@@ -1,0 +1,243 @@
+============================================================
+σ–FLOW AND NEWMAN FLOW: A UNIFIED FORMAL CORE
+Riemann Zero Dynamics under Heat-Type Deformations
+============================================================
+
+------------------------------------------------------------
+GLOBAL SETUP (fixed throughout)
+------------------------------------------------------------
+
+Let
+
+    F(t,σ) := (S_σ Z)(t)
+
+where:
+• Z(t) is the Riemann–Siegel Z-function,
+• S_σ is Gaussian smoothing of variance σ², implemented spectrally
+  (equivalently, the heat semigroup).
+
+Assumptions:
+1. For each σ > 0, F(·,σ) is real-valued on ℝ.
+2. For each σ > 0, F(·,σ) is entire in t.
+3. F satisfies the heat equation
+
+    ∂_σ F(t,σ) = c · ∂_{tt} F(t,σ),     c > 0.
+
+Let { t_i(σ) } denote the real zeros of F(·,σ), indexed increasingly.
+Unless stated otherwise, all zeros are assumed simple.
+
+------------------------------------------------------------
+LEMMA 1 — Zero tracking and differentiability
+------------------------------------------------------------
+
+If t_i(σ₀) is a simple zero of F(·,σ₀), then there exists an open interval
+I containing σ₀ and a unique C¹ function t_i : I → ℝ such that
+
+    F(t_i(σ), σ) = 0   for all σ ∈ I.
+
+Moreover,
+
+    d t_i / dσ = - ( ∂_σ F / ∂_t F ) evaluated at (t_i(σ), σ).
+
+This follows directly from the implicit function theorem.
+
+------------------------------------------------------------
+LEMMA 2 — Heat-flow generator for zeros
+------------------------------------------------------------
+
+Using ∂_σ F = c F_{tt}, the zero trajectories satisfy
+
+    d t_i / dσ = - c · ( F_{tt} / F_t ) evaluated at t = t_i(σ).
+
+This identity is exact and encodes the full σ-dynamics of the zeros.
+
+------------------------------------------------------------
+LEMMA 3 — Log-derivative expansion at a simple real zero
+------------------------------------------------------------
+
+Assume F(·,σ) is real entire with all zeros real and simple.
+Then, at any zero t_i,
+
+    ( F_{tt} / F_t )(t_i)
+      = 2 · Σ_{j ≠ i} [ 1 / (t_i − t_j) ] + A(σ),
+
+where A(σ) is a σ-dependent constant arising from the exponential
+prefactor in the Hadamard product of F.
+
+Sketch:
+Hadamard factorisation gives
+
+    F(t) = exp(a t + b) · Π_j (1 − t/t_j) exp(t/t_j),
+
+leading to A(σ) = 2a(σ).
+
+------------------------------------------------------------
+LEMMA 4 — Odd-kernel zero dynamics
+------------------------------------------------------------
+
+Combining Lemmas 2 and 3:
+
+    d t_i / dσ
+      = - 2c · Σ_{j ≠ i} [ 1 / (t_i − t_j) ] − c · A(σ).
+
+The interaction term is antisymmetric and purely odd in pairwise
+separations.
+
+------------------------------------------------------------
+LEMMA 5 — Order preservation and collision obstruction
+------------------------------------------------------------
+
+Assume on an interval I:
+1. All zeros are real and simple.
+2. Zero dynamics obey Lemma 4.
+
+Then for all σ ∈ I:
+
+    t_{i+1}(σ) − t_i(σ) > 0,
+
+and no two zeros can collide in finite σ-time.
+
+Reason:
+Let Δ_i = t_{i+1} − t_i. As Δ_i → 0,
+
+    dΔ_i / dσ ~ 2c / Δ_i + O(1),
+
+which diverges positively, preventing finite-time collapse.
+
+------------------------------------------------------------
+LEMMA 6 — Collision necessity for complex escape
+------------------------------------------------------------
+
+Let F(t,σ) be real entire and analytic in (t,σ).
+If a complex conjugate pair of zeros is created or annihilated as σ varies,
+then at the transition point (t*,σ*):
+
+    F(t*,σ*) = 0,
+    ∂_t F(t*,σ*) = 0.
+
+Thus, complex escape requires a multiple real zero.
+
+------------------------------------------------------------
+LEMMA 7 — No collisions ⇒ no complex escape
+------------------------------------------------------------
+
+If there exists σ₁ > 0 such that:
+1. All zeros of F(·,σ₁) are real and simple,
+2. Lemma 4 governs zero dynamics for 0 ≤ σ ≤ σ₁,
+
+then all zeros remain real for σ ∈ [0, σ₁].
+
+Reason:
+Lemma 5 forbids collisions; Lemma 6 shows collisions are necessary
+for complex escape.
+
+------------------------------------------------------------
+LEMMA 50 — Local square-root escape at the Newman boundary
+------------------------------------------------------------
+
+Let Ξ_λ(t) denote the de Bruijn–Newman family.
+Assume there exists (t*,λ*) such that
+
+    Ξ_{λ*}(t*) = 0,
+    ∂_t Ξ_{λ*}(t*) = 0,
+    ∂_{tt} Ξ_{λ*}(t*) ≠ 0,
+
+and the parameter is transversal:
+
+    ∂_λ Ξ_λ(t) evaluated at (t*,λ*) ≠ 0.
+
+Then, in neighborhoods of t* and λ*,
+
+    Ξ_λ(t)
+      = U(t,λ) · [ (t − t* − r(λ))² − s(λ) ],
+
+with:
+• U(t,λ) analytic and nonvanishing,
+• r(λ* ) = 0,
+• s(λ* ) = 0,
+• s'(λ* ) ≠ 0.
+
+The local zeros are
+
+    t_±(λ) = t* + r(λ) ± sqrt( s(λ) ).
+
+Hence the square-root law:
+
+    t_±(λ)
+      = t* + r(λ)
+        ± sqrt( s'(λ*) ) · sqrt(λ − λ*)
+        + O(λ − λ*).
+
+Consequences:
+• s(λ) > 0  ⇒ two real zeros.
+• s(λ) < 0  ⇒ complex conjugate pair with
+               Im t ~ sqrt(|λ − λ*|).
+
+------------------------------------------------------------
+COROLLARY 50.1 — Universality of square-root escape
+------------------------------------------------------------
+
+Any creation or annihilation of a nonreal conjugate pair in the Newman
+family occurs via a local square-root bifurcation and cannot happen
+without a real double zero.
+
+------------------------------------------------------------
+STEP 60 — Newman admissibility (compatibility with σ-flow logic)
+------------------------------------------------------------
+
+Define:
+• ξ(s) = Riemann xi-function,
+• Ξ(t) = ξ(1/2 + i t),
+• Φ(x) such that
+
+      Ξ(t) = ∫₀^∞ Φ(x) cos(t x) dx.
+
+Define the Newman deformation:
+
+    Ξ_λ(t) = ∫₀^∞ exp(λ x²) Φ(x) cos(t x) dx.
+
+Properties:
+(A1) For fixed λ, Ξ_λ(t) is entire, real on ℝ, and even.
+(A2) (t,λ) ↦ Ξ_λ(t) is jointly real-analytic where the integral converges.
+(A3) Parameter derivative exists:
+
+        ∂_λ Ξ_λ(t)
+          = ∫₀^∞ x² exp(λ x²) Φ(x) cos(t x) dx.
+
+(A4) Ξ_λ satisfies the heat equation:
+
+        ∂_λ Ξ_λ(t) = − ∂_{tt} Ξ_λ(t).
+
+(A5) Simple real zeros track uniquely:
+
+        d t_i / dλ
+          = − ( ∂_λ Ξ_λ / ∂_t Ξ_λ )
+            evaluated at (t_i(λ), λ).
+
+------------------------------------------------------------
+COROLLARY 60.1 — Collision ⇔ complex-pair birth (Newman flow)
+------------------------------------------------------------
+
+For Ξ_λ, a complex conjugate pair can only be created or annihilated at
+λ = λ* where a real multiple zero occurs:
+
+    Ξ_{λ*}(t*) = 0,
+    ∂_t Ξ_{λ*}(t*) = 0.
+
+------------------------------------------------------------
+COROLLARY 60.2 — Zero ODE for Newman flow
+------------------------------------------------------------
+
+On any interval where all zeros are real and simple:
+
+    d t_i / dλ
+      = + ( Ξ_{λ,tt} / Ξ_{λ,t} )(t_i(λ), λ),
+
+up to the chosen heat-sign convention.
+
+The local singular structure of the generator is identical to the σ-flow
+case, with the same Hadamard pole sum controlling interactions.
+
+============================================================
+END OF CONSOLIDATED FORMAL CORE
+============================================================
