@@ -1,0 +1,2203 @@
+
+
+Code 81 
+
+# ====================================================
+# TEST AT: OPERATOR CLOSURE
+# Does G_high lie in span{H1,H3,H5}_low ?
+# ====================================================
+
+import numpy as np
+
+def build_H(t0, p):
+    N = len(t0)
+    H = np.zeros((N,N))
+    for i in range(N):
+        for j in range(N):
+            if i != j:
+                H[i,j] = np.sign(t0[i]-t0[j]) / abs(t0[i]-t0[j])**p
+    return H
+
+t0 = np.asarray(baseline_zeros, float)
+
+sig_lo = 0.02
+sig_hi = 0.06
+
+v_lo = np.asarray(v_sigma_dict[sig_lo], float)
+v_hi = np.asarray(v_sigma_dict[sig_hi], float)
+
+# centre + normalise
+def norm(v):
+    v = v - v.mean()
+    n = np.linalg.norm(v)
+    return v/n if n > 0 else v
+
+v_lo = norm(v_lo)
+v_hi = norm(v_hi)
+
+powers = [1,3,5]
+
+# build low-sigma operator basis
+H_basis = []
+for p in powers:
+    H = build_H(t0, p)
+    h = H @ np.ones(len(t0))
+    H_basis.append(norm(h))
+
+X = np.vstack(H_basis).T
+
+# project high-sigma generator
+a_hat, *_ = np.linalg.lstsq(X, v_hi, rcond=None)
+v_proj = X @ a_hat
+
+# diagnostics
+corr = np.dot(v_hi, v_proj)
+rel_err = np.linalg.norm(v_hi - v_proj)
+
+print("==============================================")
+print("TEST AT: OPERATOR CLOSURE")
+print("==============================================")
+print("Projection of high-σ generator onto low-σ basis")
+print("------------------------------------------------")
+for p,a in zip(powers,a_hat):
+    print(f"p={p:2d}  coeff={a:+.6f}")
+print("------------------------------------------------")
+print(f"corr(v_high, projection) = {corr:+.6f}")
+print(f"||resid||                = {rel_err:.6e}")
+print("------------------------------------------------")
+print("Interpretation:")
+print("  corr ~1, small resid -> same operator family")
+print("  corr small           -> genuinely new generator")
+print("================================================")
+
+=============================================
+TEST AT: OPERATOR CLOSURE
+==============================================
+Projection of high-σ generator onto low-σ basis
+------------------------------------------------
+p= 1  coeff=+0.149441
+p= 3  coeff=-0.780009
+p= 5  coeff=+0.998214
+------------------------------------------------
+corr(v_high, projection) = +0.111674
+||resid||                = 9.425105e-01
+------------------------------------------------
+Interpretation:
+  corr ~1, small resid -> same operator family
+  corr small           -> genuinely new generator
+================================================
+
+
+82
+
+# ====================================================
+# TEST AU: CROSS-σ OPERATOR DISCOVERY
+# Joint SVD of generators across σ
+# ====================================================
+
+import numpy as np
+
+sigmas = sorted(v_sigma_dict.keys())
+V = []
+
+for s in sigmas:
+    v = np.asarray(v_sigma_dict[s], float)
+    v = v - v.mean()
+    n = np.linalg.norm(v)
+    if n > 0:
+        V.append(v / n)
+
+V = np.vstack(V)
+
+# SVD across σ
+U, S, VT = np.linalg.svd(V, full_matrices=False)
+
+print("==============================================")
+print("TEST AU: CROSS-σ OPERATOR DISCOVERY")
+print("==============================================")
+print("sigmas used:", sigmas)
+print("------------------------------------------------")
+print("Singular values:")
+for i,s in enumerate(S):
+    print(f"  S[{i}] = {s:.6e}")
+print("------------------------------------------------")
+
+# correlations with known odd kernels
+powers = [1,3,5]
+t0 = np.asarray(baseline_zeros, float)
+
+def build_H_action(p):
+    N = len(t0)
+    H = np.zeros((N,N))
+    for i in range(N):
+        for j in range(N):
+            if i != j:
+                H[i,j] = np.sign(t0[i]-t0[j]) / abs(t0[i]-t0[j])**p
+    h = H @ np.ones(N)
+    h = h - h.mean()
+    return h / np.linalg.norm(h)
+
+print("Correlation of singular modes with odd kernels:")
+for k in range(min(3, VT.shape[0])):
+    print(f"\nMode {k}:")
+    for p in powers:
+        h = build_H_action(p)
+        c = np.dot(VT[k], h)
+        print(f"  corr with H{p}: {c:+.4f}")
+
+print("================================================")
+
+==============================================
+TEST AU: CROSS-σ OPERATOR DISCOVERY
+==============================================
+sigmas used: [0.01, 0.02, 0.04, 0.06]
+------------------------------------------------
+Singular values:
+  S[0] = 1.463647e+00
+  S[1] = 9.261417e-01
+  S[2] = 3.049813e-16
+------------------------------------------------
+Correlation of singular modes with odd kernels:
+
+Mode 0:
+  corr with H1: +0.2642
+  corr with H3: +0.0665
+  corr with H5: -0.0225
+
+Mode 1:
+  corr with H1: +0.3472
+  corr with H3: +0.3515
+  corr with H5: +0.3313
+
+Mode 2:
+  corr with H1: -0.3433
+  corr with H3: +0.0144
+  corr with H5: +0.0476
+================================================
+
+83
+
+# ====================================================
+# TEST AV: SYMMETRY OF THE NEW GENERATOR (Mode 0)
+# ====================================================
+
+import numpy as np
+
+# Extract new generator mode
+g_new = VT[0].copy()
+g_new -= g_new.mean()
+g_new /= np.linalg.norm(g_new)
+
+t0 = np.asarray(baseline_zeros, float)
+N = len(t0)
+
+def even_kernel_action(p):
+    H = np.zeros((N,N))
+    for i in range(N):
+        for j in range(N):
+            if i != j:
+                H[i,j] = 1.0 / abs(t0[i]-t0[j])**p
+    h = H @ np.ones(N)
+    h -= h.mean()
+    return h / np.linalg.norm(h)
+
+def curvature_operator():
+    d = np.diff(t0)
+    k = d[1:] - d[:-1]
+    k = np.pad(k, (1,1))
+    k -= k.mean()
+    return k / np.linalg.norm(k)
+
+def density_gradient():
+    d = np.diff(t0)
+    g = np.zeros(N)
+    g[1:-1] = d[1:] - d[:-1]
+    g -= g.mean()
+    return g / np.linalg.norm(g)
+
+print("==============================================")
+print("TEST AV: NEW GENERATOR SYMMETRY")
+print("==============================================")
+
+for p in [1,2,3]:
+    h = even_kernel_action(p)
+    print(f"corr(G_new, even 1/|d|^{p}) = {np.dot(g_new,h):+.4f}")
+
+h_curv = curvature_operator()
+print(f"corr(G_new, curvature Δ²t) = {np.dot(g_new,h_curv):+.4f}")
+
+h_dens = density_gradient()
+print(f"corr(G_new, density gradient) = {np.dot(g_new,h_dens):+.4f}")
+
+print("================================================")
+
+TEST AV: NEW GENERATOR SYMMETRY
+==============================================
+corr(G_new, even 1/|d|^1) = -0.0271
+corr(G_new, even 1/|d|^2) = -0.0268
+corr(G_new, even 1/|d|^3) = -0.0074
+corr(G_new, curvature Δ²t) = +0.2909
+corr(G_new, density gradient) = +0.2909
+================================================
+
+84
+
+# ====================================================
+# TEST AW: IS CURVATURE FUNDAMENTAL OR EMERGENT?
+# ====================================================
+
+import numpy as np
+
+# Inputs assumed present:
+# baseline_zeros
+# v_sigma_dict   (dict: sigma -> generator vector)
+# sigmas sorted
+
+t0 = np.asarray(baseline_zeros, float)
+N = len(t0)
+
+# --- curvature operator ---
+d = np.diff(t0)
+curv = np.zeros(N)
+curv[1:-1] = d[1:] - d[:-1]
+curv -= curv.mean()
+curv /= np.linalg.norm(curv)
+
+def remove_projection(v, u):
+    """remove component of v along u"""
+    return v - np.dot(v,u)*u
+
+print("==============================================")
+print("TEST AW: CURVATURE SUBTRACTION")
+print("==============================================")
+
+residuals = []
+sig_list = []
+
+for s in sorted(v_sigma_dict.keys()):
+    v = v_sigma_dict[s].copy()
+    if np.linalg.norm(v) < 1e-8:
+        continue
+
+    v -= v.mean()
+    v /= np.linalg.norm(v)
+
+    v_res = remove_projection(v, curv)
+    if np.linalg.norm(v_res) < 1e-8:
+        continue
+
+    v_res /= np.linalg.norm(v_res)
+    residuals.append(v_res)
+    sig_list.append(s)
+
+# stack residual generators
+V = np.vstack(residuals)
+
+# SVD to check rank
+U,S,VT = np.linalg.svd(V, full_matrices=False)
+
+print("sigmas used:", sig_list)
+print("Singular values after curvature removal:")
+for i,s in enumerate(S):
+    print(f"  S[{i}] = {s:.6e}")
+
+if len(S) > 1:
+    print("rank ratio S1/S0 =", S[1]/S[0])
+
+print("================================================")
+
+=============================================
+TEST AW: CURVATURE SUBTRACTION
+==============================================
+sigmas used: [0.02, 0.04, 0.06]
+Singular values after curvature removal:
+  S[0] = 1.473404e+00
+  S[1] = 9.105387e-01
+  S[2] = 1.704185e-16
+rank ratio S1/S0 = 0.6179830702280756
+================================================
+
+
+85
+
+import numpy as np
+import mpmath as mp
+
+# ============================================================
+# TEST AW′ — LIE CLOSURE (FULLY SELF-CONTAINED)
+# ============================================================
+
+mp.mp.dps = 50
+
+# -----------------------------
+# Config
+# -----------------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+SIGMAS = [0.0, 0.01, 0.02, 0.04, 0.06]
+EDGE_DROP = 2
+
+# -----------------------------
+# Xi function (mpmath-safe)
+# -----------------------------
+def xi(s):
+    return 0.5*s*(s-1)*mp.pi**(-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+def f_vals(t):
+    return np.array([mp.re(xi(0.5+1j*tt)) for tt in t], dtype=float)
+
+# -----------------------------
+# Zero finder
+# -----------------------------
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z.append(t[i] - f[i]*(t[i+1]-t[i])/(f[i+1]-f[i]))
+    return np.array(z)
+
+# -----------------------------
+# Sample baseline
+# -----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1]-t[0]
+
+f0 = f_vals(t)
+z0 = find_zeros(t, f0)
+z0 = z0[EDGE_DROP:-EDGE_DROP]
+
+# -----------------------------
+# Track zeros across σ
+# -----------------------------
+tracks = []
+for z in z0:
+    row = []
+    for s in SIGMAS:
+        g = np.exp(-(t[:,None]-t[None,:])**2/(2*s*s+1e-12)).sum(axis=1)
+        fs = np.convolve(f0, g/g.sum(), mode="same") if s>0 else f0
+        zs = find_zeros(t, fs)
+        row.append(zs[np.argmin(np.abs(zs-z))] if len(zs)>0 else np.nan)
+    tracks.append(row)
+
+tracks = np.array(tracks)
+mask = ~np.isnan(tracks).any(axis=1)
+tracks = tracks[mask]
+z0 = z0[mask]
+
+# -----------------------------
+# Generator v = dt/dσ at σ=0
+# -----------------------------
+sig = np.array(SIGMAS)
+V = []
+for row in tracks:
+    a, *_ = np.polyfit(sig[:3], row[:3], 1)
+    V.append(a)
+v = np.array(V)
+
+print("baseline zeros used:", len(z0))
+print("mean|v| =", np.mean(np.abs(v)))
+
+# -----------------------------
+# Build operators
+# -----------------------------
+def odd_kernel(t, p):
+    N = len(t)
+    H = np.zeros((N,N))
+    for i in range(N):
+        for j in range(N):
+            if i!=j:
+                d = t[i]-t[j]
+                H[i,j] = np.sign(d)/(abs(d)**p)
+    return H
+
+def curvature_op(t):
+    N = len(t)
+    L = np.zeros((N,N))
+    for i in range(1,N-1):
+        dt1 = t[i]-t[i-1]
+        dt2 = t[i+1]-t[i]
+        L[i,i-1] =  2/(dt1*(dt1+dt2))
+        L[i,i]   = -2/(dt1*dt2)
+        L[i,i+1] =  2/(dt2*(dt1+dt2))
+    return L
+
+H1 = odd_kernel(z0,1)
+H3 = odd_kernel(z0,3)
+L  = curvature_op(z0)
+
+# -----------------------------
+# Fit odd generator
+# -----------------------------
+X = np.column_stack([H1@np.ones(len(z0)), H3@np.ones(len(z0))])
+a, *_ = np.linalg.lstsq(X, v, rcond=None)
+G_odd = a[0]*H1 + a[1]*H3
+G_curv = L
+
+# -----------------------------
+# Lie commutator
+# -----------------------------
+Comm = G_odd@G_curv - G_curv@G_odd
+
+# -----------------------------
+# Projection test
+# -----------------------------
+def project(A, B):
+    c = np.sum(A*B)/np.sum(B*B)
+    return c*B
+
+Proj = project(Comm, G_odd) + project(Comm, G_curv)
+resid = Comm - Proj
+
+# -----------------------------
+# Report
+# -----------------------------
+print("\n================================================")
+print("TEST AW′ — LIE CLOSURE (ROBUST)")
+print("================================================")
+print("coeffs on generators:", a)
+print("||Comm||       =", np.linalg.norm(Comm))
+print("||Residual||   =", np.linalg.norm(resid))
+print("relative resid =", np.linalg.norm(resid)/np.linalg.norm(Comm))
+print("================================================")
+
+baseline zeros used: 21
+mean|v| = 401.548142814174
+
+================================================
+TEST AW′ — LIE CLOSURE (ROBUST)
+================================================
+coeffs on generators: [-539.803  416.9  ]
+||Comm||       = 448.80811194826896
+||Residual||   = 448.80811194826896
+relative resid = 1.0
+================================================
+
+
+
+
+86
+
+import numpy as np
+import mpmath as mp
+
+# ============================================================
+# FIXED σ-ACTION (FFT GAUSSIAN) + TEST AW′ (LIE CLOSURE)
+# ============================================================
+
+mp.mp.dps = 50
+
+# -----------------------------
+# CONFIG
+# -----------------------------
+T0, T1 = 60.0, 120.0
+N = 8192                 # power of 2 helps FFT
+SIGMAS = [0.0, 0.01, 0.02, 0.04, 0.06]
+EDGE_DROP = 2
+
+# -----------------------------
+# Xi / f(t)
+# -----------------------------
+def xi(s):
+    return 0.5*s*(s-1)*mp.pi**(-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+def f_vals(t):
+    return np.array([mp.re(xi(0.5+1j*tt)) for tt in t], dtype=float)
+
+# -----------------------------
+# Zero finder (sign-change + linear refine)
+# -----------------------------
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        a, b = f[i], f[i+1]
+        if a == 0.0:
+            z.append(t[i])
+        elif a*b < 0.0:
+            z.append(t[i] - a*(t[i+1]-t[i])/(b-a))
+    return np.array(z, dtype=float)
+
+# -----------------------------
+# FFT Gaussian smoothing:
+# f_sigma(t) = G_sigma * f(t)
+# where G_hat(omega) = exp(-0.5 * sigma^2 * omega^2)
+# -----------------------------
+def gaussian_smooth_fft(f, dt, sigma):
+    if sigma == 0.0:
+        return f.copy()
+    n = len(f)
+    F = np.fft.rfft(f)
+    omega = 2*np.pi*np.fft.rfftfreq(n, d=dt)   # angular frequency
+    mult = np.exp(-0.5*(sigma**2)*(omega**2))
+    fs = np.fft.irfft(F * mult, n=n)
+    return fs
+
+# -----------------------------
+# Track zeros: nearest-neighbour matching per sigma
+# -----------------------------
+def track_zeros(t, f0, z0, dt, sigmas):
+    tracks = []
+    zs_by_sigma = {}
+    for s in sigmas:
+        fs = gaussian_smooth_fft(f0, dt, s)
+        zs = find_zeros(t, fs)
+        zs_by_sigma[s] = zs
+    for z in z0:
+        row = []
+        ok = True
+        for s in sigmas:
+            zs = zs_by_sigma[s]
+            if len(zs) == 0:
+                ok = False
+                break
+            row.append(zs[np.argmin(np.abs(zs - z))])
+        if ok:
+            tracks.append(row)
+    return np.array(tracks, dtype=float), zs_by_sigma
+
+# -----------------------------
+# Build odd-kernel operator on zero-lattice
+# -----------------------------
+def odd_kernel(t0, p, k_drop=0):
+    n = len(t0)
+    H = np.zeros((n, n), dtype=float)
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                continue
+            if abs(j - i) <= k_drop:
+                continue
+            d = t0[i] - t0[j]
+            H[i, j] = np.sign(d) / (abs(d)**p)
+    return H
+
+# -----------------------------
+# Curvature operator (discrete Laplacian on irregular grid)
+# -----------------------------
+def curvature_op(t0):
+    n = len(t0)
+    L = np.zeros((n, n), dtype=float)
+    for i in range(1, n-1):
+        h0 = t0[i] - t0[i-1]
+        h1 = t0[i+1] - t0[i]
+        L[i, i-1] =  2.0/(h0*(h0+h1))
+        L[i, i]   = -2.0/(h0*h1)
+        L[i, i+1] =  2.0/(h1*(h0+h1))
+    return L
+
+# -----------------------------
+# MAIN
+# -----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+
+print(f"Sampling f(t)=Re xi(1/2+it) on [{T0},{T1}]  N={N}  dt≈{dt} ...")
+f0 = f_vals(t)
+
+z0 = find_zeros(t, f0)
+z0 = z0[EDGE_DROP:-EDGE_DROP]
+print("Baseline zeros in window:", len(z0))
+
+tracks, zs_by_sigma = track_zeros(t, f0, z0, dt, SIGMAS)
+if len(tracks) == 0:
+    raise RuntimeError("No zeros could be tracked across sigma grid.")
+
+# Keep only those that survived tracking (and mirror that in z0)
+# (We re-derive z0_used from sigma=0 track column)
+z0_used = tracks[:, 0].copy()
+print("Tracked zeros across σ:", len(z0_used), "/", len(z0))
+
+# Generator v = dt/dσ at σ=0 from first 3 sigma points
+sig = np.array(SIGMAS, dtype=float)
+V = []
+for row in tracks:
+    # robust slope from (0, .01, .02)
+    a, *_ = np.polyfit(sig[:3], row[:3], 1)
+    V.append(a)
+v = np.array(V, dtype=float)
+
+print("\nGenerator stats:")
+print("  zeros used =", len(v))
+print("  mean|v|    =", float(np.mean(np.abs(v))))
+print("  max |v|    =", float(np.max(np.abs(v))))
+
+# -----------------------------
+# TEST AW′: Lie closure of {G_odd, G_curv}
+# -----------------------------
+K_DROP = 1
+H1 = odd_kernel(z0_used, 1, k_drop=K_DROP)
+H3 = odd_kernel(z0_used, 3, k_drop=K_DROP)
+L  = curvature_op(z0_used)
+
+# Fit v ~ a1*(H1*1) + a3*(H3*1)
+ones = np.ones(len(z0_used))
+X = np.column_stack([H1 @ ones, H3 @ ones])
+a, *_ = np.linalg.lstsq(X, v, rcond=None)
+G_odd = a[0]*H1 + a[1]*H3
+G_curv = L
+
+Comm = G_odd@G_curv - G_curv@G_odd
+
+# best projection of Comm onto span{G_odd, G_curv} in Frobenius inner product
+def proj_coeff(A, B):
+    denom = np.sum(B*B)
+    return 0.0 if denom == 0 else (np.sum(A*B)/denom)
+
+c1 = proj_coeff(Comm, G_odd)
+c2 = proj_coeff(Comm, G_curv)
+Proj = c1*G_odd + c2*G_curv
+resid = Comm - Proj
+
+print("\n================================================")
+print("TEST AW′ — LIE CLOSURE (FFT σ, ROBUST)")
+print("================================================")
+print("fit a (odd):", a)
+print("proj coeffs (Comm): c1,c2 =", float(c1), float(c2))
+nC = np.linalg.norm(Comm)
+nR = np.linalg.norm(resid)
+print("||Comm||       =", float(nC))
+print("||Residual||   =", float(nR))
+print("relative resid =", float(nR/nC) if nC != 0 else np.nan)
+print("================================================")
+
+Sampling f(t)=Re xi(1/2+it) on [60.0,120.0]  N=8192  dt≈0.007325112928825206 ...
+Baseline zeros in window: 21
+Tracked zeros across σ: 21 / 21
+
+Generator stats:
+  zeros used = 21
+  mean|v|    = 0.18887133148785923
+  max |v|    = 2.901541824833147
+
+================================================
+TEST AW′ — LIE CLOSURE (FFT σ, ROBUST)
+================================================
+fit a (odd): [ 0.214 16.443]
+proj coeffs (Comm): c1,c2 = 2.2283138322662117e-17 1.4166624950157516e-18
+||Comm||       = 0.9276583953621609
+||Residual||   = 0.9276583953621609
+relative resid = 1.0
+================================================
+
+
+87
+
+# ============================================================
+# TEST AW″ — NESTED COMMUTATORS / JACOBI CHECK
+# ============================================================
+
+import numpy as np
+
+# We assume these exist from the previous block:
+#   G_odd, G_curv
+
+def comm(A, B):
+    return A @ B - B @ A
+
+# First commutator
+C1 = comm(G_odd, G_curv)
+
+# Second-level commutators
+C2 = comm(G_odd, C1)
+C3 = comm(G_curv, C1)
+
+# Basis to test closure against
+basis = [G_odd, G_curv, C1]
+
+def project_residual(X, basis):
+    coeffs = []
+    for B in basis:
+        denom = np.sum(B*B)
+        coeffs.append(0.0 if denom == 0 else np.sum(X*B)/denom)
+    proj = sum(c*b for c,b in zip(coeffs, basis))
+    resid = X - proj
+    return coeffs, np.linalg.norm(resid)/np.linalg.norm(X)
+
+c2_coeffs, c2_resid = project_residual(C2, basis)
+c3_coeffs, c3_resid = project_residual(C3, basis)
+
+print("==============================================")
+print("TEST AW″ — NESTED COMMUTATOR CLOSURE")
+print("==============================================")
+print("C2 = [G_odd, [G_odd, G_curv]]")
+print("  projection coeffs:", c2_coeffs)
+print("  relative residual:", c2_resid)
+print("----------------------------------------------")
+print("C3 = [G_curv, [G_odd, G_curv]]")
+print("  projection coeffs:", c3_coeffs)
+print("  relative residual:", c3_resid)
+print("==============================================")
+
+if c2_resid < 0.1 and c3_resid < 0.1:
+    print("→ Finite-dimensional Lie closure detected")
+else:
+    print("→ Infinite / geometric flow (no closure)")
+
+
+=============================================
+TEST AW″ — NESTED COMMUTATOR CLOSURE
+==============================================
+C2 = [G_odd, [G_odd, G_curv]]
+  projection coeffs: [np.float64(1.0611018248886721e-18), np.float64(-0.11712808664606866), np.float64(2.5197886198447044e-19)]
+  relative residual: 0.9089666777950184
+----------------------------------------------
+C3 = [G_curv, [G_odd, G_curv]]
+  projection coeffs: [np.float64(-0.23928285577464717), np.float64(-0.03365056107563606), np.float64(-0.05512486778596255)]
+  relative residual: 0.9109786880284996
+==============================================
+→ Infinite / geometric flow (no closure)
+
+88
+
+# ============================================================
+# TEST AW‴ — COMMUTATOR TOWER DIMENSION / ENERGY GROWTH
+# ============================================================
+
+import numpy as np
+
+def comm(A, B):
+    return A @ B - B @ A
+
+def vec(M):
+    return M.reshape(-1)
+
+def gram_schmidt_add(basis, X, tol=1e-10):
+    # Orthonormalise X against basis (in Frobenius inner product)
+    v = X.copy()
+    for B in basis:
+        denom = np.sum(B*B)
+        if denom > 0:
+            v = v - (np.sum(v*B)/denom)*B
+    nrm = np.linalg.norm(v)
+    if not np.isfinite(nrm) or nrm < tol:
+        return basis, False
+    basis.append(v / nrm)
+    return basis, True
+
+# ----------------------------
+# Build tower up to depth D
+# ----------------------------
+D = 3   # depth 1: include [G1,G2], depth 2: nested, etc.
+tol = 1e-10
+
+# Start basis with normalized generators
+B = []
+for M in [G_odd, G_curv]:
+    n = np.linalg.norm(M)
+    if n == 0 or not np.isfinite(n):
+        raise RuntimeError("Generator has zero/invalid norm.")
+    B.append(M / n)
+
+added_counts = []
+all_mats = [B[0], B[1]]
+
+for depth in range(1, D+1):
+    new = []
+    for i in range(len(all_mats)):
+        for j in range(i+1, len(all_mats)):
+            C = comm(all_mats[i], all_mats[j])
+            if np.all(np.isfinite(C)):
+                new.append(C)
+
+    # Orthonormal-add unique new directions
+    add_this_depth = 0
+    for C in new:
+        # normalize input magnitude to keep numerics stable
+        cn = np.linalg.norm(C)
+        if cn == 0 or not np.isfinite(cn):
+            continue
+        Cn = C / cn
+        B, ok = gram_schmidt_add(B, Cn, tol=tol)
+        if ok:
+            add_this_depth += 1
+
+    added_counts.append(add_this_depth)
+    all_mats = list(B)  # expand pool to current orthonormal basis
+
+# ----------------------------
+# SVD on tower basis vectors
+# ----------------------------
+V = np.stack([vec(M) for M in B], axis=1)  # shape: (N^2, k)
+U, S, VT = np.linalg.svd(V, full_matrices=False)
+
+cum = np.cumsum(S**2) / np.sum(S**2)
+
+print("==============================================")
+print("TEST AW‴ — COMMUTATOR TOWER GROWTH")
+print("==============================================")
+print("matrix size:", G_odd.shape)
+print("depth D =", D, "  tol =", tol)
+print("basis size =", V.shape[1])
+for d, c in enumerate(added_counts, start=1):
+    print(f"  new independent directions at depth {d}: {c}")
+print("----------------------------------------------")
+print("Singular values (first 10):")
+for i in range(min(10, len(S))):
+    print(f"  S[{i:02d}] = {S[i]:.6e}   cum_energy={cum[i]:.6f}")
+print("----------------------------------------------")
+# Effective dimension where 95% energy captured
+k95 = int(np.searchsorted(cum, 0.95) + 1)
+print("effective dim (95% energy):", k95)
+print("==============================================")
+
+TEST AW‴ — COMMUTATOR TOWER GROWTH
+==============================================
+matrix size: (21, 21)
+depth D = 3   tol = 1e-10
+basis size = 11
+  new independent directions at depth 1: 1
+  new independent directions at depth 2: 2
+  new independent directions at depth 3: 6
+----------------------------------------------
+Singular values (first 10):
+  S[00] = 1.000000e+00   cum_energy=0.090909
+  S[01] = 1.000000e+00   cum_energy=0.181818
+  S[02] = 1.000000e+00   cum_energy=0.272727
+  S[03] = 1.000000e+00   cum_energy=0.363636
+  S[04] = 1.000000e+00   cum_energy=0.454545
+  S[05] = 1.000000e+00   cum_energy=0.545455
+  S[06] = 1.000000e+00   cum_energy=0.636364
+  S[07] = 1.000000e+00   cum_energy=0.727273
+  S[08] = 1.000000e+00   cum_energy=0.818182
+  S[09] = 1.000000e+00   cum_energy=0.909091
+----------------------------------------------
+effective dim (95% energy): 11
+==============================================
+
+
+
+89
+
+# ============================================================
+# TEST AW⁗ — RAW COMMUTATOR TOWER: SVD + INCREMENTAL CLOSURE
+# ============================================================
+
+import numpy as np
+
+def comm(A, B):
+    return A @ B - B @ A
+
+def vec(M):
+    return M.reshape(-1).astype(float)
+
+def safe_norm(x):
+    n = np.linalg.norm(x)
+    return n if np.isfinite(n) else np.nan
+
+def proj_residual_norm(v, Q):
+    """
+    v: (m,) vector
+    Q: (m,k) orthonormal columns (or empty)
+    returns ||v - QQ^T v|| / ||v||
+    """
+    nv = safe_norm(v)
+    if nv == 0 or not np.isfinite(nv):
+        return np.nan
+    if Q.size == 0:
+        return 1.0
+    coeff = Q.T @ v
+    vhat = Q @ coeff
+    r = v - vhat
+    return safe_norm(r) / nv
+
+def orthonormal_append(Q, v, tol=1e-12):
+    """
+    Append v into orthonormal basis Q (m,k) using modified Gram–Schmidt.
+    Returns updated Q and whether appended.
+    """
+    v = v.copy()
+    if Q.size != 0:
+        v = v - Q @ (Q.T @ v)
+    nv = safe_norm(v)
+    if nv is None or not np.isfinite(nv) or nv < tol:
+        return Q, False
+    v = v / nv
+    if Q.size == 0:
+        return v.reshape(-1,1), True
+    return np.column_stack([Q, v]), True
+
+# ----------------------------
+# REQUIRE these from your run:
+#   G_odd, G_curv  (21x21)
+# ----------------------------
+G1 = np.asarray(G_odd, dtype=float)
+G2 = np.asarray(G_curv, dtype=float)
+
+assert G1.shape == G2.shape
+n = G1.shape[0]
+
+# ----------------------------
+# Build RAW tower up to depth D
+# ----------------------------
+D = 4     # increase if you want (watch runtime)
+MAX_NEW_PER_DEPTH = 2000  # safety cap
+tol = 1e-12
+
+# pool contains matrices used to generate commutators
+pool = [G1, G2]
+
+# raw_list stores *all* generated matrices (including repeats; we keep them for raw-SVD statistics)
+raw_list = [G1, G2]
+
+# basis_Q is built on-the-fly for incremental closure diagnostics (vector space)
+Q = np.zeros((n*n, 0), dtype=float)
+
+# seed basis with G1, G2 vectors (normalised)
+for M in [G1, G2]:
+    v = vec(M)
+    Q, _ = orthonormal_append(Q, v, tol=tol)
+
+closure_stats = []  # (depth, count, median_resid, mean_resid, max_resid)
+
+for depth in range(1, D+1):
+    new_comms = []
+    L = len(pool)
+    for i in range(L):
+        for j in range(i+1, L):
+            C = comm(pool[i], pool[j])
+            if np.all(np.isfinite(C)):
+                new_comms.append(C)
+            if len(new_comms) >= MAX_NEW_PER_DEPTH:
+                break
+        if len(new_comms) >= MAX_NEW_PER_DEPTH:
+            break
+
+    if len(new_comms) == 0:
+        closure_stats.append((depth, 0, np.nan, np.nan, np.nan))
+        continue
+
+    # incremental closure residuals for this depth
+    resids = []
+    added_to_pool = 0
+
+    for C in new_comms:
+        v = vec(C)
+        rrel = proj_residual_norm(v, Q)
+        if np.isfinite(rrel):
+            resids.append(rrel)
+
+        # Add to working basis + pool if it's genuinely new
+        Q2, ok = orthonormal_append(Q, v, tol=tol)
+        if ok:
+            Q = Q2
+            pool.append(C)
+            added_to_pool += 1
+
+        raw_list.append(C)
+
+    resids = np.asarray(resids, dtype=float)
+    if resids.size:
+        closure_stats.append((
+            depth,
+            added_to_pool,
+            float(np.median(resids)),
+            float(np.mean(resids)),
+            float(np.max(resids)),
+        ))
+    else:
+        closure_stats.append((depth, added_to_pool, np.nan, np.nan, np.nan))
+
+# ----------------------------
+# RAW SVD on *unnormalised* tower set
+# ----------------------------
+Vraw = np.stack([vec(M) for M in raw_list], axis=1)  # (n^2, K)
+
+# scale columns to comparable magnitude so SVD isn't dominated by a few huge matrices
+col_norms = np.linalg.norm(Vraw, axis=0)
+good = np.isfinite(col_norms) & (col_norms > 0)
+Vn = Vraw[:, good] / col_norms[good]
+
+U, S, VT = np.linalg.svd(Vn, full_matrices=False)
+energy = np.cumsum(S**2) / np.sum(S**2)
+
+k90 = int(np.searchsorted(energy, 0.90) + 1)
+k95 = int(np.searchsorted(energy, 0.95) + 1)
+k99 = int(np.searchsorted(energy, 0.99) + 1)
+
+print("================================================")
+print("TEST AW⁗ — RAW TOWER SVD + INCREMENTAL CLOSURE")
+print("================================================")
+print(f"matrix size: {G1.shape}")
+print(f"depth D = {D}")
+print(f"raw matrices total (incl repeats) = {len(raw_list)}")
+print(f"usable for SVD (finite/nonzero)   = {Vn.shape[1]}")
+print("------------------------------------------------")
+print("Incremental closure by depth (using expanding basis):")
+for (d, cnt, medr, meanr, maxr) in closure_stats:
+    print(f"  depth {d}: new_dirs_added={cnt:4d} | resid_rel median={medr:.3f} mean={meanr:.3f} max={maxr:.3f}")
+print("------------------------------------------------")
+print("RAW SVD singular values (first 12):")
+for i in range(min(12, len(S))):
+    print(f"  S[{i:02d}] = {S[i]:.6e}   cum_energy={energy[i]:.6f}")
+print("------------------------------------------------")
+print(f"effective dim: k90={k90}  k95={k95}  k99={k99}")
+print("================================================")
+
+TEST AW⁗ — RAW TOWER SVD + INCREMENTAL CLOSURE
+================================================
+matrix size: (21, 21)
+depth D = 4
+raw matrices total (incl repeats) = 71
+usable for SVD (finite/nonzero)   = 71
+------------------------------------------------
+Incremental closure by depth (using expanding basis):
+  depth 1: new_dirs_added=   1 | resid_rel median=1.000 mean=1.000 max=1.000
+  depth 2: new_dirs_added=   2 | resid_rel median=0.909 mean=0.607 max=0.911
+  depth 3: new_dirs_added=   6 | resid_rel median=0.287 mean=0.316 max=0.986
+  depth 4: new_dirs_added=  36 | resid_rel median=0.056 mean=0.113 max=0.655
+------------------------------------------------
+RAW SVD singular values (first 12):
+  S[00] = 4.055040e+00   cum_energy=0.231597
+  S[01] = 3.860137e+00   cum_energy=0.441465
+  S[02] = 3.523071e+00   cum_energy=0.616282
+  S[03] = 3.175031e+00   cum_energy=0.758266
+  S[04] = 2.124317e+00   cum_energy=0.821825
+  S[05] = 1.860372e+00   cum_energy=0.870571
+  S[06] = 1.573055e+00   cum_energy=0.905424
+  S[07] = 1.057281e+00   cum_energy=0.921168
+  S[08] = 9.553403e-01   cum_energy=0.934022
+  S[09] = 9.271780e-01   cum_energy=0.946130
+  S[10] = 8.870632e-01   cum_energy=0.957213
+  S[11] = 7.729698e-01   cum_energy=0.965628
+------------------------------------------------
+effective dim: k90=7  k95=11  k99=18
+================================================
+
+
+90
+
+# ============================================================
+# TEST AX — LOCALITY/BANDEDNESS + TOLERANCE STABILITY SWEEP
+# ============================================================
+
+import numpy as np
+
+def comm(A, B):
+    return A @ B - B @ A
+
+def vec(M):
+    return M.reshape(-1).astype(float)
+
+def safe_norm(x):
+    n = np.linalg.norm(x)
+    return n if np.isfinite(n) else np.nan
+
+def orthonormal_append(Q, v, tol=1e-12):
+    v = v.copy()
+    if Q.size != 0:
+        v = v - Q @ (Q.T @ v)
+    nv = safe_norm(v)
+    if nv is None or (not np.isfinite(nv)) or nv < tol:
+        return Q, False
+    v = v / nv
+    if Q.size == 0:
+        return v.reshape(-1,1), True
+    return np.column_stack([Q, v]), True
+
+def proj_residual_norm(v, Q):
+    nv = safe_norm(v)
+    if nv == 0 or not np.isfinite(nv):
+        return np.nan
+    if Q.size == 0:
+        return 1.0
+    coeff = Q.T @ v
+    vhat = Q @ coeff
+    r = v - vhat
+    return safe_norm(r) / nv
+
+def band_profile(M):
+    """
+    Returns prof[k] = mean abs value on band |i-j|=k, k=0..n-1
+    """
+    n = M.shape[0]
+    prof = np.zeros(n, dtype=float)
+    for k in range(n):
+        vals = []
+        for i in range(n):
+            j1 = i + k
+            j2 = i - k
+            if 0 <= j1 < n:
+                vals.append(abs(M[i, j1]))
+            if k != 0 and 0 <= j2 < n:
+                vals.append(abs(M[i, j2]))
+        prof[k] = np.mean(vals) if vals else 0.0
+    return prof
+
+def locality_mass(M, K):
+    """
+    fraction of L1 mass inside |i-j|<=K
+    """
+    n = M.shape[0]
+    A = np.abs(M)
+    tot = np.sum(A)
+    if tot == 0 or not np.isfinite(tot):
+        return np.nan
+    mask = np.zeros_like(A, dtype=bool)
+    for i in range(n):
+        j0 = max(0, i-K)
+        j1 = min(n, i+K+1)
+        mask[i, j0:j1] = True
+    return float(np.sum(A[mask]) / tot)
+
+def shuffle_matrix_preserve_vals(M, seed=0):
+    """
+    destroy geometry while preserving entry multiset
+    """
+    rng = np.random.default_rng(seed)
+    flat = M.reshape(-1).copy()
+    rng.shuffle(flat)
+    return flat.reshape(M.shape)
+
+# ------------------------------------------------------------
+# REQUIRE these already defined:
+#   G_odd, G_curv  (both 21x21)
+# ------------------------------------------------------------
+G1 = np.asarray(G_odd, dtype=float)
+G2 = np.asarray(G_curv, dtype=float)
+assert G1.shape == G2.shape
+n = G1.shape[0]
+
+def build_raw_tower(G1, G2, D=4, tol=1e-12, max_new_per_depth=2000):
+    pool = [G1, G2]
+    raw_list = [G1, G2]
+    Q = np.zeros((n*n, 0), dtype=float)
+
+    for M in [G1, G2]:
+        Q, _ = orthonormal_append(Q, vec(M), tol=tol)
+
+    stats = []  # per depth: (new_dirs_added, resid_median, resid_mean, resid_max)
+    depth_new_mats = []  # list of lists of commutators by depth
+
+    for depth in range(1, D+1):
+        new_comms = []
+        L = len(pool)
+        for i in range(L):
+            for j in range(i+1, L):
+                C = comm(pool[i], pool[j])
+                if np.all(np.isfinite(C)):
+                    new_comms.append(C)
+                if len(new_comms) >= max_new_per_depth:
+                    break
+            if len(new_comms) >= max_new_per_depth:
+                break
+
+        depth_new_mats.append(new_comms)
+
+        if len(new_comms) == 0:
+            stats.append((0, np.nan, np.nan, np.nan))
+            continue
+
+        resids = []
+        added = 0
+        for C in new_comms:
+            v = vec(C)
+            rrel = proj_residual_norm(v, Q)
+            if np.isfinite(rrel):
+                resids.append(rrel)
+
+            Q2, ok = orthonormal_append(Q, v, tol=tol)
+            if ok:
+                Q = Q2
+                pool.append(C)
+                added += 1
+
+            raw_list.append(C)
+
+        resids = np.asarray(resids, dtype=float)
+        stats.append((added,
+                      float(np.median(resids)) if resids.size else np.nan,
+                      float(np.mean(resids)) if resids.size else np.nan,
+                      float(np.max(resids)) if resids.size else np.nan))
+    return raw_list, depth_new_mats, stats
+
+def raw_svd_modes(raw_list):
+    Vraw = np.stack([vec(M) for M in raw_list], axis=1)
+    col_norms = np.linalg.norm(Vraw, axis=0)
+    good = np.isfinite(col_norms) & (col_norms > 0)
+    Vn = Vraw[:, good] / col_norms[good]
+    U, S, VT = np.linalg.svd(Vn, full_matrices=False)
+    energy = np.cumsum(S**2) / np.sum(S**2)
+    return U, S, energy
+
+# ------------------------------------------------------------
+# 1) TOLERANCE SWEEP (stability of "new dirs")
+# ------------------------------------------------------------
+D = 4
+tols = [1e-8, 1e-10, 1e-12]
+print("================================================")
+print("TEST AX-1: TOLERANCE SWEEP (tower growth stability)")
+print("================================================")
+for tol in tols:
+    raw_list, depth_new_mats, stats = build_raw_tower(G1, G2, D=D, tol=tol)
+    total_dirs = 0
+    print(f"\n--- tol = {tol:.0e} ---")
+    for d,(added, medr, meanr, maxr) in enumerate(stats, start=1):
+        total_dirs += added
+        print(f"depth {d}: new_dirs_added={added:4d} | resid median={medr:.3f} mean={meanr:.3f} max={maxr:.3f}")
+    print(f"TOTAL new dirs added (depth 1..{D}) = {total_dirs}")
+print("================================================\n")
+
+# ------------------------------------------------------------
+# 2) LOCALITY / BANDEDNESS ON:
+#    (a) generators G1, G2
+#    (b) top raw SVD modes of the tower (geometry-bearing)
+#    also compare against shuffled controls
+# ------------------------------------------------------------
+raw_list, depth_new_mats, stats = build_raw_tower(G1, G2, D=D, tol=1e-12)
+U, S, energy = raw_svd_modes(raw_list)
+
+def report_locality(name, M, seed=0):
+    prof = band_profile(M)
+    Ms = shuffle_matrix_preserve_vals(M, seed=seed)
+    profs = band_profile(Ms)
+
+    Ks = [0,1,2,3,4,5,7,10]
+    loc = [locality_mass(M, K) for K in Ks]
+    locs = [locality_mass(Ms, K) for K in Ks]
+
+    # simple "band-decay slope" on k=1..6 (avoid k=0 diag)
+    kfit = np.arange(1, min(7, len(prof)))
+    y = prof[kfit]
+    y = np.maximum(y, 1e-300)
+    slope = np.polyfit(kfit, np.log(y), 1)[0]  # more negative => more local
+
+    ys = profs[kfit]
+    ys = np.maximum(ys, 1e-300)
+    slope_s = np.polyfit(kfit, np.log(ys), 1)[0]
+
+    print(f"\n[{name}]")
+    print("  locality mass inside |i-j|<=K:")
+    for K,a,b in zip(Ks, loc, locs):
+        print(f"    K={K:2d}:  real={a:.3f}   shuffled={b:.3f}")
+    print(f"  band-decay slope (k=1..6): real={slope:+.3f}  shuffled={slope_s:+.3f}")
+
+print("================================================")
+print("TEST AX-2: LOCALITY / BANDEDNESS")
+print("================================================")
+report_locality("G_odd", G1, seed=1)
+report_locality("G_curv", G2, seed=2)
+
+# top tower modes
+print("\n--- Top raw tower SVD modes ---")
+modes_to_show = 6
+for k in range(modes_to_show):
+    Mk = U[:,k].reshape(n,n)
+    # scale so magnitudes are comparable
+    Mk = Mk / (np.linalg.norm(Mk) + 1e-300)
+    report_locality(f"tower_mode_{k}  (S={S[k]:.3e}, cumE={energy[k]:.3f})", Mk, seed=100+k)
+
+print("\n================================================")
+print("DONE: TEST AX")
+print("================================================")
+
+===============================================
+TEST AX-1: TOLERANCE SWEEP (tower growth stability)
+================================================
+
+--- tol = 1e-08 ---
+depth 1: new_dirs_added=   1 | resid median=1.000 mean=1.000 max=1.000
+depth 2: new_dirs_added=   2 | resid median=0.909 mean=0.607 max=0.911
+depth 3: new_dirs_added=   6 | resid median=0.287 mean=0.316 max=0.986
+depth 4: new_dirs_added=  36 | resid median=0.056 mean=0.113 max=0.655
+TOTAL new dirs added (depth 1..4) = 45
+
+--- tol = 1e-10 ---
+depth 1: new_dirs_added=   1 | resid median=1.000 mean=1.000 max=1.000
+depth 2: new_dirs_added=   2 | resid median=0.909 mean=0.607 max=0.911
+depth 3: new_dirs_added=   6 | resid median=0.287 mean=0.316 max=0.986
+depth 4: new_dirs_added=  36 | resid median=0.056 mean=0.113 max=0.655
+TOTAL new dirs added (depth 1..4) = 45
+
+--- tol = 1e-12 ---
+depth 1: new_dirs_added=   1 | resid median=1.000 mean=1.000 max=1.000
+depth 2: new_dirs_added=   2 | resid median=0.909 mean=0.607 max=0.911
+depth 3: new_dirs_added=   6 | resid median=0.287 mean=0.316 max=0.986
+depth 4: new_dirs_added=  36 | resid median=0.056 mean=0.113 max=0.655
+TOTAL new dirs added (depth 1..4) = 45
+================================================
+
+================================================
+TEST AX-2: LOCALITY / BANDEDNESS
+================================================
+
+[G_odd]
+  locality mass inside |i-j|<=K:
+    K= 0:  real=0.000   shuffled=0.098
+    K= 1:  real=0.000   shuffled=0.200
+    K= 2:  real=0.537   shuffled=0.266
+    K= 3:  real=0.701   shuffled=0.362
+    K= 4:  real=0.786   shuffled=0.443
+    K= 5:  real=0.839   shuffled=0.497
+    K= 7:  real=0.903   shuffled=0.587
+    K=10:  real=0.954   shuffled=0.795
+  band-decay slope (k=1..6): real=+97.931  shuffled=-0.066
+
+[G_curv]
+  locality mass inside |i-j|<=K:
+    K= 0:  real=0.500   shuffled=0.070
+    K= 1:  real=1.000   shuffled=0.220
+    K= 2:  real=1.000   shuffled=0.313
+    K= 3:  real=1.000   shuffled=0.389
+    K= 4:  real=1.000   shuffled=0.465
+    K= 5:  real=1.000   shuffled=0.512
+    K= 7:  real=1.000   shuffled=0.682
+    K=10:  real=1.000   shuffled=0.848
+  band-decay slope (k=1..6): real=-98.464  shuffled=-0.041
+
+--- Top raw tower SVD modes ---
+
+[tower_mode_0  (S=4.055e+00, cumE=0.232)]
+  locality mass inside |i-j|<=K:
+    K= 0:  real=0.174   shuffled=0.045
+    K= 1:  real=0.491   shuffled=0.079
+    K= 2:  real=0.722   shuffled=0.113
+    K= 3:  real=0.823   shuffled=0.254
+    K= 4:  real=0.888   shuffled=0.321
+    K= 5:  real=0.928   shuffled=0.381
+    K= 7:  real=0.954   shuffled=0.589
+    K=10:  real=0.976   shuffled=0.755
+  band-decay slope (k=1..6): real=-0.535  shuffled=+0.303
+
+[tower_mode_1  (S=3.860e+00, cumE=0.441)]
+  locality mass inside |i-j|<=K:
+    K= 0:  real=0.092   shuffled=0.105
+    K= 1:  real=0.413   shuffled=0.151
+    K= 2:  real=0.661   shuffled=0.214
+    K= 3:  real=0.763   shuffled=0.258
+    K= 4:  real=0.839   shuffled=0.298
+    K= 5:  real=0.888   shuffled=0.423
+    K= 7:  real=0.930   shuffled=0.539
+    K=10:  real=0.959   shuffled=0.616
+  band-decay slope (k=1..6): real=-0.459  shuffled=+0.211
+
+[tower_mode_2  (S=3.523e+00, cumE=0.616)]
+  locality mass inside |i-j|<=K:
+    K= 0:  real=0.201   shuffled=0.018
+    K= 1:  real=0.453   shuffled=0.155
+    K= 2:  real=0.651   shuffled=0.285
+    K= 3:  real=0.790   shuffled=0.364
+    K= 4:  real=0.858   shuffled=0.449
+    K= 5:  real=0.900   shuffled=0.486
+    K= 7:  real=0.935   shuffled=0.670
+    K=10:  real=0.965   shuffled=0.861
+  band-decay slope (k=1..6): real=-0.438  shuffled=-0.136
+
+[tower_mode_3  (S=3.175e+00, cumE=0.758)]
+  locality mass inside |i-j|<=K:
+    K= 0:  real=0.035   shuffled=0.019
+    K= 1:  real=0.298   shuffled=0.082
+    K= 2:  real=0.470   shuffled=0.205
+    K= 3:  real=0.578   shuffled=0.279
+    K= 4:  real=0.720   shuffled=0.399
+    K= 5:  real=0.798   shuffled=0.443
+    K= 7:  real=0.868   shuffled=0.541
+    K=10:  real=0.925   shuffled=0.775
+  band-decay slope (k=1..6): real=-0.289  shuffled=-0.044
+
+[tower_mode_4  (S=2.124e+00, cumE=0.822)]
+  locality mass inside |i-j|<=K:
+    K= 0:  real=0.077   shuffled=0.049
+    K= 1:  real=0.287   shuffled=0.129
+    K= 2:  real=0.451   shuffled=0.204
+    K= 3:  real=0.554   shuffled=0.258
+    K= 4:  real=0.631   shuffled=0.354
+    K= 5:  real=0.735   shuffled=0.398
+    K= 7:  real=0.851   shuffled=0.554
+    K=10:  real=0.919   shuffled=0.727
+  band-decay slope (k=1..6): real=-0.141  shuffled=-0.015
+
+[tower_mode_5  (S=1.860e+00, cumE=0.871)]
+  locality mass inside |i-j|<=K:
+    K= 0:  real=0.161   shuffled=0.080
+    K= 1:  real=0.294   shuffled=0.122
+    K= 2:  real=0.478   shuffled=0.257
+    K= 3:  real=0.596   shuffled=0.313
+    K= 4:  real=0.704   shuffled=0.390
+    K= 5:  real=0.791   shuffled=0.532
+    K= 7:  real=0.868   shuffled=0.704
+    K=10:  real=0.928   shuffled=0.825
+  band-decay slope (k=1..6): real=-0.146  shuffled=+0.152
+
+================================================
+DONE: TEST AX
+================================================
+
+
+91
+
+# ============================================================
+# TEST AY — CONTINUUM SYMBOL / BAND-COLLAPSE TEST (PASTE & RUN)
+# ============================================================
+#
+# Purpose:
+#   Test whether the σ-generator (and its tower modes) converge
+#   to a universal *continuum kernel* when distances are
+#   rescaled by mean zero spacing.
+#
+# Requirements (ALL computed internally — no saved state):
+#   - mpmath
+#   - numpy
+#   - scipy
+#
+# Output:
+#   - Band profiles vs rescaled distance
+#   - Collapse statistics across zeros
+#
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+from numpy.linalg import svd
+from scipy.signal import find_peaks
+
+# --------------------------
+# CONFIG
+# --------------------------
+mp.mp.dps = 50
+T0, T1 = 60.0, 120.0
+N = 8192
+EDGE_DROP = 2
+SIGMAS = [0.0, 0.02, 0.04, 0.06]
+K_MAX = 10   # band radius
+
+# --------------------------
+# XI FUNCTION (SAFE)
+# --------------------------
+def xi(s):
+    return 0.5*s*(s-1)*mp.pi**(-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+def f_vals(t):
+    return np.array([mp.re(xi(0.5+1j*tt)) for tt in t], dtype=float)
+
+# --------------------------
+# ZERO FINDER
+# --------------------------
+def find_zeros(t, f):
+    s = np.sign(f)
+    idx = np.where(s[:-1]*s[1:] < 0)[0]
+    z = []
+    for i in idx:
+        t0, t1 = t[i], t[i+1]
+        f0, f1 = f[i], f[i+1]
+        z.append(t0 - f0*(t1-t0)/(f1-f0))
+    return np.array(z)
+
+# --------------------------
+# GAUSSIAN FLOW
+# --------------------------
+def gaussian_smooth(f, sigma, dt):
+    if sigma == 0:
+        return f.copy()
+    k = np.fft.fftfreq(len(f), d=dt)
+    G = np.exp(-2*(np.pi*sigma*k)**2)
+    return np.fft.ifft(np.fft.fft(f)*G).real
+
+# --------------------------
+# BUILD ZERO TRAJECTORIES
+# --------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1]-t[0]
+f0 = f_vals(t)
+z0 = find_zeros(t, f0)[EDGE_DROP:-EDGE_DROP]
+
+Z = []
+for s in SIGMAS:
+    fs = gaussian_smooth(f0, s, dt)
+    zs = find_zeros(t, fs)[EDGE_DROP:-EDGE_DROP]
+    Z.append(zs)
+
+# align by index
+M = min(len(z) for z in Z)
+Z = np.array([z[:M] for z in Z])
+z0 = Z[0]
+
+# --------------------------
+# GENERATOR v = dt/dσ
+# --------------------------
+sig = np.array(SIGMAS)
+V = (Z[2] - Z[1]) / (sig[2] - sig[1])   # central diff approx
+v = V - V.mean()
+
+# --------------------------
+# BUILD GENERATOR MATRIX (ODD KERNEL FIT)
+# --------------------------
+Δ = z0[1:] - z0[:-1]
+Δbar = np.mean(Δ)
+
+N0 = len(z0)
+G = np.zeros((N0, N0))
+for i in range(N0):
+    for j in range(N0):
+        if i != j:
+            G[i,j] = 1/((z0[i]-z0[j])**3)
+
+# --------------------------
+# CONTINUUM BAND PROFILES
+# --------------------------
+def band_profile(M):
+    prof = {}
+    for k in range(1, K_MAX+1):
+        vals = []
+        for i in range(N0):
+            for j in range(N0):
+                if abs(i-j) == k:
+                    vals.append(abs(M[i,j]))
+        prof[k] = np.mean(vals) if vals else 0.0
+    return prof
+
+prof_G = band_profile(G)
+
+# --------------------------
+# RESCALE & COLLAPSE
+# --------------------------
+x = np.array([k/Δbar for k in prof_G.keys()])
+y = np.array(list(prof_G.values()))
+y /= np.max(y)
+
+# --------------------------
+# OUTPUT
+# --------------------------
+print("\n==============================================")
+print("TEST AY: CONTINUUM SYMBOL COLLAPSE")
+print("==============================================")
+print(f"zeros used       = {N0}")
+print(f"mean spacing Δ̄  = {Δbar:.6f}")
+print("----------------------------------------------")
+print("Rescaled band profile (k/Δ̄ , amplitude):")
+for xi, yi in zip(x, y):
+    print(f"{xi:8.3f}   {yi:8.5f}")
+print("----------------------------------------------")
+print("Interpretation:")
+print("  smooth decay vs k/Δ̄ → continuum kernel")
+print("  no collapse          → discrete artifact")
+print("==============================================")
+print("DONE: TEST AY")
+print("==============================================")
+
+TEST AY: CONTINUUM SYMBOL COLLAPSE
+==============================================
+zeros used       = 21
+mean spacing Δ̄  = 2.362021
+----------------------------------------------
+Rescaled band profile (k/Δ̄ , amplitude):
+   0.423    1.00000
+   0.847    0.05728
+   1.270    0.01402
+   1.693    0.00595
+   2.117    0.00303
+   2.540    0.00175
+   2.964    0.00108
+   3.387    0.00072
+   3.810    0.00052
+   4.234    0.00037
+----------------------------------------------
+Interpretation:
+  smooth decay vs k/Δ̄ → continuum kernel
+  no collapse          → discrete artifact
+==============================================
+DONE: TEST AY
+==============================================
+
+
+
+92
+
+# ============================================================
+# TEST AY′ — CONTINUUM SYMBOL COLLAPSE (SELF-CONTAINED)
+# ============================================================
+# Reconstructs the empirical generator matrix G_emp directly
+# from the σ-generator vector v, then performs the continuum
+# band-profile collapse test.
+#
+# REQUIRED (one of these must exist):
+#   baseline_zeros : 1D array of tracked zero positions
+#   v              : generator vector (dt/dσ at σ≈0)
+#   v_generator    : same as v (fallback name)
+# ============================================================
+
+import numpy as np
+
+# -------------------------------
+# Locate required inputs
+# -------------------------------
+if "baseline_zeros" not in globals():
+    raise RuntimeError("baseline_zeros not found")
+
+if "v" in globals():
+    v_use = np.asarray(v, dtype=float)
+elif "v_generator" in globals():
+    v_use = np.asarray(v_generator, dtype=float)
+else:
+    raise RuntimeError("No generator vector found (need `v` or `v_generator`)")
+
+t0 = np.asarray(baseline_zeros, dtype=float)
+N = len(t0)
+
+if len(v_use) != N:
+    raise RuntimeError("Length mismatch: baseline_zeros vs generator vector")
+
+# -------------------------------
+# Reconstruct empirical generator matrix
+#   G_ij ≈ (v_i - v_j) / (t_i - t_j)
+# -------------------------------
+G_emp = np.zeros((N, N))
+for i in range(N):
+    for j in range(N):
+        if i != j:
+            G_emp[i, j] = (v_use[i] - v_use[j]) / (t0[i] - t0[j])
+
+# -------------------------------
+# Mean spacing Δ̄
+# -------------------------------
+Delta_bar = np.mean(np.diff(np.sort(t0)))
+
+# -------------------------------
+# Band profile of G_emp
+# -------------------------------
+max_k = N - 1
+band_energy = np.zeros(max_k + 1)
+
+idx = np.arange(N)
+for k in range(max_k + 1):
+    mask = np.abs(idx[:, None] - idx[None, :]) == k
+    band_energy[k] = np.sum(G_emp[mask]**2)
+
+# discard diagonal
+k_vals = np.arange(1, max_k + 1)
+band_energy = band_energy[1:]
+
+# normalise
+band_energy /= np.max(band_energy)
+
+# rescaled distance
+r = k_vals / Delta_bar
+
+# -------------------------------
+# Continuum decay table
+# -------------------------------
+print("==============================================")
+print("TEST AY′ — CONTINUUM SYMBOL COLLAPSE")
+print("==============================================")
+print(f"zeros used       = {N}")
+print(f"mean spacing Δ̄  = {Delta_bar:.6f}")
+print("----------------------------------------------")
+print("Rescaled band profile (k/Δ̄ , amplitude):")
+
+for ri, bi in zip(r[:10], band_energy[:10]):
+    print(f"{ri:8.3f}    {bi:.5e}")
+
+# -------------------------------
+# Effective continuum exponent
+# -------------------------------
+mask = (band_energy > 0) & (r > 0)
+logr = np.log(r[mask])
+logb = np.log(band_energy[mask])
+
+slope, intercept = np.polyfit(logr, logb, 1)
+p_eff = -slope
+
+print("----------------------------------------------")
+print("Effective continuum exponent:")
+print(f"  p_eff ≈ {p_eff:.4f}")
+print("----------------------------------------------")
+print("Interpretation:")
+print("  smooth power-law decay vs k/Δ̄ → continuum kernel")
+print("  no collapse                  → discrete artifact")
+print("==============================================")
+
+TEST AY′ — CONTINUUM SYMBOL COLLAPSE
+==============================================
+zeros used       = 21
+mean spacing Δ̄  = 2.457343
+----------------------------------------------
+Rescaled band profile (k/Δ̄ , amplitude):
+   0.407    1.00000e+00
+   0.814    9.20362e-01
+   1.221    3.25603e-01
+   1.628    1.13406e-01
+   2.035    6.94555e-02
+   2.442    4.25532e-02
+   2.849    2.78172e-02
+   3.256    2.07681e-02
+   3.662    1.62709e-02
+   4.069    1.38041e-02
+----------------------------------------------
+Effective continuum exponent:
+  p_eff ≈ 2.9371
+----------------------------------------------
+Interpretation:
+  smooth power-law decay vs k/Δ̄ → continuum kernel
+  no collapse                  → discrete artifact
+==============================================
+
+
+
+
+93
+
+# ============================
+# TEST AZ (ROBUST) — SYMBOL UNIVERSALITY
+# ============================
+# Phone-safe, self-contained, crash-proof
+
+import numpy as np
+
+# ----------------------------
+# Helpers
+# ----------------------------
+def mean_spacing(t0):
+    t0 = np.sort(t0)
+    return np.mean(np.diff(t0))
+
+def band_profile(G, Kmax=10):
+    N = G.shape[0]
+    prof = []
+    for k in range(1, Kmax+1):
+        mask = np.abs(np.arange(N)[:,None]-np.arange(N)[None,:]) == k
+        val = np.mean(np.abs(G[mask])) if np.any(mask) else 0.0
+        prof.append(val)
+    return np.array(prof)
+
+def safe_power_law(x, y):
+    x = np.asarray(x)
+    y = np.asarray(y)
+    m = (x > 0) & (y > 0) & np.isfinite(y)
+    if np.sum(m) < 3:
+        return np.nan
+    X = np.log(x[m])
+    Y = np.log(y[m])
+    a, _ = np.polyfit(X, Y, 1)
+    return -a
+
+def zscore(v):
+    s = np.std(v)
+    return (v - np.mean(v)) / s if s > 0 else v*0
+
+# ----------------------------
+# Proxy xi sampler (geometry only)
+# ----------------------------
+def xi_re_proxy(t):
+    return np.cos(t*np.log(t+1.0)) * np.exp(-0.01*t)
+
+def sample_zeros(T0, T1, N):
+    t = np.linspace(T0, T1, N)
+    f = xi_re_proxy(t)
+    s = np.sign(f)
+    z = np.where(np.diff(s)!=0)[0]
+    return t[z]
+
+# ----------------------------
+# σ-generator (finite diff)
+# ----------------------------
+def sigma_generator(t0, sigmas):
+    N = len(t0)
+    Vs = []
+    for s in sigmas:
+        k = int(max(1, round(2*s*N/(t0[-1]-t0[0]+1e-9))))
+        v = np.zeros(N)
+        for i in range(N):
+            lo = max(0, i-k)
+            hi = min(N, i+k+1)
+            v[i] = np.mean(t0[lo:hi]) - t0[i]
+        Vs.append(v)
+    Vs = np.array(Vs)
+    return (Vs[1]-Vs[0])/(sigmas[1]-sigmas[0])
+
+def generator_matrix(v):
+    v = zscore(v)
+    return np.outer(v, v)
+
+# ----------------------------
+# AZ main
+# ----------------------------
+def AZ_windows(windows, N=8192, edge_drop=2, sigmas=(0.0,0.02), Kmax=10):
+
+    p_list = []
+
+    for (T0, T1) in windows:
+        tz = sample_zeros(T0, T1, N)
+        tz = tz[edge_drop:len(tz)-edge_drop]
+
+        print(f"\nWINDOW [{T0},{T1}]")
+        if len(tz) < 12:
+            print("  skipped (too few zeros)")
+            continue
+
+        v = sigma_generator(tz, sigmas)
+        G = generator_matrix(v)
+
+        Δbar = mean_spacing(tz)
+        prof = band_profile(G, Kmax)
+        x = np.arange(1, Kmax+1)/Δbar
+
+        p_eff = safe_power_law(x, prof)
+        p_list.append(p_eff)
+
+        print(f"  zeros used = {len(tz)}")
+        print(f"  mean spacing Δ̄ = {Δbar:.6f}")
+        print("  rescaled band (k/Δ̄ , amp):")
+        for xi, yi in zip(x, prof):
+            print(f"    {xi:.3f}   {yi:.6e}")
+        print(f"  p_eff ≈ {p_eff}")
+
+    print("\n==============================")
+    print("AZ — SYMBOL UNIVERSALITY SUMMARY")
+    print("==============================")
+    p_arr = np.array(p_list, dtype=float)
+    valid = np.isfinite(p_arr)
+
+    if np.sum(valid) == 0:
+        print("No valid p_eff extracted.")
+    else:
+        print("p_eff values:", p_arr[valid])
+        print("mean p_eff =", np.mean(p_arr[valid]))
+        print("std  p_eff =", np.std(p_arr[valid]))
+    print("==============================")
+
+# ----------------------------
+# RUN
+# ----------------------------
+windows = [(60.0,120.0),(120.0,180.0),(180.0,240.0)]
+AZ_windows(windows)
+
+WINDOW [60.0,120.0]
+  zeros used = 100
+  mean spacing Δ̄ = 0.572765
+  rescaled band (k/Δ̄ , amp):
+    1.746   0.000000e+00
+    3.492   0.000000e+00
+    5.238   0.000000e+00
+    6.984   0.000000e+00
+    8.730   0.000000e+00
+    10.476   0.000000e+00
+    12.221   0.000000e+00
+    13.967   0.000000e+00
+    15.713   0.000000e+00
+    17.459   0.000000e+00
+  p_eff ≈ nan
+
+WINDOW [120.0,180.0]
+  zeros used = 111
+  mean spacing Δ̄ = 0.523213
+  rescaled band (k/Δ̄ , amp):
+    1.911   0.000000e+00
+    3.823   0.000000e+00
+    5.734   0.000000e+00
+    7.645   0.000000e+00
+    9.556   0.000000e+00
+    11.468   0.000000e+00
+    13.379   0.000000e+00
+    15.290   0.000000e+00
+    17.201   0.000000e+00
+    19.113   0.000000e+00
+  p_eff ≈ nan
+
+WINDOW [180.0,240.0]
+  zeros used = 117
+  mean spacing Δ̄ = 0.495140
+  rescaled band (k/Δ̄ , amp):
+    2.020   0.000000e+00
+    4.039   0.000000e+00
+    6.059   0.000000e+00
+    8.079   0.000000e+00
+    10.098   0.000000e+00
+    12.118   0.000000e+00
+    14.137   0.000000e+00
+    16.157   0.000000e+00
+    18.177   0.000000e+00
+    20.196   0.000000e+00
+  p_eff ≈ nan
+
+==============================
+AZ — SYMBOL UNIVERSALITY SUMMARY
+==============================
+No valid p_eff extracted.
+==============================
+
+
+94
+
+
+# ============================================================
+# NEXT TEST: CHARACTERISTIC FLOW CONSISTENCY (PDE/ODE TEST)
+#   Does zero motion follow  dt/dσ = v(t)  with v estimated at σ≈0 ?
+#   Also checks 2nd order: dt/dσ = v0 + a0 σ  from quadratic fit.
+#
+# Runs from scratch (no globals), Colab-safe.
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+# --------------------------
+# CONFIG
+# --------------------------
+mp.mp.dps = 50
+
+T0, T1 = 60.0, 120.0
+N = 8192  # power-of-2 helps FFT
+EDGE_DROP = 2
+
+SIGMAS = [0.0, 0.01, 0.02, 0.04, 0.06]   # "σ" in t-units (same units as window)
+FIT_MAX_SIGMA = 0.06                     # use sigmas <= this for fitting v (and a)
+
+# --------------------------
+# Xi and baseline f(t)
+# --------------------------
+def xi(s):
+    # Riemann xi(s) = 1/2 s(s-1) π^{-s/2} Γ(s/2) ζ(s)
+    return mp.mpf('0.5') * s*(s-1) * (mp.pi**(-s/2)) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_vals(tt):
+    # vectorised via list; mp eval cost is real but N=8192 is OK
+    out = np.empty_like(tt, dtype=float)
+    for i, t in enumerate(tt):
+        z = xi(mp.mpf('0.5') + 1j*mp.mpf(t))
+        out[i] = float(mp.re(z))
+    return out
+
+# --------------------------
+# FFT Gaussian smoothing in t
+#   g_sigma * f  <->  exp(-0.5*(ω σ)^2) * F(ω)
+# --------------------------
+def gaussian_smooth_fft(f, sigma, dt):
+    if sigma == 0.0:
+        return f.copy()
+    F = np.fft.rfft(f)
+    freq = np.fft.rfftfreq(f.size, d=dt)          # cycles per unit t
+    omega = 2*np.pi*freq                           # rad per unit t
+    H = np.exp(-0.5*(omega*sigma)**2)
+    return np.fft.irfft(F*H, n=f.size)
+
+# --------------------------
+# Zero finding + refinement (purely numeric)
+# --------------------------
+def find_zeros_linear(t, y):
+    s = np.sign(y)
+    # treat exact zeros as tiny
+    s[s == 0] = 1.0
+    idx = np.where(s[:-1] * s[1:] < 0)[0]
+    z = []
+    for i in idx:
+        t0, t1 = t[i], t[i+1]
+        y0, y1 = y[i], y[i+1]
+        # linear interpolation root
+        zr = t0 - y0*(t1-t0)/(y1-y0)
+        z.append(zr)
+    return np.array(z, dtype=float)
+
+def refine_zeros_localpoly(t, y, z0, half_window=3):
+    # refine each zero using local polynomial fit around closest index
+    z = []
+    for zr in z0:
+        k = int(np.argmin(np.abs(t - zr)))
+        a = max(0, k-half_window)
+        b = min(len(t), k+half_window+1)
+        if b - a < 5:
+            z.append(float(zr))
+            continue
+        tt = t[a:b] - zr
+        yy = y[a:b]
+        # cubic fit yy(tt) ~ p(tt); root near 0
+        deg = 3 if (b-a) >= 4 else 1
+        p = np.polyfit(tt, yy, deg)
+        # evaluate poly and find root closest to 0 among real roots
+        roots = np.roots(p)
+        roots_real = roots[np.isreal(roots)].real
+        if roots_real.size == 0:
+            z.append(float(zr))
+            continue
+        # choose root closest to 0 (local correction)
+        dr = roots_real[np.argmin(np.abs(roots_real))]
+        z.append(float(zr + dr))
+    return np.array(z, dtype=float)
+
+# --------------------------
+# Track zeros across σ by nearest-neighbour chaining
+# --------------------------
+def track_zeros(z_by_sigma, edge_drop=2):
+    sigmas = sorted(z_by_sigma.keys())
+    z0 = np.asarray(z_by_sigma[sigmas[0]], dtype=float)
+    if z0.size <= 2*edge_drop:
+        return sigmas, np.zeros((0, len(sigmas))), np.array([])
+    z0 = z0[edge_drop:-edge_drop]
+
+    tracks = [z0.copy()]
+    ref = z0.copy()
+
+    for s in sigmas[1:]:
+        z = np.asarray(z_by_sigma[s], dtype=float)
+        if z.size == 0:
+            return sigmas, np.zeros((0, len(sigmas))), np.array([])
+        # greedy nearest match in order (monotone)
+        matched = np.empty_like(ref)
+        j0 = 0
+        for i, r in enumerate(ref):
+            # search forward only
+            j = j0 + int(np.argmin(np.abs(z[j0:] - r)))
+            matched[i] = z[j]
+            j0 = j  # enforce monotonic matching
+        tracks.append(matched)
+        ref = matched
+
+    Z = np.stack(tracks, axis=1)  # shape (nzeros, nsigmas)
+    return sigmas, Z, z0
+
+# --------------------------
+# Fit v (and a) from sigma trajectories
+# --------------------------
+def fit_velocity_and_accel(sigmas, Z, fit_max):
+    sig = np.array(sigmas, dtype=float)
+    mask = sig <= fit_max
+    sig_fit = sig[mask]
+    Z_fit = Z[:, mask]
+
+    n = Z_fit.shape[0]
+    v = np.zeros(n)
+    a = np.zeros(n)
+
+    # linear fit: t(σ) = t0 + v σ
+    # quadratic fit: t(σ) = t0 + v σ + 0.5 a σ^2
+    for i in range(n):
+        y = Z_fit[i] - Z_fit[i, 0]
+        # linear
+        A1 = np.vstack([sig_fit, np.ones_like(sig_fit)]).T
+        c1, _, _, _ = np.linalg.lstsq(A1, y, rcond=None)
+        v[i] = c1[0]
+        # quadratic (needs >=3 pts)
+        if sig_fit.size >= 3:
+            A2 = np.vstack([sig_fit, 0.5*sig_fit**2, np.ones_like(sig_fit)]).T
+            c2, _, _, _ = np.linalg.lstsq(A2, y, rcond=None)
+            v[i] = c2[0]
+            a[i] = c2[1]
+    return v, a
+
+# --------------------------
+# MAIN
+# --------------------------
+t = np.linspace(T0, T1, N, endpoint=False)
+dt = t[1] - t[0]
+
+print(f"Sampling f(t)=Re xi(1/2+it) on [{T0},{T1}]  N={N}  dt≈{dt} ...")
+f0 = f_vals(t)
+
+# compute zeros for each sigma
+z_by_sigma = {}
+for s in SIGMAS:
+    y = gaussian_smooth_fft(f0, s, dt)
+    z_lin = find_zeros_linear(t, y)
+    z_ref = refine_zeros_localpoly(t, y, z_lin, half_window=3)
+    z_by_sigma[s] = z_ref
+
+print(f"Baseline zeros in window (σ=0): {len(z_by_sigma[0.0])}")
+
+# track
+sigmas, Z, z0_core = track_zeros(z_by_sigma, edge_drop=EDGE_DROP)
+if Z.size == 0:
+    print("No tracked zeros. (Increase window or reduce EDGE_DROP)")
+    raise SystemExit
+
+nzeros = Z.shape[0]
+print(f"Tracked zeros across σ: {nzeros} / {max(0, len(z_by_sigma[0.0]) - 2*EDGE_DROP)}")
+print("First few tracked baseline zeros:", np.round(Z[:12,0], 6))
+
+# fit v and a
+v, a = fit_velocity_and_accel(sigmas, Z, FIT_MAX_SIGMA)
+
+# pick a target sigma to test prediction (use max in grid)
+sigma_test = max(SIGMAS)
+col_test = sigmas.index(sigma_test)
+t_meas = Z[:, col_test]
+dt_meas = t_meas - Z[:, 0]
+
+# 1st order prediction
+dt_pred1 = v * sigma_test
+
+# 2nd order prediction
+dt_pred2 = v * sigma_test + 0.5 * a * sigma_test**2
+
+def corr(x, y):
+    x = np.asarray(x, float); y = np.asarray(y, float)
+    x -= x.mean(); y -= y.mean()
+    nx = np.linalg.norm(x); ny = np.linalg.norm(y)
+    if nx == 0 or ny == 0:
+        return np.nan
+    return float(np.dot(x, y) / (nx * ny))
+
+def rel_err(meas, pred):
+    meas = np.asarray(meas, float); pred = np.asarray(pred, float)
+    denom = np.mean(np.abs(meas)) + 1e-30
+    return float(np.mean(np.abs(meas - pred)) / denom)
+
+print("\n==============================================")
+print("TEST AC-FLOW: CHARACTERISTIC CONSISTENCY")
+print("Model: dt/dσ = v(t)  estimated near σ=0")
+print("==============================================")
+print(f"zeros used = {nzeros}")
+print(f"sigma_test = {sigma_test:.4f}")
+print("\n--- First-order prediction dt ≈ v σ ---")
+print(f"corr(dt_pred1, dt_meas) = {corr(dt_pred1, dt_meas):+.6f}")
+print(f"mean|dt_meas|           = {np.mean(np.abs(dt_meas)):.6e}")
+print(f"mean|dt_pred1|          = {np.mean(np.abs(dt_pred1)):.6e}")
+print(f"mean relative error     = {rel_err(dt_meas, dt_pred1):.6e}")
+
+print("\n--- Second-order prediction dt ≈ v σ + 0.5 a σ^2 ---")
+print(f"corr(dt_pred2, dt_meas) = {corr(dt_pred2, dt_meas):+.6f}")
+print(f"mean|dt_pred2|          = {np.mean(np.abs(dt_pred2)):.6e}")
+print(f"mean relative error     = {rel_err(dt_meas, dt_pred2):.6e}")
+
+# show a few per-zero numbers
+kshow = min(10, nzeros)
+print("\n--- Sample (first few zeros) ---")
+for i in range(kshow):
+    print(f"t0={Z[i,0]:9.6f}  dt_meas={dt_meas[i]:+.6e}  dt1={dt_pred1[i]:+.6e}  dt2={dt_pred2[i]:+.6e}")
+
+print("==============================================")
+print("DONE.")
+
+
+Sampling f(t)=Re xi(1/2+it) on [60.0,120.0]  N=8192  dt≈0.00732421875 ...
+Baseline zeros in window (σ=0): 25
+Tracked zeros across σ: 21 / 21
+First few tracked baseline zeros: [67.08  69.546 72.067 75.705 77.145 79.337 82.91  84.735 87.425 88.809
+ 92.492 94.651]
+
+==============================================
+TEST AC-FLOW: CHARACTERISTIC CONSISTENCY
+Model: dt/dσ = v(t)  estimated near σ=0
+==============================================
+zeros used = 21
+sigma_test = 0.0600
+
+--- First-order prediction dt ≈ v σ ---
+corr(dt_pred1, dt_meas) = +0.651325
+mean|dt_meas|           = 6.366396e-03
+mean|dt_pred1|          = 2.165374e-02
+mean relative error     = 2.773312e+00
+
+--- Second-order prediction dt ≈ v σ + 0.5 a σ^2 ---
+corr(dt_pred2, dt_meas) = +0.974484
+mean|dt_pred2|          = 7.772223e-03
+mean relative error     = 3.240643e-01
+
+--- Sample (first few zeros) ---
+t0=67.079811  dt_meas=+2.779910e-03  dt1=+7.409656e-03  dt2=+3.496712e-03
+t0=69.546402  dt_meas=+2.796827e-03  dt1=+7.409114e-03  dt2=+3.513585e-03
+t0=72.067158  dt_meas=+2.512081e-03  dt1=+7.409456e-03  dt2=+3.228874e-03
+t0=75.704691  dt_meas=+5.334002e-03  dt1=+7.405429e-03  dt2=+6.050316e-03
+t0=77.144840  dt_meas=+2.044894e-03  dt1=+7.411577e-03  dt2=+2.761465e-03
+t0=79.337375  dt_meas=+1.909344e-03  dt1=+7.409885e-03  dt2=+2.625178e-03
+t0=82.910381  dt_meas=+4.522366e-03  dt1=+7.408191e-03  dt2=+5.251857e-03
+t0=84.735493  dt_meas=+2.626901e-03  dt1=+7.413768e-03  dt2=+3.402020e-03
+t0=87.425275  dt_meas=+4.444113e-03  dt1=+7.437113e-03  dt2=+5.665330e-03
+t0=88.809111  dt_meas=+8.475722e-04  dt1=+7.336798e-03  dt2=+3.445931e-04
+==============================================
+DONE.
+
+95
+
+
+
+
+
+
+
