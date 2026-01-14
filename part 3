@@ -1,0 +1,1564 @@
+Code 15
+# ============================================================
+# C1 — GLOBAL ZERO BALANCE TEST (FULL, SELF-CONTAINED)
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+from scipy.ndimage import gaussian_filter1d
+
+mp.mp.dps = 80
+
+# ------------------------------------------------------------
+# Riemann xi function
+# ------------------------------------------------------------
+def xi(s):
+    return 0.5 * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+# ------------------------------------------------------------
+# Sample Re[xi(1/2 + it)]
+# ------------------------------------------------------------
+def sample_xi(t_min, t_max, N):
+    t = np.linspace(t_min, t_max, N)
+    f = np.array([float(mp.re(xi(0.5 + 1j*tt))) for tt in t])
+    return t, f
+
+# ------------------------------------------------------------
+# Zero finder via sign change + linear refine
+# ------------------------------------------------------------
+def find_zeros(t, f):
+    zeros = []
+    s = np.sign(f)
+    for i in range(1, len(s)):
+        if s[i] == 0 or s[i] != s[i-1]:
+            t0, t1 = t[i-1], t[i]
+            f0, f1 = f[i-1], f[i]
+            if f1 != f0:
+                z = t0 - f0 * (t1 - t0) / (f1 - f0)
+                zeros.append(z)
+    return np.array(zeros)
+
+# ------------------------------------------------------------
+# C1: global balance
+# ------------------------------------------------------------
+def C1_global_balance(baseline, convolved, edge_drop=3):
+    n = min(len(baseline), len(convolved))
+    b = baseline[edge_drop:n-edge_drop]
+    c = convolved[edge_drop:n-edge_drop]
+    dt = c - b
+    print("\n================ C1 GLOBAL BALANCE =================")
+    print(f"Σ Δt      = {np.sum(dt):+.6e}")
+    print(f"Σ |Δt|    = {np.sum(np.abs(dt)):.6e}")
+    print(f"mean Δt   = {np.mean(dt):+.6e}")
+    print(f"mean |Δt| = {np.mean(np.abs(dt)):.6e}")
+    print("===================================================\n")
+
+# ------------------------------------------------------------
+# PARAMETERS
+# ------------------------------------------------------------
+T_MIN, T_MAX = 60.0, 120.0
+N = 16384
+SIGMA = 0.08          # convolution width (σ)
+EDGE_DROP = 3
+
+# ------------------------------------------------------------
+# BASELINE
+# ------------------------------------------------------------
+t, f = sample_xi(T_MIN, T_MAX, N)
+baseline_zeros = find_zeros(t, f)
+
+# ------------------------------------------------------------
+# CONVOLUTION
+# ------------------------------------------------------------
+f_conv = gaussian_filter1d(f, sigma=SIGMA / (t[1]-t[0]))
+convolved_zeros = find_zeros(t, f_conv)
+
+# ------------------------------------------------------------
+# REPORT
+# ------------------------------------------------------------
+print("Baseline zeros:", baseline_zeros[:12])
+print("Convolved zeros:", convolved_zeros[:12])
+
+# ------------------------------------------------------------
+# RUN C1
+# ------------------------------------------------------------
+C1_global_balance(baseline_zeros, convolved_zeros, edge_drop=EDGE_DROP)
+
+Code 16
+import numpy as np
+import mpmath as mp
+from scipy.signal import fftconvolve
+
+mp.mp.dps = 80
+
+# ------------------------------------------------------------
+# Riemann xi
+# ------------------------------------------------------------
+def xi(s):
+    return 0.5 * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+# ------------------------------------------------------------
+# Sample Re ξ(1/2 + it)
+# ------------------------------------------------------------
+def sample_xi(t_vals):
+    return np.array([float(mp.re(xi(0.5 + 1j*t))) for t in t_vals])
+
+# ------------------------------------------------------------
+# Zero finder (sign-change + linear refine)
+# ------------------------------------------------------------
+def find_zeros(t, f):
+    z = []
+    for i in range(1, len(f)):
+        if f[i-1] == 0 or f[i] == 0 or np.sign(f[i-1]) != np.sign(f[i]):
+            t0, t1 = t[i-1], t[i]
+            f0, f1 = f[i-1], f[i]
+            if f1 != f0:
+                z.append(t0 - f0*(t1-t0)/(f1-f0))
+    return np.array(z)
+
+# ------------------------------------------------------------
+# C1b kernel: Gaussian with zero first moment
+# ------------------------------------------------------------
+def balanced_kernel(sigma, dx, width=6):
+    x = np.arange(-width*sigma, width*sigma+dx, dx)
+    g = np.exp(-0.5*(x/sigma)**2)
+    g /= g.sum()
+
+    # subtract linear component to kill first moment
+    m1 = np.sum(x * g)
+    g = g - m1 * x / np.sum(x*x)
+    g /= g.sum()
+
+    return g
+
+# ------------------------------------------------------------
+# C1b test
+# ------------------------------------------------------------
+def C1b_test(baseline_zeros, convolved_zeros):
+    Δt = convolved_zeros - baseline_zeros
+    print("\n================ C1b GLOBAL BALANCE ================")
+    print(f"Σ Δt      = {np.sum(Δt):+.6e}")
+    print(f"Σ |Δt|    = {np.sum(np.abs(Δt)):.6e}")
+    print(f"mean Δt   = {np.mean(Δt):+.6e}")
+    print(f"mean |Δt| = {np.mean(np.abs(Δt)):.6e}")
+    print("====================================================")
+
+# ------------------------------------------------------------
+# RUN
+# ------------------------------------------------------------
+t_min, t_max = 60.0, 120.0
+N = 16384
+t = np.linspace(t_min, t_max, N)
+dt = t[1] - t[0]
+
+f = sample_xi(t)
+baseline_zeros = find_zeros(t, f)
+
+sigma = 0.05
+kernel = balanced_kernel(sigma, dt)
+
+f_conv = fftconvolve(f, kernel, mode="same")
+convolved_zeros = find_zeros(t, f_conv)
+
+# Trim edges consistently
+n = min(len(baseline_zeros), len(convolved_zeros))
+baseline_zeros = baseline_zeros[:n]
+convolved_zeros = convolved_zeros[:n]
+
+print("Baseline zeros:", baseline_zeros)
+print("Convolved zeros:", convolved_zeros)
+
+C1b_test(baseline_zeros, convolved_zeros)
+
+Code 17
+# ============================================================
+# D) GLOBAL PHASE-ONLY OPERATORS (FOURIER-SPACE MASKING)
+# ------------------------------------------------------------
+# Goal: test whether "phase-only" spectral operators can preserve
+#       Riemann ξ zeros on the critical line.
+#
+# We sample f(t) = Re ξ(1/2 + i t) on a window [T0, T1],
+# take FFT, apply PHASE-ONLY mask:
+#       F(k) -> |F(k)| * exp(i*(arg(F(k)) + tau * Phi(k)))
+# then inverse FFT, track zero drift.
+#
+# Modes implemented:
+#   D0_GLOBAL    : constant phase rotation (should NOT move zeros much unless it flips sign)
+#   D1_ODD_POWER : Phi(k)=sign(k)*|k|^p      (odd phase -> time-asymmetry / "forbidden" class)
+#   D2_EVEN_POWER: Phi(k)=|k|^p              (even phase -> dispersive but symmetric)
+#   D3_BAND      : Phi(k)=1 inside band else 0
+#   D4_RANDOMSYM : random symmetric Phi(k) (Hermitian-safe)
+#
+# Output:
+#   baseline zeros
+#   zeros after mask
+#   mean |Δt|
+#   plus optional plots
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+# ----------------------------
+# Precision / sampling controls
+# ----------------------------
+mp.mp.dps = 80
+
+T0, T1 = 60.0, 120.0   # window (edit if you want)
+N = 16384              # sample count (power of 2 helps FFT)
+EDGE_DROP = 3          # drop first/last few matched zeros to avoid edge artifacts
+TRACK_N = 25           # how many zeros to compare
+REFINE_ITERS = 3       # refinement passes
+PLOT = True
+
+# ----------------------------
+# xi(s) and f(t)
+# ----------------------------
+def xi(s):
+    return 0.5 * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_of_t(t):
+    # real part along critical line
+    return float(mp.re(xi(mp.mpf("0.5") + 1j*mp.mpf(t))))
+
+t = np.linspace(T0, T1, N, endpoint=False)
+dt = t[1] - t[0]
+
+print(f"Sampling f(t)=Re ξ(1/2+it) on [{T0},{T1}] with N={N}, dt≈{dt:.8g} ...")
+f0 = np.array([f_of_t(tt) for tt in t], dtype=np.float64)
+
+# ----------------------------
+# Zero finding (sign-change + local quadratic refine)
+# ----------------------------
+def sign_change_zeros(y, tgrid):
+    ysgn = np.sign(y)
+    idx = np.where(ysgn[:-1] * ysgn[1:] <= 0)[0]  # includes exact zeros and sign flips
+    # exclude exact flat regions
+    zeros = []
+    for i in idx:
+        tL, tR = tgrid[i], tgrid[i+1]
+        yL, yR = y[i], y[i+1]
+        if np.isfinite(yL) and np.isfinite(yR) and (yL != yR):
+            # linear interpolate as starting point
+            z = tL - yL * (tR - tL) / (yR - yL)
+            zeros.append(z)
+    return np.array(zeros, dtype=np.float64)
+
+def refine_zeros_local(y, tgrid, z0, iters=3):
+    # local quadratic refinement around each approximate zero:
+    # fit 3 points around nearest index, take root of quadratic closest to z0
+    z = z0.copy()
+    for _ in range(iters):
+        for j in range(len(z)):
+            # nearest index
+            i = int(np.clip(np.floor((z[j] - tgrid[0]) / (tgrid[1] - tgrid[0])), 1, len(tgrid) - 2))
+            xs = tgrid[i-1:i+2]
+            ys = y[i-1:i+2]
+            if not np.all(np.isfinite(ys)):
+                continue
+            # fit a x^2 + b x + c
+            A = np.vstack([xs**2, xs, np.ones_like(xs)]).T
+            try:
+                a, b, c = np.linalg.lstsq(A, ys, rcond=None)[0]
+            except Exception:
+                continue
+            # handle near-linear
+            if abs(a) < 1e-18:
+                if abs(b) > 1e-18:
+                    z[j] = -c / b
+                continue
+            disc = b*b - 4*a*c
+            if disc < 0:
+                continue
+            r1 = (-b + np.sqrt(disc)) / (2*a)
+            r2 = (-b - np.sqrt(disc)) / (2*a)
+            # pick closest to current
+            z[j] = r1 if abs(r1 - z[j]) < abs(r2 - z[j]) else r2
+    return z
+
+def baseline_zeros(y, tgrid):
+    z = sign_change_zeros(y, tgrid)
+    z = refine_zeros_local(y, tgrid, z, iters=REFINE_ITERS)
+    # keep within window
+    z = z[(z > tgrid[0] + 2*dt) & (z < tgrid[-1] - 2*dt)]
+    return np.sort(z)
+
+z_base = baseline_zeros(f0, t)
+print(f"\nBaseline zeros in [{T0},{T1}] (count={len(z_base)}):")
+print(np.array2string(z_base[:min(len(z_base), 30)], precision=6, suppress_small=False))
+
+# ----------------------------
+# Fourier phase-only masking utilities
+# ----------------------------
+def hermitian_enforce(F):
+    # Enforce Hermitian symmetry so inverse FFT is real (up to rounding):
+    # F[-k] = conj(F[k])
+    N = len(F)
+    F2 = F.copy()
+    # DC and Nyquist (if N even) must be real
+    F2[0] = np.real(F2[0]) + 0j
+    if N % 2 == 0:
+        F2[N//2] = np.real(F2[N//2]) + 0j
+    # enforce pairs
+    for k in range(1, N//2):
+        F2[-k] = np.conj(F2[k])
+    return F2
+
+def apply_phase_only_mask(y, tau, mode="D2_EVEN_POWER", p=2.0, band=(0.1, 0.3), seed=0):
+    """
+    y: real signal
+    tau: strength
+    mode: operator type
+    p: power for Phi(k)
+    band: fraction band for D3_BAND: (low_frac, high_frac) in [0,0.5]
+    """
+    N = len(y)
+    Y = np.fft.fft(y)
+    mag = np.abs(Y)
+    ang = np.angle(Y)
+
+    # frequency index k mapped to signed integers
+    k = np.fft.fftfreq(N, d=1.0)  # cycles/sample; symmetric
+    ks = np.fft.fftfreq(N, d=dt)  # cycles/unit-t; not needed for Phi, but available
+    # signed index proxy: use k * N gives integer-like ordering
+    kk = k * N
+
+    if mode == "D0_GLOBAL":
+        Phi = np.ones_like(kk)
+    elif mode == "D1_ODD_POWER":
+        Phi = np.sign(kk) * (np.abs(kk) ** p)
+    elif mode == "D2_EVEN_POWER":
+        Phi = (np.abs(kk) ** p)
+    elif mode == "D3_BAND":
+        # band on |k| normalized to Nyquist (0.5 cycles/sample)
+        low, high = band
+        absk = np.abs(k)
+        Phi = ((absk >= low) & (absk <= high)).astype(np.float64)
+    elif mode == "D4_RANDOMSYM":
+        rng = np.random.default_rng(seed)
+        # build random Phi on positive frequencies, mirror to keep odd/even structure stable
+        Phi = np.zeros(N, dtype=np.float64)
+        # random values for k=1..N/2-1
+        r = rng.standard_normal(N//2 - 1)
+        Phi[1:N//2] = r
+        Phi[-(N//2 - 1):] = Phi[1:N//2][::-1]  # symmetric (even)
+        Phi[0] = 0.0
+        if N % 2 == 0:
+            Phi[N//2] = 0.0
+    else:
+        raise ValueError("Unknown mode")
+
+    new_ang = ang + tau * Phi
+    Y2 = mag * np.exp(1j * new_ang)
+
+    # enforce hermitian so y2 is real-valued
+    Y2 = hermitian_enforce(Y2)
+    y2 = np.real(np.fft.ifft(Y2))
+    return y2
+
+# ----------------------------
+# Matching / drift metric
+# ----------------------------
+def match_zeros(z0, z1, edge_drop=3, n=25):
+    # simple sorted pairing; assumes no reordering catastrophes
+    m = min(len(z0), len(z1), n)
+    if m <= 2*edge_drop:
+        return None, None, None
+    a = z0[:m]
+    b = z1[:m]
+    a = a[edge_drop:m-edge_drop]
+    b = b[edge_drop:m-edge_drop]
+    dt = b - a
+    return a, b, dt
+
+def run_mode(mode, taus, p=2.0, band=(0.1, 0.3), seed=0):
+    print("\n=========================================================")
+    print(f"D) PHASE-ONLY MASK TEST   mode={mode}")
+    if mode in ("D1_ODD_POWER","D2_EVEN_POWER"):
+        print(f"    Phi(k) power p={p}")
+    if mode == "D3_BAND":
+        print(f"    band |k| in [{band[0]}, {band[1]}] cycles/sample")
+    if mode == "D4_RANDOMSYM":
+        print(f"    seed={seed}")
+    print("=========================================================")
+
+    results = []
+    for tau in taus:
+        y = apply_phase_only_mask(f0, tau=tau, mode=mode, p=p, band=band, seed=seed)
+        z = baseline_zeros(y, t)
+
+        a, b, d = match_zeros(z_base, z, edge_drop=EDGE_DROP, n=TRACK_N)
+        if d is None:
+            print(f"tau={tau:.3f} -> not enough zeros to compare (base={len(z_base)} new={len(z)})")
+            continue
+        mean_abs = float(np.mean(np.abs(d)))
+        mean_signed = float(np.mean(d))
+        print(f"tau={tau:.3f}  zeros(base/new)={len(z_base)}/{len(z)}   mean|Δt|={mean_abs:.6e}   meanΔt={mean_signed:+.6e}")
+        results.append((tau, z, mean_abs, mean_signed, y))
+    return results
+
+# ----------------------------
+# Choose tests
+# ----------------------------
+TAUS = [0.0, 0.1, 0.2, 0.5, 1.0]
+
+# Run a few operator families
+res_global = run_mode("D0_GLOBAL", TAUS)                          # constant phase shift
+res_even_p2 = run_mode("D2_EVEN_POWER", TAUS, p=2.0)              # even phase dispersion (p=2)
+res_odd_p2  = run_mode("D1_ODD_POWER",  TAUS, p=2.0)              # odd phase dispersion (p=2) "phase skew"
+res_band    = run_mode("D3_BAND",       TAUS, band=(0.05, 0.15))  # phase applied to a spectral band
+res_rand    = run_mode("D4_RANDOMSYM",  [0.2, 0.5, 1.0], seed=7)  # random symmetric phase
+
+# ----------------------------
+# Optional plots (pick one result set to visualize)
+# ----------------------------
+if PLOT:
+    # pick: even p=2, tau=0.5 if available
+    pick = None
+    for tau, z, mean_abs, mean_signed, y in res_even_p2:
+        if abs(tau - 0.5) < 1e-12:
+            pick = (tau, z, y)
+            break
+
+    if pick is None and len(res_even_p2) > 0:
+        pick = (res_even_p2[-1][0], res_even_p2[-1][1], res_even_p2[-1][4])
+
+    if pick is not None:
+        tau_pick, z_pick, y_pick = pick
+        plt.figure(figsize=(10,4))
+        plt.plot(t, f0, lw=1.0, label="baseline f(t)")
+        plt.plot(t, y_pick, lw=1.0, alpha=0.8, label=f"phase-only masked (mode=D2_EVEN_POWER, tau={tau_pick})")
+        plt.axhline(0, lw=0.6)
+        plt.title("Phase-only Fourier Mask: Baseline vs Transformed f(t)")
+        plt.xlabel("t")
+        plt.ylabel("Re ξ(1/2+it)")
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+
+        # zero overlays
+        m = min(len(z_base), len(z_pick), 30)
+        plt.figure(figsize=(10,2.4))
+        plt.scatter(z_base[:m], np.zeros(m), s=12, label="baseline zeros")
+        plt.scatter(z_pick[:m], np.zeros(m), s=12, label="masked zeros", alpha=0.75)
+        plt.yticks([])
+        plt.title("Zero locations (first ~30 in window)")
+        plt.xlabel("t")
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+
+print("\nDone. If phase-only masks cause drift, that's a clean veto on")
+print("any 'pure phase deformation' spectral explanation of zero rigidity.")
+
+Code 18
+# ============================================================
+# TEST E: Real-space, real, even, zero-mean kernel convolution
+#        Zero stability + σ² drift check
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+mp.mp.dps = 50
+
+# ------------------------------------------------------------
+# 1. Sample f(t) = Re ξ(1/2 + i t)
+# ------------------------------------------------------------
+tmin, tmax = 60.0, 120.0
+N = 16384
+t = np.linspace(tmin, tmax, N)
+dt = t[1] - t[0]
+
+def xi_half(t):
+    return mp.re(mp.zeta(0.5 + 1j*t))
+
+f = np.array([xi_half(tt) for tt in t], dtype=float)
+
+# ------------------------------------------------------------
+# 2. Find zeros by sign change + linear refine
+# ------------------------------------------------------------
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            t0, t1 = t[i], t[i+1]
+            f0, f1 = f[i], f[i+1]
+            z.append(t0 - f0*(t1-t0)/(f1-f0))
+    return np.array(z)
+
+baseline_zeros = find_zeros(t, f)
+
+# interior only
+edge = 3
+bz = baseline_zeros[edge:-edge]
+
+print("Baseline zeros:", bz)
+print("count:", len(bz))
+
+# ------------------------------------------------------------
+# 3. Kernel factory: real, even, zero-mean
+# ------------------------------------------------------------
+def kernel_even_zero_mean(x, sigma, kind="gaussian"):
+    if kind == "gaussian":
+        K = np.exp(-x**2/(2*sigma**2))
+    elif kind == "mexican":
+        K = (1 - x**2/sigma**2) * np.exp(-x**2/(2*sigma**2))
+    else:
+        raise ValueError
+
+    K -= K.mean()   # enforce zero-mean
+    K /= np.sum(np.abs(K))  # normalize
+    return K
+
+# ------------------------------------------------------------
+# 4. Convolution operator
+# ------------------------------------------------------------
+def apply_kernel(f, t, sigma, kind):
+    R = int(6*sigma/dt)
+    x = np.arange(-R, R+1)*dt
+    K = kernel_even_zero_mean(x, sigma, kind)
+    return np.convolve(f, K, mode="same")
+
+# ------------------------------------------------------------
+# 5. Run test
+# ------------------------------------------------------------
+sigma_vals = [0.03, 0.05, 0.08, 0.12, 0.15, 0.20, 0.30]
+results = {}
+
+for kind in ["gaussian", "mexican"]:
+    print("\n============================")
+    print("Kernel:", kind)
+    print("============================")
+
+    for s in sigma_vals:
+        f2 = f + apply_kernel(f, t, s, kind)
+        z2 = find_zeros(t, f2)
+
+        # match by index (interior only)
+        z2 = z2[edge:edge+len(bz)]
+        dtz = z2 - bz
+
+        mean_abs = np.mean(np.abs(dtz))
+        mean_signed = np.mean(dtz)
+
+        results[(kind, s)] = mean_abs
+
+        print(f"sigma={s:.3f}  mean|Δt|={mean_abs:.6e}  meanΔt={mean_signed:+.6e}")
+
+# ------------------------------------------------------------
+# 6. Scaling plot
+# ------------------------------------------------------------
+plt.figure(figsize=(7,5))
+for kind in ["gaussian", "mexican"]:
+    y = [results[(kind, s)] for s in sigma_vals]
+    plt.loglog(sigma_vals, y, "o-", label=kind)
+
+plt.loglog(sigma_vals,
+           (np.array(sigma_vals)**2)*y[0]/(sigma_vals[0]**2),
+           "--", label="σ² reference")
+
+plt.xlabel("σ")
+plt.ylabel("mean |Δt|")
+plt.title("TEST E: Real even zero-mean kernels")
+plt.legend()
+plt.grid(True, which="both", alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+Code 19
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ==============================
+# INPUT DATA (yours)
+# ==============================
+
+baseline_zeros = np.array([
+    60.83177873, 65.11254434, 67.07981161, 69.54640375, 72.06715813,
+    75.70469324, 77.14484154, 79.33737539, 82.91038419, 84.73549319,
+    87.42527836, 88.80911158
+])
+
+convolved_zeros = np.array([
+    60.83269146, 65.11983450, 67.08403120, 69.55065286, 72.07090147,
+    75.71345690, 77.14775131, 79.34004818, 82.91770123, 84.73944009,
+    87.43245953, 88.80989322
+])
+
+sigma = 0.15
+
+# ==============================
+# STEP 1: zero shifts
+# ==============================
+
+dt = convolved_zeros - baseline_zeros          # length N
+
+# ==============================
+# STEP 2: zero spacings
+# ==============================
+
+Delta = np.diff(baseline_zeros)                # length N-1
+
+# ==============================
+# STEP 3: discrete curvature of spacing lattice
+# κ_i = Δ_{i+1} - 2Δ_i + Δ_{i-1}
+# ==============================
+
+kappa = Delta[1:-1] - 2*Delta[:-2] + Delta[2:] # length N-3
+
+# ==============================
+# STEP 4: align Δt to curvature
+# curvature at index i corresponds to zero i+1
+# ==============================
+
+dt_aligned = dt[2:-1]                           # length N-3
+
+# ==============================
+# HARD CHECK
+# ==============================
+
+assert kappa.shape == dt_aligned.shape, \
+    f"Shape mismatch: kappa {kappa.shape}, dt {dt_aligned.shape}"
+
+# ==============================
+# STEP 5: prediction
+# ==============================
+
+pred = sigma**2 * kappa
+
+# ==============================
+# STEP 6: diagnostics
+# ==============================
+
+corr = np.corrcoef(pred, dt_aligned)[0,1]
+rel_err = np.mean(np.abs(dt_aligned - pred)) / np.mean(np.abs(dt_aligned))
+
+print("========== HYBRID ZERO-CURVATURE TEST ==========")
+print(f"sigma = {sigma}")
+print(f"Correlation(pred, meas) = {corr:.6f}")
+print(f"Mean relative error     = {rel_err:.6e}")
+print("===============================================")
+
+# ==============================
+# STEP 7: plots
+# ==============================
+
+plt.figure(figsize=(12,4))
+
+plt.subplot(1,2,1)
+plt.scatter(pred, dt_aligned, s=60)
+m = max(np.max(np.abs(pred)), np.max(np.abs(dt_aligned)))
+plt.plot([-m, m], [-m, m], 'k--', lw=1)
+plt.xlabel("predicted Δt  (σ²·κ)")
+plt.ylabel("measured Δt")
+plt.title("Hybrid test: predicted vs measured")
+plt.grid(alpha=0.3)
+
+plt.subplot(1,2,2)
+plt.plot(dt_aligned, marker='o', label="measured Δt")
+plt.plot(pred, marker='s', label="predicted σ²·κ")
+plt.legend()
+plt.title("Index-space comparison")
+plt.grid(alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+
+Code 20 
+# ============================================================
+# TEST F1: HARD SPECTRAL PROJECTION (FOURIER BAND-LIMIT)
+# Purpose:
+#   Test whether Riemann-zero rigidity survives true spectral
+#   projection (not convolution, not phase masking).
+#
+# What this does:
+#   1) Samples f(t) = Re ξ(1/2 + it) on a window
+#   2) Computes baseline zeros
+#   3) Applies HARD Fourier cutoff |k| <= kc
+#   4) Recomputes zeros
+#   5) Measures zero survival + drift statistics
+#
+# This is a projection operator, not smoothing.
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+mp.mp.dps = 50
+
+# -----------------------------
+# PARAMETERS
+# -----------------------------
+T0, T1 = 60.0, 120.0
+N = 16384
+dt = (T1 - T0) / N
+t = np.linspace(T0, T1, N, endpoint=False)
+
+kc_fracs = [0.05, 0.10, 0.15, 0.20, 0.30]  # fraction of Nyquist
+EDGE_DROP = 2
+
+# -----------------------------
+# RIEMANN FUNCTION
+# -----------------------------
+def f_riemann(t):
+    return float(mp.re(mp.zeta(0.5 + 1j*t)))
+
+# -----------------------------
+# SAMPLE FUNCTION
+# -----------------------------
+print("Sampling f(t) = Re ξ(1/2 + it)...")
+f = np.array([f_riemann(tt) for tt in t])
+
+# -----------------------------
+# ZERO FINDER
+# -----------------------------
+def find_zeros(t, y):
+    s = np.sign(y)
+    idx = np.where(s[:-1] * s[1:] < 0)[0]
+    zeros = []
+    for i in idx:
+        t0, t1 = t[i], t[i+1]
+        y0, y1 = y[i], y[i+1]
+        z = t0 - y0 * (t1 - t0) / (y1 - y0)
+        zeros.append(z)
+    return np.array(zeros)
+
+baseline_zeros = find_zeros(t, f)
+baseline_zeros = baseline_zeros[EDGE_DROP:-EDGE_DROP]
+
+print(f"Baseline zeros count: {len(baseline_zeros)}")
+print(baseline_zeros[:12])
+
+# -----------------------------
+# FFT SETUP
+# -----------------------------
+F = np.fft.fft(f)
+freq = np.fft.fftfreq(N, d=dt)
+k_nyq = np.max(np.abs(freq))
+
+# -----------------------------
+# RUN PROJECTION TEST
+# -----------------------------
+print("\n================ HARD SPECTRAL PROJECTION =================")
+
+for kc_frac in kc_fracs:
+    kc = kc_frac * k_nyq
+    mask = np.abs(freq) <= kc
+
+    F_proj = F * mask
+    f_proj = np.real(np.fft.ifft(F_proj))
+
+    z_proj = find_zeros(t, f_proj)
+    z_proj = z_proj[EDGE_DROP:-EDGE_DROP]
+
+    m = min(len(baseline_zeros), len(z_proj))
+    if m < 5:
+        print(f"kc={kc_frac:.2f}: insufficient zeros (base={len(baseline_zeros)}, proj={len(z_proj)})")
+        continue
+
+    dt_shift = z_proj[:m] - baseline_zeros[:m]
+
+    print(f"\nkc={kc_frac:.2f}")
+    print(f"  zeros(base/proj) = {len(baseline_zeros)}/{len(z_proj)}")
+    print(f"  mean |Δt|        = {np.mean(np.abs(dt_shift)):.6e}")
+    print(f"  mean Δt          = {np.mean(dt_shift):+.6e}")
+    print(f"  Σ Δt             = {np.sum(dt_shift):+.6e}")
+
+# -----------------------------
+# VISUAL CHECK (last kc)
+# -----------------------------
+plt.figure(figsize=(10,4))
+plt.plot(t, f, label="baseline", alpha=0.7)
+plt.plot(t, f_proj, label=f"projected kc={kc_frac}", alpha=0.7)
+plt.axhline(0, color="k", lw=0.5)
+plt.legend()
+plt.title("Hard spectral projection (visual check)")
+plt.show()
+
+Code 21 
+import numpy as np
+import matplotlib.pyplot as plt
+from mpmath import mp
+
+# =======================
+# PARAMETERS
+# =======================
+mp.dps = 50
+T0, T1 = 60.0, 120.0
+N = 16384
+dt = (T1 - T0) / N
+t = np.linspace(T0, T1, N, endpoint=False)
+
+kc_list = [0.05, 0.10, 0.15, 0.20, 0.30]
+
+# =======================
+# RIEMANN XI (REAL PART)
+# =======================
+def xi(s):
+    return 0.5 * s * (s - 1) * mp.pi**(-s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_vals(t):
+    return np.array([float(mp.re(xi(0.5 + 1j*ti))) for ti in t])
+
+print("Sampling f(t) = Re ξ(1/2 + it)...")
+f = f_vals(t)
+
+# =======================
+# ZERO FINDER
+# =======================
+def find_zeros(x, y):
+    zeros = []
+    for i in range(len(y)-1):
+        if y[i] == 0 or y[i]*y[i+1] < 0:
+            x0 = x[i] - y[i]*(x[i+1]-x[i])/(y[i+1]-y[i])
+            zeros.append(x0)
+    return np.array(zeros)
+
+baseline_zeros = find_zeros(t, f)
+print(f"Baseline zeros count: {len(baseline_zeros)}")
+print(baseline_zeros[:12])
+
+# =======================
+# ASYMMETRIC SPECTRAL PROJECTION
+# =======================
+def asymmetric_projection(f, kc, side="positive"):
+    F = np.fft.fft(f)
+    freqs = np.fft.fftfreq(len(f), d=dt)
+
+    mask = np.zeros_like(F, dtype=float)
+
+    if side == "positive":
+        mask[(freqs >= 0) & (np.abs(freqs) <= kc)] = 1.0
+    elif side == "negative":
+        mask[(freqs <= 0) & (np.abs(freqs) <= kc)] = 1.0
+    else:
+        raise ValueError("side must be 'positive' or 'negative'")
+
+    return np.real(np.fft.ifft(F * mask))
+
+# =======================
+# TEST LOOP
+# =======================
+print("\n================ ASYMMETRIC SPECTRAL PROJECTION =================")
+
+for side in ["positive", "negative"]:
+    print(f"\n---- Side: {side} ----")
+    for kc in kc_list:
+        fp = asymmetric_projection(f, kc, side=side)
+        zp = find_zeros(t, fp)
+
+        m = min(len(baseline_zeros), len(zp))
+        if m < 5:
+            print(f"kc={kc:.2f}  insufficient zeros")
+            continue
+
+        dtz = zp[:m] - baseline_zeros[:m]
+
+        print(f"kc={kc:.2f}")
+        print(f"  zeros(base/proj) = {len(baseline_zeros)}/{len(zp)}")
+        print(f"  mean |Δt|        = {np.mean(np.abs(dtz)):.6e}")
+        print(f"  mean Δt          = {np.mean(dtz):+.6e}")
+        print(f"  Σ Δt             = {np.sum(dtz):+.6e}")
+
+# =======================
+# VISUAL CHECK
+# =======================
+kc_plot = 0.15
+fp_pos = asymmetric_projection(f, kc_plot, side="positive")
+fp_neg = asymmetric_projection(f, kc_plot, side="negative")
+
+plt.figure(figsize=(12,4))
+plt.plot(t, f, label="baseline", alpha=0.7)
+plt.plot(t, fp_pos, label="positive-only", alpha=0.8)
+plt.plot(t, fp_neg, label="negative-only", alpha=0.8)
+plt.axhline(0, color="k", lw=0.5)
+plt.legend()
+plt.title(f"Asymmetric spectral projection (kc={kc_plot})")
+plt.show()
+
+Code 22 
+import numpy as np
+import matplotlib.pyplot as plt
+from mpmath import mp
+
+# =======================
+# PARAMETERS
+# =======================
+mp.dps = 50
+T0, T1 = 60.0, 120.0
+N = 16384
+dt = (T1 - T0) / N
+t = np.linspace(T0, T1, N, endpoint=False)
+
+kc_list = [0.05, 0.10, 0.15, 0.20, 0.30]
+
+# =======================
+# RIEMANN XI (REAL PART)
+# =======================
+def xi(s):
+    return 0.5 * s * (s - 1) * mp.pi**(-s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_vals(t):
+    return np.array([float(mp.re(xi(0.5 + 1j*ti))) for ti in t])
+
+print("Sampling f(t) = Re ξ(1/2 + it)...")
+f = f_vals(t)
+
+# =======================
+# ZERO FINDER
+# =======================
+def find_zeros(x, y):
+    zeros = []
+    for i in range(len(y)-1):
+        if y[i] == 0 or y[i]*y[i+1] < 0:
+            x0 = x[i] - y[i]*(x[i+1]-x[i])/(y[i+1]-y[i])
+            zeros.append(x0)
+    return np.array(zeros)
+
+baseline_zeros = find_zeros(t, f)
+print(f"Baseline zeros count: {len(baseline_zeros)}")
+print(baseline_zeros[:12])
+
+# =======================
+# ASYMMETRIC SPECTRAL PROJECTION
+# =======================
+def asymmetric_projection(f, kc, side="positive"):
+    F = np.fft.fft(f)
+    freqs = np.fft.fftfreq(len(f), d=dt)
+
+    mask = np.zeros_like(F, dtype=float)
+
+    if side == "positive":
+        mask[(freqs >= 0) & (np.abs(freqs) <= kc)] = 1.0
+    elif side == "negative":
+        mask[(freqs <= 0) & (np.abs(freqs) <= kc)] = 1.0
+    else:
+        raise ValueError("side must be 'positive' or 'negative'")
+
+    return np.real(np.fft.ifft(F * mask))
+
+# =======================
+# TEST LOOP
+# =======================
+print("\n================ ASYMMETRIC SPECTRAL PROJECTION =================")
+
+for side in ["positive", "negative"]:
+    print(f"\n---- Side: {side} ----")
+    for kc in kc_list:
+        fp = asymmetric_projection(f, kc, side=side)
+        zp = find_zeros(t, fp)
+
+        m = min(len(baseline_zeros), len(zp))
+        if m < 5:
+            print(f"kc={kc:.2f}  insufficient zeros")
+            continue
+
+        dtz = zp[:m] - baseline_zeros[:m]
+
+        print(f"kc={kc:.2f}")
+        print(f"  zeros(base/proj) = {len(baseline_zeros)}/{len(zp)}")
+        print(f"  mean |Δt|        = {np.mean(np.abs(dtz)):.6e}")
+        print(f"  mean Δt          = {np.mean(dtz):+.6e}")
+        print(f"  Σ Δt             = {np.sum(dtz):+.6e}")
+
+# =======================
+# VISUAL CHECK
+# =======================
+kc_plot = 0.15
+fp_pos = asymmetric_projection(f, kc_plot, side="positive")
+fp_neg = asymmetric_projection(f, kc_plot, side="negative")
+
+plt.figure(figsize=(12,4))
+plt.plot(t, f, label="baseline", alpha=0.7)
+plt.plot(t, fp_pos, label="positive-only", alpha=0.8)
+plt.plot(t, fp_neg, label="negative-only", alpha=0.8)
+plt.axhline(0, color="k", lw=0.5)
+plt.legend()
+plt.title(f"Asymmetric spectral projection (kc={kc_plot})")
+plt.show()
+
+Code 23 
+# =========================
+# TEST E′: One-sided FFT -> re-symmetrize spectrum -> zero rigidity?
+# =========================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+# ---------- Riemann xi ----------
+def xi(s):
+    # xi(s) = 1/2 * s(s-1) * pi^{-s/2} * Gamma(s/2) * zeta(s)
+    return mp.mpf('0.5') * s * (s-1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def sample_re_xi(ts, dps=50):
+    mp.mp.dps = dps
+    out = np.empty(len(ts), dtype=np.float64)
+    for i, t in enumerate(ts):
+        s = mp.mpf('0.5') + 1j*mp.mpf(str(t))
+        val = xi(s)
+        out[i] = float(mp.re(val))
+    return out
+
+# ---------- zero finding (sign-change + linear refine) ----------
+def find_zeros_linear(ts, ys):
+    sgn = np.sign(ys)
+    # treat exact zeros as tiny sign (rare)
+    sgn[sgn == 0] = 1
+    idx = np.where(sgn[:-1] * sgn[1:] < 0)[0]
+    zeros = []
+    for i in idx:
+        t0, t1 = ts[i], ts[i+1]
+        y0, y1 = ys[i], ys[i+1]
+        # linear interpolation
+        z = t0 - y0*(t1-t0)/(y1-y0)
+        zeros.append(z)
+    return np.array(zeros, dtype=np.float64)
+
+# ---------- matching zeros: nearest-neighbor in order ----------
+def match_zeros(z_base, z_new, edge_drop=2):
+    if len(z_base) < 2*edge_drop+1 or len(z_new) < 2*edge_drop+1:
+        return np.array([]), np.array([]), np.array([])
+    zb = z_base[edge_drop:-edge_drop]
+    zn = z_new[edge_drop:-edge_drop]
+    m = min(len(zb), len(zn))
+    zb = zb[:m]
+    zn = zn[:m]
+    dt = zn - zb
+    return zb, zn, dt
+
+# ---------- E′ operator: positive-only mask then re-symmetrize ----------
+def onesided_then_resymmetrize(y, kc_cycles_per_sample=0.15):
+    N = len(y)
+    Y = np.fft.fft(y)
+
+    # frequency in cycles/sample, in [-0.5, 0.5)
+    f = np.fft.fftfreq(N, d=1.0)
+
+    # keep only POSITIVE frequencies within kc (and DC)
+    keep_pos = (f >= 0) & (np.abs(f) <= kc_cycles_per_sample)
+
+    Ypos = np.zeros_like(Y)
+    Ypos[keep_pos] = Y[keep_pos]
+
+    # enforce conjugate symmetry to produce a real signal:
+    # Ysym[k] = Ypos[k] for k>=0, and Ysym[-k] = conj(Ypos[k])
+    Ysym = np.zeros_like(Ypos)
+
+    # indices for positive frequencies (including DC, excluding Nyquist handling separately)
+    pos_idx = np.where(f > 0)[0]
+    dc_idx = np.where(f == 0)[0]
+    Ysym[dc_idx] = Ypos[dc_idx]
+
+    # copy positives
+    Ysym[pos_idx] = Ypos[pos_idx]
+
+    # reflect to negatives
+    for k in pos_idx:
+        k_neg = (-k) % N
+        Ysym[k_neg] = np.conj(Ypos[k])
+
+    # if N even, Nyquist bin f=0.5 is its own conjugate partner; keep it real if included
+    if N % 2 == 0:
+        nyq = N//2
+        if np.abs(f[nyq]) <= kc_cycles_per_sample:
+            Ysym[nyq] = np.real(Ypos[nyq]) + 0j
+
+    y_out = np.fft.ifft(Ysym).real
+    return y_out
+
+# ---------- RUN ----------
+tmin, tmax = 60.0, 120.0
+N = 16384               # keep same as your earlier runs
+dps = 50                # mp precision
+kc_list = [0.05, 0.10, 0.15, 0.20, 0.30]
+EDGE_DROP = 2
+
+ts = np.linspace(tmin, tmax, N, endpoint=False)
+dt = ts[1] - ts[0]
+print(f"Sampling f(t)=Re xi(1/2+it) on [{tmin},{tmax}] with N={N}, dt≈{dt} ...")
+y0 = sample_re_xi(ts, dps=dps)
+
+z0 = find_zeros_linear(ts, y0)
+print(f"Baseline zeros in window: {len(z0)}")
+print(z0[:min(20, len(z0))])
+
+print("\n================ TEST E′: one-sided -> re-symmetrize =================")
+for kc in kc_list:
+    y_sym = onesided_then_resymmetrize(y0, kc_cycles_per_sample=kc)
+    z1 = find_zeros_linear(ts, y_sym)
+
+    zb, zn, dts = match_zeros(z0, z1, edge_drop=EDGE_DROP)
+    if len(dts) == 0:
+        print(f"kc={kc:.2f}  zeros(base/new)={len(z0)}/{len(z1)}  -> not enough to compare")
+        continue
+
+    print(f"\nkc={kc:.2f}")
+    print(f"  zeros(base/new) = {len(z0)}/{len(z1)}")
+    print(f"  mean |Δt|        = {np.mean(np.abs(dts)):.6e}")
+    print(f"  mean Δt          = {np.mean(dts):+.6e}")
+    print(f"  Σ Δt             = {np.sum(dts):+.6e}")
+
+# ---------- quick visual for one kc ----------
+kc_show = 0.15
+y_show = onesided_then_resymmetrize(y0, kc_cycles_per_sample=kc_show)
+z_show = find_zeros_linear(ts, y_show)
+
+plt.figure(figsize=(10,4))
+plt.plot(ts, y0, lw=1.0, label="baseline f(t)")
+plt.plot(ts, y_show, lw=1.0, label=f"E′ resymmetrized (kc={kc_show})")
+plt.axhline(0, lw=0.8)
+plt.xlim(tmin, tmax)
+plt.title("E′: One-sided spectrum repaired by conjugate symmetry")
+plt.legend()
+plt.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(10,2))
+plt.scatter(z0, np.zeros_like(z0), s=16, label="baseline zeros")
+plt.scatter(z_show, 0.02*np.ones_like(z_show), s=16, label="E′ zeros")
+plt.xlim(tmin, tmax)
+plt.yticks([])
+plt.title("Zero locations (baseline vs E′)")
+plt.legend()
+plt.grid(alpha=0.2)
+plt.tight_layout()
+plt.show()
+
+Code 24 
+
+# ============================================================
+# TEST F: Conjugate-symmetric phase/amplitude scrambles (real output)
+#   - Phase-only scramble (keep |F|)
+#   - Amplitude-only shuffle (keep phase)
+#   - Band-limited phase scramble
+# Measures: zero counts + mean|Δt| + meanΔt over matched zeros
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+mp.mp.dps = 50
+
+# -----------------------------
+# 1) Sample f(t) = Re xi(1/2 + it)
+# -----------------------------
+def xi_half_line(t):
+    s = mp.mpf('0.5') + 1j*mp.mpf(t)
+    # Riemann xi(s) = 0.5*s*(s-1)*pi^(-s/2)*Gamma(s/2)*zeta(s)
+    return mp.mpf('0.5')*s*(s-1)*(mp.pi**(-s/2))*mp.gamma(s/2)*mp.zeta(s)
+
+def sample_f(tmin, tmax, N):
+    ts = np.linspace(tmin, tmax, N, endpoint=False)
+    vals = np.zeros(N, dtype=np.float64)
+    for i, t in enumerate(ts):
+        vals[i] = float(mp.re(xi_half_line(t)))
+    dt = ts[1] - ts[0]
+    return ts, vals, dt
+
+# -----------------------------
+# 2) Zero finder: sign changes + bisection refine
+# -----------------------------
+def refine_root_bisect(f, a, b, iters=60):
+    fa, fb = f(a), f(b)
+    if fa == 0: return a
+    if fb == 0: return b
+    if fa*fb > 0:
+        return None
+    lo, hi = a, b
+    for _ in range(iters):
+        mid = 0.5*(lo+hi)
+        fm = f(mid)
+        if fm == 0:
+            return mid
+        if fa*fm <= 0:
+            hi = mid
+            fb = fm
+        else:
+            lo = mid
+            fa = fm
+    return 0.5*(lo+hi)
+
+def find_zeros(ts, y):
+    # raw sign-change brackets
+    zeros = []
+    for i in range(len(y)-1):
+        a, b = ts[i], ts[i+1]
+        ya, yb = y[i], y[i+1]
+        if ya == 0:
+            zeros.append(a)
+        elif ya*yb < 0:
+            # refine using xi directly (more stable than linear interp on y)
+            root = refine_root_bisect(lambda t: float(mp.re(xi_half_line(t))), a, b, iters=70)
+            if root is not None:
+                zeros.append(root)
+    return np.array(zeros, dtype=np.float64)
+
+def match_zeros(z0, z1, edge_drop=2):
+    # Match by index after dropping edges
+    n = min(len(z0), len(z1))
+    if n <= 2*edge_drop:
+        return None, None
+    a = z0[edge_drop:n-edge_drop]
+    b = z1[edge_drop:n-edge_drop]
+    m = min(len(a), len(b))
+    return a[:m], b[:m]
+
+def drift_stats(z0, z1, edge_drop=2, label=""):
+    a, b = match_zeros(z0, z1, edge_drop=edge_drop)
+    if a is None:
+        print(f"{label} not enough zeros to compare (base={len(z0)} new={len(z1)})")
+        return None
+    dt = b - a
+    print(f"{label} zeros(base/new)={len(z0)}/{len(z1)}  mean|Δt|={np.mean(np.abs(dt)):.6e}  meanΔt={np.mean(dt):+.6e}  ΣΔt={np.sum(dt):+.6e}")
+    return dt
+
+# -----------------------------
+# 3) FFT helpers
+# -----------------------------
+def rfft_full(y):
+    # Use full FFT so we can enforce conjugate symmetry explicitly
+    return np.fft.fft(y)
+
+def ifft_real(F):
+    y = np.fft.ifft(F)
+    return np.real(y)
+
+def enforce_conjugate_symmetry(F):
+    # For real signal: F[-k] = conj(F[k])
+    # We'll rebuild it explicitly to avoid numerical asymmetry
+    N = len(F)
+    G = np.zeros_like(F, dtype=np.complex128)
+    G[0] = np.real(F[0]) + 0j
+    if N % 2 == 0:
+        G[N//2] = np.real(F[N//2]) + 0j
+        kmax = N//2 - 1
+    else:
+        kmax = (N-1)//2
+    for k in range(1, kmax+1):
+        G[k] = F[k]
+        G[-k] = np.conj(G[k])
+    return G
+
+def freq_axis(N, dt):
+    # cycles per unit t
+    return np.fft.fftfreq(N, d=dt)
+
+# -----------------------------
+# 4) Conjugate-symmetric scrambles
+# -----------------------------
+def phase_scramble_conj(F, tau=1.0, seed=0, band=None, keep_dc=True):
+    """
+    Phase-only: keep |F|, randomize phase.
+    tau in [0,1]: 0=no change, 1=full random phase
+    band: (kmin, kmax) in |freq| cycles per unit t, scramble only inside band if provided
+    """
+    rng = np.random.default_rng(seed)
+    N = len(F)
+    f = freq_axis(N, dt_global)
+
+    G = np.array(F, dtype=np.complex128)
+
+    # indices to consider (exclude DC + Nyquist)
+    idx = np.arange(N)
+    # only positive k indices for independent assignment
+    pos = idx[(idx > 0) & (idx < N//2)] if N % 2 == 0 else idx[(idx > 0) & (idx <= (N-1)//2)]
+
+    if band is not None:
+        kmin, kmax = band
+        pos = pos[(np.abs(f[pos]) >= kmin) & (np.abs(f[pos]) <= kmax)]
+
+    for k in pos:
+        amp = np.abs(F[k])
+        if amp == 0:
+            continue
+        ph0 = np.angle(F[k])
+        phr = rng.uniform(-np.pi, np.pi)
+        ph  = (1.0 - tau)*ph0 + tau*phr
+        G[k] = amp * np.exp(1j*ph)
+        G[-k] = np.conj(G[k])
+
+    if keep_dc:
+        G[0] = np.real(F[0]) + 0j
+        if N % 2 == 0:
+            G[N//2] = np.real(F[N//2]) + 0j
+
+    return enforce_conjugate_symmetry(G)
+
+def amplitude_shuffle_conj(F, tau=1.0, seed=0, band=None, keep_dc=True):
+    """
+    Amplitude-only: keep phase, scramble amplitudes by shuffling |F| among modes.
+    tau in [0,1]: 0=no change, 1=full shuffle
+    """
+    rng = np.random.default_rng(seed)
+    N = len(F)
+    f = freq_axis(N, dt_global)
+
+    G = np.array(F, dtype=np.complex128)
+
+    pos = np.arange(1, N//2) if N % 2 == 0 else np.arange(1, (N+1)//2)
+
+    if band is not None:
+        kmin, kmax = band
+        pos = pos[(np.abs(f[pos]) >= kmin) & (np.abs(f[pos]) <= kmax)]
+
+    amps = np.abs(F[pos])
+    amps_shuf = np.array(amps, copy=True)
+    rng.shuffle(amps_shuf)
+
+    for i, k in enumerate(pos):
+        ph0 = np.angle(F[k])
+        amp_new = (1.0 - tau)*amps[i] + tau*amps_shuf[i]
+        G[k] = amp_new * np.exp(1j*ph0)
+        G[-k] = np.conj(G[k])
+
+    if keep_dc:
+        G[0] = np.real(F[0]) + 0j
+        if N % 2 == 0:
+            G[N//2] = np.real(F[N//2]) + 0j
+
+    return enforce_conjugate_symmetry(G)
+
+# -----------------------------
+# 5) Run test F on your window
+# -----------------------------
+tmin, tmax = 60.0, 120.0
+N = 16384  # you used this already
+print(f"Sampling f(t)=Re xi(1/2+it) on [{tmin},{tmax}] with N={N} ...")
+ts, y0, dt_global = sample_f(tmin, tmax, N)
+print("dt≈", dt_global)
+
+z0 = find_zeros(ts, y0)
+print(f"Baseline zeros in window: {len(z0)}")
+print(z0[:12])
+
+F0 = enforce_conjugate_symmetry(rfft_full(y0))
+
+# Visual sanity
+plt.figure(figsize=(10,4))
+plt.plot(ts, y0, lw=1.0, label="baseline f(t)")
+plt.axhline(0, lw=0.8)
+plt.title("Baseline f(t) (window)")
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+# ---- configs
+taus = [0.0, 0.1, 0.2, 0.5, 1.0]
+band = (0.02, 0.12)  # cycles per unit t (tune freely)
+
+print("\n=========================================================")
+print("F1) Phase-only scramble (conjugate-symmetric, real output)")
+print("=========================================================")
+for tau in taus:
+    G = phase_scramble_conj(F0, tau=tau, seed=7, band=None)
+    y = ifft_real(G)
+    z = find_zeros(ts, y)
+    drift_stats(z0, z, edge_drop=2, label=f"tau={tau:0.3f}")
+
+print("\n=========================================================")
+print("F2) Phase-only scramble in band (conjugate-symmetric)")
+print(f"    band |freq| in [{band[0]},{band[1]}] cycles per unit t")
+print("=========================================================")
+for tau in taus:
+    G = phase_scramble_conj(F0, tau=tau, seed=7, band=band)
+    y = ifft_real(G)
+    z = find_zeros(ts, y)
+    drift_stats(z0, z, edge_drop=2, label=f"tau={tau:0.3f}")
+
+print("\n=========================================================")
+print("F3) Amplitude-only shuffle (conjugate-symmetric)")
+print("=========================================================")
+for tau in taus:
+    G = amplitude_shuffle_conj(F0, tau=tau, seed=7, band=None)
+    y = ifft_real(G)
+    z = find_zeros(ts, y)
+    drift_stats(z0, z, edge_drop=2, label=f"tau={tau:0.3f}")
+
+# Quick plot one representative example (tau=0.5)
+tau_show = 0.5
+G_show = phase_scramble_conj(F0, tau=tau_show, seed=7, band=band)
+y_show = ifft_real(G_show)
+plt.figure(figsize=(12,4))
+plt.plot(ts, y0, lw=1.0, label="baseline")
+plt.plot(ts, y_show, lw=1.0, label=f"phase-scramble (band), tau={tau_show}")
+plt.axhline(0, lw=0.8)
+plt.title("Representative: conjugate-symmetric phase scramble (band-limited)")
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+Code 25 
+
+# FULL, READY-TO-RUN COLAB CODE (FIXED mp.dps)
+# Test G: Semigroup / composition law for symmetric real-even smoothing
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+from mpmath import mp
+from scipy.optimize import brentq
+
+# --------------------------
+# CONFIG
+# --------------------------
+mp.dps = 60              # <-- FIXED HERE
+T0, T1 = 60.0, 120.0
+N = 16384
+EDGE_DROP = 2
+
+SIGMA1 = 0.10
+SIGMA2 = 0.12
+SIGMA_TOTAL = (SIGMA1**2 + SIGMA2**2) ** 0.5
+
+KC_LIST = [0.05, 0.10, 0.15, 0.20, 0.30]
+
+# --------------------------
+# RIEMANN XI
+# --------------------------
+def xi_of_s(s):
+    return mp.mpf('0.5') * s * (s - 1) * (mp.pi ** (-s / 2)) * mp.gamma(s / 2) * mp.zeta(s)
+
+def f_re_xi(t):
+    s = mp.mpf('0.5') + 1j * mp.mpf(str(t))
+    return mp.re(xi_of_s(s))
+
+# --------------------------
+# SAMPLING
+# --------------------------
+ts = np.linspace(T0, T1, N, endpoint=False)
+dt = ts[1] - ts[0]
+
+print(f"Sampling f(t)=Re ξ(1/2+it) on [{T0},{T1}] with N={N}, dt≈{dt}")
+
+f = np.empty(N, dtype=np.float64)
+for i, t in enumerate(ts):
+    f[i] = float(f_re_xi(t))
+
+# --------------------------
+# ZERO FINDING
+# --------------------------
+def find_zeros_brent(ts, y, max_zeros=5000):
+    zeros = []
+    sgn = np.sign(y)
+    sgn[sgn == 0] = 1.0
+
+    for i in range(len(ts) - 1):
+        if sgn[i] * sgn[i + 1] < 0:
+            a, b = ts[i], ts[i + 1]
+            ya, yb = y[i], y[i + 1]
+
+            def g(t):
+                u = (t - a) / (b - a)
+                return ya * (1 - u) + yb * u
+
+            try:
+                zeros.append(brentq(g, a, b))
+            except Exception:
+                pass
+
+    return np.array(zeros)
+
+base_zeros = find_zeros_brent(ts, f)
+print(f"Baseline zeros: {len(base_zeros)}")
+print(base_zeros[:12])
+
+# --------------------------
+# FFT SETUP
+# --------------------------
+freq = np.fft.fftfreq(N, d=dt)
+F = np.fft.fft(f)
+
+def ifft_real(Fk):
+    return np.real(np.fft.ifft(Fk))
+
+# --------------------------
+# FILTERS
+# --------------------------
+def hard_bandlimit(F, freq, kc):
+    return F * (np.abs(freq) <= kc)
+
+def gaussian_heat(F, freq, sigma):
+    return F * np.exp(-2.0 * np.pi**2 * sigma**2 * freq**2)
+
+# --------------------------
+# PAIRING + DRIFT
+# --------------------------
+def drift_stats(base, new, edge_drop=0):
+    m = min(len(base), len(new))
+    if m <= 2 * edge_drop:
+        return None
+
+    b = base[edge_drop:m-edge_drop]
+    n = new[edge_drop:m-edge_drop]
+    dtv = n - b
+
+    return {
+        "count": len(dtv),
+        "sum_dt": float(np.sum(dtv)),
+        "mean_dt": float(np.mean(dtv)),
+        "mean_abs_dt": float(np.mean(np.abs(dtv))),
+    }
+
+# --------------------------
+# TEST G: SEMIGROUP CHECK
+# --------------------------
+print("\n===== GAUSSIAN SEMIGROUP TEST =====")
+print(f"σ1={SIGMA1}, σ2={SIGMA2}, σ_total={SIGMA_TOTAL}")
+
+# direct
+F_dir = gaussian_heat(F, freq, SIGMA_TOTAL)
+y_dir = ifft_real(F_dir)
+
+# composed
+F_comp = gaussian_heat(gaussian_heat(F, freq, SIGMA1), freq, SIGMA2)
+y_comp = ifft_real(F_comp)
+
+# function error
+rel_err = np.linalg.norm(y_comp - y_dir) / np.linalg.norm(y_dir)
+print(f"Function relative error = {rel_err:.3e}")
+
+# zero comparison
+z_dir = find_zeros_brent(ts, y_dir)
+z_comp = find_zeros_brent(ts, y_comp)
+
+st_dir = drift_stats(base_zeros, z_dir, EDGE_DROP)
+st_comp = drift_stats(base_zeros, z_comp, EDGE_DROP)
+st_sem = drift_stats(z_dir, z_comp, EDGE_DROP)
+
+print("\nBaseline → Direct")
+print(st_dir)
+
+print("\nBaseline → Composed")
+print(st_comp)
+
+print("\nDirect → Composed (semigroup consistency)")
+print(st_sem)
+
+# --------------------------
+# PLOTS
+# --------------------------
+plt.figure(figsize=(12,4))
+plt.plot(ts, f, label="baseline")
+plt.plot(ts, y_dir, label="direct σ_total")
+plt.plot(ts, y_comp, "--", label="σ1 then σ2")
+plt.axhline(0, lw=0.8)
+plt.legend()
+plt.grid(alpha=0.3)
+plt.title("Gaussian semigroup: direct vs composed")
+plt.show()
+
+plt.figure(figsize=(12,3))
+plt.plot(ts, y_comp - y_dir)
+plt.axhline(0, lw=0.8)
+plt.title("compose − direct")
+plt.grid(alpha=0.3)
+plt.show()
+
+print("\nDONE.")
