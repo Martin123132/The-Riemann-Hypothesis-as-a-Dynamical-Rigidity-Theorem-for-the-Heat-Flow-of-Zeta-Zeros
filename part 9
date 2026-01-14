@@ -1,0 +1,1385 @@
+
+
+
+
+
+95
+
+# ====================================================
+# TEST AD-FLOW-EXTRAPOLATION (ROBUST, ALIGNED)
+# ====================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# Xi and helpers
+# ----------------------------
+def xi(s):
+    return mp.zeta(s) * mp.gamma(s/2) * mp.pi**(-s/2)
+
+def f_vals(t):
+    return np.array([mp.re(xi(0.5 + 1j*ti)) for ti in t], dtype=float)
+
+def find_zeros(t, f):
+    idx = np.where(np.sign(f[:-1]) * np.sign(f[1:]) < 0)[0]
+    return np.array([np.interp(0, [f[i], f[i+1]], [t[i], t[i+1]]) for i in idx])
+
+def gaussian_smooth(f, sigma, dt):
+    if sigma == 0:
+        return f.copy()
+    k = np.fft.fftfreq(len(f), d=dt)
+    G = np.exp(-(2*np.pi*k)**2 * sigma**2 / 2)
+    return np.real(np.fft.ifft(np.fft.fft(f) * G))
+
+# ----------------------------
+# Parameters
+# ----------------------------
+WINDOW = (60.0, 120.0)
+N = 8192
+EDGE_DROP = 2
+
+SIGMAS_FIT  = [0.00, 0.01, 0.02, 0.04]
+SIGMAS_TEST = [0.06, 0.08, 0.10]
+
+# ----------------------------
+# Baseline sampling
+# ----------------------------
+t = np.linspace(*WINDOW, N)
+dt = t[1] - t[0]
+
+f0 = f_vals(t)
+z0_full = find_zeros(t, f0)
+
+# enforce edge drop once
+z0 = z0_full[EDGE_DROP:-EDGE_DROP]
+
+print(f"Baseline zeros used: {len(z0)}")
+
+# ----------------------------
+# Track zeros across σ
+# ----------------------------
+Z = {}
+for sigma in SIGMAS_FIT + SIGMAS_TEST:
+    fs = gaussian_smooth(f0, sigma, dt)
+    zs = find_zeros(t, fs)
+    zs = zs[EDGE_DROP:-EDGE_DROP]
+    Z[sigma] = zs
+
+# enforce common length across *all* sigmas
+min_len = min(len(z0), *(len(Z[s]) for s in Z))
+
+z0 = z0[:min_len]
+for s in Z:
+    Z[s] = Z[s][:min_len]
+
+print(f"Tracked zeros: {min_len}")
+
+# ----------------------------
+# Fit v and a from small σ
+# ----------------------------
+sigma_fit = np.array(SIGMAS_FIT)
+X = np.vstack([sigma_fit, 0.5*sigma_fit**2]).T
+
+v = np.zeros(min_len)
+a = np.zeros(min_len)
+
+for i in range(min_len):
+    y = np.array([Z[s][i] - z0[i] for s in sigma_fit])
+    coeffs, *_ = np.linalg.lstsq(X, y, rcond=None)
+    v[i], a[i] = coeffs
+
+print(f"mean|v| = {np.mean(np.abs(v)):.6e}")
+print(f"mean|a| = {np.mean(np.abs(a)):.6e}")
+
+# ----------------------------
+# Extrapolation test
+# ----------------------------
+print("\n==============================================")
+print("TEST AD-FLOW-EXTRAPOLATION (ROBUST)")
+print("==============================================")
+
+for sigma in SIGMAS_TEST:
+    dt_meas = Z[sigma] - z0
+    dt_pred = v*sigma + 0.5*a*sigma**2
+
+    corr = np.corrcoef(dt_pred, dt_meas)[0,1]
+    rel_err = np.linalg.norm(dt_pred - dt_meas) / np.linalg.norm(dt_meas)
+
+    print(f"\nσ = {sigma:.3f}")
+    print(f"  corr(pred, meas) = {corr:+.6f}")
+    print(f"  ||err||/||meas|| = {rel_err:.6f}")
+
+print("\nDONE.")
+
+Baseline zeros used: 21
+Tracked zeros: 21
+mean|v| = 4.038002e+02
+mean|a| = 1.929111e+04
+
+==============================================
+TEST AD-FLOW-EXTRAPOLATION (ROBUST)
+==============================================
+
+σ = 0.060
+  corr(pred, meas) = -0.627933
+  ||err||/||meas|| = 6.335090
+
+σ = 0.080
+  corr(pred, meas) = -0.713618
+  ||err||/||meas|| = 20.994970
+
+σ = 0.100
+  corr(pred, meas) = -0.736210
+  ||err||/||meas|| = 31.386265
+
+DONE.
+
+
+
+96
+
+# ====================================================
+# TEST AE″ — σ-ORDERED EXPONENTIAL FLOW
+# ====================================================
+
+import numpy as np
+from scipy.linalg import expm
+
+# ----------------------------
+# Inputs (already in memory)
+# ----------------------------
+# baseline zeros: z0
+# tracked zeros:  Z[sigma]
+# fitted generator at sigma≈0: v
+
+sigmas_test = [0.06, 0.08, 0.10]
+
+z0 = np.asarray(z0, float)
+v0 = np.asarray(v, float)
+
+N = len(z0)
+
+# ----------------------------
+# Build empirical generator matrix
+# ----------------------------
+# G_ij ≈ ∂v_i / ∂t_j  via finite differences
+G = np.zeros((N, N))
+
+for i in range(N):
+    for j in range(N):
+        if i == j:
+            continue
+        G[i,j] = (v0[i] - v0[j]) / (z0[i] - z0[j])
+
+# normalize scale to avoid overflow
+G /= np.linalg.norm(G)
+
+print("Generator matrix built.")
+print(f"||G|| = {np.linalg.norm(G):.6e}")
+
+# ----------------------------
+# Exponential flow test
+# ----------------------------
+print("\n==============================================")
+print("TEST AE″ — EXPONENTIAL FLOW CONSISTENCY")
+print("==============================================")
+
+for sigma in sigmas_test:
+    dt_meas = Z[sigma] - z0
+
+    U = expm(sigma * G)
+    dt_pred = U @ np.zeros_like(z0) + sigma * (U @ v0)
+
+    corr = np.corrcoef(dt_pred, dt_meas)[0,1]
+    rel_err = np.linalg.norm(dt_pred - dt_meas) / np.linalg.norm(dt_meas)
+
+    print(f"\nσ = {sigma:.3f}")
+    print(f"  corr(exp-flow, meas) = {corr:+.6f}")
+    print(f"  ||err||/||meas||     = {rel_err:.6f}")
+
+print("\nDONE.")
+
+Generator matrix built.
+||G|| = 1.000000e+00
+
+==============================================
+TEST AE″ — EXPONENTIAL FLOW CONSISTENCY
+==============================================
+
+σ = 0.060
+  corr(exp-flow, meas) = +0.822838
+  ||err||/||meas||     = 12.497072
+
+σ = 0.080
+  corr(exp-flow, meas) = +0.825686
+  ||err||/||meas||     = 21.336923
+
+σ = 0.100
+  corr(exp-flow, meas) = +0.825426
+  ||err||/||meas||     = 20.745800
+
+DONE.
+
+97
+
+# =========================================================
+# FULL STATELESS σ–GENERATOR EXPONENTIAL FLOW TEST
+# Mobile-safe: rebuilds everything from scratch
+# =========================================================
+
+import numpy as np
+import mpmath as mp
+from scipy.linalg import expm
+
+# -----------------------
+# CONFIG
+# -----------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+SIGMAS = [0.0, 0.02, 0.04, 0.06]
+EDGE_DROP = 2
+mp.mp.dps = 50
+
+# -----------------------
+# ξ(s) via ζ(s)
+# -----------------------
+def xi(s):
+    return 0.5*s*(s-1)*mp.pi**(-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+def f_vals(t):
+    return np.array([mp.re(xi(0.5 + 1j*ti)) for ti in t], float)
+
+# -----------------------
+# Zero finder
+# -----------------------
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z0, z1 = t[i], t[i+1]
+            f0, f1 = f[i], f[i+1]
+            z.append(z0 - f0*(z1-z0)/(f1-f0))
+    return np.array(z)
+
+# -----------------------
+# SAMPLE BASELINE
+# -----------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+
+f0 = f_vals(t)
+z0 = find_zeros(t, f0)
+z0 = z0[EDGE_DROP:-EDGE_DROP]
+
+print(f"Baseline zeros used: {len(z0)}")
+
+# -----------------------
+# TRACK ZEROS ACROSS σ
+# -----------------------
+Z = {}
+Z[0.0] = z0.copy()
+
+for s in SIGMAS[1:]:
+    f = np.array([
+        mp.re(xi(0.5 + s + 1j*ti))
+        for ti in z0
+    ], float)
+
+    z = []
+    for zi, fi in zip(z0, f):
+        # Newton step (1 iteration is enough here)
+        dfi = mp.re(mp.diff(lambda x: xi(0.5+s+1j*x), zi))
+        z.append(zi - fi/dfi)
+
+    Z[s] = np.array(z, float)
+
+print("Tracked zeros:", len(Z[0.0]))
+
+# -----------------------
+# GENERATOR v ≈ dt/dσ
+# -----------------------
+sig = SIGMAS[1]
+v = (Z[sig] - Z[0.0]) / sig
+
+print("mean|v| =", np.mean(np.abs(v)))
+
+# -----------------------
+# BUILD GENERATOR MATRIX
+# -----------------------
+N0 = len(z0)
+G = np.zeros((N0, N0))
+
+for i in range(N0):
+    for j in range(N0):
+        if i != j:
+            G[i,j] = (v[i] - v[j]) / (z0[i] - z0[j])
+
+np.fill_diagonal(G, -np.sum(G, axis=1))
+
+# -----------------------
+# EXPONENTIAL FLOW TEST
+# -----------------------
+print("\n==============================================")
+print("TEST AE‴ — EXPONENTIAL σ–FLOW")
+print("==============================================")
+
+for s in SIGMAS[1:]:
+    dt_meas = Z[s] - z0
+
+    A = s * G
+    U, S, VT = np.linalg.svd(A, full_matrices=False)
+    Sinv = np.array([1/x if x > 1e-12 else 0 for x in S])
+    Ainv = (VT.T * Sinv) @ U.T
+
+    dt_pred = (expm(A) - np.eye(N0)) @ (Ainv @ v)
+
+    corr = np.corrcoef(dt_pred, dt_meas)[0,1]
+    rel  = np.linalg.norm(dt_pred - dt_meas)/np.linalg.norm(dt_meas)
+
+    print(f"\nσ = {s:.3f}")
+    print(f"  corr(pred, meas) = {corr:+.6f}")
+    print(f"  ||err||/||meas|| = {rel:.6f}")
+
+print("\nDONE.")
+
+Baseline zeros used: 21
+Tracked zeros: 21
+mean|v| = 0.015663886376212792
+
+==============================================
+TEST AE‴ — EXPONENTIAL σ–FLOW
+==============================================
+
+σ = 0.020
+  corr(pred, meas) = +1.000000
+  ||err||/||meas|| = 25.905746
+
+σ = 0.040
+  corr(pred, meas) = +0.999891
+  ||err||/||meas|| = 6.242188
+
+σ = 0.060
+  corr(pred, meas) = +0.999843
+  ||err||/||meas|| = 2.597333
+
+DONE.
+
+
+
+
+98
+
+
+# =========================================================
+# AE⁗ — EXPONENTIAL FLOW WITH REGULARISED INVERSE + SCALE FIT
+# Fully stateless, mobile-safe (rebuilds everything)
+# =========================================================
+
+import numpy as np
+import mpmath as mp
+from scipy.linalg import expm
+
+# -----------------------
+# CONFIG
+# -----------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+SIGMAS = [0.0, 0.02, 0.04, 0.06]
+EDGE_DROP = 2
+mp.mp.dps = 50
+
+# Regularisation sweep (stabilises G^{-1})
+EPS_GRID = np.logspace(-12, -2, 21)
+
+# -----------------------
+# ξ(s) via ζ(s)
+# -----------------------
+def xi(s):
+    return 0.5*s*(s-1)*mp.pi**(-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+def f_vals(t):
+    return np.array([mp.re(xi(0.5 + 1j*ti)) for ti in t], float)
+
+# -----------------------
+# Zero finder (linear bracket)
+# -----------------------
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z0, z1 = t[i], t[i+1]
+            f0, f1 = f[i], f[i+1]
+            z.append(z0 - f0*(z1-z0)/(f1-f0))
+    return np.array(z)
+
+# -----------------------
+# Newton refine a root of Re xi(1/2+σ+i t)=0
+# -----------------------
+def refine_root(t0, sigma, iters=2):
+    t = mp.mpf(t0)
+    for _ in range(iters):
+        f = mp.re(xi(0.5 + sigma + 1j*t))
+        df = mp.re(mp.diff(lambda x: xi(0.5 + sigma + 1j*x), t))
+        if df == 0:
+            break
+        t = t - f/df
+    return float(t)
+
+# -----------------------
+# Sample baseline
+# -----------------------
+t = np.linspace(T0, T1, N)
+f0 = f_vals(t)
+z0 = find_zeros(t, f0)
+z0 = z0[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+
+print(f"Baseline zeros used: {N0}")
+
+# -----------------------
+# Track zeros across σ
+# -----------------------
+Z = {0.0: z0.copy()}
+for s in SIGMAS[1:]:
+    Z[s] = np.array([refine_root(zi, s, iters=2) for zi in z0], float)
+
+print("Tracked zeros:", len(Z[0.0]))
+
+# -----------------------
+# Generator estimate v ≈ (z(σ)-z0)/σ at smallest σ
+# -----------------------
+s_small = SIGMAS[1]
+v = (Z[s_small] - z0) / s_small
+print("mean|v| =", np.mean(np.abs(v)))
+
+# -----------------------
+# Build empirical generator matrix G from pairwise slopes
+# -----------------------
+G = np.zeros((N0, N0), float)
+for i in range(N0):
+    for j in range(N0):
+        if i != j:
+            G[i,j] = (v[i] - v[j]) / (z0[i] - z0[j])
+np.fill_diagonal(G, -np.sum(G, axis=1))
+
+# Normalise (optional but keeps numbers sane)
+Gn = G / max(np.linalg.norm(G), 1e-300)
+
+print("\n==============================================")
+print("AE⁗ — REGULARISED EXP FLOW + BEST SCALE λ*")
+print("==============================================")
+
+def best_scale(a, b):
+    # λ* = argmin ||λ a - b||_2
+    denom = np.dot(a, a)
+    if denom == 0:
+        return np.nan
+    return np.dot(a, b) / denom
+
+for s in SIGMAS[1:]:
+    dt_meas = Z[s] - z0
+
+    best = None  # (scaled_err, eps, corr, raw_err, lam)
+
+    for eps in EPS_GRID:
+        A = s * Gn
+
+        # Solve (Gn + eps I) x ≈ v  (ridge-stable substitute for Gn^{-1} v)
+        M = Gn + eps*np.eye(N0)
+        x, *_ = np.linalg.lstsq(M, v, rcond=None)
+
+        dt_pred = (expm(A) - np.eye(N0)) @ x
+
+        # stats
+        corr = np.corrcoef(dt_pred, dt_meas)[0,1] if np.std(dt_pred)>0 and np.std(dt_meas)>0 else np.nan
+        raw_err = np.linalg.norm(dt_pred - dt_meas) / max(np.linalg.norm(dt_meas), 1e-300)
+
+        lam = best_scale(dt_pred, dt_meas)
+        dt_scaled = lam * dt_pred
+        scaled_err = np.linalg.norm(dt_scaled - dt_meas) / max(np.linalg.norm(dt_meas), 1e-300)
+
+        if best is None or scaled_err < best[0]:
+            best = (scaled_err, eps, corr, raw_err, lam)
+
+    scaled_err, eps, corr, raw_err, lam = best
+
+    print(f"\nσ = {s:.3f}")
+    print(f"  best eps         = {eps:.2e}")
+    print(f"  corr(pred,meas)  = {corr:+.6f}")
+    print(f"  raw ||err||/||meas||    = {raw_err:.6f}")
+    print(f"  best scale λ*    = {lam:+.6e}")
+    print(f"  scaled ||err||/||meas|| = {scaled_err:.6f}")
+
+print("\nDONE.")
+
+Baseline zeros used: 21
+Tracked zeros: 21
+mean|v| = 0.015655555885748147
+
+==============================================
+AE⁗ — REGULARISED EXP FLOW + BEST SCALE λ*
+==============================================
+
+σ = 0.020
+  best eps         = 1.00e-04
+  corr(pred,meas)  = +0.999994
+  raw ||err||/||meas||    = 0.849004
+  best scale λ*    = +1.003952e+00
+  scaled ||err||/||meas|| = 0.849001
+
+σ = 0.040
+  best eps         = 1.00e-03
+  corr(pred,meas)  = +0.999881
+  raw ||err||/||meas||    = 0.888504
+  best scale λ*    = +1.976653e+00
+  scaled ||err||/||meas|| = 0.849372
+
+σ = 0.060
+  best eps         = 1.00e-03
+  corr(pred,meas)  = +0.999820
+  raw ||err||/||meas||    = 0.918601
+  best scale λ*    = +2.961650e+00
+  scaled ||err||/||meas|| = 0.849567
+
+DONE.
+
+
+99
+
+# =========================================================
+# BA — QUADRATIC σ-FLOW (v,a) PER ZERO
+# dt(σ) ≈ v σ + 0.5 a σ^2  (fit from tracked zeros)
+# Fully stateless, mobile-safe
+# =========================================================
+
+import numpy as np
+import mpmath as mp
+
+# -----------------------
+# CONFIG
+# -----------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+SIGMAS = [0.0, 0.02, 0.04, 0.06]
+EDGE_DROP = 2
+mp.mp.dps = 50
+
+# -----------------------
+# ξ(s) via ζ(s)
+# -----------------------
+def xi(s):
+    return 0.5*s*(s-1)*mp.pi**(-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+def f_vals(t):
+    return np.array([mp.re(xi(0.5 + 1j*ti)) for ti in t], float)
+
+# -----------------------
+# Zero finder (linear bracket)
+# -----------------------
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z0, z1 = t[i], t[i+1]
+            f0, f1 = f[i], f[i+1]
+            z.append(z0 - f0*(z1-z0)/(f1-f0))
+    return np.array(z)
+
+# -----------------------
+# Newton refine root of Re xi(1/2+σ+i t)=0
+# -----------------------
+def refine_root(t0, sigma, iters=2):
+    t = mp.mpf(t0)
+    for _ in range(iters):
+        f = mp.re(xi(0.5 + sigma + 1j*t))
+        df = mp.re(mp.diff(lambda x: xi(0.5 + sigma + 1j*x), t))
+        if df == 0:
+            break
+        t = t - f/df
+    return float(t)
+
+# -----------------------
+# Sample baseline
+# -----------------------
+t = np.linspace(T0, T1, N)
+f0 = f_vals(t)
+z0 = find_zeros(t, f0)
+z0 = z0[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+
+print(f"Baseline zeros used: {N0}")
+
+# -----------------------
+# Track zeros across σ
+# -----------------------
+Z = {0.0: z0.copy()}
+for s in SIGMAS[1:]:
+    Z[s] = np.array([refine_root(zi, s, iters=2) for zi in z0], float)
+
+print("Tracked zeros:", len(Z[0.0]))
+
+# -----------------------
+# Fit per-zero quadratic: z(σ) = z0 + v σ + 0.5 a σ^2
+# => y(σ) := z(σ)-z0 = v σ + 0.5 a σ^2
+# linear LS in [σ, 0.5 σ^2]
+# -----------------------
+sig = np.array(SIGMAS, float)
+A = np.vstack([sig, 0.5*sig**2]).T  # shape (ns, 2)
+
+v = np.zeros(N0, float)
+acc = np.zeros(N0, float)
+
+for i in range(N0):
+    y = np.array([Z[s][i] - z0[i] for s in SIGMAS], float)
+    coeffs, *_ = np.linalg.lstsq(A, y, rcond=None)
+    v[i], acc[i] = coeffs
+
+print("mean|v| =", float(np.mean(np.abs(v))))
+print("mean|a| =", float(np.mean(np.abs(acc))))
+
+# -----------------------
+# Evaluate prediction quality at each σ
+# -----------------------
+def rel_err(a, b):
+    return np.linalg.norm(a-b) / max(np.linalg.norm(b), 1e-300)
+
+print("\n==============================================")
+print("BA — QUADRATIC FLOW CHECK")
+print("==============================================")
+
+for s in SIGMAS[1:]:
+    dt_meas = Z[s] - z0
+    dt_pred = v*s + 0.5*acc*s*s
+
+    corr = np.corrcoef(dt_pred, dt_meas)[0,1] if np.std(dt_pred)>0 and np.std(dt_meas)>0 else np.nan
+    err = rel_err(dt_pred, dt_meas)
+
+    print(f"\nσ = {s:.3f}")
+    print(f"  corr(pred,meas) = {corr:+.6f}")
+    print(f"  ||err||/||meas|| = {err:.6f}")
+    print(f"  mean|dt_meas| = {np.mean(np.abs(dt_meas)):.6e}")
+    print(f"  mean|dt_pred| = {np.mean(np.abs(dt_pred)):.6e}")
+
+print("\nDONE.")
+
+
+Baseline zeros used: 21
+Tracked zeros: 21
+mean|v| = 0.00047029745800167614
+mean|a| = 1.5144303206594985
+
+==============================================
+BA — QUADRATIC FLOW CHECK
+==============================================
+
+σ = 0.020
+  corr(pred,meas) = +0.999995
+  ||err||/||meas|| = 0.003143
+  mean|dt_meas| = 3.131111e-04
+  mean|dt_pred| = 3.122815e-04
+
+σ = 0.040
+  corr(pred,meas) = +1.000000
+  ||err||/||meas|| = 0.000801
+  mean|dt_meas| = 1.229505e-03
+  mean|dt_pred| = 1.230335e-03
+
+σ = 0.060
+  corr(pred,meas) = +1.000000
+  ||err||/||meas|| = 0.000119
+  mean|dt_meas| = 2.754437e-03
+  mean|dt_pred| = 2.754161e-03
+
+DONE.
+
+
+100
+
+# =========================================================
+# BB — ACCELERATION FROM ODD-KERNEL OPERATOR (NO NEW FITS)
+# v_i fit -> coefficients a_p
+# then predict a_i using derivative of kernel sums:
+#   a_pred_i = Σ_p a_p Σ_{j≠i} [ -p * sign(d)/|d|^(p+1) * (v_i - v_j) ]
+# =========================================================
+
+import numpy as np
+import mpmath as mp
+
+# -----------------------
+# CONFIG
+# -----------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+SIGMAS = [0.0, 0.02, 0.04, 0.06]
+EDGE_DROP = 2
+POWERS = [1, 3, 5]          # odd-kernel basis
+mp.mp.dps = 50
+
+# -----------------------
+# ξ(s) via ζ(s)
+# -----------------------
+def xi(s):
+    return 0.5*s*(s-1)*mp.pi**(-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+def f_vals(t):
+    return np.array([mp.re(xi(0.5 + 1j*ti)) for ti in t], float)
+
+# -----------------------
+# Zero finder (linear bracket)
+# -----------------------
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z0, z1 = t[i], t[i+1]
+            f0, f1 = f[i], f[i+1]
+            z.append(z0 - f0*(z1-z0)/(f1-f0))
+    return np.array(z, float)
+
+# -----------------------
+# Newton refine root of Re xi(1/2+σ+i t)=0
+# -----------------------
+def refine_root(t0, sigma, iters=2):
+    t = mp.mpf(t0)
+    for _ in range(iters):
+        f = mp.re(xi(0.5 + sigma + 1j*t))
+        df = mp.re(mp.diff(lambda x: xi(0.5 + sigma + 1j*x), t))
+        if df == 0:
+            break
+        t = t - f/df
+    return float(t)
+
+# -----------------------
+# Sample baseline & track
+# -----------------------
+t = np.linspace(T0, T1, N)
+f0 = f_vals(t)
+z0 = find_zeros(t, f0)
+z0 = z0[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+print("Baseline zeros used:", N0)
+
+Z = {0.0: z0.copy()}
+for s in SIGMAS[1:]:
+    Z[s] = np.array([refine_root(zi, s, iters=2) for zi in z0], float)
+
+print("Tracked zeros:", len(Z[0.0]))
+
+# -----------------------
+# Fit (v, a) per zero from quadratic y = v σ + 0.5 a σ^2
+# -----------------------
+sig = np.array(SIGMAS, float)
+A = np.vstack([sig, 0.5*sig**2]).T  # (ns,2)
+
+v = np.zeros(N0, float)
+acc = np.zeros(N0, float)
+for i in range(N0):
+    y = np.array([Z[s][i] - z0[i] for s in SIGMAS], float)
+    coeffs, *_ = np.linalg.lstsq(A, y, rcond=None)
+    v[i], acc[i] = coeffs
+
+print("mean|v| =", float(np.mean(np.abs(v))))
+print("mean|a| =", float(np.mean(np.abs(acc))))
+
+# -----------------------
+# Build H_p(z0): Hilbert-like odd sums at baseline
+# H_p[i] = Σ_{j≠i} sign(d)/|d|^p
+# -----------------------
+def H_p(z, p):
+    z = np.asarray(z, float)
+    d = z[:,None] - z[None,:]
+    np.fill_diagonal(d, np.nan)
+    return np.nansum(np.sign(d) / (np.abs(d)**p), axis=1)
+
+H = np.vstack([H_p(z0, p) for p in POWERS]).T  # (N0, npowers)
+
+# zscore columns for conditioning
+Hz = (H - H.mean(axis=0)) / (H.std(axis=0) + 1e-300)
+
+# Fit coefficients a_p from v ~ Σ a_p H_p  (through origin after mean-removal)
+vc = v - np.mean(v)
+a_fit, *_ = np.linalg.lstsq(Hz, vc, rcond=None)
+v_hat = Hz @ a_fit
+
+def corr(a,b):
+    a = np.asarray(a,float); b = np.asarray(b,float)
+    if np.std(a) == 0 or np.std(b) == 0: return np.nan
+    return float(np.corrcoef(a,b)[0,1])
+
+def rel_err(a,b):
+    a = np.asarray(a,float); b = np.asarray(b,float)
+    nb = np.linalg.norm(b)
+    return float(np.linalg.norm(a-b) / (nb if nb > 1e-300 else 1e-300))
+
+print("\n==============================")
+print("BB0: v-fit on odd kernels")
+print("==============================")
+for p,val in zip(POWERS, a_fit):
+    print(f"p={p:2d}  a_p(zscored) = {val:+.6e}")
+print("corr(v_hat, v) =", corr(v_hat, vc))
+print("rel_err(v_hat, v) =", rel_err(v_hat, vc))
+
+# -----------------------
+# Predict acceleration from SAME coefficients
+# a_pred_i = Σ_p a_p Σ_{j≠i} [ -p * sign(d)/|d|^(p+1) * (v_i - v_j) ]
+# NOTE: coefficients were fit on zscored H_p; convert to raw-scale weights.
+# If Hz = (H - mu)/sd, then Hz @ a = Σ a_k*(H_k/sd_k) + const.
+# The constant drops out in the derivative, so use weights w_k = a_k / sd_k.
+# -----------------------
+sd = H.std(axis=0) + 1e-300
+w = a_fit / sd  # effective weights on raw H_p (up to irrelevant constants)
+
+z = z0
+d = z[:,None] - z[None,:]
+np.fill_diagonal(d, np.nan)
+sign = np.sign(d)
+absd = np.abs(d)
+
+dv = v[:,None] - v[None,:]
+np.fill_diagonal(dv, np.nan)
+
+a_pred = np.zeros(N0, float)
+for k, p in enumerate(POWERS):
+    term = (-p) * sign / (absd**(p+1)) * dv
+    a_pred += w[k] * np.nansum(term, axis=1)
+
+# compare against measured acc (mean-removed)
+ac = acc - np.mean(acc)
+apc = a_pred - np.mean(a_pred)
+
+print("\n==============================")
+print("BB1: acceleration prediction from v-fit (no refit)")
+print("==============================")
+print("corr(a_pred, a_meas) =", corr(apc, ac))
+print("rel_err(a_pred, a_meas) =", rel_err(apc, ac))
+print("mean|a_meas| =", float(np.mean(np.abs(ac))))
+print("mean|a_pred| =", float(np.mean(np.abs(apc))))
+
+# -----------------------
+# Optional: fit acceleration directly to same basis for comparison
+# -----------------------
+a_fit2, *_ = np.linalg.lstsq(Hz, ac, rcond=None)
+a_hat2 = Hz @ a_fit2
+
+print("\n==============================")
+print("BB2: direct fit a ~ odd kernels (control)")
+print("==============================")
+for p,val in zip(POWERS, a_fit2):
+    print(f"p={p:2d}  b_p(zscored) = {val:+.6e}")
+print("corr(a_hat, a_meas) =", corr(a_hat2, ac))
+print("rel_err(a_hat, a_meas) =", rel_err(a_hat2, ac))
+
+print("\nDONE.")
+
+Baseline zeros used: 21
+Tracked zeros: 21
+mean|v| = 0.00047029745800167614
+mean|a| = 1.5144303206594985
+
+==============================
+BB0: v-fit on odd kernels
+==============================
+p= 1  a_p(zscored) = -1.038942e-04
+p= 3  a_p(zscored) = +6.377035e-04
+p= 5  a_p(zscored) = -2.771032e-04
+corr(v_hat, v) = 0.8282690442115116
+rel_err(v_hat, v) = 0.5603306081243008
+
+==============================
+BB1: acceleration prediction from v-fit (no refit)
+==============================
+corr(a_pred, a_meas) = 0.102136205611831
+rel_err(a_pred, a_meas) = 0.9999999187095621
+mean|a_meas| = 0.7298638071638454
+mean|a_pred| = 5.202879626530001e-07
+
+==============================
+BB2: direct fit a ~ odd kernels (control)
+==============================
+p= 1  b_p(zscored) = -1.536819e-01
+p= 3  b_p(zscored) = +2.582670e+00
+p= 5  b_p(zscored) = -1.723450e+00
+corr(a_hat, a_meas) = 0.9703350639079911
+rel_err(a_hat, a_meas) = 0.24176406629330682
+
+
+101
+
+# =========================================================
+# BB′ — ACCELERATION PREDICTION USING v(σ0)=v0 + a σ0
+# (fixes the "v≈0" degeneracy in BB1)
+# =========================================================
+
+import numpy as np
+import mpmath as mp
+
+# -----------------------
+# CONFIG
+# -----------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+SIGMAS = [0.0, 0.02, 0.04, 0.06]
+EDGE_DROP = 2
+POWERS = [1, 3, 5]
+SIGMA0 = 0.06          # pick a sigma where the quadratic term dominates (0.04 or 0.06)
+mp.mp.dps = 50
+
+# -----------------------
+# ξ(s) via ζ(s)
+# -----------------------
+def xi(s):
+    return 0.5*s*(s-1)*mp.pi**(-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+def f_vals(t):
+    return np.array([mp.re(xi(0.5 + 1j*ti)) for ti in t], float)
+
+# -----------------------
+# Zero finder (linear bracket)
+# -----------------------
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z0, z1 = t[i], t[i+1]
+            f0, f1 = f[i], f[i+1]
+            z.append(z0 - f0*(z1-z0)/(f1-f0))
+    return np.array(z, float)
+
+# -----------------------
+# Newton refine root of Re xi(1/2+σ+i t)=0
+# -----------------------
+def refine_root(t0, sigma, iters=2):
+    t = mp.mpf(t0)
+    for _ in range(iters):
+        f = mp.re(xi(0.5 + sigma + 1j*t))
+        df = mp.re(mp.diff(lambda x: xi(0.5 + sigma + 1j*x), t))
+        if df == 0:
+            break
+        t = t - f/df
+    return float(t)
+
+# -----------------------
+# Helpers
+# -----------------------
+def corr(a,b):
+    a = np.asarray(a,float); b = np.asarray(b,float)
+    if np.std(a) == 0 or np.std(b) == 0: return np.nan
+    return float(np.corrcoef(a,b)[0,1])
+
+def rel_err(a,b):
+    a = np.asarray(a,float); b = np.asarray(b,float)
+    nb = np.linalg.norm(b)
+    return float(np.linalg.norm(a-b) / (nb if nb > 1e-300 else 1e-300))
+
+def H_p(z, p):
+    z = np.asarray(z, float)
+    d = z[:,None] - z[None,:]
+    np.fill_diagonal(d, np.nan)
+    return np.nansum(np.sign(d) / (np.abs(d)**p), axis=1)
+
+# -----------------------
+# Sample baseline & track
+# -----------------------
+t = np.linspace(T0, T1, N)
+f0 = f_vals(t)
+z0 = find_zeros(t, f0)
+z0 = z0[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+print("Baseline zeros used:", N0)
+
+Z = {0.0: z0.copy()}
+for s in SIGMAS[1:]:
+    Z[s] = np.array([refine_root(zi, s, iters=2) for zi in z0], float)
+
+print("Tracked zeros:", len(Z[0.0]))
+
+# -----------------------
+# Fit (v0, a) per zero from dt(σ)= v0 σ + 0.5 a σ^2
+# -----------------------
+sig = np.array(SIGMAS, float)
+A = np.vstack([sig, 0.5*sig**2]).T
+
+v0 = np.zeros(N0, float)
+acc = np.zeros(N0, float)
+for i in range(N0):
+    y = np.array([Z[s][i] - z0[i] for s in SIGMAS], float)
+    coeffs, *_ = np.linalg.lstsq(A, y, rcond=None)
+    v0[i], acc[i] = coeffs
+
+print("mean|v0| =", float(np.mean(np.abs(v0))))
+print("mean|a|  =", float(np.mean(np.abs(acc))))
+
+# Effective velocity at sigma0
+v_eff = v0 + acc * SIGMA0
+print("\nUsing SIGMA0 =", SIGMA0)
+print("mean|v_eff| =", float(np.mean(np.abs(v_eff))))
+
+# -----------------------
+# Build odd-kernel design at baseline zeros
+# -----------------------
+H = np.vstack([H_p(z0, p) for p in POWERS]).T
+mu = H.mean(axis=0)
+sd = H.std(axis=0) + 1e-300
+Hz = (H - mu) / sd
+
+# -----------------------
+# Fit v_eff ~ Σ a_p Hz_p  (mean-removed)
+# -----------------------
+ve = v_eff - np.mean(v_eff)
+a_fit, *_ = np.linalg.lstsq(Hz, ve, rcond=None)
+ve_hat = Hz @ a_fit
+
+print("\n==============================")
+print("BB′0: fit v(σ0) on odd kernels")
+print("==============================")
+for p,val in zip(POWERS, a_fit):
+    print(f"p={p:2d}  a_p(zscored) = {val:+.6e}")
+print("corr(v_hat, v_eff) =", corr(ve_hat, ve))
+print("rel_err(v_hat, v_eff) =", rel_err(ve_hat, ve))
+
+# Convert zscored coefficients to raw-kernel weights (constants drop out later)
+w = a_fit / sd
+
+# -----------------------
+# Predict acceleration using dv built from v_eff (NOT v0)
+# a_pred_i = Σ_p w_p Σ_{j≠i} [ -p * sign(d)/|d|^(p+1) * (v_i - v_j) ]
+# -----------------------
+d = z0[:,None] - z0[None,:]
+np.fill_diagonal(d, np.nan)
+sign = np.sign(d)
+absd = np.abs(d)
+
+dv = v_eff[:,None] - v_eff[None,:]
+np.fill_diagonal(dv, np.nan)
+
+a_pred = np.zeros(N0, float)
+for k,p in enumerate(POWERS):
+    term = (-p) * sign / (absd**(p+1)) * dv
+    a_pred += w[k] * np.nansum(term, axis=1)
+
+ac = acc - np.mean(acc)
+apc = a_pred - np.mean(a_pred)
+
+print("\n==============================")
+print("BB′1: predict a from v(σ0)-fit (no refit)")
+print("==============================")
+print("corr(a_pred, a_meas) =", corr(apc, ac))
+print("rel_err(a_pred, a_meas) =", rel_err(apc, ac))
+print("mean|a_meas| =", float(np.mean(np.abs(ac))))
+print("mean|a_pred| =", float(np.mean(np.abs(apc))))
+
+# -----------------------
+# Control: direct fit a ~ odd kernels
+# -----------------------
+b_fit, *_ = np.linalg.lstsq(Hz, ac, rcond=None)
+a_hat = Hz @ b_fit
+
+print("\n==============================")
+print("BB′2: direct fit a ~ odd kernels (control)")
+print("==============================")
+for p,val in zip(POWERS, b_fit):
+    print(f"p={p:2d}  b_p(zscored) = {val:+.6e}")
+print("corr(a_hat, a_meas) =", corr(a_hat, ac))
+print("rel_err(a_hat, a_meas) =", rel_err(a_hat, ac))
+
+print("\nDONE.")
+
+Baseline zeros used: 21
+Tracked zeros: 21
+mean|v0| = 0.00047029745800167614
+mean|a|  = 1.5144303206594985
+
+Using SIGMA0 = 0.06
+mean|v_eff| = 0.09133558877811128
+
+==============================
+BB′0: fit v(σ0) on odd kernels
+==============================
+p= 1  a_p(zscored) = -9.324810e-03
+p= 3  a_p(zscored) = +1.555979e-01
+p= 5  a_p(zscored) = -1.036841e-01
+corr(v_hat, v_eff) = 0.970326359164676
+rel_err(v_hat, v_eff) = 0.2417990006394242
+
+==============================
+BB′1: predict a from v(σ0)-fit (no refit)
+==============================
+corr(a_pred, a_meas) = -0.1364312325298386
+rel_err(a_pred, a_meas) = 1.0040155232478056
+mean|a_meas| = 0.7298638071638454
+mean|a_pred| = 0.014093344980463697
+
+==============================
+BB′2: direct fit a ~ odd kernels (control)
+==============================
+p= 1  b_p(zscored) = -1.536819e-01
+p= 3  b_p(zscored) = +2.582670e+00
+p= 5  b_p(zscored) = -1.723450e+00
+corr(a_hat, a_meas) = 0.9703350639079911
+rel_err(a_hat, a_meas) = 0.24176406629330682
+
+DONE.
+
+102
+
+# =========================================================
+# TEST BC — ACCELERATION = (coeff drift) + (transport)
+# Model: v(σ,Z)=Σ a_p(σ) H_p(Z) with odd kernels
+# Then a = dv/dσ = Σ a'_p H_p + Σ a_p (dH_p/dσ)
+# =========================================================
+
+import numpy as np
+import mpmath as mp
+
+# -----------------------
+# CONFIG
+# -----------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+SIGMAS = [0.0, 0.02, 0.04, 0.06]
+EDGE_DROP = 2
+POWERS = [1, 3, 5]
+mp.mp.dps = 50
+
+# pick evaluation sigma where we compare acceleration
+SIGMA_EVAL = 0.04   # mid is best for finite-diff
+# -----------------------
+
+def xi(s):
+    return 0.5*s*(s-1)*mp.pi**(-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+def f_vals(t):
+    return np.array([mp.re(xi(0.5 + 1j*ti)) for ti in t], float)
+
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z0, z1 = t[i], t[i+1]
+            f0, f1 = f[i], f[i+1]
+            z.append(z0 - f0*(z1-z0)/(f1-f0))
+    return np.array(z, float)
+
+def refine_root(t0, sigma, iters=2):
+    t = mp.mpf(t0)
+    for _ in range(iters):
+        f = mp.re(xi(0.5 + sigma + 1j*t))
+        df = mp.re(mp.diff(lambda x: xi(0.5 + sigma + 1j*x), t))
+        if df == 0:
+            break
+        t = t - f/df
+    return float(t)
+
+def corr(a,b):
+    a = np.asarray(a,float); b = np.asarray(b,float)
+    if np.std(a) == 0 or np.std(b) == 0: return np.nan
+    return float(np.corrcoef(a,b)[0,1])
+
+def rel_err(a,b):
+    a = np.asarray(a,float); b = np.asarray(b,float)
+    nb = np.linalg.norm(b)
+    return float(np.linalg.norm(a-b) / (nb if nb > 1e-300 else 1e-300))
+
+def H_and_J(Z, p):
+    """
+    H_p(Z)_i = Σ_{j≠i} sign(d)/|d|^p
+    Jacobian action for transport:
+      (dH_p/dσ)_i = Σ_{j≠i} (-p) sign(d)/|d|^(p+1) * (dZ_i/dσ - dZ_j/dσ)
+    We'll compute transport using v = dZ/dσ.
+    """
+    Z = np.asarray(Z,float)
+    d = Z[:,None] - Z[None,:]
+    np.fill_diagonal(d, np.nan)
+    sgn = np.sign(d)
+    absd = np.abs(d)
+    H = np.nansum(sgn / (absd**p), axis=1)
+
+    # precompute kernel derivative factor K_ij = (-p) sign(d)/|d|^(p+1)
+    K = (-p) * sgn / (absd**(p+1))
+    return H, K
+
+# ---------------------------------------------------------
+# 1) Baseline zeros and tracked Z[sigma] for all sigmas
+# ---------------------------------------------------------
+t = np.linspace(T0, T1, N)
+z0 = find_zeros(t, f_vals(t))
+z0 = z0[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+print("Baseline zeros used:", N0)
+
+Z = {0.0: z0.copy()}
+for s in SIGMAS[1:]:
+    Z[s] = np.array([refine_root(zi, s, iters=2) for zi in z0], float)
+print("Tracked zeros:", len(Z[0.0]))
+
+# ---------------------------------------------------------
+# 2) Quadratic fit dt(σ)=v0 σ + 0.5 a σ^2 per zero (measured a)
+# ---------------------------------------------------------
+sig = np.array(SIGMAS, float)
+Aq = np.vstack([sig, 0.5*sig**2]).T
+
+v0 = np.zeros(N0, float)
+acc_meas = np.zeros(N0, float)
+for i in range(N0):
+    y = np.array([Z[s][i] - z0[i] for s in SIGMAS], float)
+    coeffs, *_ = np.linalg.lstsq(Aq, y, rcond=None)
+    v0[i], acc_meas[i] = coeffs
+
+print("mean|v0| =", float(np.mean(np.abs(v0))))
+print("mean|a|  =", float(np.mean(np.abs(acc_meas))))
+
+# ---------------------------------------------------------
+# 3) Estimate v(σ) by central difference on Z
+#    For endpoints use one-sided.
+# ---------------------------------------------------------
+sig_list = np.array(SIGMAS, float)
+v_sigma = {}
+for k,s in enumerate(sig_list):
+    if k == 0:
+        s1, s2 = sig_list[k], sig_list[k+1]
+        v_sigma[s] = (Z[s2] - Z[s1]) / (s2 - s1)
+    elif k == len(sig_list)-1:
+        s1, s2 = sig_list[k-1], sig_list[k]
+        v_sigma[s] = (Z[s2] - Z[s1]) / (s2 - s1)
+    else:
+        sL, sR = sig_list[k-1], sig_list[k+1]
+        v_sigma[s] = (Z[sR] - Z[sL]) / (sR - sL)
+
+# ---------------------------------------------------------
+# 4) For each σ, fit v(σ) ≈ Σ a_p(σ) H_p(Zσ)
+#    (use zscored H per σ so coefficients are comparable)
+# ---------------------------------------------------------
+a_of_sigma = {}
+Hz_of_sigma = {}
+Hraw_of_sigma = {}
+K_of_sigma = {}  # derivative kernel for transport
+
+for s in sig_list:
+    Zs = Z[s]
+    # Build H features at current positions
+    Hcols = []
+    Kcols = []
+    for p in POWERS:
+        Hp, Kp = H_and_J(Zs, p)
+        Hcols.append(Hp)
+        Kcols.append(Kp)
+    H = np.vstack(Hcols).T  # (N0, P)
+    mu = H.mean(axis=0)
+    sd = H.std(axis=0) + 1e-300
+    Hz = (H - mu) / sd
+
+    y = v_sigma[s] - np.mean(v_sigma[s])
+    a_fit, *_ = np.linalg.lstsq(Hz, y, rcond=None)
+
+    a_of_sigma[s] = a_fit
+    Hz_of_sigma[s] = (Hz, mu, sd)
+    Hraw_of_sigma[s] = H
+    K_of_sigma[s] = Kcols
+
+# ---------------------------------------------------------
+# 5) Estimate a'_p(σ) by finite differences in σ
+# ---------------------------------------------------------
+a_prime = {}
+for k,s in enumerate(sig_list):
+    if k == 0:
+        s1, s2 = sig_list[k], sig_list[k+1]
+        a_prime[s] = (a_of_sigma[s2] - a_of_sigma[s1]) / (s2 - s1)
+    elif k == len(sig_list)-1:
+        s1, s2 = sig_list[k-1], sig_list[k]
+        a_prime[s] = (a_of_sigma[s2] - a_of_sigma[s1]) / (s2 - s1)
+    else:
+        sL, sR = sig_list[k-1], sig_list[k+1]
+        a_prime[s] = (a_of_sigma[sR] - a_of_sigma[sL]) / (sR - sL)
+
+# ---------------------------------------------------------
+# 6) Build predicted acceleration at σ=SIGMA_EVAL
+#    a_pred = a_coeff + a_transport
+# ---------------------------------------------------------
+if SIGMA_EVAL not in Z:
+    raise RuntimeError("SIGMA_EVAL must be one of SIGMAS")
+
+s = float(SIGMA_EVAL)
+Zs = Z[s]
+v_s = v_sigma[s]
+
+Hz, mu, sd = Hz_of_sigma[s]
+a_fit = a_of_sigma[s]
+ap = a_prime[s]
+
+# Convert zscored coefficients to raw weights:
+# v ≈ Σ (a_fit_p / sd_p) * (Hraw_p - mu_p)
+# derivative wrt Z only uses Hraw part; constants drop out
+w = a_fit / sd
+wp = ap / sd  # same scaling for coefficient drift term using raw H
+
+Hraw = Hraw_of_sigma[s]
+
+# coeff-drift contribution: Σ a'_p H_p(Z)
+a_coeff = Hraw @ wp
+a_coeff = a_coeff - np.mean(a_coeff)
+
+# transport contribution: Σ_p w_p * dH_p/dσ where dH_p/dσ uses Kp and dv
+a_trans = np.zeros(N0, float)
+for idx,p in enumerate(POWERS):
+    Kp = K_of_sigma[s][idx]           # (N0,N0) with nan diag
+    dv = v_s[:,None] - v_s[None,:]
+    np.fill_diagonal(dv, np.nan)
+    dH_dsigma = np.nansum(Kp * dv, axis=1)
+    a_trans += w[idx] * dH_dsigma
+a_trans = a_trans - np.mean(a_trans)
+
+a_pred = a_coeff + a_trans
+a_pred = a_pred - np.mean(a_pred)
+
+a_true = acc_meas - np.mean(acc_meas)
+
+print("\n==============================================")
+print("TEST BC — a = coeff drift + transport")
+print("sigma eval =", s)
+print("----------------------------------------------")
+print("coeffs a_p(σ):", a_fit)
+print("coeffs a'_p(σ):", ap)
+print("----------------------------------------------")
+print("corr(a_pred, a_meas) =", corr(a_pred, a_true))
+print("rel_err(a_pred, a_meas) =", rel_err(a_pred, a_true))
+print("mean|a_meas| =", float(np.mean(np.abs(a_true))))
+print("mean|a_pred| =", float(np.mean(np.abs(a_pred))))
+print("----------------------------------------------")
+print("Decomposition diagnostics:")
+print("corr(a_coeff, a_meas) =", corr(a_coeff, a_true), " rel_err =", rel_err(a_coeff, a_true))
+print("corr(a_trans, a_meas) =", corr(a_trans, a_true), " rel_err =", rel_err(a_trans, a_true))
+print("corr(a_coeff, a_trans) =", corr(a_coeff, a_trans))
+print("==============================================")
+print("DONE.")
+
+
+Baseline zeros used: 21
+Tracked zeros: 21
+mean|v0| = 0.00047029745800167614
+mean|a|  = 1.5144303206594985
+
+==============================================
+TEST BC — a = coeff drift + transport
+sigma eval = 0.04
+----------------------------------------------
+coeffs a_p(σ): [-0.00627606  0.10343138 -0.06865262]
+coeffs a'_p(σ): [-0.11747426  1.90662076 -1.2573358 ]
+----------------------------------------------
+corr(a_pred, a_meas) = 0.969524906589696
+rel_err(a_pred, a_meas) = 0.34500392760360526
+mean|a_meas| = 0.7298638071638454
+mean|a_pred| = 0.5119636627570608
+----------------------------------------------
+Decomposition diagnostics:
+corr(a_coeff, a_meas) = 0.9704655138674665  rel_err = 0.3423512855171455
+corr(a_trans, a_meas) = -0.1362699687621609  rel_err = 1.0016603456644897
+corr(a_coeff, a_trans) = -0.08817062629209046
+==============================================
+DONE.
+
+
+
+
