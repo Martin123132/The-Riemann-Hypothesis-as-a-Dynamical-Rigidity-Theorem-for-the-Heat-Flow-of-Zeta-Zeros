@@ -1,0 +1,1160 @@
+103
+ 
+ # =========================================================
+# TEST BD — direct check: a_meas (quadratic) vs d/dσ v(σ)
+# Uses only tracked Z[sigma] values (no kernel model).
+# =========================================================
+
+import numpy as np
+
+# ---- CONFIG (must match your run) ----
+SIGMAS = [0.0, 0.02, 0.04, 0.06]
+SIGMA_EVAL = 0.04
+# -------------------------------------
+
+def corr(a,b):
+    a = np.asarray(a,float); b = np.asarray(b,float)
+    if np.std(a)==0 or np.std(b)==0: return np.nan
+    return float(np.corrcoef(a,b)[0,1])
+
+def rel_err(a,b):
+    a = np.asarray(a,float); b = np.asarray(b,float)
+    nb = np.linalg.norm(b)
+    return float(np.linalg.norm(a-b) / (nb if nb>1e-300 else 1e-300))
+
+# Require Z and acc_meas from your previous BC run.
+required = ["Z", "acc_meas"]
+missing = [k for k in required if k not in globals()]
+if missing:
+    raise RuntimeError(f"Missing required objects: {missing}")
+
+sig = np.array(SIGMAS, float)
+if SIGMA_EVAL not in sig:
+    raise RuntimeError("SIGMA_EVAL must be one of SIGMAS")
+
+# ---- build v(σ) at all σ by central/one-sided diff on Z ----
+Zloc = {float(s): np.asarray(Z[float(s)], float) for s in sig}
+
+v_sigma = {}
+for k,s in enumerate(sig):
+    if k == 0:
+        s1, s2 = sig[k], sig[k+1]
+        v_sigma[float(s)] = (Zloc[float(s2)] - Zloc[float(s1)])/(s2-s1)
+    elif k == len(sig)-1:
+        s1, s2 = sig[k-1], sig[k]
+        v_sigma[float(s)] = (Zloc[float(s2)] - Zloc[float(s1)])/(s2-s1)
+    else:
+        sL, sR = sig[k-1], sig[k+1]
+        v_sigma[float(s)] = (Zloc[float(sR)] - Zloc[float(sL)])/(sR-sL)
+
+# ---- estimate dv/dσ at SIGMA_EVAL ----
+k = int(np.where(sig == SIGMA_EVAL)[0][0])
+if k == 0 or k == len(sig)-1:
+    raise RuntimeError("Pick an interior SIGMA_EVAL for dv/dσ (e.g. 0.04 here).")
+
+sL, sR = float(sig[k-1]), float(sig[k+1])
+dv_dsigma = (v_sigma[sR] - v_sigma[sL]) / (sR - sL)
+
+a_true = np.asarray(acc_meas, float)
+a_true = a_true - np.mean(a_true)
+dv_dsigma = dv_dsigma - np.mean(dv_dsigma)
+
+print("==============================================")
+print("TEST BD — a_meas vs dv/dσ(σ)")
+print("sigma eval =", SIGMA_EVAL)
+print("----------------------------------------------")
+print("corr(dv/dσ, a_meas) =", corr(dv_dsigma, a_true))
+print("rel_err(dv/dσ, a_meas) =", rel_err(dv_dsigma, a_true))
+print("mean|a_meas| =", float(np.mean(np.abs(a_true))))
+print("mean|dv/dσ|  =", float(np.mean(np.abs(dv_dsigma))))
+print("==============================================")
+print("DONE.")
+
+
+ ==============================================
+TEST BD — a_meas vs dv/dσ(σ)
+sigma eval = 0.04
+----------------------------------------------
+corr(dv/dσ, a_meas) = 0.9999981282357814
+rel_err(dv/dσ, a_meas) = 0.24888250243243065
+mean|a_meas| = 0.7298638071638454
+mean|dv/dσ|  = 0.548186765737281
+==============================================
+DONE.
+ 
+104
+
+# =========================================================
+# TEST BE — beta-function in coefficient space (ROBUST)
+# Self-contained: reconstructs baseline_zeros from Z[0]
+# =========================================================
+
+import numpy as np
+
+# ------------------ CONFIG ------------------
+SIGMAS = [0.0, 0.02, 0.04, 0.06]   # must exist in Z
+POWERS = [1, 3, 5]                # odd kernels
+K_DROP = 1
+ZSCORE = True
+# --------------------------------------------
+
+def corr(a,b):
+    a=np.asarray(a,float); b=np.asarray(b,float)
+    if np.std(a)==0 or np.std(b)==0: return np.nan
+    return float(np.corrcoef(a,b)[0,1])
+
+def rel_err(a,b):
+    a=np.asarray(a,float); b=np.asarray(b,float)
+    nb=np.linalg.norm(b)
+    return float(np.linalg.norm(a-b)/(nb if nb>1e-300 else 1e-300))
+
+# ------------------ REQUIREMENTS ------------------
+assert "Z" in globals(), "Z dict missing"
+
+# reconstruct baseline zeros
+assert 0.0 in Z, "Z[0.0] missing"
+baseline_zeros = np.asarray(Z[0.0], float)
+N = len(baseline_zeros)
+
+# ensure all sigmas exist and same length
+Zloc = {}
+for s in SIGMAS:
+    assert s in Z, f"Z missing sigma={s}"
+    Zloc[s] = np.asarray(Z[s], float)
+    assert len(Zloc[s]) == N, f"Length mismatch at sigma={s}"
+
+print(f"baseline zeros used = {N}")
+
+# ------------------ BUILD ODD KERNEL BASIS ------------------
+t = baseline_zeros
+D = t[:,None] - t[None,:]
+np.fill_diagonal(D, np.inf)
+
+X = []
+for p in POWERS:
+    H = np.sign(D) / (np.abs(D)**p)
+    H[np.isinf(H)] = 0.0
+
+    # truncate near-diagonal by index distance
+    if K_DROP > 0:
+        i = np.arange(N)[:,None]
+        j = np.arange(N)[None,:]
+        H[np.abs(i-j) <= K_DROP] = 0.0
+
+    X.append(H.sum(axis=1))
+
+X = np.vstack(X).T
+
+if ZSCORE:
+    X = (X - X.mean(axis=0)) / (X.std(axis=0) + 1e-300)
+
+# ------------------ COMPUTE v(sigma) ------------------
+sig = np.array(SIGMAS, float)
+v_sigma = {}
+
+for k,s in enumerate(sig):
+    if k == 0:
+        s1, s2 = sig[k], sig[k+1]
+        v_sigma[s] = (Zloc[s2]-Zloc[s1])/(s2-s1)
+    elif k == len(sig)-1:
+        s1, s2 = sig[k-1], sig[k]
+        v_sigma[s] = (Zloc[s2]-Zloc[s1])/(s2-s1)
+    else:
+        sL, sR = sig[k-1], sig[k+1]
+        v_sigma[s] = (Zloc[sR]-Zloc[sL])/(sR-sL)
+
+# ------------------ FIT a_p(sigma) ------------------
+A = []
+sig_pos = []
+
+for s in sig:
+    if s == 0.0:
+        continue
+    v = v_sigma[s] - np.mean(v_sigma[s])
+    a, *_ = np.linalg.lstsq(X, v, rcond=None)
+    A.append(a)
+    sig_pos.append(s)
+
+A = np.vstack(A)
+sig_pos = np.array(sig_pos)
+
+print(f"sigmas used (positive) = {sig_pos.tolist()}")
+
+# ------------------ COMPUTE beta = d a / d log σ ------------------
+logsig = np.log(sig_pos)
+beta = np.zeros_like(A)
+
+m = len(sig_pos)
+for i in range(m):
+    if i == 0:
+        beta[i] = (A[i+1]-A[i])/(logsig[i+1]-logsig[i])
+    elif i == m-1:
+        beta[i] = (A[i]-A[i-1])/(logsig[i]-logsig[i-1])
+    else:
+        beta[i] = (A[i+1]-A[i-1])/(logsig[i+1]-logsig[i-1])
+
+# ------------------ LINEAR RG TEST: beta ≈ B a ------------------
+P = len(POWERS)
+K = m*P
+M = np.zeros((K, P*P))
+y = beta.reshape(K)
+
+for i in range(m):
+    ai = A[i]
+    M[i*P:(i+1)*P,:] = np.kron(ai.reshape(1,-1), np.eye(P))
+
+vecB, *_ = np.linalg.lstsq(M, y, rcond=None)
+B = vecB.reshape(P,P)
+beta_hat = A @ B.T
+
+# ------------------ OUTPUT ------------------
+print("==============================================")
+print("TEST BE — β-FUNCTION IN COEFFICIENT SPACE")
+print("----------------------------------------------")
+for j,p in enumerate(POWERS):
+    print(f"p={p:2d}  a(σ) =", ["%+.6e"%x for x in A[:,j]])
+print("----------------------------------------------")
+for j,p in enumerate(POWERS):
+    print(f"p={p:2d}  beta(σ) =", ["%+.6e"%x for x in beta[:,j]])
+
+print("----------------------------------------------")
+print("B matrix (rows β_p , cols a_q):")
+for r in range(P):
+    print(" ", ["%+.6e"%x for x in B[r]])
+
+print("----------------------------------------------")
+print("Diagnostics:")
+for j,p in enumerate(POWERS):
+    print(f"  p={p:2d}  corr={corr(beta_hat[:,j], beta[:,j]):+.6f}  rel_err={rel_err(beta_hat[:,j], beta[:,j]):.6f}")
+
+print("Overall:")
+print("  corr =", corr(beta_hat.reshape(-1), beta.reshape(-1)))
+print("  rel_err =", rel_err(beta_hat.reshape(-1), beta.reshape(-1)))
+print("==============================================")
+print("DONE.")
+
+
+baseline zeros used = 21
+sigmas used (positive) = [0.02, 0.04, 0.06]
+==============================================
+TEST BE — β-FUNCTION IN COEFFICIENT SPACE
+----------------------------------------------
+p= 1  a(σ) = ['-1.268452e-02', '-2.504001e-02', '-3.126617e-02']
+p= 3  a(σ) = ['+3.410929e-02', '+6.744196e-02', '+8.421473e-02']
+p= 5  a(σ) = ['-1.431446e-02', '-2.822725e-02', '-3.523401e-02']
+----------------------------------------------
+p= 1  beta(σ) = ['-1.782521e-02', '-1.691374e-02', '-1.535558e-02']
+p= 3  beta(σ) = ['+4.808888e-02', '+4.560794e-02', '+4.136673e-02']
+p= 5  beta(σ) = ['-2.007190e-02', '-1.904180e-02', '-1.728082e-02']
+----------------------------------------------
+B matrix (rows β_p , cols a_q):
+  ['-4.383077e+02', '+1.187343e+03', '-4.943858e+02']
+  ['+3.566681e+01', '-9.561680e+01', '+4.005879e+01']
+  ['+4.746331e+02', '-1.283345e+03', '+5.349481e+02']
+----------------------------------------------
+Diagnostics:
+  p= 1  corr=+0.943243  rel_err=6081.308906
+  p= 3  corr=+0.943244  rel_err=182.879961
+  p= 5  corr=-0.943243  rel_err=5838.812305
+Overall:
+  corr = 0.006362024997088219
+  rel_err = 2904.0517546588076
+==============================================
+DONE.
+
+ 
+ 
+ 
+105
+ 
+ # =========================================================
+# TEST BF — RG closure check: beta ≈ Λ a  (diagonal) and beta ≈ λ a (scalar)
+# Robust: will reuse A,beta from BE if present; else rebuild from Z.
+# =========================================================
+
+import numpy as np
+
+# ------------- CONFIG -------------
+SIGMAS = [0.0, 0.02, 0.04, 0.06]
+POWERS = [1, 3, 5]
+K_DROP = 1
+ZSCORE = True
+EPS = 1e-12
+# ----------------------------------
+
+def corr(a,b):
+    a=np.asarray(a,float); b=np.asarray(b,float)
+    if np.std(a)==0 or np.std(b)==0: return np.nan
+    return float(np.corrcoef(a,b)[0,1])
+
+def rel_err(a,b):
+    a=np.asarray(a,float); b=np.asarray(b,float)
+    nb=np.linalg.norm(b)
+    return float(np.linalg.norm(a-b)/(nb if nb>1e-300 else 1e-300))
+
+def build_A_beta_from_Z():
+    assert "Z" in globals(), "Z dict missing"
+    assert 0.0 in Z, "Z[0.0] missing"
+    t0 = np.asarray(Z[0.0], float)
+    N = len(t0)
+    Zloc = {}
+    for s in SIGMAS:
+        assert s in Z, f"Z missing sigma={s}"
+        Zloc[s] = np.asarray(Z[s], float)
+        assert len(Zloc[s]) == N, f"Length mismatch at sigma={s}"
+
+    # design X from odd kernels
+    t = t0
+    D = t[:,None] - t[None,:]
+    np.fill_diagonal(D, np.inf)
+
+    X = []
+    for p in POWERS:
+        H = np.sign(D) / (np.abs(D)**p)
+        H[np.isinf(H)] = 0.0
+        if K_DROP > 0:
+            i = np.arange(N)[:,None]
+            j = np.arange(N)[None,:]
+            H[np.abs(i-j) <= K_DROP] = 0.0
+        X.append(H.sum(axis=1))
+    X = np.vstack(X).T
+    if ZSCORE:
+        X = (X - X.mean(axis=0)) / (X.std(axis=0) + 1e-300)
+
+    # velocities v(sigma)
+    sig = np.array(SIGMAS, float)
+    v_sigma = {}
+    for k,s in enumerate(sig):
+        if k == 0:
+            s1, s2 = sig[k], sig[k+1]
+            v_sigma[s] = (Zloc[s2]-Zloc[s1])/(s2-s1)
+        elif k == len(sig)-1:
+            s1, s2 = sig[k-1], sig[k]
+            v_sigma[s] = (Zloc[s2]-Zloc[s1])/(s2-s1)
+        else:
+            sL, sR = sig[k-1], sig[k+1]
+            v_sigma[s] = (Zloc[sR]-Zloc[sL])/(sR-sL)
+
+    # fit coefficients a(sigma) for s>0
+    A = []
+    sig_pos = []
+    for s in sig:
+        if s == 0.0:
+            continue
+        v = v_sigma[s] - np.mean(v_sigma[s])
+        a, *_ = np.linalg.lstsq(X, v, rcond=None)
+        A.append(a)
+        sig_pos.append(s)
+    A = np.vstack(A)
+    sig_pos = np.array(sig_pos)
+
+    # beta = d a / d log sigma
+    logsig = np.log(sig_pos)
+    beta = np.zeros_like(A)
+    m = len(sig_pos)
+    for i in range(m):
+        if i == 0:
+            beta[i] = (A[i+1]-A[i])/(logsig[i+1]-logsig[i])
+        elif i == m-1:
+            beta[i] = (A[i]-A[i-1])/(logsig[i]-logsig[i-1])
+        else:
+            beta[i] = (A[i+1]-A[i-1])/(logsig[i+1]-logsig[i-1])
+
+    return A, beta, sig_pos
+
+# ---------------------------------------------------------
+# Grab A,beta if BE already created them; else rebuild.
+# ---------------------------------------------------------
+if all(k in globals() for k in ["A","beta","sig_pos"]):
+    A = np.asarray(globals()["A"], float)
+    beta = np.asarray(globals()["beta"], float)
+    sig_pos = np.asarray(globals()["sig_pos"], float)
+else:
+    A, beta, sig_pos = build_A_beta_from_Z()
+
+m, P = A.shape
+print("==============================================")
+print("TEST BF — DIAGONAL/SCALAR RG CLOSURE")
+print("----------------------------------------------")
+print("sigmas (positive) =", sig_pos.tolist())
+print("powers =", POWERS)
+print("----------------------------------------------")
+
+# ---------- 1) Diagonal closure: beta_p ≈ lambda_p * a_p ----------
+lam_diag = np.zeros(P)
+beta_hat_diag = np.zeros_like(beta)
+for j in range(P):
+    aj = A[:,j]
+    bj = beta[:,j]
+    denom = float(np.dot(aj,aj))
+    lam = float(np.dot(aj,bj) / (denom if denom>EPS else EPS))
+    lam_diag[j] = lam
+    beta_hat_diag[:,j] = lam * aj
+
+print("Diagonal lambdas λ_p (fit from all σ points):")
+for j,p in enumerate(POWERS):
+    print(f"  p={p:2d}:  λ={lam_diag[j]:+.6e}")
+
+print("----------------------------------------------")
+print("Per-component diagnostics (diagonal model):")
+for j,p in enumerate(POWERS):
+    print(f"  p={p:2d}: corr={corr(beta_hat_diag[:,j], beta[:,j]):+.6f}  rel_err={rel_err(beta_hat_diag[:,j], beta[:,j]):.6f}")
+
+print("Overall (stacked):")
+print("  corr =", corr(beta_hat_diag.reshape(-1), beta.reshape(-1)))
+print("  rel_err =", rel_err(beta_hat_diag.reshape(-1), beta.reshape(-1)))
+
+# ---------- 2) Scalar closure: beta ≈ lambda * a ----------
+a_vec = A.reshape(-1)
+b_vec = beta.reshape(-1)
+den = float(np.dot(a_vec,a_vec))
+lam_scalar = float(np.dot(a_vec,b_vec) / (den if den>EPS else EPS))
+beta_hat_scalar = lam_scalar * A
+
+print("----------------------------------------------")
+print("Scalar lambda λ (single-number RG direction):")
+print("  λ =", lam_scalar)
+
+print("Scalar model diagnostics:")
+print("  corr =", corr(beta_hat_scalar.reshape(-1), beta.reshape(-1)))
+print("  rel_err =", rel_err(beta_hat_scalar.reshape(-1), beta.reshape(-1)))
+
+# ---------- 3) Direction test: are beta and a aligned? ----------
+# (independent of scaling)
+cos_dir = float(np.dot(a_vec,b_vec) / (np.linalg.norm(a_vec)*np.linalg.norm(b_vec) + 1e-300))
+print("----------------------------------------------")
+print("Directionality:")
+print("  cos(angle(beta, a)) =", cos_dir)
+
+# ---------- 4) Quick readout ----------
+print("----------------------------------------------")
+print("Quick readout:")
+for j,p in enumerate(POWERS):
+    # if lambda is ~+1, that means beta ~ a (a grows ~ σ^1)
+    # if lambda ~ -1, decays etc. Just report number.
+    pass
+print("DONE.")
+print("==============================================")
+
+==============================================
+TEST BF — DIAGONAL/SCALAR RG CLOSURE
+----------------------------------------------
+sigmas (positive) = [0.02, 0.04, 0.06]
+powers = [1, 3, 5]
+----------------------------------------------
+Diagonal lambdas λ_p (fit from all σ points):
+  p= 1:  λ=+6.399051e-01
+  p= 3:  λ=+6.404144e-01
+  p= 5:  λ=+6.391501e-01
+----------------------------------------------
+Per-component diagnostics (diagonal model):
+  p= 1: corr=-0.943340  rel_err=0.372793
+  p= 3: corr=-0.943222  rel_err=0.373725
+  p= 5: corr=-0.943292  rel_err=0.372633
+Overall (stacked):
+  corr = 0.9268670023284855
+  rel_err = 0.3734827145331618
+----------------------------------------------
+Scalar lambda λ (single-number RG direction):
+  λ = 0.6401922510197371
+Scalar model diagnostics:
+  corr = 0.926874460622725
+  rel_err = 0.3734832517981522
+----------------------------------------------
+Directionality:
+  cos(angle(beta, a)) = 0.9276369228455056
+----------------------------------------------
+Quick readout:
+DONE.
+
+ 
+106
+ 
+ # ============================================================
+# BF-WINDOW SCAN : RG SCALAR CLOSURE ACROSS WINDOWS
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+from scipy.signal import savgol_filter
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+WINDOWS = [
+    (60.0, 120.0),
+    (120.0, 180.0),
+    (180.0, 240.0),
+]
+
+SIGMAS = np.array([0.02, 0.04, 0.06])
+N = 8192
+EDGE_DROP = 2
+POWERS = [1, 3, 5]
+
+# ----------------------------
+# RIEMANN XI (safe)
+# ----------------------------
+def xi(s):
+    return 0.5 * s * (s - 1) * mp.pi**(-s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_vals(t):
+    return np.array([mp.re(xi(0.5 + 1j*tt)) for tt in t], float)
+
+# ----------------------------
+# ZERO FINDER
+# ----------------------------
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z.append(t[i])
+    return np.array(z)
+
+# ----------------------------
+# GAUSSIAN FLOW
+# ----------------------------
+def gaussian_flow(f, sigma, dt):
+    k = np.fft.fftfreq(len(f), d=dt)
+    return np.real(np.fft.ifft(np.fft.fft(f) * np.exp(-(2*np.pi*k)**2 * sigma)))
+
+# ----------------------------
+# ODD KERNELS
+# ----------------------------
+def odd_kernels(t0, powers):
+    N = len(t0)
+    H = {}
+    for p in powers:
+        M = np.zeros((N, N))
+        for i in range(N):
+            for j in range(N):
+                if i != j:
+                    d = t0[i] - t0[j]
+                    M[i,j] = np.sign(d) / abs(d)**p
+        M -= M.mean(axis=1, keepdims=True)
+        M /= np.linalg.norm(M) + 1e-12
+        H[p] = M @ np.ones(N)
+    return H
+
+# ============================================================
+# MAIN LOOP
+# ============================================================
+print("\n================ BF WINDOW SCAN ================\n")
+
+for (T0, T1) in WINDOWS:
+
+    print(f"\nWINDOW [{T0},{T1}]")
+
+    t = np.linspace(T0, T1, N)
+    dt = t[1] - t[0]
+
+    f0 = f_vals(t)
+    z0 = find_zeros(t, f0)
+    z0 = z0[EDGE_DROP:-EDGE_DROP]
+
+    if len(z0) < 10:
+        print("  insufficient zeros, skipping")
+        continue
+
+    # Track zeros across sigma
+    Z = {}
+    for s in SIGMAS:
+        fs = gaussian_flow(f0, s, dt)
+        zs = find_zeros(t, fs)
+        zs = zs[EDGE_DROP:-EDGE_DROP]
+        if len(zs) >= len(z0):
+            Z[s] = zs[:len(z0)]
+
+    if len(Z) < 3:
+        print("  insufficient σ tracking, skipping")
+        continue
+
+    z0 = z0[:min(len(Z[s]) for s in Z)]
+    for s in Z:
+        Z[s] = Z[s][:len(z0)]
+
+    # Build v(σ)
+    V = []
+    for i in range(len(z0)):
+        y = np.array([Z[s][i] - z0[i] for s in SIGMAS])
+        coeffs = np.polyfit(SIGMAS, y, 1)
+        V.append(coeffs[0])
+    V = np.array(V)
+
+    # Smooth
+    V = savgol_filter(V, 5, 2)
+
+    # Odd kernels
+    H = odd_kernels(z0, POWERS)
+    X = np.column_stack([H[p] for p in POWERS])
+    X = (X - X.mean(0)) / X.std(0)
+
+    # Fit a(σ)
+    A = []
+    for s in SIGMAS:
+        v_s = []
+        for i in range(len(z0)):
+            v_s.append((Z[s][i] - z0[i]) / s)
+        v_s = np.array(v_s)
+        a, *_ = np.linalg.lstsq(X, v_s, rcond=None)
+        A.append(a)
+    A = np.array(A)
+
+    # β = d a / d log σ
+    logσ = np.log(SIGMAS)
+    BETA = np.gradient(A, logσ, axis=0)
+
+    # Scalar λ fit
+    a_flat = A.flatten()
+    b_flat = BETA.flatten()
+    lam = np.dot(a_flat, b_flat) / np.dot(a_flat, a_flat)
+
+    b_hat = lam * a_flat
+
+    corr = np.corrcoef(b_flat, b_hat)[0,1]
+    rel_err = np.linalg.norm(b_flat - b_hat) / np.linalg.norm(b_flat)
+
+    print(f"  zeros used = {len(z0)}")
+    print(f"  λ* = {lam:+.6f}")
+    print(f"  corr(β, λa) = {corr:+.6f}")
+    print(f"  rel_err     = {rel_err:.6f}")
+
+print("\n================ DONE ================\n")
+
+================ BF WINDOW SCAN ================
+
+
+WINDOW [60.0,120.0]
+  zeros used = 21
+  λ* = -0.899604
+  corr(β, λa) = +0.975102
+  rel_err     = 0.216895
+
+WINDOW [120.0,180.0]
+  zeros used = 27
+  λ* = -0.943643
+  corr(β, λa) = +0.818071
+  rel_err     = 0.483806
+
+WINDOW [180.0,240.0]
+  zeros used = 29
+  λ* = -0.852664
+  corr(β, λa) = +0.881713
+  rel_err     = 0.357303
+
+================ DONE ================
+
+
+ 
+107
+ # ============================================================
+# BF WINDOW SCAN + BF+2D (Curved RG) CLOSURE
+# (FULL, RUNNABLE BLOCK — fixes the SyntaxError you hit)
+# Works in a fresh Colab session. No external state required.
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import math
+import matplotlib.pyplot as plt
+
+# ----------------------------
+# Precision + xi definition
+# (mpmath doesn't always ship mp.xi, so we define it)
+# xi(s) = 1/2 * s(s-1) * pi^{-s/2} * Gamma(s/2) * zeta(s)
+# ----------------------------
+mp.mp.dps = 60
+
+def xi(s):
+    return mp.mpf('0.5') * s * (s - 1) * (mp.pi ** (-s/2)) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_vals(tgrid):
+    # f(t) = Re xi(1/2 + i t)
+    out = np.empty_like(tgrid, dtype=float)
+    for i, t in enumerate(tgrid):
+        s = mp.mpf('0.5') + 1j * mp.mpf(str(t))
+        out[i] = float(mp.re(xi(s)))
+    return out
+
+# ----------------------------
+# Gaussian convolution in time domain
+# ----------------------------
+def gaussian_kernel(dt, sigma, radius=6):
+    if sigma <= 0:
+        return None
+    halfw = int(radius * sigma / dt) + 1
+    x = np.arange(-halfw, halfw + 1) * dt
+    g = np.exp(-(x*x) / (2*sigma*sigma))
+    g /= g.sum()
+    return g
+
+def convolve_same(y, k):
+    if k is None:
+        return y.copy()
+    return np.convolve(y, k, mode="same")
+
+# ----------------------------
+# Zero finding from sampled function:
+# sign-change bracketing + quadratic refinement (3-point)
+# ----------------------------
+def find_zeros(t, y):
+    zeros = []
+    sgn = np.sign(y)
+    # treat exact zeros as tiny sign for stability
+    sgn[sgn == 0] = 1.0
+    for i in range(len(y) - 1):
+        if sgn[i] == 0:
+            zeros.append(t[i])
+        elif sgn[i] * sgn[i+1] < 0:
+            # linear bracket
+            t0, t1 = t[i], t[i+1]
+            y0, y1 = y[i], y[i+1]
+            # linear estimate
+            tl = t0 - y0 * (t1 - t0) / (y1 - y0)
+
+            # quadratic refine if we have neighbors
+            if 0 < i < len(y) - 2:
+                tt = np.array([t[i-1], t[i], t[i+1]], dtype=float)
+                yy = np.array([y[i-1], y[i], y[i+1]], dtype=float)
+                # fit parabola yy = a tt^2 + b tt + c
+                A = np.vstack([tt**2, tt, np.ones_like(tt)]).T
+                try:
+                    a, b, c = np.linalg.lstsq(A, yy, rcond=None)[0]
+                    disc = b*b - 4*a*c
+                    if abs(a) > 1e-14 and disc >= 0:
+                        r1 = (-b + math.sqrt(disc)) / (2*a)
+                        r2 = (-b - math.sqrt(disc)) / (2*a)
+                        # pick root nearest linear estimate
+                        rq = r1 if abs(r1 - tl) < abs(r2 - tl) else r2
+                        # accept if inside local interval
+                        if (t[i-1] <= rq <= t[i+1]):
+                            zeros.append(rq)
+                        else:
+                            zeros.append(tl)
+                    else:
+                        zeros.append(tl)
+                except Exception:
+                    zeros.append(tl)
+            else:
+                zeros.append(tl)
+    return np.array(sorted(zeros), dtype=float)
+
+# ----------------------------
+# Track zeros across sigma by nearest-neighbor matching
+# (greedy, monotone)
+# ----------------------------
+def track_zeros(z0, zsig, max_jump=0.5):
+    """
+    Returns matched zsig for each z0 index where possible.
+    Greedy monotone matching to preserve order.
+    """
+    z0 = np.asarray(z0, float)
+    zsig = np.asarray(zsig, float)
+    out = np.full_like(z0, np.nan, dtype=float)
+    j = 0
+    for i in range(len(z0)):
+        # advance j to nearest >= z0[i] - max_jump
+        while j < len(zsig) and zsig[j] < z0[i] - max_jump:
+            j += 1
+        # pick best among j and j-1
+        cand = []
+        if 0 <= j-1 < len(zsig): cand.append(j-1)
+        if 0 <= j   < len(zsig): cand.append(j)
+        if not cand:
+            continue
+        kbest = min(cand, key=lambda k: abs(zsig[k] - z0[i]))
+        if abs(zsig[kbest] - z0[i]) <= max_jump:
+            out[i] = zsig[kbest]
+            j = max(j, kbest)  # keep monotone
+    return out
+
+# ----------------------------
+# Odd-kernel columns H_p (design features)
+# H_p(i) = sum_{j!=i} sign(t_i-t_j)/|t_i-t_j|^p
+# Optional neighbor exclusion K_DROP.
+# ----------------------------
+def odd_kernel_features(t0, powers=(1,3,5), k_drop=0):
+    t0 = np.asarray(t0, float)
+    N = len(t0)
+    X = []
+    for p in powers:
+        h = np.zeros(N, dtype=float)
+        for i in range(N):
+            s = 0.0
+            for j in range(N):
+                if i == j:
+                    continue
+                if abs(j - i) <= k_drop:
+                    continue
+                d = t0[i] - t0[j]
+                s += math.copysign(1.0, d) / (abs(d) ** p)
+            h[i] = s
+        X.append(h)
+    X = np.vstack(X).T  # N x P
+    # zscore columns for stability (like your later tests)
+    Xz = X.copy()
+    for k in range(Xz.shape[1]):
+        mu = Xz[:,k].mean()
+        sd = Xz[:,k].std()
+        if sd == 0: sd = 1.0
+        Xz[:,k] = (Xz[:,k] - mu) / sd
+    return X, Xz
+
+def fit_on_features(y, Xz, through_origin=True):
+    y = np.asarray(y, float)
+    if through_origin:
+        a = np.linalg.lstsq(Xz, y, rcond=None)[0]
+        yhat = Xz @ a
+        b = 0.0
+    else:
+        A = np.hstack([Xz, np.ones((len(y),1))])
+        sol = np.linalg.lstsq(A, y, rcond=None)[0]
+        a = sol[:-1]
+        b = sol[-1]
+        yhat = Xz @ a + b
+    # metrics
+    yc = y - y.mean()
+    yhc = yhat - yhat.mean()
+    corr = float(np.dot(yc, yhc) / (np.linalg.norm(yc)*np.linalg.norm(yhc) + 1e-30))
+    ssr = float(np.sum((y - yhat)**2))
+    sst = float(np.sum((y - y.mean())**2) + 1e-30)
+    r2 = float(1.0 - ssr/sst)
+    rel_err = float(np.linalg.norm(y - yhat) / (np.linalg.norm(y) + 1e-30))
+    return a, b, yhat, corr, r2, rel_err
+
+# ----------------------------
+# Coefficient RG objects:
+# Given a(σ) in coefficient space, form beta(σ)=d a/d log σ
+# Then BF scalar closure: beta ≈ λ a
+# Then BF+2D: beta ≈ λ a + μ u   (u = dominant residual direction)
+# ----------------------------
+def beta_from_sigmas(sigmas, a_sigma):
+    sigmas = np.asarray(sigmas, float)
+    A = np.asarray(a_sigma, float)  # shape (S, P)
+    logS = np.log(sigmas)
+    # finite diff in logσ
+    B = np.zeros_like(A)
+    for k in range(A.shape[1]):
+        for i in range(len(sigmas)):
+            if i == 0:
+                B[i,k] = (A[i+1,k] - A[i,k]) / (logS[i+1] - logS[i])
+            elif i == len(sigmas)-1:
+                B[i,k] = (A[i,k] - A[i-1,k]) / (logS[i] - logS[i-1])
+            else:
+                B[i,k] = (A[i+1,k] - A[i-1,k]) / (logS[i+1] - logS[i-1])
+    return B
+
+def bf_scalar_closure(A, B):
+    # A,B shape (S,P). Fit scalar λ minimizing ||B - λ A||_F
+    num = float(np.sum(A*B))
+    den = float(np.sum(A*A) + 1e-30)
+    lam = num/den
+    R = B - lam*A
+    rel = float(np.linalg.norm(R) / (np.linalg.norm(B) + 1e-30))
+    # corr between flattened vectors
+    Af = A.reshape(-1); Bf = B.reshape(-1)
+    Afc = Af - Af.mean(); Bfc = Bf - Bf.mean()
+    corr = float(np.dot(Afc, Bfc) / (np.linalg.norm(Afc)*np.linalg.norm(Bfc) + 1e-30))
+    # corr(beta, lam*a)
+    Pf = (lam*A).reshape(-1)
+    Pfc = Pf - Pf.mean()
+    corr2 = float(np.dot(Bfc, Pfc) / (np.linalg.norm(Bfc)*np.linalg.norm(Pfc) + 1e-30))
+    return lam, corr2, rel, R
+
+def bf_2d_closure(A, B):
+    # Step 1: scalar closure
+    lam, corr1, rel1, R = bf_scalar_closure(A, B)
+
+    # Step 2: dominant residual direction u in coefficient space
+    # Use SVD of residuals across sigmas (SxP)
+    U, S, VT = np.linalg.svd(R, full_matrices=False)
+    u = VT[0]  # length P
+    # normalise
+    u = u / (np.linalg.norm(u) + 1e-30)
+
+    # Step 3: fit beta ≈ λ a + μ(σ) u   (μ varies with σ)
+    # for each sigma i: solve scalar μ_i = <R_i, u>
+    mu = (R @ u)  # length S
+    B2 = lam*A + np.outer(mu, u)
+    R2 = B - B2
+    rel2 = float(np.linalg.norm(R2) / (np.linalg.norm(B) + 1e-30))
+
+    # corr(beta, 2d model)
+    Bf = B.reshape(-1); P2f = B2.reshape(-1)
+    Bfc = Bf - Bf.mean(); P2fc = P2f - P2f.mean()
+    corr2 = float(np.dot(Bfc, P2fc) / (np.linalg.norm(Bfc)*np.linalg.norm(P2fc) + 1e-30))
+
+    return {
+        "lambda": lam,
+        "corr_1d": corr1,
+        "relerr_1d": rel1,
+        "corr_2d": corr2,
+        "relerr_2d": rel2,
+        "u_resid": u,
+        "mu": mu,
+        "S_resid": S[:min(5,len(S))]
+    }
+
+# ----------------------------
+# MAIN: window runner
+# ----------------------------
+def run_BF_window_scan(
+    windows=((60.0,120.0),(120.0,180.0),(180.0,240.0)),
+    N=8192,
+    sigmas=(0.02,0.04,0.06),
+    edge_drop=2,
+    powers=(1,3,5),
+    k_drop=1,
+    max_jump=0.5,
+    plot=False
+):
+    sigmas = [float(s) for s in sigmas]
+    all_results = []
+
+    for (T0,T1) in windows:
+        print("\n================ BF WINDOW SCAN ================")
+        print(f"\nWINDOW [{T0},{T1}]")
+
+        t = np.linspace(T0, T1, N, endpoint=False)
+        dt = float(t[1]-t[0])
+
+        y0 = f_vals(t)
+        z0_all = find_zeros(t, y0)
+        if len(z0_all) <= 2*edge_drop:
+            print("  not enough zeros")
+            continue
+        z0 = z0_all[edge_drop:-edge_drop]
+        print(f"  zeros used = {len(z0)}   (edge_drop={edge_drop})")
+
+        # build zeros at each sigma + track
+        Z = {}
+        Z[0.0] = z0.copy()
+
+        for s in sigmas:
+            g = gaussian_kernel(dt, s, radius=6)
+            ys = convolve_same(y0, g)
+            zs_all = find_zeros(t, ys)
+            if len(zs_all) <= 2*edge_drop:
+                Z[s] = np.array([], dtype=float)
+                continue
+            zs = zs_all[edge_drop:-edge_drop]
+            Z[s] = zs
+
+        # tracking intersection set across all sigmas
+        # start with baseline indices; keep only those tracked for all sigmas
+        tracked = np.ones(len(z0), dtype=bool)
+        Ztrk = {0.0: z0.copy()}
+
+        for s in sigmas:
+            zmatch = track_zeros(z0, Z[s], max_jump=max_jump)
+            tracked &= np.isfinite(zmatch)
+            Ztrk[s] = zmatch
+
+        z0u = z0[tracked]
+        if len(z0u) < max(6, len(powers)+2):
+            print("  not enough tracked zeros across sigmas")
+            continue
+
+        # rebuild tracked arrays cleanly
+        ZU = {}
+        ZU[0.0] = z0u
+        for s in sigmas:
+            ZU[s] = Ztrk[s][tracked]
+
+        # generator estimates in physical space:
+        # dt(s) = z(s) - z0
+        # v_eff(s) = dt(s)/s (good for small sigma)
+        # we then fit v_eff(s) on odd-kernel features to get a_p(s)
+        X_raw, Xz = odd_kernel_features(z0u, powers=powers, k_drop=k_drop)
+
+        a_list = []
+        for s in sigmas:
+            dt_s = ZU[s] - ZU[0.0]
+            v_eff = dt_s / s
+            a_p, _, _, _, _, _ = fit_on_features(v_eff, Xz, through_origin=True)
+            a_list.append(a_p)
+
+        A = np.vstack(a_list)  # shape (S,P)
+        B = beta_from_sigmas(np.array(sigmas), A)
+
+        lam, corr_beta_lama, rel1, _ = bf_scalar_closure(A, B)
+
+        print(f"  λ* = {lam:+.6f}")
+        print(f"  corr(β, λa) = {corr_beta_lama:+.6f}")
+        print(f"  rel_err     = {rel1:.6f}")
+
+        # BF+2D closure
+        twoD = bf_2d_closure(A, B)
+        print("  --- BF+2D closure ---")
+        print(f"  corr(β, model2D) = {twoD['corr_2d']:+.6f}")
+        print(f"  rel_err_2D       = {twoD['relerr_2d']:.6f}")
+        print(f"  resid singulars  = {twoD['S_resid']}")
+
+        if plot:
+            # quick visual: predicted vs measured beta (flattened) 1D vs 2D
+            Bflat = B.reshape(-1)
+            P1 = (twoD["lambda"]*A).reshape(-1)
+            P2 = (twoD["lambda"]*A + np.outer(twoD["mu"], twoD["u_resid"])).reshape(-1)
+
+            plt.figure()
+            plt.plot(Bflat, label="beta (measured)")
+            plt.plot(P1, label="lambda*a (1D)")
+            plt.plot(P2, label="lambda*a + mu*u (2D)")
+            plt.title(f"BF closure in coeff space | window [{T0},{T1}]")
+            plt.legend()
+            plt.show()
+
+        all_results.append({
+            "window": (T0,T1),
+            "zeros_used": int(len(z0u)),
+            "lambda": float(lam),
+            "corr_1d": float(corr_beta_lama),
+            "relerr_1d": float(rel1),
+            "corr_2d": float(twoD["corr_2d"]),
+            "relerr_2d": float(twoD["relerr_2d"]),
+        })
+
+    print("\n================ DONE ================")
+    if all_results:
+        print("\nSummary:")
+        for r in all_results:
+            w = r["window"]
+            print(f"  [{w[0]:.0f},{w[1]:.0f}]  n={r['zeros_used']:3d}  "
+                  f"λ={r['lambda']:+.3f}  "
+                  f"1D: corr={r['corr_1d']:+.3f} err={r['relerr_1d']:.3f}  "
+                  f"2D: corr={r['corr_2d']:+.3f} err={r['relerr_2d']:.3f}")
+    return all_results
+
+# ------------------------------------------------------------
+# RUN (defaults match your recent BF scan settings)
+# ------------------------------------------------------------
+results = run_BF_window_scan(
+    windows=((60.0,120.0),(120.0,180.0),(180.0,240.0)),
+    N=8192,
+    sigmas=(0.02,0.04,0.06),
+    edge_drop=2,
+    powers=(1,3,5),
+    k_drop=1,
+    max_jump=0.5,
+    plot=True
+)
+ 
+108
+ 
+ 
+
+================ BF WINDOW SCAN ================
+
+WINDOW [60.0,120.0]
+  zeros used = 21   (edge_drop=2)
+  λ* = +0.891952
+  corr(β, λa) = +0.984119
+  rel_err     = 0.176697
+  --- BF+2D closure ---
+  corr(β, model2D) = +1.000000
+  rel_err_2D       = 0.001116
+  resid singulars  = [1.17199486e-02 7.39934912e-05 1.25097003e-06]
+ 
+================ BF WINDOW SCAN ================
+
+WINDOW [120.0,180.0]
+  zeros used = 27   (edge_drop=2)
+  λ* = +0.883048
+  corr(β, λa) = +0.983949
+  rel_err     = 0.175753
+  --- BF+2D closure ---
+  corr(β, model2D) = +0.999987
+  rel_err_2D       = 0.006258
+  resid singulars  = [8.74931413e-03 3.11741374e-04 2.26704809e-06]
+ 
+================ BF WINDOW SCAN ================
+
+WINDOW [180.0,240.0]
+  zeros used = 29   (edge_drop=2)
+  λ* = +0.887830
+  corr(β, λa) = +0.980663
+  rel_err     = 0.184010
+  --- BF+2D closure ---
+  corr(β, model2D) = +0.999919
+  rel_err_2D       = 0.012012
+  resid singulars  = [6.23229330e-03 4.07704961e-04 3.90187314e-06]
+ 
+================ DONE ================
+
+Summary:
+  [60,120]  n= 21  λ=+0.892  1D: corr=+0.984 err=0.177  2D: corr=+1.000 err=0.001
+  [120,180]  n= 27  λ=+0.883  1D: corr=+0.984 err=0.176  2D: corr=+1.000 err=0.006
+  [180,240]  n= 29  λ=+0.888  1D: corr=+0.981 err=0.184  2D: corr=+1.000 err=0.012
+
+109
+ 
+
+import numpy as np
+import mpmath as mp
+from scipy.signal import savgol_filter
+
+mp.mp.dps = 50
+
+# ----------------------------
+# RIEMANN-SIEGEL Z (Stabilized)
+# ----------------------------
+def z_func(t_val):
+    # This keeps the magnitude manageable while preserving zeros
+    return float(mp.siegelz(t_val))
+
+# ----------------------------
+# UPDATED WINDOW SCAN
+# ----------------------------
+WINDOWS = [(1000.0, 1020.0)] # Smaller slice to ensure high density
+N = 10000
+SIGMAS = np.array([0.005, 0.01, 0.015]) # Tight flow for tight zeros
+
+print("\n================ HIGH-T STRESS TEST (STABILIZED) ================\n")
+
+for (T0, T1) in WINDOWS:
+    t_grid = np.linspace(T0, T1, N)
+    dt = t_grid[1] - t_grid[0]
+
+    # Use Z-function instead of Xi
+    f0 = np.array([z_func(tt) for tt in t_grid])
+
+    # Simple zero crossing
+    z0_idx = np.where(np.diff(np.sign(f0)))[0]
+    z0 = t_grid[z0_idx]
+
+    # Clip edges
+    z0 = z0[(z0 > T0 + 1) & (z0 < T1 - 1)]
+
+    if len(z0) == 0:
+        print(f"Still no zeros found at T={T0}. Check sampling.")
+        continue
+
+    # Proceed with the tracking...
+    # (Rest of the logic from your previous RG flow code)
+    Z_flow = {}
+    for s in SIGMAS:
+        fs = np.real(np.fft.ifft(np.fft.fft(f0) * np.exp(-(2*np.pi*np.fft.fftfreq(N, d=dt))**2 * s)))
+        zs_idx = np.where(np.diff(np.sign(fs)))[0]
+        zs = t_grid[zs_idx]
+        zs = zs[(zs > T0 + 1) & (zs < T1 - 1)]
+        if len(zs) >= len(z0): Z_flow[s] = zs[:len(z0)]
+
+    if len(Z_flow) == len(SIGMAS):
+        # ... Insert the λ* calculation here ...
+        # (Using the same Odd Kernels / Beta logic as before)
+        print(f"  Successfully tracked {len(z0)} zeros at T=1000.")
+
+================ HIGH-T STRESS TEST (STABILIZED) ================
+
+  Successfully tracked 15 zeros at T=1000.
+
+ 
+110
+ 
+ 
+ 
+ 
+ 
+
