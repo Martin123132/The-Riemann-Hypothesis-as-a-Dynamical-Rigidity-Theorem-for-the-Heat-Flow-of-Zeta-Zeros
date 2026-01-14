@@ -1,0 +1,1794 @@
+
+
+Code 66
+
+# ============================================================
+# TEST AG″ — MULTI-σ RENORMALISATION (solve for α)
+# Goal:
+#   Use multiple σ values for the SAME zero set.
+#   Find α such that dt/σ^α has σ-INVARIANT kernel coefficients.
+#
+# Outputs:
+#   - best α (minimises coefficient drift across σ)
+#   - coefficient table vs σ
+#   - fit quality vs σ at that α
+# ============================================================
+
+import numpy as np
+
+# ----------------------------
+# INPUT (PASTE YOUR DATA)
+# ----------------------------
+# Baseline zero locations (σ=0), length M
+t0 = np.array([
+    67.079812, 69.546404, 72.067158, 75.704693, 77.144842,
+    79.337375, 82.910384, 84.735493, 87.425278, 88.809112,
+    92.491900, 94.651348
+], dtype=float)
+
+# Provide MULTIPLE σ values and the corresponding Gaussian-smoothed zero arrays.
+# IMPORTANT: Each t_sigma must be the SAME LENGTH as t0 and in the SAME ORDER.
+sigmas = np.array([0.02, 0.04, 0.06], dtype=float)
+
+t_sigmas = {
+    0.02: np.array([
+        67.080900, 69.547900, 72.069200, 75.707600, 77.148100,
+        79.341400, 82.915400, 84.741400, 87.432000, 88.816900,
+        92.501500, 94.662500
+    ], dtype=float),
+
+    0.04: np.array([
+        67.081900, 69.549300, 72.071100, 75.710300, 77.151200,
+        79.345300, 82.920300, 84.747200, 87.438700, 88.824700,
+        92.511000, 94.675000
+    ], dtype=float),
+
+    0.06: np.array([
+        67.083091, 69.550802, 72.073114, 75.712992, 77.154224,
+        79.348916, 82.925314, 84.753842, 87.446019, 88.833904,
+        92.522118, 94.688330
+    ], dtype=float),
+}
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+EDGE_DROP = 1
+ODD_POWERS = [1, 3, 5]
+ALPHAS = np.linspace(0.0, 3.0, 61)  # scan alpha
+REMOVE_MEAN = True
+
+# ----------------------------
+# BUILD ODD KERNEL DESIGN MATRIX
+# ----------------------------
+t0_use = t0[EDGE_DROP:-EDGE_DROP]
+M = len(t0_use)
+
+def odd_kernel(t, p):
+    H = np.zeros(len(t))
+    for i in range(len(t)):
+        s = 0.0
+        ti = t[i]
+        for j in range(len(t)):
+            if i == j:
+                continue
+            d = ti - t[j]
+            s += np.sign(d) / (abs(d)**p)
+        H[i] = s
+    return H
+
+X = np.column_stack([odd_kernel(t0_use, p) for p in ODD_POWERS])
+
+# precompute pseudoinverse for stability
+XtX = X.T @ X
+XtX_inv = np.linalg.pinv(XtX)
+X_pinv = XtX_inv @ X.T
+
+# ----------------------------
+# FIT FUNCTION
+# ----------------------------
+def fit_coeffs_for_alpha(alpha):
+    # returns: coeffs_by_sigma, stats_by_sigma
+    coeffs = []
+    stats = []
+    for s in sigmas:
+        ts = t_sigmas[float(s)][EDGE_DROP:-EDGE_DROP]
+        dt = ts - t0_use
+        v = dt / (s**alpha)
+
+        if REMOVE_MEAN:
+            v = v - np.mean(v)
+
+        a = X_pinv @ v
+        vhat = X @ a
+
+        # correlation + relative residual
+        corr = np.corrcoef(v, vhat)[0, 1]
+        rel = np.linalg.norm(v - vhat) / (np.linalg.norm(v) + 1e-30)
+
+        coeffs.append(a)
+        stats.append((float(s), float(corr), float(rel), float(np.mean(np.abs(dt)))))
+
+    return np.array(coeffs), stats
+
+# ----------------------------
+# SCORE α by coefficient invariance across σ
+# ----------------------------
+def score_alpha(alpha):
+    A, stats = fit_coeffs_for_alpha(alpha)  # shape (Ns, 3)
+    # coefficient drift metric: relative std per coefficient, averaged
+    mean_abs = np.mean(np.abs(A), axis=0) + 1e-30
+    rel_std = np.std(A, axis=0) / mean_abs
+    drift = float(np.mean(rel_std))
+
+    # also prefer better fits (lower residual)
+    mean_rel_resid = float(np.mean([st[2] for st in stats]))
+    mean_corr = float(np.mean([st[1] for st in stats]))
+
+    # primary: drift, secondary: residual
+    return drift, mean_rel_resid, mean_corr, rel_std, A, stats
+
+best = None
+for alpha in ALPHAS:
+    out = score_alpha(float(alpha))
+    if best is None or (out[0] < best[0]) or (out[0] == best[0] and out[1] < best[1]):
+        best = out + (float(alpha),)
+
+drift, mean_rel_resid, mean_corr, rel_std, A_best, stats_best, alpha_star = best
+
+# ----------------------------
+# PRINT RESULTS
+# ----------------------------
+print("====================================================")
+print("TEST AG″ — MULTI-σ RENORMALISATION")
+print("====================================================")
+print(f"sigmas used: {list(map(float, sigmas))}")
+print(f"best α* = {alpha_star:.4f}")
+print(f"mean corr(v, X a)       = {mean_corr:.6f}")
+print(f"mean ||resid||/||v||    = {mean_rel_resid:.6f}")
+print(f"coefficient rel.std     = {rel_std}")
+print("----------------------------------------------------")
+print("Coefficients a_p vs σ at α*")
+for i, s in enumerate(sigmas):
+    a = A_best[i]
+    print(f"σ={float(s):.4f}  a1={a[0]:+.6e}  a3={a[1]:+.6e}  a5={a[2]:+.6e}")
+print("----------------------------------------------------")
+print("Per-σ fit stats (at α*)")
+for (s, corr, rel, mean_abs_dt) in stats_best:
+    print(f"σ={s:.4f}  corr={corr:+.6f}  rel_resid={rel:.6f}  mean|dt|={mean_abs_dt:.6e}")
+print("====================================================")
+
+# Optional: show a quick table of drift vs alpha (top 10)
+rows = []
+for alpha in ALPHAS:
+    d, r, c, rs, _, _ = score_alpha(float(alpha))
+    rows.append((float(alpha), d, r, c))
+rows.sort(key=lambda x: (x[1], x[2]))
+
+print("\nTop 10 α by (drift, resid):")
+for a, d, r, c in rows[:10]:
+    print(f"α={a:5.2f}  drift={d:.6f}  mean_rel_resid={r:.6f}  mean_corr={c:.6f}")
+
+66
+
+import numpy as np
+
+# ==============================
+# TEST AH: ODD-KERNEL SATURATION
+# ==============================
+
+# REQUIRED INPUTS (paste exactly what you already have)
+baseline_zeros = np.array([
+    67.079812, 69.546404, 72.067158, 75.704693, 77.144842,
+    79.337375, 82.910384, 84.735493, 87.425278, 88.809112,
+    92.491900, 94.651348, 98.831197, 101.317854,
+    103.725538, 105.446623, 107.168612, 111.029542,
+    114.320221, 116.226682, 118.790785
+])
+
+# sigma-generator velocity (v = dt/dσ at σ≈0)
+v = np.array([
+    0.1341, -0.2215, 0.3189, -0.4073, 0.5121,
+   -0.4984, 0.3762, -0.2918, 0.1836, -0.0917,
+    0.0524, -0.0289, 0.0147, -0.0068,
+    0.0031, -0.0014, 0.0006, -0.0003,
+    0.0001, -0.00005, 0.00002
+])
+
+# ------------------------------
+# build odd-kernel matrix
+# ------------------------------
+def odd_kernel_matrix(t, powers):
+    N = len(t)
+    X = np.zeros((N, len(powers)))
+    for k, p in enumerate(powers):
+        for i in range(N):
+            s = 0.0
+            for j in range(N):
+                if i != j:
+                    d = t[i] - t[j]
+                    s += np.sign(d) / (abs(d)**p)
+            X[i, k] = s
+    return X
+
+powers = [1, 3, 5, 7]
+X = odd_kernel_matrix(baseline_zeros, powers)
+
+# remove mean (important)
+v0 = v - np.mean(v)
+X0 = X - np.mean(X, axis=0)
+
+# least squares fit
+a, *_ = np.linalg.lstsq(X0, v0, rcond=None)
+v_hat = X0 @ a
+resid = v0 - v_hat
+
+# diagnostics
+corr = np.corrcoef(v0, v_hat)[0,1]
+R2 = 1 - np.sum(resid**2)/np.sum(v0**2)
+rel_resid = np.linalg.norm(resid)/np.linalg.norm(v0)
+
+print("========== TEST AH: ODD-KERNEL SATURATION ==========")
+print("kernels used: H1, H3, H5, H7")
+for p, ai in zip(powers, a):
+    print(f"p={p:2d}  a_p={ai:+.6e}")
+print("---------------------------------------------------")
+print(f"corr(v, v_hat) = {corr:+.6f}")
+print(f"R^2            = {R2:+.6f}")
+print(f"||resid||/||v|| = {rel_resid:.6f}")
+print("===================================================")
+
+67
+
+import numpy as np
+
+# ==========================================================
+# TEST AH′: NORMALISATION + RIDGE + vΔ COMPARISON (H1,H3,H5,H7)
+# ==========================================================
+
+# ---- PASTE YOUR ARRAYS HERE (must be same length) ----
+baseline_zeros = np.array([
+    67.079812, 69.546404, 72.067158, 75.704693, 77.144842,
+    79.337375, 82.910384, 84.735493, 87.425278, 88.809112,
+    92.491900, 94.651348, 98.831197, 101.317854,
+    103.725538, 105.446623, 107.168612, 111.029542,
+    114.320221, 116.226682, 118.790785
+], dtype=float)
+
+v = np.array([
+    # dt/dσ at σ≈0, aligned with baseline_zeros above
+    0.1341, -0.2215, 0.3189, -0.4073, 0.5121,
+   -0.4984, 0.3762, -0.2918, 0.1836, -0.0917,
+    0.0524, -0.0289, 0.0147, -0.0068,
+    0.0031, -0.0014, 0.0006, -0.0003,
+    0.0001, -0.00005, 0.00002
+], dtype=float)
+
+# ------------------------------
+# helpers
+# ------------------------------
+def corr(a, b):
+    a = np.asarray(a, float)
+    b = np.asarray(b, float)
+    if a.size < 2 or b.size < 2:
+        return np.nan
+    sa = np.std(a)
+    sb = np.std(b)
+    if sa == 0 or sb == 0:
+        return np.nan
+    return float(np.corrcoef(a, b)[0, 1])
+
+def odd_kernel_matrix(t, powers):
+    t = np.asarray(t, float)
+    N = len(t)
+    X = np.zeros((N, len(powers)), dtype=float)
+    for k, p in enumerate(powers):
+        for i in range(N):
+            d = t[i] - t
+            d[i] = 1.0  # dummy (ignored)
+            mask = np.ones(N, dtype=bool)
+            mask[i] = False
+            dd = d[mask]
+            X[i, k] = np.sum(np.sign(dd) / (np.abs(dd)**p))
+    return X
+
+def zscore_cols(X, eps=1e-12):
+    X = X.copy()
+    mu = X.mean(axis=0)
+    sd = X.std(axis=0)
+    sd = np.where(sd < eps, 1.0, sd)
+    return (X - mu) / sd
+
+def fit_ls(X, y):
+    a, *_ = np.linalg.lstsq(X, y, rcond=None)
+    yhat = X @ a
+    r = y - yhat
+    R2 = 1.0 - (np.dot(r, r) / max(np.dot(y, y), 1e-30))
+    return a, yhat, r, R2
+
+def fit_ridge(X, y, lam):
+    # solves (X^T X + lam I)a = X^T y
+    XtX = X.T @ X
+    Xty = X.T @ y
+    A = XtX + lam * np.eye(X.shape[1])
+    a = np.linalg.solve(A, Xty)
+    yhat = X @ a
+    r = y - yhat
+    R2 = 1.0 - (np.dot(r, r) / max(np.dot(y, y), 1e-30))
+    return a, yhat, r, R2
+
+def spacing_bar(t):
+    # local mean spacing (uses neighbors)
+    t = np.asarray(t, float)
+    N = len(t)
+    dprev = np.empty(N)
+    dnext = np.empty(N)
+    dprev[0] = t[1] - t[0]
+    dnext[-1] = t[-1] - t[-2]
+    dprev[1:] = t[1:] - t[:-1]
+    dnext[:-1] = t[1:] - t[:-1]
+    return 0.5 * (dprev + dnext)
+
+# ------------------------------
+# build design
+# ------------------------------
+powers = [1, 3, 5, 7]
+X_raw = odd_kernel_matrix(baseline_zeros, powers)
+
+# center targets
+v0 = v - np.mean(v)
+
+# spacing-scaled target (often stabilises)
+Delta = spacing_bar(baseline_zeros)
+vDelta0 = (v * Delta) - np.mean(v * Delta)
+
+# designs
+X0_raw = X_raw - X_raw.mean(axis=0)          # just mean-center
+X0_norm = zscore_cols(X_raw)                 # zscore (mean+std)
+
+# condition numbers (to show how nasty it is)
+def condnum(X):
+    s = np.linalg.svd(X, compute_uv=False)
+    if len(s) == 0:
+        return np.nan
+    if s[-1] == 0:
+        return np.inf
+    return float(s[0] / s[-1])
+
+print("========== TEST AH′ SETUP ==========")
+print("N =", len(baseline_zeros))
+print("powers =", powers)
+print("cond(X0_raw)  =", condnum(X0_raw))
+print("cond(X0_norm) =", condnum(X0_norm))
+print("====================================\n")
+
+# ------------------------------
+# run fits
+# ------------------------------
+def report(tag, a, yhat, r, R2, y):
+    print(f"--- {tag} ---")
+    for p, ai in zip(powers, a):
+        print(f"p={p:2d}  a_p={ai:+.6e}")
+    print(f"corr(y, yhat) = {corr(y, yhat):+.6f}")
+    print(f"R^2           = {R2:+.6f}")
+    print(f"||r||/||y||    = {np.linalg.norm(r)/max(np.linalg.norm(y),1e-30):.6f}")
+    print()
+
+# 1) raw LS on raw
+a1, yhat1, r1, R21 = fit_ls(X0_raw, v0)
+report("1) LS: raw v  ~ raw H", a1, yhat1, r1, R21, v0)
+
+# 2) raw LS on normed
+a2, yhat2, r2, R22 = fit_ls(X0_norm, v0)
+report("2) LS: raw v  ~ zscored H", a2, yhat2, r2, R22, v0)
+
+# 3) ridge scan on normed (raw v)
+lam_grid = np.logspace(-6, 2, 25)
+best = None
+for lam in lam_grid:
+    a, yhat, r, R2 = fit_ridge(X0_norm, v0, lam)
+    c = corr(v0, yhat)
+    score = c  # maximize corr
+    if best is None or score > best[0]:
+        best = (score, lam, a, yhat, r, R2)
+score3, lam3, a3, yhat3, r3, R23 = best
+print(f"Best ridge λ for raw v (by corr): {lam3:.3e}   corr={score3:+.6f}\n")
+report("3) RIDGE: raw v ~ zscored H", a3, yhat3, r3, R23, v0)
+
+# 4) ridge scan on normed (vΔ)
+best = None
+for lam in lam_grid:
+    a, yhat, r, R2 = fit_ridge(X0_norm, vDelta0, lam)
+    c = corr(vDelta0, yhat)
+    score = c
+    if best is None or score > best[0]:
+        best = (score, lam, a, yhat, r, R2)
+score4, lam4, a4, yhat4, r4, R24 = best
+print(f"Best ridge λ for vΔ (by corr): {lam4:.3e}   corr={score4:+.6f}\n")
+report("4) RIDGE: vΔ ~ zscored H", a4, yhat4, r4, R24, vDelta0)
+
+print("DONE: TEST AH′")
+
+68
+
+import numpy as np
+
+# ==========================================================
+# TEST AH″: TRUNCATED ODD-KERNELS (PV-style) vs FULL
+# checks whether H7 only lives in near-neighbour singularity
+# ==========================================================
+
+# ---- PASTE YOUR ARRAYS HERE (same length) ----
+t0 = np.array([
+    67.079812, 69.546404, 72.067158, 75.704693, 77.144842,
+    79.337375, 82.910384, 84.735493, 87.425278, 88.809112,
+    92.491900, 94.651348, 98.831197, 101.317854,
+    103.725538, 105.446623, 107.168612, 111.029542,
+    114.320221, 116.226682, 118.790785
+], dtype=float)
+
+v = np.array([
+    # your dt/dσ aligned with t0
+    0.1341, -0.2215, 0.3189, -0.4073, 0.5121,
+   -0.4984, 0.3762, -0.2918, 0.1836, -0.0917,
+    0.0524, -0.0289, 0.0147, -0.0068,
+    0.0031, -0.0014, 0.0006, -0.0003,
+    0.0001, -0.00005, 0.00002
+], dtype=float)
+
+powers = [1,3,5,7]
+
+def corr(a,b):
+    a=np.asarray(a,float); b=np.asarray(b,float)
+    sa=np.std(a); sb=np.std(b)
+    if sa==0 or sb==0: return np.nan
+    return float(np.corrcoef(a,b)[0,1])
+
+def zscore_cols(X, eps=1e-12):
+    mu = X.mean(axis=0)
+    sd = X.std(axis=0)
+    sd = np.where(sd < eps, 1.0, sd)
+    return (X - mu) / sd
+
+def fit_ls(X,y):
+    a, *_ = np.linalg.lstsq(X,y,rcond=None)
+    yhat = X@a
+    r = y-yhat
+    R2 = 1.0 - (np.dot(r,r)/max(np.dot(y,y),1e-30))
+    return a,yhat,r,R2
+
+def odd_kernel_matrix_truncated(t, powers, k_drop=0):
+    """
+    For each i, sum over j excluding i AND excluding the k_drop nearest neighbors
+    on each side (in index distance), i.e. ignore |j-i| <= k_drop.
+    k_drop=0 -> full sum (exclude only i)
+    k_drop=1 -> exclude nearest neighbors
+    k_drop=2 -> exclude up to 2-away, etc.
+    """
+    t = np.asarray(t,float)
+    N = len(t)
+    X = np.zeros((N, len(powers)), float)
+    for i in range(N):
+        # allowed js by index distance
+        jj = np.arange(N)
+        mask = (jj != i) & (np.abs(jj - i) > k_drop)
+        d = t[i] - t[mask]
+        for k,p in enumerate(powers):
+            X[i,k] = np.sum(np.sign(d) / (np.abs(d)**p))
+    return X
+
+y = v - np.mean(v)
+
+print("========== TEST AH″: TRUNCATION SCAN ==========")
+print("N =", len(t0), "powers =", powers)
+print("")
+
+for k_drop in [0,1,2,3,4]:
+    X = odd_kernel_matrix_truncated(t0, powers, k_drop=k_drop)
+    Xn = zscore_cols(X)
+    a, yhat, r, R2 = fit_ls(Xn, y)
+
+    # report
+    print(f"--- k_drop = {k_drop} (exclude |j-i| <= {k_drop}) ---")
+    for p, ai in zip(powers, a):
+        print(f"p={p:2d}  a_p={ai:+.6e}")
+    print(f"corr(y,yhat) = {corr(y,yhat):+.6f}")
+    print(f"R^2          = {R2:+.6f}")
+    print(f"||r||/||y||   = {np.linalg.norm(r)/max(np.linalg.norm(y),1e-30):.6f}")
+    print("")
+
+print("DONE: TEST AH″")
+
+69
+
+# ============================================================
+# TEST AI′ (FIXED): ORTHOGONAL ODD-BASIS USING TRUE σ-SMOOTHED ZEROS
+#   - zeros extracted from sampled arrays (baseline & smoothed) by linear interpolation
+#   - NO "refine using xi" anywhere for smoothed curves
+#   - then track zeros across σ, estimate v_i = dt_i/dσ near 0
+#   - fit v in orthonormalised odd-kernel feature space (H1,H3,H5)
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+mp.mp.dps = 60
+
+T0, T1 = 60.0, 120.0
+N = 8192
+EDGE_DROP = 2
+
+SIGMAS = [0.00, 0.01, 0.02, 0.04, 0.06]  # generator extraction grid
+SIGMA_FIT_MAX = 0.06                      # use sigmas <= this for v fit
+
+K_DROP = 1
+POWERS = [1, 3, 5]
+
+MAX_JUMP = 0.35         # max allowed zero hop between σ steps
+MIN_TRACK = 4           # minimum sigma points per zero to fit v
+
+# ----------------------------
+# xi(s) (mpmath build-safe)
+# xi(s) = 0.5*s*(s-1)*pi^{-s/2}*Gamma(s/2)*zeta(s)
+# ----------------------------
+def xi(s):
+    return mp.mpf('0.5') * s * (s - 1) * (mp.pi ** (-s/2)) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_re_xi(t):
+    s = mp.mpf('0.5') + 1j * mp.mpf(t)
+    return mp.re(xi(s))
+
+def sample_f(t_grid):
+    out = np.empty_like(t_grid, dtype=np.float64)
+    for i, tt in enumerate(t_grid):
+        out[i] = float(f_re_xi(tt))
+    return out
+
+# ----------------------------
+# Linear-interp zeros from sampled arrays
+# ----------------------------
+def find_zeros_linear(t, y):
+    z = []
+    for i in range(len(t) - 1):
+        ya, yb = y[i], y[i+1]
+        if not (np.isfinite(ya) and np.isfinite(yb)):
+            continue
+        if ya == 0.0:
+            z.append(float(t[i]))
+            continue
+        if ya * yb < 0.0:
+            # linear root in [t[i], t[i+1]]
+            a, b = t[i], t[i+1]
+            r = a + (0.0 - ya) * (b - a) / (yb - ya)
+            if T0 <= r <= T1:
+                z.append(float(r))
+    z = np.array(sorted(z), dtype=np.float64)
+    if len(z) == 0:
+        return z
+    # de-dup close hits
+    keep = [z[0]]
+    for v in z[1:]:
+        if abs(v - keep[-1]) > 1e-6:
+            keep.append(v)
+    return np.array(keep, dtype=np.float64)
+
+# ----------------------------
+# Gaussian smoothing via convolution in sample-space
+# ----------------------------
+def gaussian_kernel(sigma, dt, half_width_sigmas=6.0):
+    if sigma <= 0:
+        return np.array([1.0], dtype=np.float64)
+    half = int(np.ceil(half_width_sigmas * sigma / dt))
+    x = np.arange(-half, half + 1, dtype=np.float64) * dt
+    k = np.exp(-0.5 * (x / sigma) ** 2)
+    k /= k.sum()
+    return k
+
+def convolve_same(y, k):
+    return np.convolve(y, k, mode='same')
+
+# ----------------------------
+# Track zeros across sigma (nearest-neighbour continuation)
+# ----------------------------
+def track_zeros(base_zeros, zeros_by_sigma, sigmas, max_jump=0.25):
+    tracked = []
+    for t0 in base_zeros:
+        path = {sigmas[0]: float(t0)}
+        prev = float(t0)
+        ok = True
+        for s in sigmas[1:]:
+            zz = zeros_by_sigma.get(s, None)
+            if zz is None or len(zz) == 0:
+                ok = False
+                break
+            j = int(np.argmin(np.abs(zz - prev)))
+            cand = float(zz[j])
+            if abs(cand - prev) > max_jump:
+                ok = False
+                break
+            path[s] = cand
+            prev = cand
+        if ok:
+            tracked.append({'t0': float(t0), 'path': path})
+    return tracked
+
+# ----------------------------
+# Estimate generator v_i = dt/dσ near 0 by linear fit t(σ)=t0+vσ
+# ----------------------------
+def estimate_v(tracked, sigmas, sigma_fit_max, min_track=4):
+    sig_use = [s for s in sigmas if s <= sigma_fit_max]
+    t0_list = []
+    v_list = []
+    for item in tracked:
+        xs = []
+        ys = []
+        for s in sig_use:
+            if s in item['path']:
+                xs.append(float(s))
+                ys.append(float(item['path'][s]))
+        if len(xs) < min_track:
+            continue
+        xs = np.array(xs, dtype=np.float64)
+        ys = np.array(ys, dtype=np.float64)
+        A = np.vstack([np.ones_like(xs), xs]).T
+        coef, *_ = np.linalg.lstsq(A, ys, rcond=None)
+        v_i = coef[1]
+        t0_list.append(item['t0'])
+        v_list.append(v_i)
+    return np.array(t0_list, dtype=np.float64), np.array(v_list, dtype=np.float64)
+
+# ----------------------------
+# Odd-kernel features H_p(i)
+# ----------------------------
+def build_H(t0, powers, k_drop=1):
+    t0 = np.asarray(t0, dtype=np.float64)
+    n = len(t0)
+    X = np.zeros((n, len(powers)), dtype=np.float64)
+    for i in range(n):
+        for pi, p in enumerate(powers):
+            acc = 0.0
+            for j in range(n):
+                if i == j:
+                    continue
+                if abs(j - i) <= k_drop:
+                    continue
+                d = t0[i] - t0[j]
+                acc += np.sign(d) / (abs(d) ** p)
+            X[i, pi] = acc
+    return X
+
+# ----------------------------
+# Orthonormal-basis fit (QR on zscored X)
+# ----------------------------
+def fit_orthonormal(v, X):
+    X = np.asarray(X, dtype=np.float64)
+    v = np.asarray(v, dtype=np.float64)
+
+    mu = X.mean(axis=0)
+    sd = X.std(axis=0)
+    sd[sd == 0] = 1.0
+    Xz = (X - mu) / sd
+
+    Q, R = np.linalg.qr(Xz)
+    cq = Q.T @ v
+    v_hat = Q @ cq
+    resid = v - v_hat
+
+    def corr(a, b):
+        if a.std() == 0 or b.std() == 0:
+            return np.nan
+        return float(np.corrcoef(a, b)[0, 1])
+
+    c = corr(v, v_hat)
+    denom = np.sum((v - v.mean()) ** 2)
+    r2 = 1.0 - (np.sum(resid ** 2) / denom if denom > 0 else np.nan)
+    rel = float(np.linalg.norm(resid) / np.linalg.norm(v)) if np.linalg.norm(v) > 0 else np.nan
+
+    # also do interpretable LS in the same zscored feature space
+    a_ls, *_ = np.linalg.lstsq(Xz, v, rcond=None)
+    v_ls = Xz @ a_ls
+    resid_ls = v - v_ls
+    denom2 = np.sum((v - v.mean()) ** 2)
+    r2_ls = 1.0 - (np.sum(resid_ls ** 2) / denom2 if denom2 > 0 else np.nan)
+    c_ls = corr(v, v_ls)
+    rel_ls = float(np.linalg.norm(resid_ls) / np.linalg.norm(v)) if np.linalg.norm(v) > 0 else np.nan
+
+    return {
+        "mu": mu, "sd": sd, "Xz": Xz, "Q": Q, "R": R,
+        "v_hat": v_hat, "resid": resid, "corr": c, "R2": float(r2), "rel": rel,
+        "a_ls": a_ls, "v_ls": v_ls, "corr_ls": c_ls, "R2_ls": float(r2_ls), "rel_ls": rel_ls
+    }
+
+# ============================================================
+# RUN
+# ============================================================
+t = np.linspace(T0, T1, N, endpoint=False)
+dt = t[1] - t[0]
+
+print(f"Sampling f(t)=Re ξ(1/2+it) on [{T0},{T1}]  N={N}  dt≈{dt} ...")
+y0 = sample_f(t)
+
+z0_full = find_zeros_linear(t, y0)
+if len(z0_full) < 2 * EDGE_DROP + 3:
+    raise RuntimeError("Not enough baseline zeros found. Increase N or widen window.")
+
+z0 = z0_full[EDGE_DROP:-EDGE_DROP]
+print(f"Baseline zeros found: {len(z0_full)} | after edge drop: {len(z0)}")
+print("First few baseline zeros:", np.array2string(z0[:12], precision=6))
+
+zeros_by_sigma = {0.0: z0_full}
+for s in SIGMAS[1:]:
+    k = gaussian_kernel(s, dt)
+    ys = convolve_same(y0, k)
+    zs = find_zeros_linear(t, ys)
+    zeros_by_sigma[s] = zs
+
+tracked = track_zeros(z0, zeros_by_sigma, SIGMAS, max_jump=MAX_JUMP)
+t0_used, v = estimate_v(tracked, SIGMAS, SIGMA_FIT_MAX, min_track=MIN_TRACK)
+
+print("Tracked zeros across σ:", len(t0_used), "/", len(z0))
+if len(t0_used) < 8:
+    raise RuntimeError("Too few tracked zeros. Try smaller SIGMAS or larger N.")
+
+print("\n========== TEST AI′: ORTHOGONAL ODD-BASIS (FIXED) ==========")
+print("zeros used =", len(t0_used))
+print("sigma grid =", SIGMAS, "  (fit max σ =", SIGMA_FIT_MAX, ")")
+print("mean|v|   =", float(np.mean(np.abs(v))))
+print("max |v|   =", float(np.max(np.abs(v))))
+
+X = build_H(t0_used, POWERS, k_drop=K_DROP)
+fit = fit_orthonormal(v, X)
+
+print("\n--- Truncation ---")
+print("K_DROP =", K_DROP)
+
+print("\n--- Orthonormal-basis reconstruction ---")
+print("corr(v, v_hat)   =", fit["corr"])
+print("R^2              =", fit["R2"])
+print("||resid||/||v||  =", fit["rel"])
+
+print("\n--- Interpretable LS on zscored H ---")
+for p, a in zip(POWERS, fit["a_ls"]):
+    print(f"p={p:>2}  a_p={a:+.6e}")
+print("corr(v, v_hat_ls) =", fit["corr_ls"])
+print("R^2 (LS)          =", fit["R2_ls"])
+print("||resid||/||v||   =", fit["rel_ls"])
+
+# quick UV sensitivity (same powers, changing K_DROP)
+print("\n--- UV sensitivity scan ---")
+for kd in [0, 1, 2, 3]:
+    Xk = build_H(t0_used, POWERS, k_drop=kd)
+    fk = fit_orthonormal(v, Xk)
+    print(f"K_DROP={kd:<2d}  corr={fk['corr_ls']:+.6f}  R^2={fk['R2_ls']:+.6f}  ||resid||/||v||={fk['rel_ls']:.6f}")
+
+# ----------------------------
+# Plots
+# ----------------------------
+plt.figure()
+plt.title("v vs reconstructed v̂ (orthonormal basis)")
+plt.plot(t0_used, v, '.', label='v')
+plt.plot(t0_used, fit["v_hat"], '.', label='v̂')
+plt.legend()
+plt.xlabel("t (baseline zero)")
+plt.ylabel("v = dt/dσ")
+
+plt.figure()
+plt.title("Residual vs t")
+plt.plot(t0_used, fit["resid"], '.')
+plt.axhline(0, linestyle='--')
+plt.xlabel("t (baseline zero)")
+plt.ylabel("residual")
+
+plt.figure()
+plt.title("zscored H features (columns)")
+for j, p in enumerate(POWERS):
+    plt.plot(t0_used, fit["Xz"][:, j], '.', label=f"H{p} (z)")
+plt.legend()
+plt.xlabel("t (baseline zero)")
+plt.ylabel("zscore(H_p)")
+
+plt.show()
+
+print("\nDONE: TEST AI′")
+
+# ====================================================
+# TEST AJ (SELF-CONTAINED)
+# Odd-kernel completeness & saturation
+# ====================================================
+
+import numpy as np
+import mpmath as mp
+
+# -----------------------------
+# NUMERICAL SETTINGS
+# -----------------------------
+mp.mp.dps = 40
+T0, T1 = 60.0, 120.0
+N = 8192
+SIGMAS = [0.0, 0.01, 0.02, 0.04, 0.06]
+EDGE_DROP = 2
+
+# -----------------------------
+# RIEMANN ξ AND REAL SLICE
+# -----------------------------
+def xi(s):
+    return 0.5 * s * (s-1) * mp.pi**(-s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_vals(t, sigma=0.0):
+    return np.array(
+        [mp.re(xi(0.5 + sigma + 1j*ti)) for ti in t],
+        dtype=float
+    )
+
+# -----------------------------
+# ZERO FINDING
+# -----------------------------
+def find_zeros(t, f):
+    s = np.sign(f)
+    idx = np.where(s[:-1] * s[1:] < 0)[0]
+    return t[idx] - f[idx] * (t[idx+1]-t[idx]) / (f[idx+1]-f[idx])
+
+# -----------------------------
+# GRID + BASELINE ZEROS
+# -----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+
+f0 = f_vals(t, 0.0)
+z0 = find_zeros(t, f0)
+z0 = z0[EDGE_DROP:-EDGE_DROP]
+
+print(f"baseline zeros used: {len(z0)}")
+
+# -----------------------------
+# TRACK ZEROS ACROSS σ
+# -----------------------------
+Z = []
+for sigma in SIGMAS:
+    fσ = f_vals(t, sigma)
+    zσ = find_zeros(t, fσ)
+    zσ = zσ[EDGE_DROP:-EDGE_DROP]
+    Z.append(zσ)
+
+Z = np.array(Z)
+assert all(len(z)==len(z0) for z in Z)
+
+# -----------------------------
+# σ–GENERATOR  v = dt/dσ
+# -----------------------------
+SIG = np.array(SIGMAS)
+V = []
+
+for i in range(len(z0)):
+    ti = Z[:, i]
+    a, _ = np.polyfit(SIG, ti, 1)
+    V.append(a)
+
+v = np.array(V)
+t0 = z0
+
+print(f"tracked zeros = {len(v)}")
+print(f"mean|v| = {np.mean(np.abs(v)):.6e}")
+
+# -----------------------------
+# ODD KERNEL MATRIX
+# -----------------------------
+def odd_kernel_matrix(t, powers):
+    N = len(t)
+    X = np.zeros((N, len(powers)))
+    for k, p in enumerate(powers):
+        for i in range(N):
+            d = t[i] - t
+            m = d != 0
+            X[i,k] = np.sum(np.sign(d[m]) / np.abs(d[m])**p)
+    return X
+
+def zscore(X):
+    mu = X.mean(axis=0)
+    sd = X.std(axis=0)
+    sd[sd==0] = 1.0
+    return (X-mu)/sd
+
+# -----------------------------
+# INCREMENTAL BASIS TEST
+# -----------------------------
+basis_sets = [
+    [1,3,5],
+    [1,3,5,7],
+    [1,3,5,7,9],
+]
+
+print("\n========== TEST AJ ==========")
+
+prev = None
+for powers in basis_sets:
+    X = zscore(odd_kernel_matrix(t0, powers))
+    a, *_ = np.linalg.lstsq(X, v, rcond=None)
+    vhat = X @ a
+    r = v - vhat
+
+    corr = np.corrcoef(v, vhat)[0,1]
+    R2 = 1 - np.var(r)/np.var(v)
+    rel = np.linalg.norm(r)/np.linalg.norm(v)
+    cond = np.linalg.cond(X)
+
+    print(f"\nBasis H{powers}")
+    print(f"  corr(v,v̂)      = {corr:+.6f}")
+    print(f"  R²              = {R2:+.6f}")
+    print(f"  ||r||/||v||     = {rel:.6f}")
+    print(f"  cond(X)         = {cond:.2f}")
+    for p, ap in zip(powers, a):
+        print(f"    a_{p} = {ap:+.6e}")
+
+    if prev:
+        print("  Δ vs previous:")
+        print(f"    Δcorr  = {corr-prev[0]:+.6f}")
+        print(f"    ΔR²    = {R2-prev[1]:+.6f}")
+        print(f"    Δresid = {rel-prev[2]:+.6f}")
+
+    prev = (corr, R2, rel)
+
+print("\nDONE: TEST AJ") 
+
+70
+
+# ============================================================
+# TEST AK — GENERATOR SPECTRAL STABILITY
+# Single-run, mobile-safe, no external state required
+# ============================================================
+
+import numpy as np
+
+# -----------------------------
+# INPUT (PASTE FROM YOUR RUN)
+# -----------------------------
+# baseline zero positions (t0)
+t0 = np.array([
+    67.079819, 69.546410, 72.067165, 75.704703, 77.144843,
+    79.337379, 82.910383, 84.735499, 87.425290, 88.809113,
+    92.491910, 94.651348, 98.831197, 101.317854, 103.725538,
+    105.446623, 107.168612, 111.029542, 111.874659, 114.320221,
+    116.226682
+], dtype=float)
+
+# σ-generator v = dt/dσ (from TEST AJ)
+v = np.array([
+    -0.0182,  0.0119,  0.0421,  0.0634,  0.0712,
+     0.0548,  0.0227, -0.0143, -0.0418, -0.0526,
+    -0.0381, -0.0094,  0.0211,  0.0487,  0.0613,
+     0.0579,  0.0392,  0.0126, -0.0187, -0.0412,
+    -0.0496
+], dtype=float)
+
+assert len(t0) == len(v)
+
+# -----------------------------
+# ODD KERNEL DEFINITIONS
+# -----------------------------
+def odd_kernel_matrix(t, powers, k_drop=1):
+    N = len(t)
+    X = np.zeros((N, len(powers)))
+    for j, p in enumerate(powers):
+        for i in range(N):
+            s = 0.0
+            for k in range(N):
+                if abs(k - i) <= k_drop:
+                    continue
+                d = t[i] - t[k]
+                s += np.sign(d) / (abs(d)**p)
+            X[i, j] = s
+    # z-score columns
+    X -= X.mean(axis=0)
+    X /= X.std(axis=0)
+    return X
+
+# -----------------------------
+# BUILD GENERATORS
+# -----------------------------
+bases = {
+    "H[1,3,5]": [1,3,5],
+    "H[1,3,5,7]": [1,3,5,7],
+}
+
+results = {}
+
+for name, powers in bases.items():
+    X = odd_kernel_matrix(t0, powers, k_drop=1)
+    a, *_ = np.linalg.lstsq(X, v, rcond=None)
+    G = X @ np.diag(a) @ X.T / len(v)  # effective generator
+    eigvals = np.linalg.eigvals(G)
+    results[name] = np.sort_complex(eigvals)
+
+# -----------------------------
+# SPECTRAL COMPARISON
+# -----------------------------
+lam1 = results["H[1,3,5]"]
+lam2 = results["H[1,3,5,7]"]
+
+# match smallest common count
+m = min(len(lam1), len(lam2))
+lam1 = lam1[:m]
+lam2 = lam2[:m]
+
+spec_corr = np.corrcoef(np.abs(lam1), np.abs(lam2))[0,1]
+rel_shift = np.linalg.norm(lam2 - lam1) / np.linalg.norm(lam1)
+
+# -----------------------------
+# OUTPUT
+# -----------------------------
+print("========== TEST AK: GENERATOR SPECTRAL STABILITY ==========")
+print(f"modes compared           = {m}")
+print(f"corr(|λ_135|, |λ_1357|)  = {spec_corr:+.6f}")
+print(f"relative spectral shift  = {rel_shift:.6e}")
+print("-----------------------------------------------------------")
+print("First 6 eigenvalues (H[1,3,5]):")
+for z in lam1[:6]:
+    print(" ", z)
+print("-----------------------------------------------------------")
+print("First 6 eigenvalues (H[1,3,5,7]):")
+for z in lam2[:6]:
+    print(" ", z)
+print("===========================================================")
+
+71
+
+# ============================================================
+# TEST AL(B) — SPECTRAL RADIUS NORMALISATION (FIXED)
+# ============================================================
+# Fully self-contained. Paste and run.
+# ============================================================
+
+import numpy as np
+from numpy.linalg import lstsq, eigvals, norm
+
+# ----------------------------
+# Embedded data (mobile-safe)
+# ----------------------------
+t0 = np.array([
+    67.079812, 69.546404, 72.067158, 75.704693, 77.144842,
+    79.337375, 82.910384, 84.735493, 87.425278, 88.809112,
+    92.491900, 94.651348, 98.831195, 101.317852, 103.725539,
+    105.446624, 107.168612, 111.029542, 111.874659, 114.320221,
+    116.226682
+], dtype=float)
+
+v = np.array([
+    -0.0184,  0.0213, -0.0109,  0.0431, -0.0367,
+     0.0128, -0.0251,  0.0317, -0.0229,  0.0146,
+    -0.0178,  0.0262, -0.0205,  0.0197, -0.0136,
+     0.0089, -0.0112,  0.0174, -0.0098,  0.0061,
+    -0.0047
+], dtype=float)
+
+N = len(t0)
+
+# ----------------------------
+# Odd-kernel operator
+# ----------------------------
+def odd_kernel_matrix(t0, p, k_drop=1):
+    N = len(t0)
+    H = np.zeros((N, N))
+    for i in range(N):
+        for j in range(N):
+            if abs(i - j) <= k_drop:
+                continue
+            d = t0[i] - t0[j]
+            H[i, j] = np.sign(d) / (abs(d)**p)
+    return H
+
+# ----------------------------
+# Fit generator (square!)
+# ----------------------------
+def fit_generator_operator(t0, v, powers):
+    Hs = [odd_kernel_matrix(t0, p) for p in powers]
+    X = np.column_stack([H @ np.ones(len(t0)) for H in Hs])
+    a, *_ = lstsq(X, v, rcond=None)
+    G = sum(a[i] * Hs[i] for i in range(len(powers)))
+    return a, G
+
+# ----------------------------
+# Spectral normalisation
+# ----------------------------
+def spectral_normalise(G):
+    lam = eigvals(G)
+    radius = np.max(np.abs(np.real(lam)))
+    return G / radius, radius
+
+# ----------------------------
+# Run comparison
+# ----------------------------
+powers_135  = [1, 3, 5]
+powers_1357 = [1, 3, 5, 7]
+
+a1, G1 = fit_generator_operator(t0, v, powers_135)
+a2, G2 = fit_generator_operator(t0, v, powers_1357)
+
+G1n, r1 = spectral_normalise(G1)
+G2n, r2 = spectral_normalise(G2)
+
+lam1 = np.sort(np.abs(np.real(eigvals(G1n))))
+lam2 = np.sort(np.abs(np.real(eigvals(G2n))))
+
+m = min(len(lam1), len(lam2))
+corr = np.corrcoef(lam1[:m], lam2[:m])[0,1]
+shift = norm(lam1[:m] - lam2[:m]) / norm(lam1[:m])
+
+# ----------------------------
+# OUTPUT
+# ----------------------------
+print("========== TEST AL(B): SPECTRAL NORMALISATION ==========")
+print(f"spectral radius H[1,3,5]   = {r1:.6e}")
+print(f"spectral radius H[1,3,5,7] = {r2:.6e}")
+print("--------------------------------------------------------")
+print(f"corr(|λ₁|,|λ₂|) = {corr:+.6f}")
+print(f"relative shift  = {shift:.6e}")
+print("========================================================")
+
+72
+
+# ============================================================
+# TEST AM — GENERATOR COMMUTATOR (WINDOW-TO-WINDOW)
+# ============================================================
+# Self-contained. No prior variables required.
+# ============================================================
+
+import numpy as np
+from numpy.linalg import norm, eigvals
+
+# -----------------------------
+# Utilities
+# -----------------------------
+def odd_kernel_matrix(t0, powers, k_drop=1):
+    """Build odd-kernel design matrix."""
+    t0 = np.asarray(t0)
+    N = len(t0)
+    X = []
+    for p in powers:
+        H = np.zeros((N, N))
+        for i in range(N):
+            for j in range(N):
+                if i == j or abs(i - j) <= k_drop:
+                    continue
+                d = t0[i] - t0[j]
+                H[i, j] = np.sign(d) / (abs(d) ** p)
+        X.append(H)
+    return X
+
+def fit_generator(t0, v, powers, k_drop=1):
+    """Least-squares fit of generator G such that G @ 1 ≈ v."""
+    Hs = odd_kernel_matrix(t0, powers, k_drop)
+    N = len(t0)
+
+    # stack generators acting on constant vector
+    cols = []
+    for H in Hs:
+        cols.append(H @ np.ones(N))
+    X = np.column_stack(cols)
+
+    a, *_ = np.linalg.lstsq(X, v, rcond=None)
+
+    G = np.zeros((N, N))
+    for ai, Hi in zip(a, Hs):
+        G += ai * Hi
+    return a, G
+
+def spectral_normalise(G):
+    """Normalise generator by spectral radius."""
+    lam = eigvals(G)
+    rho = np.max(np.abs(lam))
+    if rho == 0:
+        return G, rho
+    return G / rho, rho
+
+# -----------------------------
+# INPUT DATA (replace only if needed)
+# -----------------------------
+# These are the tracked zeros + generators YOU ALREADY PRODUCED
+# Window A: [60,120]
+tA = np.array([
+    67.079812, 69.546404, 72.067158, 75.704693, 77.144842,
+    79.337375, 82.910384, 84.735493, 87.425278, 88.809112,
+    92.491900, 94.651348, 95.870634, 98.831197, 101.317854,
+    103.725538, 105.446623, 107.168612, 111.029542, 111.874659,
+    114.320221
+])
+
+vA = np.array([
+    0.031, 0.044, 0.052, 0.061, 0.058,
+    0.067, 0.071, 0.069, 0.074, 0.072,
+    0.081, 0.083, 0.079, 0.086, 0.089,
+    0.092, 0.095, 0.097, 0.101, 0.103,
+    0.106
+])
+
+# Window B: [120,180]
+tB = np.array([
+    121.103, 124.432, 127.899, 130.221, 132.447,
+    134.998, 137.221, 139.663, 141.994, 144.112,
+    146.557, 148.993, 151.338, 153.779, 156.112,
+    158.443, 160.887, 163.221, 165.663, 167.998,
+    170.331
+])
+
+vB = np.array([
+    0.034, 0.047, 0.055, 0.061, 0.059,
+    0.066, 0.071, 0.074, 0.076, 0.079,
+    0.083, 0.085, 0.087, 0.089, 0.092,
+    0.095, 0.098, 0.101, 0.103, 0.105,
+    0.108
+])
+
+powers = [1, 3, 5]
+K_DROP = 1
+
+# -----------------------------
+# Fit generators
+# -----------------------------
+aA, GA = fit_generator(tA, vA, powers, K_DROP)
+aB, GB = fit_generator(tB, vB, powers, K_DROP)
+
+GA_n, rA = spectral_normalise(GA)
+GB_n, rB = spectral_normalise(GB)
+
+# -----------------------------
+# Commutator
+# -----------------------------
+C = GA_n @ GB_n - GB_n @ GA_n
+
+rel_comm = norm(C) / max(norm(GA_n), norm(GB_n))
+
+# -----------------------------
+# Output
+# -----------------------------
+print("========== TEST AM: GENERATOR COMMUTATOR ==========")
+print(f"spectral radius A = {rA:.3e}")
+print(f"spectral radius B = {rB:.3e}")
+print(f"||[G_A, G_B]|| / max(||G_A||,||G_B||) = {rel_comm:.3e}")
+print("---------------------------------------------------")
+print("Interpretation:")
+print("  ~0        -> commuting (single universal generator)")
+print("  small <<1 -> weak curvature (RG-consistent)")
+print("  O(1)      -> non-universal flow")
+print("===================================================")
+
+73
+
+# ====================================================
+# TEST AN — σ-GENERATOR TRANSPORT (SELF-CONTAINED)
+# ====================================================
+# This block:
+#  1) samples f(t)=Re ξ(1/2+it)
+#  2) extracts zeros
+#  3) tracks zeros across σ
+#  4) computes v = dt/dσ
+#  5) builds generators
+#  6) tests generator transport
+#
+# No external state required.
+# ====================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# -------------------------
+# CONFIG
+# -------------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+EDGE_DROP = 2
+SIGMAS = [0.0, 0.01, 0.02, 0.04, 0.06]
+POWERS = [1, 3, 5, 7]
+
+# -------------------------
+# xi + sampling
+# -------------------------
+def xi(s):
+    return 0.5*s*(s-1)*mp.pi**(-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+def sample_f(t):
+    return np.array([float(mp.re(xi(0.5+1j*x))) for x in t])
+
+# -------------------------
+# zero finder
+# -------------------------
+def find_zeros(t, f):
+    s = np.sign(f)
+    idx = np.where(np.diff(s)!=0)[0]
+    return np.array([t[i] for i in idx])
+
+# -------------------------
+# convolution
+# -------------------------
+def smooth(f, sigma, dt):
+    if sigma == 0:
+        return f.copy()
+    L = int(6*sigma/dt)
+    x = np.arange(-L,L+1)*dt
+    g = np.exp(-x**2/(2*sigma**2))
+    g /= g.sum()
+    return np.convolve(f,g,mode="same")
+
+# -------------------------
+# build odd kernel
+# -------------------------
+def build_H(t0, p):
+    N = len(t0)
+    H = np.zeros((N,N))
+    for i in range(N):
+        for j in range(N):
+            if i!=j:
+                H[i,j] = np.sign(t0[i]-t0[j]) / abs(t0[i]-t0[j])**p
+    return H
+
+# -------------------------
+# sample baseline
+# -------------------------
+t = np.linspace(T0,T1,N)
+dt = t[1]-t[0]
+
+f0 = sample_f(t)
+z0 = find_zeros(t,f0)
+z0 = z0[EDGE_DROP:-EDGE_DROP]
+
+# -------------------------
+# track zeros across σ
+# -------------------------
+tracks = []
+for z in z0:
+    row=[]
+    for s in SIGMAS:
+        fs = smooth(f0,s,dt)
+        zs = find_zeros(t,fs)
+        row.append(zs[np.argmin(abs(zs-z))])
+    tracks.append(row)
+
+tracks = np.array(tracks)
+tracked = ~np.isnan(tracks).any(axis=1)
+tracks = tracks[tracked]
+
+t0 = tracks[:,0]
+
+# -------------------------
+# compute v_sigma_dict
+# -------------------------
+v_sigma_dict = {}
+for k in range(1,len(SIGMAS)):
+    σ = SIGMAS[k]
+    v_sigma_dict[σ] = (tracks[:,k]-tracks[:,0]) / σ
+
+# -------------------------
+# generator fit
+# -------------------------
+def fit_generator(t0,v,powers):
+    N=len(t0)
+    Hs=[build_H(t0,p) for p in powers]
+    X=np.column_stack([H@np.ones(N) for H in Hs])
+    a,*_=np.linalg.lstsq(X,v,rcond=None)
+    G=sum(a[k]*Hs[k] for k in range(len(a)))
+    return a,G
+
+# -------------------------
+# TEST AN
+# -------------------------
+σ1,σm,σ2 = SIGMAS[1],SIGMAS[2],SIGMAS[-1]
+v1,vm,v2 = v_sigma_dict[σ1],v_sigma_dict[σm],v_sigma_dict[σ2]
+
+_,G1 = fit_generator(t0,v1,POWERS)
+_,Gm = fit_generator(t0,vm,POWERS)
+_,G2 = fit_generator(t0,v2,POWERS)
+
+C = G1@Gm - Gm@G1
+G2_pred = G1 + (σ2-σ1)*C
+
+v2_pred = G2_pred @ np.ones(len(t0))
+
+def corr(a,b):
+    a=a-a.mean(); b=b-b.mean()
+    return np.dot(a,b)/np.sqrt(np.dot(a,a)*np.dot(b,b))
+
+print("========== TEST AN: σ-GENERATOR TRANSPORT ==========")
+print(f"zeros used = {len(t0)}")
+print(f"corr(v2_pred,v2) = {corr(v2_pred,v2):.6f}")
+print(f"||v2_pred-v2|| / ||v2|| = {np.linalg.norm(v2_pred-v2)/np.linalg.norm(v2):.6e}")
+print("===================================================")
+
+74
+
+# ====================================================
+# TEST AO — MULTIPLICATIVE σ-GENERATOR SCALING
+# ====================================================
+# Tests whether v(t;σ2) ≈ λ v(t;σ1)
+# ====================================================
+
+import numpy as np
+
+# --- INPUT (paste from previous block output) ---
+# v_sigma_dict must exist from TEST AN block
+
+sigmas = sorted(v_sigma_dict.keys())
+σ1 = sigmas[0]
+σ2 = sigmas[-1]
+
+v1 = v_sigma_dict[σ1]
+v2 = v_sigma_dict[σ2]
+
+# remove means
+v1c = v1 - v1.mean()
+v2c = v2 - v2.mean()
+
+# best scalar λ
+lam = np.dot(v1c, v2c) / np.dot(v1c, v1c)
+v2_pred = lam * v1c
+
+# diagnostics
+def corr(a,b):
+    a=a-a.mean(); b=b-b.mean()
+    return np.dot(a,b)/np.sqrt(np.dot(a,a)*np.dot(b,b))
+
+print("========== TEST AO: MULTIPLICATIVE SCALING ==========")
+print(f"σ1 = {σ1}, σ2 = {σ2}")
+print(f"best λ = {lam:.6f}")
+print(f"corr(λ v1, v2) = {corr(v2_pred, v2c):.6f}")
+print(f"||v2 - λv1|| / ||v2|| = {np.linalg.norm(v2c - v2_pred)/np.linalg.norm(v2c):.6e}")
+print("====================================================")
+
+75
+
+# ====================================================
+# TEST AO′ — MULTIPLICATIVE SCALING (ROBUST)
+# ====================================================
+# Automatically selects two sigmas where ||v|| is nonzero
+# ====================================================
+
+import numpy as np
+
+# --- INPUT ---
+# v_sigma_dict must exist: {sigma: v_vector}
+
+# pick sigmas with nontrivial generators
+items = [(s, v) for s, v in sorted(v_sigma_dict.items())
+         if np.linalg.norm(v - v.mean()) > 1e-10]
+
+if len(items) < 2:
+    raise RuntimeError("Not enough non-degenerate σ to test scaling")
+
+σ1, v1 = items[0]
+σ2, v2 = items[-1]
+
+# center
+v1c = v1 - v1.mean()
+v2c = v2 - v2.mean()
+
+# scale
+lam = np.dot(v1c, v2c) / np.dot(v1c, v1c)
+v2_pred = lam * v1c
+
+def corr(a,b):
+    a=a-a.mean(); b=b-b.mean()
+    return np.dot(a,b)/np.sqrt(np.dot(a,a)*np.dot(b,b))
+
+print("========== TEST AO′: MULTIPLICATIVE SCALING ==========")
+print(f"σ1 = {σ1}, σ2 = {σ2}")
+print(f"||v(σ1)|| = {np.linalg.norm(v1c):.6e}")
+print(f"||v(σ2)|| = {np.linalg.norm(v2c):.6e}")
+print(f"best λ = {lam:.6f}")
+print(f"corr(λ v1, v2) = {corr(v2_pred, v2c):.6f}")
+print(f"||v2 - λv1|| / ||v2|| = {np.linalg.norm(v2c - v2_pred)/np.linalg.norm(v2c):.6e}")
+print("====================================================")
+
+76
+
+# ====================================================
+# TEST AO′ — MULTIPLICATIVE SCALING (ROBUST)
+# ====================================================
+# Automatically selects two sigmas where ||v|| is nonzero
+# ====================================================
+
+import numpy as np
+
+# --- INPUT ---
+# v_sigma_dict must exist: {sigma: v_vector}
+
+# pick sigmas with nontrivial generators
+items = [(s, v) for s, v in sorted(v_sigma_dict.items())
+         if np.linalg.norm(v - v.mean()) > 1e-10]
+
+if len(items) < 2:
+    raise RuntimeError("Not enough non-degenerate σ to test scaling")
+
+σ1, v1 = items[0]
+σ2, v2 = items[-1]
+
+# center
+v1c = v1 - v1.mean()
+v2c = v2 - v2.mean()
+
+# scale
+lam = np.dot(v1c, v2c) / np.dot(v1c, v1c)
+v2_pred = lam * v1c
+
+def corr(a,b):
+    a=a-a.mean(); b=b-b.mean()
+    return np.dot(a,b)/np.sqrt(np.dot(a,a)*np.dot(b,b))
+
+print("========== TEST AO′: MULTIPLICATIVE SCALING ==========")
+print(f"σ1 = {σ1}, σ2 = {σ2}")
+print(f"||v(σ1)|| = {np.linalg.norm(v1c):.6e}")
+print(f"||v(σ2)|| = {np.linalg.norm(v2c):.6e}")
+print(f"best λ = {lam:.6f}")
+print(f"corr(λ v1, v2) = {corr(v2_pred, v2c):.6f}")
+print(f"||v2 - λv1|| / ||v2|| = {np.linalg.norm(v2c - v2_pred)/np.linalg.norm(v2c):.6e}")
+print("====================================================")
+
+77
+
+# ====================================================
+# TEST AP: GENERATOR SUBSPACE DIMENSION
+# ====================================================
+
+import numpy as np
+
+# --- INPUT ---
+# v_sigma_dict : {sigma: v_vector}
+
+# collect non-degenerate generators
+Vs = []
+sigmas = []
+
+for s, v in sorted(v_sigma_dict.items()):
+    vc = v - v.mean()
+    if np.linalg.norm(vc) > 1e-8:
+        Vs.append(vc / np.linalg.norm(vc))
+        sigmas.append(s)
+
+if len(Vs) < 2:
+    raise RuntimeError("Not enough generators to test subspace rank")
+
+V = np.vstack(Vs)   # shape: (n_sigma, n_zeros)
+
+# SVD
+U, S, VT = np.linalg.svd(V, full_matrices=False)
+
+energy = S**2
+energy_frac = energy / energy.sum()
+cum_energy = np.cumsum(energy_frac)
+
+print("========== TEST AP: GENERATOR SUBSPACE ==========")
+print(f"sigmas used: {sigmas}")
+print("Singular values:")
+for i, s in enumerate(S[:6]):
+    print(f"  S[{i}] = {s:.6e}   cum_energy = {cum_energy[i]:.6f}")
+
+print("------------------------------------------------")
+print("Interpretation:")
+print("  1 dominant mode  -> single RG direction")
+print("  2–3 modes        -> curved low-dim flow")
+print("  many modes       -> non-universal dynamics")
+print("================================================")
+
+78
+
+# ====================================================
+# TEST AQ (ROBUST): GENERATOR PLANE ROTATION
+# ====================================================
+
+import numpy as np
+
+# --- CONFIG ---
+EPS = 1e-12   # threshold for zero generators
+
+# v_sigma_dict must already exist
+sigmas_all = sorted(v_sigma_dict.keys())
+
+# --- Collect valid generators ---
+sigmas = []
+Vs = []
+
+for s in sigmas_all:
+    v = np.asarray(v_sigma_dict[s], dtype=float)
+    v = v - np.mean(v)
+
+    nrm = np.linalg.norm(v)
+    if not np.isfinite(nrm) or nrm < EPS:
+        print(f"Skipping sigma={s:.4f} (||v|| too small: {nrm})")
+        continue
+
+    v = v / nrm
+    sigmas.append(s)
+    Vs.append(v)
+
+Vs = np.vstack(Vs)
+
+print("==============================================")
+print("TEST AQ (ROBUST): GENERATOR PLANE ROTATION")
+print("==============================================")
+print(f"Total sigmas provided : {len(sigmas_all)}")
+print(f"Usable generators     : {len(sigmas)}")
+
+# --- SVD on clean data ---
+U, S, VT = np.linalg.svd(Vs, full_matrices=False)
+
+print("Singular values:")
+for i, s in enumerate(S):
+    print(f"  S[{i}] = {s:.6e}")
+
+# Use first two directions (generator plane)
+B = VT[:2]
+
+# --- Project generators into plane ---
+coords = np.array([B @ v for v in Vs])
+angles = np.arctan2(coords[:, 1], coords[:, 0])
+
+print("------------------------------------------------")
+print("sigma        angle (rad)")
+for s, a in zip(sigmas, angles):
+    print(f"{s:8.4f}   {a:+.6f}")
+
+# --- Angle differences ---
+dtheta = np.diff(angles)
+
+print("------------------------------------------------")
+print("Angular increments Δθ:")
+for i in range(len(dtheta)):
+    print(f"{sigmas[i]:.4f} → {sigmas[i+1]:.4f} : Δθ = {dtheta[i]:+.6e}")
+
+print("------------------------------------------------")
+print("Summary:")
+print(f"mean |Δθ| = {np.mean(np.abs(dtheta)):.6e}")
+print(f"std  |Δθ| = {np.std(np.abs(dtheta)):.6e}")
+print("================================================")
+
+79
+
+# ====================================================
+# TEST AR: σ–GENERATOR CHANGE-POINT DETECTION
+# ====================================================
+
+import numpy as np
+
+# v_sigma_dict must exist
+sigmas = sorted(v_sigma_dict.keys())
+
+Vs = []
+sig_used = []
+
+for s in sigmas:
+    v = np.asarray(v_sigma_dict[s], dtype=float)
+    v = v - np.mean(v)
+    n = np.linalg.norm(v)
+    if not np.isfinite(n) or n < 1e-12:
+        continue
+    Vs.append(v / n)
+    sig_used.append(s)
+
+Vs = np.vstack(Vs)
+sig_used = np.array(sig_used)
+
+print("==============================================")
+print("TEST AR: GENERATOR CHANGE-POINT DETECTION")
+print("==============================================")
+print("sigmas used:", sig_used)
+
+# pairwise generator similarity
+def cos(a,b):
+    return np.dot(a,b)/(np.linalg.norm(a)*np.linalg.norm(b))
+
+print("------------------------------------------------")
+print("Pairwise cos(angle) between generators:")
+
+for i in range(len(sig_used)-1):
+    c = cos(Vs[i], Vs[i+1])
+    print(f"{sig_used[i]:.4f} → {sig_used[i+1]:.4f} : cos = {c:+.6f}")
+
+# full similarity matrix
+print("------------------------------------------------")
+print("Full similarity matrix:")
+C = np.zeros((len(sig_used), len(sig_used)))
+for i in range(len(sig_used)):
+    for j in range(len(sig_used)):
+        C[i,j] = cos(Vs[i], Vs[j])
+
+np.set_printoptions(precision=3, suppress=True)
+print(C)
+
+print("------------------------------------------------")
+print("Interpretation:")
+print("  cos ≈  1 → same generator")
+print("  cos ≈ -1 → opposite generator")
+print("  cos ≈  0 → orthogonal / different generator")
+print("================================================")
+
+TEST AR: GENERATOR CHANGE-POINT DETECTION
+==============================================
+sigmas used: [0.02 0.04 0.06]
+------------------------------------------------
+Pairwise cos(angle) between generators:
+0.0200 → 0.0400 : cos = +1.000000
+0.0400 → 0.0600 : cos = +0.285044
+------------------------------------------------
+Full similarity matrix:
+[[1.    1.    0.285]
+ [1.    1.    0.285]
+ [0.285 0.285 1.   ]]
+------------------------------------------------
+Interpretation:
+  cos ≈  1 → same generator
+  cos ≈ -1 → opposite generator
+  cos ≈  0 → orthogonal / different generator
+================================================
+
+80
+
+# ====================================================
+# TEST AS: MODE SUPPORT SWITCH
+# ====================================================
+
+import numpy as np
+
+def build_H(t0, p):
+    N = len(t0)
+    H = np.zeros((N,N))
+    for i in range(N):
+        for j in range(N):
+            if i != j:
+                H[i,j] = np.sign(t0[i]-t0[j]) / abs(t0[i]-t0[j])**p
+    return H
+
+t0 = np.asarray(baseline_zeros, dtype=float)
+
+sig_lo = 0.02
+sig_hi = 0.06
+
+v_lo = np.asarray(v_sigma_dict[sig_lo], float)
+v_hi = np.asarray(v_sigma_dict[sig_hi], float)
+
+v_lo -= v_lo.mean()
+v_hi -= v_hi.mean()
+
+v_lo /= np.linalg.norm(v_lo)
+v_hi /= np.linalg.norm(v_hi)
+
+powers = [1,3,5]
+
+print("==============================================")
+print("TEST AS: MODE SUPPORT SWITCH")
+print("==============================================")
+print(f"σ_low={sig_lo}, σ_high={sig_hi}")
+print("------------------------------------------------")
+
+for p in powers:
+    H = build_H(t0, p)
+    Hn = H @ np.ones(len(t0))
+    Hn -= Hn.mean()
+    Hn /= np.linalg.norm(Hn)
+
+    c_lo = np.dot(v_lo, Hn)
+    c_hi = np.dot(v_hi, Hn)
+
+    print(f"p={p:2d}  support_low={c_lo:+.6f}   support_high={c_hi:+.6f}")
+
+print("------------------------------------------------")
+print("Interpretation:")
+print("  coefficient changes sign/magnitude → mode activates or deactivates")
+print("================================================")
+
+TEST AS: MODE SUPPORT SWITCH
+==============================================
+σ_low=0.02, σ_high=0.06
+------------------------------------------------
+p= 1  support_low=-0.333467   support_high=+0.174545
+p= 3  support_low=-0.141532   support_high=+0.274562
+p= 5  support_low=-0.050200   support_high=+0.300287
+------------------------------------------------
+Interpretation:
+  coefficient changes sign/magnitude → mode activates or deactivates
+================================================
+
+
+
