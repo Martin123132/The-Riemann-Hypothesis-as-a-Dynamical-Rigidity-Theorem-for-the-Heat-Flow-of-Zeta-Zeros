@@ -1,0 +1,1234 @@
+# ================= STEP 36 — σ-FLOW OF WINDING NUMBER =================
+# Self-contained, single-cell, no external state required.
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 16384
+EDGE_DROP = 2
+
+SIGMA0 = 0.06
+DSIGMAS = [-2e-5, -1e-5, 0.0, 1e-5, 2e-5]
+
+WIDTH = 0.20
+BOX_HALF_WIDTH = 0.5
+HY = 0.02          # fixed imaginary height (local box)
+NBOUND = 1024      # boundary resolution
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(tt)) for tt in t])
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    k = np.fft.fftfreq(len(f), d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z.append(t[i])
+    return np.array(z)
+
+def gaussian(t, tc, w):
+    return np.exp(-0.5*((t-tc)/w)**2)
+
+def d_gaussian(t, tc, w):
+    return -(t-tc)/(w*w) * gaussian(t, tc, w)
+
+def dd_gaussian(t, tc, w):
+    x = (t-tc)/w
+    return ((x*x - 1)/(w*w)) * gaussian(t, tc, w)
+
+def interp(f, tgrid, x):
+    return np.interp(x, tgrid, f)
+
+def deriv(f, tgrid, x):
+    i = np.searchsorted(tgrid, x)
+    if i <= 0 or i >= len(tgrid)-1:
+        return np.nan
+    return (f[i+1]-f[i-1])/(tgrid[i+1]-tgrid[i-1])
+
+# Argument principle (FFT-periodic analytic continuation)
+def winding_number(f, tgrid, center, halfwidth, Hy):
+    # rectangle boundary, counterclockwise
+    xs = np.linspace(center-halfwidth, center+halfwidth, NBOUND//4)
+    ys = np.linspace(-Hy, Hy, NBOUND//4)
+
+    path = []
+    path += [(x, -Hy) for x in xs]
+    path += [(center+halfwidth, y) for y in ys]
+    path += [(x, Hy) for x in xs[::-1]]
+    path += [(center-halfwidth, y) for y in ys[::-1]]
+
+    vals = []
+    for (x,y) in path:
+        phase = np.exp(2j*np.pi*np.fft.fftfreq(len(f), d=dt)*y)
+        Fc = np.fft.ifft(np.fft.fft(f) * phase)
+        vals.append(interp(np.real(Fc), tgrid, x)
+                    + 1j*interp(np.imag(Fc), tgrid, x))
+
+    args = np.unwrap(np.angle(vals))
+    return int(round((args[-1]-args[0])/(2*np.pi)))
+
+# ----------------------------
+# BUILD BASELINE
+# ----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+
+f0 = siegel_vals(t)
+f_sigma0 = smooth_fft(f0, dt, SIGMA0)
+
+zlist = find_zeros(t, f_sigma0)[EDGE_DROP:-EDGE_DROP]
+pairs = [(abs(zlist[i+1]-zlist[i]), zlist[i], zlist[i+1])
+         for i in range(len(zlist)-1)]
+pairs.sort()
+sep0, z1, z2 = pairs[0]
+tc0 = 0.5*(z1+z2)
+
+# ----------------------------
+# CODIM-3 FORCING AT tc0
+# ----------------------------
+g0 = gaussian(t, tc0, WIDTH)
+g1 = d_gaussian(t, tc0, WIDTH)
+g2 = dd_gaussian(t, tc0, WIDTH)
+
+M = np.array([
+    [interp(g0,t,tc0), interp(g1,t,tc0), interp(g2,t,tc0)],
+    [deriv(g0,t,tc0),  deriv(g1,t,tc0),  deriv(g2,t,tc0)],
+    [deriv(g1,t,tc0),  deriv(g2,t,tc0),  0.0]
+])
+
+rhs = -np.array([
+    interp(f_sigma0,t,tc0),
+    deriv(f_sigma0,t,tc0),
+    0.0
+])
+
+A,B,C = np.linalg.solve(M, rhs)
+
+# ----------------------------
+# σ-FLOW OF WINDING
+# ----------------------------
+print("================ STEP 36 — σ-FLOW OF WINDING =================")
+print(f"tc0={tc0:.6f}   Hy={HY}   halfwidth={BOX_HALF_WIDTH}")
+print("dsigma | winding")
+print("--------------------------------")
+
+for ds in DSIGMAS:
+    s = SIGMA0 + ds
+    fs = smooth_fft(f0, dt, s)
+    F = fs + A*g0 + B*g1 + C*g2
+    w = winding_number(F, t, tc0, BOX_HALF_WIDTH, HY)
+    print(f"{ds:+.1e} | {w:7d}")
+
+print("\nInterpretation:")
+print("• Constant winding under σ-flow → topological protection")
+print("• Jumping winding → complex escape channel")
+print("• Linear change → instability rate")
+print("================ STEP 36 DONE =================")
+
+
+=============== STEP 36 — σ-FLOW OF WINDING =================
+tc0=111.452115   Hy=0.02   halfwidth=0.5
+dsigma | winding
+--------------------------------
+-2.0e-05 |       0
+-1.0e-05 |       0
++0.0e+00 |       0
++1.0e-05 |       1
++2.0e-05 |      -1
+
+Interpretation:
+• Constant winding under σ-flow → topological protection
+• Jumping winding → complex escape channel
+• Linear change → instability rate
+
+================ STEP 36 DONE =================
+
+
+
+# ================= STEP 37 — ROBUST WINDING + RELIABILITY MAP =================
+# Self-contained, single-cell, no external state required.
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 16384
+EDGE_DROP = 2
+
+SIGMA0 = 0.06
+DSIGMAS = [-2e-5, -1e-5, 0.0, 1e-5, 2e-5]
+
+WIDTH = 0.20
+BOX_HALF_WIDTH = 0.5
+
+HY_LIST = [0.002, 0.005, 0.01, 0.02, 0.03]   # keep small first
+NBOUND = 4096                                # higher boundary resolution
+MINF_THRESH = 1e-6                           # validity threshold
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(tt)) for tt in t])
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    k = np.fft.fftfreq(len(f), d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z.append(t[i])
+    return np.array(z)
+
+def gaussian(t, tc, w):
+    return np.exp(-0.5*((t-tc)/w)**2)
+
+def d_gaussian(t, tc, w):
+    return -(t-tc)/(w*w) * gaussian(t, tc, w)
+
+def dd_gaussian(t, tc, w):
+    x = (t-tc)/w
+    return ((x*x - 1)/(w*w)) * gaussian(t, tc, w)
+
+def interp_real(f, tgrid, x):
+    return np.interp(x, tgrid, f)
+
+def deriv_real(f, tgrid, x):
+    i = np.searchsorted(tgrid, x)
+    if i <= 0 or i >= len(tgrid)-1:
+        return np.nan
+    return (f[i+1]-f[i-1])/(tgrid[i+1]-tgrid[i-1])
+
+def boundary_path(center, halfwidth, Hy, n):
+    # Rectangle boundary CCW
+    m = n//4
+    xs = np.linspace(center-halfwidth, center+halfwidth, m, endpoint=False)
+    ys = np.linspace(-Hy, Hy, m, endpoint=False)
+
+    path = []
+    # bottom
+    path += [(x, -Hy) for x in xs]
+    # right
+    path += [(center+halfwidth, y) for y in ys]
+    # top
+    path += [(x, Hy) for x in xs[::-1]]
+    # left
+    path += [(center-halfwidth, y) for y in ys[::-1]]
+    path.append(path[0])  # close
+    return path
+
+def analytic_continue_periodic(f_real, dt, y):
+    # periodic FFT continuation: f(t + i y) approx IFFT( FFT(f) * exp(-2π k y) ) with k in cycles/sec
+    # Here np.fft.fftfreq gives cycles per unit t. Multiplying by exp(-2π * freq * y) gives analytic continuation
+    freq = np.fft.fftfreq(len(f_real), d=dt)
+    F = np.fft.fft(f_real)
+    phase = np.exp(-2.0*np.pi*freq*y)  # decays for positive y; grows for negative y
+    # build complex continuation by applying phase to spectral components
+    fc = np.fft.ifft(F * phase)
+    return fc  # complex array over t-grid
+
+def winding_arg_unwrap(vals):
+    ang = np.unwrap(np.angle(vals))
+    return int(round((ang[-1]-ang[0])/(2*np.pi)))
+
+def winding_log_increment(vals):
+    # sum of principal increments of log along the path
+    # winding = (1/2πi) ∮ d log F
+    # discretized as sum log(F_{k+1}/F_k)
+    ratios = vals[1:] / vals[:-1]
+    inc = np.log(ratios)
+    total = np.sum(inc)
+    w = total / (2j*np.pi)
+    return int(round(np.real(w)))
+
+def eval_on_boundary(F_real, tgrid, dt, center, halfwidth, Hy, nbound):
+    path = boundary_path(center, halfwidth, Hy, nbound)
+    # Precompute two continuations for +/- imaginary parts used on boundary
+    # We'll compute continuation separately for each y encountered (small list size)
+    ys = sorted(set([y for (_,y) in path]))
+    cont = {}
+    for y in ys:
+        cont[y] = analytic_continue_periodic(F_real, dt, y)
+
+    vals = []
+    mins = []
+    for (x,y) in path:
+        fc = cont[y]
+        # interpolate complex array at x
+        re = np.interp(x, tgrid, np.real(fc))
+        im = np.interp(x, tgrid, np.imag(fc))
+        v = re + 1j*im
+        vals.append(v)
+        mins.append(abs(v))
+    vals = np.asarray(vals, complex)
+    minF = float(np.min(mins))
+    return vals, minF
+
+# ----------------------------
+# BUILD BASELINE
+# ----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+
+f0 = siegel_vals(t)
+f_sigma0 = smooth_fft(f0, dt, SIGMA0)
+
+zlist = find_zeros(t, f_sigma0)[EDGE_DROP:-EDGE_DROP]
+pairs = [(abs(zlist[i+1]-zlist[i]), zlist[i], zlist[i+1]) for i in range(len(zlist)-1)]
+pairs.sort()
+sep0, z1, z2 = pairs[0]
+tc0 = 0.5*(z1+z2)
+
+# ----------------------------
+# CODIM-3 FORCING AT tc0 (same idea as your step 35/32)
+# ----------------------------
+g0 = gaussian(t, tc0, WIDTH)
+g1 = d_gaussian(t, tc0, WIDTH)
+g2 = dd_gaussian(t, tc0, WIDTH)
+
+M = np.array([
+    [interp_real(g0,t,tc0), interp_real(g1,t,tc0), interp_real(g2,t,tc0)],
+    [deriv_real(g0,t,tc0),  deriv_real(g1,t,tc0),  deriv_real(g2,t,tc0)],
+    [deriv_real(g1,t,tc0),  deriv_real(g2,t,tc0),  0.0]
+], dtype=float)
+
+rhs = -np.array([
+    interp_real(f_sigma0,t,tc0),
+    deriv_real(f_sigma0,t,tc0),
+    0.0
+], dtype=float)
+
+A,B,C = np.linalg.solve(M, rhs)
+
+print("================ STEP 37 — ROBUST WINDING MAP =================")
+print(f"N={N}  dt={dt:.12e}")
+print(f"tc0={tc0:.6f} (closest-pair midpoint on σ0 slice)")
+print(f"forcing: A={A:+.3e}  B={B:+.3e}  C={C:+.3e}")
+print(f"halfwidth={BOX_HALF_WIDTH}  WIDTH={WIDTH}")
+print(f"MINF_THRESH={MINF_THRESH:g}  NBOUND={NBOUND}")
+print()
+
+# ----------------------------
+# SWEEP
+# ----------------------------
+print("Hy     dsigma   min|F|      w_arg  w_log   status")
+print("--------------------------------------------------------------")
+
+for Hy in HY_LIST:
+    for ds in DSIGMAS:
+        s = SIGMA0 + ds
+        fs = smooth_fft(f0, dt, s)
+        F_real = fs + A*g0 + B*g1 + C*g2
+
+        vals, minF = eval_on_boundary(F_real, t, dt, tc0, BOX_HALF_WIDTH, Hy, NBOUND)
+
+        w1 = winding_arg_unwrap(vals)
+        w2 = winding_log_increment(vals)
+
+        ok = (minF >= MINF_THRESH) and (w1 == w2)
+        status = "OK" if ok else ("LOWMIN" if minF < MINF_THRESH else "DISAGREE")
+
+        print(f"{Hy:0.3e} {ds:+0.1e}  {minF:0.3e}   {w1:5d}  {w2:5d}   {status}")
+
+print("\nInterpretation (practical):")
+print("• Trust only rows with status=OK (boundary not near zero AND methods agree).")
+print("• If OK rows show winding changing with dsigma -> real σ-instability / escape.")
+print("• If OK rows are constant across dsigma -> local topological protection.")
+print("• If everything is LOWMIN/DISAGREE -> box is grazing zeros; shrink halfwidth or Hy, or move tc0.")
+print("================ STEP 37 DONE =================")
+
+=============== STEP 37 — ROBUST WINDING MAP =================
+N=16384  dt=3.662332906060e-03
+tc0=111.452115 (closest-pair midpoint on σ0 slice)
+forcing: A=-0.000e+00  B=+2.062e-03  C=-1.234e-02
+halfwidth=0.5  WIDTH=0.2
+MINF_THRESH=1e-06  NBOUND=4096
+
+Hy     dsigma   min|F|      w_arg  w_log   status
+--------------------------------------------------------------
+2.000e-03 -2.0e-05  3.004e-05       4      4   OK
+2.000e-03 -1.0e-05  3.447e-05       4      4   OK
+2.000e-03 +0.0e+00  3.820e-05       4      4   OK
+2.000e-03 +1.0e-05  3.892e-05       4      4   OK
+2.000e-03 +2.0e-05  4.012e-05       4      4   OK
+5.000e-03 -2.0e-05  2.210e-04       4      4   OK
+5.000e-03 -1.0e-05  2.250e-04       4      4   OK
+5.000e-03 +0.0e+00  2.290e-04       4      4   OK
+5.000e-03 +1.0e-05  2.330e-04       4      4   OK
+5.000e-03 +2.0e-05  2.371e-04       4      4   OK
+1.000e-02 -2.0e-05  9.490e-04       4      4   OK
+1.000e-02 -1.0e-05  9.534e-04       4      4   OK
+1.000e-02 +0.0e+00  9.577e-04       4      4   OK
+1.000e-02 +1.0e-05  9.621e-04       4      4   OK
+1.000e-02 +2.0e-05  9.664e-04       4      4   OK
+2.000e-02 -2.0e-05  3.883e-03       4      4   OK
+2.000e-02 -1.0e-05  3.888e-03       4      4   OK
+2.000e-02 +0.0e+00  3.892e-03       4      4   OK
+2.000e-02 +1.0e-05  3.897e-03       4      4   OK
+2.000e-02 +2.0e-05  3.901e-03       4      4   OK
+3.000e-02 -2.0e-05  8.799e-03       4      4   OK
+3.000e-02 -1.0e-05  8.815e-03       4      4   OK
+3.000e-02 +0.0e+00  8.820e-03       4      4   OK
+3.000e-02 +1.0e-05  8.840e-03       4      4   OK
+3.000e-02 +2.0e-05  8.838e-03       4      4   OK
+
+Interpretation (practical):
+• Trust only rows with status=OK (boundary not near zero AND methods agree).
+• If OK rows show winding changing with dsigma -> real σ-instability / escape.
+• If OK rows are constant across dsigma -> local topological protection.
+• If everything is LOWMIN/DISAGREE -> box is grazing zeros; shrink halfwidth or Hy, or move tc0.
+================ STEP 37 DONE =================
+
+
+# ================= STEP 38 — BOX SHRINK + CENTER SENSITIVITY =================
+# Self-contained, single-cell, no external state required.
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 16384
+EDGE_DROP = 2
+
+SIGMA0 = 0.06
+DSIGMAS = [-2e-5, 0.0, 2e-5]   # keep small; we already know stability holds
+WIDTH = 0.20
+
+HY = 0.02                      # choose a stable Hy from step 37
+HALFWIDTHS = [0.50, 0.40, 0.30, 0.25, 0.20, 0.15, 0.12, 0.10, 0.08, 0.06, 0.05]
+
+# center perturbation (tests whether winding is just "count in box")
+DCENTERS = [0.0, -0.05, +0.05, -0.10, +0.10]  # shift the box center a bit
+
+NBOUND = 4096
+MINF_THRESH = 1e-6
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(tt)) for tt in t])
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    freq = np.fft.fftfreq(len(f), d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*freq*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z.append(t[i])
+    return np.array(z)
+
+def gaussian(t, tc, w):
+    return np.exp(-0.5*((t-tc)/w)**2)
+
+def d_gaussian(t, tc, w):
+    return -(t-tc)/(w*w) * gaussian(t, tc, w)
+
+def dd_gaussian(t, tc, w):
+    x = (t-tc)/w
+    return ((x*x - 1)/(w*w)) * gaussian(t, tc, w)
+
+def interp_real(f, tgrid, x):
+    return np.interp(x, tgrid, f)
+
+def deriv_real(f, tgrid, x):
+    i = np.searchsorted(tgrid, x)
+    if i <= 0 or i >= len(tgrid)-1:
+        return np.nan
+    return (f[i+1]-f[i-1])/(tgrid[i+1]-tgrid[i-1])
+
+def boundary_path(center, halfwidth, Hy, n):
+    m = n//4
+    xs = np.linspace(center-halfwidth, center+halfwidth, m, endpoint=False)
+    ys = np.linspace(-Hy, Hy, m, endpoint=False)
+    path = []
+    path += [(x, -Hy) for x in xs]                  # bottom
+    path += [(center+halfwidth, y) for y in ys]     # right
+    path += [(x, Hy) for x in xs[::-1]]             # top
+    path += [(center-halfwidth, y) for y in ys[::-1]]  # left
+    path.append(path[0])
+    return path
+
+def analytic_continue_periodic(f_real, dt, y):
+    freq = np.fft.fftfreq(len(f_real), d=dt)
+    F = np.fft.fft(f_real)
+    phase = np.exp(-2.0*np.pi*freq*y)
+    return np.fft.ifft(F * phase)
+
+def winding_arg_unwrap(vals):
+    ang = np.unwrap(np.angle(vals))
+    return int(round((ang[-1]-ang[0])/(2*np.pi)))
+
+def winding_log_increment(vals):
+    ratios = vals[1:] / vals[:-1]
+    inc = np.log(ratios)
+    total = np.sum(inc)
+    w = total / (2j*np.pi)
+    return int(round(np.real(w)))
+
+def eval_on_boundary(F_real, tgrid, dt, center, halfwidth, Hy, nbound):
+    path = boundary_path(center, halfwidth, Hy, nbound)
+    ys = sorted(set([y for (_,y) in path]))
+    cont = {y: analytic_continue_periodic(F_real, dt, y) for y in ys}
+
+    vals = []
+    minF = np.inf
+    for (x,y) in path:
+        fc = cont[y]
+        re = np.interp(x, tgrid, np.real(fc))
+        im = np.interp(x, tgrid, np.imag(fc))
+        v = re + 1j*im
+        vals.append(v)
+        av = abs(v)
+        if av < minF:
+            minF = av
+    return np.asarray(vals, complex), float(minF)
+
+# ----------------------------
+# BUILD BASELINE + FORCE (same codim-3)
+# ----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+
+f0 = siegel_vals(t)
+f_sigma0 = smooth_fft(f0, dt, SIGMA0)
+
+zlist = find_zeros(t, f_sigma0)[EDGE_DROP:-EDGE_DROP]
+pairs = [(abs(zlist[i+1]-zlist[i]), zlist[i], zlist[i+1]) for i in range(len(zlist)-1)]
+pairs.sort()
+sep0, z1, z2 = pairs[0]
+tc0 = 0.5*(z1+z2)
+
+g0 = gaussian(t, tc0, WIDTH)
+g1 = d_gaussian(t, tc0, WIDTH)
+g2 = dd_gaussian(t, tc0, WIDTH)
+
+M = np.array([
+    [interp_real(g0,t,tc0), interp_real(g1,t,tc0), interp_real(g2,t,tc0)],
+    [deriv_real(g0,t,tc0),  deriv_real(g1,t,tc0),  deriv_real(g2,t,tc0)],
+    [deriv_real(g1,t,tc0),  deriv_real(g2,t,tc0),  0.0]
+], dtype=float)
+
+rhs = -np.array([interp_real(f_sigma0,t,tc0), deriv_real(f_sigma0,t,tc0), 0.0], dtype=float)
+A,B,C = np.linalg.solve(M, rhs)
+
+print("================ STEP 38 — BOX SHRINK + CENTER SENSITIVITY =================")
+print(f"N={N}  dt={dt:.12e}  SIGMA0={SIGMA0}")
+print(f"tc0={tc0:.6f}  (closest-pair midpoint)")
+print(f"forcing: A={A:+.3e}  B={B:+.3e}  C={C:+.3e}  WIDTH={WIDTH}  Hy={HY}")
+print()
+
+# ----------------------------
+# SWEEP: halfwidth + center shifts + dsigma
+# ----------------------------
+for dc in DCENTERS:
+    center = tc0 + dc
+    print(f"--- center shift dc={dc:+.3f}  center={center:.6f} ---")
+    print("halfW   dsigma   min|F|      w_arg  w_log  status")
+    print("---------------------------------------------------------")
+    for hw in HALFWIDTHS:
+        for ds in DSIGMAS:
+            s = SIGMA0 + ds
+            fs = smooth_fft(f0, dt, s)
+            F_real = fs + A*g0 + B*g1 + C*g2
+            vals, minF = eval_on_boundary(F_real, t, dt, center, hw, HY, NBOUND)
+            w1 = winding_arg_unwrap(vals)
+            w2 = winding_log_increment(vals)
+            ok = (minF >= MINF_THRESH) and (w1 == w2)
+            status = "OK" if ok else ("LOWMIN" if minF < MINF_THRESH else "DISAGREE")
+            print(f"{hw:5.2f}  {ds:+0.1e}  {minF:0.3e}   {w1:5d}  {w2:5d}  {status}")
+    print()
+
+print("Notes:")
+print("• If winding stays fixed as halfW shrinks -> invariant is localized near tc0.")
+print("• If winding drops in steps (4->2->0) as halfW shrinks -> you're just counting how many zeros the box encloses.")
+print("• Trust only rows with status=OK.")
+print("================ STEP 38 DONE =================")
+
+
+================ STEP 38 — BOX SHRINK + CENTER SENSITIVITY =================
+N=16384  dt=3.662332906060e-03  SIGMA0=0.06
+tc0=111.452115  (closest-pair midpoint)
+forcing: A=-0.000e+00  B=+2.062e-03  C=-1.234e-02  WIDTH=0.2  Hy=0.02
+
+--- center shift dc=+0.000  center=111.452115 ---
+halfW   dsigma   min|F|      w_arg  w_log  status
+---------------------------------------------------------
+ 0.50  -2.0e-05  3.883e-03       4      4  OK
+ 0.50  +0.0e+00  3.892e-03       4      4  OK
+ 0.50  +2.0e-05  3.901e-03       4      4  OK
+ 0.40  -2.0e-05  3.884e-03       2      2  OK
+ 0.40  +0.0e+00  3.893e-03       2      2  OK
+ 0.40  +2.0e-05  3.901e-03       2      2  OK
+ 0.30  -2.0e-05  3.885e-03       2      2  OK
+ 0.30  +0.0e+00  3.893e-03       2      2  OK
+ 0.30  +2.0e-05  3.902e-03       2      2  OK
+ 0.25  -2.0e-05  3.883e-03       2      2  OK
+ 0.25  +0.0e+00  3.892e-03       2      2  OK
+ 0.25  +2.0e-05  3.901e-03       2      2  OK
+ 0.20  -2.0e-05  3.884e-03       2      2  OK
+ 0.20  +0.0e+00  3.893e-03       2      2  OK
+ 0.20  +2.0e-05  3.901e-03       2      2  OK
+ 0.15  -2.0e-05  3.883e-03       2      2  OK
+ 0.15  +0.0e+00  3.892e-03       2      2  OK
+ 0.15  +2.0e-05  3.901e-03       2      2  OK
+ 0.12  -2.0e-05  3.883e-03       2      2  OK
+ 0.12  +0.0e+00  3.892e-03       2      2  OK
+ 0.12  +2.0e-05  3.901e-03       2      2  OK
+ 0.10  -2.0e-05  3.883e-03       2      2  OK
+ 0.10  +0.0e+00  3.892e-03       2      2  OK
+ 0.10  +2.0e-05  3.901e-03       2      2  OK
+ 0.08  -2.0e-05  3.883e-03       2      2  OK
+ 0.08  +0.0e+00  3.892e-03       2      2  OK
+ 0.08  +2.0e-05  3.901e-03       2      2  OK
+ 0.06  -2.0e-05  3.883e-03       2      2  OK
+ 0.06  +0.0e+00  3.892e-03       2      2  OK
+ 0.06  +2.0e-05  3.901e-03       2      2  OK
+ 0.05  -2.0e-05  3.883e-03       2      2  OK
+ 0.05  +0.0e+00  3.892e-03       2      2  OK
+ 0.05  +2.0e-05  3.901e-03       2      2  OK
+
+--- center shift dc=-0.050  center=111.402115 ---
+halfW   dsigma   min|F|      w_arg  w_log  status
+---------------------------------------------------------
+ 0.50  -2.0e-05  3.884e-03       3      3  OK
+ 0.50  +0.0e+00  3.893e-03       3      3  OK
+ 0.50  +2.0e-05  3.901e-03       3      3  OK
+ 0.40  -2.0e-05  3.884e-03       2      2  OK
+ 0.40  +0.0e+00  3.893e-03       2      2  OK
+ 0.40  +2.0e-05  3.901e-03       2      2  OK
+ 0.30  -2.0e-05  3.883e-03       2      2  OK
+ 0.30  +0.0e+00  3.892e-03       2      2  OK
+ 0.30  +2.0e-05  3.901e-03       2      2  OK
+ 0.25  -2.0e-05  3.884e-03       2      2  OK
+ 0.25  +0.0e+00  3.893e-03       2      2  OK
+ 0.25  +2.0e-05  3.901e-03       2      2  OK
+ 0.20  -2.0e-05  3.884e-03       2      2  OK
+ 0.20  +0.0e+00  3.893e-03       2      2  OK
+ 0.20  +2.0e-05  3.901e-03       2      2  OK
+ 0.15  -2.0e-05  3.883e-03       2      2  OK
+ 0.15  +0.0e+00  3.892e-03       2      2  OK
+ 0.15  +2.0e-05  3.901e-03       2      2  OK
+ 0.12  -2.0e-05  3.883e-03       2      2  OK
+ 0.12  +0.0e+00  3.892e-03       2      2  OK
+ 0.12  +2.0e-05  3.901e-03       2      2  OK
+ 0.10  -2.0e-05  3.883e-03       2      2  OK
+ 0.10  +0.0e+00  3.892e-03       2      2  OK
+ 0.10  +2.0e-05  3.901e-03       2      2  OK
+ 0.08  -2.0e-05  3.883e-03       2      2  OK
+ 0.08  +0.0e+00  3.892e-03       2      2  OK
+ 0.08  +2.0e-05  3.901e-03       2      2  OK
+ 0.06  -2.0e-05  1.005e-03       2      2  OK
+ 0.06  +0.0e+00  9.965e-04       2      2  OK
+ 0.06  +2.0e-05  9.877e-04       2      2  OK
+ 0.05  -2.0e-05  3.107e-07       0      0  LOWMIN
+ 0.05  +0.0e+00  8.488e-16       1      1  LOWMIN
+ 0.05  +2.0e-05  8.861e-06       1      1  OK
+
+--- center shift dc=+0.050  center=111.502115 ---
+halfW   dsigma   min|F|      w_arg  w_log  status
+---------------------------------------------------------
+ 0.50  -2.0e-05  3.884e-03       3      3  OK
+ 0.50  +0.0e+00  3.893e-03       3      3  OK
+ 0.50  +2.0e-05  3.902e-03       3      3  OK
+ 0.40  -2.0e-05  3.884e-03       2      2  OK
+ 0.40  +0.0e+00  3.893e-03       2      2  OK
+ 0.40  +2.0e-05  3.901e-03       2      2  OK
+ 0.30  -2.0e-05  3.884e-03       2      2  OK
+ 0.30  +0.0e+00  3.892e-03       2      2  OK
+ 0.30  +2.0e-05  3.901e-03       2      2  OK
+ 0.25  -2.0e-05  3.884e-03       2      2  OK
+ 0.25  +0.0e+00  3.893e-03       2      2  OK
+ 0.25  +2.0e-05  3.902e-03       2      2  OK
+ 0.20  -2.0e-05  3.884e-03       2      2  OK
+ 0.20  +0.0e+00  3.893e-03       2      2  OK
+ 0.20  +2.0e-05  3.901e-03       2      2  OK
+ 0.15  -2.0e-05  3.884e-03       2      2  OK
+ 0.15  +0.0e+00  3.892e-03       2      2  OK
+ 0.15  +2.0e-05  3.901e-03       2      2  OK
+ 0.12  -2.0e-05  3.884e-03       2      2  OK
+ 0.12  +0.0e+00  3.892e-03       2      2  OK
+ 0.12  +2.0e-05  3.901e-03       2      2  OK
+ 0.10  -2.0e-05  3.883e-03       2      2  OK
+ 0.10  +0.0e+00  3.892e-03       2      2  OK
+ 0.10  +2.0e-05  3.901e-03       2      2  OK
+ 0.08  -2.0e-05  3.883e-03       2      2  OK
+ 0.08  +0.0e+00  3.892e-03       2      2  OK
+ 0.08  +2.0e-05  3.901e-03       2      2  OK
+ 0.06  -2.0e-05  1.006e-03       2      2  OK
+ 0.06  +0.0e+00  9.971e-04       2      2  OK
+ 0.06  +2.0e-05  9.882e-04       2      2  OK
+ 0.05  -2.0e-05  3.107e-07       2      2  LOWMIN
+ 0.05  +0.0e+00  8.488e-16       1      1  LOWMIN
+ 0.05  +2.0e-05  8.861e-06       1      1  OK
+
+--- center shift dc=-0.100  center=111.352115 ---
+halfW   dsigma   min|F|      w_arg  w_log  status
+---------------------------------------------------------
+ 0.50  -2.0e-05  3.886e-03       3      3  OK
+ 0.50  +0.0e+00  3.894e-03       3      3  OK
+ 0.50  +2.0e-05  3.903e-03       3      3  OK
+ 0.40  -2.0e-05  3.884e-03       3      3  OK
+ 0.40  +0.0e+00  3.893e-03       3      3  OK
+ 0.40  +2.0e-05  3.901e-03       3      3  OK
+ 0.30  -2.0e-05  3.884e-03       2      2  OK
+ 0.30  +0.0e+00  3.892e-03       2      2  OK
+ 0.30  +2.0e-05  3.901e-03       2      2  OK
+ 0.25  -2.0e-05  3.884e-03       2      2  OK
+ 0.25  +0.0e+00  3.892e-03       2      2  OK
+ 0.25  +2.0e-05  3.901e-03       2      2  OK
+ 0.20  -2.0e-05  3.884e-03       2      2  OK
+ 0.20  +0.0e+00  3.893e-03       2      2  OK
+ 0.20  +2.0e-05  3.901e-03       2      2  OK
+ 0.15  -2.0e-05  3.884e-03       2      2  OK
+ 0.15  +0.0e+00  3.892e-03       2      2  OK
+ 0.15  +2.0e-05  3.901e-03       2      2  OK
+ 0.12  -2.0e-05  3.884e-03       2      2  OK
+ 0.12  +0.0e+00  3.892e-03       2      2  OK
+ 0.12  +2.0e-05  3.891e-03       2      2  OK
+ 0.10  -2.0e-05  3.107e-07       0      0  LOWMIN
+ 0.10  +0.0e+00  8.488e-16       1      1  LOWMIN
+ 0.10  +2.0e-05  8.861e-06       1      1  OK
+ 0.08  -2.0e-05  3.914e-03       0      0  OK
+ 0.08  +0.0e+00  3.905e-03       0      0  OK
+ 0.08  +2.0e-05  3.896e-03       0      0  OK
+ 0.06  -2.0e-05  1.529e-02       0      0  OK
+ 0.06  +0.0e+00  1.528e-02       0      0  OK
+ 0.06  +2.0e-05  1.527e-02       0      0  OK
+ 0.05  -2.0e-05  2.364e-02       0      0  OK
+ 0.05  +0.0e+00  2.363e-02       0      0  OK
+ 0.05  +2.0e-05  2.362e-02       0      0  OK
+
+--- center shift dc=+0.100  center=111.552115 ---
+halfW   dsigma   min|F|      w_arg  w_log  status
+---------------------------------------------------------
+ 0.50  -2.0e-05  3.886e-03       3      3  OK
+ 0.50  +0.0e+00  3.895e-03       3      3  OK
+ 0.50  +2.0e-05  3.903e-03       3      3  OK
+ 0.40  -2.0e-05  3.884e-03       3      3  OK
+ 0.40  +0.0e+00  3.893e-03       3      3  OK
+ 0.40  +2.0e-05  3.901e-03       3      3  OK
+ 0.30  -2.0e-05  3.883e-03       2      2  OK
+ 0.30  +0.0e+00  3.892e-03       2      2  OK
+ 0.30  +2.0e-05  3.901e-03       2      2  OK
+ 0.25  -2.0e-05  3.883e-03       2      2  OK
+ 0.25  +0.0e+00  3.892e-03       2      2  OK
+ 0.25  +2.0e-05  3.901e-03       2      2  OK
+ 0.20  -2.0e-05  3.884e-03       2      2  OK
+ 0.20  +0.0e+00  3.893e-03       2      2  OK
+ 0.20  +2.0e-05  3.901e-03       2      2  OK
+ 0.15  -2.0e-05  3.883e-03       2      2  OK
+ 0.15  +0.0e+00  3.892e-03       2      2  OK
+ 0.15  +2.0e-05  3.901e-03       2      2  OK
+ 0.12  -2.0e-05  3.883e-03       2      2  OK
+ 0.12  +0.0e+00  3.892e-03       2      2  OK
+ 0.12  +2.0e-05  3.896e-03       2      2  OK
+ 0.10  -2.0e-05  3.107e-07       2      2  LOWMIN
+ 0.10  +0.0e+00  8.488e-16       1      1  LOWMIN
+ 0.10  +2.0e-05  8.861e-06       1      1  OK
+ 0.08  -2.0e-05  3.908e-03       0      0  OK
+ 0.08  +0.0e+00  3.900e-03       0      0  OK
+ 0.08  +2.0e-05  3.891e-03       0      0  OK
+ 0.06  -2.0e-05  1.525e-02       0      0  OK
+ 0.06  +0.0e+00  1.524e-02       0      0  OK
+ 0.06  +2.0e-05  1.524e-02       0      0  OK
+ 0.05  -2.0e-05  2.357e-02       0      0  OK
+ 0.05  +0.0e+00  2.356e-02       0      0  OK
+ 0.05  +2.0e-05  2.355e-02       0      0  OK
+
+Notes:
+• If winding stays fixed as halfW shrinks -> invariant is localized near tc0.
+• If winding drops in steps (4->2->0) as halfW shrinks -> you're just counting how many zeros the box encloses.
+• Trust only rows with status=OK.
+================ STEP 38 DONE =================
+
+
+# ================= STEP 39 — PAIR-CENTER σ-FLOW (UNFORCED) =================
+# Self-contained, single-cell, no external state required.
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 16384
+EDGE_DROP = 2
+
+SIGMA0 = 0.06
+DSIGMAS = [-5e-05, -2e-05, -1e-05, 0.0, 1e-05, 2e-05, 5e-05]
+
+PAIR_RADIUS = 0.8   # how local the pair must remain
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(tt)) for tt in t])
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    k = np.fft.fftfreq(len(f), d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z.append(t[i])
+    return np.array(z)
+
+def nearest_pair(z):
+    pairs = [(abs(z[i+1]-z[i]), z[i], z[i+1]) for i in range(len(z)-1)]
+    pairs.sort()
+    return pairs[0]
+
+# ----------------------------
+# BUILD BASELINE
+# ----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+f0 = siegel_vals(t)
+
+f_sigma0 = smooth_fft(f0, dt, SIGMA0)
+z0 = find_zeros(t, f_sigma0)[EDGE_DROP:-EDGE_DROP]
+
+sep0, z1_0, z2_0 = nearest_pair(z0)
+center0 = 0.5 * (z1_0 + z2_0)
+
+print("Initial nearest pair at σ0:")
+print(f"  z1={z1_0:.6f}  z2={z2_0:.6f}")
+print(f"  sep0={sep0:.6e}  center0={center0:.6f}")
+print()
+
+# ----------------------------
+# σ-FLOW TRACKING
+# ----------------------------
+print("================ σ-FLOW PAIR TRANSPORT =================")
+print("dsigma | z1       z2       | center    sep       | dcenter/dσ  dsep/dσ")
+print("-----------------------------------------------------------------------")
+
+prev_center = None
+prev_sep = None
+prev_ds = None
+
+for ds in DSIGMAS:
+    sigma = SIGMA0 + ds
+    f_s = smooth_fft(f0, dt, sigma)
+    z = find_zeros(t, f_s)
+    z = z[np.abs(z - center0) <= PAIR_RADIUS]
+
+    if len(z) < 2:
+        print(f"{ds:+.1e} |  LOST PAIR")
+        prev_center = prev_sep = prev_ds = None
+        continue
+
+    sep, a, b = nearest_pair(z)
+    center = 0.5 * (a + b)
+
+    if prev_center is not None:
+        dcenter = (center - prev_center) / (ds - prev_ds)
+        dsep = (sep - prev_sep) / (ds - prev_ds)
+        print(f"{ds:+.1e} | {a:8.6f} {b:8.6f} | {center:8.6f} {sep:8.6e} | {dcenter:+.3e} {dsep:+.3e}")
+    else:
+        print(f"{ds:+.1e} | {a:8.6f} {b:8.6f} | {center:8.6f} {sep:8.6e} |     ---        ---")
+
+    prev_center = center
+    prev_sep = sep
+    prev_ds = ds
+
+print("\n================ INTERPRETATION =================")
+print("• dcenter/dσ ≈ 0   → center pinned under σ-flow")
+print("• dsep/dσ > 0      → σ-flow induces repulsion")
+print("• dsep/dσ < 0      → σ-flow induces attraction")
+print("• sign change      → nontrivial interaction")
+print("================================================")
+
+
+Initial nearest pair at σ0:
+  z1=111.038271  z2=111.865959
+  sep0=8.276872e-01  center0=111.452115
+
+================ σ-FLOW PAIR TRANSPORT =================
+dsigma | z1       z2       | center    sep       | dcenter/dσ  dsep/dσ
+-----------------------------------------------------------------------
+-5.0e-05 | 111.038271 111.865959 | 111.452115 8.276872e-01 |     ---        ---
+-2.0e-05 | 111.038271 111.865959 | 111.452115 8.276872e-01 | +0.000e+00 +0.000e+00
+-1.0e-05 | 111.038271 111.865959 | 111.452115 8.276872e-01 | +0.000e+00 +0.000e+00
++0.0e+00 | 111.038271 111.865959 | 111.452115 8.276872e-01 | +0.000e+00 +0.000e+00
++1.0e-05 | 111.038271 111.865959 | 111.452115 8.276872e-01 | +0.000e+00 +0.000e+00
++2.0e-05 | 111.038271 111.865959 | 111.452115 8.276872e-01 | +0.000e+00 +0.000e+00
++5.0e-05 | 111.038271 111.865959 | 111.452115 8.276872e-01 | +0.000e+00 +0.000e+00
+
+================ INTERPRETATION =================
+• dcenter/dσ ≈ 0   → center pinned under σ-flow
+• dsep/dσ > 0      → σ-flow induces repulsion
+• dsep/dσ < 0      → σ-flow 
+induces attraction
+• sign change      → nontrivial interaction
+=======
+
+# ================= STEP 40 — σ-FLOW PAIR TRANSPORT (REFINED ROOTS, UNFORCED) =================
+# Self-contained, single-cell, no external state required.
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 16384
+EDGE_DROP = 2
+
+SIGMA0 = 0.06
+DSIGMAS = [-5e-04, -2e-04, -1e-04, -5e-05, -2e-05, -1e-05, 0.0, 1e-05, 2e-05, 5e-05, 1e-04, 2e-04, 5e-04]
+
+PAIR_RADIUS = 1.2  # keep only roots near the σ0 pair center
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(tt)) for tt in t], dtype=float)
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    k = np.fft.fftfreq(len(f), d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def refined_roots_from_samples(t, f):
+    # Find sign-change brackets and refine each root by linear crossing:
+    # root = t0 + (0 - f0)*(t1 - t0)/(f1 - f0)
+    roots = []
+    for i in range(len(f)-1):
+        f0, f1 = f[i], f[i+1]
+        if f0 == 0.0:
+            roots.append(t[i])
+        elif f0*f1 < 0.0:
+            denom = (f1 - f0)
+            if denom != 0.0:
+                r = t[i] + (-f0)*(t[i+1]-t[i]) / denom
+                roots.append(r)
+    return np.array(roots, dtype=float)
+
+def nearest_pair(z):
+    z = np.sort(z)
+    if len(z) < 2:
+        return None
+    seps = np.diff(z)
+    j = np.argmin(seps)
+    return float(seps[j]), float(z[j]), float(z[j+1])
+
+# ----------------------------
+# BUILD BASELINE
+# ----------------------------
+t = np.linspace(T0, T1, N, dtype=float)
+dt = t[1] - t[0]
+f0 = siegel_vals(t)
+
+f_sigma0 = smooth_fft(f0, dt, SIGMA0)
+z0_all = refined_roots_from_samples(t, f_sigma0)
+z0_all = z0_all[EDGE_DROP:-EDGE_DROP] if len(z0_all) > 2*EDGE_DROP else z0_all
+
+pair0 = nearest_pair(z0_all)
+assert pair0 is not None, "Not enough roots found at sigma0"
+sep0, z1_0, z2_0 = pair0
+center0 = 0.5 * (z1_0 + z2_0)
+
+print("Initial nearest pair at σ0 (REFINED):")
+print(f"  z1={z1_0:.9f}  z2={z2_0:.9f}")
+print(f"  sep0={sep0:.9e}  center0={center0:.9f}")
+print(f"  dt={dt:.9e}  sep0/dt={sep0/dt:.3f}")
+print()
+
+# ----------------------------
+# σ-FLOW TRACKING
+# ----------------------------
+print("================ σ-FLOW PAIR TRANSPORT (REFINED) =================")
+print("dsigma | z1            z2            | center         sep           | dcenter/dσ     dsep/dσ")
+print("-----------------------------------------------------------------------------------------------")
+
+prev_center = None
+prev_sep = None
+prev_ds = None
+
+for ds in DSIGMAS:
+    sigma = SIGMA0 + ds
+    f_s = smooth_fft(f0, dt, sigma)
+    z_all = refined_roots_from_samples(t, f_s)
+    if len(z_all) > 2*EDGE_DROP:
+        z_all = z_all[EDGE_DROP:-EDGE_DROP]
+
+    # Keep local neighborhood around baseline center
+    z_local = z_all[np.abs(z_all - center0) <= PAIR_RADIUS]
+
+    pair = nearest_pair(z_local)
+    if pair is None:
+        print(f"{ds:+.1e} | LOST PAIR (n_local={len(z_local)})")
+        prev_center = prev_sep = prev_ds = None
+        continue
+
+    sep, a, b = pair
+    center = 0.5 * (a + b)
+
+    if prev_center is not None:
+        dcenter = (center - prev_center) / (ds - prev_ds)
+        dsep = (sep - prev_sep) / (ds - prev_ds)
+        print(f"{ds:+.1e} | {a:12.9f} {b:12.9f} | {center:12.9f} {sep:12.9e} | {dcenter:+.3e} {dsep:+.3e}")
+    else:
+        print(f"{ds:+.1e} | {a:12.9f} {b:12.9f} | {center:12.9f} {sep:12.9e} |     ---         ---")
+
+    prev_center = center
+    prev_sep = sep
+    prev_ds = ds
+
+print("\n================ READOUT =================")
+print("If Step 39 was grid-locked, you should now see small but nonzero drift in z1,z2 with dsigma.")
+print("If this still prints EXACTLY identical values across dsigma, then your σ-smoothing is effectively not changing the sampled function in that window (unlikely) or precision is too low.")
+print("=========================================")
+
+
+
+REFINED):
+  z1=111.038313767  z2=111.868602417
+  sep0=8.302886497e-01  center0=111.453458092
+  dt=3.662332906e-03  sep0/dt=226.710
+
+================ σ-FLOW PAIR TRANSPORT (REFINED) =================
+dsigma | z1            z2            | center         sep           | dcenter/dσ     dsep/dσ
+-----------------------------------------------------------------------------------------------
+-5.0e-04 | 111.038166883 111.868704448 | 111.453435665 8.305375658e-01 |     ---         ---
+-2.0e-04 | 111.038254638 111.868643336 | 111.453448987 8.303886974e-01 | +4.440e-02 -4.962e-01
+-1.0e-04 | 111.038284102 111.868622894 | 111.453453498 8.303387918e-01 | +4.511e-02 -4.991e-01
+-5.0e-05 | 111.038298928 111.868612660 | 111.453455794 8.303137313e-01 | +4.592e-02 -5.012e-01
+-2.0e-05 | 111.038307830 111.868606515 | 111.453457173 8.302986849e-01 | +4.595e-02 -5.015e-01
+-1.0e-05 | 111.038310798 111.868604466 | 111.453457632 8.302936678e-01 | +4.596e-02 -5.017e-01
++0.0e+00 | 111.038313767 111.868602417 | 111.453458092 8.302886497e-01 | +4.597e-02 -5.018e-01
++1.0e-05 | 111.038316736 111.868600367 | 111.453458552 8.302836309e-01 | +4.598e-02 -5.019e-01
++2.0e-05 | 111.038319706 111.868598317 | 111.453459012 8.302786112e-01 | +4.599e-02 -5.020e-01
++5.0e-05 | 111.038328618 111.868592165 | 111.453460392 8.302635469e-01 | +4.600e-02 -5.021e-01
++1.0e-04 | 111.038343481 111.868581904 | 111.453462693 8.302384230e-01 | +4.603e-02 -5.025e-01
++2.0e-04 | 111.038373245 111.868561357 | 111.453467301 8.301881115e-01 | +4.608e-02 -5.031e-01
++5.0e-04 | 111.038462832 111.868499501 | 111.453481167 8.300366685e-01 | +4.622e-02 -5.048e-01
+
+================ READOUT =================
+If Step 39 was grid-locked, you should now see small but nonzero drift in z1,z2 with dsigma.
+If this still prints EXACTLY identical values across dsigma, then your σ-smoothing is effectively not changing the sampled function in that window (unlikely) or precision is too low.
+=========================================
+
+# ================= STEP 41 — σ-FLOW CONTINUITY TRACKING (IDENTITY-SAFE) =================
+# Self-contained, single-cell.
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 16384
+EDGE_DROP = 2
+
+SIGMA0 = 0.06
+DSIGMAS = [-5e-04, -2e-04, -1e-04, -5e-05, -2e-05, -1e-05, 0.0, 1e-05, 2e-05, 5e-05, 1e-04, 2e-04, 5e-04]
+
+PAIR_RADIUS = 1.2          # local search around baseline center
+MATCH_RADIUS = 0.15        # max allowed movement per sigma step for identity match
+NO_CROSS_GUARD = True      # enforce z1 < z2 after matching
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(tt)) for tt in t], dtype=float)
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    k = np.fft.fftfreq(len(f), d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def refined_roots_from_samples(t, f):
+    roots = []
+    for i in range(len(f)-1):
+        f0, f1 = f[i], f[i+1]
+        if f0 == 0.0:
+            roots.append(t[i])
+        elif f0*f1 < 0.0:
+            denom = (f1 - f0)
+            if denom != 0.0:
+                r = t[i] + (-f0)*(t[i+1]-t[i]) / denom
+                roots.append(r)
+    return np.array(roots, dtype=float)
+
+def nearest_pair(z):
+    z = np.sort(z)
+    if len(z) < 2:
+        return None
+    seps = np.diff(z)
+    j = np.argmin(seps)
+    return float(seps[j]), float(z[j]), float(z[j+1])
+
+def match_root(prev, candidates, match_radius):
+    if len(candidates) == 0:
+        return np.nan
+    d = np.abs(candidates - prev)
+    j = np.argmin(d)
+    if d[j] > match_radius:
+        return np.nan
+    return float(candidates[j])
+
+# ----------------------------
+# BASELINE
+# ----------------------------
+t = np.linspace(T0, T1, N, dtype=float)
+dt = t[1] - t[0]
+f0 = siegel_vals(t)
+
+f_sigma0 = smooth_fft(f0, dt, SIGMA0)
+z0_all = refined_roots_from_samples(t, f_sigma0)
+z0_all = z0_all[EDGE_DROP:-EDGE_DROP] if len(z0_all) > 2*EDGE_DROP else z0_all
+
+pair0 = nearest_pair(z0_all)
+assert pair0 is not None, "Not enough roots at sigma0"
+sep0, z1_0, z2_0 = pair0
+center0 = 0.5*(z1_0 + z2_0)
+
+print("Baseline σ0 identity roots (REFINED):")
+print(f"  z1_0={z1_0:.9f}  z2_0={z2_0:.9f}")
+print(f"  sep0={sep0:.9e}  center0={center0:.9f}")
+print(f"  dt={dt:.9e}")
+print()
+
+# ----------------------------
+# CONTINUITY TRACK
+# ----------------------------
+print("================ σ-FLOW IDENTITY TRACK (CONTINUITY) =================")
+print("dsigma | z1(trk)       z2(trk)       | center        sep         | note")
+print("----------------------------------------------------------------------------")
+
+prev_z1 = z1_0
+prev_z2 = z2_0
+
+for ds in DSIGMAS:
+    sigma = SIGMA0 + ds
+    f_s = smooth_fft(f0, dt, sigma)
+    z_all = refined_roots_from_samples(t, f_s)
+    if len(z_all) > 2*EDGE_DROP:
+        z_all = z_all[EDGE_DROP:-EDGE_DROP]
+
+    # Local neighborhood
+    z_local = z_all[np.abs(z_all - center0) <= PAIR_RADIUS]
+    z_local = np.sort(z_local)
+
+    z1 = match_root(prev_z1, z_local, MATCH_RADIUS)
+    z2 = match_root(prev_z2, z_local, MATCH_RADIUS)
+
+    note = "OK"
+    if np.isnan(z1) or np.isnan(z2):
+        note = f"LOST (n_local={len(z_local)})"
+        print(f"{ds:+.1e} | {z1!s:>12} {z2!s:>12} | {'--':>12} {'--':>12} | {note}")
+        prev_z1, prev_z2 = z1_0, z2_0
+        continue
+
+    if NO_CROSS_GUARD and z1 >= z2:
+        # try a fix: pick next-best for z2 that is > z1
+        bigger = z_local[z_local > z1]
+        if len(bigger) == 0:
+            note = "CROSS/FAIL"
+        else:
+            z2 = float(bigger[np.argmin(np.abs(bigger - prev_z2))])
+            note = "CROSS-FIXED"
+
+    center = 0.5*(z1 + z2)
+    sep = (z2 - z1)
+
+    print(f"{ds:+.1e} | {z1:12.9f} {z2:12.9f} | {center:12.9f} {sep:12.9e} | {note}")
+
+    prev_z1, prev_z2 = z1, z2
+
+print("\nInterpretation:")
+print("• If sep(σ) still decreases smoothly for the same tracked roots -> real attraction under σ-flow.")
+print("• If sep trend breaks or CROSS events appear -> nearest-pair identity swapping was contaminating Step 40.")
+print("====================================================================")
+
+Baseline σ0 identity roots (REFINED):
+  z1_0=111.038313767  z2_0=111.868602417
+  sep0=8.302886497e-01  center0=111.453458092
+  dt=3.662332906e-03
+
+================ σ-FLOW IDENTITY TRACK (CONTINUITY) =================
+dsigma | z1(trk)       z2(trk)       | center        sep         | note
+----------------------------------------------------------------------------
+-5.0e-04 | 111.038166883 111.868704448 | 111.453435665 8.305375658e-01 | OK
+-2.0e-04 | 111.038254638 111.868643336 | 111.453448987 8.303886974e-01 | OK
+-1.0e-04 | 111.038284102 111.868622894 | 111.453453498 8.303387918e-01 | OK
+-5.0e-05 | 111.038298928 111.868612660 | 111.453455794 8.303137313e-01 | OK
+-2.0e-05 | 111.038307830 111.868606515 | 111.453457173 8.302986849e-01 | OK
+-1.0e-05 | 111.038310798 111.868604466 | 111.453457632 8.302936678e-01 | OK
++0.0e+00 | 111.038313767 111.868602417 | 111.453458092 8.302886497e-01 | OK
++1.0e-05 | 111.038316736 111.868600367 | 111.453458552 8.302836309e-01 | OK
++2.0e-05 | 111.038319706 111.868598317 | 111.453459012 8.302786112e-01 | OK
++5.0e-05 | 111.038328618 111.868592165 | 111.453460392 8.302635469e-01 | OK
++1.0e-04 | 111.038343481 111.868581904 | 111.453462693 8.302384230e-01 | OK
++2.0e-04 | 111.038373245 111.868561357 | 111.453467301 8.301881115e-01 | OK
++5.0e-04 | 111.038462832 111.868499501 | 111.453481167 8.300366685e-01 | OK
+
+Interpretation:
+• If sep(σ) still decreases smoothly for the same tracked roots -> real attraction under σ-flow.
+• If sep trend breaks or CROSS events appear -> nearest-pair identity swapping was contaminating Step 40.
+====================================================================
