@@ -1,0 +1,3563 @@
+Code
+
+
+120
+
+# ============================================================
+# NEXT TEST: TWO-σ t-KINK (trajectory corruption across σ>=σ_kink)
+# + split-closure diagnostics (LOW vs HIGH σ)
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# -----------------------------
+# CONFIG
+# -----------------------------
+T0, T1    = 60.0, 120.0
+NGRID     = 8192
+EDGE_DROP = 2
+
+SIGMAS = np.array([0.005, 0.01, 0.015, 0.02, 0.04, 0.06], dtype=float)
+
+POWERS = [1, 3, 5]
+K_DROP = 1
+
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+
+# TWO-σ kink settings
+SIGMA_KINK = 0.02          # apply kink to all σ >= SIGMA_KINK
+INJECT_MODE = "abs"        # "step", "abs", "cusp2"
+INJECT_ZERO_INDEX = 3
+SHIFT = 0.25
+KINK_WIDTH = 0.8
+
+# -----------------------------
+# FFT Gaussian smoothing
+# -----------------------------
+def smooth_fft(f0, dt, sigma):
+    n = len(f0)
+    freqs = np.fft.fftfreq(n, d=dt)
+    w = 2*np.pi*freqs
+    F = np.fft.fft(f0)
+    G = np.exp(-(w*w)*sigma)
+    return np.real(np.fft.ifft(F * G))
+
+# -----------------------------
+# Zero finding
+# -----------------------------
+def find_zeros(t, f):
+    s = np.sign(f)
+    idx = np.where(np.diff(s) != 0)[0]
+    z = []
+    for i in idx:
+        f1, f2 = f[i], f[i+1]
+        if f2 == f1:
+            continue
+        ti = t[i] - f1*(t[i+1]-t[i])/(f2-f1)
+        z.append(ti)
+    return np.array(z, dtype=float)
+
+# -----------------------------
+# Odd-kernel mats
+# -----------------------------
+def odd_kernel_mats(t0, powers, k_drop):
+    t0 = np.asarray(t0, float)
+    N = len(t0)
+    D = t0[:,None] - t0[None,:]
+    I = np.arange(N)
+    band = (np.abs(I[:,None]-I[None,:]) <= k_drop)
+    mats = []
+    for p in powers:
+        H = np.zeros((N,N), dtype=float)
+        mask = (D != 0.0) & (~band)
+        H[mask] = np.sign(D[mask]) / (np.abs(D[mask])**p)
+        mats.append(H)
+    return mats
+
+def zscore_cols(X):
+    X = np.asarray(X, float)
+    mu = X.mean(axis=0, keepdims=True)
+    sd = X.std(axis=0, keepdims=True)
+    sd = np.where(sd==0, 1.0, sd)
+    return (X - mu)/sd
+
+def fit_coeffs_for_v(v, H_list):
+    feats = []
+    for H in H_list:
+        feats.append(H @ v)
+    X = np.column_stack(feats)
+    Xz = zscore_cols(X)
+    coeffs, *_ = np.linalg.lstsq(Xz, v, rcond=None)
+    vhat = Xz @ coeffs
+
+    def corr(a,b):
+        a = np.asarray(a,float); b=np.asarray(b,float)
+        a = a - a.mean(); b = b - b.mean()
+        na = np.linalg.norm(a); nb = np.linalg.norm(b)
+        if na==0 or nb==0: return np.nan
+        return float(np.dot(a,b)/(na*nb))
+
+    rel = float(np.linalg.norm(v-vhat)/max(np.linalg.norm(v),1e-300))
+    return coeffs, vhat, corr(v, vhat), rel
+
+# -----------------------------
+# RG metrics (scalar + 2D closure)
+# -----------------------------
+def rg_metrics(A, sigmas):
+    logS = np.log(sigmas)
+    B = np.gradient(A, logS, axis=0)
+    a_flat = A.reshape(-1)
+    b_flat = B.reshape(-1)
+
+    def corr(x,y):
+        x = np.asarray(x,float); y = np.asarray(y,float)
+        x = x - x.mean(); y = y - y.mean()
+        nx = np.linalg.norm(x); ny = np.linalg.norm(y)
+        if nx==0 or ny==0: return np.nan
+        return float(np.dot(x,y)/(nx*ny))
+
+    denom = np.dot(a_flat, a_flat)
+    lam = np.dot(b_flat, a_flat)/denom if denom>0 else np.nan
+    scalar_pred = lam * a_flat
+    scalar_corr = corr(b_flat, scalar_pred)
+    scalar_err = float(np.linalg.norm(b_flat - scalar_pred)/max(np.linalg.norm(b_flat),1e-300))
+
+    r = b_flat - scalar_pred
+    a_hat = a_flat / max(np.linalg.norm(a_flat), 1e-300)
+    r_orth = r - np.dot(r, a_hat)*a_hat
+    if np.linalg.norm(r_orth) < 1e-300:
+        twoD_corr = 1.0
+        twoD_err  = 0.0
+    else:
+        u_hat = r_orth / np.linalg.norm(r_orth)
+        proj = (np.dot(b_flat, a_hat)*a_hat + np.dot(b_flat, u_hat)*u_hat)
+        twoD_corr = corr(b_flat, proj)
+        twoD_err  = float(np.linalg.norm(b_flat - proj)/max(np.linalg.norm(b_flat),1e-300))
+
+    return {"lambda": lam, "scalar_corr": scalar_corr, "scalar_err": scalar_err,
+            "twoD_corr": twoD_corr, "twoD_err": twoD_err}
+
+# -----------------------------
+# Plane angle (LOW vs HIGH σ)
+# -----------------------------
+def plane_from_sigmas(z0, Z, sig_list):
+    z0 = np.asarray(z0,float)
+    V = []
+    for s in sig_list:
+        s = float(s)
+        zs = np.asarray(Z[s], float)
+        v = (zs - z0)/s
+        nrm = np.linalg.norm(v)
+        if nrm == 0 or not np.isfinite(nrm):
+            continue
+        V.append(v)
+    V = np.array(V, dtype=float)
+    if V.shape[0] < 2:
+        return None
+    U, S, VT = np.linalg.svd(V, full_matrices=False)
+    P = VT[:2]
+    Q, _ = np.linalg.qr(P.T)
+    return Q
+
+def plane_angle_deg(Q1, Q2):
+    M = Q1.T @ Q2
+    s = np.linalg.svd(M, compute_uv=False)
+    s = np.clip(s, -1.0, 1.0)
+    ang = np.arccos(s)
+    return float(np.max(ang) * 180.0/np.pi)
+
+# -----------------------------
+# t-kink injection
+# -----------------------------
+def inject_t_kink(z0, zs, center_t, shift, width, mode):
+    z0 = np.asarray(z0,float)
+    zs = np.asarray(zs,float).copy()
+    x = (z0 - center_t)/max(width, 1e-12)
+
+    if mode == "step":
+        bump = (x >= 0).astype(float)
+    elif mode == "abs":
+        bump = np.abs(x)
+        bump = bump * np.exp(-0.5*x*x)
+    elif mode == "cusp2":
+        bump = np.abs(x) * np.exp(-x*x)
+    else:
+        raise ValueError("INJECT_MODE must be 'step', 'abs', or 'cusp2'")
+
+    zs += shift * bump
+    return zs
+
+# -----------------------------
+# Build flow
+# -----------------------------
+print("\n================ TWO-σ t-KINK TEST ================\n")
+
+t = np.linspace(T0, T1, NGRID)
+dt = t[1]-t[0]
+f0 = np.array([float(mp.siegelz(tt)) for tt in t], dtype=float)
+
+z0_raw = find_zeros(t, f0)
+z0 = z0_raw[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+
+print(f"Window [{T0},{T1}]  N={NGRID}")
+print(f"Baseline zeros used (after edge_drop={EDGE_DROP}): {N0}")
+print("First few baseline zeros:", np.array2string(z0[:12], precision=6))
+
+Z = {}
+for s in SIGMAS:
+    fs = smooth_fft(f0, dt, float(s))
+    zs_raw = find_zeros(t, fs)
+    zs = zs_raw[EDGE_DROP:EDGE_DROP+N0]
+    Z[float(s)] = zs
+
+# enforce common length
+minN = min(len(Z[float(s)]) for s in SIGMAS)
+z0 = z0[:minN]
+for s in SIGMAS:
+    Z[float(s)] = Z[float(s)][:minN]
+N0 = minN
+
+print(f"Tracked zeros across σ: {N0}/{N0}")
+print(f"Two-σ kink: apply to all σ >= {SIGMA_KINK}")
+print(f"mode={INJECT_MODE}, shift={SHIFT}, width={KINK_WIDTH}")
+print(f"Target index={INJECT_ZERO_INDEX}, baseline t0={z0[INJECT_ZERO_INDEX]:.6f}")
+
+# corrupted copy
+Zk = {float(s): Z[float(s)].copy() for s in SIGMAS}
+center_t = float(z0[INJECT_ZERO_INDEX])
+for s in SIGMAS:
+    s = float(s)
+    if s >= SIGMA_KINK:
+        Zk[s] = inject_t_kink(z0, Zk[s], center_t=center_t, shift=SHIFT,
+                              width=KINK_WIDTH, mode=INJECT_MODE)
+
+# coefficient extraction
+H_list = odd_kernel_mats(z0, POWERS, K_DROP)
+
+def build_A(Zdict, sig_list):
+    A = []
+    corrs = []
+    errs = []
+    for s in sig_list:
+        s = float(s)
+        v = (Zdict[s] - z0)/s
+        coeffs, vhat, c, re = fit_coeffs_for_v(v, H_list)
+        A.append(coeffs); corrs.append(c); errs.append(re)
+    return np.array(A, float), float(np.nanmean(corrs)), float(np.nanmean(errs))
+
+A_clean_all, mc_all, me_all = build_A(Z,  SIGMAS)
+A_kink_all,  mk_all,  mek_all = build_A(Zk, SIGMAS)
+
+A_clean_lo, _, _ = build_A(Z,  LOW_SIGMAS)
+A_clean_hi, _, _ = build_A(Z,  HIGH_SIGMAS)
+A_kink_lo,  _, _ = build_A(Zk, LOW_SIGMAS)
+A_kink_hi,  _, _ = build_A(Zk, HIGH_SIGMAS)
+
+rg_clean_all = rg_metrics(A_clean_all, SIGMAS)
+rg_kink_all  = rg_metrics(A_kink_all,  SIGMAS)
+
+rg_clean_lo = rg_metrics(A_clean_lo, np.array(LOW_SIGMAS, float))
+rg_clean_hi = rg_metrics(A_clean_hi, np.array(HIGH_SIGMAS, float))
+rg_kink_lo  = rg_metrics(A_kink_lo,  np.array(LOW_SIGMAS, float))
+rg_kink_hi  = rg_metrics(A_kink_hi,  np.array(HIGH_SIGMAS, float))
+
+# plane angles
+Qlo_clean = plane_from_sigmas(z0, Z,  LOW_SIGMAS)
+Qhi_clean = plane_from_sigmas(z0, Z,  HIGH_SIGMAS)
+Qlo_kink  = plane_from_sigmas(z0, Zk, LOW_SIGMAS)
+Qhi_kink  = plane_from_sigmas(z0, Zk, HIGH_SIGMAS)
+
+ang_clean = plane_angle_deg(Qlo_clean, Qhi_clean) if (Qlo_clean is not None and Qhi_clean is not None) else np.nan
+ang_kink  = plane_angle_deg(Qlo_kink,  Qhi_kink)  if (Qlo_kink  is not None and Qhi_kink  is not None) else np.nan
+
+print("\n================ RESULTS (CLEAN, ALL σ) ================")
+print(f"mean per-σ v-fit corr  = {mc_all:+.6f}")
+print(f"mean per-σ v-fit relerr= {me_all:+.6f}")
+print(f"Scalar RG:  λ*={rg_clean_all['lambda']:+.6e}  corr={rg_clean_all['scalar_corr']:+.6f}  err={rg_clean_all['scalar_err']:.6f}")
+print(f"2D closure: corr={rg_clean_all['twoD_corr']:+.6f}  err={rg_clean_all['twoD_err']:.3e}")
+
+print("\n================ RESULTS (TWO-σ t-KINK, ALL σ) ================")
+print(f"mean per-σ v-fit corr  = {mk_all:+.6f}")
+print(f"mean per-σ v-fit relerr= {mek_all:+.6f}")
+print(f"Scalar RG:  λ*={rg_kink_all['lambda']:+.6e}  corr={rg_kink_all['scalar_corr']:+.6f}  err={rg_kink_all['scalar_err']:.6f}")
+print(f"2D closure: corr={rg_kink_all['twoD_corr']:+.6f}  err={rg_kink_all['twoD_err']:.3e}")
+
+print("\n================ SPLIT-CLOSURE (LOW vs HIGH σ) ================")
+print("[CLEAN LOW ]  2Derr={:.3e}  scalCorr={:+.6f}  scalErr={:.3f}".format(rg_clean_lo["twoD_err"], rg_clean_lo["scalar_corr"], rg_clean_lo["scalar_err"]))
+print("[CLEAN HIGH]  2Derr={:.3e}  scalCorr={:+.6f}  scalErr={:.3f}".format(rg_clean_hi["twoD_err"], rg_clean_hi["scalar_corr"], rg_clean_hi["scalar_err"]))
+print("[KINK  LOW ]  2Derr={:.3e}  scalCorr={:+.6f}  scalErr={:.3f}".format(rg_kink_lo["twoD_err"],  rg_kink_lo["scalar_corr"],  rg_kink_lo["scalar_err"]))
+print("[KINK  HIGH]  2Derr={:.3e}  scalCorr={:+.6f}  scalErr={:.3f}".format(rg_kink_hi["twoD_err"], rg_kink_hi["scalar_corr"], rg_kink_hi["scalar_err"]))
+
+print("\n============= PLANE ANGLES (LOW vs HIGH) =============")
+print(f"Clean plane angle (deg): {ang_clean:.6f}")
+print(f"Kink  plane angle (deg): {ang_kink:.6f}")
+print("======================================================\n")
+
+
+================ TWO-σ t-KINK TEST ================
+
+Window [60.0,120.0]  N=8192
+Baseline zeros used (after edge_drop=2): 21
+First few baseline zeros: [67.079809 69.546401 72.067155 75.704692 77.144836 79.337373 82.910385
+ 84.735492 87.425275 88.809109 92.491903 94.65135 ]
+Tracked zeros across σ: 21/21
+Two-σ kink: apply to all σ >= 0.02
+mode=abs, shift=0.25, width=0.8
+Target index=3, baseline t0=75.704692
+
+================ RESULTS (CLEAN, ALL σ) ================
+mean per-σ v-fit corr  = +0.497382
+mean per-σ v-fit relerr= +0.985597
+Scalar RG:  λ*=-8.093477e-01  corr=+0.984856  err=0.170209
+2D closure: corr=+1.000000  err=2.617e-16
+
+================ RESULTS (TWO-σ t-KINK, ALL σ) ================
+mean per-σ v-fit corr  = +0.496300
+mean per-σ v-fit relerr= +0.985565
+Scalar RG:  λ*=-7.935351e-01  corr=+0.986885  err=0.160252
+2D closure: corr=+1.000000  err=2.528e-16
+
+================ SPLIT-CLOSURE (LOW vs HIGH σ) ================
+[CLEAN LOW ]  2Derr=2.197e-16  scalCorr=+0.977655  scalErr=0.203
+[CLEAN HIGH]  2Derr=2.561e-16  scalCorr=+0.984502  scalErr=0.175
+[KINK  LOW ]  2Derr=2.197e-16  scalCorr=+0.977655  scalErr=0.203
+[KINK  HIGH]  2Derr=1.772e-16  scalCorr=+0.984375  scalErr=0.175
+
+============= PLANE ANGLES (LOW vs HIGH) =============
+Clean plane angle (deg): 5.217184
+Kink  plane angle (deg): 5.253116
+========
+
+121
+
+# ============================================================
+# ORDERING-VIOLATION STRESS TEST (RH "LINE-PROTECTOR" CANDIDATE)
+# ============================================================
+# Goal:
+#   Break the *ordering* of tracked zeros at ONE sigma (or a sigma band)
+#
+# What this script does:
+#   1) Build baseline zeros at σ=0 (using Z(t)=siegelz(t))
+#   2) Track zeros across SIGMAS using FFT Gaussian smoothing
+#   3) Compute BF + 2D closure metrics (scalar RG and 2D closure)
+#   4) Inject an ORDERING VIOLATION at chosen σ:
+#        - swap: swap two adjacent zeros by index
+#        - cross: move one zero past its neighbor by a controlled margin
+#   5) Recompute and report:
+#        - scalar RG corr/err
+#        - 2D closure corr/err
+#        - low-vs-high σ plane angle
+#        - count of ordering inversions
+#
+# No "assumes saved variables". Single-run, self-contained.
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# Config
+# ----------------------------
+T0, T1 = 60.0, 120.0
+NGRID = 8192
+EDGE_DROP = 2
+
+SIGMAS = np.array([0.005, 0.01, 0.015, 0.02, 0.04, 0.06], dtype=float)
+
+POWERS = [1, 3, 5]    # BF kernel powers
+K_DROP = 1            # exclude |i-j|<=K_DROP in kernels
+
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+
+# Injection config
+INJECT_SIGMA = 0.06          # where to violate ordering (single sigma)
+TARGET_IDX = 3               # index in tracked list (0-based)
+ORDER_MODE = "cross"         # "swap" or "cross"
+
+# For ORDER_MODE="cross":
+#   margin_frac=0.15 means cross by 15% of local spacing at that sigma
+CROSS_MARGIN_FRAC = 0.15
+
+# For ORDER_MODE="swap":
+#   swap with neighbor TARGET_IDX+1 (or TARGET_IDX-1 if at end)
+# (no extra params)
+
+# ----------------------------
+# Numerics helpers
+# ----------------------------
+def z_func(t):
+    return float(mp.siegelz(t))
+
+def find_zeros(t, f):
+    """Linear-interpolated sign-change zeros of real f(t)."""
+    s = np.sign(f)
+    s[s == 0] = 1
+    idx = np.where(s[:-1] * s[1:] < 0)[0]
+    if len(idx) == 0:
+        return np.array([], dtype=float)
+    t0 = t[idx]
+    t1 = t[idx + 1]
+    f0 = f[idx]
+    f1 = f[idx + 1]
+    # linear interpolation: f(t)=0 => t = t0 - f0*(t1-t0)/(f1-f0)
+    denom = (f1 - f0)
+    denom[denom == 0] = np.nan
+    z = t0 - f0 * (t1 - t0) / denom
+    z = z[np.isfinite(z)]
+    return z.astype(float)
+
+def smooth_fft(f0, dt, sigma):
+    """Gaussian smoothing in frequency: exp(-(2πk)^2 sigma)."""
+    N = len(f0)
+    freqs = np.fft.fftfreq(N, d=dt)
+    F = np.fft.fft(f0)
+    G = np.exp(-((2*np.pi*freqs)**2) * sigma)
+    fs = np.fft.ifft(F * G).real
+    return fs
+
+def zscore_cols(X):
+    X = X.copy()
+    mu = X.mean(axis=0)
+    sd = X.std(axis=0)
+    sd[sd == 0] = 1.0
+    return (X - mu) / sd
+
+def corr(a, b):
+    a = np.asarray(a, float)
+    b = np.asarray(b, float)
+    a = a - a.mean()
+    b = b - b.mean()
+    na = np.linalg.norm(a)
+    nb = np.linalg.norm(b)
+    if na == 0 or nb == 0:
+        return np.nan
+    return float(np.dot(a, b) / (na * nb))
+
+def rel_err(a, b):
+    a = np.asarray(a, float)
+    b = np.asarray(b, float)
+    nb = np.linalg.norm(b)
+    if nb == 0:
+        return np.nan
+    return float(np.linalg.norm(a - b) / nb)
+
+def principal_angle_deg(Q1, Q2):
+    """
+    Principal angle between 2D subspaces spanned by rows of Q1, Q2 (shape 2xN),
+    assuming they are orthonormal row-bases.
+    """
+    M = Q1 @ Q2.T
+    s = np.linalg.svd(M, compute_uv=False)
+    s = np.clip(s, 0.0, 1.0)
+    theta = np.arccos(s.min())  # largest principal angle in 2D
+    return float(theta * 180.0 / np.pi), s
+
+def inversion_count(z):
+    """Count ordering inversions relative to sorted order."""
+    z = np.asarray(z, float)
+    # inversions count: number of i<j with z[i] > z[j]
+    # O(n^2) fine for n~30
+    inv = 0
+    n = len(z)
+    for i in range(n):
+        inv += int(np.sum(z[i] > z[i+1:]))
+    return inv
+
+# ----------------------------
+# Kernel matrix builder
+# ----------------------------
+def odd_kernel_design(t0, powers, k_drop):
+    """
+    Build design matrix X where each column is H_p @ v (but we use direct columns H_p*v in LS).
+    Here we build H_p matrices (NxN) with entries sign(d)/|d|^p, truncated near diagonal.
+    """
+    t0 = np.asarray(t0, float)
+    N = len(t0)
+    D = t0.reshape(-1, 1) - t0.reshape(1, -1)
+    Hs = []
+    for p in powers:
+        H = np.zeros((N, N), dtype=float)
+        # mask for |i-j| > k_drop
+        I = np.arange(N).reshape(-1, 1)
+        J = np.arange(N).reshape(1, -1)
+        mask = (np.abs(I - J) > k_drop)
+        d = D[mask]
+        H[mask] = np.sign(d) / (np.abs(d)**p)
+        Hs.append(H)
+    return Hs
+
+# ----------------------------
+# BF / 2D closure core
+# ----------------------------
+def fit_a_coeffs_per_sigma(z0, Z, sigmas, powers, k_drop):
+    """
+    For each sigma, form v(sigma) = (Z[s]-z0)/s, then fit v ~ sum_p a_p(s) * (H_p @ v)
+    Using zscored features for stability.
+    Returns:
+      A: array shape (n_sigma, n_powers)
+      V: array shape (n_sigma, N) (the v vectors)
+    """
+    z0 = np.asarray(z0, float)
+    sigs = [float(s) for s in sigmas if s > 0]
+    Hs = odd_kernel_design(z0, powers, k_drop)
+    A = []
+    V = []
+    for s in sigs:
+        zs = np.asarray(Z[s], float)
+        v = (zs - z0) / s
+        V.append(v)
+        # features: columns are H_p @ v
+        X = np.column_stack([H @ v for H in Hs])  # N x P
+        Xz = zscore_cols(X)
+        # LS fit v ~ Xz a
+        a, *_ = np.linalg.lstsq(Xz, v, rcond=None)
+        A.append(a)
+    return np.asarray(A, float), np.asarray(V, float), np.asarray(sigs, float)
+
+def scalar_rg(A, sigmas):
+    """Compute beta = dA/dlog(sigma), then fit beta ≈ λ A (stacked scalar)."""
+    logS = np.log(np.asarray(sigmas, float))
+    beta = np.gradient(A, logS, axis=0)
+    a_flat = A.reshape(-1)
+    b_flat = beta.reshape(-1)
+    denom = np.dot(a_flat, a_flat)
+    lam = np.dot(b_flat, a_flat) / denom if denom != 0 else np.nan
+    c = corr(b_flat, lam * a_flat)
+    e = rel_err(b_flat, lam * a_flat)
+    return lam, c, e, beta
+
+def closure_2d(A, beta):
+    """
+    Project beta onto span{A, beta_perp} where beta_perp is beta component orthogonal to A.
+    In practice: build 2D basis for each row? You used stacked closure; keep stacked.
+    """
+    a = A.reshape(-1)
+    b = beta.reshape(-1)
+    # basis1 = a
+    na = np.linalg.norm(a)
+    if na == 0:
+        return np.nan, np.nan
+    e1 = a / na
+    # remove component along a
+    b_perp = b - np.dot(b, e1) * e1
+    nbp = np.linalg.norm(b_perp)
+    if nbp == 0:
+        # beta collinear with a -> perfect 1D closure already
+        return 1.0, 0.0
+    e2 = b_perp / nbp
+    # 2D model: proj = (b·e1)e1 + (b·e2)e2 == exactly b by construction
+    # BUT: we report numerical check (should be machine epsilon)
+    proj = np.dot(b, e1) * e1 + np.dot(b, e2) * e2
+    c = corr(b, proj)
+    e = rel_err(b, proj)
+    return c, e
+
+def rg_plane_from_V(V):
+    """
+    Compute 2D plane from V (n_sigma x N) via SVD, return orthonormal row basis Q (2xN).
+    """
+    # center rows to focus on directions
+    Vc = V - V.mean(axis=1, keepdims=True)
+    U, S, VT = np.linalg.svd(Vc, full_matrices=False)
+    P = VT[:2]  # 2 x N
+    # Orthonormalize rows
+    Q, _ = np.linalg.qr(P.T)
+    return Q.T  # 2 x N
+
+def plane_angle_low_high(z0, Z, low_sigmas, high_sigmas):
+    """
+    Build V_low and V_high and return principal angle between their 2D planes.
+    """
+    z0 = np.asarray(z0, float)
+    def build_V(sig_list):
+        V = []
+        for s in sig_list:
+            s = float(s)
+            zs = np.asarray(Z[s], float)
+            dt = zs - z0
+            if np.linalg.norm(dt) == 0:
+                continue
+            V.append(dt / s)
+        if len(V) < 2:
+            return None
+        return np.asarray(V, float)
+    Vlo = build_V(low_sigmas)
+    Vhi = build_V(high_sigmas)
+    if Vlo is None or Vhi is None:
+        return np.nan, np.array([np.nan, np.nan])
+    Qlo = rg_plane_from_V(Vlo)
+    Qhi = rg_plane_from_V(Vhi)
+    ang, svals = principal_angle_deg(Qlo, Qhi)
+    return ang, svals
+
+# ----------------------------
+# Build clean flow
+# ----------------------------
+print("\n================ BUILD CLEAN FLOW ================\n")
+t = np.linspace(T0, T1, NGRID)
+dt = t[1] - t[0]
+
+# baseline f0 using siegelz
+f0 = np.array([z_func(tt) for tt in t], dtype=float)
+z0_raw = find_zeros(t, f0)
+
+if len(z0_raw) <= 2 * EDGE_DROP:
+    raise RuntimeError("Not enough baseline zeros found. Increase window or NGRID.")
+
+z0 = z0_raw[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+
+print(f"Baseline zeros used (after edge_drop={EDGE_DROP}): {N0}")
+print("First few baseline zeros:", np.array2string(z0[:12], precision=6))
+
+# track across sigmas (index-based)
+Z_clean = {}
+for s in SIGMAS:
+    fs = smooth_fft(f0, dt, float(s))
+    zs_raw = find_zeros(t, fs)
+    if len(zs_raw) < EDGE_DROP + N0:
+        continue
+    zs = zs_raw[EDGE_DROP:EDGE_DROP + N0]
+    Z_clean[float(s)] = zs
+
+sig_ok = sorted(Z_clean.keys())
+print("Tracked σ values:", sig_ok)
+if len(sig_ok) != len(SIGMAS):
+    missing = [float(s) for s in SIGMAS if float(s) not in Z_clean]
+    print("WARNING: Missing σ tracks:", missing)
+
+# Make sure we include only those we tracked
+SIGMAS_USED = np.array(sig_ok, dtype=float)
+
+# ----------------------------
+# Injection: ordering violation
+# ----------------------------
+Z_test = {s: Z_clean[s].copy() for s in Z_clean}
+s_inj = float(INJECT_SIGMA)
+if s_inj not in Z_test:
+    raise RuntimeError(f"INJECT_SIGMA={s_inj} not tracked. Available: {sorted(Z_test.keys())}")
+
+zs = Z_test[s_inj]
+
+if TARGET_IDX < 0 or TARGET_IDX >= len(zs):
+    raise RuntimeError(f"TARGET_IDX={TARGET_IDX} out of range for zeros length {len(zs)}")
+
+print(f"\nTarget: sigma={s_inj} idx={TARGET_IDX} baseline t0={z0[TARGET_IDX]:.6f} clean t={zs[TARGET_IDX]:.6f}")
+print(f"ORDER_MODE={ORDER_MODE}")
+
+zs_before = zs.copy()
+
+if ORDER_MODE.lower() == "swap":
+    j = TARGET_IDX + 1
+    if j >= len(zs):
+        j = TARGET_IDX - 1
+    if j < 0:
+        raise RuntimeError("Cannot swap: only one zero.")
+    zs[TARGET_IDX], zs[j] = zs[j], zs[TARGET_IDX]
+
+elif ORDER_MODE.lower() == "cross":
+    # force an inversion with neighbor to the right if possible, else left
+    j = TARGET_IDX + 1
+    direction = +1
+    if j >= len(zs):
+        j = TARGET_IDX - 1
+        direction = -1
+    if j < 0:
+        raise RuntimeError("Cannot cross: only one zero.")
+    # local spacing at sigma
+    spacing = abs(zs[j] - zs[TARGET_IDX])
+    margin = CROSS_MARGIN_FRAC * spacing
+    if direction == +1:
+        # move i beyond j by margin
+        zs[TARGET_IDX] = zs[j] + margin
+    else:
+        zs[TARGET_IDX] = zs[j] - margin
+else:
+    raise RuntimeError("ORDER_MODE must be 'swap' or 'cross'")
+
+Z_test[s_inj] = zs
+
+inv_before = inversion_count(zs_before)
+inv_after  = inversion_count(zs)
+print(f"Ordering inversions at σ={s_inj}: before={inv_before} after={inv_after}")
+
+# ----------------------------
+# Evaluate CLEAN vs ORDER-VIOLATION
+# ----------------------------
+def run_report(tag, Z_use):
+    A, V, sigs = fit_a_coeffs_per_sigma(z0, Z_use, SIGMAS_USED, POWERS, K_DROP)
+    lam, c1, e1, beta = scalar_rg(A, sigs)
+    c2, e2 = closure_2d(A, beta)
+    ang, svals = plane_angle_low_high(z0, Z_use, LOW_SIGMAS, HIGH_SIGMAS)
+    return {
+        "tag": tag,
+        "lam": lam,
+        "scalarCorr": c1,
+        "scalarErr": e1,
+        "corr2D": c2,
+        "err2D": e2,
+        "planeDeg": ang,
+        "planeS": svals
+    }
+
+clean = run_report("CLEAN", Z_clean)
+test  = run_report("ORDER-VIOLATION", Z_test)
+
+print("\n================ RESULTS ================\n")
+for r in [clean, test]:
+    print(f"[{r['tag']}]")
+    print(f"  Scalar RG:  λ*={r['lam']:+.6e}  corr={r['scalarCorr']:+.6f}  err={r['scalarErr']:.6f}")
+    print(f"  2D closure: corr={r['corr2D']:+.6f}  err={r['err2D']:.3e}")
+    print(f"  Plane angle (LOW vs HIGH σ): {r['planeDeg']:.6f} deg   s={np.array2string(r['planeS'], precision=6)}")
+    print("")
+
+# Simple "break" flagging heuristics (you can tune)
+def broke(r_clean, r_test):
+    # Expect: if "line protector", ORDER-VIOLATION should worsen 2D err or rotate plane a lot
+    d2 = (r_test["err2D"] / max(r_clean["err2D"], 1e-30)) if np.isfinite(r_test["err2D"]) and np.isfinite(r_clean["err2D"]) else np.inf
+    dang = abs(r_test["planeDeg"] - r_clean["planeDeg"])
+    return d2, dang
+
+d2, dang = broke(clean, test)
+print("================ DIFF SUMMARY ================\n")
+print(f"2Derr ratio (test/clean): {d2:.3e}")
+print(f"Δ plane angle (deg):      {dang:.6f}")
+print("\nInterpretation guide:")
+print("  - If 2Derr ratio >> 1e6 or Δangle jumps big → strong geometric break.")
+print("  - If 2Derr stays ~1e-16 and Δangle small    → 2D closure is not an ordering protector here.")
+print("\nDONE.")
+
+================ BUILD CLEAN FLOW ================
+
+Baseline zeros used (after edge_drop=2): 21
+First few baseline zeros: [67.079809 69.546401 72.067155 75.704692 77.144836 79.337373 82.910385
+ 84.735492 87.425275 88.809109 92.491903 94.65135 ]
+Tracked σ values: [0.005, 0.01, 0.015, 0.02, 0.04, 0.06]
+
+Target: sigma=0.06 idx=3 baseline t0=75.704692 clean t=72.045500
+ORDER_MODE=cross
+Ordering inversions at σ=0.06: before=0 after=1
+
+================ RESULTS ================
+
+[CLEAN]
+  Scalar RG:  λ*=-8.093477e-01  corr=+0.984856  err=0.172730
+  2D closure: corr=+1.000000  err=1.527e-15
+  Plane angle (LOW vs HIGH σ): 6.721144 deg   s=[1.       0.993128]
+
+[ORDER-VIOLATION]
+  Scalar RG:  λ*=-7.547415e-01  corr=+0.917215  err=0.426592
+  2D closure: corr=+1.000000  err=5.869e-16
+  Plane angle (LOW vs HIGH σ): 68.681030 deg   s=[1.      0.36356]
+
+================ DIFF SUMMARY ================
+
+2Derr ratio (test/clean): 3.843e-01
+Δ plane angle (deg):      61.959886
+
+Interpretation guide:
+  - If 2Derr ratio >> 1e6 or Δangle jumps big → strong geometric break.
+  - If 2Derr stays ~1e-16 and Δangle small    → 2D closure is not an ordering protector here.
+
+DONE.
+
+122
+
+# ============================================================
+# MANIFOLD ENERGY TEST — ORDERING BARRIER VIA RG PLANE ROTATION
+# Single-cell, restart-safe, no external state assumptions
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+from numpy.linalg import svd, qr, norm
+from scipy.signal import savgol_filter
+
+mp.mp.dps = 50
+
+# ------------------------------------------------------------
+# CONFIG
+# ------------------------------------------------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+EDGE_DROP = 2
+
+SIGMAS_LOW  = np.array([0.005, 0.01, 0.015])
+SIGMAS_HIGH = np.array([0.02, 0.04, 0.06])
+SIGMAS_ALL  = np.concatenate([SIGMAS_LOW, SIGMAS_HIGH])
+
+POWERS = [1, 3, 5]
+K_DROP = 1
+
+CROSS_INDEX = 3                 # which adjacent zero pair to cross
+CROSS_RANGE = np.linspace(-0.4, 0.4, 41)
+
+# ------------------------------------------------------------
+# CORE UTILITIES
+# ------------------------------------------------------------
+def siegel_z(t):
+    return float(mp.siegelz(t))
+
+def fft_smooth(f, dt, sigma):
+    k = 2 * np.pi * np.fft.fftfreq(len(f), d=dt)
+    return np.real(np.fft.ifft(np.fft.fft(f) * np.exp(-(k**2) * sigma)))
+
+def find_zeros(t, f):
+    idx = np.where(np.diff(np.sign(f)))[0]
+    return t[idx]
+
+def odd_kernel_matrix(z, powers, k_drop):
+    N = len(z)
+    Hs = []
+    for p in powers:
+        H = np.zeros((N, N))
+        for i in range(N):
+            for j in range(N):
+                if abs(i - j) <= k_drop:
+                    continue
+                H[i, j] = 1.0 / abs(z[i] - z[j])**p
+        Hs.append(H)
+    return Hs
+
+def rg_plane(z0, Zsigmas):
+    V = []
+    for s, zs in Zsigmas.items():
+        v = (zs - z0) / s
+        if norm(v) > 0:
+            V.append(v)
+    V = np.array(V)
+    U, S, VT = svd(V, full_matrices=False)
+    Q, _ = qr(VT[:2].T)
+    return Q.T  # shape (2, N)
+
+def plane_angle(P, Q):
+    M = P @ Q.T
+    _, s, _ = svd(M)
+    s = np.clip(s, -1, 1)
+    angles = np.arccos(s)
+    return np.max(angles), s
+
+# ------------------------------------------------------------
+# BUILD CLEAN FLOW
+# ------------------------------------------------------------
+print("\n================ BUILD CLEAN FLOW ================\n")
+
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+f0 = np.array([siegel_z(tt) for tt in t])
+
+z0_raw = find_zeros(t, f0)
+z0 = z0_raw[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+
+print(f"Baseline zeros used (after edge_drop={EDGE_DROP}): {N0}")
+print("First few baseline zeros:", z0[:12])
+
+Z_clean = {}
+for s in SIGMAS_ALL:
+    fs = fft_smooth(f0, dt, s)
+    zs = find_zeros(t, fs)
+    Z_clean[s] = zs[EDGE_DROP:EDGE_DROP + N0]
+
+# Reference RG planes
+P_clean_low  = rg_plane(z0, {s: Z_clean[s] for s in SIGMAS_LOW})
+P_clean_high = rg_plane(z0, {s: Z_clean[s] for s in SIGMAS_HIGH})
+theta_clean, _ = plane_angle(P_clean_low, P_clean_high)
+
+print(f"\nClean reference plane angle: {np.degrees(theta_clean):.3f} deg")
+
+# ------------------------------------------------------------
+# ORDERING VIOLATION / CROSSING SWEEP
+# ------------------------------------------------------------
+print("\n================ MANIFOLD ENERGY SWEEP ================\n")
+print("off      |  plane_angle(deg)")
+
+results = []
+
+for off in CROSS_RANGE:
+    Z_test = {s: Z_clean[s].copy() for s in SIGMAS_ALL}
+
+    # induce crossing at highest sigma
+    s_max = SIGMAS_HIGH[-1]
+    Z_test[s_max][CROSS_INDEX]     += off
+    Z_test[s_max][CROSS_INDEX + 1] -= off
+
+    # enforce re-sorting to allow crossing
+    Z_test[s_max] = np.sort(Z_test[s_max])
+
+    # build planes
+    P_low  = rg_plane(z0, {s: Z_test[s] for s in SIGMAS_LOW})
+    P_high = rg_plane(z0, {s: Z_test[s] for s in SIGMAS_HIGH})
+
+    theta, svals = plane_angle(P_low, P_high)
+
+    results.append((off, theta))
+    print(f"{off:+.3f}  |  {np.degrees(theta):6.2f}")
+
+# ------------------------------------------------------------
+# SUMMARY
+# ------------------------------------------------------------
+thetas = np.array([r[1] for r in results])
+offs   = np.array([r[0] for r in results])
+
+imax = np.argmax(thetas)
+
+print("\n================ SUMMARY ================\n")
+print(f"Max plane rotation at off = {offs[imax]:+.3f}")
+print(f"Peak angle = {np.degrees(thetas[imax]):.3f} deg")
+print("\nInterpretation:")
+print("• Smooth region  → stable RG manifold")
+print("• Sharp peak     → geometric barrier / ordering obstruction")
+print("================================================")
+
+
+================ BUILD CLEAN FLOW ================
+
+Baseline zeros used (after edge_drop=2): 21
+First few baseline zeros: [67.07605909 69.54462215 72.06446099 75.69771701 77.14076425 79.33097302
+ 82.90562813 84.72958125 87.42522281 88.80234404 92.48687584 94.64778415]
+
+Clean reference plane angle: 27.646 deg
+
+================ MANIFOLD ENERGY SWEEP ================
+
+off      |  plane_angle(deg)
+-0.400  |   51.40
+-0.380  |   50.60
+-0.360  |   49.73
+-0.340  |   48.77
+-0.320  |   47.71
+-0.300  |   46.54
+-0.280  |   45.24
+-0.260  |   43.79
+-0.240  |   42.19
+-0.220  |   40.41
+-0.200  |   38.44
+-0.180  |   36.29
+-0.160  |   33.97
+-0.140  |   31.55
+-0.120  |   29.16
+-0.100  |   26.97
+-0.080  |   25.26
+-0.060  |   24.33
+-0.040  |   24.40
+-0.020  |   25.54
++0.000  |   27.65
++0.020  |   30.57
++0.040  |   34.17
++0.060  |   38.38
++0.080  |   43.13
++0.100  |   48.31
++0.120  |   53.74
++0.140  |   59.18
++0.160  |   64.35
++0.180  |   69.06
++0.200  |   73.22
++0.220  |   76.83
++0.240  |   79.93
++0.260  |   82.59
++0.280  |   84.88
++0.300  |   86.86
++0.320  |   88.58
++0.340  |   89.91
++0.360  |   88.58
++0.380  |   87.40
++0.400  |   86.35
+
+================ SUMMARY ================
+
+Max plane rotation at off = +0.340
+Peak angle = 89.912 deg
+
+Interpretation
+
+123
+
+# ============================================================
+# STEP 2 — σ-RESOLUTION SCALING TEST (single-cell, no assumptions)
+# ------------------------------------------------------------
+# Goal:
+#   Repeat the "manifold energy" (RG-plane rotation) sweep while
+#   changing LOW/HIGH sigma bands to see how the barrier scales.
+#
+# Output:
+#   For each (LOW_SIGMAS, HIGH_SIGMAS) band-pair:
+#     - clean reference plane angle
+#     - angle(off) sweep table
+#     - peak location + peak height
+#     - (optional) quick summary across band-pairs
+#
+# Dependencies: numpy, mpmath
+# Uses: mp.siegelz (stable at higher t)
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N_GRID = 8192
+EDGE_DROP = 2
+
+# choose the corruption target in the *tracked zero list*
+TARGET_SIGMA = 0.06
+TARGET_IDX   = 3
+
+# sweep offsets applied to the target zero at TARGET_SIGMA
+OFFSETS = np.arange(-0.40, 0.401, 0.02)
+
+# smoothing sigmas available (must include all used in band definitions and include TARGET_SIGMA)
+SIGMAS_ALL = np.array([0.005, 0.01, 0.015, 0.02, 0.04, 0.06], dtype=float)
+
+# σ-band definitions to compare
+# You can add/remove band pairs here.
+BAND_PAIRS = [
+    (np.array([0.005, 0.01, 0.015]), np.array([0.02, 0.04, 0.06])),   # your default
+    (np.array([0.005, 0.01]),        np.array([0.015, 0.02])),        # tighter
+    (np.array([0.01, 0.015]),        np.array([0.04, 0.06])),         # separated
+    (np.array([0.005, 0.01, 0.015]), np.array([0.015, 0.02, 0.04])),  # overlapping high
+]
+
+# ------------------------------------------------------------
+# UTILITIES
+# ------------------------------------------------------------
+def z_func(t):
+    return float(mp.siegelz(t))
+
+def smooth_fft(f0, dt, sigma):
+    """
+    Heat-kernel smoothing in frequency domain:
+      f_sigma = F^{-1}[ F(f0) * exp(-(2πk)^2 * sigma) ]
+    """
+    F = np.fft.fft(f0)
+    freqs = np.fft.fftfreq(len(f0), d=dt)
+    k = 2*np.pi*freqs
+    filt = np.exp(-(k*k)*sigma)
+    fs = np.real(np.fft.ifft(F * filt))
+    return fs
+
+def find_zeros(t, f):
+    """
+    Zero crossing finder on a sampled real function.
+    Returns approximate roots via linear interpolation between sign changes.
+    """
+    s = np.sign(f)
+    ds = np.diff(s)
+    idx = np.where(ds != 0)[0]
+    roots = []
+    for i in idx:
+        f1, f2 = f[i], f[i+1]
+        if f2 == f1:
+            roots.append(t[i])
+        else:
+            # linear interp: f(t)=0 between t[i], t[i+1]
+            roots.append(t[i] - f1*(t[i+1]-t[i])/(f2-f1))
+    return np.array(roots, dtype=float)
+
+def track_zeros_by_nearest(z0, zs):
+    """
+    Track each baseline zero z0[i] to nearest zero in zs.
+    Greedy nearest-neighbour with monotonic constraint (keeps order).
+    """
+    z0 = np.asarray(z0, float)
+    zs = np.asarray(zs, float)
+
+    out = np.full_like(z0, np.nan)
+    j0 = 0
+    for i in range(len(z0)):
+        # search forward only to keep ordering
+        best_j = None
+        best_d = None
+        for j in range(j0, len(zs)):
+            d = abs(zs[j] - z0[i])
+            if (best_d is None) or (d < best_d):
+                best_d = d
+                best_j = j
+            # early stop if distance starts increasing after having a best
+            if best_d is not None and (zs[j] > z0[i]) and (abs(zs[j]-z0[i]) > best_d) and j > best_j:
+                break
+        if best_j is None:
+            return None
+        out[i] = zs[best_j]
+        j0 = best_j + 1
+    return out
+
+def build_clean_flow():
+    """
+    Build baseline zeros at sigma=0 and track same count across all SIGMAS_ALL.
+    """
+    t = np.linspace(T0, T1, N_GRID)
+    dt = t[1] - t[0]
+
+    f0 = np.array([z_func(tt) for tt in t], dtype=float)
+    z0_raw = find_zeros(t, f0)
+
+    # edge drop
+    if len(z0_raw) <= 2*EDGE_DROP:
+        raise RuntimeError("Not enough baseline zeros found. Increase window or N_GRID.")
+    z0 = z0_raw[EDGE_DROP:-EDGE_DROP]
+    N0 = len(z0)
+
+    Z = {0.0: z0.copy()}
+
+    for s in SIGMAS_ALL:
+        if s == 0.0:
+            continue
+        fs = smooth_fft(f0, dt, s)
+        zs_raw = find_zeros(t, fs)
+        # track by nearest (preserves ordering)
+        zs_tr = track_zeros_by_nearest(z0, zs_raw)
+        if zs_tr is None or np.any(~np.isfinite(zs_tr)):
+            raise RuntimeError(f"Failed tracking at sigma={s}.")
+        Z[float(s)] = zs_tr
+
+    return z0, Z
+
+def plane_from_sigmas(z0, Z, sigmas):
+    """
+    Construct the 2D RG plane from generators v(s) = (Z[s]-z0)/s over given sigmas.
+    Returns orthonormal basis Q of shape (2, N).
+    """
+    z0 = np.asarray(z0, float)
+    V = []
+    for s in sigmas:
+        s = float(s)
+        dt = np.asarray(Z[s], float) - z0
+        if not np.isfinite(dt).all():
+            continue
+        ns = np.linalg.norm(dt)
+        if ns == 0:
+            continue
+        V.append(dt / s)
+    if len(V) < 2:
+        return None
+    V = np.array(V, dtype=float)  # (m, N)
+    # SVD plane
+    U, S, VT = np.linalg.svd(V, full_matrices=False)
+    P = VT[:2]  # (2, N)
+    # Orthonormalise rows via QR on transpose
+    Q, _ = np.linalg.qr(P.T)  # (N,2)
+    Q = Q.T  # (2,N)
+    return Q
+
+def principal_angle_deg(Q1, Q2):
+    """
+    Principal angle between two 2D subspaces spanned by Q1 and Q2 (each 2xN orthonormal).
+    Returns max principal angle in degrees (0..90).
+    """
+    if Q1 is None or Q2 is None:
+        return np.nan, None
+    M = Q1 @ Q2.T  # (2,2)
+    s = np.linalg.svd(M, compute_uv=False)
+    s = np.clip(s, 0.0, 1.0)
+    # angles are arccos(singular values); for 2D, take max angle
+    ang = np.degrees(np.arccos(s))
+    return float(np.max(ang)), s
+
+def inject_break(Z_in, sigma_target, idx, shift):
+    """
+    Copy Z dict and add a shift to one tracked zero at sigma_target.
+    """
+    Z = {float(k): np.array(v, float).copy() for k, v in Z_in.items()}
+    sigma_target = float(sigma_target)
+    Z[sigma_target][idx] += float(shift)
+    return Z
+
+# ------------------------------------------------------------
+# RUN
+# ------------------------------------------------------------
+print("\n================ BUILD CLEAN FLOW ================\n")
+z0, Z_clean = build_clean_flow()
+
+print(f"Baseline zeros used (after edge_drop={EDGE_DROP}): {len(z0)}")
+print("First few baseline zeros:", np.array2string(z0[:12], precision=6))
+print(f"\nTarget: sigma={TARGET_SIGMA} idx={TARGET_IDX} original t={Z_clean[float(TARGET_SIGMA)][TARGET_IDX]:.6f}\n")
+
+summary = []
+
+for (LOW_SIGMAS, HIGH_SIGMAS) in BAND_PAIRS:
+    LOW_SIGMAS  = np.array(sorted(set(float(x) for x in LOW_SIGMAS)), dtype=float)
+    HIGH_SIGMAS = np.array(sorted(set(float(x) for x in HIGH_SIGMAS)), dtype=float)
+
+    # sanity: must be subset of SIGMAS_ALL
+    if not set(LOW_SIGMAS).issubset(set(SIGMAS_ALL)) or not set(HIGH_SIGMAS).issubset(set(SIGMAS_ALL)):
+        print("Skipping band-pair (contains sigma not in SIGMAS_ALL):", LOW_SIGMAS, HIGH_SIGMAS)
+        continue
+
+    # reference planes (clean) for this band definition
+    Q_low_clean  = plane_from_sigmas(z0, Z_clean, LOW_SIGMAS)
+    Q_high_clean = plane_from_sigmas(z0, Z_clean, HIGH_SIGMAS)
+    ref_angle, ref_s = principal_angle_deg(Q_low_clean, Q_high_clean)
+
+    print("====================================================")
+    print("σ-RESOLUTION SCALING TEST")
+    print("LOW_SIGMAS :", list(LOW_SIGMAS))
+    print("HIGH_SIGMAS:", list(HIGH_SIGMAS))
+    print(f"Clean reference plane angle: {ref_angle:.3f} deg   s={ref_s}")
+    print("----------------------------------------------------")
+    print("off      | plane_angle(deg)")
+    print("----------------------------------------------------")
+
+    best_off = None
+    best_ang = -1.0
+
+    for off in OFFSETS:
+        Z_test = inject_break(Z_clean, TARGET_SIGMA, TARGET_IDX, off)
+
+        Q_low  = plane_from_sigmas(z0, Z_test, LOW_SIGMAS)
+        Q_high = plane_from_sigmas(z0, Z_test, HIGH_SIGMAS)
+        ang, _s = principal_angle_deg(Q_low, Q_high)
+
+        if np.isfinite(ang) and ang > best_ang:
+            best_ang = ang
+            best_off = float(off)
+
+        print(f"{off:+.3f}  |   {ang:7.2f}")
+
+    print("----------------------------------------------------")
+    print(f"Peak angle = {best_ang:.3f} deg  at off = {best_off:+.3f}")
+    print("Interpretation:")
+    print("  - if peak sharpens as bands narrow toward σ→0, that's strong universality evidence")
+    print("  - if peak drifts wildly with band choice, barrier is band-artifact / estimator-dependent")
+    print("====================================================\n")
+
+    summary.append((tuple(LOW_SIGMAS), tuple(HIGH_SIGMAS), ref_angle, best_off, best_ang))
+
+# global summary
+if summary:
+    print("\n================ SUMMARY ACROSS σ-BANDS ================\n")
+    for LOW, HIGH, refA, offP, angP in summary:
+        print(f"LOW={list(LOW)}  HIGH={list(HIGH)}")
+        print(f"  clean_ref={refA:6.2f}°   peak={angP:6.2f}° @ off={offP:+.3f}")
+    print("\nDONE.\n")
+
+=============== BUILD CLEAN FLOW ================
+
+Baseline zeros used (after edge_drop=2): 21
+First few baseline zeros: [67.079809 69.546401 72.067155 75.704692 77.144836 79.337373 82.910385
+ 84.735492 87.425275 88.809109 92.491903 94.65135 ]
+
+Target: sigma=0.06 idx=3 original t=75.782655
+
+====================================================
+σ-RESOLUTION SCALING TEST
+LOW_SIGMAS : [np.float64(0.005), np.float64(0.01), np.float64(0.015)]
+HIGH_SIGMAS: [np.float64(0.02), np.float64(0.04), np.float64(0.06)]
+Clean reference plane angle: 5.632 deg   s=[0.99999988 0.99517257]
+----------------------------------------------------
+off      | plane_angle(deg)
+----------------------------------------------------
+-0.400  |     70.73
+-0.380  |     70.61
+-0.360  |     70.48
+-0.340  |     70.33
+-0.320  |     70.17
+-0.300  |     69.98
+-0.280  |     69.77
+-0.260  |     69.53
+-0.240  |     69.25
+-0.220  |     68.91
+-0.200  |     68.51
+-0.180  |     68.03
+-0.160  |     67.42
+-0.140  |     66.65
+-0.120  |     65.63
+-0.100  |     64.23
+-0.080  |     62.16
+-0.060  |     58.84
+-0.040  |     52.71
+-0.020  |     38.48
++0.000  |      5.63
++0.020  |     57.80
++0.040  |     82.36
++0.060  |     89.09
++0.080  |     84.92
++0.100  |     82.46
++0.120  |     80.84
++0.140  |     79.69
++0.160  |     78.83
++0.180  |     78.17
++0.200  |     77.65
++0.220  |     77.22
++0.240  |     76.86
++0.260  |     76.56
++0.280  |     76.30
++0.300  |     76.08
++0.320  |     75.88
++0.340  |     75.71
++0.360  |     75.56
++0.380  |     75.42
++0.400  |     75.30
+----------------------------------------------------
+Peak angle = 89.093 deg  at off = +0.060
+Interpretation:
+  - if peak sharpens as bands narrow toward σ→0, that's strong universality evidence
+  - if peak drifts wildly with band choice, barrier is band-artifact / estimator-dependent
+====================================================
+
+====================================================
+σ-RESOLUTION SCALING TEST
+LOW_SIGMAS : [np.float64(0.005), np.float64(0.01)]
+HIGH_SIGMAS: [np.float64(0.015), np.float64(0.02)]
+Clean reference plane angle: 4.888 deg   s=[0.99999997 0.99636263]
+----------------------------------------------------
+off      | plane_angle(deg)
+----------------------------------------------------
+-0.400  |      4.89
+-0.380  |      4.89
+-0.360  |      4.89
+-0.340  |      4.89
+-0.320  |      4.89
+-0.300  |      4.89
+-0.280  |      4.89
+-0.260  |      4.89
+-0.240  |      4.89
+-0.220  |      4.89
+-0.200  |      4.89
+-0.180  |      4.89
+-0.160  |      4.89
+-0.140  |      4.89
+-0.120  |      4.89
+-0.100  |      4.89
+-0.080  |      4.89
+-0.060  |      4.89
+-0.040  |      4.89
+-0.020  |      4.89
++0.000  |      4.89
++0.020  |      4.89
++0.040  |      4.89
++0.060  |      4.89
++0.080  |      4.89
++0.100  |      4.89
++0.120  |      4.89
++0.140  |      4.89
++0.160  |      4.89
++0.180  |      4.89
++0.200  |      4.89
++0.220  |      4.89
++0.240  |      4.89
++0.260  |      4.89
++0.280  |      4.89
++0.300  |      4.89
++0.320  |      4.89
++0.340  |      4.89
++0.360  |      4.89
++0.380  |      4.89
++0.400  |      4.89
+----------------------------------------------------
+Peak angle = 4.888 deg  at off = -0.400
+Interpretation:
+  - if peak sharpens as bands narrow toward σ→0, that's strong universality evidence
+  - if peak drifts wildly with band choice, barrier is band-artifact / estimator-dependent
+====================================================
+
+====================================================
+σ-RESOLUTION SCALING TEST
+LOW_SIGMAS : [np.float64(0.01), np.float64(0.015)]
+HIGH_SIGMAS: [np.float64(0.04), np.float64(0.06)]
+Clean reference plane angle: 6.710 deg   s=[0.99999978 0.9931497 ]
+----------------------------------------------------
+off      | plane_angle(deg)
+----------------------------------------------------
+-0.400  |     71.06
+-0.380  |     70.97
+-0.360  |     70.88
+-0.340  |     70.77
+-0.320  |     70.65
+-0.300  |     70.51
+-0.280  |     70.35
+-0.260  |     70.17
+-0.240  |     69.96
+-0.220  |     69.72
+-0.200  |     69.42
+-0.180  |     69.06
+-0.160  |     68.61
+-0.140  |     68.04
+-0.120  |     67.29
+-0.100  |     66.25
+-0.080  |     64.72
+-0.060  |     62.25
+-0.040  |     57.62
+-0.020  |     46.25
++0.000  |      6.71
++0.020  |     71.79
++0.040  |     89.40
++0.060  |     84.50
++0.080  |     81.47
++0.100  |     79.68
++0.120  |     78.50
++0.140  |     77.66
++0.160  |     77.03
++0.180  |     76.54
++0.200  |     76.15
++0.220  |     75.84
++0.240  |     75.58
++0.260  |     75.35
++0.280  |     75.16
++0.300  |     75.00
++0.320  |     74.86
++0.340  |     74.73
++0.360  |     74.62
++0.380  |     74.52
++0.400  |     74.43
+----------------------------------------------------
+Peak angle = 89.398 deg  at off = +0.040
+Interpretation:
+  - if peak sharpens as bands narrow toward σ→0, that's strong universality evidence
+  - if peak drifts wildly with band choice, barrier is band-artifact / estimator-dependent
+====================================================
+
+====================================================
+σ-RESOLUTION SCALING TEST
+LOW_SIGMAS : [np.float64(0.005), np.float64(0.01), np.float64(0.015)]
+HIGH_SIGMAS: [np.float64(0.015), np.float64(0.02), np.float64(0.04)]
+Clean reference plane angle: 3.683 deg   s=[0.99999999 0.9979349 ]
+----------------------------------------------------
+off      | plane_angle(deg)
+----------------------------------------------------
+-0.400  |      3.68
+-0.380  |      3.68
+-0.360  |      3.68
+-0.340  |      3.68
+-0.320  |      3.68
+-0.300  |      3.68
+-0.280  |      3.68
+-0.260  |      3.68
+-0.240  |      3.68
+-0.220  |      3.68
+-0.200  |      3.68
+-0.180  |      3.68
+-0.160  |      3.68
+-0.140  |      3.68
+-0.120  |      3.68
+-0.100  |      3.68
+-0.080  |      3.68
+-0.060  |      3.68
+-0.040  |      3.68
+-0.020  |      3.68
++0.000  |      3.68
++0.020  |      3.68
++0.040  |      3.68
++0.060  |      3.68
++0.080  |      3.68
++0.100  |      3.68
++0.120  |      3.68
++0.140  |      3.68
++0.160  |      3.68
++0.180  |      3.68
++0.200  |      3.68
++0.220  |      3.68
++0.240  |      3.68
++0.260  |      3.68
++0.280  |      3.68
++0.300  |      3.68
++0.320  |      3.68
++0.340  |      3.68
++0.360  |      3.68
++0.380  |      3.68
++0.400  |      3.68
+----------------------------------------------------
+Peak angle = 3.683 deg  at off = -0.400
+Interpretation:
+  - if peak sharpens as bands narrow toward σ→0, that's strong universality evidence
+  - if peak drifts wildly with band choice, barrier is band-artifact / estimator-dependent
+====================================================
+
+
+================ SUMMARY ACROSS σ-BANDS ================
+
+LOW=[np.float64(0.005), np.float64(0.01), np.float64(0.015)]  HIGH=[np.float64(0.02), np.float64(0.04), np.float64(0.06)]
+  clean_ref=  5.63°   peak= 89.09° @ off=+0.060
+LOW=[np.float64(0.005), np.float64(0.01)]  HIGH=[np.float64(0.015), np.float64(0.02)]
+  clean_ref=  4.89°   peak=  4.89° @ off=-0.400
+LOW=[np.float64(0.01), np.float64(0.015)]  HIGH=[np.float64(0.04), np.float64(0.06)]
+  clean_ref=  6.71°   peak= 89.40° @ off=+0.040
+LOW=[np.float64(0.005), np.float64(0.01), np.float64(0.015)]  HIGH=[np.float64(0.015), np.float64(0.02), np.float64(0.04)]
+  clean_ref=  3.68°   peak=  3.68° @ off=-0.400
+
+DONE.
+
+
+124
+
+# ============================================================
+# STEP 3 — MANIFOLD ENERGY HEATMAP (σ-target × offset)
+# ============================================================
+# Measures RG-plane rotation ("manifold energy") as a function
+# of:
+#   • which σ is corrupted
+#   • how far the zero is displaced
+#
+# OUTPUT:
+#   table of plane-angle(deg) indexed by (σ_target, offset)
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+EDGE_DROP = 2
+
+SIGMAS = np.array([0.005, 0.01, 0.015, 0.02, 0.04, 0.06])
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+
+TARGET_IDX = 3
+OFFSETS = np.linspace(-0.30, 0.30, 31)
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def smooth_fft(f, dt, sigma):
+    k = 2*np.pi*np.fft.fftfreq(len(f), d=dt)
+    return np.real(np.fft.ifft(np.fft.fft(f) * np.exp(-(k**2) * sigma)))
+
+def find_zeros(t, f):
+    idx = np.where(np.diff(np.sign(f)))[0]
+    return t[idx]
+
+def rg_plane(z0, Z, sigmas):
+    V = []
+    for s in sigmas:
+        dt = (Z[s] - z0) / s
+        if np.linalg.norm(dt) > 0:
+            V.append(dt)
+    V = np.array(V)
+    _, _, VT = np.linalg.svd(V, full_matrices=False)
+    Q, _ = np.linalg.qr(VT[:2].T)
+    return Q
+
+def plane_angle(Q1, Q2):
+    M = Q1.T @ Q2
+    s = np.linalg.svd(M, compute_uv=False)
+    s = np.clip(s, -1, 1)
+    theta = np.degrees(np.arccos(s))
+    return float(theta.max())
+
+# ----------------------------
+# BUILD CLEAN FLOW
+# ----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+
+f0 = np.array([float(mp.siegelz(tt)) for tt in t])
+z0_raw = find_zeros(t, f0)
+z0 = z0_raw[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+
+Z_clean = {}
+for s in SIGMAS:
+    fs = smooth_fft(f0, dt, s)
+    zs = find_zeros(t, fs)
+    Z_clean[s] = zs[EDGE_DROP:EDGE_DROP+N0]
+
+# Clean reference planes
+Q_clean_low  = rg_plane(z0, Z_clean, LOW_SIGMAS)
+Q_clean_high = rg_plane(z0, Z_clean, HIGH_SIGMAS)
+theta_clean = plane_angle(Q_clean_low, Q_clean_high)
+
+print("\n================ CLEAN REFERENCE =================")
+print(f"Clean plane angle = {theta_clean:.3f} deg")
+
+# ----------------------------
+# MANIFOLD ENERGY SWEEP
+# ----------------------------
+print("\n================ MANIFOLD ENERGY MAP =================\n")
+print("σ_target | offset | plane_angle(deg)")
+print("------------------------------------")
+
+results = {}
+
+for sigma_target in HIGH_SIGMAS:
+    results[sigma_target] = []
+    for off in OFFSETS:
+        Z = {s: Z_clean[s].copy() for s in SIGMAS}
+        Z[sigma_target][TARGET_IDX] += off
+
+        Q_low  = rg_plane(z0, Z, LOW_SIGMAS)
+        Q_high = rg_plane(z0, Z, HIGH_SIGMAS)
+
+        theta = plane_angle(Q_low, Q_high)
+        results[sigma_target].append(theta)
+
+        print(f"{sigma_target:7.3f} | {off:+.3f} | {theta:8.2f}")
+
+# ----------------------------
+# SUMMARY
+# ----------------------------
+print("\n================ SUMMARY =================")
+for s in results:
+    arr = np.array(results[s])
+    peak = arr.max()
+    off_peak = OFFSETS[arr.argmax()]
+    print(f"σ={s:.3f} → peak {peak:.2f}° at off={off_peak:+.3f}")
+
+print("\nDONE.")
+
+================ CLEAN REFERENCE =================
+Clean plane angle = 27.646 deg
+
+================ MANIFOLD ENERGY MAP =================
+
+σ_target | offset | plane_angle(deg)
+------------------------------------
+  0.020 | -0.300 |    73.84
+  0.020 | -0.280 |    72.36
+  0.020 | -0.260 |    70.69
+  0.020 | -0.240 |    68.81
+  0.020 | -0.220 |    66.67
+  0.020 | -0.200 |    64.24
+  0.020 | -0.180 |    61.48
+  0.020 | -0.160 |    58.35
+  0.020 | -0.140 |    54.83
+  0.020 | -0.120 |    50.91
+  0.020 | -0.100 |    46.67
+  0.020 | -0.080 |    42.21
+  0.020 | -0.060 |    37.76
+  0.020 | -0.040 |    33.60
+  0.020 | -0.020 |    30.10
+  0.020 | +0.000 |    27.65
+  0.020 | +0.020 |    26.61
+  0.020 | +0.040 |    27.15
+  0.020 | +0.060 |    29.10
+  0.020 | +0.080 |    32.03
+  0.020 | +0.100 |    35.49
+  0.020 | +0.120 |    39.09
+  0.020 | +0.140 |    42.59
+  0.020 | +0.160 |    45.84
+  0.020 | +0.180 |    48.78
+  0.020 | +0.200 |    51.41
+  0.020 | +0.220 |    53.74
+  0.020 | +0.240 |    55.80
+  0.020 | +0.260 |    57.63
+  0.020 | +0.280 |    59.26
+  0.020 | +0.300 |    60.70
+  0.040 | -0.300 |    66.15
+  0.040 | -0.280 |    64.33
+  0.040 | -0.260 |    62.08
+  0.040 | -0.240 |    59.28
+  0.040 | -0.220 |    55.77
+  0.040 | -0.200 |    51.41
+  0.040 | -0.180 |    46.25
+  0.040 | -0.160 |    40.68
+  0.040 | -0.140 |    35.49
+  0.040 | -0.120 |    31.43
+  0.040 | -0.100 |    28.77
+  0.040 | -0.080 |    27.31
+  0.040 | -0.060 |    26.70
+  0.040 | -0.040 |    26.66
+  0.040 | -0.020 |    27.00
+  0.040 | +0.000 |    27.65
+  0.040 | +0.020 |    28.59
+  0.040 | +0.040 |    29.87
+  0.040 | +0.060 |    31.61
+  0.040 | +0.080 |    33.97
+  0.040 | +0.100 |    37.17
+  0.040 | +0.120 |    41.44
+  0.040 | +0.140 |    46.79
+  0.040 | +0.160 |    52.88
+  0.040 | +0.180 |    58.98
+  0.040 | +0.200 |    64.44
+  0.040 | +0.220 |    68.96
+  0.040 | +0.240 |    72.58
+  0.040 | +0.260 |    75.46
+  0.040 | +0.280 |    77.75
+  0.040 | +0.300 |    79.61
+  0.060 | -0.300 |    49.70
+  0.060 | -0.280 |    47.79
+  0.060 | -0.260 |    45.73
+  0.060 | -0.240 |    43.55
+  0.060 | -0.220 |    41.27
+  0.060 | -0.200 |    38.92
+  0.060 | -0.180 |    36.55
+  0.060 | -0.160 |    34.25
+  0.060 | -0.140 |    32.10
+  0.060 | -0.120 |    30.19
+  0.060 | -0.100 |    28.62
+  0.060 | -0.080 |    27.46
+  0.060 | -0.060 |    26.77
+  0.060 | -0.040 |    26.57
+  0.060 | -0.020 |    26.87
+  0.060 | +0.000 |    27.65
+  0.060 | +0.020 |    28.85
+  0.060 | +0.040 |    30.44
+  0.060 | +0.060 |    32.37
+  0.060 | +0.080 |    34.60
+  0.060 | +0.100 |    37.07
+  0.060 | +0.120 |    39.72
+  0.060 | +0.140 |    42.50
+  0.060 | +0.160 |    45.35
+  0.060 | +0.180 |    48.18
+  0.060 | +0.200 |    50.96
+  0.060 | +0.220 |    53.63
+  0.060 | +0.240 |    56.16
+  0.060 | +0.260 |    58.53
+  0.060 | +0.280 |    60.73
+  0.060 | +0.300 |    62.76
+
+================ SUMMARY =================
+σ=0.020 → peak 73.84° at off=-0.300
+σ=0.040 → peak 79.61° at off=+0.300
+σ=0.060 → peak 62.76° at off=+0.300
+
+DONE.
+
+125
+
+# ============================================================
+# STEP 4 — MANIFOLD ENERGY + SPLIT-CLOSURE (FIXED)
+# Fully self-contained, reset-safe
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+from scipy.signal import savgol_filter
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+EDGE_DROP = 2
+
+SIGMAS = np.array([0.005, 0.01, 0.015, 0.02, 0.04, 0.06])
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+
+TARGET_SIGMA = 0.06
+TARGET_IDX   = 3
+OFFSETS      = np.linspace(-0.30, 0.30, 31)
+
+POWERS = [1,3,5]
+K_DROP = 1
+
+# ----------------------------
+# NUMERICS
+# ----------------------------
+def siegel_z(t):
+    return float(mp.siegelz(t))
+
+def smooth_fft(f, dt, sigma):
+    k = 2*np.pi*np.fft.fftfreq(len(f), d=dt)
+    return np.real(np.fft.ifft(np.fft.fft(f)*np.exp(-(k**2)*sigma)))
+
+def find_zeros(t, f):
+    idx = np.where(np.diff(np.sign(f)))[0]
+    return t[idx]
+
+def odd_kernels(z):
+    Hs = []
+    for p in POWERS:
+        D = z[:,None] - z[None,:]
+        H = np.zeros_like(D)
+        mask = np.abs(D) > 0
+        H[mask] = np.sign(D[mask]) / np.abs(D[mask])**p
+        for k in range(-K_DROP, K_DROP+1):
+            np.fill_diagonal(np.roll(H,k,axis=1),0)
+        Hs.append(H)
+    return Hs
+
+def rg_plane(V):
+    _,_,VT = np.linalg.svd(V, full_matrices=False)
+    Q,_ = np.linalg.qr(VT[:2].T)
+    return Q.T
+
+def plane_angle(P,Q):
+    _,s,_ = np.linalg.svd(P@Q.T)
+    return np.degrees(np.arccos(np.clip(np.min(s),-1,1)))
+
+def fit_coeffs(V, Hs):
+    A=[]
+    for v in V:
+        X = np.column_stack([H@v for H in Hs])
+        c,*_ = np.linalg.lstsq(X, v, rcond=None)
+        A.append(c)
+    return np.array(A)
+
+def scalar_rg(A):
+    logS = np.log(SIGMAS)
+    B = np.gradient(A, logS, axis=0)
+    a,b = A.flatten(), B.flatten()
+    lam = np.dot(b,a)/np.dot(a,a)
+    corr = np.corrcoef(b,lam*a)[0,1]
+    err  = np.linalg.norm(b-lam*a)/np.linalg.norm(b)
+    return corr,err
+
+def closure_err(A):
+    U,S,VT = np.linalg.svd(A, full_matrices=False)
+    A2 = U[:,:2] @ np.diag(S[:2]) @ VT[:2,:]
+    return np.linalg.norm(A-A2)/np.linalg.norm(A)
+
+# ----------------------------
+# BUILD CLEAN FLOW
+# ----------------------------
+t = np.linspace(T0,T1,N)
+dt = t[1]-t[0]
+f0 = np.array([siegel_z(tt) for tt in t])
+
+z0 = find_zeros(t,f0)[EDGE_DROP:-EDGE_DROP]
+n0 = len(z0)
+
+Z_clean={}
+for s in SIGMAS:
+    fs = smooth_fft(f0,dt,s)
+    zs = find_zeros(t,fs)[EDGE_DROP:EDGE_DROP+n0]
+    Z_clean[s]=zs
+
+Hs = odd_kernels(z0)
+
+V_clean = np.array([(Z_clean[s]-z0)/s for s in SIGMAS])
+P_ref = rg_plane(V_clean)
+
+print("\n================ CLEAN REFERENCE ================")
+print(f"Clean plane angle = {plane_angle(P_ref,P_ref):.3f} deg")
+
+# ----------------------------
+# SWEEP
+# ----------------------------
+print("\n================ MANIFOLD ENERGY + SPLIT CLOSURE ================\n")
+print("off | plane(deg) | 2Derr | 2Derr_low | 2Derr_high | scalCorr | scalErr")
+print("--------------------------------------------------------------------")
+
+idx_map = {s:i for i,s in enumerate(SIGMAS)}
+
+for off in OFFSETS:
+    Z = {s:Z_clean[s].copy() for s in SIGMAS}
+    Z[TARGET_SIGMA][TARGET_IDX] += off
+
+    V = np.array([(Z[s]-z0)/s for s in SIGMAS])
+    P = rg_plane(V)
+
+    A = fit_coeffs(V, Hs)
+    A_low  = fit_coeffs(V[[idx_map[s] for s in LOW_SIGMAS]],  Hs)
+    A_high = fit_coeffs(V[[idx_map[s] for s in HIGH_SIGMAS]], Hs)
+
+    corr,err = scalar_rg(A)
+
+    print(f"{off:+.3f} | "
+          f"{plane_angle(P_ref,P):6.2f} | "
+          f"{closure_err(A):6.1e} | "
+          f"{closure_err(A_low):6.1e} | "
+          f"{closure_err(A_high):6.1e} | "
+          f"{corr:+.3f} | {err:.3f}")
+
+print("\nDONE.")
+
+================ CLEAN REFERENCE ================
+Clean plane angle = 0.000 deg
+
+================ MANIFOLD ENERGY + SPLIT CLOSURE ================
+
+off | plane(deg) | 2Derr | 2Derr_low | 2Derr_high | scalCorr | scalErr
+--------------------------------------------------------------------
+-0.300 |  27.57 | 3.5e-03 | 2.1e-03 | 2.3e-03 | +0.043 | 0.999
+-0.280 |  25.36 | 4.2e-03 | 2.1e-03 | 2.7e-03 | +0.107 | 0.994
+-0.260 |  23.20 | 4.4e-03 | 2.1e-03 | 2.7e-03 | +0.030 | 0.999
+-0.240 |  21.09 | 2.8e-03 | 2.1e-03 | 2.9e-03 | +0.105 | 0.995
+-0.220 |  19.04 | 5.0e-03 | 2.1e-03 | 1.8e-03 | +0.071 | 0.998
+-0.200 |  17.06 | 3.9e-03 | 2.1e-03 | 1.5e-03 | +0.021 | 1.000
+-0.180 |  15.14 | 2.8e-03 | 2.1e-03 | 2.8e-03 | +0.016 | 1.000
+-0.160 |  13.28 | 4.5e-03 | 2.1e-03 | 3.2e-03 | +0.084 | 0.996
+-0.140 |  11.48 | 2.8e-03 | 2.1e-03 | 3.0e-03 | +0.004 | 1.000
+-0.120 |   9.74 | 4.6e-03 | 2.1e-03 | 2.0e-03 | +0.146 | 0.989
+-0.100 |   8.04 | 3.7e-03 | 2.1e-03 | 2.9e-03 | +0.132 | 0.991
+-0.080 |   6.39 | 4.2e-03 | 2.1e-03 | 2.7e-03 | +0.159 | 0.987
+-0.060 |   4.76 | 3.5e-03 | 2.1e-03 | 2.2e-03 | +0.135 | 0.991
+-0.040 |   3.16 | 5.8e-03 | 2.1e-03 | 2.2e-03 | +0.087 | 0.996
+-0.020 |   1.58 | 4.4e-03 | 2.1e-03 | 3.0e-03 | +0.028 | 1.000
++0.000 |   0.00 | 5.0e-03 | 2.1e-03 | 1.4e-03 | +0.110 | 0.994
++0.020 |   1.58 | 5.8e-03 | 2.1e-03 | 1.8e-03 | +0.133 | 0.991
++0.040 |   3.17 | 3.5e-03 | 2.1e-03 | 2.4e-03 | +0.019 | 1.000
++0.060 |   4.79 | 4.4e-03 | 2.1e-03 | 3.0e-03 | +0.029 | 1.000
++0.080 |   6.43 | 3.9e-03 | 2.1e-03 | 3.2e-03 | +0.131 | 0.991
++0.100 |   8.11 | 4.9e-03 | 2.1e-03 | 2.1e-03 | +0.020 | 1.000
++0.120 |   9.84 | 2.8e-03 | 2.1e-03 | 2.7e-03 | +0.130 | 0.992
++0.140 |  11.62 | 3.0e-03 | 2.1e-03 | 3.2e-03 | +0.107 | 0.994
++0.160 |  13.47 | 2.8e-03 | 2.1e-03 | 3.0e-03 | +0.006 | 1.000
++0.180 |  15.39 | 6.6e-03 | 2.1e-03 | 9.4e-04 | +0.067 | 0.998
++0.200 |  17.38 | 3.6e-03 | 2.1e-03 | 2.3e-03 | +0.129 | 0.992
++0.220 |  19.45 | 3.2e-03 | 2.1e-03 | 2.2e-03 | +0.214 | 0.977
++0.240 |  21.60 | 2.9e-03 | 2.1e-03 | 2.4e-03 | +0.039 | 0.999
++0.260 |  23.82 | 2.9e-03 | 2.1e-03 | 2.8e-03 | +0.005 | 1.000
++0.280 |  26.10 | 3.5e-03 | 2.1e-03 | 2.9e-03 | +0.083 | 0.997
++0.300 |  28.44 | 5.3e-03 | 2.1e-03 | 2.9e-03 | +0.043 | 0.999
+
+DONE.
+
+125
+
+# ============================================================
+# STEP 5 — SELF-CONTAINED "MANIFOLD ENERGY" CURVATURE TEST
+# ============================================================
+# Builds clean σ-flow of Riemann–Siegel Z(t) zeros in a window,
+# then measures RG-plane rotation angle vs injected offset ("energy").
+# Finally fits a local quadratic around 0 to estimate curvature E''(0).
+#
+# Single-cell. No saved-state assumptions. No scipy.
+#
+# Dependencies: numpy, mpmath
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1      = 60.0, 120.0
+N_GRID      = 8192
+EDGE_DROP   = 2
+
+SIGMAS      = np.array([0.0, 0.005, 0.01, 0.015, 0.02, 0.04, 0.06], float)
+
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+
+# Injection target
+TARGET_SIGMA = 0.06
+TARGET_IDX   = 3
+
+# Corruption mode:
+#   "one_sigma"  -> shift only at TARGET_SIGMA
+#   "all_sigmas" -> shift across all σ>0 with scaling below
+CORRUPT_MODE = "one_sigma"   # "one_sigma" or "all_sigmas"
+
+# Scaling across σ when CORRUPT_MODE="all_sigmas"
+#   "flat"      : shift(s)=off
+#   "quadratic" : shift(s)=off*(s/TARGET_SIGMA)^2
+#   "kink"      : shift(s)=off if s>=SIGMA_KINK else 0
+BREAK_MODE   = "quadratic"
+SIGMA_KINK   = 0.02
+
+# Offset sweep
+OFF_MIN, OFF_MAX, OFF_STEPS = -0.30, 0.30, 31
+
+# Local quadratic fit radius around 0
+FIT_RADIUS  = 0.08
+
+# ----------------------------
+# NUMERICS
+# ----------------------------
+EPS_NORM = 1e-15
+
+# ----------------------------
+# FUNCTIONS
+# ----------------------------
+def z_func(t):
+    return float(mp.siegelz(t))
+
+def smooth_fft_real(f, dt, sigma):
+    if sigma <= 0:
+        return f.copy()
+    n = f.size
+    freq  = np.fft.fftfreq(n, d=dt)
+    omega = 2*np.pi*freq
+    filt  = np.exp(-(omega*omega)*sigma)
+    return np.real(np.fft.ifft(np.fft.fft(f) * filt))
+
+def find_zeros_linear(t, f):
+    s = np.sign(f)
+    s[s == 0] = 1.0
+    idx = np.where(s[:-1] * s[1:] < 0)[0]
+    if idx.size == 0:
+        return np.array([], float)
+    t0, t1 = t[idx], t[idx+1]
+    f0, f1 = f[idx], f[idx+1]
+    denom = (f1 - f0)
+    denom = np.where(np.abs(denom) < 1e-300, 1e-300, denom)
+    z = t0 - f0 * (t1 - t0) / denom
+    return z.astype(float)
+
+def build_flow():
+    t = np.linspace(T0, T1, N_GRID)
+    dt = float(t[1] - t[0])
+
+    f0 = np.array([z_func(tt) for tt in t], float)
+
+    z0_raw = find_zeros_linear(t, f0)
+    if z0_raw.size < 2*EDGE_DROP + 3:
+        raise RuntimeError(f"Too few baseline zeros ({z0_raw.size}); increase window or N_GRID.")
+
+    z0 = z0_raw[EDGE_DROP:-EDGE_DROP]
+    n0 = z0.size
+
+    Z = {0.0: z0.copy()}
+
+    for s in SIGMAS:
+        s = float(s)
+        if s <= 0:
+            continue
+        fs = smooth_fft_real(f0, dt, s)
+        zs_raw = find_zeros_linear(t, fs)
+        zs = zs_raw[EDGE_DROP:EDGE_DROP + n0]
+
+        # if mismatch, crop everything to min
+        if zs.size != n0:
+            m = min(n0, zs.size)
+            z0 = z0[:m]
+            for k in list(Z.keys()):
+                Z[k] = Z[k][:m]
+            n0 = m
+            zs = zs[:m]
+
+        Z[s] = zs.copy()
+
+    return z0, Z
+
+def orthonormal_plane(z0, Z, sig_list):
+    sig_list = [float(s) for s in sig_list if float(s) in Z and float(s) > 0]
+    if not sig_list:
+        raise RuntimeError("No usable σ values for plane.")
+
+    rows = []
+    for s in sig_list:
+        d = Z[s] - z0
+        if np.linalg.norm(d) < EPS_NORM:
+            continue
+        rows.append(d / s)
+
+    if not rows:
+        raise RuntimeError("All generator rows ~0; try larger σ or different window.")
+
+    V = np.vstack(rows)  # (m,N)
+    _, _, VT = np.linalg.svd(V, full_matrices=False)
+    P = VT[:2, :]        # (2,N)
+    Q, _ = np.linalg.qr(P.T)  # (N,2)
+    return Q.T           # (2,N)
+
+def principal_angle_deg(Q1, Q2):
+    M = Q1 @ Q2.T
+    s = np.linalg.svd(M, compute_uv=False)
+    s = np.clip(s, 0.0, 1.0)
+    theta = np.arccos(np.min(s))
+    return float(theta * 180/np.pi), s
+
+def apply_corruption(Z_in, off):
+    Z = {float(s): np.array(Z_in[float(s)], float).copy() for s in Z_in}
+
+    def scale(s):
+        s = float(s)
+        if BREAK_MODE == "flat":
+            return 1.0
+        if BREAK_MODE == "quadratic":
+            return (s / float(TARGET_SIGMA))**2 if float(TARGET_SIGMA) != 0 else 1.0
+        if BREAK_MODE == "kink":
+            return 1.0 if s >= float(SIGMA_KINK) else 0.0
+        return 1.0
+
+    if CORRUPT_MODE == "one_sigma":
+        s = float(TARGET_SIGMA)
+        if s in Z and s > 0 and TARGET_IDX < Z[s].size:
+            Z[s][TARGET_IDX] += float(off)
+        return Z
+
+    if CORRUPT_MODE == "all_sigmas":
+        for s in SIGMAS:
+            s = float(s)
+            if s <= 0:
+                continue
+            if s in Z and TARGET_IDX < Z[s].size:
+                Z[s][TARGET_IDX] += float(off) * scale(s)
+        return Z
+
+    raise ValueError("CORRUPT_MODE must be 'one_sigma' or 'all_sigmas'.")
+
+def quad_fit_curvature(offsets, energies, fit_radius):
+    offsets = np.asarray(offsets, float)
+    energies = np.asarray(energies, float)
+    mask = np.abs(offsets) <= float(fit_radius)
+    x, y = offsets[mask], energies[mask]
+    if x.size < 5:
+        raise RuntimeError("Not enough points near 0 for quadratic fit; increase OFF_STEPS or FIT_RADIUS.")
+    # y = a2 x^2 + a1 x + a0
+    a2, a1, a0 = np.polyfit(x, y, 2)
+    yhat = a2*x*x + a1*x + a0
+    rmse = float(np.sqrt(np.mean((y - yhat)**2)))
+    Epp0 = float(2.0 * a2)
+    return float(a0), float(a1), float(a2), Epp0, rmse
+
+# ----------------------------
+# RUN
+# ----------------------------
+print("\n================ BUILD CLEAN FLOW ================\n")
+z0, Z_clean = build_flow()
+n0 = len(z0)
+present = sorted(Z_clean.keys())
+print(f"Baseline zeros used (after edge_drop={EDGE_DROP}): {n0}")
+print(f"Tracked σ values present: {present}")
+print(f"First few baseline zeros: {np.round(z0[:min(12,n0)], 6)}")
+if float(TARGET_SIGMA) in Z_clean and TARGET_IDX < n0:
+    print(f"Target: sigma={TARGET_SIGMA} idx={TARGET_IDX} clean t={Z_clean[float(TARGET_SIGMA)][TARGET_IDX]:.6f}")
+
+Q_low_ref  = orthonormal_plane(z0, Z_clean, LOW_SIGMAS)
+Q_high_ref = orthonormal_plane(z0, Z_clean, HIGH_SIGMAS)
+E0, s0 = principal_angle_deg(Q_low_ref, Q_high_ref)
+
+print("\n================ CLEAN REFERENCE ================\n")
+print(f"LOW_SIGMAS  = {LOW_SIGMAS}")
+print(f"HIGH_SIGMAS = {HIGH_SIGMAS}")
+print(f"Clean plane angle E(0) = {E0:.6f} deg   s={s0}")
+
+offsets = np.linspace(OFF_MIN, OFF_MAX, OFF_STEPS)
+energies = []
+
+print("\n================ ENERGY SWEEP ================\n")
+print(f"CORRUPT_MODE={CORRUPT_MODE}   BREAK_MODE={BREAK_MODE}")
+print("off      | plane_angle(deg)")
+print("-"*32)
+
+for off in offsets:
+    Zc = apply_corruption(Z_clean, off)
+    Ql = orthonormal_plane(z0, Zc, LOW_SIGMAS)
+    Qh = orthonormal_plane(z0, Zc, HIGH_SIGMAS)
+    E, _ = principal_angle_deg(Ql, Qh)
+    energies.append(E)
+    print(f"{off:+.3f}  |   {E:8.3f}")
+
+energies = np.asarray(energies, float)
+
+c0, c1, c2, Epp0, rmse = quad_fit_curvature(offsets, energies, FIT_RADIUS)
+
+print("\n================ LOCAL QUADRATIC FIT ================\n")
+print(f"Fit radius: |off| <= {FIT_RADIUS}")
+print("E(off) ≈ c0 + c1 off + c2 off^2   (degrees)")
+print(f"c0 = {c0:+.6f} deg")
+print(f"c1 = {c1:+.6f} deg / t")
+print(f"c2 = {c2:+.6f} deg / t^2")
+print(f"E''(0) = 2*c2 = {Epp0:+.6f} deg / t^2")
+print(f"fit RMSE = {rmse:.6e} deg")
+
+# evenness check
+mid = len(offsets)//2
+if len(offsets) % 2 == 1:
+    L = energies[:mid][::-1]
+    R = energies[mid+1:]
+    if L.size == R.size and L.size > 0:
+        even_err = float(np.mean(np.abs(L - R)))
+        print("\n================ EVENNESS CHECK ================\n")
+        print(f"mean |E(+off)-E(-off)| over sweep = {even_err:.6e} deg")
+
+print("\nDONE.")
+
+================ BUILD CLEAN FLOW ================
+
+Baseline zeros used (after edge_drop=2): 21
+Tracked σ values present: [0.0, 0.005, 0.01, 0.015, 0.02, 0.04, 0.06]
+First few baseline zeros: [67.079809 69.546401 72.067155 75.704692 77.144836 79.337373 82.910385
+ 84.735492 87.425275 88.809109 92.491903 94.65135 ]
+Target: sigma=0.06 idx=3 clean t=72.045500
+
+================ CLEAN REFERENCE ================
+
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+Clean plane angle E(0) = 5.217184 deg   s=[1.         0.99585717]
+
+================ ENERGY SWEEP ================
+
+CORRUPT_MODE=one_sigma   BREAK_MODE=quadratic
+off      | plane_angle(deg)
+--------------------------------
+-0.300  |     51.690
+-0.280  |     49.301
+-0.260  |     46.692
+-0.240  |     43.857
+-0.220  |     40.799
+-0.200  |     37.531
+-0.180  |     34.077
+-0.160  |     30.477
+-0.140  |     26.776
+-0.120  |     23.027
+-0.100  |     19.286
+-0.080  |     15.610
+-0.060  |     12.069
+-0.040  |      8.800
+-0.020  |      6.179
++0.000  |      5.217
++0.020  |      6.655
++0.040  |      9.468
++0.060  |     12.800
++0.080  |     16.357
++0.100  |     20.027
++0.120  |     23.743
++0.140  |     27.452
++0.160  |     31.101
++0.180  |     34.639
++0.200  |     38.024
++0.220  |     41.220
++0.240  |     44.206
++0.260  |     46.971
++0.280  |     49.516
++0.300  |     51.847
+
+================ LOCAL QUADRATIC FIT ================
+
+Fit radius: |off| <= 0.08
+E(off) ≈ c0 + c1 off + c2 off^2   (degrees)
+c0 = +5.877392 deg
+c1 = +10.985793 deg / t
+c2 = +1741.950536 deg / t^2
+E''(0) = 2*c2 = +3483.901073 deg / t^2
+fit RMSE = 4.434935e-01 deg
+
+================ EVENNESS CHECK ================
+
+mean |E(+off)-E(-off)| over sweep = 5.236126e-01 deg
+
+DONE.
+
+126
+
+# ============================================================
+# STEP 6 — EVEN / ODD MANIFOLD ENERGY (FLOAT-SAFE)
+# ============================================================
+# Fixes float-key errors by working index-wise, not dict-wise
+# Fully self-contained. Single cell.
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+np.set_printoptions(precision=6, suppress=True)
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+EDGE_DROP = 2
+SIGMAS = np.array([0.005, 0.01, 0.015, 0.02, 0.04, 0.06])
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+
+TARGET_SIGMA = 0.06
+TARGET_IDX   = 3
+OFFSETS = np.linspace(-0.30, 0.30, 31)
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def find_zeros(t, f):
+    idx = np.where(np.diff(np.sign(f)))[0]
+    return t[idx]
+
+def smooth_fft(f, dt, sigma):
+    freqs = np.fft.fftfreq(len(f), d=dt)
+    kernel = np.exp(-(2*np.pi*freqs)**2 * sigma)
+    return np.real(np.fft.ifft(np.fft.fft(f) * kernel))
+
+def rg_plane(Z, z0, sigmas):
+    V = [(Z[s] - z0) / s for s in sigmas]
+    V = np.array(V)
+    _, _, VT = np.linalg.svd(V, full_matrices=False)
+    Q, _ = np.linalg.qr(VT[:2].T)
+    return Q.T
+
+def plane_angle(P1, P2):
+    M = P1 @ P2.T
+    _, s, _ = np.linalg.svd(M)
+    return np.degrees(np.arccos(np.clip(s.min(), -1, 1)))
+
+# ----------------------------
+# BUILD CLEAN FLOW
+# ----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+f0 = np.array([float(mp.siegelz(tt)) for tt in t])
+
+z0_raw = find_zeros(t, f0)
+z0 = z0_raw[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+
+Z_clean = {0.0: z0.copy()}
+for s in SIGMAS:
+    fs = smooth_fft(f0, dt, s)
+    zs = find_zeros(t, fs)
+    Z_clean[s] = zs[EDGE_DROP:EDGE_DROP + N0]
+
+P_ref = rg_plane(Z_clean, z0, SIGMAS)
+E0 = plane_angle(P_ref, P_ref)
+
+print("\n================ CLEAN REFERENCE ================")
+print(f"Clean plane angle E(0) = {E0:.6e} deg")
+
+# ----------------------------
+# ENERGY SWEEP (ARRAY FORM)
+# ----------------------------
+E = np.zeros_like(OFFSETS)
+
+for i, off in enumerate(OFFSETS):
+    Z = {s: Z_clean[s].copy() for s in Z_clean}
+    Z[TARGET_SIGMA][TARGET_IDX] += off
+    P = rg_plane(Z, z0, SIGMAS)
+    E[i] = plane_angle(P_ref, P)
+
+# ----------------------------
+# EVEN / ODD DECOMPOSITION (INDEX SAFE)
+# ----------------------------
+E_even = np.zeros_like(E)
+E_odd  = np.zeros_like(E)
+
+for i in range(len(OFFSETS)):
+    j = len(OFFSETS) - 1 - i
+    E_even[i] = 0.5 * (E[i] + E[j])
+    E_odd[i]  = 0.5 * (E[i] - E[j])
+
+# ----------------------------
+# LOCAL CURVATURE (EVEN PART)
+# ----------------------------
+R = 0.06
+mask = np.abs(OFFSETS) <= R
+xs = OFFSETS[mask]
+ys = E_even[mask]
+
+# Quadratic fit: E_even ≈ a + b x^2
+X = np.column_stack([np.ones_like(xs), xs**2])
+a, b = np.linalg.lstsq(X, ys, rcond=None)[0]
+curv_quad = 2 * b
+
+# Finite-difference curvature
+h = 0.04
+i0 = np.argmin(np.abs(OFFSETS))
+ip = np.argmin(np.abs(OFFSETS - h))
+im = np.argmin(np.abs(OFFSETS + h))
+curv_fd = (E[ip] - 2*E[i0] + E[im]) / (h*h)
+
+# ----------------------------
+# OUTPUT
+# ----------------------------
+print("\n================ EVEN / ODD ENERGY =================")
+print("off      |  E(off)   E_even   E_odd")
+print("-------------------------------------")
+for off, e, ev, od in zip(OFFSETS, E, E_even, E_odd):
+    print(f"{off:+.3f} | {e:7.3f}  {ev:7.3f}  {od:7.3f}")
+
+print("\n================ BARRIER CURVATURE =================")
+print(f"Quadratic even-fit curvature E''(0) = {curv_quad:.3f} deg / t^2")
+print(f"Finite-difference curvature E''(0) = {curv_fd:.3f} deg / t^2")
+
+print("\n================ SYMMETRY CHECK =================")
+odd_strength  = np.mean(np.abs(E_odd))
+even_strength = np.mean(np.abs(E_even))
+print(f"Mean |E_odd|  = {odd_strength:.3f} deg")
+print(f"Mean |E_even| = {even_strength:.3f} deg")
+print(f"Odd / Even ratio = {odd_strength / even_strength:.3f}")
+
+print("\nInterpretation:")
+print("• Even curvature → genuine geometric barrier")
+print("• Odd component  → estimator drift / transport")
+print("• Agreement of curvatures → real obstruction")
+
+print("\n================ DONE =================")
+
+================ CLEAN REFERENCE ================
+Clean plane angle E(0) = 1.478779e-06 deg
+
+================ EVEN / ODD ENERGY =================
+off      |  E(off)   E_even   E_odd
+-------------------------------------
+-0.300 |  27.568   28.006   -0.437
+-0.280 |  25.362   25.733   -0.371
+-0.260 |  23.200   23.510   -0.310
+-0.240 |  21.092   21.346   -0.255
+-0.220 |  19.043   19.249   -0.205
+-0.200 |  17.059   17.222   -0.163
+-0.180 |  15.139   15.265   -0.126
+-0.160 |  13.282   13.377   -0.096
+-0.140 |  11.484   11.554   -0.070
+-0.120 |   9.740    9.789   -0.050
+-0.100 |   8.043    8.076   -0.033
+-0.080 |   6.386    6.407   -0.021
+-0.060 |   4.762    4.774   -0.011
+-0.040 |   3.163    3.168   -0.005
+-0.020 |   1.578    1.579   -0.001
++0.000 |   0.000    0.000    0.000
++0.020 |   1.580    1.579    0.001
++0.040 |   3.173    3.168    0.005
++0.060 |   4.785    4.774    0.011
++0.080 |   6.428    6.407    0.021
++0.100 |   8.110    8.076    0.033
++0.120 |   9.839    9.789    0.050
++0.140 |  11.624   11.554    0.070
++0.160 |  13.473   13.377    0.096
++0.180 |  15.392   15.265    0.126
++0.200 |  17.384   17.222    0.163
++0.220 |  19.454   19.249    0.205
++0.240 |  21.601   21.346    0.255
++0.260 |  23.820   23.510    0.310
++0.280 |  26.105   25.733    0.371
++0.300 |  28.443   28.006    0.437
+
+================ BARRIER CURVATURE =================
+Quadratic even-fit curvature E''(0) = 2277.604 deg / t^2
+Finite-difference curvature E''(0) = 3959.402 deg / t^2
+
+================ SYMMETRY CHECK =================
+Mean |E_odd|  = 0.139 deg
+Mean |E_even| = 13.487 deg
+Odd / Even ratio = 0.010
+
+Interpretation:
+• Even curvature → genuine geometric barrier
+• Odd component  → estimator drift / transport
+• Agreement of curvatures → real obstruction
+
+============
+
+127
+
+# ============================================================
+# STEP 7 — CURVATURE CONVERGENCE (h-scan + R-scan)
+# Fully self-contained, single cell, restart-proof.
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+np.set_printoptions(precision=6, suppress=True)
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+EDGE_DROP = 2
+SIGMAS = np.array([0.005, 0.01, 0.015, 0.02, 0.04, 0.06])
+
+TARGET_SIGMA = 0.06
+TARGET_IDX   = 3
+OFFSETS = np.linspace(-0.30, 0.30, 31)  # step=0.02
+
+# curvature scan params
+H_LIST = [0.02, 0.04, 0.06, 0.08, 0.10]   # finite-diff steps (must exist in OFFSETS grid)
+R_LIST = [0.04, 0.06, 0.08, 0.10, 0.12]   # quadratic-fit radii
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def find_zeros(t, f):
+    idx = np.where(np.diff(np.sign(f)))[0]
+    return t[idx]
+
+def smooth_fft(f, dt, sigma):
+    freqs = np.fft.fftfreq(len(f), d=dt)
+    kernel = np.exp(-(2*np.pi*freqs)**2 * sigma)
+    return np.real(np.fft.ifft(np.fft.fft(f) * kernel))
+
+def rg_plane(Z, z0, sigmas):
+    V = np.array([(Z[s] - z0)/s for s in sigmas])
+    _, _, VT = np.linalg.svd(V, full_matrices=False)
+    Q, _ = np.linalg.qr(VT[:2].T)
+    return Q.T
+
+def plane_angle(P1, P2):
+    M = P1 @ P2.T
+    _, s, _ = np.linalg.svd(M)
+    return np.degrees(np.arccos(np.clip(s.min(), -1, 1)))
+
+def idx_of(x):
+    return int(np.argmin(np.abs(OFFSETS - x)))
+
+# ----------------------------
+# BUILD CLEAN FLOW
+# ----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+f0 = np.array([float(mp.siegelz(tt)) for tt in t])
+
+z0_raw = find_zeros(t, f0)
+z0 = z0_raw[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+
+Z_clean = {0.0: z0.copy()}
+for s in SIGMAS:
+    fs = smooth_fft(f0, dt, s)
+    zs = find_zeros(t, fs)
+    Z_clean[s] = zs[EDGE_DROP:EDGE_DROP + N0]
+
+P_ref = rg_plane(Z_clean, z0, SIGMAS)
+E0 = plane_angle(P_ref, P_ref)
+
+# ----------------------------
+# ENERGY SWEEP (E(off))
+# ----------------------------
+E = np.zeros_like(OFFSETS)
+for i, off in enumerate(OFFSETS):
+    Z = {s: Z_clean[s].copy() for s in Z_clean}
+    Z[TARGET_SIGMA][TARGET_IDX] += off
+    P = rg_plane(Z, z0, SIGMAS)
+    E[i] = plane_angle(P_ref, P)
+
+# even part
+E_even = np.zeros_like(E)
+for i in range(len(OFFSETS)):
+    j = len(OFFSETS) - 1 - i
+    E_even[i] = 0.5*(E[i] + E[j])
+
+print("\n================ CLEAN REFERENCE ================")
+print(f"E(0) = {E0:.6e} deg")
+print("Baseline zeros used:", len(z0))
+
+# ----------------------------
+# FINITE-DIFF CURVATURE VS h
+# ----------------------------
+print("\n================ FINITE-DIFF CURVATURE SCAN ================")
+print("h   | E''_fd(0)  (deg/t^2) | E(h)  E(0)  E(-h)")
+print("----------------------------------------------------------")
+
+fd_vals = []
+i0 = idx_of(0.0)
+
+for h in H_LIST:
+    ip = idx_of(+h)
+    im = idx_of(-h)
+    if abs(OFFSETS[ip] - h) > 1e-9 or abs(OFFSETS[im] + h) > 1e-9:
+        continue
+    curv = (E_even[ip] - 2*E_even[i0] + E_even[im]) / (h*h)
+    fd_vals.append((h, curv))
+    print(f"{h:0.2f} | {curv:10.3f}           | {E_even[ip]:5.3f} {E_even[i0]:5.3f} {E_even[im]:5.3f}")
+
+# ----------------------------
+# QUADRATIC-FIT CURVATURE VS R
+# ----------------------------
+print("\n================ QUADRATIC-FIT CURVATURE SCAN ================")
+print("R   | E''_quad(0) (deg/t^2) | points | RMSE(deg)")
+print("--------------------------------------------------")
+
+quad_vals = []
+for R in R_LIST:
+    mask = np.abs(OFFSETS) <= R
+    xs = OFFSETS[mask]
+    ys = E_even[mask]
+    X = np.column_stack([np.ones_like(xs), xs**2])
+    a, b = np.linalg.lstsq(X, ys, rcond=None)[0]
+    pred = a + b*xs**2
+    rmse = float(np.sqrt(np.mean((pred - ys)**2)))
+    curv = 2*b
+    quad_vals.append((R, curv, xs.size, rmse))
+    print(f"{R:0.2f} | {curv:10.3f}           | {xs.size:6d} | {rmse:8.4f}")
+
+# ----------------------------
+# QUICK STABILITY READOUT
+# ----------------------------
+def stats(arr):
+    vals = np.array([v for _, v in arr], float)
+    return float(vals.mean()), float(vals.std()), float(vals.min()), float(vals.max())
+
+if fd_vals:
+    m, s, lo, hi = stats(fd_vals)
+    print("\nFD curvature stats:")
+    print(f"  mean={m:.3f}  std={s:.3f}  range=[{lo:.3f},{hi:.3f}]")
+
+if quad_vals:
+    vals = np.array([v for _, v, _, _ in quad_vals], float)
+    print("\nQuad curvature stats:")
+    print(f"  mean={vals.mean():.3f}  std={vals.std():.3f}  range=[{vals.min():.3f},{vals.max():.3f}]")
+
+print("\nInterpretation guide:")
+print("• If E'' stabilizes as h→0 and as R shrinks, barrier curvature is real & local.")
+print("• If E'' drifts wildly, the barrier is non-quadratic or estimator-dependent.")
+print("\n================ DONE =================")
+
+================ CLEAN REFERENCE ================
+E(0) = 1.478779e-06 deg
+Baseline zeros used: 21
+
+================ FINITE-DIFF CURVATURE SCAN ================
+h   | E''_fd(0)  (deg/t^2) | E(h)  E(0)  E(-h)
+----------------------------------------------------------
+0.02 |   7896.121           | 1.579 0.000 1.579
+0.04 |   3959.402           | 3.168 0.000 3.168
+0.06 |   2652.172           | 4.774 0.000 4.774
+0.08 |   2002.275           | 6.407 0.000 6.407
+0.10 |   1615.262           | 8.076 0.000 8.076
+
+================ QUADRATIC-FIT CURVATURE SCAN ================
+R   | E''_quad(0) (deg/t^2) | points | RMSE(deg)
+--------------------------------------------------
+0.04 |   3521.989           |      4 |   0.3712
+0.06 |   2277.604           |      7 |   0.4486
+0.08 |   1832.815           |      8 |   0.5609
+0.10 |   1490.141           |     10 |   0.6546
+0.12 |   1203.518           |     13 |   0.7584
+
+FD curvature stats:
+  mean=3625.047  std=2279.166  range=[1615.262,7896.121]
+
+Quad curvature stats:
+  mean=2065.213  std=811.732  range=[1203.518,3521.989]
+
+Interpretation guide:
+• If E'' stabilizes as h→0 and as R shrinks, barrier curvature is real & local.
+• If E'' drifts wildly, the barrier is non-quadratic or estimator-dependent.
+
+================ DONE =================
+
+128
+
+# ============================================================
+# STEP 8 — CUSP EXPONENT EXTRACTION (E(off) ~ C |off|^alpha)
+# ============================================================
+# Self-contained, restart-proof single cell.
+#
+# What it does:
+#  1) Build clean σ-flow from Re ξ(1/2+it) (via mp.siegelz for stability).
+#  2) Track zeros across σ (Gaussian FFT smoothing).
+#  3) Build RG planes for LOW_SIGMAS vs HIGH_SIGMAS using v(σ)=(z(σ)-z0)/σ.
+#  4) Corrupt a chosen zero's trajectory by applying an offset (optionally σ-dependent),
+#     then compute plane angle energy E(off).
+#  5) Enforce even part: E_even(off) = (E(off)+E(-off))/2.
+#  6) Fit log(E_even) vs log(|off|) over a chosen small-offset range to extract alpha.
+#  7) Print diagnostics + robustness checks (multi-R fits).
+#
+# Dependencies: numpy, mpmath (both standard in Colab). No saved-state assumptions.
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+np.set_printoptions(precision=6, suppress=True)
+
+# ----------------------------
+# CONFIG (edit these)
+# ----------------------------
+T0, T1   = 60.0, 120.0
+N_GRID   = 8192
+EDGE_DROP = 2
+
+# σ grid used for tracking (include 0.0 for baseline if you want)
+SIGMAS = np.array([0.0, 0.005, 0.01, 0.015, 0.02, 0.04, 0.06], dtype=float)
+
+# RG plane comparison sets (must be subsets of SIGMAS > 0)
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+
+# Choose which σ to corrupt (or use "all_sigmas")
+CORRUPT_MODE = "one_sigma"   # "one_sigma" or "all_sigmas"
+SIGMA_TARGET = 0.06          # used if CORRUPT_MODE="one_sigma"
+
+# Break mode: how offset is applied as a function of σ
+BREAK_MODE = "constant"      # "constant" or "quadratic"
+# constant  : add off
+# quadratic : add off*(σ/σmax)^2
+
+# Which zero index to corrupt (in the edge-dropped baseline ordering)
+TARGET_IDX = 3
+
+# Offset sweep (must be symmetric around 0 for even/odd extraction)
+OFFSETS = np.round(np.linspace(-0.30, 0.30, 31), 3)
+
+# Exponent-fit radii: use only |off| <= R for fitting alpha
+FIT_RADII = [0.04, 0.06, 0.08, 0.10]
+
+# Minimum energy floor to avoid log(0); also screens ultra-tiny angles
+E_FLOOR_DEG = 1e-8
+
+# ----------------------------
+# Helpers
+# ----------------------------
+def z_func(t):
+    # Siegel Z is stable and has the same zeros on the critical line.
+    return float(mp.siegelz(t))
+
+def smooth_fft(f, dt, sigma):
+    # Gaussian smoothing in frequency domain.
+    # f is real array length N, dt is spacing, sigma>0
+    N = len(f)
+    w = 2*np.pi*np.fft.fftfreq(N, d=dt)     # angular freq
+    F = np.fft.fft(f)
+    G = np.exp(-(w*w)*sigma)
+    fs = np.real(np.fft.ifft(F * G))
+    return fs
+
+def find_zeros_linear(t, f):
+    # sign-change + linear interpolation
+    s = np.sign(f)
+    idx = np.where(s[:-1]*s[1:] < 0)[0]
+    if len(idx) == 0:
+        return np.array([], dtype=float)
+    t0 = t[idx]
+    t1 = t[idx+1]
+    f0 = f[idx]
+    f1 = f[idx+1]
+    # linear root in [t0,t1]
+    zr = t0 - f0*(t1 - t0)/(f1 - f0)
+    return zr
+
+def build_flow(T0, T1, N, sigmas, edge_drop):
+    t = np.linspace(T0, T1, N)
+    dt = t[1] - t[0]
+    f0 = np.array([z_func(tt) for tt in t], dtype=float)
+
+    # baseline zeros at sigma=0
+    z0_raw = find_zeros_linear(t, f0)
+    if len(z0_raw) < 2*edge_drop + 3:
+        raise RuntimeError(f"Too few baseline zeros found: {len(z0_raw)} (increase window or N).")
+    z0 = z0_raw[edge_drop:-edge_drop]
+    n0 = len(z0)
+
+    Z = {0.0: z0.copy()}
+
+    for s in sigmas:
+        if s == 0.0:
+            continue
+        fs = smooth_fft(f0, dt, s)
+        zs_raw = find_zeros_linear(t, fs)
+        # edge drop + match length
+        zs = zs_raw[edge_drop:edge_drop + n0]
+        if len(zs) != n0:
+            # attempt to clip/pad by truncation if longer
+            if len(zs_raw) >= edge_drop + n0:
+                zs = zs_raw[edge_drop:edge_drop+n0]
+            else:
+                raise RuntimeError(f"Tracking failed at sigma={s}: got {len(zs)} zeros, expected {n0}.")
+        Z[float(s)] = np.asarray(zs, float)
+
+    return t, f0, z0, Z
+
+def vstack_generators(z0, Z, sigmas):
+    # returns matrix V of shape (len(sigmas), Nzeros): each row is v(σ)=(z(σ)-z0)/σ
+    z0 = np.asarray(z0, float)
+    rows = []
+    used = []
+    for s in sigmas:
+        s = float(s)
+        if s <= 0:
+            continue
+        if s not in Z:
+            continue
+        dt = np.asarray(Z[s], float) - z0
+        # skip degenerate
+        if np.linalg.norm(dt) == 0:
+            continue
+        rows.append(dt / s)
+        used.append(s)
+    V = np.array(rows, dtype=float)
+    return V, used
+
+def plane_from_sigmas(z0, Z, sig_list, rank=2):
+    V, used = vstack_generators(z0, Z, sig_list)
+    if V.shape[0] < rank:
+        raise RuntimeError(f"Not enough usable sigmas to form rank-{rank} plane: got {V.shape[0]}")
+    # SVD on V: rows are samples in R^N, right singular vectors span the dominant subspace
+    U, S, VT = np.linalg.svd(V, full_matrices=False)
+    P = VT[:rank].copy()  # shape (rank, N)
+    # Orthonormalise row-space basis robustly
+    Q, _ = np.linalg.qr(P.T)  # Q shape (N,rank)
+    return Q[:, :rank]        # returns (N,rank) orthonormal columns
+
+def principal_angle_deg(Q1, Q2):
+    # Q1,Q2 are (N,2) with orthonormal columns
+    M = Q1.T @ Q2
+    s = np.linalg.svd(M, compute_uv=False)
+    s = np.clip(s, 0.0, 1.0)
+    # principal angles: theta_i = arccos(s_i)
+    thetas = np.arccos(s)
+    # report max principal angle (more sensitive)
+    return float(np.degrees(np.max(thetas))), s
+
+def apply_corruption(Z_clean, z0, offsets, corrupt_mode, sigma_target, break_mode, target_idx):
+    # returns dict mapping off -> Z_corrupted (dict sigma->zeros array)
+    sigmas_present = sorted(Z_clean.keys())
+    sig_pos = [s for s in sigmas_present if s > 0]
+    smax = max(sig_pos) if sig_pos else 1.0
+
+    out = {}
+    for off in offsets:
+        Zc = {s: Z_clean[s].copy() for s in Z_clean}
+        for s in sig_pos:
+            do_apply = (corrupt_mode == "all_sigmas") or (abs(s - sigma_target) < 1e-15)
+            if not do_apply:
+                continue
+            if break_mode == "constant":
+                delta = off
+            elif break_mode == "quadratic":
+                delta = off * (s / smax)**2
+            else:
+                raise RuntimeError(f"Unknown BREAK_MODE: {break_mode}")
+            Zc[s][target_idx] += delta
+        out[float(off)] = Zc
+    return out
+
+def energy_curve(z0, Z_clean, offsets, corrupt_mode, sigma_target, break_mode, target_idx, low_sigmas, high_sigmas):
+    # Compute energy E(off) = principal angle between LOW-plane and HIGH-plane
+    curves = {}
+
+    Z_by_off = apply_corruption(
+        Z_clean, z0, offsets,
+        corrupt_mode=corrupt_mode,
+        sigma_target=float(sigma_target),
+        break_mode=break_mode,
+        target_idx=int(target_idx)
+    )
+
+    for off, Zc in Z_by_off.items():
+        QL = plane_from_sigmas(z0, Zc, low_sigmas, rank=2)
+        QH = plane_from_sigmas(z0, Zc, high_sigmas, rank=2)
+        ang_deg, svals = principal_angle_deg(QL, QH)
+        curves[float(off)] = (ang_deg, svals)
+
+    return curves
+
+def even_odd_from_curve(curve):
+    # curve: dict off -> angle_deg
+    offs = sorted(curve.keys())
+    E = {o: curve[o] for o in offs}
+    E_even = {}
+    E_odd  = {}
+    for o in offs:
+        if -o not in E:
+            continue
+        ep = 0.5*(E[o] + E[-o])
+        od = 0.5*(E[o] - E[-o])
+        E_even[o] = ep
+        E_odd[o]  = od
+    return E_even, E_odd
+
+def fit_alpha(E_even, R, floor_deg=1e-8):
+    # Fit log(E_even) = logC + alpha*log|off| over 0<|off|<=R
+    xs = []
+    ys = []
+    for o, e in E_even.items():
+        ao = abs(float(o))
+        if ao <= 0:
+            continue
+        if ao <= R:
+            ee = max(float(e), floor_deg)
+            xs.append(np.log(ao))
+            ys.append(np.log(ee))
+    xs = np.array(xs, float)
+    ys = np.array(ys, float)
+    if xs.size < 3:
+        return None
+    # least squares
+    A = np.column_stack([np.ones_like(xs), xs])
+    coeffs, *_ = np.linalg.lstsq(A, ys, rcond=None)
+    logC, alpha = coeffs
+    resid = ys - A @ coeffs
+    rmse = float(np.sqrt(np.mean(resid**2)))
+    return float(alpha), float(np.exp(logC)), rmse, int(xs.size)
+
+# ----------------------------
+# RUN
+# ----------------------------
+print("\n================ BUILD CLEAN FLOW ================\n")
+t, f0, z0, Z = build_flow(T0, T1, N_GRID, SIGMAS, EDGE_DROP)
+
+print(f"Baseline zeros used (after edge_drop={EDGE_DROP}): {len(z0)}")
+print(f"First few baseline zeros: {np.round(z0[:12], 6)}")
+print(f"Tracked σ values present: {sorted(Z.keys())}")
+
+# sanity checks
+if TARGET_IDX < 0 or TARGET_IDX >= len(z0):
+    raise RuntimeError(f"TARGET_IDX={TARGET_IDX} out of range for zeros used={len(z0)}")
+
+print(f"\nTarget: sigma={SIGMA_TARGET} idx={TARGET_IDX} baseline t0={z0[TARGET_IDX]:.6f}  clean t@σ={Z[float(SIGMA_TARGET)][TARGET_IDX]:.6f}")
+
+# compute clean reference energy
+clean_curve = energy_curve(z0, Z, [0.0], CORRUPT_MODE, SIGMA_TARGET, BREAK_MODE, TARGET_IDX, LOW_SIGMAS, HIGH_SIGMAS)
+E0 = clean_curve[0.0][0]
+print("\n================ CLEAN REFERENCE ================\n")
+print(f"E(0) = {E0:.6e} deg")
+
+# energy sweep
+print("\n================ ENERGY SWEEP ================\n")
+curve_full = energy_curve(z0, Z, OFFSETS, CORRUPT_MODE, SIGMA_TARGET, BREAK_MODE, TARGET_IDX, LOW_SIGMAS, HIGH_SIGMAS)
+
+print(f"CORRUPT_MODE={CORRUPT_MODE}   BREAK_MODE={BREAK_MODE}")
+print("off      | E(off) [deg]   svals")
+print("---------------------------------------------")
+for o in sorted(curve_full.keys()):
+    ang, svals = curve_full[o]
+    print(f"{o:+.3f} | {ang:10.6f}   {np.array2string(svals, precision=6, suppress_small=True)}")
+
+# even/odd
+E_only = {o: curve_full[o][0] for o in curve_full}
+E_even, E_odd = even_odd_from_curve(E_only)
+
+print("\n================ EVEN/ODD DECOMPOSITION ================\n")
+print("off      | E(off)   E_even   E_odd")
+print("-------------------------------------")
+for o in sorted(E_even.keys()):
+    print(f"{o:+.3f} | {E_only[o]:7.3f}  {E_even[o]:7.3f}  {E_odd[o]:7.3f}")
+
+# exponent fit on E_even
+print("\n================ CUSP EXPONENT FIT (log–log) ================\n")
+print("R_fit | alpha | C | RMSE(log) | points")
+print("----------------------------------------")
+fits = []
+for R in FIT_RADII:
+    res = fit_alpha(E_even, R, floor_deg=E_FLOOR_DEG)
+    if res is None:
+        print(f"{R:4.2f} |  (insufficient points)")
+        continue
+    alpha, C, rmse, npts = res
+    fits.append((R, alpha, C, rmse, npts))
+    print(f"{R:4.2f} | {alpha:5.3f} | {C: .3e} | {rmse:9.4f} | {npts:6d}")
+
+if fits:
+    alphas = np.array([a for (_, a, _, _, _) in fits], float)
+    print("\nAlpha summary:")
+    print(f"  mean(alpha) = {alphas.mean():.4f}")
+    print(f"  std(alpha)  = {alphas.std():.4f}")
+    print(f"  range       = [{alphas.min():.4f}, {alphas.max():.4f}]")
+
+print("\nInterpretation guide:")
+print("  alpha ~ 1      -> cusp / |off| barrier")
+print("  1<alpha<2      -> fractional rigidity")
+print("  alpha ~ 2      -> quadratic barrier")
+print("  if alpha stabilizes as R shrinks -> local universal scaling")
+print("\n================ DONE (STEP 8) ================\n")
+
+================ BUILD CLEAN FLOW ================
+
+Baseline zeros used (after edge_drop=2): 21
+First few baseline zeros: [67.079809 69.546401 72.067155 75.704692 77.144836 79.337373 82.910385
+ 84.735492 87.425275 88.809109 92.491903 94.65135 ]
+Tracked σ values present: [0.0, 0.005, 0.01, 0.015, 0.02, 0.04, 0.06]
+
+Target: sigma=0.06 idx=3 baseline t0=75.704692  clean t@σ=72.045500
+
+================ CLEAN REFERENCE ================
+
+E(0) = 5.217184e+00 deg
+
+================ ENERGY SWEEP ================
+
+CORRUPT_MODE=one_sigma   BREAK_MODE=constant
+off      | E(off) [deg]   svals
+---------------------------------------------
+-0.300 |  51.690014   [1.       0.619916]
+-0.280 |  49.300578   [1.       0.652091]
+-0.260 |  46.691687   [1.       0.685924]
+-0.240 |  43.857190   [1.       0.721069]
+-0.220 |  40.799240   [1.       0.757004]
+-0.200 |  37.530836   [1.       0.793026]
+-0.180 |  34.077392   [1.       0.828281]
+-0.160 |  30.476509   [1.       0.861837]
+-0.140 |  26.775505   [1.       0.892778]
+-0.120 |  23.027278   [1.       0.920319]
+-0.100 |  19.286497   [1.       0.943879]
+-0.080 |  15.609971   [1.       0.963116]
+-0.060 |  12.069249   [1.       0.977896]
+-0.040 |   8.800019   [1.       0.988228]
+-0.020 |   6.179094   [1.      0.99419]
++0.000 |   5.217184   [1.       0.995857]
++0.020 |   6.655415   [1.       0.993261]
++0.040 |   9.467658   [1.       0.986379]
++0.060 |  12.800010   [1.       0.975149]
++0.080 |  16.357311   [1.       0.959524]
++0.100 |  20.026677   [1.       0.939533]
++0.120 |  23.743038   [1.      0.91536]
++0.140 |  27.451964   [1.       0.887398]
++0.160 |  31.100770   [1.      0.85626]
++0.180 |  34.639260   [1.       0.822747]
++0.200 |  38.023551   [1.       0.787758]
++0.220 |  41.219729   [1.       0.752188]
++0.240 |  44.205753   [1.       0.716841]
++0.260 |  46.971281   [1.       0.682365]
++0.280 |  49.515948   [1.       0.649236]
++0.300 |  51.846885   [1.       0.617765]
+
+================ EVEN/ODD DECOMPOSITION ================
+
+off      | E(off)   E_even   E_odd
+-------------------------------------
+-0.300 |  51.690   51.768   -0.078
+-0.280 |  49.301   49.408   -0.108
+-0.260 |  46.692   46.831   -0.140
+-0.240 |  43.857   44.031   -0.174
+-0.220 |  40.799   41.009   -0.210
+-0.200 |  37.531   37.777   -0.246
+-0.180 |  34.077   34.358   -0.281
+-0.160 |  30.477   30.789   -0.312
+-0.140 |  26.776   27.114   -0.338
+-0.120 |  23.027   23.385   -0.358
+-0.100 |  19.286   19.657   -0.370
+-0.080 |  15.610   15.984   -0.374
+-0.060 |  12.069   12.435   -0.365
+-0.040 |   8.800    9.134   -0.334
+-0.020 |   6.179    6.417   -0.238
++0.000 |   5.217    5.217    0.000
++0.020 |   6.655    6.417    0.238
++0.040 |   9.468    9.134    0.334
++0.060 |  12.800   12.435    0.365
++0.080 |  16.357   15.984    0.374
++0.100 |  20.027   19.657    0.370
++0.120 |  23.743   23.385    0.358
++0.140 |  27.452   27.114    0.338
++0.160 |  31.101   30.789    0.312
++0.180 |  34.639   34.358    0.281
++0.200 |  38.024   37.777    0.246
++0.220 |  41.220   41.009    0.210
++0.240 |  44.206   44.031    0.174
++0.260 |  46.971   46.831    0.140
++0.280 |  49.516   49.408    0.108
++0.300 |  51.847   51.768    0.078
+
+================ CUSP EXPONENT FIT (log–log) ================
+
+R_fit | alpha | C | RMSE(log) | points
+----------------------------------------
+0.04 | 0.509 |  4.705e+01 |    0.0000 |      4
+0.06 | 0.592 |  6.406e+01 |    0.0300 |      6
+0.08 | 0.651 |  7.897e+01 |    0.0436 |      8
+0.10 | 0.694 |  9.172e+01 |    0.0525 |     10
+
+Alpha summary:
+  mean(alpha) = 0.6115
+  std(alpha)  = 0.0692
+  range       = [0.5093, 0.6940]
+
+Interpretation guide:
+  alpha ~ 1      -> cusp / |off| barrier
+  1<alpha<2      -> fractional rigidity
+  alpha ~ 2      -> quadratic barrier
+  if alpha stabilizes as R shrinks -> local universal scaling
+
+================ DONE (STEP 8) ================
+
+
+
+129
+
+# ============================================================
+# STEP 9 — EXPONENT STABILITY: one_sigma vs all_sigmas (quadratic break)
+# Self-contained single-cell. No saved state assumed.
+#
+# What it does:
+#   1) Builds clean σ-flow by FFT-Gaussian smoothing of Z(t)=siegelz(t)
+#   2) Tracks zeros across σ by index (after EDGE_DROP)
+#   3) Defines RG planes from LOW_SIGMAS and HIGH_SIGMAS via SVD of v=(dt/dσ)
+#   4) Corrupts one tracked zero with a quadratic-in-σ perturbation:
+#        one_sigma : only at sigma_target
+#        all_sigmas: for all σ >= sigma_kink (or all positive if sigma_kink=None)
+#   5) Sweeps offset size, computes energy E(off)=max principal angle between planes
+#   6) Even/odd split and log–log cusp exponent fits for multiple radii R
+#
+# Output:
+#   - Clean reference E(0)
+#   - Sweep table for both modes
+#   - Alpha fits vs radius for both modes
+#   - Odd/Even drift ratio
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+mp.mp.dps = 60
+
+T0, T1 = 60.0, 120.0
+N_GRID = 8192
+EDGE_DROP = 2
+
+SIGMAS = np.array([0.0, 0.005, 0.01, 0.015, 0.02, 0.04, 0.06], dtype=float)
+
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+
+# Corruption target
+SIGMA_TARGET = 0.06
+TARGET_IDX = 3
+
+# Quadratic break controls
+SIGMA_KINK = 0.02   # for all_sigmas mode: apply to all σ >= SIGMA_KINK
+WIDTH = 0.0         # optional smooth window in t (0 disables; keep 0 for now)
+
+# Sweep offsets (t-shifts) — keep modest so tracking/indexing remains valid
+OFFSETS = np.linspace(-0.30, 0.30, 31)
+
+# Exponent-fit radii (subset of OFFSETS by |off|<=R)
+R_LIST = [0.04, 0.06, 0.08, 0.10]
+
+# ----------------------------
+# NUMERICS HELPERS
+# ----------------------------
+def z_func(t):
+    # Z(t)=siegelz(t) is real; zeros match xi on critical line
+    return float(mp.siegelz(t))
+
+def smooth_fft(f, dt, sigma):
+    """Gaussian smoothing in frequency domain.
+       Uses exp(-(ω^2)*sigma). sigma here is a smoothing strength parameter."""
+    if sigma <= 0:
+        return f.copy()
+    F = np.fft.fft(f)
+    w = 2*np.pi*np.fft.fftfreq(f.size, d=dt)
+    G = np.exp(-(w*w) * sigma)
+    return np.real(np.fft.ifft(F * G))
+
+def find_zeros(t, f):
+    """Zero crossings with linear interpolation."""
+    s = np.sign(f)
+    # handle exact zeros by nudging sign using neighborhood
+    s[s == 0] = 1.0
+    idx = np.where(s[:-1] * s[1:] < 0)[0]
+    z = []
+    for i in idx:
+        f0, f1 = f[i], f[i+1]
+        t0, t1 = t[i], t[i+1]
+        # linear interpolation: t = t0 - f0*(t1-t0)/(f1-f0)
+        denom = (f1 - f0)
+        if denom == 0:
+            continue
+        z.append(t0 - f0 * (t1 - t0) / denom)
+    return np.array(z, dtype=float)
+
+def track_zeros_by_index(z0, zs):
+    """Track by index: truncate zs to len(z0)."""
+    if len(zs) < len(z0):
+        return None
+    return zs[:len(z0)].copy()
+
+def plane_basis_from_sigmas(z0, Z, sigmas_subset):
+    """Build 2D plane basis in R^N (N=zeros) from v=(dt/dσ) rows across sigmas_subset.
+       Returns Q: shape (2,N) with orthonormal rows."""
+    z0 = np.asarray(z0, float)
+    V = []
+    for s in sigmas_subset:
+        s = float(s)
+        if s <= 0:
+            continue
+        if s not in Z:
+            continue
+        zs = np.asarray(Z[s], float)
+        dt = zs - z0
+        if not np.isfinite(dt).all():
+            continue
+        if np.linalg.norm(dt) == 0:
+            continue
+        V.append(dt / s)
+    V = np.array(V, dtype=float)
+    if V.ndim != 2 or V.shape[0] < 2:
+        return None
+    # SVD: V = U S VT. Right singular vectors in VT span directions in zero-index space.
+    try:
+        _, _, VT = np.linalg.svd(V, full_matrices=False)
+    except np.linalg.LinAlgError:
+        return None
+    B = VT[:2, :]  # (2,N)
+    # Orthonormalize rows via QR on transpose
+    Q, _ = np.linalg.qr(B.T)  # (N,2)
+    return Q.T  # (2,N)
+
+def plane_angle_deg(Q1, Q2):
+    """Max principal angle between 2D planes with orthonormal row bases Q1,Q2 (2xN)."""
+    M = Q1 @ Q2.T  # (2,2)
+    # singular values are cos(theta_i)
+    s = np.linalg.svd(M, compute_uv=False)
+    s = np.clip(s, 0.0, 1.0)
+    thetas = np.arccos(s)  # two principal angles
+    return float(np.max(thetas) * 180.0 / np.pi), s
+
+def apply_quadratic_break(Z_in, sigma_target, target_idx, off,
+                          mode="one_sigma", sigma_kink=0.02, width=0.0):
+    """Return a corrupted Z dict (deep copy arrays).
+       Quadratic break: shift scales like (σ/σ_target)^2 for σ being corrupted.
+       If width>0, apply a smooth bump in index-space around target_idx (optional).
+    """
+    Z = {float(s): np.array(Z_in[float(s)], float).copy() for s in Z_in}
+    sigma_target = float(sigma_target)
+
+    def bump(j, j0, w):
+        if w <= 0:
+            return 1.0 if j == j0 else 0.0
+        return np.exp(-0.5 * ((j - j0)/w)**2)
+
+    def should_corrupt(s):
+        if mode == "one_sigma":
+            return abs(s - sigma_target) < 1e-15
+        if mode == "all_sigmas":
+            if sigma_kink is None:
+                return s > 0
+            return s >= float(sigma_kink) and s > 0
+        raise ValueError("mode must be one_sigma or all_sigmas")
+
+    for s in list(Z.keys()):
+        if s <= 0:
+            continue
+        if not should_corrupt(s):
+            continue
+        scale = (s / sigma_target)**2
+        if width <= 0:
+            Z[s][target_idx] += off * scale
+        else:
+            for j in range(len(Z[s])):
+                Z[s][j] += (off * scale) * bump(j, target_idx, width)
+    return Z
+
+def energy_E(Z, z0, low_sigmas, high_sigmas):
+    """Compute E = max principal angle between LOW-plane and HIGH-plane."""
+    QL = plane_basis_from_sigmas(z0, Z, low_sigmas)
+    QH = plane_basis_from_sigmas(z0, Z, high_sigmas)
+    if QL is None or QH is None:
+        return np.nan, None
+    ang, svals = plane_angle_deg(QL, QH)
+    return ang, svals
+
+def even_odd_decomp(offsets, E_vals):
+    """Return dicts E, E_even, E_odd indexed by float offset."""
+    E = {float(o): float(v) for o, v in zip(offsets, E_vals)}
+    E_even, E_odd = {}, {}
+    for o in offsets:
+        op = float(o)
+        om = float(-o)
+        if op in E and om in E:
+            E_even[op] = 0.5 * (E[op] + E[om])
+            E_odd[op]  = 0.5 * (E[op] - E[om])
+    return E, E_even, E_odd
+
+def fit_alpha(offsets, E_even, E0, R):
+    """Fit E_even(off)-E0 ~ C |off|^alpha over |off|<=R, off!=0.
+       Returns (alpha, C, rmse_log, npts)."""
+    xs, ys = [], []
+    for o in offsets:
+        o = float(o)
+        if o == 0.0:
+            continue
+        if abs(o) > R:
+            continue
+        if o not in E_even:
+            continue
+        y = float(E_even[o] - E0)
+        x = abs(o)
+        if y <= 0 or x <= 0:
+            continue
+        xs.append(np.log(x))
+        ys.append(np.log(y))
+    if len(xs) < 3:
+        return np.nan, np.nan, np.nan, len(xs)
+    xs = np.array(xs)
+    ys = np.array(ys)
+    A = np.column_stack([np.ones_like(xs), xs])
+    c0, c1 = np.linalg.lstsq(A, ys, rcond=None)[0]
+    yhat = A @ np.array([c0, c1])
+    rmse = float(np.sqrt(np.mean((ys - yhat)**2)))
+    alpha = float(c1)
+    C = float(np.exp(c0))
+    return alpha, C, rmse, len(xs)
+
+# ----------------------------
+# 1) BUILD CLEAN FLOW
+# ----------------------------
+print("\n================ BUILD CLEAN FLOW ================\n")
+t = np.linspace(T0, T1, N_GRID)
+dt = float(t[1] - t[0])
+
+print(f"Window [{T0},{T1}]  N={N_GRID}  dt≈{dt}")
+f0 = np.array([z_func(tt) for tt in t], dtype=float)
+
+# Baseline zeros at sigma=0
+z0_raw = find_zeros(t, f0)
+if len(z0_raw) < 2*EDGE_DROP + 5:
+    raise RuntimeError(f"Too few baseline zeros found: {len(z0_raw)}")
+z0 = z0_raw[EDGE_DROP:-EDGE_DROP].copy()
+N0 = len(z0)
+
+print(f"Baseline zeros used (after edge_drop={EDGE_DROP}): {N0}")
+print("First few baseline zeros:", np.array2string(z0[:12], precision=6))
+
+# Track across sigmas
+Z_clean = {0.0: z0.copy()}
+pos_sigmas = [float(s) for s in SIGMAS if s > 0]
+tracked_ok = 0
+for s in pos_sigmas:
+    fs = smooth_fft(f0, dt, s)
+    zs_raw = find_zeros(t, fs)
+    if len(zs_raw) < EDGE_DROP + N0:
+        continue
+    zs = zs_raw[EDGE_DROP:EDGE_DROP+N0]
+    Z_clean[s] = zs
+    tracked_ok += 1
+
+print(f"Tracked σ values present: {sorted([k for k in Z_clean.keys()])}")
+if tracked_ok < 3:
+    raise RuntimeError("Too few σ tracked. Try increasing N_GRID or shrinking window.")
+
+# sanity: ensure target sigma present
+if float(SIGMA_TARGET) not in Z_clean:
+    raise RuntimeError(f"SIGMA_TARGET={SIGMA_TARGET} not tracked in Z_clean keys.")
+
+# target index sanity
+if not (0 <= TARGET_IDX < N0):
+    raise RuntimeError(f"TARGET_IDX={TARGET_IDX} out of range for N0={N0}")
+
+t_target_clean = float(Z_clean[float(SIGMA_TARGET)][TARGET_IDX])
+print(f"\nTarget: sigma={SIGMA_TARGET} idx={TARGET_IDX}  clean t@σ={t_target_clean:.6f}")
+
+# ----------------------------
+# 2) CLEAN REFERENCE ENERGY
+# ----------------------------
+E0, svals0 = energy_E(Z_clean, z0, LOW_SIGMAS, HIGH_SIGMAS)
+if not np.isfinite(E0):
+    raise RuntimeError("Failed to compute clean reference plane angle (insufficient plane basis).")
+
+print("\n================ CLEAN REFERENCE ================\n")
+print(f"LOW_SIGMAS  = {LOW_SIGMAS}")
+print(f"HIGH_SIGMAS = {HIGH_SIGMAS}")
+print(f"E(0) = {E0:.6f} deg   s={svals0}")
+
+# ----------------------------
+# 3) SWEEP OFFSETS: one_sigma and all_sigmas (quadratic)
+# ----------------------------
+def run_sweep(mode):
+    E_list = []
+    for off in OFFSETS:
+        Zc = apply_quadratic_break(
+            Z_clean, SIGMA_TARGET, TARGET_IDX, float(off),
+            mode=mode, sigma_kink=SIGMA_KINK, width=WIDTH
+        )
+        E, _ = energy_E(Zc, z0, LOW_SIGMAS, HIGH_SIGMAS)
+        E_list.append(E)
+    return np.array(E_list, float)
+
+print("\n================ ENERGY SWEEP (quadratic break) ================\n")
+print(f"SIGMA_TARGET={SIGMA_TARGET}  TARGET_IDX={TARGET_IDX}  SIGMA_KINK={SIGMA_KINK}")
+print(f"OFFSETS: [{OFFSETS[0]:+.3f} .. {OFFSETS[-1]:+.3f}]  count={len(OFFSETS)}")
+
+E_one = run_sweep("one_sigma")
+E_all = run_sweep("all_sigmas")
+
+print("\n---- one_sigma ----")
+for off, E in zip(OFFSETS, E_one):
+    print(f"off={off:+.3f}  E={E:9.4f} deg")
+
+print("\n---- all_sigmas ----")
+for off, E in zip(OFFSETS, E_all):
+    print(f"off={off:+.3f}  E={E:9.4f} deg")
+
+# ----------------------------
+# 4) EVEN/ODD + ALPHA FITS
+# ----------------------------
+def summarize(mode, E_vals):
+    E, E_even, E_odd = even_odd_decomp(OFFSETS, E_vals)
+    # Symmetry drift measures
+    odd_abs = np.array([abs(E_odd[float(o)]) for o in OFFSETS if float(o) in E_odd and float(o)!=0.0], float)
+    even_abs = np.array([abs(E_even[float(o)] - E0) for o in OFFSETS if float(o) in E_even and float(o)!=0.0], float)
+    mean_odd = float(np.mean(odd_abs)) if odd_abs.size else np.nan
+    mean_even = float(np.mean(even_abs)) if even_abs.size else np.nan
+    ratio = mean_odd / mean_even if np.isfinite(mean_odd) and np.isfinite(mean_even) and mean_even>0 else np.nan
+
+    print(f"\n================ {mode.upper()} — EVEN/ODD + EXPONENT FITS ================\n")
+    print("off     | E(off)   E_even   E_odd")
+    print("-------------------------------------")
+    for off in OFFSETS:
+        o = float(off)
+        if o not in E_even:
+            continue
+        print(f"{o:+.3f} | {E[o]:7.3f} | {E_even[o]:7.3f} | {E_odd[o]:+7.3f}")
+
+    print("\nR_fit | alpha | C | RMSE(log) | points")
+    print("----------------------------------------")
+    for R in R_LIST:
+        alpha, C, rmse, npts = fit_alpha(OFFSETS, E_even, E0, R)
+        print(f"{R:0.02f} | {alpha:5.3f} | {C:9.3e} | {rmse:10.4f} | {npts:6d}")
+
+    print("\nSymmetry drift:")
+    print(f"  mean |E_odd|              = {mean_odd:.4f} deg")
+    print(f"  mean |E_even - E(0)|      = {mean_even:.4f} deg")
+    print(f"  odd/even ratio            = {ratio:.4f}")
+    print("\nPeak location:")
+    # peak of E(off) for positive offsets only (avoids trivial symmetric)
+    offs = np.array([float(o) for o in OFFSETS], float)
+    Es = np.array([float(E[o]) for o in OFFSETS], float)
+    j = int(np.nanargmax(Es))
+    print(f"  max E(off) = {Es[j]:.4f} deg at off={offs[j]:+.3f}")
+    return
+
+summarize("one_sigma", E_one)
+summarize("all_sigmas", E_all)
+
+print("\n================ STEP 9 DONE ================\n")
+print("Readout:")
+print("  - Compare alpha(R) stability between one_sigma vs all_sigmas.")
+print("  - If alpha stays similar AND odd/even stays small under all_sigmas, that's stronger evidence the barrier is structural.")
+
+================ BUILD CLEAN FLOW ================
+
+Window [60.0,120.0]  N=8192  dt≈0.007325112928825206
+Baseline zeros used (after edge_drop=2): 21
+First few baseline zeros: [67.079809 69.546401 72.067155 75.704692 77.144836 79.337373 82.910385
+ 84.735492 87.425275 88.809109 92.491903 94.65135 ]
+Tracked σ values present: [0.0, 0.005, 0.01, 0.015, 0.02, 0.04, 0.06]
+
+Target: sigma=0.06 idx=3  clean t@σ=72.045500
+
+================ CLEAN REFERENCE ================
+
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+E(0) = 5.217184 deg   s=[1.       0.995857]
+
+================ ENERGY SWEEP (quadratic break) ================
+
+SIGMA_TARGET=0.06  TARGET_IDX=3  SIGMA_KINK=0.02
+OFFSETS: [-0.300 .. +0.300]  count=31
+
+---- one_sigma ----
+off=-0.300  E=  51.6900 deg
+off=-0.280  E=  49.3006 deg
+off=-0.260  E=  46.6917 deg
+off=-0.240  E=  43.8572 deg
+off=-0.220  E=  40.7992 deg
+off=-0.200  E=  37.5308 deg
+off=-0.180  E=  34.0774 deg
+off=-0.160  E=  30.4765 deg
+off=-0.140  E=  26.7755 deg
+off=-0.120  E=  23.0273 deg
+off=-0.100  E=  19.2865 deg
+off=-0.080  E=  15.6100 deg
+off=-0.060  E=  12.0692 deg
+off=-0.040  E=   8.8000 deg
+off=-0.020  E=   6.1791 deg
+off=+0.000  E=   5.2172 deg
+off=+0.020  E=   6.6554 deg
+off=+0.040  E=   9.4677 deg
+off=+0.060  E=  12.8000 deg
+off=+0.080  E=  16.3573 deg
+off=+0.100  E=  20.0267 deg
+off=+0.120  E=  23.7430 deg
+off=+0.140  E=  27.4520 deg
+off=+0.160  E=  31.1008 deg
+off=+0.180  E=  34.6393 deg
+off=+0.200  E=  38.0236 deg
+off=+0.220  E=  41.2197 deg
+off=+0.240  E=  44.2058 deg
+off=+0.260  E=  46.9713 deg
+off=+0.280  E=  49.5159 deg
+off=+0.300  E=  51.8469 deg
+
+---- all_sigmas ----
+off=-0.300  E=  48.8303 deg
+off=-0.280  E=  46.8498 deg
+off=-0.260  E=  44.7142 deg
+off=-0.240  E=  42.4119 deg
+off=-0.220  E=  39.9315 deg
+off=-0.200  E=  37.2632 deg
+off=-0.180  E=  34.3991 deg
+off=-0.160  E=  31.3350 deg
+off=-0.140  E=  28.0720 deg
+off=-0.120  E=  24.6188 deg
+off=-0.100  E=  20.9952 deg
+off=-0.080  E=  17.2390 deg
+off=-0.060  E=  13.4212 deg
+off=-0.040  E=   9.6964 deg
+off=-0.020  E=   6.5059 deg
+off=+0.000  E=   5.2172 deg
+off=+0.020  E=   7.0236 deg
+off=+0.040  E=  10.3770 deg
+off=+0.060  E=  14.1349 deg
+off=+0.080  E=  17.9436 deg
+off=+0.100  E=  21.6722 deg
+off=+0.120  E=  25.2584 deg
+off=+0.140  E=  28.6689 deg
+off=+0.160  E=  31.8865 deg
+off=+0.180  E=  34.9044 deg
+off=+0.200  E=  37.7229 deg
+off=+0.220  E=  40.3472 deg
+off=+0.240  E=  42.7856 deg
+off=+0.260  E=  45.0484 deg
+off=+0.280  E=  47.1471 deg
+off=+0.300  E=  49.0934 deg
+
+================ ONE_SIGMA — EVEN/ODD + EXPONENT FITS ================
+
+off     | E(off)   E_even   E_odd
+-------------------------------------
+-0.300 |  51.690 |  51.768 |  -0.078
+-0.280 |  49.301 |  49.408 |  -0.108
+-0.180 |  34.077 |  34.358 |  -0.281
+-0.120 |  23.027 |  23.385 |  -0.358
+-0.060 |  12.069 |  12.435 |  -0.365
++0.000 |   5.217 |   5.217 |  +0.000
++0.060 |  12.800 |  12.435 |  +0.365
++0.120 |  23.743 |  23.385 |  +0.358
++0.180 |  34.639 |  34.358 |  +0.281
++0.280 |  49.516 |  49.408 |  +0.108
++0.300 |  51.847 |  51.768 |  +0.078
+
+R_fit | alpha | C | RMSE(log) | points
+----------------------------------------
+0.04 |   nan |       nan |        nan |      0
+0.06 |   nan |       nan |        nan |      2
+0.08 |   nan |       nan |        nan |      2
+0.10 |   nan |       nan |        nan |      2
+
+Symmetry drift:
+  mean |E_odd|              = 0.2381 deg
+  mean |E_even - E(0)|      = 29.0538 deg
+  odd/even ratio            = 0.0082
+
+Peak location:
+  max E(off) = 51.8469 deg at off=+0.300
+
+================ ALL_SIGMAS — EVEN/ODD + EXPONENT FITS ================
+
+off     | E(off)   E_even   E_odd
+-------------------------------------
+-0.300 |  48.830 |  48.962 |  -0.132
+-0.280 |  46.850 |  46.998 |  -0.149
+-0.180 |  34.399 |  34.652 |  -0.253
+-0.120 |  24.619 |  24.939 |  -0.320
+-0.060 |  13.421 |  13.778 |  -0.357
++0.000 |   5.217 |   5.217 |  +0.000
++0.060 |  14.135 |  13.778 |  +0.357
++0.120 |  25.258 |  24.939 |  +0.320
++0.180 |  34.904 |  34.652 |  +0.253
++0.280 |  47.147 |  46.998 |  +0.149
++0.300 |  49.093 |  48.962 |  +0.132
+
+R_fit | alpha | C | RMSE(log) | points
+----------------------------------------
+0.04 |   nan |       nan |        nan |      0
+0.06 |   nan |       nan |        nan |      2
+0.08 |   nan |       nan |        nan |      2
+0.10 |   nan |       nan |        nan |      2
+
+Symmetry drift:
+  mean |E_odd|              = 0.2419 deg
+  mean |E_even - E(0)|      = 28.6485 deg
+  odd/even ratio            = 0.0084
+
+Peak location:
+  max E(off) = 49.0934 deg at off=+0.300
+
+================ STEP 9 DONE ================
+
+Readout:
+  - Compare alpha(R) stability between one_sigma vs all_sigmas.
+  - If alpha stays similar AND odd/even stays small under all_sigmas, that's stronger evidence the barrier is structural.
+
+130
+
+
+
+
