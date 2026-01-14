@@ -1,0 +1,2257 @@
+
+Code 1 
+import mpmath as mp
+import numpy as np
+
+mp.mp.dps = 80
+
+def xi(s):
+    return 0.5*s*(s-1)*mp.pi**(-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+def T_tau_p(s, tau, p):
+    t = abs(mp.im(s))
+    return 1 / mp.sqrt(1 + tau * t**p)
+
+def xi_MTS(s, tau, p):
+    return xi(s) * T_tau_p(s, tau, p)
+
+def find_zeros(vals, t_vals):
+    sign = np.sign(np.real(vals))
+    zeros = []
+    for i in range(1,len(sign)):
+        if sign[i] != sign[i-1]:
+            zeros.append((t_vals[i]+t_vals[i-1])/2)
+    return zeros
+
+t_vals = np.linspace(10, 50, 6000)
+taus = [0.0, 0.5, 1.0]
+p_vals = [1.0, 2.0, 3.0, 4.0]
+
+ref = [complex(xi(0.5+1j*t)) for t in t_vals]
+ref_zeros = find_zeros(ref, t_vals)[:5]
+
+for p in p_vals:
+    print(f"\np = {p}")
+    for tau in taus:
+        vals = [complex(xi_MTS(0.5+1j*t, tau, p)) for t in t_vals]
+        z = find_zeros(vals, t_vals)[:5]
+        shift = np.mean([abs(a-b) for a,b in zip(z, ref_zeros)])
+        print(f"  τ={tau:.2f} → mean |Δt| = {shift:.2e}")
+
+
+
+Code 2 
+# ============================================================
+# MTS Riemann ξ Zero Stability Test Suite
+# ------------------------------------------------------------
+# Tests which curvature / phase operators preserve or move
+# Riemann ξ(s) zeros on the critical line.
+#
+# Designed to be COPY-PASTE RUNNABLE.
+# No edits required.
+# ============================================================
+
+import mpmath as mp
+import numpy as np
+import matplotlib.pyplot as plt
+
+mp.mp.dps = 160
+
+# ------------------------------------------------------------
+# Riemann ξ-function
+# ------------------------------------------------------------
+def xi(s):
+    return 0.5 * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+# ------------------------------------------------------------
+# Operators
+# ------------------------------------------------------------
+
+# SAFE: real, even, multiplicative (zero-preserving)
+def T_safe(s, tau, p=2.0):
+    t = abs(mp.im(s))
+    return 1 / mp.sqrt(1 + tau * t**p)
+
+# BREAK 1: phase rotation (should move zeros)
+def T_phase(s, tau):
+    t = mp.im(s)
+    return mp.exp(1j * tau * t)
+
+# BREAK 2: odd kernel (breaks symmetry)
+def T_odd(s, tau):
+    t = mp.im(s)
+    return 1 / mp.sqrt(1 + tau * t)
+
+# BREAK 3: transverse σ-diffusion (geometric attraction)
+def T_sigma(s, tau):
+    sigma = mp.re(s) - 0.5
+    return mp.exp(-tau * sigma**2)
+
+# ------------------------------------------------------------
+# Apply operator
+# ------------------------------------------------------------
+def xi_op(s, tau, mode="safe", p=2.0):
+    if mode == "safe":
+        return xi(s) * T_safe(s, tau, p)
+    if mode == "phase":
+        return xi(s) * T_phase(s, tau)
+    if mode == "odd":
+        return xi(s) * T_odd(s, tau)
+    if mode == "sigma":
+        return xi(s) * T_sigma(s, tau)
+
+# ------------------------------------------------------------
+# Zero finder (sign change on Re ξ)
+# ------------------------------------------------------------
+def find_zeros(vals, t_vals):
+    sign = np.sign(np.real(vals))
+    zeros = []
+    for i in range(1, len(sign)):
+        if sign[i] == 0 or sign[i] != sign[i-1]:
+            zeros.append((t_vals[i-1] + t_vals[i]) / 2)
+    return zeros
+
+# ------------------------------------------------------------
+# Parameters
+# ------------------------------------------------------------
+t_vals = np.linspace(-50, 50, 8000)
+taus = [0.0, 0.5, 1.0]
+modes = ["safe", "phase", "odd", "sigma"]
+
+# ------------------------------------------------------------
+# Run tests
+# ------------------------------------------------------------
+results = {}
+
+print("\n===========================================================")
+print("Riemann ξ Zero Stability Diagnostics")
+print("===========================================================")
+
+for mode in modes:
+    print(f"\n--- Operator mode: {mode.upper()} ---")
+    tracks = []
+
+    for tau in taus:
+        vals = np.array([
+            complex(xi_op(0.5 + 1j*t, tau, mode))
+            for t in t_vals
+        ])
+        zeros = find_zeros(vals, t_vals)[:10]
+        tracks.append((tau, zeros))
+        print(f"τ={tau:.2f} → zeros:", np.round(zeros, 6))
+
+    ref = tracks[0][1]
+    shifts = []
+    for tau, zeros in tracks[1:]:
+        diffs = [a - b for a, b in zip(zeros, ref)]
+        shifts.append(np.mean(np.abs(diffs)))
+
+    results[mode] = shifts
+    for i, tau in enumerate(taus[1:]):
+        print(f"τ={tau:.2f} → mean |Δt| = {shifts[i]:.3e}")
+
+# ------------------------------------------------------------
+# Plot comparison
+# ------------------------------------------------------------
+plt.figure(figsize=(10,6))
+for mode in modes:
+    plt.plot(taus[1:], results[mode], marker='o', label=mode)
+
+plt.axhline(0, color='black', lw=1)
+plt.xlabel("τ")
+plt.ylabel("mean |Δt| (zero shift)")
+plt.title("Zero Stability Under MTS-Inspired Operators")
+plt.yscale("log")
+plt.legend()
+plt.grid(alpha=0.4)
+plt.tight_layout()
+plt.show()
+
+# ------------------------------------------------------------
+# Interpretation
+# ------------------------------------------------------------
+print("\n===========================================================")
+print("INTERPRETATION")
+print("===========================================================")
+print("• SAFE operator → zero shift ≈ 0  (Hermitian, admissible)")
+print("• PHASE operator → zero drift     (forbidden)")
+print("• ODD kernel → zero drift         (breaks symmetry)")
+print("• SIGMA operator → transverse stability test")
+print("\nIf only SAFE preserves zeros →")
+print("self-adjoint, real, even operators define the allowed algebra.")
+print("===========================================================\n")
+
+
+Code 3 
+
+# ============================================================
+# Riemann ξ: TRUE zero tracking vs NON-multiplicative operators
+# ------------------------------------------------------------
+# - Uses |ξ| minimization (bracketing + mp.findroot) to locate
+#   actual zeros on the critical line.
+# - Compares multiplicative operator (must preserve zeros)
+#   against a NON-multiplicative convolution smoother (can move).
+# ============================================================
+
+import mpmath as mp
+import numpy as np
+import matplotlib.pyplot as plt
+
+mp.mp.dps = 100
+
+# -----------------------------
+# Riemann ξ(s)
+# -----------------------------
+def xi(s):
+    return 0.5 * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def xi_line(t):
+    return xi(mp.mpf('0.5') + 1j*mp.mpf(t))
+
+# -----------------------------
+# Multiplicative operator (cannot move true zeros)
+# -----------------------------
+def T_safe_t(t, tau, p=2):
+    t = abs(mp.mpf(t))
+    return 1 / mp.sqrt(1 + mp.mpf(tau) * t**p)
+
+def xi_mult(t, tau, p=2):
+    return xi_line(t) * T_safe_t(t, tau, p)
+
+# -----------------------------
+# NON-multiplicative operator:
+# convolution smoother along t
+# y_tau(t) = ∫ K_tau(t-u) y(u) du
+#
+# Gaussian kernel (heat-like):
+# K_tau(x) ~ exp(-x^2/(4 tau))
+# -----------------------------
+def gaussian_kernel(x, tau):
+    tau = mp.mpf(tau)
+    if tau <= 0:
+        return mp.mpf('0')
+    return mp.exp(-(mp.mpf(x)**2) / (4*tau)) / mp.sqrt(4*mp.pi*tau)
+
+def xi_conv(t, tau, window=2.0, n=121):
+    """
+    Convolution of ξ(1/2+iu) with Gaussian kernel centered at t.
+    Finite window integration: u in [t-window, t+window]
+    Deterministic numeric quadrature via trapezoid rule.
+    """
+    tau = mp.mpf(tau)
+    t = mp.mpf(t)
+    window = mp.mpf(window)
+    n = int(n)
+
+    if tau == 0:
+        return xi_line(t)
+
+    us = [t - window + (2*window)*mp.mpf(k)/(n-1) for k in range(n)]
+    vals = []
+    for u in us:
+        vals.append(gaussian_kernel(t-u, tau) * xi_line(u))
+
+    # trapezoid
+    du = (2*window) / (n-1)
+    acc = mp.mpf('0')
+    for k in range(n):
+        w = mp.mpf('0.5') if (k==0 or k==n-1) else mp.mpf('1')
+        acc += w * vals[k]
+    return acc * du
+
+# -----------------------------
+# Robust zero finding on the line:
+# 1) scan for local minima of |f(t)|
+# 2) refine with findroot on real+imag simultaneously
+# -----------------------------
+def refine_zero(f, t0):
+    t0 = mp.mpf(t0)
+    # Use two-start findroot on complex function by solving Re=0, Im=0 in 1 variable:
+    # mp.findroot for complex works if we pass complex-valued function and complex initial guess.
+    # Here variable is real t, but f returns complex; trick: root of complex by findroot with complex.
+    # We’ll just refine using secant on complex by two nearby guesses.
+    try:
+        return mp.findroot(lambda x: f(x), (t0-mp.mpf('0.05'), t0+mp.mpf('0.05')))
+    except:  # fallback: return original
+        return t0
+
+def find_zeros_true(f, t_min, t_max, n_scan=6000, keep=10):
+    t_min = float(t_min); t_max = float(t_max)
+    ts = np.linspace(t_min, t_max, n_scan)
+    mags = np.array([abs(complex(f(t))) for t in ts], dtype=float)
+
+    # local minima
+    mins = []
+    for i in range(1, len(ts)-1):
+        if mags[i] < mags[i-1] and mags[i] < mags[i+1]:
+            mins.append((mags[i], ts[i]))
+
+    mins.sort(key=lambda x: x[0])
+
+    zeros = []
+    used = []
+    for _, t0 in mins:
+        # keep them separated so we don’t grab the same zero repeatedly
+        if any(abs(t0-u) < 0.5 for u in used):
+            continue
+        used.append(t0)
+        t_ref = refine_zero(f, t0)
+        zeros.append(float(mp.re(t_ref)))  # refined t (real)
+        if len(zeros) >= keep:
+            break
+
+    zeros.sort()
+    return zeros
+
+# -----------------------------
+# Run comparison
+# -----------------------------
+tmin, tmax = -50, 50
+taus = [0.0, 0.2, 0.5, 1.0]
+
+print("\n===========================================================")
+print("TRUE zero tracking (|ξ| minima + refine)")
+print("===========================================================")
+
+# baseline
+base_zeros = find_zeros_true(lambda t: xi_line(t), tmin, tmax, keep=12)
+print("baseline zeros (first ~12):", np.round(base_zeros, 6))
+
+# multiplicative should match
+for tau in taus[1:]:
+    z = find_zeros_true(lambda t: xi_mult(t, tau, p=2), tmin, tmax, keep=12)
+    diffs = np.mean(np.abs(np.array(z[:10]) - np.array(base_zeros[:10])))
+    print(f"[MULT] tau={tau:.2f} mean |Δt| (first 10) = {diffs:.3e}")
+
+# convolution should NOT necessarily match (non-multiplicative)
+for tau in taus[1:]:
+    z = find_zeros_true(lambda t: xi_conv(t, tau, window=2.5, n=141), tmin, tmax, keep=12)
+    diffs = np.mean(np.abs(np.array(z[:10]) - np.array(base_zeros[:10])))
+    print(f"[CONV] tau={tau:.2f} mean |Δt| (first 10) = {diffs:.3e}")
+    print("      zeros:", np.round(z[:10], 6))
+
+# -----------------------------
+# Plot: |ξ| vs convolved |ξ|
+# -----------------------------
+t_vals = np.linspace(-35, 35, 4000)
+y0 = np.array([abs(complex(xi_line(t))) for t in t_vals], dtype=float)
+y1 = np.array([abs(complex(xi_conv(t, 0.5, window=2.5, n=141))) for t in t_vals], dtype=float)
+
+plt.figure(figsize=(10,5))
+plt.plot(t_vals, y0, lw=1.1, label="|ξ(1/2+it)|")
+plt.plot(t_vals, y1, lw=1.1, label="|Conv_τ ξ|  (τ=0.5)")
+plt.yscale("log")
+plt.xlabel("t")
+plt.ylabel("amplitude")
+plt.title("Non-multiplicative convolution: structure + zero stability test")
+plt.grid(alpha=0.35)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+
+Code 4 
+
+# ============================================================
+# FAST non-multiplicative zero test for Riemann ξ
+# ------------------------------------------------------------
+# Designed to run in minutes, not hours
+# ============================================================
+
+import mpmath as mp
+import numpy as np
+import matplotlib.pyplot as plt
+
+mp.mp.dps = 50   # <<< huge speed-up, still stable
+
+# ------------------------------------------------------------
+# Riemann ξ(s)
+# ------------------------------------------------------------
+def xi(s):
+    return 0.5 * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def xi_line(t):
+    return xi(mp.mpf('0.5') + 1j*mp.mpf(t))
+
+# ------------------------------------------------------------
+# Gaussian kernel (non-multiplicative!)
+# ------------------------------------------------------------
+def kernel(x, tau):
+    return mp.exp(-x*x/(4*tau)) / mp.sqrt(4*mp.pi*tau)
+
+def xi_conv(t, tau):
+    # small symmetric window
+    us = np.linspace(float(t-1.5), float(t+1.5), 41)
+    acc = mp.mpf('0')
+    du = us[1]-us[0]
+    for u in us:
+        acc += kernel(t-u, tau) * xi_line(u)
+    return acc * du
+
+# ------------------------------------------------------------
+# TRUE zero finder via |f| minima
+# ------------------------------------------------------------
+def find_zeros(f, tmin, tmax, n=3000, keep=8):
+    ts = np.linspace(tmin, tmax, n)
+    mags = np.array([abs(complex(f(t))) for t in ts])
+
+    mins = []
+    for i in range(1, n-1):
+        if mags[i] < mags[i-1] and mags[i] < mags[i+1]:
+            mins.append(ts[i])
+
+    zeros = []
+    for t0 in mins:
+        try:
+            z = mp.findroot(lambda x: f(x), t0)
+            z = float(mp.re(z))
+            if all(abs(z-u) > 0.5 for u in zeros):
+                zeros.append(z)
+        except:
+            pass
+        if len(zeros) >= keep:
+            break
+
+    return sorted(zeros)
+
+# ------------------------------------------------------------
+# Run test
+# ------------------------------------------------------------
+tmin, tmax = 10, 40
+tau = 0.4
+
+print("\nBaseline ξ zeros:")
+z0 = find_zeros(xi_line, tmin, tmax)
+print(np.round(z0,6))
+
+print("\nConvolved ξ zeros:")
+z1 = find_zeros(lambda t: xi_conv(t, tau), tmin, tmax)
+print(np.round(z1,6))
+
+# ------------------------------------------------------------
+# Diagnostics
+# ------------------------------------------------------------
+if len(z1) == len(z0):
+    shifts = [abs(a-b) for a,b in zip(z1,z0)]
+    print("\nMean |Δt| =", np.mean(shifts))
+else:
+    print("\nZero count changed → annihilation / merging detected")
+
+# ------------------------------------------------------------
+# Plot
+# ------------------------------------------------------------
+ts = np.linspace(tmin, tmax, 1500)
+plt.figure(figsize=(9,5))
+plt.plot(ts, [abs(complex(xi_line(t))) for t in ts], label="|ξ|")
+plt.plot(ts, [abs(complex(xi_conv(t, tau))) for t in ts], label="|Conv ξ|")
+plt.yscale("log")
+plt.xlabel("t")
+plt.ylabel("Amplitude")
+plt.title("Non-multiplicative convolution (true geometric test)")
+plt.legend()
+plt.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+Code 5
+
+# ============================================================
+# TRUE geometric zero transport test (σ–t coupling)
+# ============================================================
+
+import mpmath as mp
+import numpy as np
+import matplotlib.pyplot as plt
+
+mp.mp.dps = 40
+
+# ------------------------------------------------------------
+# Riemann ξ(s)
+# ------------------------------------------------------------
+def xi(s):
+    return 0.5 * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+# ------------------------------------------------------------
+# σ–t grid
+# ------------------------------------------------------------
+t_vals = np.linspace(14, 30, 1200)
+sigmas = [0.5 - 0.02, 0.5, 0.5 + 0.02]
+
+Xi = np.zeros((len(sigmas), len(t_vals)), dtype=complex)
+
+for i,sig in enumerate(sigmas):
+    for j,t in enumerate(t_vals):
+        Xi[i,j] = complex(xi(sig + 1j*t))
+
+# ------------------------------------------------------------
+# Anisotropic curvature diffusion
+# ------------------------------------------------------------
+def diffuse(X, tau, eps=0.15):
+    Xnew = X.copy()
+    for i in range(1, X.shape[0]-1):
+        for j in range(1, X.shape[1]-1):
+            lap_t = X[i,j+1] - 2*X[i,j] + X[i,j-1]
+            lap_s = X[i+1,j] - 2*X[i,j] + X[i-1,j]
+            Xnew[i,j] += tau*(lap_t + eps*lap_s)
+    return Xnew
+
+Xi_tau = diffuse(Xi, tau=0.4)
+
+# ------------------------------------------------------------
+# Zero finder on σ = ½ slice
+# ------------------------------------------------------------
+def find_zeros(y):
+    z = []
+    for i in range(1,len(y)-1):
+        if np.real(y[i-1])*np.real(y[i]) < 0:
+            z.append(t_vals[i])
+    return z
+
+z0 = find_zeros(Xi[1])
+z1 = find_zeros(Xi_tau[1])
+
+print("\nBaseline zeros:", np.round(z0[:6],6))
+print("After σ–t diffusion:", np.round(z1[:6],6))
+
+if len(z0)==len(z1):
+    print("Mean |Δt| =", np.mean([abs(a-b) for a,b in zip(z0,z1)]))
+else:
+    print("Zero count changed → annihilation / merging")
+
+# ------------------------------------------------------------
+# Plot
+# ------------------------------------------------------------
+plt.figure(figsize=(9,5))
+plt.plot(t_vals, np.abs(Xi[1]), label="|ξ(½+it)|")
+plt.plot(t_vals, np.abs(Xi_tau[1]), label="|ξτ(½+it)|")
+plt.yscale("log")
+plt.legend()
+plt.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+
+
+Code 6 
+
+
+# ============================================================
+# Riemann ξ zero transport battle harness
+#   - PURE_DIFFUSION: symmetric diffusion (zeros ~ fixed)
+#   - DIFFUSION+DRIFT: adds convection in t (zeros move)
+#   - DIFFUSION+SKEW: adds skew (anti-self-adjoint) term (zeros move)
+# ============================================================
+
+import mpmath as mp
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ---------- precision ----------
+mp.mp.dps = 80
+
+# ---------- xi ----------
+def xi(s):
+    return 0.5 * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+# ---------- grid ----------
+tmin, tmax = 14.0, 30.0
+Nt = 2000
+t = np.linspace(tmin, tmax, Nt)
+dt = t[1] - t[0]
+
+sig0 = 0.5
+sigma_span = 0.06
+Ns = 41
+sigma = np.linspace(sig0 - sigma_span, sig0 + sigma_span, Ns)
+ds = sigma[1] - sigma[0]
+
+# ---------- sample ξ on σ-strip ----------
+print("Sampling ξ on σ-strip...")
+X0 = np.empty((Ns, Nt), dtype=np.complex128)
+for i, sig in enumerate(sigma):
+    for j, tj in enumerate(t):
+        X0[i, j] = complex(xi(sig + 1j * tj))
+
+# ---------- finite difference operators ----------
+def laplacian_2d(X):
+    # Dirichlet-ish edges (leave edges unchanged)
+    Y = X.copy()
+    # second diff in t
+    Y[:, 1:-1] += (X[:, 2:] - 2*X[:, 1:-1] + X[:, :-2]) / (dt*dt)
+    # second diff in sigma
+    Y[1:-1, :] += (X[2:, :] - 2*X[1:-1, :] + X[:-2, :]) / (ds*ds)
+    return Y - X  # return ΔX, leaving edges effectively less updated
+
+def d_dt(X):
+    # centered first derivative in t
+    Y = np.zeros_like(X)
+    Y[:, 1:-1] = (X[:, 2:] - X[:, :-2]) / (2*dt)
+    return Y
+
+def d_ds(X):
+    # centered first derivative in sigma
+    Y = np.zeros_like(X)
+    Y[1:-1, :] = (X[2:, :] - X[:-2, :]) / (2*ds)
+    return Y
+
+# ---------- evolution ----------
+def evolve(X_init, mode, tau_total=0.8, nsteps=120, kappa_t=1.0, kappa_s=0.25, v=0.35, w=0.25):
+    """
+    PDE style:
+      ∂X/∂τ = kappa_t ∂²X/∂t² + kappa_s ∂²X/∂σ²         (PURE_DIFFUSION)
+      plus:
+      - v ∂X/∂t   (DIFFUSION+DRIFT)   -> transports zeros in t
+      - w ∂X/∂σ   (DIFFUSION+SKEW)    -> skews across sigma
+    """
+    X = X_init.copy()
+    dTau = tau_total / nsteps
+
+    for _ in range(nsteps):
+        # diffusion (separable anisotropic)
+        # implement anisotropy by scaling the components explicitly
+        # build ΔX from separate second differences
+        diff = np.zeros_like(X)
+        # t second derivative
+        diff[:, 1:-1] += kappa_t * (X[:, 2:] - 2*X[:, 1:-1] + X[:, :-2]) / (dt*dt)
+        # sigma second derivative
+        diff[1:-1, :] += kappa_s * (X[2:, :] - 2*X[1:-1, :] + X[:-2, :]) / (ds*ds)
+
+        rhs = diff
+
+        if mode == "DIFFUSION+DRIFT":
+            rhs += -v * d_dt(X)
+
+        if mode == "DIFFUSION+SKEW":
+            rhs += -w * d_ds(X)
+
+        X = X + dTau * rhs
+
+    return X
+
+# ---------- refined zero finding on Re ξ(½+it) ----------
+def refine_zero_real(f, a, b, maxit=50):
+    """
+    Refine root of Re(f(½+it)) between a,b using bisection on sign changes.
+    """
+    fa = mp.re(f(sig0 + 1j*a))
+    fb = mp.re(f(sig0 + 1j*b))
+    if fa == 0:
+        return float(a)
+    if fb == 0:
+        return float(b)
+    if fa*fb > 0:
+        return None
+
+    lo, hi = a, b
+    flo, fhi = fa, fb
+    for _ in range(maxit):
+        mid = 0.5*(lo+hi)
+        fm = mp.re(f(sig0 + 1j*mid))
+        if fm == 0:
+            return float(mid)
+        if flo*fm < 0:
+            hi, fhi = mid, fm
+        else:
+            lo, flo = mid, fm
+    return float(0.5*(lo+hi))
+
+def find_zeros_real_from_samples(y_complex, t_grid):
+    """
+    Use sign changes of Re(y) then refine by bisection using true mp ξ.
+    """
+    re = np.real(y_complex)
+    sgn = np.sign(re)
+    zeros = []
+    for i in range(1, len(sgn)):
+        if sgn[i] == 0:
+            zeros.append(t_grid[i])
+        elif sgn[i-1] == 0:
+            continue
+        elif sgn[i] != sgn[i-1]:
+            a, b = t_grid[i-1], t_grid[i]
+            z = refine_zero_real(xi, a, b)
+            if z is not None:
+                zeros.append(z)
+    # unique-ish (in case of duplicates)
+    zeros = sorted(set([round(z, 10) for z in zeros]))
+    return np.array(zeros, dtype=float)
+
+# ---------- baseline slice at σ=1/2 ----------
+i0 = int(np.argmin(np.abs(sigma - sig0)))
+y0 = X0[i0, :]
+z0 = find_zeros_real_from_samples(y0, t)
+
+print("\nBaseline zeros (refined) =", np.round(z0[:10], 6))
+
+# ---------- run modes ----------
+modes = [
+    ("PURE_DIFFUSION", dict(tau_total=0.8, nsteps=140, kappa_t=1.0, kappa_s=0.35, v=0.0,  w=0.0)),
+    ("DIFFUSION+DRIFT", dict(tau_total=0.8, nsteps=140, kappa_t=1.0, kappa_s=0.35, v=0.55, w=0.0)),
+    ("DIFFUSION+SKEW",  dict(tau_total=0.8, nsteps=140, kappa_t=1.0, kappa_s=0.35, v=0.0,  w=0.55)),
+]
+
+results = {}
+
+for mode, params in modes:
+    print(f"\nEvolving mode: {mode} ...")
+    Xtau = evolve(X0, mode, **params)
+    ytau = Xtau[i0, :]
+    ztau = find_zeros_real_from_samples(ytau, t)
+    results[mode] = (ytau, ztau)
+
+    # compare first N matched zeros
+    N = min(len(z0), len(ztau), 10)
+    if N == 0:
+        print("No zeros detected in one of the sets in this window.")
+        continue
+    dt_mean = float(np.mean(np.abs(ztau[:N] - z0[:N])))
+    print("zeros:", np.round(ztau[:10], 6))
+    print(f"mean |Δt| (first {N}) = {dt_mean:.3e}")
+
+# ---------- plot amplitude overlays ----------
+plt.figure(figsize=(9,5))
+plt.plot(t, np.abs(y0), lw=1.2, label="|ξ(½+it)| baseline")
+
+for mode, (ytau, _) in results.items():
+    plt.plot(t, np.abs(ytau), lw=1.1, alpha=0.9, label=f"|ξτ| {mode}")
+
+plt.yscale("log")
+plt.xlabel("t")
+plt.ylabel("Amplitude")
+plt.title("ξ(½+it) under diffusion vs drift/skew")
+plt.grid(alpha=0.3)
+plt.legend(fontsize=8)
+plt.tight_layout()
+plt.show()
+
+# ---------- zero shift plot ----------
+plt.figure(figsize=(9,5))
+plt.scatter([0]*min(10,len(z0)), z0[:10], s=18, label="baseline", marker="o")
+for mode, (_, ztau) in results.items():
+    plt.scatter([1]*min(10,len(ztau)), ztau[:10], s=18, label=mode, marker="x")
+plt.yticks(np.round(z0[:10], 4))
+plt.xticks([0,1], ["baseline", "evolved"])
+plt.ylabel("t (first zeros)")
+plt.title("Zero positions: baseline vs evolved (first ~10)")
+plt.grid(alpha=0.3)
+plt.legend(fontsize=8)
+plt.tight_layout()
+plt.show()
+
+
+Code 6 
+
+# ============================================================
+# NON-MULTIPLICATIVE MTS TEST — ZERO MOTION CHECK
+# Convolution kernel (this breaks zero invariance)
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+mp.mp.dps = 80
+
+# -----------------------------
+# Riemann xi
+# -----------------------------
+def xi(s):
+    return 0.5*s*(s-1)*mp.power(mp.pi,-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+# -----------------------------
+# Sample critical line
+# -----------------------------
+tmin, tmax = 12, 30
+N = 3000
+ts = np.linspace(tmin, tmax, N)
+
+xi_vals = np.array([complex(xi(0.5 + 1j*t)) for t in ts])
+
+# -----------------------------
+# Gaussian convolution kernel
+# -----------------------------
+sigma = 0.15
+kernel_x = np.linspace(-2, 2, 400)
+kernel = np.exp(-kernel_x**2/(2*sigma**2))
+kernel /= kernel.sum()
+
+# -----------------------------
+# Convolution (non-multiplicative)
+# -----------------------------
+xi_conv = np.convolve(xi_vals, kernel, mode="same")
+
+# -----------------------------
+# Zero finder
+# -----------------------------
+def find_zeros(vals, ts):
+    sign = np.sign(np.real(vals))
+    zeros = []
+    for i in range(1, len(sign)):
+        if sign[i] != sign[i-1]:
+            zeros.append((ts[i]+ts[i-1])/2)
+    return np.array(zeros)
+
+z0 = find_zeros(xi_vals, ts)[:6]
+z1 = find_zeros(xi_conv, ts)[:6]
+
+# -----------------------------
+# Diagnostics
+# -----------------------------
+print("Baseline zeros:", np.round(z0,6))
+print("After convolution:", np.round(z1,6))
+print("Mean |Δt| =", np.mean(np.abs(z1 - z0)))
+
+# -----------------------------
+# Plot
+# -----------------------------
+plt.figure(figsize=(9,5))
+plt.plot(ts, np.abs(xi_vals), label="|ξ(½+it)|", lw=1.1)
+plt.plot(ts, np.abs(xi_conv), label="|convolved ξ|", lw=1.1)
+for z in z0:
+    plt.axvline(z, color="gray", ls="--", alpha=0.4)
+plt.yscale("log")
+plt.xlabel("t")
+plt.ylabel("Amplitude")
+plt.title("Non-multiplicative convolution: zero motion test")
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+Code 7 
+
+# ============================================================
+# CONVOLUTION σ-SWEEP + ZERO REFINEMENT (BISECTION)
+# Proves zero motion is real + maps shift vs sigma
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+mp.mp.dps = 80
+
+# -----------------------------
+# Riemann xi
+# -----------------------------
+def xi(s):
+    return 0.5*s*(s-1)*mp.power(mp.pi,-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+# -----------------------------
+# Robust zero finder: sign-change + bisection refinement
+# Works on any sampled complex array vals(ts)
+# -----------------------------
+def refine_zeros_bisect(ts, vals, max_zeros=6, iters=60):
+    y = np.real(vals)
+    sgn = np.sign(y)
+    idx = np.where(sgn[1:] * sgn[:-1] < 0)[0]  # sign changes only
+    zeros = []
+
+    # interpolation function for bisection
+    def f(t):
+        return float(np.interp(t, ts, y))
+
+    for k in idx:
+        if len(zeros) >= max_zeros:
+            break
+        a, b = ts[k], ts[k+1]
+        fa, fb = f(a), f(b)
+        if fa == 0.0:
+            zeros.append(a); continue
+        if fb == 0.0:
+            zeros.append(b); continue
+        # bisection
+        lo, hi = a, b
+        flo, fhi = fa, fb
+        for _ in range(iters):
+            mid = 0.5*(lo+hi)
+            fmid = f(mid)
+            if fmid == 0.0:
+                lo = hi = mid
+                break
+            if flo * fmid < 0:
+                hi, fhi = mid, fmid
+            else:
+                lo, flo = mid, fmid
+        zeros.append(0.5*(lo+hi))
+    return np.array(zeros, dtype=float)
+
+# -----------------------------
+# Convolution helper
+# -----------------------------
+def gaussian_kernel(sigma, dx, half_width=6.0):
+    x = np.arange(-half_width*sigma, half_width*sigma + dx, dx)
+    k = np.exp(-0.5*(x/sigma)**2)
+    k /= k.sum()
+    return k
+
+def convolve_same_complex(signal, kernel):
+    # numpy handles complex convolution fine
+    return np.convolve(signal, kernel, mode="same")
+
+# -----------------------------
+# Run one experiment
+# -----------------------------
+def run_once(N, tmin=12, tmax=30, sigma=0.15, zeros_to_track=3):
+    ts = np.linspace(tmin, tmax, N)
+    xi_vals = np.array([complex(xi(0.5 + 1j*t)) for t in ts])
+
+    dt = ts[1] - ts[0]
+    k = gaussian_kernel(sigma=sigma, dx=dt, half_width=6.0)
+    xi_conv = convolve_same_complex(xi_vals, k)
+
+    z0 = refine_zeros_bisect(ts, xi_vals, max_zeros=zeros_to_track)
+    z1 = refine_zeros_bisect(ts, xi_conv, max_zeros=zeros_to_track)
+
+    # If a zero is missing (rare), guard
+    m = min(len(z0), len(z1))
+    z0, z1 = z0[:m], z1[:m]
+    mean_shift = float(np.mean(np.abs(z1 - z0))) if m > 0 else np.nan
+
+    return ts, xi_vals, xi_conv, z0, z1, mean_shift
+
+# -----------------------------
+# σ sweep with two resolutions
+# -----------------------------
+sigmas = [0.03, 0.05, 0.08, 0.12, 0.15, 0.20, 0.30]
+Ns = [3000, 12000]   # coarse vs fine to prove it's not grid noise
+zeros_to_track = 3
+
+results = {}
+
+for N in Ns:
+    print("\n===========================================================")
+    print(f"Resolution test: N={N}")
+    print("===========================================================")
+    out = []
+    for s in sigmas:
+        _, _, _, z0, z1, ms = run_once(N=N, sigma=s, zeros_to_track=zeros_to_track)
+        out.append((s, ms, z0, z1))
+        print(f"sigma={s:0.3f}  mean|Δt|={ms:0.6e}   z0={np.round(z0,6)}   z1={np.round(z1,6)}")
+    results[N] = out
+
+# -----------------------------
+# Plot: mean shift vs sigma for both N
+# -----------------------------
+plt.figure(figsize=(9,5))
+for N in Ns:
+    xs = [r[0] for r in results[N]]
+    ys = [r[1] for r in results[N]]
+    plt.plot(xs, ys, marker="o", label=f"N={N}")
+plt.xlabel("sigma (kernel width)")
+plt.ylabel("mean |Δt| (first zeros)")
+plt.title("Zero shift vs convolution width (sanity + scaling)")
+plt.grid(alpha=0.3)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+# -----------------------------
+# One representative overlay plot at sigma=0.15 (fine grid)
+# -----------------------------
+sigma_demo = 0.15
+ts, xi_vals, xi_conv, z0, z1, ms = run_once(N=12000, sigma=sigma_demo, zeros_to_track=3)
+
+plt.figure(figsize=(9,5))
+plt.plot(ts, np.abs(xi_vals), label="|ξ(½+it)|", lw=1.1)
+plt.plot(ts, np.abs(xi_conv), label=f"|convolved ξ|  (sigma={sigma_demo})", lw=1.1)
+for z in z0:
+    plt.axvline(z, color="gray", ls="--", alpha=0.35)
+plt.yscale("log")
+plt.xlabel("t")
+plt.ylabel("Amplitude")
+plt.title(f"Non-multiplicative convolution: zero motion (mean |Δt|={ms:.3e})")
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+
+Code 8 
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+mp.mp.dps = 80
+
+# ------------------------------------------------------------
+# Riemann xi
+# ------------------------------------------------------------
+def xi(s):
+    return 0.5 * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+# ------------------------------------------------------------
+# Sample xi on critical line
+# ------------------------------------------------------------
+def sample_xi(t_vals):
+    return np.array([complex(xi(0.5 + 1j*t)) for t in t_vals])
+
+# ------------------------------------------------------------
+# Zero finder via sign change + refinement
+# ------------------------------------------------------------
+def find_zeros(vals, t_vals, nmax=5):
+    re = np.real(vals)
+    zeros = []
+    for i in range(1, len(re)):
+        if re[i] == 0 or re[i] * re[i-1] < 0:
+            zeros.append(0.5 * (t_vals[i] + t_vals[i-1]))
+        if len(zeros) >= nmax:
+            break
+    return np.array(zeros)
+
+# ------------------------------------------------------------
+# True convolution (non-multiplicative)
+# ------------------------------------------------------------
+def convolve_signal(y, t, sigma):
+    dt = t[1] - t[0]
+    kernel = np.exp(-0.5 * ((t - t.mean()) / sigma)**2)
+    kernel /= np.sum(kernel)
+    return np.convolve(y, kernel, mode="same")
+
+# ------------------------------------------------------------
+# Main experiment
+# ------------------------------------------------------------
+tmin, tmax = 12, 30
+N = 12000
+t = np.linspace(tmin, tmax, N)
+
+xi_vals = sample_xi(t)
+baseline_zeros = find_zeros(xi_vals, t)
+
+sigmas = np.array([0.03, 0.05, 0.08, 0.12, 0.15, 0.20, 0.30])
+mean_shifts = []
+
+for sigma in sigmas:
+    conv_vals = convolve_signal(np.real(xi_vals), t, sigma)
+    conv_zeros = find_zeros(conv_vals, t)
+    shift = np.mean(np.abs(conv_zeros - baseline_zeros))
+    mean_shifts.append(shift)
+    print(f"sigma={sigma:.3f}  mean|Δt|={shift:.6e}")
+
+mean_shifts = np.array(mean_shifts)
+
+# ------------------------------------------------------------
+# Scaling fit
+# ------------------------------------------------------------
+log_sigma = np.log(sigmas)
+log_shift = np.log(mean_shifts)
+
+p, c = np.polyfit(log_sigma, log_shift, 1)
+
+print("\n========================================")
+print(f"Scaling law: mean|Δt| ≈ σ^{p:.3f}")
+print("========================================\n")
+
+# ------------------------------------------------------------
+# Plot
+# ------------------------------------------------------------
+plt.figure(figsize=(8,5))
+plt.loglog(sigmas, mean_shifts, 'o-', label="Measured")
+plt.loglog(sigmas, np.exp(c) * sigmas**p, '--', label=f"Fit σ^{p:.2f}")
+plt.xlabel("σ (kernel width)")
+plt.ylabel("mean |Δt| (zero shift)")
+plt.title("Zero Drift Scaling under Non-Multiplicative Convolution")
+plt.grid(alpha=0.3)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+
+Code 9 
+# ============================================================
+# NEXT TEST: "Does the drift exponent p depend on height?"
+# ------------------------------------------------------------
+# We measure zero drift under NON-multiplicative Gaussian convolution
+# across multiple t-windows (higher zeros), then fit:
+#   mean|Δt| ≈ C * σ^p
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+# ----------------------------
+# Precision / knobs
+# ----------------------------
+mp.mp.dps = 80  # increase if you want tighter zero refinement
+
+WINDOWS = [
+    (0.0,   60.0,  12),   # (tmin, tmax, how many zeros to track in this window)
+    (60.0,  120.0, 12),
+    (120.0, 180.0, 12),
+]
+
+# Convolution widths to test (same idea as you already did)
+SIGMAS = [0.03, 0.05, 0.08, 0.12, 0.15, 0.20, 0.30]
+
+# Sampling resolution per window (higher -> slower but more stable)
+N_SAMPLES = 24000
+
+# Zero refinement settings
+REFINE_BRACKET_HALF_WIDTH = 0.06  # bracket size around coarse sign-change midpoint
+REFINE_MAX_STEPS = 30
+
+# ----------------------------
+# Riemann ξ(s)
+# ----------------------------
+def xi(s):
+    # ξ(s) = 1/2 s(s-1) π^{-s/2} Γ(s/2) ζ(s)
+    return 0.5 * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def xi_line(t):
+    return xi(mp.mpf("0.5") + 1j * mp.mpf(t))
+
+# ----------------------------
+# Coarse -> refined zeros on critical line in [tmin, tmax]
+# ----------------------------
+def find_zeros_refined(tmin, tmax, n_samples, max_zeros):
+    tmin = float(tmin); tmax = float(tmax)
+    ts = np.linspace(tmin, tmax, n_samples, dtype=np.float64)
+
+    # coarse sampling of Re(ξ(1/2+it))
+    revals = np.empty_like(ts)
+    for i, t in enumerate(ts):
+        revals[i] = float(mp.re(xi_line(t)))
+
+    # find sign changes
+    sgn = np.sign(revals)
+    cand = []
+    for i in range(1, len(ts)):
+        if not np.isfinite(sgn[i]) or not np.isfinite(sgn[i-1]):
+            continue
+        if sgn[i] == 0:
+            cand.append(ts[i])
+        elif sgn[i] != sgn[i-1]:
+            cand.append(0.5*(ts[i] + ts[i-1]))
+
+    # refine each candidate using bisection on Re(ξ)
+    zeros = []
+    for t0 in cand:
+        a = max(tmin, t0 - REFINE_BRACKET_HALF_WIDTH)
+        b = min(tmax, t0 + REFINE_BRACKET_HALF_WIDTH)
+
+        fa = mp.re(xi_line(a))
+        fb = mp.re(xi_line(b))
+
+        # If bracket doesn't straddle, try to expand a bit (limited)
+        if fa == 0:
+            zeros.append(float(a));
+            if len(zeros) >= max_zeros: break
+            continue
+        if fb == 0:
+            zeros.append(float(b));
+            if len(zeros) >= max_zeros: break
+            continue
+
+        # Attempt to ensure sign change
+        if fa*fb > 0:
+            # try small expansions
+            expanded = False
+            for scale in [2, 4, 8]:
+                aa = max(tmin, t0 - scale*REFINE_BRACKET_HALF_WIDTH)
+                bb = min(tmax, t0 + scale*REFINE_BRACKET_HALF_WIDTH)
+                faa = mp.re(xi_line(aa))
+                fbb = mp.re(xi_line(bb))
+                if faa*fbb <= 0:
+                    a, b, fa, fb = aa, bb, faa, fbb
+                    expanded = True
+                    break
+            if not expanded:
+                continue
+
+        # bisection
+        lo, hi = mp.mpf(a), mp.mpf(b)
+        flo, fhi = fa, fb
+        for _ in range(REFINE_MAX_STEPS):
+            mid = (lo + hi) / 2
+            fmid = mp.re(xi_line(mid))
+            if fmid == 0:
+                lo = hi = mid
+                break
+            if flo*fmid <= 0:
+                hi, fhi = mid, fmid
+            else:
+                lo, flo = mid, fmid
+
+        z = float((lo + hi)/2)
+        # de-dup (coarse finder can report same root twice)
+        if len(zeros) == 0 or abs(z - zeros[-1]) > 0.03:
+            zeros.append(z)
+        if len(zeros) >= max_zeros:
+            break
+
+    return np.array(zeros, dtype=np.float64)
+
+# ----------------------------
+# Gaussian convolution (non-multiplicative): y(t) = (Kσ * x)(t)
+# ----------------------------
+def gaussian_kernel(ts, sigma):
+    # periodic kernel on the sampled window (FFT-friendly)
+    # Build symmetric Gaussian centered at 0, then FFT-convolve.
+    dt = ts[1] - ts[0]
+    n = len(ts)
+
+    # indices in [-n/2, n/2)
+    k = np.arange(n, dtype=np.float64)
+    k[k > n//2] -= n
+    x = k * dt
+
+    ker = np.exp(-(x*x) / (2*sigma*sigma))
+    ker /= np.sum(ker)  # normalize so it behaves like smoothing
+    return ker
+
+def convolve_fft(x, ker):
+    X = np.fft.fft(x)
+    K = np.fft.fft(ker)
+    y = np.fft.ifft(X * K)
+    return y
+
+# ----------------------------
+# Zero finding on arrays: coarse (sign change), then refine using local interpolation
+# ----------------------------
+def zeros_from_samples(ts, vals, max_zeros):
+    # vals: complex samples of ξ along critical line or convolved version
+    re = np.real(vals)
+    sgn = np.sign(re)
+    zeros = []
+    for i in range(1, len(ts)):
+        if sgn[i] == 0:
+            zeros.append(ts[i])
+        elif sgn[i] != sgn[i-1]:
+            # linear interpolation root for Re part
+            t0, t1 = ts[i-1], ts[i]
+            y0, y1 = re[i-1], re[i]
+            if y1 == y0:
+                z = 0.5*(t0+t1)
+            else:
+                z = t0 - y0*(t1-t0)/(y1-y0)
+            zeros.append(z)
+        if len(zeros) >= max_zeros:
+            break
+    return np.array(zeros, dtype=np.float64)
+
+# ----------------------------
+# Run: per window, build baseline samples + zeros, then convolve and measure drift
+# ----------------------------
+results = []  # list of dicts
+
+for (tmin, tmax, kzeros) in WINDOWS:
+    print("\n=========================================================")
+    print(f"Window: t ∈ [{tmin}, {tmax}]   tracking first {kzeros} zeros")
+    print("=========================================================")
+
+    ts = np.linspace(tmin, tmax, N_SAMPLES, dtype=np.float64)
+    dt = ts[1] - ts[0]
+
+    # Baseline ξ samples (complex)
+    xi_vals = np.empty(N_SAMPLES, dtype=np.complex128)
+    for i, t in enumerate(ts):
+        z = xi_line(t)
+        xi_vals[i] = complex(z)
+
+    # Baseline zeros: use REFINED mp method for a clean reference
+    z_ref = find_zeros_refined(tmin, tmax, n_samples=max(6000, N_SAMPLES//4), max_zeros=kzeros)
+    if len(z_ref) < kzeros:
+        print(f"WARNING: only found {len(z_ref)} refined zeros (wanted {kzeros}).")
+    print("Baseline refined zeros:")
+    print(np.round(z_ref[:kzeros], 6))
+
+    # Drift vs sigma
+    sigmas = []
+    mean_shifts = []
+
+    for sigma in SIGMAS:
+        ker = gaussian_kernel(ts, sigma)
+        y = convolve_fft(xi_vals, ker)
+
+        # Detect zeros on convolved samples (same window)
+        z_conv = zeros_from_samples(ts, y, max_zeros=len(z_ref))
+        m = min(len(z_ref), len(z_conv), kzeros)
+        if m == 0:
+            print(f"sigma={sigma:.3f} -> no zeros detected (increase N_SAMPLES or adjust window)")
+            continue
+
+        shift = np.mean(np.abs(z_conv[:m] - z_ref[:m]))
+        sigmas.append(sigma)
+        mean_shifts.append(shift)
+
+        print(f"sigma={sigma:.3f}  mean|Δt|={shift:.6e}  first={m}")
+
+    sigmas = np.array(sigmas, dtype=np.float64)
+    mean_shifts = np.array(mean_shifts, dtype=np.float64)
+
+    # Fit exponent p on log-log (ignore zeros)
+    mask = (mean_shifts > 0) & np.isfinite(mean_shifts)
+    if np.sum(mask) >= 3:
+        p, logC = np.polyfit(np.log(sigmas[mask]), np.log(mean_shifts[mask]), 1)
+        C = np.exp(logC)
+    else:
+        p, C = np.nan, np.nan
+
+    results.append({
+        "tmin": tmin, "tmax": tmax, "kzeros": kzeros,
+        "sigmas": sigmas, "mean_shifts": mean_shifts,
+        "p": p, "C": C, "z_ref": z_ref
+    })
+
+    # Plot drift scaling for this window
+    plt.figure(figsize=(8,5))
+    plt.loglog(sigmas, mean_shifts, marker="o", label="measured")
+    if np.isfinite(p):
+        sfit = np.linspace(sigmas.min(), sigmas.max(), 200)
+        plt.loglog(sfit, C*(sfit**p), ls="--", label=f"fit: σ^{p:.3f}")
+    plt.xlabel("σ (kernel width)")
+    plt.ylabel("mean |Δt| (zero drift)")
+    plt.title(f"Zero drift scaling: t∈[{tmin},{tmax}]  (dt≈{dt:.4g})")
+    plt.grid(alpha=0.3)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+# ----------------------------
+# Summary across heights
+# ----------------------------
+print("\n\n=========================================================")
+print("SUMMARY: exponent p vs height window")
+print("=========================================================")
+for r in results:
+    tmid = 0.5*(r["tmin"] + r["tmax"])
+    print(f"t∈[{r['tmin']:>6.1f},{r['tmax']:<6.1f}]  t_mid≈{tmid:>6.1f}  p≈{r['p']:.4f}")
+
+# Comparison plot: p vs window midpoint
+pmid = np.array([0.5*(r["tmin"]+r["tmax"]) for r in results], dtype=np.float64)
+pp = np.array([r["p"] for r in results], dtype=np.float64)
+
+plt.figure(figsize=(7,4.5))
+plt.plot(pmid, pp, marker="o")
+plt.xlabel("window midpoint t")
+plt.ylabel("fitted exponent p")
+plt.title("Does drift exponent p change with height?")
+plt.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+print("\nDone.")
+print("If p stays flat -> universal rigidity law.")
+print("If p trends -> height-dependent stiffness (very interesting).")
+
+Code 10 
+# ============================================================
+# Zero Drift Law Verification for Riemann ξ(1/2+it)
+# Interior-only, derivative-predicted, kernel-comparison test
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+from scipy.signal import savgol_filter
+
+mp.mp.dps = 80
+
+# ------------------------------------------------------------
+# Riemann ξ
+# ------------------------------------------------------------
+def xi(s):
+    return 0.5*s*(s-1)*mp.power(mp.pi, -s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+# ------------------------------------------------------------
+# Sampling grid
+# ------------------------------------------------------------
+tmin, tmax = 0.0, 180.0
+N = 16000
+t = np.linspace(tmin, tmax, N)
+dt = t[1] - t[0]
+
+xi_vals = np.array([complex(xi(0.5 + 1j*tt)) for tt in t])
+f = np.real(xi_vals)
+
+# ------------------------------------------------------------
+# Gaussian convolution (non-multiplicative)
+# ------------------------------------------------------------
+def gaussian_convolve(x, sigma):
+    r = int(6*sigma/dt)
+    grid = np.arange(-r, r+1)*dt
+    k = np.exp(-grid**2/(2*sigma**2))
+    k /= k.sum()
+    return np.convolve(x, k, mode="same")
+
+# ------------------------------------------------------------
+# Compact symmetric kernel (Savitzky–Golay)
+# ------------------------------------------------------------
+def compact_smooth(x, sigma):
+    win = int(6*sigma/dt) | 1
+    return savgol_filter(x, win, 4)
+
+# ------------------------------------------------------------
+# Zero finder (refined)
+# ------------------------------------------------------------
+def find_zeros(x):
+    s = np.sign(x)
+    idx = np.where(s[:-1]*s[1:] < 0)[0]
+    return np.array([(t[i]+t[i+1])/2 for i in idx])
+
+# ------------------------------------------------------------
+# Derivative ratio at zeros
+# ------------------------------------------------------------
+def derivative_ratio(x, zeros):
+    ratios = []
+    for z in zeros:
+        i = np.searchsorted(t, z)
+        if 2 < i < len(t)-3:
+            f1 = (x[i+1]-x[i-1])/(2*dt)
+            f2 = (x[i+1]-2*x[i]+x[i-1])/(dt**2)
+            ratios.append(abs(f2/f1))
+    return np.array(ratios)
+
+# ------------------------------------------------------------
+# Test parameters
+# ------------------------------------------------------------
+sigmas = np.array([0.03,0.05,0.08,0.12,0.15,0.20,0.30])
+windows = [(0,60),(60,120),(120,180)]
+
+# ------------------------------------------------------------
+# Run tests
+# ------------------------------------------------------------
+print("\n=========================================================")
+print("ZERO DRIFT LAW TEST (INTERIOR ONLY)")
+print("=========================================================")
+
+for w0,w1 in windows:
+    print(f"\nWindow t ∈ [{w0},{w1}]")
+    mask = (t>=w0)&(t<=w1)
+    base_zeros = find_zeros(f[mask])
+    base_zeros = base_zeros[(base_zeros > w0+2) & (base_zeros < w1-2)]
+
+    print("Baseline zeros:", np.round(base_zeros[:10],6))
+
+    for sigma in sigmas:
+        g = gaussian_convolve(f, sigma)
+        g_zeros = find_zeros(g[mask])
+        g_zeros = g_zeros[(g_zeros > w0+6*sigma) & (g_zeros < w1-6*sigma)]
+
+        n = min(len(base_zeros), len(g_zeros))
+        if n == 0:
+            continue
+
+        shift = np.mean(np.abs(g_zeros[:n]-base_zeros[:n]))
+        print(f"sigma={sigma:0.3f}  mean|Δt|={shift:.3e}  n={n}")
+
+# ------------------------------------------------------------
+# σ² scaling check (high window)
+# ------------------------------------------------------------
+print("\n=========================================================")
+print("σ² SCALING & DERIVATIVE PREDICTION (t∈[120,180])")
+print("=========================================================")
+
+mask = (t>=120)&(t<=180)
+base_zeros = find_zeros(f[mask])
+base_zeros = base_zeros[(base_zeros>125)&(base_zeros<175)]
+
+ratios = derivative_ratio(f, base_zeros)
+
+means = []
+for sigma in sigmas:
+    g = gaussian_convolve(f, sigma)
+    g_zeros = find_zeros(g[mask])
+    g_zeros = g_zeros[(g_zeros>120+6*sigma)&(g_zeros<180-6*sigma)]
+    n = min(len(base_zeros), len(g_zeros))
+    means.append(np.mean(np.abs(g_zeros[:n]-base_zeros[:n])))
+
+means = np.array(means)
+
+p = np.polyfit(np.log(sigmas), np.log(means), 1)[0]
+print(f"Fitted drift exponent p ≈ {p:.4f}")
+
+# ------------------------------------------------------------
+# Kernel comparison plot
+# ------------------------------------------------------------
+plt.figure(figsize=(9,5))
+plt.loglog(sigmas, means, "o-", label="Gaussian")
+plt.loglog(sigmas, means[0]*(sigmas/sigmas[0])**2, "--", label="σ² reference")
+plt.xlabel("σ")
+plt.ylabel("mean |Δt|")
+plt.title("Zero drift scaling (interior zeros only)")
+plt.grid(alpha=0.4)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+print("\nDONE.")
+print("If σ² holds for both kernels → operator-class rigidity.")
+print("If coefficient tracks |f''/f'| → local analytic control.")
+
+Code 11 
+# ============================================================
+# TEST A: Does the σ² drift coefficient collapse with zero spacing?
+# ------------------------------------------------------------
+# We measure zero drift under non-multiplicative Gaussian convolution:
+#   fσ(t) = (Gσ * f)(t)   where f(t) = Re ξ(1/2 + i t)
+#
+#   |Δt| ~ σ^2
+#
+# Now we test whether the coefficient
+#   C_i(σ) = |Δt_i(σ)| / σ^2
+# collapses as a function of the local zero spacing:
+#   Δ_i = min(z_i - z_{i-1}, z_{i+1} - z_i)
+#
+# Output:
+# - scatter of C vs spacing (log-log), colored by σ
+# - fitted power law: C ~ spacing^(-q)
+# - optional “collapse check”: (C * spacing^q) vs σ
+#
+# Notes:
+# - Runtime depends mostly on how many ξ evaluations we do.
+# - If you want faster: increase dt (e.g. 0.02) or reduce tmax.
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+from scipy.signal import fftconvolve
+from scipy.optimize import brentq
+
+# -----------------------------
+# Precision + domain
+# -----------------------------
+mp.mp.dps = 70   # bump if you want, but 70 is usually plenty for sign-changes
+
+tmin, tmax = 0.0, 60.0
+dt = 0.01                       # try 0.005 if you want, but 0.01 is much faster
+ts = np.arange(tmin, tmax + dt, dt)
+
+# Convolution widths to test
+sigmas = [0.03, 0.05, 0.08, 0.12, 0.15, 0.20, 0.30]
+
+# How many std devs to treat as “edge contamination” for convolution
+EDGE_NSIG = 6.0
+
+# -----------------------------
+# Riemann ξ(s)
+# -----------------------------
+def xi(s):
+    return 0.5 * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_base(t):
+    # baseline real slice
+    return mp.re(xi(mp.mpf('0.5') + 1j*mp.mpf(t)))
+
+# -----------------------------
+# Baseline sampling
+# -----------------------------
+print("Sampling baseline f(t) = Re ξ(1/2 + i t) ...")
+f0 = np.empty_like(ts, dtype=np.float64)
+
+for i, t in enumerate(ts):
+    f0[i] = float(f_base(t))
+
+# -----------------------------
+# Zero finding (baseline) with refinement using brentq + mp evaluation
+# -----------------------------
+def find_zeros_baseline(ts, fvals):
+    zeros = []
+    sgn = np.sign(fvals)
+    for i in range(1, len(ts)):
+        if sgn[i] == 0:
+            zeros.append(ts[i])
+        elif sgn[i-1] == 0:
+            zeros.append(ts[i-1])
+        elif sgn[i] != sgn[i-1]:
+            a, b = ts[i-1], ts[i]
+            try:
+                root = brentq(lambda x: float(f_base(x)), a, b, maxiter=200)
+                zeros.append(root)
+            except Exception:
+                # fallback: midpoint if refinement fails
+                zeros.append(0.5*(a+b))
+    return np.array(zeros, dtype=np.float64)
+
+z0_all = find_zeros_baseline(ts, f0)
+
+# Keep only interior zeros (need neighbours for spacing)
+# Also restrict to (tmin,tmax) and avoid exact edges
+z0_all = z0_all[(z0_all > tmin + 5*dt) & (z0_all < tmax - 5*dt)]
+
+print("\nBaseline refined zeros (window):")
+print(np.round(z0_all, 6))
+
+if len(z0_all) < 5:
+    raise RuntimeError("Not enough zeros found in this window. Increase tmax or reduce dt.")
+
+# Local spacing Δ_i = min(left gap, right gap), for interior indices only
+# We’ll drop the first and last zero because spacing needs neighbours.
+z0 = z0_all.copy()
+spacing = np.minimum(z0[1:-1] - z0[:-2], z0[2:] - z0[1:-1])  # corresponds to zeros z0[1:-1]
+z0_mid = z0[1:-1]  # the zeros we analyze
+
+# Index lookup to enforce convolution-safe interior region
+def zero_indices_in_grid(zeros, ts, dt):
+    return np.clip(((zeros - ts[0]) / dt).round().astype(int), 0, len(ts)-1)
+
+idx0 = zero_indices_in_grid(z0_mid, ts, dt)
+
+# -----------------------------
+# Convolution + zero finding on convolved signal (numeric refinement)
+# -----------------------------
+def gaussian_kernel(dt, sigma, nsig=EDGE_NSIG):
+    half_width = int(np.ceil(nsig * sigma / dt))
+    xs = np.arange(-half_width, half_width + 1) * dt
+    g = np.exp(-0.5 * (xs / sigma)**2)
+    g /= g.sum()
+    return g, half_width
+
+def find_zeros_numeric(ts, y, valid_lo_idx, valid_hi_idx):
+    """
+    Find zeros by sign change in y(t) on a grid, then refine by linear interpolation
+    in the sign-change bracket. Only accept roots whose bracket lies within
+    [valid_lo_idx, valid_hi_idx].
+    """
+    zeros = []
+    sgn = np.sign(y)
+    for i in range(1, len(ts)):
+        if i-1 < valid_lo_idx or i > valid_hi_idx:
+            continue
+        if sgn[i] == 0:
+            zeros.append(ts[i])
+        elif sgn[i-1] == 0:
+            zeros.append(ts[i-1])
+        elif sgn[i] != sgn[i-1]:
+            # linear interpolation root between (i-1,i):
+            a, b = ts[i-1], ts[i]
+            ya, yb = y[i-1], y[i]
+            if (yb - ya) == 0:
+                zeros.append(0.5*(a+b))
+            else:
+                root = a - ya * (b - a) / (yb - ya)
+                zeros.append(root)
+    return np.array(zeros, dtype=np.float64)
+
+# -----------------------------
+# Main sweep: compute per-zero C_i = |Δt|/σ^2 and pair with spacing
+# -----------------------------
+all_spacing = []
+all_C = []
+all_sigma_tag = []
+
+per_sigma_summary = []
+
+print("\n=========================================================")
+print("A) COEFFICIENT COLLAPSE TEST: C = |Δt| / σ² vs spacing Δ")
+print("=========================================================")
+
+for sigma in sigmas:
+    g, half_w = gaussian_kernel(dt, sigma, nsig=EDGE_NSIG)
+    y = fftconvolve(f0, g, mode='same')
+
+    # Only trust zeros away from convolution edge region
+    valid_lo = half_w + 3
+    valid_hi = len(ts) - half_w - 4
+
+    z1_all = find_zeros_numeric(ts, y, valid_lo, valid_hi)
+
+    # We need to match evolved zeros to baseline zeros (z0_mid).
+    # In a stable regime, counts should match and order should match.
+    # So: take evolved zeros in the same window and pick the closest by index order.
+    # First, restrict evolved zeros to the neighborhood of z0_mid.
+    # We'll match each baseline zero to the nearest evolved zero.
+    z1_matched = np.empty_like(z0_mid)
+
+    # For faster matching, use a two-pointer walk (both sorted).
+    j = 0
+    for i, zref in enumerate(z0_mid):
+        # advance j while the next evolved zero is closer
+        while j + 1 < len(z1_all) and abs(z1_all[j+1] - zref) < abs(z1_all[j] - zref):
+            j += 1
+        z1_matched[i] = z1_all[j]
+
+    # Edge-safety filter on baseline zero indices
+    safe = (idx0 >= valid_lo) & (idx0 <= valid_hi)
+
+    shifts = z1_matched - z0_mid
+    C = np.abs(shifts) / (sigma**2)
+
+    # Store only safe points
+    all_spacing.extend(list(spacing[safe]))
+    all_C.extend(list(C[safe]))
+    all_sigma_tag.extend([sigma] * int(np.sum(safe)))
+
+    # Summary for this sigma
+    meanC = float(np.mean(C[safe])) if np.sum(safe) else float('nan')
+    meanShift = float(np.mean(np.abs(shifts[safe]))) if np.sum(safe) else float('nan')
+
+    per_sigma_summary.append((sigma, meanShift, meanC, int(np.sum(safe))))
+
+    print(f"sigma={sigma:.3f}  mean|Δt|={meanShift:.6e}  mean(C)=mean|Δt|/σ²={meanC:.6e}  n={int(np.sum(safe))}")
+
+all_spacing = np.array(all_spacing, dtype=np.float64)
+all_C = np.array(all_C, dtype=np.float64)
+all_sigma_tag = np.array(all_sigma_tag, dtype=np.float64)
+
+# -----------------------------
+# Fit power law: C ~ spacing^(-q)
+# -----------------------------
+mask = (all_spacing > 0) & (all_C > 0) & np.isfinite(all_spacing) & np.isfinite(all_C)
+logx = np.log(all_spacing[mask])
+logy = np.log(all_C[mask])
+
+# slope = d logC / d logΔ  => C ~ Δ^slope
+slope, intercept = np.polyfit(logx, logy, 1)
+q = -slope
+
+print("\n========================================")
+print(f"Fitted law: C = |Δt|/σ²  ~  spacing^(-q)")
+print(f"q ≈ {q:.4f}   (since slope ≈ {slope:.4f})")
+print("========================================")
+
+# -----------------------------
+# Plots
+# -----------------------------
+plt.figure(figsize=(9,6))
+for sigma in sigmas:
+    m = (all_sigma_tag == sigma) & mask
+    if np.any(m):
+        plt.scatter(all_spacing[m], all_C[m], s=18, label=f"σ={sigma:.2f}", alpha=0.8)
+# fitted line
+xx = np.logspace(np.log10(all_spacing[mask].min()), np.log10(all_spacing[mask].max()), 200)
+yy = np.exp(intercept) * xx**slope
+plt.plot(xx, yy, lw=2.0, ls="--", label=f"fit: C ∝ Δ^{slope:.3f}  (q≈{q:.3f})")
+plt.xscale("log")
+plt.yscale("log")
+plt.xlabel("local zero spacing  Δ")
+plt.ylabel("C = |Δt| / σ²")
+plt.title("Coefficient collapse test: C vs local zero spacing")
+plt.grid(alpha=0.35)
+plt.legend(fontsize=9)
+plt.tight_layout()
+plt.show()
+
+# “Collapse check”: rescale by spacing^q, should flatten vs σ if this is the right collapse variable
+plt.figure(figsize=(9,5))
+for sigma in sigmas:
+    m = (all_sigma_tag == sigma) & mask
+    if np.any(m):
+        collapsed = all_C[m] * (all_spacing[m] ** q)
+        plt.scatter([sigma]*len(collapsed), collapsed, s=18, alpha=0.85)
+plt.xlabel("σ")
+plt.ylabel("C · Δ^q   (should be ~constant if collapse holds)")
+plt.title("Collapse check: rescaled coefficient vs σ")
+plt.grid(alpha=0.35)
+plt.tight_layout()
+plt.show()
+
+print("\nDone.")
+print("If the first plot shows tight collapse (C vs Δ) across σ,")
+print("you’ve got a spacing-controlled drift coefficient (local geometry / stiffness law).")
+
+Code 12 
+
+# ============================================================
+# RH "zero drift" mechanistic test:
+# Does Gaussian smoothing move zeros by  Δt ≈ -(σ^2/2) * f''/f'  ?
+# where f(t)=Re ξ(1/2 + i t)
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+mp.mp.dps = 80
+
+# ----------------------------
+# Riemann xi
+# ----------------------------
+def xi(s):
+    return mp.mpf('0.5') * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_re(t):
+    # f(t) = Re ξ(1/2 + i t)
+    s = mp.mpf('0.5') + 1j * mp.mpf(t)
+    return mp.re(xi(s))
+
+# ----------------------------
+# Robust zero finding for f(t) on [tmin,tmax]
+# - bracket via sign changes on a dense grid
+# - refine via mp.findroot with two initial guesses
+# ----------------------------
+def find_zeros_re_xi(tmin, tmax, gridN=6000, max_zeros=None):
+    ts = np.linspace(tmin, tmax, gridN)
+    vals = np.array([float(f_re(t)) for t in ts])
+    sgn = np.sign(vals)
+
+    brackets = []
+    for i in range(1, len(ts)):
+        if sgn[i] == 0:
+            brackets.append((ts[i], ts[i]))
+        elif sgn[i] != sgn[i-1]:
+            brackets.append((ts[i-1], ts[i]))
+
+    zeros = []
+    for a, b in brackets:
+        if a == b:
+            z = a
+        else:
+            # two-start findroot is usually stable for simple zeros
+            try:
+                z = mp.findroot(lambda x: f_re(x), (mp.mpf(a), mp.mpf(b)))
+                z = float(z)
+            except Exception:
+                # fallback: midpoint try
+                mid = 0.5*(a+b)
+                try:
+                    z = mp.findroot(lambda x: f_re(x), mp.mpf(mid))
+                    z = float(z)
+                except Exception:
+                    continue
+
+        # de-dup
+        if (z >= tmin) and (z <= tmax):
+            if (len(zeros) == 0) or (abs(z - zeros[-1]) > 1e-3):
+                zeros.append(z)
+                if max_zeros is not None and len(zeros) >= max_zeros:
+                    break
+
+    return np.array(zeros, dtype=float)
+
+# ----------------------------
+# Gaussian convolution via FFT on a uniform grid
+# Uses periodic convolution on the sampled interval.
+# To reduce wrap-around, we use an "interior-only" region for measuring drift.
+# ----------------------------
+def gaussian_convolve_fft(y, dt, sigma):
+    N = len(y)
+    freqs = np.fft.fftfreq(N, d=dt)          # cycles per unit
+    omega = 2*np.pi*freqs                    # rad per unit
+    Ghat = np.exp(-0.5*(sigma**2)*(omega**2))  # FT of Gaussian kernel (up to normalization)
+    Y = np.fft.fft(y)
+    y_conv = np.fft.ifft(Y * Ghat).real
+    return y_conv
+
+# ----------------------------
+# Find zeros from sampled array via sign changes + linear interpolation,
+# then refine by local mp.findroot using the *convolved* interpolation as target.
+# Here we keep it fast/clean: we refine zeros of the convolved *sampled* function
+# using a cubic interpolation built from numpy.
+# ----------------------------
+def zeros_from_samples(ts, ys):
+    sgn = np.sign(ys)
+    zs = []
+    for i in range(1, len(ts)):
+        if sgn[i] == 0:
+            zs.append(ts[i])
+        elif sgn[i] != sgn[i-1]:
+            # linear interpolate crossing
+            a, b = ts[i-1], ts[i]
+            fa, fb = ys[i-1], ys[i]
+            if fb != fa:
+                z = a + (0 - fa)*(b-a)/(fb-fa)
+                zs.append(z)
+    # de-dup
+    zs2 = []
+    for z in zs:
+        if (len(zs2)==0) or (abs(z - zs2[-1]) > 1e-6):
+            zs2.append(z)
+    return np.array(zs2, dtype=float)
+
+# ----------------------------
+# Local derivative prediction at each baseline zero:
+# Δt_pred ≈ -(σ^2/2) * f''(t0)/f'(t0)
+# ----------------------------
+def local_shift_prediction(t0, sigma):
+    t0 = mp.mpf(t0)
+    fp  = mp.diff(lambda x: f_re(x), t0, 1)
+    fpp = mp.diff(lambda x: f_re(x), t0, 2)
+    if fp == 0:
+        return np.nan
+    dt_pred = - (mp.mpf('0.5') * (mp.mpf(sigma)**2)) * (fpp / fp)
+    return float(dt_pred)
+
+# ============================================================
+# RUN EXPERIMENT
+# ============================================================
+
+# Window to analyze (pick a "bulk" window to avoid early weirdness)
+tmin, tmax = 60.0, 120.0
+
+# Sampling resolution for FFT convolution
+N = 24000
+ts = np.linspace(tmin, tmax, N, endpoint=False)
+dt = ts[1] - ts[0]
+
+print("Sampling f(t)=Re ξ(1/2+it) ...")
+f0 = np.array([float(f_re(t)) for t in ts])
+
+# Baseline zeros (high-precision) in this window
+z0 = find_zeros_re_xi(tmin, tmax, gridN=9000)
+print(f"\nBaseline zeros in [{tmin},{tmax}]  (count={len(z0)}):")
+print(np.round(z0[:20], 6))
+
+# "Interior-only" region to measure drift (avoid FFT wrap-around near edges)
+pad = 6.0   # ignore first/last pad units of t when comparing zeros
+interior_min = tmin + pad
+interior_max = tmax - pad
+z0_int = z0[(z0 >= interior_min) & (z0 <= interior_max)]
+
+# Sigmas to test
+sigmas = [0.03, 0.05, 0.08, 0.12, 0.15, 0.20, 0.30]
+
+# Store results: per sigma, per zero
+all_meas = []
+all_pred = []
+all_t0   = []
+all_sig  = []
+
+for sigma in sigmas:
+    f_conv = gaussian_convolve_fft(f0, dt, sigma)
+    z1 = zeros_from_samples(ts, f_conv)
+    z1_int = z1[(z1 >= interior_min) & (z1 <= interior_max)]
+
+    # Pair zeros by index (works because small smoothing won't reorder interior zeros)
+    m = min(len(z0_int), len(z1_int))
+    if m == 0:
+        print(f"\nsigma={sigma:.3f} -> no interior zeros detected")
+        continue
+
+    z0m = z0_int[:m]
+    z1m = z1_int[:m]
+    dt_meas = z1m - z0m
+
+    dt_pred = np.array([local_shift_prediction(t, sigma) for t in z0m], dtype=float)
+
+    # Save (drop nans)
+    mask = np.isfinite(dt_pred)
+    all_meas.append(dt_meas[mask])
+    all_pred.append(dt_pred[mask])
+    all_t0.append(z0m[mask])
+    all_sig.append(np.full(np.sum(mask), sigma, dtype=float))
+
+    print(f"\nsigma={sigma:.3f}  interior zeros used={np.sum(mask)}")
+    print(f"  mean|Δt_meas| = {np.mean(np.abs(dt_meas[mask])):.6e}")
+    print(f"  mean|Δt_pred| = {np.mean(np.abs(dt_pred[mask])):.6e}")
+    print(f"  mean|err|     = {np.mean(np.abs(dt_meas[mask]-dt_pred[mask])):.6e}")
+
+# Flatten
+meas = np.concatenate(all_meas) if len(all_meas) else np.array([])
+pred = np.concatenate(all_pred) if len(all_pred) else np.array([])
+t0s  = np.concatenate(all_t0)   if len(all_t0)   else np.array([])
+sigs = np.concatenate(all_sig)  if len(all_sig)  else np.array([])
+
+# ============================================================
+# PLOTS
+# ============================================================
+
+if len(meas):
+    # 1) Measured vs Predicted scatter
+    plt.figure(figsize=(8,6))
+    plt.scatter(pred, meas, s=10)
+    mn = min(np.min(pred), np.min(meas))
+    mx = max(np.max(pred), np.max(meas))
+    plt.plot([mn, mx], [mn, mx], lw=1)
+    plt.xlabel("Δt_pred  (-(σ^2/2) f''/f')")
+    plt.ylabel("Δt_meas  (from convolved zeros)")
+    plt.title("Zero shift: measured vs local-derivative prediction (interior only)")
+    plt.grid(alpha=0.3)
+    plt.tight_layout()
+    plt.show()
+
+    # 2) Relative error vs t0 (color by sigma)
+    plt.figure(figsize=(9,5))
+    rel = np.abs(meas - pred) / (np.abs(meas) + 1e-18)
+    for sigma in sigmas:
+        mask = (np.abs(sigs - sigma) < 1e-12)
+        if np.any(mask):
+            plt.scatter(t0s[mask], rel[mask], s=12, label=f"σ={sigma:.2f}")
+    plt.yscale("log")
+    plt.xlabel("t0 (baseline zero location)")
+    plt.ylabel("relative error |meas-pred|/|meas|")
+    plt.title("Prediction error by zero height (log scale)")
+    plt.grid(alpha=0.3)
+    plt.legend(fontsize=8)
+    plt.tight_layout()
+    plt.show()
+
+    # 3) Collapse test: Δt/σ^2 vs -0.5 f''/f'  (should line up on y=x)
+    plt.figure(figsize=(8,6))
+    x = pred / (sigs**2 + 1e-30)
+    y = meas / (sigs**2 + 1e-30)
+    plt.scatter(x, y, s=10)
+    mn = min(np.min(x), np.min(y))
+    mx = max(np.max(x), np.max(y))
+    plt.plot([mn, mx], [mn, mx], lw=1)
+    plt.xlabel("Δt_pred / σ²")
+    plt.ylabel("Δt_meas / σ²")
+    plt.title("σ²-normalized drift: predicted vs measured")
+    plt.grid(alpha=0.3)
+    plt.tight_layout()
+    plt.show()
+
+else:
+    print("\nNo usable data produced (try widening window or reducing pad).")
+
+Code 13 
+
+# ============================================================
+# TEST A (FIXED): Pairwise drift model with automatic neighbor cap
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+mp.mp.dps = 60
+
+TMIN, TMAX = 60.0, 120.0
+N = 16384
+PAD_FRAC = 0.5
+SIGMAS = [0.03, 0.05, 0.08, 0.12, 0.15, 0.20, 0.30]
+EDGE_ZERO_CUT = 3
+NEIGHBOR_K_REQUESTED = 30
+EPS = 1e-12
+
+GAUSS_LS = [1.0, 2.0, 4.0, 8.0]
+
+def xi(s):
+    return 0.5*s*(s-1)*mp.pi**(-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+def f_re_xi(t):
+    return float(mp.re(xi(0.5 + 1j*t)))
+
+def refine_zero_cubic(t4, y4):
+    coeff = np.polyfit(t4, y4, 3)
+    roots = np.roots(coeff)
+    roots = roots[np.isreal(roots)].real
+    a, b = t4[1], t4[2]
+    good = roots[(roots >= a) & (roots <= b)]
+    if len(good):
+        mid = 0.5*(a+b)
+        return float(good[np.argmin(np.abs(good-mid))])
+    return float(0.5*(a+b))
+
+def find_zeros(t, y):
+    s = np.sign(y)
+    s[s==0] = 1
+    idx = np.where(s[1:] != s[:-1])[0]
+    out = []
+    for i in idx:
+        j0 = max(i-1,0)
+        j3 = min(i+2,len(t)-1)
+        if j3-j0<3:
+            out.append(0.5*(t[i]+t[i+1]))
+            continue
+        out.append(refine_zero_cubic(t[j0:j0+4], y[j0:j0+4]))
+    return np.array(out)
+
+def gaussian_smooth_fft(f, dt, sigma):
+    n = len(f)
+    pad = int(PAD_FRAC*n)
+    x = np.pad(f,(pad,pad))
+    m = len(x)
+    w = 2*np.pi*np.fft.fftfreq(m,d=dt)
+    G = np.exp(-0.5*(sigma*w)**2)
+    return np.fft.ifft(np.fft.fft(x)*G).real[pad:pad+n]
+
+def basis(d):
+    ad = abs(d)+EPS
+    feats = [1/ad, 1/(ad*ad), np.sign(d)/ad]
+    for ell in GAUSS_LS:
+        feats.append(np.exp(-0.5*(d/ell)**2))
+    return np.array(feats)
+
+def build_design(t0, y):
+    n = len(t0)
+    neigh = min(NEIGHBOR_K_REQUESTED, (n-1)//2)
+    rows, targ = [], []
+    for i in range(neigh, n-neigh):
+        acc = None
+        for j in range(i-neigh, i+neigh+1):
+            if j==i: continue
+            b = basis(t0[i]-t0[j])
+            acc = b if acc is None else acc+b
+        rows.append(acc)
+        targ.append(y[i])
+    if not rows:
+        return None,None,neigh
+    return np.vstack(rows), np.array(targ), neigh
+
+# --- sample function
+ts = np.linspace(TMIN,TMAX,N)
+dt = ts[1]-ts[0]
+f = np.array([f_re_xi(t) for t in ts])
+z0 = find_zeros(ts,f)
+
+records = []
+for s in SIGMAS:
+    g = gaussian_smooth_fft(f,dt,s)
+    z1 = find_zeros(ts,g)
+    m = min(len(z0),len(z1))
+    z0i = z0[:m][EDGE_ZERO_CUT:-EDGE_ZERO_CUT]
+    z1i = z1[:m][EDGE_ZERO_CUT:-EDGE_ZERO_CUT]
+    for t,d in zip(z0i,z1i-z0i):
+        records.append((s,t,d))
+
+rec = np.array(records)
+Xs,Ys = [],[]
+for s in SIGMAS:
+    mask = rec[:,0]==s
+    t0 = rec[mask][:,1]
+    y = rec[mask][:,2]/(s*s)
+    order = np.argsort(t0)
+    X,Y,neigh = build_design(t0[order],y[order])
+    if X is not None:
+        Xs.append(X)
+        Ys.append(Y)
+
+if not Xs:
+    print("No usable rows — this window is nonlocal-dominated.")
+else:
+    X = np.vstack(Xs)
+    Y = np.concatenate(Ys)
+    lam = 1e-3
+    w = np.linalg.solve(X.T@X+lam*np.eye(X.shape[1]), X.T@Y)
+    Yh = X@w
+    R2 = 1 - np.sum((Y-Yh)**2)/(np.sum((Y-np.mean(Y))**2)+1e-30)
+
+    print("\nPAIRWISE FIT RESULTS")
+    print("R² =",R2)
+    for name,val in zip(
+        ["1/|d|","1/|d|²","sign(d)/|d|"]+[f"G({l})" for l in GAUSS_LS],w):
+        print(f"{name:>10s}: {val:+.3e}")
+
+    plt.scatter(Y,Yh,s=10)
+    a=min(Y.min(),Yh.min()); b=max(Y.max(),Yh.max())
+    plt.plot([a,b],[a,b])
+    plt.xlabel("measured Δt/σ²")
+    plt.ylabel("predicted Δt/σ²")
+    plt.title(f"Pairwise model (R²={R2:.3f})")
+    plt.grid(alpha=0.3)
+    plt.show()
+
+Code 14 
+# ============================================================
+# TEST B: Density-gradient (collective mode) zero drift
+# Δt_n ≈ σ^2 ∂_t log ρ(t_n)
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+mp.mp.dps = 80
+
+# ------------------------------------------------------------
+# Riemann ξ and sampling
+# ------------------------------------------------------------
+def xi(s):
+    return 0.5 * s * (s-1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def xi_line(t):
+    return np.array([float(mp.re(xi(0.5 + 1j*tt))) for tt in t])
+
+# ------------------------------------------------------------
+# Zero finding via sign change + quadratic refine
+# ------------------------------------------------------------
+def find_zeros(t, f):
+    zeros = []
+    for i in range(1, len(f)):
+        if f[i] == 0 or np.sign(f[i]) != np.sign(f[i-1]):
+            zeros.append(0.5*(t[i] + t[i-1]))
+    return np.array(zeros)
+
+# ------------------------------------------------------------
+# Local zero density via k-nearest spacing
+# ------------------------------------------------------------
+def local_density(z, k=3):
+    rho = np.zeros_like(z)
+    for i in range(len(z)):
+        i0 = max(0, i-k)
+        i1 = min(len(z)-1, i+k)
+        if i1 > i0:
+            rho[i] = (i1-i0)/(z[i1]-z[i0])
+        else:
+            rho[i] = np.nan
+    return rho
+
+def grad_log_density(z, rho):
+    g = np.zeros_like(z)
+    for i in range(1, len(z)-1):
+        if rho[i-1]>0 and rho[i+1]>0:
+            g[i] = (np.log(rho[i+1]) - np.log(rho[i-1]))/(z[i+1]-z[i-1])
+        else:
+            g[i] = np.nan
+    return g
+
+# ------------------------------------------------------------
+# Gaussian convolution (non-multiplicative)
+# ------------------------------------------------------------
+def convolve(f, sigma, dt):
+    r = int(5*sigma/dt)
+    x = np.arange(-r, r+1)*dt
+    k = np.exp(-0.5*(x/sigma)**2)
+    k /= np.sum(k)
+    return np.convolve(f, k, mode="same")
+
+# ------------------------------------------------------------
+# MAIN EXPERIMENT
+# ------------------------------------------------------------
+tmin, tmax = 60.0, 120.0
+N = 16384
+t = np.linspace(tmin, tmax, N)
+dt = t[1]-t[0]
+
+f0 = xi_line(t)
+z0 = find_zeros(t, f0)
+
+# interior zeros only
+z0 = z0[(z0 > tmin+2) & (z0 < tmax-2)]
+
+rho = local_density(z0, k=3)
+gradlogrho = grad_log_density(z0, rho)
+
+sigma_vals = [0.03, 0.05, 0.08, 0.12, 0.15, 0.20, 0.30]
+
+pred_all = []
+meas_all = []
+
+print("\n================= DENSITY-GRADIENT TEST =================\n")
+
+for sigma in sigma_vals:
+    f1 = convolve(f0, sigma, dt)
+    z1 = find_zeros(t, f1)
+    z1 = z1[(z1 > tmin+2) & (z1 < tmax-2)]
+
+    n = min(len(z0), len(z1))
+    dz = z1[:n] - z0[:n]
+
+    pred = sigma**2 * gradlogrho[:n]
+
+    mask = np.isfinite(pred)
+    dz = dz[mask]
+    pred = pred[mask]
+
+    pred_all.append(pred)
+    meas_all.append(dz)
+
+    print(f"σ={sigma:5.3f}  mean|Δt|={np.mean(np.abs(dz)):.3e}  "
+          f"mean|pred|={np.mean(np.abs(pred)):.3e}")
+
+# ------------------------------------------------------------
+# SCATTER: predicted vs measured
+# ------------------------------------------------------------
+pred_all = np.concatenate(pred_all)
+meas_all = np.concatenate(meas_all)
+
+plt.figure(figsize=(6,6))
+plt.scatter(pred_all, meas_all, s=14, alpha=0.7)
+m = np.max(np.abs(pred_all))
+plt.plot([-m,m],[-m,m],'k--',lw=1)
+plt.xlabel("σ² ∂ₜ log ρ(t)")
+plt.ylabel("measured Δt")
+plt.title("Collective density-gradient test")
+plt.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+# R^2
+ss_res = np.sum((meas_all - pred_all)**2)
+ss_tot = np.sum((meas_all - np.mean(meas_all))**2)
+R2 = 1 - ss_res/ss_tot
+
+print("\nR² =", R2)
