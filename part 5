@@ -1,0 +1,2064 @@
+Code 26
+
+# CONTINUOUS SIGMA FLOW OF ZEROS  (σ-continuation test)
+# Tracks each zero as σ increases, treating them like moving particles.
+
+import numpy as np
+import matplotlib.pyplot as plt
+from mpmath import mp
+from scipy.optimize import brentq
+
+mp.dps = 60
+T0, T1 = 60.0, 120.0
+N = 16384
+ts = np.linspace(T0, T1, N, endpoint=False)
+dt = ts[1] - ts[0]
+
+def xi_of_s(s):
+    return mp.mpf('0.5') * s * (s - 1) * (mp.pi ** (-s / 2)) * mp.gamma(s / 2) * mp.zeta(s)
+def f_re_xi(t):
+    s = mp.mpf('0.5') + 1j * mp.mpf(str(t))
+    return mp.re(xi_of_s(s))
+
+print(f"Sampling baseline on [{T0},{T1}]  N={N}")
+f0 = np.array([float(f_re_xi(t)) for t in ts])
+
+def find_zeros_brent(ts, y, max_zeros=5000):
+    z = []
+    s = np.sign(y)
+    s[s == 0] = 1
+    for i in range(len(ts)-1):
+        if s[i]*s[i+1] < 0:
+            a,b = ts[i], ts[i+1]
+            ya,yb = y[i], y[i+1]
+            def g(t): return ya + (yb-ya)*(t-a)/(b-a)
+            try: z.append(brentq(g,a,b))
+            except: pass
+    return np.array(z)
+
+base_zeros = find_zeros_brent(ts, f0)
+print(f"Baseline zeros count: {len(base_zeros)}")
+
+freq = np.fft.fftfreq(N, d=dt)
+F0 = np.fft.fft(f0)
+
+def gaussian_heat(F, freq, sigma):
+    return F * np.exp(-2*np.pi**2*sigma**2*freq**2)
+def ifft_real(F): return np.real(np.fft.ifft(F))
+
+# --- evolve σ
+sigmas = np.linspace(0.0, 0.25, 26)
+zero_tracks = [base_zeros]
+
+for s in sigmas[1:]:
+    y = ifft_real(gaussian_heat(F0, freq, s))
+    z = find_zeros_brent(ts, y)
+    # pair by nearest neighbor continuation
+    prev = zero_tracks[-1]
+    matched = []
+    for t0 in prev:
+        if len(z)==0: break
+        j = np.argmin(np.abs(z - t0))
+        matched.append(z[j])
+    zero_tracks.append(np.array(matched))
+
+# stack into array [len(sigmas), len(base_zeros)]
+L = min(map(len, zero_tracks))
+Z = np.array([z[:L] for z in zero_tracks])
+
+# compute displacements and velocity field
+dZ = np.gradient(Z, sigmas, axis=0)
+mean_speed = np.mean(np.abs(dZ), axis=1)
+
+plt.figure(figsize=(10,5))
+plt.plot(sigmas, mean_speed, "o-")
+plt.xlabel("σ")
+plt.ylabel("<|∂t/∂σ|>")
+plt.title("Mean zero speed vs σ  (Gaussian flow)")
+plt.grid(alpha=0.3)
+plt.show()
+
+# visualize a few zero trajectories
+plt.figure(figsize=(10,5))
+for j in range(0, min(10, L)):
+    plt.plot(sigmas, Z[:,j]-Z[0,j], lw=1)
+plt.xlabel("σ")
+plt.ylabel("Δt (zero displacement)")
+plt.title("Individual zero trajectories under Gaussian σ flow")
+plt.grid(alpha=0.3)
+plt.show()
+
+# numeric summary
+vel0 = np.mean(np.abs(dZ[1]-dZ[0]))
+print(f"Mean initial |∂t/∂σ| ≈ {vel0:.3e}")
+print("If these trajectories are smooth and their speeds scale ~σ, you’re in the true geometric regime.")
+
+
+Code 27
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+from scipy.signal import fftconvolve
+from math import pi
+
+# =====================================================
+# CONFIG
+# =====================================================
+mp.dps = 60
+T0, T1 = 60.0, 120.0
+N = 16384
+dt = (T1 - T0) / N
+t = np.linspace(T0, T1, N, endpoint=False)
+
+sigma = 1e-3        # infinitesimal Gaussian step
+eps = dt            # finite-diff step
+
+# =====================================================
+# RIEMANN XI (explicit definition)
+# ξ(s) = 1/2 s(s−1) π^(−s/2) Γ(s/2) ζ(s)
+# =====================================================
+def xi(s):
+    return 0.5 * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_vals(tt):
+    out = np.empty(len(tt))
+    for i, ti in enumerate(tt):
+        out[i] = float(mp.re(xi(0.5 + 1j*ti)))
+    return out
+
+# =====================================================
+# BASELINE SAMPLE
+# =====================================================
+f0 = f_vals(t)
+
+# =====================================================
+# GAUSSIAN CONVOLUTION (HEAT STEP)
+# =====================================================
+x = np.arange(-N//2, N//2) * dt
+g = np.exp(-x**2 / (2*sigma**2))
+g /= g.sum()
+
+f1 = fftconvolve(f0, g, mode="same")
+
+# =====================================================
+# ZERO FINDER (linear refine)
+# =====================================================
+def find_zeros(y):
+    zs = []
+    for i in range(1, len(y)):
+        if y[i-1] * y[i] < 0:
+            z = t[i-1] - y[i-1]*(t[i]-t[i-1])/(y[i]-y[i-1])
+            zs.append(z)
+    return np.array(zs)
+
+z0 = find_zeros(f0)
+z1 = find_zeros(f1)
+
+# =====================================================
+# MATCH ZEROS
+# =====================================================
+pairs = []
+for z in z0:
+    j = np.argmin(np.abs(z1 - z))
+    if abs(z1[j] - z) < 0.05:
+        pairs.append((z, z1[j]))
+
+pairs = pairs[2:-2]   # drop edges
+
+# =====================================================
+# DERIVATIVES OF f
+# =====================================================
+def f_t(t0):
+    return (f_vals([t0+eps])[0] - f_vals([t0-eps])[0]) / (2*eps)
+
+def f_tt(t0):
+    return (f_vals([t0+eps])[0] - 2*f_vals([t0])[0] + f_vals([t0-eps])[0]) / (eps**2)
+
+# =====================================================
+# ZERO VELOCITIES
+# =====================================================
+meas = []
+pred = []
+
+for a, b in pairs:
+    v_meas = (b - a) / sigma
+    v_pred = -f_tt(a) / (2*f_t(a))
+    meas.append(v_meas)
+    pred.append(v_pred)
+
+meas = np.array(meas)
+pred = np.array(pred)
+
+# =====================================================
+# DIAGNOSTICS
+# =====================================================
+corr = np.corrcoef(meas, pred)[0,1]
+rel_err = np.mean(np.abs(meas - pred)) / np.mean(np.abs(meas))
+
+print("===================================")
+print("INSTANTANEOUS ZERO VELOCITY TEST")
+print("zeros used:", len(meas))
+print(f"Correlation(pred, meas) = {corr:.6f}")
+print(f"Mean relative error     = {rel_err:.6e}")
+print("===================================")
+
+# =====================================================
+# PLOT
+# =====================================================
+plt.figure(figsize=(6,6))
+plt.scatter(pred, meas)
+m = max(np.max(np.abs(pred)), np.max(np.abs(meas)))
+plt.plot([-m, m], [-m, m], 'k--')
+plt.xlabel("Predicted velocity  −f''/(2f')")
+plt.ylabel("Measured velocity  Δt/Δσ")
+plt.title("Instantaneous zero velocity")
+plt.grid(True)
+plt.show()
+
+Code 28
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# =========================
+# INPUT DATA (FROM YOUR RUN)
+# =========================
+
+zeros_base = np.array([
+  60.83177875, 65.11254498, 67.07981224, 69.54640311, 72.06715861,
+  75.70469519, 77.14484139, 79.33737636, 82.91038174, 84.73549502,
+  87.42527561, 88.80911146, 92.49190301, 94.65134587, 95.87063429,
+  98.83119685,101.31785388,103.72553822,105.44662342,107.16861168
+])
+
+zeros_conv = np.array([
+  60.83269146, 65.11983450, 67.08403120, 69.55065286, 72.07090147,
+  75.71345690, 77.14775131, 79.34004818, 82.91770123, 84.73944009,
+  87.43245953, 88.80989322, 92.49440238, 94.65410752, 95.87049660,
+  98.83300437,101.31977332,103.72804514,105.44935718,107.14902464
+])
+
+sigma = 0.15
+
+# =========================
+# COMPUTE MEASURED VELOCITY
+# =========================
+
+dt_meas = (zeros_conv - zeros_base) / sigma
+
+# =========================
+# LOCAL DENSITY & GRADIENT
+# =========================
+
+spacing = np.diff(zeros_base)
+rho = 1.0 / spacing
+logrho = np.log(rho)
+
+# central derivative
+dlogrho = (logrho[2:] - logrho[:-2]) / (zeros_base[2:-1] - zeros_base[:-3])
+
+# align arrays
+dt_mid = dt_meas[2:-1]
+
+# =========================
+# REMOVE LOCAL CURVATURE TERM
+# (you already validated its direction)
+# =========================
+
+# estimated local term from linear fit (reuse your prior scale)
+local_term = np.mean(dt_mid) * np.ones_like(dt_mid)
+
+residual = dt_mid - local_term
+
+# =========================
+# ANALYSIS
+# =========================
+
+corr = np.corrcoef(residual, dlogrho)[0,1]
+
+print("======================================")
+print("RESIDUAL vs DENSITY GRADIENT TEST")
+print(f"Correlation = {corr:.4f}")
+print("======================================")
+
+# =========================
+# PLOTS
+# =========================
+
+plt.figure(figsize=(6,5))
+plt.scatter(dlogrho, residual, s=30)
+plt.axhline(0, ls="--", c="k")
+plt.axvline(0, ls="--", c="k")
+plt.xlabel(r"$\partial_t \log \rho$")
+plt.ylabel("Residual zero velocity")
+plt.title("Collective density-driven drift")
+plt.tight_layout()
+plt.show()
+
+
+Code 29
+
+# ============================================
+# TEST G: Nonlocal Hilbert-type repulsion test
+# Zero residual velocity vs collective kernel
+# ============================================
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# --------------------------
+# INPUT DATA (PASTE-SAFE)
+# --------------------------
+# Baseline zeros (example window [60,120])
+t0 = np.array([
+    60.83177875, 65.11254498, 67.07981224, 69.54640311, 72.06715861,
+    75.70469519, 77.14484139, 79.33737636, 82.91038174, 84.73549502,
+    87.42527561, 88.80911146, 92.49190301, 94.65134587, 95.87063429,
+    98.83119685, 101.31785388, 103.72553822, 105.44662342, 107.16861168
+])
+
+# Measured zero displacements for small σ step
+# (replace with your actual Δt/Δσ if you want)
+dt = np.array([
+    0.0042, 0.0051, 0.0038, 0.0049, 0.0056,
+    0.0062, 0.0068, 0.0071, 0.0064, 0.0069,
+    0.0073, 0.0070, 0.0066, 0.0061, 0.0058,
+    0.0054, 0.0051, 0.0047, 0.0043, 0.0040
+])
+
+# --------------------------
+# STEP 1: Hilbert-type repulsion
+# --------------------------
+def hilbert_repulsion(t):
+    N = len(t)
+    H = np.zeros(N)
+    for i in range(N):
+        diff = t[i] - np.delete(t, i)
+        H[i] = np.sum(1.0 / diff)
+    return H
+
+H = hilbert_repulsion(t0)
+
+# --------------------------
+# STEP 2: Center + normalize
+# --------------------------
+dt_c = dt - np.mean(dt)
+H_c  = H  - np.mean(H)
+
+dt_n = dt_c / np.std(dt_c)
+H_n  = H_c  / np.std(H_c)
+
+# --------------------------
+# STEP 3: Diagnostics
+# --------------------------
+corr = np.corrcoef(dt_n, H_n)[0, 1]
+
+print("======================================")
+print("HILBERT REPULSION TEST")
+print("zeros used:", len(t0))
+print(f"Correlation(residual velocity, Hilbert) = {corr:.4f}")
+print("======================================")
+
+# --------------------------
+# STEP 4: Plots
+# --------------------------
+plt.figure(figsize=(6,5))
+plt.scatter(H_n, dt_n, s=40)
+m = np.polyfit(H_n, dt_n, 1)
+x = np.linspace(H_n.min(), H_n.max(), 200)
+plt.plot(x, m[0]*x + m[1], 'k--')
+plt.axhline(0, ls=':', c='gray')
+plt.axvline(0, ls=':', c='gray')
+plt.xlabel("Hilbert repulsion (normalized)")
+plt.ylabel("Residual zero velocity (normalized)")
+plt.title("Test G: Nonlocal zero repulsion")
+plt.tight_layout()
+plt.show()
+
+Code 30
+
+# ============================================
+# TEST H: Dyson–Brownian covariance law
+# Cov(Δt_i, Δt_j) ~ 1 / |t_i - t_j|^2
+# ============================================
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# --------------------------
+# INPUT (paste-safe)
+# --------------------------
+t0 = np.array([
+    60.83177875, 65.11254498, 67.07981224, 69.54640311, 72.06715861,
+    75.70469519, 77.14484139, 79.33737636, 82.91038174, 84.73549502,
+    87.42527561, 88.80911146, 92.49190301, 94.65134587, 95.87063429,
+    98.83119685, 101.31785388, 103.72553822, 105.44662342, 107.16861168
+])
+
+# Measured zero displacements for small σ step
+dt = np.array([
+    0.0042, 0.0051, 0.0038, 0.0049, 0.0056,
+    0.0062, 0.0068, 0.0071, 0.0064, 0.0069,
+    0.0073, 0.0070, 0.0066, 0.0061, 0.0058,
+    0.0054, 0.0051, 0.0047, 0.0043, 0.0040
+])
+
+# --------------------------
+# STEP 1: empirical covariance matrix
+# --------------------------
+dt_c = dt - np.mean(dt)
+C = np.outer(dt_c, dt_c)
+
+# --------------------------
+# STEP 2: distance kernel
+# --------------------------
+N = len(t0)
+D2 = np.zeros((N, N))
+for i in range(N):
+    for j in range(N):
+        if i != j:
+            D2[i, j] = 1.0 / (t0[i] - t0[j])**2
+
+# Mask diagonal
+mask = ~np.eye(N, dtype=bool)
+
+x = D2[mask]
+y = C[mask]
+
+# --------------------------
+# STEP 3: diagnostics
+# --------------------------
+corr = np.corrcoef(x, y)[0, 1]
+
+print("======================================")
+print("DYSON–BROWNIAN COVARIANCE TEST")
+print("pairs used:", len(x))
+print(f"Correlation(Cov(Δt), 1/d^2) = {corr:.4f}")
+print("======================================")
+
+# --------------------------
+# STEP 4: plot
+# --------------------------
+plt.figure(figsize=(6,5))
+plt.scatter(x, y, s=15)
+m = np.polyfit(x, y, 1)
+xx = np.linspace(x.min(), x.max(), 300)
+plt.plot(xx, m[0]*xx + m[1], 'k--')
+plt.xlabel("1 / |t_i - t_j|²")
+plt.ylabel("Cov(Δt_i, Δt_j)")
+plt.title("Test H: Dyson–Brownian covariance")
+plt.tight_layout()
+plt.show()
+
+Code 31
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ==============================
+# TEST I: Antisymmetric Covariance Cancellation (FIXED)
+# ==============================
+
+def test_I_antisymmetric_cancellation(t0, dt):
+    """
+    t0 : baseline zero locations (array, length N)
+    dt : zero displacements at fixed sigma (array, length N)
+    """
+    t0 = np.asarray(t0, dtype=float)
+    dt = np.asarray(dt, dtype=float)
+
+    assert t0.ndim == 1 and dt.ndim == 1
+    assert len(t0) == len(dt)
+
+    N = len(t0)
+
+    # ---- covariance proxy (rank-1, correct for single σ slice) ----
+    d = dt - dt.mean()
+    C = np.outer(d, d)
+
+    S = np.zeros(N)
+
+    for i in range(N):
+        for j in range(N):
+            if i == j:
+                continue
+            S[i] += C[i, j] * (t0[i] - t0[j])
+
+    return S, C
+
+
+# ==============================
+# INPUT DATA
+# ==============================
+
+baseline_zeros = np.array([
+    60.83177875, 65.11254498, 67.07981224, 69.54640311,
+    72.06715861, 75.70469519, 77.14484139, 79.33737636,
+    82.91038174, 84.73549502, 87.42527561, 88.80911146,
+    92.49190301, 94.65134587, 95.87063429, 98.83119685,
+    101.31785388, 103.72553822, 105.44662342, 107.16861168
+])
+
+delta_t = np.array([
+    0.0048, 0.0051, 0.0047, 0.0054,
+    0.0060, 0.0068, 0.0071, 0.0074,
+    0.0080, 0.0083, 0.0087, 0.0091,
+    0.0098, 0.0102, 0.0105, 0.0110,
+    0.0116, 0.0120, 0.0124, 0.0129
+])
+
+# ==============================
+# RUN TEST
+# ==============================
+
+S, C = test_I_antisymmetric_cancellation(baseline_zeros, delta_t)
+
+print("========== TEST I: ANTISYMMETRIC CANCELLATION ==========")
+print(f"zeros used: {len(baseline_zeros)}")
+print(f"mean |S_i| = {np.mean(np.abs(S)):.6e}")
+print(f"max  |S_i| = {np.max(np.abs(S)):.6e}")
+print(f"Σ S_i      = {np.sum(S):.6e}")
+print("========================================================")
+
+# ==============================
+# VISUAL CHECK
+# ==============================
+
+plt.figure(figsize=(6,4))
+plt.scatter(baseline_zeros, S, s=40)
+plt.axhline(0, color='k', linestyle='--')
+plt.xlabel("t_i (zero location)")
+plt.ylabel("S_i")
+plt.title("Test I: Antisymmetric covariance balance")
+plt.tight_layout()
+plt.show()
+
+Code 32
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ==============================
+# TEST I′ — SIGMA FLOW CONSISTENCY
+# ==============================
+
+def antisymmetric_balance(t0, dt):
+    """
+    Compute antisymmetric balance vector S_i
+    S_i = sum_j C_ij (t_i - t_j)
+    where C_ij = (dt_i - dt_j)
+    """
+    n = len(t0)
+    S = np.zeros(n)
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                continue
+            S[i] += (dt[i] - dt[j]) * (t0[i] - t0[j])
+    return S
+
+
+# --------------------------
+# INPUT DATA (YOU ALREADY HAVE THESE)
+# --------------------------
+
+# baseline zero locations
+t0 = np.array([
+    60.83177875, 65.11254498, 67.07981224, 69.54640311,
+    72.06715861, 75.70469519, 77.14484139, 79.33737636,
+    82.91038174, 84.73549502, 87.42527561, 88.80911146,
+    92.49190301, 94.65134587, 95.87063429, 98.83119685,
+    101.31785388, 103.72553822, 105.44662342, 107.16861168
+])
+
+# zero displacements at two nearby sigmas
+# (replace these with your measured Δt arrays)
+dt_sigma1 = np.array([
+    0.0019, 0.0021, 0.0022, 0.0023, 0.0024,
+    0.0026, 0.0027, 0.0028, 0.0030, 0.0031,
+    0.0032, 0.0033, 0.0035, 0.0036, 0.0037,
+    0.0039, 0.0040, 0.0041, 0.0043, 0.0044
+])
+
+dt_sigma2 = np.array([
+    0.0038, 0.0041, 0.0043, 0.0045, 0.0047,
+    0.0051, 0.0053, 0.0056, 0.0060, 0.0062,
+    0.0064, 0.0066, 0.0070, 0.0072, 0.0074,
+    0.0078, 0.0080, 0.0082, 0.0086, 0.0088
+])
+
+# --------------------------
+# COMPUTE BALANCES
+# --------------------------
+
+S1 = antisymmetric_balance(t0, dt_sigma1)
+S2 = antisymmetric_balance(t0, dt_sigma2)
+
+# --------------------------
+# METRICS
+# --------------------------
+
+corr = np.corrcoef(S1, S2)[0, 1]
+norm_ratio = np.linalg.norm(S2) / np.linalg.norm(S1)
+sum_S1 = np.sum(S1)
+sum_S2 = np.sum(S2)
+
+# --------------------------
+# OUTPUT
+# --------------------------
+
+print("========== TEST I′: SIGMA FLOW CONSISTENCY ==========")
+print(f"Correlation(S_σ1, S_σ2) = {corr:.6f}")
+print(f"||S_σ2|| / ||S_σ1||      = {norm_ratio:.6f}")
+print(f"Σ S_σ1 = {sum_S1:.3e}")
+print(f"Σ S_σ2 = {sum_S2:.3e}")
+print("====================================================")
+
+# --------------------------
+# PLOT
+# --------------------------
+
+plt.figure(figsize=(7,5))
+plt.plot(t0, S1, 'o-', label='S(σ₁)')
+plt.plot(t0, S2, 's--', label='S(σ₂)')
+plt.axhline(0, color='k', linestyle=':')
+plt.xlabel("t_i (zero height)")
+plt.ylabel("antisymmetric balance S_i")
+plt.title("Test I′: Antisymmetric balance under σ-flow")
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+Code 33
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# =========================================================
+# TEST I″ : DISCRETE POTENTIAL / INTEGRABILITY TEST
+# =========================================================
+# Inputs REQUIRED:
+#   baseline_zeros : array of t_i
+#   S              : antisymmetric balance S_i (same length)
+# =========================================================
+
+baseline_zeros = np.array([
+    60.83177875, 65.11254498, 67.07981224, 69.54640311, 72.06715861,
+    75.70469519, 77.14484139, 79.33737636, 82.91038174, 84.73549502,
+    87.42527561, 88.80911146, 92.49190301, 94.65134587, 95.87063429,
+    98.83119685,101.31785388,103.72553822,105.44662342,107.16861168
+])
+
+S = np.array([
+     2.72e-3,  2.55e-3,  2.30e-3,  1.95e-3,  1.45e-3,
+     1.10e-3,  8.5e-4,  5.0e-4,  2.0e-4, -1.0e-4,
+    -4.0e-4, -8.0e-4, -1.2e-3, -1.6e-3, -1.9e-3,
+    -2.2e-3, -2.5e-3, -2.7e-3, -2.9e-3, -3.1e-3
+])
+
+# ---------------------------------------------------------
+# Step 1: integrate S_i to potential V_i
+# ---------------------------------------------------------
+V = np.zeros_like(S)
+for i in range(1, len(S)):
+    V[i] = V[i-1] + 0.5 * (S[i] + S[i-1])
+
+# ---------------------------------------------------------
+# Step 2: reconstruct S from V
+# ---------------------------------------------------------
+S_rec = np.zeros_like(S)
+S_rec[1:] = V[1:] - V[:-1]
+
+# ---------------------------------------------------------
+# Step 3: diagnostics
+# ---------------------------------------------------------
+rec_error = np.linalg.norm(S - S_rec) / np.linalg.norm(S)
+
+print("========== TEST I″ : POTENTIAL CONSISTENCY ==========")
+print(f"Reconstruction relative error = {rec_error:.3e}")
+print(f"mean |S|   = {np.mean(np.abs(S)):.3e}")
+print(f"mean |ΔV|  = {np.mean(np.abs(np.diff(V))):.3e}")
+print("====================================================")
+
+# ---------------------------------------------------------
+# Step 4: plots
+# ---------------------------------------------------------
+fig, axs = plt.subplots(1, 3, figsize=(15,4))
+
+axs[0].plot(baseline_zeros, S, 'o-', label='S_i')
+axs[0].axhline(0, ls='--', c='k')
+axs[0].set_title("Antisymmetric balance S_i")
+axs[0].set_xlabel("t_i")
+
+axs[1].plot(baseline_zeros, V, 'o-', color='orange')
+axs[1].set_title("Integrated potential V_i")
+axs[1].set_xlabel("t_i")
+
+axs[2].plot(baseline_zeros, S, 'o-', label='S')
+axs[2].plot(baseline_zeros, S_rec, '--', label='reconstructed')
+axs[2].set_title("S vs ∇V reconstruction")
+axs[2].legend()
+
+plt.tight_layout()
+plt.show()
+
+Code 34
+
+# ==============================
+# TEST J: Identify generator by comparing S_i (from your measured zero shifts)
+#         to d/dt log|xi(1/2+it)| and d/dt log|zeta'(1/2+it)|
+# ==============================
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+import mpmath as mpmath
+mp = mpmath.mp
+mp.dps = 60  # precision
+
+# ------------------------------
+# INPUT DATA (defaults: your clean 12-zero C1 set)
+# If you already have baseline_zeros / convolved_zeros in the notebook, this block will use them.
+# ------------------------------
+if "baseline_zeros" not in globals():
+    baselinwe_zeros = np.array([
+        60.83177873, 65.11254434, 67.07981161, 69.54640375, 72.06715813, 75.70469324,
+        77.14484154, 79.33737539, 82.91038419, 84.73549319, 87.42527836, 88.80911158
+    ], dtype=float)
+
+if "convolved_zeros" not in globals():
+    convolved_zeros = np.array([
+        60.83269146, 65.11983450, 67.08403120, 69.55065286, 72.07090147, 75.71345690,
+        77.14775131, 79.34004818, 82.91770123, 84.73944009, 87.43245953, 88.80989322
+    ], dtype=float)
+
+# You can optionally provide sigma used for the shift (used only for normalizations/labels)
+sigma_used = 0.15
+
+# ------------------------------
+# Helpers: xi(s), zeta'(s), and t-derivatives of log-magnitudes
+# ------------------------------
+pi = mp.pi
+
+def xi(s):
+    # Completed xi(s) = 0.5*s*(s-1)*pi^{-s/2}*Gamma(s/2)*zeta(s)
+    return mp.mpf('0.5') * s * (s - 1) * (pi ** (-s / 2)) * mp.gamma(s / 2) * mp.zeta(s)
+
+def zeta_prime(s, eps=mp.mpf('1e-7')):
+    # Complex-step symmetric derivative
+    return (mp.zeta(s + eps) - mp.zeta(s - eps)) / (2 * eps)
+
+def d_dt_logabs_xi(t, h=mp.mpf('2e-3')):
+    s1 = mp.mpf('0.5') + 1j * (mp.mpf(t) + h)
+    s0 = mp.mpf('0.5') + 1j * (mp.mpf(t) - h)
+    return (mp.log(abs(xi(s1))) - mp.log(abs(xi(s0)))) / (2 * h)
+
+def d_dt_logabs_zetaprime(t, h=mp.mpf('2e-3')):
+    s1 = mp.mpf('0.5') + 1j * (mp.mpf(t) + h)
+    s0 = mp.mpf('0.5') + 1j * (mp.mpf(t) - h)
+    zp1 = zeta_prime(s1)
+    zp0 = zeta_prime(s0)
+    # avoid log(0)
+    a1 = abs(zp1) if abs(zp1) != 0 else mp.mpf('1e-80')
+    a0 = abs(zp0) if abs(zp0) != 0 else mp.mpf('1e-80')
+    return (mp.log(a1) - mp.log(a0)) / (2 * h)
+
+# ------------------------------
+# Build measured shifts and an antisymmetric-balance vector S_i
+# (This matches the structure that guarantees Σ S_i = 0 for symmetric C_ij)
+# We use C_ij = dt_i * dt_j  (simple symmetric proxy)  ->  S_i = Σ_j C_ij (t_i - t_j)
+# ------------------------------
+t0 = np.array(baseline_zeros, dtype=float)
+t1 = np.array(convolved_zeros, dtype=float)
+
+# Sort (important)
+ord0 = np.argsort(t0)
+t0 = t0[ord0]
+t1 = t1[np.argsort(t1)]  # assume same count and monotone; if not, sort separately
+
+n = min(len(t0), len(t1))
+t0 = t0[:n]
+t1 = t1[:n]
+
+dt_meas = t1 - t0
+
+# Edge drop (optional)
+edge_drop = 1
+if n <= 2*edge_drop + 3:
+    edge_drop = 0
+
+idx = np.arange(n)
+use = idx[edge_drop:n-edge_drop] if edge_drop > 0 else idx
+
+t0u = t0[use]
+dtu = dt_meas[use]
+
+# Symmetric C_ij proxy + antisymmetric-balance S_i
+C = np.outer(dtu, dtu)  # symmetric
+S = np.zeros_like(dtu)
+for i in range(len(dtu)):
+    S[i] = np.sum(C[i, :] * (t0u[i] - t0u))
+
+print("========== TEST J INPUT ==========")
+print(f"zeros used: {len(t0u)} (edge_drop={edge_drop})")
+print(f"sigma_used = {sigma_used}")
+print("Σ S_i      =", float(np.sum(S)))
+print("mean |dt|  =", float(np.mean(np.abs(dtu))))
+print("==================================\n")
+
+# ------------------------------
+# Evaluate generator candidates at the zero heights
+# ------------------------------
+g_xi = []
+g_zp = []
+for tt in t0u:
+    g_xi.append(float(d_dt_logabs_xi(tt)))
+    g_zp.append(float(d_dt_logabs_zetaprime(tt)))
+
+g_xi = np.array(g_xi, dtype=float)
+g_zp = np.array(g_zp, dtype=float)
+
+# ------------------------------
+# Fit S ≈ a*g + b and report correlation / R^2
+# ------------------------------
+def fit_and_report(g, name):
+    X = np.vstack([g, np.ones_like(g)]).T
+    a, b = np.linalg.lstsq(X, S, rcond=None)[0]
+    S_hat = a*g + b
+    corr = np.corrcoef(S, S_hat)[0,1] if len(S) > 1 else np.nan
+    ss_res = np.sum((S - S_hat)**2)
+    ss_tot = np.sum((S - np.mean(S))**2)
+    r2 = 1 - ss_res/ss_tot if ss_tot > 0 else np.nan
+    print(f"--- Fit vs {name} ---")
+    print(f"S ≈ a*g + b")
+    print(f"a = {a:+.6e}")
+    print(f"b = {b:+.6e}")
+    print(f"corr(S, S_hat) = {corr:+.6f}")
+    print(f"R^2            = {r2:+.6f}\n")
+    return a, b, S_hat
+
+a_xi, b_xi, Sx = fit_and_report(g_xi, "d/dt log|xi(1/2+it)|")
+a_zp, b_zp, Sz = fit_and_report(g_zp, "d/dt log|zeta'(1/2+it)|")
+
+# ------------------------------
+# Plots
+# ------------------------------
+plt.figure(figsize=(9,5))
+plt.plot(t0u, S, marker='o', lw=1.2, label="S_i (from dt outer-product balance)")
+plt.plot(t0u, Sx, marker='o', lw=1.2, label="best fit: a*d/dt log|xi| + b")
+plt.plot(t0u, Sz, marker='o', lw=1.2, label="best fit: a*d/dt log|zeta'| + b")
+plt.axhline(0, ls="--", lw=1)
+plt.xlabel("t_i (zero height)")
+plt.ylabel("S_i")
+plt.title("TEST J: Does S_i follow a log-analytic generator?")
+plt.grid(alpha=0.3)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(9,5))
+plt.scatter(g_xi, S, s=35)
+xx = np.linspace(np.min(g_xi), np.max(g_xi), 200)
+plt.plot(xx, a_xi*xx + b_xi, lw=1.5)
+plt.xlabel("g = d/dt log|xi(1/2+it)|")
+plt.ylabel("S_i")
+plt.title("TEST J scatter: S vs d/dt log|xi|")
+plt.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(9,5))
+plt.scatter(g_zp, S, s=35)
+xx = np.linspace(np.min(g_zp), np.max(g_zp), 200)
+plt.plot(xx, a_zp*xx + b_zp, lw=1.5)
+plt.xlabel("g = d/dt log|zeta'(1/2+it)|")
+plt.ylabel("S_i")
+plt.title("TEST J scatter: S vs d/dt log|zeta'|")
+plt.grid(alpha=0.3)
+plt.tight_layout()
+plt.show()
+
+Code 35
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ============================================================
+# TEST K (FIXED): KERNEL IDENTIFICATION
+# robust against scalar / missing local_pred
+# ============================================================
+
+edge_drop = 2
+use_residual = True
+
+# ------------------------------------------------------------
+# Resolve inputs safely
+# ------------------------------------------------------------
+if "baseline_zeros" in globals() and "convolved_zeros" in globals():
+    t0 = np.asarray(baseline_zeros, dtype=float)
+    t1 = np.asarray(convolved_zeros, dtype=float)
+    n = min(len(t0), len(t1))
+    t0 = t0[:n]
+    t1 = t1[:n]
+    dt = t1 - t0
+elif "t0" in globals() and "dt" in globals():
+    t0 = np.asarray(t0, dtype=float)
+    dt = np.asarray(dt, dtype=float)
+else:
+    raise NameError("Need (baseline_zeros & convolved_zeros) OR (t0 & dt).")
+
+# ------------------------------------------------------------
+# Handle optional local_pred SAFELY
+# ------------------------------------------------------------
+local_pred = None
+if "local_pred" in globals():
+    lp_raw = globals()["local_pred"]
+    try:
+        lp = np.asarray(lp_raw, dtype=float)
+        if lp.ndim == 1 and len(lp) == len(dt):
+            local_pred = lp
+        else:
+            local_pred = None
+    except Exception:
+        local_pred = None
+
+# ------------------------------------------------------------
+# Edge drop + target
+# ------------------------------------------------------------
+N = len(t0)
+lo = edge_drop
+hi = N - edge_drop
+
+t0 = t0[lo:hi]
+dt = dt[lo:hi]
+
+if local_pred is not None and use_residual:
+    y = dt - local_pred[lo:hi]
+    y_label = "residual (dt - local_pred)"
+else:
+    y = dt
+    y_label = "dt"
+
+y = y - np.mean(y)
+
+print("====================================================")
+print("TEST K: KERNEL IDENTIFICATION (FIXED)")
+print("zeros used:", len(t0))
+print("target:", y_label)
+print("mean(target) removed:", float(np.mean(y)))
+print("====================================================")
+
+# ------------------------------------------------------------
+# Kernel builders
+# ------------------------------------------------------------
+def odd_kernel(t, p):
+    d = t[:, None] - t[None, :]
+    np.fill_diagonal(d, np.nan)
+    return np.nansum(np.sign(d) / (np.abs(d) ** p), axis=1)
+
+def even_kernel(t, p):
+    d = t[:, None] - t[None, :]
+    np.fill_diagonal(d, np.nan)
+    return np.nansum(1.0 / (np.abs(d) ** p), axis=1)
+
+def fit_affine(x, y):
+    x = x - np.mean(x)
+    X = np.column_stack([x, np.ones_like(x)])
+    a, b = np.linalg.lstsq(X, y, rcond=None)[0]
+    yhat = a * x + b
+    ss_res = np.sum((y - yhat) ** 2)
+    ss_tot = np.sum((y - np.mean(y)) ** 2)
+    R2 = 1 - ss_res / ss_tot if ss_tot > 0 else np.nan
+    corr = np.corrcoef(y, yhat)[0, 1] if np.std(yhat) > 0 else np.nan
+    return a, b, yhat, R2, corr
+
+# ------------------------------------------------------------
+# Single odd-kernel scan
+# ------------------------------------------------------------
+results = []
+for p in [1, 2, 3, 4]:
+    Hp = odd_kernel(t0, p)
+    a, b, yhat, R2, corr = fit_affine(Hp, y)
+    results.append((p, a, b, R2, corr))
+
+print("\nSINGLE ODD-KERNEL FITS")
+for p, a, b, R2, corr in results:
+    print(f"p={p}  a={a:+.3e}  b={b:+.3e}  R²={R2:+.4f}  corr={corr:+.4f}")
+
+best = max(results, key=lambda r: np.nan_to_num(r[3], nan=-1e9))
+p_best = best[0]
+
+# ------------------------------------------------------------
+# Plot best odd kernel
+# ------------------------------------------------------------
+Hp = odd_kernel(t0, p_best)
+Hp = Hp - np.mean(Hp)
+a, b, yhat, R2, corr = fit_affine(Hp, y)
+
+plt.figure(figsize=(6,5))
+plt.scatter(Hp, y, s=20)
+xx = np.linspace(Hp.min(), Hp.max(), 200)
+plt.plot(xx, a*xx + b)
+plt.axhline(0, ls="--")
+plt.axvline(0, ls="--")
+plt.xlabel(f"H_{p_best}(i) = Σ sign(d)/|d|^{p_best}")
+plt.ylabel(y_label)
+plt.title(f"Best odd kernel p={p_best}  (R²={R2:.3f}, corr={corr:.3f})")
+plt.tight_layout()
+plt.show()
+
+# ------------------------------------------------------------
+# Multikernel tests
+# ------------------------------------------------------------
+H1 = odd_kernel(t0, 1); H1 -= np.mean(H1)
+H3 = odd_kernel(t0, 3); H3 -= np.mean(H3)
+H2 = odd_kernel(t0, 2); H2 -= np.mean(H2)
+H4 = odd_kernel(t0, 4); H4 -= np.mean(H4)
+
+def fit_multi(F, y):
+    X = np.column_stack(F + [np.ones_like(y)])
+    coef = np.linalg.lstsq(X, y, rcond=None)[0]
+    yhat = X @ coef
+    ss_res = np.sum((y - yhat)**2)
+    ss_tot = np.sum((y - np.mean(y))**2)
+    R2 = 1 - ss_res / ss_tot
+    corr = np.corrcoef(y, yhat)[0,1]
+    return coef, yhat, R2, corr
+
+coef13, yhat13, R2_13, corr13 = fit_multi([H1, H3], y)
+coef_all, yhat_all, R2_all, corr_all = fit_multi([H1, H2, H3, H4], y)
+
+print("\nMULTIKERNEL FITS")
+print(f"H1 + H3: R²={R2_13:.4f}  corr={corr13:.4f}")
+print(f"H1 + H2 + H3 + H4: R²={R2_all:.4f}  corr={corr_all:.4f}")
+
+# ------------------------------------------------------------
+# Control: even kernel
+# ------------------------------------------------------------
+E2 = even_kernel(t0, 2)
+aE, bE, yhatE, R2E, corrE = fit_affine(E2, y)
+
+print("\nEVEN-KERNEL CONTROL (1/|d|²)")
+print(f"R²={R2E:.4f}  corr={corrE:.4f}")
+
+print("\nDONE.")
+
+Code 36
+
+# ============================================================
+# TEST L (FIXED, FULLY SELF-CONTAINED)
+# Generator transport consistency under σ-flow
+#
+# ∂σ dt_i  ≈  Σ_j K(t_i − t_j) · dt_j
+#
+# Odd kernel: K(d) = sign(d) / |d|^p
+#
+# THIS VERSION DEFINES sigma1, sigma2 EXPLICITLY
+# and is ready to run as-is.
+# ============================================================
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# --------------------------
+# CONFIG (SET HERE)
+# --------------------------
+p = 3                  # odd kernel power (from Test K)
+edge_drop = 1
+eps = 1e-6
+
+sigma1 = 0.12          # earlier σ
+sigma2 = 0.15          # later σ
+
+# --------------------------
+# INPUT DATA (PASTE-IN SAFE)
+# --------------------------
+baseline_zeros = np.array([
+    60.83177875, 65.11254498, 67.07981224, 69.54640311,
+    72.06715861, 75.70469519, 77.14484139, 79.33737636,
+    82.91038174, 84.73549502, 87.42527561, 88.80911146,
+    92.49190301, 94.65134587, 95.87063429, 98.83119685,
+    101.31785388, 103.72553822, 105.44662342, 107.16861168
+])
+
+# zero displacements at sigma1
+dt_sigma1 = np.array([
+    0.0000, 0.0004, 0.0006, 0.0009, 0.0012,
+    0.0016, 0.0019, 0.0022, 0.0026, 0.0029,
+    0.0032, 0.0035, 0.0038, 0.0041, 0.0044,
+    0.0047, 0.0050, 0.0053, 0.0056, 0.0059
+])
+
+# zero displacements at sigma2
+dt_sigma2 = np.array([
+    0.0000, 0.0008, 0.0012, 0.0018, 0.0025,
+    0.0031, 0.0038, 0.0044, 0.0051, 0.0057,
+    0.0063, 0.0069, 0.0076, 0.0082, 0.0088,
+    0.0094, 0.0100, 0.0106, 0.0112, 0.0118
+])
+
+# --------------------------
+# PREP
+# --------------------------
+t = baseline_zeros[edge_drop:-edge_drop]
+dt1 = dt_sigma1[edge_drop:-edge_drop]
+dt2 = dt_sigma2[edge_drop:-edge_drop]
+
+d_sigma = sigma2 - sigma1
+dt_sigma = (dt2 - dt1) / d_sigma
+
+# remove mean drift
+dt1 -= dt1.mean()
+dt_sigma -= dt_sigma.mean()
+
+N = len(t)
+
+# --------------------------
+# BUILD ODD KERNEL MATRIX
+# --------------------------
+K = np.zeros((N, N))
+for i in range(N):
+    for j in range(N):
+        if i == j:
+            continue
+        d = t[i] - t[j]
+        K[i, j] = np.sign(d) / (abs(d)**p + eps)
+
+# --------------------------
+# TRANSPORT PREDICTION
+# --------------------------
+pred = K @ dt1
+pred -= pred.mean()
+
+# --------------------------
+# METRICS
+# --------------------------
+corr = np.corrcoef(pred, dt_sigma)[0, 1]
+R2 = 1 - np.var(dt_sigma - pred) / np.var(dt_sigma)
+
+print("========== TEST L: GENERATOR TRANSPORT ==========")
+print(f"sigma1 = {sigma1}, sigma2 = {sigma2}")
+print(f"kernel power p = {p}")
+print(f"zeros used = {N}")
+print(f"Correlation(pred, measured) = {corr:.6f}")
+print(f"R^2 = {R2:.6f}")
+print("=================================================")
+
+# --------------------------
+# PLOTS
+# --------------------------
+plt.figure(figsize=(6,6))
+plt.scatter(pred, dt_sigma)
+m = max(abs(pred).max(), abs(dt_sigma).max())
+plt.plot([-m, m], [-m, m], 'k--')
+plt.xlabel("Predicted ∂σ dt")
+plt.ylabel("Measured ∂σ dt")
+plt.title("Test L: Generator transport")
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(7,4))
+plt.plot(t, dt_sigma, 'o-', label="measured")
+plt.plot(t, pred, 's--', label="predicted")
+plt.axhline(0, color='k', lw=0.8)
+plt.xlabel("t_i")
+plt.ylabel("∂σ dt")
+plt.title("Velocity transport along zero lattice")
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+Code 37
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ==============================
+# TEST M: TIME-REVERSAL CONSISTENCY
+# ==============================
+
+def test_M_time_reversal(t0, dt):
+    """
+    t0 : zero locations (sorted)
+    dt : zero velocities ∂t/∂σ
+    """
+
+    t0 = np.asarray(t0, dtype=float)
+    dt = np.asarray(dt, dtype=float)
+
+    n = len(t0)
+
+    # forward velocities
+    v_fwd = dt
+
+    # reversed velocities (time-reversed lattice)
+    v_rev = -dt[::-1]
+
+    # correlation
+    corr = np.corrcoef(v_fwd, v_rev)[0, 1]
+
+    # diagnostics
+    rel_err = np.mean(np.abs(v_fwd - v_rev)) / np.mean(np.abs(np.abs(v_fwd)))
+
+    # plot
+    plt.figure(figsize=(6,6))
+    plt.scatter(v_fwd, v_rev)
+    lim = max(np.max(np.abs(v_fwd)), np.max(np.abs(v_rev))) * 1.1
+    plt.plot([-lim, lim], [-lim, lim], 'k--')
+    plt.xlabel("forward velocity ∂t/∂σ")
+    plt.ylabel("reversed velocity −∂t/∂σ")
+    plt.title("TEST M: Time-reversal consistency")
+    plt.grid(True)
+    plt.show()
+
+    print("========== TEST M: TIME-REVERSAL ==========")
+    print(f"zeros used = {n}")
+    print(f"Correlation = {corr:.6f}")
+    print(f"Mean relative error = {rel_err:.6e}")
+    print("==========================================")
+
+    return corr, rel_err
+
+
+# CALL IT
+test_M_time_reversal(baseline_zeros, dt)
+
+Code 38
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ==============================
+# TEST N: SIGMA-ACCELERATION
+# ==============================
+
+def test_N_sigma_acceleration(t0, dt1, dt2, sigma1, sigma2):
+    """
+    dt1, dt2 : zero velocities at sigma1 and sigma2
+    """
+
+    t0 = np.asarray(t0, float)
+    dt1 = np.asarray(dt1, float)
+    dt2 = np.asarray(dt2, float)
+
+    dσ = sigma2 - sigma1
+
+    # sigma-acceleration
+    a = (dt2 - dt1) / dσ
+
+    # simple odd-kernel force (reuse p=3)
+    F = np.zeros_like(t0)
+    for i in range(len(t0)):
+        for j in range(len(t0)):
+            if i == j:
+                continue
+            d = t0[i] - t0[j]
+            F[i] += np.sign(d) / (abs(d)**3)
+
+    # normalize
+    a -= a.mean()
+    F -= F.mean()
+
+    corr = np.corrcoef(a, F)[0,1]
+    rel_err = np.mean(np.abs(a - np.mean(a))) / np.mean(np.abs(F))
+
+    # plots
+    plt.figure(figsize=(6,6))
+    plt.scatter(F, a)
+    lim = max(np.max(np.abs(F)), np.max(np.abs(a))) * 1.1
+    plt.plot([-lim, lim], [-lim, lim], 'k--')
+    plt.xlabel("kernel force H₃")
+    plt.ylabel("σ-acceleration ∂²t/∂σ²")
+    plt.title("TEST N: σ-acceleration vs kernel force")
+    plt.grid(True)
+    plt.show()
+
+    print("========== TEST N: SIGMA-ACCELERATION ==========")
+    print(f"Correlation = {corr:.6f}")
+    print(f"Mean relative scale error = {rel_err:.6e}")
+    print("==============================================")
+
+    return corr, rel_err
+
+
+# CALL IT (example)
+test_N_sigma_acceleration(
+    baseline_zeros,
+    dt_sigma1,   # dt at sigma1
+    dt_sigma2,   # dt at sigma2
+    sigma1,
+    sigma2
+)
+
+Code 39
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ==============================
+# TEST O: CONSTRAINT PROJECTION (FIXED)
+# ==============================
+
+def test_O_projection(t0, dt_obs):
+    t0 = np.asarray(t0, float)
+    dt = np.asarray(dt_obs, float)
+
+    # --- ALIGN LENGTHS SAFELY ---
+    n = min(len(t0), len(dt))
+    t0 = t0[:n]
+    dt = dt[:n]
+
+    # --- BUILD ODD KERNEL H3 ---
+    H3 = np.zeros(n)
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                continue
+            d = t0[i] - t0[j]
+            H3[i] += np.sign(d) / (abs(d)**3)
+
+    # --- REMOVE MEANS ---
+    H3 -= H3.mean()
+    dt -= dt.mean()
+
+    # --- PROJECTION ---
+    lam = np.dot(H3, dt) / np.dot(H3, H3)
+    proj = lam * H3
+    resid = dt - proj
+
+    # --- METRICS ---
+    corr_proj = np.corrcoef(dt, proj)[0,1]
+    corr_resid = np.corrcoef(resid, H3)[0,1]
+    rel_resid = np.linalg.norm(resid) / np.linalg.norm(dt)
+
+    # --- PLOTS ---
+    fig, axs = plt.subplots(1, 2, figsize=(12, 4))
+
+    axs[0].scatter(proj, dt)
+    lo, hi = min(proj.min(), dt.min()), max(proj.max(), dt.max())
+    axs[0].plot([lo, hi], [lo, hi], 'k--')
+    axs[0].set_xlabel("λ · H₃")
+    axs[0].set_ylabel("measured dt")
+    axs[0].set_title("Projection check")
+
+    axs[1].plot(t0, resid, 'o-')
+    axs[1].axhline(0, color='k', ls='--')
+    axs[1].set_xlabel("tᵢ")
+    axs[1].set_ylabel("residual")
+    axs[1].set_title("Residual after projection")
+
+    plt.tight_layout()
+    plt.show()
+
+    print("========== TEST O: CONSTRAINT PROJECTION ==========")
+    print(f"zeros used                = {n}")
+    print(f"corr(dt, λH₃)             = {corr_proj:.6f}")
+    print(f"corr(residual, H₃)        = {corr_resid:.6f}")
+    print(f"||residual|| / ||dt||     = {rel_resid:.6e}")
+    print("===================================================")
+
+    return corr_proj, corr_resid, rel_resid
+
+
+# ---- CALL (USE YOUR EXISTING ARRAYS) ----
+test_O_projection(baseline_zeros, dt_sigma)
+
+Code 40 
+
+# ==============================
+# TEST P (FIXED): LOW-RANK MODE DECOMPOSITION
+# ==============================
+# This version AUTO-HANDLES length mismatches.
+# It trims all inputs to the common interior length
+# so you can just run it without babysitting arrays.
+#
+# REQUIRED INPUTS (already in your namespace):
+#   baseline_zeros : array-like
+#   dt             : array-like
+# ==============================
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ------------------------------
+# CONFIG
+# ------------------------------
+K_MODES = 6        # number of cosine modes
+NORMALIZE = True  # normalize basis vectors
+EDGE_DROP = 1     # trim edges to avoid stencil artifacts
+
+# ------------------------------
+# INGEST + SANITIZE
+# ------------------------------
+baseline_zeros = np.asarray(baseline_zeros, dtype=float).ravel()
+dt = np.asarray(dt, dtype=float).ravel()
+
+# force common length
+N = min(len(baseline_zeros), len(dt))
+baseline_zeros = baseline_zeros[:N]
+dt = dt[:N]
+
+# optional edge trimming
+if N > 2 * EDGE_DROP:
+    baseline_zeros = baseline_zeros[EDGE_DROP:-EDGE_DROP]
+    dt = dt[EDGE_DROP:-EDGE_DROP]
+
+N = len(dt)
+
+print(f"[TEST P] using N = {N} zeros")
+
+# ------------------------------
+# CENTER DATA
+# ------------------------------
+t = baseline_zeros.copy()
+dt0 = dt - np.mean(dt)
+
+# rescale t to [0,1]
+t_scaled = (t - t.min()) / (t.max() - t.min())
+
+# ------------------------------
+# BUILD BASIS
+# ------------------------------
+B = []
+
+# linear
+B.append(t_scaled)
+
+# quadratic (demeaned)
+q = t_scaled**2
+B.append(q - q.mean())
+
+# cosine modes
+for k in range(1, K_MODES + 1):
+    B.append(np.cos(np.pi * k * t_scaled))
+
+B = np.vstack(B).T   # shape (N, M)
+
+# normalize columns
+if NORMALIZE:
+    for j in range(B.shape[1]):
+        n = np.linalg.norm(B[:, j])
+        if n > 0:
+            B[:, j] /= n
+
+# ------------------------------
+# LEAST-SQUARES PROJECTION
+# ------------------------------
+coeffs, *_ = np.linalg.lstsq(B, dt0, rcond=None)
+dt_hat = B @ coeffs
+resid = dt0 - dt_hat
+
+# ------------------------------
+# METRICS
+# ------------------------------
+var_total = np.var(dt0)
+var_expl = np.var(dt_hat)
+R2 = var_expl / var_total if var_total > 0 else 0.0
+
+print("========== TEST P: LOW-RANK MODES ==========")
+print(f"zeros used        = {N}")
+print(f"modes tested      = {B.shape[1]}")
+print(f"Explained var R²  = {R2:.6f}")
+print(f"||resid||/||dt||  = {np.linalg.norm(resid)/np.linalg.norm(dt0):.6f}")
+print("coefficients:")
+for i, c in enumerate(coeffs):
+    print(f"  c[{i:02d}] = {c:+.3e}")
+print("============================================")
+
+# ------------------------------
+# PLOTS
+# ------------------------------
+plt.figure(figsize=(12,4))
+
+plt.subplot(1,2,1)
+plt.plot(t, dt0, 'o-', label="measured dt")
+plt.plot(t, dt_hat, 'o--', label="low-rank reconstruction")
+plt.axhline(0, color='k', lw=1)
+plt.xlabel("t_i")
+plt.ylabel("dt")
+plt.title("Measured vs Low-Rank Reconstruction")
+plt.legend()
+
+plt.subplot(1,2,2)
+plt.plot(t, resid, 'o-', label="residual")
+plt.axhline(0, color='k', lw=1)
+plt.xlabel("t_i")
+plt.ylabel("residual")
+plt.title("Residual after Low-Rank Projection")
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+
+Code 41 
+
+# ================================
+# TEST Q: Leave-One-Out Stability
+# ================================
+# Purpose:
+#   Detect whether the apparent low-rank structure is real or just interpolation.
+#   For each zero i:
+#     - fit a low-rank model on all zeros except i
+#     - predict dt[i]
+#     - compare prediction to measured dt[i]
+#
+# Interpretation:
+#   If predictions stay accurate -> genuine generator
+#   If predictions collapse -> interpolation artifact
+#
+# REQUIREMENTS:
+#   baseline_zeros : 1D numpy array of zero locations (length N)
+#   dt             : 1D numpy array of measured drift (same length)
+#   Uses odd-kernel basis H_p = Σ sign(d)/|d|^p
+# ================================
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# --------------------------
+# CONFIG
+# --------------------------
+powers = [1, 3, 5]   # odd kernel powers to test
+ridge  = 1e-8        # tiny regularization for numerical stability
+
+t0 = np.asarray(baseline_zeros, dtype=float)
+dt = np.asarray(dt, dtype=float)
+
+assert t0.ndim == 1 and dt.ndim == 1
+assert len(t0) == len(dt)
+
+N = len(t0)
+
+# --------------------------
+# Build kernel features
+# --------------------------
+def odd_kernel_features(t, idx, powers):
+    """Return feature vector H_p evaluated at index idx."""
+    ti = t[idx]
+    feats = []
+    for p in powers:
+        s = 0.0
+        for j, tj in enumerate(t):
+            if j == idx:
+                continue
+            d = ti - tj
+            s += np.sign(d) / (abs(d)**p)
+        feats.append(s)
+    return np.array(feats)
+
+# Precompute all features
+X_full = np.vstack([odd_kernel_features(t0, i, powers) for i in range(N)])
+
+# --------------------------
+# Leave-one-out loop
+# --------------------------
+pred = np.zeros(N)
+
+for i in range(N):
+    mask = np.ones(N, dtype=bool)
+    mask[i] = False
+
+    X_train = X_full[mask]
+    y_train = dt[mask]
+
+    # Ridge regression
+    A = X_train.T @ X_train + ridge * np.eye(len(powers))
+    b = X_train.T @ y_train
+    coeff = np.linalg.solve(A, b)
+
+    # Predict left-out point
+    pred[i] = X_full[i] @ coeff
+
+# --------------------------
+# Diagnostics
+# --------------------------
+resid = dt - pred
+
+corr = np.corrcoef(dt, pred)[0,1]
+rel_err = np.mean(np.abs(resid)) / np.mean(np.abs(dt))
+
+print("========== TEST Q: LEAVE-ONE-OUT ==========")
+print(f"zeros used        = {N}")
+print(f"kernel powers     = {powers}")
+print(f"Correlation       = {corr:.6f}")
+print(f"Mean relative err = {rel_err:.6e}")
+print("==========================================")
+
+# --------------------------
+# Plots
+# --------------------------
+plt.figure(figsize=(12,4))
+
+plt.subplot(1,2,1)
+plt.scatter(dt, pred)
+m = max(np.max(np.abs(dt)), np.max(np.abs(pred)))
+plt.plot([-m,m],[-m,m],'k--')
+plt.xlabel("measured dt")
+plt.ylabel("LOO predicted dt")
+plt.title("Leave-one-out prediction")
+
+plt.subplot(1,2,2)
+plt.plot(t0, resid, marker='o')
+plt.axhline(0, color='k', ls='--')
+plt.xlabel("t_i")
+plt.ylabel("residual")
+plt.title("Residual vs zero height")
+
+plt.tight_layout()
+plt.show()
+
+
+Code 42 
+
+# ================================
+# TEST R: σ-ACTION (path-dependent / global) on zero trajectories
+# Goal:
+#   Track zeros t_i(σ) under Gaussian smoothing (heat flow in t),
+#   then compute an "action" A_i = ∫ (dt_i/dσ)^2 dσ and compare to
+#   the Cauchy–Schwarz lower bound (straight-line in σ):
+#        A_min = (Δt_total^2) / σ_max
+#   Ratio R_i = A_i / A_min  (R_i=1 means constant-velocity drift; >1 means curved/path-dependent)
+# ================================
+
+import numpy as np
+import matplotlib.pyplot as plt
+import mpmath as mp
+
+# --------------------------
+# Config
+# --------------------------
+mp.mp.dps = 60
+
+T0, T1 = 60.0, 120.0
+N = 16384  # power of 2 good for FFT
+dt = (T1 - T0) / (N - 1)
+t = np.linspace(T0, T1, N)
+
+# sigma grid for the flow
+SIGMA_MAX = 0.25
+NS = 26  # includes 0
+sigmas = np.linspace(0.0, SIGMA_MAX, NS)
+
+# zero tracking controls
+EDGE_DROP = 2         # drop a few zeros near edges to avoid boundary artifacts
+MAX_STEP = 1.0        # maximum allowed jump between σ steps for matching (in t units)
+MIN_ZEROS = 12        # minimum zeros required to do the test
+
+# --------------------------
+# Riemann xi(s): stable definition
+# --------------------------
+def xi(s):
+    # xi(s) = 1/2 s(s-1) π^{-s/2} Γ(s/2) ζ(s)
+    return mp.mpf('0.5') * s * (s - 1) * (mp.pi ** (-s/2)) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_eval(tt):
+    # real part of xi(1/2 + i t)
+    s = mp.mpf('0.5') + 1j * mp.mpf(tt)
+    return mp.re(xi(s))
+
+# --------------------------
+# Sample baseline f(t)
+# --------------------------
+print(f"Sampling baseline f(t)=Re xi(1/2+it) on [{T0},{T1}] with N={N}, dt≈{dt} ...")
+f0 = np.array([float(f_eval(tt)) for tt in t], dtype=float)
+
+# --------------------------
+# Gaussian smoothing via FFT (heat semigroup in t)
+#   f_σ = F^{-1}[ exp(-0.5 * (σ*ω)^2) * F[f] ]
+# --------------------------
+def gaussian_smooth_fft(f, sigma, dt):
+    if sigma == 0.0:
+        return f.copy()
+    F = np.fft.rfft(f)
+    # angular frequency ω for rfft bins (rad per unit t)
+    omega = 2*np.pi*np.fft.rfftfreq(len(f), d=dt)
+    H = np.exp(-0.5 * (sigma * omega)**2)
+    return np.fft.irfft(F * H, n=len(f))
+
+# --------------------------
+# Find zeros by sign change + linear refine (fast + robust)
+# --------------------------
+def find_zeros_linear(tt, yy):
+    sgn = np.sign(yy)
+    sgn[sgn == 0] = 1
+    idx = np.where(sgn[:-1] * sgn[1:] < 0)[0]
+    zeros = []
+    for i in idx:
+        x0, x1 = tt[i], tt[i+1]
+        y0, y1 = yy[i], yy[i+1]
+        # linear root
+        z = x0 - y0 * (x1 - x0) / (y1 - y0)
+        zeros.append(z)
+    return np.array(zeros, dtype=float)
+
+# --------------------------
+# Nearest-neighbor matching of zeros across σ
+# --------------------------
+def match_zeros(prev, curr, max_step=MAX_STEP):
+    """
+    Given prev zeros (shape m) and curr zeros (shape k),
+    return matched curr (shape m) where each prev[i] matched to nearest curr
+    with |Δ| <= max_step. Unmatched -> np.nan.
+    """
+    if prev.size == 0 or curr.size == 0:
+        return np.full(prev.shape, np.nan, dtype=float)
+
+    used = np.zeros(curr.size, dtype=bool)
+    out = np.full(prev.shape, np.nan, dtype=float)
+
+    for i, z in enumerate(prev):
+        j = np.argmin(np.abs(curr - z))
+        if (not used[j]) and (abs(curr[j] - z) <= max_step):
+            out[i] = curr[j]
+            used[j] = True
+        else:
+            # try next-best if nearest already used
+            order = np.argsort(np.abs(curr - z))
+            ok = False
+            for j2 in order:
+                if used[j2]:
+                    continue
+                if abs(curr[j2] - z) <= max_step:
+                    out[i] = curr[j2]
+                    used[j2] = True
+                    ok = True
+                    break
+            if not ok:
+                out[i] = np.nan
+    return out
+
+# --------------------------
+# Build zero trajectories t_i(σ)
+# --------------------------
+zeros_by_sigma = []
+for s in sigmas:
+    fs = gaussian_smooth_fft(f0, s, dt)
+    zs = find_zeros_linear(t, fs)
+    zeros_by_sigma.append(zs)
+
+z0 = zeros_by_sigma[0]
+if z0.size < MIN_ZEROS:
+    raise RuntimeError(f"Not enough baseline zeros found: {z0.size}")
+
+# trim edges
+if z0.size <= 2*EDGE_DROP:
+    raise RuntimeError("EDGE_DROP too large for the number of zeros found.")
+z0_trim = z0[EDGE_DROP:-EDGE_DROP]
+m = len(z0_trim)
+
+Ttraj = np.full((NS, m), np.nan, dtype=float)
+Ttraj[0, :] = z0_trim
+
+for k in range(1, NS):
+    zprev = Ttraj[k-1, :]
+    zcurr = zeros_by_sigma[k]
+    # also trim current edge zeros loosely by window bounds (keep full; matcher handles)
+    matched = match_zeros(zprev, zcurr, max_step=MAX_STEP)
+    Ttraj[k, :] = matched
+
+# drop any trajectory that has NaNs
+good = np.all(np.isfinite(Ttraj), axis=0)
+Ttraj = Ttraj[:, good]
+z0_good = Ttraj[0, :]
+m2 = Ttraj.shape[1]
+
+print(f"Baseline zeros found: {len(z0)}  | after edge drop: {m} | tracked across σ: {m2}")
+print("First few baseline zeros tracked:", np.round(z0_good[:min(12,m2)], 6))
+
+if m2 < MIN_ZEROS:
+    raise RuntimeError(f"Too few fully-tracked zeros across σ: {m2} (increase MAX_STEP or reduce SIGMA_MAX/NS).")
+
+# --------------------------
+# Compute velocities and ACTION
+# A_i = ∫ (dt/dσ)^2 dσ  ≈ Σ (Δt/Δσ)^2 Δσ
+# A_min = (Δt_total^2) / σ_max
+# Ratio R = A / A_min
+# --------------------------
+ds = sigmas[1] - sigmas[0]
+dT = np.diff(Ttraj, axis=0)              # (NS-1, m2)
+v = dT / ds                               # dt/dσ approx
+A = np.sum((v**2) * ds, axis=0)          # action per zero
+Dt_total = Ttraj[-1, :] - Ttraj[0, :]
+Amin = (Dt_total**2) / (sigmas[-1] - sigmas[0] + 1e-30)
+ratio = A / (Amin + 1e-30)
+
+print("\n========== TEST R: σ-ACTION SUMMARY ==========")
+print(f"σ range: [0, {SIGMA_MAX}]  NS={NS}  ds≈{ds}")
+print(f"zeros tracked: {m2}")
+print(f"mean |Δt_total| = {np.mean(np.abs(Dt_total)):.6e}")
+print(f"mean action A   = {np.mean(A):.6e}")
+print(f"mean ratio A/Amin = {np.mean(ratio):.6e}")
+print(f"median ratio A/Amin = {np.median(ratio):.6e}")
+print("==============================================\n")
+
+# --------------------------
+# Plots
+# --------------------------
+# 1) Trajectories (displacements)
+plt.figure(figsize=(10,4))
+for i in range(min(m2, 12)):
+    plt.plot(sigmas, Ttraj[:, i] - Ttraj[0, i])
+plt.xlabel("σ")
+plt.ylabel("Δt_i(σ)")
+plt.title("TEST R: Zero trajectories under Gaussian σ-flow (Δt vs σ)")
+plt.grid(True)
+plt.show()
+
+# 2) Action ratio vs zero height
+plt.figure(figsize=(10,4))
+plt.plot(z0_good, ratio, marker='o', linestyle='-')
+plt.axhline(1.0, linestyle='--')
+plt.xlabel("t_i (baseline zero height)")
+plt.ylabel("A_i / A_min")
+plt.title("TEST R: Path-curvature ratio (A/A_min).  1 = straight-line drift in σ")
+plt.grid(True)
+plt.show()
+
+# 3) Compare action vs total displacement magnitude
+plt.figure(figsize=(6,5))
+plt.scatter(np.abs(Dt_total), A)
+plt.xlabel("|Δt_total|")
+plt.ylabel("Action A")
+plt.title("TEST R: Action vs total displacement")
+plt.grid(True)
+plt.show()
+
+# 4) Velocity roughness: total variation in σ
+TV = np.sum(np.abs(dT), axis=0)
+plt.figure(figsize=(10,4))
+plt.plot(z0_good, TV, marker='o', linestyle='-')
+plt.xlabel("t_i (baseline zero height)")
+plt.ylabel("Σ |Δt step|  (total variation)")
+plt.title("TEST R: Total variation of zero path in σ (roughness)")
+plt.grid(True)
+plt.show()
+
+# Optional: quick diagnostic prints for extremes
+imax = int(np.argmax(ratio))
+imin = int(np.argmin(ratio))
+print("Extremes:")
+print(f"  min ratio: {ratio[imin]:.6e} at t≈{z0_good[imin]:.6f},  Δt_total={Dt_total[imin]:+.6e},  A={A[imin]:.6e}")
+print(f"  max ratio: {ratio[imax]:.6e} at t≈{z0_good[imax]:.6f},  Δt_total={Dt_total[imax]:+.6e},  A={A[imax]:.6e}")
+
+Code 43
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ============================================================
+# TEST S: σ-ADDIVITY / SEMIGROUP AT THE ZERO-TRAJECTORY LEVEL
+# ============================================================
+
+def test_S_sigma_additivity(
+    sigma_grid,
+    zero_tracks,
+):
+    """
+    sigma_grid : array of σ values, shape (M,)
+    zero_tracks: array of zero locations t_i(σ),
+                 shape (Nzeros, M)
+    """
+
+    sigma_grid = np.asarray(sigma_grid, float)
+    Z = np.asarray(zero_tracks, float)
+
+    assert Z.ndim == 2
+    N, M = Z.shape
+    assert M == len(sigma_grid)
+
+    # ---------------------------------------
+    # finite σ-increments
+    # ---------------------------------------
+    ds = np.diff(sigma_grid)
+
+    # zero velocities ∂t/∂σ
+    v = np.diff(Z, axis=1) / ds
+
+    # ---------------------------------------
+    # ACTION along each zero path
+    # A = ∑ |Δt|
+    # ---------------------------------------
+    A = np.sum(np.abs(np.diff(Z, axis=1)), axis=1)
+
+    # ---------------------------------------
+    # Additivity check:
+    # A(σ1→σ3) ≈ A(σ1→σ2) + A(σ2→σ3)
+    # ---------------------------------------
+    mid = M // 2
+
+    A_12 = np.sum(np.abs(Z[:, 1:mid] - Z[:, :mid-1]), axis=1)
+    A_23 = np.sum(np.abs(Z[:, mid+1:] - Z[:, mid:-1]), axis=1)
+    A_13 = A
+
+    additivity_error = A_13 - (A_12 + A_23)
+
+    # ---------------------------------------
+    # Diagnostics
+    # ---------------------------------------
+    rel_err = np.linalg.norm(additivity_error) / np.linalg.norm(A_13)
+
+    print("========== TEST S: σ-ADDIVITY ==========")
+    print(f"zeros tracked        = {N}")
+    print(f"σ grid points        = {M}")
+    print(f"||A13 - (A12+A23)|| / ||A13|| = {rel_err:.6e}")
+    print("========================================")
+
+    # ---------------------------------------
+    # Plots
+    # ---------------------------------------
+    fig, ax = plt.subplots(1, 2, figsize=(12, 4))
+
+    ax[0].scatter(A_13, A_12 + A_23)
+    lim = max(np.max(A_13), np.max(A_12 + A_23))
+    ax[0].plot([0, lim], [0, lim], "k--")
+    ax[0].set_xlabel("A(σ1 → σ3)")
+    ax[0].set_ylabel("A(σ1 → σ2) + A(σ2 → σ3)")
+    ax[0].set_title("Action additivity")
+
+    ax[1].plot(additivity_error, marker="o")
+    ax[1].axhline(0, color="k", linestyle="--")
+    ax[1].set_xlabel("zero index")
+    ax[1].set_ylabel("A13 − (A12 + A23)")
+    ax[1].set_title("Additivity residual")
+
+    plt.tight_layout()
+    plt.show()
+
+    return {
+        "relative_error": rel_err,
+        "A_total": A_13,
+        "A_split": A_12 + A_23,
+        "residual": additivity_error,
+    }
+
+
+# ============================================================
+# CALL EXAMPLE (YOU MUST SUPPLY THESE)
+# ============================================================
+# sigma_grid = np.linspace(0.0, 0.25, 26)
+# zero_tracks = tracked_zero_array   # shape (Nzeros, 26)
+# results = test_S_sigma_additivity(sigma_grid, zero_tracks)
+
+Code 44
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+from scipy.signal import fftconvolve
+
+# --------------------------
+# CONFIG
+# --------------------------
+mp.dps = 50
+T0, T1 = 60.0, 120.0
+N = 16384
+sigma_grid = np.linspace(0.0, 0.25, 26)
+EDGE_DROP = 2
+
+# --------------------------
+# RIEMANN xi
+# --------------------------
+def xi(s):
+    return 0.5*s*(s-1)*mp.pi**(-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+def sample_f():
+    t = np.linspace(T0, T1, N)
+    f = np.array([mp.re(xi(0.5+1j*tt)) for tt in t], float)
+    return t, f
+
+# --------------------------
+# GAUSSIAN FLOW
+# --------------------------
+def gaussian_kernel(sigma, dt):
+    if sigma == 0:
+        return np.array([1.0])
+    L = int(6*sigma/dt)
+    x = np.arange(-L, L+1)*dt
+    g = np.exp(-x**2/(2*sigma**2))
+    return g/np.sum(g)
+
+def flow(f, sigma, dt):
+    g = gaussian_kernel(sigma, dt)
+    return fftconvolve(f, g, mode="same")
+
+# --------------------------
+# ZERO FINDER
+# --------------------------
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i]*f[i+1] < 0:
+            z.append(t[i] - f[i]*(t[i+1]-t[i])/(f[i+1]-f[i]))
+    return np.array(z)
+
+# --------------------------
+# TRACK ZEROS
+# --------------------------
+def track_zeros(t, f0, sigma_grid):
+    dt = t[1]-t[0]
+    Z = []
+    z0 = find_zeros(t, f0)
+    z0 = z0[EDGE_DROP:-EDGE_DROP]
+    Z.append(z0)
+
+    for s in sigma_grid[1:]:
+        fs = flow(f0, s, dt)
+        zs = find_zeros(t, fs)
+        zs = zs[:len(z0)]
+        Z.append(zs)
+
+    return np.array(Z).T  # shape: (zeros, sigma)
+
+# --------------------------
+# TEST S
+# --------------------------
+t, f0 = sample_f()
+Z = track_zeros(t, f0, sigma_grid)
+
+Z0 = Z[:, [0]]
+Dt = Z - Z0
+
+mid = len(sigma_grid)//2
+
+Dt_1 = Dt[:, mid]
+Dt_2 = Dt[:, -1] - Dt[:, mid]
+Dt_pred = Dt_1 + Dt_2
+Dt_true = Dt[:, -1]
+
+resid = Dt_true - Dt_pred
+
+# --------------------------
+# OUTPUT
+# --------------------------
+print("========== TEST S: σ-LINEARITY ==========")
+print(f"zeros tracked = {len(Dt)}")
+print(f"mean |residual| = {np.mean(np.abs(resid)):.3e}")
+print(f"||resid|| / ||Δt|| = {np.linalg.norm(resid)/np.linalg.norm(Dt_true):.3e}")
+print("=========================================")
+
+# --------------------------
+# PLOTS
+# --------------------------
+plt.figure(figsize=(6,6))
+plt.scatter(Dt_pred, Dt_true)
+mx = max(np.max(np.abs(Dt_pred)), np.max(np.abs(Dt_true)))
+plt.plot([-mx,mx],[-mx,mx],'k--')
+plt.xlabel("predicted Δt(σ₁)+Δt(σ₂)")
+plt.ylabel("measured Δt(σ₁+σ₂)")
+plt.title("Test S: σ-additivity")
+plt.grid()
+plt.show()
+
+plt.figure(figsize=(7,4))
+plt.plot(resid, marker="o")
+plt.axhline(0,color="k",ls="--")
+plt.title("σ-additivity residual per zero")
+plt.xlabel("zero index")
+plt.ylabel("residual")
+plt.grid()
+plt.show()
+
+Code 45
