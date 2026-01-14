@@ -1,0 +1,1976 @@
+# ================= STEP 42A — σ-FLOW UNIVERSALITY CHECK =================
+# Self-contained, identity-preserving, no external state required
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+WINDOWS = [(60.0,120.0)]          # add more windows if desired
+SIGMA0 = 0.06
+DSIGMAS = [-2e-4,-1e-4,-5e-5,-2e-5,-1e-5,0.0,1e-5,2e-5,5e-5,1e-4,2e-4]
+N = 16384
+EDGE_DROP = 2
+N_PAIRS = 5                       # number of nearest adjacent pairs to test
+ROOT_RADIUS = 1.0
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(tt)) for tt in t])
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    k = np.fft.fftfreq(len(f), d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F*G))
+
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i]*f[i+1] < 0:
+            z.append(t[i])
+    return np.array(z)
+
+def track_root(prev_z, roots):
+    return roots[np.argmin(np.abs(roots-prev_z))]
+
+# ----------------------------
+# MAIN LOOP
+# ----------------------------
+for (T0,T1) in WINDOWS:
+    print(f"\n================ WINDOW [{T0},{T1}] =================")
+
+    t = np.linspace(T0, T1, N)
+    dt = t[1]-t[0]
+    f0 = siegel_vals(t)
+
+    f_sigma0 = smooth_fft(f0, dt, SIGMA0)
+    Z0 = find_zeros(t, f_sigma0)[EDGE_DROP:-EDGE_DROP]
+
+    # nearest adjacent pairs
+    pairs = [(abs(Z0[i+1]-Z0[i]), Z0[i], Z0[i+1]) for i in range(len(Z0)-1)]
+    pairs.sort()
+
+    for pidx,(sep0,z1_0,z2_0) in enumerate(pairs[:N_PAIRS]):
+        center0 = 0.5*(z1_0+z2_0)
+
+        print(f"\n--- Pair {pidx+1} ---")
+        print(f"z1_0={z1_0:.9f}  z2_0={z2_0:.9f}")
+        print(f"sep0={sep0:.9e}  center0={center0:.9f}")
+        print(f"sep0/dt={sep0/dt:.3f}")
+
+        print("\nds | z1          z2          | center       sep        | dcenter/dσ   dsep/dσ")
+        print("-"*86)
+
+        z1_prev, z2_prev = z1_0, z2_0
+        sep_prev, cen_prev = sep0, center0
+
+        for ds in DSIGMAS:
+            sigma = SIGMA0 + ds
+            fs = smooth_fft(f0, dt, sigma)
+            roots = find_zeros(t, fs)
+
+            # identity tracking
+            z1 = track_root(z1_prev, roots)
+            z2 = track_root(z2_prev, roots)
+
+            center = 0.5*(z1+z2)
+            sep = abs(z2-z1)
+
+            if ds != DSIGMAS[0]:
+                dsep = (sep-sep_prev)/(ds-ds_prev)
+                dcen = (center-cen_prev)/(ds-ds_prev)
+                print(f"{ds:+.1e} | {z1:.9f} {z2:.9f} | {center:.9f} {sep:.9e} | {dcen:+.3e} {dsep:+.3e}")
+            else:
+                print(f"{ds:+.1e} | {z1:.9f} {z2:.9f} | {center:.9f} {sep:.9e} |    ---        ---")
+
+            z1_prev, z2_prev = z1, z2
+            sep_prev, cen_prev = sep, center
+            ds_prev = ds
+
+print("\n================ STEP 42A DONE =================")
+
+
+
+================ WINDOW [60.0,120.0] =================
+
+--- Pair 1 ---
+z1_0=111.038271379  z2_0=111.865958616
+sep0=8.276872368e-01  center0=111.452114997
+sep0/dt=226.000
+
+ds | z1          z2          | center       sep        | dcenter/dσ   dsep/dσ
+--------------------------------------------------------------------------------------
+-2.0e-04 | 111.034609046 111.865958616 | 111.450283831 8.313495697e-01 |    ---        ---
+-1.0e-04 | 111.038271379 111.865958616 | 111.452114997 8.276872368e-01 | +1.831e+01 -3.662e+01
+-5.0e-05 | 111.038271379 111.865958616 | 111.452114997 8.276872368e-01 | +0.000e+00 +0.000e+00
+-2.0e-05 | 111.038271379 111.865958616 | 111.452114997 8.276872368e-01 | +0.000e+00 +0.000e+00
+-1.0e-05 | 111.038271379 111.865958616 | 111.452114997 8.276872368e-01 | +0.000e+00 +0.000e+00
++0.0e+00 | 111.038271379 111.865958616 | 111.452114997 8.276872368e-01 | +0.000e+00 +0.000e+00
++1.0e-05 | 111.038271379 111.865958616 | 111.452114997 8.276872368e-01 | +0.000e+00 +0.000e+00
++2.0e-05 | 111.038271379 111.865958616 | 111.452114997 8.276872368e-01 | +0.000e+00 +0.000e+00
++5.0e-05 | 111.038271379 111.865958616 | 111.452114997 8.276872368e-01 | +0.000e+00 +0.000e+00
++1.0e-04 | 111.038271379 111.865958616 | 111.452114997 8.276872368e-01 | +0.000e+00 +0.000e+00
++2.0e-04 | 111.038271379 111.865958616 | 111.452114997 8.276872368e-01 | +0.000e+00 +0.000e+00
+
+--- Pair 2 ---
+z1_0=94.652993957  z2_0=95.865226149
+sep0=1.212232192e+00  center0=95.259110053
+sep0/dt=331.000
+
+ds | z1          z2          | center       sep        | dcenter/dσ   dsep/dσ
+--------------------------------------------------------------------------------------
+-2.0e-04 | 94.652993957 95.865226149 | 95.259110053 1.212232192e+00 |    ---        ---
+-1.0e-04 | 94.652993957 95.865226149 | 95.259110053 1.212232192e+00 | +0.000e+00 +0.000e+00
+-5.0e-05 | 94.652993957 95.865226149 | 95.259110053 1.212232192e+00 | +0.000e+00 +0.000e+00
+-2.0e-05 | 94.652993957 95.865226149 | 95.259110053 1.212232192e+00 | +0.000e+00 +0.000e+00
+-1.0e-05 | 94.652993957 95.865226149 | 95.259110053 1.212232192e+00 | +0.000e+00 +0.000e+00
++0.0e+00 | 94.652993957 95.865226149 | 95.259110053 1.212232192e+00 | +0.000e+00 +0.000e+00
++1.0e-05 | 94.652993957 95.865226149 | 95.259110053 1.212232192e+00 | +0.000e+00 +0.000e+00
++2.0e-05 | 94.652993957 95.865226149 | 95.259110053 1.212232192e+00 | +0.000e+00 +0.000e+00
++5.0e-05 | 94.652993957 95.865226149 | 95.259110053 1.212232192e+00 | +0.000e+00 +0.000e+00
++1.0e-04 | 94.652993957 95.865226149 | 95.259110053 1.212232192e+00 | +0.000e+00 +0.000e+00
++2.0e-04 | 94.652993957 95.865226149 | 95.259110053 1.212232192e+00 | +0.000e+00 +0.000e+00
+
+--- Pair 3 ---
+z1_0=87.427211133  z2_0=88.804248306
+sep0=1.377037173e+00  center0=88.115729720
+sep0/dt=376.000
+
+ds | z1          z2          | center       sep        | dcenter/dσ   dsep/dσ
+--------------------------------------------------------------------------------------
+-2.0e-04 | 87.427211133 88.804248306 | 88.115729720 1.377037173e+00 |    ---        ---
+-1.0e-04 | 87.427211133 88.804248306 | 88.115729720 1.377037173e+00 | +0.000e+00 +0.000e+00
+-5.0e-05 | 87.427211133 88.804248306 | 88.115729720 1.377037173e+00 | +0.000e+00 +0.000e+00
+-2.0e-05 | 87.427211133 88.804248306 | 88.115729720 1.377037173e+00 | +0.000e+00 +0.000e+00
+-1.0e-05 | 87.427211133 88.804248306 | 88.115729720 1.377037173e+00 | +0.000e+00 +0.000e+00
++0.0e+00 | 87.427211133 88.804248306 | 88.115729720 1.377037173e+00 | +0.000e+00 +0.000e+00
++1.0e-05 | 87.427211133 88.804248306 | 88.115729720 1.377037173e+00 | +0.000e+00 +0.000e+00
++2.0e-05 | 87.427211133 88.804248306 | 88.115729720 1.377037173e+00 | +0.000e+00 +0.000e+00
++5.0e-05 | 87.427211133 88.804248306 | 88.115729720 1.377037173e+00 | +0.000e+00 +0.000e+00
++1.0e-04 | 87.427211133 88.804248306 | 88.115729720 1.377037173e+00 | +0.000e+00 +0.000e+00
++2.0e-04 | 87.427211133 88.804248306 | 88.115729720 1.377037173e+00 | +0.000e+00 +0.000e+00
+
+--- Pair 4 ---
+z1_0=75.707745834  z2_0=77.139718000
+sep0=1.431972166e+00  center0=76.423731917
+sep0/dt=391.000
+
+ds | z1          z2          | center       sep        | dcenter/dσ   dsep/dσ
+--------------------------------------------------------------------------------------
+-2.0e-04 | 75.707745834 77.139718000 | 76.423731917 1.431972166e+00 |    ---        ---
+-1.0e-04 | 75.707745834 77.139718000 | 76.423731917 1.431972166e+00 | +0.000e+00 +0.000e+00
+-5.0e-05 | 75.707745834 77.139718000 | 76.423731917 1.431972166e+00 | +0.000e+00 +0.000e+00
+-2.0e-05 | 75.707745834 77.139718000 | 76.423731917 1.431972166e+00 | +0.000e+00 +0.000e+00
+-1.0e-05 | 75.707745834 77.139718000 | 76.423731917 1.431972166e+00 | +0.000e+00 +0.000e+00
++0.0e+00 | 75.707745834 77.139718000 | 76.423731917 1.431972166e+00 | +0.000e+00 +0.000e+00
++1.0e-05 | 75.707745834 77.139718000 | 76.423731917 1.431972166e+00 | +0.000e+00 +0.000e+00
++2.0e-05 | 75.707745834 77.139718000 | 76.423731917 1.431972166e+00 | +0.000e+00 +0.000e+00
++5.0e-05 | 75.707745834 77.139718000 | 76.423731917 1.431972166e+00 | +0.000e+00 +0.000e+00
++1.0e-04 | 75.707745834 77.139718000 | 76.423731917 1.431972166e+00 | +0.000e+00 +0.000e+00
++2.0e-04 | 75.707745834 77.139718000 | 76.423731917 1.431972166e+00 | +0.000e+00 +0.000e+00
+
+--- Pair 5 ---
+z1_0=105.445889031  z2_0=107.163523164
+sep0=1.717634133e+00  center0=106.304706098
+sep0/dt=469.000
+
+ds | z1          z2          | center       sep        | dcenter/dσ   dsep/dσ
+--------------------------------------------------------------------------------------
+-2.0e-04 | 105.445889031 107.163523164 | 106.304706098 1.717634133e+00 |    ---        ---
+-1.0e-04 | 105.445889031 107.163523164 | 106.304706098 1.717634133e+00 | +0.000e+00 +0.000e+00
+-5.0e-05 | 105.445889031 107.163523164 | 106.304706098 1.717634133e+00 | +0.000e+00 +0.000e+00
+-2.0e-05 | 105.445889031 107.163523164 | 106.304706098 1.717634133e+00 | +0.000e+00 +0.000e+00
+-1.0e-05 | 105.445889031 107.163523164 | 106.304706098 1.717634133e+00 | +0.000e+00 +0.000e+00
++0.0e+00 | 105.445889031 107.163523164 | 106.304706098 1.717634133e+00 | +0.000e+00 +0.000e+00
++1.0e-05 | 105.445889031 107.163523164 | 106.304706098 1.717634133e+00 | +0.000e+00 +0.000e+00
++2.0e-05 | 105.445889031 107.163523164 | 106.304706098 1.717634133e+00 | +0.000e+00 +0.000e+00
++5.0e-05 | 105.445889031 107.163523164 | 106.304706098 1.717634133e+00 | +0.000e+00 +0.000e+00
++1.0e-04 | 105.445889031 107.163523164 | 106.304706098 1.717634133e+00 | +0.000e+00 +0.000e+00
++2.0e-04 | 105.445889031 107.163523164 | 106.304706098 1.717634133e+00 | +0.000e+00 +0.000e+00
+
+================ STEP 42A DONE =================
+
+
+# ================= STEP 42B — LOCAL σ-CRITICAL EXPONENT =================
+# Purpose:
+#   Measure how the nearest-pair separation scales as σ approaches
+#   a critical value σ* from below:
+#
+#       sep(σ) ~ C * |σ* − σ|^β
+#
+#   This distinguishes:
+#     β ≈ 1     → linear (generic flow)
+#     β ≈ 1/2   → saddle-node / avoided crossing
+#     β < 1/2   → non-generic / topologically constrained
+#
+# Self-contained, single-cell, no external state required.
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 16384
+EDGE_DROP = 2
+
+SIGMA0 = 0.06
+DSIGMAS = np.array([
+    -5e-4, -2e-4, -1e-4, -5e-5,
+    -2e-5, -1e-5, -5e-6, -2e-6, -1e-6
+])
+
+# nearest-pair tracking radius
+PAIR_RADIUS = 1.0
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(tt)) for tt in t])
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    k = np.fft.fftfreq(len(f), d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z.append(t[i])
+    return np.array(z)
+
+def nearest_pair(z):
+    pairs = [(abs(z[i+1]-z[i]), z[i], z[i+1]) for i in range(len(z)-1)]
+    pairs.sort()
+    return pairs[0]
+
+# ----------------------------
+# BASELINE
+# ----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+
+f0 = siegel_vals(t)
+
+# σ0 slice
+f_sigma0 = smooth_fft(f0, dt, SIGMA0)
+z0 = find_zeros(t, f_sigma0)[EDGE_DROP:-EDGE_DROP]
+
+sep0, z1_0, z2_0 = nearest_pair(z0)
+center0 = 0.5*(z1_0 + z2_0)
+
+print("Baseline σ0 pair:")
+print(f"  z1={z1_0:.9f}  z2={z2_0:.9f}")
+print(f"  sep0={sep0:.9e}  center0={center0:.9f}")
+print(f"  dt={dt:.3e}  sep0/dt={sep0/dt:.1f}")
+
+# ----------------------------
+# σ-SCAN BELOW σ0
+# ----------------------------
+sigmas = SIGMA0 + DSIGMAS
+seps = []
+
+for s in sigmas:
+    fs = smooth_fft(f0, dt, s)
+    z = find_zeros(t, fs)
+    z = z[np.abs(z-center0) <= PAIR_RADIUS]
+
+    if len(z) < 2:
+        seps.append(np.nan)
+        continue
+
+    sep, _, _ = nearest_pair(np.sort(z))
+    seps.append(sep)
+
+sigmas = np.array(sigmas)
+seps = np.array(seps)
+
+# keep only valid points
+mask = np.isfinite(seps)
+sigmas = sigmas[mask]
+seps = seps[mask]
+
+# ----------------------------
+# FIT sep ~ |σ* − σ|^β
+# ----------------------------
+# Assume σ* ≈ σ0 (local critical surface)
+x = SIGMA0 - sigmas
+y = seps
+
+# log–log fit
+lx = np.log(x)
+ly = np.log(y)
+
+beta, logC = np.polyfit(lx, ly, 1)
+
+# ----------------------------
+# OUTPUT
+# ----------------------------
+print("\n================ LOCAL σ-SCALING =================")
+print("σ          |  sep")
+print("---------------------------------")
+for s, sp in zip(sigmas, seps):
+    print(f"{s:+.6e} | {sp:.9e}")
+
+print("\n================ POWER-LAW FIT =================")
+print(f"Assumed σ* ≈ {SIGMA0:.6f}")
+print(f"sep ≈ C * |σ* − σ|^β")
+print(f"β = {beta:.6f}")
+print(f"C = {np.exp(logC):.6e}")
+
+print("\n================ INTERPRETATION =================")
+print("β ≈ 1      → linear σ-flow")
+print("β ≈ 1/2    → saddle-node / avoided crossing")
+print("β < 1/2    → non-generic / topological obstruction")
+print("=================================================")
+
+
+Baseline σ0 pair:
+  z1=111.038271379  z2=111.865958616
+  sep0=8.276872368e-01  center0=111.452114997
+  dt=3.662e-03  sep0/dt=226.0
+
+================ LOCAL σ-SCALING =================
+σ          |  sep
+---------------------------------
++5.950000e-02 | 8.313495697e-01
++5.980000e-02 | 8.313495697e-01
++5.990000e-02 | 8.276872368e-01
++5.995000e-02 | 8.276872368e-01
++5.998000e-02 | 8.276872368e-01
++5.999000e-02 | 8.276872368e-01
++5.999500e-02 | 8.276872368e-01
++5.999800e-02 | 8.276872368e-01
++5.999900e-02 | 8.276872368e-01
+
+================ POWER-LAW FIT =================
+Assumed σ* ≈ 0.060000
+sep ≈ C * |σ* − σ|^β
+β = 0.000664
+C = 8.344325e-01
+
+================ INTERPRETATION =================
+β ≈ 1      → linear σ-flow
+β ≈ 1/2    → saddle-node / avoided crossing
+β < 1/2    → non-generic / topological obstruction
+=================================================
+
+
+# ================= STEP 42B2 — LOCAL σ-CRITICAL EXPONENT (REFINED ROOTS) =================
+# Same goal as Step 42B, but removes grid-lock by refining each zero via bisection.
+# Self-contained, single-cell.
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 80
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 16384
+EDGE_DROP = 2
+
+SIGMA0 = 0.06
+DSIGMAS = np.array([
+    -5e-4, -2e-4, -1e-4, -5e-5,
+    -2e-5, -1e-5, -5e-6, -2e-6, -1e-6
+], dtype=float)
+
+PAIR_RADIUS = 1.0          # search roots near the σ0 pair center
+MAX_BISECT_ITERS = 80
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(tt)) for tt in t], dtype=float)
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    k = np.fft.fftfreq(len(f), d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def bracket_indices(f):
+    # return indices i where f[i]*f[i+1] < 0 (sign change)
+    s = f[:-1] * f[1:]
+    return np.where(s < 0)[0]
+
+def bisect_root(t, f, i, iters=60):
+    # root in [t[i], t[i+1]] assuming sign change
+    a = t[i]; b = t[i+1]
+    fa = f[i]; fb = f[i+1]
+    if fa == 0.0:
+        return a
+    if fb == 0.0:
+        return b
+    # safety
+    if fa * fb > 0:
+        return np.nan
+    for _ in range(iters):
+        m = 0.5*(a+b)
+        fm = np.interp(m, t, f)
+        if fm == 0.0:
+            return m
+        if fa * fm < 0:
+            b = m; fb = fm
+        else:
+            a = m; fa = fm
+    return 0.5*(a+b)
+
+def refined_zeros(t, f, edge_drop=0):
+    idx = bracket_indices(f)
+    if edge_drop > 0 and len(idx) > 2*edge_drop:
+        idx = idx[edge_drop:-edge_drop]
+    z = []
+    for i in idx:
+        r = bisect_root(t, f, i, iters=MAX_BISECT_ITERS)
+        if np.isfinite(r):
+            z.append(r)
+    return np.array(z, dtype=float)
+
+def nearest_pair(z):
+    z = np.sort(z)
+    seps = np.diff(z)
+    j = np.argmin(seps)
+    return seps[j], z[j], z[j+1]
+
+# ----------------------------
+# BASELINE σ0
+# ----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+
+f0 = siegel_vals(t)
+
+f_sigma0 = smooth_fft(f0, dt, SIGMA0)
+z0 = refined_zeros(t, f_sigma0, edge_drop=EDGE_DROP)
+
+sep0, z1_0, z2_0 = nearest_pair(z0)
+center0 = 0.5*(z1_0 + z2_0)
+
+print("Baseline σ0 pair (REFINED):")
+print(f"  z1={z1_0:.12f}  z2={z2_0:.12f}")
+print(f"  sep0={sep0:.12e}  center0={center0:.12f}")
+print(f"  dt={dt:.6e}  sep0/dt={sep0/dt:.3f}")
+
+# ----------------------------
+# σ-SCAN BELOW σ0
+# ----------------------------
+sigmas = SIGMA0 + DSIGMAS
+rows = []
+
+for s in sigmas:
+    fs = smooth_fft(f0, dt, s)
+    z = refined_zeros(t, fs, edge_drop=EDGE_DROP)
+
+    # restrict to neighborhood of the same feature
+    z_local = z[np.abs(z - center0) <= PAIR_RADIUS]
+
+    if len(z_local) < 2:
+        rows.append((s, np.nan, np.nan, np.nan))
+        continue
+
+    sep, a, b = nearest_pair(z_local)
+    rows.append((s, sep, a, b))
+
+rows = np.array(rows, dtype=float)
+
+# keep only valid
+mask = np.isfinite(rows[:,1])
+rows = rows[mask]
+
+sigmas_ok = rows[:,0]
+seps_ok   = rows[:,1]
+
+print("\n================ LOCAL σ-SCALING (REFINED) =================")
+print("σ           | sep           | z1           z2")
+print("--------------------------------------------------------------")
+for s, sep, a, b in rows:
+    print(f"{s:+.10e} | {sep:.12e} | {a:.9f}  {b:.9f}")
+
+# ----------------------------
+# FIT sep ~ |σ* − σ|^β  (σ* ≈ σ0)
+# ----------------------------
+x = SIGMA0 - sigmas_ok
+y = seps_ok
+
+# need strictly positive for log
+good = (x > 0) & (y > 0)
+x = x[good]
+y = y[good]
+
+lx = np.log(x)
+ly = np.log(y)
+
+beta, logC = np.polyfit(lx, ly, 1)
+
+print("\n================ POWER-LAW FIT (REFINED) =================")
+print(f"Assumed σ* ≈ {SIGMA0:.6f}")
+print(f"β = {beta:.6f}")
+print(f"C = {np.exp(logC):.12e}")
+
+print("\n================ CHECKS =================")
+print(f"sep range = [{np.min(seps_ok):.12e}, {np.max(seps_ok):.12e}]")
+print(f"unique(sep rounded 1e-12) = {len(np.unique(np.round(seps_ok,12)))}")
+
+print("\n================ INTERPRETATION =================")
+print("If refined sep still barely changes -> you are NOT near a σ-critical collision for this pair.")
+print("If refined sep changes smoothly -> β becomes meaningful.")
+print("=================================================")
+
+Baseline σ0 pair (REFINED):
+  z1=111.038313767118  z2=111.868602416856
+  sep0=8.302886497383e-01  center0=111.453458091987
+  dt=3.662333e-03  sep0/dt=226.710
+
+================ LOCAL σ-SCALING (REFINED) =================
+σ           | sep           | z1           z2
+--------------------------------------------------------------
++5.9500000000e-02 | 8.305375657804e-01 | 111.038166883  111.868704448
++5.9800000000e-02 | 8.303886973850e-01 | 111.038254638  111.868643336
++5.9900000000e-02 | 8.303387917706e-01 | 111.038284102  111.868622894
++5.9950000000e-02 | 8.303137313457e-01 | 111.038298928  111.868612660
++5.9980000000e-02 | 8.302986849232e-01 | 111.038307830  111.868606515
++5.9990000000e-02 | 8.302936677544e-01 | 111.038310798  111.868604466
++5.9995000000e-02 | 8.302911588523e-01 | 111.038312283  111.868603442
++5.9998000000e-02 | 8.302896534093e-01 | 111.038313173  111.868602827
++5.9999000000e-02 | 8.302891515780e-01 | 111.038313470  111.868602622
+
+================ POWER-LAW FIT (REFINED) =================
+Assumed σ* ≈ 0.060000
+β = 0.000037
+C = 8.306662854409e-01
+
+================ CHECKS =================
+sep range = [8.302891515780e-01, 8.305375657804e-01]
+unique(sep rounded 1e-12) = 9
+
+================ INTERPRETATION =================
+If refined sep still barely changes -> you are NOT near a σ-critical collision for this pair.
+If refined sep changes smoothly -> β becomes meaningful.
+=============
+
+
+
+# ================= STEP 42A — UNIVERSALITY ACROSS WINDOWS =================
+# Self-contained, single-cell. No external state required.
+# Tests σ-universality of nearest-neighbor zero spacing across windows.
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+WINDOWS = [(60.0,120.0),(120.0,180.0),(180.0,240.0)]
+N = 16384
+EDGE_DROP = 2
+
+SIGMA0 = 0.06
+SIGMAS = np.array([
+    0.05950, 0.05980, 0.05990, 0.05995,
+    0.05998, 0.05999, 0.059995, 0.059998, 0.059999, 0.06000
+])
+
+MIN_SEP_DT = 100        # discard pairs too close to grid
+MAX_PAIRS_PER_WINDOW = 5
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(tt)) for tt in t])
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    k = np.fft.fftfreq(len(f), d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z.append(t[i])
+    return np.array(z)
+
+def track_root(prev_z, t, f, radius=0.02):
+    z = find_zeros(t, f)
+    if len(z) == 0:
+        return None
+    idx = np.argmin(np.abs(z - prev_z))
+    if abs(z[idx] - prev_z) <= radius:
+        return z[idx]
+    return None
+
+def powerlaw_beta(sigmas, seps, sigma_star):
+    x = np.abs(sigma_star - sigmas)
+    y = seps
+    mask = (x > 0) & (y > 0)
+    lx = np.log(x[mask])
+    ly = np.log(y[mask])
+    if len(lx) < 3:
+        return np.nan
+    A = np.vstack([lx, np.ones_like(lx)]).T
+    beta, _ = np.linalg.lstsq(A, ly, rcond=None)[0]
+    return beta
+
+# ----------------------------
+# MAIN LOOP
+# ----------------------------
+print("================ STEP 42A — UNIVERSALITY CHECK ================\n")
+
+for (T0,T1) in WINDOWS:
+    t = np.linspace(T0, T1, N)
+    dt = t[1] - t[0]
+
+    f0 = siegel_vals(t)
+    f_sigma0 = smooth_fft(f0, dt, SIGMA0)
+    z0 = find_zeros(t, f_sigma0)[EDGE_DROP:-EDGE_DROP]
+
+    # mean spacing
+    deltas = np.diff(z0)
+    delta_bar = deltas.mean()
+
+    # find nearest-neighbor pairs
+    pairs = [(z0[i], z0[i+1]) for i in range(len(z0)-1)]
+    pairs = sorted(pairs, key=lambda p: p[1]-p[0])
+
+    print(f"WINDOW [{T0},{T1}]  dt={dt:.3e}  ⟨Δ⟩={delta_bar:.6f}")
+
+    used = 0
+    for (z1_0, z2_0) in pairs:
+        sep0 = z2_0 - z1_0
+        if sep0/dt < MIN_SEP_DT:
+            continue
+
+        # identity tracking
+        z1_trk = [z1_0]
+        z2_trk = [z2_0]
+        ok = True
+
+        for s in SIGMAS[1:]:
+            fs = smooth_fft(f0, dt, s)
+            z1_new = track_root(z1_trk[-1], t, fs)
+            z2_new = track_root(z2_trk[-1], t, fs)
+            if z1_new is None or z2_new is None:
+                ok = False
+                break
+            z1_trk.append(z1_new)
+            z2_trk.append(z2_new)
+
+        if not ok:
+            continue
+
+        z1_trk = np.array(z1_trk)
+        z2_trk = np.array(z2_trk)
+        seps = z2_trk - z1_trk
+
+        beta = powerlaw_beta(SIGMAS, seps/delta_bar, SIGMA0)
+
+        print(f"  Pair center={0.5*(z1_0+z2_0):.6f}  "
+              f"sep0/dt={sep0/dt:.1f}  β={beta:.6e}")
+
+        used += 1
+        if used >= MAX_PAIRS_PER_WINDOW:
+            break
+
+    if used == 0:
+        print("  (no valid pairs)")
+    print()
+
+print("================ STEP 42A DONE =================")
+
+
+================ STEP 42A — UNIVERSALITY CHECK ================
+
+WINDOW [60.0,120.0]  dt=3.662e-03  ⟨Δ⟩=2.343195
+  Pair center=111.452115  sep0/dt=226.0  β=2.753944e-04
+  Pair center=95.259110  sep0/dt=331.0  β=1.071844e-17
+  Pair center=88.115730  sep0/dt=376.0  β=1.807071e-17
+  Pair center=76.423732  sep0/dt=391.0  β=9.333446e-18
+  Pair center=106.304706  sep0/dt=469.0  β=1.454280e-17
+
+WINDOW [120.0,180.0]  dt=3.662e-03  ⟨Δ⟩=2.020143
+  Pair center=169.498260  sep0/dt=219.0  β=2.516912e-17
+  Pair center=150.488921  sep0/dt=234.0  β=4.492517e-04
+  Pair center=158.220106  sep0/dt=340.0  β=1.016733e-17
+  Pair center=134.123787  sep0/dt=341.0  β=4.137013e-17
+  Pair center=174.083501  sep0/dt=365.0  β=2.657623e-17
+
+WINDOW [180.0,240.0]  dt=3.662e-03  ⟨Δ⟩=1.780904
+  Pair center=221.071232  sep0/dt=191.0  β=3.885934e-17
+  Pair center=185.237136  sep0/dt=194.0  β=6.178189e-17
+  Pair center=231.616920  sep0/dt=196.0  β=1.891297e-17
+  Pair center=224.493682  sep0/dt=264.0  β=3.129494e-17
+  Pair center=192.552646  sep0/dt=285.0  β=3.598323e-17
+
+================ STEP 42A DONE =================
+
+
+# ================= STEP 43 — LOCAL COMPLEX-PLANE TRANSPORT (Imag velocity vs σ) =================
+# Self-contained single cell.
+#
+# Goal:
+#   Track a nearby *complex* zero z(σ)=x(σ)+i y(σ) of the σ-smoothed (optionally forced) signal
+#   using an FFT-based analytic continuation (periodic extension on the window).
+#
+# Output:
+#   For dsigma steps around σ0, prints z, and finite-diff velocities:
+#     dx/dσ, dy/dσ, and |dz|/dσ.
+#
+# Notes:
+# - This is "local": only searches inside a small rectangle around a chosen center tc0.
+# - Uses a coarse grid to seed Newton in C, then continuation across σ.
+# - If you want to use your CODIM-3 forcing (A,B,C) from Step 35/37/38, set USE_FORCING=True and fill A,B,C.
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 80
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 16384
+SIGMA0 = 0.06
+
+DSIGMAS = [-5e-4, -2e-4, -1e-4, -5e-5, -2e-5, -1e-5, 0.0, 1e-5, 2e-5, 5e-5, 1e-4, 2e-4, 5e-4]
+
+# Search box around center (real axis center)
+HALF_W = 0.50        # half-width in x
+HY_MAX = 0.03        # max imaginary height searched (positive y)
+NX = 161             # x-grid for seed search
+NY = 81              # y-grid for seed search
+
+# Newton settings
+NEWTON_MAXIT = 50
+NEWTON_TOL = 1e-20
+SEED_TOPK = 6        # try a few best minima as seeds
+
+# Choose a center tc0:
+# Option A: Use midpoint of closest adjacent real zeros at σ0 (grid-based, fast and consistent)
+# Option B: Hardcode if you already have a tc0 you care about
+USE_AUTO_TC0 = True
+TC0_HARDCODE = 111.452115
+
+# Optional forcing (CODIM-3 style) around tc0: f -> f + A*g + B*g' + C*g''
+USE_FORCING = False
+A_FORCE = 0.0
+B_FORCE = 0.0
+C_FORCE = 0.0
+WIDTH_FORCE = 0.2
+
+EDGE_DROP = 2
+
+# ----------------------------
+# Helpers: baseline signal + σ-smoothing on real grid
+# ----------------------------
+def siegel_vals(t):
+    # mp.siegelz expects mp.mpf
+    return np.array([float(mp.siegelz(mp.mpf(tt))) for tt in t], dtype=np.float64)
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    n = len(f)
+    k = np.fft.fftfreq(n, d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def find_zeros_signchange(t, f):
+    # crude: grid sign-changes
+    z = []
+    for i in range(len(f)-1):
+        a, b = f[i], f[i+1]
+        if a == 0.0:
+            z.append(t[i])
+        elif a*b < 0.0:
+            # linear interp for better placement
+            ta, tb = t[i], t[i+1]
+            z0 = ta + (0.0 - a) * (tb - ta) / (b - a)
+            z.append(z0)
+    return np.array(z, dtype=np.float64)
+
+def gaussian_real(t, tc, w):
+    return np.exp(-0.5*((t-tc)/w)**2)
+
+def d_gaussian_real(t, tc, w):
+    g = gaussian_real(t, tc, w)
+    return -(t-tc)/(w*w) * g
+
+def dd_gaussian_real(t, tc, w):
+    x = (t-tc)/w
+    return ((x*x - 1.0)/(w*w)) * gaussian_real(t, tc, w)
+
+# ----------------------------
+# FFT analytic continuation: periodic on [T0,T1)
+# F(z) from Fourier series of samples f(t)
+# ----------------------------
+def fft_coeffs(f):
+    # coefficients for exp(i 2π k (t-T0)/L)
+    return np.fft.fft(f)
+
+def eval_F_from_coeffs(Ck, z, L):
+    # z may be complex scalar
+    n = len(Ck)
+    # k indices: 0..n-1 with negative freqs wrapped
+    k = np.fft.fftfreq(n) * n  # integer-ish floats
+    k = k.astype(np.int64)
+    # phase = exp(i2π k (z-T0)/L)
+    phase = np.exp(1j * 2*np.pi * k * ((z - T0) / L))
+    return np.sum(Ck * phase) / n
+
+def eval_dF_from_coeffs(Ck, z, L):
+    n = len(Ck)
+    k = np.fft.fftfreq(n) * n
+    k = k.astype(np.int64)
+    phase = np.exp(1j * 2*np.pi * k * ((z - T0) / L))
+    factor = (1j * 2*np.pi * k / L)
+    return np.sum(Ck * factor * phase) / n
+
+# ----------------------------
+# Complex Newton
+# ----------------------------
+def newton_complex(Ck, z0, L, maxit=NEWTON_MAXIT, tol=NEWTON_TOL):
+    z = complex(z0)
+    for _ in range(maxit):
+        Fz = eval_F_from_coeffs(Ck, z, L)
+        dFz = eval_dF_from_coeffs(Ck, z, L)
+        if dFz == 0:
+            return None
+        step = Fz / dFz
+        z1 = z - step
+        if abs(step) < tol:
+            return z1
+        z = z1
+    # one last check
+    if abs(eval_F_from_coeffs(Ck, z, L)) < 1e-10:
+        return z
+    return None
+
+# ----------------------------
+# Seed search: find minima of |F| on a local x+iy grid, then Newton-refine
+# ----------------------------
+def find_local_complex_root(Ck, center, half_w, hy_max, nx=NX, ny=NY, topk=SEED_TOPK):
+    L = (T1 - T0)
+    xs = np.linspace(center - half_w, center + half_w, nx)
+    ys = np.linspace(0.0, hy_max, ny)
+
+    # evaluate |F| grid
+    vals = np.empty((ny, nx), dtype=np.float64)
+    for j, y in enumerate(ys):
+        for i, x in enumerate(xs):
+            z = x + 1j*y
+            vals[j, i] = abs(eval_F_from_coeffs(Ck, z, L))
+
+    # pick top-k minima
+    flat = vals.ravel()
+    idxs = np.argsort(flat)[:topk]
+    seeds = []
+    for idx in idxs:
+        j = idx // nx
+        i = idx % nx
+        seeds.append(xs[i] + 1j*ys[j])
+
+    # Newton from each seed; pick best root (small |F|) with y>=0
+    best = None
+    bestF = np.inf
+    for s in seeds:
+        zr = newton_complex(Ck, s, L)
+        if zr is None:
+            continue
+        if zr.imag < -1e-12:
+            continue
+        Fzr = abs(eval_F_from_coeffs(Ck, zr, L))
+        if Fzr < bestF:
+            bestF = Fzr
+            best = zr
+
+    return best, bestF
+
+# ----------------------------
+# Build baseline
+# ----------------------------
+t = np.linspace(T0, T1, N, endpoint=False)
+dt = t[1] - t[0]
+L = (T1 - T0)
+
+f_base = siegel_vals(t)
+
+# auto tc0 from closest adjacent real zeros at σ0 (grid sign-change)
+if USE_AUTO_TC0:
+    f_sig0 = smooth_fft(f_base, dt, SIGMA0)
+    z0 = find_zeros_signchange(t, f_sig0)
+    z0 = z0[EDGE_DROP:-EDGE_DROP] if len(z0) > 2*EDGE_DROP else z0
+    if len(z0) < 2:
+        tc0 = TC0_HARDCODE
+    else:
+        seps = np.diff(z0)
+        kmin = int(np.argmin(np.abs(seps)))
+        tc0 = 0.5*(z0[kmin] + z0[kmin+1])
+else:
+    tc0 = TC0_HARDCODE
+
+# forcing basis (real-space) fixed at tc0
+g0 = gaussian_real(t, tc0, WIDTH_FORCE)
+g1 = d_gaussian_real(t, tc0, WIDTH_FORCE)
+g2 = dd_gaussian_real(t, tc0, WIDTH_FORCE)
+
+print("============== STEP 43 — LOCAL COMPLEX TRANSPORT (Imag velocity vs σ) ==============")
+print(f"WINDOW=({T0},{T1})  N={N}  dt={dt:.12e}")
+print(f"σ0={SIGMA0}  tc0={tc0:.12f}  HALF_W={HALF_W}  HY_MAX={HY_MAX}")
+print(f"USE_FORCING={USE_FORCING}  (A,B,C)=({A_FORCE:.3e},{B_FORCE:.3e},{C_FORCE:.3e})  WIDTH_FORCE={WIDTH_FORCE}")
+print("-----------------------------------------------------------------------------------")
+
+# ----------------------------
+# Track complex root across σ using continuation
+# ----------------------------
+rows = []
+z_prev = None
+
+for ds in DSIGMAS:
+    sigma = SIGMA0 + ds
+
+    f_sig = smooth_fft(f_base, dt, sigma)
+
+    if USE_FORCING:
+        f_sig = f_sig + A_FORCE*g0 + B_FORCE*g1 + C_FORCE*g2
+
+    Ck = fft_coeffs(f_sig)
+
+    # If we have previous root, start Newton from it (continuation); fallback to grid-seed search
+    z_here = None
+    F_here = None
+
+    if z_prev is not None:
+        z_try = newton_complex(Ck, z_prev, L)
+        if z_try is not None:
+            F_try = abs(eval_F_from_coeffs(Ck, z_try, L))
+            # accept if it stays within the box neighborhood
+            if (abs(z_try.real - tc0) <= HALF_W*1.5) and (0.0 <= z_try.imag <= HY_MAX*2.0):
+                z_here, F_here = z_try, F_try
+
+    if z_here is None:
+        z_here, F_here = find_local_complex_root(Ck, tc0, HALF_W, HY_MAX)
+
+    if z_here is None:
+        rows.append((sigma, ds, None, None, None))
+        print(f"ds={ds:+.1e}  σ={sigma:.10f}  -> NO ROOT FOUND in box")
+        continue
+
+    z_prev = z_here
+    rows.append((sigma, ds, z_here.real, z_here.imag, F_here))
+    print(f"ds={ds:+.1e}  σ={sigma:.10f}  z={z_here.real:.12f}{z_here.imag:+.12f}i   |F|={F_here:.3e}")
+
+# ----------------------------
+# Finite-diff velocities vs σ (central where possible)
+# ----------------------------
+# keep only successful points
+succ = [(s, ds, x, y, Fv) for (s, ds, x, y, Fv) in rows if x is not None]
+if len(succ) < 3:
+    print("\nNot enough complex-root points to compute velocities.")
+else:
+    sig = np.array([r[0] for r in succ], float)
+    x = np.array([r[2] for r in succ], float)
+    y = np.array([r[3] for r in succ], float)
+
+    # central differences
+    dx = np.full_like(x, np.nan)
+    dy = np.full_like(y, np.nan)
+    speed = np.full_like(y, np.nan)
+
+    for i in range(1, len(sig)-1):
+        dsig = sig[i+1] - sig[i-1]
+        if dsig == 0:
+            continue
+        dx[i] = (x[i+1] - x[i-1]) / dsig
+        dy[i] = (y[i+1] - y[i-1]) / dsig
+        speed[i] = np.sqrt(dx[i]**2 + dy[i]**2)
+
+    print("\n================ VELOCITY ESTIMATES (central finite diff) ================")
+    print("σ            x            y            dx/dσ         dy/dσ         |dz|/dσ")
+    print("----------------------------------------------------------------------------")
+    for i in range(len(sig)):
+        if np.isnan(dx[i]):
+            print(f"{sig[i]:.10f}  {x[i]:.12f}  {y[i]:+.12f}    ---          ---          ---")
+        else:
+            print(f"{sig[i]:.10f}  {x[i]:.12f}  {y[i]:+.12f}  {dx[i]:+.6e}  {dy[i]:+.6e}  {speed[i]:+.6e}")
+
+    # simple summary around σ0 (nearest to SIGMA0)
+    j0 = int(np.argmin(np.abs(sig - SIGMA0)))
+    if 0 < j0 < len(sig)-1 and not np.isnan(dy[j0]):
+        print("\n================ SUMMARY @ σ0-neighborhood =================")
+        print(f"closest σ to σ0: σ={sig[j0]:.10f}")
+        print(f"z(σ) ≈ {x[j0]:.12f}{y[j0]:+.12f}i")
+        print(f"Imag velocity dy/dσ ≈ {dy[j0]:+.6e}")
+        print("Interpretation:")
+        print(" • dy/dσ > 0 : pair lifting off real axis as σ increases (escape upward)")
+        print(" • dy/dσ < 0 : complex pair descending toward real axis as σ increases")
+        print(" • dy/dσ ~ 0 : locally pinned
+
+ (no imaginary transport in this box)")
+        print("==========================================================================")
+
+print("\n================ STEP 43 DONE =================")
+
+
+
+============== STEP 43 — LOCAL COMPLEX TRANSPORT (Imag velocity vs σ) ==============
+WINDOW=(60.0,120.0)  N=16384  dt=3.662109375000e-03
+σ0=0.06  tc0=111.453458737186  HALF_W=0.5  HY_MAX=0.03
+USE_FORCING=False  (A,B,C)=(0.000e+00,0.000e+00,0.000e+00)  WIDTH_FORCE=0.2
+-----------------------------------------------------------------------------------
+ds=-5.0e-04  σ=0.0595000000  z=111.038166425063+0.000000000000i   |F|=1.943e-15
+ds=-2.0e-04  σ=0.0598000000  z=111.038254563056+0.000000000000i   |F|=3.255e-15
+ds=-1.0e-04  σ=0.0599000000  z=111.038284044914-0.000000000000i   |F|=7.026e-15
+ds=-5.0e-05  σ=0.0599500000  z=111.038298805072-0.000000000000i   |F|=6.453e-15
+ds=-2.0e-05  σ=0.0599800000  z=111.038307667322+0.000000000000i   |F|=6.758e-15
+ds=-1.0e-05  σ=0.0599900000  z=111.868606762122+0.000000000000i   |F|=1.427e-14
+ds=+0.0e+00  σ=0.0600000000  z=111.868604715688+0.000000000000i   |F|=8.382e-15
+ds=+1.0e-05  σ=0.0600100000  z=111.868602668894+0.000000000000i   |F|=1.694e-15
+ds=+2.0e-05  σ=0.0600200000  z=111.868600621740+0.000000000000i   |F|=8.793e-15
+ds=+5.0e-05  σ=0.0600500000  z=111.868594478114+0.000000000000i   |F|=5.773e-15
+ds=+1.0e-04  σ=0.0601000000  z=111.868584231527+0.000000000000i   |F|=8.747e-15
+ds=+2.0e-04  σ=0.0602000000  z=111.868563711312+0.000000000000i   |F|=2.259e-15
+ds=+5.0e-04  σ=0.0605000000  z=111.868501934246+0.000000000000i   |F|=9.953e-15
+
+================ VELOCITY ESTIMATES (central finite diff) ================
+σ            x            y            dx/dσ         dy/dσ         |dz|/dσ
+----------------------------------------------------------------------------
+0.0595000000  111.038166425063  +0.000000000000    ---          ---          ---
+0.0598000000  111.038254563056  +0.000000000000  +2.940496e-01  -2.465936e-12  +2.940496e-01
+0.0599000000  111.038284044914  -0.000000000000  +2.949468e-01  -6.658075e-12  +2.949468e-01
+0.0599500000  111.038298805072  -0.000000000000  +2.952801e-01  +1.052814e-11  +2.952801e-01
+0.0599800000  111.038307667322  +0.000000000000  +2.075770e+04  +1.924140e-11  +2.075770e+04
+0.0599900000  111.868606762122  +0.000000000000  +4.151485e+04  +2.247782e-11  +4.151485e+04
+0.0600000000  111.868604715688  +0.000000000000  -2.046614e-01  -8.724314e-12  +2.046614e-01
+0.0600100000  111.868602668894  +0.000000000000  -2.046974e-01  -8.735016e-12  +2.046974e-01
+0.0600200000  111.868600621740  +0.000000000000  -2.047695e-01  +1.883391e-11  +2.047695e-01
+0.0600500000  111.868594478114  +0.000000000000  -2.048777e-01  +2.763893e-14  +2.048777e-01
+0.0601000000  111.868584231527  +0.000000000000  -2.051120e-01  -3.595698e-12  +2.051120e-01
+0.0602000000  111.868563711312  +0.000000000000  -2.057432e-01  -1.025007e-13  +2.057432e-01
+0.0605000000  111.868501934246  +0.000000000000    ---          ---          ---
+
+================ SUMMARY @ σ0-neighborhood =================
+closest σ to σ0: σ=0.0600000000
+z(σ) ≈ 111.868604715688+0.000000000000i
+Imag velocity dy/dσ ≈ -8.724314e-12
+Interpretation:
+ • dy/dσ > 0 : pair lifting off real axis as σ increases (escape upward)
+ • dy/dσ < 0 : complex pair descending toward real axis as σ increases
+ • dy/dσ ~ 0 : locally pinned (no imaginary transport in this box)
+==========================================================================
+
+================ STEP 43 DONE =================
+
+# ================= STEP 43B — COMPLEX ROOT TRANSPORT (NO SWAPS, OFF-AXIS ONLY) =================
+# Tracks a single complex root z(σ) in upper half-plane by continuation.
+# - Requires y >= YMIN (so it won't snap to real-axis roots)
+# - Uses nearest-in-ℂ matching when reseeding is needed
+# - Reports dy/dσ cleanly if an off-axis root exists in the box
+#
+# If it prints "NO OFF-AXIS ROOT FOUND" across σ, then in this box/continuation there is no escape channel.
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 90
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 16384
+SIGMA0 = 0.06
+DSIGMAS = [-5e-4, -2e-4, -1e-4, -5e-5, -2e-5, -1e-5, 0.0, 1e-5, 2e-5, 5e-5, 1e-4, 2e-4, 5e-4]
+
+# Local box around tc0
+HALF_W = 0.50
+HY_MAX = 0.08
+YMIN   = 5e-4    # enforce truly complex (upper-half-plane), avoids real-axis snapping
+
+# Seed grid (only y>=YMIN)
+NX = 201
+NY = 101
+SEED_TOPK = 8
+
+# Continuation / Newton
+NEWTON_MAXIT = 60
+NEWTON_TOL = 1e-22
+
+EDGE_DROP = 2
+
+# Center choice
+USE_AUTO_TC0 = True
+TC0_HARDCODE = 111.452115
+
+# Optional forcing (if you want): f -> f + A*g + B*g' + C*g''
+USE_FORCING = False
+A_FORCE = 0.0
+B_FORCE = 0.0
+C_FORCE = 0.0
+WIDTH_FORCE = 0.2
+
+# ----------------------------
+# baseline + smoothing
+# ----------------------------
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(mp.mpf(tt))) for tt in t], dtype=np.float64)
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    n = len(f)
+    k = np.fft.fftfreq(n, d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def find_zeros_signchange(t, f):
+    z = []
+    for i in range(len(f)-1):
+        a, b = f[i], f[i+1]
+        if a == 0.0:
+            z.append(t[i])
+        elif a*b < 0.0:
+            ta, tb = t[i], t[i+1]
+            z0 = ta + (0.0 - a) * (tb - ta) / (b - a)
+            z.append(z0)
+    return np.array(z, dtype=np.float64)
+
+def gaussian_real(t, tc, w):
+    return np.exp(-0.5*((t-tc)/w)**2)
+
+def d_gaussian_real(t, tc, w):
+    g = gaussian_real(t, tc, w)
+    return -(t-tc)/(w*w) * g
+
+def dd_gaussian_real(t, tc, w):
+    x = (t-tc)/w
+    return ((x*x - 1.0)/(w*w)) * gaussian_real(t, tc, w)
+
+# ----------------------------
+# FFT analytic continuation (periodic)
+# ----------------------------
+def fft_coeffs(f):
+    return np.fft.fft(f)
+
+def eval_F(Ck, z, L):
+    n = len(Ck)
+    k = (np.fft.fftfreq(n) * n).astype(np.int64)
+    phase = np.exp(1j * 2*np.pi * k * ((z - T0) / L))
+    return np.sum(Ck * phase) / n
+
+def eval_dF(Ck, z, L):
+    n = len(Ck)
+    k = (np.fft.fftfreq(n) * n).astype(np.int64)
+    phase = np.exp(1j * 2*np.pi * k * ((z - T0) / L))
+    factor = (1j * 2*np.pi * k / L)
+    return np.sum(Ck * factor * phase) / n
+
+def newton_complex(Ck, z0, L):
+    z = complex(z0)
+    for _ in range(NEWTON_MAXIT):
+        Fz = eval_F(Ck, z, L)
+        dFz = eval_dF(Ck, z, L)
+        if dFz == 0:
+            return None
+        step = Fz / dFz
+        z1 = z - step
+        if abs(step) < NEWTON_TOL:
+            return z1
+        z = z1
+    if abs(eval_F(Ck, z, L)) < 1e-10:
+        return z
+    return None
+
+# ----------------------------
+# Off-axis seed search in local box (y in [YMIN, HY_MAX])
+# ----------------------------
+def find_offaxis_root(Ck, center, half_w, ymin, hy_max, nx=NX, ny=NY, topk=SEED_TOPK):
+    L = (T1 - T0)
+    xs = np.linspace(center - half_w, center + half_w, nx)
+    ys = np.linspace(ymin, hy_max, ny)
+
+    vals = np.empty((ny, nx), dtype=np.float64)
+    for j, y in enumerate(ys):
+        for i, x in enumerate(xs):
+            z = x + 1j*y
+            vals[j, i] = abs(eval_F(Ck, z, L))
+
+    flat = vals.ravel()
+    idxs = np.argsort(flat)[:topk]
+    seeds = []
+    for idx in idxs:
+        j = idx // nx
+        i = idx % nx
+        seeds.append(xs[i] + 1j*ys[j])
+
+    best = None
+    bestF = np.inf
+    for s in seeds:
+        zr = newton_complex(Ck, s, L)
+        if zr is None:
+            continue
+        if zr.imag < ymin * 0.8 or zr.imag > hy_max * 1.5:
+            continue
+        if abs(zr.real - center) > half_w * 2.0:
+            continue
+        Fzr = abs(eval_F(Ck, zr, L))
+        if Fzr < bestF:
+            bestF = Fzr
+            best = zr
+    return best, bestF
+
+# ----------------------------
+# Build baseline
+# ----------------------------
+t = np.linspace(T0, T1, N, endpoint=False)
+dt = t[1] - t[0]
+L = (T1 - T0)
+
+f_base = siegel_vals(t)
+
+# choose tc0
+if USE_AUTO_TC0:
+    f_sig0 = smooth_fft(f_base, dt, SIGMA0)
+    z0 = find_zeros_signchange(t, f_sig0)
+    z0 = z0[EDGE_DROP:-EDGE_DROP] if len(z0) > 2*EDGE_DROP else z0
+    if len(z0) >= 2:
+        seps = np.diff(z0)
+        kmin = int(np.argmin(np.abs(seps)))
+        tc0 = 0.5*(z0[kmin] + z0[kmin+1])
+    else:
+        tc0 = TC0_HARDCODE
+else:
+    tc0 = TC0_HARDCODE
+
+g0 = gaussian_real(t, tc0, WIDTH_FORCE)
+g1 = d_gaussian_real(t, tc0, WIDTH_FORCE)
+g2 = dd_gaussian_real(t, tc0, WIDTH_FORCE)
+
+print("============== STEP 43B — COMPLEX ROOT TRANSPORT (OFF-AXIS ONLY) ==============")
+print(f"WINDOW=({T0},{T1})  N={N}  dt={dt:.12e}")
+print(f"σ0={SIGMA0}  tc0={tc0:.12f}  HALF_W={HALF_W}  HY_MAX={HY_MAX}  YMIN={YMIN}")
+print(f"USE_FORCING={USE_FORCING}  (A,B,C)=({A_FORCE:.3e},{B_FORCE:.3e},{C_FORCE:.3e})")
+print("-----------------------------------------------------------------------------------")
+
+# ----------------------------
+# Track by continuation: start at σ0, find off-axis root, then walk σ
+# ----------------------------
+def build_Ck(sigma):
+    f = smooth_fft(f_base, dt, sigma)
+    if USE_FORCING:
+        f = f + A_FORCE*g0 + B_FORCE*g1 + C_FORCE*g2
+    return fft_coeffs(f)
+
+# initialize at σ0 (must be off-axis)
+Ck0 = build_Ck(SIGMA0)
+z_init, F_init = find_offaxis_root(Ck0, tc0, HALF_W, YMIN, HY_MAX)
+if z_init is None:
+    print("NO OFF-AXIS ROOT FOUND at σ0 in this box. Increase HY_MAX/HALF_W or move tc0.")
+    print("DONE (STEP 43B)")
+    raise SystemExit
+
+print(f"Init @ σ0: z={z_init.real:.12f}{z_init.imag:+.12f}i  |F|={F_init:.3e}")
+
+# walk σ in order (sorted by σ)
+sigma_list = [SIGMA0 + ds for ds in DSIGMAS]
+order = np.argsort(sigma_list)
+sigma_sorted = [sigma_list[i] for i in order]
+ds_sorted = [DSIGMAS[i] for i in order]
+
+track = []
+z_prev = z_init
+
+for sigma, ds in zip(sigma_sorted, ds_sorted):
+    Ck = build_Ck(sigma)
+
+    # continuation Newton from previous
+    z_try = newton_complex(Ck, z_prev, L)
+    ok = False
+    if z_try is not None:
+        if (abs(z_try.real - tc0) <= HALF_W*1.8) and (z_try.imag >= YMIN*0.8) and (z_try.imag <= HY_MAX*1.8):
+            ok = True
+
+    if ok:
+        z_here = z_try
+        F_here = abs(eval_F(Ck, z_here, L))
+        note = "CONT"
+    else:
+        # reseed in box, but then choose the root closest to previous if multiple candidates appear
+        z_seed, F_seed = find_offaxis_root(Ck, tc0, HALF_W, YMIN, HY_MAX)
+        if z_seed is None:
+            track.append((sigma, ds, np.nan, np.nan, np.nan, "NOROOT"))
+            print(f"ds={ds:+.1e} σ={sigma:.10f} -> NO OFF-AXIS ROOT")
+            continue
+        z_here = z_seed
+        F_here = abs(eval_F(Ck, z_here, L))
+        note = "RESEED"
+
+    track.append((sigma, ds, z_here.real, z_here.imag, F_here, note))
+    z_prev = z_here
+    print(f"ds={ds:+.1e} σ={sigma:.10f}  z={z_here.real:.12f}{z_here.imag:+.12f}i  |F|={F_here:.3e}  {note}")
+
+# sort back to ds-order display (your preference)
+track_sorted_back = sorted(track, key=lambda r: r[1])
+
+# velocities (central diff in σ)
+succ = [(s, ds, x, y) for (s, ds, x, y, Fv, note) in track_sorted_back if np.isfinite(x)]
+if len(succ) < 3:
+    print("\nNot enough off-axis points for velocity estimation.")
+else:
+    sig = np.array([r[0] for r in succ], float)
+    x = np.array([r[2] for r in succ], float)
+    y = np.array([r[3] for r in succ], float)
+
+    dx = np.full_like(x, np.nan)
+    dy = np.full_like(y, np.nan)
+    sp = np.full_like(y, np.nan)
+
+    for i in range(1, len(sig)-1):
+        dsig = sig[i+1] - sig[i-1]
+        if dsig != 0:
+            dx[i] = (x[i+1] - x[i-1]) / dsig
+            dy[i] = (y[i+1] - y[i-1]) / dsig
+            sp[i] = np.sqrt(dx[i]**2 + dy[i]**2)
+
+    print("\n================ VELOCITY (OFF-AXIS TRACK) ================")
+    print("σ            x            y            dx/dσ         dy/dσ         |dz|/dσ")
+    print("----------------------------------------------------------------------------")
+    for i in range(len(sig)):
+        if np.isnan(dx[i]):
+            print(f"{sig[i]:.10f}  {x[i]:.12f}  {y[i]:+.12f}    ---          ---          ---")
+        else:
+            print(f"{sig[i]:.10f}  {x[i]:.12f}  {y[i]:+.12f}  {dx[i]:+.6e}  {dy[i]:+.6e}  {sp[i]:+.6e}")
+
+    j0 = int(np.argmin(np.abs(sig - SIGMA0)))
+    if 0 < j0 < len(sig)-1 and np.isfinite(dy[j0]):
+        print("\n================ SUMMARY @ σ0-neighborhood =================")
+        print(f"closest σ to σ0: σ={sig[j0]:.10f}")
+        print(f"z(σ) ≈ {x[j0]:.12f}{y[j0]:+.12f}i")
+        print(f"Imag velocity dy/dσ ≈ {dy[j0]:+.6e}")
+        print("==========================================================================")
+
+print("\n================ STEP 43B DONE =================")
+
+============== STEP 43B — COMPLEX ROOT TRANSPORT (OFF-AXIS ONLY) ==============
+WINDOW=(60.0,120.0)  N=16384  dt=3.662109375000e-03
+σ0=0.06  tc0=111.453458737186  HALF_W=0.5  HY_MAX=0.08  YMIN=0.0005
+USE_FORCING=False  (A,B,C)=(0.000e+00,0.000e+00,0.000e+00)
+-----------------------------------------------------------------------------------
+Init @ σ0: z=111.798448331407+0.041042100661i  |F|=4.617e-13
+ds=-5.0e-04 σ=0.0595000000  z=111.796397328265+0.040287840222i  |F|=4.618e-13  CONT
+ds=-2.0e-04 σ=0.0598000000 -> NO OFF-AXIS ROOT
+ds=-1.0e-04 σ=0.0599000000  z=111.798254146845+0.040329611583i  |F|=4.032e-13  CONT
+ds=-5.0e-05 σ=0.0599500000  z=111.799333109459+0.041544678995i  |F|=4.073e-13  CONT
+ds=-2.0e-05 σ=0.0599800000  z=111.797584676676+0.041288874298i  |F|=1.596e-13  CONT
+ds=-1.0e-05 σ=0.0599900000  z=111.798856877195+0.041022480305i  |F|=5.329e-13  CONT
+ds=+0.0e+00 σ=0.0600000000  z=111.798448331407+0.041042100661i  |F|=4.617e-13  CONT
+ds=+1.0e-05 σ=0.0600100000  z=111.797017297972+0.041150042337i  |F|=2.823e-13  CONT
+ds=+2.0e-05 σ=0.0600200000  z=111.798596517268+0.039646599505i  |F|=2.886e-13  CONT
+ds=+5.0e-05 σ=0.0600500000  z=111.798591702837+0.040219675206i  |F|=2.699e-13  CONT
+ds=+1.0e-04 σ=0.0601000000 -> NO OFF-AXIS ROOT
+ds=+2.0e-04 σ=0.0602000000  z=111.799042365356+0.040662072306i  |F|=4.347e-13  CONT
+ds=+5.0e-04 σ=0.0605000000  z=111.863511477706+0.040226873396i  |F|=6.540e-14  RESEED
+
+================ VELOCITY (OFF-AXIS TRACK) ================
+σ            x            y            dx/dσ         dy/dσ         |dz|/dσ
+----------------------------------------------------------------------------
+0.0595000000  111.796397328265  +0.040287840222    ---          ---          ---
+0.0599000000  111.798254146845  +0.040329611583  +6.523958e+00  +2.792975e+00  +7.096671e+00
+0.0599500000  111.799333109459  +0.041544678995  -8.368377e+00  +1.199078e+01  +1.462220e+01
+0.0599800000  111.797584676676  +0.041288874298  -1.190581e+01  -1.305497e+01  +1.766863e+01
+0.0599900000  111.798856877195  +0.041022480305  +4.318274e+01  -1.233868e+01  +4.491093e+01
+0.0600000000  111.798448331407  +0.041042100661  -9.197896e+01  +6.378102e+00  +9.219983e+01
+0.0600100000  111.797017297972  +0.041150042337  +7.409293e+00  -6.977506e+01  +7.016735e+01
+0.0600200000  111.798596517268  +0.039646599505  +3.936012e+01  -2.325918e+01  +4.571880e+01
+0.0600500000  111.798591702837  +0.040219675206  +2.476934e+00  +5.641516e+00  +6.161323e+00
+0.0602000000  111.799042365356  +0.040662072306  +1.442662e+02  +1.599598e-02  +1.442662e+02
+0.0605000000  111.863511477706  +0.040226873396    ---          ---
+
+          ---
+
+================ SUMMARY @ σ0-neighborhood =================
+closest σ to σ0: σ=0.0600000000
+z(σ) ≈ 111.798448331407+0.041042100661i
+Imag velocity dy/dσ ≈ +6.378102e+00
+==========================================================================
+
+================ STEP 43B DONE =================
+
+# ================= STEP 45 — BRANCH-LOCKED COMPLEX TRANSPORT (predictor–corrector, jump rejection) =================
+# Single cell. Self-contained.
+#
+# Goal:
+# Track ONE off-axis zero z(σ) near tc0 with continuity, rejecting sheet-jumps.
+# Then estimate dy/dσ near σ0 using only "accepted" steps.
+#
+# Key upgrades vs Step 43B/44:
+# - Predictor–corrector: z_pred = z_prev + v_prev * dσ
+# - Newton corrector from z_pred
+# - Hard jump rejection: reject if |z_new - z_prev| > JUMP_MAX
+# - Soft rejection: reject if |F(z_new)| not small or imag drops below YMIN
+# - If rejected: local reseed near z_prev (not global box), then retry
+#
+# Output:
+# - Accepted track table
+# - Robust dy/dσ estimate around σ0 using nearest accepted neighbors
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 16384
+EDGE_DROP = 2
+
+SIGMA0 = 0.06
+DSIGMAS = [-5e-4, -2e-4, -1e-4, -5e-5, -2e-5, -1e-5, 0.0, 1e-5, 2e-5, 5e-5, 1e-4, 2e-4, 5e-4]
+
+# Midpoint neighborhood + off-axis band
+HALF_W = 0.5
+YMIN  = 5e-4
+YMAX  = 0.08
+
+# Local reseed radius around previous root (branch-lock)
+RESEED_R = 0.08
+RESEED_NX = 5
+RESEED_NY = 5
+
+# Newton
+NEWTON_MAXIT = 60
+NEWTON_TOL_F = 1e-12
+NEWTON_TOL_DZ = 1e-12
+STEP_CLIP = 0.25
+DAMP = 1.0
+
+# Acceptance / jump rejection
+JUMP_MAX = 0.20          # if |Δz| > this between adjacent σ points -> reject as sheet jump
+F_OK_MAX = 1e-10         # require small |F(z)| after Newton
+ALLOW_RESEED = True
+
+# Velocity smoothing
+VEL_EPS = 1e-6            # to avoid division by zero
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    out = np.empty_like(t, dtype=float)
+    for i, tt in enumerate(t):
+        out[i] = float(mp.siegelz(tt))
+    return out
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    n = len(f)
+    freq = np.fft.fftfreq(n, d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*freq*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def closest_pair_center_refined(t, f, edge_drop=2):
+    # bracket sign changes
+    brackets = []
+    for i in range(len(f)-1):
+        if f[i]*f[i+1] < 0:
+            brackets.append((t[i], t[i+1]))
+    if len(brackets) < 2*edge_drop + 2:
+        raise RuntimeError("Not enough sign-change brackets to refine roots.")
+    brackets = brackets[edge_drop:-edge_drop]
+
+    finterp = lambda x: float(np.interp(x, t, f))
+    roots = []
+    for a,b in brackets:
+        fa, fb = finterp(a), finterp(b)
+        if fa*fb > 0:
+            continue
+        # bisection
+        lo, hi = float(a), float(b)
+        flo, fhi = fa, fb
+        for _ in range(70):
+            mid = 0.5*(lo+hi)
+            fm = finterp(mid)
+            if fm == 0:
+                lo = hi = mid
+                break
+            if flo*fm < 0:
+                hi, fhi = mid, fm
+            else:
+                lo, flo = mid, fm
+        roots.append(0.5*(lo+hi))
+
+    roots = np.array(roots, float)
+    roots.sort()
+    if len(roots) < 2:
+        raise RuntimeError("Refined roots < 2.")
+    seps = roots[1:] - roots[:-1]
+    j = int(np.argmin(seps))
+    z1, z2 = roots[j], roots[j+1]
+    return z1, z2, 0.5*(z1+z2), float(z2-z1), roots
+
+def fft_continuation_builder(t, fs):
+    n = len(fs)
+    dt = float(t[1]-t[0])
+    t0 = float(t[0])
+    freq = np.fft.fftfreq(n, d=dt)
+    a = np.fft.fft(fs) / n
+    w = 2j*np.pi*freq
+
+    def F(z):
+        zc = complex(z)
+        ex = np.exp(w*(zc - t0))
+        return complex(np.sum(a * ex))
+
+    def dF(z):
+        zc = complex(z)
+        ex = np.exp(w*(zc - t0))
+        return complex(np.sum(a * (w * ex)))
+
+    return F, dF
+
+def newton_root(F, dF, z0):
+    z = complex(z0)
+    for _ in range(NEWTON_MAXIT):
+        fz = F(z)
+        if abs(fz) < NEWTON_TOL_F:
+            return z, True, abs(fz)
+        dfz = dF(z)
+        if dfz == 0:
+            return z, False, abs(fz)
+        dz = -fz/dfz
+        if abs(dz) > STEP_CLIP:
+            dz = dz * (STEP_CLIP/abs(dz))
+        z_new = z + DAMP*dz
+        if abs(z_new - z) < NEWTON_TOL_DZ and abs(F(z_new)) < NEWTON_TOL_F*10:
+            return z_new, True, abs(F(z_new))
+        z = z_new
+    return z, False, abs(F(z))
+
+def unique_roots(roots, tol=1e-6):
+    out = []
+    for r in roots:
+        ok = True
+        for q in out:
+            if abs(r-q) < tol:
+                ok = False
+                break
+        if ok:
+            out.append(r)
+    return out
+
+def local_reseed(F, dF, z_center, r=RESEED_R, ymin=YMIN, ymax=YMAX, nx=RESEED_NX, ny=RESEED_NY):
+    # Search a small grid around z_center to find a converged off-axis root
+    xc, yc = z_center.real, abs(z_center.imag)
+    xs = np.linspace(xc-r, xc+r, nx)
+    ys = np.linspace(max(ymin, yc-r), min(ymax, yc+r), ny)
+    cands = []
+    for x in xs:
+        for y in ys:
+            z0 = complex(x, y)
+            z, ok, ferr = newton_root(F, dF, z0)
+            if ok and abs(z.imag) >= ymin:
+                cands.append((ferr, z))
+    if not cands:
+        return None
+    cands.sort(key=lambda p: (p[0], abs(p[1]-z_center)))
+    return cands[0][1]
+
+# ----------------------------
+# BUILD
+# ----------------------------
+t = np.linspace(T0, T1, N, endpoint=False)
+dt = float(t[1]-t[0])
+
+f0 = siegel_vals(t)
+fs0 = smooth_fft(f0, dt, SIGMA0)
+
+z1, z2, tc0, sep0, roots_ref = closest_pair_center_refined(t, fs0, edge_drop=EDGE_DROP)
+
+print("================ STEP 45 — BRANCH-LOCKED COMPLEX TRANSPORT =================")
+print(f"WINDOW=({T0},{T1})  N={N}  dt={dt:.12e}")
+print(f"σ0={SIGMA0}  closest refined pair: z1={z1:.9f}  z2={z2:.9f}  sep0={sep0:.6e}  tc0={tc0:.9f}")
+print(f"Search band: x∈[{tc0-HALF_W},{tc0+HALF_W}]  y∈[{YMIN},{YMAX}]")
+print("--------------------------------------------------------------------------")
+
+# Seed off-axis root at sigma0: try local search around tc0, then around z1
+Fseed, dFseed = fft_continuation_builder(t, fs0)
+
+seed = local_reseed(Fseed, dFseed, complex(tc0, 0.04), r=HALF_W, ymin=YMIN, ymax=YMAX, nx=9, ny=9)
+if seed is None:
+    seed = local_reseed(Fseed, dFseed, complex(z1, 0.04), r=HALF_W, ymin=YMIN, ymax=YMAX, nx=9, ny=9)
+if seed is None:
+    raise RuntimeError("Failed to find any off-axis seed at σ0. Increase HALF_W/YMAX or change initial imag guess.")
+
+seed, ok, ferr = newton_root(Fseed, dFseed, seed)
+if not ok:
+    raise RuntimeError("Seed Newton failed at σ0; try increasing NEWTON_MAXIT or reducing STEP_CLIP.")
+
+print(f"Seed @σ0: z0={seed.real:.12f}{seed.imag:+.12f}i  |F|={ferr:.3e}")
+
+# ----------------------------
+# TRACK
+# ----------------------------
+track = []  # (sigma, z, |F|, tag)
+v_prev = 0+0j
+
+# We'll do σ in ascending order, but keep original DSIGMAS ordering for print at end.
+sig_list = [SIGMA0 + ds for ds in DSIGMAS]
+order = np.argsort(sig_list)
+sig_sorted = [sig_list[i] for i in order]
+
+# initialize at nearest sigma0 in sorted list (should be exact)
+z_at = {SIGMA0: seed}
+
+# forward/backward from σ0
+def step_to(s_from, z_from, v_from, s_to):
+    ds = float(s_to - s_from)
+    sigma = float(s_to)
+
+    fs = smooth_fft(f0, dt, sigma)
+    F, dF = fft_continuation_builder(t, fs)
+
+    # predictor
+    z_pred = z_from + v_from*ds
+
+    z_new, ok, ferr = newton_root(F, dF, z_pred)
+    if ok and (abs(z_new.imag) >= YMIN) and (abs(z_new - z_from) <= JUMP_MAX) and (ferr <= F_OK_MAX):
+        v_new = (z_new - z_from) / (ds + np.sign(ds)*VEL_EPS)
+        return z_new, v_new, ferr, "CONT"
+
+    # try local reseed near previous if allowed
+    if ALLOW_RESEED:
+        z_rs = local_reseed(F, dF, z_from, r=RESEED_R, ymin=YMIN, ymax=YMAX, nx=RESEED_NX, ny=RESEED_NY)
+        if z_rs is not None:
+            z_new2, ok2, ferr2 = newton_root(F, dF, z_rs)
+            if ok2 and (abs(z_new2.imag) >= YMIN) and (abs(z_new2 - z_from) <= JUMP_MAX) and (ferr2 <= F_OK_MAX):
+                v_new2 = (z_new2 - z_from) / (ds + np.sign(ds)*VEL_EPS)
+                return z_new2, v_new2, ferr2, "RESEED_OK"
+
+    return None, 0j, np.nan, "REJECT"
+
+# walk forward from σ0
+sig_sorted_unique = sorted(set(sig_sorted))
+i0 = sig_sorted_unique.index(SIGMA0)
+
+# forward
+z_cur, v_cur, s_cur = seed, 0j, SIGMA0
+accepted = {SIGMA0: (seed, ferr, "SEED")}
+for s_to in sig_sorted_unique[i0+1:]:
+    z_new, v_new, ferr_new, tag = step_to(s_cur, z_cur, v_cur, s_to)
+    if z_new is None:
+        accepted[s_to] = (None, np.nan, tag)
+        # do not update z_cur/v_cur/s_cur on reject
+        continue
+    accepted[s_to] = (z_new, ferr_new, tag)
+    z_cur, v_cur, s_cur = z_new, v_new, s_to
+
+# backward
+z_cur, v_cur, s_cur = seed, 0j, SIGMA0
+for s_to in reversed(sig_sorted_unique[:i0]):
+    z_new, v_new, ferr_new, tag = step_to(s_cur, z_cur, v_cur, s_to)
+    if z_new is None:
+        accepted[s_to] = (None, np.nan, tag)
+        continue
+    accepted[s_to] = (z_new, ferr_new, tag)
+    z_cur, v_cur, s_cur = z_new, v_new, s_to
+
+# print in original DSIGMAS order
+print("\n================ TRACK (branch-locked) =================")
+print("dsigma |   σ          | z(real)        z(imag)        | |F|        | status")
+print("--------------------------------------------------------------------------------")
+for ds in DSIGMAS:
+    s = float(SIGMA0 + ds)
+    z, ferr, tag = accepted.get(s, (None, np.nan, "MISSING"))
+    if z is None:
+        print(f"{ds:+.1e} | {s:.10f} |    ---          ---         |    ---      | {tag}")
+    else:
+        print(f"{ds:+.1e} | {s:.10f} | {z.real: .12f} {z.imag:+.12f} | {ferr: .3e} | {tag}")
+
+# ----------------------------
+# ROBUST dy/dσ near σ0 from nearest accepted neighbors
+# ----------------------------
+sig_ok = sorted([s for s,(z,_,_) in accepted.items() if (z is not None)])
+idx0 = sig_ok.index(SIGMA0)
+
+def nearest_neighbor(idx, direction):
+    # direction = -1 or +1
+    j = idx + direction
+    while 0 <= j < len(sig_ok):
+        s = sig_ok[j]
+        z, ferr, tag = accepted[s]
+        if z is not None:
+            return s, z
+        j += direction
+    return None, None
+
+sL, zL = nearest_neighbor(idx0, -1)
+sR, zR = nearest_neighbor(idx0, +1)
+
+print("\n================ VELOCITY ESTIMATE @ σ0 =================")
+if (sL is None) or (sR is None):
+    print("Not enough accepted neighbors around σ0 to estimate dy/dσ.")
+else:
+    dsd = float(sR - sL)
+    dx = (zR.real - zL.real) / dsd
+    dy = (zR.imag - zL.imag) / dsd
+    print(f"Using σL={sL:.10f}, σR={sR:.10f} (Δσ={dsd:.3e})")
+    print(f"dy/dσ ≈ {dy:+.6e}   (dx/dσ ≈ {dx:+.6e})")
+    print("Interpretation:")
+    print(" • dy/dσ > 0  : off-axis root lifts upward as σ increases")
+    print(" • dy/dσ < 0  : off-axis root moves downward as σ increases")
+    print(" • dy/dσ ~ 0  : locally pinned / no imaginary transport")
+
+print("\nDONE (STEP 45).")
+
+================ STEP 45 — BRANCH-LOCKED COMPLEX TRANSPORT =================
+WINDOW=(60.0,120.0)  N=16384  dt=3.662109375000e-03
+σ0=0.06  closest refined pair: z1=111.038315534  z2=111.868601940  sep0=8.302864e-01  tc0=111.453458737
+Search band: x∈[110.95345873718628,111.95345873718628]  y∈[0.0005,0.08]
+--------------------------------------------------------------------------
+Seed @σ0: z0=111.078412741672+0.040483123927i  |F|=2.593e-13
+
+================ TRACK (branch-locked) =================
+dsigma |   σ          | z(real)        z(imag)        | |F|        | status
+--------------------------------------------------------------------------------
+-5.0e-04 | 0.0595000000 |  110.737839902937 +0.043506307448 |  6.528e-13 | RESEED_OK
+-2.0e-04 | 0.0598000000 |  110.827588147128 +0.041652421221 |  4.038e-13 | RESEED_OK
+-1.0e-04 | 0.0599000000 |  110.827087128665 +0.042742274564 |  2.257e-12 | CONT
+-5.0e-05 | 0.0599500000 |  110.982330551280 +0.041011913126 |  2.552e-13 | CONT
+-2.0e-05 | 0.0599800000 |  111.078627100410 +0.040053296245 |  2.974e-13 | CONT
+-1.0e-05 | 0.0599900000 |  111.079809458880 +0.041025159470 |  4.225e-13 | CONT
++0.0e+00 | 0.0600000000 |  111.078412741672 +0.040483123927 |  2.593e-13 | SEED
++1.0e-05 | 0.0600100000 |  111.077778022150 +0.040910706291 |  1.976e-13 | CONT
++2.0e-05 | 0.0600200000 |  111.078786805234 +0.039259776310 |  4.270e-13 | CONT
++5.0e-05 | 0.0600500000 |  111.078161608178 +0.039480370837 |  4.940e-14 | RESEED_OK
++1.0e-04 | 0.0601000000 |  111.076615515642 +0.040481981913 |  2.606e-13 | CONT
++2.0e-04 | 0.0602000000 |  110.995065944096 +0.040700325355 |  5.107e-14 | RESEED_OK
++5.0e-04 | 0.0605000000 |  111.073645582281 +0.040203656827 |  1.177e-13 | RESEED_OK
+
+================ VELOCITY ESTIMATE @ σ0 =================
+Using σL=0.0599900000, σR=0.0600100000 (Δσ=2.000e-05)
+dy/dσ ≈ -5.722659e+00   (dx/dσ ≈ -1.015718e+02)
+Interpretation:
+ • dy/dσ > 0  : off-axis root lifts upward as σ increases
+ • dy/dσ < 0  : off-axis root moves downward as σ increases
+ • dy/dσ ~ 0  : locally pinned / no imaginary transport
+
+DONE (STEP 45).
+
+
+
+# ================= STEP 48 — LOCAL NO-ESCAPE (ARGUMENT PRINCIPLE CERTIFICATION) =================
+# We certify that NO off-axis zeros exist in a specified complex tube
+# around the closest real pair at σ0, using winding numbers.
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 70
+
+# ----------------------------
+# CONFIG (reuse from Step 47)
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 16384
+SIGMA0 = 0.06
+
+HALF_W = 0.6          # x half-width around tc0 (can increase safely)
+YMAX   = 0.10         # imaginary height of tube
+NBOUND = 8192
+MINF_THRESH = 1e-8
+
+# ----------------------------
+# Real grid + smoothed function
+# ----------------------------
+t = np.linspace(T0, T1, N, endpoint=False)
+dt = float(t[1]-t[0])
+
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(tt)) for tt in t], dtype=float)
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    k = np.fft.fftfreq(len(f), d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+f0 = siegel_vals(t)
+fs0 = smooth_fft(f0, dt, SIGMA0)
+
+# ----------------------------
+# Locate closest real pair (grid + refine)
+# ----------------------------
+def grid_signchange_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i]*f[i+1] < 0:
+            z.append(t[i])
+    return np.array(z)
+
+zgrid = grid_signchange_zeros(t, fs0)
+
+best = None
+for i in range(len(zgrid)-1):
+    sep = zgrid[i+1] - zgrid[i]
+    if best is None or sep < best[0]:
+        best = (sep, zgrid[i], zgrid[i+1])
+
+sep0, z1g, z2g = best
+tc0 = 0.5*(z1g + z2g)
+
+print("Closest real pair:")
+print(f"  z1≈{z1g:.12f}  z2≈{z2g:.12f}")
+print(f"  sep≈{sep0:.6e}  tc0≈{tc0:.12f}")
+print(f"  sep/dt≈{sep0/dt:.2f}")
+
+# ----------------------------
+# Periodic analytic continuation (as in Step 47)
+# ----------------------------
+class PeriodicAnalytic:
+    def __init__(self, t0, t1, f_real):
+        self.t0 = mp.mpf(t0)
+        self.L  = mp.mpf(t1 - t0)
+        self.n  = len(f_real)
+
+        Fhat = np.fft.fft(f_real) / self.n
+        self.Fhat = [mp.mpc(c.real, c.imag) for c in Fhat]
+
+        k = np.fft.fftfreq(self.n) * self.n
+        self.k = [mp.mpf(int(round(kk))) for kk in k]
+
+    def eval(self, z):
+        w = (z - self.t0) / self.L
+        s = mp.mpc(0)
+        for ck, kk in zip(self.Fhat, self.k):
+            s += ck * mp.e**(2*mp.pi*1j*kk*w)
+        return s
+
+F = PeriodicAnalytic(T0, T1, fs0)
+
+# ----------------------------
+# Winding number in a rectangular tube
+# ----------------------------
+def winding_in_tube(F, xc, hw, ymax, nbound=NBOUND):
+    pts = []
+    m = nbound//4
+
+    # bottom edge (just above real axis)
+    for i in range(m):
+        x = xc - hw + 2*hw*i/(m-1)
+        pts.append(mp.mpc(x, 0.0))
+
+    # right edge
+    for i in range(m):
+        y = ymax*i/(m-1)
+        pts.append(mp.mpc(xc+hw, y))
+
+    # top edge
+    for i in range(m):
+        x = xc + hw - 2*hw*i/(m-1)
+        pts.append(mp.mpc(x, ymax))
+
+    # left edge
+    for i in range(m):
+        y = ymax - ymax*i/(m-1)
+        pts.append(mp.mpc(xc-hw, y))
+
+    vals = []
+    minabs = mp.inf
+    for z in pts:
+        v = F.eval(z)
+        vals.append(v)
+        minabs = min(minabs, abs(v))
+
+    if minabs < MINF_THRESH:
+        return None, float(minabs), "LOWMIN"
+
+    args = [mp.arg(v) for v in vals]
+    total = mp.mpf(0)
+    for i in range(1, len(args)):
+        da = args[i] - args[i-1]
+        while da <= -mp.pi: da += 2*mp.pi
+        while da >  mp.pi: da -= 2*mp.pi
+        total += da
+
+    winding = int(mp.nint(total/(2*mp.pi)))
+    return winding, float(minabs), "OK"
+
+# ----------------------------
+# Execute no-escape test
+# ----------------------------
+w, minf, status = winding_in_tube(F, tc0, HALF_W, YMAX)
+
+print("\n================ NO-ESCAPE TEST =================")
+print(f"x-band = [{tc0-HALF_W:.3f}, {tc0+HALF_W:.3f}]")
+print(f"y-band = [0, {YMAX:.3f}]")
+print(f"winding = {w}")
+print(f"min|F| on boundary = {minf:.3e}")
+print(f"status = {status}")
+
+if status == "OK" and w == 0:
+    print("\nCERTIFIED RESULT:")
+    print("• No off-axis zeros exist in this tube.")
+    print("• Any σ-obstruction here is purely real-axis.")
+    print("• Complex escape channel is topologically forbidden locally.")
+elif status == "OK":
+    print("\nWARNING:")
+    print("• Nonzero winding detected — off-axis zeros exist.")
+else:
+    print("\nWARNING:")
+    print("• Boundary grazes zeros — adjust HALF_W / YMAX.")
+
+print("\n================ STEP 48 DONE =================")
+
+Closest real pair:
+  z1≈60.076904296875  z2≈60.823974609375
+  sep≈7.470703e-01  tc0≈60.450439453125
+  sep/dt≈204.00
+
+================ NO-ESCAPE TEST =================
+x-band = [59.850, 61.050]
+y-band = [0, 0.100]
+winding = 163
+min|F| on boundary = 1.284e-04
+status = OK
+
+WARNING:
+• Nonzero winding detected — off-axis zeros exist.
+
+================ STEP 48 DONE =================
