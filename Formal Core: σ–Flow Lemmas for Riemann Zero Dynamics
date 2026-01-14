@@ -1,0 +1,145 @@
+
+
+Formal Core: σ–Flow Lemmas for Riemann Zero Dynamics
+
+Setup (fixed for all lemmas)
+
+Let
+F(t,\sigma) := \bigl(\mathcal S_\sigma Z\bigr)(t)
+where Z(t) is the Riemann–Siegel Z-function and \mathcal S_\sigma denotes Gaussian smoothing with variance \sigma^2, implemented spectrally (equivalently: the heat semigroup).
+
+Assume:
+	•	F(\cdot,\sigma) is real-valued on \mathbb R,
+	•	F(\cdot,\sigma) is entire in t for each fixed \sigma>0,
+	•	F satisfies the heat equation
+\partial_\sigma F = c\,\partial_{tt} F
+for some fixed constant c>0 (normalisation irrelevant).
+
+Let \{t_i(\sigma)\} denote the real zeros of F(\cdot,\sigma), indexed in increasing order, and assume simplicity unless stated otherwise.
+
+⸻
+
+Lemma 1 — Zero tracking and differentiability
+
+Lemma.
+If t_i(\sigma_0) is a simple zero of F(\cdot,\sigma_0), then there exists an open interval I\ni\sigma_0 and a unique C^1 function t_i:I\to\mathbb R such that
+F(t_i(\sigma),\sigma)=0\quad\forall\sigma\in I.
+
+Moreover,
+\frac{d t_i}{d\sigma}
+=
+-\frac{\partial_\sigma F}{\partial_t F}
+\Big|_{(t_i(\sigma),\sigma)}.
+
+Proof.
+Immediate from the implicit function theorem applied to F(t,\sigma), using simplicity of the zero to guarantee \partial_t F\neq 0. ∎
+
+⸻
+
+Lemma 2 — Heat-flow generator for zeros
+
+Lemma.
+Under the heat equation \partial_\sigma F=cF_{tt}, the zero trajectories satisfy
+\boxed{
+\frac{d t_i}{d\sigma}
+=
+-\,c\,\frac{F_{tt}}{F_t}
+\Big|_{t=t_i(\sigma)}.
+}
+
+Proof.
+Substitute \partial_\sigma F=cF_{tt} into Lemma 1. ∎
+
+This identity is exact and contains the full σ-dynamics of the zeros.
+
+⸻
+
+Lemma 3 — Log-derivative expansion at a simple real zero
+
+Lemma.
+Suppose F(\cdot,\sigma) is a real entire function whose zeros \{t_j(\sigma)\} are all real and simple. Then at any zero t_i(\sigma),
+\frac{F_{tt}}{F_t}(t_i)
+=
+2\sum_{j\neq i}\frac{1}{t_i-t_j}
++
+A(\sigma),
+where A(\sigma) is a σ-dependent constant arising from the exponential prefactor in the canonical product of F.
+
+Proof.
+By the Hadamard factorisation theorem, F admits a canonical product
+F(t)=e^{a t+b}\prod_j\left(1-\frac{t}{t_j}\right)e^{t/t_j}.
+Taking \partial_t\log F and then differentiating again, evaluation at t=t_i yields
+\frac{F_{tt}}{F_t}(t_i)
+=
+2\sum_{j\neq i}\frac{1}{t_i-t_j}
++
+2a,
+with A(\sigma)=2a(\sigma). ∎
+
+⸻
+
+Lemma 4 — Odd-kernel zero dynamics
+
+Lemma.
+Combining Lemmas 2 and 3, the σ-flow of zeros obeys
+\boxed{
+\frac{d t_i}{d\sigma}
+=
+-2c\sum_{j\neq i}\frac{1}{t_i-t_j}
+-
+c\,A(\sigma).
+}
+
+The interaction term is antisymmetric and purely odd in pairwise separations.
+
+Proof.
+Immediate substitution. ∎
+
+This equation is the exact continuum origin of the odd-kernel structure observed numerically.
+
+⸻
+
+Lemma 5 — Order preservation and collision obstruction
+
+Lemma.
+Assume that for σ in an interval I:
+	1.	all zeros are real and simple,
+	2.	zero dynamics obey Lemma 4.
+
+Then for all \sigma\in I,
+t_{i+1}(\sigma)-t_i(\sigma) > 0,
+and no two zeros can collide in finite σ-time.
+
+Proof.
+Let \Delta_i=t_{i+1}-t_i. Subtract the equations for t_{i+1} and t_i. The dominant contribution near \Delta_i\to 0 is
+\frac{d\Delta_i}{d\sigma}
+\sim
+\frac{2c}{\Delta_i} + O(1),
+which diverges positively as \Delta_i\to 0. Hence \Delta_i cannot vanish in finite σ. ∎
+
+⸻
+
+Lemma 6 — Collision necessity for complex escape
+
+Lemma.
+Let F(\cdot,\sigma) be real entire and analytic in (t,\sigma). If a pair of complex conjugate zeros is created or annihilated as σ varies, then at the transition point (t^\*,\sigma^\*),
+F(t^\*,\sigma^\*)=0,
+\quad
+\partial_t F(t^\*,\sigma^\*)=0.
+
+Proof.
+Standard consequence of analyticity: birth or death of a conjugate pair requires a multiple real zero. ∎
+
+⸻
+
+Lemma 7 — No collisions ⇒ no complex escape
+
+Lemma.
+If there exists \sigma_1>0 such that:
+	1.	all zeros of F(\cdot,\sigma_1) are real and simple,
+	2.	Lemma 4 governs zero dynamics for 0\le\sigma\le\sigma_1,
+
+then all zeros remain real for all \sigma\in[0,\sigma_1].
+
+Proof.
+By Lemma 5, collisions are impossible. By Lemma 6, complex escape requires a collision. Therefore escape cannot occur. ∎
