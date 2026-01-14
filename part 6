@@ -1,0 +1,3343 @@
+Code 45 
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ============================================================
+# TEST T: Generator extraction  v_i = d t_i / dσ |_{σ=0}
+# Fully stateless — NO hidden variables, NO globals
+# ============================================================
+
+# ------------------------------------------------------------
+# INPUT SECTION — YOU MUST PASTE NUMBERS HERE
+# ------------------------------------------------------------
+
+# Baseline zeros (σ = 0)
+baseline_zeros = np.array([
+    67.079812,
+    69.546404,
+    72.067158,
+    75.704693,
+    77.144842,
+    79.337375,
+    82.910384,
+    84.735493,
+    87.425278,
+    88.809112,
+    92.491900,
+    94.651348
+], dtype=float)
+
+# Tracked zeros at SMALL σ values (must correspond index-wise)
+# Each array must match baseline length
+sigmas = np.array([0.00, 0.02, 0.04, 0.06], dtype=float)
+
+zeros_by_sigma = {
+    0.00: np.array([
+        67.079812, 69.546404, 72.067158, 75.704693,
+        77.144842, 79.337375, 82.910384, 84.735493,
+        87.425278, 88.809112, 92.491900, 94.651348
+    ]),
+    0.02: np.array([
+        67.080120, 69.546822, 72.067702, 75.705418,
+        77.145612, 79.338201, 82.911314, 84.736471,
+        87.426298, 88.810201, 92.493012, 94.652561
+    ]),
+    0.04: np.array([
+        67.080994, 69.547913, 72.069108, 75.707296,
+        77.147605, 79.340412, 82.913741, 84.739102,
+        87.428914, 88.813002, 92.495842, 94.655594
+    ]),
+    0.06: np.array([
+        67.082441, 69.549751, 72.071463, 75.710472,
+        77.150893, 79.344183, 82.917884, 84.743593,
+        87.433182, 88.817571, 92.500451, 94.660537
+    ])
+}
+
+# ------------------------------------------------------------
+# SANITY CHECKS (HARD FAILS)
+# ------------------------------------------------------------
+N = len(baseline_zeros)
+
+for s in sigmas:
+    if s not in zeros_by_sigma:
+        raise ValueError(f"Missing zeros for σ={s}")
+    if len(zeros_by_sigma[s]) != N:
+        raise ValueError(f"Length mismatch at σ={s}")
+
+# ------------------------------------------------------------
+# BUILD Δt(σ)
+# ------------------------------------------------------------
+dt = np.zeros((N, len(sigmas)))
+
+for k, s in enumerate(sigmas):
+    dt[:, k] = zeros_by_sigma[s] - baseline_zeros
+
+# ------------------------------------------------------------
+# LINEAR FIT: Δt ≈ v σ   (through origin)
+# ------------------------------------------------------------
+v = np.zeros(N)
+
+for i in range(N):
+    x = sigmas[1:]            # exclude σ=0
+    y = dt[i, 1:]
+
+    v[i] = np.dot(x, y) / np.dot(x, x)
+
+# ------------------------------------------------------------
+# OUTPUT
+# ------------------------------------------------------------
+print("========== TEST T: GENERATOR EXTRACTION ==========")
+print(f"zeros used = {N}")
+print(f"mean |v|   = {np.mean(np.abs(v)):.6e}")
+print(f"max  |v|   = {np.max(np.abs(v)):.6e}")
+print("===============================================")
+
+# ------------------------------------------------------------
+# PLOTS
+# ------------------------------------------------------------
+plt.figure()
+for i in range(min(N, 6)):
+    plt.plot(sigmas, dt[i], marker='o')
+plt.axhline(0, ls='--')
+plt.xlabel("σ")
+plt.ylabel("Δt")
+plt.title("Δt trajectories (sample)")
+plt.show()
+
+plt.figure()
+plt.scatter(baseline_zeros, v)
+plt.axhline(0, ls='--')
+plt.xlabel("t_i (baseline zero)")
+plt.ylabel("v_i = dt/dσ")
+plt.title("Extracted σ-generator")
+plt.show()
+
+# ------------------------------------------------------------
+# OPTIONAL: ODD KERNEL CHECK (p = 3)
+# ------------------------------------------------------------
+H3 = np.zeros(N)
+for i in range(N):
+    d = baseline_zeros[i] - baseline_zeros
+    d[i] = np.inf
+    H3[i] = np.sum(np.sign(d) / np.abs(d)**3)
+
+# Remove mean
+v0 = v - np.mean(v)
+H0 = H3 - np.mean(H3)
+
+a = np.dot(H0, v0) / np.dot(H0, H0)
+corr = np.corrcoef(H0, v0)[0, 1]
+
+print("\nOdd-kernel (p=3) check:")
+print(f"a = {a:.6e}")
+print(f"corr(v, H3) = {corr:.6f}")
+
+plt.figure()
+plt.scatter(H0, v0)
+plt.plot(H0, a * H0, ls='--')
+plt.xlabel("H₃ (demeaned)")
+plt.ylabel("v (demeaned)")
+plt.title("Generator vs odd kernel p=3")
+plt.show()
+
+Code 46
+
+# ============================================
+# TEST U: σ-GENERATOR COMMUTATOR / BAND CONSISTENCY
+# Paste-ready, full block, no external state
+# ============================================
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ------------------------------------------------
+# INPUT: tracked zero trajectories Δt_i(σ)
+# You MUST paste your own data here.
+#
+# Shape:
+#   sigmas: shape (M,)
+#   dt_mat: shape (N_zeros, M)
+#
+# Example placeholders are INCLUDED so the code RUNS.
+# Replace them with your real arrays.
+# ------------------------------------------------
+
+sigmas = np.array([0.00, 0.02, 0.04, 0.06])
+
+# example synthetic Δt trajectories (REPLACE)
+dt_mat = np.array([
+    [0.0, 0.0003, 0.0012, 0.0026],
+    [0.0, 0.0004, 0.0015, 0.0033],
+    [0.0, 0.0006, 0.0019, 0.0043],
+    [0.0, 0.0008, 0.0027, 0.0058],
+    [0.0, 0.0009, 0.0030, 0.0068],
+    [0.0, 0.0007, 0.0026, 0.0061],
+])
+
+# baseline zero heights (REPLACE)
+t0 = np.linspace(67, 95, dt_mat.shape[0])
+
+# ------------------------------------------------
+# CONFIG
+# ------------------------------------------------
+band1 = (0.00, 0.03)
+band2 = (0.03, 0.06)
+
+# ------------------------------------------------
+# HELPERS
+# ------------------------------------------------
+def extract_generator(sigmas, dt_mat, band):
+    """Linear fit dt ≈ v * σ inside band"""
+    mask = (sigmas >= band[0]) & (sigmas <= band[1])
+    s = sigmas[mask]
+    dt = dt_mat[:, mask]
+
+    v = []
+    for i in range(dt.shape[0]):
+        if len(s) < 2:
+            v.append(np.nan)
+        else:
+            a, _ = np.polyfit(s, dt[i], 1)
+            v.append(a)
+    return np.array(v)
+
+def normalize(x):
+    x = x - np.mean(x)
+    n = np.linalg.norm(x)
+    return x / n if n > 0 else x
+
+# ------------------------------------------------
+# EXTRACT GENERATORS
+# ------------------------------------------------
+v1 = extract_generator(sigmas, dt_mat, band1)
+v2 = extract_generator(sigmas, dt_mat, band2)
+
+mask = np.isfinite(v1) & np.isfinite(v2)
+v1 = v1[mask]
+v2 = v2[mask]
+t  = t0[mask]
+
+# ------------------------------------------------
+# ALIGN + COMPARE
+# ------------------------------------------------
+# best scale α such that v2 ≈ α v1
+alpha = np.dot(v1, v2) / np.dot(v1, v1)
+v2_fit = alpha * v1
+resid = v2 - v2_fit
+
+corr = np.corrcoef(v1, v2)[0, 1]
+rel_err = np.linalg.norm(resid) / np.linalg.norm(v2)
+
+# ------------------------------------------------
+# PLOTS
+# ------------------------------------------------
+plt.figure(figsize=(6,5))
+plt.scatter(v1, v2, s=50)
+x = np.linspace(v1.min(), v1.max(), 100)
+plt.plot(x, alpha*x, 'k--', label=f'fit α={alpha:.3f}')
+plt.xlabel('v (band 1)')
+plt.ylabel('v (band 2)')
+plt.title('Test U: Generator consistency across σ bands')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+plt.figure(figsize=(6,4))
+plt.plot(t, resid, 'o-')
+plt.axhline(0, ls='--', c='k')
+plt.xlabel('t_i (zero height)')
+plt.ylabel('residual v')
+plt.title('Band-commutator residual')
+plt.grid(True)
+plt.show()
+
+# ------------------------------------------------
+# REPORT
+# ------------------------------------------------
+print("========== TEST U: σ-GENERATOR CONSISTENCY ==========")
+print(f"zeros used              = {len(v1)}")
+print(f"best scale α             = {alpha:.6f}")
+print(f"corr(v_band1, v_band2)   = {corr:.6f}")
+print(f"||resid|| / ||v2||       = {rel_err:.6e}")
+print("====================================================")
+
+Code 47
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ============================
+# TEST V: GENERATOR CLOSURE
+# ============================
+
+def test_V_generator_closure(t0, dt1, dt2, sigma1, sigma2, H):
+    """
+    Checks whether second-order sigma acceleration aligns with G^2
+    """
+
+    t0 = np.asarray(t0, float)
+    dt1 = np.asarray(dt1, float)
+    dt2 = np.asarray(dt2, float)
+    H   = np.asarray(H, float)
+
+    assert len(t0) == len(dt1) == len(dt2) == len(H)
+
+    # First-order generator estimate
+    v1 = dt1 / sigma1
+    v2 = dt2 / sigma2
+    v  = 0.5 * (v1 + v2)
+
+    # Second sigma derivative (acceleration)
+    d2t = 2 * (dt2 - (sigma2/sigma1)*dt1) / (sigma2**2 - sigma1**2)
+
+    # Generator squared prediction
+    G2 = H @ H * np.ones_like(v)  # scalar G^2 direction
+
+    # Best fit scale
+    a = np.dot(d2t, G2) / np.dot(G2, G2)
+    pred = a * G2
+    resid = d2t - pred
+
+    corr = np.corrcoef(d2t, pred)[0,1]
+    rel_err = np.linalg.norm(resid) / np.linalg.norm(d2t)
+
+    # ---- plots ----
+    plt.figure(figsize=(6,5))
+    plt.scatter(pred, d2t)
+    lim = max(abs(pred).max(), abs(d2t).max())
+    plt.plot([-lim, lim], [-lim, lim], 'k--')
+    plt.xlabel("predicted ½σ² G²")
+    plt.ylabel("measured ∂²t/∂σ²")
+    plt.title("TEST V: Generator closure")
+    plt.grid(True)
+    plt.show()
+
+    return corr, rel_err
+
+
+# ======= CALL (PUT YOUR ARRAYS HERE) =======
+# t0        = [...]
+# dt_sigma1 = [...]
+# dt_sigma2 = [...]
+# sigma1    = 0.02
+# sigma2    = 0.04
+# H3        = [...]
+
+# corr, err = test_V_generator_closure(t0, dt_sigma1, dt_sigma2, sigma1, sigma2, H3)
+# print("corr =", corr)
+# print("rel error =", err)
+
+Code 48
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# =========================
+# HARD INPUTS (SELF-CONTAINED)
+# =========================
+
+# Representative baseline zero heights (subset)
+t0 = np.array([
+    67.079812, 69.546404, 72.067158,
+    75.704693, 77.144842, 79.337375,
+    82.910384, 84.735493, 87.425278
+])
+
+# Small-sigma displacements (measured style)
+sigma1 = 0.02
+sigma2 = 0.04
+
+dt_sigma1 = np.array([
+    0.00042, 0.00055, 0.00061,
+    0.00078, 0.00083, 0.00091,
+    0.00102, 0.00109, 0.00118
+])
+
+dt_sigma2 = np.array([
+    0.00165, 0.00210, 0.00228,
+    0.00295, 0.00315, 0.00342,
+    0.00386, 0.00405, 0.00438
+])
+
+# Odd-kernel p=3 surrogate (Hilbert-like)
+H3 = np.array([
+    -0.31, -0.22, -0.15,
+    -0.07, -0.02,  0.04,
+     0.11,  0.18,  0.27
+])
+
+# =========================
+# TEST V: GENERATOR CLOSURE
+# =========================
+
+# First-order generator estimates
+v1 = dt_sigma1 / sigma1
+v2 = dt_sigma2 / sigma2
+v  = 0.5 * (v1 + v2)
+
+# Second sigma derivative (acceleration)
+d2t = 2 * (dt_sigma2 - (sigma2/sigma1)*dt_sigma1) / (sigma2**2 - sigma1**2)
+
+# Generator-squared prediction (rank-1 closure test)
+G2 = np.mean(H3**2) * np.ones_like(d2t)
+
+# Best-fit scale
+a = np.dot(d2t, G2) / np.dot(G2, G2)
+pred = a * G2
+resid = d2t - pred
+
+# Metrics
+corr = np.corrcoef(d2t, pred)[0, 1]
+rel_err = np.linalg.norm(resid) / np.linalg.norm(d2t)
+
+# =========================
+# OUTPUT
+# =========================
+
+print("========== TEST V: GENERATOR CLOSURE ==========")
+print(f"zeros used        = {len(t0)}")
+print(f"best scale a      = {a:.3e}")
+print(f"correlation       = {corr:.6f}")
+print(f"relative error    = {rel_err:.6f}")
+print("==============================================")
+
+# =========================
+# PLOT
+# =========================
+
+plt.figure(figsize=(6, 5))
+plt.scatter(pred, d2t, s=50)
+L = max(abs(pred).max(), abs(d2t).max())
+plt.plot([-L, L], [-L, L], "k--")
+plt.xlabel("Predicted ∂²t/∂σ²  (½ G²)")
+plt.ylabel("Measured ∂²t/∂σ²")
+plt.title("TEST V: Generator closure check")
+plt.grid(True)
+plt.show()
+
+
+49
+
+# ================================
+# TEST W: Generator commutator test
+# ================================
+# Purpose:
+# Check whether the σ-generator depends on σ by testing
+#   [G(σ1), G(σ2)] v  ≠ 0
+# If nonzero → generator is σ-dependent (non-semigroup flow)
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# --------------------------
+# INPUT (PASTE YOUR DATA)
+# --------------------------
+# baseline zero positions (same ones used before)
+t0 = np.array([
+    67.079812, 69.546404, 72.067158, 75.704693, 77.144842,
+    79.337375, 82.910384, 84.735493, 87.425278, 88.809112,
+    92.491900, 94.651348, 95.870634, 98.831197, 101.317854,
+    103.725538, 105.446623, 107.168612
+], dtype=float)
+
+# extracted generators v = dt/dσ at two different σ
+# (paste from your Test T / U outputs)
+v1 = np.array([
+    0.037, 0.048, 0.062, 0.083, 0.087, 0.098,
+    0.108, 0.115, 0.113, 0.121, 0.124,
+    0.131, 0.135, 0.142, 0.148, 0.152,
+    0.156, 0.160
+], dtype=float)
+
+v2 = np.array([
+    0.070, 0.090, 0.120, 0.175, 0.155, 0.189,
+    0.210, 0.225, 0.220, 0.238, 0.245,
+    0.255, 0.265, 0.278, 0.285, 0.292,
+    0.298, 0.305
+], dtype=float)
+
+# --------------------------
+# BUILD ODD KERNEL GENERATOR
+# --------------------------
+def odd_kernel_matrix(t, p=3):
+    N = len(t)
+    G = np.zeros((N, N))
+    for i in range(N):
+        for j in range(N):
+            if i != j:
+                d = t[i] - t[j]
+                G[i, j] = np.sign(d) / (abs(d)**p)
+    return G
+
+G1 = odd_kernel_matrix(t0, p=3)
+G2 = odd_kernel_matrix(t0, p=3)
+
+# scale generators to match v norms
+a1 = np.dot(v1, G1 @ v1) / np.dot(G1 @ v1, G1 @ v1)
+a2 = np.dot(v2, G2 @ v2) / np.dot(G2 @ v2, G2 @ v2)
+
+G1 *= a1
+G2 *= a2
+
+# --------------------------
+# COMMUTATOR
+# --------------------------
+comm = G1 @ G2 - G2 @ G1
+
+# apply to a test vector (use v1)
+comm_v = comm @ v1
+
+# --------------------------
+# DIAGNOSTICS
+# --------------------------
+norm_comm = np.linalg.norm(comm_v)
+norm_v = np.linalg.norm(v1)
+rel = norm_comm / norm_v
+
+print("========== TEST W: GENERATOR COMMUTATOR ==========")
+print(f"||[G1,G2] v||      = {norm_comm:.6e}")
+print(f"||v||               = {norm_v:.6e}")
+print(f"relative magnitude  = {rel:.6e}")
+print("=================================================")
+
+# --------------------------
+# PLOT
+# --------------------------
+plt.figure(figsize=(7,4))
+plt.plot(t0, comm_v, "o-", label="[G1,G2] v")
+plt.axhline(0, color="k", ls="--")
+plt.xlabel("t_i (baseline zero)")
+plt.ylabel("commutator action")
+plt.title("TEST W: Generator commutator action")
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+50
+
+# ============================================================
+# TEST X: Spectral diagonalization of the σ-generator
+# Paste-and-run. No external state assumed.
+# ============================================================
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# --------------------------
+# INPUT DATA (PASTE VALUES)
+# --------------------------
+# baseline zero locations t_i
+t0 = np.array([
+    67.079812, 69.546404, 72.067158, 75.704693, 77.144842, 79.337375,
+    82.910384, 84.735493, 87.425278, 88.809112, 92.491900, 94.651348
+], dtype=float)
+
+# extracted generator velocities v_i = dt/dσ at σ≈0
+v = np.array([
+    0.038, 0.048, 0.062, 0.083, 0.087, 0.098,
+    0.108, 0.116, 0.114, 0.122, 0.125, 0.132
+], dtype=float)
+
+# --------------------------
+# BUILD ODD KERNEL GENERATOR
+# --------------------------
+def build_generator(t, power=3, eps=1e-6):
+    N = len(t)
+    G = np.zeros((N, N))
+    for i in range(N):
+        for j in range(N):
+            if i == j:
+                continue
+            d = t[i] - t[j]
+            G[i, j] = np.sign(d) / (abs(d)**power + eps)
+        G[i, i] = -np.sum(G[i])
+    return G
+
+G = build_generator(t0, power=3)
+
+# --------------------------
+# EIGEN-DECOMPOSITION
+# --------------------------
+eigvals, eigvecs = np.linalg.eig(G)
+
+# sort by imaginary magnitude
+idx = np.argsort(np.abs(np.imag(eigvals)))[::-1]
+eigvals = eigvals[idx]
+eigvecs = eigvecs[:, idx]
+
+# --------------------------
+# PROJECT v ONTO MODES
+# --------------------------
+coeffs = eigvecs.T @ v
+v_recon = eigvecs @ coeffs
+resid = v - v_recon
+
+# --------------------------
+# DIAGNOSTICS
+# --------------------------
+corr = np.corrcoef(v, v_recon)[0,1]
+rel_err = np.linalg.norm(resid) / np.linalg.norm(v)
+
+print("========== TEST X: GENERATOR SPECTRUM ==========")
+print("zeros used =", len(t0))
+print("corr(v, reconstruction) =", corr)
+print("||resid|| / ||v||       =", rel_err)
+print("Eigenvalues (first 6):")
+for k in range(min(6, len(eigvals))):
+    print(f"  λ[{k}] = {eigvals[k]}")
+print("===============================================")
+
+# --------------------------
+# PLOTS
+# --------------------------
+plt.figure(figsize=(6,4))
+plt.scatter(np.real(eigvals), np.imag(eigvals))
+plt.axhline(0, ls="--", c="k")
+plt.axvline(0, ls="--", c="k")
+plt.xlabel("Re(λ)")
+plt.ylabel("Im(λ)")
+plt.title("Generator spectrum")
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(6,4))
+plt.plot(t0, v, "o-", label="measured v")
+plt.plot(t0, v_recon, "s--", label="modal reconstruction")
+plt.axhline(0, ls="--", c="k")
+plt.xlabel("t_i")
+plt.ylabel("v_i = dt/dσ")
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(6,4))
+plt.plot(t0, resid, "o-")
+plt.axhline(0, ls="--", c="k")
+plt.xlabel("t_i")
+plt.ylabel("residual")
+plt.title("Reconstruction residual")
+plt.tight_layout()
+plt.show()
+
+51
+
+# ============================================================
+# TEST X: Spectral diagonalization of the σ-generator
+# ============================================================
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# --------------------------
+# INPUT DATA (PASTE VALUES)
+# --------------------------
+# baseline zero locations t_i
+t0 = np.array([
+    67.079812, 69.546404, 72.067158, 75.704693, 77.144842, 79.337375,
+    82.910384, 84.735493, 87.425278, 88.809112, 92.491900, 94.651348
+], dtype=float)
+
+# extracted generator velocities v_i = dt/dσ at σ≈0
+v = np.array([
+    0.038, 0.048, 0.062, 0.083, 0.087, 0.098,
+    0.108, 0.116, 0.114, 0.122, 0.125, 0.132
+], dtype=float)
+
+# --------------------------
+# BUILD ODD KERNEL GENERATOR
+# --------------------------
+def build_generator(t, power=3, eps=1e-6):
+    N = len(t)
+    G = np.zeros((N, N))
+    for i in range(N):
+        for j in range(N):
+            if i == j:
+                continue
+            d = t[i] - t[j]
+            G[i, j] = np.sign(d) / (abs(d)**power + eps)
+        G[i, i] = -np.sum(G[i])
+    return G
+
+G = build_generator(t0, power=3)
+
+# --------------------------
+# EIGEN-DECOMPOSITION
+# --------------------------
+eigvals, eigvecs = np.linalg.eig(G)
+
+# sort by imaginary magnitude
+idx = np.argsort(np.abs(np.imag(eigvals)))[::-1]
+eigvals = eigvals[idx]
+eigvecs = eigvecs[:, idx]
+
+# --------------------------
+# PROJECT v ONTO MODES
+# --------------------------
+coeffs = eigvecs.T @ v
+v_recon = eigvecs @ coeffs
+resid = v - v_recon
+
+# --------------------------
+# DIAGNOSTICS
+# --------------------------
+corr = np.corrcoef(v, v_recon)[0,1]
+rel_err = np.linalg.norm(resid) / np.linalg.norm(v)
+
+print("========== TEST X: GENERATOR SPECTRUM ==========")
+print("zeros used =", len(t0))
+print("corr(v, reconstruction) =", corr)
+print("||resid|| / ||v||       =", rel_err)
+print("Eigenvalues (first 6):")
+for k in range(min(6, len(eigvals))):
+    print(f"  λ[{k}] = {eigvals[k]}")
+print("===============================================")
+
+# --------------------------
+# PLOTS
+# --------------------------
+plt.figure(figsize=(6,4))
+plt.scatter(np.real(eigvals), np.imag(eigvals))
+plt.axhline(0, ls="--", c="k")
+plt.axvline(0, ls="--", c="k")
+plt.xlabel("Re(λ)")
+plt.ylabel("Im(λ)")
+plt.title("Generator spectrum")
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(6,4))
+plt.plot(t0, v, "o-", label="measured v")
+plt.plot(t0, v_recon, "s--", label="modal reconstruction")
+plt.axhline(0, ls="--", c="k")
+plt.xlabel("t_i")
+plt.ylabel("v_i = dt/dσ")
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(6,4))
+plt.plot(t0, resid, "o-")
+plt.axhline(0, ls="--", c="k")
+plt.xlabel("t_i")
+plt.ylabel("residual")
+plt.title("Reconstruction residual")
+plt.tight_layout()
+plt.show()
+
+52
+
+# ============================================================
+# TEST Y: Do generator eigen-frequencies scale with zero spacing?
+#   - Build σ-generator v_i = dt_i/dσ near σ=0 from Gaussian flow
+#   - Fit an odd-kernel operator G_ij ~ sum_p a_p * sign(d)/|d|^p
+#   - Form matrix G, eigendecompose -> λ_k
+#   - For each mode k, compute spacing-weighted Δ̄_k = Σ |u_k(i)|^2 Δ_i
+#   - Check scaling: Im(λ_k) vs 1/Δ̄_k  and Im(λ_k) vs log(t̄_k)
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+from numpy.fft import rfft, irfft, rfftfreq
+from scipy.interpolate import CubicSpline
+
+# --------------------------
+# CONFIG
+# --------------------------
+mp.mp.dps = 50
+
+T0, T1 = 60.0, 120.0
+
+# Keep this reasonable for speed on mobile/colab.
+# If you already know 16384 works for you, set N=16384.
+N = 8192  # 4096/8192/16384
+
+EDGE_DROP = 2          # drop this many zeros at each edge for safety
+SIGMAS = np.array([0.00, 0.01, 0.02, 0.04, 0.06])  # small-σ band for generator extraction
+SIGMA_FIT_MAX = 0.06   # fit v_i using σ <= this
+
+# Odd-kernel basis powers to fit
+P_LIST = [1, 3, 5]     # extend to [1,3,5,7] if you want
+
+# Numerical safety
+EPS_D = 1e-9
+
+# --------------------------
+# xi(s) and baseline f(t)
+# --------------------------
+def xi(s):
+    # Riemann xi function:
+    # xi(s) = 1/2 s(s-1) π^{-s/2} Γ(s/2) ζ(s)
+    return mp.mpf('0.5') * s * (s - 1) * (mp.pi ** (-s/2)) * mp.gamma(s/2) * mp.zeta(s)
+
+def sample_f(T0, T1, N):
+    t = np.linspace(T0, T1, N, endpoint=False)
+    f = np.empty_like(t, dtype=float)
+    for i, ti in enumerate(t):
+        s = mp.mpf('0.5') + 1j*mp.mpf(str(ti))
+        f[i] = float(mp.re(xi(s)))
+    return t, f
+
+t, f0 = sample_f(T0, T1, N)
+dt = t[1] - t[0]
+print(f"Sampling f(t)=Re xi(1/2+it) on [{T0},{T1}] with N={N}, dt≈{dt}")
+
+# --------------------------
+# Gaussian smoothing in Fourier domain
+# --------------------------
+freq = rfftfreq(N, d=dt)         # cycles per unit t
+omega = 2*np.pi*freq             # radians per unit t
+F0 = rfft(f0)
+
+def gaussian_smooth_from_fft(F, sigma):
+    # exp(-0.5 (sigma*omega)^2)
+    G = np.exp(-0.5 * (sigma * omega)**2)
+    return irfft(F * G, n=N)
+
+# --------------------------
+# Zero finding + refinement on spline
+# --------------------------
+def find_zeros_spline(t, y):
+    cs = CubicSpline(t, y)
+    # sign changes between consecutive samples
+    sgn = np.sign(y)
+    sgn[sgn == 0] = 1
+    idx = np.where(sgn[:-1]*sgn[1:] < 0)[0]
+    zeros = []
+    for i in idx:
+        a, b = t[i], t[i+1]
+        ya, yb = y[i], y[i+1]
+        # linear fallback if spline misbehaves
+        if ya == yb:
+            continue
+        # bisection on spline (robust)
+        lo, hi = a, b
+        flo, fhi = float(cs(lo)), float(cs(hi))
+        if flo == 0.0:
+            zeros.append(lo); continue
+        if fhi == 0.0:
+            zeros.append(hi); continue
+        if flo*fhi > 0:
+            continue
+        for _ in range(60):
+            mid = 0.5*(lo+hi)
+            fm = float(cs(mid))
+            if flo*fm <= 0:
+                hi, fhi = mid, fm
+            else:
+                lo, flo = mid, fm
+        zeros.append(0.5*(lo+hi))
+    return np.array(zeros, dtype=float)
+
+# baseline zeros
+z0 = find_zeros_spline(t, f0)
+print(f"Baseline zeros in window: {len(z0)}")
+if len(z0) < 8:
+    raise RuntimeError("Too few baseline zeros found. Increase N or adjust window/precision.")
+
+# --------------------------
+# Track zeros across σ by nearest-neighbor matching
+# --------------------------
+def track_zeros_across_sigmas(z_base, sigmas, max_jump=2.0):
+    # returns dict sigma -> zeros array (aligned as much as possible)
+    z_by_sigma = {}
+    z_by_sigma[sigmas[0]] = z_base.copy()
+    prev = z_base.copy()
+    for s in sigmas[1:]:
+        ys = gaussian_smooth_from_fft(F0, s)
+        zs = find_zeros_spline(t, ys)
+
+        # greedy nearest matching from prev -> zs
+        matched = np.full_like(prev, np.nan, dtype=float)
+        used = np.zeros(len(zs), dtype=bool)
+
+        for i, p in enumerate(prev):
+            if len(zs) == 0:
+                break
+            j = int(np.argmin(np.abs(zs - p)))
+            if used[j]:
+                # try next-best
+                order = np.argsort(np.abs(zs - p))
+                j = None
+                for jj in order:
+                    if not used[jj]:
+                        j = int(jj); break
+                if j is None:
+                    continue
+            if abs(zs[j] - p) <= max_jump:
+                matched[i] = zs[j]
+                used[j] = True
+
+        z_by_sigma[s] = matched
+        prev = matched.copy()
+    return z_by_sigma
+
+z_by_sigma = track_zeros_across_sigmas(z0, SIGMAS, max_jump=3.0)
+
+# --------------------------
+# Build interior set where all σ have valid matches
+# --------------------------
+base = z_by_sigma[SIGMAS[0]]
+mask = np.isfinite(base)
+for s in SIGMAS[1:]:
+    mask &= np.isfinite(z_by_sigma[s])
+
+# edge drop in index-space of the matched baseline
+idx_all = np.where(mask)[0]
+if len(idx_all) <= 2*EDGE_DROP + 5:
+    raise RuntimeError("Not enough matched interior zeros after edge drop. Reduce EDGE_DROP or adjust params.")
+
+idx_use = idx_all[EDGE_DROP:len(idx_all)-EDGE_DROP]
+t0 = base[idx_use]
+
+# assemble trajectories for each σ
+Z = []
+S_used = []
+for s in SIGMAS:
+    zs = z_by_sigma[s][idx_use]
+    if np.any(~np.isfinite(zs)):
+        continue
+    Z.append(zs)
+    S_used.append(s)
+
+Z = np.stack(Z, axis=0)          # shape (ns, nz)
+S_used = np.array(S_used, float) # shape (ns,)
+ns, nz = Z.shape
+print(f"Tracked zeros used: {nz} across {ns} sigma values {S_used.tolist()}")
+
+# --------------------------
+# Generator extraction: v_i = dt_i/dσ at σ=0 from small-σ linear fit
+# --------------------------
+# Fit each zero i: Z[:,i] = t0[i] + v[i]*σ  (use σ <= SIGMA_FIT_MAX)
+fit_mask = S_used <= SIGMA_FIT_MAX
+Sfit = S_used[fit_mask]
+Zfit = Z[fit_mask, :]  # (nfit, nz)
+
+if len(Sfit) < 3:
+    raise RuntimeError("Need at least 3 sigma points for stable slope fit.")
+
+# least squares slope through origin in displacement (Z - t0)
+dZ = Zfit - t0[None, :]
+# slope v = argmin ||dZ - v σ|| => v = (σ·dZ)/(σ·σ)
+den = float(np.dot(Sfit, Sfit))
+v = (Sfit[:, None] * dZ).sum(axis=0) / den  # (nz,)
+v = v.astype(float)
+
+print("========== TEST Y: Extracted σ-generator v ==========")
+print(f"zeros used = {nz}")
+print(f"mean |v|   = {np.mean(np.abs(v)):.6e}")
+print(f"max  |v|   = {np.max(np.abs(v)):.6e}")
+print("===============================================")
+
+# --------------------------
+# Local spacing Δ_i (neighbor mean spacing)
+# --------------------------
+# Use centered spacing (t_{i+1}-t_{i-1})/2 for interior points
+if nz < 5:
+    raise RuntimeError("Need at least 5 zeros to compute stable local spacing.")
+Delta = np.empty(nz, dtype=float)
+Delta[0] = t0[1] - t0[0]
+Delta[-1] = t0[-1] - t0[-2]
+Delta[1:-1] = 0.5*(t0[2:] - t0[:-2])
+
+# --------------------------
+# Fit odd-kernel operator coefficients: v_i ≈ Σ_p a_p * H_p(i)
+# where H_p(i) = Σ_{j≠i} sign(t_i - t_j)/|t_i - t_j|^p
+# --------------------------
+def H_p(t0, p):
+    N = len(t0)
+    H = np.zeros(N, dtype=float)
+    for i in range(N):
+        d = t0[i] - t0
+        d[i] = np.inf
+        H[i] = np.sum(np.sign(d) / (np.abs(d) + EPS_D)**p)
+    return H
+
+Hs = []
+for p in P_LIST:
+    Hs.append(H_p(t0, p))
+Hmat = np.stack(Hs, axis=1)  # (nz, nP)
+
+# Demean to remove constant offset issues
+v0 = v - np.mean(v)
+Hmat0 = Hmat - Hmat.mean(axis=0, keepdims=True)
+
+# Fit a_p via least squares
+a, *_ = np.linalg.lstsq(Hmat0, v0, rcond=None)
+
+# --------------------------
+# Build generator matrix G from fitted kernel:
+#   G_ij = Σ_p a_p * sign(t_i - t_j)/|t_i - t_j|^p   for i≠j
+#   G_ii = -Σ_{j≠i} G_ij    (row-sum zero)
+# --------------------------
+G = np.zeros((nz, nz), dtype=float)
+for i in range(nz):
+    for j in range(nz):
+        if i == j:
+            continue
+        d = t0[i] - t0[j]
+        val = 0.0
+        for coeff, p in zip(a, P_LIST):
+            val += coeff * (np.sign(d) / (abs(d) + EPS_D)**p)
+        G[i, j] = val
+    G[i, i] = -np.sum(G[i, :])
+
+# --------------------------
+# Eigendecompose
+# --------------------------
+eigvals, eigvecs = np.linalg.eig(G)  # generally complex
+# Sort by |Im(λ)| descending (ignore near-zero mode)
+order = np.argsort(-np.abs(np.imag(eigvals)))
+eigvals = eigvals[order]
+eigvecs = eigvecs[:, order]
+
+# Remove the near-zero eigenvalue (mass-conservation mode) if present
+# (keep modes with |Im| above a threshold)
+keep = np.abs(np.imag(eigvals)) > 1e-10
+eigvals = eigvals[keep]
+eigvecs = eigvecs[:, keep]
+
+# --------------------------
+# Mode-localized "effective spacing" Δ̄_k
+# Using weights w_i = |u_i|^2 / Σ |u|^2
+# Also compute effective t̄_k
+# --------------------------
+Delta_bar = []
+t_bar = []
+ImLam = []
+ReLam = []
+
+for k in range(eigvecs.shape[1]):
+    u = eigvecs[:, k]
+    w = np.abs(u)**2
+    sw = np.sum(w)
+    if sw == 0:
+        continue
+    w /= sw
+    Delta_bar.append(float(np.sum(w * Delta)))
+    t_bar.append(float(np.sum(w * t0)))
+    ImLam.append(float(np.imag(eigvals[k])))
+    ReLam.append(float(np.real(eigvals[k])))
+
+Delta_bar = np.array(Delta_bar)
+t_bar = np.array(t_bar)
+ImLam = np.array(ImLam)
+ReLam = np.array(ReLam)
+
+# --------------------------
+# Correlation checks
+# --------------------------
+def corr(a, b):
+    a = np.asarray(a, float)
+    b = np.asarray(b, float)
+    a = a - a.mean()
+    b = b - b.mean()
+    da = np.sqrt(np.sum(a*a))
+    db = np.sqrt(np.sum(b*b))
+    if da == 0 or db == 0:
+        return np.nan
+    return float(np.sum(a*b) / (da*db))
+
+x1 = 1.0 / Delta_bar
+x2 = np.log(t_bar)
+
+c1 = corr(np.abs(ImLam), x1)
+c2 = corr(np.abs(ImLam), x2)
+
+print("\n========== TEST Y: Frequency scaling ==========")
+print("Fitted odd-kernel coefficients (a_p):")
+for coeff, p in zip(a, P_LIST):
+    print(f"  p={p:>2d}  a={coeff:+.6e}")
+print("----------------------------------------------")
+print(f"modes kept = {len(ImLam)}")
+print(f"corr(|Im λ|, 1/Δ̄) = {c1:+.6f}")
+print(f"corr(|Im λ|, log(t̄)) = {c2:+.6f}")
+print("==============================================\n")
+
+# --------------------------
+# Plots
+# --------------------------
+plt.figure()
+plt.title("TEST Y1: |Im(λ)| vs 1/Δ̄_k  (spacing-weighted)")
+plt.scatter(x1, np.abs(ImLam))
+plt.xlabel("1 / Δ̄_k")
+plt.ylabel("|Im(λ_k)|")
+plt.axhline(0, linestyle="--")
+plt.show()
+
+plt.figure()
+plt.title("TEST Y2: |Im(λ)| vs log(t̄_k)")
+plt.scatter(x2, np.abs(ImLam))
+plt.xlabel("log(t̄_k)")
+plt.ylabel("|Im(λ_k)|")
+plt.axhline(0, linestyle="--")
+plt.show()
+
+plt.figure()
+plt.title("TEST Y3: Generator spectrum (Re vs Im)")
+plt.scatter(ReLam, ImLam)
+plt.axhline(0, linestyle="--")
+plt.axvline(0, linestyle="--")
+plt.xlabel("Re(λ)")
+plt.ylabel("Im(λ)")
+plt.show()
+
+53
+
+# ===========================
+# TEST Z: WINDOW-TRANSFER UNIVERSALITY
+# generator extraction + odd-kernel fit across two height windows
+# ===========================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+# ---------------------------
+# CONFIG
+# ---------------------------
+mp.mp.dps = 50
+
+WINDOWS = [
+    (60.0, 120.0),
+    (120.0, 180.0),
+]
+
+N = 8192                 # increase if you want (cost grows)
+EDGE_DROP = 2            # drop a couple zeros near edges
+SIGMAS = np.array([0.00, 0.01, 0.02, 0.04, 0.06], dtype=float)  # small-σ generator regime
+SIGMA_FIT_MAX = 0.06     # use sigmas <= this for v extraction
+KERNEL_POWERS = [1, 3, 5]
+MAX_ZEROS_TRACK = 40     # cap for stability
+
+# ---------------------------
+# xi(s) definition (mpmath has zeta/gamma, not mp.xi in some builds)
+# xi(s) = 1/2 * s(s-1) * pi^{-s/2} * Gamma(s/2) * zeta(s)
+# ---------------------------
+def xi(s):
+    return mp.mpf('0.5') * s * (s - 1) * (mp.pi ** (-s/2)) * mp.gamma(s/2) * mp.zeta(s)
+
+def sample_f(T0, T1, N):
+    t = np.linspace(T0, T1, N, endpoint=False)
+    f = np.empty_like(t, dtype=float)
+    for i, tt in enumerate(t):
+        s = mp.mpf('0.5') + 1j * mp.mpf(tt)
+        f[i] = float(mp.re(xi(s)))
+    return t, f
+
+# ---------------------------
+# Gaussian smoothing (FFT)
+# sigma is in units of t, convert to samples
+# ---------------------------
+def gaussian_smooth_fft(f, sigma_t, dt):
+    if sigma_t <= 0:
+        return f.copy()
+    n = f.size
+    sig_samp = sigma_t / dt
+    k = np.fft.rfftfreq(n, d=1.0)  # cycles/sample
+    # Gaussian in frequency: exp(-2*pi^2*sigma^2 * k^2)
+    G = np.exp(-2.0 * (np.pi**2) * (sig_samp**2) * (k**2))
+    F = np.fft.rfft(f)
+    return np.fft.irfft(F * G, n=n)
+
+# ---------------------------
+# zero finder on sampled signal via sign changes + linear refinement
+# ---------------------------
+def find_zeros(t, f):
+    sgn = np.sign(f)
+    sgn[sgn == 0] = 1
+    idx = np.where(sgn[:-1] * sgn[1:] < 0)[0]
+    zeros = []
+    for i in idx:
+        t0, t1 = t[i], t[i+1]
+        f0, f1 = f[i], f[i+1]
+        # linear root
+        z = t0 - f0 * (t1 - t0) / (f1 - f0)
+        zeros.append(z)
+    return np.array(zeros, dtype=float)
+
+# ---------------------------
+# track zeros across sigma by nearest-match (monotone order preserved)
+# ---------------------------
+def track_zeros_across_sigmas(t, f0, sigmas, edge_drop=2, max_track=40):
+    dt = t[1] - t[0]
+    base_zeros = find_zeros(t, f0)
+    if base_zeros.size == 0:
+        return base_zeros, {}
+
+    # edge drop
+    if base_zeros.size > 2*edge_drop:
+        base_use = base_zeros[edge_drop:-edge_drop]
+    else:
+        base_use = base_zeros.copy()
+
+    base_use = base_use[:max_track]
+
+    tracks = {float(s): None for s in sigmas}
+    tracks[float(sigmas[0])] = base_use.copy()
+
+    prev = base_use.copy()
+
+    for s in sigmas[1:]:
+        fs = gaussian_smooth_fft(f0, float(s), dt)
+        zs = find_zeros(t, fs)
+        if zs.size == 0:
+            tracks[float(s)] = np.array([], dtype=float)
+            prev = np.array([], dtype=float)
+            continue
+
+        # greedy nearest match in order (since zeros are ordered)
+        matched = []
+        j = 0
+        for z0 in prev:
+            # advance j until zs[j] >= z0 - window
+            while j+1 < zs.size and zs[j] < z0:
+                j += 1
+            # choose nearest among j and j-1
+            cand = []
+            if 0 <= j < zs.size: cand.append(zs[j])
+            if 0 <= j-1 < zs.size: cand.append(zs[j-1])
+            if not cand:
+                break
+            cand = np.array(cand)
+            zpick = cand[np.argmin(np.abs(cand - z0))]
+            matched.append(zpick)
+        matched = np.array(matched, dtype=float)
+
+        tracks[float(s)] = matched
+        prev = matched
+
+    return base_use, tracks
+
+# ---------------------------
+# extract generator v_i = dt_i/dsigma from small sigma fits
+# ---------------------------
+def extract_generator(base_t0, tracks, sigmas, sigma_fit_max=0.06):
+    sig_use = [s for s in sigmas if s <= sigma_fit_max]
+    sig_use = np.array(sig_use, dtype=float)
+    if sig_use.size < 2:
+        return base_t0, np.array([], dtype=float)
+
+    # build dt matrix: shape (nzeros, nsig)
+    T = []
+    for s in sig_use:
+        zs = tracks.get(float(s), None)
+        if zs is None or zs.size != base_t0.size:
+            return base_t0, np.array([], dtype=float)
+        T.append(zs)
+    T = np.stack(T, axis=1)  # (nzeros, nsig)
+
+    dt_mat = T - base_t0[:, None]
+
+    # fit slope through origin for each zero: dt ≈ v*sigma
+    v = np.zeros(base_t0.size, dtype=float)
+    denom = np.sum(sig_use**2)
+    for i in range(base_t0.size):
+        v[i] = float(np.dot(sig_use, dt_mat[i]) / denom)
+    return base_t0, v
+
+# ---------------------------
+# odd-kernel features H_p(i) = sum_{j!=i} sign(d)/|d|^p
+# ---------------------------
+def odd_kernel_features(t0, powers):
+    t0 = np.asarray(t0, dtype=float)
+    n = t0.size
+    H = np.zeros((n, len(powers)), dtype=float)
+    for i in range(n):
+        d = t0[i] - t0
+        mask = (d != 0)
+        di = d[mask]
+        sgn = np.sign(di)
+        ad = np.abs(di)
+        for k, p in enumerate(powers):
+            H[i, k] = np.sum(sgn / (ad**p))
+    # demean columns
+    H = H - H.mean(axis=0, keepdims=True)
+    return H
+
+def fit_linear(H, y):
+    # y demeaned, no intercept
+    y = np.asarray(y, dtype=float)
+    y = y - y.mean()
+    # ridge-free least squares
+    coef, *_ = np.linalg.lstsq(H, y, rcond=None)
+    yhat = H @ coef
+    # stats
+    ssr = np.sum((y - yhat)**2)
+    sst = np.sum((y - y.mean())**2) + 1e-30
+    r2 = 1.0 - ssr/sst
+    corr = float(np.corrcoef(y, yhat)[0,1]) if np.std(yhat) > 0 and np.std(y) > 0 else float("nan")
+    rel = float(np.linalg.norm(y - yhat) / (np.linalg.norm(y) + 1e-30))
+    return coef, yhat, r2, corr, rel
+
+# ---------------------------
+# RUN FOR EACH WINDOW
+# ---------------------------
+results = []
+
+for (T0, T1) in WINDOWS:
+    print("\n" + "="*70)
+    print(f"WINDOW [{T0},{T1}]  N={N}")
+    print("="*70)
+
+    t, f0 = sample_f(T0, T1, N)
+    dt = t[1] - t[0]
+
+    base_t0, tracks = track_zeros_across_sigmas(t, f0, SIGMAS, edge_drop=EDGE_DROP, max_track=MAX_ZEROS_TRACK)
+    print(f"baseline zeros tracked: {base_t0.size}")
+    if base_t0.size < 8:
+        print("Not enough zeros in this window; skipping.")
+        continue
+
+    base_t0, v = extract_generator(base_t0, tracks, SIGMAS, sigma_fit_max=SIGMA_FIT_MAX)
+    if v.size == 0:
+        print("Generator extraction failed (tracking mismatch).")
+        continue
+
+    print(f"generator: mean|v|={np.mean(np.abs(v)):.6e}  max|v|={np.max(np.abs(v)):.6e}")
+
+    H = odd_kernel_features(base_t0, KERNEL_POWERS)
+    coef, vhat, r2, corr, rel = fit_linear(H, v)
+
+    print("Odd-kernel fit: v ~ Σ a_p H_p")
+    for p, a in zip(KERNEL_POWERS, coef):
+        print(f"  p={p:>2d}  a={a:+.6e}")
+    print(f"  R^2={r2:+.6f}  corr={corr:+.6f}  ||resid||/||v||={rel:.6f}")
+
+    # quick spacing correlation: |v| vs 1/Δ
+    Delta = np.diff(base_t0)
+    invD = 1.0 / (0.5*(Delta[:-1] + Delta[1:])) if Delta.size >= 3 else np.array([], dtype=float)
+    vv = np.abs(v[1:-1]) if v.size >= 3 else np.array([], dtype=float)
+    corr_invD = float(np.corrcoef(vv, invD)[0,1]) if vv.size == invD.size and vv.size > 2 else float("nan")
+    print(f"corr(|v|, 1/Δ̄) = {corr_invD:+.6f}")
+
+    # plots
+    plt.figure()
+    plt.title(f"Z1: extracted generator v(t)  window [{T0},{T1}]")
+    plt.plot(base_t0, v, marker="o", linewidth=1)
+    plt.axhline(0, linestyle="--")
+    plt.xlabel("t_i (baseline zero)")
+    plt.ylabel("v_i = dt_i/dσ (small-σ fit)")
+
+    plt.figure()
+    plt.title(f"Z2: odd-kernel prediction (window [{T0},{T1}])  corr={corr:.3f}  R2={r2:.3f}")
+    plt.scatter(vhat, v)
+    lim = max(np.max(np.abs(vhat)), np.max(np.abs(v)), 1e-12)
+    plt.plot([-lim, lim], [-lim, lim], linestyle="--")
+    plt.xlabel("predicted v")
+    plt.ylabel("measured v")
+
+    results.append({
+        "window": (T0, T1),
+        "t0": base_t0,
+        "v": v,
+        "coef": coef,
+        "r2": r2,
+        "corr": corr,
+        "rel": rel
+    })
+
+plt.show()
+
+# ---------------------------
+# TRANSFER COMPARISON
+# ---------------------------
+print("\n" + "="*70)
+print("TEST Z (TRANSFER): compare fitted coefficients across windows")
+print("="*70)
+
+if len(results) >= 2:
+    a0 = results[0]["coef"]
+    a1 = results[1]["coef"]
+    # scale-invariant direction comparison
+    dot = float(np.dot(a0, a1))
+    n0 = float(np.linalg.norm(a0))
+    n1 = float(np.linalg.norm(a1))
+    cos = dot / (n0*n1 + 1e-30)
+    print(f"window0={results[0]['window']}  window1={results[1]['window']}")
+    for p, x, y in zip(KERNEL_POWERS, a0, a1):
+        print(f"  p={p:>2d}  a0={x:+.6e}  a1={y:+.6e}  ratio(a1/a0)={y/(x+1e-30):+.3e}")
+    print(f"cos(angle(a0,a1)) = {cos:+.6f}   (1=perfect same direction)")
+else:
+    print("Need two successful windows to do transfer check.")
+
+54
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ============================================================
+# TEST AA: Renormalized σ-generator + odd-kernel transfer test
+#   - works from tracked zero arrays (no mpmath needed)
+#   - fixes the "coeff flips across windows" by spacing-normalizing
+# ============================================================
+
+def robust_generator_from_tracks(sigmas, tracks, fit_max_sigma=0.06, through_origin=True):
+    """
+    sigmas: 1D array, shape (S,)
+    tracks: list of arrays, each shape (M,), tracked zeros t_i(sigma_k) for same i across k
+    returns:
+        t0 (M,), v (M,), fit_counts (M,)
+    """
+    sigmas = np.asarray(sigmas, dtype=float)
+    S = len(sigmas)
+    assert len(tracks) == S, "tracks must have one array per sigma"
+    M = len(tracks[0])
+    for k in range(S):
+        assert len(tracks[k]) == M, "all track arrays must have same length (tracked zeros)"
+
+    # choose small-σ points
+    mask = sigmas <= float(fit_max_sigma)
+    sig_fit = sigmas[mask]
+    if len(sig_fit) < (2 if through_origin else 3):
+        raise ValueError("Need more small-σ points for generator fit. Increase fit_max_sigma or add sigmas.")
+
+    T = np.vstack([np.asarray(tracks[k], dtype=float) for k in range(S)])  # (S,M)
+    Tfit = T[mask, :]  # (Sf,M)
+
+    t0 = T[0, :].copy()
+
+    v = np.zeros(M, dtype=float)
+    fit_counts = np.zeros(M, dtype=int)
+
+    x = sig_fit
+    if through_origin:
+        # v = argmin ||t(s)-t0 - v*s|| => v = <s,dt>/<s,s>
+        denom = np.dot(x, x)
+        for i in range(M):
+            y = Tfit[:, i] - t0[i]
+            if np.any(~np.isfinite(y)):
+                v[i] = np.nan
+                fit_counts[i] = 0
+                continue
+            v[i] = float(np.dot(x, y) / denom)
+            fit_counts[i] = len(x)
+    else:
+        # y = a*s + b
+        X = np.vstack([x, np.ones_like(x)]).T
+        XtX_inv = np.linalg.inv(X.T @ X)
+        for i in range(M):
+            y = Tfit[:, i] - t0[i]
+            if np.any(~np.isfinite(y)):
+                v[i] = np.nan
+                fit_counts[i] = 0
+                continue
+            a, b = (XtX_inv @ (X.T @ y))
+            v[i] = float(a)
+            fit_counts[i] = len(x)
+
+    return t0, v, fit_counts
+
+
+def local_spacing(t0):
+    t0 = np.asarray(t0, dtype=float)
+    d = np.diff(t0)
+    # define Δ_i at each i as average of adjacent gaps (with edge fallback)
+    Delta = np.zeros_like(t0)
+    Delta[1:-1] = 0.5 * (d[1:] + d[:-1])
+    Delta[0] = d[0]
+    Delta[-1] = d[-1]
+    return Delta
+
+
+def odd_kernel_vector(t0, p=3, normalize="geom"):
+    """
+    Build H_p(i) = sum_{j!=i} sign(d_ij)/|d_ij|^p using spacing-normalized distances.
+    normalize:
+      - "none": use d_ij in t-units
+      - "local": use d_ij / Delta_i
+      - "geom": use d_ij / sqrt(Delta_i*Delta_j)  (recommended)
+    """
+    t0 = np.asarray(t0, dtype=float)
+    M = len(t0)
+    Delta = local_spacing(t0)
+
+    H = np.zeros(M, dtype=float)
+    for i in range(M):
+        for j in range(M):
+            if i == j:
+                continue
+            dij = t0[i] - t0[j]
+            if dij == 0:
+                continue
+            if normalize == "none":
+                x = dij
+            elif normalize == "local":
+                x = dij / (Delta[i] if Delta[i] != 0 else 1.0)
+            elif normalize == "geom":
+                denom = np.sqrt(Delta[i] * Delta[j])
+                x = dij / (denom if denom != 0 else 1.0)
+            else:
+                raise ValueError("normalize must be one of: none, local, geom")
+
+            H[i] += np.sign(x) / (abs(x) ** p)
+    return H
+
+
+def fit_linear(y, Xcols, add_intercept=False):
+    """
+    y: (M,)
+    Xcols: list of arrays length M each
+    returns: yhat, coeffs, R2, corr, resid_norm_ratio
+    """
+    y = np.asarray(y, dtype=float)
+    mask = np.isfinite(y)
+    for c in Xcols:
+        mask &= np.isfinite(c)
+    y = y[mask]
+    X = np.vstack([np.asarray(c, dtype=float)[mask] for c in Xcols]).T
+
+    if add_intercept:
+        X = np.hstack([X, np.ones((X.shape[0], 1))])
+
+    # least squares
+    coeffs, *_ = np.linalg.lstsq(X, y, rcond=None)
+    yhat = X @ coeffs
+
+    # metrics
+    y0 = y - np.mean(y)
+    ss_tot = float(np.dot(y0, y0))
+    ss_res = float(np.dot(y - yhat, y - yhat))
+    R2 = 1.0 - (ss_res / ss_tot if ss_tot > 0 else np.nan)
+
+    # corr
+    if np.std(y) == 0 or np.std(yhat) == 0:
+        corr = np.nan
+    else:
+        corr = float(np.corrcoef(y, yhat)[0, 1])
+
+    resid_norm_ratio = float(np.linalg.norm(y - yhat) / (np.linalg.norm(y) + 1e-30))
+
+    # expand yhat back to full length if needed
+    full_yhat = np.full(mask.shape, np.nan, dtype=float)
+    full_yhat[mask] = yhat
+
+    return full_yhat, coeffs, R2, corr, resid_norm_ratio
+
+
+def run_AA(sigmas, tracks, window_name="window", fit_max_sigma=0.06,
+           kernel_ps=(1,3,5), normalize="geom", edge_drop=2, plot=True):
+    """
+    sigmas: list/array of sigma values used (must include 0.0)
+    tracks: list of arrays, one per sigma, tracked zeros
+    """
+    sigmas = np.asarray(sigmas, dtype=float)
+    assert np.any(np.isclose(sigmas, 0.0)), "Need sigma=0.0 in sigmas for baseline t0."
+    # Ensure sigma=0 is first for convenience
+    if not np.isclose(sigmas[0], 0.0):
+        k0 = int(np.argmin(np.abs(sigmas - 0.0)))
+        sigmas = np.concatenate([[sigmas[k0]], np.delete(sigmas, k0)])
+        tracks = [tracks[k0]] + [tracks[k] for k in range(len(tracks)) if k != k0]
+
+    t0, v, fit_counts = robust_generator_from_tracks(sigmas, tracks, fit_max_sigma=fit_max_sigma, through_origin=True)
+
+    # edge drop
+    M = len(t0)
+    lo = edge_drop
+    hi = M - edge_drop
+    if hi <= lo + 3:
+        raise ValueError("Too few zeros after edge_drop; reduce edge_drop or track more zeros.")
+    t0i = t0[lo:hi]
+    vi  = v[lo:hi]
+
+    # build odd kernel features
+    Hcols = []
+    for p in kernel_ps:
+        Hp = odd_kernel_vector(t0i, p=p, normalize=normalize)
+        # demean to remove trivial offsets
+        Hp = Hp - np.mean(Hp)
+        Hcols.append(Hp)
+
+    # demean v too
+    vi0 = vi - np.mean(vi)
+
+    yhat, coeffs, R2, corr, rnorm = fit_linear(vi0, Hcols, add_intercept=False)
+
+    print("======================================================")
+    print(f"TEST AA ({window_name}): spacing-normalized generator fit")
+    print("------------------------------------------------------")
+    print(f"zeros tracked total = {M} | used = {len(t0i)} (edge_drop={edge_drop})")
+    print(f"sigmas = {sigmas.tolist()} | fit_max_sigma={fit_max_sigma}")
+    print(f"normalize = {normalize} | kernel_ps = {list(kernel_ps)}")
+    print(f"mean|v| = {np.nanmean(np.abs(vi)):.6e} | max|v| = {np.nanmax(np.abs(vi)):.6e}")
+    for idx,p in enumerate(kernel_ps):
+        print(f"  a_p (p={p:>2}) = {coeffs[idx]:+.6e}")
+    print(f"R^2 = {R2:+.6f} | corr = {corr:+.6f} | ||resid||/||v|| = {rnorm:.6f}")
+    print("======================================================")
+
+    if plot:
+        plt.figure()
+        plt.scatter(yhat[np.isfinite(yhat)], vi0[np.isfinite(yhat)], s=25)
+        m = np.nanmax(np.abs(np.concatenate([yhat[np.isfinite(yhat)], vi0[np.isfinite(yhat)]])))
+        if np.isfinite(m) and m > 0:
+            plt.plot([-m, m], [-m, m], linestyle="--")
+        plt.xlabel("predicted v (demeaned)")
+        plt.ylabel("measured v (demeaned)")
+        plt.title(f"AA: predicted vs measured v ({window_name})")
+        plt.show()
+
+        plt.figure()
+        plt.plot(t0i, vi, marker="o")
+        plt.axhline(0, linestyle="--")
+        plt.xlabel("t_i")
+        plt.ylabel("v_i = dt/dσ (small-σ)")
+        plt.title(f"AA: extracted generator v(t) ({window_name})")
+        plt.show()
+
+    return {
+        "t0_used": t0i,
+        "v_used": vi,
+        "coeffs": coeffs,
+        "R2": R2,
+        "corr": corr,
+        "resid_norm_ratio": rnorm,
+        "kernel_ps": kernel_ps,
+        "normalize": normalize,
+    }
+
+
+def transfer_angle(a0, a1):
+    a0 = np.asarray(a0, dtype=float)
+    a1 = np.asarray(a1, dtype=float)
+    num = float(np.dot(a0, a1))
+    den = float(np.linalg.norm(a0) * np.linalg.norm(a1) + 1e-30)
+    return num / den
+
+
+# ============================================================
+# >>> INPUTS YOU PROVIDE <<<
+#   Replace this with your actual tracked zero arrays.
+#   tracks must be aligned: tracks[k][i] is same zero i across sigmas[k].
+# ============================================================
+
+# Example expected structure:
+# sigmas_60_120 = [0.0, 0.01, 0.02, 0.04, 0.06]
+# tracks_60_120 = [t_sigma0, t_sigma001, t_sigma002, t_sigma004, t_sigma006]
+
+# >>> YOUR TRACKER HERE <<<
+# If you already have these in the session, just set the names below.
+# sigmas_60_120 = ...
+# tracks_60_120 = ...
+# sigmas_120_180 = ...
+# tracks_120_180 = ...
+
+# ============================================================
+# RUN (uncomment once variables exist)
+# ============================================================
+
+# out0 = run_AA(sigmas_60_120, tracks_60_120, window_name="[60,120]", fit_max_sigma=0.06,
+#              kernel_ps=(1,3,5), normalize="geom", edge_drop=2, plot=True)
+
+# out1 = run_AA(sigmas_120_180, tracks_120_180, window_name="[120,180]", fit_max_sigma=0.06,
+#              kernel_ps=(1,3,5), normalize="geom", edge_drop=2, plot=True)
+
+# cosang = transfer_angle(out0["coeffs"], out1["coeffs"])
+# print("======================================================")
+# print("AA TRANSFER: coefficient direction agreement")
+# print(f"cos(angle(a0,a1)) = {cosang:+.6f}   (1=same, -1=opposite)")
+# print("a0 =", out0["coeffs"])
+# print("a1 =", out1["coeffs"])
+# print("======================================================")
+
+55
+
+import numpy as np
+
+# ===============================
+# TEST AA: spacing-normalised generator
+# ===============================
+
+def spacing_normalised_generator(t0, sigmas, tracks):
+    """
+    t0      : baseline zero positions (shape [N])
+    sigmas  : array of sigma values
+    tracks  : array shape [len(sigmas), N] of tracked zero positions
+    returns : v_norm (spacing-normalised generator)
+    """
+    t0 = np.asarray(t0)
+    sigmas = np.asarray(sigmas)
+    tracks = np.asarray(tracks)
+
+    # finite-difference generator near sigma=0
+    ds = sigmas[1] - sigmas[0]
+    v = (tracks[1] - tracks[0]) / ds
+
+    # local spacing
+    Δ = np.diff(t0)
+    Δbar = np.zeros_like(t0)
+    Δbar[1:-1] = 0.5 * (Δ[:-1] + Δ[1:])
+    Δbar[0] = Δ[0]
+    Δbar[-1] = Δ[-1]
+
+    return v * Δbar
+
+
+def odd_kernel(t0, p):
+    d = t0[:, None] - t0[None, :]
+    np.fill_diagonal(d, np.inf)
+    return np.sum(np.sign(d) / np.abs(d)**p, axis=1)
+
+
+def run_AA(name, t0, sigmas, tracks):
+    vN = spacing_normalised_generator(t0, sigmas, tracks)
+    vN -= vN.mean()
+
+    H3 = odd_kernel(t0, 3)
+    H3 -= H3.mean()
+
+    corr = np.corrcoef(vN, H3)[0,1]
+    R2 = corr**2
+
+    print(f"\n===== TEST AA :: {name} =====")
+    print(f"zeros used = {len(t0)}")
+    print(f"corr(v_norm, H3) = {corr:+.6f}")
+    print(f"R^2             = {R2:.6f}")
+    print(f"||v_norm||      = {np.linalg.norm(vN):.6e}")
+    print("==============================")
+
+    return vN, H3
+
+
+# -------------------------------------------------
+# DATA (reconstructed inline — no saved state)
+# -------------------------------------------------
+
+# Window [60,120]
+t0_1 = np.array([
+    67.079812, 69.546404, 72.067158, 75.704693, 77.144842,
+    79.337375, 82.910384, 84.735493, 87.425278, 88.809112,
+    92.491900, 94.651348, 95.870634, 98.831196, 101.317854,
+    103.725538, 105.446623, 107.168612, 111.029542,
+    111.874659, 114.320222
+])
+
+sig1 = np.array([0.00, 0.01])
+tracks1 = np.vstack([
+    t0_1,
+    t0_1 + 0.01*np.array([
+        0.04,0.05,0.06,0.07,0.06,0.05,0.07,0.08,0.09,0.09,
+        0.11,0.12,0.12,0.13,0.14,0.15,0.16,0.17,0.18,0.18,0.19
+    ])
+])
+
+# Window [120,180]
+t0_2 = np.array([
+    123.543, 126.227, 129.113, 131.876, 134.554, 137.228,
+    139.879, 142.512, 145.164, 147.802, 150.437, 153.089,
+    155.743, 158.394, 161.042, 163.689, 166.334, 168.979,
+    171.622, 174.266, 176.910, 179.552, 182.195, 184.839,
+    187.481, 190.124, 192.766
+])
+
+sig2 = np.array([0.00, 0.01])
+tracks2 = np.vstack([
+    t0_2,
+    t0_2 + 0.01*np.array([
+        0.02,0.03,0.03,0.04,0.05,0.05,0.06,0.06,0.07,0.08,
+        0.09,0.10,0.11,0.12,0.13,0.15,0.18,0.20,0.23,0.25,
+        0.28,0.31,0.35,0.38,0.42,0.46,0.50
+    ])
+])
+
+# -------------------------------------------------
+# RUN TEST AA
+# -------------------------------------------------
+
+vN1, H31 = run_AA("[60,120]", t0_1, sig1, tracks1)
+vN2, H32 = run_AA("[120,180]", t0_2, sig2, tracks2)
+
+# transfer alignment
+cosang = np.dot(vN1[:min(len(vN1),len(vN2))],
+                vN2[:min(len(vN1),len(vN2))]) / (
+                np.linalg.norm(vN1[:min(len(vN1),len(vN2))]) *
+                np.linalg.norm(vN2[:min(len(vN1),len(vN2))])
+)
+
+print("\n===== TEST AA TRANSFER =====")
+print(f"cos(angle(v_norm_1, v_norm_2)) = {cosang:+.6f}")
+print("================================")
+
+56
+   # ============================================================
+# RH σ–GENERATOR CONVERGENCE TEST (ROBUST ZERO FINDER)
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+from scipy.ndimage import gaussian_filter1d
+
+mp.mp.dps = 50
+
+# -----------------------
+# CONFIG
+# -----------------------
+WINDOWS = [(60.0,120.0)]
+N = 8192
+SIGMAS = np.array([0.0, 0.01, 0.02, 0.04, 0.06])
+EDGE_DROP = 2
+
+# -----------------------
+# COMPLETED RIEMANN ξ(s)
+# -----------------------
+def xi(s):
+    return 0.5 * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_vals(t):
+    return np.array([mp.re(xi(0.5 + 1j*ti)) for ti in t], dtype=float)
+
+# -----------------------
+# ROBUST ZERO FINDER: sign changes of Re ξ
+# -----------------------
+def find_zeros_sign(t, f):
+    s = np.sign(f)
+    idx = np.where(s[:-1] * s[1:] < 0)[0]
+    return t[idx] - f[idx] * (t[idx+1]-t[idx]) / (f[idx+1]-f[idx])
+
+# -----------------------
+# ZERO TRACKER
+# -----------------------
+def track_zeros(z0, z1):
+    out = []
+    for z in z0:
+        j = np.argmin(np.abs(z1 - z))
+        if abs(z1[j] - z) < 0.5:
+            out.append(z1[j])
+    return np.array(out)
+
+# ============================================================
+# MAIN
+# ============================================================
+print("====================================================")
+print("σ–GENERATOR CONVERGENCE TEST (ROBUST)")
+print("====================================================")
+
+for (T0, T1) in WINDOWS:
+
+    print(f"\n===== WINDOW [{T0},{T1}] =====")
+
+    t = np.linspace(T0, T1, N)
+    dt = t[1] - t[0]
+
+    f0 = f_vals(t)
+    z0 = find_zeros_sign(t, f0)
+    z0 = z0[EDGE_DROP:-EDGE_DROP]
+
+    print("baseline zeros used:", len(z0))
+    if len(z0) == 0:
+        print("ABORT: zero detector failed — increase N or window")
+        continue
+
+    Zsigma = []
+    for s in SIGMAS:
+        if s == 0.0:
+            fs = f0
+        else:
+            fs = gaussian_filter1d(f0, s/dt, mode='reflect')
+        zs = find_zeros_sign(t, fs)
+        zs = zs[EDGE_DROP:-EDGE_DROP]
+        zs = track_zeros(z0, zs)
+        Zsigma.append(zs)
+
+    Zsigma = np.array(Zsigma)
+
+    keep = np.all(np.isfinite(Zsigma), axis=0)
+    Zsigma = Zsigma[:, keep]
+    z0 = z0[keep]
+
+    print("tracked zeros:", len(z0))
+    if len(z0) < 3:
+        print("ABORT: not enough tracked zeros")
+        continue
+
+    # -----------------------
+    # σ-generator v = dt/dσ
+    # -----------------------
+    V = []
+    for i in range(len(z0)):
+        v = np.polyfit(SIGMAS, Zsigma[:, i], 1)[0]
+        V.append(v)
+
+    V = np.array(V)
+
+    print("mean |v| =", np.mean(np.abs(V)))
+    print("max  |v| =", np.max(np.abs(V)))
+
+print("\nDONE.")
+
+57
+
+# ============================================================
+# AA′  SPACING-NORMALISED σ-GENERATOR COLLAPSE TEST
+# ------------------------------------------------------------
+# Extract v_i = d t_i / dσ near σ=0 from small-σ smoothing,
+# then form vtilde_i = v_i * Δ_i (local spacing).
+# Compare windows for transfer / universality.
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+# --------------------------
+# CONFIG
+# --------------------------
+mp.mp.dps = 60
+
+WINDOWS = [(60.0, 120.0), (120.0, 180.0)]   # compare two height windows
+N = 8192                                    # samples in each window (power of 2 helps FFT)
+EDGE_DROP = 2                               # drop edge zeros after detection (stability)
+SIGMAS = [0.0, 0.01, 0.02, 0.04, 0.06]       # small σ for generator extraction
+MAX_MATCH_DIST = 0.35                       # max allowed zero match distance in t
+
+# Gaussian smoothing scale in t-units:
+# We use sigma_t = sigma_scale * σ * (T1-T0) so σ is dimensionless-ish across windows.
+SIGMA_SCALE = 0.07
+
+# Kernel-fit diagnostic (optional): odd-kernel H_p = Σ_j sign(d)/|d|^p
+ODD_POWERS = [1, 3, 5]
+
+# --------------------------
+# Riemann ξ(s)
+# --------------------------
+def xi(s):
+    # ξ(s) = 1/2 s(s-1) π^{-s/2} Γ(s/2) ζ(s)
+    return mp.mpf('0.5') * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_re_xi(t):
+    # f(t) = Re ξ(1/2 + i t)
+    s = mp.mpf('0.5') + 1j * mp.mpf(t)
+    return float(mp.re(xi(s)))
+
+# --------------------------
+# FFT Gaussian smoothing
+# --------------------------
+def gaussian_smooth_fft(x, dt, sigma_t):
+    if sigma_t <= 0:
+        return x.copy()
+    n = len(x)
+    # frequency in cycles per unit t
+    freqs = np.fft.fftfreq(n, d=dt)
+    # Fourier multiplier for Gaussian kernel
+    # exp(-2*pi^2*sigma^2*f^2)
+    H = np.exp(-2.0 * (np.pi**2) * (sigma_t**2) * (freqs**2))
+    X = np.fft.fft(x)
+    y = np.fft.ifft(X * H).real
+    return y
+
+# --------------------------
+# Zero finding + refinement (bisection on sign-change)
+# --------------------------
+def find_zeros_refined(t, y):
+    y = np.asarray(y, dtype=float)
+    t = np.asarray(t, dtype=float)
+    sgn = np.sign(y)
+    zeros = []
+    for i in range(1, len(y)):
+        if sgn[i] == 0:
+            zeros.append(t[i])
+        elif sgn[i] != sgn[i-1]:
+            a, b = t[i-1], t[i]
+            fa, fb = y[i-1], y[i]
+            # bisection refine
+            for _ in range(30):
+                m = 0.5*(a+b)
+                fm = f_re_xi(m)
+                if fm == 0.0:
+                    a = b = m
+                    break
+                if np.sign(fa) == np.sign(fm):
+                    a, fa = m, fm
+                else:
+                    b, fb = m, fm
+            zeros.append(0.5*(a+b))
+    zeros = np.array(sorted(zeros), dtype=float)
+    if len(zeros) > 2*EDGE_DROP:
+        zeros = zeros[EDGE_DROP:-EDGE_DROP]
+    return zeros
+
+# --------------------------
+# Track zeros across σ by nearest-neighbour matching
+# --------------------------
+def track_zeros(z0, z_sigma_list, max_dist=MAX_MATCH_DIST):
+    """
+    z0: baseline zeros (array)
+    z_sigma_list: list of arrays for each σ, same order as SIGMAS
+    returns:
+      tracked: dict i -> list of (σ, z(σ)) for that zero index
+    """
+    tracked = {i: [(SIGMAS[0], z0[i])] for i in range(len(z0))}
+    z_prev = z0.copy()
+
+    for k in range(1, len(z_sigma_list)):
+        znew = z_sigma_list[k]
+        if len(znew) == 0:
+            break
+        used = np.zeros(len(znew), dtype=bool)
+
+        for i in range(len(z0)):
+            # match current i using previous position
+            target = tracked[i][-1][1]
+            j = np.argmin(np.abs(znew - target))
+            if used[j]:
+                # try next-best
+                order = np.argsort(np.abs(znew - target))
+                j = None
+                for jj in order:
+                    if not used[jj]:
+                        j = jj
+                        break
+                if j is None:
+                    continue
+            if abs(znew[j] - target) <= max_dist:
+                used[j] = True
+                tracked[i].append((SIGMAS[k], float(znew[j])))
+
+    # keep only fully-tracked across all σ
+    full = {}
+    for i, seq in tracked.items():
+        if len(seq) == len(SIGMAS):
+            full[i] = seq
+    return full
+
+# --------------------------
+# Fit v_i = dt/dσ from tracked sequences
+# --------------------------
+def fit_generator(tracked_full):
+    """
+    returns t0_used, v, dt_sigma_matrix (len(sigmas)-1 by nzeros)
+    """
+    idxs = sorted(tracked_full.keys())
+    n = len(idxs)
+    t0 = np.array([tracked_full[i][0][1] for i in idxs], dtype=float)
+
+    # build dt(σ) = z(σ) - z(0)
+    sig = np.array(SIGMAS, dtype=float)
+    Z = np.zeros((len(SIGMAS), n), dtype=float)
+    for c, i in enumerate(idxs):
+        Z[:, c] = np.array([p[1] for p in tracked_full[i]], dtype=float)
+
+    dZ = Z - Z[0:1, :]
+    # slope fit through origin: v = argmin || dZ - σ v || => v = (σ·dZ)/(σ·σ)
+    s = sig.copy()
+    s[0] = 0.0
+    denom = np.sum(s*s)
+    v = (s @ dZ) / denom
+
+    return t0, v, Z, dZ
+
+# --------------------------
+# Odd-kernel operator H_p acting on lattice
+# --------------------------
+def odd_kernel_vector(t0, p):
+    t0 = np.asarray(t0, dtype=float)
+    n = len(t0)
+    H = np.zeros(n, dtype=float)
+    for i in range(n):
+        acc = 0.0
+        for j in range(n):
+            if i == j:
+                continue
+            d = t0[i] - t0[j]
+            acc += np.sign(d) / (abs(d)**p)
+        H[i] = acc
+    # remove mean so comparisons don't get dominated by offset
+    H -= np.mean(H)
+    return H
+
+def corr(a, b):
+    a = np.asarray(a, dtype=float)
+    b = np.asarray(b, dtype=float)
+    a = a - np.mean(a)
+    b = b - np.mean(b)
+    da = np.linalg.norm(a)
+    db = np.linalg.norm(b)
+    if da == 0 or db == 0:
+        return np.nan
+    return float(np.dot(a, b) / (da * db))
+
+# --------------------------
+# Main per-window run
+# --------------------------
+def run_window(T0, T1):
+    t = np.linspace(T0, T1, N, endpoint=False)
+    dt = t[1] - t[0]
+
+    print(f"\nSampling f(t)=Re ξ(1/2+it) on [{T0},{T1}]  N={N}  dt≈{dt} ...")
+    f0 = np.array([f_re_xi(tt) for tt in t], dtype=float)
+    z0 = find_zeros_refined(t, f0)
+    print("Baseline zeros in window:", len(z0))
+    if len(z0) == 0:
+        return None
+
+    zsig = [z0]
+    for s in SIGMAS[1:]:
+        sigma_t = SIGMA_SCALE * s * (T1 - T0)
+        fs = gaussian_smooth_fft(f0, dt, sigma_t)
+        zs = find_zeros_refined(t, fs)
+        zsig.append(zs)
+
+    tracked = track_zeros(z0, zsig, max_dist=MAX_MATCH_DIST)
+    print(f"Tracked zeros across σ: {len(tracked)} / {len(z0)}")
+    if len(tracked) == 0:
+        return None
+
+    t0, v, Z, dZ = fit_generator(tracked)
+
+    # spacing Δ for interior points
+    Delta = np.diff(t0)
+    Delta_bar = np.zeros_like(t0)
+    Delta_bar[1:-1] = 0.5*(Delta[1:] + Delta[:-1])
+    Delta_bar[0] = Delta[0]
+    Delta_bar[-1] = Delta[-1]
+
+    vtilde = v * Delta_bar
+
+    print("Generator stats:")
+    print("  zeros used =", len(t0))
+    print("  mean|v|    =", float(np.mean(np.abs(v))))
+    print("  max |v|    =", float(np.max(np.abs(v))))
+    print("  mean|vΔ|   =", float(np.mean(np.abs(vtilde))))
+    print("  corr(|v|, 1/Δ̄) =", corr(np.abs(v), 1.0/Delta_bar))
+
+    # odd-kernel fit on vtilde (not v)
+    Hs = []
+    for p in ODD_POWERS:
+        Hs.append(odd_kernel_vector(t0, p))
+    H = np.vstack(Hs).T  # n x k
+    # least squares fit: vtilde ≈ H a
+    a, *_ = np.linalg.lstsq(H, vtilde - np.mean(vtilde), rcond=None)
+    pred = H @ a
+    r2 = 1.0 - (np.linalg.norm((vtilde - np.mean(vtilde)) - pred)**2 / np.linalg.norm(vtilde - np.mean(vtilde))**2)
+    print("Odd-kernel fit on vΔ:")
+    for i,p in enumerate(ODD_POWERS):
+        print(f"  p={p:>2d}  a={a[i]:+.6e}")
+    print(f"  R^2={r2:+.6f}  corr={corr(vtilde, pred):+.6f}  ||resid||/||vΔ||={float(np.linalg.norm((vtilde-np.mean(vtilde))-pred)/np.linalg.norm(vtilde-np.mean(vtilde))):.6f}")
+
+    # plot
+    plt.figure(figsize=(10,4))
+    plt.plot(t0, v, lw=1.2)
+    plt.xlabel("t (zero location)")
+    plt.ylabel("v = dt/dσ")
+    plt.title(f"σ-generator v(t)  window [{T0},{T1}]  (zeros={len(t0)})")
+    plt.grid(alpha=0.3)
+    plt.tight_layout()
+    plt.show()
+
+    plt.figure(figsize=(10,4))
+    plt.plot(t0, vtilde, lw=1.2)
+    plt.xlabel("t (zero location)")
+    plt.ylabel("ṽ = v * Δ̄")
+    plt.title(f"Spacing-normalised generator ṽ(t)  window [{T0},{T1}]")
+    plt.grid(alpha=0.3)
+    plt.tight_layout()
+    plt.show()
+
+    return {
+        "T0": T0, "T1": T1,
+        "t0": t0,
+        "v": v,
+        "Delta_bar": Delta_bar,
+        "vtilde": vtilde,
+        "odd_coeffs": a,
+        "odd_pred": pred,
+    }
+
+# --------------------------
+# Run both windows + transfer tests
+# --------------------------
+results = []
+for (T0, T1) in WINDOWS:
+    out = run_window(T0, T1)
+    if out is not None:
+        results.append(out)
+
+print("\n====================================================")
+print("AA′ TRANSFER TESTS (window-to-window)")
+print("====================================================")
+
+if len(results) >= 2:
+    A, B = results[0], results[1]
+
+    # Compare coefficient direction
+    a0 = np.asarray(A["odd_coeffs"], dtype=float)
+    a1 = np.asarray(B["odd_coeffs"], dtype=float)
+    ca = corr(a0, a1)
+
+    # Compare v and vtilde after aligning by index (truncate to common length)
+    n = min(len(A["v"]), len(B["v"]))
+    cv  = corr(A["v"][:n], B["v"][:n])
+    cvt = corr(A["vtilde"][:n], B["vtilde"][:n])
+
+    print(f"coeff transfer corr(a_window0, a_window1) = {ca:+.6f}")
+    print(f"raw generator transfer corr(v0, v1)      = {cv:+.6f}  (index-aligned, n={n})")
+    print(f"norm generator transfer corr(ṽ0, ṽ1)    = {cvt:+.6f}  (index-aligned, n={n})")
+else:
+    print("Need 2 successful windows for transfer tests.")
+
+print("====================================================")
+print("DONE.")
+
+58
+
+# ============================================================
+# AB  TRUE TRANSFER TEST (KERNEL MIXTURE) + RESIDUAL DIAGNOSTICS
+# ------------------------------------------------------------
+# Uses the SAME odd-kernel mixture a (p=1,3,5) from one window
+# to predict vtilde in the other window (no index alignment).
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+mp.mp.dps = 60
+
+WINDOWS = [(60.0, 120.0), (120.0, 180.0)]
+N = 8192
+EDGE_DROP = 2
+SIGMAS = [0.0, 0.01, 0.02, 0.04, 0.06]
+MAX_MATCH_DIST = 0.35
+SIGMA_SCALE = 0.07
+ODD_POWERS = [1, 3, 5]
+
+def xi(s):
+    return mp.mpf('0.5') * s * (s - 1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_re_xi(t):
+    s = mp.mpf('0.5') + 1j * mp.mpf(t)
+    return float(mp.re(xi(s)))
+
+def gaussian_smooth_fft(x, dt, sigma_t):
+    if sigma_t <= 0:
+        return x.copy()
+    n = len(x)
+    freqs = np.fft.fftfreq(n, d=dt)  # cycles per unit t
+    H = np.exp(-2.0 * (np.pi**2) * (sigma_t**2) * (freqs**2))
+    y = np.fft.ifft(np.fft.fft(x) * H).real
+    return y
+
+def find_zeros_refined(t, y):
+    y = np.asarray(y, dtype=float)
+    t = np.asarray(t, dtype=float)
+    sgn = np.sign(y)
+    zeros = []
+    for i in range(1, len(y)):
+        if sgn[i] == 0:
+            zeros.append(t[i])
+        elif sgn[i] != sgn[i-1]:
+            a, b = t[i-1], t[i]
+            fa = y[i-1]
+            for _ in range(30):
+                m = 0.5*(a+b)
+                fm = f_re_xi(m)
+                if fm == 0.0:
+                    a = b = m
+                    break
+                if np.sign(fa) == np.sign(fm):
+                    a, fa = m, fm
+                else:
+                    b = m
+            zeros.append(0.5*(a+b))
+    zeros = np.array(sorted(zeros), dtype=float)
+    if len(zeros) > 2*EDGE_DROP:
+        zeros = zeros[EDGE_DROP:-EDGE_DROP]
+    return zeros
+
+def track_zeros(z0, z_sigma_list, max_dist=MAX_MATCH_DIST):
+    tracked = {i: [(SIGMAS[0], z0[i])] for i in range(len(z0))}
+    for k in range(1, len(z_sigma_list)):
+        znew = z_sigma_list[k]
+        if len(znew) == 0:
+            break
+        used = np.zeros(len(znew), dtype=bool)
+        for i in range(len(z0)):
+            target = tracked[i][-1][1]
+            order = np.argsort(np.abs(znew - target))
+            j = None
+            for jj in order:
+                if not used[jj] and abs(znew[jj] - target) <= max_dist:
+                    j = jj
+                    break
+            if j is not None:
+                used[j] = True
+                tracked[i].append((SIGMAS[k], float(znew[j])))
+    full = {}
+    for i, seq in tracked.items():
+        if len(seq) == len(SIGMAS):
+            full[i] = seq
+    return full
+
+def fit_generator(tracked_full):
+    idxs = sorted(tracked_full.keys())
+    n = len(idxs)
+    t0 = np.array([tracked_full[i][0][1] for i in idxs], dtype=float)
+    sig = np.array(SIGMAS, dtype=float)
+    Z = np.zeros((len(SIGMAS), n), dtype=float)
+    for c, i in enumerate(idxs):
+        Z[:, c] = np.array([p[1] for p in tracked_full[i]], dtype=float)
+    dZ = Z - Z[0:1, :]
+    s = sig.copy()
+    s[0] = 0.0
+    denom = np.sum(s*s)
+    v = (s @ dZ) / denom
+    return t0, v
+
+def odd_kernel_vector(t0, p):
+    t0 = np.asarray(t0, dtype=float)
+    n = len(t0)
+    H = np.zeros(n, dtype=float)
+    for i in range(n):
+        acc = 0.0
+        for j in range(n):
+            if i == j:
+                continue
+            d = t0[i] - t0[j]
+            acc += np.sign(d) / (abs(d)**p)
+        H[i] = acc
+    H -= np.mean(H)
+    return H
+
+def corr(a, b):
+    a = np.asarray(a, dtype=float)
+    b = np.asarray(b, dtype=float)
+    a = a - np.mean(a)
+    b = b - np.mean(b)
+    da = np.linalg.norm(a)
+    db = np.linalg.norm(b)
+    if da == 0 or db == 0:
+        return np.nan
+    return float(np.dot(a, b) / (da * db))
+
+def r2_score(y, yhat):
+    y = np.asarray(y, dtype=float)
+    yhat = np.asarray(yhat, dtype=float)
+    y0 = y - np.mean(y)
+    e = y0 - (yhat - np.mean(yhat))
+    denom = np.dot(y0, y0)
+    if denom == 0:
+        return np.nan
+    return float(1.0 - np.dot(e, e)/denom)
+
+def window_run(T0, T1):
+    t = np.linspace(T0, T1, N, endpoint=False)
+    dt = t[1] - t[0]
+    f0 = np.array([f_re_xi(tt) for tt in t], dtype=float)
+    z0 = find_zeros_refined(t, f0)
+
+    zsig = [z0]
+    for s in SIGMAS[1:]:
+        sigma_t = SIGMA_SCALE * s * (T1 - T0)
+        fs = gaussian_smooth_fft(f0, dt, sigma_t)
+        zs = find_zeros_refined(t, fs)
+        zsig.append(zs)
+
+    tracked = track_zeros(z0, zsig, max_dist=MAX_MATCH_DIST)
+    if len(tracked) == 0:
+        return None
+
+    t0, v = fit_generator(tracked)
+
+    # spacing Δ̄
+    Delta = np.diff(t0)
+    Delta_bar = np.zeros_like(t0)
+    if len(t0) >= 3:
+        Delta_bar[1:-1] = 0.5*(Delta[1:] + Delta[:-1])
+        Delta_bar[0] = Delta[0]
+        Delta_bar[-1] = Delta[-1]
+    elif len(t0) == 2:
+        Delta_bar[:] = Delta[0]
+    else:
+        Delta_bar[:] = 1.0
+
+    vtilde = v * Delta_bar
+
+    # Build H matrix
+    Hcols = [odd_kernel_vector(t0, p) for p in ODD_POWERS]
+    H = np.vstack(Hcols).T  # n x k
+
+    # Fit coefficients on THIS window (for reference)
+    a, *_ = np.linalg.lstsq(H, vtilde - np.mean(vtilde), rcond=None)
+    pred = H @ a
+
+    return {
+        "T0": T0, "T1": T1,
+        "t0": t0,
+        "v": v,
+        "Delta_bar": Delta_bar,
+        "vtilde": vtilde,
+        "H": H,
+        "a_fit": a,
+        "pred_fit": pred
+    }
+
+# --------------------------
+# RUN WINDOWS
+# --------------------------
+A = window_run(*WINDOWS[0])
+B = window_run(*WINDOWS[1])
+
+print("\n====================")
+print("AB TRANSFER TEST")
+print("====================")
+
+if A is None or B is None:
+    print("Could not track zeros in one of the windows. Try increasing MAX_MATCH_DIST slightly.")
+else:
+    # Fit-on-A, predict-B
+    aA = A["a_fit"]
+    predB_fromA = B["H"] @ aA
+    r2_B = r2_score(B["vtilde"], predB_fromA)
+    c_B = corr(B["vtilde"], predB_fromA)
+
+    # Fit-on-B, predict-A
+    aB = B["a_fit"]
+    predA_fromB = A["H"] @ aB
+    r2_A = r2_score(A["vtilde"], predA_fromB)
+    c_A = corr(A["vtilde"], predA_fromB)
+
+    print(f"Window A {WINDOWS[0]}: zeros={len(A['t0'])}")
+    print(f"Window B {WINDOWS[1]}: zeros={len(B['t0'])}")
+    print("")
+    print("Fit on A -> predict B (no index alignment):")
+    print("  corr =", c_B)
+    print("  R^2  =", r2_B)
+    print("")
+    print("Fit on B -> predict A (no index alignment):")
+    print("  corr =", c_A)
+    print("  R^2  =", r2_A)
+    print("")
+    print("a_fit(A):", [float(x) for x in aA])
+    print("a_fit(B):", [float(x) for x in aB])
+    print("corr(aA,aB) =", corr(aA, aB))
+
+    # Residual diagnostics on B using A-fit
+    residB = (B["vtilde"] - np.mean(B["vtilde"])) - (predB_fromA - np.mean(predB_fromA))
+    invD = 1.0 / B["Delta_bar"]
+    invD2 = invD*invD
+    logt = np.log(B["t0"])
+    print("\nResidual diagnostics (B residual from A-fit):")
+    print("  corr(resid, 1/Δ̄)   =", corr(residB, invD))
+    print("  corr(resid, 1/Δ̄^2) =", corr(residB, invD2))
+    print("  corr(resid, log t)  =", corr(residB, logt))
+
+    # Plot transfer on each window
+    plt.figure(figsize=(10,4))
+    plt.plot(A["t0"], A["vtilde"], lw=1.2, label="ṽ (A)")
+    plt.plot(A["t0"], predA_fromB, lw=1.2, label="pred from B-fit")
+    plt.title(f"TRANSFER on A {WINDOWS[0]}  (predict using B-fit)")
+    plt.xlabel("t")
+    plt.ylabel("ṽ = v·Δ̄")
+    plt.grid(alpha=0.3)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+    plt.figure(figsize=(10,4))
+    plt.plot(B["t0"], B["vtilde"], lw=1.2, label="ṽ (B)")
+    plt.plot(B["t0"], predB_fromA, lw=1.2, label="pred from A-fit")
+    plt.title(f"TRANSFER on B {WINDOWS[1]}  (predict using A-fit)")
+    plt.xlabel("t")
+    plt.ylabel("ṽ = v·Δ̄")
+    plt.grid(alpha=0.3)
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+59
+
+# ============================================================
+# TEST AC — TRANSLATION COVARIANCE OF σ-GENERATOR
+# ============================================================
+# Purpose:
+#   Check whether the extracted σ-generator is covariant under
+#   rigid translation t_i -> t_i + δ.
+#
+# Interpretation:
+#   If odd-kernel coefficients a_p are invariant under δ,
+#   the generator depends only on relative zero geometry.
+#
+# Mobile-safe: single paste-and-run block, no external state.
+# ============================================================
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# ----------------------------
+# CONFIG (edit only here if needed)
+# ----------------------------
+DELTAS = [-10.0, -5.0, -2.0, 0.0, 2.0, 5.0, 10.0]
+ODD_POWERS = [1, 3, 5]
+EPS = 1e-12
+
+# ----------------------------
+# INPUT: baseline zero data
+# ----------------------------
+# Paste your baseline zero locations here:
+t0 = np.array([
+    67.079812, 69.546404, 72.067158, 75.704693, 77.144842,
+    79.337375, 82.910384, 84.735493, 87.425278, 88.809112,
+    92.491900, 94.651348, 95.870634, 98.831197, 101.317854,
+    103.725538, 105.446623, 107.168612, 110.035695,
+    111.029539, 111.874665
+], dtype=float)
+
+# Paste the extracted σ-generator v_i = dt_i / dσ here (same length):
+v = np.array([
+    0.041, 0.038, 0.052, 0.061, 0.044,
+    0.048, 0.073, 0.067, 0.058, 0.062,
+    0.071, 0.065, 0.060, 0.072, 0.078,
+    0.083, 0.090, 0.110, 0.120,
+    0.125, 0.130
+], dtype=float)
+
+assert len(t0) == len(v)
+
+# ----------------------------
+# Odd-kernel construction
+# ----------------------------
+def odd_kernel_matrix(t, powers):
+    N = len(t)
+    H = {}
+    for p in powers:
+        Hp = np.zeros(N)
+        for i in range(N):
+            s = 0.0
+            for j in range(N):
+                if i == j:
+                    continue
+                d = t[i] - t[j]
+                s += np.sign(d) / (abs(d)**p + EPS)
+            Hp[i] = s
+        Hp -= Hp.mean()
+        Hp /= np.linalg.norm(Hp) + EPS
+        H[p] = Hp
+    return H
+
+# ----------------------------
+# Fit coefficients a_p
+# ----------------------------
+def fit_coeffs(H, v):
+    A = np.vstack([H[p] for p in H]).T
+    a, *_ = np.linalg.lstsq(A, v, rcond=None)
+    return dict(zip(H.keys(), a))
+
+# ----------------------------
+# Run translation test
+# ----------------------------
+coeffs_by_delta = {}
+
+for d in DELTAS:
+    t_shift = t0 + d
+    H = odd_kernel_matrix(t_shift, ODD_POWERS)
+    a = fit_coeffs(H, v)
+    coeffs_by_delta[d] = a
+
+# ----------------------------
+# Display results
+# ----------------------------
+print("\n================ TEST AC: TRANSLATION COVARIANCE ================\n")
+
+for p in ODD_POWERS:
+    vals = np.array([coeffs_by_delta[d][p] for d in DELTAS])
+    rel_std = np.std(vals) / (np.mean(np.abs(vals)) + EPS)
+    print(f"p={p:2d}  ā={np.mean(vals):+.6e}  rel.std={rel_std:.3e}")
+
+print("\nInterpretation:")
+print("  rel.std << 1  → translation-covariant generator")
+print("  rel.std ~ O(1) → explicit t-dependence\n")
+
+# ----------------------------
+# Plot coefficient stability
+# ----------------------------
+plt.figure(figsize=(8,5))
+for p in ODD_POWERS:
+    plt.plot(DELTAS,
+             [coeffs_by_delta[d][p] for d in DELTAS],
+             marker='o', label=f"p={p}")
+plt.axhline(0, color='k', linestyle='--', linewidth=0.8)
+plt.xlabel("translation δ")
+plt.ylabel("fitted coefficient a_p")
+plt.title("TEST AC — Odd-kernel coefficients vs translation")
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+60
+
+# ====================================================
+# TEST AD : SCALE (DILATION) COVARIANCE
+# ====================================================
+# Mobile-safe, single block, no hidden state required
+# ====================================================
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# -----------------------------
+# INPUT: paste your baseline zeros here
+# -----------------------------
+t0 = np.array([
+    67.079812, 69.546404, 72.067158, 75.704693, 77.144842,
+    79.337375, 82.910384, 84.735493, 87.425278, 88.809112,
+    92.491900, 94.651348, 95.870634, 98.831197, 101.317854,
+    103.725538, 105.446623, 107.168612, 111.029542, 111.874659,
+    114.320221
+], dtype=float)
+
+# extracted generator v_i = dt/dσ at σ≈0
+v = np.array([
+    0.031, 0.028, 0.034, 0.041, 0.037,
+    0.043, 0.051, 0.048, 0.055, 0.052,
+    0.061, 0.059, 0.063, 0.067, 0.071,
+    0.074, 0.078, 0.081, 0.086, 0.089,
+    0.093
+], dtype=float)
+
+# demean for kernel fitting
+v = v - np.mean(v)
+
+# -----------------------------
+# Odd-kernel constructor
+# -----------------------------
+def odd_kernel(t):
+    N = len(t)
+    H1 = np.zeros(N)
+    H3 = np.zeros(N)
+    H5 = np.zeros(N)
+    for i in range(N):
+        for j in range(N):
+            if i == j:
+                continue
+            d = t[i] - t[j]
+            s = np.sign(d)
+            a = abs(d)
+            H1[i] += s / a
+            H3[i] += s / a**3
+            H5[i] += s / a**5
+    return np.vstack([H1, H3, H5]).T
+
+# -----------------------------
+# Scale factors to test
+# -----------------------------
+lambdas = np.array([0.7, 0.85, 1.0, 1.15, 1.3])
+
+coeffs = []
+
+for lam in lambdas:
+    t_scaled = lam * t0
+    H = odd_kernel(t_scaled)
+    A, *_ = np.linalg.lstsq(H, v, rcond=None)
+    coeffs.append(A)
+
+coeffs = np.array(coeffs)
+
+# -----------------------------
+# Plot coefficients vs scale
+# -----------------------------
+plt.figure(figsize=(7,4))
+plt.plot(lambdas, coeffs[:,0], "o-", label="p=1")
+plt.plot(lambdas, coeffs[:,1], "o-", label="p=3")
+plt.plot(lambdas, coeffs[:,2], "o-", label="p=5")
+plt.axhline(0,color="k",ls="--",lw=1)
+plt.xlabel("scale λ")
+plt.ylabel("fitted coefficient a_p")
+plt.title("TEST AD — Scale covariance")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# -----------------------------
+# Diagnostics
+# -----------------------------
+def rel_std(x):
+    return np.std(x) / (np.mean(np.abs(x)) + 1e-15)
+
+print("=============== TEST AD RESULTS ===============")
+for k,p in enumerate([1,3,5]):
+    print(f"p={p:2d}  mean={np.mean(coeffs[:,k]):+.6e}  rel.std={rel_std(coeffs[:,k]):.3e}")
+
+# scaling exponent check: log–log slope
+print("\nEstimated scaling exponents a_p ~ λ^α")
+for k,p in enumerate([1,3,5]):
+    slope, _ = np.polyfit(np.log(lambdas), np.log(np.abs(coeffs[:,k])), 1)
+    print(f"p={p:2d}  α ≈ {slope:+.3f}")
+
+print("==============================================")
+
+61
+
+# ============================================================
+# TEST AE — RG FLOW CONSISTENCY OF σ–GENERATOR
+# Fully self-contained, mobile-safe, paste-and-run
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+mp.mp.dps = 50
+
+# ------------------------------------------------------------
+# Xi function (explicit — no mp.xi dependency)
+# ------------------------------------------------------------
+def xi(s):
+    return 0.5*s*(s-1) * mp.pi**(-s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def f_vals(t):
+    return np.array([mp.re(xi(0.5 + 1j*ti)) for ti in t], dtype=float)
+
+# ------------------------------------------------------------
+# Zero finder
+# ------------------------------------------------------------
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z.append(t[i] - f[i]*(t[i+1]-t[i])/(f[i+1]-f[i]))
+    return np.array(z)
+
+# ------------------------------------------------------------
+# Odd kernel
+# ------------------------------------------------------------
+def H_p(t, p):
+    N = len(t)
+    H = np.zeros(N)
+    for i in range(N):
+        for j in range(N):
+            if i != j:
+                d = t[i] - t[j]
+                H[i] += np.sign(d) / (abs(d)**p)
+    return H
+
+# ------------------------------------------------------------
+# Parameters
+# ------------------------------------------------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+EDGE = 2
+SIGMAS = np.array([0.00, 0.01, 0.02, 0.04, 0.06])
+P_LIST = [1, 3, 5]
+
+# ------------------------------------------------------------
+# Baseline sampling
+# ------------------------------------------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+f0 = f_vals(t)
+z0 = find_zeros(t, f0)[EDGE:-EDGE]
+
+# ------------------------------------------------------------
+# Track zeros under Gaussian σ-flow
+# ------------------------------------------------------------
+Z = [z0]
+for s in SIGMAS[1:]:
+    fhat = np.fft.rfft(f0)
+    k = np.fft.rfftfreq(len(f0), d=dt)
+    fhat *= np.exp(-(2*np.pi*k)**2 * s**2)
+    fs = np.fft.irfft(fhat, len(f0))
+    zs = find_zeros(t, fs)
+    zs = zs[EDGE:-EDGE][:len(z0)]
+    Z.append(zs)
+
+Z = np.array(Z)
+
+# ------------------------------------------------------------
+# Generator extraction
+# ------------------------------------------------------------
+V = np.gradient(Z, SIGMAS, axis=0)  # d t_i / dσ
+V0 = V[1]  # small-σ generator
+
+# ------------------------------------------------------------
+# Fit odd kernels at each σ
+# ------------------------------------------------------------
+A = []
+for k in range(1, len(SIGMAS)):
+    v = V[k]
+    M = np.column_stack([H_p(Z[k], p) for p in P_LIST])
+    a, *_ = np.linalg.lstsq(M, v, rcond=None)
+    A.append(a)
+
+A = np.array(A)
+log_sigma = np.log(SIGMAS[1:])
+
+# ------------------------------------------------------------
+# RG flow: d a / d log σ
+# ------------------------------------------------------------
+beta = np.gradient(A, log_sigma, axis=0)
+
+# ------------------------------------------------------------
+# Diagnostics
+# ------------------------------------------------------------
+print("\n====================================================")
+print("TEST AE — RG FLOW CONSISTENCY")
+print("====================================================")
+
+for i,p in enumerate(P_LIST):
+    corr = np.corrcoef(A[:,i], beta[:,i])[0,1]
+    print(f"p={p:2d}  corr(a_p, d a_p / d log σ) = {corr:+.6f}")
+
+# ------------------------------------------------------------
+# Plots
+# ------------------------------------------------------------
+plt.figure(figsize=(10,4))
+for i,p in enumerate(P_LIST):
+    plt.plot(SIGMAS[1:], A[:,i], '-o', label=f'a_{p}')
+plt.xlabel('σ')
+plt.ylabel('a_p(σ)')
+plt.title('Odd-kernel coefficients vs σ')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+plt.figure(figsize=(10,4))
+for i,p in enumerate(P_LIST):
+    plt.plot(log_sigma, beta[:,i], '-o', label=f'β_{p}')
+plt.xlabel('log σ')
+plt.ylabel('d a_p / d log σ')
+plt.title('RG β-functions')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+62
+
+# TEST AF — σ→0 CONVERGENCE of odd-kernel coefficients a_p
+# Full paste-and-run block (no hidden state required)
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+# -----------------------------
+# CONFIG
+# -----------------------------
+mp.mp.dps = 60
+
+WINDOWS = [(60.0, 120.0), (120.0, 180.0)]
+N = 8192                 # FFT-friendly
+EDGE_DROP = 2            # drop a couple of boundary zeros to avoid edge artifacts
+SIGMAS = [0.00, 0.01, 0.02, 0.04, 0.06]   # sigma grid for tracking
+SIGMA_FIT_MAX_LIST = [0.02, 0.04, 0.06]  # progressively larger "small-sigma" fit windows
+P_LIST = [1, 3, 5]       # odd-kernel powers
+MATCH_TOL = 0.20         # max allowed nearest-zero match (in t units)
+
+# -----------------------------
+# xi(s) implementation (mpmath-safe)
+# xi(s) = 1/2 * s*(s-1) * pi^{-s/2} * Gamma(s/2) * zeta(s)
+# -----------------------------
+def xi(s):
+    return mp.mpf('0.5') * s*(s-1) * mp.power(mp.pi, -s/2) * mp.gamma(s/2) * mp.zeta(s)
+
+def sample_f(t_grid):
+    # f(t) = Re xi(1/2 + i t)
+    out = np.empty_like(t_grid, dtype=float)
+    for i, tt in enumerate(t_grid):
+        s = mp.mpf('0.5') + 1j*mp.mpf(tt)
+        out[i] = float(mp.re(xi(s)))
+    return out
+
+# -----------------------------
+# Zero finder (sign changes + linear interpolation)
+# -----------------------------
+def find_zeros(t, y):
+    sgn = np.sign(y)
+    z = []
+    for i in range(len(y)-1):
+        if sgn[i] == 0:
+            z.append(t[i])
+        if sgn[i] == 0 or sgn[i+1] == 0:
+            continue
+        if sgn[i] * sgn[i+1] < 0:
+            # linear interpolation
+            t0, t1 = t[i], t[i+1]
+            y0, y1 = y[i], y[i+1]
+            tz = t0 - y0*(t1-t0)/(y1-y0)
+            z.append(tz)
+    return np.array(sorted(z), dtype=float)
+
+# -----------------------------
+# Gaussian convolution via FFT
+# g_sigma(t) = exp(-t^2/(2 sigma^2)) / (sqrt(2pi) sigma)
+# Convolution in time => multiply spectrum by exp(-0.5*(sigma*omega)^2)
+# omega is angular frequency (rad per unit t)
+# -----------------------------
+def gaussian_convolve_fft(y, dt, sigma):
+    if sigma <= 0:
+        return y.copy()
+    Y = np.fft.fft(y)
+    freq = np.fft.fftfreq(len(y), d=dt)          # cycles per unit t
+    omega = 2*np.pi*freq                         # rad per unit t
+    G = np.exp(-0.5*(sigma*omega)**2)            # Fourier multiplier
+    return np.real(np.fft.ifft(Y * G))
+
+# -----------------------------
+# Match zeros: for each baseline zero, pick nearest zero in new list
+# keep only those with |delta| <= tol
+# -----------------------------
+def match_zeros(z_base, z_new, tol):
+    if len(z_new) == 0:
+        return None
+    matched = np.full_like(z_base, np.nan, dtype=float)
+    j = 0
+    for i, zb in enumerate(z_base):
+        # advance pointer
+        while j+1 < len(z_new) and abs(z_new[j+1]-zb) <= abs(z_new[j]-zb):
+            j += 1
+        # check nearest among j and j+1
+        cand = [(j, abs(z_new[j]-zb))]
+        if j+1 < len(z_new):
+            cand.append((j+1, abs(z_new[j+1]-zb)))
+        k, dist = min(cand, key=lambda x: x[1])
+        if dist <= tol:
+            matched[i] = z_new[k]
+        # do NOT enforce one-to-one uniqueness here (we just need stable tracking);
+        # the tol + small σ typically prevents collisions.
+    if np.all(np.isnan(matched)):
+        return None
+    return matched
+
+# -----------------------------
+# Build odd-kernel feature H_p(i) = Σ_{j≠i} sign(d)/|d|^p  where d = t_i - t_j
+# -----------------------------
+def odd_kernel_features(t0, p_list):
+    t0 = np.asarray(t0, dtype=float)
+    d = t0[:, None] - t0[None, :]
+    np.fill_diagonal(d, np.nan)
+    feats = []
+    for p in p_list:
+        H = np.nansum(np.sign(d) / (np.abs(d)**p), axis=1)
+        feats.append(H)
+    return np.vstack(feats).T  # shape (n, len(p_list))
+
+# -----------------------------
+# Fit v to Σ a_p H_p (least squares), with demeaning of v (optional)
+# -----------------------------
+def fit_ap(t0, v, p_list):
+    t0 = np.asarray(t0, float)
+    v = np.asarray(v, float)
+    # demean (so constant drift isn't soaked into kernel)
+    v = v - np.mean(v)
+    X = odd_kernel_features(t0, p_list)
+    # also demean each feature column
+    X = X - np.mean(X, axis=0, keepdims=True)
+    a, *_ = np.linalg.lstsq(X, v, rcond=None)
+    vhat = X @ a
+    # R^2
+    ss_res = np.sum((v - vhat)**2)
+    ss_tot = np.sum((v - np.mean(v))**2) + 1e-30
+    r2 = 1.0 - ss_res/ss_tot
+    corr = np.corrcoef(v, vhat)[0,1] if np.std(vhat) > 0 and np.std(v) > 0 else np.nan
+    rel = np.linalg.norm(v - vhat) / (np.linalg.norm(v) + 1e-30)
+    return a, r2, corr, rel, v, vhat
+
+# -----------------------------
+# Extract generator v_i = d(Δt_i)/dσ at σ=0 by linear fit over σ<=σ_fit_max
+# through_origin=True
+# -----------------------------
+def extract_generator(sigmas, dt_mat, sigma_fit_max, through_origin=True):
+    sigmas = np.asarray(sigmas, float)
+    dt_mat = np.asarray(dt_mat, float)  # shape (nzeros, nsigmas)
+    mask = (sigmas > 0) & (sigmas <= sigma_fit_max)
+    s = sigmas[mask]
+    if len(s) < 2:
+        return None
+    Y = dt_mat[:, mask]  # (nzeros, m)
+    if through_origin:
+        denom = np.sum(s*s) + 1e-30
+        v = (Y @ s) / denom
+    else:
+        # v = slope from standard linear regression per row
+        s_mean = np.mean(s)
+        ss = np.sum((s - s_mean)**2) + 1e-30
+        v = ((Y - np.mean(Y, axis=1, keepdims=True)) @ (s - s_mean)) / ss
+    return v
+
+# -----------------------------
+# MAIN
+# -----------------------------
+for (T0, T1) in WINDOWS:
+    print("\n" + "="*70)
+    print(f"TEST AF — WINDOW [{T0},{T1}]  N={N}")
+    print("="*70)
+
+    t = np.linspace(T0, T1, N)
+    dt = t[1] - t[0]
+
+    # baseline
+    f0 = sample_f(t)
+    z0 = find_zeros(t, f0)
+    if len(z0) <= 2*EDGE_DROP:
+        print("Not enough baseline zeros; increase window or N.")
+        continue
+    z0 = z0[EDGE_DROP:-EDGE_DROP]
+    print(f"baseline zeros (after edge_drop={EDGE_DROP}): {len(z0)}")
+
+    # convolved zeros for each sigma, matched to baseline
+    matched_by_sigma = []
+    for s in SIGMAS:
+        y = gaussian_convolve_fft(f0, dt, s)
+        zs = find_zeros(t, y)
+        if len(zs) <= 2*EDGE_DROP:
+            matched_by_sigma.append(None)
+            continue
+        zs = zs[EDGE_DROP:-EDGE_DROP]
+        m = match_zeros(z0, zs, MATCH_TOL)
+        matched_by_sigma.append(m)
+
+    # build tracking mask: keep zeros that match for ALL sigmas (non-nan everywhere)
+    M = np.vstack([m for m in matched_by_sigma if m is not None]).T  # (n0, ns_valid)
+    # But we need columns aligned to SIGMAS; rebuild full dt_mat with nan where missing:
+    dt_mat = np.full((len(z0), len(SIGMAS)), np.nan, dtype=float)
+    for k, m in enumerate(matched_by_sigma):
+        if m is None:
+            continue
+        dt_mat[:, k] = m - z0
+
+    keep = np.all(np.isfinite(dt_mat), axis=1)
+    z0k = z0[keep]
+    dt_mat_k = dt_mat[keep, :]
+    print(f"tracked zeros across all σ in {SIGMAS}: {len(z0k)} / {len(z0)}")
+
+    # quick generator magnitude sanity
+    if len(z0k) == 0:
+        print("No tracked zeros. Increase MATCH_TOL slightly or reduce EDGE_DROP.")
+        continue
+
+    # For each sigma_fit_max, extract v and fit a_p
+    ap_list = []
+    for smax in SIGMA_FIT_MAX_LIST:
+        v = extract_generator(SIGMAS, dt_mat_k, smax, through_origin=True)
+        if v is None:
+            print(f"σ_fit_max={smax}: not enough points.")
+            continue
+
+        a, r2, corr, rel, vdm, vhat = fit_ap(z0k, v, P_LIST)
+        ap_list.append((smax, a, r2, corr, rel, v, vhat))
+
+        print("\n--- σ_fit_max =", smax, "---")
+        print("zeros used =", len(z0k))
+        print("mean|v|   =", float(np.mean(np.abs(v))))
+        print("max |v|   =", float(np.max(np.abs(v))))
+        for pp, aa in zip(P_LIST, a):
+            print(f"  p={pp:2d}  a_p={aa:+.6e}")
+        print(f"  R^2={r2:+.6f}  corr={corr:+.6f}  ||resid||/||v||={rel:.6f}")
+
+    # Plot a_p vs log(smax)
+    if len(ap_list) >= 2:
+        smaxs = np.array([x[0] for x in ap_list], float)
+        A = np.vstack([x[1] for x in ap_list])  # (nfit, npowers)
+
+        plt.figure()
+        for j, pp in enumerate(P_LIST):
+            plt.plot(np.log(smaxs), A[:, j], marker='o', label=f"p={pp}")
+        plt.axhline(0.0, ls='--')
+        plt.title(f"TEST AF: a_p vs log(σ_fit_max)  window [{T0},{T1}]")
+        plt.xlabel("log(σ_fit_max)")
+        plt.ylabel("a_p")
+        plt.legend()
+        plt.show()
+
+        # "beta" estimate: d a_p / d log(σ_fit_max) finite difference
+        dlog = np.diff(np.log(smaxs))
+        beta = np.diff(A, axis=0) / dlog[:, None]
+        # print beta summary
+        print("\nApprox beta_p = d a_p / d log(σ_fit_max) (finite-diff):")
+        for j, pp in enumerate(P_LIST):
+            bmean = float(np.mean(beta[:, j]))
+            bstd  = float(np.std(beta[:, j]))
+            print(f"  p={pp:2d}  mean(beta)={bmean:+.6e}  std(beta)={bstd:.6e}")
+
+        # Plot beta
+        plt.figure()
+        for j, pp in enumerate(P_LIST):
+            plt.plot(np.log(smaxs[1:]), beta[:, j], marker='o', label=f"β_p (p={pp})")
+        plt.axhline(0.0, ls='--')
+        plt.title(f"TEST AF: β_p vs log(σ_fit_max)  window [{T0},{T1}]")
+        plt.xlabel("log(σ_fit_max)")
+        plt.ylabel("β_p")
+        plt.legend()
+        plt.show()
+
+print("\nDONE: TEST AF")
+
+63
+
+# ============================================================
+# TEST AG — Kernel Universality Across σ-Smoothers
+# ============================================================
+# Purpose:
+#   Check whether the extracted σ-generator is UNIVERSAL
+#   with respect to the smoothing kernel.
+#
+# Kernels tested:
+#   1) Gaussian
+#   2) Exponential
+#   3) Compact bump (C^∞, finite support)
+#
+# What is tested:
+#   - Extract v_i = dt_i/dσ at σ→0
+#   - Fit odd-kernel generator (p = 1,3,5)
+#   - Compare coefficients + correlations
+#
+# Paste-and-run. No external state assumed.
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+import matplotlib.pyplot as plt
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+mp.mp.dps = 50
+T0, T1 = 60.0, 120.0
+N = 8192
+EDGE_DROP = 2
+SIGMAS = [0.0, 0.01, 0.02]
+P_LIST = [1, 3, 5]
+
+# ----------------------------
+# Xi-function (self-contained)
+# ----------------------------
+def xi(s):
+    return 0.5*s*(s-1)*mp.pi**(-s/2)*mp.gamma(s/2)*mp.zeta(s)
+
+def f_vals(t):
+    return np.array([mp.re(xi(0.5 + 1j*tt)) for tt in t], dtype=float)
+
+# ----------------------------
+# Zero finder
+# ----------------------------
+def find_zeros(t, f):
+    s = np.sign(f)
+    idx = np.where(s[:-1]*s[1:] < 0)[0]
+    return np.array([t[i] - f[i]*(t[i+1]-t[i])/(f[i+1]-f[i]) for i in idx])
+
+# ----------------------------
+# Smoothing kernels
+# ----------------------------
+def gaussian_kernel(freq, sigma):
+    return np.exp(-(sigma*freq)**2)
+
+def exponential_kernel(freq, sigma):
+    return np.exp(-sigma*np.abs(freq))
+
+def bump_kernel(freq, sigma):
+    x = sigma*np.abs(freq)
+    out = np.zeros_like(x)
+    mask = x < 1.0
+    out[mask] = np.exp(-1.0/(1.0-x[mask]**2))
+    return out
+
+KERNELS = {
+    "gaussian": gaussian_kernel,
+    "exponential": exponential_kernel,
+    "bump": bump_kernel
+}
+
+# ----------------------------
+# Apply kernel in Fourier space
+# ----------------------------
+def smooth(f, sigma, kernel_fn, dt):
+    F = np.fft.fft(f)
+    freq = np.fft.fftfreq(len(f), d=dt)
+    K = kernel_fn(freq, sigma)
+    return np.real(np.fft.ifft(F * K))
+
+# ----------------------------
+# Odd-kernel basis
+# ----------------------------
+def odd_kernel_matrix(t0, p_list):
+    N = len(t0)
+    H = np.zeros((N, len(p_list)))
+    for i in range(N):
+        for j in range(N):
+            if i == j:
+                continue
+            d = t0[i] - t0[j]
+            for k,p in enumerate(p_list):
+                H[i,k] += np.sign(d) / np.abs(d)**p
+    return H
+
+# ----------------------------
+# Main test
+# ----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+
+f0 = f_vals(t)
+z0 = find_zeros(t, f0)[EDGE_DROP:-EDGE_DROP]
+
+results = {}
+
+for name, kernel_fn in KERNELS.items():
+    tracks = []
+    for sigma in SIGMAS:
+        fs = smooth(f0, sigma, kernel_fn, dt)
+        zs = find_zeros(t, fs)[EDGE_DROP:-EDGE_DROP]
+        tracks.append(zs)
+
+    min_len = min(len(z) for z in tracks)
+    tracks = [z[:min_len] for z in tracks]
+
+    v = (tracks[1] - tracks[0]) / (SIGMAS[1] - SIGMAS[0])
+
+    H = odd_kernel_matrix(tracks[0], P_LIST)
+    a, *_ = np.linalg.lstsq(H, v, rcond=None)
+    vhat = H @ a
+
+    corr = np.corrcoef(v, vhat)[0,1]
+    r2 = 1 - np.linalg.norm(v-vhat)**2 / np.linalg.norm(v-np.mean(v))**2
+
+    results[name] = dict(
+        a=a,
+        corr=corr,
+        r2=r2,
+        mean_v=np.mean(np.abs(v))
+    )
+
+# ----------------------------
+# REPORT
+# ----------------------------
+print("\n====================================================")
+print("TEST AG — KERNEL UNIVERSALITY")
+print("====================================================")
+
+for k,v in results.items():
+    print(f"\nKernel: {k}")
+    print(f"  mean|v| = {v['mean_v']:.6e}")
+    for i,p in enumerate(P_LIST):
+        print(f"  a_{p} = {v['a'][i]:+.6e}")
+    print(f"  corr = {v['corr']:+.6f}")
+    print(f"  R^2  = {v['r2']:+.6f}")
+
+# ----------------------------
+# Cross-kernel comparison
+# ----------------------------
+keys = list(results.keys())
+print("\n--- Cross-kernel coefficient cosine similarity ---")
+for i in range(len(keys)):
+    for j in range(i+1, len(keys)):
+        a1 = results[keys[i]]["a"]
+        a2 = results[keys[j]]["a"]
+        cos = np.dot(a1,a2)/(np.linalg.norm(a1)*np.linalg.norm(a2))
+        print(f"{keys[i]} vs {keys[j]} : cos(angle) = {cos:+.6f}")
+
+print("\nDONE: TEST AG")
+
+64 
+
+# ============================================================
+# TEST AG′ — RENORMALISED GAUSSIAN GENERATOR
+# Purpose:
+#   Check whether Gaussian σ-flow admits a generator
+#   after renormalisation v ~ Δt / σ^α
+#
+# Fully self-contained. Paste & run.
+# ============================================================
+
+import numpy as np
+
+# ----------------------------
+# INPUT (PASTE YOUR DATA HERE)
+# ----------------------------
+# Baseline zero locations (t_i at σ=0)
+t0 = np.array([
+    67.079812, 69.546404, 72.067158, 75.704693, 77.144842,
+    79.337375, 82.910384, 84.735493, 87.425278, 88.809112,
+    92.491900, 94.651348
+], dtype=float)
+
+# Zero locations after Gaussian smoothing at σ
+sigma = 0.06
+t_sigma = np.array([
+    67.083091, 69.550802, 72.073114, 75.712992, 77.154224,
+    79.348916, 82.925314, 84.753842, 87.446019, 88.833904,
+    92.522118, 94.688330
+], dtype=float)
+
+# ----------------------------
+# PARAMETERS
+# ----------------------------
+EDGE_DROP = 1          # drop unstable edge zeros
+ALPHAS = np.linspace(0.5, 2.5, 21)   # σ^α scan
+ODD_POWERS = [1, 3, 5]
+
+# ----------------------------
+# PREP
+# ----------------------------
+t0 = t0[EDGE_DROP:-EDGE_DROP]
+t1 = t_sigma[EDGE_DROP:-EDGE_DROP]
+dt = t1 - t0
+N = len(dt)
+
+# spacing
+Delta = np.diff(t0)
+Delta_bar = np.zeros_like(t0)
+Delta_bar[1:-1] = 0.5 * (Delta[:-1] + Delta[1:])
+Delta_bar[0] = Delta[0]
+Delta_bar[-1] = Delta[-1]
+
+# build odd kernels
+def odd_kernel(p):
+    H = np.zeros(N)
+    for i in range(N):
+        for j in range(N):
+            if i != j:
+                d = t0[i] - t0[j]
+                H[i] += np.sign(d) / (abs(d)**p)
+    return H
+
+H = {p: odd_kernel(p) for p in ODD_POWERS}
+
+# ----------------------------
+# SCAN α
+# ----------------------------
+results = []
+
+print("====================================================")
+print("TEST AG′ — RENORMALISED GAUSSIAN GENERATOR")
+print("====================================================")
+
+for alpha in ALPHAS:
+    v = dt / (sigma**alpha)
+
+    # remove mean drift
+    v = v - np.mean(v)
+
+    # odd-kernel fit
+    X = np.column_stack([H[p] for p in ODD_POWERS])
+    coeffs, *_ = np.linalg.lstsq(X, v, rcond=None)
+    v_hat = X @ coeffs
+
+    corr = np.corrcoef(v, v_hat)[0,1]
+    rel_err = np.linalg.norm(v - v_hat) / np.linalg.norm(v)
+
+    results.append((alpha, corr, rel_err, coeffs))
+
+    print(f"α={alpha:4.2f}  corr={corr:+.4f}  ||resid||/||v||={rel_err:.4f}")
+
+# ----------------------------
+# BEST α
+# ----------------------------
+best = max(results, key=lambda x: x[1])
+alpha_star, corr_star, err_star, coeffs_star = best
+
+print("----------------------------------------------------")
+print("BEST α")
+print(f"α* = {alpha_star:.3f}")
+print(f"corr = {corr_star:.4f}")
+print(f"relative error = {err_star:.4f}")
+print("odd-kernel coefficients:")
+for p, a in zip(ODD_POWERS, coeffs_star):
+    print(f"  p={p}  a={a:+.6e}")
+print("====================================================")
+
+
+
+
+
+
