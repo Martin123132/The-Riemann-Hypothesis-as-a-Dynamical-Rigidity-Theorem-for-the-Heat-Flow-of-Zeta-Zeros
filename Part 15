@@ -1,0 +1,1804 @@
+# ================= STEP 29 — BRACKETED SPLITTING RATE (NO PAIR-SWITCHING) =================
+# Single-cell, self-contained. Rebuilds everything and measures splitting of the roots that
+# bracket tc (left<tc<right), preventing "closest-pair" switching artifacts.
+
+import numpy as np
+from numpy.fft import fft, ifft, fftfreq
+
+# ----------------------------
+# Parameters (edit here only if you want)
+# ----------------------------
+WINDOW = (60.0, 120.0)
+N = 8192
+EDGE_DROP = 2
+
+tc = 111.452176
+WIDTH = 0.200
+
+ROOT_RADIUS = 0.9          # radius to search roots around tc
+DSIGMAS = [0.0, 1e-6, 2e-6, 5e-6, 1e-5, 2e-5, 5e-5, 1e-4, 2e-4]
+
+# Fit only on dsigma <= this (avoid topology changes)
+FIT_MAX_DSIGMA = 1e-4
+
+# ----------------------------
+# Grid
+# ----------------------------
+t = np.linspace(WINDOW[0], WINDOW[1], N, endpoint=False)
+dt = t[1] - t[0]
+k = 2*np.pi*fftfreq(N, d=dt)
+
+# ----------------------------
+# Deterministic smooth proxy Z(t)
+# ----------------------------
+def Z_base(tt):
+    tt = np.asarray(tt)
+    return np.real(np.exp(1j * (tt*np.log(tt+1.0) - tt)))
+
+Z0 = Z_base(t)
+
+def deriv_spectral(y):
+    Y = fft(y)
+    return np.real(ifft(1j*k * Y))
+
+Z0p = deriv_spectral(Z0)
+
+def interp_at(x0, x, y):
+    if x0 <= x[0] or x0 >= x[-1]:
+        raise ValueError("x0 out of bounds")
+    i = np.searchsorted(x, x0) - 1
+    i = np.clip(i, 0, len(x)-2)
+    x1,x2 = x[i], x[i+1]
+    y1,y2 = y[i], y[i+1]
+    w = (x0-x1)/(x2-x1)
+    return y1*(1-w) + y2*w
+
+# ----------------------------
+# Gaussian basis and derivatives
+# ----------------------------
+def gauss(tt, tc, w):
+    return np.exp(-(tt-tc)**2/(2*w**2))
+
+def dgauss(tt, tc, w):
+    return -(tt-tc)/(w**2) * gauss(tt, tc, w)
+
+def ddgauss(tt, tc, w):
+    x = (tt-tc)
+    g = gauss(tt, tc, w)
+    return g * ((x**2)/(w**4) - 1.0/(w**2))
+
+g   = gauss(t, tc, WIDTH)
+dg  = dgauss(t, tc, WIDTH)
+ddg = ddgauss(t, tc, WIDTH)
+
+# ----------------------------
+# Solve A,B for F(tc)=0 and F'(tc)=0
+# ----------------------------
+Z0_tc  = interp_at(tc, t, Z0)
+Z0p_tc = interp_at(tc, t, Z0p)
+
+g_tc   = interp_at(tc, t, g)
+dg_tc  = interp_at(tc, t, dg)
+ddg_tc = interp_at(tc, t, ddg)
+
+M = np.array([[g_tc,  dg_tc],
+              [dg_tc, ddg_tc]], float)
+b = -np.array([Z0_tc, Z0p_tc], float)
+
+condM = np.linalg.cond(M)
+if condM > 1e10:
+    raise RuntimeError(f"Ill-conditioned solve (cond={condM:.2e}). Try WIDTH change.")
+
+A, B = np.linalg.solve(M, b)
+
+F = Z0 + A*g + B*dg
+Fp = deriv_spectral(F)
+
+F_tc  = interp_at(tc, t, F)
+Fp_tc = interp_at(tc, t, Fp)
+
+# ----------------------------
+# σ-flow (heat)
+# ----------------------------
+def sigma_flow(y, ds):
+    Y = fft(y)
+    Y *= np.exp(-(k**2)*ds)
+    return np.real(ifft(Y))
+
+# ----------------------------
+# Root finding: sign-crossing interpolation
+# ----------------------------
+def roots_in_radius(y, center, radius, max_roots=64):
+    mask = np.abs(t-center) < radius
+    tt = t[mask]
+    yy = y[mask]
+    s = np.sign(yy)
+    idx = np.where(np.diff(s) != 0)[0]
+    out = []
+    for i in idx:
+        x1,x2 = tt[i], tt[i+1]
+        y1,y2 = yy[i], yy[i+1]
+        if y2 != y1:
+            out.append(x1 - y1*(x2-x1)/(y2-y1))
+        if len(out) >= max_roots:
+            break
+    return np.array(out, float)
+
+def bracket_pair(roots, center):
+    if len(roots) < 2:
+        return None
+    r = np.sort(roots)
+    left_candidates = r[r < center]
+    right_candidates = r[r > center]
+    if len(left_candidates) == 0 or len(right_candidates) == 0:
+        return None
+    left = left_candidates.max()
+    right = right_candidates.min()
+    return float(left), float(right)
+
+# ----------------------------
+# Scan dsigma, track BRACKETED separation
+# ----------------------------
+rows = []
+for ds in DSIGMAS:
+    Fds = sigma_flow(F, ds) if ds > 0 else F
+    rts = roots_in_radius(Fds, tc, ROOT_RADIUS)
+    pair = bracket_pair(rts, tc)
+    if pair is None:
+        rows.append((ds, np.nan, np.nan, np.nan, len(rts)))
+        continue
+    left, right = pair
+    sep = right - left
+    rows.append((ds, left, right, sep, len(rts)))
+
+# ----------------------------
+# Print
+# ----------------------------
+print("\n================ STEP 29 — BRACKETED SPLITTING RATE =================")
+print(f"WINDOW={WINDOW}  N={N}  dt={dt:.12f}")
+print(f"tc={tc:.6f}  WIDTH={WIDTH:.3f}  ROOT_RADIUS={ROOT_RADIUS:.3f}")
+print("---------------------------------------------------------------------")
+print(f"Solved forcing: A={A:.6e}  B={B:.6e}  cond(M)={condM:.3e}")
+print(f"Check: F(tc)={F_tc:.3e}  F'(tc)={Fp_tc:.3e}")
+print("\nds | left_root | right_root | sep | n_roots_in_radius")
+print("-----------------------------------------------------")
+for ds,left,right,sep,nr in rows:
+    if np.isnan(sep):
+        print(f"{ds: .1e} |   nan    |    nan    |   nan   | {nr:d}")
+    else:
+        print(f"{ds: .1e} | {left: .9f} | {right: .9f} | {sep: .9e} | {nr:d}")
+
+# ----------------------------
+# Fit sep(ds) ~ sep0 + lambda*ds on "safe" ds
+# ----------------------------
+fit_pts = [(ds,sep) for ds,_,_,sep,_ in rows if np.isfinite(sep) and ds <= FIT_MAX_DSIGMA]
+if len(fit_pts) >= 3:
+    xs = np.array([p[0] for p in fit_pts], float)
+    ys = np.array([p[1] for p in fit_pts], float)
+    # linear least squares
+    X = np.vstack([np.ones_like(xs), xs]).T
+    beta, *_ = np.linalg.lstsq(X, ys, rcond=None)
+    sep0_hat, lam = beta
+    rmse = np.sqrt(np.mean((ys - (sep0_hat + lam*xs))**2))
+    print("\n================ LINEAR FIT (BRACKETED) ================")
+    print(f"Using dsigma <= {FIT_MAX_DSIGMA:.1e}  points={len(xs)}")
+    print(f"sep(ds) ≈ sep0 + λ ds")
+    print(f"sep0 = {sep0_hat:.6e}")
+    print(f"λ    = {lam:.6e}   (dsep/dσ)")
+    print(f"RMSE = {rmse:.3e}")
+else:
+    print("\nNot enough stable bracketed points to fit λ. Increase ROOT_RADIUS or adjust WIDTH.")
+
+print("\nInterpretation:")
+print("• If sep0 is ~0 and λ>0: constructed double-root is unstable under σ-flow (splits).")
+print("• If sep0 is ~0 and λ~0: neutral/protected.")
+print("• If sep0 not ~0: you enforced F(tc)=F'(tc)=0 but you are not isolating a clean double-root.")
+print("=====================================================================")
+
+=============== STEP 29 — BRACKETED SPLITTING RATE =================
+WINDOW=(60.0, 120.0)  N=8192  dt=0.007324218750
+tc=111.452176  WIDTH=0.200  ROOT_RADIUS=0.900
+---------------------------------------------------------------------
+Solved forcing: A=-9.813188e-01  B=-3.491603e-02  cond(M)=2.500e+01
+Check: F(tc)=-8.033e-17  F'(tc)=-3.213e-14
+
+ds | left_root | right_root | sep | n_roots_in_radius
+-----------------------------------------------------
+ 0.0e+00 |  111.197835500 |  111.484144181 |  2.863086804e-01 | 4
+ 1.0e-06 |  111.197851944 |  111.452239340 |  2.543873963e-01 | 4
+ 2.0e-06 |  111.197868382 |  111.452302474 |  2.544340915e-01 | 4
+ 5.0e-06 |  111.197917672 |  111.452490753 |  2.545730816e-01 | 4
+ 1.0e-05 |  111.197999749 |  111.452937028 |  2.549372791e-01 | 4
+ 2.0e-05 |  111.198163666 |  111.454034026 |  2.558703601e-01 | 4
+ 5.0e-05 |  111.198653543 |  111.457037345 |  2.583838017e-01 | 4
+ 1.0e-04 |  111.199463773 |  111.462920696 |  2.634569229e-01 | 4
+ 2.0e-04 |  111.201061310 |  111.517858423 |  3.167971131e-01 | 2
+
+================ LINEAR FIT (BRACKETED) ================
+Using dsigma <= 1.0e-04  points=8
+sep(ds) ≈ sep0 + λ ds
+sep0 = 2.602052e-01
+λ    = 3.776177e+00   (dsep/dσ)
+RMSE = 1.025e-02
+
+Interpretation:
+• If sep0 is ~0 and λ>0: constructed double-root is unstable under σ-flow (splits).
+• If sep0 is ~0 and λ~0: neutral/protected.
+• If sep0 not ~0: you enforced F(tc)=F'(tc)=0 but you are not isolating a clean double-root.
+=====================================================================
+
+
+
+
+
+# ================= STEP 30 — LOCAL PAIR TRACKING (NEAREST-2 ROOTS TO tc) =================
+# Single-cell. Rebuilds everything, enforces F(tc)=F'(tc)=0 using (g, dg),
+# then tracks the separation of the TWO closest roots to tc under σ-flow.
+
+import numpy as np
+from numpy.fft import fft, ifft, fftfreq
+
+# ----------------------------
+# Parameters
+# ----------------------------
+WINDOW = (60.0, 120.0)
+N = 8192
+EDGE_DROP = 2
+
+tc = 111.452176
+WIDTH = 0.200
+
+ROOT_RADIUS = 0.9
+DSIGMAS = [0.0, 1e-6, 2e-6, 5e-6, 1e-5, 2e-5, 5e-5, 1e-4, 2e-4]
+FIT_MAX_DSIGMA = 1e-4
+
+# ----------------------------
+# Grid
+# ----------------------------
+t = np.linspace(WINDOW[0], WINDOW[1], N, endpoint=False)
+dt = t[1] - t[0]
+k = 2*np.pi*fftfreq(N, d=dt)
+
+# ----------------------------
+# Deterministic smooth proxy signal
+# ----------------------------
+def Z_base(tt):
+    tt = np.asarray(tt)
+    return np.real(np.exp(1j * (tt*np.log(tt+1.0) - tt)))
+
+Z0 = Z_base(t)
+
+def deriv_spectral(y):
+    Y = fft(y)
+    return np.real(ifft(1j*k * Y))
+
+Z0p = deriv_spectral(Z0)
+
+def interp_at(x0, x, y):
+    if x0 <= x[0] or x0 >= x[-1]:
+        raise ValueError("x0 out of bounds")
+    i = np.searchsorted(x, x0) - 1
+    i = np.clip(i, 0, len(x)-2)
+    x1,x2 = x[i], x[i+1]
+    y1,y2 = y[i], y[i+1]
+    w = (x0-x1)/(x2-x1)
+    return y1*(1-w) + y2*w
+
+# ----------------------------
+# Gaussian basis and derivatives
+# ----------------------------
+def gauss(tt, tc, w):
+    return np.exp(-(tt-tc)**2/(2*w**2))
+
+def dgauss(tt, tc, w):
+    return -(tt-tc)/(w**2) * gauss(tt, tc, w)
+
+def ddgauss(tt, tc, w):
+    x = (tt-tc)
+    g = gauss(tt, tc, w)
+    return g * ((x**2)/(w**4) - 1.0/(w**2))
+
+g   = gauss(t, tc, WIDTH)
+dg  = dgauss(t, tc, WIDTH)
+ddg = ddgauss(t, tc, WIDTH)
+
+# ----------------------------
+# Solve A,B for F(tc)=0 and F'(tc)=0
+# ----------------------------
+Z0_tc  = interp_at(tc, t, Z0)
+Z0p_tc = interp_at(tc, t, Z0p)
+
+g_tc   = interp_at(tc, t, g)
+dg_tc  = interp_at(tc, t, dg)
+ddg_tc = interp_at(tc, t, ddg)
+
+M = np.array([[g_tc,  dg_tc],
+              [dg_tc, ddg_tc]], float)
+b = -np.array([Z0_tc, Z0p_tc], float)
+
+condM = np.linalg.cond(M)
+if condM > 1e10:
+    raise RuntimeError(f"Ill-conditioned solve (cond={condM:.2e}). Try WIDTH change.")
+
+A, B = np.linalg.solve(M, b)
+
+F = Z0 + A*g + B*dg
+Fp = deriv_spectral(F)
+
+F_tc  = interp_at(tc, t, F)
+Fp_tc = interp_at(tc, t, Fp)
+
+# ----------------------------
+# σ-flow (heat)
+# ----------------------------
+def sigma_flow(y, ds):
+    Y = fft(y)
+    Y *= np.exp(-(k**2)*ds)
+    return np.real(ifft(Y))
+
+# ----------------------------
+# Root finding: sign-crossing interpolation
+# ----------------------------
+def roots_in_radius(y, center, radius, max_roots=128):
+    mask = np.abs(t-center) < radius
+    tt = t[mask]
+    yy = y[mask]
+    s = np.sign(yy)
+    idx = np.where(np.diff(s) != 0)[0]
+    out = []
+    for i in idx:
+        x1,x2 = tt[i], tt[i+1]
+        y1,y2 = yy[i], yy[i+1]
+        if y2 != y1:
+            out.append(x1 - y1*(x2-x1)/(y2-y1))
+        if len(out) >= max_roots:
+            break
+    return np.array(out, float)
+
+def nearest_two_pair(roots, center):
+    if len(roots) < 2:
+        return None
+    r = np.sort(roots)
+    d = np.abs(r - center)
+    order = np.argsort(d)
+    r1 = r[order[0]]
+    r2 = r[order[1]]
+    if r2 < r1:
+        r1, r2 = r2, r1
+    return float(r1), float(r2)
+
+# ----------------------------
+# Scan dsigma, track nearest-two separation
+# ----------------------------
+rows = []
+for ds in DSIGMAS:
+    Fds = sigma_flow(F, ds) if ds > 0 else F
+    rts = roots_in_radius(Fds, tc, ROOT_RADIUS)
+    pair = nearest_two_pair(rts, tc)
+    if pair is None:
+        rows.append((ds, np.nan, np.nan, np.nan, len(rts)))
+        continue
+    r1, r2 = pair
+    sep = r2 - r1
+    rows.append((ds, r1, r2, sep, len(rts)))
+
+# ----------------------------
+# Print
+# ----------------------------
+print("\n================ STEP 30 — LOCAL NEAREST-PAIR SPLITTING =================")
+print(f"WINDOW={WINDOW}  N={N}  dt={dt:.12f}")
+print(f"tc={tc:.6f}  WIDTH={WIDTH:.3f}  ROOT_RADIUS={ROOT_RADIUS:.3f}")
+print("--------------------------------------------------------------------------")
+print(f"Solved forcing: A={A:.6e}  B={B:.6e}  cond(M)={condM:.3e}")
+print(f"Check: F(tc)={F_tc:.3e}  F'(tc)={Fp_tc:.3e}")
+print("\nds | r1 (nearest) | r2 (2nd nearest) | sep_local | n_roots_in_radius")
+print("---------------------------------------------------------------------")
+for ds,r1,r2,sep,nr in rows:
+    if np.isnan(sep):
+        print(f"{ds: .1e} |     nan     |      nan      |   nan    | {nr:d}")
+    else:
+        print(f"{ds: .1e} | {r1: .9f} | {r2: .9f} | {sep: .9e} | {nr:d}")
+
+# ----------------------------
+# Fit sep_local(ds) ~ sep0 + λ ds (small ds only)
+# ----------------------------
+fit_pts = [(ds,sep) for ds,_,_,sep,_ in rows if np.isfinite(sep) and ds <= FIT_MAX_DSIGMA]
+if len(fit_pts) >= 3:
+    xs = np.array([p[0] for p in fit_pts], float)
+    ys = np.array([p[1] for p in fit_pts], float)
+    X = np.vstack([np.ones_like(xs), xs]).T
+    beta, *_ = np.linalg.lstsq(X, ys, rcond=None)
+    sep0_hat, lam = beta
+    rmse = np.sqrt(np.mean((ys - (sep0_hat + lam*xs))**2))
+
+    print("\n================ LINEAR FIT (LOCAL PAIR) =================")
+    print(f"Using dsigma <= {FIT_MAX_DSIGMA:.1e}  points={len(xs)}")
+    print(f"sep_local(ds) ≈ sep0 + λ ds")
+    print(f"sep0 = {sep0_hat:.6e}")
+    print(f"λ    = {lam:.6e}   (dsep/dσ)")
+    print(f"RMSE = {rmse:.3e}")
+else:
+    print("\nNot enough stable points to fit λ (local pair).")
+
+print("\nInterpretation:")
+print("• If sep0 ~ 0 and λ>0: you truly built a double-root that immediately splits under σ-flow.")
+print("• If sep0 not ~0: you enforced F(tc)=F'(tc)=0 but the local root geometry is still multi-root (needs a different forcing).")
+print("==========================================================================")
+
+WINDOW=(60.0, 120.0)  N=8192  dt=0.007324218750
+tc=111.452176  WIDTH=0.200  ROOT_RADIUS=0.900
+--------------------------------------------------------------------------
+Solved forcing: A=-9.813188e-01  B=-3.491603e-02  cond(M)=2.500e+01
+Check: F(tc)=-8.033e-17  F'(tc)=-3.213e-14
+
+ds | r1 (nearest) | r2 (2nd nearest) | sep_local | n_roots_in_radius
+---------------------------------------------------------------------
+ 0.0e+00 |  111.452176000 |  111.484144181 |  3.196818084e-02 | 4
+ 1.0e-06 |  111.452239340 |  111.484117316 |  3.187797560e-02 | 4
+ 2.0e-06 |  111.452302474 |  111.484090344 |  3.178787069e-02 | 4
+ 5.0e-06 |  111.452490753 |  111.484008687 |  3.151793325e-02 | 4
+ 1.0e-05 |  111.452937028 |  111.483869685 |  3.093265650e-02 | 4
+ 2.0e-05 |  111.454034026 |  111.483579069 |  2.954504262e-02 | 4
+ 5.0e-05 |  111.457037345 |  111.482585268 |  2.554792320e-02 | 4
+ 1.0e-04 |  111.462920696 |  111.479487158 |  1.656646148e-02 | 4
+ 2.0e-04 |  111.201061310 |  111.517858423 |  3.167971131e-01 | 2
+
+================ LINEAR FIT (LOCAL PAIR) =================
+Using dsigma <= 1.0e-04  points=8
+sep_local(ds) ≈ sep0 + λ ds
+sep0 = 3.229723e-02
+λ    = -1.523075e+02   (dsep/dσ)
+RMSE = 4.083e-04
+
+Interpretation:
+• If sep0 ~ 0 and λ>0: you truly built a double-root that immediately splits under σ-flow.
+• If sep0 not ~0: you enforced F(tc)=F'(tc)=0 but the local root geometry is still multi-root (needs a different forcing).
+==========================================================================
+
+# ================= STEP 31 — ROOT-SPACE COLLISION SOLVER (self-contained) =================
+# Goal: given a local nearest pair near tc, solve for forcing (p*g + q*g') that drives sep -> 0
+# while keeping center fixed. Then check whether we actually get a double-root (F=0 and F'=0)
+# and probe σ-stability for small ds.
+
+import numpy as np
+from numpy.fft import fft, ifft, fftfreq
+
+# ----------------------------
+# Parameters
+# ----------------------------
+WINDOW = (60.0, 120.0)
+N = 8192
+EDGE_DROP = 2
+
+tc_guess = 111.452176          # starting reference point (midpoint-ish)
+WIDTH = 0.200                  # gaussian width for forcing
+ROOT_RADIUS = 0.9              # root search radius around tc
+EPS = 1e-4                     # finite-diff step for Jacobian in (p,q)
+SIGMA_TEST_STEPS = [0.0, 1e-6, 2e-6, 5e-6, 1e-5, 2e-5]  # σ-flow check after collision
+
+# ----------------------------
+# Grid
+# ----------------------------
+t = np.linspace(WINDOW[0], WINDOW[1], N, endpoint=False)
+dt = t[1] - t[0]
+k = 2*np.pi*fftfreq(N, d=dt)
+
+def deriv_spectral(y):
+    Y = fft(y)
+    return np.real(ifft(1j*k * Y))
+
+def sigma_flow(y, ds):
+    if ds == 0.0:
+        return y
+    Y = fft(y)
+    Y *= np.exp(-(k**2)*ds)
+    return np.real(ifft(Y))
+
+def interp_at(x0, x, y):
+    if x0 <= x[0] or x0 >= x[-1]:
+        raise ValueError("x0 out of bounds")
+    i = np.searchsorted(x, x0) - 1
+    i = np.clip(i, 0, len(x)-2)
+    x1,x2 = x[i], x[i+1]
+    y1,y2 = y[i], y[i+1]
+    w = (x0-x1)/(x2-x1)
+    return y1*(1-w) + y2*w
+
+# ----------------------------
+# Deterministic smooth proxy signal (same family as Step 30)
+# ----------------------------
+def Z_base(tt):
+    tt = np.asarray(tt)
+    return np.real(np.exp(1j * (tt*np.log(tt+1.0) - tt)))
+
+Z0 = Z_base(t)
+
+# ----------------------------
+# Root finding: sign-crossing interpolation
+# ----------------------------
+def roots_in_radius(y, center, radius, max_roots=256):
+    mask = np.abs(t-center) < radius
+    tt = t[mask]
+    yy = y[mask]
+    s = np.sign(yy)
+    idx = np.where(np.diff(s) != 0)[0]
+    out = []
+    for i in idx:
+        x1,x2 = tt[i], tt[i+1]
+        y1,y2 = yy[i], yy[i+1]
+        if y2 != y1:
+            out.append(x1 - y1*(x2-x1)/(y2-y1))
+        if len(out) >= max_roots:
+            break
+    return np.array(out, float)
+
+def nearest_two_pair(roots, center):
+    if len(roots) < 2:
+        return None
+    r = np.sort(roots)
+    d = np.abs(r - center)
+    order = np.argsort(d)
+    r1 = float(r[order[0]])
+    r2 = float(r[order[1]])
+    if r2 < r1:
+        r1, r2 = r2, r1
+    return r1, r2
+
+# ----------------------------
+# Forcing basis (g, dg) centered at chosen tc
+# ----------------------------
+def gauss(tt, tc, w):
+    return np.exp(-(tt-tc)**2/(2*w**2))
+
+def dgauss(tt, tc, w):
+    return -(tt-tc)/(w**2) * gauss(tt, tc, w)
+
+def ddgauss(tt, tc, w):
+    x = (tt-tc)
+    g = gauss(tt, tc, w)
+    return g * ((x**2)/(w**4) - 1.0/(w**2))
+
+# ----------------------------
+# Build initial function and identify the local pair
+# ----------------------------
+F0 = Z0.copy()
+rts0 = roots_in_radius(F0, tc_guess, ROOT_RADIUS)
+pair0 = nearest_two_pair(rts0, tc_guess)
+if pair0 is None:
+    raise RuntimeError("Could not find a root pair near tc_guess. Try changing tc_guess or ROOT_RADIUS.")
+
+z1, z2 = pair0
+center0 = 0.5*(z1+z2)
+sep0 = (z2 - z1)
+
+print("\n================ STEP 31 — ROOT-SPACE COLLISION SOLVER =================")
+print(f"WINDOW={WINDOW}  N={N}  dt={dt:.12f}")
+print(f"tc_guess={tc_guess:.6f}  ROOT_RADIUS={ROOT_RADIUS:.3f}  WIDTH={WIDTH:.3f}")
+print("--------------------------------------------------------------------------")
+print(f"Initial nearest pair: z1={z1:.9f}  z2={z2:.9f}  sep0={sep0:.9e}  center0={center0:.9f}")
+print(f"Roots in radius: {len(rts0)}")
+
+# Use tc = current center for forcing
+tc = center0
+g  = gauss(t, tc, WIDTH)
+dg = dgauss(t, tc, WIDTH)
+
+# ----------------------------
+# Helper: given p,q, compute nearest pair and (center, sep)
+# ----------------------------
+def pair_metrics(p, q):
+    F = F0 + p*g + q*dg
+    rts = roots_in_radius(F, tc, ROOT_RADIUS)
+    pair = nearest_two_pair(rts, tc)
+    if pair is None:
+        return None, None, None, len(rts), F
+    a,b = pair
+    c = 0.5*(a+b)
+    s = (b-a)
+    return c, s, (a,b), len(rts), F
+
+c00, s00, pair00, n00, _ = pair_metrics(0.0, 0.0)
+if pair00 is None:
+    raise RuntimeError("Lost the pair at p=q=0 unexpectedly.")
+
+# ----------------------------
+# Finite-diff Jacobian for [center, sep] wrt [p, q]
+# ----------------------------
+def fd_col(p, q, dp, dq):
+    c1, s1, _, _, _ = pair_metrics(p+dp, q+dq)
+    c0, s0, _, _, _ = pair_metrics(p, q)
+    if c1 is None or c0 is None:
+        return None
+    return np.array([(c1-c0)/(dp if dp!=0 else dq), (s1-s0)/(dp if dp!=0 else dq)], float)
+
+col_p = fd_col(0.0, 0.0, EPS, 0.0)
+col_q = fd_col(0.0, 0.0, 0.0, EPS)
+if col_p is None or col_q is None:
+    raise RuntimeError("Jacobian finite-diff failed (pair tracking broke). Reduce EPS or change WIDTH/ROOT_RADIUS.")
+
+J = np.column_stack([col_p, col_q])  # shape (2,2)
+
+# Targets: keep center fixed, drive sep to 0
+target = np.array([center0, 0.0], float)
+current = np.array([c00, s00], float)
+rhs = target - current
+
+condJ = np.linalg.cond(J)
+if condJ > 1e10:
+    raise RuntimeError(f"Jacobian ill-conditioned (cond={condJ:.2e}). Try changing WIDTH or EPS.")
+
+dpq = np.linalg.solve(J, rhs)
+p_sol, q_sol = float(dpq[0]), float(dpq[1])
+
+# ----------------------------
+# Evaluate solution
+# ----------------------------
+c1, s1, pair1, n1, F1 = pair_metrics(p_sol, q_sol)
+Fp1 = deriv_spectral(F1)
+
+print("\n================ JACOBIAN =================")
+print("J = d[center, sep]/d[p,q]")
+print(J)
+print(f"cond(J) = {condJ:.3e}")
+print("\nSolved (p,q) to enforce: center -> center0, sep -> 0")
+print(f"p = {p_sol:.6e}")
+print(f"q = {q_sol:.6e}")
+
+print("\n================ RESULTING LOCAL PAIR =================")
+if pair1 is None:
+    print("Pair lost after applying (p,q). Try smaller WIDTH or smaller EPS.")
+else:
+    a,b = pair1
+    print(f"z1={a:.9f}  z2={b:.9f}  sep={s1:.9e}  center={c1:.9f}  roots_in_radius={n1}")
+
+    # Check "double root" style diagnostics at tc (center)
+    F_tc  = interp_at(tc, t, F1)
+    Fp_tc = interp_at(tc, t, Fp1)
+    print("\nCheck at tc=center0:")
+    print(f"F(tc)  = {F_tc:.3e}")
+    print(f"F'(tc) = {Fp_tc:.3e}")
+
+    # Also check at the midpoint of the pair (more honest if center drifted tiny)
+    tmid = 0.5*(a+b)
+    F_mid  = interp_at(tmid, t, F1)
+    Fp_mid = interp_at(tmid, t, Fp1)
+    print("\nCheck at mid(pair):")
+    print(f"mid    = {tmid:.9f}")
+    print(f"F(mid)  = {F_mid:.3e}")
+    print(f"F'(mid) = {Fp_mid:.3e}")
+
+# ----------------------------
+# σ-stability scan of the local pair after forcing
+# ----------------------------
+print("\n================ σ-STABILITY SCAN (post-forcing) =================")
+print("dsigma | sep_local | center | n_roots")
+print("--------------------------------------------------")
+for ds in SIGMA_TEST_STEPS:
+    Fds = sigma_flow(F1, ds)
+    rts = roots_in_radius(Fds, tc, ROOT_RADIUS)
+    pair = nearest_two_pair(rts, tc)
+    if pair is None:
+        print(f"{ds: .1e} |   nan     |   nan    | {len(rts)}")
+        continue
+    a,b = pair
+    c = 0.5*(a+b)
+    s = (b-a)
+    print(f"{ds: .1e} | {s: .9e} | {c: .9f} | {len(rts)}")
+
+print("\nInterpretation:")
+print("• If you succeed: sep gets very small (<< dt) AND F(mid)≈0 AND F'(mid)≈0.")
+print("• If sep is small but F'(mid) not small: you forced proximity, not a true double root.")
+print("• If σ-flow drives sep away from 0 immediately: unstable under σ (splitting).")
+print("==========================================================================")
+
+
+================ STEP 31 — ROOT-SPACE COLLISION SOLVER =================
+WINDOW=(60.0, 120.0)  N=8192  dt=0.007324218750
+tc_guess=111.452176  ROOT_RADIUS=0.900  WIDTH=0.200
+--------------------------------------------------------------------------
+Initial nearest pair: z1=111.077720752  z2=111.744263608  sep0=6.665428563e-01  center0=111.410992180
+Roots in radius: 2
+
+================ JACOBIAN =================
+J = d[center, sep]/d[p,q]
+[[-3.36865469e-05 -4.41055046e-01]
+ [ 1.05889772e-01  3.53686289e-04]]
+cond(J) = 4.165e+00
+
+Solved (p,q) to enforce: center -> center0, sep -> 0
+p = -6.294688e+00
+q = 4.807706e-04
+
+================ RESULTING LOCAL PAIR =================
+Pair lost after applying (p,q). Try smaller WIDTH or smaller EPS.
+
+================ σ-STABILITY SCAN (post-forcing) =================
+dsigma | sep_local | center | n_roots
+--------------------------------------------------
+ 0.0e+00 |   nan     |   nan    | 0
+ 1.0e-06 |   nan     |   nan    | 0
+ 2.0e-06 |   nan     |   nan    | 0
+ 5.0e-06 |   nan     |   nan    | 0
+ 1.0e-05 |   nan     |   nan    | 0
+ 2.0e-05 |   nan     |   nan    | 0
+
+Interpretation:
+• If you succeed: sep gets very small (<< dt) AND F(mid)≈0 AND F'(mid)≈0.
+• If sep is small but F'(mid) not small: you forced proximity, not a true double root.
+• If σ-flow drives sep away from 0 immediately: unstable under σ (splitting).
+==========
+
+
+# ================= STEP 32 — CODIMENSION-3 DOUBLE-ROOT TEST =================
+# Self-contained, single-cell, no external state required.
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+EDGE_DROP = 2
+
+SIGMAS = [0.0, 0.005, 0.01, 0.015, 0.02, 0.04, 0.06]
+SIGMA_TARGET = 0.06
+DSIGMAS = [0.0, 1e-6, 2e-6, 5e-6, 1e-5, 2e-5]
+
+WIDTH = 0.20
+ROOT_RADIUS = 0.90
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(tt)) for tt in t])
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    n = len(f)
+    k = np.fft.fftfreq(n, d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z.append(t[i])
+    return np.array(z)
+
+def local_roots(t, f, center, radius):
+    z = find_zeros(t, f)
+    return z[np.abs(z-center) <= radius]
+
+def gaussian(t, tc, w):
+    return np.exp(-0.5*((t-tc)/w)**2)
+
+def d_gaussian(t, tc, w):
+    return -(t-tc)/(w*w) * gaussian(t, tc, w)
+
+def dd_gaussian(t, tc, w):
+    x = (t-tc)/w
+    return ((x*x - 1)/(w*w)) * gaussian(t, tc, w)
+
+# ----------------------------
+# BUILD BASELINE
+# ----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+
+f0 = siegel_vals(t)
+
+Z_clean = {}
+F_clean = {}
+for s in SIGMAS:
+    fs = smooth_fft(f0, dt, s)
+    zs = find_zeros(t, fs)
+    zs = zs[EDGE_DROP:-EDGE_DROP]
+    Z_clean[s] = zs
+    F_clean[s] = fs
+
+# closest pair at sigma_target
+zlist = Z_clean[SIGMA_TARGET]
+pairs = [(abs(zlist[i+1]-zlist[i]), zlist[i], zlist[i+1])
+         for i in range(len(zlist)-1)]
+pairs.sort()
+sep0, z1, z2 = pairs[0]
+tc0 = 0.5*(z1+z2)
+
+print("Initial closest pair:")
+print(f"z1={z1:.6f}  z2={z2:.6f}  sep={sep0:.6e}  tc={tc0:.6f}")
+
+# ----------------------------
+# CODIM-3 FORCING
+# ----------------------------
+fs = F_clean[SIGMA_TARGET]
+
+g0 = gaussian(t, tc0, WIDTH)
+g1 = d_gaussian(t, tc0, WIDTH)
+g2 = dd_gaussian(t, tc0, WIDTH)
+
+def interp(f, x):
+    return np.interp(x, t, f)
+
+def deriv(f, x):
+    i = np.searchsorted(t, x)
+    if i <= 0 or i >= len(t)-1:
+        return np.nan
+    return (f[i+1]-f[i-1])/(t[i+1]-t[i-1])
+
+# Enforce F(tc)=0, F'(tc)=0, F''(tc)=0
+M = np.array([
+    [interp(g0, tc0), interp(g1, tc0), interp(g2, tc0)],
+    [deriv(g0, tc0),  deriv(g1, tc0),  deriv(g2, tc0)],
+    [deriv(g1, tc0),  deriv(g2, tc0),  0.0]
+], dtype=float)
+
+rhs = -np.array([
+    interp(fs, tc0),
+    deriv(fs, tc0),
+    0.0
+])
+
+condM = np.linalg.cond(M)
+A, B, C = np.linalg.solve(M, rhs)
+
+print("\nSolved forcing coefficients:")
+print(f"A={A:.6e}  B={B:.6e}  C={C:.6e}  cond(M)={condM:.3e}")
+
+F_forced = fs + A*g0 + B*g1 + C*g2
+
+print("\nCheck at tc:")
+print(f"F(tc)  = {interp(F_forced, tc0):+.3e}")
+print(f"F'(tc) = {deriv(F_forced, tc0):+.3e}")
+
+roots0 = local_roots(t, F_forced, tc0, ROOT_RADIUS)
+print("\nRoots near tc after forcing (σ fixed):")
+print(roots0)
+
+# ----------------------------
+# σ-STABILITY SCAN
+# ----------------------------
+print("\n================ σ-STABILITY (CODIM-3) ================")
+print("dsigma | n_roots | min_sep")
+print("-------------------------------------------------------")
+
+for ds in DSIGMAS:
+    s_new = SIGMA_TARGET + ds
+    fs_new = smooth_fft(f0, dt, s_new)
+    F_new = fs_new + A*g0 + B*g1 + C*g2
+    roots = local_roots(t, F_new, tc0, ROOT_RADIUS)
+    if len(roots) >= 2:
+        sep = np.min(np.diff(np.sort(roots)))
+    else:
+        sep = np.nan
+    print(f"{ds:8.1e} | {len(roots):7d} | {sep: .6e}")
+
+print("\n================ STEP 32 DONE =================")
+
+Initial closest pair:
+z1=111.034062  z2=111.861800  sep=8.277378e-01  tc=111.447931
+
+Solved forcing coefficients:
+A=-3.870723e-04  B=-1.409431e-03  C=-1.236999e-02  cond(M)=1.484e+00
+
+Check at tc:
+F(tc)  = -7.102e-18
+F'(tc) = -3.789e-15
+
+Roots near tc after forcing (σ fixed):
+[110.97546087 111.4442681  111.45159321 111.92040044]
+
+================ σ-STABILITY (CODIM-3) ================
+dsigma | n_roots | min_sep
+-------------------------------------------------------
+ 0.0e+00 |       4 |  7.325113e-03
+ 1.0e-06 |       4 |  7.325113e-03
+ 2.0e-06 |       4 |  7.325113e-03
+ 5.0e-06 |       4 |  7.325113e-03
+ 1.0e-05 |       4 |  7.325113e-03
+ 2.0e-05 |       4 |  7.325113e-03
+
+================ STEP 32 DONE =================
+
+# ================= STEP 33 — RESOLUTION SCALING TEST =================
+# Self-contained, no external state required
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+EDGE_DROP = 2
+
+SIGMAS = [0.0, 0.005, 0.01, 0.015, 0.02, 0.04, 0.06]
+SIGMA_TARGET = 0.06
+DSIGMAS = [0.0, 1e-6, 2e-6, 5e-6, 1e-5]
+
+WIDTH = 0.20
+ROOT_RADIUS = 0.90
+
+N_LIST = [8192, 16384]   # add 32768 later if needed
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(tt)) for tt in t])
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    k = np.fft.fftfreq(len(f), d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def find_zeros(t, f):
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z.append(t[i])
+    return np.array(z)
+
+def local_roots(t, f, center, radius):
+    z = find_zeros(t, f)
+    return z[np.abs(z-center) <= radius]
+
+def gaussian(t, tc, w):
+    return np.exp(-0.5*((t-tc)/w)**2)
+
+def d_gaussian(t, tc, w):
+    return -(t-tc)/(w*w) * gaussian(t, tc, w)
+
+def dd_gaussian(t, tc, w):
+    x = (t-tc)/w
+    return ((x*x - 1)/(w*w)) * gaussian(t, tc, w)
+
+def interp(f, t, x):
+    return np.interp(x, t, f)
+
+def deriv(f, t, x):
+    i = np.searchsorted(t, x)
+    if i <= 0 or i >= len(t)-1:
+        return np.nan
+    return (f[i+1]-f[i-1])/(t[i+1]-t[i-1])
+
+# ----------------------------
+# MAIN LOOP
+# ----------------------------
+for N in N_LIST:
+    print("\n==============================")
+    print(f"N = {N}")
+    print("==============================")
+
+    t = np.linspace(T0, T1, N)
+    dt = t[1] - t[0]
+
+    f0 = siegel_vals(t)
+
+    # build smoothed fields
+    Z = {}
+    F = {}
+    for s in SIGMAS:
+        fs = smooth_fft(f0, dt, s)
+        zs = find_zeros(t, fs)[EDGE_DROP:-EDGE_DROP]
+        Z[s] = zs
+        F[s] = fs
+
+    # closest pair
+    zlist = Z[SIGMA_TARGET]
+    pairs = [(abs(zlist[i+1]-zlist[i]), zlist[i], zlist[i+1])
+             for i in range(len(zlist)-1)]
+    pairs.sort()
+    sep0, z1, z2 = pairs[0]
+    tc0 = 0.5*(z1+z2)
+
+    print(f"dt = {dt:.6e}")
+    print(f"Initial sep = {sep0:.6e}")
+
+    fs = F[SIGMA_TARGET]
+
+    g0 = gaussian(t, tc0, WIDTH)
+    g1 = d_gaussian(t, tc0, WIDTH)
+    g2 = dd_gaussian(t, tc0, WIDTH)
+
+    # codim-3 solve
+    M = np.array([
+        [interp(g0, t, tc0), interp(g1, t, tc0), interp(g2, t, tc0)],
+        [deriv(g0, t, tc0),  deriv(g1, t, tc0),  deriv(g2, t, tc0)],
+        [deriv(g1, t, tc0),  deriv(g2, t, tc0),  0.0]
+    ])
+
+    rhs = -np.array([
+        interp(fs, t, tc0),
+        deriv(fs, t, tc0),
+        0.0
+    ])
+
+    A, B, C = np.linalg.solve(M, rhs)
+
+    F_forced = fs + A*g0 + B*g1 + C*g2
+
+    roots = local_roots(t, F_forced, tc0, ROOT_RADIUS)
+    if len(roots) >= 2:
+        min_sep = np.min(np.diff(np.sort(roots)))
+    else:
+        min_sep = np.nan
+
+    print(f"min_sep = {min_sep:.6e}")
+    print(f"min_sep / dt = {min_sep/dt:.3f}")
+
+print("\n================ STEP 33 DONE =================")
+
+
+==============================
+N = 8192
+==============================
+dt = 7.325113e-03
+Initial sep = 8.277378e-01
+min_sep = 7.325113e-03
+min_sep / dt = 1.000
+
+==============================
+N = 16384
+==============================
+dt = 3.662333e-03
+Initial sep = 8.276872e-01
+min_sep = 4.687786e-01
+min_sep / dt = 128.000
+
+================ STEP 33 DONE =================
+
+
+# ================= STEP 34 — BRENT ROOTS + RESOLUTION SCALING =================
+# Self-contained, single cell, no external state required
+
+import numpy as np
+import mpmath as mp
+from scipy.optimize import brentq
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+EDGE_DROP = 2
+
+SIGMAS = [0.0, 0.005, 0.01, 0.015, 0.02, 0.04, 0.06]
+SIGMA_TARGET = 0.06
+
+WIDTH = 0.20
+ROOT_RADIUS = 0.90
+
+N_LIST = [8192, 16384]  # extend later if desired (e.g. 32768)
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(tt)) for tt in t])
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    k = np.fft.fftfreq(len(f), d=dt)
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def find_zeros_grid(t, f):
+    # grid-only (for initial closest-pair selection)
+    z = []
+    for i in range(len(f)-1):
+        if f[i] == 0 or f[i]*f[i+1] < 0:
+            z.append(t[i])
+    return np.array(z)
+
+def gaussian(t, tc, w):
+    return np.exp(-0.5*((t-tc)/w)**2)
+
+def d_gaussian(t, tc, w):
+    return -(t-tc)/(w*w) * gaussian(t, tc, w)
+
+def dd_gaussian(t, tc, w):
+    x = (t-tc)/w
+    return ((x*x - 1)/(w*w)) * gaussian(t, tc, w)
+
+def interp(f, t, x):
+    return np.interp(x, t, f)
+
+def deriv(f, t, x):
+    i = np.searchsorted(t, x)
+    if i <= 0 or i >= len(t)-1:
+        return np.nan
+    return (f[i+1]-f[i-1])/(t[i+1]-t[i-1])
+
+def brent_roots_in_window(t, f, a, b, tol=1e-12):
+    """
+    Find roots of the piecewise-linear interpolant of (t,f) in [a,b]
+    using bracketing on sample sign changes + brentq refinement.
+    """
+    # clip to sample domain
+    a = max(a, t[0])
+    b = min(b, t[-1])
+    if a >= b:
+        return np.array([])
+
+    # indices spanning [a,b]
+    i0 = max(0, np.searchsorted(t, a) - 1)
+    i1 = min(len(t)-2, np.searchsorted(t, b))
+
+    def f_cont(x):
+        return float(np.interp(x, t, f))
+
+    roots = []
+    eps0 = 1e-14
+
+    for i in range(i0, i1+1):
+        xL, xR = t[i], t[i+1]
+        if xR < a or xL > b:
+            continue
+        yL, yR = f[i], f[i+1]
+
+        # catch exact/near-zero endpoints (prevents missing a forced root)
+        if abs(yL) < eps0:
+            roots.append(float(xL))
+            continue
+        if abs(yR) < eps0:
+            roots.append(float(xR))
+            continue
+
+        # bracket sign change
+        if yL * yR < 0:
+            try:
+                r = brentq(f_cont, xL, xR, xtol=tol, rtol=0.0, maxiter=100)
+                roots.append(float(r))
+            except Exception:
+                pass
+
+    if not roots:
+        return np.array([])
+
+    roots = np.array(sorted(roots), dtype=float)
+
+    # dedupe very-close roots
+    dedup = [roots[0]]
+    for r in roots[1:]:
+        if abs(r - dedup[-1]) > 10*tol:
+            dedup.append(r)
+    return np.array(dedup, dtype=float)
+
+# ----------------------------
+# MAIN
+# ----------------------------
+for N in N_LIST:
+    print("\n==============================")
+    print(f"N = {N}")
+    print("==============================")
+
+    t = np.linspace(T0, T1, N)
+    dt = t[1] - t[0]
+
+    f0 = siegel_vals(t)
+
+    # build smoothed fields
+    Z = {}
+    F = {}
+    for s in SIGMAS:
+        fs = smooth_fft(f0, dt, s)
+        zs = find_zeros_grid(t, fs)[EDGE_DROP:-EDGE_DROP]
+        Z[s] = zs
+        F[s] = fs
+
+    # closest grid pair at sigma_target (just to pick tc0 consistently)
+    zlist = Z[SIGMA_TARGET]
+    pairs = [(abs(zlist[i+1]-zlist[i]), zlist[i], zlist[i+1])
+             for i in range(len(zlist)-1)]
+    pairs.sort()
+    sep_init, z1, z2 = pairs[0]
+    tc0 = 0.5*(z1+z2)
+
+    print(f"dt = {dt:.6e}")
+    print(f"Initial closest-pair sep (grid pick) = {sep_init:.6e}")
+    print(f"tc0 = {tc0:.6f}")
+
+    # codim-3 forcing built consistently with piecewise-linear interp at tc0
+    fs = F[SIGMA_TARGET]
+    g0 = gaussian(t, tc0, WIDTH)
+    g1 = d_gaussian(t, tc0, WIDTH)
+    g2 = dd_gaussian(t, tc0, WIDTH)
+
+    M = np.array([
+        [interp(g0, t, tc0), interp(g1, t, tc0), interp(g2, t, tc0)],
+        [deriv(g0, t, tc0),  deriv(g1, t, tc0),  deriv(g2, t, tc0)],
+        [deriv(g1, t, tc0),  deriv(g2, t, tc0),  0.0]
+    ], dtype=float)
+
+    rhs = -np.array([
+        interp(fs, t, tc0),
+        deriv(fs, t, tc0),
+        0.0
+    ], dtype=float)
+
+    A, B, C = np.linalg.solve(M, rhs)
+    F_forced = fs + A*g0 + B*g1 + C*g2
+
+    print(f"Check interp(F,tc0) = {interp(F_forced, t, tc0):+.3e}")
+    print(f"Check deriv(F,tc0)  = {deriv(F_forced, t, tc0):+.3e}")
+
+    # refined roots in radius (brentq)
+    a = tc0 - ROOT_RADIUS
+    b = tc0 + ROOT_RADIUS
+    roots = brent_roots_in_window(t, F_forced, a, b, tol=1e-12)
+
+    print(f"Roots in radius: {len(roots)}")
+    if len(roots):
+        print("First few roots:", np.array2string(roots[:min(6,len(roots))], precision=9))
+
+    if len(roots) >= 2:
+        seps = np.diff(roots)
+        min_sep = float(np.min(seps))
+        print(f"min_sep (refined) = {min_sep:.12e}")
+        print(f"min_sep / dt      = {min_sep/dt:.6f}")
+    else:
+        print("min_sep (refined) = nan (not enough roots)")
+
+print("\n================ STEP 34 DONE =================")
+
+
+N = 8192
+==============================
+dt = 7.325113e-03
+Initial closest-pair sep (grid pick) = 8.277378e-01
+tc0 = 111.447931
+Check interp(F,tc0) = -7.102e-18
+Check deriv(F,tc0)  = -3.789e-15
+Roots in radius: 0
+min_sep (refined) = nan (not enough roots)
+
+==============================
+N = 16384
+==============================
+dt = 3.662333e-03
+Initial closest-pair sep (grid pick) = 8.276872e-01
+tc0 = 111.452115
+Check interp(F,tc0) = +0.000e+00
+Check deriv(F,tc0)  = +0.000e+00
+Roots in radius: 1
+First few roots: [111.452114997]
+min_sep (refined) = nan (not enough roots)
+
+================ STEP 34 DONE =================
+
+
+# ================= STEP 35 — IMAGINARY ESCAPE DIAGNOSTIC (ARGUMENT PRINCIPLE) =================
+# Self-contained, single-cell. No external state required.
+#
+# What it does:
+# 1) Builds Siegel Z(t) on a window and smooths it at SIGMA_TARGET via FFT Gaussian filter.
+# 2) Finds the closest adjacent zero-pair (on the smoothed slice) to define tc0.
+# 3) Applies a CODIM-3 local forcing at tc0 (Gaussian + its 1st/2nd t-derivatives) to enforce:
+#       F(tc0)=0, F'(tc0)=0, F''(tc0)=0
+# 4) Defines a (periodic) analytic continuation of the forced F(t) via its FFT series, evaluating F(z) for complex z.
+# 5) Uses the argument principle (winding number of F(z) around a rectangle in complex-t plane) to count zeros
+#    inside boxes centered at tc0 for various imaginary half-heights Hy.
+#
+# Interpretation:
+# - If only the real-axis zero exists and nothing "escapes", winding stays ~1 for small Hy and does not jump.
+# - If a conjugate pair appears off-axis, winding will increase by 2 when Hy exceeds their imaginary offset.
+#
+# Notes:
+# - This is the analytic continuation of the *periodic bandlimited reconstruction* of your forced slice on [T0,T1].
+# - It is not "the" analytic continuation of zeta; it is the continuation of the reconstructed signal you are studying.
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 60
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 16384             # bump if you want (32768 ok if your runtime permits)
+EDGE_DROP = 2
+
+SIGMA_TARGET = 0.06
+SIGMAS_FOR_TRACK = [0.0, 0.005, 0.01, 0.015, 0.02, 0.04, 0.06]
+
+SMOOTH_SIGMA_FOR_TC = SIGMA_TARGET  # use same as target to pick tc0
+
+WIDTH = 0.20          # Gaussian forcing width
+ROOT_RADIUS = 0.90     # just for printing local real roots list
+
+# Boxes for argument principle around tc0:
+BOX_HALF_WIDTH = 0.50
+HY_LIST = [0.002, 0.005, 0.01, 0.02, 0.04, 0.08]  # imaginary half-heights
+PTS_PER_EDGE = 600
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    # Real Siegel Z values on real grid
+    return np.array([float(mp.siegelz(tt)) for tt in t], dtype=float)
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    n = len(f)
+    k = np.fft.fftfreq(n, d=dt)  # cycles per unit t
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*k*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def sign_change_zeros(t, f):
+    # quick bracketing "zeros" (grid picks) from sign changes
+    z = []
+    for i in range(len(f)-1):
+        a, b = f[i], f[i+1]
+        if a == 0.0:
+            z.append(t[i])
+        elif a*b < 0.0:
+            # linearized pick; later you can refine if needed
+            z.append(t[i])
+    return np.array(z, dtype=float)
+
+def local_roots_grid(t, f, center, radius):
+    z = sign_change_zeros(t, f)
+    return z[np.abs(z-center) <= radius]
+
+def gaussian(t, tc, w):
+    return np.exp(-0.5*((t-tc)/w)**2)
+
+def d_gaussian(t, tc, w):
+    return -(t-tc)/(w*w) * gaussian(t, tc, w)
+
+def dd_gaussian(t, tc, w):
+    x = (t-tc)/w
+    return ((x*x - 1.0)/(w*w)) * gaussian(t, tc, w)
+
+def interp_real(f, tgrid, x):
+    return float(np.interp(x, tgrid, f))
+
+def deriv1_centered(f, tgrid, x):
+    # centered finite difference using nearest index
+    i = int(np.searchsorted(tgrid, x))
+    if i <= 0 or i >= len(tgrid)-1:
+        return np.nan
+    return float((f[i+1] - f[i-1]) / (tgrid[i+1] - tgrid[i-1]))
+
+def deriv2_centered(f, tgrid, x):
+    i = int(np.searchsorted(tgrid, x))
+    if i <= 0 or i >= len(tgrid)-1:
+        return np.nan
+    dt = tgrid[1] - tgrid[0]
+    return float((f[i+1] - 2.0*f[i] + f[i-1]) / (dt*dt))
+
+# Periodic FFT analytic continuation:
+# f(t) on [T0,T1] -> Fourier series coefficients c_n for exp(i*2π*n*(t-T0)/L)
+def fft_continuation_coeffs(f):
+    # numpy FFT uses exp(-2π i k m/N) convention for forward.
+    # For evaluation we use:
+    # f(z) = sum_k c_k * exp( i 2π k (z-T0)/L )
+    # with c_k = FFT(f)[k]/N, k interpreted in signed order (fftfreq)
+    Fk = np.fft.fft(f)
+    c = Fk / len(f)
+    freqs = np.fft.fftfreq(len(f), d=1.0)  # cycles per sample index; we'll scale by (z-T0)/L
+    return c, freqs
+
+def eval_fourier_series(c, freqs, z, T0, L):
+    # z may be complex scalar or array-like complex
+    z = np.asarray(z, dtype=np.complex128)
+    phase = 1j * 2.0*np.pi * freqs[:, None] * ((z[None, :] - T0) / L)
+    # For large Im(z), exp can overflow. Hy list is small; keep it that way.
+    return (c[:, None] * np.exp(phase)).sum(axis=0)
+
+def rectangle_path(center, half_w, half_h, m):
+    # complex rectangle boundary, counterclockwise
+    cx = center
+    hw = half_w
+    hh = half_h
+    # bottom: (cx-hw .. cx+hw) - i hh
+    xb = np.linspace(cx-hw, cx+hw, m, endpoint=False)
+    bottom = xb - 1j*hh
+    # right: (cx+hw) + i(-hh .. +hh)
+    yr = np.linspace(-hh, +hh, m, endpoint=False)
+    right = (cx+hw) + 1j*yr
+    # top: (cx+hw .. cx-hw) + i hh
+    xt = np.linspace(cx+hw, cx-hw, m, endpoint=False)
+    top = xt + 1j*hh
+    # left: (cx-hw) + i(+hh .. -hh)
+    yl = np.linspace(+hh, -hh, m, endpoint=False)
+    left = (cx-hw) + 1j*yl
+    path = np.concatenate([bottom, right, top, left, [bottom[0]]])  # close loop
+    return path
+
+def winding_number(values):
+    # values: complex array along closed contour
+    ang = np.unwrap(np.angle(values))
+    total = ang[-1] - ang[0]
+    return int(np.round(total / (2.0*np.pi)))
+
+# ----------------------------
+# BUILD GRID + BASELINE
+# ----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+L = T1 - T0
+
+print("============== STEP 35 — IMAGINARY ESCAPE DIAGNOSTIC =================")
+print(f"WINDOW=({T0},{T1})  N={N}  dt={dt:.12e}")
+print(f"SIGMA_TARGET={SIGMA_TARGET}  WIDTH={WIDTH}  BOX_HALF_WIDTH={BOX_HALF_WIDTH}")
+print("-----------------------------------------------------------------------")
+
+f0 = siegel_vals(t)
+fs = smooth_fft(f0, dt, SMOOTH_SIGMA_FOR_TC)
+
+# Pick tc0 from closest adjacent sign-change zeros on sigma_target slice
+zlist = sign_change_zeros(t, fs)
+zlist = zlist[EDGE_DROP:-EDGE_DROP] if len(zlist) > 2*EDGE_DROP else zlist
+if len(zlist) < 2:
+    raise RuntimeError("Not enough zeros found to define a closest pair. Try expanding window or decreasing sigma.")
+
+pairs = [(abs(zlist[i+1]-zlist[i]), zlist[i], zlist[i+1]) for i in range(len(zlist)-1)]
+pairs.sort(key=lambda x: x[0])
+sep_init, z1, z2 = pairs[0]
+tc0 = 0.5*(z1+z2)
+
+print("Closest adjacent zero-pair (grid picks) on sigma_target slice:")
+print(f"  z1={z1:.6f}  z2={z2:.6f}  sep={sep_init:.6e}  tc0={tc0:.6f}")
+
+# ----------------------------
+# CODIM-3 FORCING at tc0: enforce F(tc0)=0, F'(tc0)=0, F''(tc0)=0
+# ----------------------------
+g0 = gaussian(t, tc0, WIDTH)
+g1 = d_gaussian(t, tc0, WIDTH)
+g2 = dd_gaussian(t, tc0, WIDTH)
+
+# Build linear system for (A,B,C):
+# (fs + A g0 + B g1 + C g2) evaluated at tc0 has 0 value, 0 first deriv, 0 second deriv
+M = np.array([
+    [interp_real(g0, t, tc0), interp_real(g1, t, tc0), interp_real(g2, t, tc0)],
+    [deriv1_centered(g0, t, tc0), deriv1_centered(g1, t, tc0), deriv1_centered(g2, t, tc0)],
+    [deriv2_centered(g0, t, tc0), deriv2_centered(g1, t, tc0), deriv2_centered(g2, t, tc0)],
+], dtype=float)
+
+rhs = -np.array([
+    interp_real(fs, t, tc0),
+    deriv1_centered(fs, t, tc0),
+    deriv2_centered(fs, t, tc0),
+], dtype=float)
+
+condM = np.linalg.cond(M)
+A, B, C = np.linalg.solve(M, rhs)
+
+F_forced = fs + A*g0 + B*g1 + C*g2
+
+print("\nCODIM-3 forcing coefficients (solve F=F'=F''=0 at tc0):")
+print(f"  A={A:+.6e}  B={B:+.6e}  C={C:+.6e}  cond(M)={condM:.3e}")
+print("Check (real axis):")
+print(f"  F(tc0)  = {interp_real(F_forced, t, tc0):+.3e}")
+print(f"  F'(tc0) = {deriv1_centered(F_forced, t, tc0):+.3e}")
+print(f"  F''(tc0)= {deriv2_centered(F_forced, t, tc0):+.3e}")
+
+roots_near = local_roots_grid(t, F_forced, tc0, ROOT_RADIUS)
+print(f"\nGrid sign-change roots within ±{ROOT_RADIUS} of tc0 (forced, σ fixed): n={len(roots_near)}")
+if len(roots_near) > 0:
+    print("  first few:", roots_near[:10])
+
+# ----------------------------
+# FFT analytic continuation of the FORCED slice
+# ----------------------------
+c, freqs = fft_continuation_coeffs(F_forced)
+
+def F_complex(z):
+    z = np.atleast_1d(np.array(z, dtype=np.complex128))
+    return eval_fourier_series(c, freqs, z, T0, L)
+
+# ----------------------------
+# ARGUMENT PRINCIPLE around tc0
+# ----------------------------
+print("\n================ ARGUMENT PRINCIPLE (zeros in complex-t box) ================")
+print("Hy      | winding (#zeros) |  min|F| on boundary")
+print("--------------------------------------------------------------------------")
+
+results = []
+for Hy in HY_LIST:
+    path = rectangle_path(tc0, BOX_HALF_WIDTH, Hy, PTS_PER_EDGE)
+    vals = F_complex(path)
+    minabs = float(np.min(np.abs(vals)))
+    wn = winding_number(vals)
+    results.append((Hy, wn, minabs))
+    print(f"{Hy:0.3e} | {wn:16d} | {minabs: .3e}")
+
+print("\nNotes:")
+print("- winding is the counted number of zeros of the continued (periodic FFT) F(z) inside the rectangle.")
+print("- If winding jumps upward by 2 as Hy increases, that indicates a conjugate pair off the real axis inside the box.")
+print("- If winding stays at 1 (or stays constant), there is no detected off-axis pair in that neighborhood for this continuation.")
+print("==========================================================================")
+
+
+============== STEP 35 — IMAGINARY ESCAPE DIAGNOSTIC =================
+WINDOW=(60.0,120.0)  N=16384  dt=3.662332906060e-03
+SIGMA_TARGET=0.06  WIDTH=0.2  BOX_HALF_WIDTH=0.5
+-----------------------------------------------------------------------
+Closest adjacent zero-pair (grid picks) on sigma_target slice:
+  z1=111.038271  z2=111.865959  sep=8.276872e-01  tc0=111.452115
+
+CODIM-3 forcing coefficients (solve F=F'=F''=0 at tc0):
+  A=+3.889947e-01  B=+2.061931e-03  C=+3.217845e-03  cond(M)=2.813e+03
+Check (real axis):
+  F(tc0)  = +1.388e-17
+  F'(tc0) = +0.000e+00
+  F''(tc0)= +2.069e-12
+
+Grid sign-change roots within ±0.9 of tc0 (forced, σ fixed): n=2
+  first few: [111.23237502 111.44479033]
+
+================ ARGUMENT PRINCIPLE (zeros in complex-t box) ================
+Hy      | winding (#zeros) |  min|F| on boundary
+--------------------------------------------------------------------------
+2.000e-03 |                0 |  1.024e+00
+5.000e-03 |                0 |  1.024e+00
+1.000e-02 |                0 |  1.024e+00
+2.000e-02 |                0 |  1.024e+00
+4.000e-02 |                0 |  1.024e+00
+8.000e-02 |                0 |  1.024e+00
+
+Notes:
+- winding is the counted number of zeros of the continued (periodic FFT) F(z) inside the rectangle.
+- If winding jumps upward by 2 as Hy increases, that indicates a conjugate pair off the real axis inside the box.
+- If winding stays at 1 (or stays constant), there is no detected off-axis pair in that neighborhood for this continuation.
+==========================================================================
+
+# ================= STEP 35 (FIXED) — IMAGINARY ESCAPE DIAGNOSTIC (ARGUMENT PRINCIPLE) =================
+# Self-contained, single-cell, no external state required.
+#
+# Fixes vs previous:
+#   - Uses periodic grid: endpoint=False so FFT continuation matches the sampled function.
+#   - Uses correct Fourier frequencies: freqs = fftfreq(N, d=dt) in cycles per unit t.
+#   - Evaluates continuation as sum_k c_k * exp(i 2π f_k (z-T0)).
+#
+# Interpretation:
+#   winding = number of zeros of the *periodic bandlimited continuation* of your forced slice inside the rectangle.
+#   If winding jumps by +2 as Hy increases, that indicates a conjugate off-axis pair entering the box.
+#
+# NOTE: This is continuation of your reconstructed slice (periodic FFT model), not "the" analytic continuation of zeta.
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 60
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 16384
+EDGE_DROP = 2
+
+SIGMA_TARGET = 0.06
+SMOOTH_SIGMA_FOR_TC = SIGMA_TARGET
+
+WIDTH = 0.20
+ROOT_RADIUS = 0.90
+
+BOX_HALF_WIDTH = 0.50
+HY_LIST = [0.002, 0.005, 0.01, 0.02, 0.04, 0.08]
+PTS_PER_EDGE = 800  # contour resolution
+
+# ----------------------------
+# HELPERS
+# ----------------------------
+def siegel_vals(t):
+    return np.array([float(mp.siegelz(tt)) for tt in t], dtype=float)
+
+def smooth_fft(f, dt, sigma):
+    if sigma == 0:
+        return f.copy()
+    n = len(f)
+    freqs = np.fft.fftfreq(n, d=dt)   # cycles per unit t
+    F = np.fft.fft(f)
+    G = np.exp(-(2*np.pi*freqs*sigma)**2)
+    return np.real(np.fft.ifft(F * G))
+
+def sign_change_zeros(t, f):
+    # crude grid-pick zeros (sign changes); enough for tc0 seeding
+    z = []
+    for i in range(len(f)-1):
+        a, b = f[i], f[i+1]
+        if a == 0.0:
+            z.append(t[i])
+        elif a*b < 0.0:
+            z.append(t[i])
+    return np.array(z, dtype=float)
+
+def local_roots_grid(t, f, center, radius):
+    z = sign_change_zeros(t, f)
+    return z[np.abs(z-center) <= radius]
+
+def gaussian(t, tc, w):
+    return np.exp(-0.5*((t-tc)/w)**2)
+
+def d_gaussian(t, tc, w):
+    return -(t-tc)/(w*w) * gaussian(t, tc, w)
+
+def dd_gaussian(t, tc, w):
+    x = (t-tc)/w
+    return ((x*x - 1.0)/(w*w)) * gaussian(t, tc, w)
+
+def interp_real(f, tgrid, x):
+    return float(np.interp(x, tgrid, f))
+
+def deriv1_centered(f, tgrid, x):
+    i = int(np.searchsorted(tgrid, x))
+    if i <= 0 or i >= len(tgrid)-1:
+        return np.nan
+    return float((f[i+1] - f[i-1]) / (tgrid[i+1] - tgrid[i-1]))
+
+def deriv2_centered(f, tgrid, x):
+    i = int(np.searchsorted(tgrid, x))
+    if i <= 0 or i >= len(tgrid)-1:
+        return np.nan
+    dt = tgrid[1] - tgrid[0]
+    return float((f[i+1] - 2.0*f[i] + f[i-1]) / (dt*dt))
+
+def rectangle_path(center, half_w, half_h, m):
+    cx = center
+    hw = half_w
+    hh = half_h
+    xb = np.linspace(cx-hw, cx+hw, m, endpoint=False)
+    bottom = xb - 1j*hh
+    yr = np.linspace(-hh, +hh, m, endpoint=False)
+    right = (cx+hw) + 1j*yr
+    xt = np.linspace(cx+hw, cx-hw, m, endpoint=False)
+    top = xt + 1j*hh
+    yl = np.linspace(+hh, -hh, m, endpoint=False)
+    left = (cx-hw) + 1j*yl
+    return np.concatenate([bottom, right, top, left, [bottom[0]]])
+
+def winding_number(values):
+    ang = np.unwrap(np.angle(values))
+    total = ang[-1] - ang[0]
+    return int(np.round(total / (2.0*np.pi)))
+
+# ----------------------------
+# PERIODIC GRID (important)
+# ----------------------------
+L = (T1 - T0)
+dt = L / N
+t = T0 + dt*np.arange(N)   # endpoint=False periodic grid
+
+print("============== STEP 35 (FIXED) — IMAGINARY ESCAPE DIAGNOSTIC =================")
+print(f"WINDOW=({T0},{T1})  N={N}  dt={dt:.12e}")
+print(f"SIGMA_TARGET={SIGMA_TARGET}  WIDTH={WIDTH}  BOX_HALF_WIDTH={BOX_HALF_WIDTH}")
+print("-----------------------------------------------------------------------")
+
+# ----------------------------
+# BUILD BASELINE + σ-SLICE
+# ----------------------------
+f0 = siegel_vals(t)
+fs = smooth_fft(f0, dt, SMOOTH_SIGMA_FOR_TC)
+
+# Choose tc0 from closest adjacent grid-pick zeros
+zlist = sign_change_zeros(t, fs)
+zlist = zlist[EDGE_DROP:-EDGE_DROP] if len(zlist) > 2*EDGE_DROP else zlist
+if len(zlist) < 2:
+    raise RuntimeError("Not enough zeros found to define tc0. Expand window or reduce sigma.")
+
+pairs = [(abs(zlist[i+1]-zlist[i]), zlist[i], zlist[i+1]) for i in range(len(zlist)-1)]
+pairs.sort(key=lambda x: x[0])
+sep_init, z1, z2 = pairs[0]
+tc0 = 0.5*(z1+z2)
+
+print("Closest adjacent zero-pair (grid picks) on sigma_target slice:")
+print(f"  z1={z1:.6f}  z2={z2:.6f}  sep={sep_init:.6e}  tc0={tc0:.6f}")
+
+# ----------------------------
+# CODIM-3 forcing at tc0: enforce F(tc0)=F'(tc0)=F''(tc0)=0
+# ----------------------------
+g0 = gaussian(t, tc0, WIDTH)
+g1 = d_gaussian(t, tc0, WIDTH)
+g2 = dd_gaussian(t, tc0, WIDTH)
+
+M = np.array([
+    [interp_real(g0, t, tc0), interp_real(g1, t, tc0), interp_real(g2, t, tc0)],
+    [deriv1_centered(g0, t, tc0), deriv1_centered(g1, t, tc0), deriv1_centered(g2, t, tc0)],
+    [deriv2_centered(g0, t, tc0), deriv2_centered(g1, t, tc0), deriv2_centered(g2, t, tc0)],
+], dtype=float)
+
+rhs = -np.array([
+    interp_real(fs, t, tc0),
+    deriv1_centered(fs, t, tc0),
+    deriv2_centered(fs, t, tc0),
+], dtype=float)
+
+condM = np.linalg.cond(M)
+A, B, C = np.linalg.solve(M, rhs)
+
+F_forced = fs + A*g0 + B*g1 + C*g2
+
+print("\nCODIM-3 forcing coefficients (solve F=F'=F''=0 at tc0):")
+print(f"  A={A:+.6e}  B={B:+.6e}  C={C:+.6e}  cond(M)={condM:.3e}")
+print("Check (real axis):")
+print(f"  F(tc0)  = {interp_real(F_forced, t, tc0):+.3e}")
+print(f"  F'(tc0) = {deriv1_centered(F_forced, t, tc0):+.3e}")
+print(f"  F''(tc0)= {deriv2_centered(F_forced, t, tc0):+.3e}")
+
+roots_near = local_roots_grid(t, F_forced, tc0, ROOT_RADIUS)
+print(f"\nGrid sign-change roots within ±{ROOT_RADIUS} of tc0 (forced, σ fixed): n={len(roots_near)}")
+if len(roots_near) > 0:
+    print("  first few:", roots_near[:10])
+
+# ----------------------------
+# FFT analytic continuation (periodic bandlimited model)
+#   F(z) = sum_k c_k exp(i 2π f_k (z - T0))
+# ----------------------------
+Fk = np.fft.fft(F_forced)
+c_k = Fk / N
+freqs = np.fft.fftfreq(N, d=dt)   # cycles per unit t
+
+def F_complex(z):
+    z = np.atleast_1d(np.array(z, dtype=np.complex128))
+    # vectorized eval: (Nfreq x Nz)
+    phase = 1j * 2.0*np.pi * freqs[:, None] * (z[None, :] - T0)
+    return (c_k[:, None] * np.exp(phase)).sum(axis=0)
+
+# ----------------------------
+# Argument principle around rectangle centered at tc0
+# ----------------------------
+print("\n================ ARGUMENT PRINCIPLE (zeros in complex-t box) ================")
+print("Hy      | winding (#zeros) |  min|F| on boundary")
+print("--------------------------------------------------------------------------")
+
+for Hy in HY_LIST:
+    path = rectangle_path(tc0, BOX_HALF_WIDTH, Hy, PTS_PER_EDGE)
+    vals = F_complex(path)
+    minabs = float(np.min(np.abs(vals)))
+    wn = winding_number(vals)
+    print(f"{Hy:0.3e} | {wn:16d} | {minabs: .3e}")
+
+print("\nDONE (STEP 35 FIXED)")
+
+
+============== STEP 35 (FIXED) — IMAGINARY ESCAPE DIAGNOSTIC =================
+WINDOW=(60.0,120.0)  N=16384  dt=3.662109375000e-03
+SIGMA_TARGET=0.06  WIDTH=0.2  BOX_HALF_WIDTH=0.5
+-----------------------------------------------------------------------
+Closest adjacent zero-pair (grid picks) on sigma_target slice:
+  z1=111.035156  z2=111.866455  sep=8.312988e-01  tc0=111.450806
+
+CODIM-3 forcing coefficients (solve F=F'=F''=0 at tc0):
+  A=+3.889846e-01  B=+1.868396e-03  C=+3.214868e-03  cond(M)=2.813e+03
+Check (real axis):
+  F(tc0)  = -2.776e-17
+  F'(tc0) = +1.895e-15
+  F''(tc0)= -3.104e-12
+
+Grid sign-change roots within ±0.9 of tc0 (forced, σ fixed): n=2
+  first few: [111.24023438 111.45629883]
+
+================ ARGUMENT PRINCIPLE (zeros in complex-t box) ================
+Hy      | winding (#zeros) |  min|F| on boundary
+--------------------------------------------------------------------------
+2.000e-03 |                4 |  8.735e-09
+5.000e-03 |                4 |  4.703e-08
+1.000e-02 |                4 |  2.763e-07
+2.000e-02 |                4 |  2.022e-06
+4.000e-02 |              211 |  4.171e-03
+8.000e-02 |              274 |  5.521e-02
+
+DONE (STEP 35 FIXED)
