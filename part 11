@@ -1,0 +1,2612 @@
+Code 
+
+110
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# --------------------------------------------------
+# Riemann–Siegel Z (zeros preserved, magnitude safe)
+# --------------------------------------------------
+def z_func(t):
+    return float(mp.siegelz(t))
+
+# --------------------------------------------------
+# Parameters
+# --------------------------------------------------
+WINDOW = (1000.0, 1020.0)
+N = 10000
+SIGMAS = np.array([0.005, 0.01, 0.015])
+EDGE = 1.0
+
+print("\n============== HIGH-T RG STRESS TEST ==============\n")
+
+# --------------------------------------------------
+# Sample baseline
+# --------------------------------------------------
+T0, T1 = WINDOW
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+
+f0 = np.array([z_func(tt) for tt in t])
+idx0 = np.where(np.diff(np.sign(f0)))[0]
+z0 = t[idx0]
+z0 = z0[(z0 > T0 + EDGE) & (z0 < T1 - EDGE)]
+
+if len(z0) < 5:
+    raise RuntimeError("Too few zeros — increase resolution or window.")
+
+print(f"Baseline zeros used: {len(z0)}")
+
+# --------------------------------------------------
+# FFT Gaussian flow
+# --------------------------------------------------
+freq = 2*np.pi*np.fft.fftfreq(N, d=dt)
+Z = {}
+
+for s in SIGMAS:
+    fs = np.real(np.fft.ifft(np.fft.fft(f0) * np.exp(-(freq**2) * s)))
+    idx = np.where(np.diff(np.sign(fs)))[0]
+    zs = t[idx]
+    zs = zs[(zs > T0 + EDGE) & (zs < T1 - EDGE)]
+    if len(zs) >= len(z0):
+        Z[s] = zs[:len(z0)]
+
+if len(Z) != len(SIGMAS):
+    raise RuntimeError("Zero tracking failed across σ.")
+
+print(f"Tracked zeros across σ: {len(z0)} / {len(z0)}")
+
+# --------------------------------------------------
+# Fit v and a from σ-flow
+# --------------------------------------------------
+sig = SIGMAS
+M = np.vstack([sig, 0.5*sig**2]).T
+
+v = np.zeros(len(z0))
+a = np.zeros(len(z0))
+
+for i in range(len(z0)):
+    y = np.array([Z[s][i] - z0[i] for s in sig])
+    coeffs, *_ = np.linalg.lstsq(M, y, rcond=None)
+    v[i], a[i] = coeffs
+
+print(f"mean|v| = {np.mean(np.abs(v)):.3e}")
+print(f"mean|a| = {np.mean(np.abs(a)):.3e}")
+
+# --------------------------------------------------
+# Odd kernel basis
+# --------------------------------------------------
+def H_kernel(z, p):
+    D = z[:,None] - z[None,:]
+    D[np.diag_indices_from(D)] = np.inf
+    return np.sign(D) / np.abs(D)**p
+
+powers = [1,3,5]
+H = np.stack([H_kernel(z0,p) @ v for p in powers], axis=1)
+H = (H - H.mean(0)) / H.std(0)
+
+# --------------------------------------------------
+# β-function
+# --------------------------------------------------
+beta = np.gradient(
+    np.vstack([np.linalg.lstsq(H, (Z[s]-z0), rcond=None)[0] for s in sig]),
+    np.log(sig),
+    axis=0
+).mean(axis=0)
+
+# --------------------------------------------------
+# BF scalar closure
+# --------------------------------------------------
+a_bar = np.linalg.lstsq(H, v, rcond=None)[0]
+lam = np.dot(beta, a_bar) / np.dot(a_bar, a_bar)
+
+corr1 = np.corrcoef(beta, lam*a_bar)[0,1]
+err1 = np.linalg.norm(beta - lam*a_bar)/np.linalg.norm(beta)
+
+# --------------------------------------------------
+# BF + 2D closure
+# --------------------------------------------------
+B = np.vstack([a_bar, beta]).T
+coeffs2, *_ = np.linalg.lstsq(B, beta, rcond=None)
+beta_hat = B @ coeffs2
+
+corr2 = np.corrcoef(beta, beta_hat)[0,1]
+err2 = np.linalg.norm(beta - beta_hat)/np.linalg.norm(beta)
+sv = np.linalg.svd(beta[:,None] - beta_hat[:,None], compute_uv=False)
+
+# --------------------------------------------------
+# Results
+# --------------------------------------------------
+print("\n================ BF HIGH-T RESULT ================\n")
+print(f"Scalar RG:")
+print(f"  λ* = {lam:+.6f}")
+print(f"  corr(β,λa) = {corr1:+.6f}")
+print(f"  rel_err    = {err1:.6f}")
+
+print("\nBF + 2D closure:")
+print(f"  corr       = {corr2:+.6f}")
+print(f"  rel_err    = {err2:.6e}")
+print(f"  resid sv   = {sv[:3]}")
+print("\n=================================================\n")
+
+============== HIGH-T RG STRESS TEST ==============
+
+Baseline zeros used: 15
+Tracked zeros across σ: 15 / 15
+mean|v| = 1.224e+00
+mean|a| = 1.460e+01
+
+================ BF HIGH-T RESULT ================
+
+Scalar RG:
+  λ* = +0.001968
+  corr(β,λa) = +0.914853
+  rel_err    = 0.621607
+
+BF + 2D closure:
+  corr       = +1.000000
+  rel_err    = 3.646354e-16
+  resid sv   = [6.32193071e-19]
+
+=================================================
+
+
+
+111
+
+# ============================================================
+# BF + 2D RG PLANE ROTATION TEST (FULLY STANDALONE)
+# ============================================================
+# This script:
+#   1) Samples Riemann–Siegel Z(t)
+#   2) Finds baseline zeros
+#   3) Applies Gaussian σ-flow (FFT)
+#   4) Tracks zeros across σ
+#   5) Builds v(σ) generators
+#   6) Extracts the 2D RG plane
+#   7) Splits σ into low/high groups
+#   8) Computes Grassmann (principal) angle
+#
+# No globals. No session memory. Paste & run.
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ------------------------------------------------------------
+# Parameters (fixed, safe defaults)
+# ------------------------------------------------------------
+WINDOW = (1000.0, 1020.0)
+N_GRID = 10000
+SIGMAS = np.array([0.005, 0.01, 0.015, 0.02])
+
+EDGE_DROP = 1
+MAX_ZEROS = 15
+
+# ------------------------------------------------------------
+# Riemann–Siegel Z
+# ------------------------------------------------------------
+def Z_func(t):
+    return float(mp.siegelz(t))
+
+# ------------------------------------------------------------
+# Gaussian σ-flow (FFT)
+# ------------------------------------------------------------
+def sigma_flow(f, dt, sigma):
+    k = np.fft.fftfreq(len(f), d=dt)
+    return np.real(
+        np.fft.ifft(np.fft.fft(f) * np.exp(-(2*np.pi*k)**2 * sigma))
+    )
+
+# ------------------------------------------------------------
+# Zero finder
+# ------------------------------------------------------------
+def find_zeros(t, f):
+    idx = np.where(np.diff(np.sign(f)))[0]
+    return t[idx]
+
+# ------------------------------------------------------------
+# Build RG plane from σ subset
+# ------------------------------------------------------------
+def rg_plane_from_sigmas(z0, Zsig, sigmas):
+    V = []
+    for s in sigmas:
+        dt = Zsig[s] - z0
+        if np.linalg.norm(dt) == 0:
+            continue
+        V.append(dt / s)
+    V = np.array(V)
+
+    U, S, VT = np.linalg.svd(V, full_matrices=False)
+    plane = VT[:2]              # (2, N)
+    Q, _ = np.linalg.qr(plane.T)
+    return Q.T                  # orthonormal (2, N)
+
+# ------------------------------------------------------------
+# Grassmann principal angle
+# ------------------------------------------------------------
+def plane_angle(P, Q):
+    M = P @ Q.T
+    _, s, _ = np.linalg.svd(M)
+    s = np.clip(s, -1, 1)
+    return np.arccos(np.min(s))
+
+# ============================================================
+# MAIN
+# ============================================================
+print("\n============== BF + 2D RG PLANE ROTATION TEST ==============\n")
+
+# Sample
+t = np.linspace(*WINDOW, N_GRID)
+dt = t[1] - t[0]
+f0 = np.array([Z_func(tt) for tt in t])
+
+# Baseline zeros
+z0 = find_zeros(t, f0)
+z0 = z0[(z0 > WINDOW[0] + 1) & (z0 < WINDOW[1] - 1)]
+z0 = z0[EDGE_DROP:-EDGE_DROP][:MAX_ZEROS]
+
+print(f"Baseline zeros used: {len(z0)}")
+
+# σ-flow tracking
+Zsig = {}
+for s in SIGMAS:
+    fs = sigma_flow(f0, dt, s)
+    zs = find_zeros(t, fs)
+    zs = zs[(zs > WINDOW[0] + 1) & (zs < WINDOW[1] - 1)]
+    if len(zs) >= len(z0):
+        Zsig[s] = zs[:len(z0)]
+
+print(f"Tracked σ values: {sorted(Zsig.keys())}")
+assert len(Zsig) >= 3, "Need at least 3 σ values"
+
+# Split σ sets
+sigmas_sorted = sorted(Zsig.keys())
+mid = len(sigmas_sorted) // 2
+sig_lo = sigmas_sorted[:mid]
+sig_hi = sigmas_sorted[mid:]
+
+print(f"Low σ set : {sig_lo}")
+print(f"High σ set: {sig_hi}")
+
+# Build RG planes
+P_lo = rg_plane_from_sigmas(z0, Zsig, sig_lo)
+P_hi = rg_plane_from_sigmas(z0, Zsig, sig_hi)
+
+# Angle
+theta = plane_angle(P_lo, P_hi)
+
+# ------------------------------------------------------------
+# Results
+# ------------------------------------------------------------
+print("\n==================== RESULTS ====================")
+print(f"Principal angle (rad): {theta:.6e}")
+print(f"Principal angle (deg): {theta * 180/np.pi:.6f}")
+
+if theta < 0.1:
+    print("Interpretation: RG plane is STABLE (universal)")
+elif theta < 0.5:
+    print("Interpretation: RG plane slowly ROTATING")
+else:
+    print("Interpretation: RG plane CHANGES (non-universal)")
+
+print("=================================================\n")
+
+============= BF + 2D RG PLANE ROTATION TEST ==============
+
+Baseline zeros used: 13
+Tracked σ values: [np.float64(0.005), np.float64(0.01), np.float64(0.015), np.float64(0.02)]
+Low σ set : [np.float64(0.005), np.float64(0.01)]
+High σ set: [np.float64(0.015), np.float64(0.02)]
+
+==================== RESULTS ====================
+Principal angle (rad): 1.157387e-01
+Principal angle (deg): 6.631339
+Interpretation: RG plane slowly ROTATING
+=================================================
+
+
+112
+
+import numpy as np
+import mpmath as mp
+
+# ============================================================
+# FULL PIPELINE (FROM SCRATCH)
+#   - sample Z(t) on [T0,T1]
+#   - find baseline zeros
+#   - FFT heat-flow smoothing for σ in SIGMAS
+#   - track zeros by index
+#   - build odd-kernel features H_p
+#   - fit a(σ), compute β = d a / d log σ
+#   - BF scalar closure β ≈ λ a
+#   - BF + 2D closure (rank-2 residual)
+#   - RG plane rotation (principal angle)
+#   - Stress-to-break (synthetic corruption) test
+# ============================================================
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+mp.mp.dps = 50
+
+T0, T1 = 60.0, 120.0          # window
+N = 8192                       # samples
+EDGE_DROP = 2                  # drop zeros near edges (index-based)
+SIGMAS = np.array([0.005, 0.01, 0.015, 0.02, 0.04, 0.06], dtype=float)  # positive σ
+POWERS = [1, 3, 5]             # odd kernels for BF / closure
+K_DROP = 1                     # exclude |j-i|<=K_DROP in pairwise sums (UV truncation)
+
+# plane rotation split
+PLANE_SPLIT = 0.5              # fraction for low/high σ groups (e.g. 0.5 = half/half)
+
+# Stress-to-break: corrupt one tracked curve
+BREAK_ENABLE = True
+BREAK_ZERO_INDEX = 3           # which zero (in tracked list) to corrupt
+BREAK_SIGMA = 0.06             # which σ slice to corrupt
+BREAK_SHIFT = 0.25             # shift amount in t-units (deliberate violation)
+
+# ----------------------------
+# CORE: Z(t) sampling
+# ----------------------------
+def Z_of_t(t):
+    return float(mp.siegelz(t))
+
+def sample_Z(T0, T1, N):
+    t = np.linspace(T0, T1, N, dtype=float)
+    f = np.array([Z_of_t(tt) for tt in t], dtype=float)
+    return t, f
+
+# ----------------------------
+# Zero finding (linear interp between sign changes)
+# ----------------------------
+def find_zeros_linear(t, f):
+    s = np.sign(f)
+    s[s == 0] = 1.0
+    idx = np.where(s[:-1] * s[1:] < 0)[0]
+    z = []
+    for i in idx:
+        x0, x1 = t[i], t[i+1]
+        y0, y1 = f[i], f[i+1]
+        # linear interpolation for root
+        if y1 == y0:
+            zr = 0.5*(x0+x1)
+        else:
+            zr = x0 - y0*(x1-x0)/(y1-y0)
+        z.append(zr)
+    return np.array(z, dtype=float)
+
+# ----------------------------
+# Heat semigroup smoothing in Fourier:
+#   f_sigma = ifft( fft(f0) * exp(-(2π f)^2 σ) )
+# ----------------------------
+def heat_smooth_fft(f0, dt, sigma):
+    n = len(f0)
+    freqs = np.fft.fftfreq(n, d=dt)          # cycles per unit t
+    w = 2*np.pi*freqs                        # angular freq
+    H = np.exp(-(w*w) * sigma)               # heat kernel in freq
+    F = np.fft.fft(f0)
+    fs = np.real(np.fft.ifft(F * H))
+    return fs
+
+# ----------------------------
+# Tracking: index-align zeros by count (simple but robust if σ small)
+# ----------------------------
+def track_zeros(t, f0, sigmas, edge_drop):
+    z0 = find_zeros_linear(t, f0)
+    if len(z0) <= 2*edge_drop:
+        return None, None, None
+
+    z0u = z0[edge_drop:-edge_drop]
+    Z = {0.0: z0u}
+
+    dt = t[1]-t[0]
+    for s in sigmas:
+        fs = heat_smooth_fft(f0, dt, s)
+        zs = find_zeros_linear(t, fs)
+        if len(zs) < len(z0):
+            # if count drops, we still try to slice by interior window
+            pass
+        # interior-only by same edge_drop rule on the sigma-zeros
+        if len(zs) <= 2*edge_drop:
+            continue
+        zsu = zs[edge_drop:-edge_drop]
+        # index-align to baseline length
+        if len(zsu) >= len(z0u):
+            Z[s] = zsu[:len(z0u)]
+        else:
+            # not enough zeros -> fail this sigma
+            continue
+
+    # keep only sigmas that succeeded
+    good_sigmas = [s for s in sigmas if s in Z]
+    good_sigmas = np.array(good_sigmas, dtype=float)
+
+    return z0u, Z, good_sigmas
+
+# ----------------------------
+# Odd-kernel feature builder
+# H_p(i) = Σ_{j≠i, |j-i|>K_DROP} sign(i-j)/|t_i-t_j|^p
+# ----------------------------
+def odd_kernels(t0, powers, k_drop=0):
+    t0 = np.asarray(t0, dtype=float)
+    n = len(t0)
+    H = np.zeros((n, len(powers)), dtype=float)
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                continue
+            if abs(j - i) <= k_drop:
+                continue
+            d = t0[i] - t0[j]
+            ad = abs(d)
+            if ad == 0:
+                continue
+            sgn = 1.0 if d > 0 else -1.0
+            for k, p in enumerate(powers):
+                H[i, k] += sgn / (ad**p)
+    return H
+
+def zscore_cols(X):
+    X = np.asarray(X, float)
+    mu = X.mean(axis=0)
+    sd = X.std(axis=0)
+    sd[sd == 0] = 1.0
+    return (X - mu) / sd
+
+# ----------------------------
+# Fit coefficients a(σ) for dt/s using odd kernels
+# ----------------------------
+def fit_coeffs_for_sigma(z0, zs, sigma, powers, k_drop=0):
+    dt = (np.asarray(zs, float) - np.asarray(z0, float))
+    v = dt / sigma
+    H = odd_kernels(z0, powers, k_drop=k_drop)
+    X = zscore_cols(H)
+    # LS: v ≈ X a
+    a, *_ = np.linalg.lstsq(X, v, rcond=None)
+    vhat = X @ a
+    # metrics
+    def corr(a1, a2):
+        a1 = np.asarray(a1, float); a2 = np.asarray(a2, float)
+        a1 -= a1.mean(); a2 -= a2.mean()
+        den = np.linalg.norm(a1)*np.linalg.norm(a2)
+        if den == 0: return np.nan
+        return float(np.dot(a1, a2)/den)
+    rel = float(np.linalg.norm(v - vhat)/max(np.linalg.norm(v), 1e-300))
+    return a, v, vhat, rel, corr(v, vhat)
+
+# ----------------------------
+# Beta: β(σ) = d a / d log σ (finite diff on log grid)
+# ----------------------------
+def beta_from_coeffs(sigmas, A):
+    sigmas = np.asarray(sigmas, float)
+    A = np.asarray(A, float)   # shape (m, k)
+    logs = np.log(sigmas)
+    m, k = A.shape
+    B = np.zeros_like(A)
+    for i in range(m):
+        if i == 0:
+            # forward diff
+            dlog = logs[i+1]-logs[i]
+            B[i] = (A[i+1]-A[i]) / dlog
+        elif i == m-1:
+            # backward diff
+            dlog = logs[i]-logs[i-1]
+            B[i] = (A[i]-A[i-1]) / dlog
+        else:
+            dlog = logs[i+1]-logs[i-1]
+            B[i] = (A[i+1]-A[i-1]) / dlog
+    return B
+
+# ----------------------------
+# BF scalar closure: β ≈ λ a (stacked)
+# ----------------------------
+def bf_scalar_closure(A, B):
+    a = A.reshape(-1)
+    b = B.reshape(-1)
+    # best λ
+    den = float(np.dot(a, a))
+    lam = float(np.dot(a, b)/den) if den != 0 else np.nan
+    bhat = lam * a
+    # metrics
+    def corr(x,y):
+        x = np.asarray(x,float); y=np.asarray(y,float)
+        x -= x.mean(); y -= y.mean()
+        den = np.linalg.norm(x)*np.linalg.norm(y)
+        if den == 0: return np.nan
+        return float(np.dot(x,y)/den)
+    c = corr(b, bhat)
+    rel = float(np.linalg.norm(b-bhat)/max(np.linalg.norm(b),1e-300))
+    return lam, c, rel
+
+# ----------------------------
+# BF + 2D closure:
+# model2D = proj of β onto span{a, da/dlogσ}  (rank-2 in coefficient space)
+# ----------------------------
+def bf_2d_closure(A, B):
+    # Build basis vectors in stacked space
+    a = A.reshape(-1)
+    b = B.reshape(-1)
+
+    # second direction: use B itself, but orthogonalize vs a
+    u1 = a.copy()
+    n1 = np.linalg.norm(u1)
+    if n1 == 0:
+        return np.nan, np.nan, None
+    u1 /= n1
+
+    u2 = b.copy()
+    u2 -= np.dot(u2, u1)*u1
+    n2 = np.linalg.norm(u2)
+    if n2 == 0:
+        # β already collinear with a
+        # then 2D reduces to scalar closure
+        lam, c1, r1 = bf_scalar_closure(A,B)
+        return c1, r1, np.array([u1, np.zeros_like(u1)])
+
+    u2 /= n2
+
+    # project β onto span(u1,u2)
+    proj = (np.dot(b, u1)*u1 + np.dot(b, u2)*u2)
+    resid = b - proj
+
+    def corr(x,y):
+        x = np.asarray(x,float); y=np.asarray(y,float)
+        x -= x.mean(); y -= y.mean()
+        den = np.linalg.norm(x)*np.linalg.norm(y)
+        if den == 0: return np.nan
+        return float(np.dot(x,y)/den)
+
+    c = corr(b, proj)
+    rel = float(np.linalg.norm(resid)/max(np.linalg.norm(b),1e-300))
+    # singular values of residual reshaped back to (m,k) just as a diagnostic
+    return c, rel, np.array([u1, u2])
+
+# ----------------------------
+# RG plane rotation: principal angle between planes from low/high σ groups
+# Planes defined by SVD of generator matrix V (rows v(σ))
+# ----------------------------
+def rg_plane_from_sigmas(z0, Z, sigmas_group):
+    V = []
+    for s in sigmas_group:
+        dt = (np.asarray(Z[s], float) - np.asarray(z0, float))
+        v = dt / s
+        if np.linalg.norm(v) == 0:
+            continue
+        V.append(v)
+    V = np.array(V, dtype=float)
+    if V.shape[0] < 2:
+        return None
+    # 2D plane via top-2 right singular vectors
+    U,S,VT = np.linalg.svd(V, full_matrices=False)
+    P = VT[:2]              # (2, n)
+    # orthonormalize rows
+    Q,_ = np.linalg.qr(P.T)
+    return Q[:, :2]         # (n,2) orthonormal basis columns
+
+def principal_angle(Q1, Q2):
+    # Q1,Q2 are (n,2) orthonormal column bases
+    M = Q1.T @ Q2
+    s = np.linalg.svd(M, compute_uv=False)
+    # principal angles: arccos(s_i). We report largest (worst) angle
+    s = np.clip(s, -1.0, 1.0)
+    theta = float(np.arccos(np.min(s)))
+    return theta
+
+# ----------------------------
+# RUN
+# ----------------------------
+print("\n================ PIPELINE RUN ================\n")
+t, f0 = sample_Z(T0, T1, N)
+z0, Z, sigmas_ok = track_zeros(t, f0, SIGMAS, EDGE_DROP)
+
+if z0 is None or Z is None or len(sigmas_ok) < 3:
+    raise RuntimeError("Tracking failed: not enough usable sigmas or zeros.")
+
+print(f"Window [{T0},{T1}]  N={N}")
+print(f"Baseline zeros used (after edge_drop={EDGE_DROP}): {len(z0)}")
+print(f"Tracked σ values: {list(sigmas_ok)}")
+print("First few baseline zeros:", np.array(z0[:min(12,len(z0))]))
+
+# Optional: stress-to-break corruption
+if BREAK_ENABLE:
+    if BREAK_SIGMA in Z and 0 <= BREAK_ZERO_INDEX < len(z0):
+        Z[BREAK_SIGMA] = np.array(Z[BREAK_SIGMA], float).copy()
+        Z[BREAK_SIGMA][BREAK_ZERO_INDEX] += BREAK_SHIFT
+        print("\n[BREAK] Injected corruption:")
+        print(f"  sigma = {BREAK_SIGMA}")
+        print(f"  zero index = {BREAK_ZERO_INDEX}")
+        print(f"  shift = {BREAK_SHIFT}")
+    else:
+        print("\n[BREAK] Skipped (sigma not tracked or index out of range).")
+
+# Fit coefficients a(σ)
+A = []
+Vcorr = []
+Vrel = []
+for s in sigmas_ok:
+    a, v, vhat, rel, c = fit_coeffs_for_sigma(z0, Z[s], s, POWERS, k_drop=K_DROP)
+    A.append(a)
+    Vcorr.append(c)
+    Vrel.append(rel)
+
+A = np.array(A, dtype=float)            # (m, k)
+sig = np.array(sigmas_ok, dtype=float)  # (m,)
+
+# Beta
+B = beta_from_coeffs(sig, A)
+
+# BF scalar closure
+lam, c1, r1 = bf_scalar_closure(A, B)
+
+# BF + 2D closure
+c2, r2, basis2 = bf_2d_closure(A, B)
+
+print("\n================ BF RESULTS ================\n")
+print(f"powers = {POWERS}   K_DROP={K_DROP}")
+print(f"mean per-σ fit corr(v, vhat) = {float(np.nanmean(Vcorr)):.6f}")
+print(f"mean per-σ fit rel_err       = {float(np.nanmean(Vrel)):.6f}")
+print("\nScalar RG (β ≈ λ a):")
+print(f"  λ*         = {lam:+.6f}")
+print(f"  corr       = {c1:+.6f}")
+print(f"  rel_err    = {r1:.6f}")
+print("\nBF + 2D closure (proj β onto span{a, β⊥a}):")
+print(f"  corr       = {c2:+.6f}")
+print(f"  rel_err    = {r2:.6e}")
+
+# Plane rotation
+sig_sorted = sorted([float(s) for s in sigmas_ok])
+m = len(sig_sorted)
+cut = max(1, int(np.floor(m * PLANE_SPLIT)))
+sig_lo = sig_sorted[:cut]
+sig_hi = sig_sorted[cut:] if cut < m else sig_sorted[-2:]
+
+Qlo = rg_plane_from_sigmas(z0, Z, sig_lo)
+Qhi = rg_plane_from_sigmas(z0, Z, sig_hi)
+
+print("\n============= RG PLANE ROTATION =============\n")
+print("Low σ set :", sig_lo)
+print("High σ set:", sig_hi)
+if Qlo is None or Qhi is None:
+    print("Not enough generators in one group to estimate a 2D plane.")
+else:
+    theta = principal_angle(Qlo, Qhi)
+    print(f"Principal angle (rad): {theta:.6e}")
+    print(f"Principal angle (deg): {theta*180/np.pi:.6f}")
+    if theta < 1e-2:
+        print("Interpretation: plane essentially FIXED")
+    elif theta < 0.25:
+        print("Interpretation: plane slowly ROTATING")
+    else:
+        print("Interpretation: strong plane rotation / regime shift")
+
+print("\n================ DONE ================\n")
+
+
+================ PIPELINE RUN ================
+
+Window [60.0,120.0]  N=8192
+Baseline zeros used (after edge_drop=2): 21
+Tracked σ values: [np.float64(0.005), np.float64(0.01), np.float64(0.015), np.float64(0.02), np.float64(0.04), np.float64(0.06)]
+First few baseline zeros: [67.0798092  69.54640078 72.06715549 75.70469217 77.14483601 79.33737297
+ 82.91038548 84.73549174 87.42527475 88.80910877 92.4919034  94.65135024]
+
+[BREAK] Injected corruption:
+  sigma = 0.06
+  zero index = 3
+  shift = 0.25
+
+================ BF RESULTS ================
+
+powers = [1, 3, 5]   K_DROP=1
+mean per-σ fit corr(v, vhat) = 0.625332
+mean per-σ fit rel_err       = 0.977223
+
+Scalar RG (β ≈ λ a):
+  λ*         = -0.835937
+  corr       = +0.974124
+  rel_err    = 0.226029
+
+BF + 2D closure (proj β onto span{a, β⊥a}):
+  corr       = +1.000000
+  rel_err    = 7.191636e-16
+
+============= RG PLANE ROTATION =============
+
+Low σ set : [0.005, 0.01, 0.015]
+High σ set: [0.02, 0.04, 0.06]
+Principal angle (rad): 7.961548e-01
+Principal angle (deg): 45.616308
+Interpretation: strong plane rotation / regime shift
+
+================ DONE ================
+
+
+
+
+113
+
+# ============================================================
+# BREAK-SIZE SWEEP — RG PLANE STRESS TEST (SELF-CONTAINED)
+# ============================================================
+# • No reliance on saved session state
+# • Recomputes everything from scratch
+# • Uses Riemann–Siegel Z (mpmath.siegelz)
+# • Tests how RG structure degrades as a single zero is pushed
+#
+# OUTPUT PER BREAK SIZE:
+#   - scalar RG error
+#   - 2D closure error
+#   - RG plane principal angle (low σ vs high σ)
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# Numerics / parameters
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+EDGE_DROP = 2
+SIGMAS = np.array([0.005, 0.01, 0.015, 0.02, 0.04, 0.06])
+POWERS = [1, 3, 5]
+K_DROP = 1
+
+BREAK_SIGMA = 0.06
+BREAK_INDEX = 3
+BREAK_SHIFTS = [0.0, 0.01, 0.02, 0.05, 0.1, 0.15, 0.25, 0.4]
+
+# ----------------------------
+# Riemann–Siegel Z
+# ----------------------------
+def z_func(t):
+    return float(mp.siegelz(t))
+
+# ----------------------------
+# Zero finder
+# ----------------------------
+def find_zeros(t, f):
+    idx = np.where(np.diff(np.sign(f)))[0]
+    return t[idx]
+
+# ----------------------------
+# Gaussian σ-flow (FFT heat kernel)
+# ----------------------------
+def smooth_fft(f, dt, sigma):
+    freqs = np.fft.fftfreq(len(f), d=dt)
+    kernel = np.exp(-(2*np.pi*freqs)**2 * sigma)
+    return np.real(np.fft.ifft(np.fft.fft(f) * kernel))
+
+# ----------------------------
+# Build odd kernel matrix
+# ----------------------------
+def odd_kernel_matrix(z, powers, k_drop):
+    N = len(z)
+    X = []
+    for p in powers:
+        H = np.zeros((N, N))
+        for i in range(N):
+            for j in range(N):
+                if abs(i - j) <= k_drop:
+                    continue
+                H[i, j] = np.sign(j - i) / abs(z[j] - z[i])**p
+        H = (H - H.mean()) / H.std()
+        X.append(H)
+    return X
+
+# ----------------------------
+# Principal angle between planes
+# ----------------------------
+def plane_angle(A, B):
+    Qa, _ = np.linalg.qr(A.T)
+    Qb, _ = np.linalg.qr(B.T)
+    M = Qa.T @ Qb
+    _, s, _ = np.linalg.svd(M)
+    return np.arccos(np.clip(s[0], -1, 1))
+
+# ============================================================
+# PIPELINE START
+# ============================================================
+
+print("\n================ BREAK-SIZE SWEEP ================\n")
+
+# --- baseline sampling ---
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+f0 = np.array([z_func(tt) for tt in t])
+
+z0 = find_zeros(t, f0)
+z0 = z0[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+
+print(f"Baseline zeros used: {N0}")
+
+# --- σ-flow tracking ---
+Z = {}
+for s in SIGMAS:
+    fs = smooth_fft(f0, dt, s)
+    zs = find_zeros(t, fs)
+    zs = zs[EDGE_DROP:-EDGE_DROP]
+    if len(zs) >= N0:
+        Z[s] = zs[:N0]
+
+# --- odd kernels ---
+H_list = odd_kernel_matrix(z0, POWERS, K_DROP)
+
+# ============================================================
+# BREAK LOOP
+# ============================================================
+
+for shift in BREAK_SHIFTS:
+    # ---- copy data ----
+    Zb = {s: Z[s].copy() for s in Z}
+
+    if shift != 0.0:
+        Zb[BREAK_SIGMA][BREAK_INDEX] += shift
+
+    # ---- build v(σ) ----
+    V = []
+    sigs = []
+    for s in SIGMAS:
+        if s == 0 or s not in Zb:
+            continue
+        v = (Zb[s] - z0) / s
+        V.append(v)
+        sigs.append(s)
+    V = np.array(V)
+
+    # ---- fit coefficients a(σ) ----
+    A = []
+    for v in V:
+        X = np.column_stack([H @ v for H in H_list])
+        coeffs, *_ = np.linalg.lstsq(X, v, rcond=None)
+        A.append(coeffs)
+    A = np.array(A)
+
+    # ---- beta ≈ da/dlogσ ----
+    logS = np.log(sigs)
+    BETA = np.gradient(A, logS, axis=0)
+
+    a_flat = A.reshape(-1)
+    b_flat = BETA.reshape(-1)
+
+    # ---- scalar RG ----
+    lam = np.dot(b_flat, a_flat) / np.dot(a_flat, a_flat)
+    scalar_err = np.linalg.norm(b_flat - lam*a_flat) / np.linalg.norm(b_flat)
+    scalar_corr = np.corrcoef(b_flat, lam*a_flat)[0,1]
+
+    # ---- 2D closure ----
+    a_hat = a_flat / np.linalg.norm(a_flat)
+    proj = np.dot(b_flat, a_hat) * a_hat
+    b_perp = b_flat - proj
+    b_perp /= np.linalg.norm(b_perp)
+
+    B2 = np.column_stack([a_hat, b_perp])
+    coeffs2, *_ = np.linalg.lstsq(B2, b_flat, rcond=None)
+    b2 = B2 @ coeffs2
+
+    err2D = np.linalg.norm(b_flat - b2) / np.linalg.norm(b_flat)
+    corr2D = np.corrcoef(b_flat, b2)[0,1]
+
+    # ---- RG plane rotation ----
+    mid = len(V)//2
+    U1, _, V1 = np.linalg.svd(V[:mid], full_matrices=False)
+    U2, _, V2 = np.linalg.svd(V[mid:], full_matrices=False)
+    angle = plane_angle(V1[:2], V2[:2])
+
+    # ---- report ----
+    print(f"\n--- Break shift = {shift:.3f} ---")
+    print(f"Scalar RG:   corr={scalar_corr:+.6f}  rel_err={scalar_err:.6f}")
+    print(f"2D closure: corr={corr2D:+.6f}  rel_err={err2D:.3e}")
+    print(f"Plane angle: {angle:.6f} rad  ({angle*180/np.pi:.2f} deg)")
+
+print("\n================ DONE ================\n")
+
+
+================ BREAK-SIZE SWEEP ================
+
+Baseline zeros used: 21
+
+--- Break shift = 0.000 ---
+Scalar RG:   corr=+0.721335  rel_err=0.692736
+2D closure: corr=+1.000000  rel_err=3.989e-16
+Plane angle: 0.001420 rad  (0.08 deg)
+
+--- Break shift = 0.010 ---
+Scalar RG:   corr=+0.067062  rel_err=0.997745
+2D closure: corr=+1.000000  rel_err=1.820e-16
+Plane angle: 0.001401 rad  (0.08 deg)
+
+--- Break shift = 0.020 ---
+Scalar RG:   corr=+0.140904  rel_err=0.990001
+2D closure: corr=+1.000000  rel_err=2.635e-16
+Plane angle: 0.001397 rad  (0.08 deg)
+
+--- Break shift = 0.050 ---
+Scalar RG:   corr=+0.098211  rel_err=0.995189
+2D closure: corr=+1.000000  rel_err=1.310e-16
+Plane angle: 0.001461 rad  (0.08 deg)
+
+--- Break shift = 0.100 ---
+Scalar RG:   corr=+0.625242  rel_err=0.780371
+2D closure: corr=+1.000000  rel_err=1.886e-16
+Plane angle: 0.001690 rad  (0.10 deg)
+
+--- Break shift = 0.150 ---
+Scalar RG:   corr=+0.110493  rel_err=0.993883
+2D closure: corr=+1.000000  rel_err=2.613e-16
+Plane angle: 0.001930 rad  (0.11 deg)
+
+--- Break shift = 0.250 ---
+Scalar RG:   corr=+0.277511  rel_err=0.960842
+2D closure: corr=+1.000000  rel_err=1.771e-16
+Plane angle: 0.002266 rad  (0.13 deg)
+
+--- Break shift = 0.400 ---
+Scalar RG:   corr=+0.346828  rel_err=0.937934
+2D closure: corr=+1.000000  rel_err=2.847e-16
+Plane angle: 0.002496 rad  (0.14 deg)
+
+================ DONE ================
+
+
+
+
+
+114
+
+# ============================================================
+# VARIATIONAL SEARCH (ROBUST): WHICH OFFSET PRESERVES RG STRUCTURE?
+# - FULL SELF-CONTAINED CELL (no "saved globals" assumptions)
+# - Uses Z(t)=mp.siegelz(t) + FFT Gaussian smoothing
+# - Sweeps an offset injected into one tracked zero
+# - Scores by: (i) 2D closure residual, (ii) RG-plane rotation angle, (iii) scalar RG corr
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+EDGE_DROP = 2
+
+SIGMAS = np.array([0.005, 0.01, 0.015, 0.02, 0.04, 0.06], dtype=float)
+SIGMAS = np.array(sorted([s for s in SIGMAS if s > 0]), dtype=float)
+
+POWERS = [1, 3, 5]
+K_DROP = 1
+
+TARGET_SIGMA = 0.06
+TARGET_IDX = 3
+
+OFFSETS = np.linspace(-0.3, 0.3, 31)
+
+# corruption mode:
+#   "one_sigma" : only alter Z[TARGET_SIGMA][TARGET_IDX]  (your current behavior)
+#   "all_sigmas": alter the same index for every sigma (trajectory corruption)
+CORRUPT_MODE = "one_sigma"
+
+# split sigmas for plane-angle
+PLANE_SPLIT = 0.5  # fraction (0..1). low group = first half.
+
+# numerical safety
+RIDGE = 1e-10
+
+# ----------------------------
+# UTILITIES
+# ----------------------------
+def siegelz_array(t_grid):
+    # mp.siegelz is already the real Z-function with zeros at critical line zeros
+    return np.array([float(mp.siegelz(float(tt))) for tt in t_grid], dtype=float)
+
+def find_zeros_linear(t_grid, f_grid):
+    # sign-change + linear interpolation
+    s = np.sign(f_grid)
+    s[s == 0] = 1.0
+    idx = np.where(s[:-1] * s[1:] < 0)[0]
+    if idx.size == 0:
+        return np.array([], dtype=float)
+    t0 = t_grid[idx]
+    t1 = t_grid[idx + 1]
+    f0 = f_grid[idx]
+    f1 = f_grid[idx + 1]
+    # linear interpolation: t = t0 - f0*(t1-t0)/(f1-f0)
+    denom = (f1 - f0)
+    denom[denom == 0] = np.nan
+    z = t0 - f0 * (t1 - t0) / denom
+    z = z[np.isfinite(z)]
+    return z.astype(float)
+
+def smooth_fft_gaussian(f0, dt, sigma):
+    # Gaussian smoothing in t-domain: multiply in freq by exp(-(omega^2)*sigma)
+    F = np.fft.fft(f0)
+    freq = np.fft.fftfreq(len(f0), d=dt)  # cycles per unit t
+    omega = 2.0 * np.pi * freq
+    mask = np.exp(-(omega * omega) * sigma)
+    fs = np.real(np.fft.ifft(F * mask))
+    return fs
+
+def odd_kernel_matrices(z0, powers, k_drop):
+    # Build antisymmetric kernels H_p with truncation in index-distance:
+    # H_p[i,j] = sign(i-j)/|z_i - z_j|^p for |i-j|>k_drop, else 0; diagonal 0
+    z0 = np.asarray(z0, dtype=float)
+    n = len(z0)
+    Dz = z0[:, None] - z0[None, :]
+    with np.errstate(divide="ignore", invalid="ignore"):
+        base = np.sign(Dz) / np.where(Dz != 0, np.abs(Dz), np.inf)
+
+    # index distance truncation
+    ii = np.arange(n)[:, None]
+    jj = np.arange(n)[None, :]
+    keep = (np.abs(ii - jj) > int(k_drop))
+    keep &= (ii != jj)
+
+    Hs = []
+    for p in powers:
+        Hp = np.zeros((n, n), dtype=float)
+        with np.errstate(divide="ignore", invalid="ignore"):
+            Hp = np.sign(Dz) / np.where(Dz != 0, np.abs(Dz) ** float(p), np.inf)
+        Hp[~keep] = 0.0
+        Hp[np.diag_indices(n)] = 0.0
+        # enforce exact antisymmetry numerically
+        Hp = 0.5 * (Hp - Hp.T)
+        Hs.append(Hp)
+    return Hs
+
+def fit_coeffs_for_v(v, H_list, ridge=1e-10):
+    # Fit v ≈ sum_p a_p (H_p @ v)   (same form you've been using)
+    # Build X = [H1 v, H3 v, ...] as columns (n x P), solve (X^T X + ridge I)a = X^T v
+    cols = [H @ v for H in H_list]
+    X = np.column_stack(cols)
+    XtX = X.T @ X
+    Xty = X.T @ v
+    XtX = XtX + ridge * np.eye(XtX.shape[0])
+    a = np.linalg.solve(XtX, Xty)
+    vhat = X @ a
+    # metrics
+    denom = np.linalg.norm(v)
+    rel_err = np.linalg.norm(v - vhat) / denom if denom > 0 else np.nan
+    corr = np.corrcoef(v, vhat)[0, 1] if (np.std(v) > 0 and np.std(vhat) > 0) else np.nan
+    return a, vhat, corr, rel_err
+
+def beta_from_A(A, sigmas):
+    # A: shape (m, P)
+    logS = np.log(sigmas)
+    B = np.gradient(A, logS, axis=0)
+    return B
+
+def scalar_rg_score(A, B):
+    # β ≈ λ a using flattened vectors
+    a_flat = A.flatten()
+    b_flat = B.flatten()
+    aa = np.dot(a_flat, a_flat)
+    if aa == 0 or np.std(a_flat) == 0 or np.std(b_flat) == 0:
+        return np.nan, np.nan
+    lam = np.dot(b_flat, a_flat) / aa
+    corr = np.corrcoef(b_flat, lam * a_flat)[0, 1]
+    rel_err = np.linalg.norm(b_flat - lam * a_flat) / (np.linalg.norm(b_flat) + 1e-30)
+    return corr, rel_err
+
+def closure_2d_residual(A, B):
+    # Project β onto span{a, u}, where u is β component orthogonal to a
+    # Return relative residual ||β - proj||/||β||
+    a = A.flatten()
+    b = B.flatten()
+    nb = np.linalg.norm(b)
+    if nb == 0 or np.linalg.norm(a) == 0:
+        return np.nan, np.nan
+    a0 = a / np.linalg.norm(a)
+    # orthogonal component of b
+    b_perp = b - np.dot(b, a0) * a0
+    nbp = np.linalg.norm(b_perp)
+    if nbp == 0:
+        # already 1D
+        proj = np.dot(b, a0) * a0
+    else:
+        u = b_perp / nbp
+        # 2D proj
+        proj = np.dot(b, a0) * a0 + np.dot(b, u) * u
+    resid = np.linalg.norm(b - proj) / (nb + 1e-30)
+    corr = np.corrcoef(b, proj)[0, 1] if (np.std(b) > 0 and np.std(proj) > 0) else np.nan
+    return corr, resid
+
+def rg_plane_angle(V, sigmas, split_frac=0.5):
+    # V: shape (m, n) generators v_sigma
+    m = V.shape[0]
+    if m < 4:
+        return np.nan, np.nan
+    k = max(1, int(np.floor(m * split_frac)))
+    lo = np.arange(0, k)
+    hi = np.arange(k, m)
+
+    def plane(Vsub):
+        # 2D plane from SVD of Vsub
+        U, S, VT = np.linalg.svd(Vsub, full_matrices=False)
+        P = VT[:2].T  # (n,2)
+        # orthonormal
+        Q, _ = np.linalg.qr(P)
+        return Q[:, :2]  # (n,2)
+
+    Q1 = plane(V[lo])
+    Q2 = plane(V[hi])
+
+    # principal angles via svd of Q1^T Q2
+    M = Q1.T @ Q2
+    _, s, _ = np.linalg.svd(M)
+    s = np.clip(s, -1.0, 1.0)
+    # largest principal angle (worst-case)
+    ang = float(np.arccos(np.min(s)))  # radians
+    return ang, float(ang * 180.0 / np.pi)
+
+# ----------------------------
+# PIPELINE: baseline + clean flow
+# ----------------------------
+print("\n================ BUILD CLEAN FLOW ================\n")
+
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+f0 = siegelz_array(t)
+
+z0_raw = find_zeros_linear(t, f0)
+if z0_raw.size < (2 * EDGE_DROP + 3):
+    raise RuntimeError(f"Not enough zeros found in window; found {z0_raw.size}")
+
+z0 = z0_raw[EDGE_DROP:-EDGE_DROP]
+n0 = len(z0)
+print(f"Baseline zeros used (after edge_drop={EDGE_DROP}): {n0}")
+print("First few baseline zeros:", np.array2string(z0[:12], precision=6))
+
+Z_clean = {}
+for s in SIGMAS:
+    fs = smooth_fft_gaussian(f0, dt, s)
+    zs_raw = find_zeros_linear(t, fs)
+    if zs_raw.size < (EDGE_DROP + n0):
+        raise RuntimeError(f"Sigma {s}: not enough zeros ({zs_raw.size}) to track {n0}")
+    zs = zs_raw[EDGE_DROP:EDGE_DROP + n0]
+    Z_clean[float(s)] = zs
+
+# confirm target exists
+if TARGET_SIGMA not in Z_clean:
+    raise RuntimeError(f"TARGET_SIGMA={TARGET_SIGMA} not in SIGMAS")
+if TARGET_IDX < 0 or TARGET_IDX >= n0:
+    raise RuntimeError(f"TARGET_IDX={TARGET_IDX} out of range for n0={n0}")
+
+ORIGINAL_POS = float(Z_clean[TARGET_SIGMA][TARGET_IDX])
+print(f"\nTarget: sigma={TARGET_SIGMA} idx={TARGET_IDX}  original t={ORIGINAL_POS:.6f}")
+
+# precompute odd kernels from baseline
+H_list = odd_kernel_matrices(z0, POWERS, K_DROP)
+
+# ----------------------------
+# SWEEP
+# ----------------------------
+print(f"\n================ VARIATIONAL SWEEP ================\nMode: {CORRUPT_MODE}\n")
+
+rows = []
+for off in OFFSETS:
+    # 1) corrupt
+    Z_test = {s: Z_clean[s].copy() for s in Z_clean}
+
+    if CORRUPT_MODE == "one_sigma":
+        Z_test[TARGET_SIGMA][TARGET_IDX] = ORIGINAL_POS + float(off)
+    elif CORRUPT_MODE == "all_sigmas":
+        for s in Z_test:
+            Z_test[s][TARGET_IDX] = float(Z_test[s][TARGET_IDX] + off)
+    else:
+        raise RuntimeError("CORRUPT_MODE must be 'one_sigma' or 'all_sigmas'")
+
+    # 2) generators V(s) = (Z(s)-z0)/s
+    sigs = np.array(sorted(Z_test.keys()), dtype=float)
+    V = np.array([(Z_test[float(s)] - z0) / float(s) for s in sigs], dtype=float)
+
+    # 3) fit coefficients A(s)
+    A = []
+    fit_corrs = []
+    fit_errs = []
+    for v in V:
+        a, vhat, c, e = fit_coeffs_for_v(v, H_list, ridge=RIDGE)
+        A.append(a)
+        fit_corrs.append(c)
+        fit_errs.append(e)
+    A = np.array(A, dtype=float)  # (m,P)
+
+    # 4) beta + scores
+    B = beta_from_A(A, sigs)
+
+    corr_scalar, err_scalar = scalar_rg_score(A, B)
+    corr_2d, err_2d = closure_2d_residual(A, B)
+    ang_rad, ang_deg = rg_plane_angle(V, sigs, split_frac=PLANE_SPLIT)
+
+    rows.append({
+        "off": float(off),
+        "fit_corr_mean": float(np.nanmean(fit_corrs)),
+        "fit_err_mean": float(np.nanmean(fit_errs)),
+        "scalar_corr": float(corr_scalar) if np.isfinite(corr_scalar) else np.nan,
+        "scalar_err": float(err_scalar) if np.isfinite(err_scalar) else np.nan,
+        "2d_corr": float(corr_2d) if np.isfinite(corr_2d) else np.nan,
+        "2d_err": float(err_2d) if np.isfinite(err_2d) else np.nan,
+        "plane_deg": float(ang_deg) if np.isfinite(ang_deg) else np.nan,
+    })
+
+# ----------------------------
+# REPORT BESTS
+# ----------------------------
+def best_by(key, minimize=True):
+    vals = [(r[key], r) for r in rows if np.isfinite(r[key])]
+    if not vals:
+        return None
+    vals.sort(key=lambda x: x[0], reverse=not minimize)
+    return vals[0][1]
+
+best_2d = best_by("2d_err", minimize=True)
+best_plane = best_by("plane_deg", minimize=True)
+best_scalar = best_by("scalar_corr", minimize=False)
+
+print("Top-line (off → key metrics):\n")
+for r in rows:
+    print(f"off={r['off']:+.3f} | 2Derr={r['2d_err']:.3e}  plane={r['plane_deg']:.3f}deg  scalarCorr={r['scalar_corr']:.3f}")
+
+print("\n================ WINNERS ================\n")
+if best_2d:
+    print(f"[min 2D closure err]   off={best_2d['off']:+.4f}  2d_err={best_2d['2d_err']:.3e}  plane={best_2d['plane_deg']:.3f}deg  scalarCorr={best_2d['scalar_corr']:.3f}")
+if best_plane:
+    print(f"[min plane rotation]   off={best_plane['off']:+.4f}  plane={best_plane['plane_deg']:.3f}deg  2d_err={best_plane['2d_err']:.3e}  scalarCorr={best_plane['scalar_corr']:.3f}")
+if best_scalar:
+    print(f"[max scalar corr]      off={best_scalar['off']:+.4f}  scalarCorr={best_scalar['scalar_corr']:.3f}  scalarErr={best_scalar['scalar_err']:.3f}  plane={best_scalar['plane_deg']:.3f}deg  2d_err={best_scalar['2d_err']:.3e}")
+
+print("\nNOTE:")
+print("  - If 'max scalar corr' prefers an off!=0, but 'min 2Derr' and 'min plane' prefer ~0,")
+print("    then scalar RG is NOT a valid locator (which matches what you've already seen).")
+print("  - Switch CORRUPT_MODE to 'all_sigmas' to test true trajectory corruption across σ.\n")
+
+================ BUILD CLEAN FLOW ================
+
+Baseline zeros used (after edge_drop=2): 21
+First few baseline zeros: [67.079809 69.546401 72.067155 75.704692 77.144836 79.337373 82.910385
+ 84.735492 87.425275 88.809109 92.491903 94.65135 ]
+
+Target: sigma=0.06 idx=3  original t=72.045500
+
+================ VARIATIONAL SWEEP ================
+Mode: one_sigma
+
+Top-line (off → key metrics):
+
+off=-0.300 | 2Derr=0.000e+00  plane=51.690deg  scalarCorr=0.163
+off=-0.280 | 2Derr=2.544e-16  plane=49.301deg  scalarCorr=0.299
+off=-0.260 | 2Derr=2.146e-16  plane=46.692deg  scalarCorr=0.291
+off=-0.240 | 2Derr=1.647e-16  plane=43.857deg  scalarCorr=0.138
+off=-0.220 | 2Derr=2.683e-16  plane=40.799deg  scalarCorr=0.350
+off=-0.200 | 2Derr=6.522e-17  plane=37.531deg  scalarCorr=0.338
+off=-0.180 | 2Derr=2.844e-16  plane=34.077deg  scalarCorr=0.047
+off=-0.160 | 2Derr=4.306e-16  plane=30.477deg  scalarCorr=0.155
+off=-0.140 | 2Derr=6.262e-17  plane=26.776deg  scalarCorr=0.313
+off=-0.120 | 2Derr=6.931e-18  plane=23.027deg  scalarCorr=0.203
+off=-0.100 | 2Derr=1.376e-16  plane=19.286deg  scalarCorr=0.125
+off=-0.080 | 2Derr=3.485e-16  plane=15.610deg  scalarCorr=0.076
+off=-0.060 | 2Derr=1.509e-16  plane=12.069deg  scalarCorr=0.283
+off=-0.040 | 2Derr=1.037e-16  plane=8.800deg  scalarCorr=-0.003
+off=-0.020 | 2Derr=8.137e-17  plane=6.179deg  scalarCorr=0.263
+off=+0.000 | 2Derr=1.450e-16  plane=5.217deg  scalarCorr=0.352
+off=+0.020 | 2Derr=1.539e-16  plane=6.655deg  scalarCorr=0.352
+off=+0.040 | 2Derr=1.275e-17  plane=9.468deg  scalarCorr=0.352
+off=+0.060 | 2Derr=1.994e-16  plane=12.800deg  scalarCorr=0.190
+off=+0.080 | 2Derr=2.299e-18  plane=16.357deg  scalarCorr=0.211
+off=+0.100 | 2Derr=2.733e-16  plane=20.027deg  scalarCorr=0.347
+off=+0.120 | 2Derr=1.335e-16  plane=23.743deg  scalarCorr=0.247
+off=+0.140 | 2Derr=1.008e-16  plane=27.452deg  scalarCorr=0.368
+off=+0.160 | 2Derr=1.542e-16  plane=31.101deg  scalarCorr=0.347
+off=+0.180 | 2Derr=2.821e-16  plane=34.639deg  scalarCorr=0.189
+off=+0.200 | 2Derr=1.628e-16  plane=38.024deg  scalarCorr=0.044
+off=+0.220 | 2Derr=2.129e-16  plane=41.220deg  scalarCorr=0.295
+off=+0.240 | 2Derr=2.736e-16  plane=44.206deg  scalarCorr=0.292
+off=+0.260 | 2Derr=1.877e-16  plane=46.971deg  scalarCorr=0.305
+off=+0.280 | 2Derr=1.394e-16  plane=49.516deg  scalarCorr=0.267
+off=+0.300 | 2Derr=3.027e-16  plane=51.847deg  scalarCorr=0.214
+
+================ WINNERS ================
+
+[min 2D closure err]   off=-0.3000  2d_err=0.000e+00  plane=51.690deg  scalarCorr=0.163
+[min plane rotation]   off=+0.0000  plane=5.217deg  2d_err=1.450e-16  scalarCorr=0.352
+[max scalar corr]      off=+0.1400  scalarCorr=0.368  scalarErr=0.932  plane=27.452deg  2d_err=1.008e-16
+
+NOTE:
+  - If 'max scalar corr' prefers an off!=0, but 'min 2Derr' and 'min plane' prefer ~0,
+    then scalar RG is NOT a valid locator (which matches what you've already seen).
+  - Switch CORRUPT_MODE to 'all_sigmas' to test true trajectory corruption across σ.
+
+
+
+115
+
+# ============================================================
+# BREAK-SIZE SWEEP (DUAL MODE): one_sigma vs all_sigmas
+# Fully self-contained. Paste + run.
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+EDGE_DROP = 2
+
+SIGMAS = np.array([0.005, 0.01, 0.015, 0.02, 0.04, 0.06], dtype=float)
+SIGMAS = np.array(sorted([s for s in SIGMAS if s > 0]), dtype=float)
+
+POWERS = [1, 3, 5]
+K_DROP = 1
+RIDGE = 1e-10
+
+TARGET_SIGMA = 0.06
+TARGET_IDX = 3
+
+OFFSETS = np.linspace(-0.3, 0.3, 31)
+
+PLANE_SPLIT = 0.5  # low/high sigma split
+
+# ----------------------------
+# CORE
+# ----------------------------
+def siegelz_array(t_grid):
+    return np.array([float(mp.siegelz(float(tt))) for tt in t_grid], dtype=float)
+
+def find_zeros_linear(t_grid, f_grid):
+    s = np.sign(f_grid)
+    s[s == 0] = 1.0
+    idx = np.where(s[:-1] * s[1:] < 0)[0]
+    if idx.size == 0:
+        return np.array([], dtype=float)
+    t0 = t_grid[idx]
+    t1 = t_grid[idx + 1]
+    f0 = f_grid[idx]
+    f1 = f_grid[idx + 1]
+    denom = (f1 - f0)
+    denom[denom == 0] = np.nan
+    z = t0 - f0 * (t1 - t0) / denom
+    z = z[np.isfinite(z)]
+    return z.astype(float)
+
+def smooth_fft_gaussian(f0, dt, sigma):
+    F = np.fft.fft(f0)
+    freq = np.fft.fftfreq(len(f0), d=dt)
+    omega = 2.0 * np.pi * freq
+    mask = np.exp(-(omega * omega) * sigma)
+    return np.real(np.fft.ifft(F * mask))
+
+def odd_kernel_matrices(z0, powers, k_drop):
+    z0 = np.asarray(z0, dtype=float)
+    n = len(z0)
+    Dz = z0[:, None] - z0[None, :]
+    ii = np.arange(n)[:, None]
+    jj = np.arange(n)[None, :]
+    keep = (np.abs(ii - jj) > int(k_drop))
+    keep &= (ii != jj)
+
+    Hs = []
+    for p in powers:
+        Hp = np.zeros((n, n), dtype=float)
+        with np.errstate(divide="ignore", invalid="ignore"):
+            Hp = np.sign(Dz) / np.where(Dz != 0, np.abs(Dz) ** float(p), np.inf)
+        Hp[~keep] = 0.0
+        Hp[np.diag_indices(n)] = 0.0
+        Hp = 0.5 * (Hp - Hp.T)
+        Hs.append(Hp)
+    return Hs
+
+def fit_coeffs_for_v(v, H_list, ridge=1e-10):
+    cols = [H @ v for H in H_list]
+    X = np.column_stack(cols)
+    XtX = X.T @ X + ridge * np.eye(X.shape[1])
+    Xty = X.T @ v
+    a = np.linalg.solve(XtX, Xty)
+    vhat = X @ a
+    rel_err = np.linalg.norm(v - vhat) / (np.linalg.norm(v) + 1e-30)
+    corr = np.corrcoef(v, vhat)[0, 1] if (np.std(v) > 0 and np.std(vhat) > 0) else np.nan
+    return a, corr, rel_err
+
+def beta_from_A(A, sigmas):
+    return np.gradient(A, np.log(sigmas), axis=0)
+
+def scalar_rg(A, B):
+    a = A.flatten()
+    b = B.flatten()
+    aa = np.dot(a, a)
+    if aa == 0 or np.std(a) == 0 or np.std(b) == 0:
+        return np.nan, np.nan
+    lam = np.dot(b, a) / aa
+    corr = np.corrcoef(b, lam * a)[0, 1]
+    rel_err = np.linalg.norm(b - lam * a) / (np.linalg.norm(b) + 1e-30)
+    return corr, rel_err
+
+def closure_2d(A, B):
+    a = A.flatten()
+    b = B.flatten()
+    nb = np.linalg.norm(b)
+    na = np.linalg.norm(a)
+    if nb == 0 or na == 0:
+        return np.nan, np.nan
+    a0 = a / na
+    b_perp = b - np.dot(b, a0) * a0
+    nbp = np.linalg.norm(b_perp)
+    if nbp == 0:
+        proj = np.dot(b, a0) * a0
+    else:
+        u = b_perp / nbp
+        proj = np.dot(b, a0) * a0 + np.dot(b, u) * u
+    resid = np.linalg.norm(b - proj) / (nb + 1e-30)
+    corr = np.corrcoef(b, proj)[0, 1] if (np.std(b) > 0 and np.std(proj) > 0) else np.nan
+    return corr, resid
+
+def plane_angle(V, split_frac=0.5):
+    m = V.shape[0]
+    if m < 4:
+        return np.nan, np.nan
+    k = max(1, int(np.floor(m * split_frac)))
+    lo = np.arange(0, k)
+    hi = np.arange(k, m)
+
+    def plane(Vsub):
+        U, S, VT = np.linalg.svd(Vsub, full_matrices=False)
+        P = VT[:2].T
+        Q, _ = np.linalg.qr(P)
+        return Q[:, :2]
+
+    Q1 = plane(V[lo])
+    Q2 = plane(V[hi])
+    M = Q1.T @ Q2
+    _, s, _ = np.linalg.svd(M)
+    s = np.clip(s, -1.0, 1.0)
+    ang = float(np.arccos(np.min(s)))
+    return ang, float(ang * 180.0 / np.pi)
+
+# ----------------------------
+# BUILD CLEAN FLOW
+# ----------------------------
+print("\n================ BUILD CLEAN FLOW ================\n")
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+f0 = siegelz_array(t)
+
+z0_raw = find_zeros_linear(t, f0)
+z0 = z0_raw[EDGE_DROP:-EDGE_DROP]
+n0 = len(z0)
+
+print(f"Baseline zeros used (after edge_drop={EDGE_DROP}): {n0}")
+print("First few baseline zeros:", np.array2string(z0[:12], precision=6))
+
+Z_clean = {}
+for s in SIGMAS:
+    fs = smooth_fft_gaussian(f0, dt, float(s))
+    zs_raw = find_zeros_linear(t, fs)
+    zs = zs_raw[EDGE_DROP:EDGE_DROP + n0]
+    if len(zs) < n0:
+        raise RuntimeError(f"Sigma {s}: insufficient zeros")
+    Z_clean[float(s)] = zs
+
+if TARGET_SIGMA not in Z_clean:
+    raise RuntimeError("TARGET_SIGMA not present")
+if not (0 <= TARGET_IDX < n0):
+    raise RuntimeError("TARGET_IDX out of range")
+
+ORIG = float(Z_clean[TARGET_SIGMA][TARGET_IDX])
+print(f"\nTarget: sigma={TARGET_SIGMA} idx={TARGET_IDX}  original t={ORIG:.6f}")
+
+H_list = odd_kernel_matrices(z0, POWERS, K_DROP)
+
+# ----------------------------
+# SWEEP FUNCTION
+# ----------------------------
+def run_sweep(mode):
+    rows = []
+    for off in OFFSETS:
+        Zt = {s: Z_clean[s].copy() for s in Z_clean}
+
+        if mode == "one_sigma":
+            Zt[TARGET_SIGMA][TARGET_IDX] = ORIG + float(off)
+        elif mode == "all_sigmas":
+            for s in Zt:
+                Zt[s][TARGET_IDX] = float(Zt[s][TARGET_IDX] + off)
+        else:
+            raise RuntimeError("bad mode")
+
+        sigs = np.array(sorted(Zt.keys()), dtype=float)
+        V = np.array([(Zt[float(s)] - z0) / float(s) for s in sigs], dtype=float)
+
+        A = []
+        fit_corrs, fit_errs = [], []
+        for v in V:
+            a, c, e = fit_coeffs_for_v(v, H_list, ridge=RIDGE)
+            A.append(a); fit_corrs.append(c); fit_errs.append(e)
+        A = np.array(A, dtype=float)
+        B = beta_from_A(A, sigs)
+
+        sc_corr, sc_err = scalar_rg(A, B)
+        c2, e2 = closure_2d(A, B)
+        ang_r, ang_d = plane_angle(V, split_frac=PLANE_SPLIT)
+
+        rows.append((float(off),
+                     float(np.nanmean(fit_corrs)),
+                     float(np.nanmean(fit_errs)),
+                     float(sc_corr) if np.isfinite(sc_corr) else np.nan,
+                     float(sc_err) if np.isfinite(sc_err) else np.nan,
+                     float(c2) if np.isfinite(c2) else np.nan,
+                     float(e2) if np.isfinite(e2) else np.nan,
+                     float(ang_d) if np.isfinite(ang_d) else np.nan))
+    return rows
+
+def pick(rows, col, minimize=True):
+    good = [r for r in rows if np.isfinite(r[col])]
+    if not good:
+        return None
+    good.sort(key=lambda r: r[col], reverse=not minimize)
+    return good[0]
+
+# ----------------------------
+# RUN BOTH MODES
+# ----------------------------
+for mode in ["one_sigma", "all_sigmas"]:
+    print(f"\n================ BREAK-SIZE SWEEP ({mode}) ================\n")
+    rows = run_sweep(mode)
+
+    # print compact
+    for r in rows:
+        off, fc, fe, sc, se, c2, e2, ang = r
+        print(f"off={off:+.3f} | 2Derr={e2:.2e}  plane={ang:6.2f}deg  scalarCorr={sc:+.3f}  scalarErr={se:.3f}")
+
+    b2d = pick(rows, 6, minimize=True)   # 2D err
+    bpl = pick(rows, 7, minimize=True)   # plane deg
+    bsc = pick(rows, 3, minimize=False)  # scalar corr
+
+    print("\nWINNERS:")
+    if b2d:
+        print(f"  [min 2Derr] off={b2d[0]:+.4f}  2Derr={b2d[6]:.2e}  plane={b2d[7]:.2f}deg  scalarCorr={b2d[3]:+.3f}")
+    if bpl:
+        print(f"  [min plane] off={bpl[0]:+.4f}  plane={bpl[7]:.2f}deg  2Derr={bpl[6]:.2e}  scalarCorr={bpl[3]:+.3f}")
+    if bsc:
+        print(f"  [max scal]  off={bsc[0]:+.4f}  scalarCorr={bsc[3]:+.3f}  scalarErr={bsc[4]:.3f}  plane={bsc[7]:.2f}deg  2Derr={bsc[6]:.2e}")
+
+print("\nDONE.")
+
+116
+
+# ============================================================
+# STEP TEST: σ-DEPENDENT BREAK SWEEP (plane rotation diagnostic)
+# Standalone / no saved globals / no scipy
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# -----------------------------
+# CONFIG
+# -----------------------------
+T0, T1   = 60.0, 120.0
+NGRID    = 8192
+EDGE_DROP = 2
+
+SIGMAS = np.array([0.005, 0.01, 0.015, 0.02, 0.04, 0.06], dtype=float)
+
+POWERS = [1, 3, 5]   # odd kernels used for coefficient space (a_p)
+K_DROP = 1           # exclude |i-j| <= K_DROP in kernels
+
+TARGET_SIGMA = 0.06
+TARGET_IDX   = 3     # index into baseline zeros (after edge_drop)
+
+# break strengths to sweep
+SHIFTS = np.linspace(0.0, 0.30, 16)
+
+# Choose one mode:
+#   "coherent"  : shift independent of σ  (gauge-like)
+#   "linear"    : shift ~ σ
+#   "quadratic" : shift ~ σ^2
+#   "random_smooth" : random but smooth in σ (seeded)
+BREAK_MODE = "quadratic"
+RANDOM_SEED = 123
+
+# plane split rule
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+
+# -----------------------------
+# HELPERS
+# -----------------------------
+def siegelZ_grid(t_grid):
+    # real-valued Z(t) with manageable magnitude; zeros match zeta on critical line
+    return np.array([float(mp.siegelz(tt)) for tt in t_grid], dtype=float)
+
+def smooth_fft_real(f0, dt, sigma):
+    # Gaussian semigroup: exp(-(2πf)^2 sigma) on FFT frequencies
+    n = len(f0)
+    freqs = np.fft.fftfreq(n, d=dt)
+    w2 = (2*np.pi*freqs)**2
+    F = np.fft.fft(f0)
+    Fs = F * np.exp(-w2 * sigma)
+    fs = np.fft.ifft(Fs).real
+    return fs
+
+def find_zeros_linear(t, f):
+    # sign-change zero crossings with linear interpolation
+    s = np.sign(f)
+    idx = np.where(s[:-1] * s[1:] < 0)[0]
+    z = []
+    for i in idx:
+        t0, t1 = t[i], t[i+1]
+        f0, f1 = f[i], f[i+1]
+        # linear root
+        tz = t0 - f0*(t1-t0)/(f1-f0)
+        z.append(tz)
+    return np.array(z, dtype=float)
+
+def odd_kernel_matrix(t0, powers, k_drop=1):
+    # returns list of H_p matrices (N x N), zeroing near-diagonal up to k_drop
+    t0 = np.asarray(t0, float)
+    N = len(t0)
+    D = t0.reshape(-1,1) - t0.reshape(1,-1)
+    mats = []
+    mask = np.ones((N,N), dtype=bool)
+    if k_drop >= 0:
+        for k in range(-k_drop, k_drop+1):
+            mask &= ~np.eye(N, k=k, dtype=bool)
+    # build odd kernels 1/(t_i - t_j)^p (antisymmetric for odd p)
+    for p in powers:
+        H = np.zeros((N,N), dtype=float)
+        with np.errstate(divide='ignore', invalid='ignore'):
+            H[mask] = 1.0 / (D[mask]**p)
+        H[~np.isfinite(H)] = 0.0
+        mats.append(H)
+    return mats
+
+def zscore_cols(X):
+    X = np.asarray(X, float)
+    mu = X.mean(axis=0, keepdims=True)
+    sd = X.std(axis=0, keepdims=True)
+    sd[sd == 0] = 1.0
+    return (X - mu) / sd
+
+def coeffs_a_for_v(t0, v, powers, k_drop):
+    # build features: columns = H_p @ v (then zscore)
+    Hs = odd_kernel_matrix(t0, powers, k_drop)
+    X = np.column_stack([H @ v for H in Hs])
+    Xz = zscore_cols(X)
+    a, *_ = np.linalg.lstsq(Xz, v, rcond=None)
+    return a
+
+def scalar_rg_lambda_and_corr(A, sigmas):
+    # A: (ns, npowers), beta = dA/dlogσ, check beta ~ λ A (stacked)
+    logS = np.log(sigmas)
+    BETA = np.gradient(A, logS, axis=0)
+    a_flat = A.reshape(-1)
+    b_flat = BETA.reshape(-1)
+    denom = np.dot(a_flat, a_flat)
+    if denom == 0:
+        return np.nan, np.nan, np.nan
+    lam = np.dot(b_flat, a_flat) / denom
+    y = lam * a_flat
+    # corr
+    if np.std(b_flat) == 0 or np.std(y) == 0:
+        corr = np.nan
+    else:
+        corr = float(np.corrcoef(b_flat, y)[0,1])
+    rel_err = float(np.linalg.norm(b_flat - y) / (np.linalg.norm(b_flat) + 1e-30))
+    return lam, corr, rel_err
+
+def plane_from_sigmas(z0, Zdict, sigmas_subset):
+    # build V matrix rows = (Z[s]-z0)/s, then take top-2 right singular vectors
+    rows = []
+    for s in sigmas_subset:
+        zs = np.asarray(Zdict[s], float)
+        dt = zs - z0
+        if np.linalg.norm(dt) == 0:
+            continue
+        rows.append(dt / s)
+    V = np.array(rows, dtype=float)
+    if V.shape[0] < 2:
+        return None
+    _, _, VT = np.linalg.svd(V, full_matrices=False)
+    P = VT[:2]  # (2, N)
+    # orthonormalise plane rows
+    Q, _ = np.linalg.qr(P.T)
+    return Q[:, :2]  # (N,2) columns orthonormal basis
+
+def principal_angle_deg(Qa, Qb):
+    # Qa,Qb: (N,2) orthonormal columns; compute principal angles via svd(Qa^T Qb)
+    M = Qa.T @ Qb
+    s = np.linalg.svd(M, compute_uv=False)
+    s = np.clip(s, -1.0, 1.0)
+    theta = np.arccos(np.max(s))  # largest singular value -> smallest principal angle
+    return float(theta * 180.0 / np.pi), float(theta)
+
+def closure_2d_err(A, sigmas):
+    # Test: is beta in span{a, a_perp}? Equivalent to residual after best 2D fit.
+    # Build a_perp per-sigma by Gram-Schmidt vs a is messy; instead do linear regression:
+    # beta_flat ≈ M @ [a_flat, u_flat] where u is any orthonormal complement from SVD.
+    # Practical: best rank-2 approximation between beta and A via regression on [A, dA] basis.
+    logS = np.log(sigmas)
+    BETA = np.gradient(A, logS, axis=0)
+    Y = BETA.reshape(-1)
+    X1 = A.reshape(-1)
+    X2 = (A - A.mean(axis=0, keepdims=True)).reshape(-1)  # centered copy as second direction
+    X = np.column_stack([X1, X2])
+    # if degenerate, return nan
+    if np.linalg.matrix_rank(X) < 2:
+        return np.nan
+    c, *_ = np.linalg.lstsq(X, Y, rcond=None)
+    Yhat = X @ c
+    rel = float(np.linalg.norm(Y - Yhat) / (np.linalg.norm(Y) + 1e-30))
+    return rel
+
+def make_break_profile(sigmas, shift, mode, seed=0):
+    sigmas = np.asarray(sigmas, float)
+    if mode == "coherent":
+        return {float(s): float(shift) for s in sigmas}
+    if mode == "linear":
+        # normalized so that at TARGET_SIGMA we apply exactly 'shift'
+        return {float(s): float(shift) * (float(s)/TARGET_SIGMA) for s in sigmas}
+    if mode == "quadratic":
+        return {float(s): float(shift) * (float(s)/TARGET_SIGMA)**2 for s in sigmas}
+    if mode == "random_smooth":
+        rng = np.random.default_rng(seed)
+        r = rng.normal(size=len(sigmas))
+        # smooth in index-space (cheap)
+        k = np.array([1,2,3,2,1], float); k /= k.sum()
+        rr = np.convolve(r, k, mode='same')
+        rr -= rr.mean()
+        rr /= (np.max(np.abs(rr)) + 1e-12)
+        return {float(s): float(shift) * float(rr[i]) for i,s in enumerate(sigmas)}
+    raise ValueError("Unknown BREAK_MODE")
+
+# -----------------------------
+# BUILD CLEAN FLOW
+# -----------------------------
+t = np.linspace(T0, T1, NGRID)
+dt = t[1] - t[0]
+f0 = siegelZ_grid(t)
+
+z0_raw = find_zeros_linear(t, f0)
+z0 = z0_raw[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+
+if N0 <= max(TARGET_IDX, 0):
+    raise RuntimeError(f"Not enough baseline zeros after edge_drop: N0={N0}, need idx={TARGET_IDX}")
+
+Z_clean = {}
+for s in SIGMAS:
+    fs = smooth_fft_real(f0, dt, float(s))
+    zs = find_zeros_linear(t, fs)
+    zs = zs[EDGE_DROP:EDGE_DROP+N0]
+    if len(zs) < N0:
+        # fail-safe: truncate to smallest available later
+        Z_clean[float(s)] = zs.copy()
+    else:
+        Z_clean[float(s)] = zs.copy()
+
+# equalize length across sigmas (robust)
+minN = min(len(v) for v in Z_clean.values())
+z0 = z0[:minN]
+N0 = len(z0)
+for s in list(Z_clean.keys()):
+    Z_clean[s] = Z_clean[s][:N0]
+
+print("\n================ BUILD CLEAN FLOW ================\n")
+print(f"Baseline zeros used (after edge_drop={EDGE_DROP}): {N0}")
+print("First few baseline zeros:", np.array2string(z0[:12], precision=6))
+print(f"Target: sigma={TARGET_SIGMA} idx={TARGET_IDX}  original t={Z_clean[float(TARGET_SIGMA)][TARGET_IDX]:.6f}")
+print("\n================ SWEEP ================\n")
+print(f"BREAK_MODE = {BREAK_MODE}")
+print(f"LOW_SIGMAS  = {LOW_SIGMAS}")
+print(f"HIGH_SIGMAS = {HIGH_SIGMAS}\n")
+
+# -----------------------------
+# SWEEP
+# -----------------------------
+for shift in SHIFTS:
+    # build corrupted Z
+    Z = {float(s): Z_clean[float(s)].copy() for s in SIGMAS}
+
+    prof = make_break_profile(SIGMAS, float(shift), BREAK_MODE, seed=RANDOM_SEED)
+    for s in SIGMAS:
+        ss = float(s)
+        if ss in Z and len(Z[ss]) > TARGET_IDX:
+            Z[ss][TARGET_IDX] += prof[ss]
+
+    # coefficients a(σ)
+    sig_pos = np.array([float(s) for s in SIGMAS if float(s) > 0], dtype=float)
+    A = []
+    for s in sig_pos:
+        v = (Z[s] - z0) / s
+        a = coeffs_a_for_v(z0, v, POWERS, K_DROP)
+        A.append(a)
+    A = np.array(A, dtype=float)
+
+    lam, scorr, serr = scalar_rg_lambda_and_corr(A, sig_pos)
+    err2d = closure_2d_err(A, sig_pos)
+
+    # plane angle low vs high
+    Qa = plane_from_sigmas(z0, Z, LOW_SIGMAS)
+    Qb = plane_from_sigmas(z0, Z, HIGH_SIGMAS)
+    if Qa is None or Qb is None:
+        ang_deg, ang_rad = np.nan, np.nan
+    else:
+        ang_deg, ang_rad = principal_angle_deg(Qa, Qb)
+
+    # report
+    print(f"shift={shift:0.3f} | 2Derr={err2d:0.3e}  plane={ang_deg:6.2f}deg  "
+          f"scalarCorr={scorr:+0.3f}  scalarErr={serr:0.3f}")
+
+print("\n================ DONE ================\n")
+
+================ BUILD CLEAN FLOW ================
+
+Baseline zeros used (after edge_drop=2): 21
+First few baseline zeros: [67.079809 69.546401 72.067155 75.704692 77.144836 79.337373 82.910385
+ 84.735492 87.425275 88.809109 92.491903 94.65135 ]
+Target: sigma=0.06 idx=3  original t=72.045500
+
+================ SWEEP ================
+
+BREAK_MODE = quadratic
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+
+shift=0.000 | 2Derr=1.293e-01  plane=  0.00deg  scalarCorr=+0.985  scalarErr=0.170
+shift=0.020 | 2Derr=1.301e-01  plane=  0.00deg  scalarCorr=+0.985  scalarErr=0.170
+shift=0.040 | 2Derr=1.309e-01  plane=  0.00deg  scalarCorr=+0.985  scalarErr=0.169
+shift=0.060 | 2Derr=1.317e-01  plane=  0.00deg  scalarCorr=+0.985  scalarErr=0.169
+shift=0.080 | 2Derr=1.326e-01  plane=  0.00deg  scalarCorr=+0.985  scalarErr=0.168
+shift=0.100 | 2Derr=1.334e-01  plane=  0.00deg  scalarCorr=+0.985  scalarErr=0.168
+shift=0.120 | 2Derr=1.342e-01  plane=  0.00deg  scalarCorr=+0.986  scalarErr=0.167
+shift=0.140 | 2Derr=1.350e-01  plane=  0.00deg  scalarCorr=+0.986  scalarErr=0.167
+shift=0.160 | 2Derr=1.359e-01  plane=  0.00deg  scalarCorr=+0.986  scalarErr=0.166
+shift=0.180 | 2Derr=1.367e-01  plane=  0.00deg  scalarCorr=+0.986  scalarErr=0.166
+shift=0.200 | 2Derr=1.376e-01  plane=  0.00deg  scalarCorr=+0.986  scalarErr=0.166
+shift=0.220 | 2Derr=1.384e-01  plane=  0.00deg  scalarCorr=+0.986  scalarErr=0.166
+shift=0.240 | 2Derr=1.393e-01  plane=  0.00deg  scalarCorr=+0.986  scalarErr=0.165
+shift=0.260 | 2Derr=1.402e-01  plane=  0.00deg  scalarCorr=+0.986  scalarErr=0.165
+shift=0.280 | 2Derr=1.410e-01  plane=  0.00deg  scalarCorr=+0.986  scalarErr=0.165
+shift=0.300 | 2Derr=1.419e-01  plane=  0.00deg  scalarCorr=+0.986  scalarErr=0.165
+
+================ DONE ================
+
+
+
+117
+
+# ============================================================
+# σ-DEPENDENT BREAK SWEEP (plane rotation diagnostic) — FIXED
+# Reports BOTH principal angles between 2D planes: θ_min, θ_max
+# Standalone / no saved globals / no scipy
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+mp.mp.dps = 50
+
+T0, T1    = 60.0, 120.0
+NGRID     = 8192
+EDGE_DROP = 2
+
+SIGMAS = np.array([0.005, 0.01, 0.015, 0.02, 0.04, 0.06], float)
+
+TARGET_SIGMA = 0.06
+TARGET_IDX   = 3
+
+SHIFTS = np.linspace(0.0, 0.30, 16)
+
+BREAK_MODE = "quadratic"   # coherent | linear | quadratic | random_smooth
+RANDOM_SEED = 123
+
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+
+def siegelZ_grid(t_grid):
+    return np.array([float(mp.siegelz(tt)) for tt in t_grid], float)
+
+def smooth_fft_real(f0, dt, sigma):
+    n = len(f0)
+    freqs = np.fft.fftfreq(n, d=dt)
+    w2 = (2*np.pi*freqs)**2
+    F = np.fft.fft(f0)
+    Fs = F * np.exp(-w2 * sigma)
+    return np.fft.ifft(Fs).real
+
+def find_zeros_linear(t, f):
+    s = np.sign(f)
+    idx = np.where(s[:-1] * s[1:] < 0)[0]
+    z = []
+    for i in idx:
+        t0, t1 = t[i], t[i+1]
+        f0, f1 = f[i], f[i+1]
+        tz = t0 - f0*(t1-t0)/(f1-f0)
+        z.append(tz)
+    return np.array(z, float)
+
+def plane_from_sigmas(z0, Zdict, sigmas_subset):
+    rows = []
+    for s in sigmas_subset:
+        s = float(s)
+        dt = np.asarray(Zdict[s], float) - z0
+        if np.linalg.norm(dt) == 0:
+            continue
+        rows.append(dt / s)
+    V = np.array(rows, float)
+    if V.shape[0] < 2:
+        return None
+    _, _, VT = np.linalg.svd(V, full_matrices=False)
+    P = VT[:2]                 # (2,N)
+    Q, _ = np.linalg.qr(P.T)   # (N,2)
+    return Q[:, :2]
+
+def principal_angles_deg(Qa, Qb):
+    # returns (theta_min_deg, theta_max_deg, singular_vals)
+    M = Qa.T @ Qb
+    s = np.linalg.svd(M, compute_uv=False)
+    s = np.clip(s, -1.0, 1.0)
+    # for 2D planes, there are 2 principal angles
+    thetas = np.arccos(s)  # in rad, sorted ascending because s sorted descending
+    theta_min = float(thetas[0] * 180.0 / np.pi)
+    theta_max = float(thetas[-1] * 180.0 / np.pi)
+    return theta_min, theta_max, s
+
+def make_break_profile(sigmas, shift, mode, seed=0):
+    sigmas = np.asarray(sigmas, float)
+    if mode == "coherent":
+        return {float(s): float(shift) for s in sigmas}
+    if mode == "linear":
+        return {float(s): float(shift) * (float(s)/TARGET_SIGMA) for s in sigmas}
+    if mode == "quadratic":
+        return {float(s): float(shift) * (float(s)/TARGET_SIGMA)**2 for s in sigmas}
+    if mode == "random_smooth":
+        rng = np.random.default_rng(seed)
+        r = rng.normal(size=len(sigmas))
+        k = np.array([1,2,3,2,1], float); k /= k.sum()
+        rr = np.convolve(r, k, mode='same')
+        rr -= rr.mean()
+        rr /= (np.max(np.abs(rr)) + 1e-12)
+        return {float(s): float(shift) * float(rr[i]) for i,s in enumerate(sigmas)}
+    raise ValueError("Unknown BREAK_MODE")
+
+# -----------------------------
+# BUILD CLEAN FLOW
+# -----------------------------
+t = np.linspace(T0, T1, NGRID)
+dt = t[1] - t[0]
+f0 = siegelZ_grid(t)
+
+z0_raw = find_zeros_linear(t, f0)
+z0 = z0_raw[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+
+Z_clean = {}
+for s in SIGMAS:
+    fs = smooth_fft_real(f0, dt, float(s))
+    zs = find_zeros_linear(t, fs)
+    zs = zs[EDGE_DROP:EDGE_DROP+N0]
+    Z_clean[float(s)] = zs
+
+# equalize length
+minN = min(len(v) for v in Z_clean.values())
+z0 = z0[:minN]
+for s in list(Z_clean.keys()):
+    Z_clean[s] = Z_clean[s][:minN]
+
+print("\n================ BUILD CLEAN FLOW ================\n")
+print(f"Baseline zeros used (after edge_drop={EDGE_DROP}): {len(z0)}")
+print("First few baseline zeros:", np.array2string(z0[:12], precision=6))
+print(f"Target: sigma={TARGET_SIGMA} idx={TARGET_IDX} original t={Z_clean[float(TARGET_SIGMA)][TARGET_IDX]:.6f}")
+
+print("\n================ SWEEP (ANGLES) ================\n")
+print(f"BREAK_MODE = {BREAK_MODE}")
+print(f"LOW_SIGMAS  = {LOW_SIGMAS}")
+print(f"HIGH_SIGMAS = {HIGH_SIGMAS}\n")
+
+for shift in SHIFTS:
+    Z = {float(s): Z_clean[float(s)].copy() for s in SIGMAS}
+    prof = make_break_profile(SIGMAS, float(shift), BREAK_MODE, seed=RANDOM_SEED)
+
+    for s in SIGMAS:
+        ss = float(s)
+        Z[ss][TARGET_IDX] += prof[ss]
+
+    Qa = plane_from_sigmas(z0, Z, LOW_SIGMAS)
+    Qb = plane_from_sigmas(z0, Z, HIGH_SIGMAS)
+    if Qa is None or Qb is None:
+        print(f"shift={shift:0.3f} | plane: insufficient data")
+        continue
+
+    th_min, th_max, svals = principal_angles_deg(Qa, Qb)
+    print(f"shift={shift:0.3f} | θ_min={th_min:6.2f}°  θ_max={th_max:6.2f}°   s={svals}")
+
+print("\n================ DONE ================\n")
+
+
+================ BUILD CLEAN FLOW ================
+
+Baseline zeros used (after edge_drop=2): 21
+First few baseline zeros: [67.079809 69.546401 72.067155 75.704692 77.144836 79.337373 82.910385
+ 84.735492 87.425275 88.809109 92.491903 94.65135 ]
+Target: sigma=0.06 idx=3 original t=72.045500
+
+================ SWEEP (ANGLES) ================
+
+BREAK_MODE = quadratic
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+
+shift=0.000 | θ_min=  0.00°  θ_max=  5.22°   s=[1.         0.99585717]
+shift=0.020 | θ_min=  0.00°  θ_max=  6.24°   s=[1.         0.99406623]
+shift=0.040 | θ_min=  0.00°  θ_max=  8.29°   s=[1.         0.98955553]
+shift=0.060 | θ_min=  0.00°  θ_max= 10.71°   s=[1.         0.98259657]
+shift=0.080 | θ_min=  0.00°  θ_max= 13.20°   s=[1.         0.97358746]
+shift=0.100 | θ_min=  0.00°  θ_max= 15.63°   s=[1.         0.96300506]
+shift=0.120 | θ_min=  0.00°  θ_max= 17.94°   s=[1.         0.95135442]
+shift=0.140 | θ_min=  0.00°  θ_max= 20.10°   s=[1.        0.9391241]
+shift=0.160 | θ_min=  0.00°  θ_max= 22.07°   s=[1.         0.92675298]
+shift=0.180 | θ_min=  0.00°  θ_max= 23.85°   s=[1.         0.91461019]
+shift=0.200 | θ_min=  0.00°  θ_max= 25.45°   s=[1.         0.90298716]
+shift=0.220 | θ_min=  0.00°  θ_max= 26.86°   s=[1.         0.89209885]
+shift=0.240 | θ_min=  0.00°  θ_max= 28.10°   s=[1.         0.88209109]
+shift=0.260 | θ_min=  0.00°  θ_max= 29.18°   s=[1.         0.87305094]
+shift=0.280 | θ_min=  0.00°  θ_max= 30.12°   s=[1.         0.86501807]
+shift=0.300 | θ_min=  0.00°  θ_max= 30.91°   s=[1.         0.85799559]
+
+================ DONE ================
+
+
+
+
+
+
+118
+
+# ============================================================
+# STEP 1 — SIGMA-KINK RG STRESS TEST (STANDALONE)
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# ----------------------------
+# CONFIG
+# ----------------------------
+T0, T1 = 60.0, 120.0
+N = 8192
+EDGE_DROP = 2
+
+SIGMAS = np.array([0.005, 0.01, 0.015, 0.02, 0.04, 0.06])
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+
+TARGET_SIGMA = 0.06
+TARGET_IDX   = 3
+KINK_SHIFT   = 0.25      # size of corruption
+SIGMA_KINK   = 0.02      # kink location
+
+# ----------------------------
+# UTILITIES
+# ----------------------------
+def siegel_z(t):
+    return float(mp.siegelz(t))
+
+def find_zeros(t, f):
+    idx = np.where(np.diff(np.sign(f)))[0]
+    return t[idx]
+
+def smooth_fft(f, dt, sigma):
+    k = 2 * np.pi * np.fft.fftfreq(len(f), d=dt)
+    return np.real(np.fft.ifft(np.fft.fft(f) * np.exp(-(k**2) * sigma)))
+
+def principal_angle(P, Q):
+    M = P @ Q.T
+    s = np.linalg.svd(M, compute_uv=False)
+    s = np.clip(s, -1, 1)
+    return np.degrees(np.arccos(s.min()))
+
+# ----------------------------
+# BUILD BASELINE
+# ----------------------------
+t = np.linspace(T0, T1, N)
+dt = t[1] - t[0]
+
+f0 = np.array([siegel_z(tt) for tt in t])
+z0_raw = find_zeros(t, f0)
+z0 = z0_raw[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+
+print("\n================ BUILD CLEAN FLOW ================\n")
+print(f"Baseline zeros used (after edge_drop={EDGE_DROP}): {N0}")
+print("First few baseline zeros:", z0[:12])
+print(f"Target: sigma={TARGET_SIGMA} idx={TARGET_IDX} original t={z0[TARGET_IDX]:.6f}")
+
+# ----------------------------
+# TRACK CLEAN FLOW
+# ----------------------------
+Z_clean = {}
+for s in SIGMAS:
+    fs = smooth_fft(f0, dt, s)
+    zs = find_zeros(t, fs)
+    Z_clean[s] = zs[EDGE_DROP:EDGE_DROP+N0]
+
+# ----------------------------
+# APPLY SIGMA-KINK CORRUPTION
+# ----------------------------
+Z_kink = {s: Z_clean[s].copy() for s in Z_clean}
+
+for s in SIGMAS:
+    if s >= SIGMA_KINK:
+        Z_kink[s][TARGET_IDX] += KINK_SHIFT
+
+# ----------------------------
+# BUILD GENERATORS
+# ----------------------------
+def build_V(Z):
+    V = []
+    sigs = []
+    for s in SIGMAS:
+        if s == 0: continue
+        v = (Z[s] - z0) / s
+        if np.linalg.norm(v) > 0:
+            V.append(v)
+            sigs.append(s)
+    return np.array(V), sigs
+
+V_clean, _ = build_V(Z_clean)
+V_kink,  _ = build_V(Z_kink)
+
+# ----------------------------
+# EXTRACT RG PLANES
+# ----------------------------
+def rg_plane(V, sig_subset):
+    rows = [V[i] for i,s in enumerate(SIGMAS) if s in sig_subset]
+    rows = np.array(rows)
+    _, _, VT = np.linalg.svd(rows, full_matrices=False)
+    P = VT[:2]
+    Q, _ = np.linalg.qr(P.T)
+    return Q.T
+
+P_clean = rg_plane(V_clean, LOW_SIGMAS)
+P_kink  = rg_plane(V_kink,  HIGH_SIGMAS)
+
+# ----------------------------
+# DIAGNOSTICS
+# ----------------------------
+angle = principal_angle(P_clean, P_kink)
+closure_err = np.linalg.norm(
+    V_kink - (V_kink @ P_clean.T) @ P_clean
+) / np.linalg.norm(V_kink)
+
+# Scalar RG check
+def scalar_rg(V):
+    A = np.linalg.norm(V, axis=1)
+    logS = np.log(SIGMAS)
+    beta = np.gradient(A, logS)
+    lam = np.dot(beta, A) / np.dot(A, A)
+    corr = np.corrcoef(beta, lam*A)[0,1]
+    return corr
+
+scalar_corr = scalar_rg(V_kink)
+
+# ----------------------------
+# OUTPUT
+# ----------------------------
+print("\n================ σ-KINK RESULT ================\n")
+print(f"σ-kink at σ >= {SIGMA_KINK}")
+print(f"Injected shift = {KINK_SHIFT}")
+print("----------------------------------------------")
+print(f"RG plane angle        = {angle:.3f} deg")
+print(f"2D closure error      = {closure_err:.3e}")
+print(f"Scalar RG correlation = {scalar_corr:.6f}")
+print("\nInterpretation:")
+if angle > 20 or closure_err > 0.2:
+    print("→ RG geometry BREAKS (non-analytic obstruction)")
+else:
+    print("→ RG geometry ADAPTS (rotation only)")
+print("\n================================================")
+
+
+
+=============== BUILD CLEAN FLOW ================
+
+Baseline zeros used (after edge_drop=2): 21
+First few baseline zeros: [67.07605909 69.54462215 72.06446099 75.69771701 77.14076425 79.33097302
+ 82.90562813 84.72958125 87.42522281 88.80234404 92.48687584 94.64778415]
+Target: sigma=0.06 idx=3 original t=75.697717
+
+================ σ-KINK RESULT ================
+
+σ-kink at σ >= 0.02
+Injected shift = 0.25
+----------------------------------------------
+RG plane angle        = 27.577 deg
+2D closure error      = 5.360e-03
+Scalar RG correlation = 0.971387
+
+Interpretation:
+→ RG geometry BREAKS (non-analytic obstruction)
+
+================================================
+
+
+119
+
+# ============================================================
+# NEXT TEST: t-KINK STRESS TEST (analytic in σ, non-analytic in t)
+# ============================================================
+# Goal:
+#   Keep σ-flow smoothing analytic, but inject a non-analytic perturbation
+#   in t (into the tracked zero trajectories) and see whether:
+#     - RG 2D closure breaks (error jumps)
+#     - RG plane rotates (principal angle increases)
+#
+# This is the clean "dual" of your σ-kink test.
+#
+# Output metrics:
+#   - RG plane angle between LOW-σ and HIGH-σ 2D planes (Grassmann)
+#   - 2D closure error on beta (BF + 2D)
+#   - Scalar RG corr(beta, λ a)
+# ============================================================
+
+import numpy as np
+import mpmath as mp
+
+mp.mp.dps = 50
+
+# -----------------------------
+# CONFIG
+# -----------------------------
+T0, T1    = 60.0, 120.0
+NGRID     = 8192
+EDGE_DROP = 2
+
+SIGMAS = np.array([0.005, 0.01, 0.015, 0.02, 0.04, 0.06], dtype=float)
+
+POWERS = [1, 3, 5]   # odd kernels for coefficient extraction
+K_DROP = 1           # truncate near-diagonal pairs
+
+# Low/high σ split for plane angle
+LOW_SIGMAS  = [0.005, 0.01, 0.015]
+HIGH_SIGMAS = [0.02, 0.04, 0.06]
+
+# t-kink injection settings (acts on tracked zero trajectories dt(t,σ))
+INJECT_SIGMA = 0.06
+INJECT_MODE  = "abs"     # "step", "abs", "cusp2"
+INJECT_ZERO_INDEX = 3    # which tracked zero to kink around (index in baseline array)
+SHIFT = 0.25             # amplitude of kink perturbation in "t" units
+KINK_WIDTH = 0.8         # controls how local it is around the chosen zero
+
+# -----------------------------
+# NUMERICS: FFT Gaussian smoothing
+# -----------------------------
+def smooth_fft(f0, dt, sigma):
+    n = len(f0)
+    freqs = np.fft.fftfreq(n, d=dt)
+    w = 2*np.pi*freqs
+    F = np.fft.fft(f0)
+    G = np.exp(-(w*w)*sigma)
+    return np.real(np.fft.ifft(F * G))
+
+# -----------------------------
+# Zero finding by sign changes + linear interpolation
+# -----------------------------
+def find_zeros(t, f):
+    s = np.sign(f)
+    idx = np.where(np.diff(s) != 0)[0]
+    z = []
+    for i in idx:
+        f1, f2 = f[i], f[i+1]
+        if f2 == f1:
+            continue
+        # linear root between t[i], t[i+1]
+        ti = t[i] - f1*(t[i+1]-t[i])/(f2-f1)
+        z.append(ti)
+    return np.array(z, dtype=float)
+
+# -----------------------------
+# Build odd-kernel matrices H_p (N×N), with truncation
+# H_p[i,j] = sign(d)/|d|^p for i!=j and |i-j|>K_DROP else 0
+# where d = t_i - t_j
+# -----------------------------
+def odd_kernel_mats(t0, powers, k_drop):
+    t0 = np.asarray(t0, float)
+    N = len(t0)
+    D = t0[:,None] - t0[None,:]
+    I = np.arange(N)
+    band = (np.abs(I[:,None]-I[None,:]) <= k_drop)
+    mats = []
+    for p in powers:
+        H = np.zeros((N,N), dtype=float)
+        mask = (D != 0.0) & (~band)
+        H[mask] = np.sign(D[mask]) / (np.abs(D[mask])**p)
+        mats.append(H)
+    return mats
+
+def zscore_cols(X):
+    X = np.asarray(X, float)
+    mu = X.mean(axis=0, keepdims=True)
+    sd = X.std(axis=0, keepdims=True)
+    sd = np.where(sd==0, 1.0, sd)
+    return (X - mu)/sd
+
+# -----------------------------
+# Fit coefficients a(σ): v(σ) ≈ Σ a_p(σ) * (H_p @ v(σ))
+# We do the same trick you've been using:
+#   features = [H_p @ v] stacked -> solve LS for v
+# -----------------------------
+def fit_coeffs_for_v(v, H_list):
+    feats = []
+    for H in H_list:
+        feats.append(H @ v)
+    X = np.column_stack(feats)
+    Xz = zscore_cols(X)
+    coeffs, *_ = np.linalg.lstsq(Xz, v, rcond=None)
+    vhat = Xz @ coeffs
+    # corr and rel err
+    def corr(a,b):
+        a = np.asarray(a,float); b=np.asarray(b,float)
+        a = a - a.mean(); b = b - b.mean()
+        na = np.linalg.norm(a); nb = np.linalg.norm(b)
+        if na==0 or nb==0: return np.nan
+        return float(np.dot(a,b)/(na*nb))
+    rel = float(np.linalg.norm(v-vhat)/max(np.linalg.norm(v),1e-300))
+    return coeffs, vhat, corr(v, vhat), rel
+
+# -----------------------------
+# Scalar RG: β ≈ λ a  (stacked over σ, p)
+# and 2D closure: β projected onto span{a, u} where u ⟂ a (best 2D fit)
+# -----------------------------
+def rg_metrics(A, sigmas):
+    # A shape: (ns, np)
+    logS = np.log(sigmas)
+    B = np.gradient(A, logS, axis=0)  # β(σ)
+    a_flat = A.reshape(-1)
+    b_flat = B.reshape(-1)
+
+    def corr(x,y):
+        x = np.asarray(x,float); y = np.asarray(y,float)
+        x = x - x.mean(); y = y - y.mean()
+        nx = np.linalg.norm(x); ny = np.linalg.norm(y)
+        if nx==0 or ny==0: return np.nan
+        return float(np.dot(x,y)/(nx*ny))
+
+    # scalar fit
+    denom = np.dot(a_flat, a_flat)
+    lam = np.dot(b_flat, a_flat)/denom if denom>0 else np.nan
+    scalar_pred = lam * a_flat
+    scalar_corr = corr(b_flat, scalar_pred)
+    scalar_err = float(np.linalg.norm(b_flat - scalar_pred)/max(np.linalg.norm(b_flat),1e-300))
+
+    # 2D closure: choose second direction from residual via SVD
+    r = b_flat - scalar_pred
+    # Build 2D basis [a_hat, u_hat]
+    a_hat = a_flat / max(np.linalg.norm(a_flat), 1e-300)
+    # make u from r orthogonal to a
+    r_orth = r - np.dot(r, a_hat)*a_hat
+    if np.linalg.norm(r_orth) < 1e-300:
+        # already 1D-closed
+        twoD_corr = 1.0
+        twoD_err  = 0.0
+    else:
+        u_hat = r_orth / np.linalg.norm(r_orth)
+        proj = (np.dot(b_flat, a_hat)*a_hat + np.dot(b_flat, u_hat)*u_hat)
+        twoD_corr = corr(b_flat, proj)
+        twoD_err  = float(np.linalg.norm(b_flat - proj)/max(np.linalg.norm(b_flat),1e-300))
+
+    return {
+        "lambda": lam,
+        "scalar_corr": scalar_corr,
+        "scalar_err": scalar_err,
+        "twoD_corr": twoD_corr,
+        "twoD_err": twoD_err
+    }
+
+# -----------------------------
+# 2D plane angle (Grassmann): compare planes from LOW vs HIGH σ sets
+# Planes are from v(σ)=dt(σ)/σ (or v_eff) stacked, SVD -> top-2 right singular vectors
+# Principal angles from singular values of Q1 Q2^T
+# -----------------------------
+def plane_from_sigmas(z0, Z, sig_list):
+    z0 = np.asarray(z0,float)
+    V = []
+    for s in sig_list:
+        zs = np.asarray(Z[s], float)
+        dtv = (zs - z0)/s
+        nrm = np.linalg.norm(dtv)
+        if nrm == 0 or not np.isfinite(nrm):
+            continue
+        V.append(dtv)
+    V = np.array(V, dtype=float)
+    if V.shape[0] < 2:
+        return None
+    U, S, VT = np.linalg.svd(V, full_matrices=False)
+    P = VT[:2]  # (2,N)
+    Q, _ = np.linalg.qr(P.T)  # (N,2) orthonormal basis
+    return Q  # (N,2)
+
+def plane_angle_deg(Q1, Q2):
+    # Q1,Q2: (N,2)
+    M = Q1.T @ Q2
+    s = np.linalg.svd(M, compute_uv=False)
+    s = np.clip(s, -1.0, 1.0)
+    # principal angles
+    ang = np.arccos(s)  # length 2
+    # report max principal angle (most conservative)
+    return float(np.max(ang) * 180.0/np.pi)
+
+# -----------------------------
+# t-kink injection: modifies tracked zeros zs at a chosen sigma
+# by adding a non-analytic bump as a function of t0
+# -----------------------------
+def inject_t_kink(z0, zs, center_t, shift, width, mode):
+    z0 = np.asarray(z0,float)
+    zs = np.asarray(zs,float).copy()
+    x = (z0 - center_t)/max(width, 1e-12)
+
+    if mode == "step":
+        bump = (x >= 0).astype(float)
+    elif mode == "abs":
+        bump = np.abs(x)
+    elif mode == "cusp2":
+        # continuous, but kink in derivative at 0: |x| * exp(-x^2)
+        bump = np.abs(x) * np.exp(-x*x)
+    else:
+        raise ValueError("INJECT_MODE must be 'step', 'abs', or 'cusp2'")
+
+    # localize it so it doesn't blow up far away (except step)
+    if mode != "step":
+        bump = bump * np.exp(-0.5*x*x)
+
+    zs += shift * bump
+    return zs
+
+# ============================================================
+# RUN
+# ============================================================
+print("\n================ t-KINK STRESS TEST ================\n")
+
+t = np.linspace(T0, T1, NGRID)
+dt = t[1]-t[0]
+
+# Baseline f0 = Z(t)
+f0 = np.array([float(mp.siegelz(tt)) for tt in t], dtype=float)
+
+z0_raw = find_zeros(t, f0)
+z0 = z0_raw[EDGE_DROP:-EDGE_DROP]
+N0 = len(z0)
+
+print(f"Window [{T0},{T1}]  N={NGRID}")
+print(f"Baseline zeros in window (after edge_drop={EDGE_DROP}): {N0}")
+print("First few baseline zeros:", np.array2string(z0[:12], precision=6))
+
+# Track zeros across σ
+Z = {}
+for s in SIGMAS:
+    fs = smooth_fft(f0, dt, s)
+    zs_raw = find_zeros(t, fs)
+    zs = zs_raw[EDGE_DROP:EDGE_DROP+N0]
+    if len(zs) != N0:
+        # robust align by truncation
+        m = min(len(zs), N0)
+        zs = zs[:m]
+    Z[float(s)] = zs
+
+# If any sigma truncated, enforce common length
+minN = min(len(Z[float(s)]) for s in SIGMAS)
+z0 = z0[:minN]
+for s in SIGMAS:
+    Z[float(s)] = Z[float(s)][:minN]
+N0 = minN
+
+print(f"Tracked zeros across σ: {N0}/{N0}")
+print(f"Injection: sigma={INJECT_SIGMA}, mode={INJECT_MODE}, shift={SHIFT}, width={KINK_WIDTH}")
+print(f"Target zero index = {INJECT_ZERO_INDEX}, baseline t0 = {z0[INJECT_ZERO_INDEX]:.6f}")
+
+# Make corrupted copy
+Zk = {float(s): Z[float(s)].copy() for s in SIGMAS}
+center_t = float(z0[INJECT_ZERO_INDEX])
+Zk[float(INJECT_SIGMA)] = inject_t_kink(
+    z0, Zk[float(INJECT_SIGMA)], center_t=center_t,
+    shift=SHIFT, width=KINK_WIDTH, mode=INJECT_MODE
+)
+
+# Compute RG coefficients A(σ) from v(σ)
+H_list = odd_kernel_mats(z0, POWERS, K_DROP)
+
+def build_A(Zdict):
+    A = []
+    fit_corrs = []
+    fit_errs = []
+    for s in SIGMAS:
+        s = float(s)
+        v = (Zdict[s] - z0)/s
+        coeffs, vhat, c, re = fit_coeffs_for_v(v, H_list)
+        A.append(coeffs)
+        fit_corrs.append(c)
+        fit_errs.append(re)
+    return np.array(A, dtype=float), float(np.nanmean(fit_corrs)), float(np.nanmean(fit_errs))
+
+A_clean, mean_corr_clean, mean_err_clean = build_A(Z)
+A_kink,  mean_corr_kink,  mean_err_kink  = build_A(Zk)
+
+# RG metrics
+rg_clean = rg_metrics(A_clean, SIGMAS)
+rg_kink  = rg_metrics(A_kink,  SIGMAS)
+
+# Plane rotation
+Qlo = plane_from_sigmas(z0, Zk, LOW_SIGMAS)
+Qhi = plane_from_sigmas(z0, Zk, HIGH_SIGMAS)
+ang = plane_angle_deg(Qlo, Qhi) if (Qlo is not None and Qhi is not None) else np.nan
+
+print("\n================ RESULTS (CLEAN) ================")
+print(f"mean per-σ v-fit corr  = {mean_corr_clean:+.6f}")
+print(f"mean per-σ v-fit relerr= {mean_err_clean:+.6f}")
+print(f"Scalar RG:  λ*={rg_clean['lambda']:+.6e}  corr={rg_clean['scalar_corr']:+.6f}  err={rg_clean['scalar_err']:.6f}")
+print(f"2D closure: corr={rg_clean['twoD_corr']:+.6f}  err={rg_clean['twoD_err']:.3e}")
+
+print("\n================ RESULTS (t-KINK) ================")
+print(f"mean per-σ v-fit corr  = {mean_corr_kink:+.6f}")
+print(f"mean per-σ v-fit relerr= {mean_err_kink:+.6f}")
+print(f"Scalar RG:  λ*={rg_kink['lambda']:+.6e}  corr={rg_kink['scalar_corr']:+.6f}  err={rg_kink['scalar_err']:.6f}")
+print(f"2D closure: corr={rg_kink['twoD_corr']:+.6f}  err={rg_kink['twoD_err']:.3e}")
+
+print("\n============= RG PLANE ROTATION (t-KINK) =============")
+print(f"Low σ set : {LOW_SIGMAS}")
+print(f"High σ set: {HIGH_SIGMAS}")
+print(f"Principal angle (deg): {ang:.6f}")
+print("=====================================================\n")
+================ t-KINK STRESS TEST ================
+
+Window [60.0,120.0]  N=8192
+Baseline zeros in window (after edge_drop=2): 21
+First few baseline zeros: [67.079809 69.546401 72.067155 75.704692 77.144836 79.337373 82.910385
+ 84.735492 87.425275 88.809109 92.491903 94.65135 ]
+Tracked zeros across σ: 21/21
+Injection: sigma=0.06, mode=abs, shift=0.25, width=0.8
+Target zero index = 3, baseline t0 = 75.704692
+
+================ RESULTS (CLEAN) ================
+mean per-σ v-fit corr  = +0.497382
+mean per-σ v-fit relerr= +0.985597
+Scalar RG:  λ*=-8.093477e-01  corr=+0.984856  err=0.170209
+2D closure: corr=+1.000000  err=2.617e-16
+
+================ RESULTS (t-KINK) ================
+mean per-σ v-fit corr  = +0.497045
+mean per-σ v-fit relerr= +0.985586
+Scalar RG:  λ*=-8.074048e-01  corr=+0.985037  err=0.169444
+2D closure: corr=+1.000000  err=2.937e-16
+
+============= RG PLANE ROTATION (t-KINK) =============
+Low σ set : [0.005, 0.01, 0.015]
+High σ set: [0.02, 0.04, 0.06]
+Principal angle (deg): 15.147139
+=====================================================
+
+
+
+120
+
+
+
+
