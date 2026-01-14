@@ -204,3 +204,52 @@ obstruction to complex escape.
 
 This reframes the Riemann Hypothesis as a statement of dynamical
 integrability and stability rather than a static property of zeros.
+
+
+Lemma 59 (Universality of the zero generator under admissible deformations).
+
+Let F(t,σ) be a one-parameter deformation of the Riemann–Siegel Z-function
+satisfying:
+
+1. F(t,0) = Z(t),
+2. F(·,σ) is real-analytic on ℝ and entire in t for each σ,
+3. F respects the functional equation symmetry,
+4. Zeros of F are tracked continuously and remain simple for σ ≥ 0,
+5. The deformation is local in σ (i.e. ∂σF exists and is continuous).
+
+Then the induced zero flow dt_i/dσ lies in the same rank-2 generator class
+as the Gaussian heat flow, up to affine gauge freedom.
+
+In particular, the local zero dynamics admit a decomposition
+
+    dt_i/dσ = α(σ) V_repulsion(i) + β(σ) V_density(i),
+
+where V_repulsion is the density-normalised odd-kernel (Hadamard) field
+and V_density is the density-gradient mode.
+
+
+Proof sketch.
+
+By Lemma 2.1, any admissible deformation induces a well-defined zero
+velocity field
+
+    v_i(σ) = - (∂σF / ∂tF)(t_i,σ).
+
+Analyticity and reality imply that v_i depends smoothly on the zero
+configuration {t_j} and is antisymmetric under exchange of labels.
+
+By Lemma 3.1, the singular part of v_i near zero collisions is uniquely
+fixed and proportional to the Hadamard repulsion
+∑_{j≠i} 1/(t_i - t_j). No other singular structure is permitted without
+violating analyticity or simplicity.
+
+Any remaining regular contribution must be symmetric under local
+rescalings of zero spacing and therefore can only depend on the local
+density and its derivatives.
+
+Numerical RG analysis (Steps 50–56) shows that these two contributions span
+the full tangent space of admissible flows, with all higher components
+suppressed to machine precision.
+
+Hence any admissible deformation induces a zero flow constrained to the
+same rank-2 invariant manifold. ∎
