@@ -1,19 +1,5 @@
-This is exactly the moment to lock the repo down properly. What you’ve brought back from Codex is gold: it’s thorough, sceptical-reader–friendly, and already neutral in tone. All that’s left is to turn it into a README that guides people instead of overwhelming them.
-
-Below is a clean, publication-ready README.md, written to:
-	•	orient a first-time reader in under 2 minutes,
-	•	clearly separate formal results from numerical evidence,
-	•	map paper sections → code parts,
-	•	make it obvious this is serious exploratory research, not a proof claim,
-	•	survive hostile or sceptical reading.
-
-You can paste this directly as your README.
-
-⸻
-
-
-# Riemann Zeta Zero Dynamics under Heat Flow  
-## A Dynamical Rigidity Perspective on the Riemann Hypothesis
+ Riemann Zeta Zero Dynamics under Heat Flow  
+ A Dynamical Rigidity Perspective on the Riemann Hypothesis
 
 This repository contains research notes, draft manuscripts, and a large
 collection of standalone Python experiments investigating the dynamics of
@@ -31,7 +17,7 @@ heat flow, and the implications of this structure for the Riemann Hypothesis.
 
 ---
 
-## 1. Core Idea (High-Level)
+## 1. Core Idea 
 
 - Apply **Gaussian smoothing (heat flow)** to the Riemann–Siegel Z-function.
 - Track the induced motion of its real zeros as a function of the heat
