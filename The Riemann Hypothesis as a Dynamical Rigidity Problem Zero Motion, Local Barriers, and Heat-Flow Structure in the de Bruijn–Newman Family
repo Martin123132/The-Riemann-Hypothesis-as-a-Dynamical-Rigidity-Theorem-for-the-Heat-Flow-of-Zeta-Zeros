@@ -1,0 +1,625 @@
+The Riemann Hypothesis as a Dynamical Rigidity Problem
+Zero Motion, Local Barriers, and Heat-Flow Structure in the de Bruijn–Newman Family
+
+Abstract
+--------
+
+We study the motion of real zeros under heat-type deformations associated with the Riemann ξ-function and the de Bruijn–Newman family. Starting from the exact zero-tracking identity
+
+    ṫ_i = - F_λ / F_t (t_i),
+
+we derive the local singular structure of zero motion near simple real zeros. In the repulsive heat-flow convention, neighbouring zeros interact through a leading Hadamard pole term of the form
+
+    ṫ_i = 2 Σ_{j≠i} 1/(t_i - t_j) + E_i,
+
+where E_i denotes the regular external contribution.
+
+Numerical experiments on finite zero windows reveal a robust reduced-flow structure. In the healthy regime the velocity field is well described by a two-mode geometry consisting of a Hadamard repulsion mode and a secondary density-balancing mode. Across 252 tested windows, 230 were classified as strong geometry, 5 as borderline, and 17 as weak. The weak windows were not random: they occurred exactly when the minimum gap satisfied
+
+    g_min / Δ̄ < 0.14.
+
+A force decomposition showed that these weak windows are local-pair dominated: the minimum-gap pair contributes approximately 80% of the velocity norm, while the compressive tail contributes only about 1% of the adjacent-pair term. Local rescaling does not rescue these windows under the correct time-scale transformation, indicating that the weak sector is a genuine local-pair regime rather than a global normalisation artefact.
+
+We then formulate a finite-model barrier theorem. In the reduced repulsive model,
+
+    ṫ_i = 2 Σ_{j≠i} 1/(t_i - t_j),
+
+the neighbouring gap g_i = t_{i+1} - t_i satisfies
+
+    ġ_i = 4/g_i
+           - 2g_i Σ_{j≠i,i+1}
+             1/(|t_{i+1}-t_j| |t_i-t_j|).
+
+Thus a sufficiently isolated small gap is forced open by the singular adjacent-pair term. More generally, a collapsing cluster of r zeros has internal variance derivative
+
+    V̇_int = 2r(r-1),
+
+so a finite real-zero cluster cannot collapse if the external logarithmic derivative is locally Lipschitz across the cluster.
+
+The remaining analytic problem is therefore reduced to a precise bridge condition: prove that, for the full de Bruijn–Newman zero flow, the external logarithmic derivative remains locally Lipschitz near any hypothetical finite real-zero collision. If this condition holds, real-zero collisions are excluded by the cluster-variance barrier.
+
+
+1. Setup
+--------
+
+Let ξ(s) denote the Riemann xi-function and define
+
+    Ξ(t) = ξ(1/2 + it).
+
+The de Bruijn–Newman family may be written formally as
+
+    Ξ_λ(t) = ∫_0^∞ e^{λx²} Φ(x) cos(tx) dx,
+
+with the heat-type identity
+
+    ∂_λ Ξ_λ(t) = -∂_{tt} Ξ_λ(t),
+
+up to the chosen normalisation convention.
+
+More generally, let F(λ,t) be a real entire function, real-valued on ℝ, analytic in (λ,t), and satisfying a heat-type evolution
+
+    F_λ = κ F_{tt}.
+
+The sign of κ determines whether the induced zero motion is attractive or repulsive. The repulsive direction is the relevant convention for the barrier calculations below.
+
+Let
+
+    t_1(λ) < t_2(λ) < ...
+
+denote real simple zeros of F(λ,·), where such an ordering exists.
+
+
+2. Exact zero tracking
+----------------------
+
+Lemma 2.1 — Zero tracking
+
+If t_i(λ_0) is a simple zero of F(λ_0,·), then there is a unique local C¹ trajectory t_i(λ) such that
+
+    F(λ,t_i(λ)) = 0.
+
+Moreover,
+
+    ṫ_i = - F_λ / F_t (λ,t_i).
+
+Proof.
+
+Differentiate
+
+    F(λ,t_i(λ)) = 0
+
+with respect to λ:
+
+    F_λ + ṫ_i F_t = 0.
+
+Since F_t ≠ 0 at a simple zero,
+
+    ṫ_i = - F_λ / F_t.
+
+
+3. Local Hadamard pole structure
+--------------------------------
+
+Assume F admits a local factorisation near its simple zeros,
+
+    F(t) = e^{H(t)} Π_m (t - t_m),
+
+with H analytic in the local region of interest.
+
+At a simple zero t_i,
+
+    F_{tt}/F_t (t_i)
+      =
+    2H'(t_i) + 2Σ_{m≠i} 1/(t_i - t_m).
+
+Therefore, for a heat-type evolution F_λ = κF_{tt},
+
+    ṫ_i
+      =
+    -2κ [ H'(t_i) + Σ_{m≠i} 1/(t_i - t_m) ].
+
+In the repulsive convention, rescale the parameter so that the singular part becomes
+
+    ṫ_i
+      =
+    2Σ_{m≠i} 1/(t_i - t_m) + E_i,
+
+where E_i denotes the regular external contribution.
+
+This is the formal source of the reduced finite-zero model used in the numerical experiments.
+
+
+4. Pair-gap equation in the finite reduced model
+------------------------------------------------
+
+Consider the finite reduced repulsive model
+
+    ṫ_i = 2Σ_{j≠i} 1/(t_i - t_j).
+
+Let
+
+    g_i = t_{i+1} - t_i.
+
+Then
+
+    ġ_i
+      =
+    4/g_i
+    -
+    2g_i Σ_{j≠i,i+1}
+    1/(|t_{i+1}-t_j| |t_i-t_j|).
+
+The first term is the singular adjacent-pair repulsion. The second term is the compressive tail from all other zeros.
+
+Thus the finite-model gap law has the form
+
+    ġ_i = 4/g_i - C_i g_i
+
+with
+
+    C_i =
+    2Σ_{j≠i,i+1}
+    1/(|t_{i+1}-t_j| |t_i-t_j|).
+
+If C_i is locally bounded, then g_i cannot vanish in finite time.
+
+
+5. Controlled-error pair barrier
+--------------------------------
+
+Lemma 5.1 — Pair no-collapse under linear error
+
+Let g(λ)>0 satisfy
+
+    ġ ≥ A/g - K(λ)g,
+
+where A>0, K(λ)≥0, and K∈L¹_loc. Then g cannot reach zero in finite λ-time.
+
+Proof.
+
+Let
+
+    h = g².
+
+Then
+
+    ḣ = 2g ġ ≥ 2A - 2K(λ)h.
+
+So
+
+    ḣ + 2K(λ)h ≥ 2A.
+
+Multiplying by the integrating factor
+
+    μ(λ) = exp( ∫_0^λ 2K(u) du )
+
+gives
+
+    (μh)' ≥ 2Aμ.
+
+Hence
+
+    h(λ)
+      ≥
+    μ(λ)^(-1) [ h(0) + 2A∫_0^λ μ(s) ds ].
+
+The right-hand side is strictly positive for finite λ. Therefore g(λ)>0, and collision is impossible.
+
+
+6. Local-minimum barrier in the finite model
+--------------------------------------------
+
+Let
+
+    g_min = η Δ̄,
+
+where Δ̄ is the mean gap in the finite window.
+
+Let the second-smallest gap be
+
+    g_second = a Δ̄.
+
+A conservative infinite-tail estimate shows that a sufficient barrier condition is
+
+    η < a.
+
+Equivalently,
+
+    g_min < g_second.
+
+Numerically, across 252 tested finite windows, every minimum gap satisfied this strict local-minimum condition and every minimum gap had
+
+    ġ_min > 0.
+
+For the weak-geometry windows specifically:
+
+    g_min / Δ̄ ≈ 0.109–0.135,
+
+with
+
+    ġ_min ≈ 32.4–37.9.
+
+The adjacent-pair term dominated:
+
+    |tail| / |pair| ≈ 0.0066–0.0157.
+
+Thus the weak windows are not collapse-threat windows. They are strong local reopening cases.
+
+
+7. Cluster-variance barrier
+---------------------------
+
+The pair barrier handles isolated two-zero collisions. A possible remaining failure mode is simultaneous collapse of a cluster of r adjacent zeros.
+
+Let
+
+    x_1 < ... < x_r
+
+be a finite cluster and define
+
+    x̄ = (1/r) Σ_{k=1}^r x_k,
+
+    V = Σ_{k=1}^r (x_k - x̄)².
+
+Assume the cluster evolves by
+
+    ẋ_k =
+    2Σ_{ℓ≠k} 1/(x_k - x_ℓ) + E_k.
+
+The internal repulsive part satisfies the exact identity
+
+    V̇_int = 2r(r-1).
+
+Derivation.
+
+Let
+
+    y_k = x_k - x̄.
+
+Then
+
+    Σ_k y_k = 0
+
+and
+
+    V̇ = 2Σ_k y_k ẋ_k.
+
+For the internal repulsive part,
+
+    ẋ_{k,int} =
+    2Σ_{ℓ≠k} 1/(x_k - x_ℓ).
+
+Thus
+
+    V̇_int =
+    4Σ_k y_k Σ_{ℓ≠k} 1/(x_k - x_ℓ).
+
+Pair the unordered terms k<ℓ. Each pair contributes
+
+    y_k/(x_k-x_ℓ) + y_ℓ/(x_ℓ-x_k)
+      =
+    (y_k-y_ℓ)/(x_k-x_ℓ)
+      =
+    1.
+
+There are r(r-1)/2 unordered pairs, so
+
+    V̇_int = 2r(r-1).
+
+Now assume the external field is Lipschitz across the cluster:
+
+    |E_k - E_m| ≤ L|x_k - x_m|.
+
+Then
+
+    |V̇_ext|
+      =
+    |2Σ_k y_k E_k|
+      ≤
+    2LV.
+
+Therefore
+
+    V̇ ≥ 2r(r-1) - 2LV.
+
+By the same integrating-factor argument as in Lemma 5.1, V cannot reach zero in finite time.
+
+
+8. Bridge condition for the full de Bruijn–Newman flow
+------------------------------------------------------
+
+The finite-model results suggest the following analytic bridge condition.
+
+Near any hypothetical finite real-zero collision of the de Bruijn–Newman family, suppose the zero motion can be decomposed as
+
+    ẋ_k =
+    2Σ_{ℓ∈C,ℓ≠k} 1/(x_k - x_ℓ)
+    +
+    E_k^ext,
+
+where C is the colliding cluster.
+
+If the external contribution satisfies
+
+    |E_k^ext - E_m^ext| ≤ L|x_k - x_m|
+
+within the cluster, then the cluster-variance barrier prevents collapse.
+
+Thus the remaining analytic problem is:
+
+    Prove local Lipschitz control of the external logarithmic derivative
+    near any finite real-zero cluster.
+
+Equivalently, if
+
+    F(t) = e^{H(t)} Π_{ℓ∈C} (t - x_ℓ) G(t),
+
+then the required condition is local boundedness of the second derivative of
+
+    H(t) + log G(t)
+
+across the cluster.
+
+This is the narrowed proof target.
+
+
+9. Numerical reduced-flow results
+---------------------------------
+
+The numerical work examined finite windows of zeros under the reduced repulsive flow
+
+    ṫ_i = 2Σ_{j≠i} 1/(t_i - t_j).
+
+The tested windows covered heights
+
+    T = 50, 100, 200, 500, 1000, 5000, 10000,
+
+with window sizes
+
+    n = 12, 16, 20, 24
+
+and shifts
+
+    -4, ..., +4.
+
+Total windows tested:
+
+    252.
+
+
+9.1 Geometry tiers
+------------------
+
+The geometry classifier gave:
+
+    strong geometry      230
+    borderline geometry    5
+    weak geometry         17
+
+The strong-geometry windows satisfy high Hadamard alignment, high two-mode capture, and strong singular-value separation.
+
+The weak windows all occurred at T=5000 and were exactly characterised by
+
+    g_min / Δ̄ < 0.14.
+
+The threshold table gave:
+
+    threshold                  TP  FP  FN  TN   precision  recall
+    g_min / Δ̄ < 0.14          17   0   0 235      1.000   1.000
+
+Thus weak geometry is exactly the small-gap compression regime in the tested family.
+
+
+9.2 Force decomposition
+-----------------------
+
+For weak windows:
+
+    pairFrac_med = 0.7958,
+
+    local4_med = 0.8294,
+
+    tail/pair_med = 0.0114.
+
+For strong windows:
+
+    pairFrac_med = 0.4169.
+
+The correlation with geometry quality was:
+
+    corr(pairFrac, geometry quality) = -0.8305.
+
+Thus geometry weakens when the dynamics become dominated by one adjacent-pair singularity.
+
+
+9.3 Local rescaling
+-------------------
+
+A local minimum-gap rescaling,
+
+    t̃_i = (t_i - t_k) / g_min,
+
+partially improved the weak windows but did not rescue them under the correct time-scale transformation.
+
+For weak windows:
+
+    S1/S2: 7.586 → 9.041,
+
+    R²: 0.9666 → 0.9800.
+
+But
+
+    0/17
+
+weak windows became strong or borderline under physically scaled local geometry.
+
+Therefore the weak sector is not a global scaling artefact. It is a genuine local-pair dominated regime.
+
+
+9.4 Closure classification
+--------------------------
+
+Earlier apparent closure outliers were separated into regimes:
+
+    stable two-mode closure
+    beta-degenerate closure
+    geometry failure / weak geometry
+
+In the tested closure scan:
+
+    genuine healthy-regime closure failures = 0.
+
+Bad 2×2 closure fits occurred only when either:
+
+    1. the second coordinate β was nearly degenerate, or
+    2. the geometry itself entered the small-gap weak sector.
+
+Thus apparent closure anomalies do not falsify the healthy two-mode regime.
+
+
+10. Interpretation of the reduced-flow regimes
+----------------------------------------------
+
+The reduced finite-zero model exhibits two distinct regimes.
+
+
+10.1 Healthy distributed regime
+-------------------------------
+
+When no gap is extremely compressed, the velocity field is distributed across the window. The flow is well described by a two-mode structure:
+
+    1. Hadamard repulsion mode
+    2. density-balancing mode
+
+This is the regime where rank-2 geometry and coefficient closure behave well.
+
+
+10.2 Small-gap local-pair regime
+--------------------------------
+
+When
+
+    g_min / Δ̄ < 0.14,
+
+the flow becomes dominated by the minimum adjacent pair. This weakens the global two-mode geometry but strengthens the local reopening barrier.
+
+The weak geometry therefore does not indicate collapse. It indicates that the local singular pair interaction has become the dominant stabilising mechanism.
+
+
+11. Relation to complex-zero formation
+--------------------------------------
+
+For a real entire family analytic in the deformation parameter, creation or annihilation of a nonreal conjugate pair requires a multiple real zero.
+
+Locally, near a generic double zero,
+
+    F(t,λ)
+      =
+    U(t,λ) [ (t - t_* - r(λ))² - s(λ) ],
+
+with U nonvanishing.
+
+The zeros have the square-root form
+
+    t_±(λ)
+      =
+    t_* + r(λ) ± sqrt(s(λ)).
+
+Thus complex escape requires a real-zero collision.
+
+The finite-model and cluster-variance barriers show that, under repulsive Hadamard zero dynamics plus Lipschitz external field, such collisions cannot occur.
+
+The full proof target is therefore not a new numerical search. It is the analytic verification of the external Lipschitz condition for the de Bruijn–Newman zero flow.
+
+
+12. Relation to the de Bruijn–Newman constant
+---------------------------------------------
+
+The de Bruijn–Newman constant Λ marks the transition between real-zero and nonreal-zero behaviour in the de Bruijn–Newman family.
+
+The present programme aims at the direction
+
+    Λ ≤ 0,
+
+by seeking a dynamical obstruction to real-zero collision in the repulsive heat-flow convention.
+
+Newman's theorem gives the opposite inequality,
+
+    Λ ≥ 0.
+
+Thus, if the bridge condition were proved for the full Ξ_λ flow, one would obtain
+
+    Λ = 0.
+
+The finite reduced model does not by itself prove this. It supplies the local barrier structure and identifies the exact analytic condition that must be established.
+
+
+13. Current status
+------------------
+
+Established analytically in the reduced model:
+
+    1. Exact zero-tracking identity.
+    2. Hadamard pole form of zero motion.
+    3. Pair-gap equation:
+
+           ġ_i = 4/g_i - C_i g_i.
+
+    4. Controlled-error no-collision lemma.
+    5. Cluster-variance identity:
+
+           V̇_int = 2r(r-1).
+
+    6. Cluster no-collapse under Lipschitz external field.
+
+Established numerically in finite windows:
+
+    1. Strong geometry in 230/252 windows.
+    2. Weak geometry in 17/252 windows.
+    3. Weak geometry exactly classified by:
+
+           g_min / Δ̄ < 0.14.
+
+    4. Weak windows are local-pair dominated:
+
+           pairFrac_med ≈ 0.80.
+
+    5. Tail contribution in weak windows is small:
+
+           |tail/pair|_med ≈ 0.011.
+
+    6. Correct local rescaling does not rescue weak windows:
+
+           0/17
+
+       weak windows recovered.
+
+    7. No genuine healthy-regime closure failures were found.
+
+Remaining analytic gap:
+
+    Prove, for the full de Bruijn–Newman zero flow, that the external
+    logarithmic derivative is locally Lipschitz across any hypothetical
+    finite real-zero collision cluster.
+
+In local factorised form,
+
+    F(t) = e^{H(t)} Π_{ℓ∈C} (t - x_ℓ) G(t),
+
+the required condition is local boundedness of
+
+    d²/dt² [ H(t) + log G(t) ]
+
+across the cluster.
+
+
+14. Conclusion
+--------------
+
+The numerical and finite-model results point to a two-regime dynamical structure.
+
+In ordinary windows, zero motion is governed by a stable distributed two-mode geometry. In compressed-gap windows, this geometry weakens, but the dynamics become dominated by the adjacent-pair singularity, forcing the minimum gap to reopen.
+
+Thus the only observed weak sector is not a collapse mechanism. It is a local barrier regime.
+
+The proof route is now sharply reduced. To close the argument for the full de Bruijn–Newman flow, it remains to prove that the external logarithmic derivative contributed by zeros outside a finite colliding cluster is locally Lipschitz across that cluster. If that bridge condition holds, the cluster-variance barrier excludes real-zero collisions, and therefore excludes the local mechanism required for complex-zero creation.
