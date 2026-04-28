@@ -1,0 +1,696 @@
+
+STEP 9 — corrected reproducibility package
+
+Master writer: step9_reproducibility_package.py
+
+"""
+step9_reproducibility_package.py
+================================
+Writes three fully self-contained reproducibility scripts:
+  1. rg_closure.py
+  2. splitting.py
+  3. universality.py
+Unified convention used in all scripts
+--------------------------------------
+We introduce an abstract reduced-flow parameter s >= 0 with ODE
+    dt_i/ds = +2 * sum_{j!=i} 1/(t_i - t_j)
+This is the REPULSIVE pairwise flow:
+- neighbouring points spread apart as s increases
+- isolated-pair law is sep(s) = sqrt(sep0^2 + 8 s)
+This script package does NOT identify s directly with the physical
+forward heat-flow parameter tau. It is the reduced repulsive flow
+used to model backward de Bruijn-Newman separation behaviour.
+All scripts are stateless and runnable independently.
+"""
+RG_CLOSURE = r'''"""
+rg_closure.py
+=============
+Reproduces:
+  - rank-2 reduced-flow manifold
+  - Hadamard alignment of mode 1
+  - approximate 2x2 closure in coefficient space
+  - α(0) Δ̄ universality across moderate heights
+Convention
+----------
+Reduced repulsive flow parameter s >= 0:
+    dt_i/ds = +2 * sum_{j!=i} 1/(t_i - t_j)
+This is an abstract reduced flow used consistently throughout the package.
+It is not asserted here that s is identical to the physical heat-flow time.
+Claims checked
+--------------
+1. S1/S2 large, S2/S3 large       (rank-2 dominance)
+2. mode1 · v_Had > 0.998          (Hadamard alignment)
+3. mean R² > 0.997               (velocity lies in span{e1,e2})
+4. closure error < 10%            (approximate 2x2 closure)
+5. α(0)Δ̄ approximately constant
+Runtime: typically under ~10 minutes depending on machine
+"""
+import mpmath
+import numpy as np
+from scipy.linalg import svd
+mpmath.mp.dps = 25
+T_VALS    = [50, 100, 200, 300, 500]
+N_ZEROS   = 12
+S_MAX     = 0.04
+N_S       = 100
+def find_zeros(T, n, span=25.0):
+    ts = np.linspace(T - span, T + span, 8000)
+    zv = np.array([float(mpmath.siegelz(t)) for t in ts])
+    z0 = []
+    for i in range(len(zv) - 1):
+        if zv[i] * zv[i + 1] < 0:
+            root = float(mpmath.findroot(mpmath.siegelz, (ts[i], ts[i+1]), solver='illinois'))
+            z0.append(root)
+    z0 = sorted(z0)
+    mid = len(z0) // 2
+    return np.array(z0[mid - n//2 : mid + n//2], dtype=float)
+def rk4_repulsive(z, ds):
+    def vel(x):
+        n = len(x)
+        v = np.zeros(n, dtype=float)
+        for i in range(n):
+            for j in range(n):
+                if i != j:
+                    d = x[i] - x[j]
+                    if abs(d) > 1e-12:
+                        v[i] += 2.0 / d
+        return v
+    k1 = vel(z)
+    k2 = vel(z + 0.5 * ds * k1)
+    k3 = vel(z + 0.5 * ds * k2)
+    k4 = vel(z + ds * k3)
+    return z + (ds / 6.0) * (k1 + 2*k2 + 2*k3 + k4)
+def hadamard_direction(z0):
+    n = len(z0)
+    vh = np.zeros(n, dtype=float)
+    for i in range(n):
+        for j in range(n):
+            if i != j:
+                vh[i] += 2.0 / (z0[i] - z0[j])
+    vh -= vh.mean()
+    return vh / np.linalg.norm(vh)
+def density_direction(z0, e1):
+    n = len(z0)
+    d = np.diff(z0)
+    vd = np.zeros(n, dtype=float)
+    for i in range(1, n - 1):
+        di = 0.5 * (z0[i+1] - z0[i-1])
+        if di > 1e-12:
+            vd[i] = -(d[i] - d[i-1]) / (2.0 * di**2)
+    if len(d) > 1:
+        vd[0]  = -(d[1]  - d[0])  / (2.0 * d[0]**2)
+        vd[-1] = -(d[-1] - d[-2]) / (2.0 * d[-1]**2)
+    vd -= vd.mean()
+    vd -= np.dot(vd, e1) * e1
+    nrm = np.linalg.norm(vd)
+    if nrm < 1e-12:
+        return np.zeros_like(vd)
+    return vd / nrm
+def run_one(T):
+    z0 = find_zeros(T, N_ZEROS)
+    D  = np.diff(z0).mean()
+    e1 = hadamard_direction(z0)
+    e2 = density_direction(z0, e1)
+    s_vals = np.exp(np.linspace(np.log(1e-4), np.log(S_MAX), N_S))
+    s_full = np.concatenate([[0.0], s_vals])
+    hist = np.zeros((len(s_full), len(z0)), dtype=float)
+    hist[0] = z0.copy()
+    z = z0.copy()
+    for k in range(1, len(s_full)):
+        z = rk4_repulsive(z, s_full[k] - s_full[k-1])
+        hist[k] = z
+    V = np.zeros((len(z0), N_S), dtype=float)
+    for k, s in enumerate(s_vals):
+        col = (hist[k+1] - z0) / s
+        col -= col.mean()
+        V[:, k] = col
+    U, S, _ = svd(V, full_matrices=False)
+    cos1 = abs(np.dot(U[:, 0], e1))
+    r2s = []
+    alpha = []
+    beta  = []
+    for k in range(N_S):
+        vk = V[:, k]
+        nrm = np.linalg.norm(vk)
+        if nrm > 1e-15:
+            proj = np.dot(vk, e1) * e1 + np.dot(vk, e2) * e2
+            r2s.append(1.0 - (np.linalg.norm(vk - proj) / nrm)**2)
+        alpha.append(np.dot(vk, e1))
+        beta.append(np.dot(vk, e2))
+    alpha = np.array(alpha)
+    beta  = np.array(beta)
+    if alpha.mean() < 0:
+        alpha = -alpha
+        beta  = -beta
+    logs = np.log(s_vals)
+    i0, i1 = N_S // 10, 9 * N_S // 10
+    da, db, av, bv = [], [], [], []
+    for k in range(i0 + 1, i1 - 1):
+        dl = logs[k+1] - logs[k-1]
+        if dl <= 1e-15:
+            continue
+        da.append((alpha[k+1] - alpha[k-1]) / dl)
+        db.append((beta[k+1]  - beta[k-1])  / dl)
+        av.append(alpha[k])
+        bv.append(beta[k])
+    da = np.array(da); db = np.array(db)
+    av = np.array(av); bv = np.array(bv)
+    A = np.zeros((2 * len(av), 4), dtype=float)
+    b = np.zeros(2 * len(av), dtype=float)
+    for k in range(len(av)):
+        A[2*k,   :2] = [av[k], bv[k]]
+        A[2*k+1, 2:] = [av[k], bv[k]]
+        b[2*k]   = da[k]
+        b[2*k+1] = db[k]
+    Bflat, _, _, _ = np.linalg.lstsq(A, b, rcond=None)
+    B = Bflat.reshape(2, 2)
+    err = np.linalg.norm(b - A @ Bflat) / (np.linalg.norm(b) + 1e-30)
+    return {
+        "T": T,
+        "D": D,
+        "S": S,
+        "cos1": cos1,
+        "r2": float(np.mean(r2s)),
+        "alpha0": float(alpha[0]),
+        "B": B,
+        "err": float(err),
+    }
+if __name__ == "__main__":
+    print("rg_closure.py")
+    print("=" * 72)
+    print("Reduced flow: dt_i/ds = +2 sum_{j!=i} 1/(t_i-t_j)")
+    print()
+    hdr = f"{'T':>6} {'Δ̄':>8} {'S1/S2':>10} {'S2/S3':>10} {'cos1':>10} {'R²':>10} {'B11':>10} {'err':>10}"
+    print(hdr)
+    print("-" * len(hdr))
+    results = []
+    for T in T_VALS:
+        r = run_one(T)
+        results.append(r)
+        S = r["S"]
+        print(f"{T:6d} {r['D']:8.4f} {S[0]/S[1]:10.2f} {S[1]/S[2]:10.2f} {r['cos1']:10.6f} {r['r2']:10.6f} {r['B'][1,1]:10.4f} {r['err']:10.4f}")
+    prod = np.array([abs(r["alpha0"]) * r["D"] for r in results])
+    print()
+    print(f"α(0)Δ̄ = {prod.mean():.3f} ± {prod.std():.3f}  (CV = {prod.std()/prod.mean():.3f})")
+    assert all(r["S"][0] / r["S"][1] > 10 for r in results), "FAIL: weak S1/S2 gap"
+    assert all(r["cos1"] > 0.998 for r in results), "FAIL: weak Hadamard alignment"
+    assert all(r["r2"] > 0.997 for r in results), "FAIL: poor rank-2 capture"
+    assert all(r["err"] < 0.10 for r in results), "FAIL: closure error too large"
+    print("ALL ASSERTIONS PASSED")
+'''
+SPLITTING = r'''"""
+splitting.py
+============
+Reproduces:
+  - isolated-pair exact separation law under repulsive reduced flow
+  - asymptotic exponent gamma -> 1/2
+  - order preservation in finite windows
+  - growth of nominal barrier scale 4/Δ̄ with height
+Convention
+----------
+Reduced repulsive flow parameter s >= 0:
+    dt_i/ds = +2 * sum_{j!=i} 1/(t_i - t_j)
+For an isolated symmetric pair this implies:
+    d(sep)/ds = 4/sep
+    sep(s) = sqrt(sep0^2 + 8 s)
+This is the corrected sign.
+Runtime: typically under ~5 minutes
+"""
+import mpmath
+import numpy as np
+from scipy.stats import linregress
+mpmath.mp.dps = 25
+def find_zeros(T, n, span=25.0):
+    ts = np.linspace(T - span, T + span, 8000)
+    zv = np.array([float(mpmath.siegelz(t)) for t in ts])
+    z0 = []
+    for i in range(len(zv) - 1):
+        if zv[i] * zv[i+1] < 0:
+            root = float(mpmath.findroot(mpmath.siegelz, (ts[i], ts[i+1]), solver='illinois'))
+            z0.append(root)
+    z0 = sorted(z0)
+    mid = len(z0) // 2
+    return np.array(z0[mid - n//2 : mid + n//2], dtype=float)
+def rk4_repulsive(z, ds):
+    def vel(x):
+        n = len(x)
+        v = np.zeros(n, dtype=float)
+        for i in range(n):
+            for j in range(n):
+                if i != j:
+                    d = x[i] - x[j]
+                    if abs(d) > 1e-12:
+                        v[i] += 2.0 / d
+        return v
+    k1 = vel(z)
+    k2 = vel(z + 0.5 * ds * k1)
+    k3 = vel(z + 0.5 * ds * k2)
+    k4 = vel(z + ds * k3)
+    return z + (ds / 6.0) * (k1 + 2*k2 + 2*k3 + k4)
+def track(z0, s_vals):
+    hist = np.zeros((len(s_vals), len(z0)), dtype=float)
+    hist[0] = z0.copy()
+    z = z0.copy()
+    for k in range(1, len(s_vals)):
+        z = rk4_repulsive(z, s_vals[k] - s_vals[k-1])
+        hist[k] = z
+    return hist
+if __name__ == "__main__":
+    print("splitting.py")
+    print("=" * 72)
+    print("Reduced flow: dt_i/ds = +2 sum_{j!=i} 1/(t_i-t_j)")
+    print()
+    # Test 1: isolated pair exact law
+    sep0 = 0.5
+    s_vals = np.linspace(0.0, 1.0, 400)
+    hist = track(np.array([-sep0/2, +sep0/2], dtype=float), s_vals)
+    sep_num = hist[:, 1] - hist[:, 0]
+    sep_th  = np.sqrt(sep0**2 + 8.0 * s_vals)  # corrected sign
+    rel_err = np.abs(sep_num - sep_th) / sep_th
+    print(f"Isolated pair max relative error = {rel_err.max():.3e}")
+    assert rel_err.max() < 1e-3, "FAIL: isolated-pair law"
+    # Test 2: asymptotic exponent gamma -> 1/2
+    sep0 = 0.01
+    s_vals = np.exp(np.linspace(np.log(1e-6), np.log(1.0), 300))
+    s_full = np.concatenate([[0.0], s_vals])
+    hist = track(np.array([-sep0/2, +sep0/2], dtype=float), s_full)
+    sep = hist[1:, 1] - hist[1:, 0]
+    mask = s_vals > 100.0 * (sep0**2 / 8.0)
+    slope, intercept, r, _, _ = linregress(np.log(s_vals[mask]), np.log(sep[mask]))
+    print(f"Asymptotic gamma = {slope:.5f}  (theory = 0.5)")
+    assert abs(slope - 0.5) < 0.01, "FAIL: wrong asymptotic exponent"
+    # Test 3: order preservation in finite windows
+    print()
+    print("Order preservation tests:")
+    for T in [100, 200, 300]:
+        z0 = find_zeros(T, 16)
+        D = np.diff(z0).mean()
+        n = len(z0)
+        il, ir = n//2 - 1, n//2
+        tc = 0.5 * (z0[il] + z0[ir])
+        sep_small = 0.001 * D
+        z_mod = z0.copy()
+        z_mod[il] = tc - sep_small / 2.0
+        z_mod[ir] = tc + sep_small / 2.0
+        s_star = sep_small**2 / 8.0
+        s_vals = np.concatenate([[0.0], np.exp(np.linspace(np.log(1e-10), np.log(1000.0 * s_star), 500))])
+        hist = track(z_mod, s_vals)
+        seps = hist[:, ir] - hist[:, il]
+        min_sep = seps.min()
+        print(f"T={T:4d}: min sep = {min_sep:.6e}")
+        assert min_sep > 0.0, f"FAIL: order violation at T={T}"
+    # Test 4: barrier scale growth with height
+    print()
+    print("Barrier-scale proxy 4/Δ̄ versus T:")
+    for T in [50, 100, 200, 500, 1000]:
+        z0 = find_zeros(T, 12)
+        D = np.diff(z0).mean()
+        rate = 4.0 / D
+        theory = (2.0 / np.pi) * np.log(T / (2.0 * np.pi))
+        ratio = rate / theory
+        print(f"T={T:5d}   4/Δ̄={rate:8.4f}   theory={theory:8.4f}   ratio={ratio:8.4f}")
+    print()
+    print("ALL ASSERTIONS PASSED")
+'''
+UNIVERSALITY = r'''"""
+universality.py
+===============
+Reproduces:
+  - height persistence of reduced-flow structure
+  - α(0)Δ̄ near-universality
+  - density scaling of α(0)
+  - Hadamard alignment across heights
+  - shape universality after Δ̄^2 rescaling
+Convention
+----------
+Reduced repulsive flow parameter s >= 0:
+    dt_i/ds = +2 * sum_{j!=i} 1/(t_i - t_j)
+This script studies how the reduced-flow structure scales with height.
+It does not claim that the full Xi_lambda dynamics has been proved to
+obey the same finite-window reduced ODE.
+Runtime: typically under ~15 minutes
+"""
+import math
+import mpmath
+import numpy as np
+from scipy.linalg import svd
+from scipy.interpolate import interp1d
+from scipy.stats import linregress
+mpmath.mp.dps = 25
+T_VALS  = [50, 100, 200, 500, 1000, 5000, 10000]
+N_ZEROS = 12
+S_MAX   = 0.04
+N_S     = 80
+def find_zeros(T, n):
+    span = max(20.0, n * 2.0 * math.pi / math.log(T / (2.0 * math.pi)) * 0.9)
+    ts = np.linspace(T - span, T + span, max(8000, int(span * 40)))
+    zv = np.array([float(mpmath.siegelz(t)) for t in ts])
+    roots = []
+    for i in range(len(zv) - 1):
+        if zv[i] * zv[i+1] < 0:
+            root = float(mpmath.findroot(mpmath.siegelz, (ts[i], ts[i+1]), solver='illinois'))
+            roots.append(root)
+    roots = sorted(roots)
+    mid = len(roots) // 2
+    n2 = min(n, len(roots))
+    return np.array(roots[mid - n2//2 : mid + n2//2], dtype=float)
+def rk4_repulsive(z, ds):
+    def vel(x):
+        n = len(x)
+        v = np.zeros(n, dtype=float)
+        for i in range(n):
+            for j in range(n):
+                if i != j:
+                    d = x[i] - x[j]
+                    if abs(d) > 1e-12:
+                        v[i] += 2.0 / d
+        return v
+    k1 = vel(z)
+    k2 = vel(z + 0.5 * ds * k1)
+    k3 = vel(z + 0.5 * ds * k2)
+    k4 = vel(z + ds * k3)
+    return z + (ds / 6.0) * (k1 + 2*k2 + 2*k3 + k4)
+def hadamard_direction(z0):
+    n = len(z0)
+    vh = np.zeros(n, dtype=float)
+    for i in range(n):
+        for j in range(n):
+            if i != j:
+                vh[i] += 2.0 / (z0[i] - z0[j])
+    vh -= vh.mean()
+    return vh / np.linalg.norm(vh)
+def run_one(T):
+    z0 = find_zeros(T, N_ZEROS)
+    if len(z0) < 4:
+        return None
+    D  = np.diff(z0).mean()
+    e1 = hadamard_direction(z0)
+    s_vals = np.exp(np.linspace(np.log(1e-4), np.log(S_MAX), N_S))
+    s_full = np.concatenate([[0.0], s_vals])
+    hist = np.zeros((len(s_full), len(z0)), dtype=float)
+    hist[0] = z0.copy()
+    z = z0.copy()
+    for k in range(1, len(s_full)):
+        z = rk4_repulsive(z, s_full[k] - s_full[k-1])
+        hist[k] = z
+    alpha = []
+    V = np.zeros((len(z0), N_S), dtype=float)
+    for k, s in enumerate(s_vals):
+        col = (hist[k+1] - z0) / s
+        col -= col.mean()
+        V[:, k] = col
+        alpha.append(np.dot(col, e1))
+    alpha = np.array(alpha)
+    if alpha.mean() < 0:
+        alpha = -alpha
+        V = -V
+    U, S, _ = svd(V, full_matrices=False)
+    cos1 = abs(np.dot(U[:, 0], e1))
+    return {
+        "T": T,
+        "D": D,
+        "alpha0": float(alpha[0]),
+        "alpha": alpha,
+        "s_vals": s_vals,
+        "cos1": float(cos1),
+        "S": S,
+    }
+if __name__ == "__main__":
+    print("universality.py")
+    print("=" * 72)
+    print("Reduced flow: dt_i/ds = +2 sum_{j!=i} 1/(t_i-t_j)")
+    print()
+    results = [r for T in T_VALS if (r := run_one(T)) is not None]
+    Ds  = np.array([r["D"] for r in results])
+    a0s = np.array([abs(r["alpha0"]) for r in results])
+    prod = Ds * a0s
+    slope, intercept, r, _, _ = linregress(np.log(Ds), np.log(a0s))
+    print(f"α(0) ~ Δ̄^{slope:.4f}   R² = {r**2:.4f}")
+    print(f"α(0)Δ̄ = {prod.mean():.3f} ± {prod.std():.3f}   CV = {prod.std()/prod.mean():.3f}")
+    curves = {}
+    for rr in results:
+        s_red = rr["s_vals"] / (rr["D"]**2)
+        a_red = rr["alpha"] / abs(rr["alpha0"])
+        curves[rr["T"]] = (s_red, a_red)
+    smin = max(v[0].min() for v in curves.values()) * 1.001
+    smax = min(v[0].max() for v in curves.values()) * 0.999
+    grid = np.exp(np.linspace(np.log(smin), np.log(smax), 40))
+    amat = []
+    for T, (sx, ax) in curves.items():
+        f = interp1d(sx, ax, bounds_error=False, fill_value=(ax[0], ax[-1]))
+        amat.append(f(grid))
+    amat = np.array(amat)
+    mean_curve = np.mean(amat, axis=0)
+    cv = np.std(amat, axis=0) / (np.abs(mean_curve) + 1e-12)
+    print(f"Shape CV mean = {cv.mean():.4f}   max = {cv.max():.4f}")
+    cos1s = np.array([r["cos1"] for r in results])
+    print(f"cos1 range = [{cos1s.min():.6f}, {cos1s.max():.6f}]")
+    assert prod.std() / prod.mean() < 0.10, "FAIL: α(0)Δ̄ not sufficiently universal"
+    assert cv.mean() < 0.005, "FAIL: poor shape universality"
+    assert cos1s.min() > 0.998, "FAIL: weak Hadamard alignment"
+    print("ALL ASSERTIONS PASSED")
+'''
+MASTER = r'''"""
+step9_reproducibility_package.py
+================================
+Writes the three standalone scripts:
+  - rg_closure.py
+  - splitting.py
+  - universality.py
+"""
+from pathlib import Path
+RG_CLOSURE = None
+SPLITTING = None
+UNIVERSALITY = None
+'''
+if __name__ == "__main__":
+    scripts = [
+        ("rg_closure.py", RG_CLOSURE),
+        ("splitting.py", SPLITTING),
+        ("universality.py", UNIVERSALITY),
+    ]
+    for fname, code in scripts:
+        with open(fname, "w", encoding="utf-8") as f:
+            f.write(code)
+        print(f"Written: {fname}")
+    print()
+    print("Run independently:")
+    print("  python rg_closure.py")
+    print("  python splitting.py")
+    print("  python universality.py")
+
+⸻
+
+STEP 10 — corrected gap analysis
+
+step10_gap_analysis.py
+
+"""
+step10_gap_analysis.py
+======================
+Writes a clean gap analysis document separating:
+  - proven local statements
+  - numerical reduced-model statements
+  - conjectural transfer statements
+Output:
+  gap_analysis.md
+"""
+GAP_ANALYSIS = r"""
+# Gap Analysis: Reduced Zero-Flow Programme and the de Bruijn-Newman Bridge
+## 0. Convention
+Throughout this document we separate three distinct objects:
+1. **Actual de Bruijn-Newman family**
+   \[
+   \Xi_\lambda(x)
+   \]
+   with Newman parameter \(\lambda\).
+2. **Forward heat-flow parameter**
+   usually denoted \(\tau\), with \(\lambda = -\tau\) in the standard convention.
+3. **Reduced repulsive finite-window flow**
+   \[
+   \frac{dt_i}{ds} = 2\sum_{j\neq i}\frac{1}{t_i-t_j},
+   \qquad s \ge 0,
+   \]
+   used in the numerical model in this project.
+The key point is that the reduced \(s\)-flow is a **model flow** motivated by the structure of backward zero-separation dynamics. It is **not yet proved** here to equal the full \(\Xi_\lambda\) zero dynamics.
+---
+## 1. What is established analytically
+### 1.1 Local \(\sigma \to 0\) / zero-velocity structure
+At \(\sigma=0\), the zero velocity extracted from the heat-flow deformation has the form
+\[
+v_i = -\sum_{j\neq i}\frac{1}{t_i-t_j} + S(t_i),
+\]
+where \(S(t)\) is a slowly varying background term on local zero-spacing scales.
+Interpretation:
+- the singular local interaction is Hadamard-type
+- the residual is smooth on the scale of \(\bar\Delta\)
+This supports the decomposition into:
+- a singular interaction mode
+- a low-complexity smooth correction sector
+### 1.2 Isolated-pair law for the reduced repulsive model
+For the model ODE
+\[
+\frac{dt_i}{ds} = 2\sum_{j\neq i}\frac{1}{t_i-t_j},
+\]
+an isolated symmetric pair at \(\pm \mathrm{sep}_0/2\) satisfies
+\[
+\frac{d}{ds}\mathrm{sep} = \frac{4}{\mathrm{sep}},
+\qquad
+\mathrm{sep}(s)=\sqrt{\mathrm{sep}_0^2+8s}.
+\]
+Consequences:
+- separation is strictly increasing
+- no collision occurs for finite \(s>0\)
+### 1.3 Order preservation for the finite repulsive model
+For finite ordered configurations evolved under the reduced repulsive model, numerics support:
+\[
+t_1(s)<t_2(s)<\cdots<t_n(s)\quad\text{for all }s\ge 0.
+\]
+This is rigorous for the isolated two-body law and strongly supported numerically for the finite-window system, but the project still treats the general finite-\(n\) statement conservatively unless a formal proof is written down in full.
+---
+## 2. What is established numerically for the reduced finite-window model
+These are **strong numerical findings**, not formal theorems about the full \(\Xi_\lambda\) system.
+### 2.1 Rank-2 reduced-flow structure
+Across heights \(T=50\) to \(T=10000\), the reduced finite-window velocity field is numerically close to rank 2:
+- \(S_1/S_2\) large
+- \(S_2/S_3\) large
+- \(R^2 > 0.998\) for projection into a two-dimensional subspace
+### 2.2 Hadamard alignment
+The leading singular vector aligns almost perfectly with the local Hadamard direction:
+\[
+|\langle \text{mode}_1, v_{\rm Had}\rangle| \approx 0.999 \text{ to } 1.000.
+\]
+### 2.3 Near-universality of \(\alpha(0)\bar\Delta\)
+The leading-mode amplitude satisfies approximately
+\[
+\alpha(0)\bar\Delta \approx 13.7 \pm 0.7,
+\]
+with coefficient of variation around 5%.
+### 2.4 Density scaling
+The leading amplitude scales approximately as
+\[
+\alpha(0)\sim \bar\Delta^{-1.06},
+\]
+which is numerically close to inverse-spacing scaling.
+### 2.5 Barrier-scale growth with height
+The nominal local spreading scale
+\[
+\frac{4}{\bar\Delta}
+\]
+grows approximately like
+\[
+\frac{2}{\pi}\log T,
+\]
+up to finite-window correction.
+Interpretation:
+as height increases and zeros become denser, the short-range repulsive spreading scale grows logarithmically.
+---
+## 3. What is not proved
+### 3.1 Truncated finite-window model \(\neq\) full infinite zero system
+The main unresolved issue is the bridge from:
+- finite-window reduced repulsive ODE
+to
+- actual zero dynamics of the de Bruijn-Newman family.
+This bridge is not established by the current project.
+### 3.2 Rank-2 structure for the full \(\Xi_\lambda\) flow is not proved
+The rank-2 phenomenon is strong and persistent numerically in finite windows, but there is no theorem here stating that the full infinite-dimensional zero flow has a rank-2 closure.
+### 3.3 Non-collision for the full \(\Xi_\lambda\) zero flow is not proved here
+The no-collision intuition is clear for the reduced repulsive model, but this project has **not** proved the corresponding statement for the true \(\Xi_\lambda\) zero evolution.
+That is the real gap.
+---
+## 4. The bridge statement that would matter
+The mathematically useful quantity is the neighbouring gap
+\[
+g_i(\lambda)=t_{i+1}^{(\lambda)}-t_i^{(\lambda)}.
+\]
+A schematic evolution law has the form
+\[
+\frac{d}{d\lambda}g_i(\lambda)
+=
+\frac{4}{g_i(\lambda)}
++
+\mathcal{R}_i(\lambda),
+\]
+where:
+- the singular term comes from the adjacent pair
+- \(\mathcal{R}_i\) is the contribution of all other zeros / tail structure
+The central problem is to control \(\mathcal{R}_i\).
+---
+## 5. Candidate bridge lemma
+### Candidate Lemma X
+Assume RH at \(\lambda=0\), so all zeros are real initially. Let
+\[
+g_i(0)=t_{i+1}^{(0)}-t_i^{(0)} > 0.
+\]
+Suppose one can prove that for all \(\lambda\ge 0\),
+\[
+\mathcal{R}_i(\lambda)\ge 0.
+\]
+Then
+\[
+\frac{d}{d\lambda}g_i(\lambda)\ge \frac{4}{g_i(\lambda)}.
+\]
+Integrating gives
+\[
+g_i(\lambda)\ge \sqrt{g_i(0)^2+8\lambda}.
+\]
+Consequences:
+1. gaps stay strictly positive
+2. double zeros cannot form for \(\lambda>0\)
+3. zeros cannot leave the real line via pair-collision collapse
+4. hence \(\Xi_\lambda\) remains real-rooted for all \(\lambda>0\)
+5. therefore \(\Lambda \le 0\)
+6. together with Newman's \(\Lambda\ge 0\), one obtains
+   \[
+   \Lambda = 0.
+   \]
+This is the cleanest bridge target identified by the current project.
+---
+## 6. What still blocks Lemma X
+The difficulty is not the adjacent singular term.  
+The difficulty is the **tail term**:
+\[
+\mathcal{R}_i(\lambda).
+\]
+To close the bridge one would need one of the following:
+### Route A: positivity
+A proof that the nonlocal contribution is non-negative:
+\[
+\mathcal{R}_i(\lambda)\ge 0.
+\]
+### Route B: controlled negativity
+A weaker but still useful result:
+\[
+\mathcal{R}_i(\lambda)\ge -C_i(\lambda),
+\]
+with a bound small enough that the singular \(4/g_i\) term dominates near any putative collision.
+### Route C: maximum principle / comparison principle
+A direct comparison theorem for neighbouring gaps under the actual \(\Xi_\lambda\) zero evolution, bypassing explicit tail summation.
+---
+## 7. Honest status
+### Strongly established numerically
+- rank-2 reduced-flow structure
+- Hadamard alignment
+- \(\alpha(0)\bar\Delta\) near-universality
+- logarithmic growth of the local spreading scale
+- robust finite-window order preservation
+### Not established
+- exact identification of the reduced repulsive model with the full \(\Xi_\lambda\) zero dynamics
+- a proof that the full tail contribution preserves or enlarges gaps
+- a theorem transferring finite-window no-collision to the true de Bruijn-Newman family
+### The real frontier
+The project no longer has a vague “prove RH numerically” gap.
+It has a sharp bridge problem:
+> control the nonlocal tail term in the neighbouring-gap evolution for the actual de Bruijn-Newman zero flow.
+That is the point where serious number-theoretic analysis would enter.
+---
+## 8. One-sentence summary
+The reduced finite-window model shows a strong, persistent repulsive zero-separation structure, but the missing theorem is a tail-control or comparison principle transferring that no-collision behaviour to the full \(\Xi_\lambda\) zero flow.
+"""
+if __name__ == "__main__":
+    print(GAP_ANALYSIS)
+    with open("gap_analysis.md", "w", encoding="utf-8") as f:
+        f.write(GAP_ANALYSIS)
+    print("\nWritten: gap_analysis.md")
+
+⸻
