@@ -1,0 +1,474 @@
+# Kernel and Jensen Diagnostics Checkpoint
+
+## Project Context
+
+This note consolidates the kernel-side diagnostics and finite Jensen polynomial tests performed during the current proof-development phase.
+
+The working kernel convention is
+
+\[
+\Phi(u)
+=
+\sum_{n\ge 1}
+\left(
+2\pi^2 n^4 e^{9u}
+-
+3\pi n^2 e^{5u}
+\right)
+e^{-\pi n^2 e^{4u}},
+\qquad
+\Phi(-u)=\Phi(u).
+\]
+
+For positive deformation parameter \(\lambda\), the tested deformed kernel is
+
+\[
+\Phi_\lambda(u)=e^{\lambda u^2}\Phi(u).
+\]
+
+The associated even moments are
+
+\[
+M_k(\lambda)
+=
+\int_{\mathbb R} u^{2k}\Phi_\lambda(u)\,du,
+\]
+
+and the Jensen coefficient sequence is
+
+\[
+A_k(\lambda)
+=
+\frac{M_k(\lambda)k!}{(2k)!}.
+\]
+
+Finite Jensen polynomials are tested in the form
+
+\[
+P_{d,n}(x)
+=
+\sum_{k=0}^{d}
+\binom{d}{k} A_{n+k} x^k.
+\]
+
+Equivalently,
+
+\[
+Q_{d,n}(y)=P_{d,n}(-y).
+\]
+
+The Jensen hyperbolicity test used here is:
+
+\[
+P_{d,n}(x)
+\text{ has } d \text{ real nonpositive roots}
+\iff
+Q_{d,n}(y)
+\text{ has } d \text{ positive real roots}.
+\]
+
+The final high-degree audits use Sturm root counting on \(Q_{d,n}(y)\), rather than floating-point polynomial root classification.
+
+---
+
+## 1. Basic Kernel Diagnostics
+
+Tested \(\lambda\) values:
+
+\[
+0,\ 10^{-6},\ 10^{-5},\ 10^{-4},\ 10^{-3},\ 10^{-2},\ 5\times10^{-2},\ 10^{-1}.
+\]
+
+### Findings
+
+1. \(\Phi_\lambda(u)\) remained positive on the sampled grid.
+
+2. Ordinary log-concavity did not hold in the sampled diagnostic:
+   sampled \(Q_2\) values were negative throughout the tested grid.
+
+3. Low-order even moments \(M_k\) were positive.
+
+4. Moment Hankel determinants through \(r=5\) were positive for all tested \(\lambda\).
+
+### Status
+
+Basic positivity and moment-Hankel diagnostics support the kernel route.
+
+Ordinary log-concavity is not supported by the sampled \(Q_2\) diagnostic and should not be treated as the main proof route.
+
+---
+
+## 2. Initial Jensen Diagnostics
+
+The first finite Jensen scan used
+
+\[
+A_k=\frac{M_k k!}{(2k)!}.
+\]
+
+The low-degree scan tested:
+
+- degrees \(2,3,4,5,6,8,10\);
+- \(n=0,\ldots,20\);
+- \(\lambda\in\{0,10^{-6},10^{-5},10^{-4},10^{-3},10^{-2},5\times10^{-2},10^{-1}\}\).
+
+After switching to scaled polynomial coefficients, no mathematical Jensen failures were detected in this range.
+
+### Status
+
+Low-degree finite Jensen evidence passed for all tested \(\lambda\) values.
+
+---
+
+## 3. Total-Positivity and Minor Diagnostics
+
+Three sampled minor families were tested:
+
+1. Translation minors:
+
+\[
+\det[\Phi_\lambda(x_i-y_j)].
+\]
+
+2. Moment Hankel minors.
+
+3. Toeplitz minors from the coefficient sequence \(A_k\).
+
+### Findings
+
+#### Translation minors
+
+No robust negative sampled translation minors were found.
+
+Several near-zero determinants occurred, associated with grid degeneracy.
+
+#### Moment Hankel minors
+
+No negative moment Hankel minors were found in the tested range.
+
+#### Toeplitz minors
+
+Robust negative order-3 Toeplitz minors were found from the \(A_k\) sequence.
+
+A representative pattern was:
+
+\[
+\text{rows}=(0,1,2),\qquad
+\text{cols}=(1,2,3),
+\]
+
+with determinant approximately
+
+\[
+-1.7\times 10^{-11}.
+\]
+
+This pattern persisted across the tested \(\lambda\) values.
+
+### Status
+
+The simple coefficient PF\(_\infty\) Toeplitz route is damaged by robust negative minors.
+
+The moment-Hankel route remains clean in the tested range.
+
+The Jensen route remains active, but should not be justified using naive PF\(_\infty\) Toeplitz positivity.
+
+---
+
+## 4. Extended Jensen Scan and Failure Isolation
+
+An extended Jensen scan was attempted for:
+
+- \(\lambda=0\);
+- degrees \(2,\ldots,20\);
+- \(n=0,\ldots,80\);
+- moments up to \(M_{100}\).
+
+The initial floating root scan reported:
+
+- total tests: \(1539\);
+- reported failures: \(256\);
+- first reported failures at degree \(16\).
+
+Failure count by degree:
+
+| Degree | Reported failures |
+|---:|---:|
+| 2–15 | 0 |
+| 16 | 17 |
+| 17 | 37 |
+| 18 | 54 |
+| 19 | 67 |
+| 20 | 81 |
+
+The first reported failure was:
+
+\[
+\lambda=0,\qquad d=16,\qquad n=54.
+\]
+
+A direct verification was then performed using the printed high-precision coefficients for this case and Sturm/root counting on
+
+\[
+Q(y)=P(-y).
+\]
+
+Result:
+
+- degree: \(16\);
+- positive real roots of \(Q\): \(16\);
+- all real roots of \(Q\): \(16\);
+- pass: true.
+
+The roots of \(Q(y)\) were all positive real, approximately:
+
+\[
+279.37,\ 321.40,\ 359.05,\ 395.01,\ 430.29,\ 465.47,\ 500.94,\ 537.00,
+\]
+
+\[
+573.96,\ 612.13,\ 651.88,\ 693.73,\ 738.39,\ 787.01,\ 841.83,\ 908.58.
+\]
+
+### Status
+
+The first reported floating-root failure was a numerical conditioning artifact.
+
+---
+
+## 5. Sturm Audit at \(\lambda=0\)
+
+A full Sturm audit was then run over the previous high-degree failure region.
+
+Parameters:
+
+- \(\lambda=0\);
+- degrees \(16,\ldots,20\);
+- \(n=0,\ldots,80\).
+
+Total cases:
+
+\[
+5\times 81=405.
+\]
+
+Result:
+
+\[
+405/405 \text{ passed}.
+\]
+
+Failures:
+
+\[
+0.
+\]
+
+Each \(Q_{d,n}(y)=P_{d,n}(-y)\) had exactly \(d\) positive real roots.
+
+### Status
+
+All previously reported high-degree floating-root failures for \(\lambda=0\), degrees \(16,\ldots,20\), \(n=0,\ldots,80\), were eliminated by Sturm counting.
+
+---
+
+## 6. Sturm Audit for Positive \(\lambda\)
+
+A positive-\(\lambda\) Sturm audit was performed for:
+
+\[
+\lambda=10^{-4},\quad 10^{-2},\quad 10^{-1}.
+\]
+
+Parameters:
+
+- degrees \(16,\ldots,20\);
+- \(n=0,\ldots,80\).
+
+Cases per \(\lambda\):
+
+\[
+405.
+\]
+
+Total cases:
+
+\[
+1215.
+\]
+
+Result:
+
+\[
+1215/1215 \text{ passed}.
+\]
+
+Failures:
+
+\[
+0.
+\]
+
+### Status
+
+Finite Jensen hyperbolicity survived positive deformation at the tested \(\lambda\) values up to \(\lambda=0.1\) for degrees \(16,\ldots,20\), \(n=0,\ldots,80\).
+
+---
+
+## 7. Higher-Degree Sturm Extension
+
+A higher-degree Sturm extension was performed for:
+
+\[
+\lambda=0,\quad 0.1.
+\]
+
+Parameters:
+
+- degrees \(21,\ldots,30\);
+- \(n=0,\ldots,40\).
+
+Cases per \(\lambda\):
+
+\[
+10\times 41=410.
+\]
+
+Total cases:
+
+\[
+820.
+\]
+
+Result:
+
+\[
+820/820 \text{ passed}.
+\]
+
+Failures:
+
+\[
+0.
+\]
+
+### Status
+
+Finite Jensen hyperbolicity remained clean through degree \(30\) in the tested \(n\)-range, both at \(\lambda=0\) and at \(\lambda=0.1\).
+
+---
+
+## 8. Current Verified Jensen Record
+
+### \(\lambda=0\)
+
+Verified clean ranges:
+
+- degrees \(2,\ldots,20\), \(n=0,\ldots,80\);
+- degrees \(21,\ldots,30\), \(n=0,\ldots,40\).
+
+### \(\lambda=10^{-4},10^{-2},10^{-1}\)
+
+Verified clean range:
+
+- degrees \(16,\ldots,20\), \(n=0,\ldots,80\).
+
+### \(\lambda=0.1\)
+
+Additional verified clean range:
+
+- degrees \(21,\ldots,30\), \(n=0,\ldots,40\).
+
+No Sturm-verified finite Jensen failures have been found in the audited ranges.
+
+---
+
+## 9. Methodological Update
+
+The extended Jensen work shows that high-degree polynomial root classification by floating solvers can produce false nonreal roots due to conditioning.
+
+Future Jensen diagnostics should use:
+
+1. high-precision moment computation;
+2. construction of \(Q_{d,n}(y)=P_{d,n}(-y)\);
+3. Sturm root counting for positive real roots;
+4. floating root solvers only as secondary diagnostics.
+
+The primary finite Jensen pass criterion should be:
+
+\[
+\#\{\text{positive real roots of }Q_{d,n}\}=d.
+\]
+
+---
+
+## 10. Route Status
+
+The kernel route currently separates into three branches.
+
+### Dead or weak branch
+
+Ordinary log-concavity.
+
+The sampled \(Q_2\) diagnostic does not support naive log-concavity.
+
+### Damaged branch
+
+Simple PF\(_\infty\) Toeplitz coefficient route.
+
+Robust sampled Toeplitz minors are negative.
+
+### Active branch
+
+Finite Jensen hyperbolicity via Sturm verification.
+
+This is currently the strongest kernel-side route.
+
+---
+
+## 11. Suggested Next Test
+
+The next controlled experiment should be a \(\lambda\)-grid Sturm scan.
+
+Suggested parameters:
+
+\[
+\lambda =
+0,\ 10^{-6},\ 10^{-5},\ 10^{-4},\ 10^{-3},\ 10^{-2},\ 5\times10^{-2},\ 10^{-1}.
+\]
+
+Degree range:
+
+\[
+21,\ldots,30.
+\]
+
+Index range:
+
+\[
+n=0,\ldots,20.
+\]
+
+Purpose:
+
+- test continuity across \(\lambda\);
+- avoid pushing degree before verifying deformation stability over the full tested \(\lambda\)-grid;
+- keep the run smaller than the previous full high-degree scans.
+
+---
+
+## Checkpoint Summary
+
+Finite Jensen hyperbolicity is currently verified by Sturm root counting across all audited ranges.
+
+The earlier high-degree floating-root failures were numerical artifacts.
+
+The current strongest kernel-side evidence is:
+
+\[
+Q_{d,n}(y)=P_{d,n}(-y)
+\]
+
+has exactly \(d\) positive real roots in every Sturm-audited case.
+
+No Sturm-confirmed Jensen counterexample has been found so far.
