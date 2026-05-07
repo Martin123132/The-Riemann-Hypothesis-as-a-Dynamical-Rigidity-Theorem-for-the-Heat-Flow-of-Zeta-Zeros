@@ -1,5 +1,7 @@
  Riemann Zeta Zero Dynamics under Heat Flow  
  A Dynamical Rigidity Perspective on the Riemann Hypothesis
+ 
+<img width="1491" height="1055" alt="b99bfc3a-d49b-4bfe-9f4f-8510e70b0e9f" src="https://github.com/user-attachments/assets/655f1bd0-4f8e-4fee-a5a4-4b4b38ad6ebb" />
 
 This repository contains research notes, draft manuscripts, and a large
 collection of standalone Python experiments investigating the dynamics of
@@ -16,6 +18,7 @@ heat flow, and the implications of this structure for the Riemann Hypothesis.
 > that appears to obstruct complex zero formation under forward heat flow.
 
 ---
+<img width="1491" height="1055" alt="3c249e74-34f9-4b4a-8543-860bf3646736" src="https://github.com/user-attachments/assets/4c4e1fa5-559b-4fab-834d-56418e1ab275" />
 
 ## 1. Core Idea 
 
@@ -38,6 +41,7 @@ This reframes the Riemann Hypothesis as a statement of **dynamical rigidity
 and stability**, rather than a static property of zero locations.
 
 ---
+<img width="1491" height="1055" alt="0eb6d3b4-d912-4b5f-9546-65b16113c6ac" src="https://github.com/user-attachments/assets/51b492c3-166d-491e-801e-14cd2025894b" />
 
 ## 2. Manuscripts / Formal Write-Ups
 
@@ -56,6 +60,7 @@ and stability**, rather than a static property of zero locations.
   - Operator dependence, σ-additivity, kernel dominance, and open questions.
 
 ---
+<img width="1491" height="1055" alt="83fed14b-2cd7-4e1d-957b-d7766d423e67" src="https://github.com/user-attachments/assets/baef2773-a219-4006-94f1-7b749cf39ae3" />
 
 ## 3. Formal Analytic Backbone (What Is Exact)
 
