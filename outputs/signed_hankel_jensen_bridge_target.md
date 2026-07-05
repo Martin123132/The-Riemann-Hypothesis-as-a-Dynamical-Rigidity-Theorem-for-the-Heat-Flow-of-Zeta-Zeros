@@ -59,7 +59,7 @@ The all-order sign-consistency hypothesis would be:
 for every `k >= 1`, `n >= 0`, and every strictly increasing column set, with
 the correct weak/zero clauses if structural degeneracies are proved.
 
-The present Arb certificate verifies only a finite unshifted frontier:
+The first Arb certificate verifies only a finite unshifted frontier:
 
 ```text
 lambda in {0, 1e-6, 1e-4, 1e-2, 1e-1}
@@ -68,6 +68,20 @@ k = 2..7
 N = 20 columns
 689,795/689,795 finite minors positive
 ```
+
+The shifted Arb certificate extends the finite evidence to a bounded shift
+range:
+
+```text
+lambda in {0, 1e-6, 1e-4, 1e-2, 1e-1}
+n = 0..12
+k = 2..5
+N = 18 columns
+818,805/818,805 finite minors positive
+```
+
+Both certificates remain finite. They are evidence for the theorem target, not
+the all-shift/all-order theorem itself.
 
 ## Candidate Theorem B-Star
 

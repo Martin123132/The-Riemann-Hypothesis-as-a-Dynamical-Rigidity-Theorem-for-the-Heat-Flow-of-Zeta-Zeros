@@ -285,6 +285,7 @@ python work/rh_compute/scripts/check_toeplitz_certificate_manifest.py
 python work/rh_compute/scripts/check_toeplitz_jacobi_trudi_map.py
 python work/rh_compute/scripts/check_hankel_sign_consistency_reduction_audit.py
 python work/rh_compute/scripts/check_arb_hankel_sign_consistency_reduction_manifest.py
+python work/rh_compute/scripts/check_arb_shifted_hankel_sign_consistency_manifest.py
 python work/rh_compute/scripts/check_jensen_hankel_bridge_algebra.py
 python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
 python work/rh_compute/scripts/check_edrei_log_sign_manifest.py
@@ -305,6 +306,11 @@ validates `689,795/689,795` finite minors as positive and separated from zero.
 This is a finite certificate only; it does not prove the all-order
 sign-consistency bridge.
 
+The shifted reshaped-Hankel Arb manifest adds finite shift coverage:
+five-lambda grid, `n = 0..12`, `k = 2..5`, `N = 18`, validating
+`818,805/818,805` finite shifted minors. This is still a finite rectangle, not
+the all-shift theorem required by the bridge target.
+
 The Jensen/Hankel bridge algebra gate records the exact degree-2 identity
 between the `m = 1` signed-Hankel determinant and the degree-2 Jensen
 discriminant, and an exact positive rational degree-3 countermodel showing
@@ -324,7 +330,7 @@ outputs/core_proof_programme_gates.md
 Current core runner status:
 
 ```text
-validated 17/17 core proof-programme gates
+validated 18/18 core proof-programme gates
 ```
 
 Current manifest status:
