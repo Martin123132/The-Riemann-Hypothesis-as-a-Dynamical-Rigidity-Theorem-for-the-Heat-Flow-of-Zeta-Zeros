@@ -327,6 +327,19 @@ The degree-5 extension manifest validates another `105/105` positive-root
 counts with needed max coefficient index `25`. This is a stronger stress test
 of the same finite diagnostic, not a theorem upgrade.
 
+Countermodel guard:
+
+```text
+outputs/countermodel_library.md
+python work/rh_compute/scripts/countermodel_gate_examples.py
+```
+
+The finite Jensen-window rectangle extension gate preserves every coefficient
+input used by the current Jensen-window PF/Sturm diagnostics, `A_0..A_25`, and
+then chooses a positive `A_26` that breaks the next degree-2 Jensen
+discriminant at shift `24`. Thus finite Jensen-window grids cannot be promoted
+to all-shift Jensen hyperbolicity without a new theorem.
+
 Misfit:
 
 ```text

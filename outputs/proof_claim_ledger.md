@@ -139,10 +139,10 @@ target_jensen_window_pf_bridge:
   B^{d,n,0}_j=binom(d,j) A_{n+j}(0); open and not proved
 
 countermodel_gates:
-  validates 10 proof-safety examples, including local heat birth, finite
-  coefficient-prefix promotion, finite Schur-prefix promotion, finite
-  signed-Hankel grid promotion, finite moment-recurrence promotion, and
-  Stieltjes/Hankel-to-Toeplitz promotion traps
+  validates 11 proof-safety examples, including local heat birth, finite
+  coefficient-prefix promotion, finite Jensen-window rectangle promotion,
+  finite Schur-prefix promotion, finite signed-Hankel grid promotion, finite
+  moment-recurrence promotion, and Stieltjes/Hankel-to-Toeplitz promotion traps
 ```
 
 ## Boundary

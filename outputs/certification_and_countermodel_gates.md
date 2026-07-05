@@ -1,6 +1,6 @@
 # Certification And Countermodel Gates
 
-Date: 2026-07-03
+Date: 2026-07-05
 
 Status: proof-safety gate ledger. This is not a proof of RH or `Lambda <= 0`; it defines certification levels, manifest checks, and countermodel boundaries.
 
@@ -400,6 +400,9 @@ exact finite Schur/Toeplitz prefix trap:
   base h_k = 1/k!, generating function exp(z)
   h_0..h_6 and 2,940 finite Toeplitz/Schur tests preserved
   positive h_7 breaks the Jacobi-Trudi skew-Schur determinant s_(6,6)
+finite Jensen-window rectangle trap:
+  current Jensen-window PF/Sturm coefficient inputs A_0..A_25 preserved
+  positive A_26 breaks degree-2, shift-24 Jensen hyperbolicity
 positive one-term extensions of the current coefficient prefixes that break:
   order-2 Toeplitz/PF
   m = 1 signed-Hankel

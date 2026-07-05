@@ -182,6 +182,20 @@ This is strong evidence for the antecedent shape of the bridge theorem, but it
 is not a proof of all-order shifted sign-consistency and it does not validate
 all Jensen-window Toeplitz minors.
 
+The executable countermodel library includes the finite Jensen-window
+rectangle extension gate:
+
+```text
+outputs/countermodel_library.md
+python work/rh_compute/scripts/countermodel_gate_examples.py
+```
+
+It preserves all coefficient inputs currently used by the Jensen-window
+PF/Sturm diagnostics, `A_0..A_25`, and then chooses a positive `A_26` that
+breaks the next degree-2 Jensen discriminant at shift `24`. This is not a
+model of the zeta coefficients; it is a proof-safety gate showing that the
+finite rectangle cannot be promoted by wording alone.
+
 The current finite Toeplitz/PF certificate ledger checks the ordinary Taylor
 coefficient sequence:
 

@@ -59,7 +59,8 @@ validated 25/25 core proof-programme gates
 
 ```text
 countermodel proof-safety gates:
-  validates 10 exact/logical traps
+  validates 11 exact/logical traps, including the finite Jensen-window
+  rectangle extension gate
 
 result-language boundary scan:
   scans output markdown for obvious unqualified global-proof overclaims
