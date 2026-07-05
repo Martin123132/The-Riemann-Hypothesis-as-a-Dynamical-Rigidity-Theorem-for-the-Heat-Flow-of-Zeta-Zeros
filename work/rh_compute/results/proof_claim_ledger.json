@@ -287,8 +287,10 @@
       "status": "open_target",
       "refs": [
         "outputs/jensen_window_pf_bridge_target.md",
+        "outputs/jensen_window_pf_bridge_obligations.md",
         "outputs/signed_hankel_jensen_bridge_target.md",
         "outputs/sign_regularity_theorem_fit_matrix.md",
+        "work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py",
         "work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py"
       ],
       "claim": "Prove that every binomially weighted Jensen window B^{d,n,0}_j=binom(d,j) A_{n+j}(0) is finite PF-infinity, or prove this from all-order shifted reshaped-Hankel sign consistency plus Xi/Phi-specific analytic hypotheses.",
@@ -367,6 +369,21 @@
       ],
       "claim": "Finite coefficient prefixes, finite signed-Hankel grids, finite Jensen passes, finite Jensen-window PF/Sturm rectangles, or finite recurrence data cannot be promoted to all-order theorem conclusions by wording alone.",
       "proof_boundary": "Rejected proof step; executable countermodel gates validate the obstruction."
+    },
+    {
+      "id": "jensen_window_pf_bridge_obligation_ledger",
+      "title": "Jensen-window PF bridge obligation ledger",
+      "category": "hygiene_gate",
+      "status": "guard_validated",
+      "refs": [
+        "outputs/jensen_window_pf_bridge_obligations.md",
+        "outputs/jensen_window_pf_bridge_target.md",
+        "work/rh_compute/results/jensen_window_pf_bridge_obligations.json",
+        "work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py",
+      "claim": "The obligation ledger decomposes the Jensen-window PF bridge into 10 exact, finite, open, conditional, rejected, and route-separated obligations, with 3 open obligations and only the central open bridge theorem marked as target-closing if proved.",
+      "proof_boundary": "Theorem-obligation hygiene only; not a proof of any open obligation and not a proof of Lambda <= 0."
     },
     {
       "id": "signed_hankel_jensen_dependency_graph",

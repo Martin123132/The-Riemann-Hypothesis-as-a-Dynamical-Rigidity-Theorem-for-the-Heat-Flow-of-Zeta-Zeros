@@ -281,10 +281,12 @@ Jensen-window PF reformulation:
 
 ```text
 outputs/jensen_window_pf_bridge_target.md
+outputs/jensen_window_pf_bridge_obligations.md
 outputs/jensen_window_pf_obligation_algebra.md
 outputs/arb_jensen_window_pf_obligation_diagnostic.md
 outputs/arb_jensen_window_sturm_hyperbolicity_diagnostic.md
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py
+python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
 python work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py
 python work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py
 python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py
@@ -294,6 +296,12 @@ This sharpens the all-degree/all-shift Jensen target into the requirement
 that every binomially weighted window
 `B^{d,n,0}_j = binom(d,j) A_{n+j}(0)` be a finite PF-infinity sequence. It is
 an equivalent target statement, not a proof of that target.
+
+The obligation ledger splits the target into `10` rows: exact reformulations,
+finite evidence, `3` open obligations, one conditional limiting row, and
+countermodel/route-separation guards. Its central open theorem row is
+`jwpf_06_sign_regular_to_jensen_pf_conversion`; finite evidence rows are
+explicitly barred from closing the target.
 
 The obligation algebra gate records the exact degree-2 contact with
 signed-Hankel and the first degree-3/4 Jensen-window Toeplitz obligations. Its

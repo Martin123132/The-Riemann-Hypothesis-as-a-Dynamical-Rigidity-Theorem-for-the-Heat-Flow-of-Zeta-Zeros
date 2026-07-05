@@ -58,6 +58,7 @@ REQUIRED_LEDGER_NODES = {
     "rejected_finite_prefix_promotion",
     "target_signed_hankel_jensen_bridge",
     "target_jensen_window_pf_bridge",
+    "jensen_window_pf_bridge_obligation_ledger",
     "target_direct_coefficient_pf",
     "target_schur_positive_specialization",
     "target_positive_determinant_integral",
@@ -90,6 +91,7 @@ REQUIRED_EDGES = {
     ("countermodel_gates", "rejected_finite_prefix_promotion", "validates_rejection"),
     ("rejected_finite_prefix_promotion", "target_signed_hankel_jensen_bridge", "blocks_promotion"),
     ("rejected_finite_prefix_promotion", "target_jensen_window_pf_bridge", "blocks_promotion"),
+    ("jensen_window_pf_bridge_obligation_ledger", "target_jensen_window_pf_bridge", "sharpens"),
     ("target_signed_hankel_jensen_bridge", "lambda_le_0_goal", "would_imply_if_proved"),
     ("target_jensen_window_pf_bridge", "lambda_le_0_goal", "would_imply_if_proved"),
     ("lambda_le_0_goal", "target_signed_hankel_jensen_bridge", "blocked_by"),
@@ -109,6 +111,9 @@ REQUIRED_NOTE_STRINGS = (
     "would_imply_if_proved",
     "blocked_by",
     "work/rh_compute/results/proof_claim_ledger.json",
+    "jensen_window_pf_bridge_obligation_ledger",
+    "outputs/jensen_window_pf_bridge_obligations.md",
+    "has no edge to `lambda_le_0_goal`",
 )
 
 

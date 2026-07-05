@@ -47,6 +47,7 @@ OK core gate: Arb Jensen-window Sturm degree-5 hyperbolicity finite diagnostics
 OK core gate: finite Sturm-to-PF Jensen-window consequences
 OK core gate: signed-Hankel/Jensen bridge target specification
 OK core gate: Jensen-window PF bridge target
+OK core gate: Jensen-window PF bridge obligation ledger
 OK core gate: sign-regularity theorem fit matrix
 OK core gate: positive Schur-specialization target note
 OK core gate: Edrei-log sign diagnostics
@@ -54,7 +55,7 @@ OK core gate: Edrei power-Hankel diagnostics
 OK core gate: Edrei midpoint frontier non-promotion guard
 OK core gate: Edrei power-Hankel boundary repair manifest
 OK core gate: Edrei moment-recurrence scout manifest
-validated 27/27 core proof-programme gates
+validated 28/28 core proof-programme gates
 ```
 
 ## Included Gates
@@ -76,7 +77,7 @@ output reference integrity:
   files; current run has 0 missing required paths and 3 planned deliverables
 
 proof-claim ledger:
-  validates 26 classified claims, including 6 open theorem targets that remain
+  validates 27 classified claims, including 6 open theorem targets that remain
   explicitly unproved
 
 signed-Hankel/Jensen dependency graph:
@@ -144,6 +145,11 @@ Jensen-window PF bridge target:
   Jensen window B^{d,n,0}_j=binom(d,j) A_{n+j}(0) must be finite PF-infinity,
   while preserving that this is an open theorem target
 
+Jensen-window PF bridge obligation ledger:
+  validates a 10-row obligation decomposition for the Jensen-window PF bridge:
+  exact equivalence/contact rows, finite evidence rows, 3 open obligations,
+  a conditional limiting row, and rejection/route-separation guards
+
 sign-regularity theorem fit matrix:
   validates that ASW/Edrei, Schur-positive, Schoenberg, Jensen, Hankel, and
   signed-Hankel route notes preserve fit/misfit boundaries and kill gates
@@ -200,7 +206,7 @@ python work/rh_compute/scripts/check_core_proof_programme_gates.py --skip-slow
 Current quick result:
 
 ```text
-validated 26/26 core proof-programme gates
+validated 27/27 core proof-programme gates
 ```
 
 For machine-readable output:

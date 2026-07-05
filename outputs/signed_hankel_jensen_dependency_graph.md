@@ -70,6 +70,22 @@ target_jensen_window_pf_bridge
 Both targets remain open. The graph checker compares their statuses with
 `work/rh_compute/results/proof_claim_ledger.json`.
 
+## Obligation-Decomposition Region
+
+```text
+jensen_window_pf_bridge_obligation_ledger
+```
+
+This node sharpens:
+
+```text
+target_jensen_window_pf_bridge
+```
+
+It records exact, finite, open, conditional, rejected, and route-separated
+obligations in `outputs/jensen_window_pf_bridge_obligations.md`. It is a
+hygiene node only; it has no edge to `lambda_le_0_goal`.
+
 ## Non-Promotion Region
 
 ```text

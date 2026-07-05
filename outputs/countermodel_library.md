@@ -629,15 +629,17 @@ python work/rh_compute/scripts/check_output_reference_integrity.py
 python work/rh_compute/scripts/check_output_status_manifest.py
 python work/rh_compute/scripts/check_proof_claim_ledger.py
 python work/rh_compute/scripts/check_signed_hankel_jensen_dependency_graph.py
+python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
 python work/rh_compute/scripts/check_result_language_boundaries.py
 ```
 
 Current result:
 
 ```text
-validated output references: scanned 42 markdown files, 423 path references, 0 missing required paths, 3 planned missing deliverables
-validated output artifact statuses: scanned 42 markdown files, 0 status issues
-validated proof-claim ledger: 26 claims, 0 issues, 6 open theorem targets
+validated output references: scanned 43 markdown files, 445 path references, 0 missing required paths, 3 planned missing deliverables
+validated output artifact statuses: scanned 43 markdown files, 0 status issues
+validated proof-claim ledger: 27 claims, 0 issues, 6 open theorem targets
 validated signed-Hankel/Jensen dependency graph with 0 issues
-validated result-language boundaries: scanned 42 markdown files, 0 overclaims
+validated Jensen-window PF bridge obligations: 10 obligations, 0 issues, 3 open obligations
+validated result-language boundaries: scanned 43 markdown files, 0 overclaims
 ```

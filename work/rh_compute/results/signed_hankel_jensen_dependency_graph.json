@@ -118,6 +118,13 @@
       "summary": "Open all-degree/all-shift Jensen-window PF bridge target."
     },
     {
+      "id": "jensen_window_pf_bridge_obligation_ledger",
+      "ledger_claim": true,
+      "role": "hygiene_gate",
+      "status": "guard_validated",
+      "summary": "Machine-readable obligation decomposition for the Jensen-window PF bridge."
+    },
+    {
       "id": "target_direct_coefficient_pf",
       "ledger_claim": true,
       "role": "theorem_target",
@@ -270,6 +277,12 @@
       "to": "target_signed_hankel_jensen_bridge",
       "type": "sharpens",
       "boundary": "Concrete total-positivity subroute; still open."
+    },
+    {
+      "from": "jensen_window_pf_bridge_obligation_ledger",
+      "to": "target_jensen_window_pf_bridge",
+      "type": "sharpens",
+      "boundary": "Decomposes the open target into exact, finite, open, conditional, rejected, and route-separated obligations."
     },
     {
       "from": "target_signed_hankel_jensen_bridge",

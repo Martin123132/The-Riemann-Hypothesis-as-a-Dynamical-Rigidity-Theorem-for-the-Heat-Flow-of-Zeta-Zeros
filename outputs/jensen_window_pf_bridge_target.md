@@ -180,6 +180,26 @@ Either version would imply all Jensen polynomials are hyperbolic, and then the
 remaining task would be the standard limiting passage to the required
 Laguerre-Polya/Newman conclusion without assuming RH.
 
+## Obligation Ledger
+
+The target is decomposed into exact, finite, open, conditional, rejected, and
+route-separated obligations here:
+
+```text
+outputs/jensen_window_pf_bridge_obligations.md
+work/rh_compute/results/jensen_window_pf_bridge_obligations.json
+python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
+```
+
+Current obligation split:
+
+```text
+10 obligations
+3 open obligations
+jwpf_06_sign_regular_to_jensen_pf_conversion is the central open bridge theorem
+finite evidence rows have would_close_target=false
+```
+
 ## Why The Existing Evidence Is Still Finite
 
 The current Arb staircase checker validates:
@@ -241,8 +261,10 @@ This note is part of the same theorem target family as:
 
 ```text
 outputs/signed_hankel_jensen_bridge_target.md
+outputs/jensen_window_pf_bridge_obligations.md
 outputs/sign_regularity_theorem_fit_matrix.md
 python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
+python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
 python work/rh_compute/scripts/check_sign_regularity_theorem_fit_matrix.py
 ```
 

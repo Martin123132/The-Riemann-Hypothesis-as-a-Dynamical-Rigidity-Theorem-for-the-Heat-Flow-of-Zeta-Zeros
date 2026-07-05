@@ -25,7 +25,7 @@ python work/rh_compute/scripts/check_proof_claim_ledger.py
 Current result:
 
 ```text
-validated proof-claim ledger: 26 claims, 0 issues, 6 open theorem targets
+validated proof-claim ledger: 27 claims, 0 issues, 6 open theorem targets
 ```
 
 ## Categories
@@ -137,6 +137,12 @@ jensen_window_sturm_pf_finite_consequence:
   finite window-by-window PF consequence of the Arb/Sturm root-count
   manifests; validates 315/315 checked Jensen windows across degrees
   d=3,4,5, five lambdas, and shifts n=0..20
+
+jensen_window_pf_bridge_obligation_ledger:
+  theorem-obligation hygiene gate for target_jensen_window_pf_bridge;
+  validates 10 exact, finite, open, conditional, rejected, and route-separated
+  obligations, with 3 open obligations and finite rows blocked from closing
+  the target
 
 signed_hankel_jensen_dependency_graph:
   dependency hygiene gate connecting finite evidence, countermodel gates, open

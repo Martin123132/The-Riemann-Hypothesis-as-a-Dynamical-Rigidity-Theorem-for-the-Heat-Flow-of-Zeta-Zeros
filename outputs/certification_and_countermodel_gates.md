@@ -289,6 +289,7 @@ python work/rh_compute/scripts/check_arb_hankel_sign_consistency_reduction_manif
 python work/rh_compute/scripts/check_arb_shifted_hankel_sign_consistency_manifest.py
 python work/rh_compute/scripts/check_jensen_hankel_bridge_algebra.py
 python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
+python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
 python work/rh_compute/scripts/check_edrei_log_sign_manifest.py
 python work/rh_compute/scripts/check_edrei_power_hankel_manifest.py
 python work/rh_compute/scripts/check_edrei_power_hankel_frontier_manifest.py
@@ -367,6 +368,19 @@ python work/rh_compute/scripts/check_signed_hankel_jensen_dependency_graph.py
 
 It is a dependency hygiene gate only, not a proof bridge.
 
+The Jensen-window PF bridge obligation ledger decomposes the central open
+bridge target into exact, finite, open, conditional, rejected, and
+route-separated obligations:
+
+```text
+outputs/jensen_window_pf_bridge_obligations.md
+work/rh_compute/results/jensen_window_pf_bridge_obligations.json
+python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
+```
+
+It validates `10` obligations with `3` still open. This is theorem-search
+hygiene only, not proof of the bridge.
+
 The core runner is documented in:
 
 ```text
@@ -376,7 +390,7 @@ outputs/core_proof_programme_gates.md
 Current core runner status:
 
 ```text
-validated 27/27 core proof-programme gates
+validated 28/28 core proof-programme gates
 ```
 
 Current manifest status:
