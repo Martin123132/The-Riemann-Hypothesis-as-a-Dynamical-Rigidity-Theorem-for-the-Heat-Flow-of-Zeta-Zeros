@@ -92,27 +92,9 @@ GATES: tuple[GateSpec, ...] = (
         category="promoted finite evidence",
     ),
     GateSpec(
-        name="shifted Hankel sign-consistency finite certificates",
-        command=("work/rh_compute/scripts/check_arb_shifted_hankel_sign_consistency_manifest.py",),
-        expected=("validated 1322685 shifted Arb reshaped-Hankel sign-consistency finite certificates with 0 issues",),
-        category="promoted finite evidence",
-    ),
-    GateSpec(
-        name="shifted Hankel order-6 finite certificates",
-        command=("work/rh_compute/scripts/check_arb_shifted_hankel_k6_manifest.py",),
-        expected=("validated 840840 shifted Arb reshaped-Hankel order-6 finite certificates with 0 issues",),
-        category="promoted finite evidence",
-    ),
-    GateSpec(
-        name="shifted Hankel order-7 finite certificates",
-        command=("work/rh_compute/scripts/check_arb_shifted_hankel_k7_manifest.py",),
-        expected=("validated 675675 shifted Arb reshaped-Hankel order-7 finite certificates with 0 issues",),
-        category="promoted finite evidence",
-    ),
-    GateSpec(
-        name="shifted Hankel order-8 finite certificates",
-        command=("work/rh_compute/scripts/check_arb_shifted_hankel_k8_manifest.py",),
-        expected=("validated 315315 shifted Arb reshaped-Hankel order-8 finite certificates with 0 issues",),
+        name="shifted Hankel staircase finite certificates",
+        command=("work/rh_compute/scripts/check_arb_shifted_hankel_staircase_manifest.py",),
+        expected=("validated 3154515 shifted Arb reshaped-Hankel staircase finite certificates with 0 issues",),
         category="promoted finite evidence",
     ),
     GateSpec(

@@ -37,10 +37,7 @@ OK core gate: Toeplitz/PF finite certificates
 OK core gate: Toeplitz/Jacobi-Trudi reindexing
 OK core gate: Hankel sign-consistency reduction point audits
 OK core gate: Hankel sign-consistency reduction finite certificates
-OK core gate: shifted Hankel sign-consistency finite certificates
-OK core gate: shifted Hankel order-6 finite certificates
-OK core gate: shifted Hankel order-7 finite certificates
-OK core gate: shifted Hankel order-8 finite certificates
+OK core gate: shifted Hankel staircase finite certificates
 OK core gate: Jensen/Hankel bridge algebra gate
 OK core gate: signed-Hankel/Jensen bridge target specification
 OK core gate: sign-regularity theorem fit matrix
@@ -50,7 +47,7 @@ OK core gate: Edrei power-Hankel diagnostics
 OK core gate: Edrei midpoint frontier non-promotion guard
 OK core gate: Edrei power-Hankel boundary repair manifest
 OK core gate: Edrei moment-recurrence scout manifest
-validated 23/23 core proof-programme gates
+validated 20/20 core proof-programme gates
 ```
 
 ## Included Gates
@@ -92,22 +89,10 @@ Hankel sign-consistency reduction finite certificates:
   validates 689,795 Arb/enclosure-backed reshaped-Hankel finite certificates
   for the five-lambda grid, orders k=2..7, and N=20
 
-shifted Hankel sign-consistency finite certificates:
-  validates 1,322,685 Arb/enclosure-backed shifted reshaped-Hankel finite
-  certificates for the five-lambda grid, shifts n=0..20, orders k=2..5,
-  and N=18
-
-shifted Hankel order-6 finite certificates:
-  validates 840,840 Arb/enclosure-backed shifted reshaped-Hankel finite
-  certificates for the five-lambda grid, shifts n=0..20, order k=6, and N=16
-
-shifted Hankel order-7 finite certificates:
-  validates 675,675 Arb/enclosure-backed shifted reshaped-Hankel finite
-  certificates for the five-lambda grid, shifts n=0..20, order k=7, and N=15
-
-shifted Hankel order-8 finite certificates:
-  validates 315,315 Arb/enclosure-backed shifted reshaped-Hankel finite
-  certificates for the five-lambda grid, shifts n=0..20, order k=8, and N=14
+shifted Hankel staircase finite certificates:
+  validates 3,154,515 Arb/enclosure-backed shifted reshaped-Hankel finite
+  certificates for the five-lambda grid and shifts n=0..20:
+  k=2..5 at N=18, k=6 at N=16, k=7 at N=15, and k=8 at N=14
 
 Jensen/Hankel bridge algebra gate:
   validates the exact degree-2 signed-Hankel/Jensen identity and an exact
@@ -172,7 +157,7 @@ python work/rh_compute/scripts/check_core_proof_programme_gates.py --skip-slow
 Current quick result:
 
 ```text
-validated 22/22 core proof-programme gates
+validated 19/19 core proof-programme gates
 ```
 
 For machine-readable output:

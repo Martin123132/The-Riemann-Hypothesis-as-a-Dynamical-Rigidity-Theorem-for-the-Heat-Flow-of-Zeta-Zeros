@@ -38,6 +38,7 @@ REQUIRED_STRINGS = (
     "675,675/675,675 finite minors positive",
     "k = 8",
     "315,315/315,315 finite minors positive",
+    "3,154,515/3,154,515 finite shifted minors positive",
     "All certificates remain finite",
     "Candidate Theorem B-Star",
     "Degree 2 is exact",

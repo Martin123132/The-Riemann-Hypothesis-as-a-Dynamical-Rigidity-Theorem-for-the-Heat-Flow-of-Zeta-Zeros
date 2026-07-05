@@ -98,10 +98,9 @@ hankel_sign_consistency_reduction_finite_certificate:
 
 shifted_hankel_sign_consistency_finite_certificate:
   Arb/enclosure-backed finite certificate for shifted reshaped-Hankel blocks;
-  validates 1,322,685 finite minors for shifts n=0..20, k=2..5, N=18, plus
-  840,840 order-6 minors for N=16, 675,675 order-7 minors for N=15, and
-  315,315 order-8 minors for N=14; not an all-shift or all-order
-  sign-consistency theorem
+  staircase manifest validates 3,154,515 finite minors for shifts n=0..20:
+  k=2..5 at N=18, k=6 at N=16, k=7 at N=15, and k=8 at N=14; not an
+  all-shift or all-order sign-consistency theorem
 
 jensen_hankel_bridge_algebra_gate:
   exact degree-2 signed-Hankel/Jensen identity plus a positive rational

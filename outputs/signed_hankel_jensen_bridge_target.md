@@ -110,6 +110,12 @@ N = 14 columns
 315,315/315,315 finite minors positive
 ```
 
+The consolidated shifted staircase checker validates:
+
+```text
+3,154,515/3,154,515 finite shifted minors positive
+```
+
 All certificates remain finite. They are evidence for the theorem target, not
 the all-shift/all-order theorem itself.
 

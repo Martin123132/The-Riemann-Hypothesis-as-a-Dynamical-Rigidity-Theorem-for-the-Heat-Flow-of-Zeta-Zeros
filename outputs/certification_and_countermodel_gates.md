@@ -326,6 +326,24 @@ five-lambda grid, `n = 0..20`, `k = 8`, `N = 14`, validating
 `315,315/315,315` finite shifted minors using coefficient enclosures through
 `A_40`. This is finite evidence only.
 
+The consolidated shifted staircase checker is:
+
+```text
+python work/rh_compute/scripts/check_arb_shifted_hankel_staircase_manifest.py
+```
+
+It validates all promoted shifted slices together:
+
+```text
+3,154,515/3,154,515 finite shifted minors
+k = 2..5 at N = 18
+k = 6 at N = 16
+k = 7 at N = 15
+k = 8 at N = 14
+```
+
+This is a consolidated finite-certificate manifest, not an all-order theorem.
+
 The Jensen/Hankel bridge algebra gate records the exact degree-2 identity
 between the `m = 1` signed-Hankel determinant and the degree-2 Jensen
 discriminant, and an exact positive rational degree-3 countermodel showing
@@ -345,7 +363,7 @@ outputs/core_proof_programme_gates.md
 Current core runner status:
 
 ```text
-validated 23/23 core proof-programme gates
+validated 20/20 core proof-programme gates
 ```
 
 Current manifest status:
