@@ -36,9 +36,13 @@ REQUIRED_STRINGS = (
     "!= signed Hankel sequence A_k",
     "Jensen-window PF reformulation",
     "outputs/jensen_window_pf_bridge_target.md",
+    "outputs/jensen_window_pf_obligation_algebra.md",
     "python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py",
+    "python work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py",
     "B^{d,n,0}_j = binom(d,j) A_{n+j}(0)",
     "finite PF-infinity sequence",
+    "exact degree-2 contact with",
+    "contiguous Toeplitz minors fail",
     "The criterion needs all degrees and shifts.",
     "Sign-regular Hankel data alone does not imply Toeplitz PF-infinity",
     "not a Level-4 interval",
@@ -139,6 +143,7 @@ def validate(path: Path) -> list[FitMatrixIssue]:
         "work/rh_compute/scripts/check_jensen_hankel_bridge_algebra.py",
         "work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py",
         "work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py",
+        "work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py",
     ):
         if not (REPO_ROOT / ref).exists():
             issues.append(FitMatrixIssue("references", "missing-ref", ref))

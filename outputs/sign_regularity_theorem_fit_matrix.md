@@ -281,13 +281,20 @@ Jensen-window PF reformulation:
 
 ```text
 outputs/jensen_window_pf_bridge_target.md
+outputs/jensen_window_pf_obligation_algebra.md
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py
+python work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py
 ```
 
 This sharpens the all-degree/all-shift Jensen target into the requirement
 that every binomially weighted window
 `B^{d,n,0}_j = binom(d,j) A_{n+j}(0)` be a finite PF-infinity sequence. It is
 an equivalent target statement, not a proof of that target.
+
+The obligation algebra gate records the exact degree-2 contact with
+signed-Hankel and the first degree-3/4 Jensen-window Toeplitz obligations. Its
+countermodel shows selected low-order window minors can pass while larger
+contiguous Toeplitz minors fail.
 
 Misfit:
 
@@ -700,8 +707,10 @@ Formal target specification:
 ```text
 outputs/signed_hankel_jensen_bridge_target.md
 outputs/jensen_window_pf_bridge_target.md
+outputs/jensen_window_pf_obligation_algebra.md
 python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py
+python work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py
 ```
 
 Why active:

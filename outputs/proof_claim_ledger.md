@@ -25,7 +25,7 @@ python work/rh_compute/scripts/check_proof_claim_ledger.py
 Current result:
 
 ```text
-validated proof-claim ledger: 20 claims, 0 issues, 6 open theorem targets
+validated proof-claim ledger: 21 claims, 0 issues, 6 open theorem targets
 ```
 
 ## Categories
@@ -112,6 +112,11 @@ jensen_hankel_bridge_algebra_gate:
   exact degree-2 signed-Hankel/Jensen identity plus a positive rational
   degree-3 countermodel; blocks promotion from finite low-order reshaped signs
   to Jensen hyperbolicity
+
+jensen_window_pf_obligation_algebra_gate:
+  exact low-degree Jensen-window PF obligation algebra; degree 2 matches the
+  signed-Hankel threshold, while degree 3 and degree 4 introduce additional
+  banded Toeplitz obligations and finite low-order countermodel failures
 
 target_jensen_window_pf_bridge:
   theorem target that reformulates all-degree/all-shift Jensen hyperbolicity

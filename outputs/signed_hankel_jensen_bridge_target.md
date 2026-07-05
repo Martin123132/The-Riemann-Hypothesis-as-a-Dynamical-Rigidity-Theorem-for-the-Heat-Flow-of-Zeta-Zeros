@@ -41,7 +41,9 @@ The total-positivity reformulation is recorded in:
 
 ```text
 outputs/jensen_window_pf_bridge_target.md
+outputs/jensen_window_pf_obligation_algebra.md
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py
+python work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py
 ```
 
 It asks for every binomially weighted Jensen window:
@@ -52,6 +54,10 @@ B^{d,n,0}_j = binom(d,j) A_{n+j}(0)
 
 to be a finite PF-infinity sequence. This is an equivalent Jensen-window
 target, not a proof that the target holds.
+
+The obligation algebra gate records that degree 2 is the exact signed-Hankel
+contact point, while degree 3 and degree 4 introduce additional
+Jensen-window Toeplitz obligations and exact low-order countermodel failures.
 
 For the reshaped-Hankel sign-consistency route, define the shifted row block:
 

@@ -1,0 +1,449 @@
+{
+  "date": "2026-07-05",
+  "degree2": {
+    "contiguous_toeplitz_recurrence": "D_m = 2*a1*D_{m-1} - a0*a2*D_{m-2}, D_0=1, D_1=2*a1",
+    "jensen_discriminant": "4*(a1**2 - a0*a2)",
+    "matches_signed_hankel_m1": true,
+    "pf_threshold": "a1**2 - a0*a2 >= 0",
+    "signed_hankel_relation": "a1**2 - a0*a2 = -det([[a0,a1],[a1,a2]])",
+    "window": [
+      "a0",
+      "2*a1",
+      "a2"
+    ]
+  },
+  "degree3": {
+    "comparison": "The degree-2 signed-Hankel contact does not supply the cubic discriminant or all Toeplitz minors of the binomially weighted Jensen window.",
+    "cubic_discriminant": "-27*(a0**2*a3**2 - 6*a0*a1*a2*a3 + 4*a0*a2**3 + 4*a1**3*a3 - 3*a1**2*a2**2)",
+    "selected_toeplitz_minors": [
+      {
+        "cols": [
+          1,
+          2
+        ],
+        "determinant": "-3*(a0*a2 - 3*a1**2)",
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          1,
+          3
+        ],
+        "determinant": "-a0*a3 + 9*a1*a2",
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          2,
+          3
+        ],
+        "determinant": "-3*(a1*a3 - 3*a2**2)",
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          1,
+          2,
+          3
+        ],
+        "determinant": "a0**2*a3 - 18*a0*a1*a2 + 27*a1**3",
+        "rows": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "cols": [
+          2,
+          3,
+          4
+        ],
+        "determinant": "a0*a3**2 - 18*a1*a2*a3 + 27*a2**3",
+        "rows": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "window": [
+      "a0",
+      "3*a1",
+      "3*a2",
+      "a3"
+    ]
+  },
+  "degree4": {
+    "comparison": "The quartic window introduces further 3x3 and higher banded Toeplitz obligations that are not identical to signed reshaped-Hankel determinants.",
+    "quartic_discriminant": "256*(a0**3*a4**3 - 12*a0**2*a1*a3*a4**2 - 18*a0**2*a2**2*a4**2 + 54*a0**2*a2*a3**2*a4 - 27*a0**2*a3**4 + 54*a0*a1**2*a2*a4**2 - 6*a0*a1**2*a3**2*a4 - 180*a0*a1*a2**2*a3*a4 + 108*a0*a1*a2*a3**3 + 81*a0*a2**4*a4 - 54*a0*a2**3*a3**2 - 27*a1**4*a4**2 + 108*a1**3*a2*a3*a4 - 64*a1**3*a3**3 - 54*a1**2*a2**3*a4 + 36*a1**2*a2**2*a3**2)",
+    "selected_toeplitz_minors": [
+      {
+        "cols": [
+          1,
+          2
+        ],
+        "determinant": "-2*(3*a0*a2 - 8*a1**2)",
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          1,
+          3
+        ],
+        "determinant": "-4*(a0*a3 - 6*a1*a2)",
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          1,
+          4
+        ],
+        "determinant": "-a0*a4 + 16*a1*a3",
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          2,
+          3
+        ],
+        "determinant": "-4*(4*a1*a3 - 9*a2**2)",
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          2,
+          4
+        ],
+        "determinant": "-4*(a1*a4 - 6*a2*a3)",
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          3,
+          4
+        ],
+        "determinant": "-2*(3*a2*a4 - 8*a3**2)",
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          1,
+          2,
+          3
+        ],
+        "determinant": "4*(a0**2*a3 - 12*a0*a1*a2 + 16*a1**3)",
+        "rows": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "cols": [
+          2,
+          3,
+          4
+        ],
+        "determinant": "-2*(3*a0*a2*a4 - 8*a0*a3**2 - 8*a1**2*a4 + 96*a1*a2*a3 - 108*a2**3)",
+        "rows": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "cols": [
+          3,
+          4,
+          5
+        ],
+        "determinant": "4*(a1*a4**2 - 12*a2*a3*a4 + 16*a3**3)",
+        "rows": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "window": [
+      "a0",
+      "4*a1",
+      "6*a2",
+      "4*a3",
+      "a4"
+    ]
+  },
+  "finite_countermodel": {
+    "blocked_promotion": "selected low-order Jensen-window Toeplitz minors, or finite low-order reshaped-Hankel signs, imply Jensen-window PF-infinity",
+    "d3_cubic_discriminant": "-2476526481/3276800000",
+    "d3_cubic_hyperbolicity_breaks": true,
+    "d3_first_negative_contiguous_toeplitz_minor": {
+      "cols": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "determinant": "-435846079534239/104857600000000",
+      "rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "size": 8
+    },
+    "d3_selected_toeplitz_minors": [
+      {
+        "cols": [
+          1,
+          2
+        ],
+        "determinant": "13167/3200",
+        "positive": true,
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          1,
+          3
+        ],
+        "determinant": "4719/1024",
+        "positive": true,
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          2,
+          3
+        ],
+        "determinant": "6413121/2048000",
+        "positive": true,
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          1,
+          2,
+          3
+        ],
+        "determinant": "356829/64000",
+        "positive": true,
+        "rows": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "cols": [
+          2,
+          3,
+          4
+        ],
+        "determinant": "6026790627/1310720000",
+        "positive": true,
+        "rows": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "d3_selected_toeplitz_minors_positive": true,
+    "d4_first_negative_contiguous_toeplitz_minor": {
+      "cols": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "determinant": "-229760849637/28672000000",
+      "rows": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "size": 6
+    },
+    "d4_quartic_discriminant": "-668519580649275927/359661568000000000",
+    "d4_quartic_hyperbolicity_breaks": true,
+    "d4_selected_toeplitz_minors": [
+      {
+        "cols": [
+          1,
+          2
+        ],
+        "determinant": "10989/1600",
+        "positive": true,
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          1,
+          3
+        ],
+        "determinant": "4719/400",
+        "positive": true,
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          1,
+          4
+        ],
+        "determinant": "4242381/896000",
+        "positive": true,
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          2,
+          3
+        ],
+        "determinant": "5790213/512000",
+        "positive": true,
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          2,
+          4
+        ],
+        "determinant": "39398931/7168000",
+        "positive": true,
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          3,
+          4
+        ],
+        "determinant": "471697083/286720000",
+        "positive": true,
+        "rows": [
+          0,
+          1
+        ]
+      },
+      {
+        "cols": [
+          1,
+          2,
+          3
+        ],
+        "determinant": "173877/16000",
+        "positive": true,
+        "rows": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "cols": [
+          2,
+          3,
+          4
+        ],
+        "determinant": "33248181681/1146880000",
+        "positive": true,
+        "rows": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "cols": [
+          3,
+          4,
+          5
+        ],
+        "determinant": "5466740429007/3211264000000",
+        "positive": true,
+        "rows": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "d4_selected_toeplitz_minors_positive": true,
+    "sequence_A0_to_A4": [
+      "1",
+      "33/40",
+      "429/640",
+      "4719/12800",
+      "4719/35840"
+    ],
+    "source": "same positive rational sequence as jensen_hankel_bridge_algebra.json"
+  },
+  "kind": "jensen_window_pf_obligation_algebra",
+  "proof_boundary": "Exact low-degree theorem-search algebra and finite proof-safety countermodel only; not a proof of Jensen-window PF-infinity, Laguerre-Polya membership, RH, or Lambda <= 0."
+}
