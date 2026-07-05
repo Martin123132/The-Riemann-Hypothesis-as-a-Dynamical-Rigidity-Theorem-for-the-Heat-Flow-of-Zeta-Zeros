@@ -70,6 +70,7 @@ target_signed_hankel_jensen_bridge:
 
 target_schur_positive_specialization:
   construct a positive Schur/Edrei-Thoma specialization h_k -> d_k(0)
+  specification: outputs/positive_schur_specialization_target.md
 
 target_positive_determinant_integral:
   derive a positive determinant integral formula for every structurally

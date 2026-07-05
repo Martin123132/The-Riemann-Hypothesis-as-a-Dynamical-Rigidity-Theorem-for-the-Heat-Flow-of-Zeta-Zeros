@@ -420,6 +420,13 @@ The route triage and kill gates are recorded in:
 outputs/coefficient_pf_decision_tree.md
 ```
 
+The focused positive Schur-specialization contract is recorded in:
+
+```text
+outputs/positive_schur_specialization_target.md
+python work/rh_compute/scripts/check_positive_schur_specialization_target.py
+```
+
 The theorem-family fit/misfit audit is recorded in:
 
 ```text

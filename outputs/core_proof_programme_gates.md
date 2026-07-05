@@ -41,12 +41,13 @@ OK core gate: shifted Hankel sign-consistency finite certificates
 OK core gate: Jensen/Hankel bridge algebra gate
 OK core gate: signed-Hankel/Jensen bridge target specification
 OK core gate: sign-regularity theorem fit matrix
+OK core gate: positive Schur-specialization target note
 OK core gate: Edrei-log sign diagnostics
 OK core gate: Edrei power-Hankel diagnostics
 OK core gate: Edrei midpoint frontier non-promotion guard
 OK core gate: Edrei power-Hankel boundary repair manifest
 OK core gate: Edrei moment-recurrence scout manifest
-validated 19/19 core proof-programme gates
+validated 20/20 core proof-programme gates
 ```
 
 ## Included Gates
@@ -105,6 +106,11 @@ sign-regularity theorem fit matrix:
   validates that ASW/Edrei, Schur-positive, Schoenberg, Jensen, Hankel, and
   signed-Hankel route notes preserve fit/misfit boundaries and kill gates
 
+positive Schur-specialization target note:
+  validates that the coefficient-PF Schur target states the exact
+  Jacobi-Trudi equivalence, noncircular sufficient constructions, and
+  rejection gates for finite or circular proof attempts
+
 Edrei-log sign diagnostics:
   validates 320 finite Edrei-log sign diagnostics
 
@@ -151,7 +157,7 @@ python work/rh_compute/scripts/check_core_proof_programme_gates.py --skip-slow
 Current quick result:
 
 ```text
-validated 18/18 core proof-programme gates
+validated 19/19 core proof-programme gates
 ```
 
 For machine-readable output:

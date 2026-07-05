@@ -206,6 +206,13 @@ The exact reindexing and source anchors for this step are recorded in:
 outputs/toeplitz_jacobi_trudi_bridge_note.md
 ```
 
+The focused positive-specialization target contract is recorded in:
+
+```text
+outputs/positive_schur_specialization_target.md
+python work/rh_compute/scripts/check_positive_schur_specialization_target.py
+```
+
 The broader theorem ecosystem fit/misfit audit is recorded in:
 
 ```text

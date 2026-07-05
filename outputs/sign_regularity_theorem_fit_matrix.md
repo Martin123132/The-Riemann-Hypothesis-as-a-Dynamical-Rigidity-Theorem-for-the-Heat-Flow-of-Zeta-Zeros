@@ -571,6 +571,13 @@ It is exactly equivalent to the certified finite Toeplitz/PF evidence,
 but asks for independent structure instead of extrapolation.
 ```
 
+Focused contract:
+
+```text
+outputs/positive_schur_specialization_target.md
+python work/rh_compute/scripts/check_positive_schur_specialization_target.py
+```
+
 ### Target 2: Edrei Log-Power Representation
 
 Prove:

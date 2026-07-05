@@ -159,6 +159,13 @@ Toeplitz minors and skew-Schur specializations:
 https://arxiv.org/abs/1706.02574
 ```
 
+The positive-specialization target contract built on this reindexing is:
+
+```text
+outputs/positive_schur_specialization_target.md
+python work/rh_compute/scripts/check_positive_schur_specialization_target.py
+```
+
 ## Boundary
 
 This note does not prove such a positive specialization exists. It only removes ambiguity in the algebraic translation.

@@ -116,6 +116,12 @@ GATES: tuple[GateSpec, ...] = (
         category="open theorem target hygiene",
     ),
     GateSpec(
+        name="positive Schur-specialization target note",
+        command=("work/rh_compute/scripts/check_positive_schur_specialization_target.py",),
+        expected=("validated positive Schur-specialization target note with 0 issues",),
+        category="open theorem target hygiene",
+    ),
+    GateSpec(
         name="Edrei-log sign diagnostics",
         command=("work/rh_compute/scripts/check_edrei_log_sign_manifest.py",),
         expected=("validated 320 finite Edrei-log sign diagnostics",),
