@@ -25,7 +25,7 @@ python work/rh_compute/scripts/check_proof_claim_ledger.py
 Current result:
 
 ```text
-validated proof-claim ledger: 24 claims, 0 issues, 6 open theorem targets
+validated proof-claim ledger: 25 claims, 0 issues, 6 open theorem targets
 ```
 
 ## Categories
@@ -132,6 +132,11 @@ arb_jensen_window_sturm_d5_hyperbolicity_diagnostic:
   Arb/Sturm finite diagnostic for selected degree-5 Jensen-window
   positive-root counts; validates 105/105 finite root-count rows for the
   five-lambda grid and shifts n=0..20
+
+jensen_window_sturm_pf_finite_consequence:
+  finite window-by-window PF consequence of the Arb/Sturm root-count
+  manifests; validates 315/315 checked Jensen windows across degrees
+  d=3,4,5, five lambdas, and shifts n=0..20
 
 target_jensen_window_pf_bridge:
   theorem target that reformulates all-degree/all-shift Jensen hyperbolicity

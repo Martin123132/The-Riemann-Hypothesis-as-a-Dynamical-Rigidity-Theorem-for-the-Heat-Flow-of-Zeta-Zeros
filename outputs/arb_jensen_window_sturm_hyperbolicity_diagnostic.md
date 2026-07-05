@@ -114,9 +114,11 @@ Lambda <= 0
 
 ```text
 outputs/arb_jensen_window_pf_obligation_diagnostic.md
+outputs/jensen_window_sturm_pf_consequence.md
 outputs/jensen_window_pf_bridge_target.md
 outputs/jensen_window_pf_obligation_algebra.md
 python work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py
+python work/rh_compute/scripts/check_jensen_window_sturm_pf_consequence.py
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py
 python work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py
 ```

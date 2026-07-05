@@ -136,6 +136,17 @@ positive-root counts for `Q_{d,n,lambda}(y)=P_{d,n,lambda}(-y)` across the
 same five-lambda grid and shifts `n=0..20`. This is finite hyperbolicity
 evidence, not all-degree or all-shift Jensen hyperbolicity.
 
+The finite Sturm-to-PF consequence gate:
+
+```text
+outputs/jensen_window_sturm_pf_consequence.md
+python work/rh_compute/scripts/check_jensen_window_sturm_pf_consequence.py
+```
+
+records the finite Polya-frequency consequence of those root counts: `315/315`
+checked Jensen windows have finite PF-infinity as a window-by-window
+certificate. This is not all-minor Jensen-window PF-infinity as an infinite theorem.
+
 The older Jensen/Hankel bridge algebra gate:
 
 ```text

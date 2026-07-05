@@ -327,6 +327,18 @@ The degree-5 extension manifest validates another `105/105` positive-root
 counts with needed max coefficient index `25`. This is a stronger stress test
 of the same finite diagnostic, not a theorem upgrade.
 
+Finite Sturm-to-PF consequence:
+
+```text
+outputs/jensen_window_sturm_pf_consequence.md
+python work/rh_compute/scripts/check_jensen_window_sturm_pf_consequence.py
+```
+
+The consequence gate records that `315/315` checked Jensen windows have
+finite PF-infinity by the finite Polya-frequency characterization. This is a
+window-by-window finite certificate, not all-minor Jensen-window PF-infinity
+as an infinite theorem.
+
 Countermodel guard:
 
 ```text

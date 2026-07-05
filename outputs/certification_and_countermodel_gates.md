@@ -363,7 +363,7 @@ outputs/core_proof_programme_gates.md
 Current core runner status:
 
 ```text
-validated 25/25 core proof-programme gates
+validated 26/26 core proof-programme gates
 ```
 
 Current manifest status:
