@@ -1,6 +1,6 @@
 # Proof Claim Ledger
 
-Date: 2026-07-04
+Date: 2026-07-05
 
 Status: claim-classification ledger. This is not a proof of RH or `Lambda <= 0`; it records which claims are exact, finite, diagnostic, open, rejected, or hygiene gates.
 
@@ -25,7 +25,7 @@ python work/rh_compute/scripts/check_proof_claim_ledger.py
 Current result:
 
 ```text
-validated proof-claim ledger: 22 claims, 0 issues, 6 open theorem targets
+validated proof-claim ledger: 23 claims, 0 issues, 6 open theorem targets
 ```
 
 ## Categories
@@ -122,6 +122,11 @@ arb_jensen_window_pf_obligation_diagnostic:
   Arb/enclosure-backed finite diagnostic for selected degree-3/4
   Jensen-window contiguous Toeplitz determinants; validates 1,470/1,470
   finite determinants for the five-lambda grid and shifts n=0..20
+
+arb_jensen_window_sturm_hyperbolicity_diagnostic:
+  Arb/Sturm finite diagnostic for selected degree-3/4 Jensen-window
+  positive-root counts; validates 210/210 finite root-count rows for the
+  five-lambda grid and shifts n=0..20
 
 target_jensen_window_pf_bridge:
   theorem target that reformulates all-degree/all-shift Jensen hyperbolicity

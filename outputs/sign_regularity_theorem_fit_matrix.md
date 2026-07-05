@@ -282,8 +282,12 @@ Jensen-window PF reformulation:
 ```text
 outputs/jensen_window_pf_bridge_target.md
 outputs/jensen_window_pf_obligation_algebra.md
+outputs/arb_jensen_window_pf_obligation_diagnostic.md
+outputs/arb_jensen_window_sturm_hyperbolicity_diagnostic.md
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py
 python work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py
+python work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py
+python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py
 ```
 
 This sharpens the all-degree/all-shift Jensen target into the requirement
@@ -307,6 +311,17 @@ This validates `1470/1470` selected Arb interval determinants for the
 degree-3 and degree-4 Jensen-window contiguous Toeplitz families across the
 five-lambda grid and shifts `n=0..20`. It is finite theorem-search evidence,
 not all-minor Jensen-window PF-infinity.
+
+Finite Arb/Sturm diagnostic:
+
+```text
+outputs/arb_jensen_window_sturm_hyperbolicity_diagnostic.md
+python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py
+```
+
+This validates `210/210` degree-3/4 Jensen-window positive-root counts for
+`Q_{d,n,lambda}(y)=P_{d,n,lambda}(-y)` across the same five-lambda grid and
+shifts `n=0..20`. It is finite hyperbolicity evidence, not all-degree or all-shift Jensen hyperbolicity.
 
 Misfit:
 
@@ -721,10 +736,12 @@ outputs/signed_hankel_jensen_bridge_target.md
 outputs/jensen_window_pf_bridge_target.md
 outputs/jensen_window_pf_obligation_algebra.md
 outputs/arb_jensen_window_pf_obligation_diagnostic.md
+outputs/arb_jensen_window_sturm_hyperbolicity_diagnostic.md
 python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py
 python work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py
 python work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py
+python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py
 ```
 
 Why active:

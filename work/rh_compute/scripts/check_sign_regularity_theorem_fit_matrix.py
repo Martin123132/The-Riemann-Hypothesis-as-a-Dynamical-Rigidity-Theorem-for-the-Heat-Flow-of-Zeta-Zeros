@@ -38,15 +38,20 @@ REQUIRED_STRINGS = (
     "outputs/jensen_window_pf_bridge_target.md",
     "outputs/jensen_window_pf_obligation_algebra.md",
     "outputs/arb_jensen_window_pf_obligation_diagnostic.md",
+    "outputs/arb_jensen_window_sturm_hyperbolicity_diagnostic.md",
     "python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py",
     "python work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py",
     "python work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py",
+    "python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py",
     "B^{d,n,0}_j = binom(d,j) A_{n+j}(0)",
     "finite PF-infinity sequence",
     "exact degree-2 contact with",
     "contiguous Toeplitz minors fail",
     "1470/1470",
     "not all-minor Jensen-window PF-infinity",
+    "210/210",
+    "positive-root counts for",
+    "not all-degree or all-shift Jensen hyperbolicity",
     "The criterion needs all degrees and shifts.",
     "Sign-regular Hankel data alone does not imply Toeplitz PF-infinity",
     "not a Level-4 interval",
@@ -149,6 +154,7 @@ def validate(path: Path) -> list[FitMatrixIssue]:
         "work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py",
         "work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py",
         "work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py",
+        "work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py",
     ):
         if not (REPO_ROOT / ref).exists():
             issues.append(FitMatrixIssue("references", "missing-ref", ref))

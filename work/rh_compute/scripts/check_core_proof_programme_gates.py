@@ -58,7 +58,7 @@ GATES: tuple[GateSpec, ...] = (
     GateSpec(
         name="proof-claim ledger",
         command=("work/rh_compute/scripts/check_proof_claim_ledger.py",),
-        expected=("validated proof-claim ledger: 22 claims, 0 issues, 6 open theorem targets",),
+        expected=("validated proof-claim ledger: 23 claims, 0 issues, 6 open theorem targets",),
         category="non-promotion guards",
     ),
     GateSpec(
@@ -113,6 +113,12 @@ GATES: tuple[GateSpec, ...] = (
         name="Arb Jensen-window PF obligation finite diagnostics",
         command=("work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py",),
         expected=("validated 1470 Arb Jensen-window PF obligation finite diagnostics with 0 issues",),
+        category="finite theorem-search diagnostics",
+    ),
+    GateSpec(
+        name="Arb Jensen-window Sturm hyperbolicity finite diagnostics",
+        command=("work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py",),
+        expected=("validated 210 Arb Jensen-window Sturm hyperbolicity finite diagnostics with 0 issues",),
         category="finite theorem-search diagnostics",
     ),
     GateSpec(
