@@ -363,13 +363,17 @@ exact finite shifted-principal signed-Hankel grid trap:
   base a_k = 1/k!
   m <= 4, shifts <= 8 preserved
   positive a_17 breaks the next shifted m = 1 signed-Hankel/Jensen gate
+exact finite Schur/Toeplitz prefix trap:
+  base h_k = 1/k!, generating function exp(z)
+  h_0..h_6 and 2,940 finite Toeplitz/Schur tests preserved
+  positive h_7 breaks the Jacobi-Trudi skew-Schur determinant s_(6,6)
 positive one-term extensions of the current coefficient prefixes that break:
   order-2 Toeplitz/PF
   m = 1 signed-Hankel
   degree-2 Jensen hyperbolicity
 ```
 
-These examples are not claims about the actual zeta coefficients. They are proof-safety tests: any proposed bridge lemma that uses only local repulsion, only a finite coefficient prefix, only a finite shifted-principal Hankel grid, only a finite moment/recurrence prefix, or only Stieltjes/Hankel positivity where Toeplitz PF is required cannot prove `Lambda <= 0`.
+These examples are not claims about the actual zeta coefficients. They are proof-safety tests: any proposed bridge lemma that uses only local repulsion, only a finite coefficient prefix, only a finite Schur/Toeplitz shape prefix, only a finite shifted-principal Hankel grid, only a finite moment/recurrence prefix, or only Stieltjes/Hankel positivity where Toeplitz PF is required cannot prove `Lambda <= 0`.
 
 ## Gate B: Circularity Checks
 

@@ -46,6 +46,9 @@ REQUIRED_STRINGS = (
     "assumes Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0",
     "leaves a signed determinant or signed integral with no independent positivity theorem",
     "python work/rh_compute/scripts/countermodel_gate_examples.py",
+    "finite Schur-prefix promotion",
+    "2,940",
+    "s_(6,6) = h_6^2 - h_5 h_7",
     "No positive specialization, planar network, production matrix, continued",
     "Target S remains an open theorem target.",
 )

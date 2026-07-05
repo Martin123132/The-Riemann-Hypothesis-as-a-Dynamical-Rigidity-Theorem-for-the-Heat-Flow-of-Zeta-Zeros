@@ -176,8 +176,15 @@ outputs/countermodel_library.md
 ```
 
 These gates block finite-prefix promotion, moment-positivity promotion,
-local-repulsion promotion, and closure arguments whose hypotheses do not imply
-Toeplitz total positivity.
+finite Schur-prefix promotion, local-repulsion promotion, and closure arguments
+whose hypotheses do not imply Toeplitz total positivity.
+
+The exact Schur-prefix trap preserves `h_0..h_6` from the PF-infinity model
+`h_k = 1/k!`, validates `2,940` finite Toeplitz/Schur grid tests, and then
+chooses a positive `h_7` that makes the Jacobi-Trudi determinant
+`s_(6,6) = h_6^2 - h_5 h_7` negative. This shows that even a finite prefix
+copied from a genuinely positive specialization cannot replace an all-order
+construction.
 
 ## Current Blocker
 

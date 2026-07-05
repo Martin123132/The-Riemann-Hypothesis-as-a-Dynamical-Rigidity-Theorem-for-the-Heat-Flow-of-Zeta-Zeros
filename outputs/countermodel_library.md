@@ -13,7 +13,7 @@ python work/rh_compute/scripts/countermodel_gate_examples.py
 Current result:
 
 ```text
-validated 9 countermodel gate examples
+validated 10 countermodel gate examples
 ```
 
 ## Purpose
@@ -31,6 +31,7 @@ local zero repulsion
 finite signed-Hankel evidence
 finite Jensen hyperbolicity
 finite Toeplitz/PF certificates
+finite Schur/Toeplitz shape-prefix evidence
 finite Edrei moment-recurrence evidence
 Stieltjes/Hankel moment positivity without Toeplitz total positivity
 ```
@@ -125,6 +126,76 @@ Correct use:
 
 ```text
 The finite Toeplitz/PF ledger is falsification pressure and theorem-search evidence.
+```
+
+## Gate 2A: Finite Schur Prefix Is Not A Positive Specialization
+
+The positive Schur-specialization target studies:
+
+```text
+h_k -> d_k(0)
+```
+
+and tries to prove all skew-Schur evaluations nonnegative. A finite set of
+Schur or Toeplitz checks still cannot prove such a specialization exists.
+
+The exact gate starts with:
+
+```text
+h_k = 1/k!
+```
+
+whose generating function is `exp(z)`, a clean restricted PF-infinity model.
+It preserves:
+
+```text
+h_0, h_1, ..., h_6
+```
+
+and exactly checks a finite Toeplitz/Schur grid:
+
+```text
+N = 7
+orders <= 4
+2,940 finite tests
+1,204 structurally nonzero positive minors
+1,736 structural zeros
+```
+
+Then it chooses the next positive complete-homogeneous coordinate:
+
+```text
+h_7 = 1/2160
+```
+
+At the first untested Jacobi-Trudi shape:
+
+```text
+lambda = (6,6)
+mu = (0,0)
+```
+
+the determinant becomes:
+
+```text
+s_(6,6) = det [[h_6, h_7],
+               [h_5, h_6]]
+        = -1/518400 < 0.
+```
+
+Blocked proof step:
+
+```text
+A finite Schur/Toeplitz shape ledger proves h_k -> d_k is a positive
+specialization.
+```
+
+Correct use:
+
+```text
+Finite Schur/Toeplitz checks test proposed formulas. A proof needs an
+all-order positive specialization, planar network, production matrix,
+continued fraction, positive determinant integral, or equivalent theorem.
 ```
 
 ## Gate 3: Finite Signed-Hankel Is Not All-Order Signed Regularity
@@ -446,6 +517,15 @@ m <= 4, shifts <= 8 preserved
 positive a_17 breaks the next shifted m = 1 signed-Hankel/Jensen gate
 ```
 
+It validates the exact finite Schur-prefix trap:
+
+```text
+base h_k = 1/k!
+h_0..h_6 preserved
+2,940 finite Toeplitz/Schur tests preserved
+positive h_7 breaks s_(6,6)
+```
+
 It also validates the Stieltjes multiplier trap:
 
 ```text
@@ -463,6 +543,7 @@ Before accepting any proposed bridge lemma, ask:
 ```text
 Does the lemma fail on the local heat-birth model?
 Does the lemma rely only on a finite coefficient prefix?
+Does the lemma rely only on a finite Schur/Toeplitz shape prefix?
 Does the lemma rely only on a finite shifted-principal signed-Hankel grid?
 Does the lemma rely only on a finite moment or recurrence prefix?
 Does the lemma prove only Stieltjes/Hankel positivity when Toeplitz PF is required?

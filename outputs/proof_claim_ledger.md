@@ -105,6 +105,12 @@ jensen_hankel_bridge_algebra_gate:
   exact degree-2 signed-Hankel/Jensen identity plus a positive rational
   degree-3 countermodel; blocks promotion from finite low-order reshaped signs
   to Jensen hyperbolicity
+
+countermodel_gates:
+  validates 10 proof-safety examples, including local heat birth, finite
+  coefficient-prefix promotion, finite Schur-prefix promotion, finite
+  signed-Hankel grid promotion, finite moment-recurrence promotion, and
+  Stieltjes/Hankel-to-Toeplitz promotion traps
 ```
 
 ## Boundary

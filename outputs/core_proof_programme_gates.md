@@ -54,7 +54,7 @@ validated 20/20 core proof-programme gates
 
 ```text
 countermodel proof-safety gates:
-  validates 9 exact/logical traps
+  validates 10 exact/logical traps
 
 result-language boundary scan:
   scans output markdown for obvious unqualified global-proof overclaims

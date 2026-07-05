@@ -34,7 +34,7 @@ GATES: tuple[GateSpec, ...] = (
     GateSpec(
         name="countermodel proof-safety gates",
         command=("work/rh_compute/scripts/countermodel_gate_examples.py",),
-        expected=("validated 9 countermodel gate examples",),
+        expected=("validated 10 countermodel gate examples",),
         category="non-promotion guards",
     ),
     GateSpec(

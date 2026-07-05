@@ -311,6 +311,92 @@ def finite_consecutive_hankel_grid_extension_gate(max_m: int = 4, max_shift: int
     }
 
 
+def finite_schur_prefix_extension_gate(prefix_k: int = 6, matrix_n: int = 7, max_order: int = 4) -> dict:
+    """Preserve a Schur-positive prefix, then break the next skew-Schur gate.
+
+    The sequence h_k = 1/k! is compatible with the restricted PF-infinity
+    generating function exp(z), so it is a clean positive-specialization model.
+    Any finite test using only h_0..h_K is preserved if we edit h_{K+1}.  The
+    2x2 Jacobi-Trudi determinant for the shape (K,K) then breaks.
+    """
+    if prefix_k < 1:
+        raise ValueError("prefix_k must be at least 1")
+    if matrix_n < 2:
+        raise ValueError("matrix_n must be at least 2")
+    if max_order < 1:
+        raise ValueError("max_order must be positive")
+    if matrix_n - 1 > prefix_k:
+        raise ValueError("matrix_n uses coefficient indices beyond the preserved prefix")
+
+    from itertools import combinations
+
+    h = [Fraction(1, math.factorial(k)) for k in range(prefix_k + 2)]
+    finite_tests = 0
+    structural_zero_tests = 0
+    positive_tests = 0
+    min_positive: Fraction | None = None
+    for order in range(1, max_order + 1):
+        for rows in combinations(range(matrix_n), order):
+            for cols in combinations(range(matrix_n), order):
+                matrix = [
+                    [h[col - row] if col >= row else Fraction(0) for col in cols]
+                    for row in rows
+                ]
+                determinant = det_fraction(matrix)
+                finite_tests += 1
+                structural_nonzero = all(cols[i] >= rows[i] for i in range(order))
+                if structural_nonzero:
+                    if determinant <= 0:
+                        raise AssertionError(
+                            f"base h_k=1/k! failed structural minor rows={rows}, cols={cols}: {determinant}"
+                        )
+                    positive_tests += 1
+                    min_positive = determinant if min_positive is None else min(min_positive, determinant)
+                else:
+                    if determinant != 0:
+                        raise AssertionError(
+                            f"structural zero minor was nonzero rows={rows}, cols={cols}: {determinant}"
+                        )
+                    structural_zero_tests += 1
+
+    edited = list(h)
+    adversarial_next = Fraction(2) * h[prefix_k] * h[prefix_k] / h[prefix_k - 1]
+    edited[prefix_k + 1] = adversarial_next
+    broken_rows = (0, 1)
+    broken_cols = (prefix_k, prefix_k + 1)
+    broken_matrix = [
+        [edited[col - row] if col >= row else Fraction(0) for col in broken_cols]
+        for row in broken_rows
+    ]
+    broken_det = det_fraction(broken_matrix)
+
+    return {
+        "name": "finite_schur_prefix_extension",
+        "base_sequence": "h_k=1/k!, generating function exp(z)",
+        "preserved_prefix_through_k": prefix_k,
+        "finite_toeplitz_schur_grid_n": matrix_n,
+        "finite_toeplitz_schur_grid_max_order": max_order,
+        "finite_grid_tests": finite_tests,
+        "finite_grid_positive_nonzero_tests": positive_tests,
+        "finite_grid_structural_zero_tests": structural_zero_tests,
+        "all_finite_nonzero_tests_positive": positive_tests + structural_zero_tests == finite_tests,
+        "minimum_finite_positive_minor": short_fraction(min_positive or Fraction(0)),
+        "edited_h_index": prefix_k + 1,
+        "adversarial_positive_h_next": exact_fraction(adversarial_next),
+        "adversarial_next_is_positive": adversarial_next > 0,
+        "broken_jacobi_trudi_shape": f"lambda=({prefix_k},{prefix_k}), mu=(0,0)",
+        "broken_toeplitz_rows": list(broken_rows),
+        "broken_toeplitz_cols": list(broken_cols),
+        "broken_skew_schur_det": exact_fraction(broken_det),
+        "broken_skew_schur_det_is_negative": broken_det < 0,
+        "gate": (
+            "A finite Schur/Toeplitz prefix, even one copied from a genuinely "
+            "PF-infinity model, cannot prove that h_k -> d_k is a positive "
+            "specialization.  A proof needs an all-order construction."
+        ),
+    }
+
+
 def finite_prefix_gates(row: dict, prefix_k: int | None = None) -> dict:
     """Build positive adversarial extensions preserving the current prefix."""
     a = a_values(row)
@@ -390,6 +476,7 @@ def main() -> int:
         moment_recurrence_prefix_gate(args.moment_order),
         stieltjes_multiplier_trap_gate(),
         finite_consecutive_hankel_grid_extension_gate(),
+        finite_schur_prefix_extension_gate(),
     ]
     for lam in targets:
         if lam not in rows:
@@ -423,6 +510,14 @@ def main() -> int:
                 result["adversarial_next_coefficient_is_positive"],
                 result["next_shift_signed_hankel_breaks"],
                 result["jensen_hyperbolicity_breaks"],
+            )
+            if not all(required):
+                raise AssertionError(result)
+        elif result["name"] == "finite_schur_prefix_extension":
+            required = (
+                result["all_finite_nonzero_tests_positive"],
+                result["adversarial_next_is_positive"],
+                result["broken_skew_schur_det_is_negative"],
             )
             if not all(required):
                 raise AssertionError(result)
@@ -461,6 +556,13 @@ def main() -> int:
                     f"m<={result['max_m_preserved']}, "
                     f"shifts<={result['max_shift_preserved']} preserved, "
                     "next shifted m=1 signed-Hankel/Jensen gate breaks"
+                )
+            if result["name"] == "finite_schur_prefix_extension":
+                print(
+                    "  "
+                    f"base {result['base_sequence']}, "
+                    f"h_0..h_{result['preserved_prefix_through_k']} preserved, "
+                    "next Jacobi-Trudi skew-Schur determinant breaks"
                 )
             if result["name"] == "stieltjes_moment_multiplier_trap":
                 print(
