@@ -42,6 +42,7 @@ OK core gate: Jensen/Hankel bridge algebra gate
 OK core gate: Jensen-window PF obligation algebra gate
 OK core gate: Arb Jensen-window PF obligation finite diagnostics
 OK core gate: Arb Jensen-window Sturm hyperbolicity finite diagnostics
+OK core gate: Arb Jensen-window Sturm degree-5 hyperbolicity finite diagnostics
 OK core gate: signed-Hankel/Jensen bridge target specification
 OK core gate: Jensen-window PF bridge target
 OK core gate: sign-regularity theorem fit matrix
@@ -51,7 +52,7 @@ OK core gate: Edrei power-Hankel diagnostics
 OK core gate: Edrei midpoint frontier non-promotion guard
 OK core gate: Edrei power-Hankel boundary repair manifest
 OK core gate: Edrei moment-recurrence scout manifest
-validated 24/24 core proof-programme gates
+validated 25/25 core proof-programme gates
 ```
 
 ## Included Gates
@@ -72,7 +73,7 @@ output reference integrity:
   files; current run has 0 missing required paths and 3 planned deliverables
 
 proof-claim ledger:
-  validates 23 classified claims, including 6 open theorem targets that remain
+  validates 24 classified claims, including 6 open theorem targets that remain
   explicitly unproved
 
 signed-Hankel finite certificates:
@@ -114,6 +115,11 @@ Arb Jensen-window PF obligation finite diagnostics:
 Arb Jensen-window Sturm hyperbolicity finite diagnostics:
   validates 210 Arb/Sturm degree-3/4 Jensen-window positive-root counts for
   Q_{d,n,lambda}(y)=P_{d,n,lambda}(-y) on the five-lambda grid and shifts
+  n=0..20
+
+Arb Jensen-window Sturm degree-5 hyperbolicity finite diagnostics:
+  validates 105 Arb/Sturm degree-5 Jensen-window positive-root counts for
+  Q_{5,n,lambda}(y)=P_{5,n,lambda}(-y) on the five-lambda grid and shifts
   n=0..20
 
 signed-Hankel/Jensen bridge target specification:
@@ -180,7 +186,7 @@ python work/rh_compute/scripts/check_core_proof_programme_gates.py --skip-slow
 Current quick result:
 
 ```text
-validated 23/23 core proof-programme gates
+validated 24/24 core proof-programme gates
 ```
 
 For machine-readable output:

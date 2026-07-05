@@ -65,9 +65,9 @@ Jensen-window Toeplitz obligations and exact low-order countermodel failures.
 The Arb diagnostic validates `1470/1470` selected degree-3/4
 Jensen-window interval determinants across the five-lambda grid and shifts
 `n=0..20`; this remains finite evidence only.
-The companion Arb/Sturm diagnostic validates `210/210` degree-3/4
-positive-root counts for `Q_{d,n,lambda}(y)=P_{d,n,lambda}(-y)` on the same
-lambda and shift grid; this also remains finite evidence only.
+The companion Arb/Sturm diagnostic validates `210/210` degree-3/4 and
+`105/105` degree-5 positive-root counts for `Q_{d,n,lambda}(y)=P_{d,n,lambda}(-y)`
+on the same lambda and shift grid; this also remains finite evidence only.
 
 For the reshaped-Hankel sign-consistency route, define the shifted row block:
 

@@ -7,9 +7,9 @@ For each lambda, shift n, and degree d, form:
                       = sum_j (-1)^j binom(d,j) A_{n+j}(lambda) y^j.
 
 The selected diagnostic checks that an interval-enclosed Sturm sequence has
-exactly d sign-variation drops on (0, infinity), for d=3,4 in the configured
-finite grid.  This is a finite diagnostic only; it is not all-degree/all-shift
-Jensen hyperbolicity and not a proof of RH or Lambda <= 0.
+exactly d sign-variation drops on (0, infinity), for the configured finite
+degree/shift/lambda grid.  This is a finite diagnostic only; it is not
+all-degree/all-shift Jensen hyperbolicity and not a proof of RH or Lambda <= 0.
 """
 
 from __future__ import annotations
@@ -171,6 +171,15 @@ def q_coefficients(balls: dict[int, flint.arb], shift_n: int, degree_d: int) -> 
     return [((-1) ** j) * comb(degree_d, j) * balls[shift_n + j] for j in range(degree_d + 1)]
 
 
+def degree_phrase(degrees: list[int]) -> str:
+    labels = [f"degree-{degree}" for degree in degrees]
+    if len(labels) == 1:
+        return labels[0]
+    if len(labels) == 2:
+        return f"{labels[0]} and {labels[1]}"
+    return f"{', '.join(labels[:-1])}, and {labels[-1]}"
+
+
 def probe_one(balls: dict[int, flint.arb], lam: str, shift_n: int, degree_d: int) -> SturmRow:
     seq = sturm_sequence(q_coefficients(balls, shift_n, degree_d))
     signs_at_zero = [sign_arb(poly[0]) for poly in seq]
@@ -245,7 +254,7 @@ def main() -> int:
         "kind": "arb_jensen_window_sturm_hyperbolicity_summary",
         "date": "2026-07-05",
         "proof_boundary": (
-            "Finite Arb/Sturm-style diagnostic for degree-3 and degree-4 "
+            f"Finite Arb/Sturm-style diagnostic for {degree_phrase(degrees)} "
             "Jensen windows only; not all-degree or all-shift Jensen "
             "hyperbolicity, not Jensen-window PF-infinity, and not a proof of "
             "RH or Lambda <= 0."

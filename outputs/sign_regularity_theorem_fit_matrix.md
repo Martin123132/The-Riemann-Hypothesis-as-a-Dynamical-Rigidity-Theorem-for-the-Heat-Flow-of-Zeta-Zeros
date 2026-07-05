@@ -323,6 +323,10 @@ This validates `210/210` degree-3/4 Jensen-window positive-root counts for
 `Q_{d,n,lambda}(y)=P_{d,n,lambda}(-y)` across the same five-lambda grid and
 shifts `n=0..20`. It is finite hyperbolicity evidence, not all-degree or all-shift Jensen hyperbolicity.
 
+The degree-5 extension manifest validates another `105/105` positive-root
+counts with needed max coefficient index `25`. This is a stronger stress test
+of the same finite diagnostic, not a theorem upgrade.
+
 Misfit:
 
 ```text

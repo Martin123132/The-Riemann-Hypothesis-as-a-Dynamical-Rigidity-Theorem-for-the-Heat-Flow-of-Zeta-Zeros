@@ -50,6 +50,8 @@ REQUIRED_STRINGS = (
     "1470/1470",
     "not all-minor Jensen-window PF-infinity",
     "210/210",
+    "105/105",
+    "needed max coefficient index `25`",
     "positive-root counts for",
     "not all-degree or all-shift Jensen hyperbolicity",
     "The criterion needs all degrees and shifts.",

@@ -37,6 +37,7 @@ REQUIRED_STRINGS = (
     "degree 3 and degree 4 introduce additional",
     "1470/1470",
     "210/210",
+    "105/105",
     "positive-root counts for `Q_{d,n,lambda}(y)=P_{d,n,lambda}(-y)`",
     "R_{k,n}(j_1,...,j_k)",
     "(-1)^(k(k-1)/2)",

@@ -4,8 +4,8 @@ Date: 2026-07-05
 
 Status: finite Arb/Sturm diagnostic. This is not a proof of Jensen-window
 PF-infinity, all-degree Jensen hyperbolicity, Laguerre-Polya membership, RH,
-or `Lambda <= 0`; it certifies only a bounded family of degree-3 and degree-4
-Jensen-window root counts.
+or `Lambda <= 0`; it certifies only bounded families of degree-3, degree-4,
+and degree-5 Jensen-window root counts.
 
 ## Purpose
 
@@ -30,12 +30,21 @@ python work/rh_compute/scripts/arb_jensen_window_sturm_hyperbolicity_probe.py
 python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py
 work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d3_d4_dps520_summary.json
 work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d3_d4_dps520.jsonl
+work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520_summary.json
+work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520.jsonl
 ```
 
-Current result:
+Current degree-3/4 result:
 
 ```text
 validated 210 Arb Jensen-window Sturm hyperbolicity finite diagnostics with 0 issues
+```
+
+Current degree-5 result:
+
+```text
+python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py --summary work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520_summary.json --rows work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520.jsonl --expected-degrees 5
+validated 105 Arb Jensen-window Sturm hyperbolicity finite diagnostics with 0 issues
 ```
 
 ## What Was Checked
@@ -51,11 +60,13 @@ work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k21_k32.jsonl
 Finite range:
 
 ```text
-degree d = 3,4
+degree d = 3,4 in the base manifest
+degree d = 5 in the extension manifest
 lambda in {0, 1e-6, 1e-4, 1e-2, 1e-1}
 shifts n = 0..20
 dps = 520
-needed max coefficient index = 24
+needed max coefficient index = 24 for d=3,4
+needed max coefficient index = 25 for d=5
 ```
 
 For each row, the probe builds an interval-enclosed Sturm sequence for
@@ -68,6 +79,7 @@ The manifest contains:
 210/210 lambda-shift-degree rows positive-root-count certified
 105/105 degree-3 rows
 105/105 degree-4 rows
+105/105 degree-5 extension rows positive-root-count certified
 0 failed or inconclusive
 ```
 

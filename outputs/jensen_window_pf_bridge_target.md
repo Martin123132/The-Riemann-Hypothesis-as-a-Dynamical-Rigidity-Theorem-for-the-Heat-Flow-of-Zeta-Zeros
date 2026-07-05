@@ -125,13 +125,16 @@ The finite Arb/Sturm root-count diagnostic:
 outputs/arb_jensen_window_sturm_hyperbolicity_diagnostic.md
 work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d3_d4_dps520_summary.json
 work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d3_d4_dps520.jsonl
+work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520_summary.json
+work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520.jsonl
 python work/rh_compute/scripts/arb_jensen_window_sturm_hyperbolicity_probe.py
 python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py
 ```
 
-validates `210/210` degree-3/4 Jensen-window positive-root counts for
-`Q_{d,n,lambda}(y)=P_{d,n,lambda}(-y)` across the same five-lambda grid and
-shifts `n=0..20`. This is finite hyperbolicity evidence, not all-degree or all-shift Jensen hyperbolicity.
+validates `210/210` degree-3/4 and `105/105` degree-5 Jensen-window
+positive-root counts for `Q_{d,n,lambda}(y)=P_{d,n,lambda}(-y)` across the
+same five-lambda grid and shifts `n=0..20`. This is finite hyperbolicity
+evidence, not all-degree or all-shift Jensen hyperbolicity.
 
 The older Jensen/Hankel bridge algebra gate:
 
