@@ -74,10 +74,10 @@ range:
 
 ```text
 lambda in {0, 1e-6, 1e-4, 1e-2, 1e-1}
-n = 0..12
+n = 0..20
 k = 2..5
 N = 18 columns
-818,805/818,805 finite minors positive
+1,322,685/1,322,685 finite minors positive
 ```
 
 Both certificates remain finite. They are evidence for the theorem target, not

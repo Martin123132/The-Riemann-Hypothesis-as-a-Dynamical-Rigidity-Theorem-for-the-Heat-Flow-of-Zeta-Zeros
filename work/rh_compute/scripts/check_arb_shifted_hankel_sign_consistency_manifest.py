@@ -14,18 +14,18 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_SUMMARY = (
     REPO_ROOT
-    / "work/rh_compute/results/arb_shifted_hankel_sign_consistency_lamgrid_n0_n12_k2_k5_N18_dps520_summary.json"
+    / "work/rh_compute/results/arb_shifted_hankel_sign_consistency_lamgrid_n0_n20_k2_k5_N18_dps520_summary.json"
 )
 DEFAULT_JSONL = (
     REPO_ROOT
-    / "work/rh_compute/results/arb_shifted_hankel_sign_consistency_lamgrid_n0_n12_k2_k5_N18_dps520.jsonl.gz"
+    / "work/rh_compute/results/arb_shifted_hankel_sign_consistency_lamgrid_n0_n20_k2_k5_N18_dps520.jsonl.gz"
 )
 EXPECTED_LAMBDAS = ("0", "1e-6", "1e-4", "1e-2", "1e-1")
-EXPECTED_SHIFTS = tuple(range(13))
+EXPECTED_SHIFTS = tuple(range(21))
 EXPECTED_ORDERS = (2, 3, 4, 5)
 EXPECTED_N_COLS = 18
 EXPECTED_DPS = 520
-EXPECTED_NEEDED_MAX_K = 33
+EXPECTED_NEEDED_MAX_K = 41
 
 
 @dataclass(frozen=True)

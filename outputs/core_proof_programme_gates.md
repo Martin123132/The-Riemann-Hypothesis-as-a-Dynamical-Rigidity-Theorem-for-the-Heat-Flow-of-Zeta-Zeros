@@ -88,8 +88,8 @@ Hankel sign-consistency reduction finite certificates:
   for the five-lambda grid, orders k=2..7, and N=20
 
 shifted Hankel sign-consistency finite certificates:
-  validates 818,805 Arb/enclosure-backed shifted reshaped-Hankel finite
-  certificates for the five-lambda grid, shifts n=0..12, orders k=2..5,
+  validates 1,322,685 Arb/enclosure-backed shifted reshaped-Hankel finite
+  certificates for the five-lambda grid, shifts n=0..20, orders k=2..5,
   and N=18
 
 Jensen/Hankel bridge algebra gate:

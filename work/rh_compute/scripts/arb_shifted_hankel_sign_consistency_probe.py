@@ -214,7 +214,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--enclosure-jsonl", type=Path, nargs="+", default=[Path(p) for p in DEFAULT_ENCLOSURE_JSONL])
     parser.add_argument("--lambdas", default=",".join(DEFAULT_LAMBDAS))
-    parser.add_argument("--shifts", default="0..12")
+    parser.add_argument("--shifts", default="0..20")
     parser.add_argument("--orders", default="2,3,4,5")
     parser.add_argument("--n-cols", type=int, default=18)
     parser.add_argument("--dps", type=int, default=520)

@@ -307,8 +307,8 @@ This is a finite certificate only; it does not prove the all-order
 sign-consistency bridge.
 
 The shifted reshaped-Hankel Arb manifest adds finite shift coverage:
-five-lambda grid, `n = 0..12`, `k = 2..5`, `N = 18`, validating
-`818,805/818,805` finite shifted minors. This is still a finite rectangle, not
+five-lambda grid, `n = 0..20`, `k = 2..5`, `N = 18`, validating
+`1,322,685/1,322,685` finite shifted minors. This is still a finite rectangle, not
 the all-shift theorem required by the bridge target.
 
 The Jensen/Hankel bridge algebra gate records the exact degree-2 identity

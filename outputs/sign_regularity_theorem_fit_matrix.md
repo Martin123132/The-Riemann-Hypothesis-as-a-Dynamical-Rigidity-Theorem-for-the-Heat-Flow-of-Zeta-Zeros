@@ -446,20 +446,20 @@ Finite shifted Arb certificate:
 ```text
 python work/rh_compute/scripts/arb_shifted_hankel_sign_consistency_probe.py
 python work/rh_compute/scripts/check_arb_shifted_hankel_sign_consistency_manifest.py
-work/rh_compute/results/arb_shifted_hankel_sign_consistency_lamgrid_n0_n12_k2_k5_N18_dps520_summary.json
-work/rh_compute/results/arb_shifted_hankel_sign_consistency_lamgrid_n0_n12_k2_k5_N18_dps520.jsonl.gz
+work/rh_compute/results/arb_shifted_hankel_sign_consistency_lamgrid_n0_n20_k2_k5_N18_dps520_summary.json
+work/rh_compute/results/arb_shifted_hankel_sign_consistency_lamgrid_n0_n20_k2_k5_N18_dps520.jsonl.gz
 ```
 
-Using rigorous `A_ball` coefficient enclosures through `A_33`, the shifted
+Using rigorous `A_ball` coefficient enclosures through `A_41`, the shifted
 manifest checks the same reshaped-Hankel condition for bounded shifts:
 
 ```text
 lambda in {0, 1e-6, 1e-4, 1e-2, 1e-1}
-n = 0..12
+n = 0..20
 k = 2..5
 N = 18
 dps = 520
-818,805/818,805 finite shifted minors positive and separated from zero
+1,322,685/1,322,685 finite shifted minors positive and separated from zero
 ```
 
 This directly addresses the all-shift requirement in the formal bridge target,
