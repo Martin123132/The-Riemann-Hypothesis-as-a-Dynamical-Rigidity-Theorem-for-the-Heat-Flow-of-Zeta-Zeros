@@ -42,8 +42,10 @@ The total-positivity reformulation is recorded in:
 ```text
 outputs/jensen_window_pf_bridge_target.md
 outputs/jensen_window_pf_obligation_algebra.md
+outputs/arb_jensen_window_pf_obligation_diagnostic.md
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py
 python work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py
+python work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py
 ```
 
 It asks for every binomially weighted Jensen window:
@@ -58,6 +60,9 @@ target, not a proof that the target holds.
 The obligation algebra gate records that degree 2 is the exact signed-Hankel
 contact point, while degree 3 and degree 4 introduce additional
 Jensen-window Toeplitz obligations and exact low-order countermodel failures.
+The Arb diagnostic validates `1470/1470` selected degree-3/4
+Jensen-window interval determinants across the five-lambda grid and shifts
+`n=0..20`; this remains finite evidence only.
 
 For the reshaped-Hankel sign-consistency route, define the shifted row block:
 

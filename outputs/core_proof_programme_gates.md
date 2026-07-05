@@ -40,6 +40,7 @@ OK core gate: Hankel sign-consistency reduction finite certificates
 OK core gate: shifted Hankel staircase finite certificates
 OK core gate: Jensen/Hankel bridge algebra gate
 OK core gate: Jensen-window PF obligation algebra gate
+OK core gate: Arb Jensen-window PF obligation finite diagnostics
 OK core gate: signed-Hankel/Jensen bridge target specification
 OK core gate: Jensen-window PF bridge target
 OK core gate: sign-regularity theorem fit matrix
@@ -49,7 +50,7 @@ OK core gate: Edrei power-Hankel diagnostics
 OK core gate: Edrei midpoint frontier non-promotion guard
 OK core gate: Edrei power-Hankel boundary repair manifest
 OK core gate: Edrei moment-recurrence scout manifest
-validated 22/22 core proof-programme gates
+validated 23/23 core proof-programme gates
 ```
 
 ## Included Gates
@@ -70,7 +71,7 @@ output reference integrity:
   files; current run has 0 missing required paths and 3 planned deliverables
 
 proof-claim ledger:
-  validates 21 classified claims, including 6 open theorem targets that remain
+  validates 22 classified claims, including 6 open theorem targets that remain
   explicitly unproved
 
 signed-Hankel finite certificates:
@@ -104,6 +105,10 @@ Jensen-window PF obligation algebra gate:
   validates exact low-degree Jensen-window PF obligations: degree 2 matches the
   signed-Hankel threshold, while degree 3 and degree 4 introduce additional
   banded Toeplitz obligations and finite low-order countermodel failures
+
+Arb Jensen-window PF obligation finite diagnostics:
+  validates 1,470 selected Arb/enclosure-backed degree-3/4 Jensen-window
+  contiguous Toeplitz determinants for the five-lambda grid and shifts n=0..20
 
 signed-Hankel/Jensen bridge target specification:
   validates that the active bridge target is stated as an all-order,
@@ -169,7 +174,7 @@ python work/rh_compute/scripts/check_core_proof_programme_gates.py --skip-slow
 Current quick result:
 
 ```text
-validated 21/21 core proof-programme gates
+validated 22/22 core proof-programme gates
 ```
 
 For machine-readable output:

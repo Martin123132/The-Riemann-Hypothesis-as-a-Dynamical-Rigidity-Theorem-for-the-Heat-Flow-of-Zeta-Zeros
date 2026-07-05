@@ -296,6 +296,18 @@ signed-Hankel and the first degree-3/4 Jensen-window Toeplitz obligations. Its
 countermodel shows selected low-order window minors can pass while larger
 contiguous Toeplitz minors fail.
 
+Finite Arb diagnostic:
+
+```text
+outputs/arb_jensen_window_pf_obligation_diagnostic.md
+python work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py
+```
+
+This validates `1470/1470` selected Arb interval determinants for the
+degree-3 and degree-4 Jensen-window contiguous Toeplitz families across the
+five-lambda grid and shifts `n=0..20`. It is finite theorem-search evidence,
+not all-minor Jensen-window PF-infinity.
+
 Misfit:
 
 ```text
@@ -708,9 +720,11 @@ Formal target specification:
 outputs/signed_hankel_jensen_bridge_target.md
 outputs/jensen_window_pf_bridge_target.md
 outputs/jensen_window_pf_obligation_algebra.md
+outputs/arb_jensen_window_pf_obligation_diagnostic.md
 python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py
 python work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py
+python work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py
 ```
 
 Why active:

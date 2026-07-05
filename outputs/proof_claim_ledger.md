@@ -25,7 +25,7 @@ python work/rh_compute/scripts/check_proof_claim_ledger.py
 Current result:
 
 ```text
-validated proof-claim ledger: 21 claims, 0 issues, 6 open theorem targets
+validated proof-claim ledger: 22 claims, 0 issues, 6 open theorem targets
 ```
 
 ## Categories
@@ -117,6 +117,11 @@ jensen_window_pf_obligation_algebra_gate:
   exact low-degree Jensen-window PF obligation algebra; degree 2 matches the
   signed-Hankel threshold, while degree 3 and degree 4 introduce additional
   banded Toeplitz obligations and finite low-order countermodel failures
+
+arb_jensen_window_pf_obligation_diagnostic:
+  Arb/enclosure-backed finite diagnostic for selected degree-3/4
+  Jensen-window contiguous Toeplitz determinants; validates 1,470/1,470
+  finite determinants for the five-lambda grid and shifts n=0..20
 
 target_jensen_window_pf_bridge:
   theorem target that reformulates all-degree/all-shift Jensen hyperbolicity

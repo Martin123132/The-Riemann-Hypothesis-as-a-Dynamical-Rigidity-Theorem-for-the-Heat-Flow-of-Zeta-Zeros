@@ -105,6 +105,20 @@ records the degree-2 exact contact, selected degree-3 and degree-4
 Jensen-window Toeplitz obligations, and an exact countermodel in which selected
 low-order window minors pass while larger contiguous Toeplitz minors fail.
 
+The finite Arb diagnostic:
+
+```text
+outputs/arb_jensen_window_pf_obligation_diagnostic.md
+work/rh_compute/results/arb_jensen_window_pf_obligations_lamgrid_n0_n20_d3_m1_m8_d4_m1_m6_dps520_summary.json
+work/rh_compute/results/arb_jensen_window_pf_obligations_lamgrid_n0_n20_d3_m1_m8_d4_m1_m6_dps520.jsonl
+python work/rh_compute/scripts/arb_jensen_window_pf_obligation_probe.py
+python work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py
+```
+
+validates `1470/1470` selected Arb interval determinants for `d=3` and `d=4`
+across the five-lambda grid and shifts `n=0..20`. This is finite
+theorem-search evidence, not all-minor Jensen-window PF-infinity.
+
 The older Jensen/Hankel bridge algebra gate:
 
 ```text
