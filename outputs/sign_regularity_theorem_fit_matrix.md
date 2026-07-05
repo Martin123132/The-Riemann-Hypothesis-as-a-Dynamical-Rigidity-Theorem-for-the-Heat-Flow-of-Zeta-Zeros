@@ -446,8 +446,11 @@ Finite shifted Arb certificate:
 ```text
 python work/rh_compute/scripts/arb_shifted_hankel_sign_consistency_probe.py
 python work/rh_compute/scripts/check_arb_shifted_hankel_sign_consistency_manifest.py
+python work/rh_compute/scripts/check_arb_shifted_hankel_k6_manifest.py
 work/rh_compute/results/arb_shifted_hankel_sign_consistency_lamgrid_n0_n20_k2_k5_N18_dps520_summary.json
 work/rh_compute/results/arb_shifted_hankel_sign_consistency_lamgrid_n0_n20_k2_k5_N18_dps520.jsonl.gz
+work/rh_compute/results/arb_shifted_hankel_sign_consistency_lamgrid_n0_n20_k6_N16_dps520_summary.json
+work/rh_compute/results/arb_shifted_hankel_sign_consistency_lamgrid_n0_n20_k6_N16_dps520.jsonl.gz
 ```
 
 Using rigorous `A_ball` coefficient enclosures through `A_41`, the shifted
@@ -460,6 +463,18 @@ k = 2..5
 N = 18
 dps = 520
 1,322,685/1,322,685 finite shifted minors positive and separated from zero
+```
+
+The next-order shifted slice checks:
+
+```text
+lambda in {0, 1e-6, 1e-4, 1e-2, 1e-1}
+n = 0..20
+k = 6
+N = 16
+dps = 520
+needed max coefficient index = 40
+840,840/840,840 finite shifted minors positive and separated from zero
 ```
 
 This directly addresses the all-shift requirement in the formal bridge target,

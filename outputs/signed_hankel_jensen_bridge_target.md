@@ -80,7 +80,17 @@ N = 18 columns
 1,322,685/1,322,685 finite minors positive
 ```
 
-Both certificates remain finite. They are evidence for the theorem target, not
+The order-6 shifted Arb certificate adds the next-order finite slice:
+
+```text
+lambda in {0, 1e-6, 1e-4, 1e-2, 1e-1}
+n = 0..20
+k = 6
+N = 16 columns
+840,840/840,840 finite minors positive
+```
+
+All certificates remain finite. They are evidence for the theorem target, not
 the all-shift/all-order theorem itself.
 
 ## Candidate Theorem B-Star

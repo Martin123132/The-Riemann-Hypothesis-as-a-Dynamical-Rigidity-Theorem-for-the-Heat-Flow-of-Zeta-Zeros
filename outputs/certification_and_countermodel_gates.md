@@ -311,6 +311,11 @@ five-lambda grid, `n = 0..20`, `k = 2..5`, `N = 18`, validating
 `1,322,685/1,322,685` finite shifted minors. This is still a finite rectangle, not
 the all-shift theorem required by the bridge target.
 
+The order-6 shifted Arb manifest adds the next-order finite slice:
+five-lambda grid, `n = 0..20`, `k = 6`, `N = 16`, validating
+`840,840/840,840` finite shifted minors using coefficient enclosures through
+`A_40`. This is a finite next-order stress test, not an all-order theorem.
+
 The Jensen/Hankel bridge algebra gate records the exact degree-2 identity
 between the `m = 1` signed-Hankel determinant and the degree-2 Jensen
 discriminant, and an exact positive rational degree-3 countermodel showing
@@ -330,7 +335,7 @@ outputs/core_proof_programme_gates.md
 Current core runner status:
 
 ```text
-validated 20/20 core proof-programme gates
+validated 21/21 core proof-programme gates
 ```
 
 Current manifest status:
