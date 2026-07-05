@@ -441,6 +441,29 @@ evidence to an enclosure-backed finite certificate. It is still not an
 all-order sign-consistency theorem, not a Jensen hyperbolicity theorem, and
 not a proof of RH or `Lambda <= 0`.
 
+Exact Jensen/Hankel bridge algebra gate:
+
+```text
+python work/rh_compute/scripts/jensen_hankel_bridge_algebra.py
+python work/rh_compute/scripts/check_jensen_hankel_bridge_algebra.py
+work/rh_compute/results/jensen_hankel_bridge_algebra.json
+outputs/jensen_hankel_bridge_algebra.md
+```
+
+This gate records:
+
+```text
+degree 2:
+  Delta_2 = -4 det [[A_n, A_{n+1}], [A_{n+1}, A_{n+2}]]
+
+degree 3:
+  positive rational A_0..A_4 can pass finite reshaped signs for
+  k = 2,3 and N = 3 while the degree-3 Jensen discriminant is negative
+```
+
+Therefore the degree-2 signed-Hankel/Jensen bridge is exact, but finite
+low-order reshaped-Hankel signs do not supply the missing all-order bridge.
+
 Required upgrade:
 
 ```text
@@ -602,6 +625,7 @@ The executable countermodel support is:
 
 ```text
 python work/rh_compute/scripts/countermodel_gate_examples.py
+python work/rh_compute/scripts/check_jensen_hankel_bridge_algebra.py
 ```
 
 ## Conclusion

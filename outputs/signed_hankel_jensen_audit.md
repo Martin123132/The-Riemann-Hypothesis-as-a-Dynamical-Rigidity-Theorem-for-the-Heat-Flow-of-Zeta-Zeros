@@ -249,6 +249,22 @@ signed-Hankel determinant and the matching degree-2 Jensen discriminant. This
 blocks the narrower promotion from a finite shifted-principal grid to all
 shifts or all-order sign consistency.
 
+Exact algebra gate added 2026-07-05:
+
+```text
+work/rh_compute/scripts/jensen_hankel_bridge_algebra.py
+work/rh_compute/scripts/check_jensen_hankel_bridge_algebra.py
+outputs/jensen_hankel_bridge_algebra.md
+```
+
+This gate proves the low-degree boundary precisely: the degree-2 Jensen
+discriminant is `-4` times the `m = 1` Hankel determinant, so the signed-Hankel
+condition is exact at degree 2. It also gives a positive rational sequence
+that passes finite reshaped-Hankel signs for `k = 2,3`, `N = 3`, while the
+degree-3 Jensen discriminant is negative. Thus even finite low-order
+reshaped-Hankel sign consistency cannot be promoted to Jensen hyperbolicity
+without the missing all-order bridge theorem.
+
 ## 7. Failed Or Damaged Routes
 
 ### Ordinary Log-Concavity
