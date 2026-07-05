@@ -104,6 +104,12 @@ GATES: tuple[GateSpec, ...] = (
         category="promoted finite evidence",
     ),
     GateSpec(
+        name="shifted Hankel order-7 finite certificates",
+        command=("work/rh_compute/scripts/check_arb_shifted_hankel_k7_manifest.py",),
+        expected=("validated 675675 shifted Arb reshaped-Hankel order-7 finite certificates with 0 issues",),
+        category="promoted finite evidence",
+    ),
+    GateSpec(
         name="Jensen/Hankel bridge algebra gate",
         command=("work/rh_compute/scripts/check_jensen_hankel_bridge_algebra.py",),
         expected=("validated Jensen/Hankel bridge algebra gate: degree2 identity and degree3 finite countermodel with 0 issues",),

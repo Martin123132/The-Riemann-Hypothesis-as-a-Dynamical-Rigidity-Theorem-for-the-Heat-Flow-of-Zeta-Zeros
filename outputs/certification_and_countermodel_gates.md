@@ -316,6 +316,11 @@ five-lambda grid, `n = 0..20`, `k = 6`, `N = 16`, validating
 `840,840/840,840` finite shifted minors using coefficient enclosures through
 `A_40`. This is a finite next-order stress test, not an all-order theorem.
 
+The order-7 shifted Arb manifest adds another bounded next-order slice:
+five-lambda grid, `n = 0..20`, `k = 7`, `N = 15`, validating
+`675,675/675,675` finite shifted minors using coefficient enclosures through
+`A_40`. This is finite evidence only.
+
 The Jensen/Hankel bridge algebra gate records the exact degree-2 identity
 between the `m = 1` signed-Hankel determinant and the degree-2 Jensen
 discriminant, and an exact positive rational degree-3 countermodel showing
@@ -335,7 +340,7 @@ outputs/core_proof_programme_gates.md
 Current core runner status:
 
 ```text
-validated 21/21 core proof-programme gates
+validated 22/22 core proof-programme gates
 ```
 
 Current manifest status:

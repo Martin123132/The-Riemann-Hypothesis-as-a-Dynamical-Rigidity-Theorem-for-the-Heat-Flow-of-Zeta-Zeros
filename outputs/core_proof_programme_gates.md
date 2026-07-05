@@ -39,6 +39,7 @@ OK core gate: Hankel sign-consistency reduction point audits
 OK core gate: Hankel sign-consistency reduction finite certificates
 OK core gate: shifted Hankel sign-consistency finite certificates
 OK core gate: shifted Hankel order-6 finite certificates
+OK core gate: shifted Hankel order-7 finite certificates
 OK core gate: Jensen/Hankel bridge algebra gate
 OK core gate: signed-Hankel/Jensen bridge target specification
 OK core gate: sign-regularity theorem fit matrix
@@ -48,7 +49,7 @@ OK core gate: Edrei power-Hankel diagnostics
 OK core gate: Edrei midpoint frontier non-promotion guard
 OK core gate: Edrei power-Hankel boundary repair manifest
 OK core gate: Edrei moment-recurrence scout manifest
-validated 21/21 core proof-programme gates
+validated 22/22 core proof-programme gates
 ```
 
 ## Included Gates
@@ -98,6 +99,10 @@ shifted Hankel sign-consistency finite certificates:
 shifted Hankel order-6 finite certificates:
   validates 840,840 Arb/enclosure-backed shifted reshaped-Hankel finite
   certificates for the five-lambda grid, shifts n=0..20, order k=6, and N=16
+
+shifted Hankel order-7 finite certificates:
+  validates 675,675 Arb/enclosure-backed shifted reshaped-Hankel finite
+  certificates for the five-lambda grid, shifts n=0..20, order k=7, and N=15
 
 Jensen/Hankel bridge algebra gate:
   validates the exact degree-2 signed-Hankel/Jensen identity and an exact
@@ -162,7 +167,7 @@ python work/rh_compute/scripts/check_core_proof_programme_gates.py --skip-slow
 Current quick result:
 
 ```text
-validated 20/20 core proof-programme gates
+validated 21/21 core proof-programme gates
 ```
 
 For machine-readable output:

@@ -90,6 +90,16 @@ N = 16 columns
 840,840/840,840 finite minors positive
 ```
 
+The order-7 shifted Arb certificate adds another bounded next-order slice:
+
+```text
+lambda in {0, 1e-6, 1e-4, 1e-2, 1e-1}
+n = 0..20
+k = 7
+N = 15 columns
+675,675/675,675 finite minors positive
+```
+
 All certificates remain finite. They are evidence for the theorem target, not
 the all-shift/all-order theorem itself.
 
