@@ -284,6 +284,7 @@ python work/rh_compute/scripts/check_result_language_boundaries.py
 python work/rh_compute/scripts/check_toeplitz_certificate_manifest.py
 python work/rh_compute/scripts/check_toeplitz_jacobi_trudi_map.py
 python work/rh_compute/scripts/check_hankel_sign_consistency_reduction_audit.py
+python work/rh_compute/scripts/check_arb_hankel_sign_consistency_reduction_manifest.py
 python work/rh_compute/scripts/check_edrei_log_sign_manifest.py
 python work/rh_compute/scripts/check_edrei_power_hankel_manifest.py
 python work/rh_compute/scripts/check_edrei_power_hankel_frontier_manifest.py
@@ -295,6 +296,13 @@ The checker validates the advertised positive summaries, empty problem-row files
 available stderr logs, and the beta negative control before a finite range is
 treated as part of the proof programme.
 
+The Grussler-Damm reshaped-Hankel sign-consistency route now has both an
+exact-rationalized cache point audit and an Arb/enclosure-backed finite
+certificate for the five-lambda grid, `k = 2..5`, `N = 18`. The Arb manifest
+validates `62,985/62,985` finite minors as positive and separated from zero.
+This is a finite certificate only; it does not prove the all-order
+sign-consistency bridge.
+
 The core runner is documented in:
 
 ```text
@@ -304,7 +312,7 @@ outputs/core_proof_programme_gates.md
 Current core runner status:
 
 ```text
-validated 14/14 core proof-programme gates
+validated 15/15 core proof-programme gates
 ```
 
 Current manifest status:

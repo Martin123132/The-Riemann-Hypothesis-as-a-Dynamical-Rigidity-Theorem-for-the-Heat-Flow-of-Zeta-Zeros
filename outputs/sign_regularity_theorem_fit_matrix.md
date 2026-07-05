@@ -414,11 +414,38 @@ N = 18
 This is a point diagnostic on cached coefficients, not a Level-4 interval
 certificate and not an all-order sign-consistency proof.
 
+Finite Arb certificate:
+
+```text
+python work/rh_compute/scripts/arb_hankel_sign_consistency_reduction_probe.py
+python work/rh_compute/scripts/check_arb_hankel_sign_consistency_reduction_manifest.py
+work/rh_compute/results/arb_hankel_sign_consistency_reduction_lamgrid_k2_k5_n18_dps520_summary.json
+work/rh_compute/results/arb_hankel_sign_consistency_reduction_lamgrid_k2_k5_n18_dps520.jsonl
+```
+
+Using rigorous `A_ball` coefficient enclosures, the Arb manifest checks the
+same reshaped-Hankel frontier with interval determinant arithmetic. Current
+result:
+
+```text
+lambda in {0, 1e-6, 1e-4, 1e-2, 1e-1}
+k = 2..5
+N = 18
+dps = 520
+needed max coefficient index = 21
+62,985/62,985 finite minors positive and separated from zero
+```
+
+This promotes the current finite reshaped-Hankel frontier from cache-point
+evidence to an enclosure-backed finite certificate. It is still not an
+all-order sign-consistency theorem, not a Jensen hyperbolicity theorem, and
+not a proof of RH or `Lambda <= 0`.
+
 Required upgrade:
 
 ```text
-1. extend the reshaped-minor audit beyond the current point grid and promote
-   selected ranges to interval/enclosure-backed finite certificates;
+1. extend the Arb/enclosure-backed reshaped-minor certificates beyond the
+   current k = 2..5, N = 18 frontier;
 2. determine the precise all-order sign convention matching (-1)^(m(m+1)/2)
    across every required k;
 3. prove the required all-order sign-consistency statement, not only a

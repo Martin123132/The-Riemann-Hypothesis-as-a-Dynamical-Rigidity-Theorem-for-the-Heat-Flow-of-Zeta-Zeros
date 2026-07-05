@@ -58,7 +58,7 @@ GATES: tuple[GateSpec, ...] = (
     GateSpec(
         name="proof-claim ledger",
         command=("work/rh_compute/scripts/check_proof_claim_ledger.py",),
-        expected=("validated proof-claim ledger: 16 claims, 0 issues, 5 open theorem targets",),
+        expected=("validated proof-claim ledger: 17 claims, 0 issues, 5 open theorem targets",),
         category="non-promotion guards",
     ),
     GateSpec(
@@ -84,6 +84,12 @@ GATES: tuple[GateSpec, ...] = (
         command=("work/rh_compute/scripts/check_hankel_sign_consistency_reduction_audit.py",),
         expected=("validated 20 reshaped Hankel sign-consistency point audits with 0 issues",),
         category="finite theorem-search diagnostics",
+    ),
+    GateSpec(
+        name="Hankel sign-consistency reduction finite certificates",
+        command=("work/rh_compute/scripts/check_arb_hankel_sign_consistency_reduction_manifest.py",),
+        expected=("validated 62985 Arb reshaped-Hankel sign-consistency finite certificates with 0 issues",),
+        category="promoted finite evidence",
     ),
     GateSpec(
         name="Edrei-log sign diagnostics",

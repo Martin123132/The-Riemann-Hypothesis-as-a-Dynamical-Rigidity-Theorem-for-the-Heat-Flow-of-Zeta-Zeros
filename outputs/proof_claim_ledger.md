@@ -25,7 +25,7 @@ python work/rh_compute/scripts/check_proof_claim_ledger.py
 Current result:
 
 ```text
-validated proof-claim ledger: 16 claims, 0 issues, 5 open theorem targets
+validated proof-claim ledger: 17 claims, 0 issues, 5 open theorem targets
 ```
 
 ## Categories
@@ -88,6 +88,11 @@ hankel_sign_consistency_reduction_point_audit:
   exact-rationalized cache point audit for the Grussler-Damm reshaped-Hankel
   finite condition; validates five lambdas, k=2..5, N=18; not an interval
   certificate or all-order sign-consistency proof
+
+hankel_sign_consistency_reduction_finite_certificate:
+  Arb/enclosure-backed finite certificate for the same reshaped-Hankel
+  frontier; validates 62,985 finite minors; not an all-order
+  sign-consistency theorem
 ```
 
 ## Boundary

@@ -36,12 +36,13 @@ OK core gate: signed-Hankel finite certificates
 OK core gate: Toeplitz/PF finite certificates
 OK core gate: Toeplitz/Jacobi-Trudi reindexing
 OK core gate: Hankel sign-consistency reduction point audits
+OK core gate: Hankel sign-consistency reduction finite certificates
 OK core gate: Edrei-log sign diagnostics
 OK core gate: Edrei power-Hankel diagnostics
 OK core gate: Edrei midpoint frontier non-promotion guard
 OK core gate: Edrei power-Hankel boundary repair manifest
 OK core gate: Edrei moment-recurrence scout manifest
-validated 14/14 core proof-programme gates
+validated 15/15 core proof-programme gates
 ```
 
 ## Included Gates
@@ -62,7 +63,7 @@ output reference integrity:
   files; current run has 0 missing required paths and 3 planned deliverables
 
 proof-claim ledger:
-  validates 16 classified claims, including 5 open theorem targets that remain
+  validates 17 classified claims, including 5 open theorem targets that remain
   explicitly unproved
 
 signed-Hankel finite certificates:
@@ -77,6 +78,10 @@ Toeplitz/Jacobi-Trudi reindexing:
 
 Hankel sign-consistency reduction point audits:
   validates 20 exact-rationalized finite reshaped-Hankel point audits
+  for the five-lambda grid, orders k=2..5, and N=18
+
+Hankel sign-consistency reduction finite certificates:
+  validates 62,985 Arb/enclosure-backed reshaped-Hankel finite certificates
   for the five-lambda grid, orders k=2..5, and N=18
 
 Edrei-log sign diagnostics:
@@ -125,7 +130,7 @@ python work/rh_compute/scripts/check_core_proof_programme_gates.py --skip-slow
 Current quick result:
 
 ```text
-validated 13/13 core proof-programme gates
+validated 14/14 core proof-programme gates
 ```
 
 For machine-readable output:
