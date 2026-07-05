@@ -280,6 +280,7 @@ python work/rh_compute/scripts/check_core_proof_programme_gates.py
 python work/rh_compute/scripts/check_output_reference_integrity.py
 python work/rh_compute/scripts/check_output_status_manifest.py
 python work/rh_compute/scripts/check_proof_claim_ledger.py
+python work/rh_compute/scripts/check_signed_hankel_jensen_dependency_graph.py
 python work/rh_compute/scripts/check_result_language_boundaries.py
 python work/rh_compute/scripts/check_toeplitz_certificate_manifest.py
 python work/rh_compute/scripts/check_toeplitz_jacobi_trudi_map.py
@@ -354,6 +355,18 @@ The signed-Hankel/Jensen bridge target checker requires the active theorem
 target to remain all-order and all-shift, with the finite Arb certificate
 listed only as evidence and the degree-3 obstruction listed as a kill gate.
 
+The signed-Hankel/Jensen dependency graph documents the allowed relation
+between finite evidence, countermodel gates, open theorem targets, and the
+not-proved Newman-direction conclusion:
+
+```text
+outputs/signed_hankel_jensen_dependency_graph.md
+work/rh_compute/results/signed_hankel_jensen_dependency_graph.json
+python work/rh_compute/scripts/check_signed_hankel_jensen_dependency_graph.py
+```
+
+It is a dependency hygiene gate only, not a proof bridge.
+
 The core runner is documented in:
 
 ```text
@@ -363,7 +376,7 @@ outputs/core_proof_programme_gates.md
 Current core runner status:
 
 ```text
-validated 26/26 core proof-programme gates
+validated 27/27 core proof-programme gates
 ```
 
 Current manifest status:

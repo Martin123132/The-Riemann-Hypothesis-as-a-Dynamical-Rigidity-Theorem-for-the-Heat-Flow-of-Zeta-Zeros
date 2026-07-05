@@ -9,8 +9,8 @@ Laguerre-Polya membership, RH, or `Lambda <= 0`.
 
 The corpus now has many individual finite-evidence manifests and
 countermodel guards. The core runner gives a single command that checks the
-main promoted finite certificates and the non-promotion gates used in the
-referee-facing notes.
+main promoted finite certificates, dependency hygiene graph, and the
+non-promotion gates used in the referee-facing notes.
 
 Script:
 
@@ -32,6 +32,7 @@ OK core gate: result-language boundary scan
 OK core gate: output artifact status manifest
 OK core gate: output reference integrity
 OK core gate: proof-claim ledger
+OK core gate: signed-Hankel/Jensen dependency graph
 OK core gate: signed-Hankel finite certificates
 OK core gate: Toeplitz/PF finite certificates
 OK core gate: Toeplitz/Jacobi-Trudi reindexing
@@ -53,7 +54,7 @@ OK core gate: Edrei power-Hankel diagnostics
 OK core gate: Edrei midpoint frontier non-promotion guard
 OK core gate: Edrei power-Hankel boundary repair manifest
 OK core gate: Edrei moment-recurrence scout manifest
-validated 26/26 core proof-programme gates
+validated 27/27 core proof-programme gates
 ```
 
 ## Included Gates
@@ -75,8 +76,14 @@ output reference integrity:
   files; current run has 0 missing required paths and 3 planned deliverables
 
 proof-claim ledger:
-  validates 25 classified claims, including 6 open theorem targets that remain
+  validates 26 classified claims, including 6 open theorem targets that remain
   explicitly unproved
+
+signed-Hankel/Jensen dependency graph:
+  validates outputs/signed_hankel_jensen_dependency_graph.md and
+  work/rh_compute/results/signed_hankel_jensen_dependency_graph.json,
+  checking that finite signed-Hankel/Jensen evidence feeds into open theorem
+  targets and not directly into the Lambda <= 0 conclusion
 
 signed-Hankel finite certificates:
   validates 2,500 finite signed-Hankel certificates
@@ -170,8 +177,9 @@ reindexing used by the coefficient-PF route still passes its algebraic check.
 It also checks for obvious forbidden result-language drift in the markdown
 notes and enforces explicit artifact classification metadata. It does not
 convert finite certificates, moment diagnostics, midpoint scouts,
-counterexamples, reindexing identities, claim classification, clean wording,
-clean metadata, or intact file references into an all-order bridge theorem.
+counterexamples, reindexing identities, dependency graphs, claim
+classification, clean wording, clean metadata, or intact file references into
+an all-order bridge theorem.
 
 The remaining theorem burden is unchanged:
 
@@ -192,7 +200,7 @@ python work/rh_compute/scripts/check_core_proof_programme_gates.py --skip-slow
 Current quick result:
 
 ```text
-validated 25/25 core proof-programme gates
+validated 26/26 core proof-programme gates
 ```
 
 For machine-readable output:

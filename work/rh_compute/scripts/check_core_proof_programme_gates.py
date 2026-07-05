@@ -58,7 +58,13 @@ GATES: tuple[GateSpec, ...] = (
     GateSpec(
         name="proof-claim ledger",
         command=("work/rh_compute/scripts/check_proof_claim_ledger.py",),
-        expected=("validated proof-claim ledger: 25 claims, 0 issues, 6 open theorem targets",),
+        expected=("validated proof-claim ledger: 26 claims, 0 issues, 6 open theorem targets",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="signed-Hankel/Jensen dependency graph",
+        command=("work/rh_compute/scripts/check_signed_hankel_jensen_dependency_graph.py",),
+        expected=("validated signed-Hankel/Jensen dependency graph with 0 issues",),
         category="non-promotion guards",
     ),
     GateSpec(
