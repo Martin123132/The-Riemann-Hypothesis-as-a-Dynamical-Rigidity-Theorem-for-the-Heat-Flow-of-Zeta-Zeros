@@ -34,6 +34,11 @@ REQUIRED_STRINGS = (
     "direct kernel PF function",
     "!= coefficient PF sequence c_k",
     "!= signed Hankel sequence A_k",
+    "Jensen-window PF reformulation",
+    "outputs/jensen_window_pf_bridge_target.md",
+    "python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py",
+    "B^{d,n,0}_j = binom(d,j) A_{n+j}(0)",
+    "finite PF-infinity sequence",
     "The criterion needs all degrees and shifts.",
     "Sign-regular Hankel data alone does not imply Toeplitz PF-infinity",
     "not a Level-4 interval",
@@ -133,6 +138,7 @@ def validate(path: Path) -> list[FitMatrixIssue]:
         "work/rh_compute/scripts/countermodel_gate_examples.py",
         "work/rh_compute/scripts/check_jensen_hankel_bridge_algebra.py",
         "work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py",
+        "work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py",
     ):
         if not (REPO_ROOT / ref).exists():
             issues.append(FitMatrixIssue("references", "missing-ref", ref))

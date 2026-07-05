@@ -37,6 +37,22 @@ P_{d,n,0}(x) has only real nonpositive zeros.
 
 Equivalently, `Q_{d,n,0}(y)=P_{d,n,0}(-y)` has `d` positive real zeros.
 
+The total-positivity reformulation is recorded in:
+
+```text
+outputs/jensen_window_pf_bridge_target.md
+python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py
+```
+
+It asks for every binomially weighted Jensen window:
+
+```text
+B^{d,n,0}_j = binom(d,j) A_{n+j}(0)
+```
+
+to be a finite PF-infinity sequence. This is an equivalent Jensen-window
+target, not a proof that the target holds.
+
 For the reshaped-Hankel sign-consistency route, define the shifted row block:
 
 ```text
@@ -184,12 +200,15 @@ low-order finite sign checks cannot be promoted into Jensen hyperbolicity.
    that is provably satisfied by the Xi/Phi coefficients.
 2. Prove a sign-regularity theorem that converts that all-order structure into
    hyperbolicity of every Jensen polynomial, not just degree 2.
-3. Identify the exact theorem ecosystem: signed total positivity,
+3. Equivalently, prove that every binomially weighted Jensen window
+   `B^{d,n,0}_j = binom(d,j) A_{n+j}(0)` is PF-infinity, or prove this from
+   the signed-Hankel/sign-consistency structure.
+4. Identify the exact theorem ecosystem: signed total positivity,
    sign-regular kernels, compound matrices, variation-diminishing transforms,
    multiplier sequences, or a new Xi-specific determinant identity.
-4. Prove the limiting passage from all Jensen polynomials to the required
+5. Prove the limiting passage from all Jensen polynomials to the required
    Laguerre-Polya or Newman conclusion without assuming RH.
-5. Preserve the heat-flow parameter discipline: finite positive-lambda
+6. Preserve the heat-flow parameter discipline: finite positive-lambda
    certificates can guide the theorem, but they cannot replace a lambda-zero
    proof or a uniform interval theorem.
 

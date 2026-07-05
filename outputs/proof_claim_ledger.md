@@ -25,7 +25,7 @@ python work/rh_compute/scripts/check_proof_claim_ledger.py
 Current result:
 
 ```text
-validated proof-claim ledger: 19 claims, 0 issues, 5 open theorem targets
+validated proof-claim ledger: 20 claims, 0 issues, 6 open theorem targets
 ```
 
 ## Categories
@@ -68,6 +68,12 @@ target_signed_hankel_jensen_bridge:
   Jensen hyperbolicity, Laguerre-Polya membership, or Lambda <= 0
   specification: outputs/signed_hankel_jensen_bridge_target.md
 
+target_jensen_window_pf_bridge:
+  prove that every binomially weighted Jensen window
+  B^{d,n,0}_j=binom(d,j) A_{n+j}(0) is finite PF-infinity, or prove this
+  from all-order shifted reshaped-Hankel sign consistency
+  specification: outputs/jensen_window_pf_bridge_target.md
+
 target_schur_positive_specialization:
   construct a positive Schur/Edrei-Thoma specialization h_k -> d_k(0)
   specification: outputs/positive_schur_specialization_target.md
@@ -106,6 +112,11 @@ jensen_hankel_bridge_algebra_gate:
   exact degree-2 signed-Hankel/Jensen identity plus a positive rational
   degree-3 countermodel; blocks promotion from finite low-order reshaped signs
   to Jensen hyperbolicity
+
+target_jensen_window_pf_bridge:
+  theorem target that reformulates all-degree/all-shift Jensen hyperbolicity
+  as finite PF-infinity of every binomially weighted window
+  B^{d,n,0}_j=binom(d,j) A_{n+j}(0); open and not proved
 
 countermodel_gates:
   validates 10 proof-safety examples, including local heat birth, finite

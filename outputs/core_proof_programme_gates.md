@@ -40,6 +40,7 @@ OK core gate: Hankel sign-consistency reduction finite certificates
 OK core gate: shifted Hankel staircase finite certificates
 OK core gate: Jensen/Hankel bridge algebra gate
 OK core gate: signed-Hankel/Jensen bridge target specification
+OK core gate: Jensen-window PF bridge target
 OK core gate: sign-regularity theorem fit matrix
 OK core gate: positive Schur-specialization target note
 OK core gate: Edrei-log sign diagnostics
@@ -47,7 +48,7 @@ OK core gate: Edrei power-Hankel diagnostics
 OK core gate: Edrei midpoint frontier non-promotion guard
 OK core gate: Edrei power-Hankel boundary repair manifest
 OK core gate: Edrei moment-recurrence scout manifest
-validated 20/20 core proof-programme gates
+validated 21/21 core proof-programme gates
 ```
 
 ## Included Gates
@@ -68,7 +69,7 @@ output reference integrity:
   files; current run has 0 missing required paths and 3 planned deliverables
 
 proof-claim ledger:
-  validates 19 classified claims, including 5 open theorem targets that remain
+  validates 20 classified claims, including 6 open theorem targets that remain
   explicitly unproved
 
 signed-Hankel finite certificates:
@@ -101,6 +102,11 @@ Jensen/Hankel bridge algebra gate:
 signed-Hankel/Jensen bridge target specification:
   validates that the active bridge target is stated as an all-order,
   all-shift open theorem with explicit low-degree obstructions
+
+Jensen-window PF bridge target:
+  validates the total-positivity reformulation that every binomially weighted
+  Jensen window B^{d,n,0}_j=binom(d,j) A_{n+j}(0) must be finite PF-infinity,
+  while preserving that this is an open theorem target
 
 sign-regularity theorem fit matrix:
   validates that ASW/Edrei, Schur-positive, Schoenberg, Jensen, Hankel, and
@@ -157,7 +163,7 @@ python work/rh_compute/scripts/check_core_proof_programme_gates.py --skip-slow
 Current quick result:
 
 ```text
-validated 19/19 core proof-programme gates
+validated 20/20 core proof-programme gates
 ```
 
 For machine-readable output:

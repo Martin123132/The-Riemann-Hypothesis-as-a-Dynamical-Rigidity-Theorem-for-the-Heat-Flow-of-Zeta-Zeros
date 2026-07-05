@@ -573,8 +573,8 @@ python work/rh_compute/scripts/check_result_language_boundaries.py
 Current result:
 
 ```text
-validated output references: scanned 36 markdown files, 304 path references, 0 missing required paths, 3 planned missing deliverables
-validated output artifact statuses: scanned 36 markdown files, 0 status issues
-validated proof-claim ledger: 19 claims, 0 issues, 5 open theorem targets
-validated result-language boundaries: scanned 36 markdown files, 0 overclaims
+validated output references: scanned 37 markdown files, 320 path references, 0 missing required paths, 3 planned missing deliverables
+validated output artifact statuses: scanned 37 markdown files, 0 status issues
+validated proof-claim ledger: 20 claims, 0 issues, 6 open theorem targets
+validated result-language boundaries: scanned 37 markdown files, 0 overclaims
 ```

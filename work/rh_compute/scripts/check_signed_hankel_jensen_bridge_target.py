@@ -24,6 +24,10 @@ REQUIRED_STRINGS = (
     "Status: theorem target",
     "This is not a proof of RH or `Lambda <= 0`",
     "for every d >= 1 and n >= 0",
+    "outputs/jensen_window_pf_bridge_target.md",
+    "python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py",
+    "B^{d,n,0}_j = binom(d,j) A_{n+j}(0)",
+    "finite PF-infinity sequence",
     "R_{k,n}(j_1,...,j_k)",
     "(-1)^(k(k-1)/2)",
     "n = 0",
@@ -72,9 +76,9 @@ def validate_note(path: Path) -> list[TargetIssue]:
             issues.append(TargetIssue("<forbidden>", "forbidden-text", forbidden))
 
     proof_obligation_count = sum(
-        1 for line in text.splitlines() if line.startswith(("1. ", "2. ", "3. ", "4. ", "5. "))
+        1 for line in text.splitlines() if line.startswith(("1. ", "2. ", "3. ", "4. ", "5. ", "6. "))
     )
-    if proof_obligation_count < 5:
+    if proof_obligation_count < 6:
         issues.append(TargetIssue("Proof Obligations", "too-few-obligations", str(proof_obligation_count)))
 
     if "outputs/jensen_hankel_bridge_algebra.md" not in text:
