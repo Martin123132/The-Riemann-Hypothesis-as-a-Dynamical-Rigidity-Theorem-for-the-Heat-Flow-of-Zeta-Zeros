@@ -321,6 +321,11 @@ five-lambda grid, `n = 0..20`, `k = 7`, `N = 15`, validating
 `675,675/675,675` finite shifted minors using coefficient enclosures through
 `A_40`. This is finite evidence only.
 
+The order-8 shifted Arb manifest adds the next bounded slice:
+five-lambda grid, `n = 0..20`, `k = 8`, `N = 14`, validating
+`315,315/315,315` finite shifted minors using coefficient enclosures through
+`A_40`. This is finite evidence only.
+
 The Jensen/Hankel bridge algebra gate records the exact degree-2 identity
 between the `m = 1` signed-Hankel determinant and the degree-2 Jensen
 discriminant, and an exact positive rational degree-3 countermodel showing
@@ -340,7 +345,7 @@ outputs/core_proof_programme_gates.md
 Current core runner status:
 
 ```text
-validated 22/22 core proof-programme gates
+validated 23/23 core proof-programme gates
 ```
 
 Current manifest status:
