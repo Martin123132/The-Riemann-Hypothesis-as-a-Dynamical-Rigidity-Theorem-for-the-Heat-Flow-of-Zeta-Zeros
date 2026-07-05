@@ -1,0 +1,223 @@
+{
+  "kind": "rh_proof_programme_claim_ledger",
+  "date": "2026-07-04",
+  "proof_boundary": "Claim-classification ledger only; not a proof of PF-infinity, Laguerre-Polya membership, RH, or Lambda <= 0.",
+  "claims": [
+    {
+      "id": "exact_heat_equation",
+      "title": "de Bruijn-Newman heat equation identity",
+      "category": "exact_lemma",
+      "status": "available_exact",
+      "refs": [
+        "outputs/formal_core.md"
+      ],
+      "claim": "The de Bruijn-Newman family satisfies partial_lambda H_lambda = -partial_zz H_lambda.",
+      "proof_boundary": "Exact identity used as background; not by itself a proof of Lambda <= 0."
+    },
+    {
+      "id": "signed_hankel_finite_certificate",
+      "title": "signed-Hankel finite certificate grid",
+      "category": "finite_certificate",
+      "status": "finite_validated",
+      "refs": [
+        "outputs/signed_hankel_certificate_status.md",
+        "work/rh_compute/scripts/check_hankel_certificate_manifest.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_hankel_certificate_manifest.py",
+      "claim": "The promoted five-lambda grid m=0..19, shifts=0..24 validates 2500 signed-Hankel finite certificates.",
+      "proof_boundary": "Finite determinant certificate only; not an all-order signed-Hankel theorem and not a proof of RH or Lambda <= 0."
+    },
+    {
+      "id": "toeplitz_pf_finite_certificate",
+      "title": "ordinary Taylor coefficient Toeplitz/PF finite certificates",
+      "category": "finite_certificate",
+      "status": "finite_validated",
+      "refs": [
+        "outputs/finite_toeplitz_certificate_status.md",
+        "work/rh_compute/scripts/check_toeplitz_certificate_manifest.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_toeplitz_certificate_manifest.py",
+      "claim": "The corrected ordinary Taylor sequence c_k=A_k/k! has 95 promoted positive Toeplitz/PF certificate summaries and one beta negative control in the manifest.",
+      "proof_boundary": "Finite coefficient-PF evidence only; it does not prove PF-infinity."
+    },
+    {
+      "id": "toeplitz_jacobi_trudi_reindexing",
+      "title": "Toeplitz-to-skew-Schur Jacobi-Trudi reindexing",
+      "category": "algebraic_reindexing",
+      "status": "guard_validated",
+      "refs": [
+        "outputs/toeplitz_jacobi_trudi_bridge_note.md",
+        "work/rh_compute/scripts/check_toeplitz_jacobi_trudi_map.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_toeplitz_jacobi_trudi_map.py",
+      "claim": "Structurally nonzero upper-triangular Toeplitz minors of d_k=c_k/c_0 map exactly to Jacobi-Trudi skew-Schur evaluations.",
+      "proof_boundary": "Exact algebraic translation only; it does not prove Schur positivity."
+    },
+    {
+      "id": "hankel_sign_consistency_reduction_point_audit",
+      "title": "reshaped Hankel sign-consistency point audit",
+      "category": "diagnostic",
+      "status": "diagnostic_validated",
+      "refs": [
+        "outputs/sign_regularity_theorem_fit_matrix.md",
+        "work/rh_compute/results/hankel_sign_consistency_reduction_lamgrid_k2_k5_n18.json",
+        "work/rh_compute/scripts/hankel_sign_consistency_reduction_audit.py",
+        "work/rh_compute/scripts/check_hankel_sign_consistency_reduction_audit.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_hankel_sign_consistency_reduction_audit.py",
+      "claim": "The exact-rationalized cache point audit validates 20 finite reshaped Hankel sign-consistency rows for the five-lambda grid, orders k=2..5, and N=18.",
+      "proof_boundary": "Finite point diagnostic only; not an interval certificate, not all-order sign consistency, and not a proof of Jensen hyperbolicity, RH, or Lambda <= 0."
+    },
+    {
+      "id": "edrei_log_sign_diagnostic",
+      "title": "Edrei-log sign diagnostic",
+      "category": "diagnostic",
+      "status": "diagnostic_validated",
+      "refs": [
+        "outputs/edrei_log_sign_diagnostic.md",
+        "work/rh_compute/scripts/check_edrei_log_sign_manifest.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_edrei_log_sign_manifest.py",
+      "claim": "The manifest validates 320 finite Edrei-log sign diagnostics across the five-lambda grid.",
+      "proof_boundary": "Finite necessary-condition diagnostic; not PF-infinity, Laguerre-Polya membership, RH, or Lambda <= 0."
+    },
+    {
+      "id": "edrei_power_hankel_diagnostic",
+      "title": "Edrei power-Hankel finite diagnostic",
+      "category": "diagnostic",
+      "status": "diagnostic_validated",
+      "refs": [
+        "outputs/edrei_log_sign_diagnostic.md",
+        "work/rh_compute/scripts/check_edrei_power_hankel_manifest.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_edrei_power_hankel_manifest.py",
+      "claim": "The manifest validates 4205 finite Edrei power-Hankel diagnostics.",
+      "proof_boundary": "Finite necessary-condition diagnostic; it does not give the all-order Edrei representation."
+    },
+    {
+      "id": "edrei_moment_recurrence_scout",
+      "title": "Edrei shifted-moment recurrence scout",
+      "category": "diagnostic",
+      "status": "diagnostic_validated",
+      "refs": [
+        "outputs/edrei_moment_quadrature_scout.md",
+        "work/rh_compute/scripts/check_edrei_quadrature_scout_manifest.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_edrei_quadrature_scout_manifest.py",
+      "claim": "Arb recurrence rows are positive through orders 2..12 and interval-inconclusive, not negative, from order 13 through 20.",
+      "proof_boundary": "Finite constructive diagnostic only; not an all-order moment representation."
+    },
+    {
+      "id": "countermodel_gates",
+      "title": "countermodel and finite-prefix proof-safety gates",
+      "category": "countermodel_gate",
+      "status": "guard_validated",
+      "refs": [
+        "outputs/countermodel_library.md",
+        "work/rh_compute/scripts/countermodel_gate_examples.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/countermodel_gate_examples.py",
+      "claim": "The executable gate validates local heat-birth, finite-prefix, finite consecutive signed-Hankel grid, finite recurrence, and Stieltjes multiplier traps.",
+      "proof_boundary": "Proof-safety countermodels only; not claims about actual zeta coefficients."
+    },
+    {
+      "id": "target_signed_hankel_jensen_bridge",
+      "title": "Theorem Target B: signed-Hankel/Jensen bridge",
+      "category": "theorem_target",
+      "status": "open_target",
+      "refs": [
+        "outputs/sign_regularity_theorem_map.md",
+        "outputs/sign_regularity_theorem_fit_matrix.md",
+        "outputs/signed_hankel_jensen_audit.md",
+        "outputs/signed_hankel_certificate_status.md"
+      ],
+      "claim": "Prove that the exact all-order signed-Hankel/sign-consistency structure for A_k(lambda), together with Xi/Phi-specific analytic hypotheses, implies all-degree/all-shift Jensen hyperbolicity, Laguerre-Polya membership, or Lambda <= 0.",
+      "current_blocker": "Finite shifted-principal signed-Hankel certificates and finite Jensen passes do not imply the all-order bridge; the exact finite-grid extension gate preserves a signed-Hankel grid while breaking the next shift.",
+      "required_upgrade": "Known Hankel sign-consistency reduction plus an all-order proof of the required minors, or a new signed/indefinite total-positivity theorem matching the zeta heat-flow coefficients.",
+      "proof_boundary": "Open theorem target; not currently proved."
+    },
+    {
+      "id": "target_direct_coefficient_pf",
+      "title": "Theorem Target A: direct coefficient PF-infinity",
+      "category": "theorem_target",
+      "status": "open_target",
+      "refs": [
+        "outputs/missing_coefficient_pf_theorem.md",
+        "outputs/coefficient_pf_bridge_obstruction.md"
+      ],
+      "claim": "Prove all Toeplitz minors of c_k(0)=mu_{2k}(0)/(2k)! are nonnegative.",
+      "current_blocker": "Finite Toeplitz/PF certificates do not imply all-order PF-infinity.",
+      "required_upgrade": "All-order determinant positivity proof, positive structural theorem, or verified external theorem applying exactly to c_k.",
+      "proof_boundary": "Open theorem target; not currently proved."
+    },
+    {
+      "id": "target_schur_positive_specialization",
+      "title": "Theorem Target D: positive Schur specialization",
+      "category": "theorem_target",
+      "status": "open_target",
+      "refs": [
+        "outputs/missing_coefficient_pf_theorem.md",
+        "outputs/toeplitz_jacobi_trudi_bridge_note.md",
+        "outputs/sign_regularity_theorem_fit_matrix.md"
+      ],
+      "claim": "Construct a positive Schur/Edrei-Thoma specialization h_k -> d_k(0).",
+      "current_blocker": "No positive specialization, planar network, or production matrix is known for the zeta heat-flow coefficients.",
+      "required_upgrade": "Independent construction proving Schur positivity before any appeal to ASW/Edrei.",
+      "proof_boundary": "Open theorem target; exact reindexing is validated but positivity is not proved."
+    },
+    {
+      "id": "target_positive_determinant_integral",
+      "title": "Theorem Target C: positive determinant integral formula",
+      "category": "theorem_target",
+      "status": "open_target",
+      "refs": [
+        "outputs/missing_coefficient_pf_theorem.md",
+        "outputs/sign_regularity_theorem_fit_matrix.md"
+      ],
+      "claim": "Derive a manifestly nonnegative integral representation for every structurally nonzero Toeplitz minor.",
+      "current_blocker": "No positive integrand W_{R,Q,lambda} is known.",
+      "required_upgrade": "Cauchy-Binet, Andreief, Karlin-style, or equivalent positive determinant identity.",
+      "proof_boundary": "Open theorem target; not currently proved."
+    },
+    {
+      "id": "target_edrei_log_power_representation",
+      "title": "Theorem Target F: all-order Edrei log-power representation",
+      "category": "theorem_target",
+      "status": "open_target",
+      "refs": [
+        "outputs/missing_coefficient_pf_theorem.md",
+        "outputs/edrei_log_sign_diagnostic.md",
+        "outputs/edrei_moment_quadrature_scout.md"
+      ],
+      "claim": "Prove the all-order positive zero-parameter representation for H_0 via Edrei log-power sums.",
+      "current_blocker": "Finite log-sign, finite power-Hankel, and finite recurrence positivity are only necessary diagnostics.",
+      "required_upgrade": "All-n proof, positive parameter construction, and analytic convergence/product reconstruction.",
+      "proof_boundary": "Open theorem target; not currently proved."
+    },
+    {
+      "id": "rejected_finite_prefix_promotion",
+      "title": "finite prefix promotion is invalid",
+      "category": "forbidden_promotion",
+      "status": "rejected_by_countermodel",
+      "refs": [
+        "outputs/countermodel_library.md",
+        "work/rh_compute/scripts/countermodel_gate_examples.py"
+      ],
+      "claim": "Finite coefficient prefixes, finite signed-Hankel grids, finite Jensen passes, or finite recurrence data cannot be promoted to all-order theorem conclusions by wording alone.",
+      "proof_boundary": "Rejected proof step; executable countermodel gates validate the obstruction."
+    },
+    {
+      "id": "core_reproducibility_gates",
+      "title": "core proof-programme reproducibility gates",
+      "category": "hygiene_gate",
+      "status": "guard_validated",
+      "refs": [
+        "outputs/core_proof_programme_gates.md",
+        "work/rh_compute/scripts/check_core_proof_programme_gates.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_core_proof_programme_gates.py",
+      "claim": "The core runner validates the promoted ledgers, non-promotion guards, algebraic reindexing, language boundaries, status manifest, and reference integrity.",
+      "proof_boundary": "Reproducibility and proof-safety hygiene only; not a proof bridge."
+    }
+  ]
+}
