@@ -419,8 +419,8 @@ Finite Arb certificate:
 ```text
 python work/rh_compute/scripts/arb_hankel_sign_consistency_reduction_probe.py
 python work/rh_compute/scripts/check_arb_hankel_sign_consistency_reduction_manifest.py
-work/rh_compute/results/arb_hankel_sign_consistency_reduction_lamgrid_k2_k5_n18_dps520_summary.json
-work/rh_compute/results/arb_hankel_sign_consistency_reduction_lamgrid_k2_k5_n18_dps520.jsonl
+work/rh_compute/results/arb_hankel_sign_consistency_reduction_lamgrid_k2_k7_n20_dps520_summary.json
+work/rh_compute/results/arb_hankel_sign_consistency_reduction_lamgrid_k2_k7_n20_dps520.jsonl.gz
 ```
 
 Using rigorous `A_ball` coefficient enclosures, the Arb manifest checks the
@@ -429,11 +429,11 @@ result:
 
 ```text
 lambda in {0, 1e-6, 1e-4, 1e-2, 1e-1}
-k = 2..5
-N = 18
+k = 2..7
+N = 20
 dps = 520
-needed max coefficient index = 21
-62,985/62,985 finite minors positive and separated from zero
+needed max coefficient index = 25
+689,795/689,795 finite minors positive and separated from zero
 ```
 
 This promotes the current finite reshaped-Hankel frontier from cache-point
@@ -445,7 +445,7 @@ Required upgrade:
 
 ```text
 1. extend the Arb/enclosure-backed reshaped-minor certificates beyond the
-   current k = 2..5, N = 18 frontier;
+   current k = 2..7, N = 20 frontier;
 2. determine the precise all-order sign convention matching (-1)^(m(m+1)/2)
    across every required k;
 3. prove the required all-order sign-consistency statement, not only a

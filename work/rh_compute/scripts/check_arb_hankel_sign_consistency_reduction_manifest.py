@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 from dataclasses import asdict, dataclass
+import gzip
 import json
 from math import comb
 from pathlib import Path
@@ -13,17 +14,17 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_SUMMARY = (
     REPO_ROOT
-    / "work/rh_compute/results/arb_hankel_sign_consistency_reduction_lamgrid_k2_k5_n18_dps520_summary.json"
+    / "work/rh_compute/results/arb_hankel_sign_consistency_reduction_lamgrid_k2_k7_n20_dps520_summary.json"
 )
 DEFAULT_JSONL = (
     REPO_ROOT
-    / "work/rh_compute/results/arb_hankel_sign_consistency_reduction_lamgrid_k2_k5_n18_dps520.jsonl"
+    / "work/rh_compute/results/arb_hankel_sign_consistency_reduction_lamgrid_k2_k7_n20_dps520.jsonl.gz"
 )
 EXPECTED_LAMBDAS = ("0", "1e-6", "1e-4", "1e-2", "1e-1")
-EXPECTED_ORDERS = (2, 3, 4, 5)
-EXPECTED_N_COLS = 18
+EXPECTED_ORDERS = (2, 3, 4, 5, 6, 7)
+EXPECTED_N_COLS = 20
 EXPECTED_DPS = 520
-EXPECTED_NEEDED_MAX_K = 21
+EXPECTED_NEEDED_MAX_K = 25
 
 
 @dataclass(frozen=True)
@@ -36,6 +37,12 @@ class ManifestIssue:
 def load_json(path: Path) -> dict:
     with path.open("r", encoding="utf-8") as handle:
         return json.load(handle)
+
+
+def open_row_input(path: Path):
+    if path.suffix == ".gz":
+        return gzip.open(path, "rt", encoding="utf-8")
+    return path.open("r", encoding="utf-8")
 
 
 def expected_rows() -> int:
@@ -113,7 +120,7 @@ def validate_summary(summary: dict) -> list[ManifestIssue]:
 def validate_jsonl(path: Path) -> list[ManifestIssue]:
     issues: list[ManifestIssue] = []
     row_count = 0
-    with path.open("r", encoding="utf-8") as handle:
+    with open_row_input(path) as handle:
         for line in handle:
             if not line.strip():
                 continue

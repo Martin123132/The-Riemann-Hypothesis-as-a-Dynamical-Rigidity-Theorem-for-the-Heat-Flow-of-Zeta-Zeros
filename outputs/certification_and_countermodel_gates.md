@@ -298,8 +298,8 @@ treated as part of the proof programme.
 
 The Grussler-Damm reshaped-Hankel sign-consistency route now has both an
 exact-rationalized cache point audit and an Arb/enclosure-backed finite
-certificate for the five-lambda grid, `k = 2..5`, `N = 18`. The Arb manifest
-validates `62,985/62,985` finite minors as positive and separated from zero.
+certificate for the five-lambda grid, `k = 2..7`, `N = 20`. The Arb manifest
+validates `689,795/689,795` finite minors as positive and separated from zero.
 This is a finite certificate only; it does not prove the all-order
 sign-consistency bridge.
 

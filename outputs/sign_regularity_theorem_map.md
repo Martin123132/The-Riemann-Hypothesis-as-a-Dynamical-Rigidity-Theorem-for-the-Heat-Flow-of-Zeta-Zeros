@@ -442,7 +442,7 @@ next finite checks, not sufficient as the RH bridge.
 Concrete task:
 
 Extend the current Arb/enclosure-backed reshaped-minor certificate frontier
-for `A_k(lambda)` beyond `k = 2..5`, `N = 18`, identify the matching
+for `A_k(lambda)` beyond `k = 2..7`, `N = 20`, identify the matching
 all-order sign convention, and keep shifted-principal minors classified as
 evidence rather than full k-sign consistency until the required reduction and
 all-order theorem are proved.
@@ -517,7 +517,7 @@ There are now two active, distinct hypotheses:
 
 1. Extend the interval-enclosed `c_k = A_k/k!` Toeplitz audit to higher `N`, higher orders, and denser lambda grids.
 2. Search ASW/Edrei/Karlin variants for structural sufficient conditions proving PF-infinity of an ordinary Taylor coefficient sequence.
-3. Use the Grussler-Damm reshaped-Hankel reduction to extend the current Arb/enclosure-backed `k = 2..5`, `N = 18` certificate frontier, then isolate the all-order sign-consistency theorem still needed.
+3. Use the Grussler-Damm reshaped-Hankel reduction to extend the current Arb/enclosure-backed `k = 2..7`, `N = 20` certificate frontier, then isolate the all-order sign-consistency theorem still needed.
 4. Compare Schoenberg's inverse-transform RH condition against the direct heat-kernel moment route, without merging them.
 5. Search for signed or indefinite analogues of ASW/Edrei where the `A_k` Hankel signature implies real-rootedness after a transform.
 6. If no known theorem applies, formulate the missing theorem explicitly.

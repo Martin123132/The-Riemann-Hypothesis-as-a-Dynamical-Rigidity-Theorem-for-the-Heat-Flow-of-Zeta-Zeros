@@ -16,6 +16,7 @@ import argparse
 from collections import Counter
 from dataclasses import asdict, dataclass
 from decimal import Decimal
+import gzip
 from itertools import combinations
 import json
 from math import comb
@@ -112,6 +113,12 @@ def load_enclosure_balls(paths: list[Path], lam: str, needed_max_k: int) -> dict
     return balls
 
 
+def open_row_output(path: Path):
+    if path.suffix == ".gz":
+        return gzip.open(path, "wt", encoding="utf-8", newline="\n")
+    return path.open("w", encoding="utf-8", newline="\n")
+
+
 def probe_one(
     balls: dict[int, flint.arb],
     lam: str,
@@ -205,7 +212,7 @@ def main() -> int:
 
     if args.out_jsonl is not None:
         args.out_jsonl.parent.mkdir(parents=True, exist_ok=True)
-        row_handle = args.out_jsonl.open("w", encoding="utf-8")
+        row_handle = open_row_output(args.out_jsonl)
     else:
         row_handle = None
 

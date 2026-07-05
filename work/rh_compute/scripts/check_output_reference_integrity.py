@@ -23,7 +23,7 @@ DEFAULT_OUTPUTS = REPO_ROOT / "outputs"
 REF_PATTERN = re.compile(
     r"(?P<path>"
     r"work/rh_compute/scripts/[A-Za-z0-9_./-]+\.py"
-    r"|work/rh_compute/results/[A-Za-z0-9_./-]+\.(?:jsonl|json|csv|md|log)"
+    r"|work/rh_compute/results/[A-Za-z0-9_./-]+\.(?:jsonl(?:\.gz)?|json|csv|md|log)"
     r"|outputs/[A-Za-z0-9_./-]+\.md"
     r")"
 )

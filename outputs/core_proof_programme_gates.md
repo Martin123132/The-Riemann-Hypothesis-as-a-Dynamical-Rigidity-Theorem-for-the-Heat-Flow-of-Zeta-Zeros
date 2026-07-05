@@ -81,8 +81,8 @@ Hankel sign-consistency reduction point audits:
   for the five-lambda grid, orders k=2..5, and N=18
 
 Hankel sign-consistency reduction finite certificates:
-  validates 62,985 Arb/enclosure-backed reshaped-Hankel finite certificates
-  for the five-lambda grid, orders k=2..5, and N=18
+  validates 689,795 Arb/enclosure-backed reshaped-Hankel finite certificates
+  for the five-lambda grid, orders k=2..7, and N=20
 
 Edrei-log sign diagnostics:
   validates 320 finite Edrei-log sign diagnostics

@@ -91,7 +91,7 @@ hankel_sign_consistency_reduction_point_audit:
 
 hankel_sign_consistency_reduction_finite_certificate:
   Arb/enclosure-backed finite certificate for the same reshaped-Hankel
-  frontier; validates 62,985 finite minors; not an all-order
+  frontier; validates 689,795 finite minors for k=2..7, N=20; not an all-order
   sign-consistency theorem
 ```
 

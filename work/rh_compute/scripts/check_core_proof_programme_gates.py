@@ -88,7 +88,7 @@ GATES: tuple[GateSpec, ...] = (
     GateSpec(
         name="Hankel sign-consistency reduction finite certificates",
         command=("work/rh_compute/scripts/check_arb_hankel_sign_consistency_reduction_manifest.py",),
-        expected=("validated 62985 Arb reshaped-Hankel sign-consistency finite certificates with 0 issues",),
+        expected=("validated 689795 Arb reshaped-Hankel sign-consistency finite certificates with 0 issues",),
         category="promoted finite evidence",
     ),
     GateSpec(
