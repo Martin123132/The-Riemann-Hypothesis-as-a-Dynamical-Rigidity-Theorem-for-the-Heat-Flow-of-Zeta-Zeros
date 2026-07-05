@@ -66,6 +66,7 @@ target_signed_hankel_jensen_bridge:
   prove that all-order signed-Hankel/sign-consistency structure for A_k,
   with Xi/Phi-specific analytic hypotheses, implies all-degree/all-shift
   Jensen hyperbolicity, Laguerre-Polya membership, or Lambda <= 0
+  specification: outputs/signed_hankel_jensen_bridge_target.md
 
 target_schur_positive_specialization:
   construct a positive Schur/Edrei-Thoma specialization h_k -> d_k(0)

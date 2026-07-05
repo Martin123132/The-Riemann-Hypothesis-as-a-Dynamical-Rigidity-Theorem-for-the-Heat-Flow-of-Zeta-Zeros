@@ -98,6 +98,12 @@ GATES: tuple[GateSpec, ...] = (
         category="exact theorem-search algebra",
     ),
     GateSpec(
+        name="signed-Hankel/Jensen bridge target specification",
+        command=("work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py",),
+        expected=("validated signed-Hankel/Jensen bridge target specification with 0 issues",),
+        category="open theorem target hygiene",
+    ),
+    GateSpec(
         name="Edrei-log sign diagnostics",
         command=("work/rh_compute/scripts/check_edrei_log_sign_manifest.py",),
         expected=("validated 320 finite Edrei-log sign diagnostics",),

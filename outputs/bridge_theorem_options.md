@@ -131,6 +131,13 @@ Recommended first serious route.
 
 It is the most aligned with the new evidence while avoiding the known local-repulsion obstruction. But it must become a theorem about all minors/degrees/shifts, not just larger numerical sweeps.
 
+The current formal version of this target is maintained in:
+
+```text
+outputs/signed_hankel_jensen_bridge_target.md
+python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
+```
+
 ## Option D: Xi-Specific Tail / Gap Comparison Principle
 
 ### Statement To Prove

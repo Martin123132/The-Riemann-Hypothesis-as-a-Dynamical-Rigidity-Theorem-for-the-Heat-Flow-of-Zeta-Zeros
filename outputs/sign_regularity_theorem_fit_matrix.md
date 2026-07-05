@@ -599,6 +599,13 @@ all-order signed-Hankel/sign-consistency structure for A_k(lambda)
   or Lambda <= 0.
 ```
 
+Formal target specification:
+
+```text
+outputs/signed_hankel_jensen_bridge_target.md
+python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
+```
+
 Why active:
 
 ```text

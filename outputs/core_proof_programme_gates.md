@@ -38,12 +38,13 @@ OK core gate: Toeplitz/Jacobi-Trudi reindexing
 OK core gate: Hankel sign-consistency reduction point audits
 OK core gate: Hankel sign-consistency reduction finite certificates
 OK core gate: Jensen/Hankel bridge algebra gate
+OK core gate: signed-Hankel/Jensen bridge target specification
 OK core gate: Edrei-log sign diagnostics
 OK core gate: Edrei power-Hankel diagnostics
 OK core gate: Edrei midpoint frontier non-promotion guard
 OK core gate: Edrei power-Hankel boundary repair manifest
 OK core gate: Edrei moment-recurrence scout manifest
-validated 16/16 core proof-programme gates
+validated 17/17 core proof-programme gates
 ```
 
 ## Included Gates
@@ -88,6 +89,10 @@ Hankel sign-consistency reduction finite certificates:
 Jensen/Hankel bridge algebra gate:
   validates the exact degree-2 signed-Hankel/Jensen identity and an exact
   degree-3 finite countermodel blocking low-order finite-sign promotion
+
+signed-Hankel/Jensen bridge target specification:
+  validates that the active bridge target is stated as an all-order,
+  all-shift open theorem with explicit low-degree obstructions
 
 Edrei-log sign diagnostics:
   validates 320 finite Edrei-log sign diagnostics
@@ -135,7 +140,7 @@ python work/rh_compute/scripts/check_core_proof_programme_gates.py --skip-slow
 Current quick result:
 
 ```text
-validated 15/15 core proof-programme gates
+validated 16/16 core proof-programme gates
 ```
 
 For machine-readable output:

@@ -265,6 +265,13 @@ degree-3 Jensen discriminant is negative. Thus even finite low-order
 reshaped-Hankel sign consistency cannot be promoted to Jensen hyperbolicity
 without the missing all-order bridge theorem.
 
+The all-order bridge target is now specified explicitly in:
+
+```text
+outputs/signed_hankel_jensen_bridge_target.md
+work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
+```
+
 ## 7. Failed Or Damaged Routes
 
 ### Ordinary Log-Concavity

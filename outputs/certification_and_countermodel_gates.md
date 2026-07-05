@@ -286,6 +286,7 @@ python work/rh_compute/scripts/check_toeplitz_jacobi_trudi_map.py
 python work/rh_compute/scripts/check_hankel_sign_consistency_reduction_audit.py
 python work/rh_compute/scripts/check_arb_hankel_sign_consistency_reduction_manifest.py
 python work/rh_compute/scripts/check_jensen_hankel_bridge_algebra.py
+python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
 python work/rh_compute/scripts/check_edrei_log_sign_manifest.py
 python work/rh_compute/scripts/check_edrei_power_hankel_manifest.py
 python work/rh_compute/scripts/check_edrei_power_hankel_frontier_manifest.py
@@ -310,6 +311,10 @@ discriminant, and an exact positive rational degree-3 countermodel showing
 that finite low-order reshaped-Hankel signs cannot be promoted into Jensen
 hyperbolicity.
 
+The signed-Hankel/Jensen bridge target checker requires the active theorem
+target to remain all-order and all-shift, with the finite Arb certificate
+listed only as evidence and the degree-3 obstruction listed as a kill gate.
+
 The core runner is documented in:
 
 ```text
@@ -319,7 +324,7 @@ outputs/core_proof_programme_gates.md
 Current core runner status:
 
 ```text
-validated 16/16 core proof-programme gates
+validated 17/17 core proof-programme gates
 ```
 
 Current manifest status:
