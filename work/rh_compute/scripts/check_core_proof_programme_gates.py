@@ -110,6 +110,12 @@ GATES: tuple[GateSpec, ...] = (
         category="open theorem target hygiene",
     ),
     GateSpec(
+        name="sign-regularity theorem fit matrix",
+        command=("work/rh_compute/scripts/check_sign_regularity_theorem_fit_matrix.py",),
+        expected=("validated sign-regularity theorem fit matrix with 0 issues",),
+        category="open theorem target hygiene",
+    ),
+    GateSpec(
         name="Edrei-log sign diagnostics",
         command=("work/rh_compute/scripts/check_edrei_log_sign_manifest.py",),
         expected=("validated 320 finite Edrei-log sign diagnostics",),
