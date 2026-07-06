@@ -281,9 +281,17 @@ Jensen-window PF reformulation:
 
 ```text
 outputs/jensen_window_pf_bridge_target.md
+outputs/jensen_window_pf_bridge_obligations.md
+outputs/jensen_window_pf_theorem_machinery_fit_matrix.md
 outputs/jensen_window_pf_obligation_algebra.md
+outputs/arb_jensen_window_pf_obligation_diagnostic.md
+outputs/arb_jensen_window_sturm_hyperbolicity_diagnostic.md
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py
+python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
+python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
 python work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py
+python work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py
+python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py
 ```
 
 This sharpens the all-degree/all-shift Jensen target into the requirement
@@ -291,10 +299,73 @@ that every binomially weighted window
 `B^{d,n,0}_j = binom(d,j) A_{n+j}(0)` be a finite PF-infinity sequence. It is
 an equivalent target statement, not a proof of that target.
 
+The obligation ledger splits the target into `10` rows: exact reformulations,
+finite evidence, `3` open obligations, one conditional limiting row, and
+countermodel/route-separation guards. Its central open theorem row is
+`jwpf_06_sign_regular_to_jensen_pf_conversion`; finite evidence rows are
+explicitly barred from closing the target.
+
+The theorem-machinery fit matrix audits `7` source-anchored theorem families
+against `jwpf_06`. It records `0` ready-to-apply rows, separates endpoint
+equivalences from possible structural routes, and keeps downstream
+Laguerre-Polya limiting machinery out of the missing bridge step.
+
 The obligation algebra gate records the exact degree-2 contact with
 signed-Hankel and the first degree-3/4 Jensen-window Toeplitz obligations. Its
 countermodel shows selected low-order window minors can pass while larger
 contiguous Toeplitz minors fail.
+
+Finite Arb diagnostic:
+
+```text
+outputs/arb_jensen_window_pf_obligation_diagnostic.md
+python work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py
+```
+
+This validates `1470/1470` selected Arb interval determinants for the
+degree-3 and degree-4 Jensen-window contiguous Toeplitz families across the
+five-lambda grid and shifts `n=0..20`. It is finite theorem-search evidence,
+not all-minor Jensen-window PF-infinity.
+
+Finite Arb/Sturm diagnostic:
+
+```text
+outputs/arb_jensen_window_sturm_hyperbolicity_diagnostic.md
+python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py
+```
+
+This validates `210/210` degree-3/4 Jensen-window positive-root counts for
+`Q_{d,n,lambda}(y)=P_{d,n,lambda}(-y)` across the same five-lambda grid and
+shifts `n=0..20`. It is finite hyperbolicity evidence, not all-degree or all-shift Jensen hyperbolicity.
+
+The degree-5 extension manifest validates another `105/105` positive-root
+counts with needed max coefficient index `25`. This is a stronger stress test
+of the same finite diagnostic, not a theorem upgrade.
+
+Finite Sturm-to-PF consequence:
+
+```text
+outputs/jensen_window_sturm_pf_consequence.md
+python work/rh_compute/scripts/check_jensen_window_sturm_pf_consequence.py
+```
+
+The consequence gate records that `315/315` checked Jensen windows have
+finite PF-infinity by the finite Polya-frequency characterization. This is a
+window-by-window finite certificate, not all-minor Jensen-window PF-infinity
+as an infinite theorem.
+
+Countermodel guard:
+
+```text
+outputs/countermodel_library.md
+python work/rh_compute/scripts/countermodel_gate_examples.py
+```
+
+The finite Jensen-window rectangle extension gate preserves every coefficient
+input used by the current Jensen-window PF/Sturm diagnostics, `A_0..A_25`, and
+then chooses a positive `A_26` that breaks the next degree-2 Jensen
+discriminant at shift `24`. Thus finite Jensen-window grids cannot be promoted
+to all-shift Jensen hyperbolicity without a new theorem.
 
 Misfit:
 
@@ -708,9 +779,13 @@ Formal target specification:
 outputs/signed_hankel_jensen_bridge_target.md
 outputs/jensen_window_pf_bridge_target.md
 outputs/jensen_window_pf_obligation_algebra.md
+outputs/arb_jensen_window_pf_obligation_diagnostic.md
+outputs/arb_jensen_window_sturm_hyperbolicity_diagnostic.md
 python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py
 python work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py
+python work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py
+python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py
 ```
 
 Why active:

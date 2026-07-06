@@ -1,6 +1,6 @@
 {
   "kind": "rh_proof_programme_claim_ledger",
-  "date": "2026-07-04",
+  "date": "2026-07-05",
   "proof_boundary": "Claim-classification ledger only; not a proof of PF-infinity, Laguerre-Polya membership, RH, or Lambda <= 0.",
   "claims": [
     {
@@ -143,6 +143,74 @@
       "proof_boundary": "Exact low-degree theorem-search algebra and finite countermodel only; not a proof of Jensen-window PF-infinity or Lambda <= 0."
     },
     {
+      "id": "arb_jensen_window_pf_obligation_diagnostic",
+      "title": "Arb Jensen-window PF selected obligation finite diagnostic",
+      "category": "diagnostic",
+      "status": "diagnostic_validated",
+      "refs": [
+        "outputs/arb_jensen_window_pf_obligation_diagnostic.md",
+        "outputs/jensen_window_pf_bridge_target.md",
+        "work/rh_compute/results/arb_jensen_window_pf_obligations_lamgrid_n0_n20_d3_m1_m8_d4_m1_m6_dps520_summary.json",
+        "work/rh_compute/results/arb_jensen_window_pf_obligations_lamgrid_n0_n20_d3_m1_m8_d4_m1_m6_dps520.jsonl",
+        "work/rh_compute/scripts/arb_jensen_window_pf_obligation_probe.py",
+        "work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py",
+      "claim": "Using rigorous A_ball coefficient enclosures, the manifest validates 1,470 selected degree-3 and degree-4 Jensen-window contiguous Toeplitz determinants for the five-lambda grid and shifts n=0..20.",
+      "proof_boundary": "Finite Arb diagnostic only; not all-minor Jensen-window PF-infinity, not Jensen hyperbolicity, and not a proof of RH or Lambda <= 0."
+    },
+    {
+      "id": "arb_jensen_window_sturm_hyperbolicity_diagnostic",
+      "title": "Arb Jensen-window Sturm hyperbolicity finite diagnostic",
+      "category": "diagnostic",
+      "status": "diagnostic_validated",
+      "refs": [
+        "outputs/arb_jensen_window_sturm_hyperbolicity_diagnostic.md",
+        "outputs/jensen_window_pf_bridge_target.md",
+        "work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d3_d4_dps520_summary.json",
+        "work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d3_d4_dps520.jsonl",
+        "work/rh_compute/scripts/arb_jensen_window_sturm_hyperbolicity_probe.py",
+        "work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py",
+      "claim": "Using rigorous A_ball coefficient enclosures and an Arb/Sturm-style sign-variation computation, the manifest validates 210 degree-3 and degree-4 Jensen-window positive-root counts for the five-lambda grid and shifts n=0..20.",
+      "proof_boundary": "Finite Arb/Sturm diagnostic only; not all-degree or all-shift Jensen hyperbolicity, not Jensen-window PF-infinity, and not a proof of RH or Lambda <= 0."
+    },
+    {
+      "id": "arb_jensen_window_sturm_d5_hyperbolicity_diagnostic",
+      "title": "Arb Jensen-window Sturm degree-5 hyperbolicity finite diagnostic",
+      "category": "diagnostic",
+      "status": "diagnostic_validated",
+      "refs": [
+        "outputs/arb_jensen_window_sturm_hyperbolicity_diagnostic.md",
+        "outputs/jensen_window_pf_bridge_target.md",
+        "work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520_summary.json",
+        "work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520.jsonl",
+        "work/rh_compute/scripts/arb_jensen_window_sturm_hyperbolicity_probe.py",
+        "work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py --summary work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520_summary.json --rows work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520.jsonl --expected-degrees 5",
+      "claim": "Using rigorous A_ball coefficient enclosures and an Arb/Sturm-style sign-variation computation, the manifest validates 105 degree-5 Jensen-window positive-root counts for the five-lambda grid and shifts n=0..20.",
+      "proof_boundary": "Finite Arb/Sturm degree-5 diagnostic only; not all-degree or all-shift Jensen hyperbolicity, not Jensen-window PF-infinity, and not a proof of RH or Lambda <= 0."
+    },
+    {
+      "id": "jensen_window_sturm_pf_finite_consequence",
+      "title": "finite Sturm-to-PF Jensen-window consequence",
+      "category": "finite_certificate",
+      "status": "finite_validated",
+      "refs": [
+        "outputs/jensen_window_sturm_pf_consequence.md",
+        "outputs/arb_jensen_window_sturm_hyperbolicity_diagnostic.md",
+        "outputs/jensen_window_pf_bridge_target.md",
+        "work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d3_d4_dps520_summary.json",
+        "work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520_summary.json",
+        "work/rh_compute/scripts/check_jensen_window_sturm_pf_consequence.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_jensen_window_sturm_pf_consequence.py",
+      "claim": "The promoted Arb/Sturm manifests give a finite PF-infinity consequence for 315 checked Jensen windows: degrees d=3,4,5, the five-lambda grid, and shifts n=0..20.",
+      "proof_boundary": "Finite window-by-window PF consequence only; not all-degree or all-shift Jensen hyperbolicity, not all-minor Jensen-window PF-infinity as an infinite theorem, and not a proof of RH or Lambda <= 0."
+    },
+    {
       "id": "edrei_log_sign_diagnostic",
       "title": "Edrei-log sign diagnostic",
       "category": "diagnostic",
@@ -191,7 +259,7 @@
         "work/rh_compute/scripts/countermodel_gate_examples.py"
       ],
       "validation_command": "python work/rh_compute/scripts/countermodel_gate_examples.py",
-      "claim": "The executable gate validates local heat-birth, finite-prefix, finite Schur-prefix, finite consecutive signed-Hankel grid, finite recurrence, and Stieltjes multiplier traps.",
+      "claim": "The executable gate validates local heat-birth, finite-prefix, finite Jensen-window rectangle, finite Schur-prefix, finite consecutive signed-Hankel grid, finite recurrence, and Stieltjes multiplier traps.",
       "proof_boundary": "Proof-safety countermodels only; not claims about actual zeta coefficients."
     },
     {
@@ -219,8 +287,10 @@
       "status": "open_target",
       "refs": [
         "outputs/jensen_window_pf_bridge_target.md",
+        "outputs/jensen_window_pf_bridge_obligations.md",
         "outputs/signed_hankel_jensen_bridge_target.md",
         "outputs/sign_regularity_theorem_fit_matrix.md",
+        "work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py",
         "work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py"
       ],
       "claim": "Prove that every binomially weighted Jensen window B^{d,n,0}_j=binom(d,j) A_{n+j}(0) is finite PF-infinity, or prove this from all-order shifted reshaped-Hankel sign consistency plus Xi/Phi-specific analytic hypotheses.",
@@ -297,8 +367,54 @@
         "outputs/countermodel_library.md",
         "work/rh_compute/scripts/countermodel_gate_examples.py"
       ],
-      "claim": "Finite coefficient prefixes, finite signed-Hankel grids, finite Jensen passes, or finite recurrence data cannot be promoted to all-order theorem conclusions by wording alone.",
+      "claim": "Finite coefficient prefixes, finite signed-Hankel grids, finite Jensen passes, finite Jensen-window PF/Sturm rectangles, or finite recurrence data cannot be promoted to all-order theorem conclusions by wording alone.",
       "proof_boundary": "Rejected proof step; executable countermodel gates validate the obstruction."
+    },
+    {
+      "id": "jensen_window_pf_bridge_obligation_ledger",
+      "title": "Jensen-window PF bridge obligation ledger",
+      "category": "hygiene_gate",
+      "status": "guard_validated",
+      "refs": [
+        "outputs/jensen_window_pf_bridge_obligations.md",
+        "outputs/jensen_window_pf_bridge_target.md",
+        "outputs/jensen_window_pf_theorem_machinery_fit_matrix.md",
+        "work/rh_compute/results/jensen_window_pf_bridge_obligations.json",
+        "work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py",
+      "claim": "The obligation ledger decomposes the Jensen-window PF bridge into 10 exact, finite, open, conditional, rejected, and route-separated obligations, with 3 open obligations and only the central open bridge theorem marked as target-closing if proved.",
+      "proof_boundary": "Theorem-obligation hygiene only; not a proof of any open obligation and not a proof of Lambda <= 0."
+    },
+    {
+      "id": "jensen_window_pf_theorem_machinery_fit_matrix",
+      "title": "Jensen-window PF theorem machinery fit matrix",
+      "category": "hygiene_gate",
+      "status": "guard_validated",
+      "refs": [
+        "outputs/jensen_window_pf_theorem_machinery_fit_matrix.md",
+        "outputs/jensen_window_pf_bridge_obligations.md",
+        "outputs/sign_regularity_theorem_fit_matrix.md",
+        "work/rh_compute/results/jensen_window_pf_theorem_machinery_fit_matrix.json",
+        "work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py",
+      "claim": "The theorem machinery fit matrix audits 7 total-positivity, PF, zero-preserver, sign-regularity, downstream, and rejected shortcut theorem families against jwpf_06, with 0 ready-to-apply rows and explicit fatal gaps/next actions.",
+      "proof_boundary": "Theorem-search hygiene only; not a proof that any source theorem currently closes jwpf_06 and not a proof of Lambda <= 0."
+    },
+    {
+      "id": "signed_hankel_jensen_dependency_graph",
+      "title": "signed-Hankel/Jensen dependency graph",
+      "category": "hygiene_gate",
+      "status": "guard_validated",
+      "refs": [
+        "outputs/signed_hankel_jensen_dependency_graph.md",
+        "work/rh_compute/results/signed_hankel_jensen_dependency_graph.json",
+        "work/rh_compute/scripts/check_signed_hankel_jensen_dependency_graph.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_signed_hankel_jensen_dependency_graph.py",
+      "claim": "The dependency graph validates that finite signed-Hankel/Jensen evidence, countermodel gates, and open theorem targets are separated from the not-proved Lambda <= 0 conclusion by explicit non-promotion edges.",
+      "proof_boundary": "Dependency hygiene only; not a proof bridge, not an all-order theorem, and not a proof of Lambda <= 0."
     },
     {
       "id": "core_reproducibility_gates",

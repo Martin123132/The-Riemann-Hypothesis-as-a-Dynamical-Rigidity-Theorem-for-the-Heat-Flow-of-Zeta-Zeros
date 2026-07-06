@@ -34,7 +34,7 @@ GATES: tuple[GateSpec, ...] = (
     GateSpec(
         name="countermodel proof-safety gates",
         command=("work/rh_compute/scripts/countermodel_gate_examples.py",),
-        expected=("validated 10 countermodel gate examples",),
+        expected=("validated 11 countermodel gate examples",),
         category="non-promotion guards",
     ),
     GateSpec(
@@ -58,7 +58,13 @@ GATES: tuple[GateSpec, ...] = (
     GateSpec(
         name="proof-claim ledger",
         command=("work/rh_compute/scripts/check_proof_claim_ledger.py",),
-        expected=("validated proof-claim ledger: 21 claims, 0 issues, 6 open theorem targets",),
+        expected=("validated proof-claim ledger: 28 claims, 0 issues, 6 open theorem targets",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="signed-Hankel/Jensen dependency graph",
+        command=("work/rh_compute/scripts/check_signed_hankel_jensen_dependency_graph.py",),
+        expected=("validated signed-Hankel/Jensen dependency graph with 0 issues",),
         category="non-promotion guards",
     ),
     GateSpec(
@@ -110,6 +116,38 @@ GATES: tuple[GateSpec, ...] = (
         category="exact theorem-search algebra",
     ),
     GateSpec(
+        name="Arb Jensen-window PF obligation finite diagnostics",
+        command=("work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py",),
+        expected=("validated 1470 Arb Jensen-window PF obligation finite diagnostics with 0 issues",),
+        category="finite theorem-search diagnostics",
+    ),
+    GateSpec(
+        name="Arb Jensen-window Sturm hyperbolicity finite diagnostics",
+        command=("work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py",),
+        expected=("validated 210 Arb Jensen-window Sturm hyperbolicity finite diagnostics with 0 issues",),
+        category="finite theorem-search diagnostics",
+    ),
+    GateSpec(
+        name="Arb Jensen-window Sturm degree-5 hyperbolicity finite diagnostics",
+        command=(
+            "work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py",
+            "--summary",
+            "work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520_summary.json",
+            "--rows",
+            "work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520.jsonl",
+            "--expected-degrees",
+            "5",
+        ),
+        expected=("validated 105 Arb Jensen-window Sturm hyperbolicity finite diagnostics with 0 issues",),
+        category="finite theorem-search diagnostics",
+    ),
+    GateSpec(
+        name="finite Sturm-to-PF Jensen-window consequences",
+        command=("work/rh_compute/scripts/check_jensen_window_sturm_pf_consequence.py",),
+        expected=("validated 315 finite Sturm-to-PF Jensen-window consequences with 0 issues",),
+        category="promoted finite evidence",
+    ),
+    GateSpec(
         name="signed-Hankel/Jensen bridge target specification",
         command=("work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py",),
         expected=("validated signed-Hankel/Jensen bridge target specification with 0 issues",),
@@ -119,6 +157,18 @@ GATES: tuple[GateSpec, ...] = (
         name="Jensen-window PF bridge target",
         command=("work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py",),
         expected=("validated Jensen-window PF bridge target with 0 issues",),
+        category="open theorem target hygiene",
+    ),
+    GateSpec(
+        name="Jensen-window PF bridge obligation ledger",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py",),
+        expected=("validated Jensen-window PF bridge obligations: 10 obligations, 0 issues, 3 open obligations",),
+        category="open theorem target hygiene",
+    ),
+    GateSpec(
+        name="Jensen-window PF theorem machinery fit matrix",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py",),
+        expected=("validated Jensen-window PF theorem machinery fit matrix: 7 rows, 0 issues, 0 ready-to-apply rows",),
         category="open theorem target hygiene",
     ),
     GateSpec(

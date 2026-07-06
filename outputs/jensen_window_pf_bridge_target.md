@@ -105,6 +105,48 @@ records the degree-2 exact contact, selected degree-3 and degree-4
 Jensen-window Toeplitz obligations, and an exact countermodel in which selected
 low-order window minors pass while larger contiguous Toeplitz minors fail.
 
+The finite Arb diagnostic:
+
+```text
+outputs/arb_jensen_window_pf_obligation_diagnostic.md
+work/rh_compute/results/arb_jensen_window_pf_obligations_lamgrid_n0_n20_d3_m1_m8_d4_m1_m6_dps520_summary.json
+work/rh_compute/results/arb_jensen_window_pf_obligations_lamgrid_n0_n20_d3_m1_m8_d4_m1_m6_dps520.jsonl
+python work/rh_compute/scripts/arb_jensen_window_pf_obligation_probe.py
+python work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py
+```
+
+validates `1470/1470` selected Arb interval determinants for `d=3` and `d=4`
+across the five-lambda grid and shifts `n=0..20`. This is finite
+theorem-search evidence, not all-minor Jensen-window PF-infinity.
+
+The finite Arb/Sturm root-count diagnostic:
+
+```text
+outputs/arb_jensen_window_sturm_hyperbolicity_diagnostic.md
+work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d3_d4_dps520_summary.json
+work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d3_d4_dps520.jsonl
+work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520_summary.json
+work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520.jsonl
+python work/rh_compute/scripts/arb_jensen_window_sturm_hyperbolicity_probe.py
+python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py
+```
+
+validates `210/210` degree-3/4 and `105/105` degree-5 Jensen-window
+positive-root counts for `Q_{d,n,lambda}(y)=P_{d,n,lambda}(-y)` across the
+same five-lambda grid and shifts `n=0..20`. This is finite hyperbolicity
+evidence, not all-degree or all-shift Jensen hyperbolicity.
+
+The finite Sturm-to-PF consequence gate:
+
+```text
+outputs/jensen_window_sturm_pf_consequence.md
+python work/rh_compute/scripts/check_jensen_window_sturm_pf_consequence.py
+```
+
+records the finite Polya-frequency consequence of those root counts: `315/315`
+checked Jensen windows have finite PF-infinity as a window-by-window
+certificate. This is not all-minor Jensen-window PF-infinity as an infinite theorem.
+
 The older Jensen/Hankel bridge algebra gate:
 
 ```text
@@ -138,6 +180,36 @@ Either version would imply all Jensen polynomials are hyperbolic, and then the
 remaining task would be the standard limiting passage to the required
 Laguerre-Polya/Newman conclusion without assuming RH.
 
+## Obligation Ledger
+
+The target is decomposed into exact, finite, open, conditional, rejected, and
+route-separated obligations here:
+
+```text
+outputs/jensen_window_pf_bridge_obligations.md
+work/rh_compute/results/jensen_window_pf_bridge_obligations.json
+python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
+```
+
+Current obligation split:
+
+```text
+10 obligations
+3 open obligations
+jwpf_06_sign_regular_to_jensen_pf_conversion is the central open bridge theorem
+finite evidence rows have would_close_target=false
+```
+
+The theorem-machinery audit for the central bridge row is:
+
+```text
+outputs/jensen_window_pf_theorem_machinery_fit_matrix.md
+python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
+```
+
+It currently records `7` source-anchored theorem-family rows and `0`
+ready-to-apply rows.
+
 ## Why The Existing Evidence Is Still Finite
 
 The current Arb staircase checker validates:
@@ -150,6 +222,20 @@ python work/rh_compute/scripts/check_arb_shifted_hankel_staircase_manifest.py
 This is strong evidence for the antecedent shape of the bridge theorem, but it
 is not a proof of all-order shifted sign-consistency and it does not validate
 all Jensen-window Toeplitz minors.
+
+The executable countermodel library includes the finite Jensen-window
+rectangle extension gate:
+
+```text
+outputs/countermodel_library.md
+python work/rh_compute/scripts/countermodel_gate_examples.py
+```
+
+It preserves all coefficient inputs currently used by the Jensen-window
+PF/Sturm diagnostics, `A_0..A_25`, and then chooses a positive `A_26` that
+breaks the next degree-2 Jensen discriminant at shift `24`. This is not a
+model of the zeta coefficients; it is a proof-safety gate showing that the
+finite rectangle cannot be promoted by wording alone.
 
 The current finite Toeplitz/PF certificate ledger checks the ordinary Taylor
 coefficient sequence:
@@ -185,8 +271,12 @@ This note is part of the same theorem target family as:
 
 ```text
 outputs/signed_hankel_jensen_bridge_target.md
+outputs/jensen_window_pf_bridge_obligations.md
+outputs/jensen_window_pf_theorem_machinery_fit_matrix.md
 outputs/sign_regularity_theorem_fit_matrix.md
 python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
+python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
+python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
 python work/rh_compute/scripts/check_sign_regularity_theorem_fit_matrix.py
 ```
 

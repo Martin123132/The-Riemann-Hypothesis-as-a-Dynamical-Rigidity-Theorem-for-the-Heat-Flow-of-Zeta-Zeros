@@ -1,6 +1,6 @@
 # Countermodel Library
 
-Date: 2026-07-04
+Date: 2026-07-05
 
 Status: proof-safety artifact. This is not evidence against RH. It records small models, finite-prefix traps, and finite-grid traps that block invalid bridge lemmas in the RH dynamical-rigidity programme.
 
@@ -13,7 +13,7 @@ python work/rh_compute/scripts/countermodel_gate_examples.py
 Current result:
 
 ```text
-validated 10 countermodel gate examples
+validated 11 countermodel gate examples
 ```
 
 ## Purpose
@@ -30,6 +30,7 @@ The dangerous failure mode is to turn one of these into a proof:
 local zero repulsion
 finite signed-Hankel evidence
 finite Jensen hyperbolicity
+finite Jensen-window PF/Sturm rectangles
 finite Toeplitz/PF certificates
 finite Schur/Toeplitz shape-prefix evidence
 finite Edrei moment-recurrence evidence
@@ -353,6 +354,59 @@ Hankel sign-consistency reduction plus an all-order proof, or a new bridge
 theorem matching the zeta coefficient sequence.
 ```
 
+## Gate 4B: Current Jensen-Window Rectangle Is Not All Shifts
+
+The current Arb Jensen-window diagnostics are deliberately finite:
+
+```text
+PF obligation checks:
+  degrees d = 3,4
+  shifts n = 0..20
+  coefficients used through A_24
+
+Sturm/root-count checks:
+  degrees d = 3,4,5
+  shifts n = 0..20
+  coefficients used through A_25
+```
+
+The executable gate preserves every coefficient those finite Jensen-window
+checks can see:
+
+```text
+A_0, A_1, ..., A_25
+```
+
+for all five lambda rows, then chooses a positive next coefficient:
+
+```text
+A_26 = 2 A_25^2 / A_24.
+```
+
+At the next untested degree-2 Jensen window, shift `24`, the discriminant is:
+
+```text
+4(A_25^2 - A_24 A_26) = -4 A_25^2 < 0.
+```
+
+So all existing finite Jensen-window PF/Sturm inputs are preserved, but the
+next degree-2 Jensen polynomial is not hyperbolic.
+
+Blocked proof step:
+
+```text
+The finite Jensen-window PF/Sturm rectangle proves all-shift Jensen
+hyperbolicity.
+```
+
+Correct use:
+
+```text
+The finite Jensen-window rectangle is a strong stress test and normalization
+check. A proof still needs an all-degree/all-shift theorem for the actual
+coefficient sequence.
+```
+
 ## Gate 5: Finite Moment Recurrence Is Not An Edrei Representation
 
 The Edrei reconstruction scout checks finite recurrence data for the shifted
@@ -526,6 +580,13 @@ h_0..h_6 preserved
 positive h_7 breaks s_(6,6)
 ```
 
+It validates the finite Jensen-window rectangle trap:
+
+```text
+current Jensen-window PF/Sturm coefficient inputs A_0..A_25 preserved
+positive A_26 breaks degree-2, shift-24 Jensen hyperbolicity
+```
+
 It also validates the Stieltjes multiplier trap:
 
 ```text
@@ -567,14 +628,20 @@ Executable result-language scan:
 python work/rh_compute/scripts/check_output_reference_integrity.py
 python work/rh_compute/scripts/check_output_status_manifest.py
 python work/rh_compute/scripts/check_proof_claim_ledger.py
+python work/rh_compute/scripts/check_signed_hankel_jensen_dependency_graph.py
+python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
+python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
 python work/rh_compute/scripts/check_result_language_boundaries.py
 ```
 
 Current result:
 
 ```text
-validated output references: scanned 38 markdown files, 338 path references, 0 missing required paths, 3 planned missing deliverables
-validated output artifact statuses: scanned 38 markdown files, 0 status issues
-validated proof-claim ledger: 21 claims, 0 issues, 6 open theorem targets
-validated result-language boundaries: scanned 38 markdown files, 0 overclaims
+validated output references: scanned 44 markdown files, 463 path references, 0 missing required paths, 3 planned missing deliverables
+validated output artifact statuses: scanned 44 markdown files, 0 status issues
+validated proof-claim ledger: 28 claims, 0 issues, 6 open theorem targets
+validated signed-Hankel/Jensen dependency graph with 0 issues
+validated Jensen-window PF bridge obligations: 10 obligations, 0 issues, 3 open obligations
+validated Jensen-window PF theorem machinery fit matrix: 7 rows, 0 issues, 0 ready-to-apply rows
+validated result-language boundaries: scanned 44 markdown files, 0 overclaims
 ```

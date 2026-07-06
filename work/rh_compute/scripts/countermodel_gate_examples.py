@@ -397,6 +397,70 @@ def finite_schur_prefix_extension_gate(prefix_k: int = 6, matrix_n: int = 7, max
     }
 
 
+def finite_jensen_window_grid_extension_gate(rows: dict[Decimal, dict], lambdas: list[Decimal]) -> dict:
+    """Preserve the current Jensen-window finite grid, then break the next shift.
+
+    The promoted Jensen-window Sturm/PF diagnostics use A_k only through
+    A_25: shifts n=0..20 and degrees up to 5.  Any proof step using only that
+    finite coefficient rectangle is invalid, because one can preserve every
+    coefficient the rectangle sees and choose a positive A_26 that makes the
+    next degree-2 Jensen discriminant negative.
+    """
+    max_shift = 20
+    max_degree = 5
+    preserved_max_index = max_shift + max_degree
+    edited_index = preserved_max_index + 1
+    break_shift = preserved_max_index - 1
+
+    summaries: list[dict] = []
+    for lam in lambdas:
+        if lam not in rows:
+            raise KeyError(f"lambda {lam} not found in coefficient rows")
+        a = a_values(rows[lam])
+        if len(a) <= preserved_max_index:
+            raise ValueError(
+                f"lambda {lam} row has only {len(a)} A coefficients; "
+                f"need through A_{preserved_max_index}"
+            )
+        adversarial_next = Decimal(2) * a[preserved_max_index] * a[preserved_max_index] / a[preserved_max_index - 1]
+        discriminant = Decimal(4) * (
+            a[preserved_max_index] * a[preserved_max_index]
+            - a[preserved_max_index - 1] * adversarial_next
+        )
+        summaries.append(
+            {
+                "lambda": str(lam),
+                "adversarial_A_next": short(adversarial_next),
+                "adversarial_A_next_is_positive": adversarial_next > 0,
+                "degree2_break_shift": break_shift,
+                "degree2_discriminant_after_extension": short(discriminant),
+                "degree2_jensen_hyperbolicity_breaks": discriminant < 0,
+            }
+        )
+
+    return {
+        "name": "finite_jensen_window_grid_extension",
+        "preserved_jensen_window_sturm_degrees": "3,4,5",
+        "preserved_jensen_window_pf_degrees": "3,4",
+        "preserved_shifts": f"0..{max_shift}",
+        "preserved_coefficient_indices": f"0..{preserved_max_index}",
+        "edited_coefficient_index": edited_index,
+        "broken_degree": 2,
+        "broken_shift": break_shift,
+        "all_extensions_positive": all(row["adversarial_A_next_is_positive"] for row in summaries),
+        "all_next_degree2_jensen_discriminants_negative": all(
+            row["degree2_jensen_hyperbolicity_breaks"] for row in summaries
+        ),
+        "lambda_rows": summaries,
+        "gate": (
+            "The current finite Jensen-window PF/Sturm rectangle sees only "
+            "A_0..A_25.  Preserving that whole prefix does not imply all-shift "
+            "Jensen hyperbolicity; a positive A_26 can break the next "
+            "degree-2 Jensen window."
+        ),
+    }
+
+
 def finite_prefix_gates(row: dict, prefix_k: int | None = None) -> dict:
     """Build positive adversarial extensions preserving the current prefix."""
     a = a_values(row)
@@ -477,6 +541,7 @@ def main() -> int:
         stieltjes_multiplier_trap_gate(),
         finite_consecutive_hankel_grid_extension_gate(),
         finite_schur_prefix_extension_gate(),
+        finite_jensen_window_grid_extension_gate(rows, targets),
     ]
     for lam in targets:
         if lam not in rows:
@@ -518,6 +583,13 @@ def main() -> int:
                 result["all_finite_nonzero_tests_positive"],
                 result["adversarial_next_is_positive"],
                 result["broken_skew_schur_det_is_negative"],
+            )
+            if not all(required):
+                raise AssertionError(result)
+        elif result["name"] == "finite_jensen_window_grid_extension":
+            required = (
+                result["all_extensions_positive"],
+                result["all_next_degree2_jensen_discriminants_negative"],
             )
             if not all(required):
                 raise AssertionError(result)
@@ -563,6 +635,13 @@ def main() -> int:
                     f"base {result['base_sequence']}, "
                     f"h_0..h_{result['preserved_prefix_through_k']} preserved, "
                     "next Jacobi-Trudi skew-Schur determinant breaks"
+                )
+            if result["name"] == "finite_jensen_window_grid_extension":
+                print(
+                    "  "
+                    f"Jensen-window PF/Sturm inputs {result['preserved_coefficient_indices']} preserved, "
+                    f"positive A_{result['edited_coefficient_index']} breaks "
+                    f"degree-{result['broken_degree']} shift-{result['broken_shift']} Jensen hyperbolicity"
                 )
             if result["name"] == "stieltjes_moment_multiplier_trap":
                 print(

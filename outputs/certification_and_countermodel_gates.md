@@ -1,6 +1,6 @@
 # Certification And Countermodel Gates
 
-Date: 2026-07-03
+Date: 2026-07-05
 
 Status: proof-safety gate ledger. This is not a proof of RH or `Lambda <= 0`; it defines certification levels, manifest checks, and countermodel boundaries.
 
@@ -280,6 +280,7 @@ python work/rh_compute/scripts/check_core_proof_programme_gates.py
 python work/rh_compute/scripts/check_output_reference_integrity.py
 python work/rh_compute/scripts/check_output_status_manifest.py
 python work/rh_compute/scripts/check_proof_claim_ledger.py
+python work/rh_compute/scripts/check_signed_hankel_jensen_dependency_graph.py
 python work/rh_compute/scripts/check_result_language_boundaries.py
 python work/rh_compute/scripts/check_toeplitz_certificate_manifest.py
 python work/rh_compute/scripts/check_toeplitz_jacobi_trudi_map.py
@@ -288,6 +289,8 @@ python work/rh_compute/scripts/check_arb_hankel_sign_consistency_reduction_manif
 python work/rh_compute/scripts/check_arb_shifted_hankel_sign_consistency_manifest.py
 python work/rh_compute/scripts/check_jensen_hankel_bridge_algebra.py
 python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
+python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
+python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
 python work/rh_compute/scripts/check_edrei_log_sign_manifest.py
 python work/rh_compute/scripts/check_edrei_power_hankel_manifest.py
 python work/rh_compute/scripts/check_edrei_power_hankel_frontier_manifest.py
@@ -354,6 +357,44 @@ The signed-Hankel/Jensen bridge target checker requires the active theorem
 target to remain all-order and all-shift, with the finite Arb certificate
 listed only as evidence and the degree-3 obstruction listed as a kill gate.
 
+The signed-Hankel/Jensen dependency graph documents the allowed relation
+between finite evidence, countermodel gates, open theorem targets, and the
+not-proved Newman-direction conclusion:
+
+```text
+outputs/signed_hankel_jensen_dependency_graph.md
+work/rh_compute/results/signed_hankel_jensen_dependency_graph.json
+python work/rh_compute/scripts/check_signed_hankel_jensen_dependency_graph.py
+```
+
+It is a dependency hygiene gate only, not a proof bridge.
+
+The Jensen-window PF bridge obligation ledger decomposes the central open
+bridge target into exact, finite, open, conditional, rejected, and
+route-separated obligations:
+
+```text
+outputs/jensen_window_pf_bridge_obligations.md
+work/rh_compute/results/jensen_window_pf_bridge_obligations.json
+python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
+```
+
+It validates `10` obligations with `3` still open. This is theorem-search
+hygiene only, not proof of the bridge.
+
+The Jensen-window PF theorem machinery fit matrix audits total-positivity,
+PF-sequence, zero-preserver, sign-regularity, downstream Laguerre-Polya, and
+rejected-shortcut theorem families against the central `jwpf_06` bridge:
+
+```text
+outputs/jensen_window_pf_theorem_machinery_fit_matrix.md
+work/rh_compute/results/jensen_window_pf_theorem_machinery_fit_matrix.json
+python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
+```
+
+It validates `7` rows with `0` ready-to-apply rows. This is source-anchored
+theorem-search hygiene only.
+
 The core runner is documented in:
 
 ```text
@@ -363,7 +404,7 @@ outputs/core_proof_programme_gates.md
 Current core runner status:
 
 ```text
-validated 22/22 core proof-programme gates
+validated 29/29 core proof-programme gates
 ```
 
 Current manifest status:
@@ -400,6 +441,9 @@ exact finite Schur/Toeplitz prefix trap:
   base h_k = 1/k!, generating function exp(z)
   h_0..h_6 and 2,940 finite Toeplitz/Schur tests preserved
   positive h_7 breaks the Jacobi-Trudi skew-Schur determinant s_(6,6)
+finite Jensen-window rectangle trap:
+  current Jensen-window PF/Sturm coefficient inputs A_0..A_25 preserved
+  positive A_26 breaks degree-2, shift-24 Jensen hyperbolicity
 positive one-term extensions of the current coefficient prefixes that break:
   order-2 Toeplitz/PF
   m = 1 signed-Hankel

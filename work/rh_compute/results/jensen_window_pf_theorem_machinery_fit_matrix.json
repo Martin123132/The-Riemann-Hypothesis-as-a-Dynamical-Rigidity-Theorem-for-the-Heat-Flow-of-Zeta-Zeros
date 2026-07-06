@@ -1,0 +1,196 @@
+{
+  "kind": "jensen_window_pf_theorem_machinery_fit_matrix",
+  "date": "2026-07-06",
+  "target_obligation": "jwpf_06_sign_regular_to_jensen_pf_conversion",
+  "proof_boundary": "Theorem-search fit matrix only; this is not a proof of Jensen-window PF-infinity, Laguerre-Polya membership, RH, or Lambda <= 0.",
+  "required_bridge_features": [
+    "outputs every binomially weighted Jensen-window Toeplitz matrix for all d,n",
+    "handles binomial weights binom(d,j)",
+    "handles all shifts n uniformly",
+    "starts from proved noncircular hypotheses about the actual A_k(0)",
+    "does not assume Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0"
+  ],
+  "allowed_verdicts": [
+    "endpoint_equivalence_only",
+    "possible_if_new_kernel_representation",
+    "possible_if_preserver_hypotheses_are_proved",
+    "route_mismatch",
+    "conditional_downstream_only",
+    "rejected_circular"
+  ],
+  "rows": [
+    {
+      "id": "tm_01_asw_edrei_pf_sequence_characterization",
+      "theorem_family": "Aissen-Edrei-Schoenberg-Whitney / Edrei PF-sequence generating-function characterization",
+      "primary_sources": [
+        "https://www.pnas.org/doi/10.1073/pnas.37.5.303",
+        "https://link.springer.com/article/10.1007/BF02786970",
+        "https://www.cambridge.org/core/journals/canadian-journal-of-mathematics/article/proof-of-a-conjecture-of-schoenberg-on-the-generating-function-of-a-totally-positive-sequence/7CC0A2ADBCB2ADF112F737EDE229766C"
+      ],
+      "fit_to_jwpf06": "Exact endpoint language for a sequence already known to be PF-infinity; it explains what the conclusion means for each Jensen window.",
+      "required_hypotheses": [
+        "Toeplitz total nonnegativity of the candidate sequence, or an equivalent real-nonpositive-zero generating polynomial/function statement",
+        "verification for every binomially weighted window B^{d,n,0}, all d,n"
+      ],
+      "current_evidence": [
+        "The target note gives the finite-window PF/Jensen equivalence.",
+        "Finite Sturm-to-PF evidence validates 315 checked windows only."
+      ],
+      "fatal_gap": "The theorem family characterizes the desired PF endpoint but does not convert signed-Hankel/sign-regular data into PF-infinity for all Jensen windows.",
+      "next_action": "Use ASW/Edrei only as endpoint certification language; do not cite it as the missing sign-regular-to-Jensen bridge.",
+      "verdict": "endpoint_equivalence_only",
+      "hypotheses_verified": false,
+      "would_close_jwpf06_if_verified": false,
+      "proof_boundary": "Endpoint equivalence only; invoking it before proving PF-infinity would assume the bridge conclusion."
+    },
+    {
+      "id": "tm_02_schoenberg_pf_functions_variation_diminishing",
+      "theorem_family": "Schoenberg Polya-frequency functions and variation-diminishing kernels",
+      "primary_sources": [
+        "https://link.springer.com/article/10.1007/BF02790092",
+        "https://www.stat.washington.edu/jaw/COURSES/580s/581/HO/Schoenberg-50.ASMATHSzeged.pdf"
+      ],
+      "fit_to_jwpf06": "Potentially relevant if the A_k(0) or the Jensen windows can be represented as samples, moments, or convolutions of a Polya-frequency kernel.",
+      "required_hypotheses": [
+        "A concrete PF kernel, convolution, or variation-diminishing operator producing the Jensen-window Toeplitz minors",
+        "A proof that binomial weighting and all shifts remain inside the PF/variation-diminishing construction",
+        "No use of already-known Jensen hyperbolicity"
+      ],
+      "current_evidence": [
+        "Finite shifted Hankel and Jensen-window diagnostics are compatible with such a route.",
+        "No PF kernel or variation-diminishing operator for the actual A_k(0) is currently constructed."
+      ],
+      "fatal_gap": "The required PF kernel/operator representation is missing.",
+      "next_action": "Search for an integral or operator representation whose minors are Jensen-window Toeplitz minors after Cauchy-Binet or convolution.",
+      "verdict": "possible_if_new_kernel_representation",
+      "hypotheses_verified": false,
+      "would_close_jwpf06_if_verified": true,
+      "proof_boundary": "Promising theorem family only if a new kernel/operator representation is proved."
+    },
+    {
+      "id": "tm_03_karlin_basic_composition_cauchy_binet",
+      "theorem_family": "Karlin total-positivity composition / Cauchy-Binet determinant propagation",
+      "primary_sources": [
+        "https://link.springer.com/book/10.1007/978-94-015-8674-0",
+        "https://projecteuclid.org/journals/pacific-journal-of-mathematics/volume-67/issue-1/Total-positivity-of-certain-reproducing-kernels/pjm/1102817668.pdf"
+      ],
+      "fit_to_jwpf06": "Could close the bridge if every Jensen-window Toeplitz minor were represented as an integral/sum of products of nonnegative determinants.",
+      "required_hypotheses": [
+        "A positive kernel, planar network, production matrix, or determinant integral whose Cauchy-Binet expansion equals each Jensen-window Toeplitz minor",
+        "Uniform control of all d,n and all minor shapes",
+        "A proof that the construction uses the actual zeta heat-flow coefficients"
+      ],
+      "current_evidence": [
+        "The coefficient-PF route already names positive determinant-integral formulas as an open target.",
+        "The Jensen-window obligation ledger isolates the binomial-weighted minors requiring such a formula."
+      ],
+      "fatal_gap": "No positive determinant formula or network for the Jensen-window Toeplitz minors is known.",
+      "next_action": "Attempt symbolic Cauchy-Binet rewrites of low-degree Jensen-window Toeplitz minors and look for a uniform positive-kernel pattern.",
+      "verdict": "possible_if_new_kernel_representation",
+      "hypotheses_verified": false,
+      "would_close_jwpf06_if_verified": true,
+      "proof_boundary": "Candidate structural route only; no positive kernel/integral is currently proved."
+    },
+    {
+      "id": "tm_04_polya_schur_multiplier_preservers",
+      "theorem_family": "Polya-Schur multiplier sequences, Schur-Szego composition, and real-root preservers",
+      "primary_sources": [
+        "https://annals.math.princeton.edu/wp-content/uploads/annals-v170-n1-p14-p.pdf",
+        "https://arxiv.org/abs/math/0607416"
+      ],
+      "fit_to_jwpf06": "Potentially relevant to the binomial-weight factor, since the bridge needs a stability-preserving way to pass between unweighted coefficient windows and binomially weighted Jensen windows.",
+      "required_hypotheses": [
+        "A verified real-root preserving operator exactly matching the binomial weighting at fixed degree",
+        "All unweighted input windows satisfying the relevant real-root/PF hypothesis",
+        "Uniform compatibility as d and n vary"
+      ],
+      "current_evidence": [
+        "The degree-2 signed-Hankel contact is exact.",
+        "No all-degree unweighted-window real-root theorem is proved."
+      ],
+      "fatal_gap": "Preserver theory cannot help until the input family to be preserved is itself proved to satisfy the required zero/PF condition.",
+      "next_action": "Formalize the finite-degree binomial-weight operator and test whether it reduces the bridge to a strictly weaker all-window real-root obligation.",
+      "verdict": "possible_if_preserver_hypotheses_are_proved",
+      "hypotheses_verified": false,
+      "would_close_jwpf06_if_verified": false,
+      "proof_boundary": "Preserver machinery may handle binomial weights but does not by itself prove the required input windows."
+    },
+    {
+      "id": "tm_05_gantmacher_krein_sign_regular_matrices",
+      "theorem_family": "Gantmacher-Krein/Karlin sign-regular and oscillatory matrix theory",
+      "primary_sources": [
+        "https://link.springer.com/book/10.1007/978-94-015-8674-0"
+      ],
+      "fit_to_jwpf06": "Conceptually close to the signed-Hankel/sign-regular evidence, but classical sign-regular matrix theory is not automatically a theorem about Jensen-window Toeplitz matrices.",
+      "required_hypotheses": [
+        "A precise matrix model whose sign-regular minors are exactly the shifted reshaped-Hankel minors",
+        "A theorem transferring that sign-regularity to Toeplitz total nonnegativity of every Jensen window",
+        "Uniform all-order and all-shift verification"
+      ],
+      "current_evidence": [
+        "Finite shifted reshaped-Hankel signs are strongly positive in tested ranges.",
+        "Exact low-degree gates show signed-Hankel data alone does not force cubic Jensen hyperbolicity."
+      ],
+      "fatal_gap": "No transfer theorem from the signed/indefinite Hankel pattern to Jensen-window Toeplitz TN is identified.",
+      "next_action": "Search specifically for sign-regular-to-TN transfer theorems with binomial/Toeplitz minors, and reject any version contradicted by the degree-3 countermodel.",
+      "verdict": "possible_if_preserver_hypotheses_are_proved",
+      "hypotheses_verified": false,
+      "would_close_jwpf06_if_verified": true,
+      "proof_boundary": "Nearest conceptual route only; the needed transfer theorem is missing and not currently proved."
+    },
+    {
+      "id": "tm_06_laguerre_polya_jensen_limit",
+      "theorem_family": "Jensen criterion and Laguerre-Polya limiting machinery",
+      "primary_sources": [
+        "outputs/formal_core.md",
+        "outputs/jensen_window_pf_bridge_target.md"
+      ],
+      "fit_to_jwpf06": "Downstream endpoint after all Jensen polynomials are proved hyperbolic; not a replacement for proving the Jensen-window PF bridge.",
+      "required_hypotheses": [
+        "All-degree/all-shift Jensen hyperbolicity at lambda=0",
+        "Correct normalization and limiting/growth hypotheses for H_0"
+      ],
+      "current_evidence": [
+        "Finite Jensen-window Sturm/PF evidence covers degrees 3,4,5 and shifts 0..20 only.",
+        "The obligation ledger records this as a conditional downstream layer."
+      ],
+      "fatal_gap": "The all-degree/all-shift Jensen theorem has not been proved.",
+      "next_action": "Keep the limiting theorem as a downstream checklist item; do not invoke it inside jwpf_06.",
+      "verdict": "conditional_downstream_only",
+      "hypotheses_verified": false,
+      "would_close_jwpf06_if_verified": false,
+      "proof_boundary": "Conditional endpoint only; using it before proving all Jensen hyperbolicity would be circular."
+    },
+    {
+      "id": "tm_07_finite_grid_or_rh_assuming_shortcuts",
+      "theorem_family": "Rejected shortcuts: finite grids, local zero repulsion, or RH-assuming arguments",
+      "primary_sources": [
+        "outputs/countermodel_library.md",
+        "work/rh_compute/scripts/countermodel_gate_examples.py",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ],
+      "fit_to_jwpf06": "None; these are proof-safety traps rather than valid theorem machinery.",
+      "required_hypotheses": [
+        "No finite-prefix promotion",
+        "No hidden assumption of Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0"
+      ],
+      "current_evidence": [
+        "Executable countermodel gates reject finite-prefix and finite Jensen-window rectangle promotion.",
+        "The dependency graph keeps lambda_le_0_goal at not_proved."
+      ],
+      "fatal_gap": "These shortcuts are invalid proof moves.",
+      "next_action": "Continue running countermodel and language gates whenever theorem-search notes are updated.",
+      "verdict": "rejected_circular",
+      "hypotheses_verified": false,
+      "would_close_jwpf06_if_verified": false,
+      "proof_boundary": "Rejected route; never use as proof machinery."
+    }
+  ],
+  "invariants": [
+    "No row is marked ready_to_apply.",
+    "Every row has a fatal_gap and next_action.",
+    "Every row with would_close_jwpf06_if_verified=true has hypotheses_verified=false.",
+    "Endpoint and downstream rows are not allowed to close jwpf_06.",
+    "Rejected shortcuts remain rejected_circular."
+  ]
+}

@@ -1,0 +1,168 @@
+{
+  "kind": "jensen_window_pf_bridge_obligation_ledger",
+  "date": "2026-07-05",
+  "target": "target_jensen_window_pf_bridge",
+  "proof_boundary": "Theorem-obligation decomposition only; this is not a proof of PF-infinity, Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0.",
+  "allowed_statuses": [
+    "available_exact",
+    "finite_evidence",
+    "guard_validated",
+    "open_obligation",
+    "conditional_consequence",
+    "rejected_by_countermodel",
+    "route_mismatch"
+  ],
+  "obligations": [
+    {
+      "id": "jwpf_01_window_pf_jensen_equivalence",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "refs": [
+        "outputs/jensen_window_pf_bridge_target.md",
+        "work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py"
+      ],
+      "claim": "For each fixed degree d and shift n, finite PF-infinity of B^{d,n,0}_0,...,B^{d,n,0}_d is the Toeplitz-total-positivity form of the real-nonpositive-root condition for the Jensen window polynomial.",
+      "needed_upgrade": "No upgrade for the finite equivalence; the missing part is proving it for every d and n for the actual zeta heat-flow coefficients.",
+      "would_close_target": false,
+      "proof_boundary": "Exact reformulation only; it does not prove any window is PF-infinity."
+    },
+    {
+      "id": "jwpf_02_degree2_signed_hankel_contact",
+      "role": "exact_contact",
+      "status": "guard_validated",
+      "refs": [
+        "outputs/jensen_window_pf_bridge_target.md",
+        "outputs/jensen_hankel_bridge_algebra.md",
+        "work/rh_compute/scripts/check_jensen_hankel_bridge_algebra.py"
+      ],
+      "claim": "At degree d=2, the Jensen discriminant reduces to A_{n+1}^2 - A_n A_{n+2} >= 0, the m=1 signed-Hankel condition.",
+      "needed_upgrade": "A theorem controlling all higher-degree Jensen-window Toeplitz minors, not only the quadratic contact.",
+      "would_close_target": false,
+      "proof_boundary": "Low-degree exact contact only; not the all-degree Jensen-window PF bridge."
+    },
+    {
+      "id": "jwpf_03_low_degree_extra_toeplitz_obligations",
+      "role": "algebraic_obstruction",
+      "status": "guard_validated",
+      "refs": [
+        "outputs/jensen_window_pf_obligation_algebra.md",
+        "work/rh_compute/results/jensen_window_pf_obligation_algebra.json",
+        "work/rh_compute/scripts/check_jensen_window_pf_obligation_algebra.py"
+      ],
+      "claim": "For degrees d=3 and d=4, Jensen-window PF introduces additional banded Toeplitz obligations not supplied by the degree-2 signed-Hankel identity.",
+      "needed_upgrade": "Identify a total-positivity or Xi/Phi-specific mechanism that supplies those higher Toeplitz minors uniformly in d and n.",
+      "would_close_target": false,
+      "proof_boundary": "Exact theorem-search obstruction and finite countermodel gate only."
+    },
+    {
+      "id": "jwpf_04_current_finite_pf_sturm_evidence",
+      "role": "finite_evidence",
+      "status": "finite_evidence",
+      "refs": [
+        "outputs/arb_jensen_window_pf_obligation_diagnostic.md",
+        "outputs/arb_jensen_window_sturm_hyperbolicity_diagnostic.md",
+        "outputs/jensen_window_sturm_pf_consequence.md",
+        "work/rh_compute/scripts/check_arb_jensen_window_pf_obligation_manifest.py",
+        "work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py",
+        "work/rh_compute/scripts/check_jensen_window_sturm_pf_consequence.py"
+      ],
+      "claim": "The current finite Arb/Sturm/PF manifests validate selected degree-3/4 Toeplitz obligations, degree-3/4/5 root counts, and 315 finite window-by-window PF consequences.",
+      "needed_upgrade": "All degrees, all shifts, and all Toeplitz minors, with no finite-prefix promotion.",
+      "would_close_target": false,
+      "proof_boundary": "Finite evidence only; not all-minor Jensen-window PF-infinity as an infinite theorem."
+    },
+    {
+      "id": "jwpf_05_all_order_shifted_sign_consistency",
+      "role": "open_antecedent",
+      "status": "open_obligation",
+      "refs": [
+        "outputs/signed_hankel_jensen_bridge_target.md",
+        "outputs/sign_regularity_theorem_fit_matrix.md",
+        "work/rh_compute/scripts/check_arb_shifted_hankel_staircase_manifest.py"
+      ],
+      "claim": "Prove all-order shifted reshaped-Hankel sign consistency for the actual A_k(0), not merely the current finite staircase.",
+      "needed_upgrade": "A non-finite proof for every order, shift, and minor shape used by the bridge theorem.",
+      "would_close_target": false,
+      "proof_boundary": "Open antecedent theorem; current Arb certificates are finite."
+    },
+    {
+      "id": "jwpf_06_sign_regular_to_jensen_pf_conversion",
+      "role": "open_bridge_theorem",
+      "status": "open_obligation",
+      "refs": [
+        "outputs/jensen_window_pf_bridge_target.md",
+        "outputs/signed_hankel_jensen_bridge_target.md",
+        "outputs/sign_regularity_theorem_fit_matrix.md",
+        "outputs/jensen_window_pf_theorem_machinery_fit_matrix.md",
+        "work/rh_compute/results/jensen_window_pf_theorem_machinery_fit_matrix.json",
+        "work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py"
+      ],
+      "claim": "Convert all-order shifted sign-regularity, plus legitimate Xi/Phi-specific analytic hypotheses, into total nonnegativity of every binomially weighted Jensen-window Toeplitz matrix.",
+      "needed_upgrade": "A signed or indefinite total-positivity theorem whose hypotheses are checked for A_k(0) without assuming Jensen hyperbolicity or RH.",
+      "would_close_target": true,
+      "proof_boundary": "Open bridge theorem; not currently proved."
+    },
+    {
+      "id": "jwpf_07_binomial_weight_and_shift_uniformity",
+      "role": "open_uniformity_obligation",
+      "status": "open_obligation",
+      "refs": [
+        "outputs/jensen_window_pf_bridge_target.md",
+        "outputs/jensen_window_pf_obligation_algebra.md",
+        "outputs/countermodel_library.md"
+      ],
+      "claim": "Any bridge theorem must handle the binomial weights binom(d,j) and all shifts n uniformly; controlling unweighted A_k or a finite shift rectangle is insufficient.",
+      "needed_upgrade": "Uniform estimates or an exact structural transformation that preserves every required Jensen-window Toeplitz minor.",
+      "would_close_target": false,
+      "proof_boundary": "Open uniformity requirement; finite window rectangles are rejected by countermodel gates."
+    },
+    {
+      "id": "jwpf_08_jensen_to_laguerre_polya_limit",
+      "role": "conditional_consequence",
+      "status": "conditional_consequence",
+      "refs": [
+        "outputs/formal_core.md",
+        "outputs/jensen_window_pf_bridge_target.md",
+        "outputs/signed_hankel_jensen_bridge_target.md"
+      ],
+      "claim": "If all-degree/all-shift Jensen hyperbolicity at lambda=0 is established noncircularly, the remaining limiting step must place H_0 in the Laguerre-Polya class in the required normalization.",
+      "needed_upgrade": "Document the limiting theorem and all normal-family/growth hypotheses used for this specific heat-flow normalization.",
+      "would_close_target": false,
+      "proof_boundary": "Conditional downstream obligation; it cannot be invoked before the all-degree Jensen theorem is proved."
+    },
+    {
+      "id": "jwpf_09_finite_rectangle_promotion_rejected",
+      "role": "rejection_test",
+      "status": "rejected_by_countermodel",
+      "refs": [
+        "outputs/countermodel_library.md",
+        "work/rh_compute/scripts/countermodel_gate_examples.py"
+      ],
+      "claim": "Finite Jensen-window PF/Sturm rectangles cannot be promoted to all-shift Jensen hyperbolicity by wording alone.",
+      "needed_upgrade": "Replace finite-prefix promotion with an all-order theorem.",
+      "would_close_target": false,
+      "proof_boundary": "Rejected proof move; executable countermodel gate validates the rejection."
+    },
+    {
+      "id": "jwpf_10_ordinary_coefficient_pf_route_separated",
+      "role": "route_separation",
+      "status": "route_mismatch",
+      "refs": [
+        "outputs/jensen_window_pf_bridge_target.md",
+        "outputs/missing_coefficient_pf_theorem.md",
+        "outputs/coefficient_pf_bridge_obstruction.md"
+      ],
+      "claim": "Finite or all-order PF evidence for c_k=A_k/k! is a separate coefficient route and does not by itself prove PF-infinity of every binomially weighted Jensen window.",
+      "needed_upgrade": "Either prove the coefficient route all the way through its own theorem target, or give a separate theorem transferring it to all Jensen windows.",
+      "would_close_target": false,
+      "proof_boundary": "Route-separation guard only; not a rejection of the coefficient-PF programme."
+    }
+  ],
+  "invariants": [
+    "At least three obligations remain open_obligation.",
+    "No finite_evidence, exact_equivalence, exact_contact, algebraic_obstruction, rejection_test, or route_separation row may set would_close_target=true.",
+    "Any row with would_close_target=true must have status open_obligation.",
+    "Every row has refs, needed_upgrade, and proof_boundary fields.",
+    "The finite evidence row is explicitly not all-minor Jensen-window PF-infinity."
+  ]
+}

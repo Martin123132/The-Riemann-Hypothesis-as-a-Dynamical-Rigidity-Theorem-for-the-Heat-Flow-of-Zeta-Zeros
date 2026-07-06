@@ -1,6 +1,6 @@
 # Proof Claim Ledger
 
-Date: 2026-07-04
+Date: 2026-07-05
 
 Status: claim-classification ledger. This is not a proof of RH or `Lambda <= 0`; it records which claims are exact, finite, diagnostic, open, rejected, or hygiene gates.
 
@@ -25,7 +25,7 @@ python work/rh_compute/scripts/check_proof_claim_ledger.py
 Current result:
 
 ```text
-validated proof-claim ledger: 21 claims, 0 issues, 6 open theorem targets
+validated proof-claim ledger: 28 claims, 0 issues, 6 open theorem targets
 ```
 
 ## Categories
@@ -118,16 +118,53 @@ jensen_window_pf_obligation_algebra_gate:
   signed-Hankel threshold, while degree 3 and degree 4 introduce additional
   banded Toeplitz obligations and finite low-order countermodel failures
 
+arb_jensen_window_pf_obligation_diagnostic:
+  Arb/enclosure-backed finite diagnostic for selected degree-3/4
+  Jensen-window contiguous Toeplitz determinants; validates 1,470/1,470
+  finite determinants for the five-lambda grid and shifts n=0..20
+
+arb_jensen_window_sturm_hyperbolicity_diagnostic:
+  Arb/Sturm finite diagnostic for selected degree-3/4 Jensen-window
+  positive-root counts; validates 210/210 finite root-count rows for the
+  five-lambda grid and shifts n=0..20
+
+arb_jensen_window_sturm_d5_hyperbolicity_diagnostic:
+  Arb/Sturm finite diagnostic for selected degree-5 Jensen-window
+  positive-root counts; validates 105/105 finite root-count rows for the
+  five-lambda grid and shifts n=0..20
+
+jensen_window_sturm_pf_finite_consequence:
+  finite window-by-window PF consequence of the Arb/Sturm root-count
+  manifests; validates 315/315 checked Jensen windows across degrees
+  d=3,4,5, five lambdas, and shifts n=0..20
+
+jensen_window_pf_bridge_obligation_ledger:
+  theorem-obligation hygiene gate for target_jensen_window_pf_bridge;
+  validates 10 exact, finite, open, conditional, rejected, and route-separated
+  obligations, with 3 open obligations and finite rows blocked from closing
+  the target
+
+jensen_window_pf_theorem_machinery_fit_matrix:
+  theorem-search hygiene gate for jwpf_06; validates 7 total-positivity,
+  PF, zero-preserver, sign-regularity, downstream, and rejected-shortcut
+  theorem-family rows, with 0 ready-to-apply rows and explicit fatal gaps
+
+signed_hankel_jensen_dependency_graph:
+  dependency hygiene gate connecting finite evidence, countermodel gates, open
+  theorem targets, and the `lambda_le_0_goal` node; validates that finite and
+  diagnostic nodes only support open targets and have no direct proving edge
+  to the not-proved conclusion
+
 target_jensen_window_pf_bridge:
   theorem target that reformulates all-degree/all-shift Jensen hyperbolicity
   as finite PF-infinity of every binomially weighted window
   B^{d,n,0}_j=binom(d,j) A_{n+j}(0); open and not proved
 
 countermodel_gates:
-  validates 10 proof-safety examples, including local heat birth, finite
-  coefficient-prefix promotion, finite Schur-prefix promotion, finite
-  signed-Hankel grid promotion, finite moment-recurrence promotion, and
-  Stieltjes/Hankel-to-Toeplitz promotion traps
+  validates 11 proof-safety examples, including local heat birth, finite
+  coefficient-prefix promotion, finite Jensen-window rectangle promotion,
+  finite Schur-prefix promotion, finite signed-Hankel grid promotion, finite
+  moment-recurrence promotion, and Stieltjes/Hankel-to-Toeplitz promotion traps
 ```
 
 ## Boundary
