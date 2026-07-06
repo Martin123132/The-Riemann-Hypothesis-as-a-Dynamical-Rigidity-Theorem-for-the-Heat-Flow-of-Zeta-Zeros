@@ -125,6 +125,13 @@
       "summary": "Machine-readable obligation decomposition for the Jensen-window PF bridge."
     },
     {
+      "id": "jensen_window_pf_theorem_machinery_fit_matrix",
+      "ledger_claim": true,
+      "role": "hygiene_gate",
+      "status": "guard_validated",
+      "summary": "Source-anchored theorem machinery fit/fail audit for jwpf_06."
+    },
+    {
       "id": "target_direct_coefficient_pf",
       "ledger_claim": true,
       "role": "theorem_target",
@@ -283,6 +290,18 @@
       "to": "target_jensen_window_pf_bridge",
       "type": "sharpens",
       "boundary": "Decomposes the open target into exact, finite, open, conditional, rejected, and route-separated obligations."
+    },
+    {
+      "from": "jensen_window_pf_theorem_machinery_fit_matrix",
+      "to": "jensen_window_pf_bridge_obligation_ledger",
+      "type": "sharpens",
+      "boundary": "Audits source-anchored theorem machinery for the central jwpf_06 bridge obligation without marking any theorem ready to apply."
+    },
+    {
+      "from": "jensen_window_pf_theorem_machinery_fit_matrix",
+      "to": "target_jensen_window_pf_bridge",
+      "type": "sharpens",
+      "boundary": "Records fit/fail status of theorem families against the open target; not a proof edge."
     },
     {
       "from": "target_signed_hankel_jensen_bridge",

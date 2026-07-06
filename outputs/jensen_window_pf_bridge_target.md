@@ -200,6 +200,16 @@ jwpf_06_sign_regular_to_jensen_pf_conversion is the central open bridge theorem
 finite evidence rows have would_close_target=false
 ```
 
+The theorem-machinery audit for the central bridge row is:
+
+```text
+outputs/jensen_window_pf_theorem_machinery_fit_matrix.md
+python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
+```
+
+It currently records `7` source-anchored theorem-family rows and `0`
+ready-to-apply rows.
+
 ## Why The Existing Evidence Is Still Finite
 
 The current Arb staircase checker validates:
@@ -262,9 +272,11 @@ This note is part of the same theorem target family as:
 ```text
 outputs/signed_hankel_jensen_bridge_target.md
 outputs/jensen_window_pf_bridge_obligations.md
+outputs/jensen_window_pf_theorem_machinery_fit_matrix.md
 outputs/sign_regularity_theorem_fit_matrix.md
 python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
+python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
 python work/rh_compute/scripts/check_sign_regularity_theorem_fit_matrix.py
 ```
 

@@ -70,6 +70,20 @@ The central open theorem is `jwpf_06_sign_regular_to_jensen_pf_conversion`.
 The checker permits `would_close_target=true` only on open theorem-obligation
 rows, never on finite evidence or countermodel rows.
 
+The theorem machinery audit for this row is:
+
+```text
+outputs/jensen_window_pf_theorem_machinery_fit_matrix.md
+work/rh_compute/results/jensen_window_pf_theorem_machinery_fit_matrix.json
+python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
+```
+
+Current audit result:
+
+```text
+validated Jensen-window PF theorem machinery fit matrix: 7 rows, 0 issues, 0 ready-to-apply rows
+```
+
 ## Downstream Conditional Layer
 
 ```text
@@ -101,10 +115,12 @@ This obligation ledger is tied to:
 ```text
 outputs/jensen_window_pf_bridge_target.md
 outputs/signed_hankel_jensen_dependency_graph.md
+outputs/jensen_window_pf_theorem_machinery_fit_matrix.md
 outputs/sign_regularity_theorem_fit_matrix.md
 work/rh_compute/results/proof_claim_ledger.json
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py
 python work/rh_compute/scripts/check_signed_hankel_jensen_dependency_graph.py
+python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
 python work/rh_compute/scripts/check_sign_regularity_theorem_fit_matrix.py
 ```
 

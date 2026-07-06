@@ -25,7 +25,7 @@ python work/rh_compute/scripts/check_proof_claim_ledger.py
 Current result:
 
 ```text
-validated proof-claim ledger: 27 claims, 0 issues, 6 open theorem targets
+validated proof-claim ledger: 28 claims, 0 issues, 6 open theorem targets
 ```
 
 ## Categories
@@ -143,6 +143,11 @@ jensen_window_pf_bridge_obligation_ledger:
   validates 10 exact, finite, open, conditional, rejected, and route-separated
   obligations, with 3 open obligations and finite rows blocked from closing
   the target
+
+jensen_window_pf_theorem_machinery_fit_matrix:
+  theorem-search hygiene gate for jwpf_06; validates 7 total-positivity,
+  PF, zero-preserver, sign-regularity, downstream, and rejected-shortcut
+  theorem-family rows, with 0 ready-to-apply rows and explicit fatal gaps
 
 signed_hankel_jensen_dependency_graph:
   dependency hygiene gate connecting finite evidence, countermodel gates, open

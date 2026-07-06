@@ -84,7 +84,10 @@ REQUIRED_NOTE_STRINGS = (
     "would_close_target=true",
     "outputs/jensen_window_pf_bridge_target.md",
     "outputs/signed_hankel_jensen_dependency_graph.md",
+    "outputs/jensen_window_pf_theorem_machinery_fit_matrix.md",
     "work/rh_compute/results/proof_claim_ledger.json",
+    "python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py",
+    "validated Jensen-window PF theorem machinery fit matrix: 7 rows, 0 issues, 0 ready-to-apply rows",
 )
 
 

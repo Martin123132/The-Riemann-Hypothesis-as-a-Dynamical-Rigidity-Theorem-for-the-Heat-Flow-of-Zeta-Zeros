@@ -74,6 +74,7 @@ Both targets remain open. The graph checker compares their statuses with
 
 ```text
 jensen_window_pf_bridge_obligation_ledger
+jensen_window_pf_theorem_machinery_fit_matrix
 ```
 
 This node sharpens:
@@ -85,6 +86,11 @@ target_jensen_window_pf_bridge
 It records exact, finite, open, conditional, rejected, and route-separated
 obligations in `outputs/jensen_window_pf_bridge_obligations.md`. It is a
 hygiene node only; it has no edge to `lambda_le_0_goal`.
+
+The theorem-machinery fit matrix sharpens that obligation ledger by auditing
+source-anchored total-positivity, PF, zero-preserver, sign-regularity, and
+Laguerre-Polya theorem families. It records `0` ready-to-apply rows and also
+has no edge to `lambda_le_0_goal`.
 
 ## Non-Promotion Region
 

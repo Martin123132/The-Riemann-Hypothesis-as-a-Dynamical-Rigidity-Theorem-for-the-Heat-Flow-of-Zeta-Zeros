@@ -290,6 +290,7 @@ python work/rh_compute/scripts/check_arb_shifted_hankel_sign_consistency_manifes
 python work/rh_compute/scripts/check_jensen_hankel_bridge_algebra.py
 python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
+python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
 python work/rh_compute/scripts/check_edrei_log_sign_manifest.py
 python work/rh_compute/scripts/check_edrei_power_hankel_manifest.py
 python work/rh_compute/scripts/check_edrei_power_hankel_frontier_manifest.py
@@ -381,6 +382,19 @@ python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
 It validates `10` obligations with `3` still open. This is theorem-search
 hygiene only, not proof of the bridge.
 
+The Jensen-window PF theorem machinery fit matrix audits total-positivity,
+PF-sequence, zero-preserver, sign-regularity, downstream Laguerre-Polya, and
+rejected-shortcut theorem families against the central `jwpf_06` bridge:
+
+```text
+outputs/jensen_window_pf_theorem_machinery_fit_matrix.md
+work/rh_compute/results/jensen_window_pf_theorem_machinery_fit_matrix.json
+python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
+```
+
+It validates `7` rows with `0` ready-to-apply rows. This is source-anchored
+theorem-search hygiene only.
+
 The core runner is documented in:
 
 ```text
@@ -390,7 +404,7 @@ outputs/core_proof_programme_gates.md
 Current core runner status:
 
 ```text
-validated 28/28 core proof-programme gates
+validated 29/29 core proof-programme gates
 ```
 
 Current manifest status:

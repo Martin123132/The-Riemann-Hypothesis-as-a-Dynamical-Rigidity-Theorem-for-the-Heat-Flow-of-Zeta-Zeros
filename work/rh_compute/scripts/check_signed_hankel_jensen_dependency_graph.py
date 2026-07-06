@@ -59,6 +59,7 @@ REQUIRED_LEDGER_NODES = {
     "target_signed_hankel_jensen_bridge",
     "target_jensen_window_pf_bridge",
     "jensen_window_pf_bridge_obligation_ledger",
+    "jensen_window_pf_theorem_machinery_fit_matrix",
     "target_direct_coefficient_pf",
     "target_schur_positive_specialization",
     "target_positive_determinant_integral",
@@ -92,6 +93,8 @@ REQUIRED_EDGES = {
     ("rejected_finite_prefix_promotion", "target_signed_hankel_jensen_bridge", "blocks_promotion"),
     ("rejected_finite_prefix_promotion", "target_jensen_window_pf_bridge", "blocks_promotion"),
     ("jensen_window_pf_bridge_obligation_ledger", "target_jensen_window_pf_bridge", "sharpens"),
+    ("jensen_window_pf_theorem_machinery_fit_matrix", "jensen_window_pf_bridge_obligation_ledger", "sharpens"),
+    ("jensen_window_pf_theorem_machinery_fit_matrix", "target_jensen_window_pf_bridge", "sharpens"),
     ("target_signed_hankel_jensen_bridge", "lambda_le_0_goal", "would_imply_if_proved"),
     ("target_jensen_window_pf_bridge", "lambda_le_0_goal", "would_imply_if_proved"),
     ("lambda_le_0_goal", "target_signed_hankel_jensen_bridge", "blocked_by"),
@@ -112,7 +115,9 @@ REQUIRED_NOTE_STRINGS = (
     "blocked_by",
     "work/rh_compute/results/proof_claim_ledger.json",
     "jensen_window_pf_bridge_obligation_ledger",
+    "jensen_window_pf_theorem_machinery_fit_matrix",
     "outputs/jensen_window_pf_bridge_obligations.md",
+    "ready-to-apply rows",
     "has no edge to `lambda_le_0_goal`",
 )
 

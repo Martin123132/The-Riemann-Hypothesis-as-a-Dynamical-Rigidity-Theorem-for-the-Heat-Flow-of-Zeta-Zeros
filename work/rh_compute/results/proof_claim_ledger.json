@@ -378,12 +378,29 @@
       "refs": [
         "outputs/jensen_window_pf_bridge_obligations.md",
         "outputs/jensen_window_pf_bridge_target.md",
+        "outputs/jensen_window_pf_theorem_machinery_fit_matrix.md",
         "work/rh_compute/results/jensen_window_pf_bridge_obligations.json",
         "work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py"
       ],
       "validation_command": "python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py",
       "claim": "The obligation ledger decomposes the Jensen-window PF bridge into 10 exact, finite, open, conditional, rejected, and route-separated obligations, with 3 open obligations and only the central open bridge theorem marked as target-closing if proved.",
       "proof_boundary": "Theorem-obligation hygiene only; not a proof of any open obligation and not a proof of Lambda <= 0."
+    },
+    {
+      "id": "jensen_window_pf_theorem_machinery_fit_matrix",
+      "title": "Jensen-window PF theorem machinery fit matrix",
+      "category": "hygiene_gate",
+      "status": "guard_validated",
+      "refs": [
+        "outputs/jensen_window_pf_theorem_machinery_fit_matrix.md",
+        "outputs/jensen_window_pf_bridge_obligations.md",
+        "outputs/sign_regularity_theorem_fit_matrix.md",
+        "work/rh_compute/results/jensen_window_pf_theorem_machinery_fit_matrix.json",
+        "work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py"
+      ],
+      "validation_command": "python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py",
+      "claim": "The theorem machinery fit matrix audits 7 total-positivity, PF, zero-preserver, sign-regularity, downstream, and rejected shortcut theorem families against jwpf_06, with 0 ready-to-apply rows and explicit fatal gaps/next actions.",
+      "proof_boundary": "Theorem-search hygiene only; not a proof that any source theorem currently closes jwpf_06 and not a proof of Lambda <= 0."
     },
     {
       "id": "signed_hankel_jensen_dependency_graph",
