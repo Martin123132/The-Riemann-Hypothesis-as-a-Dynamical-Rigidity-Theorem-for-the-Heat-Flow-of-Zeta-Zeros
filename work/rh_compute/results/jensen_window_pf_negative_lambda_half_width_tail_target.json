@@ -1,0 +1,208 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_half_width_tail_target.py",
+  "date": "2026-07-06",
+  "finite_anchor": {
+    "checked_x_max": 149,
+    "coefficient_k_max": 150,
+    "lambdas": [
+      "-100.0",
+      "-50.0",
+      "-25.0"
+    ],
+    "next_finite_coefficient_needed": "A_151",
+    "tail_lower_start_k": 150,
+    "tail_monotone_bridge_k": 149
+  },
+  "frontier_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_scaled_defect_frontier_k150_scout.json",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_half_width_tail_target.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The target remains finite_rejected_target.",
+    "The fixed half-width buffer is rejected by finite evidence.",
+    "The monotone defect bridge remains a separate required theorem.",
+    "The one-third-width, fixed half-width, and scaled-defect nonincrease shortcuts remain rejected.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_half_width_tail_target",
+  "proof_boundary": "Finite-rejected target record. It shows the fixed half-width scaled-defect route fails on the checked prefix, and it does not prove a replacement tail theorem, does not prove the monotone defect bridge, does not prove zeta cone entry, does not prove jwpf_06, and does not prove RH or Lambda <= 0.",
+  "source_cone_entry_target": "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+  "source_defect_tail_target": "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md",
+  "source_scaled_defect_frontier": "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k150_scout.md",
+  "status": "finite_rejected_target",
+  "summary": {
+    "checked_x_max": 149,
+    "coefficient_k_max": 150,
+    "conditional_application_rows": 1,
+    "finite_half_width_failure_rows": 17,
+    "finite_half_width_rows": 430,
+    "finite_one_third_failure_rows": 268,
+    "finite_scaled_rows": 447,
+    "first_half_width_failures": [
+      {
+        "failure_rows": 17,
+        "first_failure_k": 133,
+        "lam": "-25.0",
+        "max_scaled_defect": {
+          "k": 149,
+          "lam": "-25.0",
+          "sample": "5.110735937007886999E-1"
+        },
+        "min_half_width_margin": {
+          "k": 149,
+          "lam": "-25.0",
+          "sample": "-1.107359370078869990E-2"
+        }
+      }
+    ],
+    "live_routes": 0,
+    "main_finding": "The k150 scaled-defect frontier finite-rejects the fixed half-width bound s_k<=1/2: only 430/447 checked rows pass, with 17 half-width failures and minimum margin -1.107359370078869990E-2 at lambda=-25.0, k=149. The route must be replaced by an exact-cone or adaptive scaled-defect tail target plus the separate monotone defect bridge.",
+    "max_scaled_defect": {
+      "k": 149,
+      "lam": "-25.0",
+      "sample": "5.110735937007886999E-1"
+    },
+    "min_half_width_margin": {
+      "k": 149,
+      "lam": "-25.0",
+      "sample": "-1.107359370078869990E-2"
+    },
+    "min_one_third_margin": {
+      "k": 149,
+      "lam": "-25.0",
+      "sample": "-1.777402603674553666E-1"
+    },
+    "next_finite_coefficient_needed": "A_151",
+    "ready_to_apply_rows": 0,
+    "rejected_routes": 2,
+    "repair_routes": 2,
+    "stress_protocol_rows": 1,
+    "tail_lower_start_k": 150,
+    "tail_monotone_bridge_k": 149,
+    "target_closing": false,
+    "target_rejected": true,
+    "target_rows": 9
+  },
+  "target_id": "target_negative_lambda_half_width_tail",
+  "target_rows": [
+    {
+      "acceptance_test": "Use this row only as algebraic bookkeeping for tail inequalities.",
+      "claim_if_proved": "With d_k=1-x_k and s_k=((2*k+1)/2)*d_k, the lower wall x_k>=(2*k-1)/(2*k+1) is equivalent to s_k<=1.",
+      "gap": "This is only a change of variables; it supplies no analytic estimate for the actual zeta heat-flow tail.",
+      "id": "nlhwt_01_scaled_defect_definition",
+      "proof_boundary": "Exact reformulation only; not a tail theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_reformulation",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k150_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_tail_barrier_k150_scout.md"
+      ]
+    },
+    {
+      "acceptance_test": "Do not use the half-width bound as a proof premise unless the statement is weakened or the finite failure is explained by a corrected target.",
+      "claim_if_proved": "For each checked negative lambda, prove 0 <= s_k <= 1/2 for all k >= 150; equivalently 0 <= d_k <= 1/(2*k+1).",
+      "gap": "Finite stress rejects this half-width statement on 17/447 checked k150 rows.",
+      "id": "nlhwt_02_half_width_tail_statement",
+      "proof_boundary": "Finite-rejected route only; not a live half-width theorem target.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md",
+        "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k150_scout.md"
+      ]
+    },
+    {
+      "acceptance_test": "Any application must separately prove d_(k+1)<=d_k from the stated bridge index or explain how the monotone wall is supplied.",
+      "claim_if_proved": "The half-width lower-wall bound plus d_(k+1)<=d_k for all k >= 149 would supply the defect-tail inequalities needed by the negative-lambda cone-entry route.",
+      "gap": "The half-width bound is already finite-rejected, and in any case would not by itself prove defect monotonicity or the bridge inequality at the finite/tail join.",
+      "id": "nlhwt_03_monotone_defect_still_required",
+      "proof_boundary": "Requirement extraction only; not a proof of cone entry.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md",
+        "outputs/jensen_window_pf_heat_flow_ratio_cone_invariance_lemma.md"
+      ]
+    },
+    {
+      "acceptance_test": "Treat the finite rows as base evidence or falsification data only; do not promote them without an analytic tail proof.",
+      "claim_if_proved": "The k150 finite prefix supplies checked contractions x_1..x_149 with 430/447 half-width rows.",
+      "gap": "The next purely finite bridge would require A_151; finite extension alone is not an all-k theorem.",
+      "id": "nlhwt_04_finite_anchor",
+      "proof_boundary": "Finite evidence only; not an all-k half-width theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_anchor",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k150_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_cone_entry_prefix_k150_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_finite_collar_k150_contract.md"
+      ]
+    },
+    {
+      "acceptance_test": "Give explicit error terms whose sign and size keep 0<=s_k<=1 from k>=150 and replace the failed half-width threshold with a valid adaptive bound.",
+      "claim_if_proved": "A uniform saddle/Laplace expansion bounds the exact scaled defect below a corrected adaptive threshold and controls the monotone defect bridge beyond the finite anchor.",
+      "gap": "The fixed half-width threshold is finite-rejected; the saddle route must now derive the actual limiting/adaptive frontier rather than force s_k<=1/2.",
+      "id": "nlhwt_05_uniform_saddle_route",
+      "proof_boundary": "Repair-route theorem search only; not a proof.",
+      "readiness": "not_ready_to_apply",
+      "role": "repair_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+        "outputs/jensen_window_pf_phi_taylor_cone_entry_sign_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "acceptance_test": "Derive a noncircular inequality compatible with increasing scaled defect and the k150 half-width failure.",
+      "claim_if_proved": "A direct recurrence or comparison inequality proves the exact cone 0<=s_k<=1 and the separate monotone defect bridge without the failed half-width threshold.",
+      "gap": "The direct width-preserving recurrence, scaled-defect nonincrease, one-third buffer, and now the fixed half-width buffer are finite-rejected.",
+      "id": "nlhwt_06_ratio_recurrence_route",
+      "proof_boundary": "Repair-route theorem search only; not a proof.",
+      "readiness": "not_ready_to_apply",
+      "role": "repair_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_defect_recurrence_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k150_scout.md",
+        "outputs/jensen_window_pf_heat_flow_ratio_cone_invariance_lemma.md"
+      ]
+    },
+    {
+      "acceptance_test": "Stress k beyond 150 and compare the observed scaled-defect frontier with any proposed analytic asymptotic bound.",
+      "claim_if_proved": "Larger finite prefixes should falsify or refine any proposed fixed/adaptive scaled-defect buffer before proof promotion.",
+      "gap": "The minimum k150 half-width margin is already negative, so the fixed half-width route is rejected rather than merely unproved.",
+      "id": "nlhwt_07_falsification_protocol",
+      "proof_boundary": "Falsification protocol only; finite stress rejects this threshold but cannot prove a replacement theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "stress_protocol",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k150_scout.md",
+        "outputs/core_proof_programme_gates.md"
+      ]
+    },
+    {
+      "acceptance_test": "Do not use one-third-width, fixed half-width, or scaled-defect nonincrease as global proof premises.",
+      "claim_if_proved": "The older one-third-width buffer, fixed half-width buffer, or scaled-defect nonincrease shortcuts would simplify the route.",
+      "gap": "The one-third buffer fails on 268/447 k150 rows, the half-width buffer fails on 17/447 rows, and s_k is increasing on all 444 checked adjacent rows.",
+      "id": "nlhwt_08_rejected_shortcuts",
+      "proof_boundary": "Rejected by finite diagnostic evidence only.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k150_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_tail_barrier_k150_scout.md"
+      ]
+    },
+    {
+      "acceptance_test": "After a corrected proof, rerun the defect-tail target, cone-entry target, dependency graph, and core gates without changing forbidden endpoint assumptions.",
+      "claim_if_proved": "A proved corrected scaled-defect buffer plus a proved monotone defect bridge would sharpen the negative-lambda defect-tail theorem target.",
+      "gap": "Even after a corrected target, the surrounding infinite/collared heat-flow and Jensen-window PF bridge obligations would remain.",
+      "id": "nlhwt_09_conditional_application",
+      "proof_boundary": "Conditional application only; not jwpf_06, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "conditional_application",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md",
+        "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md"
+      ]
+    }
+  ]
+}

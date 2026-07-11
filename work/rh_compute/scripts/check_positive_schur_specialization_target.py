@@ -39,6 +39,9 @@ REQUIRED_STRINGS = (
     "S4: Positive Determinant Integral",
     "Evidence That May Guide The Search",
     "These artifacts are evidence and falsification pressure. They are not a proof",
+    "The Jensen-window Schur shape contract is an analogue",
+    "h_j = binom(d,j) * A_{n+j}",
+    "bounded shape obligations",
     "Kill Gates",
     "uses only finitely many Toeplitz, Schur, Hankel, or Edrei-log checks",
     "invokes ASW/Edrei after assuming PF-infinity or real-negative zeros",
@@ -67,6 +70,7 @@ FORBIDDEN_STRINGS = (
 
 REQUIRED_REFS = (
     "outputs/toeplitz_jacobi_trudi_bridge_note.md",
+    "outputs/jensen_window_pf_schur_shape_contract.md",
     "outputs/finite_toeplitz_certificate_status.md",
     "outputs/edrei_log_sign_diagnostic.md",
     "outputs/missing_coefficient_pf_theorem.md",

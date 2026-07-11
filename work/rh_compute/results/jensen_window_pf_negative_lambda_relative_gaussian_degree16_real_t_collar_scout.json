@@ -1,0 +1,213 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_degree16_real_t_collar_scout.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_degree16_real_t_collar_scout.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The real-T collar is only for the rationalized degree-16 finite surrogate.",
+    "The result does not control the infinite residual Taylor tail.",
+    "The result is fixed at k=22 and is not an all-k theorem.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_degree16_real_t_collar_scout",
+  "matrix_rows": [
+    {
+      "claim": "The degree-16 real-T collar scout converts the midpoint coefficient-ratio finite truncation into exact rational polynomial data in u=1/T.",
+      "diagnostics": {
+        "certified_derivative_stencil_rows": 1,
+        "certified_positive_normalizer_rows": 4,
+        "certified_product_stencil_rows": 2,
+        "certified_surrogate_stencil_rows": 3,
+        "derivative_stencil_rows": [
+          {
+            "certified_positive_derivative_on_interval": true,
+            "certified_positive_stencil_on_interval": true,
+            "interpretation": "The weighted-gap log stencil starts at 0 as u->0; positive derivative on the interval implies positivity.",
+            "name": "weighted_gap",
+            "numerator_degree": 30,
+            "numerator_value_at_endpoint": "3.045223860527820235E-2",
+            "roots_in_open_interval": 0,
+            "sign_at_endpoint": "positive",
+            "sign_at_u0_after_stripping": "positive",
+            "stripped_degree": 29,
+            "zero_order_at_u0": 1
+          }
+        ],
+        "endpoint_log_stencils": {
+          "B": "1.259416498980593755E-4",
+          "T": "1156",
+          "companion": "8.851471227548859301E-10",
+          "weighted_gap": "2.518416978813492713E-4"
+        },
+        "normalizer_rows": [
+          {
+            "certified_positive_on_interval": true,
+            "index": 21,
+            "polynomial_degree": 8,
+            "roots_in_open_interval": 0,
+            "sign_at_endpoint": "positive",
+            "sign_at_u0_after_stripping": "positive",
+            "stripped_degree": 8,
+            "value_at_endpoint": "4.881704699409963404E-1",
+            "zero_order_at_u0": 0
+          },
+          {
+            "certified_positive_on_interval": true,
+            "index": 22,
+            "polynomial_degree": 8,
+            "roots_in_open_interval": 0,
+            "sign_at_endpoint": "positive",
+            "sign_at_u0_after_stripping": "positive",
+            "stripped_degree": 8,
+            "value_at_endpoint": "4.714791458554841687E-1",
+            "zero_order_at_u0": 0
+          },
+          {
+            "certified_positive_on_interval": true,
+            "index": 23,
+            "polynomial_degree": 8,
+            "roots_in_open_interval": 0,
+            "sign_at_endpoint": "positive",
+            "sign_at_u0_after_stripping": "positive",
+            "stripped_degree": 8,
+            "value_at_endpoint": "4.553011796707405967E-1",
+            "zero_order_at_u0": 0
+          },
+          {
+            "certified_positive_on_interval": true,
+            "index": 24,
+            "polynomial_degree": 8,
+            "roots_in_open_interval": 0,
+            "sign_at_endpoint": "positive",
+            "sign_at_u0_after_stripping": "positive",
+            "stripped_degree": 8,
+            "value_at_endpoint": "4.396229616097434235E-1",
+            "zero_order_at_u0": 0
+          }
+        ],
+        "parameters": {
+          "coefficient_max_taylor_degree": 16,
+          "collar_start_T": 1156,
+          "continuation_M": 8,
+          "precision_bits": 256,
+          "real_interval_T": "[1156, infinity)",
+          "real_interval_u": "(0, 1/1156]",
+          "tail_cutoff_n": 80,
+          "tail_start_k": 22
+        },
+        "product_stencil_rows": [
+          {
+            "certified_positive_on_interval": true,
+            "interpretation": "B=2*log(F_k)-log(F_(k-1))-log(F_(k+1)) is positive iff F_k^2-F_(k-1)*F_(k+1)>0.",
+            "name": "B",
+            "polynomial_degree": 16,
+            "roots_in_open_interval": 0,
+            "sign_at_endpoint": "positive",
+            "sign_at_u0_after_stripping": "positive",
+            "stripped_degree": 14,
+            "value_at_endpoint": "2.799413206146811600E-5",
+            "zero_order_at_u0": 2
+          },
+          {
+            "certified_positive_on_interval": true,
+            "interpretation": "The companion stencil is positive iff F_k^3*F_(k+2)-F_(k-1)*F_(k+1)^3>0.",
+            "name": "companion",
+            "polynomial_degree": 32,
+            "roots_in_open_interval": 0,
+            "sign_at_endpoint": "positive",
+            "sign_at_u0_after_stripping": "positive",
+            "stripped_degree": 29,
+            "value_at_endpoint": "4.078338730298926972E-11",
+            "zero_order_at_u0": 3
+          }
+        ],
+        "real_T_surrogate_collar_certified": true,
+        "root_count_failures": 0,
+        "surrogate_note": "Coefficient ratios are rationalized from the degree-16 high-order Taylor midpoint decimals; this is an exact root-count analysis of that finite surrogate, not an Arb coefficient-ball theorem."
+      },
+      "id": "nlrgd16rt_01_surrogate_setup",
+      "proof_boundary": "Exact finite-surrogate setup only; not an Arb coefficient-ball theorem and not an infinite Taylor-tail theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_surrogate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree16_collar_scan.md",
+        "outputs/jensen_window_pf_negative_lambda_high_order_taylor_scout.md"
+      ]
+    },
+    {
+      "claim": "The four degree-16 surrogate normalizer polynomials F_(k-1), F_k, F_(k+1), F_(k+2) have no roots on 0<u<=1/1156 and are positive there.",
+      "id": "nlrgd16rt_02_normalizer_positivity",
+      "proof_boundary": "Finite surrogate real-T certificate only; not a statement about the full zeta tail.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_surrogate_certificate"
+    },
+    {
+      "claim": "The B product polynomial F_k^2-F_(k-1)F_(k+1), after removing its u=0 zero, has no roots on 0<u<=1/1156 and is positive there.",
+      "id": "nlrgd16rt_03_B_product_collar",
+      "proof_boundary": "Finite surrogate real-T B-stencil certificate only; not an all-k theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_surrogate_certificate"
+    },
+    {
+      "claim": "The companion product polynomial F_k^3F_(k+2)-F_(k-1)F_(k+1)^3, after removing its u=0 zero, has no roots on 0<u<=1/1156 and is positive there.",
+      "id": "nlrgd16rt_04_companion_product_collar",
+      "proof_boundary": "Finite surrogate real-T companion-stencil certificate only; not an infinite-tail theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_surrogate_certificate"
+    },
+    {
+      "claim": "The weighted-gap log-stencil derivative numerator has no roots on 0<u<=1/1156 and is positive there, so the weighted-gap surrogate stencil is positive on the real collar.",
+      "id": "nlrgd16rt_05_weighted_gap_derivative_collar",
+      "proof_boundary": "Finite surrogate derivative certificate only; not a proof of the analytic weighted-gap tail.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_surrogate_certificate"
+    },
+    {
+      "claim": "The integer threshold T=1156 from the collar scan is upgraded to a real-T sign collar for the degree-16 rationalized finite surrogate.",
+      "id": "nlrgd16rt_06_integer_scan_to_real_surrogate",
+      "proof_boundary": "Finite surrogate upgrade only; not a real-T theorem for the infinite zeta Taylor tail.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree16_collar_scan.md"
+      ]
+    },
+    {
+      "claim": "The next proof task is to replace rationalized finite-surrogate signs with interval coefficient control and signed infinite-tail stencil bounds on the same real-T collar.",
+      "id": "nlrgd16rt_07_live_tail_upgrade",
+      "proof_boundary": "Live theorem-search target only; the interval coefficient and infinite-tail upgrades remain open.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    },
+    {
+      "claim": "The rationalized degree-16 finite-surrogate real-T collar proves the direct signed stencil-tail theorem.",
+      "gap": "The result uses midpoint coefficient ratios, finite degree 16 truncation, fixed k=22, and no infinite residual Taylor-tail bound.",
+      "id": "nlrgd16rt_08_surrogate_promotion_rejected",
+      "proof_boundary": "Rejected finite-surrogate promotion only; not scaled-curvature monotonicity, cone entry, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route"
+    }
+  ],
+  "proof_boundary": "Finite theorem-search diagnostic only. It certifies a real-T collar for a rationalized degree-16 finite surrogate at fixed k=22, but it does not prove an Arb coefficient-ball theorem, an infinite Taylor-tail theorem, scaled-curvature monotonicity, cone entry, RH, or Lambda <= 0.",
+  "source_degree16_collar_scan": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree16_collar_scan.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "finite theorem-search diagnostic",
+  "summary": {
+    "certified_derivative_stencil_rows": 1,
+    "certified_product_stencil_rows": 2,
+    "certified_surrogate_stencil_rows": 3,
+    "main_finding": "For the rationalized degree-16 finite surrogate at k=22, the integer collar threshold T=1156 extends to the whole real half-line T>=1156: the four normalizers are positive, the B and companion product stencils have no stripped roots on 0<u<=1/1156, and the weighted-gap derivative numerator is positive there. This is a finite-surrogate real-T collar, not an infinite Taylor-tail theorem.",
+    "matrix_rows": 8,
+    "positive_normalizer_rows": 4,
+    "ready_to_apply_rows": 0,
+    "real_T_surrogate_collar_certified": true,
+    "real_T_surrogate_collar_start_T": "1156",
+    "root_count_failures": 0,
+    "target_closing": false
+  }
+}

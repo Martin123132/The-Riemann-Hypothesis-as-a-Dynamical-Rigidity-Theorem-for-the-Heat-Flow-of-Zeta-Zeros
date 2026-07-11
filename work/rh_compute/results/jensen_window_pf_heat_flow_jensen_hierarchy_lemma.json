@@ -1,0 +1,90 @@
+{
+  "date": "2026-07-10",
+  "invariants": [
+    "Every displayed hierarchy identity is coefficientwise exact for all d>=1 and n>=0.",
+    "The hierarchy is not closed at a single degree and shift.",
+    "The cubic witness is abstract and is not a zeta heat-flow orbit.",
+    "Endpoint Jensen hyperbolicity, RH, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_heat_flow_jensen_hierarchy_lemma",
+  "proof_boundary": "Exact coefficient and Jensen-window identities plus one exact cubic countermodel gate. This does not prove an invariant higher-minor cone, Jensen hyperbolicity, PF-infinity, RH, or Lambda <= 0.",
+  "rows": [
+    {
+      "claim": "The factorial-normalized Newman coefficients satisfy an exact upper-shift heat ODE.",
+      "formula": "A_k'=2*(2*k+1)*A_(k+1)",
+      "id": "hfjh_01_coefficient_heat_ode",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "All degree and shift dependence is retained explicitly.",
+      "formula": "J_(d,n)(z)=sum_(j=0)^d binom(d,j)*A_(n+j)*z^j",
+      "id": "hfjh_02_jensen_window_definition",
+      "readiness": "available_exact",
+      "role": "exact_definition"
+    },
+    {
+      "claim": "Pascal's identity couples one degree step to one coefficient shift.",
+      "formula": "J_(d+1,n)=J_(d,n)+z*J_(d,n+1)",
+      "id": "hfjh_03_pascal_shift_degree_identity",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "A z derivative lowers degree and raises shift.",
+      "formula": "partial_z J_(d,n)=d*J_(d-1,n+1)",
+      "id": "hfjh_04_z_derivative_identity",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The heat derivative is an exact shifted Jensen-window operator.",
+      "formula": "partial_lambda J_(d,n)=(4*n+2)*J_(d,n+1)+4*z*partial_z J_(d,n+1)",
+      "id": "hfjh_05_lambda_hierarchy_identity",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The same hierarchy is an explicit differential operator applied to the next-degree window.",
+      "formula": "partial_lambda J_(d,n)=((4*n+2)*partial_z+4*z*partial_z^2)*J_(d+1,n)/(d+1)",
+      "id": "hfjh_06_cross_degree_operator_identity",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The full static ratio cone does not force even degree-3 hyperbolicity: x=1/2,y=1 gives discriminant -27/16.",
+      "formula": "Disc(1+3*z+3*x*z^2+x^2*y*z^3)=-27*x^2*(x^2*y^2-6*x*y+4*x+4*y-3)",
+      "id": "hfjh_07_degree3_discriminant_frontier",
+      "readiness": "guard_validated",
+      "role": "exact_countermodel_gate"
+    },
+    {
+      "claim": "Even complete Hausdorff defect monotonicity, the full static ratio cone, and the exact local coefficient heat ODE do not make the degree-3 hyperbolicity boundary forward invariant.",
+      "formula": "d_k=(4/9)*(9/25)^(k-1); n=0, x=5/9, y=21/25, z=589/625: F=0 and (partial_lambda F)/r_0=329728/2109375>0, hence partial_lambda Disc<0",
+      "id": "hfjh_08_cubic_boundary_exit_countermodel",
+      "readiness": "guard_validated",
+      "role": "exact_countermodel_gate"
+    },
+    {
+      "claim": "A viable heat-flow proof must control a degree-and-shift hierarchy or its minors; there is no closed fixed-window scalar evolution supplied here.",
+      "formula": "shift-coupled hierarchy + missing invariant cone => all-degree Jensen hyperbolicity",
+      "id": "hfjh_09_open_higher_minor_handoff",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "source_bridge_target": "outputs/jensen_window_pf_bridge_target.md",
+  "source_defect_scout": "outputs/jensen_window_pf_defect_complete_monotonicity_scout.md",
+  "source_flow_certificate": "outputs/jensen_window_pf_heat_flow_infinite_cone_invariance_certificate.md",
+  "status": "exact heat-flow hierarchy lemma and open higher-minor handoff",
+  "summary": {
+    "exact_cubic_countermodels": 2,
+    "exact_definition_rows": 1,
+    "exact_identity_rows": 5,
+    "main_finding": "The lambda derivative of a Jensen window is exactly coupled to shift n+1 and, equivalently, to degree d+1. This gives a concrete hierarchy for higher-minor theorem search. The -27/16 static cubic guard and the exact one-atom Hausdorff boundary-exit guard 329728/2109375 prove that neither the propagated static cone nor complete defect monotonicity plus the local heat ODE supplies the missing invariant structure.",
+    "open_hierarchy_handoffs": 1,
+    "ready_to_apply_rows": 0,
+    "rows": 9,
+    "target_closing": false
+  }
+}

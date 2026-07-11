@@ -1,0 +1,174 @@
+{
+  "kind": "jensen_window_pf_newman_root_external_field_lemma",
+  "date": "2026-07-11",
+  "status": "exact Newman root external-field reduction with sign countermodels",
+  "proof_boundary": "This artifact translates the Jensen D^-2 correction into the regularized Newman zero field, derives its positive stiffness and pair-flow expansion, and proves that no generic LP sign rule can control the field. It does not establish the required Xi-specific degree- and height-uniform balance estimate, exclude a positive Newman boundary, prove RH, or prove Lambda <= 0.",
+  "sources": [
+    "outputs/jensen_window_pf_scaled_double_zero_boundary_layer_lemma.md",
+    "outputs/formal_core.md",
+    "https://arxiv.org/abs/1801.05914"
+  ],
+  "exact": {
+    "canonical_product": "At a real-zero time, F_lambda(s)=F_lambda(0)*product_(j>=1)(1+s/x_j(lambda)^2), with sum_j x_j^(-2)<infinity.",
+    "double_root_factor": "F_*(s)=(s-rho)^2*U(s), rho=-x^2<0",
+    "squared_external_field": "E_x=U'(rho)/U(rho)=sum_(j!=*) m_j/(x_j^2-x^2)",
+    "squared_stiffness": "K_s=-E_x'(rho)=sum_(j!=*) m_j/(x_j^2-x^2)^2>0",
+    "jet_identity": "F_*'''(rho)/F_*''(rho)=3*E_x",
+    "newman_external_field": "If H_*(z)=(z-x)^2*V(z), then B_x=V'(x)/V(x)=1/x-2*x*E_x and H_*'''(x)/H_*''(x)=3*B_x.",
+    "newman_stiffness": "K_x=sum_(signed y outside pair)1/(x-y)^2=1/(2*x^2)+2*E_x+4*x^2*K_s>0.",
+    "pair_flow": {
+      "center": "c'=sum_y[1/(x_+-y)+1/(x_--y)] -> 2*B_x",
+      "gap": "g'=4/g-2*g*sum_y 1/((x_+-y)*(x_--y))",
+      "gap_square": "q'=8-4*q*S(c,q), S=sum_y 1/((c-y)^2-q/4)",
+      "boundary_expansion": "g(t)^2=8*(t-t_*)-16*K_x*(t-t_*)^2+O((t-t_*)^3)"
+    },
+    "sign_countermodels": {
+      "positive": {
+        "F": "(1+s)^2*(1+s/2)",
+        "rho": "-1",
+        "E": "1",
+        "D_minus_2_collision_coefficient_at_n0": "-3/64"
+      },
+      "negative": {
+        "F": "(1+s)^2*(1+2*s)",
+        "rho": "-1",
+        "E": "-2",
+        "D_minus_2_collision_coefficient_at_n0": "9/64"
+      },
+      "conclusion": "Positive coefficients and Laguerre-Polya membership do not fix the sign of E_x or of the second collision correction."
+    },
+    "cosine_equilibrium": {
+      "F": "cosh(sqrt(s))^2",
+      "roots": "rho_k=-pi^2*(k+1/2)^2, each double",
+      "ODE": "4*s*g''+2*g'-g=0 for g=cosh(sqrt(s))",
+      "E": "-1/(2*rho_k)=1/(2*x_k^2)",
+      "B": "1/x_k-2*x_k*E=0",
+      "interpretation": "The arithmetic cosine lattice has zero center field."
+    },
+    "checks": {
+      "local_f2": "2*u0",
+      "local_f3": "6*u1",
+      "local_h2": "8*u0*x**2",
+      "local_h3": "-24*x*(-u0 + 2*u1*x**2)",
+      "finite_squared_field": "16/35",
+      "finite_squared_stiffness": "34112/11025",
+      "finite_signed_field": "3/35",
+      "finite_signed_stiffness": "304081/22050",
+      "sample_center_flow": "8*(48*c**5 - 24*c**3*g**2 - 496*c**3 - 180*c**2 + 3*c*g**4 + 961*c - 45*g**2 + 465)/((2*c - g - 6)*(2*c - g + 1)*(2*c - g + 5)*(2*c + g - 6)*(2*c + g + 1)*(2*c + g + 5))",
+      "sample_gap_flow": "4*(64*c**6 - 144*c**4*g**2 - 992*c**4 - 480*c**3 + 60*c**2*g**4 + 3844*c**2 - 1080*c*g**2 + 3720*c - 7*g**6 + 310*g**4 - 2883*g**2 + 900)/(g*(2*c - g - 6)*(2*c - g + 1)*(2*c - g + 5)*(2*c + g - 6)*(2*c + g + 1)*(2*c + g + 5))"
+    }
+  },
+  "rows": [
+    {
+      "id": "nref_01_canonical_product",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "At a real-zero Newman time, the squared-variable entire function has a genus-zero product over positive zero heights.",
+      "formula": "At a real-zero time, F_lambda(s)=F_lambda(0)*product_(j>=1)(1+s/x_j(lambda)^2), with sum_j x_j^(-2)<infinity.",
+      "proof_boundary": "Conditional on being in the real-zero regime.",
+      "diagnostics": null
+    },
+    {
+      "id": "nref_02_squared_external_field",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "Removing a double squared zero turns the regularized logarithmic derivative into an absolutely convergent root field.",
+      "formula": "E_x=U'(rho)/U(rho)=sum_(j!=*) m_j/(x_j^2-x^2)",
+      "proof_boundary": "One finite double zero at a real-zero time.",
+      "diagnostics": null
+    },
+    {
+      "id": "nref_03_squared_stiffness",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The derivative of the squared-zero field is a strictly negative sum of squares.",
+      "formula": "K_s=-E_x'(rho)=sum_(j!=*) m_j/(x_j^2-x^2)^2>0",
+      "proof_boundary": "Root-measure stiffness identity only.",
+      "diagnostics": null
+    },
+    {
+      "id": "nref_04_newman_field_conversion",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The squared-zero field converts exactly to the regularized field acting on the colliding Newman pair.",
+      "formula": "If H_*(z)=(z-x)^2*V(z), then B_x=V'(x)/V(x)=1/x-2*x*E_x and H_*'''(x)/H_*''(x)=3*B_x.",
+      "proof_boundary": "Local change of variables H(z)=F(-z^2).",
+      "diagnostics": null
+    },
+    {
+      "id": "nref_05_newman_stiffness_conversion",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The signed-zero stiffness is an explicit positive combination of the squared field and squared stiffness.",
+      "formula": "K_x=sum_(signed y outside pair)1/(x-y)^2=1/(2*x^2)+2*E_x+4*x^2*K_s>0.",
+      "proof_boundary": "Exact canonical-product algebra only.",
+      "diagnostics": null
+    },
+    {
+      "id": "nref_06_pair_flow_reduction",
+      "role": "exact_local_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "The Newman zero ODE separates a universal pair repulsion from the regularized center field and stiffness.",
+      "formula": "c'=sum_y[1/(x_+-y)+1/(x_--y)] -> 2*B_x; g'=4/g-2*g*sum_y 1/((x_+-y)*(x_--y))",
+      "proof_boundary": "Already-real simple pair for t>t_* only.",
+      "diagnostics": null
+    },
+    {
+      "id": "nref_07_gap_stiffness_expansion",
+      "role": "exact_local_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "The first correction to square-root pair birth is coercive and governed by the positive signed-zero stiffness.",
+      "formula": "g(t)^2=8*(t-t_*)-16*K_x*(t-t_*)^2+O((t-t_*)^3)",
+      "proof_boundary": "Local finite-height double-zero branch only.",
+      "diagnostics": null
+    },
+    {
+      "id": "nref_08_external_field_sign_guard",
+      "role": "exact_countermodel",
+      "readiness": "guard_validated",
+      "claim": "Positive coefficients and Laguerre-Polya membership alone allow either sign of the regularized field and second Jensen collision correction.",
+      "formula": "E=1 gives -3/64; E=-2 gives 9/64 at rho=-1, n=0",
+      "proof_boundary": "Abstract finite LP countermodels, not Xi trajectories.",
+      "diagnostics": {
+        "positive": {
+          "F": "(1+s)^2*(1+s/2)",
+          "rho": "-1",
+          "E": "1",
+          "D_minus_2_collision_coefficient_at_n0": "-3/64"
+        },
+        "negative": {
+          "F": "(1+s)^2*(1+2*s)",
+          "rho": "-1",
+          "E": "-2",
+          "D_minus_2_collision_coefficient_at_n0": "9/64"
+        },
+        "conclusion": "Positive coefficients and Laguerre-Polya membership do not fix the sign of E_x or of the second collision correction."
+      }
+    },
+    {
+      "id": "nref_09_cosine_equilibrium",
+      "role": "exact_benchmark",
+      "readiness": "available_exact",
+      "claim": "The doubled arithmetic cosine lattice has the exact field needed for zero center drift.",
+      "formula": "E=1/(2*x_k^2), B_x=0",
+      "proof_boundary": "Solvable equilibrium benchmark only.",
+      "diagnostics": {
+        "F": "cosh(sqrt(s))^2",
+        "roots": "rho_k=-pi^2*(k+1/2)^2, each double",
+        "ODE": "4*s*g''+2*g'-g=0 for g=cosh(sqrt(s))",
+        "E": "-1/(2*rho_k)=1/(2*x_k^2)",
+        "B": "1/x_k-2*x_k*E=0",
+        "interpretation": "The arithmetic cosine lattice has zero center field."
+      }
+    },
+    {
+      "id": "nref_10_xi_balance_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "A closing root-measure route must prove an Xi-specific paired-cancellation and far-tail bound for E_x and K_x uniformly as zero height diverges.",
+      "formula": "control sum_j m_j/(x_j^2-x^2) and its square-denominator tail",
+      "proof_boundary": "Open height-uniform theorem; not a proof of RH or Lambda <= 0.",
+      "diagnostics": null
+    }
+  ]
+}

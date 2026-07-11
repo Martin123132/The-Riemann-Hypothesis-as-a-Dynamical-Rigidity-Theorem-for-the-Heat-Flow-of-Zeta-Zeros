@@ -1,0 +1,172 @@
+{
+  "kind": "jensen_window_pf_nonordinary_positive_transform_ansatz_matrix",
+  "date": "2026-07-06",
+  "status": "nonordinary_positive_transform_ansatz_matrix",
+  "parent_positive_readout_target": "jensen_window_pf_positive_readout_theorem_target",
+  "parent_live_rows": [
+    "pr_01_positive_spectral_transform",
+    "pr_02_xi_phi_positive_resolvent_kernel"
+  ],
+  "parent_obstruction": "jensen_window_pf_positive_spectral_moment_obstruction",
+  "parent_target": "jwpf_06_sign_regular_to_jensen_pf_conversion",
+  "proof_boundary": "The ansatz matrix is theorem-search hygiene only: it rejects ordinary or wrapper interpretations and specifies acceptance tests for surviving nonordinary positive transforms. It is not a construction of a positive transform, not an Xi/Phi positive kernel, not a proof of reciprocal coefficient positivity, and not Lambda <= 0.",
+  "objects": {
+    "H(t)": "1 + g_1*t + ... + g_d*t^d",
+    "E(t)": "1/H(-t)",
+    "mu_m": "[t^m]E(t)",
+    "ordinary_moment_obstruction": "Delta_2(mu) = det [[mu_0, mu_1], [mu_1, mu_2]] = -g_2",
+    "nonordinary_transform": "A positive functional or kernel whose coefficient extraction is not the ordinary power-moment representation mu_m=int x^m dnu(x)."
+  },
+  "required_acceptance_tests": [
+    "Exactness: prove the proposed readout has Taylor coefficients exactly mu_m=[t^m]1/H(-t) for every m,d,n.",
+    "Nonordinary escape: explain explicitly why the raw Hankel obstruction Delta_2(mu)=-g_2 does not apply; the proof must not claim mu_m are ordinary power moments of a positive measure.",
+    "Positivity: identify the positive object, such as a positive kernel, positive functional on a non-power basis, nonnegative transfer model, or Xi/Phi integral identity, and prove it gives mu_m>=0.",
+    "Noncircularity: verify all hypotheses from Xi/Phi or zeta heat-flow data without endpoint PF, Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0.",
+    "Signed-data compatibility: survive lambda_n<0, beta_1<0, raw Motzkin cancellation, same-length mixed signs, and the absolute-value sign-lift gap.",
+    "Uniformity: state all-degree, all-shift, and all-m coverage and isolate any limiting or compactness argument.",
+    "Lift scope: state whether the result is column-only or supplies an all-Schur/Toeplitz lift."
+  ],
+  "ansatz_rows": [
+    {
+      "id": "npt_01_raw_power_moment_measure",
+      "ansatz_family": "Ordinary positive power-moment measure for the raw reciprocal coefficients.",
+      "verdict": "rejected_by_delta2_obstruction",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_positive_spectral_moment_obstruction.md",
+        "work/rh_compute/results/jensen_window_pf_positive_spectral_moment_obstruction.json"
+      ],
+      "fit": "Would have given a direct Hamburger/Stieltjes moment proof for mu_m>=0.",
+      "failure_or_gap": "Rejected because Delta_2(mu)=-g_2 and the checked zeta-window rows have Delta_2<0.",
+      "acceptance_test": "No acceptance test remains for the raw ordinary moment interpretation.",
+      "proof_boundary": "Rejects only mu_m=int x^m dnu(x) with nu positive; it does not reject non-power bases or positive kernels."
+    },
+    {
+      "id": "npt_02_positive_majorant_or_absolute_value_basis",
+      "ansatz_family": "Positive majorant, absolute-value path model, or absolute-value basis transform.",
+      "verdict": "rejected_by_exactness_gap",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_state_space_sign_lift_obstruction_scout.md",
+        "outputs/jensen_window_pf_reciprocal_motzkin_path_obstruction_scout.md"
+      ],
+      "fit": "Positive weights would make coefficient positivity transparent.",
+      "failure_or_gap": "The known positive cover overshoots the actual coefficient at mu_2 by 2*kappa_1>0 and therefore is not exactly E(t).",
+      "acceptance_test": "A surviving transform must prove equality to E(t), not just domination or an absolute-value envelope.",
+      "proof_boundary": "Rejects majorants and cheap sign-state covers only; genuinely modified exact state-space models remain separate."
+    },
+    {
+      "id": "npt_03_fixed_triangular_basis_change",
+      "ansatz_family": "Window-independent lower-triangular basis change to a positive moment sequence.",
+      "verdict": "conditional_wrapper_only",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_positive_readout_theorem_target.md",
+        "outputs/jensen_window_pf_positive_spectral_moment_obstruction.md"
+      ],
+      "fit": "A fixed positive transform could move the obstruction to a different sequence.",
+      "failure_or_gap": "Positivity after a basis change is only a wrapper unless the signed inverse and coefficient extraction prove the original mu_m>=0.",
+      "acceptance_test": "Specify T, prove transformed positivity, and prove the inverse extraction for each mu_m is positive or otherwise exactly sign-controlled.",
+      "proof_boundary": "Does not reject all basis changes; it rejects treating transformed positivity as positivity of mu without an exact extraction theorem."
+    },
+    {
+      "id": "npt_04_nonpower_positive_functional",
+      "ansatz_family": "Positive functional on a non-power basis K_m with mu_m=L(K_m).",
+      "verdict": "live_if_functional_constructed",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_positive_readout_theorem_target.md",
+        "outputs/jensen_window_pf_positive_spectral_moment_obstruction.md",
+        "outputs/jensen_window_pf_oscillatory_resolvent_fit_matrix.md",
+        "outputs/jensen_window_pf_nonpower_functional_low_degree_scout.md"
+      ],
+      "fit": "This is the cleanest nonordinary escape from Delta_2(mu)<0: the positive object is not the raw power-moment Hankel matrix.",
+      "failure_or_gap": "The low-degree scout shows that the route must absorb signed reciprocal-polynomial and composition cancellations, including mu_2=g1^2-g2 and mu_3=g1^3-2*g1*g2+g3; no explicit cone C, basis K_m, positive functional L, or Xi/Phi verification is currently constructed.",
+      "acceptance_test": "Produce a positive cone C, basis K_m in C, and functional L positive on C with L(K_m)=mu_m for all m,d,n, while proving the required low-degree cancellation identities from zeta heat-flow data.",
+      "proof_boundary": "Live theorem target only; does not currently prove coefficient positivity."
+    },
+    {
+      "id": "npt_05_xi_phi_positive_kernel_identity",
+      "ansatz_family": "Xi/Phi-specific positive kernel or double-integral identity.",
+      "verdict": "live_if_kernel_identity_proved",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_positive_readout_theorem_target.md",
+        "outputs/jensen_window_pf_oscillatory_resolvent_fit_matrix.md",
+        "outputs/jensen_window_pf_modified_signed_model_target.md"
+      ],
+      "fit": "A kernel using the special Xi/Phi structure could prove the required scalar readout without generic moment positivity.",
+      "failure_or_gap": "No identity is known that is both positive and exactly equal to E(t)=1/H(-t).",
+      "acceptance_test": "Prove a positive kernel identity whose Taylor coefficients are exactly mu_m for every d,n,m and whose hypotheses avoid endpoint/RH assumptions.",
+      "proof_boundary": "Live Xi/Phi-specific route only; generic kernel language without an identity remains insufficient."
+    },
+    {
+      "id": "npt_06_modified_state_space_transfer_model",
+      "ansatz_family": "Genuinely modified nonnegative state-space or transfer-matrix model.",
+      "verdict": "live_if_exact_model_constructed",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_modified_signed_model_target.md",
+        "outputs/jensen_window_pf_state_space_sign_lift_obstruction_scout.md",
+        "outputs/jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_scout.md"
+      ],
+      "fit": "A modified state space could encode signed cancellations while keeping the final scalar coefficient positive.",
+      "failure_or_gap": "The cheap absolute-value and parity-lift repairs are rejected; no exact modified transfer model is known.",
+      "acceptance_test": "Construct a nonnegative transfer model whose scalar generating function is exactly E(t) and prove the cancellation identity uniformly.",
+      "proof_boundary": "Live modified-model target only; not a consequence of the rejected absolute-value cover."
+    },
+    {
+      "id": "npt_07_finite_quadrature_or_prefix_fit",
+      "ansatz_family": "Finite positive quadrature, fitted basis, or prefix interpolation.",
+      "verdict": "finite_evidence_only",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_positive_readout_theorem_target.md",
+        "outputs/jensen_window_pf_reciprocal_coefficient_extended_stress.md"
+      ],
+      "fit": "Can suggest candidate kernels or basis functions from finite positive prefixes.",
+      "failure_or_gap": "Finite fits do not prove all m,d,n and can miss the signed Hankel obstruction.",
+      "acceptance_test": "Promote only if the fitted pattern becomes an exact symbolic identity with uniform positivity.",
+      "proof_boundary": "Evidence only; no finite quadrature is promoted to a theorem."
+    },
+    {
+      "id": "npt_08_endpoint_or_lp_factorization_basis",
+      "ansatz_family": "Basis or kernel extracted from endpoint real-rootedness or Laguerre-Polya membership.",
+      "verdict": "circular_if_endpoint_used",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_positive_readout_theorem_target.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ],
+      "fit": "Endpoint root factorization would make E(t) coefficientwise positive.",
+      "failure_or_gap": "As input this assumes the endpoint conclusion or downstream Laguerre-Polya/RH-type information.",
+      "acceptance_test": "May appear only as a consequence after a noncircular proof, not as a hypothesis for the readout.",
+      "proof_boundary": "Circular as a proof route for the missing bridge."
+    }
+  ],
+  "kill_gates": [
+    "Reject any row that claims mu_m are ordinary power moments of a positive measure.",
+    "Reject positive majorants, absolute-value covers, fitted quadratures, and finite prefixes unless they prove exact equality to E(t).",
+    "Reject transformed positivity unless the inverse coefficient extraction proves mu_m>=0.",
+    "Reject endpoint PF, Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0 as hypotheses.",
+    "Reject generic spectral, Pick, Hamburger, or kernel wrappers unless the positive object and exact identity are constructed.",
+    "Reject a column-only theorem if it is advertised as an all-Schur/Toeplitz lift."
+  ],
+  "summary": {
+    "ansatz_rows": 8,
+    "ready_to_apply_rows": 0,
+    "live_ansatz_rows": 3,
+    "rejected_rows": 3,
+    "conditional_wrapper_rows": 1,
+    "finite_evidence_rows": 1,
+    "target_closing": false,
+    "main_finding": "After Delta_2=-g_2 rejects ordinary positive power moments, the only live nonordinary routes are a positive functional on a non-power basis, an Xi/Phi positive kernel identity, or a genuinely modified exact state-space transfer model; all are not ready to apply. The nonpower functional low-degree scout sharpens npt_04 by requiring a cone C, basis K_m, and positive functional L that absorb the signed mu_2 and mu_3 cancellation identities exactly."
+  },
+  "invariants": [
+    "No ansatz row proves reciprocal coefficient positivity.",
+    "No ansatz row proves jwpf_06.",
+    "No finite fit is promoted to all-order evidence.",
+    "Every live ansatz row has a missing exact construction or identity.",
+    "The ordinary positive moment route remains rejected by Delta_2=-g_2."
+  ]
+}

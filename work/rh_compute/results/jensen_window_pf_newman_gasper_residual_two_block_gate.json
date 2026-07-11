@@ -1,0 +1,331 @@
+{
+  "date": "2026-07-11",
+  "exact": {
+    "laguerre_quadratic": {
+      "convexity_use": "When the beta^2 coefficient is positive, negativity at both ends of a closed beta interval proves negativity throughout.",
+      "forms": "L[f]=f'^2-f*f'', B[f,g]=2*f'*g'-f*g''-g*f''",
+      "identity": "L[R_beta]=L[E_0]-beta*B[E_0,P_(5/4)]+beta^2*L[P_(5/4)]"
+    },
+    "multiplier_guard": {
+      "bernstein_coefficients": [
+        "247597/2000",
+        "298893/2500",
+        "1922391/12500",
+        "4098286/15625",
+        "371523/625"
+      ],
+      "conclusion": "For beta>=11/10 the quartic discriminant is negative, so U_beta has off-imaginary zeros and fails the standard Laguerre-Polya universal-multiplier test. In particular the tail-matched beta is not certified by that theorem.",
+      "discriminant": "disc_y Q_beta=-16777216*(20*beta**5 - 64*beta**4 + 184*beta**3 - 432*beta**2 + 972*beta - 729)",
+      "monotonicity": "For beta>=11/10, F(beta)=20beta^5-64beta^4+184beta^3-432beta^2+972beta-729 is strictly increasing and F(11/10)=4459/5000>0.",
+      "multiplier": "U_beta(z)=cosh(9z)+beta*cosh(5z)",
+      "reduction": "U_beta(z)=cosh(z)*Q_beta(cosh(z)^2), where Q_beta(y)=5*beta + 256*y**4 - 576*y**3 + y**2*(16*beta + 432) - y*(20*beta + 120) + 9"
+    },
+    "one_block_positive_residual": {
+      "conclusion": "Phi(u)>phi_1(u)>Psi_9(u) for every finite u>=0",
+      "definitions": "Psi_9(u)=4*pi^2*exp(-2*pi*cosh(4u))*cosh(9u), E_0(u)=Phi(u)-Psi_9(u)",
+      "inequality": "exp(pi*q)*(1-a*q)>(1+pi*q)*(1-a*q)>1+q>=1+q^(9/2) for 0<q<=1, since pi>3 gives pi-a-3/2>1.",
+      "quotient": "With q=exp(-4u) and a=3/(2*pi), phi_1(u)/Psi_9(u)=exp(pi*q)*(1-a*q)/(1+q^(9/2)).",
+      "tail": "E_0(u)~2*pi^2*(pi-3/(2*pi))*exp(5u-pi*exp(4u))"
+    },
+    "open_handoff": "Any surviving Gasper comparison must now use at least one signed block or a coupled square identity; decomposing Phi into a positive 9/5 Gasper block plus a separately Laguerre-Polya positive residual is impossible. The live target is a sign-aware multi-block identity whose mixed terms are controlled together after modular cancellation.",
+    "two_block_family": {
+      "beta_match": "beta_tail=pi-3/(2*pi)",
+      "kernel": "Psi_beta(u)=4*pi^2*exp(-2*pi*cosh(4u))*(cosh(9u)+beta*cosh(5u)), beta>=0",
+      "positive_residual_necessity": "A residual kernel nonnegative for all sufficiently large u must satisfy 0<=beta<=beta_tail.",
+      "residual_tail": "Phi(u)-Psi_beta(u)~2*pi^2*(pi-3/(2*pi)-beta)*exp(5u-pi*exp(4u))",
+      "transform": "P_beta=P_(9/4)+beta*P_(5/4), R_beta=H_0-P_beta"
+    },
+    "two_block_obstruction": {
+      "spectral_side": "For 0<=beta<=pi-3/(2*pi), the interval certificate gives L[R_beta](66)<0 or L[R_beta](50)<0.",
+      "tail_side": "beta>pi-3/(2*pi) makes the residual kernel eventually negative.",
+      "theorem": "For every beta>=0, the decomposition Phi=Psi_beta+residual cannot have both a globally nonnegative residual kernel and a residual transform satisfying the first Laguerre inequality on all real x."
+    }
+  },
+  "interval_certificate": {
+    "acb_box_radius": "0.1",
+    "arithmetic": "python-flint Acb/Arb balls at 110 decimal digits",
+    "beta_match": "[2.6641278243141072311559920931619597980937904621537364747319425601311260133835293933576934170433578101139295583 +/- 3.89e-110]",
+    "beta_split": "23/10",
+    "cauchy_radius": "0.04",
+    "conclusion": "L[R_beta](66)<0 for 0<=beta<=23/10 and L[R_beta](50)<0 for 23/10<=beta<=pi-3/(2*pi).",
+    "derivative_method": "For real entire f, central differences with step h enclose f' and f''. A square Acb evaluation bounds abs(f) by M on every Cauchy circle of radius r around the finite-difference segment; the added errors are h^2*M/r^3 and 2*h^2*M/r^4.",
+    "rigorous": true,
+    "rows": [
+      {
+        "beta_interval": [
+          "0",
+          "[2.3000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 +/- 4.66e-111]"
+        ],
+        "cauchy_box_abs_upper": {
+          "first_residual": "3.8101621580022282387290033511817455291748046875000000000000000000000000000000000000000000000000000000000000000e-9",
+          "second_block": "2.2611558307163159842190225390368141233921051025390625000000000000000000000000000000000000000000000000000000000e-10"
+        },
+        "certified": {
+          "left_endpoint_negative": true,
+          "negative_on_closed_beta_interval": true,
+          "quadratic_strictly_convex": true,
+          "right_endpoint_negative": true
+        },
+        "first_residual_jet": [
+          "[-3.5979444323922500050304355821507119163504339134872295428396336933899278038703498345391560085303752150845108e-11 +/- 1.31e-118]",
+          "[3.58697e-11 +/- 8.23e-17]",
+          "[-7.697e-11 +/- 7.39e-15]"
+        ],
+        "laguerre_quadratic": {
+          "c0": "[-1.483e-21 +/- 5.70e-25]",
+          "c1": "[-6.213e-21 +/- 4.82e-25]",
+          "c2": "[2.8475e-21 +/- 3.10e-26]"
+        },
+        "left_endpoint_value": "[-1.483e-21 +/- 5.70e-25]",
+        "right_endpoint_value": "[-7.1e-22 +/- 1.78e-24]",
+        "second_block_jet": [
+          "[1.311219833713762213865688423221592016832369429326976870028254430707132425579189700702957396548820937110715158e-10 +/- 5.26e-119]",
+          "[-5.456425e-11 +/- 5.81e-18]",
+          "[9.90e-13 +/- 5.26e-16]"
+        ],
+        "x": "66"
+      },
+      {
+        "beta_interval": [
+          "[2.3000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 +/- 4.66e-111]",
+          "[2.6641278243141072311559920931619597980937904621537364747319425601311260133835293933576934170433578101139295583 +/- 3.89e-110]"
+        ],
+        "cauchy_box_abs_upper": {
+          "first_residual": "1.0885301797713964333524927496910095214843750000000000000000000000000000000000000000000000000000000000000000000e-6",
+          "second_block": "1.1173369351968887031034682877361774444580078125000000000000000000000000000000000000000000000000000000000000000e-7"
+        },
+        "certified": {
+          "left_endpoint_negative": true,
+          "negative_on_closed_beta_interval": true,
+          "quadratic_strictly_convex": true,
+          "right_endpoint_negative": true
+        },
+        "first_residual_jet": [
+          "[7.43136538438731027696781875753025833588499077521369848796071638309179436313680511852784843552593907366374925e-8 +/- 5.17e-116]",
+          "[-3.88666e-8 +/- 2.91e-14]",
+          "[1.34e-9 +/- 1.32e-12]"
+        ],
+        "laguerre_quadratic": {
+          "c0": "[1.411e-15 +/- 1.31e-19]",
+          "c1": "[-1.4587e-15 +/- 6.49e-20]",
+          "c2": "[3.4559e-16 +/- 4.59e-21]"
+        },
+        "left_endpoint_value": "[-1.16e-16 +/- 3.95e-19]",
+        "right_endpoint_value": "[-2.2e-17 +/- 5.16e-19]",
+        "second_block_jet": [
+          "[4.976628880893146379296592133412345428612610089265643295418351105898843158574547904454584235255728890217237157e-8 +/- 9.75e-117]",
+          "[-2.726895e-8 +/- 6.43e-15]",
+          "[7.9975e-9 +/- 9.01e-14]"
+        ],
+        "x": "50"
+      }
+    ],
+    "scope": "A complete interval certificate over the tail-admissible nonnegative two-block parameter range at t=0. It rejects an independently Laguerre-Polya residual, not a signed coupled identity or RH.",
+    "spectral_point_formula": "H_0(x)=xi((1+i*x)/2)/8, P_a(x)=pi^2/2*(K_(a+i*x/4)(2*pi)+K_(a-i*x/4)(2*pi))",
+    "step": "1e-6"
+  },
+  "kind": "jensen_window_pf_newman_gasper_residual_two_block_gate",
+  "proof_boundary": "This artifact proves exact one-block kernel domination, derives the two-block tail parameter and Laguerre quadratic, and uses Acb/Arb Cauchy derivative enclosures to reject every tail-admissible nonnegative two-block residual as an independent Laguerre-Polya component. It also rejects the standard universal-factor proof for the tail-matched multiplier. Signed blocks and coupled mixed-term identities remain open; this does not prove or disprove RH or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The true Xi kernel strictly dominates the first Gasper fake-Xi kernel pointwise.",
+      "diagnostics": {
+        "conclusion": "Phi(u)>phi_1(u)>Psi_9(u) for every finite u>=0",
+        "definitions": "Psi_9(u)=4*pi^2*exp(-2*pi*cosh(4u))*cosh(9u), E_0(u)=Phi(u)-Psi_9(u)",
+        "inequality": "exp(pi*q)*(1-a*q)>(1+pi*q)*(1-a*q)>1+q>=1+q^(9/2) for 0<q<=1, since pi>3 gives pi-a-3/2>1.",
+        "quotient": "With q=exp(-4u) and a=3/(2*pi), phi_1(u)/Psi_9(u)=exp(pi*q)*(1-a*q)/(1+q^(9/2)).",
+        "tail": "E_0(u)~2*pi^2*(pi-3/(2*pi))*exp(5u-pi*exp(4u))"
+      },
+      "formula": "Phi(u)>phi_1(u)>Psi_9(u) for every finite u>=0",
+      "id": "grtb_01_one_block_residual_positive",
+      "proof_boundary": "Exact kernel inequality only; positive kernels need not have real-rooted transforms.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "Tail positivity confines every nonnegative 9/5 two-block residual to one compact beta interval.",
+      "diagnostics": {
+        "beta_match": "beta_tail=pi-3/(2*pi)",
+        "kernel": "Psi_beta(u)=4*pi^2*exp(-2*pi*cosh(4u))*(cosh(9u)+beta*cosh(5u)), beta>=0",
+        "positive_residual_necessity": "A residual kernel nonnegative for all sufficiently large u must satisfy 0<=beta<=beta_tail.",
+        "residual_tail": "Phi(u)-Psi_beta(u)~2*pi^2*(pi-3/(2*pi)-beta)*exp(5u-pi*exp(4u))",
+        "transform": "P_beta=P_(9/4)+beta*P_(5/4), R_beta=H_0-P_beta"
+      },
+      "formula": "A residual kernel nonnegative for all sufficiently large u must satisfy 0<=beta<=beta_tail.",
+      "id": "grtb_02_two_block_tail_parameter",
+      "proof_boundary": "Exact leading-tail necessity; no sufficiency is claimed.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "The residual first Laguerre expression is an exact quadratic in the second-block coefficient.",
+      "diagnostics": {
+        "convexity_use": "When the beta^2 coefficient is positive, negativity at both ends of a closed beta interval proves negativity throughout.",
+        "forms": "L[f]=f'^2-f*f'', B[f,g]=2*f'*g'-f*g''-g*f''",
+        "identity": "L[R_beta]=L[E_0]-beta*B[E_0,P_(5/4)]+beta^2*L[P_(5/4)]"
+      },
+      "formula": "L[R_beta]=L[E_0]-beta*B[E_0,P_(5/4)]+beta^2*L[P_(5/4)]",
+      "id": "grtb_03_laguerre_beta_quadratic",
+      "proof_boundary": "Exact quadratic identity used by the interval certificate.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Acb Cauchy bounds rigorously enclose the finite-difference jets used in the beta-uniform test.",
+      "diagnostics": {
+        "acb_box_radius": "0.1",
+        "arithmetic": "python-flint Acb/Arb balls at 110 decimal digits",
+        "cauchy_radius": "0.04",
+        "step": "1e-6"
+      },
+      "formula": "For real entire f, central differences with step h enclose f' and f''. A square Acb evaluation bounds abs(f) by M on every Cauchy circle of radius r around the finite-difference segment; the added errors are h^2*M/r^3 and 2*h^2*M/r^4.",
+      "id": "grtb_04_acb_cauchy_derivatives",
+      "proof_boundary": "Finite spectral-point derivative enclosures at t=0.",
+      "readiness": "interval_validated",
+      "role": "interval_method"
+    },
+    {
+      "claim": "Every tail-admissible nonnegative two-block residual violates the first Laguerre inequality.",
+      "diagnostics": {
+        "acb_box_radius": "0.1",
+        "arithmetic": "python-flint Acb/Arb balls at 110 decimal digits",
+        "beta_match": "[2.6641278243141072311559920931619597980937904621537364747319425601311260133835293933576934170433578101139295583 +/- 3.89e-110]",
+        "beta_split": "23/10",
+        "cauchy_radius": "0.04",
+        "conclusion": "L[R_beta](66)<0 for 0<=beta<=23/10 and L[R_beta](50)<0 for 23/10<=beta<=pi-3/(2*pi).",
+        "derivative_method": "For real entire f, central differences with step h enclose f' and f''. A square Acb evaluation bounds abs(f) by M on every Cauchy circle of radius r around the finite-difference segment; the added errors are h^2*M/r^3 and 2*h^2*M/r^4.",
+        "rigorous": true,
+        "rows": [
+          {
+            "beta_interval": [
+              "0",
+              "[2.3000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 +/- 4.66e-111]"
+            ],
+            "cauchy_box_abs_upper": {
+              "first_residual": "3.8101621580022282387290033511817455291748046875000000000000000000000000000000000000000000000000000000000000000e-9",
+              "second_block": "2.2611558307163159842190225390368141233921051025390625000000000000000000000000000000000000000000000000000000000e-10"
+            },
+            "certified": {
+              "left_endpoint_negative": true,
+              "negative_on_closed_beta_interval": true,
+              "quadratic_strictly_convex": true,
+              "right_endpoint_negative": true
+            },
+            "first_residual_jet": [
+              "[-3.5979444323922500050304355821507119163504339134872295428396336933899278038703498345391560085303752150845108e-11 +/- 1.31e-118]",
+              "[3.58697e-11 +/- 8.23e-17]",
+              "[-7.697e-11 +/- 7.39e-15]"
+            ],
+            "laguerre_quadratic": {
+              "c0": "[-1.483e-21 +/- 5.70e-25]",
+              "c1": "[-6.213e-21 +/- 4.82e-25]",
+              "c2": "[2.8475e-21 +/- 3.10e-26]"
+            },
+            "left_endpoint_value": "[-1.483e-21 +/- 5.70e-25]",
+            "right_endpoint_value": "[-7.1e-22 +/- 1.78e-24]",
+            "second_block_jet": [
+              "[1.311219833713762213865688423221592016832369429326976870028254430707132425579189700702957396548820937110715158e-10 +/- 5.26e-119]",
+              "[-5.456425e-11 +/- 5.81e-18]",
+              "[9.90e-13 +/- 5.26e-16]"
+            ],
+            "x": "66"
+          },
+          {
+            "beta_interval": [
+              "[2.3000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 +/- 4.66e-111]",
+              "[2.6641278243141072311559920931619597980937904621537364747319425601311260133835293933576934170433578101139295583 +/- 3.89e-110]"
+            ],
+            "cauchy_box_abs_upper": {
+              "first_residual": "1.0885301797713964333524927496910095214843750000000000000000000000000000000000000000000000000000000000000000000e-6",
+              "second_block": "1.1173369351968887031034682877361774444580078125000000000000000000000000000000000000000000000000000000000000000e-7"
+            },
+            "certified": {
+              "left_endpoint_negative": true,
+              "negative_on_closed_beta_interval": true,
+              "quadratic_strictly_convex": true,
+              "right_endpoint_negative": true
+            },
+            "first_residual_jet": [
+              "[7.43136538438731027696781875753025833588499077521369848796071638309179436313680511852784843552593907366374925e-8 +/- 5.17e-116]",
+              "[-3.88666e-8 +/- 2.91e-14]",
+              "[1.34e-9 +/- 1.32e-12]"
+            ],
+            "laguerre_quadratic": {
+              "c0": "[1.411e-15 +/- 1.31e-19]",
+              "c1": "[-1.4587e-15 +/- 6.49e-20]",
+              "c2": "[3.4559e-16 +/- 4.59e-21]"
+            },
+            "left_endpoint_value": "[-1.16e-16 +/- 3.95e-19]",
+            "right_endpoint_value": "[-2.2e-17 +/- 5.16e-19]",
+            "second_block_jet": [
+              "[4.976628880893146379296592133412345428612610089265643295418351105898843158574547904454584235255728890217237157e-8 +/- 9.75e-117]",
+              "[-2.726895e-8 +/- 6.43e-15]",
+              "[7.9975e-9 +/- 9.01e-14]"
+            ],
+            "x": "50"
+          }
+        ],
+        "scope": "A complete interval certificate over the tail-admissible nonnegative two-block parameter range at t=0. It rejects an independently Laguerre-Polya residual, not a signed coupled identity or RH.",
+        "spectral_point_formula": "H_0(x)=xi((1+i*x)/2)/8, P_a(x)=pi^2/2*(K_(a+i*x/4)(2*pi)+K_(a-i*x/4)(2*pi))",
+        "step": "1e-6"
+      },
+      "formula": "L[R_beta](66)<0 for 0<=beta<=23/10 and L[R_beta](50)<0 for 23/10<=beta<=pi-3/(2*pi).",
+      "id": "grtb_05_beta_uniform_negative_laguerre",
+      "proof_boundary": "Complete interval coverage in beta at t=0; not a statement about signed coupled sums.",
+      "readiness": "interval_validated",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "No positive 9/5 Gasper block plus positive independently-LP residual decomposition can prove Xi.",
+      "diagnostics": {
+        "spectral_side": "For 0<=beta<=pi-3/(2*pi), the interval certificate gives L[R_beta](66)<0 or L[R_beta](50)<0.",
+        "tail_side": "beta>pi-3/(2*pi) makes the residual kernel eventually negative.",
+        "theorem": "For every beta>=0, the decomposition Phi=Psi_beta+residual cannot have both a globally nonnegative residual kernel and a residual transform satisfying the first Laguerre inequality on all real x."
+      },
+      "formula": "For every beta>=0, the decomposition Phi=Psi_beta+residual cannot have both a globally nonnegative residual kernel and a residual transform satisfying the first Laguerre inequality on all real x.",
+      "id": "grtb_06_two_block_obstruction",
+      "proof_boundary": "Rejects this decomposition architecture only; it neither proves nor disproves RH.",
+      "readiness": "ready_to_apply",
+      "role": "exact_interval_composition"
+    },
+    {
+      "claim": "The tail-matched 9/5 multiplier fails the standard universal-factor imaginary-zero test.",
+      "diagnostics": {
+        "bernstein_coefficients": [
+          "247597/2000",
+          "298893/2500",
+          "1922391/12500",
+          "4098286/15625",
+          "371523/625"
+        ],
+        "conclusion": "For beta>=11/10 the quartic discriminant is negative, so U_beta has off-imaginary zeros and fails the standard Laguerre-Polya universal-multiplier test. In particular the tail-matched beta is not certified by that theorem.",
+        "discriminant": "disc_y Q_beta=-16777216*(20*beta**5 - 64*beta**4 + 184*beta**3 - 432*beta**2 + 972*beta - 729)",
+        "monotonicity": "For beta>=11/10, F(beta)=20beta^5-64beta^4+184beta^3-432beta^2+972beta-729 is strictly increasing and F(11/10)=4459/5000>0.",
+        "multiplier": "U_beta(z)=cosh(9z)+beta*cosh(5z)",
+        "reduction": "U_beta(z)=cosh(z)*Q_beta(cosh(z)^2), where Q_beta(y)=5*beta + 256*y**4 - 576*y**3 + y**2*(16*beta + 432) - y*(20*beta + 120) + 9"
+      },
+      "formula": "For beta>=11/10 the quartic discriminant is negative, so U_beta has off-imaginary zeros and fails the standard Laguerre-Polya universal-multiplier test. In particular the tail-matched beta is not certified by that theorem.",
+      "id": "grtb_07_multiplier_discriminant_guard",
+      "proof_boundary": "Rejects the standard universal-multiplier proof, not real-rootedness by every possible special-function theorem.",
+      "readiness": "guard_validated",
+      "role": "exact_route_obstruction"
+    },
+    {
+      "claim": "A surviving Gasper route must control signed blocks and mixed terms together.",
+      "diagnostics": null,
+      "formula": "Any surviving Gasper comparison must now use at least one signed block or a coupled square identity; decomposing Phi into a positive 9/5 Gasper block plus a separately Laguerre-Polya positive residual is impossible. The live target is a sign-aware multi-block identity whose mixed terms are controlled together after modular cancellation.",
+      "id": "grtb_08_signed_multiblock_handoff",
+      "proof_boundary": "Open coupled-square target; not strict Laguerre positivity, RH, or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "sources": [
+    "outputs/jensen_window_pf_newman_gasper_fake_xi_remainder_gate.md",
+    "outputs/jensen_window_pf_newman_theta_summand_spectral_square_gate.md",
+    "outputs/formal_core.md",
+    "https://arxiv.org/abs/0801.2996",
+    "https://arxiv.org/abs/1502.06844"
+  ],
+  "status": "exact and interval-certified positive two-block Gasper obstruction"
+}

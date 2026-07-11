@@ -1,0 +1,344 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_quadrature_ladder_scout.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_ladder_scout.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The high-order ladder is floating evidence only.",
+    "The proposed quadrature radius cap is a target, not a proved remainder.",
+    "Laguerre nodes and weights are not interval enclosures here.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_quadrature_ladder_scout",
+  "location_diagnostics": [
+    {
+      "T": 10000,
+      "all_ladder_ratios_below_one": true,
+      "cap_keeps_worst_ladder_below_one": true,
+      "derivative_ratio_spread": "7.756680887393827019918227e-15",
+      "index": 21,
+      "ladder_orders": [
+        96,
+        128,
+        160,
+        192,
+        224,
+        256,
+        320
+      ],
+      "ladder_row_count": 7,
+      "ladder_rows": [
+        {
+          "derivative_delta_from_reference_ratio": "-7.62993120142187004368876e-16",
+          "derivative_ratio_to_first_omitted": "0.9693567774758038687433225",
+          "proof_boundary": "Floating high-order quadrature sample only; SciPy supplies floating Laguerre nodes and weights.",
+          "quadrature_order": 96,
+          "value_delta_from_reference_ratio": "-7.645824343684963955788635e-16",
+          "value_ratio_to_first_omitted": "0.9707100590203295412978665"
+        },
+        {
+          "derivative_delta_from_reference_ratio": "-1.240298506779145668073936e-15",
+          "derivative_ratio_to_first_omitted": "0.9693567774758033914379359",
+          "proof_boundary": "Floating high-order quadrature sample only; SciPy supplies floating Laguerre nodes and weights.",
+          "quadrature_order": 128,
+          "value_delta_from_reference_ratio": "-1.241613149238753592653189e-15",
+          "value_ratio_to_first_omitted": "0.9707100590203290642671517"
+        },
+        {
+          "derivative_delta_from_reference_ratio": "-2.946607264801217696074909e-15",
+          "derivative_ratio_to_first_omitted": "0.9693567774758016851291779",
+          "proof_boundary": "Floating high-order quadrature sample only; SciPy supplies floating Laguerre nodes and weights.",
+          "quadrature_order": 160,
+          "value_delta_from_reference_ratio": "-2.950390942308912476588076e-15",
+          "value_ratio_to_first_omitted": "0.9707100590203273554893586"
+        },
+        {
+          "derivative_delta_from_reference_ratio": "-2.597755497438248870549006e-15",
+          "derivative_ratio_to_first_omitted": "0.9693567774758020339809452",
+          "proof_boundary": "Floating high-order quadrature sample only; SciPy supplies floating Laguerre nodes and weights.",
+          "quadrature_order": 192,
+          "value_delta_from_reference_ratio": "-2.602045896053889653546352e-15",
+          "value_ratio_to_first_omitted": "0.9707100590203277038344049"
+        },
+        {
+          "derivative_delta_from_reference_ratio": "4.810073622592609323843318e-15",
+          "derivative_ratio_to_first_omitted": "0.9693567774758094418100653",
+          "proof_boundary": "Floating high-order quadrature sample only; SciPy supplies floating Laguerre nodes and weights.",
+          "quadrature_order": 224,
+          "value_delta_from_reference_ratio": "4.817430801976440500816557e-15",
+          "value_ratio_to_first_omitted": "0.9707100590203351233111029"
+        },
+        {
+          "derivative_delta_from_reference_ratio": "2.04059276980833138920819e-16",
+          "derivative_ratio_to_first_omitted": "0.9693567774758048357957197",
+          "proof_boundary": "Floating high-order quadrature sample only; SciPy supplies floating Laguerre nodes and weights.",
+          "quadrature_order": 256,
+          "value_delta_from_reference_ratio": "2.044763672796231384763709e-16",
+          "value_ratio_to_first_omitted": "0.9707100590203305103566682"
+        },
+        {
+          "derivative_delta_from_reference_ratio": "0.0",
+          "derivative_ratio_to_first_omitted": "0.9693567774758046317364427",
+          "proof_boundary": "Floating high-order quadrature sample only; SciPy supplies floating Laguerre nodes and weights.",
+          "quadrature_order": 320,
+          "value_delta_from_reference_ratio": "0.0",
+          "value_ratio_to_first_omitted": "0.9707100590203303058803009"
+        }
+      ],
+      "max_derivative_delta_from_reference_abs": "4.810073622592609323843318e-15",
+      "max_derivative_ratio": "0.9693567774758094418100653",
+      "max_value_delta_from_reference_abs": "4.817430801976440500816557e-15",
+      "max_value_ratio": "0.9707100590203351233111029",
+      "proof_boundary": "High-order floating ladder only. The spread is target calibration for a future quadrature remainder theorem, not a certified quadrature error bound.",
+      "proposed_quadrature_ratio_radius_cap": "1.0e-6",
+      "reference_derivative_ratio": "0.9693567774758046317364427",
+      "reference_order": 320,
+      "reference_value_ratio": "0.9707100590203303058803009",
+      "value_ratio_spread": "7.767821744285352977404633e-15"
+    }
+  ],
+  "matrix_rows": [
+    {
+      "claim": "Import the worst cancellation-reduced finite-grid row and test it with a higher quadrature ladder.",
+      "diagnostics": {
+        "ladder_orders": [
+          96,
+          128,
+          160,
+          192,
+          224,
+          256,
+          320
+        ],
+        "reference_order": 320,
+        "source_worst_locations": [
+          {
+            "T": 10000,
+            "index": 21
+          }
+        ]
+      },
+      "gap": null,
+      "id": "nlrgqls_01_worst_row_import",
+      "proof_boundary": "Worst-row floating diagnostic only; not an interval certificate.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md"
+      ]
+    },
+    {
+      "claim": "Across the high-order ladder through N=320, the worst row stays below one first omitted term and has tiny order-to-order spread.",
+      "diagnostics": {
+        "aggregate": {
+          "all_ladder_ratios_below_one": true,
+          "cap_below_per_source_cap": true,
+          "cap_keeps_worst_ladder_below_one": true,
+          "intervalization_per_source_cap": "2.000000000000000000E-3",
+          "ladder_orders": [
+            96,
+            128,
+            160,
+            192,
+            224,
+            256,
+            320
+          ],
+          "location_count": 1,
+          "max_derivative_ratio": "0.9693567774758094418100653",
+          "max_derivative_ratio_spread": "7.756680887393827019918227e-15",
+          "max_value_ratio": "0.9707100590203351233111029",
+          "max_value_ratio_spread": "7.767821744285352977404633e-15",
+          "proposed_quadrature_ratio_radius_cap": "1.0e-6",
+          "reference_order": 320,
+          "source_worst_locations": [
+            {
+              "T": 10000,
+              "index": 21
+            }
+          ],
+          "total_ladder_rows": 7
+        },
+        "locations": [
+          {
+            "T": 10000,
+            "all_ladder_ratios_below_one": true,
+            "cap_keeps_worst_ladder_below_one": true,
+            "derivative_ratio_spread": "7.756680887393827019918227e-15",
+            "index": 21,
+            "ladder_orders": [
+              96,
+              128,
+              160,
+              192,
+              224,
+              256,
+              320
+            ],
+            "ladder_row_count": 7,
+            "ladder_rows": [
+              {
+                "derivative_delta_from_reference_ratio": "-7.62993120142187004368876e-16",
+                "derivative_ratio_to_first_omitted": "0.9693567774758038687433225",
+                "proof_boundary": "Floating high-order quadrature sample only; SciPy supplies floating Laguerre nodes and weights.",
+                "quadrature_order": 96,
+                "value_delta_from_reference_ratio": "-7.645824343684963955788635e-16",
+                "value_ratio_to_first_omitted": "0.9707100590203295412978665"
+              },
+              {
+                "derivative_delta_from_reference_ratio": "-1.240298506779145668073936e-15",
+                "derivative_ratio_to_first_omitted": "0.9693567774758033914379359",
+                "proof_boundary": "Floating high-order quadrature sample only; SciPy supplies floating Laguerre nodes and weights.",
+                "quadrature_order": 128,
+                "value_delta_from_reference_ratio": "-1.241613149238753592653189e-15",
+                "value_ratio_to_first_omitted": "0.9707100590203290642671517"
+              },
+              {
+                "derivative_delta_from_reference_ratio": "-2.946607264801217696074909e-15",
+                "derivative_ratio_to_first_omitted": "0.9693567774758016851291779",
+                "proof_boundary": "Floating high-order quadrature sample only; SciPy supplies floating Laguerre nodes and weights.",
+                "quadrature_order": 160,
+                "value_delta_from_reference_ratio": "-2.950390942308912476588076e-15",
+                "value_ratio_to_first_omitted": "0.9707100590203273554893586"
+              },
+              {
+                "derivative_delta_from_reference_ratio": "-2.597755497438248870549006e-15",
+                "derivative_ratio_to_first_omitted": "0.9693567774758020339809452",
+                "proof_boundary": "Floating high-order quadrature sample only; SciPy supplies floating Laguerre nodes and weights.",
+                "quadrature_order": 192,
+                "value_delta_from_reference_ratio": "-2.602045896053889653546352e-15",
+                "value_ratio_to_first_omitted": "0.9707100590203277038344049"
+              },
+              {
+                "derivative_delta_from_reference_ratio": "4.810073622592609323843318e-15",
+                "derivative_ratio_to_first_omitted": "0.9693567774758094418100653",
+                "proof_boundary": "Floating high-order quadrature sample only; SciPy supplies floating Laguerre nodes and weights.",
+                "quadrature_order": 224,
+                "value_delta_from_reference_ratio": "4.817430801976440500816557e-15",
+                "value_ratio_to_first_omitted": "0.9707100590203351233111029"
+              },
+              {
+                "derivative_delta_from_reference_ratio": "2.04059276980833138920819e-16",
+                "derivative_ratio_to_first_omitted": "0.9693567774758048357957197",
+                "proof_boundary": "Floating high-order quadrature sample only; SciPy supplies floating Laguerre nodes and weights.",
+                "quadrature_order": 256,
+                "value_delta_from_reference_ratio": "2.044763672796231384763709e-16",
+                "value_ratio_to_first_omitted": "0.9707100590203305103566682"
+              },
+              {
+                "derivative_delta_from_reference_ratio": "0.0",
+                "derivative_ratio_to_first_omitted": "0.9693567774758046317364427",
+                "proof_boundary": "Floating high-order quadrature sample only; SciPy supplies floating Laguerre nodes and weights.",
+                "quadrature_order": 320,
+                "value_delta_from_reference_ratio": "0.0",
+                "value_ratio_to_first_omitted": "0.9707100590203303058803009"
+              }
+            ],
+            "max_derivative_delta_from_reference_abs": "4.810073622592609323843318e-15",
+            "max_derivative_ratio": "0.9693567774758094418100653",
+            "max_value_delta_from_reference_abs": "4.817430801976440500816557e-15",
+            "max_value_ratio": "0.9707100590203351233111029",
+            "proof_boundary": "High-order floating ladder only. The spread is target calibration for a future quadrature remainder theorem, not a certified quadrature error bound.",
+            "proposed_quadrature_ratio_radius_cap": "1.0e-6",
+            "reference_derivative_ratio": "0.9693567774758046317364427",
+            "reference_order": 320,
+            "reference_value_ratio": "0.9707100590203303058803009",
+            "value_ratio_spread": "7.767821744285352977404633e-15"
+          }
+        ]
+      },
+      "gap": null,
+      "id": "nlrgqls_02_high_order_ladder_stability",
+      "proof_boundary": "Floating quadrature stability evidence only; the ladder spread is not a rigorous quadrature remainder.",
+      "readiness": "not_ready_to_apply",
+      "role": "floating_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree40_residual_tail_budget.md"
+      ]
+    },
+    {
+      "claim": "A future rigorous quadrature theorem with ratio radius below 1.0e-6 on the worst row would be far inside the intervalization slack and below the per-source cap.",
+      "diagnostics": {
+        "cap_below_per_source_cap": true,
+        "cap_keeps_worst_ladder_below_one": true,
+        "intervalization_per_source_cap": "2.000000000000000000E-3",
+        "proposed_quadrature_ratio_radius_cap": "1.0e-6"
+      },
+      "gap": null,
+      "id": "nlrgqls_03_quadrature_radius_target",
+      "proof_boundary": "Sufficient quadrature-radius target only; no remainder theorem is proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_requirement",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md"
+      ]
+    },
+    {
+      "claim": "Pushing SciPy floating generalized Laguerre quadrature to still higher orders by itself provides a rigorous error bound.",
+      "diagnostics": null,
+      "gap": "SciPy floating roots become numerically fragile at higher orders in this parameter range, and repeated floating agreement is not an interval remainder theorem.",
+      "id": "nlrgqls_04_floating_overflow_boundary",
+      "proof_boundary": "Rejected promotion only; not a quadrature theorem or interval enclosure.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_node_c0_range_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_bound_scout.md"
+      ]
+    },
+    {
+      "claim": "A promoted proof must replace the floating ladder by a quadrature-remainder theorem or interval adaptive integration for the cancellation-reduced cores.",
+      "diagnostics": null,
+      "gap": null,
+      "id": "nlrgqls_05_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not scaled-curvature monotonicity, cone entry, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "High-order floating quadrature ladder scout only. It calibrates a future quadrature-remainder target for the worst finite-grid row, but it does not provide interval nodes or weights, does not prove a quadrature-remainder theorem, does not prove a uniform collar theorem, does not prove scaled-curvature monotonicity, and does not prove RH or Lambda <= 0.",
+  "source_cancellation_reduced_grid_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.json",
+  "source_cancellation_reduced_grid_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_intervalization_target": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+  "source_intervalization_target_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.json",
+  "source_node_c0_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_node_c0_range_certificate.md",
+  "source_phi_tail_bound_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_bound_scout.md",
+  "source_residual_budget": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree40_residual_tail_budget.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "high-order floating quadrature ladder scout",
+  "summary": {
+    "all_ladder_ratios_below_one": true,
+    "cap_below_per_source_cap": true,
+    "cap_keeps_worst_ladder_below_one": true,
+    "intervalization_per_source_cap": "2.000000000000000000E-3",
+    "ladder_orders": [
+      96,
+      128,
+      160,
+      192,
+      224,
+      256,
+      320
+    ],
+    "location_count": 1,
+    "main_finding": "The worst cancellation-reduced row remains below one first omitted term through the high-order floating ladder N=96..320. The largest value ratio is about 0.970710059020335 and the largest derivative ratio is about 0.969356777475809, with order-spread below 1e-14. A future rigorous quadrature radius below 1e-6 would be far inside the 2.0e-3 per-source intervalization cap, but this artifact remains floating evidence only.",
+    "matrix_rows": 5,
+    "max_derivative_ratio": "0.9693567774758094418100653",
+    "max_derivative_ratio_spread": "7.756680887393827019918227e-15",
+    "max_value_ratio": "0.9707100590203351233111029",
+    "max_value_ratio_spread": "7.767821744285352977404633e-15",
+    "proposed_quadrature_ratio_radius_cap": "1.0e-6",
+    "ready_to_apply_rows": 0,
+    "reference_order": 320,
+    "target_closing": false,
+    "total_ladder_rows": 7
+  }
+}

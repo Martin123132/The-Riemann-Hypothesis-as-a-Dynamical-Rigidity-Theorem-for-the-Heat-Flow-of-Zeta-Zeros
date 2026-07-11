@@ -1,0 +1,463 @@
+{
+  "date": "2026-07-11",
+  "exact": {
+    "discriminants": {
+      "critical_discriminant": "disc_y Q'=-4194304*(32*beta**3 - 297*beta**2 + 1053*beta - 1215)",
+      "critical_factor": "f(beta)=32*beta**3 - 297*beta**2 + 1053*beta - 1215",
+      "exclusions": "f(beta)>0 makes disc(Q')<0, while Delta(beta,gamma)<0 makes disc(Q)<0; either condition excludes four roots in [0,1].",
+      "quartic_discriminant": "disc_y Q=2^24*Delta=-16777216*(20*beta**5 - 16*beta**4*gamma - 64*beta**4 - 124*beta**3*gamma + 184*beta**3 + 128*beta**2*gamma**2 + 384*beta**2*gamma - 432*beta**2 + 48*beta*gamma**2 - 1080*beta*gamma + 972*beta - 256*gamma**3 + 459*gamma**2 + 486*gamma - 729)",
+      "quartic_factor": "Delta(beta,gamma)=-20*beta**5 + 16*beta**4*gamma + 64*beta**4 + 124*beta**3*gamma - 184*beta**3 - 128*beta**2*gamma**2 - 384*beta**2*gamma + 432*beta**2 - 48*beta*gamma**2 + 1080*beta*gamma - 972*beta + 256*gamma**3 - 459*gamma**2 - 486*gamma + 729"
+    },
+    "laguerre_identity": {
+      "definitions": "E=H_0-P_(9/4), P5=P_(5/4), P1=P_(1/4)",
+      "identity": "L[R_(beta,gamma)]=L[E]-beta*B[E,P5]-gamma*B[E,P1]+beta^2*L[P5]+beta*gamma*B[P5,P1]+gamma^2*L[P1]"
+    },
+    "multiplier_reduction": {
+      "imaginary_zero_equivalence": "U_(beta,gamma) has only imaginary zeros iff every zero of Q_(beta,gamma) is real and lies in [0,1].",
+      "multiplier": "U_(beta,gamma)(z)=cosh(9z)+beta*cosh(5z)+gamma*cosh(z)",
+      "quartic": "Q_(beta,gamma)(y)=5*beta + gamma + 256*y**4 - 576*y**3 + y**2*(16*beta + 432) - y*(20*beta + 120) + 9",
+      "reason": "cosh(z)=0 is purely imaginary, and cosh(z)^2=r has only purely imaginary solutions exactly when 0<=r<=1.",
+      "reduction": "U_(beta,gamma)(z)=cosh(z)*Q_(beta,gamma)(cosh(z)^2)"
+    },
+    "parameter_rectangle": {
+      "lower_beta": "If Q has roots in [0,1], Q'(1)=40+12*beta>=0, so beta>=-10/3>-17/5.",
+      "lower_sum": "Q(1)=1+beta+gamma=256*product_j(1-r_j)>=0, so s=beta+gamma>=-1.",
+      "rectangle": "-17/5<=beta<11/5, -1<=s=beta+gamma<51/10",
+      "scope": "A rational outer rectangle containing every signed 9/5/1 multiplier that passes the standard imaginary-zero test and leaves a globally nonnegative residual.",
+      "upper_beta": "Rolle gives three real roots of Q', hence f(beta)<=0 for f=32beta^3-297beta^2+1053beta-1215. Since disc(f')=-51516, f is strictly increasing, and f(11/5)=607/125>0, beta<11/5.",
+      "upper_sum": "Global residual nonnegativity at u=0 and the Arb origin bound give s<51/10."
+    }
+  },
+  "interval_certificate": {
+    "acb_box_radius": "0.1",
+    "adaptive_cover": {
+      "classification_counts": {
+        "critical_discriminant": 240,
+        "laguerre_x122": 1281,
+        "laguerre_x86": 2329,
+        "quartic_discriminant": 244
+      },
+      "classification_logic": "A leaf is accepted by L[R](86)<0, then L[R](122)<0, then f(beta)>0 (so disc Q'<0), then Delta(beta,gamma)<0 (so disc Q<0). Otherwise it is bisected in both coordinates.",
+      "classification_order": [
+        "laguerre_x86",
+        "laguerre_x122",
+        "critical_discriminant",
+        "quartic_discriminant"
+      ],
+      "closest_certified_bounds": {
+        "critical_discriminant": "[0.41944723042845726013183593749999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999997 +/- 3.92e-171]",
+        "laguerre_x122": "[-1.5636889595661975973706309021175809109054454705725417304447306175112712510179248034947185885812359629198908805847167968750000000000000000000000000000000000000000000000000e-38 +/- 4.67e-209]",
+        "laguerre_x86": "[-7.8739077202342654315823889532094668622128382486602372284517636913392379938159137964248657226562500000000000000000000000000000000000000000000000000000000000000000000009583e-32 +/- 4.64e-202]",
+        "quartic_discriminant": "[-0.19827340506434440612792968749999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999699 +/- 3.16e-171]"
+      },
+      "coordinates": "beta and s=beta+gamma",
+      "depth_counts": {
+        "0": 3400,
+        "1": 41,
+        "2": 54,
+        "3": 86,
+        "4": 197,
+        "5": 252,
+        "6": 64
+      },
+      "depth_limit": 14,
+      "initial_beta_cells": 56,
+      "initial_boxes": 3416,
+      "initial_cell_width": "1/10",
+      "initial_sum_cells": 61,
+      "leaf_count": 4094,
+      "leaf_sha256": "fbc1f39873be290c8b2b976396d5cf778d8604c008bfa053fa397f9e4c57b69e",
+      "maximum_depth": 6,
+      "rectangle": "[-17/5,11/5] x [-1,51/10]",
+      "unresolved_boxes": 0
+    },
+    "arithmetic": "python-flint Acb/Arb balls at 170 decimal digits",
+    "cauchy_radius": "0.04",
+    "conclusion": "Every point in the necessary signed rectangle either has a strictly negative residual Laguerre value at x=86 or x=122, or is rigorously excluded from the Polya imaginary-zero multiplier cone by a negative critical or quartic discriminant.",
+    "derivative_method": "Central differences use h=1e-6. Acb boxes of radius 0.1 bound each component on Cauchy circles of radius 0.04; the added f' and f'' errors are h^2*M/r^3 and 2*h^2*M/r^4.",
+    "rigorous": true,
+    "rows": [
+      {
+        "adaptive_leaf_count": 2329,
+        "cauchy_box_abs_upper": {
+          "E": "2.9580462868928920211475386281563260126858949661254882812500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-12",
+          "P1": "7.5875861985676129866512651389598431705962866544723510742187500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-14",
+          "P5": "1.0246881097757386822402758674854794662678614258766174316406250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-13"
+        },
+        "jets": {
+          "E": [
+            "[1.12168187794422426074892643023054595364798297310718243376837051794659277570500724114445956113486132330729982955231379824492628319481790461125079669220503156018907214835e-13 +/- 1.78e-181]",
+            "[-5.84830e-14 +/- 6.93e-20]",
+            "[5.557e-14 +/- 6.12e-18]"
+          ],
+          "P1": [
+            "[8.02159242994377050654167297619415677490633069736747011647934968697512136369266169994313461916724689028805414329708983575395927462700331226727233566155433709811564907459e-15 +/- 7.72e-183]",
+            "[-7.61431e-15 +/- 5.02e-21]",
+            "[2.938e-15 +/- 1.12e-19]"
+          ],
+          "P5": [
+            "[-5.51119675424170611029583502889838278541443416940989440912734087363300486920062981608298634427295175771695197982050082621163744854168293838093790065929355491694152482546e-14 +/- 1.57e-182]",
+            "[6.76182e-15 +/- 1.81e-21]",
+            "[1.5286e-14 +/- 1.06e-19]"
+          ]
+        },
+        "laguerre_coefficients": {
+          "c00": "[-2.813e-27 +/- 6.20e-31]",
+          "c_beta": "[-5.57e-28 +/- 4.11e-31]",
+          "c_beta2": "[8.8817e-28 +/- 9.30e-33]",
+          "c_beta_gamma": "[-6.367e-29 +/- 4.37e-33]",
+          "c_gamma": "[-1.153e-28 +/- 5.79e-32]",
+          "c_gamma2": "[3.4410e-29 +/- 6.90e-34]"
+        },
+        "x": "86"
+      },
+      {
+        "adaptive_leaf_count": 1281,
+        "cauchy_box_abs_upper": {
+          "E": "5.4746480644670734576559149647465019050684986723354086279869079589843750000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-18",
+          "P1": "4.1200051603018163586251508925025616170145781325118150562047958374023437500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-20",
+          "P5": "9.2741892362795847225069300557502398330012027827251586131751537322998046875000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-20"
+        },
+        "jets": {
+          "E": [
+            "[3.94040540664337356016509570614880855170773451886156500305013253318231827987483610112507039794059842384679747767298632456846211034367497928919431741939290834647325960586e-19 +/- 2.90e-187]",
+            "[-1.37890e-19 +/- 5.39e-25]",
+            "[7.421e-20 +/- 8.48e-24]"
+          ],
+          "P1": [
+            "[4.97680903544062788088979160364102402407068347834656811132627596772420739760034825710073515854732228103046482904121440656480827292737312224265041625589576407017297051025e-21 +/- 4.17e-189]",
+            "[-5.340776e-21 +/- 7.37e-28]",
+            "[1.8401e-21 +/- 8.02e-26]"
+          ],
+          "P5": [
+            "[-5.18361868393721101429682891225707256429447486460342846488384690968173133883843548247453575250773649342773596644162651115412950412514272328865076912802573783142807996887e-20 +/- 5.35e-188]",
+            "[3.39594e-21 +/- 3.37e-27]",
+            "[2.16386e-20 +/- 7.86e-26]"
+          ]
+        },
+        "laguerre_coefficients": {
+          "c00": "[-1.023e-38 +/- 5.40e-42]",
+          "c_beta": "[5.616e-39 +/- 7.24e-43]",
+          "c_beta2": "[1.13319e-39 +/- 8.36e-45]",
+          "c_beta_gamma": "[-4.858e-41 +/- 3.27e-45]",
+          "c_gamma": "[-3.785e-40 +/- 5.21e-44]",
+          "c_gamma2": "[1.9366e-41 +/- 3.46e-46]"
+        },
+        "x": "122"
+      }
+    ],
+    "scope": "This exhausts signed 9/5/1 bases certified by the standard Polya universal-factor hypothesis when their residual kernel is globally nonnegative and is treated as an independent Laguerre-Polya block. It does not reject higher shifts or a coupled signed identity.",
+    "spectral_points": [
+      "86",
+      "122"
+    ],
+    "step": "1e-6"
+  },
+  "kind": "jensen_window_pf_newman_signed_universal_factor_residual_gate",
+  "origin_certificate": {
+    "arithmetic": "python-flint Arb balls at 130 decimal digits",
+    "comparison_upper": "[0.4497144724889990183736181355128760295816323587609600875401708961428349500539675779537170276610384926688675942860921672504492088739 +/- 6.81e-131]",
+    "fake_origin": "[0.0737236840145900030120685468053895130461692391411409979574050649414483524678635373694618078132849987981750154567364208607293785039 +/- 2.59e-131]",
+    "identity": "Phi(0)=sum_(n>=1) pi*n^2*(2*pi*n^2-3)*exp(-pi*n^2)",
+    "parameter_region": "Every beta,gamma>=0 with a globally nonnegative residual lies in 0<=beta<27/10, gamma>=0, beta+gamma<51/10.",
+    "partial_cutoff": 8,
+    "partial_sum": "[0.4466969004671234440869846670547091132204243670948249747308518817309554089794572357258691112614035823905223111710911393326434134099 +/- 8.30e-131]",
+    "phi_upper": "[0.4466969004671234440869846670547091132204243670948249747308518817309554089794572357258691112614035823905227072804628016886300533707 +/- 2.94e-131]",
+    "ratio_conclusion": "Phi(0)/(4*pi^2*exp(-2*pi))<61/10, hence beta+gamma<51/10",
+    "rigorous": true,
+    "tail_beta_bound": "beta<=b=pi-3/(2*pi)<821/308<27/10, using pi<22/7",
+    "tail_majorant": "For n>=9, each summand is at most 2*pi^2*n^4*exp(-pi*n^2); successive majorants have ratio at most (10/9)^4*exp(-19*pi).",
+    "tail_ratio": "[1.81919493945887572831380849077790696747061734080659119614165946146539116957567130872650278012870372025359329198842382887503338197e-26 +/- 4.77e-155]",
+    "tail_upper": "[3.9610937166235598663996074677351365176976789540787719671012036591704494608418285688055595996889518616749401304187867635872182266e-106 +/- 5.38e-234]"
+  },
+  "proof_boundary": "This artifact reduces the signed 9/5/1 Polya multiplier hypothesis to a quartic root-location condition, derives a rational rectangle containing every globally positive residual candidate, and covers that rectangle by two Acb Laguerre tests and two exact discriminant exclusions. It closes an independent Laguerre-Polya residual for every signed base certified by this standard universal-factor route. Higher shifts and coupled signed identities remain open; this does not prove or disprove RH or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The signed 9/5/1 multiplier condition is exactly a quartic root-location condition on [0,1].",
+      "diagnostics": {
+        "imaginary_zero_equivalence": "U_(beta,gamma) has only imaginary zeros iff every zero of Q_(beta,gamma) is real and lies in [0,1].",
+        "multiplier": "U_(beta,gamma)(z)=cosh(9z)+beta*cosh(5z)+gamma*cosh(z)",
+        "quartic": "Q_(beta,gamma)(y)=5*beta + gamma + 256*y**4 - 576*y**3 + y**2*(16*beta + 432) - y*(20*beta + 120) + 9",
+        "reason": "cosh(z)=0 is purely imaginary, and cosh(z)^2=r has only purely imaginary solutions exactly when 0<=r<=1.",
+        "reduction": "U_(beta,gamma)(z)=cosh(z)*Q_(beta,gamma)(cosh(z)^2)"
+      },
+      "formula": "U_(beta,gamma)(z)=cosh(z)*Q_(beta,gamma)(cosh(z)^2)",
+      "id": "sufr_01_multiplier_quartic",
+      "proof_boundary": "Exact standard universal-factor hypothesis only; no claim about every possible real-zero proof.",
+      "readiness": "available_exact",
+      "role": "exact_multiplier_reduction"
+    },
+    {
+      "claim": "Every signed universal-factor candidate with globally nonnegative residual lies in one rational outer rectangle.",
+      "diagnostics": {
+        "origin": {
+          "arithmetic": "python-flint Arb balls at 130 decimal digits",
+          "comparison_upper": "[0.4497144724889990183736181355128760295816323587609600875401708961428349500539675779537170276610384926688675942860921672504492088739 +/- 6.81e-131]",
+          "fake_origin": "[0.0737236840145900030120685468053895130461692391411409979574050649414483524678635373694618078132849987981750154567364208607293785039 +/- 2.59e-131]",
+          "identity": "Phi(0)=sum_(n>=1) pi*n^2*(2*pi*n^2-3)*exp(-pi*n^2)",
+          "parameter_region": "Every beta,gamma>=0 with a globally nonnegative residual lies in 0<=beta<27/10, gamma>=0, beta+gamma<51/10.",
+          "partial_cutoff": 8,
+          "partial_sum": "[0.4466969004671234440869846670547091132204243670948249747308518817309554089794572357258691112614035823905223111710911393326434134099 +/- 8.30e-131]",
+          "phi_upper": "[0.4466969004671234440869846670547091132204243670948249747308518817309554089794572357258691112614035823905227072804628016886300533707 +/- 2.94e-131]",
+          "ratio_conclusion": "Phi(0)/(4*pi^2*exp(-2*pi))<61/10, hence beta+gamma<51/10",
+          "rigorous": true,
+          "tail_beta_bound": "beta<=b=pi-3/(2*pi)<821/308<27/10, using pi<22/7",
+          "tail_majorant": "For n>=9, each summand is at most 2*pi^2*n^4*exp(-pi*n^2); successive majorants have ratio at most (10/9)^4*exp(-19*pi).",
+          "tail_ratio": "[1.81919493945887572831380849077790696747061734080659119614165946146539116957567130872650278012870372025359329198842382887503338197e-26 +/- 4.77e-155]",
+          "tail_upper": "[3.9610937166235598663996074677351365176976789540787719671012036591704494608418285688055595996889518616749401304187867635872182266e-106 +/- 5.38e-234]"
+        },
+        "parameter": {
+          "lower_beta": "If Q has roots in [0,1], Q'(1)=40+12*beta>=0, so beta>=-10/3>-17/5.",
+          "lower_sum": "Q(1)=1+beta+gamma=256*product_j(1-r_j)>=0, so s=beta+gamma>=-1.",
+          "rectangle": "-17/5<=beta<11/5, -1<=s=beta+gamma<51/10",
+          "scope": "A rational outer rectangle containing every signed 9/5/1 multiplier that passes the standard imaginary-zero test and leaves a globally nonnegative residual.",
+          "upper_beta": "Rolle gives three real roots of Q', hence f(beta)<=0 for f=32beta^3-297beta^2+1053beta-1215. Since disc(f')=-51516, f is strictly increasing, and f(11/5)=607/125>0, beta<11/5.",
+          "upper_sum": "Global residual nonnegativity at u=0 and the Arb origin bound give s<51/10."
+        }
+      },
+      "formula": "-17/5<=beta<11/5, -1<=s=beta+gamma<51/10",
+      "id": "sufr_02_rational_rectangle",
+      "proof_boundary": "Necessary outer bounds only; membership in the rectangle is not sufficient.",
+      "readiness": "ready_to_apply",
+      "role": "exact_interval_reduction"
+    },
+    {
+      "claim": "Two exact discriminants exclude boxes that cannot contain an imaginary-zero multiplier.",
+      "diagnostics": {
+        "critical_discriminant": "disc_y Q'=-4194304*(32*beta**3 - 297*beta**2 + 1053*beta - 1215)",
+        "critical_factor": "f(beta)=32*beta**3 - 297*beta**2 + 1053*beta - 1215",
+        "exclusions": "f(beta)>0 makes disc(Q')<0, while Delta(beta,gamma)<0 makes disc(Q)<0; either condition excludes four roots in [0,1].",
+        "quartic_discriminant": "disc_y Q=2^24*Delta=-16777216*(20*beta**5 - 16*beta**4*gamma - 64*beta**4 - 124*beta**3*gamma + 184*beta**3 + 128*beta**2*gamma**2 + 384*beta**2*gamma - 432*beta**2 + 48*beta*gamma**2 - 1080*beta*gamma + 972*beta - 256*gamma**3 + 459*gamma**2 + 486*gamma - 729)",
+        "quartic_factor": "Delta(beta,gamma)=-20*beta**5 + 16*beta**4*gamma + 64*beta**4 + 124*beta**3*gamma - 184*beta**3 - 128*beta**2*gamma**2 - 384*beta**2*gamma + 432*beta**2 - 48*beta*gamma**2 + 1080*beta*gamma - 972*beta + 256*gamma**3 - 459*gamma**2 - 486*gamma + 729"
+      },
+      "formula": "f(beta)>0 makes disc(Q')<0, while Delta(beta,gamma)<0 makes disc(Q)<0; either condition excludes four roots in [0,1].",
+      "id": "sufr_03_discriminant_exclusions",
+      "proof_boundary": "Necessary real-rootedness exclusions for Q and Q' only.",
+      "readiness": "guard_validated",
+      "role": "exact_route_guard"
+    },
+    {
+      "claim": "The signed residual first Laguerre expression remains an exact bivariate quadratic.",
+      "diagnostics": {
+        "definitions": "E=H_0-P_(9/4), P5=P_(5/4), P1=P_(1/4)",
+        "identity": "L[R_(beta,gamma)]=L[E]-beta*B[E,P5]-gamma*B[E,P1]+beta^2*L[P5]+beta*gamma*B[P5,P1]+gamma^2*L[P1]"
+      },
+      "formula": "L[R_(beta,gamma)]=L[E]-beta*B[E,P5]-gamma*B[E,P1]+beta^2*L[P5]+beta*gamma*B[P5,P1]+gamma^2*L[P1]",
+      "id": "sufr_04_bivariate_laguerre",
+      "proof_boundary": "Exact algebra used by the adaptive interval cover.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Acb Cauchy certificates enclose the two residual Laguerre quadratics used by the signed cover.",
+      "diagnostics": {
+        "arithmetic": "python-flint Acb/Arb balls at 170 decimal digits",
+        "rows": [
+          {
+            "adaptive_leaf_count": 2329,
+            "cauchy_box_abs_upper": {
+              "E": "2.9580462868928920211475386281563260126858949661254882812500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-12",
+              "P1": "7.5875861985676129866512651389598431705962866544723510742187500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-14",
+              "P5": "1.0246881097757386822402758674854794662678614258766174316406250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-13"
+            },
+            "jets": {
+              "E": [
+                "[1.12168187794422426074892643023054595364798297310718243376837051794659277570500724114445956113486132330729982955231379824492628319481790461125079669220503156018907214835e-13 +/- 1.78e-181]",
+                "[-5.84830e-14 +/- 6.93e-20]",
+                "[5.557e-14 +/- 6.12e-18]"
+              ],
+              "P1": [
+                "[8.02159242994377050654167297619415677490633069736747011647934968697512136369266169994313461916724689028805414329708983575395927462700331226727233566155433709811564907459e-15 +/- 7.72e-183]",
+                "[-7.61431e-15 +/- 5.02e-21]",
+                "[2.938e-15 +/- 1.12e-19]"
+              ],
+              "P5": [
+                "[-5.51119675424170611029583502889838278541443416940989440912734087363300486920062981608298634427295175771695197982050082621163744854168293838093790065929355491694152482546e-14 +/- 1.57e-182]",
+                "[6.76182e-15 +/- 1.81e-21]",
+                "[1.5286e-14 +/- 1.06e-19]"
+              ]
+            },
+            "laguerre_coefficients": {
+              "c00": "[-2.813e-27 +/- 6.20e-31]",
+              "c_beta": "[-5.57e-28 +/- 4.11e-31]",
+              "c_beta2": "[8.8817e-28 +/- 9.30e-33]",
+              "c_beta_gamma": "[-6.367e-29 +/- 4.37e-33]",
+              "c_gamma": "[-1.153e-28 +/- 5.79e-32]",
+              "c_gamma2": "[3.4410e-29 +/- 6.90e-34]"
+            },
+            "x": "86"
+          },
+          {
+            "adaptive_leaf_count": 1281,
+            "cauchy_box_abs_upper": {
+              "E": "5.4746480644670734576559149647465019050684986723354086279869079589843750000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-18",
+              "P1": "4.1200051603018163586251508925025616170145781325118150562047958374023437500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-20",
+              "P5": "9.2741892362795847225069300557502398330012027827251586131751537322998046875000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-20"
+            },
+            "jets": {
+              "E": [
+                "[3.94040540664337356016509570614880855170773451886156500305013253318231827987483610112507039794059842384679747767298632456846211034367497928919431741939290834647325960586e-19 +/- 2.90e-187]",
+                "[-1.37890e-19 +/- 5.39e-25]",
+                "[7.421e-20 +/- 8.48e-24]"
+              ],
+              "P1": [
+                "[4.97680903544062788088979160364102402407068347834656811132627596772420739760034825710073515854732228103046482904121440656480827292737312224265041625589576407017297051025e-21 +/- 4.17e-189]",
+                "[-5.340776e-21 +/- 7.37e-28]",
+                "[1.8401e-21 +/- 8.02e-26]"
+              ],
+              "P5": [
+                "[-5.18361868393721101429682891225707256429447486460342846488384690968173133883843548247453575250773649342773596644162651115412950412514272328865076912802573783142807996887e-20 +/- 5.35e-188]",
+                "[3.39594e-21 +/- 3.37e-27]",
+                "[2.16386e-20 +/- 7.86e-26]"
+              ]
+            },
+            "laguerre_coefficients": {
+              "c00": "[-1.023e-38 +/- 5.40e-42]",
+              "c_beta": "[5.616e-39 +/- 7.24e-43]",
+              "c_beta2": "[1.13319e-39 +/- 8.36e-45]",
+              "c_beta_gamma": "[-4.858e-41 +/- 3.27e-45]",
+              "c_gamma": "[-3.785e-40 +/- 5.21e-44]",
+              "c_gamma2": "[1.9366e-41 +/- 3.46e-46]"
+            },
+            "x": "122"
+          }
+        ],
+        "spectral_points": [
+          "86",
+          "122"
+        ]
+      },
+      "formula": "Central differences use h=1e-6. Acb boxes of radius 0.1 bound each component on Cauchy circles of radius 0.04; the added f' and f'' errors are h^2*M/r^3 and 2*h^2*M/r^4.",
+      "id": "sufr_05_acb_spectral_jets",
+      "proof_boundary": "Finite spectral points x=86 and x=122 at t=0.",
+      "readiness": "interval_validated",
+      "role": "interval_method"
+    },
+    {
+      "claim": "A 4,094-leaf adaptive rational cover classifies every point of the necessary signed rectangle.",
+      "diagnostics": {
+        "classification_counts": {
+          "critical_discriminant": 240,
+          "laguerre_x122": 1281,
+          "laguerre_x86": 2329,
+          "quartic_discriminant": 244
+        },
+        "classification_logic": "A leaf is accepted by L[R](86)<0, then L[R](122)<0, then f(beta)>0 (so disc Q'<0), then Delta(beta,gamma)<0 (so disc Q<0). Otherwise it is bisected in both coordinates.",
+        "classification_order": [
+          "laguerre_x86",
+          "laguerre_x122",
+          "critical_discriminant",
+          "quartic_discriminant"
+        ],
+        "closest_certified_bounds": {
+          "critical_discriminant": "[0.41944723042845726013183593749999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999997 +/- 3.92e-171]",
+          "laguerre_x122": "[-1.5636889595661975973706309021175809109054454705725417304447306175112712510179248034947185885812359629198908805847167968750000000000000000000000000000000000000000000000000e-38 +/- 4.67e-209]",
+          "laguerre_x86": "[-7.8739077202342654315823889532094668622128382486602372284517636913392379938159137964248657226562500000000000000000000000000000000000000000000000000000000000000000000009583e-32 +/- 4.64e-202]",
+          "quartic_discriminant": "[-0.19827340506434440612792968749999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999699 +/- 3.16e-171]"
+        },
+        "coordinates": "beta and s=beta+gamma",
+        "depth_counts": {
+          "0": 3400,
+          "1": 41,
+          "2": 54,
+          "3": 86,
+          "4": 197,
+          "5": 252,
+          "6": 64
+        },
+        "depth_limit": 14,
+        "initial_beta_cells": 56,
+        "initial_boxes": 3416,
+        "initial_cell_width": "1/10",
+        "initial_sum_cells": 61,
+        "leaf_count": 4094,
+        "leaf_sha256": "fbc1f39873be290c8b2b976396d5cf778d8604c008bfa053fa397f9e4c57b69e",
+        "maximum_depth": 6,
+        "rectangle": "[-17/5,11/5] x [-1,51/10]",
+        "unresolved_boxes": 0
+      },
+      "formula": "Every point in the necessary signed rectangle either has a strictly negative residual Laguerre value at x=86 or x=122, or is rigorously excluded from the Polya imaginary-zero multiplier cone by a negative critical or quartic discriminant.",
+      "id": "sufr_06_adaptive_rectangle_cover",
+      "proof_boundary": "Complete for the stated rectangle and four classification tests; not higher-block structure.",
+      "readiness": "interval_validated",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "No signed 9/5/1 base certified by the standard Polya factor theorem leaves a globally positive independently-LP residual.",
+      "diagnostics": {
+        "cover": {
+          "classification_counts": {
+            "critical_discriminant": 240,
+            "laguerre_x122": 1281,
+            "laguerre_x86": 2329,
+            "quartic_discriminant": 244
+          },
+          "classification_logic": "A leaf is accepted by L[R](86)<0, then L[R](122)<0, then f(beta)>0 (so disc Q'<0), then Delta(beta,gamma)<0 (so disc Q<0). Otherwise it is bisected in both coordinates.",
+          "classification_order": [
+            "laguerre_x86",
+            "laguerre_x122",
+            "critical_discriminant",
+            "quartic_discriminant"
+          ],
+          "closest_certified_bounds": {
+            "critical_discriminant": "[0.41944723042845726013183593749999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999997 +/- 3.92e-171]",
+            "laguerre_x122": "[-1.5636889595661975973706309021175809109054454705725417304447306175112712510179248034947185885812359629198908805847167968750000000000000000000000000000000000000000000000000e-38 +/- 4.67e-209]",
+            "laguerre_x86": "[-7.8739077202342654315823889532094668622128382486602372284517636913392379938159137964248657226562500000000000000000000000000000000000000000000000000000000000000000000009583e-32 +/- 4.64e-202]",
+            "quartic_discriminant": "[-0.19827340506434440612792968749999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999699 +/- 3.16e-171]"
+          },
+          "coordinates": "beta and s=beta+gamma",
+          "depth_counts": {
+            "0": 3400,
+            "1": 41,
+            "2": 54,
+            "3": 86,
+            "4": 197,
+            "5": 252,
+            "6": 64
+          },
+          "depth_limit": 14,
+          "initial_beta_cells": 56,
+          "initial_boxes": 3416,
+          "initial_cell_width": "1/10",
+          "initial_sum_cells": 61,
+          "leaf_count": 4094,
+          "leaf_sha256": "fbc1f39873be290c8b2b976396d5cf778d8604c008bfa053fa397f9e4c57b69e",
+          "maximum_depth": 6,
+          "rectangle": "[-17/5,11/5] x [-1,51/10]",
+          "unresolved_boxes": 0
+        },
+        "parameter": {
+          "lower_beta": "If Q has roots in [0,1], Q'(1)=40+12*beta>=0, so beta>=-10/3>-17/5.",
+          "lower_sum": "Q(1)=1+beta+gamma=256*product_j(1-r_j)>=0, so s=beta+gamma>=-1.",
+          "rectangle": "-17/5<=beta<11/5, -1<=s=beta+gamma<51/10",
+          "scope": "A rational outer rectangle containing every signed 9/5/1 multiplier that passes the standard imaginary-zero test and leaves a globally nonnegative residual.",
+          "upper_beta": "Rolle gives three real roots of Q', hence f(beta)<=0 for f=32beta^3-297beta^2+1053beta-1215. Since disc(f')=-51516, f is strictly increasing, and f(11/5)=607/125>0, beta<11/5.",
+          "upper_sum": "Global residual nonnegativity at u=0 and the Arb origin bound give s<51/10."
+        }
+      },
+      "formula": "This exhausts signed 9/5/1 bases certified by the standard Polya universal-factor hypothesis when their residual kernel is globally nonnegative and is treated as an independent Laguerre-Polya block. It does not reject higher shifts or a coupled signed identity.",
+      "id": "sufr_07_signed_universal_obstruction",
+      "proof_boundary": "Rejects this decomposition architecture only; it does not prove or disprove RH.",
+      "readiness": "ready_to_apply",
+      "role": "exact_interval_composition"
+    },
+    {
+      "claim": "The surviving Gasper route needs higher shifts or one coupled signed square rather than independent LP summands.",
+      "diagnostics": null,
+      "formula": "Control all mixed terms after modular cancellation in one matrix-valued identity.",
+      "id": "sufr_08_coupled_handoff",
+      "proof_boundary": "Open theorem target; not strict Laguerre positivity, RH, or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "sources": [
+    "outputs/jensen_window_pf_newman_classical_three_block_residual_gate.md",
+    "outputs/jensen_window_pf_newman_gasper_residual_two_block_gate.md",
+    "outputs/formal_core.md",
+    "https://arxiv.org/abs/0801.2996",
+    "https://arxiv.org/abs/1502.06844",
+    "https://doi.org/10.1007/BF02565336"
+  ],
+  "status": "exact and interval-certified signed universal-factor residual obstruction"
+}

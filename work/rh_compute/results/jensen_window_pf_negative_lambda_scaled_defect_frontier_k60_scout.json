@@ -1,0 +1,184 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_scaled_defect_frontier_scout.py",
+  "date": "2026-07-06",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k60.jsonl"
+  ],
+  "finite_diagnostics": {
+    "checked_x_max": 59,
+    "coefficient_k_max": 60,
+    "cone_positive_rows": 177,
+    "half_width_positive_rows": 177,
+    "lambda_frontiers": [
+      {
+        "checked_x_max": 59,
+        "cone_positive_rows": 59,
+        "first_one_third_failure_k": null,
+        "first_one_third_failure_margin": null,
+        "half_width_positive_rows": 59,
+        "lam": "-100.0",
+        "max_scaled_defect": {
+          "k": 59,
+          "lam": "-100.0",
+          "sample": "2.539780558950884235E-1"
+        },
+        "min_cone_margin": {
+          "k": 1,
+          "lam": "-100.0",
+          "sample": "1.346067912947116963E-2"
+        },
+        "min_half_width_margin": {
+          "k": 59,
+          "lam": "-100.0",
+          "sample": "2.460219441049115765E-1"
+        },
+        "one_third_positive_rows": 59
+      },
+      {
+        "checked_x_max": 59,
+        "cone_positive_rows": 59,
+        "first_one_third_failure_k": 51,
+        "first_one_third_failure_margin": "-2.719207370662713847E-4",
+        "half_width_positive_rows": 59,
+        "lam": "-50.0",
+        "max_scaled_defect": {
+          "k": 59,
+          "lam": "-50.0",
+          "sample": "3.533907112847882969E-1"
+        },
+        "min_cone_margin": {
+          "k": 1,
+          "lam": "-50.0",
+          "sample": "3.009677639167511887E-2"
+        },
+        "min_half_width_margin": {
+          "k": 59,
+          "lam": "-50.0",
+          "sample": "1.466092887152117031E-1"
+        },
+        "one_third_positive_rows": 50
+      },
+      {
+        "checked_x_max": 59,
+        "cone_positive_rows": 59,
+        "first_one_third_failure_k": 31,
+        "first_one_third_failure_margin": "-1.768768251686068314E-3",
+        "half_width_positive_rows": 59,
+        "lam": "-25.0",
+        "max_scaled_defect": {
+          "k": 59,
+          "lam": "-25.0",
+          "sample": "4.124052882015568604E-1"
+        },
+        "min_cone_margin": {
+          "k": 1,
+          "lam": "-25.0",
+          "sample": "5.195327018748652727E-2"
+        },
+        "min_half_width_margin": {
+          "k": 59,
+          "lam": "-25.0",
+          "sample": "8.759471179844313957E-2"
+        },
+        "one_third_positive_rows": 30
+      }
+    ],
+    "lambdas": [
+      "-100.0",
+      "-50.0",
+      "-25.0"
+    ],
+    "max_scaled_defect": {
+      "k": 59,
+      "lam": "-25.0",
+      "sample": "4.124052882015568604E-1"
+    },
+    "min_cone_margin": {
+      "k": 1,
+      "lam": "-100.0",
+      "sample": "1.346067912947116963E-2"
+    },
+    "min_half_width_margin": {
+      "k": 59,
+      "lam": "-25.0",
+      "sample": "8.759471179844313957E-2"
+    },
+    "min_one_third_margin": {
+      "k": 59,
+      "lam": "-25.0",
+      "sample": "-7.907195486822352710E-2"
+    },
+    "min_scaled_defect_increase": {
+      "k": 58,
+      "lam": "-25.0",
+      "sample": "1.988804647851078841E-3"
+    },
+    "one_third_failure_rows": 38,
+    "one_third_positive_rows": 139,
+    "scaled_defect_increase_positive_rows": 174,
+    "scaled_defect_increase_rows": 174,
+    "scaled_defect_rows": 177
+  },
+  "frontier_rows": [
+    {
+      "claim": "The exact lower-wall scaled defect satisfies 0 <= s_k <= 1 on every checked row.",
+      "id": "nlsdf_01_exact_cone_scaled_defect",
+      "positive_rows": 177,
+      "proof_boundary": "Finite prefix only; not an all-k tail theorem.",
+      "role": "finite_barrier_certificate",
+      "rows": 177
+    },
+    {
+      "claim": "The half-width buffer s_k <= 1/2 holds on every checked row.",
+      "id": "nlsdf_02_half_width_buffer",
+      "positive_rows": 177,
+      "proof_boundary": "Finite prefix only; not an all-k half-width theorem.",
+      "role": "live_sufficient_buffer",
+      "rows": 177
+    },
+    {
+      "claim": "The one-third-width buffer s_k <= 1/3 fails before the end of the checked k60 prefix.",
+      "failure_rows": 38,
+      "id": "nlsdf_03_one_third_frontier",
+      "positive_rows": 139,
+      "proof_boundary": "Finite obstruction to this stronger buffer only.",
+      "role": "frontier_obstruction",
+      "rows": 177
+    },
+    {
+      "claim": "The scaled defect is increasing on every checked adjacent row, rejecting scaled-defect nonincrease.",
+      "id": "nlsdf_04_scaled_defect_increase",
+      "positive_rows": 174,
+      "proof_boundary": "Finite rejection of one shortcut only.",
+      "role": "rejected_candidate",
+      "rows": 174
+    }
+  ],
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_scaled_defect_frontier_scout.py",
+  "invariants": [
+    "The exact cone barrier remains finite evidence only.",
+    "The half-width buffer is a finite candidate, not a theorem.",
+    "The one-third-width route is not promoted as an all-k sufficient condition.",
+    "The scaled-defect nonincrease shortcut remains rejected.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_scaled_defect_frontier_scout",
+  "note": "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k60_scout.md",
+  "proof_boundary": "Finite scaled-defect frontier diagnostic only. It distinguishes the exact cone barrier, the half-width buffer, and the one-third-width buffer on the checked negative-lambda prefix, but it does not prove an all-k tail theorem, cone entry, jwpf_06, RH, or Lambda <= 0.",
+  "result_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_scaled_defect_frontier_k60_scout.json",
+  "source_defect_tail_target": "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md",
+  "source_tail_barrier_scout": "outputs/jensen_window_pf_negative_lambda_tail_barrier_k60_scout.md",
+  "status": "finite theorem-search diagnostic",
+  "summary": {
+    "cone_positive_rows": 177,
+    "half_width_positive_rows": 177,
+    "main_finding": "On the k60 negative-lambda prefix, the exact scaled-defect cone 0<=s_k<=1 and the half-width buffer s_k<=1/2 hold on every checked row, while the one-third buffer holds on only 139/177 rows. Thus the previous one-third sufficient route is too strong for the observed prefix; any analytic tail theorem should target the exact cone or a weaker buffer such as one-half.",
+    "one_third_failure_rows": 38,
+    "one_third_positive_rows": 139,
+    "ready_to_apply_rows": 0,
+    "scaled_defect_increase_positive_rows": 174,
+    "scaled_defect_increase_rows": 174,
+    "scaled_defect_rows": 177,
+    "target_closing": false
+  }
+}

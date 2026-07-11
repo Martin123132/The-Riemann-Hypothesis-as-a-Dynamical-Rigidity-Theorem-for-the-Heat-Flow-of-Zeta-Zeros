@@ -1,0 +1,108 @@
+{
+  "date": "2026-07-06",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k0_k9.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k10_k20.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k21_k32.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k33_k48.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k49_k64.jsonl"
+  ],
+  "exact_rows": [
+    {
+      "egf": "sum_{k>=0} gamma_k*z^k/k! = cosh(sqrt(z))",
+      "formula": "gamma_k = k!/(2*k)!",
+      "id": "fm_01_factorial_multiplier_sequence",
+      "proof_boundary": "Multiplier-sequence fact only; it preserves real-rootedness under its hypotheses but does not create the missing input theorem.",
+      "readiness": "conditional_only",
+      "reason": "cosh(sqrt(z)) has only real nonpositive zeros in the z-plane; its derivatives give the shifted sequences gamma_{n+j}.",
+      "role": "standard_multiplier_sequence"
+    },
+    {
+      "conditional_claim": "If M_{d,n}(x)=sum_j binom(d,j)*mu_{2*(n+j)}*x^j has real nonpositive zeros, then P_{d,n}(x) does too.",
+      "formula": "P_{d,n}(x)=sum_j binom(d,j)*gamma_{n+j}*mu_{2*(n+j)}*x^j",
+      "id": "fm_02_shifted_window_preserver",
+      "proof_boundary": "Conditional P\u00f3lya-Schur reduction only; the raw moment-window hypothesis is not proved and is false at degree 2 for nondegenerate positive moment weights.",
+      "readiness": "not_ready_to_apply",
+      "role": "conditional_transfer"
+    },
+    {
+      "formula": "Delta_2(M_{2,n}) = 4*(mu_{2*n+2}^2 - mu_{2*n}*mu_{2*n+4}) <= 0",
+      "id": "fm_03_raw_moment_degree2_anti_alignment",
+      "proof_boundary": "Exact degree-2 obstruction to the raw moment-window input theorem; not a statement about all normalized Jensen windows.",
+      "readiness": "not_ready_to_apply",
+      "reason": "Cauchy-Schwarz for the positive Newman/Phi moment weight gives raw moment log-convexity, the opposite sign from degree-2 hyperbolicity for positive coefficients.",
+      "role": "exact_obstruction"
+    },
+    {
+      "formula": "A_{n+1}^2 >= A_n*A_{n+2} iff mu_{2*n+2}^2/(mu_{2*n}*mu_{2*n+4}) >= (2*n+1)/(2*n+3)",
+      "id": "fm_04_normalized_degree2_threshold",
+      "proof_boundary": "Degree-2 normalization threshold only; it does not prove higher Jensen-window PF minors.",
+      "readiness": "available_low_degree_only",
+      "reason": "gamma_n*gamma_{n+2}/gamma_{n+1}^2 = (2*n+1)/(2*n+3).",
+      "role": "exact_normalization_threshold"
+    },
+    {
+      "formula": "factorial multiplier route = preserver theorem + missing Xi/Phi-specific input theorem",
+      "id": "fm_05_route_verdict",
+      "proof_boundary": "Route-selection boundary only; no all-degree/all-shift bridge theorem is proved.",
+      "readiness": "not_ready_to_apply",
+      "reason": "The preserver component is standard, while raw Stieltjes moment positivity supplies anti-hyperbolic degree-2 windows; the route must instead prove a normalized ratio-cone, determinant-integral, or Schur-positive theorem.",
+      "role": "route_boundary"
+    }
+  ],
+  "finite_diagnostics": {
+    "lambdas": [
+      "0.0",
+      "0.000001",
+      "0.0001",
+      "0.01",
+      "0.1"
+    ],
+    "max_coefficient_index": 64,
+    "max_raw_discriminant": {
+      "lam": "0.0",
+      "n": 62,
+      "sample": "-3.575201093265539228E-80"
+    },
+    "min_normalized_discriminant": {
+      "lam": "0.0",
+      "n": 62,
+      "sample": "2.277193819536730908E-328"
+    },
+    "min_normalized_threshold_margin": {
+      "lam": "0.0",
+      "n": 62,
+      "sample": "7.510922618285697771E-3"
+    },
+    "normalized_degree2_positive_rows": 315,
+    "normalized_degree2_rows": 315,
+    "normalized_threshold_positive_rows": 315,
+    "normalized_threshold_rows": 315,
+    "raw_degree2_negative_rows": 315,
+    "raw_degree2_rows": 315,
+    "raw_ratio_below_one_rows": 315
+  },
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The shifted multiplier sequence is used only conditionally.",
+    "Raw moment positivity is not promoted to Jensen-window hyperbolicity.",
+    "Degree-2 normalized positivity is not promoted to Jensen-window PF-infinity.",
+    "Endpoint PF, Jensen hyperbolicity, Laguerre-Polya membership, RH, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_factorial_multiplier_split_audit",
+  "proof_boundary": "Finite theorem-search diagnostic plus exact low-degree algebra only. It records that the factorial multiplier gamma_k=k!/(2*k)! is a conditional P\u00f3lya-Schur preserver for shifted windows, and that raw moment-window hyperbolicity is not a valid input theorem. It does not prove Jensen-window PF-infinity, Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0.",
+  "source_coefficient_pf_obstruction": "outputs/coefficient_pf_bridge_obstruction.md",
+  "source_heat_flow_boundary_threshold": "outputs/jensen_window_pf_heat_flow_boundary_threshold_lemma.md",
+  "source_sign_regular_transfer_gap": "outputs/jensen_window_pf_sign_regular_transfer_gap_matrix.md",
+  "status": "finite_theorem_search_diagnostic",
+  "summary": {
+    "exact_rows": 5,
+    "main_finding": "The factorial multiplier gamma_k=k!/(2*k)! is not the missing bridge by itself. It gives a clean conditional preservation step for shifted windows, but the natural raw moment-window input theorem is anti-aligned at degree 2. The useful route is therefore a normalized Xi/Phi-specific ratio-cone, determinant integral, or Schur-positive theorem, not raw moment positivity.",
+    "normalized_degree2_positive_rows": 315,
+    "normalized_degree2_rows": 315,
+    "raw_degree2_negative_rows": 315,
+    "raw_degree2_rows": 315,
+    "ready_to_apply_rows": 0,
+    "target_closing": false
+  }
+}

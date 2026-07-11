@@ -1,0 +1,121 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_t1156_monotone_wall_counterexample_certificate.py",
+  "date": "2026-07-10",
+  "diagnostics": {
+    "T": 1156,
+    "all_source_coefficients_positive": true,
+    "both_contractions_inside_upper_wall": true,
+    "coefficient_balls": {
+      "119": "[1.54193974191734875753489422699048332657449825240E-440 +/- 3.71E-488]",
+      "120": "[3.18295807046355613614511076212638615128587047438E-444 +/- 4.98E-492]",
+      "121": "[6.56966006747723906065353299724230618339304421E-448 +/- 7.43E-493]",
+      "122": "[1.3558240630024095039138386579374530206909179E-451 +/- 4.11E-495]"
+    },
+    "coefficient_indices": [
+      119,
+      120,
+      121,
+      122
+    ],
+    "lambda": "-1156",
+    "log_x_121_over_x_120_ball": "[-1.68457114156376793080407845822737199E-8 +/- 8.14E-44]",
+    "log_x_121_over_x_120_upper": "-1.684571141563767930804078458227371981866190171040020862453225189194760E-8",
+    "monotone_wall_strictly_violated": true,
+    "polynomial_witness_ball": "[-7.3652153656077192040505304802215995E-1790 +/- 1.60E-1825]",
+    "polynomial_witness_upper": "-7.365215365607719204050530480221599484085205072752744395183855143168049E-1790",
+    "violated_wall_index": 120,
+    "x_120_ball": "[0.99988134408769009708577622685369921860954640 +/- 4.16E-45]",
+    "x_121_ball": "[0.9998813272439776665767885382673292264809601 +/- 4.01E-44]",
+    "x_121_minus_x_120_ball": "[-1.68437124305089876885863699921285863E-8 +/- 3.82E-44]",
+    "x_121_minus_x_120_upper": "-1.684371243050898768858636999212858627089898559583466809242237561908850E-8"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_t1156_monotone_wall_counterexample_certificate.py",
+  "kind": "jensen_window_pf_negative_lambda_t1156_monotone_wall_counterexample_certificate",
+  "proof_boundary": "This interval certificate proves one actual zeta-kernel adjacent-k violation at lambda=-1156. It blocks all-k cone entry at that parameter and universal promotion of the fixed-k T>=1156 collar. It does not disprove cone entry at another lambda, does not disprove Jensen-window PF-infinity or RH, and does not prove Lambda <= 0.",
+  "rows": [
+    {
+      "claim": "ACB integration plus analytic n-series and u-tail bounds encloses A_119 through A_122 at lambda=-1156.",
+      "diagnostics": {
+        "all_source_coefficients_positive": true,
+        "coefficient_indices": [
+          119,
+          120,
+          121,
+          122
+        ]
+      },
+      "id": "t1156mwc_01_rigorous_coefficient_source",
+      "proof_boundary": "Four coefficient enclosures at one heat parameter only.",
+      "role": "interval_input"
+    },
+    {
+      "claim": "x_120=A_121*A_119/A_120^2 and x_121=A_122*A_120/A_121^2.",
+      "diagnostics": null,
+      "id": "t1156mwc_02_exact_contraction_reduction",
+      "proof_boundary": "Exact ratio algebra only.",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "Both x_120 and x_121 are strictly between zero and one.",
+      "diagnostics": {
+        "x_120_ball": "[0.99988134408769009708577622685369921860954640 +/- 4.16E-45]",
+        "x_121_ball": "[0.9998813272439776665767885382673292264809601 +/- 4.01E-44]"
+      },
+      "id": "t1156mwc_03_upper_wall_occupancy",
+      "proof_boundary": "Two contractions at lambda=-1156 only; the global upper wall is proved separately.",
+      "role": "interval_evaluation"
+    },
+    {
+      "claim": "Arb certifies x_121-x_120<0, so the adjacent-k monotone wall fails for the actual zeta kernel at lambda=-1156 and k=120.",
+      "diagnostics": {
+        "gap_ball": "[-1.68437124305089876885863699921285863E-8 +/- 3.82E-44]",
+        "gap_upper": "-1.684371243050898768858636999212858627089898559583466809242237561908850E-8"
+      },
+      "id": "t1156mwc_04_strict_monotone_wall_violation",
+      "proof_boundary": "A strict local zeta-kernel counterexample, not a statement about every lambda or every k.",
+      "role": "interval_counterexample"
+    },
+    {
+      "claim": "The equivalent polynomial A_122*A_120^3-A_121^3*A_119 is strictly negative.",
+      "diagnostics": {
+        "polynomial_upper": "-7.365215365607719204050530480221599484085205072752744395183855143168049E-1790"
+      },
+      "id": "t1156mwc_05_polynomial_witness",
+      "proof_boundary": "Equivalent cross-multiplied witness using positive enclosed coefficients.",
+      "role": "interval_counterexample"
+    },
+    {
+      "claim": "The fixed-k=22 theorem for every T>=1156 cannot be promoted to an all-k cone theorem at T=1156.",
+      "diagnostics": null,
+      "id": "t1156mwc_06_fixed_k_promotion_gate",
+      "proof_boundary": "Blocks that promotion only; the certified fixed-k=22 theorem remains valid.",
+      "role": "non_promotion_gate"
+    },
+    {
+      "claim": "A surviving cone-entry route must use a different entry time with a finite collar plus an eventual-k theorem, or avoid the monotone cone.",
+      "diagnostics": null,
+      "id": "t1156mwc_07_revised_tail_handoff",
+      "proof_boundary": "Research redirection only; no moderate-T all-k theorem or cone entry is claimed.",
+      "role": "theorem_search_handoff"
+    }
+  ],
+  "source_cone_entry_target": "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+  "source_enclosure_generator": "work/rh_compute/scripts/acb_coefficient_enclosures.py",
+  "source_enclosure_jsonl": "work/rh_compute/results/acb_enclosures_lambda_m1156_k119_k122_dps250.jsonl",
+  "source_enclosure_summary": "work/rh_compute/results/acb_enclosures_lambda_m1156_k119_k122_dps250_summary.json",
+  "source_fixed_k_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_full_real_T_fixed_k_stencil_certificate.md",
+  "source_generation_command": "python work/rh_compute/scripts/acb_coefficient_enclosures.py --lambdas=-1156 --k-min 119 --k-max 122 --n-sum 20 --cutoff 2 --dps 250 --digits 100 --abs-tol 1e-220 --constant-terms 40 --output-dir work/rh_compute/results --run-id acb_enclosures_lambda_m1156_k119_k122_dps250 --overwrite",
+  "source_tail_bounds": "work/rh_compute/scripts/coefficient_tail_bounds.py",
+  "status": "interval zeta-kernel counterexample certificate",
+  "summary": {
+    "certificate_rows": 7,
+    "fixed_k_t1156_all_k_promotion_blocked": true,
+    "gap_upper": "-1.684371243050898768858636999212858627089898559583466809242237561908850E-8",
+    "log_ratio_upper": "-1.684571141563767930804078458227371981866190171040020862453225189194760E-8",
+    "main_finding": "Rigorous ACB coefficient enclosures for the actual Newman kernel at lambda=-1156 give x_121-x_120<0, with an upper enclosure below -1.68e-8. Thus the adjacent-k monotone wall fails at k=120 even though both contractions remain below one. The fixed-k=22 T>=1156 certificate is valid, but T=1156 cannot be an all-k cone-entry time.",
+    "source_coefficient_rows": 4,
+    "upper_wall_contractions": 2,
+    "violated_wall_index": 120,
+    "zeta_monotone_wall_violations": 1
+  }
+}

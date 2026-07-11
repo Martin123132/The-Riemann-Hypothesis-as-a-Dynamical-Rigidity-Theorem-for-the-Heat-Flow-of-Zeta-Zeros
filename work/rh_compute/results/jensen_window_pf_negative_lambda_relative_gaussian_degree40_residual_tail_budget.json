@@ -1,0 +1,238 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_degree40_residual_tail_budget.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_degree40_residual_tail_budget.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The value and derivative residual-tail bounds are sufficient targets, not proved estimates.",
+    "The finite degree-42..80 tail profile is not promoted to an infinite-tail theorem.",
+    "The result is fixed at k=22 and is not an all-k theorem.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_degree40_residual_tail_budget",
+  "matrix_rows": [
+    {
+      "claim": "Write the full multiplier as F_i(u)=P_i^(40)(u)+R_i(u), where P_i^(40) is the degree-40 finite surrogate and R_i is the residual tail from j=21 onward.",
+      "id": "nlrgd40rtb_01_residual_coordinate",
+      "proof_boundary": "Exact residual bookkeeping only; it does not bound R_i.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree40_arb_collar_ladder_stress.md"
+      ]
+    },
+    {
+      "claim": "The degree-40 Arb collar supplies finite lower margins for the normalizers, B product, companion product, and weighted-gap derivative numerator on 0<=u<=1/1156.",
+      "diagnostics": {
+        "budget_inequality_row_count": 5,
+        "budget_inequality_rows": [
+          {
+            "allocated_margin": "2.198139674637756280E-01",
+            "bound_at_half_safety": "3.484466661937167012E-10",
+            "half_safety_budget": "5.382819486765314521E-01",
+            "limiting": false,
+            "name": "normalizer_value_residual",
+            "proof_boundary": "Sufficient normalizer positivity budget only; the residual estimate is not proved.",
+            "raw_threshold": "3.395695876365208626E+08",
+            "residual_input": "|R_i(u)| <= A*u^3"
+          },
+          {
+            "allocated_margin": "1.860167864518255953E+01",
+            "bound_at_half_safety": "1.862567296783089075E-03",
+            "half_safety_budget": "5.382819486765314521E-01",
+            "limiting": false,
+            "name": "B_product_value_residual",
+            "proof_boundary": "Sufficient B-product perturbation budget only; the residual estimate is not proved.",
+            "raw_threshold": "5.375875774509763687E+03",
+            "residual_input": "|R_i(u)| <= A*u^3"
+          },
+          {
+            "allocated_margin": "8.612511187827506021E+00",
+            "bound_at_half_safety": "4.306255591663002313E+00",
+            "half_safety_budget": "5.382819486765314521E-01",
+            "limiting": true,
+            "name": "companion_product_value_residual",
+            "proof_boundary": "Sufficient companion-product perturbation budget only; the residual estimate is not proved.",
+            "raw_threshold": "1.076563897353062904E+00",
+            "residual_input": "|R_i(u)| <= A*u^3"
+          },
+          {
+            "allocated_margin": "6.856100606742001169E+00",
+            "bound_at_half_safety": "4.080612044257607152E-01",
+            "half_safety_budget": "5.382819486765314521E-01",
+            "limiting": false,
+            "name": "weighted_gap_value_residual",
+            "proof_boundary": "Sufficient weighted-gap value-residual budget only; the residual estimate is not proved.",
+            "raw_threshold": "9.044023628251490976E+00",
+            "residual_input": "|R_i(u)| <= A*u^3"
+          },
+          {
+            "allocated_margin": "6.856100606742001169E+00",
+            "bound_at_half_safety": "3.428050303371000584E+00",
+            "half_safety_budget": "9.315354075509573936E-03",
+            "limiting": true,
+            "name": "weighted_gap_derivative_residual",
+            "proof_boundary": "Sufficient weighted-gap derivative-residual budget only; the residual derivative estimate is not proved.",
+            "raw_threshold": "1.863070815101914787E-02",
+            "residual_input": "|R_i'(u)| <= B*u"
+          }
+        ],
+        "derivative_residual_half_safety_budget_B": "9.315354075509573936E-03",
+        "finite_collar_margins": {
+          "B_product_min_lower": "[37.2033572903651204156102209610 +/- 2.68e-29]",
+          "companion_product_min_lower": "[17.2250223756550133023672457518 +/- 2.11e-29]",
+          "finite_derivative_abs_upper": "[917.618341545662737252398795656 +/- 4.88e-28]",
+          "finite_normalizer_abs_upper": "[1.00000000000000000000000000000 +/- 1e-34]",
+          "normalizer_min_lower": "[0.439627934927551258358085649181 +/- 2.62e-31]",
+          "weighted_gap_derivative_min_lower": "[27.4244024269680055723947152492 +/- 3.52e-29]"
+        },
+        "finite_tail_profile_row_count": 4,
+        "finite_tail_profile_rows": [
+          {
+            "derivative_budget_fraction": "[0.000134001677480446364 +/- 4.16e-23]",
+            "derivative_scale_sum": "[1.24827307244259553e-6 +/- 2.35e-24]",
+            "index": 21,
+            "largest_derivative_term_degree": 42,
+            "largest_value_term_degree": 42,
+            "proof_boundary": "Finite tail-profile diagnostic only; not a bound for the infinite residual beyond the sampled range.",
+            "term_degree_range": "42..80",
+            "value_budget_fraction": "[0.000125542567495511743 +/- 1.93e-23]",
+            "value_scale_sum": "[6.75772978733390378e-5 +/- 4.86e-23]"
+          },
+          {
+            "derivative_budget_fraction": "[0.000267227352867346908 +/- 9.09e-23]",
+            "derivative_scale_sum": "[2.48931741062047505e-6 +/- 1.22e-24]",
+            "index": 22,
+            "largest_derivative_term_degree": 42,
+            "largest_value_term_degree": 42,
+            "proof_boundary": "Finite tail-profile diagnostic only; not a bound for the infinite residual beyond the sampled range.",
+            "term_degree_range": "42..80",
+            "value_budget_fraction": "[0.000250228988828346650 +/- 3.53e-22]",
+            "value_scale_sum": "[0.000134693747721880453 +/- 3.51e-22]"
+          },
+          {
+            "derivative_budget_fraction": "[0.000521239897545509047 +/- 4.75e-22]",
+            "derivative_scale_sum": "[4.85553420391875047e-6 +/- 3.73e-25]",
+            "index": 23,
+            "largest_derivative_term_degree": 42,
+            "largest_value_term_degree": 42,
+            "proof_boundary": "Finite tail-profile diagnostic only; not a bound for the infinite residual beyond the sampled range.",
+            "term_degree_range": "42..80",
+            "value_budget_fraction": "[0.000487828627931362480 +/- 3.38e-22]",
+            "value_scale_sum": "[0.000262589344463092416 +/- 1.43e-22]"
+          },
+          {
+            "derivative_budget_fraction": "[0.000995886692207194084 +/- 4.49e-22]",
+            "derivative_scale_sum": "[9.27703715699803406e-6 +/- 6.23e-25]",
+            "index": 24,
+            "largest_derivative_term_degree": 42,
+            "largest_value_term_degree": 42,
+            "proof_boundary": "Finite tail-profile diagnostic only; not a bound for the infinite residual beyond the sampled range.",
+            "term_degree_range": "42..80",
+            "value_budget_fraction": "[0.000931556974617909435 +/- 2.12e-22]",
+            "value_scale_sum": "[0.000501440303600542439 +/- 4.13e-23]"
+          }
+        ],
+        "limiting_value_budget": "companion_product",
+        "max_finite_profile_derivative_budget_fraction": 0.000995886692207194,
+        "max_finite_profile_value_budget_fraction": 0.0009315569746179094,
+        "parameters": {
+          "collar_start_T": 1156,
+          "finite_degree": 40,
+          "finite_tail_profile_last_j": 40,
+          "precision_bits": 384,
+          "profile_max_degree": 80,
+          "real_interval_T": "[1156, infinity)",
+          "real_interval_u": "[0, 1/1156]",
+          "residual_first_j": 21,
+          "tail_cutoff_n": 80,
+          "tail_start_k": 22,
+          "weighted_gap_abs_weight_sum": 368
+        },
+        "proof_boundary_note": "These are sufficient residual-tail targets derived from finite degree-40 margins. They do not prove the residual estimates and do not control the infinite residual tail.",
+        "raw_value_thresholds": {
+          "B_product": "5.375875774509763687E+03",
+          "companion_product": "1.076563897353062904E+00",
+          "normalizer": "3.395695876365208626E+08",
+          "weighted_gap_value_part": "9.044023628251490976E+00"
+        },
+        "value_residual_half_safety_budget_A": "5.382819486765314521E-01"
+      },
+      "id": "nlrgd40rtb_02_degree40_margin_extraction",
+      "proof_boundary": "Finite margin extraction only; not an infinite-tail theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_interval_diagnostic"
+    },
+    {
+      "claim": "A sufficient value-tail target is |R_i(u)|<=A*u^3 for i=21..24 with A below the half-safety budget recorded in diagnostics.",
+      "formula": "|R_i(u)| <= A*u^3",
+      "id": "nlrgd40rtb_03_value_residual_sufficient_budget",
+      "proof_boundary": "Sufficient condition only; the analytic value-tail estimate is not proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_sufficient_condition"
+    },
+    {
+      "claim": "A sufficient derivative-tail target for the weighted-gap numerator is |R_i'(u)|<=B*u with B below the half-safety budget recorded in diagnostics.",
+      "formula": "|R_i'(u)| <= B*u",
+      "id": "nlrgd40rtb_04_derivative_residual_sufficient_budget",
+      "proof_boundary": "Sufficient condition only; the analytic derivative-tail estimate is not proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_sufficient_condition"
+    },
+    {
+      "claim": "The computed finite tail terms from degree 42 through 80 consume less than 0.1% of the half-safety value and derivative budgets at the worst tested index.",
+      "id": "nlrgd40rtb_05_finite_tail_profile_through_degree80",
+      "proof_boundary": "Finite sampled tail profile only; it is not a bound for the infinite residual beyond degree 80.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic"
+    },
+    {
+      "claim": "A promoted proof can close the fixed-k degree-40 collar branch by proving the recorded value and derivative residual estimates on the full real collar.",
+      "id": "nlrgd40rtb_06_live_residual_tail_theorem",
+      "proof_boundary": "Live theorem-search route only; the residual-tail theorem is not proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_stencil_remainder_obligations.md"
+      ]
+    },
+    {
+      "claim": "The finite degree-42..80 tail profile proves the residual-tail theorem.",
+      "gap": "The finite profile stops at degree 80 and does not supply an analytic majorant for the remaining infinite series.",
+      "id": "nlrgd40rtb_07_finite_profile_promotion_rejected",
+      "proof_boundary": "Rejected finite-profile promotion only; not scaled-curvature monotonicity, cone entry, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route"
+    },
+    {
+      "claim": "Any residual-tail proof must state its analytic majorant, the collar, the affected indices, value and derivative estimates, and interval-safe comparison to the recorded budgets.",
+      "id": "nlrgd40rtb_08_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a proof of the residual-tail estimates.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Exact finite theorem-search diagnostic only. It converts finite degree-40 collar margins into sufficient value and derivative residual-tail targets, but it does not prove those residual estimates, does not control the infinite tail, does not prove scaled-curvature monotonicity, does not prove cone entry, and does not prove RH or Lambda <= 0.",
+  "source_degree40_ladder_stress": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree40_arb_collar_ladder_stress.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_stencil_remainder_obligations": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_stencil_remainder_obligations.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "exact finite theorem-search diagnostic",
+  "summary": {
+    "budget_inequality_rows": 5,
+    "derivative_residual_half_safety_budget_B": "9.315354075509573936E-03",
+    "finite_tail_profile_rows": 4,
+    "limiting_value_budget": "companion_product",
+    "main_finding": "The degree-40 Arb collar margins imply a concrete sufficient fixed-k residual target on 0<=u<=1/1156: prove |R_i(u)|<=A*u^3 with half-safety A=5.382819486765314521E-01 and |R_i'(u)|<=B*u with half-safety B=9.315354075509573936E-03 for i=21..24. The finite degree-42..80 tail profile uses less than 0.1% of these budgets, but this remains a target because no analytic majorant for the infinite residual tail is proved.",
+    "matrix_rows": 8,
+    "max_finite_profile_derivative_budget_fraction": "9.958866922071939881E-04",
+    "max_finite_profile_value_budget_fraction": "9.315569746179094314E-04",
+    "ready_to_apply_rows": 0,
+    "target_closing": false,
+    "value_residual_half_safety_budget_A": "5.382819486765314521E-01"
+  }
+}

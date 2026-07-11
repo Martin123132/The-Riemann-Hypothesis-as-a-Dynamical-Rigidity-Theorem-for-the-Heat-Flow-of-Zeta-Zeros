@@ -1,0 +1,428 @@
+{
+  "date": "2026-07-11",
+  "exact": {
+    "fake_xi_benchmark": {
+      "bessel_form": "P_0(z)=pi^2/2*(K_(9/4+i*z/4)(2*pi)+K_(9/4-i*z/4)(2*pi))",
+      "established_result": "Gasper's integral-of-squares theorem proves that Xi_star, hence P_0, has only real zeros; classical heat universal-factor preservation gives the same conclusion for P_t, t>=0.",
+      "kernel": "Psi(u)=4*pi^2*exp(-2*pi*cosh(4u))*cosh(9u)",
+      "normalization": "P_0(z)=Xi_star(z/2)/8",
+      "transform": "P_t(z)=integral_0^infinity exp(tu^2)*Psi(u)*cos(zu)du"
+    },
+    "kernel_ratio": {
+      "definition": "M(u)=Phi(u)/Psi(u) for u>=0",
+      "fake_expansion": "Psi(u)=2*pi^2*exp(9u-pi*exp(4u)-pi*exp(-4u))*(1+exp(-18u))",
+      "first_xi_summand": "phi_1(u)=2*pi^2*exp(9u-pi*exp(4u))*(1-3*exp(-4u)/(2*pi))",
+      "limit": "lim_(u->infinity) M(u)=1",
+      "origin": "Phi(0)>pi*(2*pi-3)*exp(-pi)>4*pi^2*exp(-2*pi)=Psi(0), so M(0)>1",
+      "origin_proof": "Use pi>3, pi<22/7, and exp(pi)>exp(3)>20; every theta summand is positive at u=0.",
+      "tail": "The n=1 quotient is exp(pi*exp(-4u))*(1-3*exp(-4u)/(2*pi))/(1+exp(-18u)); all n>=2 terms are O(exp(-3*pi*exp(4u))) relative to the leading scale."
+    },
+    "laguerre_decomposition": {
+      "forms": "L[f]=f'^2-f*f'', B[f,g]=2*f'*g'-f*g''-g*f''",
+      "identity": "L[H]=alpha^2*L[P]+B[alpha*P,E_alpha]+L[E_alpha]",
+      "mixed_term": "B[alpha*P,E_alpha]=alpha*B[P,H]-2*alpha^2*L[P]",
+      "residual": "E_alpha=H-alpha*P",
+      "residual_term": "L[E_alpha]=L[H]-alpha*B[P,H]+alpha^2*L[P]"
+    },
+    "open_handoff": "Retain the Gasper block only inside a sign-aware or multi-block decomposition. The next admissible target is to construct blocks P_j with a proved common real-zero/interlacing structure and control the signed mixed Laguerre forms after the full modular endpoint cancellation. A scalar absolute budget or a single positive-cosh multiplier is now a closed route.",
+    "positive_cosh_obstruction": {
+      "boundedness_lemma": "If a positive finite cosh transform has a finite limit as u->infinity, monotone convergence forces mu(R\\{0})=0, so the transform is constant.",
+      "candidate": "M(u)=integral_R cosh(u*s) dmu(s), mu>=0 finite",
+      "conclusion": "Because M(0)>1 but M(u)->1, Phi/Psi is not a positive cosh-mixture multiplier. Thus the direct Cardon/Polya positive-convolution transfer from fake Xi to Xi is impossible.",
+      "scope": "This rejects the one-factor positive multiplier representation, not signed measures, multi-block special-function expansions, or sign-aware remainder estimates."
+    },
+    "scalar_absolute_budget": {
+      "branch_check": "rho<2 makes L[E_alpha]>0 for all alpha. On alpha<=B[P,H]/(2L[P]), R_alpha=L[H]/(alpha^2L[P])-1, whose boundary excess above 3-rho is (B[P,H]^2-2L[P]L[H])^2/(B[P,H]^2L[P]L[H])>=0.",
+      "conclusion": "No positive scalar normalization can prove L[H]>0 by the one-block absolute triangle estimate alpha^2*L[P]>abs(B[alpha*P,E_alpha])+abs(L[E_alpha]).",
+      "definition": "R_alpha=(abs(B[alpha*P,E_alpha])+abs(L[E_alpha]))/(alpha^2*L[P])",
+      "optimizer": "alpha_star=L[H]/B[P,H]",
+      "rho": "rho=B[P,H]^2/(L[P]*L[H])",
+      "square_completion": "R_alpha-(3-rho)=(alpha*B[P,H]-L[H])^2/(alpha^2*L[P]*L[H]) in the minimizing sign branch",
+      "theorem": "If L[P]>0, L[H]>0, B[P,H]>0, and 0<rho<2 at one x, then inf_(alpha>0) R_alpha=3-rho>1."
+    }
+  },
+  "kind": "jensen_window_pf_newman_gasper_fake_xi_remainder_gate",
+  "numerics": {
+    "coarse_nodes_per_panel": 260,
+    "fine_nodes_per_panel": 440,
+    "independent_mpmath_80_digit_references": {
+      "t=0": {
+        "B_PH": "1.38896714646661879236332397203696970691267589712036014490271902059136787417e-8",
+        "L_H": "4.8288528964419507801374708154818700034633984690053013016496021650378316292e-8",
+        "L_P": "9.63174385700759649241903486292893805398341744805199241066479291231613173805e-9",
+        "alpha_opt": "3.47657819605454804669500385759263056682910105814050513244566880659488779575",
+        "minimum_absolute_budget": "2.58520353486464885488422025541974176469220050527060812102332310321875803657",
+        "rho": "0.414796465135351145115779744580258235307799494729391878976676896781241963434"
+      },
+      "t=1/2": {
+        "B_PH": "1.4004303022542297279992077700223327439020884971891888365241884558981968285e-8",
+        "L_H": "4.672292012357301139515295159686405810509762612410202977067597568468093348e-8",
+        "L_P": "9.74443254751230118745822433911669421683885075608936029332663842695002500259e-9",
+        "alpha_opt": "3.3363259884026044810382951892480128214468378718873867757317456041503241612",
+        "minimum_absolute_budget": "2.56923890998245475462597099578324989110763955746038015376286213458545096457",
+        "rho": "0.430761090017545245374029004216750108892360442539619846237137865414549035433"
+      }
+    },
+    "interval_certificate": {
+      "arithmetic": "python-flint Arb balls at 70 decimal digits",
+      "cell_count": 2048,
+      "domain": "u in [0,1]",
+      "omitted_tail_radius_per_jet": "1e-45",
+      "rigorous": true,
+      "rows": [
+        {
+          "B_PH": "[1.39e-8 +/- 3.61e-11]",
+          "H_jet": [
+            "[0.000669 +/- 7.98e-7]",
+            "[-0.0003650 +/- 6.19e-8]",
+            "[0.00012690 +/- 7.59e-9]"
+          ],
+          "L_H": "[4.83e-8 +/- 8.13e-11]",
+          "L_P": "[9.63e-9 +/- 4.19e-12]",
+          "P_jet": [
+            "[-0.0005071 +/- 9.31e-8]",
+            "[5.772e-5 +/- 9.16e-9]",
+            "[1.242e-5 +/- 6.09e-9]"
+          ],
+          "certified_signs": {
+            "B_PH_positive": true,
+            "L_H_positive": true,
+            "L_P_positive": true,
+            "minimum_budget_above_1": true,
+            "rho_in_open_0_2": true
+          },
+          "minimum_absolute_budget": "[2.59 +/- 7.05e-3]",
+          "rho": "[0.41 +/- 7.05e-3]",
+          "t": "0",
+          "x": "25"
+        },
+        {
+          "B_PH": "[1.40e-8 +/- 2.99e-11]",
+          "H_jet": [
+            "[0.000606 +/- 7.44e-7]",
+            "[-0.0003503 +/- 4.38e-8]",
+            "[0.00012531 +/- 7.01e-9]"
+          ],
+          "L_H": "[4.67e-8 +/- 9.13e-11]",
+          "L_P": "[9.74e-9 +/- 6.93e-12]",
+          "P_jet": [
+            "[-0.000513 +/- 1.31e-7]",
+            "[6.18e-5 +/- 3.07e-8]",
+            "[1.155e-5 +/- 5.25e-9]"
+          ],
+          "certified_signs": {
+            "B_PH_positive": true,
+            "L_H_positive": true,
+            "L_P_positive": true,
+            "minimum_budget_above_1": true,
+            "rho_in_open_0_2": true
+          },
+          "minimum_absolute_budget": "[2.57 +/- 3.08e-3]",
+          "rho": "[0.43 +/- 3.08e-3]",
+          "t": "1/2",
+          "x": "25"
+        }
+      ],
+      "rule": "Composite midpoint rule with interval suprema of each exact second derivative and per-cell error h^3*sup(abs(f''))/24",
+      "scope": "Finite interval certificates at x=25 for t=0 and t=1/2. They rigorously reject the scalar absolute-margin inequality at those points, not sign-aware cancellation or RH.",
+      "tail_proof": "For n>=9 on 0<=u<=1, pi>3 and exp(tu^2)<=exp(1/2)<2 give an omitted moment below 8e5*9^4*exp(-243)<1e-70. For u=1+v>=1 and 0<=t<=1/2, use u^2/2<=exp(4u)/100, pi>3, exp(4)>50, u^j<=exp(2v) for j<=2, and sum_(n>=1)n^4*q^(n^2)<=2q for q<=exp(-150). Both true and fake tails are then bounded by 40*exp(-281/2)*integral_0^infinity exp(-587v)dv<1e-60. The common 1e-45 radius covers all omissions.",
+      "theta_summands": 8
+    },
+    "max_relative_coarse_fine_delta": "9.39468665713992695e-14",
+    "method": "Composite Gauss-Legendre quadrature on [0,4], analytic Fourier derivative moments, and Xi theta summands n<=16",
+    "rows": [
+      {
+        "B_PH": "1.38896714646655856e-08",
+        "H_jet": [
+          "6.69480889960802285e-04",
+          "-3.65025811755675749e-04",
+          "1.26897295438010483e-04"
+        ],
+        "L_H": "4.82885289644319105e-08",
+        "L_P": "9.63174385700821997e-09",
+        "P_jet": [
+          "-5.07070557210933517e-04",
+          "5.77193133078619076e-05",
+          "1.24247496500892257e-05"
+        ],
+        "alpha_opt": "3.47657819605559171e+00",
+        "minimum_absolute_budget": "2.58520353486481813e+00",
+        "natural_alpha_budget": "5.12933258396172054e+00",
+        "rho": "4.14796465135181813e-01",
+        "t": "0",
+        "x": "25"
+      },
+      {
+        "B_PH": "1.40043030225417386e-08",
+        "H_jet": [
+          "6.06424980293074627e-04",
+          "-3.50307407908911244e-04",
+          "1.25312054057452967e-04"
+        ],
+        "L_H": "4.67229201235847161e-08",
+        "L_P": "9.74443254751297479e-09",
+        "P_jet": [
+          "-5.13066581880899431e-04",
+          "6.17779618678458855e-05",
+          "1.15538921931657393e-05"
+        ],
+        "alpha_opt": "3.33632598840357320e+00",
+        "minimum_absolute_budget": "2.56923890998262694e+00",
+        "natural_alpha_budget": "4.92051348164728264e+00",
+        "rho": "4.30761090017373172e-01",
+        "t": "0.5",
+        "x": "25"
+      }
+    ],
+    "scope": "The pointwise minimization is exact algebra once the jet signs and rho<2 hold. Arb certifies those hypotheses at both displayed endpoint times; the 80-digit values are independent cross-checks. This is not a sign-aware remainder theorem or an RH proof."
+  },
+  "proof_boundary": "This artifact normalizes the Gasper/Polya fake-Xi benchmark, derives the exact Laguerre remainder algebra, and rejects two direct transfer routes: scalar absolute domination and a single positive cosh-mixture multiplier. The scalar witnesses are interval-certified, and the positive-convolution obstruction is exact. It does not reject sign-aware or multi-block decompositions and does not prove strict Laguerre positivity, Wiener density, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The scaled Polya fake-Xi transform has an exact Bessel normalization in the corpus variable.",
+      "diagnostics": {
+        "bessel_form": "P_0(z)=pi^2/2*(K_(9/4+i*z/4)(2*pi)+K_(9/4-i*z/4)(2*pi))",
+        "established_result": "Gasper's integral-of-squares theorem proves that Xi_star, hence P_0, has only real zeros; classical heat universal-factor preservation gives the same conclusion for P_t, t>=0.",
+        "kernel": "Psi(u)=4*pi^2*exp(-2*pi*cosh(4u))*cosh(9u)",
+        "normalization": "P_0(z)=Xi_star(z/2)/8",
+        "transform": "P_t(z)=integral_0^infinity exp(tu^2)*Psi(u)*cos(zu)du"
+      },
+      "formula": "P_0(z)=Xi_star(z/2)/8",
+      "id": "gfrr_01_fake_xi_normalization",
+      "proof_boundary": "Exact change of variables and Bessel integral identity.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Gasper's integral-of-squares theorem supplies a genuine real-zero benchmark for the fake-Xi model.",
+      "diagnostics": null,
+      "formula": "Gasper's integral-of-squares theorem proves that Xi_star, hence P_0, has only real zeros; classical heat universal-factor preservation gives the same conclusion for P_t, t>=0.",
+      "id": "gfrr_02_gasper_real_zero_benchmark",
+      "proof_boundary": "Established theorem for the model transform, not for the true Xi transform.",
+      "readiness": "ready_to_apply",
+      "role": "established_theorem"
+    },
+    {
+      "claim": "The true Laguerre expression splits exactly into the scaled fake-Xi margin and signed residual terms.",
+      "diagnostics": {
+        "forms": "L[f]=f'^2-f*f'', B[f,g]=2*f'*g'-f*g''-g*f''",
+        "identity": "L[H]=alpha^2*L[P]+B[alpha*P,E_alpha]+L[E_alpha]",
+        "mixed_term": "B[alpha*P,E_alpha]=alpha*B[P,H]-2*alpha^2*L[P]",
+        "residual": "E_alpha=H-alpha*P",
+        "residual_term": "L[E_alpha]=L[H]-alpha*B[P,H]+alpha^2*L[P]"
+      },
+      "formula": "L[H]=alpha^2*L[P]+B[alpha*P,E_alpha]+L[E_alpha]",
+      "id": "gfrr_03_laguerre_remainder_identity",
+      "proof_boundary": "Exact quadratic identity; no sign is discarded.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "A pointwise invariant gives the exact best possible one-block absolute remainder budget over every positive normalization.",
+      "diagnostics": {
+        "branch_check": "rho<2 makes L[E_alpha]>0 for all alpha. On alpha<=B[P,H]/(2L[P]), R_alpha=L[H]/(alpha^2L[P])-1, whose boundary excess above 3-rho is (B[P,H]^2-2L[P]L[H])^2/(B[P,H]^2L[P]L[H])>=0.",
+        "conclusion": "No positive scalar normalization can prove L[H]>0 by the one-block absolute triangle estimate alpha^2*L[P]>abs(B[alpha*P,E_alpha])+abs(L[E_alpha]).",
+        "definition": "R_alpha=(abs(B[alpha*P,E_alpha])+abs(L[E_alpha]))/(alpha^2*L[P])",
+        "optimizer": "alpha_star=L[H]/B[P,H]",
+        "rho": "rho=B[P,H]^2/(L[P]*L[H])",
+        "square_completion": "R_alpha-(3-rho)=(alpha*B[P,H]-L[H])^2/(alpha^2*L[P]*L[H]) in the minimizing sign branch",
+        "theorem": "If L[P]>0, L[H]>0, B[P,H]>0, and 0<rho<2 at one x, then inf_(alpha>0) R_alpha=3-rho>1."
+      },
+      "formula": "If L[P]>0, L[H]>0, B[P,H]>0, and 0<rho<2 at one x, then inf_(alpha>0) R_alpha=3-rho>1.",
+      "id": "gfrr_04_scalar_budget_minimum",
+      "proof_boundary": "Exact algebra conditional on the displayed pointwise sign chamber.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "At x=25 the normalization-independent minimum is interval-certified above one at both endpoint heat times.",
+      "diagnostics": {
+        "coarse_nodes_per_panel": 260,
+        "fine_nodes_per_panel": 440,
+        "independent_mpmath_80_digit_references": {
+          "t=0": {
+            "B_PH": "1.38896714646661879236332397203696970691267589712036014490271902059136787417e-8",
+            "L_H": "4.8288528964419507801374708154818700034633984690053013016496021650378316292e-8",
+            "L_P": "9.63174385700759649241903486292893805398341744805199241066479291231613173805e-9",
+            "alpha_opt": "3.47657819605454804669500385759263056682910105814050513244566880659488779575",
+            "minimum_absolute_budget": "2.58520353486464885488422025541974176469220050527060812102332310321875803657",
+            "rho": "0.414796465135351145115779744580258235307799494729391878976676896781241963434"
+          },
+          "t=1/2": {
+            "B_PH": "1.4004303022542297279992077700223327439020884971891888365241884558981968285e-8",
+            "L_H": "4.672292012357301139515295159686405810509762612410202977067597568468093348e-8",
+            "L_P": "9.74443254751230118745822433911669421683885075608936029332663842695002500259e-9",
+            "alpha_opt": "3.3363259884026044810382951892480128214468378718873867757317456041503241612",
+            "minimum_absolute_budget": "2.56923890998245475462597099578324989110763955746038015376286213458545096457",
+            "rho": "0.430761090017545245374029004216750108892360442539619846237137865414549035433"
+          }
+        },
+        "interval_certificate": {
+          "arithmetic": "python-flint Arb balls at 70 decimal digits",
+          "cell_count": 2048,
+          "domain": "u in [0,1]",
+          "omitted_tail_radius_per_jet": "1e-45",
+          "rigorous": true,
+          "rows": [
+            {
+              "B_PH": "[1.39e-8 +/- 3.61e-11]",
+              "H_jet": [
+                "[0.000669 +/- 7.98e-7]",
+                "[-0.0003650 +/- 6.19e-8]",
+                "[0.00012690 +/- 7.59e-9]"
+              ],
+              "L_H": "[4.83e-8 +/- 8.13e-11]",
+              "L_P": "[9.63e-9 +/- 4.19e-12]",
+              "P_jet": [
+                "[-0.0005071 +/- 9.31e-8]",
+                "[5.772e-5 +/- 9.16e-9]",
+                "[1.242e-5 +/- 6.09e-9]"
+              ],
+              "certified_signs": {
+                "B_PH_positive": true,
+                "L_H_positive": true,
+                "L_P_positive": true,
+                "minimum_budget_above_1": true,
+                "rho_in_open_0_2": true
+              },
+              "minimum_absolute_budget": "[2.59 +/- 7.05e-3]",
+              "rho": "[0.41 +/- 7.05e-3]",
+              "t": "0",
+              "x": "25"
+            },
+            {
+              "B_PH": "[1.40e-8 +/- 2.99e-11]",
+              "H_jet": [
+                "[0.000606 +/- 7.44e-7]",
+                "[-0.0003503 +/- 4.38e-8]",
+                "[0.00012531 +/- 7.01e-9]"
+              ],
+              "L_H": "[4.67e-8 +/- 9.13e-11]",
+              "L_P": "[9.74e-9 +/- 6.93e-12]",
+              "P_jet": [
+                "[-0.000513 +/- 1.31e-7]",
+                "[6.18e-5 +/- 3.07e-8]",
+                "[1.155e-5 +/- 5.25e-9]"
+              ],
+              "certified_signs": {
+                "B_PH_positive": true,
+                "L_H_positive": true,
+                "L_P_positive": true,
+                "minimum_budget_above_1": true,
+                "rho_in_open_0_2": true
+              },
+              "minimum_absolute_budget": "[2.57 +/- 3.08e-3]",
+              "rho": "[0.43 +/- 3.08e-3]",
+              "t": "1/2",
+              "x": "25"
+            }
+          ],
+          "rule": "Composite midpoint rule with interval suprema of each exact second derivative and per-cell error h^3*sup(abs(f''))/24",
+          "scope": "Finite interval certificates at x=25 for t=0 and t=1/2. They rigorously reject the scalar absolute-margin inequality at those points, not sign-aware cancellation or RH.",
+          "tail_proof": "For n>=9 on 0<=u<=1, pi>3 and exp(tu^2)<=exp(1/2)<2 give an omitted moment below 8e5*9^4*exp(-243)<1e-70. For u=1+v>=1 and 0<=t<=1/2, use u^2/2<=exp(4u)/100, pi>3, exp(4)>50, u^j<=exp(2v) for j<=2, and sum_(n>=1)n^4*q^(n^2)<=2q for q<=exp(-150). Both true and fake tails are then bounded by 40*exp(-281/2)*integral_0^infinity exp(-587v)dv<1e-60. The common 1e-45 radius covers all omissions.",
+          "theta_summands": 8
+        },
+        "max_relative_coarse_fine_delta": "9.39468665713992695e-14",
+        "method": "Composite Gauss-Legendre quadrature on [0,4], analytic Fourier derivative moments, and Xi theta summands n<=16",
+        "rows": [
+          {
+            "B_PH": "1.38896714646655856e-08",
+            "H_jet": [
+              "6.69480889960802285e-04",
+              "-3.65025811755675749e-04",
+              "1.26897295438010483e-04"
+            ],
+            "L_H": "4.82885289644319105e-08",
+            "L_P": "9.63174385700821997e-09",
+            "P_jet": [
+              "-5.07070557210933517e-04",
+              "5.77193133078619076e-05",
+              "1.24247496500892257e-05"
+            ],
+            "alpha_opt": "3.47657819605559171e+00",
+            "minimum_absolute_budget": "2.58520353486481813e+00",
+            "natural_alpha_budget": "5.12933258396172054e+00",
+            "rho": "4.14796465135181813e-01",
+            "t": "0",
+            "x": "25"
+          },
+          {
+            "B_PH": "1.40043030225417386e-08",
+            "H_jet": [
+              "6.06424980293074627e-04",
+              "-3.50307407908911244e-04",
+              "1.25312054057452967e-04"
+            ],
+            "L_H": "4.67229201235847161e-08",
+            "L_P": "9.74443254751297479e-09",
+            "P_jet": [
+              "-5.13066581880899431e-04",
+              "6.17779618678458855e-05",
+              "1.15538921931657393e-05"
+            ],
+            "alpha_opt": "3.33632598840357320e+00",
+            "minimum_absolute_budget": "2.56923890998262694e+00",
+            "natural_alpha_budget": "4.92051348164728264e+00",
+            "rho": "4.30761090017373172e-01",
+            "t": "0.5",
+            "x": "25"
+          }
+        ],
+        "scope": "The pointwise minimization is exact algebra once the jet signs and rho<2 hold. Arb certifies those hypotheses at both displayed endpoint times; the 80-digit values are independent cross-checks. This is not a sign-aware remainder theorem or an RH proof."
+      },
+      "formula": "inf_(alpha>0) R_alpha=2.5852035... at t=0 and 2.5692389... at t=1/2",
+      "id": "gfrr_05_scalar_budget_witnesses",
+      "proof_boundary": "Arb midpoint certificates with explicit theta and integration tails; not a sign-aware estimate or an RH theorem.",
+      "readiness": "interval_validated",
+      "role": "interval_counter_certificate"
+    },
+    {
+      "claim": "The true-to-fake kernel ratio is nonconstant but has finite limit one.",
+      "diagnostics": {
+        "definition": "M(u)=Phi(u)/Psi(u) for u>=0",
+        "fake_expansion": "Psi(u)=2*pi^2*exp(9u-pi*exp(4u)-pi*exp(-4u))*(1+exp(-18u))",
+        "first_xi_summand": "phi_1(u)=2*pi^2*exp(9u-pi*exp(4u))*(1-3*exp(-4u)/(2*pi))",
+        "limit": "lim_(u->infinity) M(u)=1",
+        "origin": "Phi(0)>pi*(2*pi-3)*exp(-pi)>4*pi^2*exp(-2*pi)=Psi(0), so M(0)>1",
+        "origin_proof": "Use pi>3, pi<22/7, and exp(pi)>exp(3)>20; every theta summand is positive at u=0.",
+        "tail": "The n=1 quotient is exp(pi*exp(-4u))*(1-3*exp(-4u)/(2*pi))/(1+exp(-18u)); all n>=2 terms are O(exp(-3*pi*exp(4u))) relative to the leading scale."
+      },
+      "formula": "M(0)>1 and lim_(u->infinity)M(u)=1",
+      "id": "gfrr_06_kernel_ratio_endpoints",
+      "proof_boundary": "Exact origin inequality and theta-tail asymptotic.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "The direct Cardon/Polya positive-cosh multiplier transfer from fake Xi to true Xi is impossible.",
+      "diagnostics": {
+        "boundedness_lemma": "If a positive finite cosh transform has a finite limit as u->infinity, monotone convergence forces mu(R\\{0})=0, so the transform is constant.",
+        "candidate": "M(u)=integral_R cosh(u*s) dmu(s), mu>=0 finite",
+        "conclusion": "Because M(0)>1 but M(u)->1, Phi/Psi is not a positive cosh-mixture multiplier. Thus the direct Cardon/Polya positive-convolution transfer from fake Xi to Xi is impossible.",
+        "scope": "This rejects the one-factor positive multiplier representation, not signed measures, multi-block special-function expansions, or sign-aware remainder estimates."
+      },
+      "formula": "Because M(0)>1 but M(u)->1, Phi/Psi is not a positive cosh-mixture multiplier. Thus the direct Cardon/Polya positive-convolution transfer from fake Xi to Xi is impossible.",
+      "id": "gfrr_07_positive_cosh_obstruction",
+      "proof_boundary": "Rejects one positive convolution factor only; signed and multi-block routes remain open.",
+      "readiness": "guard_validated",
+      "role": "exact_route_obstruction"
+    },
+    {
+      "claim": "Any surviving Gasper-type route must preserve signed cancellation or use several interlacing blocks.",
+      "diagnostics": null,
+      "formula": "Retain the Gasper block only inside a sign-aware or multi-block decomposition. The next admissible target is to construct blocks P_j with a proved common real-zero/interlacing structure and control the signed mixed Laguerre forms after the full modular endpoint cancellation. A scalar absolute budget or a single positive-cosh multiplier is now a closed route.",
+      "id": "gfrr_08_sign_aware_handoff",
+      "proof_boundary": "Open construction target; not strict Laguerre positivity, RH, or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "sources": [
+    "outputs/jensen_window_pf_newman_theta_summand_spectral_square_gate.md",
+    "outputs/jensen_window_pf_newman_strict_laguerre_correlation_target.md",
+    "outputs/formal_core.md",
+    "https://arxiv.org/abs/0801.2996",
+    "https://mathdept.byu.edu/cardon/papers/convolutions_and_zeros.pdf"
+  ],
+  "status": "exact fake-Xi comparison with scalar and positive-convolution obstructions"
+}

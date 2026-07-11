@@ -47,12 +47,14 @@ work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d3_d4_dps520_summ
 work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d3_d4_dps520.jsonl
 work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520_summary.json
 work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520.jsonl
+work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d6_d12_dps520_summary.json
+work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d6_d12_dps520.jsonl
 ```
 
 Finite range:
 
 ```text
-degree d = 3,4,5
+degree d = 3..12
 lambda in {0, 1e-6, 1e-4, 1e-2, 1e-1}
 shifts n = 0..20
 ```
@@ -60,8 +62,8 @@ shifts n = 0..20
 Current result:
 
 ```text
-315/315 checked Jensen windows have Sturm-certified finite PF-infinity consequence
-validated 315 finite Sturm-to-PF Jensen-window consequences with 0 issues
+1050/1050 checked Jensen windows have Sturm-certified finite PF-infinity consequence
+validated 1050 finite Sturm-to-PF Jensen-window consequences with 0 issues
 ```
 
 ## Boundary

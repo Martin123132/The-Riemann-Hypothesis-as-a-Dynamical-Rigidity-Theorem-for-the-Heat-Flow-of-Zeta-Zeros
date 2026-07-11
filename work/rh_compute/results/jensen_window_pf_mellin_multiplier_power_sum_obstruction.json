@@ -1,0 +1,211 @@
+{
+  "configuration": {
+    "analytic_tail_inflation": "1e-45",
+    "dps": 100,
+    "max_log_moment_order": 10,
+    "n_sum": 10,
+    "negative_log_x_cutoff": 200,
+    "negative_x_panels": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        4
+      ],
+      [
+        4,
+        8
+      ],
+      [
+        8,
+        16
+      ],
+      [
+        16,
+        32
+      ],
+      [
+        32,
+        64
+      ],
+      [
+        64,
+        128
+      ],
+      [
+        128,
+        200
+      ]
+    ],
+    "positive_u_cutoff": 8,
+    "quadrature_abs_tol": "1e-65"
+  },
+  "date": "2026-07-10",
+  "definitions": {
+    "coefficient_interpolation": "A(s)=2*sqrt(pi)*M(s)/(4^s*Gamma(s+1/2))",
+    "geometric_normalization": "B(s)=A(s)*A(0)^(s-1)/A(1)^s",
+    "mellin_moment": "M(s)=integral_0^infinity u^(2s)*Phi(u)du",
+    "power_sum_candidate": "p_m=(-1)^(m-1)*(kappa_m-psi_(m-1)(1/2))/(m-1)!",
+    "raw_log_moment": "R_m=integral_0^infinity (2*log u)^m*Phi(u)du"
+  },
+  "hankel_rows": [
+    {
+      "classification": "positive",
+      "contains_zero": false,
+      "determinant": "[5.28653155758260126141317989105602703e-5 +/- 3.54e-41]",
+      "shift": 2,
+      "size": 2
+    },
+    {
+      "classification": "positive",
+      "contains_zero": false,
+      "determinant": "[5.505892699579024126630489011720e-11 +/- 6.69e-42]",
+      "shift": 2,
+      "size": 3
+    },
+    {
+      "classification": "negative",
+      "contains_zero": false,
+      "determinant": "[-2.588644974358276189292582822e-19 +/- 8.65e-47]",
+      "shift": 2,
+      "size": 4
+    },
+    {
+      "classification": "positive",
+      "contains_zero": false,
+      "determinant": "[6.04002197437267726580084557e-16 +/- 9.24e-43]",
+      "shift": 3,
+      "size": 3
+    },
+    {
+      "classification": "negative",
+      "contains_zero": false,
+      "determinant": "[-2.5739894194580514748560442e-17 +/- 6.00e-43]",
+      "shift": 4,
+      "size": 3
+    },
+    {
+      "classification": "negative",
+      "contains_zero": false,
+      "determinant": "[-1.1686954903466295579809210e-14 +/- 2.08e-40]",
+      "shift": 7,
+      "size": 2
+    }
+  ],
+  "invariants": [
+    "All promoted signs use Arb balls with analytic tail inflation.",
+    "The continuous-index product is rejected by a necessary positive-semidefinite Hankel condition.",
+    "No claim promotes equality at integers to equality of analytic interpolations.",
+    "The discrete counting-measure target remains open.",
+    "PF-infinity, Jensen hyperbolicity, RH, and Lambda <= 0 are not proved."
+  ],
+  "kind": "jensen_window_pf_mellin_multiplier_power_sum_obstruction",
+  "power_sum_candidate_balls": {
+    "10": "[1.44165172492596485849217847e-7 +/- 1.19e-34]",
+    "2": "[0.08866959360452186625898917050448368042996 +/- 3.61e-42]",
+    "3": "[0.0107315115814917773165748744347945286830 +/- 5.50e-41]",
+    "4": "[0.001895020035266623043978694514287596850 +/- 3.80e-40]",
+    "5": "[0.00037472844863505263887732644505590847 +/- 2.76e-39]",
+    "6": "[7.69899726744574253878284391408264e-5 +/- 1.80e-38]",
+    "7": "[1.6005383503535788329666527828880e-5 +/- 5.96e-37]",
+    "8": "[3.33434016766525080576860469494e-6 +/- 3.96e-36]",
+    "9": "[6.9390011156864705197665357065e-7 +/- 8.36e-36]"
+  },
+  "proof_boundary": "This rigorously rejects the natural continuous-index Mellin multiplier-product identity. It does not reject a product identity asserted only for integer coefficients, does not prove or disprove PF-infinity, Jensen hyperbolicity, RH, or Lambda <= 0.",
+  "raw_log_moment_balls": [
+    "[0.06214009727353926373909671746067471497591170 +/- 2.20e-45]",
+    "[-0.35358021239822472243158499486158495672081654 +/- 2.14e-45]",
+    "[2.31302796550027274341599010253945367039004529 +/- 5.70e-45]",
+    "[-17.63264552400209941397736225012988078517524933 +/- 3.62e-45]",
+    "[157.83886737682199027569712533181858393165893460 +/- 5.57e-45]",
+    "[-1658.85702845042423199686579772803211062225349448 +/- 4.88e-45]",
+    "[20321.73285792296245315252165919202056900144930768 +/- 5.86e-45]",
+    "[-286818.63001114382099173540049132477082763258867436 +/- 3.89e-45]",
+    "[4603031.02555857063086612020841549001986089167229081 +/- 5.36e-45]",
+    "[-82945258.44299657618394017618572147284313637667463652 +/- 3.33e-45]",
+    "[1659543369.14669040061189045348761089450990269169304049 +/- 4.44e-45]"
+  ],
+  "rows": [
+    {
+      "claim": "The Gamma-normalized Mellin interpolation A(s) agrees with A_k at every nonnegative integer k.",
+      "formula": "A(s)=2*sqrt(pi)*integral_0^infinity u^(2s)*Phi(u)du/(4^s*Gamma(s+1/2))",
+      "id": "mmps_01_mellin_interpolation",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "For m>=2, geometric normalization drops out and the log derivative is a log-U cumulant minus the half-Gamma polygamma term.",
+      "formula": "d^m log B(0)=kappa_m(2*log U)-psi_(m-1)(1/2)",
+      "id": "mmps_02_log_derivative_reduction",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "A continuous-index elementary multiplier product forces p_m to be positive power sums and every shifted Hankel matrix of p_m to be positive semidefinite.",
+      "formula": "p_m=(-1)^(m-1)*d^m log B(0)/(m-1)!=sum_j alpha_j^(-m)",
+      "id": "mmps_03_continuous_product_necessity",
+      "readiness": "available_exact",
+      "role": "exact_necessary_condition"
+    },
+    {
+      "claim": "Arb quadrature plus explicit series, small-u, and large-u tails encloses raw log moments through order 10.",
+      "id": "mmps_04_arb_log_moments",
+      "readiness": "ready_to_apply",
+      "role": "interval_certificate"
+    },
+    {
+      "claim": "Three shifted power-sum Hankel determinants are strictly negative, including the shift-2 size-4 determinant.",
+      "id": "mmps_05_negative_hankel_obstruction",
+      "readiness": "guard_validated",
+      "role": "interval_counterexample_gate"
+    },
+    {
+      "claim": "Integer coefficient equality alone does not identify the multiplier product with this Mellin interpolation; a separate uniqueness theorem would be required.",
+      "id": "mmps_06_integer_uniqueness_boundary",
+      "readiness": "not_ready_to_apply",
+      "role": "proof_boundary"
+    }
+  ],
+  "source_artifacts": [
+    "outputs/jensen_window_pf_multiplier_counting_measure_target.md",
+    "outputs/jensen_window_pf_rank_two_boundary_family_lemma.md",
+    "outputs/jensen_window_pf_defect_complete_monotonicity_scout.md"
+  ],
+  "status": "interval-certified continuous-interpolation obstruction",
+  "summary": {
+    "continuous_product_ruled_out": true,
+    "hankel_determinants": 6,
+    "inconclusive_hankel_determinants": 0,
+    "integer_only_product_ruled_out": false,
+    "main_finding": "The natural Gamma-normalized Mellin interpolation cannot itself be the canonical continuous elementary-multiplier product: its candidate power sums have three strictly negative shifted Hankel determinants. The integer-only counting-measure target remains open because no interpolation-uniqueness theorem is supplied.",
+    "negative_hankel_determinants": 3,
+    "positive_hankel_determinants": 3,
+    "power_sum_candidates": 9,
+    "raw_log_moments": 11,
+    "ready_to_apply_rows": 1,
+    "rows": 6,
+    "target_closing": false
+  },
+  "tail_diagnostics": {
+    "all_tail_errors_below_inflation": true,
+    "compact_phi_bound_upper": "6981.40164243394531832434034187",
+    "compact_phi_round_bound": "10000000000.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "inflation_radius": "1e-45",
+    "large_u_tail_formula": "2^m*C_p*U^m*exp(a*U-pi*exp(4*U))/(4*pi*exp(4*U)-a-m/U)",
+    "max_large_u_error_upper": "1.52416287502135050890540482128e-107735195702587",
+    "max_series_error_upper": "1.62889074533211360161496240414e-119",
+    "max_small_u_error_upper": "1.52707705270095547698867965699e-51",
+    "max_total_error_upper": "1.52707705270095547698867965699e-51",
+    "series_tail_formula": "sum_(n>N)n^p*exp(-pi*n^2)<=a_(N+1)/(1-2^p*exp(-pi*(2*N+3)))",
+    "series_tail_ratio_p2_upper": "1.66496018689220454468498899174e-31",
+    "series_tail_ratio_p4_upper": "6.65984074756881817873995596696e-31",
+    "series_tail_sup_upper": "4.37083451461603560161214426598e-129",
+    "small_u_tail_formula": "1e10*2^m*Gamma(m+1,X)"
+  }
+}

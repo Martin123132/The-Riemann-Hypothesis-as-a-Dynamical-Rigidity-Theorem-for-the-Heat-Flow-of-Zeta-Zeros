@@ -4,8 +4,8 @@ Date: 2026-07-05
 
 Status: finite Arb/Sturm diagnostic. This is not a proof of Jensen-window
 PF-infinity, all-degree Jensen hyperbolicity, Laguerre-Polya membership, RH,
-or `Lambda <= 0`; it certifies only bounded families of degree-3, degree-4,
-and degree-5 Jensen-window root counts.
+or `Lambda <= 0`; it certifies only bounded families of degree-3 through
+degree-12 Jensen-window root counts.
 
 ## Purpose
 
@@ -32,6 +32,8 @@ work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d3_d4_dps520_summ
 work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d3_d4_dps520.jsonl
 work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520_summary.json
 work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520.jsonl
+work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d6_d12_dps520_summary.json
+work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d6_d12_dps520.jsonl
 ```
 
 Current degree-3/4 result:
@@ -45,6 +47,13 @@ Current degree-5 result:
 ```text
 python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py --summary work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520_summary.json --rows work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520.jsonl --expected-degrees 5
 validated 105 Arb Jensen-window Sturm hyperbolicity finite diagnostics with 0 issues
+```
+
+Current degree-6 through degree-12 extension:
+
+```text
+python work/rh_compute/scripts/check_arb_jensen_window_sturm_manifest.py --summary work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d6_d12_dps520_summary.json --rows work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d6_d12_dps520.jsonl --expected-degrees 6..12
+validated 735 Arb Jensen-window Sturm hyperbolicity finite diagnostics with 0 issues
 ```
 
 ## What Was Checked
@@ -62,11 +71,13 @@ Finite range:
 ```text
 degree d = 3,4 in the base manifest
 degree d = 5 in the extension manifest
+degree d = 6..12 in the extended terminal-reconnaissance manifest
 lambda in {0, 1e-6, 1e-4, 1e-2, 1e-1}
 shifts n = 0..20
 dps = 520
 needed max coefficient index = 24 for d=3,4
 needed max coefficient index = 25 for d=5
+needed max coefficient index = 32 for d=6..12
 ```
 
 For each row, the probe builds an interval-enclosed Sturm sequence for
@@ -80,6 +91,8 @@ The manifest contains:
 105/105 degree-3 rows
 105/105 degree-4 rows
 105/105 degree-5 extension rows positive-root-count certified
+735/735 degree-6 through degree-12 extension rows positive-root-count certified
+1050/1050 total degree-3 through degree-12 rows certified
 0 failed or inconclusive
 ```
 

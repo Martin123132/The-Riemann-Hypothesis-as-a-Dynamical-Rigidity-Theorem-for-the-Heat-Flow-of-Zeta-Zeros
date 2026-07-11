@@ -1,0 +1,354 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_degree16_stencil_continuation.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_degree16_stencil_continuation.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "Degree-16 continuation stress is not promoted to an infinite-tail theorem.",
+    "Failure of the T=1000 baseline is finite evidence for a collar, not an analytic obstruction.",
+    "Survival of the T=2000 baseline is finite evidence only.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_degree16_stencil_continuation",
+  "matrix_rows": [
+    {
+      "claim": "The degree-16 relative-Gaussian Taylor coefficient ratio is computed with the same finite-sum plus geometric-tail method as the high-order scout.",
+      "degree16_coefficient": {
+        "degree": 16,
+        "enclosure": "[-106203604.5393341080162370793069293885993 +/- 2.03e-32]",
+        "ratio_to_c0": "[-237753170.9494156506565064820654116030884 +/- 2.39e-32]",
+        "sign": "negative",
+        "tail_radius": "1583608363045672366325201511766912819440207476015802478781126089830842341935593456e-8958"
+      },
+      "id": "nlrgd16sc_01_degree16_coefficient",
+      "proof_boundary": "Finite coefficient certificate only; not an infinite Taylor-tail theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_certificate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_high_order_taylor_scout.md"
+      ]
+    },
+    {
+      "claim": "The degree-16 continuation tests all four current positive relative-Gaussian finite baselines from the pointwise-tail budget artifact.",
+      "diagnostics": {
+        "continuation_rows": [
+          {
+            "M": 5,
+            "T": "2000",
+            "allowed_relative_tail_ratio": "1.556566056416113956E-8",
+            "failing_stencils": [],
+            "half_safety_stencils_satisfied": false,
+            "k": 22,
+            "limiting_stencil": "companion",
+            "max_abs_log_increment": "3.157858200641902125E-5",
+            "max_next_abs_theta": "3.157808340824660809E-5",
+            "max_next_abs_theta_over_allowed": "2.028701787378877343E+3",
+            "next_M": 6,
+            "pointwise_budget_satisfied": false,
+            "source_row": "nlrgts_M5_T2000",
+            "stencil_increments": [
+              {
+                "abs_over_half_margin": "5.180086598431442089E-2",
+                "exceeds_half_safety": false,
+                "half_margin": "2.153482097214686988E-5",
+                "increment": "1.115522375174383601E-6",
+                "margin_after_increment": "4.418516431946812336E-5",
+                "name": "B",
+                "sign_preserved": true
+              },
+              {
+                "abs_over_half_margin": "1.812650007602512478E+0",
+                "exceeds_half_safety": true,
+                "half_margin": "1.245252854824482818E-7",
+                "increment": "-2.257207596764649147E-7",
+                "margin_after_increment": "2.332981128843164882E-8",
+                "name": "companion",
+                "sign_preserved": true
+              },
+              {
+                "abs_over_half_margin": "3.450019208573621088E-1",
+                "exceeds_half_safety": false,
+                "half_margin": "3.721695352661867051E-5",
+                "increment": "1.283992045514261819E-5",
+                "margin_after_increment": "8.727382750837995921E-5",
+                "name": "weighted_gap",
+                "sign_preserved": true
+              }
+            ],
+            "stencil_signs_preserved": true
+          },
+          {
+            "M": 6,
+            "T": "2000",
+            "allowed_relative_tail_ratio": "1.458113204463930993E-9",
+            "failing_stencils": [],
+            "half_safety_stencils_satisfied": false,
+            "k": 22,
+            "limiting_stencil": "companion",
+            "max_abs_log_increment": "4.390076008296640423E-6",
+            "max_next_abs_theta": "4.390085644694421235E-6",
+            "max_next_abs_theta_over_allowed": "3.010798908654295615E+3",
+            "next_M": 7,
+            "pointwise_budget_satisfied": false,
+            "source_row": "nlrgts_M6_T2000",
+            "stencil_increments": [
+              {
+                "abs_over_half_margin": "8.628052597940853252E-3",
+                "exceeds_half_safety": false,
+                "half_margin": "2.209258215973406168E-5",
+                "increment": "-1.906159608985152175E-7",
+                "margin_after_increment": "4.399454835856960814E-5",
+                "name": "B",
+                "sign_preserved": true
+              },
+              {
+                "abs_over_half_margin": "3.998025843926772743E+0",
+                "exceeds_half_safety": true,
+                "half_margin": "1.166490564421582442E-8",
+                "increment": "4.663659423254214610E-8",
+                "margin_after_increment": "6.996640552097379494E-8",
+                "name": "companion",
+                "sign_preserved": true
+              },
+              {
+                "abs_over_half_margin": "5.896731985266578194E-2",
+                "exceeds_half_safety": false,
+                "half_margin": "4.363691375418997961E-5",
+                "increment": "-2.573151850726511302E-6",
+                "margin_after_increment": "8.470067565765344792E-5",
+                "name": "weighted_gap",
+                "sign_preserved": true
+              }
+            ],
+            "stencil_signs_preserved": true
+          },
+          {
+            "M": 7,
+            "T": "1000",
+            "allowed_relative_tail_ratio": "1.992872619171197327E-7",
+            "failing_stencils": [
+              "companion"
+            ],
+            "half_safety_stencils_satisfied": false,
+            "k": 22,
+            "limiting_stencil": "weighted_gap",
+            "max_abs_log_increment": "2.270648880622514458E-4",
+            "max_next_abs_theta": "2.270391107816314477E-4",
+            "max_next_abs_theta_over_allowed": "1.139255507841004152E+3",
+            "next_M": 8,
+            "pointwise_budget_satisfied": false,
+            "source_row": "nlrgts_M7_T1000",
+            "stencil_increments": [
+              {
+                "abs_over_half_margin": "1.666505251701368401E-1",
+                "exceeds_half_safety": false,
+                "half_margin": "7.723029143018334445E-5",
+                "increment": "1.287046862588277294E-5",
+                "margin_after_increment": "1.673310514862494618E-4",
+                "name": "B",
+                "sign_preserved": true
+              },
+              {
+                "abs_over_half_margin": "2.401524460650696046E+0",
+                "exceeds_half_safety": true,
+                "half_margin": "1.726018365260206556E-6",
+                "increment": "-4.145075323704713633E-6",
+                "margin_after_increment": "-6.930385931843005219E-7",
+                "name": "companion",
+                "sign_preserved": false
+              },
+              {
+                "abs_over_half_margin": "3.007449350603783080E+0",
+                "exceeds_half_safety": true,
+                "half_margin": "7.333771969313698080E-5",
+                "increment": "2.205594774658870866E-4",
+                "margin_after_increment": "3.672349168521610482E-4",
+                "name": "weighted_gap",
+                "sign_preserved": true
+              }
+            ],
+            "stencil_signs_preserved": false
+          },
+          {
+            "M": 7,
+            "T": "2000",
+            "allowed_relative_tail_ratio": "4.372900335499733484E-9",
+            "failing_stencils": [],
+            "half_safety_stencils_satisfied": true,
+            "k": 22,
+            "limiting_stencil": "companion",
+            "max_abs_log_increment": "5.457416442164781085E-7",
+            "max_next_abs_theta": "5.457414952995340825E-7",
+            "max_next_abs_theta_over_allowed": "1.248008080287443688E+2",
+            "next_M": 8,
+            "pointwise_budget_satisfied": false,
+            "source_row": "nlrgts_M7_T2000",
+            "stencil_increments": [
+              {
+                "abs_over_half_margin": "1.274640059098902619E-3",
+                "exceeds_half_safety": false,
+                "half_margin": "2.199727417928480407E-5",
+                "increment": "2.803860685989834727E-8",
+                "margin_after_increment": "4.402258696542950649E-5",
+                "name": "B",
+                "sign_preserved": true
+              },
+              {
+                "abs_over_half_margin": "2.302306453506772200E-1",
+                "exceeds_half_safety": false,
+                "half_margin": "3.498320276048689747E-8",
+                "increment": "-8.054205347980491209E-9",
+                "margin_after_increment": "6.191220017299330373E-8",
+                "name": "companion",
+                "sign_preserved": true
+              },
+              {
+                "abs_over_half_margin": "1.026260680213612010E-2",
+                "exceeds_half_safety": false,
+                "half_margin": "4.235033782882672396E-5",
+                "increment": "4.346248650748797813E-7",
+                "margin_after_increment": "8.513530052272832770E-5",
+                "name": "weighted_gap",
+                "sign_preserved": true
+              }
+            ],
+            "stencil_signs_preserved": true
+          }
+        ],
+        "degree14_baseline_failures": 1,
+        "degree14_baseline_rows": 2,
+        "degree14_baseline_survivors": 1,
+        "degree16_coefficient": {
+          "degree": 16,
+          "enclosure": "[-106203604.5393341080162370793069293885993 +/- 2.03e-32]",
+          "ratio_to_c0": "[-237753170.9494156506565064820654116030884 +/- 2.39e-32]",
+          "sign": "negative",
+          "tail_radius": "1583608363045672366325201511766912819440207476015802478781126089830842341935593456e-8958"
+        },
+        "failed_rows": [
+          "nlrgts_M7_T1000"
+        ],
+        "half_safety_stencil_failure_rows": 3,
+        "parameters": {
+          "baseline_max_taylor_degree": 14,
+          "coefficient_max_taylor_degree": 16,
+          "precision_bits": 256,
+          "sample_T_values": [
+            25,
+            50,
+            100,
+            200,
+            500,
+            1000,
+            2000
+          ],
+          "tail_cutoff_n": 80,
+          "tail_start_k": 22
+        },
+        "pointwise_budget_failure_rows": 4,
+        "source_pointwise_summary": {
+          "blocked_baseline_rows": 31,
+          "budget_rows": 4,
+          "exact_sufficient_rows": 2,
+          "limiting_stencil_counts": {
+            "companion": 3,
+            "weighted_gap": 1
+          },
+          "main_finding": "The exact epsilon-stencil obligations reduce to a concrete pointwise log-tail target. At k=22, the absolute coefficient sums are 4, 8, and 368; among the 4 positive finite baselines, the companion stencil is limiting in 3 rows and the weighted-gap stencil is limiting in 1 row. The weakest half-safety log-tail envelope is 1.458113205526978052E-9 at nlrgts_M6_T2000, equivalent to the multiplicative relative-tail ratio bound 1.458113204463930993E-9. This sharpens the open uniform remainder theorem but does not prove any analytic tail estimate.",
+          "matrix_rows": 9,
+          "positive_baseline_rows": 4,
+          "ready_to_apply_rows": 0,
+          "target_closing": false,
+          "weakest_half_safety_eta_bound": "1.458113205526978052E-9",
+          "weakest_half_safety_relative_tail_ratio_bound": "1.458113204463930993E-9"
+        },
+        "stencil_sign_failure_rows": 1,
+        "stencil_sign_preserving_rows": 3,
+        "surviving_rows": [
+          "nlrgts_M5_T2000",
+          "nlrgts_M6_T2000",
+          "nlrgts_M7_T2000"
+        ],
+        "tested_continuation_rows": 4,
+        "worst_pointwise_over_budget": {
+          "sample": "3.010798908654295615E+3",
+          "source_row": "nlrgts_M6_T2000"
+        },
+        "worst_stencil_abs_over_half_margin": {
+          "sample": "3.998025843926772743E+0",
+          "source_row": "nlrgts_M6_T2000",
+          "stencil": "companion"
+        }
+      },
+      "id": "nlrgd16sc_02_all_positive_baselines_tested",
+      "proof_boundary": "Finite continuation diagnostic only; not an analytic all-k result.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic"
+    },
+    {
+      "claim": "Every tested next increment still exceeds the crude pointwise half-safety relative-tail budget.",
+      "id": "nlrgd16sc_03_pointwise_budget_still_fails",
+      "proof_boundary": "Finite rejection of the current pointwise shortcut only; not a rejection of a sharper analytic theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic"
+    },
+    {
+      "claim": "The structured next-increment stencil test preserves three baselines and fails the degree-14 T=1000 baseline through the companion stencil.",
+      "id": "nlrgd16sc_04_stencil_survival_filter",
+      "proof_boundary": "Finite filter only; not a theorem about all T or all remaining tail terms.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic"
+    },
+    {
+      "claim": "The degree-16 continuation suggests that any direct signed stencil-tail theorem should include an explicit sufficiently-large T or q/T collar.",
+      "id": "nlrgd16sc_05_collar_signal",
+      "proof_boundary": "Live theorem-search signal only; no collar theorem is proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_next_increment_stencil_stress.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "Passing some degree-16 continuation rows proves the direct stencil-tail theorem.",
+      "gap": "One tested degree-14 baseline fails and surviving finite rows do not control the infinite remaining Taylor tail.",
+      "id": "nlrgd16sc_06_degree16_promotion_rejected",
+      "proof_boundary": "Rejected finite promotion only; not a claim about the final analytic route.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route"
+    },
+    {
+      "claim": "A promoted direct stencil-tail proof must replace degree-by-degree continuation stress with explicit signed bounds for the infinite residual stencil tails beyond a stated degree and collar.",
+      "id": "nlrgd16sc_07_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a proof of scaled-curvature monotonicity, cone entry, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Finite theorem-search diagnostic only. It computes the degree-16 coefficient and stress-tests degree-16 continuation of current finite baselines, but it does not prove an infinite Taylor-tail theorem, does not prove scaled-curvature monotonicity, does not prove cone entry, and does not prove RH or Lambda <= 0.",
+  "source_high_order_taylor_scout": "outputs/jensen_window_pf_negative_lambda_high_order_taylor_scout.md",
+  "source_next_increment_stress": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_next_increment_stencil_stress.md",
+  "source_pointwise_tail_budget": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_pointwise_tail_budget.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "finite theorem-search diagnostic",
+  "summary": {
+    "degree14_baseline_failures": 1,
+    "degree14_baseline_rows": 2,
+    "degree14_baseline_survivors": 1,
+    "half_safety_stencil_failure_rows": 3,
+    "main_finding": "Adding the degree-16 Taylor coefficient removes the previous next-increment frontier for the degree-14 positive baselines. All four current positive baselines still fail the crude pointwise tail budget, while three preserve the structured stencil signs. The degree-14 T=1000 baseline fails through the companion stencil, and the degree-14 T=2000 baseline survives. This sharpens the direct signed stencil-tail route toward an explicit large-T/q-over-T collar.",
+    "matrix_rows": 7,
+    "pointwise_budget_failure_rows": 4,
+    "ready_to_apply_rows": 0,
+    "stencil_sign_failure_rows": 1,
+    "stencil_sign_preserving_rows": 3,
+    "target_closing": false,
+    "tested_continuation_rows": 4,
+    "worst_pointwise_over_budget": "3.010798908654295615E+3",
+    "worst_stencil_abs_over_half_margin": "3.998025843926772743E+0"
+  }
+}

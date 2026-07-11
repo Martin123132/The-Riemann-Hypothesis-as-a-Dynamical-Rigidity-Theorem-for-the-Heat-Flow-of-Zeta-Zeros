@@ -1,0 +1,235 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_linear_curvature_barrier_scout.py",
+  "date": "2026-07-07",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k300.jsonl",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k220_k250_dps220.jsonl",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k245_k320_dps220.jsonl"
+  ],
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_linear_curvature_barrier_scout.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The linear curvature barrier remains an open zeta-specific all-k theorem.",
+    "Repaired k300 evidence is finite stress evidence only.",
+    "The analogous defect-width recurrence remains rejected.",
+    "Monotone curvature alone is rejected as a shortcut.",
+    "Generic moment positivity, endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_linear_curvature_barrier_scout",
+  "matrix_rows": [
+    {
+      "claim": "For B>=0 and alpha_k=(2*k+1)/(2*k+3), the nonlinear lower barrier L_k(B)=log((2*k+3)/(2+(2*k+1)*exp(-B))) satisfies L_k(B)<=alpha_k*B.",
+      "formula": "alpha_k*B-L_k(B)>=0 for B>=0",
+      "id": "nllcbs_01_exact_linear_sufficient_barrier",
+      "proof_boundary": "Exact calculus lemma only; it proves no zeta coefficient inequality.",
+      "readiness": "available_exact",
+      "role": "exact_sufficient_condition"
+    },
+    {
+      "claim": "The linear barrier B_(k+1)>=alpha_k*B_k is a sufficient condition for the lower coefficient-curvature barrier and hence for the upper raw-corridor side.",
+      "id": "nllcbs_02_linear_barrier_implies_raw_corridor_side",
+      "proof_boundary": "Exact sufficient reduction only; the linear zeta inequality remains open for all k.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_coefficient_curvature_corridor_bridge.md"
+      ]
+    },
+    {
+      "claim": "The repaired k300 data validate the linear lower barrier, exact lower barrier, and monotone side on all checked adjacent rows.",
+      "diagnostics": {
+        "adjacent_rows_per_lambda": 298,
+        "adjacent_total_rows": 894,
+        "b_total_rows": 897,
+        "b_wall_rows": 897,
+        "coefficient_cap": 300,
+        "exact_lower_barrier_rows": 894,
+        "lambdas": [
+          "-25.0",
+          "-50.0",
+          "-100.0"
+        ],
+        "linear_corridor_rows": 894,
+        "linear_lower_barrier_rows": 894,
+        "max_ratio_next_over_current": {
+          "k": 298,
+          "lam": "-100.0",
+          "sample": "9.975258371615469160E-1"
+        },
+        "min_b_wall": {
+          "k": 299,
+          "lam": "-100.0",
+          "sample": "1.652602130709587426E-3"
+        },
+        "min_exact_lower_margin": {
+          "k": 298,
+          "lam": "-25.0",
+          "sample": "8.786855849482974303E-7"
+        },
+        "min_linear_lower_margin": {
+          "k": 298,
+          "lam": "-25.0",
+          "sample": "8.725751895568097074E-7"
+        },
+        "min_linear_to_exact_slack": {
+          "k": 298,
+          "lam": "-100.0",
+          "sample": "4.569274603858794776E-9"
+        },
+        "min_linear_width": {
+          "k": 298,
+          "lam": "-100.0",
+          "sample": "5.531556190162135064E-6"
+        },
+        "min_monotone_margin": {
+          "k": 298,
+          "lam": "-100.0",
+          "sample": "4.098948243972025449E-6"
+        },
+        "min_ratio_next_over_current": {
+          "k": 1,
+          "lam": "-25.0",
+          "sample": "9.053367907812444210E-1"
+        },
+        "monotone_rows": 894,
+        "raw_ratio_rows_per_lambda": 299
+      },
+      "id": "nllcbs_03_repaired_k300_linear_barrier",
+      "proof_boundary": "Finite repaired stress evidence only; not an all-k linear curvature-barrier theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_stress",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_coefficient_curvature_corridor_bridge.md",
+        "outputs/jensen_window_pf_negative_lambda_k300_precision_repair_audit.md"
+      ]
+    },
+    {
+      "claim": "The analogous defect-width recurrence is rejected, so the live route is specifically a log-curvature linear barrier, not a defect-linear shortcut.",
+      "id": "nllcbs_04_defect_width_recurrence_distinction",
+      "proof_boundary": "Shortcut distinction only; it does not prove the B-linear theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_analogy",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_defect_recurrence_scout.md"
+      ]
+    },
+    {
+      "claim": "Raw walls plus B_(k+1)<=B_k do not imply the linear lower barrier.",
+      "id": "nllcbs_05_monotone_curvature_shortcut_blocked",
+      "proof_boundary": "Exact shortcut rejection only; not evidence against actual zeta coefficients.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_counterexample",
+      "witness": {
+        "B_k": "log(3/2)",
+        "B_lower_barrier_holds": false,
+        "B_monotone_holds": true,
+        "B_next": "log(10/9)",
+        "D_k": "1/2",
+        "R_k": "2",
+        "R_k_upper_wall": "3",
+        "R_next": "3/2",
+        "R_next_upper_wall": "5/3",
+        "corridor_lower": "10/9",
+        "corridor_upper": "4/3",
+        "decrement_lower": "2/3",
+        "decrement_upper": "8/9",
+        "k": 1,
+        "lower_margin_D_minus_lower": "-1/6",
+        "raw_cone_holds_at_k_and_next": true,
+        "raw_decrease_holds": true,
+        "raw_wall_holds_at_k": true,
+        "raw_wall_holds_at_next": true,
+        "scaled_upper_x_next_wall": "4/5",
+        "upper_margin_upper_minus_D": "7/18",
+        "x_k": "2/3",
+        "x_next": "9/10"
+      }
+    },
+    {
+      "claim": "Raw walls alone do not imply the two-sided linear B corridor.",
+      "id": "nllcbs_06_raw_wall_shortcut_blocked",
+      "proof_boundary": "Exact shortcut rejection only; not evidence against actual zeta coefficients.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_counterexample",
+      "witness": {
+        "B_k": "log(3/2)",
+        "B_lower_barrier_holds": true,
+        "B_monotone_holds": false,
+        "B_next": "log(5/3)",
+        "D_k": "1",
+        "R_k": "2",
+        "R_k_upper_wall": "3",
+        "R_next": "1",
+        "R_next_upper_wall": "5/3",
+        "corridor_lower": "10/9",
+        "corridor_upper": "4/3",
+        "decrement_lower": "2/3",
+        "decrement_upper": "8/9",
+        "k": 1,
+        "lower_margin_D_minus_lower": "1/3",
+        "raw_cone_holds_at_k_and_next": true,
+        "raw_decrease_holds": true,
+        "raw_wall_holds_at_k": true,
+        "raw_wall_holds_at_next": true,
+        "scaled_upper_x_next_wall": "4/5",
+        "upper_margin_upper_minus_D": "-1/9",
+        "x_k": "2/3",
+        "x_next": "3/5"
+      }
+    },
+    {
+      "claim": "A zeta-specific proof may target B_(k+1)>=((2*k+1)/(2*k+3))*B_k after a finite collar.",
+      "id": "nllcbs_07_live_linear_barrier_target",
+      "proof_boundary": "Live theorem-search target only; no all-k linear barrier is proved here.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+        "outputs/jensen_window_pf_monotone_contraction_theorem_target.md"
+      ]
+    },
+    {
+      "claim": "A promoted proof must state the tail start, lambda range, finite collar, B>=0 wall, monotone upper side, linear lower side, and forbidden assumptions.",
+      "id": "nllcbs_08_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a proof of the raw-corridor theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Exact finite theorem-search diagnostic only. It isolates a linear sufficient curvature-barrier theorem and checks repaired k300 evidence, but it does not prove the all-k linear barrier, does not prove the raw-corridor theorem, does not prove cone entry, does not prove jwpf_06, and does not prove RH or Lambda <= 0.",
+  "source_curvature_corridor_bridge": "outputs/jensen_window_pf_negative_lambda_coefficient_curvature_corridor_bridge.md",
+  "source_defect_recurrence_scout": "outputs/jensen_window_pf_negative_lambda_defect_recurrence_scout.md",
+  "source_k300_precision_repair": "outputs/jensen_window_pf_negative_lambda_k300_precision_repair_audit.md",
+  "source_monotone_contraction_target": "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+  "source_raw_corridor_target": "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+  "source_raw_obstruction": "outputs/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.md",
+  "status": "exact finite theorem-search diagnostic",
+  "summary": {
+    "adjacent_total_rows": 894,
+    "b_total_rows": 897,
+    "b_wall_rows": 897,
+    "coefficient_cap": 300,
+    "exact_available_rows": 2,
+    "exact_counterexample_rows": 2,
+    "exact_lower_barrier_rows": 894,
+    "finite_stress_rows": 1,
+    "lambdas": [
+      "-25.0",
+      "-50.0",
+      "-100.0"
+    ],
+    "linear_corridor_rows": 894,
+    "linear_lower_barrier_rows": 894,
+    "live_routes": 1,
+    "main_finding": "The nonlinear lower curvature barrier is implied by the simpler linear theorem B_(k+1)>=((2*k+1)/(2*k+3))*B_k. On repaired k300 data the linear lower barrier holds on 894/894 adjacent rows and the B wall holds on 897/897 rows, while the analogous defect-width recurrence is already rejected.",
+    "matrix_rows": 8,
+    "monotone_rows": 894,
+    "ready_to_apply_rows": 0,
+    "rejected_analogy_rows": 1,
+    "target_closing": false
+  }
+}

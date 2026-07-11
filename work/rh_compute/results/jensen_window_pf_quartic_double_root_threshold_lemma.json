@@ -1,0 +1,177 @@
+{
+  "kind": "jensen_window_pf_quartic_double_root_threshold_lemma",
+  "date": "2026-07-10",
+  "status": "exact quartic double-root heat threshold with open global invariant",
+  "proof_boundary": "This artifact proves the exact local inward threshold on every quartic double-root boundary branch and the necessary first-order triple-root equality. It does not construct a globally closed quartic cone, prove degree-4 zeta hyperbolicity, establish higher-time triple-root viability, PF-infinity, RH, or Lambda <= 0.",
+  "sources": [
+    "outputs/jensen_window_pf_quartic_boundary_flow_obstruction.md",
+    "outputs/jensen_window_pf_cubic_forward_uniform_tail_certificate.md",
+    "outputs/jensen_window_pf_bridge_target.md"
+  ],
+  "exact": {
+    "root_coordinates": {
+      "factorization": "P(w)=(1+a*w)^2*(1+b*w)*(1+c*w)",
+      "normalization": "2*a+b+c=4",
+      "symmetric_simple_roots": "p=b*c",
+      "simple_root_quadratic": "T^2-(4-2*a)*T+p=0"
+    },
+    "contraction_coordinates": {
+      "x": "(-3*a**2 + 8*a + p)/6",
+      "y": "18*a*(-a**2 + 2*a + p)/(-3*a**2 + 8*a + p)**2",
+      "z": "2*p*(-3*a**2 + 8*a + p)/(3*(-a**2 + 2*a + p)**2)"
+    },
+    "positive_denominators": {
+      "A": "-3*a**2 + 8*a + p=6*x>0",
+      "B": "-a**2 + 2*a + p=e_3/(2*a)>0"
+    },
+    "double_root_curvature": {
+      "P_second": "P''(-1/a)=2*(a-b)*(a-c)",
+      "symmetric_factor": "3*a**2 - 4*a + p"
+    },
+    "heat_value": "4*(2*k + 7)*(3*a**4 - 11*a**3 + 2*a**2*p + 10*a**2 - 5*a*p + 6*p**2*u - 5*p**2)/(a*(-3*a**2 + 8*a + p)*(-a**2 + 2*a + p))",
+    "threshold": "(-a**2 + 2*a + p)*(3*a**2 - 5*a + 5*p)/(6*p**2)",
+    "heat_threshold_factorization": "4*(2*k + 7)*(3*a**4 - 11*a**3 + 2*a**2*p + 10*a**2 - 5*a*p + 6*p**2*u - 5*p**2)/(a*(-3*a**2 + 8*a + p)*(-a**2 + 2*a + p))",
+    "inward_criterion": "(3*a^2-4*a+p)*(u-U(a,p))<=0",
+    "branch_interpretation": {
+      "double_root_outside_simple_roots": "u<=U",
+      "double_root_between_simple_roots": "u>=U",
+      "triple_root": "u=U is necessary for first-order viability"
+    },
+    "triple_root": {
+      "p": "-3*a**2 + 4*a",
+      "threshold": "(2*a - 3)*(4*a - 5)/(3*a - 4)**2",
+      "constant_heat_value_at_threshold": "0",
+      "full_first_variation_at_threshold": "24*w**2*(a - 1)**2*(a*w + 1)**2*(2*a*k + a - 2*k + 1)/(a - 2)",
+      "tangent_factor": "(1+a*w)^2"
+    },
+    "countermodel_threshold_check": {
+      "a": "13/20",
+      "p": "1197/1250",
+      "x": "48901/60000",
+      "y": "2147067000/2391307801",
+      "z_equals_u": "104061328/112253067",
+      "U": "57204145/61133184",
+      "U_minus_u": "2212607757569/254162496276864",
+      "curvature": "-3749/10000",
+      "criterion_left_side": "8295066483126181/2541624962768640000",
+      "conclusion": "positive left side violates the inward criterion"
+    }
+  },
+  "rows": [
+    {
+      "id": "qdrt_01_double_root_coordinates",
+      "role": "exact_definition",
+      "readiness": "available_exact",
+      "claim": "Every nondegenerate hyperbolic quartic discriminant boundary point has one double-root factor and two simple-root factors.",
+      "formula": "P=(1+a*w)^2*(1+b*w)*(1+c*w), 2*a+b+c=4",
+      "proof_boundary": "Simple quartic boundary stratum only.",
+      "diagnostics": null
+    },
+    {
+      "id": "qdrt_02_symmetric_contractions",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The three contraction coordinates are rational functions of the double root a and p=b*c.",
+      "formula": "x=A/6, y=18*a*B/A^2, z=2*p*A/(3*B^2)",
+      "proof_boundary": "Coordinate identity only.",
+      "diagnostics": {
+        "x": "(-3*a**2 + 8*a + p)/6",
+        "y": "18*a*(-a**2 + 2*a + p)/(-3*a**2 + 8*a + p)**2",
+        "z": "2*p*(-3*a**2 + 8*a + p)/(3*(-a**2 + 2*a + p)**2)"
+      }
+    },
+    {
+      "id": "qdrt_03_root_splitting_criterion",
+      "role": "exact_local_lemma",
+      "readiness": "available_exact",
+      "claim": "A first-order heat perturbation splits the double root into real roots exactly when its value has sign opposite to P'' at the double root.",
+      "formula": "H(-1/a)*P''(-1/a)<=0",
+      "proof_boundary": "Nondegenerate double-root first-order criterion only.",
+      "diagnostics": null
+    },
+    {
+      "id": "qdrt_04_heat_value_factorization",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The normalized heat perturbation at the double root factors into a positive prefactor times u-U(a,p).",
+      "formula": "4*(2*k + 7)*(3*a**4 - 11*a**3 + 2*a**2*p + 10*a**2 - 5*a*p + 6*p**2*u - 5*p**2)/(a*(-3*a**2 + 8*a + p)*(-a**2 + 2*a + p))",
+      "proof_boundary": "Boundary heat value only.",
+      "diagnostics": null
+    },
+    {
+      "id": "qdrt_05_exact_inward_threshold",
+      "role": "exact_boundary_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The complete nondegenerate quartic inward condition is a single root-branch-aware threshold inequality.",
+      "formula": "(3*a^2-4*a+p)*(u-U(a,p))<=0",
+      "proof_boundary": "Local degree-4 boundary condition, not a global invariant.",
+      "diagnostics": {
+        "double_root_outside_simple_roots": "u<=U",
+        "double_root_between_simple_roots": "u>=U",
+        "triple_root": "u=U is necessary for first-order viability"
+      }
+    },
+    {
+      "id": "qdrt_06_shift_independence",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The threshold U is independent of the shift index; k enters only through a positive factor 2*k+7.",
+      "formula": "U=B*(3*a^2-5*a+5*p)/(6*p^2)",
+      "proof_boundary": "Threshold simplification only.",
+      "diagnostics": null
+    },
+    {
+      "id": "qdrt_07_triple_root_necessity",
+      "role": "exact_boundary_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "On the triple-root stratum, first-order viability requires u=U.",
+      "formula": "3*a^2-4*a+p=0 => H(-1/a)=0 iff u=U",
+      "proof_boundary": "Necessary first-order condition at a degenerate boundary.",
+      "diagnostics": null
+    },
+    {
+      "id": "qdrt_08_triple_root_tangency",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "At the triple-root threshold, the full first heat variation retains a double root factor.",
+      "formula": "H(w) is divisible by (1+a*w)^2",
+      "proof_boundary": "First-order tangency only; higher-time viability is not proved.",
+      "diagnostics": {
+        "p": "-3*a**2 + 4*a",
+        "threshold": "(2*a - 3)*(4*a - 5)/(3*a - 4)**2",
+        "constant_heat_value_at_threshold": "0",
+        "full_first_variation_at_threshold": "24*w**2*(a - 1)**2*(a*w + 1)**2*(2*a*k + a - 2*k + 1)/(a - 2)",
+        "tangent_factor": "(1+a*w)^2"
+      }
+    },
+    {
+      "id": "qdrt_09_countermodel_explanation",
+      "role": "exact_countermodel",
+      "readiness": "guard_validated",
+      "claim": "The earlier rational quartic obstruction fails precisely because its middle double-root branch requires u>=U but has u<U.",
+      "formula": "curvature<0, U-u>0 => curvature*(u-U)>0",
+      "proof_boundary": "Explains one abstract countermodel only.",
+      "diagnostics": {
+        "a": "13/20",
+        "p": "1197/1250",
+        "x": "48901/60000",
+        "y": "2147067000/2391307801",
+        "z_equals_u": "104061328/112253067",
+        "U": "57204145/61133184",
+        "U_minus_u": "2212607757569/254162496276864",
+        "curvature": "-3749/10000",
+        "criterion_left_side": "8295066483126181/2541624962768640000",
+        "conclusion": "positive left side violates the inward criterion"
+      }
+    },
+    {
+      "id": "qdrt_10_live_quartic_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "Construct a closed contraction-coordinate inequality realizing the branch-aware threshold and propagate it with a uniform spatial tail.",
+      "formula": "Q>=0 plus a root-branch-compatible extension of (3*a^2-4*a+p)*(u-U)<=0",
+      "proof_boundary": "Open quartic invariant and all-degree handoff; not PF-infinity, RH, or Lambda <= 0.",
+      "diagnostics": null
+    }
+  ]
+}

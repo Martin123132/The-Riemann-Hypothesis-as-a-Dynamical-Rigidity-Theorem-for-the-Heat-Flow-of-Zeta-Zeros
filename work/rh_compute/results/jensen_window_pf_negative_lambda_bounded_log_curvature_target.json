@@ -1,0 +1,172 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_bounded_log_curvature_target.py",
+  "date": "2026-07-06",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k22.jsonl"
+  ],
+  "finite_diagnostics": {
+    "checked_x_max": 21,
+    "coefficient_k_max": 22,
+    "lambdas": [
+      "-100.0",
+      "-50.0",
+      "-25.0"
+    ],
+    "max_bounded_log_curvature_target": {
+      "k": 1,
+      "lam": "-100.0",
+      "sample": "2.222222222222222222E-1"
+    },
+    "min_plain_logconvexity_shortfall": {
+      "k": 21,
+      "lam": "-100.0",
+      "sample": "3.212417302026237154E-2"
+    },
+    "min_raw_curvature_threshold_margin": {
+      "k": 21,
+      "lam": "-25.0",
+      "sample": "2.034879929997686858E-3"
+    },
+    "min_simple_log_buffer_margin": {
+      "k": 21,
+      "lam": "-25.0",
+      "sample": "2.005614607560894716E-3"
+    },
+    "raw_curvature_threshold_positive_rows": 63,
+    "raw_curvature_threshold_rows": 63,
+    "raw_logconvexity_positive_rows": 63,
+    "raw_logconvexity_rows": 63,
+    "simple_log_buffer_positive_rows": 63,
+    "simple_log_buffer_rows": 63,
+    "threshold_positive_rows": 63
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_bounded_log_curvature_target.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The target remains open_theorem_target.",
+    "Plain raw moment log-convexity is recorded as insufficient.",
+    "Finite prefix compatibility is not promoted to an all-k bounded-curvature theorem.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_bounded_log_curvature_target",
+  "proof_boundary": "Open theorem target only. It isolates the bounded log-curvature estimate needed by the negative-lambda buffered tail route, but it does not prove that estimate, does not prove the defect-tail theorem, does not prove cone entry, and does not prove Lambda <= 0.",
+  "source_defect_tail_target": "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md",
+  "source_log_curvature_bridge": "outputs/jensen_window_pf_negative_lambda_log_curvature_bridge.md",
+  "source_monotone_contraction_target": "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+  "status": "open_theorem_target",
+  "summary": {
+    "conditional_application_rows": 1,
+    "exact_reduction_rows": 2,
+    "insufficient_routes": 1,
+    "live_routes": 2,
+    "main_finding": "The bounded log-curvature target is the missing quantitative half of the negative-lambda buffered tail: prove B_k=-Delta^2 log A_k<=2/(3*(2*k+1)) for k>=22. Equivalently, for raw moments M_k=mu_(2k), prove log(M_(k+1)*M_(k-1)/M_k^2) >= log((2*k+1)/(2*k-1))-2/(3*(2*k+1)). Plain moment log-convexity only gives the nonnegative left side and is too weak.",
+    "raw_curvature_threshold_rows": 63,
+    "ready_to_apply_rows": 0,
+    "simple_log_buffer_rows": 63,
+    "target_closing": false,
+    "target_rows": 8
+  },
+  "target_id": "target_negative_lambda_bounded_log_curvature",
+  "target_rows": [
+    {
+      "acceptance_test": "Give a noncircular analytic estimate with explicit starting index and constants.",
+      "claim_if_proved": "Prove 0<=B_k<=2/(3*(2*k+1)) for all k>=22, where B_k=-Delta^2 log A_k=-log(x_k), for the actual negative-lambda zeta heat-flow coefficients.",
+      "gap": "No all-k bounded log-curvature estimate is currently proved.",
+      "id": "nllct_01_bounded_log_curvature_statement",
+      "proof_boundary": "Open theorem target only; not a proof of the defect-tail theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_statement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_log_curvature_bridge.md",
+        "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md"
+      ]
+    },
+    {
+      "acceptance_test": "Keep the factorial normalization A_k=M_k*k!/(2*k)! explicit.",
+      "claim_if_proved": "For M_k=mu_(2k), x_k=((2*k-1)/(2*k+1))*(M_(k+1)*M_(k-1)/M_k^2), so the bounded B_k target is equivalent to a quantitative lower bound on raw moment curvature.",
+      "gap": "The exact identity is available, but the quantitative lower bound is not.",
+      "id": "nllct_02_raw_moment_curvature_equivalence",
+      "proof_boundary": "Exact reduction only; not the analytic estimate.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_monotone_contraction_theorem_target.md"
+      ]
+    },
+    {
+      "acceptance_test": "Bound the remainder uniformly in k from the stated tail index, with constants strong enough for 2/(3*(2*k+1)).",
+      "claim_if_proved": "A uniform saddle/Laplace estimate for the actual heat-flow moment integrals gives the required upper bound on B_k.",
+      "gap": "Current asymptotic support is fixed-k/local and does not control the k-tail uniformly.",
+      "id": "nllct_03_saddle_laplace_route",
+      "proof_boundary": "Live theorem-search route only.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+        "outputs/jensen_window_pf_phi_taylor_cone_entry_sign_scout.md"
+      ]
+    },
+    {
+      "acceptance_test": "Derive the threshold log((2*k+1)/(2*k-1))-2/(3*(2*k+1)) from Phi/Newman-kernel structure.",
+      "claim_if_proved": "A zeta-specific lower bound on the growth of raw moment ratios proves the required raw moment curvature threshold.",
+      "gap": "Plain positivity or Stieltjes moment log-convexity gives only a zero lower bound.",
+      "id": "nllct_04_moment_ratio_growth_route",
+      "proof_boundary": "Live theorem-search route only; not a proved moment-ratio growth theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_log_curvature_bridge.md"
+      ]
+    },
+    {
+      "acceptance_test": "Do not use ordinary moment log-convexity alone as the bounded-curvature proof.",
+      "claim_if_proved": "Raw moment log-convexity gives M_(k+1)*M_(k-1)/M_k^2>=1.",
+      "gap": "The needed threshold is strictly positive for the checked tail range, so zero curvature is too weak.",
+      "id": "nllct_05_plain_moment_logconvexity_insufficient",
+      "proof_boundary": "Insufficient exact fact only.",
+      "readiness": "not_ready_to_apply",
+      "role": "insufficient_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_monotone_contraction_theorem_target.md"
+      ]
+    },
+    {
+      "acceptance_test": "Use as a base-case diagnostic only unless paired with an analytic tail theorem.",
+      "claim_if_proved": "The current finite prefix satisfies the raw moment curvature threshold and the equivalent simple log-buffer rows.",
+      "gap": "Finite compatibility through x_21 does not prove the all-k tail from k>=22.",
+      "id": "nllct_06_finite_compatibility",
+      "proof_boundary": "Finite diagnostic only.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_log_curvature_bridge.md"
+      ]
+    },
+    {
+      "acceptance_test": "Discharge both the bounded-curvature upper estimate and the monotone-contraction theorem without endpoint assumptions.",
+      "claim_if_proved": "Together with B_(k+1)<=B_k, the bounded-curvature estimate gives the buffered defect-tail sufficient condition.",
+      "gap": "The B monotonicity clause is still the open Delta^3 log A theorem target.",
+      "id": "nllct_07_monotone_contraction_interaction",
+      "proof_boundary": "Dependency statement only; neither open theorem is proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_dependency",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+        "outputs/jensen_window_pf_negative_lambda_log_curvature_bridge.md"
+      ]
+    },
+    {
+      "acceptance_test": "After proof, re-run the defect-tail target and dependency graph without changing forbidden endpoint assumptions.",
+      "claim_if_proved": "A proved bounded log-curvature theorem plus the monotone-contraction theorem would close the buffered route to the defect-tail theorem.",
+      "gap": "Both analytic inputs remain open.",
+      "id": "nllct_08_conditional_defect_tail_application",
+      "proof_boundary": "Conditional application only; not cone entry or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "conditional_application",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md",
+        "outputs/jensen_window_pf_negative_lambda_defect_recurrence_scout.md"
+      ]
+    }
+  ]
+}

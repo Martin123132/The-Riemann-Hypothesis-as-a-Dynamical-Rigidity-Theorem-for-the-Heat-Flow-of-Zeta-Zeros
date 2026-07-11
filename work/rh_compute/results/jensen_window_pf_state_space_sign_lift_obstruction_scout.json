@@ -1,0 +1,68 @@
+{
+  "date": "2026-07-06",
+  "finite_grid": {
+    "all_absolute_lift_gaps_positive": true,
+    "all_absolute_lift_rows_fail_exact_mu2": true,
+    "degrees": [
+      2,
+      8
+    ],
+    "derived_from": "work\\rh_compute\\results\\jensen_window_pf_reciprocal_motzkin_path_obstruction_lamgrid_n0_n20_d2_d8_dps520.jsonl",
+    "lambdas": [
+      "0",
+      "1e-6",
+      "1e-4",
+      "1e-2",
+      "1e-1"
+    ],
+    "mu2_sign_lift_obstruction_ok_rows": 735,
+    "mu2_sign_lift_obstruction_rows": 735,
+    "row_log": "work\\rh_compute\\results\\jensen_window_pf_state_space_sign_lift_obstruction_lamgrid_n0_n20_d2_d8_dps520.jsonl",
+    "shifts": [
+      0,
+      20
+    ]
+  },
+  "invariants": [
+    "The scout rejects only the absolute-value cover of raw Motzkin paths.",
+    "Every derived row depends on a validated lambda_1<0 Motzkin obstruction row.",
+    "No row is ready_to_apply.",
+    "The state-space doubled route remains live only if a genuinely modified exact positive model is constructed."
+  ],
+  "kind": "jensen_window_pf_state_space_sign_lift_obstruction_scout",
+  "proof_boundary": "State-space sign-lift obstruction diagnostic only; rejects only the absolute-value cover of raw Motzkin path weights, not every state-space doubled model, not a production-matrix theorem, not an all-order recurrence theorem, not Schur positivity, and not Lambda <= 0.",
+  "source_artifacts": [
+    "outputs/jensen_window_pf_reciprocal_motzkin_path_obstruction_scout.md",
+    "work/rh_compute/results/jensen_window_pf_reciprocal_motzkin_path_obstruction_scout.json",
+    "work\\rh_compute\\results\\jensen_window_pf_reciprocal_motzkin_path_obstruction_lamgrid_n0_n20_d2_d8_dps520.jsonl"
+  ],
+  "summary": {
+    "main_finding": "The cheap state-space sign lift that simply takes absolute values of the raw Motzkin path weights is rejected at mu_2: every derived finite row has absolute_lift_mu2-mu_2=2*kappa_1>0. A live state-space doubled route must therefore alter the representation itself, not just split raw signed paths into positive and negative states.",
+    "mu2_sign_lift_obstruction_rows": 735,
+    "ready_to_apply_rows": 0,
+    "symbolic_rows": 3,
+    "target_closing": false
+  },
+  "symbolic_rows": [
+    {
+      "id": "absolute_value_sign_state_cover",
+      "proof_boundary": "This is only one naive state-space lift, not every possible state-space model.",
+      "statement": "A cheap two-state sign cover keeps the raw Motzkin paths, replaces negative raw path weights by their absolute values, and counts the lifted paths with nonnegative transition and readout weights."
+    },
+    {
+      "id": "mu2_absolute_lift_gap",
+      "proof_boundary": "Uses the validated finite lambda_1<0 rows as a derived obstruction; not an all-order theorem.",
+      "statement": "For mu_2, the raw signed expression is beta_0^2+lambda_1=beta_0^2-kappa_1, while the absolute-value sign lift gives beta_0^2+kappa_1, so the gap is 2*kappa_1=-2*lambda_1."
+    },
+    {
+      "id": "surviving_state_space_requirement",
+      "proof_boundary": "Requirement for future theorem search only; not a construction.",
+      "statement": "A surviving state-space doubled model must change the representation, transition weights, or coefficient extraction so the final formula is exactly E(t)=1/H(-t) and manifestly nonnegative; it cannot be merely an absolute-value cover of the raw Motzkin paths."
+    }
+  ],
+  "target_model_row": "msm_04_state_space_doubled_model",
+  "target_route_rows": [
+    "rp_04_companion_or_production_matrix_total_positivity",
+    "rp_09_signed_or_modified_continued_fraction"
+  ]
+}

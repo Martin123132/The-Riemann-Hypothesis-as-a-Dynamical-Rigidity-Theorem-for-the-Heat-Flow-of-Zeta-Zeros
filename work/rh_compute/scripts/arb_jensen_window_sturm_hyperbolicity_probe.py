@@ -143,9 +143,10 @@ def remainder(numerator: list[flint.arb], denominator: list[flint.arb]) -> list[
 
 def sturm_sequence(poly: list[flint.arb]) -> list[list[flint.arb]]:
     seq = [trim(poly), trim(derivative(poly))]
+    max_length = degree(seq[0]) + 1
     while degree(seq[-1]) > 0:
         seq.append(trim(negative(remainder(seq[-2], seq[-1]))))
-        if len(seq) > 8:
+        if len(seq) > max_length:
             raise RuntimeError("unexpectedly long Sturm sequence")
     return seq
 

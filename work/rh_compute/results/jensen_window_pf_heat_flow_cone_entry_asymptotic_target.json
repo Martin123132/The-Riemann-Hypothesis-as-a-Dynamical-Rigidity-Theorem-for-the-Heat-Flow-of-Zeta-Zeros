@@ -1,0 +1,154 @@
+{
+  "kind": "jensen_window_pf_heat_flow_cone_entry_asymptotic_target",
+  "date": "2026-07-06",
+  "status": "open_theorem_target",
+  "parent_route": "jensen_window_pf_heat_flow_ratio_cone_invariance_lemma",
+  "target_id": "target_zeta_ratio_cone_entry",
+  "proof_boundary": "Open theorem target after cone entry. The cited interval/analytic certificate proves full ratio-cone entry at lambda=-100. This artifact does not prove infinite or collared finite forward-flow legitimacy, jwpf_06, RH, or Lambda <= 0.",
+  "cone": {
+    "ratio": "x_k=(A_{k+1}/A_k)/(A_k/A_{k-1})",
+    "lower_wall": "x_k >= (2*k-1)/(2*k+1)",
+    "upper_wall": "x_k <= 1",
+    "monotone_wall": "x_{k+1} >= x_k",
+    "entry_target": "entry is proved at lambda=-100; prove enough infinite or collared finite flow legitimacy to feed the ratio-cone invariance lemma"
+  },
+  "formal_asymptotic": {
+    "regime": "lambda=-T, T -> +infty",
+    "weight_taylor": "Phi(u)=c0+c2*u^2+c4*u^4+c6*u^6+...",
+    "moment_expansion": "A_k(-T)=C*4^(-k)*T^(-k-1/2)*(1+a*s/T+b*s*(s+1)/T^2+c*s*(s+1)*(s+2)/T^3+...), s=k+1/2",
+    "coefficient_ratios": "a=c2/c0, b=c4/c0, c=c6/c0",
+    "log_x_expansion": "log x_k=(2*b-a^2)/T^2 + 2*(a^3*k-3*a*b*k-a*b+3*c*k+3*c)/T^3+O(T^-4)",
+    "monotone_log_gap_expansion": "log(x_{k+1}/x_k)=2*(a^3-3*a*b+3*c)/T^3+O(T^-4)",
+    "entry_sign_requirements": [
+      "2*b-a^2 < 0 for eventual x_k<1 at fixed k",
+      "2*(a^3-3*a*b+3*c) > 0 for eventual x_{k+1}>x_k at fixed k",
+      "a rigorous uniform-in-k or collared finite-tail version is still required"
+    ]
+  },
+  "target_rows": [
+    {
+      "id": "hfcet_01_exact_cone_entry_statement",
+      "role": "entry_theorem",
+      "readiness": "ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_heat_flow_ratio_cone_invariance_lemma.md",
+        "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+        "outputs/jensen_window_pf_negative_lambda_m100_full_cone_entry_certificate.md"
+      ],
+      "claim_if_proved": "The actual zeta coefficient sequence lies in the full infinite ratio cone at lambda=-100.",
+      "gap": "No entry gap remains; the forward-flow legitimacy handoff is separate.",
+      "acceptance_test": "Validate the repaired prefix, exact pointwise walls, and analytic adjacent tail without endpoint PF, Jensen hyperbolicity, RH, Laguerre-Polya membership, or Lambda <= 0.",
+      "proof_boundary": "Interval/analytic entry theorem at one heat parameter only."
+    },
+    {
+      "id": "hfcet_02_fixed_k_asymptotic_formal_reduction",
+      "role": "formal_reduction",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_heat_flow_boundary_threshold_lemma.md"
+      ],
+      "claim_if_proved": "A fixed-k large-negative-lambda expansion reduces upper-wall and monotone-wall cone entry to Taylor-coefficient sign conditions for Phi at zero.",
+      "gap": "The formal expansion is fixed-k and does not by itself prove a full infinite cone or uniform collar.",
+      "acceptance_test": "Justify the asymptotic expansion rigorously with explicit error terms and state the k-range/uniformity.",
+      "proof_boundary": "Formal reduction target only; not a proof."
+    },
+    {
+      "id": "hfcet_03_gaussian_leading_degeneracy",
+      "role": "diagnostic_obstruction",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_heat_flow_ratio_cone_invariance_lemma.md"
+      ],
+      "claim_if_proved": "The leading constant-weight Gaussian asymptotic gives x_k -> 1, so it lands on the upper wall rather than strictly inside the cone.",
+      "gap": "Cone entry must use subleading Phi Taylor data; leading asymptotics alone are too weak.",
+      "acceptance_test": "Do not accept an entry proof that stops at x_k -> 1 without strict one-sided error control.",
+      "proof_boundary": "Diagnostic obstruction only; not a proof of cone entry."
+    },
+    {
+      "id": "hfcet_04_phi_taylor_sign_route",
+      "role": "diagnostic_obstruction",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_heat_flow_boundary_threshold_lemma.md",
+        "outputs/jensen_window_pf_phi_taylor_cone_entry_sign_scout.md"
+      ],
+      "claim_if_proved": "The certified local Phi Taylor signs support fixed-k strict upper-wall and monotone-wall entry for large negative lambda once rigorous remainder control is supplied.",
+      "gap": "The local Taylor-combination signs now have certified Phi tail bounds, but the current corpus has not converted them into a uniform or collared finite cone-entry theorem.",
+      "acceptance_test": "Combine the certified signs 2*b-a^2<0 and 2*(a^3-3*a*b+3*c)>0 with explicit asymptotic remainder estimates and a stated k-range/uniformity theorem.",
+      "proof_boundary": "Live asymptotic route only; local Taylor signs are not cone entry."
+    },
+    {
+      "id": "hfcet_05_uniform_k_or_tail_collar_gap",
+      "role": "hard_gap",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_heat_flow_ratio_cone_invariance_lemma.md",
+        "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md"
+      ],
+      "claim_if_proved": "Analytic legitimacy for an infinite-dimensional or explicitly collared finite forward flow is required to apply the boundary algebra.",
+      "gap": "Cone entry is proved, but a first-exit argument over infinitely many coordinates still needs uniform tail/collar control.",
+      "acceptance_test": "Prove a uniform tail barrier on lambda in [-100,0], or give a finite-collar flow theorem whose moving boundary and collars are explicit.",
+      "proof_boundary": "Hard forward-flow legitimacy gap."
+    },
+    {
+      "id": "hfcet_06_finite_grid_support",
+      "role": "finite_evidence",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_heat_flow_ratio_cone_invariance_lemma.md",
+        "outputs/jensen_window_pf_monotone_contraction_stress.md",
+        "outputs/jensen_window_pf_negative_lambda_cone_entry_prefix_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_finite_collar_contract.md"
+      ],
+      "claim_if_proved": "The existing Arb cache supports monotone contractions on the checked five-lambda grid, the large-negative-lambda prefix scout certifies the ratio cone for lambda=-25,-50,-100 through lower/upper k<=21 and monotone k<=20, and the finite-collar contract extracts the currently supported active depth K=19 with collars x_20,x_21.",
+      "gap": "Finite rows do not prove all lambda values, all k, all shifts, the required tail theorem, or the required cone-entry theorem; the current collared finite seed is only depth K=19.",
+      "acceptance_test": "Use finite evidence only as sanity support unless paired with a rigorous analytic tail/uniform theorem or a finite-collar flow theorem whose active depth and collars are explicit.",
+      "proof_boundary": "Finite evidence only."
+    },
+    {
+      "id": "hfcet_07_forbidden_endpoint_shortcuts",
+      "role": "circular_route",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ],
+      "claim_if_proved": "Endpoint Jensen hyperbolicity, Laguerre-Polya membership, or Lambda <= 0 would supply strong coefficient inequalities.",
+      "gap": "Using those as input would be circular for the Newman-direction programme.",
+      "acceptance_test": "Use endpoint PF/LP/RH/Newman conclusions only as outputs, never as premises.",
+      "proof_boundary": "Circular as input."
+    },
+    {
+      "id": "hfcet_08_conditional_application",
+      "role": "conditional_application",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_heat_flow_ratio_cone_invariance_lemma.md",
+        "outputs/jensen_window_pf_monotone_contraction_theorem_target.md"
+      ],
+      "claim_if_proved": "Cone entry plus the exact conditional ratio-cone invariance lemma would prove the monotone-contraction theorem for the covered coefficient range.",
+      "gap": "This would still need mapping into the full Jensen-window PF bridge and all-shape obligations.",
+      "acceptance_test": "After proving cone entry, verify the exact coefficient range, shift coverage, and downstream column/all-shape consequences.",
+      "proof_boundary": "Conditional application only; not jwpf_06."
+    }
+  ],
+  "summary": {
+    "target_rows": 8,
+    "ready_to_apply_rows": 1,
+    "live_routes": 0,
+    "formal_reduction_rows": 1,
+    "finite_evidence_rows": 1,
+    "hard_gap_rows": 1,
+    "target_closing": false,
+    "main_finding": "Full infinite ratio-cone entry is certified at lambda=-100 by a repaired finite prefix and analytic adjacent tail. Fixed-k asymptotics and local Phi Taylor signs remain diagnostic history. The remaining heat-flow theorem is forward infinite-dimensional or collared finite-flow legitimacy, followed by downstream all-shape bridge obligations."
+  },
+  "invariants": [
+    "Exactly the cone-entry theorem row is ready_to_apply.",
+    "The target remains open_target.",
+    "Fixed-k asymptotics are not the basis of the promoted full cone entry.",
+    "The Phi Taylor sign scout is not promoted to full cone entry.",
+    "The standalone negative-lambda prefix scout is not promoted without the repaired merge and analytic tail.",
+    "The standalone finite-collar contract is not promoted without the analytic tail.",
+    "Finite grid support alone is not promoted to an analytic theorem.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ]
+}

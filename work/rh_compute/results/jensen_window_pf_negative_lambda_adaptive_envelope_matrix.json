@@ -1,0 +1,141 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_adaptive_envelope_matrix.py",
+  "date": "2026-07-06",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k200.jsonl"
+  ],
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_adaptive_envelope_matrix.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The exact cone evidence is finite prefix evidence only.",
+    "The k-monotone and lambda-magnitude patterns are finite diagnostics only.",
+    "The one-third, fixed half-width, and scaled-defect nonincrease shortcuts remain rejected.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_adaptive_envelope_matrix",
+  "matrix_rows": [
+    {
+      "claim": "The exact cone 0<=s_k<=1 holds on 597/597 checked rows.",
+      "id": "nlaem_01_exact_cone_prefix",
+      "proof_boundary": "Finite prefix certificate only; not an all-k exact-cone theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_certificate"
+    },
+    {
+      "claim": "The scaled defect increases in k on 594/594 checked adjacent rows.",
+      "id": "nlaem_02_k_monotone_frontier",
+      "proof_boundary": "Finite monotonicity pattern only; it does not prove a limiting envelope.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_pattern"
+    },
+    {
+      "claim": "The scaled defect is ordered by |lambda| on 398/398 checked cross-lambda rows.",
+      "id": "nlaem_03_lambda_magnitude_order",
+      "proof_boundary": "Finite lambda-grid pattern only; it does not prove continuous lambda monotonicity.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_pattern"
+    },
+    {
+      "claim": "The checked maximum is s=5.376643171065356005E-1 at lambda=-25.0, k=199, with upper cone slack 4.623356828934643995E-1.",
+      "id": "nlaem_04_corner_dominance",
+      "proof_boundary": "Finite corner dominance only; it does not control k beyond the checked prefix.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_frontier"
+    },
+    {
+      "claim": "The half-width buffer fails on 76 rows, the one-third buffer fails on 418 rows, and scaled-defect nonincrease is incompatible with the k-increase pattern.",
+      "id": "nlaem_05_fixed_buffer_rejections",
+      "proof_boundary": "Finite rejection of shortcuts only; not a proof of the replacement envelope.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route"
+    },
+    {
+      "claim": "A plausible repair is to prove k-monotonicity, |lambda|-monotonicity, and a limiting/adaptive upper envelope below the exact cone wall.",
+      "id": "nlaem_06_monotone_envelope_route",
+      "proof_boundary": "Theorem-search route only; no monotone-envelope theorem is proved here.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route"
+    },
+    {
+      "claim": "Any promoted proof must give interval-safe all-k estimates and survive the fixed-buffer rejection gates.",
+      "id": "nlaem_07_acceptance_tests",
+      "proof_boundary": "Proof-hygiene gate only; not a mathematical bridge theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate"
+    }
+  ],
+  "proof_boundary": "Finite theorem-search diagnostic only. It records monotone-envelope patterns for the checked negative-lambda grid, but it does not prove k-uniform bounds, continuous lambda monotonicity, the adaptive scaled-defect target, cone entry, jwpf_06, RH, or Lambda <= 0.",
+  "source_adaptive_target": "outputs/jensen_window_pf_negative_lambda_adaptive_scaled_defect_target.md",
+  "source_scaled_defect_frontier": "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k200_scout.md",
+  "status": "finite theorem-search diagnostic",
+  "summary": {
+    "checked_x_max": 199,
+    "coefficient_k_max": 200,
+    "cone_positive_rows": 597,
+    "half_width_failure_rows": 76,
+    "half_width_positive_rows": 521,
+    "k_increase_positive_rows": 594,
+    "k_increase_rows": 594,
+    "lambda_order_positive_rows": 398,
+    "lambda_order_rows": 398,
+    "lambda_pairs": [
+      {
+        "min_gap": {
+          "k": 1,
+          "pair": "-25.0>=-50.0",
+          "sample": "2.185649379581140840E-2"
+        },
+        "pair": "-25.0>=-50.0",
+        "positive_rows": 199,
+        "rows": 199
+      },
+      {
+        "min_gap": {
+          "k": 1,
+          "pair": "-50.0>=-100.0",
+          "sample": "1.663609726220394924E-2"
+        },
+        "pair": "-50.0>=-100.0",
+        "positive_rows": 199,
+        "rows": 199
+      }
+    ],
+    "lambdas": [
+      "-25.0",
+      "-50.0",
+      "-100.0"
+    ],
+    "main_finding": "On the k200 negative-lambda prefix, s_k is interval-increasing in k on all 594/594 adjacent rows and interval-ordered by |lambda| on all 398/398 cross-lambda rows. The largest checked scaled defect is 5.376643171065356005E-1 at lambda=-25.0, k=199, leaving upper cone slack 4.623356828934643995E-1. This supports a monotone-envelope proof search, but supplies no all-k tail theorem.",
+    "matrix_rows": 7,
+    "max_scaled_defect": {
+      "k": 199,
+      "lam": "-25.0",
+      "sample": "5.376643171065356005E-1"
+    },
+    "min_cone_margin": {
+      "k": 1,
+      "lam": "-100.0",
+      "sample": "1.346067912947116963E-2"
+    },
+    "min_k_increase": {
+      "k": 198,
+      "lam": "-25.0",
+      "sample": "4.449655594664470276E-4"
+    },
+    "min_lambda_gap": {
+      "k": 1,
+      "pair": "-50.0>=-100.0",
+      "sample": "1.663609726220394924E-2"
+    },
+    "min_upper_slack": {
+      "k": 199,
+      "lam": "-25.0",
+      "sample": "4.623356828934643995E-1"
+    },
+    "one_third_failure_rows": 418,
+    "one_third_positive_rows": 179,
+    "ready_to_apply_rows": 0,
+    "scaled_defect_rows": 597,
+    "target_closing": false
+  }
+}

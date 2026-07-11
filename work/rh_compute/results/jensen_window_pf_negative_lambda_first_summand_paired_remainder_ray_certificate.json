@@ -1,0 +1,283 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_first_summand_paired_remainder_ray_certificate.py",
+  "date": "2026-07-10",
+  "diagnostics": {
+    "central_window": {
+      "central_remainder_cap": "1/40",
+      "central_remainder_upper": "2.25043943534960228992130917200459785961038038747658954735372E-2",
+      "endpoint_slope_loss_cap": "1/10",
+      "endpoint_slope_loss_upper": "4.07251318528254493517610056263744020737107645382583487342579E-4",
+      "exp_1_over_2000_upper": "1.00050012502083593776043836960575164848771676777200566765440E+0",
+      "exp_1_over_40000_upper": "1.00002500031250260418294278971388075207907434494827582617565E+0",
+      "q_log_drift_cap": "1/2000",
+      "q_log_drift_upper": "4.12396729051132882730041506051559013221779723695000745597171E-4",
+      "q_ratio_cap": "1001/1000",
+      "standardized_log_shift_cap": "1/40000",
+      "standardized_log_shift_upper": "2.06177746750891352229797773248454661144775384309069465852021E-5",
+      "tail_log_margin_lower": "9.99999999999998839497113131000975254932306839080439369044452E+17",
+      "u_ratio_cap": "10001/10000"
+    },
+    "cumulant_composition": {
+      "bound": "|kappa_3(Y)+alpha|<=120/q",
+      "coefficient_cap": 120,
+      "coefficient_upper": "178505502236101419773/1500000000000000000",
+      "scaled_bound": "P*|kappa_3(Y)+alpha|<1/1000",
+      "scaled_cap_fraction": "3/3125"
+    },
+    "derivative_envelopes": {
+      "alpha_bound": "|alpha|<=2/sqrt(q)",
+      "alpha_sq_margin": "10319/250",
+      "bell_v4_correction": 4120,
+      "central_fourth_bound": "sup_window |V^(4)|/a^2<=3/q",
+      "prefactor_bound": "P=t^2/a^(3/2)<=6*sqrt(q)/(5*u)",
+      "prefactor_sq_margin": "4092/54925",
+      "right_drift_factor": "30042013801920123003/1000000000000000000",
+      "v4_component_ratio_upper": "136676674520774419/6212574950000000",
+      "v4_normalized_margin": "1463/1521"
+    },
+    "mode_handoff": {
+      "compact_mode_start": "579/625",
+      "potential_slope_at_compact_start_upper": "3.17886371915959754694766439873084482741893495958601681361374E+2",
+      "q_at_499_lower": "1.46442701350737083836612675644209264792559638683183836587522E+9",
+      "target_t_start": 318
+    },
+    "moment_comparison": {
+      "gaussian_abs_moment_caps": {
+        "4": 4,
+        "5": 7,
+        "6": 15,
+        "7": 39,
+        "8": 105,
+        "9": 307
+      },
+      "linear_model_moments": {
+        "p0": "1",
+        "p1": "-alpha/2",
+        "p2": "1",
+        "p3": "-5*alpha/2"
+      },
+      "raw_error_caps_over_q": {
+        "raw1": 13,
+        "raw2": 36,
+        "raw3": 80
+      },
+      "raw_error_coefficients": {
+        "raw1": "6000100000/499999997",
+        "raw2": "2500000000/71428571",
+        "raw3": "39500500000/499999997"
+      },
+      "unnormalized_error_caps_over_q": {
+        "0": 6,
+        "1": 12,
+        "2": 29,
+        "3": 79
+      }
+    },
+    "parameters": {
+      "adaptive_cutoff": "Y=sqrt(8*log(q))",
+      "curvature_lower": "a>=39*u^2*q/10",
+      "mode_ray": "u>=5",
+      "precision_bits": 192,
+      "q_floor": 1000000000,
+      "slope_upper": "t<=3*u*q"
+    },
+    "ray_theorem": {
+      "cubic_correction_cap": "1/100",
+      "fifth_correction_cap": "1/1000",
+      "floor_margin": "419/6250",
+      "ray_remainder_absolute_cap": "299/25000",
+      "ray_remainder_lower": "-299/25000",
+      "required_remainder_floor": "-79/1000"
+    },
+    "tails": {
+      "actual_tail_argument": "W(+-Y)>=4*log(q)-1/40 and outward slopes are >=9*Y/10",
+      "actual_tail_ratio_max": "232078585/204073344",
+      "model_tail_argument": "Gaussian-linear model tails use P_j(Y,Y) and |alpha|*P_(j+3)(Y,Y)/6",
+      "model_tail_ratio_max": "64589374805/61917364224",
+      "normalized_tail_error": "<=q^(-2) for raw orders 0..3"
+    }
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_first_summand_paired_remainder_ray_certificate.py",
+  "kind": "jensen_window_pf_negative_lambda_first_summand_paired_remainder_ray_certificate",
+  "proof_boundary": "This artifact proves the u>=5 paired remainder theorem and composes it with the compact certificate to close the global first-summand cumulant hypothesis. It does not prove the remaining cone-propagation/all-order bridge, RH, or Lambda <= 0.",
+  "rows": [
+    {
+      "claim": "The compact cover starts below the t=318 mode, and the ray has explicit alpha, fourth-derivative, and prefactor envelopes.",
+      "diagnostics": {
+        "derivative_envelopes": {
+          "alpha_bound": "|alpha|<=2/sqrt(q)",
+          "alpha_sq_margin": "10319/250",
+          "bell_v4_correction": 4120,
+          "central_fourth_bound": "sup_window |V^(4)|/a^2<=3/q",
+          "prefactor_bound": "P=t^2/a^(3/2)<=6*sqrt(q)/(5*u)",
+          "prefactor_sq_margin": "4092/54925",
+          "right_drift_factor": "30042013801920123003/1000000000000000000",
+          "v4_component_ratio_upper": "136676674520774419/6212574950000000",
+          "v4_normalized_margin": "1463/1521"
+        },
+        "mode_handoff": {
+          "compact_mode_start": "579/625",
+          "potential_slope_at_compact_start_upper": "3.17886371915959754694766439873084482741893495958601681361374E+2",
+          "q_at_499_lower": "1.46442701350737083836612675644209264792559638683183836587522E+9",
+          "target_t_start": 318
+        }
+      },
+      "formula": "|alpha|<=2/sqrt(q), B4<=3/q, P<=6*sqrt(q)/(5*u)",
+      "id": "fsprrc_01_mode_and_derivative_geometry",
+      "proof_boundary": "Mode and derivative geometry only.",
+      "readiness": "available_exact",
+      "role": "exact_analytic_lemma"
+    },
+    {
+      "claim": "The adaptive cutoff Y=sqrt(8 log q) stays in the derivative envelope and keeps the perturbation uniformly small.",
+      "diagnostics": {
+        "central_remainder_cap": "1/40",
+        "central_remainder_upper": "2.25043943534960228992130917200459785961038038747658954735372E-2",
+        "endpoint_slope_loss_cap": "1/10",
+        "endpoint_slope_loss_upper": "4.07251318528254493517610056263744020737107645382583487342579E-4",
+        "exp_1_over_2000_upper": "1.00050012502083593776043836960575164848771676777200566765440E+0",
+        "exp_1_over_40000_upper": "1.00002500031250260418294278971388075207907434494827582617565E+0",
+        "q_log_drift_cap": "1/2000",
+        "q_log_drift_upper": "4.12396729051132882730041506051559013221779723695000745597171E-4",
+        "q_ratio_cap": "1001/1000",
+        "standardized_log_shift_cap": "1/40000",
+        "standardized_log_shift_upper": "2.06177746750891352229797773248454661144775384309069465852021E-5",
+        "tail_log_margin_lower": "9.99999999999998839497113131000975254932306839080439369044452E+17",
+        "u_ratio_cap": "10001/10000"
+      },
+      "formula": "|r(y)|<1/40 and endpoint slope loss <1/10 for |y|<=Y",
+      "id": "fsprrc_02_adaptive_window",
+      "proof_boundary": "Central-window theorem only.",
+      "readiness": "available_exact",
+      "role": "exact_analytic_lemma"
+    },
+    {
+      "claim": "The exact standardized weight is controlled by its first odd Gaussian perturbation.",
+      "diagnostics": null,
+      "formula": "|exp(-r)-(1-alpha*y^3/6)|<=B4*|y|^4/12+alpha^2*|y|^6/18",
+      "id": "fsprrc_03_first_order_weight_bound",
+      "proof_boundary": "Pointwise central comparison only.",
+      "readiness": "available_exact",
+      "role": "exact_analytic_lemma"
+    },
+    {
+      "claim": "Potential monotonicity and endpoint slopes control both actual tails, while Gaussian hazards control both model tails.",
+      "diagnostics": {
+        "actual_tail_argument": "W(+-Y)>=4*log(q)-1/40 and outward slopes are >=9*Y/10",
+        "actual_tail_ratio_max": "232078585/204073344",
+        "model_tail_argument": "Gaussian-linear model tails use P_j(Y,Y) and |alpha|*P_(j+3)(Y,Y)/6",
+        "model_tail_ratio_max": "64589374805/61917364224",
+        "normalized_tail_error": "<=q^(-2) for raw orders 0..3"
+      },
+      "formula": "normalized actual+model tail error<=q^(-2), raw orders 0..3",
+      "id": "fsprrc_04_two_tail_bound",
+      "proof_boundary": "Tail moment theorem only.",
+      "readiness": "available_exact",
+      "role": "exact_analytic_lemma"
+    },
+    {
+      "claim": "The four normalized raw moments remain close to the exactly integrable Gaussian-linear model.",
+      "diagnostics": {
+        "gaussian_abs_moment_caps": {
+          "4": 4,
+          "5": 7,
+          "6": 15,
+          "7": 39,
+          "8": 105,
+          "9": 307
+        },
+        "linear_model_moments": {
+          "p0": "1",
+          "p1": "-alpha/2",
+          "p2": "1",
+          "p3": "-5*alpha/2"
+        },
+        "raw_error_caps_over_q": {
+          "raw1": 13,
+          "raw2": 36,
+          "raw3": 80
+        },
+        "raw_error_coefficients": {
+          "raw1": "6000100000/499999997",
+          "raw2": "2500000000/71428571",
+          "raw3": "39500500000/499999997"
+        },
+        "unnormalized_error_caps_over_q": {
+          "0": 6,
+          "1": 12,
+          "2": 29,
+          "3": 79
+        }
+      },
+      "formula": "|m1+alpha/2|<=13/q, |m2-1|<=36/q, |m3+5*alpha/2|<=80/q",
+      "id": "fsprrc_05_raw_moment_comparison",
+      "proof_boundary": "Raw standardized moments only.",
+      "readiness": "available_exact",
+      "role": "exact_analytic_lemma"
+    },
+    {
+      "claim": "Normalization and centralization preserve enough cancellation to bound the residual skewness after the leading odd term.",
+      "diagnostics": {
+        "bound": "|kappa_3(Y)+alpha|<=120/q",
+        "coefficient_cap": 120,
+        "coefficient_upper": "178505502236101419773/1500000000000000000",
+        "scaled_bound": "P*|kappa_3(Y)+alpha|<1/1000",
+        "scaled_cap_fraction": "3/3125"
+      },
+      "formula": "|kappa_3(Y)+alpha|<=120/q and P*|kappa_3(Y)+alpha|<1/1000",
+      "id": "fsprrc_06_cumulant_composition",
+      "proof_boundary": "First-order cumulant theorem on u>=5.",
+      "readiness": "available_exact",
+      "role": "exact_analytic_theorem"
+    },
+    {
+      "claim": "The paired seventh-order normalized remainder satisfies a stronger bound on the full asymptotic mode ray.",
+      "diagnostics": {
+        "cubic_correction_cap": "1/100",
+        "fifth_correction_cap": "1/1000",
+        "floor_margin": "419/6250",
+        "ray_remainder_absolute_cap": "299/25000",
+        "ray_remainder_lower": "-299/25000",
+        "required_remainder_floor": "-79/1000"
+      },
+      "formula": "H_t>=-3/250>-79/1000 for u>=5",
+      "id": "fsprrc_07_ray_remainder_theorem",
+      "proof_boundary": "Analytic ray theorem only.",
+      "readiness": "available_exact",
+      "role": "exact_analytic_theorem"
+    },
+    {
+      "claim": "The compact paired certificate and analytic ray theorem prove the required remainder floor for every t>=318.",
+      "diagnostics": null,
+      "formula": "H_t>=-79/1000 for every real t>=318",
+      "id": "fsprrc_08_global_remainder_closure",
+      "proof_boundary": "Global first-summand remainder theorem; not yet the full heat-flow bridge.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "Together with the certified leading, cubic, and fifth caps, the global remainder proves the cumulant hypothesis used by the exact Gamma bridge.",
+      "diagnostics": null,
+      "formula": "kappa_3,t(2 log U)>=-37/(50*t^2), t>=318",
+      "id": "fsprrc_09_cumulant_wall_handoff",
+      "proof_boundary": "Closes the first-summand analytic hypothesis only; not cone propagation, RH, or Lambda <= 0.",
+      "readiness": "ready_to_apply",
+      "role": "exact_handoff"
+    }
+  ],
+  "source_compact_certificate": "outputs/jensen_window_pf_negative_lambda_first_summand_paired_remainder_certificate.md",
+  "source_cumulant_bridge": "outputs/jensen_window_pf_negative_lambda_first_summand_cumulant_bridge.md",
+  "source_leading_certificate": "outputs/jensen_window_pf_negative_lambda_first_summand_leading_saddle_certificate.md",
+  "source_saddle_target": "outputs/jensen_window_pf_negative_lambda_first_summand_saddle_wall_target.md",
+  "status": "analytic asymptotic-ray theorem and global paired-remainder closure",
+  "summary": {
+    "analytic_ray_rows": 1,
+    "certificate_rows": 9,
+    "floor_margin": "419/6250",
+    "global_remainder_closure_rows": 1,
+    "open_ray_rows": 0,
+    "ray_remainder_lower": "-299/25000",
+    "ready_to_apply_rows": 2,
+    "required_remainder_floor": "-79/1000"
+  }
+}

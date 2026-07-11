@@ -44,6 +44,13 @@ SPECS = (
         expected_rows=105,
         needed_max_k=25,
     ),
+    ManifestSpec(
+        summary=REPO_ROOT / "work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d6_d12_dps520_summary.json",
+        rows=REPO_ROOT / "work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d6_d12_dps520.jsonl",
+        degrees=(6, 7, 8, 9, 10, 11, 12),
+        expected_rows=735,
+        needed_max_k=32,
+    ),
 )
 
 
@@ -52,12 +59,13 @@ REQUIRED_NOTE_STRINGS = (
     "This is not a proof of all-degree or all-shift Jensen hyperbolicity",
     "Q_{d,n,lambda}(y)=P_{d,n,lambda}(-y)",
     "finite Polya-frequency characterization",
-    "315/315 checked Jensen windows",
-    "degree d = 3,4,5",
+    "1050/1050 checked Jensen windows",
+    "degree d = 3..12",
     "lambda in {0, 1e-6, 1e-4, 1e-2, 1e-1}",
     "shifts n = 0..20",
     "work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d3_d4_dps520_summary.json",
     "work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d5_dps520_summary.json",
+    "work/rh_compute/results/arb_jensen_window_sturm_lamgrid_n0_n20_d6_d12_dps520_summary.json",
     "python work/rh_compute/scripts/check_jensen_window_sturm_pf_consequence.py",
     "not all-minor Jensen-window PF-infinity",
 )
@@ -149,7 +157,7 @@ def validate(note: Path) -> list[ConsequenceIssue]:
         spec_issues, rows = validate_spec(spec)
         issues.extend(spec_issues)
         total_rows += rows
-    if total_rows != 315:
+    if total_rows != 1050:
         issues.append(ConsequenceIssue("<total>", "bad-total-window-count", repr(total_rows)))
     return issues
 
@@ -169,7 +177,7 @@ def main() -> int:
     else:
         for issue in issues:
             print(f"JENSEN-STURM-PF {issue.section} [{issue.issue}] {issue.detail}")
-        print(f"validated 315 finite Sturm-to-PF Jensen-window consequences with {len(issues)} issues")
+        print(f"validated 1050 finite Sturm-to-PF Jensen-window consequences with {len(issues)} issues")
     return 0 if not issues else 1
 
 

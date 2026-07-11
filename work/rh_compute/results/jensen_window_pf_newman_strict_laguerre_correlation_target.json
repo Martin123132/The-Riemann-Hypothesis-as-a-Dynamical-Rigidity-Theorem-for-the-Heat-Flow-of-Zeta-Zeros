@@ -1,0 +1,190 @@
+{
+  "kind": "jensen_window_pf_newman_strict_laguerre_correlation_target",
+  "date": "2026-07-11",
+  "status": "exact strict-Laguerre/Wiener equivalence with generic-kernel guard",
+  "proof_boundary": "This artifact composes positive-boundary attainment with the first Laguerre correlation identity and Wiener's theorem to give an RH-equivalent translation-density target for every 0<t<=1/2. It supplies an exact smooth strict-log-concavity and positive-definiteness countermodel with double Fourier zeros. It does not prove the Xi correlation transform zero-free, translation density, RH, or Lambda<=0.",
+  "sources": [
+    "outputs/jensen_window_pf_newman_positive_boundary_attainment_lemma.md",
+    "outputs/jensen_window_pf_kernel_mellin_upper_wall_certificate.md",
+    "outputs/formal_core.md",
+    "https://arxiv.org/abs/1309.0055",
+    "https://arxiv.org/abs/1606.05011"
+  ],
+  "exact": {
+    "definitions": {
+      "deformed_kernel": "phi_t(u)=exp(t*u^2)*Phi(u), u in R",
+      "heat_function": "H_t(x)=integral_0^infinity phi_t(u)*cos(x*u)du",
+      "first_laguerre": "L_t(x)=H_t'(x)^2-H_t(x)*H_t''(x)",
+      "correlation": "K_(1,t)(v)=integral_R phi_t(s+v)*phi_t(s-v)*s^2 ds"
+    },
+    "strict_laguerre_equivalence": "Lambda<=0 if and only if L_t(x)>0 for every real x and every 0<t<=1/2. The forward implication uses the simple real-zero factorization for t>Lambda; the reverse implication uses the finite multiple zero of H_Lambda forced when Lambda>0.",
+    "factorization_identity": "When H_t has simple real roots r_j, L_t(x)/H_t(x)^2=sum_j 1/(x-r_j)^2 away from roots, and L_t(r_j)=H_t'(r_j)^2>0.",
+    "origin_sign": "H_t(0)>0, H_t'(0)=0, H_t''(0)=-integral_0^infinity u^2*phi_t(u)du<0, hence L_t(0)>0.",
+    "correlation_identity": "L_t(x)=integral_R K_(1,t)(v)*cos(2*x*v)dv; equivalently, Fourier[K_(1,t)](xi)=L_t(xi/2).",
+    "correlation_normalization": {
+      "full_transform": "F_t(x)=integral_R phi_t(u)*exp(i*x*u)du=2*H_t(x)",
+      "full_laguerre": "L_1[F_t](x)=4*L_t(x)",
+      "jacobian_identity": "L_1[F_t](x)=4*integral_R K_(1,t)(v)*cos(2*x*v)dv"
+    },
+    "wiener_density": {
+      "source": "https://arxiv.org/abs/1606.05011",
+      "statement": "For K in L1(R), the linear span of its translates is dense in L1(R) if and only if its Fourier transform has no real zero.",
+      "application": "Translations of K_(1,t) are dense iff L_t has no real zero. Since L_t(0)>0, zero-freeness is equivalent to L_t(x)>0 for all x."
+    },
+    "density_rh_equivalence": "Lambda<=0 if and only if, for every 0<t<=1/2, the translations of K_(1,t) are dense in L1(R).",
+    "positive_definite_scope": "At a hypothetical boundary H_Lambda is Laguerre-Polya, so L_Lambda>=0 and K_(1,Lambda) is positive definite; a multiple zero c still gives Fourier[K_(1,Lambda)](2c)=L_Lambda(c)=0. Positive definiteness alone does not provide the required zero-freeness.",
+    "published_correlation_source": {
+      "source": "https://arxiv.org/abs/1309.0055",
+      "theorem": "Theorem 3.7 and equations (3.7), (3.14)",
+      "scope": "Correlation kernels represent generalized Laguerre expressions; positive definiteness gives nonnegativity, not strict positivity."
+    },
+    "strict_logconcavity_guard": {
+      "parameters": "a=1, sigma=2",
+      "triangle": "T_a(y)=(a-|y|)_+ = 1_[-a/2,a/2]*1_[-a/2,a/2]",
+      "gaussian": "G_sigma(x)=exp(-x^2/(2*sigma^2))",
+      "kernel": "K_(a,sigma)(x)=integral_(-a)^a (a-|y|)*exp(-(x-y)^2/(2*sigma^2))dy",
+      "conditional_curvature": "With p_x(y) proportional to T_a(y)G_sigma(x-y), (log K)''=Var_x(Y)/sigma^4-1/sigma^2",
+      "strict_bound": "Since Y lies in [-a,a], Var_x(Y)<=a^2; for sigma>a, (log K)''<=(a^2-sigma^2)/sigma^4<0.",
+      "fourier_transform": "4*sqrt(2)*sqrt(pi)*sigma*exp(-sigma**2*xi**2/2)*sin(a*xi/2)**2/xi**2",
+      "a1_sigma2_transform": "8*sqrt(2)*sqrt(pi)*exp(-2*xi**2)*sin(xi/2)**2/xi**2",
+      "double_zeros": "xi=2*pi*n/a for every nonzero integer n",
+      "positive_definite": "The transform is nonnegative, so K_(a,sigma) is positive definite.",
+      "translation_failure": "The double Fourier zeros make its translates non-dense by Wiener.",
+      "curvature_bound_a1_sigma2": "-3/16",
+      "second_derivative_at_2pi": "sqrt(2)*exp(-8*pi**2)/pi**(3/2)",
+      "scope_warning": "This Gaussian-tail model blocks promotion from strict log-concavity and positive definiteness alone; it does not reproduce the Xi tail."
+    },
+    "nonpromotion_decision": "Pointwise positivity, evenness, smoothness, strict log-concavity, and positive definiteness of a kernel do not force a zero-free Fourier transform. The Xi route needs a stronger correlation property such as Wiener translate density, strict Fourier positivity, or an Xi-specific total-positivity factorization.",
+    "open_handoff": "Prove uniformly for every 0<t<=1/2 that Fourier[K_(1,t)] has no real zero, equivalently that translations of K_(1,t) are dense in L1(R). A viable proof must use Xi-specific structure beyond generic strict log-concavity and positive definiteness.",
+    "checks": {
+      "triangular_transform": "4*sin(a*xi/2)**2/xi**2",
+      "gaussian_transform": "sqrt(2)*sqrt(pi)*sigma*exp(-sigma**2*xi**2/2)",
+      "guard_transform": "4*sqrt(2)*sqrt(pi)*sigma*exp(-sigma**2*xi**2/2)*sin(a*xi/2)**2/xi**2",
+      "guard_zero": "0",
+      "guard_zero_derivative": "0",
+      "guard_zero_second_derivative": "sqrt(2)*exp(-8*pi**2)/pi**(3/2)"
+    }
+  },
+  "rows": [
+    {
+      "id": "nslc_01_boundary_laguerre_zero",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "A positive Newman boundary forces a zero of the first Laguerre expression.",
+      "formula": "H_Lambda(c)=H_Lambda'(c)=0 => L_Lambda(c)=0",
+      "proof_boundary": "Uses the finite positive-boundary attainment lemma.",
+      "diagnostics": null
+    },
+    {
+      "id": "nslc_02_strict_laguerre_equivalence",
+      "role": "exact_equivalence",
+      "readiness": "ready_to_apply",
+      "claim": "Strict first-Laguerre positivity throughout positive time is equivalent to the Newman upper direction.",
+      "formula": "Lambda<=0 if and only if L_t(x)>0 for every real x and every 0<t<=1/2. The forward implication uses the simple real-zero factorization for t>Lambda; the reverse implication uses the finite multiple zero of H_Lambda forced when Lambda>0.",
+      "proof_boundary": "All real x and the full continuum 0<t<=1/2 are required.",
+      "diagnostics": {
+        "factorization": "When H_t has simple real roots r_j, L_t(x)/H_t(x)^2=sum_j 1/(x-r_j)^2 away from roots, and L_t(r_j)=H_t'(r_j)^2>0.",
+        "origin": "H_t(0)>0, H_t'(0)=0, H_t''(0)=-integral_0^infinity u^2*phi_t(u)du<0, hence L_t(0)>0."
+      }
+    },
+    {
+      "id": "nslc_03_correlation_identity",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The first Laguerre expression is exactly the Fourier transform of one positive Xi correlation kernel.",
+      "formula": "L_t(x)=integral_R K_(1,t)(v)*cos(2*x*v)dv; equivalently, Fourier[K_(1,t)](xi)=L_t(xi/2).",
+      "proof_boundary": "Fubini and the midpoint/difference change of variables.",
+      "diagnostics": {
+        "full_transform": "F_t(x)=integral_R phi_t(u)*exp(i*x*u)du=2*H_t(x)",
+        "full_laguerre": "L_1[F_t](x)=4*L_t(x)",
+        "jacobian_identity": "L_1[F_t](x)=4*integral_R K_(1,t)(v)*cos(2*x*v)dv"
+      }
+    },
+    {
+      "id": "nslc_04_wiener_density",
+      "role": "published_theorem",
+      "readiness": "available_published",
+      "claim": "Wiener translate density is equivalent to zero-freeness of the correlation transform.",
+      "formula": "Translations of K_(1,t) are dense iff L_t has no real zero. Since L_t(0)>0, zero-freeness is equivalent to L_t(x)>0 for all x.",
+      "proof_boundary": "Classical Wiener L1 Tauberian theorem; K_(1,t) is integrable.",
+      "diagnostics": {
+        "source": "https://arxiv.org/abs/1606.05011",
+        "statement": "For K in L1(R), the linear span of its translates is dense in L1(R) if and only if its Fourier transform has no real zero.",
+        "application": "Translations of K_(1,t) are dense iff L_t has no real zero. Since L_t(0)>0, zero-freeness is equivalent to L_t(x)>0 for all x."
+      }
+    },
+    {
+      "id": "nslc_05_density_rh_equivalence",
+      "role": "exact_equivalence",
+      "readiness": "ready_to_apply",
+      "claim": "The missing Newman direction is equivalent to an all-positive-time correlation-density theorem.",
+      "formula": "Lambda<=0 if and only if, for every 0<t<=1/2, the translations of K_(1,t) are dense in L1(R).",
+      "proof_boundary": "Equivalent target only; density is not proved.",
+      "diagnostics": null
+    },
+    {
+      "id": "nslc_06_positive_definite_scope",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "Positive definiteness yields nonnegative Laguerre expressions but does not exclude a boundary zero.",
+      "formula": "At a hypothetical boundary H_Lambda is Laguerre-Polya, so L_Lambda>=0 and K_(1,Lambda) is positive definite; a multiple zero c still gives Fourier[K_(1,Lambda)](2c)=L_Lambda(c)=0. Positive definiteness alone does not provide the required zero-freeness.",
+      "proof_boundary": "Separates nonnegativity from strict zero-freeness.",
+      "diagnostics": {
+        "source": "https://arxiv.org/abs/1309.0055",
+        "theorem": "Theorem 3.7 and equations (3.7), (3.14)",
+        "scope": "Correlation kernels represent generalized Laguerre expressions; positive definiteness gives nonnegativity, not strict positivity."
+      }
+    },
+    {
+      "id": "nslc_07_strict_logconcavity_guard",
+      "role": "exact_countermodel",
+      "readiness": "guard_validated",
+      "claim": "A smooth positive even strictly log-concave positive-definite kernel can have double Fourier zeros.",
+      "formula": "8*sqrt(2)*sqrt(pi)*exp(-2*xi**2)*sin(xi/2)**2/xi**2",
+      "proof_boundary": "Exact Gaussian-tail convolution model, not the Xi kernel.",
+      "diagnostics": {
+        "parameters": "a=1, sigma=2",
+        "triangle": "T_a(y)=(a-|y|)_+ = 1_[-a/2,a/2]*1_[-a/2,a/2]",
+        "gaussian": "G_sigma(x)=exp(-x^2/(2*sigma^2))",
+        "kernel": "K_(a,sigma)(x)=integral_(-a)^a (a-|y|)*exp(-(x-y)^2/(2*sigma^2))dy",
+        "conditional_curvature": "With p_x(y) proportional to T_a(y)G_sigma(x-y), (log K)''=Var_x(Y)/sigma^4-1/sigma^2",
+        "strict_bound": "Since Y lies in [-a,a], Var_x(Y)<=a^2; for sigma>a, (log K)''<=(a^2-sigma^2)/sigma^4<0.",
+        "fourier_transform": "4*sqrt(2)*sqrt(pi)*sigma*exp(-sigma**2*xi**2/2)*sin(a*xi/2)**2/xi**2",
+        "a1_sigma2_transform": "8*sqrt(2)*sqrt(pi)*exp(-2*xi**2)*sin(xi/2)**2/xi**2",
+        "double_zeros": "xi=2*pi*n/a for every nonzero integer n",
+        "positive_definite": "The transform is nonnegative, so K_(a,sigma) is positive definite.",
+        "translation_failure": "The double Fourier zeros make its translates non-dense by Wiener.",
+        "curvature_bound_a1_sigma2": "-3/16",
+        "second_derivative_at_2pi": "sqrt(2)*exp(-8*pi**2)/pi**(3/2)",
+        "scope_warning": "This Gaussian-tail model blocks promotion from strict log-concavity and positive definiteness alone; it does not reproduce the Xi tail."
+      }
+    },
+    {
+      "id": "nslc_08_generic_kernel_nonpromotion",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "Generic kernel shape properties cannot be promoted to Wiener density.",
+      "formula": "Pointwise positivity, evenness, smoothness, strict log-concavity, and positive definiteness of a kernel do not force a zero-free Fourier transform. The Xi route needs a stronger correlation property such as Wiener translate density, strict Fourier positivity, or an Xi-specific total-positivity factorization.",
+      "proof_boundary": "Does not rule out stronger Xi tail or total-positivity structure.",
+      "diagnostics": null
+    },
+    {
+      "id": "nslc_09_first_correlation_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "It is sufficient to prove zero-freeness of the first Xi correlation transform for all positive times up to 1/2.",
+      "formula": "Fourier[K_(1,t)](xi)=L_t(xi/2)>0 for all xi in R, 0<t<=1/2",
+      "proof_boundary": "Open Xi-specific strict correlation theorem.",
+      "diagnostics": null
+    },
+    {
+      "id": "nslc_10_xi_density_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "The next route should attack translate density using Xi-specific correlation structure.",
+      "formula": "Prove uniformly for every 0<t<=1/2 that Fourier[K_(1,t)] has no real zero, equivalently that translations of K_(1,t) are dense in L1(R). A viable proof must use Xi-specific structure beyond generic strict log-concavity and positive definiteness.",
+      "proof_boundary": "Not a proof of density, RH, or Lambda<=0.",
+      "diagnostics": null
+    }
+  ]
+}

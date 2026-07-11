@@ -88,6 +88,10 @@ REQUIRED_NOTE_STRINGS = (
     "work/rh_compute/results/proof_claim_ledger.json",
     "python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py",
     "validated Jensen-window PF theorem machinery fit matrix: 7 rows, 0 issues, 0 ready-to-apply rows",
+    "outputs/jensen_window_pf_structural_ansatz_matrix.md",
+    "work/rh_compute/results/jensen_window_pf_structural_ansatz_matrix.json",
+    "python work/rh_compute/scripts/check_jensen_window_pf_structural_ansatz_matrix.py",
+    "validated Jensen-window PF structural ansatz matrix: 6 ansatz rows, 0 issues, 0 ready-to-apply rows",
 )
 
 

@@ -1,0 +1,219 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_full_kernel_evenness_cauchy_lemma.py",
+  "date": "2026-07-10",
+  "diagnostics": {
+    "all_odd_taylor_coefficients_zero": true,
+    "all_symbolic_operator_identities_verified": true,
+    "analytic": {
+      "disk_admissible": true,
+      "disk_radius": "0.38",
+      "four_disk_radius_upper": "1.520000000000000000000000000000000000000",
+      "pi_over_two_lower": "1.570796326794896619231321691639751442099",
+      "real_exp4_lower_on_disk": "0.011104983408849904885559698512335034910163134523327",
+      "uniform_convergence_statement": "For |z|<=R<pi/8, Re(exp(4z))>=exp(-4R)cos(4R)>0, so the defining n-series and all z-derivatives converge uniformly."
+    },
+    "cauchy_derivative_factor_formula": "|x*G_20'(x)/2|<=M*x^42/(2*c0*R^42)*(42/(1-q)+q/(1-q)^2), q=x/R.",
+    "cauchy_value_factor_formula": "If sup_|z|<=R |Phi(z)|<=M and Phi(0)>=c0, then for 0<=x<R, |G_20(x)|<=M*x^42/(c0*R^42*(1-x/R)).",
+    "first_residual_degree": 42,
+    "full_kernel_evenness_certified": true,
+    "full_kernel_evenness_identity": "Phi(-u)=Phi(u)",
+    "kernel_operator_identity": "Phi(u)=exp(u)*(L_x Psi)(x), x=exp(4u), L_x=2*x^2*d_x^2+3*x*d_x",
+    "normalized_even_taylor_coefficient_formula": "r_j=Phi^(2j)(0)/((2j)!*Phi(0))",
+    "polynomial_M": 20,
+    "psi_definition": "Psi(x)=(theta(x)-1)/2=sum_{n>=1}exp(-pi*n^2*x)",
+    "psi_transformation": "Psi(x)=x^(-1/2)*Psi(1/x)+(x^(-1/2)-1)/2",
+    "residual_definition": "G_20(z)=Phi(z)/Phi(0)-sum_{j=0}^{20}r_j*z^(2j)",
+    "residual_order_42_certified": true,
+    "residual_vanishing_statement": "G_20^(m)(0)=0 for 0<=m<=41",
+    "residual_zero_order_at_least": 42,
+    "subtracted_even_degree": 40,
+    "symbolic": {
+      "annihilator_constant_residual": "0",
+      "annihilator_constant_verified": true,
+      "annihilator_x_minus_half_residual": "0",
+      "annihilator_x_minus_half_verified": true,
+      "covariance_identity": "L_x[x^(-1/2)f(1/x)]=x^(-1/2)*(L_y f)(1/x)",
+      "operator": "L_x=2*x^2*d_x^2+3*x*d_x",
+      "operator_covariance_residual": "0",
+      "operator_covariance_verified": true
+    },
+    "target_closing": false,
+    "theta_definition": "theta(x)=sum_{n in Z} exp(-pi*n^2*x)",
+    "theta_transformation": "theta(x)=x^(-1/2)*theta(1/x), x>0"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_full_kernel_evenness_cauchy_lemma.py",
+  "invariants": [
+    "Exact evenness is proved for the full theta kernel, not inferred from a finite truncation.",
+    "The Jacobi theta transformation is the classical Poisson-summation input.",
+    "The order-42 zero uses exact parity and exact subtraction through degree 40.",
+    "The Cauchy formulas are local analytic estimates, not formal full-Gamma moment summation.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_full_kernel_evenness_cauchy_lemma",
+  "matrix_rows": [
+    {
+      "claim": "Use the Jacobi theta transformation theta(x)=x^(-1/2)theta(1/x) for x>0, equivalently the recorded inhomogeneous Psi transformation.",
+      "diagnostics": null,
+      "formula": "Psi(x)=x^(-1/2)*Psi(1/x)+(x^(-1/2)-1)/2",
+      "gap": null,
+      "id": "nlrgfkec_01_jacobi_theta_input",
+      "proof_boundary": "Classical Poisson/Jacobi identity used as an exact input; not a Newman conclusion.",
+      "readiness": "available_exact",
+      "role": "exact_classical_lemma",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_audit.md"
+      ]
+    },
+    {
+      "claim": "The positive-u Riemann kernel series equals exp(u)*(2*x^2*Psi''(x)+3*x*Psi'(x)) at x=exp(4u).",
+      "diagnostics": null,
+      "formula": "Phi(u)=exp(u)*(L_x Psi)(x), x=exp(4u), L_x=2*x^2*d_x^2+3*x*d_x",
+      "gap": null,
+      "id": "nlrgfkec_02_kernel_operator_identity",
+      "proof_boundary": "Exact differentiation and regrouping of the uniformly convergent theta series.",
+      "readiness": "available_exact",
+      "role": "exact_algebraic_lemma",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_audit.md"
+      ]
+    },
+    {
+      "claim": "The differential operator annihilates 1 and x^(-1/2) and obeys the recorded inversion covariance.",
+      "diagnostics": {
+        "annihilator_constant_residual": "0",
+        "annihilator_constant_verified": true,
+        "annihilator_x_minus_half_residual": "0",
+        "annihilator_x_minus_half_verified": true,
+        "covariance_identity": "L_x[x^(-1/2)f(1/x)]=x^(-1/2)*(L_y f)(1/x)",
+        "operator": "L_x=2*x^2*d_x^2+3*x*d_x",
+        "operator_covariance_residual": "0",
+        "operator_covariance_verified": true
+      },
+      "formula": null,
+      "gap": null,
+      "id": "nlrgfkec_03_operator_covariance",
+      "proof_boundary": "Exact symbolic differential identity only.",
+      "readiness": "available_exact",
+      "role": "exact_algebraic_lemma",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_endpoint_parity_repair_matrix.md"
+      ]
+    },
+    {
+      "claim": "Combining the Psi transformation, operator covariance, and x=exp(4u) proves Phi(-u)=Phi(u).",
+      "diagnostics": {
+        "full_kernel_evenness_certified": true
+      },
+      "formula": "Phi(-u)=Phi(u)",
+      "gap": null,
+      "id": "nlrgfkec_04_full_kernel_evenness",
+      "proof_boundary": "Exact full infinite-kernel evenness; it does not assert evenness of finite n truncations.",
+      "readiness": "available_exact",
+      "role": "exact_analytic_lemma",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_audit.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_endpoint_parity_repair_matrix.md"
+      ]
+    },
+    {
+      "claim": "The defining full-kernel n-series is holomorphic with termwise derivatives on every closed disk |z|<=R<pi/8.",
+      "diagnostics": {
+        "disk_admissible": true,
+        "disk_radius": "0.38",
+        "four_disk_radius_upper": "1.520000000000000000000000000000000000000",
+        "pi_over_two_lower": "1.570796326794896619231321691639751442099",
+        "real_exp4_lower_on_disk": "0.011104983408849904885559698512335034910163134523327",
+        "uniform_convergence_statement": "For |z|<=R<pi/8, Re(exp(4z))>=exp(-4R)cos(4R)>0, so the defining n-series and all z-derivatives converge uniformly."
+      },
+      "formula": null,
+      "gap": null,
+      "id": "nlrgfkec_05_disk_analyticity",
+      "proof_boundary": "Local disk analyticity only; not a global entire-function claim for this series representation.",
+      "readiness": "available_exact",
+      "role": "exact_analytic_lemma",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_x_moment_taylor_certificate.md"
+      ]
+    },
+    {
+      "claim": "After subtracting normalized even Taylor coefficients r_0 through r_20, the full residual G_20 has a zero of order at least 42 at the origin.",
+      "diagnostics": {
+        "first_residual_degree": 42,
+        "residual_order_42_certified": true
+      },
+      "formula": "G_20^(m)(0)=0 for 0<=m<=41",
+      "gap": null,
+      "id": "nlrgfkec_06_order42_residual_zero",
+      "proof_boundary": "Exact local residual-order lemma only; not a Gamma-expectation bound.",
+      "readiness": "available_exact",
+      "role": "exact_analytic_lemma",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_endpoint_parity_repair_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "Cauchy's coefficient estimate and the order-42 zero give the recorded x^42 value and logarithmic-derivative-core bounds on 0<=x<R.",
+      "diagnostics": {
+        "derivative_formula": "|x*G_20'(x)/2|<=M*x^42/(2*c0*R^42)*(42/(1-q)+q/(1-q)^2), q=x/R.",
+        "value_formula": "If sup_|z|<=R |Phi(z)|<=M and Phi(0)>=c0, then for 0<=x<R, |G_20(x)|<=M*x^42/(c0*R^42*(1-x/R))."
+      },
+      "formula": null,
+      "gap": null,
+      "id": "nlrgfkec_07_factored_cauchy_bounds",
+      "proof_boundary": "Exact conditional Cauchy formula; a later certificate must supply M, c0, R, and integration bounds.",
+      "readiness": "available_exact",
+      "role": "exact_sufficient_condition",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_x_moment_taylor_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "Tail-sized odd coefficients of Phi_30 prove exact evenness of Phi_30.",
+      "diagnostics": null,
+      "formula": null,
+      "gap": "Only the full theta kernel is exactly even; finite n truncations retain nonzero odd coefficients.",
+      "id": "nlrgfkec_08_finite_truncation_promotion_rejected",
+      "proof_boundary": "Rejected finite-truncation parity promotion only.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_endpoint_parity_repair_matrix.md"
+      ]
+    },
+    {
+      "claim": "Any use of the order-42 factor must bind the full-kernel disk majorant and real tail without replacing exact evenness by numerical near-evenness.",
+      "diagnostics": null,
+      "formula": null,
+      "gap": null,
+      "id": "nlrgfkec_09_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not cone entry, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Exact full-kernel parity, local analyticity, order-42 residual zero, and factored Cauchy bounds only. It does not bound a Gamma expectation by itself, does not prove cone entry or sign regularity, and does not prove RH or Lambda <= 0.",
+  "source_compact_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_x_moment_taylor_certificate.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_parity_matrix": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_endpoint_parity_repair_matrix.md",
+  "source_signed_audit": "outputs/signed_hankel_jensen_audit.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "exact full-kernel evenness and Cauchy lemma",
+  "summary": {
+    "disk_radius": "0.38",
+    "full_kernel_evenness_certified": true,
+    "main_finding": "The Jacobi theta transformation and an exact differential-operator covariance prove the full Riemann kernel even. On |z|<pi/8 the full series is analytic, so subtracting r_0 through r_20 leaves an exact order-42 zero. Cauchy's estimate then factors both residual channels by x^42. This is the analytic input needed for a decaying T>=10000 Gamma-expectation bound, not itself a cone-entry, RH, or Lambda <= 0 proof.",
+    "matrix_rows": 9,
+    "ready_to_apply_rows": 0,
+    "residual_order_42_certified": true,
+    "residual_zero_order_at_least": 42,
+    "symbolic_operator_identities": 3,
+    "symbolic_operator_identities_verified": 3,
+    "target_closing": false
+  }
+}

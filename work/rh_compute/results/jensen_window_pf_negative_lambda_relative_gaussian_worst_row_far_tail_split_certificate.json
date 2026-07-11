@@ -1,0 +1,224 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.py",
+  "invariants": [
+    "No row is ready_to_apply for the full intervalization target.",
+    "Only the worst-row finite n<=30 far tail y>=200 is certified here.",
+    "The compact interval 0<=y<=200 remains open.",
+    "The omitted n>30 source, aggregation, all-row coverage, and grid-to-collar coverage remain separate.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate",
+  "matrix_rows": [
+    {
+      "claim": "For the worst row T=10000, F_21, split the normalized Gamma expectation at y=200. Arb margins certify the finite n<=30 Phi and x Phi' majorants are decreasing beyond the split.",
+      "diagnostics": {
+        "derivative_majorant_monotonicity_margin_lower": "2.053964955826639750100365648207602941110",
+        "phi_term_count": 30,
+        "split_x": "0.1414213562373095048801688724209698078570",
+        "split_y": 200,
+        "value_majorant_monotonicity_margin_lower": "13.12503276769211499410880926925609333396"
+      },
+      "gap": null,
+      "id": "nlrgwrftsc_01_split_and_monotonicity",
+      "proof_boundary": "Far-tail split monotonicity certificate only; not compact-interval integration.",
+      "readiness": "available_tail_certificate",
+      "role": "arb_tail_certificate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_node_c0_range_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md"
+      ]
+    },
+    {
+      "claim": "The finite n<=30 Phi and derivative-core contributions on y>=200 are bounded by the monotone majorant at the split times the Arb upper Gamma tail mass.",
+      "diagnostics": {
+        "c0_lower": "0.44",
+        "derivative_phi_tail_bound": "3.559939908583515037371089990427770881092E-59",
+        "phi_abs_bound_at_split": "0.3549040369132711613838363950469748782883",
+        "tail_mass_upper": "2.061872387924679053576321193215761896360E-59",
+        "value_phi_tail_bound": "1.663106441078351932873027976692146177263E-59",
+        "x_phip_abs_bound_at_split": "1.519370033713227853650085491699334190309"
+      },
+      "gap": null,
+      "id": "nlrgwrftsc_02_finite_phi_tail_bound",
+      "proof_boundary": "Finite n<=30 far-tail Phi bound only; not the omitted n>30 source or compact interval.",
+      "readiness": "available_tail_certificate",
+      "role": "arb_tail_certificate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_node_c0_range_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_grid_certificate.md"
+      ]
+    },
+    {
+      "claim": "The cancellation polynomial tail on y>=200 is bounded by Arb upper incomplete-Gamma moments and Arb coefficient-ratio enclosures.",
+      "diagnostics": {
+        "derivative_polynomial_tail_bound": "2.845903123114037602953051448880343397728E-59",
+        "moment_sample_rows": [
+          {
+            "derivative_contribution_upper": "0",
+            "j": 0,
+            "proof_boundary": "Sampled polynomial tail-moment contribution only.",
+            "ratio_abs_upper": "1.000000000000000000000000000000000000000",
+            "tail_moment_upper": "2.061872387924679053576321193215761896360E-59",
+            "value_contribution_upper": "2.061872387924679053576321193215761896360E-59"
+          },
+          {
+            "derivative_contribution_upper": "1.553093244550586745822807419290660061729E-59",
+            "j": 1,
+            "proof_boundary": "Sampled polynomial tail-moment contribution only.",
+            "ratio_abs_upper": "37.45380985900664233683260390434643972954",
+            "tail_moment_upper": "4.146689616883151990508564374555854306981E-57",
+            "value_contribution_upper": "1.553093244550586745822807419290660061729E-59"
+          },
+          {
+            "derivative_contribution_upper": "1.010865720633410392474637788738725114526E-59",
+            "j": 2,
+            "proof_boundary": "Sampled polynomial tail-moment contribution only.",
+            "ratio_abs_upper": "606.0506446363092395662753197700082678903",
+            "tail_moment_upper": "8.339779270757401185843737620303998217599E-55",
+            "value_contribution_upper": "5.054328603167051962373188943693625572630E-60"
+          },
+          {
+            "derivative_contribution_upper": "3.304978586355404124302232509117520629125E-65",
+            "j": 10,
+            "proof_boundary": "Sampled polynomial tail-moment contribution only.",
+            "ratio_abs_upper": "14787468229.30549815091563407940055034899",
+            "tail_moment_upper": "2.234986094377985569355686874964614262382E-36",
+            "value_contribution_upper": "3.304978586355404124302232509117520629125E-66"
+          },
+          {
+            "derivative_contribution_upper": "2.403852088058794567657822371138676842374E-73",
+            "j": 20,
+            "proof_boundary": "Sampled polynomial tail-moment contribution only.",
+            "ratio_abs_upper": "4944469183781380656.778124937500385796020",
+            "tail_moment_upper": "2.430849499420280654200068198423065343109E-13",
+            "value_contribution_upper": "1.201926044029397283828911185569338421187E-74"
+          }
+        ],
+        "value_polynomial_tail_bound": "4.211397187548070538090594671854112325119E-59"
+      },
+      "gap": null,
+      "id": "nlrgwrftsc_03_polynomial_tail_moments",
+      "proof_boundary": "Polynomial far-tail moment certificate only; not compact-interval integration.",
+      "readiness": "available_tail_certificate",
+      "role": "arb_tail_certificate",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_first_omitted_denominator_certificate.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_first_omitted_denominator_certificate.md"
+      ]
+    },
+    {
+      "claim": "The combined finite n<=30 value and derivative far tails on y>=200 are far below the unscaled and first-omitted ratio caps required by the quadrature route matrix.",
+      "diagnostics": {
+        "derivative_ratio_to_first_omitted_upper": "4.497769005186247039689660658162936457902E-27",
+        "derivative_scaled_tail_bound": "6.405843031697552640324141439308114278820E-51",
+        "derivative_tail_ratio_below_quadrature_cap": true,
+        "derivative_tail_to_unscaled_cap_ratio_upper": "4.497769005186247039689660658162936457902E-21",
+        "derivative_total_tail_bound": "6.405843031697552640324141439308114278820E-59",
+        "quadrature_ratio_radius_cap": "0.0000010",
+        "value_ratio_to_first_omitted_upper": "8.661863308699458186697067463495530095599E-26",
+        "value_scaled_tail_bound": "5.874503628626422470963622648546258502383E-47",
+        "value_tail_ratio_below_quadrature_cap": true,
+        "value_tail_to_unscaled_cap_ratio_upper": "8.661863308699458186697067463495530095599E-20",
+        "value_total_tail_bound": "5.874503628626422470963622648546258502383E-59"
+      },
+      "gap": null,
+      "id": "nlrgwrftsc_04_tail_vs_quadrature_cap",
+      "proof_boundary": "Far-tail comparison only; it does not certify the compact interval 0<=y<=200.",
+      "readiness": "available_tail_certificate",
+      "role": "arb_tail_certificate",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md"
+      ]
+    },
+    {
+      "claim": "After this far-tail certificate, the independent interval-integration route is reduced to certifying the compact worst-row integral on 0<=y<=200 plus already separated tail sources.",
+      "diagnostics": {
+        "remaining_compact_interval": "0<=y<=200",
+        "remaining_sources": [
+          "Arb or interval-adaptive integration on 0<=y<=200",
+          "rounding and aggregation with the other intervalization sources",
+          "all recorded rows/orders, not just the worst row",
+          "finite-grid to full-collar coverage"
+        ],
+        "retired_component": "finite n<=30 cancellation-reduced far tail y>=200 for T=10000, F_21"
+      },
+      "gap": null,
+      "id": "nlrgwrftsc_05_interval_integration_handoff",
+      "proof_boundary": "Handoff only; not a finite-grid interval certificate or uniform collar theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "intervalization_handoff",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "The y>=200 far-tail certificate proves the quadrature-remainder source for the worst row.",
+      "diagnostics": null,
+      "gap": "It certifies only the continuum far tail after the split. The compact interval 0<=y<=200 still needs interval integration or a derivative/remainder theorem.",
+      "id": "nlrgwrftsc_06_far_tail_promotion_rejected",
+      "proof_boundary": "Rejected promotion only; not quadrature remainder, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    },
+    {
+      "claim": "A promoted worst-row interval-integration certificate may use this far-tail split only together with a compact-interval enclosure and aggregation ledger.",
+      "diagnostics": null,
+      "gap": null,
+      "id": "nlrgwrftsc_07_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a finite-grid interval certificate, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Worst-row far-tail split certificate only. It certifies the finite n<=30 cancellation-reduced continuum tail y>=200 for T=10000, F_21 against the quadrature route caps, but it does not integrate the compact interval 0<=y<=200, does not aggregate rounding, does not cover all rows or quadrature orders, does not prove a finite-grid interval certificate, does not prove a uniform collar theorem, and does not prove RH or Lambda <= 0.",
+  "source_cancellation_reduced_grid_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_first_omitted_denominator_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_first_omitted_denominator_certificate.md",
+  "source_first_omitted_denominator_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_first_omitted_denominator_certificate.json",
+  "source_intervalization_target": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+  "source_node_c0_range_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_node_c0_range_certificate.md",
+  "source_phi_tail_grid_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_grid_certificate.md",
+  "source_quadrature_remainder_route_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.json",
+  "source_quadrature_remainder_route_matrix": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "worst-row far-tail split certificate",
+  "summary": {
+    "T": 10000,
+    "derivative_ratio_to_first_omitted_upper": "4.497769005186247039689660658162936457902E-27",
+    "derivative_scaled_tail_bound": "6.405843031697552640324141439308114278820E-51",
+    "derivative_tail_ratio_below_quadrature_cap": true,
+    "derivative_tail_to_unscaled_cap_ratio_upper": "4.497769005186247039689660658162936457902E-21",
+    "derivative_total_tail_bound": "6.405843031697552640324141439308114278820E-59",
+    "derivative_unscaled_tail_below_quadrature_cap": true,
+    "index": 21,
+    "main_finding": "The worst-row interval-integration route now has an Arb-certified far-tail split: on y>=200, finite n<=30 Phi majorants are monotone decreasing, the polynomial part is bounded by upper incomplete-Gamma moments, and the combined value and derivative tails are far below the quadrature route matrix caps. This retires only the far-tail part; compact integration on 0<=y<=200, aggregation, all-row coverage, and grid-to-collar coverage remain open.",
+    "matrix_rows": 7,
+    "phi_term_count": 30,
+    "polynomial_M": 20,
+    "precision_bits": 512,
+    "quadrature_ratio_radius_cap": "0.0000010",
+    "ready_to_apply_rows": 0,
+    "remaining_compact_interval": "0<=y<=200",
+    "split_x": "0.1414213562373095048801688724209698078570",
+    "split_y": 200,
+    "tail_mass_upper": "2.061872387924679053576321193215761896360E-59",
+    "target_closing": false,
+    "value_ratio_to_first_omitted_upper": "8.661863308699458186697067463495530095599E-26",
+    "value_scaled_tail_bound": "5.874503628626422470963622648546258502383E-47",
+    "value_tail_ratio_below_quadrature_cap": true,
+    "value_tail_to_unscaled_cap_ratio_upper": "8.661863308699458186697067463495530095599E-20",
+    "value_total_tail_bound": "5.874503628626422470963622648546258502383E-59",
+    "value_unscaled_tail_below_quadrature_cap": true
+  }
+}

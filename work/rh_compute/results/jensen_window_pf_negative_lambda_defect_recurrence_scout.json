@@ -1,0 +1,106 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_defect_recurrence_scout.py",
+  "date": "2026-07-06",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k22.jsonl"
+  ],
+  "finite_diagnostics": {
+    "buffered_sufficient_positive_rows": 63,
+    "buffered_sufficient_rows": 63,
+    "checked_x_max": 21,
+    "coefficient_k_max": 22,
+    "defect_monotone_positive_rows": 60,
+    "defect_monotone_rows": 60,
+    "lambdas": [
+      "-100.0",
+      "-50.0",
+      "-25.0"
+    ],
+    "max_defect_ratio": {
+      "k": 20,
+      "lam": "-100.0",
+      "sample": "9.876072930238421307E-1"
+    },
+    "max_scaled_defect": {
+      "k": 21,
+      "lam": "-25.0",
+      "sample": "2.876419422417297597E-1"
+    },
+    "max_width_preserving_excess": {
+      "k": 1,
+      "lam": "-25.0",
+      "sample": "1.062756314392564011E-2"
+    },
+    "min_buffer_margin": {
+      "k": 21,
+      "lam": "-25.0",
+      "sample": "4.569139109160357364E-2"
+    },
+    "min_defect_monotone_gap": {
+      "k": 20,
+      "lam": "-100.0",
+      "sample": "7.539431011168075104E-5"
+    },
+    "width_preserving_positive_rows": 0,
+    "width_preserving_rejected_rows": 60,
+    "width_preserving_rows": 60
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_defect_recurrence_scout.py",
+  "invariants": [
+    "No row is ready_to_apply for the defect-tail theorem.",
+    "The buffered sufficient condition is not promoted to an all-k proof.",
+    "Width-preserving recurrence is explicitly rejected.",
+    "Scaled-defect nonincrease is explicitly rejected.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_defect_recurrence_scout",
+  "proof_boundary": "Finite theorem-search diagnostic only. It identifies recurrence-style sufficient conditions and finite counterevidence for over-strong recurrences, but it does not prove an all-k tail theorem, does not prove cone entry, does not prove jwpf_06, and leaves Lambda <= 0 unsettled.",
+  "recurrence_rows": [
+    {
+      "claim": "If 0<=d_k<=2/(3*(2*k+1)) on the tail and d_(k+1)<=d_k from the bridge index, then the target defect barriers 0<=d_k<=2/(2*k+1) and d_(k+1)<=d_k follow.",
+      "finite_positive_rows": 63,
+      "finite_rows": 63,
+      "id": "nldrs_01_buffered_sufficient_tail_condition",
+      "proof_boundary": "Sufficient condition plus finite compatibility only; not an all-k theorem.",
+      "role": "live_sufficient_condition"
+    },
+    {
+      "claim": "Defect monotonicity alone gives d_(k+1)<=d_k but does not preserve the shrinking lower-wall width for all k.",
+      "finite_positive_rows": 60,
+      "finite_rows": 60,
+      "id": "nldrs_02_defect_monotone_only_insufficient",
+      "proof_boundary": "Finite-compatible but insufficient by itself.",
+      "role": "insufficient_condition"
+    },
+    {
+      "claim": "The direct recurrence d_(k+1)<=((2*k+1)/(2*k+3))*d_k would preserve the lower wall step-by-step, but is false on the certified prefix.",
+      "finite_positive_rows": 0,
+      "finite_rejected_rows": 60,
+      "finite_rows": 60,
+      "id": "nldrs_03_width_preserving_recurrence_rejected",
+      "proof_boundary": "Rejected by finite interval evidence only.",
+      "role": "rejected_candidate"
+    },
+    {
+      "claim": "The scaled-defect nonincreasing shortcut remains rejected by the tail-barrier scout.",
+      "id": "nldrs_04_scaled_defect_nonincrease_rejected",
+      "proof_boundary": "Rejected shortcut only; not a theorem.",
+      "role": "rejected_candidate",
+      "source": "outputs/jensen_window_pf_negative_lambda_tail_barrier_scout.md"
+    }
+  ],
+  "source_defect_tail_target": "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md",
+  "source_tail_barrier_scout": "outputs/jensen_window_pf_negative_lambda_tail_barrier_scout.md",
+  "status": "finite theorem-search diagnostic",
+  "summary": {
+    "buffered_sufficient_rows": 63,
+    "defect_monotone_rows": 60,
+    "live_sufficient_routes": 1,
+    "main_finding": "A buffered sufficient tail theorem is compatible with the finite prefix: prove 0<=d_k<=2/(3*(2*k+1)) for k>=22 and d_(k+1)<=d_k for k>=21. The tempting width-preserving one-step recurrence d_(k+1)<=((2*k+1)/(2*k+3))*d_k is rejected on all checked adjacent pairs, so it should not be used as the direct recurrence route.",
+    "ready_to_apply_rows": 0,
+    "rejected_routes": 1,
+    "target_closing": false,
+    "width_preserving_rejected_rows": 60,
+    "width_preserving_rows": 60
+  }
+}

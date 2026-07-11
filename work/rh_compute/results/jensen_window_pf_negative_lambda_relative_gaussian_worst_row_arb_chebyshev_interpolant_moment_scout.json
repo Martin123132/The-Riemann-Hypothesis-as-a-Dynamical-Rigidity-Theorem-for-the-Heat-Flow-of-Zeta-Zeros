@@ -1,0 +1,305 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_worst_row_arb_chebyshev_interpolant_moment_scout.py",
+  "date": "2026-07-08",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_arb_chebyshev_interpolant_moment_scout.py",
+  "invariants": [
+    "No row is ready_to_apply for the full intervalization target.",
+    "Arb interpolant arithmetic is not promoted to a true-function integral enclosure.",
+    "Panel interpolation remainders remain open.",
+    "The compact interval 0<=y<=200 remains open until those remainders are certified.",
+    "All-row coverage, rounding aggregation, and grid-to-collar coverage remain separate.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_worst_row_arb_chebyshev_interpolant_moment_scout",
+  "matrix_rows": [
+    {
+      "claim": "The floating Chebyshev panel-moment scout identifies the six-panel compact route and degree ladder to promote into Arb arithmetic.",
+      "diagnostics": {
+        "compact_interval": "0<=y<=200",
+        "floating_reference_degree": 32,
+        "floating_reference_derivative_integral_estimate": "-1.38058387415230156402674205260518855676282541898259838947598E-32",
+        "floating_reference_value_integral_estimate": "-6.58338692361019331200869759429797241582343365917043174997833E-34"
+      },
+      "gap": null,
+      "id": "nlrgwracims_01_floating_scout_import",
+      "proof_boundary": "Scope import only; not a compact interval-integration proof.",
+      "readiness": "diagnostic_only",
+      "role": "scope_reduction",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_chebyshev_panel_moment_scout.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_chebyshev_panel_moment_scout.md"
+      ]
+    },
+    {
+      "claim": "For each panel and degree, Arb evaluates the cancellation-reduced core at Chebyshev nodes, forms the interpolant coefficients, and integrates that interpolant against Arb incomplete-Gamma panel moments.",
+      "diagnostics": {
+        "degrees": [
+          16,
+          20,
+          24,
+          32
+        ],
+        "moment_formula": "Chebyshev basis moments are expanded into monomials in y and evaluated by lower incomplete-Gamma differences.",
+        "panel_count": 6,
+        "precision_bits": 1024
+      },
+      "gap": null,
+      "id": "nlrgwracims_02_arb_interpolant_moment_arithmetic",
+      "proof_boundary": "Arb interpolant arithmetic only; not a true-function panel enclosure.",
+      "readiness": "diagnostic_only",
+      "role": "arb_interpolant_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_part_weighted_sum_interval_certificate.md"
+      ]
+    },
+    {
+      "claim": "The Arb interpolant-integral ladder for degrees 16,20,24,32 agrees with the floating Chebyshev calibration while preserving ball arithmetic for coefficients and moments.",
+      "diagnostics": {
+        "ladder_rows": [
+          {
+            "degree": 16,
+            "derivative_interpolant_integral_ball": "[-1.38058385883950818307446261429387384389406753493782251237134E-32 +/- 4.77E-92]",
+            "panel_count": 6,
+            "proof_boundary": "Arb-enclosed Chebyshev interpolant integral only; not an interpolation-remainder or true-function integral certificate.",
+            "value_interpolant_integral_ball": "[-6.58338685008327661423542206078604075018177633988117643432771E-34 +/- 1.90E-94]"
+          },
+          {
+            "degree": 20,
+            "derivative_interpolant_integral_ball": "[-1.38058387415230060647341221670742396432862091548744582506427E-32 +/- 2.51E-92]",
+            "panel_count": 6,
+            "proof_boundary": "Arb-enclosed Chebyshev interpolant integral only; not an interpolation-remainder or true-function integral certificate.",
+            "value_interpolant_integral_ball": "[-6.58338692361018858544508140670083590761109726129929623985207E-34 +/- 3.62E-94]"
+          },
+          {
+            "degree": 24,
+            "derivative_interpolant_integral_ball": "[-1.38058387415230156402674020877267464944150711737413680242435E-32 +/- 1.82E-92]",
+            "panel_count": 6,
+            "proof_boundary": "Arb-enclosed Chebyshev interpolant integral only; not an interpolation-remainder or true-function integral certificate.",
+            "value_interpolant_integral_ball": "[-6.58338692361019331200868988527753143791758379472046944313503E-34 +/- 8.80E-95]"
+          },
+          {
+            "degree": 32,
+            "derivative_interpolant_integral_ball": "[-1.38058387415230156402674205260518855676282541898259838947598E-32 +/- 3.91E-92]",
+            "panel_count": 6,
+            "proof_boundary": "Arb-enclosed Chebyshev interpolant integral only; not an interpolation-remainder or true-function integral certificate.",
+            "value_interpolant_integral_ball": "[-6.58338692361019331200869759429797241582343365917043174997833E-34 +/- 1.63E-94]"
+          }
+        ]
+      },
+      "gap": null,
+      "id": "nlrgwracims_03_arb_degree_ladder",
+      "proof_boundary": "Arb interpolant ladder only; interpolation remainders are not bounded.",
+      "readiness": "diagnostic_only",
+      "role": "arb_interpolant_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_chebyshev_panel_moment_scout.md",
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.json"
+      ]
+    },
+    {
+      "claim": "All consecutive Arb interpolant Cauchy deltas in the degree ladder are below the unscaled quadrature route caps in both value and derivative channels.",
+      "diagnostics": {
+        "cap_safe_pair_count": 3,
+        "cauchy_rows": [
+          {
+            "both_deltas_below_caps": true,
+            "derivative_delta_to_cap_ratio_upper": "0.01075165326468561580445350311071629542923",
+            "derivative_delta_upper": "1.5312792423398949602413550120434553380549623312693E-40",
+            "lower_degree": 16,
+            "pair": "16->20",
+            "proof_boundary": "Arb Cauchy-ladder comparison for interpolants only; not a bound for the interpolation remainder.",
+            "upper_degree": 20,
+            "value_delta_to_cap_ratio_upper": "0.01084142765529810925122002325367656958771",
+            "value_delta_upper": "7.3526911971209659345914795157429320921418119805524E-42"
+          },
+          {
+            "both_deltas_below_caps": true,
+            "derivative_delta_to_cap_ratio_upper": "6.723320659192506578602117131047695988453E-10",
+            "derivative_delta_upper": "9.5755332799206525068511288620188669097736007567735E-48",
+            "lower_degree": 20,
+            "pair": "20->24",
+            "proof_boundary": "Arb Cauchy-ladder comparison for interpolants only; not a bound for the interpolation remainder.",
+            "upper_degree": 24,
+            "value_delta_to_cap_ratio_upper": "6.969243783765862010324414119702129783777E-10",
+            "value_delta_upper": "4.7265636084785766955303064865334211732032829627406E-49"
+          },
+          {
+            "both_deltas_below_caps": true,
+            "derivative_delta_to_cap_ratio_upper": "1.294620035297571747757230219488783361619E-18",
+            "derivative_delta_upper": "1.8438325139073213183016084615870516279094899697555E-56",
+            "lower_degree": 24,
+            "pair": "24->32",
+            "proof_boundary": "Arb Cauchy-ladder comparison for interpolants only; not a bound for the interpolation remainder.",
+            "upper_degree": 32,
+            "value_delta_to_cap_ratio_upper": "1.136682952723511405736824962015391755683E-18",
+            "value_delta_upper": "7.7090204409779058498644499623068432992544758840568E-58"
+          }
+        ],
+        "first_cap_safe_pair": "16->20"
+      },
+      "gap": null,
+      "id": "nlrgwracims_04_cauchy_delta_vs_caps",
+      "proof_boundary": "Cauchy-delta diagnostic only; not an interpolation-remainder theorem.",
+      "readiness": "diagnostic_only",
+      "role": "arb_interpolant_diagnostic",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md"
+      ]
+    },
+    {
+      "claim": "At reference degree 32, Arb panel contribution balls identify the central panels as the dominant compact-interval contribution for the interpolant.",
+      "diagnostics": {
+        "panel_rows": [
+          {
+            "degree": 32,
+            "derivative_interpolant_contribution_ball": "[-5.8332978789969920509137104127278740011338197252697E-85 +/- 1.95E-135]",
+            "derivative_max_interpolant_coefficient_abs_upper": "1.78612715189588277889391620517E-64",
+            "max_panel_chebyshev_moment_abs_upper": "1.61555602394641035019843832303E-21",
+            "panel": "0<=y<=1",
+            "proof_boundary": "Reference panel contribution for the interpolant only.",
+            "value_interpolant_contribution_ball": "[-2.7778525801082570082696403014722026321169162937528E-86 +/- 3.03E-136]",
+            "value_max_interpolant_coefficient_abs_upper": "8.50564834899942391557580227833E-66"
+          },
+          {
+            "degree": 32,
+            "derivative_interpolant_contribution_ball": "[-5.9769071623193789594056812796459992592108345818100E-57 +/- 4.15E-107]",
+            "derivative_max_interpolant_coefficient_abs_upper": "9.52398647767794462772412023131E-50",
+            "max_panel_chebyshev_moment_abs_upper": "3.86372995969006152517663215803E-8",
+            "panel": "1<=y<=5",
+            "proof_boundary": "Reference panel contribution for the interpolant only.",
+            "value_interpolant_contribution_ball": "[-2.8466136631204462122728775590225265008249546480954E-58 +/- 3.70E-108]",
+            "value_max_interpolant_coefficient_abs_upper": "4.53597866940500108144559753033E-51"
+          },
+          {
+            "degree": 32,
+            "derivative_interpolant_contribution_ball": "[-1.1302824730972481895462298562846956146323510194914E-37 +/- 1.68E-87]",
+            "derivative_max_interpolant_coefficient_abs_upper": "4.28404319058608797822128717552E-37",
+            "max_panel_chebyshev_moment_abs_upper": "0.397836420421894290676934916274",
+            "panel": "5<=y<=20",
+            "proof_boundary": "Reference panel contribution for the interpolant only.",
+            "value_interpolant_contribution_ball": "[-5.3857486124488129468165201930455791346566522870780E-39 +/- 9.31E-91]",
+            "value_max_interpolant_coefficient_abs_upper": "2.04135161248742027760303898812E-38"
+          },
+          {
+            "degree": 32,
+            "derivative_interpolant_contribution_ball": "[-1.2062987674338121788712906124924892922603605268958E-32 +/- 4.14E-82]",
+            "derivative_max_interpolant_coefficient_abs_upper": "1.07072057498723280599684069766E-28",
+            "max_panel_chebyshev_moment_abs_upper": "0.602161593324895319504828679221",
+            "panel": "20<=y<=50",
+            "proof_boundary": "Reference panel contribution for the interpolant only.",
+            "value_interpolant_contribution_ball": "[-5.7520010655891323225646800639834560908513825005169E-34 +/- 3.41E-84]",
+            "value_max_interpolant_coefficient_abs_upper": "5.10682666144419168229384129569E-30"
+          },
+          {
+            "degree": 32,
+            "derivative_interpolant_contribution_ball": "[-1.7427380385524942157037364507756207854808840460270E-33 +/- 2.71E-83]",
+            "derivative_max_interpolant_coefficient_abs_upper": "2.38708511600194403424920753780E-22",
+            "max_panel_chebyshev_moment_abs_upper": "1.94761591079291558470430954358E-6",
+            "panel": "50<=y<=100",
+            "proof_boundary": "Reference panel contribution for the interpolant only.",
+            "value_interpolant_contribution_ball": "[-8.3133200035096989656600344729852724593674858623841E-35 +/- 1.17E-85]",
+            "value_max_interpolant_coefficient_abs_upper": "1.14023159615709671599285650404E-23"
+          },
+          {
+            "degree": 32,
+            "derivative_interpolant_contribution_ball": "[-3.8508991103181735045858107060334223405814142884251E-43 +/- 2.73E-93]",
+            "derivative_max_interpolant_coefficient_abs_upper": "4.68813406331066674194961393022E-16",
+            "max_panel_chebyshev_moment_abs_upper": "4.20892405489773527001805345681E-22",
+            "panel": "100<=y<=200",
+            "proof_boundary": "Reference panel contribution for the interpolant only.",
+            "value_interpolant_contribution_ball": "[-1.8396660474854307120039550279774373301465875650551E-44 +/- 2.27E-94]",
+            "value_max_interpolant_coefficient_abs_upper": "2.24547981157767706932538728143E-17"
+          }
+        ],
+        "reference_degree": 32,
+        "reference_derivative_interpolant_integral_ball": "[-1.38058387415230156402674205260518855676282541898259838947598E-32 +/- 3.91E-92]",
+        "reference_value_interpolant_integral_ball": "[-6.58338692361019331200869759429797241582343365917043174997833E-34 +/- 1.63E-94]"
+      },
+      "gap": null,
+      "id": "nlrgwracims_05_reference_panel_contributions",
+      "proof_boundary": "Reference interpolant contribution only; not a certified true integral.",
+      "readiness": "diagnostic_only",
+      "role": "arb_interpolant_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.md"
+      ]
+    },
+    {
+      "claim": "The Arb Chebyshev interpolant-moment ladder proves the compact-interval integration source.",
+      "diagnostics": null,
+      "gap": "The interpolant arithmetic is Arb-enclosed, but the difference between each interpolant and the true cancellation-reduced core on its panel is not yet bounded.",
+      "id": "nlrgwracims_06_remainder_gap",
+      "proof_boundary": "Rejected promotion only; not a compact interval certificate, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "A promoted compact-interval certificate may reuse this Arb interpolant arithmetic only after a panel remainder theorem supplies true-function enclosures.",
+      "diagnostics": {
+        "recommended_upgrade": "Complete this route by bounding the difference between each Arb Chebyshev interpolant and the true cancellation-reduced core on its panel."
+      },
+      "gap": null,
+      "id": "nlrgwracims_07_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a finite-grid certificate, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Worst-row Arb Chebyshev interpolant-moment scout only. It certifies the arithmetic of Chebyshev interpolant coefficients and incomplete-Gamma panel moments on 0<=y<=200, but it does not bound the interpolation remainder, does not prove the true compact integral, does not prove a quadrature-remainder theorem, does not cover all rows or quadrature orders, does not prove a finite-grid interval certificate, does not prove a uniform collar theorem, and does not prove RH or Lambda <= 0.",
+  "source_compact_interval_integration_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_far_tail_split_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.md",
+  "source_finite_part_weighted_sum_interval_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_part_weighted_sum_interval_certificate.md",
+  "source_floating_chebyshev_panel_moment_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_chebyshev_panel_moment_scout.md",
+  "source_floating_chebyshev_panel_moment_scout_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_chebyshev_panel_moment_scout.json",
+  "source_intervalization_target": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+  "source_quadrature_remainder_route_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.json",
+  "source_quadrature_remainder_route_matrix": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "worst-row Arb Chebyshev interpolant-moment scout",
+  "summary": {
+    "T": 10000,
+    "alpha": "20.5",
+    "cap_safe_pair_count": 3,
+    "cauchy_pair_count": 3,
+    "compact_interval": "0<=y<=200",
+    "degree_count": 4,
+    "degrees": [
+      16,
+      20,
+      24,
+      32
+    ],
+    "derivative_unscaled_expectation_error_cap": "1.424226772053247012E-38",
+    "first_cap_safe_pair": "16->20",
+    "index": 21,
+    "main_finding": "The Arb Chebyshev interpolant-moment route upgrades the floating scout's arithmetic: degree 16,20,24,32 interpolant integrals are Arb-enclosed, all consecutive Cauchy deltas are below the unscaled quadrature caps, and the degree-32 interpolant balls are [-6.58338692361019331200869759429797241582343365917043174997833E-34 +/- 1.63E-94] and [-1.38058387415230156402674205260518855676282541898259838947598E-32 +/- 3.91E-92]. This still does not close the compact interval because panel interpolation remainders remain unbounded.",
+    "matrix_rows": 7,
+    "panel_count": 6,
+    "phi_term_count": 30,
+    "polynomial_M": 20,
+    "precision_bits": 1024,
+    "ratio_cutoff_n": 80,
+    "ready_to_apply_rows": 0,
+    "recommended_upgrade": "Complete this route by bounding the difference between each Arb Chebyshev interpolant and the true cancellation-reduced core on its panel.",
+    "reference_degree": 32,
+    "reference_derivative_interpolant_integral_ball": "[-1.38058387415230156402674205260518855676282541898259838947598E-32 +/- 3.91E-92]",
+    "reference_derivative_interpolant_mid": "-1.38058387415230156402674205260518855676282541898259838947598E-32",
+    "reference_value_interpolant_integral_ball": "[-6.58338692361019331200869759429797241582343365917043174997833E-34 +/- 1.63E-94]",
+    "reference_value_interpolant_mid": "-6.58338692361019331200869759429797241582343365917043174997833E-34",
+    "target_closing": false,
+    "u": "1/10000",
+    "value_unscaled_expectation_error_cap": "6.782032247872604818E-40"
+  }
+}

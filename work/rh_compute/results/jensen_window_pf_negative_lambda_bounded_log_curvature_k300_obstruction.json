@@ -1,0 +1,232 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_bounded_log_curvature_k300_obstruction.py",
+  "date": "2026-07-07",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k300.jsonl",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k220_k250_dps220.jsonl",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k245_k320_dps220.jsonl"
+  ],
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_bounded_log_curvature_k300_obstruction.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The fixed 2/3 scaled-curvature wall is retired as a live theorem target.",
+    "The repaired k300 obstruction is not evidence against the linear curvature-barrier route.",
+    "Finite scaled-curvature monotonicity is stress evidence only.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_bounded_log_curvature_k300_obstruction",
+  "matrix_rows": [
+    {
+      "claim": "With B_k=-log(((2*k-1)/(2*k+1))*R_k) and C_k=(2*k+1)*B_k, the old bounded log-curvature wall B_k<=2/(3*(2*k+1)) is exactly C_k<=2/3.",
+      "formula": "B_k<=2/(3*(2*k+1)) iff C_k=(2*k+1)*B_k<=2/3",
+      "id": "nllcko_01_exact_scaled_curvature_rewrite",
+      "proof_boundary": "Exact rewrite only; it does not prove or disprove any zeta coefficient inequality by itself.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_target.md",
+        "outputs/jensen_window_pf_negative_lambda_coefficient_curvature_corridor_bridge.md"
+      ]
+    },
+    {
+      "claim": "The repaired k300 data reject the fixed scaled-curvature wall C_k<=2/3 on 718 of 897 checked rows, with zero inconclusive rows.",
+      "diagnostics": {
+        "adjacent_rows_per_lambda": 298,
+        "adjacent_total_rows": 894,
+        "b_decrease_rows": 894,
+        "b_wall_rows": 897,
+        "coefficient_cap": 300,
+        "first_two_thirds_failure": {
+          "B_k": "1.069515173802103209E-2",
+          "k": 31,
+          "lam": "-25.0",
+          "scaled_curvature": "6.737945594953250214E-1",
+          "two_thirds_slack": "-7.127892828658354747E-3"
+        },
+        "lambdas": [
+          "-25.0",
+          "-50.0",
+          "-100.0"
+        ],
+        "max_b_wall": {
+          "k": 1,
+          "lam": "-25.0",
+          "sample": "3.524954269540071057E-2"
+        },
+        "max_scaled_curvature": {
+          "k": 299,
+          "lam": "-25.0",
+          "sample": "1.144219413064916367E+0"
+        },
+        "min_b_decrease_margin": {
+          "k": 298,
+          "lam": "-100.0",
+          "sample": "4.098948243972025449E-6"
+        },
+        "min_b_wall": {
+          "k": 299,
+          "lam": "-100.0",
+          "sample": "1.652602130709587426E-3"
+        },
+        "min_scaled_curvature_increase_margin": {
+          "k": 298,
+          "lam": "-25.0",
+          "sample": "5.226725385445290147E-4"
+        },
+        "min_two_thirds_slack": {
+          "k": 299,
+          "lam": "-25.0",
+          "sample": "-4.775527463982497008E-1"
+        },
+        "per_lambda": {
+          "-100.0": {
+            "first_failure": {
+              "B_k": "3.332140532789258129E-3",
+              "k": 100,
+              "lam": "-100.0",
+              "scaled_curvature": "6.697602470906408839E-1",
+              "two_thirds_slack": "-3.093580423974217203E-3"
+            },
+            "two_thirds_bound_rows": 99,
+            "two_thirds_failure_rows": 200,
+            "two_thirds_inconclusive_rows": 0
+          },
+          "-25.0": {
+            "first_failure": {
+              "B_k": "1.069515173802103209E-2",
+              "k": 31,
+              "lam": "-25.0",
+              "scaled_curvature": "6.737945594953250214E-1",
+              "two_thirds_slack": "-7.127892828658354747E-3"
+            },
+            "two_thirds_bound_rows": 30,
+            "two_thirds_failure_rows": 269,
+            "two_thirds_inconclusive_rows": 0
+          },
+          "-50.0": {
+            "first_failure": {
+              "B_k": "6.498843736469185792E-3",
+              "k": 51,
+              "lam": "-50.0",
+              "scaled_curvature": "6.693809048563261366E-1",
+              "two_thirds_slack": "-2.714238189659469960E-3"
+            },
+            "two_thirds_bound_rows": 50,
+            "two_thirds_failure_rows": 249,
+            "two_thirds_inconclusive_rows": 0
+          }
+        },
+        "raw_ratio_rows_per_lambda": 299,
+        "scaled_curvature_increase_failures": 0,
+        "scaled_curvature_increase_inconclusive": 0,
+        "scaled_curvature_increase_rows": 894,
+        "scaled_curvature_total_rows": 897,
+        "two_thirds_bound_rows": 179,
+        "two_thirds_failure_rows": 718,
+        "two_thirds_inconclusive_rows": 0
+      },
+      "id": "nllcko_02_repaired_k300_two_thirds_obstruction",
+      "proof_boundary": "Finite Arb obstruction gate only; it retires this fixed wall but does not prove a replacement all-k theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_obstruction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_k300_precision_repair_audit.md"
+      ]
+    },
+    {
+      "claim": "The first checked failure in the repaired ordering is lambda=-25.0 at k=31.",
+      "id": "nllcko_03_first_checked_failure",
+      "proof_boundary": "Finite checked counterexample to the fixed wall only; not a statement against the linear curvature-barrier route.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_counterexample",
+      "witness": {
+        "B_k": "1.069515173802103209E-2",
+        "k": 31,
+        "lam": "-25.0",
+        "scaled_curvature": "6.737945594953250214E-1",
+        "two_thirds_slack": "-7.127892828658354747E-3"
+      }
+    },
+    {
+      "claim": "The worst checked slack is negative at lambda=-25.0, k=299, where C_k exceeds 2/3 by about 0.47755.",
+      "id": "nllcko_04_worst_checked_failure",
+      "max_scaled_curvature": {
+        "k": 299,
+        "lam": "-25.0",
+        "sample": "1.144219413064916367E+0"
+      },
+      "min_two_thirds_slack": {
+        "k": 299,
+        "lam": "-25.0",
+        "sample": "-4.775527463982497008E-1"
+      },
+      "proof_boundary": "Finite stress extremum only; not an all-k asymptotic theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_extremum"
+    },
+    {
+      "claim": "The former bounded log-curvature target was supported only by the old k<=22 prefix compatibility check; that prefix does not license the fixed 2/3 wall at k300.",
+      "id": "nllcko_05_k22_prefix_scope",
+      "proof_boundary": "Scope correction only; finite prefix compatibility is not promoted to an all-k theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "historical_scope",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_target.md"
+      ]
+    },
+    {
+      "claim": "The repaired data instead support the newer scaled-curvature monotonicity shape C_(k+1)>=C_k and B_(k+1)<=B_k on all 894 adjacent rows.",
+      "id": "nllcko_06_replacement_scaled_monotonicity_route",
+      "proof_boundary": "Finite route diagnostic only; it does not prove the all-k scaled-curvature or linear-barrier theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "replacement_route_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_linear_curvature_barrier_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_coefficient_curvature_corridor_bridge.md"
+      ]
+    },
+    {
+      "claim": "Future negative-lambda proofs must not use C_k<=2/3 or B_k<=2/(3*(2*k+1)) as a live tail wall; any replacement must prove the zeta-specific raw corridor or linear curvature barrier with an explicit finite collar.",
+      "id": "nllcko_07_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a proof of cone entry, jwpf_06, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Finite obstruction gate only. It records that the fixed 2/3 scaled-curvature wall is incompatible with the repaired k300 zeta data, but it does not prove the replacement raw-corridor theorem, does not prove cone entry, does not prove jwpf_06, and does not prove RH or Lambda <= 0.",
+  "source_bounded_log_curvature_target": "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_target.md",
+  "source_curvature_corridor_bridge": "outputs/jensen_window_pf_negative_lambda_coefficient_curvature_corridor_bridge.md",
+  "source_k300_precision_repair": "outputs/jensen_window_pf_negative_lambda_k300_precision_repair_audit.md",
+  "source_linear_barrier_scout": "outputs/jensen_window_pf_negative_lambda_linear_curvature_barrier_scout.md",
+  "source_raw_corridor_target": "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+  "status": "finite obstruction gate",
+  "summary": {
+    "acceptance_gate_rows": 1,
+    "adjacent_total_rows": 894,
+    "b_decrease_rows": 894,
+    "coefficient_cap": 300,
+    "exact_reduction_rows": 1,
+    "finite_obstruction_rows": 3,
+    "historical_scope_rows": 1,
+    "lambdas": [
+      "-25.0",
+      "-50.0",
+      "-100.0"
+    ],
+    "main_finding": "The fixed bounded log-curvature wall B_k<=2/(3*(2*k+1)), equivalently C_k=(2*k+1)*B_k<=2/3, is finite-rejected by the repaired k300 data: only 179/897 checked rows satisfy it, 718/897 fail it, and zero rows are inconclusive. The live replacement direction is the zeta-specific linear/scaled curvature corridor, not a fixed 2/3 wall.",
+    "matrix_rows": 7,
+    "ready_to_apply_rows": 0,
+    "replacement_route_rows": 1,
+    "scaled_curvature_increase_rows": 894,
+    "scaled_curvature_total_rows": 897,
+    "target_closing": false,
+    "target_retired": true,
+    "two_thirds_bound_rows": 179,
+    "two_thirds_failure_rows": 718,
+    "two_thirds_inconclusive_rows": 0
+  }
+}

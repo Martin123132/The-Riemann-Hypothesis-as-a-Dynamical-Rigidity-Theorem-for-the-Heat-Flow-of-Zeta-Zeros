@@ -1,0 +1,116 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_cone_entry_prefix_scout.py",
+  "coefficient_reproduction_command": "python work/rh_compute/scripts/acb_coefficient_enclosures.py --lambdas=-25,-50,-100 --k-min 0 --k-max 60 --n-sum 50 --cutoff 6 --dps 160 --digits 80 --abs-tol 1e-110 --constant-terms 30 --output-dir work/rh_compute/results --run-id acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k60 --overwrite",
+  "date": "2026-07-06",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k60.jsonl"
+  ],
+  "enclosure_summary": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k60_summary.json",
+  "finite_diagnostics": {
+    "coefficient_k_max": 60,
+    "coefficient_k_min": 0,
+    "coefficient_rows": 183,
+    "lambdas": [
+      "-100.0",
+      "-50.0",
+      "-25.0"
+    ],
+    "lower_upper_k_max": 59,
+    "lower_wall_positive_rows": 177,
+    "lower_wall_rows": 177,
+    "min_lower_wall_margin": {
+      "k": 59,
+      "lam": "-25.0",
+      "sample": "9.875541374763750245E-3"
+    },
+    "min_monotone_gap": {
+      "k": 58,
+      "lam": "-100.0",
+      "sample": "3.050976509934343254E-5"
+    },
+    "min_upper_wall_margin": {
+      "k": 59,
+      "lam": "-100.0",
+      "sample": "4.268538754539301236E-3"
+    },
+    "monotone_gap_positive_rows": 174,
+    "monotone_gap_rows": 174,
+    "monotone_k_max": 58,
+    "upper_wall_positive_rows": 177,
+    "upper_wall_rows": 177
+  },
+  "finite_rows": [
+    {
+      "claim": "ACB/Arb enclosures cover A_0..A_60 for lambda=-25,-50,-100.",
+      "id": "nlcep_01_acb_coefficient_enclosures",
+      "proof_boundary": "Finite coefficient enclosures only.",
+      "role": "finite_coefficient_input",
+      "rows": 183
+    },
+    {
+      "claim": "The checked contractions satisfy x_k >= (2*k-1)/(2*k+1).",
+      "id": "nlcep_02_lower_wall_prefix",
+      "positive_rows": 177,
+      "proof_boundary": "Finite prefix only; no all-k tail theorem.",
+      "role": "finite_lower_wall_certificate",
+      "rows": 177
+    },
+    {
+      "claim": "The checked contractions satisfy x_k <= 1.",
+      "id": "nlcep_03_upper_wall_prefix",
+      "positive_rows": 177,
+      "proof_boundary": "Finite prefix only; no all-k tail theorem.",
+      "role": "finite_upper_wall_certificate",
+      "rows": 177
+    },
+    {
+      "claim": "The checked contractions satisfy x_{k+1} >= x_k.",
+      "id": "nlcep_04_monotone_wall_prefix",
+      "positive_rows": 174,
+      "proof_boundary": "Finite prefix only; no collared finite flow theorem.",
+      "role": "finite_monotone_wall_certificate",
+      "rows": 174
+    }
+  ],
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_cone_entry_prefix_scout.py",
+  "invariants": [
+    "The scout uses actual A_k(lambda) enclosures, not only the Taylor expansion.",
+    "The certificate is finite in lambda and k.",
+    "No row is ready_to_apply for the cone-entry theorem.",
+    "The infinite or collared finite cone-entry target remains open.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_cone_entry_prefix_scout",
+  "note": "outputs/jensen_window_pf_negative_lambda_cone_entry_prefix_k60_scout.md",
+  "prefix_statement": {
+    "coefficient_range": "A_0..A_60",
+    "lambdas": [
+      "-100.0",
+      "-50.0",
+      "-25.0"
+    ],
+    "lower_upper_walls": "1 <= k <= 59",
+    "lower_wall": "x_k >= (2*k-1)/(2*k+1)",
+    "monotone_wall": "1 <= k <= 58",
+    "monotone_wall_formula": "x_{k+1} >= x_k",
+    "ratio": "x_k=(A_{k+1}/A_k)/(A_k/A_{k-1})",
+    "upper_wall": "x_k <= 1"
+  },
+  "proof_boundary": "Finite large-negative-lambda prefix certificate only. It certifies the ratio-cone inequalities on the listed lambda grid and finite prefix, but it does not prove an infinite cone-entry theorem, does not prove a collared finite flow theorem, does not control all k, does not prove monotone contractions for all zeta windows, does not prove jwpf_06, and leaves Lambda <= 0 unsettled.",
+  "result_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_cone_entry_prefix_k60_scout.json",
+  "source_sign_scout": "outputs/jensen_window_pf_phi_taylor_cone_entry_sign_scout.md",
+  "source_target": "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+  "status": "finite_negative_lambda_prefix_certificate",
+  "summary": {
+    "coefficient_rows": 183,
+    "lower_wall_positive_rows": 177,
+    "lower_wall_rows": 177,
+    "main_finding": "The actual ACB-enclosed zeta coefficients satisfy the ratio cone on a finite large-negative-lambda prefix. This supports the cone-entry route beyond formal Taylor signs, but the open bridge remains an infinite or collared finite theorem with tail control.",
+    "monotone_gap_positive_rows": 174,
+    "monotone_gap_rows": 174,
+    "ready_to_apply_rows": 0,
+    "target_closing": false,
+    "upper_wall_positive_rows": 177,
+    "upper_wall_rows": 177
+  }
+}

@@ -1,0 +1,235 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_raw_log_decrement_bridge.py",
+  "date": "2026-07-07",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k300.jsonl",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k220_k250_dps220.jsonl",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k245_k320_dps220.jsonl"
+  ],
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_raw_log_decrement_bridge.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The log-ratio recurrence remains an open zeta-specific all-k theorem.",
+    "Repaired k300 evidence is finite stress evidence only.",
+    "Raw-log decrease alone is rejected as a shortcut.",
+    "Generic moment positivity, endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_raw_log_decrement_bridge",
+  "matrix_rows": [
+    {
+      "claim": "Set p_k=log(R_k) and delta_k=p_(k+1)-p_k=log(R_(k+1)/R_k) for the raw ratios R_k=M_(k+1)*M_(k-1)/M_k^2.",
+      "formula": "R_k=exp(p_k); R_(k+1)=R_k*exp(delta_k)",
+      "id": "nlrldb_01_log_coordinate",
+      "proof_boundary": "Exact change of variables only; it proves no zeta inequality.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The decrement corridor 2*(R_k-1)/(2*k+1)<=R_k-R_(k+1)<=4*R_k/(2*k+1)^2 is equivalent to a two-sided bound on delta_k.",
+      "formula": "log(1-4/(2*k+1)^2)<=delta_k<=log(1-2*(1-exp(-p_k))/(2*k+1))",
+      "id": "nlrldb_02_exact_log_corridor",
+      "proof_boundary": "Exact algebraic equivalence only; the log-corridor inequality remains open for all k.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The log corridor has nonnegative width exactly when the raw upper wall R_k<=(2*k+1)/(2*k-1) holds.",
+      "formula": "log-upper-exp - log-lower-exp >= 0 iff R_k <= (2*k+1)/(2*k-1)",
+      "id": "nlrldb_03_width_raw_wall_equivalence",
+      "proof_boundary": "Exact algebra only; it does not prove the raw upper wall.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The repaired k300 data validate the raw-log walls, log decrease, and log-corridor sides on all checked rows.",
+      "diagnostics": {
+        "adjacent_rows_per_lambda": 298,
+        "adjacent_total_rows": 894,
+        "coefficient_cap": 300,
+        "lambdas": [
+          "-25.0",
+          "-50.0",
+          "-100.0"
+        ],
+        "log_corridor_rows": 894,
+        "log_decrease_rows": 894,
+        "log_lower_bound_rows": 894,
+        "log_upper_bound_rows": 894,
+        "log_width_rows": 894,
+        "max_delta": {
+          "k": 298,
+          "lam": "-25.0",
+          "sample": "-5.699238767442957333E-6"
+        },
+        "max_p": {
+          "k": 1,
+          "lam": "-100.0",
+          "sample": "1.089597995647632698E+0"
+        },
+        "min_delta": {
+          "k": 1,
+          "lam": "-100.0",
+          "sample": "-5.874561412680720753E-1"
+        },
+        "min_delta_negative_margin": {
+          "k": 298,
+          "lam": "-25.0",
+          "sample": "5.699238767442957333E-6"
+        },
+        "min_log_lower_margin": {
+          "k": 298,
+          "lam": "-100.0",
+          "sample": "4.098948243972025449E-6"
+        },
+        "min_log_upper_margin": {
+          "k": 298,
+          "lam": "-25.0",
+          "sample": "8.786855849482974303E-7"
+        },
+        "min_log_width": {
+          "k": 298,
+          "lam": "-100.0",
+          "sample": "5.536125464765993858E-6"
+        },
+        "min_p": {
+          "k": 299,
+          "lam": "-25.0",
+          "sample": "1.434268674324864062E-3"
+        },
+        "min_raw_log_upper_margin": {
+          "k": 299,
+          "lam": "-100.0",
+          "sample": "1.652602130709587426E-3"
+        },
+        "raw_log_lower_rows": 897,
+        "raw_log_total_rows": 897,
+        "raw_log_upper_rows": 897,
+        "raw_ratio_rows_per_lambda": 299
+      },
+      "id": "nlrldb_04_repaired_k300_log_corridor",
+      "proof_boundary": "Finite repaired stress evidence only; not an all-k log-ratio recurrence theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_stress",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_k300_precision_repair_audit.md",
+        "outputs/jensen_window_pf_negative_lambda_raw_ratio_decrement_corridor_scout.md"
+      ]
+    },
+    {
+      "claim": "Raw-log decrease plus raw cone occupancy does not imply the lower decrement wall.",
+      "id": "nlrldb_05_underfast_log_decrease_shortcut_blocked",
+      "proof_boundary": "Exact shortcut rejection only; not evidence against actual zeta coefficients.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_counterexample",
+      "witness": {
+        "D_k": "1/2",
+        "R_k": "2",
+        "R_k_upper_wall": "3",
+        "R_next": "3/2",
+        "R_next_upper_wall": "5/3",
+        "corridor_lower": "10/9",
+        "corridor_upper": "4/3",
+        "decrement_lower": "2/3",
+        "decrement_upper": "8/9",
+        "exp_delta": "3/4",
+        "k": 1,
+        "log_decrease_holds": true,
+        "log_lower_wall_holds": true,
+        "log_upper_wall_holds": false,
+        "lower_exp_wall": "5/9",
+        "lower_margin_D_minus_lower": "-1/6",
+        "raw_cone_holds_at_k_and_next": true,
+        "raw_decrease_holds": true,
+        "raw_log_wall_holds_at_k": true,
+        "raw_log_wall_holds_at_next": true,
+        "upper_exp_wall": "2/3",
+        "upper_margin_upper_minus_D": "7/18"
+      }
+    },
+    {
+      "claim": "Raw-log decrease plus raw cone occupancy does not imply the upper decrement wall.",
+      "id": "nlrldb_06_overfast_log_decrease_shortcut_blocked",
+      "proof_boundary": "Exact shortcut rejection only; not evidence against actual zeta coefficients.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_counterexample",
+      "witness": {
+        "D_k": "1",
+        "R_k": "2",
+        "R_k_upper_wall": "3",
+        "R_next": "1",
+        "R_next_upper_wall": "5/3",
+        "corridor_lower": "10/9",
+        "corridor_upper": "4/3",
+        "decrement_lower": "2/3",
+        "decrement_upper": "8/9",
+        "exp_delta": "1/2",
+        "k": 1,
+        "log_decrease_holds": true,
+        "log_lower_wall_holds": false,
+        "log_upper_wall_holds": true,
+        "lower_exp_wall": "5/9",
+        "lower_margin_D_minus_lower": "1/3",
+        "raw_cone_holds_at_k_and_next": true,
+        "raw_decrease_holds": true,
+        "raw_log_wall_holds_at_k": true,
+        "raw_log_wall_holds_at_next": true,
+        "upper_exp_wall": "2/3",
+        "upper_margin_upper_minus_D": "-1/9"
+      }
+    },
+    {
+      "claim": "A zeta-specific proof may target the log-ratio recurrence directly: prove p_k is in the raw wall and delta_k lies between the two log bounds after a finite collar.",
+      "id": "nlrldb_07_live_log_recurrence_route",
+      "proof_boundary": "Live theorem-search route only; no all-k recurrence is proved here.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+        "outputs/jensen_window_pf_negative_lambda_log_curvature_bridge.md"
+      ]
+    },
+    {
+      "claim": "A promoted log-ratio proof must state the tail start, lambda range, finite collar, raw wall, both delta_k bounds, and forbidden assumptions.",
+      "id": "nlrldb_08_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a proof of the raw-corridor theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Exact finite theorem-search diagnostic only. It rewrites the raw decrement corridor as a log-ratio recurrence and checks repaired k300 evidence, but it does not prove the all-k raw-corridor theorem, does not prove cone entry, does not prove jwpf_06, and does not prove RH or Lambda <= 0.",
+  "source_decrement_scout": "outputs/jensen_window_pf_negative_lambda_raw_ratio_decrement_corridor_scout.md",
+  "source_k300_precision_repair": "outputs/jensen_window_pf_negative_lambda_k300_precision_repair_audit.md",
+  "source_log_curvature_bridge": "outputs/jensen_window_pf_negative_lambda_log_curvature_bridge.md",
+  "source_raw_corridor_target": "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+  "source_raw_obstruction": "outputs/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.md",
+  "status": "exact finite theorem-search diagnostic",
+  "summary": {
+    "adjacent_total_rows": 894,
+    "coefficient_cap": 300,
+    "exact_available_rows": 3,
+    "exact_counterexample_rows": 2,
+    "finite_stress_rows": 1,
+    "lambdas": [
+      "-25.0",
+      "-50.0",
+      "-100.0"
+    ],
+    "live_routes": 1,
+    "log_corridor_rows": 894,
+    "log_decrease_rows": 894,
+    "log_lower_bound_rows": 894,
+    "log_upper_bound_rows": 894,
+    "log_width_rows": 894,
+    "main_finding": "The raw-ratio decrement corridor is exactly equivalent to a log-ratio recurrence for delta_k=log(R_(k+1)/R_k). On the repaired k300 data the log walls hold on 897/897 raw rows and the two-sided log corridor holds on 894/894 adjacent rows, but raw-log decrease alone is blocked by two exact cone counterexamples.",
+    "matrix_rows": 8,
+    "raw_log_lower_rows": 897,
+    "raw_log_total_rows": 897,
+    "raw_log_upper_rows": 897,
+    "ready_to_apply_rows": 0,
+    "target_closing": false
+  }
+}

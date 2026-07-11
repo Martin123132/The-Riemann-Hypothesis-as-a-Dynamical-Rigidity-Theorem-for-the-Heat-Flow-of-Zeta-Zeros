@@ -1,0 +1,258 @@
+{
+  "kind": "jensen_window_pf_newman_local_odd_count_reduction_lemma",
+  "date": "2026-07-11",
+  "status": "exact local odd-count reduction with counting and birth guards",
+  "proof_boundary": "This artifact proves a deterministic Stieltjes outer-field bound, composes it with the published uniform positive-time zero count, reduces the high collision field to a log-squared local odd reciprocal-gap statistic, and gives an exact even heat-flow countermodel showing that classical field balance does not exclude birth. It does not prove the Xi-specific local odd-count estimate, turn field control into a global collision obstruction, prove RH, or prove Lambda <= 0.",
+  "sources": [
+    "outputs/jensen_window_pf_newman_classical_field_balance_gate.md",
+    "outputs/jensen_window_pf_newman_root_external_field_lemma.md",
+    "https://arxiv.org/abs/1801.05914",
+    "https://arxiv.org/abs/1904.12438"
+  ],
+  "exact": {
+    "positive_zero_field": "At an even double zero c>0, remove the positive double atom and let mu count the other positive roots. Then B(c)=1/c+PV integral K_c(y)dmu(y), K_c(y)=2c/(c^2-y^2)=1/(c-y)+1/(c+y).",
+    "kernel_derivative": "K_c'(y)=4c*y/(c^2-y^2)^2>0",
+    "outer_count_bound": "If |F(y)|<=E on [a,2c] and |F(y)|<=C*log(2+y) for y>=2c, then for 0<H<=c/2 the field discrepancy outside (c-H,c+H) is at most 5*E/H+2*C*(log(4c)+1)/c.",
+    "outer_bound_constants": {
+      "left_boundary": "2*c/(width*(2*c - width))",
+      "right_boundary_absolute": "2*c/(width*(2*c + width))",
+      "left_plus_mid_coefficient": "14/3 < 5",
+      "tail_integral": "log(2*radius)/(2*radius**2) + 1/(4*radius**2)"
+    },
+    "published_counting_input": {
+      "source": "https://arxiv.org/abs/1904.12438",
+      "statement": "Uniformly for 0<t<=1/2, N_t(X)=g(X,t)+O(log(2+X)), with an absolute implied constant; g_x=log(x/(4*pi))/(4*pi)+t/(16*x).",
+      "use": "After removing the double atom and fixing the low cutoff, E=O(log(4c)) on [a,2c] and the same logarithmic bound holds on the tail."
+    },
+    "local_window": "H=log(4c)^2",
+    "local_singular_field": "S_H(c)=sum_(positive outsider roots y:0<|y-c|<H) 1/(c-y)",
+    "smooth_local_bound": "local_mass/(2*c - width) + 2*rho_derivative*width + 2*rho_max*width/(2*c - width)",
+    "localized_field_theorem": "Uniformly for 0<t<=1/2 at any large positive double zero c, B(c)=-pi/8+S_H(c)+O(1/log(4c)+log(4c)^3/c), H=log(4c)^2.",
+    "odd_count_identity": "Let D_c(u)=#roots in [c-u,c)-#roots in (c,c+u]. If H avoids roots, S_H=D_c(H)/H+integral_0^H D_c(u)/u^2 du.",
+    "paired_gap_identity": "For paired left/right distances ell_m,r_m, 1/ell_m-1/r_m=(r_m-ell_m)/(ell_m*r_m); unmatched roots retain their signed reciprocal terms.",
+    "absolute_odd_norm": "W_H=|D_c(H)|/H+integral_0^H |D_c(u)|/u^2 du controls |S_H|.",
+    "counting_guard": "The O(log c) Riemann-von Mangoldt error controls the outer field but cannot control W_H near u=0; one neighboring even pair can keep the counting error <=1 while producing a reciprocal field of size 1/epsilon.",
+    "classical_field_birth_countermodel": {
+      "initial_polynomial": "z**6 - 3*z**4 - 16*z**4/(pi + 8) + 32*z**2/(pi + 8) + 3*z**2 - 16/(pi + 8) - 1",
+      "a_squared": "1 + 16/(pi + 8)",
+      "heat_solution": "-120*tau**3 + 180*tau**2*z**2 - 36*tau**2 - 192*tau**2/(pi + 8) - 30*tau*z**4 + 192*tau*z**2/(pi + 8) + 36*tau*z**2 - 6*tau - 64*tau/(pi + 8) + z**6 - 3*z**4 - 16*z**4/(pi + 8) + 32*z**2/(pi + 8) + 3*z**2 - 16/(pi + 8) - 1",
+      "field": "-pi/8",
+      "center_velocity": "-pi/4",
+      "branches": "z_+/-=1+/-sqrt(2*tau)-pi*tau/4+O(tau^(3/2)), tau>0",
+      "conclusion": "An exact even backward-heat solution can have the classical field and drift while still undergoing positive square-root birth."
+    },
+    "open_handoff": "Prove an Xi-specific lambda-uniform bound on the signed odd-count integral or paired reciprocal-gap discrepancy, and then add a genuinely global mechanism that turns that control into collision exclusion; field balance alone is compatible with positive birth.",
+    "checks": {
+      "odd_count_checks": [
+        {
+          "example": 1,
+          "left": [
+            "1/3",
+            "5/4",
+            "7/3"
+          ],
+          "right": [
+            "1/2",
+            "3/2",
+            "11/4"
+          ],
+          "cutoff": "3",
+          "field": "1384/1155",
+          "passed": true
+        },
+        {
+          "example": 2,
+          "left": [
+            "2/5",
+            "4/5"
+          ],
+          "right": [
+            "1/2",
+            "3/4",
+            "7/5"
+          ],
+          "cutoff": "2",
+          "field": "-25/84",
+          "passed": true
+        },
+        {
+          "example": 3,
+          "left": [
+            "1/4",
+            "2/3",
+            "5/3"
+          ],
+          "right": [
+            "1/4",
+            "3/4",
+            "9/5"
+          ],
+          "cutoff": "2",
+          "field": "19/90",
+          "passed": true
+        }
+      ],
+      "kernel_split": "0",
+      "kernel_derivative": "4*c*y/(c**2 - y**2)**2",
+      "countermodel_field": "-pi/8",
+      "countermodel_pde_residual": "0"
+    }
+  },
+  "rows": [
+    {
+      "id": "nloc_01_positive_zero_stieltjes_field",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The signed Newman field at an even double zero is a Stieltjes transform of the positive outsider-root counting measure plus the reflected double root.",
+      "formula": "At an even double zero c>0, remove the positive double atom and let mu count the other positive roots. Then B(c)=1/c+PV integral K_c(y)dmu(y), K_c(y)=2c/(c^2-y^2)=1/(c-y)+1/(c+y).",
+      "proof_boundary": "Canonical-product identity in the real-zero regime.",
+      "diagnostics": null
+    },
+    {
+      "id": "nloc_02_outer_counting_bound",
+      "role": "exact_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "A uniform counting-function discrepancy controls the entire collision field outside a symmetric local window with an explicit inverse-window bound.",
+      "formula": "If |F(y)|<=E on [a,2c] and |F(y)|<=C*log(2+y) for y>=2c, then for 0<H<=c/2 the field discrepancy outside (c-H,c+H) is at most 5*E/H+2*C*(log(4c)+1)/c.",
+      "proof_boundary": "Conditional deterministic Stieltjes estimate.",
+      "diagnostics": {
+        "left_boundary": "2*c/(width*(2*c - width))",
+        "right_boundary_absolute": "2*c/(width*(2*c + width))",
+        "left_plus_mid_coefficient": "14/3 < 5",
+        "tail_integral": "log(2*radius)/(2*radius**2) + 1/(4*radius**2)"
+      }
+    },
+    {
+      "id": "nloc_03_published_uniform_counting",
+      "role": "published_theorem",
+      "readiness": "available_published",
+      "claim": "The published positive-time zero count supplies the logarithmic discrepancy required by the outer-field lemma uniformly in t.",
+      "formula": "Uniformly for 0<t<=1/2, N_t(X)=g(X,t)+O(log(2+X)), with an absolute implied constant; g_x=log(x/(4*pi))/(4*pi)+t/(16*x).",
+      "proof_boundary": "External theorem; it does not control reciprocal gaps inside the local window.",
+      "diagnostics": {
+        "source": "https://arxiv.org/abs/1904.12438",
+        "statement": "Uniformly for 0<t<=1/2, N_t(X)=g(X,t)+O(log(2+X)), with an absolute implied constant; g_x=log(x/(4*pi))/(4*pi)+t/(16*x).",
+        "use": "After removing the double atom and fixing the low cutoff, E=O(log(4c)) on [a,2c] and the same logarithmic bound holds on the tail."
+      }
+    },
+    {
+      "id": "nloc_04_log_squared_localization",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "Choosing H=log(4c)^2 reduces the full high collision field to the classical constant and one local singular sum.",
+      "formula": "Uniformly for 0<t<=1/2 at any large positive double zero c, B(c)=-pi/8+S_H(c)+O(1/log(4c)+log(4c)^3/c), H=log(4c)^2.",
+      "proof_boundary": "High-c asymptotic reduction; not a collision-exclusion theorem.",
+      "diagnostics": null
+    },
+    {
+      "id": "nloc_05_odd_count_identity",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The local singular field is exactly the inverse-square weighted odd part of the local counting function.",
+      "formula": "Let D_c(u)=#roots in [c-u,c)-#roots in (c,c+u]. If H avoids roots, S_H=D_c(H)/H+integral_0^H D_c(u)/u^2 du.",
+      "proof_boundary": "Finite local window avoiding outsider roots at its boundary.",
+      "diagnostics": [
+        {
+          "example": 1,
+          "left": [
+            "1/3",
+            "5/4",
+            "7/3"
+          ],
+          "right": [
+            "1/2",
+            "3/2",
+            "11/4"
+          ],
+          "cutoff": "3",
+          "field": "1384/1155",
+          "passed": true
+        },
+        {
+          "example": 2,
+          "left": [
+            "2/5",
+            "4/5"
+          ],
+          "right": [
+            "1/2",
+            "3/4",
+            "7/5"
+          ],
+          "cutoff": "2",
+          "field": "-25/84",
+          "passed": true
+        },
+        {
+          "example": 3,
+          "left": [
+            "1/4",
+            "2/3",
+            "5/3"
+          ],
+          "right": [
+            "1/4",
+            "3/4",
+            "9/5"
+          ],
+          "cutoff": "2",
+          "field": "19/90",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "nloc_06_paired_gap_norm",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "Left-right pairing turns the local field into reciprocal-gap asymmetry, with a natural absolute odd-count norm as a sufficient bound.",
+      "formula": "For paired left/right distances ell_m,r_m, 1/ell_m-1/r_m=(r_m-ell_m)/(ell_m*r_m); unmatched roots retain their signed reciprocal terms. W_H=|D_c(H)|/H+integral_0^H |D_c(u)|/u^2 du controls |S_H|.",
+      "proof_boundary": "Sufficient local balance estimate only.",
+      "diagnostics": null
+    },
+    {
+      "id": "nloc_07_counting_only_guard",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "Uniform Riemann-von Mangoldt error does not control the local odd reciprocal-gap norm.",
+      "formula": "The O(log c) Riemann-von Mangoldt error controls the outer field but cannot control W_H near u=0; one neighboring even pair can keep the counting error <=1 while producing a reciprocal field of size 1/epsilon.",
+      "proof_boundary": "Blocks counting-only promotion; does not rule out stronger Xi spacing input.",
+      "diagnostics": null
+    },
+    {
+      "id": "nloc_08_classical_field_birth_guard",
+      "role": "exact_countermodel",
+      "readiness": "guard_validated",
+      "claim": "Even exact classical field and center drift remain compatible with positive square-root birth under the backward heat equation.",
+      "formula": "z_+/-=1+/-sqrt(2*tau)-pi*tau/4+O(tau^(3/2)), tau>0",
+      "proof_boundary": "Exact even polynomial heat-flow countermodel, not the Xi kernel.",
+      "diagnostics": {
+        "initial_polynomial": "z**6 - 3*z**4 - 16*z**4/(pi + 8) + 32*z**2/(pi + 8) + 3*z**2 - 16/(pi + 8) - 1",
+        "a_squared": "1 + 16/(pi + 8)",
+        "heat_solution": "-120*tau**3 + 180*tau**2*z**2 - 36*tau**2 - 192*tau**2/(pi + 8) - 30*tau*z**4 + 192*tau*z**2/(pi + 8) + 36*tau*z**2 - 6*tau - 64*tau/(pi + 8) + z**6 - 3*z**4 - 16*z**4/(pi + 8) + 32*z**2/(pi + 8) + 3*z**2 - 16/(pi + 8) - 1",
+        "field": "-pi/8",
+        "center_velocity": "-pi/4",
+        "branches": "z_+/-=1+/-sqrt(2*tau)-pi*tau/4+O(tau^(3/2)), tau>0",
+        "conclusion": "An exact even backward-heat solution can have the classical field and drift while still undergoing positive square-root birth."
+      }
+    },
+    {
+      "id": "nloc_09_fixed_time_scope",
+      "role": "scope_gate",
+      "readiness": "guard_validated",
+      "claim": "Fixed-positive-time high-zero localization and the local field reduction are compatible: the former gives compactness, while the latter identifies what must be uniform as t approaches zero.",
+      "formula": "high zeros simple for x>=exp(C/t); local odd-count control needed below that expanding scale",
+      "proof_boundary": "Scope composition only; no compact collision is excluded.",
+      "diagnostics": null
+    },
+    {
+      "id": "nloc_10_xi_collision_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "The remaining root-field route needs both an Xi-specific uniform odd-count theorem and a separate global implication from field control to no collision.",
+      "formula": "Prove an Xi-specific lambda-uniform bound on the signed odd-count integral or paired reciprocal-gap discrepancy, and then add a genuinely global mechanism that turns that control into collision exclusion; field balance alone is compatible with positive birth.",
+      "proof_boundary": "Open theorem pair; not a proof of RH or Lambda <= 0.",
+      "diagnostics": null
+    }
+  ]
+}

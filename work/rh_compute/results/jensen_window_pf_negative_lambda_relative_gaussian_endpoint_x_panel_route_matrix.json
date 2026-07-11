@@ -1,0 +1,334 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_endpoint_x_panel_route_matrix.py",
+  "date": "2026-07-08",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_endpoint_x_panel_route_matrix.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The first-panel mass is not promoted into a proof.",
+    "The y=0 branch is avoided only after a certified x-panel theorem is supplied.",
+    "Bernstein x-panel budgets are sufficient-condition route sizing, not proved estimates.",
+    "The x moment formula is an obligation until implemented and checked with Arb-safe enclosures.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_endpoint_x_panel_route_matrix",
+  "matrix_rows": [
+    {
+      "claim": "The endpoint parity-repair matrix identifies the x-variable first-panel route as an admissible way to avoid the y=0 sqrt-branch obstruction.",
+      "diagnostics": {
+        "source_ready_to_apply_rows": 0,
+        "x_interval": "0<=x<=0.01",
+        "y_interval": "0<=y<=1"
+      },
+      "gap": null,
+      "id": "nlrgexrm_01_endpoint_route_import",
+      "proof_boundary": "Scope import only; not an x-panel certificate or endpoint theorem.",
+      "readiness": "diagnostic_only",
+      "role": "scope_reduction",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_endpoint_parity_repair_matrix.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_endpoint_parity_repair_matrix.md"
+      ]
+    },
+    {
+      "claim": "On the first panel, y=T*x^2 maps 0<=y<=1 to 0<=x<=0.01 and removes the sqrt(y/T) branch from the finite core by working directly in x.",
+      "diagnostics": {
+        "x_moment_formula": "For monomial x^k on the first panel, the transformed Gamma moment equals T^(-k/2)*lower_gamma(alpha+1+k/2,1)/Gamma(alpha+1).",
+        "x_transform_formula": "y=T*x^2, dy=2*T*x dx, and the Gamma(alpha+1,1) density becomes 2*T^(alpha+1)*x^(2*alpha+1)*exp(-T*x^2)/Gamma(alpha+1) dx.",
+        "x_weight_power": 42
+      },
+      "gap": null,
+      "id": "nlrgexrm_02_exact_x_change_of_variables",
+      "proof_boundary": "Change-of-variables route only; transformed x moments and remainders are not certified here.",
+      "readiness": "open_requirement",
+      "role": "change_of_variables",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_interpolation_remainder_route_matrix.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_part_weighted_sum_interval_certificate.md"
+      ]
+    },
+    {
+      "claim": "The first panel has extremely small Gamma mass compared with the heaviest compact panel, so its admissible first-panel sup-norm budgets can be much larger after a valid x-panel remainder theorem is supplied.",
+      "diagnostics": {
+        "first_panel_derivative_sup_budget_without_bernstein": "1.469284414511984837177801591129E-18",
+        "first_panel_mass_upper": "1.6155560239464103501984383230311864446832165667162E-21",
+        "first_panel_value_sup_budget_without_bernstein": "6.996592450057070652146864508995E-20",
+        "first_to_heaviest_mass_ratio": "2.682927708866247294881825729652E-21",
+        "heaviest_panel": "20<=y<=50",
+        "heaviest_panel_mass_upper": "0.60216159332489531950482867922076390781009134801886"
+      },
+      "gap": null,
+      "id": "nlrgexrm_03_first_panel_mass_budget",
+      "proof_boundary": "Budget diagnostic only; tiny mass is not a proof of the first-panel remainder.",
+      "readiness": "diagnostic_only",
+      "role": "budget_diagnostic",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_interpolation_remainder_route_matrix.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md"
+      ]
+    },
+    {
+      "claim": "For selected x-panel degrees and Bernstein radii, the table records sufficient-condition sup-norm budgets for value and derivative channels on the first panel.",
+      "diagnostics": {
+        "bernstein_x_budget_rows": [
+          {
+            "bernstein_error_constant": "3.121475384849870446578265508307E-1",
+            "degree": 8,
+            "derivative_sup_norm_budget_on_first_x_panel": "4.707019064264224861681423945017E-18",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "1.5",
+            "value_sup_norm_budget_on_first_x_panel": "2.241437649649630886168729396656E-19"
+          },
+          {
+            "bernstein_error_constant": "1.562500000000000000000000000000E-2",
+            "degree": 8,
+            "derivative_sup_norm_budget_on_first_x_panel": "9.403420252876702957937930183224E-17",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "2.0",
+            "value_sup_norm_budget_on_first_x_panel": "4.477819168036525217373993285757E-18"
+          },
+          {
+            "bernstein_error_constant": "3.048315805517451607986587410456E-4",
+            "degree": 8,
+            "derivative_sup_norm_budget_on_first_x_panel": "4.819987521806566258361778119698E-15",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "3.0",
+            "value_sup_norm_budget_on_first_x_panel": "2.295232153241222027436778902176E-16"
+          },
+          {
+            "bernstein_error_constant": "6.165877303407151499413857794186E-2",
+            "degree": 12,
+            "derivative_sup_norm_budget_on_first_x_panel": "2.382928401283763836226220872165E-17",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "1.5",
+            "value_sup_norm_budget_on_first_x_panel": "1.134727810135125636122919257057E-18"
+          },
+          {
+            "bernstein_error_constant": "9.765625000000000000000000000000E-4",
+            "degree": 12,
+            "derivative_sup_norm_budget_on_first_x_panel": "1.504547240460272473270068829316E-15",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "2.0",
+            "value_sup_norm_budget_on_first_x_panel": "7.164510668858440347798389257211E-17"
+          },
+          {
+            "bernstein_error_constant": "3.763352846317841491341465938834E-6",
+            "degree": 12,
+            "derivative_sup_norm_budget_on_first_x_panel": "3.904189892663318669273040276955E-13",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "3.0",
+            "value_sup_norm_budget_on_first_x_panel": "1.859138044125389842223790910762E-14"
+          },
+          {
+            "bernstein_error_constant": "1.217951072277955851736070675395E-2",
+            "degree": 16,
+            "derivative_sup_norm_budget_on_first_x_panel": "1.206357503149905442089524316534E-16",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "1.5",
+            "value_sup_norm_budget_on_first_x_panel": "5.744559538809073532872278738852E-18"
+          },
+          {
+            "bernstein_error_constant": "6.103515625000000000000000000000E-5",
+            "degree": 16,
+            "derivative_sup_norm_budget_on_first_x_panel": "2.407275584736435957232110126905E-14",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "2.0",
+            "value_sup_norm_budget_on_first_x_panel": "1.146321707017350455647742281154E-15"
+          },
+          {
+            "bernstein_error_constant": "4.646114625083754927582056714610E-8",
+            "degree": 16,
+            "derivative_sup_norm_budget_on_first_x_panel": "3.162393813057288122111162624334E-11",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "3.0",
+            "value_sup_norm_budget_on_first_x_panel": "1.505901815741565772201270637718E-12"
+          },
+          {
+            "bernstein_error_constant": "2.405829278573739954046559358804E-3",
+            "degree": 20,
+            "derivative_sup_norm_budget_on_first_x_panel": "6.107184859696396300578216852451E-16",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "1.5",
+            "value_sup_norm_budget_on_first_x_panel": "2.908183266522093476016591111544E-17"
+          },
+          {
+            "bernstein_error_constant": "3.814697265625000000000000000000E-6",
+            "degree": 20,
+            "derivative_sup_norm_budget_on_first_x_panel": "3.851640935578297531571376203048E-13",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "2.0",
+            "value_sup_norm_budget_on_first_x_panel": "1.834114731227760729036387649846E-14"
+          },
+          {
+            "bernstein_error_constant": "5.735943981584882626644514462482E-10",
+            "degree": 20,
+            "derivative_sup_norm_budget_on_first_x_panel": "2.561538988576403378910041725710E-9",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "3.0",
+            "value_sup_norm_budget_on_first_x_panel": "1.219780470750668275483029216551E-10"
+          },
+          {
+            "bernstein_error_constant": "4.752255365083930773425302437145E-4",
+            "degree": 24,
+            "derivative_sup_norm_budget_on_first_x_panel": "3.091762335221300627167722281553E-15",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "1.5",
+            "value_sup_norm_budget_on_first_x_panel": "1.472267778676809822233399250219E-16"
+          },
+          {
+            "bernstein_error_constant": "2.384185791015625000000000000000E-7",
+            "degree": 24,
+            "derivative_sup_norm_budget_on_first_x_panel": "6.162625496925276050514201924877E-12",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "2.0",
+            "value_sup_norm_budget_on_first_x_panel": "2.934583569964417166458220239754E-13"
+          },
+          {
+            "bernstein_error_constant": "7.081412322944299539067301805533E-12",
+            "degree": 24,
+            "derivative_sup_norm_budget_on_first_x_panel": "2.074846580746886736917133797825E-7",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "3.0",
+            "value_sup_norm_budget_on_first_x_panel": "9.880221813080413031412536654065E-9"
+          },
+          {
+            "bernstein_error_constant": "1.854256018078778049073125169805E-5",
+            "degree": 32,
+            "derivative_sup_norm_budget_on_first_x_panel": "7.923848703666778677674775737996E-14",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "1.5",
+            "value_sup_norm_budget_on_first_x_panel": "3.773261287460370798309895500268E-15"
+          },
+          {
+            "bernstein_error_constant": "9.313225746154785156250000000000E-10",
+            "degree": 32,
+            "derivative_sup_norm_budget_on_first_x_panel": "1.577632127212870668931635692769E-9",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "2.0",
+            "value_sup_norm_budget_on_first_x_panel": "7.512533939108907946133043813769E-11"
+          },
+          {
+            "bernstein_error_constant": "1.079319055470858030645831703328E-15",
+            "degree": 32,
+            "derivative_sup_norm_budget_on_first_x_panel": "1.361306841628032388091331484753E-3",
+            "proof_boundary": "First x-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate in the x variable.",
+            "rho": "3.0",
+            "value_sup_norm_budget_on_first_x_panel": "6.482413531562058989909765298732E-5"
+          }
+        ],
+        "degree_count": 6,
+        "rho_2_degree_32_value_sup_budget": "7.512533939108907946133043813769E-11",
+        "rho_3_degree_32_value_sup_budget": "6.482413531562058989909765298732E-5",
+        "rho_count": 3
+      },
+      "gap": null,
+      "id": "nlrgexrm_04_x_bernstein_budget_table",
+      "proof_boundary": "Route sizing table only; no x-domain or x-panel sup-norm theorem is proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "route_budget",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_interpolation_remainder_route_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout.md"
+      ]
+    },
+    {
+      "claim": "A usable x-panel certificate must integrate the x-local model against exact transformed moments and certify a true-function x Taylor/Chebyshev remainder in both value and derivative channels.",
+      "diagnostics": {
+        "required_missing_input": "Certify the first-panel value and derivative cores in x, including an x-domain/sup-norm or Taylor-model remainder bound and exact transformed moments; then splice this with the y-panel route away from zero.",
+        "x_moment_formula": "For monomial x^k on the first panel, the transformed Gamma moment equals T^(-k/2)*lower_gamma(alpha+1+k/2,1)/Gamma(alpha+1)."
+      },
+      "gap": null,
+      "id": "nlrgexrm_05_x_moment_taylor_obligation",
+      "proof_boundary": "Open requirement only; the x moment implementation and remainder proof are not produced.",
+      "readiness": "open_requirement",
+      "role": "open_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_arb_chebyshev_interpolant_moment_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "The tiny first-panel Gamma mass alone proves the endpoint interpolation remainder is harmless.",
+      "diagnostics": {
+        "tiny_mass_is_proof": false,
+        "y_plane_branch_resolved": false
+      },
+      "gap": "Mass allocation only multiplies a future pointwise or analytic remainder bound. It does not supply the missing endpoint analyticity, x-domain, sup-norm, or Taylor-model certificate.",
+      "id": "nlrgexrm_06_tiny_mass_promotion_rejected",
+      "proof_boundary": "Rejected promotion only; small measure does not prove the endpoint theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_endpoint_parity_repair_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_formal_tail_obstruction_scout.md"
+      ]
+    },
+    {
+      "claim": "Before the compact-interval route can be promoted, the first panel must be certified in x or replaced by an exact even-core plus tail-charge theorem, and then spliced to the nonzero y-panels.",
+      "diagnostics": {
+        "ready_to_apply_rows": 0,
+        "required_missing_input": "Certify the first-panel value and derivative cores in x, including an x-domain/sup-norm or Taylor-model remainder bound and exact transformed moments; then splice this with the y-panel route away from zero.",
+        "target_closing": false,
+        "x_panel_certificate_produced": false
+      },
+      "gap": null,
+      "id": "nlrgexrm_07_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a compact certificate, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Endpoint x-panel route matrix only. It records the y=T*x^2 change of variables, first-panel Gamma mass and Bernstein sufficient-condition budgets, exact-moment obligations, and rejected shortcuts. It does not prove an x-domain theorem, does not prove a sup-norm bound, does not implement exact x moments, does not prove a Taylor-model or Chebyshev interpolation remainder, does not prove a compact interval certificate, does not prove a finite-grid interval certificate, does not prove a uniform collar theorem, and does not prove RH or Lambda <= 0.",
+  "source_arb_chebyshev_interpolant_moment_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_arb_chebyshev_interpolant_moment_scout.md",
+  "source_compact_interval_integration_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_endpoint_parity_repair_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_endpoint_parity_repair_matrix.json",
+  "source_endpoint_parity_repair_matrix": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_endpoint_parity_repair_matrix.md",
+  "source_finite_part_weighted_sum_interval_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_part_weighted_sum_interval_certificate.md",
+  "source_formal_tail_obstruction": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_formal_tail_obstruction_scout.md",
+  "source_interpolation_remainder_route_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_interpolation_remainder_route_matrix.json",
+  "source_interpolation_remainder_route_matrix": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_interpolation_remainder_route_matrix.md",
+  "source_intervalization_target": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+  "source_quadrature_remainder_route_matrix": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "endpoint x-panel route matrix",
+  "summary": {
+    "T": 10000,
+    "alpha": "20.5",
+    "bernstein_x_budget_row_count": 18,
+    "compact_interval": "0<=y<=200",
+    "degree_count": 6,
+    "derivative_unscaled_expectation_error_cap": "1.424226772053247012E-38",
+    "first_panel_derivative_sup_budget_without_bernstein": "1.469284414511984837177801591129E-18",
+    "first_panel_mass_upper": "1.6155560239464103501984383230311864446832165667162E-21",
+    "first_panel_value_sup_budget_without_bernstein": "6.996592450057070652146864508995E-20",
+    "first_to_heaviest_mass_ratio": "2.682927708866247294881825729652E-21",
+    "heaviest_panel": "20<=y<=50",
+    "heaviest_panel_mass_upper": "0.60216159332489531950482867922076390781009134801886",
+    "index": 21,
+    "main_finding": "The endpoint x-panel route matrix quantifies the first-panel repair suggested by the endpoint parity matrix. The change y=T*x^2 maps 0<=y<=1 to 0<=x<=0.01 and gives transformed density power x^42 for alpha=20.5. The first-panel Gamma mass upper is 1.6155560239464103501984383230311864446832165667162E-21, only 2.682927708866247294881825729652E-21 of the heaviest panel mass. This makes the first panel numerically lightweight, but it remains a route matrix only: no x-domain, sup-norm, exact-moment implementation, or true x-panel interpolation-remainder certificate is proved.",
+    "matrix_rows": 7,
+    "panel_count": 6,
+    "ready_to_apply_rows": 0,
+    "required_missing_input": "Certify the first-panel value and derivative cores in x, including an x-domain/sup-norm or Taylor-model remainder bound and exact transformed moments; then splice this with the y-panel route away from zero.",
+    "rho_2_degree_32_derivative_sup_budget": "1.577632127212870668931635692769E-9",
+    "rho_2_degree_32_value_sup_budget": "7.512533939108907946133043813769E-11",
+    "rho_3_degree_32_derivative_sup_budget": "1.361306841628032388091331484753E-3",
+    "rho_3_degree_32_value_sup_budget": "6.482413531562058989909765298732E-5",
+    "rho_count": 3,
+    "target_closing": false,
+    "tiny_mass_is_proof": false,
+    "value_unscaled_expectation_error_cap": "6.782032247872604818E-40",
+    "x_interval": "0<=x<=0.01",
+    "x_panel_certificate_produced": false,
+    "x_right_endpoint": "0.01",
+    "x_weight_power": 42,
+    "y_interval": "0<=y<=1",
+    "y_plane_branch_resolved": false
+  }
+}

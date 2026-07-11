@@ -1,0 +1,304 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_worst_row_chebyshev_panel_moment_scout.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_chebyshev_panel_moment_scout.py",
+  "invariants": [
+    "No row is ready_to_apply for the full intervalization target.",
+    "The Chebyshev panel-moment ladder is floating calibration only.",
+    "Small consecutive-degree deltas are not promoted to interpolation-remainder bounds.",
+    "The compact interval 0<=y<=200 remains open until Arb local models and remainders are certified.",
+    "All-row coverage, rounding aggregation, and grid-to-collar coverage remain separate.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_worst_row_chebyshev_panel_moment_scout",
+  "matrix_rows": [
+    {
+      "claim": "The prior compact-interval scout rejects raw Arb interval-Riemann hulls on 0<=y<=200, so the next route must use local panel models rather than direct hull evaluation.",
+      "diagnostics": {
+        "compact_interval": "0<=y<=200",
+        "raw_derivative_width_to_cap_ratio_upper": "42790317247256500123688575487970253060.03",
+        "raw_value_width_to_cap_ratio_upper": "1.375217360851530223059919868593402789065E+39"
+      },
+      "gap": null,
+      "id": "nlrgwrcpms_01_raw_panel_rejection_import",
+      "proof_boundary": "Scope import only; not a compact interval-integration proof.",
+      "readiness": "diagnostic_only",
+      "role": "scope_reduction",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout.md"
+      ]
+    },
+    {
+      "claim": "Each Chebyshev interpolant is integrated termwise against the normalized Gamma weight by expanding T_k((2y-a-b)/(b-a)) into monomials and using incomplete-Gamma panel moments.",
+      "diagnostics": {
+        "degrees": [
+          12,
+          16,
+          20,
+          24,
+          32
+        ],
+        "formula": "Integral T_k(t(y))*y^alpha*exp(-y)/Gamma(alpha+1) dy is reduced to a finite linear combination of incomplete-Gamma moments.",
+        "panel_count": 6
+      },
+      "gap": null,
+      "id": "nlrgwrcpms_02_panel_moment_formula",
+      "proof_boundary": "Moment-formula diagnostic only; the Chebyshev coefficients and interpolation remainder are not Arb-certified.",
+      "readiness": "diagnostic_only",
+      "role": "floating_panel_moment_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_part_weighted_sum_interval_certificate.md"
+      ]
+    },
+    {
+      "claim": "The degree ladder 12,16,20,24,32 gives stable high-precision floating panel-moment estimates for the compact value and derivative integrals.",
+      "diagnostics": {
+        "ladder_rows": [
+          {
+            "degree": 12,
+            "derivative_integral_estimate": "-1.37933029360821747179171875864350211335277664317627273588327E-32",
+            "panel_count": 6,
+            "proof_boundary": "High-precision floating Chebyshev panel-moment estimate only; not an Arb coefficient-ball integration certificate.",
+            "value_integral_estimate": "-6.57738536551902629507344097634647254870362440581448838597655E-34"
+          },
+          {
+            "degree": 16,
+            "derivative_integral_estimate": "-1.38058385883950818307446261429387384389406753493782251237134E-32",
+            "panel_count": 6,
+            "proof_boundary": "High-precision floating Chebyshev panel-moment estimate only; not an Arb coefficient-ball integration certificate.",
+            "value_integral_estimate": "-6.58338685008327661423542206078604075018177633988117643432771E-34"
+          },
+          {
+            "degree": 20,
+            "derivative_integral_estimate": "-1.38058387415230060647341221670742396432862091548744582506427E-32",
+            "panel_count": 6,
+            "proof_boundary": "High-precision floating Chebyshev panel-moment estimate only; not an Arb coefficient-ball integration certificate.",
+            "value_integral_estimate": "-6.58338692361018858544508140670083590761109726129929623985207E-34"
+          },
+          {
+            "degree": 24,
+            "derivative_integral_estimate": "-1.38058387415230156402674020877267464944150711737413680242435E-32",
+            "panel_count": 6,
+            "proof_boundary": "High-precision floating Chebyshev panel-moment estimate only; not an Arb coefficient-ball integration certificate.",
+            "value_integral_estimate": "-6.58338692361019331200868988527753143791758379472046944313503E-34"
+          },
+          {
+            "degree": 32,
+            "derivative_integral_estimate": "-1.38058387415230156402674205260518855676282541898259838947598E-32",
+            "panel_count": 6,
+            "proof_boundary": "High-precision floating Chebyshev panel-moment estimate only; not an Arb coefficient-ball integration certificate.",
+            "value_integral_estimate": "-6.58338692361019331200869759429797241582343365917043174997833E-34"
+          }
+        ]
+      },
+      "gap": null,
+      "id": "nlrgwrcpms_03_degree_ladder",
+      "proof_boundary": "Floating degree-ladder diagnostic only; not an interval enclosure.",
+      "readiness": "diagnostic_only",
+      "role": "floating_panel_moment_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md",
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.json"
+      ]
+    },
+    {
+      "claim": "Consecutive Chebyshev panel-moment deltas from degree 16->20 onward are below the unscaled quadrature route caps in both value and derivative channels.",
+      "diagnostics": {
+        "cap_safe_pair_count": 3,
+        "cauchy_rows": [
+          {
+            "both_deltas_below_caps": false,
+            "derivative_delta": "1.2535652312907112827438556503717305412908917615498E-35",
+            "derivative_delta_to_cap_ratio": "880.1724949205243049207001942674662479932",
+            "lower_degree": 12,
+            "pair": "12->16",
+            "proof_boundary": "Cauchy-ladder calibration only; a small consecutive-degree delta is not an interpolation-remainder proof.",
+            "upper_degree": 16,
+            "value_delta": "6.001484564250319161981084439568201478151934066688E-37",
+            "value_delta_to_cap_ratio": "884.9094703335967335860058853789744189628"
+          },
+          {
+            "both_deltas_below_caps": true,
+            "derivative_delta": "1.5312792423398949602413550120434553380549623312693E-40",
+            "derivative_delta_to_cap_ratio": "0.01075165326468561580445350311071629542923",
+            "lower_degree": 16,
+            "pair": "16->20",
+            "proof_boundary": "Cauchy-ladder calibration only; a small consecutive-degree delta is not an interpolation-remainder proof.",
+            "upper_degree": 20,
+            "value_delta": "7.3526911971209659345914795157429320921418119805524E-42",
+            "value_delta_to_cap_ratio": "0.01084142765529810925122002325367656958771"
+          },
+          {
+            "both_deltas_below_caps": true,
+            "derivative_delta": "9.5755332799206525068511288620188669097736007567735E-48",
+            "derivative_delta_to_cap_ratio": "6.723320659192506578602117131047695988453E-10",
+            "lower_degree": 20,
+            "pair": "20->24",
+            "proof_boundary": "Cauchy-ladder calibration only; a small consecutive-degree delta is not an interpolation-remainder proof.",
+            "upper_degree": 24,
+            "value_delta": "4.7265636084785766955303064865334211732032829627406E-49",
+            "value_delta_to_cap_ratio": "6.969243783765862010324414119702129783777E-10"
+          },
+          {
+            "both_deltas_below_caps": true,
+            "derivative_delta": "1.8438325139073213183016084615870516279094899698067E-56",
+            "derivative_delta_to_cap_ratio": "1.294620035297571747757230219488783361619E-18",
+            "lower_degree": 24,
+            "pair": "24->32",
+            "proof_boundary": "Cauchy-ladder calibration only; a small consecutive-degree delta is not an interpolation-remainder proof.",
+            "upper_degree": 32,
+            "value_delta": "7.7090204409779058498644499623068432992544758385E-58",
+            "value_delta_to_cap_ratio": "1.136682952723511405736824962015391755683E-18"
+          }
+        ],
+        "first_cap_safe_pair": "16->20"
+      },
+      "gap": null,
+      "id": "nlrgwrcpms_04_cauchy_delta_vs_caps",
+      "proof_boundary": "Cauchy convergence calibration only; small floating deltas are not a proof of quadrature or interpolation error.",
+      "readiness": "diagnostic_only",
+      "role": "floating_panel_moment_diagnostic",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md"
+      ]
+    },
+    {
+      "claim": "At reference degree 32, the compact integral estimate is concentrated in the central Gamma-mass panels and is stable enough to guide a formal Arb panel partition.",
+      "diagnostics": {
+        "panel_rows": [
+          {
+            "degree": 32,
+            "derivative_contribution_estimate": "-5.8332978789969920509137104127278740011247358488559E-85",
+            "panel": "0<=y<=1",
+            "proof_boundary": "Panel contribution estimate only; not a rigorous panel enclosure.",
+            "value_contribution_estimate": "-2.7778525801082570082696403014722026340124165205964E-86"
+          },
+          {
+            "degree": 32,
+            "derivative_contribution_estimate": "-5.97690716231937895940568127964599925921083458181E-57",
+            "panel": "1<=y<=5",
+            "proof_boundary": "Panel contribution estimate only; not a rigorous panel enclosure.",
+            "value_contribution_estimate": "-2.8466136631204462122728775590225265008249546480954E-58"
+          },
+          {
+            "degree": 32,
+            "derivative_contribution_estimate": "-1.1302824730972481895462298562846956146323510194914E-37",
+            "panel": "5<=y<=20",
+            "proof_boundary": "Panel contribution estimate only; not a rigorous panel enclosure.",
+            "value_contribution_estimate": "-5.385748612448812946816520193045579134656652287078E-39"
+          },
+          {
+            "degree": 32,
+            "derivative_contribution_estimate": "-1.2062987674338121788712906124924892922603605268958E-32",
+            "panel": "20<=y<=50",
+            "proof_boundary": "Panel contribution estimate only; not a rigorous panel enclosure.",
+            "value_contribution_estimate": "-5.7520010655891323225646800639834560908513825005169E-34"
+          },
+          {
+            "degree": 32,
+            "derivative_contribution_estimate": "-1.742738038552494215703736450775620785480884046027E-33",
+            "panel": "50<=y<=100",
+            "proof_boundary": "Panel contribution estimate only; not a rigorous panel enclosure.",
+            "value_contribution_estimate": "-8.3133200035096989656600344729852724593674858623841E-35"
+          },
+          {
+            "degree": 32,
+            "derivative_contribution_estimate": "-3.8508991103181735045858107060334223405814142884251E-43",
+            "panel": "100<=y<=200",
+            "proof_boundary": "Panel contribution estimate only; not a rigorous panel enclosure.",
+            "value_contribution_estimate": "-1.8396660474854307120039550279774373301465875650551E-44"
+          }
+        ],
+        "reference_degree": 32,
+        "reference_derivative_integral_estimate": "-1.38058387415230156402674205260518855676282541898259838947598E-32",
+        "reference_value_integral_estimate": "-6.58338692361019331200869759429797241582343365917043174997833E-34"
+      },
+      "gap": null,
+      "id": "nlrgwrcpms_05_reference_panel_contributions",
+      "proof_boundary": "Reference floating estimate only; not a certified integral value.",
+      "readiness": "diagnostic_only",
+      "role": "floating_panel_moment_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout.md"
+      ]
+    },
+    {
+      "claim": "The floating Chebyshev panel-moment ladder proves the compact-interval integration source.",
+      "diagnostics": null,
+      "gap": "The ladder is numerical calibration. A proof still needs Arb coefficient balls plus a rigorous interpolation or Taylor remainder bound on every panel.",
+      "id": "nlrgwrcpms_06_promotion_rejected",
+      "proof_boundary": "Rejected promotion only; not a compact interval certificate, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "A promoted compact-interval certificate may reuse this partition and degree ladder only after replacing all floating components with interval-certified local models.",
+      "diagnostics": {
+        "recommended_upgrade": "Promote this scout only by replacing floating Chebyshev coefficients with Arb coefficient balls and by adding a rigorous interpolation or Taylor remainder bound on each panel."
+      },
+      "gap": null,
+      "id": "nlrgwrcpms_07_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a finite-grid certificate, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Worst-row floating Chebyshev panel-moment scout only. It calibrates a local-model route on 0<=y<=200 using high-precision floating Chebyshev coefficients and incomplete-Gamma moment formulas, but it does not provide Arb coefficient balls, does not prove interpolation remainder bounds, does not prove a compact interval-integration certificate, does not prove a quadrature-remainder theorem, does not cover all rows or quadrature orders, does not prove a finite-grid interval certificate, does not prove a uniform collar theorem, and does not prove RH or Lambda <= 0.",
+  "source_cancellation_reduced_grid_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md",
+  "source_compact_interval_integration_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout.md",
+  "source_compact_interval_integration_scout_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout.json",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_far_tail_split_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.md",
+  "source_finite_part_weighted_sum_interval_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_part_weighted_sum_interval_certificate.md",
+  "source_intervalization_target": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+  "source_quadrature_remainder_route_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.json",
+  "source_quadrature_remainder_route_matrix": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "worst-row floating Chebyshev panel-moment scout",
+  "summary": {
+    "T": 10000,
+    "alpha": "20.5",
+    "cap_safe_pair_count": 3,
+    "cauchy_pair_count": 4,
+    "compact_interval": "0<=y<=200",
+    "degree_count": 5,
+    "degrees": [
+      12,
+      16,
+      20,
+      24,
+      32
+    ],
+    "derivative_unscaled_expectation_error_cap": "1.424226772053247012E-38",
+    "first_cap_safe_pair": "16->20",
+    "flint_precision_bits_for_coefficients": 384,
+    "index": 21,
+    "main_finding": "The floating Chebyshev panel-moment route is numerically plausible: on the six-panel compact interval 0<=y<=200, consecutive degree deltas from 16->20 onward are below the unscaled quadrature caps in both channels, with reference degree-32 estimates -6.58338692361019331200869759429797241582343365917043174997833E-34 and -1.38058387415230156402674205260518855676282541898259838947598E-32. This is calibration only; a referee-usable proof still needs Arb coefficient balls and panel remainder bounds.",
+    "matrix_rows": 7,
+    "mpmath_dps": 100,
+    "panel_count": 6,
+    "phi_term_count": 30,
+    "polynomial_M": 20,
+    "ratio_cutoff_n": 80,
+    "ready_to_apply_rows": 0,
+    "recommended_upgrade": "Promote this scout only by replacing floating Chebyshev coefficients with Arb coefficient balls and by adding a rigorous interpolation or Taylor remainder bound on each panel.",
+    "reference_degree": 32,
+    "reference_derivative_integral_estimate": "-1.38058387415230156402674205260518855676282541898259838947598E-32",
+    "reference_value_integral_estimate": "-6.58338692361019331200869759429797241582343365917043174997833E-34",
+    "target_closing": false,
+    "u": "1/10000",
+    "value_unscaled_expectation_error_cap": "6.782032247872604818E-40"
+  }
+}

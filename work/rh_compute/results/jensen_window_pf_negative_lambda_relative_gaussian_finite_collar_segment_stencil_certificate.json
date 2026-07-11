@@ -1,0 +1,1599 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_finite_collar_segment_stencil_certificate.py",
+  "date": "2026-07-10",
+  "diagnostics": {
+    "T_transition_ball": "1953.1250000000000000000000000000000000000000000000",
+    "all_four_derivative_budgets_certified_uniformly": true,
+    "all_four_residual_budgets_certified_uniformly": true,
+    "all_four_value_budgets_certified_uniformly": true,
+    "all_retained_perturbation_margins_positive": true,
+    "cauchy_derivative_scaled_uniform_upper": "3.444682701258727588679866341334902558432735232359124643812718912228585E-13",
+    "cauchy_q_upper": "8.421052631578947368421052631578947368421052631578947368421052631578948E-1",
+    "cauchy_value_scaled_uniform_upper": "3.447256652892887611429733875962287733273579505056233298008565307658303E-12",
+    "disk_radius_admissible": true,
+    "finite_collar_segment_stencil_system_certified": true,
+    "finite_phi_disk_majorant_upper": "1.768508446734926415433097204233572413431274458023462036057859663537779E+6",
+    "global_n_tail_extension_certified": true,
+    "maximum_derivative_fraction_location": "F_24",
+    "maximum_derivative_fraction_of_budget_upper": "1.030781944956076525740430906406485911868272476120036208386572085189608E-3",
+    "maximum_value_fraction_location": "F_24",
+    "maximum_value_fraction_of_budget_upper": "1.002880614281438852930299875898237823687299039592401504227849958494828E-3",
+    "normalization_derivative_scaled_uniform_upper": "7.630809489296715286433428546167434946535582521954684315617219974427415E-1287",
+    "normalization_value_scaled_uniform_upper": "1.106076054762397444658468363672754444199974889197454787063483188470034E-1285",
+    "parameters": {
+      "T_interval": "1156<=T<=10000",
+      "T_left": 1156,
+      "T_right": 10000,
+      "T_transition": "15625/8",
+      "derivative_budget_B": "0.009",
+      "disk_radius": "0.38",
+      "fixed_split_y": 200,
+      "indices": [
+        21,
+        22,
+        23,
+        24
+      ],
+      "phi_term_count": 30,
+      "polynomial_M": 20,
+      "precision_bits": 4096,
+      "ratio_cutoff_n": 80,
+      "taylor_degree": 384,
+      "value_budget_A": "0.5",
+      "x_cap": "8/25"
+    },
+    "perturbation_rows": [
+      {
+        "certified_positive_after_perturbation": true,
+        "finite_margin_lower": "4.396279349275512583580856491807389999989460662793632652531137141158390E-1",
+        "name": "normalizer",
+        "perturbation_bound_upper": "3.236655688068670047095463507530522232789888658630038509677590150027123E-10",
+        "perturbation_formula": "|R_i| <= A*u^3",
+        "proof_boundary": "Arb perturbation inequality for the rational A,B budgets on 0<=u<=1/1156.",
+        "retained_margin_lower": "4.396279346038856895512186444711926492458938430003743993901098631480800E-1"
+      },
+      {
+        "certified_positive_after_perturbation": true,
+        "finite_margin_lower": "3.720335729036512041561022096097329999989652433846591632890398864647758E+1",
+        "name": "B_product",
+        "perturbation_bound_upper": "1.730103806508361218691061422759123140789837563390128776698100217100139E-3",
+        "perturbation_formula": "4*P*A*U + 2*A^2*U^4",
+        "proof_boundary": "Arb perturbation inequality for the rational A,B budgets on 0<=u<=1/1156.",
+        "retained_margin_lower": "3.720162718655861205439152989955054087675573450090252620012729054626048E+1"
+      },
+      {
+        "certified_positive_after_perturbation": true,
+        "finite_margin_lower": "1.722502237565501330236724575177899999993340738612960792171015944016988E+1",
+        "name": "companion_product",
+        "perturbation_bound_upper": "4.000000001941993413260239630015476153089032263105205690220702446380269E+0",
+        "perturbation_formula": "2*(4*P^3*A + 6*P^2*A^2*U^3 + 4*P*A^3*U^6 + A^4*U^9)",
+        "proof_boundary": "Arb perturbation inequality for the rational A,B budgets on 0<=u<=1/1156.",
+        "retained_margin_lower": "1.322502237371301988910700612176352384684437512302440223148945699378961E+1"
+      },
+      {
+        "certified_positive_after_perturbation": true,
+        "finite_margin_lower": "2.742440242696800557239471524916489999987929124772433779765180231484331E+1",
+        "name": "weighted_gap_derivative",
+        "perturbation_bound_upper": "3.691040397770267727819495342225868845483873301706132333444232206394856E+0",
+        "perturbation_formula": "368*(D*(3*P^2*A*U^2+3*P*A^2*U^5+A^3*U^8)+B*(P+A*U^3)^3)",
+        "proof_boundary": "Arb perturbation inequality for the rational A,B budgets on 0<=u<=1/1156.",
+        "retained_margin_lower": "2.373336202919773784457521990693903115439541794601820546420757010844846E+1"
+      }
+    ],
+    "remaining_finite_segment_stencil_sources": [],
+    "remaining_obligations": [
+      "extend the residual majorants from T=10000 to every T>10000",
+      "extend fixed k=22 to the complete required k range",
+      "complete cone invariance and the sign-regularity/Newman bridges"
+    ],
+    "split_rule": "For 1156<=T<=15625/8 use x_*=8/25 and y_*=(64/625)T; for 15625/8<=T<=10000 use y_*=200 and x_*=sqrt(200/T).",
+    "target_closing": false,
+    "uniform_residual_row_count": 4,
+    "uniform_residual_rows": [
+      {
+        "T_interval": "1156<=T<=10000",
+        "cauchy_derivative_scaled_upper": "3.444682701258727588679866341334902558432735232359124643812718912228585E-13",
+        "cauchy_value_scaled_upper": "3.447256652892887611429733875962287733273579505056233298008565307658303E-12",
+        "compact_polynomial_derivative_scaled_upper": "1.248273072577546610258599325874882273318258852209896131892075861139410E-6",
+        "compact_polynomial_value_scaled_upper": "6.757729787709492306661551717431420406512930019067636894861188543156574E-5",
+        "derivative_budget_certified_uniformly": true,
+        "derivative_fraction_of_budget_upper": "1.386970463384368962549227502538648181029191985508205714239932968384976E-4",
+        "derivative_residual_scaled_uniform_upper": "1.248273417045932066294304752284783362926272786957385142815939671546479E-6",
+        "index": 21,
+        "normalization_derivative_scaled_upper": "7.630809489296715286433428546167434946535582521954684315617219974427415E-1287",
+        "normalization_value_scaled_upper": "1.106076054762397444658468363672754444199974889197454787063483188470034E-1285",
+        "proof_boundary": "Uniform residual majorant on 1156<=T<=10000 for one F_i only; not T>10000.",
+        "regime_one_far_derivative_scaled_upper": "1.153301629465584232669561177580914739657750113994291351770493776304182E-19",
+        "regime_one_far_value_scaled_upper": "4.071656733581826456433718342053990039165674532705718832870736384919471E-17",
+        "regime_two_far_derivative_scaled_upper": "4.479332194424143382462623126051390493079417143286500790666821699534612E-49",
+        "regime_two_far_value_scaled_upper": "8.307653352845323939799513738897658315541188656421152737584241622101612E-46",
+        "row_label": "F_21",
+        "selected_compact_majorant_row_count": 13,
+        "selected_compact_majorant_rows": [
+          {
+            "degree": 0,
+            "derivative_core_coefficient_ball": "0",
+            "derivative_scaled_contribution_upper": "1E-1000048",
+            "full_gamma_moment_constant_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+            "value_core_coefficient_ball": "[+/- 2.79E-1231]",
+            "value_scaled_contribution_upper": "2.7840992117156812322189818131577945271180057724605E-1219"
+          },
+          {
+            "degree": 1,
+            "derivative_core_coefficient_ball": "[+/- 1.67E-1231]",
+            "derivative_scaled_contribution_upper": "7.6707772933913059391217622804548425008375112176897E-1225",
+            "full_gamma_moment_constant_ball": "[4.6099316839628031441220476052275060490765668720377 +/- 1.32E-50]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[+/- 3.33E-1231]",
+            "value_scaled_contribution_upper": "1.5341554523639846875315945109363251335481141554790E-1220"
+          },
+          {
+            "degree": 2,
+            "derivative_core_coefficient_ball": "[+/- 2.28E-1229]",
+            "derivative_scaled_contribution_upper": "4.9012698586195817131296971399822002970753230018394E-1224",
+            "full_gamma_moment_constant_ball": "[21.500000000000000000000000000000000000000000000000 +/- 3E-53]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[-37.453809859006642336832603904346439729537577165782 +/- 4.59E-49]",
+            "value_core_coefficient_ball": "[+/- 2.28E-1229]",
+            "value_scaled_contribution_upper": "4.9012698523371715748706643886438605520793197302243E-1220"
+          },
+          {
+            "degree": 20,
+            "derivative_core_coefficient_ball": "[+/- 1.73E-1213]",
+            "derivative_scaled_contribution_upper": "7.1886464950300490198605361490594444551482837013299E-1224",
+            "full_gamma_moment_constant_ball": "[132721227041473.60839843750000000000000000000000000 +/- 3E-40]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[-14787468229.305498150915634079400550348987764301328 +/- 8.80E-41]",
+            "value_core_coefficient_ball": "[+/- 1.73E-1214]",
+            "value_scaled_contribution_upper": "8.3100753086849993835630973029158669778853191253189E-1222"
+          },
+          {
+            "degree": 40,
+            "derivative_core_coefficient_ball": "[-9.66683445E-1188 +/- 8.58E-1197]",
+            "derivative_scaled_contribution_upper": "3.3427723918559910282531592221407486568012211551115E-1213",
+            "full_gamma_moment_constant_ball": "[469962860638360176510883519049.11100864410400390625 +/- 3E-25]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[4944469183781380656.7781249375003857960201630646009 +/- 7.06E-33]",
+            "value_core_coefficient_ball": "[-4.83341723E-1189 +/- 7.02E-1198]",
+            "value_scaled_contribution_upper": "1.9321224424927628169363620784965885296766757309198E-1211"
+          },
+          {
+            "degree": 41,
+            "derivative_core_coefficient_ball": "[2.8773589168E-1185 +/- 4.92E-1196]",
+            "derivative_scaled_contribution_upper": "1.8795488195917212115036170209790551366319053199431E-1211",
+            "full_gamma_moment_constant_ball": "[3018418838790283188842056571347.8236136929313630895 +/- 2.82E-20]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[1.4035897155E-1186 +/- 1.18E-1197]",
+            "value_scaled_contribution_upper": "1.0598821636331852294741954712172877840301089601101E-1209"
+          },
+          {
+            "degree": 42,
+            "derivative_core_coefficient_ball": "[-730243180328283929064.33567817245557092341631461451 +/- 2.86E-30]",
+            "derivative_scaled_contribution_upper": "9.0652606893616445393466629037609442144819325544549E-7",
+            "full_gamma_moment_constant_ball": "[19503458716491947325201666040538.106858730316162109 +/- 3.76E-19]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-34773484777537329955.444556103450265282067443553072 +/- 4.07E-32]",
+            "value_scaled_contribution_upper": "4.9902101699533624226117820555941197675910066823571E-5"
+          },
+          {
+            "degree": 64,
+            "derivative_core_coefficient_ball": "[-1302524862685245857381091002269.6629747011826550774 +/- 3.03E-20]",
+            "derivative_scaled_contribution_upper": "8.8953622753560058916331942790697873791844707044304E-13",
+            "full_gamma_moment_constant_ball": "[5.2858232956933953131165432190173104827641821503377E+49 +/- 0.444]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-40703901958913933043159093820.926967959411957971170 +/- 3.05E-22]",
+            "value_scaled_contribution_upper": "3.2134496219723571283524914333139606907303900419755E-11"
+          },
+          {
+            "degree": 128,
+            "derivative_core_coefficient_ball": "[9.6677100754703273549405744408875339689669297946179E+56 +/- 1.88E+6]",
+            "derivative_scaled_contribution_upper": "3.3246294907130742684867328745355253986610822479453E-25",
+            "full_gamma_moment_constant_ball": "[2.7529945286055700291084065204974392111747421235429E+108 +/- 3.81E+58]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[1.5105796992922386492094647563886771826510827804090E+55 +/- 4.40E+5]",
+            "value_scaled_contribution_upper": "6.0051120176004903974541612546297927513315798103512E-24"
+          },
+          {
+            "degree": 192,
+            "derivative_core_coefficient_ball": "[-2.2054510214209334267538170424398861251217643515653E+83 +/- 2.44E+32]",
+            "derivative_scaled_contribution_upper": "8.8112658447375660232146967121738441341809276024265E-33",
+            "full_gamma_moment_constant_ball": "[3.3080898064427228672383579715552247179728869866823E+172 +/- 4.08E+122]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-2.2973448139801389862018927525415480470018378662139E+81 +/- 4.84E+31]",
+            "value_scaled_contribution_upper": "1.0610232621371485752954363957576003978242866987923E-31"
+          },
+          {
+            "degree": 256,
+            "derivative_core_coefficient_ball": "[4.6457984103083511446534859505249347590772862686019E+109 +/- 1.34E+59]",
+            "derivative_scaled_contribution_upper": "1.5260491510258665170497254678660424305783267893280E-36",
+            "full_gamma_moment_constant_ball": "[2.8131653220571827656986110632602649091260183659578E+240 +/- 7.09E+189]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[3.6295300080533993317605358988476052805291298973452E+107 +/- 4.48E+57]",
+            "value_scaled_contribution_upper": "1.3782131395202356982105333131665195701160513816118E-35"
+          },
+          {
+            "degree": 320,
+            "derivative_core_coefficient_ball": "[-8.1638832761990191347050702666022175812519195236456E+135 +/- 2.88E+85]",
+            "derivative_scaled_contribution_upper": "2.2460548859361879016857382416468601541765279284177E-37",
+            "full_gamma_moment_constant_ball": "[2.4370327381085717304903813296083631587223661749184E+311 +/- 3.23E+261]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-5.1024270476243869591906689166263859882824497022785E+133 +/- 1.80E+83]",
+            "value_scaled_contribution_upper": "1.6227746550888957589679458795898564613925414282818E-36"
+          },
+          {
+            "degree": 384,
+            "derivative_core_coefficient_ball": "[1.2129219431710441700324181628366939057210724124077E+162 +/- 5.62E+111]",
+            "derivative_scaled_contribution_upper": "8.2476613470553903536321486993395379256396036221609E-36",
+            "full_gamma_moment_constant_ball": "[6.2299770002674274296784804038731912647807135370418E+384 +/- 9.02E+333]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[6.3173017873491883855855112647744474256305854812901E+159 +/- 3.35E+109]",
+            "value_scaled_contribution_upper": "4.9657794360395996087493561960606801260621780141761E-35"
+          }
+        ],
+        "uniform_far_derivative_scaled_upper": "1.153301629465584232669561177580914739657750113994291351770493776304182E-19",
+        "uniform_far_value_scaled_upper": "4.071656733581826456433718342053990039165674532705718832870736384919471E-17",
+        "uniform_residual_budget_certified": true,
+        "value_budget_certified_uniformly": true,
+        "value_fraction_of_budget_upper": "1.351546026487845850536778937372248344216751467292950615003444812569196E-4",
+        "value_residual_scaled_uniform_upper": "6.757730132439229252683894686861241721083757336464753075017224062845976E-5"
+      },
+      {
+        "T_interval": "1156<=T<=10000",
+        "cauchy_derivative_scaled_upper": "3.444682701258727588679866341334902558432735232359124643812718912228585E-13",
+        "cauchy_value_scaled_upper": "3.447256652892887611429733875962287733273579505056233298008565307658303E-12",
+        "compact_polynomial_derivative_scaled_upper": "2.489317411016255156566960398590914671002997785778048332990750945376744E-6",
+        "compact_polynomial_value_scaled_upper": "1.346937477328923129019150902306567114119156831281014819005765224305034E-4",
+        "derivative_budget_certified_uniformly": true,
+        "derivative_fraction_of_budget_upper": "2.765908617205741453258786201113293122840252207315036489846964975011052E-4",
+        "derivative_residual_scaled_uniform_upper": "2.489317755485167307932907581001963810556226986583532840862268477509947E-6",
+        "index": 22,
+        "normalization_derivative_scaled_upper": "7.630809489296715286433428546167434946535582521954684315617219974427415E-1287",
+        "normalization_value_scaled_upper": "1.106076054762397444658468363672754444199974889197454787063483188470034E-1285",
+        "proof_boundary": "Uniform residual majorant on 1156<=T<=10000 for one F_i only; not T>10000.",
+        "regime_one_far_derivative_scaled_upper": "6.420254931883144244150060629733575319612719590531508613111868497156394E-19",
+        "regime_one_far_value_scaled_upper": "2.265940560462816349045930798545699227640557839812258748057823734684032E-16",
+        "regime_two_far_derivative_scaled_upper": "4.191084753519605617039819422717063252154725323356487311983862200190910E-48",
+        "regime_two_far_value_scaled_upper": "7.772371905220465724546867232261586859037800787438812433920086185978575E-45",
+        "row_label": "F_22",
+        "selected_compact_majorant_row_count": 13,
+        "selected_compact_majorant_rows": [
+          {
+            "degree": 0,
+            "derivative_core_coefficient_ball": "0",
+            "derivative_scaled_contribution_upper": "1E-1000048",
+            "full_gamma_moment_constant_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+            "value_core_coefficient_ball": "[+/- 2.79E-1231]",
+            "value_scaled_contribution_upper": "2.7840992117156812322189818131577945271180057724605E-1219"
+          },
+          {
+            "degree": 1,
+            "derivative_core_coefficient_ball": "[+/- 1.67E-1231]",
+            "derivative_scaled_contribution_upper": "7.8491674630050572400315707055816993031825696181011E-1225",
+            "full_gamma_moment_constant_ball": "[4.7171393975433334497993045262793085153341614504572 +/- 5.14E-51]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[+/- 3.33E-1231]",
+            "value_scaled_contribution_upper": "1.5698334861398913081718641507255419971190005311879E-1220"
+          },
+          {
+            "degree": 2,
+            "derivative_core_coefficient_ball": "[+/- 2.28E-1229]",
+            "derivative_scaled_contribution_upper": "5.1292358985553762114147993325395119387997566298319E-1224",
+            "full_gamma_moment_constant_ball": "[22.500000000000000000000000000000000000000000000000 +/- 1E-53]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[-37.453809859006642336832603904346439729537577165782 +/- 4.59E-49]",
+            "value_core_coefficient_ball": "[+/- 2.28E-1229]",
+            "value_scaled_contribution_upper": "5.1292358919807609504460441276505517405481252990719E-1220"
+          },
+          {
+            "degree": 20,
+            "derivative_core_coefficient_ball": "[+/- 1.73E-1213]",
+            "derivative_scaled_contribution_upper": "1.0532203004346350889563111102110348852891671469391E-1223",
+            "full_gamma_moment_constant_ball": "[194452030316577.61230468750000000000000000000000000 +/- 3E-40]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[-14787468229.305498150915634079400550348987764301328 +/- 8.80E-41]",
+            "value_core_coefficient_ball": "[+/- 1.73E-1214]",
+            "value_scaled_contribution_upper": "1.2175226615050115375918026281016270223413374532445E-1221"
+          },
+          {
+            "degree": 40,
+            "derivative_core_coefficient_ball": "[-9.66683445E-1188 +/- 8.58E-1197]",
+            "derivative_scaled_contribution_upper": "6.4523281052104012870933073357600497328953803691686E-1213",
+            "full_gamma_moment_constant_ball": "[907137614720555689544263536769.21427249908447265625 +/- 3E-24]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[4944469183781380656.7781249375003857960201630646009 +/- 7.06E-33]",
+            "value_core_coefficient_ball": "[-4.83341723E-1189 +/- 7.02E-1198]",
+            "value_scaled_contribution_upper": "3.7294456448116119489701872677957406503061415271241E-1211"
+          },
+          {
+            "degree": 41,
+            "derivative_core_coefficient_ball": "[2.8773589168E-1185 +/- 4.92E-1196]",
+            "derivative_scaled_contribution_upper": "3.6716767638535949247977634828428053831879080668656E-1211",
+            "full_gamma_moment_constant_ball": "[5896446103683343903784482604493.4228732606101046400 +/- 8.51E-21]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[1.4035897155E-1186 +/- 1.18E-1197]",
+            "value_scaled_contribution_upper": "2.0704674824462223087402888274942366013611430848662E-1209"
+          },
+          {
+            "degree": 42,
+            "derivative_core_coefficient_ball": "[-730243180328283929064.33567817245557092341631461451 +/- 2.86E-30]",
+            "derivative_scaled_contribution_upper": "1.7919701362691622926615496437666982749557308537877E-6",
+            "full_gamma_moment_constant_ball": "[38553348625623616805631200312691.606581211090087891 +/- 3.76E-19]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-34773484777537329955.444556103450265282067443553072 +/- 4.07E-32]",
+            "value_scaled_contribution_upper": "9.8643689406054838586511970866395390754705946046593E-5"
+          },
+          {
+            "degree": 64,
+            "derivative_core_coefficient_ball": "[-1302524862685245857381091002269.6629747011826550774 +/- 3.03E-20]",
+            "derivative_scaled_contribution_upper": "2.2134971243327735590808181113034122083086938729630E-12",
+            "full_gamma_moment_constant_ball": "[1.3153095177655658104731863358950051666413197443863E+50 +/- 4.69]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-40703901958913933043159093820.926967959411957971170 +/- 3.05E-22]",
+            "value_scaled_contribution_upper": "7.9962583616521444821794554270835766025151566160785E-11"
+          },
+          {
+            "degree": 128,
+            "derivative_core_coefficient_ball": "[9.6677100754703273549405744408875339689669297946179E+56 +/- 1.88E+6]",
+            "derivative_scaled_contribution_upper": "1.3221200997951993021191426082455228910954536381365E-24",
+            "full_gamma_moment_constant_ball": "[1.0947954985850057557617151511745630351415834956415E+109 +/- 6.02E+58]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[1.5105796992922386492094647563886771826510827804090E+55 +/- 4.40E+5]",
+            "value_scaled_contribution_upper": "2.3880794302550787394527013361434757220411631338839E-23"
+          },
+          {
+            "degree": 192,
+            "derivative_core_coefficient_ball": "[-2.2054510214209334267538170424398861251217643515653E+83 +/- 2.44E+32]",
+            "derivative_scaled_contribution_upper": "4.8154592407286698033847761101415194686802743873727E-32",
+            "full_gamma_moment_constant_ball": "[1.8079095453814880786070095891057623458689033531869E+173 +/- 3.94E+123]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-2.2973448139801389862018927525415480470018378662139E+81 +/- 4.84E+31]",
+            "value_scaled_contribution_upper": "5.7986155023774398882425012326287463602024970747946E-31"
+          },
+          {
+            "degree": 256,
+            "derivative_core_coefficient_ball": "[4.6457984103083511446534859505249347590772862686019E+109 +/- 1.34E+59]",
+            "derivative_scaled_contribution_upper": "1.0611365026900792758089951509115039226579528139746E-35",
+            "full_gamma_moment_constant_ball": "[1.9561312355699945277764760649181842042527430033055E+241 +/- 4.50E+191]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[3.6295300080533993317605358988476052805291298973452E+107 +/- 4.48E+57]",
+            "value_scaled_contribution_upper": "9.5833890399197784596499874566695198015046363512072E-35"
+          },
+          {
+            "degree": 320,
+            "derivative_core_coefficient_ball": "[-8.1638832761990191347050702666022175812519195236456E+135 +/- 2.88E+85]",
+            "derivative_scaled_contribution_upper": "1.8960881944065958332835418179483958975955340418968E-36",
+            "full_gamma_moment_constant_ball": "[2.0573090324032826469023451689484554107353928406870E+312 +/- 4.44E+262]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-5.1024270476243869591906689166263859882824497022785E+133 +/- 1.80E+83]",
+            "value_scaled_contribution_upper": "1.3699237204587654895473589634677160360127733452705E-35"
+          },
+          {
+            "degree": 384,
+            "derivative_core_coefficient_ball": "[1.2129219431710441700324181628366939057210724124077E+162 +/- 5.62E+111]",
+            "derivative_scaled_contribution_upper": "8.1901195237038411186068081270185644052281645271226E-35",
+            "full_gamma_moment_constant_ball": "[6.1865120444516081685411886801252387675845690239927E+385 +/- 3.78E+335]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[6.3173017873491883855855112647744474256305854812901E+159 +/- 3.35E+109]",
+            "value_scaled_contribution_upper": "4.9311344632300210068278490598090939856477907257051E-34"
+          }
+        ],
+        "uniform_far_derivative_scaled_upper": "6.420254931883144244150060629733575319612719590531508613111868497156394E-19",
+        "uniform_far_value_scaled_upper": "2.265940560462816349045930798545699227640557839812258748057823734684032E-16",
+        "uniform_residual_budget_certified": true,
+        "value_budget_certified_uniformly": true,
+        "value_fraction_of_budget_upper": "2.693875023607511197016979665905903609081159726488900854815820926277488E-4",
+        "value_residual_scaled_uniform_upper": "1.346937511803755598508489832952951804540579863244450427407910463138745E-4"
+      },
+      {
+        "T_interval": "1156<=T<=10000",
+        "cauchy_derivative_scaled_upper": "3.444682701258727588679866341334902558432735232359124643812718912228585E-13",
+        "cauchy_value_scaled_upper": "3.447256652892887611429733875962287733273579505056233298008565307658303E-12",
+        "compact_polynomial_derivative_scaled_upper": "4.855534205045710723401659788525861752001133265192233758532060177414827E-6",
+        "compact_polynomial_value_scaled_upper": "2.625893444944385778348664778204832607310030360329647651422346598907485E-4",
+        "derivative_budget_certified_uniformly": true,
+        "derivative_fraction_of_budget_upper": "5.395038388352662744855538989780101534635411262106455930658796689106210E-4",
+        "derivative_residual_scaled_uniform_upper": "4.855534549517396470369985090802091381171870135895810337592917020195589E-6",
+        "index": 23,
+        "normalization_derivative_scaled_upper": "7.630809489296715286433428546167434946535582521954684315617219974427415E-1287",
+        "normalization_value_scaled_upper": "1.106076054762397444658468363672754444199974889197454787063483188470034E-1285",
+        "proof_boundary": "Uniform residual majorant on 1156<=T<=10000 for one F_i only; not T>10000.",
+        "regime_one_far_derivative_scaled_upper": "3.415621095566434289595495680481027430053343148392461508871186195476199E-18",
+        "regime_one_far_value_scaled_upper": "1.205122289620170746810104277123826436193253768478945296191904569958610E-15",
+        "regime_two_far_derivative_scaled_upper": "3.747227855780409130344134211768517532762032337055642156595385031941426E-47",
+        "regime_two_far_value_scaled_upper": "6.948624357090272273706584588415262896670020950426824900312138453568903E-44",
+        "row_label": "F_23",
+        "selected_compact_majorant_row_count": 13,
+        "selected_compact_majorant_rows": [
+          {
+            "degree": 0,
+            "derivative_core_coefficient_ball": "0",
+            "derivative_scaled_contribution_upper": "1E-1000048",
+            "full_gamma_moment_constant_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+            "value_core_coefficient_ball": "[+/- 2.79E-1231]",
+            "value_scaled_contribution_upper": "2.7840992117156812322189818131577945271180057724605E-1219"
+          },
+          {
+            "degree": 1,
+            "derivative_core_coefficient_ball": "[+/- 1.67E-1231]",
+            "derivative_scaled_contribution_upper": "8.0235934066273918453656056101501815099199600540589E-1225",
+            "full_gamma_moment_constant_ball": "[4.8219647174887408597948446268632931490082539271340 +/- 2.15E-50]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[+/- 3.33E-1231]",
+            "value_scaled_contribution_upper": "1.6047186747207777816867944651861095970549783207698E-1220"
+          },
+          {
+            "degree": 2,
+            "derivative_core_coefficient_ball": "[+/- 2.28E-1229]",
+            "derivative_scaled_contribution_upper": "5.3572019384911707096999015250968235805241902578244E-1224",
+            "full_gamma_moment_constant_ball": "[23.500000000000000000000000000000000000000000000000 +/- 3E-53]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[-37.453809859006642336832603904346439729537577165782 +/- 4.59E-49]",
+            "value_core_coefficient_ball": "[+/- 2.28E-1229]",
+            "value_scaled_contribution_upper": "5.3572019316243503260214238666572429290169308679195E-1220"
+          },
+          {
+            "degree": 20,
+            "derivative_core_coefficient_ball": "[+/- 1.73E-1213]",
+            "derivative_scaled_contribution_upper": "1.5213182117389173507146716036381615009732414344676E-1223",
+            "full_gamma_moment_constant_ball": "[280875154901723.21777343750000000000000000000000000 +/- 1E-40]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[-14787468229.305498150915634079400550348987764301328 +/- 8.80E-41]",
+            "value_core_coefficient_ball": "[+/- 1.73E-1214]",
+            "value_scaled_contribution_upper": "1.7586438443961277765214926850356834767152652102420E-1221"
+          },
+          {
+            "degree": 40,
+            "derivative_core_coefficient_ball": "[-9.66683445E-1188 +/- 8.58E-1197]",
+            "derivative_scaled_contribution_upper": "1.2187730865397424653398469411991205051024607363986E-1212",
+            "full_gamma_moment_constant_ball": "[1713482161138827413583608902786.2936258316040039063 +/- 5.01E-20]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[4944469183781380656.7781249375003857960201630646009 +/- 7.06E-33]",
+            "value_core_coefficient_ball": "[-4.83341723E-1189 +/- 7.02E-1198]",
+            "value_scaled_contribution_upper": "7.0445084401997114591659092836141767839116006623454E-1211"
+          },
+          {
+            "degree": 41,
+            "derivative_core_coefficient_ball": "[2.8773589168E-1185 +/- 4.92E-1196]",
+            "derivative_scaled_contribution_upper": "7.0169822598090925229468368783218058434257798611208E-1211",
+            "full_gamma_moment_constant_ball": "[11268763664817057238343677866365.208157786943755534 +/- 2.39E-19]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[1.4035897155E-1186 +/- 1.18E-1197]",
+            "value_scaled_contribution_upper": "3.9568934108972248567036630925445410603790734510776E-1209"
+          },
+          {
+            "degree": 42,
+            "derivative_core_coefficient_ball": "[-730243180328283929064.33567817245557092341631461451 +/- 2.86E-30]",
+            "derivative_scaled_contribution_upper": "3.4644755967870470991456626446156166649144129839894E-6",
+            "full_gamma_moment_constant_ball": "[74536474009538992490886987271203.772723674774169922 +/- 1.26E-19]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-34773484777537329955.444556103450265282067443553072 +/- 4.07E-32]",
+            "value_scaled_contribution_upper": "1.9071113285170602126725647700836442212576482902342E-4"
+          },
+          {
+            "degree": 64,
+            "derivative_core_coefficient_ball": "[-1302524862685245857381091002269.6629747011826550774 +/- 3.03E-20]",
+            "derivative_scaled_contribution_upper": "5.3615819233838292875513149807127095712366140478435E-12",
+            "full_gamma_moment_constant_ball": "[3.1859719430321482964794957913901236258645300475136E+50 +/- 0.426]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-40703901958913933043159093820.926967959411957971170 +/- 3.05E-22]",
+            "value_scaled_contribution_upper": "1.9368714698224083301279125367824663326092268247835E-10"
+          },
+          {
+            "degree": 128,
+            "derivative_core_coefficient_ball": "[9.6677100754703273549405744408875339689669297946179E+56 +/- 1.88E+6]",
+            "derivative_scaled_contribution_upper": "5.0828172725459884281469260272550102257669662088355E-24",
+            "full_gamma_moment_constant_ball": "[4.2088804723379110165950382478488756684331987721329E+109 +/- 4.54E+59]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[1.5105796992922386492094647563886771826510827804090E+55 +/- 4.40E+5]",
+            "value_scaled_contribution_upper": "9.1808386985361915983403851367293622202915827147090E-23"
+          },
+          {
+            "degree": 192,
+            "derivative_core_coefficient_ball": "[-2.2054510214209334267538170424398861251217643515653E+83 +/- 2.44E+32]",
+            "derivative_scaled_contribution_upper": "2.5361418667837660964493154180078669201716111773497E-31",
+            "full_gamma_moment_constant_ball": "[9.5216569390091705473302505026236816882428909934508E+173 +/- 6.89E+121]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-2.2973448139801389862018927525415480470018378662139E+81 +/- 4.84E+31]",
+            "value_scaled_contribution_upper": "3.0539374979187850078077173158511397497066484593919E-30"
+          },
+          {
+            "degree": 256,
+            "derivative_core_coefficient_ball": "[4.6457984103083511446534859505249347590772862686019E+109 +/- 1.34E+59]",
+            "derivative_scaled_contribution_upper": "7.0978241624380858226335008983191706826676399334739E-35",
+            "full_gamma_moment_constant_ball": "[1.3084344486812630063571539900897187677335014310999E+242 +/- 3.12E+192]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[3.6295300080533993317605358988476052805291298973452E+107 +/- 4.48E+57]",
+            "value_scaled_contribution_upper": "6.4102224467018962585658804987945010227842123149186E-34"
+          },
+          {
+            "degree": 320,
+            "derivative_core_coefficient_ball": "[-8.1638832761990191347050702666022175812519195236456E+135 +/- 2.88E+85]",
+            "derivative_scaled_contribution_upper": "1.5379382021297943981077616967803655613830442784274E-35",
+            "full_gamma_moment_constant_ball": "[1.6687062151715514802652355259248582775964853041128E+313 +/- 4.72E+263]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-5.1024270476243869591906689166263859882824497022785E+133 +/- 1.80E+83]",
+            "value_scaled_contribution_upper": "1.1111603510387764526328578259238141180992494911638E-34"
+          },
+          {
+            "degree": 384,
+            "derivative_core_coefficient_ball": "[1.2129219431710441700324181628366939057210724124077E+162 +/- 5.62E+111]",
+            "derivative_scaled_contribution_upper": "7.8079139459309951997384904144243647329841835158569E-34",
+            "full_gamma_moment_constant_ball": "[5.8978081490438664540092665417193942917639558028730E+386 +/- 4.66E+335]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[6.3173017873491883855855112647744474256305854812901E+159 +/- 3.35E+109]",
+            "value_scaled_contribution_upper": "4.7010148549459533598425494370180029329842271585055E-33"
+          }
+        ],
+        "uniform_far_derivative_scaled_upper": "3.415621095566434289595495680481027430053343148392461508871186195476199E-18",
+        "uniform_far_value_scaled_upper": "1.205122289620170746810104277123826436193253768478945296191904569958610E-15",
+        "uniform_residual_budget_certified": true,
+        "value_budget_certified_uniformly": true,
+        "value_fraction_of_budget_upper": "5.251786958858007060347485199940544819408291914854750479338938063910113E-4",
+        "value_residual_scaled_uniform_upper": "2.625893479429003530173742599970272409704145957427375239669469031955057E-4"
+      },
+      {
+        "T_interval": "1156<=T<=10000",
+        "cauchy_derivative_scaled_upper": "3.444682701258727588679866341334902558432735232359124643812718912228585E-13",
+        "cauchy_value_scaled_upper": "3.447256652892887611429733875962287733273579505056233298008565307658303E-12",
+        "compact_polynomial_derivative_scaled_upper": "9.277037160119018376161590032479361696794818801438699397897871627725396E-6",
+        "compact_polynomial_value_scaled_upper": "5.014403036873254542711353593326490558507183575036976257747053647882608E-4",
+        "derivative_budget_certified_uniformly": true,
+        "derivative_fraction_of_budget_upper": "1.030781944956076525740430906406485911868272476120036208386572085189608E-3",
+        "derivative_residual_scaled_uniform_upper": "9.277037504604688731663878157658373206814452285080325875479148766706465E-6",
+        "index": 24,
+        "normalization_derivative_scaled_upper": "7.630809489296715286433428546167434946535582521954684315617219974427415E-1287",
+        "normalization_value_scaled_upper": "1.106076054762397444658468363672754444199974889197454787063483188470034E-1285",
+        "proof_boundary": "Uniform residual majorant on 1156<=T<=10000 for one F_i only; not T>10000.",
+        "regime_one_far_derivative_scaled_upper": "1.740022962952925719237737652937764036810324166881275770917737729127972E-17",
+        "regime_one_far_value_scaled_upper": "6.137319301126967186735980030643429018923621282986316450587269114527581E-15",
+        "regime_two_far_derivative_scaled_upper": "3.207917034183535663004137575318235372886703778542689230643336494841769E-46",
+        "regime_two_far_value_scaled_upper": "5.948028261688765986898514218946632562642876905066737150680755357208249E-43",
+        "row_label": "F_24",
+        "selected_compact_majorant_row_count": 13,
+        "selected_compact_majorant_rows": [
+          {
+            "degree": 0,
+            "derivative_core_coefficient_ball": "0",
+            "derivative_scaled_contribution_upper": "1E-1000048",
+            "full_gamma_moment_constant_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+            "value_core_coefficient_ball": "[+/- 2.79E-1231]",
+            "value_scaled_contribution_upper": "2.7840992117156812322189818131577945271180057724605E-1219"
+          },
+          {
+            "degree": 1,
+            "derivative_core_coefficient_ball": "[+/- 1.67E-1231]",
+            "derivative_scaled_contribution_upper": "8.1943081599598895442031716869618874994927251615920E-1225",
+            "full_gamma_moment_constant_ball": "[4.9245597114778630057479264274348525777105572021794 +/- 2.62E-50]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[+/- 3.33E-1231]",
+            "value_scaled_contribution_upper": "1.6388616252467517770418326452964523544391267956798E-1220"
+          },
+          {
+            "degree": 2,
+            "derivative_core_coefficient_ball": "[+/- 2.28E-1229]",
+            "derivative_scaled_contribution_upper": "5.5851679784269652079850037176541352222486238858170E-1224",
+            "full_gamma_moment_constant_ball": "[24.500000000000000000000000000000000000000000000000 +/- 3E-53]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[-37.453809859006642336832603904346439729537577165782 +/- 4.59E-49]",
+            "value_core_coefficient_ball": "[+/- 2.28E-1229]",
+            "value_scaled_contribution_upper": "5.5851679712679397015968036056639341174857364367672E-1220"
+          },
+          {
+            "degree": 20,
+            "derivative_core_coefficient_ball": "[+/- 1.73E-1213]",
+            "derivative_scaled_contribution_upper": "2.1686876635427119680400637753990812886214292789218E-1223",
+            "full_gamma_moment_constant_ball": "[400396497413094.79980468750000000000000000000000000 +/- 3E-40]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[-14787468229.305498150915634079400550348987764301328 +/- 8.80E-41]",
+            "value_core_coefficient_ball": "[+/- 1.73E-1214]",
+            "value_scaled_contribution_upper": "2.5070029271178842771689363807955487859558035975790E-1221"
+          },
+          {
+            "degree": 40,
+            "derivative_core_coefficient_ball": "[-9.66683445E-1188 +/- 8.58E-1197]",
+            "derivative_scaled_contribution_upper": "2.2560267772118637124375890188153932754024273205675E-1212",
+            "full_gamma_moment_constant_ball": "[3171764851469744361314339883881.0116052627563476563 +/- 5.01E-20]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": "[4944469183781380656.7781249375003857960201630646009 +/- 7.06E-33]",
+            "value_core_coefficient_ball": "[-4.83341723E-1189 +/- 7.02E-1198]",
+            "value_scaled_contribution_upper": "1.3039834772284572275477321439881561280857643779236E-1210"
+          },
+          {
+            "degree": 41,
+            "derivative_core_coefficient_ball": "[2.8773589168E-1185 +/- 4.92E-1196]",
+            "derivative_scaled_contribution_upper": "1.3138179550280854085517481814730189664286566548482E-1210",
+            "full_gamma_moment_constant_ball": "[21098961755402149722856247920002.942933728745755043 +/- 1.71E-19]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[1.4035897155E-1186 +/- 1.18E-1197]",
+            "value_scaled_contribution_upper": "7.4086514927437401572323904711472258151778396530814E-1209"
+          },
+          {
+            "degree": 42,
+            "derivative_core_coefficient_ball": "[-730243180328283929064.33567817245557092341631461451 +/- 2.86E-30]",
+            "derivative_scaled_contribution_upper": "6.5603899598733445068928505398040400676038884164905E-6",
+            "full_gamma_moment_constant_ball": "[141143535890403624078488124832705.01643419265747070 +/- 3.13E-18]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-34773484777537329955.444556103450265282067443553072 +/- 4.07E-32]",
+            "value_scaled_contribution_upper": "3.6113384731493267856991120114349858657857595283158E-4"
+          },
+          {
+            "degree": 64,
+            "derivative_core_coefficient_ball": "[-1302524862685245857381091002269.6629747011826550774 +/- 3.03E-20]",
+            "derivative_scaled_contribution_upper": "1.2662459436076703211025446018278952391643918283206E-11",
+            "full_gamma_moment_constant_ball": "[7.5243167165227332108345538903043345206587837292342E+50 +/- 3.68]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-40703901958913933043159093820.926967959411957971170 +/- 3.05E-22]",
+            "value_scaled_contribution_upper": "4.5743134712827090349829423741032715514813654798078E-10"
+          },
+          {
+            "degree": 128,
+            "derivative_core_coefficient_ball": "[9.6677100754703273549405744408875339689669297946179E+56 +/- 1.88E+6]",
+            "derivative_scaled_contribution_upper": "1.8925383461607403721823660739779293393813172054175E-23",
+            "full_gamma_moment_constant_ball": "[1.5671363460832647402215567944118154084591697555814E+110 +/- 1.80E+60]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[1.5105796992922386492094647563886771826510827804090E+55 +/- 4.40E+5]",
+            "value_scaled_contribution_upper": "3.4183973877528372972543987211226348692575042022853E-22"
+          },
+          {
+            "degree": 192,
+            "derivative_core_coefficient_ball": "[-2.2054510214209334267538170424398861251217643515653E+83 +/- 2.44E+32]",
+            "derivative_scaled_contribution_upper": "1.2896551194921704192582689040508089232362022795459E-30",
+            "full_gamma_moment_constant_ball": "[4.8418638477089186400253827023979998372128743562441E+174 +/- 2.99E+124]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-2.2973448139801389862018927525415480470018378662139E+81 +/- 4.84E+31]",
+            "value_scaled_contribution_upper": "1.5529597063884885465234988052945157450635935782865E-29"
+          },
+          {
+            "degree": 256,
+            "derivative_core_coefficient_ball": "[4.6457984103083511446534859505249347590772862686019E+109 +/- 1.34E+59]",
+            "derivative_scaled_contribution_upper": "4.5758313217420000090594697280653376954219040422183E-34",
+            "full_gamma_moment_constant_ball": "[8.4352263393706955516216523190890380132606581621974E+242 +/- 2.86E+192]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[3.6295300080533993317605358988476052805291298973452E+107 +/- 4.48E+57]",
+            "value_scaled_contribution_upper": "4.1325476624482437581818335981590081061779070881284E-33"
+          },
+          {
+            "degree": 320,
+            "derivative_core_coefficient_ball": "[-8.1638832761990191347050702666022175812519195236456E+135 +/- 2.88E+85]",
+            "derivative_scaled_contribution_upper": "1.2009006812375203066075500908902003426118664897508E-34",
+            "full_gamma_moment_constant_ball": "[1.3030110233360838154411519957753680593147023544880E+314 +/- 4.33E+264]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[-5.1024270476243869591906689166263859882824497022785E+133 +/- 1.80E+83]",
+            "value_scaled_contribution_upper": "8.6765074219410842152395494066816974753707353884489E-34"
+          },
+          {
+            "degree": 384,
+            "derivative_core_coefficient_ball": "[1.2129219431710441700324181628366939057210724124077E+162 +/- 5.62E+111]",
+            "derivative_scaled_contribution_upper": "7.1600232142473594278452965289721302125876236070943E-33",
+            "full_gamma_moment_constant_ball": "[5.4084155579529924291021146371937424250005637256133E+387 +/- 2.99E+337]",
+            "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+            "subtracted_even_ratio_ball": null,
+            "value_core_coefficient_ball": "[6.3173017873491883855855112647744474256305854812901E+159 +/- 3.35E+109]",
+            "value_scaled_contribution_upper": "4.3109306435780976555151889518186367321621317134381E-32"
+          }
+        ],
+        "uniform_far_derivative_scaled_upper": "1.740022962952925719237737652937764036810324166881275770917737729127972E-17",
+        "uniform_far_value_scaled_upper": "6.137319301126967186735980030643429018923621282986316450587269114527581E-15",
+        "uniform_residual_budget_certified": true,
+        "value_budget_certified_uniformly": true,
+        "value_fraction_of_budget_upper": "1.002880614281438852930299875898237823687299039592401504227849958494828E-3",
+        "value_residual_scaled_uniform_upper": "5.014403071407194264651499379491189118436495197962007521139249792474134E-4"
+      }
+    ],
+    "x_cap_ball": "[0.32000000000000000000000000000000000000000000000000 +/- 3E-55]"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_finite_collar_segment_stencil_certificate.py",
+  "invariants": [
+    "The two T regimes cover every real T in [1156,10000] with a shared endpoint.",
+    "No floating quadrature node, weight, or threshold is a proof input.",
+    "The compact Cauchy tail is convergent and does not use the obstructed formal full-moment tail.",
+    "The bounded T segment is not promoted to T>10000.",
+    "Fixed k=22 is not promoted to all k.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_finite_collar_segment_stencil_certificate",
+  "matrix_rows": [
+    {
+      "claim": "Split the finite T segment at T=15625/8: use fixed x_*=8/25 below the transition and fixed y_*=200 above it.",
+      "diagnostics": null,
+      "formula": "For 1156<=T<=15625/8 use x_*=8/25 and y_*=(64/625)T; for 15625/8<=T<=10000 use y_*=200 and x_*=sqrt(200/T).",
+      "gap": null,
+      "id": "nlrgfcssc_01_two_regime_split",
+      "proof_boundary": "Exact split geometry on 1156<=T<=10000 only.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_x_moment_taylor_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.md"
+      ]
+    },
+    {
+      "claim": "Absolute full-Gamma moments bound every degree-0..384 compact Taylor contribution uniformly in T after the value T^3 and derivative T^2 scalings.",
+      "diagnostics": {
+        "taylor_degree": 384,
+        "uniform_residual_rows": 4
+      },
+      "formula": null,
+      "gap": null,
+      "id": "nlrgfcssc_02_compact_polynomial_majorant",
+      "proof_boundary": "Compact polynomial majorant for four indices on the finite T segment only.",
+      "readiness": "available_interval_certificate",
+      "role": "analytic_interval_certificate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_all_row_direct_expectation_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_x_moment_taylor_certificate.md"
+      ]
+    },
+    {
+      "claim": "The common |z|<=0.38 Cauchy disk gives scaled degree-384 remainders uniformly across both T regimes.",
+      "diagnostics": {
+        "cauchy_q_upper": "8.421052631578947368421052631578947368421052631578947368421052631578948E-1",
+        "derivative_scaled_uniform_upper": "3.444682701258727588679866341334902558432735232359124643812718912228585E-13",
+        "value_scaled_uniform_upper": "3.447256652892887611429733875962287733273579505056233298008565307658303E-12"
+      },
+      "formula": null,
+      "gap": null,
+      "id": "nlrgfcssc_03_uniform_cauchy_remainder",
+      "proof_boundary": "Convergent compact Cauchy remainder only; not formal full-moment tail summation.",
+      "readiness": "available_interval_certificate",
+      "role": "analytic_interval_certificate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_x_moment_taylor_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_formal_tail_obstruction_scout.md"
+      ]
+    },
+    {
+      "claim": "Endpoint-monotone finite-Phi majorants and upper incomplete-Gamma moments bound the real tails uniformly in each T regime.",
+      "diagnostics": {
+        "split_rule": "For 1156<=T<=15625/8 use x_*=8/25 and y_*=(64/625)T; for 15625/8<=T<=10000 use y_*=200 and x_*=sqrt(200/T).",
+        "uniform_residual_rows": 4
+      },
+      "formula": null,
+      "gap": null,
+      "id": "nlrgfcssc_04_two_regime_real_tail",
+      "proof_boundary": "Finite n<=30 real-tail majorants on 1156<=T<=10000 only.",
+      "readiness": "available_tail_certificate",
+      "role": "analytic_tail_certificate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_all_row_direct_expectation_certificate.md"
+      ]
+    },
+    {
+      "claim": "The global n>=31 numerator and Phi(0) correction remains negligible after worst-case T^3 and T^2 scaling on the finite segment.",
+      "diagnostics": {
+        "derivative_scaled_uniform_upper": "7.630809489296715286433428546167434946535582521954684315617219974427415E-1287",
+        "global_n_tail_extension_certified": true,
+        "value_scaled_uniform_upper": "1.106076054762397444658468363672754444199974889197454787063483188470034E-1285"
+      },
+      "formula": null,
+      "gap": null,
+      "id": "nlrgfcssc_05_global_normalization_tail",
+      "proof_boundary": "Global omitted-n normalization correction only.",
+      "readiness": "available_normalization_certificate",
+      "role": "normalization_certificate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_all_row_direct_expectation_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.md"
+      ]
+    },
+    {
+      "claim": "For every real 1156<=T<=10000 and i=21..24, |R_i(u)|<=(1/2)u^3 and |R_i'(u)|<=(9/1000)u.",
+      "diagnostics": {
+        "all_four_residual_budgets_certified_uniformly": true,
+        "maximum_derivative_fraction_of_budget_upper": "1.030781944956076525740430906406485911868272476120036208386572085189608E-3",
+        "maximum_value_fraction_of_budget_upper": "1.002880614281438852930299875898237823687299039592401504227849958494828E-3",
+        "uniform_residual_rows": [
+          {
+            "T_interval": "1156<=T<=10000",
+            "cauchy_derivative_scaled_upper": "3.444682701258727588679866341334902558432735232359124643812718912228585E-13",
+            "cauchy_value_scaled_upper": "3.447256652892887611429733875962287733273579505056233298008565307658303E-12",
+            "compact_polynomial_derivative_scaled_upper": "1.248273072577546610258599325874882273318258852209896131892075861139410E-6",
+            "compact_polynomial_value_scaled_upper": "6.757729787709492306661551717431420406512930019067636894861188543156574E-5",
+            "derivative_budget_certified_uniformly": true,
+            "derivative_fraction_of_budget_upper": "1.386970463384368962549227502538648181029191985508205714239932968384976E-4",
+            "derivative_residual_scaled_uniform_upper": "1.248273417045932066294304752284783362926272786957385142815939671546479E-6",
+            "index": 21,
+            "normalization_derivative_scaled_upper": "7.630809489296715286433428546167434946535582521954684315617219974427415E-1287",
+            "normalization_value_scaled_upper": "1.106076054762397444658468363672754444199974889197454787063483188470034E-1285",
+            "proof_boundary": "Uniform residual majorant on 1156<=T<=10000 for one F_i only; not T>10000.",
+            "regime_one_far_derivative_scaled_upper": "1.153301629465584232669561177580914739657750113994291351770493776304182E-19",
+            "regime_one_far_value_scaled_upper": "4.071656733581826456433718342053990039165674532705718832870736384919471E-17",
+            "regime_two_far_derivative_scaled_upper": "4.479332194424143382462623126051390493079417143286500790666821699534612E-49",
+            "regime_two_far_value_scaled_upper": "8.307653352845323939799513738897658315541188656421152737584241622101612E-46",
+            "row_label": "F_21",
+            "selected_compact_majorant_row_count": 13,
+            "selected_compact_majorant_rows": [
+              {
+                "degree": 0,
+                "derivative_core_coefficient_ball": "0",
+                "derivative_scaled_contribution_upper": "1E-1000048",
+                "full_gamma_moment_constant_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+                "value_core_coefficient_ball": "[+/- 2.79E-1231]",
+                "value_scaled_contribution_upper": "2.7840992117156812322189818131577945271180057724605E-1219"
+              },
+              {
+                "degree": 1,
+                "derivative_core_coefficient_ball": "[+/- 1.67E-1231]",
+                "derivative_scaled_contribution_upper": "7.6707772933913059391217622804548425008375112176897E-1225",
+                "full_gamma_moment_constant_ball": "[4.6099316839628031441220476052275060490765668720377 +/- 1.32E-50]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[+/- 3.33E-1231]",
+                "value_scaled_contribution_upper": "1.5341554523639846875315945109363251335481141554790E-1220"
+              },
+              {
+                "degree": 2,
+                "derivative_core_coefficient_ball": "[+/- 2.28E-1229]",
+                "derivative_scaled_contribution_upper": "4.9012698586195817131296971399822002970753230018394E-1224",
+                "full_gamma_moment_constant_ball": "[21.500000000000000000000000000000000000000000000000 +/- 3E-53]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[-37.453809859006642336832603904346439729537577165782 +/- 4.59E-49]",
+                "value_core_coefficient_ball": "[+/- 2.28E-1229]",
+                "value_scaled_contribution_upper": "4.9012698523371715748706643886438605520793197302243E-1220"
+              },
+              {
+                "degree": 20,
+                "derivative_core_coefficient_ball": "[+/- 1.73E-1213]",
+                "derivative_scaled_contribution_upper": "7.1886464950300490198605361490594444551482837013299E-1224",
+                "full_gamma_moment_constant_ball": "[132721227041473.60839843750000000000000000000000000 +/- 3E-40]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[-14787468229.305498150915634079400550348987764301328 +/- 8.80E-41]",
+                "value_core_coefficient_ball": "[+/- 1.73E-1214]",
+                "value_scaled_contribution_upper": "8.3100753086849993835630973029158669778853191253189E-1222"
+              },
+              {
+                "degree": 40,
+                "derivative_core_coefficient_ball": "[-9.66683445E-1188 +/- 8.58E-1197]",
+                "derivative_scaled_contribution_upper": "3.3427723918559910282531592221407486568012211551115E-1213",
+                "full_gamma_moment_constant_ball": "[469962860638360176510883519049.11100864410400390625 +/- 3E-25]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[4944469183781380656.7781249375003857960201630646009 +/- 7.06E-33]",
+                "value_core_coefficient_ball": "[-4.83341723E-1189 +/- 7.02E-1198]",
+                "value_scaled_contribution_upper": "1.9321224424927628169363620784965885296766757309198E-1211"
+              },
+              {
+                "degree": 41,
+                "derivative_core_coefficient_ball": "[2.8773589168E-1185 +/- 4.92E-1196]",
+                "derivative_scaled_contribution_upper": "1.8795488195917212115036170209790551366319053199431E-1211",
+                "full_gamma_moment_constant_ball": "[3018418838790283188842056571347.8236136929313630895 +/- 2.82E-20]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[1.4035897155E-1186 +/- 1.18E-1197]",
+                "value_scaled_contribution_upper": "1.0598821636331852294741954712172877840301089601101E-1209"
+              },
+              {
+                "degree": 42,
+                "derivative_core_coefficient_ball": "[-730243180328283929064.33567817245557092341631461451 +/- 2.86E-30]",
+                "derivative_scaled_contribution_upper": "9.0652606893616445393466629037609442144819325544549E-7",
+                "full_gamma_moment_constant_ball": "[19503458716491947325201666040538.106858730316162109 +/- 3.76E-19]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-34773484777537329955.444556103450265282067443553072 +/- 4.07E-32]",
+                "value_scaled_contribution_upper": "4.9902101699533624226117820555941197675910066823571E-5"
+              },
+              {
+                "degree": 64,
+                "derivative_core_coefficient_ball": "[-1302524862685245857381091002269.6629747011826550774 +/- 3.03E-20]",
+                "derivative_scaled_contribution_upper": "8.8953622753560058916331942790697873791844707044304E-13",
+                "full_gamma_moment_constant_ball": "[5.2858232956933953131165432190173104827641821503377E+49 +/- 0.444]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-40703901958913933043159093820.926967959411957971170 +/- 3.05E-22]",
+                "value_scaled_contribution_upper": "3.2134496219723571283524914333139606907303900419755E-11"
+              },
+              {
+                "degree": 128,
+                "derivative_core_coefficient_ball": "[9.6677100754703273549405744408875339689669297946179E+56 +/- 1.88E+6]",
+                "derivative_scaled_contribution_upper": "3.3246294907130742684867328745355253986610822479453E-25",
+                "full_gamma_moment_constant_ball": "[2.7529945286055700291084065204974392111747421235429E+108 +/- 3.81E+58]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[1.5105796992922386492094647563886771826510827804090E+55 +/- 4.40E+5]",
+                "value_scaled_contribution_upper": "6.0051120176004903974541612546297927513315798103512E-24"
+              },
+              {
+                "degree": 192,
+                "derivative_core_coefficient_ball": "[-2.2054510214209334267538170424398861251217643515653E+83 +/- 2.44E+32]",
+                "derivative_scaled_contribution_upper": "8.8112658447375660232146967121738441341809276024265E-33",
+                "full_gamma_moment_constant_ball": "[3.3080898064427228672383579715552247179728869866823E+172 +/- 4.08E+122]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-2.2973448139801389862018927525415480470018378662139E+81 +/- 4.84E+31]",
+                "value_scaled_contribution_upper": "1.0610232621371485752954363957576003978242866987923E-31"
+              },
+              {
+                "degree": 256,
+                "derivative_core_coefficient_ball": "[4.6457984103083511446534859505249347590772862686019E+109 +/- 1.34E+59]",
+                "derivative_scaled_contribution_upper": "1.5260491510258665170497254678660424305783267893280E-36",
+                "full_gamma_moment_constant_ball": "[2.8131653220571827656986110632602649091260183659578E+240 +/- 7.09E+189]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[3.6295300080533993317605358988476052805291298973452E+107 +/- 4.48E+57]",
+                "value_scaled_contribution_upper": "1.3782131395202356982105333131665195701160513816118E-35"
+              },
+              {
+                "degree": 320,
+                "derivative_core_coefficient_ball": "[-8.1638832761990191347050702666022175812519195236456E+135 +/- 2.88E+85]",
+                "derivative_scaled_contribution_upper": "2.2460548859361879016857382416468601541765279284177E-37",
+                "full_gamma_moment_constant_ball": "[2.4370327381085717304903813296083631587223661749184E+311 +/- 3.23E+261]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-5.1024270476243869591906689166263859882824497022785E+133 +/- 1.80E+83]",
+                "value_scaled_contribution_upper": "1.6227746550888957589679458795898564613925414282818E-36"
+              },
+              {
+                "degree": 384,
+                "derivative_core_coefficient_ball": "[1.2129219431710441700324181628366939057210724124077E+162 +/- 5.62E+111]",
+                "derivative_scaled_contribution_upper": "8.2476613470553903536321486993395379256396036221609E-36",
+                "full_gamma_moment_constant_ball": "[6.2299770002674274296784804038731912647807135370418E+384 +/- 9.02E+333]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[6.3173017873491883855855112647744474256305854812901E+159 +/- 3.35E+109]",
+                "value_scaled_contribution_upper": "4.9657794360395996087493561960606801260621780141761E-35"
+              }
+            ],
+            "uniform_far_derivative_scaled_upper": "1.153301629465584232669561177580914739657750113994291351770493776304182E-19",
+            "uniform_far_value_scaled_upper": "4.071656733581826456433718342053990039165674532705718832870736384919471E-17",
+            "uniform_residual_budget_certified": true,
+            "value_budget_certified_uniformly": true,
+            "value_fraction_of_budget_upper": "1.351546026487845850536778937372248344216751467292950615003444812569196E-4",
+            "value_residual_scaled_uniform_upper": "6.757730132439229252683894686861241721083757336464753075017224062845976E-5"
+          },
+          {
+            "T_interval": "1156<=T<=10000",
+            "cauchy_derivative_scaled_upper": "3.444682701258727588679866341334902558432735232359124643812718912228585E-13",
+            "cauchy_value_scaled_upper": "3.447256652892887611429733875962287733273579505056233298008565307658303E-12",
+            "compact_polynomial_derivative_scaled_upper": "2.489317411016255156566960398590914671002997785778048332990750945376744E-6",
+            "compact_polynomial_value_scaled_upper": "1.346937477328923129019150902306567114119156831281014819005765224305034E-4",
+            "derivative_budget_certified_uniformly": true,
+            "derivative_fraction_of_budget_upper": "2.765908617205741453258786201113293122840252207315036489846964975011052E-4",
+            "derivative_residual_scaled_uniform_upper": "2.489317755485167307932907581001963810556226986583532840862268477509947E-6",
+            "index": 22,
+            "normalization_derivative_scaled_upper": "7.630809489296715286433428546167434946535582521954684315617219974427415E-1287",
+            "normalization_value_scaled_upper": "1.106076054762397444658468363672754444199974889197454787063483188470034E-1285",
+            "proof_boundary": "Uniform residual majorant on 1156<=T<=10000 for one F_i only; not T>10000.",
+            "regime_one_far_derivative_scaled_upper": "6.420254931883144244150060629733575319612719590531508613111868497156394E-19",
+            "regime_one_far_value_scaled_upper": "2.265940560462816349045930798545699227640557839812258748057823734684032E-16",
+            "regime_two_far_derivative_scaled_upper": "4.191084753519605617039819422717063252154725323356487311983862200190910E-48",
+            "regime_two_far_value_scaled_upper": "7.772371905220465724546867232261586859037800787438812433920086185978575E-45",
+            "row_label": "F_22",
+            "selected_compact_majorant_row_count": 13,
+            "selected_compact_majorant_rows": [
+              {
+                "degree": 0,
+                "derivative_core_coefficient_ball": "0",
+                "derivative_scaled_contribution_upper": "1E-1000048",
+                "full_gamma_moment_constant_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+                "value_core_coefficient_ball": "[+/- 2.79E-1231]",
+                "value_scaled_contribution_upper": "2.7840992117156812322189818131577945271180057724605E-1219"
+              },
+              {
+                "degree": 1,
+                "derivative_core_coefficient_ball": "[+/- 1.67E-1231]",
+                "derivative_scaled_contribution_upper": "7.8491674630050572400315707055816993031825696181011E-1225",
+                "full_gamma_moment_constant_ball": "[4.7171393975433334497993045262793085153341614504572 +/- 5.14E-51]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[+/- 3.33E-1231]",
+                "value_scaled_contribution_upper": "1.5698334861398913081718641507255419971190005311879E-1220"
+              },
+              {
+                "degree": 2,
+                "derivative_core_coefficient_ball": "[+/- 2.28E-1229]",
+                "derivative_scaled_contribution_upper": "5.1292358985553762114147993325395119387997566298319E-1224",
+                "full_gamma_moment_constant_ball": "[22.500000000000000000000000000000000000000000000000 +/- 1E-53]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[-37.453809859006642336832603904346439729537577165782 +/- 4.59E-49]",
+                "value_core_coefficient_ball": "[+/- 2.28E-1229]",
+                "value_scaled_contribution_upper": "5.1292358919807609504460441276505517405481252990719E-1220"
+              },
+              {
+                "degree": 20,
+                "derivative_core_coefficient_ball": "[+/- 1.73E-1213]",
+                "derivative_scaled_contribution_upper": "1.0532203004346350889563111102110348852891671469391E-1223",
+                "full_gamma_moment_constant_ball": "[194452030316577.61230468750000000000000000000000000 +/- 3E-40]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[-14787468229.305498150915634079400550348987764301328 +/- 8.80E-41]",
+                "value_core_coefficient_ball": "[+/- 1.73E-1214]",
+                "value_scaled_contribution_upper": "1.2175226615050115375918026281016270223413374532445E-1221"
+              },
+              {
+                "degree": 40,
+                "derivative_core_coefficient_ball": "[-9.66683445E-1188 +/- 8.58E-1197]",
+                "derivative_scaled_contribution_upper": "6.4523281052104012870933073357600497328953803691686E-1213",
+                "full_gamma_moment_constant_ball": "[907137614720555689544263536769.21427249908447265625 +/- 3E-24]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[4944469183781380656.7781249375003857960201630646009 +/- 7.06E-33]",
+                "value_core_coefficient_ball": "[-4.83341723E-1189 +/- 7.02E-1198]",
+                "value_scaled_contribution_upper": "3.7294456448116119489701872677957406503061415271241E-1211"
+              },
+              {
+                "degree": 41,
+                "derivative_core_coefficient_ball": "[2.8773589168E-1185 +/- 4.92E-1196]",
+                "derivative_scaled_contribution_upper": "3.6716767638535949247977634828428053831879080668656E-1211",
+                "full_gamma_moment_constant_ball": "[5896446103683343903784482604493.4228732606101046400 +/- 8.51E-21]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[1.4035897155E-1186 +/- 1.18E-1197]",
+                "value_scaled_contribution_upper": "2.0704674824462223087402888274942366013611430848662E-1209"
+              },
+              {
+                "degree": 42,
+                "derivative_core_coefficient_ball": "[-730243180328283929064.33567817245557092341631461451 +/- 2.86E-30]",
+                "derivative_scaled_contribution_upper": "1.7919701362691622926615496437666982749557308537877E-6",
+                "full_gamma_moment_constant_ball": "[38553348625623616805631200312691.606581211090087891 +/- 3.76E-19]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-34773484777537329955.444556103450265282067443553072 +/- 4.07E-32]",
+                "value_scaled_contribution_upper": "9.8643689406054838586511970866395390754705946046593E-5"
+              },
+              {
+                "degree": 64,
+                "derivative_core_coefficient_ball": "[-1302524862685245857381091002269.6629747011826550774 +/- 3.03E-20]",
+                "derivative_scaled_contribution_upper": "2.2134971243327735590808181113034122083086938729630E-12",
+                "full_gamma_moment_constant_ball": "[1.3153095177655658104731863358950051666413197443863E+50 +/- 4.69]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-40703901958913933043159093820.926967959411957971170 +/- 3.05E-22]",
+                "value_scaled_contribution_upper": "7.9962583616521444821794554270835766025151566160785E-11"
+              },
+              {
+                "degree": 128,
+                "derivative_core_coefficient_ball": "[9.6677100754703273549405744408875339689669297946179E+56 +/- 1.88E+6]",
+                "derivative_scaled_contribution_upper": "1.3221200997951993021191426082455228910954536381365E-24",
+                "full_gamma_moment_constant_ball": "[1.0947954985850057557617151511745630351415834956415E+109 +/- 6.02E+58]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[1.5105796992922386492094647563886771826510827804090E+55 +/- 4.40E+5]",
+                "value_scaled_contribution_upper": "2.3880794302550787394527013361434757220411631338839E-23"
+              },
+              {
+                "degree": 192,
+                "derivative_core_coefficient_ball": "[-2.2054510214209334267538170424398861251217643515653E+83 +/- 2.44E+32]",
+                "derivative_scaled_contribution_upper": "4.8154592407286698033847761101415194686802743873727E-32",
+                "full_gamma_moment_constant_ball": "[1.8079095453814880786070095891057623458689033531869E+173 +/- 3.94E+123]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-2.2973448139801389862018927525415480470018378662139E+81 +/- 4.84E+31]",
+                "value_scaled_contribution_upper": "5.7986155023774398882425012326287463602024970747946E-31"
+              },
+              {
+                "degree": 256,
+                "derivative_core_coefficient_ball": "[4.6457984103083511446534859505249347590772862686019E+109 +/- 1.34E+59]",
+                "derivative_scaled_contribution_upper": "1.0611365026900792758089951509115039226579528139746E-35",
+                "full_gamma_moment_constant_ball": "[1.9561312355699945277764760649181842042527430033055E+241 +/- 4.50E+191]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[3.6295300080533993317605358988476052805291298973452E+107 +/- 4.48E+57]",
+                "value_scaled_contribution_upper": "9.5833890399197784596499874566695198015046363512072E-35"
+              },
+              {
+                "degree": 320,
+                "derivative_core_coefficient_ball": "[-8.1638832761990191347050702666022175812519195236456E+135 +/- 2.88E+85]",
+                "derivative_scaled_contribution_upper": "1.8960881944065958332835418179483958975955340418968E-36",
+                "full_gamma_moment_constant_ball": "[2.0573090324032826469023451689484554107353928406870E+312 +/- 4.44E+262]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-5.1024270476243869591906689166263859882824497022785E+133 +/- 1.80E+83]",
+                "value_scaled_contribution_upper": "1.3699237204587654895473589634677160360127733452705E-35"
+              },
+              {
+                "degree": 384,
+                "derivative_core_coefficient_ball": "[1.2129219431710441700324181628366939057210724124077E+162 +/- 5.62E+111]",
+                "derivative_scaled_contribution_upper": "8.1901195237038411186068081270185644052281645271226E-35",
+                "full_gamma_moment_constant_ball": "[6.1865120444516081685411886801252387675845690239927E+385 +/- 3.78E+335]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[6.3173017873491883855855112647744474256305854812901E+159 +/- 3.35E+109]",
+                "value_scaled_contribution_upper": "4.9311344632300210068278490598090939856477907257051E-34"
+              }
+            ],
+            "uniform_far_derivative_scaled_upper": "6.420254931883144244150060629733575319612719590531508613111868497156394E-19",
+            "uniform_far_value_scaled_upper": "2.265940560462816349045930798545699227640557839812258748057823734684032E-16",
+            "uniform_residual_budget_certified": true,
+            "value_budget_certified_uniformly": true,
+            "value_fraction_of_budget_upper": "2.693875023607511197016979665905903609081159726488900854815820926277488E-4",
+            "value_residual_scaled_uniform_upper": "1.346937511803755598508489832952951804540579863244450427407910463138745E-4"
+          },
+          {
+            "T_interval": "1156<=T<=10000",
+            "cauchy_derivative_scaled_upper": "3.444682701258727588679866341334902558432735232359124643812718912228585E-13",
+            "cauchy_value_scaled_upper": "3.447256652892887611429733875962287733273579505056233298008565307658303E-12",
+            "compact_polynomial_derivative_scaled_upper": "4.855534205045710723401659788525861752001133265192233758532060177414827E-6",
+            "compact_polynomial_value_scaled_upper": "2.625893444944385778348664778204832607310030360329647651422346598907485E-4",
+            "derivative_budget_certified_uniformly": true,
+            "derivative_fraction_of_budget_upper": "5.395038388352662744855538989780101534635411262106455930658796689106210E-4",
+            "derivative_residual_scaled_uniform_upper": "4.855534549517396470369985090802091381171870135895810337592917020195589E-6",
+            "index": 23,
+            "normalization_derivative_scaled_upper": "7.630809489296715286433428546167434946535582521954684315617219974427415E-1287",
+            "normalization_value_scaled_upper": "1.106076054762397444658468363672754444199974889197454787063483188470034E-1285",
+            "proof_boundary": "Uniform residual majorant on 1156<=T<=10000 for one F_i only; not T>10000.",
+            "regime_one_far_derivative_scaled_upper": "3.415621095566434289595495680481027430053343148392461508871186195476199E-18",
+            "regime_one_far_value_scaled_upper": "1.205122289620170746810104277123826436193253768478945296191904569958610E-15",
+            "regime_two_far_derivative_scaled_upper": "3.747227855780409130344134211768517532762032337055642156595385031941426E-47",
+            "regime_two_far_value_scaled_upper": "6.948624357090272273706584588415262896670020950426824900312138453568903E-44",
+            "row_label": "F_23",
+            "selected_compact_majorant_row_count": 13,
+            "selected_compact_majorant_rows": [
+              {
+                "degree": 0,
+                "derivative_core_coefficient_ball": "0",
+                "derivative_scaled_contribution_upper": "1E-1000048",
+                "full_gamma_moment_constant_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+                "value_core_coefficient_ball": "[+/- 2.79E-1231]",
+                "value_scaled_contribution_upper": "2.7840992117156812322189818131577945271180057724605E-1219"
+              },
+              {
+                "degree": 1,
+                "derivative_core_coefficient_ball": "[+/- 1.67E-1231]",
+                "derivative_scaled_contribution_upper": "8.0235934066273918453656056101501815099199600540589E-1225",
+                "full_gamma_moment_constant_ball": "[4.8219647174887408597948446268632931490082539271340 +/- 2.15E-50]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[+/- 3.33E-1231]",
+                "value_scaled_contribution_upper": "1.6047186747207777816867944651861095970549783207698E-1220"
+              },
+              {
+                "degree": 2,
+                "derivative_core_coefficient_ball": "[+/- 2.28E-1229]",
+                "derivative_scaled_contribution_upper": "5.3572019384911707096999015250968235805241902578244E-1224",
+                "full_gamma_moment_constant_ball": "[23.500000000000000000000000000000000000000000000000 +/- 3E-53]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[-37.453809859006642336832603904346439729537577165782 +/- 4.59E-49]",
+                "value_core_coefficient_ball": "[+/- 2.28E-1229]",
+                "value_scaled_contribution_upper": "5.3572019316243503260214238666572429290169308679195E-1220"
+              },
+              {
+                "degree": 20,
+                "derivative_core_coefficient_ball": "[+/- 1.73E-1213]",
+                "derivative_scaled_contribution_upper": "1.5213182117389173507146716036381615009732414344676E-1223",
+                "full_gamma_moment_constant_ball": "[280875154901723.21777343750000000000000000000000000 +/- 1E-40]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[-14787468229.305498150915634079400550348987764301328 +/- 8.80E-41]",
+                "value_core_coefficient_ball": "[+/- 1.73E-1214]",
+                "value_scaled_contribution_upper": "1.7586438443961277765214926850356834767152652102420E-1221"
+              },
+              {
+                "degree": 40,
+                "derivative_core_coefficient_ball": "[-9.66683445E-1188 +/- 8.58E-1197]",
+                "derivative_scaled_contribution_upper": "1.2187730865397424653398469411991205051024607363986E-1212",
+                "full_gamma_moment_constant_ball": "[1713482161138827413583608902786.2936258316040039063 +/- 5.01E-20]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[4944469183781380656.7781249375003857960201630646009 +/- 7.06E-33]",
+                "value_core_coefficient_ball": "[-4.83341723E-1189 +/- 7.02E-1198]",
+                "value_scaled_contribution_upper": "7.0445084401997114591659092836141767839116006623454E-1211"
+              },
+              {
+                "degree": 41,
+                "derivative_core_coefficient_ball": "[2.8773589168E-1185 +/- 4.92E-1196]",
+                "derivative_scaled_contribution_upper": "7.0169822598090925229468368783218058434257798611208E-1211",
+                "full_gamma_moment_constant_ball": "[11268763664817057238343677866365.208157786943755534 +/- 2.39E-19]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[1.4035897155E-1186 +/- 1.18E-1197]",
+                "value_scaled_contribution_upper": "3.9568934108972248567036630925445410603790734510776E-1209"
+              },
+              {
+                "degree": 42,
+                "derivative_core_coefficient_ball": "[-730243180328283929064.33567817245557092341631461451 +/- 2.86E-30]",
+                "derivative_scaled_contribution_upper": "3.4644755967870470991456626446156166649144129839894E-6",
+                "full_gamma_moment_constant_ball": "[74536474009538992490886987271203.772723674774169922 +/- 1.26E-19]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-34773484777537329955.444556103450265282067443553072 +/- 4.07E-32]",
+                "value_scaled_contribution_upper": "1.9071113285170602126725647700836442212576482902342E-4"
+              },
+              {
+                "degree": 64,
+                "derivative_core_coefficient_ball": "[-1302524862685245857381091002269.6629747011826550774 +/- 3.03E-20]",
+                "derivative_scaled_contribution_upper": "5.3615819233838292875513149807127095712366140478435E-12",
+                "full_gamma_moment_constant_ball": "[3.1859719430321482964794957913901236258645300475136E+50 +/- 0.426]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-40703901958913933043159093820.926967959411957971170 +/- 3.05E-22]",
+                "value_scaled_contribution_upper": "1.9368714698224083301279125367824663326092268247835E-10"
+              },
+              {
+                "degree": 128,
+                "derivative_core_coefficient_ball": "[9.6677100754703273549405744408875339689669297946179E+56 +/- 1.88E+6]",
+                "derivative_scaled_contribution_upper": "5.0828172725459884281469260272550102257669662088355E-24",
+                "full_gamma_moment_constant_ball": "[4.2088804723379110165950382478488756684331987721329E+109 +/- 4.54E+59]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[1.5105796992922386492094647563886771826510827804090E+55 +/- 4.40E+5]",
+                "value_scaled_contribution_upper": "9.1808386985361915983403851367293622202915827147090E-23"
+              },
+              {
+                "degree": 192,
+                "derivative_core_coefficient_ball": "[-2.2054510214209334267538170424398861251217643515653E+83 +/- 2.44E+32]",
+                "derivative_scaled_contribution_upper": "2.5361418667837660964493154180078669201716111773497E-31",
+                "full_gamma_moment_constant_ball": "[9.5216569390091705473302505026236816882428909934508E+173 +/- 6.89E+121]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-2.2973448139801389862018927525415480470018378662139E+81 +/- 4.84E+31]",
+                "value_scaled_contribution_upper": "3.0539374979187850078077173158511397497066484593919E-30"
+              },
+              {
+                "degree": 256,
+                "derivative_core_coefficient_ball": "[4.6457984103083511446534859505249347590772862686019E+109 +/- 1.34E+59]",
+                "derivative_scaled_contribution_upper": "7.0978241624380858226335008983191706826676399334739E-35",
+                "full_gamma_moment_constant_ball": "[1.3084344486812630063571539900897187677335014310999E+242 +/- 3.12E+192]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[3.6295300080533993317605358988476052805291298973452E+107 +/- 4.48E+57]",
+                "value_scaled_contribution_upper": "6.4102224467018962585658804987945010227842123149186E-34"
+              },
+              {
+                "degree": 320,
+                "derivative_core_coefficient_ball": "[-8.1638832761990191347050702666022175812519195236456E+135 +/- 2.88E+85]",
+                "derivative_scaled_contribution_upper": "1.5379382021297943981077616967803655613830442784274E-35",
+                "full_gamma_moment_constant_ball": "[1.6687062151715514802652355259248582775964853041128E+313 +/- 4.72E+263]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-5.1024270476243869591906689166263859882824497022785E+133 +/- 1.80E+83]",
+                "value_scaled_contribution_upper": "1.1111603510387764526328578259238141180992494911638E-34"
+              },
+              {
+                "degree": 384,
+                "derivative_core_coefficient_ball": "[1.2129219431710441700324181628366939057210724124077E+162 +/- 5.62E+111]",
+                "derivative_scaled_contribution_upper": "7.8079139459309951997384904144243647329841835158569E-34",
+                "full_gamma_moment_constant_ball": "[5.8978081490438664540092665417193942917639558028730E+386 +/- 4.66E+335]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[6.3173017873491883855855112647744474256305854812901E+159 +/- 3.35E+109]",
+                "value_scaled_contribution_upper": "4.7010148549459533598425494370180029329842271585055E-33"
+              }
+            ],
+            "uniform_far_derivative_scaled_upper": "3.415621095566434289595495680481027430053343148392461508871186195476199E-18",
+            "uniform_far_value_scaled_upper": "1.205122289620170746810104277123826436193253768478945296191904569958610E-15",
+            "uniform_residual_budget_certified": true,
+            "value_budget_certified_uniformly": true,
+            "value_fraction_of_budget_upper": "5.251786958858007060347485199940544819408291914854750479338938063910113E-4",
+            "value_residual_scaled_uniform_upper": "2.625893479429003530173742599970272409704145957427375239669469031955057E-4"
+          },
+          {
+            "T_interval": "1156<=T<=10000",
+            "cauchy_derivative_scaled_upper": "3.444682701258727588679866341334902558432735232359124643812718912228585E-13",
+            "cauchy_value_scaled_upper": "3.447256652892887611429733875962287733273579505056233298008565307658303E-12",
+            "compact_polynomial_derivative_scaled_upper": "9.277037160119018376161590032479361696794818801438699397897871627725396E-6",
+            "compact_polynomial_value_scaled_upper": "5.014403036873254542711353593326490558507183575036976257747053647882608E-4",
+            "derivative_budget_certified_uniformly": true,
+            "derivative_fraction_of_budget_upper": "1.030781944956076525740430906406485911868272476120036208386572085189608E-3",
+            "derivative_residual_scaled_uniform_upper": "9.277037504604688731663878157658373206814452285080325875479148766706465E-6",
+            "index": 24,
+            "normalization_derivative_scaled_upper": "7.630809489296715286433428546167434946535582521954684315617219974427415E-1287",
+            "normalization_value_scaled_upper": "1.106076054762397444658468363672754444199974889197454787063483188470034E-1285",
+            "proof_boundary": "Uniform residual majorant on 1156<=T<=10000 for one F_i only; not T>10000.",
+            "regime_one_far_derivative_scaled_upper": "1.740022962952925719237737652937764036810324166881275770917737729127972E-17",
+            "regime_one_far_value_scaled_upper": "6.137319301126967186735980030643429018923621282986316450587269114527581E-15",
+            "regime_two_far_derivative_scaled_upper": "3.207917034183535663004137575318235372886703778542689230643336494841769E-46",
+            "regime_two_far_value_scaled_upper": "5.948028261688765986898514218946632562642876905066737150680755357208249E-43",
+            "row_label": "F_24",
+            "selected_compact_majorant_row_count": 13,
+            "selected_compact_majorant_rows": [
+              {
+                "degree": 0,
+                "derivative_core_coefficient_ball": "0",
+                "derivative_scaled_contribution_upper": "1E-1000048",
+                "full_gamma_moment_constant_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[1.0000000000000000000000000000000000000000000000000 +/- 1E-54]",
+                "value_core_coefficient_ball": "[+/- 2.79E-1231]",
+                "value_scaled_contribution_upper": "2.7840992117156812322189818131577945271180057724605E-1219"
+              },
+              {
+                "degree": 1,
+                "derivative_core_coefficient_ball": "[+/- 1.67E-1231]",
+                "derivative_scaled_contribution_upper": "8.1943081599598895442031716869618874994927251615920E-1225",
+                "full_gamma_moment_constant_ball": "[4.9245597114778630057479264274348525777105572021794 +/- 2.62E-50]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[+/- 3.33E-1231]",
+                "value_scaled_contribution_upper": "1.6388616252467517770418326452964523544391267956798E-1220"
+              },
+              {
+                "degree": 2,
+                "derivative_core_coefficient_ball": "[+/- 2.28E-1229]",
+                "derivative_scaled_contribution_upper": "5.5851679784269652079850037176541352222486238858170E-1224",
+                "full_gamma_moment_constant_ball": "[24.500000000000000000000000000000000000000000000000 +/- 3E-53]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[-37.453809859006642336832603904346439729537577165782 +/- 4.59E-49]",
+                "value_core_coefficient_ball": "[+/- 2.28E-1229]",
+                "value_scaled_contribution_upper": "5.5851679712679397015968036056639341174857364367672E-1220"
+              },
+              {
+                "degree": 20,
+                "derivative_core_coefficient_ball": "[+/- 1.73E-1213]",
+                "derivative_scaled_contribution_upper": "2.1686876635427119680400637753990812886214292789218E-1223",
+                "full_gamma_moment_constant_ball": "[400396497413094.79980468750000000000000000000000000 +/- 3E-40]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[-14787468229.305498150915634079400550348987764301328 +/- 8.80E-41]",
+                "value_core_coefficient_ball": "[+/- 1.73E-1214]",
+                "value_scaled_contribution_upper": "2.5070029271178842771689363807955487859558035975790E-1221"
+              },
+              {
+                "degree": 40,
+                "derivative_core_coefficient_ball": "[-9.66683445E-1188 +/- 8.58E-1197]",
+                "derivative_scaled_contribution_upper": "2.2560267772118637124375890188153932754024273205675E-1212",
+                "full_gamma_moment_constant_ball": "[3171764851469744361314339883881.0116052627563476563 +/- 5.01E-20]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": "[4944469183781380656.7781249375003857960201630646009 +/- 7.06E-33]",
+                "value_core_coefficient_ball": "[-4.83341723E-1189 +/- 7.02E-1198]",
+                "value_scaled_contribution_upper": "1.3039834772284572275477321439881561280857643779236E-1210"
+              },
+              {
+                "degree": 41,
+                "derivative_core_coefficient_ball": "[2.8773589168E-1185 +/- 4.92E-1196]",
+                "derivative_scaled_contribution_upper": "1.3138179550280854085517481814730189664286566548482E-1210",
+                "full_gamma_moment_constant_ball": "[21098961755402149722856247920002.942933728745755043 +/- 1.71E-19]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[1.4035897155E-1186 +/- 1.18E-1197]",
+                "value_scaled_contribution_upper": "7.4086514927437401572323904711472258151778396530814E-1209"
+              },
+              {
+                "degree": 42,
+                "derivative_core_coefficient_ball": "[-730243180328283929064.33567817245557092341631461451 +/- 2.86E-30]",
+                "derivative_scaled_contribution_upper": "6.5603899598733445068928505398040400676038884164905E-6",
+                "full_gamma_moment_constant_ball": "[141143535890403624078488124832705.01643419265747070 +/- 3.13E-18]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-34773484777537329955.444556103450265282067443553072 +/- 4.07E-32]",
+                "value_scaled_contribution_upper": "3.6113384731493267856991120114349858657857595283158E-4"
+              },
+              {
+                "degree": 64,
+                "derivative_core_coefficient_ball": "[-1302524862685245857381091002269.6629747011826550774 +/- 3.03E-20]",
+                "derivative_scaled_contribution_upper": "1.2662459436076703211025446018278952391643918283206E-11",
+                "full_gamma_moment_constant_ball": "[7.5243167165227332108345538903043345206587837292342E+50 +/- 3.68]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-40703901958913933043159093820.926967959411957971170 +/- 3.05E-22]",
+                "value_scaled_contribution_upper": "4.5743134712827090349829423741032715514813654798078E-10"
+              },
+              {
+                "degree": 128,
+                "derivative_core_coefficient_ball": "[9.6677100754703273549405744408875339689669297946179E+56 +/- 1.88E+6]",
+                "derivative_scaled_contribution_upper": "1.8925383461607403721823660739779293393813172054175E-23",
+                "full_gamma_moment_constant_ball": "[1.5671363460832647402215567944118154084591697555814E+110 +/- 1.80E+60]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[1.5105796992922386492094647563886771826510827804090E+55 +/- 4.40E+5]",
+                "value_scaled_contribution_upper": "3.4183973877528372972543987211226348692575042022853E-22"
+              },
+              {
+                "degree": 192,
+                "derivative_core_coefficient_ball": "[-2.2054510214209334267538170424398861251217643515653E+83 +/- 2.44E+32]",
+                "derivative_scaled_contribution_upper": "1.2896551194921704192582689040508089232362022795459E-30",
+                "full_gamma_moment_constant_ball": "[4.8418638477089186400253827023979998372128743562441E+174 +/- 2.99E+124]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-2.2973448139801389862018927525415480470018378662139E+81 +/- 4.84E+31]",
+                "value_scaled_contribution_upper": "1.5529597063884885465234988052945157450635935782865E-29"
+              },
+              {
+                "degree": 256,
+                "derivative_core_coefficient_ball": "[4.6457984103083511446534859505249347590772862686019E+109 +/- 1.34E+59]",
+                "derivative_scaled_contribution_upper": "4.5758313217420000090594697280653376954219040422183E-34",
+                "full_gamma_moment_constant_ball": "[8.4352263393706955516216523190890380132606581621974E+242 +/- 2.86E+192]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[3.6295300080533993317605358988476052805291298973452E+107 +/- 4.48E+57]",
+                "value_scaled_contribution_upper": "4.1325476624482437581818335981590081061779070881284E-33"
+              },
+              {
+                "degree": 320,
+                "derivative_core_coefficient_ball": "[-8.1638832761990191347050702666022175812519195236456E+135 +/- 2.88E+85]",
+                "derivative_scaled_contribution_upper": "1.2009006812375203066075500908902003426118664897508E-34",
+                "full_gamma_moment_constant_ball": "[1.3030110233360838154411519957753680593147023544880E+314 +/- 4.33E+264]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[-5.1024270476243869591906689166263859882824497022785E+133 +/- 1.80E+83]",
+                "value_scaled_contribution_upper": "8.6765074219410842152395494066816974753707353884489E-34"
+              },
+              {
+                "degree": 384,
+                "derivative_core_coefficient_ball": "[1.2129219431710441700324181628366939057210724124077E+162 +/- 5.62E+111]",
+                "derivative_scaled_contribution_upper": "7.1600232142473594278452965289721302125876236070943E-33",
+                "full_gamma_moment_constant_ball": "[5.4084155579529924291021146371937424250005637256133E+387 +/- 2.99E+337]",
+                "proof_boundary": "Selected absolute full-Gamma moment majorant row; the generator sums every degree 0 through 384.",
+                "subtracted_even_ratio_ball": null,
+                "value_core_coefficient_ball": "[6.3173017873491883855855112647744474256305854812901E+159 +/- 3.35E+109]",
+                "value_scaled_contribution_upper": "4.3109306435780976555151889518186367321621317134381E-32"
+              }
+            ],
+            "uniform_far_derivative_scaled_upper": "1.740022962952925719237737652937764036810324166881275770917737729127972E-17",
+            "uniform_far_value_scaled_upper": "6.137319301126967186735980030643429018923621282986316450587269114527581E-15",
+            "uniform_residual_budget_certified": true,
+            "value_budget_certified_uniformly": true,
+            "value_fraction_of_budget_upper": "1.002880614281438852930299875898237823687299039592401504227849958494828E-3",
+            "value_residual_scaled_uniform_upper": "5.014403071407194264651499379491189118436495197962007521139249792474134E-4"
+          }
+        ]
+      },
+      "formula": null,
+      "gap": null,
+      "id": "nlrgfcssc_06_uniform_residual_budget_certificate",
+      "proof_boundary": "Four-index residual theorem on the bounded real-T segment only; not T>10000.",
+      "readiness": "available_interval_certificate",
+      "role": "real_interval_certificate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree40_residual_tail_budget.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_recorded_grid_stencil_composition_certificate.md"
+      ]
+    },
+    {
+      "claim": "The exact rational residual budgets and Arb perturbation ledger certify the fixed-k=22 normalizers and three stencil inequalities for every 1156<=T<=10000.",
+      "diagnostics": {
+        "finite_collar_segment_stencil_system_certified": true,
+        "perturbation_rows": [
+          {
+            "certified_positive_after_perturbation": true,
+            "finite_margin_lower": "4.396279349275512583580856491807389999989460662793632652531137141158390E-1",
+            "name": "normalizer",
+            "perturbation_bound_upper": "3.236655688068670047095463507530522232789888658630038509677590150027123E-10",
+            "perturbation_formula": "|R_i| <= A*u^3",
+            "proof_boundary": "Arb perturbation inequality for the rational A,B budgets on 0<=u<=1/1156.",
+            "retained_margin_lower": "4.396279346038856895512186444711926492458938430003743993901098631480800E-1"
+          },
+          {
+            "certified_positive_after_perturbation": true,
+            "finite_margin_lower": "3.720335729036512041561022096097329999989652433846591632890398864647758E+1",
+            "name": "B_product",
+            "perturbation_bound_upper": "1.730103806508361218691061422759123140789837563390128776698100217100139E-3",
+            "perturbation_formula": "4*P*A*U + 2*A^2*U^4",
+            "proof_boundary": "Arb perturbation inequality for the rational A,B budgets on 0<=u<=1/1156.",
+            "retained_margin_lower": "3.720162718655861205439152989955054087675573450090252620012729054626048E+1"
+          },
+          {
+            "certified_positive_after_perturbation": true,
+            "finite_margin_lower": "1.722502237565501330236724575177899999993340738612960792171015944016988E+1",
+            "name": "companion_product",
+            "perturbation_bound_upper": "4.000000001941993413260239630015476153089032263105205690220702446380269E+0",
+            "perturbation_formula": "2*(4*P^3*A + 6*P^2*A^2*U^3 + 4*P*A^3*U^6 + A^4*U^9)",
+            "proof_boundary": "Arb perturbation inequality for the rational A,B budgets on 0<=u<=1/1156.",
+            "retained_margin_lower": "1.322502237371301988910700612176352384684437512302440223148945699378961E+1"
+          },
+          {
+            "certified_positive_after_perturbation": true,
+            "finite_margin_lower": "2.742440242696800557239471524916489999987929124772433779765180231484331E+1",
+            "name": "weighted_gap_derivative",
+            "perturbation_bound_upper": "3.691040397770267727819495342225868845483873301706132333444232206394856E+0",
+            "perturbation_formula": "368*(D*(3*P^2*A*U^2+3*P*A^2*U^5+A^3*U^8)+B*(P+A*U^3)^3)",
+            "proof_boundary": "Arb perturbation inequality for the rational A,B budgets on 0<=u<=1/1156.",
+            "retained_margin_lower": "2.373336202919773784457521990693903115439541794601820546420757010844846E+1"
+          }
+        ],
+        "remaining_finite_segment_stencil_sources": []
+      },
+      "formula": null,
+      "gap": null,
+      "id": "nlrgfcssc_07_finite_collar_segment_stencil_certificate",
+      "proof_boundary": "Fixed k=22 on 1156<=T<=10000 only; not the unbounded collar or all k.",
+      "readiness": "available_interval_certificate",
+      "role": "real_interval_certificate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree40_arb_collar_ladder_stress.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_recorded_grid_stencil_composition_certificate.md"
+      ]
+    },
+    {
+      "claim": "The bounded segment certificate proves the same residual and stencil bounds for every T>10000.",
+      "diagnostics": null,
+      "formula": null,
+      "gap": "The crude normalization and fixed-degree Cauchy bounds were scaled only through T=10000; an asymptotic or adaptive split is still required on the unbounded ray.",
+      "id": "nlrgfcssc_08_T_gt_10000_promotion_rejected",
+      "proof_boundary": "Rejected bounded-to-unbounded T promotion only.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+        "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md"
+      ]
+    },
+    {
+      "claim": "The fixed-k=22 segment certificate proves cone entry for all k.",
+      "diagnostics": null,
+      "formula": null,
+      "gap": "Only F_21 through F_24 and one k-window are controlled.",
+      "id": "nlrgfcssc_09_all_k_promotion_rejected",
+      "proof_boundary": "Rejected fixed-k-to-all-k promotion only.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    },
+    {
+      "claim": "Promotion requires a certified T>10000 tail and all required k windows; neither finite endpoints nor RH-assuming inputs may replace them.",
+      "diagnostics": null,
+      "formula": null,
+      "gap": null,
+      "id": "nlrgfcssc_10_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not cone entry, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Uniform fixed-k=22 residual and stencil certificate on the bounded real interval 1156<=T<=10000 only. It does not cover T>10000, does not cover all k, does not prove the full cone-entry or sign-regularity theorem, and does not prove RH or Lambda <= 0.",
+  "source_all_row_expectation_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_all_row_direct_expectation_certificate.md",
+  "source_compact_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_x_moment_taylor_certificate.md",
+  "source_cone_entry_target": "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+  "source_degree40_budget": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree40_residual_tail_budget.md",
+  "source_degree40_ladder": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree40_arb_collar_ladder_stress.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_far_tail_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.md",
+  "source_formal_tail_obstruction": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_formal_tail_obstruction_scout.md",
+  "source_recorded_grid_stencil_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_recorded_grid_stencil_composition_certificate.md",
+  "source_recorded_grid_stencil_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_recorded_grid_stencil_composition_certificate.json",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "bounded real-T fixed-k stencil certificate",
+  "summary": {
+    "T_regimes": 2,
+    "finite_collar_segment_stencil_system_certified": true,
+    "main_finding": "A two-regime exact-moment/Cauchy and incomplete-Gamma majorant proves the rational residual budgets uniformly for every real 1156<=T<=10000 and i=21..24. Composed with the Arb degree-40 perturbation ledger, this certifies the complete fixed-k=22 stencil system on the whole bounded collar segment. The unbounded ray T>10000, remaining k coverage, cone entry, RH, and Lambda <= 0 remain open.",
+    "matrix_rows": 10,
+    "maximum_derivative_fraction_of_budget_upper": "1.030781944956076525740430906406485911868272476120036208386572085189608E-3",
+    "maximum_value_fraction_of_budget_upper": "1.002880614281438852930299875898237823687299039592401504227849958494828E-3",
+    "positive_retained_perturbation_margins": 4,
+    "ready_to_apply_rows": 0,
+    "remaining_finite_segment_stencil_source_count": 0,
+    "target_closing": false,
+    "uniform_residual_rows": 4
+  }
+}

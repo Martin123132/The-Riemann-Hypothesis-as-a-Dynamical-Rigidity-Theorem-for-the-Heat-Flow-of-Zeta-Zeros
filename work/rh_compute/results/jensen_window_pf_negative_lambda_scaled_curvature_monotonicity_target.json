@@ -1,0 +1,270 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_scaled_curvature_monotonicity_target.py",
+  "date": "2026-07-07",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k300.jsonl",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k220_k250_dps220.jsonl",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k245_k320_dps220.jsonl"
+  ],
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_scaled_curvature_monotonicity_target.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The target remains open_theorem_target.",
+    "The retired fixed 2/3 wall is not a substitute for scaled-curvature monotonicity.",
+    "Finite repaired k300 support is finite evidence only.",
+    "The companion monotone-contraction upper side remains a separate open theorem target.",
+    "Generic moment positivity, endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_scaled_curvature_monotonicity_target",
+  "proof_boundary": "Open theorem target only. It names the scaled-curvature monotonicity theorem needed by the linear curvature-barrier route, but it does not prove that theorem, does not prove the companion monotone-contraction theorem, does not prove the raw-corridor theorem, does not prove cone entry, and does not prove RH or Lambda <= 0.",
+  "source_curvature_corridor_bridge": "outputs/jensen_window_pf_negative_lambda_coefficient_curvature_corridor_bridge.md",
+  "source_k300_obstruction": "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_k300_obstruction.md",
+  "source_linear_barrier_scout": "outputs/jensen_window_pf_negative_lambda_linear_curvature_barrier_scout.md",
+  "source_monotone_contraction_target": "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+  "source_raw_corridor_target": "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+  "status": "open_theorem_target",
+  "summary": {
+    "acceptance_gate_rows": 1,
+    "adjacent_total_rows": 894,
+    "b_wall_rows": 897,
+    "coefficient_cap": 300,
+    "exact_available_rows": 2,
+    "finite_anchor_rows": 1,
+    "lambdas": [
+      "-25.0",
+      "-50.0",
+      "-100.0"
+    ],
+    "live_routes": 2,
+    "main_finding": "The replacement for the retired fixed 2/3 wall is the scaled-curvature monotonicity theorem target C_(k+1)>=C_k, exactly equivalent to the linear barrier B_(k+1)>=((2*k+1)/(2*k+3))*B_k. Repaired k300 data support this on 894/894 adjacent rows, while C_k<=2/3 fails on 718/897 rows. Together with B_k>=0 and the separate monotone-contraction upper side B_(k+1)<=B_k, this would feed the zeta-specific raw-corridor target.",
+    "open_dependency_rows": 1,
+    "open_theorem_target": true,
+    "ready_to_apply_rows": 0,
+    "rejected_shortcut_rows": 2,
+    "scaled_curvature_increase_failures": 0,
+    "scaled_curvature_increase_inconclusive": 0,
+    "scaled_curvature_increase_rows": 894,
+    "scaled_curvature_total_rows": 897,
+    "target_closing": false,
+    "target_rows": 10,
+    "two_thirds_failure_rows": 718
+  },
+  "target_id": "target_negative_lambda_scaled_curvature_monotonicity",
+  "target_rows": [
+    {
+      "claim_if_proved": "For the actual negative-lambda zeta heat-flow coefficients, prove C_(k+1)>=C_k after an explicit finite collar, where C_k=(2*k+1)*B_k and B_k=-log(((2*k-1)/(2*k+1))*R_k).",
+      "formula": "C_k=(2*k+1)*B_k; B_k=-log(((2*k-1)/(2*k+1))*R_k)",
+      "id": "nlscmt_01_scaled_curvature_statement",
+      "proof_boundary": "Open theorem target only; this artifact does not prove scaled-curvature monotonicity.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_statement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_linear_curvature_barrier_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md"
+      ]
+    },
+    {
+      "claim_if_proved": "The scaled-curvature monotonicity statement C_(k+1)>=C_k is exactly the linear B-barrier B_(k+1)>=((2*k+1)/(2*k+3))*B_k.",
+      "formula": "C_(k+1)-C_k=(2*k+3)*(B_(k+1)-((2*k+1)/(2*k+3))*B_k)",
+      "id": "nlscmt_02_linear_barrier_equivalence",
+      "proof_boundary": "Exact algebraic equivalence only; no zeta coefficient inequality is proved.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_linear_curvature_barrier_scout.md"
+      ]
+    },
+    {
+      "claim_if_proved": "For B_k>=0, the scaled-curvature target implies the nonlinear lower coefficient-curvature barrier; paired with B_(k+1)<=B_k it gives the two-sided curvature corridor equivalent to the raw corridor.",
+      "formula": "C_(k+1)>=C_k => B_(k+1)>=alpha_k*B_k => L_k(B_k)<=B_(k+1), alpha_k=(2*k+1)/(2*k+3)",
+      "id": "nlscmt_03_raw_corridor_sufficient_chain",
+      "proof_boundary": "Exact sufficient chain only; it does not prove B_k>=0, monotone curvature, or the all-k raw corridor.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_linear_curvature_barrier_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_coefficient_curvature_corridor_bridge.md",
+        "outputs/jensen_window_pf_negative_lambda_raw_log_decrement_bridge.md"
+      ]
+    },
+    {
+      "claim_if_proved": "The repaired k300 data validate C_(k+1)>=C_k and B_k>=0 on every checked row for lambda=-25,-50,-100.",
+      "diagnostics": {
+        "adjacent_rows_per_lambda": 298,
+        "adjacent_total_rows": 894,
+        "b_decrease_rows": 894,
+        "b_wall_rows": 897,
+        "coefficient_cap": 300,
+        "first_two_thirds_failure": {
+          "B_k": "1.069515173802103209E-2",
+          "k": 31,
+          "lam": "-25.0",
+          "scaled_curvature": "6.737945594953250214E-1",
+          "two_thirds_slack": "-7.127892828658354747E-3"
+        },
+        "lambdas": [
+          "-25.0",
+          "-50.0",
+          "-100.0"
+        ],
+        "max_b_wall": {
+          "k": 1,
+          "lam": "-25.0",
+          "sample": "3.524954269540071057E-2"
+        },
+        "max_scaled_curvature": {
+          "k": 299,
+          "lam": "-25.0",
+          "sample": "1.144219413064916367E+0"
+        },
+        "min_b_decrease_margin": {
+          "k": 298,
+          "lam": "-100.0",
+          "sample": "4.098948243972025449E-6"
+        },
+        "min_b_wall": {
+          "k": 299,
+          "lam": "-100.0",
+          "sample": "1.652602130709587426E-3"
+        },
+        "min_scaled_curvature_increase_margin": {
+          "k": 298,
+          "lam": "-25.0",
+          "sample": "5.226725385445290147E-4"
+        },
+        "min_two_thirds_slack": {
+          "k": 299,
+          "lam": "-25.0",
+          "sample": "-4.775527463982497008E-1"
+        },
+        "per_lambda": {
+          "-100.0": {
+            "first_failure": {
+              "B_k": "3.332140532789258129E-3",
+              "k": 100,
+              "lam": "-100.0",
+              "scaled_curvature": "6.697602470906408839E-1",
+              "two_thirds_slack": "-3.093580423974217203E-3"
+            },
+            "two_thirds_bound_rows": 99,
+            "two_thirds_failure_rows": 200,
+            "two_thirds_inconclusive_rows": 0
+          },
+          "-25.0": {
+            "first_failure": {
+              "B_k": "1.069515173802103209E-2",
+              "k": 31,
+              "lam": "-25.0",
+              "scaled_curvature": "6.737945594953250214E-1",
+              "two_thirds_slack": "-7.127892828658354747E-3"
+            },
+            "two_thirds_bound_rows": 30,
+            "two_thirds_failure_rows": 269,
+            "two_thirds_inconclusive_rows": 0
+          },
+          "-50.0": {
+            "first_failure": {
+              "B_k": "6.498843736469185792E-3",
+              "k": 51,
+              "lam": "-50.0",
+              "scaled_curvature": "6.693809048563261366E-1",
+              "two_thirds_slack": "-2.714238189659469960E-3"
+            },
+            "two_thirds_bound_rows": 50,
+            "two_thirds_failure_rows": 249,
+            "two_thirds_inconclusive_rows": 0
+          }
+        },
+        "raw_ratio_rows_per_lambda": 299,
+        "scaled_curvature_increase_failures": 0,
+        "scaled_curvature_increase_inconclusive": 0,
+        "scaled_curvature_increase_rows": 894,
+        "scaled_curvature_total_rows": 897,
+        "two_thirds_bound_rows": 179,
+        "two_thirds_failure_rows": 718,
+        "two_thirds_inconclusive_rows": 0
+      },
+      "id": "nlscmt_04_repaired_k300_finite_anchor",
+      "proof_boundary": "Finite repaired stress evidence only; not an all-k or continuous-lambda theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_anchor",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_k300_precision_repair_audit.md",
+        "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_k300_obstruction.md"
+      ]
+    },
+    {
+      "claim_if_proved": "Scaled-curvature monotonicity may be replaced by the fixed wall C_k<=2/3.",
+      "gap": "The repaired k300 obstruction finite-rejects C_k<=2/3 on 718/897 checked rows, so the replacement target is monotonicity, not a fixed upper wall.",
+      "id": "nlscmt_05_retired_fixed_wall_boundary",
+      "proof_boundary": "Rejected shortcut only; not evidence against the scaled-curvature monotonicity target.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_shortcut",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_k300_obstruction.md"
+      ]
+    },
+    {
+      "claim_if_proved": "The scaled-curvature target supplies the lower side of the curvature corridor; the upper side still requires B_(k+1)<=B_k, i.e. the monotone-contraction/Delta^3 log A target.",
+      "gap": "No all-k proof of the monotone upper side is included here.",
+      "id": "nlscmt_06_required_monotone_upper_side",
+      "proof_boundary": "Open dependency only; this target is not a substitute for the monotone-contraction theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_dependency",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+        "outputs/jensen_window_pf_negative_lambda_coefficient_curvature_corridor_bridge.md"
+      ]
+    },
+    {
+      "claim_if_proved": "A zeta-specific log-ratio recurrence may prove C_(k+1)>=C_k directly from the heat-flow raw moments after a finite collar.",
+      "gap": "The current artifacts give exact reductions and finite stress, not an all-k zeta-specific recurrence.",
+      "id": "nlscmt_07_live_log_ratio_recurrence_route",
+      "proof_boundary": "Live theorem-search route only.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_log_decrement_bridge.md",
+        "outputs/jensen_window_pf_negative_lambda_coefficient_curvature_corridor_bridge.md",
+        "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md"
+      ]
+    },
+    {
+      "claim_if_proved": "A signed/tilted saddle analysis with uniform remainders may prove the scaled-curvature monotonicity inequality in the tail.",
+      "gap": "Current Taylor and perturbation artifacts are fixed-scale diagnostics and do not provide the required uniform all-k remainder.",
+      "id": "nlscmt_08_live_asymptotic_curvature_route",
+      "proof_boundary": "Live theorem-search route only.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_signed_gaussian_perturbation_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+        "outputs/jensen_window_pf_negative_lambda_high_order_taylor_scout.md"
+      ]
+    },
+    {
+      "claim_if_proved": "Generic raw-moment positivity, raw walls, or monotone B curvature alone prove the scaled-curvature target.",
+      "gap": "Exact positive moment and cone witnesses block the generic shortcuts; the proof must use zeta-specific structure.",
+      "id": "nlscmt_09_generic_shortcuts_blocked",
+      "proof_boundary": "Rejected shortcut only; not evidence against actual zeta coefficients.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_shortcut",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_linear_curvature_barrier_scout.md"
+      ]
+    },
+    {
+      "claim_if_proved": "A promoted proof must state the lambda range, finite collar, B-wall input, scaled monotonicity inequality, companion monotone upper side, and forbidden endpoint assumptions.",
+      "id": "nlscmt_10_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a proof of scaled-curvature monotonicity, cone entry, jwpf_06, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_k300_obstruction.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ]
+}

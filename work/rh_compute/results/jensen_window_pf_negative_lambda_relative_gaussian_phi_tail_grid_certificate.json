@@ -1,0 +1,228 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_grid_certificate.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_grid_certificate.py",
+  "invariants": [
+    "No row is ready_to_apply for the full intervalization target.",
+    "Only the omitted n>30 Phi-tail source is certified for the recorded finite grid.",
+    "Finite n<=30 node evaluation, Laguerre weights, quadrature, coefficient propagation, rounding, and grid-to-collar coverage remain open.",
+    "The finite grid is not promoted to a uniform collar theorem.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_grid_certificate",
+  "matrix_rows": [
+    {
+      "claim": "Import the padded-range n>30 majorants for Phi, Phi', and Phi(0) from the tail-bound scout.",
+      "diagnostics": {
+        "tail_bounds_below_per_source_cap": true,
+        "tail_source_rows": [
+          {
+            "certified_below_cap": true,
+            "channel": "Phi value n>30 tail",
+            "normalized_or_relative_bound": "2.2924616915439343177265838691371055161606069801575954245017643040467343671748619e-1300",
+            "per_source_cap": "2.000000000000000000E-3",
+            "proof_boundary": "Finite-grid Phi-tail source bound only; not a Laguerre node/weight interval, not a quadrature-remainder bound, and not a full residual numerator enclosure.",
+            "ratio_to_per_source_cap": "1.146230845771967159E-1297",
+            "tail_bound": "1.0086831442793310997996969024203264271106670712693419867807762937805631215569392e-1300"
+          },
+          {
+            "certified_below_cap": true,
+            "channel": "Phi prime n>30 derivative-core tail",
+            "normalized_or_relative_bound": "7.5576921686295812039942015879578382175496444154707086649254335740220458593283757e-1295",
+            "per_source_cap": "2.000000000000000000E-3",
+            "proof_boundary": "Finite-grid Phi-tail source bound only; not a Laguerre node/weight interval, not a quadrature-remainder bound, and not a full residual numerator enclosure.",
+            "ratio_to_per_source_cap": "3.778846084314790602E-1292",
+            "tail_bound": "6.6507691083940314595148973974028976314436870856142236251343815451394003562089706e-1295"
+          },
+          {
+            "certified_below_cap": true,
+            "channel": "Phi(0) n>30 denominator tail",
+            "normalized_or_relative_bound": "2.8305023506963495151711014966544950405375213996921059922339419209937073753762793e-1304",
+            "per_source_cap": "2.000000000000000000E-3",
+            "proof_boundary": "Finite-grid Phi-tail source bound only; not a Laguerre node/weight interval, not a quadrature-remainder bound, and not a full residual numerator enclosure.",
+            "ratio_to_per_source_cap": "1.415251175348174758E-1301",
+            "tail_bound": "1.2454210343063937866752846585279778178365094158645266365829344452372312451655629e-1304"
+          }
+        ]
+      },
+      "gap": null,
+      "id": "nlrgptgc_01_conditional_tail_scout_import",
+      "proof_boundary": "Analytic tail-bound import only; not a node, weight, or quadrature certificate.",
+      "readiness": "available_conditional",
+      "role": "analytic_tail_bound",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_bound_scout.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_bound_scout.md"
+      ]
+    },
+    {
+      "claim": "The recorded finite grid satisfies the side conditions required by the padded tail scout: node-induced x<=1 and Phi(0)>=0.44.",
+      "diagnostics": {
+        "c0_lower_certified_by_n1_term": true,
+        "certified_c0_lower": "0.44",
+        "certified_worst_x_square_upper_bound": "809/1156",
+        "certified_worst_x_square_upper_bound_decimal": "6.998269896193771711E-01",
+        "n1_phi0_term_lower": "0.44572697131799474430335802786658539152643783769655419085980516650442890855659827",
+        "node_range_x_le_1_certified": true,
+        "padded_tail_range": "0<=x<=1",
+        "phi_tail_padded_x_upper": "1.000000000000000000E+00",
+        "proof_boundary": "Side-condition certificate only; individual roots, weights, and quadrature remainders remain open.",
+        "side_condition_source": "Gershgorin/AM-GM certifies every recorded Laguerre node has x<=1, and Arb certifies Phi(0)>=0.44 from the n=1 term.",
+        "side_conditions_certified": true
+      },
+      "gap": null,
+      "id": "nlrgptgc_02_side_conditions_certified",
+      "proof_boundary": "Finite-grid side-condition certificate only; not individual node/weight intervals or quadrature error.",
+      "readiness": "available_for_phi_tail_source",
+      "role": "finite_side_condition_certificate",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_node_c0_range_certificate.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_node_c0_range_certificate.md"
+      ]
+    },
+    {
+      "claim": "Combining the certified side conditions with the padded majorants certifies the Phi/Phi'/Phi(0) n-tail source below the per-source intervalization cap for the recorded finite grid.",
+      "diagnostics": {
+        "c0_ratio_to_per_source_cap": "1.415251175348174758E-1301",
+        "derivative_ratio_to_per_source_cap": "3.778846084314790602E-1292",
+        "finite_grid_tail_source_certified": true,
+        "per_source_intervalization_cap": "2.000000000000000000E-3",
+        "proof_boundary": "Certified finite-grid Phi-tail source only; it does not certify the full cancellation-reduced numerator or the quadrature integral.",
+        "remaining_obligations": [
+          "individual Laguerre node and weight intervals beyond the coarse x<=1 range",
+          "finite n<=30 interval evaluation of Phi and Phi' at certified node intervals",
+          "coefficient-ratio ball propagation for the cancellation-reduced polynomial core",
+          "generalized Gauss-Laguerre quadrature-remainder or interval adaptive integration",
+          "rounding aggregation and finite-grid to full-collar coverage"
+        ],
+        "side_conditions_certified": true,
+        "tail_source_rows": 3,
+        "tail_sources_below_per_source_cap": true,
+        "value_ratio_to_per_source_cap": "1.146230845771967159E-1297"
+      },
+      "gap": null,
+      "id": "nlrgptgc_03_finite_grid_tail_source_certificate",
+      "proof_boundary": "Finite-grid tail-source certificate only; not a full Phi/Phi' node evaluation enclosure, not coefficient propagation, and not quadrature error.",
+      "readiness": "available_for_intervalization",
+      "role": "finite_tail_source_certificate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_bound_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_node_c0_range_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md"
+      ]
+    },
+    {
+      "claim": "The n-tail part of nlrgit_03 may now be treated as certified for the recorded finite grid, while the non-tail finite-part and quadrature obligations remain open.",
+      "diagnostics": {
+        "certified_component": "n>30 tails in Phi, Phi', and Phi(0) on the recorded finite grid",
+        "remaining_obligations": [
+          "individual Laguerre node and weight intervals beyond the coarse x<=1 range",
+          "finite n<=30 interval evaluation of Phi and Phi' at certified node intervals",
+          "coefficient-ratio ball propagation for the cancellation-reduced polynomial core",
+          "generalized Gauss-Laguerre quadrature-remainder or interval adaptive integration",
+          "rounding aggregation and finite-grid to full-collar coverage"
+        ],
+        "source_obligation_id": "nlrgit_03_phi_and_c0_interval_tail"
+      },
+      "gap": null,
+      "id": "nlrgptgc_04_intervalization_obligation_handoff",
+      "proof_boundary": "Handoff only; this does not close the intervalization target or uniform collar theorem.",
+      "readiness": "available_for_intervalization",
+      "role": "intervalization_handoff",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    },
+    {
+      "claim": "The finite-grid Phi-tail source certificate supplies full interval values for Phi and Phi' at every quadrature node.",
+      "diagnostics": null,
+      "gap": "It bounds only the omitted n>30 source. Full node evaluations still need individual node intervals, finite n<=30 interval evaluation, coefficient propagation, and quadrature-radius control.",
+      "id": "nlrgptgc_05_full_phi_evaluation_promotion_rejected",
+      "proof_boundary": "Rejected promotion only; not a full residual numerator certificate, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "A promoted finite-grid interval proof may use this tail-source certificate only after separately certifying the finite n<=30 evaluations, coefficient balls, quadrature remainder, and aggregation.",
+      "diagnostics": null,
+      "gap": null,
+      "id": "nlrgptgc_06_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not scaled-curvature monotonicity, cone entry, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Finite-grid Phi-tail source certificate only. It composes the padded n-tail majorants with the certified x<=1 and Phi(0)>=0.44 side conditions, but it does not provide individual Laguerre node or weight intervals, does not certify finite n<=30 Phi/Phi' node evaluations, does not bound quadrature remainder, does not prove a uniform collar theorem, does not prove scaled-curvature monotonicity, and does not prove RH or Lambda <= 0.",
+  "source_cancellation_reduced_grid_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.json",
+  "source_cancellation_reduced_grid_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_intervalization_target": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+  "source_intervalization_target_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.json",
+  "source_node_c0_range_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_node_c0_range_certificate.md",
+  "source_node_c0_range_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_node_c0_range_certificate.json",
+  "source_phi_tail_bound_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_bound_scout.json",
+  "source_phi_tail_bound_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_bound_scout.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "finite-grid Phi-tail source certificate",
+  "summary": {
+    "c0_lower_certified_by_n1_term": true,
+    "c0_ratio_to_per_source_cap": "1.415251175348174758E-1301",
+    "certified_c0_lower": "0.44",
+    "certified_side_conditions": 2,
+    "derivative_ratio_to_per_source_cap": "3.778846084314790602E-1292",
+    "finite_grid_tail_source_certified": true,
+    "main_finding": "The Phi-tail source for the recorded finite grid is now certificate-composed rather than merely conditional: the padded n>30 majorants are far below the 2.0e-3 per-source cap, while the node-c0 certificate proves x<=1 and Phi(0)>=0.44 for the same grid. This certifies the omitted-n tail component only; finite n<=30 node evaluation, weights, quadrature error, coefficient propagation, rounding, and grid-to-collar coverage remain open.",
+    "matrix_rows": 6,
+    "max_tail_source_ratio_to_cap": "3.778846084314790602E-1292",
+    "node_range_x_le_1_certified": true,
+    "padded_tail_range": "0<=x<=1",
+    "per_source_intervalization_cap": "2.000000000000000000E-3",
+    "ready_to_apply_rows": 0,
+    "remaining_obligation_count": 5,
+    "source_interval_obligations": 8,
+    "source_node_c0_rows": 5,
+    "source_phi_tail_rows": 6,
+    "tail_source_rows": 3,
+    "tail_sources_below_per_source_cap": true,
+    "target_closing": false,
+    "value_ratio_to_per_source_cap": "1.146230845771967159E-1297"
+  },
+  "tail_source_rows": [
+    {
+      "certified_below_cap": true,
+      "channel": "Phi value n>30 tail",
+      "normalized_or_relative_bound": "2.2924616915439343177265838691371055161606069801575954245017643040467343671748619e-1300",
+      "per_source_cap": "2.000000000000000000E-3",
+      "proof_boundary": "Finite-grid Phi-tail source bound only; not a Laguerre node/weight interval, not a quadrature-remainder bound, and not a full residual numerator enclosure.",
+      "ratio_to_per_source_cap": "1.146230845771967159E-1297",
+      "tail_bound": "1.0086831442793310997996969024203264271106670712693419867807762937805631215569392e-1300"
+    },
+    {
+      "certified_below_cap": true,
+      "channel": "Phi prime n>30 derivative-core tail",
+      "normalized_or_relative_bound": "7.5576921686295812039942015879578382175496444154707086649254335740220458593283757e-1295",
+      "per_source_cap": "2.000000000000000000E-3",
+      "proof_boundary": "Finite-grid Phi-tail source bound only; not a Laguerre node/weight interval, not a quadrature-remainder bound, and not a full residual numerator enclosure.",
+      "ratio_to_per_source_cap": "3.778846084314790602E-1292",
+      "tail_bound": "6.6507691083940314595148973974028976314436870856142236251343815451394003562089706e-1295"
+    },
+    {
+      "certified_below_cap": true,
+      "channel": "Phi(0) n>30 denominator tail",
+      "normalized_or_relative_bound": "2.8305023506963495151711014966544950405375213996921059922339419209937073753762793e-1304",
+      "per_source_cap": "2.000000000000000000E-3",
+      "proof_boundary": "Finite-grid Phi-tail source bound only; not a Laguerre node/weight interval, not a quadrature-remainder bound, and not a full residual numerator enclosure.",
+      "ratio_to_per_source_cap": "1.415251175348174758E-1301",
+      "tail_bound": "1.2454210343063937866752846585279778178365094158645266365829344452372312451655629e-1304"
+    }
+  ]
+}

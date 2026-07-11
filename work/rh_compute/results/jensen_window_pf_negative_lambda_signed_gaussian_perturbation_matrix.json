@@ -1,0 +1,90 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_signed_gaussian_perturbation_matrix.py",
+  "date": "2026-07-06",
+  "finite_diagnostics": {
+    "certified_taylor_signs": 2,
+    "deficit_coefficient": "[190.68658368200 +/- 5.53e-12]",
+    "fixed_k_activation_depth": 21,
+    "fixed_k_activation_t_lower": "[110.902139959017 +/- 7.87e-13]",
+    "monotone_wall_correction": "[825.997624927 +/- 3.55e-10]",
+    "ratio_a": "[-37.45380985900664 +/- 7.39e-15]",
+    "ratio_b": "[606.050644636309 +/- 2.44e-13]",
+    "ratio_c": "[-5047.98924959459 +/- 3.10e-12]",
+    "upper_wall_correction": "[-190.68658368200 +/- 5.53e-12]"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_signed_gaussian_perturbation_matrix.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The route is fixed-k/formal until uniform remainders are proved.",
+    "Positive Gaussian scale mixtures remain rejected for the upper-wall proof template.",
+    "The bounded log-curvature theorem remains open.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_signed_gaussian_perturbation_matrix",
+  "matrix_rows": [
+    {
+      "claim": "The pure Gaussian raw-moment baseline has x_k=1 and B_k=0.",
+      "id": "nlsgp_01_gaussian_baseline",
+      "proof_boundary": "Exact baseline only; it is degenerate for strict cone entry.",
+      "role": "exact_baseline"
+    },
+    {
+      "claim": "For Phi(u)=c0*(1+a*u^2+b*u^4+c*u^6+...), the fixed-k perturbation has log x_k=(2*b-a^2)/T^2+O_k(T^-3).",
+      "id": "nlsgp_02_signed_taylor_perturbation_model",
+      "proof_boundary": "Formal fixed-k model only; not a uniform tail theorem.",
+      "role": "formal_model"
+    },
+    {
+      "claim": "The certified sign 2*b-a^2<0 gives positive leading Gaussian deficit D2=a^2-2*b>0.",
+      "id": "nlsgp_03_positive_deficit_sign",
+      "proof_boundary": "Certified local Taylor sign only.",
+      "role": "certified_local_sign"
+    },
+    {
+      "claim": "The certified sign 2*(a^3-3*a*b+3*c)>0 gives fixed-k increasing contractions, equivalently decreasing B_k to the next order.",
+      "id": "nlsgp_04_monotone_deficit_sign",
+      "proof_boundary": "Certified local Taylor sign only.",
+      "role": "certified_local_sign"
+    },
+    {
+      "claim": "Ignoring remainders, D2/T^2<=2/(3*(2*K+1)) gives a finite-depth activation scale for a chosen K.",
+      "id": "nlsgp_05_fixed_k_activation_scale",
+      "proof_boundary": "Leading-term estimate only; not a rigorous remainder bound.",
+      "role": "finite_depth_estimate"
+    },
+    {
+      "claim": "The fixed-k expansion cannot by itself prove the all-k tail because the target bound shrinks like 1/k.",
+      "id": "nlsgp_06_uniform_tail_gap",
+      "proof_boundary": "Gap statement only; the needed uniform theorem remains open.",
+      "role": "open_gap"
+    },
+    {
+      "claim": "Positive Gaussian scale mixtures are unsuitable for the upper-wall route because they push the deficit nonpositive.",
+      "id": "nlsgp_07_positive_mixture_template_rejected",
+      "proof_boundary": "Rejects this proof template only; not a statement about the actual signed Phi perturbation.",
+      "role": "rejected_template"
+    },
+    {
+      "claim": "A signed or tilted Gaussian perturbation theorem with explicit uniform remainders could prove the bounded log-curvature target.",
+      "id": "nlsgp_08_live_signed_perturbation_route",
+      "proof_boundary": "Live route only; no such theorem is proved.",
+      "role": "live_route"
+    }
+  ],
+  "proof_boundary": "Finite theorem-search diagnostic only. It packages the fixed-k signed Gaussian perturbation route and its certified local Taylor signs, but it does not prove a uniform asymptotic remainder, does not prove the bounded log-curvature theorem, does not prove cone entry, and does not prove Lambda <= 0.",
+  "sign_scout_json": "work/rh_compute/results/jensen_window_pf_phi_taylor_cone_entry_sign_scout.json",
+  "source_bounded_log_curvature_target": "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_target.md",
+  "source_gaussian_curvature_matrix": "outputs/jensen_window_pf_negative_lambda_gaussian_curvature_matrix.md",
+  "source_phi_taylor_sign_scout": "outputs/jensen_window_pf_phi_taylor_cone_entry_sign_scout.md",
+  "status": "finite theorem-search diagnostic",
+  "summary": {
+    "certified_taylor_signs": 2,
+    "fixed_k_activation_estimates": 1,
+    "live_routes": 2,
+    "main_finding": "The surviving Gaussian-baseline route is a signed or tilted perturbation, not a positive Gaussian mixture: the certified Phi Taylor signs give a positive leading deficit D2=a^2-2*b and positive monotone correction 2*(a^3-3*a*b+3*c), but the fixed-k expansion still needs uniform remainder control or a finite-collar tail theorem before it can close the bounded log-curvature target.",
+    "matrix_rows": 8,
+    "ready_to_apply_rows": 0,
+    "rejected_templates": 1,
+    "target_closing": false
+  }
+}

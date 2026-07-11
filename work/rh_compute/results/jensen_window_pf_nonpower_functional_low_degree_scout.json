@@ -1,0 +1,190 @@
+{
+  "kind": "jensen_window_pf_nonpower_functional_low_degree_scout",
+  "date": "2026-07-06",
+  "status": "exact_low_degree_nonpower_functional_scout",
+  "parent_ansatz_matrix": "jensen_window_pf_nonordinary_positive_transform_ansatz_matrix",
+  "parent_ansatz_row": "npt_04_nonpower_positive_functional",
+  "parent_positive_readout_target": "jensen_window_pf_positive_readout_theorem_target",
+  "parent_target": "jwpf_06_sign_regular_to_jensen_pf_conversion",
+  "proof_boundary": "Exact low-degree theorem-search scout only; it derives reciprocal coefficient formulas, signed composition counts, and nonpower-functional acceptance tests. It does not construct a positive functional, does not prove coefficient positivity, does not prove jwpf_06, and does not prove Lambda <= 0.",
+  "objects": {
+    "H(t)": "1 + g_1*t + ... + g_d*t^d",
+    "E(t)": "1/H(-t)",
+    "mu_m": "[t^m]E(t)",
+    "recurrence": "mu_m = sum_{1<=j<=m} (-1)^(j+1) g_j mu_{m-j}, with g_j=0 for j>d",
+    "composition_expansion": "mu_m = sum_{alpha composition of m} (-1)^(m-len(alpha)) prod_i g_{alpha_i}",
+    "normalized_window_coefficients": "g_j=h_j/h_0"
+  },
+  "reciprocal_polynomials": {
+    "mu_0": "1",
+    "mu_1": "g1",
+    "mu_2": "g1^2 - g2",
+    "mu_3": "g1^3 - 2*g1*g2 + g3",
+    "mu_4": "g1^4 - 3*g1^2*g2 + g2^2 + 2*g1*g3 - g4",
+    "mu_5": "g1^5 - 4*g1^3*g2 + 3*g1*g2^2 + 3*g1^2*g3 - 2*g2*g3 - 2*g1*g4 + g5",
+    "mu_6": "g1^6 - 5*g1^4*g2 + 6*g1^2*g2^2 + 4*g1^3*g3 - g2^3 - 6*g1*g2*g3 - 3*g1^2*g4 + g3^2 + 2*g2*g4 + 2*g1*g5 - g6"
+  },
+  "composition_counts": [
+    {
+      "m": 1,
+      "total_compositions": 1,
+      "positive_sign_compositions": 1,
+      "negative_sign_compositions": 0,
+      "mixed_sign": false
+    },
+    {
+      "m": 2,
+      "total_compositions": 2,
+      "positive_sign_compositions": 1,
+      "negative_sign_compositions": 1,
+      "mixed_sign": true
+    },
+    {
+      "m": 3,
+      "total_compositions": 4,
+      "positive_sign_compositions": 2,
+      "negative_sign_compositions": 2,
+      "mixed_sign": true
+    },
+    {
+      "m": 4,
+      "total_compositions": 8,
+      "positive_sign_compositions": 4,
+      "negative_sign_compositions": 4,
+      "mixed_sign": true
+    },
+    {
+      "m": 5,
+      "total_compositions": 16,
+      "positive_sign_compositions": 8,
+      "negative_sign_compositions": 8,
+      "mixed_sign": true
+    },
+    {
+      "m": 6,
+      "total_compositions": 32,
+      "positive_sign_compositions": 16,
+      "negative_sign_compositions": 16,
+      "mixed_sign": true
+    },
+    {
+      "m": 7,
+      "total_compositions": 64,
+      "positive_sign_compositions": 32,
+      "negative_sign_compositions": 32,
+      "mixed_sign": true
+    },
+    {
+      "m": 8,
+      "total_compositions": 128,
+      "positive_sign_compositions": 64,
+      "negative_sign_compositions": 64,
+      "mixed_sign": true
+    }
+  ],
+  "scout_rows": [
+    {
+      "id": "npf_01_exact_reciprocal_polynomials",
+      "verdict": "exact_identity",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_reciprocal_positivity_route_matrix.md",
+        "outputs/jensen_window_pf_nonordinary_positive_transform_ansatz_matrix.md"
+      ],
+      "finding": "The first reciprocal coefficients are signed polynomials in the normalized window coefficients g_j; the checker recomputes mu_0 through mu_6 from the recurrence.",
+      "proof_boundary": "Exact algebra only; not a positivity proof."
+    },
+    {
+      "id": "npf_02_signed_composition_expansion",
+      "verdict": "exact_identity",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_reciprocal_fraction_scout.md",
+        "outputs/jensen_window_pf_reciprocal_motzkin_path_obstruction_scout.md"
+      ],
+      "finding": "For m>=2 the composition expansion has both positive and negative signs; a nonpower functional cannot be a termwise-positive composition proof in the independent g_j cone.",
+      "proof_boundary": "Rejects only coefficientwise or termwise positivity in the raw composition expansion."
+    },
+    {
+      "id": "npf_03_positive_g_cone_obstruction",
+      "verdict": "rejected_as_generic_positive_cone",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_ratio_condition_scout.md",
+        "outputs/jensen_window_pf_contraction_log_concavity_scout.md"
+      ],
+      "finding": "Because mu_2=g1^2-g2 already has a negative g2 term, any proof using only independent nonnegativity of the g_j is insufficient.",
+      "proof_boundary": "Does not reject proofs using genuine Jensen-window inequalities or Xi/Phi structure."
+    },
+    {
+      "id": "npf_04_degree2_log_concavity_entry",
+      "verdict": "first_required_inequality",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_column_recurrence_contract.md",
+        "outputs/jensen_window_pf_positive_spectral_moment_obstruction.md"
+      ],
+      "finding": "With g_j=h_j/h_0, mu_2=(h_1^2-h_0*h_2)/h_0^2; the first nonpower-functional positivity input must at least certify this adjacent log-concavity numerator without treating mu as ordinary moments.",
+      "proof_boundary": "Degree-2 necessary structure only; not an all-m theorem."
+    },
+    {
+      "id": "npf_05_degree3_cancellation_entry",
+      "verdict": "higher_cancellation_required",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_column_recurrence_finite_coverage.md",
+        "outputs/jensen_window_pf_reciprocal_coefficient_extended_stress.md"
+      ],
+      "finding": "mu_3=(h_1^3-2*h_0*h_1*h_2+h_0^2*h_3)/h_0^3 shows the next functional input must certify a signed three-term cancellation, not merely positivity of h_j.",
+      "proof_boundary": "Low-degree target only; finite positive rows remain evidence."
+    },
+    {
+      "id": "npf_06_tautological_basis_trap",
+      "verdict": "rejected_as_tautological",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_nonordinary_positive_transform_ansatz_matrix.md",
+        "outputs/jensen_window_pf_positive_readout_theorem_target.md"
+      ],
+      "finding": "Choosing K_m or L with coefficients that already contain the unknown mu_m is a tautological restatement of the target, not a positive functional proof.",
+      "proof_boundary": "Rejects circular basis choices only."
+    },
+    {
+      "id": "npf_07_positive_cone_contract",
+      "verdict": "live_if_cone_and_functional_constructed",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_nonordinary_positive_transform_ansatz_matrix.md",
+        "outputs/jensen_window_pf_oscillatory_resolvent_fit_matrix.md",
+        "outputs/jensen_window_pf_nonpower_functional_cone_candidate_matrix.md"
+      ],
+      "finding": "A serious nonpower functional must specify a positive cone C, prove K_m in C independently for all m,d,n, prove L positive on C, and prove L(K_m)=mu_m exactly. The cone candidate matrix rejects raw g-coordinate, standalone ratio/log-concavity, tautological, and endpoint PF/LP cones, leaving only Xi/Phi kernel and Cauchy-Binet/determinant-integral cone routes live.",
+      "proof_boundary": "Acceptance contract only; the cone C, basis K_m, and functional L are not constructed."
+    }
+  ],
+  "kill_gates": [
+    "Reject any nonpower-functional proof that uses only independent nonnegativity of the g_j.",
+    "Reject termwise-positive composition arguments for mu_m unless the signed composition cancellations are replaced by a new exact positive identity.",
+    "Reject K_m or L definitions that already contain the unknown target coefficients mu_m.",
+    "Reject transformed positivity without an exact proof that L(K_m)=mu_m for the original reciprocal coefficients.",
+    "Reject finite low-degree or finite-grid positivity as an all-m,d,n functional theorem.",
+    "Reject endpoint PF, Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0 as hypotheses."
+  ],
+  "summary": {
+    "scout_rows": 7,
+    "exact_identity_rows": 2,
+    "rejected_rows": 2,
+    "low_degree_requirement_rows": 2,
+    "live_contract_rows": 1,
+    "ready_to_apply_rows": 0,
+    "target_closing": false,
+    "main_finding": "The npt_04 nonpower positive-functional route must overcome signed reciprocal-polynomial and composition cancellations. The first low-degree inputs are mu_2=(h_1^2-h_0*h_2)/h_0^2 and mu_3=(h_1^3-2*h_0*h_1*h_2+h_0^2*h_3)/h_0^3; no positive cone C, basis K_m, or functional L is currently constructed. The cone candidate matrix leaves only Xi/Phi kernel and Cauchy-Binet/determinant-integral cone routes live."
+  },
+  "invariants": [
+    "The scout verifies exact algebra only.",
+    "No scout row proves reciprocal coefficient positivity.",
+    "No scout row proves jwpf_06.",
+    "Every live functional route still lacks a positive cone, basis, and functional.",
+    "The ordinary moment-measure route remains rejected by Delta_2=-g_2."
+  ]
+}

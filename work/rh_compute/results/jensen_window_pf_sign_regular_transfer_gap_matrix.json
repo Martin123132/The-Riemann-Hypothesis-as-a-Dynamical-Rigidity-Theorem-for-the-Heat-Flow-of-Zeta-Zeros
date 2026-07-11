@@ -1,0 +1,155 @@
+{
+  "bridge_json": "work/rh_compute/results/jensen_hankel_bridge_algebra.json",
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_sign_regular_transfer_gap_matrix.py",
+  "countermodel_data": {
+    "d3_first_negative_contiguous_determinant": "-435846079534239/104857600000000",
+    "d3_first_negative_contiguous_size": 8,
+    "d3_selected_toeplitz_minors_positive": true,
+    "d4_first_negative_contiguous_determinant": "-229760849637/28672000000",
+    "d4_first_negative_contiguous_size": 6,
+    "d4_quartic_discriminant": "-668519580649275927/359661568000000000",
+    "d4_selected_toeplitz_minors_positive": true,
+    "degree3_jensen_discriminant": "-2476526481/3276800000",
+    "degree3_jensen_hyperbolicity_breaks": true,
+    "finite_reshaped_signs_pass": true,
+    "sequence_A0_to_A4": [
+      "1",
+      "33/40",
+      "429/640",
+      "4719/12800",
+      "4719/35840"
+    ]
+  },
+  "date": "2026-07-06",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_sign_regular_transfer_gap_matrix.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "Degree-2 contact is not promoted to all-degree transfer.",
+    "Finite reshaped-Hankel signs are not promoted to all-order sign consistency.",
+    "Selected low-order Toeplitz minors are not promoted to Jensen-window PF-infinity.",
+    "Endpoint PF, Jensen hyperbolicity, Laguerre-Polya membership, RH, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_sign_regular_transfer_gap_matrix",
+  "obligation_json": "work/rh_compute/results/jensen_window_pf_obligation_algebra.json",
+  "proof_boundary": "Finite theorem-search diagnostic only. It combines exact low-degree algebra and finite countermodel gates to specify the missing transfer theorem, but it does not prove sign-regular-to-Jensen conversion, Jensen-window PF-infinity, Laguerre-Polya membership, RH, or Lambda <= 0.",
+  "source_bridge_obligation_ledger": "outputs/jensen_window_pf_bridge_obligations.md",
+  "source_jensen_hankel_bridge_algebra": "outputs/jensen_hankel_bridge_algebra.md",
+  "source_jensen_window_pf_obligation_algebra": "outputs/jensen_window_pf_obligation_algebra.md",
+  "source_signed_hankel_jensen_bridge_target": "outputs/signed_hankel_jensen_bridge_target.md",
+  "status": "finite_theorem_search_diagnostic",
+  "summary": {
+    "countermodel_gates": 2,
+    "main_finding": "The signed-Hankel/Jensen bridge is exact only at degree 2. The degree-3/4 countermodel gates show that finite reshaped-Hankel signs and selected low-order Toeplitz positivity do not imply Jensen-window PF-infinity; a proof needs all-order sign consistency plus a genuine Xi/Phi-specific sign-regular-to-Toeplitz transfer theorem with binomial and shift uniformity.",
+    "open_requirement_rows": 3,
+    "ready_to_apply_rows": 0,
+    "rejected_shortcut_rows": 3,
+    "target_closing": false,
+    "transfer_rows": 9
+  },
+  "transfer_rows": [
+    {
+      "acceptance_test": "Use this as the contact point only; do not extrapolate it to all degrees.",
+      "claim": "Degree 2 is exact: the m=1 signed-Hankel condition is the Jensen-window quadratic discriminant threshold.",
+      "id": "srgt_01_degree2_exact_contact",
+      "proof_boundary": "Exact low-degree contact only; not a sign-regular-to-Jensen transfer theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_contact",
+      "source_artifacts": [
+        "outputs/jensen_hankel_bridge_algebra.md",
+        "outputs/jensen_window_pf_obligation_algebra.md"
+      ]
+    },
+    {
+      "acceptance_test": "A proposed bridge must prove these cubic obligations from its stated hypotheses.",
+      "claim": "Degree 3 introduces a cubic discriminant and Toeplitz minors that are not signed reshaped-Hankel minors.",
+      "id": "srgt_02_degree3_new_obligation",
+      "proof_boundary": "Exact algebraic obstruction only; not a theorem for the zeta coefficients.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_obstruction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_obligation_algebra.md"
+      ]
+    },
+    {
+      "acceptance_test": "Reject any bridge that uses only finite low-order reshaped-Hankel signs.",
+      "claim": "A positive rational sequence passes finite reshaped-Hankel signs for k=2,3 at N=3 while its degree-3 Jensen discriminant is negative.",
+      "id": "srgt_03_finite_reshaped_hankel_countermodel",
+      "proof_boundary": "Countermodel gate only; it is not a claim about the actual zeta sequence.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_shortcut",
+      "source_artifacts": [
+        "outputs/jensen_hankel_bridge_algebra.md"
+      ]
+    },
+    {
+      "acceptance_test": "Reject any bridge that certifies only selected low-order Jensen-window Toeplitz minors.",
+      "claim": "The same positive rational sequence has selected low-order degree-3 and degree-4 Toeplitz minors positive while later contiguous Toeplitz minors and discriminants are negative.",
+      "id": "srgt_04_selected_toeplitz_countermodel",
+      "proof_boundary": "Countermodel gate only; not an all-minor theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_shortcut",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_obligation_algebra.md"
+      ]
+    },
+    {
+      "acceptance_test": "State the exact all-order minor family and prove it for the actual A_k(0).",
+      "claim": "The signed-Hankel side must be an all-order, all-shift reshaped-Hankel sign-consistency theorem, not a finite staircase.",
+      "id": "srgt_05_all_order_antecedent_requirement",
+      "proof_boundary": "Open antecedent requirement only; current Arb certificates are finite.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_requirement",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_bridge_target.md",
+        "outputs/jensen_window_pf_bridge_obligations.md"
+      ]
+    },
+    {
+      "acceptance_test": "Identify a positive kernel, determinant integral, production/network model, or sign-regular transfer theorem whose hypotheses are verified for A_k(0).",
+      "claim": "A viable bridge must add noncircular Xi/Phi-specific structure that is absent from arbitrary positive sequences.",
+      "id": "srgt_06_xi_phi_specific_transfer_requirement",
+      "proof_boundary": "Open bridge requirement only; no such theorem is proved here.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_theorem_machinery_fit_matrix.md",
+        "outputs/jensen_window_pf_structural_ansatz_matrix.md"
+      ]
+    },
+    {
+      "acceptance_test": "Handle binom(d,j), every d, every n, and every Toeplitz minor shape in one theorem.",
+      "claim": "The transfer must output every binomially weighted Jensen-window Toeplitz matrix for all degrees and shifts.",
+      "id": "srgt_07_binomial_shift_uniformity_requirement",
+      "proof_boundary": "Open uniformity requirement only; finite rectangles are rejected elsewhere.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_bridge_target.md",
+        "outputs/jensen_window_pf_schur_shape_contract.md"
+      ]
+    },
+    {
+      "acceptance_test": "The theorem must imply all Jensen-window PF conditions without assuming Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0.",
+      "claim": "An acceptable theorem may prove a sign-regular-to-Toeplitz transfer, a positive determinant integral, or an Xi/Phi positive-kernel identity that directly gives the Jensen-window PF target.",
+      "id": "srgt_08_acceptable_theorem_shape",
+      "proof_boundary": "Live contract only; no candidate is ready to apply.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_contract",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_bridge_target.md"
+      ]
+    },
+    {
+      "acceptance_test": "Reject any proposed proof step that avoids the all-order transfer theorem with one of these shortcuts.",
+      "claim": "Finite grids, degree-2 analogy, selected minors, endpoint PF/LP assumptions, and asymptotic Jensen statements are forbidden as bridge replacements.",
+      "id": "srgt_09_forbidden_transfer_shortcuts",
+      "proof_boundary": "Rejected proof templates only.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_shortcut",
+      "source_artifacts": [
+        "outputs/countermodel_library.md",
+        "outputs/sign_regularity_theorem_fit_matrix.md"
+      ]
+    }
+  ]
+}

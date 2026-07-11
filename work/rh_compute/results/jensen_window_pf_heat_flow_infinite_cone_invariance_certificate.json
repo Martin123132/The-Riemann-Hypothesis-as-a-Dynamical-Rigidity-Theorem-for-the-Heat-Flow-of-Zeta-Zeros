@@ -1,0 +1,189 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_heat_flow_infinite_cone_invariance_certificate.py",
+  "date": "2026-07-10",
+  "diagnostics": {
+    "exact_ode": {
+      "Q_k": "(8*k+20)*d^2-(10*k+25)*d*h-(6*k+25)*d+(4*k+10)*h^2+(6*k+19)*h+6",
+      "a_k": "2*r_k*(2*k+5)*(1-d_(k+1))^2>=0",
+      "c_k": "2*r_k*d_k^2*(6-(2*k+5)*d_k)>=0",
+      "d_equation": "d_k'=2*r_k*((2*k+3)*(1-d_k)*d_(k+1)-(2*k-1)*d_k)",
+      "h_equation": "h_k'=a_k*(h_(k+1)-h_k)+q_k*h_k+c_k",
+      "q_k": "2*r_k*Q_k(d_k,h_k)"
+    },
+    "maximum_principle": {
+      "conclusion": "h_k(lambda)>=0 for every k>=1 and every finite lambda>=-100",
+      "coordinate_regularity": "Each z_k is C1 on compact heat intervals because A_k is positive analytic and the coefficient ODE is exact.",
+      "dini_derivative": "For m(t)<0, D_+m(t)=min{z_k'(t): z_k(t)=m(t)}>=0 because every active index is a negative spatial minimum.",
+      "finite_active_set": "Whenever m(t)<0, uniform c0-tail decay leaves only finitely many indices below m(t)/2; hence there is a finite active set locally in time.",
+      "minimum_attainment": "z_k->0 uniformly on compact time intervals, so every negative infimum is attained at finite k.",
+      "minimum_function": "m(t)=min(0,inf_(k>=1) z_k(t))",
+      "negative_component_contradiction": "On any connected component (alpha,beta) of {t:m(t)<0}, the Dini inequality makes m nondecreasing, contradicting m(alpha)=0.",
+      "negative_minimum": "If z_k is a negative spatial minimum, every term on the right is nonnegative.",
+      "transform": "z_k(t)=exp(-176*R*t)*h_k(-100+t)",
+      "transformed_equation": "z_k'=a_k*(z_(k+1)-z_k)+(q_k-176*R)*z_k+exp(-176*R*t)*c_k"
+    },
+    "pointwise_cone": {
+      "adjacent_decay": "|h_k|<=max(d_k,d_(k+1))<=1/k",
+      "defect_bound": "0<=d_k<=2/(2*k+1)<=1/k",
+      "ratio_bound": "0<r_k<=r_0",
+      "uniform_tail": "sup_lambda |h_k(lambda)|<=1/k on compact forward intervals"
+    },
+    "uniform_coefficient_bound": {
+      "Q_absolute_sum": "778/9",
+      "Q_cap": 88,
+      "absolute_term_bounds": {
+        "10*h^2": "40/9",
+        "10*k*|d*h|": "20/3",
+        "19*|h|": "38/3",
+        "20*d^2": "80/9",
+        "25*d": "50/3",
+        "25*|d*h|": "100/9",
+        "4*k*h^2": "8/3",
+        "6*k*d": "6",
+        "6*k*|h|": "6",
+        "8*k*d^2": "16/3",
+        "constant": "6"
+      },
+      "compact_interval_R": "R=sup r_0(lambda)<infinity",
+      "q_upper": "q_k<=176*R"
+    },
+    "variables": {
+      "d_k": "1-x_k",
+      "h_k": "d_k-d_(k+1)=x_(k+1)-x_k",
+      "r_k": "A_(k+1)/A_k",
+      "x_k": "r_k/r_(k-1)"
+    }
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_heat_flow_infinite_cone_invariance_certificate.py",
+  "kind": "jensen_window_pf_heat_flow_infinite_cone_invariance_certificate",
+  "proof_boundary": "This artifact proves legitimate forward propagation of the full infinite ratio cone from lambda=-100 to every finite lambda>=-100, including lambda=0. It does not prove PF-infinity, the all-shape Jensen bridge, RH, or Lambda <= 0.",
+  "rows": [
+    {
+      "claim": "The positive zeta moment coefficients define a coordinatewise analytic heat trajectory on every finite real lambda interval.",
+      "diagnostics": null,
+      "formula": "A_k(lambda)>0 and A_k'(lambda)=4*(k+1/2)*A_(k+1)(lambda)",
+      "id": "hfic_01_actual_analytic_trajectory",
+      "proof_boundary": "Actual trajectory and coefficient ODE only.",
+      "readiness": "available_exact",
+      "role": "exact_analytic_input"
+    },
+    {
+      "claim": "Pointwise cone walls give uniformly vanishing adjacent defects and bounded coefficient ratios.",
+      "diagnostics": {
+        "adjacent_decay": "|h_k|<=max(d_k,d_(k+1))<=1/k",
+        "defect_bound": "0<=d_k<=2/(2*k+1)<=1/k",
+        "ratio_bound": "0<r_k<=r_0",
+        "uniform_tail": "sup_lambda |h_k(lambda)|<=1/k on compact forward intervals"
+      },
+      "formula": "0<=d_k<=1/k, |h_k|<=1/k, 0<r_k<=r_0",
+      "id": "hfic_02_defect_coordinates",
+      "proof_boundary": "Coordinate and tail bounds only.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The adjacent defect equation is a one-sided cooperative transport with a nonnegative source.",
+      "diagnostics": {
+        "Q_k": "(8*k+20)*d^2-(10*k+25)*d*h-(6*k+25)*d+(4*k+10)*h^2+(6*k+19)*h+6",
+        "a_k": "2*r_k*(2*k+5)*(1-d_(k+1))^2>=0",
+        "c_k": "2*r_k*d_k^2*(6-(2*k+5)*d_k)>=0",
+        "d_equation": "d_k'=2*r_k*((2*k+3)*(1-d_k)*d_(k+1)-(2*k-1)*d_k)",
+        "h_equation": "h_k'=a_k*(h_(k+1)-h_k)+q_k*h_k+c_k",
+        "q_k": "2*r_k*Q_k(d_k,h_k)"
+      },
+      "formula": "h_k'=a_k*(h_(k+1)-h_k)+q_k*h_k+c_k",
+      "id": "hfic_03_exact_adjacent_ode",
+      "proof_boundary": "Exact ODE identity only.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "The potential coefficient q_k has a uniform upper bound on each compact heat interval.",
+      "diagnostics": {
+        "Q_absolute_sum": "778/9",
+        "Q_cap": 88,
+        "absolute_term_bounds": {
+          "10*h^2": "40/9",
+          "10*k*|d*h|": "20/3",
+          "19*|h|": "38/3",
+          "20*d^2": "80/9",
+          "25*d": "50/3",
+          "25*|d*h|": "100/9",
+          "4*k*h^2": "8/3",
+          "6*k*d": "6",
+          "6*k*|h|": "6",
+          "8*k*d^2": "16/3",
+          "constant": "6"
+        },
+        "compact_interval_R": "R=sup r_0(lambda)<infinity",
+        "q_upper": "q_k<=176*R"
+      },
+      "formula": "|Q_k|<=778/9<88 and q_k<=176*R",
+      "id": "hfic_04_uniform_coefficient_bound",
+      "proof_boundary": "Uniform coefficient bound only.",
+      "readiness": "available_exact",
+      "role": "exact_analytic_lemma"
+    },
+    {
+      "claim": "Uniform tail decay makes every negative spatial infimum attainable, and the transformed ODE points inward there.",
+      "diagnostics": {
+        "conclusion": "h_k(lambda)>=0 for every k>=1 and every finite lambda>=-100",
+        "coordinate_regularity": "Each z_k is C1 on compact heat intervals because A_k is positive analytic and the coefficient ODE is exact.",
+        "dini_derivative": "For m(t)<0, D_+m(t)=min{z_k'(t): z_k(t)=m(t)}>=0 because every active index is a negative spatial minimum.",
+        "finite_active_set": "Whenever m(t)<0, uniform c0-tail decay leaves only finitely many indices below m(t)/2; hence there is a finite active set locally in time.",
+        "minimum_attainment": "z_k->0 uniformly on compact time intervals, so every negative infimum is attained at finite k.",
+        "minimum_function": "m(t)=min(0,inf_(k>=1) z_k(t))",
+        "negative_component_contradiction": "On any connected component (alpha,beta) of {t:m(t)<0}, the Dini inequality makes m nondecreasing, contradicting m(alpha)=0.",
+        "negative_minimum": "If z_k is a negative spatial minimum, every term on the right is nonnegative.",
+        "transform": "z_k(t)=exp(-176*R*t)*h_k(-100+t)",
+        "transformed_equation": "z_k'=a_k*(z_(k+1)-z_k)+(q_k-176*R)*z_k+exp(-176*R*t)*c_k"
+      },
+      "formula": "h_k(-100)>=0 for all k => h_k(lambda)>=0 for all k and lambda>=-100",
+      "id": "hfic_05_infinite_minimum_principle",
+      "proof_boundary": "Infinite-index maximum principle for the adjacent wall only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_theorem"
+    },
+    {
+      "claim": "The exact pointwise walls and infinite maximum principle propagate the full ratio cone forward from lambda=-100.",
+      "diagnostics": null,
+      "formula": "(2*k-1)/(2*k+1)<=x_k(lambda)<=1 and x_(k+1)(lambda)>=x_k(lambda)",
+      "id": "hfic_06_full_cone_propagation",
+      "proof_boundary": "Full ratio-cone propagation only.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "The actual zeta coefficient sequence lies in the full infinite ratio cone at lambda=0.",
+      "diagnostics": null,
+      "formula": "full ratio cone at lambda=0 for every k>=1",
+      "id": "hfic_07_endpoint_cone",
+      "proof_boundary": "Endpoint coefficient-ratio theorem; not PF-infinity or RH.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "Convert the propagated ratio cone into the required all-shape Jensen-window or sign-regular theorem without circular endpoint assumptions.",
+      "diagnostics": null,
+      "formula": "propagated cone + missing structural bridge => Newman direction",
+      "id": "hfic_08_all_order_handoff",
+      "proof_boundary": "Open all-order bridge; not RH or Lambda <= 0.",
+      "readiness": "blocked_by_all_order_bridge",
+      "role": "open_handoff"
+    }
+  ],
+  "source_boundary_algebra": "outputs/jensen_window_pf_heat_flow_ratio_cone_invariance_lemma.md",
+  "source_cone_entry": "outputs/jensen_window_pf_negative_lambda_m100_full_cone_entry_certificate.md",
+  "source_heat_target": "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+  "source_pointwise_walls": "outputs/jensen_window_pf_kernel_mellin_upper_wall_certificate.md",
+  "status": "exact infinite ratio-cone propagation theorem and open all-order handoff",
+  "summary": {
+    "certificate_rows": 8,
+    "endpoint_cone_rows": 1,
+    "exact_ode_rows": 3,
+    "full_cone_propagation_rows": 1,
+    "infinite_maximum_principle_rows": 1,
+    "open_all_order_handoffs": 1,
+    "ready_to_apply_rows": 3
+  }
+}

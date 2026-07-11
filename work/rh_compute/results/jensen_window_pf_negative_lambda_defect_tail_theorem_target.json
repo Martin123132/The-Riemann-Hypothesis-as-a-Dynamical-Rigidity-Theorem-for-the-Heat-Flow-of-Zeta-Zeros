@@ -1,0 +1,160 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_defect_tail_theorem_target.py",
+  "date": "2026-07-06",
+  "finite_anchor": {
+    "checked_x_max": 149,
+    "coefficient_k_max": 150,
+    "lambdas": [
+      "-100.0",
+      "-50.0",
+      "-25.0"
+    ],
+    "next_finite_coefficient_needed": "A_151",
+    "tail_lower_start_k": 150,
+    "tail_monotone_bridge_k": 149
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_defect_tail_theorem_target.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The target remains open_target.",
+    "Finite extensions are not promoted to an all-k theorem.",
+    "The scaled-defect nonincreasing shortcut remains rejected.",
+    "The one-third-width buffer is not promoted after the k150 frontier failure.",
+    "The fixed half-width buffer is finite-rejected after the k150 frontier failure.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_defect_tail_theorem_target",
+  "proof_boundary": "Open theorem target only. It states the all-k defect-tail theorem needed after the finite negative-lambda prefix, but it does not prove the tail theorem, does not prove zeta cone entry, does not prove jwpf_06, and does not prove RH or Lambda <= 0.",
+  "source_cone_entry_target": "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+  "source_scaled_defect_frontier_scout": "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k150_scout.md",
+  "source_tail_barrier_scout": "outputs/jensen_window_pf_negative_lambda_tail_barrier_k150_scout.md",
+  "status": "open_theorem_target",
+  "summary": {
+    "conditional_application_rows": 1,
+    "insufficient_routes": 1,
+    "live_routes": 2,
+    "main_finding": "The defect-tail target is now indexed precisely: finite evidence covers x_1..x_149, so an analytic proof must supply 0 <= d_k <= 2/(2*k+1) for k >= 150 and d_(k+1) <= d_k for k >= 149. Two live routes remain: uniform saddle/Laplace control and a direct ratio-recurrence comparison. The scaled-defect nonincreasing shortcut is rejected by the finite diagnostic; the one-third buffer is too strong on the k150 prefix, and the fixed half-width buffer is also finite-rejected.",
+    "next_finite_coefficient_needed": "A_151",
+    "ready_to_apply_rows": 0,
+    "rejected_routes": 1,
+    "tail_lower_start_k": 150,
+    "tail_monotone_bridge_k": 149,
+    "target_closing": false,
+    "target_rows": 8
+  },
+  "tail_barrier_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_tail_barrier_k150_scout.json",
+  "target_id": "target_negative_lambda_defect_tail",
+  "target_rows": [
+    {
+      "acceptance_test": "Provide noncircular estimates for the actual zeta heat-flow coefficients, with explicit starting index and no endpoint PF/RH input.",
+      "claim_if_proved": "For each checked negative lambda, prove 0 <= d_k <= 2/(2*k+1) for all k >= 150 and d_(k+1) <= d_k for all k >= 149, where d_k=1-x_k.",
+      "gap": "No analytic all-k defect-tail theorem is currently proved.",
+      "id": "nldtt_01_exact_tail_statement",
+      "proof_boundary": "Open theorem target only; not a proof of cone entry.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_statement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_tail_barrier_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_tail_barrier_k150_scout.md",
+        "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md"
+      ]
+    },
+    {
+      "acceptance_test": "State whether the route proves the bridge inequality analytically or adds the missing coefficient enclosure.",
+      "claim_if_proved": "The existing finite prefix supplies x_1..x_149; a tail theorem starting at x_150 plus the bridge inequality d_150 <= d_149 would complete the infinite ratio-cone entry on the checked lambda grid.",
+      "gap": "The bridge value x_150 would otherwise require A_151.",
+      "id": "nldtt_02_finite_anchor_handoff",
+      "proof_boundary": "Requirement extraction only; not a tail theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_cone_entry_prefix_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_cone_entry_prefix_k150_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_finite_collar_contract.md",
+        "outputs/jensen_window_pf_negative_lambda_finite_collar_k150_contract.md"
+      ]
+    },
+    {
+      "acceptance_test": "Give explicit k-uniform remainder terms strong enough to prove the defect barriers from the stated starting index.",
+      "claim_if_proved": "A uniform large-negative-lambda saddle/Laplace expansion controls d_k and d_(k+1)-d_k beyond the finite anchor.",
+      "gap": "The current Phi Taylor sign certificate is fixed-k/local; it does not bound the saddle remainder uniformly in k.",
+      "id": "nldtt_03_uniform_saddle_route",
+      "proof_boundary": "Live theorem-search route only.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+        "outputs/jensen_window_pf_phi_taylor_cone_entry_sign_scout.md"
+      ]
+    },
+    {
+      "acceptance_test": "Derive an inequality involving only already-controlled tail quantities and verify its base case noncircularly.",
+      "claim_if_proved": "A direct recurrence or comparison inequality for x_k proves positivity, the lower wall, and monotone defect decrease for the actual coefficient tail.",
+      "gap": "No closed recurrence or comparison principle has been proved for the zeta heat-flow coefficient tail; the width-preserving recurrence, the one-third buffer, and the fixed half-width buffer are now finite-rejected on the k150 prefix.",
+      "id": "nldtt_04_ratio_recurrence_route",
+      "proof_boundary": "Live theorem-search route only.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_tail_barrier_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_tail_barrier_k150_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_defect_recurrence_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k150_scout.md",
+        "outputs/jensen_window_pf_heat_flow_ratio_cone_invariance_lemma.md"
+      ]
+    },
+    {
+      "acceptance_test": "Do not use scaled-defect nonincrease as a proof premise.",
+      "claim_if_proved": "The shortcut s_k=((2*k+1)/2)*d_k is nonincreasing would imply the lower wall from one finite bound.",
+      "gap": "The certified finite prefix shows s_k is increasing on every checked adjacent pair.",
+      "id": "nldtt_05_scaled_defect_shortcut_rejected",
+      "proof_boundary": "Rejected by finite diagnostic evidence only.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_tail_barrier_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k150_scout.md"
+      ]
+    },
+    {
+      "acceptance_test": "Use finite extensions as diagnostics or base cases only, unless paired with a genuine analytic tail theorem.",
+      "claim_if_proved": "More ACB coefficients can keep extending the finite collar depth.",
+      "gap": "Finite extension alone does not prove the all-k tail or an analytic collared finite flow theorem.",
+      "id": "nldtt_06_finite_extension_insufficient",
+      "proof_boundary": "Finite evidence only.",
+      "readiness": "not_ready_to_apply",
+      "role": "insufficient_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_cone_entry_prefix_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_cone_entry_prefix_k150_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_finite_collar_contract.md",
+        "outputs/jensen_window_pf_negative_lambda_finite_collar_k150_contract.md"
+      ]
+    },
+    {
+      "acceptance_test": "Reject any route that imports endpoint PF/LP/RH/Newman conclusions as premises.",
+      "claim_if_proved": "Endpoint Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0 would imply strong tail inequalities.",
+      "gap": "Those endpoint statements are outputs or stronger assumptions, not admissible inputs for this Newman-direction programme.",
+      "id": "nldtt_07_forbidden_endpoint_shortcuts",
+      "proof_boundary": "Circular as input.",
+      "readiness": "not_ready_to_apply",
+      "role": "circular_route",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    },
+    {
+      "acceptance_test": "After a proof, re-run the cone-entry target and dependency graph without changing forbidden endpoint assumptions.",
+      "claim_if_proved": "The finite prefix plus this all-k defect-tail theorem would supply the missing cone-entry input for the conditional heat-flow ratio-cone route.",
+      "gap": "This would still need the surrounding infinite/collared flow legitimacy and downstream Jensen-window PF bridge checks.",
+      "id": "nldtt_08_conditional_cone_entry_application",
+      "proof_boundary": "Conditional application only; not jwpf_06 or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "conditional_application",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+        "outputs/jensen_window_pf_heat_flow_ratio_cone_invariance_lemma.md"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,459 @@
+{
+  "date": "2026-07-11",
+  "exact": {
+    "bilateral_profile_transform": {
+      "absolute_shift_region": "Im z<-1",
+      "convention": "Qhat(z)=integral_R phi_1(u)*exp(i*z*u)du",
+      "formula": "Qhat(z)=-(1+z^2)/32*pi^(-(1+i*z)/4)*Gamma((1+i*z)/4)"
+    },
+    "deformed_half_transform": {
+      "curvature_reduction": "With A_t=D_t[C_t], L_t(x)=(A_t'(x)^2-(A_t(x)+1/2)*A_t''(x))/64.",
+      "definition": "C_t(x)=integral_0^infinity exp(tu^2)*R(u)*cos(xu)du",
+      "expanded": "H_t(x)=1/16+(-4*t^2*C_t''(x)+4*t*x*C_t'(x)+(2*t-1-x^2)*C_t(x))/8",
+      "identity": "H_t(x)=1/16+D_t[C_t](x)/8",
+      "integration_by_parts": "For w=exp(tu^2)cos(xu), integral R''w=-R'(0)+integral Rw''; w'(0)=0 and R'(0)=-1/2.",
+      "multiple_contact": "A_t(c)=-1/2 and A_t'(c)=0 exactly characterize a multiple real zero of H_t.",
+      "operator": "D_t=-4*t^2*partial_x^2+4*t*x*partial_x+(2*t-1-x^2)"
+    },
+    "differential_profile": {
+      "h": "h(u)=exp(u-pi*exp(4u))",
+      "identity": "phi_1(u)=(h''(u)-h(u))/8",
+      "theta_primitive": "R(u)=sum_(n>=1) exp(u-pi*n^2*exp(4u)), Phi(u)=(R''(u)-R(u))/8 for u>=0"
+    },
+    "finite_theta_boundary_defect": {
+      "derivative_roots": [
+        "15/8 - sqrt(105)/8",
+        "sqrt(105)/8 + 15/8"
+      ],
+      "partial_boundary_jet": "A_N=f_(N,t)'(0)=sum_(n=1)^N phi_n'(0)=-sum_(n>N)phi_n'(0)>0, independent of t",
+      "partial_kernel": "f_(N,t)(u)=exp(tu^2)*sum_(n=1)^N phi_n(u)",
+      "signs": "phi_1'(0)>0, phi_n'(0)<0 for n>=2, and sum_(n>=1)phi_n'(0)=Phi'(0)=0",
+      "summand_derivative": "phi_n'(0)=pi*n^2*exp(-pi*n^2)*(-8*pi^2*n^4+30*pi*n^2-15)"
+    },
+    "finite_theta_laguerre_obstruction": {
+      "conclusion": "Every finite theta truncation fails the global first-Laguerre criterion at every fixed real t; the failure escapes to higher frequency as N grows.",
+      "cosine_transform": "H_(N,t)(x)=integral_0^infinity f_(N,t)(u)cos(xu)du",
+      "jet": "H_(N,t)(x)=-A_N/x^2+O_(N,t)(x^-4), H_(N,t)'(x)=2A_N/x^3+O(x^-5), H_(N,t)''(x)=-6A_N/x^4+O(x^-6)",
+      "laguerre_tail": "L[H_(N,t)](x)=-2*A_N^2/x^6+O_(N,t)(x^-8)<0 for all sufficiently large x"
+    },
+    "half_transform": {
+      "boundary_term": "integral_0^infinity R''(u)cos(xu)du=-R'(0)-x^2*C(x)",
+      "definition": "C(x)=integral_0^infinity R(u)*cos(xu)du",
+      "identity": "H_0(x)=1/16-(1+x^2)*C(x)/8",
+      "interpretation": "The constant 1/16 cancels the complete algebraic high-frequency expansion of (1+x^2)C(x)/8; the Xi transform is beyond-all-orders in any finite endpoint-jet truncation."
+    },
+    "laguerre_pair_expansion": {
+      "cross": "B[f,g]=2*f'*g'-f*g''-g*f''",
+      "self": "L[f]=f'^2-f*f''",
+      "sum": "L[sum_n H_n]=sum_n L[H_n]+sum_(m<n)B[H_m,H_n]",
+      "summand_transform": "H_(n,t)(x)=integral_0^infinity exp(tu^2)*phi_n(u)*cos(xu)du"
+    },
+    "nonpromotion_decision": "Neither entrywise nonnegativity of the self/cross Laguerre blocks nor any finite positive theta grouping can prove the Xi strict-correlation target. The proof must perform the infinite theta/modular endpoint cancellation before imposing spectral positivity.",
+    "open_handoff": "For A_t=D_t[C_t], prove A_t'(x)^2-(A_t(x)+1/2)*A_t''(x)>0 for every real x and 0<t<=1/2 using the positive theta primitive R and its modular identity. The formula already performs the infinite odd-endpoint cancellation; the missing step is a noncircular curvature estimate. Finite summand squares and pairwise-positive cross terms are closed routes.",
+    "summands": {
+      "definition": "phi_n(u)=(2*pi^2*n^4*exp(9u)-3*pi*n^2*exp(5u))*exp(-pi*n^2*exp(4u))",
+      "shift": "phi_n(u)=n^(-1/2)*phi_1(u+(log n)/2)"
+    },
+    "theta_boundary": {
+      "derivative_at_one": "theta'(1)=-theta(1)/4",
+      "evenness_cancellation": "Phi^(2j+1)(0)=0 for every j>=0",
+      "primitive_boundary": "R'(0)=-1/2",
+      "theta_equation": "theta(a)=a^(-1/2)*theta(1/a)"
+    },
+    "xi_reconstruction": {
+      "dirichlet_sum": "sum_(n>=1)n^(-1/2)*exp(-i*z*log(n)/2)=zeta(s)",
+      "identity": "Qhat(z)*zeta(s)=xi(s)/4",
+      "real_axis_normalization": "2*H_0(z)=xi((1+i*z)/2)/4",
+      "scope": "The shifted-profile spectral assembly reconstructs the completed zeta function itself; it is not a new zero-free factor or square.",
+      "spectral_parameter": "s=(1+i*z)/2"
+    }
+  },
+  "kind": "jensen_window_pf_newman_theta_summand_spectral_square_gate",
+  "numerics": {
+    "coarse_nodes_per_panel": 240,
+    "fine_nodes_per_panel": 420,
+    "independent_mpmath_60_digit_references": {
+      "t=0,x=10.5,cross12": "-9.4724043513340160018636035506062629341749836398503e-11",
+      "t=0,x=16.75,cross12": "-5.4558070422955992764707732998584777381880650231387e-9",
+      "t=0,x=39.5,full": "8.11247906572043557130219629418246417508307194e-12",
+      "t=0,x=39.5,self1": "-1.4353955305833860032713529652751068355630815282954e-11",
+      "t=1/2,x=10.5,cross12": "-2.0098927299713753769802078261423676200344093158894e-10",
+      "t=1/2,x=16.75,cross12": "-5.5716576800419615230365387281576815152175562856393e-9",
+      "t=1/2,x=39.5,full": "7.78250223515801376811879379711178859057922847e-12",
+      "t=1/2,x=39.5,self1": "-1.4913091820093501126902730280059671578053292653959e-11"
+    },
+    "max_relative_coarse_fine_delta_negative_witnesses": "1.21579106855854902e-10",
+    "method": "Composite Gauss-Legendre quadrature on [0,4], analytic Fourier derivative moments, Phi summands n<=15 for full-kernel comparison",
+    "rows": [
+      {
+        "cross_laguerre": "-9.47240435132102504e-11",
+        "first_jet": [
+          "3.23524744763410838e-02",
+          "-4.12220455611088301e-03",
+          "9.04493633752682035e-05"
+        ],
+        "full_laguerre": "1.40662152605622681e-05",
+        "kind": "cross_1_2",
+        "second_jet": [
+          "2.05906923636616128e-05",
+          "-1.61703176250871524e-07",
+          "-1.34315485758552257e-08"
+        ],
+        "t": "0",
+        "x": "10.5"
+      },
+      {
+        "cross_laguerre": "-5.45580704229529059e-09",
+        "first_jet": [
+          "1.09512225142310293e-02",
+          "-2.45931719389438138e-03",
+          "3.46963464094433556e-04"
+        ],
+        "full_laguerre": "2.24311139002416139e-06",
+        "kind": "cross_1_2",
+        "second_jet": [
+          "1.93414948975843289e-05",
+          "-2.33950202143855462e-07",
+          "-9.52126748451893162e-09"
+        ],
+        "t": "0",
+        "x": "16.75"
+      },
+      {
+        "first_jet": [
+          "-1.95243888431441270e-05",
+          "4.87018973637762128e-06",
+          "-1.95000743336407692e-06"
+        ],
+        "full_laguerre": "8.11247906394412734e-12",
+        "kind": "self_1",
+        "self_laguerre": "-1.43539553077037718e-11",
+        "t": "0",
+        "x": "39.5"
+      },
+      {
+        "cross_laguerre": "-2.00989272997002332e-10",
+        "first_jet": [
+          "3.23057811242477844e-02",
+          "-4.16508766244555548e-03",
+          "9.63592368252321038e-05"
+        ],
+        "full_laguerre": "1.42347941351116568e-05",
+        "kind": "cross_1_2",
+        "second_jet": [
+          "2.05974128126813091e-05",
+          "-1.61970263720247324e-07",
+          "-1.34502555541855265e-08"
+        ],
+        "t": "0.5",
+        "x": "10.5"
+      },
+      {
+        "cross_laguerre": "-5.57165768004164914e-09",
+        "first_jet": [
+          "1.07762768524888621e-02",
+          "-2.45771199059220853e-03",
+          "3.52833160983215732e-04"
+        ],
+        "full_laguerre": "2.23254898230694973e-06",
+        "kind": "cross_1_2",
+        "second_jet": [
+          "1.93462571685242899e-05",
+          "-2.34296985529952856e-07",
+          "-9.52781465577431525e-09"
+        ],
+        "t": "0.5",
+        "x": "16.75"
+      },
+      {
+        "first_jet": [
+          "-1.85470374982172495e-05",
+          "4.62555834937945278e-06",
+          "-1.95766476823800695e-06"
+        ],
+        "full_laguerre": "7.78250223341584428e-12",
+        "kind": "self_1",
+        "self_laguerre": "-1.49130918219351315e-11",
+        "t": "0.5",
+        "x": "39.5"
+      }
+    ],
+    "scope": "Numerical witnesses only. The eventual failure of every finite theta truncation follows exactly from its uncancelled boundary jet."
+  },
+  "proof_boundary": "This artifact derives an exact theta primitive, boundary identity, half-transform formula, and bilateral Gamma/Mellin reconstruction of xi. It proves that every finite theta truncation retains an odd endpoint jet and therefore has an eventually negative first Laguerre expression. Independent numerical witnesses also reject entrywise self/cross positivity. It does not prove the required infinite theta remainder positive, strict Fourier positivity, Wiener density, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "Every positive Newman-kernel summand is an arithmetic translate of one profile.",
+      "diagnostics": null,
+      "formula": "phi_n(u)=n^(-1/2)*phi_1(u+(log n)/2)",
+      "id": "ntssg_01_summand_shift",
+      "proof_boundary": "Exact positive-half-line identity only.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The base profile is a second-order differential image of a simpler theta summand.",
+      "diagnostics": {
+        "h": "h(u)=exp(u-pi*exp(4u))",
+        "identity": "phi_1(u)=(h''(u)-h(u))/8",
+        "theta_primitive": "R(u)=sum_(n>=1) exp(u-pi*n^2*exp(4u)), Phi(u)=(R''(u)-R(u))/8 for u>=0"
+      },
+      "formula": "phi_1(u)=(h''(u)-h(u))/8",
+      "id": "ntssg_02_differential_profile",
+      "proof_boundary": "Exact differential identity; no spectral sign follows.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The theta functional equation fixes the endpoint term that survives two integrations by parts.",
+      "diagnostics": {
+        "derivative_at_one": "theta'(1)=-theta(1)/4",
+        "evenness_cancellation": "Phi^(2j+1)(0)=0 for every j>=0",
+        "primitive_boundary": "R'(0)=-1/2",
+        "theta_equation": "theta(a)=a^(-1/2)*theta(1/a)"
+      },
+      "formula": "R'(0)=-1/2",
+      "id": "ntssg_03_theta_boundary",
+      "proof_boundary": "Exact modular boundary identity for the infinite theta sum.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The Xi cosine transform is a boundary constant minus a quadratic multiplier of one theta-primitive transform.",
+      "diagnostics": {
+        "boundary_term": "integral_0^infinity R''(u)cos(xu)du=-R'(0)-x^2*C(x)",
+        "definition": "C(x)=integral_0^infinity R(u)*cos(xu)du",
+        "identity": "H_0(x)=1/16-(1+x^2)*C(x)/8",
+        "interpretation": "The constant 1/16 cancels the complete algebraic high-frequency expansion of (1+x^2)C(x)/8; the Xi transform is beyond-all-orders in any finite endpoint-jet truncation."
+      },
+      "formula": "H_0(x)=1/16-(1+x^2)*C(x)/8",
+      "id": "ntssg_04_half_transform",
+      "proof_boundary": "Exact at t=0 only; the cancellation is not a positivity factorization.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The endpoint-subtracted theta primitive has an exact deformation for every target heat time.",
+      "diagnostics": {
+        "curvature_reduction": "With A_t=D_t[C_t], L_t(x)=(A_t'(x)^2-(A_t(x)+1/2)*A_t''(x))/64.",
+        "definition": "C_t(x)=integral_0^infinity exp(tu^2)*R(u)*cos(xu)du",
+        "expanded": "H_t(x)=1/16+(-4*t^2*C_t''(x)+4*t*x*C_t'(x)+(2*t-1-x^2)*C_t(x))/8",
+        "identity": "H_t(x)=1/16+D_t[C_t](x)/8",
+        "integration_by_parts": "For w=exp(tu^2)cos(xu), integral R''w=-R'(0)+integral Rw''; w'(0)=0 and R'(0)=-1/2.",
+        "multiple_contact": "A_t(c)=-1/2 and A_t'(c)=0 exactly characterize a multiple real zero of H_t.",
+        "operator": "D_t=-4*t^2*partial_x^2+4*t*x*partial_x+(2*t-1-x^2)"
+      },
+      "formula": "H_t(x)=1/16+(-4*t^2*C_t''(x)+4*t*x*C_t'(x)+(2*t-1-x^2)*C_t(x))/8",
+      "id": "ntssg_04b_deformed_half_transform",
+      "proof_boundary": "Exact transform identity; the resulting curvature inequality remains open.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The bilateral transform of the base profile is an explicit Gamma factor.",
+      "diagnostics": null,
+      "formula": "Qhat(z)=-(1+z^2)/32*pi^(-(1+i*z)/4)*Gamma((1+i*z)/4)",
+      "id": "ntssg_05_mellin_transform",
+      "proof_boundary": "Bilateral profile transform before theta regularization.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Arithmetic shift summation reconstructs xi itself, not a zero-free spectral factor.",
+      "diagnostics": {
+        "dirichlet_sum": "sum_(n>=1)n^(-1/2)*exp(-i*z*log(n)/2)=zeta(s)",
+        "identity": "Qhat(z)*zeta(s)=xi(s)/4",
+        "real_axis_normalization": "2*H_0(z)=xi((1+i*z)/2)/4",
+        "scope": "The shifted-profile spectral assembly reconstructs the completed zeta function itself; it is not a new zero-free factor or square.",
+        "spectral_parameter": "s=(1+i*z)/2"
+      },
+      "formula": "Qhat(z)*zeta(s)=xi(s)/4",
+      "id": "ntssg_06_xi_reconstruction",
+      "proof_boundary": "Exact in the absolute shift region and then by analytic continuation; no new zero information.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion_gate"
+    },
+    {
+      "claim": "The full first Laguerre expression splits into self and pairwise cross forms of theta summands.",
+      "diagnostics": {
+        "cross": "B[f,g]=2*f'*g'-f*g''-g*f''",
+        "self": "L[f]=f'^2-f*f''",
+        "sum": "L[sum_n H_n]=sum_n L[H_n]+sum_(m<n)B[H_m,H_n]",
+        "summand_transform": "H_(n,t)(x)=integral_0^infinity exp(tu^2)*phi_n(u)*cos(xu)du"
+      },
+      "formula": "L[sum_n H_n]=sum_n L[H_n]+sum_(m<n)B[H_m,H_n]",
+      "id": "ntssg_07_laguerre_pair_expansion",
+      "proof_boundary": "Exact quadratic expansion only; individual terms have no fixed sign.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Every finite theta truncation retains a strictly positive first odd endpoint jet.",
+      "diagnostics": {
+        "derivative_roots": [
+          "15/8 - sqrt(105)/8",
+          "sqrt(105)/8 + 15/8"
+        ],
+        "partial_boundary_jet": "A_N=f_(N,t)'(0)=sum_(n=1)^N phi_n'(0)=-sum_(n>N)phi_n'(0)>0, independent of t",
+        "partial_kernel": "f_(N,t)(u)=exp(tu^2)*sum_(n=1)^N phi_n(u)",
+        "signs": "phi_1'(0)>0, phi_n'(0)<0 for n>=2, and sum_(n>=1)phi_n'(0)=Phi'(0)=0",
+        "summand_derivative": "phi_n'(0)=pi*n^2*exp(-pi*n^2)*(-8*pi^2*n^4+30*pi*n^2-15)"
+      },
+      "formula": "A_N=f_(N,t)'(0)=sum_(n=1)^N phi_n'(0)=-sum_(n>N)phi_n'(0)>0, independent of t",
+      "id": "ntssg_08_finite_boundary_jet",
+      "proof_boundary": "Exact for every finite N and fixed real t.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "Every finite theta truncation has an eventually negative first Laguerre expression.",
+      "diagnostics": {
+        "conclusion": "Every finite theta truncation fails the global first-Laguerre criterion at every fixed real t; the failure escapes to higher frequency as N grows.",
+        "cosine_transform": "H_(N,t)(x)=integral_0^infinity f_(N,t)(u)cos(xu)du",
+        "jet": "H_(N,t)(x)=-A_N/x^2+O_(N,t)(x^-4), H_(N,t)'(x)=2A_N/x^3+O(x^-5), H_(N,t)''(x)=-6A_N/x^4+O(x^-6)",
+        "laguerre_tail": "L[H_(N,t)](x)=-2*A_N^2/x^6+O_(N,t)(x^-8)<0 for all sufficiently large x"
+      },
+      "formula": "L[H_(N,t)](x)=-2*A_N^2/x^6+O_(N,t)(x^-8)<0 for all sufficiently large x",
+      "id": "ntssg_09_finite_laguerre_obstruction",
+      "proof_boundary": "Rejects finite summand promotion only; the infinite theta kernel cancels the boundary jet.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "The first self term and the first cross term are already negative at moderate frequencies while the sampled full sum is positive.",
+      "diagnostics": {
+        "coarse_nodes_per_panel": 240,
+        "fine_nodes_per_panel": 420,
+        "independent_mpmath_60_digit_references": {
+          "t=0,x=10.5,cross12": "-9.4724043513340160018636035506062629341749836398503e-11",
+          "t=0,x=16.75,cross12": "-5.4558070422955992764707732998584777381880650231387e-9",
+          "t=0,x=39.5,full": "8.11247906572043557130219629418246417508307194e-12",
+          "t=0,x=39.5,self1": "-1.4353955305833860032713529652751068355630815282954e-11",
+          "t=1/2,x=10.5,cross12": "-2.0098927299713753769802078261423676200344093158894e-10",
+          "t=1/2,x=16.75,cross12": "-5.5716576800419615230365387281576815152175562856393e-9",
+          "t=1/2,x=39.5,full": "7.78250223515801376811879379711178859057922847e-12",
+          "t=1/2,x=39.5,self1": "-1.4913091820093501126902730280059671578053292653959e-11"
+        },
+        "max_relative_coarse_fine_delta_negative_witnesses": "1.21579106855854902e-10",
+        "method": "Composite Gauss-Legendre quadrature on [0,4], analytic Fourier derivative moments, Phi summands n<=15 for full-kernel comparison",
+        "rows": [
+          {
+            "cross_laguerre": "-9.47240435132102504e-11",
+            "first_jet": [
+              "3.23524744763410838e-02",
+              "-4.12220455611088301e-03",
+              "9.04493633752682035e-05"
+            ],
+            "full_laguerre": "1.40662152605622681e-05",
+            "kind": "cross_1_2",
+            "second_jet": [
+              "2.05906923636616128e-05",
+              "-1.61703176250871524e-07",
+              "-1.34315485758552257e-08"
+            ],
+            "t": "0",
+            "x": "10.5"
+          },
+          {
+            "cross_laguerre": "-5.45580704229529059e-09",
+            "first_jet": [
+              "1.09512225142310293e-02",
+              "-2.45931719389438138e-03",
+              "3.46963464094433556e-04"
+            ],
+            "full_laguerre": "2.24311139002416139e-06",
+            "kind": "cross_1_2",
+            "second_jet": [
+              "1.93414948975843289e-05",
+              "-2.33950202143855462e-07",
+              "-9.52126748451893162e-09"
+            ],
+            "t": "0",
+            "x": "16.75"
+          },
+          {
+            "first_jet": [
+              "-1.95243888431441270e-05",
+              "4.87018973637762128e-06",
+              "-1.95000743336407692e-06"
+            ],
+            "full_laguerre": "8.11247906394412734e-12",
+            "kind": "self_1",
+            "self_laguerre": "-1.43539553077037718e-11",
+            "t": "0",
+            "x": "39.5"
+          },
+          {
+            "cross_laguerre": "-2.00989272997002332e-10",
+            "first_jet": [
+              "3.23057811242477844e-02",
+              "-4.16508766244555548e-03",
+              "9.63592368252321038e-05"
+            ],
+            "full_laguerre": "1.42347941351116568e-05",
+            "kind": "cross_1_2",
+            "second_jet": [
+              "2.05974128126813091e-05",
+              "-1.61970263720247324e-07",
+              "-1.34502555541855265e-08"
+            ],
+            "t": "0.5",
+            "x": "10.5"
+          },
+          {
+            "cross_laguerre": "-5.57165768004164914e-09",
+            "first_jet": [
+              "1.07762768524888621e-02",
+              "-2.45771199059220853e-03",
+              "3.52833160983215732e-04"
+            ],
+            "full_laguerre": "2.23254898230694973e-06",
+            "kind": "cross_1_2",
+            "second_jet": [
+              "1.93462571685242899e-05",
+              "-2.34296985529952856e-07",
+              "-9.52781465577431525e-09"
+            ],
+            "t": "0.5",
+            "x": "16.75"
+          },
+          {
+            "first_jet": [
+              "-1.85470374982172495e-05",
+              "4.62555834937945278e-06",
+              "-1.95766476823800695e-06"
+            ],
+            "full_laguerre": "7.78250223341584428e-12",
+            "kind": "self_1",
+            "self_laguerre": "-1.49130918219351315e-11",
+            "t": "0.5",
+            "x": "39.5"
+          }
+        ],
+        "scope": "Numerical witnesses only. The eventual failure of every finite theta truncation follows exactly from its uncancelled boundary jet."
+      },
+      "formula": "B[H_1,H_2]<0 and L[H_1]<0 at the recorded endpoint-time samples",
+      "id": "ntssg_10_summand_sign_witnesses",
+      "proof_boundary": "Independent high-precision numerical witnesses; the finite-N theorem is exact.",
+      "readiness": "diagnostic_validated",
+      "role": "numerical_counter_witness"
+    },
+    {
+      "claim": "A viable theta proof must cancel the infinite endpoint jet before seeking spectral positivity.",
+      "diagnostics": null,
+      "formula": "For A_t=D_t[C_t], prove A_t'(x)^2-(A_t(x)+1/2)*A_t''(x)>0 for every real x and 0<t<=1/2 using the positive theta primitive R and its modular identity. The formula already performs the infinite odd-endpoint cancellation; the missing step is a noncircular curvature estimate. Finite summand squares and pairwise-positive cross terms are closed routes.",
+      "id": "ntssg_11_infinite_cancellation_handoff",
+      "proof_boundary": "Open infinite-sum theorem; not strict Laguerre positivity, Wiener density, RH, or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "sources": [
+    "outputs/jensen_window_pf_newman_correlation_hierarchy_gaussian_mixture_gate.md",
+    "outputs/jensen_window_pf_negative_lambda_kernel_summand_shift_lemma.md",
+    "outputs/jensen_window_pf_negative_lambda_relative_gaussian_endpoint_parity_repair_matrix.md",
+    "https://dlmf.nist.gov/20.7",
+    "https://dlmf.nist.gov/25.4"
+  ],
+  "status": "exact theta differential/Mellin reduction with finite-summand spectral obstruction"
+}

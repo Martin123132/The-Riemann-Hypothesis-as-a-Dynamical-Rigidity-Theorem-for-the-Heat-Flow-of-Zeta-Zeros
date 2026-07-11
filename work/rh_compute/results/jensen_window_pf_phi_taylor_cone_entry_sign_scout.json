@@ -1,0 +1,137 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_phi_taylor_cone_entry_sign_scout.py",
+  "coefficient_enclosures": [
+    {
+      "coefficient": "c0",
+      "enclosure": "[0.4466969004671234440869846670547091132204 +/- 2.44e-41]",
+      "finite_sum": "[0.4466969004671234440869846670547091132204 +/- 2.44e-41]",
+      "id": "phi_taylor_c0",
+      "sign": "positive",
+      "tail_radius": "595366777496992142162026167729099573445394144998065237523340910307950822169308580e-305",
+      "taylor_degree": 0
+    },
+    {
+      "coefficient": "c2",
+      "enclosure": "[-16.73050077470325686679012435077297959908 +/- 2.45e-39]",
+      "finite_sum": "[-16.73050077470325686679012435077297959908 +/- 2.45e-39]",
+      "id": "phi_taylor_c2",
+      "sign": "negative",
+      "tail_radius": "1356521496703920033003879075513705074132515331816826474433723135823401761277229136e-299",
+      "taylor_degree": 2
+    },
+    {
+      "coefficient": "c4",
+      "enclosure": "[270.7209444851414291692625428649721885115 +/- 4.48e-38]",
+      "finite_sum": "[270.7209444851414291692625428649721885115 +/- 4.48e-38]",
+      "id": "phi_taylor_c4",
+      "sign": "positive",
+      "tail_radius": "518975586278544957248719223541064325843082678317110569814996979891697992404200348e-293",
+      "taylor_degree": 4
+    },
+    {
+      "coefficient": "c6",
+      "enclosure": "[-2254.921151385262962904875830379485325230 +/- 3.67e-37]",
+      "finite_sum": "[-2254.921151385262962904875830379485325230 +/- 3.67e-37]",
+      "id": "phi_taylor_c6",
+      "sign": "negative",
+      "tail_radius": "800078878940402487368236494435213569575479407264920093789672681973357961136083496e-288",
+      "taylor_degree": 6
+    }
+  ],
+  "date": "2026-07-06",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_phi_taylor_cone_entry_sign_scout.py",
+  "invariants": [
+    "The certificate uses the Phi series at u=0 only.",
+    "The tail bound is attached as an explicit Arb error ball.",
+    "The signs support only the fixed-k asymptotic route.",
+    "The cone-entry theorem target remains open.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_phi_taylor_cone_entry_sign_scout",
+  "parameters": {
+    "certified_taylor_degrees": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "precision_bits": 256,
+    "tail_cutoff_n": 12,
+    "tail_safety_factor": 4
+  },
+  "polynomial_rows": {
+    "P0": {
+      "1": "-3/1",
+      "2": "2/1"
+    },
+    "P2": {
+      "1": "-75/2",
+      "2": "165/1",
+      "3": "-112/1",
+      "4": "16/1"
+    },
+    "P4": {
+      "1": "-625/8",
+      "2": "5155/4",
+      "3": "-8512/3",
+      "4": "5176/3",
+      "5": "-352/1",
+      "6": "64/3"
+    },
+    "P6": {
+      "1": "-3125/48",
+      "2": "87011/24",
+      "3": "-891254/45",
+      "4": "1289582/45",
+      "5": "-46288/3",
+      "6": "31712/9",
+      "7": "-1024/3",
+      "8": "512/45"
+    }
+  },
+  "proof_boundary": "Certified local Taylor-combination signs only. This confirms the fixed-k sign inputs isolated by the cone-entry asymptotic target, but it does not prove zeta cone entry, does not control the asymptotic remainder uniformly in k, does not prove the full infinite or collared finite ratio cone, does not prove jwpf_06, and leaves RH and Lambda <= 0 unsettled.",
+  "ratio_enclosures": {
+    "a=c2/c0": "[-37.45380985900664233683260390434643972954 +/- 2.43e-39]",
+    "b=c4/c0": "[606.0506446363092395662753197700082678903 +/- 9.08e-39]",
+    "c=c6/c0": "[-5047.989249594588274331383288623799728021 +/- 3.85e-37]"
+  },
+  "sign_combinations": [
+    {
+      "certified_sign": "negative",
+      "consequence": "For fixed k, the first nonzero correction to log x_k at order T^-2 points strictly below the upper wall x_k=1.",
+      "enclosure": "[-190.6865836820046823899449624711272165733 +/- 5.91e-39]",
+      "formula": "2*b-a^2=(2*c4*c0-c2^2)/c0^2",
+      "id": "ptces_01_upper_wall_sign",
+      "proof_boundary": "Local Taylor sign only; it does not give a uniform-in-k cone-entry theorem or a controlled asymptotic remainder.",
+      "role": "fixed_k_upper_wall_subleading_sign"
+    },
+    {
+      "certified_sign": "positive",
+      "consequence": "For fixed k, the first nonzero correction to log(x_{k+1}/x_k) at order T^-3 points toward increasing contractions.",
+      "enclosure": "[825.9976249272062741326759643225349914950 +/- 2.19e-38]",
+      "formula": "2*(a^3-3*a*b+3*c)",
+      "id": "ptces_02_monotone_wall_sign",
+      "proof_boundary": "Local Taylor sign only; it does not give a uniform-in-k cone-entry theorem or a controlled asymptotic remainder.",
+      "role": "fixed_k_monotone_wall_subleading_sign"
+    }
+  ],
+  "source_target": "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+  "status": "finite_taylor_sign_certificate",
+  "summary": {
+    "certified_signs": 2,
+    "coefficient_balls": 4,
+    "main_finding": "The local Phi Taylor combinations required by the fixed-k large-negative-lambda route have the desired certified signs. The remaining bridge is not these local signs, but controlled asymptotic remainders and uniform-in-k or collared finite cone coverage.",
+    "ready_to_apply_rows": 0,
+    "target_closing": false
+  },
+  "taylor_model": {
+    "coefficient_formula": "c_j=sum_{n>=1} exp(-pi*n^2)*P_j(pi*n^2)",
+    "normalizations": {
+      "a": "c2/c0",
+      "b": "c4/c0",
+      "c": "c6/c0"
+    },
+    "phi_term": "(2*q^2*exp(9*u)-3*q*exp(5*u))*exp(-q*(exp(4*u)-1)), q=pi*n^2",
+    "tail_bound": "For each polynomial degree m, bound sum_{n>N} n^(2*m)*exp(-pi*n^2) by first/(1-r), where first=(N+1)^(2*m)*exp(-pi*(N+1)^2) and r=((N+2)/(N+1))^(2*m)*exp(-pi*(2*N+3))."
+  }
+}

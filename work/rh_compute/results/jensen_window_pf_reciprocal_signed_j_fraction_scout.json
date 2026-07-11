@@ -1,0 +1,67 @@
+{
+  "date": "2026-07-06",
+  "finite_grid": {
+    "all_ordinary_lambda_rows_negative": true,
+    "all_signed_hankel_rows_positive": true,
+    "degrees": [
+      2,
+      8
+    ],
+    "dps": 520,
+    "lambdas": [
+      "0",
+      "1e-6",
+      "1e-4",
+      "1e-2",
+      "1e-1"
+    ],
+    "ordinary_lambda_negative_rows": 2940,
+    "ordinary_lambda_rows": 2940,
+    "row_log": "work\\rh_compute\\results\\jensen_window_pf_reciprocal_signed_j_fraction_lamgrid_n0_n20_d2_d8_dps520.jsonl",
+    "shifts": [
+      0,
+      20
+    ],
+    "signed_hankel_positive_rows": 3675,
+    "signed_hankel_rows": 3675,
+    "signed_lambda_positive_rows": 2940,
+    "source_enclosures": [
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k0_k9.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k10_k20.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k21_k32.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k33_k48.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k49_k64.jsonl"
+    ]
+  },
+  "invariants": [
+    "Every signed Hankel row in the finite grid must be positive and separated from zero.",
+    "Every ordinary Jacobi lambda row in the finite grid must be negative and separated from zero.",
+    "Every signed kappa_n=-lambda_n row in the finite grid must be positive and separated from zero.",
+    "The scout is finite evidence only and does not mark the signed-fraction route ready to apply."
+  ],
+  "kind": "jensen_window_pf_reciprocal_signed_j_fraction_scout",
+  "proof_boundary": "Signed J-fraction Hankel-signature diagnostic only; not a proof of a signed continued-fraction theorem, the all-order column recurrence, Schur positivity, Jensen-window PF-infinity, RH, or Lambda <= 0.",
+  "summary": {
+    "main_finding": "On the finite Arb grid, reciprocal coefficient Hankel determinants obey (-1)^(r(r-1)/2) Delta_r > 0 through r=d, and the ordinary Jacobi lambda_n parameters are negative through n=d-1, so the signed parameters kappa_n=-lambda_n are positive.  This supports a signed-J-fraction target but does not supply the missing all-order theorem.",
+    "ready_to_apply_rows": 0,
+    "signed_hankel_rows": 3675,
+    "signed_lambda_rows": 2940,
+    "symbolic_rows": 2,
+    "target_closing": false
+  },
+  "symbolic_rows": [
+    {
+      "id": "signed_hankel_signature_to_signed_j_lambda",
+      "parity_check": "n(n+1)/2 + (n-1)(n-2)/2 = n^2 - n + 1 is odd.",
+      "proof_boundary": "Formal sign implication only; not a proof that the determinant signature holds for all zeta windows.",
+      "signed_parameter": "kappa_n = -lambda_n > 0",
+      "statement": "If Delta_r has sign (-1)^(r(r-1)/2) for r=1..N+1, then ordinary Jacobi lambda_n=Delta_{n+1}Delta_{n-1}/Delta_n^2 is negative for n=1..N."
+    },
+    {
+      "id": "endpoint_real_rooted_model_signature",
+      "proof_boundary": "Endpoint consistency only; using real-rootedness as an input would be circular for jwpf_06.",
+      "statement": "The same determinant signature is compatible with the endpoint model H(t)=prod_i(1+alpha_i*t), alpha_i>=0, where E(t)=prod_i(1-alpha_i*t)^(-1)."
+    }
+  ],
+  "target_route_row": "rp_09_signed_or_modified_continued_fraction"
+}

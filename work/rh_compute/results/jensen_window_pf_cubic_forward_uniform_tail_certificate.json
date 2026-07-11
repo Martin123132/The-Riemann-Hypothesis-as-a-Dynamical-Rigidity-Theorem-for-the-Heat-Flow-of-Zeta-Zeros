@@ -1,0 +1,157 @@
+{
+  "kind": "jensen_window_pf_cubic_forward_uniform_tail_certificate",
+  "date": "2026-07-10",
+  "status": "exact all-shift cubic forward-propagation theorem with open higher-degree handoff",
+  "proof_boundary": "This artifact proves the reciprocal-defect tail uniformly on compact forward heat intervals and propagates every shifted degree-3 Jensen polynomial through lambda=0. It does not prove degree 4 or higher, PF-infinity, RH, or Lambda <= 0.",
+  "sources": [
+    "outputs/jensen_window_pf_cubic_reciprocal_defect_invariance_lemma.md",
+    "outputs/jensen_window_pf_cubic_m100_tail_entry_certificate.md",
+    "outputs/jensen_window_pf_heat_flow_infinite_cone_invariance_certificate.md"
+  ],
+  "diagnostics": {
+    "flow": {
+      "q_flow": "q_k'=r_k*((2*k-1)*q_k-(2*k+3)*(q_k^3-q_k)/q_(k+1)^2)",
+      "defect_to_q_identity": "q_k'=-q_k^3*d_k'/2",
+      "increment": "g_k=q_(k+1)-q_k",
+      "next_increment_derivative": "2*(2*k + 5)*(g + q - 1)**2*(g + q + 1)**2/((g + q)*(g + j + q)**3)",
+      "next_increment_monotonicity": "partial(g_k'/r_k)/partial(g_(k+1))>0",
+      "same_neighbor_polynomial": "-6*g**3*k + g**3 - 14*g**2*k*q + 5*g**2*q - 6*g*k*q**2 - 2*g*k + 13*g*q**2 - 5*g - 2*k*q + 6*q**3 - 5*q",
+      "same_neighbor_identity": "g_k'/r_k=(1-g_k^2)*P_k/((q_k+g_k)^2*(q_k+2*g_k)^2) when g_(k+1)=g_k",
+      "positive_majorant": "g**3 + 5*g**2*q + 13*g*q**2 + 6*q**3",
+      "majorant_gap": "6*g**3*k + 14*g**2*k*q + 6*g*k*q**2 + 2*g*k + 5*g + 2*k*q + 5*q",
+      "weighted_source_bound": "sqrt(k)*g_k'/r_k<=6+13/sqrt(k)+5/k+1/k^(3/2)<7",
+      "rational_remainder_cap": "3843/4913",
+      "rational_margin_to_one": "1070/4913",
+      "coercive_coupling_cap": "1286/319",
+      "coercive_coupling_margin": "309/319"
+    },
+    "initial_tail": {
+      "tail_start": 319,
+      "source_bound": "g_k<=(100000/99999)^2*(5*k+6)^(3/2)/k^2, k>=319",
+      "weighted_bound": "sqrt(k)*g_k<=(100000/99999)^2*(5+6/k)^(3/2)<12",
+      "endpoint_squared_margin": 57062151807283727967356093296,
+      "monotonicity": "(5+6/k)^(3/2) decreases for k>=319"
+    }
+  },
+  "rows": [
+    {
+      "id": "cfut_01_strict_reciprocal_defects",
+      "role": "exact_analytic_input",
+      "readiness": "ready_to_apply",
+      "claim": "Strict moment log-concavity makes every reciprocal-defect coordinate finite along the actual heat trajectory.",
+      "formula": "0<d_k(lambda)=1-x_k(lambda), q_k=d_k^(-1/2)",
+      "proof_boundary": "Strict coordinate regularity only.",
+      "diagnostics": null
+    },
+    {
+      "id": "cfut_02_exact_q_flow",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The defect heat equation induces an exact one-sided evolution equation for q_k.",
+      "formula": "q_k'=r_k*((2*k-1)*q_k-(2*k+3)*(q_k^3-q_k)/q_(k+1)^2)",
+      "proof_boundary": "Exact coordinate identity only.",
+      "diagnostics": {
+        "increment": "g_k=q_(k+1)-q_k"
+      }
+    },
+    {
+      "id": "cfut_03_neighbor_monotonicity",
+      "role": "exact_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "The increment vector field is strictly increasing in the next increment.",
+      "formula": "partial(g_k'/r_k)/partial(g_(k+1))>0",
+      "proof_boundary": "One-sided cooperativity only.",
+      "diagnostics": {
+        "derivative": "2*(2*k + 5)*(g + q - 1)**2*(g + q + 1)**2/((g + q)*(g + j + q)**3)"
+      }
+    },
+    {
+      "id": "cfut_04_weighted_source_cap",
+      "role": "exact_analytic_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "Inside the cubic cone, the vector field at a nonincreasing increment barrier has a uniform weighted upper bound.",
+      "formula": "sqrt(k)*g_k'/r_k<=6+13/sqrt(k)+5/k+1/k^(3/2)<7",
+      "proof_boundary": "Conditional on 0<=g_k<=1 and q_k>=sqrt(k).",
+      "diagnostics": {
+        "q_flow": "q_k'=r_k*((2*k-1)*q_k-(2*k+3)*(q_k^3-q_k)/q_(k+1)^2)",
+        "defect_to_q_identity": "q_k'=-q_k^3*d_k'/2",
+        "increment": "g_k=q_(k+1)-q_k",
+        "next_increment_derivative": "2*(2*k + 5)*(g + q - 1)**2*(g + q + 1)**2/((g + q)*(g + j + q)**3)",
+        "next_increment_monotonicity": "partial(g_k'/r_k)/partial(g_(k+1))>0",
+        "same_neighbor_polynomial": "-6*g**3*k + g**3 - 14*g**2*k*q + 5*g**2*q - 6*g*k*q**2 - 2*g*k + 13*g*q**2 - 5*g - 2*k*q + 6*q**3 - 5*q",
+        "same_neighbor_identity": "g_k'/r_k=(1-g_k^2)*P_k/((q_k+g_k)^2*(q_k+2*g_k)^2) when g_(k+1)=g_k",
+        "positive_majorant": "g**3 + 5*g**2*q + 13*g*q**2 + 6*q**3",
+        "majorant_gap": "6*g**3*k + 14*g**2*k*q + 6*g*k*q**2 + 2*g*k + 5*g + 2*k*q + 5*q",
+        "weighted_source_bound": "sqrt(k)*g_k'/r_k<=6+13/sqrt(k)+5/k+1/k^(3/2)<7",
+        "rational_remainder_cap": "3843/4913",
+        "rational_margin_to_one": "1070/4913",
+        "coercive_coupling_cap": "1286/319",
+        "coercive_coupling_margin": "309/319"
+      }
+    },
+    {
+      "id": "cfut_05_initial_weighted_tail",
+      "role": "exact_analytic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The lambda=-100 entry theorem supplies a strict weighted reciprocal-increment tail.",
+      "formula": "sqrt(k)*g_k(-100)<12 for every k>=319",
+      "proof_boundary": "Entry-parameter tail only.",
+      "diagnostics": {
+        "tail_start": 319,
+        "source_bound": "g_k<=(100000/99999)^2*(5*k+6)^(3/2)/k^2, k>=319",
+        "weighted_bound": "sqrt(k)*g_k<=(100000/99999)^2*(5+6/k)^(3/2)<12",
+        "endpoint_squared_margin": 57062151807283727967356093296,
+        "monotonicity": "(5+6/k)^(3/2) decreases for k>=319"
+      }
+    },
+    {
+      "id": "cfut_06_weighted_supersolution",
+      "role": "exact_infinite_maximum_principle",
+      "readiness": "ready_to_apply",
+      "claim": "On every interval where the cubic cone holds, a componentwise weighted supersolution propagates the entry tail.",
+      "formula": "g_k(lambda)<=(12+7*R_L*(lambda+100))/sqrt(k), R_L=sup_[-100,L] r_0",
+      "proof_boundary": "Bootstrap estimate on an interval where 0<=g_k<=1.",
+      "diagnostics": {
+        "coercive_regularization": "G_k^epsilon=(12+7*R_L*t)/sqrt(k)+epsilon*k*exp(5*R_L*t); since g_k<=1, every first contact is at finite k.",
+        "coefficient_growth": "partial g_k'/partial g_(k+1)<=2*R_L*(2*k+5), while H_(k+1)-H_k=H_k/k and 2*(2*k+5)/k<5 for k>=319.",
+        "first_contact_conclusion": "At contact, the base source is below 7*R_L/sqrt(k) and the perturbation coupling is strictly below 5*R_L*H_k=H_k', contradicting first contact."
+      }
+    },
+    {
+      "id": "cfut_07_forward_uniform_tail",
+      "role": "exact_analytic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The reciprocal-defect increment tends to zero uniformly on every compact forward heat interval.",
+      "formula": "sup_(lambda in [-100,L]) g_k(lambda)<=(12+7*R_L*(L+100))/sqrt(k)->0",
+      "proof_boundary": "Degree-3 tail theorem only.",
+      "diagnostics": null
+    },
+    {
+      "id": "cfut_08_cubic_continuation",
+      "role": "theorem_composition",
+      "readiness": "ready_to_apply",
+      "claim": "The entry theorem, weighted tail, and inward frontier condition propagate the full cubic cone to every finite lambda>=-100.",
+      "formula": "0<=q_(k+1)(lambda)-q_k(lambda)<=1 for every k>=1",
+      "proof_boundary": "All-shift degree-3 propagation only.",
+      "diagnostics": null
+    },
+    {
+      "id": "cfut_09_lambda_zero_cubics",
+      "role": "theorem_composition",
+      "readiness": "ready_to_apply",
+      "claim": "Every shifted degree-3 Jensen polynomial of the lambda=0 coefficient sequence is hyperbolic.",
+      "formula": "Disc(J_(3,n)(.;0))>=0 for every n>=0",
+      "proof_boundary": "Degree 3 at lambda=0 only; not all degrees.",
+      "diagnostics": null
+    },
+    {
+      "id": "cfut_10_higher_degree_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "A coupled invariant for degree four and then a genuinely all-degree mechanism are still required.",
+      "formula": "degree 3 propagation + missing higher-minor hierarchy",
+      "proof_boundary": "Open higher-degree bridge; not PF-infinity, RH, or Lambda <= 0.",
+      "diagnostics": null
+    }
+  ]
+}

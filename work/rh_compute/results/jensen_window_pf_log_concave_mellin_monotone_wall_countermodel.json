@@ -1,0 +1,75 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_log_concave_mellin_monotone_wall_countermodel.py",
+  "date": "2026-07-10",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_log_concave_mellin_monotone_wall_countermodel.py",
+  "kind": "jensen_window_pf_log_concave_mellin_monotone_wall_countermodel",
+  "proof_boundary": "This exact Arb countermodel blocks promotion from generic log-concavity and Berwald-Borell to adjacent-k monotonicity. It is not the zeta kernel, does not disprove zeta monotone contractions, and does not prove or disprove RH or Lambda <= 0.",
+  "rows": [
+    {
+      "claim": "f(y)=exp(-5*y)*1_[0,1](y) is an integrable log-concave density on [0,infinity).",
+      "diagnostics": null,
+      "id": "lcmmc_01_log_concave_density",
+      "proof_boundary": "Abstract density only; not the Riemann/Newman kernel.",
+      "role": "exact_input"
+    },
+    {
+      "claim": "H(p)=integral_0^1 y^(p-1)*exp(-5*y)dy/Gamma(p)=gamma_lower(p,5)/(5^p*Gamma(p)).",
+      "diagnostics": null,
+      "id": "lcmmc_02_normalized_mellin_closed_form",
+      "proof_boundary": "Exact incomplete-Gamma evaluation for p>0.",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The first Gamma-normalized Mellin contraction lies strictly between zero and one.",
+      "diagnostics": {
+        "x_1_ball": "[0.9585809898433196985470820434295664830224263410373725967025382207166573 +/- 3.49E-71]",
+        "x_1_upper": "9.585809898433196985470820434295664830224263410373725967025382207166574E-1"
+      },
+      "id": "lcmmc_03_first_contraction",
+      "proof_boundary": "One Arb-enclosed abstract contraction.",
+      "role": "interval_evaluation"
+    },
+    {
+      "claim": "The second Gamma-normalized Mellin contraction lies strictly between zero and one.",
+      "diagnostics": {
+        "x_2_ball": "[0.9312101606377941403101410236154778849453880349801908190968314813658826 +/- 4.53E-71]",
+        "x_2_upper": "9.312101606377941403101410236154778849453880349801908190968314813658827E-1"
+      },
+      "id": "lcmmc_04_second_contraction",
+      "proof_boundary": "One Arb-enclosed abstract contraction.",
+      "role": "interval_evaluation"
+    },
+    {
+      "claim": "The strict Arb inequality x_2<x_1 disproves any generic implication from log-concavity to adjacent-k contraction monotonicity.",
+      "diagnostics": {
+        "x_2_minus_x_1_ball": "[-0.02737082920552555823694101981408859807703830605718177760570673935077462 +/- 1.26E-73]",
+        "x_2_minus_x_1_upper": "-2.737082920552555823694101981408859807703830605718177760570673935077461E-2"
+      },
+      "id": "lcmmc_05_monotone_wall_violation",
+      "proof_boundary": "Exact abstract countermodel gate; not a failure of the actual zeta sequence.",
+      "role": "countermodel_gate"
+    },
+    {
+      "claim": "A proof of x_(k+1)>=x_k must use structure beyond kernel log-concavity and Berwald-Borell.",
+      "diagnostics": null,
+      "id": "lcmmc_06_zeta_specific_handoff",
+      "proof_boundary": "No claim against a zeta-specific recurrence, determinant identity, or saddle theorem.",
+      "role": "non_promotion_gate"
+    }
+  ],
+  "source_monotone_target": "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+  "source_upper_wall_certificate": "outputs/jensen_window_pf_kernel_mellin_upper_wall_certificate.md",
+  "status": "exact interval countermodel gate",
+  "summary": {
+    "countermodel_rows": 6,
+    "log_concave_density_rows": 1,
+    "main_finding": "The compactly supported log-concave density exp(-5y) on [0,1] has Gamma-normalized Mellin contractions x_1 and x_2 inside the Berwald-Borell upper wall but x_2<x_1. Therefore the remaining adjacent-k wall is not a generic consequence of log-concavity and needs zeta-specific structure.",
+    "monotone_wall_violations": 1,
+    "upper_wall_rows": 2,
+    "x_1_lower": "9.585809898433196985470820434295664830224263410373725967025382207166572E-1",
+    "x_1_upper": "9.585809898433196985470820434295664830224263410373725967025382207166574E-1",
+    "x_2_lower": "9.312101606377941403101410236154778849453880349801908190968314813658825E-1",
+    "x_2_minus_x_1_upper": "-2.737082920552555823694101981408859807703830605718177760570673935077461E-2",
+    "x_2_upper": "9.312101606377941403101410236154778849453880349801908190968314813658827E-1"
+  }
+}

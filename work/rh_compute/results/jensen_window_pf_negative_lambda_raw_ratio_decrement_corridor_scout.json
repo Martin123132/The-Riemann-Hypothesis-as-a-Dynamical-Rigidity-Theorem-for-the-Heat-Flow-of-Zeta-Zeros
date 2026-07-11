@@ -1,0 +1,221 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_raw_ratio_decrement_corridor_scout.py",
+  "date": "2026-07-07",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k200.jsonl"
+  ],
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_raw_ratio_decrement_corridor_scout.py",
+  "invariants": [
+    "Only exact algebra rows are available_exact.",
+    "No finite row is ready_to_apply.",
+    "The decrement-corridor recurrence remains zeta-specific and open all-k.",
+    "Raw cone occupancy plus raw monotone decrease is explicitly blocked as a shortcut.",
+    "Theta monotonicity is finite shape evidence only.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_raw_ratio_decrement_corridor_scout",
+  "matrix_rows": [
+    {
+      "claim": "The raw adaptive corridor is exactly a two-sided decrement bound for D_k=R_k-R_(k+1).",
+      "formula": "2*(R_k-1)/(2*k+1) <= D_k <= 4*R_k/(2*k+1)^2",
+      "id": "nlrdc_01_exact_decrement_corridor",
+      "proof_boundary": "Exact algebra only; no zeta-specific inequality is proved.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_bridge_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md"
+      ]
+    },
+    {
+      "claim": "The decrement corridor width is positive exactly under the upper raw wall.",
+      "formula": "4*R_k/(2*k+1)^2 - 2*(R_k-1)/(2*k+1) = 2*(2*k+1-(2*k-1)*R_k)/(2*k+1)^2",
+      "id": "nlrdc_02_exact_width_equivalence",
+      "proof_boundary": "Exact algebra only; proving the upper raw wall for zeta remains open.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_bridge_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.md"
+      ]
+    },
+    {
+      "claim": "The k200 negative-lambda prefix satisfies raw decrease, both decrement walls, and decrement-corridor occupancy on 594/594 adjacent rows.",
+      "id": "nlrdc_03_k200_decrement_corridor",
+      "proof_boundary": "Finite prefix evidence only; not an all-k recurrence theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_pattern",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_bridge_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_cone_entry_prefix_k200_scout.md"
+      ]
+    },
+    {
+      "claim": "The normalized corridor coordinate theta_k=(D_k-L_k)/(U_k-L_k) stays in (0,1), decreases with k on each checked lambda, and increases as lambda becomes more negative.",
+      "formula": "theta_k=(R_k-R_(k+1)-2*(R_k-1)/(2*k+1))/(4*R_k/(2*k+1)^2-2*(R_k-1)/(2*k+1))",
+      "id": "nlrdc_04_theta_coordinate_shape",
+      "proof_boundary": "Finite shape diagnostic only; not a monotone theta theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_pattern"
+    },
+    {
+      "claim": "Raw cone occupancy plus R_(k+1)<R_k does not imply the scaled-upper side of the decrement corridor.",
+      "id": "nlrdc_05_monotone_decrease_shortcut_blocked",
+      "proof_boundary": "Exact counterexample gate only; not evidence against the zeta prefix.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_counterexample",
+      "witness": {
+        "D_k": "1/2",
+        "R_k": "2",
+        "R_k_upper_wall": "3",
+        "R_next": "3/2",
+        "R_next_upper_wall": "5/3",
+        "corridor_lower": "10/9",
+        "corridor_upper": "4/3",
+        "decrement_lower": "2/3",
+        "decrement_upper": "8/9",
+        "k": 1,
+        "lower_margin_D_minus_lower": "-1/6",
+        "raw_cone_holds_at_k_and_next": true,
+        "raw_decrease_holds": true,
+        "upper_margin_upper_minus_D": "7/18"
+      }
+    },
+    {
+      "claim": "Raw cone occupancy plus R_(k+1)<R_k also does not imply the monotone-bridge lower side of the decrement corridor.",
+      "id": "nlrdc_06_overfast_decrease_shortcut_blocked",
+      "proof_boundary": "Exact counterexample gate only; not evidence against the zeta prefix.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_counterexample",
+      "witness": {
+        "D_k": "1",
+        "R_k": "2",
+        "R_k_upper_wall": "3",
+        "R_next": "1",
+        "R_next_upper_wall": "5/3",
+        "corridor_lower": "10/9",
+        "corridor_upper": "4/3",
+        "decrement_lower": "2/3",
+        "decrement_upper": "8/9",
+        "k": 1,
+        "lower_margin_D_minus_lower": "1/3",
+        "raw_cone_holds_at_k_and_next": true,
+        "raw_decrease_holds": true,
+        "upper_margin_upper_minus_D": "-1/9"
+      }
+    },
+    {
+      "claim": "A zeta-specific proof could promote the finite theta-shape into a recurrence or comparison principle that forces 0<theta_k<1 on the tail.",
+      "gap": "No all-k formula or interval-safe comparison for theta_k is proved.",
+      "id": "nlrdc_07_live_theta_recurrence_route",
+      "proof_boundary": "Live theorem-search route only.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_defect_recurrence_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_adaptive_envelope_obligations.md"
+      ]
+    },
+    {
+      "claim": "A promoted route must prove the upper raw wall and the two decrement inequalities for actual zeta moments, with a finite/collar handoff and no endpoint PF or RH input.",
+      "id": "nlrdc_08_open_requirements",
+      "proof_boundary": "Open analytic requirement only.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.md"
+      ]
+    },
+    {
+      "claim": "Any recurrence upgrade must preserve the exact counterexamples: raw cone, Stieltjes positivity, and monotone decrease are insufficient by themselves.",
+      "id": "nlrdc_09_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a proof.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Exact algebra plus finite theorem-search diagnostics only. The artifact rewrites the zeta-specific raw corridor as a decrement recurrence and records finite theta-shape evidence plus exact counterexamples, but it does not prove the raw-corridor theorem, does not prove cone entry, does not prove jwpf_06, and does not prove RH or Lambda <= 0.",
+  "source_adaptive_obligations": "outputs/jensen_window_pf_negative_lambda_adaptive_envelope_obligations.md",
+  "source_raw_bridge": "outputs/jensen_window_pf_negative_lambda_raw_moment_bridge_matrix.md",
+  "source_raw_corridor_target": "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+  "source_raw_obstruction": "outputs/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.md",
+  "status": "exact finite theorem-search diagnostic",
+  "summary": {
+    "adjacent_rows": 594,
+    "checked_ratio_max": 199,
+    "coefficient_k_max": 200,
+    "decrement_corridor_rows": 594,
+    "exact_available_rows": 2,
+    "exact_counterexample_rows": 2,
+    "finite_pattern_rows": 2,
+    "lambdas": [
+      "-25.0",
+      "-50.0",
+      "-100.0"
+    ],
+    "live_routes": 1,
+    "lower_decrement_rows": 594,
+    "main_finding": "The zeta-specific raw-corridor target can be attacked as a decrement recurrence: prove 2*(R_k-1)/(2*k+1) <= R_k-R_(k+1) <= 4*R_k/(2*k+1)^2. The k200 prefix satisfies this on 594 adjacent rows, and the normalized theta coordinate is k-monotone on 591 rows and lambda-ordered on 396 rows. Exact raw-cone monotone counterexamples show that the recurrence must use zeta-specific structure.",
+    "matrix_rows": 9,
+    "max_decrement": {
+      "k": 1,
+      "lam": "-100.0",
+      "sample": "1.320822265677606423E+0"
+    },
+    "max_theta": {
+      "k": 1,
+      "lam": "-100.0",
+      "sample": "9.087309076587821269E-1"
+    },
+    "min_decrement": {
+      "k": 198,
+      "lam": "-25.0",
+      "sample": "1.404613962816195222E-5"
+    },
+    "min_decrement_corridor_width": {
+      "k": 198,
+      "lam": "-100.0",
+      "sample": "1.112322974466921331E-5"
+    },
+    "min_lower_decrement_margin": {
+      "k": 198,
+      "lam": "-25.0",
+      "sample": "2.241640098067743212E-6"
+    },
+    "min_theta": {
+      "k": 198,
+      "lam": "-25.0",
+      "sample": "1.644126617921189501E-1"
+    },
+    "min_theta_k_drop": {
+      "k": 197,
+      "lam": "-25.0",
+      "sample": "3.722452214840226847E-4"
+    },
+    "min_theta_lambda_gap": {
+      "k": 198,
+      "lam": "-25.0->-50.0",
+      "sample": "5.048218901591782104E-2"
+    },
+    "min_upper_decrement_margin": {
+      "k": 198,
+      "lam": "-100.0",
+      "sample": "7.465690906027845625E-6"
+    },
+    "open_requirement_rows": 1,
+    "raw_decrease_rows": 594,
+    "ready_to_apply_rows": 0,
+    "target_closing": false,
+    "theta_k_monotone_rows": 591,
+    "theta_k_monotone_total_rows": 591,
+    "theta_lambda_order_rows": 396,
+    "theta_lambda_order_total_rows": 396,
+    "theta_unit_rows": 594,
+    "upper_decrement_rows": 594
+  }
+}

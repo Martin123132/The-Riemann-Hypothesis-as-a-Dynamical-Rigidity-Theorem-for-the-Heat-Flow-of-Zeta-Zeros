@@ -1,0 +1,177 @@
+{
+  "kind": "jensen_window_pf_monotone_contraction_theorem_target",
+  "date": "2026-07-06",
+  "status": "open_theorem_target",
+  "target_id": "target_monotone_contraction_zeta_coefficients",
+  "parent_route": "jensen_window_pf_cauchy_binet_cone_frontier_matrix",
+  "parent_frontier_rows": [
+    "d3_column_recurrence_m8",
+    "d4_column_recurrence_m6"
+  ],
+  "proof_boundary": "Open theorem target only. This artifact states the analytic monotone-contraction theorem that would turn the finite stress pattern into proof-search machinery for bounded hard column-frontier rows. It does not prove an all-m column theorem, does not construct a Cauchy-Binet kernel or determinant integral, does not prove jwpf_06, and does not prove Lambda <= 0.",
+  "normalization": {
+    "mu_2k_lambda": "2 * integral_0^infty u^(2k) exp(lambda*u^2) Phi(u) du",
+    "A_k_lambda": "mu_2k(lambda) * k! / (2k)!",
+    "x_k": "(A_{k+1}/A_k) / (A_k/A_{k-1})",
+    "adjacent_log_concavity": "0 < x_k <= 1",
+    "monotone_contraction": "x_{k+1} >= x_k",
+    "log_difference_form": "Delta^2 log A_{k-1} <= 0 and Delta^3 log A_{k-1} >= 0",
+    "polynomial_form": "A_{k+2}*A_k^3 >= A_{k+1}^3*A_{k-1}",
+    "raw_moment_adjacent_factor": "x_k(A) = ((2*k-1)/(2*k+1)) * (mu_{2k+2}*mu_{2k-2}/mu_{2k}^2)",
+    "raw_moment_monotone_equivalent": "mu_{2k+4}*mu_{2k}^3/(mu_{2k+2}^3*mu_{2k-2}) >= ((2*k-1)*(2*k+3))/(2*k+1)^2"
+  },
+  "theorem_contract": [
+    "Prove A_k(lambda)>0 for the required zeta heat-flow regime from the Phi/Newman-kernel integral, not from endpoint PF, RH, or Lambda <= 0.",
+    "Prove 0 < x_k <= 1 and x_{k+1} >= x_k for every required k, shift, and lambda regime used by the Jensen-window PF bridge.",
+    "Keep the factorial normalization A_k=mu_{2k} k!/(2k)! explicit; raw moment log-convexity alone is the wrong object.",
+    "Give a noncircular analytic mechanism: a total-positivity kernel, an integral inequality, or a closed heat-flow differential inequality.",
+    "Explain why the exact rational log-concavity countermodel and constructed ratio-condition extensions are outside the zeta-specific hypotheses.",
+    "State exactly whether the theorem proves only bounded/frontier column rows or a uniform all-m column recurrence; monotone contractions alone are blocked as an all-m claim by the exact degree-7 m=11 counterexample.",
+    "Do not promote finite stress, endpoint hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0 as inputs."
+  ],
+  "target_rows": [
+    {
+      "id": "mct_01_exact_monotone_contraction_statement",
+      "role": "open_statement",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_monotone_contraction_frontier_scout.md",
+        "outputs/jensen_window_pf_monotone_contraction_stress.md"
+      ],
+      "claim_if_proved": "For every required zeta heat-flow coefficient prefix, x_{k+1}>=x_k in addition to adjacent log-concavity.",
+      "gap": "The result is presently finite-stressed and exact for selected frontier polynomials, but not analytically proved for all k, shifts, or lambda values.",
+      "acceptance_test": "Produce a proof of A_{k+2}*A_k^3 >= A_{k+1}^3*A_{k-1} from the Phi/Newman-kernel representation with explicit uniform hypotheses.",
+      "proof_boundary": "Open theorem statement only."
+    },
+    {
+      "id": "mct_02_factorial_normalized_moment_reduction",
+      "role": "exact_reduction",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "work/rh_compute/scripts/acb_coefficient_enclosures.py",
+        "outputs/jensen_window_pf_monotone_contraction_stress.md"
+      ],
+      "claim_if_proved": "The normalized inequality can be studied as a raw even-moment ratio with an explicit factorial threshold.",
+      "gap": "The reduction is exact algebra, not a positivity proof; ordinary moment log-convexity does not by itself imply the normalized target.",
+      "acceptance_test": "Use the raw moment threshold mu_{2k+4}*mu_{2k}^3/(mu_{2k+2}^3*mu_{2k-2}) >= ((2*k-1)*(2*k+3))/(2*k+1)^2 without dropping the factorial factor.",
+      "proof_boundary": "Exact reduction only."
+    },
+    {
+      "id": "mct_03_total_positivity_kernel_route",
+      "role": "live_route",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_theorem_machinery_fit_matrix.md",
+        "outputs/jensen_window_pf_structural_ansatz_matrix.md",
+        "outputs/jensen_window_pf_cauchy_binet_cone_frontier_matrix.md"
+      ],
+      "claim_if_proved": "A zeta-specific total-positive kernel or variation-diminishing representation could force the required alternating log-difference signs.",
+      "gap": "No kernel is currently constructed that yields the third log-difference inequality for A_k(lambda).",
+      "acceptance_test": "Construct a TP/TP3/TP4 kernel or determinant identity whose minors are exactly the monotone-contraction gaps and whose positivity follows from Phi data.",
+      "proof_boundary": "Live route only; no kernel exists yet."
+    },
+    {
+      "id": "mct_04_heat_flow_differential_inequality_route",
+      "role": "live_route",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+        "outputs/jensen_window_pf_heat_flow_ratio_cone_invariance_lemma.md",
+        "outputs/jensen_window_pf_heat_flow_boundary_threshold_lemma.md",
+        "outputs/jensen_window_pf_heat_flow_monotone_closure_scout.md",
+        "outputs/jensen_window_pf_monotone_contraction_stress.md",
+        "outputs/core_proof_programme_gates.md"
+      ],
+      "claim_if_proved": "A closed differential inequality in lambda could propagate the monotone-contraction signs over the required heat-flow regime.",
+      "gap": "The cone-entry asymptotic target now isolates the remaining theorem: prove that the actual zeta heat-flow coefficient sequence enters the full infinite or collared finite ratio cone at a suitable lambda and that the flow argument is analytically legitimate. The ratio-cone invariance lemma gives exact conditional inward-pointing boundary algebra, the boundary threshold is discharged by raw moment log-convexity, and the closure scout gives finite positive bracket diagnostics, but cone entry remains open without endpoint Jensen hyperbolicity, RH, or Lambda <= 0.",
+      "acceptance_test": "Close the cone-entry asymptotic target noncircularly, including the required uniform-in-k or collared finite-tail theorem.",
+      "proof_boundary": "Live route only; conditional cone invariance is exact, but the zeta cone-entry theorem target remains open."
+    },
+    {
+      "id": "mct_05_plain_stieltjes_moment_logconvexity",
+      "role": "insufficient_route",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "work/rh_compute/scripts/acb_coefficient_enclosures.py"
+      ],
+      "claim_if_proved": "Raw moment log-convexity supplies only the standard Stieltjes moment inequality.",
+      "gap": "The target is an inequality for factorial-normalized moments with a sharper raw moment threshold; plain log-convexity is too weak and points at the wrong object.",
+      "acceptance_test": "Do not accept a proof that stops at mu_{2k+2}*mu_{2k-2} >= mu_{2k}^2.",
+      "proof_boundary": "Insufficient route, not a bridge theorem."
+    },
+    {
+      "id": "mct_06_endpoint_pf_or_laguerre_polya_route",
+      "role": "circular_route",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md",
+        "outputs/jensen_window_pf_positive_readout_theorem_target.md"
+      ],
+      "claim_if_proved": "Endpoint PF, Jensen hyperbolicity, or Laguerre-Polya membership would imply many coefficient inequalities.",
+      "gap": "As an input this is circular for the missing Newman-direction bridge.",
+      "acceptance_test": "Use endpoint PF/LP only as an output after a noncircular proof, never as a premise.",
+      "proof_boundary": "Circular as input."
+    },
+    {
+      "id": "mct_07_generic_ratio_conditions",
+      "role": "rejected_route",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_ratio_condition_scout.md",
+        "outputs/jensen_window_pf_contraction_log_concavity_scout.md",
+        "outputs/jensen_window_pf_log_concavity_frontier_scout.md",
+        "outputs/jensen_window_pf_monotone_contraction_all_m_counterexample.md"
+      ],
+      "claim_if_proved": "Generic adjacent log-concavity, decreasing contractions, second-order log-concavity, or contraction log-concavity might look nearby.",
+      "gap": "Existing exact countermodel and constructed-extension scouts reject these nearby generic ratio conditions as standalone bridge lemmas. The all-m counterexample also rejects monotone contractions alone as a uniform all-m column-recurrence theorem.",
+      "acceptance_test": "Only use ratio conditions that separate from the rational countermodel and are proved from zeta-specific structure.",
+      "proof_boundary": "Rejected generic-ratio route."
+    },
+    {
+      "id": "mct_08_finite_stress_support",
+      "role": "finite_evidence",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_monotone_contraction_stress.md",
+        "work/rh_compute/results/jensen_window_pf_monotone_contraction_stress_lamgrid_d3_d12_k64_summary.json"
+      ],
+      "claim_if_proved": "The finite zeta grid strongly supports the monotone-contraction sign pattern.",
+      "gap": "Finite Arb rows do not prove all k, all shifts, all lambda values, or analytic uniformity.",
+      "acceptance_test": "Promote only after a symbolic or analytic proof explains the 2875/2875 finite pattern.",
+      "proof_boundary": "Finite evidence only."
+    },
+    {
+      "id": "mct_09_column_frontier_application",
+      "role": "conditional_application",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_monotone_contraction_frontier_scout.md",
+        "outputs/jensen_window_pf_column_recurrence_contract.md",
+        "outputs/jensen_window_pf_cauchy_binet_cone_frontier_matrix.md"
+      ],
+      "claim_if_proved": "Combined with the exact Bernstein and subdivision certificates, the theorem would cover the recorded bounded column-frontier polynomials.",
+      "gap": "This application is bounded and column-focused unless strengthened beyond the monotone-contraction cone; the exact degree-7 m=11 counterexample shows monotone contractions alone do not extend to all m.",
+      "acceptance_test": "After proving the theorem, verify exactly which column recurrence rows and which all-shape obligations are covered.",
+      "proof_boundary": "Conditional application only, not jwpf_06."
+    }
+  ],
+  "summary": {
+    "target_rows": 9,
+    "ready_to_apply_rows": 0,
+    "live_routes": 2,
+    "exact_reduction_rows": 1,
+    "rejected_or_insufficient_rows": 3,
+    "finite_evidence_rows": 1,
+    "conditional_application_rows": 1,
+    "target_closing": false,
+    "main_finding": "The monotone-contraction route is now a precise open theorem target: prove Delta^3 log A_{k-1}(lambda)>=0, with the factorial-normalized moment threshold intact, from noncircular Phi/Newman-kernel structure. Finite stress supports it on 2875 rows and exact Bernstein/subdivision certificates show why it matters for bounded column-frontier rows, but the exact degree-7 m=11 counterexample blocks monotone contractions alone as an all-m column theorem and no analytic theorem is proved."
+  },
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The theorem target remains open_target.",
+    "Finite stress is not promoted to an analytic theorem.",
+    "Monotone contractions alone are not promoted to an all-m column recurrence theorem.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs.",
+    "The raw moment factorial threshold must remain explicit."
+  ]
+}

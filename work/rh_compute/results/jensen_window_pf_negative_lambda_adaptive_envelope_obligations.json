@@ -1,0 +1,129 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_adaptive_envelope_obligations.py",
+  "date": "2026-07-06",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_adaptive_envelope_obligations.py",
+  "invariants": [
+    "No row is ready_to_apply for the adaptive target.",
+    "The lower threshold is exact input, not a proof of the whole exact cone.",
+    "The upper wall x_k<=1 remains open on the needed tail.",
+    "The monotone bridge x_(k+1)>=x_k remains open on the needed tail.",
+    "The fixed half-width and one-third buffers remain finite-rejected.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_adaptive_envelope_obligations",
+  "obligation_rows": [
+    {
+      "claim": "With x_k=(A_{k-1}*A_{k+1})/A_k^2, d_k=1-x_k, and s_k=((2*k+1)/2)*d_k.",
+      "formula": "s_k=((2*k+1)/2)*(1-x_k)",
+      "id": "nlaeo_01_scaled_defect_coordinates",
+      "proof_boundary": "Exact coordinate reindexing only; not a tail theorem.",
+      "readiness": "available_exact",
+      "role": "exact_reindexing"
+    },
+    {
+      "claim": "The scaled upper cone wall s_k<=1 is equivalent to x_k>=(2*k-1)/(2*k+1), which is already supplied by the boundary-threshold lemma.",
+      "formula": "1-s_k=((2*k+1)*x_k-(2*k-1))/2",
+      "id": "nlaeo_02_lower_wall_equivalence",
+      "proof_boundary": "Exact equivalence plus existing exact lower-threshold input; does not prove x_k<=1 or monotonicity.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_heat_flow_boundary_threshold_lemma.md"
+      ]
+    },
+    {
+      "claim": "The fixed half-width and one-third buffers are stronger thresholds x_k>=2*k/(2*k+1) and x_k>=1-2/(3*(2*k+1)); finite k200 stress rejects them as global routes.",
+      "formula": "s_k<=1/2 iff x_k>=2*k/(2*k+1); s_k<=1/3 iff x_k>=1-2/(3*(2*k+1))",
+      "id": "nlaeo_03_fixed_buffer_thresholds",
+      "proof_boundary": "Exact threshold translation plus finite rejection only; not a replacement proof.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k200_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_half_width_tail_target.md"
+      ]
+    },
+    {
+      "claim": "The lower side 0<=s_k is exactly the adjacent log-concavity upper-wall condition x_k<=1.",
+      "formula": "s_k>=0 iff x_k<=1",
+      "id": "nlaeo_04_nonnegative_defect_upper_wall",
+      "proof_boundary": "Exact equivalence only; adjacent log-concavity for the needed zeta tail remains open.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md"
+      ]
+    },
+    {
+      "claim": "The separate monotone defect bridge d_(k+1)<=d_k is exactly x_(k+1)>=x_k.",
+      "formula": "d_k-d_(k+1)=x_(k+1)-x_k",
+      "id": "nlaeo_05_monotone_defect_bridge",
+      "proof_boundary": "Exact equivalence only; monotone contractions remain an open theorem target.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+        "outputs/jensen_window_pf_heat_flow_ratio_cone_invariance_lemma.md"
+      ]
+    },
+    {
+      "claim": "The observed k-increase of scaled defect is equivalent to 2+(2*k+1)*x_k-(2*k+3)*x_(k+1)>=0.",
+      "formula": "s_(k+1)-s_k=(2+(2*k+1)*x_k-(2*k+3)*x_(k+1))/2",
+      "id": "nlaeo_06_scaled_k_monotone_identity",
+      "proof_boundary": "Exact identity only; the all-k inequality remains open.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_adaptive_envelope_matrix.md"
+      ]
+    },
+    {
+      "claim": "If s_k is eventually nondecreasing and has limsup bounded by an explicit E_lambda<1, then the scaled upper cone wall follows on the tail.",
+      "formula": "s_k nondecreasing and limsup s_k<=E_lambda<1 => s_k<=E_lambda<1",
+      "id": "nlaeo_07_monotone_envelope_implication",
+      "proof_boundary": "Conditional route only; no limiting envelope or all-k monotonicity is proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "conditional_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_adaptive_envelope_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_adaptive_scaled_defect_target.md"
+      ]
+    },
+    {
+      "claim": "The finite lambda-order pattern would need a continuous negative-lambda monotonicity theorem, such as s_k(-T1)>=s_k(-T2) for 25<=T1<=T2 on the required ray.",
+      "formula": "25<=T1<=T2 and k>=K => s_k(-T1)>=s_k(-T2)",
+      "id": "nlaeo_08_lambda_order_requirement",
+      "proof_boundary": "Open theorem-search requirement only; the finite lambda grid does not imply continuous lambda monotonicity.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_adaptive_envelope_matrix.md"
+      ]
+    },
+    {
+      "claim": "A promoted proof must combine exact lower-threshold input, x_k<=1, x_(k+1)>=x_k, and a noncircular upper envelope, while preserving fixed-buffer rejection gates.",
+      "formula": "lower threshold exact + upper wall + monotone bridge + envelope < 1",
+      "id": "nlaeo_09_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a mathematical proof.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate"
+    }
+  ],
+  "proof_boundary": "Exact algebraic obligation diagnostic only. It translates the adaptive scaled-defect route into exact coefficient-ratio inequalities and records which subclaims remain open, but it does not prove adjacent log-concavity, monotone contractions, the limiting envelope, cone entry, jwpf_06, RH, or Lambda <= 0.",
+  "source_adaptive_target": "outputs/jensen_window_pf_negative_lambda_adaptive_scaled_defect_target.md",
+  "source_boundary_threshold": "outputs/jensen_window_pf_heat_flow_boundary_threshold_lemma.md",
+  "source_envelope_matrix": "outputs/jensen_window_pf_negative_lambda_adaptive_envelope_matrix.md",
+  "source_monotone_contraction_target": "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+  "status": "exact algebraic obligation diagnostic",
+  "summary": {
+    "acceptance_gate_rows": 1,
+    "conditional_route_rows": 1,
+    "exact_available_rows": 3,
+    "main_finding": "The adaptive scaled-defect target decomposes exactly: the lower threshold s_k<=1 is already the boundary-threshold lemma, while 0<=s_k is x_k<=1, the monotone bridge is x_(k+1)>=x_k, and scaled k-monotonicity is 2+(2*k+1)*x_k-(2*k+3)*x_(k+1)>=0. The remaining proof burden is a noncircular upper-wall/monotone-envelope theorem compatible with the finite half-width and one-third rejection gates.",
+    "obligation_rows": 9,
+    "open_requirement_rows": 3,
+    "ready_to_apply_rows": 0,
+    "rejected_route_rows": 1,
+    "target_closing": false
+  }
+}

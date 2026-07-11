@@ -1,0 +1,218 @@
+{
+  "kind": "jensen_window_pf_signed_j_fraction_theorem_target",
+  "date": "2026-07-06",
+  "target_route_row": "rp_09_signed_or_modified_continued_fraction",
+  "parent_target": "jwpf_06_sign_regular_to_jensen_pf_conversion",
+  "proof_boundary": "Signed J-fraction theorem target specification only; not a proof of the all-order determinant signature, the all-order column recurrence, Schur positivity, Jensen-window PF-infinity, RH, or Lambda <= 0.",
+  "objects": {
+    "h_j": "binom(d,j) * A_{n+j}(0)",
+    "g_j": "h_j / h_0",
+    "H(t)": "1 + g_1*t + ... + g_d*t^d",
+    "E(t)": "1 / H(-t)",
+    "mu_m": "[t^m] E(t)",
+    "Delta_r": "det(mu_{i+j}) for 0<=i,j<r",
+    "Delta_r^*": "determinant formed by shifting only the final Hankel column to mu_{i+r}",
+    "Q_r": "Delta_r^* / Delta_r with Q_0=0",
+    "beta_n": "Q_{n+1} - Q_n",
+    "lambda_n": "Delta_{n+1} Delta_{n-1} / Delta_n^2 with Delta_0=1",
+    "kappa_n": "-lambda_n"
+  },
+  "missing_theorem": {
+    "id": "signed_j_fraction_column_recurrence_theorem",
+    "hypotheses": [
+      "For every degree d>=2 and shift n>=0, H(t) is the actual normalized zeta heat-flow Jensen-window polynomial at lambda=0.",
+      "The reciprocal coefficients mu_m=[t^m]1/H(-t) have nonzero Hankel determinants Delta_r for all r needed by the J-fraction.",
+      "The signed Hankel signature (-1)^(r(r-1)/2) Delta_r > 0 holds for every r>=1, or an equivalent signed J-fraction parameter statement kappa_n=-lambda_n>0 holds for every n>=1.",
+      "The ordinary diagonal Jacobi beta parameters, defined by the last-column shifted determinant formula beta_n=Q_{n+1}-Q_n, have an all-order sign pattern compatible with the finite beta scout, or the proof explains why that finite beta pattern is not part of the required mechanism.",
+      "Additional Xi/Phi-specific analytic hypotheses are stated explicitly and do not assume Jensen-window PF-infinity, Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0."
+    ],
+    "desired_conclusion": [
+      "mu_m >= 0 for every m>=0, degree d, and shift n.",
+      "Equivalently, the normalized column recurrence coefficients are nonnegative for every size.",
+      "This proves only the column-shape recurrence subtarget unless separately lifted to all Schur/Toeplitz shapes."
+    ],
+    "acceptance_conditions": [
+      "An exact theorem statement with a proof or a cited theorem whose hypotheses are verified for the actual zeta windows.",
+      "All-degree and all-shift coverage, not only the finite d=2..8, n=0..20 grid.",
+      "A mechanism converting signed Hankel/J-fraction data to coefficientwise nonnegativity of E(t), not only to existence of a formal fraction.",
+      "No finite-prefix, endpoint real-rootedness, RH, Laguerre-Polya, or Jensen-hyperbolicity assumption as input.",
+      "A clear statement whether the theorem proves only column shapes or also supplies an all-Schur/Toeplitz lift."
+    ]
+  },
+  "fit_rows": [
+    {
+      "id": "sj_01_standard_positive_stieltjes_j_fraction",
+      "theorem_family": "ordinary positive Stieltjes/Jacobi S-fraction or J-fraction",
+      "verdict": "rejected_by_fraction_sign",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_reciprocal_fraction_scout.md",
+        "work/rh_compute/results/jensen_window_pf_reciprocal_fraction_scout.json"
+      ],
+      "fit": "Would be a clean coefficient-positivity mechanism if all ordinary fraction parameters were nonnegative.",
+      "gap_or_rejection": "The exact first signs are a_2=-g_2/g_1 and lambda_1=-g_2, so the standard positive theorem has the wrong sign for positive g_1,g_2.",
+      "next_action": "Keep this as a rejection gate; do not cite positive Stieltjes/Jacobi fraction machinery for E(t)."
+    },
+    {
+      "id": "sj_02_signed_j_fraction_signature",
+      "theorem_family": "signed J-fraction or oscillatory continued-fraction theorem",
+      "verdict": "open_missing_theorem",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_reciprocal_signed_j_fraction_scout.md",
+        "outputs/jensen_window_pf_reciprocal_signed_jacobi_beta_scout.md",
+        "work/rh_compute/results/jensen_window_pf_reciprocal_signed_j_fraction_scout.json"
+      ],
+      "fit": "The finite data exactly supports the signed signature (-1)^(r(r-1)/2) Delta_r>0, kappa_n=-lambda_n>0, and the sharper beta_0>0, beta_1<0, beta_n>0 diagonal pattern.",
+      "gap_or_rejection": "No theorem is currently identified that turns this signed signature into mu_m>=0 for every actual zeta window.",
+      "next_action": "Search for an oscillatory, sign-regular, or signed moment theorem matching this signature and the reciprocal finite-support setting."
+    },
+    {
+      "id": "sj_03_oscillatory_jacobi_matrix_after_sign_conjugation",
+      "theorem_family": "oscillatory or sign-regular Jacobi matrix after diagonal sign conjugation",
+      "verdict": "live_if_conjugation_theorem_proved",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_reciprocal_signed_jacobi_beta_scout.md",
+        "outputs/jensen_window_pf_oscillatory_resolvent_fit_matrix.md",
+        "outputs/jensen_window_pf_positive_readout_theorem_target.md",
+        "outputs/jensen_window_pf_positive_spectral_moment_obstruction.md",
+        "outputs/sign_regularity_theorem_map.md",
+        "outputs/sign_regularity_theorem_fit_matrix.md"
+      ],
+      "fit": "The negative ordinary lambda_n, positive kappa_n, and beta_0>0, beta_1<0, beta_n>0 diagonal pattern suggest a tightly constrained sign-conjugated tridiagonal or oscillatory matrix model.",
+      "gap_or_rejection": "The oscillatory/resolvent fit matrix rejects the standard shortcuts: entrywise nonnegative Jacobi powers fail by lambda_n<0 and beta_1<0, diagonal similarity preserves the closed-path signs, absolute-value majorants overshoot mu_2, classical oscillatory spectral conclusions lack a positive scalar readout, and the positive spectral moment obstruction rejects ordinary positive moment measures by Delta_2=-g_2.",
+      "next_action": "Use the positive-readout theorem target to search only for a noncircular positive spectral transform or an Xi/Phi-specific positive resolvent kernel whose scalar readout is exactly E(t) and proves mu_m>=0."
+    },
+    {
+      "id": "sj_04_production_matrix_or_lattice_path_model",
+      "theorem_family": "production matrix, Riordan, or lattice-path total-positivity model",
+      "verdict": "live_if_positive_model_proved",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_structural_ansatz_matrix.md",
+        "outputs/jensen_window_pf_reciprocal_motzkin_path_obstruction_scout.md",
+        "outputs/jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_scout.md",
+        "outputs/jensen_window_pf_state_space_sign_lift_obstruction_scout.md",
+        "outputs/jensen_window_pf_modified_signed_model_target.md",
+        "outputs/positive_schur_specialization_target.md"
+      ],
+      "fit": "A modified path model could turn the signed kappa_n into manifestly nonnegative weights after the correct transformation.",
+      "gap_or_rejection": "The raw ordinary Motzkin/J-fraction path model is rejected as manifest positivity by the mu_2 cancellation and beta_1 diagonal obstruction scout, global length-parity sign repair is rejected by same-length mixed-sign path witnesses, and the absolute-value sign-state cover is rejected at mu_2 by the gap 2*kappa_1>0; the modified signed-model target leaves only genuinely modified state-space, modified production/Riordan/network, oscillatory resolvent, and Xi/Phi positive-cancellation routes live conditionally.",
+      "next_action": "Use the finite signed-kappa, beta, Motzkin-obstruction, parity-lift obstruction, sign-lift obstruction, and modified signed-model target to fit a genuinely modified production matrix or state-space model, then reject it unless it proves all-order coefficient positivity."
+    },
+    {
+      "id": "sj_05_indefinite_moment_problem",
+      "theorem_family": "indefinite moment or Hankel determinant solvability",
+      "verdict": "language_only",
+      "source_artifacts": [
+        "outputs/sign_regularity_theorem_map.md"
+      ],
+      "fit": "Indefinite moment language can describe the alternating determinant signature.",
+      "gap_or_rejection": "Solvability or representation of an indefinite moment problem does not by itself imply coefficientwise nonnegativity of E(t), Jensen-window PF, or Laguerre-Polya membership.",
+      "next_action": "Use only as interpretation unless paired with an explicit positivity theorem."
+    },
+    {
+      "id": "sj_06_finite_signature_extrapolation",
+      "theorem_family": "finite signed-Hankel/J-fraction evidence",
+      "verdict": "finite_evidence_only",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_reciprocal_signed_j_fraction_scout.md",
+        "outputs/countermodel_library.md"
+      ],
+      "fit": "The finite grid is strong falsification pressure and gives the exact signs a theorem should explain.",
+      "gap_or_rejection": "Finite signature rows cannot be extrapolated to all degrees, shifts, or determinant orders.",
+      "next_action": "Use finite evidence to test theorem candidates, never as the theorem."
+    },
+    {
+      "id": "sj_07_endpoint_real_rooted_model",
+      "theorem_family": "real-negative-root endpoint model for H(t)",
+      "verdict": "circular_endpoint_only",
+      "source_artifacts": [
+        "outputs/jensen_window_sturm_pf_consequence.md",
+        "outputs/jensen_window_pf_reciprocal_signed_j_fraction_scout.md"
+      ],
+      "fit": "If H(t) already has nonpositive real roots, the reciprocal has a positive product model and the signed Hankel signature is compatible.",
+      "gap_or_rejection": "Using this as an input assumes the Jensen-window endpoint whose proof is the target.",
+      "next_action": "Use endpoint real-rootedness only as a consistency check for finite Sturm/PF windows."
+    }
+  ],
+  "source_anchors": [
+    {
+      "id": "local_signed_j_scout",
+      "url": "outputs/jensen_window_pf_reciprocal_signed_j_fraction_scout.md",
+      "use": "finite signed-Hankel and signed-lambda evidence"
+    },
+    {
+      "id": "local_signed_jacobi_beta_scout",
+      "url": "outputs/jensen_window_pf_reciprocal_signed_jacobi_beta_scout.md",
+      "use": "finite signed Jacobi diagonal beta-parameter evidence"
+    },
+    {
+      "id": "local_motzkin_obstruction_scout",
+      "url": "outputs/jensen_window_pf_reciprocal_motzkin_path_obstruction_scout.md",
+      "use": "finite obstruction to raw ordinary Motzkin/J-fraction manifest positivity"
+    },
+    {
+      "id": "local_motzkin_parity_lift_obstruction_scout",
+      "url": "outputs/jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_scout.md",
+      "use": "finite obstruction to global length-parity sign repairs of the raw Motzkin model"
+    },
+    {
+      "id": "local_state_space_sign_lift_obstruction_scout",
+      "url": "outputs/jensen_window_pf_state_space_sign_lift_obstruction_scout.md",
+      "use": "finite derived obstruction to absolute-value sign-state covers of the raw Motzkin model"
+    },
+    {
+      "id": "local_modified_signed_model_target",
+      "url": "outputs/jensen_window_pf_modified_signed_model_target.md",
+      "use": "classification of dead raw sign repairs and live modified signed-model candidates"
+    },
+    {
+      "id": "local_oscillatory_resolvent_fit_matrix",
+      "url": "outputs/jensen_window_pf_oscillatory_resolvent_fit_matrix.md",
+      "use": "fit/misfit matrix for oscillatory, sign-regular, and resolvent theorem shortcuts"
+    },
+    {
+      "id": "local_positive_readout_theorem_target",
+      "url": "outputs/jensen_window_pf_positive_readout_theorem_target.md",
+      "use": "positive scalar readout theorem target for the two surviving oscillatory/resolvent subroutes"
+    },
+    {
+      "id": "local_positive_spectral_moment_obstruction",
+      "url": "outputs/jensen_window_pf_positive_spectral_moment_obstruction.md",
+      "use": "ordinary positive moment-measure obstruction for the spectral-transform subroute"
+    },
+    {
+      "id": "structured_matrices_cf_root_localization",
+      "url": "https://epubs.siam.org/doi/10.1137/090781127",
+      "use": "theorem-ecosystem anchor for Hankel, continued fractions, total positivity, and root localization"
+    },
+    {
+      "id": "production_matrix_hankel_total_positivity",
+      "url": "https://arxiv.org/pdf/2202.03793",
+      "use": "production-matrix and Hankel-total-positivity ecosystem anchor"
+    }
+  ],
+  "kill_gates": [
+    "Reject any proof that uses only the finite d=2..8, n=0..20 signed J-fraction or signed Jacobi beta scout.",
+    "Reject any proof that uses the raw ordinary Motzkin/J-fraction path expansion as a manifestly nonnegative production matrix.",
+    "Reject any proof that repairs the raw ordinary Motzkin/J-fraction path expansion only by a global length-parity sign or diagonal sign conjugation.",
+    "Reject any proof that cites ordinary positive Stieltjes/Jacobi fractions for E(t) despite the negative first parameter.",
+    "Reject any proof that assumes endpoint real-rootedness, Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0.",
+    "Reject any proof that proves only formal existence of a signed fraction without coefficientwise nonnegativity of E(t).",
+    "Reject any proof that claims to close jwpf_06 from column recurrence positivity without an all-Schur/Toeplitz lift."
+  ],
+  "summary": {
+    "fit_rows": 7,
+    "open_missing_theorem_rows": 1,
+    "live_conditional_rows": 2,
+    "rejected_or_finite_rows": 3,
+    "ready_to_apply_rows": 0,
+    "target_closing": false,
+    "main_finding": "The signed J-fraction route now has a precise missing theorem: convert the all-order signed reciprocal-Hankel/Jacobi signature, now sharpened by the signed Jacobi beta pattern, raw Motzkin path obstruction, global parity-lift obstruction, state-space sign-lift obstruction, modified signed-model target, oscillatory/resolvent fit matrix, positive-readout theorem target, and positive spectral moment obstruction, into coefficientwise nonnegativity of E(t)=1/H(-t) for every actual zeta Jensen window, without using endpoint real-rootedness or finite extrapolation."
+  },
+  "invariants": [
+    "No fit row is ready_to_apply.",
+    "The standard positive Stieltjes/Jacobi fraction row remains rejected.",
+    "The signed J-fraction row remains open_missing_theorem.",
+    "Finite evidence rows cannot close the target.",
+    "The theorem target proves at most the column recurrence unless an all-Schur/Toeplitz lift is supplied."
+  ]
+}

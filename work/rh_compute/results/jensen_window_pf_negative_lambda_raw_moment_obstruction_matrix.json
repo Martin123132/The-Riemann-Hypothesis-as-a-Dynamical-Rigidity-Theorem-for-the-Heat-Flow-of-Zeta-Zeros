@@ -1,0 +1,170 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.py",
+  "date": "2026-07-06",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.py",
+  "invariants": [
+    "All counterexamples are positive two-atom Stieltjes moment sequences.",
+    "The gate is not evidence against the finite zeta prefix.",
+    "The upper raw wall remains zeta-specific and open all-k.",
+    "The adaptive corridor occupancy remains zeta-specific and open all-k.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix",
+  "matrix_rows": [
+    {
+      "claim": "Every measure delta_1+w*delta_a with w>0 and a>0 gives a positive Stieltjes moment sequence M_k=1+w*a^k, so raw moment log-convexity holds but stronger raw-wall/corridor claims may fail.",
+      "formula": "M_k=1+w*a^k; R_k=M_(k+1)*M_(k-1)/M_k^2",
+      "id": "nlrmo_01_two_atom_family",
+      "proof_boundary": "Exact countermodel family only; not a statement about the zeta heat-flow density.",
+      "role": "exact_countermodel_family",
+      "status": "guard_validated"
+    },
+    {
+      "claim": "A positive two-atom moment sequence can violate the upper raw wall R_k<=(2*k+1)/(2*k-1), hence can make x_k>1 and s_k<0.",
+      "id": "nlrmo_02_upper_raw_wall_failure",
+      "proof_boundary": "Blocks generic Stieltjes/raw-log-convexity proofs of the upper raw wall; not evidence against the zeta prefix.",
+      "role": "exact_counterexample",
+      "status": "guard_validated",
+      "witness": {
+        "R_k": "289/64",
+        "R_next": "514/289",
+        "corridor_lower": "1445/576",
+        "corridor_upper": "139/64",
+        "corridor_width": "-97/288",
+        "k": 1,
+        "lower_margin_R_next_minus_lower": "-121541/166464",
+        "measure": "delta_1 + (1/16)*delta_16",
+        "moments": [
+          "17/16",
+          "2",
+          "17",
+          "257"
+        ],
+        "raw_next_upper_slack": "-97/867",
+        "raw_next_upper_wall": "5/3",
+        "raw_upper_slack": "-97/64",
+        "raw_upper_wall": "3",
+        "s_k": "-97/128",
+        "s_next": "-97/578",
+        "s_next_minus_s_k": "21825/36992",
+        "upper_margin_upper_minus_R_next": "7275/18496",
+        "x_k": "289/192",
+        "x_next": "1542/1445",
+        "x_next_minus_x_k": "-121541/277440"
+      }
+    },
+    {
+      "claim": "Even when the raw upper wall holds at k=1 and k=2, the scaled-upper side of the adaptive corridor can fail.",
+      "id": "nlrmo_03_scaled_upper_corridor_failure",
+      "proof_boundary": "Blocks replacing scaled k-monotonicity by raw upper-wall checks alone.",
+      "role": "exact_counterexample",
+      "status": "guard_validated",
+      "witness": {
+        "R_k": "10/9",
+        "R_next": "27/25",
+        "corridor_lower": "50/81",
+        "corridor_upper": "28/27",
+        "corridor_width": "34/81",
+        "k": 1,
+        "lower_margin_R_next_minus_lower": "937/2025",
+        "measure": "delta_1 + (1)*delta_2",
+        "moments": [
+          "2",
+          "3",
+          "5",
+          "9"
+        ],
+        "raw_next_upper_slack": "44/75",
+        "raw_next_upper_wall": "5/3",
+        "raw_upper_slack": "17/9",
+        "raw_upper_wall": "3",
+        "s_k": "17/18",
+        "s_next": "22/25",
+        "s_next_minus_s_k": "-29/450",
+        "upper_margin_upper_minus_R_next": "-29/675",
+        "x_k": "10/27",
+        "x_next": "81/125",
+        "x_next_minus_x_k": "937/3375"
+      }
+    },
+    {
+      "claim": "Even when the raw upper wall holds at k=1 and k=2, the monotone-bridge lower side of the adaptive corridor can fail.",
+      "id": "nlrmo_04_monotone_lower_corridor_failure",
+      "proof_boundary": "Blocks replacing the monotone bridge by raw upper-wall checks alone.",
+      "role": "exact_counterexample",
+      "status": "guard_validated",
+      "witness": {
+        "R_k": "7/3",
+        "R_next": "61/49",
+        "corridor_lower": "35/27",
+        "corridor_upper": "13/9",
+        "corridor_width": "4/27",
+        "k": 1,
+        "lower_margin_R_next_minus_lower": "-68/1323",
+        "measure": "delta_1 + (1/3)*delta_9",
+        "moments": [
+          "4/3",
+          "4",
+          "28",
+          "244"
+        ],
+        "raw_next_upper_slack": "62/147",
+        "raw_next_upper_wall": "5/3",
+        "raw_upper_slack": "2/3",
+        "raw_upper_wall": "3",
+        "s_k": "1/3",
+        "s_next": "31/49",
+        "s_next_minus_s_k": "44/147",
+        "upper_margin_upper_minus_R_next": "88/441",
+        "x_k": "7/9",
+        "x_next": "183/245",
+        "x_next_minus_x_k": "-68/2205"
+      }
+    },
+    {
+      "claim": "The adaptive corridor width is positive exactly under the open upper raw wall.",
+      "formula": "U_k-L_k=2*(2*k+1-(2*k-1)*R_k)/(2*k+1)^2",
+      "id": "nlrmo_05_corridor_width_identity",
+      "proof_boundary": "Exact algebra only; positivity of the width for actual zeta coefficients remains an all-k requirement.",
+      "role": "exact_identity",
+      "status": "available_exact"
+    },
+    {
+      "claim": "The actual k200 negative-lambda zeta prefix satisfies 597/597 raw-cone rows and 594/594 adaptive corridor rows, showing the finite zeta data are special relative to the generic two-atom obstructions.",
+      "id": "nlrmo_06_zeta_prefix_contrast",
+      "proof_boundary": "Finite zeta contrast only; not an all-k raw-wall or corridor theorem.",
+      "role": "finite_contrast",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_bridge_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_cone_entry_prefix_k200_scout.md"
+      ],
+      "status": "finite_validated"
+    },
+    {
+      "claim": "A promoted proof must use zeta-specific structure to prove the upper raw wall and corridor occupancy; generic Stieltjes positivity, raw log-convexity, and finite prefix evidence are insufficient.",
+      "id": "nlrmo_07_acceptance_gate",
+      "proof_boundary": "Proof-safety gate only; not a mathematical proof of the zeta-specific theorem.",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_bridge_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_adaptive_scaled_defect_target.md"
+      ],
+      "status": "guard_validated"
+    }
+  ],
+  "proof_boundary": "Exact countermodel gate only. It blocks generic Stieltjes/raw-log-convexity promotions into the adaptive raw-moment wall or corridor, but it is not a claim about actual zeta coefficients, not an all-k theorem, not cone entry, not jwpf_06, and not Lambda <= 0.",
+  "source_adaptive_target": "outputs/jensen_window_pf_negative_lambda_adaptive_scaled_defect_target.md",
+  "source_cone_prefix": "outputs/jensen_window_pf_negative_lambda_cone_entry_prefix_k200_scout.md",
+  "source_raw_moment_bridge": "outputs/jensen_window_pf_negative_lambda_raw_moment_bridge_matrix.md",
+  "status": "exact countermodel gate",
+  "summary": {
+    "acceptance_gate_rows": 1,
+    "exact_counterexample_rows": 3,
+    "exact_identity_rows": 2,
+    "finite_contrast_rows": 1,
+    "main_finding": "Generic positive Stieltjes/raw-moment structure does not prove the adaptive raw wall or corridor. Exact two-atom measures can violate the upper raw wall, the scaled-upper corridor side, or the monotone-bridge lower corridor side, even while raw log-convexity holds. The actual zeta k200 prefix remains finite-compatible, so the missing proof must be zeta-specific and all-k.",
+    "matrix_rows": 7,
+    "ready_to_apply_rows": 0,
+    "target_closing": false
+  }
+}

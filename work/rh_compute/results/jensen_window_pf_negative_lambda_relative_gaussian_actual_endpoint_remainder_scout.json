@@ -1,0 +1,437 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_actual_endpoint_remainder_scout.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_actual_endpoint_remainder_scout.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "Endpoint quadrature is not promoted to a uniform collar theorem.",
+    "Floating samples are not interval enclosures.",
+    "The first-omitted-term comparison is numerical evidence only.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_actual_endpoint_remainder_scout",
+  "matrix_rows": [
+    {
+      "claim": "At lambda=-T with u=1/T, the actual relative-Gaussian multiplier is F_i(T)=E[Phi(sqrt(uY))/Phi(0)] for Y~Gamma(i+1/2,1).",
+      "formula": "F_i'(u)=E[Phi'(sqrt(uY))*Y/(2*sqrt(uY))/Phi(0)]",
+      "id": "nlrgaeprs_01_actual_gamma_expectation_coordinate",
+      "proof_boundary": "Exact coordinate identity only; it is not a numerical enclosure or a residual bound.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree40_residual_tail_budget.md"
+      ]
+    },
+    {
+      "claim": "Generalized Gauss-Laguerre quadrature at T=1156 gives stable endpoint samples for the actual value and derivative residuals over the recorded quadrature orders.",
+      "diagnostics": {
+        "all_selected_residuals_below_first_omitted_term": true,
+        "endpoint_row_count": 4,
+        "endpoint_rows": [
+          {
+            "actual_derivative_at_selected_order": "-4.148273764672624111E+02",
+            "actual_value_at_selected_order": "4.881723117282058544E-01",
+            "derivative_budget_fraction_at_selected_order": "7.648708601762656246E-05",
+            "derivative_first_omitted_scaled": "9.065260689361647775E-07",
+            "derivative_residual_scaled_at_selected_order": "7.125042884581489488E-07",
+            "derivative_residual_spread_scaled": "3.285549610154703259E-10",
+            "derivative_residual_to_first_omitted_ratio_at_selected_order": "7.859721996680071321E-01",
+            "index": 21,
+            "max_derivative_residual_to_first_omitted_ratio_over_orders": "7.863346326661018182E-01",
+            "max_value_residual_to_first_omitted_ratio_over_orders": "7.990755683030266177E-01",
+            "polynomial_derivative_at_endpoint": "-4.148273764666460579E+02",
+            "polynomial_value_at_endpoint": "4.881723117282313340E-01",
+            "proof_boundary": "Floating endpoint quadrature row only; it is not an interval enclosure, not a uniform collar estimate, and not an analytic remainder theorem.",
+            "selected_quadrature_order": 320,
+            "value_budget_fraction_at_selected_order": "7.312343864120115860E-05",
+            "value_first_omitted_scaled": "4.990210169953365261E-05",
+            "value_residual_scaled_at_selected_order": "3.936102704571453614E-05",
+            "value_residual_spread_scaled": "5.145232293557455705E-07",
+            "value_residual_to_first_omitted_ratio_at_selected_order": "7.887649158087939316E-01"
+          },
+          {
+            "actual_derivative_at_selected_order": "-4.207624075815728588E+02",
+            "actual_value_at_selected_order": "4.714817437525371524E-01",
+            "derivative_budget_fraction_at_selected_order": "1.504347133092229032E-04",
+            "derivative_first_omitted_scaled": "1.791970136269163607E-06",
+            "derivative_residual_scaled_at_selected_order": "1.401352619723184034E-06",
+            "derivative_residual_spread_scaled": "2.628439688123762608E-10",
+            "derivative_residual_to_first_omitted_ratio_at_selected_order": "7.820178424629132818E-01",
+            "index": 22,
+            "max_derivative_residual_to_first_omitted_ratio_over_orders": "7.820545121544851819E-01",
+            "max_value_residual_to_first_omitted_ratio_over_orders": "7.945671849575091095E-01",
+            "polynomial_derivative_at_endpoint": "-4.207624075803606161E+02",
+            "polynomial_value_at_endpoint": "4.714817437525877786E-01",
+            "proof_boundary": "Floating endpoint quadrature row only; it is not an interval enclosure, not a uniform collar estimate, and not an analytic remainder theorem.",
+            "selected_quadrature_order": 320,
+            "value_budget_fraction_at_selected_order": "1.452910153393800773E-04",
+            "value_first_omitted_scaled": "9.864368940605490509E-05",
+            "value_residual_scaled_at_selected_order": "7.820753086207332672E-05",
+            "value_residual_spread_scaled": "1.715077431185818568E-07",
+            "value_residual_to_first_omitted_ratio_at_selected_order": "7.928285259094620674E-01"
+          },
+          {
+            "actual_derivative_at_selected_order": "-4.258776115148948520E+02",
+            "actual_value_at_selected_order": "4.553047961330997651E-01",
+            "derivative_budget_fraction_at_selected_order": "2.893572137271088881E-04",
+            "derivative_first_omitted_scaled": "3.464475596787048638E-06",
+            "derivative_residual_scaled_at_selected_order": "2.695464900170918554E-06",
+            "derivative_residual_spread_scaled": "1.971329766092821956E-10",
+            "derivative_residual_to_first_omitted_ratio_at_selected_order": "7.780296973864356813E-01",
+            "index": 23,
+            "max_derivative_residual_to_first_omitted_ratio_over_orders": "7.780865986319782657E-01",
+            "max_value_residual_to_first_omitted_ratio_over_orders": "7.868931036419911651E-01",
+            "polynomial_derivative_at_endpoint": "-4.258776115125631350E+02",
+            "polynomial_value_at_endpoint": "4.553047961331967430E-01",
+            "proof_boundary": "Floating endpoint quadrature row only; it is not an interval enclosure, not a uniform collar estimate, and not an analytic remainder theorem.",
+            "selected_quadrature_order": 320,
+            "value_budget_fraction_at_selected_order": "2.783151357433080947E-04",
+            "value_first_omitted_scaled": "1.907111328517061011E-04",
+            "value_residual_scaled_at_selected_order": "1.498120136140812519E-04",
+            "value_residual_spread_scaled": "4.287693577964546421E-07",
+            "value_residual_to_first_omitted_ratio_at_selected_order": "7.855441440357477934E-01"
+          },
+          {
+            "actual_derivative_at_selected_order": "-4.302123804035261969E+02",
+            "actual_value_at_selected_order": "4.396279349273683468E-01",
+            "derivative_budget_fraction_at_selected_order": "5.452217884786860185E-04",
+            "derivative_first_omitted_scaled": "6.560389959873349845E-06",
+            "derivative_residual_scaled_at_selected_order": "5.078934009361546487E-06",
+            "derivative_residual_spread_scaled": "1.971329766092821956E-10",
+            "derivative_residual_to_first_omitted_ratio_at_selected_order": "7.741817240174541093E-01",
+            "index": 24,
+            "max_derivative_residual_to_first_omitted_ratio_over_orders": "7.742017566656975713E-01",
+            "max_value_residual_to_first_omitted_ratio_over_orders": "7.828967476549552051E-01",
+            "polynomial_derivative_at_endpoint": "-4.302123803991326554E+02",
+            "polynomial_value_at_endpoint": "4.396279349275512560E-01",
+            "proof_boundary": "Floating endpoint quadrature row only; it is not an interval enclosure, not a uniform collar estimate, and not an analytic remainder theorem.",
+            "selected_quadrature_order": 320,
+            "value_budget_fraction_at_selected_order": "5.249275170430453248E-04",
+            "value_first_omitted_scaled": "3.611338473149329790E-04",
+            "value_residual_scaled_at_selected_order": "2.825590067878636091E-04",
+            "value_residual_spread_scaled": "1.715077431185818568E-07",
+            "value_residual_to_first_omitted_ratio_at_selected_order": "7.824218330370267260E-01"
+          }
+        ],
+        "floating_scope_note": "The endpoint quadrature is stable over N=96..320 at T=1156, but larger T values suffer double-precision cancellation after subtracting the degree-40 polynomial. This scout is therefore kept endpoint-local and is not promoted to a uniform theorem.",
+        "max_derivative_budget_fraction_at_selected_order": "5.452217884786860185E-04",
+        "max_derivative_residual_spread_scaled": "3.285549610154703259E-10",
+        "max_derivative_residual_to_first_omitted_ratio_over_orders": "7.863346326661018182E-01",
+        "max_selected_derivative_residual_to_first_omitted_ratio": "7.859721996680071321E-01",
+        "max_selected_value_residual_to_first_omitted_ratio": "7.928285259094620674E-01",
+        "max_value_budget_fraction_at_selected_order": "5.249275170430453248E-04",
+        "max_value_residual_spread_scaled": "5.145232293557455705E-07",
+        "max_value_residual_to_first_omitted_ratio_over_orders": "7.990755683030266177E-01",
+        "parameters": {
+          "derivative_budget_B": "9.315354075509573936E-03",
+          "indices": [
+            21,
+            22,
+            23,
+            24
+          ],
+          "normalizing_phi0_float": "4.466969004671234589E-01",
+          "phi_n_terms": 23,
+          "polynomial_M": 20,
+          "polynomial_degree": 40,
+          "precision_bits_for_ratio_build": 384,
+          "quadrature_orders": [
+            96,
+            128,
+            192,
+            256,
+            320
+          ],
+          "quadrature_rule": "generalized Gauss-Laguerre for Gamma(i+1/2, 1)",
+          "ratio_cutoff_n": 80,
+          "residual_first_j": 21,
+          "scaled_derivative_residual": "|F_i'(u)-P_i^(40)'(u)|/u",
+          "scaled_value_residual": "|F_i(u)-P_i^(40)(u)|/u^3",
+          "selected_quadrature_order": 320,
+          "t_endpoint": 1156,
+          "u_endpoint": "1/1156",
+          "value_budget_A": "5.382819486765314521E-01"
+        },
+        "quadrature_order_count": 5,
+        "quadrature_sample_rows": [
+          {
+            "index": 21,
+            "samples": [
+              {
+                "actual_derivative": "-4.148273764672624679E+02",
+                "actual_value": "4.881723117282055213E-01",
+                "derivative_residual_scaled": "7.125699994503520429E-07",
+                "derivative_residual_to_first_omitted_ratio": "7.860446862676261359E-01",
+                "quadrature_order": 96,
+                "value_residual_scaled": "3.987555027507028171E-05",
+                "value_residual_to_first_omitted_ratio": "7.990755683030266177E-01"
+              },
+              {
+                "actual_derivative": "-4.148273764672624111E+02",
+                "actual_value": "4.881723117282056879E-01",
+                "derivative_residual_scaled": "7.125042884581489488E-07",
+                "derivative_residual_to_first_omitted_ratio": "7.859721996680071321E-01",
+                "quadrature_order": 128,
+                "value_residual_scaled": "3.961828866039240893E-05",
+                "value_residual_to_first_omitted_ratio": "7.939202420559102746E-01"
+              },
+              {
+                "actual_derivative": "-4.148273764672624679E+02",
+                "actual_value": "4.881723117282056879E-01",
+                "derivative_residual_scaled": "7.125699994503520429E-07",
+                "derivative_residual_to_first_omitted_ratio": "7.860446862676261359E-01",
+                "quadrature_order": 192,
+                "value_residual_scaled": "3.961828866039240893E-05",
+                "value_residual_to_first_omitted_ratio": "7.939202420559102746E-01"
+              },
+              {
+                "actual_derivative": "-4.148273764672626953E+02",
+                "actual_value": "4.881723117282055213E-01",
+                "derivative_residual_scaled": "7.128328434191644192E-07",
+                "derivative_residual_to_first_omitted_ratio": "7.863346326661018182E-01",
+                "quadrature_order": 256,
+                "value_residual_scaled": "3.987555027507028171E-05",
+                "value_residual_to_first_omitted_ratio": "7.990755683030266177E-01"
+              },
+              {
+                "actual_derivative": "-4.148273764672624111E+02",
+                "actual_value": "4.881723117282058544E-01",
+                "derivative_residual_scaled": "7.125042884581489488E-07",
+                "derivative_residual_to_first_omitted_ratio": "7.859721996680071321E-01",
+                "quadrature_order": 320,
+                "value_residual_scaled": "3.936102704571453614E-05",
+                "value_residual_to_first_omitted_ratio": "7.887649158087939316E-01"
+              }
+            ]
+          },
+          {
+            "index": 22,
+            "samples": [
+              {
+                "actual_derivative": "-4.207624075815726883E+02",
+                "actual_value": "4.714817437525370969E-01",
+                "derivative_residual_scaled": "1.401155486746574752E-06",
+                "derivative_residual_to_first_omitted_ratio": "7.819078333881974707E-01",
+                "quadrature_order": 96,
+                "value_residual_scaled": "7.829328473363261764E-05",
+                "value_residual_to_first_omitted_ratio": "7.936978554334855884E-01"
+              },
+              {
+                "actual_derivative": "-4.207624075815726883E+02",
+                "actual_value": "4.714817437525371524E-01",
+                "derivative_residual_scaled": "1.401155486746574752E-06",
+                "derivative_residual_to_first_omitted_ratio": "7.819078333881974707E-01",
+                "quadrature_order": 128,
+                "value_residual_scaled": "7.820753086207332672E-05",
+                "value_residual_to_first_omitted_ratio": "7.928285259094620674E-01"
+              },
+              {
+                "actual_derivative": "-4.207624075815729157E+02",
+                "actual_value": "4.714817437525371524E-01",
+                "derivative_residual_scaled": "1.401418330715387128E-06",
+                "derivative_residual_to_first_omitted_ratio": "7.820545121544851819E-01",
+                "quadrature_order": 192,
+                "value_residual_scaled": "7.820753086207332672E-05",
+                "value_residual_to_first_omitted_ratio": "7.928285259094620674E-01"
+              },
+              {
+                "actual_derivative": "-4.207624075815728020E+02",
+                "actual_value": "4.714817437525370414E-01",
+                "derivative_residual_scaled": "1.401286908730980940E-06",
+                "derivative_residual_to_first_omitted_ratio": "7.819811727713413818E-01",
+                "quadrature_order": 256,
+                "value_residual_scaled": "7.837903860519190857E-05",
+                "value_residual_to_first_omitted_ratio": "7.945671849575091095E-01"
+              },
+              {
+                "actual_derivative": "-4.207624075815728588E+02",
+                "actual_value": "4.714817437525371524E-01",
+                "derivative_residual_scaled": "1.401352619723184034E-06",
+                "derivative_residual_to_first_omitted_ratio": "7.820178424629132818E-01",
+                "quadrature_order": 320,
+                "value_residual_scaled": "7.820753086207332672E-05",
+                "value_residual_to_first_omitted_ratio": "7.928285259094620674E-01"
+              }
+            ]
+          },
+          {
+            "index": 23,
+            "samples": [
+              {
+                "actual_derivative": "-4.258776115148948520E+02",
+                "actual_value": "4.553047961330998761E-01",
+                "derivative_residual_scaled": "2.695464900170918554E-06",
+                "derivative_residual_to_first_omitted_ratio": "7.780296973864356813E-01",
+                "quadrature_order": 96,
+                "value_residual_scaled": "1.496405058709626701E-04",
+                "value_residual_to_first_omitted_ratio": "7.846448376315855455E-01"
+              },
+              {
+                "actual_derivative": "-4.258776115148949089E+02",
+                "actual_value": "4.553047961330997651E-01",
+                "derivative_residual_scaled": "2.695530611163121648E-06",
+                "derivative_residual_to_first_omitted_ratio": "7.780486644682832464E-01",
+                "quadrature_order": 128,
+                "value_residual_scaled": "1.498120136140812519E-04",
+                "value_residual_to_first_omitted_ratio": "7.855441440357477934E-01"
+              },
+              {
+                "actual_derivative": "-4.258776115148949657E+02",
+                "actual_value": "4.553047961330995985E-01",
+                "derivative_residual_scaled": "2.695596322155324742E-06",
+                "derivative_residual_to_first_omitted_ratio": "7.780676315501308116E-01",
+                "quadrature_order": 192,
+                "value_residual_scaled": "1.500692752287591247E-04",
+                "value_residual_to_first_omitted_ratio": "7.868931036419911651E-01"
+              },
+              {
+                "actual_derivative": "-4.258776115148950225E+02",
+                "actual_value": "4.553047961330997095E-01",
+                "derivative_residual_scaled": "2.695662033147527836E-06",
+                "derivative_residual_to_first_omitted_ratio": "7.780865986319782657E-01",
+                "quadrature_order": 256,
+                "value_residual_scaled": "1.498977674856405429E-04",
+                "value_residual_to_first_omitted_ratio": "7.859937972378289173E-01"
+              },
+              {
+                "actual_derivative": "-4.258776115148948520E+02",
+                "actual_value": "4.553047961330997651E-01",
+                "derivative_residual_scaled": "2.695464900170918554E-06",
+                "derivative_residual_to_first_omitted_ratio": "7.780296973864356813E-01",
+                "quadrature_order": 320,
+                "value_residual_scaled": "1.498120136140812519E-04",
+                "value_residual_to_first_omitted_ratio": "7.855441440357477934E-01"
+              }
+            ]
+          },
+          {
+            "index": 24,
+            "samples": [
+              {
+                "actual_derivative": "-4.302123804035261401E+02",
+                "actual_value": "4.396279349273682358E-01",
+                "derivative_residual_scaled": "5.078868298369343393E-06",
+                "derivative_residual_to_first_omitted_ratio": "7.741717076933323227E-01",
+                "quadrature_order": 96,
+                "value_residual_scaled": "2.827305145309821910E-04",
+                "value_residual_to_first_omitted_ratio": "7.828967476549552051E-01"
+              },
+              {
+                "actual_derivative": "-4.302123804035261969E+02",
+                "actual_value": "4.396279349273682358E-01",
+                "derivative_residual_scaled": "5.078934009361546487E-06",
+                "derivative_residual_to_first_omitted_ratio": "7.741817240174541093E-01",
+                "quadrature_order": 128,
+                "value_residual_scaled": "2.827305145309821910E-04",
+                "value_residual_to_first_omitted_ratio": "7.828967476549552051E-01"
+              },
+              {
+                "actual_derivative": "-4.302123804035261401E+02",
+                "actual_value": "4.396279349273683468E-01",
+                "derivative_residual_scaled": "5.078868298369343393E-06",
+                "derivative_residual_to_first_omitted_ratio": "7.741717076933323227E-01",
+                "quadrature_order": 192,
+                "value_residual_scaled": "2.825590067878636091E-04",
+                "value_residual_to_first_omitted_ratio": "7.824218330370267260E-01"
+              },
+              {
+                "actual_derivative": "-4.302123804035263106E+02",
+                "actual_value": "4.396279349273683468E-01",
+                "derivative_residual_scaled": "5.079065431345952675E-06",
+                "derivative_residual_to_first_omitted_ratio": "7.742017566656975713E-01",
+                "quadrature_order": 256,
+                "value_residual_scaled": "2.825590067878636091E-04",
+                "value_residual_to_first_omitted_ratio": "7.824218330370267260E-01"
+              },
+              {
+                "actual_derivative": "-4.302123804035261969E+02",
+                "actual_value": "4.396279349273683468E-01",
+                "derivative_residual_scaled": "5.078934009361546487E-06",
+                "derivative_residual_to_first_omitted_ratio": "7.741817240174541093E-01",
+                "quadrature_order": 320,
+                "value_residual_scaled": "2.825590067878636091E-04",
+                "value_residual_to_first_omitted_ratio": "7.824218330370267260E-01"
+              }
+            ]
+          }
+        ]
+      },
+      "id": "nlrgaeprs_02_endpoint_quadrature_samples",
+      "proof_boundary": "Floating endpoint diagnostic only; no interval arithmetic or all-T theorem is supplied.",
+      "readiness": "not_ready_to_apply",
+      "role": "floating_diagnostic"
+    },
+    {
+      "claim": "At the endpoint and selected quadrature order, all four value and derivative residuals are below one first omitted formal term.",
+      "id": "nlrgaeprs_03_first_omitted_comparison",
+      "proof_boundary": "Endpoint comparison only; it does not prove a first-omitted-term remainder theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic"
+    },
+    {
+      "claim": "At the endpoint and selected quadrature order, the observed scaled residuals use less than 0.1% of the degree-40 half-safety value and derivative budgets.",
+      "id": "nlrgaeprs_04_budget_comparison",
+      "proof_boundary": "Numerical budget comparison only; it is not a certified residual estimate.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree40_residual_tail_budget.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_asymptotic_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "The endpoint floating quadrature proves the residual-tail estimates on the full collar 0<=u<=1/1156.",
+      "gap": "The computation is local to T=1156, uses double floating quadrature, and is not an interval enclosure for either the value or derivative channel.",
+      "id": "nlrgaeprs_05_uniform_promotion_rejected",
+      "proof_boundary": "Rejected promotion only; not a theorem about the actual remainder.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_formal_tail_obstruction_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "A promoted endpoint-to-collar proof must replace this scout with interval-safe quadrature or analytic remainder control, prove uniformity in T, and preserve derivative control.",
+      "id": "nlrgaeprs_06_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not scaled-curvature monotonicity, cone entry, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Floating endpoint theorem-search diagnostic only. It samples the actual relative-Gaussian integral at T=1156, but it does not provide interval enclosures, does not prove a uniform collar remainder estimate, does not prove scaled-curvature monotonicity, does not prove cone entry, and does not prove RH or Lambda <= 0.",
+  "source_asymptotic_remainder_target": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_asymptotic_remainder_target.md",
+  "source_degree40_residual_tail_budget": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree40_residual_tail_budget.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_formal_tail_obstruction": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_formal_tail_obstruction_scout.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "floating endpoint theorem-search diagnostic",
+  "summary": {
+    "all_selected_residuals_below_first_omitted_term": true,
+    "endpoint_rows": 4,
+    "main_finding": "At the collar endpoint T=1156, direct generalized Gauss-Laguerre quadrature of the actual relative-Gaussian multiplier gives value and derivative residuals for F_21..F_24 below one first omitted formal term and below 0.1% of the degree-40 half-safety budgets. This is useful evidence that the asymptotic-remainder target is numerically plausible, but it remains a floating endpoint scout rather than a uniform analytic or interval-certified remainder theorem.",
+    "matrix_rows": 6,
+    "max_derivative_budget_fraction_at_selected_order": "5.452217884786860185E-04",
+    "max_derivative_residual_spread_scaled": "3.285549610154703259E-10",
+    "max_derivative_residual_to_first_omitted_ratio_over_orders": "7.863346326661018182E-01",
+    "max_selected_derivative_residual_to_first_omitted_ratio": "7.859721996680071321E-01",
+    "max_selected_value_residual_to_first_omitted_ratio": "7.928285259094620674E-01",
+    "max_value_budget_fraction_at_selected_order": "5.249275170430453248E-04",
+    "max_value_residual_spread_scaled": "5.145232293557455705E-07",
+    "max_value_residual_to_first_omitted_ratio_over_orders": "7.990755683030266177E-01",
+    "quadrature_order_count": 5,
+    "quadrature_orders": [
+      96,
+      128,
+      192,
+      256,
+      320
+    ],
+    "ready_to_apply_rows": 0,
+    "selected_quadrature_order": 320,
+    "target_closing": false
+  }
+}

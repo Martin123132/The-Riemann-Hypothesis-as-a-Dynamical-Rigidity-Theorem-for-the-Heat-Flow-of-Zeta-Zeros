@@ -1,0 +1,156 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_raw_moment_bridge_matrix.py",
+  "date": "2026-07-06",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k200.jsonl"
+  ],
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_raw_moment_bridge_matrix.py",
+  "invariants": [
+    "Only exact algebraic rows are available_exact.",
+    "No finite row is ready_to_apply.",
+    "The lower raw wall R_k>=1 is not the bottleneck; the upper raw wall remains open all-k.",
+    "The adaptive corridor occupancy remains open all-k.",
+    "The half-width and one-third fixed buffers remain finite-rejected.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_raw_moment_bridge_matrix",
+  "matrix_rows": [
+    {
+      "claim": "With M_k=mu_{2k}, A_k=M_k*k!/(2*k)!, and R_k=M_(k+1)*M_(k-1)/M_k^2, one has x_k=((2*k-1)/(2*k+1))*R_k.",
+      "formula": "x_k=((2*k-1)/(2*k+1))*R_k",
+      "id": "nlrmb_01_raw_ratio_reindexing",
+      "proof_boundary": "Exact reindexing only; it does not prove any raw moment bound.",
+      "readiness": "available_exact",
+      "role": "exact_reindexing"
+    },
+    {
+      "claim": "The adaptive exact cone 0<=s_k<=1 is equivalent to 1<=R_k<=(2*k+1)/(2*k-1).",
+      "formula": "s_k=((2*k+1)-(2*k-1)*R_k)/2",
+      "id": "nlrmb_02_exact_cone_translation",
+      "proof_boundary": "Exact translation only; the upper raw wall remains an open all-k estimate.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_adaptive_envelope_obligations.md",
+        "outputs/jensen_window_pf_heat_flow_boundary_threshold_lemma.md"
+      ]
+    },
+    {
+      "claim": "The monotone bridge and scaled k-increase are exactly a lower/upper corridor for R_(k+1), and the corridor width is positive exactly under the upper raw wall.",
+      "formula": "((2*k-1)*(2*k+3)/(2*k+1)^2)*R_k <= R_(k+1) <= (2+(2*k-1)*R_k)/(2*k+1)",
+      "id": "nlrmb_03_adaptive_corridor_identity",
+      "proof_boundary": "Exact algebraic corridor only; no all-k corridor occupancy is proved.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The checked raw ratios satisfy 1<=R_k<=(2*k+1)/(2*k-1) on 597/597 rows.",
+      "id": "nlrmb_04_raw_cone_prefix",
+      "proof_boundary": "Finite prefix certificate only; not an all-k raw moment-growth theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_certificate"
+    },
+    {
+      "claim": "The checked adjacent raw ratios occupy the adaptive corridor on 594/594 rows.",
+      "id": "nlrmb_05_raw_corridor_prefix",
+      "proof_boundary": "Finite corridor pattern only; it does not prove the adaptive envelope.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_pattern"
+    },
+    {
+      "claim": "The half-width threshold R_k>=2*k/(2*k-1) fails on 76 rows, and the one-third threshold R_k>=(6*k+1)/(3*(2*k-1)) fails on 418 rows.",
+      "id": "nlrmb_06_fixed_buffer_thresholds",
+      "proof_boundary": "Finite rejection of fixed-buffer shortcuts only; not a proof of the adaptive replacement.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route"
+    },
+    {
+      "claim": "A promoted route must prove the zeta-specific upper raw wall and all-k corridor occupancy without using endpoint PF, RH, or Lambda <= 0.",
+      "id": "nlrmb_07_live_theorem_burden",
+      "proof_boundary": "Theorem-search burden only; no all-k theorem is supplied here.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route"
+    },
+    {
+      "claim": "Any proof upgrade must preserve the fixed-buffer rejection gates and keep exact, finite, conditional, and conjectural claims separated.",
+      "id": "nlrmb_08_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a mathematical proof.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate"
+    }
+  ],
+  "proof_boundary": "Exact algebra plus finite theorem-search diagnostics only. The artifact translates the adaptive envelope route into raw moment-ratio inequalities and checks the finite negative-lambda prefix, but it does not prove all-k raw moment-growth bounds, corridor occupancy, cone entry, jwpf_06, RH, or Lambda <= 0.",
+  "source_adaptive_matrix": "outputs/jensen_window_pf_negative_lambda_adaptive_envelope_matrix.md",
+  "source_adaptive_obligations": "outputs/jensen_window_pf_negative_lambda_adaptive_envelope_obligations.md",
+  "source_boundary_threshold": "outputs/jensen_window_pf_heat_flow_boundary_threshold_lemma.md",
+  "source_bounded_log_curvature_target": "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_target.md",
+  "source_cone_prefix": "outputs/jensen_window_pf_negative_lambda_cone_entry_prefix_k200_scout.md",
+  "source_monotone_contraction_target": "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+  "status": "exact finite theorem-search diagnostic",
+  "summary": {
+    "bridge_lower_positive_rows": 594,
+    "checked_ratio_max": 199,
+    "coefficient_k_max": 200,
+    "corridor_occupancy_positive_rows": 594,
+    "corridor_rows": 594,
+    "corridor_width_positive_rows": 594,
+    "half_width_failure_rows": 76,
+    "half_width_positive_rows": 521,
+    "lambdas": [
+      "-25.0",
+      "-50.0",
+      "-100.0"
+    ],
+    "main_finding": "The adaptive exact-cone route becomes a raw-moment ratio corridor. On the k200 negative-lambda prefix, the raw cone holds on 597/597 lower rows and 597/597 upper rows, while the adaptive corridor contains R_(k+1) on 594/594 adjacent rows. The exact corridor is nonempty precisely under the upper raw wall, so the remaining all-k burden is a zeta-specific upper raw moment-growth theorem plus a corridor occupancy theorem.",
+    "matrix_rows": 8,
+    "max_raw_ratio": {
+      "k": 1,
+      "lam": "-100.0",
+      "sample": "2.973078641741057661E+0"
+    },
+    "min_bridge_lower_margin": {
+      "k": 198,
+      "lam": "-100.0",
+      "sample": "7.465690906027845625E-6"
+    },
+    "min_corridor_occupancy_margin": {
+      "k": 198,
+      "lam": "-25.0",
+      "sample": "2.241640098067743212E-6"
+    },
+    "min_corridor_width": {
+      "k": 198,
+      "lam": "-100.0",
+      "sample": "1.112322974466921331E-5"
+    },
+    "min_raw_cone_margin": {
+      "k": 199,
+      "lam": "-100.0",
+      "sample": "2.211618643155480210E-3"
+    },
+    "min_raw_lower_margin": {
+      "k": 199,
+      "lam": "-25.0",
+      "sample": "2.329147017095538537E-3"
+    },
+    "min_raw_upper_slack": {
+      "k": 199,
+      "lam": "-100.0",
+      "sample": "2.211618643155480210E-3"
+    },
+    "min_scaled_upper_margin": {
+      "k": 198,
+      "lam": "-25.0",
+      "sample": "2.241640098067743212E-6"
+    },
+    "one_third_failure_rows": 418,
+    "one_third_positive_rows": 179,
+    "raw_cone_positive_rows": 597,
+    "raw_lower_positive_rows": 597,
+    "raw_ratio_rows": 597,
+    "raw_upper_positive_rows": 597,
+    "ready_to_apply_rows": 0,
+    "scaled_upper_positive_rows": 594,
+    "target_closing": false
+  }
+}
