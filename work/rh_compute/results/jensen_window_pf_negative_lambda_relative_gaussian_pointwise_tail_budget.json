@@ -1,0 +1,260 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_pointwise_tail_budget.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_pointwise_tail_budget.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "Pointwise epsilon budgets are required tolerances, not proved tail estimates.",
+    "Finite positive baseline rows are not promoted to uniform all-k tail bounds.",
+    "The companion stencil is the current global finite bottleneck, with one weighted-gap limited row.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_pointwise_tail_budget",
+  "matrix_rows": [
+    {
+      "claim": "If |epsilon_j|<=eta_j for j in {k-1,k,k+1,k+2}, then every epsilon-stencil error is bounded by the absolute coefficient-weighted eta sum.",
+      "formula": "|sum_j c_j*epsilon_j| <= sum_j |c_j|*eta_j",
+      "id": "nlrgptb_01_pointwise_log_tail_envelope",
+      "proof_boundary": "Exact triangle-inequality reduction only; no eta_j bound is proved.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_stencil_remainder_obligations.md"
+      ]
+    },
+    {
+      "claim": "The B, companion, and weighted-gap epsilon stencils have absolute coefficient sums 4, 8, and 16*k+16.",
+      "formula": "||E_B||_1=4, ||E_U||_1=8, ||E_C||_1=16*k+16",
+      "id": "nlrgptb_02_stencil_weight_sums",
+      "proof_boundary": "Exact coefficient bookkeeping only; not a tail estimate.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "On a positive baseline row, a uniform pointwise log-tail envelope eta preserves nonnegativity if eta is below every stencil margin divided by its absolute coefficient sum.",
+      "formula": "eta <= min(B_margin/4, U_margin/8, C_margin/(16*k+16))",
+      "id": "nlrgptb_03_uniform_eta_sufficient_condition",
+      "proof_boundary": "Exact finite-row sufficient condition only; no uniform analytic eta is proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_sufficient_condition"
+    },
+    {
+      "claim": "Using a half-safety margin converts each positive baseline row into a stricter pointwise epsilon target with half of the uniform eta bound.",
+      "diagnostics": {
+        "blocked_baseline_rows": 31,
+        "budget_rows": [
+          {
+            "B_eta_bound": "1.076741048607343494E-5",
+            "B_margin": "4.306964194429373976E-5",
+            "B_weight_sum": "4.000000000000000000E+0",
+            "M": 5,
+            "T": "2000",
+            "companion_eta_bound": "3.113132137061207044E-8",
+            "companion_margin": "2.490505709648965635E-7",
+            "companion_weight_sum": "8.000000000000000000E+0",
+            "half_safety_eta_bound": "1.556566068530603522E-8",
+            "half_safety_relative_tail_ratio_bound": "1.556566056416113956E-8",
+            "k": 22,
+            "limiting_stencil": "companion",
+            "source_row": "nlrgts_M5_T2000",
+            "truncation_degree": 10,
+            "uniform_eta_bound": "3.113132137061207044E-8",
+            "weighted_gap_eta_bound": "2.022660517751014702E-7",
+            "weighted_gap_margin": "7.443390705323734102E-5",
+            "weighted_gap_weight_sum": "3.680000000000000000E+2"
+          },
+          {
+            "B_eta_bound": "1.104629107986703084E-5",
+            "B_margin": "4.418516431946812336E-5",
+            "B_weight_sum": "4.000000000000000000E+0",
+            "M": 6,
+            "T": "2000",
+            "companion_eta_bound": "2.916226411053956105E-9",
+            "companion_margin": "2.332981128843164884E-8",
+            "companion_weight_sum": "8.000000000000000000E+0",
+            "half_safety_eta_bound": "1.458113205526978052E-9",
+            "half_safety_relative_tail_ratio_bound": "1.458113204463930993E-9",
+            "k": 22,
+            "limiting_stencil": "companion",
+            "source_row": "nlrgts_M6_T2000",
+            "truncation_degree": 12,
+            "uniform_eta_bound": "2.916226411053956105E-9",
+            "weighted_gap_eta_bound": "2.371571399684238022E-7",
+            "weighted_gap_margin": "8.727382750837995922E-5",
+            "weighted_gap_weight_sum": "3.680000000000000000E+2"
+          },
+          {
+            "B_eta_bound": "3.861514571509167222E-5",
+            "B_margin": "1.544605828603666889E-4",
+            "B_weight_sum": "4.000000000000000000E+0",
+            "M": 7,
+            "T": "1000",
+            "companion_eta_bound": "4.315045913150516389E-7",
+            "companion_margin": "3.452036730520413111E-6",
+            "companion_weight_sum": "8.000000000000000000E+0",
+            "half_safety_eta_bound": "1.992872817748287522E-7",
+            "half_safety_relative_tail_ratio_bound": "1.992872619171197327E-7",
+            "k": 22,
+            "limiting_stencil": "weighted_gap",
+            "source_row": "nlrgts_M7_T1000",
+            "truncation_degree": 14,
+            "uniform_eta_bound": "3.985745635496575043E-7",
+            "weighted_gap_eta_bound": "3.985745635496575043E-7",
+            "weighted_gap_margin": "1.466754393862739616E-4",
+            "weighted_gap_weight_sum": "3.680000000000000000E+2"
+          },
+          {
+            "B_eta_bound": "1.099863708964240204E-5",
+            "B_margin": "4.399454835856960814E-5",
+            "B_weight_sum": "4.000000000000000000E+0",
+            "M": 7,
+            "T": "2000",
+            "companion_eta_bound": "8.745800690121724368E-9",
+            "companion_margin": "6.996640552097379494E-8",
+            "companion_weight_sum": "8.000000000000000000E+0",
+            "half_safety_eta_bound": "4.372900345060862184E-9",
+            "half_safety_relative_tail_ratio_bound": "4.372900335499733484E-9",
+            "k": 22,
+            "limiting_stencil": "companion",
+            "source_row": "nlrgts_M7_T2000",
+            "truncation_degree": 14,
+            "uniform_eta_bound": "8.745800690121724368E-9",
+            "weighted_gap_eta_bound": "2.301648795044930650E-7",
+            "weighted_gap_margin": "8.470067565765344792E-5",
+            "weighted_gap_weight_sum": "3.680000000000000000E+2"
+          }
+        ],
+        "limiting_stencil_counts": {
+          "companion": 3,
+          "weighted_gap": 1
+        },
+        "parameters": {
+          "max_taylor_degree": 14,
+          "precision_bits": 256,
+          "sample_T_values": [
+            25,
+            50,
+            100,
+            200,
+            500,
+            1000,
+            2000
+          ],
+          "tail_cutoff_n": 80,
+          "tail_start_k": 22,
+          "truncation_degrees": [
+            6,
+            8,
+            10,
+            12,
+            14
+          ]
+        },
+        "positive_baseline_rows": 4,
+        "source_remainder_summary": {
+          "blocked_baseline_rows": 31,
+          "exact_stencil_rows": 4,
+          "main_finding": "The relative-Gaussian remainder problem can be split into three exact epsilon stencils for B_k, B_k-B_(k+1), and C_(k+1)-C_k. In the finite degree<=14 truncation matrix, only 4/35 rows have positive baseline margins for all three stencils; the weakest half-margin budget is 1.166490564421582442E-8, so a promoted proof needs sharp uniform epsilon-stencil bounds rather than finite truncation promotion.",
+          "matrix_rows": 9,
+          "positive_baseline_rows": 4,
+          "ready_to_apply_rows": 0,
+          "target_closing": false,
+          "truncation_rows": 35
+        },
+        "weakest_half_safety_eta_bound": {
+          "M": 6,
+          "T": "2000",
+          "limiting_stencil": "companion",
+          "sample": "1.458113205526978052E-9",
+          "source_row": "nlrgts_M6_T2000"
+        },
+        "weakest_half_safety_relative_tail_ratio_bound": "1.458113204463930993E-9",
+        "weakest_uniform_eta_bound": {
+          "M": 6,
+          "T": "2000",
+          "limiting_stencil": "companion",
+          "sample": "2.916226411053956105E-9",
+          "source_row": "nlrgts_M6_T2000"
+        }
+      },
+      "id": "nlrgptb_04_half_safety_eta_budget",
+      "proof_boundary": "Finite budget diagnostic only; not a theorem for the full Taylor tail.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic"
+    },
+    {
+      "claim": "If the analytic tail is multiplicative, F_j=F_j^(M)*(1+theta_j), then |theta_j|<=rho<1 implies |epsilon_j|<=-log(1-rho).",
+      "formula": "rho <= 1-exp(-eta) is sufficient for |epsilon_j|<=eta",
+      "id": "nlrgptb_05_relative_tail_ratio_conversion",
+      "proof_boundary": "Exact conversion from multiplicative relative tail to log-tail envelope only; no bound on theta_j is proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_sufficient_condition",
+      "weakest_half_safety_relative_tail_ratio_bound": "1.458113204463930993E-9"
+    },
+    {
+      "claim": "For the current positive finite baselines, the companion stencil gives the global weakest pointwise-tail budget, while one sampled row is weighted-gap limited.",
+      "id": "nlrgptb_06_bottleneck_diagnostic",
+      "proof_boundary": "Finite diagnostic only; it identifies the present bottleneck split but does not prove any tail bound.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic",
+      "weakest_half_safety_eta_bound": {
+        "M": 6,
+        "T": "2000",
+        "limiting_stencil": "companion",
+        "sample": "1.458113205526978052E-9",
+        "source_row": "nlrgts_M6_T2000"
+      }
+    },
+    {
+      "claim": "A promoted proof may close this branch by proving a zeta-specific analytic relative-tail theorem at least as strong as the half-safety pointwise log-tail budget over a stated q/T range.",
+      "id": "nlrgptb_07_live_pointwise_tail_theorem",
+      "proof_boundary": "Live theorem-search route only; the pointwise tail theorem remains open.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+        "outputs/jensen_window_pf_negative_lambda_taylor_moment_budget.md"
+      ]
+    },
+    {
+      "claim": "The finite pointwise budget table alone proves the required epsilon bounds.",
+      "gap": "The table gives required tolerances, not analytic estimates for the Taylor tail or relative multiplier error.",
+      "id": "nlrgptb_08_finite_budget_promotion_rejected",
+      "proof_boundary": "Rejected shortcut only; finite tolerances are not promoted to an all-k analytic theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route"
+    },
+    {
+      "claim": "Any promoted pointwise-tail proof must state the truncation order, q/T collar, normalized multiplier positivity, a relative-tail estimate |theta_j|<=rho, and the comparison rho<=1-exp(-eta).",
+      "id": "nlrgptb_09_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a proof of scaled-curvature monotonicity, cone entry, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_taylor_stencil_scout.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Exact finite theorem-search diagnostic only. It converts exact epsilon-stencil margins into pointwise log-tail and multiplicative relative-tail budgets, but it does not prove the required analytic tail estimate, does not prove scaled-curvature monotonicity, does not prove cone entry, and does not prove RH or Lambda <= 0.",
+  "source_stencil_remainder_obligations": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_stencil_remainder_obligations.md",
+  "source_taylor_moment_budget": "outputs/jensen_window_pf_negative_lambda_taylor_moment_budget.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "exact finite theorem-search diagnostic",
+  "summary": {
+    "blocked_baseline_rows": 31,
+    "budget_rows": 4,
+    "exact_sufficient_rows": 2,
+    "limiting_stencil_counts": {
+      "companion": 3,
+      "weighted_gap": 1
+    },
+    "main_finding": "The exact epsilon-stencil obligations reduce to a concrete pointwise log-tail target. At k=22, the absolute coefficient sums are 4, 8, and 368; among the 4 positive finite baselines, the companion stencil is limiting in 3 rows and the weighted-gap stencil is limiting in 1 row. The weakest half-safety log-tail envelope is 1.458113205526978052E-9 at nlrgts_M6_T2000, equivalent to the multiplicative relative-tail ratio bound 1.458113204463930993E-9. This sharpens the open uniform remainder theorem but does not prove any analytic tail estimate.",
+    "matrix_rows": 9,
+    "positive_baseline_rows": 4,
+    "ready_to_apply_rows": 0,
+    "target_closing": false,
+    "weakest_half_safety_eta_bound": "1.458113205526978052E-9",
+    "weakest_half_safety_relative_tail_ratio_bound": "1.458113204463930993E-9"
+  }
+}

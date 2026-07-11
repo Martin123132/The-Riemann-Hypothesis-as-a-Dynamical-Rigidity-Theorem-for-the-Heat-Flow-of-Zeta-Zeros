@@ -1,0 +1,94 @@
+{
+  "comparison_to_original_countermodel": {
+    "d3_m8_matches_original_countermodel": true,
+    "original_d3_m8_value": "-435846079534239/104857600000000",
+    "same_A0_to_A3_prefix": true
+  },
+  "constructed_extension": {
+    "adjacent_ratios": [
+      "33/40",
+      "13/16",
+      "11/20",
+      "11/60"
+    ],
+    "condition_values": {
+      "(1 - x2)^2 - x2^2*(1 - x1)*(1 - x3)": "3793/38025",
+      "1 - x1": "1/66",
+      "1 - x2": "21/65",
+      "1 - x3": "2/3",
+      "x1 - x2": "1321/4290",
+      "x2 - x3": "67/195",
+      "x2^2 - x1*x3": "108703/836550"
+    },
+    "contractions": [
+      "65/66",
+      "44/65",
+      "1/3"
+    ],
+    "ratio_parameterization": {
+      "a0": "A",
+      "a1": "A*rho",
+      "a2": "A*rho**2*x1",
+      "a3": "A*rho**3*x1**2*x2",
+      "a4": "A*rho**4*x1**3*x2**2*x3"
+    },
+    "ratio_point": {
+      "rho": "33/40",
+      "x1": "65/66",
+      "x2": "44/65",
+      "x3": "1/3"
+    },
+    "satisfies": {
+      "adjacent_log_concavity_box": true,
+      "contraction_log_concavity": true,
+      "decreasing_ratio_contractions": true,
+      "second_order_log_concavity": true
+    },
+    "sequence_A0_to_A4": [
+      "1",
+      "33/40",
+      "429/640",
+      "4719/12800",
+      "17303/256000"
+    ]
+  },
+  "date": "2026-07-06",
+  "frontier_failures": {
+    "negative_rows": 2,
+    "rows": [
+      {
+        "degree": 3,
+        "id": "d3_contiguous_m8",
+        "minor_size": 8,
+        "positive": false,
+        "sign": -1,
+        "value": "-435846079534239/104857600000000"
+      },
+      {
+        "degree": 4,
+        "id": "d4_contiguous_m6",
+        "minor_size": 6,
+        "positive": false,
+        "sign": -1,
+        "value": "-26359418151/4096000000"
+      }
+    ]
+  },
+  "invariants": [
+    "The constructed extension must satisfy x2^2 >= x1*x3 exactly.",
+    "At least one advertised frontier minor must remain negative.",
+    "This diagnostic rejects rc_07 only as a standalone bridge condition.",
+    "No row may set target_closing=true."
+  ],
+  "kind": "jensen_window_pf_contraction_log_concavity_scout",
+  "proof_boundary": "Ratio-condition rejection diagnostic only; not a proof of a positive kernel, Cauchy-Binet identity, Jensen-window PF-infinity, RH, or Lambda <= 0.",
+  "source_algebra": "work/rh_compute/results/jensen_window_pf_obligation_algebra.json",
+  "summary": {
+    "candidate_rows_tested": 1,
+    "main_finding": "Contraction log-concavity x2^2 >= x1*x3 is satisfied by a positive rational extension of the old bad prefix, but the degree 3 size 8 and degree 4 size 6 contiguous minors are still negative.",
+    "negative_frontier_rows": 2,
+    "rejected_by_constructed_extension_rows": 1,
+    "target_closing_rows": 0
+  },
+  "target_ratio_condition": "rc_07_contraction_log_concavity"
+}

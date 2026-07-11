@@ -1,0 +1,168 @@
+{
+  "kind": "jensen_window_pf_newman_boundary_energy_direction_gate",
+  "date": "2026-07-11",
+  "status": "exact boundary-energy singularity and published-directionality gate",
+  "proof_boundary": "This artifact derives the universal stiffness gap jet, verifies an exact even higher-jet birth model, proves the 1/(8*tau) renormalized pair-energy singularity, and isolates a conditional finite-integrated-energy collision criterion. It also records that the Rodgers-Tao theorem is an interior estimate under Lambda<0, separated from the boundary. It does not prove the required Xi boundary estimate, RH, or Lambda<=0.",
+  "sources": [
+    "outputs/jensen_window_pf_newman_local_odd_count_reduction_lemma.md",
+    "outputs/formal_core.md",
+    "https://arxiv.org/abs/1801.05914"
+  ],
+  "exact": {
+    "zero_ode": "x_k'=2*PV sum_(j!=k) 1/(x_k-x_j); for a pair gap g and q=g^2, q'=8-4*q*S, S=sum_out 1/((x_+-y)(x_--y)).",
+    "universal_boundary_jet": "At a finite double-zero birth t_*, K=sum_out 1/(c-y)^2, so q(t)=8*(t-t_*)-16*K*(t-t_*)^2+O((t-t_*)^3).",
+    "model": {
+      "a_squared": "1 + 16/(pi + 8)",
+      "initial_polynomial": "z**6 - 3*z**4 - 16*z**4/(pi + 8) + 32*z**2/(pi + 8) + 3*z**2 - 16/(pi + 8) - 1",
+      "heat_solution": "-120*tau**3 + 180*tau**2*z**2 - 36*tau**2 - 192*tau**2/(pi + 8) - 30*tau*z**4 + 192*tau*z**2/(pi + 8) + 36*tau*z**2 - 6*tau - 64*tau/(pi + 8) + z**6 - 3*z**4 - 16*z**4/(pi + 8) + 32*z**2/(pi + 8) + 3*z**2 - 16/(pi + 8) - 1",
+      "field": "-pi/8",
+      "stiffness": "(pi**2 + 24*pi + 160)/64",
+      "stiffness_decimal": "3.83230981386319369",
+      "fourth_branch_coefficient": "(pi + 12)*(pi**2 + 24*pi + 96)/128",
+      "fifth_branch_coefficient": "(15*pi**4 + 720*pi**3 + 11904*pi**2 + 211968 + 82432*pi)/8192",
+      "branch_formula": "z_s=1+s*sqrt(2)*e-pi*e^2/4-s*sqrt(2)*K*e^3+P4*e^4+s*sqrt(2)*L5*e^5+O(e^6), e=sqrt(tau), s=+/-1",
+      "squared_gap": "q(tau)=8*tau-16*K*tau^2+C3*tau^3+O(tau^(7/2))",
+      "cubic_gap_coefficient": "(pi**4 + 48*pi**3 + 800*pi**2 + 14848 + 5632*pi)/32",
+      "cubic_gap_coefficient_decimal": "1313.21386617429988",
+      "jet_signs": "K>0, q''(0)=-32*K<0, q'''(0)=6*C3>0"
+    },
+    "renormalized_energy": {
+      "potential": "V(r)=r^(-2)-1+2*(r-1)=r^(-2)+2*r-3 for r>0",
+      "convexity": "V(1)=V'(1)=0 and V''(r)=6/r^4>0, hence V(r)>=0",
+      "single_interaction": "E_pair=Delta^(-2)*V(g/Delta)=1/g^2+2*g/Delta^3-3/Delta^2",
+      "asymptotic": "E_pair(tau)=1/(8*tau)+K/4-3/Delta^2+4*sqrt(2)*sqrt(tau)/Delta^3+O(tau)",
+      "derivative_asymptotic": "dE_pair/dtau=-1/(8*tau^2)+2*sqrt(2)/(Delta^3*sqrt(tau))+O(1)<0 for small tau>0",
+      "integral": "integral_0^epsilon E_pair(tau) dtau=+infinity",
+      "ordered_pair_warning": "A sum over ordered j!=k counts the symmetric collision interaction twice; one interaction already forces divergence.",
+      "symbolic_pair_energy": "1/(tau**3*(pi**4 + 48*pi**3 + 800*pi**2 + 14848 + 5632*pi)/32 - tau**2*(pi**2 + 24*pi + 160)/4 + 8*tau) - 3/Delta**2 + 2*sqrt(tau**3*(pi**4 + 48*pi**3 + 800*pi**2 + 14848 + 5632*pi)/32 - tau**2*(pi**2 + 24*pi + 160)/4 + 8*tau)/Delta**3"
+    },
+    "conditional_exclusion": "If a nonnegative renormalized energy contains the colliding interaction with a reference gap Delta bounded away from zero and a weight bounded below, then local time-integrability down to t_* excludes the collision, because the interaction is asymptotic to 1/(8*(t-t_*)).",
+    "rodgers_tao_scope": {
+      "source": "https://arxiv.org/abs/1801.05914",
+      "version": "v5 (2021-07-03)",
+      "contradiction_regime": "The paper assumes Lambda<0 and studies real zeros for Lambda<t<=0.",
+      "dynamics_theorem": "Theorem 11 states the zero ODE for Lambda<t<=0.",
+      "potential_equations": "Equations (62)-(63) define the nonnegative renormalized interaction.",
+      "integrated_energy_theorem": "Theorem 17 proves integral_(Lambda/4)^0 E_tilde_[0.5*T*log(T),3*T*log(T)](t) dt=o(T*log_+(T)^3) as T tends to infinity.",
+      "boundary_separation": "For Lambda<0, Lambda/4-Lambda=3*abs(Lambda)/4>0; the theorem does not integrate down to the collision boundary t=Lambda.",
+      "directionality": "The estimate controls relaxation inside an already-real interval and uses zeta-zero information at t=0. It is unavailable in a hypothetical Lambda>0 regime, where 0 lies before the real-zero boundary."
+    },
+    "decision": "Renormalized energy identifies a valid conditional boundary obstruction, but the published Rodgers-Tao theorem does not supply it. Nonnegativity and forward energy decrease are compatible with birth from an infinite-energy trace.",
+    "open_handoff": "Prove an Xi-specific boundary-uniform estimate giving finite local integrated renormalized energy on (Lambda,Lambda+epsilon), or find another global invariant that forbids the universal 1/(t-Lambda) collision singularity, without assuming Lambda<0 or importing t=0 real-zero information."
+  },
+  "rows": [
+    {
+      "id": "nbeng_01_pair_gap_ode",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The zero ODE gives a closed squared-gap equation for an isolated real pair.",
+      "formula": "x_k'=2*PV sum_(j!=k) 1/(x_k-x_j); for a pair gap g and q=g^2, q'=8-4*q*S, S=sum_out 1/((x_+-y)(x_--y)).",
+      "proof_boundary": "Real simple-zero interval; principal-value outsider sum exists.",
+      "diagnostics": null
+    },
+    {
+      "id": "nbeng_02_stiffness_boundary_jet",
+      "role": "exact_lemma",
+      "readiness": "available_exact",
+      "claim": "The first correction to universal square-root birth is the positive outsider stiffness.",
+      "formula": "At a finite double-zero birth t_*, K=sum_out 1/(c-y)^2, so q(t)=8*(t-t_*)-16*K*(t-t_*)^2+O((t-t_*)^3).",
+      "proof_boundary": "Finite isolated double zero with a regular outsider field.",
+      "diagnostics": null
+    },
+    {
+      "id": "nbeng_03_exact_higher_jet_birth",
+      "role": "exact_countermodel",
+      "readiness": "guard_validated",
+      "claim": "Classical field, positive stiffness, negative quadratic gap curvature, and positive cubic gap jet all coexist with birth.",
+      "formula": "z_s=1+s*sqrt(2)*e-pi*e^2/4-s*sqrt(2)*K*e^3+P4*e^4+s*sqrt(2)*L5*e^5+O(e^6), e=sqrt(tau), s=+/-1; q(tau)=8*tau-16*K*tau^2+C3*tau^3+O(tau^(7/2))",
+      "proof_boundary": "Exact even polynomial backward-heat solution, not the Xi kernel.",
+      "diagnostics": {
+        "a_squared": "1 + 16/(pi + 8)",
+        "initial_polynomial": "z**6 - 3*z**4 - 16*z**4/(pi + 8) + 32*z**2/(pi + 8) + 3*z**2 - 16/(pi + 8) - 1",
+        "heat_solution": "-120*tau**3 + 180*tau**2*z**2 - 36*tau**2 - 192*tau**2/(pi + 8) - 30*tau*z**4 + 192*tau*z**2/(pi + 8) + 36*tau*z**2 - 6*tau - 64*tau/(pi + 8) + z**6 - 3*z**4 - 16*z**4/(pi + 8) + 32*z**2/(pi + 8) + 3*z**2 - 16/(pi + 8) - 1",
+        "field": "-pi/8",
+        "stiffness": "(pi**2 + 24*pi + 160)/64",
+        "stiffness_decimal": "3.83230981386319369",
+        "fourth_branch_coefficient": "(pi + 12)*(pi**2 + 24*pi + 96)/128",
+        "fifth_branch_coefficient": "(15*pi**4 + 720*pi**3 + 11904*pi**2 + 211968 + 82432*pi)/8192",
+        "branch_formula": "z_s=1+s*sqrt(2)*e-pi*e^2/4-s*sqrt(2)*K*e^3+P4*e^4+s*sqrt(2)*L5*e^5+O(e^6), e=sqrt(tau), s=+/-1",
+        "squared_gap": "q(tau)=8*tau-16*K*tau^2+C3*tau^3+O(tau^(7/2))",
+        "cubic_gap_coefficient": "(pi**4 + 48*pi**3 + 800*pi**2 + 14848 + 5632*pi)/32",
+        "cubic_gap_coefficient_decimal": "1313.21386617429988",
+        "jet_signs": "K>0, q''(0)=-32*K<0, q'''(0)=6*C3>0"
+      }
+    },
+    {
+      "id": "nbeng_04_renormalized_potential",
+      "role": "published_definition",
+      "readiness": "available_published",
+      "claim": "The Rodgers-Tao renormalized interaction is nonnegative and singular like the inverse squared gap at collision.",
+      "formula": "V(r)=r^(-2)-1+2*(r-1)=r^(-2)+2*r-3 for r>0; E_pair=Delta^(-2)*V(g/Delta)=1/g^2+2*g/Delta^3-3/Delta^2",
+      "proof_boundary": "Equations (62)-(63) of the cited paper; ordered real zeros.",
+      "diagnostics": null
+    },
+    {
+      "id": "nbeng_05_collision_energy_asymptotic",
+      "role": "exact_lemma",
+      "readiness": "available_exact",
+      "claim": "A generic double-zero birth has logarithmically nonintegrable renormalized pair energy at the boundary.",
+      "formula": "E_pair(tau)=1/(8*tau)+K/4-3/Delta^2+4*sqrt(2)*sqrt(tau)/Delta^3+O(tau); integral_0^epsilon E_pair(tau) dtau=+infinity",
+      "proof_boundary": "Fixed nonzero reference gap and positive collision weight.",
+      "diagnostics": null
+    },
+    {
+      "id": "nbeng_06_forward_relaxation_guard",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "Forward decrease of nonnegative renormalized energy does not exclude birth.",
+      "formula": "dE_pair/dtau=-1/(8*tau^2)+2*sqrt(2)/(Delta^3*sqrt(tau))+O(1)<0 for small tau>0",
+      "proof_boundary": "The energy descends from an infinite boundary trace in the exact birth model.",
+      "diagnostics": null
+    },
+    {
+      "id": "nbeng_07_boundary_integrability_criterion",
+      "role": "conditional_criterion",
+      "readiness": "ready_if_hypothesis_proved",
+      "claim": "Finite integrated energy all the way to the boundary would exclude a double collision.",
+      "formula": "If a nonnegative renormalized energy contains the colliding interaction with a reference gap Delta bounded away from zero and a weight bounded below, then local time-integrability down to t_* excludes the collision, because the interaction is asymptotic to 1/(8*(t-t_*)).",
+      "proof_boundary": "The required Xi boundary-uniform integrability is not currently proved.",
+      "diagnostics": null
+    },
+    {
+      "id": "nbeng_08_published_energy_scope",
+      "role": "published_theorem",
+      "readiness": "available_published",
+      "claim": "The published integrated-energy theorem is an interior relaxation estimate under Lambda<0.",
+      "formula": "Theorem 17 proves integral_(Lambda/4)^0 E_tilde_[0.5*T*log(T),3*T*log(T)](t) dt=o(T*log_+(T)^3) as T tends to infinity.",
+      "proof_boundary": "The paper assumes Lambda<0 and studies real zeros for Lambda<t<=0. For Lambda<0, Lambda/4-Lambda=3*abs(Lambda)/4>0; the theorem does not integrate down to the collision boundary t=Lambda.",
+      "diagnostics": {
+        "source": "https://arxiv.org/abs/1801.05914",
+        "version": "v5 (2021-07-03)",
+        "contradiction_regime": "The paper assumes Lambda<0 and studies real zeros for Lambda<t<=0.",
+        "dynamics_theorem": "Theorem 11 states the zero ODE for Lambda<t<=0.",
+        "potential_equations": "Equations (62)-(63) define the nonnegative renormalized interaction.",
+        "integrated_energy_theorem": "Theorem 17 proves integral_(Lambda/4)^0 E_tilde_[0.5*T*log(T),3*T*log(T)](t) dt=o(T*log_+(T)^3) as T tends to infinity.",
+        "boundary_separation": "For Lambda<0, Lambda/4-Lambda=3*abs(Lambda)/4>0; the theorem does not integrate down to the collision boundary t=Lambda.",
+        "directionality": "The estimate controls relaxation inside an already-real interval and uses zeta-zero information at t=0. It is unavailable in a hypothetical Lambda>0 regime, where 0 lies before the real-zero boundary."
+      }
+    },
+    {
+      "id": "nbeng_09_directionality_gate",
+      "role": "circularity_gate",
+      "readiness": "guard_validated",
+      "claim": "Rodgers-Tao interior energy control cannot be reversed into a proof of Lambda<=0.",
+      "formula": "The estimate controls relaxation inside an already-real interval and uses zeta-zero information at t=0. It is unavailable in a hypothetical Lambda>0 regime, where 0 lies before the real-zero boundary.",
+      "proof_boundary": "Blocks an assumption-direction error; it does not weaken the cited theorem.",
+      "diagnostics": null
+    },
+    {
+      "id": "nbeng_10_xi_boundary_energy_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "The energy route now has one precise non-circular target at the Newman boundary.",
+      "formula": "Prove an Xi-specific boundary-uniform estimate giving finite local integrated renormalized energy on (Lambda,Lambda+epsilon), or find another global invariant that forbids the universal 1/(t-Lambda) collision singularity, without assuming Lambda<0 or importing t=0 real-zero information.",
+      "proof_boundary": "Open Xi-specific boundary theorem; not RH and not Lambda<=0.",
+      "diagnostics": null
+    }
+  ]
+}

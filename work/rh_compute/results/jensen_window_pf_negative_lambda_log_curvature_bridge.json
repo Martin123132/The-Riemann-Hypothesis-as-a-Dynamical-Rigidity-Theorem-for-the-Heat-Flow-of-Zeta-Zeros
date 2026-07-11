@@ -1,0 +1,112 @@
+{
+  "bridge_rows": [
+    {
+      "claim": "For 0<c<1 and 0<x_k<=1, d_k=1-x_k<=c is equivalent to B_k=-log(x_k)<=-log(1-c).",
+      "id": "nllcb_01_defect_log_equivalence",
+      "proof_boundary": "Exact algebra only; it does not prove any zeta tail bound.",
+      "role": "exact_bridge"
+    },
+    {
+      "claim": "The stronger bound 0<=B_k<=2/(3*(2*k+1)) implies the buffered defect condition d_k<=2/(3*(2*k+1)).",
+      "id": "nllcb_02_simple_log_curvature_sufficient",
+      "proof_boundary": "Sufficient condition only; the all-k bound remains unproved.",
+      "role": "live_sufficient_condition"
+    },
+    {
+      "claim": "For 0<x_k<=1, d_(k+1)<=d_k is equivalent to B_(k+1)<=B_k.",
+      "id": "nllcb_03_monotone_defect_log_curvature",
+      "proof_boundary": "Exact translation only; not a proof of monotonicity for zeta coefficients.",
+      "role": "exact_bridge"
+    },
+    {
+      "claim": "B_(k+1)<=B_k is equivalent to Delta^3 log A_{k-1}>=0, matching the existing monotone-contraction theorem target.",
+      "id": "nllcb_04_delta3_reduction",
+      "proof_boundary": "Reduction to an open theorem target only.",
+      "role": "live_reduction",
+      "source": "outputs/jensen_window_pf_monotone_contraction_theorem_target.md"
+    },
+    {
+      "claim": "The current certified prefix validates the exact defect buffer, the stronger simple log-buffer, and curvature monotonicity on all checked rows.",
+      "id": "nllcb_05_finite_compatibility",
+      "proof_boundary": "Finite compatibility only; not an all-k theorem.",
+      "role": "finite_diagnostic"
+    }
+  ],
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_log_curvature_bridge.py",
+  "date": "2026-07-06",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k22.jsonl"
+  ],
+  "finite_diagnostics": {
+    "checked_x_max": 21,
+    "coefficient_k_max": 22,
+    "curvature_monotone_positive_rows": 60,
+    "curvature_monotone_rows": 60,
+    "exact_defect_buffer_positive_rows": 63,
+    "exact_defect_buffer_rows": 63,
+    "lambdas": [
+      "-100.0",
+      "-50.0",
+      "-25.0"
+    ],
+    "max_log_curvature": {
+      "k": 1,
+      "lam": "-25.0",
+      "sample": "3.524954269540071057E-2"
+    },
+    "min_curvature_monotone_gap": {
+      "k": 20,
+      "lam": "-100.0",
+      "sample": "7.539431011168075104E-5"
+    },
+    "min_exact_defect_buffer_margin": {
+      "k": 21,
+      "lam": "-25.0",
+      "sample": "2.125180981004817379E-3"
+    },
+    "min_exact_log_slack": {
+      "k": 21,
+      "lam": "-25.0",
+      "sample": "2.156321864086280617E-3"
+    },
+    "min_simple_log_buffer_margin": {
+      "k": 21,
+      "lam": "-25.0",
+      "sample": "2.005614607560894716E-3"
+    },
+    "min_simple_log_slack": {
+      "k": 21,
+      "lam": "-25.0",
+      "sample": "2.034879929997686858E-3"
+    },
+    "positive_curvature_positive_rows": 63,
+    "positive_curvature_rows": 63,
+    "simple_log_buffer_positive_rows": 63,
+    "simple_log_buffer_rows": 63
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_log_curvature_bridge.py",
+  "invariants": [
+    "No row is ready_to_apply for the defect-tail theorem.",
+    "The bounded log-curvature estimate is not proved for all k.",
+    "The Delta^3 log A monotone-contraction theorem target remains open.",
+    "Finite prefix compatibility is not promoted to cone entry.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_log_curvature_bridge",
+  "proof_boundary": "Finite theorem-search diagnostic and exact algebraic reduction only. It shows how a bounded log-curvature theorem would imply the buffered defect-tail condition, but it does not prove the all-k bound, does not prove the monotone-contraction theorem, does not prove cone entry, and does not prove Lambda <= 0.",
+  "source_defect_recurrence_scout": "outputs/jensen_window_pf_negative_lambda_defect_recurrence_scout.md",
+  "source_defect_tail_target": "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md",
+  "source_monotone_contraction_target": "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+  "status": "finite theorem-search diagnostic",
+  "summary": {
+    "bridge_rows": 5,
+    "curvature_monotone_rows": 60,
+    "exact_defect_buffer_rows": 63,
+    "live_reduction_rows": 2,
+    "main_finding": "The buffered defect-tail condition reduces to a cleaner log-curvature target: prove 0<=B_k<=2/(3*(2*k+1)) for k>=22, where B_k=-Delta^2 log A_k=-log(x_k), and prove B_(k+1)<=B_k from k>=21. The second clause is exactly the Delta^3 log A monotone-contraction target, while the bounded-curvature upper estimate remains open.",
+    "positive_curvature_rows": 63,
+    "ready_to_apply_rows": 0,
+    "simple_log_buffer_rows": 63,
+    "target_closing": false
+  }
+}

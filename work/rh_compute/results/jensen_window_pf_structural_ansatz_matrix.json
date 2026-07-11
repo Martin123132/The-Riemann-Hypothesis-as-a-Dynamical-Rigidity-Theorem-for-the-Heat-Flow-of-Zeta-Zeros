@@ -1,0 +1,254 @@
+{
+  "kind": "jensen_window_pf_structural_ansatz_matrix",
+  "date": "2026-07-06",
+  "target_obligation": "jwpf_06_sign_regular_to_jensen_pf_conversion",
+  "proof_boundary": "Structural proof-search matrix only; this is not a proof of Jensen-window PF-infinity, Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0.",
+  "status_legend": {
+    "live_structural_candidate": "A possible route only if a uniform all-degree identity or theorem is proved.",
+    "blocked_until_input_pf": "Potentially useful only after an input PF or real-rootedness hypothesis is independently proved.",
+    "rejected_by_countermodel": "Blocked by exact low-degree algebra or finite-prefix/countermodel gates."
+  },
+  "hard_low_degree_tests": [
+    {
+      "id": "hard_01_degree2_contact",
+      "source": "work/rh_compute/results/jensen_window_pf_obligation_algebra.json#degree2",
+      "required_formulas": [
+        "4*(a1**2 - a0*a2)",
+        "a1**2 - a0*a2 = -det([[a0,a1],[a1,a2]])"
+      ],
+      "implication": "Any valid transfer theorem must specialize to the exact degree-2 signed-Hankel threshold."
+    },
+    {
+      "id": "hard_02_degree3_2x2_off_hankel",
+      "source": "work/rh_compute/results/jensen_window_pf_obligation_algebra.json#degree3",
+      "required_formulas": [
+        "-3*(a0*a2 - 3*a1**2)",
+        "-a0*a3 + 9*a1*a2",
+        "-3*(a1*a3 - 3*a2**2)"
+      ],
+      "implication": "A shifted-Hankel-only identity is too small; degree 3 already contains off-Hankel binomial-weighted Toeplitz products."
+    },
+    {
+      "id": "hard_03_degree3_3x3_cubic",
+      "source": "work/rh_compute/results/jensen_window_pf_obligation_algebra.json#degree3",
+      "required_formulas": [
+        "a0**2*a3 - 18*a0*a1*a2 + 27*a1**3",
+        "a0*a3**2 - 18*a1*a2*a3 + 27*a2**3"
+      ],
+      "implication": "The proof mechanism must reproduce cubic contiguous Toeplitz minors, not only quadratic log-concavity."
+    },
+    {
+      "id": "hard_04_degree4_banded_coefficients",
+      "source": "work/rh_compute/results/jensen_window_pf_obligation_algebra.json#degree4",
+      "required_formulas": [
+        "-2*(3*a0*a2 - 8*a1**2)",
+        "-4*(a0*a3 - 6*a1*a2)",
+        "-a0*a4 + 16*a1*a3",
+        "-2*(3*a0*a2*a4 - 8*a0*a3**2 - 8*a1**2*a4 + 96*a1*a2*a3 - 108*a2**3)"
+      ],
+      "implication": "Degree 4 tests the binomial-weighted coefficient arithmetic that a kernel, network, or determinant identity must explain uniformly."
+    },
+    {
+      "id": "hard_05_countermodel_kill_gate",
+      "source": "work/rh_compute/results/jensen_window_pf_obligation_algebra.json#finite_countermodel",
+      "required_countermodel_fields": [
+        "d3_first_negative_contiguous_toeplitz_minor.size=8",
+        "d4_first_negative_contiguous_toeplitz_minor.size=6",
+        "blocked_promotion includes selected low-order Jensen-window Toeplitz minors"
+      ],
+      "implication": "Any finite-prefix, selected-minor, or low-order-only proof step is rejected before it enters the manuscript route."
+    }
+  ],
+  "ansatz_rows": [
+    {
+      "id": "ansatz_01_direct_shifted_hankel_only_transfer",
+      "ansatz_family": "direct shifted-Hankel-only transfer",
+      "status": "rejected_by_countermodel",
+      "readiness": "not_ready_to_apply",
+      "hoped_mechanism": "Use signed shifted Hankel minors of A_k(0) directly as Jensen-window PF minors.",
+      "required_identity": "Every binomially weighted Jensen-window Toeplitz minor would need to be a signed shifted-Hankel minor or a nonnegative combination of such minors.",
+      "hard_tests_required": [
+        "hard_01_degree2_contact",
+        "hard_02_degree3_2x2_off_hankel",
+        "hard_03_degree3_3x3_cubic",
+        "hard_04_degree4_banded_coefficients",
+        "hard_05_countermodel_kill_gate"
+      ],
+      "failed_hard_tests": [
+        "hard_02_degree3_2x2_off_hankel",
+        "hard_03_degree3_3x3_cubic",
+        "hard_05_countermodel_kill_gate"
+      ],
+      "low_degree_fit": "Matches only the degree-2 contact test.",
+      "current_failure": "Degree-3 and degree-4 selected Toeplitz minors contain binomially weighted off-Hankel products and cubic forms not supplied by the degree-2 signed-Hankel identity.",
+      "next_action": "Do not use this as a proof route; retain it only as a rejection baseline for proposed bridge lemmas.",
+      "refs": [
+        "work/rh_compute/results/jensen_window_pf_obligation_algebra.json",
+        "outputs/jensen_window_pf_obligation_algebra.md",
+        "outputs/countermodel_library.md"
+      ],
+      "hypotheses_verified": false,
+      "closes_jwpf06_if_proved": false,
+      "proof_boundary": "Rejected ansatz only; not a bridge theorem."
+    },
+    {
+      "id": "ansatz_02_positive_cauchy_binet_kernel",
+      "ansatz_family": "positive Cauchy-Binet kernel or integral",
+      "status": "live_structural_candidate",
+      "readiness": "not_ready_to_apply",
+      "hoped_mechanism": "Represent every Jensen-window Toeplitz minor as a Cauchy-Binet or Andreief sum/integral of products of nonnegative determinants.",
+      "required_identity": "For all d,n and every Toeplitz minor shape, det T_{d,n}[R,C] equals a finite sum or integral of manifestly nonnegative determinant products using only proved Xi/Phi data.",
+      "hard_tests_required": [
+        "hard_01_degree2_contact",
+        "hard_02_degree3_2x2_off_hankel",
+        "hard_03_degree3_3x3_cubic",
+        "hard_04_degree4_banded_coefficients",
+        "hard_05_countermodel_kill_gate"
+      ],
+      "failed_hard_tests": [],
+      "low_degree_fit": "The Cauchy-Binet low-degree scout certifies the selected degree-2/3/4 hard formulas by adjacent log-concavity via nonnegative Bernstein coefficients, but finds no kernel identity.",
+      "current_failure": "No uniform positive kernel identity is currently known; the selected low-degree formulas are too weak to identify one because a log-concave finite countermodel passes them while larger contiguous Jensen-window Toeplitz minors fail.",
+      "next_action": "Move beyond the selected formulas: test larger contiguous minors and search for a uniform positive kernel pattern that covers every d,n and every Toeplitz minor shape.",
+      "refs": [
+        "outputs/jensen_window_pf_cauchy_binet_low_degree_scout.md",
+        "outputs/jensen_window_pf_log_concavity_frontier_scout.md",
+        "outputs/jensen_window_pf_ratio_condition_scout.md",
+        "outputs/jensen_window_pf_theorem_machinery_fit_matrix.md",
+        "work/rh_compute/results/jensen_window_pf_cauchy_binet_low_degree_scout.json",
+        "work/rh_compute/results/jensen_window_pf_log_concavity_frontier_scout.json",
+        "work/rh_compute/results/jensen_window_pf_ratio_condition_scout.json",
+        "work/rh_compute/results/jensen_window_pf_theorem_machinery_fit_matrix.json",
+        "work/rh_compute/results/jensen_window_pf_obligation_algebra.json",
+        "work/rh_compute/scripts/check_jensen_window_pf_cauchy_binet_low_degree_scout.py",
+        "work/rh_compute/scripts/check_jensen_window_pf_log_concavity_frontier_scout.py",
+        "work/rh_compute/scripts/check_jensen_window_pf_ratio_condition_scout.py"
+      ],
+      "hypotheses_verified": false,
+      "closes_jwpf06_if_proved": true,
+      "proof_boundary": "Live structural candidate only; the required positive identity is missing."
+    },
+    {
+      "id": "ansatz_03_planar_network_or_production_matrix",
+      "ansatz_family": "planar network, production matrix, or LGV model",
+      "status": "live_structural_candidate",
+      "readiness": "not_ready_to_apply",
+      "hoped_mechanism": "Build a totally nonnegative matrix model whose path minors are exactly the Jensen-window Toeplitz minors.",
+      "required_identity": "A Lindstrom-Gessel-Viennot, production-matrix, or equivalent network model must yield B^{d,n,0}_j=binom(d,j) A_{n+j}(0) and all of its Toeplitz minors.",
+      "hard_tests_required": [
+        "hard_01_degree2_contact",
+        "hard_02_degree3_2x2_off_hankel",
+        "hard_03_degree3_3x3_cubic",
+        "hard_04_degree4_banded_coefficients",
+        "hard_05_countermodel_kill_gate"
+      ],
+      "failed_hard_tests": [],
+      "low_degree_fit": "Still open; the network has to produce the degree-3 cubic minors and the degree-4 binomial coefficients exactly, and cannot be the raw ordinary Motzkin/J-fraction production matrix, a global length-parity sign repair, or an absolute-value sign-state cover.",
+      "current_failure": "No positive network or production matrix has been constructed for the zeta heat-flow Jensen windows. The reciprocal Motzkin obstruction scout rejects the raw ordinary J-fraction path model as manifest positivity because mu_2 already contains a negative lambda_1 path contribution and beta_1 is negative for d>=3; the parity-lift obstruction scout rejects global length-parity signs because same-length closed paths have both signs; and the state-space sign-lift obstruction scout rejects absolute-value sign-state covers because they overshoot mu_2 by 2*kappa_1.",
+      "next_action": "Search for a genuinely modified binomial transform, parity-doubled state model, or Riordan/production-matrix representation whose minors survive the hard low-degree tests.",
+      "refs": [
+        "outputs/toeplitz_jacobi_trudi_bridge_note.md",
+        "outputs/positive_schur_specialization_target.md",
+        "outputs/jensen_window_pf_reciprocal_motzkin_path_obstruction_scout.md",
+        "outputs/jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_scout.md",
+        "outputs/jensen_window_pf_state_space_sign_lift_obstruction_scout.md",
+        "work/rh_compute/results/jensen_window_pf_reciprocal_motzkin_path_obstruction_scout.json",
+        "work/rh_compute/results/jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_scout.json",
+        "work/rh_compute/results/jensen_window_pf_state_space_sign_lift_obstruction_scout.json",
+        "work/rh_compute/results/jensen_window_pf_obligation_algebra.json"
+      ],
+      "hypotheses_verified": false,
+      "closes_jwpf06_if_proved": true,
+      "proof_boundary": "Live structural candidate only; no positive network is currently proved."
+    },
+    {
+      "id": "ansatz_04_binomial_multiplier_preserver",
+      "ansatz_family": "binomial multiplier or zero-preserver route",
+      "status": "blocked_until_input_pf",
+      "readiness": "not_ready_to_apply",
+      "hoped_mechanism": "Use the binomial weights binom(d,j) as a multiplier/preserver acting on already real-rooted input windows.",
+      "required_identity": "A preserver theorem must start from independently proved PF or real-rooted input windows and then preserve every shifted Jensen window.",
+      "hard_tests_required": [
+        "hard_01_degree2_contact",
+        "hard_02_degree3_2x2_off_hankel",
+        "hard_03_degree3_3x3_cubic",
+        "hard_04_degree4_banded_coefficients",
+        "hard_05_countermodel_kill_gate"
+      ],
+      "failed_hard_tests": [],
+      "low_degree_fit": "Binomial weights are relevant, but they do not create the missing input real-rootedness.",
+      "current_failure": "The needed input PF/real-rootedness of unweighted or shifted windows is itself an open theorem; using it would be circular.",
+      "next_action": "Use preserver theory only as an auxiliary after a noncircular input PF theorem is available.",
+      "refs": [
+        "outputs/jensen_window_pf_theorem_machinery_fit_matrix.md",
+        "outputs/jensen_window_pf_bridge_target.md"
+      ],
+      "hypotheses_verified": false,
+      "closes_jwpf06_if_proved": false,
+      "proof_boundary": "Conditional auxiliary route only; it cannot close jwpf_06 without a separate input theorem."
+    },
+    {
+      "id": "ansatz_05_positive_determinant_integral",
+      "ansatz_family": "positive determinant-integral formula",
+      "status": "live_structural_candidate",
+      "readiness": "not_ready_to_apply",
+      "hoped_mechanism": "Derive a manifestly nonnegative integral formula for each Jensen-window Toeplitz minor.",
+      "required_identity": "For all d,n,R,C, det T_{d,n}[R,C] = integral W_{d,n,R,C}(x) dx with W manifestly nonnegative under proved zeta heat-flow hypotheses.",
+      "hard_tests_required": [
+        "hard_01_degree2_contact",
+        "hard_02_degree3_2x2_off_hankel",
+        "hard_03_degree3_3x3_cubic",
+        "hard_04_degree4_banded_coefficients",
+        "hard_05_countermodel_kill_gate"
+      ],
+      "failed_hard_tests": [],
+      "low_degree_fit": "Still open; the integral must specialize to the hard degree-3 and degree-4 determinant polynomials exactly.",
+      "current_failure": "The corpus has positive determinant-integral language as an open target, but no formula for these Jensen-window minors.",
+      "next_action": "Try Andreief, de Bruijn, or kernel-composition identities on the listed low-degree minors and reject any formula that only proves selected cases.",
+      "refs": [
+        "outputs/coefficient_pf_bridge_obstruction.md",
+        "outputs/missing_coefficient_pf_theorem.md",
+        "work/rh_compute/results/jensen_window_pf_obligation_algebra.json"
+      ],
+      "hypotheses_verified": false,
+      "closes_jwpf06_if_proved": true,
+      "proof_boundary": "Live structural candidate only; the determinant-integral formula is missing."
+    },
+    {
+      "id": "ansatz_06_finite_grid_interpolation",
+      "ansatz_family": "finite grid interpolation or finite rectangle promotion",
+      "status": "rejected_by_countermodel",
+      "readiness": "not_ready_to_apply",
+      "hoped_mechanism": "Infer the all-degree/all-shift bridge from enough finite Arb/Sturm/PF rows or from interpolation over checked minors.",
+      "required_identity": "A finite rectangle would need to determine every future shift, degree, and Toeplitz minor for the actual A_k(0).",
+      "hard_tests_required": [
+        "hard_01_degree2_contact",
+        "hard_02_degree3_2x2_off_hankel",
+        "hard_03_degree3_3x3_cubic",
+        "hard_04_degree4_banded_coefficients",
+        "hard_05_countermodel_kill_gate"
+      ],
+      "failed_hard_tests": [
+        "hard_05_countermodel_kill_gate"
+      ],
+      "low_degree_fit": "Finite checked rows can pass and still fail at the next untested coefficient or larger contiguous minor.",
+      "current_failure": "The finite Jensen-window rectangle trap preserves current coefficient inputs and breaks the next degree-2 Jensen discriminant; the low-degree algebra countermodel also passes selected minors while larger contiguous minors fail.",
+      "next_action": "Use finite grids only for falsification pressure and normalization checks; never as a target-closing proof step.",
+      "refs": [
+        "outputs/countermodel_library.md",
+        "work/rh_compute/scripts/countermodel_gate_examples.py",
+        "work/rh_compute/results/jensen_window_pf_obligation_algebra.json"
+      ],
+      "hypotheses_verified": false,
+      "closes_jwpf06_if_proved": false,
+      "proof_boundary": "Rejected proof move; finite evidence is not an all-order bridge theorem."
+    }
+  ],
+  "invariants": [
+    "No ansatz row has readiness ready_to_apply.",
+    "No row has hypotheses_verified=true.",
+    "Every live structural candidate must require all hard low-degree tests.",
+    "Every live structural candidate must still name a missing uniform identity or theorem.",
+    "Rejected rows cannot close jwpf_06.",
+    "The finite countermodel kill gate remains part of every ansatz row."
+  ]
+}

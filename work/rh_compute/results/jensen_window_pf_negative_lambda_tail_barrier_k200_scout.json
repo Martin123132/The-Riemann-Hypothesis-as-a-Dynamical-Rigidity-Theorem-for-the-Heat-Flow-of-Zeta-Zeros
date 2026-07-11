@@ -1,0 +1,125 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_tail_barrier_scout.py",
+  "date": "2026-07-06",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k200.jsonl"
+  ],
+  "finite_diagnostics": {
+    "checked_x_max": 199,
+    "coefficient_k_max": 200,
+    "cone_buffer_positive_rows": 597,
+    "cone_buffer_rows": 597,
+    "defect_monotone_positive_rows": 594,
+    "defect_monotone_rows": 594,
+    "lambdas": [
+      "-100.0",
+      "-50.0",
+      "-25.0"
+    ],
+    "max_defect_ratio": {
+      "k": 198,
+      "lam": "-100.0",
+      "sample": "9.966356885173608218E-1"
+    },
+    "max_scaled_defect": {
+      "k": 199,
+      "lam": "-25.0",
+      "sample": "5.376643171065356005E-1"
+    },
+    "min_defect_monotone_gap": {
+      "k": 198,
+      "lam": "-100.0",
+      "sample": "7.428268896473821337E-6"
+    },
+    "min_lower_wall_slack": {
+      "k": 199,
+      "lam": "-25.0",
+      "sample": "2.317472094704082203E-3"
+    },
+    "min_one_third_buffer_margin": {
+      "k": 199,
+      "lam": "-25.0",
+      "sample": "-2.043309837732022671E-1"
+    },
+    "min_scaled_defect_increase": {
+      "k": 198,
+      "lam": "-25.0",
+      "sample": "4.449655594664470276E-4"
+    },
+    "min_upper_defect": {
+      "k": 199,
+      "lam": "-100.0",
+      "sample": "2.200532835420365021E-3"
+    },
+    "rejected_candidate_count": 1,
+    "scaled_defect_increase_positive_rows": 594,
+    "scaled_defect_increase_rows": 594,
+    "scaled_defect_one_third_rows": 179,
+    "scaled_defect_rows": 597
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_tail_barrier_scout.py",
+  "invariants": [
+    "No row is ready_to_apply for the cone-entry theorem.",
+    "The one-third width buffer is a finite-prefix certificate only.",
+    "The scaled-defect monotonicity shortcut is explicitly rejected.",
+    "The all-k tail or finite-collar flow theorem remains open.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_tail_barrier_scout",
+  "note": "outputs/jensen_window_pf_negative_lambda_tail_barrier_k200_scout.md",
+  "proof_boundary": "Finite theorem-search diagnostic only. It rewrites the missing negative-lambda tail as defect inequalities and certifies several finite-prefix barrier facts, but it does not prove an all-k tail theorem, does not prove a collared finite flow theorem, does not prove cone entry for zeta coefficients, does not prove jwpf_06, and leaves Lambda <= 0 unsettled.",
+  "result_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_tail_barrier_k200_scout.json",
+  "source_cone_entry_target": "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+  "source_finite_collar_contract": "outputs/jensen_window_pf_negative_lambda_finite_collar_contract.md",
+  "source_prefix_scout": "outputs/jensen_window_pf_negative_lambda_cone_entry_prefix_scout.md",
+  "status": "finite theorem-search diagnostic",
+  "summary": {
+    "checked_x_max": 199,
+    "cone_buffer_rows": 597,
+    "defect_monotone_rows": 594,
+    "main_finding": "The certified prefix satisfies the defect-form cone barriers 0 <= d_k <= 2/(2k+1), d_{k+1} <= d_k, and the stronger finite one-third width buffer on 179/597 checked rows, with a frontier failure before the end of the prefix. However, the scaled defect is increasing on the checked prefix, so any analytic proof route that assumes scaled-defect monotone decrease is already rejected. The next finite collar needs x_200, hence A_201, unless an analytic tail theorem supplies it.",
+    "one_third_buffer_rows": 179,
+    "ready_to_apply_rows": 0,
+    "rejected_candidate_count": 1,
+    "scaled_defect_increase_rows": 594,
+    "target_closing": false
+  },
+  "tail_barrier_rows": [
+    {
+      "claim": "Writing d_k=1-x_k, the ratio cone is equivalent to 0 <= d_k <= 2/(2*k+1) and d_{k+1} <= d_k.",
+      "id": "nltbs_01_defect_form_reduction",
+      "proof_boundary": "Algebraic reformulation only; not a zeta tail theorem.",
+      "role": "exact_reformulation"
+    },
+    {
+      "claim": "On the checked negative-lambda prefix, the stronger one-third width buffer d_k <= 2/(3*(2*k+1)) holds on 179/597 certified x_k rows.",
+      "id": "nltbs_02_one_third_width_buffer",
+      "positive_rows": 179,
+      "proof_boundary": "Finite prefix only; not a tail theorem.",
+      "role": "finite_barrier_certificate",
+      "rows": 597
+    },
+    {
+      "claim": "On the checked negative-lambda prefix, d_{k+1} <= d_k.",
+      "id": "nltbs_03_defect_monotone_prefix",
+      "positive_rows": 594,
+      "proof_boundary": "Finite prefix only; not an all-k monotonicity theorem.",
+      "role": "finite_barrier_certificate",
+      "rows": 594
+    },
+    {
+      "claim": "The candidate shortcut that the scaled defect ((2*k+1)/2)*d_k should be nonincreasing is false on the certified prefix.",
+      "id": "nltbs_04_scaled_defect_monotonicity_rejected",
+      "positive_increase_rows": 594,
+      "proof_boundary": "Rejects one over-strong barrier ansatz only.",
+      "role": "rejected_candidate",
+      "rows": 594
+    },
+    {
+      "claim": "The next purely finite collar upgrade from K=197 to K=198 needs x_200, hence coefficient A_201, unless an analytic tail theorem supplies the missing collar.",
+      "id": "nltbs_05_next_collar_upgrade",
+      "proof_boundary": "Upgrade target only; not an analytic tail theorem.",
+      "role": "open_upgrade"
+    }
+  ]
+}

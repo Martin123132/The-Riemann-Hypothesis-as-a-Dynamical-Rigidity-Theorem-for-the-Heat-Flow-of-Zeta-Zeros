@@ -146,6 +146,7 @@ Relevant notes:
 ```text
 outputs/finite_toeplitz_certificate_status.md
 outputs/toeplitz_jacobi_trudi_bridge_note.md
+outputs/jensen_window_pf_schur_shape_contract.md
 outputs/edrei_log_sign_diagnostic.md
 outputs/missing_coefficient_pf_theorem.md
 outputs/sign_regularity_theorem_fit_matrix.md
@@ -153,6 +154,17 @@ outputs/sign_regularity_theorem_fit_matrix.md
 
 These artifacts are evidence and falsification pressure. They are not a proof
 of Target S.
+
+The Jensen-window Schur shape contract is an analogue for the open
+Jensen-window PF bridge, not a coefficient-PF proof. It uses the finite-support
+specialization:
+
+```text
+h_j = binom(d,j) * A_{n+j}
+```
+
+and records bounded shape obligations for positive Schur, network, or
+determinant-integral routes.
 
 ## Kill Gates
 

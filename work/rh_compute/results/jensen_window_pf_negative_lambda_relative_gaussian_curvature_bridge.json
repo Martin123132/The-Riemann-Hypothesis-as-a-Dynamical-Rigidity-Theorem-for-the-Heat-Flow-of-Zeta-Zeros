@@ -1,0 +1,191 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_curvature_bridge.py",
+  "date": "2026-07-07",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k300.jsonl",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k220_k250_dps220.jsonl",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k245_k320_dps220.jsonl"
+  ],
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_curvature_bridge.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The weighted four-point relative-Gaussian inequality remains an open zeta-specific all-k theorem.",
+    "Repaired k300 evidence is finite stress evidence only.",
+    "The companion monotone-contraction upper side remains a separate open theorem target.",
+    "Generic moment positivity, endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_curvature_bridge",
+  "matrix_rows": [
+    {
+      "claim": "Let f_k be the log of the zeta moment sequence after subtracting any Gaussian raw-moment baseline; affine changes in f_k do not affect the second differences below.",
+      "formula": "f_k=log(M_k/G_k), with G_(k+1)*G_(k-1)/G_k^2=(2*k+1)/(2*k-1)",
+      "id": "nlrgcb_01_relative_gaussian_log_coordinate",
+      "proof_boundary": "Exact coordinate choice only; no zeta inequality is proved.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_gaussian_curvature_matrix.md"
+      ]
+    },
+    {
+      "claim": "The curvature deficit B_k is the negative second difference of the relative Gaussian log moment f_k.",
+      "formula": "B_k=h_k-log(R_k)=2*f_k-f_(k-1)-f_(k+1)=-Delta^2 f_(k-1)",
+      "id": "nlrgcb_02_deficit_as_negative_second_difference",
+      "proof_boundary": "Exact identity only; positivity of B_k remains a zeta-specific input.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_scaled_curvature_log_ceiling_bridge.md"
+      ]
+    },
+    {
+      "claim": "The scaled-curvature target C_(k+1)>=C_k is exactly a weighted four-point inequality for f_k.",
+      "formula": "C_(k+1)-C_k=(2*k+1)*f_(k-1)-(6*k+5)*f_k+(6*k+7)*f_(k+1)-(2*k+3)*f_(k+2)",
+      "id": "nlrgcb_03_scaled_curvature_weighted_third_gap",
+      "proof_boundary": "Exact bridge only; the weighted four-point inequality is not proved.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_scaled_curvature_monotonicity_target.md"
+      ]
+    },
+    {
+      "claim": "The companion monotone upper side B_(k+1)<=B_k is an ordinary third-difference sign condition in the same f_k coordinate.",
+      "formula": "B_k-B_(k+1)=-f_(k-1)+3*f_k-3*f_(k+1)+f_(k+2)",
+      "id": "nlrgcb_04_companion_upper_side_third_difference",
+      "proof_boundary": "Exact translation only; it does not prove the companion monotone-contraction theorem.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+        "outputs/jensen_window_pf_negative_lambda_coefficient_curvature_corridor_bridge.md"
+      ]
+    },
+    {
+      "claim": "The repaired k300 data validate the finite curvature ladder B_k>0, B_(k+1)<=B_k, and C_(k+1)>=C_k on every checked row.",
+      "diagnostics": {
+        "adjacent_total_rows": 894,
+        "b_decrease_rows": 894,
+        "b_positive_rows": 897,
+        "c_increase_rows": 894,
+        "c_lambda_order_rows": 598,
+        "coefficient_cap": 300,
+        "lambda_order_total_rows": 598,
+        "lambdas": [
+          "-25.0",
+          "-50.0",
+          "-100.0"
+        ],
+        "max_c": {
+          "k": 299,
+          "lam": "-25.0",
+          "sample": "1.144219413064916367E+0"
+        },
+        "min_b": {
+          "k": 299,
+          "lam": "-100.0",
+          "sample": "1.652602130709587426E-3"
+        },
+        "min_b_decrease": {
+          "k": 298,
+          "lam": "-100.0",
+          "sample": "4.098948243972025449E-6"
+        },
+        "min_c": {
+          "k": 1,
+          "lam": "-100.0",
+          "sample": "2.704287906143097886E-2"
+        },
+        "min_c_increase": {
+          "k": 298,
+          "lam": "-25.0",
+          "sample": "5.226725385445290147E-4"
+        },
+        "min_c_lambda_gap": {
+          "k": 1,
+          "lam": "-50.0 to -100.0",
+          "sample": "3.376275223279466485E-2"
+        },
+        "raw_log_total_rows": 897
+      },
+      "id": "nlrgcb_05_repaired_k300_curvature_ladder",
+      "proof_boundary": "Finite repaired stress evidence only; not an all-k weighted curvature theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_stress",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_k300_precision_repair_audit.md",
+        "outputs/jensen_window_pf_negative_lambda_scaled_curvature_log_ceiling_bridge.md"
+      ]
+    },
+    {
+      "claim": "On the checked grid, C_k is ordered downward as |lambda| grows across -25, -50, and -100.",
+      "diagnostics": {
+        "c_lambda_order_rows": 598,
+        "lambda_order_total_rows": 598,
+        "min_c_lambda_gap": {
+          "k": 1,
+          "lam": "-50.0 to -100.0",
+          "sample": "3.376275223279466485E-2"
+        }
+      },
+      "id": "nlrgcb_06_lambda_order_finite_pattern",
+      "proof_boundary": "Finite lambda-order diagnostic only; not a continuous-lambda theorem or tail theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_order_pattern"
+    },
+    {
+      "claim": "A promoted tail proof may now target the relative-Gaussian weighted four-point inequality for f_k, with uniform remainders and a finite collar.",
+      "gap": "Current signed/Taylor diagnostics do not yet provide a uniform all-k remainder theorem for the weighted four-point inequality.",
+      "id": "nlrgcb_07_live_tail_profile_route",
+      "proof_boundary": "Live theorem-search route only.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_signed_gaussian_perturbation_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+        "outputs/jensen_window_pf_negative_lambda_high_order_taylor_scout.md"
+      ]
+    },
+    {
+      "claim": "A promoted proof must state the relative Gaussian baseline, finite collar, lambda range, B-wall input, weighted C-monotonicity inequality, companion B-monotone side, and forbidden endpoint assumptions.",
+      "id": "nlrgcb_08_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a proof of scaled-curvature monotonicity, raw-corridor occupancy, cone entry, jwpf_06, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Exact finite theorem-search diagnostic only. It rewrites the scaled-curvature target in relative-Gaussian log-moment coordinates and checks repaired k300 finite stress, but it does not prove the all-k weighted four-point inequality, does not prove the companion monotone-contraction theorem, does not prove cone entry, and does not prove RH or Lambda <= 0.",
+  "source_gaussian_curvature_matrix": "outputs/jensen_window_pf_negative_lambda_gaussian_curvature_matrix.md",
+  "source_monotone_contraction_target": "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+  "source_raw_corridor_target": "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+  "source_scaled_curvature_target": "outputs/jensen_window_pf_negative_lambda_scaled_curvature_monotonicity_target.md",
+  "source_scaled_log_ceiling_bridge": "outputs/jensen_window_pf_negative_lambda_scaled_curvature_log_ceiling_bridge.md",
+  "status": "exact finite theorem-search diagnostic",
+  "summary": {
+    "adjacent_total_rows": 894,
+    "b_decrease_rows": 894,
+    "b_positive_rows": 897,
+    "c_increase_rows": 894,
+    "c_lambda_order_rows": 598,
+    "coefficient_cap": 300,
+    "exact_available_rows": 4,
+    "finite_order_rows": 1,
+    "finite_stress_rows": 1,
+    "lambda_order_total_rows": 598,
+    "lambdas": [
+      "-25.0",
+      "-50.0",
+      "-100.0"
+    ],
+    "live_routes": 1,
+    "main_finding": "The scaled-curvature target can be rewritten as a weighted four-point discrete-curvature inequality for the log moment sequence relative to the Gaussian baseline. Repaired k300 data validate B_k>0 on 897/897 rows, B_(k+1)<=B_k on 894/894 rows, C_(k+1)>=C_k on 894/894 rows, and C_k lambda-ordering on 598/598 rows.",
+    "matrix_rows": 8,
+    "raw_log_total_rows": 897,
+    "ready_to_apply_rows": 0,
+    "target_closing": false
+  }
+}

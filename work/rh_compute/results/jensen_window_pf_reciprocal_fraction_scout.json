@@ -1,0 +1,83 @@
+{
+  "date": "2026-07-06",
+  "finite_grid": {
+    "all_rows_obstruct_standard_positive_fraction": true,
+    "degrees": [
+      2,
+      8
+    ],
+    "dps": 520,
+    "lambdas": [
+      "0",
+      "1e-6",
+      "1e-4",
+      "1e-2",
+      "1e-1"
+    ],
+    "row_log": "work\\rh_compute\\results\\jensen_window_pf_reciprocal_fraction_sign_lamgrid_n0_n20_d2_d8_dps520.jsonl",
+    "rows": 735,
+    "shifts": [
+      0,
+      20
+    ],
+    "source_enclosures": [
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k0_k9.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k10_k20.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k21_k32.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k33_k48.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k49_k64.jsonl"
+    ],
+    "standard_positive_fraction_obstructed_rows": 735
+  },
+  "invariants": [
+    "The symbolic S-fraction row must have second_parameter -g2/g1.",
+    "The symbolic J-fraction row must have first_lambda -g2.",
+    "Every finite row in the checked grid must obstruct the standard positive fraction route.",
+    "The scout does not reject signed or modified continued-fraction routes.",
+    "No row may set target_closing=true."
+  ],
+  "kind": "jensen_window_pf_reciprocal_fraction_scout",
+  "proof_boundary": "Continued-fraction sign diagnostic only; not a proof of the all-order column recurrence, Schur positivity, Jensen-window PF-infinity, RH, or Lambda <= 0.",
+  "summary": {
+    "finite_rows": 735,
+    "main_finding": "The ordinary positive S-fraction and J-fraction routes have the wrong first nontrivial sign for E(t)=1/H(-t): a2=-g2/g1 and lambda1=-g2. Thus a continued-fraction proof would have to be a signed or modified fraction with a separate theorem, not the standard positive Stieltjes/Jacobi route.",
+    "ready_to_apply_rows": 0,
+    "standard_positive_fraction_obstructed_rows": 735,
+    "symbolic_rows": 3,
+    "target_closing": false
+  },
+  "symbolic_rows": [
+    {
+      "first_parameter": "g1",
+      "fraction_family": "standard S-fraction",
+      "id": "symbolic_standard_s_fraction_first_obstruction",
+      "normalization": "F(t)=1/(1-a1*t/(1-a2*t/(1-...)))",
+      "obstruction": "Standard positive S-fraction coefficients cannot all be nonnegative for positive g1,g2.",
+      "reciprocal_series_prefix": "g1*t + t**4*(g1**4 - 3*g1**2*g2 + 2*g1*g3 + g2**2 - g4) + t**3*(g1**3 - 2*g1*g2 + g3) + t**2*(g1**2 - g2) + 1",
+      "second_parameter": "-g2/g1",
+      "sign_conclusion_under_g1_g2_positive": "a1>0 and a2<0"
+    },
+    {
+      "first_beta": "g1",
+      "first_lambda": "-g2",
+      "fraction_family": "standard J-fraction",
+      "id": "symbolic_standard_j_fraction_first_obstruction",
+      "normalization": "F(t)=1/(1-beta0*t-lambda1*t^2*F1(t)), F1(0)=1",
+      "obstruction": "Standard positive Jacobi/Stieltjes fraction has the wrong first quadratic sign for positive g2.",
+      "reciprocal_series_prefix": "g1*t + t**4*(g1**4 - 3*g1**2*g2 + 2*g1*g3 + g2**2 - g4) + t**3*(g1**3 - 2*g1*g2 + g3) + t**2*(g1**2 - g2) + 1",
+      "sign_conclusion_under_g2_positive": "beta0>0 and lambda1<0"
+    },
+    {
+      "first_signed_lambda": "g2",
+      "fraction_family": "signed or modified continued fraction",
+      "id": "signed_or_modified_fraction_remaining_candidate",
+      "normalization": "Would need a theorem compatible with negative ordinary lambda1 or alternating signs.",
+      "obstruction": "A modified signed fraction remains possible only with a separate total-positivity or oscillatory theorem.",
+      "sign_conclusion_under_g2_positive": "-lambda1=g2>0"
+    }
+  ],
+  "target_route_rows": [
+    "rp_03_positive_stieltjes_or_j_fraction",
+    "rp_04_companion_or_production_matrix_total_positivity"
+  ]
+}

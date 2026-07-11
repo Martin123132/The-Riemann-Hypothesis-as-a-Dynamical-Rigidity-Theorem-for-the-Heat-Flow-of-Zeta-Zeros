@@ -1,0 +1,286 @@
+{
+  "kind": "jensen_window_pf_newman_classical_field_balance_gate",
+  "date": "2026-07-11",
+  "status": "exact classical-field balance reduction with fixed-time compactness gate",
+  "proof_boundary": "This artifact proves exact principal-value, perturbation, arithmetic-lattice, and continuum-density identities; imports the published fixed-positive-time high-zero localization theorem with its nonuniform threshold; and blocks promotion from macroscopic zero locations to collision-field control. It does not prove the needed lambda-uniform reciprocal-gap balance, exclude a compact positive-boundary collision, prove RH, or prove Lambda <= 0.",
+  "sources": [
+    "outputs/jensen_window_pf_newman_root_external_field_lemma.md",
+    "https://arxiv.org/abs/1801.05914",
+    "https://arxiv.org/abs/1904.12438"
+  ],
+  "exact": {
+    "principal_value_field": "For H(z)=(z-c)^2*V(z), B_c=V'(c)/V(c)=PV sum_(signed roots y outside the pair) 1/(c-y).",
+    "arithmetic_pair_equilibrium": "For roots c+(j+1/2)h, j in Z, removing the pair c+/-h/2 gives PV sum 1/(c-y)=0 by termwise reflection.",
+    "perturbation_identity": "If c=c0+delta_c and y_j=r_j+delta_j, then 1/(c-y_j)-1/(c0-r_j)=(delta_j-delta_c)/((c-y_j)(c0-r_j)).",
+    "weighted_stability": "|B(c;y)-B(c0;r)| <= sum_j |delta_j-delta_c|/(|c-y_j|*|c0-r_j|), provided the paired sums converge.",
+    "classical_density": "rho_0(y)=Psi'(y)=log(y/(4*pi))/(4*pi), y>=a>4*pi",
+    "continuum_field": {
+      "definition": "B_rho(x)=2*x*PV integral_a^infinity rho_0(y)/(x^2-y^2)dy",
+      "exact_scaled_formula": "(-2*log(a)*log(1/(-a/x + 1)) - 2*log(a)*log(a/x + 1) + 2*log(x)*log(1/(-a/x + 1)) + 2*log(x)*log(a/x + 1) - 4*log(x)*atanh(a/x) + 4*log(pi)*atanh(a/x) + 8*log(2)*atanh(a/x) - 2*polylog(2, -a/x) + 2*polylog(2, a/x) - pi**2)/(8*pi)",
+      "limit": "B_rho(x)=-pi/8+O_a(1/x)",
+      "first_correction": "B_rho(x)+pi/8=(a/x)*(1-log(a/(4*pi)))/(2*pi)+O_a((a/x)^3*|log(a/x)|)",
+      "integral_identities": [
+        "PV integral_0^infinity du/(1-u^2)=0",
+        "PV integral_0^infinity log(u)/(1-u^2)du=-pi^2/4"
+      ]
+    },
+    "positive_time_density": {
+      "density": "rho_t(y)=rho_0(y)+t/(16*y)",
+      "field_correction": "time*log(sqrt(-a**2 + x**2)/a)/(8*x)",
+      "asymptotic": "B_(rho,t)(x)=-pi/8+O_a((1+t*log(x/a))/x)"
+    },
+    "quantile_drift": {
+      "counting_function": "g(x,t)=x/(4*pi)*log(x/(4*pi))-x/(4*pi)+11/8+t/16*log(x/(4*pi))",
+      "velocity": "-pi*level*(-log(level) + log(pi) + 2*log(2))/(-4*level*log(level) + 4*level*log(pi) + 8*level*log(2) - pi*time)",
+      "limit": "dx_n/dt=-pi/4+o(1), so B_n=(1/2)dx_n/dt -> -pi/8"
+    },
+    "published_fixed_time_localization": {
+      "source": "https://arxiv.org/abs/1904.12438",
+      "theorem": "For each fixed 0<t<=1/2, sufficiently high zeros are real, simple, and uniquely localized near the quantiles g(x_n,t)=n once x_n>=exp(C/t).",
+      "consequence": "At fixed positive t, every multiple zero lies in a bounded region |x|<exp(C/t), after adjusting the absolute constant.",
+      "uniformity_warning": "The localization scale diverges exponentially as t decreases to zero."
+    },
+    "macroscopic_location_countermodels": {
+      "reference": "Signed integer lattice with double roots at +/-n; after removing the +n pair its field is 1/(2*n).",
+      "upper_neighbor_move": {
+        "move": "+/-(n+1) to +/-(n+eps)",
+        "field": "(4*eps**2*n**2 + 2*eps**2*n + eps**2 + 8*eps*n**3 + 4*eps*n**2 + 2*eps*n - 8*n**3 - 4*n**2)/(2*eps*n*(eps + 2*n)*(2*n + 1))",
+        "limit": "-infinity"
+      },
+      "lower_neighbor_move": {
+        "move": "+/-(n-1) to +/-(n-eps)",
+        "field": "-(-4*eps**2*n**2 + 2*eps**2*n - eps**2 + 8*eps*n**3 - 4*eps*n**2 + 2*eps*n - 8*n**3 + 4*n**2)/(2*eps*n*(-eps + 2*n)*(2*n - 1))",
+        "limit": "+infinity"
+      },
+      "guard": "Even symmetry and uniformly bounded location error do not bound the collision field or stiffness."
+    },
+    "compactness_reduction": "If Lambda>0, the published fixed-time theorem confines every boundary multiple zero at t=Lambda to |x|<exp(C/Lambda); closing Lambda<=0 still requires a lambda-uniform analytic exclusion of that expanding compact region.",
+    "open_handoff": "Prove a lambda-uniform paired reciprocal-gap discrepancy bound strong enough for the weighted perturbation sum, together with an explicit far-tail bound, or prove a different analytic exclusion that remains effective as lambda->0+.",
+    "checks": {
+      "lattice_checks": [
+        {
+          "cutoff": 1,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 2,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 3,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 4,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 5,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 6,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 7,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 8,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 9,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 10,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 11,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 12,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 13,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 14,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 15,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 16,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 17,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 18,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 19,
+          "field": "0",
+          "passed": true
+        },
+        {
+          "cutoff": 20,
+          "field": "0",
+          "passed": true
+        }
+      ],
+      "odd_square_sum": "pi**2/8",
+      "continuum_correction_slope": "(log(4*pi/a) + 1)/(2*pi)",
+      "quantile_velocity": "-pi*level*(-log(level) + log(pi) + 2*log(2))/(-4*level*log(level) + 4*level*log(pi) + 8*level*log(2) - pi*time)"
+    }
+  },
+  "rows": [
+    {
+      "id": "ncfb_01_principal_value_field",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The regularized field at a double zero is the principal-value signed-root field with the colliding pair removed.",
+      "formula": "For H(z)=(z-c)^2*V(z), B_c=V'(c)/V(c)=PV sum_(signed roots y outside the pair) 1/(c-y).",
+      "proof_boundary": "Canonical-product identity at a real-zero time.",
+      "diagnostics": null
+    },
+    {
+      "id": "ncfb_02_arithmetic_pair_equilibrium",
+      "role": "exact_benchmark",
+      "readiness": "available_exact",
+      "claim": "An arithmetic lattice has exactly zero external field at the midpoint of a removed adjacent pair.",
+      "formula": "For roots c+(j+1/2)h, j in Z, removing the pair c+/-h/2 gives PV sum 1/(c-y)=0 by termwise reflection.",
+      "proof_boundary": "Solvable constant-density benchmark only.",
+      "diagnostics": null
+    },
+    {
+      "id": "ncfb_03_weighted_perturbation_identity",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "Field displacement from any reference configuration is governed exactly by a weighted relative-location sum.",
+      "formula": "If c=c0+delta_c and y_j=r_j+delta_j, then 1/(c-y_j)-1/(c0-r_j)=(delta_j-delta_c)/((c-y_j)(c0-r_j)). Hence |B(c;y)-B(c0;r)| <= sum_j |delta_j-delta_c|/(|c-y_j|*|c0-r_j|), provided the paired sums converge.",
+      "proof_boundary": "Requires convergent paired sums and nonzero outsider gaps.",
+      "diagnostics": null
+    },
+    {
+      "id": "ncfb_04_classical_continuum_field",
+      "role": "exact_asymptotic",
+      "readiness": "available_exact",
+      "claim": "The continuum field generated by the Riemann-von Mangoldt density tends to -pi/8.",
+      "formula": "B_rho(x)=-pi/8+O_a(1/x)",
+      "proof_boundary": "Continuum density benchmark, not the discrete Xi zero field.",
+      "diagnostics": {
+        "definition": "B_rho(x)=2*x*PV integral_a^infinity rho_0(y)/(x^2-y^2)dy",
+        "exact_scaled_formula": "(-2*log(a)*log(1/(-a/x + 1)) - 2*log(a)*log(a/x + 1) + 2*log(x)*log(1/(-a/x + 1)) + 2*log(x)*log(a/x + 1) - 4*log(x)*atanh(a/x) + 4*log(pi)*atanh(a/x) + 8*log(2)*atanh(a/x) - 2*polylog(2, -a/x) + 2*polylog(2, a/x) - pi**2)/(8*pi)",
+        "limit": "B_rho(x)=-pi/8+O_a(1/x)",
+        "first_correction": "B_rho(x)+pi/8=(a/x)*(1-log(a/(4*pi)))/(2*pi)+O_a((a/x)^3*|log(a/x)|)",
+        "integral_identities": [
+          "PV integral_0^infinity du/(1-u^2)=0",
+          "PV integral_0^infinity log(u)/(1-u^2)du=-pi^2/4"
+        ]
+      }
+    },
+    {
+      "id": "ncfb_05_positive_time_quantile_drift",
+      "role": "exact_asymptotic",
+      "readiness": "available_exact",
+      "claim": "Implicit differentiation of the positive-time quantile law gives velocity -pi/4 and field -pi/8 at high height.",
+      "formula": "-pi*level*(-log(level) + log(pi) + 2*log(2))/(-4*level*log(level) + 4*level*log(pi) + 8*level*log(2) - pi*time); dx_n/dt=-pi/4+o(1), so B_n=(1/2)dx_n/dt -> -pi/8",
+      "proof_boundary": "Quantile model asymptotic only.",
+      "diagnostics": null
+    },
+    {
+      "id": "ncfb_06_published_high_zero_localization",
+      "role": "published_theorem",
+      "readiness": "available_published",
+      "claim": "The published positive-time asymptotic theorem makes every sufficiently high zero simple and uniquely localized at fixed t>0.",
+      "formula": "For each fixed 0<t<=1/2, sufficiently high zeros are real, simple, and uniquely localized near the quantiles g(x_n,t)=n once x_n>=exp(C/t).",
+      "proof_boundary": "External theorem for each fixed positive time; its threshold is not uniform as t approaches zero.",
+      "diagnostics": {
+        "source": "https://arxiv.org/abs/1904.12438",
+        "theorem": "For each fixed 0<t<=1/2, sufficiently high zeros are real, simple, and uniquely localized near the quantiles g(x_n,t)=n once x_n>=exp(C/t).",
+        "consequence": "At fixed positive t, every multiple zero lies in a bounded region |x|<exp(C/t), after adjusting the absolute constant.",
+        "uniformity_warning": "The localization scale diverges exponentially as t decreases to zero."
+      }
+    },
+    {
+      "id": "ncfb_07_positive_boundary_compactness",
+      "role": "conditional_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "A hypothetical positive Newman boundary can have multiple zeros only in a t-dependent compact height range.",
+      "formula": "If Lambda>0, the published fixed-time theorem confines every boundary multiple zero at t=Lambda to |x|<exp(C/Lambda); closing Lambda<=0 still requires a lambda-uniform analytic exclusion of that expanding compact region.",
+      "proof_boundary": "Conditional on Lambda>0; does not exclude the compact collision.",
+      "diagnostics": null
+    },
+    {
+      "id": "ncfb_08_macroscopic_location_guard",
+      "role": "exact_countermodel",
+      "readiness": "guard_validated",
+      "claim": "Even symmetry and bounded error from classical locations do not control the sign or magnitude of the collision field.",
+      "formula": "One neighboring even pair moved by <1 makes B tend to either sign of infinity.",
+      "proof_boundary": "Abstract lattice countermodels, not Xi zero configurations.",
+      "diagnostics": {
+        "reference": "Signed integer lattice with double roots at +/-n; after removing the +n pair its field is 1/(2*n).",
+        "upper_neighbor_move": {
+          "move": "+/-(n+1) to +/-(n+eps)",
+          "field": "(4*eps**2*n**2 + 2*eps**2*n + eps**2 + 8*eps*n**3 + 4*eps*n**2 + 2*eps*n - 8*n**3 - 4*n**2)/(2*eps*n*(eps + 2*n)*(2*n + 1))",
+          "limit": "-infinity"
+        },
+        "lower_neighbor_move": {
+          "move": "+/-(n-1) to +/-(n-eps)",
+          "field": "-(-4*eps**2*n**2 + 2*eps**2*n - eps**2 + 8*eps*n**3 - 4*eps*n**2 + 2*eps*n - 8*n**3 + 4*n**2)/(2*eps*n*(-eps + 2*n)*(2*n - 1))",
+          "limit": "+infinity"
+        },
+        "guard": "Even symmetry and uniformly bounded location error do not bound the collision field or stiffness."
+      }
+    },
+    {
+      "id": "ncfb_09_required_local_upgrade",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "Riemann-von Mangoldt counting and macroscopic location estimates must be upgraded to reciprocal-gap weighted local discrepancy control.",
+      "formula": "|B(c;y)-B(c0;r)| <= sum_j |delta_j-delta_c|/(|c-y_j|*|c0-r_j|), provided the paired sums converge.",
+      "proof_boundary": "Necessity for this perturbative field route, not for every possible RH proof.",
+      "diagnostics": null
+    },
+    {
+      "id": "ncfb_10_lambda_uniform_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "The fixed-time compactness theorem closes the high tail only after a lambda-uniform local balance or compact-region exclusion is supplied.",
+      "formula": "Prove a lambda-uniform paired reciprocal-gap discrepancy bound strong enough for the weighted perturbation sum, together with an explicit far-tail bound, or prove a different analytic exclusion that remains effective as lambda->0+.",
+      "proof_boundary": "Open lambda-uniform theorem; not a proof of RH or Lambda <= 0.",
+      "diagnostics": null
+    }
+  ]
+}

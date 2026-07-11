@@ -1,0 +1,116 @@
+{
+  "acceptance_contract": [
+    "Normalize the actual zeta coefficients by B_k=A_k*A_0^(k-1)/A_1^k and keep B_0=B_1=1 explicit.",
+    "Construct a finite or countable multiset alpha_j>0 with unit integer multiplicities and sum alpha_j^(-2)<infinity.",
+    "Prove the coefficient product, or equivalently the contraction-log identity plus convergence, for every k>=1.",
+    "Derive the multiset from noncircular Phi/Newman-kernel structure, not endpoint Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0.",
+    "Prove locally uniform convergence of the EGF/Jensen windows or use coefficientwise Jensen limits to preserve real negative roots.",
+    "Do not replace the counting measure by arbitrary positive weights without a separately proved stability-preserving composition theorem.",
+    "Do not identify the integer product with the natural Mellin interpolation: its candidate power sums have an Arb-certified negative Hankel determinant."
+  ],
+  "date": "2026-07-10",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The counting-measure representation is sufficient, not claimed necessary for all multiplier sequences.",
+    "Finite log-complete-monotonicity does not construct the atoms.",
+    "Arbitrary positive measure weights and convex mixtures are blocked by exact cubic countermodels.",
+    "The natural continuous-index Mellin interpolation is blocked, but integer-only product equality remains open without an interpolation-uniqueness theorem.",
+    "Endpoint PF, Jensen hyperbolicity, RH, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_multiplier_counting_measure_target",
+  "primary_source_anchors": [
+    "https://annals.math.princeton.edu/wp-content/uploads/annals-v170-n1-p14-p.pdf",
+    "https://arxiv.org/abs/math/0606360"
+  ],
+  "proof_boundary": "Open sufficient bridge target based on a discrete product of elementary multiplier sequences. No zeta counting measure is constructed, finite complete-monotonicity evidence is not promoted, arbitrary positive weights are rejected, and PF-infinity, RH, and Lambda <= 0 remain unproved.",
+  "source_boundary_family": "outputs/jensen_window_pf_rank_two_boundary_family_lemma.md",
+  "source_bridge_target": "outputs/jensen_window_pf_bridge_target.md",
+  "source_defect_scout": "outputs/jensen_window_pf_defect_complete_monotonicity_scout.md",
+  "source_mellin_obstruction": "outputs/jensen_window_pf_mellin_multiplier_power_sum_obstruction.md",
+  "status": "open theorem target",
+  "summary": {
+    "conditional_theorem_rows": 1,
+    "countermodel_rows": 3,
+    "exact_rows": 4,
+    "finite_evidence_rows": 1,
+    "live_routes": 1,
+    "main_finding": "A discrete unit-atomic product of elementary multiplier sequences would close the all-degree Jensen-window target, and its ratio contractions have an explicit positive Laplace kernel. The zeta data satisfy the finite necessary log-complete-monotonicity pattern through order 8. No discrete representation is known; exact fractional-weight and convex-mixture countermodels forbid the obvious continuous relaxations, and an Arb negative power-sum Hankel determinant rules out identifying the product with the natural Mellin interpolation.",
+    "open_statement_rows": 1,
+    "ready_to_apply_rows": 0,
+    "target_closing": false,
+    "target_rows": 10
+  },
+  "target_id": "target_zeta_multiplier_counting_measure_factorization",
+  "target_rows": [
+    {
+      "claim": "Positive geometric normalization leaves every Jensen root sign and ratio contraction unchanged.",
+      "formula": "B_k=A_k*A_0^(k-1)/A_1^k, so B_0=B_1=1 and x_k(B)=x_k(A)",
+      "id": "mcmt_01_geometric_normalization",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "For alpha>0, the EGF is (1+z/(alpha+1))*exp(alpha*z/(alpha+1)), hence M^(alpha) is a nonnegative multiplier sequence.",
+      "formula": "M_k^(alpha)=(alpha/(alpha+1))^(k-1)*(alpha+k)/(alpha+1)",
+      "id": "mcmt_02_elementary_multiplier_atom",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "A convergent unit-atomic product is a pointwise limit of multiplier sequences and therefore makes every zeta Jensen window hyperbolic.",
+      "formula": "B_k=product_j M_k^(alpha_j), alpha_j>0, sum_j alpha_j^(-2)<infinity",
+      "id": "mcmt_03_integer_product_sufficient_theorem",
+      "readiness": "not_ready_to_apply",
+      "role": "conditional_theorem"
+    },
+    {
+      "claim": "Because B_0=B_1=1, this contraction identity is equivalent to the coefficient product whenever the products converge.",
+      "formula": "-log x_k=sum_j -log(1-1/(k+alpha_j)^2)",
+      "id": "mcmt_04_contraction_log_representation",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "Any counting-measure representation forces y_k=-log x_k to be completely monotone.",
+      "formula": "-log(1-1/(k+alpha)^2)=integral_0^infty exp(-(k+alpha)t)*2*(cosh(t)-1)/t dt",
+      "id": "mcmt_05_positive_laplace_kernel",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "The cached zeta data satisfy the finite necessary sign pattern, with high-order enclosure inconclusives retained.",
+      "formula": "(-1)^m*Delta^m(-log x_k)>0 on every cached interval through m=8",
+      "id": "mcmt_06_finite_zeta_necessary_evidence",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_evidence"
+    },
+    {
+      "claim": "Arbitrary positive measure weights cannot replace a counting measure without an independent stability-preserver theorem.",
+      "formula": "alpha=1, weight=1/2 gives cubic discriminant <-27/125",
+      "id": "mcmt_07_fractional_weight_guard",
+      "readiness": "guard_validated",
+      "role": "countermodel_gate"
+    },
+    {
+      "claim": "Coefficientwise convex mixtures of elementary multiplier atoms need not be multiplier sequences.",
+      "formula": "(A^(u=3/5)+A^(u=2/3))/2 gives cubic discriminant -937/3456",
+      "id": "mcmt_08_convex_mixture_guard",
+      "readiness": "guard_validated",
+      "role": "countermodel_gate"
+    },
+    {
+      "claim": "The natural continuous-index Mellin interpolation cannot equal the elementary multiplier product; this does not reject equality asserted only at integer indices.",
+      "formula": "det[p_(2+i+j)]_(i,j=0..3)<0 for the Gamma-normalized Mellin interpolation",
+      "id": "mcmt_09_mellin_interpolation_guard",
+      "readiness": "guard_validated",
+      "role": "countermodel_gate"
+    },
+    {
+      "claim": "This is a sufficient noncircular all-degree bridge if the exact discrete representation and convergence are proved.",
+      "formula": "construct {alpha_j} from Phi/Newman data and prove B_k=product_j M_k^(alpha_j) for all k",
+      "id": "mcmt_10_zeta_counting_measure_target",
+      "readiness": "not_ready_to_apply",
+      "role": "open_statement"
+    }
+  ]
+}

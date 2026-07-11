@@ -1,0 +1,224 @@
+{
+  "date": "2026-07-06",
+  "degree_contract_rows": [
+    {
+      "degree": 2,
+      "necessary_condition": "C[m] >= 0 for every m >= 0 and every shift n",
+      "normalized_generating_identity": "E(t) = 1 / H(-t), H(t)=1+g1*t+...+gd*t^d, g_j=h_j/h0",
+      "recurrence_terms": [
+        {
+          "coefficient": "h1",
+          "offset": 1,
+          "sign": "+",
+          "term": "+ h1 * C[m-1]"
+        },
+        {
+          "coefficient": "h0*h2",
+          "offset": 2,
+          "sign": "-",
+          "term": "- h0*h2 * C[m-2]"
+        }
+      ],
+      "unnormalized_column_recurrence": "C[m] = sum_{j=1..min(d,m)} (-1)^(j-1) h0^(j-1) h_j C[m-j], C[0]=1, C[m<0]=0"
+    },
+    {
+      "degree": 3,
+      "necessary_condition": "C[m] >= 0 for every m >= 0 and every shift n",
+      "normalized_generating_identity": "E(t) = 1 / H(-t), H(t)=1+g1*t+...+gd*t^d, g_j=h_j/h0",
+      "recurrence_terms": [
+        {
+          "coefficient": "h1",
+          "offset": 1,
+          "sign": "+",
+          "term": "+ h1 * C[m-1]"
+        },
+        {
+          "coefficient": "h0*h2",
+          "offset": 2,
+          "sign": "-",
+          "term": "- h0*h2 * C[m-2]"
+        },
+        {
+          "coefficient": "h0**2*h3",
+          "offset": 3,
+          "sign": "+",
+          "term": "+ h0**2*h3 * C[m-3]"
+        }
+      ],
+      "unnormalized_column_recurrence": "C[m] = sum_{j=1..min(d,m)} (-1)^(j-1) h0^(j-1) h_j C[m-j], C[0]=1, C[m<0]=0"
+    },
+    {
+      "degree": 4,
+      "necessary_condition": "C[m] >= 0 for every m >= 0 and every shift n",
+      "normalized_generating_identity": "E(t) = 1 / H(-t), H(t)=1+g1*t+...+gd*t^d, g_j=h_j/h0",
+      "recurrence_terms": [
+        {
+          "coefficient": "h1",
+          "offset": 1,
+          "sign": "+",
+          "term": "+ h1 * C[m-1]"
+        },
+        {
+          "coefficient": "h0*h2",
+          "offset": 2,
+          "sign": "-",
+          "term": "- h0*h2 * C[m-2]"
+        },
+        {
+          "coefficient": "h0**2*h3",
+          "offset": 3,
+          "sign": "+",
+          "term": "+ h0**2*h3 * C[m-3]"
+        },
+        {
+          "coefficient": "h0**3*h4",
+          "offset": 4,
+          "sign": "-",
+          "term": "- h0**3*h4 * C[m-4]"
+        }
+      ],
+      "unnormalized_column_recurrence": "C[m] = sum_{j=1..min(d,m)} (-1)^(j-1) h0^(j-1) h_j C[m-j], C[0]=1, C[m<0]=0"
+    },
+    {
+      "degree": 5,
+      "necessary_condition": "C[m] >= 0 for every m >= 0 and every shift n",
+      "normalized_generating_identity": "E(t) = 1 / H(-t), H(t)=1+g1*t+...+gd*t^d, g_j=h_j/h0",
+      "recurrence_terms": [
+        {
+          "coefficient": "h1",
+          "offset": 1,
+          "sign": "+",
+          "term": "+ h1 * C[m-1]"
+        },
+        {
+          "coefficient": "h0*h2",
+          "offset": 2,
+          "sign": "-",
+          "term": "- h0*h2 * C[m-2]"
+        },
+        {
+          "coefficient": "h0**2*h3",
+          "offset": 3,
+          "sign": "+",
+          "term": "+ h0**2*h3 * C[m-3]"
+        },
+        {
+          "coefficient": "h0**3*h4",
+          "offset": 4,
+          "sign": "-",
+          "term": "- h0**3*h4 * C[m-4]"
+        },
+        {
+          "coefficient": "h0**4*h5",
+          "offset": 5,
+          "sign": "+",
+          "term": "+ h0**4*h5 * C[m-5]"
+        }
+      ],
+      "unnormalized_column_recurrence": "C[m] = sum_{j=1..min(d,m)} (-1)^(j-1) h0^(j-1) h_j C[m-j], C[0]=1, C[m<0]=0"
+    }
+  ],
+  "hard_frontier_recurrence_rows": [
+    {
+      "column_shape": "s_(1, 1, 1, 1, 1, 1, 1, 1)/(0, 0, 0, 0, 0, 0, 0, 0)",
+      "countermodel_negative": true,
+      "countermodel_value": "-435846079534239/104857600000000",
+      "degree": 3,
+      "direct_determinant_polynomial_h": "-3*h0**5*h2*h3**2 + 6*h0**4*h1**2*h3**2 + 12*h0**4*h1*h2**2*h3 + h0**4*h2**4 - 20*h0**3*h1**3*h2*h3 - 10*h0**3*h1**2*h2**3 + 6*h0**2*h1**5*h3 + 15*h0**2*h1**4*h2**2 - 7*h0*h1**6*h2 + h1**8",
+      "expected_countermodel_value": "-435846079534239/104857600000000",
+      "id": "d3_column_recurrence_m8",
+      "matches_obligation_algebra_countermodel": true,
+      "minor_size": 8,
+      "recurrence_matches_determinant": true,
+      "recurrence_polynomial_h": "-3*h0**5*h2*h3**2 + 6*h0**4*h1**2*h3**2 + 12*h0**4*h1*h2**2*h3 + h0**4*h2**4 - 20*h0**3*h1**3*h2*h3 - 10*h0**3*h1**2*h2**3 + 6*h0**2*h1**5*h3 + 15*h0**2*h1**4*h2**2 - 7*h0*h1**6*h2 + h1**8",
+      "recurrence_terms": [
+        {
+          "coefficient": "h1",
+          "offset": 1,
+          "sign": "+",
+          "term": "+ h1 * C[m-1]"
+        },
+        {
+          "coefficient": "h0*h2",
+          "offset": 2,
+          "sign": "-",
+          "term": "- h0*h2 * C[m-2]"
+        },
+        {
+          "coefficient": "h0**2*h3",
+          "offset": 3,
+          "sign": "+",
+          "term": "+ h0**2*h3 * C[m-3]"
+        }
+      ],
+      "source_shape_row": "d3_column_shape_m8",
+      "structural_obligation": "A positive Schur, network, production-matrix, or determinant-integral route must prove C_m >= 0 for this column recurrence from Xi/Phi-specific input, not from generic log-concavity."
+    },
+    {
+      "column_shape": "s_(1, 1, 1, 1, 1, 1)/(0, 0, 0, 0, 0, 0)",
+      "countermodel_negative": true,
+      "countermodel_value": "-229760849637/28672000000",
+      "degree": 4,
+      "direct_determinant_polynomial_h": "2*h0**4*h2*h4 + h0**4*h3**2 - 3*h0**3*h1**2*h4 - 6*h0**3*h1*h2*h3 - h0**3*h2**3 + 4*h0**2*h1**3*h3 + 6*h0**2*h1**2*h2**2 - 5*h0*h1**4*h2 + h1**6",
+      "expected_countermodel_value": "-229760849637/28672000000",
+      "id": "d4_column_recurrence_m6",
+      "matches_obligation_algebra_countermodel": true,
+      "minor_size": 6,
+      "recurrence_matches_determinant": true,
+      "recurrence_polynomial_h": "2*h0**4*h2*h4 + h0**4*h3**2 - 3*h0**3*h1**2*h4 - 6*h0**3*h1*h2*h3 - h0**3*h2**3 + 4*h0**2*h1**3*h3 + 6*h0**2*h1**2*h2**2 - 5*h0*h1**4*h2 + h1**6",
+      "recurrence_terms": [
+        {
+          "coefficient": "h1",
+          "offset": 1,
+          "sign": "+",
+          "term": "+ h1 * C[m-1]"
+        },
+        {
+          "coefficient": "h0*h2",
+          "offset": 2,
+          "sign": "-",
+          "term": "- h0*h2 * C[m-2]"
+        },
+        {
+          "coefficient": "h0**2*h3",
+          "offset": 3,
+          "sign": "+",
+          "term": "+ h0**2*h3 * C[m-3]"
+        },
+        {
+          "coefficient": "h0**3*h4",
+          "offset": 4,
+          "sign": "-",
+          "term": "- h0**3*h4 * C[m-4]"
+        }
+      ],
+      "source_shape_row": "d4_column_shape_m6",
+      "structural_obligation": "A positive Schur, network, production-matrix, or determinant-integral route must prove C_m >= 0 for this column recurrence from Xi/Phi-specific input, not from generic log-concavity."
+    }
+  ],
+  "invariants": [
+    "Every hard recurrence polynomial must match the direct column determinant.",
+    "Every hard recurrence countermodel value must match the obligation algebra.",
+    "The recurrence is a necessary Schur-positivity condition only, not a proof of all shapes.",
+    "No row may set target_closing=true."
+  ],
+  "kind": "jensen_window_pf_column_recurrence_contract",
+  "normalization": {
+    "C_m": "det(h_{1+col-row}) for rows=0..m-1 and cols=1..m",
+    "C_m_relation_to_elementary": "C_m = h_0^m * e_m(g_1,...,g_d)",
+    "g_j": "h_j / h_0",
+    "generating_identity": "sum_m e_m t^m = 1 / (1 - g_1*t + g_2*t^2 - ... + (-1)^d*g_d*t^d)",
+    "h_j": "binom(d,j) * A_{n+j}"
+  },
+  "proof_boundary": "Column-shape recurrence diagnostic only; not a proof of Schur positivity, Jensen-window PF-infinity, Jensen hyperbolicity, RH, or Lambda <= 0.",
+  "source_algebra": "work/rh_compute/results/jensen_window_pf_obligation_algebra.json",
+  "source_schur_shape_contract": "work/rh_compute/results/jensen_window_pf_schur_shape_contract.json",
+  "summary": {
+    "degree_rows": 4,
+    "hard_frontier_rows": 2,
+    "main_finding": "The hard column-shape frontier minors are elementary-symmetric recurrence coefficients for the finite-support Jensen-window specialization.  Generic log-concavity does not force the recurrence sequence C_m nonnegative: the exact rational countermodel makes both hard recurrence rows negative.",
+    "negative_countermodel_rows": 2,
+    "target_closing": false
+  },
+  "target_obligation": "jwpf_06_sign_regular_to_jensen_pf_conversion"
+}

@@ -1,0 +1,206 @@
+{
+  "kind": "jensen_window_pf_modified_signed_model_target",
+  "date": "2026-07-06",
+  "parent_route_row": "rp_09_signed_or_modified_continued_fraction",
+  "parent_target": "jwpf_06_sign_regular_to_jensen_pf_conversion",
+  "proof_boundary": "Modified signed-model target classification only; not a construction of a positive model, not an all-order recurrence theorem, not Schur positivity, not Jensen-window PF-infinity, not RH, and not Lambda <= 0.",
+  "target_problem": "After the signed J-fraction, beta, Motzkin, and parity-lift diagnostics, classify which signed or modified model classes are rejected and which remain live candidates for proving [t^m]1/H(-t)>=0 for every actual zeta Jensen window.",
+  "objects": {
+    "h_j": "binom(d,j) * A_{n+j}(0)",
+    "g_j": "h_j / h_0",
+    "H(t)": "1 + g_1*t + ... + g_d*t^d",
+    "E(t)": "1 / H(-t)",
+    "mu_m": "[t^m] E(t)",
+    "raw_motzkin_model": "ordinary J-fraction Motzkin-excursion path expansion using the signed Jacobi parameters",
+    "modified_model": "any state-space, production-matrix, Riordan, oscillatory, or Xi/Phi cancellation construction whose final weights are manifestly nonnegative and whose coefficient extraction is exactly E(t)"
+  },
+  "required_conditions_for_live_model": [
+    "Recover exactly E(t)=1/H(-t) for all degrees d and shifts n of the actual zeta heat-flow Jensen windows.",
+    "Prove coefficientwise positivity mu_m>=0 for every m, not only a finite prefix.",
+    "Use no endpoint PF, Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0 assumption as input.",
+    "State whether the result proves only column recurrence shapes or also supplies an all-Schur/Toeplitz lift.",
+    "Survive the raw Motzkin path obstruction, beta_1 diagonal obstruction, same-length mixed-sign path obstruction, and finite-prefix promotion gates.",
+    "If the model uses cancellation, end with a manifestly nonnegative formula rather than a difference of positive quantities."
+  ],
+  "model_rows": [
+    {
+      "id": "msm_01_raw_ordinary_motzkin_j_fraction",
+      "model_family": "raw ordinary Motzkin/J-fraction path model",
+      "verdict": "rejected_by_motzkin_obstruction",
+      "readiness": "not_ready_to_apply",
+      "live_candidate": false,
+      "source_artifacts": [
+        "outputs/jensen_window_pf_reciprocal_motzkin_path_obstruction_scout.md",
+        "outputs/jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_scout.md",
+        "work/rh_compute/results/jensen_window_pf_reciprocal_motzkin_path_obstruction_scout.json",
+        "work/rh_compute/results/jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_scout.json"
+      ],
+      "fit": "The ordinary J-fraction path expansion is the first natural way to read the signed Jacobi data as weighted Motzkin excursions.",
+      "gap_or_rejection": "It contains negative path weights already in the mu_2 cancellation row and in beta_1 diagonal rows, so the raw ordinary path sum is not a manifest positivity proof.",
+      "required_upgrade": "Replace it with a genuinely modified model whose individual final weights are nonnegative and whose total is exactly mu_m.",
+      "proof_boundary": "Rejected only as a raw manifest-positive Motzkin model; this does not reject every modified signed model."
+    },
+    {
+      "id": "msm_02_diagonal_sign_conjugation",
+      "model_family": "diagonal sign conjugation of the raw J-fraction path model",
+      "verdict": "rejected_by_sign_repair_obstruction",
+      "readiness": "not_ready_to_apply",
+      "live_candidate": false,
+      "source_artifacts": [
+        "outputs/jensen_window_pf_reciprocal_signed_jacobi_beta_scout.md",
+        "outputs/jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_scout.md",
+        "work/rh_compute/results/jensen_window_pf_reciprocal_signed_jacobi_beta_scout.json",
+        "work/rh_compute/results/jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_scout.json"
+      ],
+      "fit": "A diagonal sign conjugation is a cheap way to try to turn a signed tridiagonal or production matrix into a nonnegative one.",
+      "gap_or_rejection": "Closed path signs are invariant under diagonal sign conjugation, and the same-length mixed-sign witnesses remain mixed; the negative beta_1 diagonal obstruction also cannot be repaired this way.",
+      "required_upgrade": "Use a nontrivial state enlargement or different coefficient extraction, not just diagonal signs on the same closed paths.",
+      "proof_boundary": "Rejected as a repair of the raw closed-path model only; not a proof against oscillatory or state-space modified routes."
+    },
+    {
+      "id": "msm_03_global_length_parity_sign",
+      "model_family": "global path-length parity sign repair",
+      "verdict": "rejected_by_sign_repair_obstruction",
+      "readiness": "not_ready_to_apply",
+      "live_candidate": false,
+      "source_artifacts": [
+        "outputs/jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_scout.md",
+        "work/rh_compute/results/jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_scout.json"
+      ],
+      "fit": "Multiplying all length-m paths by a global sign would be the simplest repair if every bad sign depended only on m.",
+      "gap_or_rejection": "The parity-lift obstruction has same-length closed paths H0^m and U D H0^(m-2) with opposite signs, so no global length-parity sign can make both nonnegative.",
+      "required_upgrade": "A surviving path model must alter the state space, weights, or coefficient extraction at finer resolution than path length.",
+      "proof_boundary": "Rejected as a cheap global sign repair only; it leaves state-space modified models open."
+    },
+    {
+      "id": "msm_04_state_space_doubled_model",
+      "model_family": "state-space doubled or parity-resolved path model",
+      "verdict": "live_if_constructed",
+      "readiness": "not_ready_to_apply",
+      "live_candidate": true,
+      "source_artifacts": [
+        "outputs/jensen_window_pf_reciprocal_motzkin_path_obstruction_scout.md",
+        "outputs/jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_scout.md",
+        "outputs/jensen_window_pf_state_space_sign_lift_obstruction_scout.md",
+        "outputs/jensen_window_pf_signed_j_fraction_theorem_target.md"
+      ],
+      "fit": "A two-state or parity-resolved model could separate cancellations before summing and might turn the signed Jacobi data into nonnegative lifted path weights.",
+      "gap_or_rejection": "No exact lifted path model is currently constructed, a difference of two positive sums would not be enough, and the absolute-value sign-state cover of raw Motzkin paths is already rejected at mu_2 by the gap 2*kappa_1>0.",
+      "required_upgrade": "Construct a finite or countable lifted state space with nonnegative transition weights whose start-to-end path sums equal mu_m for every m,d,n, while changing more than just the signs of the raw Motzkin paths.",
+      "proof_boundary": "Live structural candidate only; the cheap absolute-value sign-lift is rejected, but no genuinely modified model or theorem is currently constructed."
+    },
+    {
+      "id": "msm_05_modified_production_matrix_or_riordan",
+      "model_family": "modified production matrix, Riordan array, or planar network",
+      "verdict": "live_if_constructed",
+      "readiness": "not_ready_to_apply",
+      "live_candidate": true,
+      "source_artifacts": [
+        "outputs/jensen_window_pf_structural_ansatz_matrix.md",
+        "outputs/jensen_window_pf_schur_shape_contract.md",
+        "outputs/jensen_window_pf_reciprocal_positivity_route_matrix.md",
+        "outputs/jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_scout.md"
+      ],
+      "fit": "A nonnegative production matrix or planar network would turn reciprocal coefficients into path sums and could possibly lift beyond columns.",
+      "gap_or_rejection": "No nonnegative production matrix, Riordan representation, or network is known for the actual binomially weighted zeta windows after the raw Motzkin and sign-repair obstructions.",
+      "required_upgrade": "Produce a nonnegative production matrix generating the mu_m column sequence and state whether it proves only column positivity or all Schur/Toeplitz positivity.",
+      "proof_boundary": "Live structural candidate only; no total-positive production model is currently proved."
+    },
+    {
+      "id": "msm_06_oscillatory_sign_regular_resolvent",
+      "model_family": "oscillatory or sign-regular resolvent theorem",
+      "verdict": "live_if_theorem_proved",
+      "readiness": "not_ready_to_apply",
+      "live_candidate": true,
+      "source_artifacts": [
+        "outputs/jensen_window_pf_reciprocal_signed_j_fraction_scout.md",
+        "outputs/jensen_window_pf_reciprocal_signed_jacobi_beta_scout.md",
+        "outputs/jensen_window_pf_oscillatory_resolvent_fit_matrix.md",
+        "outputs/jensen_window_pf_positive_readout_theorem_target.md",
+        "outputs/jensen_window_pf_positive_spectral_moment_obstruction.md",
+        "outputs/sign_regularity_theorem_map.md",
+        "outputs/sign_regularity_theorem_fit_matrix.md"
+      ],
+      "fit": "The signed Hankel signature, negative ordinary lambda parameters, positive kappa parameters, and beta pattern point toward an oscillatory/sign-regular matrix interpretation.",
+      "gap_or_rejection": "The oscillatory/resolvent fit matrix validates 8 theorem-fit rows with 0 ready rows, the positive-readout theorem target validates 8 candidate rows with 0 ready rows, and the positive spectral moment obstruction validates Delta_2=-g_2 plus 735 finite Delta_2<0 rows: entrywise nonnegative Jacobi powers, diagonal similarity, absolute-value majorants, classical oscillatory spectral conclusions, indefinite moment language, finite signed patterns, endpoint factorization, raw signed readouts, ordinary positive moment measures, and finite quadrature do not prove coefficientwise nonnegativity. Only a nonordinary noncircular positive spectral transform or an Xi/Phi-specific positive resolvent kernel remains live.",
+      "required_upgrade": "State and prove, or cite and verify, a theorem whose hypotheses are checked for the actual zeta windows and whose conclusion is mu_m>=0 for all m; the theorem must include an exact positive scalar readout or positive kernel, not only oscillatory spectral language.",
+      "proof_boundary": "Live theorem-search candidate only; the fit matrix sharpens the route but is not a ready-to-apply sign-regularity theorem."
+    },
+    {
+      "id": "msm_07_cancellation_positive_identity",
+      "model_family": "Xi/Phi-specific cancellation identity with positive final form",
+      "verdict": "live_if_identity_proved",
+      "readiness": "not_ready_to_apply",
+      "live_candidate": true,
+      "source_artifacts": [
+        "outputs/jensen_window_pf_reciprocal_positivity_route_matrix.md",
+        "outputs/jensen_window_pf_column_recurrence_contract.md",
+        "outputs/arb_jensen_window_column_recurrence_stress.md",
+        "outputs/jensen_window_pf_reciprocal_coefficient_extended_stress.md"
+      ],
+      "fit": "The direct reciprocal coefficients are positive across strong finite grids even though the raw signed path terms cancel, suggesting a possible Xi/Phi-specific positive identity.",
+      "gap_or_rejection": "No analytic identity currently rewrites mu_m as an integral, determinant, sum, or convolution with manifestly nonnegative final terms.",
+      "required_upgrade": "Derive an exact identity for the actual heat-flow coefficients whose final coefficient formula is nonnegative term-by-term or by a proved positive kernel theorem.",
+      "proof_boundary": "Live identity-search candidate only; finite positivity and cancellation pattern do not supply the identity."
+    },
+    {
+      "id": "msm_08_finite_grid_extrapolation",
+      "model_family": "finite signed/reciprocal evidence extrapolated to an all-order theorem",
+      "verdict": "finite_evidence_only",
+      "readiness": "not_ready_to_apply",
+      "live_candidate": false,
+      "source_artifacts": [
+        "outputs/jensen_window_pf_reciprocal_signed_j_fraction_scout.md",
+        "outputs/jensen_window_pf_reciprocal_signed_jacobi_beta_scout.md",
+        "outputs/jensen_window_pf_reciprocal_coefficient_extended_stress.md",
+        "outputs/countermodel_library.md"
+      ],
+      "fit": "The finite grids are strong falsification pressure and useful guides for theorem candidates.",
+      "gap_or_rejection": "Finite rows cannot be promoted into all degrees, all shifts, or all m by wording.",
+      "required_upgrade": "Pair the finite evidence with an independent all-order theorem or constructive model.",
+      "proof_boundary": "Finite evidence only; not a proof model."
+    },
+    {
+      "id": "msm_09_endpoint_real_rooted_or_pf_input",
+      "model_family": "endpoint real-rooted or PF input for H(t)",
+      "verdict": "circular_if_used_as_input",
+      "readiness": "not_ready_to_apply",
+      "live_candidate": false,
+      "source_artifacts": [
+        "outputs/jensen_window_sturm_pf_consequence.md",
+        "outputs/jensen_window_pf_bridge_target.md",
+        "outputs/jensen_window_pf_reciprocal_positivity_route_matrix.md"
+      ],
+      "fit": "If H(t) already has real nonpositive zeros or finite PF-infinity, then E(t)=1/H(-t) has nonnegative coefficients by a product expansion.",
+      "gap_or_rejection": "Using endpoint real-rootedness or Jensen-window PF-infinity as input assumes the target property rather than deriving it.",
+      "required_upgrade": "Use endpoint PF only as a finite consistency check or as the conclusion of a separate noncircular theorem.",
+      "proof_boundary": "Endpoint consequence only; circular as a proof input for jwpf_06."
+    }
+  ],
+  "kill_gates": [
+    "Reject any proof that uses the raw ordinary Motzkin/J-fraction path expansion as manifest positivity.",
+    "Reject any proof that repairs the raw Motzkin model only by diagonal sign conjugation of closed paths.",
+    "Reject any proof that repairs the raw Motzkin model only by a global path-length parity sign.",
+    "Reject any proof that uses only an absolute-value sign-state cover of the raw Motzkin paths as a state-space doubled model.",
+    "Reject any proof that promotes finite signed-Hankel, beta, Motzkin, parity-lift, or reciprocal coefficient grids into an all-order theorem.",
+    "Reject any proof that assumes endpoint real-rootedness, Jensen-window PF-infinity, Laguerre-Polya membership, RH, or Lambda <= 0.",
+    "Reject any proof that proves only formal signed-fraction existence without coefficientwise nonnegativity of E(t).",
+    "Reject any column-only proof that claims to close jwpf_06 without an all-Schur/Toeplitz lift."
+  ],
+  "summary": {
+    "model_rows": 9,
+    "ready_to_apply_rows": 0,
+    "live_modified_candidates": 4,
+    "rejected_or_dead_repairs": 3,
+    "finite_or_circular_rows": 2,
+    "target_closing": false,
+    "main_finding": "The raw ordinary Motzkin/J-fraction model, diagonal sign conjugation, global length-parity sign repair, and absolute-value sign-state cover are rejected as proof mechanisms. Four modified routes remain live only conditionally: a genuinely modified state-space doubled model, a modified production/Riordan/network model, an oscillatory sign-regular resolvent theorem narrowed by the 8-row oscillatory/resolvent fit matrix, the positive-readout theorem target, and the positive spectral moment obstruction, and an Xi/Phi-specific positive cancellation identity. Finite grids and endpoint PF language remain evidence or consequences only, not proof inputs."
+  },
+  "invariants": [
+    "No model row is ready_to_apply.",
+    "Every live candidate states a missing construction, theorem, or identity.",
+    "Every rejected sign-repair row cites the Motzkin or parity-lift obstruction.",
+    "Finite evidence and endpoint PF language cannot close jwpf_06.",
+    "The artifact classifies proof routes only and does not prove coefficient positivity."
+  ]
+}

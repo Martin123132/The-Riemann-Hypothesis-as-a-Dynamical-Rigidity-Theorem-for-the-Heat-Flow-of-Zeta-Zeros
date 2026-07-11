@@ -210,6 +210,18 @@ python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matr
 It currently records `7` source-anchored theorem-family rows and `0`
 ready-to-apply rows.
 
+The structural ansatz workbench for the same central row is:
+
+```text
+outputs/jensen_window_pf_structural_ansatz_matrix.md
+work/rh_compute/results/jensen_window_pf_structural_ansatz_matrix.json
+python work/rh_compute/scripts/check_jensen_window_pf_structural_ansatz_matrix.py
+```
+
+It currently records `6` candidate, blocked, and rejected ansatz rows and `0`
+ready-to-apply rows, tested against exact degree-2/3/4 low-degree formulas and
+the finite countermodel kill gate.
+
 ## Why The Existing Evidence Is Still Finite
 
 The current Arb staircase checker validates:
@@ -273,10 +285,12 @@ This note is part of the same theorem target family as:
 outputs/signed_hankel_jensen_bridge_target.md
 outputs/jensen_window_pf_bridge_obligations.md
 outputs/jensen_window_pf_theorem_machinery_fit_matrix.md
+outputs/jensen_window_pf_structural_ansatz_matrix.md
 outputs/sign_regularity_theorem_fit_matrix.md
 python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
 python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
+python work/rh_compute/scripts/check_jensen_window_pf_structural_ansatz_matrix.py
 python work/rh_compute/scripts/check_sign_regularity_theorem_fit_matrix.py
 ```
 

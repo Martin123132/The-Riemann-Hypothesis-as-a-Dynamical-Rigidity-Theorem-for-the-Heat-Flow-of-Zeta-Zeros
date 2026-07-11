@@ -1,0 +1,235 @@
+{
+  "kind": "jensen_window_pf_scaled_double_zero_boundary_layer_lemma",
+  "date": "2026-07-11",
+  "status": "exact scaled double-zero boundary layer and finite-threshold exhaustion theorem",
+  "proof_boundary": "This artifact derives the universal 1/D Jensen correction, the local D^(-3/2) root gap, the rho/(8D) finite collision shift, its second-order external-field correction, and the exhaustion of the Newman boundary by nested finite-degree eventual thresholds. It does not provide the required uniform remainder bound, exclude collision escape in degree or zero height, prove PF-infinity, RH, or Lambda <= 0.",
+  "sources": [
+    "outputs/jensen_window_pf_polar_heat_collision_cascade_lemma.md",
+    "outputs/jensen_window_pf_cofinal_scaling_limit_equivalence_gate.md",
+    "outputs/formal_core.md",
+    "outputs/jensen_window_pf_cubic_forward_uniform_tail_certificate.md"
+  ],
+  "exact": {
+    "entire_family": "F_(n,lambda)(z)=sum_(j>=0) A_(n+j)(lambda)*z^j/j!",
+    "scaled_jensen": "J_(D,n,lambda)(z/D)=sum_(j=0)^D ((D)_j/D^j)*A_(n+j)(lambda)*z^j/j!",
+    "falling_expansion": "(D)_j/D^j=1-j*(j-1)/(2*D)+O_j(D^(-2))",
+    "first_correction": "J_(D,n,lambda)(z/D)=F_(n,lambda)(z)-z^2*F_(n,lambda)''(z)/(2*D)+O_K(D^(-2))",
+    "second_correction": "J_D(z/D)=F-z^2*F''/(2*D)+(z^3*F'''/3+z^4*F''''/8)/D^2+O_K(D^(-3))",
+    "heat_pde": "partial_lambda F_n=(4*n+2)*partial_z F_n+4*z*partial_z^2 F_n",
+    "double_zero_transversality": "F(rho)=F'(rho)=0 => partial_lambda F(rho)=4*rho*F''(rho)",
+    "boundary_layer": "If lambda=lambda_*+tau/D and z=rho+eta/sqrt(D), then 2*D*J_D(z/D)/F''_*(rho)->eta^2+8*rho*tau-rho^2.",
+    "local_discriminant": "4*rho*(rho - 8*tau)",
+    "root_layer": "eta_+/- -> +/-sqrt(rho^2-8*rho*tau); at tau=0, w_+/-=rho/D+/-|rho|/D^(3/2)+O(D^(-2)).",
+    "collision_shift": "lambda_D=lambda_*+rho/(8*D)-[rho*(6*n+1)/64+rho^2*F'''_*(rho)/(48*F''_*(rho))]/D^2+o(D^(-2)).",
+    "collision_center": "z_D=rho+rho*(1-2*n)/(4*D)+o(D^(-1)) in the scaled Jensen variable.",
+    "external_field": "If F_*(z)=(z-rho)^2*U(z), then F'''_*(rho)/F''_*(rho)=3*U'(rho)/U(rho); the global root external field first enters at order D^(-2).",
+    "eventual_thresholds": {
+      "definition": "Theta_D=inf{ell:[ell,infinity) is contained in the degree-D hyperbolicity set}",
+      "nesting": "Theta_D<=Theta_(D+1)<=Lambda",
+      "exhaustion": "sup_D Theta_D=Lambda",
+      "warning": "Theta_D<=0 requires the full forward ray, not a single lambda=0 test."
+    },
+    "toy": {
+      "family": "12*lambda**2 + 4*lambda + z**2 + z*(12*lambda + 2) + 1",
+      "pde_residual": "0",
+      "scaled_jensen": "12*lambda**2 + 12*lambda*z + 4*lambda + z**2 + 2*z + 1 - z**2/D",
+      "discriminant": "4*(24*D*lambda**2 + 8*D*lambda + 12*lambda**2 + 4*lambda + 1)/D",
+      "near_threshold": "(sqrt(2)*sqrt(D - 1) - sqrt(2*D + 1))/(6*sqrt(2*D + 1))",
+      "near_threshold_series": "-h/8 + h**2/64 - 5*h**3/256 + O(h**4)",
+      "far_threshold": "-(sqrt(2)*sqrt(D - 1) + sqrt(2*D + 1))/(6*sqrt(2*D + 1))",
+      "boundary_scaled_roots": [
+        "-sqrt(D)*(sqrt(D) + 1)/(D - 1)",
+        "-sqrt(D)*(sqrt(D) - 1)/(D - 1)"
+      ],
+      "boundary_unscaled_gap": "2/(sqrt(D)*(D - 1))"
+    },
+    "checks": {
+      "falling_factor_orders": [
+        0,
+        12
+      ],
+      "falling_factor_checks": [
+        {
+          "order": 0,
+          "linear_coefficient": "0",
+          "quadratic_coefficient": "0"
+        },
+        {
+          "order": 1,
+          "linear_coefficient": "0",
+          "quadratic_coefficient": "0"
+        },
+        {
+          "order": 2,
+          "linear_coefficient": "-1",
+          "quadratic_coefficient": "0"
+        },
+        {
+          "order": 3,
+          "linear_coefficient": "-3",
+          "quadratic_coefficient": "2"
+        },
+        {
+          "order": 4,
+          "linear_coefficient": "-6",
+          "quadratic_coefficient": "11"
+        },
+        {
+          "order": 5,
+          "linear_coefficient": "-10",
+          "quadratic_coefficient": "35"
+        },
+        {
+          "order": 6,
+          "linear_coefficient": "-15",
+          "quadratic_coefficient": "85"
+        },
+        {
+          "order": 7,
+          "linear_coefficient": "-21",
+          "quadratic_coefficient": "175"
+        },
+        {
+          "order": 8,
+          "linear_coefficient": "-28",
+          "quadratic_coefficient": "322"
+        },
+        {
+          "order": 9,
+          "linear_coefficient": "-36",
+          "quadratic_coefficient": "546"
+        },
+        {
+          "order": 10,
+          "linear_coefficient": "-45",
+          "quadratic_coefficient": "870"
+        },
+        {
+          "order": 11,
+          "linear_coefficient": "-55",
+          "quadratic_coefficient": "1320"
+        },
+        {
+          "order": 12,
+          "linear_coefficient": "-66",
+          "quadratic_coefficient": "1925"
+        }
+      ],
+      "local_quadratic": "eta**2 - rho**2 + 8*rho*tau",
+      "first_parameter_shift": "rho/8",
+      "first_center_shift": "-rho*(2*n - 1)/4",
+      "second_parameter_shift": "-rho*(18*f2*n + 3*f2 + 4*f3*rho)/(192*f2)",
+      "toy_exact_checks": 7
+    }
+  },
+  "rows": [
+    {
+      "id": "sdzb_01_scaled_jensen_identity",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "Degree scaling inserts the falling-factorial multiplier into the entire-function coefficients.",
+      "formula": "J_(D,n,lambda)(z/D)=sum_(j=0)^D ((D)_j/D^j)*A_(n+j)(lambda)*z^j/j!",
+      "proof_boundary": "Exact coefficient identity only.",
+      "diagnostics": null
+    },
+    {
+      "id": "sdzb_02_first_degree_correction",
+      "role": "exact_asymptotic",
+      "readiness": "ready_to_apply",
+      "claim": "The first two locally uniform finite-degree corrections are universal differential operators on the coefficient entire function.",
+      "formula": "J_(D,n,lambda)(z/D)=F_(n,lambda)(z)-z^2*F_(n,lambda)''(z)/(2*D)+O_K(D^(-2)); J_D(z/D)=F-z^2*F''/(2*D)+(z^3*F'''/3+z^4*F''''/8)/D^2+O_K(D^(-3))",
+      "proof_boundary": "Compact-z asymptotic for an entire coefficient function.",
+      "diagnostics": null
+    },
+    {
+      "id": "sdzb_03_coefficient_heat_pde",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The shifted coefficient entire functions obey a Laguerre-type heat PDE.",
+      "formula": "partial_lambda F_n=(4*n+2)*partial_z F_n+4*z*partial_z^2 F_n",
+      "proof_boundary": "Exact coefficient flow only.",
+      "diagnostics": null
+    },
+    {
+      "id": "sdzb_04_double_zero_transversality",
+      "role": "exact_local_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "At a nonzero double zero, the heat derivative is transverse with a shift-independent coefficient.",
+      "formula": "F(rho)=F'(rho)=0 => partial_lambda F(rho)=4*rho*F''(rho)",
+      "proof_boundary": "Nondegenerate double zero only.",
+      "diagnostics": null
+    },
+    {
+      "id": "sdzb_05_universal_boundary_layer",
+      "role": "exact_asymptotic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The joint degree-parameter-root scaling converges to one universal quadratic collision model.",
+      "formula": "If lambda=lambda_*+tau/D and z=rho+eta/sqrt(D), then 2*D*J_D(z/D)/F''_*(rho)->eta^2+8*rho*tau-rho^2.",
+      "proof_boundary": "Local layer near one finite nondegenerate double zero.",
+      "diagnostics": null
+    },
+    {
+      "id": "sdzb_06_root_gap_law",
+      "role": "exact_asymptotic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "At the entire-function boundary, the associated finite Jensen roots remain distinct with an unscaled gap of order D^(-3/2).",
+      "formula": "eta_+/- -> +/-sqrt(rho^2-8*rho*tau); at tau=0, w_+/-=rho/D+/-|rho|/D^(3/2)+O(D^(-2)).",
+      "proof_boundary": "The local root pair only; no claim about all other roots.",
+      "diagnostics": null
+    },
+    {
+      "id": "sdzb_07_finite_collision_shift",
+      "role": "exact_asymptotic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The finite-degree pair collides behind the entire-function boundary by rho/(8D), with a second-order correction governed by the regularized global root field.",
+      "formula": "lambda_D=lambda_*+rho/(8*D)-[rho*(6*n+1)/64+rho^2*F'''_*(rho)/(48*F''_*(rho))]/D^2+o(D^(-2)). If F_*(z)=(z-rho)^2*U(z), then F'''_*(rho)/F''_*(rho)=3*U'(rho)/U(rho); the global root external field first enters at order D^(-2).",
+      "proof_boundary": "Local collision branch and second-order external field only.",
+      "diagnostics": null
+    },
+    {
+      "id": "sdzb_08_exact_toy_validation",
+      "role": "exact_countercheck",
+      "readiness": "guard_validated",
+      "claim": "A solvable polynomial heat family realizes both the root-gap and negative 1/(8D) threshold shift exactly.",
+      "formula": "F_lambda=z^2+(2+12*lambda)z+1+4*lambda+12*lambda^2, rho=-1",
+      "proof_boundary": "Algebraic model check, not a zeta coefficient family.",
+      "diagnostics": {
+        "family": "12*lambda**2 + 4*lambda + z**2 + z*(12*lambda + 2) + 1",
+        "pde_residual": "0",
+        "scaled_jensen": "12*lambda**2 + 12*lambda*z + 4*lambda + z**2 + 2*z + 1 - z**2/D",
+        "discriminant": "4*(24*D*lambda**2 + 8*D*lambda + 12*lambda**2 + 4*lambda + 1)/D",
+        "near_threshold": "(sqrt(2)*sqrt(D - 1) - sqrt(2*D + 1))/(6*sqrt(2*D + 1))",
+        "near_threshold_series": "-h/8 + h**2/64 - 5*h**3/256 + O(h**4)",
+        "far_threshold": "-(sqrt(2)*sqrt(D - 1) + sqrt(2*D + 1))/(6*sqrt(2*D + 1))",
+        "boundary_scaled_roots": [
+          "-sqrt(D)*(sqrt(D) + 1)/(D - 1)",
+          "-sqrt(D)*(sqrt(D) - 1)/(D - 1)"
+        ],
+        "boundary_unscaled_gap": "2/(sqrt(D)*(D - 1))"
+      }
+    },
+    {
+      "id": "sdzb_09_eventual_threshold_exhaustion",
+      "role": "exact_global_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "Nested finite-degree eventual hyperbolicity thresholds increase to the full Newman boundary.",
+      "formula": "sup_D Theta_D=Lambda",
+      "proof_boundary": "Equivalent exhaustion theorem; it does not bound any open higher-degree threshold.",
+      "diagnostics": {
+        "definition": "Theta_D=inf{ell:[ell,infinity) is contained in the degree-D hyperbolicity set}",
+        "nesting": "Theta_D<=Theta_(D+1)<=Lambda",
+        "exhaustion": "sup_D Theta_D=Lambda",
+        "warning": "Theta_D<=0 requires the full forward ray, not a single lambda=0 test."
+      }
+    },
+    {
+      "id": "sdzb_10_uniform_layer_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "To prove Lambda<=0 by this route, control the scaled collision discriminant uniformly over degree and over collision locations, including escape in zero height.",
+      "formula": "uniform lower bound for rho^2-8*rho*tau plus controlled remainders",
+      "proof_boundary": "Open degree-uniform and height-uniform theorem; not RH or Lambda <= 0.",
+      "diagnostics": null
+    }
+  ]
+}

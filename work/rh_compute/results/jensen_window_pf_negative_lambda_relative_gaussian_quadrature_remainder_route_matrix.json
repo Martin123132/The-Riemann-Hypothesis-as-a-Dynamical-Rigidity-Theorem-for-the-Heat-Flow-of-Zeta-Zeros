@@ -1,0 +1,182 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The route matrix does not promote floating order-spread to a quadrature theorem.",
+    "The derivative-supremum caps are sufficient conditions, not proved estimates.",
+    "Node-only x<=1 tail control is not a continuum quadrature-tail theorem.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix",
+  "matrix_rows": [
+    {
+      "claim": "For normalized generalized Gauss-Laguerre expectation with alpha=41/2 and N=320, the classical Gaussian-quadrature remainder prefactor is N!*Gamma(N+alpha+1)/(Gamma(alpha+1)*(2N)!).",
+      "diagnostics": {
+        "alpha": "41/2",
+        "derivative_order": 640,
+        "laguerre_error_prefactor": "2.791244149880588131514918942024363250922057058755595558776957E-159",
+        "laguerre_error_prefactor_formula": "N!*Gamma(N+alpha+1)/(Gamma(alpha+1)*(2N)!)",
+        "monic_norm_formula": "N!*Gamma(N+alpha+1)",
+        "normalized_expectation_error_bound": "prefactor * sup_y |f^(2N)(y)|",
+        "quadrature_order": 320
+      },
+      "gap": null,
+      "id": "nlrgqrrm_01_gauss_laguerre_remainder_formula",
+      "proof_boundary": "Exact quadrature-remainder formula target only; no 640th-derivative bound is proved here.",
+      "readiness": "available_exact_formula",
+      "role": "exact_formula_target",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_ladder_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md"
+      ]
+    },
+    {
+      "claim": "A 1e-6 quadrature ratio-radius certificate at the worst row would follow from explicit 640th-derivative supremum bounds for the value and derivative cancellation-reduced cores.",
+      "diagnostics": {
+        "derivative_required_640th_derivative_supremum_cap": "5.1024800969638456035049425453208614326121E+120",
+        "derivative_scaled_absolute_radius_cap": "1.424226772053247012E-30",
+        "derivative_unscaled_expectation_error_cap": "1.424226772053247012E-38",
+        "quadrature_ratio_radius_cap": "0.0000010",
+        "value_required_640th_derivative_supremum_cap": "2.4297524271256407631984588349963763207485E+119",
+        "value_scaled_absolute_radius_cap": "6.782032247872604818E-28",
+        "value_unscaled_expectation_error_cap": "6.782032247872604818E-40"
+      },
+      "gap": null,
+      "id": "nlrgqrrm_02_ratio_cap_to_derivative_sup_caps",
+      "proof_boundary": "Sufficient derivative-sup condition only; not a derivative estimate.",
+      "readiness": "open_requirement",
+      "role": "sufficient_condition",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_first_omitted_denominator_certificate.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_first_omitted_denominator_certificate.md"
+      ]
+    },
+    {
+      "claim": "Adding the proposed 1e-6 quadrature ratio-radius cap to the certified worst-row finite-plus-tail ratio uppers still keeps both channels below one first omitted term.",
+      "diagnostics": {
+        "both_ratios_still_below_one_after_quadrature_cap": true,
+        "derivative_ratio_upper_after_quadrature_cap": "0.9714065674762067320093698741711260875260",
+        "finite_plus_tail_derivative_ratio_upper": "0.9714055674762067320093698741711260875260",
+        "finite_plus_tail_value_ratio_upper": "0.9853957992836557769419015895036210773888",
+        "quadrature_ratio_radius_cap": "0.0000010",
+        "value_ratio_upper_after_quadrature_cap": "0.9853967992836557769419015895036210773888"
+      },
+      "gap": null,
+      "id": "nlrgqrrm_03_finite_plus_tail_plus_quadrature_budget",
+      "proof_boundary": "Budget arithmetic only; the quadrature radius remains an unproved target until a remainder or interval-integration theorem supplies it.",
+      "readiness": "available_budget_arithmetic",
+      "role": "budget_composition",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_plus_tail_budget_certificate.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_plus_tail_budget_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md"
+      ]
+    },
+    {
+      "claim": "One rigorous route is to prove complex-analytic Cauchy bounds for the 640th y-derivatives of the cancellation-reduced value and derivative cores, using the even-v expansion and separate n-tail control.",
+      "diagnostics": {
+        "polynomial_part_note": "The degree-20 polynomial part has zero 640th y-derivative.",
+        "required_derivative_derivative_sup_cap": "5.1024800969638456035049425453208614326121E+120",
+        "required_value_derivative_sup_cap": "2.4297524271256407631984588349963763207485E+119",
+        "tail_warning": "Node-only x<=1 tail control is not enough for a quadrature theorem; the continuum integral tail or analytic derivative tail must be bounded separately."
+      },
+      "gap": null,
+      "id": "nlrgqrrm_04_cauchy_derivative_route",
+      "proof_boundary": "Live analytic route only; no Cauchy-radius or tail derivative theorem is proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_grid_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "A second rigorous route is independent Arb interval integration of the cancellation-reduced Gamma expectation, split into a finite interval and a separately bounded far Gamma tail.",
+      "diagnostics": {
+        "required_derivative_unscaled_error": "1.424226772053247012E-38",
+        "required_value_unscaled_error": "6.782032247872604818E-40",
+        "split_warning": "The finite-grid node range x<=1 does not cover the continuum y>T tail; a split proof must include the far-tail integral."
+      },
+      "gap": null,
+      "id": "nlrgqrrm_05_interval_adaptive_integration_route",
+      "proof_boundary": "Live interval-integration route only; no integration certificate is produced here.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "The observed N=96..320 order-spread below 1e-14 proves the quadrature remainder is below the required 1e-6 ratio-radius cap.",
+      "diagnostics": {
+        "ladder_order_spread_is_proof": false,
+        "quadrature_ladder_role": "floating stability scout"
+      },
+      "gap": "Order agreement is calibration evidence only. A referee-usable proof needs a Gaussian quadrature remainder theorem, a derivative-sup certificate, or independent interval integration.",
+      "id": "nlrgqrrm_06_order_spread_promotion_rejected",
+      "proof_boundary": "Rejected promotion only; not a quadrature-remainder theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_ladder_scout.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_ladder_scout.md"
+      ]
+    },
+    {
+      "claim": "A promoted intervalized worst-row proof may use the quadrature source only after one of the live routes supplies a machine-checkable radius below the recorded cap.",
+      "diagnostics": null,
+      "gap": null,
+      "id": "nlrgqrrm_07_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a finite-grid interval certificate, not RH, and not Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Quadrature-remainder route matrix only. It records the exact classical Gauss-Laguerre remainder prefactor, converts the desired 1e-6 ratio-radius target into derivative-supremum and interval integration obligations, and checks budget compatibility, but it does not prove any derivative bound, does not produce interval adaptive integration, does not close the finite-grid interval certificate, does not prove a uniform collar theorem, and does not prove RH or Lambda <= 0.",
+  "source_cancellation_reduced_grid_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_finite_plus_tail_budget_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_plus_tail_budget_certificate.md",
+  "source_finite_plus_tail_budget_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_plus_tail_budget_certificate.json",
+  "source_first_omitted_denominator_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_first_omitted_denominator_certificate.md",
+  "source_first_omitted_denominator_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_first_omitted_denominator_certificate.json",
+  "source_intervalization_target": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+  "source_intervalization_target_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.json",
+  "source_phi_tail_grid_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_grid_certificate.md",
+  "source_quadrature_ladder_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_ladder_scout.json",
+  "source_quadrature_ladder_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_ladder_scout.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "quadrature-remainder route matrix",
+  "summary": {
+    "T": 10000,
+    "both_ratios_still_below_one_after_quadrature_cap": true,
+    "derivative_order": 640,
+    "derivative_ratio_upper_after_quadrature_cap": "0.9714065674762067320093698741711260875260",
+    "derivative_required_640th_derivative_supremum_cap": "5.1024800969638456035049425453208614326121E+120",
+    "derivative_unscaled_expectation_error_cap": "1.424226772053247012E-38",
+    "finite_plus_tail_derivative_ratio_upper": "0.9714055674762067320093698741711260875260",
+    "finite_plus_tail_value_ratio_upper": "0.9853957992836557769419015895036210773888",
+    "index": 21,
+    "intervalization_per_source_cap": "2.000000000000000000E-3",
+    "laguerre_error_prefactor": "2.791244149880588131514918942024363250922057058755595558776957E-159",
+    "live_route_rows": 2,
+    "main_finding": "The classical N=320 generalized Gauss-Laguerre remainder formula reduces the worst-row quadrature source to 640th-derivative control with normalized prefactor about 2.79e-159. A 1e-6 ratio-radius certificate would follow from value and derivative 640th-derivative supremum bounds below the recorded caps, and adding that cap to the finite-plus-tail budget still leaves both channels below one. This is a route matrix only: no derivative or interval integration bound is proved.",
+    "matrix_rows": 7,
+    "quadrature_cap_below_per_source_cap": true,
+    "quadrature_order": 320,
+    "quadrature_ratio_radius_cap": "0.0000010",
+    "ready_to_apply_rows": 0,
+    "rejected_route_rows": 1,
+    "target_closing": false,
+    "value_ratio_upper_after_quadrature_cap": "0.9853967992836557769419015895036210773888",
+    "value_required_640th_derivative_supremum_cap": "2.4297524271256407631984588349963763207485E+119",
+    "value_unscaled_expectation_error_cap": "6.782032247872604818E-40"
+  }
+}

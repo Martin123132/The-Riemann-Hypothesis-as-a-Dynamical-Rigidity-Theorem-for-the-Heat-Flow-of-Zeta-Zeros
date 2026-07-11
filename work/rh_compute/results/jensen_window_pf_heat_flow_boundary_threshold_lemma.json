@@ -1,0 +1,94 @@
+{
+  "date": "2026-07-06",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k0_k9.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k10_k20.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k21_k32.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k33_k48.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k49_k64.jsonl"
+  ],
+  "exact_rows": [
+    {
+      "argument": "For n>=1 and u>=0, 2*pi*n^2*exp(4*u)-3 >= 2*pi-3 > 0, and every other factor is positive.",
+      "formula": "Phi(u)=sum_{n>=1} pi*n^2*exp(5*u)*(2*pi*n^2*exp(4*u)-3)*exp(-pi*n^2*exp(4*u)) > 0 for u>=0",
+      "id": "hfbtl_01_phi_positive_half_line",
+      "proof_boundary": "Exact half-line positivity for the Newman/Phi moment weight only.",
+      "role": "exact_kernel_positivity"
+    },
+    {
+      "argument": "Apply Cauchy-Schwarz to u^(2*k-1)*sqrt(w_lambda(u)) and u^(2*k+1)*sqrt(w_lambda(u)), where w_lambda(u)=2*exp(lambda*u^2)*Phi(u) is positive on u>=0.",
+      "formula": "mu_{2k}(lambda)^2 <= mu_{2k-2}(lambda)*mu_{2k+2}(lambda)",
+      "id": "hfbtl_02_raw_moment_logconvexity",
+      "proof_boundary": "Exact raw-moment log-convexity only; it is not normalized monotone contraction.",
+      "role": "exact_moment_inequality"
+    },
+    {
+      "argument": "Substitute A_k=mu_{2k}*k!/(2*k)! into x_k=(A_{k+1}/A_k)/(A_k/A_{k-1}) and use raw-moment log-convexity.",
+      "formula": "x_k = ((2*k-1)/(2*k+1))*(mu_{2k+2}*mu_{2k-2}/mu_{2k}^2) >= (2*k-1)/(2*k+1)",
+      "id": "hfbtl_03_normalized_strong_threshold",
+      "proof_boundary": "Exact lower bound for x_k only; it does not prove x_k<=1 or x_{k+1}>=x_k.",
+      "role": "exact_normalization_reduction"
+    },
+    {
+      "argument": "The strong normalized threshold strictly dominates the boundary threshold needed by the heat-flow bracket.",
+      "formula": "x_k >= (2*k-1)/(2*k+1) > (2*k-1)/(2*k+5)",
+      "id": "hfbtl_04_heat_flow_threshold",
+      "proof_boundary": "Exact threshold discharge only; it does not close the heat-flow differential inequality.",
+      "role": "exact_heat_flow_threshold"
+    },
+    {
+      "argument": "Use the heat-flow bracket factorization from the monotone-closure scout and the exact threshold bound.",
+      "formula": "if x_k=x_{k+1}=q, x_{k+2}>=q, and q>=((2*k-1)/(2*k+5)), then bracket >= ((q-1)^2*((2*k+5)*q-(2*k-1)))/q >= 0",
+      "id": "hfbtl_05_boundary_bracket_nonnegative",
+      "proof_boundary": "Boundary pointing condition only; not a global flow-invariance theorem and not an initial-condition theorem.",
+      "role": "exact_boundary_pointing_condition"
+    }
+  ],
+  "finite_diagnostics": {
+    "heat_flow_threshold": "x_k >= (2*k-1)/(2*k+5)",
+    "heat_flow_threshold_positive_rows": 315,
+    "heat_flow_threshold_rows": 315,
+    "lambdas": [
+      "0.0",
+      "0.000001",
+      "0.0001",
+      "0.01",
+      "0.1"
+    ],
+    "max_coefficient_index": 64,
+    "min_heat_flow_threshold_margin": {
+      "k": 63,
+      "lam": "0.1",
+      "sample": "3.822433850353900366E-2"
+    },
+    "min_strong_threshold_margin": {
+      "k": 63,
+      "lam": "0.1",
+      "sample": "8.170843282044743874E-3"
+    },
+    "strong_threshold": "x_k >= (2*k-1)/(2*k+1)",
+    "strong_threshold_positive_rows": 315,
+    "strong_threshold_rows": 315
+  },
+  "invariants": [
+    "The lemma keeps A_k=mu_{2k}*k!/(2*k)! explicit.",
+    "The boundary threshold is closed, but the monotone-contraction theorem remains open.",
+    "Finite threshold margins are sanity evidence, not the proof of the exact lemma.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_heat_flow_boundary_threshold_lemma",
+  "proof_boundary": "Exact boundary-threshold lemma only. It proves the Cauchy-Schwarz lower bound x_k >= (2*k-1)/(2*k+1), hence the weaker heat-flow threshold x_k >= (2*k-1)/(2*k+5), and the corresponding boundary bracket nonnegativity under the monotone-neighbor assumption. It does not prove adjacent log-concavity x_k<=1, does not prove increasing contractions for all zeta windows, does not prove a closed differential inequality, does not prove jwpf_06, and does not prove RH or Lambda <= 0.",
+  "source_heat_flow_closure": "outputs/jensen_window_pf_heat_flow_monotone_closure_scout.md",
+  "source_theorem_target": "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+  "status": "available_exact_boundary_threshold_lemma",
+  "summary": {
+    "boundary_threshold_closed": true,
+    "exact_rows": 5,
+    "heat_flow_threshold_positive_rows": 315,
+    "heat_flow_threshold_rows": 315,
+    "main_finding": "The heat-flow boundary threshold is not an open subtarget: Phi positivity and Cauchy-Schwarz raw-moment log-convexity prove the stronger bound x_k >= (2*k-1)/(2*k+1), which implies the needed x_k >= (2*k-1)/(2*k+5). The remaining heat-flow route still needs adjacent log-concavity, a global flow-invariance argument, and initial or terminal conditions.",
+    "monotone_contraction_target_closing": false,
+    "strong_threshold_positive_rows": 315,
+    "strong_threshold_rows": 315
+  }
+}

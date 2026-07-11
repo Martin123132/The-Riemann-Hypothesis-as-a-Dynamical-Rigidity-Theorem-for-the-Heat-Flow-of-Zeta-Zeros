@@ -1,6 +1,6 @@
 # Certification And Countermodel Gates
 
-Date: 2026-07-05
+Date: 2026-07-10
 
 Status: proof-safety gate ledger. This is not a proof of RH or `Lambda <= 0`; it defines certification levels, manifest checks, and countermodel boundaries.
 
@@ -291,6 +291,10 @@ python work/rh_compute/scripts/check_jensen_hankel_bridge_algebra.py
 python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
 python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
+python work/rh_compute/scripts/check_jensen_window_pf_structural_ansatz_matrix.py
+python work/rh_compute/scripts/check_jensen_window_pf_cauchy_binet_low_degree_scout.py
+python work/rh_compute/scripts/check_jensen_window_pf_log_concavity_frontier_scout.py
+python work/rh_compute/scripts/check_jensen_window_pf_ratio_condition_scout.py
 python work/rh_compute/scripts/check_edrei_log_sign_manifest.py
 python work/rh_compute/scripts/check_edrei_power_hankel_manifest.py
 python work/rh_compute/scripts/check_edrei_power_hankel_frontier_manifest.py
@@ -395,6 +399,249 @@ python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matr
 It validates `7` rows with `0` ready-to-apply rows. This is source-anchored
 theorem-search hygiene only.
 
+The Jensen-window PF structural ansatz matrix turns the theorem-machinery
+audit into exact hard tests for candidate proof mechanisms:
+
+```text
+outputs/jensen_window_pf_structural_ansatz_matrix.md
+work/rh_compute/results/jensen_window_pf_structural_ansatz_matrix.json
+python work/rh_compute/scripts/check_jensen_window_pf_structural_ansatz_matrix.py
+```
+
+It validates `6` candidate, blocked, and rejected ansatz rows with `0`
+ready-to-apply rows. This is structural proof-search hygiene only.
+
+The Jensen-window PF Cauchy-Binet low-degree scout checks the live kernel
+ansatz against the selected exact degree-2/3/4 formulas:
+
+```text
+outputs/jensen_window_pf_cauchy_binet_low_degree_scout.md
+work/rh_compute/results/jensen_window_pf_cauchy_binet_low_degree_scout.json
+python work/rh_compute/scripts/check_jensen_window_pf_cauchy_binet_low_degree_scout.py
+```
+
+It validates `15` formula rows with nonnegative Bernstein coefficients under
+adjacent log-concavity and records `0` kernel identities found.
+
+The Jensen-window PF log-concavity frontier scout extends that diagnostic to
+larger contiguous minors:
+
+```text
+outputs/jensen_window_pf_log_concavity_frontier_scout.md
+work/rh_compute/results/jensen_window_pf_log_concavity_frontier_scout.json
+python work/rh_compute/scripts/check_jensen_window_pf_log_concavity_frontier_scout.py
+```
+
+It validates `14` contiguous rows and locates first Bernstein-certificate
+failures at degree 3 size 6 and degree 4 size 5, plus first exact countermodel
+negatives at degree 3 size 8 and degree 4 size 6.
+
+The Jensen-window PF ratio-condition scout rejects nearby strengthened
+conditions as standalone bridges:
+
+```text
+outputs/jensen_window_pf_ratio_condition_scout.md
+work/rh_compute/results/jensen_window_pf_ratio_condition_scout.json
+python work/rh_compute/scripts/check_jensen_window_pf_ratio_condition_scout.py
+```
+
+It validates `7` candidate rows with `4` rejected by exact countermodel and
+`1` rejected by constructed positive extension.
+
+The kernel Mellin upper-wall theorem and its adjacent-wall countermodel form
+a matched promotion gate:
+
+```text
+outputs/jensen_window_pf_kernel_mellin_upper_wall_certificate.md
+outputs/jensen_window_pf_log_concave_mellin_monotone_wall_countermodel.md
+python work/rh_compute/scripts/check_jensen_window_pf_kernel_mellin_upper_wall_certificate.py
+python work/rh_compute/scripts/check_jensen_window_pf_log_concave_mellin_monotone_wall_countermodel.py
+```
+
+The first proves `x_k(lambda)<=1` for every real `lambda` and every `k>=1`
+from a global interval-backed log-concavity theorem and Berwald-Borell. The
+second gives an exact log-concave Mellin witness with `x_2<x_1`, preventing
+that valid upper-wall theorem from being promoted to the still-open
+adjacent-`k` wall.
+
+The actual zeta kernel now also has a parameter-specific promotion gate:
+
+```text
+outputs/jensen_window_pf_negative_lambda_t1156_monotone_wall_counterexample_certificate.md
+work/rh_compute/results/acb_enclosures_lambda_m1156_k119_k122_dps250.jsonl
+python work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_t1156_monotone_wall_counterexample_certificate.py
+```
+
+Four rigorous coefficient enclosures at `lambda=-1156` certify
+`x_121-x_120<-1.68e-8`. This leaves the fixed-`k=22` theorem intact but
+blocks its promotion to an all-`k` cone theorem at `T=1156`. Cone entry is
+therefore redirected to a moderate fixed negative parameter with a finite
+collar plus a separate eventual-`k` theorem.
+
+The first exact reduction on that revised route is:
+
+```text
+outputs/jensen_window_pf_negative_lambda_kernel_summand_shift_lemma.md
+python work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_kernel_summand_shift_lemma.py
+```
+
+It proves every Newman-kernel summand is a shifted `n=1` copy and certifies
+the complete compact `n=2..20` perturbation below `2.122e-29` for
+`lambda=-100`, `k>=300`.
+
+The compact reduction, forward-flow handoff, and first higher-minor audit are
+now covered by twenty-two linked gates:
+
+```text
+outputs/jensen_window_pf_negative_lambda_first_summand_dominance_certificate.md
+outputs/jensen_window_pf_negative_lambda_m100_k320_collar_extension_certificate.md
+outputs/jensen_window_pf_negative_lambda_first_summand_saddle_wall_target.md
+outputs/jensen_window_pf_negative_lambda_first_summand_cumulant_bridge.md
+outputs/jensen_window_pf_negative_lambda_first_summand_leading_saddle_certificate.md
+outputs/jensen_window_pf_negative_lambda_first_summand_paired_remainder_certificate.md
+outputs/jensen_window_pf_negative_lambda_first_summand_paired_remainder_ray_certificate.md
+outputs/jensen_window_pf_negative_lambda_m100_full_cone_entry_certificate.md
+outputs/jensen_window_pf_heat_flow_infinite_cone_invariance_certificate.md
+outputs/jensen_window_pf_defect_complete_monotonicity_scout.md
+outputs/jensen_window_pf_heat_flow_jensen_hierarchy_lemma.md
+outputs/jensen_window_pf_rank_two_boundary_family_lemma.md
+outputs/jensen_window_pf_multiplier_counting_measure_target.md
+outputs/jensen_window_pf_mellin_multiplier_power_sum_obstruction.md
+outputs/jensen_window_pf_cubic_reciprocal_defect_invariance_lemma.md
+outputs/jensen_window_pf_cubic_m100_tail_entry_certificate.md
+outputs/jensen_window_pf_cubic_forward_uniform_tail_certificate.md
+outputs/jensen_window_pf_quartic_boundary_flow_obstruction.md
+outputs/jensen_window_pf_quartic_double_root_threshold_lemma.md
+outputs/jensen_window_pf_quartic_quintic_polar_contact_lemma.md
+outputs/jensen_window_pf_cofinal_degree_polar_closure_lemma.md
+outputs/jensen_window_pf_cofinal_scaling_limit_equivalence_gate.md
+outputs/jensen_window_pf_polar_heat_collision_cascade_lemma.md
+outputs/jensen_window_pf_scaled_double_zero_boundary_layer_lemma.md
+python work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_first_summand_dominance_certificate.py
+python work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_m100_k320_collar_extension_certificate.py
+python work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_first_summand_saddle_wall_target.py
+python work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_first_summand_cumulant_bridge.py
+python work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_first_summand_leading_saddle_certificate.py
+python work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_first_summand_paired_remainder_certificate.py
+python work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_first_summand_paired_remainder_ray_certificate.py
+python work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_m100_full_cone_entry_certificate.py
+python work/rh_compute/scripts/check_jensen_window_pf_heat_flow_infinite_cone_invariance_certificate.py
+python work/rh_compute/scripts/check_jensen_window_pf_defect_complete_monotonicity_scout.py
+python work/rh_compute/scripts/check_jensen_window_pf_heat_flow_jensen_hierarchy_lemma.py
+python work/rh_compute/scripts/check_jensen_window_pf_rank_two_boundary_family_lemma.py
+python work/rh_compute/scripts/check_jensen_window_pf_multiplier_counting_measure_target.py
+python work/rh_compute/scripts/check_jensen_window_pf_mellin_multiplier_power_sum_obstruction.py
+python work/rh_compute/scripts/check_jensen_window_pf_cubic_reciprocal_defect_invariance_lemma.py
+python work/rh_compute/scripts/check_jensen_window_pf_cubic_m100_tail_entry_certificate.py
+python work/rh_compute/scripts/check_jensen_window_pf_cubic_forward_uniform_tail_certificate.py
+python work/rh_compute/scripts/check_jensen_window_pf_quartic_boundary_flow_obstruction.py
+python work/rh_compute/scripts/check_jensen_window_pf_quartic_double_root_threshold_lemma.py
+python work/rh_compute/scripts/check_jensen_window_pf_quartic_quintic_polar_contact_lemma.py
+python work/rh_compute/scripts/check_jensen_window_pf_cofinal_degree_polar_closure_lemma.py
+python work/rh_compute/scripts/check_jensen_window_pf_cofinal_scaling_limit_equivalence_gate.py
+python work/rh_compute/scripts/check_jensen_window_pf_polar_heat_collision_cascade_lemma.py
+python work/rh_compute/scripts/check_jensen_window_pf_scaled_double_zero_boundary_layer_lemma.py
+```
+
+The first discharges the shifted far tail and proves
+`M_k=M_k^(1)(1+delta_k)`, `0<=delta_k<=2/k^6`, for every integer `k>=300`.
+The second extends the certified `lambda=-100` adjacent wall through `k=318`.
+The third records exact saddle geometry and, using the paired remainder
+theorems, proves `L_k^(1)>=1/(4*k^2)` for every integer `k>=319`.
+The fourth proves the exact cumulant/Gamma reduction to the sufficient estimate
+`kappa_3,t(2*log(U))>=-37/(50*t^2)` for every real `t>=318`.
+The fifth certifies the leading saddle term below `13/20`, its cubic
+Edgeworth correction below `1/100`, and its fifth-order correction below
+`1/1000`. The sixth proves the seventh-order normalized remainder floor
+`-79/1000` throughout `0.9264<=u<=5`, reaching `t>1.5241916613e10`.
+The seventh proves `H_t>=-3/250` on `u>=5`, closing the global cumulant
+hypothesis and lambda=-100 adjacent wall.
+The eighth merges the repaired prefix and composes it with the exact pointwise
+walls and analytic adjacent tail, proving full ratio-cone entry at lambda=-100.
+The ninth proves an infinite-sequence first-crossing maximum principle for the
+heat ODE and propagates that full cone to every finite lambda>=-100, including
+lambda=0. The all-order PF/Jensen bridge remains open.
+The tenth certifies both defect and negative-log-contraction alternating
+hierarchies through order 8 on the cached grid, retains 838 high-order
+inconclusives, and supplies the exact degree-3 discriminant countermodel. The
+eleventh records the exact coupled
+degree-shift Jensen heat hierarchy and the one-atom Hausdorff full-cone
+boundary witness with normalized frontier derivative `329728/2109375>0`,
+showing that complete defect monotonicity plus the local heat ODE still does
+not give cubic invariance.
+The twelfth proves an all-degree rank-two boundary factorization and supplies
+integer pointwise-product multiplier closure. The exact `-937/3456` mixture
+and `<-27/125` fractional-power cubic guards reject arbitrary positive measure
+weights in the resulting canonical-product ansatz.
+The thirteenth records the open sufficient unit-atomic factorization target,
+with exact convergence, Laplace-kernel, and failure-gate requirements.
+The fourteenth Arb-encloses the natural Mellin interpolation's log moments and
+finds three negative power-sum Hankel determinants. It closes that continuous-
+index strengthening but explicitly leaves the integer-only product target open.
+The fifteenth factors the cubic discriminant in reciprocal defect coordinates,
+proves the shift-coupled inward boundary condition, and certifies 318
+lambda=-100 prefix margins plus 310 nonnegative-grid margins.
+The sixteenth certifies negative third log-cumulant on 4,074 compact Arb blocks
+and an explicit analytic ray, derives a reciprocal-defect floor, and closes
+`q_(k+1)-q_k<1` for every `k>=319`. Together with the prefix this proves all
+shifted cubics hyperbolic at lambda=-100.
+The seventeenth derives the exact one-sided q-increment flow, proves the
+weighted source cap `sqrt(k)*g_k'<=7*r_k`, and uses an explicit coercive
+supersolution to establish compact-forward `O_L(k^(-1/2))` tail decay. This
+closes the cubic first-crossing handoff and proves every shifted cubic
+hyperbolic at lambda=0. Degree four and the all-degree bridge remain open.
+The eighteenth derives the normalized quartic discriminant and supplies an
+exact rational hyperbolic boundary point with four positive ratio margins and
+three strict cubic margins but `Q'/r_1<0`. It blocks promotion of the cubic
+cone unchanged to degree four without claiming any failure of the actual zeta
+trajectory.
+The nineteenth converts that obstruction into the exact branch-aware inward
+law `(3*a^2-4*a+p)*(u-U)<=0`, proves shift-independence of `U`, and identifies
+the necessary triple-root equality and tangent factor. A globally closed
+quartic contraction cone is still open.
+The twentieth proves the adjacent-degree polar identity, shows that a quartic
+double root under a hyperbolic quintic extension forces a quintic triple root,
+and identifies `u=U` as exactly that contact value. The identity extends to all
+degrees, but its infinite top-down hierarchy remains open.
+The twenty-first iterates polar descent and proves that an unbounded sequence
+of hyperbolic terminal degrees at each shift suffices for every finite degree.
+The finite Sturm data now reach every degree from 3 through 12 on the bounded
+grid, totaling 1050 certified rows. This is still not a cofinal sequence, so
+the terminal theorem remains open.
+The twenty-second proves that the fixed-shift cofinal degree condition is
+equivalent, through the Jensen scaling limit, to Laguerre-Polya membership.
+It blocks using cofinal degrees as a weaker assumed endpoint or promoting the
+bounded degree-3 through degree-12 ladder into that limit.
+The twenty-third proves the general polar heat-collision cascade: a fixed-degree
+multiple root under a hyperbolic upper tower forces linearly increasing
+multiplicity and hence an exponential-polynomial entire function. A genuine
+Xi-type LP boundary must therefore escape to unbounded Jensen degree.
+The twenty-fourth resolves the first two orders of that escaping layer. It
+proves the universal quadratic, the D^(-3/2) root gap, the rho/(8D) collision
+shift, and the D^(-2) regularized external-field correction. The required
+degree- and zero-height-uniform remainder estimate remains open.
+The twenty-fifth identifies that external correction exactly with the
+regularized Newman root field, derives the positive pair stiffness and the
+second-order squared-gap law, and supplies opposite-sign finite LP
+countermodels. The remaining sign and tail estimate is therefore Xi-specific.
+The twenty-sixth rewrites each unshifted Jensen polynomial as a positive
+integral of generalized Laguerre kernels. Fixed scales and every half-integer
+Gamma law are hyperbolic in all degrees, but exact positive-mixture and
+log-concave-density countermodels show that integration alone is not a
+preserver. A common-interlacing or total-positive Xi connection remains open.
+The twenty-seventh computes the classical continuum root field as
+`-pi/8+O(1/x)`, matching the positive-time quantile drift, and imports the
+published fixed-time high-zero simplicity theorem to confine any multiple zero
+below `exp(C/t)`. Exact bounded-location even-lattice deformations force either
+unbounded field sign, so only a lambda-uniform reciprocal-gap estimate or an
+analytic compact-region exclusion can close this reduction.
+The twenty-eighth integrates the uniform zero-count discrepancy against the
+field kernel and proves that every mesoscopic and far contribution is
+`O(1/log c)` outside `H=log(4c)^2`. The remaining field is the inverse-square
+weighted odd local count. An exact even backward-heat polynomial has field
+`-pi/8` and drift `-pi/4` while still undergoing positive pair birth, proving
+that field balance alone is not a collision obstruction.
+
 The core runner is documented in:
 
 ```text
@@ -404,7 +651,8 @@ outputs/core_proof_programme_gates.md
 Current core runner status:
 
 ```text
-validated 29/29 core proof-programme gates
+validated 193/193 core proof-programme gates in the integrated non-slow run.
+The current runner has 200 gates: 193 non-slow and 7 slow.
 ```
 
 Current manifest status:

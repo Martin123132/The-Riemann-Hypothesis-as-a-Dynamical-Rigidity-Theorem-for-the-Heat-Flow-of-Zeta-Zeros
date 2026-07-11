@@ -1,0 +1,87 @@
+{
+  "date": "2026-07-06",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k0_k9.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k10_k20.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k21_k32.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k33_k48.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k49_k64.jsonl"
+  ],
+  "exact_rows": [
+    {
+      "derivation": "Differentiate mu_{2k}(lambda) under the retained Phi/Newman integral and keep A_k=mu_{2k}*k!/(2*k)! explicit.",
+      "formula": "dA_k/dlambda = 2*(2*k+1)*A_{k+1}",
+      "id": "hfmc_01_coefficient_flow_identity",
+      "proof_boundary": "Exact formal heat-flow identity only; not a proof of a sign theorem.",
+      "role": "exact_identity"
+    },
+    {
+      "derivation": "Use x_k=(A_{k+1}/A_k)/(A_k/A_{k-1}) and r_k=A_{k+1}/A_k.",
+      "formula": "dlog(x_k)/dlambda = 2*r_k*((2*k+3)*x_{k+1} + (2*k-1)/x_k - 2*(2*k+1))",
+      "id": "hfmc_02_contraction_log_flow",
+      "proof_boundary": "Exact algebraic flow identity only; not a proof of closed positivity.",
+      "role": "exact_identity"
+    },
+    {
+      "derivation": "Subtract the adjacent contraction log flows.",
+      "formula": "dlog(x_{k+1}/x_k)/dlambda = 2*r_k*((2*k+5)*x_{k+1}*x_{k+2} - 3*(2*k+3)*x_{k+1} + 3*(2*k+1) - (2*k-1)/x_k)",
+      "id": "hfmc_03_monotone_gap_flow",
+      "proof_boundary": "Exact algebraic flow identity only; not a proof; the bracket still needs a noncircular sign proof.",
+      "role": "exact_identity"
+    },
+    {
+      "derivation": "Set x_k=x_{k+1}=q and minimize the bracket at x_{k+2}=q.",
+      "formula": "if x_k=x_{k+1}=q and x_{k+2}>=q, bracket >= ((q-1)^2*((2*k+5)*q-(2*k-1)))/q",
+      "id": "hfmc_04_boundary_threshold_factorization",
+      "proof_boundary": "Boundary test only; not a proof; the lower-bound subtarget is discharged separately by raw moment log-convexity.",
+      "role": "boundary_test",
+      "sufficient_threshold": "q >= (2*k-1)/(2*k+5)"
+    }
+  ],
+  "finite_diagnostics": {
+    "contraction_threshold_positive_rows": 315,
+    "contraction_threshold_rows": 315,
+    "flow_bracket_positive_rows": 305,
+    "flow_bracket_rows": 305,
+    "lambdas": [
+      "0.0",
+      "0.000001",
+      "0.0001",
+      "0.01",
+      "0.1"
+    ],
+    "max_coefficient_index": 64,
+    "min_flow_bracket": {
+      "k": 61,
+      "lam": "0.1",
+      "sample": "2.665474275226736438E-4"
+    },
+    "min_threshold_margin": {
+      "k": 63,
+      "lam": "0.1",
+      "sample": "3.822433850353900366E-2"
+    }
+  },
+  "invariants": [
+    "The coefficient normalization A_k=mu_{2k}*k!/(2*k)! is retained.",
+    "Finite flow-bracket positivity is not promoted to an analytic theorem.",
+    "The boundary threshold q >= (2*k-1)/(2*k+5) is discharged by a separate exact raw-moment log-convexity lemma.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_heat_flow_monotone_closure_scout",
+  "proof_boundary": "Exact lambda-flow algebra plus finite Arb diagnostics only. This does not prove a closed differential inequality, does not prove the monotone-contraction theorem for all zeta windows, does not construct a Cauchy-Binet kernel, does not prove jwpf_06, and does not prove RH or Lambda <= 0.",
+  "source_boundary_threshold": "outputs/jensen_window_pf_heat_flow_boundary_threshold_lemma.md",
+  "source_stress": "outputs/jensen_window_pf_monotone_contraction_stress.md",
+  "source_stress_summary": "work/rh_compute/results/jensen_window_pf_monotone_contraction_stress_lamgrid_d3_d12_k64_summary.json",
+  "source_theorem_target": "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+  "status": "finite_heat_flow_closure_scout",
+  "summary": {
+    "exact_rows": 4,
+    "flow_bracket_positive_rows": 305,
+    "flow_bracket_rows": 305,
+    "main_finding": "The heat-flow route reduces to exact identities for the contraction flow and a concrete boundary threshold q >= (2*k-1)/(2*k+5). The existing finite zeta cache clears that threshold on 315 Arb-classified rows and has positive actual flow brackets on 305 rows. The boundary threshold is discharged exactly by raw moment log-convexity in the separate boundary-threshold lemma, but this scout is still not a closed analytic differential inequality.",
+    "target_closing": false,
+    "threshold_positive_rows": 315,
+    "threshold_rows": 315
+  }
+}

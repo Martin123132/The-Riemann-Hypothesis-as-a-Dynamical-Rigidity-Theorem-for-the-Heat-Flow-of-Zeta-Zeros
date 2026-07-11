@@ -84,6 +84,20 @@ Current audit result:
 validated Jensen-window PF theorem machinery fit matrix: 7 rows, 0 issues, 0 ready-to-apply rows
 ```
 
+The structural ansatz workbench for this row is:
+
+```text
+outputs/jensen_window_pf_structural_ansatz_matrix.md
+work/rh_compute/results/jensen_window_pf_structural_ansatz_matrix.json
+python work/rh_compute/scripts/check_jensen_window_pf_structural_ansatz_matrix.py
+```
+
+Current ansatz result:
+
+```text
+validated Jensen-window PF structural ansatz matrix: 6 ansatz rows, 0 issues, 0 ready-to-apply rows
+```
+
 ## Downstream Conditional Layer
 
 ```text
@@ -116,11 +130,13 @@ This obligation ledger is tied to:
 outputs/jensen_window_pf_bridge_target.md
 outputs/signed_hankel_jensen_dependency_graph.md
 outputs/jensen_window_pf_theorem_machinery_fit_matrix.md
+outputs/jensen_window_pf_structural_ansatz_matrix.md
 outputs/sign_regularity_theorem_fit_matrix.md
 work/rh_compute/results/proof_claim_ledger.json
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py
 python work/rh_compute/scripts/check_signed_hankel_jensen_dependency_graph.py
 python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
+python work/rh_compute/scripts/check_jensen_window_pf_structural_ansatz_matrix.py
 python work/rh_compute/scripts/check_sign_regularity_theorem_fit_matrix.py
 ```
 

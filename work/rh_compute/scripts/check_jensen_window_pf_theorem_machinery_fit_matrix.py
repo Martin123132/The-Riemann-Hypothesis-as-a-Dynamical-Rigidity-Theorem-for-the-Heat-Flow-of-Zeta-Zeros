@@ -65,6 +65,20 @@ REQUIRED_NOTE_STRINGS = (
     "tm_07_finite_grid_or_rh_assuming_shortcuts",
     "no `ready_to_apply` row",
     "degree-3 countermodel",
+    "Structural Ansatz Workbench",
+    "outputs/jensen_window_pf_structural_ansatz_matrix.md",
+    "work/rh_compute/results/jensen_window_pf_structural_ansatz_matrix.json",
+    "python work/rh_compute/scripts/check_jensen_window_pf_structural_ansatz_matrix.py",
+    "validated Jensen-window PF structural ansatz matrix: 6 ansatz rows, 0 issues, 0 ready-to-apply rows",
+    "outputs/jensen_window_pf_schur_shape_contract.md",
+    "work/rh_compute/results/jensen_window_pf_schur_shape_contract.json",
+    "python work/rh_compute/scripts/check_jensen_window_pf_schur_shape_contract.py",
+    "finite-band shape obligations",
+    "outputs/jensen_window_pf_cauchy_binet_low_degree_scout.md",
+    "work/rh_compute/results/jensen_window_pf_cauchy_binet_low_degree_scout.json",
+    "python work/rh_compute/scripts/check_jensen_window_pf_cauchy_binet_low_degree_scout.py",
+    "`15` formula rows with nonnegative Bernstein coefficients",
+    "`0` kernel identities found",
 )
 
 

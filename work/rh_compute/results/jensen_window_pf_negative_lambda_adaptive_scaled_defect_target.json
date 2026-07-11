@@ -1,0 +1,184 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_adaptive_scaled_defect_target.py",
+  "date": "2026-07-06",
+  "frontier_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_scaled_defect_frontier_k200_scout.json",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_adaptive_scaled_defect_target.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The target remains open_target.",
+    "The one-third, fixed half-width, and scaled-defect nonincrease shortcuts remain rejected.",
+    "The exact cone evidence is finite evidence only.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_adaptive_scaled_defect_target",
+  "proof_boundary": "Open theorem target only. It replaces the finite-rejected fixed half-width route with an adaptive or exact-cone scaled-defect target, but it does not prove that target, does not prove the monotone defect bridge, does not prove cone entry, and does not prove RH or Lambda <= 0.",
+  "source_defect_tail_target": "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md",
+  "source_scaled_defect_frontier": "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k200_scout.md",
+  "status": "open_theorem_target",
+  "summary": {
+    "checked_x_max": 199,
+    "coefficient_k_max": 200,
+    "finite_exact_cone_rows": 597,
+    "finite_half_width_failure_rows": 76,
+    "finite_half_width_rows": 521,
+    "finite_one_third_failure_rows": 418,
+    "finite_scaled_rows": 597,
+    "first_half_width_failures": [
+      {
+        "failure_rows": 9,
+        "first_failure_k": 191,
+        "lam": "-50.0",
+        "max_scaled_defect": {
+          "k": 199,
+          "lam": "-50.0",
+          "sample": "5.049575716217948385E-1"
+        },
+        "min_half_width_margin": {
+          "k": 199,
+          "lam": "-50.0",
+          "sample": "-4.957571621794838495E-3"
+        }
+      },
+      {
+        "failure_rows": 67,
+        "first_failure_k": 133,
+        "lam": "-25.0",
+        "max_scaled_defect": {
+          "k": 199,
+          "lam": "-25.0",
+          "sample": "5.376643171065356005E-1"
+        },
+        "min_half_width_margin": {
+          "k": 199,
+          "lam": "-25.0",
+          "sample": "-3.766431710653560048E-2"
+        }
+      }
+    ],
+    "live_routes": 2,
+    "main_finding": "The k200 frontier keeps the exact scaled cone 0<=s_k<=1 on 597/597 rows, while rejecting the fixed half-width buffer on 76 rows and the one-third buffer on 418 rows. The replacement target is an exact-cone or adaptive-envelope all-k theorem from k>=200, plus the separate monotone defect bridge.",
+    "max_scaled_defect": {
+      "k": 199,
+      "lam": "-25.0",
+      "sample": "5.376643171065356005E-1"
+    },
+    "min_exact_cone_margin": {
+      "k": 1,
+      "lam": "-100.0",
+      "sample": "1.346067912947116963E-2"
+    },
+    "next_finite_coefficient_needed": "A_201",
+    "ready_to_apply_rows": 0,
+    "rejected_routes": 1,
+    "tail_start_k": 200,
+    "target_closing": false,
+    "target_rows": 8
+  },
+  "target_id": "target_negative_lambda_adaptive_scaled_defect_tail",
+  "target_rows": [
+    {
+      "acceptance_test": "Use only as algebraic bookkeeping for the defect-tail lower wall.",
+      "claim_if_proved": "With d_k=1-x_k and s_k=((2*k+1)/2)*d_k, the lower wall is equivalent to 0<=s_k<=1.",
+      "gap": "This exact reformulation supplies no analytic all-k estimate for the actual zeta heat-flow tail.",
+      "id": "nlasdt_01_exact_scaled_cone",
+      "proof_boundary": "Exact reformulation only; not a tail theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_reformulation",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k200_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md"
+      ]
+    },
+    {
+      "acceptance_test": "Treat the k200 rows as base evidence, falsification data, and quantitative guidance only.",
+      "claim_if_proved": "The k200 frontier supplies 597/597 exact-cone rows, 521/597 fixed half-width rows, and 179/597 one-third rows.",
+      "gap": "Finite frontier evidence is not an all-k theorem and cannot close cone entry by itself.",
+      "id": "nlasdt_02_k200_frontier",
+      "proof_boundary": "Finite diagnostic only.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_frontier",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k200_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_tail_barrier_k200_scout.md"
+      ]
+    },
+    {
+      "acceptance_test": "Do not use these fixed-buffer or monotone-decrease shortcuts as proof premises.",
+      "claim_if_proved": "The one-third buffer, fixed half-width buffer, or scaled-defect nonincrease would give a simpler tail proof.",
+      "gap": "The one-third buffer fails on 418 checked rows, the fixed half-width buffer fails on 76 checked rows, and scaled-defect nonincrease is rejected on 594 adjacent rows.",
+      "id": "nlasdt_03_fixed_buffers_rejected",
+      "proof_boundary": "Finite rejection only; not a proof of any replacement route.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_half_width_tail_target.md",
+        "outputs/jensen_window_pf_negative_lambda_scaled_defect_frontier_k200_scout.md"
+      ]
+    },
+    {
+      "acceptance_test": "Give explicit zeta coefficient estimates with a stated starting index and no endpoint PF/RH/Newman input.",
+      "claim_if_proved": "Prove for each checked negative lambda that 0<=s_k<=1 for all k>=200, preferably through an explicit adaptive envelope E_lambda(k)<1, and separately prove d_(k+1)<=d_k for all k>=199.",
+      "gap": "No noncircular exact-cone or adaptive scaled-defect all-k theorem is currently available.",
+      "id": "nlasdt_04_adaptive_or_exact_cone_statement",
+      "proof_boundary": "Open theorem target only; not a proof of cone entry.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_statement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md",
+        "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md"
+      ]
+    },
+    {
+      "acceptance_test": "Produce interval-safe remainder estimates strong enough to dominate the k200 frontier and remain below the exact cone wall.",
+      "claim_if_proved": "A uniform saddle/Laplace expansion derives the adaptive scaled-defect envelope and the monotone defect bridge.",
+      "gap": "Current signed perturbation evidence is fixed-k/local and lacks uniform k/T and far-tail remainders.",
+      "id": "nlasdt_05_uniform_saddle_route",
+      "proof_boundary": "Live theorem-search route only.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+        "outputs/jensen_window_pf_negative_lambda_signed_gaussian_perturbation_matrix.md"
+      ]
+    },
+    {
+      "acceptance_test": "Derive a noncircular inequality using only tail quantities already controlled by finite anchors or analytic estimates.",
+      "claim_if_proved": "A direct ratio recurrence or comparison inequality proves 0<=s_k<=1 and the separate monotone defect bridge.",
+      "gap": "Known direct fixed-width recurrences are finite-rejected, so any recurrence must be compatible with increasing s_k.",
+      "id": "nlasdt_06_ratio_comparison_route",
+      "proof_boundary": "Live theorem-search route only.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_defect_recurrence_scout.md",
+        "outputs/jensen_window_pf_heat_flow_ratio_cone_invariance_lemma.md"
+      ]
+    },
+    {
+      "acceptance_test": "State whether the bridge is analytic or purely finite before using it in cone-entry arguments.",
+      "claim_if_proved": "The finite anchor covers x_1..x_199; without an analytic bridge, the next purely finite step needs A_201.",
+      "gap": "Finite extension alone is not an all-k tail theorem or finite-collar flow theorem.",
+      "id": "nlasdt_07_finite_anchor_handoff",
+      "proof_boundary": "Requirement extraction only.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_cone_entry_prefix_k200_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_finite_collar_k200_contract.md"
+      ]
+    },
+    {
+      "acceptance_test": "After a proof, rerun the defect-tail target, dependency graph, and core gates without relaxing forbidden endpoint assumptions.",
+      "claim_if_proved": "A proved adaptive/exact-cone scaled-defect tail plus the monotone bridge would supply the missing defect-tail input for cone entry.",
+      "gap": "The surrounding infinite/collared flow legitimacy and Jensen-window PF bridge obligations would still remain.",
+      "id": "nlasdt_08_conditional_application",
+      "proof_boundary": "Conditional application only; not jwpf_06, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "conditional_application",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md",
+        "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md"
+      ]
+    }
+  ]
+}

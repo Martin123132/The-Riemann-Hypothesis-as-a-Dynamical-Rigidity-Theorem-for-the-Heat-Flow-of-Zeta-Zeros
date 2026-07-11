@@ -1,0 +1,255 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_next_increment_stencil_stress.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_next_increment_stencil_stress.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "Known next-increment stress is not promoted to an infinite-tail theorem.",
+    "Failure of the crude pointwise budget is not promoted to failure of a direct stencil-tail theorem.",
+    "Stencil sign survival for tested rows is finite evidence only.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_next_increment_stencil_stress",
+  "matrix_rows": [
+    {
+      "claim": "For a truncation baseline M, the known next increment has log coordinate delta_j=log(F_j^(M+1)/F_j^(M)) and contributes to the same B, companion, and weighted-gap stencils as the unknown tail.",
+      "formula": "delta_j=log(F_j^(M+1)/F_j^(M))",
+      "id": "nlrgniss_01_next_increment_coordinate",
+      "proof_boundary": "Exact finite bookkeeping for the next known coefficient only; not an infinite-tail theorem.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_stencil_remainder_obligations.md"
+      ]
+    },
+    {
+      "claim": "In the tested rows with an available next coefficient, the next known relative increment exceeds the pointwise half-safety tail budget.",
+      "diagnostics": {
+        "half_safety_stencil_failure_rows": 2,
+        "missing_next_increment_rows": 2,
+        "missing_rows": [
+          {
+            "M": 7,
+            "T": "1000",
+            "k": 22,
+            "reason": "degree-16 Taylor ratio is not available in the current degree<=14 coefficient scaffold",
+            "source_row": "nlrgts_M7_T1000"
+          },
+          {
+            "M": 7,
+            "T": "2000",
+            "k": 22,
+            "reason": "degree-16 Taylor ratio is not available in the current degree<=14 coefficient scaffold",
+            "source_row": "nlrgts_M7_T2000"
+          }
+        ],
+        "parameters": {
+          "max_taylor_degree": 14,
+          "precision_bits": 256,
+          "sample_T_values": [
+            25,
+            50,
+            100,
+            200,
+            500,
+            1000,
+            2000
+          ],
+          "tail_cutoff_n": 80,
+          "tail_start_k": 22
+        },
+        "pointwise_budget_failure_rows": 2,
+        "source_pointwise_summary": {
+          "blocked_baseline_rows": 31,
+          "budget_rows": 4,
+          "exact_sufficient_rows": 2,
+          "limiting_stencil_counts": {
+            "companion": 3,
+            "weighted_gap": 1
+          },
+          "main_finding": "The exact epsilon-stencil obligations reduce to a concrete pointwise log-tail target. At k=22, the absolute coefficient sums are 4, 8, and 368; among the 4 positive finite baselines, the companion stencil is limiting in 3 rows and the weighted-gap stencil is limiting in 1 row. The weakest half-safety log-tail envelope is 1.458113205526978052E-9 at nlrgts_M6_T2000, equivalent to the multiplicative relative-tail ratio bound 1.458113204463930993E-9. This sharpens the open uniform remainder theorem but does not prove any analytic tail estimate.",
+          "matrix_rows": 9,
+          "positive_baseline_rows": 4,
+          "ready_to_apply_rows": 0,
+          "target_closing": false,
+          "weakest_half_safety_eta_bound": "1.458113205526978052E-9",
+          "weakest_half_safety_relative_tail_ratio_bound": "1.458113204463930993E-9"
+        },
+        "stencil_sign_preserving_rows": 2,
+        "stress_rows": [
+          {
+            "M": 5,
+            "T": "2000",
+            "allowed_relative_tail_ratio": "1.556566056416113956E-8",
+            "half_safety_stencils_satisfied": false,
+            "k": 22,
+            "limiting_stencil": "companion",
+            "max_abs_log_increment": "3.157858200641902125E-5",
+            "max_next_abs_theta": "3.157808340824660809E-5",
+            "max_next_abs_theta_over_allowed": "2.028701787378877343E+3",
+            "next_M": 6,
+            "pointwise_budget_satisfied": false,
+            "source_row": "nlrgts_M5_T2000",
+            "stencil_increments": [
+              {
+                "abs_over_half_margin": "5.180086598431442089E-2",
+                "exceeds_half_safety": false,
+                "half_margin": "2.153482097214686988E-5",
+                "increment": "1.115522375174383601E-6",
+                "margin_after_increment": "4.418516431946812336E-5",
+                "name": "B",
+                "sign_preserved": true
+              },
+              {
+                "abs_over_half_margin": "1.812650007602512478E+0",
+                "exceeds_half_safety": true,
+                "half_margin": "1.245252854824482818E-7",
+                "increment": "-2.257207596764649147E-7",
+                "margin_after_increment": "2.332981128843164882E-8",
+                "name": "companion",
+                "sign_preserved": true
+              },
+              {
+                "abs_over_half_margin": "3.450019208573621088E-1",
+                "exceeds_half_safety": false,
+                "half_margin": "3.721695352661867051E-5",
+                "increment": "1.283992045514261819E-5",
+                "margin_after_increment": "8.727382750837995921E-5",
+                "name": "weighted_gap",
+                "sign_preserved": true
+              }
+            ],
+            "stencil_signs_preserved": true
+          },
+          {
+            "M": 6,
+            "T": "2000",
+            "allowed_relative_tail_ratio": "1.458113204463930993E-9",
+            "half_safety_stencils_satisfied": false,
+            "k": 22,
+            "limiting_stencil": "companion",
+            "max_abs_log_increment": "4.390076008296640423E-6",
+            "max_next_abs_theta": "4.390085644694421235E-6",
+            "max_next_abs_theta_over_allowed": "3.010798908654295615E+3",
+            "next_M": 7,
+            "pointwise_budget_satisfied": false,
+            "source_row": "nlrgts_M6_T2000",
+            "stencil_increments": [
+              {
+                "abs_over_half_margin": "8.628052597940853252E-3",
+                "exceeds_half_safety": false,
+                "half_margin": "2.209258215973406168E-5",
+                "increment": "-1.906159608985152175E-7",
+                "margin_after_increment": "4.399454835856960814E-5",
+                "name": "B",
+                "sign_preserved": true
+              },
+              {
+                "abs_over_half_margin": "3.998025843926772743E+0",
+                "exceeds_half_safety": true,
+                "half_margin": "1.166490564421582442E-8",
+                "increment": "4.663659423254214610E-8",
+                "margin_after_increment": "6.996640552097379494E-8",
+                "name": "companion",
+                "sign_preserved": true
+              },
+              {
+                "abs_over_half_margin": "5.896731985266578194E-2",
+                "exceeds_half_safety": false,
+                "half_margin": "4.363691375418997961E-5",
+                "increment": "-2.573151850726511302E-6",
+                "margin_after_increment": "8.470067565765344792E-5",
+                "name": "weighted_gap",
+                "sign_preserved": true
+              }
+            ],
+            "stencil_signs_preserved": true
+          }
+        ],
+        "tested_next_increment_rows": 2,
+        "worst_pointwise_over_budget": {
+          "sample": "3.010798908654295615E+3",
+          "source_row": "nlrgts_M6_T2000"
+        },
+        "worst_stencil_abs_over_half_margin": {
+          "sample": "3.998025843926772743E+0",
+          "source_row": "nlrgts_M6_T2000",
+          "stencil": "companion"
+        }
+      },
+      "id": "nlrgniss_02_pointwise_budget_failure",
+      "proof_boundary": "Finite stress diagnostic only; it does not prove failure of the infinite series or of a direct stencil-tail theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic"
+    },
+    {
+      "claim": "Although the pointwise budget fails, the structured next-increment stencil contributions preserve all three finite stencil signs in the tested rows.",
+      "id": "nlrgniss_03_structured_stencil_survival",
+      "proof_boundary": "Finite cancellation diagnostic only; not a proof that the remaining infinite tail preserves the signs.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic"
+    },
+    {
+      "claim": "The companion next-increment stencil can exceed the half-safety stencil margin even when the total next-truncation sign is preserved.",
+      "id": "nlrgniss_04_half_safety_not_respected",
+      "proof_boundary": "Finite warning only; it shows the half-safety sufficient condition is conservative, not false.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic"
+    },
+    {
+      "claim": "The degree-14 positive baselines cannot be tested by the same next-increment method until the degree-16 Taylor ratio is computed.",
+      "id": "nlrgniss_05_degree16_unavailable_frontier",
+      "proof_boundary": "Finite scaffold frontier only; not an analytic obstruction.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_frontier"
+    },
+    {
+      "claim": "The current positive baselines plus the crude pointwise triangle envelope already certify the next Taylor increment.",
+      "gap": "The tested next increments exceed the pointwise relative-tail budget by factors above 2000, so this finite shortcut is not acceptable.",
+      "id": "nlrgniss_06_pointwise_triangle_route_rejected_for_current_baselines",
+      "proof_boundary": "Rejected finite shortcut only; it does not reject a sharper analytic pointwise theorem at a different truncation order.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route"
+    },
+    {
+      "claim": "A stronger promoted route should bound the B, companion, and weighted-gap stencil tails directly, preserving cancellations instead of bounding each epsilon_j separately.",
+      "id": "nlrgniss_07_live_direct_stencil_tail_route",
+      "proof_boundary": "Live theorem-search route only; no direct stencil-tail theorem is proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_pointwise_tail_budget.md",
+        "outputs/jensen_window_pf_negative_lambda_high_order_taylor_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "A promoted direct stencil-tail proof must state the truncation order, available coefficient range, q/T collar, normalized multiplier positivity, and signed bounds for the three structured stencil tails.",
+      "id": "nlrgniss_08_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a proof of scaled-curvature monotonicity, cone entry, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Finite theorem-search diagnostic only. It compares the known next Taylor increment with the current pointwise and structured stencil budgets, but it does not prove an infinite Taylor-tail theorem, does not prove scaled-curvature monotonicity, does not prove cone entry, and does not prove RH or Lambda <= 0.",
+  "source_high_order_taylor_scout": "outputs/jensen_window_pf_negative_lambda_high_order_taylor_scout.md",
+  "source_pointwise_tail_budget": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_pointwise_tail_budget.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "finite theorem-search diagnostic",
+  "summary": {
+    "half_safety_stencil_failure_rows": 2,
+    "main_finding": "The known next Taylor increment defeats the crude pointwise half-safety envelope on both tested positive baselines, with worst over-budget factor 3.010798908654295615E+3. However, the structured B, companion, and weighted-gap next-increment stencils preserve all tested finite signs, while the companion stencil exceeds the half-safety margin. This points away from a crude pointwise triangle proof and toward a direct signed stencil-tail theorem.",
+    "matrix_rows": 8,
+    "missing_next_increment_rows": 2,
+    "pointwise_budget_failure_rows": 2,
+    "ready_to_apply_rows": 0,
+    "stencil_sign_preserving_rows": 2,
+    "target_closing": false,
+    "tested_next_increment_rows": 2,
+    "worst_pointwise_over_budget": "3.010798908654295615E+3",
+    "worst_stencil_abs_over_half_margin": "3.998025843926772743E+0"
+  }
+}

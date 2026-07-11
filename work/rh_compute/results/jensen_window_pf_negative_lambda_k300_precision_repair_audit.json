@@ -1,0 +1,284 @@
+{
+  "audit_rows": [
+    {
+      "claim": "The broad k300 negative-lambda enclosure run covers lambdas -25,-50,-100 and coefficients A_0..A_300 with dps=160, cutoff=6, n_sum=50, abs_tol=1e-110.",
+      "id": "nlk300pra_01_broad_k300_input",
+      "proof_boundary": "Finite enclosure input only; not a theorem and not a counterexample by itself.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_input",
+      "source": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k300.jsonl",
+      "summary": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k300_summary.json"
+    },
+    {
+      "claim": "The broad k300 run alone reports lambda=-100 high-k failures, so broad-run failures must be repaired before being interpreted mathematically.",
+      "id": "nlk300pra_02_broad_run_failure_gate",
+      "lambda_minus_100_counts": {
+        "corridor_width": 282,
+        "decrement_corridor": 251,
+        "lower_decrement": 251,
+        "raw_decrease": 253,
+        "raw_lower": 283,
+        "raw_upper": 282,
+        "theta_k_monotone": 232,
+        "theta_unit": 251,
+        "upper_decrement": 252
+      },
+      "lambda_minus_100_first_failures": {
+        "corridor_width": 271,
+        "decrement_corridor": 252,
+        "lower_decrement": 252,
+        "raw_decrease": 252,
+        "raw_lower": 272,
+        "raw_upper": 271,
+        "theta_k_monotone": 233,
+        "theta_unit": 252,
+        "upper_decrement": 253
+      },
+      "proof_boundary": "Precision-sensitivity gate only; not evidence against the zeta-specific target.",
+      "readiness": "not_ready_to_apply",
+      "role": "precision_gate"
+    },
+    {
+      "claim": "Two local lambda=-100 dps220/cutoff7/n_sum70 repair runs cover k220..250 and k245..320, overriding the broad run in the sensitive high-k window.",
+      "id": "nlk300pra_03_local_precision_repair",
+      "proof_boundary": "Finite precision repair only; not an all-k stability theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_input",
+      "sources": [
+        "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k220_k250_dps220.jsonl",
+        "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k245_k320_dps220.jsonl"
+      ],
+      "summaries": [
+        "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k220_k250_dps220_summary.json",
+        "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k245_k320_dps220_summary.json"
+      ]
+    },
+    {
+      "claim": "The repaired k300 data validate the raw lower and upper walls on 897/897 and 897/897 rows.",
+      "id": "nlk300pra_04_repaired_raw_wall_stress",
+      "proof_boundary": "Finite stress evidence only; not an all-k raw-wall theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_stress"
+    },
+    {
+      "claim": "The repaired k300 data validate raw decrease and both decrement-corridor sides on 894/894 adjacent rows.",
+      "id": "nlk300pra_05_repaired_decrement_corridor_stress",
+      "proof_boundary": "Finite stress evidence only; not an all-k decrement recurrence theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_stress"
+    },
+    {
+      "claim": "The repaired k300 data validate theta in (0,1), theta-k monotonicity, and theta lambda-order on 894/894, 891/891, and 596/596 rows.",
+      "id": "nlk300pra_06_repaired_theta_shape_stress",
+      "proof_boundary": "Finite shape evidence only; not a theta monotonicity theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_stress"
+    },
+    {
+      "claim": "Future k-depth stress should treat broad-run high-k failures as precision alarms until repaired by local high-precision enclosures; only repaired failures may become countermodel evidence.",
+      "id": "nlk300pra_07_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a proof and not a disproof.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate"
+    }
+  ],
+  "base_diagnostics": {
+    "adjacent_rows_per_lambda": 298,
+    "coefficient_cap": 300,
+    "labels": [
+      "-25.0",
+      "-50.0",
+      "-100.0"
+    ],
+    "per_lambda": {
+      "-100.0": {
+        "counts": {
+          "corridor_width": 282,
+          "decrement_corridor": 251,
+          "lower_decrement": 251,
+          "raw_decrease": 253,
+          "raw_lower": 283,
+          "raw_upper": 282,
+          "theta_k_monotone": 232,
+          "theta_unit": 251,
+          "upper_decrement": 252
+        },
+        "first_failures": {
+          "corridor_width": 271,
+          "decrement_corridor": 252,
+          "lower_decrement": 252,
+          "raw_decrease": 252,
+          "raw_lower": 272,
+          "raw_upper": 271,
+          "theta_k_monotone": 233,
+          "theta_unit": 252,
+          "upper_decrement": 253
+        }
+      },
+      "-25.0": {
+        "counts": {
+          "corridor_width": 298,
+          "decrement_corridor": 298,
+          "lower_decrement": 298,
+          "raw_decrease": 298,
+          "raw_lower": 299,
+          "raw_upper": 299,
+          "theta_k_monotone": 297,
+          "theta_unit": 298,
+          "upper_decrement": 298
+        },
+        "first_failures": {}
+      },
+      "-50.0": {
+        "counts": {
+          "corridor_width": 298,
+          "decrement_corridor": 298,
+          "lower_decrement": 298,
+          "raw_decrease": 298,
+          "raw_lower": 299,
+          "raw_upper": 299,
+          "theta_k_monotone": 297,
+          "theta_unit": 298,
+          "upper_decrement": 298
+        },
+        "first_failures": {}
+      }
+    },
+    "raw_ratio_rows_per_lambda": 299,
+    "theta_k_rows_per_lambda": 297,
+    "theta_lambda_first_failure": {
+      "k": 249,
+      "left": "-50.0",
+      "right": "-100.0"
+    },
+    "theta_lambda_order_rows": 546,
+    "theta_lambda_order_total_rows": 596
+  },
+  "base_enclosure_jsonl": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k300.jsonl",
+  "base_summary": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k300_summary.json",
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_k300_precision_repair_audit.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_k300_precision_repair_audit.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "Broad-run failures are precision alarms until repaired.",
+    "The repaired k300 stress is finite evidence only.",
+    "The decrement corridor remains an open zeta-specific all-k theorem.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_k300_precision_repair_audit",
+  "proof_boundary": "Finite precision-repair diagnostic only. It documents a k300 stress extension and a local precision repair for lambda=-100, but it does not prove the raw-corridor theorem, does not prove cone entry, does not prove jwpf_06, and does not prove RH or Lambda <= 0.",
+  "repair_enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k220_k250_dps220.jsonl",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k245_k320_dps220.jsonl"
+  ],
+  "repair_summaries": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k220_k250_dps220_summary.json",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k245_k320_dps220_summary.json"
+  ],
+  "repaired_diagnostics": {
+    "adjacent_rows_per_lambda": 298,
+    "coefficient_cap": 300,
+    "labels": [
+      "-25.0",
+      "-50.0",
+      "-100.0"
+    ],
+    "per_lambda": {
+      "-100.0": {
+        "counts": {
+          "corridor_width": 298,
+          "decrement_corridor": 298,
+          "lower_decrement": 298,
+          "raw_decrease": 298,
+          "raw_lower": 299,
+          "raw_upper": 299,
+          "theta_k_monotone": 297,
+          "theta_unit": 298,
+          "upper_decrement": 298
+        },
+        "first_failures": {}
+      },
+      "-25.0": {
+        "counts": {
+          "corridor_width": 298,
+          "decrement_corridor": 298,
+          "lower_decrement": 298,
+          "raw_decrease": 298,
+          "raw_lower": 299,
+          "raw_upper": 299,
+          "theta_k_monotone": 297,
+          "theta_unit": 298,
+          "upper_decrement": 298
+        },
+        "first_failures": {}
+      },
+      "-50.0": {
+        "counts": {
+          "corridor_width": 298,
+          "decrement_corridor": 298,
+          "lower_decrement": 298,
+          "raw_decrease": 298,
+          "raw_lower": 299,
+          "raw_upper": 299,
+          "theta_k_monotone": 297,
+          "theta_unit": 298,
+          "upper_decrement": 298
+        },
+        "first_failures": {}
+      }
+    },
+    "raw_ratio_rows_per_lambda": 299,
+    "theta_k_rows_per_lambda": 297,
+    "theta_lambda_first_failure": null,
+    "theta_lambda_order_rows": 596,
+    "theta_lambda_order_total_rows": 596
+  },
+  "source_decrement_scout": "outputs/jensen_window_pf_negative_lambda_raw_ratio_decrement_corridor_scout.md",
+  "source_raw_corridor_target": "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+  "status": "finite precision-repair theorem-search diagnostic",
+  "summary": {
+    "audit_rows": 7,
+    "base_k_max": 300,
+    "base_lambda_minus_100_first_failures": {
+      "corridor_width": 271,
+      "decrement_corridor": 252,
+      "lower_decrement": 252,
+      "raw_decrease": 252,
+      "raw_lower": 272,
+      "raw_upper": 271,
+      "theta_k_monotone": 233,
+      "theta_unit": 252,
+      "upper_decrement": 253
+    },
+    "base_rows": 903,
+    "main_finding": "The k300 stress extension supports the raw-ratio decrement route only after local precision repair: the broad dps160/cutoff6 run falsely reports lambda=-100 high-k failures, while the dps220/cutoff7 repair restores 897/897 raw wall rows, 894/894 decrement-corridor rows, 894/894 theta-unit rows, 891/891 theta-k monotone rows, and 596/596 theta lambda-order rows. This is finite stress evidence, not an all-k theorem.",
+    "open_theorem_target": false,
+    "ready_to_apply_rows": 0,
+    "repair_ranges": [
+      [
+        220,
+        250
+      ],
+      [
+        245,
+        320
+      ]
+    ],
+    "repair_rows": 107,
+    "repaired_adjacent_total_rows": 894,
+    "repaired_decrement_corridor_rows": 894,
+    "repaired_lower_decrement_rows": 894,
+    "repaired_raw_decrease_rows": 894,
+    "repaired_raw_lower_rows": 897,
+    "repaired_raw_total_rows": 897,
+    "repaired_raw_upper_rows": 897,
+    "repaired_theta_k_monotone_rows": 891,
+    "repaired_theta_k_total_rows": 891,
+    "repaired_theta_lambda_order_rows": 596,
+    "repaired_theta_lambda_order_total_rows": 596,
+    "repaired_theta_unit_rows": 894,
+    "repaired_upper_decrement_rows": 894,
+    "target_closing": false
+  }
+}

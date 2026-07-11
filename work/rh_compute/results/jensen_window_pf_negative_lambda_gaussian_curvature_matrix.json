@@ -1,0 +1,118 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_gaussian_curvature_matrix.py",
+  "date": "2026-07-06",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k22.jsonl"
+  ],
+  "finite_diagnostics": {
+    "bounded_deficit_positive_rows": 63,
+    "bounded_deficit_rows": 63,
+    "checked_x_max": 21,
+    "coefficient_k_max": 22,
+    "gaussian_deficit_positive_rows": 63,
+    "gaussian_deficit_rows": 63,
+    "lambdas": [
+      "-100.0",
+      "-50.0",
+      "-25.0"
+    ],
+    "max_deficit_fraction_of_bound": {
+      "k": 21,
+      "lam": "-25.0",
+      "sample": "8.687502445151491977E-1"
+    },
+    "max_gaussian_deficit": {
+      "k": 1,
+      "lam": "-25.0",
+      "sample": "3.524954269540071057E-2"
+    },
+    "min_deficit_bound_slack": {
+      "k": 21,
+      "lam": "-25.0",
+      "sample": "2.034879929997686858E-3"
+    },
+    "min_positive_threshold": {
+      "k": 21,
+      "lam": "-100.0",
+      "sample": "3.212417302026237154E-2"
+    },
+    "min_raw_threshold_margin": {
+      "k": 21,
+      "lam": "-25.0",
+      "sample": "2.034879929997686858E-3"
+    },
+    "positive_threshold_rows": 63,
+    "raw_threshold_positive_rows": 63,
+    "raw_threshold_rows": 63
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_gaussian_curvature_matrix.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The bounded curvature target remains open.",
+    "Positive Gaussian scale-mixture arguments are not promoted as proof of the upper wall.",
+    "Finite prefix margins are not promoted to an all-k theorem.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_gaussian_curvature_matrix",
+  "matrix_rows": [
+    {
+      "claim": "For Gaussian raw moments M_k proportional to Gamma(k+1/2) T^(-k-1/2), raw curvature equals log((2*k+1)/(2*k-1)), hence x_k=1 and B_k=0.",
+      "id": "nlgcm_01_gaussian_baseline_exact",
+      "proof_boundary": "Exact model baseline only; it lands on the upper wall and is not strict cone entry.",
+      "role": "exact_baseline"
+    },
+    {
+      "claim": "The bounded log-curvature target is exactly 0<=B_k<=2/(3*(2*k+1)), where B_k is the deficit from Gaussian raw curvature.",
+      "id": "nlgcm_02_actual_target_as_gaussian_deficit",
+      "proof_boundary": "Exact reformulation only; the all-k bound remains open.",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The checked negative-lambda prefix has positive Gaussian deficit B_k on all 63 rows, corresponding to x_k<1.",
+      "id": "nlgcm_03_positive_deficit_finite_pattern",
+      "proof_boundary": "Finite prefix evidence only.",
+      "role": "finite_diagnostic"
+    },
+    {
+      "claim": "The checked negative-lambda prefix keeps B_k below 2/(3*(2*k+1)) on all 63 rows.",
+      "id": "nlgcm_04_bounded_deficit_finite_pattern",
+      "proof_boundary": "Finite prefix evidence only; not an all-k tail theorem.",
+      "role": "finite_diagnostic"
+    },
+    {
+      "claim": "A positive scale mixture of centered Gaussian raw moments has nonnegative curvature added to the Gaussian baseline, giving B_k<=0 and pushing x_k>=1.",
+      "id": "nlgcm_05_positive_gaussian_scale_mixture_rejected",
+      "proof_boundary": "Rejects this proof template for the upper-wall route only; not a claim about the actual Phi kernel.",
+      "role": "rejected_template"
+    },
+    {
+      "claim": "A controlled signed or tilted perturbation of the Gaussian baseline could prove 0<B_k<=2/(3*(2*k+1)) with uniform remainder bounds.",
+      "id": "nlgcm_06_signed_or_tilted_gaussian_perturbation_route",
+      "proof_boundary": "Live route only; no such all-k perturbation theorem is proved.",
+      "role": "live_route"
+    },
+    {
+      "claim": "The certified Phi Taylor signs support the fixed-k direction B_k>0 and B_(k+1)<=B_k for large negative lambda, but uniform-in-k remainder control remains missing.",
+      "id": "nlgcm_07_phi_taylor_asymptotic_route",
+      "proof_boundary": "Finite/local asymptotic support only; not a cone-entry theorem.",
+      "role": "live_route"
+    }
+  ],
+  "proof_boundary": "Finite theorem-search diagnostic and exact algebraic comparison only. It identifies the Gaussian baseline, compatible finite deficit margins, and rejected/insufficient proof templates, but it does not prove an all-k bounded-curvature theorem, cone entry, or Lambda <= 0.",
+  "source_bounded_log_curvature_target": "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_target.md",
+  "source_heat_flow_cone_entry_target": "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+  "source_phi_taylor_sign_scout": "outputs/jensen_window_pf_phi_taylor_cone_entry_sign_scout.md",
+  "status": "finite theorem-search diagnostic",
+  "summary": {
+    "bounded_deficit_rows": 63,
+    "exact_rows": 2,
+    "gaussian_deficit_rows": 63,
+    "live_routes": 2,
+    "main_finding": "The negative-lambda curvature target is a controlled deficit from the Gaussian moment baseline: Gaussian moments give raw curvature log((2*k+1)/(2*k-1)) and x_k=1, while the actual zeta prefix has a positive deficit B_k=-log(x_k) on 63 rows but keeps it below 2/(3*(2*k+1)) on all 63 checked rows. Positive Gaussian scale-mixture arguments point the wrong way for the upper wall because they make the deficit nonpositive.",
+    "matrix_rows": 7,
+    "raw_threshold_rows": 63,
+    "ready_to_apply_rows": 0,
+    "rejected_or_insufficient_rows": 2,
+    "target_closing": false
+  }
+}

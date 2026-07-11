@@ -1,0 +1,238 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_stencil_remainder_obligations.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_stencil_remainder_obligations.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "Finite positive baseline margins are not promoted to uniform remainder bounds.",
+    "Rows with invalid normalizers or failed finite stencils block finite-truncation promotion only.",
+    "The uniform epsilon-stencil remainder theorem remains open.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_stencil_remainder_obligations",
+  "matrix_rows": [
+    {
+      "claim": "Write the full relative-Gaussian log multiplier as f_k=f_k^(M)+epsilon_k, where epsilon_k is the log Taylor-tail error after the chosen finite truncation.",
+      "formula": "epsilon_k=log(F_k/F_k^(M))",
+      "id": "nlrgsro_01_log_tail_error_coordinate",
+      "proof_boundary": "Exact bookkeeping coordinate only; it does not bound epsilon_k.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_taylor_stencil_scout.md"
+      ]
+    },
+    {
+      "claim": "The B_k remainder contribution is the second-difference stencil 2*epsilon_k-epsilon_(k-1)-epsilon_(k+1).",
+      "formula": "B_k=B_k^(M)+2*epsilon_k-epsilon_(k-1)-epsilon_(k+1)",
+      "id": "nlrgsro_02_B_error_stencil",
+      "proof_boundary": "Exact stencil identity only; no sign estimate is proved.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The companion upper-side remainder contribution is -epsilon_(k-1)+3*epsilon_k-3*epsilon_(k+1)+epsilon_(k+2).",
+      "formula": "B_k-B_(k+1)=(B_k-B_(k+1))^(M)-epsilon_(k-1)+3*epsilon_k-3*epsilon_(k+1)+epsilon_(k+2)",
+      "id": "nlrgsro_03_companion_error_stencil",
+      "proof_boundary": "Exact stencil identity only; the monotone side remains open.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The weighted C-gap remainder contribution is (2*k+1)*epsilon_(k-1)-(6*k+5)*epsilon_k+(6*k+7)*epsilon_(k+1)-(2*k+3)*epsilon_(k+2).",
+      "formula": "C_(k+1)-C_k=(C_(k+1)-C_k)^(M)+(2*k+1)*epsilon_(k-1)-(6*k+5)*epsilon_k+(6*k+7)*epsilon_(k+1)-(2*k+3)*epsilon_(k+2)",
+      "id": "nlrgsro_04_weighted_gap_error_stencil",
+      "proof_boundary": "Exact weighted stencil identity only; no tail theorem is proved.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "Only the all-positive finite truncation rows provide a perturbative baseline with positive margins for all three stencils.",
+      "diagnostics": {
+        "blocked_baseline_rows": 31,
+        "companion_failure_rows": 8,
+        "invalid_normalizer_rows": 9,
+        "parameters": {
+          "max_taylor_degree": 14,
+          "precision_bits": 256,
+          "sample_T_values": [
+            25,
+            50,
+            100,
+            200,
+            500,
+            1000,
+            2000
+          ],
+          "tail_cutoff_n": 80,
+          "tail_start_k": 22,
+          "truncation_degrees": [
+            6,
+            8,
+            10,
+            12,
+            14
+          ]
+        },
+        "positive_baseline_details": [
+          {
+            "B_margin": "4.306964194429373976E-5",
+            "M": 5,
+            "T": "2000",
+            "companion_margin": "2.490505709648965635E-7",
+            "half_margin_budget": "1.245252854824482818E-7",
+            "k": 22,
+            "minimum_margin": "2.490505709648965635E-7",
+            "source_row": "nlrgts_M5_T2000",
+            "truncation_degree": 10,
+            "weighted_gap_margin": "7.443390705323734102E-5"
+          },
+          {
+            "B_margin": "4.418516431946812336E-5",
+            "M": 6,
+            "T": "2000",
+            "companion_margin": "2.332981128843164884E-8",
+            "half_margin_budget": "1.166490564421582442E-8",
+            "k": 22,
+            "minimum_margin": "2.332981128843164884E-8",
+            "source_row": "nlrgts_M6_T2000",
+            "truncation_degree": 12,
+            "weighted_gap_margin": "8.727382750837995922E-5"
+          },
+          {
+            "B_margin": "1.544605828603666889E-4",
+            "M": 7,
+            "T": "1000",
+            "companion_margin": "3.452036730520413111E-6",
+            "half_margin_budget": "1.726018365260206556E-6",
+            "k": 22,
+            "minimum_margin": "3.452036730520413111E-6",
+            "source_row": "nlrgts_M7_T1000",
+            "truncation_degree": 14,
+            "weighted_gap_margin": "1.466754393862739616E-4"
+          },
+          {
+            "B_margin": "4.399454835856960814E-5",
+            "M": 7,
+            "T": "2000",
+            "companion_margin": "6.996640552097379494E-8",
+            "half_margin_budget": "3.498320276048689747E-8",
+            "k": 22,
+            "minimum_margin": "6.996640552097379494E-8",
+            "source_row": "nlrgts_M7_T2000",
+            "truncation_degree": 14,
+            "weighted_gap_margin": "8.470067565765344792E-5"
+          }
+        ],
+        "positive_baseline_rows": 4,
+        "source_taylor_stencil_summary": {
+          "all_positive_rows": 4,
+          "b_decrease_rows": 18,
+          "b_positive_rows": 24,
+          "c_increase_rows": 12,
+          "certified_leading_sign_rows": 3,
+          "companion_failure_rows": 8,
+          "invalid_normalizer_rows": 9,
+          "main_finding": "The fixed-k Taylor stencil has certified positive leading signs for B_k, B_k-B_(k+1), and the relative-Gaussian weighted gap C_(k+1)-C_k. However, finite truncations through degree 14 are not stable proof objects: only 4/35 sampled truncation rows satisfy all three stencil inequalities, so the route still needs a uniform Taylor-tail remainder theorem.",
+          "matrix_rows": 8,
+          "positive_normalizer_rows": 26,
+          "ready_to_apply_rows": 0,
+          "target_closing": false,
+          "truncation_rows": 35,
+          "upper_wall_violation_rows": 2,
+          "weighted_gap_failure_rows": 12
+        },
+        "status_counts": {
+          "companion_failure": 8,
+          "invalid_normalizer": 9,
+          "target_satisfying_truncation": 4,
+          "upper_wall_violation": 2,
+          "weighted_gap_failure": 12
+        },
+        "truncation_rows": 35,
+        "upper_wall_violation_rows": 2,
+        "weakest_half_margin_budget": {
+          "M": 6,
+          "T": "2000",
+          "sample": "1.166490564421582442E-8",
+          "source_row": "nlrgts_M6_T2000"
+        },
+        "weakest_positive_margin": {
+          "M": 6,
+          "T": "2000",
+          "sample": "2.332981128843164884E-8",
+          "source_row": "nlrgts_M6_T2000"
+        },
+        "weighted_gap_failure_rows": 12
+      },
+      "id": "nlrgsro_05_positive_baseline_margin_budget",
+      "proof_boundary": "Finite margin diagnostic only; not a theorem about the full Taylor tail.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic"
+    },
+    {
+      "blocked_counts": {
+        "blocked_baseline_rows": 31,
+        "companion_failure_rows": 8,
+        "invalid_normalizer_rows": 9,
+        "upper_wall_violation_rows": 2,
+        "weighted_gap_failure_rows": 12
+      },
+      "claim": "Rows with invalid normalizers or a negative stencil margin cannot be used as small-remainder perturbative baselines.",
+      "id": "nlrgsro_06_blocked_baseline_rows",
+      "proof_boundary": "Finite obstruction to finite-truncation promotion only; not a statement about the full zeta moments.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_obstruction"
+    },
+    {
+      "claim": "On a positive baseline row, it is sufficient to bound each absolute epsilon-stencil error by half of that row's minimum positive margin.",
+      "id": "nlrgsro_07_sufficient_remainder_budget",
+      "proof_boundary": "Exact finite-row sufficient condition only; no uniform epsilon-stencil bound is proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_sufficient_condition",
+      "weakest_half_margin_budget": {
+        "M": 6,
+        "T": "2000",
+        "sample": "1.166490564421582442E-8",
+        "source_row": "nlrgts_M6_T2000"
+      }
+    },
+    {
+      "claim": "A promoted proof should replace finite-row budgets by uniform q/T bounds for the B, companion, and weighted-gap epsilon stencils.",
+      "id": "nlrgsro_08_live_uniform_stencil_bound_route",
+      "proof_boundary": "Live theorem-search route only; the uniform stencil remainder theorem is not proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_curvature_bridge.md"
+      ]
+    },
+    {
+      "claim": "A promoted remainder proof must state the truncation order, q/T range, positivity of the finite baseline, and explicit absolute bounds for all three epsilon stencils.",
+      "id": "nlrgsro_09_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a proof of scaled-curvature monotonicity, cone entry, jwpf_06, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Exact finite theorem-search diagnostic only. It decomposes the relative-Gaussian Taylor-tail remainder into three epsilon stencils and records finite margin budgets, but it does not prove uniform epsilon-stencil bounds, does not prove scaled-curvature monotonicity, does not prove cone entry, and does not prove RH or Lambda <= 0.",
+  "source_relative_gaussian_bridge": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_curvature_bridge.md",
+  "source_taylor_stencil_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_taylor_stencil_scout.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "exact finite theorem-search diagnostic",
+  "summary": {
+    "blocked_baseline_rows": 31,
+    "exact_stencil_rows": 4,
+    "main_finding": "The relative-Gaussian remainder problem can be split into three exact epsilon stencils for B_k, B_k-B_(k+1), and C_(k+1)-C_k. In the finite degree<=14 truncation matrix, only 4/35 rows have positive baseline margins for all three stencils; the weakest half-margin budget is 1.166490564421582442E-8, so a promoted proof needs sharp uniform epsilon-stencil bounds rather than finite truncation promotion.",
+    "matrix_rows": 9,
+    "positive_baseline_rows": 4,
+    "ready_to_apply_rows": 0,
+    "target_closing": false,
+    "truncation_rows": 35
+  }
+}

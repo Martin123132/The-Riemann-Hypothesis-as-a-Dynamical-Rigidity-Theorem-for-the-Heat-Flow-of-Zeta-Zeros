@@ -1,0 +1,74 @@
+{
+  "date": "2026-07-06",
+  "finite_grid": {
+    "all_beta1_rows_block_nonnegative_diagonal": true,
+    "all_mu2_rows_show_negative_path_cancellation": true,
+    "beta1_diagonal_obstruction_ok_rows": 630,
+    "beta1_diagonal_obstruction_rows": 630,
+    "degrees": [
+      2,
+      8
+    ],
+    "dps": 520,
+    "lambdas": [
+      "0",
+      "1e-6",
+      "1e-4",
+      "1e-2",
+      "1e-1"
+    ],
+    "motzkin_mu2_cancellation_ok_rows": 735,
+    "motzkin_mu2_cancellation_rows": 735,
+    "row_log": "work\\rh_compute\\results\\jensen_window_pf_reciprocal_motzkin_path_obstruction_lamgrid_n0_n20_d2_d8_dps520.jsonl",
+    "shifts": [
+      0,
+      20
+    ],
+    "source_enclosures": [
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k0_k9.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k10_k20.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k21_k32.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k33_k48.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k49_k64.jsonl"
+    ]
+  },
+  "invariants": [
+    "The scout rejects only the raw ordinary Motzkin/J-fraction production matrix.",
+    "Every mu_2 row must contain a negative lambda_1 path contribution while mu_2 remains positive.",
+    "Every d>=3 beta_1 row must be negative and separated from zero.",
+    "Diagonal sign conjugation cannot change diagonal beta signs.",
+    "The scout is finite evidence and a structural rejection gate, not an all-order theorem."
+  ],
+  "kind": "jensen_window_pf_reciprocal_motzkin_path_obstruction_scout",
+  "proof_boundary": "Ordinary Motzkin-path obstruction diagnostic only; not a proof against every modified signed continued-fraction or production-matrix model, not an all-order recurrence theorem, not Schur positivity, and not a proof of Lambda <= 0.",
+  "summary": {
+    "beta1_diagonal_obstruction_rows": 630,
+    "main_finding": "The ordinary J-fraction Motzkin path expansion is not a manifest positivity proof for the zeta-window reciprocal: every finite mu_2 row has beta_0^2>0, lambda_1<0, and mu_2>0, while every d>=3 beta_1 row is negative and invariant under diagonal sign conjugation. Any useful route must therefore be a genuinely modified path, parity, network, or Xi/Phi-specific representation.",
+    "motzkin_mu2_cancellation_rows": 735,
+    "ready_to_apply_rows": 0,
+    "symbolic_rows": 3,
+    "target_closing": false,
+    "total_finite_rows": 1365
+  },
+  "symbolic_rows": [
+    {
+      "boundary": "This is a model for the ordinary J-fraction, not a proof that the signed zeta-window route is positive.",
+      "id": "ordinary_j_fraction_motzkin_model",
+      "statement": "The ordinary J-fraction moment expansion is a Motzkin-excursion path model with horizontal weights beta_h and down-step weights lambda_h."
+    },
+    {
+      "id": "diagonal_conjugation_obstruction",
+      "proof_boundary": "Rejects only the naive tridiagonal Motzkin production matrix, not every possible modified signed model.",
+      "statement": "A diagonal sign conjugation leaves every beta_h diagonal entry fixed and preserves the product of opposite off-diagonal entries, so lambda_h<0 and beta_1<0 block a raw entrywise nonnegative tridiagonal production matrix."
+    },
+    {
+      "id": "first_mu2_cancellation",
+      "proof_boundary": "Finite cancellation diagnostic only; not an all-order obstruction theorem.",
+      "statement": "The first nontrivial coefficient satisfies mu_2=beta_0^2+lambda_1; on the finite grid beta_0^2>0, lambda_1<0, and mu_2>0, so positivity already uses cancellation in the ordinary path model."
+    }
+  ],
+  "target_route_rows": [
+    "rp_04_companion_or_production_matrix_total_positivity",
+    "rp_09_signed_or_modified_continued_fraction"
+  ]
+}

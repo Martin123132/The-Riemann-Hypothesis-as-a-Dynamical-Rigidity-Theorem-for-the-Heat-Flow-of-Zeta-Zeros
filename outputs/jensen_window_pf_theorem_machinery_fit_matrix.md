@@ -116,6 +116,50 @@ The next proof-search action is therefore not another finite grid by itself.
 It is a symbolic/theorem search for a uniform identity that survives the
 degree-3 countermodel and handles the binomial weights.
 
+## Structural Ansatz Workbench
+
+The next layer of this audit is:
+
+```text
+outputs/jensen_window_pf_structural_ansatz_matrix.md
+work/rh_compute/results/jensen_window_pf_structural_ansatz_matrix.json
+python work/rh_compute/scripts/check_jensen_window_pf_structural_ansatz_matrix.py
+```
+
+It validates:
+
+```text
+validated Jensen-window PF structural ansatz matrix: 6 ansatz rows, 0 issues, 0 ready-to-apply rows
+```
+
+The workbench tests positive Cauchy-Binet, planar-network/production-matrix,
+determinant-integral, binomial-preserver, direct-Hankel, and finite-grid
+ansatz rows against exact degree-2/3/4 low-degree formulas and the finite
+countermodel kill gate.
+
+The structural rows now also have a bounded Schur/Jacobi-Trudi shape contract:
+
+```text
+outputs/jensen_window_pf_schur_shape_contract.md
+work/rh_compute/results/jensen_window_pf_schur_shape_contract.json
+python work/rh_compute/scripts/check_jensen_window_pf_schur_shape_contract.py
+```
+
+It records the finite-band shape obligations that any positive Schur, network,
+production-matrix, Cauchy-Binet, or determinant-integral theorem would need to
+cover.
+
+The Cauchy-Binet row also has a low-degree symbolic scout:
+
+```text
+outputs/jensen_window_pf_cauchy_binet_low_degree_scout.md
+work/rh_compute/results/jensen_window_pf_cauchy_binet_low_degree_scout.json
+python work/rh_compute/scripts/check_jensen_window_pf_cauchy_binet_low_degree_scout.py
+```
+
+It records `15` formula rows with nonnegative Bernstein coefficients under
+adjacent log-concavity, but `0` kernel identities found.
+
 ## Boundary
 
 Passing this checker means the theorem-search map does not overstate any known

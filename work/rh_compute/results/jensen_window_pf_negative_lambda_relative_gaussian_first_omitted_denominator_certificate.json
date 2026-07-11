@@ -1,0 +1,429 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_first_omitted_denominator_certificate.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_first_omitted_denominator_certificate.py",
+  "invariants": [
+    "No row is ready_to_apply for the full intervalization target.",
+    "The certificate only discharges the denominator positivity and ratio-cap conversion side conditions.",
+    "Residual numerator, quadrature, Phi-tail, rounding, and grid-to-collar bounds remain open.",
+    "The finite grid is not promoted to a uniform collar theorem.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_first_omitted_denominator_certificate",
+  "matrix_rows": [
+    {
+      "claim": "For the degree-40 relative-Gaussian truncation, the first omitted comparison denominator has explicit value and derivative forms in terms of r_21 and the rising factorial.",
+      "diagnostics": null,
+      "formula": "D_value(i,T)=|r_21|*(i+1/2)_21*T^(-18); D_derivative(i,T)=21*|r_21|*(i+1/2)_21*T^(-19)",
+      "gap": null,
+      "id": "nlrgfodc_01_first_omitted_formula",
+      "proof_boundary": "Exact denominator identity only; not a residual numerator or quadrature bound.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree40_residual_tail_budget.md"
+      ]
+    },
+    {
+      "claim": "The normalized first omitted coefficient r_21 is Arb-certified negative with a positive absolute lower bound.",
+      "diagnostics": {
+        "absolute_ratio_to_c0_lower": "34773484777537329955.444556103450265282067443553072040686572814816710446096290774",
+        "coefficient_certificate_source": "build_ratio_rows uses finite n<=80 sums plus a geometric Arb tail-radius bound.",
+        "coefficient_degree": 42,
+        "coefficient_index": 21,
+        "precision_bits": 384,
+        "proof_boundary": "Arb sign and magnitude certificate for the first omitted coefficient only; it does not bound the cancellation-reduced residual numerator.",
+        "ratio_cutoff_n": 80,
+        "ratio_to_c0_ball": "[-34773484777537329955.444556103450265282067443553072040686572814816710446096290774 +/- 4.45e-61]",
+        "ratio_to_c0_radius": "[1.1634227377488650116e-79 +/- 1.09e-99]",
+        "ratio_to_c0_sign": "negative"
+      },
+      "formula": null,
+      "gap": null,
+      "id": "nlrgfodc_02_r21_arb_sign_magnitude",
+      "proof_boundary": "Arb coefficient certificate only; not a residual-tail theorem.",
+      "readiness": "available_arb",
+      "role": "arb_coefficient_certificate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree16_arb_real_t_collar_certificate.md"
+      ]
+    },
+    {
+      "claim": "Every first-omitted value and derivative denominator used by the recorded finite grid is Arb-certified positive.",
+      "diagnostics": {
+        "denominator_rows": [
+          {
+            "T": 1156,
+            "derivative_denominator_ball": "[9.065260689361644539346662903760944214482e-7 +/- 6.75e-48]",
+            "derivative_denominator_lower": "9.0652606893616445393466629037609442144819325544547770937170580932339082007121419e-7",
+            "derivative_to_value_denominator_ratio": "21/1156",
+            "first_j": 21,
+            "index": 21,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "40901717454208520316941324340246571875/2097152",
+            "value_denominator_ball": "[4.990210169953362422611782055594119767591e-5 +/- 6.70e-47]",
+            "value_denominator_lower": "4.9902101699533624226117820555941197675910066823570106287318662646563799428682076e-5"
+          },
+          {
+            "T": 1156,
+            "derivative_denominator_ball": "[1.791970136269162292661549643766698274956e-6 +/- 2.70e-46]",
+            "derivative_denominator_lower": "1.7919701362691622926615496437666982749557308537875722161998835765694934815361211e-6",
+            "derivative_to_value_denominator_ratio": "21/1156",
+            "first_j": 21,
+            "index": 22,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "80852232176923819231163082998161828125/2097152",
+            "value_denominator_ball": "[9.864368940605483858651197086639539075471e-5 +/- 4.06e-45]",
+            "value_denominator_lower": "9.8643689406054838586511970866395390754705946046592070567955495929254022126464569e-5"
+          },
+          {
+            "T": 1156,
+            "derivative_denominator_ball": "[3.464475596787047099145662644615616664914e-6 +/- 4.13e-46]",
+            "derivative_denominator_lower": "3.4644755967870470991456626446156166649144129839893062846531082480343540643031674e-6",
+            "derivative_to_value_denominator_ratio": "21/1156",
+            "first_j": 21,
+            "index": 23,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "156314315542052717180248627129779534375/2097152",
+            "value_denominator_ball": "[0.0001907111328517060212672564770083644221258 +/- 3.52e-44]",
+            "value_denominator_lower": "0.00019071113285170602126725647700836442212576482902341133643138062546322444277783150"
+          },
+          {
+            "T": 1156,
+            "derivative_denominator_ball": "[6.560389959873344506892850539804040067604e-6 +/- 1.12e-46]",
+            "derivative_denominator_lower": "6.5603899598733445068928505398040400676038884164903884964707794484054789728294021e-6",
+            "derivative_to_value_denominator_ratio": "21/1156",
+            "first_j": 21,
+            "index": 24,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "295999448579631741043449527969156990625/2097152",
+            "value_denominator_ball": "[0.0003611338473149326785699112011434985865786 +/- 2.41e-44]",
+            "value_denominator_lower": "0.00036113384731493267856991120114349858657857595283156614771048671630270160440908518"
+          },
+          {
+            "T": 1500,
+            "derivative_denominator_ball": "[6.424587126626755572092955509938958939576e-9 +/- 3.37e-49]",
+            "derivative_denominator_lower": "6.4245871266267555720929555099389589395763361813830110981506502406500875329151472e-9",
+            "derivative_to_value_denominator_ratio": "21/1500",
+            "first_j": 21,
+            "index": 21,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "40901717454208520316941324340246571875/2097152",
+            "value_denominator_ball": "[4.588990804733396837209253935670684956840e-7 +/- 2.41e-47]",
+            "value_denominator_lower": "4.5889908047333968372092539356706849568402401295592936415361787433214910949393908e-7"
+          },
+          {
+            "T": 1500,
+            "derivative_denominator_ball": "[1.269976525030870287506747019406538395033e-8 +/- 4.69e-48]",
+            "derivative_denominator_lower": "1.2699765250308702875067470194065383950325315707385021938204773731517614890646221e-8",
+            "derivative_to_value_denominator_ratio": "21/1500",
+            "first_j": 21,
+            "index": 22,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "80852232176923819231163082998161828125/2097152",
+            "value_denominator_ball": "[9.071260893077644910762478710046702821661e-7 +/- 6.03e-48]",
+            "value_denominator_lower": "9.0712608930776449107624787100467028216609397909893013844319812367982963504615865e-7"
+          },
+          {
+            "T": 1500,
+            "derivative_denominator_ball": "[2.455287948393015889179710904185974230396e-8 +/- 2.28e-48]",
+            "derivative_denominator_lower": "2.4552879483930158891797109041859742303962277034277709080529229214267388788582694e-8",
+            "derivative_to_value_denominator_ratio": "21/1500",
+            "first_j": 21,
+            "index": 23,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "156314315542052717180248627129779534375/2097152",
+            "value_denominator_ball": "[1.753777105995011349414079217275695878854e-6 +/- 4.49e-46]",
+            "value_denominator_lower": "1.7537771059950113494140792172756958788544483595912649343235163724476706277559067e-6"
+          },
+          {
+            "T": 1500,
+            "derivative_denominator_ball": "[4.649375051212306683765835541969185244793e-8 +/- 1.44e-48]",
+            "derivative_denominator_lower": "4.6493750512123066837658355419691852447928567150015236343980880852548885152848081e-8",
+            "derivative_to_value_denominator_ratio": "21/1500",
+            "first_j": 21,
+            "index": 24,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "295999448579631741043449527969156990625/2097152",
+            "value_denominator_ball": "[3.320982179437361916975596815692275174852e-6 +/- 4.06e-47]",
+            "value_denominator_lower": "3.3209821794373619169755968156922751748520405107153740245700629180392060823462915e-6"
+          },
+          {
+            "T": 2000,
+            "derivative_denominator_ball": "[2.716496986490720771206245528936919980902e-11 +/- 4.42e-51]",
+            "derivative_denominator_lower": "2.7164969864907207712062455289369199809024419114064209016992593153925095137981297e-11",
+            "derivative_to_value_denominator_ratio": "21/2000",
+            "first_j": 21,
+            "index": 21,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "40901717454208520316941324340246571875/2097152",
+            "value_denominator_ball": "[2.587139987134019782101186218035161886574e-9 +/- 2.46e-49]",
+            "value_denominator_lower": "2.5871399871340197821011862180351618865737542013394484778088183956119138226648854e-9"
+          },
+          {
+            "T": 2000,
+            "derivative_denominator_ball": "[5.369819624458401524477462092084609264575e-11 +/- 4.06e-51]",
+            "derivative_denominator_lower": "5.3698196244584015244774620920846092645745944760359482940566753908921699691358377e-11",
+            "derivative_to_value_denominator_ratio": "21/2000",
+            "first_j": 21,
+            "index": 22,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "80852232176923819231163082998161828125/2097152",
+            "value_denominator_ball": "[5.114113928055620499502344849604389775785e-9 +/- 3.29e-49]",
+            "value_denominator_lower": "5.1141139280556204995023448496043897757853280724151888514825479913258761610817502e-9"
+          },
+          {
+            "T": 2000,
+            "derivative_denominator_ball": "[1.038165127395290961398976004469691124484e-10 +/- 4.22e-50]",
+            "derivative_denominator_lower": "1.0381651273952909613989760044696911244844215987002833368509572422391528606995953e-10",
+            "derivative_to_value_denominator_ratio": "21/2000",
+            "first_j": 21,
+            "index": 23,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "156314315542052717180248627129779534375/2097152",
+            "value_denominator_ball": "[9.887286927574199632371200042568486899852e-9 +/- 3.66e-49]",
+            "value_denominator_lower": "9.8872869275741996323712000425684868998516342733360317795329261165633605780913838e-9"
+          },
+          {
+            "T": 2000,
+            "derivative_denominator_ball": "[1.965887156131508416266146051017074682534e-10 +/- 3.31e-50]",
+            "derivative_denominator_lower": "1.9658871561315084162661460510170746825343302613686216378667062672188213745162549e-10",
+            "derivative_to_value_denominator_ratio": "21/2000",
+            "first_j": 21,
+            "index": 24,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "295999448579631741043449527969156990625/2097152",
+            "value_denominator_ball": "[1.872273482030008015491567667635309221461e-8 +/- 2.67e-48]",
+            "value_denominator_lower": "1.8722734820300080154915676676353092214612669155891634646349583497322108328726237e-8"
+          },
+          {
+            "T": 5000,
+            "derivative_denominator_ball": "[7.467050058662527692671182731347387497565e-19 +/- 2.44e-59]",
+            "derivative_denominator_lower": "7.4670500586625276926711827313473874975647568486593965678138557357018737696843697e-19",
+            "derivative_to_value_denominator_ratio": "21/5000",
+            "first_j": 21,
+            "index": 21,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "40901717454208520316941324340246571875/2097152",
+            "value_denominator_ball": "[1.777869061586316117302662555082711308944e-16 +/- 1.03e-57]",
+            "value_denominator_lower": "1.7778690615863161173026625550827113089439897258712848970985370799290175642105642e-16"
+          },
+          {
+            "T": 5000,
+            "derivative_denominator_ball": "[1.476044779037941520644303563173320784402e-18 +/- 3.36e-58]",
+            "derivative_denominator_lower": "1.4760447790379415206443035631733207844023356561303458331725063663596727219143522e-18",
+            "derivative_to_value_denominator_ratio": "21/5000",
+            "first_j": 21,
+            "index": 22,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "80852232176923819231163082998161828125/2097152",
+            "value_denominator_ball": "[3.514392331042717906295960864698382820006e-16 +/- 4.39e-56]",
+            "value_denominator_lower": "3.5143923310427179062959608646983828200055610860246329361250151579992207664627432e-16"
+          },
+          {
+            "T": 5000,
+            "derivative_denominator_ball": "[2.853686572806686939912320222135086849845e-18 +/- 4.85e-58]",
+            "derivative_denominator_lower": "2.8536865728066869399123202221350868498445156018520019441335123082953672623677475e-18",
+            "derivative_to_value_denominator_ratio": "21/5000",
+            "first_j": 21,
+            "index": 23,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "156314315542052717180248627129779534375/2097152",
+            "value_denominator_ball": "[6.794491840015921285505524338416873452011e-16 +/- 2.49e-56]",
+            "value_denominator_lower": "6.7944918400159212855055243384168734520107514329809570098416959721318268151613036e-16"
+          },
+          {
+            "T": 5000,
+            "derivative_denominator_ball": "[5.403789467655215694727585101489845311408e-18 +/- 3.01e-58]",
+            "derivative_denominator_lower": "5.4037894676552156947275851014898453114076997566984717665506935199635677946963729e-18",
+            "derivative_to_value_denominator_ratio": "21/5000",
+            "first_j": 21,
+            "index": 24,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "295999448579631741043449527969156990625/2097152",
+            "value_denominator_ball": "[1.286616539917908498744663119402344121764e-15 +/- 2.62e-55]",
+            "value_denominator_lower": "1.2866165399179084987446631194023441217637380373091599444168317904675161415943745e-15"
+          },
+          {
+            "T": 10000,
+            "derivative_denominator_ball": "[1.424226772053247011694180055875279902947e-24 +/- 3.80e-64]",
+            "derivative_denominator_lower": "1.4242267720532470116941800558752799029473794648474496017101012679485080279701938e-24",
+            "derivative_to_value_denominator_ratio": "21/10000",
+            "first_j": 21,
+            "index": 21,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "40901717454208520316941324340246571875/2097152",
+            "value_denominator_ball": "[6.782032247872604817591333599406094775940e-22 +/- 9.79e-63]",
+            "value_denominator_lower": "6.7820322478726048175913335994060947759399022135592838176671488949928953712866372e-22"
+          },
+          {
+            "T": 10000,
+            "derivative_denominator_ball": "[2.815331991268046418465239645334855622105e-24 +/- 2.85e-64]",
+            "derivative_denominator_lower": "2.8153319912680464184652396453348556221052849886519352591943862273400740087782901e-24",
+            "derivative_to_value_denominator_ratio": "21/10000",
+            "first_j": 21,
+            "index": 22,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "80852232176923819231163082998161828125/2097152",
+            "value_denominator_ball": "[1.340634281556212580221542688254693153383e-21 +/- 4.70e-61]",
+            "value_denominator_lower": "1.3406342815562125802215426882546931533834690422152072662830410606381304803706143e-21"
+          },
+          {
+            "T": 10000,
+            "derivative_denominator_ball": "[5.442975183118223075699463314314054202737e-24 +/- 1.16e-64]",
+            "derivative_denominator_lower": "5.4429751831182230756994633143140542027368843113937415011091467061908097503046942e-24",
+            "derivative_to_value_denominator_ratio": "21/10000",
+            "first_j": 21,
+            "index": 23,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "156314315542052717180248627129779534375/2097152",
+            "value_denominator_ball": "[2.591892944342010988428315863959073429875e-21 +/- 2.94e-61]",
+            "value_denominator_lower": "2.5918929443420109884283158639590734298747068149494007148138793839003855953831877e-21"
+          },
+          {
+            "T": 10000,
+            "derivative_denominator_ball": "[1.030691045313876284547345180795640051157e-23 +/- 4.42e-63]",
+            "derivative_denominator_lower": "1.0306910453138762845473451807956400511565589440724319012738596954276214208023783e-23",
+            "derivative_to_value_denominator_ratio": "21/10000",
+            "first_j": 21,
+            "index": 24,
+            "proof_boundary": "Arb lower bound for the first omitted denominator only; numerator and quadrature errors are not bounded here.",
+            "rising_factor_exact": "295999448579631741043449527969156990625/2097152",
+            "value_denominator_ball": "[4.908052596732744212130215146645905005507e-21 +/- 4.24e-61]",
+            "value_denominator_lower": "4.9080525967327442121302151466459050055074235432020566727326652163220067657256108e-21"
+          }
+        ],
+        "denominator_summary": {
+          "all_denominators_positive": true,
+          "denominator_rows": 20,
+          "derivative_denominator_formula": "21*|r_21|*(i+1/2)_21*T^(-19)",
+          "first_j": 21,
+          "indices": [
+            21,
+            22,
+            23,
+            24
+          ],
+          "minimum_derivative_denominator_location": "T=10000, F_21",
+          "minimum_derivative_denominator_lower": "1.424226772053247012E-24",
+          "minimum_value_denominator_location": "T=10000, F_21",
+          "minimum_value_denominator_lower": "6.782032247872604818E-22",
+          "t_grid": [
+            1156,
+            1500,
+            2000,
+            5000,
+            10000
+          ],
+          "value_denominator_formula": "|r_21|*(i+1/2)_21*T^(-18)"
+        }
+      },
+      "formula": null,
+      "gap": null,
+      "id": "nlrgfodc_03_grid_denominator_lowers",
+      "proof_boundary": "Finite-grid denominator lower certificate only; not a finite-grid residual certificate.",
+      "readiness": "available_for_intervalization",
+      "role": "arb_denominator_certificate",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md"
+      ]
+    },
+    {
+      "claim": "The certified denominator lows translate the intervalization ratio caps into explicit scaled absolute-radius targets for value and derivative residual enclosures.",
+      "diagnostics": {
+        "ratio_cap_rows": [
+          {
+            "derivative_scaled_absolute_radius_cap_from_min_denominator": "1.424226772053247012E-30",
+            "limiting_derivative_location": "T=10000, F_21",
+            "limiting_value_location": "T=10000, F_21",
+            "proof_boundary": "Exact denominator-to-ratio budget conversion only; it does not provide the scaled absolute residual enclosure.",
+            "ratio_error_cap": "1.000000000000000000E-6",
+            "value_scaled_absolute_radius_cap_from_min_denominator": "6.782032247872604818E-28"
+          },
+          {
+            "derivative_scaled_absolute_radius_cap_from_min_denominator": "2.848453544106494024E-27",
+            "limiting_derivative_location": "T=10000, F_21",
+            "limiting_value_location": "T=10000, F_21",
+            "proof_boundary": "Exact denominator-to-ratio budget conversion only; it does not provide the scaled absolute residual enclosure.",
+            "ratio_error_cap": "2.000000000000000000E-3",
+            "value_scaled_absolute_radius_cap_from_min_denominator": "1.356406449574520964E-24"
+          }
+        ]
+      },
+      "formula": null,
+      "gap": null,
+      "id": "nlrgfodc_04_ratio_cap_absolute_radius_handoff",
+      "proof_boundary": "Budget handoff only; the numerator and quadrature-radius estimates remain open.",
+      "readiness": "available_for_intervalization",
+      "role": "exact_budget_handoff",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_ladder_scout.md"
+      ]
+    },
+    {
+      "claim": "Certified first-omitted denominators prove the first-omitted residual comparison.",
+      "diagnostics": null,
+      "formula": null,
+      "gap": "The denominator is only the divisor in the ratio comparison. A proof still needs interval enclosures for the cancellation-reduced residual numerator, quadrature error, Phi tails, coefficient propagation, and grid-to-collar coverage.",
+      "id": "nlrgfodc_05_denominator_promotion_rejected",
+      "proof_boundary": "Rejected promotion only; not a residual theorem, uniform collar theorem, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "Any promoted intervalized grid proof may use these denominator lows only together with separately certified numerator and quadrature-radius bounds.",
+      "diagnostics": null,
+      "formula": null,
+      "gap": null,
+      "id": "nlrgfodc_06_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not scaled-curvature monotonicity, cone entry, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "First-omitted denominator lower certificate only. It certifies the divisor side of the finite-grid ratio comparisons, but it does not enclose the cancellation-reduced residual numerator, does not prove quadrature-remainder bounds, does not prove a finite-grid residual certificate, does not prove a uniform collar theorem, does not prove scaled-curvature monotonicity, and does not prove RH or Lambda <= 0.",
+  "source_cancellation_reduced_grid_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.json",
+  "source_cancellation_reduced_grid_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md",
+  "source_degree16_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree16_arb_real_t_collar_certificate.md",
+  "source_degree40_residual_budget": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree40_residual_tail_budget.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_intervalization_target": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+  "source_intervalization_target_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.json",
+  "source_quadrature_ladder_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_ladder_scout.json",
+  "source_quadrature_ladder_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_ladder_scout.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "first-omitted denominator lower certificate",
+  "summary": {
+    "absolute_r21_lower": "34773484777537329955.444556103450265282067443553072040686572814816710446096290774",
+    "all_denominators_positive": true,
+    "certified_denominator_conditions": 2,
+    "denominator_rows": 20,
+    "finest_derivative_scaled_absolute_radius_cap": "1.424226772053247012E-30",
+    "finest_ratio_cap": "1.000000000000000000E-6",
+    "finest_value_scaled_absolute_radius_cap": "6.782032247872604818E-28",
+    "first_j": 21,
+    "main_finding": "The first omitted coefficient r_21 is Arb-certified negative and bounded away from zero. Consequently every value and derivative first-omitted denominator on the recorded finite grid is positive. The smallest value denominator lower is at T=10000, F_21, and the smallest derivative denominator lower is also at T=10000, F_21. A ratio-radius target of 1e-6 therefore requires scaled absolute residual radii below the recorded value and derivative caps. This certifies the divisor side of the ratio comparison but leaves numerator enclosure, quadrature error, and grid-to-collar coverage open.",
+    "matrix_rows": 6,
+    "minimum_derivative_denominator_location": "T=10000, F_21",
+    "minimum_derivative_denominator_lower": "1.424226772053247012E-24",
+    "minimum_value_denominator_location": "T=10000, F_21",
+    "minimum_value_denominator_lower": "6.782032247872604818E-22",
+    "r21_sign_certified": true,
+    "ratio_cap_rows": 2,
+    "ready_to_apply_rows": 0,
+    "source_grid_rows": 20,
+    "source_interval_obligations": 8,
+    "source_quadrature_ladder_rows": 7,
+    "target_closing": false
+  }
+}

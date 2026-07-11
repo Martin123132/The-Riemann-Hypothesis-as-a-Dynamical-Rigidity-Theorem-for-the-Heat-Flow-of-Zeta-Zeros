@@ -1,0 +1,217 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_scaled_curvature_log_ceiling_bridge.py",
+  "date": "2026-07-07",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k300.jsonl",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k220_k250_dps220.jsonl",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k245_k320_dps220.jsonl"
+  ],
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_scaled_curvature_log_ceiling_bridge.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The affine log-ratio ceiling remains an open zeta-specific all-k theorem.",
+    "Repaired k300 evidence is finite stress evidence only.",
+    "The nonlinear raw-log upper wall is weaker than the affine ceiling.",
+    "The companion monotone-contraction upper side remains a separate open theorem target.",
+    "Generic moment positivity, endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_scaled_curvature_log_ceiling_bridge",
+  "matrix_rows": [
+    {
+      "claim": "Set p_k=log(R_k), delta_k=p_(k+1)-p_k, h_k=log((2*k+1)/(2*k-1)), B_k=h_k-p_k, and C_k=(2*k+1)*B_k.",
+      "formula": "C_k=(2*k+1)*(h_k-p_k)",
+      "id": "nlsclcb_01_log_curvature_coordinate",
+      "proof_boundary": "Exact change of variables only; no zeta inequality is proved.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The scaled-curvature monotonicity target C_(k+1)>=C_k is exactly an affine upper ceiling for delta_k.",
+      "formula": "delta_k <= h_(k+1)-((2*k+1)/(2*k+3))*h_k-2*p_k/(2*k+3)",
+      "id": "nlsclcb_02_affine_ceiling_equivalence",
+      "proof_boundary": "Exact algebraic equivalence only; the affine ceiling remains open for all k.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_scaled_curvature_monotonicity_target.md"
+      ]
+    },
+    {
+      "claim": "On the raw upper wall B_k>=0, the affine scaled-curvature ceiling is stronger than the nonlinear raw-log upper corridor wall.",
+      "formula": "raw_log_upper(p_k)-scaled_ceiling(p_k)=alpha_k*B_k-L_k(B_k)>=0",
+      "id": "nlsclcb_03_ceiling_dominates_raw_log_upper",
+      "proof_boundary": "Exact sufficient comparison only; it does not prove the affine ceiling for zeta coefficients.",
+      "readiness": "available_exact",
+      "role": "exact_sufficient_condition",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_linear_curvature_barrier_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_raw_log_decrement_bridge.md"
+      ]
+    },
+    {
+      "claim": "The repaired k300 data validate the p-wall, affine scaled-curvature ceiling, lower log wall, and scaled log corridor on all checked rows.",
+      "diagnostics": {
+        "adjacent_rows_per_lambda": 298,
+        "adjacent_total_rows": 894,
+        "ceiling_dominance_rows": 894,
+        "coefficient_cap": 300,
+        "lambdas": [
+          "-25.0",
+          "-50.0",
+          "-100.0"
+        ],
+        "log_lower_rows": 894,
+        "max_ceiling": {
+          "k": 298,
+          "lam": "-25.0",
+          "sample": "-4.826663577886147625E-6"
+        },
+        "max_delta": {
+          "k": 298,
+          "lam": "-25.0",
+          "sample": "-5.699238767442957333E-6"
+        },
+        "min_ceiling": {
+          "k": 1,
+          "lam": "-100.0",
+          "sample": "-5.841809476939282110E-1"
+        },
+        "min_ceiling_to_raw_upper_slack": {
+          "k": 298,
+          "lam": "-100.0",
+          "sample": "4.569274603858794776E-9"
+        },
+        "min_delta": {
+          "k": 1,
+          "lam": "-100.0",
+          "sample": "-5.874561412680720753E-1"
+        },
+        "min_log_lower_margin": {
+          "k": 298,
+          "lam": "-100.0",
+          "sample": "4.098948243972025449E-6"
+        },
+        "min_p_lower_margin": {
+          "k": 299,
+          "lam": "-25.0",
+          "sample": "1.434268674324864062E-3"
+        },
+        "min_p_upper_margin": {
+          "k": 299,
+          "lam": "-100.0",
+          "sample": "1.652602130709587426E-3"
+        },
+        "min_raw_upper_margin": {
+          "k": 298,
+          "lam": "-25.0",
+          "sample": "8.786855849482974303E-7"
+        },
+        "min_scaled_ceiling_margin": {
+          "k": 298,
+          "lam": "-25.0",
+          "sample": "8.725751895568097074E-7"
+        },
+        "min_scaled_log_width": {
+          "k": 298,
+          "lam": "-100.0",
+          "sample": "5.531556190162135064E-6"
+        },
+        "p_lower_rows": 897,
+        "p_upper_rows": 897,
+        "raw_log_total_rows": 897,
+        "raw_ratio_rows_per_lambda": 299,
+        "raw_upper_rows": 894,
+        "scaled_ceiling_rows": 894,
+        "scaled_log_corridor_rows": 894,
+        "scaled_width_rows": 894
+      },
+      "id": "nlsclcb_04_repaired_k300_affine_ceiling",
+      "proof_boundary": "Finite repaired stress evidence only; not an all-k affine log-ceiling theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_stress",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_k300_precision_repair_audit.md",
+        "outputs/jensen_window_pf_negative_lambda_scaled_curvature_monotonicity_target.md"
+      ]
+    },
+    {
+      "claim": "The affine ceiling is very close to the nonlinear raw-log upper wall at the high-k edge, so a promoted proof needs sharp constants.",
+      "id": "nlsclcb_05_sharpness_warning",
+      "min_ceiling_to_raw_upper_slack": {
+        "k": 298,
+        "lam": "-100.0",
+        "sample": "4.569274603858794776E-9"
+      },
+      "proof_boundary": "Finite sharpness diagnostic only; not an asymptotic theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_sharpness"
+    },
+    {
+      "claim": "A sufficient log-recurrence target is lower_log_bound(k)<=delta_k<=scaled_ceiling(k,p_k), plus the p-wall and the companion B-monotone upper side.",
+      "id": "nlsclcb_06_scaled_log_corridor_target",
+      "proof_boundary": "Open dependency only; it is not a substitute for the companion monotone-contraction theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_dependency",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_log_decrement_bridge.md",
+        "outputs/jensen_window_pf_monotone_contraction_theorem_target.md"
+      ]
+    },
+    {
+      "claim": "A zeta-specific proof may target the affine delta ceiling directly as a log-ratio recurrence after a finite collar.",
+      "id": "nlsclcb_07_live_affine_recurrence_route",
+      "proof_boundary": "Live theorem-search route only; no all-k affine recurrence is proved here.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+        "outputs/jensen_window_pf_negative_lambda_scaled_curvature_monotonicity_target.md"
+      ]
+    },
+    {
+      "claim": "A promoted proof must state the tail start, lambda range, finite collar, p-wall, lower log wall, affine ceiling, companion B-monotone side, and forbidden assumptions.",
+      "id": "nlsclcb_08_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a proof of scaled-curvature monotonicity, raw-corridor occupancy, cone entry, jwpf_06, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Exact finite theorem-search diagnostic only. It rewrites scaled-curvature monotonicity as an affine log-ratio ceiling and checks repaired k300 evidence, but it does not prove the all-k affine recurrence, does not prove the companion monotone-contraction theorem, does not prove cone entry, and does not prove RH or Lambda <= 0.",
+  "source_linear_barrier_scout": "outputs/jensen_window_pf_negative_lambda_linear_curvature_barrier_scout.md",
+  "source_monotone_contraction_target": "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+  "source_raw_corridor_target": "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+  "source_raw_log_bridge": "outputs/jensen_window_pf_negative_lambda_raw_log_decrement_bridge.md",
+  "source_scaled_curvature_target": "outputs/jensen_window_pf_negative_lambda_scaled_curvature_monotonicity_target.md",
+  "status": "exact finite theorem-search diagnostic",
+  "summary": {
+    "adjacent_total_rows": 894,
+    "ceiling_dominance_rows": 894,
+    "coefficient_cap": 300,
+    "exact_available_rows": 3,
+    "finite_sharpness_rows": 1,
+    "finite_stress_rows": 1,
+    "lambdas": [
+      "-25.0",
+      "-50.0",
+      "-100.0"
+    ],
+    "live_routes": 1,
+    "log_lower_rows": 894,
+    "main_finding": "Scaled-curvature monotonicity is exactly equivalent to the affine log-ratio ceiling delta_k<=h_(k+1)-((2*k+1)/(2*k+3))*h_k-2*p_k/(2*k+3). On repaired k300 data the p-wall holds on 897/897 rows, the affine ceiling holds on 894/894 adjacent rows, and the ceiling is stronger than the nonlinear raw-log upper wall on 894/894 rows.",
+    "matrix_rows": 8,
+    "open_dependency_rows": 1,
+    "p_lower_rows": 897,
+    "p_upper_rows": 897,
+    "raw_log_total_rows": 897,
+    "raw_upper_rows": 894,
+    "ready_to_apply_rows": 0,
+    "scaled_ceiling_rows": 894,
+    "scaled_log_corridor_rows": 894,
+    "scaled_width_rows": 894,
+    "target_closing": false
+  }
+}

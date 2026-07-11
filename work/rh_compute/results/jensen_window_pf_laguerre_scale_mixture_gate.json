@@ -1,0 +1,1188 @@
+{
+  "kind": "jensen_window_pf_laguerre_scale_mixture_gate",
+  "date": "2026-07-11",
+  "status": "exact Laguerre scale-mixture reduction with sharp preservation guards",
+  "proof_boundary": "This artifact exactly identifies the Laguerre kernel inside the unshifted Jensen moment integral, proves fixed-scale and half-integer Gamma benchmark hyperbolicity, and blocks generic positive-mixture and log-concavity promotions. It does not prove an Xi-specific zero-preserving expansion, all-degree Jensen hyperbolicity, PF-infinity, RH, or Lambda <= 0.",
+  "sources": [
+    "outputs/coefficient_pf_bridge_obstruction.md",
+    "outputs/jensen_window_pf_bridge_target.md",
+    "https://dlmf.nist.gov/13.6",
+    "https://dlmf.nist.gov/15.8",
+    "https://dlmf.nist.gov/18.16"
+  ],
+  "exact": {
+    "moment_normalization": "A_j(lambda)=j!/(2j)!*integral_0^infinity W_lambda(u)u^(2j)du, W_lambda(u)=2*exp(lambda*u^2)*Phi(u)>0",
+    "jensen_integral": "J_D(w)=integral_0^infinity W_lambda(u)K_D(w,u^2)du, K_D(w,y)=sum_(j=0)^D (D)_j*(w*y)^j/(2j)!",
+    "kummer_kernel": "K_D(w,y)={}_1F_1(-D;1/2;-w*y/4)",
+    "laguerre_kernel": "K_D(w,y)=D!/(1/2)_D*L_D^(-1/2)(-w*y/4)",
+    "single_scale_roots": "For y>0, K_D(w,y) has D simple roots w=-4*ell_(D,r)/y<0, where ell_(D,r) are the positive roots of L_D^(-1/2).",
+    "positive_mixture_countermodel": {
+      "measure": "(9/10)*delta_(1/4)+(1/10)*delta_(5/2) in y=u^2",
+      "D": 2,
+      "polynomial": "109*w**2/1920 + 19*w/40 + 1",
+      "discriminant": "-7/4800",
+      "conclusion": "Positive scale mixtures of the hyperbolic kernels need not be hyperbolic."
+    },
+    "gamma_mixing": {
+      "law": "Y~Gamma(alpha,theta), E[Y^j]=theta^j*(alpha)_j",
+      "polynomial": "P_(D,alpha,theta)(w)={}_2F_1(-D,alpha;1/2;-theta*w/4)"
+    },
+    "half_integer_factorization": {
+      "parameters": "alpha=m+1/2, m in Z_(>=0), X=-theta*w/4",
+      "D_ge_m": "P=(1-X)^(D-m)*{}_2F_1(-m,D+1/2;1/2;X), the cofactor being proportional to P_m^(-1/2,D-m)(1-2X)",
+      "D_lt_m": "P=D!/(1/2)_D*P_D^(-1/2,m-D)(1-2X)",
+      "root_theorem": "All D roots are real and negative: min(D,m) are simple in (-4/theta,0), and w=-4/theta has multiplicity max(D-m,0)."
+    },
+    "log_concavity_countermodel": {
+      "mixing_density": "exp(-y) on y>=0 (Gamma(1,1), log-concave)",
+      "D": 3,
+      "polynomial": "w**3/20 + w**2/2 + 3*w/2 + 1",
+      "discriminant": "-1/200",
+      "conclusion": "Log-concavity of the squared-scale density does not ensure Jensen hyperbolicity."
+    },
+    "xi_specific_handoff": "Exploit the actual pushforward density W_lambda(sqrt(y))/(2*sqrt(y)) through a half-integer Gamma/Laguerre expansion with a proved common-interlacing, total-positive connection, or direct variation-diminishing rule; positivity of the expansion coefficients alone is insufficient.",
+    "checks": {
+      "kernel_checks": [
+        {
+          "D": 1,
+          "degree": 1,
+          "passed": true
+        },
+        {
+          "D": 2,
+          "degree": 2,
+          "passed": true
+        },
+        {
+          "D": 3,
+          "degree": 3,
+          "passed": true
+        },
+        {
+          "D": 4,
+          "degree": 4,
+          "passed": true
+        },
+        {
+          "D": 5,
+          "degree": 5,
+          "passed": true
+        },
+        {
+          "D": 6,
+          "degree": 6,
+          "passed": true
+        },
+        {
+          "D": 7,
+          "degree": 7,
+          "passed": true
+        },
+        {
+          "D": 8,
+          "degree": 8,
+          "passed": true
+        }
+      ],
+      "gamma_checks": [
+        {
+          "D": 1,
+          "alpha": "7/5",
+          "passed": true
+        },
+        {
+          "D": 2,
+          "alpha": "7/5",
+          "passed": true
+        },
+        {
+          "D": 3,
+          "alpha": "7/5",
+          "passed": true
+        },
+        {
+          "D": 4,
+          "alpha": "7/5",
+          "passed": true
+        },
+        {
+          "D": 5,
+          "alpha": "7/5",
+          "passed": true
+        },
+        {
+          "D": 6,
+          "alpha": "7/5",
+          "passed": true
+        }
+      ],
+      "half_integer_checks": [
+        {
+          "m": 0,
+          "D": 1,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 1,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 2,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 2,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 3,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 3,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 4,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 4,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 5,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 5,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 6,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 6,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 7,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 7,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 8,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 8,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 9,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 9,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 10,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 10,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 1,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 2,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 1,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 3,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 2,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 4,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 3,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 5,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 4,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 6,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 5,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 7,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 6,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 8,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 7,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 9,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 8,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 10,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 9,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 1,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 2,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 3,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 1,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 4,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 2,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 5,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 3,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 6,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 4,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 7,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 5,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 8,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 6,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 9,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 7,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 10,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 8,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 1,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 2,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 3,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 4,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 1,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 5,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 2,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 6,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 3,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 7,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 4,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 8,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 5,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 9,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 6,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 10,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 7,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 1,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 2,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 3,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 4,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 5,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 1,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 6,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 2,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 7,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 3,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 8,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 4,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 9,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 5,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 10,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 6,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 1,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 2,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 3,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 4,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 5,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 5,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 6,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 1,
+          "interior_root_count": 5,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 7,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 2,
+          "interior_root_count": 5,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 8,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 3,
+          "interior_root_count": 5,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 9,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 4,
+          "interior_root_count": 5,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 10,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 5,
+          "interior_root_count": 5,
+          "passed": true
+        }
+      ]
+    }
+  },
+  "rows": [
+    {
+      "id": "lsmg_01_jensen_moment_integral",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "Each unshifted Jensen polynomial is an integral of a universal finite scale kernel against the positive Phi heat-flow weight.",
+      "formula": "J_D(w)=integral_0^infinity W_lambda(u)K_D(w,u^2)du, K_D(w,y)=sum_(j=0)^D (D)_j*(w*y)^j/(2j)!",
+      "proof_boundary": "Unshifted Jensen window n=0; no hyperbolicity conclusion.",
+      "diagnostics": null
+    },
+    {
+      "id": "lsmg_02_kummer_kernel",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The finite scale kernel is a terminating confluent hypergeometric polynomial.",
+      "formula": "K_D(w,y)={}_1F_1(-D;1/2;-w*y/4)",
+      "proof_boundary": "Finite algebraic identity.",
+      "diagnostics": null
+    },
+    {
+      "id": "lsmg_03_laguerre_kernel",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The same kernel is a rescaled generalized Laguerre polynomial with parameter -1/2.",
+      "formula": "K_D(w,y)=D!/(1/2)_D*L_D^(-1/2)(-w*y/4)",
+      "proof_boundary": "Finite algebraic identity.",
+      "diagnostics": null
+    },
+    {
+      "id": "lsmg_04_single_scale_hyperbolicity",
+      "role": "exact_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Every nonzero fixed-scale kernel has only simple negative roots.",
+      "formula": "For y>0, K_D(w,y) has D simple roots w=-4*ell_(D,r)/y<0, where ell_(D,r) are the positive roots of L_D^(-1/2).",
+      "proof_boundary": "Individual kernels only; integration is not covered.",
+      "diagnostics": null
+    },
+    {
+      "id": "lsmg_05_positive_mixture_guard",
+      "role": "exact_countermodel",
+      "readiness": "guard_validated",
+      "claim": "Positive integration of the fixed-scale kernels does not preserve real-rootedness in general.",
+      "formula": "D=2 two-atom discriminant=-7/4800",
+      "proof_boundary": "Abstract positive measure in y, not the Xi density.",
+      "diagnostics": {
+        "measure": "(9/10)*delta_(1/4)+(1/10)*delta_(5/2) in y=u^2",
+        "D": 2,
+        "polynomial": "109*w**2/1920 + 19*w/40 + 1",
+        "discriminant": "-7/4800",
+        "conclusion": "Positive scale mixtures of the hyperbolic kernels need not be hyperbolic."
+      }
+    },
+    {
+      "id": "lsmg_06_gamma_reduction",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "Gamma scale mixing converts the Jensen kernel into an explicit Gauss hypergeometric polynomial.",
+      "formula": "P_(D,alpha,theta)(w)={}_2F_1(-D,alpha;1/2;-theta*w/4)",
+      "proof_boundary": "Gamma mixing laws only.",
+      "diagnostics": null
+    },
+    {
+      "id": "lsmg_07_half_integer_factorization",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "At half-integer Gamma shape the polynomial factors exactly into an endpoint power and a Jacobi polynomial.",
+      "formula": "P=(1-X)^(D-m)*{}_2F_1(-m,D+1/2;1/2;X), the cofactor being proportional to P_m^(-1/2,D-m)(1-2X); P=D!/(1/2)_D*P_D^(-1/2,m-D)(1-2X)",
+      "proof_boundary": "alpha=m+1/2 only.",
+      "diagnostics": null
+    },
+    {
+      "id": "lsmg_08_half_integer_all_degree_theorem",
+      "role": "exact_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Every half-integer Gamma scale law produces a hyperbolic Jensen polynomial in every degree.",
+      "formula": "All D roots are real and negative: min(D,m) are simple in (-4/theta,0), and w=-4/theta has multiplicity max(D-m,0).",
+      "proof_boundary": "Solvable benchmark family, not a representation theorem for Xi.",
+      "diagnostics": [
+        {
+          "m": 0,
+          "D": 1,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 1,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 2,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 2,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 3,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 3,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 4,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 4,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 5,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 5,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 6,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 6,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 7,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 7,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 8,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 8,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 9,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 9,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 0,
+          "D": 10,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 10,
+          "interior_root_count": 0,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 1,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 2,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 1,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 3,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 2,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 4,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 3,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 5,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 4,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 6,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 5,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 7,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 6,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 8,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 7,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 9,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 8,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 1,
+          "D": 10,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 9,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 1,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 2,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 3,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 1,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 4,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 2,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 5,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 3,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 6,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 4,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 7,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 5,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 8,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 6,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 9,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 7,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 2,
+          "D": 10,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 8,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 1,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 2,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 3,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 4,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 1,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 5,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 2,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 6,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 3,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 7,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 4,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 8,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 5,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 9,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 6,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 3,
+          "D": 10,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 7,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 1,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 2,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 3,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 4,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 5,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 1,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 6,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 2,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 7,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 3,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 8,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 4,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 9,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 5,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 4,
+          "D": 10,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 6,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 1,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 1,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 2,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 2,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 3,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 3,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 4,
+          "branch": "direct-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 4,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 5,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 0,
+          "interior_root_count": 5,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 6,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 1,
+          "interior_root_count": 5,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 7,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 2,
+          "interior_root_count": 5,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 8,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 3,
+          "interior_root_count": 5,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 9,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 4,
+          "interior_root_count": 5,
+          "passed": true
+        },
+        {
+          "m": 5,
+          "D": 10,
+          "branch": "Euler-Jacobi",
+          "endpoint_multiplicity": 5,
+          "interior_root_count": 5,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "id": "lsmg_09_log_concavity_guard",
+      "role": "exact_countermodel",
+      "readiness": "guard_validated",
+      "claim": "Even a log-concave squared-scale density can destroy Jensen hyperbolicity.",
+      "formula": "Gamma(1,1), D=3, discriminant=-1/200",
+      "proof_boundary": "Generic log-concavity obstruction, not an Xi counterexample.",
+      "diagnostics": {
+        "mixing_density": "exp(-y) on y>=0 (Gamma(1,1), log-concave)",
+        "D": 3,
+        "polynomial": "w**3/20 + w**2/2 + 3*w/2 + 1",
+        "discriminant": "-1/200",
+        "conclusion": "Log-concavity of the squared-scale density does not ensure Jensen hyperbolicity."
+      }
+    },
+    {
+      "id": "lsmg_10_xi_gamma_laguerre_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "A closing kernel route needs an Xi-specific Gamma/Laguerre expansion together with a zero-preserving connection theorem stronger than positivity.",
+      "formula": "Exploit the actual pushforward density W_lambda(sqrt(y))/(2*sqrt(y)) through a half-integer Gamma/Laguerre expansion with a proved common-interlacing, total-positive connection, or direct variation-diminishing rule; positivity of the expansion coefficients alone is insufficient.",
+      "proof_boundary": "Open all-degree theorem; not a proof of PF-infinity, RH, or Lambda <= 0.",
+      "diagnostics": null
+    }
+  ]
+}

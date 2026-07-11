@@ -1,0 +1,272 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout.py",
+  "invariants": [
+    "No row is ready_to_apply for the full intervalization target.",
+    "Plain interval-Riemann panel hulls are explicitly rejected here.",
+    "The compact interval 0<=y<=200 remains open.",
+    "The far-tail split is imported as support only, not as a quadrature-remainder theorem.",
+    "All-row coverage, rounding aggregation, and grid-to-collar coverage remain separate.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout",
+  "matrix_rows": [
+    {
+      "claim": "The far-tail split reduces the independent interval-integration route for the worst row to the compact Gamma interval 0<=y<=200.",
+      "diagnostics": {
+        "compact_interval": "0<=y<=200",
+        "far_tail_split_imported": true,
+        "far_tail_split_y": 200
+      },
+      "gap": null,
+      "id": "nlrgwrcis_01_compact_interval_import",
+      "proof_boundary": "Scope-reduction diagnostic only; not a compact interval-integration proof.",
+      "readiness": "diagnostic_only",
+      "role": "scope_reduction",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.md"
+      ]
+    },
+    {
+      "claim": "Six raw Arb panel hulls evaluate the finite n<=30 cancellation-reduced value and derivative cores on 0<=y<=200 and accumulate Gamma-mass-weighted interval widths.",
+      "diagnostics": {
+        "derivative_raw_interval_width_bound": "0.6094311540819450756312705442967424541098",
+        "endpoint_inflation_panel_count": 1,
+        "panel_count": 6,
+        "panels": [
+          "0<=y<=1",
+          "1<=y<=5",
+          "5<=y<=20",
+          "20<=y<=50",
+          "50<=y<=100",
+          "100<=y<=200"
+        ],
+        "value_raw_interval_width_bound": "0.9326768489129334646963769417351161026927"
+      },
+      "gap": null,
+      "id": "nlrgwrcis_02_raw_panel_width_scout",
+      "proof_boundary": "Raw interval-width scout only; it measures dependency/cancellation loss and does not certify an integral value.",
+      "readiness": "diagnostic_only",
+      "role": "arb_panel_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_part_weighted_sum_interval_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md"
+      ]
+    },
+    {
+      "claim": "Plain interval-Riemann panel hulls close the compact-interval source below the quadrature caps.",
+      "diagnostics": {
+        "derivative_raw_width_to_cap_ratio_upper": "42790317247256500123688575487970253060.03",
+        "derivative_unscaled_expectation_error_cap": "1.424226772053247012E-38",
+        "plain_interval_riemann_rejected": true,
+        "value_raw_width_to_cap_ratio_upper": "1.375217360851530223059919868593402789065E+39",
+        "value_unscaled_expectation_error_cap": "6.782032247872604818E-40"
+      },
+      "gap": "The raw interval-width envelope is many orders of magnitude larger than the required unscaled caps, so ordinary panel hulls do not control the cancellation-reduced integral.",
+      "id": "nlrgwrcis_03_width_vs_quadrature_caps",
+      "proof_boundary": "Rejected diagnostic only; not a quadrature-remainder theorem or interval certificate.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md"
+      ]
+    },
+    {
+      "claim": "The widest compact-panel contribution comes from the central Gamma-mass panels, not the already retired far tail.",
+      "diagnostics": {
+        "panel_rows": [
+          {
+            "derivative_core_ball": "0E-1",
+            "derivative_core_width_upper": "0.03298251435626298189163208007812500000000",
+            "derivative_width_contribution_upper": "5.328509975315962112930200849254519130788E-23",
+            "endpoint_inflation_touches_negative_x": true,
+            "gamma_mass_upper": "1.615556023946410350198438323031186444683E-21",
+            "left": 0,
+            "panel": "0<=y<=1",
+            "proof_boundary": "Raw interval-width diagnostic for this panel only; it is not an interval integration proof.",
+            "right": 1,
+            "value_core_ball": "0E+0",
+            "value_core_width_upper": "0.3595762043260037899017333984375000000000",
+            "value_width_contribution_upper": "5.809155029666607197557704298765593260498E-22",
+            "x_interval_lower": "-1.19325704872608185E-11",
+            "x_interval_upper": "0.0100000000119325705"
+          },
+          {
+            "derivative_core_ball": "0E-1",
+            "derivative_core_width_upper": "0.09985944768413901329040527343750000000000",
+            "derivative_width_contribution_upper": "3.858299397753102375430510977995722917406E-9",
+            "endpoint_inflation_touches_negative_x": false,
+            "gamma_mass_upper": "3.863729959690061525176632158032112339961E-8",
+            "left": 1,
+            "panel": "1<=y<=5",
+            "proof_boundary": "Raw interval-width diagnostic for this panel only; it is not an interval integration proof.",
+            "right": 5,
+            "value_core_ball": "0E+0",
+            "value_core_width_upper": "0.4504944151267409324645996093750000000000",
+            "value_width_contribution_upper": "1.740588768398240585980982934543578904802E-8",
+            "x_interval_lower": "0.00999999997991190827",
+            "x_interval_upper": "0.0223606797950859887"
+          },
+          {
+            "derivative_core_ball": "0E+0",
+            "derivative_core_width_upper": "0.3901838674210011959075927734375000000000",
+            "derivative_width_contribution_upper": "0.1552293531211420945747618740629063530600",
+            "endpoint_inflation_touches_negative_x": false,
+            "gamma_mass_upper": "0.3978364204218942906769349162739347479186",
+            "left": 5,
+            "panel": "5<=y<=20",
+            "proof_boundary": "Raw interval-width diagnostic for this panel only; it is not an interval integration proof.",
+            "right": 20,
+            "value_core_ball": "0E+0",
+            "value_core_width_upper": "0.8485333221033215522766113281250000000000",
+            "value_width_contribution_upper": "0.3375774594742836805110938868057898123875",
+            "x_interval_lower": "0.0223606797429772347",
+            "x_interval_upper": "0.0447213595820164561"
+          },
+          {
+            "derivative_core_ball": "0E+0",
+            "derivative_core_width_upper": "0.7542815152555704116821289062500000000000",
+            "derivative_width_contribution_upper": "0.4541993590418106151177214083563803470629",
+            "endpoint_inflation_touches_negative_x": false,
+            "gamma_mass_upper": "0.6021615933248953195048286792207639078101",
+            "left": 20,
+            "panel": "20<=y<=50",
+            "proof_boundary": "Raw interval-width diagnostic for this panel only; it is not an interval integration proof.",
+            "right": 50,
+            "value_core_ball": "0E+0",
+            "value_core_width_upper": "0.9882682999595999717712402343750000000000",
+            "value_width_contribution_upper": "0.5950972141361582997163931516423060293295",
+            "x_interval_lower": "0.0447213595264468087",
+            "x_interval_upper": "0.0707106781422037376"
+          },
+          {
+            "derivative_core_ball": "0E+0",
+            "derivative_core_width_upper": "1.251818019896745681762695312500000000000",
+            "derivative_width_contribution_upper": "2.438060692968184464214641335300555249160E-6",
+            "endpoint_inflation_touches_negative_x": false,
+            "gamma_mass_upper": "1.947615910792915584704309543580072982801E-6",
+            "left": 50,
+            "panel": "50<=y<=100",
+            "proof_boundary": "Raw interval-width diagnostic for this panel only; it is not an interval integration proof.",
+            "right": 100,
+            "value_core_ball": "0E+0",
+            "value_core_width_upper": "1.107968255877494812011718750000000000000",
+            "value_width_contribution_upper": "2.157896603800485204259400391866842573569E-6",
+            "x_interval_lower": "0.0707106781014712724",
+            "x_interval_upper": "0.100000000017183480"
+          },
+          {
+            "derivative_core_ball": "0E+1",
+            "derivative_core_width_upper": "2.773598883301019668579101562500000000000",
+            "derivative_width_contribution_upper": "1.167386705856315814823170099920286565848E-21",
+            "endpoint_inflation_touches_negative_x": false,
+            "gamma_mass_upper": "4.208924054897735270018053456807303805193E-22",
+            "left": 100,
+            "panel": "100<=y<=200",
+            "proof_boundary": "Raw interval-width diagnostic for this panel only; it is not an interval integration proof.",
+            "right": 200,
+            "value_core_ball": "0E+0",
+            "value_core_width_upper": "1.660444723442196846008300781250000000000",
+            "value_width_contribution_upper": "6.988685738323879775916703723910106724447E-22",
+            "x_interval_lower": "0.0999999999586970008",
+            "x_interval_upper": "0.141421356278612504"
+          }
+        ]
+      },
+      "gap": null,
+      "id": "nlrgwrcis_04_panel_samples",
+      "proof_boundary": "Panel-local diagnostics only; no finite grid, collar, or RH claim follows.",
+      "readiness": "diagnostic_only",
+      "role": "arb_panel_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.md"
+      ]
+    },
+    {
+      "claim": "A viable compact-interval route should replace raw hulls by local Taylor or Chebyshev models, then integrate coefficient balls against exact Gamma-weighted panel moments.",
+      "diagnostics": {
+        "recommended_upgrade": "Use local Taylor or Chebyshev panel models for the cancellation-reduced core, with Arb coefficient balls and exact Gamma-weighted panel moments."
+      },
+      "gap": null,
+      "id": "nlrgwrcis_05_taylor_chebyshev_upgrade",
+      "proof_boundary": "Live route specification only; no local model certificate is produced here.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "The first panel touches y=0; the scout avoids taking square roots of midpoint-radius balls that slightly cross below zero, and records endpoint inflation explicitly.",
+      "diagnostics": {
+        "endpoint_inflation_panel_count": 1,
+        "inflation_explanation": "Hull endpoints in python-flint are outward rounded; for y=0 this can introduce a tiny negative x lower endpoint. The scout evaluates Phi on the x hull rather than taking sqrt of a sign-ambiguous v ball."
+      },
+      "gap": null,
+      "id": "nlrgwrcis_06_endpoint_hygiene",
+      "proof_boundary": "Numerical hygiene diagnostic only; not an analytic endpoint theorem.",
+      "readiness": "diagnostic_only",
+      "role": "interval_hygiene",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_part_weighted_sum_interval_certificate.md"
+      ]
+    },
+    {
+      "claim": "A promoted compact-interval certificate must beat the unscaled caps, compose with the far-tail split, and remain separate from all-row, rounding, and grid-to-collar coverage.",
+      "diagnostics": null,
+      "gap": null,
+      "id": "nlrgwrcis_07_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a finite-grid certificate, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Worst-row compact-interval integration scout only. It imports the far-tail split and diagnoses raw Arb panel widths on 0<=y<=200, but it does not prove a compact interval-integration certificate, does not prove a quadrature-remainder theorem, does not aggregate rounding, does not cover all rows or quadrature orders, does not prove a finite-grid interval certificate, does not prove a uniform collar theorem, and does not prove RH or Lambda <= 0.",
+  "source_cancellation_reduced_grid_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_far_tail_split_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.md",
+  "source_far_tail_split_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.json",
+  "source_finite_part_weighted_sum_interval_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_part_weighted_sum_interval_certificate.md",
+  "source_intervalization_target": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+  "source_quadrature_remainder_route_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.json",
+  "source_quadrature_remainder_route_matrix": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "worst-row compact-interval integration scout",
+  "summary": {
+    "T": 10000,
+    "alpha": "20.5",
+    "compact_interval": "0<=y<=200",
+    "derivative_raw_interval_width_bound": "0.6094311540819450756312705442967424541098",
+    "derivative_raw_width_to_cap_ratio_upper": "42790317247256500123688575487970253060.03",
+    "derivative_unscaled_expectation_error_cap": "1.424226772053247012E-38",
+    "endpoint_inflation_panel_count": 1,
+    "far_tail_split_imported": true,
+    "far_tail_split_y": 200,
+    "index": 21,
+    "main_finding": "A six-panel raw Arb interval scout on the remaining compact interval 0<=y<=200 is far too wide: the value and derivative width-to-cap ratios are respectively 1.375217360851530223059919868593402789065E+39 and 42790317247256500123688575487970253060.03. Plain interval-Riemann hulls are therefore rejected; the live route is a local Taylor/Chebyshev panel model with exact Gamma-weighted moments. This does not close the compact interval.",
+    "matrix_rows": 7,
+    "panel_count": 6,
+    "phi_term_count": 30,
+    "plain_interval_riemann_rejected": true,
+    "polynomial_M": 20,
+    "precision_bits": 512,
+    "quadrature_ratio_radius_cap": "0.0000010",
+    "ratio_cutoff_n": 80,
+    "ready_to_apply_rows": 0,
+    "recommended_upgrade": "Use local Taylor or Chebyshev panel models for the cancellation-reduced core, with Arb coefficient balls and exact Gamma-weighted panel moments.",
+    "target_closing": false,
+    "u": "1/10000",
+    "value_raw_interval_width_bound": "0.9326768489129334646963769417351161026927",
+    "value_raw_width_to_cap_ratio_upper": "1.375217360851530223059919868593402789065E+39",
+    "value_unscaled_expectation_error_cap": "6.782032247872604818E-40"
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_endpoint_parity_repair_matrix.py",
+  "date": "2026-07-08",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_endpoint_parity_repair_matrix.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "Low-order near-evenness is not promoted to endpoint analyticity.",
+    "The finite Phi truncation is not treated as exactly even.",
+    "A compact y-plane interpolation theorem must repair the y=0 endpoint branch.",
+    "The accepted repairs are exact infinite-even-core plus tail charge, or an x-variable endpoint-panel certificate.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_endpoint_parity_repair_matrix",
+  "matrix_rows": [
+    {
+      "claim": "The first compact panel touches y=0, so a y-plane interpolation-remainder theorem for Phi(sqrt(y/T)) must supply exact evenness/analyticity or avoid the branch by changing variables.",
+      "diagnostics": {
+        "endpoint_problem": "A y-panel Bernstein proof for finite Phi(sqrt(y/T)) needs exact evenness in x at y=0; finite-truncation odd Taylor coefficients are tail-sized but not a theorem of exact evenness."
+      },
+      "gap": null,
+      "id": "nlrgeprm_01_endpoint_branch_obligation",
+      "proof_boundary": "Route constraint only; no endpoint analytic-continuation theorem is proved.",
+      "readiness": "open_requirement",
+      "role": "route_constraint",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_interpolation_remainder_route_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_part_weighted_sum_interval_certificate.md"
+      ]
+    },
+    {
+      "claim": "Arb power-series expansion of the finite n<=30 Phi truncation at x=0 finds tiny but nonzero low-order odd Taylor coefficients, consistent with parity defect living in the omitted tail.",
+      "diagnostics": {
+        "finite_c0_ball": "[0.44669690046712344408698466705470911322042436709482497473085188173095540897945724 +/- 4.28E-81]",
+        "first_odd_coefficient_abs_upper": "1.5013918057273630212637957520005850517148059822056E-1300",
+        "max_low_order_odd_abs_upper": "1.5394049948039318674157069296860766261840406690307E-1255",
+        "max_low_order_odd_degree": 15,
+        "odd_taylor_rows": [
+          {
+            "degree": 1,
+            "normalized_abs_upper": "3.3610974335333771338009276426908465616419385949398E-1300",
+            "odd_coefficient_abs_upper": "1.5013918057273630212637957520005850517148059822056E-1300",
+            "odd_coefficient_ball": "[1.5013918057273630212637957520005850517148059822056191253681019051690858324498000E-1300 +/- 1.88E-1380]",
+            "proof_boundary": "Finite-truncation low-order odd Taylor coefficient only; not an all-order parity theorem."
+          },
+          {
+            "degree": 3,
+            "normalized_abs_upper": "8.1492244829448065419853034852974827427812665567137E-1293",
+            "odd_coefficient_abs_upper": "3.6402333177422417605157097846505247017713474376942E-1293",
+            "odd_coefficient_ball": "[3.6402333177422417605157097846505247017713474376941570123473295012375634303872206E-1293 +/- 1.17E-1373]",
+            "proof_boundary": "Finite-truncation low-order odd Taylor coefficient only; not an all-order parity theorem."
+          },
+          {
+            "degree": 5,
+            "normalized_abs_upper": "5.9196440425262168998525180553132723967562665310977E-1286",
+            "odd_coefficient_abs_upper": "2.6442866456651337708055774371741139265073336453880E-1286",
+            "odd_coefficient_ball": "[2.6442866456651337708055774371741139265073336453879619776143081873791200203575133E-1286 +/- 2.61E-1366]",
+            "proof_boundary": "Finite-truncation low-order odd Taylor coefficient only; not an all-order parity theorem."
+          },
+          {
+            "degree": 7,
+            "normalized_abs_upper": "2.0449265738564684094432368531592424927767138336319E-1279",
+            "odd_coefficient_abs_upper": "9.1346236222453862753105577054654767907510573019252E-1280",
+            "odd_coefficient_ball": "[9.1346236222453862753105577054654767907510573019252419994444557321059935956986991E-1280 +/- 2.34E-1360]",
+            "proof_boundary": "Finite-truncation low-order odd Taylor coefficient only; not an all-order parity theorem."
+          },
+          {
+            "degree": 9,
+            "normalized_abs_upper": "4.1152666152961334134122383885311720286863057552644E-1273",
+            "odd_coefficient_abs_upper": "1.8382768416486128924309833265473645449222806531567E-1273",
+            "odd_coefficient_ball": "[1.8382768416486128924309833265473645449222806531567364355478002917181563995232004E-1273 +/- 1.08E-1353]",
+            "proof_boundary": "Finite-truncation low-order odd Taylor coefficient only; not an all-order parity theorem."
+          },
+          {
+            "degree": 11,
+            "normalized_abs_upper": "5.4135058721647093880132054889305968790988989433733E-1267",
+            "odd_coefficient_abs_upper": "2.4181962937565474806170908414451027274599109597727E-1267",
+            "odd_coefficient_ball": "[2.4181962937565474806170908414451027274599109597726640917766962849383842509157347E-1267 +/- 2.22E-1347]",
+            "proof_boundary": "Finite-truncation low-order odd Taylor coefficient only; not an all-order parity theorem."
+          },
+          {
+            "degree": 13,
+            "normalized_abs_upper": "5.0147250267737304574005660913282057052890360282893E-1261",
+            "odd_coefficient_abs_upper": "2.2400621261547380224121562980549042786895815434925E-1261",
+            "odd_coefficient_ball": "[2.2400621261547380224121562980549042786895815434925142508305625773474675271278958E-1261 +/- 7.08E-1342]",
+            "proof_boundary": "Finite-truncation low-order odd Taylor coefficient only; not an all-order parity theorem."
+          },
+          {
+            "degree": 15,
+            "normalized_abs_upper": "3.4461958280752183487438861717159644648360127954165E-1255",
+            "odd_coefficient_abs_upper": "1.5394049948039318674157069296860766261840406690307E-1255",
+            "odd_coefficient_ball": "[1.5394049948039318674157069296860766261840406690307139467671327915483737439670043E-1255 +/- 1.73E-1335]",
+            "proof_boundary": "Finite-truncation low-order odd Taylor coefficient only; not an all-order parity theorem."
+          }
+        ],
+        "phi_term_count": 30,
+        "series_order": 15
+      },
+      "gap": null,
+      "id": "nlrgeprm_02_finite_truncation_odd_taylor_audit",
+      "proof_boundary": "Low-order finite-truncation parity diagnostic only; not an all-order evenness theorem.",
+      "readiness": "diagnostic_only",
+      "role": "arb_series_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_part_weighted_sum_interval_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_grid_certificate.md"
+      ]
+    },
+    {
+      "claim": "The normalized low-order odd Taylor contribution through degree 15 is far below numerical budgets on the first panel and on the whole compact interval, but this finite-order sum is not a proof.",
+      "diagnostics": {
+        "compact_low_order_normalized_odd_partial_sum_upper": "6.2387347102785735263519242935701452522435065420123E-1268",
+        "compact_x_max": "0.14142135623730950488016887242096980785696718753769",
+        "first_panel_low_order_normalized_odd_partial_sum_upper": "3.4968885647053311252358566122466130159385287853700E-1285",
+        "first_panel_x_max": "0.010000000000000000000000000000000000000000000000000"
+      },
+      "gap": null,
+      "id": "nlrgeprm_03_low_order_branch_size_scout",
+      "proof_boundary": "Finite-order size scout only; it does not bound all odd coefficients or the analytic remainder.",
+      "readiness": "diagnostic_only",
+      "role": "arb_series_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_interpolation_remainder_route_matrix.md"
+      ]
+    },
+    {
+      "claim": "One admissible repair is to prove/use exact evenness of the infinite theta kernel, work with the resulting analytic y-core, and charge finite-truncation parity defect to the Phi-tail certificate.",
+      "diagnostics": {
+        "infinite_even_core_route": "Use the theta functional equation to split the infinite Phi kernel into an exact even analytic core in x, hence an analytic core in y=x^2, and charge the finite truncation/tail parity defect to the existing Phi-tail source.",
+        "phi_tail_certificate_rows": 6,
+        "phi_tail_grid_tail_sources": 3
+      },
+      "gap": null,
+      "id": "nlrgeprm_04_infinite_even_core_tail_charge_route",
+      "proof_boundary": "Live repair route only; this artifact does not prove the exact even-kernel split or tail charge.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_grid_certificate.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_grid_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "A second admissible repair is to certify the first panel directly in x, using y=T*x^2 and the transformed Gamma density, then hand off to y-panel Bernstein/Taylor models away from zero.",
+      "diagnostics": {
+        "x_variable_endpoint_route": "Alternatively handle the first panel in x with y=T*x^2 and Gamma density 2*T^(alpha+1)*x^(2*alpha+1)*exp(-T*x^2)/Gamma(alpha+1), avoiding a y-plane branch theorem."
+      },
+      "gap": null,
+      "id": "nlrgeprm_05_x_variable_endpoint_route",
+      "proof_boundary": "Live endpoint route only; no x-panel quadrature or Taylor-model certificate is produced.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_interpolation_remainder_route_matrix.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md"
+      ]
+    },
+    {
+      "claim": "Near-zero low-order odd coefficients prove finite Phi(sqrt(y/T)) is analytic in y at the endpoint.",
+      "diagnostics": {
+        "near_evenness_is_proof": false
+      },
+      "gap": "Near-evenness and low-order cancellation are calibration evidence. A referee-usable proof needs an exact even-kernel theorem with tail charges or an x-variable endpoint certificate.",
+      "id": "nlrgeprm_06_near_evenness_promotion_rejected",
+      "proof_boundary": "Rejected promotion only; near-evenness is not an endpoint analyticity proof.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_interpolation_remainder_route_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_formal_tail_obstruction_scout.md"
+      ]
+    },
+    {
+      "claim": "A promoted compact-interval interpolation theorem must choose one endpoint repair and validate it before applying y-plane Bernstein/Taylor remainders to the panel touching y=0.",
+      "diagnostics": {
+        "ready_to_apply_rows": 0,
+        "target_closing": false
+      },
+      "gap": null,
+      "id": "nlrgeprm_07_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a compact certificate, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Endpoint parity-repair route matrix only. It audits low-order odd Taylor coefficients of the finite Phi truncation and records two admissible endpoint repair routes, but it does not prove exact evenness of the infinite theta kernel, does not certify the finite-truncation tail charge, does not produce an x-variable endpoint-panel certificate, does not prove an interpolation remainder theorem, does not prove a finite-grid interval certificate, does not prove a uniform collar theorem, and does not prove RH or Lambda <= 0.",
+  "source_arb_chebyshev_interpolant_moment_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_arb_chebyshev_interpolant_moment_scout.md",
+  "source_compact_interval_integration_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_finite_part_weighted_sum_interval_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_part_weighted_sum_interval_certificate.md",
+  "source_formal_tail_obstruction": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_formal_tail_obstruction_scout.md",
+  "source_interpolation_remainder_route_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_interpolation_remainder_route_matrix.json",
+  "source_interpolation_remainder_route_matrix": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_interpolation_remainder_route_matrix.md",
+  "source_intervalization_target": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+  "source_phi_tail_grid_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_grid_certificate.md",
+  "source_phi_tail_grid_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_phi_tail_grid_certificate.json",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "endpoint parity-repair route matrix",
+  "summary": {
+    "T": 10000,
+    "compact_interval": "0<=y<=200",
+    "compact_low_order_normalized_odd_partial_sum_upper": "6.2387347102785735263519242935701452522435065420123E-1268",
+    "compact_x_max": "0.14142135623730950488016887242096980785696718753769",
+    "finite_c0_lower": "0.44669690046712344408698466705470911322042436709482",
+    "first_odd_coefficient_abs_upper": "1.5013918057273630212637957520005850517148059822056E-1300",
+    "first_panel_low_order_normalized_odd_partial_sum_upper": "3.4968885647053311252358566122466130159385287853700E-1285",
+    "first_panel_x_max": "0.010000000000000000000000000000000000000000000000000",
+    "heaviest_panel": "20<=y<=50",
+    "live_route_rows": 2,
+    "main_finding": "The endpoint parity-repair matrix makes the first-panel branch obligation explicit. For the finite n<=30 Phi truncation, Arb series coefficients through odd degree 15 are tail-sized rather than exactly zero: the first odd coefficient has absolute upper 1.5013918057273630212637957520005850517148059822056E-1300, and the largest recorded low-order odd coefficient is degree 15 with upper 1.5394049948039318674157069296860766261840406690307E-1255. This supports, but does not prove, the correct repair: either use exact evenness of the infinite theta kernel plus a certified tail charge, or handle the endpoint panel in the x variable.",
+    "matrix_rows": 7,
+    "max_low_order_odd_abs_upper": "1.5394049948039318674157069296860766261840406690307E-1255",
+    "max_low_order_odd_degree": 15,
+    "near_evenness_is_proof": false,
+    "odd_taylor_row_count": 8,
+    "phi_term_count": 30,
+    "precision_bits": 8192,
+    "ready_to_apply_rows": 0,
+    "rejected_route_rows": 1,
+    "series_order": 15,
+    "target_closing": false
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "kind": "jensen_window_pf_positive_spectral_moment_obstruction",
+  "date": "2026-07-06",
+  "parent_positive_readout_row": "pr_01_positive_spectral_transform",
+  "parent_fit_row": "or_06_positive_spectral_measure_after_transform",
+  "parent_route_row": "rp_09_signed_or_modified_continued_fraction",
+  "parent_target": "jwpf_06_sign_regular_to_jensen_pf_conversion",
+  "proof_boundary": "Ordinary positive spectral moment obstruction only; not a proof against nonordinary positive transforms, positive kernels, non-power bases, signed-to-positive conjugate coefficient extractions, Xi/Phi-specific identities, Schur positivity, RH, and not Lambda <= 0.",
+  "objects": {
+    "H(t)": "1 + g_1*t + ... + g_d*t^d",
+    "E(t)": "1 / H(-t)",
+    "mu_m": "[t^m]E(t)",
+    "ordinary_moment_hankel": "Delta_r=det(mu_{i+j}) for 0<=i,j<r",
+    "positive_measure_requirement": "If mu_m are ordinary moments of a positive measure, every finite Hankel matrix (mu_{i+j}) is positive semidefinite, so Delta_r>=0 for every r."
+  },
+  "symbolic_rows": [
+    {
+      "id": "psm_01_degree2_hankel_obstruction",
+      "statement": "For H(t)=1+g_1*t+g_2*t^2+..., E(t)=1/H(-t) has mu_0=1, mu_1=g_1, and mu_2=g_1^2-g_2, hence Delta_2=mu_0*mu_2-mu_1^2=-g_2.",
+      "consequence": "For any window with g_2>0, the ordinary moment Hankel matrix [[mu_0,mu_1],[mu_1,mu_2]] is not positive semidefinite.",
+      "proof_boundary": "Exact algebraic obstruction to ordinary positive moment representation only."
+    },
+    {
+      "id": "psm_02_signed_hankel_signature_conflict",
+      "statement": "The signed J-fraction diagnostic records (-1)^(r(r-1)/2) Delta_r>0 on the finite grid; at r=2 this means Delta_2<0.",
+      "consequence": "The finite signed-Hankel signature is structurally incompatible with a positive measure whose ordinary power moments are mu_m.",
+      "proof_boundary": "Finite-grid diagnostic conflict only; not an all-order theorem."
+    },
+    {
+      "id": "psm_03_transform_escape_hatch",
+      "statement": "A positive spectral transform can survive only if it is not the ordinary moment representation mu_m=int x^m dnu(x) of a positive measure.",
+      "consequence": "A surviving transform must use a non-power basis, a positive kernel, a different coefficient extraction, or an Xi/Phi-specific positive functional whose Taylor coefficients are nevertheless exactly mu_m.",
+      "proof_boundary": "Route separation only; no surviving transform is constructed here."
+    }
+  ],
+  "finite_obstruction": {
+    "source_summary": "work/rh_compute/results/jensen_window_pf_reciprocal_signed_j_fraction_scout.json",
+    "source_rows": "work/rh_compute/results/jensen_window_pf_reciprocal_signed_j_fraction_lamgrid_n0_n20_d2_d8_dps520.jsonl",
+    "determinant_order_r": 2,
+    "expected_delta_sign": -1,
+    "finite_delta2_obstruction_rows": 735,
+    "all_checked_delta2_rows_negative": true,
+    "grid": {
+      "lambdas": [
+        "0",
+        "1e-6",
+        "1e-4",
+        "1e-2",
+        "1e-1"
+      ],
+      "shifts": [
+        0,
+        20
+      ],
+      "degrees": [
+        2,
+        8
+      ],
+      "dps": 520
+    }
+  },
+  "route_consequences": [
+    "Reject a positive spectral-measure proof if it claims mu_m are ordinary power moments of a positive measure.",
+    "Keep pr_01 live only for nonordinary positive transforms whose coefficient extraction is exactly E(t) without requiring Hankel PSD for the raw mu_m sequence.",
+    "Keep pr_02 live for Xi/Phi-specific positive kernel identities whose Taylor coefficients are mu_m but whose positivity is not an ordinary moment-Hankel claim."
+  ],
+  "summary": {
+    "symbolic_rows": 3,
+    "finite_delta2_obstruction_rows": 735,
+    "ready_to_apply_rows": 0,
+    "ordinary_positive_moment_route_rejected": true,
+    "nonordinary_positive_transform_route_still_live": true,
+    "target_closing": false,
+    "main_finding": "The ordinary positive spectral moment interpretation of pr_01 is impossible: Delta_2=-g_2 symbolically, and the finite signed-Hankel scout validates 735 checked Delta_2<0 rows. A nonordinary positive spectral transform can remain live only if it is not an ordinary power-moment representation of the raw reciprocal coefficients mu_m."
+  },
+  "invariants": [
+    "The artifact rejects only ordinary positive moment representations mu_m=int x^m dnu(x).",
+    "The artifact does not reject nonordinary positive transforms, positive kernels, or Xi/Phi-specific readouts.",
+    "No row assumes endpoint PF, Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0.",
+    "The artifact does not prove reciprocal coefficient positivity."
+  ]
+}

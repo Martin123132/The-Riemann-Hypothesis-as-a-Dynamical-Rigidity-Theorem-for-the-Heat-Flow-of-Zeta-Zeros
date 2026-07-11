@@ -1,0 +1,73 @@
+{
+  "date": "2026-07-06",
+  "finite_grid": {
+    "all_rows_have_same_length_mixed_sign_witnesses": true,
+    "degrees": [
+      2,
+      8
+    ],
+    "dps": 520,
+    "lambdas": [
+      "0",
+      "1e-6",
+      "1e-4",
+      "1e-2",
+      "1e-1"
+    ],
+    "lengths": [
+      2,
+      8
+    ],
+    "parity_lift_obstruction_ok_rows": 5145,
+    "parity_lift_obstruction_rows": 5145,
+    "row_log": "work\\rh_compute\\results\\jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_lamgrid_n0_n20_d2_d8_m2_m8_dps520.jsonl",
+    "shifts": [
+      0,
+      20
+    ],
+    "source_enclosures": [
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k0_k9.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k10_k20.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k21_k32.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k33_k48.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k49_k64.jsonl"
+    ]
+  },
+  "invariants": [
+    "The scout rejects only global length-parity signs and diagonal sign conjugation for the raw ordinary Motzkin model.",
+    "Every checked row must have a positive H0^m witness and a negative U D H0^(m-2) witness.",
+    "The two witness paths have the same length and endpoints.",
+    "Closed excursion signs are invariant under diagonal sign conjugation.",
+    "The scout is finite evidence and a structural rejection gate, not an all-order theorem."
+  ],
+  "kind": "jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_scout",
+  "proof_boundary": "Global parity/sign-lift obstruction diagnostic only; not a proof against state-space doubled, modified signed continued-fraction, oscillatory, or production-matrix models, not Schur positivity, and not a proof of Lambda <= 0.",
+  "summary": {
+    "main_finding": "On the finite Arb grid, every tested length m=2..8 has same-length closed Motzkin witnesses of both signs: H0^m is positive and U D H0^(m-2) is negative. Therefore no global length-parity sign or diagonal sign conjugation can make the raw ordinary Motzkin expansion manifestly nonnegative; a surviving path route must alter the state space or weights.",
+    "parity_lift_obstruction_rows": 5145,
+    "ready_to_apply_rows": 0,
+    "symbolic_rows": 3,
+    "target_closing": false
+  },
+  "symbolic_rows": [
+    {
+      "id": "same_length_mixed_sign_paths",
+      "proof_boundary": "Rejects a global length-parity sign only for the raw ordinary Motzkin model.",
+      "statement": "For every m>=2, the ordinary Motzkin model contains the same-endpoint excursions H0^m with sign positive and U D H0^(m-2) with sign negative when beta_0>0 and lambda_1<0."
+    },
+    {
+      "id": "global_length_sign_obstruction",
+      "proof_boundary": "Does not reject transformations that change the state space or path weights nontrivially.",
+      "statement": "Because the two witness paths have the same length, multiplying the whole coefficient of t^m by any sign depending only on m keeps one witness path negative."
+    },
+    {
+      "id": "closed_path_conjugation_invariance",
+      "proof_boundary": "Rejects diagonal sign-conjugation fixes only; not a general oscillatory theorem.",
+      "statement": "A diagonal sign conjugation changes open edge signs by endpoint factors, so the sign of any closed excursion path is invariant."
+    }
+  ],
+  "target_route_rows": [
+    "rp_04_companion_or_production_matrix_total_positivity",
+    "rp_09_signed_or_modified_continued_fraction"
+  ]
+}

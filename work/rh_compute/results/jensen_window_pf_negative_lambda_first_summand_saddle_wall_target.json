@@ -1,0 +1,318 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_first_summand_saddle_wall_target.py",
+  "date": "2026-07-10",
+  "diagnostics": {
+    "bracketed_saddle_rows": 9,
+    "exact_geometry": {
+      "bracket_width_margin_ball": "[4.823782474656201059431228146291254119849693535080295403801350135572640 +/- 4.88E-70]",
+      "bracket_width_margin_lower": "4.823782474656201059431228146291254119849693535080295403801350135572639E+0",
+      "transfer_propagation": "(k-1)^6/k^2 increases for k>1, so 1/(4*k^2)>16/(k-1)^6 propagates from k=319.",
+      "upper_saddle_sign_margin_ball": "[11.13045924872067096284125657131792078634088310269991817253720679636801 +/- 4.85E-69]",
+      "upper_saddle_sign_margin_lower": "1.113045924872067096284125657131792078634088310269991817253720679636800E+1",
+      "upper_sign_propagation": "8/log(k)+10/k decreases, so D_k(log(k)/4)<0 follows from the k=300 endpoint.",
+      "wall_transfer_margin_at_k319_ball": "[2.456736848355604136385806393418439127746706902318124458878517351653453E-6 +/- 4.80E-76]",
+      "wall_transfer_margin_at_k319_lower": "2.456736848355604136385806393418439127746706902318124458878517351653452E-6"
+    },
+    "formal_asymptotic_target": "k^2*L_k^(1)->1 as k->infinity",
+    "full_kernel_k300_crosscheck": {
+      "absolute_midpoint_difference": "8.841910962133475298889713173431623e-42",
+      "first_summand_mpmath_log_gap": "4.0572431996774948681448297126916962e-6",
+      "full_Arb_log_gap_ball": "[4.05724319967749486814482971269169621E-6 +/- 2.03E-42]",
+      "proof_boundary": "Cross-check only: the full value is Arb-enclosed, but the first-summand quadrature value is not an interval enclosure."
+    },
+    "minimum_scaled_k2_log_gap": "0.36515188797097453813303467414225266",
+    "minimum_scaled_k2_log_gap_at_k": 300,
+    "minimum_target_margin": "1.2047016537092515733142790645243493e-9",
+    "minimum_target_margin_at_k": 20000,
+    "parameters": {
+      "T": 100,
+      "bisection_steps": 210,
+      "mpmath_dps": 60,
+      "sample_k": [
+        300,
+        400,
+        500,
+        700,
+        1000,
+        2000,
+        5000,
+        10000,
+        20000
+      ],
+      "tail_start_k": 319,
+      "upper_padding": "1.2"
+    },
+    "positive_sample_rows": 9,
+    "quantitative_theorem_target": "L_k^(1)>=1/(4*k^2) for every integer k>=319",
+    "sample_count": 9,
+    "sample_rows": [
+      {
+        "above_quarter_k2_target": true,
+        "k": 300,
+        "log_gap": "4.0572431996774948681448297126916962e-6",
+        "lower_bracket": "0.82297280933202513242890351828640676",
+        "positive_log_gap": true,
+        "proof_boundary": "High-precision mpmath saddle quadrature with a finite upper truncation; not an interval enclosure or a uniform theorem.",
+        "quarter_k2_target": "2.7777777777777777777777777777777778e-6",
+        "saddle": "0.91270928796298985056807425462483823",
+        "saddle_inside_bracket": true,
+        "scaled_k2_log_gap": "0.36515188797097453813303467414225266",
+        "target_margin": "1.2794654218997170903670519349139184e-6",
+        "upper_bracket": "1.4259456186640502648578070365728135"
+      },
+      {
+        "above_quarter_k2_target": true,
+        "k": 400,
+        "log_gap": "2.5810854757523237610846318406240925e-6",
+        "lower_bracket": "0.85893306838849774835880589403563519",
+        "positive_log_gap": true,
+        "proof_boundary": "High-precision mpmath saddle quadrature with a finite upper truncation; not an interval enclosure or a uniform theorem.",
+        "quarter_k2_target": "1.5625e-6",
+        "saddle": "0.97888094701689181843228254728997258",
+        "saddle_inside_bracket": true,
+        "scaled_k2_log_gap": "0.4129736761203718017735410944998548",
+        "target_margin": "1.0185854757523237610846318406240925e-6",
+        "upper_bracket": "1.4978661367769954967176117880712704"
+      },
+      {
+        "above_quarter_k2_target": true,
+        "k": 500,
+        "log_gap": "1.7900980615579707918656351323123603e-6",
+        "lower_bracket": "0.88682601230277396782959278032436451",
+        "positive_log_gap": true,
+        "proof_boundary": "High-precision mpmath saddle quadrature with a finite upper truncation; not an interval enclosure or a uniform theorem.",
+        "quarter_k2_target": "1.0e-6",
+        "saddle": "1.030077594236378203800516720387092",
+        "saddle_inside_bracket": true,
+        "scaled_k2_log_gap": "0.44752451538949269796640878307809008",
+        "target_margin": "7.9009806155797079186563513231236033e-7",
+        "upper_bracket": "1.553652024605547935659185560648729"
+      },
+      {
+        "above_quarter_k2_target": true,
+        "k": 700,
+        "log_gap": "1.0098324178528385723969950897527977e-6",
+        "lower_bracket": "0.92888504188042558414266695660148852",
+        "positive_log_gap": true,
+        "proof_boundary": "High-precision mpmath saddle quadrature with a finite upper truncation; not an interval enclosure or a uniform theorem.",
+        "quarter_k2_target": "5.1020408163265306122448979591836735e-7",
+        "saddle": "1.1069452994078673013038750783415861",
+        "saddle_inside_bracket": true,
+        "scaled_k2_log_gap": "0.49481788474789090047452759397887087",
+        "target_margin": "4.9962833622018551117250529383443035e-7",
+        "upper_bracket": "1.637770083760851168285333913202977"
+      },
+      {
+        "above_quarter_k2_target": true,
+        "k": 1000,
+        "log_gap": "5.3852461092523267042219952610500539e-7",
+        "lower_bracket": "0.97346940987276713150674679550663658",
+        "positive_log_gap": true,
+        "proof_boundary": "High-precision mpmath saddle quadrature with a finite upper truncation; not an interval enclosure or a uniform theorem.",
+        "quarter_k2_target": "2.5e-7",
+        "saddle": "1.1879375411452161946579555446887138",
+        "saddle_inside_bracket": true,
+        "scaled_k2_log_gap": "0.53852461092523267042219952610500539",
+        "target_margin": "2.8852461092523267042219952610500539e-7",
+        "upper_bracket": "1.7269388197455342630134935910132732"
+      },
+      {
+        "above_quarter_k2_target": true,
+        "k": 2000,
+        "log_gap": "1.5160662670416244357565390578729955e-7",
+        "lower_bracket": "1.0601128074427602951839008106889086",
+        "positive_log_gap": true,
+        "proof_boundary": "High-precision mpmath saddle quadrature with a finite upper truncation; not an interval enclosure or a uniform theorem.",
+        "quarter_k2_target": "6.25e-8",
+        "saddle": "1.3440078260003367251495307467509845",
+        "saddle_inside_bracket": true,
+        "scaled_k2_log_gap": "0.60642650681664977430261562314919819",
+        "target_margin": "8.9106626704162443575653905787299549e-8",
+        "upper_bracket": "1.9002256148855205903678016213778173"
+      },
+      {
+        "above_quarter_k2_target": true,
+        "k": 5000,
+        "log_gap": "2.6797224818459480525570040725290535e-8",
+        "lower_bracket": "1.17464914892702967833184171215991",
+        "positive_log_gap": true,
+        "proof_boundary": "High-precision mpmath saddle quadrature with a finite upper truncation; not an interval enclosure or a uniform theorem.",
+        "quarter_k2_target": "1.0e-8",
+        "saddle": "1.5485738239457640734903380663464682",
+        "saddle_inside_bracket": true,
+        "scaled_k2_log_gap": "0.66993062046148701313925101813226337",
+        "target_margin": "1.6797224818459480525570040725290535e-8",
+        "upper_bracket": "2.1292982978540593566636834243198201"
+      },
+      {
+        "above_quarter_k2_target": true,
+        "k": 10000,
+        "log_gap": "7.0465686623400990046495219175233875e-9",
+        "lower_bracket": "1.2612925464970228420089957273421821",
+        "positive_log_gap": true,
+        "proof_boundary": "High-precision mpmath saddle quadrature with a finite upper truncation; not an interval enclosure or a uniform theorem.",
+        "quarter_k2_target": "2.5e-9",
+        "saddle": "1.7028766831343941982947111923584631",
+        "saddle_inside_bracket": true,
+        "scaled_k2_log_gap": "0.70465686623400990046495219175233875",
+        "target_margin": "4.5465686623400990046495219175233875e-9",
+        "upper_bracket": "2.3025850929940456840179914546843642"
+      },
+      {
+        "above_quarter_k2_target": true,
+        "k": 20000,
+        "log_gap": "1.8297016537092515733142790645243493e-9",
+        "lower_bracket": "1.3479359440670160056861497425244542",
+        "positive_log_gap": true,
+        "proof_boundary": "High-precision mpmath saddle quadrature with a finite upper truncation; not an interval enclosure or a uniform theorem.",
+        "quarter_k2_target": "6.25e-10",
+        "saddle": "1.8573688080533650862594433804397783",
+        "saddle_inside_bracket": true,
+        "scaled_k2_log_gap": "0.7318806614837006293257116258097397",
+        "target_margin": "1.2047016537092515733142790645243493e-9",
+        "upper_bracket": "2.4758718881340320113722994850489083"
+      }
+    ],
+    "scaled_profile_strictly_increasing": true,
+    "target_sample_rows": 9
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_first_summand_saddle_wall_target.py",
+  "kind": "jensen_window_pf_negative_lambda_first_summand_saddle_wall_target",
+  "proof_boundary": "This artifact composes exact first-summand saddle geometry, finite high-precision cross-checks, and the paired remainder theorems to prove the quantitative all-k adjacent wall. It does not prove the remaining all-order bridge, RH, or Lambda <= 0.",
+  "rows": [
+    {
+      "claim": "Define the first-summand moments and their Gamma-normalized adjacent log wall.",
+      "diagnostics": null,
+      "formula": "M_k^(1)=2*integral_0^infinity u^(2k)*exp(-100*u^2)*phi_1(u)du; L_k^(1)=Delta^3 log(M_j^(1)/Gamma(j+1/2)) at j=k-1",
+      "gap": null,
+      "id": "fsswt_01_exact_first_moment_wall",
+      "proof_boundary": "Exact normalization only.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The first-summand log integrand is strictly concave and has one saddle.",
+      "diagnostics": null,
+      "formula": "S_k''(u)=-2*k/u^2-200-16*q-96*q/(2*q-3)^2<0; S_k'(0+)=+infinity, S_k'(infinity)=-infinity",
+      "gap": null,
+      "id": "fsswt_02_exact_saddle_geometry",
+      "proof_boundary": "Exact unique-mode geometry only.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "For every k>=300 the unique saddle lies between (log(k)+22/25)/8 and log(k)/4.",
+      "diagnostics": {
+        "bracket_width_margin_ball": "[4.823782474656201059431228146291254119849693535080295403801350135572640 +/- 4.88E-70]",
+        "bracket_width_margin_lower": "4.823782474656201059431228146291254119849693535080295403801350135572639E+0",
+        "transfer_propagation": "(k-1)^6/k^2 increases for k>1, so 1/(4*k^2)>16/(k-1)^6 propagates from k=319.",
+        "upper_saddle_sign_margin_ball": "[11.13045924872067096284125657131792078634088310269991817253720679636801 +/- 4.85E-69]",
+        "upper_saddle_sign_margin_lower": "1.113045924872067096284125657131792078634088310269991817253720679636800E+1",
+        "upper_sign_propagation": "8/log(k)+10/k decreases, so D_k(log(k)/4)<0 follows from the k=300 endpoint.",
+        "wall_transfer_margin_at_k319_ball": "[2.456736848355604136385806393418439127746706902318124458878517351653453E-6 +/- 4.80E-76]",
+        "wall_transfer_margin_at_k319_lower": "2.456736848355604136385806393418439127746706902318124458878517351653452E-6"
+      },
+      "formula": "(log(k)+22/25)/8 < s_k < log(k)/4",
+      "gap": null,
+      "id": "fsswt_03_all_k_saddle_bracket",
+      "proof_boundary": "All-k saddle location bracket; not a moment-curvature theorem.",
+      "readiness": "interval_validated",
+      "role": "exact_analytic_bound"
+    },
+    {
+      "claim": "High-precision saddle-centered quadrature samples the first-summand wall at nine k values from 300 through 20000.",
+      "diagnostics": {
+        "mpmath_dps": 60,
+        "sample_count": 9,
+        "upper_padding": "1.2"
+      },
+      "formula": null,
+      "gap": null,
+      "id": "fsswt_04_high_precision_scout",
+      "proof_boundary": "Finite mpmath quadrature only; no certified truncation or quadrature remainder.",
+      "readiness": "not_ready_to_apply",
+      "role": "floating_diagnostic"
+    },
+    {
+      "claim": "All nine samples satisfy L_k^(1)>1/(4*k^2), and k^2*L_k^(1) increases from about 0.365 to 0.732.",
+      "diagnostics": {
+        "minimum_scaled_k2_log_gap": "0.36515188797097453813303467414225266",
+        "minimum_scaled_k2_log_gap_at_k": 300,
+        "scaled_profile_strictly_increasing": true
+      },
+      "formula": null,
+      "gap": null,
+      "id": "fsswt_05_positive_scaled_profile",
+      "proof_boundary": "Finite shape evidence only.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic"
+    },
+    {
+      "claim": "At k=300 the high-precision first-summand value agrees with the repaired full-kernel Arb log gap to the displayed precision.",
+      "diagnostics": {
+        "absolute_midpoint_difference": "8.841910962133475298889713173431623e-42",
+        "first_summand_mpmath_log_gap": "4.0572431996774948681448297126916962e-6",
+        "full_Arb_log_gap_ball": "[4.05724319967749486814482971269169621E-6 +/- 2.03E-42]",
+        "proof_boundary": "Cross-check only: the full value is Arb-enclosed, but the first-summand quadrature value is not an interval enclosure."
+      },
+      "formula": null,
+      "gap": null,
+      "id": "fsswt_06_full_kernel_overlap",
+      "proof_boundary": "Mixed interval/floating cross-check only; not a first-summand interval certificate.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_crosscheck"
+    },
+    {
+      "claim": "The saddle equation predicts k^2*L_k^(1)->1, consistent with the finite scaled profile.",
+      "diagnostics": null,
+      "formula": "4*pi*exp(4*s_k)~2*k/s_k and d_k log(M_k^(1))~2*log(s_k)",
+      "gap": null,
+      "id": "fsswt_07_formal_saddle_scale",
+      "proof_boundary": "Formal leading scale only; no uniform Laplace remainder.",
+      "readiness": "not_ready_to_apply",
+      "role": "asymptotic_target"
+    },
+    {
+      "claim": "The compact and ray paired-remainder certificates prove L_k^(1)>=1/(4*k^2) for every integer k>=319.",
+      "diagnostics": null,
+      "formula": "L_k^(1)>=1/(4*k^2), k>=319",
+      "gap": null,
+      "id": "fsswt_08_quantitative_wall_target",
+      "proof_boundary": "Analytic first-summand wall theorem; not the remaining all-order bridge.",
+      "readiness": "ready_to_apply",
+      "role": "analytic_theorem"
+    },
+    {
+      "claim": "The quantitative first-summand target plus the 16/(k-1)^6 dominance error proves the full lambda=-100 wall for k>=319 and splices to the finite collar.",
+      "diagnostics": {
+        "transfer_margin_at_k319": "[2.456736848355604136385806393418439127746706902318124458878517351653453E-6 +/- 4.80E-76]"
+      },
+      "formula": "L_k>=1/(4*k^2)-16/(k-1)^6>0",
+      "gap": null,
+      "id": "fsswt_09_full_wall_handoff",
+      "proof_boundary": "Exact wall handoff with the analytic antecedent discharged.",
+      "readiness": "ready_to_apply",
+      "role": "conditional_bridge"
+    }
+  ],
+  "source_collar_extension": "outputs/jensen_window_pf_negative_lambda_m100_k320_collar_extension_certificate.md",
+  "source_cone_entry_target": "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+  "source_dominance_certificate": "outputs/jensen_window_pf_negative_lambda_first_summand_dominance_certificate.md",
+  "source_full_enclosure_jsonl": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k245_k320_dps220.jsonl",
+  "source_paired_ray_certificate": "outputs/jensen_window_pf_negative_lambda_first_summand_paired_remainder_ray_certificate.md",
+  "source_paired_remainder_certificate": "outputs/jensen_window_pf_negative_lambda_first_summand_paired_remainder_certificate.md",
+  "status": "exact saddle geometry with analytic wall closure",
+  "summary": {
+    "bracketed_saddle_rows": 9,
+    "main_finding": "The dominant n=1 integrand has exact strict-concavity geometry and an all-k saddle bracket. Sixty-digit saddle-centered quadrature at nine k values from 300 to 20000 finds L_k^(1)>1/(4*k^2), with k^2*L_k^(1) increasing from about 0.365 to 0.732 and formally tending to one. This remains finite floating evidence. The paired compact and ray theorems prove the analytic tail, and the certified full-kernel perturbation plus finite collar close the adjacent wall.",
+    "minimum_scaled_k2_log_gap": "0.36515188797097453813303467414225266",
+    "minimum_scaled_k2_log_gap_at_k": 300,
+    "open_requirement_rows": 0,
+    "positive_sample_rows": 9,
+    "ready_to_apply_rows": 2,
+    "sample_rows": 9,
+    "scaled_profile_strictly_increasing": true,
+    "target_rows": 9,
+    "target_sample_rows": 9
+  }
+}

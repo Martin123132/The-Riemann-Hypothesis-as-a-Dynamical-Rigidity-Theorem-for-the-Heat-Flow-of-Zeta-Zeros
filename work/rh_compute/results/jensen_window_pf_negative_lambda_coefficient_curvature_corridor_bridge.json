@@ -1,0 +1,241 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_coefficient_curvature_corridor_bridge.py",
+  "date": "2026-07-07",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k300.jsonl",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k220_k250_dps220.jsonl",
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k245_k320_dps220.jsonl"
+  ],
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_coefficient_curvature_corridor_bridge.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The coefficient-curvature corridor remains an open zeta-specific all-k theorem.",
+    "Repaired k300 evidence is finite stress evidence only.",
+    "Monotone curvature alone is rejected as a shortcut.",
+    "Generic moment positivity, endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_coefficient_curvature_corridor_bridge",
+  "matrix_rows": [
+    {
+      "claim": "With x_k=((2*k-1)/(2*k+1))*R_k and B_k=-log(x_k), the raw log ratio is p_k=log(R_k)=log((2*k+1)/(2*k-1))-B_k.",
+      "formula": "R_k=((2*k+1)/(2*k-1))*exp(-B_k)",
+      "id": "nlcccb_01_curvature_coordinate",
+      "proof_boundary": "Exact change of variables only; it proves no zeta inequality.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The raw decrement corridor is exactly equivalent to a coefficient-curvature corridor for B_(k+1).",
+      "formula": "log((2*k+3)/(2+(2*k+1)*exp(-B_k))) <= B_(k+1) <= B_k",
+      "id": "nlcccb_02_exact_curvature_corridor",
+      "proof_boundary": "Exact algebraic equivalence only; the all-k curvature corridor remains open.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The upper side B_(k+1)<=B_k is exactly the monotone-contraction/log-curvature side already isolated as Delta^3 log A>=0.",
+      "id": "nlcccb_03_monotone_side_identification",
+      "proof_boundary": "Exact identification with an open theorem target only; not a monotonicity proof.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_log_curvature_bridge.md",
+        "outputs/jensen_window_pf_monotone_contraction_theorem_target.md"
+      ]
+    },
+    {
+      "claim": "The repaired k300 data validate the B wall, monotone side, lower barrier, and full coefficient-curvature corridor on all checked rows.",
+      "diagnostics": {
+        "adjacent_rows_per_lambda": 298,
+        "adjacent_total_rows": 894,
+        "b_corridor_rows": 894,
+        "b_lower_barrier_rows": 894,
+        "b_monotone_rows": 894,
+        "b_positive_rows": 897,
+        "b_total_rows": 897,
+        "b_upper_wall_rows": 897,
+        "b_width_rows": 894,
+        "coefficient_cap": 300,
+        "lambdas": [
+          "-25.0",
+          "-50.0",
+          "-100.0"
+        ],
+        "max_b": {
+          "k": 1,
+          "lam": "-25.0",
+          "sample": "3.524954269540071057E-2"
+        },
+        "min_b": {
+          "k": 299,
+          "lam": "-100.0",
+          "sample": "1.652602130709587426E-3"
+        },
+        "min_b_corridor_width": {
+          "k": 298,
+          "lam": "-100.0",
+          "sample": "5.536125464765993858E-6"
+        },
+        "min_b_lower_barrier_margin": {
+          "k": 298,
+          "lam": "-25.0",
+          "sample": "8.786855849482974303E-7"
+        },
+        "min_b_monotone_margin": {
+          "k": 298,
+          "lam": "-100.0",
+          "sample": "4.098948243972025449E-6"
+        },
+        "min_b_upper_slack": {
+          "k": 299,
+          "lam": "-25.0",
+          "sample": "1.434268674324864062E-3"
+        },
+        "min_exp_scaled_upper_margin": {
+          "k": 298,
+          "lam": "-25.0",
+          "sample": "8.770090930586581423E-7"
+        },
+        "raw_ratio_rows_per_lambda": 299
+      },
+      "id": "nlcccb_04_repaired_k300_curvature_corridor",
+      "proof_boundary": "Finite repaired stress evidence only; not an all-k curvature-corridor theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_stress",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_log_decrement_bridge.md",
+        "outputs/jensen_window_pf_negative_lambda_k300_precision_repair_audit.md"
+      ]
+    },
+    {
+      "claim": "Raw walls plus B_(k+1)<=B_k do not imply the lower curvature barrier.",
+      "id": "nlcccb_05_monotone_curvature_shortcut_blocked",
+      "proof_boundary": "Exact shortcut rejection only; not evidence against actual zeta coefficients.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_counterexample",
+      "witness": {
+        "B_k": "log(3/2)",
+        "B_lower_barrier_holds": false,
+        "B_monotone_holds": true,
+        "B_next": "log(10/9)",
+        "D_k": "1/2",
+        "R_k": "2",
+        "R_k_upper_wall": "3",
+        "R_next": "3/2",
+        "R_next_upper_wall": "5/3",
+        "corridor_lower": "10/9",
+        "corridor_upper": "4/3",
+        "decrement_lower": "2/3",
+        "decrement_upper": "8/9",
+        "k": 1,
+        "lower_margin_D_minus_lower": "-1/6",
+        "raw_cone_holds_at_k_and_next": true,
+        "raw_decrease_holds": true,
+        "raw_wall_holds_at_k": true,
+        "raw_wall_holds_at_next": true,
+        "scaled_upper_x_next_wall": "4/5",
+        "upper_margin_upper_minus_D": "7/18",
+        "x_k": "2/3",
+        "x_next": "9/10"
+      }
+    },
+    {
+      "claim": "Raw walls alone do not imply the monotone curvature side.",
+      "id": "nlcccb_06_raw_wall_shortcut_blocked",
+      "proof_boundary": "Exact shortcut rejection only; not evidence against actual zeta coefficients.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_counterexample",
+      "witness": {
+        "B_k": "log(3/2)",
+        "B_lower_barrier_holds": true,
+        "B_monotone_holds": false,
+        "B_next": "log(5/3)",
+        "D_k": "1",
+        "R_k": "2",
+        "R_k_upper_wall": "3",
+        "R_next": "1",
+        "R_next_upper_wall": "5/3",
+        "corridor_lower": "10/9",
+        "corridor_upper": "4/3",
+        "decrement_lower": "2/3",
+        "decrement_upper": "8/9",
+        "k": 1,
+        "lower_margin_D_minus_lower": "1/3",
+        "raw_cone_holds_at_k_and_next": true,
+        "raw_decrease_holds": true,
+        "raw_wall_holds_at_k": true,
+        "raw_wall_holds_at_next": true,
+        "scaled_upper_x_next_wall": "4/5",
+        "upper_margin_upper_minus_D": "-1/9",
+        "x_k": "2/3",
+        "x_next": "3/5"
+      }
+    },
+    {
+      "claim": "A zeta-specific proof can target the missing lower barrier B_(k+1)>=log((2*k+3)/(2+(2*k+1)*exp(-B_k))) after a finite collar.",
+      "id": "nlcccb_07_live_lower_barrier_route",
+      "proof_boundary": "Live theorem-search route only; no all-k lower barrier is proved here.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "Finite collar plus the existing monotone-contraction theorem plus the lower curvature barrier would imply the raw-corridor target.",
+      "id": "nlcccb_08_conditional_closure_route",
+      "proof_boundary": "Conditional route only; at least two all-k inputs remain open.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+        "outputs/jensen_window_pf_negative_lambda_adaptive_scaled_defect_target.md",
+        "outputs/jensen_window_pf_monotone_contraction_theorem_target.md"
+      ]
+    },
+    {
+      "claim": "A promoted curvature-corridor proof must state the tail start, lambda range, finite collar, B wall, monotone side, lower barrier, and forbidden assumptions.",
+      "id": "nlcccb_09_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a proof of the raw-corridor theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.md",
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Exact finite theorem-search diagnostic only. It rewrites the raw decrement corridor as a coefficient-curvature corridor and checks repaired k300 evidence, but it does not prove the all-k raw-corridor theorem, does not prove cone entry, does not prove jwpf_06, and does not prove RH or Lambda <= 0.",
+  "source_k300_precision_repair": "outputs/jensen_window_pf_negative_lambda_k300_precision_repair_audit.md",
+  "source_log_curvature_bridge": "outputs/jensen_window_pf_negative_lambda_log_curvature_bridge.md",
+  "source_monotone_contraction_target": "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+  "source_raw_corridor_target": "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+  "source_raw_log_bridge": "outputs/jensen_window_pf_negative_lambda_raw_log_decrement_bridge.md",
+  "source_raw_obstruction": "outputs/jensen_window_pf_negative_lambda_raw_moment_obstruction_matrix.md",
+  "status": "exact finite theorem-search diagnostic",
+  "summary": {
+    "adjacent_total_rows": 894,
+    "b_corridor_rows": 894,
+    "b_lower_barrier_rows": 894,
+    "b_monotone_rows": 894,
+    "b_positive_rows": 897,
+    "b_total_rows": 897,
+    "b_upper_wall_rows": 897,
+    "b_width_rows": 894,
+    "coefficient_cap": 300,
+    "exact_available_rows": 3,
+    "exact_counterexample_rows": 2,
+    "finite_stress_rows": 1,
+    "lambdas": [
+      "-25.0",
+      "-50.0",
+      "-100.0"
+    ],
+    "live_routes": 2,
+    "main_finding": "The raw-corridor theorem is exactly equivalent to the coefficient-curvature corridor log((2*k+3)/(2+(2*k+1)*exp(-B_k))) <= B_(k+1) <= B_k. On repaired k300 data the B wall holds on 897/897 rows and the curvature corridor holds on 894/894 adjacent rows; monotone curvature alone is blocked by an exact cone counterexample.",
+    "matrix_rows": 9,
+    "ready_to_apply_rows": 0,
+    "target_closing": false
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_finite_collar_contract.py",
+  "contract_rows": [
+    {
+      "claim": "Active finite depth K needs lower/upper control through x_{K+1} and monotone-gap control through x_{K+2}.",
+      "id": "nlfcc_01_ratio_cone_collar_rule",
+      "proof_boundary": "Requirement extraction only; not a cone-entry theorem.",
+      "role": "exact_requirement_extraction"
+    },
+    {
+      "claim": "The current negative-lambda prefix supports active depth K=97.",
+      "id": "nlfcc_02_current_active_depth",
+      "proof_boundary": "Finite depth only; not all k.",
+      "role": "finite_prefix_accounting"
+    },
+    {
+      "claim": "For K=97, the first collar x_98 and second collar x_99 are available on the checked lambdas.",
+      "id": "nlfcc_03_collar_certificate",
+      "proof_boundary": "Finite lambda grid and finite depth only.",
+      "role": "finite_collar_certificate"
+    },
+    {
+      "claim": "Extending active depth requires either more ACB coefficients and collars or an analytic all-k tail theorem.",
+      "id": "nlfcc_04_next_upgrade",
+      "proof_boundary": "Upgrade target only.",
+      "role": "open_upgrade"
+    }
+  ],
+  "date": "2026-07-06",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k100.jsonl"
+  ],
+  "finite_diagnostics": {
+    "active_lower_positive_rows": 291,
+    "active_lower_rows": 291,
+    "active_monotone_positive_rows": 291,
+    "active_monotone_rows": 291,
+    "active_upper_positive_rows": 291,
+    "active_upper_rows": 291,
+    "available_x_max": 99,
+    "certified_active_depth": 97,
+    "coefficient_k_max": 100,
+    "collar_lower_upper_positive_rows": 6,
+    "collar_lower_upper_rows": 6,
+    "collar_monotone_positive_rows": 3,
+    "collar_monotone_rows": 3,
+    "first_collar_x": 98,
+    "lambdas": [
+      "-100.0",
+      "-50.0",
+      "-25.0"
+    ],
+    "lower_upper_k_max": 99,
+    "min_active_lower_margin": {
+      "k": 97,
+      "lam": "-25.0",
+      "sample": "5.458628018046818002E-3"
+    },
+    "min_active_monotone_gap": {
+      "k": 97,
+      "lam": "-100.0",
+      "sample": "1.808119739573407679E-5"
+    },
+    "min_active_upper_margin": {
+      "k": 97,
+      "lam": "-100.0",
+      "sample": "3.380229139004779895E-3"
+    },
+    "min_collar_lower_upper_margin": {
+      "k": 98,
+      "lam": "-100.0",
+      "sample": "3.362147941609045818E-3"
+    },
+    "min_collar_monotone_gap": {
+      "k": 98,
+      "lam": "-100.0",
+      "sample": "1.787679020491334833E-5"
+    },
+    "monotone_gap_k_max": 98,
+    "second_collar_x": 99
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_finite_collar_contract.py",
+  "invariants": [
+    "The contract uses the finite-collar requirement from the exact ratio-cone invariance lemma.",
+    "The certified active depth is finite and tied to available ACB enclosures.",
+    "No row is ready_to_apply for the cone-entry theorem.",
+    "The all-k tail or finite-collar flow theorem remains open.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_finite_collar_contract",
+  "note": "outputs/jensen_window_pf_negative_lambda_finite_collar_k100_contract.md",
+  "prefix_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_cone_entry_prefix_k100_scout.json",
+  "proof_boundary": "Finite-collar accounting contract only. It extracts the active finite depth currently supported by the negative-lambda prefix and the ratio-cone collar requirements, but it does not prove an infinite cone-entry theorem, does not prove a tail theorem, does not prove a collared finite flow theorem beyond the stated depth, does not prove jwpf_06, and leaves Lambda <= 0 unsettled.",
+  "result_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_finite_collar_k100_contract.json",
+  "source_cone_entry_target": "outputs/jensen_window_pf_heat_flow_cone_entry_asymptotic_target.md",
+  "source_prefix_scout": "outputs/jensen_window_pf_negative_lambda_cone_entry_prefix_scout.md",
+  "source_ratio_cone_lemma": "outputs/jensen_window_pf_heat_flow_ratio_cone_invariance_lemma.md",
+  "status": "finite_collar_contract",
+  "summary": {
+    "active_lower_rows": 291,
+    "active_monotone_rows": 291,
+    "active_upper_rows": 291,
+    "certified_active_depth": 97,
+    "collar_lower_upper_rows": 6,
+    "collar_monotone_rows": 3,
+    "first_collar_x": 98,
+    "main_finding": "The current negative-lambda prefix is collar-ready only for active depth K=97, with x_98 and x_99 acting as collar variables. This makes the finite evidence usable as a precise local seed, but it still does not provide the all-k tail theorem or the finite-collar flow theorem needed for the cone-entry target.",
+    "ready_to_apply_rows": 0,
+    "second_collar_x": 99,
+    "target_closing": false
+  }
+}

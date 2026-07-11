@@ -1,0 +1,568 @@
+{
+  "date": "2026-07-11",
+  "exact": {
+    "classical_benchmarks": {
+      "de_bruijn": {
+        "parameters": "beta=b, gamma=1, b=pi-3/(2*pi)",
+        "source_fact": "de Bruijn proved that the dB transform has only real zeros.",
+        "transform": "B_dB=P_(9/4)+b*P_(5/4)+P_(1/4)"
+      },
+      "polya_p2": {
+        "parameters": "beta=-a, gamma=0, a=3/(2*pi)",
+        "source_fact": "Polya proved that the P2 transform has only real zeros.",
+        "transform": "B_P2=P_(9/4)-a*P_(5/4)"
+      },
+      "proof_boundary": "These are established source facts and normalization checks; this artifact does not re-prove their real-zero theorems."
+    },
+    "de_bruijn_positive_residual": {
+      "bernstein_balls": [
+        "[2.434802200544679309417245499938075567656849703620395313206674688110022411209602621500886701859276115912012956887011572038886174061 +/- 1.75e-130]",
+        "[2.268135533878012642750578833271408900990183036953728646540008021443355744542935954834220035192609449245346290220344905372219507394 +/- 5.34e-130]",
+        "[2.288903419868520982777183498186338147916161106605918996537311215203591534422688905320226083176646775768795796578817863621811499804 +/- 8.53e-130]",
+        "[2.363899467300498967939259890024765318530094389469279539461987141384173480179685003291020174959220204976664998045780025160841395838 +/- 8.79e-130]",
+        "[2.46600468670120314091076781159928187969908611029512533472462690290257468815116990333458215861161095514110468828535793489817158547 +/- 5.09e-129]",
+        "[2.50752082367418528193075980652650208839536557502710665821634316693363100501414471762808973446188268664544626587578843761168093742 +/- 3.05e-129]",
+        "[0.23561139971388698116944480086655912489054096876672310475806986675497466877709272192333297389053444825315244504448097238314803141 +/- 3.26e-129]"
+      ],
+      "bernstein_coefficients": [
+        "(-5 + pi**2)/2",
+        "(-16 + 3*pi**2)/6",
+        "(-510 - 9*pi + 2*pi**3 + 90*pi**2)/180",
+        "(-360*pi - 24*pi**2 + 9 + 4*pi**4 + 60*pi**3)/(120*pi)",
+        "(-1140*pi - 180*pi**2 + 108 + pi**5 + 24*pi**4 + 174*pi**3)/(360*pi)",
+        "(-252*pi - 72*pi**2 + 54 + pi**5 + 8*pi**4 + 30*pi**3)/(72*pi)",
+        "(-84*pi**2 - 216*pi + 72 + 12*pi**3 + 5*pi**4 + 2*pi**5)/(48*pi)"
+      ],
+      "conclusion": "Phi(u)-Psi_dB(u)>0 for every finite u>=0",
+      "identity": "(1-a*q)*sum_(k=0)^4(pi*q)^k/k!-S_dB(q)=q^2*p(sqrt(q))",
+      "polynomial": "p(r)=-pi**3*r**6/16 - r**5 + r**4*(-pi**2/4 + pi**4/24) + r**3*(3 - 2*pi**2)/(2*pi) + r**2*(-3*pi/4 + pi**3/6) - r - 5/2 + pi**2/2",
+      "taylor_lower_bound": "exp(pi*q)>sum_(k=0)^4 (pi*q)^k/k!, while 1-a*q>0"
+    },
+    "gasper_square_scope": {
+      "multi_shift_guard": "A linear combination with several shifts does not yield that two-modulus equality. Its squared modulus contains mixed products between distinct shifts, which the single-shift identity does not sign.",
+      "scope": "This rejects automatic reuse of the published single-shift square, not the possibility of a new matrix-valued or coupled addition formula.",
+      "single_shift": "For F_(a,c)(z)=K_(i(z-i*c))(a)+K_(i(z+i*c))(a), a zero gives equality of two Bessel moduli. Gasper converts their difference into one integral of [f_t(y+c)-f_t(y-c)] times K_(i*x)(a/sqrt(t))^2, and convexity forces y=0."
+    },
+    "laguerre_polynomial": {
+      "definitions": "E=H_0-P_(9/4), P5=P_(5/4), P1=P_(1/4)",
+      "forms": "L[f]=f'^2-f*f'', B[f,g]=2*f'*g'-f*g''-g*f''",
+      "identity": "L[R_(beta,gamma)]=L[E]-beta*B[E,P5]-gamma*B[E,P1]+beta^2*L[P5]+beta*gamma*B[P5,P1]+gamma^2*L[P1]"
+    },
+    "normalization": {
+      "block": "P_a(x)=pi^2/2*(K_(a+i*x/4)(2*pi)+K_(a-i*x/4)(2*pi))",
+      "kernel": "Psi_(beta,gamma)(u)=4*pi^2*exp(-2*pi*cosh(4u))*(cosh(9u)+beta*cosh(5u)+gamma*cosh(u))",
+      "residual": "R_(beta,gamma)=H_0-B_(beta,gamma)",
+      "transform": "B_(beta,gamma)(x)=P_(9/4)(x)+beta*P_(5/4)(x)+gamma*P_(1/4)(x)"
+    },
+    "normalized_tail": {
+      "actual_after_exp_pi_q": "exp(pi*q)*(1-a*q)=1+b*q+gamma_match*q^2+O(q^3)",
+      "b": "pi-3/(2*pi)",
+      "block_after_exp_pi_q": "beta*r**2*(r**5 + 1) + gamma*r**4*(r + 1) + r**9 + 1",
+      "conclusion": "Eventual residual nonnegativity requires beta<=b; exact matching beta=b, gamma=gamma_match overshoots in the next fractional tail order.",
+      "first_summand": "phi_1/[2*pi^2*exp(9u-pi*exp(4u))]=1-a*q",
+      "gamma_match": "(pi^2-3)/2",
+      "q_definition": "q=exp(-4u), r=sqrt(q), a=3/(2*pi)",
+      "tail_hierarchy": "The residual first has coefficient b-beta at q. If beta=b, it has coefficient gamma_match-gamma at q^2; at equality the mirrored gamma block contributes -gamma_match*q^(5/2)."
+    },
+    "polya_p2_positive_residual": {
+      "conclusion": "Phi(u)-Psi_P2(u)>0 for every finite u>=0",
+      "lower_difference": "-r**2*(2*pi*r**7 - 3*r**5 + 3*pi*r**2 - 2*pi**2)/(2*pi)",
+      "proof": "Since exp(pi*q)>1+pi*q, 0<q<=1, and pi>3, the normalized first-summand residual exceeds q*(pi-3*q/2-q^(7/2)+a*q^(5/2)) >= q*(pi-5/2)>0."
+    }
+  },
+  "interval_certificate": {
+    "acb_box_radius": "0.1",
+    "arithmetic": "python-flint Acb/Arb balls at 130 decimal digits",
+    "cauchy_radius": "0.04",
+    "classical_witnesses": {
+      "de_bruijn": {
+        "laguerre_value": "[-4.8e-17 +/- 1.15e-19]",
+        "parameters": "beta=pi-3/(2*pi), gamma=1",
+        "strictly_negative": true,
+        "x": "52"
+      },
+      "polya_p2": {
+        "laguerre_value": "[-2.34e-27 +/- 5.35e-30]",
+        "parameters": "beta=-3/(2*pi), gamma=0",
+        "strictly_negative": true,
+        "x": "86"
+      }
+    },
+    "conclusion": "Every nonnegative-coefficient 9/5/1 block whose kernel residual is globally nonnegative has L[R_(beta,gamma)](x)<0 at at least one of x=48,52,86. The classical P2 residual also has L<0 at x=86.",
+    "derivative_method": "For each real entire component, central differences with step h enclose f' and f''. An Acb square bounds abs(f) by M on every Cauchy circle of radius r around the difference segment; the added errors are h^2*M/r^3 and 2*h^2*M/r^4.",
+    "mesh": {
+      "all_boxes_strictly_negative_at_an_assigned_x": true,
+      "assignment_counts": {
+        "48": 12929,
+        "52": 5833,
+        "86": 46146
+      },
+      "assignment_order": [
+        "48",
+        "52",
+        "86"
+      ],
+      "assignment_sha256": "48e36d40cd04261b379508ff7afb58ed7c95c85df9dee3d2cef29d0bb50731e8",
+      "beta_cell_count": 216,
+      "cell_definition": "I_i=[i/80,(i+1)/80], J_j=[j/80,(j+1)/80], 0<=i<216, 0<=j<408-i",
+      "covered_region": "0<=beta<27/10, gamma>=0, beta+gamma<51/10",
+      "denominator": 80,
+      "sum_cell_count": 408,
+      "total_boxes": 64908
+    },
+    "rigorous": true,
+    "rows": [
+      {
+        "cauchy_box_abs_upper": {
+          "E": "3.544719145764929635333828628063201904296875000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-6",
+          "P1": "3.218112913927484441956039518117904663085937500000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-7",
+          "P5": "2.829537066872944706119596958160400390625000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-7"
+        },
+        "closest_assigned_upper": "[-5.288819384584745669319709449052169247806887142360210418701171874999999999999999999999999999999999999999999999999999999999999988306e-20 +/- 4.78e-150]",
+        "jets": {
+          "E": [
+            "[1.33327740392358277556628707821893828751289380781810770837251432658139037791961019444634886559964987909319162442921663504299669382e-7 +/- 8.02e-136]",
+            "[-5.4413e-9 +/- 6.52e-14]",
+            "[-4.337e-8 +/- 3.21e-12]"
+          ],
+          "P1": [
+            "[-2.1267279404056760666170648957717008631941479903540443442086281115149340567942228356193704067320017042613662248018217870459526856e-8 +/- 4.39e-136]",
+            "[2.266709e-8 +/- 5.58e-15]",
+            "[-1.2443e-8 +/- 3.92e-13]"
+          ],
+          "P5": [
+            "[1.17791156381997081960087950983472875841034730483215762118645482626612438339569387999668854973189100459080756606071711025143981109e-7 +/- 2.72e-136]",
+            "[-3.839249e-8 +/- 6.08e-15]",
+            "[6.74e-10 +/- 4.50e-13]"
+          ]
+        },
+        "laguerre_coefficients": {
+          "c00": "[5.812e-15 +/- 3.97e-19]",
+          "c_beta": "[-5.437e-15 +/- 8.33e-19]",
+          "c_beta2": "[1.3946e-15 +/- 4.55e-20]",
+          "c_beta_gamma": "[-2.605e-16 +/- 6.40e-20]",
+          "c_gamma": "[-4.90e-16 +/- 1.09e-19]",
+          "c_gamma2": "[2.492e-16 +/- 4.04e-20]"
+        },
+        "mesh_assignment_count": 12929,
+        "x": "48"
+      },
+      {
+        "cauchy_box_abs_upper": {
+          "E": "9.225726422812385862926021218299865722656250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-7",
+          "P1": "5.472229608338707862458250019699335098266601562500000000000000000000000000000000000000000000000000000000000000000000000000000000000e-8",
+          "P5": "4.251252133657956733259197790175676345825195312500000000000000000000000000000000000000000000000000000000000000000000000000000000000e-8"
+        },
+        "closest_assigned_upper": "[-2.858607438850555623950948011535722059761610580608248710632324218749999999999999999999999999999999999999999999999999999999999999820e-20 +/- 1.78e-150]",
+        "jets": {
+          "E": [
+            "[8.918181694872115832835161912867922820396440188244070830537526617431299460507120917599615127939278121580959071383805986851809546e-9 +/- 4.50e-136]",
+            "[-2.36988e-8 +/- 4.21e-14]",
+            "[1.022e-8 +/- 2.44e-12]"
+          ],
+          "P1": [
+            "[7.4591301248273125445470616936133450819913079931007879461015528758594842974847435416457256195137065942213080270893997876397282325e-9 +/- 4.56e-137]",
+            "[-8.6625e-10 +/- 3.50e-15]",
+            "[-1.3467e-9 +/- 6.41e-14]"
+          ],
+          "P5": [
+            "[1.08447148570643654645871081100706335675281225782305657677617802498025681872553400584913529860664440504651494630828482428084191573e-8 +/- 4.18e-137]",
+            "[-1.2252664e-8 +/- 9.21e-16]",
+            "[6.3169e-9 +/- 3.94e-14]"
+          ]
+        },
+        "laguerre_coefficients": {
+          "c00": "[4.705e-16 +/- 3.18e-20]",
+          "c_beta": "[-4.1356e-16 +/- 9.30e-21]",
+          "c_beta2": "[8.1623e-17 +/- 5.08e-22]",
+          "c_beta_gamma": "[-1.1286e-17 +/- 8.14e-22]",
+          "c_gamma": "[2.318e-17 +/- 9.39e-21]",
+          "c_gamma2": "[1.0796e-17 +/- 5.58e-22]"
+        },
+        "mesh_assignment_count": 5833,
+        "x": "52"
+      },
+      {
+        "cauchy_box_abs_upper": {
+          "E": "2.518603957389706909930637834804656449705362319946289062500000000000000000000000000000000000000000000000000000000000000000000000000e-12",
+          "P1": "7.587586198567612986651265138959843170596286654472351074218750000000000000000000000000000000000000000000000000000000000000000000000e-14",
+          "P5": "1.024688109775738682240275867485479466267861425876617431640625000000000000000000000000000000000000000000000000000000000000000000000e-13"
+        },
+        "closest_assigned_upper": "[-9.851648512754458578631529848992420217376253097371445726498917494495799473952502012252807617187500000000000000000000000000000000001e-28 +/- 4.10e-158]",
+        "jets": {
+          "E": [
+            "[1.1216818779442242607489264302305459536479829731071824337683705179465927757050072411444595611348613233072998295523137982449262832e-13 +/- 1.69e-141]",
+            "[-5.84830e-14 +/- 6.24e-20]",
+            "[5.557e-14 +/- 5.78e-18]"
+          ],
+          "P1": [
+            "[8.0215924299437705065416729761941567749063306973674701164793496869751213636926616999431346191672468902880541432970898357539592746e-15 +/- 6.52e-143]",
+            "[-7.61431e-15 +/- 5.02e-21]",
+            "[2.938e-15 +/- 1.12e-19]"
+          ],
+          "P5": [
+            "[-5.5111967542417061102958350288983827854144341694098944091273408736330048692006298160829863442729517577169519798205008262116374485e-14 +/- 5.59e-142]",
+            "[6.76182e-15 +/- 1.81e-21]",
+            "[1.5286e-14 +/- 1.06e-19]"
+          ]
+        },
+        "laguerre_coefficients": {
+          "c00": "[-2.813e-27 +/- 5.81e-31]",
+          "c_beta": "[-5.57e-28 +/- 3.92e-31]",
+          "c_beta2": "[8.8817e-28 +/- 9.30e-33]",
+          "c_beta_gamma": "[-6.367e-29 +/- 4.37e-33]",
+          "c_gamma": "[-1.153e-28 +/- 5.50e-32]",
+          "c_gamma2": "[3.4410e-29 +/- 6.90e-34]"
+        },
+        "mesh_assignment_count": 46146,
+        "x": "86"
+      }
+    ],
+    "scope": "This exhausts the positive three-block plus independently-LP residual architecture at t=0. It does not reject signed higher blocks or a coupled identity controlling all mixed terms.",
+    "spectral_point_formula": "H_0(x)=xi((1+i*x)/2)/8 and P_a(x)=pi^2/2*(K_(a+i*x/4)(2*pi)+K_(a-i*x/4)(2*pi))",
+    "spectral_points": [
+      "48",
+      "52",
+      "86"
+    ],
+    "step": "1e-6"
+  },
+  "kind": "jensen_window_pf_newman_classical_three_block_residual_gate",
+  "origin_certificate": {
+    "arithmetic": "python-flint Arb balls at 130 decimal digits",
+    "comparison_upper": "[0.4497144724889990183736181355128760295816323587609600875401708961428349500539675779537170276610384926688675942860921672504492088739 +/- 6.81e-131]",
+    "fake_origin": "[0.0737236840145900030120685468053895130461692391411409979574050649414483524678635373694618078132849987981750154567364208607293785039 +/- 2.59e-131]",
+    "identity": "Phi(0)=sum_(n>=1) pi*n^2*(2*pi*n^2-3)*exp(-pi*n^2)",
+    "parameter_region": "Every beta,gamma>=0 with a globally nonnegative residual lies in 0<=beta<27/10, gamma>=0, beta+gamma<51/10.",
+    "partial_cutoff": 8,
+    "partial_sum": "[0.4466969004671234440869846670547091132204243670948249747308518817309554089794572357258691112614035823905223111710911393326434134099 +/- 8.30e-131]",
+    "phi_upper": "[0.4466969004671234440869846670547091132204243670948249747308518817309554089794572357258691112614035823905227072804628016886300533707 +/- 2.94e-131]",
+    "ratio_conclusion": "Phi(0)/(4*pi^2*exp(-2*pi))<61/10, hence beta+gamma<51/10",
+    "rigorous": true,
+    "tail_beta_bound": "beta<=b=pi-3/(2*pi)<821/308<27/10, using pi<22/7",
+    "tail_majorant": "For n>=9, each summand is at most 2*pi^2*n^4*exp(-pi*n^2); successive majorants have ratio at most (10/9)^4*exp(-19*pi).",
+    "tail_ratio": "[1.81919493945887572831380849077790696747061734080659119614165946146539116957567130872650278012870372025359329198842382887503338197e-26 +/- 4.77e-155]",
+    "tail_upper": "[3.9610937166235598663996074677351365176976789540787719671012036591704494608418285688055595996889518616749401304187867635872182266e-106 +/- 5.38e-234]"
+  },
+  "proof_boundary": "This artifact proves positive kernel residuals for the classical Polya P2 and de Bruijn bases, derives necessary compact constraints for the full nonnegative 9/5/1 family, and uses Acb/Arb Cauchy certificates to show that every such globally positive residual violates the first Laguerre inequality. It audits the scope of Gasper's single-shift square. Signed higher-block and genuinely coupled identities remain open; this does not prove or disprove RH or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The Polya P2 and de Bruijn kernels map to the stated 9/5/1 Bessel combinations.",
+      "diagnostics": {
+        "de_bruijn": {
+          "parameters": "beta=b, gamma=1, b=pi-3/(2*pi)",
+          "source_fact": "de Bruijn proved that the dB transform has only real zeros.",
+          "transform": "B_dB=P_(9/4)+b*P_(5/4)+P_(1/4)"
+        },
+        "polya_p2": {
+          "parameters": "beta=-a, gamma=0, a=3/(2*pi)",
+          "source_fact": "Polya proved that the P2 transform has only real zeros.",
+          "transform": "B_P2=P_(9/4)-a*P_(5/4)"
+        },
+        "proof_boundary": "These are established source facts and normalization checks; this artifact does not re-prove their real-zero theorems."
+      },
+      "formula": "B_P2=P9-a*P5; B_dB=P9+b*P5+P1",
+      "id": "gctb_01_classical_normalizations",
+      "proof_boundary": "Normalization and source audit; the classical real-zero theorems are not re-proved here.",
+      "readiness": "source_validated",
+      "role": "established_benchmark"
+    },
+    {
+      "claim": "The signed Polya P2 block leaves a strictly positive Xi-kernel residual.",
+      "diagnostics": {
+        "conclusion": "Phi(u)-Psi_P2(u)>0 for every finite u>=0",
+        "lower_difference": "-r**2*(2*pi*r**7 - 3*r**5 + 3*pi*r**2 - 2*pi**2)/(2*pi)",
+        "proof": "Since exp(pi*q)>1+pi*q, 0<q<=1, and pi>3, the normalized first-summand residual exceeds q*(pi-3*q/2-q^(7/2)+a*q^(5/2)) >= q*(pi-5/2)>0."
+      },
+      "formula": "Phi(u)-Psi_P2(u)>0 for every finite u>=0",
+      "id": "gctb_02_polya_p2_positive_residual",
+      "proof_boundary": "Exact pointwise kernel theorem only; positivity does not imply a real-rooted transform.",
+      "readiness": "ready_to_apply",
+      "role": "exact_kernel_theorem"
+    },
+    {
+      "claim": "The classical de Bruijn block also leaves a strictly positive Xi-kernel residual.",
+      "diagnostics": {
+        "bernstein_balls": [
+          "[2.434802200544679309417245499938075567656849703620395313206674688110022411209602621500886701859276115912012956887011572038886174061 +/- 1.75e-130]",
+          "[2.268135533878012642750578833271408900990183036953728646540008021443355744542935954834220035192609449245346290220344905372219507394 +/- 5.34e-130]",
+          "[2.288903419868520982777183498186338147916161106605918996537311215203591534422688905320226083176646775768795796578817863621811499804 +/- 8.53e-130]",
+          "[2.363899467300498967939259890024765318530094389469279539461987141384173480179685003291020174959220204976664998045780025160841395838 +/- 8.79e-130]",
+          "[2.46600468670120314091076781159928187969908611029512533472462690290257468815116990333458215861161095514110468828535793489817158547 +/- 5.09e-129]",
+          "[2.50752082367418528193075980652650208839536557502710665821634316693363100501414471762808973446188268664544626587578843761168093742 +/- 3.05e-129]",
+          "[0.23561139971388698116944480086655912489054096876672310475806986675497466877709272192333297389053444825315244504448097238314803141 +/- 3.26e-129]"
+        ],
+        "bernstein_coefficients": [
+          "(-5 + pi**2)/2",
+          "(-16 + 3*pi**2)/6",
+          "(-510 - 9*pi + 2*pi**3 + 90*pi**2)/180",
+          "(-360*pi - 24*pi**2 + 9 + 4*pi**4 + 60*pi**3)/(120*pi)",
+          "(-1140*pi - 180*pi**2 + 108 + pi**5 + 24*pi**4 + 174*pi**3)/(360*pi)",
+          "(-252*pi - 72*pi**2 + 54 + pi**5 + 8*pi**4 + 30*pi**3)/(72*pi)",
+          "(-84*pi**2 - 216*pi + 72 + 12*pi**3 + 5*pi**4 + 2*pi**5)/(48*pi)"
+        ],
+        "conclusion": "Phi(u)-Psi_dB(u)>0 for every finite u>=0",
+        "identity": "(1-a*q)*sum_(k=0)^4(pi*q)^k/k!-S_dB(q)=q^2*p(sqrt(q))",
+        "polynomial": "p(r)=-pi**3*r**6/16 - r**5 + r**4*(-pi**2/4 + pi**4/24) + r**3*(3 - 2*pi**2)/(2*pi) + r**2*(-3*pi/4 + pi**3/6) - r - 5/2 + pi**2/2",
+        "taylor_lower_bound": "exp(pi*q)>sum_(k=0)^4 (pi*q)^k/k!, while 1-a*q>0"
+      },
+      "formula": "Phi(u)-Psi_dB(u)>0 for every finite u>=0",
+      "id": "gctb_03_de_bruijn_positive_residual",
+      "proof_boundary": "Finite exact Bernstein reduction with Arb-certified coefficients; not transform real-rootedness of the residual.",
+      "readiness": "interval_validated",
+      "role": "interval_kernel_theorem"
+    },
+    {
+      "claim": "Tail and origin positivity confine every positive 9/5/1 residual candidate to one rational triangle.",
+      "diagnostics": {
+        "origin": {
+          "arithmetic": "python-flint Arb balls at 130 decimal digits",
+          "comparison_upper": "[0.4497144724889990183736181355128760295816323587609600875401708961428349500539675779537170276610384926688675942860921672504492088739 +/- 6.81e-131]",
+          "fake_origin": "[0.0737236840145900030120685468053895130461692391411409979574050649414483524678635373694618078132849987981750154567364208607293785039 +/- 2.59e-131]",
+          "identity": "Phi(0)=sum_(n>=1) pi*n^2*(2*pi*n^2-3)*exp(-pi*n^2)",
+          "parameter_region": "Every beta,gamma>=0 with a globally nonnegative residual lies in 0<=beta<27/10, gamma>=0, beta+gamma<51/10.",
+          "partial_cutoff": 8,
+          "partial_sum": "[0.4466969004671234440869846670547091132204243670948249747308518817309554089794572357258691112614035823905223111710911393326434134099 +/- 8.30e-131]",
+          "phi_upper": "[0.4466969004671234440869846670547091132204243670948249747308518817309554089794572357258691112614035823905227072804628016886300533707 +/- 2.94e-131]",
+          "ratio_conclusion": "Phi(0)/(4*pi^2*exp(-2*pi))<61/10, hence beta+gamma<51/10",
+          "rigorous": true,
+          "tail_beta_bound": "beta<=b=pi-3/(2*pi)<821/308<27/10, using pi<22/7",
+          "tail_majorant": "For n>=9, each summand is at most 2*pi^2*n^4*exp(-pi*n^2); successive majorants have ratio at most (10/9)^4*exp(-19*pi).",
+          "tail_ratio": "[1.81919493945887572831380849077790696747061734080659119614165946146539116957567130872650278012870372025359329198842382887503338197e-26 +/- 4.77e-155]",
+          "tail_upper": "[3.9610937166235598663996074677351365176976789540787719671012036591704494608418285688055595996889518616749401304187867635872182266e-106 +/- 5.38e-234]"
+        },
+        "tail": {
+          "actual_after_exp_pi_q": "exp(pi*q)*(1-a*q)=1+b*q+gamma_match*q^2+O(q^3)",
+          "b": "pi-3/(2*pi)",
+          "block_after_exp_pi_q": "beta*r**2*(r**5 + 1) + gamma*r**4*(r + 1) + r**9 + 1",
+          "conclusion": "Eventual residual nonnegativity requires beta<=b; exact matching beta=b, gamma=gamma_match overshoots in the next fractional tail order.",
+          "first_summand": "phi_1/[2*pi^2*exp(9u-pi*exp(4u))]=1-a*q",
+          "gamma_match": "(pi^2-3)/2",
+          "q_definition": "q=exp(-4u), r=sqrt(q), a=3/(2*pi)",
+          "tail_hierarchy": "The residual first has coefficient b-beta at q. If beta=b, it has coefficient gamma_match-gamma at q^2; at equality the mirrored gamma block contributes -gamma_match*q^(5/2)."
+        }
+      },
+      "formula": "Every beta,gamma>=0 with a globally nonnegative residual lies in 0<=beta<27/10, gamma>=0, beta+gamma<51/10.",
+      "id": "gctb_04_tail_origin_compactness",
+      "proof_boundary": "Necessary compact parameter reduction; no sufficiency of kernel positivity is claimed.",
+      "readiness": "ready_to_apply",
+      "role": "exact_interval_reduction"
+    },
+    {
+      "claim": "The residual first Laguerre expression is an exact quadratic in both block coefficients.",
+      "diagnostics": {
+        "definitions": "E=H_0-P_(9/4), P5=P_(5/4), P1=P_(1/4)",
+        "forms": "L[f]=f'^2-f*f'', B[f,g]=2*f'*g'-f*g''-g*f''",
+        "identity": "L[R_(beta,gamma)]=L[E]-beta*B[E,P5]-gamma*B[E,P1]+beta^2*L[P5]+beta*gamma*B[P5,P1]+gamma^2*L[P1]"
+      },
+      "formula": "L[R_(beta,gamma)]=L[E]-beta*B[E,P5]-gamma*B[E,P1]+beta^2*L[P5]+beta*gamma*B[P5,P1]+gamma^2*L[P1]",
+      "id": "gctb_05_bivariate_laguerre_identity",
+      "proof_boundary": "Exact algebraic identity used by the interval mesh.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Three Acb Cauchy jet certificates rigorously enclose every bivariate Laguerre coefficient used by the mesh.",
+      "diagnostics": {
+        "acb_box_radius": "0.1",
+        "arithmetic": "python-flint Acb/Arb balls at 130 decimal digits",
+        "cauchy_radius": "0.04",
+        "rows": [
+          {
+            "cauchy_box_abs_upper": {
+              "E": "3.544719145764929635333828628063201904296875000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-6",
+              "P1": "3.218112913927484441956039518117904663085937500000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-7",
+              "P5": "2.829537066872944706119596958160400390625000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-7"
+            },
+            "closest_assigned_upper": "[-5.288819384584745669319709449052169247806887142360210418701171874999999999999999999999999999999999999999999999999999999999999988306e-20 +/- 4.78e-150]",
+            "jets": {
+              "E": [
+                "[1.33327740392358277556628707821893828751289380781810770837251432658139037791961019444634886559964987909319162442921663504299669382e-7 +/- 8.02e-136]",
+                "[-5.4413e-9 +/- 6.52e-14]",
+                "[-4.337e-8 +/- 3.21e-12]"
+              ],
+              "P1": [
+                "[-2.1267279404056760666170648957717008631941479903540443442086281115149340567942228356193704067320017042613662248018217870459526856e-8 +/- 4.39e-136]",
+                "[2.266709e-8 +/- 5.58e-15]",
+                "[-1.2443e-8 +/- 3.92e-13]"
+              ],
+              "P5": [
+                "[1.17791156381997081960087950983472875841034730483215762118645482626612438339569387999668854973189100459080756606071711025143981109e-7 +/- 2.72e-136]",
+                "[-3.839249e-8 +/- 6.08e-15]",
+                "[6.74e-10 +/- 4.50e-13]"
+              ]
+            },
+            "laguerre_coefficients": {
+              "c00": "[5.812e-15 +/- 3.97e-19]",
+              "c_beta": "[-5.437e-15 +/- 8.33e-19]",
+              "c_beta2": "[1.3946e-15 +/- 4.55e-20]",
+              "c_beta_gamma": "[-2.605e-16 +/- 6.40e-20]",
+              "c_gamma": "[-4.90e-16 +/- 1.09e-19]",
+              "c_gamma2": "[2.492e-16 +/- 4.04e-20]"
+            },
+            "mesh_assignment_count": 12929,
+            "x": "48"
+          },
+          {
+            "cauchy_box_abs_upper": {
+              "E": "9.225726422812385862926021218299865722656250000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-7",
+              "P1": "5.472229608338707862458250019699335098266601562500000000000000000000000000000000000000000000000000000000000000000000000000000000000e-8",
+              "P5": "4.251252133657956733259197790175676345825195312500000000000000000000000000000000000000000000000000000000000000000000000000000000000e-8"
+            },
+            "closest_assigned_upper": "[-2.858607438850555623950948011535722059761610580608248710632324218749999999999999999999999999999999999999999999999999999999999999820e-20 +/- 1.78e-150]",
+            "jets": {
+              "E": [
+                "[8.918181694872115832835161912867922820396440188244070830537526617431299460507120917599615127939278121580959071383805986851809546e-9 +/- 4.50e-136]",
+                "[-2.36988e-8 +/- 4.21e-14]",
+                "[1.022e-8 +/- 2.44e-12]"
+              ],
+              "P1": [
+                "[7.4591301248273125445470616936133450819913079931007879461015528758594842974847435416457256195137065942213080270893997876397282325e-9 +/- 4.56e-137]",
+                "[-8.6625e-10 +/- 3.50e-15]",
+                "[-1.3467e-9 +/- 6.41e-14]"
+              ],
+              "P5": [
+                "[1.08447148570643654645871081100706335675281225782305657677617802498025681872553400584913529860664440504651494630828482428084191573e-8 +/- 4.18e-137]",
+                "[-1.2252664e-8 +/- 9.21e-16]",
+                "[6.3169e-9 +/- 3.94e-14]"
+              ]
+            },
+            "laguerre_coefficients": {
+              "c00": "[4.705e-16 +/- 3.18e-20]",
+              "c_beta": "[-4.1356e-16 +/- 9.30e-21]",
+              "c_beta2": "[8.1623e-17 +/- 5.08e-22]",
+              "c_beta_gamma": "[-1.1286e-17 +/- 8.14e-22]",
+              "c_gamma": "[2.318e-17 +/- 9.39e-21]",
+              "c_gamma2": "[1.0796e-17 +/- 5.58e-22]"
+            },
+            "mesh_assignment_count": 5833,
+            "x": "52"
+          },
+          {
+            "cauchy_box_abs_upper": {
+              "E": "2.518603957389706909930637834804656449705362319946289062500000000000000000000000000000000000000000000000000000000000000000000000000e-12",
+              "P1": "7.587586198567612986651265138959843170596286654472351074218750000000000000000000000000000000000000000000000000000000000000000000000e-14",
+              "P5": "1.024688109775738682240275867485479466267861425876617431640625000000000000000000000000000000000000000000000000000000000000000000000e-13"
+            },
+            "closest_assigned_upper": "[-9.851648512754458578631529848992420217376253097371445726498917494495799473952502012252807617187500000000000000000000000000000000001e-28 +/- 4.10e-158]",
+            "jets": {
+              "E": [
+                "[1.1216818779442242607489264302305459536479829731071824337683705179465927757050072411444595611348613233072998295523137982449262832e-13 +/- 1.69e-141]",
+                "[-5.84830e-14 +/- 6.24e-20]",
+                "[5.557e-14 +/- 5.78e-18]"
+              ],
+              "P1": [
+                "[8.0215924299437705065416729761941567749063306973674701164793496869751213636926616999431346191672468902880541432970898357539592746e-15 +/- 6.52e-143]",
+                "[-7.61431e-15 +/- 5.02e-21]",
+                "[2.938e-15 +/- 1.12e-19]"
+              ],
+              "P5": [
+                "[-5.5111967542417061102958350288983827854144341694098944091273408736330048692006298160829863442729517577169519798205008262116374485e-14 +/- 5.59e-142]",
+                "[6.76182e-15 +/- 1.81e-21]",
+                "[1.5286e-14 +/- 1.06e-19]"
+              ]
+            },
+            "laguerre_coefficients": {
+              "c00": "[-2.813e-27 +/- 5.81e-31]",
+              "c_beta": "[-5.57e-28 +/- 3.92e-31]",
+              "c_beta2": "[8.8817e-28 +/- 9.30e-33]",
+              "c_beta_gamma": "[-6.367e-29 +/- 4.37e-33]",
+              "c_gamma": "[-1.153e-28 +/- 5.50e-32]",
+              "c_gamma2": "[3.4410e-29 +/- 6.90e-34]"
+            },
+            "mesh_assignment_count": 46146,
+            "x": "86"
+          }
+        ],
+        "step": "1e-6"
+      },
+      "formula": "For each real entire component, central differences with step h enclose f' and f''. An Acb square bounds abs(f) by M on every Cauchy circle of radius r around the difference segment; the added errors are h^2*M/r^3 and 2*h^2*M/r^4.",
+      "id": "gctb_06_acb_cauchy_jets",
+      "proof_boundary": "Finite spectral certificates at t=0 only.",
+      "readiness": "interval_validated",
+      "role": "interval_method"
+    },
+    {
+      "claim": "All 64,908 boxes covering the admissible positive three-block parameter triangle violate the first Laguerre inequality.",
+      "diagnostics": {
+        "all_boxes_strictly_negative_at_an_assigned_x": true,
+        "assignment_counts": {
+          "48": 12929,
+          "52": 5833,
+          "86": 46146
+        },
+        "assignment_order": [
+          "48",
+          "52",
+          "86"
+        ],
+        "assignment_sha256": "48e36d40cd04261b379508ff7afb58ed7c95c85df9dee3d2cef29d0bb50731e8",
+        "beta_cell_count": 216,
+        "cell_definition": "I_i=[i/80,(i+1)/80], J_j=[j/80,(j+1)/80], 0<=i<216, 0<=j<408-i",
+        "covered_region": "0<=beta<27/10, gamma>=0, beta+gamma<51/10",
+        "denominator": 80,
+        "sum_cell_count": 408,
+        "total_boxes": 64908
+      },
+      "formula": "Every nonnegative-coefficient 9/5/1 block whose kernel residual is globally nonnegative has L[R_(beta,gamma)](x)<0 at at least one of x=48,52,86. The classical P2 residual also has L<0 at x=86.",
+      "id": "gctb_07_positive_three_block_mesh",
+      "proof_boundary": "Exhaustive for nonnegative 9/5/1 coefficients with a globally nonnegative residual; signed extensions remain open.",
+      "readiness": "interval_validated",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "Both established classical real-zero bases leave positive residuals that fail a necessary Laguerre-Polya inequality.",
+      "diagnostics": {
+        "de_bruijn": {
+          "laguerre_value": "[-4.8e-17 +/- 1.15e-19]",
+          "parameters": "beta=pi-3/(2*pi), gamma=1",
+          "strictly_negative": true,
+          "x": "52"
+        },
+        "polya_p2": {
+          "laguerre_value": "[-2.34e-27 +/- 5.35e-30]",
+          "parameters": "beta=-3/(2*pi), gamma=0",
+          "strictly_negative": true,
+          "x": "86"
+        }
+      },
+      "formula": "L[R_P2](86)<0 and L[R_dB](52)<0",
+      "id": "gctb_08_classical_residual_obstructions",
+      "proof_boundary": "Rejects independent LP treatment of the residuals, not the classical base theorems or RH.",
+      "readiness": "ready_to_apply",
+      "role": "interval_composition"
+    },
+    {
+      "claim": "Gasper's published single-shift square does not automatically sign the mixed products in a multi-shift sum.",
+      "diagnostics": {
+        "multi_shift_guard": "A linear combination with several shifts does not yield that two-modulus equality. Its squared modulus contains mixed products between distinct shifts, which the single-shift identity does not sign.",
+        "scope": "This rejects automatic reuse of the published single-shift square, not the possibility of a new matrix-valued or coupled addition formula.",
+        "single_shift": "For F_(a,c)(z)=K_(i(z-i*c))(a)+K_(i(z+i*c))(a), a zero gives equality of two Bessel moduli. Gasper converts their difference into one integral of [f_t(y+c)-f_t(y-c)] times K_(i*x)(a/sqrt(t))^2, and convexity forces y=0."
+      },
+      "formula": "A linear combination with several shifts does not yield that two-modulus equality. Its squared modulus contains mixed products between distinct shifts, which the single-shift identity does not sign.",
+      "id": "gctb_09_gasper_square_scope",
+      "proof_boundary": "This rejects automatic reuse of the published single-shift square, not the possibility of a new matrix-valued or coupled addition formula.",
+      "readiness": "guard_validated",
+      "role": "source_scope_guard"
+    },
+    {
+      "claim": "The surviving comparison route requires signed higher blocks or a new coupled square controlling cross terms together.",
+      "diagnostics": null,
+      "formula": "Seek a signed multi-block or matrix-valued addition identity after full modular cancellation.",
+      "id": "gctb_10_coupled_signed_handoff",
+      "proof_boundary": "Open theorem target; not strict Laguerre positivity, RH, or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "sources": [
+    "outputs/jensen_window_pf_newman_gasper_residual_two_block_gate.md",
+    "outputs/jensen_window_pf_newman_gasper_fake_xi_remainder_gate.md",
+    "outputs/formal_core.md",
+    "https://arxiv.org/abs/0801.2996",
+    "https://arxiv.org/abs/1502.06844",
+    "https://doi.org/10.1215/S0012-7094-50-01720-0",
+    "https://doi.org/10.1007/BF02565336"
+  ],
+  "status": "exact and interval-certified classical three-block residual obstruction"
+}

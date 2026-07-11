@@ -1,0 +1,163 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_uniform_remainder_target.py",
+  "date": "2026-07-06",
+  "finite_diagnostics": {
+    "activation_depth": 21,
+    "activation_t_lower": "[110.902139959017 +/- 7.87e-13]",
+    "deficit_coefficient": "[190.68658368200 +/- 5.53e-12]",
+    "leading_scale_rows": [
+      {
+        "T": "25",
+        "leading_only_k_max_floor": 0,
+        "leading_only_k_max_sample": "5.925432157343440434E-1",
+        "proof_boundary": "Leading fixed-k estimate only; it ignores all remainders and cannot prove the tail.",
+        "target_tail_start_k": 22
+      },
+      {
+        "T": "50",
+        "leading_only_k_max_floor": 3,
+        "leading_only_k_max_sample": "3.870172862937376174E+0",
+        "proof_boundary": "Leading fixed-k estimate only; it ignores all remainders and cannot prove the tail.",
+        "target_tail_start_k": 22
+      },
+      {
+        "T": "100",
+        "leading_only_k_max_floor": 16,
+        "leading_only_k_max_sample": "1.698069145174950469E+1",
+        "proof_boundary": "Leading fixed-k estimate only; it ignores all remainders and cannot prove the tail.",
+        "target_tail_start_k": 22
+      }
+    ],
+    "monotone_coefficient": "[825.997624927 +/- 3.55e-10]",
+    "rows_below_tail_start": 3,
+    "target_tail_start_k": 22
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_uniform_remainder_target.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The target remains open_theorem_target.",
+    "Fixed-k Taylor signs are not promoted to an all-k tail theorem.",
+    "The moving-saddle or far-tail requirement remains open.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_uniform_remainder_target",
+  "proof_boundary": "Open theorem target only. It states the two-scale uniform remainder theorem needed by the signed Gaussian perturbation route, but it does not prove that theorem, does not prove the bounded log-curvature target, does not prove cone entry, and does not prove Lambda <= 0.",
+  "sign_scout_json": "work/rh_compute/results/jensen_window_pf_phi_taylor_cone_entry_sign_scout.json",
+  "source_bounded_log_curvature_target": "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_target.md",
+  "source_defect_tail_target": "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md",
+  "source_signed_gaussian_matrix": "outputs/jensen_window_pf_negative_lambda_signed_gaussian_perturbation_matrix.md",
+  "status": "open_theorem_target",
+  "summary": {
+    "leading_scale_rows": 3,
+    "leading_scale_rows_below_tail_start": 3,
+    "live_routes": 2,
+    "main_finding": "The signed Gaussian perturbation route now needs a two-scale uniform remainder theorem: the fixed-k Taylor signs give the correct local direction, but the bounded-curvature target shrinks like 1/k, so a leading fixed-k D2/T^2 estimate cannot be promoted to the all-k tail. A proof must either control the moving saddle globally in k/T or combine a finite collar with a separate far-tail theorem.",
+    "open_requirement_rows": 2,
+    "ready_to_apply_rows": 0,
+    "rejected_routes": 1,
+    "target_closing": false,
+    "target_rows": 8
+  },
+  "target_id": "target_negative_lambda_uniform_remainder",
+  "target_rows": [
+    {
+      "acceptance_test": "State the scale in k/T where each remainder bound is valid.",
+      "claim_if_proved": "The signed perturbation expansion gives the correct fixed-k signs as T tends to infinity.",
+      "gap": "Fixed-k signs do not control the infinite tail where k is unbounded.",
+      "id": "nlurt_01_fixed_k_scope",
+      "proof_boundary": "Formal fixed-k scope only; not a uniform theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "formal_scope",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_signed_gaussian_perturbation_matrix.md",
+        "outputs/jensen_window_pf_phi_taylor_cone_entry_sign_scout.md"
+      ]
+    },
+    {
+      "acceptance_test": "Do not promote fixed-k asymptotics to an all-k tail without changing scale.",
+      "claim_if_proved": "The bounded-curvature target is O(1/k), while the leading fixed-k deficit D2/T^2 is independent of k.",
+      "gap": "For any fixed T, a leading-only fixed-k estimate eventually exceeds the all-k target bound.",
+      "id": "nlurt_02_shrinking_target_obstruction",
+      "proof_boundary": "Exact scale obstruction only; not a statement about the full zeta coefficient tail.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_obstruction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_target.md"
+      ]
+    },
+    {
+      "acceptance_test": "Use them only to size the asymptotic route.",
+      "claim_if_proved": "The leading-only cutoff estimates quantify why the fixed-k model is not the finite-prefix proof at T=25,50,100.",
+      "gap": "These estimates ignore remainders and do not decide the actual finite prefix.",
+      "id": "nlurt_03_leading_scale_diagnostic",
+      "proof_boundary": "Scale diagnostic only.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_scale_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_signed_gaussian_perturbation_matrix.md"
+      ]
+    },
+    {
+      "acceptance_test": "Give constants and a range such as k<=alpha*T or k<=K(T), with interval-safe inequalities.",
+      "claim_if_proved": "For a controlled local or mesoscopic range, bound the signed Taylor remainder by a fixed fraction of the positive deficit and monotone correction.",
+      "gap": "No explicit k/T-dependent remainder bound is proved.",
+      "id": "nlurt_04_local_uniform_remainder_requirement",
+      "proof_boundary": "Open analytic requirement only; the required k/T-dependent constants are not proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_phi_taylor_cone_entry_sign_scout.md"
+      ]
+    },
+    {
+      "acceptance_test": "Produce a global estimate valid to infinity, or a finite cutoff plus a separate tail theorem.",
+      "claim_if_proved": "For k beyond the local range, prove the bounded log-curvature estimate using a moving-saddle or global Phi-kernel argument.",
+      "gap": "The saddle location moves away from u=0 as k/T grows, so the local Phi Taylor expansion is not enough.",
+      "id": "nlurt_05_far_tail_saddle_requirement",
+      "proof_boundary": "Open analytic requirement only.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_target.md"
+      ]
+    },
+    {
+      "acceptance_test": "Pair any new A_k enclosures with an analytic tail theorem and explicit starting index.",
+      "claim_if_proved": "Extend the finite collar to a larger K, then prove a tail theorem starting at K+1.",
+      "gap": "Finite extension alone never proves the infinite tail.",
+      "id": "nlurt_06_collared_finite_tail_route",
+      "proof_boundary": "Live route only; not a closed proof.",
+      "readiness": "not_ready_to_apply",
+      "role": "live_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_finite_collar_contract.md",
+        "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md"
+      ]
+    },
+    {
+      "acceptance_test": "Reject any manuscript step that uses only fixed-k signs for the all-k tail.",
+      "claim_if_proved": "The fixed-k Taylor signs alone prove the all-k negative-lambda tail.",
+      "gap": "This promotion ignores the shrinking target and moving saddle.",
+      "id": "nlurt_07_fixed_k_promotion_rejected",
+      "proof_boundary": "Rejected proof template only.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_signed_gaussian_perturbation_matrix.md"
+      ]
+    },
+    {
+      "acceptance_test": "After proof, re-run the bounded-curvature and defect-tail targets without changing forbidden endpoint assumptions.",
+      "claim_if_proved": "A two-scale uniform remainder theorem would supply the bounded-curvature half of the buffered defect-tail route.",
+      "gap": "The monotone-contraction theorem and the uniform remainder theorem are both still open.",
+      "id": "nlurt_08_conditional_bounded_curvature_application",
+      "proof_boundary": "Conditional application only; not cone entry or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "conditional_application",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_target.md",
+        "outputs/jensen_window_pf_negative_lambda_log_curvature_bridge.md"
+      ]
+    }
+  ]
+}

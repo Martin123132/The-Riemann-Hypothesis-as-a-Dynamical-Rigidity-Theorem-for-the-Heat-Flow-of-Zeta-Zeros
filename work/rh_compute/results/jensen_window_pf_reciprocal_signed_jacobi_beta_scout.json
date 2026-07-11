@@ -1,0 +1,75 @@
+{
+  "date": "2026-07-06",
+  "finite_grid": {
+    "all_beta_rows_match_signature": true,
+    "beta_rows": 3675,
+    "degrees": [
+      2,
+      8
+    ],
+    "dps": 520,
+    "expected_negative_beta_rows": 630,
+    "expected_positive_beta_rows": 2940,
+    "expected_terminal_zero_beta_rows": 105,
+    "lambdas": [
+      "0",
+      "1e-6",
+      "1e-4",
+      "1e-2",
+      "1e-1"
+    ],
+    "negative_beta_rows": 630,
+    "ok_beta_rows": 3675,
+    "positive_beta_rows": 2940,
+    "row_log": "work\\rh_compute\\results\\jensen_window_pf_reciprocal_signed_jacobi_beta_lamgrid_n0_n20_d2_d8_dps520.jsonl",
+    "shifts": [
+      0,
+      20
+    ],
+    "source_enclosures": [
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k0_k9.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k10_k20.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k21_k32.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k33_k48.jsonl",
+      "work\\rh_compute\\results\\acb_enclosures_repro_hankel_15c_lamgrid_k49_k64.jsonl"
+    ],
+    "terminal_zero_beta_rows": 105
+  },
+  "invariants": [
+    "The beta formula uses a last-column shifted determinant, not a fully shifted Hankel determinant.",
+    "Every nonterminal positive beta row in the finite grid must be positive and separated from zero.",
+    "Every d>=3 beta_1 row in the finite grid must be negative and separated from zero.",
+    "Every degree-2 terminal beta_1 row must contain zero.",
+    "The scout is finite evidence only and does not mark the signed-fraction route ready to apply."
+  ],
+  "kind": "jensen_window_pf_reciprocal_signed_jacobi_beta_scout",
+  "proof_boundary": "Signed Jacobi diagonal-parameter diagnostic only; not a proof of a signed continued-fraction theorem, a production-matrix model, the all-order column recurrence, Schur positivity, Jensen-window PF-infinity, RH, or Lambda <= 0.",
+  "summary": {
+    "beta_rows": 3675,
+    "main_finding": "On the finite Arb grid, the Jacobi diagonal parameters for E(t)=1/H(-t) match beta_0>0, beta_1<0 for degrees d>=3, beta_n>0 for n>=2, and a terminal zero-containing beta_1 in degree d=2. This gives a sharper signed-Jacobi target but does not supply the missing all-order theorem.",
+    "negative_beta_rows": 630,
+    "positive_beta_rows": 2940,
+    "ready_to_apply_rows": 0,
+    "symbolic_rows": 3,
+    "target_closing": false,
+    "terminal_zero_beta_rows": 105
+  },
+  "symbolic_rows": [
+    {
+      "formula_boundary": "This is not the fully shifted determinant det(mu_{i+j+1}); using the fully shifted determinant gives the wrong degree-2 sanity check.",
+      "id": "last_column_shifted_beta_formula",
+      "statement": "For the ordinary J-fraction diagonal parameter, define Delta_r^* by shifting only the final Hankel column, set Q_r=Delta_r^*/Delta_r and Q_0=0, then beta_n=Q_{n+1}-Q_n."
+    },
+    {
+      "id": "degree_two_formula_sanity_check",
+      "proof_boundary": "Sanity check only; not an all-degree theorem for zeta windows.",
+      "statement": "For H(t)=1+g_1*t+g_2*t^2 and E(t)=1/(1-g_1*t+g_2*t^2), the formula gives beta_0=g_1, lambda_1=-g_2, and terminal beta_1=0."
+    },
+    {
+      "id": "finite_beta_signature",
+      "proof_boundary": "Finite Arb evidence only; not a signed Jacobi or production-matrix theorem.",
+      "statement": "On the current finite grid the diagonal beta signature is beta_0>0, beta_1<0 for d>=3, beta_n>0 for n>=2, and the degree-2 terminal beta_1 contains zero."
+    }
+  ],
+  "target_route_row": "rp_09_signed_or_modified_continued_fraction"
+}

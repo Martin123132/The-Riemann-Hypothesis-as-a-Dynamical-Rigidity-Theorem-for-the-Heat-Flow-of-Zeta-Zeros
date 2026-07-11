@@ -1,0 +1,131 @@
+{
+  "date": "2026-07-06",
+  "enclosure_jsonl": [
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k0_k9.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k10_k20.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k21_k32.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k33_k48.jsonl",
+    "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k49_k64.jsonl"
+  ],
+  "exact_rows": [
+    {
+      "argument": "Differentiate x_k=(A_{k+1}/A_k)/(A_k/A_{k-1}) using dA_k/dlambda=2*(2*k+1)*A_{k+1}.",
+      "formula": "dlog(x_k)/dlambda = 2*r_k*((2*k+3)*x_{k+1} + (2*k-1)/x_k - 2*(2*k+1))",
+      "id": "hfrci_01_ratio_flow_identity",
+      "proof_boundary": "Exact ratio-flow identity only.",
+      "role": "exact_identity"
+    },
+    {
+      "argument": "The strong lower threshold for the next coordinate makes the lower wall inward-pointing.",
+      "formula": "at x_k=(2*k-1)/(2*k+1), F_k=(2*k+3)*x_{k+1}-(2*k+1)>=0 if x_{k+1}>=(2*k+1)/(2*k+3)",
+      "id": "hfrci_02_lower_wall_inward",
+      "proof_boundary": "Exact lower-wall condition only; not an initial-condition theorem.",
+      "role": "exact_boundary_condition"
+    },
+    {
+      "argument": "Adjacent log-concavity of the next coordinate makes the upper wall inward-pointing.",
+      "formula": "at x_k=1, F_k=(2*k+3)*(x_{k+1}-1)<=0 if x_{k+1}<=1",
+      "id": "hfrci_03_upper_wall_inward",
+      "proof_boundary": "Exact upper-wall condition only; it assumes the next upper bound.",
+      "role": "exact_boundary_condition"
+    },
+    {
+      "argument": "Use the heat-flow monotone-wall bracket and the exact boundary-threshold lemma.",
+      "formula": "at x_{k+1}=x_k=q, dlog(x_{k+1}/x_k)/dlambda >= 0 if x_{k+2}>=q and q>=(2*k-1)/(2*k+5)",
+      "id": "hfrci_04_monotone_wall_inward",
+      "proof_boundary": "Exact monotone-wall condition only; not a proof that the wall is reached from zeta data.",
+      "role": "exact_boundary_condition"
+    },
+    {
+      "argument": "The vector field for x_k depends on x_{k+1}; the monotone-wall field for x_{k+1}/x_k depends on x_{k+2}.",
+      "formula": "checking x_1..x_K requires collar variables x_{K+1} for lower/upper walls and x_{K+2} for monotone walls",
+      "id": "hfrci_05_finite_collar_requirement",
+      "proof_boundary": "Finite-prefix caveat only; no finite prefix alone proves the infinite cone.",
+      "role": "finite_prefix_caveat"
+    },
+    {
+      "argument": "Combine the inward-pointing lower, upper, and monotone boundary conditions for every k.",
+      "formula": "if the full ratio cone holds at lambda0 and the positive heat-flow ratio ODE is well posed, then the cone is forward-invariant while the hypotheses persist",
+      "id": "hfrci_06_conditional_forward_invariance",
+      "proof_boundary": "Conditional invariance only; the zeta initial/terminal cone condition and global analytic well-posedness remain open.",
+      "role": "conditional_exact_lemma"
+    }
+  ],
+  "finite_diagnostics": {
+    "coordinate_lower_positive_rows": 315,
+    "coordinate_lower_rows": 315,
+    "coordinate_monotone_positive_rows": 310,
+    "coordinate_monotone_rows": 310,
+    "coordinate_upper_positive_rows": 315,
+    "coordinate_upper_rows": 315,
+    "lambdas": [
+      "0.0",
+      "0.000001",
+      "0.0001",
+      "0.01",
+      "0.1"
+    ],
+    "lower_wall_positive_rows": 310,
+    "lower_wall_rows": 310,
+    "max_coefficient_index": 64,
+    "min_coordinate_lower_margin": {
+      "k": 63,
+      "lam": "0.1",
+      "sample": "8.170843282044743874E-3"
+    },
+    "min_coordinate_monotone_margin": {
+      "k": 62,
+      "lam": "0.0",
+      "sample": "9.895636183563448458E-5"
+    },
+    "min_coordinate_upper_margin": {
+      "k": 63,
+      "lam": "0.0",
+      "sample": "7.573304754109889330E-3"
+    },
+    "min_lower_wall_margin": {
+      "k": 62,
+      "lam": "0.1",
+      "sample": "1.037697096819682472E+0"
+    },
+    "min_monotone_wall_margin": {
+      "k": 61,
+      "lam": "0.1",
+      "sample": "2.665474275226736438E-4"
+    },
+    "min_upper_wall_margin": {
+      "k": 1,
+      "lam": "0.0",
+      "sample": "2.951966135520726476E-1"
+    },
+    "monotone_wall_positive_rows": 305,
+    "monotone_wall_rows": 305,
+    "upper_wall_positive_rows": 310,
+    "upper_wall_rows": 310
+  },
+  "invariants": [
+    "The lemma is conditional on a full infinite cone or a collared finite cone.",
+    "The finite zeta diagnostics are sanity evidence only.",
+    "No initial or terminal zeta cone condition is proved.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_heat_flow_ratio_cone_invariance_lemma",
+  "proof_boundary": "Exact conditional ratio-cone invariance lemma only. It proves inward-pointing boundary algebra for the cone (2*k-1)/(2*k+1) <= x_k <= 1 and x_{k+1}>=x_k under the heat-flow ratio ODE, assuming positive smooth coefficients and the required infinite or collared finite ratio variables. It does not prove that the actual zeta coefficients enter the cone at an initial or terminal lambda, does not prove all-shift monotone contractions, does not prove jwpf_06, and does not prove RH or Lambda <= 0.",
+  "source_boundary_threshold": "outputs/jensen_window_pf_heat_flow_boundary_threshold_lemma.md",
+  "source_heat_flow_closure": "outputs/jensen_window_pf_heat_flow_monotone_closure_scout.md",
+  "source_theorem_target": "outputs/jensen_window_pf_monotone_contraction_theorem_target.md",
+  "status": "available_exact_conditional_invariance_lemma",
+  "summary": {
+    "conditional_invariance_available": true,
+    "coordinate_lower_rows": 315,
+    "coordinate_monotone_rows": 310,
+    "coordinate_upper_rows": 315,
+    "exact_rows": 6,
+    "lower_wall_rows": 310,
+    "main_finding": "The heat-flow ratio cone has an exact conditional forward-invariance algebra: the lower wall, upper wall, and monotone wall all point inward under the stated neighbor and threshold hypotheses. The remaining theorem gap is no longer the boundary algebra; it is to prove that the actual zeta heat-flow coefficient sequence enters the full infinite cone at a suitable lambda and that the infinite/collared flow argument is analytically legitimate.",
+    "monotone_wall_rows": 305,
+    "target_closing": false,
+    "upper_wall_rows": 310,
+    "zeta_initial_condition_available": false
+  }
+}

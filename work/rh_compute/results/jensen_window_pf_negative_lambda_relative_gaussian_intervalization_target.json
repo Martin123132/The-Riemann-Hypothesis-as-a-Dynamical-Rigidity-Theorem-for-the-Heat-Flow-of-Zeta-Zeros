@@ -1,0 +1,219 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.py",
+  "date": "2026-07-07",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The floating grid is not promoted to a certified theorem.",
+    "The intervalization target is finite-grid only until a continuum-in-T bridge is proved.",
+    "The proposed error cap is sufficient target bookkeeping, not a proved bound.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target",
+  "matrix_rows": [
+    {
+      "claim": "Import the cancellation-reduced finite-grid ratios and compute remaining ratio slack to the first-omitted threshold one.",
+      "diagnostics": {
+        "budget_summary": {
+          "closed_if_total_cap_met": true,
+          "common_half_slack": "1.464497048983522950E-2",
+          "common_slack_to_one": "2.928994097967045900E-2",
+          "derivative_slack_to_one": "3.064322252419613100E-2",
+          "proposed_per_error_source_cap_for_five_sources": "2.000000000000000000E-3",
+          "proposed_total_ratio_error_cap": "1.000000000000000000E-2",
+          "value_slack_to_one": "2.928994097967045900E-2"
+        },
+        "certification_budget_row_count": 2,
+        "certification_budget_rows": [
+          {
+            "channel": "value",
+            "closed_if_cap_met": true,
+            "half_slack": "1.464497048983522950E-2",
+            "observed_worst_location": "T=10000, F_21",
+            "observed_worst_ratio": "9.707100590203295410E-1",
+            "proof_boundary": "Certification budget only; the intervalized quadrature and analytic error terms are not yet proved.",
+            "proposed_total_ratio_error_cap": "1.000000000000000000E-2",
+            "slack_to_one": "2.928994097967045900E-2"
+          },
+          {
+            "channel": "derivative",
+            "closed_if_cap_met": true,
+            "half_slack": "1.532161126209806550E-2",
+            "observed_worst_location": "T=10000, F_21",
+            "observed_worst_ratio": "9.693567774758038690E-1",
+            "proof_boundary": "Certification budget only; the intervalized quadrature and analytic error terms are not yet proved.",
+            "proposed_total_ratio_error_cap": "1.000000000000000000E-2",
+            "slack_to_one": "3.064322252419613100E-2"
+          }
+        ],
+        "obligation_row_count": 8,
+        "obligation_rows": [
+          {
+            "claim": "Use the cancellation-reduced Gamma-expectation residual cores for value and derivative channels.",
+            "id": "nlrgit_01_residual_core_identity",
+            "proof_boundary": "Exact coordinate identity only; not a numerical enclosure.",
+            "readiness": "available_exact",
+            "required_upgrade": "None for the identity; downstream proof must preserve the same normalization and degree-40 polynomial.",
+            "role": "exact_reduction",
+            "target_error_cap": null
+          },
+          {
+            "claim": "Replace SciPy floating generalized Laguerre nodes and weights by interval enclosures for every recorded index and order.",
+            "id": "nlrgit_02_laguerre_node_weight_intervals",
+            "proof_boundary": "Open numerical-certification requirement only.",
+            "readiness": "not_ready_to_apply",
+            "required_upgrade": "Certified roots and Christoffel weights for L_N^(i-1/2), including root separation and weight-radius propagation.",
+            "role": "open_requirement",
+            "target_error_cap": "2.000000000000000000E-3"
+          },
+          {
+            "claim": "Enclose Phi, Phi', Phi(0), and their n>30 tails on all node-induced v ranges used by the finite grid.",
+            "id": "nlrgit_03_phi_and_c0_interval_tail",
+            "proof_boundary": "Open analytic/numerical tail requirement only.",
+            "readiness": "not_ready_to_apply",
+            "required_upgrade": "Arb or analytic exponential-tail enclosure for value and derivative cores after the n=30 truncation.",
+            "role": "open_requirement",
+            "target_error_cap": "2.000000000000000000E-3"
+          },
+          {
+            "claim": "Bound the generalized Gauss-Laguerre quadrature remainder for the cancellation-reduced cores, not just the spread across orders.",
+            "id": "nlrgit_04_quadrature_remainder_error",
+            "proof_boundary": "Open quadrature-error requirement only.",
+            "readiness": "not_ready_to_apply",
+            "required_upgrade": "A rigorous quadrature remainder theorem or an interval adaptive integral cross-check for the Gamma expectation.",
+            "role": "open_requirement",
+            "target_error_cap": "2.000000000000000000E-3"
+          },
+          {
+            "claim": "Propagate Arb coefficient-ratio balls and first-omitted-term denominators through the ratio comparisons.",
+            "id": "nlrgit_05_ratio_and_coefficient_ball_propagation",
+            "proof_boundary": "Open interval propagation requirement only.",
+            "readiness": "not_ready_to_apply",
+            "required_upgrade": "Interval-safe denominator lower bounds and signed residual absolute-value enclosure in first-omitted units.",
+            "role": "open_requirement",
+            "target_error_cap": "2.000000000000000000E-3"
+          },
+          {
+            "claim": "Account for arithmetic rounding, summation, and cross-source aggregation so the total ratio error remains below the proposed cap.",
+            "id": "nlrgit_06_rounding_and_aggregation_budget",
+            "proof_boundary": "Open certification-ledger requirement only.",
+            "readiness": "not_ready_to_apply",
+            "required_upgrade": "A machine-checkable error ledger whose total ratio radius is below the recorded total cap.",
+            "role": "open_requirement",
+            "target_error_cap": "1.000000000000000000E-2"
+          },
+          {
+            "claim": "An intervalized finite T grid would by itself prove the full collar residual theorem on 0<=u<=1/1156.",
+            "id": "nlrgit_07_finite_grid_not_uniform_collar",
+            "proof_boundary": "Rejected promotion only; finite grid certification is not a uniform collar theorem.",
+            "readiness": "not_ready_to_apply",
+            "required_upgrade": "A separate T-continuity, monotonicity, interval subdivision, or far-tail theorem is still required.",
+            "role": "rejected_route",
+            "target_error_cap": null
+          },
+          {
+            "claim": "A promoted proof must state all interval sources, cap their total ratio error, and separately bridge from finite grid certification to the full collar or all-k theorem.",
+            "id": "nlrgit_08_acceptance_gate",
+            "proof_boundary": "Proof-hygiene gate only; not scaled-curvature monotonicity, cone entry, RH, or Lambda <= 0.",
+            "readiness": "not_ready_to_apply",
+            "required_upgrade": "Intervalized grid certificate plus a continuum-in-T theorem or subdivision plan with certified coverage.",
+            "role": "acceptance_gate",
+            "target_error_cap": "1.000000000000000000E-2"
+          }
+        ],
+        "open_requirement_rows": 5,
+        "proof_boundary_note": "This target is a certification roadmap for the finite cancellation-reduced grid. It does not provide node/weight intervals, quadrature-remainder bounds, Phi n-tail bounds, or a continuum-in-T theorem.",
+        "ready_to_apply_rows": 0,
+        "source_grid_summary": {
+          "grid_rows": 20,
+          "index_count": 4,
+          "max_derivative_ratio_spread_over_orders": "9.62202755450426673e-15",
+          "max_derivative_ratio_to_first_omitted_over_orders": "0.969356777475803869",
+          "max_value_ratio_spread_over_orders": "9.63500159925082018e-15",
+          "max_value_ratio_to_first_omitted_over_orders": "0.970710059020329541",
+          "quadrature_order_count": 4,
+          "selected_quadrature_order": 192,
+          "t_grid_count": 5
+        }
+      },
+      "id": "nlrgit_01_budget_import",
+      "proof_boundary": "Exact budget bookkeeping only; not an interval certificate.",
+      "readiness": "available_exact",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_asymptotic_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "If all intervalization and quadrature-certification errors are bounded by the proposed total ratio cap in both channels, the finite grid remains below one first omitted term.",
+      "id": "nlrgit_02_common_error_cap",
+      "proof_boundary": "Sufficient finite-grid certification condition only; the cap is not yet proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_sufficient_condition"
+    },
+    {
+      "claim": "The required interval sources are Laguerre node/weight balls, Phi and Phi' n-tail balls, coefficient-ratio propagation, quadrature-remainder error, and aggregation/rounding control.",
+      "id": "nlrgit_03_interval_sources",
+      "proof_boundary": "Open numerical-certification requirement only.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_requirement"
+    },
+    {
+      "claim": "A certified finite T grid still requires a separate continuum-in-T or far-tail theorem before it can become the full real-collar residual estimate.",
+      "id": "nlrgit_04_grid_to_collar_gap",
+      "proof_boundary": "Open collar-uniformity requirement only.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "The existing floating cancellation-reduced grid already proves the first-omitted-term theorem.",
+      "gap": "The grid lacks interval node/weight enclosures, quadrature-remainder bounds, Phi n-tail bounds, and T-continuum coverage.",
+      "id": "nlrgit_05_floating_grid_promotion_rejected",
+      "proof_boundary": "Rejected promotion only; not a proof of the actual remainder.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_formal_tail_obstruction_scout.md"
+      ]
+    },
+    {
+      "claim": "Any promoted remainder proof must pass the interval-source ledger and keep total ratio radii below the recorded cap before using the grid as certified evidence.",
+      "id": "nlrgit_06_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not scaled-curvature monotonicity, cone entry, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Open numerical-certification target only. It gives a sufficient error budget for certifying the finite cancellation-reduced grid, but it does not provide interval enclosures, does not prove a uniform collar remainder theorem, does not prove scaled-curvature monotonicity, does not prove cone entry, and does not prove RH or Lambda <= 0.",
+  "source_actual_endpoint_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_actual_endpoint_remainder_scout.md",
+  "source_asymptotic_remainder_target": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_asymptotic_remainder_target.md",
+  "source_cancellation_reduced_grid_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_cancellation_reduced_remainder_grid_scout.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_formal_tail_obstruction": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_formal_tail_obstruction_scout.md",
+  "source_residual_budget": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_degree40_residual_tail_budget.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "open numerical-certification target",
+  "summary": {
+    "certification_budget_rows": 2,
+    "closed_if_total_cap_met": true,
+    "common_slack_to_one": "2.928994097967045900E-2",
+    "main_finding": "The cancellation-reduced finite grid leaves a common ratio slack of about 2.928994097967e-2 before reaching one first omitted term. A future interval certificate with total ratio error below 1.0e-2 in both value and derivative channels would keep the finite grid below the first-omitted threshold. The remaining work is to intervalize Laguerre nodes/weights, Phi tails, coefficient propagation, quadrature error, and then separately bridge the finite grid to the full collar.",
+    "matrix_rows": 6,
+    "obligation_rows": 8,
+    "observed_worst_derivative_ratio": "0.969356777475803869",
+    "observed_worst_value_ratio": "0.970710059020329541",
+    "open_requirement_rows": 5,
+    "proposed_per_error_source_cap_for_five_sources": "2.000000000000000000E-3",
+    "proposed_total_ratio_error_cap": "1.000000000000000000E-2",
+    "ready_to_apply_rows": 0,
+    "target_closing": false
+  }
+}

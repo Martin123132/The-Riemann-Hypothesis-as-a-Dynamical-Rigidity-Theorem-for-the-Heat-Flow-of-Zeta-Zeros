@@ -22,6 +22,7 @@ DEFAULT_LEDGER = REPO_ROOT / "work/rh_compute/results/proof_claim_ledger.json"
 ALLOWED_CATEGORIES = {
     "exact_lemma",
     "finite_certificate",
+    "interval_certificate",
     "diagnostic",
     "algebraic_reindexing",
     "countermodel_gate",
@@ -34,6 +35,7 @@ ALLOWED_CATEGORIES = {
 ALLOWED_STATUSES = {
     "available_exact",
     "finite_validated",
+    "interval_validated",
     "diagnostic_validated",
     "guard_validated",
     "open_target",
@@ -44,6 +46,7 @@ ALLOWED_STATUSES = {
 CATEGORY_STATUSES = {
     "exact_lemma": {"available_exact"},
     "finite_certificate": {"finite_validated"},
+    "interval_certificate": {"interval_validated"},
     "diagnostic": {"diagnostic_validated"},
     "algebraic_reindexing": {"guard_validated"},
     "countermodel_gate": {"guard_validated"},
@@ -126,7 +129,7 @@ def validate_claim(claim: dict) -> list[LedgerIssue]:
     if not has_boundary(boundary):
         issues.append(LedgerIssue(claim_id, "weak-proof-boundary", boundary))
 
-    if category in {"finite_certificate", "diagnostic", "algebraic_reindexing", "countermodel_gate", "hygiene_gate"}:
+    if category in {"finite_certificate", "interval_certificate", "diagnostic", "algebraic_reindexing", "countermodel_gate", "hygiene_gate"}:
         if "validation_command" not in claim:
             issues.append(LedgerIssue(claim_id, "missing-validation-command", "validated claim needs executable gate"))
 

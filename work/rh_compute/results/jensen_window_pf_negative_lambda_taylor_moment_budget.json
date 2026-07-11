@@ -1,0 +1,271 @@
+{
+  "budget_rows": [
+    {
+      "acceptance_test": "Keep the pure Gaussian cancellation separate from any Taylor remainder estimate.",
+      "claim": "After factoring the pure Gaussian moments, a local Taylor model changes x_k only through F_(k+1)*F_(k-1)/F_k^2.",
+      "id": "nltmb_01_gaussian_moment_factorization",
+      "proof_boundary": "Exact model reduction only; not a theorem about the full zeta coefficient tail.",
+      "readiness": "not_ready_to_apply",
+      "role": "exact_reduction",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_gaussian_curvature_matrix.md"
+      ]
+    },
+    {
+      "acceptance_test": "Treat q/T, not k alone, as the local expansion parameter.",
+      "claim": "The degree-6 local multiplier is F_k^(<=6)=1+a*q/T+b*q*(q+1)/T^2+c*q*(q+1)*(q+2)/T^3 with q=k+1/2.",
+      "id": "nltmb_02_truncated_multiplier_formula",
+      "proof_boundary": "Formal low-order Taylor model only; the omitted R_k^(>=8) is not bounded here.",
+      "readiness": "not_ready_to_apply",
+      "role": "formal_model",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_phi_taylor_cone_entry_sign_scout.md"
+      ]
+    },
+    {
+      "acceptance_test": "Do not use the low-order truncation as a finite proof model for lambda=-25,-50,-100.",
+      "claim": "At the k=22 tail start, the degree-6 Taylor multiplier is an invalid positive-moment model for four sampled T values and only bounded for two larger sampled T values.",
+      "id": "nltmb_03_tail_start_stability_samples",
+      "proof_boundary": "Finite diagnostic only; it does not contradict the separately certified actual ACB prefix.",
+      "readiness": "not_ready_to_apply",
+      "role": "finite_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "acceptance_test": "Any local/mesoscopic theorem must state its q/T range and constants explicitly.",
+      "claim": "The simple stability budget abs(a)*(k+1/2)/T<=1/2 covers k=22 only after T is about 1685.4.",
+      "id": "nltmb_04_first_correction_budget",
+      "proof_boundary": "Scale budget only; not a rigorous remainder theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "scale_budget",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_signed_gaussian_perturbation_matrix.md"
+      ]
+    },
+    {
+      "acceptance_test": "Give interval-safe lower bounds for the full normalized moment multiplier, including the Taylor tail.",
+      "claim": "A proof must certify F_k^(<=6)+R_k^(>=8)>0 throughout its claimed k/T range.",
+      "id": "nltmb_05_normalizer_positivity_requirement",
+      "proof_boundary": "Open analytic requirement only; positivity of the full multiplier is not proved here.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "acceptance_test": "State a concrete inequality comparing the Taylor-tail log-curvature error to the remaining target margin.",
+      "claim": "A proof must bound the second log-difference contribution of R_k^(>=8) strongly enough to keep B_k<=2/(3*(2*k+1)).",
+      "id": "nltmb_06_log_curvature_remainder_requirement",
+      "proof_boundary": "Open analytic requirement only; the bounded log-curvature theorem is not proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_target.md"
+      ]
+    },
+    {
+      "acceptance_test": "Do not infer B_(k+1)<=B_k from the fixed-k sign without a uniform remainder bound.",
+      "claim": "A proof must also control the third log-difference or provide the separate monotone-contraction theorem required by the log-curvature bridge.",
+      "id": "nltmb_07_monotone_remainder_requirement",
+      "proof_boundary": "Open analytic requirement only; monotone contraction remains an open target.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_requirement",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_monotone_contraction_theorem_target.md"
+      ]
+    },
+    {
+      "acceptance_test": "Reject any use of the low-order local truncation as a substitute for the actual ACB prefix plus analytic tail.",
+      "claim": "The degree-6 Taylor truncation alone proves the finite negative-lambda prefix or the all-k tail.",
+      "id": "nltmb_08_low_order_finite_T_promotion_rejected",
+      "proof_boundary": "Rejected proof template only.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_cone_entry_prefix_scout.md"
+      ]
+    },
+    {
+      "acceptance_test": "Pair the local q/T theorem with either a far-tail saddle theorem or an explicit finite collar and analytic tail.",
+      "claim": "A successful local/mesoscopic theorem should hand off at a stated k<=eta*T or k<=K(T) to the far-tail moving-saddle theorem.",
+      "id": "nltmb_09_local_mesoscopic_theorem_handoff",
+      "proof_boundary": "Conditional handoff only; not cone entry or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "conditional_handoff",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    }
+  ],
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_taylor_moment_budget.py",
+  "date": "2026-07-06",
+  "diagnostics": {
+    "bounded_truncation_rows": 2,
+    "first_correction_budget": {
+      "eta_q_over_T": "1.334977674853986504E-2",
+      "proof_boundary": "Scale budget only; it is a stability diagnostic, not a rigorous Taylor remainder theorem.",
+      "tail_start_T_min": "1.685421443655298788E+3",
+      "tail_start_k": 22,
+      "threshold": "abs(a)*(k+1/2)/T <= 1/2"
+    },
+    "invalid_truncation_rows": 4,
+    "overbound_truncation_rows": 1,
+    "positive_truncation_rows": 3,
+    "ratio_a": "[-37.45380985900664 +/- 7.39e-15]",
+    "ratio_b": "[606.050644636309 +/- 2.44e-13]",
+    "ratio_c": "[-5047.98924959459 +/- 3.10e-12]",
+    "sample_T_values": [
+      25,
+      50,
+      100,
+      200,
+      500,
+      1000,
+      2000
+    ],
+    "tail_start_k": 22,
+    "tail_start_samples": [
+      {
+        "B_over_target_bound": null,
+        "T": "25",
+        "first_correction_abs": "3.370842887310597575E+1",
+        "k": 22,
+        "proof_boundary": "Low-order Taylor-moment truncation diagnostic only; it is not the actual zeta coefficient prefix.",
+        "q_over_T": "9.000000000000000000E-1",
+        "target_bound": "1.481481481481481481E-2",
+        "truncated_B": null,
+        "truncated_F_k": "-3.705176510564669320E+3",
+        "truncated_F_k_minus_1": "-3.234842135965280757E+3",
+        "truncated_F_k_plus_1": "-4.219124578089563255E+3",
+        "truncated_x": null,
+        "truncation_status": "invalid_truncation_normalizer"
+      },
+      {
+        "B_over_target_bound": null,
+        "T": "50",
+        "first_correction_abs": "1.685421443655298788E+1",
+        "k": 22,
+        "proof_boundary": "Low-order Taylor-moment truncation diagnostic only; it is not the actual zeta coefficient prefix.",
+        "q_over_T": "4.500000000000000000E-1",
+        "target_bound": "1.481481481481481481E-2",
+        "truncated_B": null,
+        "truncated_F_k": "-4.108228689777087154E+2",
+        "truncated_F_k_minus_1": "-3.569237208066268276E+2",
+        "truncated_F_k_plus_1": "-4.699313085066242511E+2",
+        "truncated_x": null,
+        "truncation_status": "invalid_truncation_normalizer"
+      },
+      {
+        "B_over_target_bound": null,
+        "T": "100",
+        "first_correction_abs": "8.427107218276493938E+0",
+        "k": 22,
+        "proof_boundary": "Low-order Taylor-moment truncation diagnostic only; it is not the actual zeta coefficient prefix.",
+        "q_over_T": "2.250000000000000000E-1",
+        "target_bound": "1.481481481481481481E-2",
+        "truncated_B": null,
+        "truncated_F_k": "-4.077572511834853726E+1",
+        "truncated_F_k_minus_1": "-3.512104197345244702E+1",
+        "truncated_F_k_plus_1": "-4.702096461851020256E+1",
+        "truncated_x": null,
+        "truncation_status": "invalid_truncation_normalizer"
+      },
+      {
+        "B_over_target_bound": null,
+        "T": "200",
+        "first_correction_abs": "4.213553609138246969E+0",
+        "k": 22,
+        "proof_boundary": "Low-order Taylor-moment truncation diagnostic only; it is not the actual zeta coefficient prefix.",
+        "q_over_T": "1.125000000000000000E-1",
+        "target_bound": "1.481481481481481481E-2",
+        "truncated_B": null,
+        "truncated_F_k": "-3.376514867254146729E+0",
+        "truncated_F_k_minus_1": "-2.870131174778784436E+0",
+        "truncated_F_k_plus_1": "-3.941566838021798176E+0",
+        "truncated_x": null,
+        "truncation_status": "invalid_truncation_normalizer"
+      },
+      {
+        "B_over_target_bound": "1.362086182073576929E+1",
+        "T": "500",
+        "first_correction_abs": "1.685421443655298788E+0",
+        "k": 22,
+        "proof_boundary": "Low-order Taylor-moment truncation diagnostic only; it is not the actual zeta coefficient prefix.",
+        "q_over_T": "4.500000000000000000E-2",
+        "target_bound": "1.481481481481481481E-2",
+        "truncated_B": "2.017905454923817673E-1",
+        "truncated_F_k": "7.322730386875991354E-2",
+        "truncated_F_k_minus_1": "1.031047911295928690E-1",
+        "truncated_F_k_plus_1": "4.250408989147473604E-2",
+        "truncated_x": "8.172660900827613216E-1",
+        "truncation_status": "overbound_positive_truncation"
+      },
+      {
+        "B_over_target_bound": "4.583846541015252075E-2",
+        "T": "1000",
+        "first_correction_abs": "8.427107218276493938E-1",
+        "k": 22,
+        "proof_boundary": "Low-order Taylor-moment truncation diagnostic only; it is not the actual zeta coefficient prefix.",
+        "q_over_T": "2.250000000000000000E-2",
+        "target_bound": "1.481481481481481481E-2",
+        "truncated_B": "6.790883764467040111E-4",
+        "truncated_F_k": "4.123450107885821700E-1",
+        "truncated_F_k_minus_1": "4.305339145861243138E-1",
+        "truncated_F_k_plus_1": "3.946564417961198076E-1",
+        "truncated_x": "9.993211421518788201E-1",
+        "truncation_status": "bounded_positive_truncation"
+      },
+      {
+        "B_over_target_bound": "3.929354468000893553E-3",
+        "T": "2000",
+        "first_correction_abs": "4.213553609138246969E-1",
+        "k": 22,
+        "proof_boundary": "Low-order Taylor-moment truncation diagnostic only; it is not the actual zeta coefficient prefix.",
+        "q_over_T": "1.125000000000000000E-2",
+        "target_bound": "1.481481481481481481E-2",
+        "truncated_B": "5.821265878519842301E-5",
+        "truncated_F_k": "6.505827654571353051E-1",
+        "truncated_F_k_minus_1": "6.634925222528763241E-1",
+        "truncated_F_k_plus_1": "6.378870631731883361E-1",
+        "truncated_x": "9.999417890355387458E-1",
+        "truncation_status": "bounded_positive_truncation"
+      }
+    ]
+  },
+  "formulae": {
+    "bounded_curvature_target": "B_k=-log(x_k)<=2/(3*(2*k+1))",
+    "gaussian_cancellation": "x_k=F_(k+1)*F_(k-1)/F_k^2 after the pure Gaussian moment factor is cancelled",
+    "normalized_multiplier": "F_k=1+a*q/T+b*q*(q+1)/T^2+c*q*(q+1)*(q+2)/T^3+R_k^(>=8)",
+    "q": "q=k+1/2"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_taylor_moment_budget.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "The low-order Taylor truncation is not the actual zeta coefficient prefix.",
+    "The Taylor-tail remainder R_k^(>=8) is not bounded here.",
+    "The local/mesoscopic theorem still requires explicit q/T constants.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_taylor_moment_budget",
+  "proof_boundary": "Finite theorem-search diagnostic only. It derives the Gaussian-moment Taylor budget and records finite low-order truncation failures, but it does not prove a Taylor remainder bound, does not prove bounded log-curvature, does not prove cone entry, and does not prove Lambda <= 0.",
+  "sign_scout_json": "work/rh_compute/results/jensen_window_pf_phi_taylor_cone_entry_sign_scout.json",
+  "source_bounded_log_curvature_target": "outputs/jensen_window_pf_negative_lambda_bounded_log_curvature_target.md",
+  "source_phi_taylor_sign_scout": "outputs/jensen_window_pf_phi_taylor_cone_entry_sign_scout.md",
+  "source_signed_gaussian_matrix": "outputs/jensen_window_pf_negative_lambda_signed_gaussian_perturbation_matrix.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "finite_theorem_search_diagnostic",
+  "summary": {
+    "bounded_truncation_rows": 2,
+    "budget_rows": 9,
+    "invalid_truncation_rows": 4,
+    "main_finding": "The exact Gaussian-moment budget makes q/T the relevant local parameter. The low-order Taylor truncation is not a finite proof model for the actual finite prefix: at the k=22 tail start it has invalid positive-moment normalizers for T=25,50,100,200, and the Taylor remainder must prove positivity plus log-curvature control before the signed perturbation route can enter the bounded-curvature target.",
+    "overbound_truncation_rows": 1,
+    "positive_truncation_rows": 3,
+    "ready_to_apply_rows": 0,
+    "tail_start_samples": 7,
+    "target_closing": false
+  }
+}

@@ -1,0 +1,535 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_worst_row_interpolation_remainder_route_matrix.py",
+  "date": "2026-07-08",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_interpolation_remainder_route_matrix.py",
+  "invariants": [
+    "No row is ready_to_apply.",
+    "Bernstein budgets are sufficient-condition route sizing, not proved estimates.",
+    "Arb Cauchy deltas do not prove the interpolation remainder.",
+    "The endpoint y=0 branch/composition condition remains open.",
+    "The compact interval 0<=y<=200 remains open until true-function panel remainders are certified.",
+    "Endpoint PF, RH, Laguerre-Polya membership, and Lambda <= 0 are forbidden as inputs."
+  ],
+  "kind": "jensen_window_pf_negative_lambda_relative_gaussian_worst_row_interpolation_remainder_route_matrix",
+  "matrix_rows": [
+    {
+      "claim": "The Arb Chebyshev interpolant-moment scout supplies ball arithmetic for panel interpolants, but explicitly leaves the true-function interpolation remainder open.",
+      "diagnostics": {
+        "arb_cap_safe_pair_count": 3,
+        "arb_reference_degree": 32,
+        "compact_interval": "0<=y<=200",
+        "reference_derivative_interpolant_mid": "-1.38058387415230156402674205260518855676282541898259838947598E-32",
+        "reference_value_interpolant_mid": "-6.58338692361019331200869759429797241582343365917043174997833E-34"
+      },
+      "gap": null,
+      "id": "nlrgwrirm_01_arb_interpolant_import",
+      "proof_boundary": "Scope import only; not an interpolation-remainder or compact-integral proof.",
+      "readiness": "diagnostic_only",
+      "role": "scope_reduction",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_arb_chebyshev_interpolant_moment_scout.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_arb_chebyshev_interpolant_moment_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_chebyshev_panel_moment_scout.md"
+      ]
+    },
+    {
+      "claim": "The compact interval 0<=y<=200 is split into six Gamma-weighted panels; the heaviest panel for alpha=20.5 is 20<=y<=50.",
+      "diagnostics": {
+        "equal_panel_allocation": "Each panel is assigned one sixth of the value/derivative caps.",
+        "heaviest_panel": "20<=y<=50",
+        "heaviest_panel_mass_upper": "0.60216159332489531950482867922076390781009134801886",
+        "panel_count": 6,
+        "panel_masses": [
+          {
+            "gamma_mass_upper": "1.6155560239464103501984383230311864446832165667162E-21",
+            "left": 0,
+            "panel": "0<=y<=1",
+            "right": 1
+          },
+          {
+            "gamma_mass_upper": "3.8637299596900615251766321580321123399607508648047E-8",
+            "left": 1,
+            "panel": "1<=y<=5",
+            "right": 5
+          },
+          {
+            "gamma_mass_upper": "0.39783642042189429067693491627393474791860220741429",
+            "left": 5,
+            "panel": "5<=y<=20",
+            "right": 20
+          },
+          {
+            "gamma_mass_upper": "0.60216159332489531950482867922076390781009134801886",
+            "left": 20,
+            "panel": "20<=y<=50",
+            "right": 50
+          },
+          {
+            "gamma_mass_upper": "1.9476159107929155847043095435800729828012906277110E-6",
+            "left": 50,
+            "panel": "50<=y<=100",
+            "right": 100
+          },
+          {
+            "gamma_mass_upper": "4.2089240548977352700180534568073038051931229015701E-22",
+            "left": 100,
+            "panel": "100<=y<=200",
+            "right": 200
+          }
+        ]
+      },
+      "gap": null,
+      "id": "nlrgwrirm_02_panel_mass_allocation",
+      "proof_boundary": "Budget allocation only; it does not bound any interpolation remainder.",
+      "readiness": "diagnostic_only",
+      "role": "budget_diagnostic",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.md",
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.json"
+      ]
+    },
+    {
+      "claim": "A conservative Bernstein-ellipse route would bound degree-N panel interpolation error by gamma_panel_mass * 4*rho^(-N)/(rho-1) * M once an analytic rho-domain and sup norm M are independently certified.",
+      "diagnostics": {
+        "derivative_cap": "1.424226772053247012E-38",
+        "required_missing_input": "For every panel, certify an analytic Bernstein-ellipse domain for the transformed cancellation-reduced value and derivative cores and an Arb-safe sup norm M on that domain.",
+        "route_formula": "panel_error <= gamma_panel_mass * 4*rho^(-N)/(rho-1) * M",
+        "value_cap": "6.782032247872604818E-40"
+      },
+      "gap": null,
+      "id": "nlrgwrirm_03_bernstein_sufficient_condition",
+      "proof_boundary": "Sufficient-condition formula only; no analytic-domain or sup-norm certificate is proved.",
+      "readiness": "open_requirement",
+      "role": "sufficient_condition",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "The heaviest-panel budget table quantifies how large a certified panel sup norm M could be for selected degrees and Bernstein radii while staying under the unscaled caps.",
+      "diagnostics": {
+        "bernstein_budget_rows": [
+          {
+            "bernstein_error_constant": "1.267650600228229401496703205376E-2",
+            "degree": 32,
+            "derivative_sup_norm_budget_on_heaviest_panel": "3.109676962397844765148283177309E-37",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "1.25",
+            "value_sup_norm_budget_on_heaviest_panel": "1.480798553522783221270443834595E-38"
+          },
+          {
+            "bernstein_error_constant": "1.854256018078778049073125169805E-5",
+            "degree": 32,
+            "derivative_sup_norm_budget_on_heaviest_panel": "2.125911324793149421804146541216E-34",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "1.5",
+            "value_sup_norm_budget_on_heaviest_panel": "1.012338726091975914988455943251E-35"
+          },
+          {
+            "bernstein_error_constant": "9.313225746154785156250000000000E-10",
+            "degree": 32,
+            "derivative_sup_norm_budget_on_heaviest_panel": "4.232672948497011094413989738527E-30",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "2.0",
+            "value_sup_norm_budget_on_heaviest_panel": "2.015558546903338616076271270437E-31"
+          },
+          {
+            "bernstein_error_constant": "1.079319055470858030645831703328E-15",
+            "degree": 32,
+            "derivative_sup_norm_budget_on_heaviest_panel": "3.652287845673044292596047484685E-24",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "3.0",
+            "value_sup_norm_budget_on_heaviest_panel": "1.739184688415735377158037797520E-25"
+          },
+          {
+            "bernstein_error_constant": "1.004336277661868922213726307713E-5",
+            "degree": 64,
+            "derivative_sup_norm_budget_on_heaviest_panel": "3.924964133603344177905911616520E-34",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "1.25",
+            "value_sup_norm_budget_on_heaviest_panel": "1.869030539811116274904582504610E-35"
+          },
+          {
+            "bernstein_error_constant": "4.297831725726707083958111646715E-11",
+            "degree": 64,
+            "derivative_sup_norm_budget_on_heaviest_panel": "9.172029338196081182748852576134E-29",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "1.5",
+            "value_sup_norm_budget_on_heaviest_panel": "4.367633018188610086348595808243E-30"
+          },
+          {
+            "bernstein_error_constant": "2.168404344971008868014905601740E-19",
+            "degree": 64,
+            "derivative_sup_norm_budget_on_heaviest_panel": "1.817919188845855500425725421185E-20",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "2.0",
+            "value_sup_norm_budget_on_heaviest_panel": "8.656758042123121429261484948149E-22"
+          },
+          {
+            "bernstein_error_constant": "5.824648117512525572866737562365E-31",
+            "degree": 64,
+            "derivative_sup_norm_budget_on_heaviest_panel": "6.767763113530348052344626641377E-9",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "3.0",
+            "value_sup_norm_budget_on_heaviest_panel": "3.222744339776356214904386544686E-10"
+          },
+          {
+            "bernstein_error_constant": "7.957171782556586274486115970349E-9",
+            "degree": 96,
+            "derivative_sup_norm_budget_on_heaviest_panel": "4.954001215030941453685271271949E-31",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "1.25",
+            "value_sup_norm_budget_on_heaviest_panel": "2.359048197633781644247632276547E-32"
+          },
+          {
+            "bernstein_error_constant": "9.961600427648308540437365683553E-17",
+            "degree": 96,
+            "derivative_sup_norm_budget_on_heaviest_panel": "3.957179267056921631470049998771E-23",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "1.5",
+            "value_sup_norm_budget_on_heaviest_panel": "1.884371079550915062313707322509E-24"
+          },
+          {
+            "bernstein_error_constant": "5.048709793414475554635062817810E-29",
+            "degree": 96,
+            "derivative_sup_norm_budget_on_heaviest_panel": "7.807903462863797359470204761067E-11",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "2.0",
+            "value_sup_norm_budget_on_heaviest_panel": "3.718049268030379694411485528470E-12"
+          },
+          {
+            "bernstein_error_constant": "3.143326852321865196893379766664E-46",
+            "degree": 96,
+            "derivative_sup_norm_budget_on_heaviest_panel": "1.254080168273852899005387911505E+7",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "3.0",
+            "value_sup_norm_budget_on_heaviest_panel": "5.971810325113585232436525811518E+5"
+          },
+          {
+            "bernstein_error_constant": "6.304320991423116673964646416023E-12",
+            "degree": 128,
+            "derivative_sup_norm_budget_on_heaviest_panel": "6.252828612728481329123302391939E-28",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "1.25",
+            "value_sup_norm_budget_on_heaviest_panel": "2.977537434632610156265442530880E-29"
+          },
+          {
+            "bernstein_error_constant": "2.308919692832875643245365599820E-22",
+            "degree": 128,
+            "derivative_sup_norm_budget_on_heaviest_panel": "1.707284961073288384889469934759E-17",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "1.5",
+            "value_sup_norm_budget_on_heaviest_panel": "8.129928386063278022027361894326E-19"
+          },
+          {
+            "bernstein_error_constant": "1.175494350822287507968736537222E-38",
+            "degree": 128,
+            "derivative_sup_norm_budget_on_heaviest_panel": "3.353469002332516016129568533521E-1",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "2.0",
+            "value_sup_norm_budget_on_heaviest_panel": "1.596890001110721912195980431156E-2"
+          },
+          {
+            "bernstein_error_constant": "1.696326284642110395754393046598E-61",
+            "degree": 128,
+            "derivative_sup_norm_budget_on_heaviest_panel": "2.323835870250163439021876048132E+22",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "3.0",
+            "value_sup_norm_budget_on_heaviest_panel": "1.106588509642934970791863631531E+21"
+          },
+          {
+            "bernstein_error_constant": "4.994797680505587570210555567669E-15",
+            "degree": 160,
+            "derivative_sup_norm_budget_on_heaviest_panel": "7.892179263406133185915275149808E-25",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "1.25",
+            "value_sup_norm_budget_on_heaviest_panel": "3.758180601621968183188653301872E-26"
+          },
+          {
+            "bernstein_error_constant": "5.351660294619954148251541981145E-28",
+            "degree": 160,
+            "derivative_sup_norm_budget_on_heaviest_panel": "7.365908243208967273290578715503E-12",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "1.5",
+            "value_sup_norm_budget_on_heaviest_panel": "3.507575353909032034358461176076E-13"
+          },
+          {
+            "bernstein_error_constant": "2.736911063134408341647909342363E-48",
+            "degree": 160,
+            "derivative_sup_norm_budget_on_heaviest_panel": "1.440303969316790400667270535006E+9",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "2.0",
+            "value_sup_norm_budget_on_heaviest_panel": "6.858590330079954287832319494469E+7"
+          },
+          {
+            "bernstein_error_constant": "9.154386416551562296353260824753E-77",
+            "degree": 160,
+            "derivative_sup_norm_budget_on_heaviest_panel": "4.306114783151640134356812764882E+37",
+            "proof_boundary": "Heaviest-panel sufficient-condition budget only; requires an independent analytic-domain and sup-norm certificate.",
+            "rho": "3.0",
+            "value_sup_norm_budget_on_heaviest_panel": "2.050530849119828635091261023824E+36"
+          }
+        ],
+        "degree_count": 5,
+        "rho_2_degree_128_value_sup_budget": "1.596890001110721912195980431156E-2",
+        "rho_2_degree_160_value_sup_budget": "6.858590330079954287832319494469E+7",
+        "rho_count": 4
+      },
+      "gap": null,
+      "id": "nlrgwrirm_04_heaviest_panel_budget_table",
+      "proof_boundary": "Route sizing table only; not a panel sup-norm or interpolation-remainder theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "route_budget",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_arb_chebyshev_interpolant_moment_scout.md",
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.json"
+      ]
+    },
+    {
+      "claim": "For assumed joint sup norms 1e-12, 1e-6, 1, and 1e6, the table records the first degree in 16..256 that would satisfy both value and derivative heaviest-panel budgets.",
+      "diagnostics": {
+        "assumed_sup_norms": [
+          "1e-12",
+          "1e-6",
+          "1",
+          "1e6"
+        ],
+        "minimal_degree_rows": [
+          {
+            "assumed_joint_sup_norm": "1e-12",
+            "derivative_sup_norm_budget_at_minimal_degree": null,
+            "minimal_degree_in_16_to_256": null,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "1.25",
+            "value_sup_norm_budget_at_minimal_degree": null
+          },
+          {
+            "assumed_joint_sup_norm": "1e-12",
+            "derivative_sup_norm_budget_at_minimal_degree": "2.485994032083026454735570E-11",
+            "minimal_degree_in_16_to_256": 163,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "1.5",
+            "value_sup_norm_budget_at_minimal_degree": "1.183806681944298311595981E-12"
+          },
+          {
+            "assumed_joint_sup_norm": "1e-12",
+            "derivative_sup_norm_budget_at_minimal_degree": "3.903951731431898679735102E-11",
+            "minimal_degree_in_16_to_256": 95,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "2.0",
+            "value_sup_norm_budget_at_minimal_degree": "1.859024634015189847205743E-12"
+          },
+          {
+            "assumed_joint_sup_norm": "1e-12",
+            "derivative_sup_norm_budget_at_minimal_degree": "2.785087701041295494792027E-11",
+            "minimal_degree_in_16_to_256": 59,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "3.0",
+            "value_sup_norm_budget_at_minimal_degree": "1.326232238591093092553245E-12"
+          },
+          {
+            "assumed_joint_sup_norm": "1e-6",
+            "derivative_sup_norm_budget_at_minimal_degree": null,
+            "minimal_degree_in_16_to_256": null,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "1.25",
+            "value_sup_norm_budget_at_minimal_degree": null
+          },
+          {
+            "assumed_joint_sup_norm": "1e-6",
+            "derivative_sup_norm_budget_at_minimal_degree": "2.413253193798903037993031E-5",
+            "minimal_degree_in_16_to_256": 197,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "1.5",
+            "value_sup_norm_budget_at_minimal_degree": "1.149168187523287160771551E-6"
+          },
+          {
+            "assumed_joint_sup_norm": "1e-6",
+            "derivative_sup_norm_budget_at_minimal_degree": "4.093590090737934590001915E-5",
+            "minimal_degree_in_16_to_256": 115,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "2.0",
+            "value_sup_norm_budget_at_minimal_degree": "1.949328614637111709223609E-6"
+          },
+          {
+            "assumed_joint_sup_norm": "1e-6",
+            "derivative_sup_norm_budget_at_minimal_degree": "4.440329378787261357143310E-5",
+            "minimal_degree_in_16_to_256": 72,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "3.0",
+            "value_sup_norm_budget_at_minimal_degree": "2.114442561327267312598768E-6"
+          },
+          {
+            "assumed_joint_sup_norm": "1",
+            "derivative_sup_norm_budget_at_minimal_degree": null,
+            "minimal_degree_in_16_to_256": null,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "1.25",
+            "value_sup_norm_budget_at_minimal_degree": null
+          },
+          {
+            "assumed_joint_sup_norm": "1",
+            "derivative_sup_norm_budget_at_minimal_degree": "2.342640771547155792337739E+1",
+            "minimal_degree_in_16_to_256": 231,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "1.5",
+            "value_sup_norm_budget_at_minimal_degree": "1.115543224546264662845653E+0"
+          },
+          {
+            "assumed_joint_sup_norm": "1",
+            "derivative_sup_norm_budget_at_minimal_degree": "2.146220161492810250322924E+1",
+            "minimal_degree_in_16_to_256": 134,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "2.0",
+            "value_sup_norm_budget_at_minimal_degree": "1.022009600710862023805427E+0"
+          },
+          {
+            "assumed_joint_sup_norm": "1",
+            "derivative_sup_norm_budget_at_minimal_degree": "2.359773085392080962901598E+1",
+            "minimal_degree_in_16_to_256": 84,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "3.0",
+            "value_sup_norm_budget_at_minimal_degree": "1.123701469234324267874802E+0"
+          },
+          {
+            "assumed_joint_sup_norm": "1e6",
+            "derivative_sup_norm_budget_at_minimal_degree": null,
+            "minimal_degree_in_16_to_256": null,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "1.25",
+            "value_sup_norm_budget_at_minimal_degree": null
+          },
+          {
+            "assumed_joint_sup_norm": "1e6",
+            "derivative_sup_norm_budget_at_minimal_degree": null,
+            "minimal_degree_in_16_to_256": null,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "1.5",
+            "value_sup_norm_budget_at_minimal_degree": null
+          },
+          {
+            "assumed_joint_sup_norm": "1e6",
+            "derivative_sup_norm_budget_at_minimal_degree": "2.250474952057485001042610E+7",
+            "minimal_degree_in_16_to_256": 154,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "2.0",
+            "value_sup_norm_budget_at_minimal_degree": "1.071654739074992857473800E+6"
+          },
+          {
+            "assumed_joint_sup_norm": "1e6",
+            "derivative_sup_norm_budget_at_minimal_degree": "3.762240504821558697016164E+7",
+            "minimal_degree_in_16_to_256": 97,
+            "proof_boundary": "Conditional degree sizing only; it is not a proof that the transformed panel core has this rho-domain or sup norm.",
+            "rho": "3.0",
+            "value_sup_norm_budget_at_minimal_degree": "1.791543097534075569730958E+6"
+          }
+        ],
+        "rhos": [
+          "1.25",
+          "1.5",
+          "2.0",
+          "3.0"
+        ]
+      },
+      "gap": null,
+      "id": "nlrgwrirm_05_minimal_degree_table",
+      "proof_boundary": "Conditional degree sizing only; it is not a certified analytic estimate.",
+      "readiness": "not_ready_to_apply",
+      "role": "route_budget",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md"
+      ]
+    },
+    {
+      "claim": "The endpoint y=0 and sqrt(y/T) composition make the first panel a branch-sensitive case unless the proof works in x or establishes an even analytic y-core plus tail split.",
+      "diagnostics": {
+        "endpoint_route_condition": "The first panel touches y=0 while the finite core is evaluated through sqrt(y/T); a proof must either work in the x-variable near zero or certify the even analytic y-core after separating the tail/parity terms."
+      },
+      "gap": null,
+      "id": "nlrgwrirm_06_endpoint_and_branch_condition",
+      "proof_boundary": "Route constraint only; no endpoint analytic continuation theorem is proved.",
+      "readiness": "open_requirement",
+      "role": "route_constraint",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_part_weighted_sum_interval_certificate.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    },
+    {
+      "claim": "The Arb Cauchy deltas between degree-16,20,24,32 interpolant integrals prove the true-function interpolation remainder is below the caps.",
+      "diagnostics": {
+        "arb_cauchy_delta_is_proof": false,
+        "cap_safe_pair_count": 3
+      },
+      "gap": "Arb Cauchy deltas compare interpolants to interpolants. They do not compare the interpolant to the true cancellation-reduced core, and therefore do not prove an interpolation remainder bound.",
+      "id": "nlrgwrirm_07_arb_cauchy_delta_promotion_rejected",
+      "proof_boundary": "Rejected promotion only; Arb Cauchy deltas do not prove the interpolation remainder.",
+      "readiness": "not_ready_to_apply",
+      "role": "rejected_route",
+      "source_artifacts": [
+        "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_arb_chebyshev_interpolant_moment_scout.json",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_arb_chebyshev_interpolant_moment_scout.md"
+      ]
+    },
+    {
+      "claim": "A promoted compact-interval certificate may reuse the Arb interpolant arithmetic only after panel analytic-domain/sup-norm or Taylor-model remainder certificates close the interpolation-remainder gap.",
+      "diagnostics": {
+        "ready_to_apply_rows": 0,
+        "required_missing_input": "For every panel, certify an analytic Bernstein-ellipse domain for the transformed cancellation-reduced value and derivative cores and an Arb-safe sup norm M on that domain.",
+        "target_closing": false
+      },
+      "gap": null,
+      "id": "nlrgwrirm_08_acceptance_gate",
+      "proof_boundary": "Proof-hygiene gate only; not a compact certificate, RH, or Lambda <= 0.",
+      "readiness": "not_ready_to_apply",
+      "role": "acceptance_gate",
+      "source_artifacts": [
+        "outputs/signed_hankel_jensen_dependency_graph.md",
+        "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+        "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md"
+      ]
+    }
+  ],
+  "proof_boundary": "Worst-row interpolation-remainder route matrix only. It records panel Gamma masses, Bernstein-ellipse sufficient-condition budgets, endpoint route constraints, and rejected shortcuts for the compact interval 0<=y<=200. It does not prove an analytic Bernstein ellipse domain, does not prove a sup-norm bound, does not prove a Taylor-model remainder, does not prove the true compact integral, does not prove a finite-grid interval certificate, does not prove a uniform collar theorem, and does not prove RH or Lambda <= 0.",
+  "source_arb_chebyshev_interpolant_moment_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_arb_chebyshev_interpolant_moment_scout.md",
+  "source_arb_chebyshev_interpolant_moment_scout_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_arb_chebyshev_interpolant_moment_scout.json",
+  "source_compact_interval_integration_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_compact_interval_integration_scout.md",
+  "source_dependency_graph": "outputs/signed_hankel_jensen_dependency_graph.md",
+  "source_far_tail_split_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_far_tail_split_certificate.md",
+  "source_finite_part_weighted_sum_interval_certificate": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_part_weighted_sum_interval_certificate.md",
+  "source_floating_chebyshev_panel_moment_scout": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_worst_row_chebyshev_panel_moment_scout.md",
+  "source_intervalization_target": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_intervalization_target.md",
+  "source_quadrature_remainder_route_json": "work/rh_compute/results/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.json",
+  "source_quadrature_remainder_route_matrix": "outputs/jensen_window_pf_negative_lambda_relative_gaussian_quadrature_remainder_route_matrix.md",
+  "source_uniform_remainder_target": "outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md",
+  "status": "worst-row interpolation-remainder route matrix",
+  "summary": {
+    "T": 10000,
+    "alpha": "20.5",
+    "arb_cauchy_delta_is_proof": false,
+    "bernstein_budget_row_count": 20,
+    "compact_interval": "0<=y<=200",
+    "degree_count": 5,
+    "derivative_unscaled_expectation_error_cap": "1.424226772053247012E-38",
+    "endpoint_route_condition": "The first panel touches y=0 while the finite core is evaluated through sqrt(y/T); a proof must either work in the x-variable near zero or certify the even analytic y-core after separating the tail/parity terms.",
+    "heaviest_panel": "20<=y<=50",
+    "heaviest_panel_mass_upper": "0.60216159332489531950482867922076390781009134801886",
+    "index": 21,
+    "main_finding": "The interpolation-remainder route matrix isolates the remaining compact-interval theorem: the heaviest Gamma panel is 20<=y<=50 with mass upper 0.60216159332489531950482867922076390781009134801886, and the Bernstein route formula panel_error <= mass * 4*rho^(-N)/(rho-1) * M gives concrete degree/rho budgets. At rho=2 and degree 128 the heaviest-panel value sup-norm budget is 1.596890001110721912195980431156E-2, while degree 160 raises it to 6.858590330079954287832319494469E+7. This is still a route matrix only: no analytic-domain, sup-norm, endpoint, or true interpolation-remainder certificate is proved.",
+    "matrix_rows": 8,
+    "minimal_degree_row_count": 16,
+    "panel_count": 6,
+    "ready_to_apply_rows": 0,
+    "required_missing_input": "For every panel, certify an analytic Bernstein-ellipse domain for the transformed cancellation-reduced value and derivative cores and an Arb-safe sup norm M on that domain.",
+    "rho_2_degree_128_derivative_sup_budget": "3.353469002332516016129568533521E-1",
+    "rho_2_degree_128_value_sup_budget": "1.596890001110721912195980431156E-2",
+    "rho_2_degree_160_derivative_sup_budget": "1.440303969316790400667270535006E+9",
+    "rho_2_degree_160_value_sup_budget": "6.858590330079954287832319494469E+7",
+    "rho_count": 4,
+    "target_closing": false,
+    "value_unscaled_expectation_error_cap": "6.782032247872604818E-40"
+  }
+}

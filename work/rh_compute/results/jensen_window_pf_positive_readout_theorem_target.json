@@ -1,0 +1,181 @@
+{
+  "kind": "jensen_window_pf_positive_readout_theorem_target",
+  "date": "2026-07-06",
+  "parent_fit_matrix": "jensen_window_pf_oscillatory_resolvent_fit_matrix",
+  "parent_live_rows": [
+    "or_06_positive_spectral_measure_after_transform",
+    "or_07_xi_phi_resolvent_kernel"
+  ],
+  "parent_route_row": "rp_09_signed_or_modified_continued_fraction",
+  "parent_target": "jwpf_06_sign_regular_to_jensen_pf_conversion",
+  "proof_boundary": "Positive-readout theorem target only; not a construction of a positive spectral transform, not an Xi/Phi kernel identity, not an all-order column recurrence theorem, not Schur positivity, not Jensen-window PF-infinity, not RH, and not Lambda <= 0.",
+  "target_problem": "Turn the two surviving oscillatory/resolvent subroutes into a precise theorem obligation: construct an exact positive scalar readout for E(t)=1/H(-t) that proves mu_m=[t^m]E(t)>=0 for every actual zeta Jensen window without endpoint PF or RH-type input.",
+  "objects": {
+    "h_j": "binom(d,j) * A_{n+j}(0)",
+    "g_j": "h_j / h_0",
+    "H(t)": "1 + g_1*t + ... + g_d*t^d",
+    "E(t)": "1 / H(-t)",
+    "mu_m": "[t^m] E(t)",
+    "signed_jacobi_data": "Delta_r, lambda_n<0, kappa_n=-lambda_n>0, beta_0>0, beta_1<0, beta_n>0 for n>=2 on the finite grid",
+    "positive_readout": "a scalar functional, measure, kernel, or operator identity whose expansion is exactly E(t) and whose coefficients are manifestly nonnegative"
+  },
+  "required_theorem_obligations": [
+    "Exactness: prove the scalar readout is exactly E(t)=1/H(-t) for every degree d and shift n, not a majorant, approximation, interpolation, or finite fit.",
+    "Positivity: prove the readout gives mu_m>=0 for every m by a positive measure, positive kernel, nonnegative path model, or equivalent positive functional.",
+    "Noncircularity: verify all hypotheses using Xi/Phi or zeta heat-flow data without assuming endpoint PF, Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0.",
+    "Signed-obstruction compatibility: explain lambda_n<0, beta_1<0, raw Motzkin cancellation, same-length mixed signs, and the absolute-value sign-lift gap.",
+    "Scope: state whether the theorem proves only column recurrence positivity or also supplies an all-Schur/Toeplitz lift.",
+    "Uniformity: state the all-degree, all-shift, and all-m coverage and identify any limiting or compactness step separately."
+  ],
+  "candidate_rows": [
+    {
+      "id": "pr_01_positive_spectral_transform",
+      "candidate_family": "nonordinary noncircular transform from signed Jacobi data to a positive spectral readout",
+      "verdict": "live_if_transform_constructed",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_oscillatory_resolvent_fit_matrix.md",
+        "outputs/jensen_window_pf_positive_spectral_moment_obstruction.md",
+        "outputs/jensen_window_pf_nonordinary_positive_transform_ansatz_matrix.md",
+        "outputs/jensen_window_pf_signed_j_fraction_theorem_target.md",
+        "outputs/jensen_window_pf_reciprocal_signed_j_fraction_scout.md",
+        "outputs/jensen_window_pf_reciprocal_signed_jacobi_beta_scout.md"
+      ],
+      "fit": "If an exact nonordinary transform sends the signed reciprocal Jacobi data to a positive scalar readout whose Taylor coefficients are mu_m, coefficient positivity follows.",
+      "missing_piece": "Missing: the ordinary positive moment interpretation mu_m=int x^m dnu(x) is rejected by Delta_2=-g_2 and 735 finite Delta_2<0 rows; the nonordinary transform ansatz matrix leaves only non-power positive functionals, Xi/Phi positive kernels, or genuinely modified exact state-space transfer models live, and none is currently constructed.",
+      "acceptance_test": "Produce a nonordinary transform or positive readout, prove positivity, prove its Taylor coefficients are exactly mu_m without requiring raw Hankel PSD for mu_m, and verify all hypotheses without endpoint PF or real-rootedness input.",
+      "proof_boundary": "Live theorem target only in the nonordinary-transform sense; ordinary positive moment measures are rejected and no surviving positive transform is currently constructed."
+    },
+    {
+      "id": "pr_02_xi_phi_positive_resolvent_kernel",
+      "candidate_family": "Xi/Phi-specific positive resolvent or kernel identity",
+      "verdict": "live_if_kernel_identity_proved",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_oscillatory_resolvent_fit_matrix.md",
+        "outputs/jensen_window_pf_nonordinary_positive_transform_ansatz_matrix.md",
+        "outputs/jensen_window_pf_reciprocal_positivity_route_matrix.md",
+        "outputs/jensen_window_pf_modified_signed_model_target.md",
+        "outputs/jensen_window_pf_reciprocal_coefficient_extended_stress.md"
+      ],
+      "fit": "A zeta-specific kernel identity could bypass generic signed Jacobi positivity by making the final scalar coefficients positive in Xi/Phi language.",
+      "missing_piece": "No kernel identity has been derived whose scalar resolvent equals E(t) and whose kernel positivity proves every mu_m>=0.",
+      "acceptance_test": "Derive the kernel, prove positivity of the kernel or scalar functional, show coefficient extraction equals E(t), and preserve all-degree/all-shift coverage.",
+      "proof_boundary": "Live theorem target only; no Xi/Phi positive kernel theorem is currently proved."
+    },
+    {
+      "id": "pr_03_abstract_stieltjes_pick_or_hamburger_wrapper",
+      "candidate_family": "abstract Stieltjes, Pick, Herglotz, Hamburger, or moment-theorem wrapper",
+      "verdict": "conditional_wrapper_only",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/sign_regularity_theorem_map.md",
+        "outputs/sign_regularity_theorem_fit_matrix.md",
+        "outputs/jensen_window_pf_theorem_machinery_fit_matrix.md"
+      ],
+      "fit": "Once a positive measure or positive kernel is constructed, classical moment or analytic-function theorems may package the positivity conclusion.",
+      "missing_piece": "The wrapper is not the construction: its hypotheses still require a positive measure, Pick/Stieltjes property, or positive kernel already verified for the actual E(t).",
+      "acceptance_test": "Use only after an exact positive readout is available; then verify the theorem hypotheses explicitly and state the resulting coefficient-positivity conclusion.",
+      "proof_boundary": "Conditional wrapper only; not itself a route to the missing positive readout."
+    },
+    {
+      "id": "pr_04_indefinite_signed_spectral_readout",
+      "candidate_family": "indefinite/Krein/Pontryagin signed spectral readout",
+      "verdict": "language_only",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_oscillatory_resolvent_fit_matrix.md",
+        "outputs/jensen_window_pf_signed_j_fraction_theorem_target.md",
+        "outputs/sign_regularity_theorem_map.md"
+      ],
+      "fit": "Indefinite spectral language can describe the signed Hankel and signed Jacobi structure.",
+      "missing_piece": "A signed or indefinite readout does not prove mu_m>=0 unless a separate positive scalar functional is proved on the exact powers or resolvent coefficients.",
+      "acceptance_test": "Pair any indefinite representation with an explicit positive scalar readout theorem; otherwise keep it as interpretation.",
+      "proof_boundary": "Interpretive language only; not a coefficient-positivity proof."
+    },
+    {
+      "id": "pr_05_endpoint_root_factorization_readout",
+      "candidate_family": "real-negative-root endpoint product readout for H(t)",
+      "verdict": "circular_if_endpoint_used",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_sturm_pf_consequence.md",
+        "outputs/jensen_window_pf_bridge_target.md",
+        "outputs/jensen_window_pf_reciprocal_positivity_route_matrix.md"
+      ],
+      "fit": "If H(t)=prod_i(1+alpha_i*t) with alpha_i>=0, then E(t)=prod_i(1-alpha_i*t)^(-1) has nonnegative coefficients.",
+      "missing_piece": "For the bridge target, endpoint real-rootedness or Jensen-window PF-infinity is the desired conclusion, so using it as input is circular.",
+      "acceptance_test": "Use endpoint factorization only as a consequence or finite consistency check, never as the noncircular positive readout theorem.",
+      "proof_boundary": "Circular as an input to jwpf_06; not a proof route."
+    },
+    {
+      "id": "pr_06_finite_quadrature_or_interpolation_fit",
+      "candidate_family": "finite positive quadrature, interpolation, or least-degree fitted measure",
+      "verdict": "finite_evidence_only",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_reciprocal_coefficient_extended_stress.md",
+        "outputs/arb_jensen_window_column_recurrence_stress.md",
+        "outputs/countermodel_library.md"
+      ],
+      "fit": "Finite positive rows can guide or falsify candidate readouts and may suggest quadrature-like formulas.",
+      "missing_piece": "A finite fitted positive measure or interpolation formula does not prove all m,d,n and does not supply the required exact identity.",
+      "acceptance_test": "Promote only with an independent all-order construction and proof; otherwise keep as finite diagnostic evidence.",
+      "proof_boundary": "Finite evidence only; not a positive readout theorem."
+    },
+    {
+      "id": "pr_07_raw_signed_jacobi_scalar_resolvent",
+      "candidate_family": "raw signed Jacobi scalar resolvent e_0^T(I-tJ)^(-1)e_0",
+      "verdict": "rejected_by_signed_readout",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_reciprocal_signed_jacobi_beta_scout.md",
+        "outputs/jensen_window_pf_reciprocal_motzkin_path_obstruction_scout.md",
+        "outputs/jensen_window_pf_reciprocal_motzkin_parity_lift_obstruction_scout.md"
+      ],
+      "fit": "The raw signed Jacobi scalar resolvent is formally close to E(t) and exposes the finite signed structure.",
+      "missing_piece": "It is not a positive readout: lambda_n<0, beta_1<0, mu_2 cancellation, and same-length mixed signs prevent a manifestly nonnegative path or power expansion.",
+      "acceptance_test": "Use only as signed data; replace it with a positive transform or kernel before claiming coefficient positivity.",
+      "proof_boundary": "Rejected as a positive readout, not as signed diagnostic data."
+    },
+    {
+      "id": "pr_08_absolute_value_or_majorant_readout",
+      "candidate_family": "absolute-value majorant or sign-state cover as positive readout",
+      "verdict": "rejected_by_exactness_gap",
+      "readiness": "not_ready_to_apply",
+      "source_artifacts": [
+        "outputs/jensen_window_pf_state_space_sign_lift_obstruction_scout.md",
+        "outputs/jensen_window_pf_oscillatory_resolvent_fit_matrix.md"
+      ],
+      "fit": "Taking absolute values gives positive path weights and therefore a tempting positive readout candidate.",
+      "missing_piece": "It is not exact: the sign-lift obstruction gives absolute_lift_mu2 - mu_2 = 2*kappa_1>0, so the positive majorant is not E(t).",
+      "acceptance_test": "Reject unless a different lifted model proves exact coefficient equality, not merely domination.",
+      "proof_boundary": "Rejected only as an exact absolute-value readout of the raw signed paths."
+    }
+  ],
+  "kill_gates": [
+    "Reject any readout that is a positive majorant, interpolation, fitted quadrature, or finite prefix rather than exactly E(t)=1/H(-t).",
+    "Reject any positive spectral claim whose measure positivity is inferred from endpoint real-rootedness, Jensen-window PF-infinity, Laguerre-Polya membership, RH, or Lambda <= 0.",
+    "Reject any signed or indefinite spectral representation that lacks a positive scalar functional proving mu_m>=0.",
+    "Reject any raw Jacobi/resolvent path proof that ignores lambda_n<0, beta_1<0, same-length mixed signs, or the absolute-value sign-lift gap.",
+    "Reject any theorem wrapper whose hypotheses are not verified for the actual zeta windows.",
+    "Reject any column-only readout that claims to close jwpf_06 without an all-Schur/Toeplitz lift."
+  ],
+  "summary": {
+    "candidate_rows": 8,
+    "ready_to_apply_rows": 0,
+    "live_foundational_routes": 2,
+    "conditional_wrapper_rows": 1,
+    "language_or_finite_rows": 2,
+    "rejected_or_circular_rows": 3,
+    "target_closing": false,
+    "main_finding": "The positive-readout target splits the surviving oscillatory/resolvent route into two live foundational theorem obligations: construct a nonordinary noncircular positive spectral transform or derive an Xi/Phi-specific positive resolvent kernel. The ordinary positive moment interpretation is rejected by the positive spectral moment obstruction, and the nonordinary ansatz matrix narrows surviving forms to non-power positive functionals, Xi/Phi positive kernels, or genuinely modified exact state-space transfer models. Abstract Stieltjes/Pick/moment machinery is only a wrapper after such a readout exists; endpoint factorization is circular as input; finite quadrature, raw signed Jacobi resolvents, and absolute-value majorants cannot prove coefficientwise positivity of E(t)=1/H(-t)."
+  },
+  "invariants": [
+    "No candidate row is ready_to_apply.",
+    "Every live foundational row names a missing construction or theorem.",
+    "Every rejected or circular row cites an existing obstruction or circularity gate.",
+    "No row assumes endpoint PF, Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0.",
+    "The artifact is a theorem target and does not prove reciprocal coefficient positivity."
+  ]
+}
