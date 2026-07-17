@@ -99,6 +99,34 @@ def upper_absolute(value: flint.arb) -> flint.arb:
     return exact_upper(abs(value))
 
 
+def scaled_curvature_quantities(
+    t: flint.arb,
+    curvature: flint.arb,
+    raw1: flint.arb,
+    raw2: flint.arb,
+    raw3: flint.arb,
+) -> dict[str, flint.arb]:
+    variance = raw2 - raw1**2
+    cumulant3 = raw3 - 3 * raw1 * raw2 + 2 * raw1**3
+    x_variance = variance / curvature
+    x_cumulant3 = cumulant3 / curvature ** flint.arb("1.5")
+    gamma_argument = t + flint.arb(1) / 2
+    gamma_second = flint.arb(2).zeta(gamma_argument)
+    gamma_third = -2 * flint.arb(3).zeta(gamma_argument)
+    h_second = gamma_second - x_variance
+    h_third = gamma_third - x_cumulant3
+    pointwise_derivative = 2 * h_second + (2 * t + 1) * h_third
+    shifted_buffer = pointwise_derivative - 2 * upper_absolute(h_third)
+    return {
+        "variance": variance,
+        "cumulant3": cumulant3,
+        "h_second": h_second,
+        "h_third": h_third,
+        "pointwise_derivative": pointwise_derivative,
+        "shifted_buffer": shifted_buffer,
+    }
+
+
 def fraction_grid(start: Fraction, end: Fraction, width: Fraction) -> list[tuple[Fraction, Fraction]]:
     rows = []
     left = start
@@ -266,15 +294,22 @@ def positive_interval_from_upper(upper: flint.arb) -> flint.arb:
     return bound / 2 + flint.arb(0, bound / 2)
 
 
-def certify_mode_block(left: Fraction, right: Fraction, panels: int) -> dict:
+def certify_mode_block(
+    left: Fraction,
+    right: Fraction,
+    panels: int,
+    *,
+    window_y: int = DEFAULT_WINDOW_Y,
+    eighth_envelope_bound: Fraction = DEFAULT_EIGHTH_ENVELOPE,
+) -> dict:
     mode = arb_interval(left, right)
     jet = potential_jet_arb(mode, 7)
     t, curvature = jet[1], jet[2]
     if not bool(curvature > 0):
         return {"passed": False, "failure": "nonpositive-curvature"}
-    y_cut = flint.arb(DEFAULT_WINDOW_Y)
+    y_cut = flint.arb(window_y)
     panel_width = y_cut / panels
-    eighth_envelope = arb_rational(DEFAULT_EIGHTH_ENVELOPE)
+    eighth_envelope = arb_rational(eighth_envelope_bound)
     normalized = [flint.arb(0) for _ in range(8)]
     # Build the powers explicitly: python-flint does not accept Fraction exponents.
     normalized[2] = flint.arb(1)
@@ -412,7 +447,15 @@ def certify_mode_block(left: Fraction, right: Fraction, panels: int) -> dict:
     raw1 = moments[1] / moments[0]
     raw2 = moments[2] / moments[0]
     raw3 = moments[3] / moments[0]
-    cumulant3 = raw3 - 3 * raw1 * raw2 + 2 * raw1**3
+    curvature_quantities = scaled_curvature_quantities(
+        t, curvature, raw1, raw2, raw3
+    )
+    variance = curvature_quantities["variance"]
+    cumulant3 = curvature_quantities["cumulant3"]
+    h_second = curvature_quantities["h_second"]
+    h_third = curvature_quantities["h_third"]
+    pointwise_curvature_derivative = curvature_quantities["pointwise_derivative"]
+    shifted_curvature_buffer = curvature_quantities["shifted_buffer"]
 
     alpha = normalized[3]
     beta = normalized[4]
@@ -446,9 +489,219 @@ def certify_mode_block(left: Fraction, right: Fraction, panels: int) -> dict:
         "cumulant3_ball": cumulant3.str(40).replace("e", "E"),
         "cumulant3_upper": arb_upper_text(cumulant3),
         "cumulant3_negative": negative_cumulant,
+        "variance_positive": bool(variance > 0),
+        "h_second_positive": bool(h_second > 0),
+        "h_third_negative": bool(h_third < 0),
+        "pointwise_curvature_derivative_lower": arb_lower_text(
+            pointwise_curvature_derivative
+        ),
+        "shifted_curvature_buffer_positive": bool(shifted_curvature_buffer > 0),
+        "shifted_curvature_buffer_lower": arb_lower_text(shifted_curvature_buffer),
         "margin_lower": arb_lower_text(margin),
         "remainder_ball": remainder.str(40).replace("e", "E"),
         "normalizer_lower": arb_lower_text(moments[0]),
+        "minimum_tail_slope_lower": arb_lower_text(minimum_tail_slope),
+        "maximum_tail_third_upper": arb_upper_text(maximum_tail_third),
+    }
+
+
+def certify_scaled_curvature_mode_block(
+    left: Fraction,
+    right: Fraction,
+    panels: int,
+    *,
+    window_y: int = 8,
+    eighth_envelope_bound: Fraction = Fraction(1, 10_000_000_000),
+) -> dict:
+    """Certify the buffered pointwise curvature derivative with Simpson error."""
+    if panels <= 0 or panels % 2:
+        raise ValueError("Simpson panels must be a positive even integer")
+
+    mode = arb_interval(left, right)
+    jet = potential_jet_arb(mode, 7)
+    t, curvature = jet[1], jet[2]
+    if not bool(curvature > 0):
+        return {"passed": False, "failure": "nonpositive-curvature"}
+
+    y_cut = flint.arb(window_y)
+    panel_width = y_cut / panels
+    eighth_envelope = arb_rational(eighth_envelope_bound)
+    normalized = [flint.arb(0) for _ in range(8)]
+    normalized[2] = flint.arb(1)
+    normalized[3] = jet[3] / curvature ** flint.arb("1.5")
+    normalized[4] = jet[4] / curvature**2
+    normalized[5] = jet[5] / curvature ** flint.arb("2.5")
+    normalized[6] = jet[6] / curvature**3
+    normalized[7] = jet[7] / curvature ** flint.arb("3.5")
+
+    branch_moments = [[flint.arb(0) for _ in range(4)] for _ in range(2)]
+    for node in range(panels + 1):
+        y = panel_width * node
+        coefficient = 1 if node in (0, panels) else (4 if node % 2 else 2)
+        for branch_index, sign in enumerate((1, -1)):
+            potential = y**2 / 2
+            for order in range(3, 8):
+                potential += (
+                    normalized[order]
+                    * sign**order
+                    * y**order
+                    / math.factorial(order)
+                )
+            value_radius = eighth_envelope * y**8 / math.factorial(8)
+            weight = (-potential + flint.arb(0, value_radius)).exp()
+            for power in range(4):
+                branch_moments[branch_index][power] += (
+                    coefficient * y**power * weight
+                )
+    for branch_index in range(2):
+        for power in range(4):
+            branch_moments[branch_index][power] *= panel_width / 3
+
+    simpson_errors = [[flint.arb(0) for _ in range(4)] for _ in range(2)]
+    pair_error_factor = (2 * panel_width) ** 5 / 2880
+    for pair_start in range(0, panels, 2):
+        y_left = panel_width * pair_start
+        y_right = panel_width * (pair_start + 2)
+        y_interval = (y_left + y_right) / 2 + flint.arb(
+            0, (y_right - y_left) / 2
+        )
+        for branch_index, sign in enumerate((1, -1)):
+            derivatives = [flint.arb(0) for _ in range(5)]
+            derivatives[0] = y_interval**2 / 2
+            derivatives[1] = y_interval
+            derivatives[2] = flint.arb(1)
+            for derivative_order in range(5):
+                for order in range(max(3, derivative_order), 8):
+                    derivatives[derivative_order] += (
+                        normalized[order]
+                        * sign**order
+                        * y_interval ** (order - derivative_order)
+                        / math.factorial(order - derivative_order)
+                    )
+                radius = (
+                    eighth_envelope
+                    * y_right ** (8 - derivative_order)
+                    / math.factorial(8 - derivative_order)
+                )
+                derivatives[derivative_order] += flint.arb(0, radius)
+
+            w0, w1, w2, w3, w4 = derivatives
+            weight = (-w0).exp()
+            exponential_derivatives = [
+                weight,
+                -w1 * weight,
+                (w1**2 - w2) * weight,
+                (-w1**3 + 3 * w1 * w2 - w3) * weight,
+                (
+                    w1**4
+                    - 6 * w1**2 * w2
+                    + 3 * w2**2
+                    + 4 * w1 * w3
+                    - w4
+                )
+                * weight,
+            ]
+            for power in range(4):
+                fourth_derivative = flint.arb(0)
+                for polynomial_order in range(min(power, 4) + 1):
+                    polynomial_derivative = (
+                        math.factorial(power)
+                        // math.factorial(power - polynomial_order)
+                    ) * y_interval ** (power - polynomial_order)
+                    fourth_derivative += (
+                        math.comb(4, polynomial_order)
+                        * polynomial_derivative
+                        * exponential_derivatives[4 - polynomial_order]
+                    )
+                simpson_errors[branch_index][power] += (
+                    upper_absolute(fourth_derivative) * pair_error_factor
+                )
+
+    for branch_index in range(2):
+        for power in range(4):
+            branch_moments[branch_index][power] += flint.arb(
+                0, simpson_errors[branch_index][power]
+            )
+
+    minimum_tail_slope: flint.arb | None = None
+    maximum_tail_third: flint.arb | None = None
+    for branch_index, sign in enumerate((1, -1)):
+        endpoint = y_cut**2 / 2
+        outward_slope = y_cut
+        for order in range(3, 8):
+            endpoint += (
+                normalized[order] * sign**order * y_cut**order / math.factorial(order)
+            )
+            outward_slope += (
+                normalized[order]
+                * sign**order
+                * y_cut ** (order - 1)
+                / math.factorial(order - 1)
+            )
+        endpoint -= eighth_envelope * y_cut**8 / math.factorial(8)
+        outward_slope -= eighth_envelope * y_cut**7 / math.factorial(7)
+        if not bool(endpoint > 0 and outward_slope > 0):
+            return {"passed": False, "failure": "tail-endpoint-or-slope"}
+        if minimum_tail_slope is None or outward_slope.lower() < minimum_tail_slope.lower():
+            minimum_tail_slope = outward_slope
+        for power in range(4):
+            tail_upper = (-exact_lower(endpoint)).exp() * tail_polynomial(
+                power, exact_lower(outward_slope), y_cut
+            )
+            branch_moments[branch_index][power] += positive_interval_from_upper(
+                tail_upper
+            )
+            if power == 3 and (
+                maximum_tail_third is None
+                or tail_upper.upper() > maximum_tail_third.upper()
+            ):
+                maximum_tail_third = tail_upper
+
+    assert minimum_tail_slope is not None and maximum_tail_third is not None
+    moments = [flint.arb(0) for _ in range(4)]
+    for power in range(4):
+        if power % 2 == 0:
+            moments[power] = branch_moments[0][power] + branch_moments[1][power]
+        else:
+            moments[power] = branch_moments[0][power] - branch_moments[1][power]
+    if not bool(moments[0] > 0):
+        return {"passed": False, "failure": "nonpositive-normalizer"}
+
+    raw1 = moments[1] / moments[0]
+    raw2 = moments[2] / moments[0]
+    raw3 = moments[3] / moments[0]
+    quantities = scaled_curvature_quantities(t, curvature, raw1, raw2, raw3)
+    transfer_margin = quantities["shifted_buffer"] - 64 / (t - 3) ** 5
+    passed = bool(
+        quantities["variance"] > 0
+        and quantities["h_second"] > 0
+        and quantities["h_third"] < 0
+        and quantities["shifted_buffer"] > 0
+        and transfer_margin > 0
+    )
+    return {
+        "passed": passed,
+        "failure": None if passed else "nonpositive-scaled-curvature-buffer",
+        "panels": panels,
+        "window_y": window_y,
+        "eighth_envelope_bound": str(eighth_envelope_bound),
+        "variance_positive": bool(quantities["variance"] > 0),
+        "h_second_positive": bool(quantities["h_second"] > 0),
+        "h_third_negative": bool(quantities["h_third"] < 0),
+        "pointwise_curvature_derivative_lower": arb_lower_text(
+            quantities["pointwise_derivative"]
+        ),
+        "shifted_curvature_buffer_lower": arb_lower_text(
+            quantities["shifted_buffer"]
+        ),
+        "full_kernel_transfer_margin_lower": arb_lower_text(transfer_margin),
+        "normalizer_lower": arb_lower_text(moments[0]),
+        "maximum_simpson_error_upper": arb_upper_text(
+            max(
+                (error for branch in simpson_errors for error in branch),
+                key=lambda value: value.upper(),
+            )
+        ),
         "minimum_tail_slope_lower": arb_lower_text(minimum_tail_slope),
         "maximum_tail_third_upper": arb_upper_text(maximum_tail_third),
     }

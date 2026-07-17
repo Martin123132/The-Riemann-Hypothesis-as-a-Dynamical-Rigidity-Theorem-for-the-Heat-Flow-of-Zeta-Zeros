@@ -1,0 +1,148 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_first_summand_power8_rebalanced_dominance_extension.py",
+  "date": "2026-07-13",
+  "diagnostics": {
+    "adjacent_B_error": "|B_j-B_j^(1)|<=a_j=2*((j-1)^(-8)+2*j^(-8)+(j+1)^(-8)), j>=301",
+    "all_positive_gates": true,
+    "exact_D_a_lower": "8.24019514778933741024091302541315849917683799777973264547843E+2",
+    "exact_D_c_lower": "5.63866059281357510254057726552983146355967359704068460556170E+2",
+    "full_tail_relative_bound": "0<=delta_k=(M_k-M_k^(1))/M_k^(1)<2/k^8 for every integer k>=300",
+    "ga_log_margin_lower": "1.37917694610463185312899200451271615588282593588785726921873E+0",
+    "ga_minus_100_lower": "7.19814462657043612075638068445997714852674922817111506554919E+2",
+    "ga_power_margin_lower": "1.28178572999968670647202521787505580176792316577897537736408E+0",
+    "gc_log_margin_lower": "1.18708142874113859482973023857107237308070511695268740908174E+0",
+    "gc_lower": "5.59736364880470126783060654155337049113793714976794820095369E+2",
+    "gc_power_margin_lower": "9.99014236574637045011170736996334039739449264662369284877056E-1",
+    "half_line_rule": "the six positive ratio-log derivatives with leading constants 3/5 or 1 show every split endpoint comparison strengthens for k>=300",
+    "high_derivative_margin_lower": "2.89130236236126579978175269934735796758531232744984256672944E+1",
+    "high_endpoint_ball": "[-43.81908591772582043884445769548078969524705689301795615052822235641345 +/- 4.52E-69]",
+    "high_endpoint_upper": "-4.38190859177258204388444576954807896952470568930179561505281E+1",
+    "high_prefactor_ball": "[16.82020848756051579381293638127254026003550784344703197169547815247457 +/- 4.78E-69]",
+    "high_prefactor_margin_lower": "1.79791512439484206187063618727459739964492156552968028304521E-1",
+    "high_region_bound": "epsilon(a(k))<=17*exp(-3*pi*k^(2/5))<k^(-8), k>=300",
+    "low_endpoint_ball": "[-22.45423668980717202070624637558429877084711058474769615482656850706380 +/- 2.16E-69]",
+    "low_endpoint_upper": "-2.24542366898071720207062463755842987708471105847476961548265E+1",
+    "low_k_derivative_margin_lower": "2.20502612356834136752407812795910886361397981320271066204872E-1",
+    "low_power_derivative_margin_lower": "2.33664016042713732356706005808783621003054381058540423959103E-1",
+    "low_region_bound": "epsilon(0)*P_k(u<a(k))<k^(-8), k>=300",
+    "moment_log_error": "0<=log(1+delta_k)<2/k^8, k>=300",
+    "parameters": {
+      "adaptive_a": "a(k)=log(k)/10",
+      "adaptive_b": "b(k)=a(k)+1/10",
+      "adaptive_c": "c(k)=b(k)+1/100",
+      "epsilon_zero_cap": "0.0022",
+      "lambda": "-100",
+      "power": 8,
+      "precision_bits": 256,
+      "start_k": 300
+    },
+    "positive_gates": {
+      "D_a_lower_above_100": true,
+      "D_a_lower_increasing_k_side": true,
+      "D_a_lower_increasing_power_side": true,
+      "D_c_lower_increasing_k_side": true,
+      "D_c_lower_increasing_power_side": true,
+      "D_c_lower_positive": true,
+      "exact_D_a_positive": true,
+      "exact_D_c_positive": true,
+      "high_comparison_decreasing": true,
+      "high_endpoint_below_k_minus_8": true,
+      "high_prefactor_below_17": true,
+      "low_comparison_decreasing_k_side": true,
+      "low_comparison_decreasing_power_side": true,
+      "low_endpoint_below_k_minus_8": true
+    },
+    "ratio_log_derivatives": [
+      "3/5+1/(L-1)-2/L>0",
+      "1+1/(L-1)-2/L>0",
+      "3/5+1/(L+1/10)-2/(L+11/10)>0",
+      "1+1/(L+1/10)-2/(L+11/10)>0",
+      "3/5+1/L-2/(L+1)>0",
+      "1+1/L-2/(L+1)>0"
+    ]
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_first_summand_power8_rebalanced_dominance_extension.py",
+  "kind": "jensen_window_pf_negative_lambda_first_summand_power8_rebalanced_dominance_extension",
+  "proof_boundary": "This artifact strengthens first-summand dominance only for lambda=-100 and k>=300. It does not prove the order-seven curvature ceiling, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The exact positive summand ratios, monotonicity, and epsilon(0) cap are inherited unchanged.",
+      "diagnostics": null,
+      "formula": "r_n(q)=n^2*(2*n^2*q-3)/(2*q-3)*exp(-(n^2-1)*q), q=pi*exp(4u); d_q log(r_n)=-(n^2-1)*(1+6/((2*n^2*q-3)*(2*q-3)))<0",
+      "id": "fsd8r_01_ratio_geometry",
+      "proof_boundary": "Inherited exact kernel geometry and rigorous epsilon(0) bound.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "Moving the split inward spends the large high-region reserve to strengthen the low-region power.",
+      "diagnostics": null,
+      "formula": "a(k)=log(k)/10, b(k)=a(k)+1/10, c(k)=b(k)+1/100",
+      "id": "fsd8r_02_rebalanced_split",
+      "proof_boundary": "Exact split definition only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The complete higher-summand kernel ratio on the high region is below k^-8 on the full half-line.",
+      "diagnostics": null,
+      "formula": "epsilon(a(k))<=17*exp(-3*pi*k^(2/5))<k^(-8), k>=300",
+      "id": "fsd8r_03_high_region",
+      "proof_boundary": "Arb endpoint gates plus exact derivative monotonicity.",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_certificate"
+    },
+    {
+      "claim": "The log-integrand derivative stays positive across the comparison collar for every k>=300.",
+      "diagnostics": null,
+      "formula": "S_k'(a(k))>100 and S_k'(c(k))>0",
+      "id": "fsd8r_04_saddle_geometry",
+      "proof_boundary": "Arb endpoint gates plus six exact ratio-monotonicity checks.",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_certificate"
+    },
+    {
+      "claim": "The tilted first-summand probability below the new split is below k^-8.",
+      "diagnostics": null,
+      "formula": "epsilon(0)*P_k(u<a(k))<k^(-8), k>=300",
+      "id": "fsd8r_05_low_region",
+      "proof_boundary": "Arb endpoint gate and exact half-line derivative comparisons.",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_certificate"
+    },
+    {
+      "claim": "The two regions compose to an inverse-eighth-power complete-to-first moment defect.",
+      "diagnostics": null,
+      "formula": "0<=delta_k=(M_k-M_k^(1))/M_k^(1)<2/k^8 for every integer k>=300",
+      "id": "fsd8r_06_full_tail",
+      "proof_boundary": "Lambda=-100 integer moments only.",
+      "readiness": "ready_to_apply",
+      "role": "analytic_theorem"
+    },
+    {
+      "claim": "The adjacent logarithmic wall inherits the inverse-eighth-power stencil bound.",
+      "diagnostics": null,
+      "formula": "0<=log(1+delta_k)<2/k^8, k>=300; |B_j-B_j^(1)|<=a_j=2*((j-1)^(-8)+2*j^(-8)+(j+1)^(-8)), j>=301",
+      "id": "fsd8r_07_wall_error",
+      "proof_boundary": "Uses log(1+z)<=z and the exact centered stencil.",
+      "readiness": "ready_to_apply",
+      "role": "exact_consequence"
+    }
+  ],
+  "source_contract": {
+    "epsilon_zero_cap": "0.0022",
+    "exact_ratio": "r_n(q)=n^2*(2*n^2*q-3)/(2*q-3)*exp(-(n^2-1)*q), q=pi*exp(4u)",
+    "ratio_monotonicity": "d_q log(r_n)=-(n^2-1)*(1+6/((2*n^2*q-3)*(2*q-3)))<0",
+    "status": "all-k analytic first-summand dominance certificate"
+  },
+  "status": "rebalanced all-k inverse-eighth-power first-summand dominance extension",
+  "summary": {
+    "dominance_theorems": 1,
+    "full_tail_power": 8,
+    "positive_analytic_gates": 14,
+    "ready_to_apply_rows": 7,
+    "rebalanced_splits": 1,
+    "rows": 7,
+    "tail_start_k": 300
+  }
+}

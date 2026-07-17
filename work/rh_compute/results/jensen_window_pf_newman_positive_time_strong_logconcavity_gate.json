@@ -1,0 +1,197 @@
+{
+  "certificate": {
+    "arithmetic": "python-flint Arb balls",
+    "correlation_strong_curvature_lower_ball": "[149.0152394360265693473304156173857589181503086631261644 +/- 3.26E-54]",
+    "kappa_ball": "[74.90761971801328467366520780869287945907515433156308220 +/- 1.63E-54]",
+    "passed": true,
+    "phi0_ball": "[0.4466969004671234440869846670547091132204243670948249747 +/- 3.09E-56]",
+    "phi0_finite_ball": "[0.4466969004671234440869846670547091132204243670948249747 +/- 3.09E-56]",
+    "phi0_tail_upper": "[3.96109371662355986639960746774E-106 +/- 4.87E-136]",
+    "phi2_ball": "[-33.46100154940651373358024870154595919815511266249142184 +/- 5.37E-55]",
+    "phi2_finite_ball": "[-33.46100154940651373358024870154595919815511266249142184 +/- 5.37E-55]",
+    "phi2_tail_upper": "[4.64262360962715356047274334366E-99 +/- 2.82E-129]",
+    "precision_bits": 256,
+    "tail_start": 9,
+    "target_strong_curvature_lower_ball": "[74.50761971801328467366520780869287945907515433156308220 +/- 1.63E-54]",
+    "target_time": "1/5",
+    "threshold_kappa_over_2_ball": "[37.45380985900664233683260390434643972953757716578154110 +/- 8.13E-55]",
+    "threshold_margin_ball": "[37.25380985900664233683260390434643972953757716578154110 +/- 8.13E-55]"
+  },
+  "date": "2026-07-17",
+  "exact": {
+    "correlation": {
+      "definition": "K_(n,t)(v)=integral_R phi_t(s+v)*phi_t(s-v)*s^(2n)ds",
+      "half_line": "K_(n,t)(v)=2*integral_(s>0) phi_t(s+v)*phi_t(s-v)*s^(2n)ds",
+      "joint_bound": "D^2 log integrand <=-2*(kappa-2*t)*I for 0<=t<kappa/2",
+      "joint_hessian": "D^2 log integrand on (s,v) has quadratic form a*(p+q)^2+b*(p-q)^2-2*n*p^2/s^2, a=(log phi_t)''(s+v), b=(log phi_t)''(s-v)",
+      "marginal_source": "https://doi.org/10.1016/0022-1236(76)90004-5",
+      "marginal_theorem": "Prekopa marginalization gives (log K_(n,t))''(v)<=-2*(kappa-2*t) for every n>=0"
+    },
+    "deformed_kernel": {
+      "admissibility": "For 0<=t<kappa/2, phi_t is positive, even, strictly decreasing on (0,infinity), strongly log-concave, and super-exponentially decaying",
+      "curvature": "(log phi_t)''(u)<=(log Phi)''(0)+2*t=-(kappa-2*t)",
+      "definition": "phi_t(u)=exp(t*u^2)*Phi(u)"
+    },
+    "nonpromotion_decision": "Uniform strong log-concavity, admissibility, positive definiteness, and the exact Xi correlation tail do not force Fourier zero-freeness: K_(0,0) has all of them and still has double Fourier zeros. Any proof for K_(1,t) must use the s^2 weighting or a coupling in the correlation hierarchy.",
+    "open_handoff": "Exploit structure that distinguishes K_(1,t) from K_(0,t), such as a relative F_2/F_1 curvature inequality, an s^2-weighted modular square, or a hierarchy coercivity estimate. Shape-only Fourier criteria are closed.",
+    "published_input": {
+      "primary_source": "https://doi.org/10.1007/BF02075457",
+      "secondary_source": "https://arxiv.org/abs/1309.0055",
+      "statement": "q(r)=log(Phi(sqrt(r))) is strictly concave for r>0"
+    },
+    "root_variable_identity": "q''(u^2)=(u*(log Phi)''(u)-(log Phi)'(u))/(4*u^3)<0",
+    "symbolic_checks": {
+      "correlation_hessian_pair_form": "alpha*(p + q)**2 + beta*(p - q)**2 - 2*n*p**2/s**2",
+      "phi_summand_at_zero": "a*(2*a - 3)*exp(-a)",
+      "phi_summand_second_at_zero": "a*(32*a**3 - 224*a**2 + 330*a - 75)*exp(-a)",
+      "root_curvature_numerator": "-ell1 + ell2*u"
+    },
+    "uniform_phi_curvature": "With kappa=-(log Phi)''(0)=-Phi''(0)/Phi(0), (log Phi)''(u)<=-kappa for every real u",
+    "zeroth_correlation_guard": {
+      "hardy_source": "https://arxiv.org/abs/1712.08435",
+      "identity": "Fourier[K_(0,t)](xi)=2*H_t(xi/2)^2",
+      "properties_at_t0": "K_(0,0) is positive, even, strongly log-concave, positive definite, and has the same Xi super-Gaussian correlation tail",
+      "zero_source": "Hardy's theorem gives infinitely many real zeros of H_0, so the Fourier transform of K_(0,0) has real double zeros"
+    }
+  },
+  "kind": "jensen_window_pf_newman_positive_time_strong_logconcavity_gate",
+  "proof_boundary": "This artifact composes the published strict concavity of log(Phi(sqrt(r))) with an Arb origin-curvature certificate and Prekopa marginalization. It proves uniform strong log-concavity and admissibility of phi_t and every K_(n,t) throughout 0<=t<=1/5. The exact K_(0,0) square-transform guard shows that these shape and tail properties do not force Fourier zero-freeness. It does not prove strict positivity of Fourier[K_(1,t)], Wiener density, Lambda<=0, or RH.",
+  "rows": [
+    {
+      "claim": "A published theorem gives strict concavity of log(Phi(sqrt(r))).",
+      "diagnostics": {
+        "primary_source": "https://doi.org/10.1007/BF02075457",
+        "secondary_source": "https://arxiv.org/abs/1309.0055",
+        "statement": "q(r)=log(Phi(sqrt(r))) is strictly concave for r>0"
+      },
+      "formula": "q(r)=log(Phi(sqrt(r))) is strictly concave for r>0",
+      "id": "npslc_01_published_root_concavity",
+      "proof_boundary": "Published input theorem; not a new proof of that source result.",
+      "readiness": "ready_to_apply",
+      "role": "published_theorem"
+    },
+    {
+      "claim": "The root-variable theorem yields a uniform strong-log-concavity constant for Phi.",
+      "diagnostics": null,
+      "formula": "With kappa=-(log Phi)''(0)=-Phi''(0)/Phi(0), (log Phi)''(u)<=-kappa for every real u",
+      "id": "npslc_02_uniform_phi_curvature",
+      "proof_boundary": "Exact calculus consequence of the published theorem only.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "Arb certifies the origin curvature and its positive margin beyond the target heat time.",
+      "diagnostics": {
+        "arithmetic": "python-flint Arb balls",
+        "correlation_strong_curvature_lower_ball": "[149.0152394360265693473304156173857589181503086631261644 +/- 3.26E-54]",
+        "kappa_ball": "[74.90761971801328467366520780869287945907515433156308220 +/- 1.63E-54]",
+        "passed": true,
+        "phi0_ball": "[0.4466969004671234440869846670547091132204243670948249747 +/- 3.09E-56]",
+        "phi0_finite_ball": "[0.4466969004671234440869846670547091132204243670948249747 +/- 3.09E-56]",
+        "phi0_tail_upper": "[3.96109371662355986639960746774E-106 +/- 4.87E-136]",
+        "phi2_ball": "[-33.46100154940651373358024870154595919815511266249142184 +/- 5.37E-55]",
+        "phi2_finite_ball": "[-33.46100154940651373358024870154595919815511266249142184 +/- 5.37E-55]",
+        "phi2_tail_upper": "[4.64262360962715356047274334366E-99 +/- 2.82E-129]",
+        "precision_bits": 256,
+        "tail_start": 9,
+        "target_strong_curvature_lower_ball": "[74.50761971801328467366520780869287945907515433156308220 +/- 1.63E-54]",
+        "target_time": "1/5",
+        "threshold_kappa_over_2_ball": "[37.45380985900664233683260390434643972953757716578154110 +/- 8.13E-55]",
+        "threshold_margin_ball": "[37.25380985900664233683260390434643972953757716578154110 +/- 8.13E-55]"
+      },
+      "formula": "kappa=-Phi''(0)/Phi(0), kappa/2>1/5",
+      "id": "npslc_03_origin_curvature_certificate",
+      "proof_boundary": "Finite theta sum plus explicit geometric tail enclosure only.",
+      "readiness": "interval_validated",
+      "role": "interval_certificate"
+    },
+    {
+      "claim": "Every deformed Xi kernel in the target window is uniformly strongly log-concave and admissible.",
+      "diagnostics": {
+        "admissibility": "For 0<=t<kappa/2, phi_t is positive, even, strictly decreasing on (0,infinity), strongly log-concave, and super-exponentially decaying",
+        "curvature": "(log phi_t)''(u)<=(log Phi)''(0)+2*t=-(kappa-2*t)",
+        "definition": "phi_t(u)=exp(t*u^2)*Phi(u)"
+      },
+      "formula": "(log phi_t)''(u)<=(log Phi)''(0)+2*t=-(kappa-2*t)",
+      "id": "npslc_04_positive_time_admissibility",
+      "proof_boundary": "Kernel-shape theorem only; it does not control Fourier zeros.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "Prekopa marginalization propagates a uniform strong-log-concavity bound to every Xi correlation.",
+      "diagnostics": {
+        "definition": "K_(n,t)(v)=integral_R phi_t(s+v)*phi_t(s-v)*s^(2n)ds",
+        "half_line": "K_(n,t)(v)=2*integral_(s>0) phi_t(s+v)*phi_t(s-v)*s^(2n)ds",
+        "joint_bound": "D^2 log integrand <=-2*(kappa-2*t)*I for 0<=t<kappa/2",
+        "joint_hessian": "D^2 log integrand on (s,v) has quadratic form a*(p+q)^2+b*(p-q)^2-2*n*p^2/s^2, a=(log phi_t)''(s+v), b=(log phi_t)''(s-v)",
+        "marginal_source": "https://doi.org/10.1016/0022-1236(76)90004-5",
+        "marginal_theorem": "Prekopa marginalization gives (log K_(n,t))''(v)<=-2*(kappa-2*t) for every n>=0"
+      },
+      "formula": "Prekopa marginalization gives (log K_(n,t))''(v)<=-2*(kappa-2*t) for every n>=0",
+      "id": "npslc_05_correlation_marginal",
+      "proof_boundary": "Exact composition with Prekopa; no Fourier zero-freeness follows.",
+      "readiness": "ready_to_apply",
+      "role": "published_theorem_composition"
+    },
+    {
+      "claim": "The zeroth correlation transform is exactly the square of the Newman heat function.",
+      "diagnostics": {
+        "hardy_source": "https://arxiv.org/abs/1712.08435",
+        "identity": "Fourier[K_(0,t)](xi)=2*H_t(xi/2)^2",
+        "properties_at_t0": "K_(0,0) is positive, even, strongly log-concave, positive definite, and has the same Xi super-Gaussian correlation tail",
+        "zero_source": "Hardy's theorem gives infinitely many real zeros of H_0, so the Fourier transform of K_(0,0) has real double zeros"
+      },
+      "formula": "Fourier[K_(0,t)](xi)=2*H_t(xi/2)^2",
+      "id": "npslc_06_zeroth_square_transform",
+      "proof_boundary": "Exact Fourier normalization identity only.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Even Xi-specific strong shape, positive definiteness, and super-Gaussian tail do not force transform zero-freeness.",
+      "diagnostics": {
+        "hardy_source": "https://arxiv.org/abs/1712.08435",
+        "identity": "Fourier[K_(0,t)](xi)=2*H_t(xi/2)^2",
+        "properties_at_t0": "K_(0,0) is positive, even, strongly log-concave, positive definite, and has the same Xi super-Gaussian correlation tail",
+        "zero_source": "Hardy's theorem gives infinitely many real zeros of H_0, so the Fourier transform of K_(0,0) has real double zeros"
+      },
+      "formula": "Uniform strong log-concavity, admissibility, positive definiteness, and the exact Xi correlation tail do not force Fourier zero-freeness: K_(0,0) has all of them and still has double Fourier zeros. Any proof for K_(1,t) must use the s^2 weighting or a coupling in the correlation hierarchy.",
+      "id": "npslc_07_xi_shape_nonpromotion",
+      "proof_boundary": "K_(0,0) counterexample; it does not decide the s^2-weighted K_(1,t) target.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion_gate"
+    },
+    {
+      "claim": "The full published target interval 0<=t<=1/5 lies deep inside the strong-log-concavity regime.",
+      "diagnostics": {
+        "correlation_margin": "[149.0152394360265693473304156173857589181503086631261644 +/- 3.26E-54]",
+        "kernel_margin": "[74.50761971801328467366520780869287945907515433156308220 +/- 1.63E-54]",
+        "target_time": "1/5"
+      },
+      "formula": "kappa-2/5>0 and (log K_(n,t))''<=-2*(kappa-2*t)",
+      "id": "npslc_08_target_window_margin",
+      "proof_boundary": "Uniform shape margin only; not strict Fourier positivity.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "The surviving route must exploit the s^2 weight or correlation-hierarchy coupling.",
+      "diagnostics": null,
+      "formula": "Exploit structure that distinguishes K_(1,t) from K_(0,t), such as a relative F_2/F_1 curvature inequality, an s^2-weighted modular square, or a hierarchy coercivity estimate. Shape-only Fourier criteria are closed.",
+      "id": "npslc_09_weighted_hierarchy_handoff",
+      "proof_boundary": "Open coercivity target; not RH or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "sources": [
+    "https://doi.org/10.1007/BF02075457",
+    "https://arxiv.org/abs/1309.0055",
+    "https://doi.org/10.1016/0022-1236(76)90004-5",
+    "https://arxiv.org/abs/1712.08435",
+    "outputs/jensen_window_pf_newman_strict_laguerre_correlation_target.md",
+    "outputs/jensen_window_pf_newman_correlation_hierarchy_gaussian_mixture_gate.md"
+  ],
+  "status": "exact positive-time strong-log-concavity theorem with Xi-specific nonpromotion gate"
+}

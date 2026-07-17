@@ -1,14 +1,14 @@
 # Jensen-Window PF Bridge Target
 
-Date: 2026-07-05
+Date: 2026-07-16
 
 Status: theorem target artifact. This is not a proof of PF-infinity,
-Laguerre-Polya membership, RH, or `Lambda <= 0`; it is a sharper formulation
-of the signed-Hankel/Jensen bridge obligation.
+Laguerre-Polya membership, RH, or `Lambda <= 0`; it is the surviving direct
+Jensen-window target after rejection of the all-order signed-Hankel route.
 
 ## Purpose
 
-The signed-Hankel route must ultimately prove hyperbolicity of every Jensen
+Any viable route must ultimately prove hyperbolicity of every Jensen
 polynomial:
 
 ```text
@@ -57,8 +57,8 @@ sum_{j=0}^d B^{d,n,0}_j x^j
 has only real nonpositive zeros for every `d,n`.
 
 This is exactly the Jensen-window version of the all-order problem. It does
-not prove the target; it removes ambiguity about what the signed-Hankel route
-has to deliver.
+not prove the target; it removes ambiguity about what any viable route has to
+deliver.
 
 ## Contact With Signed Hankel
 
@@ -158,13 +158,46 @@ python work/rh_compute/scripts/check_jensen_hankel_bridge_algebra.py
 records a positive rational finite countermodel: low-order reshaped-Hankel
 signs can hold while degree-3 Jensen hyperbolicity fails.
 
-## Required Bridge Theorem
-
-The theorem needed by this route is now:
+An all-order generic promotion is also excluded. The exact gate
 
 ```text
-all-order shifted reshaped-Hankel sign-consistency for A_k(0)
-+ Xi/Phi-specific analytic hypotheses
+outputs/jensen_window_pf_deep_schur_toda_boundary_gate.md
+python work/rh_compute/scripts/check_jensen_window_pf_deep_schur_toda_boundary_gate.py
+```
+
+uses
+
+```text
+H(z)=exp(z/100)/((1-z)(1-2z)).
+```
+
+The associated coefficient specialization is strictly Schur-positive for
+every partition, but its shift-zero cubic Jensen polynomial has exact
+discriminant `-222484532394597/2000000000000<0`. Thus even strict full
+unweighted Schur/PF positivity is insufficient for Jensen hyperbolicity. The
+required bridge must exploit additional Xi/Phi-specific analytic structure;
+it cannot be stated as a generic implication for Schur-positive sequences.
+
+The actual all-order signed-Hankel antecedent is also excluded directly. The
+rigorous endpoint gate
+
+```text
+outputs/jensen_window_pf_endpoint_order10_counterexample.md
+python work/rh_compute/scripts/check_jensen_window_pf_endpoint_order10_counterexample.py
+```
+
+certifies `Q_(10,n)(-100)<0` for `n=0,1,2,3`, equivalently
+`s_((N^10))(h)<0` for `N=9,10,11,12`. Thus this direct Jensen target cannot
+depend on the proposed all-shift signed-Hankel/deep-Schur cone. This rejects
+that antecedent, not Jensen hyperbolicity or RH.
+
+## Required Bridge Theorem
+
+The theorem needed now has the weaker form:
+
+```text
+an Xi/Phi-specific kernel, determinant, or variation-diminishing condition
+that is actually satisfied despite the negative order-ten endpoint minors
 => every binomially weighted Jensen window B^{d,n,0} is PF-infinity
 ```
 
@@ -194,9 +227,11 @@ python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
 Current obligation split:
 
 ```text
-10 obligations
+11 obligations
 3 open obligations
 jwpf_06_sign_regular_to_jensen_pf_conversion is the central open bridge theorem
+jwpf_05_all_order_shifted_sign_consistency is rejected by counterexample
+jwpf_05b_weaker_xi_specific_antecedent is the open replacement antecedent
 finite evidence rows have would_close_target=false
 ```
 
@@ -275,6 +310,7 @@ checks only shifted-principal Hankel determinants;
 uses all-order PF-infinity of B^{d,n,0} as an assumption;
 assumes Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0;
 treats the shifted Arb staircase as an all-order theorem.
+assumes the rejected all-shift signed-Hankel/deep-Schur hierarchy.
 ```
 
 ## Integration Points
@@ -302,5 +338,7 @@ python work/rh_compute/scripts/check_jensen_window_pf_bridge_target.py
 
 ## Current Status
 
-The Jensen-window PF bridge is open. It is the concrete total-positivity form
-of the signed-Hankel/Jensen gap, not a proof of that gap.
+The Jensen-window PF bridge is open. Its former all-order signed-Hankel
+antecedent is false, so the live problem is to prove the same Jensen conclusion
+from a weaker Xi/Phi-specific structure. This is a route correction, not a
+proof or disproof of the Jensen target.

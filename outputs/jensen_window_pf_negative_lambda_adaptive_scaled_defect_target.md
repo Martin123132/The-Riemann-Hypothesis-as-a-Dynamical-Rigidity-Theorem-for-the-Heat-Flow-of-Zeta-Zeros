@@ -35,6 +35,23 @@ Current result:
 validated Jensen-window PF negative-lambda adaptive scaled-defect target: 8 rows, 0 issues, 2 live routes, 597 exact-cone rows, 76 half-width failures
 ```
 
+## 2026-07-11 Parameter-Specific Closure
+
+The interval-analytic certificate
+`outputs/jensen_window_pf_negative_lambda_m100_adaptive_defect_certificate.md`
+proves at `lambda=-100`, for every `k>=1`,
+
+```text
+0<=s_k<=1,
+d_(k+1)<=d_k,
+s_(k+1)>=s_k.
+```
+
+This discharges the adaptive-defect input needed by the established
+one-entry-parameter route. The original simultaneous target for all three
+exploratory parameters `lambda=-25,-50,-100` remains unproved and is retained
+below as audit history; it is no longer an active proof-programme blocker.
+
 ## Target
 
 ```text

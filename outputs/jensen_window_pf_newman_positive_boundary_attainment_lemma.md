@@ -1,6 +1,6 @@
 # Jensen-Window PF Newman Positive-Boundary Attainment Lemma
 
-Date: 2026-07-11
+Date: 2026-07-17
 
 Status: exact positive-boundary attainment and arbitrary-multiplicity
 energy lemma. This is not a proof of RH or `Lambda <= 0`.
@@ -49,7 +49,7 @@ hypothetical positive-boundary regime. It also yields the exact
 reformulation
 
 ```text
-Using simplicity for every t>Lambda, Lambda<=0 if and only if H_t has only simple zeros for every t>0.
+Using simplicity for every t>Lambda and the published bound Lambda<=1/5, Lambda<=0 if and only if H_t has only simple zeros for every 0<t<=1/5.
 ```
 
 ## Multiplicity Cluster
@@ -79,7 +79,7 @@ multiplicity assumption is needed for the endpoint energy obstruction.
 
 ## Live Handoff
 
-Prove either Xi positive-time simplicity for every t>0, or an Xi-specific finite-truncation energy estimate that remains integrable down to every hypothetical positive boundary. The published Rodgers-Tao estimate starts strictly after a negative boundary and does not supply this endpoint control.
+Prove either Xi positive-time simplicity for every 0<t<=1/5, or an Xi-specific finite-truncation energy estimate that remains integrable down to every hypothetical positive boundary. The published Rodgers-Tao estimate starts strictly after a negative boundary and does not supply this endpoint control.
 
 The route is now global enough to cover every hypothetical positive
 Newman boundary, but the Xi-specific simplicity or endpoint-integrability

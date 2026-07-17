@@ -1,0 +1,298 @@
+{
+  "adaptive_window": {
+    "Y_at_q_floor_lower": "1.80692517528504279165868514273065001396128262810016232629077E+1",
+    "Y_at_q_floor_upper": "1.80692517528504279165868514273065001396128262810016232629079E+1",
+    "Y_floor": 13,
+    "Y_power_bound": "Y(q)<2*q^(1/4), q>=9000",
+    "completed_square": "exp(-Y^2/2+Y)=exp(1/2)*q^-16",
+    "derivative_margin_lower": "3.93266071364578922832232426833885144411097989335932199862179E+0",
+    "endpoint_margin_lower": "1.41082317565550737186727250068702432301408148688572035284885E+0",
+    "maximum_tail_polynomial_ratio": "14168489223237857012804250062922257235955758753769/10583070431703828782569486650372963556614268256256",
+    "maximum_tail_polynomial_ratio_order": 30,
+    "q_floor": 9000,
+    "slope": "Y-1=sqrt(32*log(q))",
+    "slope_ratio": "12/13",
+    "tail_polynomial_ratios": {
+      "0": "13/12",
+      "1": "157/144",
+      "10": "439634699571750091/379978385469456384",
+      "11": "69052328839627379897/59276628133235195904",
+      "12": "903864841716023055545/770596165732057546752",
+      "13": "10921614996232771163321/9247153988784690561024",
+      "14": "857835817025935750549775/721278011125205863759872",
+      "15": "44921173711849609077888331/37506456578510704915513344",
+      "16": "441083121322368929747998027/365687951640479372926255104",
+      "17": "69299676889721285830253079035/57047320455914782176495796224",
+      "18": "604910630059143407376241388027/494410110617928112196296900608",
+      "19": "95048610665553575701322762575265/77127977256396785502622316494848",
+      "2": "12325/11232",
+      "20": "3733900092410532065992406684783653/3007991112999474634602270343299072",
+      "21": "195587466679177462211208076132666627/156415537875972680999318057851551744",
+      "22": "15368575083990643628765664725915455265/12200411954325869117946808512421036032",
+      "23": "2415346847212856684394620927295210560503/1903264264874835582399702127937681620992",
+      "24": "15817499379039823910459190078189718641655/12371217721686431285598063831594930536448",
+      "25": "2486173279441002485027552539494286226701087/1929909964583083280553297957728809163685888",
+      "26": "15030588049231043808623989264731545790659359/11579459787498499683319787746372854982115328",
+      "27": "87509428941351282567181179232769045493529375/66903545438880220392514329201265384341110784",
+      "28": "3439240797382148289553998663382845806866636249/2609238272116328595308058838849349989303320576",
+      "29": "540699251111741833004127905003642676591393628565/407041170450147260868057178860498598331318009856",
+      "3": "645061/584064",
+      "30": "14168489223237857012804250062922257235955758753769/10583070431703828782569486650372963556614268256256",
+      "4": "25321765/22778496",
+      "5": "3976174649/3553445376",
+      "6": "104064886073/92389579776",
+      "7": "16342293184655/14412774445056",
+      "8": "320812153336463/281049101678592",
+      "9": "5598289729301135/4871517762428928"
+    },
+    "window": "Y(q)=1+sqrt(32*log(q))"
+  },
+  "date": "2026-07-13",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order4_exact_cumulant_formal_tail_certificate.py",
+  "kind": "jensen_window_pf_compound_order4_exact_cumulant_formal_tail_certificate",
+  "proof_boundary": "This artifact proves both epsilon-ten formal Gaussian tails fit the complex-disk partition budgets. It does not prove the exact central residual or either exact-density tail, the exact cumulant corridors, curvature ray, order-four entry, PF-infinity, RH, or Lambda<=0.",
+  "remaining_target": "At Y=1+sqrt(32 log q), prove the central exact-minus-formal partition residual and both exact-density tails fit their finite and ray allocations.",
+  "rows": [
+    {
+      "claim": "The epsilon-ten formal density factor is a degree-thirty polynomial in y with exact graded coefficients.",
+      "diagnostics": null,
+      "formula": "E^[10](y)=sum_(n=0)^10 epsilon^n E_n(y), deg_y E^[10]=30",
+      "id": "co4ecftc_01_formal_weight_polynomial",
+      "proof_boundary": "Exact formal weight only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_formal_algebra"
+    },
+    {
+      "claim": "The global finite normalized-jet caps bound the total absolute formal-weight coefficient norm by 4/3.",
+      "diagnostics": {
+        "epsilon_degree_norms": {
+          "0": "1",
+          "1": "1/5",
+          "10": "2658183130093783/268240896000000000000",
+          "2": "33/400",
+          "3": "61/2000",
+          "4": "10339/960000",
+          "5": "601073/168000000",
+          "6": "46343209/40320000000",
+          "7": "31252673/86400000000",
+          "8": "1024237903/9216000000000",
+          "9": "1069119355531/31933440000000000"
+        },
+        "epsilon_powers_discarded_upward": "epsilon^n<=1 is used only for the formal tail upper bound",
+        "maximum_y_degree": 30,
+        "normalized_jet_caps": {
+          "10": "21",
+          "11": "38",
+          "12": "71",
+          "3": "6/5",
+          "4": "3/2",
+          "5": "2",
+          "6": "3",
+          "7": "9/2",
+          "8": "7",
+          "9": "12"
+        },
+        "total_coefficient_cap": "4/3",
+        "total_coefficient_norm": "32408700190646835653/24385536000000000000"
+      },
+      "formula": "sum_(n,m)|[y^m]E_n|<4/3",
+      "id": "co4ecftc_02_weight_coefficient_majorant",
+      "proof_boundary": "Formal coefficient majorant only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_inequality"
+    },
+    {
+      "claim": "The adaptive cutoff has a q^-16 completed-square factor and a controlled outward Gaussian slope.",
+      "diagnostics": {
+        "Y_at_q_floor_lower": "1.80692517528504279165868514273065001396128262810016232629077E+1",
+        "Y_at_q_floor_upper": "1.80692517528504279165868514273065001396128262810016232629079E+1",
+        "Y_floor": 13,
+        "Y_power_bound": "Y(q)<2*q^(1/4), q>=9000",
+        "completed_square": "exp(-Y^2/2+Y)=exp(1/2)*q^-16",
+        "derivative_margin_lower": "3.93266071364578922832232426833885144411097989335932199862179E+0",
+        "endpoint_margin_lower": "1.41082317565550737186727250068702432301408148688572035284885E+0",
+        "maximum_tail_polynomial_ratio": "14168489223237857012804250062922257235955758753769/10583070431703828782569486650372963556614268256256",
+        "maximum_tail_polynomial_ratio_order": 30,
+        "q_floor": 9000,
+        "slope": "Y-1=sqrt(32*log(q))",
+        "slope_ratio": "12/13",
+        "tail_polynomial_ratios": {
+          "0": "13/12",
+          "1": "157/144",
+          "10": "439634699571750091/379978385469456384",
+          "11": "69052328839627379897/59276628133235195904",
+          "12": "903864841716023055545/770596165732057546752",
+          "13": "10921614996232771163321/9247153988784690561024",
+          "14": "857835817025935750549775/721278011125205863759872",
+          "15": "44921173711849609077888331/37506456578510704915513344",
+          "16": "441083121322368929747998027/365687951640479372926255104",
+          "17": "69299676889721285830253079035/57047320455914782176495796224",
+          "18": "604910630059143407376241388027/494410110617928112196296900608",
+          "19": "95048610665553575701322762575265/77127977256396785502622316494848",
+          "2": "12325/11232",
+          "20": "3733900092410532065992406684783653/3007991112999474634602270343299072",
+          "21": "195587466679177462211208076132666627/156415537875972680999318057851551744",
+          "22": "15368575083990643628765664725915455265/12200411954325869117946808512421036032",
+          "23": "2415346847212856684394620927295210560503/1903264264874835582399702127937681620992",
+          "24": "15817499379039823910459190078189718641655/12371217721686431285598063831594930536448",
+          "25": "2486173279441002485027552539494286226701087/1929909964583083280553297957728809163685888",
+          "26": "15030588049231043808623989264731545790659359/11579459787498499683319787746372854982115328",
+          "27": "87509428941351282567181179232769045493529375/66903545438880220392514329201265384341110784",
+          "28": "3439240797382148289553998663382845806866636249/2609238272116328595308058838849349989303320576",
+          "29": "540699251111741833004127905003642676591393628565/407041170450147260868057178860498598331318009856",
+          "3": "645061/584064",
+          "30": "14168489223237857012804250062922257235955758753769/10583070431703828782569486650372963556614268256256",
+          "4": "25321765/22778496",
+          "5": "3976174649/3553445376",
+          "6": "104064886073/92389579776",
+          "7": "16342293184655/14412774445056",
+          "8": "320812153336463/281049101678592",
+          "9": "5598289729301135/4871517762428928"
+        },
+        "window": "Y(q)=1+sqrt(32*log(q))"
+      },
+      "formula": "Y(q)=1+sqrt(32*log(q))",
+      "id": "co4ecftc_03_adaptive_window",
+      "proof_boundary": "Formal Gaussian geometry only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_lemma"
+    },
+    {
+      "claim": "Exact exponential-tail integration controls every polynomial degree through thirty by less than 3/2 times Y^(m-1).",
+      "diagnostics": {
+        "maximum_order": 30,
+        "maximum_ratio": "14168489223237857012804250062922257235955758753769/10583070431703828782569486650372963556614268256256"
+      },
+      "formula": "P_m(Y-1,Y)<(3/2)*Y^(m-1), m=0,...,30",
+      "id": "co4ecftc_04_polynomial_hazard",
+      "proof_boundary": "One-sided polynomial Gaussian tail calculus only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_lemma"
+    },
+    {
+      "claim": "Both complex unit-disk formal tails satisfy one explicit q-power bound.",
+      "diagnostics": null,
+      "formula": "formal tail <=2^32*q^(-35/4) for |z|<=1",
+      "id": "co4ecftc_05_common_formal_tail_bound",
+      "proof_boundary": "Formal tails only; not exact-density tails.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_theorem"
+    },
+    {
+      "claim": "Each formal tail fits one fifth of the finite exact partition residual budget.",
+      "diagnostics": {
+        "endpoint_left_fourth": "21267647932558653966460912964485513216000000000000000000000000",
+        "endpoint_right": "8862938119652501095929000000000000000000000000000000000000000000000000000000000000000000000",
+        "q_power_margin": "23/4",
+        "target": "each formal tail <1/(500000*q^3)"
+      },
+      "formula": "each formal tail <1/(500000*q^3)",
+      "id": "co4ecftc_06_finite_formal_tails",
+      "proof_boundary": "Formal tails on 2<=u<=20 only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_theorem"
+    },
+    {
+      "claim": "Each formal tail fits its assigned asymptotic exact partition residual budget.",
+      "diagnostics": {
+        "endpoint_left_fourth": "5444517870735015415413993718908291383296000000000000000000000000",
+        "endpoint_right": "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "q23_over_u4_log_derivative_lower": "114/5",
+        "target": "each formal tail <1/(100000*u*q^3)"
+      },
+      "formula": "each formal tail <1/(100000*u*q^3)",
+      "id": "co4ecftc_07_ray_formal_tails",
+      "proof_boundary": "Formal tails on u>=20 only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_theorem"
+    },
+    {
+      "claim": "Prove only the central exact-minus-formal residual and the two exact-density tails at their remaining allocations.",
+      "diagnostics": {
+        "finite_five_equal_parts": "1/(500000*q^3)",
+        "finite_partition_target": "1/(100000*q^3)",
+        "ray_each_formal_tail": "1/(100000*u*q^3)",
+        "ray_each_remaining_exact_component": "1/(300000*u*q^3)",
+        "ray_partition_target": "1/(20000*u*q^3)"
+      },
+      "formula": "finite each <1/(500000*q^3); ray each <1/(300000*u*q^3)",
+      "id": "co4ecftc_08_exact_residual_handoff",
+      "proof_boundary": "Open exact-density central and two-tail theorem.",
+      "readiness": "not_ready_to_apply",
+      "role": "analytic_theorem_target"
+    }
+  ],
+  "source_hashes": {
+    "work/rh_compute/results/jensen_window_pf_compound_order4_exact_cumulant_complex_disk_contract.json": "b332cb63f13a56036c44534c09b95ceb9ce8a30f7b3374268e58886c6b68127d",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_formal_cumulant_second_next_parity_finite_certificate.json": "c000834d54d563977c86bb5bf402811879be83db8e9b40366dde2a71384c34f0"
+  },
+  "sources": [
+    "outputs/jensen_window_pf_compound_order4_exact_cumulant_complex_disk_contract.md",
+    "outputs/jensen_window_pf_compound_order4_formal_cumulant_second_next_parity_finite_certificate.md",
+    "outputs/jensen_window_pf_compound_order4_exact_cumulant_remainder_budget.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "exact formal two-tail theorem with open exact-density components",
+  "summary": {
+    "exact_rows": 7,
+    "formal_tails_closed": 2,
+    "maximum_y_degree": 30,
+    "open_analytic_rows": 1,
+    "open_exact_components": 3,
+    "rows": 8,
+    "tail_polynomial_orders": 31
+  },
+  "tail_budgets": {
+    "allocation": {
+      "finite_five_equal_parts": "1/(500000*q^3)",
+      "finite_partition_target": "1/(100000*q^3)",
+      "ray_each_formal_tail": "1/(100000*u*q^3)",
+      "ray_each_remaining_exact_component": "1/(300000*u*q^3)",
+      "ray_partition_target": "1/(20000*u*q^3)"
+    },
+    "common_one_sided_bound": "formal tail <=2^32*q^(-35/4) for |z|<=1",
+    "finite": {
+      "endpoint_left_fourth": "21267647932558653966460912964485513216000000000000000000000000",
+      "endpoint_right": "8862938119652501095929000000000000000000000000000000000000000000000000000000000000000000000",
+      "q_power_margin": "23/4",
+      "target": "each formal tail <1/(500000*q^3)"
+    },
+    "ray": {
+      "endpoint_left_fourth": "5444517870735015415413993718908291383296000000000000000000000000",
+      "endpoint_right": "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "q23_over_u4_log_derivative_lower": "114/5",
+      "target": "each formal tail <1/(100000*u*q^3)"
+    }
+  },
+  "weight_majorant": {
+    "epsilon_degree_norms": {
+      "0": "1",
+      "1": "1/5",
+      "10": "2658183130093783/268240896000000000000",
+      "2": "33/400",
+      "3": "61/2000",
+      "4": "10339/960000",
+      "5": "601073/168000000",
+      "6": "46343209/40320000000",
+      "7": "31252673/86400000000",
+      "8": "1024237903/9216000000000",
+      "9": "1069119355531/31933440000000000"
+    },
+    "epsilon_powers_discarded_upward": "epsilon^n<=1 is used only for the formal tail upper bound",
+    "maximum_y_degree": 30,
+    "normalized_jet_caps": {
+      "10": "21",
+      "11": "38",
+      "12": "71",
+      "3": "6/5",
+      "4": "3/2",
+      "5": "2",
+      "6": "3",
+      "7": "9/2",
+      "8": "7",
+      "9": "12"
+    },
+    "total_coefficient_cap": "4/3",
+    "total_coefficient_norm": "32408700190646835653/24385536000000000000"
+  }
+}

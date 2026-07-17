@@ -110,8 +110,9 @@ def build_exact() -> dict:
             "cannot be realized solely by zero collisions escaping to infinity."
         ),
         "positive_time_simplicity_equivalence": (
-            "Using simplicity for every t>Lambda, Lambda<=0 if and only if "
-            "H_t has only simple zeros for every t>0."
+            "Using simplicity for every t>Lambda and the published bound "
+            "Lambda<=1/5, Lambda<=0 if and only if H_t has only simple zeros "
+            "for every 0<t<=1/5."
         ),
         "published_hermite_split": {
             "source": "https://arxiv.org/abs/1904.12438",
@@ -160,7 +161,7 @@ def build_exact() -> dict:
             "and force Lambda<=0."
         ),
         "open_handoff": (
-            "Prove either Xi positive-time simplicity for every t>0, or an Xi-specific "
+            "Prove either Xi positive-time simplicity for every 0<t<=1/5, or an Xi-specific "
             "finite-truncation energy estimate that remains integrable down to every "
             "hypothetical positive boundary. The published Rodgers-Tao estimate starts "
             "strictly after a negative boundary and does not supply this endpoint control."
@@ -222,9 +223,9 @@ def build_payload() -> dict:
             id="npba_06_positive_time_simplicity_equivalence",
             role="exact_equivalence",
             readiness="ready_to_apply",
-            claim="The Newman upper direction is equivalent to simplicity at every positive time.",
+            claim="The Newman upper direction is equivalent to simplicity on the published reduced positive-time window.",
             formula=exact["positive_time_simplicity_equivalence"],
-            proof_boundary="Still an all-time, all-zero theorem; no simplicity proof is supplied here.",
+            proof_boundary="Still an all-zero continuum theorem on 0<t<=1/5; no simplicity proof is supplied here.",
         ),
         LemmaRow(
             id="npba_07_hermite_cluster_split",
@@ -263,7 +264,7 @@ def build_payload() -> dict:
     ]
     return {
         "kind": "jensen_window_pf_newman_positive_boundary_attainment_lemma",
-        "date": "2026-07-11",
+        "date": "2026-07-17",
         "status": "exact positive-boundary attainment and arbitrary-multiplicity energy lemma",
         "proof_boundary": (
             "This artifact composes published positive-time strip and high-zero theorems "
@@ -278,6 +279,8 @@ def build_payload() -> dict:
             "outputs/formal_core.md",
             "https://arxiv.org/abs/1904.12438",
             "https://arxiv.org/abs/1801.05914",
+            "https://arxiv.org/abs/2004.09765",
+            "outputs/jensen_window_pf_newman_polymath15_lambda01965_provenance_audit.md",
         ],
         "exact": exact,
         "rows": [asdict(row) for row in rows],
@@ -292,7 +295,7 @@ def render_note(payload: dict) -> str:
         [
             "# Jensen-Window PF Newman Positive-Boundary Attainment Lemma",
             "",
-            "Date: 2026-07-11",
+            "Date: 2026-07-17",
             "",
             "Status: exact positive-boundary attainment and arbitrary-multiplicity",
             "energy lemma. This is not a proof of RH or `Lambda <= 0`.",

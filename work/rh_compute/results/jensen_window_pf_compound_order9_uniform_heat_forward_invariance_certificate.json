@@ -1,0 +1,135 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order9_uniform_heat_forward_invariance_certificate.py",
+  "conclusions": {
+    "arbitrary_order_nine": "epsilon_9*R_(9,n)(j_1,j_2,j_3,j_4,j_5,j_6,j_7,j_8,j_9;lambda)>0 for every n>=0, 0<=j_1<j_2<j_3<j_4<j_5<j_6<j_7<j_8<j_9, and -100<=lambda<=0",
+    "contiguous_order_nine": "Q_(9,n)(lambda)=H_(9,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+    "fixed_order_nine": "every consecutive-row arbitrary-column reshaped-Hankel minor through order nine has its required sign on -100<=lambda<=0",
+    "next_handoff": "derive a uniform-in-order endpoint and forward mechanism; fixed order nine alone is not PF-infinity",
+    "signed_layers_through_nine": "epsilon_k*H_(k,n)(lambda)>0 for 1<=k<=9, every n>=0 and -100<=lambda<=0"
+  },
+  "date": "2026-07-14",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order9_uniform_heat_forward_invariance_certificate.py",
+  "kind": "jensen_window_pf_compound_order9_uniform_heat_forward_invariance_certificate",
+  "proof_boundary": "This artifact proves the required signed Hankel layers through fixed order nine only. It does not prove order ten or higher, PF-infinity, the all-degree Jensen bridge, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "Every signed order-nine endpoint coordinate is strictly positive at lambda=-100.",
+      "diagnostics": null,
+      "formula": "Q_(9,n)(-100)=H_(9,n)(-100)>0 for every integer n>=0",
+      "id": "co9uhfic_01_endpoint",
+      "proof_boundary": "Completed zeta-specific endpoint theorem.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "Signed order-nine positivity is uniform at sufficiently large shift throughout the compact heat interval.",
+      "diagnostics": null,
+      "formula": "there exists N_9 such that Q_(9,n)(lambda)>0 for every n>=N_9 and -100<=lambda<=0",
+      "id": "co9uhfic_02_uniform_tail",
+      "proof_boundary": "Non-effective but compact-uniform eventual theorem.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The signed order-nine layer obeys a nearest-neighbor cooperative system with positive forward coefficient.",
+      "diagnostics": null,
+      "formula": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n=(4*n+66)*Q_(8,n)/Q_(8,n+1)>0, b_n=((4*n+66)/(4*n+62))*(log Q_(8,n+1))'",
+      "id": "co9uhfic_03_cooperative_flow",
+      "proof_boundary": "Exact Plucker and heat-flow algebra inside the completed order-eight cone.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The uniform tail confines any first loss to finitely many shifts, where variation of constants preserves positivity.",
+      "diagnostics": null,
+      "formula": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)",
+      "id": "co9uhfic_04_finite_confinement",
+      "proof_boundary": "Infinite-index maximum principle with compact-uniform tail.",
+      "readiness": "ready_to_apply",
+      "role": "exact_maximum_principle"
+    },
+    {
+      "claim": "Endpoint entry, the uniform tail, and the cooperative system prove signed contiguous order nine throughout the interval.",
+      "diagnostics": null,
+      "formula": "Q_(9,n)(lambda)=H_(9,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+      "id": "co9uhfic_05_contiguous_theorem",
+      "proof_boundary": "All shifts and all finite heat parameters from -100 through zero.",
+      "readiness": "ready_to_apply",
+      "role": "exact_forward_theorem"
+    },
+    {
+      "claim": "The completed lower contiguous layers supply every initial-minor sign through order eight.",
+      "diagnostics": null,
+      "formula": "epsilon_k*H_(k,n)(lambda)>0 for k=1,2,3,4,5,6,7,8, all n and -100<=lambda<=0",
+      "id": "co9uhfic_06_lower_layers",
+      "proof_boundary": "Previously proved lower-layer interval theorems.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The fixed-order initial-minor criterion transfers signed contiguous order nine to all arbitrary column sets.",
+      "diagnostics": null,
+      "formula": "epsilon_9*R_(9,n)(j_1,j_2,j_3,j_4,j_5,j_6,j_7,j_8,j_9;lambda)>0 for every n>=0, 0<=j_1<j_2<j_3<j_4<j_5<j_6<j_7<j_8<j_9, and -100<=lambda<=0",
+      "id": "co9uhfic_07_arbitrary_columns",
+      "proof_boundary": "Finite-dimensional transfer applied pointwise in lambda.",
+      "readiness": "ready_to_apply",
+      "role": "published_theorem_composition"
+    },
+    {
+      "claim": "Fixed order nine does not supply the all-order theorem required by the Jensen bridge.",
+      "diagnostics": null,
+      "formula": "derive a uniform-in-order endpoint and forward mechanism; fixed order nine alone is not PF-infinity",
+      "id": "co9uhfic_08_all_order_handoff",
+      "proof_boundary": "Open uniform-in-order problem; not PF-infinity, RH, or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    }
+  ],
+  "source_contract": {
+    "conditional_arbitrary_columns": "completed signed contiguous layers through order nine imply every arbitrary-column signed layer through order nine",
+    "conditional_forward": "[Q_(9,n)(-100)>0 for all n] => [Q_(9,n)(lambda)>0 for all n and -100<=lambda<=0]",
+    "cooperative_flow": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n=(4*n+66)*Q_(8,n)/Q_(8,n+1)>0, b_n=((4*n+66)/(4*n+62))*(log Q_(8,n+1))'",
+    "endpoint_entry": "Q_(9,n)(-100)=H_(9,n)(-100)>0 for every integer n>=0",
+    "fixed_order_transfer": "[epsilon_k H_(k,s)>0 for 1<=k<=m, all s] => [epsilon_k R_(k,n)(j_1,...,j_k)>0 for 1<=k<=m]",
+    "lower_layers": "epsilon_k*H_(k,n)(lambda)>0 for k=1,2,3,4,5,6,7,8, all n and -100<=lambda<=0",
+    "sources": [
+      {
+        "kind": "jensen_window_pf_compound_order9_m100_entry_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_m100_entry_certificate.json",
+        "sha256": "ed036ed78b86a437492a4c45e90319a2c019fb2077cbf686575a51742bf71943",
+        "status": "rigorous all-shift signed order-nine entry at lambda=-100"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order9_uniform_tail_flow_reduction",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_uniform_tail_flow_reduction.json",
+        "sha256": "4530f62966450e9f35c28e374b9280af903c6340303042cd89d7ff66fc6ad389",
+        "status": "exact uniform eventual signed order-nine tail and conditional forward reduction with one open lambda=-100 entry"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order8_uniform_heat_forward_invariance_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order8_uniform_heat_forward_invariance_certificate.json",
+        "sha256": "a43a91fae1f47daf4b02d856d748faf4dae0413df232d6df34371a0f77ed9473",
+        "status": "signed contiguous and arbitrary-column order-eight theorem on -100<=lambda<=0"
+      },
+      {
+        "kind": "jensen_window_pf_order4_noncontiguous_total_positivity_transfer",
+        "path": "work/rh_compute/results/jensen_window_pf_order4_noncontiguous_total_positivity_transfer.json",
+        "sha256": "dba5df10b861a594e2e20690b5286a711d98ace5fdc343453f6cd8fdeca8d1e5",
+        "status": "exact arbitrary-column reshaped-Hankel order-four theorem at lambda zero"
+      }
+    ],
+    "uniform_tail": "there exists N_9 such that Q_(9,n)(lambda)>0 for every n>=N_9 and -100<=lambda<=0",
+    "variation_of_constants": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)"
+  },
+  "status": "signed contiguous and arbitrary-column order-nine theorem on -100<=lambda<=0",
+  "summary": {
+    "arbitrary_column_order_nine_theorems": 1,
+    "contiguous_order_nine_theorems": 1,
+    "cooperative_flow_theorems": 1,
+    "open_all_order_handoffs": 1,
+    "open_rows": 1,
+    "ready_rows": 7,
+    "rows": 8,
+    "uniform_tail_theorems": 1
+  }
+}

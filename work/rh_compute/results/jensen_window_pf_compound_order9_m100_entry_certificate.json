@@ -1,0 +1,120 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order9_m100_entry_certificate.py",
+  "date": "2026-07-14",
+  "exact": {
+    "all_shift_entry": "Q_(9,n)(-100)=H_(9,n)(-100)>0 for every integer n>=0",
+    "analytic_tail": "Q_(9,n)(-100)>0 for every n>=1243",
+    "continuous_first_summand": "w_1''(t)<=4200/t^2 for every real t>=1250",
+    "finite_prefix": "Q_(9,n)(-100)>0 for every 0<=n<=1242",
+    "first_discrete_ceiling": "w_1''(t)<=4200/t^2 => Y_k^(1)<=4200*[-log(1-1/k^2)]<4201/k^2, k>=1251",
+    "full_curvature_ceiling": "w_1''(t)<=4200/t^2 on t>=1250 => Y_k<4201/k^2+550/k^2=4751/k^2<4900/k^2, k>=1251",
+    "full_kernel_transfer": "|Y_k-Y_k^(1)|<=F_(k-1)+2*F_k+F_(k+1)<550/k^2, k>=1251"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order9_m100_entry_certificate.py",
+  "kind": "jensen_window_pf_compound_order9_m100_entry_certificate",
+  "proof_boundary": "This artifact proves fixed order-nine endpoint entry at lambda=-100. It does not by itself prove heat-forward invariance, order ten or higher, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The global first-summand theorem supplies the sole open analytic premise.",
+      "diagnostics": null,
+      "formula": "w_1''(t)<=4200/t^2 for every real t>=1250",
+      "id": "co9m100ec_01_continuous",
+      "proof_boundary": "Continuous first summand at lambda=-100.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The tent identity converts the continuous ceiling to a discrete first-summand ceiling.",
+      "diagnostics": null,
+      "formula": "w_1''(t)<=4200/t^2 => Y_k^(1)<=4200*[-log(1-1/k^2)]<4201/k^2, k>=1251",
+      "id": "co9m100ec_02_tent",
+      "proof_boundary": "Integer k>=1251 only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_application"
+    },
+    {
+      "claim": "The tenth-power remainder transfer keeps the complete-kernel curvature below its endpoint target.",
+      "diagnostics": null,
+      "formula": "|Y_k-Y_k^(1)|<=F_(k-1)+2*F_k+F_(k+1)<550/k^2, k>=1251; w_1''(t)<=4200/t^2 on t>=1250 => Y_k<4201/k^2+550/k^2=4751/k^2<4900/k^2, k>=1251",
+      "id": "co9m100ec_03_full_kernel",
+      "proof_boundary": "Complete theta kernel at lambda=-100, k>=1251.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_application"
+    },
+    {
+      "claim": "The full curvature ceiling proves every signed endpoint determinant in the analytic tail.",
+      "diagnostics": null,
+      "formula": "Q_(9,n)(-100)>0 for every n>=1243",
+      "id": "co9m100ec_04_analytic_tail",
+      "proof_boundary": "Endpoint shifts n>=1243.",
+      "readiness": "ready_to_apply",
+      "role": "analytic_theorem"
+    },
+    {
+      "claim": "The finite Arb certificate covers every endpoint shift before the analytic tail.",
+      "diagnostics": null,
+      "formula": "Q_(9,n)(-100)>0 for every 0<=n<=1242",
+      "id": "co9m100ec_05_finite_prefix",
+      "proof_boundary": "Endpoint shifts 0<=n<=1242.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "The finite prefix and analytic tail meet without an index gap.",
+      "diagnostics": {
+        "orientation": "epsilon_9=1, Q_(9,n)=H_(9,n)"
+      },
+      "formula": "Q_(9,n)(-100)=H_(9,n)(-100)>0 for every integer n>=0",
+      "id": "co9m100ec_06_all_shift_entry",
+      "proof_boundary": "All shifts at lambda=-100 only; no heat-forward claim here.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    }
+  ],
+  "source_contract": {
+    "continuous": "w_1''(t)<=4200/t^2 for every real t>=1250",
+    "finite": "Q_(9,n)(-100)>0 for every 0<=n<=1242",
+    "full_ceiling": "w_1''(t)<=4200/t^2 on t>=1250 => Y_k<4201/k^2+550/k^2=4751/k^2<4900/k^2, k>=1251",
+    "full_transfer": "|Y_k-Y_k^(1)|<=F_(k-1)+2*F_k+F_(k+1)<550/k^2, k>=1251",
+    "orientation": "epsilon_9=1, Q_(9,n)=H_(9,n)",
+    "sources": [
+      {
+        "kind": "jensen_window_pf_compound_order9_first_summand_curvature_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_first_summand_curvature_certificate.json",
+        "sha256": "aa9371bbe20ea323d7603709b46fa470836066bd6ada7869cc6db3a5f8fce05a",
+        "status": "rigorous global order-nine first-summand curvature theorem on t>=1250"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order9_first_summand_curvature_bridge",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_first_summand_curvature_bridge.json",
+        "sha256": "2959900efe2d5709ad86e3e0f2c3450d9ea26eb16ff102dde94b18d9652bec85",
+        "status": "exact order-nine first/full curvature transfer with one open continuous theorem and a two-index finite splice"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order9_m100_finite_splice_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_m100_finite_splice_certificate.json",
+        "sha256": "9b38f63e1e32d3c980f2c02c91583a1cffa2a1d4642d423868e31c8288c889ac",
+        "status": "rigorous two-index order-nine finite splice at lambda=-100"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order9_uniform_tail_flow_reduction",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_uniform_tail_flow_reduction.json",
+        "sha256": "4530f62966450e9f35c28e374b9280af903c6340303042cd89d7ff66fc6ad389",
+        "status": "exact uniform eventual signed order-nine tail and conditional forward reduction with one open lambda=-100 entry"
+      }
+    ],
+    "tail": "Q_(9,n)(-100)>0 for every n>=1243",
+    "tent_transfer": "w_1''(t)<=4200/t^2 => Y_k^(1)<=4200*[-log(1-1/k^2)]<4201/k^2, k>=1251"
+  },
+  "status": "rigorous all-shift signed order-nine entry at lambda=-100",
+  "summary": {
+    "all_shift_m100_entry_theorems": 1,
+    "analytic_tail_theorems": 1,
+    "continuous_curvature_inputs": 1,
+    "finite_prefix_theorems": 1,
+    "full_kernel_transfer_applications": 1,
+    "open_rows": 0,
+    "ready_rows": 6,
+    "rows": 6
+  }
+}

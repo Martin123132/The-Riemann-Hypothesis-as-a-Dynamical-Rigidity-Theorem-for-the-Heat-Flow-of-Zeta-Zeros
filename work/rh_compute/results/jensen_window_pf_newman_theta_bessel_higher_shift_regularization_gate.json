@@ -1,0 +1,307 @@
+{
+  "date": "2026-07-11",
+  "exact": {
+    "analytic_continuation_guard": {
+      "continued_identity": "Qhat(x)*zeta((1+i*x)/2)=xi((1+i*x)/2)/4",
+      "decision": "The Dirichlet series is outside its convergence half-plane on the real spectral axis. Analytic continuation reconstructs xi itself; it is not a positive or zero-free block summation theorem.",
+      "formal_assembly": "Qhat(x)*sum_(n>=1)n^(-1/2-i*x/2)"
+    },
+    "coefficient_sign": {
+      "first_block": "For n=1, c_(1,m)>0 for 0<=m<=6 and c_(1,m)<0 for m>=7; the bounds 3<pi<22/7 place 2*pi^2/3 strictly between 6 and 7.",
+      "law": "sign(c_(n,m))=sign(2*pi^2*n^4-3*m)",
+      "no_zero": "c_(n,m) is never zero because pi^2 is irrational",
+      "rows": [
+        {
+          "first_negative_m": 7,
+          "last_positive_m": 6,
+          "n": 1,
+          "sample_signs": [
+            {
+              "m": 0,
+              "sign": "positive"
+            },
+            {
+              "m": 6,
+              "sign": "positive"
+            },
+            {
+              "m": 7,
+              "sign": "negative"
+            }
+          ],
+          "threshold": "2*pi**2/3"
+        },
+        {
+          "first_negative_m": 106,
+          "last_positive_m": 105,
+          "n": 2,
+          "sample_signs": [
+            {
+              "m": 0,
+              "sign": "positive"
+            },
+            {
+              "m": 105,
+              "sign": "positive"
+            },
+            {
+              "m": 106,
+              "sign": "negative"
+            }
+          ],
+          "threshold": "32*pi**2/3"
+        },
+        {
+          "first_negative_m": 533,
+          "last_positive_m": 532,
+          "n": 3,
+          "sample_signs": [
+            {
+              "m": 0,
+              "sign": "positive"
+            },
+            {
+              "m": 532,
+              "sign": "positive"
+            },
+            {
+              "m": 533,
+              "sign": "negative"
+            }
+          ],
+          "threshold": "54*pi**2"
+        }
+      ],
+      "threshold": "c_(n,m)>0 iff m<2*pi^2*n^4/3"
+    },
+    "coupled_matrix_handoff": {
+      "matrix_entry": "M_(i,j)=F_i'*F_j'-(F_i*F_j''+F_j*F_i'')/2",
+      "quadratic_identity": "L[sum_j a_j*F_j]=sum_(i,j)a_i*a_j*M_(i,j)",
+      "required_upgrade": "Group the theta summands through the modular identity before the spectral transform, then prove positivity of the resulting coupled mixed-term quadratic form. Alternatively supply a noncircular renormalized summation theorem that preserves the needed sign.",
+      "subsequent_endpoint_result": "The theta cell-renormalization gate supplies an ordinary normally convergent coupled matrix at t=0, but proves that every individual cell block retains an exp(-5u) tail and cannot be deformed to t>0."
+    },
+    "fixed_block_transform": {
+      "bessel_integral": "integral_0^infinity exp(-2*pi*n^2*cosh(4u))*cosh((9-4m)u)*cos(xu)du=P_(n,m)(x)",
+      "definition": "P_(n,m)(x)=1/8*(K_(9/4-m+i*x/4)(2*pi*n^2)+K_(9/4-m-i*x/4)(2*pi*n^2))",
+      "scope": "The identity is an ordinary absolutely justified transform for each fixed n.",
+      "termwise_transform": "I_n(x):=integral_0^infinity g_n(u)cos(xu)du=sum_(m>=0)c_(n,m)*P_(n,m)(x)"
+    },
+    "higher_shift_expansion": {
+      "absolute_majorant": "(1/2)*(2*pi^2*n^4)*(exp(9u-pi*n^2*exp(4u))+exp(-9u-pi*n^2*exp(-4u))) + (1/2)*(3*pi*n^2)*(exp(5u-pi*n^2*exp(4u))+exp(-5u-pi*n^2*exp(-4u)))",
+      "coefficient": "c_(n,m)=pi^m*n^(2m)*(2*pi^2*n^4-3*m)/m!",
+      "convergence": "For each fixed n the m-series and all u-derivatives converge locally uniformly; the absolute m-majorant is integrable on [0,infinity).",
+      "derivation": "Symmetrize phi_n first, factor exp(-pi*n^2*(exp(4u)+exp(-4u))), expand the remaining exponentials, and pair the exp(9u) term at index m with the exp(5u) term at index m-1.",
+      "identity": "g_n(u)=exp(-2*pi*n^2*cosh(4u))*sum_(m>=0) c_(n,m)*cosh((9-4*m)*u)"
+    },
+    "spectral_summation_obstruction": {
+      "divergence": "sum_(n>=1)I_n(0)=-infinity",
+      "finite_target": "H_0(0)=integral_0^infinity Phi(u)du is finite, so H_0 is not the ordinary termwise sum of the Bessel-block transforms.",
+      "fubini_boundary": "The n-sum is pointwise and locally uniform in the kernel variable, but it is not interchangeable with the half-line Fourier integral.",
+      "profile_transform": "Qhat(x)=-(1+x^2)/32*pi^(-(1+i*x)/4)*Gamma((1+i*x)/4)",
+      "shift_transform": "Fourier[phi_n](x)=n^(-1/2-i*x/2)*Qhat(x)",
+      "symmetrized_cosine_transform": "I_n(x)=1/4*(n^(-1/2-i*x/2)*Qhat(x)+n^(-1/2+i*x/2)*Qhat(-x))",
+      "zero_frequency": "I_n(0)=Qhat(0)/(2*sqrt(n)), Qhat(0)=-Gamma(1/4)/(32*pi^(1/4))<0"
+    },
+    "theta_summand": {
+      "definition": "phi_n(u)=(2*pi^2*n^4*exp(9u)-3*pi*n^2*exp(5u))*exp(-pi*n^2*exp(4u))",
+      "full_evenness": "Phi(u)=sum_(n>=1)phi_n(u)=Phi(-u)",
+      "pointwise_sum": "Phi(u)=sum_(n>=1)g_n(u)",
+      "shift": "phi_n(u)=n^(-1/2)*phi_1(u+(log n)/2)",
+      "symmetrized_block": "g_n(u)=(phi_n(u)+phi_n(-u))/2"
+    }
+  },
+  "kind": "jensen_window_pf_newman_theta_bessel_higher_shift_regularization_gate",
+  "proof_boundary": "This artifact proves an exact higher-shift expansion for every symmetrized theta summand, its coefficient sign law, and a fixed-index Bessel transform theorem. It also proves that summing those transforms over the arithmetic index is invalid in the ordinary sense, with an explicit divergence at zero frequency. It does not reject modularly grouped or renormalized coupled identities and does not prove strict Laguerre positivity, Wiener density, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The even Xi kernel is the pointwise sum of symmetrized arithmetic theta blocks.",
+      "diagnostics": {
+        "definition": "phi_n(u)=(2*pi^2*n^4*exp(9u)-3*pi*n^2*exp(5u))*exp(-pi*n^2*exp(4u))",
+        "full_evenness": "Phi(u)=sum_(n>=1)phi_n(u)=Phi(-u)",
+        "pointwise_sum": "Phi(u)=sum_(n>=1)g_n(u)",
+        "shift": "phi_n(u)=n^(-1/2)*phi_1(u+(log n)/2)",
+        "symmetrized_block": "g_n(u)=(phi_n(u)+phi_n(-u))/2"
+      },
+      "formula": "Phi(u)=sum_(n>=1)g_n(u)",
+      "id": "ntbhsr_01_theta_symmetrization",
+      "proof_boundary": "Exact kernel identity; no spectral interchange is asserted.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Each symmetrized theta block has an exact infinite expansion in higher Bessel-shift kernels.",
+      "diagnostics": {
+        "absolute_majorant": "(1/2)*(2*pi^2*n^4)*(exp(9u-pi*n^2*exp(4u))+exp(-9u-pi*n^2*exp(-4u))) + (1/2)*(3*pi*n^2)*(exp(5u-pi*n^2*exp(4u))+exp(-5u-pi*n^2*exp(-4u)))",
+        "coefficient": "c_(n,m)=pi^m*n^(2m)*(2*pi^2*n^4-3*m)/m!",
+        "convergence": "For each fixed n the m-series and all u-derivatives converge locally uniformly; the absolute m-majorant is integrable on [0,infinity).",
+        "derivation": "Symmetrize phi_n first, factor exp(-pi*n^2*(exp(4u)+exp(-4u))), expand the remaining exponentials, and pair the exp(9u) term at index m with the exp(5u) term at index m-1.",
+        "identity": "g_n(u)=exp(-2*pi*n^2*cosh(4u))*sum_(m>=0) c_(n,m)*cosh((9-4*m)*u)"
+      },
+      "formula": "g_n(u)=exp(-2*pi*n^2*cosh(4u))*sum_(m>=0) c_(n,m)*cosh((9-4*m)*u)",
+      "id": "ntbhsr_02_higher_shift_expansion",
+      "proof_boundary": "Exact for each fixed n with locally uniform kernel convergence.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The two neighboring exponential series combine into one closed coefficient formula.",
+      "diagnostics": null,
+      "formula": "c_(n,m)=pi^m*n^(2m)*(2*pi^2*n^4-3*m)/m!",
+      "id": "ntbhsr_03_coefficient_formula",
+      "proof_boundary": "Exact coefficient algebra only.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Every arithmetic block has a sharp positive-to-negative coefficient threshold.",
+      "diagnostics": {
+        "first_block": "For n=1, c_(1,m)>0 for 0<=m<=6 and c_(1,m)<0 for m>=7; the bounds 3<pi<22/7 place 2*pi^2/3 strictly between 6 and 7.",
+        "law": "sign(c_(n,m))=sign(2*pi^2*n^4-3*m)",
+        "no_zero": "c_(n,m) is never zero because pi^2 is irrational",
+        "rows": [
+          {
+            "first_negative_m": 7,
+            "last_positive_m": 6,
+            "n": 1,
+            "sample_signs": [
+              {
+                "m": 0,
+                "sign": "positive"
+              },
+              {
+                "m": 6,
+                "sign": "positive"
+              },
+              {
+                "m": 7,
+                "sign": "negative"
+              }
+            ],
+            "threshold": "2*pi**2/3"
+          },
+          {
+            "first_negative_m": 106,
+            "last_positive_m": 105,
+            "n": 2,
+            "sample_signs": [
+              {
+                "m": 0,
+                "sign": "positive"
+              },
+              {
+                "m": 105,
+                "sign": "positive"
+              },
+              {
+                "m": 106,
+                "sign": "negative"
+              }
+            ],
+            "threshold": "32*pi**2/3"
+          },
+          {
+            "first_negative_m": 533,
+            "last_positive_m": 532,
+            "n": 3,
+            "sample_signs": [
+              {
+                "m": 0,
+                "sign": "positive"
+              },
+              {
+                "m": 532,
+                "sign": "positive"
+              },
+              {
+                "m": 533,
+                "sign": "negative"
+              }
+            ],
+            "threshold": "54*pi**2"
+          }
+        ],
+        "threshold": "c_(n,m)>0 iff m<2*pi^2*n^4/3"
+      },
+      "formula": "c_(n,m)>0 iff m<2*pi^2*n^4/3",
+      "id": "ntbhsr_04_coefficient_sign",
+      "proof_boundary": "Signs the expansion coefficients; it does not sign mixed Laguerre terms.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "For each fixed theta index, the higher-shift series may be Fourier transformed term by term.",
+      "diagnostics": {
+        "bessel_integral": "integral_0^infinity exp(-2*pi*n^2*cosh(4u))*cosh((9-4m)u)*cos(xu)du=P_(n,m)(x)",
+        "definition": "P_(n,m)(x)=1/8*(K_(9/4-m+i*x/4)(2*pi*n^2)+K_(9/4-m-i*x/4)(2*pi*n^2))",
+        "scope": "The identity is an ordinary absolutely justified transform for each fixed n.",
+        "termwise_transform": "I_n(x):=integral_0^infinity g_n(u)cos(xu)du=sum_(m>=0)c_(n,m)*P_(n,m)(x)"
+      },
+      "formula": "I_n(x):=integral_0^infinity g_n(u)cos(xu)du=sum_(m>=0)c_(n,m)*P_(n,m)(x)",
+      "id": "ntbhsr_05_fixed_block_bessel_transform",
+      "proof_boundary": "Fixed n only; summation over n is deliberately excluded.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "The ordinary sum of the fixed-block transforms diverges already at zero frequency.",
+      "diagnostics": {
+        "divergence": "sum_(n>=1)I_n(0)=-infinity",
+        "finite_target": "H_0(0)=integral_0^infinity Phi(u)du is finite, so H_0 is not the ordinary termwise sum of the Bessel-block transforms.",
+        "fubini_boundary": "The n-sum is pointwise and locally uniform in the kernel variable, but it is not interchangeable with the half-line Fourier integral.",
+        "profile_transform": "Qhat(x)=-(1+x^2)/32*pi^(-(1+i*x)/4)*Gamma((1+i*x)/4)",
+        "shift_transform": "Fourier[phi_n](x)=n^(-1/2-i*x/2)*Qhat(x)",
+        "symmetrized_cosine_transform": "I_n(x)=1/4*(n^(-1/2-i*x/2)*Qhat(x)+n^(-1/2+i*x/2)*Qhat(-x))",
+        "zero_frequency": "I_n(0)=Qhat(0)/(2*sqrt(n)), Qhat(0)=-Gamma(1/4)/(32*pi^(1/4))<0"
+      },
+      "formula": "sum_(n>=1)I_n(0)=-infinity",
+      "id": "ntbhsr_06_zero_frequency_divergence",
+      "proof_boundary": "Rejects Fubini promotion of this block expansion, not the exact kernel identity.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion_gate"
+    },
+    {
+      "claim": "Pointwise theta convergence does not supply an ordinary Bessel-transform decomposition of Xi.",
+      "diagnostics": null,
+      "formula": "The n-sum is pointwise and locally uniform in the kernel variable, but it is not interchangeable with the half-line Fourier integral.",
+      "id": "ntbhsr_07_fubini_boundary",
+      "proof_boundary": "A modularly grouped or renormalized transform may still exist.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion_gate"
+    },
+    {
+      "claim": "Analytic continuation of the divergent arithmetic transform reconstructs xi rather than a new positive factor.",
+      "diagnostics": {
+        "continued_identity": "Qhat(x)*zeta((1+i*x)/2)=xi((1+i*x)/2)/4",
+        "decision": "The Dirichlet series is outside its convergence half-plane on the real spectral axis. Analytic continuation reconstructs xi itself; it is not a positive or zero-free block summation theorem.",
+        "formal_assembly": "Qhat(x)*sum_(n>=1)n^(-1/2-i*x/2)"
+      },
+      "formula": "Qhat(x)*zeta((1+i*x)/2)=xi((1+i*x)/2)/4",
+      "id": "ntbhsr_08_continuation_guard",
+      "proof_boundary": "No zero information or strict Laguerre positivity is obtained.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion_gate"
+    },
+    {
+      "claim": "The surviving route is a modularly grouped mixed-term matrix identity or a sign-preserving renormalized summation theorem.",
+      "diagnostics": {
+        "matrix_entry": "M_(i,j)=F_i'*F_j'-(F_i*F_j''+F_j*F_i'')/2",
+        "quadratic_identity": "L[sum_j a_j*F_j]=sum_(i,j)a_i*a_j*M_(i,j)",
+        "required_upgrade": "Group the theta summands through the modular identity before the spectral transform, then prove positivity of the resulting coupled mixed-term quadratic form. Alternatively supply a noncircular renormalized summation theorem that preserves the needed sign.",
+        "subsequent_endpoint_result": "The theta cell-renormalization gate supplies an ordinary normally convergent coupled matrix at t=0, but proves that every individual cell block retains an exp(-5u) tail and cannot be deformed to t>0."
+      },
+      "formula": "L[sum_j a_j*F_j]=sum_(i,j)a_i*a_j*M_(i,j)",
+      "id": "ntbhsr_09_coupled_matrix_handoff",
+      "proof_boundary": "Open; this is not Wiener density, RH, or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "sources": [
+    "outputs/jensen_window_pf_newman_theta_summand_spectral_square_gate.md",
+    "outputs/jensen_window_pf_newman_signed_universal_factor_residual_gate.md",
+    "outputs/jensen_window_pf_newman_strict_laguerre_correlation_target.md",
+    "outputs/formal_core.md",
+    "https://dlmf.nist.gov/10.32"
+  ],
+  "status": "exact higher-shift expansion with spectral summation obstruction"
+}

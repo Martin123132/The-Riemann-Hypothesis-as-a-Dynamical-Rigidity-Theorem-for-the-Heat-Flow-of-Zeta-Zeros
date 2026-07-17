@@ -1,0 +1,271 @@
+{
+  "certificate": {
+    "F_ball": "[0.010079077726118413514324903055736354411454698489725216 +/- 3.24E-55]",
+    "F_prime_ball": "[-0.02883692696821660760997548984142684809891905250938752 +/- 3.43E-54]",
+    "F_second_ball": "[0.1036847681860763492844176464243140394504271561765499 +/- 3.77E-53]",
+    "absolute_tolerance": "1e-55",
+    "arithmetic": "python-flint Acb integration and Arb tail balls",
+    "compact_imaginary_parts": [
+      "0",
+      "0",
+      "0"
+    ],
+    "correlation_frequency": "42/5",
+    "cutoff": "6",
+    "delta": "1/10",
+    "epsilon": "1/1000",
+    "integration_tail_bound": "2*integral_6^infinity u^j*phi(u)du<=4*integral_6^infinity u^(j+4)*exp(-u^4/10)du",
+    "laguerre_ball": "[-0.000213478480591774964507646766853475076598648832979809 +/- 5.09E-55]",
+    "laguerre_upper": "-0.0002134784805917749645076467668534750765986488329798090000",
+    "passed": true,
+    "precision_bits": 256,
+    "tail_radii": [
+      "[3.12189702097777876E-55 +/- 1.83E-73]",
+      "[1.87673768553145020E-54 +/- 4.03E-72]",
+      "[1.12821054831534012E-53 +/- 2.43E-71]"
+    ],
+    "theta_tail_bound": "exp(-(cosh(4*u)-1)/1000)<=exp(1/1000-exp(4*abs(u))/2000)",
+    "x": "21/5"
+  },
+  "date": "2026-07-17",
+  "exact": {
+    "admissibility": {
+      "monotonicity": "(log phi_delta)'(0)=0 and the uniform negative second-derivative bound imply (log phi_delta)'(u)<0 for u>0.",
+      "statement": "For delta>0 or epsilon>0, phi_(delta,epsilon) is smooth, positive, even, strictly decreasing on (0,infinity), and admissible. At epsilon>0 it has theta-type double-exponential decay."
+    },
+    "base_transform": {
+      "Gaussian_derivative_identity": "F_0(x)=G(x)+(1/10)*G''''(x), G(x)=sqrt(pi)*exp(-x^2/4)",
+      "closed_form": "sqrt(pi)*(x**4 - 12*x**2 + 172)*exp(-x**2/4)/160",
+      "definition": "F_0(x)=integral_R phi_0(u)*exp(i*x*u)du"
+    },
+    "explicit_root_concavity": {
+      "base_second_derivative": "-r**2*(r**2 + 30)/(5*(r**2 + 10)**2)",
+      "delta": "1/10",
+      "epsilon": "1/1000",
+      "root_profile": "log(phi_(1/10,1/1000)(sqrt(r)))=-r-r^2/10+log(1+r^2/10)-(cosh(4*sqrt(r))-1)/1000",
+      "strict_statement": "d^2/dr^2 log(phi_(1/10,1/1000)(sqrt(r)))<0 for every r>0",
+      "tail_bound": "phi_(1/10,1/1000)(u)<=exp(1/1000)*(1+u^4/10)*exp(-u^2-u^4/10-exp(4*abs(u))/2000)",
+      "theta_factor_positive_numerator_derivative": "16*y*sinh(4*y)",
+      "theta_factor_second_derivative": "-(-4*r**(3/2)*cosh(4*sqrt(r)) + r*sinh(4*sqrt(r)))/r**(5/2)"
+    },
+    "family": {
+      "definition": "phi_(delta,epsilon)(u)=exp(-u^2-delta*u^4-epsilon*(cosh(4*u)-1))*(1+u^4/10), delta,epsilon>=0",
+      "log_curvature_identity": "(log phi_(delta,epsilon))''=-2-12*delta*u^2-16*epsilon*cosh(4*u)+4*(u^2/10)*(3-u^4/10)/(1+u^4/10)^2",
+      "symbolic_log_polynomial_second": "-4*u**2*(u**4 - 30)/(u**4 + 10)**2"
+    },
+    "negative_laguerre_witness": {
+      "decimal": "-5.06458141437095321e-04",
+      "formula": "pi*(x**8 - 16*x**6 + 440*x**4 - 7680*x**2 + 37840)*exp(-x**2/2)/51200",
+      "point": "x=3",
+      "value": "-743*pi*exp(-9/2)/51200"
+    },
+    "nonpromotion_decision": "Even strict concavity of log(phi(sqrt(r))), uniform strong log-concavity, theta-type double-exponential decay, and admissibility of phi do not imply positive definiteness, let alone strict Fourier positivity, of K_(1). The Xi route must use arithmetic or modular structure beyond these generic shape and tail properties and the s^2-weighted correlation construction.",
+    "open_handoff": "For Xi, seek a relative F_2/F_1 coercivity inequality or an s^2-weighted modular square that is absent from the countermodel.",
+    "strong_logconcavity": {
+      "curvature_bound": "(log phi_(delta,epsilon))''<=-(2-6/sqrt(10))-12*delta*u^2-16*epsilon*cosh(4*u)",
+      "elementary_bound": "z*(3-z^2)/(1+z^2)^2<=3*z/(1+z^2)<=3/2",
+      "positivity_check": "3*sqrt(10)<10 because 90<100",
+      "substitution": "z=u^2/sqrt(10)>=0",
+      "uniform_constant": "2 - 3*sqrt(10)/5"
+    },
+    "symbolic_checks": {
+      "base_transform": "sqrt(pi)*(x**4 - 12*x**2 + 172)*exp(-x**2/4)/160",
+      "curvature_constant": "2 - 3*sqrt(10)/5",
+      "laguerre": "pi*(x**8 - 16*x**6 + 440*x**4 - 7680*x**2 + 37840)*exp(-x**2/2)/51200",
+      "witness": "-743*pi*exp(-9/2)/51200"
+    },
+    "weighted_correlation": {
+      "conclusion": "A smooth positive even uniformly strongly log-concave admissible kernel can have a non-positive-definite first weighted correlation.",
+      "definition": "K_(1,delta,epsilon)(v)=integral_R phi_(delta,epsilon)(s+v)*phi_(delta,epsilon)(s-v)*s^2 ds",
+      "identity": "L_1[F_(delta,epsilon)](x)=4*Fourier[K_(1,delta,epsilon)](2*x)",
+      "source": "https://arxiv.org/abs/1309.0055",
+      "witness": "Fourier[K_(1,1/10,1/1000)](42/5)=L_1[F_(1/10,1/1000)](21/5)/4<0"
+    }
+  },
+  "kind": "jensen_window_pf_newman_weighted_strong_logconcavity_countermodel_gate",
+  "proof_boundary": "This artifact gives an explicit smooth positive even admissible kernel whose log(phi(sqrt(r))) is strictly concave, whose ordinary log is uniformly strongly concave, whose tail is theta-type double exponential, and whose first s^2-weighted correlation has a rigorously negative Fourier value. The sign uses Acb quadrature with explicit Arb tails. It closes generic shape-tail-plus-weighting promotion but does not determine the Xi correlation, prove Wiener density, Lambda<=0, or RH.",
+  "rows": [
+    {
+      "claim": "A quartically damped Gaussian-polynomial family supplies admissible perturbations of an exactly transformable kernel.",
+      "diagnostics": {
+        "definition": "phi_(delta,epsilon)(u)=exp(-u^2-delta*u^4-epsilon*(cosh(4*u)-1))*(1+u^4/10), delta,epsilon>=0",
+        "log_curvature_identity": "(log phi_(delta,epsilon))''=-2-12*delta*u^2-16*epsilon*cosh(4*u)+4*(u^2/10)*(3-u^4/10)/(1+u^4/10)^2",
+        "symbolic_log_polynomial_second": "-4*u**2*(u**4 - 30)/(u**4 + 10)**2"
+      },
+      "formula": "phi_(delta,epsilon)(u)=exp(-u^2-delta*u^4-epsilon*(cosh(4*u)-1))*(1+u^4/10), delta,epsilon>=0",
+      "id": "nwslc_01_countermodel_family",
+      "proof_boundary": "Generic family construction only; it is not the Xi kernel.",
+      "readiness": "available_exact",
+      "role": "exact_family"
+    },
+    {
+      "claim": "Every member of the family has one uniform positive strong-log-concavity constant.",
+      "diagnostics": {
+        "curvature_bound": "(log phi_(delta,epsilon))''<=-(2-6/sqrt(10))-12*delta*u^2-16*epsilon*cosh(4*u)",
+        "elementary_bound": "z*(3-z^2)/(1+z^2)^2<=3*z/(1+z^2)<=3/2",
+        "positivity_check": "3*sqrt(10)<10 because 90<100",
+        "substitution": "z=u^2/sqrt(10)>=0",
+        "uniform_constant": "2 - 3*sqrt(10)/5"
+      },
+      "formula": "(log phi_(delta,epsilon))''<=-(2-6/sqrt(10))-12*delta*u^2-16*epsilon*cosh(4*u)",
+      "id": "nwslc_02_strong_curvature",
+      "proof_boundary": "Exact elementary curvature estimate only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "The explicit delta=1/10, epsilon=1/1000 kernel has the same strict root-variable log-concavity property known for Phi.",
+      "diagnostics": {
+        "base_second_derivative": "-r**2*(r**2 + 30)/(5*(r**2 + 10)**2)",
+        "delta": "1/10",
+        "epsilon": "1/1000",
+        "root_profile": "log(phi_(1/10,1/1000)(sqrt(r)))=-r-r^2/10+log(1+r^2/10)-(cosh(4*sqrt(r))-1)/1000",
+        "strict_statement": "d^2/dr^2 log(phi_(1/10,1/1000)(sqrt(r)))<0 for every r>0",
+        "tail_bound": "phi_(1/10,1/1000)(u)<=exp(1/1000)*(1+u^4/10)*exp(-u^2-u^4/10-exp(4*abs(u))/2000)",
+        "theta_factor_positive_numerator_derivative": "16*y*sinh(4*y)",
+        "theta_factor_second_derivative": "-(-4*r**(3/2)*cosh(4*sqrt(r)) + r*sinh(4*sqrt(r)))/r**(5/2)"
+      },
+      "formula": "d^2/dr^2 log(phi_(1/10,1/1000)(sqrt(r)))<0 for every r>0",
+      "id": "nwslc_03_root_variable_concavity",
+      "proof_boundary": "Exact generic shape theorem; it is not an arithmetic identity for Xi.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "The explicit delta=1/10, epsilon=1/1000 member is admissible with theta-type double-exponential decay.",
+      "diagnostics": {
+        "monotonicity": "(log phi_delta)'(0)=0 and the uniform negative second-derivative bound imply (log phi_delta)'(u)<0 for u>0.",
+        "statement": "For delta>0 or epsilon>0, phi_(delta,epsilon) is smooth, positive, even, strictly decreasing on (0,infinity), and admissible. At epsilon>0 it has theta-type double-exponential decay."
+      },
+      "formula": "For delta>0 or epsilon>0, phi_(delta,epsilon) is smooth, positive, even, strictly decreasing on (0,infinity), and admissible. At epsilon>0 it has theta-type double-exponential decay.",
+      "id": "nwslc_04_explicit_admissible_kernel",
+      "proof_boundary": "Kernel-class membership only; no transform sign follows.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "The delta-zero Fourier transform is an explicit Gaussian times quartic polynomial.",
+      "diagnostics": {
+        "Gaussian_derivative_identity": "F_0(x)=G(x)+(1/10)*G''''(x), G(x)=sqrt(pi)*exp(-x^2/4)",
+        "closed_form": "sqrt(pi)*(x**4 - 12*x**2 + 172)*exp(-x**2/4)/160",
+        "definition": "F_0(x)=integral_R phi_0(u)*exp(i*x*u)du"
+      },
+      "formula": "sqrt(pi)*(x**4 - 12*x**2 + 172)*exp(-x**2/4)/160",
+      "id": "nwslc_05_base_fourier_transform",
+      "proof_boundary": "Exact Gaussian differentiation identity at delta=0.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The first Laguerre expression is strictly negative at one exact frequency.",
+      "diagnostics": {
+        "decimal": "-5.06458141437095321e-04",
+        "formula": "pi*(x**8 - 16*x**6 + 440*x**4 - 7680*x**2 + 37840)*exp(-x**2/2)/51200",
+        "point": "x=3",
+        "value": "-743*pi*exp(-9/2)/51200"
+      },
+      "formula": "-743*pi*exp(-9/2)/51200",
+      "id": "nwslc_06_endpoint_laguerre_witness",
+      "proof_boundary": "Exact delta-zero benchmark; the explicit admissible witness is independently interval-certified.",
+      "readiness": "guard_validated",
+      "role": "exact_counterexample"
+    },
+    {
+      "claim": "Acb quadrature with explicit Arb tails certifies a negative first Laguerre value for the root-concave theta-tail admissible kernel.",
+      "diagnostics": {
+        "F_ball": "[0.010079077726118413514324903055736354411454698489725216 +/- 3.24E-55]",
+        "F_prime_ball": "[-0.02883692696821660760997548984142684809891905250938752 +/- 3.43E-54]",
+        "F_second_ball": "[0.1036847681860763492844176464243140394504271561765499 +/- 3.77E-53]",
+        "absolute_tolerance": "1e-55",
+        "arithmetic": "python-flint Acb integration and Arb tail balls",
+        "compact_imaginary_parts": [
+          "0",
+          "0",
+          "0"
+        ],
+        "correlation_frequency": "42/5",
+        "cutoff": "6",
+        "delta": "1/10",
+        "epsilon": "1/1000",
+        "integration_tail_bound": "2*integral_6^infinity u^j*phi(u)du<=4*integral_6^infinity u^(j+4)*exp(-u^4/10)du",
+        "laguerre_ball": "[-0.000213478480591774964507646766853475076598648832979809 +/- 5.09E-55]",
+        "laguerre_upper": "-0.0002134784805917749645076467668534750765986488329798090000",
+        "passed": true,
+        "precision_bits": 256,
+        "tail_radii": [
+          "[3.12189702097777876E-55 +/- 1.83E-73]",
+          "[1.87673768553145020E-54 +/- 4.03E-72]",
+          "[1.12821054831534012E-53 +/- 2.43E-71]"
+        ],
+        "theta_tail_bound": "exp(-(cosh(4*u)-1)/1000)<=exp(1/1000-exp(4*abs(u))/2000)",
+        "x": "21/5"
+      },
+      "formula": "[-0.000213478480591774964507646766853475076598648832979809 +/- 5.09E-55]",
+      "id": "nwslc_07_explicit_arb_witness",
+      "proof_boundary": "One rigorous scalar witness at delta=1/10 and x=21/5.",
+      "readiness": "interval_validated",
+      "role": "interval_certificate"
+    },
+    {
+      "claim": "Even root-variable concavity plus strong log-concavity does not make the first s^2-weighted correlation positive definite.",
+      "diagnostics": {
+        "certificate": {
+          "F_ball": "[0.010079077726118413514324903055736354411454698489725216 +/- 3.24E-55]",
+          "F_prime_ball": "[-0.02883692696821660760997548984142684809891905250938752 +/- 3.43E-54]",
+          "F_second_ball": "[0.1036847681860763492844176464243140394504271561765499 +/- 3.77E-53]",
+          "absolute_tolerance": "1e-55",
+          "arithmetic": "python-flint Acb integration and Arb tail balls",
+          "compact_imaginary_parts": [
+            "0",
+            "0",
+            "0"
+          ],
+          "correlation_frequency": "42/5",
+          "cutoff": "6",
+          "delta": "1/10",
+          "epsilon": "1/1000",
+          "integration_tail_bound": "2*integral_6^infinity u^j*phi(u)du<=4*integral_6^infinity u^(j+4)*exp(-u^4/10)du",
+          "laguerre_ball": "[-0.000213478480591774964507646766853475076598648832979809 +/- 5.09E-55]",
+          "laguerre_upper": "-0.0002134784805917749645076467668534750765986488329798090000",
+          "passed": true,
+          "precision_bits": 256,
+          "tail_radii": [
+            "[3.12189702097777876E-55 +/- 1.83E-73]",
+            "[1.87673768553145020E-54 +/- 4.03E-72]",
+            "[1.12821054831534012E-53 +/- 2.43E-71]"
+          ],
+          "theta_tail_bound": "exp(-(cosh(4*u)-1)/1000)<=exp(1/1000-exp(4*abs(u))/2000)",
+          "x": "21/5"
+        },
+        "correlation": {
+          "conclusion": "A smooth positive even uniformly strongly log-concave admissible kernel can have a non-positive-definite first weighted correlation.",
+          "definition": "K_(1,delta,epsilon)(v)=integral_R phi_(delta,epsilon)(s+v)*phi_(delta,epsilon)(s-v)*s^2 ds",
+          "identity": "L_1[F_(delta,epsilon)](x)=4*Fourier[K_(1,delta,epsilon)](2*x)",
+          "source": "https://arxiv.org/abs/1309.0055",
+          "witness": "Fourier[K_(1,1/10,1/1000)](42/5)=L_1[F_(1/10,1/1000)](21/5)/4<0"
+        }
+      },
+      "formula": "Fourier[K_(1,1/10,1/1000)](42/5)=L_1[F_(1/10,1/1000)](21/5)/4<0",
+      "id": "nwslc_08_weighted_correlation_failure",
+      "proof_boundary": "Explicit generic admissible countermodel; it does not decide the Xi first correlation.",
+      "readiness": "guard_validated",
+      "role": "exact_countermodel"
+    },
+    {
+      "claim": "The surviving Xi route must use structure absent from generic weighted correlations.",
+      "diagnostics": null,
+      "formula": "For Xi, seek a relative F_2/F_1 coercivity inequality or an s^2-weighted modular square that is absent from the countermodel.",
+      "id": "nwslc_09_xi_specific_handoff",
+      "proof_boundary": "Open Xi-specific coercivity or modular-square target, not RH or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/abs/1309.0055",
+    "outputs/jensen_window_pf_newman_positive_time_strong_logconcavity_gate.md",
+    "outputs/jensen_window_pf_newman_correlation_hierarchy_gaussian_mixture_gate.md",
+    "outputs/jensen_window_pf_newman_strict_laguerre_correlation_target.md"
+  ],
+  "status": "explicit root-concave theta-tail admissible weighted-correlation countermodel to generic shape-and-tail promotion"
+}

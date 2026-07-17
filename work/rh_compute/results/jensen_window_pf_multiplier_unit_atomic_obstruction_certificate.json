@@ -1,0 +1,108 @@
+{
+  "arb_dps": 250,
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_multiplier_unit_atomic_obstruction_certificate.py",
+  "date": "2026-07-11",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_multiplier_unit_atomic_obstruction_certificate.py",
+  "kind": "jensen_window_pf_multiplier_unit_atomic_obstruction_certificate",
+  "proof_boundary": "This artifact rules out the specific convergent unit-atomic elementary multiplier product for the normalized lambda-zero zeta coefficients. It does not rule out every multiplier sequence or other all-order Jensen/PF bridges, and does not prove PF-infinity, RH, or Lambda <= 0.",
+  "rows": [
+    {
+      "claim": "A unit atom contributes the positive Hausdorff difference kernel.",
+      "diagnostics": null,
+      "formula": "g_m(alpha)=integral_0^1 r^(alpha-1)*(1-r)^(m+2)/(-log r)dr",
+      "id": "muao_01_atom_kernel",
+      "proof_boundary": "Exact kernel identity only.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The target product would express every first difference moment as a unit sum.",
+      "diagnostics": null,
+      "formula": "a_m=(-1)^m*Delta^m y_1=sum_j g_m(alpha_j)",
+      "id": "muao_02_unit_sum",
+      "proof_boundary": "This is precisely the unit-atomic hypothesis being tested.",
+      "readiness": "conditional_on_rejected_target",
+      "role": "conditional_reduction"
+    },
+    {
+      "claim": "No unit atom can lie at or below the certified cutoff.",
+      "diagnostics": {
+        "gap_ball": "[3.6340198025246959890220872597646469641634080905380338232387292267659619923440835845955394274199001689031528386553693e-14 +/- 5.90e-130]"
+      },
+      "formula": "g_6(4.863538496)>a_6 implies alpha_j>4.863538496 for every j",
+      "id": "muao_03_cutoff_exclusion",
+      "proof_boundary": "Uses unit multiplicity; arbitrary subunit weights are not excluded.",
+      "readiness": "ready_to_apply",
+      "role": "interval_obstruction"
+    },
+    {
+      "claim": "The consecutive one-atom ratio is strictly decreasing in alpha.",
+      "diagnostics": null,
+      "formula": "R_m(alpha)=g_(m+1)(alpha)/g_m(alpha)=E_alpha[1-r], R_m'(alpha)=Cov_alpha(1-r,log r)<0",
+      "id": "muao_04_ratio_monotonicity",
+      "proof_boundary": "Strict opposite-monotonicity covariance on 0<r<1.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "If all target atoms exceed the cutoff, the total ratio is capped by the cutoff atom ratio.",
+      "diagnostics": null,
+      "formula": "a_7/a_6=sum_j (g_6(alpha_j)/a_6)*R_6(alpha_j)<R_6(4.863538496)",
+      "id": "muao_05_weighted_ratio_cap",
+      "proof_boundary": "Positive weighted-average consequence of the target hypothesis.",
+      "readiness": "conditional_on_rejected_target",
+      "role": "exact_conditional_consequence"
+    },
+    {
+      "claim": "The actual coefficient ratio is strictly above the required cap.",
+      "diagnostics": {
+        "atom_ratio_cap_ball": "[0.6025238849153418649240749307941747635646417680649518410079275535058583119279131726463225567787733712573160877741236982418582741262310526346166283516150332751712563336295821838120906942619746924833555077744248045915567093599748222065622108860579 +/- 4.06e-245]",
+        "gap_ball": "[0.00076825009751290047487951642578445797089741744927919313334493401515461581338968688652680203524975352497530647479235316208951 +/- 8.00e-126]",
+        "observed_ratio_ball": "[0.60329213501285476539895444721995922153553918551423103414127248752101292774130285953284935881402312478229139424891605140394779 +/- 4.76e-126]"
+      },
+      "formula": "a_7/a_6-R_6(4.863538496)>0",
+      "id": "muao_06_interval_ratio_contradiction",
+      "proof_boundary": "Arb contradiction at lambda=0 using A_0..A_57 sources.",
+      "readiness": "ready_to_apply",
+      "role": "interval_obstruction"
+    },
+    {
+      "claim": "The normalized zeta coefficient sequence has no admissible unit-atomic elementary multiplier product.",
+      "diagnostics": null,
+      "formula": "not exists {alpha_j}: y_k=sum_j -log(1-1/(k+alpha_j)^2), alpha_j>0, sum_j alpha_j^(-2)<infinity",
+      "id": "muao_07_unit_product_rejected",
+      "proof_boundary": "Rejects this sufficient subclass, not all multiplier sequences.",
+      "readiness": "ready_to_apply",
+      "role": "proved_obstruction"
+    },
+    {
+      "claim": "The multiplier counting-measure route is retired; other all-order Jensen/PF routes remain open.",
+      "diagnostics": null,
+      "formula": "unit-atomic route closed as false; general bridge targets unchanged",
+      "id": "muao_08_route_boundary",
+      "proof_boundary": "Not PF-infinity, the all-order Jensen bridge, RH, or Lambda <= 0.",
+      "readiness": "ready_to_apply",
+      "role": "route_closure"
+    }
+  ],
+  "source_enclosures": [
+    "work/rh_compute/results/acb_enclosures_edrei_boundary_lam0_k0_k53_dps220_tol1e-140.jsonl",
+    "work/rh_compute/results/acb_enclosures_edrei_boundary_lam0_k54_k55_dps220_tol1e-140.jsonl",
+    "work/rh_compute/results/acb_enclosures_edrei_boundary_lam0_k56_k57_dps220_tol1e-140.jsonl"
+  ],
+  "source_hausdorff_bridge": "outputs/jensen_window_pf_multiplier_hausdorff_uniqueness_bridge.md",
+  "source_leading_bound": "outputs/jensen_window_pf_multiplier_leading_atom_bound_certificate.md",
+  "source_target": "outputs/jensen_window_pf_multiplier_counting_measure_target.md",
+  "status": "interval-certified unit-atomic obstruction; not a proof of PF-infinity, RH, or Lambda <= 0",
+  "summary": {
+    "arbitrary_positive_weight_routes_ruled_out": 0,
+    "atom_cutoff": "4.863538496",
+    "certificate_rows": 8,
+    "cutoff_order": 6,
+    "open_requirements": 0,
+    "ratio_order": 6,
+    "source_difference_orders": 56,
+    "target_closing": true,
+    "unit_atomic_routes_ruled_out": 1
+  }
+}

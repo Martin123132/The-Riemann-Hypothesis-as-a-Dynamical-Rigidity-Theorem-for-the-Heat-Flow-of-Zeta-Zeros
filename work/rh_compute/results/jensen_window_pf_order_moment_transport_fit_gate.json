@@ -1,0 +1,110 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_order_moment_transport_fit_gate.py",
+  "date": "2026-07-12",
+  "exact": {
+    "cm_orientation": "The transported A_t^(1) is a positive Mellin moment family and has nonnegative Hankel minors (ordinary log-convex orientation).",
+    "complete_monotonicity_failure": "d_u phi_1(0)>0, so g'(y)>0 for sufficiently small y>0; g is not completely monotone",
+    "first_summand": "phi_1(u)=pi*exp(5*u)*(2*q-3)*exp(-q), q=pi*exp(4*u)",
+    "gamma_average": "A_t^(1)=sqrt(pi)/(10*400^t*Gamma(t+1/2))*integral_0^infinity y^(t-1/2)*exp(-y)*g(y)dy",
+    "live_replacement": "A signed reciprocal-Gamma transport theorem or the direct stable-gap curvature certificate is still required.",
+    "origin_log_derivative": "d_u log(phi_1)(0)=5+8*pi/(2*pi-3)-4*pi",
+    "origin_log_derivative_ball": "[0.0886165024991730927364637276247675413757025436842714931604458 +/- 2.11E-63]",
+    "origin_log_derivative_lower": "0.0886165024991730927364637276247675413757025436842714931604458",
+    "source_scope": "The source theorem treats positive Mellin/Hankel total positivity and explicitly separates reciprocal sign-regularity.",
+    "substitution": "y=100*u^2",
+    "transformed_kernel": "g(y)=phi_1(sqrt(y)/10)",
+    "transport_if_cm": "g(y)=integral exp(-s*y)dmu(s) => normalized gamma average=integral (1+s)^(-(t+1/2))dmu(s)"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_order_moment_transport_fit_gate.py",
+  "kind": "jensen_window_pf_order_moment_transport_fit_gate",
+  "primary_source": {
+    "author": "Domingos S. P. Salazar",
+    "title": "Order-Moment Transport and Hankel Determinants in Special-Function Inequalities",
+    "url": "https://arxiv.org/abs/2606.31647v2",
+    "version": "arXiv:2606.31647v2"
+  },
+  "proof_boundary": "This artifact rejects direct use of one positive order-moment transport criterion for the first Newman summand. It does not reject signed total positivity, prove the stable-gap curvature ceiling, order-four entry, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The order-moment transport theorem turns Gamma-normalized completely-monotone averages into positive Hankel moment kernels.",
+      "diagnostics": null,
+      "formula": "g(y)=integral exp(-s*y)dmu(s) => normalized gamma average=integral (1+s)^(-(t+1/2))dmu(s)",
+      "id": "omtf_01_primary_scope",
+      "proof_boundary": "Primary-source theorem scope only.",
+      "readiness": "source_audited",
+      "role": "theorem_fit"
+    },
+    {
+      "claim": "The lambda=-100 first Newman summand has exactly the Gamma-average form tested by the theorem.",
+      "diagnostics": null,
+      "formula": "A_t^(1)=sqrt(pi)/(10*400^t*Gamma(t+1/2))*integral_0^infinity y^(t-1/2)*exp(-y)*g(y)dy",
+      "id": "omtf_02_exact_reparametrization",
+      "proof_boundary": "Exact change of variables only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Application of the positive transport criterion requires complete monotonicity of the transformed kernel.",
+      "diagnostics": null,
+      "formula": "(-1)^m*g^(m)(y)>=0 for every m>=0 and y>0",
+      "id": "omtf_03_cm_prerequisite",
+      "proof_boundary": "Necessary hypothesis for this theorem route, not a claim about all routes.",
+      "readiness": "tested",
+      "role": "theorem_fit"
+    },
+    {
+      "claim": "The transformed first-summand kernel increases at the origin and therefore fails complete monotonicity.",
+      "diagnostics": {
+        "ball": "[0.0886165024991730927364637276247675413757025436842714931604458 +/- 2.11E-63]",
+        "lower": "0.0886165024991730927364637276247675413757025436842714931604458"
+      },
+      "formula": "d_u log(phi_1)(0)=5+8*pi/(2*pi-3)-4*pi",
+      "id": "omtf_04_origin_obstruction",
+      "proof_boundary": "Exact formula with Arb sign certification.",
+      "readiness": "guard_validated",
+      "role": "interval_countercheck"
+    },
+    {
+      "claim": "If the criterion applied, it would produce positive Hankel moment orientation, not the reciprocal-Gamma signed orientation required here.",
+      "diagnostics": null,
+      "formula": "The transported A_t^(1) is a positive Mellin moment family and has nonnegative Hankel minors (ordinary log-convex orientation).",
+      "id": "omtf_05_orientation_mismatch",
+      "proof_boundary": "Route-orientation audit only.",
+      "readiness": "guard_validated",
+      "role": "structural_mismatch"
+    },
+    {
+      "claim": "The positive order-moment transport theorem cannot be cited as the missing signed-Hankel bridge for the Xi first summand.",
+      "diagnostics": null,
+      "formula": "positive transport theorem != reciprocal sign-regular transport theorem",
+      "id": "omtf_06_forbidden_promotion",
+      "proof_boundary": "Rejects this theorem application only, not total-positivity methods in general.",
+      "readiness": "guard_validated",
+      "role": "forbidden_promotion"
+    },
+    {
+      "claim": "Seek a signed reciprocal-Gamma analogue or continue the direct stable-gap curvature proof.",
+      "diagnostics": null,
+      "formula": "A signed reciprocal-Gamma transport theorem or the direct stable-gap curvature certificate is still required.",
+      "id": "omtf_07_live_handoff",
+      "proof_boundary": "Open theorem-search handoff.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/abs/2606.31647v2",
+    "outputs/jensen_window_pf_reciprocal_gamma_mixture_sign_gate.md",
+    "outputs/jensen_window_pf_compound_order4_first_summand_curvature_bridge.md"
+  ],
+  "status": "primary-source theorem-fit audit with exact first-summand complete-monotonicity obstruction",
+  "summary": {
+    "exact_identity_rows": 1,
+    "fit_rows": 7,
+    "forbidden_promotions": 1,
+    "interval_counterchecks": 1,
+    "open_handoffs": 1,
+    "ready_to_apply_rows": 1,
+    "structural_mismatches": 1
+  }
+}

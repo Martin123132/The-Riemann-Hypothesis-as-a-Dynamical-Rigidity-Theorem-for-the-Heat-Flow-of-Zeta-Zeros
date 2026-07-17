@@ -1,6 +1,6 @@
 {
   "kind": "jensen_window_pf_bridge_obligation_ledger",
-  "date": "2026-07-05",
+  "date": "2026-07-16",
   "target": "target_jensen_window_pf_bridge",
   "proof_boundary": "Theorem-obligation decomposition only; this is not a proof of PF-infinity, Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0.",
   "allowed_statuses": [
@@ -73,17 +73,33 @@
     },
     {
       "id": "jwpf_05_all_order_shifted_sign_consistency",
+      "role": "rejection_test",
+      "status": "rejected_by_countermodel",
+      "refs": [
+        "outputs/signed_hankel_jensen_bridge_target.md",
+        "outputs/jensen_window_pf_endpoint_order10_counterexample.md",
+        "work/rh_compute/results/jensen_window_pf_endpoint_order10_counterexample.json",
+        "work/rh_compute/scripts/check_jensen_window_pf_endpoint_order10_counterexample.py"
+      ],
+      "claim": "The proposed all-order shifted reshaped-Hankel antecedent is false for the actual endpoint sequence: Q_(10,n)(-100)<0 for n=0,1,2,3.",
+      "needed_upgrade": "Do not attempt to prove this antecedent; replace it with a weaker Xi/Phi-specific condition that tolerates the certified order-ten failures.",
+      "would_close_target": false,
+      "proof_boundary": "Rejected route antecedent only; this is not a counterexample to Jensen hyperbolicity, RH, or Lambda <= 0."
+    },
+    {
+      "id": "jwpf_05b_weaker_xi_specific_antecedent",
       "role": "open_antecedent",
       "status": "open_obligation",
       "refs": [
+        "outputs/jensen_window_pf_bridge_target.md",
         "outputs/signed_hankel_jensen_bridge_target.md",
-        "outputs/sign_regularity_theorem_fit_matrix.md",
-        "work/rh_compute/scripts/check_arb_shifted_hankel_staircase_manifest.py"
+        "outputs/jensen_window_pf_endpoint_order10_counterexample.md",
+        "outputs/sign_regularity_theorem_fit_matrix.md"
       ],
-      "claim": "Prove all-order shifted reshaped-Hankel sign consistency for the actual A_k(0), not merely the current finite staircase.",
-      "needed_upgrade": "A non-finite proof for every order, shift, and minor shape used by the bridge theorem.",
+      "claim": "Identify and prove a weaker Xi/Phi-specific structural condition that is satisfied by A_k(0), survives the negative order-ten endpoint rectangles, and can control every Jensen window.",
+      "needed_upgrade": "An exact kernel, determinant, variation-diminishing, or direct Jensen condition verified for all degrees and shifts without all-shift signed-Hankel positivity.",
       "would_close_target": false,
-      "proof_boundary": "Open antecedent theorem; current Arb certificates are finite."
+      "proof_boundary": "Open replacement antecedent; no such all-degree condition is currently proved."
     },
     {
       "id": "jwpf_06_sign_regular_to_jensen_pf_conversion",
@@ -100,8 +116,8 @@
         "work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py",
         "work/rh_compute/scripts/check_jensen_window_pf_structural_ansatz_matrix.py"
       ],
-      "claim": "Convert all-order shifted sign-regularity, plus legitimate Xi/Phi-specific analytic hypotheses, into total nonnegativity of every binomially weighted Jensen-window Toeplitz matrix.",
-      "needed_upgrade": "A signed or indefinite total-positivity theorem whose hypotheses are checked for A_k(0) without assuming Jensen hyperbolicity or RH.",
+      "claim": "Convert the weaker Xi/Phi-specific structure from jwpf_05b, without all-shift signed-Hankel positivity, into total nonnegativity of every binomially weighted Jensen-window Toeplitz matrix or directly into Jensen hyperbolicity.",
+      "needed_upgrade": "A kernel, determinant, signed/indefinite total-positivity, or direct Jensen theorem whose weaker hypotheses are checked for A_k(0) without assuming Jensen hyperbolicity or RH.",
       "would_close_target": true,
       "proof_boundary": "Open bridge theorem; not currently proved."
     },

@@ -1,0 +1,109 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order10_high_cumulant_coarse_corridor.py",
+  "date": "2026-07-16",
+  "exact": {
+    "cauchy_factor": 306,
+    "cauchy_factor_identity": "r!/(r-2)!=r*(r-1)<=18*17=306 for r=17,18",
+    "exact_corridor": "|kappa_r|*q^(r/2-1)/(r-2)!<1, r=17,18, u>=2",
+    "finite_exact_corridor": "|kappa_r|*q^(r/2-1)/(r-2)!<1, r=17,18, 2<=u<=20",
+    "finite_scaled_residual_bound": "323/6875",
+    "formal_orders": [
+      17,
+      18
+    ],
+    "formal_rows": {
+      "17": {
+        "scaled_expression": "0",
+        "term_count": 0
+      },
+      "18": {
+        "scaled_expression": "0",
+        "term_count": 0
+      }
+    },
+    "formal_term_counts": 0,
+    "ray_exact_corridor": "|kappa_r|*q^(r/2-1)/(r-2)!<1, r=17,18, u>=20",
+    "ray_scaled_residual_bound": "18683/550000/u"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order10_high_cumulant_coarse_corridor.py",
+  "kind": "jensen_window_pf_compound_order10_high_cumulant_coarse_corridor",
+  "proof_boundary": "This artifact proves only an absolute normalized corridor for the seventeenth and eighteenth tilted cumulants. It does not prove order-ten curvature, entry, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The epsilon-ten formal log partition has zero normalized cumulants in orders seventeen and eighteen.",
+      "diagnostics": null,
+      "formula": "scaled kappa_17^[10]=scaled kappa_18^[10]=0",
+      "id": "co10hccc_01_formal_vanishing",
+      "proof_boundary": "Exact finite symbolic algebra only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_formal_algebra"
+    },
+    {
+      "claim": "The proved unit-disk log-partition residual controls both new derivatives with Cauchy factor 306.",
+      "diagnostics": {
+        "finite_scaled_residual_bound": "323/6875",
+        "ray_scaled_residual_bound": "18683/550000/u"
+      },
+      "formula": "r!/(r-2)!=r*(r-1)<=18*17=306 for r=17,18",
+      "id": "co10hccc_02_cauchy_extension",
+      "proof_boundary": "Same exact-minus-epsilon-ten complex-disk theorem; no extrapolation.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_consequence"
+    },
+    {
+      "claim": "Formal vanishing and the finite Cauchy residual give a unit corridor for both new cumulants.",
+      "diagnostics": null,
+      "formula": "|kappa_r|*q^(r/2-1)/(r-2)!<1, r=17,18, 2<=u<=20",
+      "id": "co10hccc_03_finite_corridor",
+      "proof_boundary": "Exact first-summand tilted cumulants on 2<=u<=20.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_theorem"
+    },
+    {
+      "claim": "The asymptotic residual is smaller still, so the same unit corridor holds on the complete saddle ray.",
+      "diagnostics": {
+        "ray": "|kappa_r|*q^(r/2-1)/(r-2)!<1, r=17,18, u>=20"
+      },
+      "formula": "|kappa_r|*q^(r/2-1)/(r-2)!<1, r=17,18, u>=2",
+      "id": "co10hccc_04_global_corridor",
+      "proof_boundary": "Exact first-summand tilted cumulants on u>=2.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_theorem"
+    }
+  ],
+  "source_contract": {
+    "cauchy_formula": "sup_|z|<=1 |H_u(z)|<=delta => |H_u^(r)(0)|<=r!*delta",
+    "exact_partition_residual": "global unit-disk exact-minus-epsilon-ten partition theorem",
+    "exact_partition_source": "work/rh_compute/results/jensen_window_pf_compound_order4_exact_cumulant_central_residual_certificate.json",
+    "finite_caps": {
+      "10": "21",
+      "11": "38",
+      "12": "71",
+      "3": "6/5",
+      "4": "3/2",
+      "5": "2",
+      "6": "3",
+      "7": "9/2",
+      "8": "7",
+      "9": "12"
+    },
+    "finite_log_constant": "19/123750",
+    "finite_mode": [
+      "2",
+      "20"
+    ],
+    "finite_q_inverse_cap": "1/9000",
+    "ray_caps": "|L_r|<2 for r=3,...,12",
+    "ray_log_constant": "1099/9900000",
+    "ray_q_inverse_cap": "1/100000000000000000000000000000000000"
+  },
+  "status": "global coarse exact seventeenth- and eighteenth-cumulant corridor theorem",
+  "summary": {
+    "cauchy_extensions": 1,
+    "formal_orders": 2,
+    "formal_terms": 0,
+    "global_coarse_corridors": 2,
+    "ready_rows": 4,
+    "rows": 4
+  }
+}

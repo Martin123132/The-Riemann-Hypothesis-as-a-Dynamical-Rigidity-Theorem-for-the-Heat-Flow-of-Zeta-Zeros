@@ -825,7 +825,60 @@ signed/indefinite Hankel sign-regularity
   => no positive Newman boundary.
 ```
 
-## Gate E: Theorem-Search Fit/Misfit
+## Gate E: Compound-Ladder Boundary
+
+The reshaped-Hankel route now has an exact low-order ladder:
+
+```text
+outputs/jensen_window_pf_reciprocal_defect_compound_order3_gate.md
+outputs/jensen_window_pf_negative_lambda_m100_compound_order3_entry_certificate.md
+outputs/jensen_window_pf_compound_order3_forward_invariance_certificate.md
+outputs/jensen_window_pf_order3_noncontiguous_secant_transfer_lemma.md
+outputs/jensen_window_pf_compound_order4_condensation_gate.md
+outputs/jensen_window_pf_compound_order4_first_summand_curvature_bridge.md
+outputs/jensen_window_pf_compound_order4_localized_curvature_compact_certificate.md
+outputs/jensen_window_pf_compound_order4_gaussian_cumulant_ray_target.md
+outputs/jensen_window_pf_compound_order4_formal_cumulant_corridor_certificate.md
+outputs/jensen_window_pf_compound_order4_formal_cumulant_asymptotic_ray_certificate.md
+```
+
+Orders two and three are proved for every shift and every increasing column
+set at `lambda=0`. Contiguous order four is exactly
+
+```text
+G_(n+1)^2>x_(n+3)^3*G_n*G_(n+2).
+```
+
+The repaired `lambda=-100` source certifies 317 prefix rows and
+`P_n<2/(n+3)^2`; the sufficient analytic tail target is
+`P_n<=4/(n+3)^2` for `n>=317`. The stable first-summand bridge proves the
+real-parameter gap floor and the complete-kernel perturbation budget, reducing
+this tail to `(log g_1(t))''<=7/(2t^2)` for real `t>=319`. The localized
+curvature certificate proves that ceiling on `319<=t<=V'(2)` using `107,452`
+Arb derivative tiles and `1,073` positive central blocks. Only the analytic
+mode ray `u>=2` remains open.
+The Gaussian-cumulant target gives its exact epsilon-six formal algebra and
+explicit corridor acceptance constants. A 1,800,000-block finite theorem and
+coefficient-positive asymptotic theorem close the formal model for every
+`u>=2`. Exact epsilon-eight algebra, a 1,800-block centered Taylor theorem,
+and coefficient-positive order-nine/ten jet transfer also close the first
+omitted coefficient layer globally. The remaining exact-density theorem has
+the explicit sufficient budgets `1/100` on `2<=u<=20` and `1/(50u)` on
+`u>=20`; the cancellation-preserving central and two-tail estimates remain
+open.
+A strict rational sequence satisfies the
+ratio, adaptive-defect, cubic, and all available order-three layers while
+having the wrong negative `H_(4,0)`. Therefore neither the finite prefix nor
+the completed lower layers may be promoted to order four.
+
+## Gate F: Theorem-Search Fit/Misfit
+
+The 2026 positive order-moment transport criterion has been audited in
+`outputs/jensen_window_pf_order_moment_transport_fit_gate.md`. The first
+summand has the formal Gamma-average shape, but its transformed kernel
+increases at the origin and is not completely monotone. The criterion also
+has ordinary positive Hankel orientation, not the reciprocal sign orientation
+needed here. Direct promotion from that theorem is therefore rejected.
 
 Naive route rejected:
 
@@ -867,7 +920,7 @@ Required before manuscript promotion:
 identify the transformation or state the missing theorem explicitly
 ```
 
-## Gate F: Result Language
+## Gate G: Result Language
 
 Use:
 

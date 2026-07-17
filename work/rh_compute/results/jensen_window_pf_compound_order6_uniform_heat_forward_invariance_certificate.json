@@ -1,0 +1,115 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order6_uniform_heat_forward_invariance_certificate.py",
+  "conclusions": {
+    "arbitrary_order_six": "epsilon_6*R_(6,n)(j_1,j_2,j_3,j_4,j_5,j_6;lambda)>0 for every n>=0, 0<=j_1<j_2<j_3<j_4<j_5<j_6, and -100<=lambda<=0",
+    "contiguous_order_six": "Q_(6,n)(lambda)=-H_(6,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+    "fixed_order_six": "every consecutive-row arbitrary-column reshaped-Hankel minor through order six has its required sign on -100<=lambda<=0",
+    "next_handoff": "derive a cancellation-preserving contiguous order-seven entry coordinate and flow reduction",
+    "signed_layers_through_six": "epsilon_k*H_(k,n)(lambda)>0 for 1<=k<=6, every n>=0 and -100<=lambda<=0"
+  },
+  "date": "2026-07-13",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order6_uniform_heat_forward_invariance_certificate.py",
+  "kind": "jensen_window_pf_compound_order6_uniform_heat_forward_invariance_certificate",
+  "proof_boundary": "This artifact proves the required signed Hankel layer through fixed order six only. It does not prove order seven or higher, PF-infinity, the all-degree Jensen bridge, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "Every signed order-six endpoint coordinate is strictly positive at lambda=-100.",
+      "diagnostics": null,
+      "formula": "Q_(6,n)(-100)=-H_(6,n)(-100)>0 for every integer n>=0",
+      "id": "co6uhfic_01_endpoint",
+      "proof_boundary": "Completed zeta-specific endpoint theorem.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "Signed order-six positivity is uniform at sufficiently large shift throughout the compact heat interval.",
+      "diagnostics": null,
+      "formula": "there exists N_6 such that Q_(6,n)(lambda)=-H_(6,n)(lambda)>0 for every n>=N_6 and -100<=lambda<=0",
+      "id": "co6uhfic_02_uniform_tail",
+      "proof_boundary": "Non-effective but compact-uniform eventual theorem.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The signed order-six layer obeys a nearest-neighbor cooperative system with positive forward coefficient.",
+      "diagnostics": null,
+      "formula": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n=(4*n+42)*H_(5,n)/H_(5,n+1)>0, b_n=((4*n+42)/(4*n+38))*(log H_(5,n+1))'",
+      "id": "co6uhfic_03_cooperative_flow",
+      "proof_boundary": "Exact Plucker and heat-flow algebra inside the completed order-five cone.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The uniform tail confines any first loss to finitely many shifts, where variation of constants preserves positivity.",
+      "diagnostics": null,
+      "formula": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)",
+      "id": "co6uhfic_04_finite_confinement",
+      "proof_boundary": "Infinite-index maximum principle with compact-uniform tail.",
+      "readiness": "ready_to_apply",
+      "role": "exact_maximum_principle"
+    },
+    {
+      "claim": "The endpoint, uniform tail, and cooperative system prove signed contiguous order six throughout the interval.",
+      "diagnostics": null,
+      "formula": "Q_(6,n)(lambda)=-H_(6,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+      "id": "co6uhfic_05_contiguous_theorem",
+      "proof_boundary": "All shifts and all finite heat parameters from -100 through zero.",
+      "readiness": "ready_to_apply",
+      "role": "exact_forward_theorem"
+    },
+    {
+      "claim": "The completed lower contiguous layers supply every initial-minor sign through order five.",
+      "diagnostics": null,
+      "formula": "epsilon_k*H_(k,n)(lambda)>0 for k=1,2,3,4,5, all n and -100<=lambda<=0",
+      "id": "co6uhfic_06_lower_layers",
+      "proof_boundary": "Previously proved lower-layer interval theorems.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The fixed-order initial-minor criterion transfers signed contiguous order six to all arbitrary column sets.",
+      "diagnostics": null,
+      "formula": "epsilon_6*R_(6,n)(j_1,j_2,j_3,j_4,j_5,j_6;lambda)>0 for every n>=0, 0<=j_1<j_2<j_3<j_4<j_5<j_6, and -100<=lambda<=0",
+      "id": "co6uhfic_07_arbitrary_columns",
+      "proof_boundary": "Finite-dimensional transfer applied pointwise in lambda.",
+      "readiness": "ready_to_apply",
+      "role": "published_theorem_composition"
+    },
+    {
+      "claim": "The fixed-order programme now hands off to a genuinely new contiguous order-seven layer.",
+      "diagnostics": null,
+      "formula": "derive a cancellation-preserving contiguous order-seven entry coordinate and flow reduction",
+      "id": "co6uhfic_08_order_seven_handoff",
+      "proof_boundary": "Open order-seven analytic problem; not PF-infinity, RH, or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    }
+  ],
+  "source_contract": {
+    "conditional_forward": "[Q_(6,n)(-100)>0 for all n] => [Q_(6,n)(lambda)>0 for all n and -100<=lambda<=0]",
+    "cooperative_flow": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n=(4*n+42)*H_(5,n)/H_(5,n+1)>0, b_n=((4*n+42)/(4*n+38))*(log H_(5,n+1))'",
+    "endpoint_entry": "Q_(6,n)(-100)=-H_(6,n)(-100)>0 for every integer n>=0",
+    "fixed_order_transfer": "[epsilon_k H_(k,s)>0 for 1<=k<=m, all s] => [epsilon_k R_(k,n)(j_1,...,j_k)>0 for 1<=k<=m]",
+    "lower_layers": "epsilon_k*H_(k,n)(lambda)>0 for k=1,2,3,4,5, all n and -100<=lambda<=0",
+    "uniform_tail": "there exists N_6 such that Q_(6,n)(lambda)=-H_(6,n)(lambda)>0 for every n>=N_6 and -100<=lambda<=0",
+    "variation_of_constants": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)"
+  },
+  "sources": [
+    "outputs/jensen_window_pf_compound_order6_m100_entry_certificate.md",
+    "outputs/jensen_window_pf_compound_order6_uniform_tail_flow_reduction.md",
+    "outputs/jensen_window_pf_compound_order5_uniform_heat_forward_invariance_certificate.md",
+    "outputs/jensen_window_pf_order4_noncontiguous_total_positivity_transfer.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "signed contiguous and arbitrary-column order-six theorem on -100<=lambda<=0",
+  "summary": {
+    "arbitrary_column_order_six_theorems": 1,
+    "contiguous_order_six_theorems": 1,
+    "cooperative_flow_theorems": 1,
+    "open_order_seven_handoffs": 1,
+    "open_rows": 1,
+    "ready_rows": 7,
+    "rows": 8,
+    "uniform_tail_theorems": 1
+  }
+}

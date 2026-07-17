@@ -1,0 +1,119 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_critical_scaled_coercivity_target",
+  "date": "2026-07-17",
+  "status": "exact corrected finite coercivity target for the critical scaled Newman layer; not a proof of its sign, Lambda<=0, or RH",
+  "proof_boundary": "This artifact proves the uncorrected component identity and the exact curvature contribution of the published Riemann-Siegel correction. It identifies the refined remainder order and the live finite target. It does not prove the corrected coercivity inequality, positivity throughout the critical layer, positivity for all x and t, Lambda<=0, or RH.",
+  "exact": {
+    "critical_region": "L=log(x/(4*pi))->infinity, c=t*L in [0,c_*+o(1)], c_*=4911678521/1933561194=2.540223984760008..., N=floor(sqrt(x/(4*pi)+t/16))",
+    "dirichlet_main": "D_(N,t)(x)=sum_(n<=N)exp((t/4)log(n)^2)*n^(-s_*(x)), P_(N,t)=2Re(exp(i*beta_t)D_(N,t))",
+    "components": "exp(i*beta)D=X+iY, exp(i*beta)D'=U+iV1, exp(i*beta)D''=W+iV2, B=beta'",
+    "coercivity": "C[P]/4=B^2(X^2+Y^2)+2B(X*V1-U*Y)+U^2-X*W+beta''*X*Y+V_t*X^2",
+    "invariant_cross": "X*V1-U*Y=Im(conj(D)*D')",
+    "correction_parameters": "T'=x/2+pi*t/8, a=sqrt(T'/(2*pi)), N=floor(a), p=1-2(a-N), U_RS=exp(-i((T'/2)log(T'/(2*pi))-T'/2-pi/8))",
+    "C0": "C0(p)=(exp(pi*i*(p^2/2+3/8))-i*sqrt(2)*cos(pi*p/2))/(2*cos(pi*p)), with removable values at p=+-1/2",
+    "raw_correction": "C_t(x)=2*(-1)^N*exp(t*pi^2/64)*Re(M_0(i*T')*C0(p)*U_RS*exp(pi*i/8))",
+    "corrected_main": "Q_(N,t)=C_t/A_t, J_(N,t)=P_(N,t)-Q_(N,t), A_t=|B_t|",
+    "corrected_curvature": "C[J]-C[P]=-2P'Q'+Q'^2+P*Q''+Q*P''-Q*Q''+V_t*(-2P*Q+Q^2)",
+    "refined_remainder": "H_t/A_t=J_(N,t)+r_ref; the published e_C replaces the e_C0 factor 1 by tilde_epsilon(s_-)+tilde_epsilon(s_+)=O(1/N)",
+    "shrinking_collar": "On radius rho=1/L collars, the refined normalized C2 remainder is o(L^2) after including one adjacent-N correction",
+    "live_target": "Prove C_t[J_(N,t)] greater than its explicit refined C2 remainder budget uniformly for 0<=t*L<=c_*+o(1)"
+  },
+  "rows": [
+    {
+      "id": "np15csct_01_critical_region",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "The remaining asymptotic obstruction is a bounded scaled-time finite Riemann-Siegel problem.",
+      "formula": "L=log(x/(4*pi))->infinity, c=t*L in [0,c_*+o(1)], c_*=4911678521/1933561194=2.540223984760008..., N=floor(sqrt(x/(4*pi)+t/16))",
+      "proof_boundary": "The c>c_*+epsilon region is closed by the oscillatory zeta handoff theorem.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15csct_02_uncorrected_coercivity",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The finite-main Laguerre curvature has an exact component formula valid even when D vanishes.",
+      "formula": "C[P]/4=B^2(X^2+Y^2)+2B(X*V1-U*Y)+U^2-X*W+beta''*X*Y+V_t*X^2",
+      "proof_boundary": "No division by D and no zero-free assumption.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15csct_03_phase_free_cross",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The leading mixed phase term is invariant under the normalizer rotation.",
+      "formula": "X*V1-U*Y=Im(conj(D)*D')",
+      "proof_boundary": "Exact complex multiplication identity.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15csct_04_rs_correction",
+      "role": "published_explicit_input",
+      "readiness": "available_published",
+      "claim": "Polymath 15 supplies an explicit leading Riemann-Siegel endpoint correction.",
+      "formula": "C_t(x)=2*(-1)^N*exp(t*pi^2/64)*Re(M_0(i*T')*C0(p)*U_RS*exp(pi*i/8))",
+      "proof_boundary": "Imported from the published A+B-C approximation.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15csct_05_corrected_main",
+      "role": "exact_definition",
+      "readiness": "ready_to_apply",
+      "claim": "The correct critical finite main object includes the normalized endpoint correction.",
+      "formula": "Q_(N,t)=C_t/A_t, J_(N,t)=P_(N,t)-Q_(N,t), A_t=|B_t|",
+      "proof_boundary": "Omitting Q loses one asymptotic order in the critical layer.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15csct_06_correction_curvature",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The endpoint correction enters the finite curvature through an explicit six-term perturbation.",
+      "formula": "C[J]-C[P]=-2P'Q'+Q'^2+P*Q''+Q*P''-Q*Q''+V_t*(-2P*Q+Q^2)",
+      "proof_boundary": "Exact symbolic identity.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15csct_07_refined_remainder",
+      "role": "published_theorem_transfer",
+      "readiness": "ready_to_apply",
+      "claim": "After extracting Q, the published contour remainder gains a full factor of the saddle index.",
+      "formula": "H_t/A_t=J_(N,t)+r_ref; the published e_C replaces the e_C0 factor 1 by tilde_epsilon(s_-)+tilde_epsilon(s_+)=O(1/N)",
+      "proof_boundary": "Uses the published tilde-epsilon bound; derivative constants remain to be made explicit.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15csct_08_shrinking_collar",
+      "role": "analytic_handoff",
+      "readiness": "conditional_ready",
+      "claim": "A scale-adapted Cauchy collar keeps normalizer growth bounded while differentiating the refined remainder.",
+      "formula": "On radius rho=1/L collars, the refined normalized C2 remainder is o(L^2) after including one adjacent-N correction",
+      "proof_boundary": "Asymptotic transfer schema; an explicit finite threshold is not supplied here.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15csct_09_live_coercivity",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The global tail is reduced to one corrected finite oscillatory coercivity inequality.",
+      "formula": "Prove C_t[J_(N,t)] greater than its explicit refined C2 remainder budget uniformly for 0<=t*L<=c_*+o(1)",
+      "proof_boundary": "Open and RH-level; no sign is asserted.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15csct_10_nonpromotion",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "Absolute coefficient bounds stop at c=4; the exponent-pair handoff lowers the open boundary to c_*, but neither argument certifies the corrected coercivity at or below c_*.",
+      "formula": "worst coefficient exponent=1/2+c/8<=1",
+      "proof_boundary": "Cancellation, not additional truncation depth, is required.",
+      "diagnostics": null
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/abs/1904.12438",
+    "outputs/jensen_window_pf_newman_polymath15_oscillatory_zeta_handoff_theorem.md",
+    "outputs/jensen_window_pf_newman_polymath15_scaled_boundary_layer_asymptotic_theorem.md",
+    "outputs/jensen_window_pf_newman_polymath15_dominant_saddle_global_ray_certificate.md"
+  ]
+}

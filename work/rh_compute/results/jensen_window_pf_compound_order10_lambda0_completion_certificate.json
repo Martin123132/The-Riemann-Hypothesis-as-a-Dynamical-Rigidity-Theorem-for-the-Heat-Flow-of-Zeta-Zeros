@@ -1,0 +1,110 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order10_lambda0_completion_certificate.py",
+  "date": "2026-07-16",
+  "exact": {
+    "all_shift_order10_lambda0": "Q_(10,n)(0)>0 for every integer n>=0",
+    "arbitrary_column_definition": "R_(k,n)(j_1,...,j_k)(0)=det[A_(n+i+j_l)(0)]_(0<=i<k,1<=l<=k)",
+    "arbitrary_columns_through_order10_lambda0": "epsilon_k*R_(k,n)(j_1,...,j_k)(0)>0 for 1<=k<=10, n>=0, and 0<=j_1<...<j_k",
+    "contiguous_through_order10_lambda0": "Q_(m,n)(0)>0 for every integer 1<=m<=10 and n>=0",
+    "delayed_endpoint": "Q_(10,n)(-100)>0 for every integer n>=4",
+    "delayed_heat_ray": "Q_(10,n)(lambda)>0 for every n>=4 and -100<=lambda<=0",
+    "fixed_order_transfer": "[epsilon_k H_(k,s)>0 for 1<=k<=m, all s] => [epsilon_k R_(k,n)(j_1,...,j_k)>0 for 1<=k<=m]",
+    "lambda0_prefix": "Q_(10,n)(0)>0 for every integer 0<=n<=3",
+    "lower_base": "Q_(m,n)(lambda)>0 for 1<=m<=9, every n>=0, and -100<=lambda<=0"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order10_lambda0_completion_certificate.py",
+  "kind": "jensen_window_pf_compound_order10_lambda0_completion_certificate",
+  "proof_boundary": "This proves contiguous signed Hankel positivity at lambda zero through order ten and the corresponding consecutive-row arbitrary-column signs through order ten. It proves no order above ten and is not PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The endpoint analysis supplies strict order-ten positivity on the ray beginning at shift four.",
+      "formula": "Q_(10,n)(-100)>0 for every integer n>=4",
+      "id": "co10l0c_01_delayed_endpoint",
+      "proof_boundary": "The four smaller endpoint shifts remain negative.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The shifted cooperative lemma propagates the delayed endpoint ray through the heat interval.",
+      "formula": "Q_(10,n)(lambda)>0 for every n>=4 and -100<=lambda<=0",
+      "id": "co10l0c_02_heat_ray",
+      "proof_boundary": "No sign at shifts below four is used.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_application"
+    },
+    {
+      "claim": "Direct Arb determinants supply the four missing rows at lambda zero.",
+      "formula": "Q_(10,n)(0)>0 for every integer 0<=n<=3",
+      "id": "co10l0c_03_lambda0_prefix",
+      "proof_boundary": "Fixed lambda zero and shifts zero through three only.",
+      "readiness": "ready_to_apply",
+      "role": "finite_theorem_input"
+    },
+    {
+      "claim": "The heat ray and finite prefix partition every nonnegative shift.",
+      "formula": "Q_(10,n)(0)>0 for every integer n>=0",
+      "id": "co10l0c_04_all_shift_order10",
+      "proof_boundary": "Contiguous signed Hankel order ten at lambda zero.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "The completed lower base and order-ten theorem give all contiguous layers through ten.",
+      "formula": "Q_(m,n)(0)>0 for every integer 1<=m<=10 and n>=0",
+      "id": "co10l0c_05_contiguous_through10",
+      "proof_boundary": "Fixed lambda zero; no order above ten is claimed.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "The finite initial-minor transfer promotes completed contiguous layers through ten to arbitrary columns.",
+      "formula": "epsilon_k*R_(k,n)(j_1,...,j_k)(0)>0 for 1<=k<=10, n>=0, and 0<=j_1<...<j_k",
+      "id": "co10l0c_06_fixed_order_transfer",
+      "proof_boundary": "Consecutive rows and arbitrary increasing columns, orders at most ten.",
+      "readiness": "ready_to_apply",
+      "role": "published_theorem_application"
+    }
+  ],
+  "sources": [
+    {
+      "kind": "jensen_window_pf_compound_order10_m100_delayed_entry_certificate",
+      "path": "work/rh_compute/results/jensen_window_pf_compound_order10_m100_delayed_entry_certificate.json",
+      "sha256": "06d355e3260026cbb4f062766cb934a3292c4a5ea2cfc078c0f495dcb89c831d",
+      "status": "rigorous delayed signed order-ten entry and complete endpoint sign chart at lambda=-100"
+    },
+    {
+      "kind": "jensen_window_pf_delayed_cooperative_heat_tail_lemma",
+      "path": "work/rh_compute/results/jensen_window_pf_delayed_cooperative_heat_tail_lemma.json",
+      "sha256": "19d93868828493fac7c3d4729fd49fe97875ad4300319c078c87af37a69504e8",
+      "status": "exact shifted cooperative heat-flow descent lemma"
+    },
+    {
+      "kind": "jensen_window_pf_compound_order10_lambda0_prefix_certificate",
+      "path": "work/rh_compute/results/jensen_window_pf_compound_order10_lambda0_prefix_certificate.json",
+      "sha256": "2b04bd0f78f0172feb20f391dd1691858a854971b29a13c4754a486b972c7a38",
+      "status": "rigorous lambda-zero order-ten prefix certificate for n=0,1,2,3"
+    },
+    {
+      "kind": "jensen_window_pf_all_order_endpoint_heat_reduction",
+      "path": "work/rh_compute/results/jensen_window_pf_all_order_endpoint_heat_reduction.json",
+      "sha256": "674c8640670fe067c701dff4e72ad9e6f0022c159830b6734d2432aec3bddd32",
+      "status": "exact all-order endpoint-to-heat equivalence with a completed base through order nine and the candidate endpoint hierarchy rejected by the order-ten counterexample"
+    },
+    {
+      "kind": "jensen_window_pf_order4_noncontiguous_total_positivity_transfer",
+      "path": "work/rh_compute/results/jensen_window_pf_order4_noncontiguous_total_positivity_transfer.json",
+      "sha256": "dba5df10b861a594e2e20690b5286a711d98ace5fdc343453f6cd8fdeca8d1e5",
+      "status": "exact arbitrary-column reshaped-Hankel order-four theorem at lambda zero"
+    }
+  ],
+  "status": "rigorous all-shift signed Hankel order ten and fixed-order arbitrary-column completion at lambda zero",
+  "summary": {
+    "all_shift_order10_lambda0_theorems": 1,
+    "arbitrary_column_through_order10_lambda0_theorems": 1,
+    "contiguous_through_order10_lambda0_theorems": 1,
+    "open_rows": 0,
+    "orders_above_10": 0,
+    "ready_rows": 6,
+    "rows": 6
+  }
+}

@@ -1,0 +1,305 @@
+{
+  "date": "2026-07-12",
+  "exact": {
+    "countermodel": {
+      "coefficients": [
+        "1",
+        "1",
+        "99/100",
+        "115465581/118810000",
+        "449662131526605921/474856053604000000"
+      ],
+      "compound_margin": "-181/100",
+      "contractions": [
+        "99/100",
+        "11781/11881",
+        "3339/3364"
+      ],
+      "cubic_frontier_values": [
+        "-828039/1411581610000",
+        "-1610484375/1597415764323856"
+      ],
+      "defects": [
+        "1/100",
+        "100/11881",
+        "25/3364"
+      ],
+      "hankel_determinant": "4106267526339/1899424214416000000",
+      "increments": [
+        "9/10",
+        "7/10"
+      ],
+      "reciprocal_defects": [
+        "10",
+        "109/10",
+        "58/5"
+      ],
+      "scaled_defects": [
+        "3/200",
+        "250/11881",
+        "175/6728"
+      ],
+      "verified_properties": [
+        "strict full ratio cone at indices 1,2,3",
+        "strictly decreasing defects",
+        "strictly increasing scaled defects below one",
+        "both reciprocal-defect increments strictly between zero and one",
+        "both neighboring cubic Jensen frontier polynomials strictly negative",
+        "contiguous order-three signed-Hankel determinant has the wrong positive sign"
+      ]
+    },
+    "defect_coordinate": {
+      "condition": "D_(3,n)<0 iff d_(n+2)^2>x_(n+2)^2*d_(n+1)*d_(n+3)",
+      "identity": "F_n=d_(n+1)*d_(n+3)*x_(n+2)^2-d_(n+2)^2",
+      "interpretation": "The defect sequence may be log-convex, but its centered log-curvature must stay below the explicit buffer -2*log x_(n+2)."
+    },
+    "determinant_coordinate": {
+      "definitions": "rho_k=A_(k+1)/A_k, x_k=rho_k/rho_(k-1), d_k=1-x_k, q_k=d_k^(-1/2)",
+      "expected_sign": "The order-three signed-Hankel condition is D_(3,n)<0.",
+      "factorization": "D_(3,n)=A_n^3*rho_n^6*x_(n+1)^3*F_n",
+      "frontier": "F_n=x_(n+1)*x_(n+2)^2*x_(n+3)-x_(n+1)*x_(n+2)^2-x_(n+2)^2*x_(n+3)+2*x_(n+2)-1",
+      "minor": "D_(3,n)=det[A_(n+i+j)]_(i,j=0..2)"
+    },
+    "forward_invariance_theorem": {
+      "boundary": "Complete shifted contiguous order three only; noncontiguous order-three minors are not included.",
+      "conclusion": "C_n(lambda)>0 for every n>=0 and finite lambda>=-100",
+      "source": "outputs/jensen_window_pf_compound_order3_forward_invariance_certificate.md",
+      "statement": "The exact cooperative system C_n'/r_(n+2)=alpha_n*C_(n+1)+beta_n*C_n, the cubic forward-uniform tail, and a weighted maximum principle propagate C_n>0 through lambda=0."
+    },
+    "increment_budget": {
+      "definitions": "a_n=q_(n+2)-q_(n+1), b_n=q_(n+3)-q_(n+2)",
+      "exact_target": "If b_n<a_n, prove q_(n+2)*(a_n-b_n)+a_n*b_n<1.",
+      "identity": "C_n=1-a_n*b_n+q_(n+2)*(b_n-a_n)"
+    },
+    "live_handoff": {
+      "forbidden_promotion": "The full ratio cone, decreasing defect, increasing scaled defect, and strict cubic Jensen increment bounds do not imply C_n>0 without the lambda=-100 scaled-defect anchor used by the entry theorem.",
+      "target": "Find coordinates, entry theorems, and forward-invariance laws for contiguous order four; then transfer to arbitrary columns and continue to higher compound orders."
+    },
+    "m100_entry_theorem": {
+      "boundary": "All shifts at lambda=-100, but only the contiguous order-three family.",
+      "source": "outputs/jensen_window_pf_negative_lambda_m100_compound_order3_entry_certificate.md",
+      "statement": "A repaired Arb prefix through n=317 and an exact scaled-defect tail prove C_n(-100)>0 for every n>=0.",
+      "uniform_tail_lower": "57613471/66107054971"
+    },
+    "noncontiguous_transfer_theorem": {
+      "boundary": "Complete reshaped-Hankel order three, not order four.",
+      "conclusion": "R_(3,n)(j_1,j_2,j_3)<0 for every n>=0 and 0<=j_1<j_2<j_3 at lambda=0",
+      "source": "outputs/jensen_window_pf_order3_noncontiguous_secant_transfer_lemma.md",
+      "statement": "Positive column scaling embeds the three-row Hankel columns as planar points. Contiguous negativity makes their edge slopes strictly decrease, and secant averaging transfers the sign to every strictly increasing column triple."
+    },
+    "reciprocal_defect_coordinate": {
+      "condition": "D_(3,n)<0 iff C_n:=q_(n+1)*q_(n+3)-q_(n+2)^2+1>0",
+      "interpretation": "This is unit-buffered log-concavity of the reciprocal defects.",
+      "positive_factorization": "d_(n+2)^2-x_(n+2)^2*d_(n+1)*d_(n+3)=C_n*(q_(n+1)*q_(n+3)+q_(n+2)^2-1)/(q_(n+1)^2*q_(n+2)^4*q_(n+3)^2)"
+    },
+    "sufficient_increment_theorem": {
+      "boundary_family": "For q_k=alpha+beta*k with 0<=beta<1, C_n=1-beta^2>0.",
+      "conclusion": "C_n>=1-a_n*b_n>=0",
+      "hypotheses": "0<=a_n<=b_n<=1",
+      "scope": "This is sufficient only. Actual reciprocal-defect increments may decrease.",
+      "strictness": "C_n>0 unless a_n=b_n=1; the strict cubic cone excludes that equality."
+    }
+  },
+  "kind": "jensen_window_pf_reciprocal_defect_compound_order3_gate",
+  "proof_boundary": "This artifact factors the contiguous 3x3 signed-Hankel minor into contraction, defect, reciprocal-defect, and increment coordinates; proves one sufficient increment theorem; and supplies a strict rational countermodel to promotion from the already proved ratio, adaptive-defect, and cubic Jensen cones; and composes the all-shift entry, forward-invariance, and noncontiguous secant-transfer theorems. It does not prove compound order four or higher, the all-order signed-Hankel antecedent, the Jensen bridge, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The contiguous order-three signed-Hankel minor has an exact contraction-coordinate factorization.",
+      "diagnostics": {
+        "definitions": "rho_k=A_(k+1)/A_k, x_k=rho_k/rho_(k-1), d_k=1-x_k, q_k=d_k^(-1/2)",
+        "expected_sign": "The order-three signed-Hankel condition is D_(3,n)<0.",
+        "factorization": "D_(3,n)=A_n^3*rho_n^6*x_(n+1)^3*F_n",
+        "frontier": "F_n=x_(n+1)*x_(n+2)^2*x_(n+3)-x_(n+1)*x_(n+2)^2-x_(n+2)^2*x_(n+3)+2*x_(n+2)-1",
+        "minor": "D_(3,n)=det[A_(n+i+j)]_(i,j=0..2)"
+      },
+      "formula": "D_(3,n)=A_n^3*rho_n^6*x_(n+1)^3*F_n",
+      "id": "rdco3_01_determinant_coordinate",
+      "proof_boundary": "Exact contiguous 3x3 identity only.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The required minor sign is exactly a buffered defect log-curvature inequality.",
+      "diagnostics": {
+        "condition": "D_(3,n)<0 iff d_(n+2)^2>x_(n+2)^2*d_(n+1)*d_(n+3)",
+        "identity": "F_n=d_(n+1)*d_(n+3)*x_(n+2)^2-d_(n+2)^2",
+        "interpretation": "The defect sequence may be log-convex, but its centered log-curvature must stay below the explicit buffer -2*log x_(n+2)."
+      },
+      "formula": "D_(3,n)<0 iff d_(n+2)^2>x_(n+2)^2*d_(n+1)*d_(n+3)",
+      "id": "rdco3_02_defect_coordinate",
+      "proof_boundary": "Equivalent to contiguous order three, not arbitrary order-three column sets.",
+      "readiness": "ready_to_apply",
+      "role": "exact_equivalence"
+    },
+    {
+      "claim": "The same sign is unit-buffered log-concavity of reciprocal defects.",
+      "diagnostics": {
+        "condition": "D_(3,n)<0 iff C_n:=q_(n+1)*q_(n+3)-q_(n+2)^2+1>0",
+        "interpretation": "This is unit-buffered log-concavity of the reciprocal defects.",
+        "positive_factorization": "d_(n+2)^2-x_(n+2)^2*d_(n+1)*d_(n+3)=C_n*(q_(n+1)*q_(n+3)+q_(n+2)^2-1)/(q_(n+1)^2*q_(n+2)^4*q_(n+3)^2)"
+      },
+      "formula": "D_(3,n)<0 iff C_n:=q_(n+1)*q_(n+3)-q_(n+2)^2+1>0",
+      "id": "rdco3_03_reciprocal_coordinate",
+      "proof_boundary": "Exact scalar coordinate for one contiguous minor family.",
+      "readiness": "ready_to_apply",
+      "role": "exact_equivalence"
+    },
+    {
+      "claim": "The compound margin is an exact first-increment product plus second-increment curvature budget.",
+      "diagnostics": {
+        "definitions": "a_n=q_(n+2)-q_(n+1), b_n=q_(n+3)-q_(n+2)",
+        "exact_target": "If b_n<a_n, prove q_(n+2)*(a_n-b_n)+a_n*b_n<1.",
+        "identity": "C_n=1-a_n*b_n+q_(n+2)*(b_n-a_n)"
+      },
+      "formula": "C_n=1-a_n*b_n+q_(n+2)*(b_n-a_n)",
+      "id": "rdco3_04_increment_budget",
+      "proof_boundary": "Exact coordinate; no sign is assumed.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Nondecreasing reciprocal-defect increments inside the cubic unit cone are sufficient for the order-three compound sign.",
+      "diagnostics": {
+        "boundary_family": "For q_k=alpha+beta*k with 0<=beta<1, C_n=1-beta^2>0.",
+        "conclusion": "C_n>=1-a_n*b_n>=0",
+        "hypotheses": "0<=a_n<=b_n<=1",
+        "scope": "This is sufficient only. Actual reciprocal-defect increments may decrease.",
+        "strictness": "C_n>0 unless a_n=b_n=1; the strict cubic cone excludes that equality."
+      },
+      "formula": "C_n>=1-a_n*b_n>=0",
+      "id": "rdco3_05_sufficient_increment",
+      "proof_boundary": "Sufficient theorem only; the monotonicity hypothesis is not proved for Xi.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "The reciprocal-square rank-two boundary family lies strictly inside the compound cone when its increment is below one.",
+      "diagnostics": null,
+      "formula": "For q_k=alpha+beta*k with 0<=beta<1, C_n=1-beta^2>0.",
+      "id": "rdco3_06_boundary_family",
+      "proof_boundary": "Exact benchmark family, not the Xi trajectory.",
+      "readiness": "available_exact",
+      "role": "exact_benchmark"
+    },
+    {
+      "claim": "A positive rational sequence satisfies the proved ratio, adaptive-defect, and strict cubic Jensen cones while reversing the contiguous order-three Hankel sign.",
+      "diagnostics": {
+        "coefficients": [
+          "1",
+          "1",
+          "99/100",
+          "115465581/118810000",
+          "449662131526605921/474856053604000000"
+        ],
+        "compound_margin": "-181/100",
+        "contractions": [
+          "99/100",
+          "11781/11881",
+          "3339/3364"
+        ],
+        "cubic_frontier_values": [
+          "-828039/1411581610000",
+          "-1610484375/1597415764323856"
+        ],
+        "defects": [
+          "1/100",
+          "100/11881",
+          "25/3364"
+        ],
+        "hankel_determinant": "4106267526339/1899424214416000000",
+        "increments": [
+          "9/10",
+          "7/10"
+        ],
+        "reciprocal_defects": [
+          "10",
+          "109/10",
+          "58/5"
+        ],
+        "scaled_defects": [
+          "3/200",
+          "250/11881",
+          "175/6728"
+        ],
+        "verified_properties": [
+          "strict full ratio cone at indices 1,2,3",
+          "strictly decreasing defects",
+          "strictly increasing scaled defects below one",
+          "both reciprocal-defect increments strictly between zero and one",
+          "both neighboring cubic Jensen frontier polynomials strictly negative",
+          "contiguous order-three signed-Hankel determinant has the wrong positive sign"
+        ]
+      },
+      "formula": "q_1=10, q_2=109/10, q_3=58/5, C_0=-181/100",
+      "id": "rdco3_07_strict_countermodel",
+      "proof_boundary": "Abstract local countermodel, not the Xi coefficient sequence.",
+      "readiness": "guard_validated",
+      "role": "exact_countermodel"
+    },
+    {
+      "claim": "The actual Xi coefficient sequence has the required contiguous order-three sign at every shift at lambda=-100.",
+      "diagnostics": {
+        "boundary": "All shifts at lambda=-100, but only the contiguous order-three family.",
+        "source": "outputs/jensen_window_pf_negative_lambda_m100_compound_order3_entry_certificate.md",
+        "statement": "A repaired Arb prefix through n=317 and an exact scaled-defect tail prove C_n(-100)>0 for every n>=0.",
+        "uniform_tail_lower": "57613471/66107054971"
+      },
+      "formula": "C_n(-100)>0 and D_(3,n)(-100)<0 for every n>=0",
+      "id": "rdco3_08_m100_entry",
+      "proof_boundary": "All-shift entry at one heat parameter; no forward propagation or noncontiguous minors.",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_theorem"
+    },
+    {
+      "claim": "The contiguous order-three compound margin propagates strictly through lambda=0 at every shift.",
+      "diagnostics": {
+        "boundary": "Complete shifted contiguous order three only; noncontiguous order-three minors are not included.",
+        "conclusion": "C_n(lambda)>0 for every n>=0 and finite lambda>=-100",
+        "source": "outputs/jensen_window_pf_compound_order3_forward_invariance_certificate.md",
+        "statement": "The exact cooperative system C_n'/r_(n+2)=alpha_n*C_(n+1)+beta_n*C_n, the cubic forward-uniform tail, and a weighted maximum principle propagate C_n>0 through lambda=0."
+      },
+      "formula": "C_n(lambda)>0 for every n>=0 and finite lambda>=-100",
+      "id": "rdco3_09_forward_invariance",
+      "proof_boundary": "Complete shifted contiguous order three only.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "Planar secant geometry transfers contiguous order-three signs to every increasing column triple.",
+      "diagnostics": {
+        "boundary": "Complete reshaped-Hankel order three, not order four.",
+        "conclusion": "R_(3,n)(j_1,j_2,j_3)<0 for every n>=0 and 0<=j_1<j_2<j_3 at lambda=0",
+        "source": "outputs/jensen_window_pf_order3_noncontiguous_secant_transfer_lemma.md",
+        "statement": "Positive column scaling embeds the three-row Hankel columns as planar points. Contiguous negativity makes their edge slopes strictly decrease, and secant averaging transfers the sign to every strictly increasing column triple."
+      },
+      "formula": "R_(3,n)(j_1,j_2,j_3)<0 for every n>=0 and 0<=j_1<j_2<j_3 at lambda=0",
+      "id": "rdco3_10_noncontiguous_transfer",
+      "proof_boundary": "Complete arbitrary-column reshaped-Hankel order three only.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "The next compound target is contiguous order four, followed by its arbitrary-column transfer and higher orders.",
+      "diagnostics": {
+        "forbidden_promotion": "The full ratio cone, decreasing defect, increasing scaled defect, and strict cubic Jensen increment bounds do not imply C_n>0 without the lambda=-100 scaled-defect anchor used by the entry theorem.",
+        "target": "Find coordinates, entry theorems, and forward-invariance laws for contiguous order four; then transfer to arbitrary columns and continue to higher compound orders."
+      },
+      "formula": "Find coordinates, entry theorems, and forward-invariance laws for contiguous order four; then transfer to arbitrary columns and continue to higher compound orders.",
+      "id": "rdco3_11_live_handoff",
+      "proof_boundary": "Open; not all order-three column sets, the all-order antecedent, RH, or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "sources": [
+    "outputs/jensen_window_pf_reciprocal_gamma_mixture_sign_gate.md",
+    "outputs/signed_hankel_jensen_bridge_target.md",
+    "outputs/jensen_window_pf_cubic_reciprocal_defect_invariance_lemma.md",
+    "outputs/jensen_window_pf_negative_lambda_m100_adaptive_defect_certificate.md",
+    "outputs/jensen_window_pf_negative_lambda_m100_compound_order3_entry_certificate.md",
+    "outputs/jensen_window_pf_compound_order3_forward_invariance_certificate.md",
+    "outputs/jensen_window_pf_order3_noncontiguous_secant_transfer_lemma.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "complete all-column order-three theorem with strict abstract countermodel gate"
+}

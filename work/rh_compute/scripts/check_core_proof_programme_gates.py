@@ -58,7 +58,7 @@ GATES: tuple[GateSpec, ...] = (
     GateSpec(
         name="proof-claim ledger",
         command=("work/rh_compute/scripts/check_proof_claim_ledger.py",),
-        expected=("validated proof-claim ledger: 182 claims, 0 issues, 13 open theorem targets",),
+        expected=("validated proof-claim ledger: 324 claims, 0 issues, 9 open theorem targets",),
         category="non-promotion guards",
     ),
     GateSpec(
@@ -176,7 +176,7 @@ GATES: tuple[GateSpec, ...] = (
     GateSpec(
         name="Jensen-window PF bridge obligation ledger",
         command=("work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py",),
-        expected=("validated Jensen-window PF bridge obligations: 10 obligations, 0 issues, 3 open obligations",),
+        expected=("validated Jensen-window PF bridge obligations: 11 obligations, 0 issues, 3 open obligations",),
         category="open theorem target hygiene",
     ),
     GateSpec(
@@ -200,6 +200,981 @@ GATES: tuple[GateSpec, ...] = (
             "validated Jensen-window PF factorial multiplier split audit: 5 exact rows, 315 raw degree-2 anti-hyperbolic rows, 315 normalized degree-2 positive rows, 0 ready-to-apply rows, 0 issues",
         ),
         category="finite theorem-search diagnostics",
+    ),
+    GateSpec(
+        name="Jensen-window PF reciprocal-gamma mixture sign gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_reciprocal_gamma_mixture_sign_gate.py",),
+        expected=(
+            "validated Jensen-window PF reciprocal-gamma mixture sign gate: 10 rows, 0 issues, 3 exact kernel identities, 1 published all-order theorem, 1 fixed-scale theorem, 2 exact mixture countermodels, 1 tilted-variance equivalence, 1 Xi order-two composition, 1 higher-order handoff",
+        ),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF reciprocal-defect compound order-three gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_reciprocal_defect_compound_order3_gate.py",),
+        expected=(
+            "validated Jensen-window PF reciprocal-defect compound order-three gate: 11 rows, 0 issues, 2 exact coordinate identities, 2 exact sign equivalences, 1 sufficient increment theorem, 1 exact boundary benchmark, 1 strict cone countermodel, 1 all-shift lambda=-100 entry theorem, 1 full forward propagation theorem, 1 arbitrary-column order-three theorem, 1 open order-four handoff",
+        ),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF negative-lambda -100 compound order-three entry certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_m100_compound_order3_entry_certificate.py",),
+        expected=(
+            "validated Jensen-window PF negative-lambda -100 compound order-three entry certificate: 11 rows, 0 issues, 322 positive coefficients, 318 prefix compound margins, 318 prefix defect gaps, 1 exact tail theorem, 1 all-shift entry theorem, 1 open forward handoff",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-three forward-invariance certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order3_forward_invariance_certificate.py",),
+        expected=(
+            "validated Jensen-window PF compound order-three forward-invariance certificate: 10 rows, 0 issues, 2 exact identities, 1 cooperative flow, 1 inward boundary theorem, 1 coefficient-growth lemma, 1 infinite maximum principle, 1 full forward propagation theorem, 1 lambda=0 theorem, 1 open higher-compound handoff",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF order-three noncontiguous secant-transfer lemma",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_order3_noncontiguous_secant_transfer_lemma.py",),
+        expected=(
+            "validated Jensen-window PF order-three noncontiguous secant-transfer lemma: 8 rows, 0 issues, 2 exact identities, 1 secant-averaging lemma, 1 arbitrary-column order-two theorem, 1 arbitrary-column order-three theorem, 1 open order-four handoff",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four condensation gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_condensation_gate.py",),
+        expected=(
+            "validated Jensen-window PF compound order-four condensation gate: 8 rows, 0 issues, 2 exact identities, 1 exact sign equivalence, 317 positive lambda=-100 prefix margins, 1 strict lower-order countermodel, 1 forbidden promotion, 2 open handoffs",
+        ),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four first-summand curvature bridge",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_first_summand_curvature_bridge.py",),
+        expected=(
+            "validated Jensen-window PF compound order-four first-summand curvature bridge: 11 rows, 0 issues, 2 exact identities, 2 exact reductions, 1 proved gap floor, 1 compact interval theorem, 1 proved full-kernel perturbation theorem, 1 open analytic ray, 8 positive finite scouts",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four localized-curvature compact certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_localized_curvature_compact_certificate.py",),
+        expected=(
+            "validated localized order-four compact curvature certificate: 107452 H tiles, 1073 positive blocks, 1 open analytic ray, 0 issues",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four Gaussian cumulant ray target",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_gaussian_cumulant_ray_target.py",),
+        expected=(
+            "validated order-four Gaussian cumulant ray target: 10 rows, 0 issues, 4 exact formal rows, 2 proved formal-corridor rows, 7 positive conditional collars, 3 open analytic rows",
+        ),
+        category="open theorem target hygiene",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four formal cumulant corridor certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_formal_cumulant_corridor_certificate.py",),
+        expected=(
+            "validated order-four formal cumulant corridor certificate: 1800000 blocks, 1800 chunks, 7 positive corridors, 0 issues",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four formal cumulant asymptotic ray certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_formal_cumulant_asymptotic_ray_certificate.py",),
+        expected=(
+            "validated order-four formal cumulant asymptotic ray: 8 rows, 0 issues, 7 exact rows, 7 buffered corridors, 14 jet-remainder sign gates, 1 open exact-density remainder",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four formal cumulant next-parity certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_formal_cumulant_next_parity_certificate.py",),
+        expected=(
+            "validated order-four formal cumulant next parity: 6 rows, 0 issues, 4 exact rows, 42 epsilon-six audits, 7 next-parity coefficients, 2 open analytic rows",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four next-parity finite certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_formal_cumulant_next_parity_finite_certificate.py",),
+        expected=(
+            "validated order-four next-parity finite bounds: 1800 Taylor blocks, 180 chunks, 7 signed coefficients, 0 issues",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four next-parity asymptotic ray certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_formal_cumulant_next_parity_asymptotic_ray_certificate.py",),
+        expected=(
+            "validated order-four next-parity asymptotic ray: 8 rows, 0 issues, 7 exact rows, 7 global coefficient bounds, 14 leading buffer gates, 4 new jet-remainder sign gates, 1 open exact-density remainder",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four exact cumulant remainder budget",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_exact_cumulant_remainder_budget.py",),
+        expected=(
+            "validated order-four exact cumulant remainder budget: 9 rows, 0 issues, 8 exact rows, finite epsilon-ten budget 9/1000, ray epsilon-ten budget 1/(100u), 1 open central-tail theorem",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four formal cumulant second-next parity certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_formal_cumulant_second_next_parity_certificate.py",),
+        expected=(
+            "validated order-four formal cumulant second-next parity: 5 rows, 0 issues, 3 exact rows, 56 epsilon-eight audits, 7 second-next coefficients, 2 open analytic rows",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four second-next finite certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_formal_cumulant_second_next_parity_finite_certificate.py",),
+        expected=(
+            "validated order-four second-next finite bounds: 3600 Taylor blocks, 360 chunks, 7 signed coefficients, 0 issues",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four second-next asymptotic ray certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_formal_cumulant_second_next_parity_asymptotic_ray_certificate.py",),
+        expected=(
+            "validated order-four second-next asymptotic ray: 8 rows, 0 issues, 7 exact rows, 7 global coefficient bounds, 14 leading buffer gates, 4 new jet-remainder sign gates, 1 open exact-density remainder",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four exact cumulant complex-disk contract",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_exact_cumulant_complex_disk_contract.py",),
+        expected=(
+            "validated order-four exact cumulant complex-disk contract: 10 rows, 0 issues, 9 exact rows, 70 cumulant audits, 2 sufficient partition targets, 1 open central-tail theorem",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four exact cumulant formal tails",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_exact_cumulant_formal_tail_certificate.py",),
+        expected=(
+            "validated order-four exact cumulant formal tails: 8 rows, 0 issues, 7 exact rows, 31 polynomial orders, 2 closed formal tails, 3 open exact components",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four exact cumulant exact tails",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_exact_cumulant_exact_tail_certificate.py",),
+        expected=(
+            "validated order-four exact cumulant exact tails: 9 rows, 0 issues, 8 exact rows, 2 positive-coefficient polynomials, 2 closed exact tails, 1 open central residual",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four finite partition extension",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_exact_cumulant_partition_extension_finite_certificate.py",),
+        expected=(
+            "validated order-four finite partition extension: 8 rows, 0 issues, 7 exact rows, 4 partition orders, 78 scalar functions, 5400 partition blocks, 5430 shifted-jet blocks, 5 new jet caps",
+        ),
+        category="interval certificates",
+        slow=True,
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four exact cumulant central residual",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_exact_cumulant_central_residual_certificate.py",),
+        expected=(
+            "validated order-four exact cumulant central residual: 11 rows, 0 issues, 11 exact rows, 222 Bell terms, 2 central regimes, 4 inherited tails, 0 open partition components",
+        ),
+        category="exact theorem composition",
+        slow=True,
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four exact cumulant corridor theorem",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_exact_cumulant_corridor_theorem.py",),
+        expected=(
+            "validated order-four exact cumulant corridors: 8 rows, 0 issues, 7 exact rows, 7 global exact corridors, 2 strict reserve regimes, 1 open localized-curvature composition",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four finite exact-corridor curvature theorem",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_exact_corridor_localized_curvature_finite_certificate.py",),
+        expected=(
+            "validated order-four exact-corridor finite curvature: 7 rows, 0 issues, 6 exact rows, 20700 mode blocks, 41400 t-collar gates, 20700 positive localized blocks, 1 open asymptotic ray",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four exact-corridor curvature ray theorem",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_exact_corridor_localized_curvature_ray_certificate.py",),
+        expected=(
+            "validated order-four exact-corridor curvature ray: 8 rows, 0 issues, 8 exact rows, 7 normalized H boxes, 6 defect bounds, 5 localized gates, global corridor-to-curvature closed",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four lambda=-100 entry theorem",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_m100_entry_certificate.py",),
+        expected=(
+            "validated Jensen-window PF compound order-four lambda=-100 entry: 10 rows, 0 issues, 9 exact rows, 317 prefix margins, 1 analytic tail, 1 all-shift entry theorem, 1 open forward handoff",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four forward-flow reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_forward_flow_reduction.py",),
+        expected=(
+            "validated Jensen-window PF compound order-four forward flow: 8 rows, 0 issues, 7 exact rows, 3 exact identities, 2 cooperative flow lemmas, 1 maximum-principle reduction, 1 open spatial-tail bound",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Arb Xi lambda-zero order-four prefix certificate",
+        command=("work/rh_compute/scripts/check_arb_xi_lambda0_order4_prefix_certificate.py",),
+        expected=(
+            "validated Arb Xi lambda-zero order-four prefix: 507 coefficients, 501 positive H4 rows, 501 positive stable margins, 0 inconclusive, 0 issues",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four lambda-zero eventual positivity",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_lambda0_eventual_positivity_certificate.py",),
+        expected=(
+            "validated Jensen-window PF compound order-four lambda-zero eventual positivity: 8 rows, 0 issues, 7 exact rows, 7 symbolic coefficients, 501 finite prefix rows, 1 eventual theorem, 1 open effective splice",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF lambda-zero first-summand dominance transfer",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_lambda0_first_summand_dominance_transfer.py",),
+        expected=(
+            "validated lambda-zero first-summand dominance transfer: 7 rows, 0 issues, 6 exact rows, 1 lambda-zero dominance theorem, 1 order-four penalty transfer, 1 open curvature tail",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four eventual-tail forward reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_eventual_tail_forward_invariance_reduction.py",),
+        expected=(
+            "validated order-four eventual-tail forward invariance: 8 rows, 0 issues, 7 exact/input rows, 1 finite-confinement reduction, 1 conditional forward theorem, 1 open uniform tail",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four uniform-heat tail reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_uniform_heat_eventual_tail_reduction.py",),
+        expected=(
+            "validated order-four uniform-heat eventual tail: 7 rows, 0 issues, 6 exact/input rows, 7 symbolic coefficients, 1 conditional uniform transfer, 1 open heat-tilt theorem",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF uniform superpolynomial first-summand dominance",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_uniform_superpolynomial_first_summand_dominance.py",),
+        expected=(
+            "validated uniform superpolynomial first-summand dominance: 6 rows, 0 issues, 6 exact rows, 1 superpolynomial theorem, 1 local-difference theorem, 0 open rows",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF uniform first-summand heat-tilt asymptotic theorem",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_uniform_first_summand_heat_tilt_asymptotic_theorem.py",),
+        expected=(
+            "validated uniform first-summand heat tilt: 8 rows, 0 issues, 8 exact/published rows, 8 suitability coefficients, 7 Lambert derivative orders, 0 open rows",
+        ),
+        category="published theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-four uniform-heat forward invariance",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order4_uniform_heat_forward_invariance_certificate.py",),
+        expected=(
+            "validated order-four uniform-heat forward invariance: 9 rows, 0 issues, 9 ready rows, 1 uniform tail theorem, 1 forward theorem, 1 lambda-zero all-shift theorem, 0 open rows",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF order-four noncontiguous total-positivity transfer",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_order4_noncontiguous_total_positivity_transfer.py",),
+        expected=(
+            "validated order-four noncontiguous total-positivity transfer: 11 rows, 0 issues, 4 reversal orders, 240 solid-block maps, 1020 signed benchmark minors, 1 arbitrary-column order-four theorem, 1 fixed-order transfer theorem, 1 open order-five handoff",
+        ),
+        category="published theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-five uniform-tail and flow reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order5_uniform_tail_flow_reduction.py",),
+        expected=(
+            "validated order-five uniform tail and flow reduction: 12 rows, 0 issues, 12 suitability coefficients, 11 Lambert orders, 8 Newton coefficients, 120 determinant permutations, 1 uniform tail theorem, 1 cooperative flow theorem, 1 conditional forward theorem, 1 open lambda=-100 entry",
+        ),
+        category="exact theorem composition",
+        slow=True,
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-five lambda=-100 prefix",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order5_m100_prefix_certificate.py",),
+        expected=(
+            "validated order-five lambda=-100 prefix: 325 coefficients, 317 positive J5 rows, 317 positive relative margins, 317 positive H5 signs, 0 inconclusive, 1 open analytic tail",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-five lambda=-100 tail curvature reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order5_m100_tail_curvature_reduction.py",),
+        expected=(
+            "validated order-five lambda=-100 tail curvature reduction: 8 rows, 0 issues, 2 exact identities, 1 rational comparison, 1 conditional tail theorem, 1 open curvature target, cap 100/k^2 from k=321",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-five first-summand curvature bridge",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order5_first_summand_curvature_bridge.py",),
+        expected=(
+            "validated order-five first-summand curvature bridge: 8 rows, 0 issues, 2 positive floors, 1 full-kernel transfer, 5 scout rows, 1 open continuous target, budgets 37+63=100",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-five nested-curvature compact certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order5_nested_curvature_compact_certificate.py",),
+        expected=(
+            "validated order-five nested curvature compact certificate: 5 rows, 0 issues, 36 interval blocks, 2 positive stable layers, 1 compact curvature theorem, 1 open ray, largest scaled upper 2.202668",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-five nested-curvature finite ray",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order5_nested_curvature_finite_ray_certificate.py",),
+        expected=(
+            "validated order-five nested curvature finite-ray certificate: 5 rows, 0 issues, 100 extension tiles, 1850 exact-corridor blocks, 1 finite-ray theorem, 1 open asymptotic ray, largest scaled upper 11.9132",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-five nested-curvature asymptotic ray",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order5_nested_curvature_asymptotic_ray_certificate.py",),
+        expected=(
+            "validated order-five nested curvature asymptotic certificate: 6 rows, 0 issues, 1 normalized-H theorem, 1 stable-log majorant, 1 dimensionless interval theorem, 1 asymptotic curvature theorem, 0 open rows, scaled upper 9.15835",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-five lambda=-100 entry",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order5_m100_entry_certificate.py",),
+        expected=(
+            "validated order-five lambda=-100 entry certificate: 10 rows, 0 issues, 1 continuous curvature theorem, 1 complete scalar ceiling, 1 analytic tail theorem, 1 all-shift entry theorem, 0 open rows",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-five uniform-heat forward invariance",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order5_uniform_heat_forward_invariance_certificate.py",),
+        expected=(
+            "validated order-five uniform-heat forward invariance: 8 rows, 0 issues, 7 ready rows, 1 contiguous theorem, 1 arbitrary-column theorem, 1 open order-six handoff",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-six uniform-tail and flow reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order6_uniform_tail_flow_reduction.py",),
+        expected=(
+            "validated order-six uniform tail and flow reduction: 13 rows, 0 issues, 17 suitability coefficients, 16 Lambert orders, 10 Newton coefficients, 720 determinant permutations, 684 weighted monomials, 1 uniform signed tail theorem, 1 condensation recursion, 1 cooperative recursion, 1 conditional forward theorem, 1 open lambda=-100 entry",
+        ),
+        category="exact theorem composition",
+        slow=True,
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-six lambda=-100 prefix",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order6_m100_prefix_certificate.py",),
+        expected=(
+            "validated order-six lambda=-100 prefix: 327 coefficients, 317 positive relative H5 margins, 317 positive Q6 signs, 0 inconclusive, 39 repaired coefficients, 1 open analytic tail, weakest n=316 above 7/1000",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-six lambda=-100 tail curvature reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order6_m100_tail_curvature_reduction.py",),
+        expected=(
+            "validated order-six tail curvature reduction: 8 rows, 0 issues, 2 exact factorizations, 1 open curvature target",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF inverse-seventh-power first-summand dominance",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_first_summand_power7_dominance_extension.py",),
+        expected=(
+            "validated power-seven first-summand dominance: 6 rows, 0 issues, 11 positive gates, tail k>=316",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-six first/full curvature bridge",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order6_first_summand_curvature_bridge.py",),
+        expected=(
+            "validated order-six first/full curvature bridge: 8 rows, 0 issues, 1 full transfer, 1 open continuous target",
+        ),
+        category="exact theorem composition",
+        slow=True,
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-six high-cumulant corridor",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order6_high_cumulant_coarse_corridor.py",),
+        expected=(
+            "validated order-six high-cumulant corridor: 2 formal orders, 109 terms, 0 issues, 2 exact corridors",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-six nested-curvature compact certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order6_nested_curvature_compact_certificate.py",),
+        expected=(
+            "validated order-six nested compact certificate: 38 blocks, 0 issues, 1 compact theorem, 1 open ray",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-six nested-curvature finite ray",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order6_nested_curvature_finite_ray_certificate.py",),
+        expected=(
+            "validated order-six nested finite-ray certificate: 17999 ray blocks, 0 issues, 1 theorem, 1 open asymptotic ray",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-six nested-curvature asymptotic ray",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order6_nested_curvature_asymptotic_ray_certificate.py",),
+        expected=(
+            "validated order-six nested curvature asymptotic certificate: 7 rows, 0 issues, 2 normalized-H theorems, 1 dimensionless interval theorem, 1 asymptotic curvature theorem, 0 open rows, scaled upper 2.27683610696345567703247070312471784171958323101989922910682E+1",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-six lambda=-100 entry",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order6_m100_entry_certificate.py",),
+        expected=(
+            "validated order-six lambda=-100 entry certificate: 10 rows, 0 issues, 1 continuous curvature theorem, 1 complete scalar ceiling, 1 analytic tail theorem, 1 all-shift entry theorem, 0 open rows",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-six uniform-heat forward invariance",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order6_uniform_heat_forward_invariance_certificate.py",),
+        expected=(
+            "validated order-six uniform-heat forward invariance: 8 rows, 0 issues, 1 contiguous theorem, 1 arbitrary-column theorem, 1 open order-seven handoff",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF graded-kernel all-order Vandermonde lemma",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_graded_kernel_vandermonde_all_order_lemma.py",),
+        expected=(
+            "validated graded-kernel all-order Vandermonde lemma: 12 order rows, 46233 permutation stress cases, 169 coefficient-valuation cells, 1 all-fixed-order eventual signed-tail theorem, 0 issues",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-seven uniform-tail and flow reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order7_uniform_tail_flow_reduction.py",),
+        expected=(
+            "validated order-seven uniform tail and flow reduction: 9 rows, 0 issues, 1 universal-tail specialization, 1 condensation coordinate, 1 cooperative recursion, 1 conditional forward theorem, 1 lower-cone countermodel, 1 open lambda=-100 entry",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-seven lambda=-100 prefix",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order7_m100_prefix_certificate.py",),
+        expected=(
+            "validated order-seven lambda=-100 prefix: 327 coefficients, 317 positive Q6 values, 315 positive relative Q6 margins, 315 positive Q7 signs, 0 inconclusive, 12 repaired coefficients, 1 open analytic tail, weakest n=314 above 9/1000",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-seven lambda=-100 tail curvature reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order7_m100_tail_curvature_reduction.py",),
+        expected=(
+            "validated order-seven tail curvature reduction: 7 rows, 0 issues, 1 exact factorization, 1 exact curvature reduction, 1 positive comparison, 1 conditional tail theorem, 1 open curvature target",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF inverse-eighth-power rebalanced first-summand dominance",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_first_summand_power8_rebalanced_dominance_extension.py",),
+        expected=(
+            "validated power-eight rebalanced first-summand dominance: 7 rows, 14 positive gates, tail k>=300, 0 issues",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-seven first/full curvature bridge",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order7_first_summand_curvature_bridge.py",),
+        expected=(
+            "validated order-seven first/full curvature bridge: 9 rows, 0 issues, 1 fourth-gap floor theorem, 1 full transfer, 3 conditional theorems, 1 open continuous target, degree 102, 103 positive coefficients",
+        ),
+        category="exact theorem composition",
+        slow=True,
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-seven shifted-jet compact bridge",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order7_shifted_jet_t320_t1000_certificate.py",),
+        expected=(
+            "validated order-seven shifted-jet t=320..1000 certificate: 5 rows, 186 contiguous blocks, 11 shifts per anchor, 0 issues",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-seven nested-curvature compact certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order7_nested_curvature_compact_certificate.py",),
+        expected=(
+            "validated order-seven nested compact certificate: 82 blocks, 0 issues, 1 compact theorem, 1 open finite ray",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-seven high-cumulant coarse corridor",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order7_high_cumulant_coarse_corridor.py",),
+        expected=(
+            "validated order-seven high-cumulant corridor: 72 formal terms, 0 issues, 2 exact corridors",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-seven nested-curvature finite-ray certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order7_nested_curvature_finite_ray_certificate.py",),
+        expected=(
+            "validated order-seven nested finite-ray certificate: 17999 ray blocks, 0 issues, 1 theorem, 1 open asymptotic ray",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-seven nested-curvature asymptotic-ray certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order7_nested_curvature_asymptotic_ray_certificate.py",),
+        expected=(
+            "validated order-seven nested curvature asymptotic certificate: 7 rows, 0 issues, 2 normalized-H theorems, 1 dimensionless interval theorem, 1 asymptotic curvature theorem, 0 open rows",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-seven lambda=-100 entry",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order7_m100_entry_certificate.py",),
+        expected=(
+            "validated order-seven lambda=-100 entry certificate: 11 rows, 0 issues, 1 continuous curvature theorem, 1 complete scalar ceiling, 1 analytic tail theorem, 1 all-shift entry theorem, 0 open rows",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-seven uniform-heat forward invariance",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order7_uniform_heat_forward_invariance_certificate.py",),
+        expected=(
+            "validated order-seven uniform-heat forward invariance: 8 rows, 0 issues, 1 contiguous theorem, 1 arbitrary-column theorem, 1 open all-order handoff",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eight uniform-tail and flow reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order8_uniform_tail_flow_reduction.py",),
+        expected=(
+            "validated order-eight uniform tail and flow reduction: 9 rows, 0 issues, 1 universal-tail specialization, 1 condensation coordinate, 1 cooperative recursion, 1 conditional forward theorem, 1 lower-cone countermodel, 1 open lambda=-100 entry",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eight lambda=-100 prefix",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order8_m100_prefix_certificate.py",),
+        expected=(
+            "validated order-eight lambda=-100 prefix: 1257 coefficients, 1245 positive Q7 values, 1243 positive relative Q7 margins, 1243 positive Q8 signs, 0 inconclusive, 12 repaired coefficients, 1 open analytic tail, weakest n=1242 above 1/300",
+        ),
+        category="finite interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eight lambda=-100 tail-curvature reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order8_m100_tail_curvature_reduction.py",),
+        expected=(
+            "validated order-eight tail curvature reduction: 7 rows, 0 issues, 1 exact factorization, 1 exact curvature reduction, 1 positive comparison, 1 conditional tail theorem, 1 open curvature target",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF inverse-ninth-power first-summand dominance",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_first_summand_power9_rebalanced_dominance_extension.py",),
+        expected=(
+            "validated power-nine rebalanced first-summand dominance: 6 rows, 0 issues, 14 positive analytic gates, 1 dominance theorem",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eight first/full curvature bridge",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order8_first_summand_curvature_bridge.py",),
+        expected=(
+            "validated order-eight first/full curvature bridge: 9 rows, 0 issues, 1 fifth-gap floor theorem, 134 positive transfer coefficients, 1 full-kernel transfer theorem, 1 open continuous target",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eight high-cumulant coarse corridor",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order8_high_cumulant_coarse_corridor.py",),
+        expected=(
+            "validated order-eight high-cumulant corridor: 0 formal terms, 0 issues, 2 exact corridors",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eight shifted-jet certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order8_shifted_jet_t699_t999_certificate.py",),
+        expected=(
+            "validated order-eight shifted-jet certificate: 185 blocks, 0 issues, 1 continuous theorem, largest scaled upper 8.81335404534865833076786551392429128216127678108895244813038E+2, 1 open ray",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eight nested-curvature compact certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order8_nested_curvature_compact_certificate.py",),
+        expected=(
+            "validated order-eight nested compact certificate: 96 blocks, 0 issues, largest scaled upper 3.99455119863063431363867738935234812098029095541283895880362E+3, weakest U lower 1.22933158930953976688262799664500547709540427726036454298503E-4, 1 open finite ray",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eight nested-curvature finite-ray certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order8_nested_curvature_finite_ray_certificate.py",),
+        expected=(
+            "validated order-eight nested finite-ray certificate: 17999 ray blocks, 0 issues, 1 theorem, 1 open asymptotic ray",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eight nested-curvature asymptotic-ray certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order8_nested_curvature_asymptotic_ray_certificate.py",),
+        expected=(
+            "validated order-eight nested curvature asymptotic certificate: 7 rows, 0 issues, 2 normalized-H theorems, 1 dimensionless interval theorem, 1 asymptotic curvature theorem, 0 open rows, scaled upper 1.34489839907184243202209472656240124460170043090398255726938E+2",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eight lambda=-100 entry",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order8_m100_entry_certificate.py",),
+        expected=(
+            "validated order-eight lambda=-100 entry certificate: 11 rows, 0 issues, 1 continuous curvature theorem, 1 analytic tail theorem, 1 all-shift entry theorem, 0 open rows",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eight uniform-heat forward invariance",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order8_uniform_heat_forward_invariance_certificate.py",),
+        expected=(
+            "validated order-eight uniform-heat forward invariance: 8 rows, 0 issues, 1 contiguous theorem, 1 arbitrary-column theorem, 1 open all-order handoff",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-nine uniform-tail and flow reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order9_uniform_tail_flow_reduction.py",),
+        expected=(
+            "validated order-nine uniform tail and flow reduction: 9 rows, 0 issues, 1 universal-tail specialization, 1 condensation coordinate, 1 cooperative recursion, 1 conditional forward theorem, 1 lower-cone countermodel, 1 open lambda=-100 entry",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-nine lambda=-100 prefix",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order9_m100_prefix_certificate.py",),
+        expected=(
+            "validated order-nine lambda=-100 prefix: 1257 coefficients, 1243 positive Q8 values, 1241 positive relative Q8 margins, 1241 positive Q9 signs, 0 inconclusive, 38 repaired coefficients, 1 open analytic tail, weakest n=1240 above 1/250",
+        ),
+        category="finite interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-nine lambda=-100 tail-curvature reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order9_m100_tail_curvature_reduction.py",),
+        expected=(
+            "validated order-nine tail curvature reduction: 7 rows, 0 issues, 1 exact factorization, 1 exact curvature reduction, 1 positive comparison, 1 conditional tail theorem, 1 open curvature target",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-nine first/full curvature bridge",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order9_first_summand_curvature_bridge.py",),
+        expected=(
+            "validated order-nine first/full curvature bridge: 10 rows, 0 issues, 1 sixth-gap floor theorem, 169 positive transfer coefficients, 1 full-kernel transfer theorem, 1 open continuous target, 2 finite splice indices",
+        ),
+        category="exact theorem composition",
+        slow=True,
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-nine high-cumulant coarse corridor",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order9_high_cumulant_coarse_corridor.py",),
+        expected=(
+            "validated order-nine high-cumulant corridor: 0 formal terms, 0 issues, 2 exact corridors",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-nine exact-point H0-H8 cache",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order9_shifted_point_h0_h8_cache.py",),
+        expected=(
+            "validated order-nine exact-point H0-H8 cache: 8929 rows, 0 issues",
+        ),
+        category="finite interval certificates",
+        slow=True,
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-nine localized lower bridge",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order9_localized_lower_bridge_certificate.py",),
+        expected=(
+            "validated order-nine localized lower bridge: 279 root segments, 874 accepted blocks, 0 issues, largest scaled upper 4.19424425522037111044561248832644227467685288026319528153785E+3",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-nine nested-curvature compact certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order9_nested_curvature_compact_certificate.py",),
+        expected=(
+            "validated order-nine nested compact certificate: 108 blocks, 0 issues, largest scaled upper 4.19918548221032914747349727361016012002522663395440335471778E+3, weakest V lower 1.43232298117533817321514966026794097632441289481887521956705E-4, 2 open handoff ranges",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-nine nested-curvature finite-ray certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order9_nested_curvature_finite_ray_certificate.py",),
+        expected=(
+            "validated order-nine finite-ray certificate: 17999 blocks, 0 issues, largest scaled upper 2.17882197094171936230311013389392316198614992290990750440229E+3, weakest V lower 5.39596935966714165720214930394256250853232758887469547152339E+0, 1 open asymptotic ray",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-nine nested-curvature asymptotic-ray certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order9_nested_curvature_asymptotic_ray_certificate.py",),
+        expected=(
+            "validated order-nine asymptotic-ray certificate: 0 issues, scaled upper 3.24905922088046558201313018798812324136265244865916789195364E+2<500<4200, 6 positive stable coordinates, 1 global above-5700 composition",
+        ),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-nine global first-summand curvature",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order9_first_summand_curvature_certificate.py",),
+        expected=(
+            "validated global order-nine first-summand curvature: 0 issues, largest scaled upper 4.19918548221032914747349727361016012002522663395440335471778E+3",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-nine finite endpoint splice",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order9_m100_finite_splice_certificate.py",),
+        expected=(
+            "validated order-nine finite splice: 1259 coefficients, 0 issues, 2 splice rows, 1243 combined positive signs",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-nine lambda=-100 entry",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order9_m100_entry_certificate.py",),
+        expected=(
+            "validated all-shift signed order-nine entry at lambda=-100: 0 issues",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-nine uniform-heat forward invariance",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order9_uniform_heat_forward_invariance_certificate.py",),
+        expected=(
+            "validated signed contiguous and arbitrary-column order nine on -100<=lambda<=0: 0 issues",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-ten first/full curvature bridge",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order10_first_summand_curvature_bridge.py",),
+        expected=("validated order-ten first/full curvature bridge:", "scaled transfer", "0 issues"),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-ten high-cumulant corridor",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order10_high_cumulant_coarse_corridor.py",),
+        expected=("validated order-ten high-cumulant corridor:", "0 issues"),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-ten compact H2-H24 cache",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order10_compact_h2_h24_unit_cache.py",),
+        expected=("validated order-ten compact H2-H24 cache: 32336 contiguous unit tiles, 0 issues",),
+        category="promoted finite evidence",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-ten sparse exact H0-H23 cache",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order10_compact_sparse_point_h0_h23_cache.py",),
+        expected=("validated order-ten sparse exact H0-H23 cache: 4042 step-eight points, 0 issues",),
+        category="promoted finite evidence",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-ten propagated H0-H7 cache",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order10_compact_propagated_point_h0_h7_cache.py",),
+        expected=("validated order-ten propagated H0-H7 cache: 32335 integer-grid points, 0 issues",),
+        category="promoted finite evidence",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-ten localized lower bridge",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order10_localized_lower_bridge_certificate.py",),
+        expected=("validated order-ten localized lower bridge: 279 segments, 9,996 contiguous blocks, 0 issues",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-ten compact curvature certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order10_nested_curvature_compact_certificate.py",),
+        expected=("validated order-ten compact curvature certificate: 18310 contiguous blocks, 0 issues",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-ten finite-ray curvature certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order10_nested_curvature_finite_ray_certificate.py",),
+        expected=("validated order-ten finite ray: 17999 blocks, 0 issues",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-ten asymptotic-ray curvature certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order10_nested_curvature_asymptotic_ray_certificate.py",),
+        expected=("validated order-ten asymptotic ray: 0 issues",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-ten global first-summand curvature",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order10_first_summand_curvature_certificate.py",),
+        expected=("validated global order-ten first-summand curvature certificate: 1 half-line first-summand theorem, 0 full-kernel claims, 0 RH claims",),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-ten endpoint-tail curvature reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order10_m100_tail_curvature_reduction.py",),
+        expected=("validated order-ten endpoint-tail curvature reduction: 10 rows, 0 issues",),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-ten finite endpoint splice",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order10_m100_finite_splice_certificate.py",),
+        expected=("validated order-ten finite splice:", "0 issues"),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-ten delayed lambda=-100 entry",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order10_m100_delayed_entry_certificate.py",),
+        expected=("validated delayed signed order-ten entry at lambda=-100: 0 issues",),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF delayed cooperative heat-tail lemma",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_delayed_cooperative_heat_tail_lemma.py",),
+        expected=("validated delayed cooperative heat-tail lemma: 1 shifted theorem, order-ten and order-eleven specializations, 0 issues",),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-ten lambda-zero prefix",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order10_lambda0_prefix_certificate.py",),
+        expected=("validated order-ten lambda-zero prefix: 22 coefficients, 4 positive Q10 rows, 4 source overlaps, 0 issues",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-ten lambda-zero completion",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order10_lambda0_completion_certificate.py",),
+        expected=("validated order-ten lambda-zero completion: all shifts, arbitrary columns through order ten, 0 issues",),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eleven lambda=-100 prefix",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order11_m100_prefix_certificate.py",),
+        expected=("validated order-eleven lambda=-100 prefix: 1263 coefficients, 1243 positive Q11 rows, 5 direct audits, 0 issues",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eleven lambda-zero prefix",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order11_lambda0_prefix_certificate.py",),
+        expected=("validated order-eleven lambda-zero prefix: 24 coefficients, 4 positive Q11 rows, 4 source overlaps, 0 issues",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eleven first-summand point scout",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order11_first_summand_point_scout.py",),
+        expected=("validated order-eleven first-summand point scout: 8 points, 72 positive coordinates", "0 issues"),
+        category="finite theorem-search diagnostics",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eleven localized final-gap core",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order11_localized_final_gap_interval_core.py",),
+        expected=("validated order-eleven localized final-gap core: H24 derivative budget, 9 positive point coordinates, 9 positive localized coordinates, 0 issues",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eleven lower sparse exact H0-H23 source",
+        command=(
+            "work/rh_compute/scripts/check_jensen_window_pf_compound_order11_lower_sparse_point_h0_h23_cache.py",
+            "--require-complete",
+        ),
+        expected=("validated order-eleven lower sparse exact H0-H23 cache (complete): 2233/2233 rows, 0 issues",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eleven sparse H23 propagation",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order11_sparse_h0_h23_propagation.py",),
+        expected=("validated order-eleven sparse H23 propagation: 5 polynomial translations + 5 H24 remainder enclosures, 0 issues",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eleven shifted Taylor-model algebra",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order11_shifted_taylor_model_algebra.py",),
+        expected=("validated order-eleven shifted Taylor-model algebra: 9 products + 81 stable-log enclosures, 0 issues",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eleven sparse H23 lower-bridge pilots",
+        command=(
+            "work/rh_compute/scripts/check_jensen_window_pf_compound_order11_sparse_h23_lower_bridge_pilot.py",
+            "work/rh_compute/results/jensen_window_pf_compound_order11_sparse_h23_lower_bridge_pilot_t1252.json",
+            "work/rh_compute/results/jensen_window_pf_compound_order11_sparse_h23_lower_bridge_pilot_t1500.json",
+            "work/rh_compute/results/jensen_window_pf_compound_order11_sparse_h23_lower_bridge_pilot_t2200.json",
+            "work/rh_compute/results/jensen_window_pf_compound_order11_sparse_h23_lower_bridge_pilot_t3000.json",
+        ),
+        expected=("validated order-eleven sparse H23 lower-bridge pilots: 4 cells, 8 quarter blocks, 0 issues",),
+        category="finite theorem-search diagnostics",
+    ),
+    GateSpec(
+        name="Jensen-window PF compound order-eleven curvature bridge target",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_compound_order11_curvature_bridge_target.py",),
+        expected=("validated order-eleven curvature bridge target: 18 envelope rows, scaled transfer", "<37, 0 issues"),
+        category="open theorem target hygiene",
+    ),
+    GateSpec(
+        name="Jensen-window PF all-order endpoint-to-heat reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_all_order_endpoint_heat_reduction.py",),
+        expected=(
+            "validated all-order endpoint-to-heat reduction: 13 rows, 0 issues, 4 symbolic orders, 255 parity checks, 1 endpoint/interval equivalence, 1 arbitrary-column consequence, 1 rejected m>=10 endpoint hierarchy, 1 separate Jensen/PF bridge",
+        ),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF endpoint deep-Schur coordinate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_endpoint_deep_schur_coordinate.py",),
+        expected=(
+            "validated endpoint deep-Schur coordinate: 14 rows, 0 issues, 4096 rectangle checks, 984 arbitrary-column checks, 1023 inverse checks, 1 rigorous endpoint PF_3 counterexample, 4 negative deep rectangles, 1 rejected m>=10 rectangle hierarchy, 1 separate Jensen/PF bridge",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF deep-Schur Toda/boundary gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_deep_schur_toda_boundary_gate.py",),
+        expected=(
+            "validated deep-Schur Toda/boundary gate: 15 rows, 0 issues, 4 symbolic Toda checks, 251 boundary checks, 138 strict-Schur checks, 1 exact full-PF Jensen counterexample, 4 negative order-ten rectangles, 1 rejected rectangle hierarchy, 1 Xi-specific bridge",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF endpoint order-ten counterexample",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_endpoint_order10_counterexample.py",),
+        expected=(
+            "validated endpoint order-ten counterexample: 8 rows, 0 issues, 5 direct checks, 4 negative deep rectangles, 1237 positive scanned rows, 0 inconclusive, 1 rejected all-order endpoint hierarchy, 1 surviving Xi/Phi bridge target",
+        ),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF order-moment transport fit gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_order_moment_transport_fit_gate.py",),
+        expected=(
+            "validated Jensen-window PF order-moment transport fit gate: 7 rows, 0 issues, 1 exact reparametrization, 1 positive origin derivative obstruction, 1 orientation mismatch, 1 forbidden promotion, 1 open signed-transport handoff",
+        ),
+        category="non-promotion guards",
     ),
     GateSpec(
         name="Jensen-window PF structural ansatz matrix",
@@ -449,6 +1424,30 @@ GATES: tuple[GateSpec, ...] = (
         category="finite theorem-search diagnostics",
     ),
     GateSpec(
+        name="Jensen-window PF multiplier complete-monotonicity frontier scout",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_multiplier_complete_monotonicity_frontier_scout.py",),
+        expected=("validated Jensen-window PF multiplier complete-monotonicity frontier scout: 7980 positive intervals, 0 inconclusive, orders 0..55, 5 lambdas, 0 issues",),
+        category="finite theorem-search diagnostics",
+    ),
+    GateSpec(
+        name="Jensen-window PF multiplier Hausdorff-uniqueness bridge",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_multiplier_hausdorff_uniqueness_bridge.py",),
+        expected=("validated Jensen-window PF multiplier Hausdorff-uniqueness bridge: 10 rows, 0 issues, 1 Hausdorff measure theorem, 1 unit-atomic characterization, 1 interpolation guard, 1 open recovery handoff",),
+        category="exact structural lemmas",
+    ),
+    GateSpec(
+        name="Jensen-window PF multiplier leading-atom bound certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_multiplier_leading_atom_bound_certificate.py",),
+        expected=("validated Jensen-window PF multiplier leading-atom bound certificate: 8 rows, 0 issues, 56 difference orders, beta6 in (4.863538496,4.863538497), alpha_min>4.863538496, N(11/2)<=1, 1 open existence handoff",),
+        category="interval theorem certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF multiplier unit-atomic obstruction certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_multiplier_unit_atomic_obstruction_certificate.py",),
+        expected=("validated Jensen-window PF multiplier unit-atomic obstruction certificate: 8 rows, 0 issues, 1 atom cutoff, 1 ratio cap, 1 unit-atomic route ruled out, 0 open requirements",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
         name="Jensen-window PF heat-flow Jensen hierarchy lemma",
         command=("work/rh_compute/scripts/check_jensen_window_pf_heat_flow_jensen_hierarchy_lemma.py",),
         expected=("validated Jensen-window PF heat-flow Jensen hierarchy lemma: 9 rows, 0 issues, 5 exact hierarchy identities, 2 cubic countermodels, 1 open higher-minor handoff, 0 ready-to-apply rows",),
@@ -551,15 +1550,82 @@ GATES: tuple[GateSpec, ...] = (
         category="open theorem target hygiene",
     ),
     GateSpec(
+        name="Jensen-window PF Newman Polymath-15 oscillatory zeta handoff theorem",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_oscillatory_zeta_handoff_theorem.py",),
+        expected=("validated Newman Polymath-15 oscillatory zeta handoff theorem: 12 rows, 0 issues, 11 exponent pairs, 10 exact transitions, threshold 4911678521/1933561194, 1 zeta-jet handoff, 1 exact-H asymptotic theorem",),
+        category="asymptotic theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 cancellation/zero-free wall gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_cancellation_zero_free_wall_gate.py",),
+        expected=("validated Newman Polymath-15 cancellation/zero-free wall gate: 10 rows, 0 issues, 11 frontier points, 1 exact c_* maximum, 1 conditional c=2 handoff, 1 inner-wall nonpromotion gate, 1 open Wronskian handoff",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 Gaussian/Legendre duality gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_gaussian_legendre_duality_gate.py",),
+        expected=("validated Newman Polymath-15 Gaussian/Legendre duality gate: 10 rows, 0 issues, 1 exact Gaussian identity, 1 exact Legendre equivalence, 1 c_* equality point, 1 c=2 deficit, 1 nonpromotion gate",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 ANTEDB beta-frontier audit",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_antedb_beta_frontier_audit.py",),
+        expected=("validated Newman Polymath-15 ANTEDB beta-frontier audit: 10 rows, 0 issues, 6 post-2023 pairs, 1 exact current-hull maximum, 1 direct-beta contact, 1 unchanged c=2 deficit, 1 nonpromotion gate",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 Lambda 0.1965 provenance audit",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_lambda01965_provenance_audit.py",),
+        expected=("validated Newman Polymath-15 Lambda 0.1965 provenance audit: 10 rows, 0 issues, 1 published interval, 22 portable passes, 3 compiled-package boundaries, 1 candidate nonpromotion gate",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 critical scaled coercivity target",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_critical_scaled_coercivity_target.py",),
+        expected=("validated Newman Polymath-15 critical scaled coercivity target: 10 rows, 0 issues, 2 exact curvature identities, 1 published endpoint correction, 1 refined remainder, 1 open coercivity target",),
+        category="open theorem target hygiene",
+    ),
+    GateSpec(
         name="Jensen-window PF Newman correlation hierarchy Gaussian-mixture gate",
         command=("work/rh_compute/scripts/check_jensen_window_pf_newman_correlation_hierarchy_gaussian_mixture_gate.py",),
         expected=("validated Jensen-window PF Newman correlation hierarchy Gaussian-mixture gate: 11 rows, 0 issues, 3 exact hierarchy identities, 1 universal boundary-contact signature, 1 Gaussian-mixture sufficient theorem, 2 numerical diagnostics, 1 exact super-Gaussian tail theorem, 2 non-promotion gates, 1 tail-compatible handoff",),
         category="non-promotion guards",
     ),
     GateSpec(
+        name="Jensen-window PF Newman positive-time strong-log-concavity gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_positive_time_strong_logconcavity_gate.py",),
+        expected=("validated Jensen-window PF Newman positive-time strong-log-concavity gate: 9 rows, 0 issues, 1 published input, 2 exact curvature/admissibility theorems, 1 Arb threshold certificate, 1 Prekopa correlation theorem, 1 square-transform identity, 1 Xi-specific nonpromotion gate, 1 target-window margin, 1 weighted-hierarchy handoff",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman weighted strong-log-concavity countermodel gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_weighted_strong_logconcavity_countermodel_gate.py",),
+        expected=("validated Jensen-window PF Newman weighted strong-log-concavity countermodel gate: 9 rows, 0 issues, 1 exact strong-curvature bound, 1 exact root-variable concavity theorem, 1 explicit theta-tail admissible kernel, 1 Gaussian endpoint identity, 1 exact endpoint witness, 1 Arb theta-tail witness, 1 weighted-correlation countermodel, 1 Xi-specific handoff",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman strict-Laguerre monotonicity scout",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_strict_laguerre_monotonicity_scout.py",),
+        expected=("validated Jensen-window PF Newman strict-Laguerre monotonicity scout: 9 rows, 0 issues, 5 exact target identities, 2 exact classical-route obstructions, 6 dense time rows, 20 high-frequency rows, 1 theta-tail nonpromotion guard, 1 Arb Xi monotonicity rejection",),
+        category="non-promotion guards",
+        slow=True,
+    ),
+    GateSpec(
         name="Jensen-window PF Newman theta-summand spectral-square gate",
         command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_summand_spectral_square_gate.py",),
         expected=("validated Jensen-window PF Newman theta-summand spectral-square gate: 12 rows, 0 issues, 7 exact transform identities, 1 xi-reconstruction non-promotion gate, 2 exact finite-truncation theorems, 1 numerical sign diagnostic, 1 infinite-cancellation handoff",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta/Bessel higher-shift regularization gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_bessel_higher_shift_regularization_gate.py",),
+        expected=("validated Jensen-window PF Newman theta/Bessel higher-shift regularization gate: 9 rows, 0 issues, 3 exact expansion identities, 1 coefficient sign theorem, 1 fixed-block Bessel theorem, 3 spectral non-promotion gates, 1 coupled modular handoff",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta cell-renormalization gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_cell_renormalization_gate.py",),
+        expected=("validated Jensen-window PF Newman theta cell-renormalization gate: 10 rows, 0 issues, 4 exact kernel/transform identities, 3 exact convergence/sign theorems, 1 coupled Laguerre identity, 1 positive-time obstruction, 1 modular handoff",),
         category="non-promotion guards",
     ),
     GateSpec(
@@ -1128,6 +2194,12 @@ GATES: tuple[GateSpec, ...] = (
         category="open theorem target hygiene",
     ),
     GateSpec(
+        name="Jensen-window PF negative-lambda scaled-curvature continuous bridge",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_scaled_curvature_continuous_bridge.py",),
+        expected=("validated Jensen-window PF negative-lambda scaled-curvature continuous bridge: 10 rows, 0 issues, 16074 compact blocks, 318 prefix gaps, 1 analytic ray, 1 all-k scaled-curvature theorem, 0 open requirements",),
+        category="interval theorem certificates",
+    ),
+    GateSpec(
         name="Jensen-window PF negative-lambda scaled-curvature log-ceiling bridge",
         command=("work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_scaled_curvature_log_ceiling_bridge.py",),
         expected=("validated Jensen-window PF negative-lambda scaled-curvature log-ceiling bridge: 8 rows, 0 issues, 894 scaled-ceiling rows, 894 scaled-log-corridor rows, 894 ceiling-dominance rows, 0 ready-to-apply rows",),
@@ -1404,6 +2476,18 @@ GATES: tuple[GateSpec, ...] = (
         command=("work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.py",),
         expected=("validated Jensen-window PF negative-lambda zeta-specific raw-corridor target: 9 rows, 0 issues, 2 live routes, 2 rejected shortcuts, 0 ready-to-apply rows",),
         category="open theorem target hygiene",
+    ),
+    GateSpec(
+        name="Jensen-window PF negative-lambda -100 raw-corridor certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_m100_raw_corridor_certificate.py",),
+        expected=("validated Jensen-window PF negative-lambda -100 raw-corridor certificate: 6 rows, 0 issues, 2 theorem inputs, 1 raw-corridor theorem, 0 open requirements",),
+        category="exact theorem composition",
+    ),
+    GateSpec(
+        name="Jensen-window PF negative-lambda -100 adaptive-defect certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_m100_adaptive_defect_certificate.py",),
+        expected=("validated Jensen-window PF negative-lambda -100 adaptive-defect certificate: 8 rows, 0 issues, 2 theorem inputs, 4 defect conclusions, 0 open requirements",),
+        category="exact theorem composition",
     ),
     GateSpec(
         name="Jensen-window PF monotone contraction stress",

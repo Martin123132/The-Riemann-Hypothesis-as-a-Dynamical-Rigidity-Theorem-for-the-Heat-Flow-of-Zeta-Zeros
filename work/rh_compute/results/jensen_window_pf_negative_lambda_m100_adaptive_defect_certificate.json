@@ -1,0 +1,86 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_m100_adaptive_defect_certificate.py",
+  "date": "2026-07-11",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_m100_adaptive_defect_certificate.py",
+  "kind": "jensen_window_pf_negative_lambda_m100_adaptive_defect_certificate",
+  "proof_boundary": "This artifact proves the all-k defect cone, defect monotonicity, exact scaled-defect cone, and scaled-defect growth at lambda=-100. It does not prove the stronger simultaneous lambda=-25,-50,-100 target, PF-infinity, the all-order Jensen bridge, RH, or Lambda <= 0.",
+  "rows": [
+    {
+      "claim": "Introduce the raw ratio, contraction, defect, and scaled defect.",
+      "formula": "x_k=((2*k-1)/(2*k+1))*R_k, d_k=1-x_k, s_k=((2*k+1)/2)*d_k",
+      "id": "m100adc_01_defect_coordinates",
+      "proof_boundary": "Exact coordinate change only.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "Full lambda=-100 ratio-cone entry supplies both walls and the adjacent-k wall.",
+      "formula": "(2*k-1)/(2*k+1)<=x_k<=1 and x_(k+1)>=x_k for every k>=1",
+      "id": "m100adc_02_full_cone_input",
+      "proof_boundary": "Uses the existing full ratio-cone theorem at one heat parameter.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The lambda=-100 raw-corridor theorem supplies both adjacent raw-ratio walls.",
+      "formula": "((2*k-1)*(2*k+3)/(2*k+1)^2)*R_k<=R_(k+1)<=(2+(2*k-1)*R_k)/(2*k+1)",
+      "id": "m100adc_03_raw_corridor_input",
+      "proof_boundary": "Uses the existing all-k raw-corridor theorem at lambda=-100.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The two pointwise cone walls are exactly the required defect bounds.",
+      "formula": "0<=d_k<=2/(2*k+1) for every k>=1",
+      "id": "m100adc_04_defect_cone",
+      "proof_boundary": "All-k defect cone at lambda=-100.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_conclusion"
+    },
+    {
+      "claim": "The adjacent contraction wall is exactly decreasing defect.",
+      "formula": "d_(k+1)<=d_k for every k>=1",
+      "id": "m100adc_05_defect_monotonicity",
+      "proof_boundary": "All-k monotone defect bridge at lambda=-100.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_conclusion"
+    },
+    {
+      "claim": "Scaling the defect cone gives the exact adaptive scaled-defect cone.",
+      "formula": "0<=s_k<=1 for every k>=1",
+      "id": "m100adc_06_scaled_defect_cone",
+      "proof_boundary": "All-k exact scaled-defect cone at lambda=-100.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_conclusion"
+    },
+    {
+      "claim": "The upper raw-corridor wall is exactly increasing scaled defect.",
+      "formula": "s_(k+1)>=s_k for every k>=1",
+      "id": "m100adc_07_scaled_defect_growth",
+      "proof_boundary": "All-k scaled-defect growth at lambda=-100.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_conclusion"
+    },
+    {
+      "claim": "The lambda=-100 theorem discharges the defect-tail and adaptive-defect inputs needed by the one-entry-parameter cone route.",
+      "formula": "lambda=-100: defect tail closed from k=1; adaptive exact cone and monotone bridge closed from k=1",
+      "id": "m100adc_08_parameter_specific_closure",
+      "proof_boundary": "The stronger simultaneous theorem at lambda=-25,-50,-100 is not proved and is not needed for the established lambda=-100 entry route.",
+      "readiness": "ready_to_apply",
+      "role": "parameter_specific_closure"
+    }
+  ],
+  "source_adaptive_target": "outputs/jensen_window_pf_negative_lambda_adaptive_scaled_defect_target.md",
+  "source_defect_tail_target": "outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md",
+  "source_full_cone": "work/rh_compute/results/jensen_window_pf_negative_lambda_m100_full_cone_entry_certificate.json",
+  "source_raw_corridor": "work/rh_compute/results/jensen_window_pf_negative_lambda_m100_raw_corridor_certificate.json",
+  "status": "exact interval-analytic adaptive-defect theorem at lambda=-100",
+  "summary": {
+    "certificate_rows": 8,
+    "defect_conclusion_rows": 4,
+    "open_requirements": 0,
+    "parameter_specific_closure_rows": 1,
+    "ready_to_apply_rows": 7,
+    "theorem_input_rows": 2
+  }
+}

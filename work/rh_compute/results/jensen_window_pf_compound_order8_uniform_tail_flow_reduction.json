@@ -1,0 +1,346 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order8_uniform_tail_flow_reduction.py",
+  "countermodel": {
+    "Q6_n2": "1/148045794139338685651353600000000",
+    "Q7_log_concavity_margin": "-463/10246317406459624992735028091299392073078206541205704645017600000000000000000000000",
+    "Q7_values": [
+      "1/148045794139338685651353600000000",
+      "1/1280394777025250130271722799104000000000",
+      "137/1412458352598425929422606207811584000000000000000"
+    ],
+    "Q8_n0": "-463/69210459277322870541707704182767616000000000000000",
+    "conclusion": "strict signed contiguous layers through order seven do not imply order eight",
+    "condensation_residual": "0",
+    "sequence": [
+      "1",
+      "1",
+      "1/2",
+      "1/6",
+      "1/24",
+      "1/120",
+      "1/720",
+      "1/5040",
+      "1/40320",
+      "1/362880",
+      "1/3628800",
+      "1/39916800",
+      "1/479001600",
+      "1/6227020800",
+      "1/87120000000"
+    ],
+    "strict_signed_lower_layers": {
+      "1": [
+        "1",
+        "1",
+        "1/2",
+        "1/6",
+        "1/24",
+        "1/120",
+        "1/720",
+        "1/5040",
+        "1/40320",
+        "1/362880",
+        "1/3628800",
+        "1/39916800",
+        "1/479001600",
+        "1/6227020800",
+        "1/87120000000"
+      ],
+      "2": [
+        "1/2",
+        "1/12",
+        "1/144",
+        "1/2880",
+        "1/86400",
+        "1/3628800",
+        "1/203212800",
+        "1/14631321600",
+        "1/1316818944000",
+        "1/144850083840000",
+        "1/19120211066880000",
+        "1/2982752926433280000",
+        "1217/666458856999936000000000"
+      ],
+      "3": [
+        "1/144",
+        "1/8640",
+        "1/1036800",
+        "1/217728000",
+        "1/73156608000",
+        "1/36870930432000",
+        "1/26547069911040000",
+        "1/26281599211929600000",
+        "1/34691710959747072000000",
+        "1/59530976006925975552000000",
+        "5167/638469717674281087795200000000000"
+      ],
+      "4": [
+        "1/1036800",
+        "1/870912000",
+        "1/1463132160000",
+        "1/4424511651840000",
+        "1/22299538725273600000",
+        "1/176612346704166912000000",
+        "1/2098154678845502914560000000",
+        "1/36004334288988830013849600000000",
+        "361/386146485249405201898536960000000000000"
+      ],
+      "5": [
+        "1/1463132160000",
+        "1/22122558259200000",
+        "1/668986161758208000000",
+        "1/37088592807875051520000000",
+        "1/3524899860460444896460800000000",
+        "1/544385534449511109809405952000000000",
+        "1/88462649348045555344028467200000000000000"
+      ],
+      "6": [
+        "1/668986161758208000000",
+        "1/222531556847250309120000000",
+        "1/148045794139338685651353600000000",
+        "1/182913539575035732895960399872000000000",
+        "31/88278647037401620588912887988224000000000000000"
+      ],
+      "7": [
+        "1/148045794139338685651353600000000",
+        "1/1280394777025250130271722799104000000000",
+        "137/1412458352598425929422606207811584000000000000000"
+      ]
+    }
+  },
+  "date": "2026-07-13",
+  "exact": {
+    "affine_derivative": "Q_(8,n)'=(4*n+58)*delta(Q_(8,n))",
+    "conditional_arbitrary_columns": "completed signed contiguous layers through order eight imply every arbitrary-column signed layer through order eight",
+    "conditional_forward": "[Q_(8,n)(-100)>0 for all n] => [Q_(8,n)(lambda)>0 for all n and -100<=lambda<=0]",
+    "cooperative_flow": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n=(4*n+58)*Q_(7,n)/Q_(7,n+1)>0, b_n=((4*n+58)/(4*n+54))*(log Q_(7,n+1))'",
+    "entry_equivalence": "Q_(8,n)>0 iff Q_(7,n+1)^2>Q_(7,n)*Q_(7,n+2)",
+    "leading_term": "det K=33664847019245568000*G_2^28*h^28+o(h^28)",
+    "open_entry": "Q_(8,n)(-100)>0 for every n>=0, equivalently strict log-concavity of Q_(7,n)(-100)",
+    "order8_orientation": "epsilon_8=1, Q_(8,n)=H_(8,n)",
+    "signed_condensation": "Q_(8,n)*Q_(6,n+2)=Q_(7,n+1)^2-Q_(7,n)*Q_(7,n+2)",
+    "signed_coordinate": "Q_(m,n)=epsilon_m*H_(m,n), epsilon_m=(-1)^binom(m,2)",
+    "signed_leading_term": "Q_8=positive_scale*(33664847019245568000*G_2^28*h^28+o(h^28))",
+    "uniform_eventual_tail": "there exists N_8 such that Q_(8,n)(lambda)>0 for every n>=N_8 and -100<=lambda<=0",
+    "variation_of_constants": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order8_uniform_tail_flow_reduction.py",
+  "kind": "jensen_window_pf_compound_order8_uniform_tail_flow_reduction",
+  "proof_boundary": "This artifact proves the signed order-eight eventual tail, exact entry coordinate, cooperative flow, and conditional forward theorem. It does not prove endpoint entry, full order-eight invariance, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The completed signed layer through fixed order seven supplies the positive lower cone for order eight.",
+      "diagnostics": null,
+      "formula": "Q_(7,n)(lambda)=-H_(7,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+      "id": "co8utfr_01_order7_input",
+      "proof_boundary": "Completed fixed-order input only; no order-eight sign is imported.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The all-fixed-order Vandermonde theorem supplies a uniform eventual signed order-eight tail.",
+      "diagnostics": null,
+      "formula": "Q_8=positive_scale*(33664847019245568000*G_2^28*h^28+o(h^28)); there exists N_8 such that Q_(8,n)(lambda)>0 for every n>=N_8 and -100<=lambda<=0",
+      "id": "co8utfr_02_eventual_tail",
+      "proof_boundary": "Non-effective tail; the threshold may depend on order eight.",
+      "readiness": "ready_to_apply",
+      "role": "exact_published_composition"
+    },
+    {
+      "claim": "Signed order-eight entry is strict log-concavity of the completed positive Q_7 sequence.",
+      "diagnostics": null,
+      "formula": "Q_(8,n)*Q_(6,n+2)=Q_(7,n+1)^2-Q_(7,n)*Q_(7,n+2); Q_(8,n)>0 iff Q_(7,n+1)^2>Q_(7,n)*Q_(7,n+2)",
+      "id": "co8utfr_03_entry_coordinate",
+      "proof_boundary": "Exact signed Desnanot-Jacobi specialization only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The affine Hankel heat derivative specializes with coefficient 4n+58.",
+      "diagnostics": null,
+      "formula": "Q_(8,n)'=(4*n+58)*delta(Q_(8,n))",
+      "id": "co8utfr_04_affine_heat",
+      "proof_boundary": "General determinant identity specialized at m=8.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The signed order-eight heat flow is cooperative throughout the completed order-seven cone.",
+      "diagnostics": null,
+      "formula": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n=(4*n+58)*Q_(7,n)/Q_(7,n+1)>0, b_n=((4*n+58)/(4*n+54))*(log Q_(7,n+1))'",
+      "id": "co8utfr_05_cooperative_flow",
+      "proof_boundary": "The off-diagonal coefficient uses only Q_7>0.",
+      "readiness": "ready_to_apply",
+      "role": "exact_forward_lemma"
+    },
+    {
+      "claim": "All-shift lambda=-100 entry would complete signed contiguous order eight through lambda zero.",
+      "diagnostics": null,
+      "formula": "[Q_(8,n)(-100)>0 for all n] => [Q_(8,n)(lambda)>0 for all n and -100<=lambda<=0]; Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)",
+      "id": "co8utfr_06_conditional_forward",
+      "proof_boundary": "Conditional only on the explicit endpoint theorem.",
+      "readiness": "conditional_on_open_input",
+      "role": "exact_conditional_theorem"
+    },
+    {
+      "claim": "The fixed-order initial-minor theorem would then transfer order eight to arbitrary columns.",
+      "diagnostics": null,
+      "formula": "completed signed contiguous layers through order eight imply every arbitrary-column signed layer through order eight",
+      "id": "co8utfr_07_conditional_columns",
+      "proof_boundary": "Conditional on contiguous order-eight completion.",
+      "readiness": "conditional_on_open_input",
+      "role": "exact_conditional_theorem"
+    },
+    {
+      "claim": "The completed lower signed layers do not imply order eight abstractly.",
+      "diagnostics": {
+        "Q6_n2": "1/148045794139338685651353600000000",
+        "Q7_log_concavity_margin": "-463/10246317406459624992735028091299392073078206541205704645017600000000000000000000000",
+        "Q7_values": [
+          "1/148045794139338685651353600000000",
+          "1/1280394777025250130271722799104000000000",
+          "137/1412458352598425929422606207811584000000000000000"
+        ],
+        "Q8_n0": "-463/69210459277322870541707704182767616000000000000000",
+        "conclusion": "strict signed contiguous layers through order seven do not imply order eight",
+        "condensation_residual": "0",
+        "sequence": [
+          "1",
+          "1",
+          "1/2",
+          "1/6",
+          "1/24",
+          "1/120",
+          "1/720",
+          "1/5040",
+          "1/40320",
+          "1/362880",
+          "1/3628800",
+          "1/39916800",
+          "1/479001600",
+          "1/6227020800",
+          "1/87120000000"
+        ],
+        "strict_signed_lower_layers": {
+          "1": [
+            "1",
+            "1",
+            "1/2",
+            "1/6",
+            "1/24",
+            "1/120",
+            "1/720",
+            "1/5040",
+            "1/40320",
+            "1/362880",
+            "1/3628800",
+            "1/39916800",
+            "1/479001600",
+            "1/6227020800",
+            "1/87120000000"
+          ],
+          "2": [
+            "1/2",
+            "1/12",
+            "1/144",
+            "1/2880",
+            "1/86400",
+            "1/3628800",
+            "1/203212800",
+            "1/14631321600",
+            "1/1316818944000",
+            "1/144850083840000",
+            "1/19120211066880000",
+            "1/2982752926433280000",
+            "1217/666458856999936000000000"
+          ],
+          "3": [
+            "1/144",
+            "1/8640",
+            "1/1036800",
+            "1/217728000",
+            "1/73156608000",
+            "1/36870930432000",
+            "1/26547069911040000",
+            "1/26281599211929600000",
+            "1/34691710959747072000000",
+            "1/59530976006925975552000000",
+            "5167/638469717674281087795200000000000"
+          ],
+          "4": [
+            "1/1036800",
+            "1/870912000",
+            "1/1463132160000",
+            "1/4424511651840000",
+            "1/22299538725273600000",
+            "1/176612346704166912000000",
+            "1/2098154678845502914560000000",
+            "1/36004334288988830013849600000000",
+            "361/386146485249405201898536960000000000000"
+          ],
+          "5": [
+            "1/1463132160000",
+            "1/22122558259200000",
+            "1/668986161758208000000",
+            "1/37088592807875051520000000",
+            "1/3524899860460444896460800000000",
+            "1/544385534449511109809405952000000000",
+            "1/88462649348045555344028467200000000000000"
+          ],
+          "6": [
+            "1/668986161758208000000",
+            "1/222531556847250309120000000",
+            "1/148045794139338685651353600000000",
+            "1/182913539575035732895960399872000000000",
+            "31/88278647037401620588912887988224000000000000000"
+          ],
+          "7": [
+            "1/148045794139338685651353600000000",
+            "1/1280394777025250130271722799104000000000",
+            "137/1412458352598425929422606207811584000000000000000"
+          ]
+        }
+      },
+      "formula": "Q_(8,0)=-463/69210459277322870541707704182767616000000000000000<0",
+      "id": "co8utfr_08_countermodel",
+      "proof_boundary": "Exact rational finite sequence; blocks lower-layer promotion.",
+      "readiness": "ready_to_apply",
+      "role": "countermodel_gate"
+    },
+    {
+      "claim": "Prove strict all-shift signed order-eight entry at lambda=-100.",
+      "diagnostics": null,
+      "formula": "Q_(8,n)(-100)>0 for every n>=0, equivalently strict log-concavity of Q_(7,n)(-100)",
+      "id": "co8utfr_09_open_entry",
+      "proof_boundary": "Sole open input in this fixed-order-eight propagation route.",
+      "readiness": "not_ready_to_apply",
+      "role": "analytic_theorem_target"
+    }
+  ],
+  "source_contract": {
+    "order7_sign": "Q_(7,n)(lambda)=-H_(7,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+    "order7_status": "signed contiguous and arbitrary-column order-seven theorem on -100<=lambda<=0",
+    "order8_leading_degree": 28,
+    "order8_positive_signed_constant": 33664847019245568000,
+    "order8_raw_leading_constant": 33664847019245568000,
+    "vandermonde_status": "exact all-fixed-order graded-kernel leading determinant lemma and compact-uniform eventual signed tails; no all-shift theorem"
+  },
+  "sources": [
+    "work/rh_compute/results/jensen_window_pf_compound_order7_uniform_heat_forward_invariance_certificate.json",
+    "work/rh_compute/results/jensen_window_pf_graded_kernel_vandermonde_all_order_lemma.json"
+  ],
+  "status": "exact uniform eventual signed order-eight tail and conditional forward reduction with one open lambda=-100 entry",
+  "summary": {
+    "conditional_arbitrary_column_theorems": 1,
+    "conditional_forward_theorems": 1,
+    "conditional_rows": 2,
+    "cooperative_flow_recursions": 1,
+    "lower_layer_countermodels": 1,
+    "open_entry_targets": 1,
+    "open_rows": 1,
+    "ready_to_apply_rows": 6,
+    "rows": 9,
+    "signed_condensation_coordinates": 1,
+    "universal_tail_specializations": 1
+  }
+}

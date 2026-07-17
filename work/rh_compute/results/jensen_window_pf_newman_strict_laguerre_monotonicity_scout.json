@@ -1,0 +1,591 @@
+{
+  "kind": "jensen_window_pf_newman_strict_laguerre_monotonicity_scout",
+  "date": "2026-07-17",
+  "status": "exact sufficient condition and finite scouts, retired by a rigorous Xi Lehmer-point counterexample",
+  "proof_boundary": "This artifact proves that strict decrease of the first Laguerre expression to its zero limit is sufficient for Lambda<=0 and derives exact correlation and theta-primitive forms. A rigorous Xi point has M_0<0, which by time continuity rejects the proposed all-positive-times condition. This does not reject strict Laguerre positivity, RH, or Lambda<=0.",
+  "exact": {
+    "definitions": {
+      "heat_function": "H_t(x)=integral_0^infinity exp(t*u^2)*Phi(u)*cos(x*u)du",
+      "first_laguerre": "L_t(x)=H_t'(x)^2-H_t(x)*H_t''(x)",
+      "monotonicity_margin": "M_t(x)=-L_t'(x)=H_t(x)*H_t'''(x)-H_t'(x)*H_t''(x)"
+    },
+    "derivative_identity": "L_t'(x)=H_t'(x)*H_t''(x)-H_t(x)*H_t'''(x)",
+    "monotone_sufficiency": "If M_t(x)>0 for every x>0 and L_t(x)->0 as x->infinity, then L_t(x)=integral_x^infinity M_t(y)dy>0 for every x>=0.",
+    "newman_consequence": "M_t(x)>0 for every x>0 and every 0<t<=1/5 implies Lambda<=0.",
+    "multiple_root_exclusion": "A multiple real zero c>0 has H_t(c)=H_t'(c)=0 and hence M_t(c)=0, contradicting strict monotonicity.",
+    "correlation_sine_transform": "M_t(x)=2*integral_R v*K_(1,t)(v)*sin(2*x*v)dv=4*integral_0^infinity v*K_(1,t)(v)*sin(2*x*v)dv",
+    "tail_cosine_reduction": {
+      "definition": "Q_t(s)=integral_s^infinity v*K_(1,t)(v)dv",
+      "identity": "M_t(x)=8*x*integral_0^infinity Q_t(s)*cos(2*x*s)ds",
+      "derivatives": "Q_t'(s)=-s*K_(1,t)(s), Q_t''(s)=-K_(1,t)(s)-s*K_(1,t)'(s)",
+      "one_inflection_theorem": "For ell=log K_(1,t), h(s)=1+s*ell'(s) decreases strictly from 1 to -infinity because h'=ell'+s*ell''<0 and strong log-concavity gives ell'(s)<=-c*s. Hence Q_t''=-K_(1,t)*h changes sign exactly once, from negative to positive.",
+      "classical_convexity_obstruction": "Q_t''(0)=-K_(1,t)(0)<0, so the classical positive-decreasing-convex cosine-transform criterion cannot establish M_t>0.",
+      "regular_shift_obstruction": "At every regular fixed shift p>0, evenness and real analyticity give Q_t(i*p) real. Hence -Im Q_t(s+i*p) starts at zero and cannot be both nonnegative and nonincreasing unless it is identically zero, so Tuck's elementary interior-shift criterion cannot apply nontrivially.",
+      "boundary_handoff": "A viable complex-contour proof needs a boundary correction or a frequency-adaptive modular shift; the theta series identifies abs(Im z)=pi/8 as its natural termwise-control boundary.",
+      "source": "https://doi.org/10.1017/S0004972700047511"
+    },
+    "theta_primitive": {
+      "definition": "A_t=D_t[C_t]=8*H_t-1/2",
+      "identity": "M_t(x)=((A_t(x)+1/2)*A_t'''(x)-A_t'(x)*A_t''(x))/64",
+      "target": "(A_t(x)+1/2)*A_t'''(x)-A_t'(x)*A_t''(x)>0 for x>0"
+    }
+  },
+  "moderate_scout": {
+    "method": "Composite Gauss-Legendre quadrature on [0,4], finite Phi series n<=15, analytic Fourier jets through order 3",
+    "coarse_nodes_per_panel": 192,
+    "fine_nodes_per_panel": 320,
+    "x_step": "1/50",
+    "max_absolute_coarse_fine_delta": "5.16690097825123207e-20",
+    "max_relative_coarse_fine_delta": "1.74849836598498601e-10",
+    "rows": [
+      {
+        "t": "0",
+        "x_count": 2000,
+        "x_min": "0.02",
+        "x_max": "40",
+        "all_L_prime_negative": true,
+        "largest_L_prime": "-4.11895579540490916e-12",
+        "largest_L_prime_x": "40",
+        "smallest_L_prime": "-3.92227242966496190e-06",
+        "smallest_L_prime_x": "6.9800000000000004"
+      },
+      {
+        "t": "0.05",
+        "x_count": 2000,
+        "x_min": "0.02",
+        "x_max": "40",
+        "all_L_prime_negative": true,
+        "largest_L_prime": "-4.10209881280951840e-12",
+        "largest_L_prime_x": "40",
+        "smallest_L_prime": "-3.93257078956562750e-06",
+        "smallest_L_prime_x": "6.9800000000000004"
+      },
+      {
+        "t": "0.1",
+        "x_count": 2000,
+        "x_min": "0.02",
+        "x_max": "40",
+        "all_L_prime_negative": true,
+        "largest_L_prime": "-4.08531227661249307e-12",
+        "largest_L_prime_x": "40",
+        "smallest_L_prime": "-3.94290383904955908e-06",
+        "smallest_L_prime_x": "6.9800000000000004"
+      },
+      {
+        "t": "0.15",
+        "x_count": 2000,
+        "x_min": "0.02",
+        "x_max": "40",
+        "all_L_prime_negative": true,
+        "largest_L_prime": "-4.06859688927927284e-12",
+        "largest_L_prime_x": "40",
+        "smallest_L_prime": "-3.95327171929068172e-06",
+        "smallest_L_prime_x": "6.9800000000000004"
+      },
+      {
+        "t": "0.2",
+        "x_count": 2000,
+        "x_min": "0.02",
+        "x_max": "40",
+        "all_L_prime_negative": true,
+        "largest_L_prime": "-4.05195335919097325e-12",
+        "largest_L_prime_x": "40",
+        "smallest_L_prime": "-3.96367457213198842e-06",
+        "smallest_L_prime_x": "6.9800000000000004"
+      },
+      {
+        "t": "0.5",
+        "x_count": 2000,
+        "x_min": "0.02",
+        "x_max": "40",
+        "all_L_prime_negative": true,
+        "largest_L_prime": "-3.95364154848317632e-12",
+        "largest_L_prime_x": "40",
+        "smallest_L_prime": "-4.02687440479802134e-06",
+        "smallest_L_prime_x": "6.96"
+      }
+    ]
+  },
+  "high_frequency_scout": {
+    "method": "75-digit composite Gauss-Legendre quadrature on [0,2.8], 13 theta terms, analytic Fourier jets through order 3",
+    "dps": 75,
+    "coarse_nodes_per_panel": 100,
+    "fine_nodes_per_panel": 140,
+    "max_relative_coarse_fine_delta": "5.85979491689557237184563e-46",
+    "max_relative_t0_xi_delta": "1.31007236842613583495048e-46",
+    "rows": [
+      {
+        "t": "0",
+        "x": "40",
+        "L_prime": "-0.00000000000411895579448632007353931142173811409819378510379368486431220",
+        "relative_coarse_fine_delta": "0.0",
+        "exact_xi_L_prime": "-0.00000000000411895579448632007353931142173811409819378510379368486431220",
+        "relative_xi_delta": "7.63271449368984155423454e-61"
+      },
+      {
+        "t": "0",
+        "x": "80",
+        "L_prime": "-2.22290026634735121755276383842595196021310280009484941075692e-24",
+        "relative_coarse_fine_delta": "0.0",
+        "exact_xi_L_prime": "-2.22290026634735121755276383842595196021310280009484941075692e-24",
+        "relative_xi_delta": "1.42125716235602322601432e-60"
+      },
+      {
+        "t": "0",
+        "x": "120",
+        "L_prime": "-1.00634691469262228721287653498564011344956118045731557868619e-37",
+        "relative_coarse_fine_delta": "9.93693114571170635148211e-59",
+        "exact_xi_L_prime": "-1.00634691469262228721287653498564011344956118045731557868607e-37",
+        "relative_xi_delta": "1.16996137619068100818487e-58"
+      },
+      {
+        "t": "0",
+        "x": "160",
+        "L_prime": "-3.08599394685849317548546681814828971355035472342185972563336e-50",
+        "relative_coarse_fine_delta": "7.27196824959586777017448e-54",
+        "exact_xi_L_prime": "-3.08599394685849317548546681814828971355035472342185976796661e-50",
+        "relative_xi_delta": "1.37178647169051366180893e-53"
+      },
+      {
+        "t": "0",
+        "x": "200",
+        "L_prime": "-2.80325572279256566791574436050465122218566479313945104835900e-63",
+        "relative_coarse_fine_delta": "5.85979491689557237184563e-46",
+        "exact_xi_L_prime": "-2.80325572279256566791574436050465122218566479350669783476530e-63",
+        "relative_xi_delta": "1.31007236842613583495048e-46"
+      },
+      {
+        "t": "0.1",
+        "x": "40",
+        "L_prime": "-0.00000000000408531227568601710680446354610037081003233688207207262763809",
+        "relative_coarse_fine_delta": "0.0"
+      },
+      {
+        "t": "0.1",
+        "x": "80",
+        "L_prime": "-2.25448648844558094273777661902921104780226057385782605875543e-24",
+        "relative_coarse_fine_delta": "0.0"
+      },
+      {
+        "t": "0.1",
+        "x": "120",
+        "L_prime": "-1.05166087076946782841663807007500747979753539813664345885561e-37",
+        "relative_coarse_fine_delta": "1.04596456003460880147116e-58"
+      },
+      {
+        "t": "0.1",
+        "x": "160",
+        "L_prime": "-3.33865621804258982945894909739915565636680745808989797800181e-50",
+        "relative_coarse_fine_delta": "7.98327777983279426130885e-54"
+      },
+      {
+        "t": "0.1",
+        "x": "200",
+        "L_prime": "-2.95693562058735799011796257092637269516453798352928137855205e-63",
+        "relative_coarse_fine_delta": "5.70513143315478930449740e-46"
+      },
+      {
+        "t": "0.2",
+        "x": "40",
+        "L_prime": "-0.00000000000405195335825762182855874424741942694559485048139509307942653",
+        "relative_coarse_fine_delta": "0.0"
+      },
+      {
+        "t": "0.2",
+        "x": "80",
+        "L_prime": "-2.28693492558438958447517508980957774054812303590026709903936e-24",
+        "relative_coarse_fine_delta": "0.0"
+      },
+      {
+        "t": "0.2",
+        "x": "120",
+        "L_prime": "-1.10273211172287721198649066493683243815671194037688303661425e-37",
+        "relative_coarse_fine_delta": "9.97522415740112403502116e-59"
+      },
+      {
+        "t": "0.2",
+        "x": "160",
+        "L_prime": "-3.60653975990912179067078815377070050198252857511712950816567e-50",
+        "relative_coarse_fine_delta": "8.52936666384488537265496e-54"
+      },
+      {
+        "t": "0.2",
+        "x": "200",
+        "L_prime": "-3.12046794559790362545710302003715582745416360579597774896448e-63",
+        "relative_coarse_fine_delta": "5.47095937697337684197204e-46"
+      },
+      {
+        "t": "0.5",
+        "x": "40",
+        "L_prime": "-0.00000000000395364154752945574189771550160078020293911202566157252451126",
+        "relative_coarse_fine_delta": "0.0"
+      },
+      {
+        "t": "0.5",
+        "x": "80",
+        "L_prime": "-2.38939093337290294731578567667251763100712112554904703997572e-24",
+        "relative_coarse_fine_delta": "0.0"
+      },
+      {
+        "t": "0.5",
+        "x": "120",
+        "L_prime": "-1.29451695714042784331138514857963727849703957707716825872298e-37",
+        "relative_coarse_fine_delta": "9.26986698305432283711528e-59"
+      },
+      {
+        "t": "0.5",
+        "x": "160",
+        "L_prime": "-4.50719488796955858889112471749374956993360634916541629078307e-50",
+        "relative_coarse_fine_delta": "9.03722847856476047445321e-54"
+      },
+      {
+        "t": "0.5",
+        "x": "200",
+        "L_prime": "-3.67574637578504169896540983775428968999536768792266071728697e-63",
+        "relative_coarse_fine_delta": "5.07321867394716856463783e-46"
+      }
+    ]
+  },
+  "countermodel_guard": {
+    "kernel": "phi_(1/10,1/1000)(u)=exp(-u^2-u^4/10-(cosh(4u)-1)/1000)*(1+u^4/10)",
+    "certified_point": "x=21/5",
+    "laguerre_ball": "[-0.000213478480591774964507646766853475076598648832979809 +/- 5.09E-55]",
+    "deduction": "L(0)>0, the certified L(21/5)<0, and L(x)->0 imply that L'(y)>0 for some y>21/5. Thus uniform strong log-concavity, strict root-variable concavity, and theta-type decay do not imply the monotonicity target."
+  },
+  "xi_monotonicity_counterexample": {
+    "x": "1401016343/100000",
+    "normalized_monotonicity_margin_ball": "[-3.24186746975685391605462931182063307428944779983857697073123186e-6 +/- 5.42e-69]",
+    "monotonicity_to_curvature_ball": "[-0.0001463088540165360168258875503621433728403782920777681331619380172 +/- 5.15e-68]",
+    "certified_sign": "M_0(x)=H_0(x)H_0'''(x)-H_0'(x)H_0''(x)=-L_0'(x)<0",
+    "continuity_deduction": "The theta tail makes |u|^3*exp(u^2/5)*Phi(u) integrable. Dominated convergence therefore makes the first three x-derivatives of H_t continuous in t on [0,1/5]. The strict value M_0(x)<0 persists for all sufficiently small positive t, rejecting the universal assertion M_t(x)>0 for every x>0 and every 0<t<=1/5.",
+    "scope": "This rejects only the stronger strict-monotonicity route. It does not reject L_t(x)>0, double-zero transversality, Lambda<=0, or RH."
+  },
+  "rows": [
+    {
+      "id": "nslms_01_derivative_identity",
+      "role": "exact_identity",
+      "readiness": "proved",
+      "claim": "The derivative of the first Laguerre expression is one third-order Wronskian.",
+      "formula": "L_t'(x)=H_t'(x)*H_t''(x)-H_t(x)*H_t'''(x)",
+      "proof_boundary": "Exact differentiation only.",
+      "diagnostics": null
+    },
+    {
+      "id": "nslms_02_monotone_sufficiency",
+      "role": "sufficient_theorem",
+      "readiness": "proved",
+      "claim": "Strict decrease to the zero limit implies strict first-Laguerre positivity.",
+      "formula": "If M_t(x)>0 for every x>0 and L_t(x)->0 as x->infinity, then L_t(x)=integral_x^infinity M_t(y)dy>0 for every x>=0.",
+      "proof_boundary": "A stronger sufficient implication, but its premise is rigorously false for Xi.",
+      "diagnostics": null
+    },
+    {
+      "id": "nslms_03_correlation_sine_target",
+      "role": "exact_identity",
+      "readiness": "proved",
+      "claim": "The monotonicity margin is a sine transform of the weighted first correlation.",
+      "formula": "M_t(x)=2*integral_R v*K_(1,t)(v)*sin(2*x*v)dv=4*integral_0^infinity v*K_(1,t)(v)*sin(2*x*v)dv",
+      "proof_boundary": "Exact differentiation under the correlation transform.",
+      "diagnostics": null
+    },
+    {
+      "id": "nslms_04_tail_cosine_geometry",
+      "role": "exact_identity",
+      "readiness": "proved",
+      "claim": "The sine target is a cosine transform of a positive decreasing one-inflection tail.",
+      "formula": "M_t(x)=8*x*integral_0^infinity Q_t(s)*cos(2*x*s)ds",
+      "proof_boundary": "Exact reduction; the tail is concave at the origin, so the classical convex criterion is unavailable.",
+      "diagnostics": {
+        "definition": "Q_t(s)=integral_s^infinity v*K_(1,t)(v)dv",
+        "identity": "M_t(x)=8*x*integral_0^infinity Q_t(s)*cos(2*x*s)ds",
+        "derivatives": "Q_t'(s)=-s*K_(1,t)(s), Q_t''(s)=-K_(1,t)(s)-s*K_(1,t)'(s)",
+        "one_inflection_theorem": "For ell=log K_(1,t), h(s)=1+s*ell'(s) decreases strictly from 1 to -infinity because h'=ell'+s*ell''<0 and strong log-concavity gives ell'(s)<=-c*s. Hence Q_t''=-K_(1,t)*h changes sign exactly once, from negative to positive.",
+        "classical_convexity_obstruction": "Q_t''(0)=-K_(1,t)(0)<0, so the classical positive-decreasing-convex cosine-transform criterion cannot establish M_t>0.",
+        "regular_shift_obstruction": "At every regular fixed shift p>0, evenness and real analyticity give Q_t(i*p) real. Hence -Im Q_t(s+i*p) starts at zero and cannot be both nonnegative and nonincreasing unless it is identically zero, so Tuck's elementary interior-shift criterion cannot apply nontrivially.",
+        "boundary_handoff": "A viable complex-contour proof needs a boundary correction or a frequency-adaptive modular shift; the theta series identifies abs(Im z)=pi/8 as its natural termwise-control boundary.",
+        "source": "https://doi.org/10.1017/S0004972700047511"
+      }
+    },
+    {
+      "id": "nslms_05_theta_primitive_target",
+      "role": "exact_identity",
+      "readiness": "proved",
+      "claim": "The same target is a third-order curvature inequality for the endpoint-subtracted theta primitive.",
+      "formula": "M_t(x)=((A_t(x)+1/2)*A_t'''(x)-A_t'(x)*A_t''(x))/64",
+      "proof_boundary": "Exact reformulation only; its proposed global sign is false for Xi.",
+      "diagnostics": null
+    },
+    {
+      "id": "nslms_06_dense_scout",
+      "role": "numerical_diagnostic",
+      "readiness": "observed",
+      "claim": "Every dense sampled moderate-frequency value has L_t'(x)<0.",
+      "formula": "x=j/50, 1<=j<=2000, t in {0,.05,.1,.15,.2,.5}",
+      "proof_boundary": "Finite double-precision quadrature with coarse/fine checks; not a continuum proof.",
+      "diagnostics": {
+        "method": "Composite Gauss-Legendre quadrature on [0,4], finite Phi series n<=15, analytic Fourier jets through order 3",
+        "coarse_nodes_per_panel": 192,
+        "fine_nodes_per_panel": 320,
+        "x_step": "1/50",
+        "max_absolute_coarse_fine_delta": "5.16690097825123207e-20",
+        "max_relative_coarse_fine_delta": "1.74849836598498601e-10",
+        "rows": [
+          {
+            "t": "0",
+            "x_count": 2000,
+            "x_min": "0.02",
+            "x_max": "40",
+            "all_L_prime_negative": true,
+            "largest_L_prime": "-4.11895579540490916e-12",
+            "largest_L_prime_x": "40",
+            "smallest_L_prime": "-3.92227242966496190e-06",
+            "smallest_L_prime_x": "6.9800000000000004"
+          },
+          {
+            "t": "0.05",
+            "x_count": 2000,
+            "x_min": "0.02",
+            "x_max": "40",
+            "all_L_prime_negative": true,
+            "largest_L_prime": "-4.10209881280951840e-12",
+            "largest_L_prime_x": "40",
+            "smallest_L_prime": "-3.93257078956562750e-06",
+            "smallest_L_prime_x": "6.9800000000000004"
+          },
+          {
+            "t": "0.1",
+            "x_count": 2000,
+            "x_min": "0.02",
+            "x_max": "40",
+            "all_L_prime_negative": true,
+            "largest_L_prime": "-4.08531227661249307e-12",
+            "largest_L_prime_x": "40",
+            "smallest_L_prime": "-3.94290383904955908e-06",
+            "smallest_L_prime_x": "6.9800000000000004"
+          },
+          {
+            "t": "0.15",
+            "x_count": 2000,
+            "x_min": "0.02",
+            "x_max": "40",
+            "all_L_prime_negative": true,
+            "largest_L_prime": "-4.06859688927927284e-12",
+            "largest_L_prime_x": "40",
+            "smallest_L_prime": "-3.95327171929068172e-06",
+            "smallest_L_prime_x": "6.9800000000000004"
+          },
+          {
+            "t": "0.2",
+            "x_count": 2000,
+            "x_min": "0.02",
+            "x_max": "40",
+            "all_L_prime_negative": true,
+            "largest_L_prime": "-4.05195335919097325e-12",
+            "largest_L_prime_x": "40",
+            "smallest_L_prime": "-3.96367457213198842e-06",
+            "smallest_L_prime_x": "6.9800000000000004"
+          },
+          {
+            "t": "0.5",
+            "x_count": 2000,
+            "x_min": "0.02",
+            "x_max": "40",
+            "all_L_prime_negative": true,
+            "largest_L_prime": "-3.95364154848317632e-12",
+            "largest_L_prime_x": "40",
+            "smallest_L_prime": "-4.02687440479802134e-06",
+            "smallest_L_prime_x": "6.96"
+          }
+        ]
+      }
+    },
+    {
+      "id": "nslms_07_high_frequency_scout",
+      "role": "numerical_diagnostic",
+      "readiness": "observed",
+      "claim": "The negative derivative survives high-frequency arithmetic cancellation through x=200.",
+      "formula": "L_t'(x)<0 on 20 selected (t,x) rows",
+      "proof_boundary": "Finite 75-digit quadrature and t=0 Xi cross-checks only.",
+      "diagnostics": {
+        "method": "75-digit composite Gauss-Legendre quadrature on [0,2.8], 13 theta terms, analytic Fourier jets through order 3",
+        "dps": 75,
+        "coarse_nodes_per_panel": 100,
+        "fine_nodes_per_panel": 140,
+        "max_relative_coarse_fine_delta": "5.85979491689557237184563e-46",
+        "max_relative_t0_xi_delta": "1.31007236842613583495048e-46",
+        "rows": [
+          {
+            "t": "0",
+            "x": "40",
+            "L_prime": "-0.00000000000411895579448632007353931142173811409819378510379368486431220",
+            "relative_coarse_fine_delta": "0.0",
+            "exact_xi_L_prime": "-0.00000000000411895579448632007353931142173811409819378510379368486431220",
+            "relative_xi_delta": "7.63271449368984155423454e-61"
+          },
+          {
+            "t": "0",
+            "x": "80",
+            "L_prime": "-2.22290026634735121755276383842595196021310280009484941075692e-24",
+            "relative_coarse_fine_delta": "0.0",
+            "exact_xi_L_prime": "-2.22290026634735121755276383842595196021310280009484941075692e-24",
+            "relative_xi_delta": "1.42125716235602322601432e-60"
+          },
+          {
+            "t": "0",
+            "x": "120",
+            "L_prime": "-1.00634691469262228721287653498564011344956118045731557868619e-37",
+            "relative_coarse_fine_delta": "9.93693114571170635148211e-59",
+            "exact_xi_L_prime": "-1.00634691469262228721287653498564011344956118045731557868607e-37",
+            "relative_xi_delta": "1.16996137619068100818487e-58"
+          },
+          {
+            "t": "0",
+            "x": "160",
+            "L_prime": "-3.08599394685849317548546681814828971355035472342185972563336e-50",
+            "relative_coarse_fine_delta": "7.27196824959586777017448e-54",
+            "exact_xi_L_prime": "-3.08599394685849317548546681814828971355035472342185976796661e-50",
+            "relative_xi_delta": "1.37178647169051366180893e-53"
+          },
+          {
+            "t": "0",
+            "x": "200",
+            "L_prime": "-2.80325572279256566791574436050465122218566479313945104835900e-63",
+            "relative_coarse_fine_delta": "5.85979491689557237184563e-46",
+            "exact_xi_L_prime": "-2.80325572279256566791574436050465122218566479350669783476530e-63",
+            "relative_xi_delta": "1.31007236842613583495048e-46"
+          },
+          {
+            "t": "0.1",
+            "x": "40",
+            "L_prime": "-0.00000000000408531227568601710680446354610037081003233688207207262763809",
+            "relative_coarse_fine_delta": "0.0"
+          },
+          {
+            "t": "0.1",
+            "x": "80",
+            "L_prime": "-2.25448648844558094273777661902921104780226057385782605875543e-24",
+            "relative_coarse_fine_delta": "0.0"
+          },
+          {
+            "t": "0.1",
+            "x": "120",
+            "L_prime": "-1.05166087076946782841663807007500747979753539813664345885561e-37",
+            "relative_coarse_fine_delta": "1.04596456003460880147116e-58"
+          },
+          {
+            "t": "0.1",
+            "x": "160",
+            "L_prime": "-3.33865621804258982945894909739915565636680745808989797800181e-50",
+            "relative_coarse_fine_delta": "7.98327777983279426130885e-54"
+          },
+          {
+            "t": "0.1",
+            "x": "200",
+            "L_prime": "-2.95693562058735799011796257092637269516453798352928137855205e-63",
+            "relative_coarse_fine_delta": "5.70513143315478930449740e-46"
+          },
+          {
+            "t": "0.2",
+            "x": "40",
+            "L_prime": "-0.00000000000405195335825762182855874424741942694559485048139509307942653",
+            "relative_coarse_fine_delta": "0.0"
+          },
+          {
+            "t": "0.2",
+            "x": "80",
+            "L_prime": "-2.28693492558438958447517508980957774054812303590026709903936e-24",
+            "relative_coarse_fine_delta": "0.0"
+          },
+          {
+            "t": "0.2",
+            "x": "120",
+            "L_prime": "-1.10273211172287721198649066493683243815671194037688303661425e-37",
+            "relative_coarse_fine_delta": "9.97522415740112403502116e-59"
+          },
+          {
+            "t": "0.2",
+            "x": "160",
+            "L_prime": "-3.60653975990912179067078815377070050198252857511712950816567e-50",
+            "relative_coarse_fine_delta": "8.52936666384488537265496e-54"
+          },
+          {
+            "t": "0.2",
+            "x": "200",
+            "L_prime": "-3.12046794559790362545710302003715582745416360579597774896448e-63",
+            "relative_coarse_fine_delta": "5.47095937697337684197204e-46"
+          },
+          {
+            "t": "0.5",
+            "x": "40",
+            "L_prime": "-0.00000000000395364154752945574189771550160078020293911202566157252451126",
+            "relative_coarse_fine_delta": "0.0"
+          },
+          {
+            "t": "0.5",
+            "x": "80",
+            "L_prime": "-2.38939093337290294731578567667251763100712112554904703997572e-24",
+            "relative_coarse_fine_delta": "0.0"
+          },
+          {
+            "t": "0.5",
+            "x": "120",
+            "L_prime": "-1.29451695714042784331138514857963727849703957707716825872298e-37",
+            "relative_coarse_fine_delta": "9.26986698305432283711528e-59"
+          },
+          {
+            "t": "0.5",
+            "x": "160",
+            "L_prime": "-4.50719488796955858889112471749374956993360634916541629078307e-50",
+            "relative_coarse_fine_delta": "9.03722847856476047445321e-54"
+          },
+          {
+            "t": "0.5",
+            "x": "200",
+            "L_prime": "-3.67574637578504169896540983775428968999536768792266071728697e-63",
+            "relative_coarse_fine_delta": "5.07321867394716856463783e-46"
+          }
+        ]
+      }
+    },
+    {
+      "id": "nslms_08_theta_tail_nonpromotion",
+      "role": "countermodel_gate",
+      "readiness": "guard_validated",
+      "claim": "The monotonicity target does not follow from the full generic Xi shape-and-tail package.",
+      "formula": "L(0)>0, the certified L(21/5)<0, and L(x)->0 imply that L'(y)>0 for some y>21/5. Thus uniform strong log-concavity, strict root-variable concavity, and theta-type decay do not imply the monotonicity target.",
+      "proof_boundary": "Uses the separate rigorous theta-tail countermodel; it is not the Xi kernel.",
+      "diagnostics": {
+        "kernel": "phi_(1/10,1/1000)(u)=exp(-u^2-u^4/10-(cosh(4u)-1)/1000)*(1+u^4/10)",
+        "certified_point": "x=21/5",
+        "laguerre_ball": "[-0.000213478480591774964507646766853475076598648832979809 +/- 5.09E-55]",
+        "deduction": "L(0)>0, the certified L(21/5)<0, and L(x)->0 imply that L'(y)>0 for some y>21/5. Thus uniform strong log-concavity, strict root-variable concavity, and theta-type decay do not imply the monotonicity target."
+      }
+    },
+    {
+      "id": "nslms_09_xi_lehmer_counterexample",
+      "role": "interval_counterexample",
+      "readiness": "certified",
+      "claim": "An exact Xi Lehmer-point jet rejects the global strict-monotonicity target.",
+      "formula": "M_0(x)=H_0(x)H_0'''(x)-H_0'(x)H_0''(x)=-L_0'(x)<0",
+      "proof_boundary": "This rejects only the stronger strict-monotonicity route. It does not reject L_t(x)>0, double-zero transversality, Lambda<=0, or RH.",
+      "diagnostics": {
+        "x": "1401016343/100000",
+        "normalized_monotonicity_margin_ball": "[-3.24186746975685391605462931182063307428944779983857697073123186e-6 +/- 5.42e-69]",
+        "monotonicity_to_curvature_ball": "[-0.0001463088540165360168258875503621433728403782920777681331619380172 +/- 5.15e-68]",
+        "certified_sign": "M_0(x)=H_0(x)H_0'''(x)-H_0'(x)H_0''(x)=-L_0'(x)<0",
+        "continuity_deduction": "The theta tail makes |u|^3*exp(u^2/5)*Phi(u) integrable. Dominated convergence therefore makes the first three x-derivatives of H_t continuous in t on [0,1/5]. The strict value M_0(x)<0 persists for all sufficiently small positive t, rejecting the universal assertion M_t(x)>0 for every x>0 and every 0<t<=1/5.",
+        "scope": "This rejects only the stronger strict-monotonicity route. It does not reject L_t(x)>0, double-zero transversality, Lambda<=0, or RH."
+      }
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/abs/1606.05011",
+    "https://doi.org/10.1017/S0004972700047511",
+    "outputs/jensen_window_pf_newman_strict_laguerre_correlation_target.md",
+    "outputs/jensen_window_pf_newman_theta_summand_spectral_square_gate.md",
+    "outputs/jensen_window_pf_newman_theta_modular_blend_adaptive_saddle_gate.md",
+    "outputs/jensen_window_pf_newman_weighted_strong_logconcavity_countermodel_gate.md",
+    "outputs/jensen_window_pf_newman_polymath15_critical_lehmer_margin_gate.md",
+    "outputs/jensen_window_pf_negative_lambda_relative_gaussian_full_kernel_evenness_cauchy_lemma.md"
+  ]
+}

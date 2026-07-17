@@ -1,0 +1,138 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_first_summand_power12_rebalanced_dominance_extension.py",
+  "date": "2026-07-16",
+  "diagnostics": {
+    "adjacent_B_error": "|B_j-B_j^(1)|<=a_j=2*((j-1)^(-12)+2*j^(-12)+(j+1)^(-12)), j>=321",
+    "all_positive_gates": true,
+    "exact_D_a_lower": "8.77080258569649206786136670859723514487623491504042890797033E+2",
+    "exact_D_c_lower": "6.07527554688965119138196529566869295990641194645755733362003E+2",
+    "full_tail_relative_bound": "0<=delta_k=(M_k-M_k^(1))/M_k^(1)<2/k^12 for every integer k>=320",
+    "ga_log_margin_lower": "1.37056748934556597350505629906771896795501176359138906663557E+0",
+    "ga_minus_100_lower": "7.72880692929848940211685103839880256317547271201130411937403E+2",
+    "ga_power_margin_lower": "1.27524101014791840932125492464186946758869586937148330959340E+0",
+    "gc_log_margin_lower": "1.18147798209814710320269136426956885326219011969595641053235E+0",
+    "gc_lower": "6.03401269906272514587595194350580265980360649279293205625401E+2",
+    "gc_power_margin_lower": "9.98919668575730514470760356101646676937746278558309702851848E-1",
+    "half_line_rule": "the six positive ratio-log derivatives with leading constants 3/5 or 1 show every split endpoint comparison strengthens for k>=300",
+    "high_derivative_margin_lower": "2.58783550074354154041123298622038800879158146127773816901209E+1",
+    "high_endpoint_ball": "[-22.64282222500705565678146529393360910845810759419711847836462988188139 +/- 2.84E-69]",
+    "high_endpoint_upper": "-2.26428222250070556567814652939336091084581075941971184783645E+1",
+    "high_prefactor_ball": "[16.79826255920106629780626807937303268030488121164991543851974968873535 +/- 1.32E-69]",
+    "high_prefactor_margin_lower": "2.01737440798933702193731920626967319695118788350084561480249E-1",
+    "high_region_bound": "epsilon(a(k))<=17*exp(-3*pi*k^(2/5))<k^(-12), k>=320",
+    "low_endpoint_ball": "[-3.396374901684933241303085895506730511674815071149367572275073708708321 +/- 4.33E-70]",
+    "low_endpoint_upper": "-3.39637490168493324130308589550673051167481507114936757227506E+0",
+    "low_k_derivative_margin_lower": "2.20585830727330450771932697388853041311481878967991598525353E-1",
+    "low_power_derivative_margin_lower": "2.32430090624538137560997907432432250621297614039627580262069E-1",
+    "low_region_bound": "epsilon(0)*P_k(u<a(k))<k^(-12), k>=320",
+    "moment_log_error": "0<=log(1+delta_k)<2/k^12, k>=320",
+    "parameters": {
+      "adaptive_a": "a(k)=log(k)/10",
+      "adaptive_b": "b(k)=a(k)+1/10",
+      "adaptive_c": "c(k)=b(k)+1/100",
+      "epsilon_zero_cap": "0.0022",
+      "lambda": "-100",
+      "power": 12,
+      "precision_bits": 256,
+      "start_k": 320
+    },
+    "positive_gates": {
+      "D_a_lower_above_100": true,
+      "D_a_lower_increasing_k_side": true,
+      "D_a_lower_increasing_power_side": true,
+      "D_c_lower_increasing_k_side": true,
+      "D_c_lower_increasing_power_side": true,
+      "D_c_lower_positive": true,
+      "exact_D_a_positive": true,
+      "exact_D_c_positive": true,
+      "high_comparison_decreasing": true,
+      "high_endpoint_below_k_minus_8": true,
+      "high_prefactor_below_17": true,
+      "low_comparison_decreasing_k_side": true,
+      "low_comparison_decreasing_power_side": true,
+      "low_endpoint_below_k_minus_8": true
+    },
+    "ratio_log_derivatives": [
+      "3/5+1/(L-1)-2/L>0",
+      "1+1/(L-1)-2/L>0",
+      "3/5+1/(L+1/10)-2/(L+11/10)>0",
+      "1+1/(L+1/10)-2/(L+11/10)>0",
+      "3/5+1/L-2/(L+1)>0",
+      "1+1/L-2/(L+1)>0"
+    ]
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_first_summand_power12_rebalanced_dominance_extension.py",
+  "kind": "jensen_window_pf_negative_lambda_first_summand_power12_rebalanced_dominance_extension",
+  "proof_boundary": "This artifact strengthens first-summand dominance only for lambda=-100 and k>=320. It does not prove the order-ten curvature ceiling, full-kernel transfer, endpoint entry, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The exact summand-ratio geometry and rebalanced split are inherited unchanged.",
+      "diagnostics": null,
+      "formula": "0<=delta_k=(M_k-M_k^(1))/M_k^(1)<2/k^11 for every integer k>=300; a(k)=log(k)/10",
+      "id": "fsd12r_01_power11_input",
+      "proof_boundary": "Inherited lambda=-100 kernel geometry only.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The higher-summand ratio on the high region has enough exponential reserve for a twelfth inverse power.",
+      "diagnostics": null,
+      "formula": "epsilon(a(k))<=17*exp(-3*pi*k^(2/5))<k^(-12), k>=320",
+      "id": "fsd12r_02_high_region",
+      "proof_boundary": "Arb endpoint gates plus exact derivative monotonicity.",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_certificate"
+    },
+    {
+      "claim": "The log-integrand derivative remains positive across the comparison collar for every k>=320.",
+      "diagnostics": null,
+      "formula": "S_k'(a(k))>100 and S_k'(c(k))>0",
+      "id": "fsd12r_03_saddle_geometry",
+      "proof_boundary": "Arb endpoint gates plus six exact ratio-monotonicity checks.",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_certificate"
+    },
+    {
+      "claim": "The tilted first-summand probability below the split has enough reserve for a twelfth inverse power.",
+      "diagnostics": null,
+      "formula": "epsilon(0)*P_k(u<a(k))<k^(-12), k>=320",
+      "id": "fsd12r_04_low_region",
+      "proof_boundary": "Arb endpoint gate and exact half-line derivative comparisons.",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_certificate"
+    },
+    {
+      "claim": "The two regions compose to an inverse-twelfth-power complete-to-first moment defect.",
+      "diagnostics": null,
+      "formula": "0<=delta_k=(M_k-M_k^(1))/M_k^(1)<2/k^12 for every integer k>=320",
+      "id": "fsd12r_05_full_tail",
+      "proof_boundary": "Lambda=-100 integer moments only.",
+      "readiness": "ready_to_apply",
+      "role": "analytic_theorem"
+    },
+    {
+      "claim": "The adjacent logarithmic wall inherits the inverse-twelfth-power stencil bound.",
+      "diagnostics": null,
+      "formula": "0<=log(1+delta_k)<2/k^12, k>=320; |B_j-B_j^(1)|<=a_j=2*((j-1)^(-12)+2*j^(-12)+(j+1)^(-12)), j>=321",
+      "id": "fsd12r_06_wall_error",
+      "proof_boundary": "Uses log(1+z)<=z and the exact centered stencil.",
+      "readiness": "ready_to_apply",
+      "role": "exact_consequence"
+    }
+  ],
+  "source_contract": {
+    "adaptive_split": "a(k)=log(k)/10",
+    "power11_bound": "0<=delta_k=(M_k-M_k^(1))/M_k^(1)<2/k^11 for every integer k>=300",
+    "status": "rebalanced all-k inverse-eleventh-power first-summand dominance extension"
+  },
+  "status": "rebalanced inverse-twelfth-power first-summand dominance extension from k=320",
+  "summary": {
+    "dominance_theorems": 1,
+    "full_tail_power": 12,
+    "positive_analytic_gates": 14,
+    "ready_to_apply_rows": 6,
+    "rebalanced_splits": 1,
+    "rows": 6,
+    "tail_start_k": 320
+  }
+}

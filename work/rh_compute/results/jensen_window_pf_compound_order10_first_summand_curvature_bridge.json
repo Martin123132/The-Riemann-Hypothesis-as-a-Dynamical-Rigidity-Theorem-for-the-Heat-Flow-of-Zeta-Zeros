@@ -1,0 +1,398 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order10_first_summand_curvature_bridge.py",
+  "date": "2026-07-16",
+  "exact": {
+    "conditional_delayed_entry": "z_1''(t)<=4200/t^2 on t>=1251 => Q_(10,n)(-100)>0 for every n>=4",
+    "conditional_endpoint_tail": "z_1''(t)<=4200/t^2 on t>=1251 => Q_(10,n)(-100)>0 for every n>=1243",
+    "conditional_full_ceiling": "z_1''(t)<=4200/t^2 on t>=1251 => Z_k<4201/k^2+10/k^2=4211/k^2<5500/k^2, k>=1252",
+    "continuous_coordinates": "W(t)=8*B(t)-w(t-1)+2*w(t)-w(t+1); z(t)=2*w(t)-s(t)+log(1-exp(-W(t)))",
+    "continuous_target": "z_1''(t)<=4200/t^2 for every real t>=1251",
+    "discrete_identity": "Z_k=z(k-1)-2*z(k)+z(k+1)=integral_[-1,1](1-|v|)*z''(k+v) dv",
+    "first_floor_polynomial": {
+      "coefficient_count": 3,
+      "constant_coefficient": "6893272",
+      "degree": 2,
+      "denominator_factorization": "5*j**2*(2*j + 1)",
+      "leading_coefficient": "38",
+      "minimum_coefficient": "38",
+      "shifted_coefficients": [
+        "38",
+        "53065",
+        "6893272"
+      ],
+      "start": 1251
+    },
+    "first_seventh_gap_floor": "W_j^(1)>=8/(2*j+1)-4201/j^2>1/(5*j), j>=1251",
+    "full_floor_polynomial": {
+      "coefficient_count": 3,
+      "constant_coefficient": "6510554",
+      "degree": 2,
+      "denominator_factorization": "125*j**2*(2*j + 1)",
+      "leading_coefficient": "954",
+      "minimum_coefficient": "954",
+      "shifted_coefficients": [
+        "954",
+        "1199133",
+        "6510554"
+      ],
+      "start": 1251
+    },
+    "full_seventh_gap_floor": "W_j>=1004/(125*(2*j+1))-4751/j^2>1/(5*j), j>=1251",
+    "full_transfer": "|Z_k-Z_k^(1)|<10/k^2 for every integer k>=1252",
+    "power_envelope": {
+      "rows": [
+        {
+          "bound": "a_j<=4655671464049469843420617322241/576460752303423488000000000000/j^12, j>=321",
+          "constant": "4655671464049469843420617322241/576460752303423488000000000000",
+          "constant_decimal": "8.0763025851219268140209923312351075752602014290460E+0",
+          "name": "moment wall",
+          "power": 12,
+          "recurrence": "a_j=2*((j-1)^(-12)+2*j^(-12)+(j+1)^(-12))",
+          "start": 321,
+          "symbol": "a"
+        },
+        {
+          "bound": "L_j<=4655671464049469843420617322241/144115188075855872000000000000/j^11, j>=321",
+          "constant": "4655671464049469843420617322241/144115188075855872000000000000",
+          "constant_decimal": "3.2305210340487707256083969324940430301040805716184E+1",
+          "name": "log defect",
+          "power": 11,
+          "recurrence": "L_j=4*j*a_j",
+          "start": 321,
+          "symbol": "L"
+        },
+        {
+          "bound": "U1_j<=120332273313702249296603047657607503356023472768797390174299/922825759796905530537392418131546207449994231808000000000/j^11, j>=322",
+          "constant": "120332273313702249296603047657607503356023472768797390174299/922825759796905530537392418131546207449994231808000000000",
+          "constant_decimal": "1.3039544251580584672310467422781495696658881703801E+2",
+          "name": "first gap",
+          "power": 11,
+          "recurrence": "U1_j=2*a_j+stencil(L)_j",
+          "start": 322,
+          "symbol": "U1"
+        },
+        {
+          "bound": "V1_j<=30088854834690674788759510732001359191436871410380497272788937/28838304993653297829293513066610818982812319744000000000000/j^10, j>=322",
+          "constant": "30088854834690674788759510732001359191436871410380497272788937/28838304993653297829293513066610818982812319744000000000000",
+          "constant_decimal": "1.0433641936068224738299062383524882298339592369607E+3",
+          "name": "log first gap",
+          "power": 10,
+          "recurrence": "V1_j=2*L_j+8*j*U1_j",
+          "start": 322,
+          "symbol": "V1"
+        },
+        {
+          "bound": "W1_j<=151647554547758911073284075497247099774995619135112508143900201446334189267010045120115409209/36052342831101721317653735450380122441164802571754358928181384123666109825024000000000000/j^10, j>=323",
+          "constant": "151647554547758911073284075497247099774995619135112508143900201446334189267010045120115409209/36052342831101721317653735450380122441164802571754358928181384123666109825024000000000000",
+          "constant_decimal": "4.2063162235585765071067598113801387783639955941697E+3",
+          "name": "second gap",
+          "power": 10,
+          "recurrence": "W1_j=3*a_j+stencil(V1)_j",
+          "start": 323,
+          "symbol": "W1"
+        },
+        {
+          "bound": "E_j<=253289417921382967173894703065475533249189976264362975714693742849868951630100513864138132319/84122133272570683074525382717553619029384539334093504165756562955220922925056000000000000/j^9, j>=323",
+          "constant": "253289417921382967173894703065475533249189976264362975714693742849868951630100513864138132319/84122133272570683074525382717553619029384539334093504165756562955220922925056000000000000",
+          "constant_decimal": "3.0109723573067289559132515550463406550404527335583E+3",
+          "name": "order-five coordinate",
+          "power": 9,
+          "recurrence": "E_j=2*V1_j+(5*j/7)*W1_j+L_j",
+          "start": 323,
+          "symbol": "E"
+        },
+        {
+          "bound": "Z_j<=351394131739083344271209089634780954034512696218441711720768249947738946158748783126172590369784090832093920653335167/28971800630926500390659501151703900256081772899964988114083258031375905529294617122093939009783857152000000000000/j^9, j>=324",
+          "constant": "351394131739083344271209089634780954034512696218441711720768249947738946158748783126172590369784090832093920653335167/28971800630926500390659501151703900256081772899964988114083258031375905529294617122093939009783857152000000000000",
+          "constant_decimal": "1.2128833006119094495259747922064729564989284438648E+4",
+          "name": "third gap",
+          "power": 9,
+          "recurrence": "Z_j=4*a_j+stencil(E)_j",
+          "start": 324,
+          "symbol": "Z"
+        },
+        {
+          "bound": "Y1_j<=1027021846509685750809893426418705922554083527680171084159203054069409387491079526869641617062615136806943680542071879747/126722655959672512708744658037552859720101674664446858011000170629238210785134655292038889228794591182848000000000000/j^8, j>=324",
+          "constant": "1027021846509685750809893426418705922554083527680171084159203054069409387491079526869641617062615136806943680542071879747/126722655959672512708744658037552859720101674664446858011000170629238210785134655292038889228794591182848000000000000",
+          "constant_decimal": "8.1044848589388724693469346849916782417781791026987E+3",
+          "name": "order-six coordinate",
+          "power": 8,
+          "recurrence": "Y1_j=2*E_j+V1_j+(2*j/3)*Z_j",
+          "start": 324,
+          "symbol": "Y1"
+        },
+        {
+          "bound": "O_j<=160017213556000421307534183595903537457410909227113752103969234379223800479056576049984597658641395218977740771422310111388374113121636825089271940273/4905460102993370199206405047672441380916392517085251160953952149466807868823021998143658764336186104673600965945951098954055680000000000000000000/j^8, j>=325",
+          "constant": "160017213556000421307534183595903537457410909227113752103969234379223800479056576049984597658641395218977740771422310111388374113121636825089271940273/4905460102993370199206405047672441380916392517085251160953952149466807868823021998143658764336186104673600965945951098954055680000000000000000000",
+          "constant_decimal": "3.2620225258453536525040600245863198182777275853501E+4",
+          "name": "fourth gap",
+          "power": 8,
+          "recurrence": "O_j=5*a_j+stencil(Y1)_j",
+          "start": 325,
+          "symbol": "O"
+        },
+        {
+          "bound": "N_j<=48812644655636066492758971701127097973601498471197414896847842310688718191225071406747629154631783894056600465903814570051866169735667072939960360257/2239449177453495090942054478285244978244440062147614660435499894321803592288770912196018131544780613003165658366629849522503680000000000000000000/j^7, j>=325",
+          "constant": "48812644655636066492758971701127097973601498471197414896847842310688718191225071406747629154631783894056600465903814570051866169735667072939960360257/2239449177453495090942054478285244978244440062147614660435499894321803592288770912196018131544780613003165658366629849522503680000000000000000000",
+          "constant_decimal": "2.1796719098194279486917305133977118825104953355930E+4",
+          "name": "order-seven coordinate",
+          "power": 7,
+          "recurrence": "N_j=2*Y1_j+E_j+(2*j/3)*O_j",
+          "start": 325,
+          "symbol": "N"
+        },
+        {
+          "bound": "P_j<=8651027533760037667591596526920271365798425114641230341216063987368559280866485580776069077458172359108718656651165380585492697289363231267065570788142713049406050553465145581701/98687639168440902403445117631968135756464265772190035129625977872074821000162435434861635621403442512315963601180451607978843732012917850112000000000000000000000000000000000/j^7, j>=326",
+          "constant": "8651027533760037667591596526920271365798425114641230341216063987368559280866485580776069077458172359108718656651165380585492697289363231267065570788142713049406050553465145581701/98687639168440902403445117631968135756464265772190035129625977872074821000162435434861635621403442512315963601180451607978843732012917850112000000000000000000000000000000000",
+          "constant_decimal": "8.7660700029457491118133535621819060255412167832824E+4",
+          "name": "fifth gap",
+          "power": 7,
+          "recurrence": "P_j=6*a_j+stencil(N)_j",
+          "start": 326,
+          "symbol": "P"
+        },
+        {
+          "bound": "C_j<=155292237781002765455482580502639147492982849873285869321510537903606225675751466417745913775876141343708172758694413305270838066917388390274606719296946041253708366389293996589162590499/2655686072384520339282274574904541684656795190938218415616341050585651726405033390354137865935181107215805917958138073133500922463521996569346834432000000000000000000000000000000000/j^6, j>=1249",
+          "constant": "155292237781002765455482580502639147492982849873285869321510537903606225675751466417745913775876141343708172758694413305270838066917388390274606719296946041253708366389293996589162590499/2655686072384520339282274574904541684656795190938218415616341050585651726405033390354137865935181107215805917958138073133500922463521996569346834432000000000000000000000000000000000",
+          "constant_decimal": "5.8475374554179532780353182195102180733327849644056E+4",
+          "name": "order-eight coordinate",
+          "power": 6,
+          "recurrence": "C_j=2*N_j+Y1_j+(2*j/3)*P_j",
+          "start": 1249,
+          "symbol": "C"
+        },
+        {
+          "bound": "D_j<=295132260584209728691419774814659480596062361260682843132211558263485101677395555911668010917751621984773058574740664629807101957533202752104917363634183320388010447879315046685060960336359853353170841658949/1260263560602882130844649296520422296458596367989996611554490226350777824001362160275962280075474861683592889312969952342435921907401487907479523835228884112511074304000000000000000000000000000000000000/j^6, j>=1250",
+          "constant": "295132260584209728691419774814659480596062361260682843132211558263485101677395555911668010917751621984773058574740664629807101957533202752104917363634183320388010447879315046685060960336359853353170841658949/1260263560602882130844649296520422296458596367989996611554490226350777824001362160275962280075474861683592889312969952342435921907401487907479523835228884112511074304000000000000000000000000000000000000",
+          "constant_decimal": "2.3418296760324086667653426983679686480066701050216E+5",
+          "name": "sixth gap",
+          "power": 6,
+          "recurrence": "D_j=7*a_j+stencil(C)_j",
+          "start": 1250,
+          "symbol": "D"
+        },
+        {
+          "bound": "F_j<=17717369922615792109291899398211920213140877993789351844948668312333016545712149485425629440708394483311765502857925579675787450996291650383342916936667855692314687526570324447346083388586624923464198317276799/100821084848230570467571943721633783716687709439199728924359218108062225920108972822076982406037988934687431145037596187394873752592119032598361906818310729000885944320000000000000000000000000000000000000/j^5, j>=1250",
+          "constant": "17717369922615792109291899398211920213140877993789351844948668312333016545712149485425629440708394483311765502857925579675787450996291650383342916936667855692314687526570324447346083388586624923464198317276799/100821084848230570467571943721633783716687709439199728924359218108062225920108972822076982406037988934687431145037596187394873752592119032598361906818310729000885944320000000000000000000000000000000000000",
+          "constant_decimal": "1.7573080025161756010418813909618509783502963050322E+5",
+          "name": "order-nine coordinate",
+          "power": 5,
+          "recurrence": "F_j=2*C_j+N_j+(3*j/4)*D_j",
+          "start": 1250,
+          "symbol": "F"
+        },
+        {
+          "bound": "D7_j<=72347983119311349694717866706401441434221526090240426624117132573936760246936896657504383031432027185997188780519118353850987323698748362111124536975739387144064395591810868337573914339642468431898189282518866829507421841712578508759561357/102821462843357492857604749480929039761298383719459817150408093799778072816742471468494481826760933053628936346061592309118755377278318109467923598027028663962353427120004268032000000000000000000000000000000000000000000000000000000000/j^5, j>=1251",
+          "constant": "72347983119311349694717866706401441434221526090240426624117132573936760246936896657504383031432027185997188780519118353850987323698748362111124536975739387144064395591810868337573914339642468431898189282518866829507421841712578508759561357/102821462843357492857604749480929039761298383719459817150408093799778072816742471468494481826760933053628936346061592309118755377278318109467923598027028663962353427120004268032000000000000000000000000000000000000000000000000000000000",
+          "constant_decimal": "7.0362724978469997256021983616594480868212313243489E+5",
+          "name": "seventh gap",
+          "power": 5,
+          "recurrence": "D7_j=8*a_j+stencil(F)_j",
+          "start": 1251,
+          "symbol": "D7"
+        },
+        {
+          "bound": "G_j<=17581963999080304947990041323724151962963543843593534319565418872703000061038257787117706428665597029050641445194174091222750149528171670021522964346016980962178120783824080097397889835840112790317765763999873434161243972587122153800448409751/4997123094187174152879590824773151332399101448765747113509833358669214338893684113368831816780581346406366306418593386223171511335726260120141086864113593068570376558032207426355200000000000000000000000000000000000000000000000000000000/j^4, j>=1251",
+          "constant": "17581963999080304947990041323724151962963543843593534319565418872703000061038257787117706428665597029050641445194174091222750149528171670021522964346016980962178120783824080097397889835840112790317765763999873434161243972587122153800448409751/4997123094187174152879590824773151332399101448765747113509833358669214338893684113368831816780581346406366306418593386223171511335726260120141086864113593068570376558032207426355200000000000000000000000000000000000000000000000000000000",
+          "constant_decimal": "3.5184172308127153337911582664643024559592108243906E+6",
+          "name": "order-ten coordinate",
+          "power": 4,
+          "recurrence": "G_j=2*F_j+C_j+5*j*D7_j",
+          "start": 1251,
+          "symbol": "G"
+        }
+      ],
+      "stencil_lemma": "E_m<=C/m^p for m>=J-1 implies E_(j-1)+2*E_j+E_(j+1)<=C*((J/(J-1))^p+3)/j^p, j>=J",
+      "transfer_bound": "|Z_k-Z_k^(1)|<=G_(k-1)+2*G_k+G_(k+1)<10/k^2, k>=1252",
+      "transfer_reserve_decimal": "1.0144201515516882871024620946386060923471415803066E+0",
+      "transfer_reserve_exact": "2780211093985342307043973180931177538312607424767579144895798788010082077473210262800870175415429554020116902817854646747005436743427097242928624392788507452890985267920396534580000380651443156414321538844439125327717847395931085713921292592247317433533/2740689929840851292563791861966369170785843708360178422778529222547272464927126871152398760951838556106689910772633126472537099740986265925299622651350930041653237271362105741892704718280766940774400000000000000000000000000000000000000000000000000000000",
+      "transfer_scaled_decimal": "8.9855798484483117128975379053613939076528584196934E+0",
+      "transfer_scaled_exact": "24626688204423170618593945438732514169545829658834205082889493437462642571798058448723117434102956007046782204908476617978365560666435562010067602120720792963641387445700660884347046802156226251329678461155560874672282152604068914286078707407752682566467/2740689929840851292563791861966369170785843708360178422778529222547272464927126871152398760951838556106689910772633126472537099740986265925299622651350930041653237271362105741892704718280766940774400000000000000000000000000000000000000000000000000000000"
+    },
+    "preserved_negative_prefix": "Q_(10,n)(-100)<0 for n=0,1,2,3",
+    "seventh_gap_floor": "min(W_j,W_j^(1))>1/(5*j), j>=1251",
+    "stable_derivative_residual": "0",
+    "stable_log_lipschitz": "phi(min(W_j,W_j^(1)))<=1/min(W_j,W_j^(1))<5*j",
+    "tent_transfer": "z_1''(t)<=4200/t^2 => Z_k^(1)<=4200*[-log(1-1/k^2)]<4201/k^2, k>=1252"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order10_first_summand_curvature_bridge.py",
+  "kind": "jensen_window_pf_compound_order10_first_summand_curvature_bridge",
+  "proof_boundary": "This artifact proves the seventh-gap floor and full-kernel transfer, and reduces the endpoint tail to the displayed continuous first-summand theorem. It does not yet prove that theorem, order-ten delayed entry, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The seventh stable gap gives a cancellation-free coordinate for Q9 and its order-ten centered curvature.",
+      "diagnostics": null,
+      "formula": "W(t)=8*B(t)-w(t-1)+2*w(t)-w(t+1); z(t)=2*w(t)-s(t)+log(1-exp(-W(t))); Z_k=z(k-1)-2*z(k)+z(k+1)=integral_[-1,1](1-|v|)*z''(k+v) dv",
+      "id": "co10fscb_01_continuous_coordinate",
+      "proof_boundary": "Exact stable-coordinate algebra only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Effective inverse-twelfth-power first-summand dominance supplies the moment-wall perturbation.",
+      "diagnostics": null,
+      "formula": "0<=delta_k=(M_k-M_k^(1))/M_k^(1)<2/k^12 for every integer k>=320; |B_j-B_j^(1)|<=a_j=2*((j-1)^(-12)+2*j^(-12)+(j+1)^(-12)), j>=321",
+      "id": "co10fscb_02_power12_input",
+      "proof_boundary": "Complete versus first Newman summand at lambda=-100.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "Completed order-nine curvature and the coefficient-defect floor keep both seventh gaps uniformly positive.",
+      "diagnostics": {
+        "first_polynomial": {
+          "coefficient_count": 3,
+          "constant_coefficient": "6893272",
+          "degree": 2,
+          "denominator_factorization": "5*j**2*(2*j + 1)",
+          "leading_coefficient": "38",
+          "minimum_coefficient": "38",
+          "shifted_coefficients": [
+            "38",
+            "53065",
+            "6893272"
+          ],
+          "start": 1251
+        },
+        "full_polynomial": {
+          "coefficient_count": 3,
+          "constant_coefficient": "6510554",
+          "degree": 2,
+          "denominator_factorization": "125*j**2*(2*j + 1)",
+          "leading_coefficient": "954",
+          "minimum_coefficient": "954",
+          "shifted_coefficients": [
+            "954",
+            "1199133",
+            "6510554"
+          ],
+          "start": 1251
+        }
+      },
+      "formula": "W_j^(1)>=8/(2*j+1)-4201/j^2>1/(5*j), j>=1251; W_j>=1004/(125*(2*j+1))-4751/j^2>1/(5*j), j>=1251",
+      "id": "co10fscb_03_seventh_gap_floor",
+      "proof_boundary": "Integer j>=1251 only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_rational_theorem"
+    },
+    {
+      "claim": "A staggered rational power envelope propagates the twelfth-power wall through all seven stable logarithms.",
+      "diagnostics": {
+        "envelope_rows": 16,
+        "reserve_below_10": "1.0144201515516882871024620946386060923471415803066E+0",
+        "transfer_scaled": "8.9855798484483117128975379053613939076528584196934E+0"
+      },
+      "formula": "E_m<=C/m^p for m>=J-1 implies E_(j-1)+2*E_j+E_(j+1)<=C*((J/(J-1))^p+3)/j^p, j>=J; phi(min(W_j,W_j^(1)))<=1/min(W_j,W_j^(1))<5*j",
+      "id": "co10fscb_04_power_envelope",
+      "proof_boundary": "Triangle inequalities with exact positive rational constants.",
+      "readiness": "ready_to_apply",
+      "role": "exact_rational_theorem"
+    },
+    {
+      "claim": "The complete theta kernel changes the order-ten centered curvature by fewer than ten inverse squares.",
+      "diagnostics": {
+        "scaled_envelope_decimal": "8.9855798484483117128975379053613939076528584196934E+0",
+        "scaled_envelope_exact": "24626688204423170618593945438732514169545829658834205082889493437462642571798058448723117434102956007046782204908476617978365560666435562010067602120720792963641387445700660884347046802156226251329678461155560874672282152604068914286078707407752682566467/2740689929840851292563791861966369170785843708360178422778529222547272464927126871152398760951838556106689910772633126472537099740986265925299622651350930041653237271362105741892704718280766940774400000000000000000000000000000000000000000000000000000000"
+      },
+      "formula": "|Z_k-Z_k^(1)|<10/k^2 for every integer k>=1252",
+      "id": "co10fscb_05_full_transfer",
+      "proof_boundary": "Complete versus first Newman summand at lambda=-100, k>=1252.",
+      "readiness": "ready_to_apply",
+      "role": "exact_transfer_theorem"
+    },
+    {
+      "claim": "A 4200 continuous first-summand ceiling fits inside the endpoint target after tent integration and full-kernel transfer.",
+      "diagnostics": null,
+      "formula": "z_1''(t)<=4200/t^2 => Z_k^(1)<=4200*[-log(1-1/k^2)]<4201/k^2, k>=1252; z_1''(t)<=4200/t^2 on t>=1251 => Z_k<4201/k^2+10/k^2=4211/k^2<5500/k^2, k>=1252",
+      "id": "co10fscb_06_tent_transfer",
+      "proof_boundary": "Conditional only on the displayed continuous first-summand theorem.",
+      "readiness": "ready_to_apply",
+      "role": "conditional_exact_transfer"
+    },
+    {
+      "claim": "The conditional analytic tail meets the completed positive block while preserving the four proved negative endpoint rows.",
+      "diagnostics": null,
+      "formula": "z_1''(t)<=4200/t^2 on t>=1251 => Q_(10,n)(-100)>0 for every n>=1243; Q_(10,n)(-100)>0 for every 4<=n<=1242; Q_(10,n)(-100)<0 for n=0,1,2,3",
+      "id": "co10fscb_07_endpoint_splice",
+      "proof_boundary": "No claim for n=0,1,2,3 and no RH/Jensen/Lambda conclusion.",
+      "readiness": "ready_to_apply",
+      "role": "conditional_theorem_composition"
+    },
+    {
+      "claim": "Complete the global continuous first-summand ceiling with a strict 4200 constant.",
+      "diagnostics": null,
+      "formula": "z_1''(t)<=4200/t^2 for every real t>=1251",
+      "id": "co10fscb_08_open_continuous_theorem",
+      "proof_boundary": "Compact interval computation remains the only open premise in this bridge.",
+      "readiness": "open",
+      "role": "open_analytic_target"
+    }
+  ],
+  "source_contract": {
+    "finite_negative": "Q_(10,n)(-100)<0 for n=0,1,2,3",
+    "finite_positive": "Q_(10,n)(-100)>0 for every 4<=n<=1242",
+    "first_B_floor": "1/(2*m+1)<=B_1(m)<=3/(2*m-1), integer m>=319",
+    "full_B_floor": "B(j)>=d_j>=251/(250*(2*j+1)), j>=320",
+    "order9_first_ceiling": "w_1''(t)<=4200/t^2 => Y_k^(1)<=4200*[-log(1-1/k^2)]<4201/k^2, k>=1251",
+    "order9_full_ceiling": "w_1''(t)<=4200/t^2 on t>=1250 => Y_k<4201/k^2+550/k^2=4751/k^2<4900/k^2, k>=1251",
+    "power12_B_error": "|B_j-B_j^(1)|<=a_j=2*((j-1)^(-12)+2*j^(-12)+(j+1)^(-12)), j>=321",
+    "power12_bound": "0<=delta_k=(M_k-M_k^(1))/M_k^(1)<2/k^12 for every integer k>=320",
+    "sources": [
+      {
+        "kind": "jensen_window_pf_compound_order10_m100_tail_curvature_reduction",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_m100_tail_curvature_reduction.json",
+        "sha256": "b1204a7f3c8e3f7c71b57b8c51c8525c5cea86a24cd2020b3d142aa2c152780f",
+        "status": "exact order-ten positive endpoint-tail reduction with one open seventh-nested curvature ceiling"
+      },
+      {
+        "kind": "jensen_window_pf_negative_lambda_first_summand_power12_rebalanced_dominance_extension",
+        "path": "work/rh_compute/results/jensen_window_pf_negative_lambda_first_summand_power12_rebalanced_dominance_extension.json",
+        "sha256": "d24de99afa84ba7d12e0fbbc5f5d7d6e2a9b2b73b258f85bdfd7605cf6da0c6a",
+        "status": "rebalanced inverse-twelfth-power first-summand dominance extension from k=320"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order9_m100_entry_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_m100_entry_certificate.json",
+        "sha256": "ed036ed78b86a437492a4c45e90319a2c019fb2077cbf686575a51742bf71943",
+        "status": "rigorous all-shift signed order-nine entry at lambda=-100"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order9_first_summand_curvature_bridge",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_first_summand_curvature_bridge.json",
+        "sha256": "2959900efe2d5709ad86e3e0f2c3450d9ea26eb16ff102dde94b18d9652bec85",
+        "status": "exact order-nine first/full curvature transfer with one open continuous theorem and a two-index finite splice"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order4_first_summand_curvature_bridge",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order4_first_summand_curvature_bridge.json",
+        "sha256": "ad9e2be018ec76285b468f917d9e6f15f2c28e935f4b627ffa0956a6f23ac2a3",
+        "status": "exact order-four first-summand curvature reduction with proved gap floor, a compact curvature certificate, closed full-kernel perturbation budget, and one open analytic ray"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order4_m100_entry_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order4_m100_entry_certificate.json",
+        "sha256": "161ec1a9eb678e9e523f1b2b920e4de566c9970558ff085db0743c122bebc161",
+        "status": "all-shift contiguous order-four entry theorem at lambda=-100"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order10_m100_finite_splice_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_m100_finite_splice_certificate.json",
+        "sha256": "4ae563049cef969e480478c7edbbaf260a7ad536e861979caf603c511ac483b2",
+        "status": "rigorous two-index order-ten finite splice at lambda=-100"
+      }
+    ],
+    "tail_ceiling": "Z_k<=5500/k^2 for every integer k>=1252"
+  },
+  "status": "exact order-ten first/full curvature transfer with one open global first-summand curvature theorem",
+  "summary": {
+    "conditional_full_constant": 4211,
+    "full_kernel_transfer_theorems": 1,
+    "open_rows": 1,
+    "power_envelope_rows": 16,
+    "ready_rows": 7,
+    "rows": 8,
+    "seventh_gap_floor_theorems": 1,
+    "target_constant": 5500,
+    "transfer_constant": 10
+  }
+}

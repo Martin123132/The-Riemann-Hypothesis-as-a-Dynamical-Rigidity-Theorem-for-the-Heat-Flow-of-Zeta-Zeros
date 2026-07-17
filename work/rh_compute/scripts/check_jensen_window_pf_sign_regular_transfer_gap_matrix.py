@@ -19,7 +19,7 @@ EXPECTED_ROW_IDS = (
     "srgt_02_degree3_new_obligation",
     "srgt_03_finite_reshaped_hankel_countermodel",
     "srgt_04_selected_toeplitz_countermodel",
-    "srgt_05_all_order_antecedent_requirement",
+    "srgt_05_weaker_xi_phi_antecedent_requirement",
     "srgt_06_xi_phi_specific_transfer_requirement",
     "srgt_07_binomial_shift_uniformity_requirement",
     "srgt_08_acceptable_theorem_shape",
@@ -56,7 +56,7 @@ REQUIRED_NOTE_STRINGS = (
     "d=3 first negative contiguous size: 8",
     "d=4 quartic discriminant: -668519580649275927/359661568000000000",
     "d=4 first negative contiguous size: 6",
-    "1. all-order, all-shift reshaped-Hankel sign consistency for the actual A_k(0)",
+    "1. a weaker Xi/Phi-specific antecedent satisfied despite the negative order-ten endpoint minors",
     "2. noncircular Xi/Phi-specific structure absent from arbitrary positive sequences",
     "3. binomial-weight and shift uniformity for every Jensen-window Toeplitz minor",
     "4. no endpoint PF, Jensen hyperbolicity, Laguerre-Polya, RH, or Lambda <= 0 assumptions",
@@ -267,7 +267,7 @@ def validate(matrix_path: Path, note_path: Path) -> tuple[list[TransferGapIssue]
     for required in (
         "No row is ready_to_apply.",
         "Degree-2 contact is not promoted to all-degree transfer.",
-        "Finite reshaped-Hankel signs are not promoted to all-order sign consistency.",
+        "The rejected all-order signed-Hankel antecedent is not used as a bridge hypothesis.",
         "Selected low-order Toeplitz minors are not promoted to Jensen-window PF-infinity.",
         "Endpoint PF, Jensen hyperbolicity, Laguerre-Polya membership, RH, and Lambda <= 0 are forbidden as inputs.",
     ):

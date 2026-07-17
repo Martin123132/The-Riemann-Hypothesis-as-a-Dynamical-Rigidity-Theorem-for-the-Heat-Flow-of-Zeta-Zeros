@@ -20,12 +20,12 @@
       "4719/35840"
     ]
   },
-  "date": "2026-07-06",
+  "date": "2026-07-16",
   "generator": "work/rh_compute/scripts/jensen_window_pf_sign_regular_transfer_gap_matrix.py",
   "invariants": [
     "No row is ready_to_apply.",
     "Degree-2 contact is not promoted to all-degree transfer.",
-    "Finite reshaped-Hankel signs are not promoted to all-order sign consistency.",
+    "The rejected all-order signed-Hankel antecedent is not used as a bridge hypothesis.",
     "Selected low-order Toeplitz minors are not promoted to Jensen-window PF-infinity.",
     "Endpoint PF, Jensen hyperbolicity, Laguerre-Polya membership, RH, and Lambda <= 0 are forbidden as inputs."
   ],
@@ -39,7 +39,7 @@
   "status": "finite_theorem_search_diagnostic",
   "summary": {
     "countermodel_gates": 2,
-    "main_finding": "The signed-Hankel/Jensen bridge is exact only at degree 2. The degree-3/4 countermodel gates show that finite reshaped-Hankel signs and selected low-order Toeplitz positivity do not imply Jensen-window PF-infinity; a proof needs all-order sign consistency plus a genuine Xi/Phi-specific sign-regular-to-Toeplitz transfer theorem with binomial and shift uniformity.",
+    "main_finding": "The signed-Hankel/Jensen bridge is exact only at degree 2. The degree-3/4 countermodel gates show that finite reshaped-Hankel signs and selected low-order Toeplitz positivity do not imply Jensen-window PF-infinity. The all-order signed-Hankel antecedent is itself false at order ten, so a proof needs a weaker Xi/Phi-specific kernel, determinant, or direct Jensen theorem with binomial and shift uniformity.",
     "open_requirement_rows": 3,
     "ready_to_apply_rows": 0,
     "rejected_shortcut_rows": 3,
@@ -93,15 +93,16 @@
       ]
     },
     {
-      "acceptance_test": "State the exact all-order minor family and prove it for the actual A_k(0).",
-      "claim": "The signed-Hankel side must be an all-order, all-shift reshaped-Hankel sign-consistency theorem, not a finite staircase.",
-      "id": "srgt_05_all_order_antecedent_requirement",
-      "proof_boundary": "Open antecedent requirement only; current Arb certificates are finite.",
+      "acceptance_test": "State an exact kernel, determinant, or variation-diminishing condition and prove it for the actual A_k(0) without all-shift signed-Hankel positivity.",
+      "claim": "The bridge needs a weaker Xi/Phi-specific antecedent that is actually satisfied despite the negative order-ten signed-Hankel endpoint minors.",
+      "id": "srgt_05_weaker_xi_phi_antecedent_requirement",
+      "proof_boundary": "Open replacement antecedent only; the former all-order signed-Hankel requirement is rejected.",
       "readiness": "not_ready_to_apply",
       "role": "open_requirement",
       "source_artifacts": [
         "outputs/signed_hankel_jensen_bridge_target.md",
-        "outputs/jensen_window_pf_bridge_obligations.md"
+        "outputs/jensen_window_pf_bridge_obligations.md",
+        "outputs/jensen_window_pf_endpoint_order10_counterexample.md"
       ]
     },
     {
@@ -140,7 +141,7 @@
       ]
     },
     {
-      "acceptance_test": "Reject any proposed proof step that avoids the all-order transfer theorem with one of these shortcuts.",
+      "acceptance_test": "Reject any proposed proof step that avoids an all-degree/all-shift Xi/Phi theorem with one of these shortcuts.",
       "claim": "Finite grids, degree-2 analogy, selected minors, endpoint PF/LP assumptions, and asymptotic Jensen statements are forbidden as bridge replacements.",
       "id": "srgt_09_forbidden_transfer_shortcuts",
       "proof_boundary": "Rejected proof templates only.",

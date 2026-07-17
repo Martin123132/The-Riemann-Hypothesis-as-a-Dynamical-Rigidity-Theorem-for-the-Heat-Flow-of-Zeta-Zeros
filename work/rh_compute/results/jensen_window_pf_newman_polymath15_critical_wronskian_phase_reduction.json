@@ -1,0 +1,261 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_critical_wronskian_phase_reduction",
+  "date": "2026-07-17",
+  "status": "exact thin-collar Wronskian reduction of corrected critical C1 transversality; open arithmetic separation, not Lambda<=0 or RH",
+  "proof_boundary": "This artifact proves exact complex, polar, Wronskian, and robust collision identities. The numerical rows only reject an unjustified one-sided phase-sign shortcut. It does not prove the L>=50 thin-collar Wronskian target on either the live asymptotic layer or the bounded-L residual domains, corrected transversality, Lambda<=0, or RH.",
+  "exact": {
+    "complex_split": "Choose the sharp endpoint half q_(N,t) so Q_(N,t)=2*Re(q_(N,t)) on the real axis, and set E_(N,t)=exp(i*beta_t)D_(N,t)-q_(N,t); then J_(N,t)=2*Re(E_(N,t)) and J_(N,t)'=2*Re(E_(N,t)')",
+    "cartesian": "For E=X+iY and E'=U+iV, T_L[J]=4*(X^2+(U/L)^2)",
+    "wronskian": "W_E=Im(E'*conj(E))=V*X-U*Y",
+    "polar": "If E=a*exp(i*theta), u=(log(a))', and v=theta', then T_L[J]=4*a^2*(cos(theta)^2+(u*cos(theta)-v*sin(theta))^2/L^2) and W_E=a^2*v",
+    "crossing": "At Re(E)=0 with E!=0, T_L[J]=4*W_E^2/(|E|^2*L^2); J=J'=0 if and only if theta'=0",
+    "collision_wronskian_cap": "If Z=J+r=Z'=0, |r|<=epsilon_0, and |r'|<=L*epsilon_1, then 2*|W_E|<=epsilon_0*|E'|+L*epsilon_1*|E|",
+    "thin_collar_target": "For every critical point, either |Re(E)|>epsilon_0/2 or 2*|W_E|>epsilon_0*|E'|+L*epsilon_1*|E|",
+    "target_domains": "The explicit formulas remain valid on the original domain L>=50, 0<tL<=25. After the oscillatory-zeta theorem, the live asymptotic high-frequency layer is 0<tL<=c_*+o(1), with c_*=4911678521/1933561194; uncovered bounded L remains a separate compact-certificate obligation",
+    "explicit_target": "With epsilon_0=2500*exp(-3L/4) and epsilon_1=5000*exp(-3L/4), either |Re(E)|>1250*exp(-3L/4) or 2*|W_E|>exp(-3L/4)*(2500*|E'|+5000*L*|E|)",
+    "critical_value_form": "Where E!=0, collision means theta is pi/2 modulo pi and theta'=0; the open arithmetic theorem is quantitative avoidance of those phase critical levels",
+    "generator_bridge": "At J=0 with E=iY and Y!=0, W_E=-Y*J'/2; along a moving simple zero x_*(t), x_*'=-J_t/J'=J_t*Y/(2*W_E)",
+    "pair_wronskian": "If J(x)=(x-alpha)*(x-beta)*G(x), then |W_E(alpha)|=|E(alpha)|*(beta-alpha)*|G(alpha)|/2; the Wronskian margin is linearly close-pair sensitive"
+  },
+  "diagnostics": {
+    "role": "finite_route_shaping_diagnostics_only",
+    "proof_boundary": "Moderate-frequency t=0 points show that neither a global nor a crossing-only one-sided phase sign follows formally. They do not establish the L>=50 thin-collar target.",
+    "dps": 75,
+    "sign_rows": [
+      {
+        "x": "200",
+        "cutoff": 3,
+        "corrected_value": "-2.6920008611978339946803078732470683",
+        "phase_velocity": "-0.62876427292260076604473370434323226"
+      },
+      {
+        "x": "520",
+        "cutoff": 6,
+        "corrected_value": "0.20998937859155427189429724969416780",
+        "phase_velocity": "0.72480971998204420553083276562185424"
+      }
+    ],
+    "root_rows": [
+      {
+        "bracket": [
+          "517.1",
+          "517.3"
+        ],
+        "root": "517.2201245916915343451981788255318076677",
+        "abs_corrected_value_residual": "2.635758643014824499667915e-74",
+        "abs_E": "1.2067463842183701382306952729844251",
+        "phase_velocity": "-0.55142810044966476597942521956113449"
+      },
+      {
+        "bracket": [
+          "519.6",
+          "519.9"
+        ],
+        "root": "519.7486269586060360224240422895051497992",
+        "abs_corrected_value_residual": "1.385241436237148917911971e-74",
+        "abs_E": "0.33681215545627004527670364642176556",
+        "phase_velocity": "1.2989222762566859009109017488767268"
+      }
+    ],
+    "lehmer_pair": {
+      "roots": [
+        {
+          "bracket": [
+            "14010.12",
+            "14010.13"
+          ],
+          "root": "14010.12594382089318324866358493301988117",
+          "abs_corrected_value_residual": "1.839901165988651049660061e-72",
+          "abs_E": "0.57596275639584201104758809091932366",
+          "abs_W": "0.059350057399241023592912928392882718",
+          "phase_velocity": "0.17890906267654252236906178230689983"
+        },
+        {
+          "bracket": [
+            "14010.19",
+            "14010.21"
+          ],
+          "root": "14010.20090109869997081492153406456328151",
+          "abs_corrected_value_residual": "7.038822819144176147474892e-73",
+          "abs_E": "0.67875714619002606350138351480807996",
+          "abs_W": "0.072035416168465488766306515643226443",
+          "phase_velocity": "-0.15635696774718775311741288197780475"
+        }
+      ],
+      "gap": "0.074957277806787566257949131543400340",
+      "min_abs_phase_velocity": "0.156356967747187753117412881978"
+    }
+  },
+  "convergence": {
+    "max_abs_root_delta": "0.0",
+    "max_abs_phase_velocity_delta": "0.0"
+  },
+  "rows": [
+    {
+      "id": "np15cwpr_01_complex_split",
+      "role": "exact_definition",
+      "readiness": "ready_to_apply",
+      "claim": "The corrected real main is the real part of one explicit complex main.",
+      "formula": "Choose the sharp endpoint half q_(N,t) so Q_(N,t)=2*Re(q_(N,t)) on the real axis, and set E_(N,t)=exp(i*beta_t)D_(N,t)-q_(N,t); then J_(N,t)=2*Re(E_(N,t)) and J_(N,t)'=2*Re(E_(N,t)')",
+      "proof_boundary": "Real axis with one fixed analytic cutoff lift.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15cwpr_02_cartesian_jet",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The corrected C1 target is the Euclidean first jet of the real part of E.",
+      "formula": "For E=X+iY and E'=U+iV, T_L[J]=4*(X^2+(U/L)^2)",
+      "proof_boundary": "No division by E.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15cwpr_03_polar_jet",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "Away from zeros of E, the first jet separates radial and phase motion exactly.",
+      "formula": "If E=a*exp(i*theta), u=(log(a))', and v=theta', then T_L[J]=4*a^2*(cos(theta)^2+(u*cos(theta)-v*sin(theta))^2/L^2) and W_E=a^2*v",
+      "proof_boundary": "Only the polar rewrite assumes E is nonzero.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15cwpr_04_crossing_wronskian",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "At a corrected crossing, simplicity is exactly nonvanishing phase velocity.",
+      "formula": "W_E=Im(E'*conj(E))=V*X-U*Y; At Re(E)=0 with E!=0, T_L[J]=4*W_E^2/(|E|^2*L^2); J=J'=0 if and only if theta'=0",
+      "proof_boundary": "E nonzero at the crossing.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15cwpr_05_collision_cap",
+      "role": "exact_exclusion_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "A true double zero forces an explicit upper bound on the complex Wronskian.",
+      "formula": "If Z=J+r=Z'=0, |r|<=epsilon_0, and |r'|<=L*epsilon_1, then 2*|W_E|<=epsilon_0*|E'|+L*epsilon_1*|E|",
+      "proof_boundary": "Uses only the certified normalized C1 remainder caps.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15cwpr_06_thin_collar",
+      "role": "strategy_reduction",
+      "readiness": "conditional_ready",
+      "claim": "It is sufficient to prove Wronskian separation only in the exponentially thin corrected-value collar.",
+      "formula": "For every critical point, either |Re(E)|>epsilon_0/2 or 2*|W_E|>epsilon_0*|E'|+L*epsilon_1*|E|",
+      "proof_boundary": "Sufficient, not asserted as established.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15cwpr_07_explicit_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The global remainder constants give a concrete crossing-localized arithmetic target.",
+      "formula": "With epsilon_0=2500*exp(-3L/4) and epsilon_1=5000*exp(-3L/4), either |Re(E)|>1250*exp(-3L/4) or 2*|W_E|>exp(-3L/4)*(2500*|E'|+5000*L*|E|)",
+      "proof_boundary": "Open on the original L>=50, 0<tL<=25 domain. Asymptotically the live high-frequency layer is 0<tL<=c_*+o(1); bounded-L residuals remain separate compact obligations.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15cwpr_08_phase_critical_values",
+      "role": "dynamical_reformulation",
+      "readiness": "conditional_ready",
+      "claim": "The surviving phase-critical obstruction is exactly the collapsing denominator of the zero generator and is linearly close-pair sensitive.",
+      "formula": "Where E!=0, collision means theta is pi/2 modulo pi and theta'=0; the open arithmetic theorem is quantitative avoidance of those phase critical levels; At J=0 with E=iY and Y!=0, W_E=-Y*J'/2; along a moving simple zero x_*(t), x_*'=-J_t/J'=J_t*Y/(2*W_E); If J(x)=(x-alpha)*(x-beta)*G(x), then |W_E(alpha)|=|E(alpha)|*(beta-alpha)*|G(alpha)|/2; the Wronskian margin is linearly close-pair sensitive",
+      "proof_boundary": "Quantitative control is still missing.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15cwpr_09_sign_diagnostic",
+      "role": "route_rejection_diagnostic",
+      "readiness": "diagnostic_only",
+      "claim": "Finite corrected examples have both phase signs, including at corrected crossings.",
+      "formula": "one-sided phase sign is not an algebraic consequence of the corrected representation",
+      "proof_boundary": "Moderate-frequency finite evidence only.",
+      "diagnostics": {
+        "convergence": {
+          "max_abs_root_delta": "0.0",
+          "max_abs_phase_velocity_delta": "0.0"
+        },
+        "sign_rows": [
+          {
+            "x": "200",
+            "cutoff": 3,
+            "corrected_value": "-2.6920008611978339946803078732470683",
+            "phase_velocity": "-0.62876427292260076604473370434323226"
+          },
+          {
+            "x": "520",
+            "cutoff": 6,
+            "corrected_value": "0.20998937859155427189429724969416780",
+            "phase_velocity": "0.72480971998204420553083276562185424"
+          }
+        ],
+        "root_rows": [
+          {
+            "bracket": [
+              "517.1",
+              "517.3"
+            ],
+            "root": "517.2201245916915343451981788255318076677",
+            "abs_corrected_value_residual": "2.635758643014824499667915e-74",
+            "abs_E": "1.2067463842183701382306952729844251",
+            "phase_velocity": "-0.55142810044966476597942521956113449"
+          },
+          {
+            "bracket": [
+              "519.6",
+              "519.9"
+            ],
+            "root": "519.7486269586060360224240422895051497992",
+            "abs_corrected_value_residual": "1.385241436237148917911971e-74",
+            "abs_E": "0.33681215545627004527670364642176556",
+            "phase_velocity": "1.2989222762566859009109017488767268"
+          }
+        ],
+        "lehmer_pair": {
+          "roots": [
+            {
+              "bracket": [
+                "14010.12",
+                "14010.13"
+              ],
+              "root": "14010.12594382089318324866358493301988117",
+              "abs_corrected_value_residual": "1.839901165988651049660061e-72",
+              "abs_E": "0.57596275639584201104758809091932366",
+              "abs_W": "0.059350057399241023592912928392882718",
+              "phase_velocity": "0.17890906267654252236906178230689983"
+            },
+            {
+              "bracket": [
+                "14010.19",
+                "14010.21"
+              ],
+              "root": "14010.20090109869997081492153406456328151",
+              "abs_corrected_value_residual": "7.038822819144176147474892e-73",
+              "abs_E": "0.67875714619002606350138351480807996",
+              "abs_W": "0.072035416168465488766306515643226443",
+              "phase_velocity": "-0.15635696774718775311741288197780475"
+            }
+          ],
+          "gap": "0.074957277806787566257949131543400340",
+          "min_abs_phase_velocity": "0.156356967747187753117412881978"
+        }
+      }
+    },
+    {
+      "id": "np15cwpr_10_nonpromotion",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "The Wronskian reduction and finite crossing diagnostics do not prove phase-level avoidance.",
+      "formula": "exact reduction plus finite diagnostics != corrected transversality",
+      "proof_boundary": "Not Lambda<=0 or RH.",
+      "diagnostics": null
+    }
+  ],
+  "sources": [
+    "outputs/jensen_window_pf_newman_polymath15_critical_transversality_target.md",
+    "outputs/jensen_window_pf_newman_polymath15_critical_C1_global_remainder_certificate.md",
+    "outputs/jensen_window_pf_newman_polymath15_oscillatory_zeta_handoff_theorem.md",
+    "outputs/jensen_window_pf_newman_polymath15_cancellation_zero_free_wall_gate.md",
+    "https://arxiv.org/abs/1904.12438"
+  ]
+}

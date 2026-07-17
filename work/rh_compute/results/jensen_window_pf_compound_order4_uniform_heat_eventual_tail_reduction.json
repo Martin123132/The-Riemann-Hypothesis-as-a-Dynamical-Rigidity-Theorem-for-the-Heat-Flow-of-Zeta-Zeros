@@ -1,0 +1,172 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order4_uniform_heat_eventual_tail_reduction.py",
+  "date": "2026-07-13",
+  "exact": {
+    "determinant_expansion": "det K=768*G_2(lambda,M)^6*h(lambda,M)^6+o(h(lambda,M)^6) uniformly",
+    "forward_consequence": "the uniform tail plus lambda=-100 entry and the cooperative flow imply H_(4,n)(lambda)>0 for all n>=0 and lambda in [-100,0]",
+    "heat_tilt_factor": "R_T^(1)(k)=A_k^(1)(-T)/A_k^(1)(0), 0<=T<=100",
+    "higher_theta_handoff": "closed: every fixed local log difference of the complete-to-first-summand correction is uniformly O_p,m(k^-p) for every p>0",
+    "indexing": "M=n+6; backward shifts j=6-i-j_column in {0,...,6}",
+    "normalized_matrix": "K_(i,j)=exp(-sum_(m=2)^7 G_m*h^(m-1)*(6-i-j)^m+r_(6-i-j))",
+    "parameter_interval": "I=[-100,0]",
+    "permutations_checked": 24,
+    "sufficient_heat_tilt_estimate": "Delta_k^m log R_T^(1)(k)=O(log(k)/k^m) uniformly for 0<=T<=100, m=2,...,7",
+    "symbolic_coefficients": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "768*G2**6"
+    ],
+    "uniform_coefficient_control": "sup_(lambda in I)|G_m(lambda,M)|=O(1), m=3,...,7",
+    "uniform_ratio_hypothesis": "log(A_(M-j)(lambda)/A_M(lambda))=-G_1(lambda,M)*j-sum_(m=2)^7 G_m(lambda,M)*h(lambda,M)^(m-1)*j^m+r_(lambda,M,j)",
+    "uniform_remainder": "max_(lambda in I,0<=j<=6)|r_(lambda,M,j)|=o(h(lambda,M)^6) uniformly",
+    "uniform_small_parameter": "sup_(lambda in I) h(lambda,M)->0 and sup_(lambda in I)|G_2(lambda,M)-1|->0",
+    "uniform_tail_consequence": "there exists N such that H_(4,n)(lambda)>0 for every n>=N and lambda in [-100,0]",
+    "why_sufficient": "O(log(k)/k^m)=o(k^(-(m-1))) for m>=2, so the bounded heat tilt does not change the universal G_2 limit or the graded ratio scales"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order4_uniform_heat_eventual_tail_reduction.py",
+  "kind": "jensen_window_pf_compound_order4_uniform_heat_eventual_tail_reduction",
+  "proof_boundary": "This artifact proves the universal determinant and finite-confinement implications of a uniform compact-heat ratio expansion. It does not prove that Xi-specific expansion, a uniform eventual tail, unconditional order-four invariance, arbitrary-column order four, PF-infinity, RH, or Lambda<=0.",
+  "remaining_target": "Delta_k^m log R_T^(1)(k)=O(log(k)/k^m) uniformly for 0<=T<=100, m=2,...,7",
+  "rows": [
+    {
+      "claim": "A compact-parameter degree-seven backward-ratio expansion isolates all analytic input needed by the order-four determinant.",
+      "diagnostics": null,
+      "formula": "log(A_(M-j)(lambda)/A_M(lambda))=-G_1(lambda,M)*j-sum_(m=2)^7 G_m(lambda,M)*h(lambda,M)^(m-1)*j^m+r_(lambda,M,j)",
+      "id": "co4uhet_01_uniform_ratio_contract",
+      "proof_boundary": "Sufficient hypothesis contract only; it is not yet proved for the heat-deformed Xi coefficients.",
+      "readiness": "ready_to_apply",
+      "role": "exact_hypothesis_contract"
+    },
+    {
+      "claim": "Uniformity in the heat parameter does not alter the universal cancellation through order h^5 or its positive first coefficient.",
+      "diagnostics": {
+        "coefficients": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "768*G2**6"
+        ],
+        "permutations_checked": 24
+      },
+      "formula": "[h^0,...,h^6] det K=[0,0,0,0,0,0,768*G_2^6]",
+      "id": "co4uhet_02_symbolic_cancellation",
+      "proof_boundary": "Exact 24-permutation formal determinant computation.",
+      "readiness": "ready_to_apply",
+      "role": "exact_symbolic_lemma"
+    },
+    {
+      "claim": "The uniform ratio contract forces a strictly positive contiguous order-four tail simultaneously across the complete compact heat interval.",
+      "diagnostics": null,
+      "formula": "det K=768*G_2(lambda,M)^6*h(lambda,M)^6+o(h(lambda,M)^6) uniformly; there exists N such that H_(4,n)(lambda)>0 for every n>=N and lambda in [-100,0]",
+      "id": "co4uhet_03_uniform_determinant_transfer",
+      "proof_boundary": "Conditional on co4uhet_01 for the actual heat-deformed Xi coefficients.",
+      "readiness": "conditional",
+      "role": "exact_conditional_theorem"
+    },
+    {
+      "claim": "The uniform determinant tail composes with entry and cooperativity to close every finite order-four coordinate.",
+      "diagnostics": {
+        "source": "exact finite-confinement forward-invariance reduction with one open uniform tail"
+      },
+      "formula": "the uniform tail plus lambda=-100 entry and the cooperative flow imply H_(4,n)(lambda)>0 for all n>=0 and lambda in [-100,0]",
+      "id": "co4uhet_04_finite_confinement_composition",
+      "proof_boundary": "Conditional contiguous order-four theorem only.",
+      "readiness": "conditional",
+      "role": "exact_conditional_theorem"
+    },
+    {
+      "claim": "It is sufficient to control seven local finite differences of the bounded heat-tilt multiplier relative to the published lambda-zero sequence.",
+      "diagnostics": {
+        "scale_comparison": "O(log(k)/k^m)=o(k^(-(m-1))) for m>=2, so the bounded heat tilt does not change the universal G_2 limit or the graded ratio scales",
+        "tilt": "R_T^(1)(k)=A_k^(1)(-T)/A_k^(1)(0), 0<=T<=100"
+      },
+      "formula": "Delta_k^m log R_T^(1)(k)=O(log(k)/k^m) uniformly for 0<=T<=100, m=2,...,7",
+      "id": "co4uhet_05_heat_tilt_reduction",
+      "proof_boundary": "Sufficient asymptotic estimate; no estimate is asserted here.",
+      "readiness": "ready_to_apply",
+      "role": "exact_asymptotic_reduction"
+    },
+    {
+      "claim": "The complete-to-first-summand correction and every fixed local logarithmic difference are uniformly superpolynomial throughout the heat interval.",
+      "diagnostics": {
+        "baseline_power_six": "0<=delta_k(T)<=delta_k(100)<=2/k^6, k>=300, 0<=T<=100",
+        "status": "uniform compact-heat superpolynomial first-summand dominance theorem"
+      },
+      "formula": "for every p>0 and fixed m, sup_(0<=T<=100)|nabla^m e_k(T)|=O_p,m(k^(-p))",
+      "id": "co4uhet_06_first_summand_input",
+      "proof_boundary": "Closed higher-theta handoff; only the first-summand heat tilt remains.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "Prove the uniform first-summand heat-tilt finite-difference estimate.",
+      "diagnostics": {
+        "higher_theta": "closed: every fixed local log difference of the complete-to-first-summand correction is uniformly O_p,m(k^-p) for every p>0"
+      },
+      "formula": "Delta_k^m log R_T^(1)(k)=O(log(k)/k^m) uniformly for 0<=T<=100, m=2,...,7",
+      "id": "co4uhet_07_uniform_heat_tilt_target",
+      "proof_boundary": "Sole Xi-specific asymptotic target in this reduction; no forward invariance or RH conclusion is asserted.",
+      "readiness": "not_ready_to_apply",
+      "role": "analytic_theorem_target"
+    }
+  ],
+  "source_diagnostics": {
+    "dominance_status": "exact heat-parameter dominance transfer with open lambda-zero curvature tail",
+    "dominance_uniform_interval": "0<=delta_k(T)<=delta_k(100)<=2/k^6, k>=300, 0<=T<=100",
+    "forward_remaining_target": "exists N such that Q_n(lambda)>0 for every n>=N and -100<=lambda<=0",
+    "forward_status": "exact finite-confinement forward-invariance reduction with one open uniform tail",
+    "lambda0_eventual": "there exists N_H4 such that H_(4,n)(0)>0 for every n>=N_H4",
+    "lambda0_ratio_source": "Griffin-Ono-Rolen-Thorner-Tripp-Wagner, Jensen Polynomials for the Riemann Xi Function",
+    "lambda0_status": "exact eventual lambda-zero order-four positivity theorem plus a rigorous 501-shift prefix, with the effective splice still open",
+    "superpolynomial_local_differences": "for every p>0 and fixed m, sup_(0<=T<=100)|nabla^m e_k(T)|=O_p,m(k^(-p))",
+    "superpolynomial_status": "uniform compact-heat superpolynomial first-summand dominance theorem"
+  },
+  "source_hashes": {
+    "work/rh_compute/results/jensen_window_pf_compound_order4_eventual_tail_forward_invariance_reduction.json": "68be27771d517ff6e7140210a4c5218304159895a3c086efb5839d4e505b278b",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_lambda0_eventual_positivity_certificate.json": "ddbc859d870da21486167d1916c11ec4ede0df6b14d1dd8bb6b43f10c6548108",
+    "work/rh_compute/results/jensen_window_pf_lambda0_first_summand_dominance_transfer.json": "8ce4e41b19f1fb7f46298973c61333d312f11884434194a376d0df6c28642990",
+    "work/rh_compute/results/jensen_window_pf_uniform_superpolynomial_first_summand_dominance.json": "babba28c13b5d849d42802752124c0cbf692fd0e00851cd960c48d1afff58057"
+  },
+  "sources": [
+    "work/rh_compute/results/jensen_window_pf_compound_order4_lambda0_eventual_positivity_certificate.json",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_eventual_tail_forward_invariance_reduction.json",
+    "work/rh_compute/results/jensen_window_pf_lambda0_first_summand_dominance_transfer.json",
+    "work/rh_compute/results/jensen_window_pf_uniform_superpolynomial_first_summand_dominance.json"
+  ],
+  "status": "exact uniform-asymptotic order-four reduction with one open heat-tilt theorem",
+  "summary": {
+    "conditional_rows": 2,
+    "exact_or_input_rows": 6,
+    "finite_confinement_compositions": 1,
+    "higher_theta_handoffs_closed": 1,
+    "open_analytic_rows": 1,
+    "open_heat_tilt_theorems": 1,
+    "ready_to_apply_rows": 4,
+    "rows": 7,
+    "symbolic_coefficients_checked": 7,
+    "uniform_determinant_transfers": 1
+  },
+  "symbolic_cancellation": {
+    "coefficients_h0_through_h6": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "768*G2**6"
+    ],
+    "first_nonzero_term": "768*G2^6*h^6",
+    "independence": "G3,...,G7 cancel from the first nonzero coefficient",
+    "matrix_entry": "K_(i,j)(h)=exp(-sum_(m>=2) G_m*h^(m-1)*(6-i-j)^m)",
+    "permutations_checked": 24,
+    "truncation": "m=2,...,7 and powers h^0,...,h^6"
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_dominant_saddle_global_ray_certificate",
+  "date": "2026-07-17",
+  "status": "strict first Laguerre positivity for exact H_t on the complete ray t*log(x/(4*pi))>=25, including all cutoff transitions; not a proof of Lambda<=0 or RH",
+  "proof_boundary": "This artifact proves L_t(x)>0 for every real x satisfying 0<t<=1/2 and t*log(x/(4*pi))>=25, with no cutoff-distance restriction. It does not cover 0<t*log(x/(4*pi))<25, all real x and t, Lambda<=0, or RH.",
+  "parameters": {
+    "precision_bits": 256,
+    "rho": "1/4",
+    "L_min": "50/1",
+    "delta": "1/8000",
+    "tL_min": "25/1"
+  },
+  "exact": {
+    "region": "0<t<=1/2, L=log(x/(4*pi)), t*L>=25, N_x=floor(sqrt(x/(4*pi)+t/16))",
+    "boundary_spacing": "x_(N+1)-x_N=4*pi*(2N+1); for L>=50 a radius-1/4 disk crosses at most one cutoff boundary",
+    "fixed_center": "Use S_(N_x,t)(z)=B_t(z)f_(N_x,t)(z) throughout the disk, even where the theorem-prescribed cutoff N_z differs from N_x",
+    "adjacent_difference": "|f_(N_z,t)(z)-f_(N_x,t)(z)|<=3*n^(-7/2), n>=exp(L/2)-1",
+    "raw_jump": "|S_(N_z,t)(z)-S_(N_x,t)(z)|/A_t(x)<10^-30",
+    "global_collar": "sup_(|z-x|=1/4)|H_t(z)-S_(N_x,t)(z)|/A_t(x)<1/8000",
+    "theorem": "For every real x on the ray, C_t[H_t/A_t](x)>3/40*L^2 and L_t(x)>0",
+    "remaining_layer": "0<t*log(x/(4*pi))<25"
+  },
+  "arb": {
+    "precision_bits": 256,
+    "adjacent_index_lower_ball": "[72004899336.38587252416135146612615791522353381339527873622138644723206 +/- 6.92e-61]",
+    "adjacent_index_gt": "10^10",
+    "cutoff_spacing_ball": "[1809680502233.865854291827428695439892669742826063980112641412636231964 +/- 7.49e-59]",
+    "cutoff_spacing_gt": "1/2",
+    "raw_adjacent_jump_ball": "[8.751811692390317453095950416291923816104918478522244230782868344244592e-37 +/- 4.19e-107]",
+    "raw_adjacent_jump_lt": "10^-30",
+    "prior_fixed_cell_collar_ball": "[0.0001144926418905000756380979082439183439073632620634334355034308779338375 +/- 4.16e-74]",
+    "global_collar_ball": "[0.0001144926418905000756380979082439192190885325010951787450984725071262191 +/- 5.21e-74]",
+    "global_collar_lt": "1/8000"
+  },
+  "rational_budget": {
+    "collar": {
+      "rho": "1/4",
+      "cell_boundary_distance": "1/2",
+      "delta": "1/8000"
+    },
+    "normalized_jet_caps": {
+      "eps0": "1/8000",
+      "eps1_over_L": "7/160000",
+      "eps2_over_L2": "13/800000"
+    },
+    "main_jet_caps": {
+      "P": "282/125",
+      "P1_over_L": "59/100",
+      "P2_over_L2": "77/500"
+    },
+    "curvature": {
+      "remainder_error_over_L2_raw": "17206231250000000000000036097/160000000000000000000000000000000",
+      "remainder_error_over_L2": "1/1000",
+      "finite_main_margin_over_L2": "19/250",
+      "full_margin_over_L2": "3/40"
+    }
+  },
+  "rows": [
+    {
+      "id": "np15dsgrc_01_boundary_spacing",
+      "role": "exact_geometry",
+      "readiness": "ready_to_apply",
+      "claim": "A Cauchy disk on the dominant ray can meet no more than one Riemann-Siegel cutoff transition.",
+      "formula": "x_(N+1)-x_N=4*pi*(2N+1); for L>=50 a radius-1/4 disk crosses at most one cutoff boundary",
+      "proof_boundary": "Exact cutoff spacing plus the Arb lower bound on N.",
+      "diagnostics": {
+        "spacing_ball": "[1809680502233.865854291827428695439892669742826063980112641412636231964 +/- 7.49e-59]",
+        "spacing_gt": "1/2"
+      }
+    },
+    {
+      "id": "np15dsgrc_02_fixed_center_cutoff",
+      "role": "exact_handoff",
+      "readiness": "ready_to_apply",
+      "claim": "One may keep the center cutoff fixed as an analytic main sum throughout a transition-crossing disk.",
+      "formula": "Use S_(N_x,t)(z)=B_t(z)f_(N_x,t)(z) throughout the disk, even where the theorem-prescribed cutoff N_z differs from N_x",
+      "proof_boundary": "The fixed finite sum remains holomorphic; only its comparison with the prescribed sum changes.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15dsgrc_03_adjacent_block",
+      "role": "analytic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The discrepancy between adjacent prescribed cutoffs is one strongly suppressed two-saddle block.",
+      "formula": "|f_(N_z,t)(z)-f_(N_x,t)(z)|<=3*n^(-7/2), n>=exp(L/2)-1",
+      "proof_boundary": "Uses tL>=25, the published Re(s_*) bound, and the gamma/kappa bounds.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15dsgrc_04_arb_jump",
+      "role": "interval_certificate",
+      "readiness": "certified",
+      "claim": "Arb bounds the raw adjacent-cutoff jump far below the available collar slack.",
+      "formula": "|S_(N_z,t)(z)-S_(N_x,t)(z)|/A_t(x)<10^-30",
+      "proof_boundary": "Outward-rounded evaluation at the monotone endpoint L=50.",
+      "diagnostics": {
+        "precision_bits": 256,
+        "adjacent_index_lower_ball": "[72004899336.38587252416135146612615791522353381339527873622138644723206 +/- 6.92e-61]",
+        "adjacent_index_gt": "10^10",
+        "cutoff_spacing_ball": "[1809680502233.865854291827428695439892669742826063980112641412636231964 +/- 7.49e-59]",
+        "cutoff_spacing_gt": "1/2",
+        "raw_adjacent_jump_ball": "[8.751811692390317453095950416291923816104918478522244230782868344244592e-37 +/- 4.19e-107]",
+        "raw_adjacent_jump_lt": "10^-30",
+        "prior_fixed_cell_collar_ball": "[0.0001144926418905000756380979082439183439073632620634334355034308779338375 +/- 4.16e-74]",
+        "global_collar_ball": "[0.0001144926418905000756380979082439192190885325010951787450984725071262191 +/- 5.21e-74]",
+        "global_collar_lt": "1/8000"
+      }
+    },
+    {
+      "id": "np15dsgrc_05_global_collar",
+      "role": "interval_certificate",
+      "readiness": "certified",
+      "claim": "The same raw Cauchy collar bound now holds whether or not the disk crosses a cutoff.",
+      "formula": "sup_(|z-x|=1/4)|H_t(z)-S_(N_x,t)(z)|/A_t(x)<1/8000",
+      "proof_boundary": "Combines the fixed-cell published remainder with at most one adjacent block.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15dsgrc_06_global_exact_h_ray",
+      "role": "proved_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Strict first Laguerre positivity holds for the exact Newman heat flow on the entire dominant-saddle ray.",
+      "formula": "For every real x on the ray, C_t[H_t/A_t](x)>3/40*L^2 and L_t(x)>0",
+      "proof_boundary": "No cutoff-distance exception remains; the tL threshold remains essential.",
+      "diagnostics": {
+        "remainder_error_over_L2_raw": "17206231250000000000000036097/160000000000000000000000000000000",
+        "remainder_error_over_L2": "1/1000",
+        "finite_main_margin_over_L2": "19/250",
+        "full_margin_over_L2": "3/40"
+      }
+    },
+    {
+      "id": "np15dsgrc_07_cutoff_gap_closed",
+      "role": "closure_record",
+      "readiness": "closed",
+      "claim": "The discrete cutoff-transition collars are no longer an open high-frequency gap.",
+      "formula": "adjacent-N correction absorbed into delta=1/8000",
+      "proof_boundary": "Closure only on tL>=25.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15dsgrc_08_live_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "The sole remaining global Newman-tail regime is the shrinking near-zero-time arithmetic layer.",
+      "formula": "0<t*log(x/(4*pi))<25",
+      "proof_boundary": "Open; not Lambda<=0 or RH.",
+      "diagnostics": null
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/abs/1904.12438",
+    "outputs/jensen_window_pf_newman_polymath15_dominant_saddle_arithmetic_ray_certificate.md",
+    "outputs/jensen_window_pf_newman_polymath15_dominant_saddle_cell_interior_certificate.md"
+  ]
+}

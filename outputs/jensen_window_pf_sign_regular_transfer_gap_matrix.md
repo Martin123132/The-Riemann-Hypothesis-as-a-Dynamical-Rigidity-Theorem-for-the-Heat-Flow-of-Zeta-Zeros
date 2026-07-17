@@ -1,6 +1,6 @@
 # Jensen-Window PF Sign-Regular Transfer Gap Matrix
 
-Date: 2026-07-06
+Date: 2026-07-16
 
 Status: finite theorem-search diagnostic. This is not a proof of
 Jensen-window PF-infinity, Jensen hyperbolicity, Laguerre-Polya
@@ -9,7 +9,7 @@ membership, RH, or `Lambda <= 0`.
 Artifact kind: `jensen_window_pf_sign_regular_transfer_gap_matrix`.
 
 Proof boundary: this artifact combines exact low-degree algebra and
-finite countermodel gates. It does not prove the missing sign-regular
+finite countermodel gates. It does not prove the missing weaker Xi/Phi
 to Jensen-window PF transfer theorem.
 
 Machine-readable artifact:
@@ -70,7 +70,7 @@ d=4 first negative contiguous determinant: -229760849637/28672000000
 A usable theorem must supply all of:
 
 ```text
-1. all-order, all-shift reshaped-Hankel sign consistency for the actual A_k(0)
+1. a weaker Xi/Phi-specific antecedent satisfied despite the negative order-ten endpoint minors
 2. noncircular Xi/Phi-specific structure absent from arbitrary positive sequences
 3. binomial-weight and shift uniformity for every Jensen-window Toeplitz minor
 4. no endpoint PF, Jensen hyperbolicity, Laguerre-Polya, RH, or Lambda <= 0 assumptions
@@ -83,7 +83,7 @@ srgt_01_degree2_exact_contact: exact_contact - Degree 2 is exact: the m=1 signed
 srgt_02_degree3_new_obligation: exact_obstruction - Degree 3 introduces a cubic discriminant and Toeplitz minors that are not signed reshaped-Hankel minors.
 srgt_03_finite_reshaped_hankel_countermodel: rejected_shortcut - A positive rational sequence passes finite reshaped-Hankel signs for k=2,3 at N=3 while its degree-3 Jensen discriminant is negative.
 srgt_04_selected_toeplitz_countermodel: rejected_shortcut - The same positive rational sequence has selected low-order degree-3 and degree-4 Toeplitz minors positive while later contiguous Toeplitz minors and discriminants are negative.
-srgt_05_all_order_antecedent_requirement: open_requirement - The signed-Hankel side must be an all-order, all-shift reshaped-Hankel sign-consistency theorem, not a finite staircase.
+srgt_05_weaker_xi_phi_antecedent_requirement: open_requirement - The bridge needs a weaker Xi/Phi-specific antecedent that is actually satisfied despite the negative order-ten signed-Hankel endpoint minors.
 srgt_06_xi_phi_specific_transfer_requirement: open_requirement - A viable bridge must add noncircular Xi/Phi-specific structure that is absent from arbitrary positive sequences.
 srgt_07_binomial_shift_uniformity_requirement: open_requirement - The transfer must output every binomially weighted Jensen-window Toeplitz matrix for all degrees and shifts.
 srgt_08_acceptable_theorem_shape: live_contract - An acceptable theorem may prove a sign-regular-to-Toeplitz transfer, a positive determinant integral, or an Xi/Phi positive-kernel identity that directly gives the Jensen-window PF target.
@@ -102,4 +102,4 @@ outputs/jensen_window_pf_theorem_machinery_fit_matrix.md
 
 Summary:
 
-The signed-Hankel/Jensen bridge is exact only at degree 2. The degree-3/4 countermodel gates show that finite reshaped-Hankel signs and selected low-order Toeplitz positivity do not imply Jensen-window PF-infinity; a proof needs all-order sign consistency plus a genuine Xi/Phi-specific sign-regular-to-Toeplitz transfer theorem with binomial and shift uniformity.
+The signed-Hankel/Jensen bridge is exact only at degree 2. The degree-3/4 countermodel gates show that finite reshaped-Hankel signs and selected low-order Toeplitz positivity do not imply Jensen-window PF-infinity. The all-order signed-Hankel antecedent is itself false at order ten, so a proof needs a weaker Xi/Phi-specific kernel, determinant, or direct Jensen theorem with binomial and shift uniformity.

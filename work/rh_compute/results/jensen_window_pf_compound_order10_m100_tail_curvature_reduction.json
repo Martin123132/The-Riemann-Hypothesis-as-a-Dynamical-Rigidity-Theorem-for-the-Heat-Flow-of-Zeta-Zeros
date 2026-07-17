@@ -1,0 +1,177 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order10_m100_tail_curvature_reduction.py",
+  "date": "2026-07-16",
+  "exact": {
+    "canonical_factorization": "Q_(9,n)=A_(n+8)^9*exp(z(n+8))",
+    "canonical_factorization_residual": "0",
+    "cleared_polynomial": "2259*k**2 - 2750000*k - 1375000",
+    "completed_coordinates": "V(t)=7*B(t)-s(t-1)+2*s(t)-s(t+1); w(t)=2*s(t)-r(t)+log(1-exp(-V(t)))",
+    "conditional_heat_handoff": "[Q_(10,n)(-100)>0 for every integer n>=4] implies Q_(10,n)(lambda)>0 for every n>=4 and -100<=lambda<=0",
+    "curvature_identity": "E_n=log(Q_(9,n)*Q_(9,n+2)/Q_(9,n+1)^2)=9*log(x_k)+Z_k, Z_k=z(k-1)-2*z(k)+z(k+1), k=n+9",
+    "finite_splice": "[Q_(10,n)(-100)>0 for 4<=n<=1242] plus [Q_(10,n)(-100)>0 for n>=1243] implies Q_(10,n)(-100)>0 for every n>=4",
+    "log_buffer": "-9*log(x_k)>=9*d_k>=2259/(250*(2*k+1)), k>=320",
+    "negative_prefix_boundary": "Q_(10,n)(-100)<0 for n=0,1,2,3 remains unchanged",
+    "order9_coordinate": "z(t)=2*w(t)-s(t)+log(1-exp(-W(t)))",
+    "rational_comparison": "5500/k^2<2259/(250*(2*k+1)), k>=1252",
+    "seventh_gap": "W(t)=8*B(t)-w(t-1)+2*w(t)-w(t+1)",
+    "shifted_coefficients": [
+      "2259",
+      "2906536",
+      "96616536"
+    ],
+    "shifted_polynomial_k_1252_plus_m": "2259*m**2 + 2906536*m + 96616536",
+    "sign_equivalence": "Q_(10,n)>0 iff L_n>0 iff E_n<0",
+    "stable_margin": "L_n=exp(-E_n)-1",
+    "sufficient_ceiling": "Z_k<=5500/k^2 for every integer k>=1252",
+    "tail_index": "n>=1243 iff k=n+9>=1252"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order10_m100_tail_curvature_reduction.py",
+  "kind": "jensen_window_pf_compound_order10_m100_tail_curvature_reduction",
+  "proof_boundary": "This artifact proves the order-nine canonical normalization, order-ten sign reduction, exact tail arithmetic, finite-splice coordinate, and conditional n>=4 heat handoff. It does not prove the 5500/k^2 curvature ceiling, the endpoint tail, delayed entry for shifts 0 through 3, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The completed signed order-nine endpoint layer supplies the positive lower cone for order ten.",
+      "diagnostics": null,
+      "formula": "Q_(9,n)(-100)>0 for every integer n>=0",
+      "id": "co10m100tcr_01_order9_input",
+      "proof_boundary": "Endpoint lambda=-100 only; no order-ten sign is imported.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The rigorous order-ten endpoint certificates have four negative shifts followed by a positive block through n=1242.",
+      "diagnostics": null,
+      "formula": "Q_(10,n)(-100)>0 for 4<=n<=1242 and Q_(10,n)(-100)<0 for 0<=n<=3",
+      "id": "co10m100tcr_02_finite_sign_chart",
+      "proof_boundary": "Finite endpoint theorem; it neither fills the tail nor removes the four counterexamples.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem_input"
+    },
+    {
+      "claim": "One more stable gap gives a cancellation-free coordinate for Q9.",
+      "diagnostics": null,
+      "formula": "W(t)=8*B(t)-w(t-1)+2*w(t)-w(t+1); z(t)=2*w(t)-s(t)+log(1-exp(-W(t))); Q_(9,n)=A_(n+8)^9*exp(z(n+8))",
+      "id": "co10m100tcr_03_nested_coordinate",
+      "proof_boundary": "Exact signed-condensation factorization only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Signed order ten is equivalent to the seventh-nested curvature lying below the ninth defect buffer.",
+      "diagnostics": null,
+      "formula": "E_n=log(Q_(9,n)*Q_(9,n+2)/Q_(9,n+1)^2)=9*log(x_k)+Z_k, Z_k=z(k-1)-2*z(k)+z(k+1), k=n+9; Q_(10,n)>0 iff L_n>0 iff E_n<0",
+      "id": "co10m100tcr_04_curvature",
+      "proof_boundary": "Exact logarithmic reduction in the positive Q8,Q9 cone.",
+      "readiness": "ready_to_apply",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The completed coefficient-defect theorem supplies an inverse-linear order-ten buffer.",
+      "diagnostics": null,
+      "formula": "-9*log(x_k)>=9*d_k>=2259/(250*(2*k+1)), k>=320",
+      "id": "co10m100tcr_05_defect",
+      "proof_boundary": "Previously proved lambda=-100 defect anchor, scaled by nine.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The proposed inverse-square curvature ceiling lies strictly inside the defect buffer on the complete tail.",
+      "diagnostics": {
+        "shifted_coefficients": [
+          "2259",
+          "2906536",
+          "96616536"
+        ]
+      },
+      "formula": "5500/k^2<2259/(250*(2*k+1)), k>=1252",
+      "id": "co10m100tcr_06_arithmetic",
+      "proof_boundary": "Coefficient-positive rational comparison.",
+      "readiness": "ready_to_apply",
+      "role": "exact_inequality"
+    },
+    {
+      "claim": "The scalar curvature ceiling would prove the complete positive order-ten endpoint tail.",
+      "diagnostics": null,
+      "formula": "[Z_k<=5500/k^2 for k>=1252] => [Q_(10,n)(-100)>0 for n>=1243]",
+      "id": "co10m100tcr_07_conditional_tail",
+      "proof_boundary": "Conditional only on the displayed full-kernel scalar ceiling.",
+      "readiness": "ready_to_apply",
+      "role": "conditional_theorem"
+    },
+    {
+      "claim": "The analytic tail would splice exactly to the known positive finite block.",
+      "diagnostics": null,
+      "formula": "[Q_(10,n)(-100)>0 for 4<=n<=1242] plus [Q_(10,n)(-100)>0 for n>=1243] implies Q_(10,n)(-100)>0 for every n>=4",
+      "id": "co10m100tcr_08_conditional_splice",
+      "proof_boundary": "The negative shifts n=0,1,2,3 are deliberately excluded.",
+      "readiness": "ready_to_apply",
+      "role": "conditional_theorem"
+    },
+    {
+      "claim": "The endpoint splice would make the complete n>=4 order-ten tail forward invariant under the cooperative heat flow.",
+      "diagnostics": null,
+      "formula": "[Q_(10,n)(-100)>0 for every integer n>=4] implies Q_(10,n)(lambda)>0 for every n>=4 and -100<=lambda<=0",
+      "id": "co10m100tcr_09_heat_handoff",
+      "proof_boundary": "Uses the compact-uniform eventual tail and positive Q9 lower layer; it says nothing yet about shifts 0 through 3.",
+      "readiness": "ready_to_apply",
+      "role": "conditional_forward_theorem"
+    },
+    {
+      "claim": "Prove the seventh-nested full-kernel curvature ceiling on the endpoint tail.",
+      "diagnostics": null,
+      "formula": "Z_k<=5500/k^2 for every integer k>=1252",
+      "id": "co10m100tcr_10_open_curvature",
+      "proof_boundary": "Requires a new continuum enclosure and a controlled first-summand-to-full-kernel transfer.",
+      "readiness": "not_ready_to_apply",
+      "role": "analytic_theorem_target"
+    }
+  ],
+  "sources": {
+    "defect_anchor": "d_k>=251/(250*(2*k+1)), k>=320",
+    "files": [
+      {
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_m100_finite_splice_certificate.json",
+        "sha256": "4ae563049cef969e480478c7edbbaf260a7ad536e861979caf603c511ac483b2"
+      },
+      {
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_m100_entry_certificate.json",
+        "sha256": "ed036ed78b86a437492a4c45e90319a2c019fb2077cbf686575a51742bf71943"
+      },
+      {
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_m100_tail_curvature_reduction.json",
+        "sha256": "e0a837b7c1d8961f0b8a6581b6234d6c7f206cc87a625dcd79dc8bddc158cb8f"
+      },
+      {
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_first_summand_curvature_certificate.json",
+        "sha256": "aa9371bbe20ea323d7603709b46fa470836066bd6ada7869cc6db3a5f8fce05a"
+      },
+      {
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order4_m100_entry_certificate.json",
+        "sha256": "161ec1a9eb678e9e523f1b2b920e4de566c9970558ff085db0743c122bebc161"
+      },
+      {
+        "path": "work/rh_compute/results/jensen_window_pf_all_order_endpoint_heat_reduction.json",
+        "sha256": "674c8640670fe067c701dff4e72ad9e6f0022c159830b6734d2432aec3bddd32"
+      }
+    ],
+    "finite_endpoint": "Q_(10,n)(-100)>0 for 4<=n<=1242 and Q_(10,n)(-100)<0 for 0<=n<=3",
+    "heat_flow": "Q_(m,n)'=a_(m,n)*Q_(m,n+1)+b_(m,n)*Q_(m,n), a_(m,n)=c_(m,n)*Q_(m-1,n)/Q_(m-1,n+1)>0, b_(m,n)=c_(m,n)/(c_(m,n)-4)*(log Q_(m-1,n+1))'",
+    "heat_tail": "for every fixed m exists N_m such that for every n>=N_m and -100<=lambda<=0, Q_(m,n)(lambda)>0",
+    "order9_endpoint": "Q_(9,n)(-100)>0 for every integer n>=0",
+    "previous_continuous_curvature": "w_1''(t)<=4200/t^2 for every real t>=1250"
+  },
+  "status": "exact order-ten positive endpoint-tail reduction with one open seventh-nested curvature ceiling",
+  "summary": {
+    "coefficient_positive_comparisons": 1,
+    "conditional_finite_splices": 1,
+    "conditional_heat_handoffs": 1,
+    "conditional_tail_theorems": 1,
+    "exact_curvature_reductions": 1,
+    "exact_factorizations": 1,
+    "open_curvature_targets": 1,
+    "open_rows": 1,
+    "preserved_negative_endpoint_shifts": 4,
+    "ready_to_apply_rows": 9,
+    "rows": 10
+  }
+}

@@ -45,7 +45,10 @@ def validate() -> list[str]:
     rebuilt = target.build_payload()
     if stored != rebuilt:
         issues.append("stored strict-Laguerre payload differs from reconstruction")
-    if stored.get("status") != "exact strict-Laguerre/Wiener equivalence with generic-kernel guard":
+    if stored.get("status") != (
+        "exact strict-Laguerre/Wiener equivalence with generic guards and a "
+        "retired strict-monotonicity subroute"
+    ):
         issues.append("status drifted")
 
     rows = stored.get("rows", [])
@@ -69,8 +72,12 @@ def validate() -> list[str]:
     definitions = exact.get("definitions", {})
     if "H_t'(x)^2-H_t(x)*H_t''(x)" not in definitions.get("first_laguerre", ""):
         issues.append("first Laguerre definition drifted")
-    if "0<t<=1/2" not in exact.get("strict_laguerre_equivalence", ""):
+    if "0<t<=1/5" not in exact.get("strict_laguerre_equivalence", ""):
         issues.append("positive-time interval missing")
+    if "Platt-Trudgian Corollary 2" not in exact.get(
+        "published_time_window_reduction", ""
+    ):
+        issues.append("published time-window reduction missing")
     if "finite multiple zero" not in exact.get("strict_laguerre_equivalence", ""):
         issues.append("boundary-attainment dependency missing")
     if "L_t(0)>0" not in exact.get("origin_sign", ""):
@@ -170,11 +177,25 @@ def validate() -> list[str]:
         issues.append("countermodel tail boundary missing")
 
     decision = exact.get("nonpromotion_decision", "")
-    for phrase in ("strict log-concavity", "positive definiteness", "total-positivity"):
+    for phrase in (
+        "strict log-concavity",
+        "positive definiteness",
+        "theta-type",
+        "arithmetic or modular",
+        "total-positivity",
+    ):
         if phrase not in decision:
             issues.append(f"nonpromotion decision missing: {phrase}")
-    if "every 0<t<=1/2" not in exact.get("open_handoff", ""):
+    if "every 0<t<=1/5" not in exact.get("open_handoff", ""):
         issues.append("uniform time handoff missing")
+    for phrase in (
+        "M_t(x)=-L_t'(x)>0",
+        "M_0(1401016343/100000)<0",
+        "corrected C1 double-zero transversality",
+        "do not impose global monotonicity",
+    ):
+        if phrase not in exact.get("open_handoff", ""):
+            issues.append(f"monotonicity handoff missing: {phrase}")
 
     note = NOTE.read_text(encoding="utf-8")
     required = [
@@ -186,6 +207,9 @@ def validate() -> list[str]:
         "zeros are double",
         "not dense",
         "Xi-specific tail",
+        "theta-tail weighted countermodel",
+        "strict_laguerre_monotonicity_scout.md",
+        "rigorous Xi counterexample",
         "https://arxiv.org/abs/1606.05011",
     ]
     for phrase in required:

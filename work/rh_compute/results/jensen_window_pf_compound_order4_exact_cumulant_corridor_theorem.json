@@ -1,0 +1,180 @@
+{
+  "corridors": {
+    "higher": {
+      "3": "1<=(-1)^3*kappa_3*q^(3/2-1)/1<=6/5",
+      "4": "1<=(-1)^4*kappa_4*q^(4/2-1)/2<=27/20",
+      "5": "1<=(-1)^5*kappa_5*q^(5/2-1)/6<=3/2",
+      "6": "1<=(-1)^6*kappa_6*q^(6/2-1)/24<=17/10",
+      "7": "1<=(-1)^7*kappa_7*q^(7/2-1)/120<=2",
+      "8": "1<=(-1)^8*kappa_8*q^(8/2-1)/720<=5/2"
+    },
+    "kappa2": "2/5<=q*(kappa_2-1)<=4/5"
+  },
+  "date": "2026-07-13",
+  "finite_reserve": "79999/10000000",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order4_exact_cumulant_corridor_theorem.py",
+  "kind": "jensen_window_pf_compound_order4_exact_cumulant_corridor_theorem",
+  "proof_boundary": "This artifact proves all seven exact cumulant corridors for every u>=2. It does not prove that interval substitution of those corridors and the mode geometry yields the localized U ceiling on the full continuum, order-four entry, PF-infinity, RH, or Lambda<=0.",
+  "ray_reserve": "29/(1000u)",
+  "remaining_target": "Intervalize the exact corridor boxes together with exact t, curvature, and Hurwitz-zeta geometry across u>=2 and prove the localized U ceiling.",
+  "rows": [
+    {
+      "claim": "The candidate inequalities are the explicit alternating-factorial cumulant corridors required by the localized curvature route.",
+      "diagnostics": null,
+      "formula": "2/5<=q*(kappa_2-1)<=4/5; 1<=(-1)^3*kappa_3*q^(3/2-1)/1<=6/5; 1<=(-1)^4*kappa_4*q^(4/2-1)/2<=27/20; 1<=(-1)^5*kappa_5*q^(5/2-1)/6<=3/2; 1<=(-1)^6*kappa_6*q^(6/2-1)/24<=17/10; 1<=(-1)^7*kappa_7*q^(7/2-1)/120<=2; 1<=(-1)^8*kappa_8*q^(8/2-1)/720<=5/2",
+      "id": "co4ecct_01_corridor_signature",
+      "proof_boundary": "Exact corridor specification only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The finite Arb cover and coefficient-positive ray theorem prove every epsilon-six formal corridor for all u>=2.",
+      "diagnostics": null,
+      "formula": "formal kappa_r^[6] lies inside every displayed corridor, r=2,...,8",
+      "id": "co4ecct_02_global_formal_corridors",
+      "proof_boundary": "Epsilon-six formal cumulants only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "The global epsilon-eight and epsilon-ten coefficient theorems consume only the recorded portions of the formal corridor buffers.",
+      "diagnostics": {
+        "finite": {
+          "corrections": {
+            "2": {
+              "coefficient_cap": "1/20",
+              "correction_cap_at_q_floor": "1/131220000000000000",
+              "q_power": 4
+            },
+            "3": {
+              "coefficient_cap": "1/5",
+              "correction_cap_at_q_floor": "1/32805000000000000",
+              "q_power": 4
+            },
+            "4": {
+              "coefficient_cap": "3/5",
+              "correction_cap_at_q_floor": "1/10935000000000000",
+              "q_power": 4
+            },
+            "5": {
+              "coefficient_cap": "1",
+              "correction_cap_at_q_floor": "1/729000000000",
+              "q_power": 3
+            },
+            "6": {
+              "coefficient_cap": "2",
+              "correction_cap_at_q_floor": "1/364500000000",
+              "q_power": 3
+            },
+            "7": {
+              "coefficient_cap": "9/2",
+              "correction_cap_at_q_floor": "1/18000000",
+              "q_power": 2
+            },
+            "8": {
+              "coefficient_cap": "25/4",
+              "correction_cap_at_q_floor": "1/12960000",
+              "q_power": 2
+            }
+          },
+          "margin_inside_previous_exact_remainder_budget": "9999/10000000",
+          "mode_interval": "2<=u<=20",
+          "reserved_final_corridor_margin": "79999/10000000",
+          "sufficient_exact_minus_epsilon_ten_budget": "9/1000",
+          "total_exact_minus_epsilon_eight_cap": "90001/10000000",
+          "uniform_epsilon_ten_correction_cap": "1/10000000"
+        },
+        "ray": {
+          "endpoint_comparison_left": "125000",
+          "endpoint_comparison_right": "10000000000000000000000000000000000000000000000000000000000000000000000",
+          "epsilon_ten_correction": "scaled |kappa_r^[10]-kappa_r^[8]|<1/(1000u)",
+          "largest_coefficient_cap": "25/4",
+          "margin_inside_previous_exact_remainder_budget": "9/(1000u)",
+          "mode_interval": "u>=20",
+          "q_squared_over_u_log_derivative_lower": "159/20",
+          "reserved_final_corridor_margin": "29/(1000u)",
+          "sufficient_exact_minus_epsilon_ten_budget": "1/(100u)",
+          "total_exact_minus_epsilon_eight_cap": "11/(1000u)"
+        }
+      },
+      "formula": "finite epsilon-ten correction <10^-7; ray <1/(1000u)",
+      "id": "co4ecct_03_global_epsilon_eight_ten_layers",
+      "proof_boundary": "Formal correction layers only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "The complex-disk central-and-tail theorem supplies the sufficient exact-minus-epsilon-ten cumulant budgets simultaneously through order eight.",
+      "diagnostics": {
+        "finite_partition_ratio": "3.63963906179695801080133493347414003233043040008906489983026E-1",
+        "ray_partition_ratio": "3.28701745816252305106076317148152296713745359650908799785395E-63"
+      },
+      "formula": "finite <9/1000; ray <1/(100u)",
+      "id": "co4ecct_04_exact_density_residual",
+      "proof_boundary": "Exact-minus-formal cumulant residual only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_theorem"
+    },
+    {
+      "claim": "Every exact cumulant corridor holds on the complete finite mode segment with a strict common reserve.",
+      "diagnostics": null,
+      "formula": "exact corridors hold on 2<=u<=20; reserve 79999/10000000",
+      "id": "co4ecct_05_finite_exact_corridors",
+      "proof_boundary": "Exact cumulants through order eight on the finite segment only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "Every exact cumulant corridor holds on the asymptotic mode ray with a strict u-dependent reserve.",
+      "diagnostics": null,
+      "formula": "exact corridors hold on u>=20; reserve 29/(1000u)",
+      "id": "co4ecct_06_ray_exact_corridors",
+      "proof_boundary": "Exact cumulants through order eight on the asymptotic segment only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "The seven alternating-factorial exact cumulant corridors hold globally for every u>=2.",
+      "diagnostics": null,
+      "formula": "candidate exact cumulant corridors hold for u>=2, r=2,...,8",
+      "id": "co4ecct_07_global_exact_corridor_theorem",
+      "proof_boundary": "Exact cumulant theorem only; the continuum corridor-to-U inequality remains separate.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_theorem"
+    },
+    {
+      "claim": "Prove the localized U(t) ceiling uniformly from the now-exact corridors and exact mode geometry, not merely on sampled collars.",
+      "diagnostics": null,
+      "formula": "exact corridors + mode geometry => U(t)<=7/(2t^2), u>=2",
+      "id": "co4ecct_08_localized_curvature_handoff",
+      "proof_boundary": "Open continuum composition; no curvature ray or order-four entry is asserted.",
+      "readiness": "not_ready_to_apply",
+      "role": "analytic_theorem_target"
+    }
+  ],
+  "source_hashes": {
+    "work/rh_compute/results/jensen_window_pf_compound_order4_exact_cumulant_central_residual_certificate.json": "c83d408b3fab09b5b9f7132bf01d58c5bd01088e9d293b148e9fc993e96463e6",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_exact_cumulant_remainder_budget.json": "2e9a75e57c6ea473c98150608a6326155a8d80fb7cdfc3fa1ec68e7dc3e4974e",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_formal_cumulant_asymptotic_ray_certificate.json": "eba63a979ca4ab37cd26f2259dfb2d7e2d1f0f55dff00bfd691af64a55e3c11e",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_formal_cumulant_corridor_certificate.json": "cf7a84ef7000cac15c22115ba60439e2da89792eae1d3a9e10e35ac7cad4df96",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_gaussian_cumulant_ray_target.json": "55daa0bd07e4f6e810262c00f5a64464a1bdbdc3d62194ff07c4d4ce4c4037f0"
+  },
+  "sources": [
+    "outputs/jensen_window_pf_compound_order4_gaussian_cumulant_ray_target.md",
+    "outputs/jensen_window_pf_compound_order4_exact_cumulant_remainder_budget.md",
+    "outputs/jensen_window_pf_compound_order4_exact_cumulant_central_residual_certificate.md",
+    "outputs/jensen_window_pf_compound_order4_first_summand_curvature_bridge.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "global exact cumulant corridor theorem with open localized-curvature composition",
+  "summary": {
+    "exact_corridors": 7,
+    "exact_rows": 7,
+    "finite_corridors_closed": 7,
+    "global_exact_corridors_closed": true,
+    "open_analytic_rows": 1,
+    "open_localized_curvature_compositions": 1,
+    "ray_corridors_closed": 7,
+    "rows": 8
+  }
+}

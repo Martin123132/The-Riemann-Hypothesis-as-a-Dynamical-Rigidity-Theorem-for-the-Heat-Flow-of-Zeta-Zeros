@@ -1,0 +1,139 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_order3_noncontiguous_secant_transfer_lemma.py",
+  "date": "2026-07-12",
+  "exact": {
+    "arbitrary_orientation": "det(P_a,P_b,P_c)=(u_b-u_a)*(u_c-u_b)*(S_(b,c)-S_(a,b))<0",
+    "benchmark": {
+      "edge_slopes": [
+        "4",
+        "3",
+        "2"
+      ],
+      "points": [
+        [
+          5,
+          4
+        ],
+        [
+          3,
+          -4
+        ],
+        [
+          2,
+          -7
+        ],
+        [
+          0,
+          -11
+        ]
+      ],
+      "triple_determinants": [
+        "-2",
+        "-2",
+        "-10",
+        "-10"
+      ]
+    },
+    "contiguous_equivalence": "D_(3,n+l)<0 iff sigma_(l+1)<sigma_l",
+    "edge_slope": "sigma_j=(v_(j+1)-v_j)/(u_(j+1)-u_j)",
+    "normalized_column": "A_(n+j)*(1, r_(n+j), r_(n+j)*r_(n+j+1))^T",
+    "order_two": "R_(2,n)(j_1,j_2)=A_(n+j_1)*A_(n+j_2)*(r_(n+j_2)-r_(n+j_1))<0",
+    "orientation_identity": "det[(1,u_j,v_j)^T]_(j=l,l+1,l+2)=(u_(l+1)-u_l)*(u_(l+2)-u_(l+1))*(sigma_(l+1)-sigma_l)",
+    "planar_points": "P_j=(u_j,v_j)=(r_(n+j),r_(n+j)*r_(n+j+1))",
+    "secant_average": "S_(a,b)=(v_b-v_a)/(u_b-u_a) is the weighted average of sigma_a,...,sigma_(b-1) with weights u_j-u_(j+1)>0",
+    "strict_abscissa_order": "u_(j+1)<u_j because x_(n+j+1)<1"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_order3_noncontiguous_secant_transfer_lemma.py",
+  "kind": "jensen_window_pf_order3_noncontiguous_secant_transfer_lemma",
+  "proof_boundary": "This artifact proves the required arbitrary-column reshaped-Hankel signs for orders two and three at lambda=0 by exact planar secant geometry. It does not prove order four or higher, the all-order sign-regular-to-Jensen transfer, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "Positive column scaling converts every three-row Hankel column into one planar point.",
+      "diagnostics": null,
+      "formula": "A_(n+j)*(1, r_(n+j), r_(n+j)*r_(n+j+1))^T",
+      "id": "o3nst_01_column_normalization",
+      "proof_boundary": "Three consecutive rows only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Strict coefficient log-concavity orders the planar abscissas.",
+      "diagnostics": null,
+      "formula": "u_(j+1)<u_j because x_(n+j+1)<1",
+      "id": "o3nst_02_strict_abscissas",
+      "proof_boundary": "Uses the strict upper ratio wall for the actual Xi trajectory.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "A contiguous determinant is exactly the product of two abscissa gaps and one edge-slope difference.",
+      "diagnostics": null,
+      "formula": "det[(1,u_j,v_j)^T]_(j=l,l+1,l+2)=(u_(l+1)-u_l)*(u_(l+2)-u_(l+1))*(sigma_(l+1)-sigma_l)",
+      "id": "o3nst_03_orientation_identity",
+      "proof_boundary": "Exact planar determinant algebra.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The completed contiguous order-three theorem makes all successive edge slopes strictly decreasing.",
+      "diagnostics": null,
+      "formula": "D_(3,n+l)<0 for every l>=0 => sigma_(l+1)<sigma_l",
+      "id": "o3nst_04_local_slope_order",
+      "proof_boundary": "Uses the all-shift contiguous theorem, not finite evidence.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "Every longer secant slope is a positive weighted average of its edge slopes.",
+      "diagnostics": null,
+      "formula": "S_(a,b)=(v_b-v_a)/(u_b-u_a) is the weighted average of sigma_a,...,sigma_(b-1) with weights u_j-u_(j+1)>0",
+      "id": "o3nst_05_secant_averaging",
+      "proof_boundary": "Elementary finite weighted-average lemma.",
+      "readiness": "ready_to_apply",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "All arbitrary-column three-row reshaped-Hankel determinants have the required negative sign.",
+      "diagnostics": null,
+      "formula": "R_(3,n)(j_1,j_2,j_3)<0 for every n>=0 and 0<=j_1<j_2<j_3",
+      "id": "o3nst_06_arbitrary_order_three",
+      "proof_boundary": "Complete order three for the consecutive-row reshaped-Hankel target.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_conclusion"
+    },
+    {
+      "claim": "The same strict ratio order gives the arbitrary-column order-two sign.",
+      "diagnostics": null,
+      "formula": "R_(2,n)(j_1,j_2)=A_(n+j_1)*A_(n+j_2)*(r_(n+j_2)-r_(n+j_1))<0",
+      "id": "o3nst_07_arbitrary_order_two",
+      "proof_boundary": "Complete order two only.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_conclusion"
+    },
+    {
+      "claim": "The planar secant argument has no automatic order-four analogue; compound order four and the sign-regular-to-Jensen transfer remain open.",
+      "diagnostics": null,
+      "formula": "orders 1,2,3 closed; order 4 and higher open",
+      "id": "o3nst_08_higher_handoff",
+      "proof_boundary": "Not an all-order theorem, PF-infinity, RH, or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "sources": [
+    "outputs/jensen_window_pf_compound_order3_forward_invariance_certificate.md",
+    "outputs/jensen_window_pf_kernel_mellin_upper_wall_certificate.md",
+    "outputs/signed_hankel_jensen_bridge_target.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "exact all-column reshaped-Hankel order-two and order-three theorem at lambda=0 with order four open",
+  "summary": {
+    "arbitrary_order_three_rows": 1,
+    "arbitrary_order_two_rows": 1,
+    "exact_identity_rows": 2,
+    "lemma_rows": 8,
+    "open_handoffs": 1,
+    "ready_to_apply_rows": 7,
+    "secant_averaging_rows": 1
+  }
+}

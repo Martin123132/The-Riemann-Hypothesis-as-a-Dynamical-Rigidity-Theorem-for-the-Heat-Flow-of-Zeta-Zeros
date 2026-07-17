@@ -1,0 +1,168 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_endpoint_holomorphic_lift",
+  "date": "2026-07-17",
+  "status": "exact fixed-cutoff holomorphic lift and saddle-gain reduction for the endpoint correction; not a C1 remainder certificate, Lambda<=0, or RH",
+  "proof_boundary": "This artifact proves the phase cancellation, holomorphic lift, real-axis match, and defect equation. The saved C0 derivative grid is diagnostic. A rigorous complex-strip derivative bound and explicit composition with the published remainder remain open. No corrected-main lower bound, positive-boundary exclusion, Lambda<=0, or RH is proved.",
+  "exact": {
+    "phase_cancellation": "M_0(i*T)*U(T)*exp(pi*i/8)=-(sqrt(pi)/8)*exp(-pi*T/4)*(T^(3/2)+i*T^(1/2))",
+    "slow_factor": "F_N(T)=exp(-pi*T/4)S_N(T), S_N(T)=-(sqrt(pi)/8)*(T^(3/2)+i*T^(1/2))*C_0(p_N(T))",
+    "complex_parameters": "T(z)=z/2+pi*t/8, a(z)=sqrt(T(z)/(2*pi)), p_N(z)=1-2*(a(z)-N)",
+    "sharp_operation": "F_N^#(z)=conj(F_N(conj(z)))",
+    "holomorphic_lift": "C_hat_(N,t)(z)=(-1)^N*exp(t*pi^2/64)*(F_N(z)+F_N^#(z))",
+    "real_match": "C_hat_(N,t)(x)=C_(N,t)(x) for every real x in the fixed-N cell",
+    "slow_derivative": "(d/dz+pi/8)F_N(z)=(1/2)*exp(-pi*T(z)/4)*S_N'(T(z))",
+    "paper_extension": "C_paper(x+iy)=exp(-pi*i*y/8)*C_(N,t)(x)",
+    "defect_ode": "D=C_hat-C_paper satisfies D(x,0)=0 and partial_y D+i*pi*D/8=i*(partial_z+pi/8)C_hat",
+    "defect_integral": "|D(x,y)|<=|y|*exp(pi*|y|/8)*sup_|v|<=|y| |(partial_z+pi/8)C_hat(x+iv)|",
+    "derivative_scale": "If C_0 and C_0' are bounded on the required p-strip, then |S_N'(T)|=O(T), one saddle factor below |S_N(T)|=O(T^(3/2))",
+    "critical_gain": "After division by A_t(x), the radius-1/L lift defect is O(exp(-3L/4)/L) uniformly for bounded c=tL",
+    "remaining_bound": "Certify explicit complex-strip bounds for C_0 and C_0' and combine them with the published e_A+e_B+e_C constants"
+  },
+  "diagnostics": {
+    "dps": 80,
+    "phase_rows": [
+      {
+        "T": "100",
+        "direct": "(-1.722170331936303692732437631553116730228e-32 - 1.722170331936303692732437631553116730228e-34j)",
+        "reduced": "(-1.722170331936303692732437631553116730228e-32 - 1.722170331936303692732437631553116730228e-34j)",
+        "relative_delta": "1.198758651358991699300771e-79"
+      },
+      {
+        "T": "1000",
+        "direct": "(-5.641524634570900680234574095172894282466e-338 - 5.641524634570900680234574095172894282466e-341j)",
+        "reduced": "(-5.641524634570900680234574095172894282466e-338 - 5.641524634570900680234574095172894282466e-341j)",
+        "relative_delta": "3.277022306515667385465167e-78"
+      },
+      {
+        "T": "10000",
+        "direct": "(-2.538635475846817796590115197421732167726e-3406 - 2.538635475846817796590115197421732167726e-3410j)",
+        "reduced": "(-2.538635475846817796590115197421732167726e-3406 - 2.538635475846817796590115197421732167726e-3410j)",
+        "relative_delta": "1.041882638615332398161565e-77"
+      }
+    ],
+    "max_phase_cancellation_relative_delta": "1.041882638615332398161565e-77",
+    "C0_prime_grid_points": 2001,
+    "C0_prime_grid_max": "0.6908594309245895837673515",
+    "C0_prime_grid_argmax": "-1.0",
+    "C0_prime_status": "diagnostic only; a complex-strip interval bound remains required"
+  },
+  "rows": [
+    {
+      "id": "np15ehl_01_phase_cancellation",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The rapidly oscillating Stirling and Riemann-Siegel phases cancel exactly in the endpoint correction.",
+      "formula": "M_0(i*T)*U(T)*exp(pi*i/8)=-(sqrt(pi)/8)*exp(-pi*T/4)*(T^(3/2)+i*T^(1/2))",
+      "proof_boundary": "Principal branches with T>0.",
+      "diagnostics": [
+        {
+          "T": "100",
+          "direct": "(-1.722170331936303692732437631553116730228e-32 - 1.722170331936303692732437631553116730228e-34j)",
+          "reduced": "(-1.722170331936303692732437631553116730228e-32 - 1.722170331936303692732437631553116730228e-34j)",
+          "relative_delta": "1.198758651358991699300771e-79"
+        },
+        {
+          "T": "1000",
+          "direct": "(-5.641524634570900680234574095172894282466e-338 - 5.641524634570900680234574095172894282466e-341j)",
+          "reduced": "(-5.641524634570900680234574095172894282466e-338 - 5.641524634570900680234574095172894282466e-341j)",
+          "relative_delta": "3.277022306515667385465167e-78"
+        },
+        {
+          "T": "10000",
+          "direct": "(-2.538635475846817796590115197421732167726e-3406 - 2.538635475846817796590115197421732167726e-3410j)",
+          "reduced": "(-2.538635475846817796590115197421732167726e-3406 - 2.538635475846817796590115197421732167726e-3410j)",
+          "relative_delta": "1.041882638615332398161565e-77"
+        }
+      ]
+    },
+    {
+      "id": "np15ehl_02_slow_factor",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "After phase cancellation the endpoint block is an exponential decay times a slowly varying algebraic factor.",
+      "formula": "F_N(T)=exp(-pi*T/4)S_N(T), S_N(T)=-(sqrt(pi)/8)*(T^(3/2)+i*T^(1/2))*C_0(p_N(T))",
+      "proof_boundary": "Fixed integer cutoff N.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ehl_03_holomorphic_lift",
+      "role": "exact_construction",
+      "readiness": "ready_to_apply",
+      "claim": "The real-axis endpoint correction has an explicit fixed-cutoff holomorphic lift.",
+      "formula": "T(z)=z/2+pi*t/8, a(z)=sqrt(T(z)/(2*pi)), p_N(z)=1-2*(a(z)-N); C_hat_(N,t)(z)=(-1)^N*exp(t*pi^2/64)*(F_N(z)+F_N^#(z))",
+      "proof_boundary": "Local principal branches around the positive real axis.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ehl_04_real_axis_match",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The holomorphic lift agrees exactly with the published correction on the real axis.",
+      "formula": "C_hat_(N,t)(x)=C_(N,t)(x) for every real x in the fixed-N cell",
+      "proof_boundary": "No approximation at y=0.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ehl_05_slow_derivative",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The Cauchy-relevant defect operator removes the leading exponential derivative exactly.",
+      "formula": "(d/dz+pi/8)F_N(z)=(1/2)*exp(-pi*T(z)/4)*S_N'(T(z))",
+      "proof_boundary": "Exact chain rule with T'(z)=1/2.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ehl_06_defect_ode",
+      "role": "exact_transfer_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "Difference between the analytic lift and the published off-axis correction obeys a first-order defect equation.",
+      "formula": "D=C_hat-C_paper satisfies D(x,0)=0 and partial_y D+i*pi*D/8=i*(partial_z+pi/8)C_hat; |D(x,y)|<=|y|*exp(pi*|y|/8)*sup_|v|<=|y| |(partial_z+pi/8)C_hat(x+iv)|",
+      "proof_boundary": "Within a fixed-N collar.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ehl_07_saddle_gain",
+      "role": "asymptotic_reduction",
+      "readiness": "conditional_ready",
+      "claim": "The lift defect gains the missing saddle-index factor needed by the refined remainder.",
+      "formula": "If C_0 and C_0' are bounded on the required p-strip, then |S_N'(T)|=O(T), one saddle factor below |S_N(T)|=O(T^(3/2)); After division by A_t(x), the radius-1/L lift defect is O(exp(-3L/4)/L) uniformly for bounded c=tL",
+      "proof_boundary": "Conditional on an explicit complex-strip C0 derivative bound.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ehl_08_C0_derivative_scout",
+      "role": "high_precision_diagnostic",
+      "readiness": "diagnostic_only",
+      "claim": "A dense real grid finds a small C0 derivative, supporting a very loose rigorous strip target.",
+      "formula": "max_grid |C0'(p)|<0.7 on -1<=p<=1",
+      "proof_boundary": "Not an interval or complex-strip certificate.",
+      "diagnostics": {
+        "grid_points": 2001,
+        "max": "0.6908594309245895837673515",
+        "argmax": "-1.0"
+      }
+    },
+    {
+      "id": "np15ehl_09_live_bound",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "An explicit C0 strip bound is the remaining local input for a rigorous corrected C1 collar.",
+      "formula": "Certify explicit complex-strip bounds for C_0 and C_0' and combine them with the published e_A+e_B+e_C constants",
+      "proof_boundary": "Open finite-dimensional interval estimate, not the RH-level sign target.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ehl_10_nonpromotion",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "The holomorphic lift resolves an error-transfer obstruction but does not prove corrected-main transversality.",
+      "formula": "analytic lift != first-jet lower bound",
+      "proof_boundary": "Not Lambda<=0 or RH.",
+      "diagnostics": null
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/abs/1904.12438",
+    "outputs/jensen_window_pf_newman_polymath15_critical_transversality_target.md"
+  ]
+}

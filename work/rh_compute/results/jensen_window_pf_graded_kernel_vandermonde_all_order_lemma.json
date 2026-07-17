@@ -1,0 +1,1577 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_graded_kernel_vandermonde_all_order_lemma.py",
+  "date": "2026-07-13",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_graded_kernel_vandermonde_all_order_lemma.py",
+  "heat_tilt_all_fixed_order_extension": {
+    "finite_difference_identity": "Delta^s f(k)=integral_[0,1]^s f^(s)(k+t_1+...+t_s)dt",
+    "lambert_derivative": "d^s(w^2)/dk^s=k^(-s)*F_s(w), F_s(w)=O_s(w)",
+    "lambert_recurrence": "F_0(w)=w^2; F_(s+1)(w)=-s*F_s(w)+w/(1+w)*F_s'(w)",
+    "primary_source": "https://arxiv.org/abs/2007.13582",
+    "published_input": "O'Sullivan Theorem 5.2 gives arbitrary-order saddle expansions for suitable multipliers",
+    "quantifier_boundary": "the implied constant and chosen truncation may depend on s",
+    "remainder_choice": "for fixed s choose R>s; 2^s O_R(w^(3R)/k^R)=o(w/k^s)",
+    "theorem": "Delta^s log R_T^(1)(k)=O_s(log(k)/k^s) for every fixed s>=2, uniformly for 0<=T<=100",
+    "uniform_suitability": "Cauchy estimates for the compact Gaussian-log family give every fixed suitability coefficient and remainder uniformly in T"
+  },
+  "kernel": {
+    "L": "2*(m-1)",
+    "entry": "K_(i,j)=exp(-sum_(r>=2)G_r*h^(r-1)*(L-i-j)^r)",
+    "mixed_entry": "M_h(z,y)=exp(sum_(a,b>=1)c_(a,b)*h^(a+b-1)*z^a*y^b)",
+    "quadratic_mixed_coefficient": "c_(1,1)=2*G_2"
+  },
+  "kind": "jensen_window_pf_graded_kernel_vandermonde_all_order_lemma",
+  "order_rows": [
+    {
+      "epsilon": 1,
+      "leading_degree": 0,
+      "order": 1,
+      "positive_constant": 1,
+      "raw_first_term": "1*G2**0*h**0",
+      "raw_leading_constant": 1,
+      "signed_first_term": "1*G2**0*h**0"
+    },
+    {
+      "epsilon": -1,
+      "leading_degree": 1,
+      "order": 2,
+      "positive_constant": 2,
+      "raw_first_term": "-2*G2**1*h**1",
+      "raw_leading_constant": -2,
+      "signed_first_term": "2*G2**1*h**1"
+    },
+    {
+      "epsilon": -1,
+      "leading_degree": 3,
+      "order": 3,
+      "positive_constant": 16,
+      "raw_first_term": "-16*G2**3*h**3",
+      "raw_leading_constant": -16,
+      "signed_first_term": "16*G2**3*h**3"
+    },
+    {
+      "epsilon": 1,
+      "leading_degree": 6,
+      "order": 4,
+      "positive_constant": 768,
+      "raw_first_term": "768*G2**6*h**6",
+      "raw_leading_constant": 768,
+      "signed_first_term": "768*G2**6*h**6"
+    },
+    {
+      "epsilon": 1,
+      "leading_degree": 10,
+      "order": 5,
+      "positive_constant": 294912,
+      "raw_first_term": "294912*G2**10*h**10",
+      "raw_leading_constant": 294912,
+      "signed_first_term": "294912*G2**10*h**10"
+    },
+    {
+      "epsilon": -1,
+      "leading_degree": 15,
+      "order": 6,
+      "positive_constant": 1132462080,
+      "raw_first_term": "-1132462080*G2**15*h**15",
+      "raw_leading_constant": -1132462080,
+      "signed_first_term": "1132462080*G2**15*h**15"
+    },
+    {
+      "epsilon": -1,
+      "leading_degree": 21,
+      "order": 7,
+      "positive_constant": 52183852646400,
+      "raw_first_term": "-52183852646400*G2**21*h**21",
+      "raw_leading_constant": -52183852646400,
+      "signed_first_term": "52183852646400*G2**21*h**21"
+    },
+    {
+      "epsilon": 1,
+      "leading_degree": 28,
+      "order": 8,
+      "positive_constant": 33664847019245568000,
+      "raw_first_term": "33664847019245568000*G2**28*h**28",
+      "raw_leading_constant": 33664847019245568000,
+      "signed_first_term": "33664847019245568000*G2**28*h**28"
+    },
+    {
+      "epsilon": 1,
+      "leading_degree": 36,
+      "order": 9,
+      "positive_constant": 347485857744891213250560000,
+      "raw_first_term": "347485857744891213250560000*G2**36*h**36",
+      "raw_leading_constant": 347485857744891213250560000,
+      "signed_first_term": "347485857744891213250560000*G2**36*h**36"
+    },
+    {
+      "epsilon": -1,
+      "leading_degree": 45,
+      "order": 10,
+      "positive_constant": 64560982045934655213753964953600000,
+      "raw_first_term": "-64560982045934655213753964953600000*G2**45*h**45",
+      "raw_leading_constant": -64560982045934655213753964953600000,
+      "signed_first_term": "64560982045934655213753964953600000*G2**45*h**45"
+    },
+    {
+      "epsilon": -1,
+      "leading_degree": 55,
+      "order": 11,
+      "positive_constant": 239901585047846581083822477336190648320000000,
+      "raw_first_term": "-239901585047846581083822477336190648320000000*G2**55*h**55",
+      "raw_leading_constant": -239901585047846581083822477336190648320000000,
+      "signed_first_term": "239901585047846581083822477336190648320000000*G2**55*h**55"
+    },
+    {
+      "epsilon": 1,
+      "leading_degree": 66,
+      "order": 12,
+      "positive_constant": 19611860152397583171188172929706505975520821248000000000,
+      "raw_first_term": "19611860152397583171188172929706505975520821248000000000*G2**66*h**66",
+      "raw_leading_constant": 19611860152397583171188172929706505975520821248000000000,
+      "signed_first_term": "19611860152397583171188172929706505975520821248000000000*G2**66*h**66"
+    }
+  ],
+  "permutation_stress": {
+    "permutations_checked": 46233,
+    "rows": [
+      {
+        "minimum_positive_penalty": null,
+        "order": 1,
+        "permutations": 1,
+        "zero_penalties": 1
+      },
+      {
+        "minimum_positive_penalty": 1,
+        "order": 2,
+        "permutations": 2,
+        "zero_penalties": 1
+      },
+      {
+        "minimum_positive_penalty": 1,
+        "order": 3,
+        "permutations": 6,
+        "zero_penalties": 1
+      },
+      {
+        "minimum_positive_penalty": 1,
+        "order": 4,
+        "permutations": 24,
+        "zero_penalties": 1
+      },
+      {
+        "minimum_positive_penalty": 1,
+        "order": 5,
+        "permutations": 120,
+        "zero_penalties": 1
+      },
+      {
+        "minimum_positive_penalty": 1,
+        "order": 6,
+        "permutations": 720,
+        "zero_penalties": 1
+      },
+      {
+        "minimum_positive_penalty": 1,
+        "order": 7,
+        "permutations": 5040,
+        "zero_penalties": 1
+      },
+      {
+        "minimum_positive_penalty": 1,
+        "order": 8,
+        "permutations": 40320,
+        "zero_penalties": 1
+      }
+    ]
+  },
+  "proof_boundary": "This artifact proves the universal first coefficient and, for every fixed order m, an eventual signed tail uniform on -100<=lambda<=0. It supplies no effective threshold, all-shift sign regularity, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The normalized fixed-order Hankel determinant has one graded translation-kernel form.",
+      "diagnostics": null,
+      "formula": "K_(i,j)=exp(-sum_(r>=2)G_r*h^(r-1)*(L-i-j)^r), L=2*(m-1)",
+      "id": "gkvaol_01_graded_kernel",
+      "proof_boundary": "Formal coefficient identity at one fixed order m.",
+      "readiness": "ready_to_apply",
+      "role": "exact_definition"
+    },
+    {
+      "claim": "Pure powers of z and y factor into row and column gauges with constant term one.",
+      "diagnostics": null,
+      "formula": "(z-y)^r=z^r+(-y)^r+sum_(a,b>=1,a+b=r) binom(r,a)z^a(-y)^b",
+      "id": "gkvaol_02_row_column_gauge",
+      "proof_boundary": "Gauge factors cannot change the first nonzero determinant coefficient.",
+      "readiness": "ready_to_apply",
+      "role": "exact_algebraic_lemma"
+    },
+    {
+      "claim": "Every mixed coefficient c_(p,q) has h-valuation at least max(p,q).",
+      "diagnostics": null,
+      "formula": "ell mixed factors give h-degree p+q-ell>=max(p,q) because ell<=min(p,q)",
+      "id": "gkvaol_03_mixed_valuation",
+      "proof_boundary": "Coefficientwise formal-series statement; no asymptotic sign is used.",
+      "readiness": "ready_to_apply",
+      "role": "exact_combinatorial_lemma"
+    },
+    {
+      "claim": "At the valuation floor of c_(k,k), only k quadratic mixed interactions occur.",
+      "diagnostics": null,
+      "formula": "[h^k]c_(k,k)=(2*G_2)^k/k!",
+      "id": "gkvaol_04_diagonal_leader",
+      "proof_boundary": "Higher G_r cannot enter this coefficient.",
+      "readiness": "ready_to_apply",
+      "role": "exact_combinatorial_lemma"
+    },
+    {
+      "claim": "Cauchy-Binet forces every m-by-m determinant term to h-degree at least D=binom(m,2).",
+      "diagnostics": null,
+      "formula": "sum_i max(p_i,q_(pi(i)))>=max(sum_i p_i,sum_i q_i)>=D",
+      "id": "gkvaol_05_cauchy_binet_floor",
+      "proof_boundary": "Strictly increasing nonnegative exponent tuples only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_determinant_lemma"
+    },
+    {
+      "claim": "Equality at degree D uses P=Q=(0,...,m-1) and the identity coefficient permutation only.",
+      "diagnostics": {
+        "permutations_checked": 46233,
+        "rows": [
+          {
+            "minimum_positive_penalty": null,
+            "order": 1,
+            "permutations": 1,
+            "zero_penalties": 1
+          },
+          {
+            "minimum_positive_penalty": 1,
+            "order": 2,
+            "permutations": 2,
+            "zero_penalties": 1
+          },
+          {
+            "minimum_positive_penalty": 1,
+            "order": 3,
+            "permutations": 6,
+            "zero_penalties": 1
+          },
+          {
+            "minimum_positive_penalty": 1,
+            "order": 4,
+            "permutations": 24,
+            "zero_penalties": 1
+          },
+          {
+            "minimum_positive_penalty": 1,
+            "order": 5,
+            "permutations": 120,
+            "zero_penalties": 1
+          },
+          {
+            "minimum_positive_penalty": 1,
+            "order": 6,
+            "permutations": 720,
+            "zero_penalties": 1
+          },
+          {
+            "minimum_positive_penalty": 1,
+            "order": 7,
+            "permutations": 5040,
+            "zero_penalties": 1
+          },
+          {
+            "minimum_positive_penalty": 1,
+            "order": 8,
+            "permutations": 40320,
+            "zero_penalties": 1
+          }
+        ]
+      },
+      "formula": "sum_i max(i,pi(i))=D+(1/2)*sum_i|i-pi(i)|",
+      "id": "gkvaol_06_unique_leading_block",
+      "proof_boundary": "The finite permutation stress is diagnostic support for the exact identity.",
+      "readiness": "ready_to_apply",
+      "role": "exact_determinant_lemma"
+    },
+    {
+      "claim": "The universal raw leading coefficient has the signed Vandermonde orientation.",
+      "diagnostics": null,
+      "formula": "[h^D]det K=epsilon_m*2^D*prod_(j=1)^(m-1)j!*G_2^D",
+      "id": "gkvaol_07_vandermonde_constant",
+      "proof_boundary": "Exact for every fixed integer m>=1.",
+      "readiness": "ready_to_apply",
+      "role": "exact_all_fixed_order_theorem"
+    },
+    {
+      "claim": "The signed coordinate Q_(m,n)=epsilon_m H_(m,n) always has a positive universal first term.",
+      "diagnostics": null,
+      "formula": "Q_m=positive_scale*(2^D*prod_(j=1)^(m-1)j!*G_2^D*h^D+o(h^D))",
+      "id": "gkvaol_08_signed_first_term",
+      "proof_boundary": "Fixed m; the asymptotic threshold may depend on m.",
+      "readiness": "ready_to_apply",
+      "role": "exact_all_fixed_order_theorem"
+    },
+    {
+      "claim": "The compact heat tilt obeys the required local difference estimate at every fixed order.",
+      "diagnostics": null,
+      "formula": "Delta^s log R_T^(1)(k)=O_s(log(k)/k^s) for every fixed s>=2, uniformly for 0<=T<=100",
+      "id": "gkvaol_09_all_fixed_heat_differences",
+      "proof_boundary": "For fixed s choose the published saddle truncation R>s; no uniformity in s is asserted.",
+      "readiness": "ready_to_apply",
+      "role": "published_theorem_composition"
+    },
+    {
+      "claim": "For every fixed order there is a compact-heat uniform eventual positive signed tail.",
+      "diagnostics": null,
+      "formula": "for every fixed m, exists N_m: Q_(m,n)(lambda)>0 for n>=N_m and -100<=lambda<=0",
+      "id": "gkvaol_10_uniform_eventual_tail",
+      "proof_boundary": "No effective N_m, no common threshold, and no finite-prefix theorem.",
+      "readiness": "ready_to_apply",
+      "role": "published_theorem_composition"
+    },
+    {
+      "claim": "Order seven vanishes through h^20 and its signed first coefficient is positive.",
+      "diagnostics": {
+        "epsilon": -1,
+        "leading_degree": 21,
+        "order": 7,
+        "positive_constant": 52183852646400,
+        "raw_first_term": "-52183852646400*G2**21*h**21",
+        "raw_leading_constant": -52183852646400,
+        "signed_first_term": "52183852646400*G2**21*h**21"
+      },
+      "formula": "-52183852646400*G2**21*h**21; Q_7=-H_7 has first coefficient 52183852646400",
+      "id": "gkvaol_11_order7_specialization",
+      "proof_boundary": "Eventual signed order-seven tail only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_specialization"
+    },
+    {
+      "claim": "Eventual positivity at every fixed order is not all-shift sign regularity or PF-infinity.",
+      "diagnostics": null,
+      "formula": "forall m exists N_m is not exists N forall m and is not forall m forall n",
+      "id": "gkvaol_12_nonpromotion_boundary",
+      "proof_boundary": "Blocks quantifier reversal and finite-prefix promotion.",
+      "readiness": "ready_to_apply",
+      "role": "non_promotion_guard"
+    }
+  ],
+  "source_contract": {
+    "heat_tilt_status": "uniform compact-heat first-summand heat-tilt asymptotic theorem",
+    "higher_theta_status": "uniform compact-heat superpolynomial first-summand dominance theorem",
+    "xi_ratio_source": "Griffin-Ono-Rolen-Thorner-Tripp-Wagner, Jensen Polynomials for the Riemann Xi Function"
+  },
+  "sources": [
+    "work/rh_compute/results/jensen_window_pf_uniform_first_summand_heat_tilt_asymptotic_theorem.json",
+    "work/rh_compute/results/jensen_window_pf_uniform_superpolynomial_first_summand_dominance.json",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_lambda0_eventual_positivity_certificate.json"
+  ],
+  "status": "exact all-fixed-order graded-kernel leading determinant lemma and compact-uniform eventual signed tails; no all-shift theorem",
+  "summary": {
+    "all_fixed_order_eventual_tail_theorems": 1,
+    "all_fixed_order_leading_theorems": 1,
+    "all_shift_theorems": 0,
+    "coefficient_valuation_cells": 169,
+    "effective_thresholds": 0,
+    "permutation_stress_cases": 46233,
+    "ready_to_apply_rows": 12,
+    "recorded_orders": 12,
+    "rows": 12
+  },
+  "valuation_lemma": {
+    "coefficient_bound": "ord_h c_(p,q)>=max(p,q)",
+    "coefficient_table": [
+      {
+        "classification": "constant",
+        "diagonal_leading_coefficient": "1",
+        "h_valuation_lower_bound": 0,
+        "p": 0,
+        "q": 0
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 0,
+        "q": 1
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 0,
+        "q": 2
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 0,
+        "q": 3
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 0,
+        "q": 4
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 0,
+        "q": 5
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 0,
+        "q": 6
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 0,
+        "q": 7
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 0,
+        "q": 8
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 0,
+        "q": 9
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 0,
+        "q": 10
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 0,
+        "q": 11
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 0,
+        "q": 12
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 1,
+        "q": 0
+      },
+      {
+        "classification": "diagonal",
+        "diagonal_leading_coefficient": "(2*G2)**1/1",
+        "h_valuation_lower_bound": 1,
+        "p": 1,
+        "q": 1
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 2,
+        "p": 1,
+        "q": 2
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 3,
+        "p": 1,
+        "q": 3
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 4,
+        "p": 1,
+        "q": 4
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 5,
+        "p": 1,
+        "q": 5
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 6,
+        "p": 1,
+        "q": 6
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 7,
+        "p": 1,
+        "q": 7
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 8,
+        "p": 1,
+        "q": 8
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 1,
+        "q": 9
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 1,
+        "q": 10
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 1,
+        "q": 11
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 1,
+        "q": 12
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 2,
+        "q": 0
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 2,
+        "p": 2,
+        "q": 1
+      },
+      {
+        "classification": "diagonal",
+        "diagonal_leading_coefficient": "(2*G2)**2/2",
+        "h_valuation_lower_bound": 2,
+        "p": 2,
+        "q": 2
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 3,
+        "p": 2,
+        "q": 3
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 4,
+        "p": 2,
+        "q": 4
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 5,
+        "p": 2,
+        "q": 5
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 6,
+        "p": 2,
+        "q": 6
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 7,
+        "p": 2,
+        "q": 7
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 8,
+        "p": 2,
+        "q": 8
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 2,
+        "q": 9
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 2,
+        "q": 10
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 2,
+        "q": 11
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 2,
+        "q": 12
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 3,
+        "q": 0
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 3,
+        "p": 3,
+        "q": 1
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 3,
+        "p": 3,
+        "q": 2
+      },
+      {
+        "classification": "diagonal",
+        "diagonal_leading_coefficient": "(2*G2)**3/6",
+        "h_valuation_lower_bound": 3,
+        "p": 3,
+        "q": 3
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 4,
+        "p": 3,
+        "q": 4
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 5,
+        "p": 3,
+        "q": 5
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 6,
+        "p": 3,
+        "q": 6
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 7,
+        "p": 3,
+        "q": 7
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 8,
+        "p": 3,
+        "q": 8
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 3,
+        "q": 9
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 3,
+        "q": 10
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 3,
+        "q": 11
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 3,
+        "q": 12
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 4,
+        "q": 0
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 4,
+        "p": 4,
+        "q": 1
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 4,
+        "p": 4,
+        "q": 2
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 4,
+        "p": 4,
+        "q": 3
+      },
+      {
+        "classification": "diagonal",
+        "diagonal_leading_coefficient": "(2*G2)**4/24",
+        "h_valuation_lower_bound": 4,
+        "p": 4,
+        "q": 4
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 5,
+        "p": 4,
+        "q": 5
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 6,
+        "p": 4,
+        "q": 6
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 7,
+        "p": 4,
+        "q": 7
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 8,
+        "p": 4,
+        "q": 8
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 4,
+        "q": 9
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 4,
+        "q": 10
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 4,
+        "q": 11
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 4,
+        "q": 12
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 5,
+        "q": 0
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 5,
+        "p": 5,
+        "q": 1
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 5,
+        "p": 5,
+        "q": 2
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 5,
+        "p": 5,
+        "q": 3
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 5,
+        "p": 5,
+        "q": 4
+      },
+      {
+        "classification": "diagonal",
+        "diagonal_leading_coefficient": "(2*G2)**5/120",
+        "h_valuation_lower_bound": 5,
+        "p": 5,
+        "q": 5
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 6,
+        "p": 5,
+        "q": 6
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 7,
+        "p": 5,
+        "q": 7
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 8,
+        "p": 5,
+        "q": 8
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 5,
+        "q": 9
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 5,
+        "q": 10
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 5,
+        "q": 11
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 5,
+        "q": 12
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 6,
+        "q": 0
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 6,
+        "p": 6,
+        "q": 1
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 6,
+        "p": 6,
+        "q": 2
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 6,
+        "p": 6,
+        "q": 3
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 6,
+        "p": 6,
+        "q": 4
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 6,
+        "p": 6,
+        "q": 5
+      },
+      {
+        "classification": "diagonal",
+        "diagonal_leading_coefficient": "(2*G2)**6/720",
+        "h_valuation_lower_bound": 6,
+        "p": 6,
+        "q": 6
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 7,
+        "p": 6,
+        "q": 7
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 8,
+        "p": 6,
+        "q": 8
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 6,
+        "q": 9
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 6,
+        "q": 10
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 6,
+        "q": 11
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 6,
+        "q": 12
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 7,
+        "q": 0
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 7,
+        "p": 7,
+        "q": 1
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 7,
+        "p": 7,
+        "q": 2
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 7,
+        "p": 7,
+        "q": 3
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 7,
+        "p": 7,
+        "q": 4
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 7,
+        "p": 7,
+        "q": 5
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 7,
+        "p": 7,
+        "q": 6
+      },
+      {
+        "classification": "diagonal",
+        "diagonal_leading_coefficient": "(2*G2)**7/5040",
+        "h_valuation_lower_bound": 7,
+        "p": 7,
+        "q": 7
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 8,
+        "p": 7,
+        "q": 8
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 7,
+        "q": 9
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 7,
+        "q": 10
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 7,
+        "q": 11
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 7,
+        "q": 12
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 8,
+        "q": 0
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 8,
+        "p": 8,
+        "q": 1
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 8,
+        "p": 8,
+        "q": 2
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 8,
+        "p": 8,
+        "q": 3
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 8,
+        "p": 8,
+        "q": 4
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 8,
+        "p": 8,
+        "q": 5
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 8,
+        "p": 8,
+        "q": 6
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 8,
+        "p": 8,
+        "q": 7
+      },
+      {
+        "classification": "diagonal",
+        "diagonal_leading_coefficient": "(2*G2)**8/40320",
+        "h_valuation_lower_bound": 8,
+        "p": 8,
+        "q": 8
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 8,
+        "q": 9
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 8,
+        "q": 10
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 8,
+        "q": 11
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 8,
+        "q": 12
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 9,
+        "q": 0
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 9,
+        "q": 1
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 9,
+        "q": 2
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 9,
+        "q": 3
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 9,
+        "q": 4
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 9,
+        "q": 5
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 9,
+        "q": 6
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 9,
+        "q": 7
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 9,
+        "p": 9,
+        "q": 8
+      },
+      {
+        "classification": "diagonal",
+        "diagonal_leading_coefficient": "(2*G2)**9/362880",
+        "h_valuation_lower_bound": 9,
+        "p": 9,
+        "q": 9
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 9,
+        "q": 10
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 9,
+        "q": 11
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 9,
+        "q": 12
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 10,
+        "q": 0
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 10,
+        "q": 1
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 10,
+        "q": 2
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 10,
+        "q": 3
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 10,
+        "q": 4
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 10,
+        "q": 5
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 10,
+        "q": 6
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 10,
+        "q": 7
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 10,
+        "q": 8
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 10,
+        "p": 10,
+        "q": 9
+      },
+      {
+        "classification": "diagonal",
+        "diagonal_leading_coefficient": "(2*G2)**10/3628800",
+        "h_valuation_lower_bound": 10,
+        "p": 10,
+        "q": 10
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 10,
+        "q": 11
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 10,
+        "q": 12
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 11,
+        "q": 0
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 11,
+        "q": 1
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 11,
+        "q": 2
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 11,
+        "q": 3
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 11,
+        "q": 4
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 11,
+        "q": 5
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 11,
+        "q": 6
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 11,
+        "q": 7
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 11,
+        "q": 8
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 11,
+        "q": 9
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 11,
+        "p": 11,
+        "q": 10
+      },
+      {
+        "classification": "diagonal",
+        "diagonal_leading_coefficient": "(2*G2)**11/39916800",
+        "h_valuation_lower_bound": 11,
+        "p": 11,
+        "q": 11
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 11,
+        "q": 12
+      },
+      {
+        "classification": "zero_pure_axis",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": "infinity",
+        "p": 12,
+        "q": 0
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 12,
+        "q": 1
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 12,
+        "q": 2
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 12,
+        "q": 3
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 12,
+        "q": 4
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 12,
+        "q": 5
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 12,
+        "q": 6
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 12,
+        "q": 7
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 12,
+        "q": 8
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 12,
+        "q": 9
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 12,
+        "q": 10
+      },
+      {
+        "classification": "off_diagonal",
+        "diagonal_leading_coefficient": null,
+        "h_valuation_lower_bound": 12,
+        "p": 12,
+        "q": 11
+      },
+      {
+        "classification": "diagonal",
+        "diagonal_leading_coefficient": "(2*G2)**12/479001600",
+        "h_valuation_lower_bound": 12,
+        "p": 12,
+        "q": 12
+      }
+    ],
+    "diagonal_leader": "[h^k]c_(k,k)=(2*G_2)^k/k!",
+    "permutation_identity": "sum_i max(i,pi(i))=binom(m,2)+(1/2)*sum_i|i-pi(i)|",
+    "tuple_floor": "sum_i p_i>=binom(m,2) for increasing nonnegative P"
+  },
+  "vandermonde_theorem": {
+    "degree": "D=binom(m,2)",
+    "eventual_tail": "for every fixed m, exists N_m such that Q_(m,n)(lambda)>0 for n>=N_m and -100<=lambda<=0",
+    "quantifier_boundary": "N_m may depend on m; this does not prove all-shift signs",
+    "raw_first_coefficient": "epsilon_m*2^D*prod_(j=1)^(m-1)j!*G_2^D",
+    "signed_first_coefficient": "2^D*prod_(j=1)^(m-1)j!*G_2^D>0"
+  }
+}

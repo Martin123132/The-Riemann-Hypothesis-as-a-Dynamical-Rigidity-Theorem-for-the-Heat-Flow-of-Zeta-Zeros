@@ -1,0 +1,135 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order10_m100_delayed_entry_certificate.py",
+  "date": "2026-07-16",
+  "exact": {
+    "analytic_tail": "Q_(10,n)(-100)>0 for every n>=1243",
+    "complete_sign_chart": "Q_(10,n)(-100)<0 for 0<=n<=3 and Q_(10,n)(-100)>0 for every n>=4",
+    "continuous_first_summand": "z_1''(t)<=4200/t^2 for every real t>=1251",
+    "delayed_entry": "Q_(10,n)(-100)>0 for every integer n>=4",
+    "finite_positive_block": "Q_(10,n)(-100)>0 for every 4<=n<=1242",
+    "first_discrete_ceiling": "z_1''(t)<=4200/t^2 => Z_k^(1)<=4200*[-log(1-1/k^2)]<4201/k^2, k>=1252",
+    "full_curvature_ceiling": "z_1''(t)<=4200/t^2 on t>=1251 => Z_k<4201/k^2+10/k^2=4211/k^2<5500/k^2, k>=1252",
+    "full_kernel_transfer": "|Z_k-Z_k^(1)|<10/k^2 for every integer k>=1252",
+    "negative_prefix": "Q_(10,n)(-100)<0 for n=0,1,2,3"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order10_m100_delayed_entry_certificate.py",
+  "kind": "jensen_window_pf_compound_order10_m100_delayed_entry_certificate",
+  "proof_boundary": "This artifact proves the fixed order-ten sign chart at lambda=-100: four negative prefix rows and positivity from n=4 onward. It does not prove all-shift order-ten positivity, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The global first-summand theorem closes the sole analytic premise in the transfer bridge.",
+      "diagnostics": null,
+      "formula": "z_1''(t)<=4200/t^2 for every real t>=1251",
+      "id": "co10m100dec_01_continuous",
+      "proof_boundary": "First Newman summand at lambda=-100.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The tent identity converts the continuous ceiling to a discrete first-summand ceiling.",
+      "diagnostics": null,
+      "formula": "z_1''(t)<=4200/t^2 => Z_k^(1)<=4200*[-log(1-1/k^2)]<4201/k^2, k>=1252",
+      "id": "co10m100dec_02_tent",
+      "proof_boundary": "Integer k>=1252 only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_application"
+    },
+    {
+      "claim": "The twelfth-power perturbation envelope keeps the full curvature far below its endpoint target.",
+      "diagnostics": null,
+      "formula": "|Z_k-Z_k^(1)|<10/k^2 for every integer k>=1252; z_1''(t)<=4200/t^2 on t>=1251 => Z_k<4201/k^2+10/k^2=4211/k^2<5500/k^2, k>=1252",
+      "id": "co10m100dec_03_full_kernel",
+      "proof_boundary": "Complete Newman kernel at lambda=-100, k>=1252.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_application"
+    },
+    {
+      "claim": "The full curvature ceiling proves every order-ten endpoint sign in the analytic tail.",
+      "diagnostics": null,
+      "formula": "Q_(10,n)(-100)>0 for every n>=1243",
+      "id": "co10m100dec_04_analytic_tail",
+      "proof_boundary": "Endpoint shifts n>=1243.",
+      "readiness": "ready_to_apply",
+      "role": "analytic_theorem"
+    },
+    {
+      "claim": "The finite Arb certificate supplies the positive block and the four negative prefix signs.",
+      "diagnostics": null,
+      "formula": "Q_(10,n)(-100)>0 for every 4<=n<=1242; Q_(10,n)(-100)<0 for n=0,1,2,3",
+      "id": "co10m100dec_05_finite_chart",
+      "proof_boundary": "Endpoint shifts 0<=n<=1242.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "The finite positive block and analytic tail meet without an index gap.",
+      "diagnostics": null,
+      "formula": "Q_(10,n)(-100)>0 for every integer n>=4",
+      "id": "co10m100dec_06_delayed_entry",
+      "proof_boundary": "Delayed positivity begins at n=4; this is not all-shift positivity.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "The endpoint signs are completely classified without erasing the failed prefix.",
+      "diagnostics": {
+        "orientation": "epsilon_10=(-1)^45=-1, Q_(10,n)=-H_(10,n)"
+      },
+      "formula": "Q_(10,n)(-100)<0 for 0<=n<=3 and Q_(10,n)(-100)>0 for every n>=4",
+      "id": "co10m100dec_07_sign_chart",
+      "proof_boundary": "Fixed lambda=-100 endpoint only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    }
+  ],
+  "source_contract": {
+    "continuous": "z_1''(t)<=4200/t^2 for every real t>=1251",
+    "finite_positive": "Q_(10,n)(-100)>0 for every 4<=n<=1242",
+    "full_ceiling": "z_1''(t)<=4200/t^2 on t>=1251 => Z_k<4201/k^2+10/k^2=4211/k^2<5500/k^2, k>=1252",
+    "full_transfer": "|Z_k-Z_k^(1)|<10/k^2 for every integer k>=1252",
+    "negative_prefix": "Q_(10,n)(-100)<0 for n=0,1,2,3",
+    "orientation": "epsilon_10=(-1)^45=-1, Q_(10,n)=-H_(10,n)",
+    "sources": [
+      {
+        "kind": "jensen_window_pf_compound_order10_first_summand_curvature_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_first_summand_curvature_certificate.json",
+        "sha256": "480da3125b1c89f2e9e85f17fcb58d08957f83a5735a4446f83f242635b13ed5",
+        "status": "rigorous global order-ten first-summand curvature theorem on t>=1251"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order10_first_summand_curvature_bridge",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_first_summand_curvature_bridge.json",
+        "sha256": "eae49b9d53dfbf4e3ed679260b378e974422958ef9be828bdb02a69c123cf9ec",
+        "status": "exact order-ten first/full curvature transfer with one open global first-summand curvature theorem"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order10_m100_finite_splice_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_m100_finite_splice_certificate.json",
+        "sha256": "4ae563049cef969e480478c7edbbaf260a7ad536e861979caf603c511ac483b2",
+        "status": "rigorous two-index order-ten finite splice at lambda=-100"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order10_m100_tail_curvature_reduction",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_m100_tail_curvature_reduction.json",
+        "sha256": "b1204a7f3c8e3f7c71b57b8c51c8525c5cea86a24cd2020b3d142aa2c152780f",
+        "status": "exact order-ten positive endpoint-tail reduction with one open seventh-nested curvature ceiling"
+      }
+    ],
+    "tail": "Q_(10,n)(-100)>0 for every n>=1243",
+    "tent_transfer": "z_1''(t)<=4200/t^2 => Z_k^(1)<=4200*[-log(1-1/k^2)]<4201/k^2, k>=1252"
+  },
+  "status": "rigorous delayed signed order-ten entry and complete endpoint sign chart at lambda=-100",
+  "summary": {
+    "all_shift_positive_entry_theorems": 0,
+    "analytic_tail_theorems": 1,
+    "complete_endpoint_sign_charts": 1,
+    "continuous_curvature_inputs": 1,
+    "delayed_m100_entry_theorems": 1,
+    "finite_positive_block_theorems": 1,
+    "full_kernel_transfer_applications": 1,
+    "negative_prefix_theorems": 1,
+    "open_rows": 0,
+    "ready_rows": 7,
+    "rows": 7
+  }
+}

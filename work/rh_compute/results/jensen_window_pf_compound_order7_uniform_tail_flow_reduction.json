@@ -1,0 +1,307 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order7_uniform_tail_flow_reduction.py",
+  "countermodel": {
+    "H7_n0": "34201/88845982207870628726518579200000000000",
+    "Q6_log_concavity_margin": "-34201/59436732624881410374275156859658650098073600000000000000000",
+    "Q6_values": [
+      "1/668986161758208000000",
+      "1/222531556847250309120000000",
+      "1234451/88845982207870628726518579200000000000"
+    ],
+    "Q7_n0": "-34201/88845982207870628726518579200000000000",
+    "conclusion": "strict signed contiguous layers through order six do not imply order seven",
+    "sequence": [
+      "1",
+      "1",
+      "1/2",
+      "1/6",
+      "1/24",
+      "1/120",
+      "1/720",
+      "1/5040",
+      "1/40320",
+      "1/362880",
+      "1/3628800",
+      "1/39916800",
+      "1/480100000"
+    ],
+    "strict_signed_lower_layers": {
+      "1": [
+        "1",
+        "1",
+        "1/2",
+        "1/6",
+        "1/24",
+        "1/120",
+        "1/720",
+        "1/5040",
+        "1/40320",
+        "1/362880",
+        "1/3628800",
+        "1/39916800",
+        "1/480100000"
+      ],
+      "2": [
+        "1/2",
+        "1/12",
+        "1/144",
+        "1/2880",
+        "1/86400",
+        "1/3628800",
+        "1/203212800",
+        "1/14631321600",
+        "1/1316818944000",
+        "1/144850083840000",
+        "51269/956209722209280000000"
+      ],
+      "3": [
+        "1/144",
+        "1/8640",
+        "1/1036800",
+        "1/217728000",
+        "1/73156608000",
+        "1/36870930432000",
+        "1/26547069911040000",
+        "1/26281599211929600000",
+        "1943/77108751998956339200000000"
+      ],
+      "4": [
+        "1/1036800",
+        "1/870912000",
+        "1/1463132160000",
+        "1/4424511651840000",
+        "1/22299538725273600000",
+        "1/176612346704166912000000",
+        "82667/125915507664215743660032000000000"
+      ],
+      "5": [
+        "1/1463132160000",
+        "1/22122558259200000",
+        "1/668986161758208000000",
+        "1/37088592807875051520000000",
+        "4201/60439443678823556956815360000000000"
+      ],
+      "6": [
+        "1/668986161758208000000",
+        "1/222531556847250309120000000",
+        "1234451/88845982207870628726518579200000000000"
+      ]
+    }
+  },
+  "date": "2026-07-13",
+  "exact": {
+    "affine_derivative": "Q_(7,n)'=(4*n+50)*delta(Q_(7,n))",
+    "conditional_arbitrary_columns": "completed signed contiguous layers through order seven imply every arbitrary-column signed layer through order seven",
+    "conditional_forward": "[Q_(7,n)(-100)>0 for all n] => [Q_(7,n)(lambda)>0 for all n and -100<=lambda<=0]",
+    "cooperative_flow": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n=(4*n+50)*Q_(6,n)/Q_(6,n+1)>0, b_n=((4*n+50)/(4*n+46))*(log Q_(6,n+1))'",
+    "entry_equivalence": "Q_(7,n)>0 iff Q_(6,n+1)^2>Q_(6,n)*Q_(6,n+2)",
+    "leading_term": "det K=-52183852646400*G_2^21*h^21+o(h^21)",
+    "open_entry": "Q_(7,n)(-100)>0 for every n>=0, equivalently strict log-concavity of Q_(6,n)(-100)",
+    "order7_condensation": "Q_(7,n)*H_(5,n+2)=Q_(6,n+1)^2-Q_(6,n)*Q_(6,n+2)",
+    "order7_orientation": "epsilon_7=-1, Q_(7,n)=-H_(7,n)",
+    "signed_condensation": "Q_(7,n)*Q_(5,n+2)=Q_(6,n+1)^2-Q_(6,n)*Q_(6,n+2)",
+    "signed_coordinate": "Q_(m,n)=epsilon_m*H_(m,n), epsilon_m=(-1)^binom(m,2)",
+    "signed_leading_term": "Q_7=positive_scale*(52183852646400*G_2^21*h^21+o(h^21))",
+    "uniform_eventual_tail": "there exists N_7 such that Q_(7,n)(lambda)>0 for every n>=N_7 and -100<=lambda<=0",
+    "variation_of_constants": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order7_uniform_tail_flow_reduction.py",
+  "kind": "jensen_window_pf_compound_order7_uniform_tail_flow_reduction",
+  "proof_boundary": "This artifact proves the signed order-seven eventual tail, exact entry coordinate, cooperative flow, and conditional forward theorem. It does not prove endpoint entry, full order-seven invariance, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The completed signed layer through fixed order six supplies the positive lower cone for order seven.",
+      "diagnostics": null,
+      "formula": "Q_(6,n)(lambda)=-H_(6,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+      "id": "co7utfr_01_order6_input",
+      "proof_boundary": "Completed fixed-order input only; no order-seven sign is imported.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The all-fixed-order Vandermonde theorem supplies a uniform eventual signed order-seven tail.",
+      "diagnostics": null,
+      "formula": "Q_7=positive_scale*(52183852646400*G_2^21*h^21+o(h^21)); there exists N_7 such that Q_(7,n)(lambda)>0 for every n>=N_7 and -100<=lambda<=0",
+      "id": "co7utfr_02_eventual_tail",
+      "proof_boundary": "Non-effective tail; the threshold may depend on order seven.",
+      "readiness": "ready_to_apply",
+      "role": "exact_published_composition"
+    },
+    {
+      "claim": "Signed order-seven entry is strict log-concavity of the completed positive Q_6 sequence.",
+      "diagnostics": null,
+      "formula": "Q_(7,n)*H_(5,n+2)=Q_(6,n+1)^2-Q_(6,n)*Q_(6,n+2); Q_(7,n)>0 iff Q_(6,n+1)^2>Q_(6,n)*Q_(6,n+2)",
+      "id": "co7utfr_03_entry_coordinate",
+      "proof_boundary": "Exact Desnanot-Jacobi specialization only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The affine Hankel heat derivative specializes with coefficient 4n+50.",
+      "diagnostics": null,
+      "formula": "Q_(7,n)'=(4*n+50)*delta(Q_(7,n))",
+      "id": "co7utfr_04_affine_heat",
+      "proof_boundary": "General determinant identity specialized at m=7.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The signed order-seven heat flow is cooperative throughout the completed order-six cone.",
+      "diagnostics": null,
+      "formula": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n=(4*n+50)*Q_(6,n)/Q_(6,n+1)>0, b_n=((4*n+50)/(4*n+46))*(log Q_(6,n+1))'",
+      "id": "co7utfr_05_cooperative_flow",
+      "proof_boundary": "The off-diagonal coefficient uses only Q_6>0.",
+      "readiness": "ready_to_apply",
+      "role": "exact_forward_lemma"
+    },
+    {
+      "claim": "All-shift lambda=-100 entry would complete signed contiguous order seven through lambda zero.",
+      "diagnostics": null,
+      "formula": "[Q_(7,n)(-100)>0 for all n] => [Q_(7,n)(lambda)>0 for all n and -100<=lambda<=0]; Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)",
+      "id": "co7utfr_06_conditional_forward",
+      "proof_boundary": "Conditional only on the explicit endpoint theorem.",
+      "readiness": "conditional_on_open_input",
+      "role": "exact_conditional_theorem"
+    },
+    {
+      "claim": "The fixed-order initial-minor theorem would then transfer order seven to arbitrary columns.",
+      "diagnostics": null,
+      "formula": "completed signed contiguous layers through order seven imply every arbitrary-column signed layer through order seven",
+      "id": "co7utfr_07_conditional_columns",
+      "proof_boundary": "Conditional on contiguous order-seven completion.",
+      "readiness": "conditional_on_open_input",
+      "role": "exact_conditional_theorem"
+    },
+    {
+      "claim": "The completed lower signed layers do not imply order seven abstractly.",
+      "diagnostics": {
+        "H7_n0": "34201/88845982207870628726518579200000000000",
+        "Q6_log_concavity_margin": "-34201/59436732624881410374275156859658650098073600000000000000000",
+        "Q6_values": [
+          "1/668986161758208000000",
+          "1/222531556847250309120000000",
+          "1234451/88845982207870628726518579200000000000"
+        ],
+        "Q7_n0": "-34201/88845982207870628726518579200000000000",
+        "conclusion": "strict signed contiguous layers through order six do not imply order seven",
+        "sequence": [
+          "1",
+          "1",
+          "1/2",
+          "1/6",
+          "1/24",
+          "1/120",
+          "1/720",
+          "1/5040",
+          "1/40320",
+          "1/362880",
+          "1/3628800",
+          "1/39916800",
+          "1/480100000"
+        ],
+        "strict_signed_lower_layers": {
+          "1": [
+            "1",
+            "1",
+            "1/2",
+            "1/6",
+            "1/24",
+            "1/120",
+            "1/720",
+            "1/5040",
+            "1/40320",
+            "1/362880",
+            "1/3628800",
+            "1/39916800",
+            "1/480100000"
+          ],
+          "2": [
+            "1/2",
+            "1/12",
+            "1/144",
+            "1/2880",
+            "1/86400",
+            "1/3628800",
+            "1/203212800",
+            "1/14631321600",
+            "1/1316818944000",
+            "1/144850083840000",
+            "51269/956209722209280000000"
+          ],
+          "3": [
+            "1/144",
+            "1/8640",
+            "1/1036800",
+            "1/217728000",
+            "1/73156608000",
+            "1/36870930432000",
+            "1/26547069911040000",
+            "1/26281599211929600000",
+            "1943/77108751998956339200000000"
+          ],
+          "4": [
+            "1/1036800",
+            "1/870912000",
+            "1/1463132160000",
+            "1/4424511651840000",
+            "1/22299538725273600000",
+            "1/176612346704166912000000",
+            "82667/125915507664215743660032000000000"
+          ],
+          "5": [
+            "1/1463132160000",
+            "1/22122558259200000",
+            "1/668986161758208000000",
+            "1/37088592807875051520000000",
+            "4201/60439443678823556956815360000000000"
+          ],
+          "6": [
+            "1/668986161758208000000",
+            "1/222531556847250309120000000",
+            "1234451/88845982207870628726518579200000000000"
+          ]
+        }
+      },
+      "formula": "Q_(7,0)=-34201/88845982207870628726518579200000000000<0",
+      "id": "co7utfr_08_countermodel",
+      "proof_boundary": "Exact rational finite sequence; blocks lower-layer promotion.",
+      "readiness": "ready_to_apply",
+      "role": "countermodel_gate"
+    },
+    {
+      "claim": "Prove strict all-shift signed order-seven entry at lambda=-100.",
+      "diagnostics": null,
+      "formula": "Q_(7,n)(-100)>0 for every n>=0, equivalently strict log-concavity of Q_(6,n)(-100)",
+      "id": "co7utfr_09_open_entry",
+      "proof_boundary": "Sole open input in this fixed-order-seven propagation route.",
+      "readiness": "not_ready_to_apply",
+      "role": "analytic_theorem_target"
+    }
+  ],
+  "source_contract": {
+    "order6_sign": "Q_(6,n)(lambda)=-H_(6,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+    "order6_status": "signed contiguous and arbitrary-column order-six theorem on -100<=lambda<=0",
+    "order7_leading_degree": 21,
+    "order7_positive_signed_constant": 52183852646400,
+    "order7_raw_leading_constant": -52183852646400,
+    "vandermonde_status": "exact all-fixed-order graded-kernel leading determinant lemma and compact-uniform eventual signed tails; no all-shift theorem"
+  },
+  "sources": [
+    "work/rh_compute/results/jensen_window_pf_compound_order6_uniform_heat_forward_invariance_certificate.json",
+    "work/rh_compute/results/jensen_window_pf_graded_kernel_vandermonde_all_order_lemma.json"
+  ],
+  "status": "exact uniform eventual signed order-seven tail and conditional forward reduction with one open lambda=-100 entry",
+  "summary": {
+    "conditional_arbitrary_column_theorems": 1,
+    "conditional_forward_theorems": 1,
+    "conditional_rows": 2,
+    "cooperative_flow_recursions": 1,
+    "lower_layer_countermodels": 1,
+    "open_entry_targets": 1,
+    "open_rows": 1,
+    "ready_to_apply_rows": 6,
+    "rows": 9,
+    "signed_condensation_coordinates": 1,
+    "universal_tail_specializations": 1
+  }
+}

@@ -1,0 +1,359 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order9_m100_finite_splice_certificate.py",
+  "date": "2026-07-13",
+  "exact": {
+    "analytic_tail": "Q_(9,n)(-100)>0 for every n>=1243",
+    "combined_prefix": "Q_(9,n)(-100)>0 for every 0<=n<=1242",
+    "signed_condensation": "Q_(9,n)*Q_(7,n+2)=Q_(8,n+1)^2-Q_(8,n)*Q_(8,n+2)",
+    "splice": "Q_(9,n)(-100)>0 for n=1241,1242",
+    "stable_coordinate": "M_n=Q_(8,n+1)^2/(Q_(8,n)*Q_(8,n+2))-1"
+  },
+  "finite": {
+    "coefficient_range": [
+      0,
+      1258
+    ],
+    "lambda": "-100",
+    "minimum_relative_ball": "[0.00406015342664670077197221967240111812209211818491693044255200 +/- 4.35E-63]",
+    "minimum_relative_lower": "4.06015342664670077197221967240111812209211818491693044255199E-3",
+    "minimum_relative_n": 1242,
+    "n_range": [
+      0,
+      1242
+    ],
+    "positive_coordinate_counts": {
+      "H4_values": 1251,
+      "H5_values": 1251,
+      "Q6_values": 1249,
+      "Q7_values": 1247,
+      "Q8_values": 1245,
+      "contractions": 1257,
+      "defects": 1257,
+      "order3_gaps": 1255,
+      "order4_margins": 1253,
+      "order5_stable_margins": 1251
+    },
+    "precision_bits": 2048,
+    "splice_rows": [
+      {
+        "Q9_sign": "positive_by_signed_condensation",
+        "n": 1241,
+        "relative_Q8_margin_ball": "[0.00406302808101788794967447375556020307485209444119966743284978 +/- 1.82E-63]",
+        "relative_Q8_margin_lower": "4.06302808101788794967447375556020307485209444119966743284977E-3"
+      },
+      {
+        "Q9_sign": "positive_by_signed_condensation",
+        "n": 1242,
+        "relative_Q8_margin_ball": "[0.00406015342664670077197221967240111812209211818491693044255200 +/- 4.35E-63]",
+        "relative_Q8_margin_lower": "4.06015342664670077197221967240111812209211818491693044255199E-3"
+      }
+    ]
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order9_m100_finite_splice_certificate.py",
+  "kind": "jensen_window_pf_compound_order9_m100_finite_splice_certificate",
+  "proof_boundary": "This artifact proves the order-nine endpoint signs only through n=1242. It does not prove the analytic tail, order-nine all-shift entry, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The first/full bridge isolates exactly two finite signs before its analytic half-line begins.",
+      "diagnostics": null,
+      "formula": "prove Q_(9,n)(-100)>0 for n=1241,1242",
+      "id": "co9m100fsc_01_bridge_target",
+      "proof_boundary": "Bridge bookkeeping only.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "Retained-integral Arb quadrature rigorously encloses the two additional coefficients.",
+      "diagnostics": {
+        "abs_tol": "1e-150",
+        "all_cache_A_radius_contains_A_ball": null,
+        "cache_checks": 0,
+        "cutoff": "7",
+        "dps": 220,
+        "elapsed_seconds_total": 11.955556199995044,
+        "k_max": 1258,
+        "k_min": 1257,
+        "kind": "acb_coefficient_enclosure_summary",
+        "lambdas": [
+          "-100.0"
+        ],
+        "max_A_radius": {
+          "k": 1257,
+          "lam": "-100.0",
+          "log10_radius": "-4256.23375881930323951222155276",
+          "radius": "5.837692041238045685754771961687798460432e-4257"
+        },
+        "max_c_radius": {
+          "k": 1257,
+          "lam": "-100.0",
+          "log10_radius": "-7608.13882548411515360809182044",
+          "radius": "7.263977927961435751883513902957870456431e-7609"
+        },
+        "n_sum": 70,
+        "rows": 2
+      },
+      "formula": "A_1257(-100)>0 and A_1258(-100)>0",
+      "id": "co9m100fsc_02_new_coefficients",
+      "proof_boundary": "Two lambda=-100 coefficients only.",
+      "readiness": "ready_to_apply",
+      "role": "interval_input"
+    },
+    {
+      "claim": "The full cancellation-preserving H4/H5/Q6/Q7/Q8 chain remains strictly positive through the enlarged endpoint.",
+      "diagnostics": {
+        "H4_values": 1251,
+        "H5_values": 1251,
+        "Q6_values": 1249,
+        "Q7_values": 1247,
+        "Q8_values": 1245,
+        "contractions": 1257,
+        "defects": 1257,
+        "order3_gaps": 1255,
+        "order4_margins": 1253,
+        "order5_stable_margins": 1251
+      },
+      "formula": "Q_(8,n)(-100)>0 for every 0<=n<=1244",
+      "id": "co9m100fsc_03_stable_rebuild",
+      "proof_boundary": "Finite 2048-bit Arb prefix only.",
+      "readiness": "ready_to_apply",
+      "role": "interval_certificate"
+    },
+    {
+      "claim": "Both new relative Q8 margins are strictly positive, closing the finite splice.",
+      "diagnostics": {
+        "rows": [
+          {
+            "Q9_sign": "positive_by_signed_condensation",
+            "n": 1241,
+            "relative_Q8_margin_ball": "[0.00406302808101788794967447375556020307485209444119966743284978 +/- 1.82E-63]",
+            "relative_Q8_margin_lower": "4.06302808101788794967447375556020307485209444119966743284977E-3"
+          },
+          {
+            "Q9_sign": "positive_by_signed_condensation",
+            "n": 1242,
+            "relative_Q8_margin_ball": "[0.00406015342664670077197221967240111812209211818491693044255200 +/- 4.35E-63]",
+            "relative_Q8_margin_lower": "4.06015342664670077197221967240111812209211818491693044255199E-3"
+          }
+        ]
+      },
+      "formula": "Q_(9,n)(-100)>0 for n=1241,1242",
+      "id": "co9m100fsc_04_splice_signs",
+      "proof_boundary": "Finite signed-condensation signs only.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "The established prefix and the two-row splice form one contiguous endpoint theorem.",
+      "diagnostics": null,
+      "formula": "Q_(9,n)(-100)>0 for every 0<=n<=1242",
+      "id": "co9m100fsc_05_combined_prefix",
+      "proof_boundary": "Lambda=-100 endpoint only; the analytic tail remains conditional.",
+      "readiness": "ready_to_apply",
+      "role": "analytic_composition"
+    }
+  ],
+  "source_diagnostics": [
+    {
+      "index_range": [
+        0,
+        300
+      ],
+      "overwritten_rows": 0,
+      "precedence": 0,
+      "rows": 301,
+      "sha256": "927013bd98552ce73ac5d3f6b019889fde55b188f63ebfae0accbd6f443cc718",
+      "source": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k300.jsonl"
+    },
+    {
+      "index_range": [
+        208,
+        217
+      ],
+      "overwritten_rows": 10,
+      "precedence": 1,
+      "rows": 10,
+      "sha256": "54c03d8b8ebf81f49f8c7048184b5986c9c8be6ebb1142a35419ee0a4b61fc74",
+      "source": "work/rh_compute/results/acb_enclosures_negative_lambda_m100_order3_k208_k217_dps220.jsonl"
+    },
+    {
+      "index_range": [
+        220,
+        250
+      ],
+      "overwritten_rows": 31,
+      "precedence": 2,
+      "rows": 31,
+      "sha256": "4b3bd467ae0e4b25969883eb48b519581fedbb237705310f2200bb0cd7655bc9",
+      "source": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k220_k250_dps220.jsonl"
+    },
+    {
+      "index_range": [
+        245,
+        320
+      ],
+      "overwritten_rows": 56,
+      "precedence": 3,
+      "rows": 76,
+      "sha256": "0a13890f3d4ca1ff16f7525bffef4a5980807a1efb5c99671bf7e95dd7060ec7",
+      "source": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k245_k320_dps220.jsonl"
+    },
+    {
+      "index_range": [
+        321,
+        321
+      ],
+      "overwritten_rows": 0,
+      "precedence": 4,
+      "rows": 1,
+      "sha256": "bc08d8735fb10d91377d9eed6ba3ffba8902fb253fedaa3e4d5a2a40ed0785b4",
+      "source": "work/rh_compute/results/acb_enclosures_negative_lambda_m100_order3_k321_dps220.jsonl"
+    },
+    {
+      "index_range": [
+        322,
+        322
+      ],
+      "overwritten_rows": 0,
+      "precedence": 5,
+      "rows": 1,
+      "sha256": "429a006774364d08827b564b0b7087510159bf29ebd63f4921cc8fb76afbd7b2",
+      "source": "work/rh_compute/results/negative_lambda_m100_order4_k322_dps220.jsonl"
+    },
+    {
+      "index_range": [
+        323,
+        324
+      ],
+      "overwritten_rows": 0,
+      "precedence": 6,
+      "rows": 2,
+      "sha256": "718b9e65f4a3a477f095665e0a83e8b037c2cd5336361774d56a150adeab1c0d",
+      "source": "work/rh_compute/results/negative_lambda_m100_order5_k323_k324_dps220.jsonl"
+    },
+    {
+      "index_range": [
+        191,
+        229
+      ],
+      "overwritten_rows": 39,
+      "precedence": 7,
+      "rows": 39,
+      "sha256": "71ef38dd6c7ea380614c4de71e4eea24bc5e0f1ca273c57ee261c2234893fbc5",
+      "source": "work/rh_compute/results/negative_lambda_m100_order6_k191_k229_dps220.jsonl"
+    },
+    {
+      "index_range": [
+        325,
+        326
+      ],
+      "overwritten_rows": 0,
+      "precedence": 8,
+      "rows": 2,
+      "sha256": "7b0474ba7ec7bd99e8dee43209e15e62abf1529e4717dbd6d27e74f06fb7de0f",
+      "source": "work/rh_compute/results/negative_lambda_m100_order6_k325_k326_dps220.jsonl"
+    },
+    {
+      "index_range": [
+        179,
+        190
+      ],
+      "overwritten_rows": 12,
+      "precedence": 9,
+      "rows": 12,
+      "sha256": "369db5c185f2515bfbb52b20f2cc208dd7f5ae0fb10c5a2b8421ba62b9acb31b",
+      "source": "work/rh_compute/results/negative_lambda_m100_order7_k179_k190_dps220.jsonl"
+    },
+    {
+      "index_range": [
+        327,
+        706
+      ],
+      "overwritten_rows": 0,
+      "precedence": 10,
+      "rows": 380,
+      "sha256": "c178e63c0d2348216b04882d5bfb9afca0ca3906cf7fb63c79900e8e2b51b585",
+      "source": "work/rh_compute/results/negative_lambda_m100_order8_k327_k706_dps220.jsonl"
+    },
+    {
+      "index_range": [
+        707,
+        1256
+      ],
+      "overwritten_rows": 0,
+      "precedence": 11,
+      "rows": 550,
+      "sha256": "ec9bf99372120ccdde036297f4d77981557b40d5cb2b9fa58232f4eee1521e94",
+      "source": "work/rh_compute/results/negative_lambda_m100_order8_k707_k1256_dps220.jsonl"
+    },
+    {
+      "index_range": [
+        153,
+        178
+      ],
+      "overwritten_rows": 26,
+      "precedence": 12,
+      "rows": 26,
+      "sha256": "f07aa68a3d5fdd8ef55c12545cebf67729243c9d866e1bbd8a00f65257652383",
+      "source": "work/rh_compute/results/negative_lambda_m100_order9_k153_k178_dps220.jsonl"
+    },
+    {
+      "index_range": [
+        1257,
+        1258
+      ],
+      "overwritten_rows": 0,
+      "precedence": 13,
+      "rows": 2,
+      "sha256": "245166827dba630ff7368c3b818bd81fb47859eff36a24e56f795fcddbda09c0",
+      "source": "work/rh_compute/results/negative_lambda_m100_order9_k1257_k1258_dps220.jsonl"
+    }
+  ],
+  "sources": {
+    "bridge_splice": "prove Q_(9,n)(-100)>0 for n=1241,1242",
+    "new_coefficient_sha256": "245166827dba630ff7368c3b818bd81fb47859eff36a24e56f795fcddbda09c0",
+    "new_coefficient_summary": {
+      "abs_tol": "1e-150",
+      "all_cache_A_radius_contains_A_ball": null,
+      "cache_checks": 0,
+      "cutoff": "7",
+      "dps": 220,
+      "elapsed_seconds_total": 11.955556199995044,
+      "k_max": 1258,
+      "k_min": 1257,
+      "kind": "acb_coefficient_enclosure_summary",
+      "lambdas": [
+        "-100.0"
+      ],
+      "max_A_radius": {
+        "k": 1257,
+        "lam": "-100.0",
+        "log10_radius": "-4256.23375881930323951222155276",
+        "radius": "5.837692041238045685754771961687798460432e-4257"
+      },
+      "max_c_radius": {
+        "k": 1257,
+        "lam": "-100.0",
+        "log10_radius": "-7608.13882548411515360809182044",
+        "radius": "7.263977927961435751883513902957870456431e-7609"
+      },
+      "n_sum": 70,
+      "rows": 2
+    },
+    "new_coefficient_summary_sha256": "b1afee4cd660d5c88207fa30b420392ef1d557a19d588c426c22e82c551cea4d",
+    "new_coefficients": "A_1257(-100)>0 and A_1258(-100)>0",
+    "old_prefix": "Q_(9,n)(-100)>0 for every 0<=n<=1240",
+    "old_prefix_sha256": "f25434f1cfedfafe54dbb9138b8a31e3ccddfea2aeadde87b0c80bd49ae625ec"
+  },
+  "status": "rigorous two-index order-nine finite splice at lambda=-100",
+  "summary": {
+    "coefficients": 1259,
+    "combined_positive_Q9_rows": 1243,
+    "finite_splice_rows": 2,
+    "finite_splice_theorems": 1,
+    "new_coefficient_rows": 2,
+    "open_rows": 0,
+    "positive_Q8_rows": 1245,
+    "ready_rows": 5,
+    "rows": 5
+  }
+}

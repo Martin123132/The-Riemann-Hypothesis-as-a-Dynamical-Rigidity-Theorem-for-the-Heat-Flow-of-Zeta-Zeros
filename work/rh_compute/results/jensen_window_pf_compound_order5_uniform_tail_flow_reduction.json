@@ -1,0 +1,834 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order5_uniform_tail_flow_reduction.py",
+  "conclusions": {
+    "conditional_entry": "H_(5,n)(-100)>0 for every integer n>=0",
+    "conditional_forward": "[H_(5,n)(-100)>0 for all n] => [H_(5,n)(lambda)>0 for all n and -100<=lambda<=0]",
+    "determinant_asymptotic": "H_(5,n)(lambda)=positive_scale(lambda,n)*(294912*G_2(lambda,n)^10*h(lambda,n)^10+o(h(lambda,n)^10)) uniformly",
+    "heat_tilt_extension": "Delta_k^m log(A_k^(1)(-T)/A_k^(1)(0))=O(log(k)/k^m), m=2,...,11, uniformly for 0<=T<=100",
+    "higher_theta": "all fixed local differences of log(A_k(-T)/A_k^(1)(-T)) are O_p,m(k^-p) uniformly",
+    "open_entry_target": "because H_(3,n+2)<0 and H_(4,j)>0, H_(5,n)>0 iff H_(4,n+1)^2>H_(4,n)*H_(4,n+2) at lambda=-100 for every n>=0",
+    "uniform_eventual_tail": "there exists N_5 such that H_(5,n)(lambda)>0 for every n>=N_5 and -100<=lambda<=0",
+    "uniform_ratio": "the complete family has the compact-uniform order-five graded ratio contract with G_2(T,M)->1",
+    "variation_of_constants": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)"
+  },
+  "countermodel": {
+    "H4_log_concavity_margin": "-1/3792438558720000000",
+    "H5_n0": "-1/3657830400000",
+    "conclusion": "strict signed contiguous layers through order four do not imply order five",
+    "sequence": [
+      "1",
+      "1",
+      "1/2",
+      "1/6",
+      "1/24",
+      "1/120",
+      "1/720",
+      "1/5040",
+      "1/42000"
+    ],
+    "strict_signed_lower_layers": {
+      "1": [
+        "1",
+        "1",
+        "1/2",
+        "1/6",
+        "1/24",
+        "1/120",
+        "1/720",
+        "1/5040",
+        "1/42000"
+      ],
+      "2": [
+        "1/2",
+        "1/12",
+        "1/144",
+        "1/2880",
+        "1/86400",
+        "1/3628800",
+        "1/158760000"
+      ],
+      "3": [
+        "1/144",
+        "1/8640",
+        "1/1036800",
+        "1/217728000",
+        "1/457228800000"
+      ],
+      "4": [
+        "1/1036800",
+        "1/870912000",
+        "1/609638400000"
+      ]
+    }
+  },
+  "date": "2026-07-13",
+  "determinant_cancellation": {
+    "coefficients_h0_through_h10": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "294912*G2**10"
+    ],
+    "elapsed_seconds": 137.425,
+    "first_nonzero_term": "294912*G2^10*h^10",
+    "general_constant": "epsilon_5*2^binom(5,2)*prod_(j=1)^4 j!=294912",
+    "independence": "G3,...,G11 cancel from the first nonzero coefficient",
+    "matrix_entry": "K_(i,j)(h)=exp(-sum_(m>=2)G_m*h^(m-1)*(8-i-j)^m)",
+    "permutations_checked": 120,
+    "truncation": "m=2,...,11 and powers h^0,...,h^10"
+  },
+  "exact_flow": {
+    "affine_derivative": "H_(5,n)'=(4*n+34)*delta(H_(5,n))",
+    "condensation": "H_(5,n)*H_(3,n+2)=H_(4,n)*H_(4,n+2)-H_(4,n+1)^2",
+    "cooperative_flow": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n=(4*n+34)*H_(4,n)/H_(4,n+1)>0, b_n=((4*n+34)/(4*n+30))*(log H_(4,n+1))'",
+    "entry_equivalence": "because H_(3,n+2)<0 and H_(4,j)>0, H_(5,n)>0 iff H_(4,n+1)^2>H_(4,n)*H_(4,n+2)",
+    "plucker": "H_(4,n+1)*delta(H_(5,n))=H_(4,n)*H_(5,n+1)+delta(H_(4,n+1))*H_(5,n)",
+    "symbolic_residuals": {
+      "affine_heat": "0",
+      "condensation": "0",
+      "plucker": "0"
+    }
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order5_uniform_tail_flow_reduction.py",
+  "kind": "jensen_window_pf_compound_order5_uniform_tail_flow_reduction",
+  "lambert_extension": {
+    "derivative_bound": "d^m/dk^m w(k)^2=O(w(k)/k^m), m=1,...,11",
+    "difference_bound": "Delta_k^m log R_T^(1)(k)=O(log(k)/k^m), m=2,...,11, uniformly for 0<=T<=100",
+    "identity": "w'(k)=w/(k*(1+w)), w=W(2*k/pi)",
+    "rows": [
+      {
+        "derivative": "2*w**2/(k*(w + 1))",
+        "limit_w_to_infinity": "2",
+        "normalized": "2*w/(w + 1)",
+        "order": 1
+      },
+      {
+        "derivative": "-2*w**2*(w**2 + w - 1)/(k**2*(w + 1)**3)",
+        "limit_w_to_infinity": "-2",
+        "normalized": "-2*w*(w**2 + w - 1)/(w + 1)**3",
+        "order": 2
+      },
+      {
+        "derivative": "2*w**3*(2*w**3 + 5*w**2 - 6)/(k**3*(w + 1)**5)",
+        "limit_w_to_infinity": "4",
+        "normalized": "2*w**2*(2*w**3 + 5*w**2 - 6)/(w + 1)**5",
+        "order": 3
+      },
+      {
+        "derivative": "-2*w**4*(w + 2)*(6*w**3 + 13*w**2 - 2*w - 24)/(k**4*(w + 1)**7)",
+        "limit_w_to_infinity": "-12",
+        "normalized": "-2*w**3*(w + 2)*(6*w**3 + 13*w**2 - 2*w - 24)/(w + 1)**7",
+        "order": 4
+      },
+      {
+        "derivative": "2*w**5*(24*w**5 + 142*w**4 + 272*w**3 + 29*w**2 - 520*w - 500)/(k**5*(w + 1)**9)",
+        "limit_w_to_infinity": "48",
+        "normalized": "2*w**4*(24*w**5 + 142*w**4 + 272*w**3 + 29*w**2 - 520*w - 500)/(w + 1)**9",
+        "order": 5
+      },
+      {
+        "derivative": "-2*w**6*(120*w**6 + 926*w**5 + 2660*w**4 + 2569*w**3 - 3068*w**2 - 9318*w - 6480)/(k**6*(w + 1)**11)",
+        "limit_w_to_infinity": "-240",
+        "normalized": "-2*w**5*(120*w**6 + 926*w**5 + 2660*w**4 + 2569*w**3 - 3068*w**2 - 9318*w - 6480)/(w + 1)**11",
+        "order": 6
+      },
+      {
+        "derivative": "2*w**7*(720*w**7 + 6876*w**6 + 26352*w**5 + 45364*w**4 + 6918*w**3 - 109635*w**2 - 181832*w - 100842)/(k**7*(w + 1)**13)",
+        "limit_w_to_infinity": "1440",
+        "normalized": "2*w**6*(720*w**7 + 6876*w**6 + 26352*w**5 + 45364*w**4 + 6918*w**3 - 109635*w**2 - 181832*w - 100842)/(w + 1)**13",
+        "order": 7
+      },
+      {
+        "derivative": "-2*w**8*(5040*w**8 + 57492*w**7 + 275688*w**6 + 671572*w**5 + 642490*w**4 - 831295*w**3 - 3267008*w**2 - 3941432*w - 1835008)/(k**8*(w + 1)**15)",
+        "limit_w_to_infinity": "-10080",
+        "normalized": "-2*w**7*(5040*w**8 + 57492*w**7 + 275688*w**6 + 671572*w**5 + 642490*w**4 - 831295*w**3 - 3267008*w**2 - 3941432*w - 1835008)/(w + 1)**15",
+        "order": 8
+      },
+      {
+        "derivative": "2*w**9*(40320*w**9 + 535536*w**8 + 3085056*w**7 + 9656828*w**6 + 15574088*w**5 + 2199090*w**4 - 45331924*w**3 - 97644739*w**2 - 94857552*w - 38263752)/(k**9*(w + 1)**17)",
+        "limit_w_to_infinity": "80640",
+        "normalized": "2*w**8*(40320*w**9 + 535536*w**8 + 3085056*w**7 + 9656828*w**6 + 15574088*w**5 + 2199090*w**4 - 45331924*w**3 - 97644739*w**2 - 94857552*w - 38263752)/(w + 1)**17",
+        "order": 9
+      },
+      {
+        "derivative": "-2*w**10*(362880*w**10 + 5505264*w**9 + 37042272*w**8 + 141243228*w**7 + 311707960*w**6 + 288906690*w**5 - 437477776*w**4 - 1930233263*w**3 - 3061195932*w**2 - 2520523090*w - 900000000)/(k**10*(w + 1)**19)",
+        "limit_w_to_infinity": "-725760",
+        "normalized": "-2*w**9*(362880*w**10 + 5505264*w**9 + 37042272*w**8 + 141243228*w**7 + 311707960*w**6 + 288906690*w**5 - 437477776*w**4 - 1930233263*w**3 - 3061195932*w**2 - 2520523090*w - 900000000)/(w + 1)**19",
+        "order": 10
+      },
+      {
+        "derivative": "2*w**11*(3628800*w**11 + 61947360*w**10 + 476899200*w**9 + 2140772616*w**8 + 5928092440*w**7 + 9069647384*w**6 + 688735040*w**5 - 31683810480*w**4 - 79048113054*w**3 - 102066821275*w**2 - 73452254656*w - 23579476910)/(k**11*(w + 1)**21)",
+        "limit_w_to_infinity": "7257600",
+        "normalized": "2*w**10*(3628800*w**11 + 61947360*w**10 + 476899200*w**9 + 2140772616*w**8 + 5928092440*w**7 + 9069647384*w**6 + 688735040*w**5 - 31683810480*w**4 - 79048113054*w**3 - 102066821275*w**2 - 73452254656*w - 23579476910)/(w + 1)**21",
+        "order": 11
+      }
+    ]
+  },
+  "newton_transfer": {
+    "coefficient_rows": [
+      {
+        "coefficient": "(840*D1 - 420*D2 + 280*D3 - 210*D4 + 168*D5 - 140*D6 + 120*D7 - 105*D8)/840",
+        "degree": 1,
+        "diagonal": "1",
+        "difference_orders": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "coefficient": "(5040*D2 - 5040*D3 + 4620*D4 - 4200*D5 + 3836*D6 - 3528*D7 + 3267*D8)/10080",
+        "degree": 2,
+        "diagonal": "1/2",
+        "difference_orders": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "coefficient": "(240*D3 - 360*D4 + 420*D5 - 450*D6 + 464*D7 - 469*D8)/1440",
+        "degree": 3,
+        "diagonal": "1/6",
+        "difference_orders": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "coefficient": "(240*D4 - 480*D5 + 680*D6 - 840*D7 + 967*D8)/5760",
+        "degree": 4,
+        "diagonal": "1/24",
+        "difference_orders": [
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "coefficient": "(6*D5 - 15*D6 + 25*D7 - 35*D8)/720",
+        "degree": 5,
+        "diagonal": "1/120",
+        "difference_orders": [
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "coefficient": "(4*D6 - 12*D7 + 23*D8)/2880",
+        "degree": 6,
+        "diagonal": "1/720",
+        "difference_orders": [
+          6,
+          7,
+          8
+        ]
+      },
+      {
+        "coefficient": "(2*D7 - 7*D8)/10080",
+        "degree": 7,
+        "diagonal": "1/5040",
+        "difference_orders": [
+          7,
+          8
+        ]
+      },
+      {
+        "coefficient": "D8/40320",
+        "degree": 8,
+        "diagonal": "1/40320",
+        "difference_orders": [
+          8
+        ]
+      }
+    ],
+    "graded_output": "[j^r]q_M(j)/h(M)^(r-1)=O(log(M)/M)=o(1), r=2,...,8",
+    "heat_input": "D_m(M)=O(log(M)/M^m), m=2,...,8",
+    "interpolant": "q_M(j)=sum_(m=1)^8 D_m(M)*binom(j,m), 0<=j<=8",
+    "polynomial": "D1*j + D2*j**2/2 - D2*j/2 + D3*j**3/6 - D3*j**2/2 + D3*j/3 + D4*j**4/24 - D4*j**3/4 + 11*D4*j**2/24 - D4*j/4 + D5*j**5/120 - D5*j**4/12 + 7*D5*j**3/24 - 5*D5*j**2/12 + D5*j/5 + D6*j**6/720 - D6*j**5/48 + 17*D6*j**4/144 - 5*D6*j**3/16 + 137*D6*j**2/360 - D6*j/6 + D7*j**7/5040 - D7*j**6/240 + 5*D7*j**5/144 - 7*D7*j**4/48 + 29*D7*j**3/90 - 7*D7*j**2/20 + D7*j/7 + D8*j**8/40320 - D8*j**7/1440 + 23*D8*j**6/2880 - 7*D8*j**5/144 + 967*D8*j**4/5760 - 469*D8*j**3/1440 + 363*D8*j**2/1120 - D8*j/8",
+    "triangular_support": "the coefficient of j^r uses only D_m with m>=r and diagonal D_r/r!"
+  },
+  "proof_boundary": "This artifact proves an unconditional compact-uniform eventual order-five tail and the exact cooperative propagation reduction. It does not prove all-shift order-five entry, full order-five invariance, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The published Xi coefficient-ratio theorem supplies the all-order lambda-zero graded expansion.",
+      "diagnostics": null,
+      "formula": "log(gamma(M-j)/gamma(M))=-sum_(m>=1)G_m(M)*Delta(M)^(2m-2)*j^m",
+      "id": "co5utfr_01_published_ratio_input",
+      "proof_boundary": "Published fixed-shift Xi asymptotics; no RH input.",
+      "readiness": "ready_to_apply",
+      "role": "published_theorem_input"
+    },
+    {
+      "claim": "O'Sullivan's all-order suitable-multiplier theorem extends the compact heat-tilt differences through order eleven.",
+      "diagnostics": {
+        "lambert": {
+          "derivative_bound": "d^m/dk^m w(k)^2=O(w(k)/k^m), m=1,...,11",
+          "difference_bound": "Delta_k^m log R_T^(1)(k)=O(log(k)/k^m), m=2,...,11, uniformly for 0<=T<=100",
+          "identity": "w'(k)=w/(k*(1+w)), w=W(2*k/pi)",
+          "rows": [
+            {
+              "derivative": "2*w**2/(k*(w + 1))",
+              "limit_w_to_infinity": "2",
+              "normalized": "2*w/(w + 1)",
+              "order": 1
+            },
+            {
+              "derivative": "-2*w**2*(w**2 + w - 1)/(k**2*(w + 1)**3)",
+              "limit_w_to_infinity": "-2",
+              "normalized": "-2*w*(w**2 + w - 1)/(w + 1)**3",
+              "order": 2
+            },
+            {
+              "derivative": "2*w**3*(2*w**3 + 5*w**2 - 6)/(k**3*(w + 1)**5)",
+              "limit_w_to_infinity": "4",
+              "normalized": "2*w**2*(2*w**3 + 5*w**2 - 6)/(w + 1)**5",
+              "order": 3
+            },
+            {
+              "derivative": "-2*w**4*(w + 2)*(6*w**3 + 13*w**2 - 2*w - 24)/(k**4*(w + 1)**7)",
+              "limit_w_to_infinity": "-12",
+              "normalized": "-2*w**3*(w + 2)*(6*w**3 + 13*w**2 - 2*w - 24)/(w + 1)**7",
+              "order": 4
+            },
+            {
+              "derivative": "2*w**5*(24*w**5 + 142*w**4 + 272*w**3 + 29*w**2 - 520*w - 500)/(k**5*(w + 1)**9)",
+              "limit_w_to_infinity": "48",
+              "normalized": "2*w**4*(24*w**5 + 142*w**4 + 272*w**3 + 29*w**2 - 520*w - 500)/(w + 1)**9",
+              "order": 5
+            },
+            {
+              "derivative": "-2*w**6*(120*w**6 + 926*w**5 + 2660*w**4 + 2569*w**3 - 3068*w**2 - 9318*w - 6480)/(k**6*(w + 1)**11)",
+              "limit_w_to_infinity": "-240",
+              "normalized": "-2*w**5*(120*w**6 + 926*w**5 + 2660*w**4 + 2569*w**3 - 3068*w**2 - 9318*w - 6480)/(w + 1)**11",
+              "order": 6
+            },
+            {
+              "derivative": "2*w**7*(720*w**7 + 6876*w**6 + 26352*w**5 + 45364*w**4 + 6918*w**3 - 109635*w**2 - 181832*w - 100842)/(k**7*(w + 1)**13)",
+              "limit_w_to_infinity": "1440",
+              "normalized": "2*w**6*(720*w**7 + 6876*w**6 + 26352*w**5 + 45364*w**4 + 6918*w**3 - 109635*w**2 - 181832*w - 100842)/(w + 1)**13",
+              "order": 7
+            },
+            {
+              "derivative": "-2*w**8*(5040*w**8 + 57492*w**7 + 275688*w**6 + 671572*w**5 + 642490*w**4 - 831295*w**3 - 3267008*w**2 - 3941432*w - 1835008)/(k**8*(w + 1)**15)",
+              "limit_w_to_infinity": "-10080",
+              "normalized": "-2*w**7*(5040*w**8 + 57492*w**7 + 275688*w**6 + 671572*w**5 + 642490*w**4 - 831295*w**3 - 3267008*w**2 - 3941432*w - 1835008)/(w + 1)**15",
+              "order": 8
+            },
+            {
+              "derivative": "2*w**9*(40320*w**9 + 535536*w**8 + 3085056*w**7 + 9656828*w**6 + 15574088*w**5 + 2199090*w**4 - 45331924*w**3 - 97644739*w**2 - 94857552*w - 38263752)/(k**9*(w + 1)**17)",
+              "limit_w_to_infinity": "80640",
+              "normalized": "2*w**8*(40320*w**9 + 535536*w**8 + 3085056*w**7 + 9656828*w**6 + 15574088*w**5 + 2199090*w**4 - 45331924*w**3 - 97644739*w**2 - 94857552*w - 38263752)/(w + 1)**17",
+              "order": 9
+            },
+            {
+              "derivative": "-2*w**10*(362880*w**10 + 5505264*w**9 + 37042272*w**8 + 141243228*w**7 + 311707960*w**6 + 288906690*w**5 - 437477776*w**4 - 1930233263*w**3 - 3061195932*w**2 - 2520523090*w - 900000000)/(k**10*(w + 1)**19)",
+              "limit_w_to_infinity": "-725760",
+              "normalized": "-2*w**9*(362880*w**10 + 5505264*w**9 + 37042272*w**8 + 141243228*w**7 + 311707960*w**6 + 288906690*w**5 - 437477776*w**4 - 1930233263*w**3 - 3061195932*w**2 - 2520523090*w - 900000000)/(w + 1)**19",
+              "order": 10
+            },
+            {
+              "derivative": "2*w**11*(3628800*w**11 + 61947360*w**10 + 476899200*w**9 + 2140772616*w**8 + 5928092440*w**7 + 9069647384*w**6 + 688735040*w**5 - 31683810480*w**4 - 79048113054*w**3 - 102066821275*w**2 - 73452254656*w - 23579476910)/(k**11*(w + 1)**21)",
+              "limit_w_to_infinity": "7257600",
+              "normalized": "2*w**10*(3628800*w**11 + 61947360*w**10 + 476899200*w**9 + 2140772616*w**8 + 5928092440*w**7 + 9069647384*w**6 + 688735040*w**5 - 31683810480*w**4 - 79048113054*w**3 - 102066821275*w**2 - 73452254656*w - 23579476910)/(w + 1)**21",
+              "order": 11
+            }
+          ]
+        },
+        "suitability": {
+          "coefficient_checks": [
+            {
+              "T_degree": 0,
+              "coefficient": "1",
+              "degree": 0,
+              "v_degree": 0
+            },
+            {
+              "T_degree": 1,
+              "coefficient": "-T*v/8",
+              "degree": 1,
+              "v_degree": 1
+            },
+            {
+              "T_degree": 2,
+              "coefficient": "T*(T*v**2 + 8*v - 8)/128",
+              "degree": 2,
+              "v_degree": 2
+            },
+            {
+              "T_degree": 3,
+              "coefficient": "-T*(T*v + 8)*(T*v**2 + 16*v - 24)/3072",
+              "degree": 3,
+              "v_degree": 3
+            },
+            {
+              "T_degree": 4,
+              "coefficient": "T*(T**3*v**4 + 48*T**2*v**3 - 48*T**2*v**2 + 704*T*v**2 - 1152*T*v + 192*T + 3072*v - 5632)/98304",
+              "degree": 4,
+              "v_degree": 4
+            },
+            {
+              "T_degree": 5,
+              "coefficient": "-T*(T*v + 16)*(T**3*v**4 + 64*T**2*v**3 - 80*T**2*v**2 + 1216*T*v**2 - 2560*T*v + 960*T + 6144*v - 12800)/3932160",
+              "degree": 5,
+              "v_degree": 5
+            },
+            {
+              "T_degree": 6,
+              "coefficient": "T*(T**5*v**6 + 120*T**4*v**5 - 120*T**4*v**4 + 5440*T**3*v**4 - 9600*T**3*v**3 + 2880*T**3*v**2 + 115200*T**2*v**3 - 261120*T**2*v**2 + 115200*T**2*v - 7680*T**2 + 1122304*T*v**2 - 2764800*T*v + 1044480*T + 3932160*v - 8978432)/188743680",
+              "degree": 6,
+              "v_degree": 6
+            },
+            {
+              "T_degree": 7,
+              "coefficient": "-T*(T*v + 24)*(T**5*v**6 + 144*T**4*v**5 - 168*T**4*v**4 + 7744*T**3*v**4 - 16128*T**3*v**3 + 6720*T**3*v**2 + 190464*T**2*v**3 - 508928*T**2*v**2 + 322560*T**2*v - 53760*T**2 + 2080768*T*v**2 - 5849088*T*v + 3010560*T + 7864320*v - 19267584)/10569646080",
+              "degree": 7,
+              "v_degree": 7
+            },
+            {
+              "T_degree": 8,
+              "coefficient": "T*(T**7*v**8 + 224*T**6*v**7 - 224*T**6*v**6 + 20608*T**5*v**6 - 37632*T**5*v**5 + 13440*T**5*v**4 + 1003520*T**4*v**5 - 2472960*T**4*v**4 + 1505280*T**4*v**3 - 215040*T**4*v**2 + 27725824*T**3*v**4 - 80281600*T**3*v**3 + 59351040*T**3*v**2 - 12042240*T**3*v + 430080*T**3 + 430309376*T**2*v**3 - 1330839552*T**2*v**2 + 963379200*T**2*v - 158269440*T**2 + 3425697792*T*v**2 - 10327425024*T*v + 5323358208*T + 10569646080*v - 27405582336)/676457349120",
+              "degree": 8,
+              "v_degree": 8
+            },
+            {
+              "T_degree": 9,
+              "coefficient": "-T*(T*v + 32)*(T**7*v**8 + 256*T**6*v**7 - 288*T**6*v**6 + 26752*T**5*v**6 - 55296*T**5*v**5 + 24192*T**5*v**4 + 1466368*T**4*v**5 - 4101120*T**4*v**4 + 3096576*T**4*v**3 - 645120*T**4*v**2 + 45027328*T**3*v**4 - 147456000*T**3*v**3 + 135733248*T**3*v**2 - 41287680*T**3*v + 3870720*T**3 + 763887616*T**2*v**3 - 2637496320*T**2*v**2 + 2345140224*T**2*v - 557383680*T**2 + 6521094144*T*v**2 - 21428699136*T*v + 13228572672*T + 21139292160*v - 57453576192)/48704929136640",
+              "degree": 9,
+              "v_degree": 9
+            },
+            {
+              "T_degree": 10,
+              "coefficient": "T*(T**9*v**10 + 360*T**8*v**9 - 360*T**8*v**8 + 55680*T**7*v**8 - 103680*T**7*v**7 + 40320*T**7*v**6 + 4838400*T**6*v**7 - 12472320*T**6*v**6 + 8709120*T**6*v**5 - 1612800*T**6*v**4 + 259166208*T**5*v**6 - 812851200*T**5*v**5 + 748339200*T**5*v**4 - 232243200*T**5*v**3 + 19353600*T**5*v**2 + 8825241600*T**4*v**5 - 31099944960*T**4*v**4 + 32514048000*T**4*v**3 - 11973427200*T**4*v**2 + 1393459200*T**4*v - 30965760*T**4 + 189708369920*T**3*v**4 - 706019328000*T**3*v**3 + 746398679040*T**3*v**2 - 260112384000*T**3*v + 23946854400*T**3 + 2459330150400*T**2*v**3 - 9106001756160*T**2*v**2 + 8472231936000*T**2*v - 1990396477440*T**2 + 17223087292416*T*v**2 - 59023923609600*T*v + 36424007024640*T + 48704929136640*v - 137784698339328)/3896394330931200",
+              "degree": 10,
+              "v_degree": 10
+            },
+            {
+              "T_degree": 11,
+              "coefficient": "-T*(T*v + 40)*(T**9*v**10 + 400*T**8*v**9 - 440*T**8*v**8 + 68480*T**7*v**8 - 140800*T**7*v**7 + 63360*T**7*v**6 + 6553600*T**6*v**7 - 18698240*T**6*v**6 + 15206400*T**6*v**5 - 3548160*T**6*v**4 + 384094208*T**5*v**6 - 1333657600*T**5*v**5 + 1435484160*T**5*v**4 - 567705600*T**5*v**3 + 70963200*T**5*v**2 + 14194769920*T**4*v**5 - 55221714944*T**4*v**4 + 67475865600*T**4*v**3 - 31791513600*T**4*v**2 + 5677056000*T**4*v - 340623360*T**4 + 327936901120*T**3*v**4 - 1338155991040*T**3*v**3 + 1643686133760*T**3*v**2 - 726663168000*T**3*v + 99916185600*T**3 + 4518523699200*T**2*v**3 - 18131976192000*T**2*v**2 + 19381144780800*T**2*v - 5675239342080*T**2 + 33228551356416*T*v**2 - 121248940032000*T*v + 84652798771200*T + 97409858273280*v - 285310382505984)/342882701121945600",
+              "degree": 11,
+              "v_degree": 11
+            }
+          ],
+          "family": "f_T(t)=exp(-T*(log t)^2/16), 0<=T<=100",
+          "ratio_identity": "f_T(t*(1+x))/f_T(t)=exp(-T*((v/8)*log(1+x)+log(1+x)^2/16)), t=exp(v)",
+          "uniform_bound": "sup_(0<=T<=100)|f_(T,r)(v)|=O_r(v^r), r=0,...,11"
+        }
+      },
+      "formula": "Delta_k^m log(A_k^(1)(-T)/A_k^(1)(0))=O(log(k)/k^m), m=2,...,11, uniformly for 0<=T<=100",
+      "id": "co5utfr_02_heat_tilt_extension",
+      "proof_boundary": "First theta summand only; compact heat interval.",
+      "readiness": "ready_to_apply",
+      "role": "published_theorem_composition"
+    },
+    {
+      "claim": "Uniform superpolynomial first-summand dominance removes all higher theta summands to every order needed here.",
+      "diagnostics": null,
+      "formula": "all fixed local differences of log(A_k(-T)/A_k^(1)(-T)) are O_p,m(k^-p) uniformly",
+      "id": "co5utfr_03_higher_theta",
+      "proof_boundary": "Complete-to-first-summand ratio correction only.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "Nine-node Newton interpolation transfers the heat differences to the graded order-five ratio coefficients.",
+      "diagnostics": {
+        "coefficient_rows": [
+          {
+            "coefficient": "(840*D1 - 420*D2 + 280*D3 - 210*D4 + 168*D5 - 140*D6 + 120*D7 - 105*D8)/840",
+            "degree": 1,
+            "diagonal": "1",
+            "difference_orders": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ]
+          },
+          {
+            "coefficient": "(5040*D2 - 5040*D3 + 4620*D4 - 4200*D5 + 3836*D6 - 3528*D7 + 3267*D8)/10080",
+            "degree": 2,
+            "diagonal": "1/2",
+            "difference_orders": [
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ]
+          },
+          {
+            "coefficient": "(240*D3 - 360*D4 + 420*D5 - 450*D6 + 464*D7 - 469*D8)/1440",
+            "degree": 3,
+            "diagonal": "1/6",
+            "difference_orders": [
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ]
+          },
+          {
+            "coefficient": "(240*D4 - 480*D5 + 680*D6 - 840*D7 + 967*D8)/5760",
+            "degree": 4,
+            "diagonal": "1/24",
+            "difference_orders": [
+              4,
+              5,
+              6,
+              7,
+              8
+            ]
+          },
+          {
+            "coefficient": "(6*D5 - 15*D6 + 25*D7 - 35*D8)/720",
+            "degree": 5,
+            "diagonal": "1/120",
+            "difference_orders": [
+              5,
+              6,
+              7,
+              8
+            ]
+          },
+          {
+            "coefficient": "(4*D6 - 12*D7 + 23*D8)/2880",
+            "degree": 6,
+            "diagonal": "1/720",
+            "difference_orders": [
+              6,
+              7,
+              8
+            ]
+          },
+          {
+            "coefficient": "(2*D7 - 7*D8)/10080",
+            "degree": 7,
+            "diagonal": "1/5040",
+            "difference_orders": [
+              7,
+              8
+            ]
+          },
+          {
+            "coefficient": "D8/40320",
+            "degree": 8,
+            "diagonal": "1/40320",
+            "difference_orders": [
+              8
+            ]
+          }
+        ],
+        "graded_output": "[j^r]q_M(j)/h(M)^(r-1)=O(log(M)/M)=o(1), r=2,...,8",
+        "heat_input": "D_m(M)=O(log(M)/M^m), m=2,...,8",
+        "interpolant": "q_M(j)=sum_(m=1)^8 D_m(M)*binom(j,m), 0<=j<=8",
+        "polynomial": "D1*j + D2*j**2/2 - D2*j/2 + D3*j**3/6 - D3*j**2/2 + D3*j/3 + D4*j**4/24 - D4*j**3/4 + 11*D4*j**2/24 - D4*j/4 + D5*j**5/120 - D5*j**4/12 + 7*D5*j**3/24 - 5*D5*j**2/12 + D5*j/5 + D6*j**6/720 - D6*j**5/48 + 17*D6*j**4/144 - 5*D6*j**3/16 + 137*D6*j**2/360 - D6*j/6 + D7*j**7/5040 - D7*j**6/240 + 5*D7*j**5/144 - 7*D7*j**4/48 + 29*D7*j**3/90 - 7*D7*j**2/20 + D7*j/7 + D8*j**8/40320 - D8*j**7/1440 + 23*D8*j**6/2880 - 7*D8*j**5/144 + 967*D8*j**4/5760 - 469*D8*j**3/1440 + 363*D8*j**2/1120 - D8*j/8",
+        "triangular_support": "the coefficient of j^r uses only D_m with m>=r and diagonal D_r/r!"
+      },
+      "formula": "[j^r]q_M(j)/h(M)^(r-1)=O(log(M)/M)=o(1), r=2,...,8",
+      "id": "co5utfr_04_newton_transfer",
+      "proof_boundary": "Exact on the nine determinant nodes.",
+      "readiness": "ready_to_apply",
+      "role": "exact_symbolic_lemma"
+    },
+    {
+      "claim": "The normalized five-by-five determinant vanishes through h^9 and has a universal positive first coefficient.",
+      "diagnostics": {
+        "coefficients_h0_through_h10": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0",
+          "294912*G2**10"
+        ],
+        "elapsed_seconds": 137.425,
+        "first_nonzero_term": "294912*G2^10*h^10",
+        "general_constant": "epsilon_5*2^binom(5,2)*prod_(j=1)^4 j!=294912",
+        "independence": "G3,...,G11 cancel from the first nonzero coefficient",
+        "matrix_entry": "K_(i,j)(h)=exp(-sum_(m>=2)G_m*h^(m-1)*(8-i-j)^m)",
+        "permutations_checked": 120,
+        "truncation": "m=2,...,11 and powers h^0,...,h^10"
+      },
+      "formula": "294912*G2^10*h^10",
+      "id": "co5utfr_05_determinant_cancellation",
+      "proof_boundary": "Exact 120-permutation expansion through the first nonzero order.",
+      "readiness": "ready_to_apply",
+      "role": "exact_symbolic_theorem"
+    },
+    {
+      "claim": "The actual heat-deformed Xi family has one eventual positive contiguous order-five tail uniformly through lambda zero.",
+      "diagnostics": {
+        "asymptotic": "H_(5,n)(lambda)=positive_scale(lambda,n)*(294912*G_2(lambda,n)^10*h(lambda,n)^10+o(h(lambda,n)^10)) uniformly"
+      },
+      "formula": "there exists N_5 such that H_(5,n)(lambda)>0 for every n>=N_5 and -100<=lambda<=0",
+      "id": "co5utfr_06_uniform_eventual_tail",
+      "proof_boundary": "Non-effective eventual theorem only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "Order-five entry is exactly strict log-concavity of the completed positive order-four determinants.",
+      "diagnostics": null,
+      "formula": "H_(5,n)*H_(3,n+2)=H_(4,n)*H_(4,n+2)-H_(4,n+1)^2; because H_(3,n+2)<0 and H_(4,j)>0, H_(5,n)>0 iff H_(4,n+1)^2>H_(4,n)*H_(4,n+2)",
+      "id": "co5utfr_07_condensation",
+      "proof_boundary": "Exact contiguous Desnanot-Jacobi identity.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The order-five heat flow is cooperative over the completed positive order-four layer and needs no order-six sign.",
+      "diagnostics": {
+        "affine_derivative": "H_(5,n)'=(4*n+34)*delta(H_(5,n))",
+        "condensation": "H_(5,n)*H_(3,n+2)=H_(4,n)*H_(4,n+2)-H_(4,n+1)^2",
+        "cooperative_flow": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n=(4*n+34)*H_(4,n)/H_(4,n+1)>0, b_n=((4*n+34)/(4*n+30))*(log H_(4,n+1))'",
+        "entry_equivalence": "because H_(3,n+2)<0 and H_(4,j)>0, H_(5,n)>0 iff H_(4,n+1)^2>H_(4,n)*H_(4,n+2)",
+        "plucker": "H_(4,n+1)*delta(H_(5,n))=H_(4,n)*H_(5,n+1)+delta(H_(4,n+1))*H_(5,n)",
+        "symbolic_residuals": {
+          "affine_heat": "0",
+          "condensation": "0",
+          "plucker": "0"
+        }
+      },
+      "formula": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n=(4*n+34)*H_(4,n)/H_(4,n+1)>0, b_n=((4*n+34)/(4*n+30))*(log H_(4,n+1))'",
+      "id": "co5utfr_08_cooperative_flow",
+      "proof_boundary": "Exact affine-Hankel and Plucker algebra.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The uniform positive tail reduces forward propagation to finite backward induction from its boundary.",
+      "diagnostics": null,
+      "formula": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)",
+      "id": "co5utfr_09_finite_confinement",
+      "proof_boundary": "Requires strict lambda=-100 entry at the finitely many remaining shifts.",
+      "readiness": "ready_to_apply",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "All-shift lambda=-100 entry would complete contiguous order-five forward invariance through zero.",
+      "diagnostics": null,
+      "formula": "[H_(5,n)(-100)>0 for all n] => [H_(5,n)(lambda)>0 for all n and -100<=lambda<=0]",
+      "id": "co5utfr_10_conditional_forward",
+      "proof_boundary": "Conditional on the explicit entry target only.",
+      "readiness": "conditional_on_open_input",
+      "role": "conditional_theorem"
+    },
+    {
+      "claim": "The completed signed layers through order four do not imply order five abstractly.",
+      "diagnostics": {
+        "H4_log_concavity_margin": "-1/3792438558720000000",
+        "H5_n0": "-1/3657830400000",
+        "conclusion": "strict signed contiguous layers through order four do not imply order five",
+        "sequence": [
+          "1",
+          "1",
+          "1/2",
+          "1/6",
+          "1/24",
+          "1/120",
+          "1/720",
+          "1/5040",
+          "1/42000"
+        ],
+        "strict_signed_lower_layers": {
+          "1": [
+            "1",
+            "1",
+            "1/2",
+            "1/6",
+            "1/24",
+            "1/120",
+            "1/720",
+            "1/5040",
+            "1/42000"
+          ],
+          "2": [
+            "1/2",
+            "1/12",
+            "1/144",
+            "1/2880",
+            "1/86400",
+            "1/3628800",
+            "1/158760000"
+          ],
+          "3": [
+            "1/144",
+            "1/8640",
+            "1/1036800",
+            "1/217728000",
+            "1/457228800000"
+          ],
+          "4": [
+            "1/1036800",
+            "1/870912000",
+            "1/609638400000"
+          ]
+        }
+      },
+      "formula": "H_(5,0)=-1/3657830400000<0",
+      "id": "co5utfr_11_lower_layer_kill_gate",
+      "proof_boundary": "Exact rational countermodel, not the Xi sequence.",
+      "readiness": "ready_to_apply",
+      "role": "non_promotion_guard"
+    },
+    {
+      "claim": "Prove strict all-shift order-five entry at lambda=-100, equivalently strict log-concavity of H_4 there.",
+      "diagnostics": null,
+      "formula": "because H_(3,n+2)<0 and H_(4,j)>0, H_(5,n)>0 iff H_(4,n+1)^2>H_(4,n)*H_(4,n+2) at lambda=-100 for every n>=0",
+      "id": "co5utfr_12_open_entry",
+      "proof_boundary": "This is the sole open input in this order-five propagation route.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    }
+  ],
+  "source_contract": {
+    "heat_tilt_status": "uniform compact-heat first-summand heat-tilt asymptotic theorem",
+    "higher_theta_status": "uniform compact-heat superpolynomial first-summand dominance theorem",
+    "order4_sign": "H_(4,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+    "order4_status": "all-shift contiguous order-four forward invariance through lambda zero",
+    "xi_ratio_source": "Griffin-Ono-Rolen-Thorner-Tripp-Wagner, Jensen Polynomials for the Riemann Xi Function"
+  },
+  "sources": [
+    "outputs/jensen_window_pf_compound_order4_uniform_heat_forward_invariance_certificate.md",
+    "outputs/jensen_window_pf_uniform_first_summand_heat_tilt_asymptotic_theorem.md",
+    "outputs/jensen_window_pf_uniform_superpolynomial_first_summand_dominance.md",
+    "outputs/jensen_window_pf_compound_order4_lambda0_eventual_positivity_certificate.md",
+    "https://arxiv.org/abs/1910.01227",
+    "https://arxiv.org/abs/2007.13582",
+    "outputs/signed_hankel_jensen_bridge_target.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "exact uniform eventual order-five tail and conditional forward reduction with one open lambda=-100 entry",
+  "summary": {
+    "conditional_forward_theorems": 1,
+    "conditional_rows": 1,
+    "cooperative_flow_theorems": 1,
+    "determinant_permutations_checked": 120,
+    "lambert_derivative_orders_checked": 11,
+    "lower_layer_countermodels": 1,
+    "newton_coefficients_checked": 8,
+    "open_entry_targets": 1,
+    "open_rows": 1,
+    "ready_to_apply_rows": 10,
+    "rows": 12,
+    "suitability_coefficients_checked": 12,
+    "uniform_eventual_tail_theorems": 1
+  },
+  "uniform_suitability_extension": {
+    "coefficient_checks": [
+      {
+        "T_degree": 0,
+        "coefficient": "1",
+        "degree": 0,
+        "v_degree": 0
+      },
+      {
+        "T_degree": 1,
+        "coefficient": "-T*v/8",
+        "degree": 1,
+        "v_degree": 1
+      },
+      {
+        "T_degree": 2,
+        "coefficient": "T*(T*v**2 + 8*v - 8)/128",
+        "degree": 2,
+        "v_degree": 2
+      },
+      {
+        "T_degree": 3,
+        "coefficient": "-T*(T*v + 8)*(T*v**2 + 16*v - 24)/3072",
+        "degree": 3,
+        "v_degree": 3
+      },
+      {
+        "T_degree": 4,
+        "coefficient": "T*(T**3*v**4 + 48*T**2*v**3 - 48*T**2*v**2 + 704*T*v**2 - 1152*T*v + 192*T + 3072*v - 5632)/98304",
+        "degree": 4,
+        "v_degree": 4
+      },
+      {
+        "T_degree": 5,
+        "coefficient": "-T*(T*v + 16)*(T**3*v**4 + 64*T**2*v**3 - 80*T**2*v**2 + 1216*T*v**2 - 2560*T*v + 960*T + 6144*v - 12800)/3932160",
+        "degree": 5,
+        "v_degree": 5
+      },
+      {
+        "T_degree": 6,
+        "coefficient": "T*(T**5*v**6 + 120*T**4*v**5 - 120*T**4*v**4 + 5440*T**3*v**4 - 9600*T**3*v**3 + 2880*T**3*v**2 + 115200*T**2*v**3 - 261120*T**2*v**2 + 115200*T**2*v - 7680*T**2 + 1122304*T*v**2 - 2764800*T*v + 1044480*T + 3932160*v - 8978432)/188743680",
+        "degree": 6,
+        "v_degree": 6
+      },
+      {
+        "T_degree": 7,
+        "coefficient": "-T*(T*v + 24)*(T**5*v**6 + 144*T**4*v**5 - 168*T**4*v**4 + 7744*T**3*v**4 - 16128*T**3*v**3 + 6720*T**3*v**2 + 190464*T**2*v**3 - 508928*T**2*v**2 + 322560*T**2*v - 53760*T**2 + 2080768*T*v**2 - 5849088*T*v + 3010560*T + 7864320*v - 19267584)/10569646080",
+        "degree": 7,
+        "v_degree": 7
+      },
+      {
+        "T_degree": 8,
+        "coefficient": "T*(T**7*v**8 + 224*T**6*v**7 - 224*T**6*v**6 + 20608*T**5*v**6 - 37632*T**5*v**5 + 13440*T**5*v**4 + 1003520*T**4*v**5 - 2472960*T**4*v**4 + 1505280*T**4*v**3 - 215040*T**4*v**2 + 27725824*T**3*v**4 - 80281600*T**3*v**3 + 59351040*T**3*v**2 - 12042240*T**3*v + 430080*T**3 + 430309376*T**2*v**3 - 1330839552*T**2*v**2 + 963379200*T**2*v - 158269440*T**2 + 3425697792*T*v**2 - 10327425024*T*v + 5323358208*T + 10569646080*v - 27405582336)/676457349120",
+        "degree": 8,
+        "v_degree": 8
+      },
+      {
+        "T_degree": 9,
+        "coefficient": "-T*(T*v + 32)*(T**7*v**8 + 256*T**6*v**7 - 288*T**6*v**6 + 26752*T**5*v**6 - 55296*T**5*v**5 + 24192*T**5*v**4 + 1466368*T**4*v**5 - 4101120*T**4*v**4 + 3096576*T**4*v**3 - 645120*T**4*v**2 + 45027328*T**3*v**4 - 147456000*T**3*v**3 + 135733248*T**3*v**2 - 41287680*T**3*v + 3870720*T**3 + 763887616*T**2*v**3 - 2637496320*T**2*v**2 + 2345140224*T**2*v - 557383680*T**2 + 6521094144*T*v**2 - 21428699136*T*v + 13228572672*T + 21139292160*v - 57453576192)/48704929136640",
+        "degree": 9,
+        "v_degree": 9
+      },
+      {
+        "T_degree": 10,
+        "coefficient": "T*(T**9*v**10 + 360*T**8*v**9 - 360*T**8*v**8 + 55680*T**7*v**8 - 103680*T**7*v**7 + 40320*T**7*v**6 + 4838400*T**6*v**7 - 12472320*T**6*v**6 + 8709120*T**6*v**5 - 1612800*T**6*v**4 + 259166208*T**5*v**6 - 812851200*T**5*v**5 + 748339200*T**5*v**4 - 232243200*T**5*v**3 + 19353600*T**5*v**2 + 8825241600*T**4*v**5 - 31099944960*T**4*v**4 + 32514048000*T**4*v**3 - 11973427200*T**4*v**2 + 1393459200*T**4*v - 30965760*T**4 + 189708369920*T**3*v**4 - 706019328000*T**3*v**3 + 746398679040*T**3*v**2 - 260112384000*T**3*v + 23946854400*T**3 + 2459330150400*T**2*v**3 - 9106001756160*T**2*v**2 + 8472231936000*T**2*v - 1990396477440*T**2 + 17223087292416*T*v**2 - 59023923609600*T*v + 36424007024640*T + 48704929136640*v - 137784698339328)/3896394330931200",
+        "degree": 10,
+        "v_degree": 10
+      },
+      {
+        "T_degree": 11,
+        "coefficient": "-T*(T*v + 40)*(T**9*v**10 + 400*T**8*v**9 - 440*T**8*v**8 + 68480*T**7*v**8 - 140800*T**7*v**7 + 63360*T**7*v**6 + 6553600*T**6*v**7 - 18698240*T**6*v**6 + 15206400*T**6*v**5 - 3548160*T**6*v**4 + 384094208*T**5*v**6 - 1333657600*T**5*v**5 + 1435484160*T**5*v**4 - 567705600*T**5*v**3 + 70963200*T**5*v**2 + 14194769920*T**4*v**5 - 55221714944*T**4*v**4 + 67475865600*T**4*v**3 - 31791513600*T**4*v**2 + 5677056000*T**4*v - 340623360*T**4 + 327936901120*T**3*v**4 - 1338155991040*T**3*v**3 + 1643686133760*T**3*v**2 - 726663168000*T**3*v + 99916185600*T**3 + 4518523699200*T**2*v**3 - 18131976192000*T**2*v**2 + 19381144780800*T**2*v - 5675239342080*T**2 + 33228551356416*T*v**2 - 121248940032000*T*v + 84652798771200*T + 97409858273280*v - 285310382505984)/342882701121945600",
+        "degree": 11,
+        "v_degree": 11
+      }
+    ],
+    "family": "f_T(t)=exp(-T*(log t)^2/16), 0<=T<=100",
+    "ratio_identity": "f_T(t*(1+x))/f_T(t)=exp(-T*((v/8)*log(1+x)+log(1+x)^2/16)), t=exp(v)",
+    "uniform_bound": "sup_(0<=T<=100)|f_(T,r)(v)|=O_r(v^r), r=0,...,11"
+  }
+}

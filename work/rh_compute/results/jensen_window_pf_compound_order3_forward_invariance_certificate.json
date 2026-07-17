@@ -1,0 +1,164 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order3_forward_invariance_certificate.py",
+  "date": "2026-07-12",
+  "exact": {
+    "alpha": "alpha_k=(2*k+5)*a*(b*d+c^2-1)/(c*d^2)",
+    "alpha_positive_reason": "q_j>1 implies a,c,d>0 and b*d+c^2-1>0",
+    "alpha_scaled_limit": "4",
+    "beta": "beta_k=-N_k/(c^2*(b^2-1))",
+    "beta_numerator": "N_k=(2*k+1)*a^2*c^2+(2*k+1)*a*b^2*c-(2*k+1)*a*c+(4*k+6)*b^4+(-4*k+2)*b^2*c^2-(4*k+6)*b^2",
+    "boundary": "at C_n=0, C_n'/r_k=alpha_k*C_(n+1), alpha_k>0",
+    "compound": "C_n=a*c-b^2+1",
+    "cooperative_system": "C_n'/r_k=alpha_k*C_(n+1)+beta_k*C_n",
+    "diagonal_scaled_limit": "2*(u + 2*v - 3*w)/y",
+    "indices": "k=n+2, a=q_(k-1), b=q_k, c=q_(k+1), d=q_(k+2)",
+    "next_compound": "C_(n+1)=b*d-c^2+1",
+    "q_flow": "q_j'=r_j*((2*j-1)*q_j-(2*j+3)*(q_j^3-q_j)/q_(j+1)^2)",
+    "scaled_sum_denominator": "(-h + y)*(h + y)*(h**2*v + y)**2*(h**2*v + h**2*w + y)**2",
+    "tail_scaling": "k=h^(-2), b=y/h, a=(y-u*h^2)/h, c=(y+v*h^2)/h, d=(y+(v+w)*h^2)/h"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order3_forward_invariance_certificate.py",
+  "kind": "jensen_window_pf_compound_order3_forward_invariance_certificate",
+  "proof_boundary": "This artifact proves strict forward propagation of the contiguous order-three reciprocal-defect margin and hence D_(3,n)(0)<0 for every shift. It does not prove noncontiguous order-three minors, any compound order four or higher, the all-order signed-Hankel/Jensen bridge, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The reciprocal-defect coordinate obeys an exact one-sided heat ODE.",
+      "diagnostics": null,
+      "formula": "q_j'=r_j*((2*j-1)*q_j-(2*j+3)*(q_j^3-q_j)/q_(j+1)^2)",
+      "id": "co3fi_01_q_flow",
+      "proof_boundary": "Exact coordinate identity only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Use the contiguous order-three compound margin and its next shift.",
+      "diagnostics": null,
+      "formula": "C_n=a*c-b^2+1, C_(n+1)=b*d-c^2+1",
+      "id": "co3fi_02_compound_coordinate",
+      "proof_boundary": "Contiguous order three only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Differentiation and exact division give a one-sided cooperative compound system.",
+      "diagnostics": {
+        "alpha": "alpha_k=(2*k+5)*a*(b*d+c^2-1)/(c*d^2)",
+        "beta": "beta_k=-N_k/(c^2*(b^2-1))",
+        "beta_numerator": "N_k=(2*k+1)*a^2*c^2+(2*k+1)*a*b^2*c-(2*k+1)*a*c+(4*k+6)*b^4+(-4*k+2)*b^2*c^2-(4*k+6)*b^2"
+      },
+      "formula": "C_n'/r_k=alpha_k*C_(n+1)+beta_k*C_n",
+      "id": "co3fi_03_cooperative_system",
+      "proof_boundary": "Exact local flow algebra; infinite continuation is separate.",
+      "readiness": "ready_to_apply",
+      "role": "exact_flow_lemma"
+    },
+    {
+      "claim": "At a zero compound margin, the vector field points inward whenever the next margin is nonnegative.",
+      "diagnostics": {
+        "positivity": "q_j>1 implies a,c,d>0 and b*d+c^2-1>0"
+      },
+      "formula": "at C_n=0, C_n'/r_k=alpha_k*C_(n+1), alpha_k>0",
+      "id": "co3fi_04_inward_boundary",
+      "proof_boundary": "Boundary theorem inside the strict ratio cone.",
+      "readiness": "ready_to_apply",
+      "role": "exact_boundary_theorem"
+    },
+    {
+      "claim": "The existing cubic theorem supplies a compact-interval reciprocal-increment tail and the full cubic cone.",
+      "diagnostics": {
+        "cubic_continuation_row": "cfut_08_cubic_continuation",
+        "cubic_forward_uniform_row": "cfut_07_forward_uniform_tail",
+        "cubic_status": "exact all-shift cubic forward-propagation theorem with open higher-degree handoff",
+        "entry_full_rows": 1,
+        "entry_status": "all-shift contiguous order-three entry theorem at lambda=-100 with open forward propagation",
+        "ratio_full_rows": 1,
+        "ratio_status": "exact infinite ratio-cone propagation theorem and open all-order handoff"
+      },
+      "formula": "0<=g_k<=B_L/sqrt(k) on every [-100,L]",
+      "id": "co3fi_05_forward_tail_input",
+      "proof_boundary": "Previously proved degree-3 tail input.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The compact-interval tail makes alpha_k=O_L(k) and alpha_k+beta_k=O_L(1).",
+      "diagnostics": {
+        "scaled_sum_denominator": "(-h + y)*(h + y)*(h**2*v + y)**2*(h**2*v + h**2*w + y)**2",
+        "tail_scaling": "k=h^(-2), b=y/h, a=(y-u*h^2)/h, c=(y+v*h^2)/h, d=(y+(v+w)*h^2)/h"
+      },
+      "formula": "lim_(h->0) h^2*alpha_k=4; lim_(h->0)(alpha_k+beta_k)=2*(u+2*v-3*w)/y",
+      "id": "co3fi_06_coefficient_growth",
+      "proof_boundary": "Coefficient-growth lemma along the actual compact heat trajectory.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_lemma"
+    },
+    {
+      "claim": "Dividing C_n by n+1 gives a locally attained negative minimum and a bounded diagonal coefficient on every compact heat interval.",
+      "diagnostics": {
+        "bounded_diagonal": "r_k*(alpha_k*(n+2)/(n+1)+beta_k)=r_k*(alpha_k+beta_k+alpha_k/(n+1)) is bounded above.",
+        "tail_attainment": "g_k=O_L(k^(-1/2)) and q_k=O_L(sqrt(k)) imply C_n=O_L(1), hence z_n->0 uniformly."
+      },
+      "formula": "z_n=C_n/(n+1), z_n'=A_n*(n+2)/(n+1)*z_(n+1)+B_n*z_n",
+      "id": "co3fi_07_weighted_maximum_principle",
+      "proof_boundary": "Uses uniform C_n=O_L(1) and the established coefficient-growth bounds.",
+      "readiness": "ready_to_apply",
+      "role": "exact_infinite_maximum_principle"
+    },
+    {
+      "claim": "Strict all-shift entry and the weighted maximum principle propagate every contiguous order-three margin to every finite forward heat time.",
+      "diagnostics": null,
+      "formula": "C_n(lambda)>0 for every n>=0 and finite lambda>=-100",
+      "id": "co3fi_08_strict_forward_propagation",
+      "proof_boundary": "Contiguous order-three family only.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "Every shifted contiguous 3x3 signed-Hankel minor has the required negative sign at lambda=0.",
+      "diagnostics": null,
+      "formula": "D_(3,n)(0)<0 for every n>=0",
+      "id": "co3fi_09_lambda_zero_theorem",
+      "proof_boundary": "One contiguous compound order at lambda=0.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_conclusion"
+    },
+    {
+      "claim": "Noncontiguous order-three minors and every compound order four or higher still require new coordinates and invariance theorems.",
+      "diagnostics": null,
+      "formula": "contiguous order 3 closed; noncontiguous order 3 and k>=4 open",
+      "id": "co3fi_10_higher_handoff",
+      "proof_boundary": "Open all-order signed-Hankel/Jensen bridge; not PF-infinity, RH, or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "source_diagnostics": {
+    "cubic_continuation_row": "cfut_08_cubic_continuation",
+    "cubic_forward_uniform_row": "cfut_07_forward_uniform_tail",
+    "cubic_status": "exact all-shift cubic forward-propagation theorem with open higher-degree handoff",
+    "entry_full_rows": 1,
+    "entry_status": "all-shift contiguous order-three entry theorem at lambda=-100 with open forward propagation",
+    "ratio_full_rows": 1,
+    "ratio_status": "exact infinite ratio-cone propagation theorem and open all-order handoff"
+  },
+  "sources": [
+    "outputs/jensen_window_pf_reciprocal_defect_compound_order3_gate.md",
+    "outputs/jensen_window_pf_negative_lambda_m100_compound_order3_entry_certificate.md",
+    "outputs/jensen_window_pf_cubic_forward_uniform_tail_certificate.md",
+    "outputs/jensen_window_pf_heat_flow_infinite_cone_invariance_certificate.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "exact all-shift contiguous order-three propagation through lambda=0 with noncontiguous and higher compounds open",
+  "summary": {
+    "certificate_rows": 10,
+    "coefficient_growth_rows": 1,
+    "cooperative_flow_rows": 1,
+    "exact_identity_rows": 2,
+    "full_forward_propagation_rows": 1,
+    "infinite_maximum_principle_rows": 1,
+    "inward_boundary_rows": 1,
+    "lambda_zero_theorem_rows": 1,
+    "open_handoffs": 1,
+    "ready_to_apply_rows": 9
+  }
+}

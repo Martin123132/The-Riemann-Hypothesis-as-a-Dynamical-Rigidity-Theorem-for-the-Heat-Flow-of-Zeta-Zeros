@@ -1,0 +1,679 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order4_first_summand_curvature_bridge.py",
+  "compact_curvature": {
+    "accepted_central_blocks": 1073,
+    "central_end_t_ball": "[37850.322210211384816295110892561323868727705625771 +/- 3.22E-46]",
+    "central_start_t_ball": "[318.99505050020666714217851899922620279230505439154 +/- 3.20E-48]",
+    "certified_t_range": "319<=t<=V'(2)",
+    "h_tile_count": 107452,
+    "largest_scaled_localized_upper": "3.33723355756790554314260494045514876254074160915177414272085E+0",
+    "remaining_ray": "u>=2",
+    "source": "work/rh_compute/results/jensen_window_pf_compound_order4_localized_curvature_compact_certificate.json",
+    "worst_margin_lower": "1.14426650120038260530285332880335545546623246507456181669743E-10"
+  },
+  "date": "2026-07-12",
+  "exact": {
+    "center_coordinate": "g(t)=d(t)^2-x(t)^2*d(t-1)*d(t+1), x(t)=exp(-B(t)), d(t)=1-x(t)",
+    "coarse_error_bounds": "a_j<=8/(j-1)^6; |ell_j-ell_j^(1)|<=32*j/(j-1)^6; |J_j-J_j^(1)|<=176*j/(j-2)^6<=1/(14*j)",
+    "continuous_target": "K(t)<=7/(2*t^2) for every real t>=319",
+    "derivative_functions": "phi(z)=1/(exp(z)-1), chi(z)=exp(z)/(exp(z)-1)^2",
+    "first_summand_rational_margin": "18/(5*k^2)-7/(2*(k^2-1))=(k^2-36)/(10*k^2*(k^2-1))",
+    "first_summand_transfer": "K(t)<=7/(2*t^2) => P_n^(1)<=7/(2*(k^2-1))<=18/(5*k^2), k>=320",
+    "full_tail_transfer": "P_n<=18/(5*k^2)+2/(5*k^2)=4/k^2, k=n+3>=320",
+    "integer_B_bounds": "1/(2*m+1)<=B_1(m)<=3/(2*m-1), integer m>=319",
+    "j_derivatives": "J^(r)=2*B^(r)-ell^(r)(t-1)+2*ell^(r)(t)-ell^(r)(t+1), r=0,1,2",
+    "j_floor_inputs": "B_1'<0, ((2*t+1)*B_1)'>0, and B_1(t)-B_1(t+1)>=1/(4*t^2)",
+    "j_floor_lower": "J_1(t)>=2/(2*t+3)-2/(2*t-1)+(t-3)/(6*t^2)>=1/(7*t), t>=319",
+    "j_floor_shifted_coefficients_descending": [
+      4,
+      3412,
+      955637,
+      87486770
+    ],
+    "j_floor_shifted_polynomial": "4*n**3 + 3412*n**2 + 955637*n + 87486770",
+    "local_jets": "j_0=2*B-ell''; j_1=2*B'-ell'''; j_2=2*B''-ell''''",
+    "local_remainders": "E_r=(1/12)*sup_|s|<=1 |ell^(r+4)(t+s)|; |J^(r)-j_r|<=E_r, r=0,1,2",
+    "localized_sufficient_condition": "j_0>E_0 and U<=7/(2*t^2) imply J>0 and K<=7/(2*t^2)",
+    "localized_upper": "U=2*ell''+phi(j_0-E_0)*max(j_2+E_2,0)-chi(j_0+E_0)*max(abs(j_1)-E_1,0)^2",
+    "log_bound": "-log(1-z)<=z/(1-z), 0<=z<1",
+    "log_defect_curvature": "ell''=phi(B)*B''-chi(B)*(B')^2",
+    "moment_error": "a_j=2*((j-1)^(-6)+2*j^(-6)+(j+1)^(-6)); |B_j-B_j^(1)|<=a_j",
+    "penalty_error": "|P_n-P_n^(1)|<=10112*(k+1)^2/(k-3)^6<=2/(5*k^2), k>=320",
+    "perturbation_shifted_coefficients_descending": [
+      1,
+      1902,
+      1482055,
+      604691300,
+      135889991935,
+      15877422036942,
+      748002501678169
+    ],
+    "perturbation_shifted_polynomial": "n**6 + 1902*n**5 + 1482055*n**4 + 604691300*n**3 + 135889991935*n**2 + 15877422036942*n + 748002501678169",
+    "real_B_bounds": "1/(2*t+3)<=B_1(t)<=3/(2*t-3), real t>=319",
+    "single_log_gap_error": "|log(g_j)-log(g_j^(1))|<=2528*j^2/(j-2)^6, j>=319",
+    "stable_factorization": "ell(t)=log(d(t)); J(t)=2*B(t)-ell(t-1)+2*ell(t)-ell(t+1); g(t)=d(t)^2*(1-exp(-J(t)))",
+    "stable_log_gap_curvature": "K(t)=(log g)''=2*ell''+phi(J)*J''-chi(J)*(J')^2",
+    "tent_identity": "P_n=Delta^2 log(g)(k)=integral_[-1,1](1-|s|)*K(k+s)ds, k=n+3"
+  },
+  "finite_j319": {
+    "center": 319,
+    "first_J_319_lower": "3.14373483568555526575056836588077222879513160667318764219688E-3",
+    "full_J_319_ball": "[0.00314373487445624348654553464069502 +/- 3.58E-36]",
+    "lambda": "-100",
+    "merged_sources": [
+      {
+        "index_range": [
+          0,
+          300
+        ],
+        "lambda_minus_100_rows": 301,
+        "overwritten_rows": 0,
+        "precedence": 0,
+        "source": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k300.jsonl"
+      },
+      {
+        "index_range": [
+          220,
+          250
+        ],
+        "lambda_minus_100_rows": 31,
+        "overwritten_rows": 31,
+        "precedence": 1,
+        "source": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k220_k250_dps220.jsonl"
+      },
+      {
+        "index_range": [
+          245,
+          320
+        ],
+        "lambda_minus_100_rows": 76,
+        "overwritten_rows": 56,
+        "precedence": 2,
+        "source": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k245_k320_dps220.jsonl"
+      },
+      {
+        "index_range": [
+          208,
+          217
+        ],
+        "lambda_minus_100_rows": 10,
+        "overwritten_rows": 10,
+        "precedence": 3,
+        "source": "work/rh_compute/results/acb_enclosures_negative_lambda_m100_order3_k208_k217_dps220.jsonl"
+      },
+      {
+        "index_range": [
+          321,
+          321
+        ],
+        "lambda_minus_100_rows": 1,
+        "overwritten_rows": 0,
+        "precedence": 4,
+        "source": "work/rh_compute/results/acb_enclosures_negative_lambda_m100_order3_k321_dps220.jsonl"
+      }
+    ],
+    "moment_gap_log_error_bound": "89951253098080690634149196914436221004385201978807690029119/2320083991953349496301767644806142109326407369735504972535037952000000",
+    "path_B_floor": "B_theta,j>1/(4*j), j=318,319,320",
+    "path_B_floor_margins": {
+      "318": "7.92358917845163208605466808645950373764274760946518681636237E-4",
+      "319": "7.91114107723035822928337174571655364072150157458793556937545E-4",
+      "320": "7.89871881200098447346385718340532038085919884698879320775493E-4"
+    },
+    "target": "1/(7*319)",
+    "target_margin_lower": "2.69590680165062467909584378012170371110591865709957217006698E-3"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order4_first_summand_curvature_bridge.py",
+  "kind": "jensen_window_pf_compound_order4_first_summand_curvature_bridge",
+  "lower_mode_collar": {
+    "block_count": 2,
+    "blocks": [
+      {
+        "eighth_envelope_bound": "1/50000",
+        "failure": null,
+        "full_kernel_transfer_margin_lower": "5.59711548470073043943411898343711522600656873457167518758518E-4",
+        "h_second_positive": true,
+        "h_third_negative": true,
+        "left": "37/40",
+        "maximum_simpson_error_upper": "2.86221996744469617028079141412124429131451682115415728155913E-7",
+        "maximum_tail_third_upper": "1.76028913981565200795383001578485759594132156878329678474080E-5",
+        "minimum_tail_slope_lower": "4.53708645110967204007985336439950125558035714285714285714174E+0",
+        "normalizer_lower": "2.50757178092360512918433395488166491278634307443298202093789E+0",
+        "panels": 200,
+        "passed": true,
+        "pointwise_curvature_derivative_lower": "5.67806155439663045465745856103751887578042711880093145657527E-4",
+        "right": "463/500",
+        "shifted_curvature_buffer_lower": "5.59711570013466157765892076575866435221556140951846016072971E-4",
+        "variance_positive": true,
+        "window_y": 6
+      },
+      {
+        "eighth_envelope_bound": "1/50000",
+        "failure": null,
+        "full_kernel_transfer_margin_lower": "6.92155006504811171513126129378094501618423156236669147117923E-4",
+        "h_second_positive": true,
+        "h_third_negative": true,
+        "left": "463/500",
+        "maximum_simpson_error_upper": "2.81961791619071337179861412995738632820146256427359039375721E-7",
+        "maximum_tail_third_upper": "1.71274963966206139225580599212562073102984419601667886105938E-5",
+        "minimum_tail_slope_lower": "4.55003194169765315226478768246514456612723214285714285714174E+0",
+        "normalizer_lower": "2.50789960103785892266612270624010758209968953650560860315070E+0",
+        "panels": 200,
+        "passed": true,
+        "pointwise_curvature_derivative_lower": "6.99848495278475602182437138017945717054759828804139040729191E-4",
+        "right": "579/625",
+        "shifted_curvature_buffer_lower": "6.92155027383258322460687502013968978673463344370385730369876E-4",
+        "variance_positive": true,
+        "window_y": 6
+      }
+    ],
+    "consequence": "Combined with the existing u>=0.9264 theorem, H'''<0 and the shifted scaled-curvature buffer hold for real parameter r>=316; hence B_1'<0 and ((2t+1)B_1)'>0 for t>=317.",
+    "eighth_envelope": "1/50000",
+    "minimum_shifted_buffer_lower": "5.59711570013466157765892076575866435221556140951846016072971E-4",
+    "mode_end_t_ball": "[317.88637191595975469476643987308448274189349595860 +/- 1.69E-48]",
+    "mode_interval": "0.925<=u<=0.9264",
+    "mode_start_t_ball": "[315.95546592336198089486945893253842006711732651970 +/- 3.75E-48]",
+    "panels_per_block": 200,
+    "positive_blocks": 2,
+    "window_y": 6
+  },
+  "proof_boundary": "This artifact proves the stable coordinate, the first-summand gap floor, the compact curvature ceiling through u=2, and the complete-kernel perturbation budget. It does not prove the remaining analytic curvature ray, order-four entry, forward invariance, arbitrary-column order four, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "Factor the cancellation-prone order-three gap through a positive logarithmic gap coordinate.",
+      "diagnostics": null,
+      "formula": "ell(t)=log(d(t)); J(t)=2*B(t)-ell(t-1)+2*ell(t)-ell(t+1); g(t)=d(t)^2*(1-exp(-J(t)))",
+      "id": "co4fcb_01_stable_gap_coordinate",
+      "proof_boundary": "Exact first-summand coordinate only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The logarithmic curvature of the stable gap uses only two derivatives of B and J.",
+      "diagnostics": null,
+      "formula": "K(t)=(log g)''=2*ell''+phi(J)*J''-chi(J)*(J')^2",
+      "id": "co4fcb_02_curvature_identity",
+      "proof_boundary": "Exact differentiation identity only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The discrete order-four penalty is a tent average of the continuous stable-gap curvature.",
+      "diagnostics": null,
+      "formula": "P_n=Delta^2 log(g)(k)=integral_[-1,1](1-|s|)*K(k+s)ds, k=n+3",
+      "id": "co4fcb_03_tent_bridge",
+      "proof_boundary": "Exact continuous-to-discrete reduction.",
+      "readiness": "ready_to_apply",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "Existing adjacent-wall and scaled-curvature theorems give a quantitative first-summand gap floor.",
+      "diagnostics": {
+        "analytic": "J_1(t)>=2/(2*t+3)-2/(2*t-1)+(t-3)/(6*t^2)>=1/(7*t), t>=319",
+        "finite_crosscheck": {
+          "center": 319,
+          "first_J_319_lower": "3.14373483568555526575056836588077222879513160667318764219688E-3",
+          "full_J_319_ball": "[0.00314373487445624348654553464069502 +/- 3.58E-36]",
+          "lambda": "-100",
+          "merged_sources": [
+            {
+              "index_range": [
+                0,
+                300
+              ],
+              "lambda_minus_100_rows": 301,
+              "overwritten_rows": 0,
+              "precedence": 0,
+              "source": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k300.jsonl"
+            },
+            {
+              "index_range": [
+                220,
+                250
+              ],
+              "lambda_minus_100_rows": 31,
+              "overwritten_rows": 31,
+              "precedence": 1,
+              "source": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k220_k250_dps220.jsonl"
+            },
+            {
+              "index_range": [
+                245,
+                320
+              ],
+              "lambda_minus_100_rows": 76,
+              "overwritten_rows": 56,
+              "precedence": 2,
+              "source": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m100_k245_k320_dps220.jsonl"
+            },
+            {
+              "index_range": [
+                208,
+                217
+              ],
+              "lambda_minus_100_rows": 10,
+              "overwritten_rows": 10,
+              "precedence": 3,
+              "source": "work/rh_compute/results/acb_enclosures_negative_lambda_m100_order3_k208_k217_dps220.jsonl"
+            },
+            {
+              "index_range": [
+                321,
+                321
+              ],
+              "lambda_minus_100_rows": 1,
+              "overwritten_rows": 0,
+              "precedence": 4,
+              "source": "work/rh_compute/results/acb_enclosures_negative_lambda_m100_order3_k321_dps220.jsonl"
+            }
+          ],
+          "moment_gap_log_error_bound": "89951253098080690634149196914436221004385201978807690029119/2320083991953349496301767644806142109326407369735504972535037952000000",
+          "path_B_floor": "B_theta,j>1/(4*j), j=318,319,320",
+          "path_B_floor_margins": {
+            "318": "7.92358917845163208605466808645950373764274760946518681636237E-4",
+            "319": "7.91114107723035822928337174571655364072150157458793556937545E-4",
+            "320": "7.89871881200098447346385718340532038085919884698879320775493E-4"
+          },
+          "target": "1/(7*319)",
+          "target_margin_lower": "2.69590680165062467909584378012170371110591865709957217006698E-3"
+        },
+        "lower_mode_collar": {
+          "block_count": 2,
+          "blocks": [
+            {
+              "eighth_envelope_bound": "1/50000",
+              "failure": null,
+              "full_kernel_transfer_margin_lower": "5.59711548470073043943411898343711522600656873457167518758518E-4",
+              "h_second_positive": true,
+              "h_third_negative": true,
+              "left": "37/40",
+              "maximum_simpson_error_upper": "2.86221996744469617028079141412124429131451682115415728155913E-7",
+              "maximum_tail_third_upper": "1.76028913981565200795383001578485759594132156878329678474080E-5",
+              "minimum_tail_slope_lower": "4.53708645110967204007985336439950125558035714285714285714174E+0",
+              "normalizer_lower": "2.50757178092360512918433395488166491278634307443298202093789E+0",
+              "panels": 200,
+              "passed": true,
+              "pointwise_curvature_derivative_lower": "5.67806155439663045465745856103751887578042711880093145657527E-4",
+              "right": "463/500",
+              "shifted_curvature_buffer_lower": "5.59711570013466157765892076575866435221556140951846016072971E-4",
+              "variance_positive": true,
+              "window_y": 6
+            },
+            {
+              "eighth_envelope_bound": "1/50000",
+              "failure": null,
+              "full_kernel_transfer_margin_lower": "6.92155006504811171513126129378094501618423156236669147117923E-4",
+              "h_second_positive": true,
+              "h_third_negative": true,
+              "left": "463/500",
+              "maximum_simpson_error_upper": "2.81961791619071337179861412995738632820146256427359039375721E-7",
+              "maximum_tail_third_upper": "1.71274963966206139225580599212562073102984419601667886105938E-5",
+              "minimum_tail_slope_lower": "4.55003194169765315226478768246514456612723214285714285714174E+0",
+              "normalizer_lower": "2.50789960103785892266612270624010758209968953650560860315070E+0",
+              "panels": 200,
+              "passed": true,
+              "pointwise_curvature_derivative_lower": "6.99848495278475602182437138017945717054759828804139040729191E-4",
+              "right": "579/625",
+              "shifted_curvature_buffer_lower": "6.92155027383258322460687502013968978673463344370385730369876E-4",
+              "variance_positive": true,
+              "window_y": 6
+            }
+          ],
+          "consequence": "Combined with the existing u>=0.9264 theorem, H'''<0 and the shifted scaled-curvature buffer hold for real parameter r>=316; hence B_1'<0 and ((2t+1)B_1)'>0 for t>=317.",
+          "eighth_envelope": "1/50000",
+          "minimum_shifted_buffer_lower": "5.59711570013466157765892076575866435221556140951846016072971E-4",
+          "mode_end_t_ball": "[317.88637191595975469476643987308448274189349595860 +/- 1.69E-48]",
+          "mode_interval": "0.925<=u<=0.9264",
+          "mode_start_t_ball": "[315.95546592336198089486945893253842006711732651970 +/- 3.75E-48]",
+          "panels_per_block": 200,
+          "positive_blocks": 2,
+          "window_y": 6
+        }
+      },
+      "formula": "J_1(t)>=1/(7*t), every real t>=319",
+      "id": "co4fcb_04_gap_floor",
+      "proof_boundary": "Uses the certified first-summand theorems and a two-block lower-mode interval collar.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "A centered-difference Taylor bound localizes the remaining curvature ceiling to same-point derivatives and explicit envelopes.",
+      "diagnostics": {
+        "local_jets": "j_0=2*B-ell''; j_1=2*B'-ell'''; j_2=2*B''-ell''''",
+        "remainders": "E_r=(1/12)*sup_|s|<=1 |ell^(r+4)(t+s)|; |J^(r)-j_r|<=E_r, r=0,1,2",
+        "upper": "U=2*ell''+phi(j_0-E_0)*max(j_2+E_2,0)-chi(j_0+E_0)*max(abs(j_1)-E_1,0)^2"
+      },
+      "formula": "j_0>E_0 and U<=7/(2*t^2) imply J>0 and K<=7/(2*t^2)",
+      "id": "co4fcb_04b_localized_curvature",
+      "proof_boundary": "Exact sufficient localization only; its derivative envelopes remain to be certified.",
+      "readiness": "ready_to_apply",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "Arb quadrature and the localized inequality prove the curvature ceiling from the required start through the u=2 handoff.",
+      "diagnostics": {
+        "accepted_central_blocks": 1073,
+        "central_end_t_ball": "[37850.322210211384816295110892561323868727705625771 +/- 3.22E-46]",
+        "central_start_t_ball": "[318.99505050020666714217851899922620279230505439154 +/- 3.20E-48]",
+        "certified_t_range": "319<=t<=V'(2)",
+        "h_tile_count": 107452,
+        "largest_scaled_localized_upper": "3.33723355756790554314260494045514876254074160915177414272085E+0",
+        "remaining_ray": "u>=2",
+        "source": "work/rh_compute/results/jensen_window_pf_compound_order4_localized_curvature_compact_certificate.json",
+        "worst_margin_lower": "1.14426650120038260530285332880335545546623246507456181669743E-10"
+      },
+      "formula": "K_1(t)<=7/(2*t^2), 319<=t<=V'(2)",
+      "id": "co4fcb_04c_compact_curvature_certificate",
+      "proof_boundary": "Rigorous compact real-parameter theorem only; the analytic mode ray u>=2 remains open.",
+      "readiness": "ready_to_apply",
+      "role": "interval_certificate"
+    },
+    {
+      "claim": "Extend the compact first-summand stable-gap curvature ceiling across the remaining asymptotic mode ray.",
+      "diagnostics": null,
+      "formula": "K_1(t)<=7/(2*t^2) on the mode ray u>=2",
+      "id": "co4fcb_05_continuous_curvature_target",
+      "proof_boundary": "Sole open analytic entry condition in this bridge; the compact range is certified.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_analytic_handoff"
+    },
+    {
+      "claim": "The continuous ceiling leaves a two-fifths inverse-square budget for the full-kernel perturbation.",
+      "diagnostics": null,
+      "formula": "K(t)<=7/(2*t^2) => P_n^(1)<=7/(2*(k^2-1))<=18/(5*k^2), k>=320",
+      "id": "co4fcb_06_first_summand_transfer",
+      "proof_boundary": "Conditional only on co4fcb_05.",
+      "readiness": "conditional",
+      "role": "exact_conditional_bridge"
+    },
+    {
+      "claim": "The certified first-summand dominance changes the order-four penalty by at most two-fifths inverse square.",
+      "diagnostics": null,
+      "formula": "|P_n-P_n^(1)|<=10112*(k+1)^2/(k-3)^6<=2/(5*k^2), k>=320",
+      "id": "co4fcb_07_full_kernel_transfer",
+      "proof_boundary": "Exact perturbation theorem, using the proved gap floor; no curvature claim.",
+      "readiness": "ready_to_apply",
+      "role": "exact_perturbation_theorem"
+    },
+    {
+      "claim": "The single continuous target implies the complete lambda=-100 order-four tail estimate.",
+      "diagnostics": null,
+      "formula": "P_n<=18/(5*k^2)+2/(5*k^2)=4/k^2, k=n+3>=320",
+      "id": "co4fcb_08_all_tail_implication",
+      "proof_boundary": "Conditional on co4fcb_05; contiguous order four only.",
+      "readiness": "conditional",
+      "role": "exact_conditional_bridge"
+    },
+    {
+      "claim": "High-precision samples clear the proposed continuous curvature ceiling with substantial room.",
+      "diagnostics": {
+        "formal_asymptotic_scout": "t^2*(log g)'' appears to increase to 3 from below",
+        "minimum_target_margin": "0.588438625855552351952919665419429673",
+        "minimum_target_margin_at_t": 100000,
+        "mpmath_dps": 70,
+        "observed_scaled_curvature_range": [
+          "1.79490588460442263240447097960303823",
+          "2.91156137414444764804708033458057033"
+        ],
+        "rows": [
+          {
+            "B": "0.00157481316729175695272387176501306447",
+            "below_target": true,
+            "g": "7.77208729941522315092729901005318986e-9",
+            "margin_below_7_over_2": "1.70509411539557736759552902039696177",
+            "positive_gap": true,
+            "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+            "saddle": "0.926843126422534373746647515760644309",
+            "t": 319,
+            "t2_log_g_second": "1.79490588460442263240447097960303823",
+            "t_times_J": "1.00285142495154167220802555038171167"
+          },
+          {
+            "B": "0.00132429100270955302367901418140090154",
+            "below_target": true,
+            "g": "4.62556553749759420573879709624222719e-9",
+            "margin_below_7_over_2": "1.55440631159527694611250243755125121",
+            "positive_gap": true,
+            "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+            "saddle": "0.97888094701689181843228254728997258",
+            "t": 400,
+            "t2_log_g_second": "1.94559368840472305388749756244874879",
+            "t_times_J": "1.05780877651205911009808887022116525"
+          },
+          {
+            "B": "0.000839834113722210491171420944457348697",
+            "below_target": true,
+            "g": "1.18163917367565660468183063367415454e-9",
+            "margin_below_7_over_2": "1.24852724706041099437031614339868127",
+            "positive_gap": true,
+            "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+            "saddle": "1.10694529940786730130387507834158606",
+            "t": 700,
+            "t2_log_g_second": "2.25147275293958900562968385660131873",
+            "t_times_J": "1.17469456249194627832611471213263743"
+          },
+          {
+            "B": "0.000618492069448245075469987725654421752",
+            "below_target": true,
+            "g": "4.722962062280146685127902827734202e-10",
+            "margin_below_7_over_2": "1.10186435097038225424288663775798734",
+            "positive_gap": true,
+            "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+            "saddle": "1.18793754114521619465795554468871379",
+            "t": 1000,
+            "t2_log_g_second": "2.39813564902961774575711336224201266",
+            "t_times_J": "1.23618419484572746294853754785757159"
+          },
+          {
+            "B": "0.000333149287204331985891605826520467666",
+            "below_target": true,
+            "g": "7.38781748639597172206017597405771876e-11",
+            "margin_below_7_over_2": "0.901927584520844450216890492645461619",
+            "positive_gap": true,
+            "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+            "saddle": "1.34400782600033672514953074675098446",
+            "t": 2000,
+            "t2_log_g_second": "2.59807241547915554978310950735453838",
+            "t_times_J": "1.33216398202528785440896450054418576"
+          },
+          {
+            "B": "0.000142460649780840351631132906460566692",
+            "below_target": true,
+            "g": "5.78009726811250748827712110274585257e-12",
+            "margin_below_7_over_2": "0.750946056511704655916979990452903385",
+            "positive_gap": true,
+            "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+            "saddle": "1.5485738239457640734903380663464682",
+            "t": 5000,
+            "t2_log_g_second": "2.74905394348829534408302000954709661",
+            "t_times_J": "1.42442320146611216441780421169711298"
+          },
+          {
+            "B": "0.0000379821127390383021054847419393762564",
+            "below_target": true,
+            "g": "1.09577338320445771526077740181683383e-13",
+            "margin_below_7_over_2": "0.642603365460469240960711797863234874",
+            "positive_gap": true,
+            "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+            "saddle": "1.85736880805336508625944338043977827",
+            "t": 20000,
+            "t2_log_g_second": "2.85739663453953075903928820213676513",
+            "t_times_J": "1.51923688461353714866705160022343311"
+          },
+          {
+            "B": "7.96652346634065511045939313367824253e-6",
+            "below_target": true,
+            "g": "1.01117645791656507998130100067058647e-15",
+            "margin_below_7_over_2": "0.588438625855552351952919665419429673",
+            "positive_gap": true,
+            "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+            "saddle": "2.21836163013573509263544082755573846",
+            "t": 100000,
+            "t2_log_g_second": "2.91156137414444764804708033458057033",
+            "t_times_J": "1.5932949879963637618540811102735149"
+          }
+        ],
+        "sample_t": [
+          319,
+          400,
+          700,
+          1000,
+          2000,
+          5000,
+          20000,
+          100000
+        ]
+      },
+      "formula": "t^2*(log g_1(t))''<7/2 on the recorded sample",
+      "id": "co4fcb_09_finite_scout",
+      "proof_boundary": "Non-interval finite evidence only.",
+      "readiness": "finite_only",
+      "role": "finite_scout"
+    }
+  ],
+  "scout": {
+    "formal_asymptotic_scout": "t^2*(log g)'' appears to increase to 3 from below",
+    "minimum_target_margin": "0.588438625855552351952919665419429673",
+    "minimum_target_margin_at_t": 100000,
+    "mpmath_dps": 70,
+    "observed_scaled_curvature_range": [
+      "1.79490588460442263240447097960303823",
+      "2.91156137414444764804708033458057033"
+    ],
+    "rows": [
+      {
+        "B": "0.00157481316729175695272387176501306447",
+        "below_target": true,
+        "g": "7.77208729941522315092729901005318986e-9",
+        "margin_below_7_over_2": "1.70509411539557736759552902039696177",
+        "positive_gap": true,
+        "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+        "saddle": "0.926843126422534373746647515760644309",
+        "t": 319,
+        "t2_log_g_second": "1.79490588460442263240447097960303823",
+        "t_times_J": "1.00285142495154167220802555038171167"
+      },
+      {
+        "B": "0.00132429100270955302367901418140090154",
+        "below_target": true,
+        "g": "4.62556553749759420573879709624222719e-9",
+        "margin_below_7_over_2": "1.55440631159527694611250243755125121",
+        "positive_gap": true,
+        "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+        "saddle": "0.97888094701689181843228254728997258",
+        "t": 400,
+        "t2_log_g_second": "1.94559368840472305388749756244874879",
+        "t_times_J": "1.05780877651205911009808887022116525"
+      },
+      {
+        "B": "0.000839834113722210491171420944457348697",
+        "below_target": true,
+        "g": "1.18163917367565660468183063367415454e-9",
+        "margin_below_7_over_2": "1.24852724706041099437031614339868127",
+        "positive_gap": true,
+        "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+        "saddle": "1.10694529940786730130387507834158606",
+        "t": 700,
+        "t2_log_g_second": "2.25147275293958900562968385660131873",
+        "t_times_J": "1.17469456249194627832611471213263743"
+      },
+      {
+        "B": "0.000618492069448245075469987725654421752",
+        "below_target": true,
+        "g": "4.722962062280146685127902827734202e-10",
+        "margin_below_7_over_2": "1.10186435097038225424288663775798734",
+        "positive_gap": true,
+        "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+        "saddle": "1.18793754114521619465795554468871379",
+        "t": 1000,
+        "t2_log_g_second": "2.39813564902961774575711336224201266",
+        "t_times_J": "1.23618419484572746294853754785757159"
+      },
+      {
+        "B": "0.000333149287204331985891605826520467666",
+        "below_target": true,
+        "g": "7.38781748639597172206017597405771876e-11",
+        "margin_below_7_over_2": "0.901927584520844450216890492645461619",
+        "positive_gap": true,
+        "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+        "saddle": "1.34400782600033672514953074675098446",
+        "t": 2000,
+        "t2_log_g_second": "2.59807241547915554978310950735453838",
+        "t_times_J": "1.33216398202528785440896450054418576"
+      },
+      {
+        "B": "0.000142460649780840351631132906460566692",
+        "below_target": true,
+        "g": "5.78009726811250748827712110274585257e-12",
+        "margin_below_7_over_2": "0.750946056511704655916979990452903385",
+        "positive_gap": true,
+        "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+        "saddle": "1.5485738239457640734903380663464682",
+        "t": 5000,
+        "t2_log_g_second": "2.74905394348829534408302000954709661",
+        "t_times_J": "1.42442320146611216441780421169711298"
+      },
+      {
+        "B": "0.0000379821127390383021054847419393762564",
+        "below_target": true,
+        "g": "1.09577338320445771526077740181683383e-13",
+        "margin_below_7_over_2": "0.642603365460469240960711797863234874",
+        "positive_gap": true,
+        "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+        "saddle": "1.85736880805336508625944338043977827",
+        "t": 20000,
+        "t2_log_g_second": "2.85739663453953075903928820213676513",
+        "t_times_J": "1.51923688461353714866705160022343311"
+      },
+      {
+        "B": "7.96652346634065511045939313367824253e-6",
+        "below_target": true,
+        "g": "1.01117645791656507998130100067058647e-15",
+        "margin_below_7_over_2": "0.588438625855552351952919665419429673",
+        "positive_gap": true,
+        "proof_boundary": "Finite-upper high-precision mpmath quadrature; not an interval enclosure or a uniform curvature theorem.",
+        "saddle": "2.21836163013573509263544082755573846",
+        "t": 100000,
+        "t2_log_g_second": "2.91156137414444764804708033458057033",
+        "t_times_J": "1.5932949879963637618540811102735149"
+      }
+    ],
+    "sample_t": [
+      319,
+      400,
+      700,
+      1000,
+      2000,
+      5000,
+      20000,
+      100000
+    ]
+  },
+  "sources": [
+    "outputs/jensen_window_pf_compound_order4_condensation_gate.md",
+    "outputs/jensen_window_pf_negative_lambda_first_summand_cumulant_bridge.md",
+    "outputs/jensen_window_pf_negative_lambda_scaled_curvature_continuous_bridge.md",
+    "outputs/jensen_window_pf_negative_lambda_first_summand_dominance_certificate.md",
+    "outputs/jensen_window_pf_negative_lambda_m100_compound_order3_entry_certificate.md",
+    "outputs/jensen_window_pf_compound_order4_localized_curvature_compact_certificate.md",
+    "outputs/jensen_window_pf_compound_order4_gaussian_cumulant_ray_target.md",
+    "outputs/jensen_window_pf_compound_order4_formal_cumulant_corridor_certificate.md",
+    "outputs/jensen_window_pf_compound_order4_formal_cumulant_asymptotic_ray_certificate.md",
+    "outputs/jensen_window_pf_compound_order4_formal_cumulant_next_parity_asymptotic_ray_certificate.md",
+    "outputs/jensen_window_pf_compound_order4_exact_cumulant_remainder_budget.md"
+  ],
+  "status": "exact order-four first-summand curvature reduction with proved gap floor, a compact curvature certificate, closed full-kernel perturbation budget, and one open analytic ray",
+  "summary": {
+    "bridge_rows": 11,
+    "compact_interval_certificate_rows": 1,
+    "conditional_bridge_rows": 2,
+    "exact_identity_rows": 2,
+    "exact_reduction_rows": 2,
+    "finite_scout_rows": 8,
+    "localized_curvature_rows": 1,
+    "lower_mode_collar_blocks": 2,
+    "open_analytic_handoffs": 1,
+    "proved_gap_floor_rows": 1,
+    "proved_perturbation_rows": 1,
+    "ready_to_apply_rows": 7
+  }
+}

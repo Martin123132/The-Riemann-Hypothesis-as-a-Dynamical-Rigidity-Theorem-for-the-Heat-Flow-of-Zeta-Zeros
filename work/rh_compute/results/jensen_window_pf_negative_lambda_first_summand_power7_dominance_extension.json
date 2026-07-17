@@ -1,0 +1,121 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_first_summand_power7_dominance_extension.py",
+  "date": "2026-07-13",
+  "diagnostics": {
+    "adjacent_B_error": "|B_j-B_j^(1)|<=a_j=2*((j-1)^(-7)+2*j^(-7)+(j+1)^(-7)), j>=317",
+    "all_positive_gates": true,
+    "full_tail_relative_bound": "0<=delta_k=(M_k-M_k^(1))/M_k^(1)<=2/k^7 for every integer k>=316",
+    "ga_minus_100_lower": "4.16148864625036424869022664714445295286682842282102392806525E+2",
+    "gc_lower": "2.54189784063409072630992136042231800756763311951989783879736E+2",
+    "half_line_rule": "the same positive ratio-log derivatives as the power-six proof show every split endpoint comparison strengthens for k>=316",
+    "high_derivative_margin_lower": "7.67692588553494006498704208936612155296595041638899571430325E+1",
+    "high_endpoint_ball": "[-124.4151088715342004284394386786649561154590148631923285631932424956892 +/- 4.89E-68]",
+    "high_endpoint_upper": "-1.24415108871534200428439438678664956115459014863192328563192E+2",
+    "low_endpoint_ball": "[-0.09644772993769165999532627795735302274578455572009859714240907548187765 +/- 1.34E-72]",
+    "low_endpoint_upper": "-9.64477299376916599953262779573530227457845557200985971424090E-2",
+    "low_k_derivative_margin_lower": "7.33528521761070113344177089394565761433999620139958622277444E-2",
+    "low_sqrt_derivative_margin_lower": "5.99564487919661621214679086550574290673688408859644210266641E-2",
+    "moment_log_error": "0<=log(1+delta_k)<=2/k^7, k>=316",
+    "parameters": {
+      "epsilon_zero_cap": "0.0022",
+      "lambda": "-100",
+      "power": 7,
+      "precision_bits": 256,
+      "start_k": 316
+    },
+    "positive_gates": {
+      "D_a_lower_above_100": true,
+      "D_a_lower_increasing_k_side": true,
+      "D_a_lower_increasing_sqrt_side": true,
+      "D_c_lower_increasing_k_side": true,
+      "D_c_lower_increasing_sqrt_side": true,
+      "D_c_lower_positive": true,
+      "high_comparison_decreasing": true,
+      "high_endpoint_below_k_minus_7": true,
+      "low_comparison_decreasing_k_side": true,
+      "low_comparison_decreasing_sqrt_side": true,
+      "low_endpoint_below_k_minus_7": true
+    }
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_first_summand_power7_dominance_extension.py",
+  "kind": "jensen_window_pf_negative_lambda_first_summand_power7_dominance_extension",
+  "proof_boundary": "This artifact strengthens first-summand dominance only for lambda=-100 and k>=316. It does not prove an order-six curvature inequality, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The exact positive summand ratios and their pointwise monotonicity are unchanged.",
+      "diagnostics": null,
+      "formula": "r_n(q)=n^2*(2*n^2*q-3)/(2*q-3)*exp(-(n^2-1)*q), q=pi*exp(4u); d_q log(r_n)=-(n^2-1)*(1+6/((2*n^2*q-3)*(2*q-3)))<0",
+      "id": "fsd7_01_ratio_geometry",
+      "proof_boundary": "Inherited exact kernel geometry.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The high-u tail is below k^-7 at the endpoint and the comparison improves on the half-line.",
+      "diagnostics": {
+        "derivative_margin_lower": "7.67692588553494006498704208936612155296595041638899571430325E+1",
+        "endpoint_upper": "-1.24415108871534200428439438678664956115459014863192328563192E+2"
+      },
+      "formula": "17*exp(-3*pi*sqrt(k))<k^(-7), k>=316",
+      "id": "fsd7_02_high_region",
+      "proof_boundary": "One Arb endpoint gate plus exact derivative monotonicity.",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_certificate"
+    },
+    {
+      "claim": "The low-u probability contribution is below k^-7 at the endpoint and decreases thereafter.",
+      "diagnostics": {
+        "endpoint_upper": "-9.64477299376916599953262779573530227457845557200985971424090E-2",
+        "k_margin_lower": "7.33528521761070113344177089394565761433999620139958622277444E-2",
+        "sqrt_margin_lower": "5.99564487919661621214679086550574290673688408859644210266641E-2"
+      },
+      "formula": "epsilon(0)*P_k(u<a(k))<k^(-7), k>=316",
+      "id": "fsd7_03_low_region",
+      "proof_boundary": "One Arb endpoint gate and the inherited split derivative argument.",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_certificate"
+    },
+    {
+      "claim": "The two regions compose to strengthen the full moment-tail dominance by one inverse power.",
+      "diagnostics": null,
+      "formula": "0<=delta_k=(M_k-M_k^(1))/M_k^(1)<=2/k^7 for every integer k>=316",
+      "id": "fsd7_04_full_tail",
+      "proof_boundary": "Lambda=-100 integer moments only.",
+      "readiness": "ready_to_apply",
+      "role": "analytic_theorem"
+    },
+    {
+      "claim": "The relative tail bound gives a seventh-power logarithmic perturbation bound.",
+      "diagnostics": null,
+      "formula": "0<=log(1+delta_k)<=2/k^7, k>=316",
+      "id": "fsd7_05_log_error",
+      "proof_boundary": "Uses log(1+z)<=z for z>=0.",
+      "readiness": "ready_to_apply",
+      "role": "exact_consequence"
+    },
+    {
+      "claim": "The adjacent log wall inherits an explicit seventh-power stencil error.",
+      "diagnostics": null,
+      "formula": "|B_j-B_j^(1)|<=a_j=2*((j-1)^(-7)+2*j^(-7)+(j+1)^(-7)), j>=317",
+      "id": "fsd7_06_B_error",
+      "proof_boundary": "Exact four-term triangle inequality.",
+      "readiness": "ready_to_apply",
+      "role": "exact_consequence"
+    }
+  ],
+  "source_contract": {
+    "epsilon_zero_cap": "0.0022",
+    "exact_ratio": "r_n(q)=n^2*(2*n^2*q-3)/(2*q-3)*exp(-(n^2-1)*q), q=pi*exp(4u)",
+    "ratio_monotonicity": "d_q log(r_n)=-(n^2-1)*(1+6/((2*n^2*q-3)*(2*q-3)))<0",
+    "status": "all-k analytic first-summand dominance certificate"
+  },
+  "status": "all-k inverse-seventh-power first-summand dominance extension",
+  "summary": {
+    "dominance_theorems": 1,
+    "full_tail_power": 7,
+    "positive_analytic_gates": 11,
+    "ready_to_apply_rows": 6,
+    "rows": 6,
+    "tail_start_k": 316
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order10_first_summand_curvature_certificate.py",
+  "date": "2026-07-16",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order10_first_summand_curvature_certificate.py",
+  "kind": "jensen_window_pf_compound_order10_first_summand_curvature_certificate",
+  "largest_scaled_curvature_upper": "4.09781412038460013699765821854500983262668416719590010539729E+3",
+  "proof_boundary": "This artifact composes the continuous first-summand theorem at lambda=-100 only. It does not prove a full-Newman-kernel ceiling, endpoint entry, heat-forward invariance, the Jensen hierarchy, Lambda<=0, or RH.",
+  "rows": [
+    {
+      "claim": "The localized continuation proves the lower real-t interval.",
+      "diagnostics": null,
+      "formula": "z_1''(t)<=4200/t^2 for every real 1251<=t<=5700",
+      "id": "co10fscc_01_lower_bridge",
+      "proof_boundary": "First Newman summand on the finite lower interval.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "The compact saddle certificate extends the real-t theorem beyond the u=2.001 handoff.",
+      "diagnostics": {
+        "V_prime_2_001_upper": "3.80196621635193385678801171533426331770390296897595492274576E+4"
+      },
+      "formula": "z_1''(t)<=4200/t^2 for every real 5700<=t<=38020",
+      "id": "co10fscc_02_compact_bridge",
+      "proof_boundary": "First Newman summand on the compact interval.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "Finite and asymptotic saddle certificates cover every mode u>=2.001.",
+      "diagnostics": null,
+      "formula": "[2001/1000<=u<=20] union [u>=20]",
+      "id": "co10fscc_03_saddle_rays",
+      "proof_boundary": "Uses the strictly increasing saddle parametrization t=V'(u).",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_theorem"
+    },
+    {
+      "claim": "The real-t compact interval overlaps the beginning of the complete saddle ray.",
+      "diagnostics": null,
+      "formula": "V'(2001/1000)<38020",
+      "id": "co10fscc_04_overlap",
+      "proof_boundary": "Joins two first-summand curvature theorems only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_overlap"
+    },
+    {
+      "claim": "The lower, compact, finite-ray, and asymptotic ranges cover the complete half-line.",
+      "diagnostics": {
+        "largest_scaled_curvature_upper": "4.09781412038460013699765821854500983262668416719590010539729E+3",
+        "largest_source": "lower",
+        "scaled_uppers": {
+          "asymptotic_ray": "7.87234512119257822632789611820583864025862278376337548102986E+2",
+          "compact": "3.10527904794520576042110924623685242329682444671709504636403E+3",
+          "finite_ray": "2.18291553878732826833189197572618480925380923527360787745558E+2",
+          "lower": "4.09781412038460013699765821854500983262668416719590010539729E+3"
+        }
+      },
+      "formula": "z_1''(t)<=4200/t^2 for every real t>=1251",
+      "id": "co10fscc_05_global_composition",
+      "proof_boundary": "First Newman summand at lambda=-100 only; no full-kernel promotion.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    }
+  ],
+  "source_contract": {
+    "compact_saddle_overlap": "V'(2001/1000)<=3.80196621635193385678801171533426331770390296897595492274576E+4<38020",
+    "finite_asymptotic_join": "u=20",
+    "lower_compact_join": "5700",
+    "scaled_uppers": {
+      "asymptotic_ray": "7.87234512119257822632789611820583864025862278376337548102986E+2",
+      "compact": "3.10527904794520576042110924623685242329682444671709504636403E+3",
+      "finite_ray": "2.18291553878732826833189197572618480925380923527360787745558E+2",
+      "lower": "4.09781412038460013699765821854500983262668416719590010539729E+3"
+    },
+    "sources": [
+      {
+        "kind": "jensen_window_pf_compound_order10_localized_lower_bridge_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_localized_lower_bridge_certificate.json",
+        "sha256": "336b193a3b514acb97ec5ca0a3d4b899ea7e37fb6f587f84d914299a2ea44a87",
+        "status": "rigorous order-ten first-summand curvature theorem on 1251<=t<=5700"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order10_nested_curvature_compact_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_nested_curvature_compact_certificate.json",
+        "sha256": "deab80c872edaa19cd63a2708bb375bdbdc2d7953846c2a891d5aab68e1baa10",
+        "status": "rigorous order-ten first-summand curvature theorem on 5700<=t<=38020"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order10_nested_curvature_finite_ray_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_nested_curvature_finite_ray_certificate.json",
+        "sha256": "42613f2f14a06ba845c09b7f8aef74494a3617c867ad76ffdc7eac150f8eaf63",
+        "status": "rigorous order-ten first-summand curvature theorem on 2001/1000<=u<=20"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order10_nested_curvature_asymptotic_ray_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_nested_curvature_asymptotic_ray_certificate.json",
+        "sha256": "8316728b8fb2d09efa79da010abf4898dabca19b7061b6bd406bc560e28f436e",
+        "status": "rigorous order-ten first-summand curvature theorem on u>=20"
+      }
+    ]
+  },
+  "status": "rigorous global order-ten first-summand curvature theorem on t>=1251",
+  "summary": {
+    "endpoint_entry_theorems": 0,
+    "full_kernel_theorems": 0,
+    "global_first_summand_curvature_theorems": 1,
+    "open_rows": 0,
+    "ready_rows": 5,
+    "rh_claims": 0,
+    "rows": 5
+  },
+  "theorem": "z_1''(t)<=4200/t^2 for every real t>=1251"
+}
