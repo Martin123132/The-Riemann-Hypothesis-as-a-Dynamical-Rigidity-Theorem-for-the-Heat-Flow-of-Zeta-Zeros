@@ -1,0 +1,99 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_delayed_cooperative_heat_tail_lemma.py",
+  "date": "2026-07-16",
+  "exact": {
+    "cooperative_flow": "Q_(m,n)'=a_(m,n)*Q_(m,n+1)+b_(m,n)*Q_(m,n), a_(m,n)=c_(m,n)*Q_(m-1,n)/Q_(m-1,n+1)>0, b_(m,n)=c_(m,n)/(c_(m,n)-4)*(log Q_(m-1,n+1))'",
+    "finite_descent": "N=max(n0,N_m); prove n=N-1 down to n0",
+    "fixed_order_tail": "for every fixed m exists N_m such that for every n>=N_m and -100<=lambda<=0, Q_(m,n)(lambda)>0",
+    "order10_delayed_handoff": "[Q_(10,n)(-100)>0 for every integer n>=4] implies Q_(10,n)(lambda)>0 for every n>=4 and -100<=lambda<=0",
+    "order11_delayed_handoff": "[Q_(10,n)(lambda)>0 for every n>=4 and -100<=lambda<=0 and Q_(11,n)(-100)>0 for every n>=4] implies Q_(11,n)(lambda)>0 for every n>=4 and -100<=lambda<=0",
+    "shifted_single_layer_implication": "[Q_(m-1,n)(lambda)>0 for every n>=n0 on -100<=lambda<=0, the fixed-order m eventual tail holds, and Q_(m,n)(-100)>0 for every n>=n0] => [Q_(m,n)(lambda)>0 for every n>=n0 and -100<=lambda<=0]",
+    "unused_prefix": "the proof uses no Q_(m,n) with n<n0",
+    "variation_of_constants": "Q_(m,n)(lambda)=E_(m,n)(lambda)*(Q_(m,n)(-100)+integral_(-100)^lambda E_(m,n)(s)^(-1)*a_(m,n)(s)*Q_(m,n+1)(s)ds), E_(m,n)>0"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_delayed_cooperative_heat_tail_lemma.py",
+  "kind": "jensen_window_pf_delayed_cooperative_heat_tail_lemma",
+  "proof_boundary": "This proves a conditional propagation lemma and its order-ten and order-eleven n>=4 specializations. It does not prove either delayed endpoint premise, any sign for n=0,1,2,3 at negative lambda, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "Every fixed signed Hankel order has a uniform positive heat tail.",
+      "formula": "for every fixed m exists N_m such that for every n>=N_m and -100<=lambda<=0, Q_(m,n)(lambda)>0",
+      "id": "dcht_01_eventual_tail",
+      "proof_boundary": "The threshold N_m may depend on m but not on lambda.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "A positive lower layer makes the next-shift coupling strictly positive.",
+      "formula": "Q_(m,n)'=a_(m,n)*Q_(m,n+1)+b_(m,n)*Q_(m,n), a_(m,n)=c_(m,n)*Q_(m-1,n)/Q_(m-1,n+1)>0, b_(m,n)=c_(m,n)/(c_(m,n)-4)*(log Q_(m-1,n+1))'",
+      "id": "dcht_02_cooperative_equation",
+      "proof_boundary": "Requires Q_(m-1,n)>0 at the relevant shifts throughout the interval.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Variation of constants preserves strict positivity when the next shift is positive.",
+      "formula": "Q_(m,n)(lambda)=E_(m,n)(lambda)*(Q_(m,n)(-100)+integral_(-100)^lambda E_(m,n)(s)^(-1)*a_(m,n)(s)*Q_(m,n+1)(s)ds), E_(m,n)>0",
+      "id": "dcht_03_scalar_solution",
+      "proof_boundary": "E is the positive integrating factor for the scalar equation at fixed n.",
+      "readiness": "ready_to_apply",
+      "role": "exact_ode_solution"
+    },
+    {
+      "claim": "Choose N=max(n0,N_m) and descend from n=N-1 to n=n0; no smaller shift is used.",
+      "formula": "tail n>=N; induction order N-1,N-2,...,n0",
+      "id": "dcht_04_finite_descent",
+      "proof_boundary": "The descent has finitely many steps even though the shift chain is infinite.",
+      "readiness": "ready_to_apply",
+      "role": "induction_lemma"
+    },
+    {
+      "claim": "Endpoint positivity on a delayed shift ray propagates on that same ray.",
+      "formula": "[Q_(m-1,n)(lambda)>0 for every n>=n0 on -100<=lambda<=0, the fixed-order m eventual tail holds, and Q_(m,n)(-100)>0 for every n>=n0] => [Q_(m,n)(lambda)>0 for every n>=n0 and -100<=lambda<=0]",
+      "id": "dcht_05_shifted_lemma",
+      "proof_boundary": "No sign hypothesis or conclusion is made for n<n0.",
+      "readiness": "ready_to_apply",
+      "role": "theorem"
+    },
+    {
+      "claim": "The completed order-nine heat layer specializes the shifted lemma to m=10 and n0=4.",
+      "formula": "[Q_(10,n)(-100)>0 for every integer n>=4] implies Q_(10,n)(lambda)>0 for every n>=4 and -100<=lambda<=0",
+      "id": "dcht_06_order10_specialization",
+      "proof_boundary": "Conditional only on the delayed endpoint premise at lambda=-100.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_specialization"
+    },
+    {
+      "claim": "Once the shifted order-ten heat ray is available, the same descent specializes to m=11 and n0=4.",
+      "formula": "[Q_(10,n)(lambda)>0 for every n>=4 and -100<=lambda<=0 and Q_(11,n)(-100)>0 for every n>=4] implies Q_(11,n)(lambda)>0 for every n>=4 and -100<=lambda<=0",
+      "id": "dcht_07_order11_specialization",
+      "proof_boundary": "Conditional on both the shifted order-ten heat ray and the order-eleven endpoint ray.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_specialization"
+    }
+  ],
+  "sources": [
+    {
+      "kind": "jensen_window_pf_all_order_endpoint_heat_reduction",
+      "path": "work/rh_compute/results/jensen_window_pf_all_order_endpoint_heat_reduction.json",
+      "sha256": "674c8640670fe067c701dff4e72ad9e6f0022c159830b6734d2432aec3bddd32",
+      "status": "exact all-order endpoint-to-heat equivalence with a completed base through order nine and the candidate endpoint hierarchy rejected by the order-ten counterexample"
+    },
+    {
+      "kind": "jensen_window_pf_compound_order10_m100_tail_curvature_reduction",
+      "path": "work/rh_compute/results/jensen_window_pf_compound_order10_m100_tail_curvature_reduction.json",
+      "sha256": "b1204a7f3c8e3f7c71b57b8c51c8525c5cea86a24cd2020b3d142aa2c152780f",
+      "status": "exact order-ten positive endpoint-tail reduction with one open seventh-nested curvature ceiling"
+    }
+  ],
+  "status": "exact shifted cooperative heat-flow descent lemma",
+  "summary": {
+    "endpoint_premises_proved": 0,
+    "open_rows": 0,
+    "order10_n4_specializations": 1,
+    "order11_n4_specializations": 1,
+    "ready_rows": 7,
+    "rows": 7,
+    "shifted_heat_lemmas": 1
+  }
+}

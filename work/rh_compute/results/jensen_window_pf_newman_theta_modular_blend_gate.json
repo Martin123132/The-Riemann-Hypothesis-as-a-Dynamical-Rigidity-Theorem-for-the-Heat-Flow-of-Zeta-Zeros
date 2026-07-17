@@ -1,0 +1,376 @@
+{
+  "kind": "jensen_window_pf_newman_theta_modular_blend_gate",
+  "date": "2026-07-16",
+  "status": "exact positive entire t-compatible modular theta blend with termwise spectral non-promotion guard",
+  "proof_boundary": "This artifact constructs an exact, strictly positive, entire, even theta-block decomposition of Phi whose blocks remain Schwartz under every bounded positive Newman deformation. It proves normal transform and coupled Laguerre matrix expansions and records explicit negative block-transform and nonreal Jensen witnesses. It does not prove the coupled matrix is positive, strict Laguerre positivity, Lambda<=0, or RH.",
+  "sources": [
+    "outputs/jensen_window_pf_newman_theta_summand_spectral_square_gate.md",
+    "outputs/jensen_window_pf_newman_theta_cell_renormalization_gate.md",
+    "outputs/jensen_window_pf_newman_strict_laguerre_correlation_target.md",
+    "outputs/formal_core.md"
+  ],
+  "exact": {
+    "theta_summand": {
+      "definition": "phi_n(u)=(2*pi^2*n^4*exp(9u)-3*pi*n^2*exp(5u))*exp(-pi*n^2*exp(4u))",
+      "kernel_series": "Phi(u)=sum_(n>=1)phi_n(u)=Phi(-u)",
+      "scope": "The second equality is the theta modular identity."
+    },
+    "modular_switch": {
+      "omega": "omega(u)=(1+erf(3*sinh(4u)))/2",
+      "reflection": "omega(-u)=1-omega(u)",
+      "entire": "omega is entire because erf and sinh are entire",
+      "tail_bound": "(1-omega(u))/omega(u)<=erfc(3*sinh(4u))<=exp(-9*sinh(4u)^2), u>=0",
+      "erfc_proof": "exp(-x^2)-erfc(x)>=0 for x>=0: it starts and ends at zero, and its derivative changes sign once at x=1/sqrt(pi)."
+    },
+    "blended_blocks": {
+      "definition": "b_n(u)=omega(u)*phi_n(u)+(1-omega(u))*phi_n(-u)",
+      "evenness": "b_n(-u)=b_n(u)",
+      "smoothness": "b_n is an even entire function"
+    },
+    "strict_positivity": {
+      "positive_side": "phi_n(u)>0 for n>=1 and u>=0",
+      "negative_case": "If phi_n(-u)<0 and q=pi*n^2, then q*exp(-4u)<3/2.",
+      "ratio": "phi_n(u)/(-phi_n(-u))=exp(10u)*(2q*exp(4u)-3)/(3-2q*exp(-4u))*exp(-q*(exp(4u)-exp(-4u)))",
+      "ratio_lower_bound": "log(phi_n(u)/(-phi_n(-u)))>10u-(3/2)*(exp(8u)-1)>-9*sinh(4u)^2",
+      "slack_identity": "10u-(3/2)*(exp(8u)-1)+9*sinh(4u)^2=10u+(3/4)*exp(8u)+(9/4)*exp(-8u)-3>0 in the negative case",
+      "negative_case_threshold": "The negative case forces exp(4u)>2*pi/3>2 and hence exp(8u)>4; the displayed slack is then strictly positive.",
+      "conclusion": "b_n(u)>0 for every n>=1 and every real u"
+    },
+    "exact_partition": {
+      "identity": "sum_(n>=1)b_n(u)=Phi(u)",
+      "proof": "The sum equals omega(u)*Phi(u)+(1-omega(u))*Phi(-u), then theta modular evenness applies."
+    },
+    "positive_time_compatibility": {
+      "block_tail": "For u->+infinity, omega*phi_n(u) is O_n(exp(9u-pi*n^2*exp(4u))) and (1-omega)*phi_n(-u) is O_n(exp(-5u-9*sinh(4u)^2)).",
+      "schwartz": "For every finite T, exp(t*u^2)*b_n(u) is Schwartz uniformly for 0<=t<=T.",
+      "normal_moments": "sum_n integral_R |u|^k*exp(t*u^2)*b_n(u)du=integral_R |u|^k*exp(t*u^2)*Phi(u)du<infinity"
+    },
+    "transform_series": {
+      "block_transform": "B_(n,t)(x)=integral_0^infinity exp(t*u^2)*b_n(u)*cos(xu)du",
+      "series": "H_t^(k)(x)=sum_(n>=1)B_(n,t)^(k)(x), k=0,1,2,...",
+      "convergence": "For every fixed derivative order and finite T, the series is absolutely and uniformly convergent on R_x times [0,T]."
+    },
+    "coupled_laguerre": {
+      "entry": "M_(m,n,t)=B_m'*B_n'-(B_m*B_n''+B_n*B_m'')/2",
+      "identity": "L_t(x)=sum_(m,n>=1)M_(m,n,t)(x)",
+      "convergence": "The double series is absolutely and uniformly convergent for x in R and t in every compact positive-time interval."
+    },
+    "tail_enclosure": {
+      "partial_sum": "S_(N,t)(x)=sum_(1<=n<=N)B_(n,t)(x), R_(N,t)(x)=H_t(x)-S_(N,t)(x)",
+      "tail_moments": "mu_(N,j)(T)=integral_0^infinity u^j*exp(T*u^2)*sum_(n>N)b_n(u)du, j=0,1,2",
+      "jet_bound": "|R_(N,t)^(j)(x)|<=mu_(N,j)(T) for every real x and 0<=t<=T",
+      "laguerre_error": "|L[H_t]-L[S_(N,t)]|<=2*|S'|*mu_1+|S|*mu_2+|S''|*mu_0+mu_1^2+mu_0*mu_2",
+      "criterion": "If L[S_(N,t)] exceeds the displayed error, then L_t(x)>0.",
+      "scope": "The bound is uniform in frequency and uses only positivity of the omitted blended blocks; numerical evaluation of the moments must still be enclosed rigorously before promotion."
+    },
+    "moment_floor_guard": {
+      "positive_floor": "For every fixed finite N, mu_(N,j)(T)>0 for j=0,1,2 because the omitted blended tail is strictly positive.",
+      "riemann_lebesgue": "S_(N,t)(x), S_(N,t)'(x), and S_(N,t)''(x) tend to zero as |x| tends to infinity.",
+      "consequence": "The moment-only error majorant tends to the positive constant mu_1^2+mu_0*mu_2 while L[S_(N,t)] tends to zero.",
+      "decision": "For every fixed N, the three-moment criterion is necessarily a compact-frequency certificate and cannot close the global tail."
+    },
+    "decaying_tail_enclosure": {
+      "tail_kernel": "r_N(u)=sum_(n>N)b_n(u)=Phi(u)-sum_(n<=N)b_n(u)",
+      "derivative_budget": "d_(N,j,m)(T)=(1/2)*sup_(0<=t<=T)||partial_u^m[(i*u)^j*exp(t*u^2)*r_N(u)]||_L1(R)",
+      "fourier_bound": "|R_(N,t)^(j)(x)|<=d_(N,j,m)(T)/|x|^m for x!=0, j=0,1,2",
+      "combined_budget": "epsilon_(N,j,m)(x,T)=min(mu_(N,j)(T),d_(N,j,m)(T)/|x|^m)",
+      "laguerre_use": "Replace each mu_j in the finite-to-infinite Laguerre error by epsilon_j; the same algebraic error inequality remains valid.",
+      "finiteness": "Every d_(N,j,m)(T) is finite because the blended tail and all of its derivatives remain Schwartz after bounded Newman time.",
+      "scope": "This repairs the positive moment floor. Rigorous useful constants and a lower bound for the finite partial Laguerre expression remain open."
+    },
+    "boundary": {
+      "decision": "The decomposition removes both the cusp obstruction of reflected finite theta truncations and the exponential-tail obstruction of Euler cell blocks. It does not make the block transforms or their mixed Laguerre entries nonnegative.",
+      "live_handoff": "Enclose derivative L1 budgets for the modular tail and compare their frequency-decaying Laguerre error with a finite blended partial sum. Termwise Fourier positivity and individual block Laguerre-Polya membership are rejected."
+    }
+  },
+  "numerics": {
+    "method": "Composite Gauss-Legendre quadrature on [0,4] with analytic Newman weight and the exact modular blend",
+    "coarse_nodes_per_panel": 220,
+    "fine_nodes_per_panel": 420,
+    "max_relative_coarse_fine_delta": "4.33716382935578912e-14",
+    "transform_rows": [
+      {
+        "t": "0",
+        "n": 1,
+        "x": "35",
+        "block_transform": "-2.68918284116059830e-05"
+      },
+      {
+        "t": "0",
+        "n": 2,
+        "x": "25",
+        "block_transform": "-3.41318721640947986e-06"
+      },
+      {
+        "t": "0",
+        "n": 3,
+        "x": "15",
+        "block_transform": "-9.21647952068369118e-09"
+      },
+      {
+        "t": "0.5",
+        "n": 1,
+        "x": "35",
+        "block_transform": "-2.57791389573067733e-05"
+      },
+      {
+        "t": "0.5",
+        "n": 2,
+        "x": "25",
+        "block_transform": "-3.68009874039114352e-06"
+      },
+      {
+        "t": "0.5",
+        "n": 3,
+        "x": "15",
+        "block_transform": "-9.35716644247212534e-09"
+      }
+    ],
+    "jensen_rows": [
+      {
+        "t": "0",
+        "block_n": 1,
+        "jensen_degree": 9,
+        "jensen_shift": 0,
+        "positive_variable_scale": "2.14815863177957993e+02",
+        "scaled_nonreal_root_real": "-8.20514016059978646e-01",
+        "scaled_nonreal_root_imag": "2.53798454211509213e-02"
+      },
+      {
+        "t": "0.5",
+        "block_n": 1,
+        "jensen_degree": 9,
+        "jensen_shift": 0,
+        "positive_variable_scale": "2.13222693229966836e+02",
+        "scaled_nonreal_root_real": "-8.20182070086582282e-01",
+        "scaled_nonreal_root_imag": "1.44435467728611482e-02"
+      }
+    ],
+    "max_relative_jensen_root_delta": "1.76364738546378321e-11",
+    "jensen_definition": "For G_t(z)=B_(1,t)(i*sqrt(z))=sum_(k>=0)gamma_k*z^k/k!, gamma_k=k!*mu_(2k)/(2k)!. The degree-nine shift-zero Jensen polynomial is sum_(j=0)^9 binom(9,j)*gamma_j*X^j.",
+    "scope": "Numerical non-promotion witnesses only: positivity of the blended kernel blocks does not make their cosine transforms nonnegative or put the individual transforms in the Laguerre-Polya class."
+  },
+  "rows": [
+    {
+      "id": "ntmbg_01_switch_reflection",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The entire super-exponential switch exchanges with its complement under reflection.",
+      "formula": "omega(-u)=1-omega(u)",
+      "proof_boundary": "Exact scalar identity.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntmbg_02_even_smooth_blocks",
+      "role": "exact_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Every modularly blended theta block is even and entire.",
+      "formula": "b_n(-u)=b_n(u)",
+      "proof_boundary": "Block regularity only; no spectral sign follows.",
+      "diagnostics": {
+        "definition": "b_n(u)=omega(u)*phi_n(u)+(1-omega(u))*phi_n(-u)",
+        "evenness": "b_n(-u)=b_n(u)",
+        "smoothness": "b_n is an even entire function"
+      }
+    },
+    {
+      "id": "ntmbg_03_strict_block_positivity",
+      "role": "exact_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Every modularly blended theta block is strictly positive on the real axis.",
+      "formula": "b_n(u)>0 for every n>=1 and every real u",
+      "proof_boundary": "Kernel positivity only; not Fourier positivity.",
+      "diagnostics": {
+        "positive_side": "phi_n(u)>0 for n>=1 and u>=0",
+        "negative_case": "If phi_n(-u)<0 and q=pi*n^2, then q*exp(-4u)<3/2.",
+        "ratio": "phi_n(u)/(-phi_n(-u))=exp(10u)*(2q*exp(4u)-3)/(3-2q*exp(-4u))*exp(-q*(exp(4u)-exp(-4u)))",
+        "ratio_lower_bound": "log(phi_n(u)/(-phi_n(-u)))>10u-(3/2)*(exp(8u)-1)>-9*sinh(4u)^2",
+        "slack_identity": "10u-(3/2)*(exp(8u)-1)+9*sinh(4u)^2=10u+(3/4)*exp(8u)+(9/4)*exp(-8u)-3>0 in the negative case",
+        "negative_case_threshold": "The negative case forces exp(4u)>2*pi/3>2 and hence exp(8u)>4; the displayed slack is then strictly positive.",
+        "conclusion": "b_n(u)>0 for every n>=1 and every real u"
+      }
+    },
+    {
+      "id": "ntmbg_04_exact_partition",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The positive blended blocks sum exactly to the Xi Fourier kernel.",
+      "formula": "sum_(n>=1)b_n(u)=Phi(u)",
+      "proof_boundary": "Uses theta modular evenness, not zeta-zero information.",
+      "diagnostics": {
+        "identity": "sum_(n>=1)b_n(u)=Phi(u)",
+        "proof": "The sum equals omega(u)*Phi(u)+(1-omega(u))*Phi(-u), then theta modular evenness applies."
+      }
+    },
+    {
+      "id": "ntmbg_05_positive_time_schwartz",
+      "role": "exact_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Every block remains rapidly decreasing after every bounded positive Newman deformation.",
+      "formula": "For every finite T, exp(t*u^2)*b_n(u) is Schwartz uniformly for 0<=t<=T.",
+      "proof_boundary": "Kernel-space compatibility only.",
+      "diagnostics": {
+        "block_tail": "For u->+infinity, omega*phi_n(u) is O_n(exp(9u-pi*n^2*exp(4u))) and (1-omega)*phi_n(-u) is O_n(exp(-5u-9*sinh(4u)^2)).",
+        "schwartz": "For every finite T, exp(t*u^2)*b_n(u) is Schwartz uniformly for 0<=t<=T.",
+        "normal_moments": "sum_n integral_R |u|^k*exp(t*u^2)*b_n(u)du=integral_R |u|^k*exp(t*u^2)*Phi(u)du<infinity"
+      }
+    },
+    {
+      "id": "ntmbg_06_normal_transform_series",
+      "role": "exact_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The positive-time block transforms and every fixed spectral jet form a normal series.",
+      "formula": "H_t^(k)(x)=sum_(n>=1)B_(n,t)^(k)(x), k=0,1,2,...",
+      "proof_boundary": "Absolute uniform convergence; no sign of the sum is asserted.",
+      "diagnostics": {
+        "block_transform": "B_(n,t)(x)=integral_0^infinity exp(t*u^2)*b_n(u)*cos(xu)du",
+        "series": "H_t^(k)(x)=sum_(n>=1)B_(n,t)^(k)(x), k=0,1,2,...",
+        "convergence": "For every fixed derivative order and finite T, the series is absolutely and uniformly convergent on R_x times [0,T]."
+      }
+    },
+    {
+      "id": "ntmbg_07_coupled_laguerre",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The strict-Laguerre target has an absolutely convergent positive-time block matrix expansion.",
+      "formula": "L_t(x)=sum_(m,n>=1)M_(m,n,t)(x)",
+      "proof_boundary": "The mixed matrix entries retain both signs.",
+      "diagnostics": {
+        "entry": "M_(m,n,t)=B_m'*B_n'-(B_m*B_n''+B_n*B_m'')/2",
+        "identity": "L_t(x)=sum_(m,n>=1)M_(m,n,t)(x)",
+        "convergence": "The double series is absolutely and uniformly convergent for x in R and t in every compact positive-time interval."
+      }
+    },
+    {
+      "id": "ntmbg_08_tail_enclosure",
+      "role": "exact_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Three positive tail moments give a uniform finite-to-infinite Laguerre enclosure.",
+      "formula": "|L[H_t]-L[S_(N,t)]|<=2*|S'|*mu_1+|S|*mu_2+|S''|*mu_0+mu_1^2+mu_0*mu_2",
+      "proof_boundary": "Exact conditional enclosure; no finite partial sum is certified globally here.",
+      "diagnostics": {
+        "partial_sum": "S_(N,t)(x)=sum_(1<=n<=N)B_(n,t)(x), R_(N,t)(x)=H_t(x)-S_(N,t)(x)",
+        "tail_moments": "mu_(N,j)(T)=integral_0^infinity u^j*exp(T*u^2)*sum_(n>N)b_n(u)du, j=0,1,2",
+        "jet_bound": "|R_(N,t)^(j)(x)|<=mu_(N,j)(T) for every real x and 0<=t<=T",
+        "laguerre_error": "|L[H_t]-L[S_(N,t)]|<=2*|S'|*mu_1+|S|*mu_2+|S''|*mu_0+mu_1^2+mu_0*mu_2",
+        "criterion": "If L[S_(N,t)] exceeds the displayed error, then L_t(x)>0.",
+        "scope": "The bound is uniform in frequency and uses only positivity of the omitted blended blocks; numerical evaluation of the moments must still be enclosed rigorously before promotion."
+      }
+    },
+    {
+      "id": "ntmbg_09_moment_floor_guard",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "The positive three-moment enclosure is necessarily compact in frequency for every finite block count.",
+      "formula": "The moment-only error majorant tends to the positive constant mu_1^2+mu_0*mu_2 while L[S_(N,t)] tends to zero.",
+      "proof_boundary": "Rejects global promotion of the moment-only enclosure, not the blended decomposition.",
+      "diagnostics": {
+        "positive_floor": "For every fixed finite N, mu_(N,j)(T)>0 for j=0,1,2 because the omitted blended tail is strictly positive.",
+        "riemann_lebesgue": "S_(N,t)(x), S_(N,t)'(x), and S_(N,t)''(x) tend to zero as |x| tends to infinity.",
+        "consequence": "The moment-only error majorant tends to the positive constant mu_1^2+mu_0*mu_2 while L[S_(N,t)] tends to zero.",
+        "decision": "For every fixed N, the three-moment criterion is necessarily a compact-frequency certificate and cannot close the global tail."
+      }
+    },
+    {
+      "id": "ntmbg_10_decaying_tail_enclosure",
+      "role": "exact_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Derivative L1 budgets give arbitrarily high algebraic decay for every remainder jet.",
+      "formula": "|R_(N,t)^(j)(x)|<=d_(N,j,m)(T)/|x|^m for x!=0, j=0,1,2",
+      "proof_boundary": "Exact tail theorem; no useful global constants or Laguerre lower bound are certified here.",
+      "diagnostics": {
+        "tail_kernel": "r_N(u)=sum_(n>N)b_n(u)=Phi(u)-sum_(n<=N)b_n(u)",
+        "derivative_budget": "d_(N,j,m)(T)=(1/2)*sup_(0<=t<=T)||partial_u^m[(i*u)^j*exp(t*u^2)*r_N(u)]||_L1(R)",
+        "fourier_bound": "|R_(N,t)^(j)(x)|<=d_(N,j,m)(T)/|x|^m for x!=0, j=0,1,2",
+        "combined_budget": "epsilon_(N,j,m)(x,T)=min(mu_(N,j)(T),d_(N,j,m)(T)/|x|^m)",
+        "laguerre_use": "Replace each mu_j in the finite-to-infinite Laguerre error by epsilon_j; the same algebraic error inequality remains valid.",
+        "finiteness": "Every d_(N,j,m)(T) is finite because the blended tail and all of its derivatives remain Schwartz after bounded Newman time.",
+        "scope": "This repairs the positive moment floor. Rigorous useful constants and a lower bound for the finite partial Laguerre expression remain open."
+      }
+    },
+    {
+      "id": "ntmbg_11_termwise_spectral_guard",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "Strict positivity of the blended kernel blocks implies neither nonnegative transforms nor individual Laguerre-Polya membership.",
+      "formula": "Six block transforms are negative, and the first block's degree-nine Jensen polynomial has a nonreal pair at two times.",
+      "proof_boundary": "Numerical witnesses only; rejects termwise transform positivity and the naive individual Laguerre-Polya promotion.",
+      "diagnostics": {
+        "method": "Composite Gauss-Legendre quadrature on [0,4] with analytic Newman weight and the exact modular blend",
+        "coarse_nodes_per_panel": 220,
+        "fine_nodes_per_panel": 420,
+        "max_relative_coarse_fine_delta": "4.33716382935578912e-14",
+        "transform_rows": [
+          {
+            "t": "0",
+            "n": 1,
+            "x": "35",
+            "block_transform": "-2.68918284116059830e-05"
+          },
+          {
+            "t": "0",
+            "n": 2,
+            "x": "25",
+            "block_transform": "-3.41318721640947986e-06"
+          },
+          {
+            "t": "0",
+            "n": 3,
+            "x": "15",
+            "block_transform": "-9.21647952068369118e-09"
+          },
+          {
+            "t": "0.5",
+            "n": 1,
+            "x": "35",
+            "block_transform": "-2.57791389573067733e-05"
+          },
+          {
+            "t": "0.5",
+            "n": 2,
+            "x": "25",
+            "block_transform": "-3.68009874039114352e-06"
+          },
+          {
+            "t": "0.5",
+            "n": 3,
+            "x": "15",
+            "block_transform": "-9.35716644247212534e-09"
+          }
+        ],
+        "jensen_rows": [
+          {
+            "t": "0",
+            "block_n": 1,
+            "jensen_degree": 9,
+            "jensen_shift": 0,
+            "positive_variable_scale": "2.14815863177957993e+02",
+            "scaled_nonreal_root_real": "-8.20514016059978646e-01",
+            "scaled_nonreal_root_imag": "2.53798454211509213e-02"
+          },
+          {
+            "t": "0.5",
+            "block_n": 1,
+            "jensen_degree": 9,
+            "jensen_shift": 0,
+            "positive_variable_scale": "2.13222693229966836e+02",
+            "scaled_nonreal_root_real": "-8.20182070086582282e-01",
+            "scaled_nonreal_root_imag": "1.44435467728611482e-02"
+          }
+        ],
+        "max_relative_jensen_root_delta": "1.76364738546378321e-11",
+        "jensen_definition": "For G_t(z)=B_(1,t)(i*sqrt(z))=sum_(k>=0)gamma_k*z^k/k!, gamma_k=k!*mu_(2k)/(2k)!. The degree-nine shift-zero Jensen polynomial is sum_(j=0)^9 binom(9,j)*gamma_j*X^j.",
+        "scope": "Numerical non-promotion witnesses only: positivity of the blended kernel blocks does not make their cosine transforms nonnegative or put the individual transforms in the Laguerre-Polya class."
+      }
+    },
+    {
+      "id": "ntmbg_12_live_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "The surviving use of the blend is a coupled spectral coercivity or tail-dominance estimate.",
+      "formula": "Enclose derivative L1 budgets for the modular tail and compare their frequency-decaying Laguerre error with a finite blended partial sum. Termwise Fourier positivity and individual block Laguerre-Polya membership are rejected.",
+      "proof_boundary": "Open; not strict Laguerre positivity, Lambda<=0, or RH.",
+      "diagnostics": null
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Core Proof-Programme Gate Runner
 
-Date: 2026-07-11
+Date: 2026-07-17
 
 Status: reproducibility ledger. This is not a proof of PF-infinity,
 Laguerre-Polya membership, RH, or `Lambda <= 0`.
@@ -22,9 +22,28 @@ Command:
 
 ```text
 python work/rh_compute/scripts/check_core_proof_programme_gates.py
+python work/rh_compute/scripts/check_core_proof_programme_gates.py --skip-slow
 ```
 
 Current result:
+
+The runner has `349` gates: `333` non-slow and `16` slow. The latest full
+single-process umbrella execution before the order-nine integration completed
+`301/301` with no failures in `1348.4` seconds. The fifteen order-nine and
+all-order gates have also passed focused validation, including the two slow
+order-nine cache/transfer checks. They complete the order-nine curvature and
+endpoint chain, signed contiguous/arbitrary-column closure through fixed order
+nine, and the all-order endpoint-to-heat reduction. The deep-Schur coordinate,
+Toda/boundary gate, and rigorous order-ten counterexample now reject the
+former all-order endpoint antecedent and raised the ledger to 295 claims. The
+current non-slow umbrella run completed `304/304` with no failures in `1104.5`
+seconds, including the newly registered counterexample gate. The subsequently
+registered Polymath-15 and Edrei gates, the expanded 304-claim ledger, and the
+new Xi strict-monotonicity rejection have passed focused validation. Sixteen
+order-ten cache, curvature, delayed-heat, and lambda-zero completion gates are
+now registered. The complete `328/328` non-slow umbrella run passed with no
+failures in `969.3` seconds. Five subsequently registered order-eleven gates
+have passed focused validation, and the claim ledger now contains 324 claims.
 
 ```text
 OK core gate: countermodel proof-safety gates
@@ -52,6 +71,107 @@ OK core gate: Jensen-window PF bridge obligation ledger
 OK core gate: Jensen-window PF theorem machinery fit matrix
 OK core gate: Jensen-window PF sign-regular transfer gap matrix
 OK core gate: Jensen-window PF factorial multiplier split audit
+OK core gate: Jensen-window PF reciprocal-gamma mixture sign gate
+OK core gate: Jensen-window PF reciprocal-defect compound order-three gate
+OK core gate: Jensen-window PF negative-lambda -100 compound order-three entry certificate
+OK core gate: Jensen-window PF compound order-three forward-invariance certificate
+OK core gate: Jensen-window PF order-three noncontiguous secant-transfer lemma
+OK core gate: Jensen-window PF compound order-four condensation gate
+OK core gate: Jensen-window PF compound order-four first-summand curvature bridge
+OK core gate: Jensen-window PF compound order-four localized-curvature compact certificate
+OK core gate: Jensen-window PF compound order-four Gaussian cumulant ray target
+OK core gate: Jensen-window PF compound order-four formal cumulant corridor certificate
+OK core gate: Jensen-window PF compound order-four formal cumulant asymptotic ray certificate
+OK core gate: Jensen-window PF compound order-four formal cumulant next-parity certificate
+OK core gate: Jensen-window PF compound order-four next-parity finite certificate
+OK core gate: Jensen-window PF compound order-four next-parity asymptotic ray certificate
+OK core gate: Jensen-window PF compound order-four exact cumulant remainder budget
+OK core gate: Jensen-window PF compound order-four formal cumulant second-next parity certificate
+OK core gate: Jensen-window PF compound order-four second-next finite certificate
+OK core gate: Jensen-window PF compound order-four second-next asymptotic ray certificate
+OK core gate: Jensen-window PF compound order-four exact cumulant complex-disk contract
+OK core gate: Jensen-window PF compound order-four exact cumulant formal tails
+OK core gate: Jensen-window PF compound order-four exact cumulant exact tails
+OK core gate: Jensen-window PF compound order-four exact cumulant corridor theorem
+OK core gate: Jensen-window PF compound order-four finite partition extension
+OK core gate: Jensen-window PF compound order-four exact cumulant central residual
+OK core gate: Jensen-window PF compound order-four finite exact-corridor curvature theorem
+OK core gate: Jensen-window PF compound order-four exact-corridor curvature ray theorem
+OK core gate: Jensen-window PF compound order-four lambda=-100 entry theorem
+OK core gate: Jensen-window PF compound order-four forward-flow reduction
+OK core gate: Arb Xi lambda-zero order-four prefix certificate
+OK core gate: Jensen-window PF compound order-four lambda-zero eventual positivity
+OK core gate: Jensen-window PF lambda-zero first-summand dominance transfer
+OK core gate: Jensen-window PF compound order-four eventual-tail forward reduction
+OK core gate: Jensen-window PF compound order-four uniform-heat tail reduction
+OK core gate: Jensen-window PF uniform superpolynomial first-summand dominance
+OK core gate: Jensen-window PF uniform first-summand heat-tilt asymptotic theorem
+OK core gate: Jensen-window PF compound order-four uniform-heat forward invariance
+OK core gate: Jensen-window PF order-four noncontiguous total-positivity transfer
+OK core gate: Jensen-window PF compound order-five uniform-tail and flow reduction
+OK core gate: Jensen-window PF compound order-five lambda=-100 prefix
+OK core gate: Jensen-window PF compound order-five lambda=-100 tail curvature reduction
+OK core gate: Jensen-window PF compound order-five first-summand curvature bridge
+OK core gate: Jensen-window PF compound order-five nested-curvature compact certificate
+OK core gate: Jensen-window PF compound order-five nested-curvature finite ray
+OK core gate: Jensen-window PF compound order-five nested-curvature asymptotic ray
+OK core gate: Jensen-window PF compound order-five lambda=-100 entry
+OK core gate: Jensen-window PF compound order-five uniform-heat forward invariance
+OK core gate: Jensen-window PF compound order-six uniform-tail and flow reduction
+OK core gate: Jensen-window PF compound order-six lambda=-100 prefix
+OK core gate: Jensen-window PF compound order-six lambda=-100 tail curvature reduction
+OK core gate: Jensen-window PF inverse-seventh-power first-summand dominance
+OK core gate: Jensen-window PF compound order-six first/full curvature bridge
+OK core gate: Jensen-window PF compound order-six high-cumulant corridor
+OK core gate: Jensen-window PF compound order-six nested-curvature compact certificate
+OK core gate: Jensen-window PF compound order-six nested-curvature finite ray
+OK core gate: Jensen-window PF compound order-six nested-curvature asymptotic ray
+OK core gate: Jensen-window PF compound order-six lambda=-100 entry
+OK core gate: Jensen-window PF compound order-six uniform-heat forward invariance
+OK core gate: Jensen-window PF graded-kernel all-order Vandermonde lemma
+OK core gate: Jensen-window PF compound order-seven uniform-tail and flow reduction
+OK core gate: Jensen-window PF compound order-seven lambda=-100 prefix
+OK core gate: Jensen-window PF compound order-seven lambda=-100 tail curvature reduction
+OK core gate: Jensen-window PF inverse-eighth-power rebalanced first-summand dominance
+OK core gate: Jensen-window PF compound order-seven first/full curvature bridge
+OK core gate: Jensen-window PF compound order-seven shifted-jet compact bridge
+OK core gate: Jensen-window PF compound order-seven nested-curvature compact certificate
+OK core gate: Jensen-window PF compound order-seven high-cumulant coarse corridor
+OK core gate: Jensen-window PF compound order-seven nested-curvature finite-ray certificate
+OK core gate: Jensen-window PF compound order-seven nested-curvature asymptotic-ray certificate
+OK core gate: Jensen-window PF compound order-seven lambda=-100 entry
+OK core gate: Jensen-window PF compound order-seven uniform-heat forward invariance
+OK core gate: Jensen-window PF compound order-eight uniform-tail and flow reduction
+OK core gate: Jensen-window PF compound order-eight lambda=-100 prefix
+OK core gate: Jensen-window PF compound order-eight lambda=-100 tail-curvature reduction
+OK core gate: Jensen-window PF inverse-ninth-power first-summand dominance
+OK core gate: Jensen-window PF compound order-eight first/full curvature bridge
+OK core gate: Jensen-window PF compound order-eight high-cumulant coarse corridor
+OK core gate: Jensen-window PF compound order-eight shifted-jet certificate
+OK core gate: Jensen-window PF compound order-eight nested-curvature compact certificate
+OK core gate: Jensen-window PF compound order-eight nested-curvature finite-ray certificate
+OK core gate: Jensen-window PF compound order-eight nested-curvature asymptotic-ray certificate
+OK core gate: Jensen-window PF compound order-eight lambda=-100 entry
+OK core gate: Jensen-window PF compound order-eight uniform-heat forward invariance
+OK core gate: Jensen-window PF compound order-nine uniform-tail and flow reduction
+OK core gate: Jensen-window PF compound order-nine lambda=-100 prefix
+OK core gate: Jensen-window PF compound order-nine lambda=-100 tail-curvature reduction
+OK core gate: Jensen-window PF compound order-nine first/full curvature bridge
+OK core gate: Jensen-window PF compound order-nine high-cumulant coarse corridor
+OK core gate: Jensen-window PF compound order-nine exact-point H0-H8 cache
+OK core gate: Jensen-window PF compound order-nine localized lower bridge
+OK core gate: Jensen-window PF compound order-nine nested-curvature compact certificate
+OK core gate: Jensen-window PF compound order-nine nested-curvature finite-ray certificate
+OK core gate: Jensen-window PF compound order-nine nested-curvature asymptotic-ray certificate
+OK core gate: Jensen-window PF compound order-nine global first-summand curvature
+OK core gate: Jensen-window PF compound order-nine finite endpoint splice
+OK core gate: Jensen-window PF compound order-nine lambda=-100 entry
+OK core gate: Jensen-window PF compound order-nine uniform-heat forward invariance
+OK core gate: Jensen-window PF all-order endpoint-to-heat reduction
+OK core gate: Jensen-window PF endpoint deep-Schur coordinate
+OK core gate: Jensen-window PF deep-Schur Toda/boundary gate
+OK core gate: Jensen-window PF endpoint order-ten counterexample
+OK core gate: Jensen-window PF order-moment transport fit gate
 OK core gate: Jensen-window PF structural ansatz matrix
 OK core gate: Jensen-window PF Schur shape contract
 OK core gate: Jensen-window PF column recurrence contract
@@ -91,6 +211,10 @@ OK core gate: Jensen-window PF negative-lambda -100 k320 collar extension certif
 OK core gate: Jensen-window PF negative-lambda -100 full cone-entry certificate
 OK core gate: Jensen-window PF infinite heat-flow cone-invariance certificate
 OK core gate: Jensen-window PF defect complete-monotonicity scout
+OK core gate: Jensen-window PF multiplier complete-monotonicity frontier scout
+OK core gate: Jensen-window PF multiplier Hausdorff-uniqueness bridge
+OK core gate: Jensen-window PF multiplier leading-atom bound certificate
+OK core gate: Jensen-window PF multiplier unit-atomic obstruction certificate
 OK core gate: Jensen-window PF heat-flow Jensen hierarchy lemma
 OK core gate: Jensen-window PF cubic reciprocal-defect invariance lemma
 OK core gate: Jensen-window PF cubic lambda=-100 tail-entry certificate
@@ -108,10 +232,19 @@ OK core gate: Jensen-window PF Newman local odd-count reduction lemma
 OK core gate: Jensen-window PF Newman boundary-energy direction gate
 OK core gate: Jensen-window PF Newman positive-boundary attainment lemma
 OK core gate: Jensen-window PF Newman strict-Laguerre correlation target
+OK core gate: Jensen-window PF Newman Polymath-15 oscillatory zeta handoff theorem
+OK core gate: Jensen-window PF Newman Polymath-15 cancellation/zero-free wall gate
+OK core gate: Jensen-window PF Newman Polymath-15 Gaussian/Legendre duality gate
+OK core gate: Jensen-window PF Newman Polymath-15 ANTEDB beta-frontier audit
+OK core gate: Jensen-window PF Newman Polymath-15 critical scaled coercivity target
 OK core gate: Jensen-window PF Newman correlation hierarchy Gaussian-mixture gate
 OK core gate: Jensen-window PF Newman theta-summand spectral-square gate
+OK core gate: Jensen-window PF Newman theta/Bessel higher-shift regularization gate
+OK core gate: Jensen-window PF Newman theta cell-renormalization gate
 OK core gate: Jensen-window PF Newman Gasper fake-Xi remainder gate
 OK core gate: Jensen-window PF Newman Gasper residual two-block gate
+OK core gate: Jensen-window PF Newman classical three-block residual gate
+OK core gate: Jensen-window PF Newman signed universal-factor residual gate
 OK core gate: Jensen-window PF Laguerre scale-mixture gate
 OK core gate: Jensen-window PF rank-two boundary-family lemma
 OK core gate: Jensen-window PF multiplier counting-measure target
@@ -175,6 +308,7 @@ OK core gate: Jensen-window PF negative-lambda raw-log decrement bridge
 OK core gate: Jensen-window PF negative-lambda coefficient-curvature corridor bridge
 OK core gate: Jensen-window PF negative-lambda linear curvature-barrier scout
 OK core gate: Jensen-window PF negative-lambda scaled-curvature monotonicity target
+OK core gate: Jensen-window PF negative-lambda scaled-curvature continuous bridge
 OK core gate: Jensen-window PF negative-lambda scaled-curvature log-ceiling bridge
 OK core gate: Jensen-window PF negative-lambda relative-Gaussian curvature bridge
 OK core gate: Jensen-window PF negative-lambda relative-Gaussian Taylor stencil scout
@@ -221,6 +355,8 @@ OK core gate: Jensen-window PF negative-lambda relative-Gaussian worst-row finit
 OK core gate: Jensen-window PF negative-lambda relative-Gaussian worst-row finite-plus-tail budget certificate
 OK core gate: Jensen-window PF negative-lambda raw-moment obstruction matrix
 OK core gate: Jensen-window PF negative-lambda zeta-specific raw-corridor target
+OK core gate: Jensen-window PF negative-lambda -100 raw-corridor certificate
+OK core gate: Jensen-window PF negative-lambda -100 adaptive-defect certificate
 OK core gate: Jensen-window PF monotone contraction stress
 OK core gate: Jensen-window PF state-space sign-lift obstruction scout
 OK core gate: Jensen-window PF Cauchy-Binet low-degree scout
@@ -234,8 +370,7 @@ OK core gate: Edrei power-Hankel diagnostics
 OK core gate: Edrei midpoint frontier non-promotion guard
 OK core gate: Edrei power-Hankel boundary repair manifest
 OK core gate: Edrei moment-recurrence scout manifest
-validated seven-gate affected-slice extension of the prior 193/193 non-slow baseline;
-current runner has 200 non-slow gates
+FULL EXECUTION: validated 301/301 registered core proof-programme gates
 ```
 
 ## Included Gates
@@ -257,7 +392,7 @@ output reference integrity:
   files; current run has 0 missing required paths and 3 planned deliverables
 
 proof-claim ledger:
-  validates 176 classified claims, including 13 open theorem targets that remain
+  validates 273 classified claims, including 7 open theorem targets that remain
   explicitly unproved
 
 signed-Hankel/Jensen dependency graph:
@@ -350,6 +485,435 @@ Jensen-window PF factorial multiplier split audit:
   validates a 5-row route-separation audit for gamma_k=k!/(2*k)!,
   recording 315 raw degree-2 anti-hyperbolic rows and 315 normalized
   degree-2 positive rows, with 0 ready-to-apply rows
+
+Jensen-window PF reciprocal-gamma mixture sign gate:
+  validates Karlin's all-order fixed-scale reciprocal-gamma signature, an
+  exact independent-row scale integral, two exact positive-mixture failure
+  gates, and the equivalence between the completed Xi order-two cone and the
+  tilted concentration bound CV_n^2<=2/(2n+1)
+
+Jensen-window PF reciprocal-defect compound order-three gate:
+  validates the exact contiguous 3x3 reciprocal-defect margin C_n, its
+  increment curvature budget and boundary benchmark, plus a strict rational
+  countermodel satisfying every existing ratio/adaptive/cubic cone while
+  reversing the required signed-Hankel sign; composes the separate entry and
+  forward-invariance theorems for the actual Xi trajectory
+
+Jensen-window PF negative-lambda -100 compound order-three entry certificate:
+  validates 318 Arb prefix compound margins, the exact scaled-defect tail
+  bound C_n>57613471/66107054971 for n>=318, and the resulting all-shift
+  contiguous 3x3 entry theorem at lambda=-100
+
+Jensen-window PF compound order-three forward-invariance certificate:
+  validates the cooperative flow C_n'/r_(n+2)=alpha_n*C_(n+1)+beta_n*C_n,
+  compact-tail coefficient cancellation, and a weighted infinite maximum
+  principle proving D_(3,n)(0)<0 for every shift; the following secant theorem
+  closes noncontiguous order three
+
+Jensen-window PF order-three noncontiguous secant-transfer lemma:
+  validates the planar orientation identity and weighted-secant transfer,
+  proving every arbitrary-column reshaped-Hankel sign in orders two and three
+  at lambda=0; downstream total positivity now closes arbitrary columns at
+  order four as well
+
+Jensen-window PF compound order-four condensation gate:
+  validates the Desnanot-Jacobi/log-concavity coordinate, 317 positive
+  lambda=-100 prefix margins, and a strict rational lower-order countermodel
+  with H_(4,0)<0; downstream the all-index G-gap tail, flow, and
+  arbitrary-column transfer are closed
+
+Jensen-window PF compound order-four first-summand curvature bridge:
+  validates the stable gap factorization, the real J_1(t)>=1/(7t) floor,
+  the same-point derivative localization, and the exact 2/(5k^2) full-kernel
+  perturbation budget; downstream exact-corridor theorems now discharge the
+  former analytic u>=2 condition
+
+Jensen-window PF compound order-four localized-curvature compact certificate:
+  validates a 107,452-tile outward-rounded Arb cache and reconstructs 1,073
+  positive real-parameter blocks proving K_1(t)<=7/(2t^2) for
+  319<=t<=V'(2); downstream finite and ray theorems close the rest
+
+Jensen-window PF compound order-four Gaussian cumulant ray target:
+  validates the exact epsilon-six cumulant polynomials through order eight,
+  their alternating factorial leading signature, explicit candidate
+  corridors, two proved global formal-corridor components, and seven positive
+  conditional full-collar boxes; exact-minus-formal errors remain open
+
+Jensen-window PF compound order-four formal cumulant corridor certificate:
+  validates 1,800,000 adjacent Arb blocks covering 2<=u<=20 and all seven
+  epsilon-six formal cumulant corridors, with weakest margin above 0.01843
+
+Jensen-window PF compound order-four formal cumulant asymptotic ray certificate:
+  validates seven coefficient-positive buffered leading-corridor gates,
+  fourteen exact potential-jet remainder sign gates, and the transfer
+  |R_r^[6]-F_r|<1/(20u), closing the formal model on u>=20
+
+Jensen-window PF compound order-four finite exact-corridor curvature theorem:
+  validates 20,700 correlated mode blocks and 41,400 shifted-collar gates,
+  proving j_0>E_0 and t^2 U(t)<7/2 throughout 2<=u<=20
+
+Jensen-window PF compound order-four exact-corridor curvature ray theorem:
+  validates the coefficient-positive geometry, seven normalized H boxes,
+  six logarithmic-defect derivative bounds, and the strict rational ceiling
+  3011223637/866377000<7/2; finite plus ray close corridor-to-U globally
+
+Jensen-window PF compound order-four lambda=-100 entry theorem:
+  validates the 317-row repaired prefix, analytic penalty tail, strict
+  scaled-defect buffer, and H_(4,n)(-100)>0 for every n>=0; the uniform-tail
+  theorem below now supplies the formerly open forward propagation
+
+Jensen-window PF compound order-four forward-flow reduction:
+  validates three exact affine-Hankel/Plucker identities, the positive
+  one-sided order-four determinant and stable-gap systems, uniform tail
+  attainment, and reduction of forward propagation to one effective-diagonal
+  coefficient ceiling; the finite-confinement reduction below provides an
+  alternative route that does not require that ceiling
+
+Arb Xi lambda-zero order-four prefix certificate:
+  validates 507 outward-rounded coefficient balls from a direct 24,576-bit
+  Xi series and proves every raw H_4 determinant and stable margin strictly
+  positive on 0<=n<=500, with zero inconclusive rows
+
+Jensen-window PF compound order-four lambda-zero eventual positivity:
+  validates the exact Xi normalization, seven determinant-series coefficients,
+  universal leading term 768*G_2^6*h^6, rigorous H_4 positivity for all
+  0<=n<=500, and eventual H_4 positivity; its direct effective finite splice
+  remains open but is no longer needed for the all-shift conclusion
+
+Jensen-window PF lambda-zero first-summand dominance transfer:
+  validates covariance monotonicity across 0<=T<=100, transfers the certified
+  first-summand error from T=100 through lambda zero, and preserves the exact
+  order-four perturbation budget; its direct curvature-tail handoff remains a
+  separate, superseded route
+
+Jensen-window PF compound order-four eventual-tail forward reduction:
+  validates variation of constants and finite backward induction, reducing
+  all-shift propagation to a uniform eventual positive tail without any
+  spatial coefficient ceiling
+
+Jensen-window PF compound order-four uniform-heat tail reduction:
+  validates the universal 768*G_2^6*h^6 determinant term under a compact-
+  uniform degree-seven ratio contract and isolates the first-summand heat tilt
+  as the last input to that contract
+
+Jensen-window PF uniform superpolynomial first-summand dominance:
+  validates uniform superpolynomial suppression of all higher theta summands
+  and every fixed local logarithmic difference on 0<=T<=100
+
+Jensen-window PF uniform first-summand heat-tilt asymptotic theorem:
+  validates the compact-uniform suitability audit for O'Sullivan's published
+  all-order saddle theorem, the exact first-summand integral reduction, and
+  the required difference bounds through order seven
+
+Jensen-window PF compound order-four uniform-heat forward invariance:
+  composes the uniform ratio contract, universal determinant cancellation,
+  all-shift lambda=-100 entry, and finite cooperative propagation to prove
+  every contiguous H_(4,n)(lambda)>0 on -100<=lambda<=0
+
+Jensen-window PF order-four noncontiguous total-positivity transfer:
+  validates four exact reversal orders, 240 solid-block maps, the rectangular
+  Gasca-Pena initial-minor criterion, and 1,020 rational benchmark minors;
+  proves every arbitrary-column order-four sign and the fixed-order transfer
+  from contiguous layers to arbitrary columns
+
+Jensen-window PF compound order-five uniform-tail and flow reduction:
+  the separately run slow gate validates twelve compact-family suitability
+  coefficients, eleven Lambert orders, nine-node Newton transfer, the exact
+  120-permutation term 294912*G_2^10*h^10, cooperative order-five flow, and
+  finite confinement to lambda=-100 entry
+
+Jensen-window PF compound order-five lambda=-100 prefix:
+  validates the exact H_(5,n)=W_n*J_n stable factorization, 325 hashed
+  outward-rounded coefficient balls, 317 positive J_n and relative margins,
+  and H_(5,n)(-100)>0 for every 0<=n<=316
+
+Jensen-window PF compound order-five lambda=-100 tail curvature reduction:
+  validates J_n>0 iff C_n<-4log(x_(n+4)), the defect anchor, and the
+  coefficient-positive comparison showing C_n<=100/(n+4)^2 is sufficient on
+  n>=317; the downstream nested-curvature chain now supplies that ceiling
+
+Jensen-window PF compound order-five first-summand curvature bridge:
+  validates two positive nested stable floors, the exact q'' identity, and a
+  degree-52 coefficient-positive full-kernel perturbation reserve; splits the
+  scalar budget as 37/k^2 plus a 63/k^2 first-summand contribution
+
+Jensen-window PF compound order-five nested-curvature compact certificate:
+  validates 36 outward-rounded blocks built from the hashed 107452-tile
+  H-derivative cache; proves q_1''(t)<=60/t^2 throughout 320<=t<=V'(2)
+
+Jensen-window PF compound order-five nested-curvature finite ray:
+  validates 100 rigorous mode-two extension tiles and 1850 exact-cumulant
+  corridor blocks; proves the same curvature ceiling for every 2<=u<=20
+
+Jensen-window PF compound order-five nested-curvature asymptotic ray:
+  validates the normalized-H collar, analytic stable-log majorant, and one
+  dimensionless interval box; proves t^2q_1''(t)<9.159 for every u>=20
+
+Jensen-window PF compound order-five lambda=-100 entry:
+  composes the three continuous ranges, the 37+63 full-kernel transfer, and
+  the rigorous prefix to prove H_(5,n)(-100)>0 for every integer n>=0
+
+Jensen-window PF compound order-five uniform-heat forward invariance:
+  composes endpoint entry, the uniform eventual tail, cooperative variation
+  of constants, and the fixed-order initial-minor theorem; proves contiguous
+  and arbitrary-column signed-Hankel order five on the full heat segment
+
+Jensen-window PF compound order-six uniform-tail and flow reduction:
+  validates 17 compact-family suitability coefficients, 16 Lambert orders,
+  ten Newton coefficients, 720 determinant permutations, and 684 weighted
+  monomials; proves the uniform signed tail and the exact cooperative
+  order-six recursion conditional only on lambda=-100 entry
+
+Jensen-window PF compound order-six lambda=-100 prefix:
+  validates 327 coefficient records, 317 strictly positive relative H_5
+  margins and Q_6 signs, and 39 repaired coefficients; proves the endpoint
+  prefix through n=316 with weakest certified margin above 7/1000
+
+Jensen-window PF compound order-six lambda=-100 tail curvature reduction:
+  validates the two exact stable factorizations that reduce the analytic tail
+  from n>=317 to one global first-summand scalar-curvature ceiling
+
+Jensen-window PF inverse-seventh-power first-summand dominance:
+  validates six exact rows and eleven positive gates; supplies the complete
+  inverse-seventh-power first-summand dominance transfer from k>=316
+
+Jensen-window PF compound order-six first/full curvature bridge:
+  validates the exact first-summand and full-kernel curvature transfer,
+  including the cancellation-preserving perturbation budget used by the
+  endpoint tail theorem
+
+Jensen-window PF compound order-six high-cumulant corridor:
+  validates 109 exact terms for formal orders nine and ten and proves the two
+  high-cumulant corridors used on the long ray
+
+Jensen-window PF compound order-six nested-curvature compact certificate:
+  validates 38 outward-rounded blocks and proves p_1''(t)<=200/t^2 throughout
+  the compact interval 321<=t<=V'(2)
+
+Jensen-window PF compound order-six nested-curvature finite ray:
+  validates 17,999 rational mode blocks and proves the same curvature ceiling
+  throughout the complete ray segment 2<=u<=20
+
+Jensen-window PF compound order-six nested-curvature asymptotic ray:
+  validates the normalized-H collar and one dimensionless interval theorem;
+  proves t^2*p_1''(t)<22.769 for every u>=20
+
+Jensen-window PF compound order-six lambda=-100 entry:
+  composes the compact, finite-ray, and asymptotic curvature ranges with the
+  full-kernel transfer, analytic n>=317 tail, and rigorous prefix to prove
+  Q_(6,n)(-100)=-H_(6,n)(-100)>0 for every n>=0
+
+Jensen-window PF compound order-six uniform-heat forward invariance:
+  composes endpoint entry, the uniform signed tail, cooperative recursion,
+  the completed order-five lower cone, and the fixed-order initial-minor
+  theorem; proves contiguous and arbitrary-column signed-Hankel order six on
+  the full heat segment and hands the fixed-order frontier to order seven
+
+Jensen-window PF graded-kernel all-order Vandermonde lemma:
+  validates 12 order rows, 46,233 permutation stress cases, and 169
+  coefficient-valuation cells; proves the universal positive signed leading
+  term and one compact-uniform eventual tail at every fixed order, with an
+  order-dependent non-effective threshold
+
+Jensen-window PF compound order-seven uniform-tail and flow reduction:
+  specializes the universal tail to the positive signed coefficient
+  52183852646400*G_2^21, validates the exact condensation coordinate and
+  cooperative recursion, and records both the conditional forward theorem
+  and exact lower-cone countermodel
+
+Jensen-window PF compound order-seven lambda=-100 prefix:
+  validates 327 coefficients, 317 positive Q_6 values, 315 strict relative
+  margins and Q_7 signs, and twelve repaired coefficients; proves the rigorous
+  endpoint prefix through n=314 with weakest margin above 9/1000
+
+Jensen-window PF compound order-seven lambda=-100 tail curvature reduction:
+  validates the fourth stable factorization, exact centered-curvature
+  coordinate, and positive rational comparison; reduces every missing n>=315
+  endpoint sign to the ceiling R_k<=900/k^2 for k>=321, later discharged by
+  the continuous and full-kernel composition
+
+Jensen-window PF inverse-eighth-power rebalanced first-summand dominance:
+  validates fourteen strict endpoint and half-line derivative gates for the
+  log(k)/10 split; proves the complete-to-first moment defect is below 2/k^8
+  for every k>=300
+
+Jensen-window PF compound order-seven first/full curvature bridge:
+  validates the global fourth-gap floor, the full four-layer perturbation
+  chain, and a degree-102 shifted numerator with 103 positive coefficients;
+  proves |R_k-R_k^(1)|<262/k^2 and reduces the endpoint tail to the single
+  continuous target r_1''(t)<=600/t^2 on t>=320
+
+Jensen-window PF compound order-seven shifted-jet compact bridge:
+  validates 186 contiguous rational blocks, eleven exact shifted point jets
+  per anchor, and dimensionless H2-H21 common-collar remainders; proves
+  r_1''(t)<=600/t^2 continuously on 320<=t<=1000 with worst scaled upper
+  below 50.911
+
+Jensen-window PF compound order-seven nested-curvature compact certificate:
+  validates 107452 aligned H2-H12 mode tiles, a strict t+-5 collar, and 82
+  contiguous adaptive rational blocks; proves r_1''(t)<=600/t^2 continuously
+  on 1000<=t<=V'(2) with worst scaled upper below 358.733
+
+Jensen-window PF compound order-seven high-cumulant coarse corridor:
+  validates 72 exact formal terms and the unit-disk residual transfer; proves
+  normalized kappa_11 and kappa_12 caps below 14001 on 2<=u<=20 and below
+  700001 on u>=20
+
+Jensen-window PF compound order-seven nested-curvature finite-ray certificate:
+  validates the exact mode-two collar and 17,999 rational mode blocks; proves
+  r_1''(t)<=600/t^2 for every 2<=u<=20 with worst scaled upper below 73.543
+
+Jensen-window PF compound order-seven nested-curvature asymptotic-ray certificate:
+  validates normalized H2-H12 boxes, the stable-log defect majorant, and one
+  interval over 0<=1/t<=10^(-30); proves t^2r_1''(t)<55.541 for all u>=20
+
+Jensen-window PF compound order-seven lambda=-100 entry:
+  composes all four continuous ranges, the exact tent and full-kernel
+  transfers, the analytic n>=315 tail, and the rigorous prefix; proves
+  Q_(7,n)(-100)=-H_(7,n)(-100)>0 for every n>=0
+
+Jensen-window PF compound order-seven uniform-heat forward invariance:
+  composes endpoint entry, the uniform eventual tail, cooperative recursion,
+  the completed order-six cone, and the fixed-order initial-minor theorem;
+  proves contiguous and arbitrary-column signed-Hankel order seven on the
+  full heat segment
+
+Jensen-window PF compound order-eight uniform-tail and flow reduction:
+  specializes the universal signed term to order eight, validates the exact
+  Q_7 log-concavity coordinate and cooperative recursion, and records both
+  the conditional forward theorem and an exact lower-cone countermodel
+
+Jensen-window PF compound order-eight lambda=-100 prefix:
+  validates 1,257 endpoint coefficients, 1,245 positive Q_7 values, and all
+  1,243 relative Q_7 margins and Q_8 signs; proves the rigorous endpoint
+  prefix through n=1242 with the weakest margin above 1/300
+
+Jensen-window PF compound order-eight lambda=-100 tail-curvature reduction:
+  validates the stable endpoint factorization, the exact logarithmic buffer,
+  and the sufficient ceiling W_k<=4300/k^2 for every k>=1250
+
+Jensen-window PF inverse-ninth-power first-summand dominance:
+  validates all 14 analytic gates and proves the retained-summand defect
+  0<=delta_k<2/k^9 for every integer k>=300
+
+Jensen-window PF compound order-eight first/full curvature bridge:
+  validates the fifth stable-gap floor, 134 positive transfer coefficients,
+  and |W_k-W_k^(1)|<190/k^2 for every k>=1250
+
+Jensen-window PF compound order-eight high-cumulant coarse corridor:
+  validates the vanishing epsilon-ten formal terms and exact normalized
+  cumulant caps in orders 13 and 14 on every saddle mode u>=2
+
+Jensen-window PF compound order-eight shifted-jet certificate:
+  validates 185 contiguous common-collar blocks and proves
+  s_1''(t)<=2000/t^2 for every real 699<=t<=999
+
+Jensen-window PF compound order-eight nested-curvature compact certificate:
+  validates 96 adaptive H2-H14 blocks and proves s_1''(t)<=4000/t^2 from
+  t=999 through the mode-two saddle boundary
+
+Jensen-window PF compound order-eight nested-curvature finite-ray certificate:
+  validates the exact mode-two collar and 17,999 rational mode blocks; proves
+  s_1''(t)<=4000/t^2 for every saddle mode 2<=u<=20
+
+Jensen-window PF compound order-eight nested-curvature asymptotic-ray certificate:
+  validates normalized H2-H14 boxes and one interval over 0<=1/t<=10^(-30);
+  proves t^2s_1''(t)<134.49 for every u>=20
+
+Jensen-window PF compound order-eight lambda=-100 entry:
+  composes all continuous ranges, tent integration, the full-kernel transfer,
+  analytic n>=1243 tail, and rigorous prefix; proves
+  Q_(8,n)(-100)=H_(8,n)(-100)>0 for every n>=0
+
+Jensen-window PF compound order-eight uniform-heat forward invariance:
+  composes endpoint entry, the uniform eventual tail, cooperative recursion,
+  the completed order-seven cone, and the fixed-order initial-minor theorem;
+  proves contiguous and arbitrary-column signed-Hankel order eight on the
+  full heat segment
+
+Jensen-window PF compound order-nine uniform-tail and flow reduction:
+  specializes the universal signed term to order nine, validates the Q_8
+  log-concavity coordinate and cooperative recursion, and retains an exact
+  lower-cone countermodel
+
+Jensen-window PF compound order-nine lambda=-100 prefix:
+  validates 1,257 endpoint coefficients, 38 repaired rows, and every Q_9 sign
+  through n=1240, with the weakest relative margin above 1/250
+
+Jensen-window PF compound order-nine lambda=-100 tail-curvature reduction:
+  validates the sixth stable factorization and reduces the endpoint tail to
+  Y_k<=4900/k^2 for k>=1249
+
+Jensen-window PF compound order-nine first/full curvature bridge:
+  validates the sixth-gap floor, 169 positive transfer coefficients, and
+  |Y_k-Y_k^(1)|<550/k^2 for k>=1251
+
+Jensen-window PF compound order-nine high-cumulant coarse corridor:
+  validates the exact fifteenth- and sixteenth-cumulant corridors on every
+  saddle mode u>=2
+
+Jensen-window PF compound order-nine exact-point H0-H8 cache:
+  validates all 8,929 hash-bound jet rows used by the localized lower bridge
+
+Jensen-window PF compound order-nine localized lower bridge:
+  validates 279 root segments and 874 accepted blocks; proves
+  w_1''(t)<=4200/t^2 on 1250<=t<=5700
+
+Jensen-window PF compound order-nine nested-curvature compact certificate:
+  validates 108 H2-H16 blocks and proves the same ceiling from t=5700 through
+  the mode-two saddle boundary
+
+Jensen-window PF compound order-nine nested-curvature finite-ray certificate:
+  validates 17,999 rational mode blocks and proves the ceiling for 2<=u<=20
+
+Jensen-window PF compound order-nine nested-curvature asymptotic-ray certificate:
+  validates one normalized asymptotic interval and proves
+  t^2*w_1''(t)<324.906<500 for every u>=20
+
+Jensen-window PF compound order-nine global first-summand curvature:
+  composes the four exact ranges and proves w_1''(t)<=4200/t^2 for every real
+  t>=1250
+
+Jensen-window PF compound order-nine finite endpoint splice:
+  validates retained-integral balls for A_1257,A_1258 and proves the two
+  missing signs n=1241,1242
+
+Jensen-window PF compound order-nine lambda=-100 entry:
+  composes the global curvature theorem, tent and full-kernel transfers,
+  analytic tail, splice, and prefix; proves Q_(9,n)(-100)>0 for every n>=0
+
+Jensen-window PF compound order-nine uniform-heat forward invariance:
+  composes endpoint entry, the eventual tail, cooperative recursion, and the
+  fixed-order initial-minor theorem; proves contiguous and arbitrary-column
+  order nine on the full heat segment
+
+Jensen-window PF all-order endpoint-to-heat reduction:
+  validates the arbitrary-order affine and flag-Plucker identities, the
+  order-dependent-tail quantifiers, and the exact equivalence between the
+  heat hierarchy and the endpoint antecedent Q_(m,n)(-100)>0 for every
+  m>=10,n>=0; the equivalence remains exact although the antecedent is false
+
+Jensen-window PF endpoint deep-Schur coordinate:
+  validates the normalized rectangular and arbitrary-column Jacobi-Trudi
+  maps, the inverse map onto deep partitions, a rigorous endpoint PF_3
+  counterexample, and the bounded primary-literature fit audit; records that
+  the candidate hierarchy s_((N^m))(h)>0 for every m>=10,N>=m-1 is rejected
+
+Jensen-window PF deep-Schur Toda/boundary gate:
+  validates the exact rectangular Toda identity, 251 shifted-tail boundary
+  checks, and 138 strict-Schur checks; blocks the zero-reset moving-tail PF
+  shortcut and generic strict-Schur-to-Jensen implication, and diagnoses the
+  rejected order-ten rectangle layer while leaving a weaker Xi/Phi bridge open
+
+Jensen-window PF endpoint order-ten counterexample:
+  independently checks direct Hankel, Jacobi-Trudi, Toda, and stable
+  condensation coordinates; certifies four negative required deep rectangles
+  at N=9,10,11,12 and rejects the proposed all-order endpoint hierarchy
+
+Jensen-window PF order-moment transport fit gate:
+  validates the exact Gamma-average reparametrization and the positive origin
+  derivative that excludes complete monotonicity; blocks promotion of an
+  ordinary positive-Hankel transport theorem into reciprocal sign regularity
 
 Jensen-window PF structural ansatz matrix:
   validates a 6-row structural proof-search workbench for jwpf_06, checking
@@ -570,6 +1134,27 @@ Jensen-window PF defect complete-monotonicity scout:
   complete through order 8 and 838 high-order inconclusives; an exact -27/16
   cubic witness blocks promotion to the all-shape bridge
 
+Jensen-window PF multiplier complete-monotonicity frontier scout:
+  evaluates the tighter dps220 A_0..A_57 sources at 250-digit Arb precision
+  and certifies all 7980 alternating log-contraction differences through the
+  complete finite order-55 triangle, with no inconclusive or negative interval
+
+Jensen-window PF multiplier Hausdorff-uniqueness bridge:
+  proves the exact Hausdorff moment representation and uniqueness theorem,
+  characterizes the unit-atomic density needed by the multiplier target, and
+  retains a periodic-interpolation guard against importing the continuous
+  Mellin obstruction without an additional uniqueness theorem
+
+Jensen-window PF multiplier leading-atom bound certificate:
+  conditionally brackets the strongest finite atom-kernel root at order 6,
+  proves alpha_min>4.863538496 and N(11/2)<=1 for any target multiset, and
+  leaves existence of an atom below 11/2 explicitly open
+
+Jensen-window PF multiplier unit-atomic obstruction certificate:
+  combines the order-6 atom cutoff with exact ratio monotonicity and an Arb
+  consecutive-moment gap above 7.68e-4, ruling out the unit-atomic elementary
+  multiplier product while leaving general multiplier sequences open
+
 Jensen-window PF heat-flow Jensen hierarchy lemma:
   validates five exact degree-shift heat identities, the static -27/16 cubic
   guard, and a one-atom Hausdorff full-cone boundary witness with normalized
@@ -688,6 +1273,39 @@ Jensen-window PF Newman strict-Laguerre correlation target:
   convolution has double Fourier zeros, so generic kernel shape cannot replace
   the open Xi-specific zero-free correlation theorem
 
+Jensen-window PF Newman Polymath-15 oscillatory zeta handoff theorem:
+  validates an eleven-exponent-pair envelope with exact threshold
+  c_*=4911678521/1933561194 and the zeta-jet/remainder composition proving
+  exact first-Laguerre positivity for every fixed c>=c_*+epsilon at
+  sufficiently large L. It supplies no practical L_epsilon and does not cover
+  the scaled strip at or below c_*
+
+Jensen-window PF Newman Polymath-15 cancellation/zero-free wall gate:
+  validates the exact weighted-block cancellation frontier, the conditional
+  c=2 zeta 1-line handoff, and the fixed c<2 nonpromotion wall. It records the
+  precise local exponent deficit without asserting a stronger exponential-sum
+  theorem or the open inner Wronskian separation
+
+Jensen-window PF Newman Polymath-15 Gaussian/Legendre duality gate:
+  validates the exact finite Gaussian-shift identity and Legendre equivalence,
+  including q_*=4800718975/7734244776 equality and the exact c=2 deficit. It
+  blocks same-input semigroup repackaging without asserting stronger
+  cancellation or inner Wronskian separation
+
+Jensen-window PF Newman Polymath-15 ANTEDB beta-frontier audit:
+  validates the exact beta-coordinate objective against pinned ANTEDB commit
+  99668603896af86e6cda90ed6755cf3116aab0ac. Six post-2023 pairs and the
+  documented one-pass direct-beta envelope retain the exact c_* contact, as do
+  twelve finite beta-only van der Corput passes. The audit does not promote raw
+  optimizer partitions, infinite transform closure, stronger cancellation, or
+  inner Wronskian separation
+
+Jensen-window PF Newman Polymath-15 critical scaled coercivity target:
+  validates the corrected finite Riemann-Siegel curvature identities and
+  refined C2 handoff on 0<=c<=c_*+o(1), while keeping the phase-sensitive
+  coercivity inequality explicitly open and subordinate to the global
+  strict-correlation target
+
 Jensen-window PF Newman correlation hierarchy Gaussian-mixture gate:
   validates the exact K_n/F_n heat hierarchy and its universal multiple-root
   contact. Complete monotonicity in v^2 would close strict Fourier positivity,
@@ -718,6 +1336,26 @@ Jensen-window PF Newman Gasper residual two-block gate:
   Arb convexity cover the whole tail-admissible interval with a negative first
   Laguerre value at x=50 or x=66. Larger beta has a negative residual tail;
   only signed, coupled multi-block identities remain open
+
+Jensen-window PF Newman classical three-block residual gate:
+  validates the full nonnegative 9/5/1 residual obstruction, including the
+  two classical real-zero benchmarks and complete Acb/Arb coverage of 64,908
+  rational parameter boxes
+
+Jensen-window PF Newman signed universal-factor residual gate:
+  validates the signed 9/5/1 standard universal-factor obstruction through an
+  exact quartic reduction and a complete 4,094-leaf adaptive interval cover
+
+Jensen-window PF Newman theta/Bessel higher-shift regularization gate:
+  validates the exact fixed-index higher-shift expansion and sign threshold,
+  then proves at zero frequency that its arithmetic Bessel-transform sum
+  diverges; modular grouping or sign-preserving renormalization is required
+
+Jensen-window PF Newman theta cell-renormalization gate:
+  validates a normally convergent endpoint cell subtraction, Euler-zeta
+  transform assembly, positive zero-frequency blocks, and an absolutely
+  convergent coupled Laguerre matrix; its nonzero exp(-5u) block tails prove
+  that the construction cannot be deformed termwise to positive Newman time
 
 Jensen-window PF Laguerre scale-mixture gate:
   validates the exact Kummer/Laguerre kernel in every unshifted Jensen moment
@@ -1043,9 +1681,14 @@ Jensen-window PF negative-lambda linear curvature-barrier scout:
   ready-to-apply proof rows
 
 Jensen-window PF negative-lambda scaled-curvature monotonicity target:
-  validates 10 open-target rows naming the replacement theorem
-  C_(k+1)>=C_k, with 894/894 repaired k300 finite stress rows, 2 live routes,
-  and no ready-to-apply proof rows
+  validates 10 historical target rows that isolated the replacement theorem
+  C_(k+1)>=C_k, with 894/894 repaired k300 finite stress rows; the following
+  continuous-bridge gate now discharges that target at lambda=-100
+
+Jensen-window PF negative-lambda scaled-curvature continuous bridge:
+  validates 10 exact/interval/analytic rows, 16,074 continuous compact mode
+  blocks, 318 repaired prefix gaps, and one exact u>=5 ray; proves
+  C_(k+1)>=C_k for every k>=1 at lambda=-100 with 0 open requirements
 
 Jensen-window PF negative-lambda scaled-curvature log-ceiling bridge:
   validates 8 exact/finite rows rewriting C_(k+1)>=C_k as an affine
@@ -1245,8 +1888,20 @@ Jensen-window PF negative-lambda raw-moment obstruction matrix:
   raw wall or adaptive corridor
 
 Jensen-window PF negative-lambda zeta-specific raw-corridor target:
-  validates 9 open-target rows naming the actual zeta raw-wall/corridor
-  theorem, with 2 live routes, 2 rejected shortcuts, and 0 ready-to-apply rows
+  validates 9 historical target rows naming the actual zeta raw-wall/corridor
+  theorem, with 2 live routes and 2 rejected shortcuts; the following exact
+  composition gate now discharges that target at lambda=-100
+
+Jensen-window PF negative-lambda -100 raw-corridor certificate:
+  validates 6 exact theorem-composition rows combining full ratio-cone entry,
+  scaled-curvature growth, and the linear-to-nonlinear calculus lemma into the
+  complete raw-ratio decrement corridor for every k>=1 at lambda=-100
+
+Jensen-window PF negative-lambda -100 adaptive-defect certificate:
+  validates 8 exact theorem-composition rows; proves the all-k defect cone,
+  decreasing defect, exact scaled-defect cone, and increasing scaled defect at
+  lambda=-100, while leaving the stronger simultaneous three-lambda statement
+  unproved
 
 Jensen-window PF monotone contraction stress:
   validates 2875 finite Arb-classified zeta-window rows across degrees d=3..12
@@ -1321,12 +1976,22 @@ an all-order bridge theorem.
 The remaining theorem burden is narrower but still open:
 
 ```text
-full ratio-cone entry at lambda=-100 is now closed. Establish legitimate
-infinite or collared finite forward propagation and construct the noncircular all-order bridge
-from the resulting coefficient or
-sign-regularity data to PF-infinity, Laguerre-Polya membership, Jensen
-hyperbolicity for all degrees/shifts, or directly to Lambda <= 0. The universal
-all-real-lambda monotone-wall formulation is false at lambda=-1156.
+contiguous and arbitrary-column signed-Hankel layers through fixed order nine
+are closed on the heat segment from -100 to zero. The arbitrary-order heat
+algebra and induction give an exact conditional endpoint-to-heat equivalence.
+After normalizing h_k=A_k(-100)/A_0(-100), however, the proposed static
+rectangle antecedent fails: four required order-ten rectangles are strictly
+negative. The endpoint sequence also fails a full PF_3 inequality outside
+the deep cone, the zero-reset moving-tail translation fails on shallow
+shapes, and strict full unweighted Schur positivity has an exact cubic Jensen
+counterexample. Construct a noncircular, weaker Xi/Phi-specific kernel,
+determinant, or direct Jensen mechanism that tolerates those failures and
+still proves Laguerre-Polya membership or all-degree/all-shift Jensen
+hyperbolicity. On
+the direct Newman route, retain theta modular cancellation before the
+spectral transform and establish positivity of the coupled mixed-term matrix
+for every 0<t<=1/2. The universal all-real-lambda monotone-wall formulation
+is false at lambda=-1156.
 ```
 
 ## Useful Options
@@ -1344,10 +2009,21 @@ exceed the former 300-second default without any change in its result.
 Current quick result:
 
 ```text
-validated affected-slice regression after the 193/193 integrated baseline.
-The current runner has 207 gates: 200 non-slow and 7 slow; the seven new Newman
-gates and all global ledger, graph, language, status, and reference scans pass.
+latest completed non-slow umbrella coverage: 328/328 core proof-programme gates
+the current runner has 349 gates: 333 non-slow and 16 slow
 ```
+
+The current 324-claim ledger expectation passes. The latest non-slow umbrella
+run completed `328/328` gates in `969.3` seconds, including the later
+Polymath-15 and Edrei gates, the Xi strict-monotonicity rejection, and the
+sixteen order-ten completion gates. Five added order-eleven gates pass focused
+validation; a fresh `333/333` umbrella timing is pending. The latest full umbrella run before
+order-nine integration completed all former `301/301` gates in one execution,
+and the fifteen order-nine/all-order gates have passed focused validation,
+including both newly marked slow checks. Earlier
+reduction and finite-prefix artifacts retain their historical local
+boundaries; their open handoffs are supplied by separately validated
+downstream entry and uniform-heat certificates.
 
 For machine-readable output:
 

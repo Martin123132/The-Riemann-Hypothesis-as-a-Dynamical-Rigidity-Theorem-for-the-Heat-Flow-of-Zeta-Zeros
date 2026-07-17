@@ -1,0 +1,151 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_endpoint_C0_strip_certificate",
+  "date": "2026-07-17",
+  "status": "rigorous complex-strip bounds for the endpoint C0 factor and its first derivative; not corrected transversality, Lambda<=0, or RH",
+  "proof_boundary": "This artifact proves |C0|<5 and |C0'|<60 on the stated complex strip and proves that L>=50 radius-1/L endpoint collars map into it. It does not by itself complete the full refined remainder constants, prove the corrected first-jet lower bound, exclude a positive Newman boundary, prove Lambda<=0, or prove RH.",
+  "exact": {
+    "C0": "C0(p)=(exp(pi*i*(p^2/2+3/8))-i*sqrt(2)*cos(pi*p/2))/(2*cos(pi*p))",
+    "removable": "The numerator vanishes at p=+-1/2, so both apparent poles are removable",
+    "near_lower": "For z=p0+w, |w|=1/4 and p0=+-1/2, |2*cos(pi*z)|=2*|sin(pi*w)|>=sqrt(2)",
+    "near_proof": "sin(pi*|Re w|)>=2*sqrt(2)*|Re w| and sinh(pi*|Im w|)>=2*sqrt(2)*|Im w|",
+    "cauchy": "A boundary bound |C0|<3 on radius 1/4 gives |C0'|<30 on radius 3/20",
+    "outside_lower": "Outside the two radius-3/20 disks, the strip width 1/100 forces dist(Re p, Z+1/2)>1/10 and |2*cos(pi*p)|>=2*sin(pi/10)",
+    "global": "On |Re p|<=101/100 and |Im p|<=1/100, |C0(p)|<5 and |C0'(p)|<60",
+    "collar_map": "For L>=50 and |z-x|<=1/L, the fixed-N map p_N(z)=1-2*(sqrt((z/2+pi*t/8)/(2*pi))-N) stays in this strip"
+  },
+  "interval": {
+    "precision_bits": 256,
+    "domain": "|Re(p)|<=101/100, |Im(p)|<=1/100",
+    "removable_centers": [
+      "-1/2",
+      "1/2"
+    ],
+    "near_outer_radius": "1/4",
+    "near_inner_radius": "3/20",
+    "near_numerator_ball": "[3.326939835774423430690659078432820102823375035559527541860310199573320 +/- 7.37e-71]",
+    "near_denominator_lower": "sqrt(2)",
+    "near_C0_ball": "[2.352501718475753584400918937474195990201736726366240237577739760870626 +/- 2.24e-71]",
+    "near_C0_lt": "3",
+    "near_C0_prime_ball": "[23.52501718475753584400918937474195990201736726366240237577739760870626 +/- 2.24e-70]",
+    "near_C0_prime_lt": "30",
+    "outside_numerator_ball": "[2.446626889343493387604259059268565651184516103412763108876849788218726 +/- 2.93e-70]",
+    "outside_numerator_prime_ball": "[5.497178801883449139152187520752974461748872160516002732340050172434717 +/- 4.54e-70]",
+    "outside_denominator_lower_ball": "[0.6180339887498948482045868343656381177203091798057628621354486227052605 +/- 3.72e-71]",
+    "outside_denominator_prime_ball": "[6.286286189872410297952087279722710320117773771292463577479823889245704 +/- 3.00e-70]",
+    "outside_C0_ball": "[3.958725464747200207594448495304580276282063847079090508337807373303300 +/- 1.73e-70]",
+    "outside_C0_lt": "5",
+    "outside_C0_prime_ball": "[49.16050018846990534165820020182535524760359511470658899392748619238243 +/- 2.82e-69]",
+    "outside_C0_prime_lt": "60",
+    "global_bound": "|C0(p)|<5 and |C0'(p)|<60",
+    "L_min": "50",
+    "critical_collar_p_displacement_ball": "[2.777588772992804118932352749217371382079952076041011116709559992176274e-14 +/- 3.73e-84]",
+    "critical_collar_p_displacement_lt": "1/100"
+  },
+  "rows": [
+    {
+      "id": "np15c0sc_01_definition",
+      "role": "exact_definition",
+      "readiness": "ready_to_apply",
+      "claim": "The endpoint factor is meromorphic only in appearance at the two half-integers.",
+      "formula": "C0(p)=(exp(pi*i*(p^2/2+3/8))-i*sqrt(2)*cos(pi*p/2))/(2*cos(pi*p)); The numerator vanishes at p=+-1/2, so both apparent poles are removable",
+      "proof_boundary": "Principal exponential and trigonometric functions.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15c0sc_02_near_denominator",
+      "role": "analytic_bound",
+      "readiness": "ready_to_apply",
+      "claim": "A fixed outer circle around each removable point has a uniform denominator lower bound.",
+      "formula": "For z=p0+w, |w|=1/4 and p0=+-1/2, |2*cos(pi*z)|=2*|sin(pi*w)|>=sqrt(2); sin(pi*|Re w|)>=2*sqrt(2)*|Re w| and sinh(pi*|Im w|)>=2*sqrt(2)*|Im w|",
+      "proof_boundary": "Exact elementary trigonometric and hyperbolic inequalities.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15c0sc_03_near_C0",
+      "role": "interval_certificate",
+      "readiness": "certified",
+      "claim": "Arb bounds C0 on both removable-point outer circles.",
+      "formula": "|C0|<3 on |p-(+-1/2)|=1/4",
+      "proof_boundary": "Uses the analytic numerator bound and denominator lower bound.",
+      "diagnostics": {
+        "numerator": "[3.326939835774423430690659078432820102823375035559527541860310199573320 +/- 7.37e-71]",
+        "C0": "[2.352501718475753584400918937474195990201736726366240237577739760870626 +/- 2.24e-71]"
+      }
+    },
+    {
+      "id": "np15c0sc_04_near_derivative",
+      "role": "cauchy_certificate",
+      "readiness": "certified",
+      "claim": "Cauchy's estimate controls C0' through neighborhoods of both removable points.",
+      "formula": "A boundary bound |C0|<3 on radius 1/4 gives |C0'|<30 on radius 3/20",
+      "proof_boundary": "Inner radius 3/20, outer radius 1/4.",
+      "diagnostics": {
+        "C0_prime": "[23.52501718475753584400918937474195990201736726366240237577739760870626 +/- 2.24e-70]"
+      }
+    },
+    {
+      "id": "np15c0sc_05_outside_denominator",
+      "role": "analytic_bound",
+      "readiness": "ready_to_apply",
+      "claim": "Away from the removable disks the denominator is uniformly separated from zero.",
+      "formula": "Outside the two radius-3/20 disks, the strip width 1/100 forces dist(Re p, Z+1/2)>1/10 and |2*cos(pi*p)|>=2*sin(pi/10)",
+      "proof_boundary": "Covers the padded strip outside both inner disks.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15c0sc_06_outside_quotient",
+      "role": "interval_certificate",
+      "readiness": "certified",
+      "claim": "Direct quotient differentiation bounds C0 and C0' on the outside region.",
+      "formula": "|C0|<5 and |C0'|<60",
+      "proof_boundary": "Arb evaluates conservative elementary numerator and denominator budgets.",
+      "diagnostics": {
+        "C0": "[3.958725464747200207594448495304580276282063847079090508337807373303300 +/- 1.73e-70]",
+        "C0_prime": "[49.16050018846990534165820020182535524760359511470658899392748619238243 +/- 2.82e-69]"
+      }
+    },
+    {
+      "id": "np15c0sc_07_global_strip",
+      "role": "proved_bound",
+      "readiness": "ready_to_apply",
+      "claim": "The near and outside covers give one rigorous complex-strip bound.",
+      "formula": "On |Re p|<=101/100 and |Im p|<=1/100, |C0(p)|<5 and |C0'(p)|<60",
+      "proof_boundary": "Closed padded strip only.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15c0sc_08_collar_map",
+      "role": "analytic_transfer",
+      "readiness": "ready_to_apply",
+      "claim": "Every radius-1/L critical collar with L at least 50 maps into the certified p-strip.",
+      "formula": "For L>=50 and |z-x|<=1/L, the fixed-N map p_N(z)=1-2*(sqrt((z/2+pi*t/8)/(2*pi))-N) stays in this strip",
+      "proof_boundary": "Fixed N and principal square-root branch.",
+      "diagnostics": {
+        "p_displacement": "[2.777588772992804118932352749217371382079952076041011116709559992176274e-14 +/- 3.73e-84]",
+        "bound": "1/100"
+      }
+    },
+    {
+      "id": "np15c0sc_09_lift_handoff",
+      "role": "closure_record",
+      "readiness": "closed",
+      "claim": "The derivative input left open by the endpoint holomorphic-lift artifact is now explicit.",
+      "formula": "complex-strip |C0|<5, |C0'|<60",
+      "proof_boundary": "Closes the local C0 bound, not the corrected first-jet lower bound.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15c0sc_10_nonpromotion",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "A correction-factor derivative bound does not imply Newman transversality.",
+      "formula": "C0 strip control != T_L[J] lower bound",
+      "proof_boundary": "Not Lambda<=0 or RH.",
+      "diagnostics": null
+    }
+  ],
+  "sources": [
+    "outputs/jensen_window_pf_newman_polymath15_endpoint_holomorphic_lift.md",
+    "https://arxiv.org/abs/1904.12438"
+  ]
+}

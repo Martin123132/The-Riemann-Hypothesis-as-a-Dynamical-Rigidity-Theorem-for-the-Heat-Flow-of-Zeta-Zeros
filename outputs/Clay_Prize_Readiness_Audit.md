@@ -1,6 +1,6 @@
 # Clay Prize Readiness Audit
 
-Date: 2026-07-03
+Date: 2026-07-16
 
 Status: readiness audit. This is not a proof of RH or `Lambda <= 0`; it separates the current programme from a Clay-ready argument.
 
@@ -223,6 +223,132 @@ s = 0..24
 
 This improves the evidence quality but does not change the Clay-readiness conclusion: the missing ingredient is still a theorem turning finite or all-order signed-Hankel/sign-regularity into Jensen hyperbolicity, Laguerre-Polya membership, or `Lambda <= 0`.
 
+2026-07-16 update:
+
+The fixed-order signed-Hankel programme is now rigorous through order nine on
+the complete heat segment:
+
+```text
+epsilon_m H_(m,n)(lambda)>0
+for every 1<=m<=9, n>=0, and -100<=lambda<=0,
+```
+
+including the consecutive-row arbitrary-column transfer at each of those
+orders. The order-nine endpoint proof combines a rigorous prefix, a global
+continuous sixth-nested first-summand curvature theorem, an exact
+complete-to-first-summand transfer, and a two-index finite splice.
+
+More importantly, the repeated heat-flow step has been proved once at
+arbitrary order. The all-fixed-order eventual tails, affine determinant heat
+identity, and flag-Plucker recursion give the exact reduction
+
+```text
+[Q_(m,n)(-100)>0 for every m>=10,n>=0]
+iff
+[Q_(m,n)(lambda)>0 for every m>=10,n>=0
+ and -100<=lambda<=0].
+```
+
+The thresholds in the eventual-tail theorem may depend on `m`; ordinary
+induction fixes one order, uses its own threshold, completes that layer, and
+then moves upward. Thus a common tail threshold uniform in order is not a
+necessary part of the dynamical argument.
+
+This is a real narrowing of the conditional dynamical argument, but the
+endpoint antecedent has now been tested at its first previously open order
+and found false. Rigorous `4096`-bit Arb determinant evaluations give
+
+```text
+Q_(10,n)(-100)<0 for n=0,1,2,3,
+Q_(10,4)(-100)>0.
+```
+
+Direct Hankel, Jacobi-Trudi, and Toda computations agree, and all relevant
+Arb balls are sign-separated. Therefore the proposed all-order
+signed-Hankel endpoint hierarchy is not an unproved obligation: it is a
+rejected antecedent. The endpoint-to-heat equivalence remains a valid
+conditional theorem, and all fixed-order results through order nine remain
+valid.
+
+The static endpoint obligation now has an exact normalized Schur coordinate.
+For
+
+```text
+h_k=A_k(-100)/A_0(-100),
+```
+
+column reversal and Jacobi-Trudi prove
+
+```text
+Q_(m,n)(-100)=A_0(-100)^m s_((n+m-1)^m)(h).
+```
+
+Arbitrary columns correspond bijectively to partitions
+`lambda_1>=...>=lambda_m>=m-1`. Consequently the rejected endpoint
+antecedent is equivalent, using the completed lower base and fixed-order
+initial-minor transfer, to
+
+```text
+s_((N^m))(h)>0 for every m>=10 and N>=m-1,
+```
+
+or to positivity on the entire associated deep partition cone. At order ten,
+the required rectangles `(9^10),(10^10),(11^10),(12^10)` are all strictly
+negative; `(13^10)` is positive. A certified finite scan finds positivity for
+every shift `4<=n<=1240`, but four failures are enough to refute the
+all-shift statement.
+
+This is not an ordinary PF-infinity problem. Rigorous endpoint coefficient
+enclosures prove
+
+```text
+s_(1,1,1)(h)<0,
+```
+
+so the actual endpoint sequence is not even `PF_3`. That earlier failed shape
+lies outside the deep cone at order three and rules out the stronger Edrei/PF
+shortcut; the new order-ten failures lie inside the deep cone and reject the
+rectangle hierarchy itself. The Clay-readiness verdict remains negative,
+but the reason is sharper: this route cannot be completed by proving its
+former endpoint obligation because that obligation is false.
+
+The newest exact gate narrows both obligations further. For
+`tau_(m,N)=s_((N^m))(h)`, Desnanot-Jacobi gives
+
+```text
+tau_(m+1,N) tau_(m-1,N)
+ =tau_(m,N)^2-tau_(m,N-1) tau_(m,N+1).
+```
+
+Once the lower row is positive, the next rectangle is therefore equivalent
+to strict width-log-concavity of the current row. This is a useful Toda
+coordinate, but not a propagation theorem: the decisive right-hand side is a
+difference of positive terms. At the first previously open step it is
+strictly negative for four admissible widths.
+
+Two plausible promotions are now excluded exactly. First, resetting negative
+indices in the ordinary shifted tail changes shallow Jacobi-Trudi
+determinants; at `r=2,s=1,mu=(0,0)` the defect is
+`h_0 h_2/h_1^2>0`. Deep positivity therefore does not imply moving-tail PF by
+that translation. Second,
+
+```text
+H(z)=exp(z/100)/((1-z)(1-2z))
+```
+
+is strictly Schur-positive for every partition but has a cubic Jensen
+polynomial with exact negative discriminant. Thus even strict full
+unweighted Schur/PF positivity cannot serve as a generic Jensen bridge. Any
+successful conversion must exploit additional structure specific to the
+actual Xi/Phi coefficient sequence. Together with the direct order-ten
+failure, these are route eliminations, not negative evidence against RH or
+Jensen hyperbolicity itself.
+
+The remaining live research burden is therefore to find a weaker
+Xi/Phi-specific Jensen mechanism, a different determinant/kernel condition,
+or a direct Newman-flow comparison theorem that does not assume all-shift
+signed-Hankel positivity. No such closing theorem is currently proved.
+
 ### Target D: Xi-Specific Tail/Comparison Principle
 
 For actual de Bruijn-Newman zeros, prove a comparison theorem for neighboring gaps that rules out square-root birth at positive lambda. It cannot be a merely local `4/g` argument; it must use global Xi structure.
@@ -243,7 +369,8 @@ The main theorem should be local/conditional. The central open problem should be
 ```text
 Open bridge problem:
 Exclude a positive de Bruijn-Newman square-root birth by proving a global
-Xi-specific sign-regularity, total-positivity, or tail-comparison theorem.
+Xi-specific Jensen-window, determinant/kernel, or tail-comparison theorem
+whose hypotheses are weaker than the rejected all-shift signed-Hankel cone.
 ```
 
 That version would be honest, technically sharper, and far more useful to a serious reader.

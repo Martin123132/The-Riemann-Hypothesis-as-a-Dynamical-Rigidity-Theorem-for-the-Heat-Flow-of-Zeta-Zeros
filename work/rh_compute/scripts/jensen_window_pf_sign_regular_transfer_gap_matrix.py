@@ -67,16 +67,17 @@ def build_matrix(bridge_json: Path, obligation_json: Path) -> dict:
             "proof_boundary": "Countermodel gate only; not an all-minor theorem.",
         },
         {
-            "id": "srgt_05_all_order_antecedent_requirement",
+            "id": "srgt_05_weaker_xi_phi_antecedent_requirement",
             "role": "open_requirement",
             "readiness": "not_ready_to_apply",
             "source_artifacts": [
                 "outputs/signed_hankel_jensen_bridge_target.md",
                 "outputs/jensen_window_pf_bridge_obligations.md",
+                "outputs/jensen_window_pf_endpoint_order10_counterexample.md",
             ],
-            "claim": "The signed-Hankel side must be an all-order, all-shift reshaped-Hankel sign-consistency theorem, not a finite staircase.",
-            "acceptance_test": "State the exact all-order minor family and prove it for the actual A_k(0).",
-            "proof_boundary": "Open antecedent requirement only; current Arb certificates are finite.",
+            "claim": "The bridge needs a weaker Xi/Phi-specific antecedent that is actually satisfied despite the negative order-ten signed-Hankel endpoint minors.",
+            "acceptance_test": "State an exact kernel, determinant, or variation-diminishing condition and prove it for the actual A_k(0) without all-shift signed-Hankel positivity.",
+            "proof_boundary": "Open replacement antecedent only; the former all-order signed-Hankel requirement is rejected.",
         },
         {
             "id": "srgt_06_xi_phi_specific_transfer_requirement",
@@ -120,7 +121,7 @@ def build_matrix(bridge_json: Path, obligation_json: Path) -> dict:
                 "outputs/sign_regularity_theorem_fit_matrix.md",
             ],
             "claim": "Finite grids, degree-2 analogy, selected minors, endpoint PF/LP assumptions, and asymptotic Jensen statements are forbidden as bridge replacements.",
-            "acceptance_test": "Reject any proposed proof step that avoids the all-order transfer theorem with one of these shortcuts.",
+            "acceptance_test": "Reject any proposed proof step that avoids an all-degree/all-shift Xi/Phi theorem with one of these shortcuts.",
             "proof_boundary": "Rejected proof templates only.",
         },
     ]
@@ -135,14 +136,14 @@ def build_matrix(bridge_json: Path, obligation_json: Path) -> dict:
             "The signed-Hankel/Jensen bridge is exact only at degree 2. The "
             "degree-3/4 countermodel gates show that finite reshaped-Hankel signs "
             "and selected low-order Toeplitz positivity do not imply Jensen-window "
-            "PF-infinity; a proof needs all-order sign consistency plus a genuine "
-            "Xi/Phi-specific sign-regular-to-Toeplitz transfer theorem with binomial "
-            "and shift uniformity."
+            "PF-infinity. The all-order signed-Hankel antecedent is itself false at "
+            "order ten, so a proof needs a weaker Xi/Phi-specific kernel, determinant, "
+            "or direct Jensen theorem with binomial and shift uniformity."
         ),
     }
     return {
         "kind": "jensen_window_pf_sign_regular_transfer_gap_matrix",
-        "date": "2026-07-06",
+        "date": "2026-07-16",
         "status": "finite_theorem_search_diagnostic",
         "source_jensen_hankel_bridge_algebra": "outputs/jensen_hankel_bridge_algebra.md",
         "source_jensen_window_pf_obligation_algebra": "outputs/jensen_window_pf_obligation_algebra.md",
@@ -175,7 +176,7 @@ def build_matrix(bridge_json: Path, obligation_json: Path) -> dict:
         "invariants": [
             "No row is ready_to_apply.",
             "Degree-2 contact is not promoted to all-degree transfer.",
-            "Finite reshaped-Hankel signs are not promoted to all-order sign consistency.",
+            "The rejected all-order signed-Hankel antecedent is not used as a bridge hypothesis.",
             "Selected low-order Toeplitz minors are not promoted to Jensen-window PF-infinity.",
             "Endpoint PF, Jensen hyperbolicity, Laguerre-Polya membership, RH, and Lambda <= 0 are forbidden as inputs.",
         ],
@@ -196,7 +197,7 @@ def write_note(matrix: dict, path: Path) -> None:
     lines = [
         "# Jensen-Window PF Sign-Regular Transfer Gap Matrix",
         "",
-        "Date: 2026-07-06",
+        "Date: 2026-07-16",
         "",
         "Status: finite theorem-search diagnostic. This is not a proof of",
         "Jensen-window PF-infinity, Jensen hyperbolicity, Laguerre-Polya",
@@ -205,7 +206,7 @@ def write_note(matrix: dict, path: Path) -> None:
         "Artifact kind: `jensen_window_pf_sign_regular_transfer_gap_matrix`.",
         "",
         "Proof boundary: this artifact combines exact low-degree algebra and",
-        "finite countermodel gates. It does not prove the missing sign-regular",
+        "finite countermodel gates. It does not prove the missing weaker Xi/Phi",
         "to Jensen-window PF transfer theorem.",
         "",
         "Machine-readable artifact:",
@@ -266,7 +267,7 @@ def write_note(matrix: dict, path: Path) -> None:
         "A usable theorem must supply all of:",
         "",
         "```text",
-        "1. all-order, all-shift reshaped-Hankel sign consistency for the actual A_k(0)",
+        "1. a weaker Xi/Phi-specific antecedent satisfied despite the negative order-ten endpoint minors",
         "2. noncircular Xi/Phi-specific structure absent from arbitrary positive sequences",
         "3. binomial-weight and shift uniformity for every Jensen-window Toeplitz minor",
         "4. no endpoint PF, Jensen hyperbolicity, Laguerre-Polya, RH, or Lambda <= 0 assumptions",

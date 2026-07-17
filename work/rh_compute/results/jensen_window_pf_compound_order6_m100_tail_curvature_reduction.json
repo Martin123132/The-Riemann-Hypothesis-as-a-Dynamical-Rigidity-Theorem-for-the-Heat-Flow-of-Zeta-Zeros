@@ -1,0 +1,128 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order6_m100_tail_curvature_reduction.py",
+  "date": "2026-07-13",
+  "exact": {
+    "canonical_factorization": "H_(5,n)=A_(n+4)^5*exp(p(n+4))",
+    "cleared_polynomial": "251*k**2 - 32000*k - 16000",
+    "curvature_identity": "D_n=log(H_(5,n)*H_(5,n+2)/H_(5,n+1)^2)=5*log(x_k)+P_k, P_k=p(k-1)-2*p(k)+p(k+1), k=n+5",
+    "log_buffer": "-5*log(x_k)>=5*d_k>=251/(50*(2*k+1)), k>=320",
+    "lower_coordinates": "x=exp(-B), d=1-x, g=d^2-x^2*d(t-1)*d(t+1), h=log(g)",
+    "order5_coordinate": "f=g^2-x^3*g(t-1)*g(t+1), q=log(f/d)",
+    "order6_coordinate": "p(t)=2*q(t)-h(t)+log(1-exp(-S(t)))",
+    "prefactor_identity": "A_n^5*rho_n^20*x_(n+1)^15*x_(n+2)^10*x_(n+3)^5=A_(n+4)^5",
+    "prefactor_residual": "0",
+    "rational_comparison": "320/k^2<251/(50*(2*k+1)), k>=322",
+    "shifted_coefficients": [
+      "251",
+      "129644",
+      "15704684"
+    ],
+    "shifted_polynomial_k_322_plus_m": "251*m**2 + 129644*m + 15704684",
+    "sign_equivalence": "Q_(6,n)>0 iff K_n>0 iff D_n<0",
+    "stable_factor_residual": "0",
+    "stable_margin": "K_n=exp(-D_n)-1",
+    "sufficient_ceiling": "P_k<=320/k^2 for every real/integer k>=322",
+    "tail_index": "k=n+5, so n>=317 iff k>=322",
+    "third_gap": "S(t)=4*B(t)-q(t-1)+2*q(t)-q(t+1)"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order6_m100_tail_curvature_reduction.py",
+  "kind": "jensen_window_pf_compound_order6_m100_tail_curvature_reduction",
+  "proof_boundary": "This artifact proves the canonical H5 normalization, sign reduction, and tail arithmetic. It does not prove the 320/k^2 curvature ceiling, order-six entry, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The rigorous endpoint prefix reaches the last index before the analytic splice.",
+      "diagnostics": null,
+      "formula": "Q_(6,n)(-100)>0 for every 0<=n<=316",
+      "id": "co6m100tcr_01_prefix",
+      "proof_boundary": "Finite Arb prefix only.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The entire order-five coefficient monomial collapses to a single shifted fifth power.",
+      "diagnostics": null,
+      "formula": "A_n^5*rho_n^20*x_(n+1)^15*x_(n+2)^10*x_(n+3)^5=A_(n+4)^5",
+      "id": "co6m100tcr_02_prefactor",
+      "proof_boundary": "Exact algebra only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "One additional stable logarithm gives a cancellation-free coordinate for H5.",
+      "diagnostics": null,
+      "formula": "S(t)=4*B(t)-q(t-1)+2*q(t)-q(t+1); p(t)=2*q(t)-h(t)+log(1-exp(-S(t))); H_(5,n)=A_(n+4)^5*exp(p(n+4))",
+      "id": "co6m100tcr_03_nested_coordinate",
+      "proof_boundary": "Exact lower-cone factorization only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Signed order six is equivalent to one centered curvature lying below the fifth defect buffer.",
+      "diagnostics": null,
+      "formula": "D_n=log(H_(5,n)*H_(5,n+2)/H_(5,n+1)^2)=5*log(x_k)+P_k, P_k=p(k-1)-2*p(k)+p(k+1), k=n+5; Q_(6,n)>0 iff K_n>0 iff D_n<0",
+      "id": "co6m100tcr_04_curvature",
+      "proof_boundary": "Exact logarithmic reduction only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The completed defect theorem supplies an inverse-linear endpoint buffer.",
+      "diagnostics": null,
+      "formula": "-5*log(x_k)>=5*d_k>=251/(50*(2*k+1)), k>=320",
+      "id": "co6m100tcr_05_defect",
+      "proof_boundary": "Previously proved lambda=-100 defect anchor.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The proposed inverse-square ceiling lies strictly inside the defect buffer on the whole tail.",
+      "diagnostics": {
+        "shifted_coefficients": [
+          "251",
+          "129644",
+          "15704684"
+        ]
+      },
+      "formula": "320/k^2<251/(50*(2*k+1)), k>=322",
+      "id": "co6m100tcr_06_arithmetic",
+      "proof_boundary": "Coefficient-positive rational comparison.",
+      "readiness": "ready_to_apply",
+      "role": "exact_inequality"
+    },
+    {
+      "claim": "The scalar curvature ceiling would close the complete order-six endpoint tail.",
+      "diagnostics": null,
+      "formula": "[P_k<=320/k^2 for k>=322] => [Q_(6,n)(-100)>0 for n>=317]",
+      "id": "co6m100tcr_07_conditional_tail",
+      "proof_boundary": "Conditional on the displayed scalar ceiling only.",
+      "readiness": "ready_to_apply",
+      "role": "conditional_theorem"
+    },
+    {
+      "claim": "Prove the third-nested stable curvature ceiling on the analytic tail.",
+      "diagnostics": null,
+      "formula": "P_k<=320/k^2 for every real/integer k>=322",
+      "id": "co6m100tcr_08_open_curvature",
+      "proof_boundary": "This scalar analytic ceiling is not proved here.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "sources": {
+    "defect_anchor": "d_k>=251/(250*(2*k+1)), k>=320",
+    "prefix": "Q_(6,n)(-100)>0 for every 0<=n<=316",
+    "prefix_minimum_lower": "7.80960782881022083463484620439881399269827010621568534633766E-3",
+    "prefix_minimum_n": 316,
+    "uniform_tail_status": "exact uniform eventual signed order-six tail and conditional forward reduction with one open lambda=-100 entry"
+  },
+  "status": "exact order-six endpoint-tail reduction with one open nested curvature ceiling",
+  "summary": {
+    "coefficient_positive_comparisons": 1,
+    "conditional_tail_theorems": 1,
+    "exact_curvature_reductions": 1,
+    "exact_factorizations": 2,
+    "open_curvature_targets": 1,
+    "ready_to_apply_rows": 7,
+    "rows": 8
+  }
+}

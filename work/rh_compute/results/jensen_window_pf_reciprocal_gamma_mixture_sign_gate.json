@@ -1,0 +1,279 @@
+{
+  "date": "2026-07-12",
+  "exact": {
+    "coefficient_split": {
+      "coefficients": "A_k(lambda)=gamma_k*m_k(lambda)",
+      "factor": "gamma_k=k!/(2k)!=sqrt(pi)/(4^k*Gamma(k+1/2))",
+      "matrix": "A_(n+i+j)=integral gamma_(n+i+j)*t^(n+i+j)*rho_lambda(dt)",
+      "moments": "m_k(lambda)=mu_(2k)(lambda)=integral_0^infinity t^k*rho_lambda(dt)"
+    },
+    "contiguous_determinant": {
+      "formula": "det[gamma_(i+j)]_(i,j=0..k-1)=(-1)^(k*(k-1)/2)*pi^(k/2)*4^(-k*(k-1))*prod_(r=1)^(k-1)r!/prod_(i=0)^(k-1)Gamma(k-1/2+i)",
+      "rows": [
+        {
+          "determinant": "1",
+          "expected_sign": "positive",
+          "size": 1
+        },
+        {
+          "determinant": "-1/6",
+          "expected_sign": "negative",
+          "size": 2
+        },
+        {
+          "determinant": "-1/18900",
+          "expected_sign": "negative",
+          "size": 3
+        },
+        {
+          "determinant": "1/82515510000",
+          "expected_sign": "positive",
+          "size": 4
+        },
+        {
+          "determinant": "1/1004569575956446500000",
+          "expected_sign": "positive",
+          "size": 5
+        },
+        {
+          "determinant": "-1/57561103092969640711114618050000000",
+          "expected_sign": "negative",
+          "size": 6
+        }
+      ],
+      "scaled_formula": "det[gamma_(i+j)*t^(i+j)]=t^(k*(k-1))*det[gamma_(i+j)]"
+    },
+    "higher_order_handoff": {
+      "first_compound_coordinate": "The subsequent order-three gate proves that the first contiguous compound sign is exactly C_n=q_(n+1)*q_(n+3)-q_(n+2)^2+1>0.",
+      "first_compound_guard": "A strict rational sequence satisfies the full ratio, adaptive-defect, and cubic Jensen cones while having C_n<0.",
+      "forbidden_promotion": "Karlin's fixed-scale sign regularity and the scalar CV_n bound do not imply mixture sign regularity in orders k>=3.",
+      "target": "Control the sign-changing row-wise compound integrand after Xi mixing for every k and column set, using a hierarchy of tilted concentration, a coupling that keeps row scales near the diagonal, or a new positive compound-kernel factorization."
+    },
+    "karlin_sign_regularity": {
+      "citation": "S. Karlin, Total positivity, absorption probabilities and applications, Trans. Amer. Math. Soc. 111 (1964), Lemma 9.2",
+      "scope": "This proves the complete fixed-scale antecedent, including arbitrary increasing row and column sets.",
+      "source": "https://doi.org/10.1090/S0002-9947-1964-0168010-2",
+      "specialization": "For every t>0 and n>=0, K_(n,t)(i,j)=gamma_(n+i+j)*t^(n+i+j) is strictly sign-regular of all orders with signature epsilon_k=(-1)^(k*(k-1)/2).",
+      "theorem": "For alpha>-nu, every (nu+1)-minor of [1/Gamma(alpha+i+j)]_(i,j>=0) has strict sign (-1)^(nu*(nu+1)/2)."
+    },
+    "order_two_integrand": {
+      "negative_witness": "D_sym(1,1)=-1/6",
+      "positive_witness": "D_sym(1,10)=41/24",
+      "raw": "D(t_0,t_1)=gamma_0*gamma_2*t_1^2-gamma_1^2*t_0*t_1",
+      "sign_region": "D_sym<=0 iff 3-2*sqrt(2)<=t_1/t_0<=3+2*sqrt(2)",
+      "symmetrized": "D_sym(t_0,t_1)=(t_0^2-6*t_0*t_1+t_1^2)/24"
+    },
+    "positive_mixture_countermodel": {
+      "coefficients": [
+        "12",
+        "31/20",
+        "1667/4000"
+      ],
+      "conclusion": "Positive mixing of strictly sign-regular fixed-scale reciprocal-gamma kernels is not closed even at order two, with all scales strictly positive.",
+      "expected": "The signed-Hankel order-two sign would require A_0*A_2-A_1^2<0.",
+      "measure": "rho=10*delta_(1/100)+delta_1+delta_2",
+      "minor": "A_0*A_2-A_1^2=5197/2000>0",
+      "moments": [
+        "12",
+        "31/10",
+        "5001/1000"
+      ]
+    },
+    "rowwise_mixture_integral": {
+      "boundary": "The scales are independent, so Karlin's common-scale sign theorem does not sign this integrand away from the diagonal t_0=...=t_(k-1).",
+      "derivation": "Expand the determinant by multilinearity in its rows and assign one independent scale variable to each row.",
+      "formula": "R_(k,n)(j_1,...,j_k)=integral_((0,infinity)^k) det[gamma_(n+i+j_l)*t_i^(n+i+j_l)]_(i=0..k-1,l=1..k) prod_(i=0)^(k-1)rho_lambda(dt_i)"
+    },
+    "tilted_concentration": {
+      "degree_two_equivalence": "A_(n+1)^2>=A_n*A_(n+2) iff m_(n+1)^2/(m_n*m_(n+2))>=(2*n+1)/(2*n+3) iff CV_n^2<=2/(2*n+1)",
+      "relative_variance": "CV_n^2=Var_(P_n)(T)/E_(P_n)(T)^2=m_n*m_(n+2)/m_(n+1)^2-1",
+      "scope": "This closes all shifted order-two signed-Hankel minors only.",
+      "tilt": "P_n(dt)=t^n*rho_lambda(dt)/m_n(lambda)",
+      "xi_input": "The lambda=-100 full ratio-cone entry plus infinite heat-flow invariance proves this tilted relative-variance bound for every n at lambda=0."
+    }
+  },
+  "kind": "jensen_window_pf_reciprocal_gamma_mixture_sign_gate",
+  "proof_boundary": "This artifact applies Karlin's published all-order sign-regularity theorem to the fixed-scale reciprocal-gamma kernel, proves the exact row-wise determinant integral for positive Xi scale mixtures, and exhibits exact sign-changing integrands and a strictly-positive-scale mixture countermodel. It translates the established Xi order-two cone into a tilted relative-variance bound. It does not prove higher-order mixture sign regularity, the signed-Hankel/Jensen bridge, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The normalized Xi coefficients are positive scale mixtures of the reciprocal-gamma sequence.",
+      "diagnostics": {
+        "coefficients": "A_k(lambda)=gamma_k*m_k(lambda)",
+        "factor": "gamma_k=k!/(2k)!=sqrt(pi)/(4^k*Gamma(k+1/2))",
+        "matrix": "A_(n+i+j)=integral gamma_(n+i+j)*t^(n+i+j)*rho_lambda(dt)",
+        "moments": "m_k(lambda)=mu_(2k)(lambda)=integral_0^infinity t^k*rho_lambda(dt)"
+      },
+      "formula": "A_k(lambda)=gamma_k*m_k(lambda)",
+      "id": "rgmsg_01_coefficient_split",
+      "proof_boundary": "Exact moment normalization only.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Karlin's reciprocal-gamma kernel is strictly sign-regular in every order.",
+      "diagnostics": {
+        "citation": "S. Karlin, Total positivity, absorption probabilities and applications, Trans. Amer. Math. Soc. 111 (1964), Lemma 9.2",
+        "scope": "This proves the complete fixed-scale antecedent, including arbitrary increasing row and column sets.",
+        "source": "https://doi.org/10.1090/S0002-9947-1964-0168010-2",
+        "specialization": "For every t>0 and n>=0, K_(n,t)(i,j)=gamma_(n+i+j)*t^(n+i+j) is strictly sign-regular of all orders with signature epsilon_k=(-1)^(k*(k-1)/2).",
+        "theorem": "For alpha>-nu, every (nu+1)-minor of [1/Gamma(alpha+i+j)]_(i,j>=0) has strict sign (-1)^(nu*(nu+1)/2)."
+      },
+      "formula": "For alpha>-nu, every (nu+1)-minor of [1/Gamma(alpha+i+j)]_(i,j>=0) has strict sign (-1)^(nu*(nu+1)/2).",
+      "id": "rgmsg_02_karlin_theorem",
+      "proof_boundary": "Published fixed-kernel theorem; mixture closure is not part of the result.",
+      "readiness": "ready_to_apply",
+      "role": "published_theorem"
+    },
+    {
+      "claim": "Every positive fixed-scale Xi coefficient kernel has exactly the observed all-order signature.",
+      "diagnostics": null,
+      "formula": "For every t>0 and n>=0, K_(n,t)(i,j)=gamma_(n+i+j)*t^(n+i+j) is strictly sign-regular of all orders with signature epsilon_k=(-1)^(k*(k-1)/2).",
+      "id": "rgmsg_03_fixed_scale",
+      "proof_boundary": "One common scale only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "The contiguous reciprocal-gamma Hankel determinants have an explicit strict product formula.",
+      "diagnostics": {
+        "formula": "det[gamma_(i+j)]_(i,j=0..k-1)=(-1)^(k*(k-1)/2)*pi^(k/2)*4^(-k*(k-1))*prod_(r=1)^(k-1)r!/prod_(i=0)^(k-1)Gamma(k-1/2+i)",
+        "rows": [
+          {
+            "determinant": "1",
+            "expected_sign": "positive",
+            "size": 1
+          },
+          {
+            "determinant": "-1/6",
+            "expected_sign": "negative",
+            "size": 2
+          },
+          {
+            "determinant": "-1/18900",
+            "expected_sign": "negative",
+            "size": 3
+          },
+          {
+            "determinant": "1/82515510000",
+            "expected_sign": "positive",
+            "size": 4
+          },
+          {
+            "determinant": "1/1004569575956446500000",
+            "expected_sign": "positive",
+            "size": 5
+          },
+          {
+            "determinant": "-1/57561103092969640711114618050000000",
+            "expected_sign": "negative",
+            "size": 6
+          }
+        ],
+        "scaled_formula": "det[gamma_(i+j)*t^(i+j)]=t^(k*(k-1))*det[gamma_(i+j)]"
+      },
+      "formula": "det[gamma_(i+j)]_(i,j=0..k-1)=(-1)^(k*(k-1)/2)*pi^(k/2)*4^(-k*(k-1))*prod_(r=1)^(k-1)r!/prod_(i=0)^(k-1)Gamma(k-1/2+i)",
+      "id": "rgmsg_04_contiguous_formula",
+      "proof_boundary": "Exact fixed-scale benchmark, not a mixed-measure determinant.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Every shifted reshaped-Hankel minor has an exact independent-row scale integral.",
+      "diagnostics": {
+        "boundary": "The scales are independent, so Karlin's common-scale sign theorem does not sign this integrand away from the diagonal t_0=...=t_(k-1).",
+        "derivation": "Expand the determinant by multilinearity in its rows and assign one independent scale variable to each row.",
+        "formula": "R_(k,n)(j_1,...,j_k)=integral_((0,infinity)^k) det[gamma_(n+i+j_l)*t_i^(n+i+j_l)]_(i=0..k-1,l=1..k) prod_(i=0)^(k-1)rho_lambda(dt_i)"
+      },
+      "formula": "R_(k,n)(j_1,...,j_k)=integral_((0,infinity)^k) det[gamma_(n+i+j_l)*t_i^(n+i+j_l)]_(i=0..k-1,l=1..k) prod_(i=0)^(k-1)rho_lambda(dt_i)",
+      "id": "rgmsg_05_rowwise_integral",
+      "proof_boundary": "The exact integrand is signed; no positive determinant formula is claimed.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The natural symmetrized order-two determinant integrand changes sign away from the common-scale diagonal.",
+      "diagnostics": {
+        "negative_witness": "D_sym(1,1)=-1/6",
+        "positive_witness": "D_sym(1,10)=41/24",
+        "raw": "D(t_0,t_1)=gamma_0*gamma_2*t_1^2-gamma_1^2*t_0*t_1",
+        "sign_region": "D_sym<=0 iff 3-2*sqrt(2)<=t_1/t_0<=3+2*sqrt(2)",
+        "symmetrized": "D_sym(t_0,t_1)=(t_0^2-6*t_0*t_1+t_1^2)/24"
+      },
+      "formula": "D_sym(t_0,t_1)=(t_0^2-6*t_0*t_1+t_1^2)/24",
+      "id": "rgmsg_06_integrand_sign_change",
+      "proof_boundary": "Rejects pointwise positivity of the natural row-wise integral only.",
+      "readiness": "guard_validated",
+      "role": "exact_countermodel"
+    },
+    {
+      "claim": "A positive three-atom measure on strictly positive scales reverses the required order-two sign.",
+      "diagnostics": {
+        "coefficients": [
+          "12",
+          "31/20",
+          "1667/4000"
+        ],
+        "conclusion": "Positive mixing of strictly sign-regular fixed-scale reciprocal-gamma kernels is not closed even at order two, with all scales strictly positive.",
+        "expected": "The signed-Hankel order-two sign would require A_0*A_2-A_1^2<0.",
+        "measure": "rho=10*delta_(1/100)+delta_1+delta_2",
+        "minor": "A_0*A_2-A_1^2=5197/2000>0",
+        "moments": [
+          "12",
+          "31/10",
+          "5001/1000"
+        ]
+      },
+      "formula": "A_0*A_2-A_1^2=5197/2000>0",
+      "id": "rgmsg_07_mixture_countermodel",
+      "proof_boundary": "Abstract positive-mixture countermodel, not the Xi measure.",
+      "readiness": "guard_validated",
+      "role": "exact_countermodel"
+    },
+    {
+      "claim": "The complete shifted degree-two cone is exactly a shrinking relative-variance bound under moment tilting.",
+      "diagnostics": {
+        "degree_two_equivalence": "A_(n+1)^2>=A_n*A_(n+2) iff m_(n+1)^2/(m_n*m_(n+2))>=(2*n+1)/(2*n+3) iff CV_n^2<=2/(2*n+1)",
+        "relative_variance": "CV_n^2=Var_(P_n)(T)/E_(P_n)(T)^2=m_n*m_(n+2)/m_(n+1)^2-1",
+        "scope": "This closes all shifted order-two signed-Hankel minors only.",
+        "tilt": "P_n(dt)=t^n*rho_lambda(dt)/m_n(lambda)",
+        "xi_input": "The lambda=-100 full ratio-cone entry plus infinite heat-flow invariance proves this tilted relative-variance bound for every n at lambda=0."
+      },
+      "formula": "A_(n+1)^2>=A_n*A_(n+2) iff m_(n+1)^2/(m_n*m_(n+2))>=(2*n+1)/(2*n+3) iff CV_n^2<=2/(2*n+1)",
+      "id": "rgmsg_08_tilted_cv",
+      "proof_boundary": "Equivalent to order two only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_equivalence"
+    },
+    {
+      "claim": "The established ratio-cone entry and heat invariance supply the tilted relative-variance theorem for Xi at lambda zero.",
+      "diagnostics": null,
+      "formula": "The lambda=-100 full ratio-cone entry plus infinite heat-flow invariance proves this tilted relative-variance bound for every n at lambda=0.",
+      "id": "rgmsg_09_xi_order_two",
+      "proof_boundary": "All shifts at order two; no higher compound sign is inferred.",
+      "readiness": "ready_to_apply",
+      "role": "exact_composition"
+    },
+    {
+      "claim": "The remaining signed-Hankel antecedent is a higher-order concentration or positive compound-kernel theorem for the Xi mixing measure.",
+      "diagnostics": {
+        "first_compound_coordinate": "The subsequent order-three gate proves that the first contiguous compound sign is exactly C_n=q_(n+1)*q_(n+3)-q_(n+2)^2+1>0.",
+        "first_compound_guard": "A strict rational sequence satisfies the full ratio, adaptive-defect, and cubic Jensen cones while having C_n<0.",
+        "forbidden_promotion": "Karlin's fixed-scale sign regularity and the scalar CV_n bound do not imply mixture sign regularity in orders k>=3.",
+        "target": "Control the sign-changing row-wise compound integrand after Xi mixing for every k and column set, using a hierarchy of tilted concentration, a coupling that keeps row scales near the diagonal, or a new positive compound-kernel factorization."
+      },
+      "formula": "Control the sign-changing row-wise compound integrand after Xi mixing for every k and column set, using a hierarchy of tilted concentration, a coupling that keeps row scales near the diagonal, or a new positive compound-kernel factorization.",
+      "id": "rgmsg_10_higher_order_handoff",
+      "proof_boundary": "Open; not the signed-Hankel/Jensen bridge, RH, or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "sources": [
+    "outputs/jensen_window_pf_factorial_multiplier_split_audit.md",
+    "outputs/signed_hankel_jensen_bridge_target.md",
+    "outputs/jensen_window_pf_heat_flow_infinite_cone_invariance_certificate.md",
+    "outputs/formal_core.md",
+    "https://doi.org/10.1090/S0002-9947-1964-0168010-2"
+  ],
+  "status": "exact reciprocal-gamma sign regularity with positive-mixture obstruction"
+}

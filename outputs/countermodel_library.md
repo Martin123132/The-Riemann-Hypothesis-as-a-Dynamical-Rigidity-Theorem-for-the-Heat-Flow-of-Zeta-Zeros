@@ -753,7 +753,7 @@ validated output references: scanned 191 markdown files, 2523 path references, 0
 validated output artifact statuses: scanned 191 markdown files, 0 status issues
 validated proof-claim ledger: 149 claims, 0 issues, 14 open theorem targets
 validated signed-Hankel/Jensen dependency graph with 0 issues
-validated Jensen-window PF bridge obligations: 10 obligations, 0 issues, 3 open obligations
+validated Jensen-window PF bridge obligations: 11 obligations, 0 issues, 3 open obligations
 validated Jensen-window PF theorem machinery fit matrix: 7 rows, 0 issues, 0 ready-to-apply rows
 validated Jensen-window PF sign-regular transfer gap matrix: 9 transfer rows, 2 countermodel gates, 3 open requirements, 3 rejected shortcuts, 0 ready-to-apply rows, 0 issues
 validated Jensen-window PF factorial multiplier split audit: 5 exact rows, 315 raw degree-2 anti-hyperbolic rows, 315 normalized degree-2 positive rows, 0 ready-to-apply rows, 0 issues

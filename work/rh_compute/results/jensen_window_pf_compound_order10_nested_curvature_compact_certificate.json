@@ -1,0 +1,154 @@
+{
+  "block_cache": {
+    "all_rows_passed": true,
+    "path": "work/rh_compute/results/jensen_window_pf_compound_order10_nested_curvature_compact_blocks.jsonl",
+    "row_count": 18310,
+    "sha256": "0ecf8c271dfb043aecb35696517a43226e4fc60da25c8ab1a8f32d85c7e61b1e",
+    "source_contract_id": "2f04682277e919e21bbb55245ea9b1f6242f9228527f7e188fc70c38624d85ad"
+  },
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order10_nested_curvature_compact_certificate.py",
+  "date": "2026-07-16",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order10_nested_curvature_compact_certificate.py",
+  "kind": "jensen_window_pf_compound_order10_nested_curvature_compact_certificate",
+  "proof_boundary": "This certificate concerns the first Newman summand at lambda=-100. It does not yet transfer the theorem to the full Newman kernel and does not prove RH, the Jensen hierarchy, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "Exact H2-H24 unit tiles and rigorously propagated H0-H7 point jets cover every compact block collar.",
+      "diagnostics": {
+        "point_source": "step-eight exact H0-H23 jets plus H24 Taylor remainders",
+        "source_contract_id": "2f04682277e919e21bbb55245ea9b1f6242f9228527f7e188fc70c38624d85ad"
+      },
+      "formula": "H: 5692..38028; propagated points: 5692..38026; point order 7; block remainder order 8",
+      "id": "co10nccc_01_sources",
+      "proof_boundary": "First Newman summand at lambda=-100 only.",
+      "readiness": "ready_to_apply",
+      "role": "interval_input"
+    },
+    {
+      "claim": "A mixed exact partition covers the compact real-t interval without gaps or extrapolation.",
+      "diagnostics": {
+        "block_count": 18310,
+        "double_block_count": 14010,
+        "unit_block_count": 4300
+      },
+      "formula": "unit blocks on 5700..10000; width-two blocks on 10000..38020",
+      "id": "co10nccc_02_partition",
+      "proof_boundary": "The partition is specific to the localized seventh-layer certificate.",
+      "readiness": "ready_to_apply",
+      "role": "interval_partition"
+    },
+    {
+      "claim": "Every block uses the cancellation-preserving stable-log second-derivative inequality.",
+      "diagnostics": null,
+      "formula": "z''=2*w''-s''+phi(W)*W''-chi(W)*(W')^2 <=2*w''-s''+phi(W)*max(W'',0)",
+      "id": "co10nccc_03_formula",
+      "proof_boundary": "Drops only the nonpositive -chi(W)*(W')^2 term.",
+      "readiness": "ready_to_apply",
+      "role": "exact_inequality"
+    },
+    {
+      "claim": "Every compact block has positive W and lies strictly below the scaled-curvature cap.",
+      "diagnostics": {
+        "largest_block": [
+          "29994",
+          "29996"
+        ],
+        "largest_scaled_curvature_upper": "3.10527904794520576042110924623685242329682444671709504636403E+3",
+        "smallest_margin_lower": "2.39472095205479423957889075376314757670317555328290495363597E+3",
+        "theorem_margin_lower": "1094.720952054794239578890754",
+        "weakest_W_block": [
+          "38018",
+          "38020"
+        ],
+        "weakest_W_lower": "1.63273977810527135997728978132745155444550432524586757993867E-4"
+      },
+      "formula": "z_1''(t)<=4200/t^2 for every real 5700<=t<=38020",
+      "id": "co10nccc_04_blocks",
+      "proof_boundary": "Continuous real-t compact interval only.",
+      "readiness": "ready_to_apply",
+      "role": "interval_certificate"
+    },
+    {
+      "claim": "The compact endpoint reaches beyond the proved finite saddle ray start u=2.001.",
+      "diagnostics": {
+        "V_prime_2_001_upper": "3.80196621635193385678801171533426331770390296897595492274576E+4"
+      },
+      "formula": "V'(2.001)<38020",
+      "id": "co10nccc_05_transition",
+      "proof_boundary": "This is an overlap statement, not a full-half-line composition.",
+      "readiness": "ready_to_apply",
+      "role": "exact_overlap"
+    }
+  ],
+  "source_contract": {
+    "geometry": {
+      "compact_domain": [
+        "5700",
+        "38020"
+      ],
+      "curvature_cap": 5500,
+      "double_blocks": [
+        "10000",
+        "38020",
+        "2"
+      ],
+      "point_order": 7,
+      "remainder_order": 8,
+      "unit_blocks": [
+        "5700",
+        "10000",
+        "1"
+      ]
+    },
+    "id": "2f04682277e919e21bbb55245ea9b1f6242f9228527f7e188fc70c38624d85ad",
+    "precision_load_invariant": "set flint.ctx.prec=512 before parsing every serialized Arb interval",
+    "sources": [
+      {
+        "domain": "5692<=t<=38028",
+        "kind": "jensen_window_pf_compound_order10_compact_h2_h24_unit_cache",
+        "manifest_path": "work/rh_compute/results/jensen_window_pf_compound_order10_compact_h2_h24_unit_cache.json",
+        "manifest_sha256": "93ba37f85b8866f1706b1734e5f6139b1404fa504355d3dd13f936acf44eda64",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_compact_h2_h24_unit_tiles.jsonl",
+        "rows": 32336,
+        "sha256": "2040c13cdb9610602c25099962a69e7588662a10b0d7dbc627531dab853d35e2"
+      },
+      {
+        "domain": "5692<=t<=38026",
+        "kind": "jensen_window_pf_compound_order10_compact_propagated_point_h0_h7_cache",
+        "manifest_path": "work/rh_compute/results/jensen_window_pf_compound_order10_compact_propagated_point_h0_h7_cache.json",
+        "manifest_sha256": "eb306fa94a3433b94ceb89b8fdf5b1b636f602d15471065c4976fc06dddf6bb5",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_compact_propagated_point_h0_h7_integer_grid.jsonl",
+        "propagation_source_contract_id": "06465532fef3fce11d285a6fd7c828d9dd718843057546e56f1ce0cc239debc1",
+        "rows": 32335,
+        "sha256": "6bdf720643d82bffca56f518a78f68b9f4fcfd51699b0b1fbfb92e86a6c23a00"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order9_first_summand_curvature_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_first_summand_curvature_certificate.json",
+        "sha256": "aa9371bbe20ea323d7603709b46fa470836066bd6ada7869cc6db3a5f8fce05a",
+        "theorem": "w_1''(t)<=4200/t^2 for every real t>=1250"
+      },
+      {
+        "kind": "order10_localized_interval_core",
+        "path": "work/rh_compute/scripts/jensen_window_pf_compound_order10_localized_final_gap_interval_core.py",
+        "sha256": "18b7878f57ff963eadc90cfbc9dc27999839204b7b89d82f0b6ea4ebd676329c"
+      }
+    ]
+  },
+  "status": "rigorous order-ten first-summand curvature theorem on 5700<=t<=38020",
+  "summary": {
+    "blocks": 18310,
+    "compact_first_summand_theorems": 1,
+    "double_blocks": 14010,
+    "full_half_line_theorems": 0,
+    "full_kernel_theorems": 0,
+    "largest_scaled_curvature_upper": "3.10527904794520576042110924623685242329682444671709504636403E+3",
+    "rh_claims": 0,
+    "saddle_transition_upper": "3.80196621635193385678801171533426331770390296897595492274576E+4",
+    "smallest_curvature_margin_lower": "2.39472095205479423957889075376314757670317555328290495363597E+3",
+    "theorem_margin_lower": "1094.720952054794239578890754",
+    "unit_blocks": 4300,
+    "weakest_W_lower": "1.63273977810527135997728978132745155444550432524586757993867E-4"
+  },
+  "theorem": "z_1''(t)<=4200/t^2 for every real 5700<=t<=38020"
+}

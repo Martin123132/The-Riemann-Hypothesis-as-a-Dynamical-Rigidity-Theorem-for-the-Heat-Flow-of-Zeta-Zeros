@@ -1,0 +1,584 @@
+{
+  "boundary_reset_audit": {
+    "checks": 251,
+    "deep_translation_checks": 31,
+    "exact_fit_condition": "det[b_(mu_i-i+j)] = h_s^(-r)*s_(mu+(s^r))(h) only when mu_r>=r-1, so every tail Jacobi-Trudi index is nonnegative",
+    "order_two_witness": {
+      "defect": {
+        "denominator": "181202",
+        "numerator": "140601",
+        "text": "140601/181202"
+      },
+      "order": 2,
+      "partition": [
+        0,
+        0
+      ],
+      "shift": 1,
+      "symbolic_defect": "h_0*h_2/h_1^2",
+      "tail_schur": {
+        "denominator": "1",
+        "numerator": "1",
+        "text": "1"
+      },
+      "translated_deep_schur": {
+        "denominator": "181202",
+        "numerator": "40601",
+        "text": "40601/181202"
+      }
+    },
+    "shallow_checks": 220,
+    "shallow_mismatches": 220
+  },
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_deep_schur_toda_boundary_gate.py",
+  "date": "2026-07-16",
+  "exact": {
+    "boundary_defect": "s_(0,0)(b^(1))-h_1^(-2)*s_(1,1)(h)=h_0*h_2/h_1^2>0",
+    "bridge_target": "prove every binomially weighted Jensen window for the actual Xi/Phi sequence using hypotheses stronger than unweighted Schur positivity and weaker than all-shift signed-Hankel positivity",
+    "conditional_tail_translation": "det[b_(mu_i-i+j)] = h_s^(-r)*s_(mu+(s^r))(h) only when mu_r>=r-1, so every tail Jacobi-Trudi index is nonnegative",
+    "deep_failure": "s_((N^10))(h)<0 for N=9,10,11,12",
+    "generic_bridge_counterexample": "H(z)=exp(z/100)/((1-z)(1-2z)) is strictly Schur-positive, but J_(3,0)(x) has negative discriminant",
+    "next_order_criterion": "tau_(m+1,N)>0 iff tau_(m,N)^2>tau_(m,N-1)*tau_(m,N+1), assuming tau_(m-1,N)>0",
+    "ordinary_tail": "b_k^(s)=h_(s+k)/h_s for k>=0 and b_k^(s)=0 for k<0",
+    "rectangle_target": "s_((N^m))(h)>0 for every m>=10 and N>=m-1",
+    "rejected_rectangle_target": "s_((N^m))(h)>0 for every m>=10 and N>=m-1 is false",
+    "tau_coordinate": "tau_(m,N)=s_((N^m))(h)=Q_(m,N-m+1)(-100)/A_0(-100)^m",
+    "toda_identity": "tau_(m+1,N)*tau_(m-1,N)=tau_(m,N)^2-tau_(m,N-1)*tau_(m,N+1)"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_deep_schur_toda_boundary_gate.py",
+  "kind": "jensen_window_pf_deep_schur_toda_boundary_gate",
+  "primary_literature_audit": [
+    {
+      "classification": "formal_identity_support_only",
+      "does_not_supply": "the zeta endpoint rectangle signs",
+      "finding": "Schur log-concavity supports formal rectangular difference identities, but numerical positivity after specialization still needs the relevant Schur values to be positive.",
+      "id": "lam_postnikov_pylyavskyy_schur_log_concavity",
+      "url": "https://arxiv.org/abs/math/0502446"
+    },
+    {
+      "classification": "hypotheses_not_met",
+      "does_not_supply": "a conversion from deep endpoint minors to binomially weighted Jensen minors",
+      "finding": "Hadamard products of totally positive Toeplitz matrices are not closed in general; Wagner proves narrower sufficient classes.",
+      "id": "wagner_hadamard_products",
+      "url": "https://doi.org/10.1016/0022-247X(92)90261-B"
+    },
+    {
+      "classification": "restricted_shape_only",
+      "does_not_supply": "the open rectangles (N^m), which contain 3x2 blocks for m>=3,N>=2",
+      "finding": "The newer preprint leaves the general Hadamard Jacobi-Trudi conjecture open and proves a 3x2-avoiding ribbon-like case.",
+      "id": "angarone_kim_oh_soskin_dual_jacobi_trudi",
+      "url": "https://arxiv.org/abs/2511.08969"
+    },
+    {
+      "classification": "fixed_multiplier_family_support",
+      "does_not_supply": "closure under the Xi scale mixture or an endpoint-to-Jensen theorem",
+      "finding": "Reciprocal-Gamma arithmetic progressions provide genuine multiplier sequences and explain the fixed-scale model.",
+      "id": "craven_csordas_fox_wright",
+      "url": "https://doi.org/10.1016/j.jmaa.2005.03.058"
+    }
+  ],
+  "proof_boundary": "This artifact proves the rectangular Toda identity, rejects the ordinary shifted-tail PF shortcut, and gives an exact strictly Schur-positive sequence whose cubic Jensen polynomial is not hyperbolic. Rigorous order-ten data reject the proposed m>=10 endpoint hierarchy at four initial widths. This rejects that route, not the Xi/Phi Jensen bridge, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "Use the normalized endpoint specialization and exact rectangular deep-Schur map.",
+      "diagnostics": null,
+      "formula": "Q_(m,n)(-100)=A_0(-100)^m*s_((n+m-1)^m)(h)",
+      "id": "jwpfdstb_01_input_coordinate",
+      "proof_boundary": "Imports the exact coordinate and its separately certified order-ten failure.",
+      "readiness": "ready_to_apply",
+      "role": "source_contract"
+    },
+    {
+      "claim": "Rectangular endpoint Schur values form a two-index tau array.",
+      "diagnostics": null,
+      "formula": "tau_(m,N)=s_((N^m))(h)=Q_(m,N-m+1)(-100)/A_0(-100)^m",
+      "id": "jwpfdstb_02_tau_coordinate",
+      "proof_boundary": "A notation change only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_reindexing"
+    },
+    {
+      "claim": "Desnanot-Jacobi gives the rectangular discrete Toda relation.",
+      "diagnostics": {
+        "all_residuals_zero": true,
+        "checks": 4,
+        "orders": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "rows": [
+          {
+            "central_order": 1,
+            "residual": "0"
+          },
+          {
+            "central_order": 2,
+            "residual": "0"
+          },
+          {
+            "central_order": 3,
+            "residual": "0"
+          },
+          {
+            "central_order": 4,
+            "residual": "0"
+          }
+        ],
+        "scope": "Finite symbolic specializations audit the index and sign convention; arbitrary-order validity is Desnanot-Jacobi."
+      },
+      "formula": "tau_(m+1,N)*tau_(m-1,N)=tau_(m,N)^2-tau_(m,N-1)*tau_(m,N+1)",
+      "id": "jwpfdstb_03_toda_identity",
+      "proof_boundary": "The right side is a difference, so the identity alone has no positivity direction.",
+      "readiness": "ready_to_apply",
+      "role": "exact_determinant_identity"
+    },
+    {
+      "claim": "The next rectangle order is exactly strict width-log-concavity of the current row; the first required row fails at four widths.",
+      "diagnostics": null,
+      "formula": "tau_(m+1,N)>0 iff tau_(m,N)^2>tau_(m,N-1)*tau_(m,N+1), assuming tau_(m-1,N)>0",
+      "id": "jwpfdstb_04_log_concavity_criterion",
+      "proof_boundary": "This restates rather than proves the next-order inequality.",
+      "readiness": "ready_to_apply",
+      "role": "exact_sign_equivalence"
+    },
+    {
+      "claim": "Ordinary subtraction-free cluster positivity cannot be read off from this signed Toda form.",
+      "diagnostics": null,
+      "formula": "positive square minus positive neighbor product has undetermined sign",
+      "id": "jwpfdstb_05_no_cluster_promotion",
+      "proof_boundary": "A different zeta-specific invariant could still control the difference.",
+      "readiness": "ready_to_apply",
+      "role": "route_rejection_guard"
+    },
+    {
+      "claim": "Resetting a shifted coefficient tail creates a genuine one-sided Schur specialization.",
+      "diagnostics": null,
+      "formula": "b_k^(s)=h_(s+k)/h_s for k>=0 and b_k^(s)=0 for k<0",
+      "id": "jwpfdstb_06_ordinary_tail",
+      "proof_boundary": "The reset changes negative-index entries and must be audited before any PF claim.",
+      "readiness": "ready_to_apply",
+      "role": "candidate_coordinate"
+    },
+    {
+      "claim": "Tail translation agrees with the shifted deep Schur determinant only when the tail shape is itself deep.",
+      "diagnostics": {
+        "checks": 251,
+        "deep_translation_checks": 31,
+        "exact_fit_condition": "det[b_(mu_i-i+j)] = h_s^(-r)*s_(mu+(s^r))(h) only when mu_r>=r-1, so every tail Jacobi-Trudi index is nonnegative",
+        "order_two_witness": {
+          "defect": {
+            "denominator": "181202",
+            "numerator": "140601",
+            "text": "140601/181202"
+          },
+          "order": 2,
+          "partition": [
+            0,
+            0
+          ],
+          "shift": 1,
+          "symbolic_defect": "h_0*h_2/h_1^2",
+          "tail_schur": {
+            "denominator": "1",
+            "numerator": "1",
+            "text": "1"
+          },
+          "translated_deep_schur": {
+            "denominator": "181202",
+            "numerator": "40601",
+            "text": "40601/181202"
+          }
+        },
+        "shallow_checks": 220,
+        "shallow_mismatches": 220
+      },
+      "formula": "det[b_(mu_i-i+j)] = h_s^(-r)*s_(mu+(s^r))(h) only when mu_r>=r-1, so every tail Jacobi-Trudi index is nonnegative",
+      "id": "jwpfdstb_07_conditional_translation",
+      "proof_boundary": "It does not extend positivity to shallow tail shapes.",
+      "readiness": "ready_to_apply",
+      "role": "exact_boundary_theorem"
+    },
+    {
+      "claim": "The smallest shallow tail shape already has a nonzero reset defect.",
+      "diagnostics": {
+        "defect": {
+          "denominator": "181202",
+          "numerator": "140601",
+          "text": "140601/181202"
+        },
+        "order": 2,
+        "partition": [
+          0,
+          0
+        ],
+        "shift": 1,
+        "symbolic_defect": "h_0*h_2/h_1^2",
+        "tail_schur": {
+          "denominator": "1",
+          "numerator": "1",
+          "text": "1"
+        },
+        "translated_deep_schur": {
+          "denominator": "181202",
+          "numerator": "40601",
+          "text": "40601/181202"
+        }
+      },
+      "formula": "s_(0,0)(b^(1))-h_1^(-2)*s_(1,1)(h)=h_0*h_2/h_1^2>0",
+      "id": "jwpfdstb_08_boundary_counterexample",
+      "proof_boundary": "This rejects the proposed moving-tail PF equivalence independently of the direct order-ten deep failures.",
+      "readiness": "ready_to_apply",
+      "role": "exact_counterexample"
+    },
+    {
+      "claim": "Littlewood-Richardson positivity cannot fill the missing tail boundary because its required straight tail Schurs are not translated deep Schurs.",
+      "diagnostics": null,
+      "formula": "moving-tail PF_m does not follow from the deep cone by zero-reset translation",
+      "id": "jwpfdstb_09_no_lr_tail_lift",
+      "proof_boundary": "A strip/interior Toeplitz theorem with the original boundary remains conceivable.",
+      "readiness": "ready_to_apply",
+      "role": "route_rejection_guard"
+    },
+    {
+      "claim": "An Edrei specialization with a positive exponential component is strictly Schur-positive for every partition.",
+      "diagnostics": null,
+      "formula": "exp(z/100)/((1-z)*(1-2*z))",
+      "id": "jwpfdstb_10_strict_schur_model",
+      "proof_boundary": "This is a generic proof-safety model, not the zeta endpoint sequence.",
+      "readiness": "ready_to_apply",
+      "role": "exact_countermodel_construction"
+    },
+    {
+      "claim": "The Plancherel summand proves strict positivity at every Schur shape in the countermodel.",
+      "diagnostics": {
+        "all_order_strictness_formula": "s_lambda[X+Pl_epsilon]>=s_lambda[Pl_epsilon]=f^lambda*epsilon^|lambda|/|lambda|!>0",
+        "all_values_at_least_plancherel_term": true,
+        "checks": 138,
+        "max_partition_size": 10,
+        "weakest_partition": [
+          1
+        ],
+        "weakest_ratio": {
+          "denominator": "1",
+          "numerator": "301",
+          "text": "301"
+        }
+      },
+      "formula": "s_lambda[X+Pl_epsilon]>=s_lambda[Pl_epsilon]=f^lambda*epsilon^|lambda|/|lambda|!>0",
+      "id": "jwpfdstb_11_all_shape_strictness",
+      "proof_boundary": "The bounded determinant audit checks implementation; the displayed formula is all-order.",
+      "readiness": "ready_to_apply",
+      "role": "exact_all_order_theorem"
+    },
+    {
+      "claim": "The same strictly Schur-positive sequence has a nonhyperbolic cubic Jensen polynomial.",
+      "diagnostics": {
+        "conclusion": "one real zero and one nonreal conjugate pair; the cubic Jensen polynomial is not hyperbolic",
+        "discriminant": {
+          "denominator": "2000000000000",
+          "numerator": "-222484532394597",
+          "text": "-222484532394597/2000000000000"
+        },
+        "edrei_parameters": {
+          "denominator_poles": [
+            "1",
+            "2"
+          ],
+          "exponential": "1/100",
+          "numerator_zeros": []
+        },
+        "epsilon": {
+          "denominator": "100",
+          "numerator": "1",
+          "text": "1/100"
+        },
+        "generating_function": "exp(z/100)/((1-z)*(1-2*z))",
+        "h_0_to_h_3": [
+          {
+            "denominator": "1",
+            "numerator": "1",
+            "text": "1"
+          },
+          {
+            "denominator": "100",
+            "numerator": "301",
+            "text": "301/100"
+          },
+          {
+            "denominator": "20000",
+            "numerator": "140601",
+            "text": "140601/20000"
+          },
+          {
+            "denominator": "6000000",
+            "numerator": "90420901",
+            "text": "90420901/6000000"
+          }
+        ],
+        "jensen_coefficients_ascending": [
+          {
+            "denominator": "1",
+            "numerator": "1",
+            "text": "1"
+          },
+          {
+            "denominator": "100",
+            "numerator": "903",
+            "text": "903/100"
+          },
+          {
+            "denominator": "20000",
+            "numerator": "421803",
+            "text": "421803/20000"
+          },
+          {
+            "denominator": "6000000",
+            "numerator": "90420901",
+            "text": "90420901/6000000"
+          }
+        ],
+        "jensen_degree": 3,
+        "jensen_shift": 0,
+        "primitive_polynomial": "6000000+54180000*x+126540900*x^2+90420901*x^3",
+        "primitive_polynomial_coefficients_ascending": [
+          6000000,
+          54180000,
+          126540900,
+          90420901
+        ],
+        "strict_schur_reason": "the Plancherel summand alone is strictly positive for every partition",
+        "strictly_negative_discriminant": true
+      },
+      "formula": "6000000+54180000*x+126540900*x^2+90420901*x^3; discriminant=-222484532394597/2000000000000",
+      "id": "jwpfdstb_12_jensen_failure",
+      "proof_boundary": "This proves unweighted Schur/PF positivity alone cannot be the Jensen bridge.",
+      "readiness": "ready_to_apply",
+      "role": "exact_counterexample"
+    },
+    {
+      "claim": "The audited Toda, Hadamard, Jacobi-Trudi, and multiplier results support formal pieces but do not supply the surviving Xi/Phi Jensen theorem.",
+      "diagnostics": {
+        "rows": [
+          {
+            "classification": "formal_identity_support_only",
+            "does_not_supply": "the zeta endpoint rectangle signs",
+            "finding": "Schur log-concavity supports formal rectangular difference identities, but numerical positivity after specialization still needs the relevant Schur values to be positive.",
+            "id": "lam_postnikov_pylyavskyy_schur_log_concavity",
+            "url": "https://arxiv.org/abs/math/0502446"
+          },
+          {
+            "classification": "hypotheses_not_met",
+            "does_not_supply": "a conversion from deep endpoint minors to binomially weighted Jensen minors",
+            "finding": "Hadamard products of totally positive Toeplitz matrices are not closed in general; Wagner proves narrower sufficient classes.",
+            "id": "wagner_hadamard_products",
+            "url": "https://doi.org/10.1016/0022-247X(92)90261-B"
+          },
+          {
+            "classification": "restricted_shape_only",
+            "does_not_supply": "the open rectangles (N^m), which contain 3x2 blocks for m>=3,N>=2",
+            "finding": "The newer preprint leaves the general Hadamard Jacobi-Trudi conjecture open and proves a 3x2-avoiding ribbon-like case.",
+            "id": "angarone_kim_oh_soskin_dual_jacobi_trudi",
+            "url": "https://arxiv.org/abs/2511.08969"
+          },
+          {
+            "classification": "fixed_multiplier_family_support",
+            "does_not_supply": "closure under the Xi scale mixture or an endpoint-to-Jensen theorem",
+            "finding": "Reciprocal-Gamma arithmetic progressions provide genuine multiplier sequences and explain the fixed-scale model.",
+            "id": "craven_csordas_fox_wright",
+            "url": "https://doi.org/10.1016/j.jmaa.2005.03.058"
+          }
+        ]
+      },
+      "formula": "direct_closing_theorems_in_audited_set=0",
+      "id": "jwpfdstb_13_literature_fit",
+      "proof_boundary": "A bounded route audit, not an exhaustive literature claim.",
+      "readiness": "ready_to_apply",
+      "role": "primary_literature_gate"
+    },
+    {
+      "claim": "The zeta-specific endpoint rectangular hierarchy fails at its first uncompleted order.",
+      "diagnostics": null,
+      "formula": "s_((N^10))(h)<0 for N=9,10,11,12; s_((N^m))(h)>0 for every m>=10 and N>=m-1 is false",
+      "id": "jwpfdstb_14_rejected_rectangles",
+      "proof_boundary": "Rejects this all-order signed-Hankel route, not RH or Jensen hyperbolicity.",
+      "readiness": "rejected_by_counterexample",
+      "role": "countermodel_gate"
+    },
+    {
+      "claim": "Use Xi/Phi analytic structure weaker than the rejected signed/deep hierarchy to prove every Jensen-window hyperbolicity statement.",
+      "diagnostics": null,
+      "formula": "prove every binomially weighted Jensen window for the actual Xi/Phi sequence using hypotheses stronger than unweighted Schur positivity and weaker than all-shift signed-Hankel positivity",
+      "id": "jwpfdstb_15_xi_specific_bridge",
+      "proof_boundary": "The strict-Schur counterexample proves that a generic Schur/PF implication is false.",
+      "readiness": "separate_open_obligation",
+      "role": "separate_open_obligation"
+    }
+  ],
+  "source_contract": {
+    "deep_failure": "s_((N^10))(h)<0 for N=9,10,11,12",
+    "deep_support_boundary": "min_(i,j)(lambda_i-i+j)=lambda_m-m+1>=0 exactly on D_m",
+    "endpoint_heat_equivalence": "[Q_(m,n)(-100)>0 for every m>=10,n>=0] iff [Q_(m,n)(lambda)>0 for every m>=10,n>=0,-100<=lambda<=0]",
+    "negative_deep_rectangles": 4,
+    "rectangle_identity": "Q_(m,n)(-100)=A_0(-100)^m*s_((n+m-1)^m)(h)",
+    "rectangle_target": "s_((N^m))(h)>0 for every m>=10 and N>=m-1",
+    "rejected_rectangle_hierarchies": 1,
+    "rejected_rectangle_target": "s_((N^m))(h)>0 for every m>=10 and N>=m-1 is false"
+  },
+  "sources": [
+    {
+      "kind": "jensen_window_pf_endpoint_deep_schur_coordinate",
+      "path": "work/rh_compute/results/jensen_window_pf_endpoint_deep_schur_coordinate.json",
+      "sha256": "38779674a66ccdcb16b63a79863a31c49cdd428b04fb777fd78daa2e0e09b4d2",
+      "status": "exact normalized deep-Schur coordinate and rigorous endpoint PF separation, with the all-order rectangle hierarchy rejected at order ten"
+    },
+    {
+      "kind": "jensen_window_pf_all_order_endpoint_heat_reduction",
+      "path": "work/rh_compute/results/jensen_window_pf_all_order_endpoint_heat_reduction.json",
+      "sha256": "674c8640670fe067c701dff4e72ad9e6f0022c159830b6734d2432aec3bddd32",
+      "status": "exact all-order endpoint-to-heat equivalence with a completed base through order nine and the candidate endpoint hierarchy rejected by the order-ten counterexample"
+    }
+  ],
+  "status": "exact rectangular Toda coordinate, moving-tail zero-boundary obstruction, strict-Schur/Jensen separation, and rejected all-order endpoint hierarchy; the Xi/Phi Jensen bridge remains open",
+  "strict_schur_audit": {
+    "all_order_strictness_formula": "s_lambda[X+Pl_epsilon]>=s_lambda[Pl_epsilon]=f^lambda*epsilon^|lambda|/|lambda|!>0",
+    "all_values_at_least_plancherel_term": true,
+    "checks": 138,
+    "max_partition_size": 10,
+    "weakest_partition": [
+      1
+    ],
+    "weakest_ratio": {
+      "denominator": "1",
+      "numerator": "301",
+      "text": "301"
+    }
+  },
+  "strict_schur_jensen_counterexample": {
+    "conclusion": "one real zero and one nonreal conjugate pair; the cubic Jensen polynomial is not hyperbolic",
+    "discriminant": {
+      "denominator": "2000000000000",
+      "numerator": "-222484532394597",
+      "text": "-222484532394597/2000000000000"
+    },
+    "edrei_parameters": {
+      "denominator_poles": [
+        "1",
+        "2"
+      ],
+      "exponential": "1/100",
+      "numerator_zeros": []
+    },
+    "epsilon": {
+      "denominator": "100",
+      "numerator": "1",
+      "text": "1/100"
+    },
+    "generating_function": "exp(z/100)/((1-z)*(1-2*z))",
+    "h_0_to_h_3": [
+      {
+        "denominator": "1",
+        "numerator": "1",
+        "text": "1"
+      },
+      {
+        "denominator": "100",
+        "numerator": "301",
+        "text": "301/100"
+      },
+      {
+        "denominator": "20000",
+        "numerator": "140601",
+        "text": "140601/20000"
+      },
+      {
+        "denominator": "6000000",
+        "numerator": "90420901",
+        "text": "90420901/6000000"
+      }
+    ],
+    "jensen_coefficients_ascending": [
+      {
+        "denominator": "1",
+        "numerator": "1",
+        "text": "1"
+      },
+      {
+        "denominator": "100",
+        "numerator": "903",
+        "text": "903/100"
+      },
+      {
+        "denominator": "20000",
+        "numerator": "421803",
+        "text": "421803/20000"
+      },
+      {
+        "denominator": "6000000",
+        "numerator": "90420901",
+        "text": "90420901/6000000"
+      }
+    ],
+    "jensen_degree": 3,
+    "jensen_shift": 0,
+    "primitive_polynomial": "6000000+54180000*x+126540900*x^2+90420901*x^3",
+    "primitive_polynomial_coefficients_ascending": [
+      6000000,
+      54180000,
+      126540900,
+      90420901
+    ],
+    "strict_schur_reason": "the Plancherel summand alone is strictly positive for every partition",
+    "strictly_negative_discriminant": true
+  },
+  "summary": {
+    "boundary_translation_checks": 251,
+    "deep_translation_checks": 31,
+    "direct_literature_closing_theorems": 0,
+    "exact_strict_schur_jensen_counterexamples": 1,
+    "negative_deep_rectangles": 4,
+    "open_endpoint_rows": 0,
+    "open_rectangle_hierarchies": 0,
+    "ready_to_apply_rows": 13,
+    "rejected_endpoint_rows": 1,
+    "rejected_generic_schur_jensen_routes": 1,
+    "rejected_moving_tail_pf_routes": 1,
+    "rejected_rectangle_hierarchies": 1,
+    "rows": 15,
+    "separate_bridge_rows": 1,
+    "separate_xi_specific_bridges": 1,
+    "shallow_boundary_mismatches": 220,
+    "strict_schur_checks": 138,
+    "symbolic_toda_checks": 4
+  },
+  "symbolic_toda_audit": {
+    "all_residuals_zero": true,
+    "checks": 4,
+    "orders": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "rows": [
+      {
+        "central_order": 1,
+        "residual": "0"
+      },
+      {
+        "central_order": 2,
+        "residual": "0"
+      },
+      {
+        "central_order": 3,
+        "residual": "0"
+      },
+      {
+        "central_order": 4,
+        "residual": "0"
+      }
+    ],
+    "scope": "Finite symbolic specializations audit the index and sign convention; arbitrary-order validity is Desnanot-Jacobi."
+  }
+}

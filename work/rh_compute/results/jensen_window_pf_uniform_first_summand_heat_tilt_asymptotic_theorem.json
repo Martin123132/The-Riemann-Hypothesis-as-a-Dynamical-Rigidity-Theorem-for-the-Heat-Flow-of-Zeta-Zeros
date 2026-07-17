@@ -1,0 +1,344 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_uniform_first_summand_heat_tilt_asymptotic_theorem.py",
+  "date": "2026-07-13",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_uniform_first_summand_heat_tilt_asymptotic_theorem.py",
+  "kind": "jensen_window_pf_uniform_first_summand_heat_tilt_asymptotic_theorem",
+  "lambert_derivatives": {
+    "derivative_identity": "w'(k)=w/(k*(1+w))",
+    "finite_difference_identity": "Delta^m F(k)=integral_[0,1]^m F^(m)(k+s_1+...+s_m) ds",
+    "main_term_derivatives": "d^m/dk^m w(k)^2=O(w(k)/k^m), m=1,...,7",
+    "main_term_differences": "Delta^m w(k)^2=O(w(k)/k^m), m=1,...,7",
+    "rows": [
+      {
+        "derivative": "2*w**2/(k*(w + 1))",
+        "limit_w_to_infinity": "2",
+        "normalized_by_w_over_km": "2*w/(w + 1)",
+        "order": 1
+      },
+      {
+        "derivative": "-2*w**2*(w**2 + w - 1)/(k**2*(w + 1)**3)",
+        "limit_w_to_infinity": "-2",
+        "normalized_by_w_over_km": "-2*w*(w**2 + w - 1)/(w + 1)**3",
+        "order": 2
+      },
+      {
+        "derivative": "2*w**3*(2*w**3 + 5*w**2 - 6)/(k**3*(w + 1)**5)",
+        "limit_w_to_infinity": "4",
+        "normalized_by_w_over_km": "2*w**2*(2*w**3 + 5*w**2 - 6)/(w + 1)**5",
+        "order": 3
+      },
+      {
+        "derivative": "-2*w**4*(w + 2)*(6*w**3 + 13*w**2 - 2*w - 24)/(k**4*(w + 1)**7)",
+        "limit_w_to_infinity": "-12",
+        "normalized_by_w_over_km": "-2*w**3*(w + 2)*(6*w**3 + 13*w**2 - 2*w - 24)/(w + 1)**7",
+        "order": 4
+      },
+      {
+        "derivative": "2*w**5*(24*w**5 + 142*w**4 + 272*w**3 + 29*w**2 - 520*w - 500)/(k**5*(w + 1)**9)",
+        "limit_w_to_infinity": "48",
+        "normalized_by_w_over_km": "2*w**4*(24*w**5 + 142*w**4 + 272*w**3 + 29*w**2 - 520*w - 500)/(w + 1)**9",
+        "order": 5
+      },
+      {
+        "derivative": "-2*w**6*(120*w**6 + 926*w**5 + 2660*w**4 + 2569*w**3 - 3068*w**2 - 9318*w - 6480)/(k**6*(w + 1)**11)",
+        "limit_w_to_infinity": "-240",
+        "normalized_by_w_over_km": "-2*w**5*(120*w**6 + 926*w**5 + 2660*w**4 + 2569*w**3 - 3068*w**2 - 9318*w - 6480)/(w + 1)**11",
+        "order": 6
+      },
+      {
+        "derivative": "2*w**7*(720*w**7 + 6876*w**6 + 26352*w**5 + 45364*w**4 + 6918*w**3 - 109635*w**2 - 181832*w - 100842)/(k**7*(w + 1)**13)",
+        "limit_w_to_infinity": "1440",
+        "normalized_by_w_over_km": "2*w**6*(720*w**7 + 6876*w**6 + 26352*w**5 + 45364*w**4 + 6918*w**3 - 109635*w**2 - 181832*w - 100842)/(w + 1)**13",
+        "order": 7
+      }
+    ],
+    "uniformizer": "w(k)=W(2*k/pi)"
+  },
+  "proof_boundary": "This artifact proves the seven fixed-order first-summand heat-tilt finite-difference estimates uniformly for -100<=lambda<=0. It does not by itself prove the complete-kernel ratio expansion, uniform order-four positivity, forward order-four invariance, arbitrary-column order four, PF-infinity, RH, or Lambda<=0.",
+  "published_input": {
+    "coefficient_growth": "a_r(f;u)=O(u^(r*(1+2*lambda_suit)))",
+    "journal": "Research in the Mathematical Sciences 8 (2021), article 20",
+    "published_expansion": "I_alpha(f;n)=sqrt(2*pi)*u^(n+1)*f(exp(u))*exp(u-n/u)/sqrt((1+u)*n)*(1+sum_(r=1)^(R-1)a_r(f;u)/n^r+O(u^(R*(1+2*lambda_suit))/n^R)), u=W(n/alpha)",
+    "published_integral": "I_alpha(f;n)=integral_1^infinity (log t)^n*exp(-alpha*t)*f(t)dt",
+    "source": "Cormac O'Sullivan, Zeros of Jensen polynomials and asymptotics for the Riemann xi function",
+    "supporting_section": "Section 5, especially the Gaussian-log suitable multiplier example",
+    "theorem": "Theorem 5.2",
+    "url": "https://arxiv.org/abs/2007.13582",
+    "xi_section": "Section 7, first-summand reduction to I_(alpha,beta)(n)"
+  },
+  "rows": [
+    {
+      "claim": "The first Newman theta summand with heat penalty is exactly a two-term O'Sullivan integral with Gaussian-log multiplier.",
+      "diagnostics": null,
+      "formula": "M_k^(1)(T)=C_k*(2*pi^2*I_pi(t^(5/4)*f_T(t);2k)-3*pi*I_pi(t^(1/4)*f_T(t);2k))",
+      "id": "ufshta_01_integral_mapping",
+      "proof_boundary": "Exact change of variables t=exp(4u); first theta summand only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "O'Sullivan's suitable-multiplier theorem supplies an arbitrary-order saddle expansion for both first-summand integrals.",
+      "diagnostics": {
+        "coefficient_growth": "a_r(f;u)=O(u^(r*(1+2*lambda_suit)))",
+        "journal": "Research in the Mathematical Sciences 8 (2021), article 20",
+        "published_expansion": "I_alpha(f;n)=sqrt(2*pi)*u^(n+1)*f(exp(u))*exp(u-n/u)/sqrt((1+u)*n)*(1+sum_(r=1)^(R-1)a_r(f;u)/n^r+O(u^(R*(1+2*lambda_suit))/n^R)), u=W(n/alpha)",
+        "published_integral": "I_alpha(f;n)=integral_1^infinity (log t)^n*exp(-alpha*t)*f(t)dt",
+        "source": "Cormac O'Sullivan, Zeros of Jensen polynomials and asymptotics for the Riemann xi function",
+        "supporting_section": "Section 5, especially the Gaussian-log suitable multiplier example",
+        "theorem": "Theorem 5.2",
+        "url": "https://arxiv.org/abs/2007.13582",
+        "xi_section": "Section 7, first-summand reduction to I_(alpha,beta)(n)"
+      },
+      "formula": "I_alpha(f;n)=sqrt(2*pi)*u^(n+1)*f(exp(u))*exp(u-n/u)/sqrt((1+u)*n)*(1+sum_(r=1)^(R-1)a_r(f;u)/n^r+O(u^(R*(1+2*lambda_suit))/n^R)), u=W(n/alpha)",
+      "id": "ufshta_02_published_saddle_theorem",
+      "proof_boundary": "Uses the cited published theorem and its stated suitable-function hypotheses.",
+      "readiness": "ready_to_apply",
+      "role": "published_theorem_input"
+    },
+    {
+      "claim": "The complete compact family of heat multipliers satisfies O'Sullivan's suitability hypotheses with uniform constants.",
+      "diagnostics": {
+        "coefficient_bound": "sup_(0<=T<=100)|f_(T,r)(v)|=O_r(v^r)",
+        "family": "f_T(t)=exp(-T*(log t)^2/16), 0<=T<=100",
+        "ratio_identity": "f_T(t*(1+x))/f_T(t)=exp(-T*((v/8)*log(1+x)+log(1+x)^2/16)), t=exp(v)",
+        "suitability_data": "b=0, lambda_suit=1, uniformly for T in [0,100]",
+        "symbolic_coefficients_through_7": [
+          {
+            "T_degree": 0,
+            "coefficient": "1",
+            "degree": 0,
+            "v_degree": 0
+          },
+          {
+            "T_degree": 1,
+            "coefficient": "-T*v/8",
+            "degree": 1,
+            "v_degree": 1
+          },
+          {
+            "T_degree": 2,
+            "coefficient": "T*(T*v**2 + 8*v - 8)/128",
+            "degree": 2,
+            "v_degree": 2
+          },
+          {
+            "T_degree": 3,
+            "coefficient": "-T*(T*v + 8)*(T*v**2 + 16*v - 24)/3072",
+            "degree": 3,
+            "v_degree": 3
+          },
+          {
+            "T_degree": 4,
+            "coefficient": "T*(T**3*v**4 + 48*T**2*v**3 - 48*T**2*v**2 + 704*T*v**2 - 1152*T*v + 192*T + 3072*v - 5632)/98304",
+            "degree": 4,
+            "v_degree": 4
+          },
+          {
+            "T_degree": 5,
+            "coefficient": "-T*(T*v + 16)*(T**3*v**4 + 64*T**2*v**3 - 80*T**2*v**2 + 1216*T*v**2 - 2560*T*v + 960*T + 6144*v - 12800)/3932160",
+            "degree": 5,
+            "v_degree": 5
+          },
+          {
+            "T_degree": 6,
+            "coefficient": "T*(T**5*v**6 + 120*T**4*v**5 - 120*T**4*v**4 + 5440*T**3*v**4 - 9600*T**3*v**3 + 2880*T**3*v**2 + 115200*T**2*v**3 - 261120*T**2*v**2 + 115200*T**2*v - 7680*T**2 + 1122304*T*v**2 - 2764800*T*v + 1044480*T + 3932160*v - 8978432)/188743680",
+            "degree": 6,
+            "v_degree": 6
+          },
+          {
+            "T_degree": 7,
+            "coefficient": "-T*(T*v + 24)*(T**5*v**6 + 144*T**4*v**5 - 168*T**4*v**4 + 7744*T**3*v**4 - 16128*T**3*v**3 + 6720*T**3*v**2 + 190464*T**2*v**3 - 508928*T**2*v**2 + 322560*T**2*v - 53760*T**2 + 2080768*T*v**2 - 5849088*T*v + 3010560*T + 7864320*v - 19267584)/10569646080",
+            "degree": 7,
+            "v_degree": 7
+          }
+        ],
+        "uniform_disk": "for v>=1 and |x|<=1/(2v), |log(1+x)|<=2|x| and the exponent is bounded uniformly for 0<=T<=100",
+        "uniform_taylor": "f_T(t*(1+x))/f_T(t)=sum_(r=0)^(K-1) f_(T,r)(v)x^r+O_K(v^K|x|^K), uniformly for 0<=T<=100"
+      },
+      "formula": "f_T(t*(1+x))/f_T(t)=sum_(r=0)^(K-1) f_(T,r)(v)x^r+O_K(v^K|x|^K), uniformly for 0<=T<=100",
+      "id": "ufshta_03_uniform_suitability",
+      "proof_boundary": "Uniform compact-parameter adaptation of the published Gaussian-log example.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_lemma"
+    },
+    {
+      "claim": "The first-summand logarithm has an arbitrary-order expansion uniform in the complete heat interval.",
+      "diagnostics": null,
+      "formula": "log M_k^(1)(T)=L_0(k)-T*w^2/16+sum_(r=1)^(R-1) P_(r,T)(w)/k^r+O_R(w^(3R)/k^R), uniformly for 0<=T<=100",
+      "id": "ufshta_04_uniform_all_order_expansion",
+      "proof_boundary": "First theta summand only; higher summands are handled by a separate theorem.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "Subtracting the T=0 expansion isolates the Gaussian heat term and smooth inverse-k corrections.",
+      "diagnostics": null,
+      "formula": "log R_T^(1)(k)=-T*w^2/16+sum_(r=1)^(R-1) Q_(r,T)(w)/k^r+O_R(w^(3R)/k^R)",
+      "id": "ufshta_05_tilt_log_expansion",
+      "proof_boundary": "Arbitrary fixed asymptotic order with non-effective onset.",
+      "readiness": "ready_to_apply",
+      "role": "exact_asymptotic_reduction"
+    },
+    {
+      "claim": "Lambert-W differentiation gives the required local-difference scale for the leading heat term.",
+      "diagnostics": {
+        "derivative_identity": "w'(k)=w/(k*(1+w))",
+        "finite_difference_identity": "Delta^m F(k)=integral_[0,1]^m F^(m)(k+s_1+...+s_m) ds",
+        "main_term_derivatives": "d^m/dk^m w(k)^2=O(w(k)/k^m), m=1,...,7",
+        "main_term_differences": "Delta^m w(k)^2=O(w(k)/k^m), m=1,...,7",
+        "rows": [
+          {
+            "derivative": "2*w**2/(k*(w + 1))",
+            "limit_w_to_infinity": "2",
+            "normalized_by_w_over_km": "2*w/(w + 1)",
+            "order": 1
+          },
+          {
+            "derivative": "-2*w**2*(w**2 + w - 1)/(k**2*(w + 1)**3)",
+            "limit_w_to_infinity": "-2",
+            "normalized_by_w_over_km": "-2*w*(w**2 + w - 1)/(w + 1)**3",
+            "order": 2
+          },
+          {
+            "derivative": "2*w**3*(2*w**3 + 5*w**2 - 6)/(k**3*(w + 1)**5)",
+            "limit_w_to_infinity": "4",
+            "normalized_by_w_over_km": "2*w**2*(2*w**3 + 5*w**2 - 6)/(w + 1)**5",
+            "order": 3
+          },
+          {
+            "derivative": "-2*w**4*(w + 2)*(6*w**3 + 13*w**2 - 2*w - 24)/(k**4*(w + 1)**7)",
+            "limit_w_to_infinity": "-12",
+            "normalized_by_w_over_km": "-2*w**3*(w + 2)*(6*w**3 + 13*w**2 - 2*w - 24)/(w + 1)**7",
+            "order": 4
+          },
+          {
+            "derivative": "2*w**5*(24*w**5 + 142*w**4 + 272*w**3 + 29*w**2 - 520*w - 500)/(k**5*(w + 1)**9)",
+            "limit_w_to_infinity": "48",
+            "normalized_by_w_over_km": "2*w**4*(24*w**5 + 142*w**4 + 272*w**3 + 29*w**2 - 520*w - 500)/(w + 1)**9",
+            "order": 5
+          },
+          {
+            "derivative": "-2*w**6*(120*w**6 + 926*w**5 + 2660*w**4 + 2569*w**3 - 3068*w**2 - 9318*w - 6480)/(k**6*(w + 1)**11)",
+            "limit_w_to_infinity": "-240",
+            "normalized_by_w_over_km": "-2*w**5*(120*w**6 + 926*w**5 + 2660*w**4 + 2569*w**3 - 3068*w**2 - 9318*w - 6480)/(w + 1)**11",
+            "order": 6
+          },
+          {
+            "derivative": "2*w**7*(720*w**7 + 6876*w**6 + 26352*w**5 + 45364*w**4 + 6918*w**3 - 109635*w**2 - 181832*w - 100842)/(k**7*(w + 1)**13)",
+            "limit_w_to_infinity": "1440",
+            "normalized_by_w_over_km": "2*w**6*(720*w**7 + 6876*w**6 + 26352*w**5 + 45364*w**4 + 6918*w**3 - 109635*w**2 - 181832*w - 100842)/(w + 1)**13",
+            "order": 7
+          }
+        ],
+        "uniformizer": "w(k)=W(2*k/pi)"
+      },
+      "formula": "Delta^m w(k)^2=O(w(k)/k^m), m=1,...,7",
+      "id": "ufshta_06_lambert_difference_bound",
+      "proof_boundary": "Exact derivative recurrence through order seven plus the iterated-integral finite-difference identity.",
+      "readiness": "ready_to_apply",
+      "role": "exact_symbolic_lemma"
+    },
+    {
+      "claim": "Choosing the published expansion order above the stencil order makes both the remainder and every inverse-k correction negligible at the target scale.",
+      "diagnostics": null,
+      "formula": "for fixed m<=7 choose R>m; then w^(3R)/k^R=o(w/k^m); Delta^m(Q_(r,T)(w)/k^r)=O_(r,m)(poly(w)/k^(r+m))=o(w/k^m), uniformly for bounded T",
+      "id": "ufshta_07_remainder_and_corrections",
+      "proof_boundary": "Fixed orders m<=7; constants are uniform for 0<=T<=100.",
+      "readiness": "ready_to_apply",
+      "role": "exact_asymptotic_lemma"
+    },
+    {
+      "claim": "The first-summand heat tilt obeys all seven compact-uniform local ratio estimates required by the order-four determinant transfer.",
+      "diagnostics": null,
+      "formula": "Delta_k^m log R_T^(1)(k)=O(log(k)/k^m) uniformly for 0<=T<=100 and m=2,...,7",
+      "id": "ufshta_08_uniform_heat_tilt_theorem",
+      "proof_boundary": "Uniform non-effective asymptotic theorem for the first summand; no determinant sign is asserted here.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/abs/2007.13582",
+    "outputs/formal_core.md"
+  ],
+  "status": "uniform compact-heat first-summand heat-tilt asymptotic theorem",
+  "summary": {
+    "exact_or_published_rows": 8,
+    "lambert_derivative_orders_checked": 7,
+    "open_analytic_rows": 0,
+    "ready_to_apply_rows": 8,
+    "rows": 8,
+    "suitability_coefficients_checked": 8,
+    "uniform_heat_tilt_theorems": 1
+  },
+  "theorem": {
+    "backward_version": "the same estimate holds for every fixed backward-difference stencil",
+    "coefficient_structure": "for fixed r, P_(r,T)(w) is a bounded-T polynomial/rational combination of powers of w and (1+w)^(-1)",
+    "correction_differences": "Delta^m(Q_(r,T)(w)/k^r)=O_(r,m)(poly(w)/k^(r+m))=o(w/k^m), uniformly for bounded T",
+    "dominant_uniformizer": "w=W(2*k/pi)",
+    "first_summand_change_of_variables": "M_k^(1)(T)=C_k*(2*pi^2*I_pi(t^(5/4)*f_T(t);2k)-3*pi*I_pi(t^(1/4)*f_T(t);2k))",
+    "normalization": "C_k>0 is independent of T and cancels from R_T^(1)(k)",
+    "remainder_choice": "for fixed m<=7 choose R>m; then w^(3R)/k^R=o(w/k^m)",
+    "target_theorem": "Delta_k^m log R_T^(1)(k)=O(log(k)/k^m) uniformly for 0<=T<=100 and m=2,...,7",
+    "tilt_log_expansion": "log R_T^(1)(k)=-T*w^2/16+sum_(r=1)^(R-1) Q_(r,T)(w)/k^r+O_R(w^(3R)/k^R)",
+    "uniform_all_order_expansion": "log M_k^(1)(T)=L_0(k)-T*w^2/16+sum_(r=1)^(R-1) P_(r,T)(w)/k^r+O_R(w^(3R)/k^R), uniformly for 0<=T<=100"
+  },
+  "uniform_suitability": {
+    "coefficient_bound": "sup_(0<=T<=100)|f_(T,r)(v)|=O_r(v^r)",
+    "family": "f_T(t)=exp(-T*(log t)^2/16), 0<=T<=100",
+    "ratio_identity": "f_T(t*(1+x))/f_T(t)=exp(-T*((v/8)*log(1+x)+log(1+x)^2/16)), t=exp(v)",
+    "suitability_data": "b=0, lambda_suit=1, uniformly for T in [0,100]",
+    "symbolic_coefficients_through_7": [
+      {
+        "T_degree": 0,
+        "coefficient": "1",
+        "degree": 0,
+        "v_degree": 0
+      },
+      {
+        "T_degree": 1,
+        "coefficient": "-T*v/8",
+        "degree": 1,
+        "v_degree": 1
+      },
+      {
+        "T_degree": 2,
+        "coefficient": "T*(T*v**2 + 8*v - 8)/128",
+        "degree": 2,
+        "v_degree": 2
+      },
+      {
+        "T_degree": 3,
+        "coefficient": "-T*(T*v + 8)*(T*v**2 + 16*v - 24)/3072",
+        "degree": 3,
+        "v_degree": 3
+      },
+      {
+        "T_degree": 4,
+        "coefficient": "T*(T**3*v**4 + 48*T**2*v**3 - 48*T**2*v**2 + 704*T*v**2 - 1152*T*v + 192*T + 3072*v - 5632)/98304",
+        "degree": 4,
+        "v_degree": 4
+      },
+      {
+        "T_degree": 5,
+        "coefficient": "-T*(T*v + 16)*(T**3*v**4 + 64*T**2*v**3 - 80*T**2*v**2 + 1216*T*v**2 - 2560*T*v + 960*T + 6144*v - 12800)/3932160",
+        "degree": 5,
+        "v_degree": 5
+      },
+      {
+        "T_degree": 6,
+        "coefficient": "T*(T**5*v**6 + 120*T**4*v**5 - 120*T**4*v**4 + 5440*T**3*v**4 - 9600*T**3*v**3 + 2880*T**3*v**2 + 115200*T**2*v**3 - 261120*T**2*v**2 + 115200*T**2*v - 7680*T**2 + 1122304*T*v**2 - 2764800*T*v + 1044480*T + 3932160*v - 8978432)/188743680",
+        "degree": 6,
+        "v_degree": 6
+      },
+      {
+        "T_degree": 7,
+        "coefficient": "-T*(T*v + 24)*(T**5*v**6 + 144*T**4*v**5 - 168*T**4*v**4 + 7744*T**3*v**4 - 16128*T**3*v**3 + 6720*T**3*v**2 + 190464*T**2*v**3 - 508928*T**2*v**2 + 322560*T**2*v - 53760*T**2 + 2080768*T*v**2 - 5849088*T*v + 3010560*T + 7864320*v - 19267584)/10569646080",
+        "degree": 7,
+        "v_degree": 7
+      }
+    ],
+    "uniform_disk": "for v>=1 and |x|<=1/(2v), |log(1+x)|<=2|x| and the exponent is bounded uniformly for 0<=T<=100",
+    "uniform_taylor": "f_T(t*(1+x))/f_T(t)=sum_(r=0)^(K-1) f_(T,r)(v)x^r+O_K(v^K|x|^K), uniformly for 0<=T<=100"
+  }
+}

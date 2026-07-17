@@ -1,0 +1,115 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_uniform_superpolynomial_first_summand_dominance.py",
+  "date": "2026-07-13",
+  "exact": {
+    "adaptive_split": "a(k)=log(k)/8",
+    "compact_heat_superpolynomial": "for every p>0 there exists K_p such that sup_(0<=T<=100) delta_k(T)<=2*k^(-p), k>=K_p",
+    "determinant_consequence": "the complete-kernel logarithmic ratio correction is o(k^-N) uniformly for every fixed N and every fixed local difference order",
+    "difference_bound": "|nabla^m e_k(T)|<=2^m*max_(0<=j<=m)e_(k+j)(T)",
+    "high_limit": "lim_(k->infinity) (log(17)-3*pi*sqrt(k)+p*log(k))/sqrt(k)=-3*pi",
+    "high_region_bound": "epsilon(a(k))<=17*exp(-3*pi*sqrt(k))",
+    "local_difference_consequence": "for every p>0 and fixed m, sup_(0<=T<=100)|nabla^m e_k(T)|=O_p,m(k^(-p))",
+    "log_tail": "e_k(T)=log(1+delta_k(T)), 0<=e_k(T)<=delta_k(T)",
+    "low_exponent": "B_low(k)=-8*k/(5*(log(k)+4/5))+(5/2)*log(k)+1+pi*(exp(2/5)-1)*sqrt(k)",
+    "low_limit": "lim_(k->infinity) (B_low(k)+p*log(k))*log(k)/k=-8/5",
+    "low_region_bound": "epsilon(0)*P_(k,100)(u<a(k))<=exp(B_low(k))",
+    "m100_superpolynomial": "for every p>0 there exists K_p such that 0<=delta_k(100)<=2*k^(-p), k>=K_p",
+    "symbolic_high_scaled_limit": "-3*pi",
+    "symbolic_low_scaled_limit": "-8/5"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_uniform_superpolynomial_first_summand_dominance.py",
+  "kind": "jensen_window_pf_uniform_superpolynomial_first_summand_dominance",
+  "proof_boundary": "This artifact proves non-effective superpolynomial higher-theta suppression and all fixed local log-difference bounds uniformly for -100<=lambda<=0. It does not prove the first-summand heat-tilt ratio expansion, uniform order-four positivity, forward order-four invariance, PF-infinity, RH, or Lambda<=0.",
+  "remaining_target": "prove the first-summand heat-tilt finite-difference estimate uniformly for 0<=T<=100",
+  "rows": [
+    {
+      "claim": "The inherited low-region probability exponent dominates every fixed logarithmic power target.",
+      "diagnostics": {
+        "bound": "epsilon(0)*P_(k,100)(u<a(k))<=exp(B_low(k))",
+        "exponent": "B_low(k)=-8*k/(5*(log(k)+4/5))+(5/2)*log(k)+1+pi*(exp(2/5)-1)*sqrt(k)"
+      },
+      "formula": "lim_(k->infinity) (B_low(k)+p*log(k))*log(k)/k=-8/5",
+      "id": "usfsd_01_low_region_asymptotic",
+      "proof_boundary": "Non-effective asymptotic consequence of the proved lambda=-100 low-region bound.",
+      "readiness": "ready_to_apply",
+      "role": "exact_asymptotic_lemma"
+    },
+    {
+      "claim": "The inherited pointwise high-region theta-tail bound dominates every fixed inverse power.",
+      "diagnostics": {
+        "bound": "epsilon(a(k))<=17*exp(-3*pi*sqrt(k))"
+      },
+      "formula": "lim_(k->infinity) (log(17)-3*pi*sqrt(k)+p*log(k))/sqrt(k)=-3*pi",
+      "id": "usfsd_02_high_region_asymptotic",
+      "proof_boundary": "Non-effective asymptotic consequence of the proved high-region bound.",
+      "readiness": "ready_to_apply",
+      "role": "exact_asymptotic_lemma"
+    },
+    {
+      "claim": "At lambda=-100, the complete-to-first-summand relative moment tail is superpolynomially small.",
+      "diagnostics": null,
+      "formula": "for every p>0 there exists K_p such that 0<=delta_k(100)<=2*k^(-p), k>=K_p",
+      "id": "usfsd_03_m100_superpolynomial",
+      "proof_boundary": "All sufficiently large indices for each fixed power; thresholds are not effectivized.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "Heat-parameter monotonicity transfers superpolynomial first-summand dominance uniformly to the full compact interval.",
+      "diagnostics": {
+        "monotonicity": "delta_k'(T)>=0 on 0<=T<=100"
+      },
+      "formula": "for every p>0 there exists K_p such that sup_(0<=T<=100) delta_k(T)<=2*k^(-p), k>=K_p",
+      "id": "usfsd_04_uniform_heat_transfer",
+      "proof_boundary": "Uniform coefficient-tail theorem only.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "Every fixed local finite difference of the logarithmic higher-summand correction is uniformly superpolynomial.",
+      "diagnostics": {
+        "difference_bound": "|nabla^m e_k(T)|<=2^m*max_(0<=j<=m)e_(k+j)(T)"
+      },
+      "formula": "for every p>0 and fixed m, sup_(0<=T<=100)|nabla^m e_k(T)|=O_p,m(k^(-p))",
+      "id": "usfsd_05_local_log_differences",
+      "proof_boundary": "Fixed finite difference order only; sufficient for every fixed determinant size.",
+      "readiness": "ready_to_apply",
+      "role": "exact_perturbation_theorem"
+    },
+    {
+      "claim": "Higher theta summands are negligible to every fixed order in the compact-heat order-four ratio expansion.",
+      "diagnostics": null,
+      "formula": "the complete-kernel logarithmic ratio correction is o(k^-N) uniformly for every fixed N and every fixed local difference order",
+      "id": "usfsd_06_uniform_ratio_handoff",
+      "proof_boundary": "Closes only the higher-summand remainder; the first-summand heat-tilt asymptotic remains separate.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_handoff"
+    }
+  ],
+  "source_diagnostics": {
+    "m100_status": "all-k analytic first-summand dominance certificate",
+    "m100_tail": "0<=delta_k=(M_k-M_k^(1))/M_k^(1)<=2/k^6 for every integer k>=300",
+    "transfer_monotonicity": "delta_k'(T)>=0 on 0<=T<=100",
+    "transfer_status": "exact heat-parameter dominance transfer with open lambda-zero curvature tail",
+    "transfer_uniform_bound": "0<=delta_k(T)<=delta_k(100)<=2/k^6, k>=300, 0<=T<=100"
+  },
+  "source_hashes": {
+    "work/rh_compute/results/jensen_window_pf_lambda0_first_summand_dominance_transfer.json": "8ce4e41b19f1fb7f46298973c61333d312f11884434194a376d0df6c28642990",
+    "work/rh_compute/results/jensen_window_pf_negative_lambda_first_summand_dominance_certificate.json": "47241dfd2dc22358c14e84f98a656f3d970ea0b0294991501218b115cda2ca69"
+  },
+  "sources": [
+    "work/rh_compute/results/jensen_window_pf_negative_lambda_first_summand_dominance_certificate.json",
+    "work/rh_compute/results/jensen_window_pf_lambda0_first_summand_dominance_transfer.json"
+  ],
+  "status": "uniform compact-heat superpolynomial first-summand dominance theorem",
+  "summary": {
+    "exact_rows": 6,
+    "higher_theta_handoffs_closed": 1,
+    "local_log_difference_theorems": 1,
+    "open_analytic_rows": 0,
+    "ready_to_apply_rows": 6,
+    "rows": 6,
+    "superpolynomial_tail_theorems": 1,
+    "uniform_heat_transfers": 1
+  }
+}

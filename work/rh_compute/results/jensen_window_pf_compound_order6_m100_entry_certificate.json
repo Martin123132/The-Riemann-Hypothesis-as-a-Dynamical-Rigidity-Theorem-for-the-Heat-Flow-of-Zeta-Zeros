@@ -1,0 +1,140 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order6_m100_entry_certificate.py",
+  "date": "2026-07-13",
+  "exact": {
+    "all_shift_entry": "Q_(6,n)(-100)=-H_(6,n)(-100)>0 for every integer n>=0",
+    "asymptotic_reserve": "u>=20 scaled upper 2.27683610696345567703247070312471784171958323101989922910682E+1<100<200",
+    "coverage": "[321<=t<=V'(2)] union [2<=u<=20] union [u>=20] covers every t>=321",
+    "full_ceiling": "P_k<=P_k^(1)+|P_k-P_k^(1)|<201/k^2+100/k^2=301/k^2<320/k^2, k>=322",
+    "global_first_curvature": "p_1''(t)<=200/t^2 for every real t>=321",
+    "next_handoff": "compose all-shift lambda=-100 entry with the completed uniform tail and cooperative flow",
+    "tail_sign": "P_k<=320/k^2 => Q_(6,n)(-100)>0, k=n+5, n>=317",
+    "target_discharge": "target_compound_order6_m100_entry is discharged",
+    "tent_transfer": "P_k^(1)<=200*[-log(1-1/k^2)]<201/k^2, k>=322"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order6_m100_entry_certificate.py",
+  "kind": "jensen_window_pf_compound_order6_m100_entry_certificate",
+  "proof_boundary": "This artifact proves Q_(6,n)(-100)=-H_(6,n)(-100)>0 for every n>=0. It does not by itself prove forward order-six invariance, arbitrary-column order six, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The signed order-six sign is controlled by one centered stable curvature coordinate.",
+      "diagnostics": null,
+      "formula": "Q_(6,n)>0 iff D_n=5*log(x_k)+P_k<0, k=n+5",
+      "id": "co6m100ec_01_stable_coordinate",
+      "proof_boundary": "Previously proved exact factorization inside the positive order-five cone.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity_input"
+    },
+    {
+      "claim": "The continuous first-summand curvature ceiling holds from the splice through mode two.",
+      "diagnostics": null,
+      "formula": "p_1''(t)<=200/t^2 for 321<=t<=V'(2)",
+      "id": "co6m100ec_02_compact_curvature",
+      "proof_boundary": "Outward-rounded real-parameter Arb blocks from hashed H2-H10 caches.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem_input"
+    },
+    {
+      "claim": "The exact-corridor dimensionless cover closes the finite mode ray.",
+      "diagnostics": null,
+      "formula": "p_1''(t)<=200/t^2 for every saddle mode 2<=u<=20",
+      "id": "co6m100ec_03_finite_ray",
+      "proof_boundary": "One collar block and 17999 rational mode blocks.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem_input"
+    },
+    {
+      "claim": "The dimensionless normalized-H box closes the asymptotic mode ray.",
+      "diagnostics": null,
+      "formula": "p_1''(t)<=200/t^2 for every mode u>=20; u>=20 scaled upper 2.27683610696345567703247070312471784171958323101989922910682E+1<100<200",
+      "id": "co6m100ec_04_asymptotic_ray",
+      "proof_boundary": "Uniform z in [0,10^-30] interval theorem.",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_theorem_input"
+    },
+    {
+      "claim": "The three continuous certificates cover the complete first-summand tail.",
+      "diagnostics": null,
+      "formula": "p_1''(t)<=200/t^2 for every real t>=321; [321<=t<=V'(2)] union [2<=u<=20] union [u>=20] covers every t>=321",
+      "id": "co6m100ec_05_global_curvature",
+      "proof_boundary": "Continuous first summand only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "The tent identity transfers the real-parameter theorem to the discrete first-summand curvature.",
+      "diagnostics": null,
+      "formula": "P_k^(1)<=200*[-log(1-1/k^2)]<201/k^2, k>=322",
+      "id": "co6m100ec_06_first_discrete",
+      "proof_boundary": "Exact tent integration and elementary logarithm bound.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_theorem"
+    },
+    {
+      "claim": "The proved higher-theta transfer closes the complete-kernel scalar ceiling.",
+      "diagnostics": null,
+      "formula": "|P_k-P_k^(1)|<=Y_(k-1)+2*Y_k+Y_(k+1)<100/k^2, k>=322; P_k<=P_k^(1)+|P_k-P_k^(1)|<201/k^2+100/k^2=301/k^2<320/k^2, k>=322",
+      "id": "co6m100ec_07_full_kernel",
+      "proof_boundary": "Complete Newman kernel at lambda=-100, k>=322.",
+      "readiness": "ready_to_apply",
+      "role": "exact_perturbation_theorem"
+    },
+    {
+      "claim": "The scalar ceiling proves every missing signed order-six tail sign.",
+      "diagnostics": null,
+      "formula": "P_k<=320/k^2 => Q_(6,n)(-100)>0, k=n+5, n>=317",
+      "id": "co6m100ec_08_tail",
+      "proof_boundary": "Analytic tail n>=317 only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_tail_theorem"
+    },
+    {
+      "claim": "The rigorous prefix and analytic tail prove signed contiguous order-six entry at every shift.",
+      "diagnostics": null,
+      "formula": "Q_(6,n)(-100)=-H_(6,n)(-100)>0 for every integer n>=0; target_compound_order6_m100_entry is discharged",
+      "id": "co6m100ec_09_all_shift_entry",
+      "proof_boundary": "One heat parameter only; not forward propagation or PF-infinity.",
+      "readiness": "ready_to_apply",
+      "role": "exact_entry_theorem"
+    },
+    {
+      "claim": "The endpoint input required by the proved conditional cooperative-flow theorem is now available.",
+      "diagnostics": null,
+      "formula": "compose all-shift lambda=-100 entry with the completed uniform tail and cooperative flow",
+      "id": "co6m100ec_10_forward_handoff",
+      "proof_boundary": "Composition handoff; the forward theorem is recorded separately.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_handoff"
+    }
+  ],
+  "source_contract": {
+    "asymptotic_ray": "p_1''(t)<=200/t^2 for every mode u>=20",
+    "asymptotic_scaled_upper": "2.27683610696345567703247070312471784171958323101989922910682E+1",
+    "compact": "p_1''(t)<=200/t^2 for 321<=t<=V'(2)",
+    "complete_ceiling": "P_k<=320/k^2 for every real/integer k>=322",
+    "conditional_tail": "[P_k<=320/k^2 for k>=322] => [Q_(6,n)(-100)>0 for n>=317]",
+    "finite_ray": "p_1''(t)<=200/t^2 for every saddle mode 2<=u<=20",
+    "full_transfer": "|P_k-P_k^(1)|<=Y_(k-1)+2*Y_k+Y_(k+1)<100/k^2, k>=322",
+    "prefix": "Q_(6,n)(-100)>0 for every 0<=n<=316"
+  },
+  "sources": [
+    "outputs/jensen_window_pf_compound_order6_m100_prefix_certificate.md",
+    "outputs/jensen_window_pf_compound_order6_m100_tail_curvature_reduction.md",
+    "outputs/jensen_window_pf_compound_order6_first_summand_curvature_bridge.md",
+    "outputs/jensen_window_pf_compound_order6_nested_curvature_compact_certificate.md",
+    "outputs/jensen_window_pf_compound_order6_nested_curvature_finite_ray_certificate.md",
+    "outputs/jensen_window_pf_compound_order6_nested_curvature_asymptotic_ray_certificate.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "all-shift signed contiguous order-six entry theorem at lambda=-100",
+  "summary": {
+    "all_shift_m100_entry_theorems": 1,
+    "analytic_tail_theorems": 1,
+    "complete_scalar_ceiling_theorems": 1,
+    "continuous_curvature_theorems": 1,
+    "discharged_local_targets": 1,
+    "open_rows": 0,
+    "ready_rows": 10,
+    "rows": 10
+  }
+}

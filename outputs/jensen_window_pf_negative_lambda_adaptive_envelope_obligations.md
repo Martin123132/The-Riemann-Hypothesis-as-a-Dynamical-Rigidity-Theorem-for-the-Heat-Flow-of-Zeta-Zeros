@@ -44,6 +44,13 @@ below remains useful as a historical decomposition, while the current hard
 requirement is the adjacent-`k` monotone bridge and its scaled-envelope
 strengthening.
 
+## 2026-07-11 Lambda=-100 Closure Handoff
+
+The full cone-entry and raw-corridor theorems now discharge every obligation
+listed below at `lambda=-100`: both pointwise walls, the adjacent monotone
+bridge, and scaled-defect increase. The simultaneous all-three-lambda
+formulation remains historical rather than proved.
+
 ## Exact Translations
 
 ```text

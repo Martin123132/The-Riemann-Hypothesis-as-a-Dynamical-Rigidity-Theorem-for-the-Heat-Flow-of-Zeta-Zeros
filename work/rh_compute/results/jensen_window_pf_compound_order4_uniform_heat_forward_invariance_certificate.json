@@ -1,0 +1,315 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order4_uniform_heat_forward_invariance_certificate.py",
+  "date": "2026-07-13",
+  "exact": {
+    "all_interval_theorem": "H_(4,n)(lambda)>0 for every integer n>=0 and every lambda in [-100,0]",
+    "base_ratio": "the published lambda-zero Xi ratios have h=Delta(M)^2->0, G_2(M)->1, bounded G_3,...,G_7, and an o(h^6) local remainder",
+    "cooperative_flow": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n>0",
+    "determinant_asymptotic": "H_(4,n)(lambda)=positive_scale(lambda,n)*(768*G_2(lambda,n)^6*h(lambda,n)^6+o(h(lambda,n)^6)) uniformly",
+    "finite_splice_status": "the previous non-effective lambda-zero splice is closed indirectly by uniform tail confinement and backward cooperative propagation",
+    "first_summand_tilt": "Delta_k^m log(A_k^(1)(-T)/A_k^(1)(0))=O(log(k)/k^m), 2<=m<=7, uniformly for 0<=T<=100",
+    "heat_coefficient_scale": "c_r(T,M)=O(log(M)/M^r) and h(M)~1/(2M) imply c_r(T,M)/h(M)^(r-1)=O(log(M)/M)=o(1), r=2,...,6",
+    "kernel_remainder": "all fixed local log differences of log(A_k(-T)/A_k^(1)(-T)) are O_p,m(k^-p) uniformly for every p>0",
+    "lambda_zero_theorem": "H_(4,n)(0)>0 for every integer n>=0",
+    "uniform_eventual_tail": "there exists N such that H_(4,n)(lambda)>0 for every n>=N and -100<=lambda<=0",
+    "uniform_ratio_consequence": "the complete A_k(lambda) family satisfies the uniform degree-seven ratio contract on -100<=lambda<=0 with the same G_2 limit 1",
+    "variation_of_constants": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order4_uniform_heat_forward_invariance_certificate.py",
+  "kind": "jensen_window_pf_compound_order4_uniform_heat_forward_invariance_certificate",
+  "newton_transfer": {
+    "coefficient_output": "[j^r]q_M(j)=O(log(M)/M^r), r=2,...,6",
+    "coefficient_rows": [
+      {
+        "coefficient": "(60*D1 - 30*D2 + 20*D3 - 15*D4 + 12*D5 - 10*D6)/60",
+        "degree": 1,
+        "diagonal": "1",
+        "difference_orders": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "coefficient": "(180*D2 - 180*D3 + 165*D4 - 150*D5 + 137*D6)/360",
+        "degree": 2,
+        "diagonal": "1/2",
+        "difference_orders": [
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "coefficient": "(8*D3 - 12*D4 + 14*D5 - 15*D6)/48",
+        "degree": 3,
+        "diagonal": "1/6",
+        "difference_orders": [
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "coefficient": "(6*D4 - 12*D5 + 17*D6)/144",
+        "degree": 4,
+        "diagonal": "1/24",
+        "difference_orders": [
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "coefficient": "(2*D5 - 5*D6)/240",
+        "degree": 5,
+        "diagonal": "1/120",
+        "difference_orders": [
+          5,
+          6
+        ]
+      },
+      {
+        "coefficient": "D6/720",
+        "degree": 6,
+        "diagonal": "1/720",
+        "difference_orders": [
+          6
+        ]
+      }
+    ],
+    "difference_input": "D_m(M)=O(log(M)/M^m), m=2,...,6",
+    "exactness": "q_M(j)=f(M-j)-f(M) exactly on all seven determinant nodes",
+    "graded_output": "after division by h(M)^(r-1), every heat correction to G_r is O(log(M)/M)=o(1)",
+    "interpolant": "q_M(j)=sum_(m=1)^6 D_m(M)*binom(j,m), 0<=j<=6",
+    "polynomial": "D1*j + D2*j**2/2 - D2*j/2 + D3*j**3/6 - D3*j**2/2 + D3*j/3 + D4*j**4/24 - D4*j**3/4 + 11*D4*j**2/24 - D4*j/4 + D5*j**5/120 - D5*j**4/12 + 7*D5*j**3/24 - 5*D5*j**2/12 + D5*j/5 + D6*j**6/720 - D6*j**5/48 + 17*D6*j**4/144 - 5*D6*j**3/16 + 137*D6*j**2/360 - D6*j/6",
+    "triangular_support": "the coefficient of j^r uses only D_m with m>=r and has D_r/r! on its diagonal"
+  },
+  "proof_boundary": "This artifact proves H_(4,n)(lambda)>0 for every contiguous shift n>=0 and every -100<=lambda<=0. It does not prove noncontiguous or arbitrary-column order-four minors, any compound order five or higher, PF-infinity, the all-degree Jensen criterion, RH, or Lambda<=0.",
+  "remaining_target": "derive arbitrary-column order-four sign regularity or begin a genuinely new contiguous order-five entry and invariance layer",
+  "rows": [
+    {
+      "claim": "The published Xi ratio theorem and exact determinant cancellation give the universal positive order-four main term at lambda zero.",
+      "diagnostics": null,
+      "formula": "the published lambda-zero Xi ratios have h=Delta(M)^2->0, G_2(M)->1, bounded G_3,...,G_7, and an o(h^6) local remainder; 768*G_2^6*h^6",
+      "id": "co4uhfi_01_lambda0_ratio_input",
+      "proof_boundary": "Eventual contiguous order-four asymptotic input only.",
+      "readiness": "ready_to_apply",
+      "role": "published_theorem_input"
+    },
+    {
+      "claim": "The first theta summand has the required seven compact-uniform heat-tilt ratio estimates.",
+      "diagnostics": {
+        "source_formula": "Delta_k^m log R_T^(1)(k)=O(log(k)/k^m) uniformly for 0<=T<=100 and m=2,...,7"
+      },
+      "formula": "Delta_k^m log(A_k^(1)(-T)/A_k^(1)(0))=O(log(k)/k^m), 2<=m<=7, uniformly for 0<=T<=100",
+      "id": "co4uhfi_02_heat_tilt",
+      "proof_boundary": "First-summand compact-heat theorem.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "Every higher-theta correction needed by the fixed order-four stencil is uniformly superpolynomial.",
+      "diagnostics": {
+        "source_formula": "for every p>0 and fixed m, sup_(0<=T<=100)|nabla^m e_k(T)|=O_p,m(k^(-p))"
+      },
+      "formula": "all fixed local log differences of log(A_k(-T)/A_k^(1)(-T)) are O_p,m(k^-p) uniformly for every p>0",
+      "id": "co4uhfi_03_kernel_remainder",
+      "proof_boundary": "Complete-to-first-summand asymptotic transfer only.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The full heat-deformed Xi coefficient family inherits the uniform degree-seven ratio expansion and the unchanged positive quadratic limit.",
+      "diagnostics": {
+        "graded_scale": "c_r(T,M)=O(log(M)/M^r) and h(M)~1/(2M) imply c_r(T,M)/h(M)^(r-1)=O(log(M)/M)=o(1), r=2,...,6",
+        "newton_transfer": {
+          "coefficient_output": "[j^r]q_M(j)=O(log(M)/M^r), r=2,...,6",
+          "coefficient_rows": [
+            {
+              "coefficient": "(60*D1 - 30*D2 + 20*D3 - 15*D4 + 12*D5 - 10*D6)/60",
+              "degree": 1,
+              "diagonal": "1",
+              "difference_orders": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ]
+            },
+            {
+              "coefficient": "(180*D2 - 180*D3 + 165*D4 - 150*D5 + 137*D6)/360",
+              "degree": 2,
+              "diagonal": "1/2",
+              "difference_orders": [
+                2,
+                3,
+                4,
+                5,
+                6
+              ]
+            },
+            {
+              "coefficient": "(8*D3 - 12*D4 + 14*D5 - 15*D6)/48",
+              "degree": 3,
+              "diagonal": "1/6",
+              "difference_orders": [
+                3,
+                4,
+                5,
+                6
+              ]
+            },
+            {
+              "coefficient": "(6*D4 - 12*D5 + 17*D6)/144",
+              "degree": 4,
+              "diagonal": "1/24",
+              "difference_orders": [
+                4,
+                5,
+                6
+              ]
+            },
+            {
+              "coefficient": "(2*D5 - 5*D6)/240",
+              "degree": 5,
+              "diagonal": "1/120",
+              "difference_orders": [
+                5,
+                6
+              ]
+            },
+            {
+              "coefficient": "D6/720",
+              "degree": 6,
+              "diagonal": "1/720",
+              "difference_orders": [
+                6
+              ]
+            }
+          ],
+          "difference_input": "D_m(M)=O(log(M)/M^m), m=2,...,6",
+          "exactness": "q_M(j)=f(M-j)-f(M) exactly on all seven determinant nodes",
+          "graded_output": "after division by h(M)^(r-1), every heat correction to G_r is O(log(M)/M)=o(1)",
+          "interpolant": "q_M(j)=sum_(m=1)^6 D_m(M)*binom(j,m), 0<=j<=6",
+          "polynomial": "D1*j + D2*j**2/2 - D2*j/2 + D3*j**3/6 - D3*j**2/2 + D3*j/3 + D4*j**4/24 - D4*j**3/4 + 11*D4*j**2/24 - D4*j/4 + D5*j**5/120 - D5*j**4/12 + 7*D5*j**3/24 - 5*D5*j**2/12 + D5*j/5 + D6*j**6/720 - D6*j**5/48 + 17*D6*j**4/144 - 5*D6*j**3/16 + 137*D6*j**2/360 - D6*j/6",
+          "triangular_support": "the coefficient of j^r uses only D_m with m>=r and has D_r/r! on its diagonal"
+        }
+      },
+      "formula": "the complete A_k(lambda) family satisfies the uniform degree-seven ratio contract on -100<=lambda<=0 with the same G_2 limit 1",
+      "id": "co4uhfi_04_uniform_ratio",
+      "proof_boundary": "Compact heat interval and seven-point local ratios only.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "The universal determinant expansion proves one strictly positive order-four tail uniformly across the full heat interval.",
+      "diagnostics": null,
+      "formula": "H_(4,n)(lambda)=positive_scale(lambda,n)*(768*G_2(lambda,n)^6*h(lambda,n)^6+o(h(lambda,n)^6)) uniformly; there exists N such that H_(4,n)(lambda)>0 for every n>=N and -100<=lambda<=0",
+      "id": "co4uhfi_05_uniform_eventual_tail",
+      "proof_boundary": "Uniform eventual contiguous order-four theorem; the threshold is non-effective.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "All-shift lambda=-100 entry and the completed order-three layer supply a strictly cooperative order-four flow.",
+      "diagnostics": {
+        "off_diagonal": "(4*n+26)*H_(3,n)/H_(3,n+1)"
+      },
+      "formula": "H_(4,n)(-100)>0, every n>=0; Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n>0",
+      "id": "co4uhfi_06_entry_and_flow",
+      "proof_boundary": "Previously certified entry and local flow inputs.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The uniform positive tail reduces the infinite flow to finite backward variation-of-constants propagation.",
+      "diagnostics": null,
+      "formula": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)",
+      "id": "co4uhfi_07_finite_confinement",
+      "proof_boundary": "Exact finite-confinement argument; no global coefficient ceiling.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "Every shifted contiguous order-four determinant remains strictly positive from lambda=-100 through lambda=0.",
+      "diagnostics": null,
+      "formula": "H_(4,n)(lambda)>0 for every integer n>=0 and every lambda in [-100,0]",
+      "id": "co4uhfi_08_forward_invariance",
+      "proof_boundary": "Contiguous order four only.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_conclusion"
+    },
+    {
+      "claim": "Every shifted contiguous four-by-four Hankel minor has the required positive sign at lambda zero.",
+      "diagnostics": {
+        "splice": "the previous non-effective lambda-zero splice is closed indirectly by uniform tail confinement and backward cooperative propagation"
+      },
+      "formula": "H_(4,n)(0)>0 for every integer n>=0",
+      "id": "co4uhfi_09_lambda_zero",
+      "proof_boundary": "Not arbitrary-column order four, higher compounds, PF-infinity, RH, or Lambda<=0.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_conclusion"
+    }
+  ],
+  "source_diagnostics": {
+    "checks": {
+      "cooperative_flow": true,
+      "entry": true,
+      "finite_confinement": true,
+      "heat_tilt": true,
+      "higher_theta": true,
+      "lambda0_eventual": true,
+      "uniform_transfer": true
+    },
+    "entry": "H_(4,n)(-100)>0, every n>=0",
+    "finite_confinement": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)",
+    "flow": "H_(4,n)'=a_n*H_(4,n+1)+b_n*H_(4,n)",
+    "heat_tilt": "Delta_k^m log R_T^(1)(k)=O(log(k)/k^m) uniformly for 0<=T<=100 and m=2,...,7",
+    "higher_theta": "for every p>0 and fixed m, sup_(0<=T<=100)|nabla^m e_k(T)|=O_p,m(k^(-p))",
+    "lambda0_G2_limit": "G_2(M)->1",
+    "lambda0_ratio": "log(gamma(M-j)/gamma(M))=-sum_(m>=1) G_m(M)*Delta(M)^(2*m-2)*j^m",
+    "off_diagonal": "(4*n+26)*H_(3,n)/H_(3,n+1)",
+    "symbolic_main_term": "768*G2^6*h^6",
+    "uniform_contract": "log(A_(M-j)(lambda)/A_M(lambda))=-G_1(lambda,M)*j-sum_(m=2)^7 G_m(lambda,M)*h(lambda,M)^(m-1)*j^m+r_(lambda,M,j)"
+  },
+  "source_hashes": {
+    "work/rh_compute/results/jensen_window_pf_compound_order4_eventual_tail_forward_invariance_reduction.json": "68be27771d517ff6e7140210a4c5218304159895a3c086efb5839d4e505b278b",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_forward_flow_reduction.json": "cda9af3e68c47cf712f422569539ff7018fc8e09ec0d67ea94c352de12a1f572",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_lambda0_eventual_positivity_certificate.json": "ddbc859d870da21486167d1916c11ec4ede0df6b14d1dd8bb6b43f10c6548108",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_m100_entry_certificate.json": "161ec1a9eb678e9e523f1b2b920e4de566c9970558ff085db0743c122bebc161",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_uniform_heat_eventual_tail_reduction.json": "5d6142e7ec343eed5c6ba603295d2ea90d406c535fa92755fcca1ed5630be5ed",
+    "work/rh_compute/results/jensen_window_pf_uniform_first_summand_heat_tilt_asymptotic_theorem.json": "2d1b39c3a82a701189d58dd27ea4a2b453fd3503f0e4d09fb228160d4ac25e45",
+    "work/rh_compute/results/jensen_window_pf_uniform_superpolynomial_first_summand_dominance.json": "babba28c13b5d849d42802752124c0cbf692fd0e00851cd960c48d1afff58057"
+  },
+  "sources": [
+    "work/rh_compute/results/jensen_window_pf_compound_order4_lambda0_eventual_positivity_certificate.json",
+    "work/rh_compute/results/jensen_window_pf_uniform_superpolynomial_first_summand_dominance.json",
+    "work/rh_compute/results/jensen_window_pf_uniform_first_summand_heat_tilt_asymptotic_theorem.json",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_uniform_heat_eventual_tail_reduction.json",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_eventual_tail_forward_invariance_reduction.json",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_m100_entry_certificate.json",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_forward_flow_reduction.json"
+  ],
+  "status": "all-shift contiguous order-four forward invariance through lambda zero",
+  "summary": {
+    "finite_confinement_theorems": 1,
+    "forward_invariance_theorems": 1,
+    "global_coefficient_ceilings_used": 0,
+    "lambda_zero_all_shift_theorems": 1,
+    "newton_coefficients_checked": 6,
+    "open_analytic_rows": 0,
+    "ready_to_apply_rows": 9,
+    "rows": 9,
+    "uniform_eventual_tail_theorems": 1,
+    "uniform_ratio_theorems": 1
+  }
+}

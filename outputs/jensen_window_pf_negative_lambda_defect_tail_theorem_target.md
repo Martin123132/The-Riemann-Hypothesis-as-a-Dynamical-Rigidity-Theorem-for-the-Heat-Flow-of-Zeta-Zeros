@@ -36,6 +36,22 @@ Current result:
 validated Jensen-window PF negative-lambda defect-tail theorem target: 8 rows, 0 issues, 0 ready-to-apply rows, 2 live routes
 ```
 
+## 2026-07-11 Parameter-Specific Closure
+
+The interval-analytic certificate
+`outputs/jensen_window_pf_negative_lambda_m100_adaptive_defect_certificate.md`
+proves at `lambda=-100`, for every `k>=1`,
+
+```text
+0<=d_k<=2/(2*k+1),
+d_(k+1)<=d_k.
+```
+
+This is stronger in `k` than the tail statement required by the
+one-entry-parameter route and discharges that route's defect-tail input. The
+original simultaneous target for `lambda=-25,-50,-100` remains unproved and
+is retained below as audit history; it is no longer an active blocker.
+
 ## 2026-07-10 Upper-Wall Handoff
 
 The interval theorem certificate

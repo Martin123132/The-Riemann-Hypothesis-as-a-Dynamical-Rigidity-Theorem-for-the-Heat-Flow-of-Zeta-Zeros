@@ -1,0 +1,118 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order7_m100_tail_curvature_reduction.py",
+  "date": "2026-07-13",
+  "exact": {
+    "canonical_factorization": "Q_(6,n)=A_(n+5)^6*exp(r(n+5))",
+    "canonical_factorization_residual": "0",
+    "cleared_polynomial": "753*k**2 - 225000*k - 112500",
+    "curvature_identity": "E_n=log(Q_(6,n)*Q_(6,n+2)/Q_(6,n+1)^2)=6*log(x_k)+R_k, R_k=r(k-1)-2*r(k)+r(k+1), k=n+6",
+    "fourth_gap": "T(t)=5*B(t)-p(t-1)+2*p(t)-p(t+1)",
+    "log_buffer": "-6*log(x_k)>=6*d_k>=753/(125*(2*k+1)), k>=320",
+    "lower_coordinates": "x=exp(-B), d=1-x, g=d^2-x^2*d(t-1)*d(t+1), h=log(g)",
+    "order5_coordinate": "f=g^2-x^3*g(t-1)*g(t+1), q=log(f/d)",
+    "order6_coordinate": "S(t)=4*B(t)-q(t-1)+2*q(t)-q(t+1), p(t)=2*q(t)-h(t)+log(1-exp(-S(t)))",
+    "order7_coordinate": "r(t)=2*p(t)-q(t)+log(1-exp(-T(t)))",
+    "rational_comparison": "900/k^2<753/(125*(2*k+1)), k>=321",
+    "shifted_coefficients": [
+      "753",
+      "258426",
+      "5252373"
+    ],
+    "shifted_polynomial_k_321_plus_m": "753*m**2 + 258426*m + 5252373",
+    "sign_equivalence": "Q_(7,n)>0 iff L_n>0 iff E_n<0",
+    "stable_margin": "L_n=exp(-E_n)-1",
+    "sufficient_ceiling": "R_k<=900/k^2 for every real/integer k>=321",
+    "tail_index": "k=n+6, so n>=315 iff k>=321"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order7_m100_tail_curvature_reduction.py",
+  "kind": "jensen_window_pf_compound_order7_m100_tail_curvature_reduction",
+  "proof_boundary": "This artifact proves the canonical Q6 normalization, sign reduction, and tail arithmetic. It does not prove the 900/k^2 curvature ceiling, order-seven entry, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The rigorous endpoint prefix reaches the last index before the analytic splice.",
+      "diagnostics": null,
+      "formula": "Q_(7,n)(-100)>0 for every 0<=n<=314",
+      "id": "co7m100tcr_01_prefix",
+      "proof_boundary": "Finite Arb prefix only.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "One additional stable logarithm gives a cancellation-free coordinate for Q6.",
+      "diagnostics": null,
+      "formula": "T(t)=5*B(t)-p(t-1)+2*p(t)-p(t+1); r(t)=2*p(t)-q(t)+log(1-exp(-T(t))); Q_(6,n)=A_(n+5)^6*exp(r(n+5))",
+      "id": "co7m100tcr_02_nested_coordinate",
+      "proof_boundary": "Exact lower-cone factorization only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Signed order seven is equivalent to one centered curvature lying below the sixth defect buffer.",
+      "diagnostics": null,
+      "formula": "E_n=log(Q_(6,n)*Q_(6,n+2)/Q_(6,n+1)^2)=6*log(x_k)+R_k, R_k=r(k-1)-2*r(k)+r(k+1), k=n+6; Q_(7,n)>0 iff L_n>0 iff E_n<0",
+      "id": "co7m100tcr_03_curvature",
+      "proof_boundary": "Exact logarithmic reduction only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The completed defect theorem supplies an inverse-linear endpoint buffer.",
+      "diagnostics": null,
+      "formula": "-6*log(x_k)>=6*d_k>=753/(125*(2*k+1)), k>=320",
+      "id": "co7m100tcr_04_defect",
+      "proof_boundary": "Previously proved lambda=-100 defect anchor.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The proposed inverse-square ceiling lies strictly inside the defect buffer on the whole tail.",
+      "diagnostics": {
+        "shifted_coefficients": [
+          "753",
+          "258426",
+          "5252373"
+        ]
+      },
+      "formula": "900/k^2<753/(125*(2*k+1)), k>=321",
+      "id": "co7m100tcr_05_arithmetic",
+      "proof_boundary": "Coefficient-positive rational comparison.",
+      "readiness": "ready_to_apply",
+      "role": "exact_inequality"
+    },
+    {
+      "claim": "The scalar curvature ceiling would close the complete order-seven endpoint tail.",
+      "diagnostics": null,
+      "formula": "[R_k<=900/k^2 for k>=321] => [Q_(7,n)(-100)>0 for n>=315]",
+      "id": "co7m100tcr_06_conditional_tail",
+      "proof_boundary": "Conditional on the displayed scalar ceiling only.",
+      "readiness": "ready_to_apply",
+      "role": "conditional_theorem"
+    },
+    {
+      "claim": "Prove the fourth-nested stable curvature ceiling on the analytic tail.",
+      "diagnostics": null,
+      "formula": "R_k<=900/k^2 for every real/integer k>=321",
+      "id": "co7m100tcr_07_open_curvature",
+      "proof_boundary": "This scalar analytic ceiling is not proved here.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "sources": {
+    "defect_anchor": "d_k>=251/(250*(2*k+1)), k>=320",
+    "prefix": "Q_(7,n)(-100)>0 for every 0<=n<=314",
+    "prefix_minimum_lower": "9.38326115496060603172271048196819607046278167988820319015194E-3",
+    "prefix_minimum_n": 314,
+    "uniform_tail_status": "exact uniform eventual signed order-seven tail and conditional forward reduction with one open lambda=-100 entry"
+  },
+  "status": "exact order-seven endpoint-tail reduction with one open fourth-nested curvature ceiling",
+  "summary": {
+    "coefficient_positive_comparisons": 1,
+    "conditional_tail_theorems": 1,
+    "exact_curvature_reductions": 1,
+    "exact_factorizations": 1,
+    "open_curvature_targets": 1,
+    "ready_to_apply_rows": 6,
+    "rows": 7
+  }
+}

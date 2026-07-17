@@ -1,0 +1,187 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_dominant_saddle_cell_interior_certificate",
+  "date": "2026-07-16",
+  "status": "strict Laguerre positivity for the exact Newman H_t on dominant-saddle fixed-cutoff cell interiors; not a proof of Lambda<=0 or RH",
+  "proof_boundary": "This artifact proves L_t(x)>0 when 0<t<=1/2, t*log(x/(4*pi))>=25, and x is at least 1/2 from both boundaries of its Riemann-Siegel cutoff cell. It does not cover the transition collars, the layer t*log(x/(4*pi))<25, all real x and t, Lambda<=0, or RH.",
+  "parameters": {
+    "precision_bits": 256,
+    "rho": "1/4",
+    "cell_distance": "1/2",
+    "L_min": "50/1",
+    "tL_min": "25/1",
+    "delta": "1/8000"
+  },
+  "exact": {
+    "region": "0<t<=1/2, L=log(x/(4*pi)), t*L>=25, N=floor(sqrt(x/(4*pi)+t/16)), and x is at distance at least 1/2 from both boundaries of its fixed-N cell",
+    "cell": "4*pi*(N^2-t/16)<=x<4*pi*((N+1)^2-t/16), dist(x,cell boundary)>=1/2",
+    "raw_main": "S_(N,t)(z)=B_t(z)*f_(N,t)(z), R_(N,t)(z)=H_t(z)-S_(N,t)(z)",
+    "real_axis": "S_(N,t)(x)=A_t(x)*P_(N,t)(x), A_t=|B_t|, Z_t-P_(N,t)=R_(N,t)/A_t",
+    "reflection": "S_(N,t) is holomorphic and real on the real axis, so R_(N,t)(conj(z))=conj(R_(N,t)(z))",
+    "scalar_collar": "sup_(|z-x|=1/4)|R_(N,t)(z)|/A_t(x)<1/8000",
+    "cauchy_raw": "|R|/A<=delta, |R'|/A<=4*delta, |R''|/A<=32*delta",
+    "normalized_jets": "eps0<=delta, eps1<=0.35*L*delta, eps2<=0.13*L^2*delta, delta=1/8000",
+    "main_jets": "|P|<=2.256, |P'|<=0.59L, |P''|<=0.154L^2",
+    "remainder_curvature": "|C[Z_t]-C[P_(N,t)]|<10^-3*L^2",
+    "theorem": "C_t[Z_t](x)>3/40*L^2 and L_t(x)=A_t(x)^2*C_t[Z_t](x)>0"
+  },
+  "arb": {
+    "precision_bits": 256,
+    "x_at_L50_ball": "[65152931198542130352545.16179758607386787326595894428541600421898494750 +/- 2.12e-48]",
+    "x_at_L50_gt": "10^22",
+    "positive_eC_correction_ball": "[5.894070639710097894878101663263036876815255884409458521278512133479575e-11 +/- 1.55e-81]",
+    "positive_eC_correction_lt": "1/100",
+    "eAB_argument_ball": "[1.266761885946380470815622730677787100421161790303463127022316482602362e-21 +/- 3.63e-92]",
+    "raw_eAB_over_center_amplitude_ball": "[2.961616707051951316591286078539224072460616796835941198192902658984541e-19 +/- 1.77e-89]",
+    "raw_eAB_over_center_amplitude_lt": "1/200000",
+    "raw_eC_over_center_amplitude_ball": "[0.0001144926418904997794764272030487866847787554081410261894417511943397177 +/- 2.23e-74]",
+    "raw_eC_over_center_amplitude_lt": "3/25000",
+    "combined_raw_collar_ball": "[0.0001144926418905000756380979082439183439073632620634334355034308779338375 +/- 4.16e-74]",
+    "combined_raw_collar_lt": "1/8000"
+  },
+  "rational_budget": {
+    "collar": {
+      "rho": "1/4",
+      "cell_boundary_distance": "1/2",
+      "delta": "1/8000"
+    },
+    "normalized_jet_caps": {
+      "eps0": "1/8000",
+      "eps1_over_L": "7/160000",
+      "eps2_over_L2": "13/800000"
+    },
+    "main_jet_caps": {
+      "P": "282/125",
+      "P1_over_L": "59/100",
+      "P2_over_L2": "77/500"
+    },
+    "curvature": {
+      "remainder_error_over_L2_raw": "17206231250000000000000036097/160000000000000000000000000000000",
+      "remainder_error_over_L2": "1/1000",
+      "finite_main_margin_over_L2": "19/250",
+      "full_margin_over_L2": "3/40"
+    }
+  },
+  "rows": [
+    {
+      "id": "np15dscic_01_fixed_n_remainder",
+      "role": "published_theorem_transfer",
+      "readiness": "ready_to_apply",
+      "claim": "Inside one cutoff cell the published approximation defines a fixed holomorphic raw remainder.",
+      "formula": "S_(N,t)(z)=B_t(z)*f_(N,t)(z), R_(N,t)(z)=H_t(z)-S_(N,t)(z)",
+      "proof_boundary": "Imports the scalar error bounds from Polymath 15, Theorem 1.3.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15dscic_02_schwarz_collar",
+      "role": "exact_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "Reality on the real axis reflects the upper-half published bound across the full Cauchy circle.",
+      "formula": "S_(N,t) is holomorphic and real on the real axis, so R_(N,t)(conj(z))=conj(R_(N,t)(z))",
+      "proof_boundary": "Requires one fixed N throughout the disk.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15dscic_03_scalar_collar",
+      "role": "interval_certificate",
+      "readiness": "certified",
+      "claim": "The raw theorem remainder is uniformly tiny relative to the center amplitude on every eligible collar.",
+      "formula": "sup_(|z-x|=1/4)|R_(N,t)(z)|/A_t(x)<1/8000",
+      "proof_boundary": "Uses the explicit published eA+eB+eC0 bounds and L>=50.",
+      "diagnostics": {
+        "precision_bits": 256,
+        "x_at_L50_ball": "[65152931198542130352545.16179758607386787326595894428541600421898494750 +/- 2.12e-48]",
+        "x_at_L50_gt": "10^22",
+        "positive_eC_correction_ball": "[5.894070639710097894878101663263036876815255884409458521278512133479575e-11 +/- 1.55e-81]",
+        "positive_eC_correction_lt": "1/100",
+        "eAB_argument_ball": "[1.266761885946380470815622730677787100421161790303463127022316482602362e-21 +/- 3.63e-92]",
+        "raw_eAB_over_center_amplitude_ball": "[2.961616707051951316591286078539224072460616796835941198192902658984541e-19 +/- 1.77e-89]",
+        "raw_eAB_over_center_amplitude_lt": "1/200000",
+        "raw_eC_over_center_amplitude_ball": "[0.0001144926418904997794764272030487866847787554081410261894417511943397177 +/- 2.23e-74]",
+        "raw_eC_over_center_amplitude_lt": "3/25000",
+        "combined_raw_collar_ball": "[0.0001144926418905000756380979082439183439073632620634334355034308779338375 +/- 4.16e-74]",
+        "combined_raw_collar_lt": "1/8000"
+      }
+    },
+    {
+      "id": "np15dscic_04_cauchy_raw_jets",
+      "role": "exact_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "Cauchy's estimate transfers the raw scalar collar through two derivatives.",
+      "formula": "|R|/A<=delta, |R'|/A<=4*delta, |R''|/A<=32*delta",
+      "proof_boundary": "Exact for disk radius 1/4.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15dscic_05_normalized_jets",
+      "role": "rational_certificate",
+      "readiness": "certified",
+      "claim": "Dividing by the real normalizer preserves an explicit small C2 error.",
+      "formula": "eps0<=delta, eps1<=0.35*L*delta, eps2<=0.13*L^2*delta, delta=1/8000",
+      "proof_boundary": "Uses |(log A)'|<=0.27L and |V|<=10^-21.",
+      "diagnostics": {
+        "eps0": "1/8000",
+        "eps1_over_L": "7/160000",
+        "eps2_over_L2": "13/800000"
+      }
+    },
+    {
+      "id": "np15dscic_06_main_jets",
+      "role": "rational_certificate",
+      "readiness": "certified",
+      "claim": "The dominant-saddle arithmetic certificate also supplies uniform main-sum jet caps.",
+      "formula": "|P|<=2.256, |P'|<=0.59L, |P''|<=0.154L^2",
+      "proof_boundary": "Direct consequence of the prior infinite-zeta tail budgets.",
+      "diagnostics": {
+        "P": "282/125",
+        "P1_over_L": "59/100",
+        "P2_over_L2": "77/500"
+      }
+    },
+    {
+      "id": "np15dscic_07_remainder_curvature",
+      "role": "rational_certificate",
+      "readiness": "certified",
+      "claim": "The transferred theorem remainder consumes less than one thousandth of L-squared curvature.",
+      "formula": "|C[Z_t]-C[P_(N,t)]|<10^-3*L^2",
+      "proof_boundary": "Exact rational perturbation budget.",
+      "diagnostics": {
+        "remainder_error_over_L2_raw": "17206231250000000000000036097/160000000000000000000000000000000",
+        "remainder_error_over_L2": "1/1000",
+        "finite_main_margin_over_L2": "19/250",
+        "full_margin_over_L2": "3/40"
+      }
+    },
+    {
+      "id": "np15dscic_08_exact_h_cell_theorem",
+      "role": "proved_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The exact Newman heat-flow function has strict first Laguerre positivity on every dominant-saddle cutoff-cell interior.",
+      "formula": "C_t[Z_t](x)>3/40*L^2 and L_t(x)=A_t(x)^2*C_t[Z_t](x)>0",
+      "proof_boundary": "Applies only under the stated tL and cell-distance hypotheses.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15dscic_09_cutoff_collar_gap",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "Width-one neighborhoods of every discrete Riemann-Siegel cutoff transition remain outside this theorem.",
+      "formula": "dist(x,cell boundary)<1/2",
+      "proof_boundary": "Needs adjacent-N overlap or a direct transition-correction estimate.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15dscic_10_boundary_layer_gap",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "The coupled near-zero-time layer remains the principal global obstruction.",
+      "formula": "0<t*log(x/(4*pi))<25",
+      "proof_boundary": "Open; not Lambda<=0 or RH.",
+      "diagnostics": null
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/abs/1904.12438",
+    "outputs/jensen_window_pf_newman_polymath15_normalized_laguerre_bridge.md",
+    "outputs/jensen_window_pf_newman_polymath15_dominant_saddle_arithmetic_ray_certificate.md"
+  ]
+}

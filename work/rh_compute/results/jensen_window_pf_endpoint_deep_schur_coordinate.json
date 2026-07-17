@@ -1,0 +1,652 @@
+{
+  "arbitrary_column_audit": {
+    "all_passed": true,
+    "canonicalization": "the inverse absorbs j_0 into n and returns columns j_l-j_0",
+    "checks": 984,
+    "column_offsets": [
+      0,
+      7
+    ],
+    "max_order": 6,
+    "observed_minimum_column_gaps": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "shifts": [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_endpoint_deep_schur_coordinate.py",
+  "date": "2026-07-16",
+  "endpoint_pf_counterexample": {
+    "coefficient_intervals": [
+      {
+        "center": "0.06728671146053304508962307870413714845552597315807931150692732451198171669098312041297077623791055349387647644",
+        "conservative_radius": "4.26000000000000000000000000000000E-111",
+        "k": 0,
+        "lower": "6.72867114605330450896230787041371E-2",
+        "upper": "6.72867114605330450896230787041371E-2"
+      },
+      {
+        "center": "0.0001206459270906446485096427071282713804250370723966195367840690695810451963568481883446805591687396442127364",
+        "conservative_radius": "3.42000000000000000000000000000000E-110",
+        "k": 1,
+        "lower": "1.20645927090644648509642707128271E-4",
+        "upper": "1.20645927090644648509642707128271E-4"
+      },
+      {
+        "center": "2.1437847099349673246495769060152013232872547619618836347890725824001014007738615088763266431971925424385e-7",
+        "conservative_radius": "4.28000000000000000000000000000000E-111",
+        "k": 2,
+        "lower": "2.14378470993496732464957690601520E-7",
+        "upper": "2.14378470993496732464957690601520E-7"
+      },
+      {
+        "center": "3.77640322628588060007914387998948527584698366062414603906109741492029744226912703494878979422805650068e-10",
+        "conservative_radius": "2.87000000000000000000000000000000E-112",
+        "k": 3,
+        "lower": "3.77640322628588060007914387998949E-10",
+        "upper": "3.77640322628588060007914387998949E-10"
+      }
+    ],
+    "consequence": "the normalized endpoint sequence is not PF_3 and hence not PF-infinity",
+    "excluded_from_deep_order_three": true,
+    "exclusion_reason": "lambda_3=1<3-1=2",
+    "formula_A": "A_1^3-2*A_0*A_1*A_2+A_0^2*A_3",
+    "formula_h": "h_1^3-2*h_1*h_2+h_3",
+    "lambda": -100,
+    "normalized_interval": {
+      "lower": "-4.84848642182060969711098547098349E-11",
+      "upper": "-4.84848642182060969711098547098349E-11"
+    },
+    "partition": [
+      1,
+      1,
+      1
+    ],
+    "strictly_negative": true,
+    "toeplitz_columns": [
+      1,
+      2,
+      3
+    ],
+    "toeplitz_rows": [
+      0,
+      1,
+      2
+    ],
+    "unnormalized_interval": {
+      "lower": "-1.47704624756126648090208397443869E-14",
+      "upper": "-1.47704624756126648090208397443869E-14"
+    }
+  },
+  "exact": {
+    "arbitrary_minor": "R_(m,n)(j_0,...,j_(m-1))=det[A_(n+i+j_l)]_(0<=i,l<m)",
+    "arbitrary_schur_identity": "epsilon_m*R_(m,n)(j_0,...,j_(m-1))=A_0(-100)^m*s_lambda(h)",
+    "bridge_boundary": "deep Schur positivity of h_k=A_k(-100)/A_0(-100) is not Schur positivity of the binomially weighted Jensen-window sequences",
+    "column_reversal": "Q_(m,n)(-100)=det[A_(n+m-1+i-j)(-100)]_(0<=i,j<m)",
+    "deep_cone": "D_m={lambda_1>=...>=lambda_m>=m-1}; s_lambda(h)=det[h_(lambda_i-i+j)]_(1<=i,j<=m)",
+    "deep_failure": "s_((N^10))(h)<0 for N=9,10,11,12",
+    "deep_target": "s_lambda(h)>0 for every m>=10 and lambda in D_m",
+    "dynamic_composition": "deep endpoint positivity => all-order endpoint hierarchy => all-order signed-Hankel positivity on -100<=lambda<=0",
+    "endpoint_deep_equivalence": "[Q_(m,n)(-100)>0 for every m>=10,n>=0] iff [s_lambda(h)>0 for every m>=10,lambda in D_m]",
+    "hankel_coordinates": "H_(m,n)=det[A_(n+i+j)]_(0<=i,j<m), epsilon_m=(-1)^binom(m,2), Q_(m,n)=epsilon_m*H_(m,n)",
+    "inverse_map": "n=lambda_m-(m-1), j_l=lambda_(m-l)-lambda_m+l for 0<=l<m",
+    "normalization": "h_k=A_k(-100)/A_0(-100) for k>=0, h_k=0 for k<0, h_0=1",
+    "partition_map": "lambda_(q+1)=n+j_(m-1-q)+q for 0<=q<m",
+    "pf_failure": "s_(1,1,1)(h)<0 at lambda=-100",
+    "rectangle_identity": "Q_(m,n)(-100)=A_0(-100)^m*s_((n+m-1)^m)(h)",
+    "rectangle_target": "s_((N^m))(h)>0 for every m>=10 and N>=m-1",
+    "rejected_rectangle_target": "s_((N^m))(h)>0 for every m>=10 and N>=m-1 is false",
+    "support_boundary": "min_(i,j)(lambda_i-i+j)=lambda_m-m+1>=0 exactly on D_m"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_endpoint_deep_schur_coordinate.py",
+  "inverse_partition_audit": {
+    "all_passed": true,
+    "checks": 1023,
+    "max_order": 5,
+    "max_part": 10,
+    "rows": [
+      {
+        "order": 1,
+        "partitions": 11
+      },
+      {
+        "order": 2,
+        "partitions": 55
+      },
+      {
+        "order": 3,
+        "partitions": 165
+      },
+      {
+        "order": 4,
+        "partitions": 330
+      },
+      {
+        "order": 5,
+        "partitions": 462
+      }
+    ]
+  },
+  "kind": "jensen_window_pf_endpoint_deep_schur_coordinate",
+  "primary_literature_audit": [
+    {
+      "citation": "M. Gasca and J. M. Pena, Total positivity and Neville elimination, Linear Algebra Appl. 165 (1992), 25-44",
+      "classification": "applicable_transfer_only",
+      "does_not_supply": "new positivity for any open rectangle",
+      "finding": "Positive initial minors characterize strict total positivity of each finite reversed block. This is exactly the fixed-order rectangle-to-arbitrary-shape transfer already used here.",
+      "id": "gasca_pena_initial_minors",
+      "url": "https://doi.org/10.1016/0024-3795(92)90226-Z"
+    },
+    {
+      "citation": "A. Edrei, Proof of a conjecture of Schoenberg on the generating function of a totally positive sequence, Canad. J. Math. 5 (1953), 86-94",
+      "classification": "strictly_too_strong",
+      "does_not_supply": "restricted deep-cone positivity",
+      "finding": "The theorem classifies full Toeplitz total positivity, whereas the endpoint specialization has a rigorously negative order-three Toeplitz minor outside the deep cone.",
+      "id": "edrei_pf_classification",
+      "url": "https://doi.org/10.4153/CJM-1953-010-3"
+    },
+    {
+      "citation": "J. M. Pena, Positive Hankel Matrices, Eigenvalues and Total Positivity, Mathematics 13 (2025), 2278, Proposition 6",
+      "classification": "structural_orientation_support",
+      "does_not_supply": "the open all-order endpoint hierarchy",
+      "finding": "Finite Hankel column reversal produces the signature (-1)^binom(k,2) in the associated Toeplitz matrix. It supports the orientation coordinate but assumes total positivity on the Hankel side and does not prove the Xi endpoint signs.",
+      "id": "pena_hankel_toeplitz_orientation",
+      "url": "https://doi.org/10.3390/math13142278"
+    },
+    {
+      "citation": "O. Y. Kushel, Matrices with totally positive powers and their generalizations, Operators and Matrices 9 (2015), 943-964",
+      "classification": "coordinate_mismatch",
+      "does_not_supply": "an eventual-depth Toeplitz theorem",
+      "finding": "Eventual total positivity there means total positivity of all sufficiently high matrix powers, not positivity of Toeplitz minors whose Jacobi-Trudi shapes lie beyond a moving depth boundary.",
+      "id": "kushel_eventual_total_positivity",
+      "url": "https://doi.org/10.7153/oam-09-56"
+    }
+  ],
+  "proof_boundary": "This artifact proves the Jacobi-Trudi index maps, their inverse, the equivalence with the existing endpoint hierarchy, and a rigorous negative PF_3 minor outside the deep cone. The order-ten source rejects the deep endpoint hierarchy itself. This does not settle the separate Jensen-window PF bridge, Jensen hyperbolicity, RH, or Lambda<=0.",
+  "rectangle_index_audit": {
+    "all_passed": true,
+    "checks": 4096,
+    "orders": [
+      1,
+      64
+    ],
+    "shifts": [
+      0,
+      63
+    ]
+  },
+  "rows": [
+    {
+      "claim": "Normalize the endpoint sequence so it is a genuine complete-homogeneous specialization with h_0=1.",
+      "diagnostics": {
+        "center": "0.06728671146053304508962307870413714845552597315807931150692732451198171669098312041297077623791055349387647644",
+        "conservative_radius": "4.26000000000000000000000000000000E-111",
+        "k": 0,
+        "lower": "6.72867114605330450896230787041371E-2",
+        "upper": "6.72867114605330450896230787041371E-2"
+      },
+      "formula": "h_k=A_k(-100)/A_0(-100) for k>=0, h_k=0 for k<0, h_0=1",
+      "id": "jwpfedsc_01_normalization",
+      "proof_boundary": "A_0(-100)>0 is rigorously enclosed away from zero.",
+      "readiness": "ready_to_apply",
+      "role": "exact_definition"
+    },
+    {
+      "claim": "Reversing the contiguous Hankel columns absorbs the signed orientation and produces a solid Toeplitz determinant.",
+      "diagnostics": {
+        "all_residuals_zero": true,
+        "orders": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "rows": [
+          {
+            "determinant_residual": "0",
+            "matrix_entries_identical": true,
+            "order": 1,
+            "rectangle_part": 2,
+            "shift": 2
+          },
+          {
+            "determinant_residual": "0",
+            "matrix_entries_identical": true,
+            "order": 2,
+            "rectangle_part": 3,
+            "shift": 2
+          },
+          {
+            "determinant_residual": "0",
+            "matrix_entries_identical": true,
+            "order": 3,
+            "rectangle_part": 4,
+            "shift": 2
+          },
+          {
+            "determinant_residual": "0",
+            "matrix_entries_identical": true,
+            "order": 4,
+            "rectangle_part": 5,
+            "shift": 2
+          },
+          {
+            "determinant_residual": "0",
+            "matrix_entries_identical": true,
+            "order": 5,
+            "rectangle_part": 6,
+            "shift": 2
+          }
+        ]
+      },
+      "formula": "Q_(m,n)(-100)=det[A_(n+m-1+i-j)(-100)]_(0<=i,j<m)",
+      "id": "jwpfedsc_02_column_reversal",
+      "proof_boundary": "One finite column reversal and one transpose; no sign hypothesis is used.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Every signed contiguous endpoint minor is exactly a normalized rectangular Schur value.",
+      "diagnostics": {
+        "all_passed": true,
+        "checks": 4096,
+        "orders": [
+          1,
+          64
+        ],
+        "shifts": [
+          0,
+          63
+        ]
+      },
+      "formula": "Q_(m,n)(-100)=A_0(-100)^m*s_((n+m-1)^m)(h)",
+      "id": "jwpfedsc_03_rectangles",
+      "proof_boundary": "The rectangle has m parts N=n+m-1, hence N>=m-1.",
+      "readiness": "ready_to_apply",
+      "role": "exact_jacobi_trudi_identity"
+    },
+    {
+      "claim": "Every consecutive-row arbitrary-column signed minor maps to one deep partition.",
+      "diagnostics": {
+        "all_passed": true,
+        "canonicalization": "the inverse absorbs j_0 into n and returns columns j_l-j_0",
+        "checks": 984,
+        "column_offsets": [
+          0,
+          7
+        ],
+        "max_order": 6,
+        "observed_minimum_column_gaps": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "shifts": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "formula": "lambda_(q+1)=n+j_(m-1-q)+q for 0<=q<m; epsilon_m*R_(m,n)(j_0,...,j_(m-1))=A_0(-100)^m*s_lambda(h)",
+      "id": "jwpfedsc_04_arbitrary_columns",
+      "proof_boundary": "Increasing column gaps are exactly the adjacent partition inequalities.",
+      "readiness": "ready_to_apply",
+      "role": "exact_jacobi_trudi_identity"
+    },
+    {
+      "claim": "Every partition with m parts and smallest part at least m-1 comes from a unique canonical shift and column set with j_0=0.",
+      "diagnostics": {
+        "all_passed": true,
+        "checks": 1023,
+        "max_order": 5,
+        "max_part": 10,
+        "rows": [
+          {
+            "order": 1,
+            "partitions": 11
+          },
+          {
+            "order": 2,
+            "partitions": 55
+          },
+          {
+            "order": 3,
+            "partitions": 165
+          },
+          {
+            "order": 4,
+            "partitions": 330
+          },
+          {
+            "order": 5,
+            "partitions": 462
+          }
+        ]
+      },
+      "formula": "n=lambda_m-(m-1), j_l=lambda_(m-l)-lambda_m+l for 0<=l<m",
+      "id": "jwpfedsc_05_inverse_map",
+      "proof_boundary": "Noncanonical representations differ only by moving j_0 into n.",
+      "readiness": "ready_to_apply",
+      "role": "exact_bijection"
+    },
+    {
+      "claim": "The depth inequality is exactly the condition that the whole Jacobi-Trudi matrix avoids negative-index structural zeros.",
+      "diagnostics": null,
+      "formula": "D_m={lambda_1>=...>=lambda_m>=m-1}; s_lambda(h)=det[h_(lambda_i-i+j)]_(1<=i,j<=m); min_(i,j)(lambda_i-i+j)=lambda_m-m+1>=0 exactly on D_m",
+      "id": "jwpfedsc_06_deep_support_boundary",
+      "proof_boundary": "This defines the term deep; it does not assert positivity.",
+      "readiness": "ready_to_apply",
+      "role": "exact_coordinate_boundary"
+    },
+    {
+      "claim": "With the completed lower base and fixed-order transfer, the candidate endpoint hierarchy is equivalent to positivity on the entire deep Schur cone.",
+      "diagnostics": {
+        "source_contract": {
+          "candidate_endpoint_hierarchy": "Q_(m,n)(-100)>0 for every m>=10 and n>=0",
+          "coefficient_enclosure": "rigorous acb enclosures at lambda=-100 include A_0,...,A_3",
+          "fixed_order_transfer": "strict signed contiguous layers through m imply all consecutive-row arbitrary-column signed minors through m",
+          "known_endpoint_base": "Q_(m,n)(-100)>0 for 1<=m<=9 and every n>=0",
+          "order10_counterexample": "Q_(10,n)(-100)<0 for n=0,1,2,3"
+        }
+      },
+      "formula": "[Q_(m,n)(-100)>0 for every m>=10,n>=0] iff [s_lambda(h)>0 for every m>=10,lambda in D_m]",
+      "id": "jwpfedsc_07_endpoint_equivalence",
+      "proof_boundary": "The equivalence is exact, but the order-ten counterexample makes both universal positivity statements false.",
+      "readiness": "ready_to_apply",
+      "role": "exact_all_order_reduction"
+    },
+    {
+      "claim": "Within the candidate hierarchy, only rectangular deep shapes are independent; the remaining deep shapes would follow structurally from lower rectangles.",
+      "diagnostics": null,
+      "formula": "s_((N^m))(h)>0 for every m>=10 and N>=m-1",
+      "id": "jwpfedsc_08_minimal_rectangle_target",
+      "proof_boundary": "An exact coordinate for a candidate statement later rejected at order ten.",
+      "readiness": "ready_to_apply",
+      "role": "exact_target_coordinate"
+    },
+    {
+      "claim": "The normalized endpoint sequence fails ordinary PF already at the first excluded order-three solid block.",
+      "diagnostics": {
+        "coefficient_intervals": [
+          {
+            "center": "0.06728671146053304508962307870413714845552597315807931150692732451198171669098312041297077623791055349387647644",
+            "conservative_radius": "4.26000000000000000000000000000000E-111",
+            "k": 0,
+            "lower": "6.72867114605330450896230787041371E-2",
+            "upper": "6.72867114605330450896230787041371E-2"
+          },
+          {
+            "center": "0.0001206459270906446485096427071282713804250370723966195367840690695810451963568481883446805591687396442127364",
+            "conservative_radius": "3.42000000000000000000000000000000E-110",
+            "k": 1,
+            "lower": "1.20645927090644648509642707128271E-4",
+            "upper": "1.20645927090644648509642707128271E-4"
+          },
+          {
+            "center": "2.1437847099349673246495769060152013232872547619618836347890725824001014007738615088763266431971925424385e-7",
+            "conservative_radius": "4.28000000000000000000000000000000E-111",
+            "k": 2,
+            "lower": "2.14378470993496732464957690601520E-7",
+            "upper": "2.14378470993496732464957690601520E-7"
+          },
+          {
+            "center": "3.77640322628588060007914387998948527584698366062414603906109741492029744226912703494878979422805650068e-10",
+            "conservative_radius": "2.87000000000000000000000000000000E-112",
+            "k": 3,
+            "lower": "3.77640322628588060007914387998949E-10",
+            "upper": "3.77640322628588060007914387998949E-10"
+          }
+        ],
+        "consequence": "the normalized endpoint sequence is not PF_3 and hence not PF-infinity",
+        "excluded_from_deep_order_three": true,
+        "exclusion_reason": "lambda_3=1<3-1=2",
+        "formula_A": "A_1^3-2*A_0*A_1*A_2+A_0^2*A_3",
+        "formula_h": "h_1^3-2*h_1*h_2+h_3",
+        "lambda": -100,
+        "normalized_interval": {
+          "lower": "-4.84848642182060969711098547098349E-11",
+          "upper": "-4.84848642182060969711098547098349E-11"
+        },
+        "partition": [
+          1,
+          1,
+          1
+        ],
+        "strictly_negative": true,
+        "toeplitz_columns": [
+          1,
+          2,
+          3
+        ],
+        "toeplitz_rows": [
+          0,
+          1,
+          2
+        ],
+        "unnormalized_interval": {
+          "lower": "-1.47704624756126648090208397443869E-14",
+          "upper": "-1.47704624756126648090208397443869E-14"
+        }
+      },
+      "formula": "s_(1,1,1)(h)<0 at lambda=-100",
+      "id": "jwpfedsc_09_endpoint_pf_counterexample",
+      "proof_boundary": "Exact rational interval propagation from rigorous acb coefficient enclosures.",
+      "readiness": "ready_to_apply",
+      "role": "rigorous_exclusion_certificate"
+    },
+    {
+      "claim": "The deep cone is a proper subfamily of the full Schur/PF inequality family, and an additional PF inequality already fails for the actual endpoint sequence.",
+      "diagnostics": null,
+      "formula": "s_(1,1,1)(h)<0 but (1,1,1) is not in D_3 because 1<2",
+      "id": "jwpfedsc_10_strictly_weaker_than_pf",
+      "proof_boundary": "This blocks Edrei/ASW as a direct endpoint theorem; the separate order-ten certificate now also rejects the deep cone itself.",
+      "readiness": "ready_to_apply",
+      "role": "route_separation_theorem"
+    },
+    {
+      "claim": "The audited primary theorems support the coordinate and transfer or impose stronger incompatible hypotheses; none supplies the candidate rectangle signs, which are now directly false at order ten.",
+      "diagnostics": [
+        {
+          "citation": "M. Gasca and J. M. Pena, Total positivity and Neville elimination, Linear Algebra Appl. 165 (1992), 25-44",
+          "classification": "applicable_transfer_only",
+          "does_not_supply": "new positivity for any open rectangle",
+          "finding": "Positive initial minors characterize strict total positivity of each finite reversed block. This is exactly the fixed-order rectangle-to-arbitrary-shape transfer already used here.",
+          "id": "gasca_pena_initial_minors",
+          "url": "https://doi.org/10.1016/0024-3795(92)90226-Z"
+        },
+        {
+          "citation": "A. Edrei, Proof of a conjecture of Schoenberg on the generating function of a totally positive sequence, Canad. J. Math. 5 (1953), 86-94",
+          "classification": "strictly_too_strong",
+          "does_not_supply": "restricted deep-cone positivity",
+          "finding": "The theorem classifies full Toeplitz total positivity, whereas the endpoint specialization has a rigorously negative order-three Toeplitz minor outside the deep cone.",
+          "id": "edrei_pf_classification",
+          "url": "https://doi.org/10.4153/CJM-1953-010-3"
+        },
+        {
+          "citation": "J. M. Pena, Positive Hankel Matrices, Eigenvalues and Total Positivity, Mathematics 13 (2025), 2278, Proposition 6",
+          "classification": "structural_orientation_support",
+          "does_not_supply": "the open all-order endpoint hierarchy",
+          "finding": "Finite Hankel column reversal produces the signature (-1)^binom(k,2) in the associated Toeplitz matrix. It supports the orientation coordinate but assumes total positivity on the Hankel side and does not prove the Xi endpoint signs.",
+          "id": "pena_hankel_toeplitz_orientation",
+          "url": "https://doi.org/10.3390/math13142278"
+        },
+        {
+          "citation": "O. Y. Kushel, Matrices with totally positive powers and their generalizations, Operators and Matrices 9 (2015), 943-964",
+          "classification": "coordinate_mismatch",
+          "does_not_supply": "an eventual-depth Toeplitz theorem",
+          "finding": "Eventual total positivity there means total positivity of all sufficiently high matrix powers, not positivity of Toeplitz minors whose Jacobi-Trudi shapes lie beyond a moving depth boundary.",
+          "id": "kushel_eventual_total_positivity",
+          "url": "https://doi.org/10.7153/oam-09-56"
+        }
+      ],
+      "formula": "direct_closing_theorems_in_audited_set=0",
+      "id": "jwpfedsc_11_literature_fit",
+      "proof_boundary": "A bounded theorem search, not a claim that no relevant theorem exists anywhere.",
+      "readiness": "ready_to_apply",
+      "role": "primary_literature_gate"
+    },
+    {
+      "claim": "Abstract static deep endpoint positivity would feed into the completed cooperative heat induction.",
+      "diagnostics": {
+        "source": {
+          "kind": "jensen_window_pf_all_order_endpoint_heat_reduction",
+          "path": "work/rh_compute/results/jensen_window_pf_all_order_endpoint_heat_reduction.json",
+          "sha256": "674c8640670fe067c701dff4e72ad9e6f0022c159830b6734d2432aec3bddd32",
+          "status": "exact all-order endpoint-to-heat equivalence with a completed base through order nine and the candidate endpoint hierarchy rejected by the order-ten counterexample"
+        }
+      },
+      "formula": "deep endpoint positivity => all-order endpoint hierarchy => all-order signed-Hankel positivity on -100<=lambda<=0",
+      "id": "jwpfedsc_12_dynamic_composition",
+      "proof_boundary": "The implication remains exact, but its antecedent is false for the actual endpoint sequence.",
+      "readiness": "ready_to_apply",
+      "role": "exact_conditional_consequence"
+    },
+    {
+      "claim": "The first four order-ten rectangles are negative, so the proposed deep endpoint hierarchy is false.",
+      "diagnostics": {
+        "source": {
+          "kind": "jensen_window_pf_endpoint_order10_counterexample",
+          "path": "work/rh_compute/results/jensen_window_pf_endpoint_order10_counterexample.json",
+          "sha256": "d29cf31fcd8927f6ca11090c468f3aede29d32da4aa26b7f31c8c850f435f3e2",
+          "status": "rigorous first-open-order endpoint counterexample rejecting the all-order deep rectangular hierarchy"
+        }
+      },
+      "formula": "s_((N^10))(h)<0 for N=9,10,11,12; s_((N^m))(h)>0 for every m>=10 and N>=m-1 is false",
+      "id": "jwpfedsc_13_rejected_deep_target",
+      "proof_boundary": "Rejects the all-order deep-cone antecedent, not RH or Jensen hyperbolicity.",
+      "readiness": "rejected_by_counterexample",
+      "role": "countermodel_gate"
+    },
+    {
+      "claim": "The binomially weighted Jensen-window problem survives, but its Xi/Phi-specific antecedent must be weaker than the rejected deep cone.",
+      "diagnostics": null,
+      "formula": "deep Schur positivity of h_k=A_k(-100)/A_0(-100) is not Schur positivity of the binomially weighted Jensen-window sequences",
+      "id": "jwpfedsc_14_jensen_bridge_boundary",
+      "proof_boundary": "The endpoint specialization and every finite Jensen-window specialization are different Toeplitz sequences.",
+      "readiness": "separate_open_obligation",
+      "role": "route_separation_guard"
+    }
+  ],
+  "source_contract": {
+    "candidate_endpoint_hierarchy": "Q_(m,n)(-100)>0 for every m>=10 and n>=0",
+    "coefficient_enclosure": "rigorous acb enclosures at lambda=-100 include A_0,...,A_3",
+    "fixed_order_transfer": "strict signed contiguous layers through m imply all consecutive-row arbitrary-column signed minors through m",
+    "known_endpoint_base": "Q_(m,n)(-100)>0 for 1<=m<=9 and every n>=0",
+    "order10_counterexample": "Q_(10,n)(-100)<0 for n=0,1,2,3"
+  },
+  "sources": [
+    {
+      "kind": "jensen_window_pf_all_order_endpoint_heat_reduction",
+      "path": "work/rh_compute/results/jensen_window_pf_all_order_endpoint_heat_reduction.json",
+      "sha256": "674c8640670fe067c701dff4e72ad9e6f0022c159830b6734d2432aec3bddd32",
+      "status": "exact all-order endpoint-to-heat equivalence with a completed base through order nine and the candidate endpoint hierarchy rejected by the order-ten counterexample"
+    },
+    {
+      "kind": "jensen_window_pf_order4_noncontiguous_total_positivity_transfer",
+      "path": "work/rh_compute/results/jensen_window_pf_order4_noncontiguous_total_positivity_transfer.json",
+      "sha256": "dba5df10b861a594e2e20690b5286a711d98ace5fdc343453f6cd8fdeca8d1e5",
+      "status": "exact arbitrary-column reshaped-Hankel order-four theorem at lambda zero"
+    },
+    {
+      "path": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k22.jsonl",
+      "sha256": "549b33735dcccbdf86f7f67977e0d43f3683f19e2e369a502229a03fa7049d54"
+    },
+    {
+      "kind": "acb_coefficient_enclosure_summary",
+      "path": "work/rh_compute/results/acb_enclosures_negative_lambda_cone_entry_lam_m25_m50_m100_k0_k22_summary.json",
+      "sha256": "c15c9088d0a4096131a1bb4fa90ac5405ce48559980a4097572fa10e67e1e6e4",
+      "status": null
+    },
+    {
+      "kind": "jensen_window_pf_endpoint_order10_counterexample",
+      "path": "work/rh_compute/results/jensen_window_pf_endpoint_order10_counterexample.json",
+      "sha256": "d29cf31fcd8927f6ca11090c468f3aede29d32da4aa26b7f31c8c850f435f3e2",
+      "status": "rigorous first-open-order endpoint counterexample rejecting the all-order deep rectangular hierarchy"
+    }
+  ],
+  "status": "exact normalized deep-Schur coordinate and rigorous endpoint PF separation, with the all-order rectangle hierarchy rejected at order ten",
+  "summary": {
+    "arbitrary_column_checks": 984,
+    "completed_base_order": 9,
+    "deep_cone_bijections": 1,
+    "direct_literature_closing_theorems": 0,
+    "endpoint_deep_equivalences": 1,
+    "first_failed_order": 10,
+    "inverse_partition_checks": 1023,
+    "negative_deep_rectangles": 4,
+    "open_endpoint_rows": 0,
+    "open_rectangle_hierarchies": 0,
+    "ready_to_apply_rows": 12,
+    "rectangle_index_checks": 4096,
+    "rejected_endpoint_rows": 1,
+    "rejected_rectangle_hierarchies": 1,
+    "rigorous_endpoint_pf_counterexamples": 1,
+    "rows": 14,
+    "separate_bridge_rows": 1,
+    "separate_jensen_pf_bridges": 1,
+    "symbolic_orders": 5
+  },
+  "symbolic_rectangle_audit": {
+    "all_residuals_zero": true,
+    "orders": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "rows": [
+      {
+        "determinant_residual": "0",
+        "matrix_entries_identical": true,
+        "order": 1,
+        "rectangle_part": 2,
+        "shift": 2
+      },
+      {
+        "determinant_residual": "0",
+        "matrix_entries_identical": true,
+        "order": 2,
+        "rectangle_part": 3,
+        "shift": 2
+      },
+      {
+        "determinant_residual": "0",
+        "matrix_entries_identical": true,
+        "order": 3,
+        "rectangle_part": 4,
+        "shift": 2
+      },
+      {
+        "determinant_residual": "0",
+        "matrix_entries_identical": true,
+        "order": 4,
+        "rectangle_part": 5,
+        "shift": 2
+      },
+      {
+        "determinant_residual": "0",
+        "matrix_entries_identical": true,
+        "order": 5,
+        "rectangle_part": 6,
+        "shift": 2
+      }
+    ]
+  }
+}

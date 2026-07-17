@@ -36,6 +36,22 @@ Current result:
 validated Jensen-window PF negative-lambda uniform remainder target: 8 rows, 0 issues, 0 ready-to-apply rows, 2 open requirements, 3 leading-scale rows
 ```
 
+## 2026-07-11 Route-Retirement Handoff
+
+This target remains an accurate statement of what the old fixed-`k`
+signed-Gaussian route would require. It is no longer an active blocker:
+
+```text
+outputs/jensen_window_pf_negative_lambda_scaled_curvature_continuous_bridge.md
+outputs/jensen_window_pf_negative_lambda_m100_raw_corridor_certificate.md
+outputs/jensen_window_pf_negative_lambda_m100_adaptive_defect_certificate.md
+```
+
+The independent lambda=-100 saddle chain proves scaled-curvature growth, the
+raw corridor, and the needed defect statements directly. The stronger old
+simultaneous remainder theorem is not proved; it is retained below as route
+history rather than a required upgrade.
+
 ## Scale Obstruction
 
 The fixed-`k` signed perturbation gives a leading deficit:

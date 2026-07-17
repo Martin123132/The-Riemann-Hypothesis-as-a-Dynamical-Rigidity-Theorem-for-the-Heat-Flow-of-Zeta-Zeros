@@ -1,0 +1,131 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order10_lambda0_prefix_certificate.py",
+  "date": "2026-07-16",
+  "finite": {
+    "all_Q10_positive": true,
+    "coefficient_range": [
+      0,
+      21
+    ],
+    "lambda": "0",
+    "n_range": [
+      0,
+      3
+    ],
+    "precision_dps": 520,
+    "rows": [
+      {
+        "Q10_ball": "[6.122601728800756973263039882428856342279754341050629910427e-271 +/- 7.74e-329]",
+        "classification": "positive",
+        "coefficient_range": [
+          0,
+          18
+        ],
+        "epsilon_10": -1,
+        "matrix_dimension": 10,
+        "n": 0,
+        "probe_m": 9,
+        "probe_sigma": -1,
+        "raw_H10_ball": "[-6.122601728800756973263039882428856342279754341050629910427e-271 +/- 7.74e-329]",
+        "source_Q10_ball": "[6.122601728800756973263039882428856342279754341050629910427e-271 +/- 7.74e-329]",
+        "source_overlap": true
+      },
+      {
+        "Q10_ball": "[4.85410207810852138935088900380689603260497548726993815580e-296 +/- 7.03e-353]",
+        "classification": "positive",
+        "coefficient_range": [
+          1,
+          19
+        ],
+        "epsilon_10": -1,
+        "matrix_dimension": 10,
+        "n": 1,
+        "probe_m": 9,
+        "probe_sigma": -1,
+        "raw_H10_ball": "[-4.85410207810852138935088900380689603260497548726993815580e-296 +/- 7.03e-353]",
+        "source_Q10_ball": "[4.85410207810852138935088900380689603260497548726993815580e-296 +/- 7.03e-353]",
+        "source_overlap": true
+      },
+      {
+        "Q10_ball": "[3.2184750025458154961067928863145107326011517462970400960e-321 +/- 5.48e-377]",
+        "classification": "positive",
+        "coefficient_range": [
+          2,
+          20
+        ],
+        "epsilon_10": -1,
+        "matrix_dimension": 10,
+        "n": 2,
+        "probe_m": 9,
+        "probe_sigma": -1,
+        "raw_H10_ball": "[-3.2184750025458154961067928863145107326011517462970400960e-321 +/- 5.48e-377]",
+        "source_Q10_ball": "[3.2184750025458154961067928863145107326011517462970400960e-321 +/- 5.48e-377]",
+        "source_overlap": true
+      },
+      {
+        "Q10_ball": "[1.794614559198768285668870688859631526278643197408175440e-346 +/- 1.62e-401]",
+        "classification": "positive",
+        "coefficient_range": [
+          3,
+          21
+        ],
+        "epsilon_10": -1,
+        "matrix_dimension": 10,
+        "n": 3,
+        "probe_m": 9,
+        "probe_sigma": -1,
+        "raw_H10_ball": "[-1.794614559198768285668870688859631526278643197408175440e-346 +/- 1.62e-401]",
+        "source_Q10_ball": "[1.794614559198768285668870688859631526278643197408175440e-346 +/- 1.62e-401]",
+        "source_overlap": true
+      }
+    ],
+    "theorem": "Q_(10,n)(0)>0 for every integer 0<=n<=3"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order10_lambda0_prefix_certificate.py",
+  "kind": "jensen_window_pf_compound_order10_lambda0_prefix_certificate",
+  "normalization": {
+    "coefficient": "A_k(lambda)=mu_(2k)(lambda)*k!/(2k)!",
+    "definition": "H_(m,n)=det[A_(n+i+j)]_(0<=i,j<m), H_(0,n)=1, epsilon_m=(-1)^binom(m,2), Q_(m,n)=epsilon_m*H_(m,n)",
+    "epsilon_10": -1,
+    "index_identification": "probe m=9 and shift=n equals Q_(10,n)",
+    "order": 10,
+    "probe_matrix_dimension": 10,
+    "probe_parameter": 9,
+    "probe_sigma": -1
+  },
+  "proof_boundary": "This proves four contiguous signed Hankel rows at lambda=0 only. It does not prove positivity at negative lambda, the order-ten all-shift theorem until the delayed heat tail is composed, PF-infinity, RH, or Lambda<=0.",
+  "sources": [
+    {
+      "path": "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k0_k9.jsonl",
+      "sha256": "0c37c761a01fd3d986d0db9e837b57f76878007b3e94df033ef27ba0109f2386"
+    },
+    {
+      "path": "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k10_k20.jsonl",
+      "sha256": "0ed90e7c86c8b73b7d9844de99244372733105a45ee11943451d209d4d18275e"
+    },
+    {
+      "path": "work/rh_compute/results/acb_enclosures_repro_hankel_15c_lamgrid_k21_k32.jsonl",
+      "sha256": "7d0b845327bf06313f4ec38d4d1c12b99df16778d589b8aacafd13743ddd6ca9"
+    },
+    {
+      "path": "work/rh_compute/results/arb_hankel_enclosure_lam0_m0_m19_s0_s24_dps520.jsonl",
+      "sha256": "55f093b6a6721a11de656dfe6922d114d302328ded64b0029268464d2b5ebfd1"
+    },
+    {
+      "path": "work/rh_compute/results/arb_hankel_enclosure_lam0_m0_m19_s0_s24_dps520_summary.json",
+      "sha256": "72ea7f73eb1491f133c2300ab71a7eb5286b802ac070c2ad0cd4610eee7c6df4"
+    },
+    {
+      "path": "work/rh_compute/results/jensen_window_pf_all_order_endpoint_heat_reduction.json",
+      "sha256": "674c8640670fe067c701dff4e72ad9e6f0022c159830b6734d2432aec3bddd32"
+    }
+  ],
+  "status": "rigorous lambda-zero order-ten prefix certificate for n=0,1,2,3",
+  "summary": {
+    "coefficient_rows": 22,
+    "inconclusive_rows": 0,
+    "positive_Q10_rows": 4,
+    "prefix_rows": 4,
+    "source_overlaps": 4
+  }
+}

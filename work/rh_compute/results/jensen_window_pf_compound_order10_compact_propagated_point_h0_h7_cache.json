@@ -1,0 +1,77 @@
+{
+  "cache": {
+    "all_rows_passed": true,
+    "coefficient_orders": [
+      0,
+      7
+    ],
+    "maximum_remainder_coefficient_upper": {
+      "0": "4.72892064566815215333150376717432871685916138145645246675294E-39",
+      "1": "1.62134422137193788114222986303119841720885533078506941717244E-38",
+      "2": "2.66363693511104080473366334640839739970026232914689975678329E-38",
+      "3": "2.79047678916394750972098064861832108540027482101103784043964E-38",
+      "4": "2.09285759187296063229073548646374081405020611575827838032973E-38",
+      "5": "1.19591862392740607559470599226499475088583206614758764590271E-38",
+      "6": "5.41010806062397986578557472691307149210257363257242030289317E-39",
+      "7": "1.98738663451493137926817030784561809913972092625109317249137E-39"
+    },
+    "path": "work/rh_compute/results/jensen_window_pf_compound_order10_compact_propagated_point_h0_h7_integer_grid.jsonl",
+    "row_count": 32335,
+    "sha256": "6bdf720643d82bffca56f518a78f68b9f4fcfd51699b0b1fbfb92e86a6c23a00"
+  },
+  "date": "2026-07-16",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order10_compact_propagated_point_h0_h7_cache.py",
+  "kind": "jensen_window_pf_compound_order10_compact_propagated_point_h0_h7_cache",
+  "parameters": {
+    "output_orders": [
+      0,
+      7
+    ],
+    "remainder_order": 24,
+    "target_end_t": "38026",
+    "target_start_t": "5692",
+    "target_step_t": "1"
+  },
+  "proof_boundary": "This cache applies exact Taylor identities with H24 interval remainders. It is a point-jet input and does not itself prove a stable-coordinate curvature theorem.",
+  "source_contract": {
+    "formula": {
+      "exact_orders": [
+        0,
+        23
+      ],
+      "identity": "H^(j)(a+h)/j!=sum_{m=0}^{23-j} binom(j+m,j) H^(j+m)(a)/(j+m)! h^m + R_24/j!",
+      "output_orders": [
+        0,
+        7
+      ],
+      "remainder_order": 24,
+      "sparse_origin": "5692",
+      "sparse_step": "8",
+      "target_domain": [
+        "5692",
+        "38026"
+      ]
+    },
+    "id": "06465532fef3fce11d285a6fd7c828d9dd718843057546e56f1ce0cc239debc1",
+    "precision_load_invariant": "set flint.ctx.prec=512 before parsing serialized Arb intervals",
+    "sources": [
+      {
+        "kind": "jensen_window_pf_compound_order10_compact_sparse_point_h0_h23_cache",
+        "manifest_path": "work/rh_compute/results/jensen_window_pf_compound_order10_compact_sparse_point_h0_h23_cache.json",
+        "manifest_sha256": "e520b87574ec4c6ec25b1fba12b33d48b65345296311c0704706fd3e8a4c47fd",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_compact_sparse_point_h0_h23_step8.jsonl",
+        "rows": 4042,
+        "sha256": "130fd26544348549a2a373cfa563766c16446dc01ad4b6f712900b528d1fcf66"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order10_compact_h2_h24_unit_cache",
+        "manifest_path": "work/rh_compute/results/jensen_window_pf_compound_order10_compact_h2_h24_unit_cache.json",
+        "manifest_sha256": "93ba37f85b8866f1706b1734e5f6139b1404fa504355d3dd13f936acf44eda64",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_compact_h2_h24_unit_tiles.jsonl",
+        "rows": 32336,
+        "sha256": "2040c13cdb9610602c25099962a69e7588662a10b0d7dbc627531dab853d35e2"
+      }
+    ]
+  },
+  "status": "rigorous full integer-grid H0-H7 Taylor-coefficient cache propagated from sparse exact jets"
+}

@@ -1,0 +1,294 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order10_localized_lower_bridge_certificate.py",
+  "composition": {
+    "block_count": 9996,
+    "global_maximum": {
+      "anchor": "1500",
+      "curvature_margin_lower": "1.40218587961539986300234178145499016737331583280409989460271E+3",
+      "expansion_anchor": "1500",
+      "regime": "middle",
+      "right": "6001/4",
+      "scaled_curvature_upper": "4.09781412038460013699765821854500983262668416719590010539729E+3"
+    },
+    "global_minimum_margin": {
+      "anchor": "1500",
+      "curvature_margin_lower": "1.40218587961539986300234178145499016737331583280409989460271E+3",
+      "expansion_anchor": "1500",
+      "regime": "middle",
+      "right": "6001/4",
+      "scaled_curvature_upper": "4.09781412038460013699765821854500983262668416719590010539729E+3"
+    },
+    "regime_counts": {
+      "far": 7800,
+      "middle": 1200,
+      "near": 996
+    },
+    "regime_maxima": {
+      "far": {
+        "anchor": "5693",
+        "curvature_margin_lower": "2.92480408520428206533168960594931711369943030023863501229460E+3",
+        "expansion_anchor": "5693",
+        "regime": "far",
+        "right": "11387/2",
+        "scaled_curvature_upper": "2.57519591479571793466831039405068288630056969976136498770540E+3"
+      },
+      "middle": {
+        "anchor": "1500",
+        "curvature_margin_lower": "1.40218587961539986300234178145499016737331583280409989460271E+3",
+        "expansion_anchor": "1500",
+        "regime": "middle",
+        "right": "6001/4",
+        "scaled_curvature_upper": "4.09781412038460013699765821854500983262668416719590010539729E+3"
+      },
+      "near": {
+        "anchor": "1251",
+        "curvature_margin_lower": "5.12254254790629483441928189232378179122800420333949754265351E+3",
+        "expansion_anchor": "1251",
+        "regime": "near",
+        "right": "5005/4",
+        "scaled_curvature_upper": "3.77457452093705165580718107676218208771995796660502457346484E+2"
+      }
+    },
+    "segment_rows": 279
+  },
+  "date": "2026-07-16",
+  "exact": {
+    "curvature_formula": "z''=2*w''-s''+phi(W)*W''-chi(W)*(W')^2",
+    "order9_coordinate": "z(t)=2*w(t)-s(t)+log(1-exp(-W(t)))",
+    "seventh_gap": "W(t)=8*B(t)-w(t-1)+2*w(t)-w(t+1)",
+    "theorem": "z_1''(t)<=4200/t^2 for every real 1251<=t<=5700",
+    "upper_formula": "z''<=2*w''-s''+phi(W)*max(W'',0)"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order10_localized_lower_bridge_certificate.py",
+  "kind": "jensen_window_pf_compound_order10_localized_lower_bridge_certificate",
+  "proof_boundary": "This artifact proves only the displayed first-summand continuous lower bridge. It does not prove the upper saddle ranges, full-kernel curvature ceiling, endpoint tail, delayed entry, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "SHA-bound H2-H24 caches and exact half-grid point jets cover every localized collar.",
+      "diagnostics": {
+        "date": "2026-07-16",
+        "kind": "order10_localized_lower_bridge_run_contract",
+        "parameters": {
+          "cell_width": "1/2",
+          "curvature_constant": 5500,
+          "end_t": "5700",
+          "middle_end_t": "1800",
+          "near_end_t": "1500",
+          "point_order": 7,
+          "precision_bits": 512,
+          "quarter_width": "1/4",
+          "remainder_order": 8,
+          "root_segment_width": "16",
+          "segment_count": 279,
+          "start_t": "1251"
+        },
+        "segment_cache": {
+          "path": "work/rh_compute/results/jensen_window_pf_compound_order10_localized_lower_bridge_segments.jsonl",
+          "row_count": 279,
+          "sha256": "b40e37852442dcc612683aa2c662fdf7f6a7e354abd76c24e811b500e5542ef4"
+        },
+        "sources": [
+          {
+            "path": "work/rh_compute/results/jensen_window_pf_compound_order10_lower_bridge_h2_h24_hundredth_tiles.jsonl",
+            "sha256": "43e2ebd53bb9007844f98404e726fb67d340aa55e6a10a902e08dcf5c9de0643"
+          },
+          {
+            "path": "work/rh_compute/results/jensen_window_pf_compound_order10_lower_bridge_h2_h24_hundredth_cache.json",
+            "sha256": "7b0c2b6e84ac96db8ddf86911ddcca334f3dbdd1f1028e6d02c59fb0e8889d26"
+          },
+          {
+            "path": "work/rh_compute/results/jensen_window_pf_compound_order10_lower_bridge_h2_h24_tenth_tiles.jsonl",
+            "sha256": "0c2b123ca508280a0d8ba5a325a020da80ffc796a1d0c41fb87913b0f59cf5fd"
+          },
+          {
+            "path": "work/rh_compute/results/jensen_window_pf_compound_order10_lower_bridge_h2_h24_tenth_cache.json",
+            "sha256": "c488edd3c6e850684796642ab4fa1bda8cd1abb4fa669f47ae6b6841bec42271"
+          },
+          {
+            "path": "work/rh_compute/results/jensen_window_pf_compound_order9_shifted_point_h0_h8_half_grid.jsonl",
+            "sha256": "81e91a22e21843b82132b5d661c5f8bed30fe4c1b8d7d7921d368ec93059b092"
+          },
+          {
+            "path": "work/rh_compute/results/jensen_window_pf_compound_order9_shifted_point_h0_h8_cache.json",
+            "sha256": "d8a6e2db6de40d6e5703154d7f3de0792a2d7701a9a1736792a490ce65d941f1"
+          },
+          {
+            "path": "work/rh_compute/results/jensen_window_pf_compound_order10_shifted_point_h0_h8_half_grid_extension.jsonl",
+            "sha256": "f55ceafbf68be780b4278ed86be1d27d3ecd2faa11cf0fbfade76a6605a6255a"
+          },
+          {
+            "path": "work/rh_compute/results/jensen_window_pf_compound_order10_shifted_point_h0_h8_half_grid_extension_cache.json",
+            "sha256": "2ee8b1048e47b805b73ce106ba6d857faad00bdb04000f6291577d92edd33e90"
+          }
+        ],
+        "stored_run_contract": {
+          "path": "work/rh_compute/results/jensen_window_pf_compound_order10_localized_lower_bridge_run_contract.json",
+          "sha256": "fee857da8798e080f7714a139e8bfdb1c765b933488b1f5fdd2591f1f2ae11d7"
+        }
+      },
+      "formula": "26600 hundredth H rows; 42180 tenth H rows; 8931 point rows",
+      "id": "co10llbc_01_sources",
+      "proof_boundary": "First Newman summand only.",
+      "readiness": "ready_to_apply",
+      "role": "interval_input"
+    },
+    {
+      "claim": "The componentwise stable-log formula preserves cancellation and drops only a nonpositive term.",
+      "diagnostics": null,
+      "formula": "z''<=2*w''-s''+phi(W)*max(W'',0)",
+      "id": "co10llbc_02_component_formula",
+      "proof_boundary": "Exact differential inequality inside the positive W cone.",
+      "readiness": "ready_to_apply",
+      "role": "exact_inequality"
+    },
+    {
+      "claim": "Bidirectional quarter blocks cover the near and middle regimes without gaps.",
+      "diagnostics": {
+        "middle_blocks": 1200,
+        "middle_maximum": {
+          "anchor": "1500",
+          "curvature_margin_lower": "1.40218587961539986300234178145499016737331583280409989460271E+3",
+          "expansion_anchor": "1500",
+          "regime": "middle",
+          "right": "6001/4",
+          "scaled_curvature_upper": "4.09781412038460013699765821854500983262668416719590010539729E+3"
+        },
+        "near_blocks": 996,
+        "near_maximum": {
+          "anchor": "1251",
+          "curvature_margin_lower": "5.12254254790629483441928189232378179122800420333949754265351E+3",
+          "expansion_anchor": "1251",
+          "regime": "near",
+          "right": "5005/4",
+          "scaled_curvature_upper": "3.77457452093705165580718107676218208771995796660502457346484E+2"
+        }
+      },
+      "formula": "z_1''(t)<=4200/t^2 for 1251<=t<=1800",
+      "id": "co10llbc_03_near_middle",
+      "proof_boundary": "Hundredth tiles through 1500, then tenth tiles through 1800.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "Half-unit blocks cover the far lower bridge through the saddle handoff.",
+      "diagnostics": {
+        "far_blocks": 7800,
+        "far_maximum": {
+          "anchor": "5693",
+          "curvature_margin_lower": "2.92480408520428206533168960594931711369943030023863501229460E+3",
+          "expansion_anchor": "5693",
+          "regime": "far",
+          "right": "11387/2",
+          "scaled_curvature_upper": "2.57519591479571793466831039405068288630056969976136498770540E+3"
+        }
+      },
+      "formula": "z_1''(t)<=4200/t^2 for 1800<=t<=5700",
+      "id": "co10llbc_04_far",
+      "proof_boundary": "Tenth-tile first-summand interval theorem.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "All 9,996 passing blocks compose into one continuous lower-bridge theorem.",
+      "diagnostics": {
+        "global_maximum": {
+          "anchor": "1500",
+          "curvature_margin_lower": "1.40218587961539986300234178145499016737331583280409989460271E+3",
+          "expansion_anchor": "1500",
+          "regime": "middle",
+          "right": "6001/4",
+          "scaled_curvature_upper": "4.09781412038460013699765821854500983262668416719590010539729E+3"
+        },
+        "global_minimum_margin": {
+          "anchor": "1500",
+          "curvature_margin_lower": "1.40218587961539986300234178145499016737331583280409989460271E+3",
+          "expansion_anchor": "1500",
+          "regime": "middle",
+          "right": "6001/4",
+          "scaled_curvature_upper": "4.09781412038460013699765821854500983262668416719590010539729E+3"
+        }
+      },
+      "formula": "z_1''(t)<=4200/t^2 for every real 1251<=t<=5700",
+      "id": "co10llbc_05_composition",
+      "proof_boundary": "First summand only; upper saddle ranges and full-kernel transfer remain separate.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    }
+  ],
+  "source_contract": {
+    "date": "2026-07-16",
+    "kind": "order10_localized_lower_bridge_run_contract",
+    "parameters": {
+      "cell_width": "1/2",
+      "curvature_constant": 5500,
+      "end_t": "5700",
+      "middle_end_t": "1800",
+      "near_end_t": "1500",
+      "point_order": 7,
+      "precision_bits": 512,
+      "quarter_width": "1/4",
+      "remainder_order": 8,
+      "root_segment_width": "16",
+      "segment_count": 279,
+      "start_t": "1251"
+    },
+    "segment_cache": {
+      "path": "work/rh_compute/results/jensen_window_pf_compound_order10_localized_lower_bridge_segments.jsonl",
+      "row_count": 279,
+      "sha256": "b40e37852442dcc612683aa2c662fdf7f6a7e354abd76c24e811b500e5542ef4"
+    },
+    "sources": [
+      {
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_lower_bridge_h2_h24_hundredth_tiles.jsonl",
+        "sha256": "43e2ebd53bb9007844f98404e726fb67d340aa55e6a10a902e08dcf5c9de0643"
+      },
+      {
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_lower_bridge_h2_h24_hundredth_cache.json",
+        "sha256": "7b0c2b6e84ac96db8ddf86911ddcca334f3dbdd1f1028e6d02c59fb0e8889d26"
+      },
+      {
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_lower_bridge_h2_h24_tenth_tiles.jsonl",
+        "sha256": "0c2b123ca508280a0d8ba5a325a020da80ffc796a1d0c41fb87913b0f59cf5fd"
+      },
+      {
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_lower_bridge_h2_h24_tenth_cache.json",
+        "sha256": "c488edd3c6e850684796642ab4fa1bda8cd1abb4fa669f47ae6b6841bec42271"
+      },
+      {
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_shifted_point_h0_h8_half_grid.jsonl",
+        "sha256": "81e91a22e21843b82132b5d661c5f8bed30fe4c1b8d7d7921d368ec93059b092"
+      },
+      {
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_shifted_point_h0_h8_cache.json",
+        "sha256": "d8a6e2db6de40d6e5703154d7f3de0792a2d7701a9a1736792a490ce65d941f1"
+      },
+      {
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_shifted_point_h0_h8_half_grid_extension.jsonl",
+        "sha256": "f55ceafbf68be780b4278ed86be1d27d3ecd2faa11cf0fbfade76a6605a6255a"
+      },
+      {
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_shifted_point_h0_h8_half_grid_extension_cache.json",
+        "sha256": "2ee8b1048e47b805b73ce106ba6d857faad00bdb04000f6291577d92edd33e90"
+      }
+    ],
+    "stored_run_contract": {
+      "path": "work/rh_compute/results/jensen_window_pf_compound_order10_localized_lower_bridge_run_contract.json",
+      "sha256": "fee857da8798e080f7714a139e8bfdb1c765b933488b1f5fdd2591f1f2ae11d7"
+    }
+  },
+  "status": "rigorous order-ten first-summand curvature theorem on 1251<=t<=5700",
+  "summary": {
+    "accepted_blocks": 9996,
+    "far_blocks": 7800,
+    "full_half_line_theorems": 0,
+    "full_kernel_theorems": 0,
+    "lower_bridge_curvature_theorems": 1,
+    "middle_blocks": 1200,
+    "near_blocks": 996,
+    "open_rows": 0,
+    "ready_rows": 5,
+    "rows": 5,
+    "segment_rows": 279
+  },
+  "theorem": "z_1''(t)<=4200/t^2 for every real 1251<=t<=5700"
+}

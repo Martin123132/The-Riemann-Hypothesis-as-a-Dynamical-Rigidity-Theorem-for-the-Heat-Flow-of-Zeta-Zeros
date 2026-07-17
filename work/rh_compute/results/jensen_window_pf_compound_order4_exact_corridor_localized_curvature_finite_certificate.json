@@ -1,0 +1,266 @@
+{
+  "cache": {
+    "path": "work/rh_compute/results/jensen_window_pf_compound_order4_exact_corridor_localized_curvature_finite_chunks.jsonl",
+    "records": 1035,
+    "sha256": "dfa6b15df29ca00c0cf5b51f521ce9c190a0edc0bbbc28a476a28739c05c18a8"
+  },
+  "date": "2026-07-13",
+  "extrema": {
+    "maximum_scaled_block": 3000,
+    "maximum_scaled_localized_upper": "3.49148869585704706421401378217589691306143341465438292500535E+0",
+    "minimum_absolute_margin_block": 20699,
+    "minimum_absolute_margin_lower": "7.73954099351404460897361453623738448562298570785173590169553E-75",
+    "minimum_j_block": 20699,
+    "minimum_j_lower": "2.80129194625256811822821472708524207910912247123837821877901E-37",
+    "minimum_scaled_margin_block": 3000,
+    "minimum_scaled_margin_lower": "8.511304142952935785986217823999999999999999999999999999999999999999999E-3",
+    "minimum_t_pad_block": 0,
+    "minimum_t_pad_lower": "3.37914422655881152567127822970820966713234541513492722726267E+0"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order4_exact_corridor_localized_curvature_finite_certificate.py",
+  "kind": "jensen_window_pf_compound_order4_exact_corridor_localized_curvature_finite_certificate",
+  "parameters": {
+    "block_count": 20700,
+    "chunk_blocks": 20,
+    "chunk_count": 1035,
+    "mode_interval": [
+      "2",
+      "20"
+    ],
+    "precision_bits": 256,
+    "segments": [
+      {
+        "block_count": 3000,
+        "block_width": "1/10000",
+        "mode_interval": [
+          "2",
+          "23/10"
+        ],
+        "outer_pad": "1/50000"
+      },
+      {
+        "block_count": 200,
+        "block_width": "1/1000",
+        "mode_interval": [
+          "23/10",
+          "5/2"
+        ],
+        "outer_pad": "1/50000"
+      },
+      {
+        "block_count": 500,
+        "block_width": "1/1000",
+        "mode_interval": [
+          "5/2",
+          "3"
+        ],
+        "outer_pad": "1/100000"
+      },
+      {
+        "block_count": 1000,
+        "block_width": "1/1000",
+        "mode_interval": [
+          "3",
+          "4"
+        ],
+        "outer_pad": "1/1000000"
+      },
+      {
+        "block_count": 1000,
+        "block_width": "1/1000",
+        "mode_interval": [
+          "4",
+          "5"
+        ],
+        "outer_pad": "1/100000000"
+      },
+      {
+        "block_count": 5000,
+        "block_width": "1/1000",
+        "mode_interval": [
+          "5",
+          "10"
+        ],
+        "outer_pad": "1/10000000000"
+      },
+      {
+        "block_count": 10000,
+        "block_width": "1/1000",
+        "mode_interval": [
+          "10",
+          "20"
+        ],
+        "outer_pad": "1/10000000000000000000"
+      }
+    ]
+  },
+  "proof_boundary": "This artifact proves the exact cumulant corridors imply the localized first-summand curvature ceiling throughout 2<=u<=20 and composes that with the earlier compact theorem. It does not prove the u>=20 analytic ray, global order-four entry, PF-infinity, RH, or Lambda<=0.",
+  "remaining_target": "Use q-leading mode geometry and the exact corridor constants to prove the localized U ceiling analytically for every u>=20.",
+  "rows": [
+    {
+      "claim": "All seven alternating-factorial exact cumulant corridors hold at every mode used by the cover.",
+      "diagnostics": null,
+      "formula": "exact cumulant corridors hold globally on u>=2",
+      "id": "co4eclcfc_01_exact_corridor_input",
+      "proof_boundary": "Inherited exact cumulant theorem only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_input"
+    },
+    {
+      "claim": "A nonuniform rational mode cover retains the correlation among q, t, curvature, and every corridor endpoint.",
+      "diagnostics": {
+        "segments": [
+          {
+            "block_count": 3000,
+            "block_width": "1/10000",
+            "mode_interval": [
+              "2",
+              "23/10"
+            ],
+            "outer_pad": "1/50000"
+          },
+          {
+            "block_count": 200,
+            "block_width": "1/1000",
+            "mode_interval": [
+              "23/10",
+              "5/2"
+            ],
+            "outer_pad": "1/50000"
+          },
+          {
+            "block_count": 500,
+            "block_width": "1/1000",
+            "mode_interval": [
+              "5/2",
+              "3"
+            ],
+            "outer_pad": "1/100000"
+          },
+          {
+            "block_count": 1000,
+            "block_width": "1/1000",
+            "mode_interval": [
+              "3",
+              "4"
+            ],
+            "outer_pad": "1/1000000"
+          },
+          {
+            "block_count": 1000,
+            "block_width": "1/1000",
+            "mode_interval": [
+              "4",
+              "5"
+            ],
+            "outer_pad": "1/100000000"
+          },
+          {
+            "block_count": 5000,
+            "block_width": "1/1000",
+            "mode_interval": [
+              "5",
+              "10"
+            ],
+            "outer_pad": "1/10000000000"
+          },
+          {
+            "block_count": 10000,
+            "block_width": "1/1000",
+            "mode_interval": [
+              "10",
+              "20"
+            ],
+            "outer_pad": "1/10000000000000000000"
+          }
+        ]
+      },
+      "formula": "width 10^-4 on [2,2.3]; width 10^-3 on [2.3,20]",
+      "id": "co4eclcfc_02_correlated_mode_cover",
+      "proof_boundary": "Finite mode-cover geometry only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_interval_construction"
+    },
+    {
+      "claim": "Every rational outer pad covers the complete t+-2 derivative collar for its central mode block.",
+      "diagnostics": {
+        "minimum_t_pad_lower": "3.37914422655881152567127822970820966713234541513492722726267E+0"
+      },
+      "formula": "t(u_left)-t(u_outer_left)>2 and t(u_outer_right)-t(u_right)>2",
+      "id": "co4eclcfc_03_t_collar_cover",
+      "proof_boundary": "Mode-to-t collar geometry only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_interval_theorem"
+    },
+    {
+      "claim": "Exact corridor boxes and Hurwitz-zeta derivatives keep the localized stable gap positive and the scaled localized curvature below 7/2 on every block.",
+      "diagnostics": {
+        "maximum_scaled_block": 3000,
+        "maximum_scaled_localized_upper": "3.49148869585704706421401378217589691306143341465438292500535E+0",
+        "minimum_absolute_margin_block": 20699,
+        "minimum_absolute_margin_lower": "7.73954099351404460897361453623738448562298570785173590169553E-75",
+        "minimum_j_block": 20699,
+        "minimum_j_lower": "2.80129194625256811822821472708524207910912247123837821877901E-37",
+        "minimum_scaled_margin_block": 3000,
+        "minimum_scaled_margin_lower": "8.511304142952935785986217823999999999999999999999999999999999999999999E-3",
+        "minimum_t_pad_block": 0,
+        "minimum_t_pad_lower": "3.37914422655881152567127822970820966713234541513492722726267E+0"
+      },
+      "formula": "j_0>E_0 and t^2*U(t)<7/2",
+      "id": "co4eclcfc_04_localized_interval_evaluation",
+      "proof_boundary": "Localized U inequality only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_interval_theorem"
+    },
+    {
+      "claim": "The first-summand stable-gap curvature ceiling holds throughout the complete finite ray segment.",
+      "diagnostics": null,
+      "formula": "K_1(t)<=7/(2t^2) for every mode 2<=u<=20",
+      "id": "co4eclcfc_05_finite_ray_curvature",
+      "proof_boundary": "Finite mode segment only; u>=20 remains separate.",
+      "readiness": "ready_to_apply",
+      "role": "exact_interval_theorem"
+    },
+    {
+      "claim": "Together with the inherited compact theorem, the first-summand curvature ceiling is proved from t=319 through the mode u=20.",
+      "diagnostics": null,
+      "formula": "K_1(t)<=7/(2t^2), 319<=t<=V'(20)",
+      "id": "co4eclcfc_06_compact_composition",
+      "proof_boundary": "Finite real-parameter theorem only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "Prove the same exact-corridor localized inequality on the remaining asymptotic ray without extrapolating the finite cover.",
+      "diagnostics": null,
+      "formula": "exact corridors => U(t)<=7/(2t^2), u>=20",
+      "id": "co4eclcfc_07_asymptotic_handoff",
+      "proof_boundary": "Open analytic ray; no global curvature or order-four entry is asserted.",
+      "readiness": "not_ready_to_apply",
+      "role": "analytic_theorem_target"
+    }
+  ],
+  "source_hashes": {
+    "work/rh_compute/results/jensen_window_pf_compound_order4_exact_cumulant_corridor_theorem.json": "4aae029d7da6feeddf25d34c1d2bda04ed5d0810141b629946957aa8ea1944b9",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_first_summand_curvature_bridge.json": "ad9e2be018ec76285b468f917d9e6f15f2c28e935f4b627ffa0956a6f23ac2a3"
+  },
+  "sources": [
+    "outputs/jensen_window_pf_compound_order4_exact_cumulant_corridor_theorem.md",
+    "outputs/jensen_window_pf_compound_order4_first_summand_curvature_bridge.md",
+    "outputs/jensen_window_pf_compound_order4_localized_curvature_compact_certificate.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "rigorous exact-corridor localized-curvature theorem on 2<=u<=20",
+  "summary": {
+    "chunks": 1035,
+    "corridors_used": 7,
+    "exact_rows": 6,
+    "finite_corridor_to_curvature_closed": true,
+    "mode_blocks": 20700,
+    "open_analytic_rows": 1,
+    "open_asymptotic_rays": 1,
+    "positive_localized_blocks": 20700,
+    "rows": 7,
+    "t_collar_gates": 41400
+  }
+}

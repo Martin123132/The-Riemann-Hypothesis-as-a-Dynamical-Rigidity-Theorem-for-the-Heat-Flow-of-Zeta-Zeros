@@ -2,7 +2,8 @@
 
 Date: 2026-07-07
 
-Status: open theorem target. This is not a proof of the scaled-curvature
+Status: open theorem target (historical statement; discharged on 2026-07-11).
+This is not a proof of the scaled-curvature
 monotonicity theorem, the raw-corridor theorem, cone entry, RH, or
 `Lambda <= 0`.
 
@@ -34,6 +35,27 @@ Current result:
 ```text
 validated Jensen-window PF negative-lambda scaled-curvature monotonicity target: 10 rows, 0 issues, 2 live routes, 894 scaled-curvature increase rows, 0 ready-to-apply rows
 ```
+
+## 2026-07-11 Closure Handoff
+
+The target is discharged at `lambda=-100` by
+
+```text
+outputs/jensen_window_pf_negative_lambda_scaled_curvature_continuous_bridge.md
+work/rh_compute/results/jensen_window_pf_negative_lambda_scaled_curvature_continuous_bridge.json
+```
+
+That theorem combines a repaired `k<=318` Arb prefix, `16,074` continuous
+compact mode blocks, an exact `u>=5` ray, and the complete-kernel perturbation
+transfer to prove
+
+```text
+C_(k+1)>=C_k for every integer k>=1 at lambda=-100.
+```
+
+The original target statement and finite anchor below are retained as audit
+history. Higher-degree minor cones and the all-order Jensen/PF bridge remain
+open.
 
 ## Target Statement
 

@@ -66,9 +66,15 @@ def build_exact() -> dict:
         },
         "strict_laguerre_equivalence": (
             "Lambda<=0 if and only if L_t(x)>0 for every real x and every "
-            "0<t<=1/2. The forward implication uses the simple real-zero "
+            "0<t<=1/5. The forward implication uses the simple real-zero "
             "factorization for t>Lambda; the reverse implication uses the finite "
-            "multiple zero of H_Lambda forced when Lambda>0."
+            "multiple zero of H_Lambda forced when Lambda>0 together with the "
+            "published bound Lambda<=1/5."
+        ),
+        "published_time_window_reduction": (
+            "Platt-Trudgian Corollary 2 gives Lambda<=1/5. Hence Lambda>0 "
+            "forces Lambda in (0,1/5], so strict positivity on that interval "
+            "already tests the attained boundary."
         ),
         "factorization_identity": (
             "When H_t has simple real roots r_j, L_t(x)/H_t(x)^2="
@@ -101,7 +107,7 @@ def build_exact() -> dict:
             ),
         },
         "density_rh_equivalence": (
-            "Lambda<=0 if and only if, for every 0<t<=1/2, the translations "
+            "Lambda<=0 if and only if, for every 0<t<=1/5, the translations "
             "of K_(1,t) are dense in L1(R)."
         ),
         "positive_definite_scope": (
@@ -153,15 +159,31 @@ def build_exact() -> dict:
         "nonpromotion_decision": (
             "Pointwise positivity, evenness, smoothness, strict log-concavity, and "
             "positive definiteness of a kernel do not force a zero-free Fourier "
-            "transform. The Xi route needs a stronger correlation property such as "
-            "Wiener translate density, strict Fourier positivity, or an Xi-specific "
-            "total-positivity factorization."
+            "transform. A separate explicit countermodel also shows that uniform "
+            "strong log-concavity, strict root-variable concavity, theta-type "
+            "double-exponential decay, admissibility, and the first s^2 weighting "
+            "still do not force positive definiteness. The Xi route needs arithmetic "
+            "or modular coupling, Wiener translate density, strict Fourier "
+            "positivity, or an Xi-specific total-positivity factorization."
         ),
         "open_handoff": (
-            "Prove uniformly for every 0<t<=1/2 that Fourier[K_(1,t)] has no real "
+            "Prove uniformly for every 0<t<=1/5 that Fourier[K_(1,t)] has no real "
             "zero, equivalently that translations of K_(1,t) are dense in L1(R). "
             "A viable proof must use Xi-specific structure beyond generic strict "
-            "log-concavity and positive definiteness."
+            "log-concavity and positive definiteness. The exact higher-shift "
+            "expansion must be grouped through the theta modular identity before "
+            "the spectral transform: its ordinary termwise Bessel-transform sum "
+            "diverges already at zero frequency. Continuum-cell subtraction repairs "
+            "the endpoint transform and gives a normally convergent coupled matrix "
+            "at t=0, but each cell block retains a nonzero exp(-5u) tail and cannot "
+            "be deformed to any t>0. The surviving route needs a t-compatible "
+            "modular grouping or a direct curvature estimate for the endpoint-subtracted "
+            "theta primitive. The former sharper sufficient subtarget "
+            "M_t(x)=-L_t'(x)>0 has now been rejected for Xi: Arb certifies "
+            "M_0(1401016343/100000)<0, and continuity preserves that sign for "
+            "sufficiently small positive t. The surviving routes are direct "
+            "zero-freeness of Fourier[K_(1,t)] or corrected C1 double-zero "
+            "transversality; do not impose global monotonicity of L_t."
         ),
         "checks": {
             "triangular_transform": str(triangular_transform),
@@ -193,10 +215,11 @@ def build_payload() -> dict:
             readiness="ready_to_apply",
             claim="Strict first-Laguerre positivity throughout positive time is equivalent to the Newman upper direction.",
             formula=exact["strict_laguerre_equivalence"],
-            proof_boundary="All real x and the full continuum 0<t<=1/2 are required.",
+            proof_boundary="All real x and the published reduced continuum 0<t<=1/5 are required.",
             diagnostics={
                 "factorization": exact["factorization_identity"],
                 "origin": exact["origin_sign"],
+                "time_window": exact["published_time_window_reduction"],
             },
         ),
         TargetRow(
@@ -249,14 +272,14 @@ def build_payload() -> dict:
             readiness="guard_validated",
             claim="Generic kernel shape properties cannot be promoted to Wiener density.",
             formula=exact["nonpromotion_decision"],
-            proof_boundary="Does not rule out stronger Xi tail or total-positivity structure.",
+            proof_boundary="The stronger theta-tail guard still does not rule out Xi arithmetic, modular coupling, or total-positivity structure.",
         ),
         TargetRow(
             id="nslc_09_first_correlation_target",
             role="open_theorem_target",
             readiness="not_ready_to_apply",
-            claim="It is sufficient to prove zero-freeness of the first Xi correlation transform for all positive times up to 1/2.",
-            formula="Fourier[K_(1,t)](xi)=L_t(xi/2)>0 for all xi in R, 0<t<=1/2",
+            claim="It is sufficient to prove zero-freeness of the first Xi correlation transform for all positive times up to 1/5.",
+            formula="Fourier[K_(1,t)](xi)=L_t(xi/2)>0 for all xi in R, 0<t<=1/5",
             proof_boundary="Open Xi-specific strict correlation theorem.",
         ),
         TargetRow(
@@ -270,22 +293,33 @@ def build_payload() -> dict:
     ]
     return {
         "kind": "jensen_window_pf_newman_strict_laguerre_correlation_target",
-        "date": "2026-07-11",
-        "status": "exact strict-Laguerre/Wiener equivalence with generic-kernel guard",
+        "date": "2026-07-17",
+        "status": (
+            "exact strict-Laguerre/Wiener equivalence with generic guards and a "
+            "retired strict-monotonicity subroute"
+        ),
         "proof_boundary": (
             "This artifact composes positive-boundary attainment with the first "
             "Laguerre correlation identity and Wiener's theorem to give an RH-equivalent "
-            "translation-density target for every 0<t<=1/2. It supplies an exact smooth "
+            "translation-density target for every 0<t<=1/5, using the published "
+            "Platt-Trudgian upper bound. It supplies an exact smooth "
             "strict-log-concavity and positive-definiteness countermodel with double "
-            "Fourier zeros. It does not prove the Xi correlation transform zero-free, "
+            "Fourier zeros and records the separate theta-tail weighted guard. It "
+            "does not prove the Xi correlation transform zero-free, "
             "translation density, RH, or Lambda<=0."
         ),
         "sources": [
             "outputs/jensen_window_pf_newman_positive_boundary_attainment_lemma.md",
             "outputs/jensen_window_pf_kernel_mellin_upper_wall_certificate.md",
+            "outputs/jensen_window_pf_newman_theta_bessel_higher_shift_regularization_gate.md",
+            "outputs/jensen_window_pf_newman_theta_cell_renormalization_gate.md",
+            "outputs/jensen_window_pf_newman_weighted_strong_logconcavity_countermodel_gate.md",
+            "outputs/jensen_window_pf_newman_strict_laguerre_monotonicity_scout.md",
             "outputs/formal_core.md",
             "https://arxiv.org/abs/1309.0055",
             "https://arxiv.org/abs/1606.05011",
+            "https://arxiv.org/abs/2004.09765",
+            "outputs/jensen_window_pf_newman_polymath15_lambda01965_provenance_audit.md",
         ],
         "exact": exact,
         "rows": [asdict(row) for row in rows],
@@ -299,7 +333,7 @@ def render_note(payload: dict) -> str:
         [
             "# Jensen-Window PF Newman Strict-Laguerre Correlation Target",
             "",
-            "Date: 2026-07-11",
+            "Date: 2026-07-17",
             "",
             "Status: exact strict-Laguerre/Wiener equivalence with a generic-kernel",
             "guard. This is not a proof of RH or `Lambda <= 0`.",
@@ -389,11 +423,22 @@ def render_note(payload: dict) -> str:
             "",
             "The zeros are double, so the translates of `K` are not dense. This",
             "blocks promotion from strict log-concavity plus positive definiteness.",
-            "It does not block stronger Xi-specific tail or correlation structure.",
+            "This Gaussian model alone does not reproduce the Xi-specific tail.",
+            "The separate theta-tail weighted countermodel closes promotion from",
+            "uniform strong and root-variable log-concavity plus theta-type decay;",
+            "it still leaves Xi arithmetic or modular correlation structure open.",
             "",
             "## Live Handoff",
             "",
             exact["open_handoff"],
+            "",
+            "The exact route refinement is recorded in",
+            "`outputs/jensen_window_pf_newman_theta_bessel_higher_shift_regularization_gate.md`.",
+            "The convergent endpoint matrix and its positive-time obstruction are in",
+            "`outputs/jensen_window_pf_newman_theta_cell_renormalization_gate.md`.",
+            "The rejected monotonicity subtarget, its misleading finite diagnostics,",
+            "and the rigorous Xi counterexample are in",
+            "`outputs/jensen_window_pf_newman_strict_laguerre_monotonicity_scout.md`.",
             "",
         ]
     )

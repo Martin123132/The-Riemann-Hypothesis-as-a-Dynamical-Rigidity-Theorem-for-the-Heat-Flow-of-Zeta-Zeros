@@ -1,0 +1,115 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order5_uniform_heat_forward_invariance_certificate.py",
+  "conclusions": {
+    "arbitrary_order_five": "R_(5,n)(j_1,j_2,j_3,j_4,j_5;lambda)>0 for every n>=0, 0<=j_1<j_2<j_3<j_4<j_5, and -100<=lambda<=0",
+    "contiguous_order_five": "H_(5,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+    "fixed_order_five": "every consecutive-row arbitrary-column reshaped-Hankel minor through order five has its required sign on -100<=lambda<=0",
+    "next_handoff": "derive a cancellation-preserving contiguous order-six entry coordinate and flow reduction",
+    "signed_layers_through_five": "epsilon_k*H_(k,n)(lambda)>0 for 1<=k<=5, every n>=0 and -100<=lambda<=0"
+  },
+  "date": "2026-07-13",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order5_uniform_heat_forward_invariance_certificate.py",
+  "kind": "jensen_window_pf_compound_order5_uniform_heat_forward_invariance_certificate",
+  "proof_boundary": "This artifact proves the required signed Hankel layer through fixed order five only. It does not prove order six or higher, PF-infinity, the all-degree Jensen bridge, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "Every order-five endpoint coordinate is strictly positive at lambda=-100.",
+      "diagnostics": null,
+      "formula": "H_(5,n)(-100)>0 for every integer n>=0",
+      "id": "co5uhfic_01_endpoint",
+      "proof_boundary": "Completed zeta-specific endpoint theorem.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "Order-five positivity is uniform at sufficiently large shift throughout the compact heat interval.",
+      "diagnostics": null,
+      "formula": "there exists N_5 such that H_(5,n)(lambda)>0 for every n>=N_5 and -100<=lambda<=0",
+      "id": "co5uhfic_02_uniform_tail",
+      "proof_boundary": "Non-effective but compact-uniform eventual theorem.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The normalized order-five layer obeys a nearest-neighbor cooperative system with positive forward coefficient.",
+      "diagnostics": null,
+      "formula": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n=(4*n+34)*H_(4,n)/H_(4,n+1)>0, b_n=((4*n+34)/(4*n+30))*(log H_(4,n+1))'",
+      "id": "co5uhfic_03_cooperative_flow",
+      "proof_boundary": "Exact Plucker and heat-flow algebra.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The uniform tail confines any first loss to finitely many shifts, where variation of constants preserves positivity.",
+      "diagnostics": null,
+      "formula": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)",
+      "id": "co5uhfic_04_finite_confinement",
+      "proof_boundary": "Infinite-index maximum principle with compact-uniform tail.",
+      "readiness": "ready_to_apply",
+      "role": "exact_maximum_principle"
+    },
+    {
+      "claim": "The endpoint, uniform tail, and cooperative system prove contiguous order five throughout the interval.",
+      "diagnostics": null,
+      "formula": "H_(5,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+      "id": "co5uhfic_05_contiguous_theorem",
+      "proof_boundary": "All shifts and all finite heat parameters from -100 through zero.",
+      "readiness": "ready_to_apply",
+      "role": "exact_forward_theorem"
+    },
+    {
+      "claim": "The completed lower contiguous layers supply every initial-minor sign through order four.",
+      "diagnostics": null,
+      "formula": "epsilon_k*H_(k,n)(lambda)>0 for k=1,2,3,4, all n and -100<=lambda<=0",
+      "id": "co5uhfic_06_lower_layers",
+      "proof_boundary": "Previously proved lower-layer interval theorems.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The fixed-order initial-minor criterion transfers signed contiguous order five to all arbitrary column sets.",
+      "diagnostics": null,
+      "formula": "R_(5,n)(j_1,j_2,j_3,j_4,j_5;lambda)>0 for every n>=0, 0<=j_1<j_2<j_3<j_4<j_5, and -100<=lambda<=0",
+      "id": "co5uhfic_07_arbitrary_columns",
+      "proof_boundary": "Finite-dimensional transfer applied pointwise in lambda.",
+      "readiness": "ready_to_apply",
+      "role": "published_theorem_composition"
+    },
+    {
+      "claim": "The fixed-order programme now hands off to a genuinely new contiguous order-six layer.",
+      "diagnostics": null,
+      "formula": "derive a cancellation-preserving contiguous order-six entry coordinate and flow reduction",
+      "id": "co5uhfic_08_order_six_handoff",
+      "proof_boundary": "Open order-six analytic problem; not PF-infinity, RH, or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    }
+  ],
+  "source_contract": {
+    "conditional_forward": "[H_(5,n)(-100)>0 for all n] => [H_(5,n)(lambda)>0 for all n and -100<=lambda<=0]",
+    "cooperative_flow": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n=(4*n+34)*H_(4,n)/H_(4,n+1)>0, b_n=((4*n+34)/(4*n+30))*(log H_(4,n+1))'",
+    "endpoint_entry": "H_(5,n)(-100)>0 for every integer n>=0",
+    "fixed_order_transfer": "[epsilon_k H_(k,s)>0 for 1<=k<=m, all s] => [epsilon_k R_(k,n)(j_1,...,j_k)>0 for 1<=k<=m]",
+    "lower_layers": "epsilon_k*H_(k,n)(lambda)>0 for k=1,2,3,4, all n and -100<=lambda<=0",
+    "uniform_tail": "there exists N_5 such that H_(5,n)(lambda)>0 for every n>=N_5 and -100<=lambda<=0",
+    "variation_of_constants": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)"
+  },
+  "sources": [
+    "outputs/jensen_window_pf_compound_order5_m100_entry_certificate.md",
+    "outputs/jensen_window_pf_compound_order5_uniform_tail_flow_reduction.md",
+    "outputs/jensen_window_pf_compound_order4_uniform_heat_forward_invariance_certificate.md",
+    "outputs/jensen_window_pf_order4_noncontiguous_total_positivity_transfer.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "contiguous and arbitrary-column order-five theorem on -100<=lambda<=0",
+  "summary": {
+    "arbitrary_column_order_five_theorems": 1,
+    "contiguous_order_five_theorems": 1,
+    "cooperative_flow_theorems": 1,
+    "open_order_six_handoffs": 1,
+    "open_rows": 1,
+    "ready_rows": 7,
+    "rows": 8,
+    "uniform_tail_theorems": 1
+  }
+}

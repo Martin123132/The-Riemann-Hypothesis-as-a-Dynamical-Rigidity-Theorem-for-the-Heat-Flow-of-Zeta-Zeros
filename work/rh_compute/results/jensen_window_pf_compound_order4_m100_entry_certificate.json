@@ -1,0 +1,227 @@
+{
+  "kind": "jensen_window_pf_compound_order4_m100_entry_certificate",
+  "date": "2026-07-13",
+  "status": "all-shift contiguous order-four entry theorem at lambda=-100",
+  "proof_boundary": "This artifact proves H_(4,n)(-100)>0 for every n>=0. It does not prove forward order-four invariance, arbitrary-column order four, PF-infinity, the Riemann hypothesis, or Lambda<=0.",
+  "exact": {
+    "condensation_sign": "H_(4,n)>0 iff T_(n+1)^2>T_n*T_(n+2)",
+    "gap_penalty_sign": "H_(4,n)>0 iff P_n<-3*log(x_(n+3))",
+    "global_first_summand_curvature": "K_1(t)<=7/(2*t^2), t>=319",
+    "complete_tail_penalty": "P_n<=4/(n+3)^2, n>=317",
+    "all_shift_entry": "H_(4,n)(-100)>0, every n>=0"
+  },
+  "tail_arithmetic": {
+    "indices": "n>=317, k=n+3>=320, |s|<=1 => k+s>=319",
+    "tent_identity": "integral_[-1,1](1-|s|)/(k+s)^2 ds=-log(1-1/k^2)",
+    "log_inequality": "-log(1-z)<=z/(1-z), 0<=z<1",
+    "first_summand_bound": "P_n^(1)<=7/(2*(k^2-1))<=18/(5*k^2)",
+    "first_summand_margin_at_k320": "25591/26214144000",
+    "first_summand_margin_formula": "18/(5*k^2)-7/(2*(k^2-1))=(k^2-36)/(10*k^2*(k^2-1))",
+    "perturbation_bound": "|P_n-P_n^(1)|<=10112*(k+1)^2/(k-3)^6<=2/(5*k^2)",
+    "perturbation_shifted_coefficients_descending": [
+      1,
+      1902,
+      1482055,
+      604691300,
+      135889991935,
+      15877422036942,
+      748002501678169
+    ],
+    "total_penalty_bound": "P_n<=4/k^2",
+    "defect_buffer": "-3*log(x_k)>3*d_k>=753/(250*(2*k+1))",
+    "buffer_comparison": "4/k^2<753/(250*(2*k+1))",
+    "buffer_shifted_coefficients_descending": [
+      753,
+      479920,
+      76466200
+    ],
+    "buffer_endpoint_numerator": 76466200,
+    "strict_tail_consequence": "P_n<-3*log(x_k), n>=317"
+  },
+  "prefix": {
+    "n_range": [
+      0,
+      316
+    ],
+    "rows": 317,
+    "tail_n_range": "n>=317",
+    "tail_k_range": "k>=320",
+    "minimum_margin_lower": "4.71789538689370302040913771438131967598144836682129515711914E-3",
+    "minimum_margin_n": null
+  },
+  "rows": [
+    {
+      "id": "co4m100ec_01_condensation_coordinate",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "Desnanot-Jacobi condensation identifies the positive contiguous order-four sign with strict log-concavity of the positive order-three magnitudes.",
+      "formula": "H_(4,n)>0 iff T_(n+1)^2>T_n*T_(n+2)",
+      "proof_boundary": "Contiguous order-four sign coordinate only.",
+      "diagnostics": null
+    },
+    {
+      "id": "co4m100ec_02_gap_penalty_coordinate",
+      "role": "exact_sign_equivalence",
+      "readiness": "ready_to_apply",
+      "claim": "The defect-gap factorization converts the order-four sign into one logarithmic penalty inequality.",
+      "formula": "H_(4,n)>0 iff P_n<-3*log(x_(n+3))",
+      "proof_boundary": "Exact lambda-independent coordinate reduction only.",
+      "diagnostics": null
+    },
+    {
+      "id": "co4m100ec_03_repaired_prefix",
+      "role": "interval_certificate",
+      "readiness": "ready_to_apply",
+      "claim": "The repaired Arb coefficient source proves every prefix order-four margin strictly positive at lambda=-100.",
+      "formula": "H_(4,n)>0, 0<=n<=316, lambda=-100",
+      "proof_boundary": "Finite prefix only.",
+      "diagnostics": {
+        "prefix_rows": 317,
+        "n_range": [
+          0,
+          316
+        ],
+        "minimum_margin_lower": "4.71789538689370302040913771438131967598144836682129515711914E-3",
+        "minimum_margin_n": null
+      }
+    },
+    {
+      "id": "co4m100ec_04_global_first_curvature",
+      "role": "exact_theorem_composition",
+      "readiness": "ready_to_apply",
+      "claim": "The compact interval, exact-corridor finite cover, analytic ray, and stable localization prove the first-summand curvature ceiling on the complete real tail.",
+      "formula": "K_1(t)<=7/(2*t^2), every real t>=319",
+      "proof_boundary": "First Newman summand at lambda=-100 only.",
+      "diagnostics": {
+        "compact_range": "319<=t<=V'(2)",
+        "mode_tail": "u>=2",
+        "compact_blocks": 1073,
+        "ray_scaled_U_upper": "3011223637/866377000"
+      }
+    },
+    {
+      "id": "co4m100ec_05_tent_transfer",
+      "role": "exact_analytic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The exact tent identity transfers the continuous curvature ceiling to the first-summand discrete penalty.",
+      "formula": "P_n^(1)<=18/(5*k^2), k=n+3>=320",
+      "proof_boundary": "First-summand discrete penalty only.",
+      "diagnostics": {
+        "indices": "n>=317, k=n+3>=320, |s|<=1 => k+s>=319",
+        "tent_identity": "integral_[-1,1](1-|s|)/(k+s)^2 ds=-log(1-1/k^2)",
+        "log_inequality": "-log(1-z)<=z/(1-z), 0<=z<1",
+        "first_summand_bound": "P_n^(1)<=7/(2*(k^2-1))<=18/(5*k^2)",
+        "first_summand_margin_at_k320": "25591/26214144000",
+        "first_summand_margin_formula": "18/(5*k^2)-7/(2*(k^2-1))=(k^2-36)/(10*k^2*(k^2-1))",
+        "perturbation_bound": "|P_n-P_n^(1)|<=10112*(k+1)^2/(k-3)^6<=2/(5*k^2)",
+        "perturbation_shifted_coefficients_descending": [
+          1,
+          1902,
+          1482055,
+          604691300,
+          135889991935,
+          15877422036942,
+          748002501678169
+        ],
+        "total_penalty_bound": "P_n<=4/k^2",
+        "defect_buffer": "-3*log(x_k)>3*d_k>=753/(250*(2*k+1))",
+        "buffer_comparison": "4/k^2<753/(250*(2*k+1))",
+        "buffer_shifted_coefficients_descending": [
+          753,
+          479920,
+          76466200
+        ],
+        "buffer_endpoint_numerator": 76466200,
+        "strict_tail_consequence": "P_n<-3*log(x_k), n>=317"
+      }
+    },
+    {
+      "id": "co4m100ec_06_full_kernel_transfer",
+      "role": "exact_perturbation_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The proved all-summand dominance estimate changes the logarithmic order-four penalty by at most two fifths inverse square.",
+      "formula": "|P_n-P_n^(1)|<=2/(5*k^2), k>=320",
+      "proof_boundary": "Full Newman kernel at lambda=-100 on the analytic tail.",
+      "diagnostics": {
+        "source_formula": "|P_n-P_n^(1)|<=10112*(k+1)^2/(k-3)^6<=2/(5*k^2), k>=320",
+        "shifted_polynomial": [
+          1,
+          1902,
+          1482055,
+          604691300,
+          135889991935,
+          15877422036942,
+          748002501678169
+        ]
+      }
+    },
+    {
+      "id": "co4m100ec_07_complete_penalty_tail",
+      "role": "exact_theorem_composition",
+      "readiness": "ready_to_apply",
+      "claim": "The first-summand and full-kernel budgets prove the sufficient complete-kernel penalty ceiling.",
+      "formula": "P_n<=4/(n+3)^2, n>=317",
+      "proof_boundary": "Complete-kernel logarithmic penalty only.",
+      "diagnostics": null
+    },
+    {
+      "id": "co4m100ec_08_strict_buffer",
+      "role": "exact_rational_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The scaled-defect anchor leaves a strict buffer above the complete penalty ceiling at every tail index.",
+      "formula": "4/k^2<753/(250*(2*k+1))<=-3*log(x_k), k>=320",
+      "proof_boundary": "Tail conversion from the penalty ceiling to the order-four sign.",
+      "diagnostics": {
+        "endpoint_numerator": 76466200,
+        "shifted_coefficients_descending": [
+          753,
+          479920,
+          76466200
+        ]
+      }
+    },
+    {
+      "id": "co4m100ec_09_all_shift_entry",
+      "role": "exact_entry_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The 317-row interval prefix and strict analytic tail prove every contiguous order-four Hankel minor has the required positive sign at lambda=-100.",
+      "formula": "H_(4,n)(-100)>0 for every integer n>=0",
+      "proof_boundary": "Contiguous order-four entry at one heat parameter only.",
+      "diagnostics": null
+    },
+    {
+      "id": "co4m100ec_10_forward_handoff",
+      "role": "analytic_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "Derive and close a legitimate infinite-index order-four compound-flow propagation theorem from lambda=-100 through lambda=0.",
+      "formula": "H_(4,n)(-100)>0 for all n => H_(4,n)(lambda)>0 for -100<=lambda<=0",
+      "proof_boundary": "Open; no order-four propagation, arbitrary-column order four, PF-infinity, RH, or Lambda<=0 is asserted.",
+      "diagnostics": null
+    }
+  ],
+  "summary": {
+    "rows": 10,
+    "exact_rows": 9,
+    "open_analytic_rows": 1,
+    "prefix_order_four_margins": 317,
+    "analytic_order_four_tails": 1,
+    "global_curvature_theorems": 1,
+    "full_kernel_transfers": 1,
+    "all_shift_order_four_entry_theorems": 1,
+    "open_forward_handoffs": 1
+  },
+  "sources": [
+    "work/rh_compute/results/jensen_window_pf_compound_order4_condensation_gate.json",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_localized_curvature_compact_certificate.json",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_exact_corridor_localized_curvature_ray_certificate.json",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_first_summand_curvature_bridge.json"
+  ],
+  "source_hashes": {
+    "work/rh_compute/results/jensen_window_pf_compound_order4_condensation_gate.json": "49ab5134e9b5a7f8f76506eb7e6dc7ffa5e88271567419eb91079a8574fd3f06",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_localized_curvature_compact_certificate.json": "c4446db511a27873299ebc0119e9eac522036fd6dbbd6a12dfb160eb12d46cf5",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_exact_corridor_localized_curvature_ray_certificate.json": "26736b0ed0e50dd0a8a342ade00b298ec8361875425a36500b0c44025ddd1712",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_first_summand_curvature_bridge.json": "ad9e2be018ec76285b468f917d9e6f15f2c28e935f4b627ffa0956a6f23ac2a3"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order4_m100_entry_certificate.py",
+  "remaining_target": "Derive the order-four compound heat-flow system, establish a weighted infinite maximum principle, and propagate the strict lambda=-100 entry through lambda=0."
+}

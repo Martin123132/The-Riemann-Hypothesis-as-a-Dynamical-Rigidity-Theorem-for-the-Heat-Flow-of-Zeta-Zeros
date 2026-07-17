@@ -1,0 +1,104 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_multiplier_hausdorff_uniqueness_bridge.py",
+  "date": "2026-07-11",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_multiplier_hausdorff_uniqueness_bridge.py",
+  "kind": "jensen_window_pf_multiplier_hausdorff_uniqueness_bridge",
+  "proof_boundary": "This artifact proves uniqueness and an exact characterization of any integer-only multiplier counting measure. It does not construct that measure, identify the natural Mellin interpolation with the canonical Hausdorff interpolation, prove PF-infinity, RH, or Lambda <= 0.",
+  "rows": [
+    {
+      "claim": "Each elementary multiplier curvature is a positive Laplace transform.",
+      "formula": "-log(1-1/(k+alpha)^2)=integral_0^infinity exp(-(k+alpha)t)*q(t)dt, q(t)=2*(cosh(t)-1)/t",
+      "id": "mhb_01_atom_laplace_kernel",
+      "proof_boundary": "Frullani identity for k+alpha>1.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "A convergent unit counting multiset defines a finite positive Laplace density.",
+      "formula": "S(t)=sum_j exp(-alpha_j*t), y_k=integral_0^infinity exp(-k*t)*q(t)*S(t)dt",
+      "id": "mhb_02_counting_laplace_sum",
+      "proof_boundary": "Uses alpha_j>0 and sum_j alpha_j^(-2)<infinity.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "The integer log contractions are Hausdorff moments of one finite measure.",
+      "formula": "y_k=integral_[0,1] r^(k-1)dnu(r), dnu/dr=q(-log r)*S(-log r)",
+      "id": "mhb_03_hausdorff_pushforward",
+      "proof_boundary": "Change of variables r=exp(-t); total mass is y_1.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "All integer values y_1,y_2,... uniquely determine nu.",
+      "formula": "int r^n dnu=int r^n dnu_tilde for all n>=0 implies nu=nu_tilde",
+      "id": "mhb_04_hausdorff_uniqueness",
+      "proof_boundary": "Polynomial density in C([0,1]) and finite-measure duality.",
+      "readiness": "available_exact",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "Hausdorff positivity gives every alternating finite-difference inequality.",
+      "formula": "(-1)^m*Delta^m y_k=integral_[0,1] r^(k-1)*(1-r)^m dnu(r)>=0",
+      "id": "mhb_05_complete_monotonicity",
+      "proof_boundary": "Necessary for the counting product, not sufficient for unit atoms.",
+      "readiness": "available_exact",
+      "role": "exact_consequence"
+    },
+    {
+      "claim": "The integer product target is equivalent to a rigid property of the unique Hausdorff measure.",
+      "formula": "dnu/dr=q(-log r)*sum_j r^alpha_j with unit integer multiplicity and sum_j alpha_j^(-2)<infinity",
+      "id": "mhb_06_unit_atomic_characterization",
+      "proof_boundary": "Characterization only; existence of the density and atoms is open.",
+      "readiness": "available_exact",
+      "role": "exact_characterization"
+    },
+    {
+      "claim": "If the counting representation exists, its multiset is unique.",
+      "formula": "S(t)=(dnu/dr)(exp(-t))/q(t); uniqueness of Laplace transforms determines sum_j delta_(alpha_j)",
+      "id": "mhb_07_atom_uniqueness",
+      "proof_boundary": "Uniqueness does not supply existence or an extraction algorithm.",
+      "readiness": "available_exact",
+      "role": "exact_consequence"
+    },
+    {
+      "claim": "The available zeta sequence passes the full finite Hausdorff sign frontier.",
+      "formula": "7980/7980 strict signs through order 55 on five heat parameters",
+      "id": "mhb_08_finite_frontier_input",
+      "proof_boundary": "Finite interval evidence only; not a representing-measure theorem.",
+      "readiness": "finite_only",
+      "role": "finite_evidence"
+    },
+    {
+      "claim": "Integer agreement and even continuous curvature agreement do not identify the natural Mellin interpolation.",
+      "formula": "f(s)=sin(2*pi*s): f(n)=0 and f(s+1)-2*f(s)+f(s-1)=0",
+      "id": "mhb_09_periodic_interpolation_guard",
+      "proof_boundary": "A growth or canonical-interpolation theorem is still required before using the continuous Mellin power-sum obstruction.",
+      "readiness": "available_exact",
+      "role": "nonpromotion_guard"
+    },
+    {
+      "claim": "Recover or rule out the unique deconvolved unit counting measure.",
+      "formula": "nu -> h(r)=dnu/dr -> S(t)=h(exp(-t))/q(t) -> unit counting measure N",
+      "id": "mhb_10_open_recovery_handoff",
+      "proof_boundary": "This recovery is the remaining multiplier target, not a proved step.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "source_frontier": "outputs/jensen_window_pf_multiplier_complete_monotonicity_frontier_scout.md",
+  "source_mellin_guard": "outputs/jensen_window_pf_mellin_multiplier_power_sum_obstruction.md",
+  "source_target": "outputs/jensen_window_pf_multiplier_counting_measure_target.md",
+  "status": "exact Hausdorff uniqueness and unit-atomic characterization",
+  "summary": {
+    "bridge_rows": 10,
+    "exact_rows": 7,
+    "finite_frontier_rows": 1,
+    "hausdorff_measure_theorems": 1,
+    "interpolation_guards": 1,
+    "open_recovery_handoffs": 1,
+    "ready_to_apply_rows": 0,
+    "target_closing": false,
+    "unit_atomic_characterizations": 1
+  }
+}

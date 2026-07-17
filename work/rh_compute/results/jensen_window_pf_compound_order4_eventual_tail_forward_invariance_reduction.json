@@ -1,0 +1,137 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order4_eventual_tail_forward_invariance_reduction.py",
+  "date": "2026-07-13",
+  "exact": {
+    "backward_induction": "Q_N>0 on the interval and Q_n(-100)>0 imply successively Q_(N-1)>0,...,Q_0>0",
+    "conditional_forward_theorem": "uniform eventual order-four positivity on [-100,0] implies H_(4,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+    "cooperative_flow": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n>0",
+    "endpoint_warning": "eventual positivity at lambda=0 alone does not provide the uniform interior tail hypothesis",
+    "finite_confinement": "uniform eventual positivity confines every possible first crossing to the finite set 0<=n<N",
+    "integrating_factor": "E_n(lambda)=exp(integral_(-100)^lambda b_n(s)ds)>0",
+    "lambda_zero_consequence": "uniform eventual order-four positivity on [-100,0] implies H_(4,n)(0)>0 for every n>=0",
+    "uniform_asymptotic_target": "prove one N works simultaneously for every lambda in [-100,0]",
+    "uniform_tail_hypothesis": "exists N such that Q_n(lambda)>0 for every n>=N and -100<=lambda<=0",
+    "variation_of_constants": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order4_eventual_tail_forward_invariance_reduction.py",
+  "kind": "jensen_window_pf_compound_order4_eventual_tail_forward_invariance_reduction",
+  "proof_boundary": "This artifact proves that a uniform eventual positive order-four tail on [-100,0] is sufficient for full contiguous order-four forward invariance, without a global coefficient ceiling. It does not prove that uniform tail, unconditional order-four invariance, arbitrary-column order four, PF-infinity, RH, or Lambda<=0.",
+  "remaining_target": "exists N such that Q_n(lambda)>0 for every n>=N and -100<=lambda<=0",
+  "rows": [
+    {
+      "claim": "Every contiguous order-four determinant is strictly positive at the initial heat parameter.",
+      "diagnostics": null,
+      "formula": "H_(4,n)(-100)>0 for every n>=0",
+      "id": "co4etfi_01_entry",
+      "proof_boundary": "Previously certified all-shift entry at lambda=-100.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The completed order-three layer makes the order-four flow one-sided cooperative throughout the target heat interval.",
+      "diagnostics": {
+        "off_diagonal": "(4*n+26)*H_(3,n)/H_(3,n+1)",
+        "order3_theorem": "H_(3,n)(lambda)<0 on -100<=lambda<=0"
+      },
+      "formula": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n>0",
+      "id": "co4etfi_02_cooperative_flow",
+      "proof_boundary": "Contiguous order-four flow only; the spatial tail is separate.",
+      "readiness": "ready_to_apply",
+      "role": "exact_flow_input"
+    },
+    {
+      "claim": "Prove that one eventual order-four tail is positive uniformly across the compact heat interval.",
+      "diagnostics": {
+        "available_endpoint": "exists N_H4: H_(4,n)(0)>0 for n>=N_H4",
+        "warning": "eventual positivity at lambda=0 alone does not provide the uniform interior tail hypothesis"
+      },
+      "formula": "exists N such that Q_n(lambda)>0 for every n>=N and -100<=lambda<=0",
+      "id": "co4etfi_03_uniform_tail_target",
+      "proof_boundary": "Open uniform asymptotic theorem; endpoint eventual positivity is insufficient.",
+      "readiness": "not_ready_to_apply",
+      "role": "analytic_theorem_target"
+    },
+    {
+      "claim": "A uniform positive tail confines any possible loss of positivity to finitely many order-four coordinates.",
+      "diagnostics": null,
+      "formula": "uniform eventual positivity confines every possible first crossing to the finite set 0<=n<N",
+      "id": "co4etfi_04_finite_confinement",
+      "proof_boundary": "Exact consequence of the open uniform-tail hypothesis.",
+      "readiness": "ready_to_apply",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "Each finite coordinate has an exact positive integrating-factor representation driven only by its next neighbor.",
+      "diagnostics": {
+        "integrating_factor": "E_n(lambda)=exp(integral_(-100)^lambda b_n(s)ds)>0"
+      },
+      "formula": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)",
+      "id": "co4etfi_05_variation_of_constants",
+      "proof_boundary": "Finite-index linear ODE identity.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Starting at the uniform positive tail boundary, variation of constants propagates strict positivity backward through every remaining finite index.",
+      "diagnostics": null,
+      "formula": "Q_N>0 on the interval and Q_n(-100)>0 imply successively Q_(N-1)>0,...,Q_0>0",
+      "id": "co4etfi_06_backward_induction",
+      "proof_boundary": "Conditional only on co4etfi_03; no coefficient ceiling is required.",
+      "readiness": "conditional",
+      "role": "exact_conditional_theorem"
+    },
+    {
+      "claim": "Uniform eventual positivity closes contiguous order-four forward invariance from lambda=-100 through lambda=0.",
+      "diagnostics": null,
+      "formula": "uniform eventual order-four positivity on [-100,0] implies H_(4,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+      "id": "co4etfi_07_forward_invariance",
+      "proof_boundary": "Conditional on the single uniform-tail theorem; contiguous order four only.",
+      "readiness": "conditional",
+      "role": "exact_conditional_theorem"
+    },
+    {
+      "claim": "The same hypothesis promotes the existing finite lambda-zero prefix to an all-shift contiguous order-four theorem.",
+      "diagnostics": null,
+      "formula": "uniform eventual order-four positivity on [-100,0] implies H_(4,n)(0)>0 for every n>=0",
+      "id": "co4etfi_08_lambda_zero_handoff",
+      "proof_boundary": "Conditional; not arbitrary-column order four, PF-infinity, RH, or Lambda<=0.",
+      "readiness": "conditional",
+      "role": "exact_conditional_consequence"
+    }
+  ],
+  "source_diagnostics": {
+    "entry_status": "all-shift contiguous order-four entry theorem at lambda=-100",
+    "entry_theorem": "H_(4,n)(-100)>0 for every n>=0",
+    "flow_identity": "H_(4,n)'=a_n*H_(4,n+1)+b_n*H_(4,n)",
+    "flow_status": "exact cooperative order-four flow reduction with one open spatial-tail coefficient bound",
+    "lambda0_eventual_status": "exact eventual lambda-zero order-four positivity theorem plus a rigorous 501-shift prefix, with the effective splice still open",
+    "lambda0_eventual_theorem": "exists N_H4: H_(4,n)(0)>0 for n>=N_H4",
+    "off_diagonal": "(4*n+26)*H_(3,n)/H_(3,n+1)",
+    "order3_status": "exact all-shift contiguous order-three propagation through lambda=0 with noncontiguous and higher compounds open",
+    "order3_theorem": "H_(3,n)(lambda)<0 on -100<=lambda<=0"
+  },
+  "source_hashes": {
+    "work/rh_compute/results/jensen_window_pf_compound_order3_forward_invariance_certificate.json": "782e91386f7eccbc85fd2e811f53a982803ba2de2617f77f3bf2df1445eb2835",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_forward_flow_reduction.json": "cda9af3e68c47cf712f422569539ff7018fc8e09ec0d67ea94c352de12a1f572",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_lambda0_eventual_positivity_certificate.json": "ddbc859d870da21486167d1916c11ec4ede0df6b14d1dd8bb6b43f10c6548108",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_m100_entry_certificate.json": "161ec1a9eb678e9e523f1b2b920e4de566c9970558ff085db0743c122bebc161"
+  },
+  "sources": [
+    "work/rh_compute/results/jensen_window_pf_compound_order4_m100_entry_certificate.json",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_forward_flow_reduction.json",
+    "work/rh_compute/results/jensen_window_pf_compound_order3_forward_invariance_certificate.json",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_lambda0_eventual_positivity_certificate.json"
+  ],
+  "status": "exact finite-confinement forward-invariance reduction with one open uniform tail",
+  "summary": {
+    "conditional_forward_theorems": 1,
+    "conditional_rows": 3,
+    "exact_or_input_rows": 7,
+    "finite_confinement_reductions": 1,
+    "global_coefficient_ceilings_required": 0,
+    "open_analytic_rows": 1,
+    "ready_to_apply_rows": 4,
+    "rows": 8,
+    "variation_of_constants_identities": 1
+  }
+}

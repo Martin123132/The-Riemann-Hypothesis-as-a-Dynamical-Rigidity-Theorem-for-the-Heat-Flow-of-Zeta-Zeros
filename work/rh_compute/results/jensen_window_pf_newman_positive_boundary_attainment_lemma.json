@@ -1,6 +1,6 @@
 {
   "kind": "jensen_window_pf_newman_positive_boundary_attainment_lemma",
-  "date": "2026-07-11",
+  "date": "2026-07-17",
   "status": "exact positive-boundary attainment and arbitrary-multiplicity energy lemma",
   "proof_boundary": "This artifact composes published positive-time strip and high-zero theorems with compactness to prove that Lambda>0 would force a finite real multiple zero of H_Lambda. It derives the exact arbitrary-multiplicity Hermite cluster energy blow-up and a positive-time simplicity equivalence. It does not prove positive-time simplicity, endpoint energy integrability, RH, or Lambda<=0.",
   "sources": [
@@ -8,7 +8,9 @@
     "outputs/jensen_window_pf_newman_classical_field_balance_gate.md",
     "outputs/formal_core.md",
     "https://arxiv.org/abs/1904.12438",
-    "https://arxiv.org/abs/1801.05914"
+    "https://arxiv.org/abs/1801.05914",
+    "https://arxiv.org/abs/2004.09765",
+    "outputs/jensen_window_pf_newman_polymath15_lambda01965_provenance_audit.md"
   ],
   "exact": {
     "published_strip": {
@@ -27,7 +29,7 @@
     "local_uniform_convergence": "The Fourier integral and super-exponential decay imply H_t -> H_Lambda locally uniformly as t->Lambda.",
     "multiplicity_argument": "A subsequence z_n converges to z_*. Since H_Lambda has only real zeros, z_* is real. The distinct zeros z_n and conjugate(z_n) both converge to z_*; Rouche zero counting forces mult_(z_*) H_Lambda>=2.",
     "attainment_theorem": "If Lambda>0, H_Lambda has a finite real multiple zero c with |c|<=X_Lambda=exp(2*C/Lambda). Thus a positive Newman boundary cannot be realized solely by zero collisions escaping to infinity.",
-    "positive_time_simplicity_equivalence": "Using simplicity for every t>Lambda, Lambda<=0 if and only if H_t has only simple zeros for every t>0.",
+    "positive_time_simplicity_equivalence": "Using simplicity for every t>Lambda and the published bound Lambda<=1/5, Lambda<=0 if and only if H_t has only simple zeros for every 0<t<=1/5.",
     "published_hermite_split": {
       "source": "https://arxiv.org/abs/1904.12438",
       "theorem": "Proposition 3.1(ii)",
@@ -48,7 +50,7 @@
       "symbolic_leading": "m*(m - 1)/(8*tau)"
     },
     "conditional_global_exclusion": "Under Lambda>0 the multiple cluster is finite. Therefore any nonnegative finite truncation containing it, if proved time-integrable on (Lambda,Lambda+epsilon), would contradict the universal cluster blow-up and force Lambda<=0.",
-    "open_handoff": "Prove either Xi positive-time simplicity for every t>0, or an Xi-specific finite-truncation energy estimate that remains integrable down to every hypothetical positive boundary. The published Rodgers-Tao estimate starts strictly after a negative boundary and does not supply this endpoint control.",
+    "open_handoff": "Prove either Xi positive-time simplicity for every 0<t<=1/5, or an Xi-specific finite-truncation energy estimate that remains integrable down to every hypothetical positive boundary. The published Rodgers-Tao estimate starts strictly after a negative boundary and does not supply this endpoint control.",
     "checks": {
       "hermite_rows": [
         {
@@ -179,9 +181,9 @@
       "id": "npba_06_positive_time_simplicity_equivalence",
       "role": "exact_equivalence",
       "readiness": "ready_to_apply",
-      "claim": "The Newman upper direction is equivalent to simplicity at every positive time.",
-      "formula": "Using simplicity for every t>Lambda, Lambda<=0 if and only if H_t has only simple zeros for every t>0.",
-      "proof_boundary": "Still an all-time, all-zero theorem; no simplicity proof is supplied here.",
+      "claim": "The Newman upper direction is equivalent to simplicity on the published reduced positive-time window.",
+      "formula": "Using simplicity for every t>Lambda and the published bound Lambda<=1/5, Lambda<=0 if and only if H_t has only simple zeros for every 0<t<=1/5.",
+      "proof_boundary": "Still an all-zero continuum theorem on 0<t<=1/5; no simplicity proof is supplied here.",
       "diagnostics": null
     },
     {
@@ -284,7 +286,7 @@
       "role": "open_handoff",
       "readiness": "not_ready_to_apply",
       "claim": "The collision route reduces to positive-time simplicity or finite boundary-energy integrability.",
-      "formula": "Prove either Xi positive-time simplicity for every t>0, or an Xi-specific finite-truncation energy estimate that remains integrable down to every hypothetical positive boundary. The published Rodgers-Tao estimate starts strictly after a negative boundary and does not supply this endpoint control.",
+      "formula": "Prove either Xi positive-time simplicity for every 0<t<=1/5, or an Xi-specific finite-truncation energy estimate that remains integrable down to every hypothetical positive boundary. The published Rodgers-Tao estimate starts strictly after a negative boundary and does not supply this endpoint control.",
       "proof_boundary": "Open Xi-specific endpoint theorem; not RH and not Lambda<=0.",
       "diagnostics": null
     }

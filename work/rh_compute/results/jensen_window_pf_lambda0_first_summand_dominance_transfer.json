@@ -1,0 +1,130 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_lambda0_first_summand_dominance_transfer.py",
+  "date": "2026-07-13",
+  "exact": {
+    "covariance_derivative": "delta_k'(T)=-Cov_(mu_(k,T))(epsilon(U),U^2)",
+    "endpoint_cap": "1/635040",
+    "endpoint_error": "2578812800/15813440003753001",
+    "endpoint_margin": "175009762015321/123977369629423527840",
+    "first_summand_measure": "dmu_(k,T)(u)=Z_(k,T)^(-1)*u^(2k)*exp(-T*u^2)*Phi_1(u)du",
+    "heat_monotonicity": "delta_k'(T)>=0 on 0<=T<=100",
+    "heat_parameter": "T=-lambda, 0<=T<=100",
+    "lambda_zero_dominance": "0<=delta_k(0)<=2/k^6, every integer k>=300",
+    "moment_error": "a_j=2*((j-1)^(-6)+2*j^(-6)+(j+1)^(-6)); |B_j-B_j^(1)|<=a_j",
+    "opposite_monotonicity": "epsilon is decreasing and u^2 is increasing, hence Cov(epsilon(U),U^2)<=0",
+    "penalty_error": "|P_n-P_n^(1)|<=10112*(k+1)^2/(k-3)^6<=2/(5*k^2), k=n+3>=504",
+    "perturbation_coefficients_descending": [
+      1,
+      3006,
+      3739735,
+      2464014980,
+      906416911135,
+      176398167034206,
+      14175790723241001
+    ],
+    "perturbation_polynomial": "n**6 + 3006*n**5 + 3739735*n**4 + 2464014980*n**3 + 906416911135*n**2 + 176398167034206*n + 14175790723241001",
+    "relative_tail": "delta_k(T)=E_(mu_(k,T))[epsilon(U)]",
+    "splice": "lambda=0 prefix ends at n=500; tail starts at n=501, k=n+3=504",
+    "tail_ratio": "epsilon(u)=sum_(m>=2) Phi_m(u)/Phi_1(u)",
+    "two_copy_identity": "2*Cov(f(U),g(U))=E[(f(U)-f(V))*(g(U)-g(V))]",
+    "uniform_dominance": "0<=delta_k(T)<=delta_k(100)<=2/k^6, k>=300, 0<=T<=100"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_lambda0_first_summand_dominance_transfer.py",
+  "kind": "jensen_window_pf_lambda0_first_summand_dominance_transfer",
+  "proof_boundary": "This artifact proves first-summand dominance uniformly for -100<=lambda<=0 and the resulting lambda-zero order-four perturbation budget. It does not prove the first-summand curvature ceiling, all-shift order-four positivity, forward order-four invariance, PF-infinity, RH, or Lambda<=0.",
+  "remaining_target": "K_1(t)<=(7/2)/t^2 for every real t>=503 at lambda=0",
+  "rows": [
+    {
+      "claim": "The complete-to-first-summand relative moment tail is an expectation of the pointwise theta-tail ratio.",
+      "diagnostics": null,
+      "formula": "delta_k(T)=E_(mu_(k,T))[epsilon(U)]",
+      "id": "l0fsdt_01_tail_expectation",
+      "proof_boundary": "Exact first-summand probability-coordinate identity.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Differentiation in the nonnegative heat-penalty parameter is a covariance identity.",
+      "diagnostics": null,
+      "formula": "delta_k'(T)=-Cov_(mu_(k,T))(epsilon(U),U^2)",
+      "id": "l0fsdt_02_covariance_derivative",
+      "proof_boundary": "Exact differentiation identity for finite first-summand moments.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The decreasing theta-tail ratio and increasing square coordinate force the covariance to be nonpositive.",
+      "diagnostics": null,
+      "formula": "2*Cov(f(U),g(U))=E[(f(U)-f(V))*(g(U)-g(V))]; epsilon is decreasing and u^2 is increasing, hence Cov(epsilon(U),U^2)<=0",
+      "id": "l0fsdt_03_opposite_monotonicity",
+      "proof_boundary": "Uses the already-proved pointwise monotonicity of every higher theta-summand ratio.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_lemma"
+    },
+    {
+      "claim": "The lambda=-100 dominance theorem transfers uniformly through the complete heat interval to lambda zero.",
+      "diagnostics": {
+        "source_row": "fsdc_08_full_moment_dominance",
+        "source_status": "all-k analytic first-summand dominance certificate"
+      },
+      "formula": "0<=delta_k(T)<=delta_k(100)<=2/k^6, k>=300, 0<=T<=100",
+      "id": "l0fsdt_04_uniform_heat_transfer",
+      "proof_boundary": "Relative moment dominance only; no Hankel sign or curvature conclusion.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "At lambda zero, every complete moment from index 300 onward differs from its first theta summand by at most two inverse sixth powers relatively.",
+      "diagnostics": null,
+      "formula": "0<=delta_k(0)<=2/k^6, every integer k>=300",
+      "id": "l0fsdt_05_lambda_zero_dominance",
+      "proof_boundary": "All-index lambda-zero coefficient dominance; not a determinant-sign theorem.",
+      "readiness": "ready_to_apply",
+      "role": "exact_interval_composition"
+    },
+    {
+      "claim": "At the first unproved lambda-zero order-four index and beyond, the complete-kernel logarithmic penalty differs from the first-summand penalty by at most two-fifths inverse square.",
+      "diagnostics": {
+        "endpoint_margin": "175009762015321/123977369629423527840",
+        "shifted_coefficients_descending": [
+          1,
+          3006,
+          3739735,
+          2464014980,
+          906416911135,
+          176398167034206,
+          14175790723241001
+        ],
+        "splice": "lambda=0 prefix ends at n=500; tail starts at n=501, k=n+3=504"
+      },
+      "formula": "|P_n-P_n^(1)|<=10112*(k+1)^2/(k-3)^6<=2/(5*k^2), k=n+3>=504",
+      "id": "l0fsdt_06_order4_penalty_transfer",
+      "proof_boundary": "Exact Lipschitz transfer only; the first-summand curvature ceiling remains open.",
+      "readiness": "ready_to_apply",
+      "role": "exact_perturbation_theorem"
+    },
+    {
+      "claim": "Prove a uniform lambda-zero first-summand stable-gap curvature ceiling from the real tent boundary t=503 onward.",
+      "diagnostics": null,
+      "formula": "K_1(t)<=(7/2)/t^2 for every real t>=503",
+      "id": "l0fsdt_07_curvature_handoff",
+      "proof_boundary": "Open first-summand analytic theorem; no lambda-zero all-shift order-four conclusion is asserted.",
+      "readiness": "not_ready_to_apply",
+      "role": "analytic_theorem_target"
+    }
+  ],
+  "source": "work/rh_compute/results/jensen_window_pf_negative_lambda_first_summand_dominance_certificate.json",
+  "source_sha256": "47241dfd2dc22358c14e84f98a656f3d970ea0b0294991501218b115cda2ca69",
+  "status": "exact heat-parameter dominance transfer with open lambda-zero curvature tail",
+  "summary": {
+    "exact_rows": 6,
+    "lambda0_splice_k": 504,
+    "lambda_zero_dominance_theorems": 1,
+    "open_analytic_rows": 1,
+    "order4_penalty_transfers": 1,
+    "ready_to_apply_rows": 6,
+    "rows": 7,
+    "tail_start_k": 300,
+    "uniform_heat_intervals": 1
+  }
+}

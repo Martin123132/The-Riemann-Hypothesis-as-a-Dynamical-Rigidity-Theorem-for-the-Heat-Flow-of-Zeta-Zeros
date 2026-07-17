@@ -1,0 +1,143 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order5_m100_tail_curvature_reduction.py",
+  "conclusions": {
+    "boundary_scout": "at n=316, (n+4)^2*C_n=3.5869277550969014082... while the sufficient cap is 100",
+    "conditional_entry": "prefix 0<=n<=316 plus the curvature tail => H_(5,n)(-100)>0 for every n>=0",
+    "conditional_forward": "the completed uniform tail and cooperative flow then imply H_(5,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+    "conditional_tail": "[C_n<=100/(n+4)^2 for every n>=317] => [J_n(-100)>0 and H_(5,n)(-100)>0 for every n>=317]",
+    "open_target": "prove C_n<=100/(n+4)^2 for every n>=317 at lambda=-100",
+    "prefix_relative": "[0.00626902754512557813924681177 +/- 7.83E-30]"
+  },
+  "date": "2026-07-13",
+  "exact": {
+    "cleared_polynomial": "502*k**2 - 25000*k - 12500",
+    "curvature_identity": "C_n=Delta^2 log(F_n)-Delta^2 log(d_(n+3))",
+    "curvature_quantity": "C_n=log(F_n*F_(n+2)/F_(n+1)^2)+log(d_k^2/(d_(k-1)*d_(k+1))), k=n+4",
+    "log_buffer": "-4*log(x_k)>=4*d_k>=502/(125*(2*k+1)), k>=320",
+    "rational_comparison": "100/k^2<502/(125*(2*k+1)), k>=321",
+    "shifted_coefficients": [
+      "502",
+      "297284",
+      "43689082"
+    ],
+    "shifted_polynomial_k_321_plus_n": "502*m**2 + 297284*m + 43689082",
+    "sign_equivalence": "J_n>0 iff C_n<-4*log(x_k)",
+    "stable_margin": "J_n=d_(n+3)*d_(n+5)*F_(n+1)^2-x_(n+4)^4*d_(n+4)^2*F_n*F_(n+2)",
+    "stable_ratio_residual": "0",
+    "sufficient_ceiling": "C_n<=100/k^2 for every k=n+4>=321",
+    "tail_index": "k=n+4, so n>=317 iff k>=321"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order5_m100_tail_curvature_reduction.py",
+  "kind": "jensen_window_pf_compound_order5_m100_tail_curvature_reduction",
+  "proof_boundary": "This artifact proves the exact scalar reduction and sufficient constant comparison. It does not prove the curvature ceiling, the order-five analytic tail, all-shift order five, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The rigorous endpoint prefix already proves order-five entry through n=316.",
+      "diagnostics": null,
+      "formula": "H_(5,n)(-100)>0 for every 0<=n<=316",
+      "id": "co5m100tcr_01_prefix_input",
+      "proof_boundary": "Finite Arb prefix only.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The stable order-five sign is exactly one scalar logarithmic inequality.",
+      "diagnostics": null,
+      "formula": "J_n>0 iff C_n<-4*log(x_k); C_n=log(F_n*F_(n+2)/F_(n+1)^2)+log(d_k^2/(d_(k-1)*d_(k+1))), k=n+4",
+      "id": "co5m100tcr_02_log_equivalence",
+      "proof_boundary": "Exact algebra inside the completed positive lower cone.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The scalar target is a difference of adjacent log-curvatures of F and d.",
+      "diagnostics": null,
+      "formula": "C_n=Delta^2 log(F_n)-Delta^2 log(d_(n+3))",
+      "id": "co5m100tcr_03_curvature_identity",
+      "proof_boundary": "Exact finite-difference identity.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The existing scaled-defect anchor supplies an order-one-over-k logarithmic buffer.",
+      "diagnostics": null,
+      "formula": "-4*log(x_k)>=4*d_k>=502/(125*(2*k+1)), k>=320",
+      "id": "co5m100tcr_04_defect_buffer",
+      "proof_boundary": "Previously proved lambda=-100 all-index anchor.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The coarse order-one-over-k-squared curvature ceiling lies strictly below the defect buffer on the complete tail.",
+      "diagnostics": {
+        "coefficients": [
+          "502",
+          "297284",
+          "43689082"
+        ],
+        "shifted_polynomial": "502*m**2 + 297284*m + 43689082"
+      },
+      "formula": "100/k^2<502/(125*(2*k+1)), k>=321",
+      "id": "co5m100tcr_05_rational_comparison",
+      "proof_boundary": "Coefficient-positive rational arithmetic for k>=321.",
+      "readiness": "ready_to_apply",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "The scalar curvature ceiling would prove the complete missing lambda=-100 order-five tail.",
+      "diagnostics": null,
+      "formula": "[C_n<=100/(n+4)^2 for every n>=317] => [J_n(-100)>0 and H_(5,n)(-100)>0 for every n>=317]",
+      "id": "co5m100tcr_06_conditional_tail",
+      "proof_boundary": "Conditional on the displayed scalar ceiling only.",
+      "readiness": "conditional_on_open_input",
+      "role": "conditional_theorem"
+    },
+    {
+      "claim": "Composing the prefix, tail, uniform eventual theorem, and cooperative flow would complete order five through lambda zero.",
+      "diagnostics": null,
+      "formula": "prefix 0<=n<=316 plus the curvature tail => H_(5,n)(-100)>0 for every n>=0; the completed uniform tail and cooperative flow then imply H_(5,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+      "id": "co5m100tcr_07_conditional_completion",
+      "proof_boundary": "Conditional; not PF-infinity, RH, or Lambda<=0.",
+      "readiness": "conditional_on_open_input",
+      "role": "conditional_theorem"
+    },
+    {
+      "claim": "Prove one zeta-specific stable log-curvature ceiling on the analytic tail.",
+      "diagnostics": {
+        "boundary_scout": "at n=316, (n+4)^2*C_n=3.5869277550969014082... while the sufficient cap is 100"
+      },
+      "formula": "prove C_n<=100/(n+4)^2 for every n>=317 at lambda=-100",
+      "id": "co5m100tcr_08_open_curvature",
+      "proof_boundary": "This scalar analytic ceiling is not proved here.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    }
+  ],
+  "source_contract": {
+    "boundary_relative_ball": "[0.00626902754512557813924681177 +/- 7.83E-30]",
+    "boundary_relative_lower": "6.26902754512557813924681176217966413351959208669864579030384E-3",
+    "defect_anchor": "d_k>=251/(250*(2*k+1)), k>=320",
+    "prefix_status": "rigorous finite lambda=-100 contiguous order-five prefix through n=316",
+    "prefix_theorem": "H_(5,n)(-100)>0 for every 0<=n<=316",
+    "source_defect_buffer": "-3*log(x_k)>3*d_k>=753/(250*(2*k+1))",
+    "uniform_tail_status": "exact uniform eventual order-five tail and conditional forward reduction with one open lambda=-100 entry"
+  },
+  "sources": [
+    "outputs/jensen_window_pf_compound_order5_m100_prefix_certificate.md",
+    "outputs/jensen_window_pf_compound_order5_uniform_tail_flow_reduction.md",
+    "outputs/jensen_window_pf_compound_order4_m100_entry_certificate.md",
+    "outputs/signed_hankel_jensen_bridge_target.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "exact order-five lambda=-100 tail reduction to one open stable log-curvature ceiling",
+  "summary": {
+    "conditional_rows": 2,
+    "conditional_tail_theorems": 1,
+    "exact_identity_rows": 2,
+    "open_curvature_targets": 1,
+    "open_rows": 1,
+    "rational_comparison_rows": 1,
+    "ready_to_apply_rows": 5,
+    "rows": 8
+  }
+}

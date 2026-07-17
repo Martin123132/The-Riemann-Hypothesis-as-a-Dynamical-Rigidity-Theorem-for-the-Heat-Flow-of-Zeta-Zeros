@@ -1,0 +1,208 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_dominant_saddle_arithmetic_ray_certificate",
+  "date": "2026-07-16",
+  "status": "rigorous positive normalized-curvature theorem for the finite Polymath-15 main sum on t*log(x/(4*pi))>=24; not a proof for H_t, Lambda<=0, or RH",
+  "proof_boundary": "This artifact proves a strict 19/250*L^2 normalized-curvature margin for the complete finite Riemann-Siegel main sum. It does not bound the published analytic remainder through two derivatives, close cutoff-transition collars, prove strict Laguerre positivity for H_t, prove Lambda<=0, or prove RH.",
+  "parameters": {
+    "precision_bits": 256,
+    "p_exponent": "349/100",
+    "L_min": "48/1",
+    "tL_min": "24/1",
+    "eta": "1/1000000000000000000000"
+  },
+  "exact": {
+    "ray": "0<t<=1/2, L=log(x/(4*pi)), t*L>=24; hence L>=48 and x=4*pi*exp(L)>10^21",
+    "alpha": "alpha(s)=1/(2s)+1/(s-1)+(1/2)Log(s/(2*pi)), s=(1-i*x)/2",
+    "alpha_real": "Re(alpha)=L/2+(1/4)log(1+x^-2)-1/(1+x^2)",
+    "alpha_bounds": "|alpha|<=L/2+1, |alpha'|<=2/x, |alpha''|<=3/x^2",
+    "normalizer_bounds": "g'=alpha+(t/2)alpha*alpha', L/2-x^-2-(L/4+1/2)/x<=Re(g')<=L/2+(4x^2)^-1+(L/4+1/2)/x; |g''|<=2/x+(3L/8+7/4)/x^2<=4/x",
+    "geometry_bounds": "0.24L<=b=|beta'|<=0.26L, a=|s_*'|<=0.51, c=|beta''|<=10^-21, d=|s_*''|<=10^-42, |V|<=10^-21",
+    "coefficient_exponent": "p_n>=1/2+(t/4)log((x/(4*pi))/n)-t/(2x^2)>=7/2-[1/(512*exp(L))+1/(4x^2)]>349/100",
+    "coefficient_bound": "|exp((t/4)log(n)^2)*n^(-s_*)|<=n^(-3.49), 2<=n<=N",
+    "tail_jets": "Q0=2*S0; Q1=2*(b*S0+a*S1); Q2=2*((b^2+c)*S0+(2*b*a+d)*S1+a^2*S2)",
+    "phase_floor": "C[P0]>=4b^2-2c-4|V|>0.23L^2, P0=2cos(beta)",
+    "perturbation_error": "Err<=4bQ1+Q1^2+2Q2+Q0(2c+2b^2)+Q0Q2+|V|(4Q0+Q0^2)",
+    "theorem": "C_t[P_(N,t)]>0.076L^2 for every point on the ray, with N held fixed when differentiating the finite analytic main sum"
+  },
+  "arb": {
+    "precision_bits": 256,
+    "p": "349/100",
+    "moments": {
+      "S0": {
+        "ball": "[0.1278709998316298986307925385245536726455110461461403941676865286585381 +/- 1.49e-72]",
+        "strict_upper": "[0.1280000000000000000000000000000000000000000000000000000000000000000000 +/- 3e-75]"
+      },
+      "S1": {
+        "ball": "[0.1143098929764890452589236997639857299254191266796851536249812640499371 +/- 9.21e-72]",
+        "strict_upper": "[0.1150000000000000000000000000000000000000000000000000000000000000000000 +/- 3e-75]"
+      },
+      "S2": {
+        "ball": "[0.1198423145124326358478067088669221942024306397216094225232479589965527 +/- 4.88e-71]",
+        "strict_upper": "[0.1210000000000000000000000000000000000000000000000000000000000000000000 +/- 3e-75]"
+      }
+    },
+    "x_at_L48_ball": "[8817490397450238834356.185569219276955454895729125369982449075043686890 +/- 4.51e-49]",
+    "x_at_L48_gt": "10^21",
+    "coefficient_exponent_loss_ball": "[2.783523599103388879466733144014579482500946841747077570921460357700027e-24 +/- 4.14e-94]",
+    "coefficient_exponent_loss_lt": "1/100"
+  },
+  "rational_budget": {
+    "moment_caps": {
+      "S0": "16/125",
+      "S1": "23/200",
+      "S2": "121/1000"
+    },
+    "geometry_caps": {
+      "b_lower_over_L": "6/25",
+      "b_upper_over_L": "13/50",
+      "a_upper": "51/100",
+      "c_upper": "1/1000000000000000000000",
+      "d_upper": "1/1000000000000000000000000000000000000000000",
+      "V_abs_upper": "1/1000000000000000000000"
+    },
+    "tail_caps": {
+      "Q0": "32/125",
+      "Q1_over_L_raw": "55203/800000",
+      "Q1_over_L": "6901/100000",
+      "Q2_over_L2_raw": "476253940000000000000002844444444444444444447/25600000000000000000000000000000000000000000000",
+      "Q2_over_L2": "1861/100000"
+    },
+    "curvature_budget": {
+      "phase_floor_over_L2_raw": "88473599999999999999999/384000000000000000000000",
+      "phase_floor_over_L2": "23/100",
+      "error_over_L2_raw": "86134578806250000000000391/562500000000000000000000000",
+      "error_over_L2": "77/500",
+      "strict_margin_over_L2": "19/250"
+    }
+  },
+  "rows": [
+    {
+      "id": "np15dsarc_01_alpha_geometry",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The published normalizer has an exact real-part formula on the critical axis.",
+      "formula": "Re(alpha)=L/2+(1/4)log(1+x^-2)-1/(1+x^2)",
+      "proof_boundary": "Exact elementary algebra for s=(1-i*x)/2.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15dsarc_02_ray_geometry",
+      "role": "analytic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The normalizer phase and shifted exponent obey uniform derivative bounds on the dominant ray.",
+      "formula": "0.24L<=b=|beta'|<=0.26L, a=|s_*'|<=0.51, c=|beta''|<=10^-21, d=|s_*''|<=10^-42, |V|<=10^-21",
+      "proof_boundary": "Uses L>=48 and elementary modulus estimates for alpha, alpha', and alpha''.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15dsarc_03_coefficient_envelope",
+      "role": "analytic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Every non-leading finite Dirichlet coefficient lies under one fixed summable power law.",
+      "formula": "|exp((t/4)log(n)^2)*n^(-s_*)|<=n^(-3.49), 2<=n<=N",
+      "proof_boundary": "Uses the published lower bound for Re(s_*) and N<=sqrt(x/(4*pi)+t/16).",
+      "diagnostics": null
+    },
+    {
+      "id": "np15dsarc_04_arb_moments",
+      "role": "interval_certificate",
+      "readiness": "certified",
+      "claim": "Arb encloses the three zeta moments needed for the coefficient tail.",
+      "formula": "S0<16/125, S1<23/200, S2<121/1000 at p=349/100",
+      "proof_boundary": "Outward-rounded Arb evaluation of zeta and its first two derivatives.",
+      "diagnostics": {
+        "precision_bits": 256,
+        "p": "349/100",
+        "moments": {
+          "S0": {
+            "ball": "[0.1278709998316298986307925385245536726455110461461403941676865286585381 +/- 1.49e-72]",
+            "strict_upper": "[0.1280000000000000000000000000000000000000000000000000000000000000000000 +/- 3e-75]"
+          },
+          "S1": {
+            "ball": "[0.1143098929764890452589236997639857299254191266796851536249812640499371 +/- 9.21e-72]",
+            "strict_upper": "[0.1150000000000000000000000000000000000000000000000000000000000000000000 +/- 3e-75]"
+          },
+          "S2": {
+            "ball": "[0.1198423145124326358478067088669221942024306397216094225232479589965527 +/- 4.88e-71]",
+            "strict_upper": "[0.1210000000000000000000000000000000000000000000000000000000000000000000 +/- 3e-75]"
+          }
+        },
+        "x_at_L48_ball": "[8817490397450238834356.185569219276955454895729125369982449075043686890 +/- 4.51e-49]",
+        "x_at_L48_gt": "10^21",
+        "coefficient_exponent_loss_ball": "[2.783523599103388879466733144014579482500946841747077570921460357700027e-24 +/- 4.14e-94]",
+        "coefficient_exponent_loss_lt": "1/100"
+      }
+    },
+    {
+      "id": "np15dsarc_05_tail_jets",
+      "role": "exact_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "The arithmetic tail's first three real jets reduce to the three certified zeta moments.",
+      "formula": "Q0=2*S0; Q1=2*(b*S0+a*S1); Q2=2*((b^2+c)*S0+(2*b*a+d)*S1+a^2*S2)",
+      "proof_boundary": "Triangle inequality after exact logarithmic differentiation of each finite term.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15dsarc_06_tail_budget",
+      "role": "rational_certificate",
+      "readiness": "certified",
+      "claim": "Exact rational arithmetic bounds all finite-tail jets homogeneously in L.",
+      "formula": "Q0<=0.256, Q1<=0.06901L, Q2<=0.01861L^2",
+      "proof_boundary": "Uses infinite zeta tails, so it covers every finite published cutoff N.",
+      "diagnostics": {
+        "Q0": "32/125",
+        "Q1_over_L_raw": "55203/800000",
+        "Q1_over_L": "6901/100000",
+        "Q2_over_L2_raw": "476253940000000000000002844444444444444444447/25600000000000000000000000000000000000000000000",
+        "Q2_over_L2": "1861/100000"
+      }
+    },
+    {
+      "id": "np15dsarc_07_phase_floor",
+      "role": "rational_certificate",
+      "readiness": "certified",
+      "claim": "The leading saddle has a uniform normalized curvature floor.",
+      "formula": "C[P0]>=4b^2-2c-4|V|>0.23L^2, P0=2cos(beta)",
+      "proof_boundary": "Allows either sign of the small normalizer potential V.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15dsarc_08_arithmetic_ray",
+      "role": "proved_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The complete finite Polymath-15 main sum has positive normalized Laguerre curvature on the dominant ray.",
+      "formula": "C_t[P_(N,t)]>0.076L^2 for every point on the ray, with N held fixed when differentiating the finite analytic main sum",
+      "proof_boundary": "Finite main sum only; the published analytic remainder is not included.",
+      "diagnostics": {
+        "phase_floor_over_L2_raw": "88473599999999999999999/384000000000000000000000",
+        "phase_floor_over_L2": "23/100",
+        "error_over_L2_raw": "86134578806250000000000391/562500000000000000000000000",
+        "error_over_L2": "77/500",
+        "strict_margin_over_L2": "19/250"
+      }
+    },
+    {
+      "id": "np15dsarc_09_remainder_gap",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "Passing from the finite main theorem to H_t requires a uniform Cauchy remainder budget and cutoff-transition collars.",
+      "formula": "C[P]>0.076L^2 must dominate the normalized C^2 theorem remainder",
+      "proof_boundary": "Open; no strict Laguerre theorem for H_t is asserted.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15dsarc_10_live_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "The dominant-saddle branch is reduced to the published remainder, leaving t*L<24 as the arithmetic boundary layer.",
+      "formula": "Close r_t in C^2 on tL>=24; retain coupled Dirichlet structure on 0<tL<24",
+      "proof_boundary": "Not Lambda<=0 or RH.",
+      "diagnostics": null
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/abs/1904.12438",
+    "outputs/jensen_window_pf_newman_polymath15_normalized_laguerre_bridge.md",
+    "outputs/jensen_window_pf_newman_theta_modular_blend_adaptive_saddle_gate.md"
+  ]
+}

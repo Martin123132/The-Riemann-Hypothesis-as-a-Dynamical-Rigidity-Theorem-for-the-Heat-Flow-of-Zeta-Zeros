@@ -1,0 +1,159 @@
+{
+  "kind": "jensen_window_pf_compound_order4_forward_flow_reduction",
+  "date": "2026-07-13",
+  "status": "exact cooperative order-four flow reduction with one open spatial-tail coefficient bound",
+  "proof_boundary": "This artifact proves the exact local cooperative order-four flow and reduces infinite-index propagation to one explicit scalar coefficient ceiling. It does not prove that ceiling, forward order-four invariance, arbitrary-column order four, PF-infinity, RH, or Lambda<=0.",
+  "exact_flow": {
+    "coefficient_flow": "A_j'=(4*j+2)*A_(j+1)",
+    "affine_hankel_derivative": "H_(m,n)'=(4*(n+2*m-2)+2)*delta(H_(m,n))",
+    "verified_sizes": "m=3 at shifts n,n+1; m=4 at shift n",
+    "plucker_identity": "H_(3,n+1)*delta(H_(4,n))=H_(3,n)*H_(4,n+1)+delta(H_(3,n+1))*H_(4,n)",
+    "weighted_identity": "H_(4,n)'=a_n*H_(4,n+1)+b_n*H_(4,n)",
+    "a_n": "(4*n+26)*H_(3,n)/H_(3,n+1)",
+    "b_n": "((4*n+26)/(4*n+22))*H_(3,n+1)'/H_(3,n+1)",
+    "boundary": "H_(4,n)=0 => H_(4,n)'=(4*n+26)*H_(3,n)/H_(3,n+1)*H_(4,n+1)",
+    "off_diagonal_positive": "H_(3,j)<0 for every j implies a_n>0"
+  },
+  "stable_gap": {
+    "gap": "G_n=d_(n+2)^2-x_(n+2)^2*d_(n+1)*d_(n+3)",
+    "margin": "F_n=G_(n+1)^2-x_(n+3)^3*G_n*G_(n+2)",
+    "positive_scale": "S_n=A_n^4*rho_n^12*x_(n+1)^8*x_(n+2)^4/d_(n+3)",
+    "factorization": "H_(4,n)=S_n*F_n",
+    "boundedness": "inside the ratio and order-three cones, 0<G_j<=1 and |F_n|<=1",
+    "scaled_flow": "F_n'=alpha_n*F_(n+1)+beta_n*F_n",
+    "alpha_n": "(4*n+26)*rho_(n+2)*x_(n+3)^4*(d_(n+3)/d_(n+4))*(G_n/G_(n+1))",
+    "beta_n": "((4*n+26)/(4*n+22))*(log T_(n+1))'-(log S_n)'",
+    "alpha_positive": true,
+    "scaled_boundary": "F_n=0 => F_n'=alpha_n*F_(n+1)"
+  },
+  "maximum_principle": {
+    "weight": "z_n=F_n/(n+1)",
+    "tail_attainment": "|F_n|<=1 implies z_n->0 uniformly on every heat interval",
+    "weighted_flow": "z_n'=alpha_n*((n+2)/(n+1))*z_(n+1)+beta_n*z_n",
+    "sufficient_coefficient_bound": "for every finite L>=-100, sup_(-100<=lambda<=L,n>=0) [beta_n+alpha_n*(n+2)/(n+1)]<infinity",
+    "consequence": "the exponential weighted-minimum argument propagates F_n>0",
+    "remaining_issue": "prove the scalar coefficient bound from a quantitative spatial tail for neighboring reciprocal-defect increments and order-three gaps"
+  },
+  "source_diagnostics": {
+    "entry_status": "all-shift contiguous order-four entry theorem at lambda=-100",
+    "entry_theorems": 1,
+    "order3_status": "exact all-shift contiguous order-three propagation through lambda=0 with noncontiguous and higher compounds open",
+    "order3_forward_theorems": 1
+  },
+  "rows": [
+    {
+      "id": "co4ffr_01_coefficient_flow",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The normalized Xi coefficients obey an affine weighted shift flow.",
+      "formula": "A_j'=(4*j+2)*A_(j+1)",
+      "proof_boundary": "Exact coefficient heat equation only.",
+      "diagnostics": null
+    },
+    {
+      "id": "co4ffr_02_affine_hankel_derivative",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "Affine shift weights collapse to one scalar on every contiguous Hankel determinant.",
+      "formula": "H_(m,n)'=(4*(n+2*m-2)+2)*delta(H_(m,n))",
+      "proof_boundary": "Exact determinant differentiation identity.",
+      "diagnostics": null
+    },
+    {
+      "id": "co4ffr_03_plucker_identity",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "A Plucker identity relates the shifted order-four derivative to the neighboring order-four minor and the completed order-three layer.",
+      "formula": "H_(3,n+1)*delta(H_(4,n))=H_(3,n)*H_(4,n+1)+delta(H_(3,n+1))*H_(4,n)",
+      "proof_boundary": "Local determinant algebra only.",
+      "diagnostics": null
+    },
+    {
+      "id": "co4ffr_04_cooperative_H4_flow",
+      "role": "exact_flow_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "The contiguous order-four determinants obey a one-sided cooperative linear system over the strict order-three cone.",
+      "formula": "H_(4,n)'=a_n*H_(4,n+1)+b_n*H_(4,n)",
+      "proof_boundary": "Finite-index flow algebra; escape to infinite index is separate.",
+      "diagnostics": {
+        "a_n": "(4*n+26)*H_(3,n)/H_(3,n+1)",
+        "b_n": "((4*n+26)/(4*n+22))*H_(3,n+1)'/H_(3,n+1)",
+        "boundary": "H_(4,n)=0 => H_(4,n)'=(4*n+26)*H_(3,n)/H_(3,n+1)*H_(4,n+1)"
+      }
+    },
+    {
+      "id": "co4ffr_05_stable_gap_factorization",
+      "role": "exact_sign_equivalence",
+      "readiness": "ready_to_apply",
+      "claim": "Positive coefficient-ratio factors isolate a bounded dimensionless order-four margin.",
+      "formula": "H_(4,n)=S_n*F_n, S_n>0, |F_n|<=1",
+      "proof_boundary": "Inside the completed ratio and order-three cones.",
+      "diagnostics": {
+        "gap": "G_n=d_(n+2)^2-x_(n+2)^2*d_(n+1)*d_(n+3)",
+        "margin": "F_n=G_(n+1)^2-x_(n+3)^3*G_n*G_(n+2)",
+        "positive_scale": "S_n=A_n^4*rho_n^12*x_(n+1)^8*x_(n+2)^4/d_(n+3)",
+        "factorization": "H_(4,n)=S_n*F_n",
+        "boundedness": "inside the ratio and order-three cones, 0<G_j<=1 and |F_n|<=1",
+        "scaled_flow": "F_n'=alpha_n*F_(n+1)+beta_n*F_n",
+        "alpha_n": "(4*n+26)*rho_(n+2)*x_(n+3)^4*(d_(n+3)/d_(n+4))*(G_n/G_(n+1))",
+        "beta_n": "((4*n+26)/(4*n+22))*(log T_(n+1))'-(log S_n)'",
+        "alpha_positive": true,
+        "scaled_boundary": "F_n=0 => F_n'=alpha_n*F_(n+1)"
+      }
+    },
+    {
+      "id": "co4ffr_06_cooperative_gap_flow",
+      "role": "exact_flow_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "Positive rescaling preserves cooperativity and gives an explicit positive off-diagonal coefficient for the bounded gap margin.",
+      "formula": "F_n'=alpha_n*F_(n+1)+beta_n*F_n",
+      "proof_boundary": "Exact local flow and boundary orientation only.",
+      "diagnostics": {
+        "alpha_n": "(4*n+26)*rho_(n+2)*x_(n+3)^4*(d_(n+3)/d_(n+4))*(G_n/G_(n+1))",
+        "beta_n": "((4*n+26)/(4*n+22))*(log T_(n+1))'-(log S_n)'",
+        "boundary": "F_n=0 => F_n'=alpha_n*F_(n+1)"
+      }
+    },
+    {
+      "id": "co4ffr_07_maximum_principle_reduction",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "Boundedness of the stable margin makes every negative weighted infimum spatially attained, reducing propagation to one scalar coefficient ceiling.",
+      "formula": "for every finite L>=-100, sup_(-100<=lambda<=L,n>=0) [beta_n+alpha_n*(n+2)/(n+1)]<infinity",
+      "proof_boundary": "Conditional infinite maximum principle reduction.",
+      "diagnostics": {
+        "weight": "z_n=F_n/(n+1)",
+        "tail_attainment": "|F_n|<=1 implies z_n->0 uniformly on every heat interval",
+        "weighted_flow": "z_n'=alpha_n*((n+2)/(n+1))*z_(n+1)+beta_n*z_n",
+        "sufficient_coefficient_bound": "for every finite L>=-100, sup_(-100<=lambda<=L,n>=0) [beta_n+alpha_n*(n+2)/(n+1)]<infinity",
+        "consequence": "the exponential weighted-minimum argument propagates F_n>0",
+        "remaining_issue": "prove the scalar coefficient bound from a quantitative spatial tail for neighboring reciprocal-defect increments and order-three gaps"
+      }
+    },
+    {
+      "id": "co4ffr_08_spatial_tail_target",
+      "role": "analytic_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "Prove the effective diagonal coefficient is uniformly bounded above on every compact heat interval.",
+      "formula": "for every finite L>=-100, sup_(-100<=lambda<=L,n>=0) [beta_n+alpha_n*(n+2)/(n+1)]<infinity",
+      "proof_boundary": "Open scalar spatial-tail theorem; no forward order-four propagation is asserted.",
+      "diagnostics": null
+    }
+  ],
+  "summary": {
+    "rows": 8,
+    "exact_rows": 7,
+    "exact_identities": 3,
+    "cooperative_flow_lemmas": 2,
+    "stable_gap_factorizations": 1,
+    "maximum_principle_reductions": 1,
+    "open_spatial_tail_bounds": 1
+  },
+  "sources": [
+    "outputs/jensen_window_pf_compound_order4_m100_entry_certificate.md",
+    "outputs/jensen_window_pf_compound_order3_forward_invariance_certificate.md",
+    "outputs/formal_core.md"
+  ],
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order4_forward_flow_reduction.py",
+  "remaining_target": "for every finite L>=-100, sup_(-100<=lambda<=L,n>=0) [beta_n+alpha_n*(n+2)/(n+1)]<infinity"
+}

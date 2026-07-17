@@ -1,0 +1,388 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order9_uniform_tail_flow_reduction.py",
+  "countermodel": {
+    "Q7_n2": "1/22147346968743318573346465338485637120000000000",
+    "Q8_log_concavity_margin": "-40921/24538241725813248696877825138277835241884876724206315993476458291926306465427019677040640000000000000000000000000000",
+    "Q8_values": [
+      "1/22147346968743318573346465338485637120000000000",
+      "1/5746332926632566442385615219551212618645504000000000000",
+      "392023/553977001408886897341215932395937493825218974580736000000000000000000"
+    ],
+    "Q9_n0": "-40921/1107954002817773794682431864791874987650437949161472000000000000000000",
+    "conclusion": "strict signed contiguous layers through order eight do not imply order nine",
+    "condensation_residual": "0",
+    "sequence": [
+      "1",
+      "1",
+      "1/2",
+      "1/6",
+      "1/24",
+      "1/120",
+      "1/720",
+      "1/5040",
+      "1/40320",
+      "1/362880",
+      "1/3628800",
+      "1/39916800",
+      "1/479001600",
+      "1/6227020800",
+      "1/87178291200",
+      "1/1307674368000",
+      "1/20926400000000"
+    ],
+    "strict_signed_lower_layers": {
+      "1": [
+        "1",
+        "1",
+        "1/2",
+        "1/6",
+        "1/24",
+        "1/120",
+        "1/720",
+        "1/5040",
+        "1/40320",
+        "1/362880",
+        "1/3628800",
+        "1/39916800",
+        "1/479001600",
+        "1/6227020800",
+        "1/87178291200",
+        "1/1307674368000",
+        "1/20926400000000"
+      ],
+      "2": [
+        "1/2",
+        "1/12",
+        "1/144",
+        "1/2880",
+        "1/86400",
+        "1/3628800",
+        "1/203212800",
+        "1/14631321600",
+        "1/1316818944000",
+        "1/144850083840000",
+        "1/19120211066880000",
+        "1/2982752926433280000",
+        "1/542861032610856960000",
+        "1/114000816848279961600000",
+        "93131/2541505710611341393920000000000"
+      ],
+      "3": [
+        "1/144",
+        "1/8640",
+        "1/1036800",
+        "1/217728000",
+        "1/73156608000",
+        "1/36870930432000",
+        "1/26547069911040000",
+        "1/26281599211929600000",
+        "1/34691710959747072000000",
+        "1/59530976006925975552000000",
+        "1/130015651599126330605568000000",
+        "1/354942728865614882553200640000000",
+        "877/1065212139067973317604671488000000000000"
+      ],
+      "4": [
+        "1/1036800",
+        "1/870912000",
+        "1/1463132160000",
+        "1/4424511651840000",
+        "1/22299538725273600000",
+        "1/176612346704166912000000",
+        "1/2098154678845502914560000000",
+        "1/36004334288988830013849600000000",
+        "1/864968126958667652252722790400000000",
+        "1/28336355839165952287799198613504000000000",
+        "16697/19162283534011980447422409317390745600000000000000"
+      ],
+      "5": [
+        "1/1463132160000",
+        "1/22122558259200000",
+        "1/668986161758208000000",
+        "1/37088592807875051520000000",
+        "1/3524899860460444896460800000000",
+        "1/544385534449511109809405952000000000",
+        "1/130783180796150549020611685908480000000000",
+        "1/47129027031700811845067627133979852800000000000",
+        "142033/4589382236222696526742024969442537483796480000000000000000"
+      ],
+      "6": [
+        "1/668986161758208000000",
+        "1/222531556847250309120000000",
+        "1/148045794139338685651353600000000",
+        "1/182913539575035732895960399872000000000",
+        "1/395488338727559260238329738187243520000000000",
+        "1/1425181777438632550194845044531550748672000000000000",
+        "1410137/7633060535285588863277335929176828343050305536000000000000000000"
+      ],
+      "7": [
+        "1/148045794139338685651353600000000",
+        "1/1280394777025250130271722799104000000000",
+        "1/22147346968743318573346465338485637120000000000",
+        "1/718291615829070805298201902443901577330688000000000000",
+        "2819/854902779951985952687061624067804774421634220032000000000000000000"
+      ],
+      "8": [
+        "1/22147346968743318573346465338485637120000000000",
+        "1/5746332926632566442385615219551212618645504000000000000",
+        "392023/553977001408886897341215932395937493825218974580736000000000000000000"
+      ]
+    }
+  },
+  "date": "2026-07-13",
+  "exact": {
+    "affine_derivative": "Q_(9,n)'=(4*n+66)*delta(Q_(9,n))",
+    "conditional_arbitrary_columns": "completed signed contiguous layers through order nine imply every arbitrary-column signed layer through order nine",
+    "conditional_forward": "[Q_(9,n)(-100)>0 for all n] => [Q_(9,n)(lambda)>0 for all n and -100<=lambda<=0]",
+    "cooperative_flow": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n=(4*n+66)*Q_(8,n)/Q_(8,n+1)>0, b_n=((4*n+66)/(4*n+62))*(log Q_(8,n+1))'",
+    "entry_equivalence": "Q_(9,n)>0 iff Q_(8,n+1)^2>Q_(8,n)*Q_(8,n+2)",
+    "leading_term": "det K=347485857744891213250560000*G_2^36*h^36+o(h^36)",
+    "open_entry": "Q_(9,n)(-100)>0 for every n>=0, equivalently strict log-concavity of Q_(8,n)(-100)",
+    "order9_orientation": "epsilon_9=1, Q_(9,n)=H_(9,n)",
+    "signed_condensation": "Q_(9,n)*Q_(7,n+2)=Q_(8,n+1)^2-Q_(8,n)*Q_(8,n+2)",
+    "signed_coordinate": "Q_(m,n)=epsilon_m*H_(m,n), epsilon_m=(-1)^binom(m,2)",
+    "signed_leading_term": "Q_9=positive_scale*(347485857744891213250560000*G_2^36*h^36+o(h^36))",
+    "uniform_eventual_tail": "there exists N_9 such that Q_(9,n)(lambda)>0 for every n>=N_9 and -100<=lambda<=0",
+    "variation_of_constants": "Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order9_uniform_tail_flow_reduction.py",
+  "kind": "jensen_window_pf_compound_order9_uniform_tail_flow_reduction",
+  "proof_boundary": "This artifact proves the signed order-nine eventual tail, exact entry coordinate, cooperative flow, and conditional forward theorem. It does not prove endpoint entry, full order-nine invariance, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The completed signed layer through fixed order eight supplies the positive lower cone for order nine.",
+      "diagnostics": null,
+      "formula": "Q_(8,n)(lambda)=H_(8,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+      "id": "co9utfr_01_order8_input",
+      "proof_boundary": "Completed fixed-order input only; no order-nine sign is imported.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The all-fixed-order Vandermonde theorem supplies a uniform eventual signed order-nine tail.",
+      "diagnostics": null,
+      "formula": "Q_9=positive_scale*(347485857744891213250560000*G_2^36*h^36+o(h^36)); there exists N_9 such that Q_(9,n)(lambda)>0 for every n>=N_9 and -100<=lambda<=0",
+      "id": "co9utfr_02_eventual_tail",
+      "proof_boundary": "Non-effective tail; the threshold may depend on order nine.",
+      "readiness": "ready_to_apply",
+      "role": "exact_published_composition"
+    },
+    {
+      "claim": "Signed order-nine entry is strict log-concavity of the completed positive Q_8 sequence.",
+      "diagnostics": null,
+      "formula": "Q_(9,n)*Q_(7,n+2)=Q_(8,n+1)^2-Q_(8,n)*Q_(8,n+2); Q_(9,n)>0 iff Q_(8,n+1)^2>Q_(8,n)*Q_(8,n+2)",
+      "id": "co9utfr_03_entry_coordinate",
+      "proof_boundary": "Exact signed Desnanot-Jacobi specialization only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The affine Hankel heat derivative specializes with coefficient 4n+66.",
+      "diagnostics": null,
+      "formula": "Q_(9,n)'=(4*n+66)*delta(Q_(9,n))",
+      "id": "co9utfr_04_affine_heat",
+      "proof_boundary": "General determinant identity specialized at m=9.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The signed order-nine heat flow is cooperative throughout the completed order-eight cone.",
+      "diagnostics": null,
+      "formula": "Q_n'=a_n*Q_(n+1)+b_n*Q_n, a_n=(4*n+66)*Q_(8,n)/Q_(8,n+1)>0, b_n=((4*n+66)/(4*n+62))*(log Q_(8,n+1))'",
+      "id": "co9utfr_05_cooperative_flow",
+      "proof_boundary": "The off-diagonal coefficient uses only Q_8>0.",
+      "readiness": "ready_to_apply",
+      "role": "exact_forward_lemma"
+    },
+    {
+      "claim": "All-shift lambda=-100 entry would complete signed contiguous order nine through lambda zero.",
+      "diagnostics": null,
+      "formula": "[Q_(9,n)(-100)>0 for all n] => [Q_(9,n)(lambda)>0 for all n and -100<=lambda<=0]; Q_n(lambda)=E_n(lambda)*(Q_n(-100)+integral_(-100)^lambda E_n(s)^(-1)*a_n(s)*Q_(n+1)(s)ds)",
+      "id": "co9utfr_06_conditional_forward",
+      "proof_boundary": "Conditional only on the explicit endpoint theorem.",
+      "readiness": "conditional_on_open_input",
+      "role": "exact_conditional_theorem"
+    },
+    {
+      "claim": "The fixed-order initial-minor theorem would then transfer order nine to arbitrary columns.",
+      "diagnostics": null,
+      "formula": "completed signed contiguous layers through order nine imply every arbitrary-column signed layer through order nine",
+      "id": "co9utfr_07_conditional_columns",
+      "proof_boundary": "Conditional on contiguous order-nine completion.",
+      "readiness": "conditional_on_open_input",
+      "role": "exact_conditional_theorem"
+    },
+    {
+      "claim": "The completed lower signed layers do not imply order nine abstractly.",
+      "diagnostics": {
+        "Q7_n2": "1/22147346968743318573346465338485637120000000000",
+        "Q8_log_concavity_margin": "-40921/24538241725813248696877825138277835241884876724206315993476458291926306465427019677040640000000000000000000000000000",
+        "Q8_values": [
+          "1/22147346968743318573346465338485637120000000000",
+          "1/5746332926632566442385615219551212618645504000000000000",
+          "392023/553977001408886897341215932395937493825218974580736000000000000000000"
+        ],
+        "Q9_n0": "-40921/1107954002817773794682431864791874987650437949161472000000000000000000",
+        "conclusion": "strict signed contiguous layers through order eight do not imply order nine",
+        "condensation_residual": "0",
+        "sequence": [
+          "1",
+          "1",
+          "1/2",
+          "1/6",
+          "1/24",
+          "1/120",
+          "1/720",
+          "1/5040",
+          "1/40320",
+          "1/362880",
+          "1/3628800",
+          "1/39916800",
+          "1/479001600",
+          "1/6227020800",
+          "1/87178291200",
+          "1/1307674368000",
+          "1/20926400000000"
+        ],
+        "strict_signed_lower_layers": {
+          "1": [
+            "1",
+            "1",
+            "1/2",
+            "1/6",
+            "1/24",
+            "1/120",
+            "1/720",
+            "1/5040",
+            "1/40320",
+            "1/362880",
+            "1/3628800",
+            "1/39916800",
+            "1/479001600",
+            "1/6227020800",
+            "1/87178291200",
+            "1/1307674368000",
+            "1/20926400000000"
+          ],
+          "2": [
+            "1/2",
+            "1/12",
+            "1/144",
+            "1/2880",
+            "1/86400",
+            "1/3628800",
+            "1/203212800",
+            "1/14631321600",
+            "1/1316818944000",
+            "1/144850083840000",
+            "1/19120211066880000",
+            "1/2982752926433280000",
+            "1/542861032610856960000",
+            "1/114000816848279961600000",
+            "93131/2541505710611341393920000000000"
+          ],
+          "3": [
+            "1/144",
+            "1/8640",
+            "1/1036800",
+            "1/217728000",
+            "1/73156608000",
+            "1/36870930432000",
+            "1/26547069911040000",
+            "1/26281599211929600000",
+            "1/34691710959747072000000",
+            "1/59530976006925975552000000",
+            "1/130015651599126330605568000000",
+            "1/354942728865614882553200640000000",
+            "877/1065212139067973317604671488000000000000"
+          ],
+          "4": [
+            "1/1036800",
+            "1/870912000",
+            "1/1463132160000",
+            "1/4424511651840000",
+            "1/22299538725273600000",
+            "1/176612346704166912000000",
+            "1/2098154678845502914560000000",
+            "1/36004334288988830013849600000000",
+            "1/864968126958667652252722790400000000",
+            "1/28336355839165952287799198613504000000000",
+            "16697/19162283534011980447422409317390745600000000000000"
+          ],
+          "5": [
+            "1/1463132160000",
+            "1/22122558259200000",
+            "1/668986161758208000000",
+            "1/37088592807875051520000000",
+            "1/3524899860460444896460800000000",
+            "1/544385534449511109809405952000000000",
+            "1/130783180796150549020611685908480000000000",
+            "1/47129027031700811845067627133979852800000000000",
+            "142033/4589382236222696526742024969442537483796480000000000000000"
+          ],
+          "6": [
+            "1/668986161758208000000",
+            "1/222531556847250309120000000",
+            "1/148045794139338685651353600000000",
+            "1/182913539575035732895960399872000000000",
+            "1/395488338727559260238329738187243520000000000",
+            "1/1425181777438632550194845044531550748672000000000000",
+            "1410137/7633060535285588863277335929176828343050305536000000000000000000"
+          ],
+          "7": [
+            "1/148045794139338685651353600000000",
+            "1/1280394777025250130271722799104000000000",
+            "1/22147346968743318573346465338485637120000000000",
+            "1/718291615829070805298201902443901577330688000000000000",
+            "2819/854902779951985952687061624067804774421634220032000000000000000000"
+          ],
+          "8": [
+            "1/22147346968743318573346465338485637120000000000",
+            "1/5746332926632566442385615219551212618645504000000000000",
+            "392023/553977001408886897341215932395937493825218974580736000000000000000000"
+          ]
+        }
+      },
+      "formula": "Q_(9,0)=-40921/1107954002817773794682431864791874987650437949161472000000000000000000<0",
+      "id": "co9utfr_08_countermodel",
+      "proof_boundary": "Exact rational finite sequence; blocks lower-layer promotion.",
+      "readiness": "ready_to_apply",
+      "role": "countermodel_gate"
+    },
+    {
+      "claim": "Prove strict all-shift signed order-nine entry at lambda=-100.",
+      "diagnostics": null,
+      "formula": "Q_(9,n)(-100)>0 for every n>=0, equivalently strict log-concavity of Q_(8,n)(-100)",
+      "id": "co9utfr_09_open_entry",
+      "proof_boundary": "Sole open input in this fixed-order-nine propagation route.",
+      "readiness": "not_ready_to_apply",
+      "role": "analytic_theorem_target"
+    }
+  ],
+  "source_contract": {
+    "order8_sign": "Q_(8,n)(lambda)=H_(8,n)(lambda)>0 for every n>=0 and -100<=lambda<=0",
+    "order8_status": "signed contiguous and arbitrary-column order-eight theorem on -100<=lambda<=0",
+    "order9_leading_degree": 36,
+    "order9_positive_signed_constant": 347485857744891213250560000,
+    "order9_raw_leading_constant": 347485857744891213250560000,
+    "vandermonde_status": "exact all-fixed-order graded-kernel leading determinant lemma and compact-uniform eventual signed tails; no all-shift theorem"
+  },
+  "sources": [
+    "work/rh_compute/results/jensen_window_pf_compound_order8_uniform_heat_forward_invariance_certificate.json",
+    "work/rh_compute/results/jensen_window_pf_graded_kernel_vandermonde_all_order_lemma.json"
+  ],
+  "status": "exact uniform eventual signed order-nine tail and conditional forward reduction with one open lambda=-100 entry",
+  "summary": {
+    "conditional_arbitrary_column_theorems": 1,
+    "conditional_forward_theorems": 1,
+    "conditional_rows": 2,
+    "cooperative_flow_recursions": 1,
+    "lower_layer_countermodels": 1,
+    "open_entry_targets": 1,
+    "open_rows": 1,
+    "ready_to_apply_rows": 6,
+    "rows": 9,
+    "signed_condensation_coordinates": 1,
+    "universal_tail_specializations": 1
+  }
+}

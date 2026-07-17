@@ -1,0 +1,140 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order5_m100_entry_certificate.py",
+  "date": "2026-07-13",
+  "exact": {
+    "all_shift_entry": "H_(5,n)(-100)>0 for every integer n>=0",
+    "asymptotic_reserve": "u>=20 scaled upper 9.15835270172636955976486206054574636687947832827158772903837E+0<10<60",
+    "coverage": "[320<=t<=V'(2)] union [2<=u<=20] union [u>=20] covers every t>=320",
+    "full_ceiling": "C_n<=C_n^(1)+|C_n-C_n^(1)|<63/k^2+37/k^2=100/k^2, k>=321",
+    "global_first_curvature": "q_1''(t)<=60/t^2 for every real t>=320",
+    "next_handoff": "compose all-shift lambda=-100 entry with the completed uniform tail and cooperative flow",
+    "tail_sign": "C_n<=100/(n+4)^2 => J_n(-100)>0 and H_(5,n)(-100)>0, n>=317",
+    "target_discharge": "target_compound_order5_m100_entry is discharged",
+    "tent_transfer": "C_n^(1)<=60*[-log(1-1/k^2)]<=60/(k^2-1)<63/k^2, k=n+4>=321"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order5_m100_entry_certificate.py",
+  "kind": "jensen_window_pf_compound_order5_m100_entry_certificate",
+  "proof_boundary": "This artifact proves H_(5,n)(-100)>0 for every n>=0. It does not by itself prove forward order-five invariance, arbitrary-column order five, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The order-five sign is controlled by the stable scalar curvature coordinate.",
+      "diagnostics": null,
+      "formula": "J_n>0 iff C_n<-4*log(x_(n+4))",
+      "id": "co5m100ec_01_stable_coordinate",
+      "proof_boundary": "Previously proved exact factorization inside the positive lower cone.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity_input"
+    },
+    {
+      "claim": "The continuous first-summand curvature ceiling holds from the splice through mode two.",
+      "diagnostics": null,
+      "formula": "q_1''(t)<=60/t^2 for 320<=t<=V'(2)",
+      "id": "co5m100ec_02_compact_curvature",
+      "proof_boundary": "Thirty-six real-parameter Arb blocks from a hashed quadrature cache.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem_input"
+    },
+    {
+      "claim": "The exact-corridor interval cover closes the finite mode ray.",
+      "diagnostics": null,
+      "formula": "q_1''(t)<=60/t^2 for every mode 2<=u<=20",
+      "id": "co5m100ec_03_finite_ray",
+      "proof_boundary": "One collar block and 1850 exact-corridor blocks.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem_input"
+    },
+    {
+      "claim": "The dimensionless normalized-H box closes the asymptotic mode ray.",
+      "diagnostics": null,
+      "formula": "q_1''(t)<=60/t^2 for every mode u>=20; u>=20 scaled upper 9.15835270172636955976486206054574636687947832827158772903837E+0<10<60",
+      "id": "co5m100ec_04_asymptotic_ray",
+      "proof_boundary": "Uniform z in [0,10^-30] interval theorem.",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_theorem_input"
+    },
+    {
+      "claim": "The three continuous certificates cover the complete first-summand tail.",
+      "diagnostics": null,
+      "formula": "q_1''(t)<=60/t^2 for every real t>=320; [320<=t<=V'(2)] union [2<=u<=20] union [u>=20] covers every t>=320",
+      "id": "co5m100ec_05_global_curvature",
+      "proof_boundary": "Continuous first summand only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "The tent identity transfers the real-parameter theorem to the discrete first-summand curvature.",
+      "diagnostics": null,
+      "formula": "C_n^(1)<=60*[-log(1-1/k^2)]<=60/(k^2-1)<63/k^2, k=n+4>=321",
+      "id": "co5m100ec_06_first_discrete",
+      "proof_boundary": "Exact tent integration and elementary logarithm bound.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_theorem"
+    },
+    {
+      "claim": "The proved higher-theta transfer closes the complete-kernel scalar ceiling.",
+      "diagnostics": null,
+      "formula": "|C_n-C_n^(1)|<=E_(k-1)+2*E_k+E_(k+1)<=37/k^2, k=n+4>=321; C_n<=C_n^(1)+|C_n-C_n^(1)|<63/k^2+37/k^2=100/k^2, k>=321",
+      "id": "co5m100ec_07_full_kernel",
+      "proof_boundary": "Complete Newman kernel at lambda=-100, k>=321.",
+      "readiness": "ready_to_apply",
+      "role": "exact_perturbation_theorem"
+    },
+    {
+      "claim": "The scalar ceiling proves every missing order-five tail sign.",
+      "diagnostics": null,
+      "formula": "C_n<=100/(n+4)^2 => J_n(-100)>0 and H_(5,n)(-100)>0, n>=317",
+      "id": "co5m100ec_08_tail",
+      "proof_boundary": "Analytic tail n>=317 only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_tail_theorem"
+    },
+    {
+      "claim": "The rigorous prefix and analytic tail prove contiguous order-five entry at every shift.",
+      "diagnostics": null,
+      "formula": "H_(5,n)(-100)>0 for every integer n>=0; target_compound_order5_m100_entry is discharged",
+      "id": "co5m100ec_09_all_shift_entry",
+      "proof_boundary": "One heat parameter only; not forward propagation or PF-infinity.",
+      "readiness": "ready_to_apply",
+      "role": "exact_entry_theorem"
+    },
+    {
+      "claim": "The endpoint input required by the proved conditional cooperative-flow theorem is now available.",
+      "diagnostics": null,
+      "formula": "compose all-shift lambda=-100 entry with the completed uniform tail and cooperative flow",
+      "id": "co5m100ec_10_forward_handoff",
+      "proof_boundary": "Composition handoff; the forward theorem is recorded separately.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_handoff"
+    }
+  ],
+  "source_contract": {
+    "asymptotic_ray": "q_1''(t)<=60/t^2 for every mode u>=20",
+    "asymptotic_scaled_upper": "9.15835270172636955976486206054574636687947832827158772903837E+0",
+    "compact": "q_1''(t)<=60/t^2 for 320<=t<=V'(2)",
+    "complete_ceiling": "C_n<=100/k^2 for every k=n+4>=321",
+    "conditional_tail": "[C_n<=100/(n+4)^2 for every n>=317] => [J_n(-100)>0 and H_(5,n)(-100)>0 for every n>=317]",
+    "finite_ray": "q_1''(t)<=60/t^2 for every mode 2<=u<=20",
+    "full_transfer": "|C_n-C_n^(1)|<=E_(k-1)+2*E_k+E_(k+1)<=37/k^2, k=n+4>=321",
+    "prefix": "H_(5,n)(-100)>0 for every 0<=n<=316"
+  },
+  "sources": [
+    "outputs/jensen_window_pf_compound_order5_m100_prefix_certificate.md",
+    "outputs/jensen_window_pf_compound_order5_m100_tail_curvature_reduction.md",
+    "outputs/jensen_window_pf_compound_order5_first_summand_curvature_bridge.md",
+    "outputs/jensen_window_pf_compound_order5_nested_curvature_compact_certificate.md",
+    "outputs/jensen_window_pf_compound_order5_nested_curvature_finite_ray_certificate.md",
+    "outputs/jensen_window_pf_compound_order5_nested_curvature_asymptotic_ray_certificate.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "all-shift contiguous order-five entry theorem at lambda=-100",
+  "summary": {
+    "all_shift_m100_entry_theorems": 1,
+    "analytic_tail_theorems": 1,
+    "complete_scalar_ceiling_theorems": 1,
+    "continuous_curvature_theorems": 1,
+    "discharged_local_targets": 1,
+    "open_rows": 0,
+    "ready_rows": 10,
+    "rows": 10
+  }
+}

@@ -93,6 +93,8 @@ def validate() -> list[str]:
         issues.append("height-escape exclusion missing")
     if "if and only if" not in exact.get("positive_time_simplicity_equivalence", ""):
         issues.append("positive-time simplicity equivalence missing")
+    if "every 0<t<=1/5" not in exact.get("positive_time_simplicity_equivalence", ""):
+        issues.append("published reduced simplicity window missing")
 
     # Re-derive the Hermite ODE and reciprocal-square identities algebraically.
     x = sp.symbols("x", real=True)
@@ -171,6 +173,8 @@ def validate() -> list[str]:
         issues.append("finite-cluster exclusion criterion missing")
     if "positive-time simplicity" not in exact.get("open_handoff", ""):
         issues.append("positive-time simplicity handoff missing")
+    if "every 0<t<=1/5" not in exact.get("open_handoff", ""):
+        issues.append("reduced positive-time handoff missing")
 
     note = NOTE.read_text(encoding="utf-8")
     required = [

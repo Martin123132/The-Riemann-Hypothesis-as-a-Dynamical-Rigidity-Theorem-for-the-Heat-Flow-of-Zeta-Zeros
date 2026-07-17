@@ -1,0 +1,454 @@
+{
+  "kind": "jensen_window_pf_compound_order4_exact_corridor_localized_curvature_ray_certificate",
+  "date": "2026-07-13",
+  "status": "rigorous exact-corridor localized-curvature ray and global corridor-to-U theorem",
+  "proof_boundary": "This artifact proves the localized U ceiling from the exact cumulant corridors on u>=20 and composes it with the finite u<=20 theorem. It does not by itself prove complete order-four entry, PF-infinity, the Riemann hypothesis, or Lambda<=0.",
+  "rows": [
+    {
+      "id": "co4eclcrc_01_exact_corridor_input",
+      "role": "exact_theorem_composition",
+      "readiness": "ready_to_apply",
+      "claim": "All seven exact alternating-factorial cumulant corridors hold at every central and shifted mode used on the ray.",
+      "formula": "exact cumulant corridors hold globally for u>=2",
+      "proof_boundary": "Exact cumulant input only.",
+      "diagnostics": null
+    },
+    {
+      "id": "co4eclcrc_02_ray_geometry",
+      "role": "exact_analytic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Coefficient-positive potential geometry gives a stable u>=19 collar around every central mode u>=20.",
+      "formula": "q>=10^33; uq<=t<=(201/100)uq; V''>=(361/100)u^2q",
+      "proof_boundary": "Potential geometry and shifted-mode collar only.",
+      "diagnostics": {
+        "mode_interval": "u>=19 for shifted jets; central u>=20",
+        "q_endpoint_lower": "3.18808944415866376191681638640184449824186670574186591406298E+33",
+        "q_floor": "1000000000000000000000000000000000",
+        "q_over_u_monotonicity": "(q/u)'=q*(4*u-1)/u^2>0",
+        "q_dominance": "q>=10000*u",
+        "t_decomposition": "2*q*u - 4*q*u/(2*q - 3) + 100*u**2 - 5*u/2 - 1/2",
+        "t_bounds": "u*q<=t<=(201/100)*u*q",
+        "curvature_bound": "V''(x_u)>=(361/100)*u^2*q",
+        "slope_lower_gate": {
+          "numerator_terms": 8,
+          "minimum_numerator_coefficient": "4",
+          "denominator": "2*(2*q - 3)"
+        },
+        "curvature_lower_gate": {
+          "numerator_terms": 12,
+          "minimum_numerator_coefficient": "156",
+          "denominator": "100*(2*q - 3)**2"
+        },
+        "inverse_slope_cap": "1/1000000000000000000000000000000",
+        "collar_t20_minus_t19_lower": "6.84140403277229664153888231548284194636517090552223519946531E+36",
+        "collar_consequence": "If central u>=20 and |s|<=1, the mode belonging to t+s is >19."
+      }
+    },
+    {
+      "id": "co4eclcrc_03_normalized_H_boxes",
+      "role": "exact_analytic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Midpoint Hurwitz-zeta bounds and the exact corridors place all seven normalized H derivatives in positive unit boxes.",
+      "formula": "0<x_r<=1; x_2>=97/100; x_3>=24/25, 2<=r<=8",
+      "proof_boundary": "Normalized H derivatives through order eight only.",
+      "diagnostics": {
+        "hurwitz_midpoint_bound": "(t/(t+1/2))^(r-1)<=G_r=(r-1)t^(r-1)*zeta(r,t+1/2)<=1",
+        "hurwitz_tangent_bound": "G_r>=1-(r-1)/(2t)",
+        "cumulant_geometry": "t^(r-1)q^(1-r/2)/V''^(r/2)<=D_r/u, D_r=(201/100)^(r-1)/(19/10)^r",
+        "kappa2_cap": "kappa_2<=1001/1000",
+        "boxes": {
+          "2": {
+            "definition": "x_2=(-1)^2*t^1*H^(2)/1",
+            "corridor_cap": "1001/1000",
+            "geometry_factor_Dr": "201/361",
+            "endpoint_lower": "13315597999999999999999999999999999639/13718000000000000000000000000000000000",
+            "required_floor": "97/100",
+            "floor_margin": "9137999999999999999999999999999639/13718000000000000000000000000000000000",
+            "upper": "1"
+          },
+          "3": {
+            "definition": "x_3=(-1)^3*t^2*H^(3)/1",
+            "corridor_cap": "6/5",
+            "geometry_factor_Dr": "40401/68590",
+            "endpoint_lower": "125472879999999999999999999999999993141/130321000000000000000000000000000000000",
+            "required_floor": "24/25",
+            "floor_margin": "364719999999999999999999999999993141/130321000000000000000000000000000000000",
+            "upper": "1"
+          },
+          "4": {
+            "definition": "x_4=(-1)^4*t^3*H^(4)/2",
+            "corridor_cap": "27/20",
+            "geometry_factor_Dr": "8120601/13032100",
+            "endpoint_lower": "4732941772999999999999999999999999609037/4952198000000000000000000000000000000000",
+            "required_floor": "0",
+            "floor_margin": "4732941772999999999999999999999999609037/4952198000000000000000000000000000000000",
+            "upper": "1"
+          },
+          "5": {
+            "definition": "x_5=(-1)^5*t^4*H^(5)/6",
+            "corridor_cap": "3/2",
+            "geometry_factor_Dr": "1632240801/2476099000",
+            "endpoint_lower": "22298759899249999999999999999999997523901/23522940500000000000000000000000000000000",
+            "required_floor": "0",
+            "floor_margin": "22298759899249999999999999999999997523901/23522940500000000000000000000000000000000",
+            "upper": "1"
+          },
+          "6": {
+            "definition": "x_6=(-1)^6*t^5*H^(6)/24",
+            "corridor_cap": "17/10",
+            "geometry_factor_Dr": "328080401001/470458810000",
+            "endpoint_lower": "335239228331931999999999999999999952954119/357548695600000000000000000000000000000000",
+            "required_floor": "0",
+            "floor_margin": "335239228331931999999999999999999952954119/357548695600000000000000000000000000000000",
+            "upper": "1"
+          },
+          "7": {
+            "definition": "x_7=(-1)^7*t^6*H^(7)/120",
+            "corridor_cap": "2",
+            "geometry_factor_Dr": "65944160601201/89387173900000",
+            "endpoint_lower": "15664679828975979999999999999999997318384783/16983563041000000000000000000000000000000000",
+            "required_floor": "0",
+            "floor_margin": "15664679828975979999999999999999997318384783/16983563041000000000000000000000000000000000",
+            "upper": "1"
+          },
+          "8": {
+            "definition": "x_8=(-1)^8*t^7*H^(8)/720",
+            "corridor_cap": "5/2",
+            "geometry_factor_Dr": "13254776280841401/16983563041000000",
+            "endpoint_lower": "579101514153792994999999999999999881115058713/645375395558000000000000000000000000000000000",
+            "required_floor": "0",
+            "floor_margin": "579101514153792994999999999999999881115058713/645375395558000000000000000000000000000000000",
+            "upper": "1"
+          }
+        },
+        "consequence": "0<x_r<=1 for 2<=r<=8, x_2>=97/100, x_3>=24/25"
+      }
+    },
+    {
+      "id": "co4eclcrc_04_logarithmic_defect",
+      "role": "exact_analytic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The convergent logarithmic-defect series and exact Bell identity control ell through order six, including every shifted Taylor envelope.",
+      "formula": "t^2 ell''<=23/20; |t^r ell^(r)|<30000; t^(r+1)E_r<1/1000",
+      "proof_boundary": "Localized logarithmic derivatives and envelopes only.",
+      "diagnostics": {
+        "defect": "R(B)=log((1-exp(-B))/B)",
+        "series": "R(B)=-B/2+sum_{k>=1}(-1)^(k+1)zeta(2k)*B^(2k)/(k*(2*pi)^(2k))",
+        "series_majorant": "zeta(2k)<2 and 2*pi>6 imply |R^(m)(B)|<1, 1<=m<=6, 0<B<=1",
+        "R_derivative_bounds": {
+          "1": "43/70",
+          "2": "288/1225",
+          "3": "20308/385875",
+          "4": "2935288/13505625",
+          "5": "517180816/4254271875",
+          "6": "22388682592/29779903125"
+        },
+        "bell_identity": "B_{n,k}(1!,2!,...)=(n!/k!)*binomial(n-1,k-1)",
+        "scaled_derivative_caps": {
+          "2": {
+            "scaled_log_B_cap": "40000/9409",
+            "scaled_R_composite_cap": "4/t",
+            "scaled_ell_cap": "30000"
+          },
+          "3": {
+            "scaled_log_B_cap": "24000000/912673",
+            "scaled_R_composite_cap": "24/t",
+            "scaled_ell_cap": "30000"
+          },
+          "4": {
+            "scaled_log_B_cap": "19200000000/88529281",
+            "scaled_R_composite_cap": "192/t",
+            "scaled_ell_cap": "30000"
+          },
+          "5": {
+            "scaled_log_B_cap": "19200000000000/8587340257",
+            "scaled_R_composite_cap": "1920/t",
+            "scaled_ell_cap": "30000"
+          },
+          "6": {
+            "scaled_log_B_cap": "23040000000000000/832972004929",
+            "scaled_R_composite_cap": "23040/t",
+            "scaled_ell_cap": "30000"
+          }
+        },
+        "sharp_log_second_upper": "69128/60625",
+        "sharp_ell_second_upper": "t^2*ell''<=23/20",
+        "collar_ratio": "t/(t-1)<=1001/1000",
+        "scaled_envelope_bound": "1006015020015006001/400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "scaled_envelope_cap": "1/1000",
+        "envelope_scaling": "t^(r+1)*E_r<1/1000, r=0,1,2"
+      }
+    },
+    {
+      "id": "co4eclcrc_05_localized_scaled_gates",
+      "role": "exact_analytic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Five dimensionless gates retain the positive curvature terms and the essential negative square term.",
+      "formula": "A_->193/100; A_+<201/100; C_+<401/100; P_->191/100",
+      "proof_boundary": "Inputs to the scalar localized-curvature comparison only.",
+      "diagnostics": {
+        "definitions": {
+          "A_minus": "t*(j_0-E_0)",
+          "A_plus": "t*(j_0+E_0)",
+          "C_plus": "t^3*max(j_2+E_2,0)",
+          "P_minus": "t^2*max(abs(j_1)-E_1,0)"
+        },
+        "gates": {
+          "t2_ell_second_upper": "23/20",
+          "A_minus_lower": "193/100",
+          "A_plus_upper": "201/100",
+          "C_plus_upper": "401/100",
+          "P_minus_lower": "191/100",
+          "j_plus_upper": "201/100000000000000000000000000000000",
+          "j_plus_cap": "1/1000"
+        },
+        "exact_precomparison_values": {
+          "A_minus": "38779999999999999999999999999977/20000000000000000000000000000000",
+          "A_plus": "200100000000000000000000003/100000000000000000000000000",
+          "C_plus": "400100000000000000000000003/100000000000000000000000000",
+          "P_minus": "191899999999999999999999997/100000000000000000000000000"
+        },
+        "positive_localized_gap": true
+      }
+    },
+    {
+      "id": "co4eclcrc_06_scalar_comparison",
+      "role": "exact_analytic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Elementary exponential inequalities reduce the complete scaled localized curvature bound to one strict rational comparison.",
+      "formula": "2*(23/20)+401/193-(999/1000)*(191/201)^2<7/2",
+      "proof_boundary": "Localized U ceiling only.",
+      "diagnostics": {
+        "phi_inequality": "z/(exp(z)-1)<=1",
+        "chi_inequality": "z^2*exp(z)/(exp(z)-1)^2>=exp(-z)>=1-z>=999/1000",
+        "ell_term_upper": "23/10",
+        "phi_term_upper": "401/193",
+        "chi_term_lower": "4049391/4489000",
+        "scaled_U_upper": "3011223637/866377000",
+        "scaled_U_upper_decimal": "3.4756504812570048",
+        "target": "7/2",
+        "margin_lower": "21095863/866377000",
+        "margin_decimal": "0.0243495187429953"
+      }
+    },
+    {
+      "id": "co4eclcrc_07_ray_theorem",
+      "role": "exact_analytic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The exact cumulant corridors imply a positive localized gap and U(t)<7/(2t^2) for every central mode u>=20.",
+      "formula": "j_0>E_0 and U(t)<7/(2t^2), u>=20",
+      "proof_boundary": "Exact first-summand localized curvature ray only.",
+      "diagnostics": null
+    },
+    {
+      "id": "co4eclcrc_08_global_corridor_to_U",
+      "role": "exact_theorem_composition",
+      "readiness": "ready_to_apply",
+      "claim": "The finite cover and analytic ray close the exact-corridor-to-localized-curvature implication for every mode u>=2.",
+      "formula": "exact corridors => j_0>E_0 and U(t)<7/(2t^2), u>=2",
+      "proof_boundary": "Does not yet compose the compact interval, first-summand transfer, or full-kernel order-four entry.",
+      "diagnostics": null
+    }
+  ],
+  "geometry": {
+    "mode_interval": "u>=19 for shifted jets; central u>=20",
+    "q_endpoint_lower": "3.18808944415866376191681638640184449824186670574186591406298E+33",
+    "q_floor": "1000000000000000000000000000000000",
+    "q_over_u_monotonicity": "(q/u)'=q*(4*u-1)/u^2>0",
+    "q_dominance": "q>=10000*u",
+    "t_decomposition": "2*q*u - 4*q*u/(2*q - 3) + 100*u**2 - 5*u/2 - 1/2",
+    "t_bounds": "u*q<=t<=(201/100)*u*q",
+    "curvature_bound": "V''(x_u)>=(361/100)*u^2*q",
+    "slope_lower_gate": {
+      "numerator_terms": 8,
+      "minimum_numerator_coefficient": "4",
+      "denominator": "2*(2*q - 3)"
+    },
+    "curvature_lower_gate": {
+      "numerator_terms": 12,
+      "minimum_numerator_coefficient": "156",
+      "denominator": "100*(2*q - 3)**2"
+    },
+    "inverse_slope_cap": "1/1000000000000000000000000000000",
+    "collar_t20_minus_t19_lower": "6.84140403277229664153888231548284194636517090552223519946531E+36",
+    "collar_consequence": "If central u>=20 and |s|<=1, the mode belonging to t+s is >19."
+  },
+  "normalized_h_boxes": {
+    "hurwitz_midpoint_bound": "(t/(t+1/2))^(r-1)<=G_r=(r-1)t^(r-1)*zeta(r,t+1/2)<=1",
+    "hurwitz_tangent_bound": "G_r>=1-(r-1)/(2t)",
+    "cumulant_geometry": "t^(r-1)q^(1-r/2)/V''^(r/2)<=D_r/u, D_r=(201/100)^(r-1)/(19/10)^r",
+    "kappa2_cap": "kappa_2<=1001/1000",
+    "boxes": {
+      "2": {
+        "definition": "x_2=(-1)^2*t^1*H^(2)/1",
+        "corridor_cap": "1001/1000",
+        "geometry_factor_Dr": "201/361",
+        "endpoint_lower": "13315597999999999999999999999999999639/13718000000000000000000000000000000000",
+        "required_floor": "97/100",
+        "floor_margin": "9137999999999999999999999999999639/13718000000000000000000000000000000000",
+        "upper": "1"
+      },
+      "3": {
+        "definition": "x_3=(-1)^3*t^2*H^(3)/1",
+        "corridor_cap": "6/5",
+        "geometry_factor_Dr": "40401/68590",
+        "endpoint_lower": "125472879999999999999999999999999993141/130321000000000000000000000000000000000",
+        "required_floor": "24/25",
+        "floor_margin": "364719999999999999999999999999993141/130321000000000000000000000000000000000",
+        "upper": "1"
+      },
+      "4": {
+        "definition": "x_4=(-1)^4*t^3*H^(4)/2",
+        "corridor_cap": "27/20",
+        "geometry_factor_Dr": "8120601/13032100",
+        "endpoint_lower": "4732941772999999999999999999999999609037/4952198000000000000000000000000000000000",
+        "required_floor": "0",
+        "floor_margin": "4732941772999999999999999999999999609037/4952198000000000000000000000000000000000",
+        "upper": "1"
+      },
+      "5": {
+        "definition": "x_5=(-1)^5*t^4*H^(5)/6",
+        "corridor_cap": "3/2",
+        "geometry_factor_Dr": "1632240801/2476099000",
+        "endpoint_lower": "22298759899249999999999999999999997523901/23522940500000000000000000000000000000000",
+        "required_floor": "0",
+        "floor_margin": "22298759899249999999999999999999997523901/23522940500000000000000000000000000000000",
+        "upper": "1"
+      },
+      "6": {
+        "definition": "x_6=(-1)^6*t^5*H^(6)/24",
+        "corridor_cap": "17/10",
+        "geometry_factor_Dr": "328080401001/470458810000",
+        "endpoint_lower": "335239228331931999999999999999999952954119/357548695600000000000000000000000000000000",
+        "required_floor": "0",
+        "floor_margin": "335239228331931999999999999999999952954119/357548695600000000000000000000000000000000",
+        "upper": "1"
+      },
+      "7": {
+        "definition": "x_7=(-1)^7*t^6*H^(7)/120",
+        "corridor_cap": "2",
+        "geometry_factor_Dr": "65944160601201/89387173900000",
+        "endpoint_lower": "15664679828975979999999999999999997318384783/16983563041000000000000000000000000000000000",
+        "required_floor": "0",
+        "floor_margin": "15664679828975979999999999999999997318384783/16983563041000000000000000000000000000000000",
+        "upper": "1"
+      },
+      "8": {
+        "definition": "x_8=(-1)^8*t^7*H^(8)/720",
+        "corridor_cap": "5/2",
+        "geometry_factor_Dr": "13254776280841401/16983563041000000",
+        "endpoint_lower": "579101514153792994999999999999999881115058713/645375395558000000000000000000000000000000000",
+        "required_floor": "0",
+        "floor_margin": "579101514153792994999999999999999881115058713/645375395558000000000000000000000000000000000",
+        "upper": "1"
+      }
+    },
+    "consequence": "0<x_r<=1 for 2<=r<=8, x_2>=97/100, x_3>=24/25"
+  },
+  "logarithmic_defect": {
+    "defect": "R(B)=log((1-exp(-B))/B)",
+    "series": "R(B)=-B/2+sum_{k>=1}(-1)^(k+1)zeta(2k)*B^(2k)/(k*(2*pi)^(2k))",
+    "series_majorant": "zeta(2k)<2 and 2*pi>6 imply |R^(m)(B)|<1, 1<=m<=6, 0<B<=1",
+    "R_derivative_bounds": {
+      "1": "43/70",
+      "2": "288/1225",
+      "3": "20308/385875",
+      "4": "2935288/13505625",
+      "5": "517180816/4254271875",
+      "6": "22388682592/29779903125"
+    },
+    "bell_identity": "B_{n,k}(1!,2!,...)=(n!/k!)*binomial(n-1,k-1)",
+    "scaled_derivative_caps": {
+      "2": {
+        "scaled_log_B_cap": "40000/9409",
+        "scaled_R_composite_cap": "4/t",
+        "scaled_ell_cap": "30000"
+      },
+      "3": {
+        "scaled_log_B_cap": "24000000/912673",
+        "scaled_R_composite_cap": "24/t",
+        "scaled_ell_cap": "30000"
+      },
+      "4": {
+        "scaled_log_B_cap": "19200000000/88529281",
+        "scaled_R_composite_cap": "192/t",
+        "scaled_ell_cap": "30000"
+      },
+      "5": {
+        "scaled_log_B_cap": "19200000000000/8587340257",
+        "scaled_R_composite_cap": "1920/t",
+        "scaled_ell_cap": "30000"
+      },
+      "6": {
+        "scaled_log_B_cap": "23040000000000000/832972004929",
+        "scaled_R_composite_cap": "23040/t",
+        "scaled_ell_cap": "30000"
+      }
+    },
+    "sharp_log_second_upper": "69128/60625",
+    "sharp_ell_second_upper": "t^2*ell''<=23/20",
+    "collar_ratio": "t/(t-1)<=1001/1000",
+    "scaled_envelope_bound": "1006015020015006001/400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "scaled_envelope_cap": "1/1000",
+    "envelope_scaling": "t^(r+1)*E_r<1/1000, r=0,1,2"
+  },
+  "localized_scaled_gates": {
+    "definitions": {
+      "A_minus": "t*(j_0-E_0)",
+      "A_plus": "t*(j_0+E_0)",
+      "C_plus": "t^3*max(j_2+E_2,0)",
+      "P_minus": "t^2*max(abs(j_1)-E_1,0)"
+    },
+    "gates": {
+      "t2_ell_second_upper": "23/20",
+      "A_minus_lower": "193/100",
+      "A_plus_upper": "201/100",
+      "C_plus_upper": "401/100",
+      "P_minus_lower": "191/100",
+      "j_plus_upper": "201/100000000000000000000000000000000",
+      "j_plus_cap": "1/1000"
+    },
+    "exact_precomparison_values": {
+      "A_minus": "38779999999999999999999999999977/20000000000000000000000000000000",
+      "A_plus": "200100000000000000000000003/100000000000000000000000000",
+      "C_plus": "400100000000000000000000003/100000000000000000000000000",
+      "P_minus": "191899999999999999999999997/100000000000000000000000000"
+    },
+    "positive_localized_gap": true
+  },
+  "scalar_comparison": {
+    "phi_inequality": "z/(exp(z)-1)<=1",
+    "chi_inequality": "z^2*exp(z)/(exp(z)-1)^2>=exp(-z)>=1-z>=999/1000",
+    "ell_term_upper": "23/10",
+    "phi_term_upper": "401/193",
+    "chi_term_lower": "4049391/4489000",
+    "scaled_U_upper": "3011223637/866377000",
+    "scaled_U_upper_decimal": "3.4756504812570048",
+    "target": "7/2",
+    "margin_lower": "21095863/866377000",
+    "margin_decimal": "0.0243495187429953"
+  },
+  "summary": {
+    "rows": 8,
+    "exact_rows": 8,
+    "open_analytic_rows": 0,
+    "normalized_h_boxes": 7,
+    "defect_derivative_bounds": 6,
+    "localized_scaled_gates": 5,
+    "positive_rational_comparisons": 1,
+    "ray_corridor_to_curvature_closed": true,
+    "global_corridor_to_curvature_closed": true
+  },
+  "sources": [
+    "work/rh_compute/results/jensen_window_pf_compound_order4_exact_cumulant_corridor_theorem.json",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_exact_corridor_localized_curvature_finite_certificate.json",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_first_summand_curvature_bridge.json"
+  ],
+  "source_hashes": {
+    "work/rh_compute/results/jensen_window_pf_compound_order4_exact_cumulant_corridor_theorem.json": "4aae029d7da6feeddf25d34c1d2bda04ed5d0810141b629946957aa8ea1944b9",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_exact_corridor_localized_curvature_finite_certificate.json": "55398a0e5eff6340935aa457f9ead7865b250cecdf5bc8193a44b37bed24633f",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_first_summand_curvature_bridge.json": "ad9e2be018ec76285b468f917d9e6f15f2c28e935f4b627ffa0956a6f23ac2a3"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order4_exact_corridor_localized_curvature_ray_certificate.py",
+  "remaining_target": "Compose compact curvature, global corridor-to-U, the first-summand tent transfer, and the full-kernel perturbation into contiguous order-four entry at lambda=-100."
+}

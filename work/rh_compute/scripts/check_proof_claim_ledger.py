@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Validate the proof-programme claim ledger.
 
-The ledger is a machine-readable separation of exact lemmas, finite
-certificates, diagnostics, theorem targets, countermodel gates, forbidden
-promotions, and hygiene gates.  This checker enforces that open bridge targets
-are not accidentally recorded as proved and that referenced artifacts exist.
+The ledger is a machine-readable separation of exact lemmas, asymptotic
+theorems, finite certificates, diagnostics, theorem targets, countermodel
+gates, forbidden promotions, and hygiene gates.  This checker enforces that
+open bridge targets are not accidentally recorded as proved and that
+referenced artifacts exist.
 """
 
 from __future__ import annotations
@@ -21,6 +22,7 @@ DEFAULT_LEDGER = REPO_ROOT / "work/rh_compute/results/proof_claim_ledger.json"
 
 ALLOWED_CATEGORIES = {
     "exact_lemma",
+    "asymptotic_theorem",
     "finite_certificate",
     "interval_certificate",
     "diagnostic",
@@ -34,6 +36,7 @@ ALLOWED_CATEGORIES = {
 
 ALLOWED_STATUSES = {
     "available_exact",
+    "asymptotic_validated",
     "finite_validated",
     "interval_validated",
     "diagnostic_validated",
@@ -45,6 +48,7 @@ ALLOWED_STATUSES = {
 
 CATEGORY_STATUSES = {
     "exact_lemma": {"available_exact"},
+    "asymptotic_theorem": {"asymptotic_validated"},
     "finite_certificate": {"finite_validated"},
     "interval_certificate": {"interval_validated"},
     "diagnostic": {"diagnostic_validated"},
@@ -129,7 +133,7 @@ def validate_claim(claim: dict) -> list[LedgerIssue]:
     if not has_boundary(boundary):
         issues.append(LedgerIssue(claim_id, "weak-proof-boundary", boundary))
 
-    if category in {"finite_certificate", "interval_certificate", "diagnostic", "algebraic_reindexing", "countermodel_gate", "hygiene_gate"}:
+    if category in {"asymptotic_theorem", "finite_certificate", "interval_certificate", "diagnostic", "algebraic_reindexing", "countermodel_gate", "hygiene_gate"}:
         if "validation_command" not in claim:
             issues.append(LedgerIssue(claim_id, "missing-validation-command", "validated claim needs executable gate"))
 

@@ -1,0 +1,217 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_order4_noncontiguous_total_positivity_transfer.py",
+  "date": "2026-07-13",
+  "exact": {
+    "arbitrary_column_identity": "det B[0:k|N-j_k,...,N-j_1]=epsilon_k*R_(k,n)(j_1,...,j_k)",
+    "determinant_reversal_audits": [
+      {
+        "identity": "det(reverse_columns(H_1))=(-1)^binom(1,2)*det(H_1)",
+        "order": 1,
+        "orientation": 1,
+        "residual": "0"
+      },
+      {
+        "identity": "det(reverse_columns(H_2))=(-1)^binom(2,2)*det(H_2)",
+        "order": 2,
+        "orientation": -1,
+        "residual": "0"
+      },
+      {
+        "identity": "det(reverse_columns(H_3))=(-1)^binom(3,2)*det(H_3)",
+        "order": 3,
+        "orientation": -1,
+        "residual": "0"
+      },
+      {
+        "identity": "det(reverse_columns(H_4))=(-1)^binom(4,2)*det(H_4)",
+        "order": 4,
+        "orientation": 1,
+        "residual": "0"
+      }
+    ],
+    "index_mapping": {
+      "finite_column_bound": 8,
+      "formula": "det B[r:r+k,c:c+k]=(-1)^binom(k,2)*H_(k,n+r+N-c-k+1)",
+      "solid_blocks_checked": 240
+    },
+    "nonpromotion_countermodel": {
+      "H2_n0_wrong_sign": "209",
+      "H4_n0": "288076",
+      "H4_n1": "264875",
+      "R4_columns_0_1_3_4": "-231169",
+      "conclusion": "contiguous order four alone does not imply arbitrary-column order four; the lower initial-minor signs are essential",
+      "sequence": [
+        10,
+        9,
+        29,
+        18,
+        21,
+        25,
+        3,
+        16
+      ]
+    },
+    "orientation": "epsilon_k=(-1)^binom(k,2)",
+    "reciprocal_factorial_benchmark": {
+      "column_offsets": "0<=j<=8",
+      "minimum_signed_minor": "1/864968126958667652252722790400000000",
+      "positive_initial_minors_for_4_by_9_block": 36,
+      "sequence": "a_k=1/k!",
+      "shifts": "n=0,1,2,3",
+      "strict_signed_minors": 1020
+    },
+    "reversed_block": "B_(i,q)^(n,N)=A_(n+i+N-q)(0)",
+    "solid_minor_identity": "det B[r:r+k,c:c+k]=epsilon_k*H_(k,n+r+N-c-k+1)(0)"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_order4_noncontiguous_total_positivity_transfer.py",
+  "kind": "jensen_window_pf_order4_noncontiguous_total_positivity_transfer",
+  "proof_boundary": "This artifact proves arbitrary-column signed-Hankel signs through order four from the completed contiguous signs and a published strict-total-positivity criterion. It does not prove contiguous order five, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The actual lambda-zero Xi sequence has the strict signed contiguous signs through order four at every shift.",
+      "diagnostics": null,
+      "formula": "epsilon_k*H_(k,s)(0)>0 for every s>=0 and k=1,2,3,4",
+      "id": "o4ntp_01_signed_contiguous_inputs",
+      "proof_boundary": "Uses completed all-shift theorems, not finite evidence.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "Reverse a finite block of Hankel columns to convert the signed orientation into ordinary total positivity.",
+      "diagnostics": null,
+      "formula": "B_(i,q)^(n,N)=A_(n+i+N-q)(0)",
+      "id": "o4ntp_02_reversed_finite_block",
+      "proof_boundary": "Finite 4 by (N+1) block for arbitrary N.",
+      "readiness": "ready_to_apply",
+      "role": "exact_definition"
+    },
+    {
+      "claim": "Every solid minor of the reversed block is a signed contiguous Hankel minor.",
+      "diagnostics": {
+        "finite_column_bound": 8,
+        "formula": "det B[r:r+k,c:c+k]=(-1)^binom(k,2)*H_(k,n+r+N-c-k+1)",
+        "solid_blocks_checked": 240
+      },
+      "formula": "det B[r:r+k,c:c+k]=epsilon_k*H_(k,n+r+N-c-k+1)(0)",
+      "id": "o4ntp_03_solid_minor_identity",
+      "proof_boundary": "Exact index map and column-reversal sign.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "All initial minors of every reversed finite block are strictly positive.",
+      "diagnostics": null,
+      "formula": "all solid minors are positive, hence all initial minors are positive",
+      "id": "o4ntp_04_positive_initial_minors",
+      "proof_boundary": "Requires every lower signed contiguous layer through the block row count.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "The rectangular Gasca-Pena criterion promotes positive initial minors to strict total positivity.",
+      "diagnostics": null,
+      "formula": "all initial minors of an m by p real matrix are positive iff the matrix is strictly totally positive",
+      "id": "o4ntp_05_gasca_pena_criterion",
+      "proof_boundary": "Published finite-dimensional total-positivity criterion.",
+      "readiness": "ready_to_apply",
+      "role": "published_theorem_input"
+    },
+    {
+      "claim": "Every reversed 4 by (N+1) Xi Hankel block is strictly totally positive.",
+      "diagnostics": null,
+      "formula": "B^(n,N) is strictly totally positive for every n,N>=0",
+      "id": "o4ntp_06_finite_block_total_positivity",
+      "proof_boundary": "Only four consecutive Hankel rows are used.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "An arbitrary increasing Hankel column set is the reverse of an increasing column set in the finite block.",
+      "diagnostics": null,
+      "formula": "det B[0:k|N-j_k,...,N-j_1]=epsilon_k*R_(k,n)(j_1,...,j_k)",
+      "id": "o4ntp_07_arbitrary_column_identity",
+      "proof_boundary": "Choose N at least the largest requested column offset.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Every arbitrary-column four-row reshaped-Hankel determinant has the required positive sign at lambda zero.",
+      "diagnostics": null,
+      "formula": "R_(4,n)(j_1,j_2,j_3,j_4)>0 for every n>=0 and 0<=j_1<j_2<j_3<j_4",
+      "id": "o4ntp_08_arbitrary_order_four",
+      "proof_boundary": "Complete arbitrary-column order four for consecutive rows.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_conclusion"
+    },
+    {
+      "claim": "At every fixed order m, strict signed contiguous signs through m imply all arbitrary-column signed signs through m.",
+      "diagnostics": null,
+      "formula": "[epsilon_k H_(k,s)>0 for 1<=k<=m, all s] => [epsilon_k R_(k,n)(j_1,...,j_k)>0 for 1<=k<=m]",
+      "id": "o4ntp_09_fixed_order_transfer",
+      "proof_boundary": "A finite-dimensional theorem for each fixed m; it supplies no new contiguous signs.",
+      "readiness": "ready_to_apply",
+      "role": "exact_structural_theorem"
+    },
+    {
+      "claim": "Contiguous order four alone cannot replace the complete family of lower initial-minor signs.",
+      "diagnostics": {
+        "H2_n0_wrong_sign": "209",
+        "H4_n0": "288076",
+        "H4_n1": "264875",
+        "R4_columns_0_1_3_4": "-231169",
+        "conclusion": "contiguous order four alone does not imply arbitrary-column order four; the lower initial-minor signs are essential",
+        "sequence": [
+          10,
+          9,
+          29,
+          18,
+          21,
+          25,
+          3,
+          16
+        ]
+      },
+      "formula": "H4_0=288076>0, H4_1=264875>0, but R4_(0,1,3,4)=-231169<0",
+      "id": "o4ntp_10_lower_layer_kill_gate",
+      "proof_boundary": "Exact rational countermodel; it does not concern the actual Xi sequence.",
+      "readiness": "ready_to_apply",
+      "role": "non_promotion_guard"
+    },
+    {
+      "claim": "The first new signed-Hankel layer is now contiguous order five; once it is proved, arbitrary columns follow automatically from the fixed-order transfer.",
+      "diagnostics": null,
+      "formula": "next target: epsilon_5*H_(5,n)(0)=H_(5,n)(0)>0 for every n>=0",
+      "id": "o4ntp_11_order_five_handoff",
+      "proof_boundary": "Not an order-five theorem, PF-infinity, RH, or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "source_contract": {
+    "order3_source_status": "exact all-column reshaped-Hankel order-two and order-three theorem at lambda=0 with order four open",
+    "order4_source_status": "all-shift contiguous order-four forward invariance through lambda zero",
+    "positive_coefficients": "A_s(0)>0 for every s>=0",
+    "signed_contiguous_orders": "epsilon_k*H_(k,s)(0)>0 for every s>=0 and k=1,2,3,4"
+  },
+  "sources": [
+    "outputs/jensen_window_pf_order3_noncontiguous_secant_transfer_lemma.md",
+    "outputs/jensen_window_pf_compound_order4_uniform_heat_forward_invariance_certificate.md",
+    "https://doi.org/10.1016/0024-3795(92)90226-Z",
+    "https://arxiv.org/abs/1207.3613",
+    "outputs/signed_hankel_jensen_bridge_target.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "exact arbitrary-column reshaped-Hankel order-four theorem at lambda zero",
+  "summary": {
+    "arbitrary_order_four_theorems": 1,
+    "determinant_reversal_orders": 4,
+    "fixed_order_transfer_theorems": 1,
+    "index_mapping_blocks": 240,
+    "nonpromotion_guards": 1,
+    "open_handoffs": 1,
+    "published_theorem_rows": 1,
+    "ready_to_apply_rows": 10,
+    "reciprocal_factorial_signed_minors": 1020,
+    "rows": 11
+  }
+}

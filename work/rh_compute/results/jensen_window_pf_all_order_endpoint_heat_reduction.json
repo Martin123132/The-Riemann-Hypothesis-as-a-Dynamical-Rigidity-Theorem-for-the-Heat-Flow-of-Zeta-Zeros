@@ -1,0 +1,345 @@
+{
+  "arithmetic_audit": {
+    "coefficient_formula": "c_(m-1,n+1)=c_(m,n)-4",
+    "coefficient_residual": "0",
+    "parity_checks": 255,
+    "parity_formula": "binom(m,2)+binom(m-2,2)-2*binom(m-1,2)=1",
+    "parity_max_order": 256,
+    "parity_min_order": 2,
+    "parity_residual_values": [
+      1
+    ]
+  },
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_all_order_endpoint_heat_reduction.py",
+  "date": "2026-07-16",
+  "exact": {
+    "affine_cancellation": "column part=[4*(n+m-1)+2]*delta(H); row part=4*(m-1)*delta(H)",
+    "affine_heat": "Q_(m,n)'=c_(m,n)*delta(Q_(m,n)), c_(m,n)=4*n+8*m-6",
+    "all_order_interval": "Q_(m,n)(lambda)>0 for every integer m>=1,n>=0 and -100<=lambda<=0",
+    "arbitrary_column_consequence": "all-order contiguous interval positivity => all-order consecutive-row arbitrary-column signed-Hankel positivity",
+    "bridge_boundary": "all-order shifted signed-Hankel positivity does not by itself prove PF-infinity of every binomially weighted Jensen window",
+    "candidate_endpoint": "Q_(m,n)(-100)>0 for every integer m>=10 and n>=0",
+    "coefficient_heat_flow": "A_n'=(4*n+2)*A_(n+1)",
+    "cooperative_flow": "Q_(m,n)'=a_(m,n)*Q_(m,n+1)+b_(m,n)*Q_(m,n), a_(m,n)=c_(m,n)*Q_(m-1,n)/Q_(m-1,n+1)>0, b_(m,n)=c_(m,n)/(c_(m,n)-4)*(log Q_(m-1,n+1))'",
+    "definitions": "H_(m,n)=det[A_(n+i+j)]_(0<=i,j<m), H_(0,n)=1, epsilon_m=(-1)^binom(m,2), Q_(m,n)=epsilon_m*H_(m,n)",
+    "delta_border": "delta(H_(m,n))=det[C_0,...,C_(m-2),C_m], C_j=(A_(n+i+j))_(0<=i<m)",
+    "endpoint_coordinate": "Q_(m,n)>0 iff Q_(m-1,n+1)^2>Q_(m-1,n)*Q_(m-1,n+2), provided Q_(m-2,n+2)>0",
+    "endpoint_interval_equivalence": "[Q_(m,n)(-100)>0 for every m>=10,n>=0] iff [Q_(m,n)(lambda)>0 for every m>=10,n>=0,-100<=lambda<=0]",
+    "fixed_order_tail": "for every fixed m exists N_m such that for every n>=N_m and -100<=lambda<=0, Q_(m,n)(lambda)>0",
+    "flag_plucker": "Q_(m-1,n+1)*delta(Q_(m,n))=Q_(m-1,n)*Q_(m,n+1)+delta(Q_(m-1,n+1))*Q_(m,n)",
+    "known_base": "Q_(m,n)(lambda)>0 for 1<=m<=9, every n>=0, and -100<=lambda<=0",
+    "order10_counterexample": "Q_(10,n)(-100)<0 for n=0,1,2,3",
+    "signed_condensation": "Q_(m,n)*Q_(m-2,n+2)=Q_(m-1,n+1)^2-Q_(m-1,n)*Q_(m-1,n+2)",
+    "single_layer_implication": "[Q_(k,n)>0 on the heat interval for every k<m,n and Q_(m,n)(-100)>0 for every n] => [Q_(m,n)(lambda)>0 for every n and -100<=lambda<=0]",
+    "variation_of_constants": "Q_(m,n)(lambda)=E_(m,n)(lambda)*(Q_(m,n)(-100)+integral_(-100)^lambda E_(m,n)(s)^(-1)*a_(m,n)(s)*Q_(m,n+1)(s)ds), E_(m,n)>0"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_all_order_endpoint_heat_reduction.py",
+  "kind": "jensen_window_pf_all_order_endpoint_heat_reduction",
+  "proof_boundary": "This artifact proves the arbitrary-order determinant identities, single-layer tail propagation, induction over compound order, and the endpoint/heat-interval equivalence. The all-order positivity antecedent is false at order ten. This does not prove the Jensen-window PF bridge, PF-infinity, Jensen hyperbolicity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "Use one signed coordinate at every compound order, with the empty minor normalized to one.",
+      "diagnostics": null,
+      "formula": "H_(m,n)=det[A_(n+i+j)]_(0<=i,j<m), H_(0,n)=1, epsilon_m=(-1)^binom(m,2), Q_(m,n)=epsilon_m*H_(m,n)",
+      "id": "jwpfaoehr_01_coordinate",
+      "proof_boundary": "Definition only; no sign is asserted.",
+      "readiness": "ready_to_apply",
+      "role": "exact_definition"
+    },
+    {
+      "claim": "Every fixed order has a heat-uniform eventual positive signed tail, although its threshold may depend on the order.",
+      "diagnostics": {
+        "source": {
+          "kind": "jensen_window_pf_graded_kernel_vandermonde_all_order_lemma",
+          "path": "work/rh_compute/results/jensen_window_pf_graded_kernel_vandermonde_all_order_lemma.json",
+          "sha256": "fa7111d347995a98cf292003528a4d17524f6738a4294fefb298f3b6055ccd6c",
+          "status": "exact all-fixed-order graded-kernel leading determinant lemma and compact-uniform eventual signed tails; no all-shift theorem"
+        }
+      },
+      "formula": "for every fixed m exists N_m such that for every n>=N_m and -100<=lambda<=0, Q_(m,n)(lambda)>0",
+      "id": "jwpfaoehr_02_fixed_order_tail",
+      "proof_boundary": "The quantifier is for every m there exists N_m, not one N uniform in m.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "Desnanot-Jacobi converts each new endpoint layer into strict log-concavity of the preceding positive layer.",
+      "diagnostics": {
+        "parity_checks": 255,
+        "parity_formula": "binom(m,2)+binom(m-2,2)-2*binom(m-1,2)=1"
+      },
+      "formula": "Q_(m,n)*Q_(m-2,n+2)=Q_(m-1,n+1)^2-Q_(m-1,n)*Q_(m-1,n+2); Q_(m,n)>0 iff Q_(m-1,n+1)^2>Q_(m-1,n)*Q_(m-1,n+2), provided Q_(m-2,n+2)>0",
+      "id": "jwpfaoehr_03_signed_condensation",
+      "proof_boundary": "The sign follows from one exact orientation-parity flip.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Multilinearity and duplicate-column/row cancellation give the affine Hankel heat derivative at arbitrary order.",
+      "diagnostics": {
+        "cancellation": "column part=[4*(n+m-1)+2]*delta(H); row part=4*(m-1)*delta(H)"
+      },
+      "formula": "A_n'=(4*n+2)*A_(n+1); Q_(m,n)'=c_(m,n)*delta(Q_(m,n)), c_(m,n)=4*n+8*m-6",
+      "id": "jwpfaoehr_04_affine_heat",
+      "proof_boundary": "Only the final shifted column and final shifted row survive.",
+      "readiness": "ready_to_apply",
+      "role": "exact_all_order_identity"
+    },
+    {
+      "claim": "The adjacent flag-Plucker relation converts the affine derivative into a nearest-neighbor system.",
+      "diagnostics": {
+        "all_residuals_zero": true,
+        "orders": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "rows": [
+          {
+            "order": 2,
+            "residuals": {
+              "affine_heat": "0",
+              "condensation": "0",
+              "flag_plucker": "0"
+            }
+          },
+          {
+            "order": 3,
+            "residuals": {
+              "affine_heat": "0",
+              "condensation": "0",
+              "flag_plucker": "0"
+            }
+          },
+          {
+            "order": 4,
+            "residuals": {
+              "affine_heat": "0",
+              "condensation": "0",
+              "flag_plucker": "0"
+            }
+          },
+          {
+            "order": 5,
+            "residuals": {
+              "affine_heat": "0",
+              "condensation": "0",
+              "flag_plucker": "0"
+            }
+          }
+        ],
+        "scope": "Independent finite symbolic specializations; arbitrary-order validity comes from the determinant cancellation, Desnanot-Jacobi, and flag Plucker derivations recorded in the theorem rows."
+      },
+      "formula": "Q_(m-1,n+1)*delta(Q_(m,n))=Q_(m-1,n)*Q_(m,n+1)+delta(Q_(m-1,n+1))*Q_(m,n)",
+      "id": "jwpfaoehr_05_flag_plucker",
+      "proof_boundary": "Apply the three-term flag relation to C_0,...,C_m and their first m-1 rows.",
+      "readiness": "ready_to_apply",
+      "role": "exact_all_order_identity"
+    },
+    {
+      "claim": "Whenever the preceding signed layer is positive, the order-m flow is cooperative in the forward shift direction.",
+      "diagnostics": {
+        "coefficient_formula": "c_(m-1,n+1)=c_(m,n)-4",
+        "coefficient_residual": "0"
+      },
+      "formula": "Q_(m,n)'=a_(m,n)*Q_(m,n+1)+b_(m,n)*Q_(m,n), a_(m,n)=c_(m,n)*Q_(m-1,n)/Q_(m-1,n+1)>0, b_(m,n)=c_(m,n)/(c_(m,n)-4)*(log Q_(m-1,n+1))'",
+      "id": "jwpfaoehr_06_cooperative_flow",
+      "proof_boundary": "For m>=2; c_(m,n)>0 and the lower-layer quotient is positive.",
+      "readiness": "ready_to_apply",
+      "role": "exact_all_order_lemma"
+    },
+    {
+      "claim": "At one fixed order, endpoint entry and the order-dependent eventual tail propagate positivity to the whole heat interval.",
+      "diagnostics": null,
+      "formula": "[Q_(k,n)>0 on the heat interval for every k<m,n and Q_(m,n)(-100)>0 for every n] => [Q_(m,n)(lambda)>0 for every n and -100<=lambda<=0]; Q_(m,n)(lambda)=E_(m,n)(lambda)*(Q_(m,n)(-100)+integral_(-100)^lambda E_(m,n)(s)^(-1)*a_(m,n)(s)*Q_(m,n+1)(s)ds), E_(m,n)>0",
+      "id": "jwpfaoehr_07_single_layer_propagation",
+      "proof_boundary": "Fix m first, choose N_m, and descend only through the finite shifts N_m-1,...,0.",
+      "readiness": "ready_to_apply",
+      "role": "exact_quantifier_lemma"
+    },
+    {
+      "claim": "The rigorous fixed-order programme supplies the induction base through order nine.",
+      "diagnostics": {
+        "source": {
+          "kind": "jensen_window_pf_compound_order9_uniform_heat_forward_invariance_certificate",
+          "path": "work/rh_compute/results/jensen_window_pf_compound_order9_uniform_heat_forward_invariance_certificate.json",
+          "sha256": "457625dd931ebc9cfd3f68115b7febcfce871cb2e6462163c21c97f095386237",
+          "status": "signed contiguous and arbitrary-column order-nine theorem on -100<=lambda<=0"
+        }
+      },
+      "formula": "Q_(m,n)(lambda)>0 for 1<=m<=9, every n>=0, and -100<=lambda<=0",
+      "id": "jwpfaoehr_08_completed_base",
+      "proof_boundary": "No order at least ten is imported.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "Ordinary induction over m makes the remaining all-order heat theorem equivalent to one static endpoint hierarchy.",
+      "diagnostics": null,
+      "formula": "[Q_(m,n)(-100)>0 for every m>=10,n>=0] iff [Q_(m,n)(lambda)>0 for every m>=10,n>=0,-100<=lambda<=0]",
+      "id": "jwpfaoehr_09_endpoint_equivalence",
+      "proof_boundary": "The reverse implication is restriction to lambda=-100; the forward implication iterates the single-layer lemma.",
+      "readiness": "ready_to_apply",
+      "role": "exact_all_order_reduction"
+    },
+    {
+      "claim": "After contiguous completion at every finite order, the initial-minor theorem transfers the result to arbitrary columns pointwise in lambda.",
+      "diagnostics": {
+        "source": {
+          "kind": "jensen_window_pf_order4_noncontiguous_total_positivity_transfer",
+          "path": "work/rh_compute/results/jensen_window_pf_order4_noncontiguous_total_positivity_transfer.json",
+          "sha256": "dba5df10b861a594e2e20690b5286a711d98ace5fdc343453f6cd8fdeca8d1e5",
+          "status": "exact arbitrary-column reshaped-Hankel order-four theorem at lambda zero"
+        }
+      },
+      "formula": "all-order contiguous interval positivity => all-order consecutive-row arbitrary-column signed-Hankel positivity",
+      "id": "jwpfaoehr_10_arbitrary_columns",
+      "proof_boundary": "For each finite m separately; no infinite determinant is invoked.",
+      "readiness": "ready_to_apply",
+      "role": "exact_conditional_consequence"
+    },
+    {
+      "claim": "The conditional all-order theorem is equivalently an infinite strict log-concavity hierarchy in the positive signed coordinates.",
+      "diagnostics": null,
+      "formula": "Q_(m,n)>0 iff Q_(m-1,n+1)^2>Q_(m-1,n)*Q_(m-1,n+2), provided Q_(m-2,n+2)>0",
+      "id": "jwpfaoehr_11_static_hierarchy",
+      "proof_boundary": "This is an exact reformulation of the candidate antecedent; the next row records that the antecedent is false.",
+      "readiness": "ready_to_apply",
+      "role": "exact_target_coordinate"
+    },
+    {
+      "claim": "The candidate all-order signed endpoint hierarchy fails at its first uncompleted order.",
+      "diagnostics": {
+        "source": {
+          "kind": "jensen_window_pf_endpoint_order10_counterexample",
+          "path": "work/rh_compute/results/jensen_window_pf_endpoint_order10_counterexample.json",
+          "sha256": "d29cf31fcd8927f6ca11090c468f3aede29d32da4aa26b7f31c8c850f435f3e2",
+          "status": "rigorous first-open-order endpoint counterexample rejecting the all-order deep rectangular hierarchy"
+        }
+      },
+      "formula": "Q_(m,n)(-100)>0 for every integer m>=10 and n>=0; but Q_(10,n)(-100)<0 for n=0,1,2,3",
+      "id": "jwpfaoehr_12_rejected_endpoint",
+      "proof_boundary": "Rejects the all-order signed-Hankel antecedent for the actual endpoint sequence, not the exact conditional heat algebra or RH.",
+      "readiness": "rejected_by_counterexample",
+      "role": "countermodel_gate"
+    },
+    {
+      "claim": "The Jensen-window PF problem remains separate and now requires an antecedent weaker than all-shift all-order signed-Hankel positivity.",
+      "diagnostics": null,
+      "formula": "all-order shifted signed-Hankel positivity does not by itself prove PF-infinity of every binomially weighted Jensen window",
+      "id": "jwpfaoehr_13_bridge_boundary",
+      "proof_boundary": "Blocks promotion of signed-Hankel sign regularity directly to RH.",
+      "readiness": "separate_open_obligation",
+      "role": "route_separation_guard"
+    }
+  ],
+  "source_contract": {
+    "completed_base": "Q_(m,n)(lambda)>0 for 1<=m<=9, n>=0, and -100<=lambda<=0",
+    "fixed_order_column_transfer": "completed signed contiguous layers through each fixed m imply all consecutive-row arbitrary-column signed minors through m",
+    "fixed_order_tail": "for every fixed m there exists N_m such that Q_(m,n)(lambda)>0 for n>=N_m and -100<=lambda<=0",
+    "general_affine_derivative": "Q_(m,n)'=c_(m,n)*delta(Q_(m,n)), c_(m,n)=4*n+8*m-6",
+    "general_condensation": "Q_(m,n)*Q_(m-2,n+2)=Q_(m-1,n+1)^2-Q_(m-1,n)*Q_(m-1,n+2)",
+    "general_flag_plucker": "Q_(m-1,n+1)*delta(Q_(m,n))=Q_(m-1,n)*Q_(m,n+1)+delta(Q_(m-1,n+1))*Q_(m,n)",
+    "order10_counterexample": "Q_(10,n)(-100)<0 for n=0,1,2,3"
+  },
+  "sources": [
+    {
+      "kind": "jensen_window_pf_graded_kernel_vandermonde_all_order_lemma",
+      "path": "work/rh_compute/results/jensen_window_pf_graded_kernel_vandermonde_all_order_lemma.json",
+      "sha256": "fa7111d347995a98cf292003528a4d17524f6738a4294fefb298f3b6055ccd6c",
+      "status": "exact all-fixed-order graded-kernel leading determinant lemma and compact-uniform eventual signed tails; no all-shift theorem"
+    },
+    {
+      "kind": "jensen_window_pf_compound_order6_uniform_tail_flow_reduction",
+      "path": "work/rh_compute/results/jensen_window_pf_compound_order6_uniform_tail_flow_reduction.json",
+      "sha256": "c9728df05944267ae1a556b11c201cd6249aeff16712ea8b9be20eb42bb6c82e",
+      "status": "exact uniform eventual signed order-six tail and conditional forward reduction with one open lambda=-100 entry"
+    },
+    {
+      "kind": "jensen_window_pf_compound_order9_uniform_heat_forward_invariance_certificate",
+      "path": "work/rh_compute/results/jensen_window_pf_compound_order9_uniform_heat_forward_invariance_certificate.json",
+      "sha256": "457625dd931ebc9cfd3f68115b7febcfce871cb2e6462163c21c97f095386237",
+      "status": "signed contiguous and arbitrary-column order-nine theorem on -100<=lambda<=0"
+    },
+    {
+      "kind": "jensen_window_pf_order4_noncontiguous_total_positivity_transfer",
+      "path": "work/rh_compute/results/jensen_window_pf_order4_noncontiguous_total_positivity_transfer.json",
+      "sha256": "dba5df10b861a594e2e20690b5286a711d98ace5fdc343453f6cd8fdeca8d1e5",
+      "status": "exact arbitrary-column reshaped-Hankel order-four theorem at lambda zero"
+    },
+    {
+      "kind": "jensen_window_pf_endpoint_order10_counterexample",
+      "path": "work/rh_compute/results/jensen_window_pf_endpoint_order10_counterexample.json",
+      "sha256": "d29cf31fcd8927f6ca11090c468f3aede29d32da4aa26b7f31c8c850f435f3e2",
+      "status": "rigorous first-open-order endpoint counterexample rejecting the all-order deep rectangular hierarchy"
+    }
+  ],
+  "status": "exact all-order endpoint-to-heat equivalence with a completed base through order nine and the candidate endpoint hierarchy rejected by the order-ten counterexample",
+  "summary": {
+    "all_fixed_order_tail_theorems": 1,
+    "all_order_affine_identities": 1,
+    "all_order_cooperative_recursions": 1,
+    "all_order_flag_plucker_identities": 1,
+    "arbitrary_column_consequences": 1,
+    "completed_base_order": 9,
+    "endpoint_interval_equivalences": 1,
+    "first_failed_order": 10,
+    "negative_order10_endpoint_rows": 4,
+    "open_endpoint_hierarchies": 0,
+    "open_endpoint_rows": 0,
+    "orientation_parity_checks": 255,
+    "ready_to_apply_rows": 11,
+    "rejected_endpoint_hierarchies": 1,
+    "rejected_endpoint_rows": 1,
+    "rows": 13,
+    "separate_bridge_rows": 1,
+    "separate_jensen_pf_bridges": 1,
+    "single_layer_propagation_lemmas": 1,
+    "symbolic_specialization_orders": 4
+  },
+  "symbolic_identity_audit": {
+    "all_residuals_zero": true,
+    "orders": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "rows": [
+      {
+        "order": 2,
+        "residuals": {
+          "affine_heat": "0",
+          "condensation": "0",
+          "flag_plucker": "0"
+        }
+      },
+      {
+        "order": 3,
+        "residuals": {
+          "affine_heat": "0",
+          "condensation": "0",
+          "flag_plucker": "0"
+        }
+      },
+      {
+        "order": 4,
+        "residuals": {
+          "affine_heat": "0",
+          "condensation": "0",
+          "flag_plucker": "0"
+        }
+      },
+      {
+        "order": 5,
+        "residuals": {
+          "affine_heat": "0",
+          "condensation": "0",
+          "flag_plucker": "0"
+        }
+      }
+    ],
+    "scope": "Independent finite symbolic specializations; arbitrary-order validity comes from the determinant cancellation, Desnanot-Jacobi, and flag Plucker derivations recorded in the theorem rows."
+  }
+}

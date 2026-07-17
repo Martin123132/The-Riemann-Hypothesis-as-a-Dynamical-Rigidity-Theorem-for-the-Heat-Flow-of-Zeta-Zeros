@@ -2,8 +2,9 @@
 
 Date: 2026-07-06
 
-Status: open theorem target. This is not a proof of cone entry,
-Jensen-window PF-infinity, RH, or `Lambda <= 0`.
+Status: open theorem target (historical statement; discharged on 2026-07-11).
+This is not a proof of Jensen-window PF-infinity, RH, or
+`Lambda <= 0`.
 
 Artifact kind: `jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target`.
 
@@ -33,6 +34,21 @@ Current result:
 ```text
 validated Jensen-window PF negative-lambda zeta-specific raw-corridor target: 9 rows, 0 issues, 2 live routes, 2 rejected shortcuts, 0 ready-to-apply rows
 ```
+
+## 2026-07-11 Closure Handoff
+
+The target is discharged at `lambda=-100` by
+
+```text
+outputs/jensen_window_pf_negative_lambda_m100_raw_corridor_certificate.md
+work/rh_compute/results/jensen_window_pf_negative_lambda_m100_raw_corridor_certificate.json
+```
+
+Full ratio-cone entry supplies `B_k>=0` and `B_(k+1)<=B_k`; the continuous
+scaled-curvature theorem supplies
+`B_(k+1)>=((2*k+1)/(2*k+3))*B_k`. The exact linear-to-nonlinear calculus
+lemma then proves both raw-ratio decrement-corridor inequalities for every
+`k>=1`. The historical target statement below is retained for auditability.
 
 ## 2026-07-10 Upper-Wall Handoff
 

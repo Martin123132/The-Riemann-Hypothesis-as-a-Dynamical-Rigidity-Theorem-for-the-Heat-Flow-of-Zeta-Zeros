@@ -1,0 +1,118 @@
+{
+  "arb_dps": 250,
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_multiplier_leading_atom_bound_certificate.py",
+  "date": "2026-07-11",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_multiplier_leading_atom_bound_certificate.py",
+  "kind": "jensen_window_pf_multiplier_leading_atom_bound_certificate",
+  "proof_boundary": "Assuming the still-open unit-atomic multiplier representation, this artifact proves alpha_min>4.863538496 and at most one atom at or below 11/2. It does not prove that any atom lies below 11/2, construct the counting measure, prove PF-infinity, RH, or Lambda <= 0.",
+  "rows": [
+    {
+      "claim": "Each atom contributes a positive finite-difference kernel.",
+      "diagnostics": null,
+      "formula": "g_m(alpha)=integral_0^1 r^(alpha-1)*(1-r)^(m+2)/(-log r)dr",
+      "id": "mlab_01_atom_difference_kernel",
+      "proof_boundary": "Exact consequence of the Hausdorff density formula.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The atom kernel is strictly decreasing in alpha.",
+      "diagnostics": null,
+      "formula": "partial_alpha g_m(alpha)=-Beta(alpha,m+3)<0",
+      "id": "mlab_02_kernel_monotonicity",
+      "proof_boundary": "Exact monotonicity only.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "Under the multiplier target, every first difference moment is the sum of atom kernels.",
+      "diagnostics": null,
+      "formula": "a_m=(-1)^m*Delta^m y_1=sum_j g_m(alpha_j)",
+      "id": "mlab_03_conditional_sum",
+      "proof_boundary": "Uses the still-open unit-atomic factorization hypothesis.",
+      "readiness": "conditional_on_target",
+      "role": "exact_conditional_reduction"
+    },
+    {
+      "claim": "Order 6 places the root beta6 above the rational decimal lower endpoint.",
+      "diagnostics": {
+        "gap_ball": "[3.6340198025246959890220872597646469641634080905380338232387292267659619923440835845955394274199001689031528386553693e-14 +/- 5.90e-130]"
+      },
+      "formula": "g_6(4.863538496)-a_6>0",
+      "id": "mlab_04_root_lower_endpoint",
+      "proof_boundary": "Conditional lower bound for any target atom multiset.",
+      "readiness": "ready_to_apply_conditionally",
+      "role": "interval_certificate"
+    },
+    {
+      "claim": "Order 6 places beta6 below the rational decimal upper endpoint.",
+      "diagnostics": {
+        "gap_ball": "[-1.44400690245213671439729637962228511397239566746416892150369167711981335757517927319511474915782715131436739220893555e-13 +/- 4.27e-130]"
+      },
+      "formula": "g_6(4.863538497)-a_6<0",
+      "id": "mlab_05_root_upper_endpoint",
+      "proof_boundary": "Brackets beta6, not the unknown smallest atom itself.",
+      "readiness": "ready_to_apply_conditionally",
+      "role": "interval_certificate"
+    },
+    {
+      "claim": "Every other available order gives a strictly weaker root lower bound.",
+      "diagnostics": {
+        "checked_other_orders": 55,
+        "weakest_other_gap_ball": "[-1.5620320875165574074573269114138805339579468809118186458079410170623682935145346576861e-9 +/- 5.62e-95]",
+        "weakest_other_order": 55
+      },
+      "formula": "g_m(4.863538496)-a_m<0 for 0<=m<=55, m!=6",
+      "id": "mlab_06_strongest_finite_order",
+      "proof_boundary": "Strongest only within the certified finite order-55 frontier.",
+      "readiness": "ready_to_apply_conditionally",
+      "role": "interval_certificate"
+    },
+    {
+      "claim": "At most one target atom can lie at or below 11/2.",
+      "diagnostics": {
+        "ratio_ball": "[1.63178855134584329177740541990111930684216062759575212148207323650049948826802369155744924183606733607412660456855010332782239084 +/- 9.05e-129]",
+        "two_atom_exclusion_gap_ball": "[0.00029843020229993440204875938444914353151169185790451270583896007421671028043883238544307983429428284090219833477411050552513611733 +/- 5.26e-132]"
+      },
+      "formula": "N(11/2)*g_3(11/2)<=a_3 and a_3/g_3(11/2)<2",
+      "id": "mlab_07_low_atom_count",
+      "proof_boundary": "Does not prove that an atom actually lies below 11/2.",
+      "readiness": "ready_to_apply_conditionally",
+      "role": "interval_certificate"
+    },
+    {
+      "claim": "Existence and location of a first atom remain open.",
+      "diagnostics": null,
+      "formula": "if target holds: alpha_min>4.863538496 and N(11/2)<=1; no atom below 11/2 is proved",
+      "id": "mlab_08_open_existence_handoff",
+      "proof_boundary": "This certificate constrains but does not construct the target measure.",
+      "readiness": "not_ready_to_apply_unconditionally",
+      "role": "open_handoff"
+    }
+  ],
+  "source_enclosures": [
+    "work/rh_compute/results/acb_enclosures_edrei_boundary_lam0_k0_k53_dps220_tol1e-140.jsonl",
+    "work/rh_compute/results/acb_enclosures_edrei_boundary_lam0_k54_k55_dps220_tol1e-140.jsonl",
+    "work/rh_compute/results/acb_enclosures_edrei_boundary_lam0_k56_k57_dps220_tol1e-140.jsonl"
+  ],
+  "source_frontier": "outputs/jensen_window_pf_multiplier_complete_monotonicity_frontier_scout.md",
+  "source_hausdorff_bridge": "outputs/jensen_window_pf_multiplier_hausdorff_uniqueness_bridge.md",
+  "source_target": "outputs/jensen_window_pf_multiplier_counting_measure_target.md",
+  "status": "conditional interval leading-atom bounds; not a proof of the multiplier factorization",
+  "summary": {
+    "certificate_rows": 8,
+    "conditional_alpha_min_lower_bound": "4.863538496",
+    "count_cutoff": "11/2",
+    "count_order": 3,
+    "difference_orders": 56,
+    "max_atoms_at_or_below_cutoff": 1,
+    "open_existence_handoffs": 1,
+    "other_orders_certified_weaker": 55,
+    "root_bracket": [
+      "4.863538496",
+      "4.863538497"
+    ],
+    "root_order": 6,
+    "target_closing": false
+  }
+}

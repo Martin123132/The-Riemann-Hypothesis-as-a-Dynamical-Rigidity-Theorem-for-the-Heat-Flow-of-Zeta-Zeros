@@ -1,0 +1,120 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_critical_transversality_target",
+  "date": "2026-07-17",
+  "status": "exact corrected C1 transversality reduction for positive Newman collisions; not a proof of the lower bound, Lambda<=0, or RH",
+  "proof_boundary": "This artifact proves the normalized double-zero equivalence, the corrected finite first-jet identity, and the exact C1 exclusion lemma. It does not prove uniform first-jet transversality, supply complete refined remainder constants, close the compact region, exclude a positive Newman boundary, prove Lambda<=0, or prove RH.",
+  "exact": {
+    "normalization": "H_t=A_t*Z_t with A_t>0; H_t'=A_t*((log A_t)'*Z_t+Z_t')",
+    "double_zero": "H_t=H_t'=0 if and only if Z_t=Z_t'=0",
+    "refined_split": "Z_t=J_(N,t)+r_ref, J_(N,t)=P_(N,t)-Q_(N,t), P_(N,t)=2Re(exp(i*beta_t)D_(N,t))",
+    "components": "exp(i*beta)D=X+iY, exp(i*beta)D'=U+iV1, B=beta'",
+    "main_first_jet": "J=2X-Q, J'=2*(U-BY)-Q'",
+    "transversality": "T_L[J]=(2X-Q)^2+((2*(U-BY)-Q')/L)^2",
+    "c1_caps": "|r_ref|<=epsilon_0, |r_ref'|<=L*epsilon_1",
+    "collision_implication": "At a double zero, T_L[J]=r_ref^2+(r_ref'/L)^2 <=epsilon_0^2+epsilon_1^2",
+    "strict_target": "T_L[J]>epsilon_0^2+epsilon_1^2 uniformly on the critical region",
+    "cauchy_gain": "A radius-1/L collar transfers the refined scalar remainder through one derivative with one factor L; no second-derivative remainder is needed",
+    "global_composition": "Combine the oscillatory-zeta theorem for every fixed tL>=c_*+epsilon at sufficiently large L, the critical transversality target on the residual high-frequency layer 0<tL<=c_*+o(1), and compact no-double-zero certificates for every bounded-L remainder, where c_*=4911678521/1933561194",
+    "conditional_endgame": "If all three regions are closed, positive-boundary attainment gives Lambda<=0, hence RH"
+  },
+  "rows": [
+    {
+      "id": "np15ctt_01_normalized_double_zero",
+      "role": "exact_equivalence",
+      "readiness": "ready_to_apply",
+      "claim": "The positive normalizer preserves the value-and-first-derivative double-zero condition.",
+      "formula": "H_t=A_t*Z_t with A_t>0; H_t'=A_t*((log A_t)'*Z_t+Z_t'); H_t=H_t'=0 if and only if Z_t=Z_t'=0",
+      "proof_boundary": "Exact on the real axis because A_t is strictly positive.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ctt_02_corrected_split",
+      "role": "published_theorem_transfer",
+      "readiness": "ready_to_apply",
+      "claim": "The refined Polymath-15 approximation splits the normalized heat flow into a corrected main and a smaller remainder.",
+      "formula": "Z_t=J_(N,t)+r_ref, J_(N,t)=P_(N,t)-Q_(N,t), P_(N,t)=2Re(exp(i*beta_t)D_(N,t))",
+      "proof_boundary": "Uses the published A+B-C approximation with fixed cutoff on a collar.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ctt_03_first_jet_identity",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The corrected finite value and first derivative have an exact two-component formula.",
+      "formula": "exp(i*beta)D=X+iY, exp(i*beta)D'=U+iV1, B=beta'; J=2X-Q, J'=2*(U-BY)-Q'",
+      "proof_boundary": "No division by D and valid when the complex finite sum vanishes.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ctt_04_sum_of_squares",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "Distance of the corrected main from a double zero is a positive sum of two squares.",
+      "formula": "T_L[J]=(2X-Q)^2+((2*(U-BY)-Q')/L)^2",
+      "proof_boundary": "L=log(x/(4*pi))>0 in the Polymath high-frequency region.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ctt_05_c1_collision_budget",
+      "role": "exact_exclusion_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "A strict corrected-main first-jet lower bound excludes an exact double zero.",
+      "formula": "|r_ref|<=epsilon_0, |r_ref'|<=L*epsilon_1; At a double zero, T_L[J]=r_ref^2+(r_ref'/L)^2 <=epsilon_0^2+epsilon_1^2",
+      "proof_boundary": "Requires rigorous normalized C1 remainder caps, including cutoff collars.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ctt_06_derivative_saving",
+      "role": "strategy_improvement",
+      "readiness": "conditional_ready",
+      "claim": "The collision target saves one Cauchy derivative compared with global Laguerre-curvature transfer.",
+      "formula": "A radius-1/L collar transfers the refined scalar remainder through one derivative with one factor L; no second-derivative remainder is needed",
+      "proof_boundary": "The scalar refined remainder still needs explicit uniform constants.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ctt_07_live_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The critical asymptotic problem is reduced to corrected finite first-jet transversality.",
+      "formula": "T_L[J]>epsilon_0^2+epsilon_1^2 uniformly on the critical region",
+      "proof_boundary": "Open and RH-level; no uniform lower bound is asserted.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ctt_08_global_partition",
+      "role": "proof_architecture",
+      "readiness": "conditional_ready",
+      "claim": "The no-collision endgame separates into the proved outer asymptotic region, residual critical high frequency, and bounded-L certificate regions.",
+      "formula": "Combine the oscillatory-zeta theorem for every fixed tL>=c_*+epsilon at sufficiently large L, the critical transversality target on the residual high-frequency layer 0<tL<=c_*+o(1), and compact no-double-zero certificates for every bounded-L remainder, where c_*=4911678521/1933561194",
+      "proof_boundary": "The residual critical and bounded-L regions remain open; the outer theorem has an existential, not numerical, L_epsilon.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ctt_09_conditional_endgame",
+      "role": "conditional_bridge",
+      "readiness": "not_ready_to_apply",
+      "claim": "Closing the three-region no-double-zero partition would prove the missing Newman direction.",
+      "formula": "If all three regions are closed, positive-boundary attainment gives Lambda<=0, hence RH",
+      "proof_boundary": "Conditional on the open critical and compact certificates.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15ctt_10_nonpromotion",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "Positive point scouts and the exact sum-of-squares identity do not prove the strict lower bound.",
+      "formula": "finite diagnostics != uniform transversality",
+      "proof_boundary": "Not Lambda<=0 or RH.",
+      "diagnostics": null
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/abs/1904.12438",
+    "outputs/jensen_window_pf_newman_positive_boundary_attainment_lemma.md",
+    "outputs/jensen_window_pf_newman_polymath15_critical_scaled_coercivity_target.md",
+    "outputs/jensen_window_pf_newman_polymath15_critical_lehmer_margin_gate.md",
+    "outputs/jensen_window_pf_newman_polymath15_oscillatory_zeta_handoff_theorem.md",
+    "outputs/jensen_window_pf_newman_polymath15_cancellation_zero_free_wall_gate.md"
+  ]
+}

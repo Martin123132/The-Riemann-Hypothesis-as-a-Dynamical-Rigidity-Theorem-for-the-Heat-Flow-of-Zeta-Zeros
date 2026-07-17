@@ -1,0 +1,126 @@
+{
+  "coverage": {
+    "accepted_block_count": 874,
+    "all_blocks_passed": true,
+    "largest_scaled_block": [
+      "1326",
+      "1327"
+    ],
+    "largest_scaled_curvature_upper": "4.19424425522037111044561248832644227467685288026319528153785E+3",
+    "root_segment_count": 279,
+    "t_range": [
+      "1250",
+      "5700"
+    ],
+    "total_attempts": 1469,
+    "total_splits": 595,
+    "weakest_common_coordinate_block": [
+      "1250",
+      "2501/2"
+    ],
+    "weakest_common_coordinate_lower": "0.634702287167133801127866466006058615418192489161371203429560",
+    "weakest_common_coordinate_name": "B",
+    "width_counts": {
+      "1": 150,
+      "1/2": 152,
+      "16": 131,
+      "2": 140,
+      "4": 140,
+      "8": 161
+    }
+  },
+  "date": "2026-07-14",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order9_localized_lower_bridge_certificate.py",
+  "kind": "jensen_window_pf_compound_order9_localized_lower_bridge_certificate",
+  "proof_boundary": "This artifact proves only the displayed localized first-summand curvature bridge. It does not by itself prove the upper ranges, full-kernel transfer, all-shift order-nine entry, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "Exact-t H2-H22 collars and exact-point H0-H8 jets cover the bridge.",
+      "diagnostics": null,
+      "formula": "H^(2),...,H^(22) on t+-7 and point H^(0),...,H^(8)",
+      "id": "co9llb_01_exact_sources",
+      "proof_boundary": "First Newman summand at lambda=-100 only.",
+      "readiness": "ready_to_apply",
+      "role": "interval_input"
+    },
+    {
+      "claim": "The sixth stable logarithm is localized with positive B,J,R,S,T,U,V.",
+      "diagnostics": null,
+      "formula": "point Taylor order 6 plus localized order-7 remainder",
+      "id": "co9llb_02_localized_sixth_layer",
+      "proof_boundary": "Outward-rounded arithmetic on each accepted rational block.",
+      "readiness": "ready_to_apply",
+      "role": "exact_interval_algebra"
+    },
+    {
+      "claim": "Adaptive dyadic blocks cover the complete lower bridge without gaps.",
+      "diagnostics": {
+        "accepted_blocks": 874,
+        "largest_scaled_upper": "4.19424425522037111044561248832644227467685288026319528153785E+3",
+        "root_segments": 279
+      },
+      "formula": "w_1''(t)<=4200/t^2 for every real 1250<=t<=5700",
+      "id": "co9llb_03_contiguous_bridge",
+      "proof_boundary": "The displayed finite real-t interval only.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "The separate compact and saddle-ray certificates cover every real t>=5700.",
+      "diagnostics": null,
+      "formula": "compose at t=5700",
+      "id": "co9llb_04_upper_composition",
+      "proof_boundary": "Those source theorems remain separate hash-bound artifacts.",
+      "readiness": "ready_to_apply",
+      "role": "proved_handoff"
+    }
+  ],
+  "source_contract": {
+    "date": "2026-07-14",
+    "kind": "order9_localized_lower_bridge_run_contract",
+    "parameters": {
+      "collar_t": "7",
+      "curvature_constant": 4200,
+      "end_t": "5700",
+      "minimum_block_width": "1/2",
+      "point_order": 6,
+      "precision_bits": 512,
+      "remainder_order": 7,
+      "root_segment_width": "16",
+      "start_t": "1250"
+    },
+    "run_contract": "work/rh_compute/results/jensen_window_pf_compound_order9_localized_lower_bridge_run_contract.json",
+    "run_contract_sha256": "164dc3da2f9aefa73a100b1578a63724ed8b7e22b866e3e9df6bbcf762c584e2",
+    "segment_cache": "work/rh_compute/results/jensen_window_pf_compound_order9_localized_lower_bridge_segments.jsonl",
+    "segment_cache_sha256": "f65a490649b19e05fa278b5e4d1d67cf116db6188bc6aad593014372234600b5",
+    "segment_rows": 279,
+    "sources": [
+      {
+        "cache": "work/rh_compute/results/jensen_window_pf_compound_order9_shifted_jet_compact_h2_h22_tenth_tiles.jsonl",
+        "cache_sha256": "f99b69f497ebea6313005c639f58aa5dec5ded48cbaa776d489f9287efbfaeb3",
+        "manifest": "work/rh_compute/results/jensen_window_pf_compound_order9_shifted_jet_compact_h2_h22_cache.json",
+        "manifest_sha256": "522e0aaf806458c4d39920dd0ac71edbc17d9ab14e0734012a8894333344ed49",
+        "role": "exact_t_h2_h22",
+        "rows": 44640
+      },
+      {
+        "cache": "work/rh_compute/results/jensen_window_pf_compound_order9_shifted_point_h0_h8_half_grid.jsonl",
+        "cache_sha256": "81e91a22e21843b82132b5d661c5f8bed30fe4c1b8d7d7921d368ec93059b092",
+        "manifest": "work/rh_compute/results/jensen_window_pf_compound_order9_shifted_point_h0_h8_cache.json",
+        "manifest_sha256": "d8a6e2db6de40d6e5703154d7f3de0792a2d7701a9a1736792a490ce65d941f1",
+        "role": "exact_point_h0_h8",
+        "rows": 8929
+      }
+    ]
+  },
+  "status": "rigorous order-nine first-summand curvature theorem on 1250<=t<=5700",
+  "summary": {
+    "accepted_blocks": 874,
+    "curvature_theorems": 1,
+    "open_rows": 0,
+    "ready_rows": 4,
+    "root_segments": 279,
+    "rows": 4
+  },
+  "theorem": "w_1''(t)<=4200/t^2 for every real 1250<=t<=5700"
+}

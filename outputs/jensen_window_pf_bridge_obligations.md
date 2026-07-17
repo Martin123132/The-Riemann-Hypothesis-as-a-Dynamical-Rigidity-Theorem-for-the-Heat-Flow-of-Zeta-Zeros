@@ -1,6 +1,6 @@
 # Jensen-Window PF Bridge Obligations
 
-Date: 2026-07-05
+Date: 2026-07-16
 
 Status: theorem-obligation ledger. This is not a proof of PF-infinity, Jensen
 hyperbolicity, Laguerre-Polya membership, RH, or `Lambda <= 0`; it decomposes
@@ -28,7 +28,7 @@ python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
 Current result:
 
 ```text
-validated Jensen-window PF bridge obligations: 10 obligations, 0 issues, 3 open obligations
+validated Jensen-window PF bridge obligations: 11 obligations, 0 issues, 3 open obligations
 ```
 
 ## Exact And Finite Layers
@@ -50,23 +50,30 @@ jwpf_04_current_finite_pf_sturm_evidence:
 
 These rows organize what we already know. None has `would_close_target=true`.
 
-## Open Bridge Obligations
+## Rejected Antecedent And Open Bridge Obligations
 
 ```text
 jwpf_05_all_order_shifted_sign_consistency:
-  prove all-order shifted reshaped-Hankel sign consistency for the actual
-  A_k(0), beyond the finite Arb staircase
+  rejected: the actual endpoint sequence has Q_(10,n)(-100)<0 for
+  n=0,1,2,3
+
+jwpf_05b_weaker_xi_specific_antecedent:
+  identify a weaker Xi/Phi-specific condition that survives those order-ten
+  failures and is provably satisfied for every required degree and shift
 
 jwpf_06_sign_regular_to_jensen_pf_conversion:
-  convert all-order shifted sign-regularity plus legitimate Xi/Phi-specific
-  analytic hypotheses into total nonnegativity of every binomially weighted
-  Jensen-window Toeplitz matrix
+  legacy id: convert the weaker jwpf_05b structure, without all-shift
+  signed-Hankel positivity, into every binomially weighted Jensen-window
+  Toeplitz conclusion or directly into Jensen hyperbolicity
 
 jwpf_07_binomial_weight_and_shift_uniformity:
   handle binomial weights binom(d,j) and all shifts n uniformly
 ```
 
 The central open theorem is `jwpf_06_sign_regular_to_jensen_pf_conversion`.
+Its legacy identifier is retained for dependency stability; its admissible
+antecedent is now `jwpf_05b_weaker_xi_specific_antecedent`, not the rejected
+all-order signed-Hankel hierarchy.
 The checker permits `would_close_target=true` only on open theorem-obligation
 rows, never on finite evidence or countermodel rows.
 
@@ -119,7 +126,15 @@ jwpf_09_finite_rectangle_promotion_rejected:
 
 jwpf_10_ordinary_coefficient_pf_route_separated:
   PF evidence for c_k=A_k/k! is a separate coefficient route and does not by
-  itself prove every binomially weighted Jensen window
+itself prove every binomially weighted Jensen window
+```
+
+The rigorous route counterexample is recorded in:
+
+```text
+outputs/jensen_window_pf_endpoint_order10_counterexample.md
+work/rh_compute/results/jensen_window_pf_endpoint_order10_counterexample.json
+python work/rh_compute/scripts/check_jensen_window_pf_endpoint_order10_counterexample.py
 ```
 
 ## Integration Points

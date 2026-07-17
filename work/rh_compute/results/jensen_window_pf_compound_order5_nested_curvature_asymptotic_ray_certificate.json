@@ -1,0 +1,153 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order5_nested_curvature_asymptotic_ray_certificate.py",
+  "date": "2026-07-13",
+  "dimensionless_interval": {
+    "bell_correction_bound": "coefficient r error <=2^(r-1)*C*10^-30 for r>=1 and <=C*10^-30 for r=0",
+    "first_composition_coefficient_cap": 2,
+    "j0_lower": "1.93799999964423477649688720703123724792404705658555030822753E+0",
+    "nested_composition_coefficient_cap": 100,
+    "normalized_B_boxes": [
+      "[1E+0 +/- 0.0311]",
+      "[-1E+0 +/- 0.0411]",
+      "[+/- 1.01]",
+      "[+/- 1.01]",
+      "[+/- 1.01]",
+      "[+/- 1.01]",
+      "[+/- 1.01]"
+    ],
+    "normalized_B_definition": "b_r=t^(r+1)*B^(r)/r!, so the y=s/t Taylor jet of B is z*b",
+    "normalized_J_boxes": [
+      "[2.0 +/- 0.0621]",
+      "[-2.0 +/- 0.0821]",
+      "[+/- 2.01]",
+      "[+/- 2.01]",
+      "[+/- 2.01]"
+    ],
+    "normalized_J_definition": "J_y,r=z*j_r, j_r=2*b_r-z*(r+1)*(r+2)*ell_(r+2)",
+    "normalized_R_boxes": [
+      "[3.0 +/- 0.0931]",
+      "[-3E+0 +/- 0.124]",
+      "[+/- 3.01]"
+    ],
+    "normalized_R_definition": "R_y,r=z*r_r, r_r=3*b_r-z*(r+1)*(r+2)*h_(r+2)",
+    "normalized_ell_identity": "ell=log(z)+log(b)+R(z*b), R(w)=log((1-exp(-w))/w)",
+    "normalized_h_identity": "h=2*ell+log(z)+log(j)+R(z*j)",
+    "normalized_q_identity": "q=2*h-ell+log(z)+log(r)+R(z*r)",
+    "r0_lower": "2.90699999952455982565879821777339924377214116975665092468261E+0",
+    "scaled_curvature_ball": "[+/- 9.16]",
+    "scaled_curvature_upper": "9.15835270172636955976486206054574636687947832827158772903837E+0",
+    "scaled_margin_lower": "8.41647283372469246387481689454253633120521671728412270961638E-1",
+    "scaled_target": 10,
+    "scaled_variable": "z=1/t in (0,10^-30]",
+    "stable_log_argument_cap": "1/1000"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order5_nested_curvature_asymptotic_ray_certificate.py",
+  "kind": "jensen_window_pf_compound_order5_nested_curvature_asymptotic_ray_certificate",
+  "parameters": {
+    "B0_floor": "969/1000",
+    "B1_magnitude_floor": "959/1000",
+    "collar_radius": 3,
+    "first_composition_cap": 2,
+    "inverse_t_cap": "1/1000000000000000000000000000000",
+    "nested_composition_cap": 100,
+    "normalized_cap": "1001/1000",
+    "precision_bits": 256,
+    "scaled_target": 10
+  },
+  "proof_boundary": "This artifact proves q_1''(t)<=60/t^2 on u>=20. It does not by itself compose the compact range, full-kernel transfer, order-five entry, PF-infinity, RH, or Lambda<=0.",
+  "ratio_gates": {
+    "B0_floor": "969/1000",
+    "B1_magnitude_floor": "959/1000",
+    "all_strict": true,
+    "collar_radius": 3,
+    "lower_ratio": "1000000000000000000000000000000000000000000000000000000000000/1000000000000000000000000000006000000000000000000000000000009",
+    "lower_ratio_floor": "999/1000",
+    "upper_ratio": "1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000/999999999999999999999999999979000000000000000000000000000188999999999999999999999999999055000000000000000000000000002834999999999999999999999999994897000000000000000000000000005102999999999999999999999999997813",
+    "upper_ratio_cap": "1001/1000"
+  },
+  "rows": [
+    {
+      "claim": "The normalized H-jet boxes remain valid on the complete three-unit collar around every central u>=20 point.",
+      "diagnostics": null,
+      "formula": "0<x_r<=1 (2<=r<=8), x_2>=97/100, x_3>=24/25; t/(t-3)<(1001/1000)^(1/7)",
+      "id": "co5ncarc_01_shifted_H_boxes",
+      "proof_boundary": "Existing exact ray theorem plus strict rational collar arithmetic.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "Every tent-averaged B derivative lies in one dimensionless alternating box.",
+      "diagnostics": null,
+      "formula": "b_0 in [969/1000,1001/1000], b_1 in [-1001/1000,-959/1000], (-1)^r*b_r in [0,1001/1000] for 2<=r<=6",
+      "id": "co5ncarc_02_normalized_B_boxes",
+      "proof_boundary": "Unit-mass tent averaging of the shifted normalized H boxes.",
+      "readiness": "ready_to_apply",
+      "role": "exact_interval_lemma"
+    },
+    {
+      "claim": "The analytic stable-log correction is uniformly negligible in normalized variables.",
+      "diagnostics": null,
+      "formula": "coefficient r error <=2^(r-1)*C*10^-30 for r>=1 and <=C*10^-30 for r=0",
+      "id": "co5ncarc_03_stable_log_majorant",
+      "proof_boundary": "Uses |R^(k)(w)|<1, the exact partial-Bell identity, and 0<=z*C<1/1000.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_lemma"
+    },
+    {
+      "claim": "A single outward-rounded dimensionless jet box proves a ten-inverse-square curvature ceiling on the whole asymptotic ray.",
+      "diagnostics": {
+        "j0_lower": "1.93799999964423477649688720703123724792404705658555030822753E+0",
+        "r0_lower": "2.90699999952455982565879821777339924377214116975665092468261E+0",
+        "scaled_margin_lower": "8.41647283372469246387481689454253633120521671728412270961638E-1",
+        "scaled_upper": "9.15835270172636955976486206054574636687947832827158772903837E+0"
+      },
+      "formula": "t^2*q_1''(t)<10 for every mode u>=20",
+      "id": "co5ncarc_04_dimensionless_interval",
+      "proof_boundary": "Uniform interval theorem over z in [0,10^-30], not a finite sample.",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_theorem"
+    },
+    {
+      "claim": "The asymptotic theorem is stronger than the continuous target needed by the order-five bridge.",
+      "diagnostics": null,
+      "formula": "t^2*q_1''(t)<10<60 for u>=20, hence q_1''(t)<=60/t^2 on the asymptotic ray",
+      "id": "co5ncarc_05_asymptotic_consequence",
+      "proof_boundary": "First Newman summand at lambda=-100 only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "The compact, finite-ray, and asymptotic certificates now cover every real t>=320.",
+      "diagnostics": null,
+      "formula": "[320<=t<=V'(2)] union [2<=u<=20] union [u>=20] covers t>=320",
+      "id": "co5ncarc_06_global_handoff",
+      "proof_boundary": "The global composition is recorded in a separate entry theorem.",
+      "readiness": "ready_to_apply",
+      "role": "exact_handoff"
+    }
+  ],
+  "source_contract": {
+    "collar_t20_minus_t19_lower": "6.84140403277229664153888231548284194636517090552223519946531E+36",
+    "defect_derivative_majorant": "zeta(2k)<2 and 2*pi>6 imply |R^(m)(B)|<1, 1<=m<=6, 0<B<=1",
+    "defect_series": "R(B)=-B/2+sum_{k>=1}(-1)^(k+1)zeta(2k)*B^(2k)/(k*(2*pi)^(2k))",
+    "finite_ray": "q_1''(t)<=60/t^2 for every mode 2<=u<=20",
+    "inverse_t_cap": "1/1000000000000000000000000000000",
+    "normalized_H_boxes": "0<x_r<=1 for 2<=r<=8, x_2>=97/100, x_3>=24/25"
+  },
+  "sources": [
+    "outputs/jensen_window_pf_compound_order4_exact_corridor_localized_curvature_ray_certificate.md",
+    "outputs/jensen_window_pf_compound_order5_nested_curvature_finite_ray_certificate.md",
+    "outputs/jensen_window_pf_compound_order5_first_summand_curvature_bridge.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "rigorous nested first-summand order-five curvature theorem on the complete u>=20 ray",
+  "summary": {
+    "asymptotic_curvature_theorems": 1,
+    "dimensionless_interval_theorems": 1,
+    "normalized_H_box_theorems": 1,
+    "open_rows": 0,
+    "ready_rows": 6,
+    "rows": 6,
+    "stable_log_majorants": 1
+  }
+}

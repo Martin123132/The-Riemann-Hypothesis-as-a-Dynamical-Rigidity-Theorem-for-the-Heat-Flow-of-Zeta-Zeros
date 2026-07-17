@@ -1,6 +1,6 @@
 # Signed-Hankel/Jensen Dependency Graph
 
-Date: 2026-07-11
+Date: 2026-07-17
 
 Status: dependency hygiene gate. This is not a proof of PF-infinity,
 Laguerre-Polya membership, RH, or `Lambda <= 0`; it records how finite
@@ -113,6 +113,10 @@ jensen_window_pf_heat_flow_ratio_cone_invariance_lemma
 jensen_window_pf_heat_flow_cone_entry_asymptotic_target
 jensen_window_pf_heat_flow_infinite_cone_invariance_certificate
 jensen_window_pf_defect_complete_monotonicity_scout
+jensen_window_pf_multiplier_complete_monotonicity_frontier_scout
+jensen_window_pf_multiplier_hausdorff_uniqueness_bridge
+jensen_window_pf_multiplier_leading_atom_bound_certificate
+jensen_window_pf_multiplier_unit_atomic_obstruction_certificate
 jensen_window_pf_heat_flow_jensen_hierarchy_lemma
 jensen_window_pf_rank_two_boundary_family_lemma
 jensen_window_pf_cubic_reciprocal_defect_invariance_lemma
@@ -206,6 +210,1129 @@ false raw moment-window input theorem:
 outputs/jensen_window_pf_factorial_multiplier_split_audit.md
 work/rh_compute/results/jensen_window_pf_factorial_multiplier_split_audit.json
 ```
+
+The reciprocal-gamma mixture gate now resolves the fixed-scale half of that
+split and identifies the actual mixture obstruction:
+
+```text
+outputs/jensen_window_pf_reciprocal_gamma_mixture_sign_gate.md
+work/rh_compute/results/jensen_window_pf_reciprocal_gamma_mixture_sign_gate.json
+jensen_window_pf_reciprocal_gamma_mixture_sign_gate
+```
+
+Karlin's reciprocal-gamma theorem gives the required strict signature in every
+order at one common positive scale. Determinant multilinearity produces an
+exact independent-row scale integral for the Xi mixture, but its order-two
+symmetrization changes sign and a positive three-atom measure reverses the
+required minor. For the actual Xi measure, the completed ratio cone is exactly
+the tilted concentration law `CV_n^2<=2/(2n+1)`. The graph therefore hands
+higher compound concentration or a new positive coupling theorem to the
+signed-Hankel and determinant-integral targets. This node has no edge to
+`lambda_le_0_goal`.
+
+The first higher compound layer now has an exact reciprocal-defect coordinate:
+
+```text
+outputs/jensen_window_pf_reciprocal_defect_compound_order3_gate.md
+work/rh_compute/results/jensen_window_pf_reciprocal_defect_compound_order3_gate.json
+jensen_window_pf_reciprocal_defect_compound_order3_gate
+```
+
+The contiguous `3` by `3` signed-Hankel sign is equivalent to
+
+```text
+C_n=q_(n+1)*q_(n+3)-q_(n+2)^2+1>0.
+```
+
+This is unit-buffered log-concavity of reciprocal defects. An exact rational
+countermodel lies strictly inside the full ratio cone, decreasing-defect and
+increasing-scaled-defect cones, and both neighboring strict cubic Jensen
+cones, yet has `C_n=-181/100` and the wrong positive Hankel sign. The graph
+therefore blocks promotion from the unanchored scalar/cubic cones.
+
+For the actual Xi sequence, the lambda=-100 entry layer is now closed:
+
+```text
+outputs/jensen_window_pf_negative_lambda_m100_compound_order3_entry_certificate.md
+work/rh_compute/results/jensen_window_pf_negative_lambda_m100_compound_order3_entry_certificate.json
+jensen_window_pf_negative_lambda_m100_compound_order3_entry_certificate
+```
+
+A repaired Arb prefix through `n=317`, the certified anchor
+`s_319>251/500`, and exact all-index scaled-defect growth prove
+
+```text
+C_n(-100)>57613471/66107054971>0, n>=318.
+```
+
+Thus every shifted contiguous order-three minor has the required sign at
+`lambda=-100`. Forward propagation is now closed by a second node:
+
+```text
+outputs/jensen_window_pf_compound_order3_forward_invariance_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order3_forward_invariance_certificate.json
+jensen_window_pf_compound_order3_forward_invariance_certificate
+```
+
+Its exact cooperative equation and weighted infinite maximum principle prove
+
+```text
+C_n(lambda)>0 for every n>=0 and finite lambda>=-100,
+D_(3,n)(0)<0 for every n>=0.
+```
+
+Arbitrary columns are closed by planar secant transfer:
+
+```text
+outputs/jensen_window_pf_order3_noncontiguous_secant_transfer_lemma.md
+work/rh_compute/results/jensen_window_pf_order3_noncontiguous_secant_transfer_lemma.json
+jensen_window_pf_order3_noncontiguous_secant_transfer_lemma
+```
+
+Contiguous negativity makes the planar edge slopes strictly decrease, and
+positive weighted secant averaging transfers that orientation to every
+increasing column triple. Thus reshaped-Hankel orders two and three are
+complete at `lambda=0`. The graph now records compound order four and higher
+as the live boundary. None of the order-three nodes has an edge to
+`lambda_le_0_goal`.
+
+The first order-four node makes that boundary explicit:
+
+```text
+outputs/jensen_window_pf_compound_order4_condensation_gate.md
+work/rh_compute/results/jensen_window_pf_compound_order4_condensation_gate.json
+jensen_window_pf_compound_order4_condensation_gate
+```
+
+Desnanot-Jacobi condensation reduces the contiguous sign to
+
+```text
+G_(n+1)^2>x_(n+3)^3*G_n*G_(n+2).
+```
+
+The node contains 317 positive repaired lambda=-100 prefix margins and the
+stronger finite cap `P_n<2/(n+3)^2`; its exact sufficient tail target is
+`P_n<=4/(n+3)^2` for `n>=317`. That tail is now discharged downstream. The
+strict rational lower-order countermodel with the wrong negative `H_(4,0)`
+remains an active guard: entry uses the new curvature theorem, not promotion
+from orders two and three.
+
+The first-summand curvature bridge now sharpens that tail further:
+
+```text
+outputs/jensen_window_pf_compound_order4_first_summand_curvature_bridge.md
+work/rh_compute/results/jensen_window_pf_compound_order4_first_summand_curvature_bridge.json
+outputs/jensen_window_pf_compound_order4_localized_curvature_compact_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order4_localized_curvature_compact_certificate.json
+outputs/jensen_window_pf_compound_order4_gaussian_cumulant_ray_target.md
+work/rh_compute/results/jensen_window_pf_compound_order4_gaussian_cumulant_ray_target.json
+outputs/jensen_window_pf_compound_order4_formal_cumulant_corridor_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order4_formal_cumulant_corridor_certificate.json
+outputs/jensen_window_pf_compound_order4_formal_cumulant_asymptotic_ray_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order4_formal_cumulant_asymptotic_ray_certificate.json
+outputs/jensen_window_pf_compound_order4_formal_cumulant_next_parity_certificate.md
+outputs/jensen_window_pf_compound_order4_formal_cumulant_next_parity_finite_certificate.md
+outputs/jensen_window_pf_compound_order4_formal_cumulant_next_parity_asymptotic_ray_certificate.md
+outputs/jensen_window_pf_compound_order4_exact_cumulant_remainder_budget.md
+outputs/jensen_window_pf_compound_order4_formal_cumulant_second_next_parity_certificate.md
+outputs/jensen_window_pf_compound_order4_formal_cumulant_second_next_parity_finite_certificate.md
+outputs/jensen_window_pf_compound_order4_formal_cumulant_second_next_parity_asymptotic_ray_certificate.md
+outputs/jensen_window_pf_compound_order4_exact_cumulant_complex_disk_contract.md
+outputs/jensen_window_pf_compound_order4_exact_cumulant_formal_tail_certificate.md
+outputs/jensen_window_pf_compound_order4_exact_cumulant_exact_tail_certificate.md
+outputs/jensen_window_pf_compound_order4_exact_cumulant_partition_extension_finite_certificate.md
+outputs/jensen_window_pf_compound_order4_exact_cumulant_central_residual_certificate.md
+outputs/jensen_window_pf_compound_order4_exact_cumulant_corridor_theorem.md
+outputs/jensen_window_pf_compound_order4_exact_corridor_localized_curvature_finite_certificate.md
+outputs/jensen_window_pf_compound_order4_exact_corridor_localized_curvature_ray_certificate.md
+outputs/jensen_window_pf_compound_order4_m100_entry_certificate.md
+outputs/arb_xi_lambda0_order4_prefix_certificate.md
+outputs/jensen_window_pf_compound_order4_lambda0_eventual_positivity_certificate.md
+jensen_window_pf_compound_order4_first_summand_curvature_bridge
+jensen_window_pf_compound_order4_localized_curvature_compact_certificate
+jensen_window_pf_compound_order4_gaussian_cumulant_ray_target
+jensen_window_pf_compound_order4_formal_cumulant_corridor_certificate
+jensen_window_pf_compound_order4_formal_cumulant_asymptotic_ray_certificate
+jensen_window_pf_compound_order4_formal_cumulant_next_parity_certificate
+jensen_window_pf_compound_order4_formal_cumulant_next_parity_finite_certificate
+jensen_window_pf_compound_order4_formal_cumulant_next_parity_asymptotic_ray_certificate
+jensen_window_pf_compound_order4_exact_cumulant_remainder_budget
+jensen_window_pf_compound_order4_formal_cumulant_second_next_parity_certificate
+jensen_window_pf_compound_order4_formal_cumulant_second_next_parity_finite_certificate
+jensen_window_pf_compound_order4_formal_cumulant_second_next_parity_asymptotic_ray_certificate
+jensen_window_pf_compound_order4_exact_cumulant_complex_disk_contract
+jensen_window_pf_compound_order4_exact_cumulant_formal_tail_certificate
+jensen_window_pf_compound_order4_exact_cumulant_exact_tail_certificate
+jensen_window_pf_compound_order4_exact_cumulant_partition_extension_finite_certificate
+jensen_window_pf_compound_order4_exact_cumulant_central_residual_certificate
+jensen_window_pf_compound_order4_exact_cumulant_corridor_theorem
+jensen_window_pf_compound_order4_exact_corridor_localized_curvature_finite_certificate
+jensen_window_pf_compound_order4_exact_corridor_localized_curvature_ray_certificate
+target_compound_order4_first_summand_curvature_ceiling
+jensen_window_pf_compound_order4_m100_entry_certificate
+jensen_window_pf_compound_order4_forward_flow_reduction
+arb_xi_lambda0_order4_prefix_certificate
+jensen_window_pf_compound_order4_lambda0_eventual_positivity_certificate
+target_compound_order4_forward_invariance
+```
+
+It proves the stable factorization `g_1=d_1^2*(1-exp(-J_1))`, the real
+floor `J_1(t)>=1/(7t)` for `t>=319`, and the full-kernel perturbation budget
+`|P_n-P_n^(1)|<=2/(5k^2)`. A centered-difference Taylor bound localizes the
+remaining curvature to same-point derivatives and three explicit envelopes.
+The localized certificate node uses `107,452` outward-rounded Arb tiles and
+`1,073` positive central blocks to prove
+
+```text
+(log g_1(t))''<=7/(2t^2), 319<=t<=V'(2).
+```
+
+The exact-corridor finite theorem preserves the common mode geometry on
+`20,700` rational blocks and proves the localized ceiling on `2<=u<=20`.
+The analytic ray theorem uses midpoint Hurwitz-zeta bounds, normalized
+`H`-jet boxes, and a convergent logarithmic-defect majorant to prove
+
+```text
+t^2*U(t)<3011223637/866377000<7/2, u>=20.
+```
+
+The Gaussian-cumulant ray target rewrites that ray as explicit two-sided
+standardized cumulant corridors through order eight. Exact epsilon-six algebra
+proves the alternating factorial formal signature, and seven conditional
+full-collar boxes clear the localized ceiling. A 1,800,000-block Arb theorem
+proves every formal corridor on `2<=u<=20`; coefficient-positive leading and
+jet-remainder gates prove the formal corridors for `u>=20`. Thus the formal
+model is complete on `u>=2`. The exact epsilon-eight extension is audited and
+its first omitted coefficient layer is also proved globally: a 1,800-block
+centered Taylor theorem covers `2<=u<=20`, while coefficient-positive leading
+and order-nine/ten jet gates cover `u>=20`. Composition reduces the remaining
+exact-density theorem to explicit epsilon-ten residual budgets. The second-next
+coefficient layer is now proved globally. A cancellation-preserving complex-
+disk contract, two formal-tail theorems, two exact-tail theorems, a 5,400-block
+partition extension, and a Bell-15 central theorem discharge those budgets.
+Consequently all seven exact cumulant corridors hold for every `u>=2`, their
+continuum corridor-to-`U` implication is complete, and the former node
+`target_compound_order4_first_summand_curvature_ceiling` is now a discharged
+exact theorem:
+
+```text
+K_1(t)<=7/(2t^2), every real t>=319.
+```
+
+The exact tent transfer and full-kernel perturbation then give
+`P_n<=4/(n+3)^2` for every `n>=317`. The strict scaled-defect buffer converts
+that estimate into the order-four sign, while the repaired prefix supplies
+`0<=n<=316`. Thus the graph now contains the entry theorem
+
+```text
+H_(4,n)(-100)>0 for every n>=0.
+```
+
+The node `jensen_window_pf_compound_order4_forward_flow_reduction` proves the
+exact one-sided system
+
+```text
+F_n'=alpha_n*F_(n+1)+beta_n*F_n, alpha_n>0.
+```
+
+Its original weighted-infimum reduction to a spatial coefficient ceiling
+remains valid. The following compact-heat route now avoids needing that global
+ceiling:
+
+```text
+outputs/jensen_window_pf_lambda0_first_summand_dominance_transfer.md
+outputs/jensen_window_pf_uniform_superpolynomial_first_summand_dominance.md
+outputs/jensen_window_pf_uniform_first_summand_heat_tilt_asymptotic_theorem.md
+outputs/jensen_window_pf_compound_order4_uniform_heat_forward_invariance_certificate.md
+jensen_window_pf_lambda0_first_summand_dominance_transfer
+jensen_window_pf_uniform_superpolynomial_first_summand_dominance
+jensen_window_pf_uniform_first_summand_heat_tilt_asymptotic_theorem
+```
+
+Writing `T=-lambda`, covariance monotonicity transfers the first-summand
+dominance estimate from `T=100` to every `0<=T<=100`. The same explicit
+negative exponent proves superpolynomial suppression of all higher theta
+summands, uniformly on that compact heat interval; fixed local logarithmic
+differences inherit the suppression.
+
+For the first theta summand, O'Sullivan's published all-order saddle expansion
+applies uniformly to the suitable multiplier
+`f_T(t)=exp(-T*(log t)^2/16)`. Exact differentiation of
+`w=W(2k/pi)` and the compact-uniform remainder give
+
+```text
+Delta_k^m log R_T^(1)(k)=O(log(k)/k^m),  m=2,...,7,
+```
+
+uniformly for `0<=T<=100`. Exact seven-node Newton interpolation transfers
+these differences to the normalized ratio coefficients. In the resulting
+order-four determinant, all terms through `h^5` vanish and the universal first
+term is
+
+```text
+768*G_2(lambda,M)^6*h(lambda,M)^6,
+```
+
+with `G_2->1` uniformly. Consequently there is one, possibly ineffective,
+integer `N` such that
+
+```text
+H_(4,n)(lambda)>0 for n>=N and -100<=lambda<=0.
+```
+
+This uniform eventual tail confines the cooperative flow to finitely many
+indices. Variation of constants and backward induction from index `N` combine
+it with the all-shift entry theorem at `lambda=-100` to prove
+
+```text
+H_(4,n)(lambda)>0 for every n>=0 and every -100<=lambda<=0.
+```
+
+Thus `target_compound_order4_forward_invariance` is a discharged exact node;
+in particular the previously non-effective lambda-zero splice is no longer
+needed. This conclusion is only for contiguous order-four Hankel minors. It
+does not establish arbitrary-column order four, any compound order at least
+five, PF-infinity, the all-degree Jensen bridge, RH, or `Lambda<=0`.
+
+The downstream finite-block transfer now closes the arbitrary-column part:
+
+```text
+outputs/jensen_window_pf_order4_noncontiguous_total_positivity_transfer.md
+work/rh_compute/results/jensen_window_pf_order4_noncontiguous_total_positivity_transfer.json
+jensen_window_pf_order4_noncontiguous_total_positivity_transfer
+```
+
+For `B_(i,q)^(n,N)=A_(n+i+N-q)(0)`, every solid minor is the corresponding
+signed contiguous Hankel minor. The completed layers through order four make
+all initial minors positive, and the rectangular Gasca-Pena criterion makes
+every reversed finite block strictly totally positive. Reversing an arbitrary
+selected column set proves
+
+```text
+R_(4,n)(j_1,j_2,j_3,j_4)>0
+for every n>=0 and 0<=j_1<j_2<j_3<j_4.
+```
+
+The same argument is an exact fixed-order theorem: signed contiguous layers
+through `m` imply every arbitrary-column layer through `m`. It supplied the
+arbitrary-column transfer used after the downstream order-five closure.
+PF-infinity, the all-degree Jensen bridge, RH, and `Lambda<=0` remain open.
+
+The order-five chain begins with the exact uniform-tail and flow reduction:
+
+```text
+outputs/jensen_window_pf_compound_order5_uniform_tail_flow_reduction.md
+work/rh_compute/results/jensen_window_pf_compound_order5_uniform_tail_flow_reduction.json
+jensen_window_pf_compound_order5_uniform_tail_flow_reduction
+```
+
+The all-order Xi ratio expansion, heat-tilt extension through order eleven,
+and higher-theta suppression give the exact determinant signature
+
+```text
+[h^0,...,h^10] det K=[0,0,0,0,0,0,0,0,0,0,294912*G_2^10]
+```
+
+and hence one eventual positive `H_5` tail uniformly on `-100<=lambda<=0`.
+The completed `H_4>0` layer makes the exact order-five flow cooperative.
+At the time of that reduction, finite confinement left the endpoint theorem
+
+```text
+H_(5,n)(-100)>0 for every n>=0,
+equivalently H_(4,n+1)(-100)^2>H_(4,n)(-100)*H_(4,n+2)(-100).
+```
+
+That endpoint theorem was recorded under the stable identifier
+`target_compound_order5_m100_entry`. It is now discharged by the chain below;
+the identifier remains in the graph as an exact theorem node, not an open
+target.
+
+The stable-coordinate prefix certificate sharpens that endpoint target:
+
+```text
+outputs/jensen_window_pf_compound_order5_m100_prefix_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order5_m100_prefix_certificate.json
+jensen_window_pf_compound_order5_m100_prefix_certificate
+```
+
+Exact algebra factors `H_(5,n)=W_n*J_n` with `W_n>0` in the completed lower
+cone. Seven source files provide 325 outward-rounded Arb coefficient balls,
+and direct evaluation proves
+
+```text
+J_n(-100)>0 and H_(5,n)(-100)>0 for every 0<=n<=316.
+```
+
+The weakest relative lower bound is above `0.006269` at `n=316`. This supplies
+the finite half of the endpoint composition.
+
+That tail has a scalar curvature reduction:
+
+```text
+outputs/jensen_window_pf_compound_order5_m100_tail_curvature_reduction.md
+work/rh_compute/results/jensen_window_pf_compound_order5_m100_tail_curvature_reduction.json
+jensen_window_pf_compound_order5_m100_tail_curvature_reduction
+```
+
+With `k=n+4`, exact logarithmic algebra gives
+
+```text
+J_n>0 iff C_n<-4log(x_k),
+C_n=Delta^2 log(F_n)-Delta^2 log(d_(n+3)).
+```
+
+The inherited defect anchor and coefficient-positive rational arithmetic show
+that the single ceiling
+
+```text
+C_n<=100/(n+4)^2 for every n>=317
+```
+
+is sufficient for the complete tail. The constant has a factor-above-27
+reserve over the measured scaled curvature at the splice.
+
+The exact first/full bridge decomposes that budget:
+
+```text
+outputs/jensen_window_pf_compound_order5_first_summand_curvature_bridge.md
+work/rh_compute/results/jensen_window_pf_compound_order5_first_summand_curvature_bridge.json
+jensen_window_pf_compound_order5_first_summand_curvature_bridge
+```
+
+Positive floors at both stable logarithmic layers prevent division by a raw
+near-zero determinant. Exact coefficient-positive perturbation arithmetic
+proves
+
+```text
+|C_n-C_n^(1)|<=37/(n+4)^2, n>=317,
+```
+
+and reduces the remaining `63` part to
+
+```text
+q_1''(t)<=60/t^2 for every real t>=320.
+```
+
+Three rigorous interval nodes close that continuous theorem:
+
+```text
+outputs/jensen_window_pf_compound_order5_nested_curvature_compact_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order5_nested_curvature_compact_certificate.json
+jensen_window_pf_compound_order5_nested_curvature_compact_certificate
+
+outputs/jensen_window_pf_compound_order5_nested_curvature_finite_ray_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order5_nested_curvature_finite_ray_certificate.json
+jensen_window_pf_compound_order5_nested_curvature_finite_ray_certificate
+
+outputs/jensen_window_pf_compound_order5_nested_curvature_asymptotic_ray_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order5_nested_curvature_asymptotic_ray_certificate.json
+jensen_window_pf_compound_order5_nested_curvature_asymptotic_ray_certificate
+```
+
+The compact certificate reuses the hashed `107452`-tile H-derivative cache
+and proves the ceiling on `320<=t<=V'(2)`. One hundred collar-extension tiles
+and 1850 exact-cumulant blocks cover `2<=u<=20`. The normalized asymptotic
+box proves `t^2q_1''(t)<9.159` for every `u>=20`. Their union covers every
+real `t>=320`.
+
+The endpoint composition is:
+
+```text
+outputs/jensen_window_pf_compound_order5_m100_entry_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order5_m100_entry_certificate.json
+jensen_window_pf_compound_order5_m100_entry_certificate
+target_compound_order5_m100_entry
+```
+
+The tent bound contributes less than `63/(n+4)^2`; the full-kernel transfer
+contributes at most `37/(n+4)^2`. The resulting scalar ceiling proves the
+complete analytic tail, and the prefix supplies the remaining shifts. Hence
+
+```text
+H_(5,n)(-100)>0 for every integer n>=0.
+```
+
+Finally,
+
+```text
+outputs/jensen_window_pf_compound_order5_uniform_heat_forward_invariance_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order5_uniform_heat_forward_invariance_certificate.json
+jensen_window_pf_compound_order5_uniform_heat_forward_invariance_certificate
+```
+
+composes endpoint entry, the uniform eventual tail, cooperative variation of
+constants, and the fixed-order initial-minor transfer. It proves
+
+```text
+H_(5,n)(lambda)>0 for every n>=0 and -100<=lambda<=0,
+R_(5,n)(j_1,j_2,j_3,j_4,j_5;lambda)>0
+```
+
+for every increasing column quintuple on the same interval. Thus fixed order
+five is complete.
+
+The downstream order-six chain begins with
+
+```text
+outputs/jensen_window_pf_compound_order6_uniform_tail_flow_reduction.md
+work/rh_compute/results/jensen_window_pf_compound_order6_uniform_tail_flow_reduction.json
+jensen_window_pf_compound_order6_uniform_tail_flow_reduction
+```
+
+The heat-tilt expansion through order sixteen, higher-theta suppression, and
+exact 720-permutation determinant audit give the signed first term
+
+```text
+1132462080*G_2^15*h^15
+```
+
+and one uniform eventual positive `Q_6=-H_6` tail. The completed `H_5>0`
+layer makes the exact signed flow cooperative.
+
+The finite endpoint half is
+
+```text
+outputs/jensen_window_pf_compound_order6_m100_prefix_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order6_m100_prefix_certificate.json
+jensen_window_pf_compound_order6_m100_prefix_certificate
+```
+
+Stable signed condensation and 327 outward-rounded coefficient balls prove
+
+```text
+Q_(6,n)(-100)>0 for every 0<=n<=316.
+```
+
+The canonical tail reduction and first/full bridge are
+
+```text
+outputs/jensen_window_pf_compound_order6_m100_tail_curvature_reduction.md
+jensen_window_pf_compound_order6_m100_tail_curvature_reduction
+
+outputs/jensen_window_pf_negative_lambda_first_summand_power7_dominance_extension.md
+jensen_window_pf_negative_lambda_first_summand_power7_dominance_extension
+
+outputs/jensen_window_pf_compound_order6_first_summand_curvature_bridge.md
+jensen_window_pf_compound_order6_first_summand_curvature_bridge
+```
+
+Exact factorization gives `H_(5,n)=A_(n+4)^5exp(p(n+4))` and reduces entry to
+`P_k<=320/k^2` for `k=n+5>=322`. The inverse-seventh-power defect theorem and
+a degree-75 coefficient-positive transfer prove
+
+```text
+|P_k-P_k^(1)|<100/k^2
+```
+
+and reduce the remaining `201` part to `p_1''(t)<=200/t^2` on `t>=321`.
+
+The required derivative corridors and three continuous ranges are graph
+nodes:
+
+```text
+outputs/jensen_window_pf_compound_order6_high_cumulant_coarse_corridor.md
+jensen_window_pf_compound_order6_high_cumulant_coarse_corridor
+
+outputs/jensen_window_pf_compound_order6_nested_curvature_compact_certificate.md
+jensen_window_pf_compound_order6_nested_curvature_compact_certificate
+
+outputs/jensen_window_pf_compound_order6_nested_curvature_finite_ray_certificate.md
+jensen_window_pf_compound_order6_nested_curvature_finite_ray_certificate
+
+outputs/jensen_window_pf_compound_order6_nested_curvature_asymptotic_ray_certificate.md
+jensen_window_pf_compound_order6_nested_curvature_asymptotic_ray_certificate
+```
+
+The exact high-cumulant node supplies orders nine and ten. Thirty-eight
+adaptive compact blocks cover `321<=t<=V'(2)`; a mode-two collar and 17,999
+rational blocks cover `2<=u<=20`; the normalized asymptotic box proves
+`t^2p_1''(t)<22.769` for `u>=20`. Their union proves the continuous theorem.
+
+The endpoint composition
+
+```text
+outputs/jensen_window_pf_compound_order6_m100_entry_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order6_m100_entry_certificate.json
+jensen_window_pf_compound_order6_m100_entry_certificate
+target_compound_order6_m100_entry
+```
+
+combines the strict `301<320` analytic budget with the prefix and proves
+
+```text
+Q_(6,n)(-100)=-H_(6,n)(-100)>0 for every n>=0.
+```
+
+Finally,
+
+```text
+outputs/jensen_window_pf_compound_order6_uniform_heat_forward_invariance_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order6_uniform_heat_forward_invariance_certificate.json
+jensen_window_pf_compound_order6_uniform_heat_forward_invariance_certificate
+```
+
+composes endpoint entry, the uniform tail, cooperative variation of constants,
+and the all-fixed-order initial-minor transfer. It proves signed contiguous and
+arbitrary-column order six for every shift on `-100<=lambda<=0`. The graph has
+only `sharpens` edges from this theorem into the two all-order bridge targets.
+
+The new all-fixed-order tail node is
+
+```text
+outputs/jensen_window_pf_graded_kernel_vandermonde_all_order_lemma.md
+work/rh_compute/results/jensen_window_pf_graded_kernel_vandermonde_all_order_lemma.json
+jensen_window_pf_graded_kernel_vandermonde_all_order_lemma
+```
+
+Mixed-kernel valuation and Cauchy-Binet force determinant degree
+`D=binom(m,2)` at every fixed order. The unique equality block is the
+Vandermonde block and gives
+
+```text
+[h^D]Q_m=2^D*prod_(j=1)^(m-1)j!*G_2^D>0.
+```
+
+Arbitrary fixed-order suitable-multiplier truncation, direct finite-difference
+control of its remainder, and higher-theta suppression prove
+
+```text
+for every fixed m, exists N_m such that
+Q_(m,n)(lambda)>0 for n>=N_m and -100<=lambda<=0.
+```
+
+The threshold may depend on `m` and is non-effective. The graph therefore
+records only `supports` edges from the three analytic inputs and does not
+interpret this as a common-tail or all-shift theorem.
+
+Its order-seven specialization and exact flow reduction are
+
+```text
+outputs/jensen_window_pf_compound_order7_uniform_tail_flow_reduction.md
+work/rh_compute/results/jensen_window_pf_compound_order7_uniform_tail_flow_reduction.json
+jensen_window_pf_compound_order7_uniform_tail_flow_reduction
+```
+
+Here `D=21`, `epsilon_7=-1`, and the positive signed leading coefficient is
+`52183852646400*G_2^21`. Exact condensation gives
+
+```text
+Q_(7,n)H_(5,n+2)=Q_(6,n+1)^2-Q_(6,n)Q_(6,n+2),
+```
+
+while the completed order-six cone makes the order-seven flow cooperative.
+Thus all-shift endpoint entry at `lambda=-100` would imply contiguous and
+arbitrary-column order seven on the complete heat interval. The exact
+lower-cone countermodel in the node prevents promotion from orders at most six.
+
+The rigorous finite half of endpoint entry is
+
+```text
+outputs/jensen_window_pf_compound_order7_m100_prefix_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order7_m100_prefix_certificate.json
+jensen_window_pf_compound_order7_m100_prefix_certificate
+```
+
+Stable Arb evaluation, including a twelve-coefficient retained-integral
+repair, proves
+
+```text
+Q_(7,n)(-100)>0 for every 0<=n<=314,
+L_314>9/1000.
+```
+
+The remaining endpoint tail has the canonical reduction
+
+```text
+outputs/jensen_window_pf_compound_order7_m100_tail_curvature_reduction.md
+work/rh_compute/results/jensen_window_pf_compound_order7_m100_tail_curvature_reduction.json
+jensen_window_pf_compound_order7_m100_tail_curvature_reduction
+```
+
+One additional stable gap gives `Q_(6,n)=A_(n+5)^6exp(r(n+5))`. With
+`k=n+6`, order-seven positivity is equivalent to
+
+```text
+6log(x_k)+R_k<0,
+R_k=r(k-1)-2r(k)+r(k+1).
+```
+
+The completed defect anchor and an exact coefficient-positive comparison
+reduce every missing `n>=315` sign to the single estimate later discharged
+by the continuous certificates:
+
+```text
+R_k<=900/k^2 for every k>=321.
+```
+
+The first-summand input is now strengthened by
+
+```text
+outputs/jensen_window_pf_negative_lambda_first_summand_power8_rebalanced_dominance_extension.md
+work/rh_compute/results/jensen_window_pf_negative_lambda_first_summand_power8_rebalanced_dominance_extension.json
+jensen_window_pf_negative_lambda_first_summand_power8_rebalanced_dominance_extension
+```
+
+The rebalanced split `a(k)=log(k)/10` uses the high-region exponential
+reserve to prove
+
+```text
+0<=delta_k<2/k^8 for every k>=300.
+```
+
+Fourteen endpoint and half-line derivative gates are strict. This is the
+power needed to cross one additional stable logarithm without exhausting the
+inverse-square endpoint budget.
+
+The resulting exact transfer node is
+
+```text
+outputs/jensen_window_pf_compound_order7_first_summand_curvature_bridge.md
+work/rh_compute/results/jensen_window_pf_compound_order7_first_summand_curvature_bridge.json
+jensen_window_pf_compound_order7_first_summand_curvature_bridge
+```
+
+The completed order-six theorems and two finite relative-H5 margins give
+
+```text
+min(T_j,T_j^(1))>=3/(2j), j>=320.
+```
+
+The full four-layer perturbation chain has a degree-102 shifted numerator
+with all 103 coefficients positive and proves
+
+```text
+|R_k-R_k^(1)|<262/k^2, k>=321.
+```
+
+Tent integration therefore reduces the endpoint tail to exactly
+
+```text
+r_1''(t)<=600/t^2 for every real t>=320
+ =>R_k<601/k^2+262/k^2=863/k^2<900/k^2.
+```
+
+The compact part of this continuous target is now discharged by
+
+```text
+outputs/jensen_window_pf_compound_order7_shifted_jet_t320_t1000_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order7_shifted_jet_t320_t1000_certificate.json
+jensen_window_pf_compound_order7_shifted_jet_t320_t1000_certificate
+```
+
+Exact-potential shifted jets and dimensionless `H2..H21` collars prove
+
+```text
+r_1''(t)<=600/t^2 for every real 320<=t<=1000.
+```
+
+All 186 rational blocks pass. The worst scaled upper is below `50.911`, and
+the weakest dimensionless `T` floor exceeds `2.069`.
+
+The next compact interval is discharged by
+
+```text
+outputs/jensen_window_pf_compound_order7_nested_curvature_compact_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order7_nested_curvature_compact_certificate.json
+jensen_window_pf_compound_order7_nested_curvature_compact_certificate
+```
+
+Aligned `H2..H12` quadrature caches and strict `t+-5` common collars prove
+
+```text
+r_1''(t)<=600/t^2 for every real 1000<=t<=V'(2).
+```
+
+All 82 adaptive rational mode blocks pass. The worst scaled upper is below
+`358.733`, and the weakest `T` floor exceeds `0.00010247`.
+
+The two new cumulant orders needed beyond mode two are certified by
+
+```text
+outputs/jensen_window_pf_compound_order7_high_cumulant_coarse_corridor.md
+work/rh_compute/results/jensen_window_pf_compound_order7_high_cumulant_coarse_corridor.json
+jensen_window_pf_compound_order7_high_cumulant_coarse_corridor
+```
+
+The exact epsilon-ten recurrence gives normalized `kappa_11,kappa_12` caps
+below `14001` on `2<=u<=20` and below `700001` on `u>=20`. These feed the two
+closed ray nodes:
+
+```text
+outputs/jensen_window_pf_compound_order7_nested_curvature_finite_ray_certificate.md
+outputs/jensen_window_pf_compound_order7_nested_curvature_asymptotic_ray_certificate.md
+jensen_window_pf_compound_order7_nested_curvature_finite_ray_certificate
+jensen_window_pf_compound_order7_nested_curvature_asymptotic_ray_certificate
+```
+
+The mode-two collar and 17,999 rational blocks prove the target on
+`2<=u<=20`; one normalized stable-log interval proves
+`t^2r_1''(t)<55.541<100` for every `u>=20`. Consequently the four closed
+ranges prove
+
+```text
+r_1''(t)<=600/t^2 for every real t>=320.
+```
+
+The exact endpoint composition is
+
+```text
+outputs/jensen_window_pf_compound_order7_m100_entry_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order7_m100_entry_certificate.json
+jensen_window_pf_compound_order7_m100_entry_certificate
+```
+
+Tent integration and the complete-kernel transfer give
+
+```text
+R_k<601/k^2+262/k^2=863/k^2<900/k^2, k>=321,
+Q_(7,n)(-100)=-H_(7,n)(-100)>0 for every n>=0.
+```
+
+The formerly conditional flow theorem then composes to
+
+```text
+outputs/jensen_window_pf_compound_order7_uniform_heat_forward_invariance_certificate.md
+work/rh_compute/results/jensen_window_pf_compound_order7_uniform_heat_forward_invariance_certificate.json
+jensen_window_pf_compound_order7_uniform_heat_forward_invariance_certificate
+```
+
+It proves signed contiguous and arbitrary-column order seven for every shift
+and every `-100<=lambda<=0`. Only `sharpens` edges leave this fixed-order
+theorem for the two all-order bridge targets. The next layer cannot be
+promoted from this lower cone alone.
+
+The completed fixed-order-eight chain begins with
+
+```text
+jensen_window_pf_compound_order8_uniform_tail_flow_reduction
+jensen_window_pf_compound_order8_m100_prefix_certificate
+jensen_window_pf_compound_order8_m100_tail_curvature_reduction
+jensen_window_pf_negative_lambda_first_summand_power9_rebalanced_dominance_extension
+jensen_window_pf_compound_order8_first_summand_curvature_bridge
+```
+
+At `m=8`, `D=28`, `epsilon_8=1`, and the universal positive signed term is
+
+```text
+33664847019245568000*G_2^28*h^28.
+```
+
+The all-fixed-order theorem supplies a compact-uniform eventual `Q_8` tail.
+Signed condensation and the affine-Hankel/Plucker identity give
+
+```text
+Q_(8,n)Q_(6,n+2)=Q_(7,n+1)^2-Q_(7,n)Q_(7,n+2),
+Q_n'=a_n Q_(n+1)+b_n Q_n,
+a_n=(4n+58)Q_(7,n)/Q_(7,n+1)>0.
+```
+
+Thus all-shift endpoint entry at `lambda=-100` is the sole new zeta-specific
+input for fixed order eight. It cannot be inferred from the completed lower
+cone: the
+exact sequence `(1,1,1/2!,...,1/13!,1/87120000000)` has all available signed
+contiguous minors through order seven positive but
+
+```text
+Q_(8,0)=-463/69210459277322870541707704182767616000000000000000<0.
+```
+
+The finite endpoint component uses 1,257 outward-rounded coefficient balls
+at 2048 bits. The stable relative coordinate
+
+```text
+M_n=Q_(7,n+1)^2/(Q_(7,n)Q_(7,n+2))-1
+```
+
+is rigorously positive for every `0<=n<=1242`. Signed condensation proves
+`Q_(8,n)(-100)>0` throughout the same 1,243-shift prefix, and the weakest
+margin, at `n=1242`, exceeds `1/300`.
+
+For the tail, exact factorization reduces `n>=1243`, or `k>=1250`, to
+
+```text
+W_k<=4300/k^2.
+```
+
+The inverse-ninth-power dominance theorem and fifth-gap bridge prove
+
+```text
+|W_k-W_k^(1)|<190/k^2,
+s_1''(t)<=4000/t^2 on t>=999
+ => W_k<4001/k^2+190/k^2=4191/k^2<4300/k^2.
+```
+
+The continuous premise is supplied by the following exact and interval
+nodes:
+
+```text
+jensen_window_pf_compound_order8_high_cumulant_coarse_corridor
+jensen_window_pf_compound_order8_shifted_jet_t699_t999_certificate
+jensen_window_pf_compound_order8_nested_curvature_compact_certificate
+jensen_window_pf_compound_order8_nested_curvature_finite_ray_certificate
+jensen_window_pf_compound_order8_nested_curvature_asymptotic_ray_certificate
+```
+
+The shifted cover proves the stronger `2000/t^2` ceiling on `699<=t<=999`.
+The compact cover handles `999<=t<=V'(2)`, 17,999 rational blocks handle
+`2<=u<=20`, and normalized `H2-H14` boxes handle every `u>=20`, where the
+scaled curvature upper is below `134.49`. The exact high-cumulant corridor
+supplies the orders thirteen and fourteen caps on both saddle rays.
+
+These components compose in
+
+```text
+jensen_window_pf_compound_order8_m100_entry_certificate
+jensen_window_pf_compound_order8_uniform_heat_forward_invariance_certificate
+```
+
+to prove
+
+```text
+Q_(8,n)(-100)=H_(8,n)(-100)>0 for every n>=0,
+Q_(8,n)(lambda)=H_(8,n)(lambda)>0
+  for every n>=0 and -100<=lambda<=0.
+```
+
+The fixed-order initial-minor theorem then transfers the conclusion to every
+arbitrary-column signed reshaped-Hankel minor through order eight. The graph
+uses only `supports` edges inside this fixed-order composition and `sharpens`
+edges from its final theorem to the all-order targets.
+
+The completed fixed-order-nine chain is now recorded by the nodes
+
+```text
+jensen_window_pf_compound_order9_uniform_tail_flow_reduction
+jensen_window_pf_compound_order9_m100_prefix_certificate
+jensen_window_pf_compound_order9_m100_tail_curvature_reduction
+jensen_window_pf_compound_order9_first_summand_curvature_bridge
+jensen_window_pf_compound_order9_high_cumulant_coarse_corridor
+jensen_window_pf_compound_order9_shifted_point_h0_h8_cache
+jensen_window_pf_compound_order9_localized_lower_bridge_certificate
+jensen_window_pf_compound_order9_nested_curvature_compact_certificate
+jensen_window_pf_compound_order9_nested_curvature_finite_ray_certificate
+jensen_window_pf_compound_order9_nested_curvature_asymptotic_ray_certificate
+jensen_window_pf_compound_order9_first_summand_curvature_certificate
+jensen_window_pf_compound_order9_m100_finite_splice_certificate
+jensen_window_pf_compound_order9_m100_entry_certificate
+jensen_window_pf_compound_order9_uniform_heat_forward_invariance_certificate
+```
+
+The eventual tail and endpoint coordinate are
+
+```text
+det K=347485857744891213250560000*G_2^36*h^36+o(h^36),
+Q_(9,n)Q_(7,n+2)=Q_(8,n+1)^2-Q_(8,n)Q_(8,n+2).
+```
+
+The finite prefix proves `Q_(9,n)(-100)>0` through `n=1240`. The tail is
+reduced to `Y_k<=4900/k^2`, while the six-layer complete-to-first transfer
+contributes less than `550/k^2`. The hash-bound localized cover, compact
+cover, finite saddle ray, and asymptotic ray compose to
+
+```text
+w_1''(t)<=4200/t^2 for every real t>=1250.
+```
+
+Tent integration contributes less than `4201/k^2`; hence the full endpoint
+tail is below `4751/k^2<4900/k^2`. Two retained-integral splice signs at
+`n=1241,1242` join that tail to the prefix. The endpoint and cooperative-flow
+nodes therefore prove
+
+```text
+Q_(9,n)(lambda)=H_(9,n)(lambda)>0
+for every n>=0 and -100<=lambda<=0,
+```
+
+and transfer the result to arbitrary columns through fixed order nine.
+
+The order-ten graph now records a delayed recovery rather than an all-shift
+endpoint entry.  Three hash-bound compact caches, the localized cover, compact
+cover, finite saddle ray, and asymptotic ray compose to
+
+```text
+z_1''(t)<=4200/t^2 for every real t>=1251.
+```
+
+The exact seven-layer transfer, finite endpoint block, and two-index splice
+then prove
+
+```text
+Q_(10,n)(-100)<0 for n=0,1,2,3,
+Q_(10,n)(-100)>0 for every integer n>=4.
+```
+
+The delayed cooperative heat lemma propagates only the positive `n>=4` ray;
+an independent Arb certificate supplies the four missing signs at lambda
+zero.  Consequently
+
+```text
+Q_(10,n)(0)>0 for every integer n>=0,
+epsilon_k R_(k,n)(j_1,...,j_k)(0)>0
+  for 1<=k<=10 and every admissible shift and column set.
+```
+
+Only `supports` edges enter this fixed-order composition, and only `sharpens`
+edges leave its final node for the open bridge targets.  The graph therefore
+records a genuine order-ten lambda-zero theorem without promoting it to order
+eleven, PF-infinity, RH, or `Lambda<=0`.
+
+The next fixed-order node is deliberately subordinate and remains open:
+
+```text
+jensen_window_pf_compound_order11_curvature_bridge_target
+```
+
+Its finite endpoint prefix through `n=1242`, four-row lambda-zero complement,
+power-thirteen full-kernel transfer, and delayed heat theorem are all recorded
+as `supports` inputs.  Exactly one premise remains: a half-line proof of
+`y_1''(t)<=6000/t^2` for `t>=1252`.  The node has only `sharpens` edges to the
+two global bridge targets, so neither selected-point evidence nor the tested
+localized interval core can be promoted to order eleven or `Lambda<=0`.
+
+The new node
+
+```text
+jensen_window_pf_all_order_endpoint_heat_reduction
+```
+
+then records the arbitrary-order determinant identities
+
+```text
+Q_(m,n)'=(4n+8m-6)delta(Q_(m,n)),
+Q_(m-1,n+1)delta(Q_(m,n))
+ =Q_(m-1,n)Q_(m,n+1)+delta(Q_(m-1,n+1))Q_(m,n),
+```
+
+and the exact quantifier composition
+
+```text
+[Q_(m,n)(-100)>0 for every m>=10,n>=0]
+iff
+[Q_(m,n)(lambda)>0 for every m>=10,n>=0
+ and -100<=lambda<=0].
+```
+
+The eventual-tail threshold may depend on `m`: each fixed order is completed
+before induction advances. The graph uses `supports` edges from the fixed-order
+tail, completed order-nine base, and initial-minor theorem into this reduction.
+Only `sharpens` edges leave it for the two open bridge targets. Its conditional
+equivalence remains exact, but the static `m>=10` endpoint antecedent is now
+rejected by the order-ten node below. PF-infinity, RH, and `Lambda<=0` are not
+proved or disproved by that route failure.
+
+The endpoint hierarchy now has an exact normalized Schur coordinate:
+
+```text
+outputs/jensen_window_pf_endpoint_deep_schur_coordinate.md
+work/rh_compute/results/jensen_window_pf_endpoint_deep_schur_coordinate.json
+jensen_window_pf_endpoint_deep_schur_coordinate
+jensen_window_pf_endpoint_order10_counterexample
+jensen_window_pf_endpoint_pf3_boundary_counterexample
+jensen_window_pf_endpoint_deep_schur_literature_fit
+```
+
+For `h_k=A_k(-100)/A_0(-100)`, column reversal and Jacobi-Trudi give
+
+```text
+Q_(m,n)(-100)=A_0(-100)^m s_((n+m-1)^m)(h).
+```
+
+Arbitrary increasing Hankel columns map bijectively to partitions
+`lambda_1>=...>=lambda_m>=m-1`. The graph therefore uses `supports` edges
+from the all-order endpoint reduction and fixed-order initial-minor theorem
+into the deep-Schur node, followed only by `sharpens` edges to the open bridge
+targets. The deep-Schur and Toda coordinates also support the direct
+order-ten counterexample node:
+
+```text
+outputs/jensen_window_pf_endpoint_order10_counterexample.md
+work/rh_compute/results/jensen_window_pf_endpoint_order10_counterexample.json
+python work/rh_compute/scripts/check_jensen_window_pf_endpoint_order10_counterexample.py
+```
+
+Independent `4096`-bit Arb Hankel, Jacobi-Trudi, and Toda checks prove
+
+```text
+Q_(10,n)(-100)<0 for n=0,1,2,3,
+s_((N^10))(h)<0 for N=9,10,11,12,
+Q_(10,4)(-100)>0.
+```
+
+These are four negative required order-ten deep rectangles, so the proposed
+all-order endpoint hierarchy is false. The graph sends a `blocks_promotion`
+edge from this node to `target_signed_hankel_jensen_bridge` and a `sharpens`
+edge to the direct Jensen target. It has no edge to `lambda_le_0_goal`.
+
+The rigorous endpoint coefficient balls also prove
+
+```text
+s_(1,1,1)(h)<0.
+```
+
+Since `(1,1,1)` lies outside the required deep order-three cone, the graph
+uses a `blocks_promotion` edge to prevent strengthening the endpoint target to
+full PF-infinity. The primary-literature fit node records that initial-minor
+and orientation theorems support the coordinate, while full Edrei positivity
+is too strong and matrix-power eventual positivity is a different notion.
+None of these coordinate or guard nodes has an edge to `lambda_le_0_goal`.
+
+The rectangular coordinate now has an exact Toda refinement and two explicit
+route guards:
+
+```text
+outputs/jensen_window_pf_deep_schur_toda_boundary_gate.md
+jensen_window_pf_deep_schur_rectangular_toda_coordinate
+jensen_window_pf_deep_schur_moving_tail_boundary_counterexample
+jensen_window_pf_strict_schur_jensen_counterexample
+```
+
+Writing `tau_(m,N)=s_((N^m))(h)`, Desnanot-Jacobi gives
+
+```text
+tau_(m+1,N) tau_(m-1,N)
+ = tau_(m,N)^2-tau_(m,N-1) tau_(m,N+1).
+```
+
+Once the lower row is positive, the next rectangle is positive exactly when
+the current width row is strictly log-concave. This is an exact coordinate,
+not an induction theorem: the Toda numerator is subtractive. The order-ten
+gate certifies that it is negative at the first four admissible widths.
+
+The first guard concerns the ordinary tail `b_k^(s)=h_(s+k)/h_s`, with
+negative indices reset to zero. Its Jacobi-Trudi determinants agree with
+translated endpoint shapes only for deep tail shapes. At
+`r=2,s=1,mu=(0,0)`, the exact mismatch is `h_0 h_2/h_1^2>0`. Thus deep
+positivity does not imply moving-tail PF by this zero-reset translation.
+
+The second guard uses the strictly Schur-positive Edrei specialization
+
+```text
+H(z)=exp(z/100)/((1-z)(1-2z)).
+```
+
+Its shift-zero cubic Jensen polynomial has exact discriminant
+`-222484532394597/2000000000000<0`, so it is not hyperbolic. Therefore even
+strict full unweighted Schur/PF positivity is not, by itself, the missing
+Jensen implication. The graph sends this counterexample only to the open
+bridge targets. Together with the direct endpoint failure, any successful
+bridge must use a weaker Xi/Phi-specific structure that does not assume the
+all-shift signed-Hankel cone. None of these nodes has an edge to
+`lambda_le_0_goal`.
+
+The current primary-source theorem audit adds a non-promotion edge:
+
+```text
+outputs/jensen_window_pf_order_moment_transport_fit_gate.md
+work/rh_compute/results/jensen_window_pf_order_moment_transport_fit_gate.json
+jensen_window_pf_order_moment_transport_fit_gate
+```
+
+The positive Gamma-normalized order-moment transport theorem would require a
+completely monotone transformed first-summand kernel. The exact origin
+derivative is positive, so that hypothesis fails, and the theorem has ordinary
+positive Hankel orientation rather than reciprocal sign regularity. The node
+records why that shortcut could not discharge the historical curvature
+target; the successful proof instead uses the exact-corridor route.
 
 The structural ansatz matrix sharpens the theorem-machinery audit into
 candidate, blocked, and rejected proof-search rows:
@@ -837,8 +1964,7 @@ deficit `D2=a^2-2*b` and a positive monotone correction
 marking it as a scale diagnostic only, since the uniform asymptotic remainder
 needed for an all-`k` tail theorem remains open.
 
-The negative-lambda uniform remainder target turns that gap into an explicit
-open theorem target:
+The negative-lambda uniform remainder target records that historical gap:
 
 ```text
 outputs/jensen_window_pf_negative_lambda_uniform_remainder_target.md
@@ -848,10 +1974,10 @@ work/rh_compute/results/jensen_window_pf_negative_lambda_uniform_remainder_targe
 It records that the fixed-`k` leading deficit has the right sign, but the
 former fixed bounded-curvature wall shrinks like `1/k`; the leading-only
 cutoff floors for `T=25,50,100` are `0,3,16`, all below the `k>=22` tail
-start. After the k300 obstruction, this node remains an open remainder
-target only if it is revised toward the raw-corridor or linear
-curvature-barrier route; it no longer supplies a live promotion into the
-retired `C_k<=2/3` wall.
+start. The later lambda=-100 saddle, scaled-curvature, raw-corridor, and
+adaptive-defect theorems close the destination by an independent route. This
+node is therefore historical rather than an active blocker; no simultaneous
+uniform remainder theorem is claimed.
 
 The negative-lambda Taylor moment budget sharpens the local/mesoscopic side:
 
@@ -881,19 +2007,19 @@ normalizers, upper-wall violations, and overbound rows. This remains a
 diagnostic node only; it sharpens the open uniform-remainder target without
 proving any infinite Taylor-tail theorem.
 
-The negative-lambda defect-tail theorem target states the missing all-k
-upgrade:
+The negative-lambda defect-tail theorem target is now a historical
+simultaneous-target diagnostic:
 
 ```text
 outputs/jensen_window_pf_negative_lambda_defect_tail_theorem_target.md
 work/rh_compute/results/jensen_window_pf_negative_lambda_defect_tail_theorem_target.json
 ```
 
-It requires `0 <= d_k <= 2/(2*k+1)` for `k>=150` and `d_(k+1)<=d_k` for
-`k>=149`, using only noncircular estimates for the actual zeta heat-flow
-coefficients. It is an open theorem target: if proved, it would supply the
-tail part of the heat-flow cone-entry target, but it has no edge to
-`lambda_le_0_goal`.
+Its original all-three-lambda statement requires
+`0 <= d_k <= 2/(2*k+1)` for `k>=150` and `d_(k+1)<=d_k` for `k>=149`.
+The lambda=-100 theorem below proves both from `k=1`, so the
+one-entry-parameter route is discharged. No corresponding all-k theorem at
+lambda=-25 or -50 is claimed.
 
 The negative-lambda half-width tail record documents a rejected scaled-defect
 shortcut from the k150 frontier:
@@ -909,19 +2035,20 @@ blocks promotion of the half-width shortcut; a replacement exact-cone or
 adaptive scaled-defect theorem would still need the separate monotone bridge,
 and this node has no proving edge to `lambda_le_0_goal`.
 
-The adaptive scaled-defect target records the replacement route:
+The adaptive scaled-defect target records the historical simultaneous
+replacement route:
 
 ```text
 outputs/jensen_window_pf_negative_lambda_adaptive_scaled_defect_target.md
 work/rh_compute/results/jensen_window_pf_negative_lambda_adaptive_scaled_defect_target.json
 ```
 
-The target asks for the exact cone `0<=s_k<=1` or an explicit adaptive
-envelope from `k>=200`, plus the separate monotone defect bridge from
-`k>=199`. It is supported by the k200 frontier and the rejected half-width
-record, and it has a conditional `would_imply_if_proved` edge into the
-defect-tail theorem target. It remains open and has no proving edge to
-`lambda_le_0_goal`.
+The original target asks for the exact cone `0<=s_k<=1` or an explicit
+adaptive envelope from `k>=200`, plus the separate monotone defect bridge
+from `k>=199`, simultaneously on the exploratory lambda grid. The lambda=-100
+composition below proves the exact cone and bridge from `k=1`; the stronger
+simultaneous formulation is retained as diagnostic history and no longer has
+a `would_imply_if_proved` edge.
 
 The adaptive envelope matrix sharpens that replacement route:
 
@@ -946,10 +2073,10 @@ work/rh_compute/results/jensen_window_pf_negative_lambda_adaptive_envelope_oblig
 
 It records that the lower threshold `s_k<=1` is already the exact
 boundary-threshold lemma. The later kernel Mellin upper-wall certificate also
-discharges `x_k<=1` for every real lambda and every k. The open pieces are now
-`x_{k+1}>=x_k` and a noncircular limiting/adaptive envelope. This sharpens the
-adaptive scaled-defect target, but it remains an obligation diagnostic with
-no proving edge to `lambda_le_0_goal`.
+discharges `x_k<=1` for every real lambda and every k. Full cone entry and the
+raw corridor now discharge the adjacent wall and scaled-envelope obligations
+at lambda=-100. The all-three-lambda version remains historical, and this node
+has no proving edge to `lambda_le_0_goal`.
 
 The raw-moment bridge matrix rewrites those obligations in the moment-ratio
 language:
@@ -1055,9 +2182,17 @@ work/rh_compute/results/jensen_window_pf_negative_lambda_scaled_curvature_monoto
 It sets `C_k=(2*k+1)*B_k` and asks for `C_(k+1)>=C_k`, exactly equivalent to
 `B_(k+1)>=((2*k+1)/(2*k+3))*B_k`. The repaired k300 table validates 894/894
 scaled-curvature increase rows, while the retired fixed wall `C_k<=2/3` fails
-on 718/897 rows. This node is an open theorem target: together with the
-`B_k>=0` wall and the separate monotone-contraction upper side
-`B_(k+1)<=B_k`, it would feed the zeta-specific raw-corridor target.
+on 718/897 rows. The target is now discharged by
+
+```text
+outputs/jensen_window_pf_negative_lambda_scaled_curvature_continuous_bridge.md
+work/rh_compute/results/jensen_window_pf_negative_lambda_scaled_curvature_continuous_bridge.json
+```
+
+A `16,074`-block compact interval-Simpson theorem, an exact `u>=5` ray,
+the repaired `k<=318` prefix, and the complete-kernel perturbation transfer
+prove `C_(k+1)>=C_k` for every integer `k>=1` at `lambda=-100`. The node is
+therefore `interval_validated`, not an open blocker.
 
 The scaled-curvature log-ceiling bridge turns that target into raw-log
 recurrence form:
@@ -1756,9 +2891,9 @@ kappa_3,t(2*log(U))>=-37/(50*t^2), t>=318,
 ```
 
 would imply `L_k^(1)>=1/(4*k^2)` for all `k>=319`. The bridge itself is
-exact, but the displayed cumulant estimate remains open; finite floating
-samples do not promote it and the node has no proving edge to
-`lambda_le_0_goal`.
+exact. The later compact-plus-ray paired certificates discharge the displayed
+cumulant estimate; the historical finite floating samples are not used as
+the proof and the node has no proving edge to `lambda_le_0_goal`.
 
 The leading part of that cumulant estimate is now certified:
 
@@ -1891,6 +3026,53 @@ Hausdorff-defect sequence `x=(1/2,1,1,...)` satisfies the full static ratio
 cone and complete defect monotonicity but gives degree-3 Jensen discriminant
 `-27/16`; therefore this pattern cannot be promoted directly to the all-shape
 bridge.
+
+The multiplier-specific high-precision pass resolves those finite
+inconclusives for the negative-log channel:
+
+```text
+outputs/jensen_window_pf_multiplier_complete_monotonicity_frontier_scout.md
+work/rh_compute/results/jensen_window_pf_multiplier_complete_monotonicity_frontier_scout.json
+jensen_window_pf_multiplier_complete_monotonicity_frontier_scout
+```
+
+Using the dps220 coefficient sources through `A_57` and 250-digit derived Arb
+arithmetic, all 7980 intervals in the complete order-55 difference triangle
+are strictly positive on the five cached nonnegative heat parameters. This
+sharpens the counting-measure target but does not construct its required
+unit-atomic measure or promote finite complete monotonicity to PF-infinity.
+
+The exact Hausdorff bridge converts that finite pattern into the correct
+infinite recovery problem:
+
+```text
+outputs/jensen_window_pf_multiplier_hausdorff_uniqueness_bridge.md
+work/rh_compute/results/jensen_window_pf_multiplier_hausdorff_uniqueness_bridge.json
+jensen_window_pf_multiplier_hausdorff_uniqueness_bridge
+```
+
+It proves that the complete integer sequence `y_k=-log(x_k)` determines a
+unique finite measure `nu` on `[0,1]`. The multiplier product exists exactly
+when `dnu/dr=q(-log r)*sum_j r^alpha_j` for a unit counting measure, and the
+multiset is then unique. The bridge also retains the exact periodic-factor
+guard `sin(2*pi*s)`, so the continuous Mellin obstruction cannot be promoted
+without an additional canonical-interpolation or growth theorem.
+
+The first conditional atom constraints are interval-certified:
+
+```text
+outputs/jensen_window_pf_multiplier_leading_atom_bound_certificate.md
+work/rh_compute/results/jensen_window_pf_multiplier_leading_atom_bound_certificate.json
+jensen_window_pf_multiplier_leading_atom_bound_certificate
+```
+
+If the unit counting representation exists, the order-6 atom-kernel root lies
+in `(4.863538496,4.863538497)`, so its smallest atom exceeds
+`4.863538496`. All other available orders through 55 are weaker. The order-3
+count inequality also gives `N(11/2)<=1`. These are conditional constraints;
+they do not by themselves prove that an atom occurs below `11/2` or construct
+the measure. The later ratio composition uses the same cutoff to reject the
+unit-atomic measure entirely.
 
 The exact heat-flow hierarchy exposed by that guard is:
 
@@ -2216,8 +3398,9 @@ jensen_window_pf_newman_strict_laguerre_correlation_target
 For `phi_t(u)=exp(t*u^2)Phi(u)`, define
 `K_(1,t)(v)=integral phi_t(s+v)phi_t(s-v)s^2 ds`. Its Fourier transform is
 exactly `H_t'(xi/2)^2-H_t(xi/2)H_t''(xi/2)`. Positive-boundary attainment and
-Wiener's theorem show that `Lambda<=0` is equivalent to density in `L1(R)` of
-the translates of every `K_(1,t)`, `0<t<=1/2`.
+Wiener's theorem, together with the published Platt-Trudgian bound
+`Lambda<=1/5`, show that `Lambda<=0` is equivalent to density in `L1(R)` of
+the translates of every `K_(1,t)`, `0<t<=1/5`.
 
 An exact triangular-Gaussian convolution is smooth, positive, even, strictly
 log-concave, and positive definite, yet its nonnegative Fourier transform has
@@ -2225,6 +3408,77 @@ double zeros. The graph therefore blocks promotion from those generic kernel
 properties and records Xi-specific translate density, strict Fourier
 positivity, or a stronger total-positive factorization as the open theorem.
 This target has only a `would_imply_if_proved` edge to `lambda_le_0_goal`.
+
+A complementary Polymath-15 high-frequency route now has one proved
+asymptotic node, two exact route-classification nodes, and one sharply
+delimited open node:
+
+```text
+outputs/jensen_window_pf_newman_polymath15_oscillatory_zeta_handoff_theorem.md
+outputs/jensen_window_pf_newman_polymath15_cancellation_zero_free_wall_gate.md
+outputs/jensen_window_pf_newman_polymath15_gaussian_legendre_duality_gate.md
+outputs/jensen_window_pf_newman_polymath15_antedb_beta_frontier_audit.md
+outputs/jensen_window_pf_newman_polymath15_lambda01965_provenance_audit.md
+outputs/jensen_window_pf_newman_polymath15_critical_scaled_coercivity_target.md
+jensen_window_pf_newman_polymath15_oscillatory_zeta_handoff_theorem
+jensen_window_pf_newman_polymath15_cancellation_zero_free_wall_gate
+jensen_window_pf_newman_polymath15_gaussian_legendre_duality_gate
+jensen_window_pf_newman_polymath15_antedb_beta_frontier_audit
+jensen_window_pf_newman_polymath15_lambda01965_provenance_audit
+jensen_window_pf_newman_polymath15_critical_scaled_coercivity_target
+```
+
+For
+`c_*=4911678521/1933561194=2.540223984760008...`, the exponent-pair
+envelope, zeta-jet handoff, and exact Polymath-15 remainder transfer prove
+first-Laguerre positivity on every fixed scaled ray `c>=c_*+epsilon` once
+`L` is sufficiently large. This is an asymptotic theorem, but it supplies no
+practical `L_epsilon` and has no edge to `lambda_le_0_goal`.
+
+The wall gate then separates two analytically different burdens. On
+`2<c<=c_*`, the Euler product already gives a nonzero zeta floor and the
+missing input is stronger weighted exponential-sum cancellation. At `c=2`,
+a strict radius-proportional cancellation gain would hand off conditionally
+to published zeta 1-line bounds. For fixed `c<2`, the saddle lies on
+`Re(s_*)<1`, so exponent-pair improvement alone does not supply the missing
+phase-amplitude floor. This is a route boundary, not an impossibility theorem
+and not a proof of the inner Wronskian target.
+
+The Gaussian/Legendre gate then audits the natural heat-semigroup rewrite
+without adding a new analytic hypothesis. The finite Gaussian-shift identity
+is exact, and Legendre optimization shows that inserting the same pointwise
+partial-sum exponent profile reproduces the weighted dyadic frontier exactly.
+At `c_*`, equality occurs at
+`q_*=4800718975/7734244776`; at `c=2`, the unchanged deficit is
+`3133668399/48144906818`. Thus a same-input repackaging cannot lower `c_*`:
+the outer route needs a genuinely better partial-sum profile or cancellation
+beyond pointwise majorants. This node has no proving edge to the conclusion.
+
+The ANTEDB beta-frontier audit then checks whether that contact was an artifact
+of retaining the 2023 exponent-pair table. At pinned commit
+`99668603896af86e6cda90ed6755cf3116aab0ac`, four Tao-Trudgian-Yang and two
+Cushing post-2023 pairs improve intermediate radii, but both the exact current
+rational hull and the documented one-pass direct-beta envelope retain
+`alpha_*=62831/155153`, `beta_*=220633/620612`, and
+`c_*=4911678521/1933561194`. Twelve finite beta-only van der Corput passes also
+preserve that contact. This is a current-source finite nonpromotion result, not
+a claim of infinite transform closure or that future estimates cannot improve
+the frontier. It has no proving edge to the conclusion.
+
+The Lambda 0.1965 provenance audit keeps a separate literature-status gate.
+The peer-reviewed record is `0<=Lambda<=1/5`; a June 2026 Zenodo preprint
+claims `Lambda<=393/2000`. Its archive integrity, exact row arithmetic, and
+22 portable certificate invocations passed locally, while three FLINT/Arb
+producer packages and independent theorem-to-code review remain outside this
+audit. The graph therefore labels 0.1965 as a reproduced unrefereed candidate.
+If accepted, its only edge sharpens the hypothetical positive-boundary range
+to `(0,393/2000]`; it supplies no exclusion theorem and no proving edge.
+
+The surviving high-frequency target is the corrected finite Riemann-Siegel
+coercivity inequality on `0<=c<=c_*+o(1)`. Its edge supports the broader
+strict-correlation target only: even proving it would still leave the compact
+`x` and all-time uniform arguments visible rather than promoting directly to
+the conclusion.
 
 The first stronger correlation criterion has now been audited:
 
@@ -2247,6 +3501,130 @@ The graph therefore sharpens the strict-correlation target to
 tail-compatible spectral-square or relative hierarchy-coercivity arguments.
 This exact gate blocks three attractive generic promotions but has no edge to
 `lambda_le_0_goal`.
+
+The surviving shape information is now exact and uniform on the target window:
+
+```text
+outputs/jensen_window_pf_newman_positive_time_strong_logconcavity_gate.md
+work/rh_compute/results/jensen_window_pf_newman_positive_time_strong_logconcavity_gate.json
+jensen_window_pf_newman_positive_time_strong_logconcavity_gate
+```
+
+The published strict concavity of `log(Phi(sqrt(r)))` implies
+`(log Phi)''(u)<=-kappa` globally, where an Arb origin certificate gives
+`kappa=74.9076197180...`. Consequently `phi_t=exp(tu^2)Phi` is uniformly
+strongly log-concave and admissible throughout `0<=t<=1/5`. The joint Hessian
+bound and Prekopa marginalization propagate
+`(log K_(n,t))''<=-2(kappa-2t)` to every correlation.
+
+This strong shape theorem still cannot be promoted to transform zero-freeness:
+`Fourier[K_(0,t)](xi)=2H_t(xi/2)^2`, and Hardy's theorem gives real double
+zeros at `t=0`. Thus even an Xi correlation with the certified strong
+log-concavity, positive definiteness, and super-Gaussian tail can have Fourier
+zeros. The graph sharpens the live target to the `s^2` weighting or a relative
+hierarchy-coercivity argument and gives this node no edge to
+`lambda_le_0_goal`.
+
+The generic first-weighted-correlation implication is now closed as well:
+
+```text
+outputs/jensen_window_pf_newman_weighted_strong_logconcavity_countermodel_gate.md
+work/rh_compute/results/jensen_window_pf_newman_weighted_strong_logconcavity_countermodel_gate.json
+jensen_window_pf_newman_weighted_strong_logconcavity_countermodel_gate
+```
+
+For
+`phi_(delta,epsilon)(u)=exp(-u^2-delta*u^4-epsilon(cosh(4u)-1))*(1+u^4/10)`,
+an elementary rational bound gives
+`(log phi_(delta,epsilon))''<=-(2-6/sqrt(10))-12delta*u^2-16epsilon*cosh(4u)`.
+At `delta=1/10`, `epsilon=1/1000`, this is a smooth positive even uniformly
+strongly log-concave admissible kernel with theta-type double-exponential decay.
+It also satisfies
+
+```text
+d^2/dr^2[-r-r^2/10+log(1+r^2/10)]
+ =-r^2(r^2+30)/(5(r^2+10)^2)<0,
+d^2/dr^2 cosh(4sqrt(r))>0               (r>0),
+```
+
+so subtracting `(cosh(4sqrt(r))-1)/1000` preserves strict root-variable
+concavity, matching the stronger shape known for the Xi kernel. At
+`delta=epsilon=0`, exact Gaussian differentiation supplies the cross-check
+
+```text
+L_1[F_0](3)=-743*pi*exp(-9/2)/51200<0.
+```
+
+A 256-bit Acb integral with explicit Arb tails directly certifies
+
+```text
+L_1[F_(1/10,1/1000)](21/5)
+ =[-0.000213478480591774964507646766853475076598648832979809
+   +/- 5.09e-55]<0.
+```
+
+The exact correlation identity yields
+`Fourier[K_(1,1/10,1/1000)](42/5)<0`. Thus even root-variable concavity,
+uniform strong log-concavity, theta-tail decay, and admissibility fail after
+the `s^2` weighting: they do not imply positive definiteness of `K_1`, let
+alone strict positivity. This countermodel blocks generic
+Xi-style-shape-and-tail-plus-weighting promotion and leaves Xi arithmetic,
+modular grouping, or relative hierarchy coercivity as the live input. It has
+no edge to `lambda_le_0_goal`.
+
+The stronger strict-monotonicity subroute now has a rigorous counter-gate:
+
+```text
+outputs/jensen_window_pf_newman_strict_laguerre_monotonicity_scout.md
+work/rh_compute/results/jensen_window_pf_newman_strict_laguerre_monotonicity_scout.json
+jensen_window_pf_newman_strict_laguerre_monotonicity_scout
+```
+
+Writing `L_t=H_t'^2-H_tH_t''` and
+`M_t=-L_t'=H_tH_t'''-H_t'H_t''`, the exact zero limit gives
+
+```text
+M_t(x)>0 for x>0
+  => L_t(x)=integral_x^infinity M_t(y)dy>0.
+```
+
+Thus this strict monotonicity throughout `0<t<=1/5` would imply
+`Lambda<=0`. The correlation and endpoint-subtracted theta forms are
+
+```text
+M_t(x)=4 integral_0^infinity v*K_(1,t)(v)*sin(2xv)dv,
+64M_t=(A_t+1/2)A_t'''-A_t'A_t'',  A_t=8H_t-1/2.
+```
+
+For `Q_t(s)=integral_s^infinity v*K_(1,t)(v)dv`, one also has
+
+```text
+M_t(x)=8x integral_0^infinity Q_t(s)cos(2xs)ds.
+```
+
+Strong log-concavity makes `Q_t` concave then convex with exactly one
+inflection, and parity blocks the elementary fixed-interior shift criterion.
+Those obstructions no longer call for a harder boundary contour theorem,
+because the desired sign itself is false. At
+`x=1401016343/100000`, a 256-bit Arb Xi jet certifies
+
+```text
+M_0(x)/A_0(x)^2=-3.2418674697568...e-6<0,
+M_0(x)/L_0(x)=-0.0001463088540165...<0.
+```
+
+Continuity in heat time preserves this sign for all sufficiently small
+positive `t`, rejecting the universal condition. The exact close-pair law
+
+```text
+M[F](m)=-4a^2G(m)G'(m)+a^4(G(m)G'''(m)-G'(m)G''(m))
+```
+
+explains why all 12000 moderate rows and 20 selected rows through `x=200`
+had the expected sign. The graph now gives this node a rejection edge to the
+open strict-correlation target: it closes only global strict decrease, while
+direct strict-Laguerre positivity, Wiener density, and corrected `C1`
+double-zero transversality remain live.
 
 The surviving arithmetic spectral-square route has also been audited:
 
@@ -2360,6 +3738,58 @@ independently LP positive residual. The graph now hands only higher shifts or
 a genuinely coupled matrix square to the open strict-correlation target. This
 node has no edge to `lambda_le_0_goal`.
 
+The higher-shift option now has an exact regularization gate:
+
+```text
+outputs/jensen_window_pf_newman_theta_bessel_higher_shift_regularization_gate.md
+work/rh_compute/results/jensen_window_pf_newman_theta_bessel_higher_shift_regularization_gate.json
+jensen_window_pf_newman_theta_bessel_higher_shift_regularization_gate
+```
+
+Every symmetrized arithmetic theta block has an exact Bessel-K expansion with
+coefficients
+
+```text
+c_(n,m)=pi^m*n^(2m)*(2*pi^2*n^4-3m)/m!.
+```
+
+For fixed `n` the expansion has an integrable absolute majorant and may be
+transformed term by term. The coefficients are intrinsically signed, with the
+first `n=1` negative coefficient at `m=7`. More decisively, the fixed-block
+zero-frequency transforms equal a negative constant times `n^(-1/2)`, so
+their ordinary arithmetic sum diverges while the complete Xi transform is
+finite. The graph therefore closes naive termwise higher-shift summation and
+hands only modularly grouped mixed-term matrices or a sign-preserving
+renormalized summation theorem to the strict-correlation target. This node has
+no edge to `lambda_le_0_goal`.
+
+The divergent higher-shift transform now has an exact endpoint
+renormalization:
+
+```text
+outputs/jensen_window_pf_newman_theta_cell_renormalization_gate.md
+work/rh_compute/results/jensen_window_pf_newman_theta_cell_renormalization_gate.json
+jensen_window_pf_newman_theta_cell_renormalization_gate
+```
+
+The continuous theta-index integral vanishes pointwise. Subtracting its cells
+from the integer blocks therefore leaves `Phi` unchanged while producing
+normal convergence in every polynomially weighted `L1` norm. The transformed
+series is Euler's convergent sum-integral formula for zeta, every renormalized
+block is positive at zero frequency, and the endpoint first Laguerre
+expression becomes an absolutely convergent mixed-term matrix.
+
+This repair is endpoint-only. Every cell block has tail
+
+```text
+r_n(u)=-(pi/2)*(3n-1)exp(-5u)+O_n(exp(-9u)),
+```
+
+so multiplication by `exp(tu^2)` is nonintegrable for every `t>0`. The graph
+therefore hands a t-compatible modular grouping, not the endpoint cell blocks,
+to the strict-correlation target. This node has no edge to
+`lambda_le_0_goal`.
+
 The moment integral also has an exact Laguerre scale-kernel gate:
 
 ```text
@@ -2393,7 +3823,7 @@ and a fractional pointwise power has discriminant `<-27/125`. Thus the live
 canonical-product target requires a genuine counting measure; naive convex or
 arbitrary positive-measure integration is blocked.
 
-That sufficient subclass is now an explicit open target:
+That sufficient subclass was isolated as an explicit target:
 
 ```text
 outputs/jensen_window_pf_multiplier_counting_measure_target.md
@@ -2404,9 +3834,20 @@ jensen_window_pf_multiplier_counting_measure_target
 After normalizing `B_0=B_1=1`, it asks for a convergent unit-atomic product
 `B_k=product_j M_k^(alpha_j)`, equivalently
 `-log x_k=sum_j -log(1-1/(k+alpha_j)^2)`, derived directly from Phi/Newman
-data. Proving this would close the Jensen-window multiplier target. No atoms or
-product identity are currently constructed, and the finite log-difference
-certificate is necessary evidence only.
+data. The later interval certificate now rejects this sufficient subclass:
+
+```text
+outputs/jensen_window_pf_multiplier_unit_atomic_obstruction_certificate.md
+work/rh_compute/results/jensen_window_pf_multiplier_unit_atomic_obstruction_certificate.json
+jensen_window_pf_multiplier_unit_atomic_obstruction_certificate
+```
+
+The order-6 magnitude bound forces every unit atom above `4.863538496`.
+Exact monotonicity of the one-atom consecutive-moment ratio would then cap
+`a_7/a_6`, but Arb proves the actual ratio exceeds that cap by more than
+`7.68e-4`. The target node is therefore a validated rejected-route record,
+not an open blocker. General multiplier sequences and the other all-order
+Jensen/PF bridges remain open.
 
 The natural continuous-index strengthening now has a rigorous obstruction:
 
@@ -2569,19 +4010,40 @@ while the raw upper wall holds. This forces the adaptive route to use
 zeta-specific all-`k` structure and has only `blocks_promotion` edges, never a
 proving edge to `lambda_le_0_goal`.
 
-The zeta-specific raw-corridor theorem target names that missing structure:
+The historical zeta-specific raw-corridor target names that structure:
 
 ```text
 outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md
 work/rh_compute/results/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.json
 ```
 
-It asks for the actual negative-lambda zeta raw ratios to satisfy the upper
-raw wall and adaptive corridor on the required tail. The k200 prefix supplies
-finite support, while generic Stieltjes and positive Gaussian-mixture shortcuts
-are blocked. A proved version would conditionally feed the adaptive
-scaled-defect target, but this node is still open and `lambda_le_0_goal` is
-blocked by it.
+The target is now discharged at `lambda=-100` by
+
+```text
+outputs/jensen_window_pf_negative_lambda_m100_raw_corridor_certificate.md
+work/rh_compute/results/jensen_window_pf_negative_lambda_m100_raw_corridor_certificate.json
+```
+
+Full ratio-cone entry supplies `B_k>=0` and `B_(k+1)<=B_k`; the scaled-
+curvature theorem supplies `B_(k+1)>=((2*k+1)/(2*k+3))*B_k`; and the exact
+linear-to-nonlinear calculus lemma proves the complete raw-ratio decrement
+corridor for every `k>=1`. This node is `interval_validated` and is no longer
+a blocker for `lambda_le_0_goal`; the all-order Jensen/PF bridge remains open.
+
+The adaptive-defect composition carries that theorem into the old defect
+coordinates:
+
+```text
+outputs/jensen_window_pf_negative_lambda_m100_adaptive_defect_certificate.md
+work/rh_compute/results/jensen_window_pf_negative_lambda_m100_adaptive_defect_certificate.json
+```
+
+At lambda=-100, full cone entry gives
+`0<=d_k<=2/(2*k+1)`, `d_(k+1)<=d_k`, and `0<=s_k<=1` for every `k>=1`.
+The upper raw-corridor wall is exactly `s_(k+1)>=s_k`. This closes the
+parameter-specific defect-tail and adaptive-defect routes while preserving
+the stronger simultaneous lambda=-25,-50,-100 statements as unproved audit
+history. The certificate has no edge to `lambda_le_0_goal`.
 
 The monotone-contraction stress artifact supports that frontier scout on the
 existing zeta coefficient cache:

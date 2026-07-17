@@ -1,0 +1,437 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_normalized_laguerre_bridge",
+  "date": "2026-07-16",
+  "status": "exact normalized-curvature transfer from the published Polymath-15 effective Riemann-Siegel theorem; not a proof of Lambda<=0 or RH",
+  "proof_boundary": "This artifact proves the real-axis collapse, amplitude-normalized Laguerre identity, Cauchy jet-transfer lemma, perturbation criterion, and the t*log(x) boundary-layer reduction. It does not prove a uniform finite-main curvature margin, cutoff-transition collars, strict Laguerre positivity, Lambda<=0, or RH.",
+  "source": {
+    "title": "Effective approximation of heat flow evolution of the Riemann xi function, and a new upper bound for the de Bruijn-Newman constant",
+    "authors": "D. H. J. Polymath",
+    "url": "https://arxiv.org/abs/1904.12438",
+    "theorem": "Theorem 1.3 (effective Riemann-Siegel approximation)"
+  },
+  "parameters": {
+    "diagnostic_dps": 60,
+    "diagnostic_x_values": [
+      200,
+      1000,
+      10000,
+      1000000
+    ],
+    "diagnostic_t_values": [
+      "0",
+      "0.01",
+      "0.1",
+      "0.5"
+    ]
+  },
+  "exact": {
+    "published_input": {
+      "region": "0<t<=1/2, 0<=y<=1, x>=200",
+      "normalizer": "B_t(x+i*y)=M_t((1+y-i*x)/2)",
+      "M_t": "M_t(s)=exp((t/4)*alpha(s)^2)*M_0(s)",
+      "alpha": "alpha(s)=1/(2s)+1/(s-1)+(1/2)Log(s/(2*pi))",
+      "cutoff": "N=floor(sqrt(x/(4*pi)+t/16))",
+      "coefficient": "b_n^t=exp((t/4)*log(n)^2)",
+      "estimate": "H_t(x+i*y)/B_t(x+i*y)=f_t(x+i*y)+r_t(x+i*y), |r_t|<=e_A+e_B+e_C0"
+    },
+    "real_axis": {
+      "s_minus": "s=(1-i*x)/2",
+      "shifted_exponent": "s_*=s+(t/2)*alpha(s)",
+      "dirichlet_sum": "D_(N,t)(x)=sum_(n<=N) exp((t/4)*log(n)^2)*n^(-s_*)",
+      "collapse": "f_t(x)=D_(N,t)(x)+(conj(B_t(x))/B_t(x))*conj(D_(N,t)(x))",
+      "real_main": "P_(N,t)(x)=2*Re(exp(i*beta_t(x))*D_(N,t)(x)), B_t(x)=A_t(x)*exp(i*beta_t(x))"
+    },
+    "normalized_curvature": "L[H_t]=A_t^2*C_t[Z_t], Z_t=H_t/A_t, C_t[Z]=Z'^2-Z*Z''+V_t*Z^2, V_t=-(log A_t)''",
+    "phase_geometry": {
+      "log_derivatives": "g_t'=alpha+(t/2)*alpha*alpha'; g_t''=alpha'+(t/2)*(alpha'^2+alpha*alpha'')",
+      "beta_first": "beta_t'=-(1/2)*Re(g_t'(s))",
+      "beta_second": "beta_t''=-(1/4)*Im(g_t''(s))",
+      "potential": "V_t=(1/4)*Re(g_t''(s))"
+    },
+    "cauchy_transfer": {
+      "hypothesis": "r=H_t/B_t-f_(N,t) is holomorphic on |z-x|<=rho and sup|r|<=E_rho",
+      "epsilon_0": "eps_0=E_rho",
+      "epsilon_1": "eps_1=(1/rho+|beta'|)*E_rho",
+      "epsilon_2": "eps_2=(2/rho^2+2*|beta'|/rho+|beta''|+beta'^2)*E_rho",
+      "conclusion": "|(Z_t-P_(N,t))^(j)|<=eps_j for j=0,1,2"
+    },
+    "curvature_error": "Err=2*|P'|*eps_1+eps_1^2+|P|*eps_2+eps_0*|P''|+eps_0*eps_2+|V|*(2*|P|*eps_0+eps_0^2); C[P]>Err implies L[H_t]>0",
+    "single_saddle": "P_0=2*cos(beta); C[P_0]=4*beta'^2+2*beta''*sin(2*beta)+4*V*cos(beta)^2",
+    "cell": "For fixed N, 4*pi*(N^2-t/16)<=x<4*pi*((N+1)^2-t/16); a Cauchy disk must remain in one cell.",
+    "boundary_layer": "|b_n^t*n^(-s_*)|<=n^(-1/2)*exp(-(t/4)*log(n)*log((x/(4*pi))/n)+(t/(2*x^2))*log(n)); hence n>=2 dominance is controlled by t*log(x), and the nonuniform regime is t*log(x)=O(1)."
+  },
+  "diagnostics": [
+    {
+      "t": "0",
+      "x": 200,
+      "beta_first": "-0.69181390516811680984359835600114606",
+      "beta_second": "-0.0012500937445314648364260131765749130",
+      "potential": "0.000043747031371089550915523254515072212",
+      "single_saddle_lower_without_potential": "1.9119257300467775441525387639886689"
+    },
+    {
+      "t": "0",
+      "x": 1000,
+      "beta_first": "-1.0941823830036490643106878278621119",
+      "beta_second": "-0.00025000074999825000274999625000474999",
+      "potential": "0.0000017499952500077499892500137499832500",
+      "single_saddle_lower_without_potential": "4.7884403476021801910600625490554395"
+    },
+    {
+      "t": "0",
+      "x": 10000,
+      "beta_first": "-1.6698290275017230295235180977836826",
+      "beta_second": "-0.000025000000749999982500000274999996250",
+      "potential": "0.000000017499999525000007749999892500001375",
+      "single_saddle_lower_without_potential": "11.153265924347900342743891983579169"
+    },
+    {
+      "t": "0",
+      "x": 1000000,
+      "beta_first": "-2.8211215777483708277825147209591933",
+      "beta_second": "-0.00000025000000000074999999999825000000000",
+      "potential": "1.7499999999952500000000077500000000e-12",
+      "single_saddle_lower_without_potential": "31.834907325749828435577062324451961"
+    },
+    {
+      "t": "0.01",
+      "x": 200,
+      "beta_first": "-0.69182410991606222690198254219868527",
+      "beta_second": "-0.0012500418750394087144689681031947286",
+      "potential": "0.000043798952052978097661845062878228628",
+      "single_saddle_lower_without_potential": "1.9119823124945281812479012987413707"
+    },
+    {
+      "t": "0.01",
+      "x": 1000,
+      "beta_first": "-1.0941843760512091551273429060595175",
+      "beta_second": "-0.00024999873614289492998357187920967307",
+      "potential": "0.0000017541888986231882834082928387236720",
+      "single_saddle_lower_without_potential": "4.7884577977060097737385135521550840"
+    },
+    {
+      "t": "0.01",
+      "x": 10000,
+      "beta_first": "-1.6698292243482099113005778396918047",
+      "beta_second": "-0.000024999981024406105596556427441703411",
+      "potential": "0.000000017570963512580096476713546474355213",
+      "single_saddle_lower_without_potential": "11.153268553987328580083029254890243"
+    },
+    {
+      "t": "0.01",
+      "x": 1000000,
+      "beta_first": "-2.8211215797119562255372468878629018",
+      "beta_second": "-0.00000024999999803708336297826477918606212",
+      "potential": "1.7628555803953593358484522190094571e-12",
+      "single_saddle_lower_without_potential": "31.834907370065937461192945220600417"
+    },
+    {
+      "t": "0.1",
+      "x": 200,
+      "beta_first": "-0.69191595264757098042744021797653822",
+      "beta_second": "-0.0012495750496109036168555624427730691",
+      "potential": "0.000044266238189975018378741338146636370",
+      "single_saddle_lower_without_potential": "1.9124915920135609417238868966360702"
+    },
+    {
+      "t": "0.1",
+      "x": 1000,
+      "beta_first": "-1.0942023134792499724772386098361684",
+      "beta_second": "-0.00024998061144469927508575254205398077",
+      "potential": "0.0000017919317361621329308328046373874694",
+      "single_saddle_lower_without_potential": "4.7886148500704819054867972532787477"
+    },
+    {
+      "t": "0.1",
+      "x": 10000,
+      "beta_first": "-1.6698309959665918472941155168649034",
+      "beta_second": "-0.000024999803494061213465561799417067856",
+      "potential": "0.000000018209639400800895017136432243539755",
+      "single_saddle_lower_without_potential": "11.153292220756132190318435842794657"
+    },
+    {
+      "t": "0.1",
+      "x": 1000000,
+      "beta_first": "-2.8211215973842248053298363899962774",
+      "beta_second": "-0.00000024999998036408362978266354186062120",
+      "potential": "1.8785558039963433584844524400945711e-12",
+      "single_saddle_lower_without_potential": "31.834907768910920079776232425156022"
+    },
+    {
+      "t": "0.5",
+      "x": 200,
+      "beta_first": "-0.69232414256538766276280766587810687",
+      "beta_second": "-0.0012475002699286587385737595075656935",
+      "potential": "0.000046343065465516888231613672672893000",
+      "single_saddle_lower_without_potential": "1.9147558729757395679586746521230940"
+    },
+    {
+      "t": "0.5",
+      "x": 1000,
+      "beta_first": "-1.0942820353816536051434417377323944",
+      "beta_second": "-0.00024990005723049636442877771025090385",
+      "potential": "0.0000019596776807796646971639681870043468",
+      "single_saddle_lower_without_potential": "4.7893128917215973774653954752133694"
+    },
+    {
+      "t": "0.5",
+      "x": 10000,
+      "beta_first": "-1.6698388698260671183765051931897868",
+      "beta_second": "-0.000024999014470306137327807897085354279",
+      "potential": "0.000000021048198904004444085682591217693275",
+      "single_saddle_lower_without_potential": "11.153397406699047895798192304206563"
+    },
+    {
+      "t": "0.5",
+      "x": 1000000,
+      "beta_first": "-2.8211216759276407155191230661446134",
+      "beta_second": "-0.00000024999990181741814891332470930310597",
+      "potential": "2.3927790200007167924222312004728555e-12",
+      "single_saddle_lower_without_potential": "31.834909541555317501913827032850125"
+    }
+  ],
+  "rows": [
+    {
+      "id": "np15nlb_01_published_input",
+      "role": "published_theorem_input",
+      "readiness": "available_published",
+      "claim": "Polymath 15 supplies an effective positive-time Riemann-Siegel approximation with the saddle-scale cutoff.",
+      "formula": "H_t(x+i*y)/B_t(x+i*y)=f_t(x+i*y)+r_t(x+i*y), |r_t|<=e_A+e_B+e_C0",
+      "proof_boundary": "Imported theorem; this artifact does not reprove its analytic estimates.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15nlb_02_real_axis_collapse",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "On the real axis the two complex saddle sums collapse to one real Hardy-type finite sum.",
+      "formula": "P_(N,t)(x)=2*Re(exp(i*beta_t(x))*D_(N,t)(x)), B_t(x)=A_t(x)*exp(i*beta_t(x))",
+      "proof_boundary": "Exact conjugation algebra for a fixed cutoff N.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15nlb_03_normalized_curvature",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "Positive Laguerre curvature is invariant under the nonvanishing amplitude after adding an explicit potential.",
+      "formula": "L[H_t]=A_t^2*C_t[Z_t], Z_t=H_t/A_t, C_t[Z]=Z'^2-Z*Z''+V_t*Z^2, V_t=-(log A_t)''",
+      "proof_boundary": "Exact product differentiation; no sign is assumed.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15nlb_04_phase_potential",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The normalizer phase derivatives and curvature potential are explicit elementary functions.",
+      "formula": "g_t'=alpha+(t/2)*alpha*alpha'; g_t''=alpha'+(t/2)*(alpha'^2+alpha*alpha'')",
+      "proof_boundary": "Exact differentiation of the published normalizer.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15nlb_05_cauchy_jet_transfer",
+      "role": "exact_lemma",
+      "readiness": "conditional_ready",
+      "claim": "A uniform holomorphic remainder bound on one cutoff cell gives explicit zeroth-through-second real jet errors.",
+      "formula": "|(Z_t-P_(N,t))^(j)|<=eps_j for j=0,1,2",
+      "proof_boundary": "Requires a disk staying inside the theorem region with one fixed N.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15nlb_06_curvature_error",
+      "role": "exact_lemma",
+      "readiness": "conditional_ready",
+      "claim": "The finite main curvature has an explicit sufficient margin over the transferred remainder.",
+      "formula": "Err=2*|P'|*eps_1+eps_1^2+|P|*eps_2+eps_0*|P''|+eps_0*eps_2+|V|*(2*|P|*eps_0+eps_0^2); C[P]>Err implies L[H_t]>0",
+      "proof_boundary": "A sufficient criterion; its uniform main-sum margin remains to be proved.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15nlb_07_single_saddle",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The n=1 saddle has a phase-speed curvature floor before all arithmetic perturbations.",
+      "formula": "P_0=2*cos(beta); C[P_0]=4*beta'^2+2*beta''*sin(2*beta)+4*V*cos(beta)^2",
+      "proof_boundary": "Exact formula; global positivity of its lower bound is not inferred from samples.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15nlb_08_phase_scout",
+      "role": "finite_diagnostic",
+      "readiness": "diagnostic_only",
+      "claim": "Sampled normalizer potential and phase-only curvature lower bounds are positive throughout the tested range.",
+      "formula": "V_t>0 and 4*beta_t'^2-2*|beta_t''|>0 on all 16 sampled points",
+      "proof_boundary": "Point diagnostics only, not an interval or ray proof.",
+      "diagnostics": [
+        {
+          "t": "0",
+          "x": 200,
+          "beta_first": "-0.69181390516811680984359835600114606",
+          "beta_second": "-0.0012500937445314648364260131765749130",
+          "potential": "0.000043747031371089550915523254515072212",
+          "single_saddle_lower_without_potential": "1.9119257300467775441525387639886689"
+        },
+        {
+          "t": "0",
+          "x": 1000,
+          "beta_first": "-1.0941823830036490643106878278621119",
+          "beta_second": "-0.00025000074999825000274999625000474999",
+          "potential": "0.0000017499952500077499892500137499832500",
+          "single_saddle_lower_without_potential": "4.7884403476021801910600625490554395"
+        },
+        {
+          "t": "0",
+          "x": 10000,
+          "beta_first": "-1.6698290275017230295235180977836826",
+          "beta_second": "-0.000025000000749999982500000274999996250",
+          "potential": "0.000000017499999525000007749999892500001375",
+          "single_saddle_lower_without_potential": "11.153265924347900342743891983579169"
+        },
+        {
+          "t": "0",
+          "x": 1000000,
+          "beta_first": "-2.8211215777483708277825147209591933",
+          "beta_second": "-0.00000025000000000074999999999825000000000",
+          "potential": "1.7499999999952500000000077500000000e-12",
+          "single_saddle_lower_without_potential": "31.834907325749828435577062324451961"
+        },
+        {
+          "t": "0.01",
+          "x": 200,
+          "beta_first": "-0.69182410991606222690198254219868527",
+          "beta_second": "-0.0012500418750394087144689681031947286",
+          "potential": "0.000043798952052978097661845062878228628",
+          "single_saddle_lower_without_potential": "1.9119823124945281812479012987413707"
+        },
+        {
+          "t": "0.01",
+          "x": 1000,
+          "beta_first": "-1.0941843760512091551273429060595175",
+          "beta_second": "-0.00024999873614289492998357187920967307",
+          "potential": "0.0000017541888986231882834082928387236720",
+          "single_saddle_lower_without_potential": "4.7884577977060097737385135521550840"
+        },
+        {
+          "t": "0.01",
+          "x": 10000,
+          "beta_first": "-1.6698292243482099113005778396918047",
+          "beta_second": "-0.000024999981024406105596556427441703411",
+          "potential": "0.000000017570963512580096476713546474355213",
+          "single_saddle_lower_without_potential": "11.153268553987328580083029254890243"
+        },
+        {
+          "t": "0.01",
+          "x": 1000000,
+          "beta_first": "-2.8211215797119562255372468878629018",
+          "beta_second": "-0.00000024999999803708336297826477918606212",
+          "potential": "1.7628555803953593358484522190094571e-12",
+          "single_saddle_lower_without_potential": "31.834907370065937461192945220600417"
+        },
+        {
+          "t": "0.1",
+          "x": 200,
+          "beta_first": "-0.69191595264757098042744021797653822",
+          "beta_second": "-0.0012495750496109036168555624427730691",
+          "potential": "0.000044266238189975018378741338146636370",
+          "single_saddle_lower_without_potential": "1.9124915920135609417238868966360702"
+        },
+        {
+          "t": "0.1",
+          "x": 1000,
+          "beta_first": "-1.0942023134792499724772386098361684",
+          "beta_second": "-0.00024998061144469927508575254205398077",
+          "potential": "0.0000017919317361621329308328046373874694",
+          "single_saddle_lower_without_potential": "4.7886148500704819054867972532787477"
+        },
+        {
+          "t": "0.1",
+          "x": 10000,
+          "beta_first": "-1.6698309959665918472941155168649034",
+          "beta_second": "-0.000024999803494061213465561799417067856",
+          "potential": "0.000000018209639400800895017136432243539755",
+          "single_saddle_lower_without_potential": "11.153292220756132190318435842794657"
+        },
+        {
+          "t": "0.1",
+          "x": 1000000,
+          "beta_first": "-2.8211215973842248053298363899962774",
+          "beta_second": "-0.00000024999998036408362978266354186062120",
+          "potential": "1.8785558039963433584844524400945711e-12",
+          "single_saddle_lower_without_potential": "31.834907768910920079776232425156022"
+        },
+        {
+          "t": "0.5",
+          "x": 200,
+          "beta_first": "-0.69232414256538766276280766587810687",
+          "beta_second": "-0.0012475002699286587385737595075656935",
+          "potential": "0.000046343065465516888231613672672893000",
+          "single_saddle_lower_without_potential": "1.9147558729757395679586746521230940"
+        },
+        {
+          "t": "0.5",
+          "x": 1000,
+          "beta_first": "-1.0942820353816536051434417377323944",
+          "beta_second": "-0.00024990005723049636442877771025090385",
+          "potential": "0.0000019596776807796646971639681870043468",
+          "single_saddle_lower_without_potential": "4.7893128917215973774653954752133694"
+        },
+        {
+          "t": "0.5",
+          "x": 10000,
+          "beta_first": "-1.6698388698260671183765051931897868",
+          "beta_second": "-0.000024999014470306137327807897085354279",
+          "potential": "0.000000021048198904004444085682591217693275",
+          "single_saddle_lower_without_potential": "11.153397406699047895798192304206563"
+        },
+        {
+          "t": "0.5",
+          "x": 1000000,
+          "beta_first": "-2.8211216759276407155191230661446134",
+          "beta_second": "-0.00000024999990181741814891332470930310597",
+          "potential": "2.3927790200007167924222312004728555e-12",
+          "single_saddle_lower_without_potential": "31.834909541555317501913827032850125"
+        }
+      ]
+    },
+    {
+      "id": "np15nlb_09_scale_match",
+      "role": "exact_handoff",
+      "readiness": "ready_to_apply",
+      "claim": "The discovered modular-blend saddle scale matches the cutoff in the published theorem.",
+      "formula": "N=floor(sqrt(x/(4*pi)+t/16))",
+      "proof_boundary": "Leading-scale match; the two decompositions have different remainders.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15nlb_10_transition_collar",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "Cauchy differentiation leaves discrete collars at cutoff transitions.",
+      "formula": "For fixed N, 4*pi*(N^2-t/16)<=x<4*pi*((N+1)^2-t/16); a Cauchy disk must remain in one cell.",
+      "proof_boundary": "Needs overlapping adjacent-N estimates or a direct transition-collar theorem.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15nlb_11_boundary_layer",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "Single-saddle dominance is nonuniform only in the shrinking boundary layer t*log(x)=O(1).",
+      "formula": "|b_n^t*n^(-s_*)|<=n^(-1/2)*exp(-(t/4)*log(n)*log((x/(4*pi))/n)+(t/(2*x^2))*log(n)); hence n>=2 dominance is controlled by t*log(x), and the nonuniform regime is t*log(x)=O(1).",
+      "proof_boundary": "Coefficient reduction only; no uniform tail constant or Laguerre sign is proved.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15nlb_12_live_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "The live tail programme splits into a dominant-saddle ray and a near-zero-time arithmetic boundary layer.",
+      "formula": "Prove C[P_0+q]>Err for t*log(x)>=C, certify cutoff collars, then retain the full Dirichlet coupling for 0<t*log(x)<C.",
+      "proof_boundary": "Open; not strict Laguerre positivity, Lambda<=0, or RH.",
+      "diagnostics": null
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/abs/1904.12438",
+    "outputs/jensen_window_pf_newman_theta_modular_blend_adaptive_saddle_gate.md",
+    "outputs/jensen_window_pf_newman_strict_laguerre_correlation_target.md"
+  ]
+}

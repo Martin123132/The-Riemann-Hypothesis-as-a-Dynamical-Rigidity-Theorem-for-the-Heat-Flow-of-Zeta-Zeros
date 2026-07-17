@@ -1,0 +1,164 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_critical_C1_cell_remainder_certificate",
+  "date": "2026-07-17",
+  "status": "explicit corrected C1 remainder certificate on critical fixed-cutoff cells with L>=50; not corrected transversality, Lambda<=0, or RH",
+  "proof_boundary": "This artifact proves the stated corrected normalized C1 remainder bounds on radius-1/L disks contained in one prescribed-N cell. It does not cover cutoff-crossing disks, prove the corrected-main first-jet lower bound, close lower frequencies, exclude a positive Newman boundary, prove Lambda<=0, or prove RH.",
+  "exact": {
+    "region": "L=log(x/(4*pi))>=50, 0<t<=1/2, 0<t*L<=25, rho=1/L, and the radius-rho disk stays in one prescribed-N cell",
+    "collar_geometry": "On |z-x|<=1/L: X=Re z satisfies L-1<=log(X/(4*pi))<=L+1 and 0<=|Im z|<=1/L",
+    "coefficient_sum": "sum_(n<=N)(1+|gamma|N^|kappa|n^y)b_n^t*n^(-Re s_*) <=50*exp(L/4)",
+    "eAB": "e_A+e_B<1000*exp(-3L/4)",
+    "eC": "e_C<100*exp(-3L/4)",
+    "normalizer": "sup_collar |B_t(z)|/A_t(x)<2",
+    "lift": "|C_hat_(N,t)(z)-C_paper(z)|/A_t(x)<100*exp(-3L/4)",
+    "analytic_remainder": "R_hat=H_t-(A_(t,N)+B_(t,N)-C_hat_(N,t)) is holomorphic and sup_collar |R_hat|/A_t(x)<2500*exp(-3L/4)",
+    "normalized_split": "Z_t=J_hat_(N,t)+r, where J_hat agrees on the real axis with the corrected main J=P-Q",
+    "c1_caps": "|r|<2500*exp(-3L/4), |r'|<5000*L*exp(-3L/4)",
+    "error_norm": "r^2+(r'/L)^2<32000000*exp(-3L/2)",
+    "cell_target": "T_L[J]>32000000*exp(-3L/2) excludes a double zero on a fixed-N cell",
+    "transition_gap": "Disks crossing a cutoff still require an adjacent-N corrected-lift comparison"
+  },
+  "interval": {
+    "precision_bits": 256,
+    "L_min": "50",
+    "coefficient_sum_constant_ball": "[43.58126780907764763428063950206785337673408545107115325555806415115972 +/- 2.05e-69]",
+    "coefficient_sum_constant_lt": "50",
+    "eAB_exponent_scaled_ball": "[9.085187784038783415789288628637307876477653783004372588533489246507593 +/- 3.72e-70]",
+    "eAB_exponent_scaled_lt": "10",
+    "eAB_constant_ball": "[908.5187784038783415789288628637307876477653783004372588533489246507593 +/- 3.72e-68]",
+    "eAB_constant_lt": "1000",
+    "eC_positive_exponent_ball": "[6.535788666824432876685547576601751806517319046370286345699524938238868e-21 +/- 8.19e-92]",
+    "eC_positive_exponent_lt": "1",
+    "eC_bracket_constant_ball": "[8.243606353521429498038394925091299080815761184957327655863197848526945 +/- 4.94e-70]",
+    "eC_bracket_constant_lt": "10",
+    "eC_constant_ball": "[10.58500008309006664389050936138499443143182591970360549094533621789808 +/- 1.14e-69]",
+    "eC_constant_lt": "100",
+    "normalizer_ratio_ball": "[1.648721270700128146848650787814163571653776100710148011575079311640661 +/- 2.13e-71]",
+    "normalizer_ratio_lt": "2",
+    "lift_source_constant_ball": "[175.3719734790537217943900391351181260828946707735163262435446987656219 +/- 2.82e-68]",
+    "lift_source_constant_lt": "300",
+    "lift_constant_ball": "[3.535095296774473788234831190161219390290052224791286143423247223949455 +/- 4.17e-70]",
+    "lift_constant_lt": "100",
+    "combined_raw_constant_ball": "2300.000000000000000000000000000000000000000000000000000000000000000000",
+    "combined_raw_constant_lt": "2500",
+    "first_constant": "5000",
+    "norm_squared_constant_ball": "31250000.00000000000000000000000000000000000000000000000000000000000000",
+    "norm_squared_constant_lt": "32000000",
+    "L50_error_norm_squared_ball": "[8.571638277785849421902128643448128630314615245610054185620196635488349e-26 +/- 1.37e-96]",
+    "L50_error_norm_squared_lt": "10^-24"
+  },
+  "rows": [
+    {
+      "id": "np15c1crc_01_region",
+      "role": "exact_scope",
+      "readiness": "ready_to_apply",
+      "claim": "The critical asymptotic cell region has a scale-adapted holomorphic collar.",
+      "formula": "L=log(x/(4*pi))>=50, 0<t<=1/2, 0<t*L<=25, rho=1/L, and the radius-rho disk stays in one prescribed-N cell; On |z-x|<=1/L: X=Re z satisfies L-1<=log(X/(4*pi))<=L+1 and 0<=|Im z|<=1/L",
+      "proof_boundary": "Fixed prescribed cutoff N throughout the disk.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15c1crc_02_coefficient_sum",
+      "role": "analytic_bound",
+      "readiness": "ready_to_apply",
+      "claim": "The complete two-saddle Dirichlet coefficient mass has a uniform square-root cutoff bound.",
+      "formula": "sum_(n<=N)(1+|gamma|N^|kappa|n^y)b_n^t*n^(-Re s_*) <=50*exp(L/4)",
+      "proof_boundary": "Uses the published Re(s_*) and gamma/kappa estimates.",
+      "diagnostics": {
+        "constant": "[43.58126780907764763428063950206785337673408545107115325555806415115972 +/- 2.05e-69]"
+      }
+    },
+    {
+      "id": "np15c1crc_03_published_eAB",
+      "role": "interval_certificate",
+      "readiness": "certified",
+      "claim": "The published finite-sum approximation errors gain three quarters of the logarithmic height.",
+      "formula": "e_A+e_B<1000*exp(-3L/4)",
+      "proof_boundary": "Uniform for bounded c=tL on the stated collar.",
+      "diagnostics": {
+        "exponent": "[9.085187784038783415789288628637307876477653783004372588533489246507593 +/- 3.72e-70]",
+        "constant": "[908.5187784038783415789288628637307876477653783004372588533489246507593 +/- 3.72e-68]"
+      }
+    },
+    {
+      "id": "np15c1crc_04_published_eC",
+      "role": "interval_certificate",
+      "readiness": "certified",
+      "claim": "After extracting the endpoint term, the published contour error gains one saddle factor.",
+      "formula": "e_C<100*exp(-3L/4)",
+      "proof_boundary": "Uses the refined e_C, not the coarser e_C0.",
+      "diagnostics": {
+        "positive_exponent": "[6.535788666824432876685547576601751806517319046370286345699524938238868e-21 +/- 8.19e-92]",
+        "constant": "[10.58500008309006664389050936138499443143182591970360549094533621789808 +/- 1.14e-69]"
+      }
+    },
+    {
+      "id": "np15c1crc_05_holomorphic_lift",
+      "role": "analytic_transfer",
+      "readiness": "ready_to_apply",
+      "claim": "The certified C0 strip bound makes the endpoint holomorphic-lift defect lower order on the collar.",
+      "formula": "|C_hat_(N,t)(z)-C_paper(z)|/A_t(x)<100*exp(-3L/4)",
+      "proof_boundary": "Composes the exact lift defect equation with |C0|<5 and |C0'|<60.",
+      "diagnostics": {
+        "constant": "[3.535095296774473788234831190161219390290052224791286143423247223949455 +/- 4.17e-70]"
+      }
+    },
+    {
+      "id": "np15c1crc_06_raw_collar",
+      "role": "proved_bound",
+      "readiness": "ready_to_apply",
+      "claim": "The corrected fixed-cutoff approximation has one holomorphic scalar remainder bound.",
+      "formula": "sup_collar |B_t(z)|/A_t(x)<2; R_hat=H_t-(A_(t,N)+B_(t,N)-C_hat_(N,t)) is holomorphic and sup_collar |R_hat|/A_t(x)<2500*exp(-3L/4)",
+      "proof_boundary": "Fixed-cutoff cell interiors only.",
+      "diagnostics": {
+        "normalizer": "[1.648721270700128146848650787814163571653776100710148011575079311640661 +/- 2.13e-71]",
+        "raw_constant": "2300.000000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    {
+      "id": "np15c1crc_07_C1_transfer",
+      "role": "proved_bound",
+      "readiness": "ready_to_apply",
+      "claim": "Cauchy's estimate and normalizer differentiation give an explicit corrected C1 remainder.",
+      "formula": "Z_t=J_hat_(N,t)+r, where J_hat agrees on the real axis with the corrected main J=P-Q; |r|<2500*exp(-3L/4), |r'|<5000*L*exp(-3L/4)",
+      "proof_boundary": "Uses |(log A_t)'|<L/2 and collar radius 1/L.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15c1crc_08_transversality_budget",
+      "role": "proved_bound",
+      "readiness": "ready_to_apply",
+      "claim": "The exact double-zero exclusion target now has a fully explicit fixed-cell error side.",
+      "formula": "r^2+(r'/L)^2<32000000*exp(-3L/2); T_L[J]>32000000*exp(-3L/2) excludes a double zero on a fixed-N cell",
+      "proof_boundary": "The corrected-main lower bound remains open.",
+      "diagnostics": {
+        "constant": "31250000.00000000000000000000000000000000000000000000000000000000000000",
+        "L50_value": "[8.571638277785849421902128643448128630314615245610054185620196635488349e-26 +/- 1.37e-96]"
+      }
+    },
+    {
+      "id": "np15c1crc_09_transition_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "Cutoff-crossing Cauchy disks remain outside this fixed-cell certificate.",
+      "formula": "Disks crossing a cutoff still require an adjacent-N corrected-lift comparison",
+      "proof_boundary": "Needs one adjacent corrected-lift comparison.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15c1crc_10_nonpromotion",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "Closing the remainder side does not establish corrected finite transversality.",
+      "formula": "explicit error budget != T_L[J] lower bound",
+      "proof_boundary": "Not Lambda<=0 or RH.",
+      "diagnostics": null
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/abs/1904.12438",
+    "outputs/jensen_window_pf_newman_polymath15_endpoint_holomorphic_lift.md",
+    "outputs/jensen_window_pf_newman_polymath15_endpoint_C0_strip_certificate.md",
+    "outputs/jensen_window_pf_newman_polymath15_critical_transversality_target.md"
+  ]
+}

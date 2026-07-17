@@ -96,6 +96,13 @@ must be paired with a genuinely normalized Xi/Phi-specific theorem,
 such as a ratio-cone argument, determinant integral, positive kernel,
 or Schur-positive specialization. Raw moment positivity is not enough.
 
+The subsequent reciprocal-gamma mixture audit proves the complete
+fixed-scale sign-regularity theorem and isolates the remaining failure:
+positive scale mixtures are not sign-regularity preserving, even at
+order two. For Xi, the completed order-two ratio cone is exactly the
+tilted relative-variance bound `CV_n^2<=2/(2n+1)`; higher compound
+concentration remains open.
+
 Integration:
 
 ```text
@@ -103,6 +110,7 @@ outputs/coefficient_pf_bridge_obstruction.md
 outputs/jensen_window_pf_heat_flow_boundary_threshold_lemma.md
 outputs/jensen_window_pf_sign_regular_transfer_gap_matrix.md
 outputs/jensen_window_pf_theorem_machinery_fit_matrix.md
+outputs/jensen_window_pf_reciprocal_gamma_mixture_sign_gate.md
 ```
 
 Summary:

@@ -1,0 +1,84 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_m100_raw_corridor_certificate.py",
+  "date": "2026-07-11",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_m100_raw_corridor_certificate.py",
+  "kind": "jensen_window_pf_negative_lambda_m100_raw_corridor_certificate",
+  "proof_boundary": "This artifact proves the full raw-ratio decrement corridor for the actual zeta heat-flow moments at lambda=-100. It does not prove PF-infinity, the all-order Jensen bridge, RH, or Lambda <= 0.",
+  "rows": [
+    {
+      "claim": "Rewrite the raw moment ratio through the normalized contraction and its log curvature.",
+      "diagnostics": null,
+      "formula": "R_k=((2*k+1)/(2*k-1))*exp(-B_k), B_k=-log(((2*k-1)/(2*k+1))*R_k)",
+      "id": "m100rcc_01_raw_curvature_coordinates",
+      "proof_boundary": "Exact coordinate change only.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "Full lambda=-100 ratio-cone entry supplies nonnegative and decreasing B curvature.",
+      "diagnostics": {
+        "analytic_tail_start": 319,
+        "full_cone_entry_rows": 1
+      },
+      "formula": "B_k>=0 and B_(k+1)<=B_k for every k>=1",
+      "id": "m100rcc_02_full_cone_input",
+      "proof_boundary": "Uses the existing full ratio-cone theorem at one heat parameter.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The continuous bridge supplies the linear lower curvature wall.",
+      "diagnostics": {
+        "compact_blocks": 16074,
+        "prefix_gaps": 318
+      },
+      "formula": "B_(k+1)>=((2*k+1)/(2*k+3))*B_k for every k>=1",
+      "id": "m100rcc_03_scaled_curvature_input",
+      "proof_boundary": "Uses the new all-k scaled-curvature theorem at lambda=-100.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The linear wall dominates the exact nonlinear lower raw-corridor wall for B>=0.",
+      "diagnostics": null,
+      "formula": "log((2*k+3)/(2+(2*k+1)*exp(-B))) <=((2*k+1)/(2*k+3))*B, B>=0",
+      "id": "m100rcc_04_linear_to_nonlinear_barrier",
+      "proof_boundary": "At B=0 equality holds; the derivative of the left side is y/(2+y)<=y_0/(2+y_0)=(2*k+1)/(2*k+3).",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "The two source theorems and the calculus lemma prove the complete B corridor.",
+      "diagnostics": null,
+      "formula": "log((2*k+3)/(2+(2*k+1)*exp(-B_k))) <=B_(k+1)<=B_k",
+      "id": "m100rcc_05_curvature_corridor",
+      "proof_boundary": "Complete coefficient-curvature corridor at lambda=-100.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "The actual zeta moments satisfy the full raw-ratio decrement corridor at lambda=-100.",
+      "diagnostics": null,
+      "formula": "((2*k-1)*(2*k+3)/(2*k+1)^2)*R_k<=R_(k+1)<=(2+(2*k-1)*R_k)/(2*k+1), k>=1",
+      "id": "m100rcc_06_raw_ratio_corridor",
+      "proof_boundary": "Closes the zeta-specific raw-corridor target at lambda=-100; not PF-infinity, the all-order Jensen bridge, RH, or Lambda <= 0.",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_theorem"
+    }
+  ],
+  "source_exact_bridge": "outputs/jensen_window_pf_negative_lambda_coefficient_curvature_corridor_bridge.md",
+  "source_full_cone": "work/rh_compute/results/jensen_window_pf_negative_lambda_m100_full_cone_entry_certificate.json",
+  "source_scaled_curvature": "work/rh_compute/results/jensen_window_pf_negative_lambda_scaled_curvature_continuous_bridge.json",
+  "source_target": "outputs/jensen_window_pf_negative_lambda_zeta_specific_raw_corridor_target.md",
+  "status": "exact interval-analytic raw-corridor theorem at lambda=-100",
+  "summary": {
+    "certificate_rows": 6,
+    "compact_source_blocks": 16074,
+    "exact_reduction_rows": 2,
+    "finite_prefix_source_gaps": 318,
+    "open_requirements": 0,
+    "raw_corridor_theorem_rows": 1,
+    "ready_to_apply_rows": 4,
+    "theorem_input_rows": 2
+  }
+}

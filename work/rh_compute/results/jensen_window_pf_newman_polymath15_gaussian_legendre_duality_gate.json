@@ -1,0 +1,243 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_gaussian_legendre_duality_gate",
+  "date": "2026-07-17",
+  "status": "exact Gaussian/Legendre equivalence for the Newman cancellation frontier; one route nonpromotion gate and one open analytic handoff, not a proof of Lambda<=0 or RH",
+  "proof_boundary": "This artifact proves an exact finite Gaussian identity and the Legendre equivalence of two uses of the same phase-sum envelope. It does not improve a partial-sum estimate, establish strict decay at c_*, close c=2, cross the fixed c<2 phase wall, prove Wronskian separation, prove Lambda<=0, or prove RH.",
+  "exact": {
+    "gaussian_identity": "exp(t*y^2/4)=(pi*t)^(-1/2)*integral_R exp(-u^2/t+u*y)du; hence D_(N,t)(s_*)=(pi*t)^(-1/2)*integral_R exp(-u^2/t)S_N(s_*-u)du, S_N(z)=sum_(n<=N)n^(-z)",
+    "moment_identity": "The same finite interchange gives D_k=(pi*t)^(-1/2)*integral_R exp(-u^2/t)S_(N,k)(s_*-u)du for k=0,1,2",
+    "scaled_gaussian": "For t=c/L and L=2log(N)+o(1), exp(-u^2/t)=N^(-2u^2/c+o(1))",
+    "partial_sum_profile": "If Phi(r) bounds the phase sum on M=N^r, define E(q)=sup_(0<=r<=1)(Phi(r)-q*r)",
+    "dual_identity": "With sigma=1/2+c/4, sup_u{E(sigma-u)-2u^2/c}=sup_r{Phi(r)-r/2-c*r*(2-r)/8}",
+    "saddle_identity": "For fixed r, sup_u{u*r-2u^2/c}=c*r^2/8 at u=c*r/4",
+    "threshold_equivalence": "A Gaussian partial-sum proof using the same pointwise envelope has strict decay exactly when the weighted dyadic frontier has strict decay; neither formulation is stronger",
+    "critical_star": {
+      "scaled_time": {
+        "exact": "4911678521/1933561194",
+        "decimal": "2.540223984760009"
+      },
+      "radius": {
+        "exact": "125662/155153",
+        "decimal": "0.809923108157754"
+      },
+      "line": {
+        "exact": "4800718975/7734244776",
+        "decimal": "0.620709469901577"
+      },
+      "gaussian_shift": {
+        "exact": "31657/61548",
+        "decimal": "0.514346526288425"
+      },
+      "partial_sum_exponent": {
+        "exact": "1989040967/9549356844",
+        "decimal": "0.208290568620833"
+      },
+      "gaussian_cost": {
+        "exact": "1989040967/9549356844",
+        "decimal": "0.208290568620833"
+      },
+      "net_exponent": {
+        "exact": "0/1",
+        "decimal": "0.000000000000000"
+      }
+    },
+    "critical_c2": {
+      "scaled_time": {
+        "exact": "2/1",
+        "decimal": "2.000000000000000"
+      },
+      "radius": {
+        "exact": "125662/155153",
+        "decimal": "0.809923108157754"
+      },
+      "line": {
+        "exact": "92322/155153",
+        "decimal": "0.595038445921123"
+      },
+      "gaussian_shift": {
+        "exact": "62831/155153",
+        "decimal": "0.404961554078877"
+      },
+      "partial_sum_exponent": {
+        "exact": "11029137521/48144906818",
+        "decimal": "0.229082124152674"
+      },
+      "gaussian_cost": {
+        "exact": "3947734561/24072453409",
+        "decimal": "0.163993860281979"
+      },
+      "net_exponent": {
+        "exact": "3133668399/48144906818",
+        "decimal": "0.065088263870695"
+      }
+    },
+    "corner_slopes": {
+      "pair_2": {
+        "exact": "521/796",
+        "decimal": "0.654522613065327"
+      },
+      "pair_1": {
+        "exact": "88225/153852",
+        "decimal": "0.573440709253048"
+      }
+    },
+    "current_nonpromotion": "At c=c_* the pair-2/pair-1 corner gives equality, not decay. Rewriting the current eleven-pair hull as a Gaussian heat average therefore cannot lower c_*",
+    "required_upgrade": "Lowering c_* requires a genuinely smaller partial-sum profile E(q) near q=0.6207094699015768 and across the exposed q-range, or an argument exploiting cancellation beyond pointwise partial-sum majorants; reaching c=2 still leaves the fixed c<2 phase wall"
+  },
+  "rows": [
+    {
+      "id": "np15gld_01_gaussian_identity",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The finite heat-weighted Dirichlet sum has an exact Gaussian shift representation.",
+      "formula": "exp(t*y^2/4)=(pi*t)^(-1/2)*integral_R exp(-u^2/t+u*y)du; hence D_(N,t)(s_*)=(pi*t)^(-1/2)*integral_R exp(-u^2/t)S_N(s_*-u)du, S_N(z)=sum_(n<=N)n^(-z)",
+      "proof_boundary": "Finite-sum Gaussian integration; no asymptotic estimate is used.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15gld_02_moment_identity",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The Gaussian representation transfers termwise through the two logarithmic moments needed for the curvature jet.",
+      "formula": "The same finite interchange gives D_k=(pi*t)^(-1/2)*integral_R exp(-u^2/t)S_(N,k)(s_*-u)du for k=0,1,2",
+      "proof_boundary": "Exact for the finite cutoff only.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15gld_03_scaled_cost",
+      "role": "exact_asymptotic_geometry",
+      "readiness": "ready_to_apply",
+      "claim": "In scaled Newman coordinates the Gaussian shift has a quadratic N-exponent cost.",
+      "formula": "For t=c/L and L=2log(N)+o(1), exp(-u^2/t)=N^(-2u^2/c+o(1))",
+      "proof_boundary": "Leading exponent with bounded c and L tending to infinity.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15gld_04_partial_sum_profile",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "The full partial-sum bound is the Legendre profile of the dyadic phase envelope.",
+      "formula": "If Phi(r) bounds the phase sum on M=N^r, define E(q)=sup_(0<=r<=1)(Phi(r)-q*r)",
+      "proof_boundary": "Pointwise exponent bookkeeping; logarithmic losses are suppressed by eta.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15gld_05_saddle_identity",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "Each dyadic radius selects one exact Gaussian shift saddle.",
+      "formula": "For fixed r, sup_u{u*r-2u^2/c}=c*r^2/8 at u=c*r/4",
+      "proof_boundary": "Exact concave quadratic maximization.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15gld_06_dual_equivalence",
+      "role": "exact_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "The Gaussian and weighted-dyadic decay frontiers are exactly equal.",
+      "formula": "With sigma=1/2+c/4, sup_u{E(sigma-u)-2u^2/c}=sup_r{Phi(r)-r/2-c*r*(2-r)/8}",
+      "proof_boundary": "Equality of suprema for the same pointwise phase envelope.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15gld_07_cstar_contact",
+      "role": "exact_frontier_contact",
+      "readiness": "ready_to_apply",
+      "claim": "The known c_* obstruction is an exact Gaussian/partial-sum contact at one exposed critical-strip line.",
+      "formula": "{\"gaussian_cost\": {\"decimal\": \"0.208290568620833\", \"exact\": \"1989040967/9549356844\"}, \"gaussian_shift\": {\"decimal\": \"0.514346526288425\", \"exact\": \"31657/61548\"}, \"line\": {\"decimal\": \"0.620709469901577\", \"exact\": \"4800718975/7734244776\"}, \"net_exponent\": {\"decimal\": \"0.000000000000000\", \"exact\": \"0/1\"}, \"partial_sum_exponent\": {\"decimal\": \"0.208290568620833\", \"exact\": \"1989040967/9549356844\"}, \"radius\": {\"decimal\": \"0.809923108157754\", \"exact\": \"125662/155153\"}, \"scaled_time\": {\"decimal\": \"2.540223984760009\", \"exact\": \"4911678521/1933561194\"}}",
+      "proof_boundary": "Exact rational contact for the current published hull.",
+      "diagnostics": {
+        "scaled_time": {
+          "exact": "4911678521/1933561194",
+          "decimal": "2.540223984760009"
+        },
+        "radius": {
+          "exact": "125662/155153",
+          "decimal": "0.809923108157754"
+        },
+        "line": {
+          "exact": "4800718975/7734244776",
+          "decimal": "0.620709469901577"
+        },
+        "gaussian_shift": {
+          "exact": "31657/61548",
+          "decimal": "0.514346526288425"
+        },
+        "partial_sum_exponent": {
+          "exact": "1989040967/9549356844",
+          "decimal": "0.208290568620833"
+        },
+        "gaussian_cost": {
+          "exact": "1989040967/9549356844",
+          "decimal": "0.208290568620833"
+        },
+        "net_exponent": {
+          "exact": "0/1",
+          "decimal": "0.000000000000000"
+        }
+      }
+    },
+    {
+      "id": "np15gld_08_c2_deficit",
+      "role": "exact_frontier_target",
+      "readiness": "ready_to_apply",
+      "claim": "At c=2 the same exposed corner retains the exact previously identified positive exponent deficit.",
+      "formula": "{\"gaussian_cost\": {\"decimal\": \"0.163993860281979\", \"exact\": \"3947734561/24072453409\"}, \"gaussian_shift\": {\"decimal\": \"0.404961554078877\", \"exact\": \"62831/155153\"}, \"line\": {\"decimal\": \"0.595038445921123\", \"exact\": \"92322/155153\"}, \"net_exponent\": {\"decimal\": \"0.065088263870695\", \"exact\": \"3133668399/48144906818\"}, \"partial_sum_exponent\": {\"decimal\": \"0.229082124152674\", \"exact\": \"11029137521/48144906818\"}, \"radius\": {\"decimal\": \"0.809923108157754\", \"exact\": \"125662/155153\"}, \"scaled_time\": {\"decimal\": \"2.000000000000000\", \"exact\": \"2/1\"}}",
+      "proof_boundary": "Necessary local target only, not an all-line cancellation theorem.",
+      "diagnostics": {
+        "scaled_time": {
+          "exact": "2/1",
+          "decimal": "2.000000000000000"
+        },
+        "radius": {
+          "exact": "125662/155153",
+          "decimal": "0.809923108157754"
+        },
+        "line": {
+          "exact": "92322/155153",
+          "decimal": "0.595038445921123"
+        },
+        "gaussian_shift": {
+          "exact": "62831/155153",
+          "decimal": "0.404961554078877"
+        },
+        "partial_sum_exponent": {
+          "exact": "11029137521/48144906818",
+          "decimal": "0.229082124152674"
+        },
+        "gaussian_cost": {
+          "exact": "3947734561/24072453409",
+          "decimal": "0.163993860281979"
+        },
+        "net_exponent": {
+          "exact": "3133668399/48144906818",
+          "decimal": "0.065088263870695"
+        }
+      }
+    },
+    {
+      "id": "np15gld_09_nonpromotion",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "A Gaussian heat-semigroup rewrite using the current partial-sum bounds cannot improve c_*.",
+      "formula": "At c=c_* the pair-2/pair-1 corner gives equality, not decay. Rewriting the current eleven-pair hull as a Gaussian heat average therefore cannot lower c_*",
+      "proof_boundary": "Route-equivalence gate only; it does not rule out stronger cancellation or Xi-specific structure.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15gld_10_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "The dual picture identifies the precise partial-sum profile that must improve, while preserving the separate inner phase wall.",
+      "formula": "Lowering c_* requires a genuinely smaller partial-sum profile E(q) near q=0.6207094699015768 and across the exposed q-range, or an argument exploiting cancellation beyond pointwise partial-sum majorants; reaching c=2 still leaves the fixed c<2 phase wall",
+      "proof_boundary": "The required analytic improvement remains open; not Lambda<=0 or RH.",
+      "diagnostics": null
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/abs/1904.12438",
+    "https://arxiv.org/abs/2306.05599",
+    "outputs/jensen_window_pf_newman_polymath15_oscillatory_zeta_handoff_theorem.md",
+    "outputs/jensen_window_pf_newman_polymath15_cancellation_zero_free_wall_gate.md"
+  ]
+}

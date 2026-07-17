@@ -26,6 +26,7 @@ REQUIRED_PATHS = (
     "outputs/coefficient_pf_bridge_obstruction.md",
     "outputs/jensen_window_pf_heat_flow_boundary_threshold_lemma.md",
     "outputs/jensen_window_pf_sign_regular_transfer_gap_matrix.md",
+    "outputs/jensen_window_pf_reciprocal_gamma_mixture_sign_gate.md",
     "work/rh_compute/results/jensen_window_pf_factorial_multiplier_split_audit.json",
     "work/rh_compute/scripts/jensen_window_pf_factorial_multiplier_split_audit.py",
     "work/rh_compute/scripts/check_jensen_window_pf_factorial_multiplier_split_audit.py",
@@ -47,6 +48,9 @@ REQUIRED_NOTE_STRINGS = (
     "raw degree-2 anti-hyperbolic rows: 315",
     "normalized degree-2 positive rows: 315",
     "Raw moment positivity is not enough.",
+    "outputs/jensen_window_pf_reciprocal_gamma_mixture_sign_gate.md",
+    "CV_n^2<=2/(2n+1)",
+    "higher compound",
 )
 
 FORBIDDEN_TEXT = (

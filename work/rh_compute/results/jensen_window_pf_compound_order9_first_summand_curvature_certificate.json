@@ -1,0 +1,95 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order9_first_summand_curvature_certificate.py",
+  "date": "2026-07-14",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order9_first_summand_curvature_certificate.py",
+  "kind": "jensen_window_pf_compound_order9_first_summand_curvature_certificate",
+  "largest_scaled_curvature_upper": "4.19918548221032914747349727361016012002522663395440335471778E+3",
+  "proof_boundary": "This artifact composes the continuous first-summand curvature theorem only. It does not by itself prove full-kernel endpoint entry, heat-forward invariance, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The localized continuation closes the finite lower real-t bridge.",
+      "diagnostics": null,
+      "formula": "w_1''(t)<=4200/t^2 for every real 1250<=t<=5700",
+      "id": "co9fscc_01_lower_bridge",
+      "proof_boundary": "Exact real-t range 1250 through 5700.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "The compact saddle certificate joins t=5700 to mode two.",
+      "diagnostics": null,
+      "formula": "w_1''(t)<=4200/t^2 for every real 5700<=t<=V'(2)",
+      "id": "co9fscc_02_compact",
+      "proof_boundary": "Compact saddle range only.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "Finite and asymptotic saddle certificates cover every mode u>=2.",
+      "diagnostics": null,
+      "formula": "w_1''(t)<=4200/t^2 for every saddle mode 2<=u<=20; t^2*w_1''(t)<500 for every mode u>=20",
+      "id": "co9fscc_03_rays",
+      "proof_boundary": "Uses the proved monotone saddle parametrization t=V'(u).",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_theorem"
+    },
+    {
+      "claim": "The lower bridge and upper saddle ranges cover the complete half-line.",
+      "diagnostics": {
+        "largest_scaled_curvature_upper": "4.19918548221032914747349727361016012002522663395440335471778E+3"
+      },
+      "formula": "w_1''(t)<=4200/t^2 for every real t>=1250",
+      "id": "co9fscc_04_global_composition",
+      "proof_boundary": "First Newman summand at lambda=-100 only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    }
+  ],
+  "source_contract": {
+    "asymptotic_scaled_upper": "3.24905922088046558201313018798812324136265244865916789195364E+2",
+    "compact_largest_scaled_upper": "4.19918548221032914747349727361016012002522663395440335471778E+3",
+    "finite_ray_largest_scaled_upper": "2.17882197094171936230311013389392316198614992290990750440229E+3",
+    "lower_largest_scaled_upper": "4.19424425522037111044561248832644227467685288026319528153785E+3",
+    "sources": [
+      {
+        "kind": "jensen_window_pf_compound_order9_localized_lower_bridge_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_localized_lower_bridge_certificate.json",
+        "sha256": "647d3a7e63c66b32e39386d7afbcb77cb35f4aa5a60ec1274ebf821d44ba49ea",
+        "status": "rigorous order-nine first-summand curvature theorem on 1250<=t<=5700",
+        "theorem": "w_1''(t)<=4200/t^2 for every real 1250<=t<=5700"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order9_nested_curvature_compact_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_nested_curvature_compact_certificate.json",
+        "sha256": "7f2727e86be3ca71e96fafd92e3a0c7e2e8948e0c83b16599ca330f4d3133393",
+        "status": "rigorous order-nine curvature theorem on 5700<=t<=V'(2)",
+        "theorem": "w_1''(t)<=4200/t^2 for every real 5700<=t<=V'(2)"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order9_nested_curvature_finite_ray_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_nested_curvature_finite_ray_certificate.json",
+        "sha256": "f54fec175580b2618e5f66c2c3169744c383883e8c0d10c0cfafc4428a070aa3",
+        "status": "rigorous order-nine first-summand curvature theorem on 2<=u<=20",
+        "theorem": "w_1''(t)<=4200/t^2 for every saddle mode 2<=u<=20"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order9_nested_curvature_asymptotic_ray_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order9_nested_curvature_asymptotic_ray_certificate.json",
+        "sha256": "25c4fb381ef11af3cbb30aa47272381e65f69301c39ff2eb205f96f8eb95005e",
+        "status": "rigorous order-nine first-summand curvature theorem on u>=20",
+        "theorem": "t^2*w_1''(t)<500 for every mode u>=20"
+      }
+    ],
+    "upper_composition": "[5700<=t<=V'(2)] union [2<=u<=20] union [u>=20]"
+  },
+  "status": "rigorous global order-nine first-summand curvature theorem on t>=1250",
+  "summary": {
+    "global_first_summand_curvature_theorems": 1,
+    "lower_bridge_theorems": 1,
+    "open_rows": 0,
+    "ready_rows": 4,
+    "rows": 4,
+    "upper_range_compositions": 1
+  },
+  "theorem": "w_1''(t)<=4200/t^2 for every real t>=1250"
+}

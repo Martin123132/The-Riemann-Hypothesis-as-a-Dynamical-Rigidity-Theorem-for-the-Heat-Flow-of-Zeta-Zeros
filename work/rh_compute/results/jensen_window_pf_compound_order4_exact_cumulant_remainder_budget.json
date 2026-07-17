@@ -1,0 +1,475 @@
+{
+  "asymptotic_budget": {
+    "endpoint_comparison_left": "12200",
+    "endpoint_comparison_right": "100000000000000000000000000000000000",
+    "epsilon_eight_correction": "scaled |kappa_r^[8]-kappa_r^[6]|<1/(100u)",
+    "formal_six_margin": "1/(20u)",
+    "largest_coefficient_cap": "61/10",
+    "mode_interval": "u>=20",
+    "post_epsilon_eight_margin": "1/(25u)",
+    "q_floor": "100000000000000000000000000000000000",
+    "q_over_u_log_derivative_lower": "79/20",
+    "reserved_final_corridor_margin": "1/(50u)",
+    "sufficient_exact_remainder_budget": "1/(50u)"
+  },
+  "date": "2026-07-13",
+  "epsilon_ten_budget": {
+    "finite": {
+      "corrections": {
+        "2": {
+          "coefficient_cap": "1/20",
+          "correction_cap_at_q_floor": "1/131220000000000000",
+          "q_power": 4
+        },
+        "3": {
+          "coefficient_cap": "1/5",
+          "correction_cap_at_q_floor": "1/32805000000000000",
+          "q_power": 4
+        },
+        "4": {
+          "coefficient_cap": "3/5",
+          "correction_cap_at_q_floor": "1/10935000000000000",
+          "q_power": 4
+        },
+        "5": {
+          "coefficient_cap": "1",
+          "correction_cap_at_q_floor": "1/729000000000",
+          "q_power": 3
+        },
+        "6": {
+          "coefficient_cap": "2",
+          "correction_cap_at_q_floor": "1/364500000000",
+          "q_power": 3
+        },
+        "7": {
+          "coefficient_cap": "9/2",
+          "correction_cap_at_q_floor": "1/18000000",
+          "q_power": 2
+        },
+        "8": {
+          "coefficient_cap": "25/4",
+          "correction_cap_at_q_floor": "1/12960000",
+          "q_power": 2
+        }
+      },
+      "margin_inside_previous_exact_remainder_budget": "9999/10000000",
+      "mode_interval": "2<=u<=20",
+      "reserved_final_corridor_margin": "79999/10000000",
+      "sufficient_exact_minus_epsilon_ten_budget": "9/1000",
+      "total_exact_minus_epsilon_eight_cap": "90001/10000000",
+      "uniform_epsilon_ten_correction_cap": "1/10000000"
+    },
+    "ray": {
+      "endpoint_comparison_left": "125000",
+      "endpoint_comparison_right": "10000000000000000000000000000000000000000000000000000000000000000000000",
+      "epsilon_ten_correction": "scaled |kappa_r^[10]-kappa_r^[8]|<1/(1000u)",
+      "largest_coefficient_cap": "25/4",
+      "margin_inside_previous_exact_remainder_budget": "9/(1000u)",
+      "mode_interval": "u>=20",
+      "q_squared_over_u_log_derivative_lower": "159/20",
+      "reserved_final_corridor_margin": "29/(1000u)",
+      "sufficient_exact_minus_epsilon_ten_budget": "1/(100u)",
+      "total_exact_minus_epsilon_eight_cap": "11/(1000u)"
+    }
+  },
+  "finite_budget": {
+    "epsilon_eight_corrections": {
+      "2": {
+        "coefficient_cap": "1/20",
+        "correction_cap_at_q_floor": "1/14580000000000",
+        "q_power": 3
+      },
+      "3": {
+        "coefficient_cap": "3/20",
+        "correction_cap_at_q_floor": "1/4860000000000",
+        "q_power": 3
+      },
+      "4": {
+        "coefficient_cap": "1/2",
+        "correction_cap_at_q_floor": "1/1458000000000",
+        "q_power": 3
+      },
+      "5": {
+        "coefficient_cap": "2",
+        "correction_cap_at_q_floor": "1/40500000",
+        "q_power": 2
+      },
+      "6": {
+        "coefficient_cap": "16/5",
+        "correction_cap_at_q_floor": "1/25312500",
+        "q_power": 2
+      },
+      "7": {
+        "coefficient_cap": "5",
+        "correction_cap_at_q_floor": "1/1800",
+        "q_power": 1
+      },
+      "8": {
+        "coefficient_cap": "61/10",
+        "correction_cap_at_q_floor": "61/90000",
+        "q_power": 1
+      }
+    },
+    "formal_six_actual_weakest_margin": "0.0184369217593030043644830584526062070977362890930433806850775",
+    "formal_six_margin_floor": "9/500",
+    "mode_interval": "2<=u<=20",
+    "post_epsilon_eight_margin_floor": "17/1000",
+    "q_at_2_lower": "9.36495571275011161725525784728625886742908031529690304810026E+3",
+    "q_floor": 9000,
+    "reserved_final_corridor_margin": "7/1000",
+    "sufficient_exact_remainder_budget": "1/100",
+    "uniform_epsilon_eight_correction_cap": "1/1000"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order4_exact_cumulant_remainder_budget.py",
+  "kind": "jensen_window_pf_compound_order4_exact_cumulant_remainder_budget",
+  "proof_boundary": "This artifact composes the epsilon-six corridor margins with the proved global epsilon-eight and epsilon-ten coefficient layers and derives sufficient exact-density remainder budgets. It does not prove those central or tail remainders, the exact cumulant corridors, curvature ray, order-four entry, PF-infinity, RH, or Lambda<=0.",
+  "remaining_target": "Prove scaled exact-minus-epsilon-ten cumulant errors below 9/1000 on 2<=u<=20 and below 1/(100u) on u>=20, including both tails.",
+  "rows": [
+    {
+      "claim": "The exact formal epsilon-eight correction has explicit signed coefficient bounds for every u>=2.",
+      "diagnostics": {
+        "powers": {
+          "2-4": 3,
+          "5-6": 2,
+          "7-8": 1
+        }
+      },
+      "formula": "scaled(kappa_r^[8]-kappa_r^[6])=q^-p_r*C_r(u)",
+      "id": "co4ecrb_01_global_epsilon_eight_layer",
+      "proof_boundary": "Exact formal coefficient layer only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "On the finite interval, every epsilon-eight scaled correction is smaller than 1/1000.",
+      "diagnostics": {
+        "2": {
+          "coefficient_cap": "1/20",
+          "correction_cap_at_q_floor": "1/14580000000000",
+          "q_power": 3
+        },
+        "3": {
+          "coefficient_cap": "3/20",
+          "correction_cap_at_q_floor": "1/4860000000000",
+          "q_power": 3
+        },
+        "4": {
+          "coefficient_cap": "1/2",
+          "correction_cap_at_q_floor": "1/1458000000000",
+          "q_power": 3
+        },
+        "5": {
+          "coefficient_cap": "2",
+          "correction_cap_at_q_floor": "1/40500000",
+          "q_power": 2
+        },
+        "6": {
+          "coefficient_cap": "16/5",
+          "correction_cap_at_q_floor": "1/25312500",
+          "q_power": 2
+        },
+        "7": {
+          "coefficient_cap": "5",
+          "correction_cap_at_q_floor": "1/1800",
+          "q_power": 1
+        },
+        "8": {
+          "coefficient_cap": "61/10",
+          "correction_cap_at_q_floor": "61/90000",
+          "q_power": 1
+        }
+      },
+      "formula": "scaled |kappa_r^[8]-kappa_r^[6]|<1/1000, 2<=u<=20",
+      "id": "co4ecrb_02_finite_correction_cap",
+      "proof_boundary": "Formal epsilon-eight correction only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_inequality"
+    },
+    {
+      "claim": "A uniform scaled exact-minus-epsilon-eight error below 1/100 is sufficient for every finite corridor.",
+      "diagnostics": {
+        "epsilon_eight_corrections": {
+          "2": {
+            "coefficient_cap": "1/20",
+            "correction_cap_at_q_floor": "1/14580000000000",
+            "q_power": 3
+          },
+          "3": {
+            "coefficient_cap": "3/20",
+            "correction_cap_at_q_floor": "1/4860000000000",
+            "q_power": 3
+          },
+          "4": {
+            "coefficient_cap": "1/2",
+            "correction_cap_at_q_floor": "1/1458000000000",
+            "q_power": 3
+          },
+          "5": {
+            "coefficient_cap": "2",
+            "correction_cap_at_q_floor": "1/40500000",
+            "q_power": 2
+          },
+          "6": {
+            "coefficient_cap": "16/5",
+            "correction_cap_at_q_floor": "1/25312500",
+            "q_power": 2
+          },
+          "7": {
+            "coefficient_cap": "5",
+            "correction_cap_at_q_floor": "1/1800",
+            "q_power": 1
+          },
+          "8": {
+            "coefficient_cap": "61/10",
+            "correction_cap_at_q_floor": "61/90000",
+            "q_power": 1
+          }
+        },
+        "formal_six_actual_weakest_margin": "0.0184369217593030043644830584526062070977362890930433806850775",
+        "formal_six_margin_floor": "9/500",
+        "mode_interval": "2<=u<=20",
+        "post_epsilon_eight_margin_floor": "17/1000",
+        "q_at_2_lower": "9.36495571275011161725525784728625886742908031529690304810026E+3",
+        "q_floor": 9000,
+        "reserved_final_corridor_margin": "7/1000",
+        "sufficient_exact_remainder_budget": "1/100",
+        "uniform_epsilon_eight_correction_cap": "1/1000"
+      },
+      "formula": "scaled |kappa_r-kappa_r^[8]|<1/100 on 2<=u<=20",
+      "id": "co4ecrb_03_finite_exact_reserve",
+      "proof_boundary": "Sufficient theorem target, not a proved exact-density estimate.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_reduction"
+    },
+    {
+      "claim": "On the asymptotic ray, exponential q growth makes every epsilon-eight correction smaller than 1/(100u).",
+      "diagnostics": {
+        "endpoint_comparison_left": "12200",
+        "endpoint_comparison_right": "100000000000000000000000000000000000",
+        "epsilon_eight_correction": "scaled |kappa_r^[8]-kappa_r^[6]|<1/(100u)",
+        "formal_six_margin": "1/(20u)",
+        "largest_coefficient_cap": "61/10",
+        "mode_interval": "u>=20",
+        "post_epsilon_eight_margin": "1/(25u)",
+        "q_floor": "100000000000000000000000000000000000",
+        "q_over_u_log_derivative_lower": "79/20",
+        "reserved_final_corridor_margin": "1/(50u)",
+        "sufficient_exact_remainder_budget": "1/(50u)"
+      },
+      "formula": "scaled |kappa_r^[8]-kappa_r^[6]|<1/(100u)",
+      "id": "co4ecrb_04_ray_correction_cap",
+      "proof_boundary": "Formal epsilon-eight correction only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_inequality"
+    },
+    {
+      "claim": "A scaled exact-minus-epsilon-eight error below 1/(50u) is sufficient for every asymptotic corridor.",
+      "diagnostics": {
+        "endpoint_comparison_left": "12200",
+        "endpoint_comparison_right": "100000000000000000000000000000000000",
+        "epsilon_eight_correction": "scaled |kappa_r^[8]-kappa_r^[6]|<1/(100u)",
+        "formal_six_margin": "1/(20u)",
+        "largest_coefficient_cap": "61/10",
+        "mode_interval": "u>=20",
+        "post_epsilon_eight_margin": "1/(25u)",
+        "q_floor": "100000000000000000000000000000000000",
+        "q_over_u_log_derivative_lower": "79/20",
+        "reserved_final_corridor_margin": "1/(50u)",
+        "sufficient_exact_remainder_budget": "1/(50u)"
+      },
+      "formula": "scaled |kappa_r-kappa_r^[8]|<1/(50u), u>=20",
+      "id": "co4ecrb_05_ray_exact_reserve",
+      "proof_boundary": "Sufficient theorem target, not a proved exact-density estimate.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_reduction"
+    },
+    {
+      "claim": "The exact formal epsilon-nine/ten correction has explicit signed coefficient bounds for every u>=2.",
+      "diagnostics": {
+        "powers": {
+          "2-4": 4,
+          "5-6": 3,
+          "7-8": 2
+        }
+      },
+      "formula": "scaled(kappa_r^[10]-kappa_r^[8])=q^-s_r*D_r(u)",
+      "id": "co4ecrb_06_global_epsilon_ten_layer",
+      "proof_boundary": "Exact formal coefficient layer only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "The complete epsilon-ten correction is below 10^-7 on the finite interval and below 1/(1000u) on the ray.",
+      "diagnostics": {
+        "finite": {
+          "corrections": {
+            "2": {
+              "coefficient_cap": "1/20",
+              "correction_cap_at_q_floor": "1/131220000000000000",
+              "q_power": 4
+            },
+            "3": {
+              "coefficient_cap": "1/5",
+              "correction_cap_at_q_floor": "1/32805000000000000",
+              "q_power": 4
+            },
+            "4": {
+              "coefficient_cap": "3/5",
+              "correction_cap_at_q_floor": "1/10935000000000000",
+              "q_power": 4
+            },
+            "5": {
+              "coefficient_cap": "1",
+              "correction_cap_at_q_floor": "1/729000000000",
+              "q_power": 3
+            },
+            "6": {
+              "coefficient_cap": "2",
+              "correction_cap_at_q_floor": "1/364500000000",
+              "q_power": 3
+            },
+            "7": {
+              "coefficient_cap": "9/2",
+              "correction_cap_at_q_floor": "1/18000000",
+              "q_power": 2
+            },
+            "8": {
+              "coefficient_cap": "25/4",
+              "correction_cap_at_q_floor": "1/12960000",
+              "q_power": 2
+            }
+          },
+          "margin_inside_previous_exact_remainder_budget": "9999/10000000",
+          "mode_interval": "2<=u<=20",
+          "reserved_final_corridor_margin": "79999/10000000",
+          "sufficient_exact_minus_epsilon_ten_budget": "9/1000",
+          "total_exact_minus_epsilon_eight_cap": "90001/10000000",
+          "uniform_epsilon_ten_correction_cap": "1/10000000"
+        },
+        "ray": {
+          "endpoint_comparison_left": "125000",
+          "endpoint_comparison_right": "10000000000000000000000000000000000000000000000000000000000000000000000",
+          "epsilon_ten_correction": "scaled |kappa_r^[10]-kappa_r^[8]|<1/(1000u)",
+          "largest_coefficient_cap": "25/4",
+          "margin_inside_previous_exact_remainder_budget": "9/(1000u)",
+          "mode_interval": "u>=20",
+          "q_squared_over_u_log_derivative_lower": "159/20",
+          "reserved_final_corridor_margin": "29/(1000u)",
+          "sufficient_exact_minus_epsilon_ten_budget": "1/(100u)",
+          "total_exact_minus_epsilon_eight_cap": "11/(1000u)"
+        }
+      },
+      "formula": "finite <10^-7; ray <1/(1000u)",
+      "id": "co4ecrb_07_epsilon_ten_correction_caps",
+      "proof_boundary": "Formal epsilon-nine/ten correction only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_analytic_inequality"
+    },
+    {
+      "claim": "It is sufficient to bound the scaled exact-minus-epsilon-ten residual by 9/1000 on the finite interval and 1/(100u) on the ray.",
+      "diagnostics": {
+        "finite": {
+          "corrections": {
+            "2": {
+              "coefficient_cap": "1/20",
+              "correction_cap_at_q_floor": "1/131220000000000000",
+              "q_power": 4
+            },
+            "3": {
+              "coefficient_cap": "1/5",
+              "correction_cap_at_q_floor": "1/32805000000000000",
+              "q_power": 4
+            },
+            "4": {
+              "coefficient_cap": "3/5",
+              "correction_cap_at_q_floor": "1/10935000000000000",
+              "q_power": 4
+            },
+            "5": {
+              "coefficient_cap": "1",
+              "correction_cap_at_q_floor": "1/729000000000",
+              "q_power": 3
+            },
+            "6": {
+              "coefficient_cap": "2",
+              "correction_cap_at_q_floor": "1/364500000000",
+              "q_power": 3
+            },
+            "7": {
+              "coefficient_cap": "9/2",
+              "correction_cap_at_q_floor": "1/18000000",
+              "q_power": 2
+            },
+            "8": {
+              "coefficient_cap": "25/4",
+              "correction_cap_at_q_floor": "1/12960000",
+              "q_power": 2
+            }
+          },
+          "margin_inside_previous_exact_remainder_budget": "9999/10000000",
+          "mode_interval": "2<=u<=20",
+          "reserved_final_corridor_margin": "79999/10000000",
+          "sufficient_exact_minus_epsilon_ten_budget": "9/1000",
+          "total_exact_minus_epsilon_eight_cap": "90001/10000000",
+          "uniform_epsilon_ten_correction_cap": "1/10000000"
+        },
+        "ray": {
+          "endpoint_comparison_left": "125000",
+          "endpoint_comparison_right": "10000000000000000000000000000000000000000000000000000000000000000000000",
+          "epsilon_ten_correction": "scaled |kappa_r^[10]-kappa_r^[8]|<1/(1000u)",
+          "largest_coefficient_cap": "25/4",
+          "margin_inside_previous_exact_remainder_budget": "9/(1000u)",
+          "mode_interval": "u>=20",
+          "q_squared_over_u_log_derivative_lower": "159/20",
+          "reserved_final_corridor_margin": "29/(1000u)",
+          "sufficient_exact_minus_epsilon_ten_budget": "1/(100u)",
+          "total_exact_minus_epsilon_eight_cap": "11/(1000u)"
+        }
+      },
+      "formula": "finite <9/1000; ray <1/(100u)",
+      "id": "co4ecrb_08_epsilon_ten_exact_reserve",
+      "proof_boundary": "Sufficient theorem target, not a proved exact-density estimate.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_reduction"
+    },
+    {
+      "claim": "Prove the sharpened exact-minus-epsilon-ten budgets by a cancellation-preserving central remainder and two adaptive tails.",
+      "diagnostics": null,
+      "formula": "finite <9/1000; ray <1/(100u), simultaneously for r=2,...,8",
+      "id": "co4ecrb_09_central_tail_handoff",
+      "proof_boundary": "Open exact-density theorem; no exact cumulant corridor is asserted.",
+      "readiness": "not_ready_to_apply",
+      "role": "analytic_theorem_target"
+    }
+  ],
+  "source_hashes": {
+    "work/rh_compute/results/jensen_window_pf_compound_order4_formal_cumulant_asymptotic_ray_certificate.json": "eba63a979ca4ab37cd26f2259dfb2d7e2d1f0f55dff00bfd691af64a55e3c11e",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_formal_cumulant_corridor_certificate.json": "cf7a84ef7000cac15c22115ba60439e2da89792eae1d3a9e10e35ac7cad4df96",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_formal_cumulant_next_parity_asymptotic_ray_certificate.json": "f29e9e42d214df2765ddcbf73a17dbb09fa48cc15f6c68fbbc5f12fd547f6cb2",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_formal_cumulant_next_parity_finite_certificate.json": "6863dbc6132392b11f46d9d9ae0f2d72a197ebface89454f44255d960517614c",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_formal_cumulant_second_next_parity_asymptotic_ray_certificate.json": "6f57ee6d193bd59ff1716b780947ceff3575ca4e94e7283c63ae1869c49f1c59",
+    "work/rh_compute/results/jensen_window_pf_compound_order4_formal_cumulant_second_next_parity_finite_certificate.json": "c000834d54d563977c86bb5bf402811879be83db8e9b40366dde2a71384c34f0"
+  },
+  "sources": [
+    "outputs/jensen_window_pf_compound_order4_formal_cumulant_corridor_certificate.md",
+    "outputs/jensen_window_pf_compound_order4_formal_cumulant_asymptotic_ray_certificate.md",
+    "outputs/jensen_window_pf_compound_order4_formal_cumulant_next_parity_finite_certificate.md",
+    "outputs/jensen_window_pf_compound_order4_formal_cumulant_next_parity_asymptotic_ray_certificate.md",
+    "outputs/jensen_window_pf_compound_order4_formal_cumulant_second_next_parity_finite_certificate.md",
+    "outputs/jensen_window_pf_compound_order4_formal_cumulant_second_next_parity_asymptotic_ray_certificate.md",
+    "outputs/jensen_window_pf_compound_order4_gaussian_cumulant_ray_target.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "exact formal composition and sharpened exact-density remainder target",
+  "summary": {
+    "exact_rows": 8,
+    "finite_exact_minus_epsilon_ten_budget": "9/1000",
+    "finite_exact_remainder_budget": "1/100",
+    "global_epsilon_eight_layer_closed": true,
+    "global_epsilon_ten_layer_closed": true,
+    "open_analytic_rows": 1,
+    "ray_exact_minus_epsilon_ten_budget": "1/(100u)",
+    "ray_exact_remainder_budget": "1/(50u)",
+    "rows": 9
+  }
+}
