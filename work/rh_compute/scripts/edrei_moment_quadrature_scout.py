@@ -183,6 +183,7 @@ def run_one(lam: str, powers: dict[int, flint.arb], order: int) -> RecurrenceRow
 
 
 def default_log_paths(results_dir: Path, lambdas: list[str], needed_max_n: int) -> list[Path]:
+    log_sign_dir = results_dir / "arb_edrei" / "log_sign"
     paths: list[Path] = []
     for lam in lambdas:
         label = lam_label(lam)
@@ -197,7 +198,7 @@ def default_log_paths(results_dir: Path, lambdas: list[str], needed_max_n: int) 
         )
         matches: list[str] = []
         for pattern in patterns:
-            matches = sorted(glob.glob(str(results_dir / pattern)))
+            matches = sorted(glob.glob(str(log_sign_dir / pattern)))
             if matches:
                 break
         if not matches:

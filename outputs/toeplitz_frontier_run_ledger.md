@@ -52,11 +52,11 @@ stderr size = 0
 Promoted summaries:
 
 ```text
-work/rh_compute/results/arb_toeplitz_taylor_lam0_N24_o5_r1e-80_nonzero_summary.json
-work/rh_compute/results/arb_toeplitz_taylor_lam1e-6_N24_o5_r1e-80_nonzero_summary.json
-work/rh_compute/results/arb_toeplitz_taylor_lam1e-4_N24_o5_r1e-80_nonzero_summary.json
-work/rh_compute/results/arb_toeplitz_taylor_lam1em2_N24_o5_r1e-80_nonzero_summary.json
-work/rh_compute/results/arb_toeplitz_taylor_lam1em1_N24_o5_r1e-80_nonzero_summary.json
+work/rh_compute/results/arb_toeplitz/arb_toeplitz_taylor_lam0_N24_o5_r1e-80_nonzero_summary.json
+work/rh_compute/results/arb_toeplitz/arb_toeplitz_taylor_lam1e-6_N24_o5_r1e-80_nonzero_summary.json
+work/rh_compute/results/arb_toeplitz/arb_toeplitz_taylor_lam1e-4_N24_o5_r1e-80_nonzero_summary.json
+work/rh_compute/results/arb_toeplitz/arb_toeplitz_taylor_lam1em2_N24_o5_r1e-80_nonzero_summary.json
+work/rh_compute/results/arb_toeplitz/arb_toeplitz_taylor_lam1em1_N24_o5_r1e-80_nonzero_summary.json
 problem-row files = matching *_problem_rows.jsonl files, all zero byte
 manifest gate = python work/rh_compute/scripts/check_toeplitz_certificate_manifest.py
 ```

@@ -45,10 +45,10 @@ manifest validates 95 promoted positive Toeplitz summaries and 1 beta negative c
 The old nonzero-lambda process ids are no longer running. Their completed summaries are:
 
 ```text
-work/rh_compute/results/arb_toeplitz_taylor_lam1e-6_N24_o5_r1e-80_nonzero_summary.json
-work/rh_compute/results/arb_toeplitz_taylor_lam1e-4_N24_o5_r1e-80_nonzero_summary.json
-work/rh_compute/results/arb_toeplitz_taylor_lam1em2_N24_o5_r1e-80_nonzero_summary.json
-work/rh_compute/results/arb_toeplitz_taylor_lam1em1_N24_o5_r1e-80_nonzero_summary.json
+work/rh_compute/results/arb_toeplitz/arb_toeplitz_taylor_lam1e-6_N24_o5_r1e-80_nonzero_summary.json
+work/rh_compute/results/arb_toeplitz/arb_toeplitz_taylor_lam1e-4_N24_o5_r1e-80_nonzero_summary.json
+work/rh_compute/results/arb_toeplitz/arb_toeplitz_taylor_lam1em2_N24_o5_r1e-80_nonzero_summary.json
+work/rh_compute/results/arb_toeplitz/arb_toeplitz_taylor_lam1em1_N24_o5_r1e-80_nonzero_summary.json
 ```
 
 ## GPU Scout Layer

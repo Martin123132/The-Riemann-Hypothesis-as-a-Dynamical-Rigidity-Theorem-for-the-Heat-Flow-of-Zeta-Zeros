@@ -1530,6 +1530,8 @@ def validate_spec(results_dir: Path, spec: PowerHankelSpec) -> None:
 
         log_summary_path = (
             results_dir
+            / "arb_edrei"
+            / "log_sign"
             / (
                 f"arb_edrei_log_sign_lam{spec.safe_lam}_n1_n{log_max_n}_"
                 f"dps{spec.source_log_dps}{spec.source_log_suffix}_summary.json"
@@ -1552,8 +1554,11 @@ def validate_spec(results_dir: Path, spec: PowerHankelSpec) -> None:
                     f"{log_summary_path.name}: {key} {actual!r} != {expected!r}"
                 )
 
-    summary_path = results_dir / f"{spec.stem}_summary.json"
-    rows_path = results_dir / f"{spec.stem}.jsonl"
+    power_dir = (
+        results_dir / "arb_edrei" / "power_hankel" / f"lam{spec.safe_lam}"
+    )
+    summary_path = power_dir / f"{spec.stem}_summary.json"
+    rows_path = power_dir / f"{spec.stem}.jsonl"
     summary = load_json(summary_path)
     checks = {
         "kind": "arb_edrei_power_hankel_probe_summary",

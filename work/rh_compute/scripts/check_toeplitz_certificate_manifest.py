@@ -290,15 +290,16 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--results-dir", default="work/rh_compute/results", type=Path)
     args = parser.parse_args()
+    toeplitz_dir = args.results_dir / "arb_toeplitz"
 
     checked_positive = 0
-    for label, summary_path, spec in iter_positive_summaries(args.results_dir):
+    for label, summary_path, spec in iter_positive_summaries(toeplitz_dir):
         validate_positive_summary(summary_path, spec)
         checked_positive += 1
         print(f"OK positive: {label} :: {summary_path.name}")
 
     for spec in NEGATIVE_CONTROLS:
-        validate_negative_control(args.results_dir, spec)
+        validate_negative_control(toeplitz_dir, spec)
         print(f"OK negative-control: {spec.name} :: {spec.summary_name}")
 
     print(
