@@ -118,8 +118,11 @@ def validate_spec(results_dir: Path, spec: BoundarySpec) -> None:
         f"m{spec.m}_m{spec.m}_s{spec.shift}_s{spec.shift}_"
         f"dps{spec.dps}_frontier_tol1e-120"
     )
-    summary_path = results_dir / f"{stem}_summary.json"
-    rows_path = results_dir / f"{stem}.jsonl"
+    power_dir = (
+        results_dir / "arb_edrei" / "power_hankel" / f"lam{spec.safe_lam}"
+    )
+    summary_path = power_dir / f"{stem}_summary.json"
+    rows_path = power_dir / f"{stem}.jsonl"
     validate_summary(summary_path, spec)
     validate_rows(rows_path, spec)
 
@@ -146,6 +149,8 @@ def validate_repair_sources(results_dir: Path) -> None:
 
     log_path = (
         results_dir
+        / "arb_edrei"
+        / "log_sign"
         / "arb_edrei_log_sign_lam1em6_n1_n51_dps2400_boundary_tol1e-140_summary.json"
     )
     log_summary = load_json(log_path)
@@ -170,8 +175,11 @@ def validate_repair_spec(results_dir: Path, spec: RepairSpec) -> None:
         f"m{spec.m}_m{spec.m}_s{spec.shift_min}_s{spec.shift_max}_"
         f"dps{spec.dps}_boundary_tol1e-140"
     )
-    summary_path = results_dir / f"{stem}_summary.json"
-    rows_path = results_dir / f"{stem}.jsonl"
+    power_dir = (
+        results_dir / "arb_edrei" / "power_hankel" / f"lam{spec.safe_lam}"
+    )
+    summary_path = power_dir / f"{stem}_summary.json"
+    rows_path = power_dir / f"{stem}.jsonl"
     summary = load_json(summary_path)
     checks = {
         "kind": "arb_edrei_power_hankel_probe_summary",
