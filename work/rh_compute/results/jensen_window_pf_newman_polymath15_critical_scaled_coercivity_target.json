@@ -4,7 +4,8 @@
   "status": "exact corrected finite coercivity target for the critical scaled Newman layer; not a proof of its sign, Lambda<=0, or RH",
   "proof_boundary": "This artifact proves the uncorrected component identity and the exact curvature contribution of the published Riemann-Siegel correction. It identifies the refined remainder order and the live finite target. It does not prove the corrected coercivity inequality, positivity throughout the critical layer, positivity for all x and t, Lambda<=0, or RH.",
   "exact": {
-    "critical_region": "L=log(x/(4*pi))->infinity, c=t*L in [0,c_*+o(1)], c_*=4911678521/1933561194=2.540223984760008..., N=floor(sqrt(x/(4*pi)+t/16))",
+    "critical_region": "L=log(x/(4*pi))->infinity, c=t*L in (0,c_*+o(1)], c_*=4911678521/1933561194=2.540223984760008..., N=floor(sqrt(x/(4*pi)+t/16))",
+    "positive_time_scope": "The Newman criterion requires t>0, so c=0 is not part of the target; however every positive sequence c(L)->0 remains in scope, and no lower cutoff c>=c_0 may be inserted.",
     "dirichlet_main": "D_(N,t)(x)=sum_(n<=N)exp((t/4)log(n)^2)*n^(-s_*(x)), P_(N,t)=2Re(exp(i*beta_t)D_(N,t))",
     "components": "exp(i*beta)D=X+iY, exp(i*beta)D'=U+iV1, exp(i*beta)D''=W+iV2, B=beta'",
     "coercivity": "C[P]/4=B^2(X^2+Y^2)+2B(X*V1-U*Y)+U^2-X*W+beta''*X*Y+V_t*X^2",
@@ -16,7 +17,7 @@
     "corrected_curvature": "C[J]-C[P]=-2P'Q'+Q'^2+P*Q''+Q*P''-Q*Q''+V_t*(-2P*Q+Q^2)",
     "refined_remainder": "H_t/A_t=J_(N,t)+r_ref; the published e_C replaces the e_C0 factor 1 by tilde_epsilon(s_-)+tilde_epsilon(s_+)=O(1/N)",
     "shrinking_collar": "On radius rho=1/L collars, the refined normalized C2 remainder is o(L^2) after including one adjacent-N correction",
-    "live_target": "Prove C_t[J_(N,t)] greater than its explicit refined C2 remainder budget uniformly for 0<=t*L<=c_*+o(1)"
+    "live_target": "Prove C_t[J_(N,t)] greater than its explicit refined C2 remainder budget for every 0<t*L<=c_*+o(1), including positive sequences t*L->0"
   },
   "rows": [
     {
@@ -24,8 +25,8 @@
       "role": "exact_reduction",
       "readiness": "ready_to_apply",
       "claim": "The remaining asymptotic obstruction is a bounded scaled-time finite Riemann-Siegel problem.",
-      "formula": "L=log(x/(4*pi))->infinity, c=t*L in [0,c_*+o(1)], c_*=4911678521/1933561194=2.540223984760008..., N=floor(sqrt(x/(4*pi)+t/16))",
-      "proof_boundary": "The c>c_*+epsilon region is closed by the oscillatory zeta handoff theorem.",
+      "formula": "L=log(x/(4*pi))->infinity, c=t*L in (0,c_*+o(1)], c_*=4911678521/1933561194=2.540223984760008..., N=floor(sqrt(x/(4*pi)+t/16))",
+      "proof_boundary": "The c>c_*+epsilon region is closed by the oscillatory zeta handoff theorem. The endpoint c=0 is not required, but no positive lower cutoff is available.",
       "diagnostics": null
     },
     {
@@ -96,7 +97,7 @@
       "role": "open_theorem_target",
       "readiness": "not_ready_to_apply",
       "claim": "The global tail is reduced to one corrected finite oscillatory coercivity inequality.",
-      "formula": "Prove C_t[J_(N,t)] greater than its explicit refined C2 remainder budget uniformly for 0<=t*L<=c_*+o(1)",
+      "formula": "Prove C_t[J_(N,t)] greater than its explicit refined C2 remainder budget for every 0<t*L<=c_*+o(1), including positive sequences t*L->0",
       "proof_boundary": "Open and RH-level; no sign is asserted.",
       "diagnostics": null
     },

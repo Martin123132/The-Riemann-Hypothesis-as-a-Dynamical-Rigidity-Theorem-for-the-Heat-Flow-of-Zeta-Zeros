@@ -1,0 +1,120 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order11_m100_entry_certificate.py",
+  "date": "2026-07-22",
+  "exact": {
+    "analytic_tail": "Q_(11,n)(-100)>0 for every n>=1243",
+    "finite_prefix": "Q_(11,n)(-100)>0 for every 0<=n<=1242",
+    "first_discrete_ceiling": "y_1''(t)<=6000/t^2 => Y_k^(1)<=6000*[-log(1-1/k^2)]<6001/k^2, k>=1253",
+    "full_curvature_ceiling": "[z_1''(t)<=4200/t^2 on t>=1251 and y_1''(t)<=6000/t^2 on t>=1252] => Y_k<6001/k^2+37/k^2=6038/k^2<6100/k^2, k>=1253",
+    "full_kernel_transfer": "|Y_k-Y_k^(1)|<37/k^2 for every integer k>=1253",
+    "global_endpoint": "Q_(11,n)(-100)>0 for every integer n>=0",
+    "order10_continuous": "z_1''(t)<=4200/t^2 for every real t>=1251",
+    "order11_continuous": "y_1''(t)<=6000/t^2 for every real t>=1252"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order11_m100_entry_certificate.py",
+  "kind": "jensen_window_pf_compound_order11_m100_entry_certificate",
+  "proof_boundary": "This artifact proves fixed order-eleven contiguous signed Hankel positivity at lambda=-100. It does not prove the heat interval, all orders, PF-infinity, Lambda<=0, or RH.",
+  "rows": [
+    {
+      "claim": "The inherited order-ten first-summand theorem supplies the common X-floor premise.",
+      "formula": "z_1''(t)<=4200/t^2 for every real t>=1251",
+      "id": "co11m100ec_01_order10_curvature",
+      "proof_boundary": "First Newman summand at lambda=-100.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The global order-eleven first-summand theorem discharges the bridge's only open target.",
+      "formula": "y_1''(t)<=6000/t^2 for every real t>=1252",
+      "id": "co11m100ec_02_order11_curvature",
+      "proof_boundary": "Continuous first-summand theorem at lambda=-100.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The tent identity and rational perturbation envelope give the full discrete curvature ceiling.",
+      "formula": "y_1''(t)<=6000/t^2 => Y_k^(1)<=6000*[-log(1-1/k^2)]<6001/k^2, k>=1253; |Y_k-Y_k^(1)|<37/k^2 for every integer k>=1253; [z_1''(t)<=4200/t^2 on t>=1251 and y_1''(t)<=6000/t^2 on t>=1252] => Y_k<6001/k^2+37/k^2=6038/k^2<6100/k^2, k>=1253",
+      "id": "co11m100ec_03_discrete_transfer",
+      "proof_boundary": "Full Newman kernel at lambda=-100 for integer k>=1253.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_application"
+    },
+    {
+      "claim": "The discharged continuum premise contains no full-kernel, heat-forward, or RH theorem.",
+      "formula": "source full_kernel_theorems=0; heat_forward_theorems=0; rh_claims=0",
+      "id": "co11m100ec_04_circularity_guard",
+      "proof_boundary": "Prevents the endpoint conclusion from being assumed inside its first-summand premise.",
+      "readiness": "ready_to_apply",
+      "role": "circularity_guard"
+    },
+    {
+      "claim": "The full curvature ceiling proves every order-eleven endpoint sign in the analytic tail.",
+      "formula": "Q_(11,n)(-100)>0 for every n>=1243",
+      "id": "co11m100ec_05_analytic_tail",
+      "proof_boundary": "Endpoint shifts n>=1243.",
+      "readiness": "ready_to_apply",
+      "role": "analytic_theorem"
+    },
+    {
+      "claim": "The direct Arb and positive-cone certificate supplies every preceding endpoint shift.",
+      "formula": "Q_(11,n)(-100)>0 for every 0<=n<=1242",
+      "id": "co11m100ec_06_finite_prefix",
+      "proof_boundary": "Endpoint shifts 0<=n<=1242.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "The finite prefix and analytic tail meet without an index gap.",
+      "formula": "Q_(11,n)(-100)>0 for every integer n>=0",
+      "id": "co11m100ec_07_global_endpoint",
+      "proof_boundary": "Fixed order eleven and lambda=-100 only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    }
+  ],
+  "source_contract": {
+    "discharged_target": "co11cbt_05_first_target",
+    "sources": [
+      {
+        "kind": "jensen_window_pf_compound_order10_first_summand_curvature_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order10_first_summand_curvature_certificate.json",
+        "sha256": "480da3125b1c89f2e9e85f17fcb58d08957f83a5735a4446f83f242635b13ed5",
+        "status": "rigorous global order-ten first-summand curvature theorem on t>=1251"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order11_first_summand_curvature_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order11_first_summand_curvature_certificate.json",
+        "sha256": "8f874d1f01027a69917e394f62a8cb5f6fd8098dd81ba2f255431d2b8765144d",
+        "status": "rigorous global order-eleven first-summand curvature theorem on t>=1252"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order11_curvature_bridge_target",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order11_curvature_bridge_target.json",
+        "sha256": "2a3f87fdb5cc4f84c0a44215a70b9cfe02b35240091eb1752dc0221f1dd33043",
+        "status": "exact conditional order-eleven curvature bridge with one open continuum target"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order11_m100_prefix_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order11_m100_prefix_certificate.json",
+        "sha256": "60a24934d8ecf9c275e159fb5b4644dc14c27d0fcff324c9f1e30d6d8c899435",
+        "status": "rigorous lambda=-100 signed order-eleven prefix through n=1242"
+      }
+    ],
+    "transfer_scaled": "3.6000240211299395138963759577008330105802313148259E+1"
+  },
+  "status": "rigorous all-shift signed order-eleven entry at lambda=-100",
+  "summary": {
+    "analytic_tail_theorems": 1,
+    "circularity_guards": 1,
+    "discharged_continuum_targets": 1,
+    "finite_prefix_theorems": 1,
+    "full_kernel_transfer_applications": 1,
+    "global_m100_order11_entry_theorems": 1,
+    "heat_interval_theorems": 0,
+    "open_rows": 0,
+    "orders_above_11": 0,
+    "ready_rows": 7,
+    "rh_claims": 0,
+    "rows": 7
+  }
+}

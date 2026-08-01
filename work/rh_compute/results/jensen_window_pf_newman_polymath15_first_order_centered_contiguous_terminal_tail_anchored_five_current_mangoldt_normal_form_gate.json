@@ -1,0 +1,208 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_current_mangoldt_normal_form_gate",
+  "date": "2026-07-31",
+  "status": "exact terminal-tail five-current correction-free Mangoldt normal form; Type-I/II Phi_B bound open; no bulk aggregate sign closure, Xi-level current theorem, Lambda<=0, or RH",
+  "proof_boundary": "This proves an exact five-moment correction-free normal form, Mangoldt representations through order four, balanced hyperbola organization, and an indefiniteness guard. It proves no Type-I/II cancellation estimate, signed bound on Phi_B, bulk aggregate sign closure, complete retained or Xi-level current theorem, Abel gap, winding cap, contact exclusion, Q209, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "source_audit": {
+    "source_sha256": {
+      "five_current": "64b2b78043ab4b2dbad53a0390f30817cf263067a345375dccbb793c382128ff",
+      "mangoldt_abel": "d93cf55cd6153297fc071a98dff59a77608875b12e00be5d46d44c1ad567ac2a",
+      "contact_centering": "51c076ce0c303a85aa3c574a80290ddff8b2ecf978aba6bcf628f699434a72fb"
+    },
+    "source_kinds": {
+      "five_current": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_current_bulk_closure_reduction",
+      "mangoldt_abel": "corrected_mangoldt_abel_contact_gate",
+      "contact_centering": "mangoldt_contact_centering_gate"
+    },
+    "imported_signed_type_ii_bounds": 0
+  },
+  "symbolic_certificate": {
+    "quadratic_correction": "c_n=(1+d_n)/(1+d_1)=1+rho_1*log(n)+rho_2*log(n)^2",
+    "correction_current": "delta_n=partial_x log(c_n), so delta_n*c_n=rho_(1,x)*log(n)+rho_(2,x)*log(n)^2",
+    "correction_free_moments": "G_r^(B)=(eta/S_a)sum_(n=1)^B log(n)^r*exp[t log(n)^2/4-s_*log(n)], 0<=r<=4",
+    "five_current_transform": "H_0=G_0+rho_1G_1+rho_2G_2; H_1=G_1+rho_1G_2+rho_2G_3; H_2=G_2+rho_1G_3+rho_2G_4; D_0=rho_(1,x)G_1+rho_(2,x)G_2; D_1=rho_(1,x)G_2+rho_(2,x)G_3",
+    "transform_determinant": "-rho_2*(rho_1*rho_1_x*rho_2_x - rho_1_x**2*rho_2 - rho_2_x**2)",
+    "mangoldt_moments": "For 1<=r<=4, G_r^(B)=(eta/S_a)sum_(dm<=B)Lambda(d)log(dm)^(r-1)q_(dm)^(0)=(eta/(2S_a))sum_(dm<=B)[Lambda(d)+Lambda(m)]log(dm)^(r-1)q_(dm)^(0)",
+    "heat_factorization": "q_(dm)^(0)=q_d^(0)q_m^(0)exp[(t/2)log(d)log(m)]",
+    "negative_prime_edge_minors": {
+      "1": "-log(p)^2/4<0",
+      "2": "-log(p)^4/4<0",
+      "3": "-log(p)^6/4<0",
+      "4": "-log(p)^8/4<0"
+    }
+  },
+  "arithmetic_certificate": {
+    "cutoffs": [
+      17,
+      31,
+      64,
+      97
+    ],
+    "divisor_rows": 205,
+    "symmetric_rows": 205,
+    "balanced_hyperbola_rows": 4,
+    "max_moment_order": 4
+  },
+  "exact": {
+    "domain": "Use the fixed physical q=1 terminal/bulk partition with B=N-M-1. All sums below stop at B and share the same eta/S_a normalizer as the certified tail.",
+    "coefficient_definitions": "From 1+d_n=a_0+a_1 log(n)+a_2 log(n)^2 and a_0=1+d_1, put rho_1=a_1/a_0 and rho_2=a_2/a_0. Their x derivatives are exact quotient derivatives; no correction remainder is discarded.",
+    "five_moment_closure": "The corrected five-current vector needed by Phi_B is an exact linear image of G_0,G_1,G_2,G_3,G_4. Thus the correction does not create an uncontrolled sixth current.",
+    "balanced_hyperbola": "For D=floor(sqrt(B)), each symmetric Mangoldt moment splits exactly into the square d,m<=D and the two wings with exactly one variable <=D. The endpoint-terminal block is composed with the resulting moments before any absolute values.",
+    "type_ii_target": "Insert the five-current transform into the exact Phi_B quadratic form and prove Phi_B<=1/400, preferably <=1/800, by a signed endpoint-coupled Type-I/II or Vaughan estimate for G_1,...,G_4 together with the value moment G_0.",
+    "indefiniteness_guard": "For every 1<=r<=4 and any prime sqrt(B)<p<=B, the {1,p} principal minor of the real transpose-symmetric Mangoldt kernel is [[0,log(p)^r/2],[log(p)^r/2,0]] and has negative determinant. Transpose symmetry and entrywise positivity therefore do not supply the signed Phi_B bound.",
+    "pi_provenance": "No pi is introduced by the correction transform, Mangoldt identity, or balanced hyperbola. Existing pi factors retain their completed-zeta/Riemann-Siegel origin.",
+    "proof_boundary": "This proves an exact five-moment correction-free normal form, Mangoldt representations through order four, balanced hyperbola organization, and an indefiniteness guard. It proves no Type-I/II cancellation estimate, signed bound on Phi_B, bulk aggregate sign closure, complete retained or Xi-level current theorem, Abel gap, winding cap, contact exclusion, Q209, Lambda<=0, PF-infinity, RH, or prize-level conclusion."
+  },
+  "counts": {
+    "rows": 12,
+    "exact_correction_transforms": 1,
+    "corrected_complex_currents": 5,
+    "correction_free_complex_moments": 5,
+    "mangoldt_moment_orders": 4,
+    "balanced_hyperbola_schemas": 1,
+    "negative_prime_edge_minor_families": 4,
+    "signed_type_ii_targets": 1,
+    "signed_type_ii_bounds": 0,
+    "phi_b_bounds": 0,
+    "xi_level_current_theorems": 0
+  },
+  "rows": [
+    {
+      "id": "ttmg_01_domain",
+      "role": "fixed partition",
+      "readiness": "proved",
+      "claim": "The normal form uses the certified tail's exact bulk cutoff.",
+      "formula": "Use the fixed physical q=1 terminal/bulk partition with B=N-M-1. All sums below stop at B and share the same eta/S_a normalizer as the certified tail.",
+      "proof_boundary": "No adjacent cutoff is crossed.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttmg_02_correction",
+      "role": "quadratic correction",
+      "readiness": "proved",
+      "claim": "The retained first Dirichlet correction is exactly quadratic in log(n).",
+      "formula": "c_n=(1+d_n)/(1+d_1)=1+rho_1*log(n)+rho_2*log(n)^2",
+      "proof_boundary": "No asymptotic correction truncation is made.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttmg_03_current",
+      "role": "correction current",
+      "readiness": "proved",
+      "claim": "Multiplication by delta_n cancels the correction denominator exactly.",
+      "formula": "delta_n=partial_x log(c_n), so delta_n*c_n=rho_(1,x)*log(n)+rho_(2,x)*log(n)^2",
+      "proof_boundary": "rho_(j,x) is retained.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttmg_04_base",
+      "role": "correction-free moments",
+      "readiness": "proved",
+      "claim": "Five correction-free logarithmic moments are sufficient.",
+      "formula": "G_r^(B)=(eta/S_a)sum_(n=1)^B log(n)^r*exp[t log(n)^2/4-s_*log(n)], 0<=r<=4",
+      "proof_boundary": "The common anchor and scale are preserved.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttmg_05_transform",
+      "role": "five-current transform",
+      "readiness": "proved",
+      "claim": "The corrected current vector is an exact linear image of G_0 through G_4.",
+      "formula": "H_0=G_0+rho_1G_1+rho_2G_2; H_1=G_1+rho_1G_2+rho_2G_3; H_2=G_2+rho_1G_3+rho_2G_4; D_0=rho_(1,x)G_1+rho_(2,x)G_2; D_1=rho_(1,x)G_2+rho_(2,x)G_3",
+      "proof_boundary": "Invertibility is neither assumed nor required.",
+      "diagnostics": {
+        "determinant": "-rho_2*(rho_1*rho_1_x*rho_2_x - rho_1_x**2*rho_2 - rho_2_x**2)"
+      }
+    },
+    {
+      "id": "ttmg_06_mangoldt",
+      "role": "Mangoldt normal form",
+      "readiness": "proved",
+      "claim": "Every positive-order base moment has a symmetric divisor-pair representation.",
+      "formula": "For 1<=r<=4, G_r^(B)=(eta/S_a)sum_(dm<=B)Lambda(d)log(dm)^(r-1)q_(dm)^(0)=(eta/(2S_a))sum_(dm<=B)[Lambda(d)+Lambda(m)]log(dm)^(r-1)q_(dm)^(0)",
+      "proof_boundary": "The form is complex bilinear, not Hermitian.",
+      "diagnostics": {
+        "cutoffs": [
+          17,
+          31,
+          64,
+          97
+        ],
+        "divisor_rows": 205,
+        "symmetric_rows": 205,
+        "balanced_hyperbola_rows": 4,
+        "max_moment_order": 4
+      }
+    },
+    {
+      "id": "ttmg_07_heat",
+      "role": "heat factorization",
+      "readiness": "proved",
+      "claim": "The multiplicative pair retains the exact heat cross coupling.",
+      "formula": "q_(dm)^(0)=q_d^(0)q_m^(0)exp[(t/2)log(d)log(m)]",
+      "proof_boundary": "No Gaussian fibre sign is inferred.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttmg_08_hyperbola",
+      "role": "balanced hyperbola",
+      "readiness": "proved",
+      "claim": "The Type-I/II square and wings form an exact partition.",
+      "formula": "For D=floor(sqrt(B)), each symmetric Mangoldt moment splits exactly into the square d,m<=D and the two wings with exactly one variable <=D. The endpoint-terminal block is composed with the resulting moments before any absolute values.",
+      "proof_boundary": "This is organization, not cancellation.",
+      "diagnostics": {
+        "cutoffs": [
+          17,
+          31,
+          64,
+          97
+        ],
+        "divisor_rows": 205,
+        "symmetric_rows": 205,
+        "balanced_hyperbola_rows": 4,
+        "max_moment_order": 4
+      }
+    },
+    {
+      "id": "ttmg_09_join",
+      "role": "endpoint-coupled join",
+      "readiness": "proved",
+      "claim": "The Mangoldt moments feed the exact terminal-tail Phi_B form.",
+      "formula": "The corrected five-current vector needed by Phi_B is an exact linear image of G_0,G_1,G_2,G_3,G_4. Thus the correction does not create an uncontrolled sixth current.",
+      "proof_boundary": "The endpoint is not estimated separately.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttmg_10_guard",
+      "role": "indefiniteness guard",
+      "readiness": "proved",
+      "claim": "The symmetric kernels through order four are indefinite on the retained hyperbola.",
+      "formula": "For every 1<=r<=4 and any prime sqrt(B)<p<=B, the {1,p} principal minor of the real transpose-symmetric Mangoldt kernel is [[0,log(p)^r/2],[log(p)^r/2,0]] and has negative determinant. Transpose symmetry and entrywise positivity therefore do not supply the signed Phi_B bound.",
+      "proof_boundary": "Positivity promotion is forbidden.",
+      "diagnostics": {
+        "1": "-log(p)^2/4<0",
+        "2": "-log(p)^4/4<0",
+        "3": "-log(p)^6/4<0",
+        "4": "-log(p)^8/4<0"
+      }
+    },
+    {
+      "id": "ttmg_11_target",
+      "role": "Type-I/II target",
+      "readiness": "open",
+      "claim": "A signed endpoint-coupled cancellation theorem is now the exact arithmetic obligation.",
+      "formula": "Insert the five-current transform into the exact Phi_B quadratic form and prove Phi_B<=1/400, preferably <=1/800, by a signed endpoint-coupled Type-I/II or Vaughan estimate for G_1,...,G_4 together with the value moment G_0.",
+      "proof_boundary": "No such estimate is proved here.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttmg_12_boundary",
+      "role": "proof boundary",
+      "readiness": "open",
+      "claim": "The normal form narrows but does not close the bulk theorem.",
+      "formula": "This proves an exact five-moment correction-free normal form, Mangoldt representations through order four, balanced hyperbola organization, and an indefiniteness guard. It proves no Type-I/II cancellation estimate, signed bound on Phi_B, bulk aggregate sign closure, complete retained or Xi-level current theorem, Abel gap, winding cap, contact exclusion, Q209, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+      "proof_boundary": "RH remains open.",
+      "diagnostics": null
+    }
+  ]
+}

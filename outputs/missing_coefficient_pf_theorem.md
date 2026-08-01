@@ -242,33 +242,46 @@ log H_lambda(z) = sum_{n >= 1} ell_n(lambda) z^n
 q_n(lambda) = n ell_n(lambda)
 ```
 
-For an entire restricted Laguerre-Polya target with only nonpositive real zeros, one would have:
+Set
 
 ```text
-H_lambda(z) = exp(gamma z) product_j (1 + beta_j z)
-gamma >= 0
-beta_j >= 0
+p_n(lambda) = (-1)^(n-1) q_n(lambda)
+a_r(lambda) = p_(r+1)(lambda)
+              = (-1)^r [z^r] H_lambda'(z)/H_lambda(z).
 ```
 
-and hence:
+Sokal's logarithmic-derivative criterion applies because `H_lambda` is entire
+and `H_lambda(0)=1`. It gives the exact all-order equivalence
 
 ```text
-(-1)^(n-1) q_n(lambda) >= 0.
+H_lambda is Laguerre-Polya type I
+  <=> (a_r(lambda))_(r>=0) is a Stieltjes moment sequence.
 ```
 
-A noncircular all-order route would be to prove either:
+Equivalently, there is a unique measure of the Edrei zero form for which
 
 ```text
-(-1)^(n-1) q_n(0) >= 0 for every n
+H_lambda'(z)/H_lambda(z)
+  = integral_[0,infinity) dnu_lambda(x)/(1+xz),
+nu_lambda
+  = gamma*delta_0 + sum_j m_j*beta_j*delta_(beta_j),
+gamma>=0, beta_j>0, m_j in Z_(>=1), sum_j m_j*beta_j<infinity.
 ```
 
-plus the analytic conditions needed to reconstruct a positive zero-parameter object, or more strongly:
+Entireness supplies the discreteness and integer-residue part once the
+all-order Stieltjes property is proved. Thus no separate product-reconstruction
+conjecture is needed. Sign alternation `p_n>=0` alone remains only necessary.
+
+A clean strict sufficient target is
 
 ```text
-(-1)^(n-1) q_n(0) = integral x^n d rho(x)
+det(p_(i+j+1)(0))_(i,j=0)^m > 0,
+det(p_(i+j+2)(0))_(i,j=0)^m > 0
 ```
 
-for a positive measure/ray-supported parameter object.
+for every `m>=0`. By the Stieltjes moment criterion these are the two required
+Hankel columns. The exact indexing and primary-source gate are recorded in
+`outputs/jensen_window_pf_edrei_stieltjes_equivalence_gate.md`.
 
 Finite status:
 
@@ -288,8 +301,8 @@ n = 1..64
 320/320 finite log-sign diagnostics pass
 ```
 
-The same coefficient enclosures also support a second necessary-condition
-test. For:
+The same coefficient enclosures also test finite pieces of the exact
+all-order Stieltjes criterion. For:
 
 ```text
 p_n(lambda) = (-1)^(n-1) q_n(lambda)
@@ -352,8 +365,73 @@ validates both the retired blockers and the repaired positive rows.
 Current blocker:
 
 ```text
-finite log-sign alternation and finite power-Hankel positivity are only necessary conditions; no all-n proof or positive parameter representation is known.
+finite log-sign alternation, finite power-Hankel positivity, and finite recurrence positivity do not prove that a_r=p_(r+1) is a Stieltjes moment sequence at all orders; no all-m proof of the two required Hankel columns or nonnegative S-fraction is known.
 ```
+
+The direct ratio handoff is now exact rather than schematic. Krein's
+Stieltjes/Pick characterization and Sokal's criterion give
+
+```text
+H_0 in LP+
+  <=> P_Phi(z):=-Im(F_0'(z)*conj(F_0(z)))>0
+      for every Im(z)>0.
+```
+
+Polarization writes `P_Phi` as a concrete double integral against
+`Phi(u)Phi(v)`. An equivalent sufficient route is a noncircular identity
+
+```text
+H_0'(z)/H_0(z)=gamma+<v,(I+z*T)^(-1)v>
+```
+
+with `T` positive self-adjoint and derived from Phi. Neither the global sign
+nor such an operator is known. The exact target and two-scale mixture guard
+are in `outputs/jensen_window_pf_phi_pick_kernel_target.md`.
+
+The same endpoint now has an explicit published arithmetic-operator form.
+With
+
+```text
+E_(omega,nu)(r)=xi(1/2+omega-ir)^nu
+```
+
+and Suzuki's truncated Hankel operator `K_(omega,nu)[t]`, a concrete
+equivalent target is:
+
+```text
+choose omega_n decreasing to 0 and nu_n*omega_n>1;
+prove det(I+/-K_(omega_n,nu_n)[t])!=0 for every t>=0;
+```
+
+Suzuki's published criterion also lists a terminal `J`-limit. The internally
+audited causal-multiplier reduction shows that this terminal premise is
+redundant for a strictly decreasing cofinal determinant family: all finite
+forms extend to one bounded causal multiplier, and any off-line zero would
+force distinct shifted zeros accumulating at itself. This does not prove the
+displayed determinant condition. Suzuki proves only a local interval
+unconditionally. The Fredholm expansion writes every coefficient as an
+integral of a continuum Hankel determinant, but total nonnegativity alone is
+insufficient: a rank-one TN kernel can have eigenvalue one and `det(I-K)=0`.
+Horizontal xi-modulus growth and real-boundary unimodularity are also
+theorem-mismatched shortcuts. The exact route and guards are in
+`outputs/jensen_window_pf_xi_pick_suzuki_hankel_bridge.md` and
+`outputs/jensen_window_pf_suzuki_determinant_only_reduction.md`.
+
+The truncations form a Hilbert-Schmidt-continuous self-adjoint path starting
+at zero, with nondecreasing operator norm. Therefore all-`t` determinant
+nonvanishing is exactly pointwise `||K[t]||<1` for every finite `t`, or
+equivalently exclusion of a finite first `+1` or `-1` crossing. This does not
+ask for one gap uniform in `t`; such a gap is impossible in the desired
+Hermite-Biehler case. The exact Hilbert-Schmidt formula also diverges for
+every nonzero kernel, and Suzuki's sup-contour local certificate has a finite
+time ceiling. The corrected spectral target and route guards are in
+`outputs/jensen_window_pf_suzuki_spectral_frontier.md`.
+
+The Edrei moments also satisfy an exact radial heat hierarchy, but the LP+
+model `(1+beta*z)^2` exits every shifted `2x2` Stieltjes wall immediately
+under backward heat. Thus generic backward cone invariance is unavailable;
+an Xi/Phi-specific all-order no-escape theorem would be required. See
+`outputs/jensen_window_pf_edrei_heat_flow_boundary_gate.md`.
 
 Arb recurrence reconstruction scout:
 
@@ -378,8 +456,7 @@ The exact rational moment-recurrence trap preserves the finite recurrence
 prefix through order `12` using factorial moments and then chooses a positive
 next even moment that makes the next Hankel determinant negative. This blocks
 any Target F proof attempt that tries to promote finite recurrence positivity
-to an all-order Edrei representation without a new infinite theorem or
-explicit positive parameter construction.
+to the all-order Stieltjes property without a new infinite theorem.
 
 ## Numerical Evidence Boundary
 
@@ -404,8 +481,12 @@ Before this route can be promoted in a manuscript, we need one of:
 3. a proof of Target C;
 4. a proof of Target D;
 5. a valid closure/factorization proof under Target E;
-6. an all-order Edrei log-power-sum representation under Target F;
-7. an external theorem whose hypotheses are verified exactly for c_k(lambda).
+6. an all-order Stieltjes-moment proof for a_r=p_(r+1), equivalently a
+   nonnegative Stieltjes continued fraction or the two all-order Hankel columns
+   under Target F;
+7. Suzuki's cofinal all-t Fredholm nonvanishing, equivalently pointwise
+   strict contractivity of every selected finite truncation;
+8. an external theorem whose hypotheses are verified exactly for c_k(lambda).
 ```
 
 Until then, the honest status is:
@@ -436,15 +517,20 @@ outputs/sign_regularity_theorem_fit_matrix.md
 Its current conclusion is:
 
 ```text
-ASW/Edrei and Schur-positive specialization theory describe the endpoint;
-Schoenberg and Jensen theory describe equivalent or necessary conditions;
-Hankel moment theory explains diagnostics but not Toeplitz PF-infinity.
+ASW/Edrei, Polya-Schur/Jensen, and Sokal's logarithmic-derivative criterion
+give equivalent endpoint languages; ordinary Hankel moment positivity of the
+raw moments does not imply Toeplitz PF-infinity, while Stieltjes positivity of
+the nonlinear Edrei-log sequence a_r=p_(r+1) is endpoint-equivalent.
 ```
 
 The three noncircular bridge targets now worth prioritizing are:
 
 ```text
 1. construct a positive Schur/Edrei-Thoma specialization h_k -> d_k(0);
-2. prove an Edrei log-power representation for H_0(z);
-3. derive a positive determinant integral formula for every Toeplitz minor.
+2. prove that a_r=p_(r+1) is a Stieltjes moment sequence, for example through
+   the two all-order Hankel columns or a nonnegative S-fraction;
+3. prevent every finite +/-1 crossing in Suzuki's arithmetic-Hankel
+   truncation path by a signed quadratic-form or determinant factorization
+   without contour, Hermite-Biehler, or RH circularity;
+4. derive a positive determinant integral formula for every Toeplitz minor.
 ```

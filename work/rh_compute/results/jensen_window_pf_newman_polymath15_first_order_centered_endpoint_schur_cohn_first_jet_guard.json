@@ -1,0 +1,285 @@
+{
+  "date": "2026-07-27",
+  "exact": {
+    "boundary_margin": "The inverse normalized recursion gives, for |z|=1, |p_d(z)|>=(1-|alpha_d|)|p_(d-1)(z)|. Consequently min_(|z|=1)|F_N(z)|>=|b_0|*product_(d=1)^K(1-|alpha_d|)>0 whenever every pivot is strict. This is a quantified sufficient boundary margin, not a claim that the actual Xi reflection coefficients satisfy the inequalities.",
+    "centered_companion": "Let A=log(a) and G(z)=r_A-s_*'[P_1(z)-A P_0(z)]. Then G(z_*)=Z_A. Its fixed-z x tangent is W(z)=r_(A,x)-s_*''[P_1-AP_0]-s_*'{-s_*'[P_2-AP_1]+D_1-AD_0-A_xP_0-i*omega_*'log(2)z[P_1'-AP_0']}. After adding z_*'G'(z_*), the phase terms cancel and one recovers the exact Z_(A,x) formula containing H_2,D_0,D_1,r_(A,x).",
+    "coefficient_x_tangent": "Inside one fixed-N chart, (B_(k,r))_x=-s_*'B_(k,r+1)+E_(k,r)-i*k*log(2)*omega_*'B_(k,r). Thus the fixed-z tangent is X(z)=F_(N,x)|_z=r_(0,x)-s_*'P_1(z)+D_0(z)-i*omega_*'log(2)zP_0'(z). At z=z_*, adding z_*'=i*omega_*'log(2)z_* gives X(z_*)+z_*'F_N'(z_*)=r_(0,x)-s_*'H_1+D_0=Z_(0,x).",
+    "cutoff_update": "At N->N+1 write n=2^v m, z_*=exp(i omega_*log 2), and u_n=q_n/z_*^v. The exact polynomial update is F_(N+1)(z)-F_N(z)=j_0+u_n z^v, with u_(n,x)/u_n=-s_*'log n+delta_n-i*v*log(2)*omega_*'. At z=z_* this is q_n+j_0=Q_N/f_1. Hence only the constant and valuation-v coefficients change, but every downstream reflection coefficient may change. The certified adjacent bounds are real projections; no complex pivot-continuity bound is inferred from them.",
+    "decreasing_phase_guard": {
+      "boundary_zero": "F(1)=b_0+b_1+b_2=0",
+      "coefficients": "b_0=1, b_1=(-23+3i*sqrt(55))/40, b_2=(-17-3i*sqrt(55))/40",
+      "first_pivot": "Delta_2=51/100>0",
+      "interpretation": "Strictly decreasing coefficient moduli do not replace Schur-Cohn once the coefficient phases are free.",
+      "moduli": "|b_0|=1>|b_1|=4/5>|b_2|=7/10"
+    },
+    "degree_one_orientation": {
+      "interpretation": "The constant-dominant orientation corresponds to a root outside the closed unit disk.",
+      "pivot": "Delta_1=9-4=5>0",
+      "polynomial": "F(z)=3+2z",
+      "root": "z=-3/2"
+    },
+    "endpoint_pivot_guard": {
+      "augmented": "F(z)=-2/3+(2/3)z",
+      "boundary_zero": "F(1)=0",
+      "endpoint": "r_0=-5/3",
+      "interpretation": "The endpoint enters the first pivot and can place a zero on the unit circle even when the prefix is disk-zero-free.",
+      "pivot": "Delta_1=0",
+      "prefix": "P(z)=1+(2/3)z"
+    },
+    "endpoint_polynomial": "At xi=omega_* and mu=1 put B_(k,r)=sum_(m<=M_k,m odd)(log(2^k m))^r a_(k,m)exp(i omega_*log m)c_(2^k m), E_(k,r)=sum_(m<=M_k,m odd)(log(2^k m))^r delta_(2^k m)a_(k,m)exp(i omega_*log m)c_(2^k m). Then P_r(z)=sum_k B_(k,r)z^k, D_r(z)=sum_k E_(k,r)z^k, and at z_*=exp(i omega_*log 2), P_r(z_*)=H_r and D_r(z_*)=D_r. Define F_N(z)=r_0+P_0(z)=sum_(k=0)^K b_kz^k with b_0=r_0+B_(0,0) and b_k=B_(k,0) for k>=1.",
+    "first_pivot_guard": {
+      "first_pivot": "Delta_2=3/4>0",
+      "interpretation": "A strict first pivot is necessary but not sufficient; every recursive pivot is needed for full disk exclusion.",
+      "polynomial": "F(z)=1-(9/4)z+(1/2)z^2",
+      "reduced_polynomial": "S_2F(z)=3/4-(9/8)z",
+      "roots": "z=1/2 and z=4",
+      "second_pivot": "Delta_1=-45/64<0"
+    },
+    "first_xi_pivot": "The first physical pivot is Delta_K=|r_0+B_(0,0)|^2-|B_(K,0)|^2, equivalently |alpha_K|=|B_(K,0)/(r_0+B_(0,0))|<1. Phase-frozen dyadic contraction compares neighboring positive B_k before odd phases, d_n corrections, and endpoint addition. It does not prove this endpoint-sensitive inequality.",
+    "frechet_bilinear": "D2S_b[U,V]_k=conj(u_0)v_k+conj(v_0)u_k-u_dconj(v_(d-k))-v_dconj(u_(d-k)).",
+    "frechet_recursion": "For V=sum v_kz^k, (DS_b[V])_k=conj(v_0)b_k+conj(b_0)v_k-v_dconj(b_(d-k))-b_dconj(v_(d-k)).",
+    "inverse": "Delta_d F(z)=b_0 S_dF(z)+b_d z (S_dF)#(z), where the latter # has degree d-1.",
+    "live_q_ge_1_target": "On q=2tL^2>=1, first prove or refute uniformly |r_0+B_(0,0)|>|B_(K,0)| in every fixed-N chart, with the actual d_n correction and endpoint recurrence. If proved, derive the next normalized coefficient array exactly and seek a structural bound |alpha_d|<=1-epsilon_d whose product margin is strong enough to feed |mathsf_X|<=delta_L => |mathcal C_N|>A_L+epsilon_term and the successor trap 0<=kappa_j<1.",
+    "mixed_recursion": "For b_(x,nu)=b+xU+nuV+xnuW, partial_(x,nu)S(b_(x,nu))|_0=DS_b[W]+D2S_b[U,V].",
+    "normalized_reflection_recursion": "For p_d(0)=1 and alpha_d=[z^d]p_d, p_(d-1)=(p_d-alpha_d p_d#)/(1-|alpha_d|^2), and p_d=p_(d-1)+alpha_d z p_(d-1)#.",
+    "outside_stability_theorem": "After trimming exact zero top coefficients, F_d has no zero in |z|<=1 iff Delta_d>0 and S_dF_d has no zero in |z|<=1. Indeed, on |z|=1 one has |F_d#|=|F_d|. Rouche applied to S_dF_d=conj(b_0)F_d-b_dF_d# gives the forward zero count; the inverse identity and |z(S_dF_d)#|=|S_dF_d| give the reverse count. Iteration ends at a nonzero constant.",
+    "outside_step": "S_dF(z)=conj(b_0)F(z)-b_dF#(z)=sum_(k=0)^(d-1)[conj(b_0)b_k-b_dconj(b_(d-k))]z^k.",
+    "pi_provenance": "The pi in a^2=x/(4*pi)+t/16 comes from the completed-zeta normalization and the Riemann-Siegel saddle; 4*pi*(2N+1) is the cutoff-cell difference and 2*pi is the period of exp(i*theta). Schur-Cohn uses the unit circle |z|=1 and introduces no new pi.",
+    "pivot": "Delta_d=|b_0|^2-|b_d|^2.",
+    "proof_boundary": "The endpoint polynomial, outside-disk Schur step and inverse, recursive reflection criterion, conditional boundary margin, fixed-z coefficient current, centered companion, Frechet and mixed tangent recursions, cutoff update, and four algebraic audits are exact. No actual Xi pivot inequality, full unit-disk stability, endpoint-complete Xi lower bound, strict successor flux upper bound, q<1 closure, finite connector or chart join, contact exclusion, Lambda<=0, PF-infinity, RH proof, or Clay-prize conclusion is asserted.",
+    "q_lt_1_target": "The q=2tL^2<1 layer remains a separate multiplicity-compatible parabolic/Hermite first-jet chart. Schur-Cohn disk stability is not imposed there, and no endpoint simplicity, chart join, or contact exclusion follows from this q>=1 algebra.",
+    "reflection_criterion": "Normalize each effective degree-d polynomial by its nonzero constant and write alpha_d for its leading coefficient. Then F_N is zero-free in |z|<=1 iff |alpha_d|<1 at every effective stage d=K,...,1. These alpha_d are the exact outside-disk reflection coefficients.",
+    "reverse": "For degree d, F#(z)=z^d*conj(F(1/conj(z)))=sum_(k=0)^d conj(b_(d-k))*z^k.",
+    "route_decision": "Retain Schur-Cohn as a sufficient endpoint-complete zero-free route and as an exact coordinate for falsification. Reject coefficient-modulus monotonicity, the first pivot alone, and prefix zero-freeness without the endpoint. The next arithmetic task is to attack Delta_K first using the actual recurrent endpoint and terminal dyadic layer. Only if that survives should the reduced coefficients be expanded into nested odd-prefix sums and tested for subsequent strict pivots.",
+    "tangent_application": "Apply DS at every strict Schur stage to U=X and V=G. Apply DS[W]+D2S[X,G] to the mixed x/companion tangent. This propagates Z_0,Z_A,Z_(0,x),Z_(A,x) through the same exact coefficient recursion before any modulus or triangle inequality is taken.",
+    "weaker_fallback": "Full unit-disk stability is stronger than final linked-point nonvanishing. If an actual Xi pivot fails, the recursion still identifies the exact failure stage and its inverse formula. A weaker route must then prove nonvanishing at z_* or a signed three-cylinder crossing budget while retaining the endpoint and complete first-jet tangents; it may not promote selected finite pivots to a disk theorem."
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_endpoint_schur_cohn_first_jet_guard",
+  "proof_boundary": "The endpoint polynomial, outside-disk Schur step and inverse, recursive reflection criterion, conditional boundary margin, fixed-z coefficient current, centered companion, Frechet and mixed tangent recursions, cutoff update, and four algebraic audits are exact. No actual Xi pivot inequality, full unit-disk stability, endpoint-complete Xi lower bound, strict successor flux upper bound, q<1 closure, finite connector or chart join, contact exclusion, Lambda<=0, PF-infinity, RH proof, or Clay-prize conclusion is asserted.",
+  "rows": [
+    {
+      "claim": "The endpoint Schur coordinate introduces no unexplained pi.",
+      "diagnostics": null,
+      "formula": "The pi in a^2=x/(4*pi)+t/16 comes from the completed-zeta normalization and the Riemann-Siegel saddle; 4*pi*(2N+1) is the cutoff-cell difference and 2*pi is the period of exp(i*theta). Schur-Cohn uses the unit circle |z|=1 and introduces no new pi.",
+      "id": "escfjg_00_pi_provenance",
+      "proof_boundary": "The unit circle is a normalized complex domain, not a new source of pi.",
+      "readiness": "certified",
+      "role": "definition_provenance"
+    },
+    {
+      "claim": "The endpoint-augmented physical prefix is an explicit dyadic-layer polynomial.",
+      "diagnostics": null,
+      "formula": "At xi=omega_* and mu=1 put B_(k,r)=sum_(m<=M_k,m odd)(log(2^k m))^r a_(k,m)exp(i omega_*log m)c_(2^k m), E_(k,r)=sum_(m<=M_k,m odd)(log(2^k m))^r delta_(2^k m)a_(k,m)exp(i omega_*log m)c_(2^k m). Then P_r(z)=sum_k B_(k,r)z^k, D_r(z)=sum_k E_(k,r)z^k, and at z_*=exp(i omega_*log 2), P_r(z_*)=H_r and D_r(z_*)=D_r. Define F_N(z)=r_0+P_0(z)=sum_(k=0)^K b_kz^k with b_0=r_0+B_(0,0) and b_k=B_(k,0) for k>=1.",
+      "id": "escfjg_01_endpoint_polynomial",
+      "proof_boundary": "Its physical coefficients are complex and endpoint-sensitive.",
+      "readiness": "ready_to_apply",
+      "role": "exact_reindexing"
+    },
+    {
+      "claim": "The constant-dominant Schur step lowers the degree exactly.",
+      "diagnostics": null,
+      "formula": "For degree d, F#(z)=z^d*conj(F(1/conj(z)))=sum_(k=0)^d conj(b_(d-k))*z^k. S_dF(z)=conj(b_0)F(z)-b_dF#(z)=sum_(k=0)^(d-1)[conj(b_0)b_k-b_dconj(b_(d-k))]z^k. Delta_d=|b_0|^2-|b_d|^2.",
+      "id": "escfjg_02_outside_step",
+      "proof_boundary": "Exact zero top coefficients must be trimmed before the next stage.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Strict outside Schur pivots are equivalent to closed-unit-disk zero exclusion.",
+      "diagnostics": null,
+      "formula": "Delta_d F(z)=b_0 S_dF(z)+b_d z (S_dF)#(z), where the latter # has degree d-1. After trimming exact zero top coefficients, F_d has no zero in |z|<=1 iff Delta_d>0 and S_dF_d has no zero in |z|<=1. Indeed, on |z|=1 one has |F_d#|=|F_d|. Rouche applied to S_dF_d=conj(b_0)F_d-b_dF_d# gives the forward zero count; the inverse identity and |z(S_dF_d)#|=|S_dF_d| give the reverse count. Iteration ends at a nonzero constant.",
+      "id": "escfjg_03_stability_theorem",
+      "proof_boundary": "The theorem is conditional on verifying every physical Xi pivot.",
+      "readiness": "certified",
+      "role": "exact_algebraic_theorem"
+    },
+    {
+      "claim": "The normalized recursion exposes one reflection coefficient per effective degree.",
+      "diagnostics": null,
+      "formula": "For p_d(0)=1 and alpha_d=[z^d]p_d, p_(d-1)=(p_d-alpha_d p_d#)/(1-|alpha_d|^2), and p_d=p_(d-1)+alpha_d z p_(d-1)#. Normalize each effective degree-d polynomial by its nonzero constant and write alpha_d for its leading coefficient. Then F_N is zero-free in |z|<=1 iff |alpha_d|<1 at every effective stage d=K,...,1. These alpha_d are the exact outside-disk reflection coefficients.",
+      "id": "escfjg_04_reflection_recursion",
+      "proof_boundary": "No actual Xi reflection coefficient is yet bounded.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Strict reflection bounds give an explicit unit-circle modulus product.",
+      "diagnostics": null,
+      "formula": "The inverse normalized recursion gives, for |z|=1, |p_d(z)|>=(1-|alpha_d|)|p_(d-1)(z)|. Consequently min_(|z|=1)|F_N(z)|>=|b_0|*product_(d=1)^K(1-|alpha_d|)>0 whenever every pivot is strict. This is a quantified sufficient boundary margin, not a claim that the actual Xi reflection coefficients satisfy the inequalities.",
+      "id": "escfjg_05_boundary_margin",
+      "proof_boundary": "The product may be small and its Xi factors remain unproved.",
+      "readiness": "ready_to_apply",
+      "role": "exact_conditional_corollary"
+    },
+    {
+      "claim": "The fixed-z coefficient derivative rejoins the physical H_1,D_0 current.",
+      "diagnostics": null,
+      "formula": "Inside one fixed-N chart, (B_(k,r))_x=-s_*'B_(k,r+1)+E_(k,r)-i*k*log(2)*omega_*'B_(k,r). Thus the fixed-z tangent is X(z)=F_(N,x)|_z=r_(0,x)-s_*'P_1(z)+D_0(z)-i*omega_*'log(2)zP_0'(z). At z=z_*, adding z_*'=i*omega_*'log(2)z_* gives X(z_*)+z_*'F_N'(z_*)=r_(0,x)-s_*'H_1+D_0=Z_(0,x).",
+      "id": "escfjg_06_coefficient_x_tangent",
+      "proof_boundary": "The moving linked point must be restored after fixed-z differentiation.",
+      "readiness": "ready_to_apply",
+      "role": "exact_differential_reduction"
+    },
+    {
+      "claim": "A companion polynomial carries Z_A and its complete first x derivative.",
+      "diagnostics": null,
+      "formula": "Let A=log(a) and G(z)=r_A-s_*'[P_1(z)-A P_0(z)]. Then G(z_*)=Z_A. Its fixed-z x tangent is W(z)=r_(A,x)-s_*''[P_1-AP_0]-s_*'{-s_*'[P_2-AP_1]+D_1-AD_0-A_xP_0-i*omega_*'log(2)z[P_1'-AP_0']}. After adding z_*'G'(z_*), the phase terms cancel and one recovers the exact Z_(A,x) formula containing H_2,D_0,D_1,r_(A,x).",
+      "id": "escfjg_07_centered_companion",
+      "proof_boundary": "H_2,D_0,D_1 and endpoint derivatives are retained.",
+      "readiness": "ready_to_apply",
+      "role": "exact_differential_reduction"
+    },
+    {
+      "claim": "The Schur map transports arbitrary coefficient tangents before absolute values.",
+      "diagnostics": null,
+      "formula": "For V=sum v_kz^k, (DS_b[V])_k=conj(v_0)b_k+conj(b_0)v_k-v_dconj(b_(d-k))-b_dconj(v_(d-k)).",
+      "id": "escfjg_08_frechet_recursion",
+      "proof_boundary": "This is a tangent identity, not a tangent lower bound.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The mixed x/centered tangent has an exact Hessian correction.",
+      "diagnostics": null,
+      "formula": "D2S_b[U,V]_k=conj(u_0)v_k+conj(v_0)u_k-u_dconj(v_(d-k))-v_dconj(u_(d-k)). For b_(x,nu)=b+xU+nuV+xnuW, partial_(x,nu)S(b_(x,nu))|_0=DS_b[W]+D2S_b[U,V]. Apply DS at every strict Schur stage to U=X and V=G. Apply DS[W]+D2S[X,G] to the mixed x/companion tangent. This propagates Z_0,Z_A,Z_(0,x),Z_(A,x) through the same exact coefficient recursion before any modulus or triangle inequality is taken.",
+      "id": "escfjg_09_mixed_recursion",
+      "proof_boundary": "Dropping the bilinear term would corrupt Z_(A,x).",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The first missing Xi inequality is endpoint versus terminal-layer dominance.",
+      "diagnostics": null,
+      "formula": "The first physical pivot is Delta_K=|r_0+B_(0,0)|^2-|B_(K,0)|^2, equivalently |alpha_K|=|B_(K,0)/(r_0+B_(0,0))|<1. Phase-frozen dyadic contraction compares neighboring positive B_k before odd phases, d_n corrections, and endpoint addition. It does not prove this endpoint-sensitive inequality.",
+      "id": "escfjg_10_first_xi_pivot",
+      "proof_boundary": "Dyadic contraction at the synchronized base does not prove it.",
+      "readiness": "not_ready_to_apply",
+      "role": "new_inequality_target"
+    },
+    {
+      "claim": "Degree one fixes the outside-zero orientation.",
+      "diagnostics": {
+        "interpretation": "The constant-dominant orientation corresponds to a root outside the closed unit disk.",
+        "pivot": "Delta_1=9-4=5>0",
+        "polynomial": "F(z)=3+2z",
+        "root": "z=-3/2"
+      },
+      "formula": "{\"interpretation\": \"The constant-dominant orientation corresponds to a root outside the closed unit disk.\", \"pivot\": \"Delta_1=9-4=5>0\", \"polynomial\": \"F(z)=3+2z\", \"root\": \"z=-3/2\"}",
+      "id": "escfjg_11_degree_one_orientation",
+      "proof_boundary": "This audit fixes signs and conjugations only.",
+      "readiness": "guard_validated",
+      "role": "exact_convention_audit"
+    },
+    {
+      "claim": "One strict pivot does not imply disk zero-freeness.",
+      "diagnostics": {
+        "first_pivot": "Delta_2=3/4>0",
+        "interpretation": "A strict first pivot is necessary but not sufficient; every recursive pivot is needed for full disk exclusion.",
+        "polynomial": "F(z)=1-(9/4)z+(1/2)z^2",
+        "reduced_polynomial": "S_2F(z)=3/4-(9/8)z",
+        "roots": "z=1/2 and z=4",
+        "second_pivot": "Delta_1=-45/64<0"
+      },
+      "formula": "{\"first_pivot\": \"Delta_2=3/4>0\", \"interpretation\": \"A strict first pivot is necessary but not sufficient; every recursive pivot is needed for full disk exclusion.\", \"polynomial\": \"F(z)=1-(9/4)z+(1/2)z^2\", \"reduced_polynomial\": \"S_2F(z)=3/4-(9/8)z\", \"roots\": \"z=1/2 and z=4\", \"second_pivot\": \"Delta_1=-45/64<0\"}",
+      "id": "escfjg_12_first_pivot_guard",
+      "proof_boundary": "Every reduced pivot remains an independent obligation.",
+      "readiness": "guard_validated",
+      "role": "countermodel"
+    },
+    {
+      "claim": "Decreasing coefficient moduli do not survive arbitrary phases as a zero-free theorem.",
+      "diagnostics": {
+        "boundary_zero": "F(1)=b_0+b_1+b_2=0",
+        "coefficients": "b_0=1, b_1=(-23+3i*sqrt(55))/40, b_2=(-17-3i*sqrt(55))/40",
+        "first_pivot": "Delta_2=51/100>0",
+        "interpretation": "Strictly decreasing coefficient moduli do not replace Schur-Cohn once the coefficient phases are free.",
+        "moduli": "|b_0|=1>|b_1|=4/5>|b_2|=7/10"
+      },
+      "formula": "{\"boundary_zero\": \"F(1)=b_0+b_1+b_2=0\", \"coefficients\": \"b_0=1, b_1=(-23+3i*sqrt(55))/40, b_2=(-17-3i*sqrt(55))/40\", \"first_pivot\": \"Delta_2=51/100>0\", \"interpretation\": \"Strictly decreasing coefficient moduli do not replace Schur-Cohn once the coefficient phases are free.\", \"moduli\": \"|b_0|=1>|b_1|=4/5>|b_2|=7/10\"}",
+      "id": "escfjg_13_decreasing_phase_guard",
+      "proof_boundary": "Xi-specific phase structure could help only through a proved inequality.",
+      "readiness": "guard_validated",
+      "role": "countermodel"
+    },
+    {
+      "claim": "Endpoint addition can collapse the first Schur pivot.",
+      "diagnostics": {
+        "augmented": "F(z)=-2/3+(2/3)z",
+        "boundary_zero": "F(1)=0",
+        "endpoint": "r_0=-5/3",
+        "interpretation": "The endpoint enters the first pivot and can place a zero on the unit circle even when the prefix is disk-zero-free.",
+        "pivot": "Delta_1=0",
+        "prefix": "P(z)=1+(2/3)z"
+      },
+      "formula": "{\"augmented\": \"F(z)=-2/3+(2/3)z\", \"boundary_zero\": \"F(1)=0\", \"endpoint\": \"r_0=-5/3\", \"interpretation\": \"The endpoint enters the first pivot and can place a zero on the unit circle even when the prefix is disk-zero-free.\", \"pivot\": \"Delta_1=0\", \"prefix\": \"P(z)=1+(2/3)z\"}",
+      "id": "escfjg_14_endpoint_pivot_guard",
+      "proof_boundary": "The countermodel is generic, not an Xi endpoint evaluation.",
+      "readiness": "guard_validated",
+      "role": "countermodel"
+    },
+    {
+      "claim": "A cutoff change updates two polynomial coefficients and then all recursive pivots.",
+      "diagnostics": null,
+      "formula": "At N->N+1 write n=2^v m, z_*=exp(i omega_*log 2), and u_n=q_n/z_*^v. The exact polynomial update is F_(N+1)(z)-F_N(z)=j_0+u_n z^v, with u_(n,x)/u_n=-s_*'log n+delta_n-i*v*log(2)*omega_*'. At z=z_* this is q_n+j_0=Q_N/f_1. Hence only the constant and valuation-v coefficients change, but every downstream reflection coefficient may change. The certified adjacent bounds are real projections; no complex pivot-continuity bound is inferred from them.",
+      "id": "escfjg_15_cutoff_update",
+      "proof_boundary": "Only certified real projected adjacent bounds are retained.",
+      "readiness": "ready_to_apply",
+      "role": "exact_chart_transition"
+    },
+    {
+      "claim": "Test the first physical pivot before expanding the full recursion.",
+      "diagnostics": null,
+      "formula": "Retain Schur-Cohn as a sufficient endpoint-complete zero-free route and as an exact coordinate for falsification. Reject coefficient-modulus monotonicity, the first pivot alone, and prefix zero-freeness without the endpoint. The next arithmetic task is to attack Delta_K first using the actual recurrent endpoint and terminal dyadic layer. Only if that survives should the reduced coefficients be expanded into nested odd-prefix sums and tested for subsequent strict pivots.",
+      "id": "escfjg_16_route_decision",
+      "proof_boundary": "Selected finite pivots cannot prove a uniform Xi theorem.",
+      "readiness": "guard_validated",
+      "role": "route_decision"
+    },
+    {
+      "claim": "A failed full-disk route must fall back to linked nonvanishing or signed degree.",
+      "diagnostics": null,
+      "formula": "Full unit-disk stability is stronger than final linked-point nonvanishing. If an actual Xi pivot fails, the recursion still identifies the exact failure stage and its inverse formula. A weaker route must then prove nonvanishing at z_* or a signed three-cylinder crossing budget while retaining the endpoint and complete first-jet tangents; it may not promote selected finite pivots to a disk theorem.",
+      "id": "escfjg_17_weaker_fallback",
+      "proof_boundary": "The endpoint and complete first jet may not be removed in the fallback.",
+      "readiness": "not_ready_to_apply",
+      "role": "conditional_route"
+    },
+    {
+      "claim": "The q>=1 route begins with a uniform endpoint-terminal pivot theorem.",
+      "diagnostics": null,
+      "formula": "On q=2tL^2>=1, first prove or refute uniformly |r_0+B_(0,0)|>|B_(K,0)| in every fixed-N chart, with the actual d_n correction and endpoint recurrence. If proved, derive the next normalized coefficient array exactly and seek a structural bound |alpha_d|<=1-epsilon_d whose product margin is strong enough to feed |mathsf_X|<=delta_L => |mathcal C_N|>A_L+epsilon_term and the successor trap 0<=kappa_j<1.",
+      "id": "escfjg_18_q_ge_1_target",
+      "proof_boundary": "The first pivot and all successor bounds remain open.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    },
+    {
+      "claim": "The small-q multiplicity chart remains separate.",
+      "diagnostics": null,
+      "formula": "The q=2tL^2<1 layer remains a separate multiplicity-compatible parabolic/Hermite first-jet chart. Schur-Cohn disk stability is not imposed there, and no endpoint simplicity, chart join, or contact exclusion follows from this q>=1 algebra.",
+      "id": "escfjg_19_q_lt_1_nonpromotion",
+      "proof_boundary": "No RH or Newman conclusion follows from the q>=1 Schur algebra.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    }
+  ],
+  "source_audit": {
+    "adjacent_recurrence": "jensen_window_pf_newman_polymath15_first_order_centered_adjacent_saddle_recurrence",
+    "joined_odd_prefix": "jensen_window_pf_newman_polymath15_first_order_centered_joined_dyadic_odd_prefix_first_jet_reduction",
+    "normalized_prefix": "jensen_window_pf_newman_polymath15_first_order_centered_normalized_prefix_phase_flux_reduction",
+    "phase_cylinder": "jensen_window_pf_newman_polymath15_first_order_centered_phase_cylinder_jacobian_transport_guard"
+  },
+  "source_sha256": {
+    "adjacent_recurrence": "ffab5ce74899f670a7e1e3cba0bcbd1734989134f2c0f0d972351f110af3d45f",
+    "joined_odd_prefix": "61ae992c785567a79390d93f9b23984b6ed6ae8431aaea0ff897b2bd68682f67",
+    "normalized_prefix": "75982d22a245d4b9ab6dff57818a49e9936bd1afd1e58318216c41be49291706",
+    "phase_cylinder": "2d10f69396d88480230ca2d91ff493ebd9cd9e6b2f7a97d79d31f957ec25a63c"
+  },
+  "sources": {
+    "adjacent_recurrence": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_adjacent_saddle_recurrence.json",
+    "joined_odd_prefix": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_joined_dyadic_odd_prefix_first_jet_reduction.json",
+    "normalized_prefix": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_normalized_prefix_phase_flux_reduction.json",
+    "phase_cylinder": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_phase_cylinder_jacobian_transport_guard.json"
+  },
+  "status": "exact endpoint outside-disk Schur-Cohn recursion, conditional boundary margin, complete first-jet tangent propagation, cutoff update, and three route guards; all physical Xi pivot inequalities remain open"
+}

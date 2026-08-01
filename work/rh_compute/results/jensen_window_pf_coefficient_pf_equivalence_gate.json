@@ -1,0 +1,145 @@
+{
+  "kind": "jensen_window_pf_coefficient_pf_equivalence_gate",
+  "date": "2026-07-23",
+  "status": "exact coefficient-PF, multiplier-sequence, and Jensen-window equivalence gate",
+  "proof_boundary": "This artifact proves an equivalence between all-order target formulations and guards against finite, signed-Hankel-only, and positive-mixture promotions. It does not prove coefficient PF-infinity for the zeta coefficients, the missing signed-Hankel-to-PF bridge, Laguerre-Polya membership, RH, or Lambda <= 0.",
+  "primary_sources": [
+    "https://annals.math.princeton.edu/wp-content/uploads/annals-v170-n1-p14-p.pdf",
+    "https://doi.org/10.1007/BF02786970",
+    "https://doi.org/10.1007/BF02786971",
+    "https://doi.org/10.1073/pnas.37.5.303"
+  ],
+  "corpus_sources": [
+    "outputs/coefficient_pf_bridge_obstruction.md",
+    "outputs/jensen_window_pf_bridge_target.md",
+    "outputs/jensen_window_pf_bridge_obligations.md",
+    "outputs/jensen_window_pf_cofinal_scaling_limit_equivalence_gate.md",
+    "outputs/countermodel_library.md"
+  ],
+  "exact": {
+    "scope_assumptions": "A_k>=0 for every k, A_0>0, and F is entire; all hold for the corpus zeta coefficient sequence",
+    "normalization": "c_k=A_k/k! and F(z)=sum_(k>=0)c_k*z^k=sum_(k>=0)A_k*z^k/k!",
+    "tail_function": "F_n(z)=F^(n)(z)=sum_(j>=0)A_(n+j)*z^j/j!",
+    "diagonal_operator": "T_n[z^j]=A_(n+j)*z^j",
+    "window_identity": "T_n[(1+z)^d]=P_(d,n)(z)=sum_(j=0)^d C(d,j)*A_(n+j)*z^j",
+    "edrei_form": "F(z)=C*exp(gamma*z)*product_r(1+alpha_r*z), C>0, gamma>=0, alpha_r>=0, sum_r alpha_r<infinity",
+    "polya_schur": "{A_k} is a multiplier sequence <=> F is Laguerre-Polya type I <=> P_(d,0) is hyperbolic for every d",
+    "derivative_closure": "F in Laguerre-Polya type I => F^(n) in Laguerre-Polya type I for every n",
+    "finite_asw": "P_(d,n) has only real nonpositive zeros <=> B^(d,n)_j=C(d,j)*A_(n+j) is a finite PF-infinity sequence",
+    "equivalence": "c is PF-infinity <=> F is Laguerre-Polya type I <=> A is a multiplier sequence <=> every P_(d,0) is hyperbolic <=> every shifted A_(n+j) is a multiplier sequence <=> every P_(d,n) is hyperbolic <=> every B^(d,n) is finite PF-infinity",
+    "finite_guard": "finite Toeplitz/PF certificates for c do not imply c is PF-infinity",
+    "signed_hankel_guard": "signed-Hankel positivity does not by itself imply coefficient PF-infinity or the equivalent Jensen-window target",
+    "positive_mixture_guard": "a positive mixture of dilations is coefficient-positive but is a hyperbolicity preserver only after a separate multiplier-sequence theorem"
+  },
+  "sample_audit": {
+    "normalization_checks": 12,
+    "derivative_tail_checks": 42,
+    "diagonal_window_checks": 80
+  },
+  "rows": [
+    {
+      "id": "cpje_01_normalization_identity",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The ordinary coefficient generating function is exactly the exponential generating function of A.",
+      "formula": "c_k=A_k/k! and F(z)=sum_(k>=0)c_k*z^k=sum_(k>=0)A_k*z^k/k!",
+      "proof_boundary": "Normalization identity only."
+    },
+    {
+      "id": "cpje_02_diagonal_window_identity",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "Every Jensen window is the image of a binomial power under the diagonal tail operator.",
+      "formula": "T_n[(1+z)^d]=P_(d,n)(z)=sum_(j=0)^d C(d,j)*A_(n+j)*z^j",
+      "proof_boundary": "Polynomial coefficient identity only."
+    },
+    {
+      "id": "cpje_03_polya_schur_shift_zero",
+      "role": "classical_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Polya-Schur identifies shift-zero Jensen hyperbolicity in every degree with the multiplier-sequence property of A.",
+      "formula": "{A_k} is a multiplier sequence <=> F is Laguerre-Polya type I <=> P_(d,0) is hyperbolic for every d",
+      "proof_boundary": "Classical equivalence; it does not prove its hypothesis for the zeta coefficients."
+    },
+    {
+      "id": "cpje_04_asw_edrei_entire_pf",
+      "role": "classical_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "For the entire positive generating function F, ASW/Edrei identifies coefficient PF-infinity with the type-I product form.",
+      "formula": "F(z)=C*exp(gamma*z)*product_r(1+alpha_r*z), C>0, gamma>=0, alpha_r>=0, sum_r alpha_r<infinity",
+      "proof_boundary": "Classical characterization; all-order Toeplitz positivity remains unproved here."
+    },
+    {
+      "id": "cpje_05_derivative_tail_identity",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The exponential generating function of every shifted A-tail is the corresponding derivative of F.",
+      "formula": "F_n(z)=F^(n)(z)=sum_(j>=0)A_(n+j)*z^j/j!",
+      "proof_boundary": "Formal differentiation identity, justified by the known entire convergence of F."
+    },
+    {
+      "id": "cpje_06_type_i_derivative_closure",
+      "role": "closure_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Laguerre-Polya type I is closed under differentiation, so a shift-zero multiplier theorem supplies every shifted tail.",
+      "formula": "F in Laguerre-Polya type I => F^(n) in Laguerre-Polya type I for every n",
+      "proof_boundary": "Classical closure step conditional on the unproved type-I membership of F."
+    },
+    {
+      "id": "cpje_07_all_shift_composition",
+      "role": "theorem_composition",
+      "readiness": "ready_to_apply",
+      "claim": "Combining Polya-Schur with derivative closure proves all-degree/all-shift Jensen hyperbolicity from coefficient PF-infinity.",
+      "formula": "c PF-infinity => F type I => every F^(n) type I => every P_(d,n) hyperbolic",
+      "proof_boundary": "Exact conditional composition; the first all-order antecedent is still open."
+    },
+    {
+      "id": "cpje_08_finite_asw_windows",
+      "role": "classical_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "For each fixed finite window, hyperbolicity and finite PF-infinity are equivalent.",
+      "formula": "P_(d,n) has only real nonpositive zeros <=> B^(d,n)_j=C(d,j)*A_(n+j) is a finite PF-infinity sequence",
+      "proof_boundary": "Window-by-window equivalence only."
+    },
+    {
+      "id": "cpje_09_seven_way_equivalence",
+      "role": "exact_equivalence",
+      "readiness": "ready_to_apply",
+      "claim": "The all-order coefficient-PF and all-degree/all-shift Jensen-window targets are exact reformulations of one endpoint theorem.",
+      "formula": "c is PF-infinity <=> F is Laguerre-Polya type I <=> A is a multiplier sequence <=> every P_(d,0) is hyperbolic <=> every shifted A_(n+j) is a multiplier sequence <=> every P_(d,n) is hyperbolic <=> every B^(d,n) is finite PF-infinity",
+      "proof_boundary": "Equivalence of targets, not a proof that any target statement holds for zeta."
+    },
+    {
+      "id": "cpje_10_finite_coefficient_pf_guard",
+      "role": "forbidden_promotion",
+      "readiness": "guard_validated",
+      "claim": "The existing finite coefficient-PF ledger cannot enter the all-order equivalence.",
+      "formula": "finite Toeplitz/PF certificates for c do not imply c is PF-infinity",
+      "proof_boundary": "Blocks promotion of finite Toeplitz evidence only."
+    },
+    {
+      "id": "cpje_11_signed_hankel_nonimplication",
+      "role": "nonimplication_guard",
+      "readiness": "guard_validated",
+      "claim": "The equivalence does not create the missing transfer from signed-Hankel data to coefficient PF-infinity.",
+      "formula": "signed-Hankel positivity does not by itself imply coefficient PF-infinity or the equivalent Jensen-window target",
+      "proof_boundary": "Preserves the central structural gap and its existing countermodels."
+    },
+    {
+      "id": "cpje_12_positive_mixture_guard",
+      "role": "positive_mixture_guard",
+      "readiness": "guard_validated",
+      "claim": "Positivity of the Phi moment integral or a mixture-of-dilations formula is not itself a real-rootedness preserver theorem.",
+      "formula": "a positive mixture of dilations is coefficient-positive but is a hyperbolicity preserver only after a separate multiplier-sequence theorem",
+      "proof_boundary": "Requires an independent multiplier or stability-preserver hypothesis; positivity alone is insufficient."
+    },
+    {
+      "id": "cpje_13_open_structural_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "The live task is one noncircular all-order proof of coefficient PF-infinity, equivalently of the Jensen-window target, from Xi/Phi-specific structure.",
+      "formula": "Xi/Phi-specific structure => c PF-infinity <=> all Jensen windows PF-infinity",
+      "proof_boundary": "Open structural theorem; not PF-infinity, Laguerre-Polya membership, RH, or Lambda <= 0."
+    }
+  ]
+}

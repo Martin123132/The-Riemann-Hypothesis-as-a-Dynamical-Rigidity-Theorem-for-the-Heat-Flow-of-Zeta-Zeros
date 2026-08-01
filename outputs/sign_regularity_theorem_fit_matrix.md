@@ -741,8 +741,9 @@ and sufficient convergence to reconstruct `H_0`.
 Why best:
 
 ```text
-It would explain both the log-sign diagnostics and the power-Hankel
-necessary conditions, then supply the Edrei product form directly.
+It would explain the log-sign diagnostics and realize the all-order shifted
+power-Hankel Stieltjes criterion, which is endpoint-equivalent by Sokal; the
+currently checked finite determinants remain nonpromotable evidence.
 ```
 
 ### Target 3: Determinantal Integral Formula

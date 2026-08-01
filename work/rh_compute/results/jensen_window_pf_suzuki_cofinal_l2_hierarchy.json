@@ -1,0 +1,205 @@
+{
+  "audit": {
+    "countermodel_gate_count": 3,
+    "fixed_shift_equivalence_candidate_count": 1,
+    "l2_residual_proved": false,
+    "lambda_le_zero_proved": false,
+    "literature_fit_guard_count": 1,
+    "open_arithmetic_gate_count": 1,
+    "rh_proved": false,
+    "row_count": 22
+  },
+  "date": "2026-07-23",
+  "definitions": {
+    "central_polynomial": "T_(omega,k-1)(z)=sum_(j=0)^(k-1)q_(omega,j)z^j",
+    "log_polynomial": "P_(omega,k)(t)=sum_(j=0)^(k-1)q_(omega,j)t^(k-1-j)/(k-1-j)!",
+    "residual": "r_(omega,k)(t)=H_(omega,k)(exp(t))-P_(omega,k)(t)",
+    "shifted_quotient": "Q_omega(z)=xi(1/2+z-omega)/xi(1/2+z+omega)"
+  },
+  "kind": "jensen_window_pf_suzuki_cofinal_l2_hierarchy",
+  "proof_boundary": "This hierarchy does not prove an L2 residual, RH, or Lambda<=0. It composes published Suzuki identities and Hardy-space machinery with the internally audited fixed-shift phase theorem; independent expert review is required.",
+  "rows": [
+    {
+      "id": "sl2_01_shifted_quotient",
+      "proof_boundary": "Definition and the xi functional equation only.",
+      "role": "published_exact",
+      "statement": "Q_omega(z)=xi(1/2+z-omega)/xi(1/2+z+omega), with Q_omega(0)=1 for 0<omega<1/2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_02_mellin_laplace_identity",
+      "proof_boundary": "Published Suzuki identity; no contour crosses a quotient pole.",
+      "role": "published_exact",
+      "statement": "The Laplace transform of H_(omega,k)(exp(t)) is Q_omega(z)/z^k, initially for Re(z)>1/2+omega.",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_03_central_taylor_polynomial",
+      "proof_boundary": "A local Taylor definition at the zero-free real point z=0.",
+      "role": "exact_definition",
+      "statement": "Write Q_omega(z)=sum_(j>=0)q_(omega,j)z^j locally and T_(omega,k-1)(z)=sum_(j=0)^(k-1)q_(omega,j)z^j.",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_04_log_polynomial",
+      "proof_boundary": "The inverse Laplace image of T_(omega,k-1)(z)/z^k.",
+      "role": "exact_definition",
+      "statement": "P_(omega,k)(t)=sum_(j=0)^(k-1)q_(omega,j)*t^(k-1-j)/(k-1-j)!.",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_05_residual_transform",
+      "proof_boundary": "Exact subtraction identity only.",
+      "role": "exact_identity",
+      "statement": "For r_(omega,k)(t)=H_(omega,k)(exp(t))-P_(omega,k)(t), Laplace(r)=[Q_omega-T_(omega,k-1)]/z^k in the initial right half-plane.",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_06_l2_to_hardy",
+      "proof_boundary": "Standard L2 Paley-Wiener theorem.",
+      "role": "published_functional_analysis",
+      "statement": "If r_(omega,k) belongs to L2(0,infinity), its Laplace transform belongs to H2 of the right half-plane.",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_07_hardy_to_pole_free",
+      "proof_boundary": "Uses transform uniqueness from the common initial half-plane.",
+      "role": "exact_implication",
+      "statement": "The H2 continuation in sl2_06 gives Q_omega=T_(omega,k-1)+z^k Laplace(r), so Q_omega has no poles in Re(z)>0.",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_08_pole_free_to_inner",
+      "proof_boundary": "The xi-specific growth input is essential.",
+      "role": "published_implication",
+      "statement": "For the xi quotient, pole-freeness in Re(z)>0 plus boundary unimodularity, Suzuki's high-strip estimate, and Phragmen-Lindelof imply that Q_omega is inner.",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_09_inner_remainder_hardy",
+      "proof_boundary": "Requires innerness, not boundary modulus one alone.",
+      "role": "exact_implication",
+      "statement": "If Q_omega is inner, [Q_omega-T_(omega,k-1)]/z^k belongs to H2: Taylor cancellation controls z=0 and the boundary tail is O(1/|t|).",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_10_hardy_to_l2_residual",
+      "proof_boundary": "Standard half-plane Hardy/Laplace correspondence.",
+      "role": "published_functional_analysis",
+      "statement": "Paley-Wiener and Laplace uniqueness turn the H2 function in sl2_09 into the actual residual r_(omega,k) in L2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_11_fixed_shift_equivalence",
+      "proof_boundary": "Internally audited composition requiring independent review.",
+      "role": "theorem_candidate",
+      "statement": "For every fixed omega and k>=1, r_(omega,k) in L2(0,infinity) iff Q_omega is inner iff D(omega).",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_12_cofinal_reverse",
+      "proof_boundary": "Uses the corpus fixed-omega phase theorem and cofinality.",
+      "role": "theorem_candidate",
+      "statement": "If omega_j tends to zero and one residual r_(omega_j,k_j) is L2 for every j, then RH.",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_13_rh_forward",
+      "proof_boundary": "Conditional direction only; it cannot establish RH.",
+      "role": "published_conditional",
+      "statement": "Under RH, Q_omega is inner and every residual r_(omega,k) is L2 for every fixed omega and k>=1.",
+      "status": "conditional_on_rh"
+    },
+    {
+      "id": "sl2_14_cofinal_equivalence",
+      "proof_boundary": "New cofinal sharpening of Suzuki's published L2 criterion.",
+      "role": "theorem_candidate",
+      "statement": "RH iff there are omega_j->0 and integers k_j>=1 such that H_(omega_j,k_j)(exp(t))-P_(omega_j,k_j)(t) belongs to L2(0,infinity) for every j.",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_15_jordan_error_form",
+      "proof_boundary": "Uses the exact Jordan-error kernel reduction.",
+      "role": "exact_handoff",
+      "statement": "The same residual equals x^(-1/2) integral_0^1 E_omega(xu)W_(omega,k)(u)du/u-P_(omega,k)(log x).",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_16_level_one_target",
+      "proof_boundary": "Exact level-one specialization only.",
+      "role": "exact_specialization",
+      "statement": "At k=1, P_(omega,1)=1, so the criterion is integral_1^infinity |H_(omega,1)(x)-1|^2 dx/x<infinity.",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_17_higher_level_target",
+      "proof_boundary": "Exact residue-polynomial and antiderivative identities, not an unconditional decay estimate.",
+      "role": "exact_specialization",
+      "statement": "At k=2, q_(omega,1)=-2 xi'(1/2+omega)/xi(1/2+omega), so P_(omega,2)(t)=t+q_(omega,1) and r_(omega,2)(t)=-q_(omega,1)+integral_0^t (H_(omega,1)(exp(u))-1)du. Higher levels use the same central Taylor recursion.",
+      "status": "available_exact"
+    },
+    {
+      "id": "sl2_18_boundary_trace_guard",
+      "proof_boundary": "Boundary energy cannot replace half-plane analyticity or positive-time Hardy support.",
+      "role": "countermodel_gate",
+      "statement": "Q_bad(z)=(a+z)/(a-z) has modulus one on the imaginary axis and its regularized boundary trace is L2, but it has a pole at z=a. The boundary inverse Fourier transform is anti-causal, while the actual positive-time residual contains exp(a t) and is not L2.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "sl2_19_fixed_shift_guard",
+      "proof_boundary": "Cofinality in omega remains indispensable.",
+      "role": "countermodel_gate",
+      "statement": "An L2 residual at one fixed omega proves only D(omega); exact horizontal zero cancellation can still hide off-line zeros.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "sl2_20_finite_energy_guard",
+      "proof_boundary": "Finite energy samples remain nonpromotable evidence.",
+      "role": "countermodel_gate",
+      "statement": "A finite numerical integral of |r_(omega,k)|^2 cannot certify integrability on the unbounded half-line.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "sl2_21_riesz_comparison_guard",
+      "proof_boundary": "The similar smoothing vocabulary does not identify the two kernels or remove the open arithmetic gate.",
+      "role": "literature_fit_guard",
+      "statement": "Classical smoothed-totient Riesz means retain a residue main term and obtain square-root bounds only under RH and extra zero-derivative hypotheses; they do not prove the Suzuki L2 premise.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "sl2_22_open_energy_target",
+      "proof_boundary": "This is an RH-strength obligation and remains open.",
+      "role": "open_arithmetic_gate",
+      "statement": "For one explicit omega_j->0 and convenient k_j, prove the Jordan-error residual in sl2_15 is in L2(dx/x) by direct arithmetic estimates without assuming a zero-free region.",
+      "status": "open_target"
+    }
+  ],
+  "sources": [
+    {
+      "title": "On monotonicity of certain weighted summatory functions associated with L-functions",
+      "url": "https://arxiv.org/abs/1204.1823",
+      "use": "Mellin hierarchy, L2 criterion, and contour bounds"
+    },
+    {
+      "title": "A canonical system of differential equations arising from the Riemann zeta-function",
+      "url": "https://arxiv.org/abs/1204.1827",
+      "use": "level-one L2 criterion and innerness"
+    },
+    {
+      "title": "Corpus fixed-omega phase diagram",
+      "url": "outputs/jensen_window_pf_suzuki_fixed_omega_phase_diagram.md",
+      "use": "fixed-shift innerness and cofinal RH handoff"
+    },
+    {
+      "title": "Corpus Jordan-error kernel reduction",
+      "url": "outputs/jensen_window_pf_suzuki_jordan_error_kernel_reduction.md",
+      "use": "arithmetic error-convolution form"
+    },
+    {
+      "title": "The Distribution of Error Terms of Smoothed Summatory Totient Functions",
+      "url": "https://arxiv.org/abs/2207.07722",
+      "use": "Riesz-smoothing comparison and non-transfer guard"
+    }
+  ],
+  "status": "internally audited theorem-candidate L2 hierarchy with one open arithmetic energy gate"
+}

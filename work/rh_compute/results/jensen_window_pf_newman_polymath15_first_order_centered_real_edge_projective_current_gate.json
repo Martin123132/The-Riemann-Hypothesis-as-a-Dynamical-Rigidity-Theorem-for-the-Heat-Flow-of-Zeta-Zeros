@@ -1,0 +1,274 @@
+{
+  "counts": {
+    "abel_gaps": 0,
+    "arb_intervals": 3072,
+    "asymptotic_edge_jet_limits": 4,
+    "division_free_edge_currents": 1,
+    "removable_charts": 2,
+    "rows": 14,
+    "strict_curvature_margins": 1,
+    "uniform_finite_height_edge_signs": 0,
+    "uniform_q1_leading_symbol_signs": 1,
+    "winding_bounds": 0
+  },
+  "date": "2026-07-31",
+  "exact": {
+    "asymptotic_jets": {
+      "current_limit": "a^2*J_edge/S_a^2->K_edge(p)=[A*A''-(A')^2]/(16pi^2)",
+      "definitions": "A=Re(F-Q); B=Re[-F'/(4pi)+i*theta*Q/2]; M=Re[F''/(16pi^2)+Q{i/(16pi)+theta^2/4}]",
+      "derivative_collapse": "B=-A'/(4pi), M=A''/(16pi^2)",
+      "division_guard": "The polynomial limit is primary. At A=0 it equals -(A')^2/(16pi^2), with no division by C_edge or A.",
+      "limits": "C_edge/S_a->A, a*D_edge/S_a->B, a(C_(edge,x)-r_S*C_edge)/S_a->B, and a^2(D_(edge,x)-r_S*D_edge)/S_a->M"
+    },
+    "curvature_certificate": {
+      "real_source": "A(p)=-cos(pi*(p^2/2-2p+3/8))/(2cos(pi*p))=-Re C_0(p-2), with removable values A(-1/2)=5/4 and A(1/2)=-3/4",
+      "removable_charts": "At p=1/2+y, A=(y-3)sinc(pi*y*(y-3)/2)/[4sinc(pi*y)]; at p=-1/2+y, A=(5-y)sinc(pi*y*(y-5)/2)/[4sinc(pi*y)].",
+      "strict_margin": "(A')^2-A*A''>3/50 on -1<=p<=1; since pi^2<10, K_edge(p)<-3/8000."
+    },
+    "edge_current": {
+      "coordinates": "V=e+z_N, G=g+s_*'*u_N*z_N, C_edge=Re(V), D_edge=Re(G)-alpha*C_edge, alpha=Re(s_*')*u_N",
+      "division_free": "J_edge=C_edge*D_(edge,x)-D_edge*C_(edge,x)=C_edge*Re(G_x)-Re(G)*C_(edge,x)-alpha_x*C_edge^2",
+      "retained_second_jet": "G_x=g_x+(s_*''u_N+s_*'u_(N,x)+s_*'u_N*z_(N,x)/z_N)z_N; g_x retains H_(a,xx), mu_(a,x), the moving T_0+i factor, and the real radial kappa rate"
+    },
+    "q1_source": {
+      "endpoint": "F=C_0(p), H_a->F, a*H_(a,x)->-F'/(4pi), a^2*H_(a,xx)->F''/(16pi^2), a*mu_a->0, a^2*mu_(a,x)->0",
+      "path": "theta=(1-p)/2, a=N+theta, q=2tL^2=1, S_a=kappa*T_0, r_S=S_(a,x)/S_a, fixed p in [-1,1], N->infinity",
+      "phase_guard": "Q=conjugate(R)*exp[-2pi*i*(1-p)] for R=exp[pi*i*(p^2/2+p+3/8)]. The extra factor is one at p=0 and p=1 but not in the interior; endpoint-only tests cannot determine the terminal phase.",
+      "terminal_phase": "Q(p)=exp[-pi*i*(p^2/2-p+3/8)], z_N/S_a->-Q(p), a*u_N->theta, a*(z_(N,x)/z_N-r_S)->-i*theta/2"
+    },
+    "route_decision": {
+      "next_target": "Derive an explicit uniform finite-a remainder smaller than 3/8000 for a^2*J_edge/(kappa*T_0)^2 on q=1, then extend the signed edge estimate to q>=1 and splice it through adjacent cutoffs before returning to the cumulative contact scalar.",
+      "proved_symbol": "The complete q=1 cofinal real-edge leading symbol is strictly clockwise on the full saddle cell, including both removable C_0 points and every A=0 fibre."
+    }
+  },
+  "interval": {
+    "boxes": 3072,
+    "current_symbol_margin": "K_edge<-3/8000",
+    "curvature": "D_edge^(0)=(A')^2-A*A''",
+    "curvature_margin": ">3/50",
+    "domain": "-1<=p<=1",
+    "minimum_box": "4093/4096..1",
+    "minimum_lower_ball": "[0.06339593028046580621590837488799260877676282746790246852103520367109893 +/- 3.49e-72]",
+    "pi_square_bound": "pi^2<10",
+    "points": {
+      "cutoff": {
+        "A_ball": "[-0.461939766255643378064091594698394143411208312931821243057 +/- 5.69e-58]",
+        "current_symbol_ball": "[-0.0005297979669857496735184050011208266800704728501775063048 +/- 5.78e-59]",
+        "curvature_ball": "[0.08366234154641199514612369608454987451081528645061289359 +/- 4.40e-57]",
+        "p": "1"
+      },
+      "midpoint": {
+        "A_ball": "[-0.1913417161825448858642299920151994333806722812428135207169 +/- 7.66e-59]",
+        "current_symbol_ball": "[-0.061970202033014250326481594998879173319929527149822493695 +/- 2.47e-58]",
+        "curvature_ball": "[9.7859420595429466236883673037916012608028841207901777328 +/- 3.07e-56]",
+        "p": "0"
+      },
+      "phase_guard": {
+        "A_ball": "[-0.482299072050506110127681032525036806315999292115357560632 +/- 9.77e-58]",
+        "current_symbol_ball": "[-0.000807457738109035704810346742034299023984120305185651123 +/- 6.39e-58]",
+        "curvature_ball": "[0.1275086151317535602929116904743133194756573527391077935 +/- 2.85e-56]",
+        "p": "29/30",
+        "wrong_terminal_phase_current_ball": "[0.000106841426805094672587728330430117455888265649129042645 +/- 4.85e-58]"
+      }
+    },
+    "precision_bits": 192,
+    "regions": [
+      {
+        "boxes": 512,
+        "chart": "direct quotient",
+        "interval": "[-1,-5/8]",
+        "minimum_box": "-2033/2048..-4063/4096",
+        "minimum_lower_ball": "[19.67246842043942281767212976013094259924425304447848287331017238827193 +/- 4.97e-69]"
+      },
+      {
+        "boxes": 512,
+        "chart": "sinc chart at -1/2",
+        "interval": "[-5/8,-3/8]",
+        "minimum_box": "-769/2048..-3/8",
+        "minimum_lower_ball": "[20.54238728406030605033434846293845928427685171626103713084845740997437 +/- 4.46e-69]"
+      },
+      {
+        "boxes": 1024,
+        "chart": "direct quotient",
+        "interval": "[-3/8,3/8]",
+        "minimum_box": "1533/4096..3/8",
+        "minimum_lower_ball": "[3.026449278048417354024409575079254201026003007140493646146688895464205 +/- 2.20e-70]"
+      },
+      {
+        "boxes": 512,
+        "chart": "sinc chart at 1/2",
+        "interval": "[3/8,5/8]",
+        "minimum_box": "1279/2048..5/8",
+        "minimum_lower_ball": "[1.339502632220575252173004014231075558834450981382224600313799046443572 +/- 2.57e-70]"
+      },
+      {
+        "boxes": 512,
+        "chart": "direct quotient",
+        "interval": "[5/8,1]",
+        "minimum_box": "4093/4096..1",
+        "minimum_lower_ball": "[0.06339593028046580621590837488799260877676282746790246852103520367109893 +/- 3.49e-72]"
+      }
+    ],
+    "removable_centers": [
+      "-1/2",
+      "1/2"
+    ],
+    "sinc_terms": 24
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_real_edge_projective_current_gate",
+  "proof_boundary": "This artifact proves the exact division-free edge-current identity, the corrected q=1 terminal phase, the fixed-p cofinal edge-current limit, and a complete Arb certificate that its leading symbol is below -3/8000 on -1<=p<=1. It does not yet prove a uniform finite-a edge sign, a q>1 edge sign, adjacent-cutoff splicing, a signed cumulative-minor estimate, an Abel-scalar gap, a successor winding cap, contact exclusion, Q209, the cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or a prize-level conclusion.",
+  "rows": [
+    {
+      "claim": "The endpoint and terminal carrier are composed before projection.",
+      "diagnostics": null,
+      "formula": "V=e+z_N, G=g+s_*'*u_N*z_N, C_edge=Re(V), D_edge=Re(G)-alpha*C_edge, alpha=Re(s_*')*u_N",
+      "id": "repc_01_edge_coordinates",
+      "proof_boundary": "One fixed-N chart; no sign is asserted here.",
+      "readiness": "ready_to_apply",
+      "role": "exact_definition"
+    },
+    {
+      "claim": "Terminal centering cancels the alpha*C*C_x terms exactly.",
+      "diagnostics": null,
+      "formula": "J_edge=C_edge*D_(edge,x)-D_edge*C_(edge,x)=C_edge*Re(G_x)-Re(G)*C_(edge,x)-alpha_x*C_edge^2",
+      "id": "repc_02_division_free_current",
+      "proof_boundary": "No division by C_edge, c_0, or H_a is used.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The real-edge current retains the complete endpoint and terminal second jet.",
+      "diagnostics": null,
+      "formula": "G_x=g_x+(s_*''u_N+s_*'u_(N,x)+s_*'u_N*z_(N,x)/z_N)z_N; g_x retains H_(a,xx), mu_(a,x), the moving T_0+i factor, and the real radial kappa rate",
+      "id": "repc_03_second_jet",
+      "proof_boundary": "Dropping any displayed derivative changes the leading symbol.",
+      "readiness": "ready_to_apply",
+      "role": "source_identity"
+    },
+    {
+      "claim": "The terminal saddle has an interior phase not visible at p=0 or p=1.",
+      "diagnostics": null,
+      "formula": "Q(p)=exp[-pi*i*(p^2/2-p+3/8)], z_N/S_a->-Q(p), a*u_N->theta, a*(z_(N,x)/z_N-r_S)->-i*theta/2",
+      "id": "repc_04_q1_terminal_phase",
+      "proof_boundary": "Fixed p on the stated q=1 cofinal family.",
+      "readiness": "available_exact",
+      "role": "source_asymptotic"
+    },
+    {
+      "claim": "Endpoint-only phase interpolation gives a false interior sign candidate.",
+      "diagnostics": {
+        "A_ball": "[-0.482299072050506110127681032525036806315999292115357560632 +/- 9.77e-58]",
+        "current_symbol_ball": "[-0.000807457738109035704810346742034299023984120305185651123 +/- 6.39e-58]",
+        "curvature_ball": "[0.1275086151317535602929116904743133194756573527391077935 +/- 2.85e-56]",
+        "p": "29/30",
+        "wrong_terminal_phase_current_ball": "[0.000106841426805094672587728330430117455888265649129042645 +/- 4.85e-58]"
+      },
+      "formula": "Q=conjugate(R)*exp[-2pi*i*(1-p)] for R=exp[pi*i*(p^2/2+p+3/8)]. The extra factor is one at p=0 and p=1 but not in the interior; endpoint-only tests cannot determine the terminal phase.",
+      "id": "repc_05_phase_guard",
+      "proof_boundary": "The corrected Q phase is used in every promoted formula.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion_guard"
+    },
+    {
+      "claim": "Four radial-subtracted edge jets close on three real functions.",
+      "diagnostics": null,
+      "formula": "C_edge/S_a->A, a*D_edge/S_a->B, a(C_(edge,x)-r_S*C_edge)/S_a->B, and a^2(D_(edge,x)-r_S*D_edge)/S_a->M",
+      "id": "repc_06_asymptotic_jets",
+      "proof_boundary": "The finite-a uniform error is not yet quantified.",
+      "readiness": "available_exact",
+      "role": "source_asymptotic"
+    },
+    {
+      "claim": "The source jets are consecutive derivatives of one real endpoint shape.",
+      "diagnostics": null,
+      "formula": "B=-A'/(4pi), M=A''/(16pi^2)",
+      "id": "repc_07_derivative_collapse",
+      "proof_boundary": "Uses the corrected terminal phase Q.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The radial rate cancels and leaves one strict log-curvature symbol.",
+      "diagnostics": null,
+      "formula": "a^2*J_edge/S_a^2->K_edge(p)=[A*A''-(A')^2]/(16pi^2)",
+      "id": "repc_08_current_limit",
+      "proof_boundary": "Pointwise cofinal limit; no finite-height threshold is claimed.",
+      "readiness": "available_exact",
+      "role": "asymptotic_identity"
+    },
+    {
+      "claim": "The leading current remains meaningful at every zero real projection.",
+      "diagnostics": null,
+      "formula": "The polynomial limit is primary. At A=0 it equals -(A')^2/(16pi^2), with no division by C_edge or A.",
+      "id": "repc_09_zero_fibre",
+      "proof_boundary": "No projective tangent is introduced.",
+      "readiness": "ready_to_apply",
+      "role": "division_guard"
+    },
+    {
+      "claim": "The edge shape is a shifted real C_0 trace with two removable points.",
+      "diagnostics": null,
+      "formula": "A(p)=-cos(pi*(p^2/2-2p+3/8))/(2cos(pi*p))=-Re C_0(p-2), with removable values A(-1/2)=5/4 and A(1/2)=-3/4",
+      "id": "repc_10_real_source",
+      "proof_boundary": "The quotient is interpreted by analytic continuation.",
+      "readiness": "ready_to_apply",
+      "role": "exact_source_reduction"
+    },
+    {
+      "claim": "Two sinc charts remove every interval division by cos(pi*p).",
+      "diagnostics": null,
+      "formula": "At p=1/2+y, A=(y-3)sinc(pi*y*(y-3)/2)/[4sinc(pi*y)]; at p=-1/2+y, A=(5-y)sinc(pi*y*(y-5)/2)/[4sinc(pi*y)].",
+      "id": "repc_11_removable_charts",
+      "proof_boundary": "The sinc tails are enclosed as entire series.",
+      "readiness": "ready_to_apply",
+      "role": "analytic_desingularization"
+    },
+    {
+      "claim": "A rational Arb cover proves strict curvature on the whole cell.",
+      "diagnostics": {
+        "boxes": 3072,
+        "minimum_box": "4093/4096..1",
+        "minimum_lower_ball": "[0.06339593028046580621590837488799260877676282746790246852103520367109893 +/- 3.49e-72]",
+        "precision_bits": 192
+      },
+      "formula": "(A')^2-A*A''>3/50 on -1<=p<=1; since pi^2<10, K_edge(p)<-3/8000.",
+      "id": "repc_12_interval_cover",
+      "proof_boundary": "Complete interval cover, not a floating grid.",
+      "readiness": "certified",
+      "role": "interval_certificate"
+    },
+    {
+      "claim": "The complete q=1 cofinal edge symbol has one strict sign.",
+      "diagnostics": null,
+      "formula": "The complete q=1 cofinal real-edge leading symbol is strictly clockwise on the full saddle cell, including both removable C_0 points and every A=0 fibre.",
+      "id": "repc_13_uniform_symbol_sign",
+      "proof_boundary": "A uniform finite-a remainder and q>1 extension remain open.",
+      "readiness": "ready_to_apply",
+      "role": "proved_asymptotic_symbol"
+    },
+    {
+      "claim": "The leading-symbol wall is closed and the finite remainder is isolated.",
+      "diagnostics": null,
+      "formula": "Derive an explicit uniform finite-a remainder smaller than 3/8000 for a^2*J_edge/(kappa*T_0)^2 on q=1, then extend the signed edge estimate to q>=1 and splice it through adjacent cutoffs before returning to the cumulative contact scalar.",
+      "id": "repc_14_handoff",
+      "proof_boundary": "No Abel gap, winding cap, contact exclusion, or RH conclusion follows yet.",
+      "readiness": "open_quantitative_handoff",
+      "role": "route_decision"
+    }
+  ],
+  "source_audit": {
+    "published_source": {
+      "citation": "D.H.J. Polymath, Effective approximation of heat flow evolution of the Riemann xi function, and a new upper bound for the de Bruijn-Newman constant, arXiv:1904.12438",
+      "location": "equation (53), C_0(p), and Proposition 6.2",
+      "url": "https://arxiv.org/abs/1904.12438"
+    },
+    "source_sha256": {
+      "adjacent_chart_stability": "dcee581f283d63141e29d1085ee463c2eabc714a6e6760b15f12262474f83a83",
+      "c0_source_extraction": "9d9bdefe7918a18f82408952b2c6f6f8176568f9f6e24d0cd4c12b54d1736e0d",
+      "complex_endpoint_source": "07f18c40511e9d9c95f8578e02fc39505ac59480682a50597dd9b79e6618fbf3",
+      "endpoint_relative_current": "1bd3da9a730296f6ca95884874ca83ecbf38d8c113a8a4f0725addb08507da30",
+      "interior_projective_current": "c1282eac2b2d22c35055880f4eb2607b855446a3b678caf0c072ca983c660419"
+    }
+  },
+  "status": "exact division-free real-edge current and rigorous q=1 cofinal negative leading-symbol certificate"
+}

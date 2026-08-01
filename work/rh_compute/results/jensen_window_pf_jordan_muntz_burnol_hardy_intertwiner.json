@@ -1,0 +1,161 @@
+{
+  "audit": {
+    "classical_source_backed_count": 1,
+    "exact_identity_or_corollary_count": 13,
+    "lambda_le_zero_proved": false,
+    "nonpromotion_guard_count": 2,
+    "open_natural_mollifier_gate_count": 1,
+    "rh_proved": false,
+    "row_count": 18,
+    "source_backed_cofinal_candidate_count": 1,
+    "uniform_partial_norm_proved": false
+  },
+  "date": "2026-07-23",
+  "kind": "jensen_window_pf_jordan_muntz_burnol_hardy_intertwiner",
+  "primary_sources": [
+    {
+      "title": "On an analytic estimate in the theory of the Riemann Zeta function and a Theorem of Baez-Duarte",
+      "url": "https://arxiv.org/abs/math/0202166",
+      "use": "weighted fractional-part functions, Balazard-Saias convergence, square-integrability-to-zero-cancellation, and cofinal RH theorem"
+    },
+    {
+      "title": "A general strong Nyman-Beurling Criterion for the Riemann Hypothesis",
+      "url": "https://arxiv.org/abs/math/0505453",
+      "use": "general Muntz framework and compact-support guard"
+    },
+    {
+      "title": "On monotonicity of certain weighted summatory functions associated with L-functions",
+      "url": "https://arxiv.org/abs/1204.1823",
+      "use": "Jordan coefficients and shifted quotient"
+    }
+  ],
+  "rows": [
+    {
+      "id": "jmbh_01_fractional_part_kernel",
+      "proof_boundary": "Endpoint notation only; the infinite omega=0 Mobius tail is not asserted to converge.",
+      "role": "exact_identity",
+      "statement": "R_0(y)=floor(y)-y=-{y}.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmbh_02_fractional_power_abel_identity",
+      "proof_boundary": "Exact Stieltjes/Abel summation for 0<omega<1.",
+      "role": "exact_identity",
+      "statement": "R_omega(y)=-y^omega*{y}+omega*integral_0^y {u}u^(omega-1)du.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmbh_03_hardy_operator_definition",
+      "proof_boundary": "Definition only.",
+      "role": "exact_definition",
+      "statement": "(T_omega f)(x)=x^omega*f(x)-omega*integral_0^x f(u)u^(omega-1)du.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmbh_04_remainder_intertwining",
+      "proof_boundary": "Exact kernel identity; it supplies no Mobius cancellation.",
+      "role": "exact_identity",
+      "statement": "R_omega=T_omega R_0.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmbh_05_dilation_covariance",
+      "proof_boundary": "Exact change of variables.",
+      "role": "exact_identity",
+      "statement": "T_omega D_d=d^omega D_d T_omega for (D_d f)(x)=f(x/d).",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmbh_06_finite_jordan_factorization",
+      "proof_boundary": "Finite identity; no infinite interchange is used.",
+      "role": "exact_identity",
+      "statement": "E_(omega,N)=T_omega sum_(d<=N)mu(d)d^(-2omega)R_0(x/d).",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmbh_07_burnol_partial_sum",
+      "proof_boundary": "This is the finite natural fractional-part approximant.",
+      "role": "exact_definition",
+      "statement": "f_(epsilon,N)(t)=sum_(d<=N)mu(d)d^(-epsilon){1/(d*t)}.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmbh_08_reciprocal_unitary",
+      "proof_boundary": "Exact substitution x=1/t.",
+      "role": "exact_identity",
+      "statement": "f(x)->f(1/t) is unitary from L2(dx/x^2) to L2(dt).",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmbh_09_tail_hardy_operator",
+      "proof_boundary": "Definition on its natural L2 domain.",
+      "role": "exact_definition",
+      "statement": "(H_star g)(t)=integral_t^infinity g(v)dv/v.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmbh_10_exact_burnol_intertwiner",
+      "proof_boundary": "Exact finite identity with epsilon=2omega.",
+      "role": "exact_identity",
+      "statement": "E_(omega,N)(1/t)=-(I-omega H_star)[t^(-omega)f_(2omega,N)(t)].",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmbh_11_hardy_norm",
+      "proof_boundary": "Classical Hardy inequality; not a zeta estimate.",
+      "role": "classical_theorem",
+      "statement": "||H_star||_(L2(dt)->L2(dt))=2.",
+      "status": "source_backed"
+    },
+    {
+      "id": "jmbh_12_two_sided_norm_equivalence",
+      "proof_boundary": "Uses 0<omega<1/2; constants degenerate only at the excluded endpoint.",
+      "role": "exact_corollary",
+      "statement": "(1-2omega)||t^(-omega)f_(2omega,N)||_2 <=||E_(omega,N)||_H<=(1+2omega)||t^(-omega)f_(2omega,N)||_2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmbh_13_invertibility",
+      "proof_boundary": "Follows from omega*||H_star||<1.",
+      "role": "exact_corollary",
+      "statement": "I-omega H_star is boundedly invertible by its Neumann series for 0<omega<1/2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmbh_14_mellin_multiplier",
+      "proof_boundary": "Initially in a common honest convergence strip.",
+      "role": "exact_identity",
+      "statement": "M[H_star g](s)=M[g](s)/s and the intertwiner multiplier is (s-omega)/s.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmbh_15_transform_consistency",
+      "proof_boundary": "Finite Mobius sum only; analytic continuation is not used to move an infinite Mobius series.",
+      "role": "exact_identity",
+      "statement": "M[t^(-omega)f_(2omega,N)](s)=-zeta(s-omega)M_N(s+omega)/(s-omega), so the exact intertwiner recovers zeta(s-omega)M_N(s+omega)/s.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmbh_16_cofinal_burnol_corollary",
+      "proof_boundary": "The reverse direction uses the two-sided norm, pointwise convergence, Fatou, and Burnol's published sequence theorem. The RH direction uses Balazard-Saias/Burnol L2 convergence. Normalization and source transfer still require expert review.",
+      "role": "theorem_candidate",
+      "statement": "RH iff there are omega_j->0 such that sup_N||E_(omega_j,N)||_H<infinity for every j.",
+      "status": "source_backed_candidate"
+    },
+    {
+      "id": "jmbh_17_nonpromotion_guards",
+      "proof_boundary": "Rejects treating an invertible operator identity as the missing arithmetic estimate.",
+      "role": "proof_guard",
+      "statement": "Hardy boundedness transfers the norm problem but does not bound the Burnol partial sums; compact-support Nyman sufficiency and scalar l2 arguments remain unavailable.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "jmbh_18_open_natural_mollifier_gate",
+      "proof_boundary": "Equivalent by exact constants to the open Jordan all-height natural-mollifier bound; RH and Lambda <= 0 remain unproved.",
+      "role": "open_target",
+      "statement": "Prove sup_N||t^(-omega)f_(2omega,N)||_2<infinity along one explicit cofinal omega sequence without assuming RH.",
+      "status": "open_target"
+    }
+  ],
+  "status": "exact finite Hardy intertwiner with one source-backed cofinal theorem candidate and one open natural-mollifier gate"
+}

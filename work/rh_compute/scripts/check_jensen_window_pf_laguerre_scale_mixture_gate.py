@@ -201,6 +201,12 @@ def validate() -> list[str]:
         "genuine all-degree hyperbolic benchmark family",
         "positive mixing of these blocks is not enough",
         "Xi-specific theorem",
+        "radial probability in dimension 2n+2",
+        "every shifted quadratic Jensen discriminant is negative",
+        "already closes every shifted quadratic",
+        "closes every shifted cubic",
+        "degree-four or all-degree connection",
+        "jensen_window_pf_newman_score_abel_radial_dimension_lift_gate.md",
         "https://dlmf.nist.gov/18.16",
     ]
     for phrase in required:

@@ -1,0 +1,1152 @@
+{
+  "date": "2026-07-30",
+  "exact": {
+    "anchored_component_jumps": "At one fixed (t,x), eta, |f_1|, s_*', and L_a=log(a) are cutoff independent. For n=N+1, Delta e=kappa_NJ_a/|f_1|, Delta g=kappa_N[J_(a,x)+mu_aJ_a]/|f_1|, Delta W_0=z_n+Delta e, and Delta Z_Lambda=log(n)z_n.",
+    "centered_endpoint_jump": "For E_N=g_N-s_*'L_a e_N, Delta E_N=Delta g-s_*'L_a Delta e.",
+    "centered_jet_jump": "The endpoint-value jump cancels exactly: Delta mathfrak B_N=Delta E_N-s_*'Delta Z_Lambda+s_*'L_aDelta W_0=Delta g+s_*'log(a/n)z_n.",
+    "complex_boundary": "No complex absolute-value bound for Delta W_0 or Delta mathfrak B_N at the displayed real-projection scales is proved. The exact complex cancellation must precede real projection and absolute values.",
+    "ordinary_split_jump": "If n=N+1 is not a square, D=floor(sqrt(N))=floor(sqrt(n)); the complete square is unchanged and the wing gains exactly the factor pairs of n. Hence Delta Z_square=0 and Delta Z_wing=log(n)z_n.",
+    "physical_recurrence_match": "With ell=log(n/a), z_n=f_n/|f_1|, Delta mathfrak B_N={-s_*'ell f_n+kappa_N[J_(a,x)+mu_aJ_a]}/|f_1|=Delta W_A. Thus Re(Delta mathfrak B_N)=Delta A_a/|f_1|.",
+    "real_projection_bound": "The certified adjacent theorem gives |Re(Delta W_0)|<2200exp(-5L/4) and |Re(Delta mathfrak B_N)|<10000exp(-7L/4).",
+    "route_decision": "The centered jet and balanced hyperbola are now compatible with adjacent cutoffs. Any Type-I/II or Vaughan estimate must retain the ordinary factor-pair insertion, the perfect-square row transfer, the recurrent endpoint slope, and real-projection semantics before absolute values.",
+    "square_recombination": "At n=r^2 the transferred row R_r cancels, and D_r+A_n=log(n)z_n by the symmetric Mangoldt divisor identity. Perfect-square changes introduce no residual term.",
+    "square_split_jump": "If n=r^2, D changes from r-1 to r. Put R_r=sum_(d<r)[Lambda(d)+Lambda(r)]z_(dr), D_r=Lambda(r)z_(r^2), and A_n=sum_(d|n,d<r)[Lambda(d)+Lambda(n/d)]z_n. Then Delta Z_square=R_r+D_r and Delta Z_wing=A_n-R_r."
+  },
+  "kind": "mangoldt_adjacent_cutoff_transport_gate",
+  "proof_boundary": "This gate proves exact centered component jumps, endpoint-value cancellation, physical recurrence matching, inherited adjacent real-projection control, and ordinary/perfect-square balanced hyperbola transport. It proves no signed lower bound, Abel gap, winding cap, contact exclusion, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "boundary": "No sign is attached to an individual jump.",
+      "claim": "The anchored endpoint, carrier value, and Mangoldt moment have exact adjacent jumps.",
+      "exact_statement": "At one fixed (t,x), eta, |f_1|, s_*', and L_a=log(a) are cutoff independent. For n=N+1, Delta e=kappa_NJ_a/|f_1|, Delta g=kappa_N[J_(a,x)+mu_aJ_a]/|f_1|, Delta W_0=z_n+Delta e, and Delta Z_Lambda=log(n)z_n.",
+      "id": "mactg_01_components",
+      "implication": "All components use the same cutoff-independent anchor.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "Bounding it separately would lose cancellation.",
+      "claim": "The centered endpoint jump retains the endpoint-value term.",
+      "exact_statement": "For E_N=g_N-s_*'L_a e_N, Delta E_N=Delta g-s_*'L_a Delta e.",
+      "id": "mactg_02_endpoint",
+      "implication": "The term is kept until recombination.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "This is an identity, not a lower bound.",
+      "claim": "The endpoint-value jump cancels exactly in the centered jet.",
+      "exact_statement": "The endpoint-value jump cancels exactly: Delta mathfrak B_N=Delta E_N-s_*'Delta Z_Lambda+s_*'L_aDelta W_0=Delta g+s_*'log(a/n)z_n.",
+      "id": "mactg_03_cancellation",
+      "implication": "Only the endpoint-slope and entering-carrier slope remain.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "The Xi signed scalar remains open.",
+      "claim": "The centered jump is exactly the established physical adjacent recurrence.",
+      "exact_statement": "With ell=log(n/a), z_n=f_n/|f_1|, Delta mathfrak B_N={-s_*'ell f_n+kappa_N[J_(a,x)+mu_aJ_a]}/|f_1|=Delta W_A. Thus Re(Delta mathfrak B_N)=Delta A_a/|f_1|.",
+      "id": "mactg_04_recurrence",
+      "implication": "No new chart-dependent complex observable is introduced.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "Only the real projection is certified at this scale.",
+      "claim": "The existing adjacent real-projection theorem transfers to the centered variables.",
+      "exact_statement": "The certified adjacent theorem gives |Re(Delta W_0)|<2200exp(-5L/4) and |Re(Delta mathfrak B_N)|<10000exp(-7L/4).",
+      "id": "mactg_05_projection",
+      "implication": "The jump is negligible at the contact scale.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "No complex small-jump theorem is asserted.",
+      "claim": "Complex absolute-value promotion across adjacent charts remains invalid.",
+      "exact_statement": "No complex absolute-value bound for Delta W_0 or Delta mathfrak B_N at the displayed real-projection scales is proved. The exact complex cancellation must precede real projection and absolute values.",
+      "id": "mactg_06_complex_guard",
+      "implication": "Cancellation is performed before projection.",
+      "readiness": "guard_validated"
+    },
+    {
+      "boundary": "Floor boundaries are retained.",
+      "claim": "A non-square cutoff increment changes only the hyperbolic wing.",
+      "exact_statement": "If n=N+1 is not a square, D=floor(sqrt(N))=floor(sqrt(n)); the complete square is unchanged and the wing gains exactly the factor pairs of n. Hence Delta Z_square=0 and Delta Z_wing=log(n)z_n.",
+      "id": "mactg_07_ordinary",
+      "implication": "The new factor pairs reproduce log(n)z_n exactly.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "Neither change is a signed estimate.",
+      "claim": "A perfect-square increment has an explicit row-transfer decomposition.",
+      "exact_statement": "If n=r^2, D changes from r-1 to r. Put R_r=sum_(d<r)[Lambda(d)+Lambda(r)]z_(dr), D_r=Lambda(r)z_(r^2), and A_n=sum_(d|n,d<r)[Lambda(d)+Lambda(n/d)]z_n. Then Delta Z_square=R_r+D_r and Delta Z_wing=A_n-R_r.",
+      "id": "mactg_08_square",
+      "implication": "The central and wing changes are separately exact.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "This is arithmetic bookkeeping, not contact coercivity.",
+      "claim": "The perfect-square row transfer cancels under recombination.",
+      "exact_statement": "At n=r^2 the transferred row R_r cancels, and D_r+A_n=log(n)z_n by the symmetric Mangoldt divisor identity. Perfect-square changes introduce no residual term.",
+      "id": "mactg_09_square_rejoin",
+      "implication": "No residual floor term survives.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "Finite audit support for exact identities only.",
+      "claim": "Ordinary and perfect-square transitions pass an exact finite coefficient audit.",
+      "exact_statement": "Every N=2,...,80 transition is reconstructed with deterministic rational-complex carriers and prime-log coefficient vectors.",
+      "id": "mactg_10_transition_audit",
+      "implication": "The formulas are checked independently of floating-point logs.",
+      "readiness": "finite_certificate"
+    },
+    {
+      "boundary": "No fixed-chart Abel gap is proved.",
+      "claim": "Adjacent transport does not consume the existing Abel-gap scale.",
+      "exact_statement": "The certified adjacent theorem gives |Re(Delta W_0)|<2200exp(-5L/4) and |Re(Delta mathfrak B_N)|<10000exp(-7L/4).",
+      "id": "mactg_11_band",
+      "implication": "The certified exp(-7L/4) jump is subordinate to exp(-5L/4).",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "No Abel gap, winding cap, contact exclusion, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+      "claim": "The centered Type-I/II coordinate is now cutoff compatible.",
+      "exact_statement": "The centered jet and balanced hyperbola are now compatible with adjacent cutoffs. Any Type-I/II or Vaughan estimate must retain the ordinary factor-pair insertion, the perfect-square row transfer, the recurrent endpoint slope, and real-projection semantics before absolute values.",
+      "id": "mactg_12_route",
+      "implication": "The next step may formulate one endpoint-composed estimate.",
+      "readiness": "open"
+    }
+  ],
+  "source_audit": {
+    "source_sha256": {
+      "adjacent_recurrence": "ffab5ce74899f670a7e1e3cba0bcbd1734989134f2c0f0d972351f110af3d45f",
+      "chart_stability": "dcee581f283d63141e29d1085ee463c2eabc714a6e6760b15f12262474f83a83",
+      "contact_centering": "51c076ce0c303a85aa3c574a80290ddff8b2ecf978aba6bcf628f699434a72fb"
+    }
+  },
+  "status": "exact centered adjacent transport and balanced-cutoff audit; signed lower bound remains open",
+  "summary": {
+    "centered_endpoint_cancellations": 1,
+    "cutoff_transitions": 79,
+    "ordinary_transitions": 71,
+    "perfect_square_transitions": 8,
+    "proved_abel_gaps": 0,
+    "proved_successor_winding_bounds": 0,
+    "rows": 12,
+    "transition_mismatches": 0
+  },
+  "witnesses": {
+    "cutoff_transitions": [
+      {
+        "D_after": 1,
+        "D_before": 1,
+        "N": 2,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 3,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 2,
+        "D_before": 1,
+        "N": 3,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 1,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 4,
+        "row_transfer_coordinates": 1,
+        "transition": "perfect_square"
+      },
+      {
+        "D_after": 2,
+        "D_before": 2,
+        "N": 4,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 5,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 2,
+        "D_before": 2,
+        "N": 5,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 6,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 2,
+        "D_before": 2,
+        "N": 6,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 7,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 2,
+        "D_before": 2,
+        "N": 7,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 8,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 3,
+        "D_before": 2,
+        "N": 8,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 2,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 9,
+        "row_transfer_coordinates": 2,
+        "transition": "perfect_square"
+      },
+      {
+        "D_after": 3,
+        "D_before": 3,
+        "N": 9,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 10,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 3,
+        "D_before": 3,
+        "N": 10,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 11,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 3,
+        "D_before": 3,
+        "N": 11,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 12,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 3,
+        "D_before": 3,
+        "N": 12,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 13,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 3,
+        "D_before": 3,
+        "N": 13,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 14,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 3,
+        "D_before": 3,
+        "N": 14,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 15,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 4,
+        "D_before": 3,
+        "N": 15,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 2,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 16,
+        "row_transfer_coordinates": 2,
+        "transition": "perfect_square"
+      },
+      {
+        "D_after": 4,
+        "D_before": 4,
+        "N": 16,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 17,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 4,
+        "D_before": 4,
+        "N": 17,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 18,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 4,
+        "D_before": 4,
+        "N": 18,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 19,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 4,
+        "D_before": 4,
+        "N": 19,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 20,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 4,
+        "D_before": 4,
+        "N": 20,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 21,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 4,
+        "D_before": 4,
+        "N": 21,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 22,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 4,
+        "D_before": 4,
+        "N": 22,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 23,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 4,
+        "D_before": 4,
+        "N": 23,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 24,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 5,
+        "D_before": 4,
+        "N": 24,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 3,
+        "delta_wing_coordinates": 3,
+        "mismatches": 0,
+        "n": 25,
+        "row_transfer_coordinates": 3,
+        "transition": "perfect_square"
+      },
+      {
+        "D_after": 5,
+        "D_before": 5,
+        "N": 25,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 26,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 5,
+        "D_before": 5,
+        "N": 26,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 27,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 5,
+        "D_before": 5,
+        "N": 27,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 28,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 5,
+        "D_before": 5,
+        "N": 28,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 29,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 5,
+        "D_before": 5,
+        "N": 29,
+        "boundary_coordinates": 3,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 3,
+        "mismatches": 0,
+        "n": 30,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 5,
+        "D_before": 5,
+        "N": 30,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 31,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 5,
+        "D_before": 5,
+        "N": 31,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 32,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 5,
+        "D_before": 5,
+        "N": 32,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 33,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 5,
+        "D_before": 5,
+        "N": 33,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 34,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 5,
+        "D_before": 5,
+        "N": 34,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 35,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 6,
+        "D_before": 5,
+        "N": 35,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 3,
+        "delta_wing_coordinates": 3,
+        "mismatches": 0,
+        "n": 36,
+        "row_transfer_coordinates": 3,
+        "transition": "perfect_square"
+      },
+      {
+        "D_after": 6,
+        "D_before": 6,
+        "N": 36,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 37,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 6,
+        "D_before": 6,
+        "N": 37,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 38,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 6,
+        "D_before": 6,
+        "N": 38,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 39,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 6,
+        "D_before": 6,
+        "N": 39,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 40,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 6,
+        "D_before": 6,
+        "N": 40,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 41,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 6,
+        "D_before": 6,
+        "N": 41,
+        "boundary_coordinates": 3,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 3,
+        "mismatches": 0,
+        "n": 42,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 6,
+        "D_before": 6,
+        "N": 42,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 43,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 6,
+        "D_before": 6,
+        "N": 43,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 44,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 6,
+        "D_before": 6,
+        "N": 44,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 45,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 6,
+        "D_before": 6,
+        "N": 45,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 46,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 6,
+        "D_before": 6,
+        "N": 46,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 47,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 6,
+        "D_before": 6,
+        "N": 47,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 48,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 7,
+        "D_before": 6,
+        "N": 48,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 4,
+        "delta_wing_coordinates": 4,
+        "mismatches": 0,
+        "n": 49,
+        "row_transfer_coordinates": 4,
+        "transition": "perfect_square"
+      },
+      {
+        "D_after": 7,
+        "D_before": 7,
+        "N": 49,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 50,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 7,
+        "D_before": 7,
+        "N": 50,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 51,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 7,
+        "D_before": 7,
+        "N": 51,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 52,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 7,
+        "D_before": 7,
+        "N": 52,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 53,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 7,
+        "D_before": 7,
+        "N": 53,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 54,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 7,
+        "D_before": 7,
+        "N": 54,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 55,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 7,
+        "D_before": 7,
+        "N": 55,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 56,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 7,
+        "D_before": 7,
+        "N": 56,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 57,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 7,
+        "D_before": 7,
+        "N": 57,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 58,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 7,
+        "D_before": 7,
+        "N": 58,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 59,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 7,
+        "D_before": 7,
+        "N": 59,
+        "boundary_coordinates": 3,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 3,
+        "mismatches": 0,
+        "n": 60,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 7,
+        "D_before": 7,
+        "N": 60,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 61,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 7,
+        "D_before": 7,
+        "N": 61,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 62,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 7,
+        "D_before": 7,
+        "N": 62,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 63,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 7,
+        "N": 63,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 4,
+        "delta_wing_coordinates": 4,
+        "mismatches": 0,
+        "n": 64,
+        "row_transfer_coordinates": 4,
+        "transition": "perfect_square"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 64,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 65,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 65,
+        "boundary_coordinates": 3,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 3,
+        "mismatches": 0,
+        "n": 66,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 66,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 67,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 67,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 68,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 68,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 69,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 69,
+        "boundary_coordinates": 3,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 3,
+        "mismatches": 0,
+        "n": 70,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 70,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 71,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 71,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 72,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 72,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 73,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 73,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 74,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 74,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 75,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 75,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 76,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 76,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 77,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 77,
+        "boundary_coordinates": 3,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 3,
+        "mismatches": 0,
+        "n": 78,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 78,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 1,
+        "mismatches": 0,
+        "n": 79,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 8,
+        "D_before": 8,
+        "N": 79,
+        "boundary_coordinates": 2,
+        "delta_square_coordinates": 0,
+        "delta_wing_coordinates": 2,
+        "mismatches": 0,
+        "n": 80,
+        "row_transfer_coordinates": 0,
+        "transition": "ordinary"
+      },
+      {
+        "D_after": 9,
+        "D_before": 8,
+        "N": 80,
+        "boundary_coordinates": 1,
+        "delta_square_coordinates": 4,
+        "delta_wing_coordinates": 4,
+        "mismatches": 0,
+        "n": 81,
+        "row_transfer_coordinates": 4,
+        "transition": "perfect_square"
+      }
+    ],
+    "rational_jump": {
+      "Delta_E_N": {
+        "imag": "-14589633/328172845",
+        "real": "-445686863/30191901740"
+      },
+      "Delta_W_0": {
+        "imag": "154218/1296295",
+        "real": "-67686/1086085"
+      },
+      "Delta_Z_Lambda": {
+        "imag": "25/518",
+        "real": "-10/217"
+      },
+      "Delta_e": {
+        "imag": "2139/35035",
+        "real": "-246/35035"
+      },
+      "Delta_g": {
+        "imag": "-11870448/328172845",
+        "real": "153757641/7547975435"
+      },
+      "Delta_mathfrak_B_direct": {
+        "imag": "-9718696041/376414253215",
+        "real": "501078974189/17315055647890"
+      },
+      "Delta_mathfrak_B_physical": {
+        "imag": "-9718696041/376414253215",
+        "real": "501078974189/17315055647890"
+      },
+      "Delta_mathfrak_B_reduced": {
+        "imag": "-9718696041/376414253215",
+        "real": "501078974189/17315055647890"
+      },
+      "J_a": {
+        "imag": "4/13",
+        "real": "-3/11"
+      },
+      "J_a_x": {
+        "imag": "-2/19",
+        "real": "5/17"
+      },
+      "abs_f_1": "7/3",
+      "ell": "-1/3",
+      "f_n": {
+        "imag": "5/37",
+        "real": "-4/31"
+      },
+      "interpretation": "Exact rational-complex recurrence witness only; it is not an Xi cutoff state or a signed lower-bound witness.",
+      "kappa_N": {
+        "imag": "-1/5",
+        "real": "2/7"
+      },
+      "log_a": "7/6",
+      "log_n": "5/6",
+      "mu_a": {
+        "imag": "3/29",
+        "real": "1/23"
+      },
+      "s_prime": {
+        "imag": "-1/2",
+        "real": "1/17"
+      },
+      "z_n": {
+        "imag": "15/259",
+        "real": "-12/217"
+      }
+    }
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "audit": {
+    "classical_theorem_step_count": 2,
+    "cofinal_rh_equivalence_proved": true,
+    "exact_reduction_count": 17,
+    "full_burnol_bound_proved": false,
+    "lambda_le_zero_proved": false,
+    "literature_guard_count": 2,
+    "logarithmic_gain_proved": false,
+    "logarithmic_stable_prefix_equivalence_proved": true,
+    "open_logarithmic_gain_gate_count": 1,
+    "pf_infinity_proved": false,
+    "prefix_tail_norm_equivalence_proved": true,
+    "proof_guard_count": 4,
+    "rh_proved": false,
+    "row_count": 26,
+    "uniform_stable_prefix_closes_log_gate": false
+  },
+  "date": "2026-07-23",
+  "kind": "jensen_window_pf_mertens_anchor_logarithmic_tail_energy_reduction",
+  "parameters": {
+    "alpha_range": "0<alpha<1",
+    "gamma": "(1+alpha)/2",
+    "omega_match": "alpha=2omega"
+  },
+  "rows": [
+    {
+      "id": "malter_01_definitions",
+      "proof_boundary": "Here r_0=1/zeta(1+alpha); A_alpha is the weighted Mobius prefix, not the reciprocal partial sum denoted A_(omega,N) in the Burnol tail-discrepancy note.",
+      "role": "exact_definition",
+      "statement": "For 0<alpha<1 set a_n=mu(n)n^(-alpha), A_alpha(N)=sum_(n<=N)a_n, r_N=sum_(n>N)a_n/n, E_alpha=sum N^(alpha-2)|A_alpha(N)|^2, and R_alpha=sum N^alpha|r_N|^2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_02_adjacent_tail_difference",
+      "proof_boundary": "Subtract two adjacent absolutely convergent reciprocal tails.",
+      "role": "exact_identity",
+      "statement": "r_(N-1)-r_N=a_N/N for every N>=1.",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_03_prefix_from_all_tails",
+      "proof_boundary": "Multiply row 2 by N and telescope. This couples all earlier cutoffs and restores the constant prefix mode.",
+      "role": "exact_identity",
+      "statement": "A_alpha(N)=sum_(j=0)^(N-1)r_j-N*r_N.",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_04_normalized_hardy_identity",
+      "proof_boundary": "This is row 3 divided by N in weighted l2 coordinates.",
+      "role": "exact_identity",
+      "statement": "With b_N=A_alpha(N)/N and s_N=r_(N-1), b_N=H(s)(N)-r_N, where H(s)(N)=N^(-1)sum_(j=1)^N s_j.",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_05_tail_from_prefix",
+      "proof_boundary": "Discrete Abel summation; A_alpha(n)/n tends to zero unconditionally for alpha>0.",
+      "role": "exact_identity",
+      "statement": "r_N=-A_alpha(N)/(N+1)+sum_(n>N)A_alpha(n)/(n(n+1)).",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_06_weighted_hardy",
+      "proof_boundary": "A nonsharp explicit weighted Hardy bound obtained by the same Schur test used in the checked OU/Mertens reduction.",
+      "role": "classical_theorem_step",
+      "statement": "On l2(N^alpha), H has norm at most h_alpha=sqrt(2(3-alpha))/(1-alpha).",
+      "status": "source_backed"
+    },
+    {
+      "id": "malter_07_weighted_copson",
+      "proof_boundary": "A nonsharp weighted Copson bound; the shifted kernel 1/(n+1) in row 5 is pointwise dominated by this positive kernel after shifting the output index.",
+      "role": "classical_theorem_step",
+      "statement": "The tail operator Cb(N)=sum_(n>=N)b_n/n has norm at most c_alpha=sqrt(2(3+alpha))/(1+alpha) on l2(N^alpha).",
+      "status": "source_backed"
+    },
+    {
+      "id": "malter_08_prefix_tail_norm_equivalence",
+      "proof_boundary": "Rows 4-7 and the one-step weight shift; r_0 is finite for every alpha>0.",
+      "role": "exact_equivalence",
+      "statement": "E_alpha<infinity iff R_alpha<infinity. Quantitatively, R_alpha^(1/2)<=(1+c_alpha)E_alpha^(1/2), while E_alpha^(1/2)<=(1+2^(alpha/2)h_alpha)(|r_0|^2+R_alpha)^(1/2).",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_09_stable_prefix_energy",
+      "proof_boundary": "This is BTDR.8 with precisely the same reciprocal tail r_N.",
+      "role": "exact_identity",
+      "statement": "For alpha=2omega, the stable-prefix Burnol energy is P_(omega,N)=r_N^2*sum_(k<=N)k^alpha.",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_10_power_sum_comparison",
+      "proof_boundary": "Use N^(1+alpha)/(1+alpha)<=sum_(k<=N)k^alpha<=N^(1+alpha).",
+      "role": "exact_inequality",
+      "statement": "(1/(1+alpha))*N^alpha*r_N^2<=P_(omega,N)/N<=N^alpha*r_N^2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_11_logarithmic_stable_prefix_equivalence",
+      "proof_boundary": "Termwise comparison in row 10; no limiting interchange or arithmetic estimate is used.",
+      "role": "exact_equivalence",
+      "statement": "R_alpha<infinity iff sum_(N>=1)P_(alpha/2,N)/N<infinity.",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_12_three_way_energy_equivalence",
+      "proof_boundary": "Compose rows 8 and 11. The global stable-prefix family contains exactly the missing weighted-prefix anchor energy.",
+      "role": "exact_equivalence",
+      "statement": "E_alpha<infinity iff R_alpha<infinity iff sum_(N>=1)P_(alpha/2,N)/N<infinity.",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_13_cofinal_rh_criterion",
+      "proof_boundary": "Compose row 12 with the already checked weighted-prefix/Mertens cofinal RH criterion. This is an equivalent target, not a proof that any series converges.",
+      "role": "exact_equivalence",
+      "statement": "For any fixed cofinal sequence alpha_j->0 in (0,1), RH iff sum_(N>=1)P_(alpha_j/2,N)/N<infinity for every j.",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_14_all_cutoff_anchor_resolution",
+      "proof_boundary": "The recovery is global in N and must not be confused with a bound from one tail value or one q-block.",
+      "role": "exact_consequence",
+      "statement": "The fixed-cutoff constant anchor is not an independent mode once the complete adjacent-cutoff tail sequence is retained: row 3 reconstructs it exactly.",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_15_fixed_cutoff_gauge_guard",
+      "proof_boundary": "The earlier constant-tail countermodel remains valid locally; the new result adds cross-cutoff compatibility rather than invalidating that guard.",
+      "role": "proof_guard",
+      "statement": "At one fixed cutoff, adding a constant to the observed prefix block still leaves its post-prefix discrepancy unchanged.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "malter_16_critical_pointwise_consequence",
+      "proof_boundary": "Summing the critical tail envelope gives the boundary power. Its contribution to E_alpha is of harmonic size.",
+      "role": "exact_consequence",
+      "statement": "The critical pointwise rate r_N=O(N^(-(1+alpha)/2)) yields at best A_alpha(N)=O(N^((1-alpha)/2)) from row 3.",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_17_uniform_prefix_one_log_short",
+      "proof_boundary": "Uniform stable-prefix control supplies the critical pointwise tail rate, whereas the anchor energy requires a logarithmic mean-square gain across cutoffs.",
+      "role": "proof_guard",
+      "statement": "sup_N P_(omega,N)<infinity does not imply sum_N P_(omega,N)/N<infinity.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "malter_18_critical_scalar_model",
+      "proof_boundary": "A positive scalar/operator model with the same adjacent-tail algebra; it is not a model of the Mobius signs.",
+      "role": "exact_definition",
+      "statement": "Let gamma=(1+alpha)/2, r_N=(N+1)^(-gamma), and a_N=N[r_(N-1)-r_N]. Then r_N=sum_(n>N)a_n/n.",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_19_scalar_coefficient_envelope",
+      "proof_boundary": "The mean-value theorem and gamma>alpha for 0<alpha<1.",
+      "role": "exact_inequality",
+      "statement": "The scalar model satisfies 0<a_N<=gamma*N^(-gamma)<=gamma*N^(-alpha).",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_20_scalar_prefix_energy_bound",
+      "proof_boundary": "Insert r_N=(N+1)^(-gamma) into row 9 and use row 10.",
+      "role": "exact_inequality",
+      "statement": "For the scalar model, 2^(-(1+alpha))/(1+alpha)<=P_N<=1 for every N>=1.",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_21_scalar_logarithmic_divergence",
+      "proof_boundary": "This realizes the logarithmic boundary exactly.",
+      "role": "exact_consequence",
+      "statement": "For the scalar model, sum_N P_N/N diverges, and A(N)~[gamma/(1-gamma)]N^(1-gamma), so N^(alpha-2)A(N)^2 is asymptotic to a positive constant/N.",
+      "status": "available_exact"
+    },
+    {
+      "id": "malter_22_countermodel_scope_guard",
+      "proof_boundary": "It does not disprove a Mobius-specific cancellation theorem and makes no claim about the actual value of P_(omega,N).",
+      "role": "proof_guard",
+      "statement": "The scalar model proves that no generic operator argument using only the critical pointwise tail rate and coefficient size can close the logarithmic series.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "malter_23_full_q_distinction_guard",
+      "proof_boundary": "Do not advertise the logarithmic P criterion as an extra condition that must be added after the full Q theorem.",
+      "role": "proof_guard",
+      "statement": "The one-log obstruction concerns the stable-prefix component P alone. A cofinal uniform bound for the full Burnol energy Q would already imply RH through the existing three-gate criterion.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "malter_24_literature_context",
+      "proof_boundary": "Those sources motivate the coordinate but are not cited as proving rows 2-13.",
+      "role": "literature_guard",
+      "statement": "Burnol and Baez-Duarte supply the natural Mobius Nyman-Beurling framework; weighted Dirichlet and Hardy-space work supplies nearby zero-free and approximation criteria.",
+      "status": "source_backed"
+    },
+    {
+      "id": "malter_25_focused_source_search_guard",
+      "proof_boundary": "This is a search report, not a novelty or priority claim; a referee-level literature review remains appropriate.",
+      "role": "literature_guard",
+      "statement": "A focused search of the cited primary sources found no exact displayed match for sum_N P_(omega,N)/N and the three-way equivalence in row 12.",
+      "status": "source_backed"
+    },
+    {
+      "id": "malter_26_open_logarithmic_gain_gate",
+      "proof_boundary": "Equivalently prove the weighted-prefix/Mertens energy. The reduction supplies no arithmetic cancellation and proves neither RH, PF-infinity, nor Lambda<=0.",
+      "role": "open_target",
+      "statement": "Prove for the actual Mobius tail, on a fixed cofinal sequence alpha_j->0, the logarithmic estimate sum_N P_(alpha_j/2,N)/N<infinity without assuming RH.",
+      "status": "open_target"
+    }
+  ],
+  "source_anchors": [
+    "https://arxiv.org/abs/math/0202166",
+    "https://arxiv.org/abs/math/0011254",
+    "https://arxiv.org/abs/2508.00388",
+    "https://doi.org/10.1007/s11785-025-01661-2",
+    "https://arxiv.org/abs/2606.16097"
+  ],
+  "status": "exact all-cutoff anchor/logarithmic stable-prefix reduction with one open RH-equivalent arithmetic gate"
+}

@@ -1,0 +1,208 @@
+{
+  "audit": {
+    "averaged_chowla_closes_gate": false,
+    "classical_theorem_step_count": 4,
+    "dyadic_mean_square_rh_equivalence_proved": true,
+    "exact_reduction_count": 16,
+    "full_burnol_bound_proved": false,
+    "lambda_le_zero_proved": false,
+    "literature_guard_count": 1,
+    "open_mean_square_gate_count": 1,
+    "ou_uniform_bound_proved": false,
+    "pf_infinity_proved": false,
+    "proof_guard_count": 4,
+    "rh_proved": false,
+    "row_count": 25
+  },
+  "date": "2026-07-23",
+  "kind": "jensen_window_pf_ou_mertens_mean_square_reduction",
+  "parameters": {
+    "alpha_range": "0<alpha<1",
+    "beta": "(1+alpha)/2",
+    "dyadic_K": "2^j"
+  },
+  "rows": [
+    {
+      "id": "ommsr_01_definitions",
+      "proof_boundary": "The prime number theorem supplies convergence and r_1=0.",
+      "role": "exact_definition",
+      "statement": "For 0<alpha<1, set r_k=sum_(n>=k)mu(n)/n, M(k)=sum_(n<=k)mu(n), B_alpha=sum k^(-alpha)|r_k|^2, and M_alpha=sum M(k)^2/k^(2+alpha).",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_02_pnt_tail",
+      "proof_boundary": "Classical input only; it supplies no RH-strength power saving.",
+      "role": "classical_theorem_step",
+      "statement": "The prime number theorem gives sum_(n>=1)mu(n)/n=0 and M(N)/N->0.",
+      "status": "source_backed"
+    },
+    {
+      "id": "ommsr_03_tail_difference",
+      "proof_boundary": "Immediate from the reciprocal-Mobius tail definition.",
+      "role": "exact_identity",
+      "statement": "r_k-r_(k+1)=mu(k)/k.",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_04_mertens_from_tail",
+      "proof_boundary": "Telescope sum n(r_n-r_(n+1)); H is the prefix Hardy operator.",
+      "role": "exact_identity",
+      "statement": "M(k)=sum_(n=1)^k r_n-k*r_(k+1), hence M(k)/k=H(r)(k)-r_(k+1).",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_05_tail_from_mertens",
+      "proof_boundary": "Abel summation and M(N)/N->0.",
+      "role": "exact_identity",
+      "statement": "r_(k+1)=-M(k)/(k+1)+sum_(n>=k+1)M(n)/(n(n+1)).",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_06_weighted_hardy",
+      "proof_boundary": "A nonsharp explicit Schur-test form of the weighted Hardy inequality; no Mobius cancellation is used.",
+      "role": "classical_theorem_step",
+      "statement": "On l2(k^(-alpha)), H has norm at most h_alpha=sqrt(2(3+alpha))/(1+alpha).",
+      "status": "source_backed"
+    },
+    {
+      "id": "ommsr_07_weighted_copson",
+      "proof_boundary": "A nonsharp explicit Schur-test form of the weighted Copson inequality; the constant blows up as alpha->1.",
+      "role": "classical_theorem_step",
+      "statement": "The tail operator Cb(k)=sum_(n>=k)b_n/n has norm at most c_alpha=sqrt(2(3-alpha))/(1-alpha) on l2(k^(-alpha)).",
+      "status": "source_backed"
+    },
+    {
+      "id": "ommsr_08_tail_mertens_norm_equivalence",
+      "proof_boundary": "Combine rows 4-7 with the one-step weighted shift bounds.",
+      "role": "exact_inequality",
+      "statement": "M_alpha^(1/2)<=(h_alpha+2^(alpha/2))B_alpha^(1/2) and B_alpha^(1/2)<=(1+c_alpha)M_alpha^(1/2).",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_09_ou_weight_comparison",
+      "proof_boundary": "Concavity and 1-alpha<=2^(-alpha); valid for every k>=1.",
+      "role": "exact_inequality",
+      "statement": "For w_(alpha,k)=k^(1-alpha)-(k-1)^(1-alpha), (1-alpha)k^(-alpha)<=w_(alpha,k)<=k^(-alpha).",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_10_infinite_ou_mertens_equivalence",
+      "proof_boundary": "Rows 8 and 9 give explicit two-sided norm constants.",
+      "role": "exact_equivalence",
+      "statement": "The limiting OU tail energy sum w_(alpha,k)|r_k|^2 is finite iff M_alpha is finite.",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_11_continuous_mertens_cell_identity",
+      "proof_boundary": "M(x)=M(k) on each half-open cell [k,k+1).",
+      "role": "exact_identity",
+      "statement": "I_alpha=integral_1^infinity M(x)^2*x^(-2-alpha)dx equals (1/(1+alpha))*sum M(k)^2*[k^(-1-alpha)-(k+1)^(-1-alpha)].",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_12_discrete_continuous_comparison",
+      "proof_boundary": "Bound x^(-2-alpha) above and below on each unit cell.",
+      "role": "exact_inequality",
+      "statement": "2^(-2-alpha)M_alpha<=I_alpha<=M_alpha.",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_13_mertens_mellin_identity",
+      "proof_boundary": "Classical Abel/Mellin identity for the Mertens function.",
+      "role": "exact_identity",
+      "statement": "1/zeta(s)=s*integral_1^infinity M(x)x^(-s-1)dx initially for Re(s)>1.",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_14_mellin_plancherel",
+      "proof_boundary": "Mellin-Plancherel plus analytic continuation from Re(s)>1; finiteness rules out a boundary pole.",
+      "role": "classical_theorem_step",
+      "statement": "If I_alpha<infinity and beta=(1+alpha)/2, then I_alpha=(1/(2pi))*integral_R dt/[(beta^2+t^2)|zeta(beta+it)|^2].",
+      "status": "source_backed"
+    },
+    {
+      "id": "ommsr_15_dyadic_block_comparison",
+      "proof_boundary": "Compare k with 2^j on each dyadic block.",
+      "role": "exact_inequality",
+      "statement": "For D_j=2^(-2j)sum_(2^j<=k<2^(j+1))M(k)^2, 2^(-2-alpha)sum 2^(-alpha*j)D_j<=M_alpha<=sum 2^(-alpha*j)D_j.",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_16_root_growth_equivalence",
+      "proof_boundary": "Root test for the nonnegative generating series sum 2^(-alpha*j)D_j.",
+      "role": "exact_equivalence",
+      "statement": "M_alpha<infinity for every alpha>0 iff limsup_(j->infinity)D_j^(1/j)<=1.",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_17_dyadic_mean_square_rh_criterion",
+      "proof_boundary": "Rows 10, 15, and 16 composed with the cofinal OU criterion; this records an equivalent antecedent, not its proof.",
+      "role": "exact_equivalence",
+      "statement": "RH iff for every epsilon>0, sum_(K<=k<2K)M(k)^2=O_epsilon(K^(2+epsilon)) on dyadic K.",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_18_prefix_pair_correlation",
+      "proof_boundary": "Expand M(k)^2 and count the k containing each ordered pair.",
+      "role": "exact_identity",
+      "statement": "sum_(k<=X)M(k)^2=sum_(n<=X)mu(n)^2(X-n+1)+2sum_(h<X)sum_(m<=X-h)mu(m)mu(m+h)(X-m-h+1).",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_19_cumulative_correlation",
+      "proof_boundary": "Reverse the m,Y summations exactly.",
+      "role": "exact_identity",
+      "statement": "With C_h(Y)=sum_(m<=Y)mu(m)mu(m+h), the off-diagonal in row 18 equals 2sum_(h<X)sum_(Y<=X-h)C_h(Y).",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_20_anchored_correlation_criterion",
+      "proof_boundary": "Rows 17-19; the correlation sum is signed and anchored at m=1.",
+      "role": "exact_equivalence",
+      "statement": "The dyadic RH criterion is equivalent to sum_(h<X)sum_(Y<=X-h)C_h(Y)=O_epsilon(X^(2+epsilon)); the squarefree diagonal is O(X^2).",
+      "status": "available_exact"
+    },
+    {
+      "id": "ommsr_21_generic_hardy_barrier",
+      "proof_boundary": "The same divergent scale as the absolute OU and remainder bounds; a generic sequence inequality cannot close RH.",
+      "role": "proof_guard",
+      "statement": "Generic weighted Hardy applied to M(k)=sum_(n<=k)mu(n) costs sum_(n<=N)mu(n)^2*n^(-alpha), of order N^(1-alpha).",
+      "status": "guard_validated"
+    },
+    {
+      "id": "ommsr_22_averaged_chowla_source",
+      "proof_boundary": "Published averaged-Chowla input only; no anchored cumulative Mertens estimate is attributed to that theorem.",
+      "role": "literature_guard",
+      "statement": "Matomaki-Radziwill-Tao prove an o(H^k X) average over all shift k-tuples, and state that the result also holds for mu.",
+      "status": "source_backed"
+    },
+    {
+      "id": "ommsr_23_averaged_chowla_mismatch",
+      "proof_boundary": "Blocks promotion of averaged or logarithmically averaged Chowla into the required origin-anchored cumulative theorem.",
+      "role": "proof_guard",
+      "statement": "The published theorem averages every base shift, whereas C_h(Y) fixes the origin; even an anchored terminal bound sum_h|C_h(Y)|=o(Y^2), integrated naively in Y, has cubic rather than X^(2+epsilon) scale.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "ommsr_24_endpoint_slice_guard",
+      "proof_boundary": "An exceptional anchored slice can carry the RH-strength obligation even when its density among shifts tends to zero.",
+      "role": "proof_guard",
+      "statement": "Almost-all short-interval cancellation leaves the single prefix M(X) and the h_1=0 correlation slice uncontrolled.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "ommsr_25_open_anchored_mean_square_gate",
+      "proof_boundary": "This is RH-equivalent. No OU bound, full Burnol bound, RH, PF-infinity, or Lambda<=0 conclusion is recorded.",
+      "role": "open_target",
+      "statement": "Prove D_j=2^(o(j)), equivalently the dyadic Mertens mean-square or signed anchored integrated-correlation bound, without assuming a zero-free half-plane or RH.",
+      "status": "open_target"
+    }
+  ],
+  "source_anchors": [
+    "https://arxiv.org/abs/2208.06141",
+    "https://arxiv.org/abs/2508.00388",
+    "https://arxiv.org/abs/1503.05121",
+    "https://annals.math.princeton.edu/2016/183-3/p06"
+  ],
+  "status": "exact OU-tail/Mertens/dyadic/anchored-correlation reduction with one open RH-equivalent mean-square gate"
+}

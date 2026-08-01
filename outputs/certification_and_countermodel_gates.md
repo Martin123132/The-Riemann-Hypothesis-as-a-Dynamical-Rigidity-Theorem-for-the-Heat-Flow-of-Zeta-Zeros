@@ -1,6 +1,6 @@
 # Certification And Countermodel Gates
 
-Date: 2026-07-10
+Date: 2026-07-25
 
 Status: proof-safety gate ledger. This is not a proof of RH or `Lambda <= 0`; it defines certification levels, manifest checks, and countermodel boundaries.
 
@@ -511,7 +511,11 @@ outputs/jensen_window_pf_cubic_reciprocal_defect_invariance_lemma.md
 outputs/jensen_window_pf_cubic_m100_tail_entry_certificate.md
 outputs/jensen_window_pf_cubic_forward_uniform_tail_certificate.md
 outputs/jensen_window_pf_quartic_boundary_flow_obstruction.md
+outputs/jensen_window_pf_strong_logconcave_local_quartic_countermodel.md
 outputs/jensen_window_pf_quartic_double_root_threshold_lemma.md
+outputs/jensen_window_pf_quartic_signed_hankel_branch_exclusion_lemma.md
+outputs/jensen_window_pf_quartic_outer_threshold_order4_nonpromotion_gate.md
+outputs/jensen_window_pf_quartic_outer_branch_length13_obstruction.md
 outputs/jensen_window_pf_quartic_quintic_polar_contact_lemma.md
 outputs/jensen_window_pf_cofinal_degree_polar_closure_lemma.md
 outputs/jensen_window_pf_cofinal_scaling_limit_equivalence_gate.md
@@ -535,7 +539,11 @@ python work/rh_compute/scripts/check_jensen_window_pf_cubic_reciprocal_defect_in
 python work/rh_compute/scripts/check_jensen_window_pf_cubic_m100_tail_entry_certificate.py
 python work/rh_compute/scripts/check_jensen_window_pf_cubic_forward_uniform_tail_certificate.py
 python work/rh_compute/scripts/check_jensen_window_pf_quartic_boundary_flow_obstruction.py
+python work/rh_compute/scripts/check_jensen_window_pf_strong_logconcave_local_quartic_countermodel.py
 python work/rh_compute/scripts/check_jensen_window_pf_quartic_double_root_threshold_lemma.py
+python work/rh_compute/scripts/check_jensen_window_pf_quartic_signed_hankel_branch_exclusion_lemma.py
+python work/rh_compute/scripts/check_jensen_window_pf_quartic_outer_threshold_order4_nonpromotion_gate.py
+python work/rh_compute/scripts/check_jensen_window_pf_quartic_outer_branch_length13_obstruction.py
 python work/rh_compute/scripts/check_jensen_window_pf_quartic_quintic_polar_contact_lemma.py
 python work/rh_compute/scripts/check_jensen_window_pf_cofinal_degree_polar_closure_lemma.py
 python work/rh_compute/scripts/check_jensen_window_pf_cofinal_scaling_limit_equivalence_gate.py
@@ -595,10 +603,60 @@ exact rational hyperbolic boundary point with four positive ratio margins and
 three strict cubic margins but `Q'/r_1<0`. It blocks promotion of the cubic
 cone unchanged to degree four without claiming any failure of the actual zeta
 trajectory.
+A companion moment-realized countergate strengthens that scope warning. The
+`1/5`-strongly log-concave squared-variable density
+`exp(-3*y-y^2/10)1_[1/20,1](y)` satisfies every local lower/upper ratio wall,
+strict contraction monotonicity, and three consecutive strict cubic tests,
+but has `Q(x_1,x_2,x_3)<0`. Full-support strongly log-concave approximants
+retain these strict signs. This blocks only a local generic promotion and is
+not an Xi kernel or Newman heat trajectory.
 The nineteenth converts that obstruction into the exact branch-aware inward
 law `(3*a^2-4*a+p)*(u-U)<=0`, proves shift-independence of `U`, and identifies
 the necessary triple-root equality and tangent factor. A globally closed
 quartic contraction cone is still open.
+A companion signed-Hankel composition now removes the middle-root and
+triple-root strata for Xi. At quartic contact,
+`D_(3,n)/(A_n^3*r_n^6)=-((a-b)*(a-c))^3/216`; the proved strict Xi sign
+`D_(3,n)<0` forces the repeated root outside the two simple roots. The live
+inward condition is therefore the single outer threshold `u<=U(a,p)`, which
+remains open.
+A second exact countergate shows why the completed compound order-four layer
+does not finish that threshold locally. A positive rational segment
+`A_1,...,A_10` satisfies every supported signed reshaped-Hankel condition
+through order four (`120` order-two, `126` arbitrary-column order-three, and
+`56` arbitrary-column order-four minors across multiple shifts), all
+pointwise ratio walls, seven increasing scaled-defect steps, seven
+reciprocal-defect increments below one, and seven strict cubic frontiers, but
+lies on the outer branch with `u-U>0`. Its adjacent quintic has negative
+discriminant. This is a finite local nonpromotion theorem, not an Xi or
+infinite sign-regular counterexample; a uniform theorem over all outer-contact
+prefixes, far-column, degree-five, and theta-specific closures remain live.
+The immediate extension does remain live: the exact `x_10` interval cut out
+by the new terminal order-three and order-four signs has positive rational
+width, and `4944208739/5000000000` lies inside while preserving the next
+pointwise, scaled-defect, reciprocal-increment, and cubic conditions. The
+first unseen shift is therefore genuinely passable.
+A downstream exact certificate now closes the proposed all-length extension
+of this fixed prefix. Parameterizing every strict continuation through
+`x_12` by `G_(k-3)=y_k*C_k`, `0<y_k<1`, reduces the next monotone order-four
+step to `Delta_13>0`. Exact Bernstein signs make `Delta_13`
+coordinatewise nondecreasing, yet its cube-corner maximum is below
+`-190137/125000000000`. Thus this witness cannot be an infinite countermodel;
+an exact alternate tail from the same outer contact now survives through
+`x_13` and has a fixed-tail obstruction at `x_14`. A complete 256-bit Arb
+partition now strengthens that fixed-tail sign to a uniform length-14
+obstruction over every admissible tail from this one contact. An exact second
+outer contact, however, survives through `x_14`, retains positive
+`Delta_15`, and has all `4043` supported arbitrary-column signed minors of
+orders two through eight positive on `A_1,...,A_15`. Thus contact-uniform
+length-14 obstruction is false under these finite hypotheses; the sharp
+separation is already adjacent-degree: its normalized quintic has
+`P_5(-1/a)<0` and negative exact discriminant, hence one nonreal conjugate
+pair. More generally, the exact contact normal form factors
+`Disc(P_5)=Pi*epsilon^2 R(epsilon)` and proves a negative-discriminant
+outward collar for `0<q<15/16`. The remaining fork is to derive that stronger
+degree-coupled condition from genuinely global, all-order, theta-arithmetic,
+or heat-compatible Xi structure.
 The twentieth proves the adjacent-degree polar identity, shows that a quartic
 double root under a hyperbolic quintic extension forces a quintic triple root,
 and identifies `u=U` as exactly that contact value. The identity extends to all
@@ -628,7 +686,10 @@ The twenty-sixth rewrites each unshifted Jensen polynomial as a positive
 integral of generalized Laguerre kernels. Fixed scales and every half-integer
 Gamma law are hyperbolic in all degrees, but exact positive-mixture and
 log-concave-density countermodels show that integration alone is not a
-preserver. A common-interlacing or total-positive Xi connection remains open.
+preserver. Full scale support also rules out a common interlacer for the
+complete component family in degree at least two. A weighted total-positive
+or variation-diminishing Xi connection remains open, but opposite-sign
+two-by-two minors show that it cannot come from the bare Abel kernel.
 The twenty-seventh computes the classical continuum root field as
 `-pi/8+O(1/x)`, matching the positive-time quantile drift, and imports the
 published fixed-time high-zero simplicity theorem to confine any multiple zero
@@ -642,6 +703,34 @@ weighted odd local count. An exact even backward-heat polynomial has field
 `-pi/8` and drift `-pi/4` while still undergoing positive pair birth, proving
 that field balance alone is not a collision obstruction.
 
+The twenty-ninth turns the score/Beta Abel measure into an exact radial
+probability ladder. For every shift `n`, its normalized density on
+`R^(2n+2)` has Fourier profile
+`mathcal F_t^(n)(-|xi|^2)/A_n`, and successive profiles obey the classical
+radial dimension walk. At `n=0`, the first-coordinate marginal is the
+normalized Newman kernel. This is not a fixed profile in every dimension.
+An exact two-Gaussian Newman flow shares the full ladder and arbitrarily
+strong log-concavity but has a nonreal zero lattice and negative
+degree-two Jensen discriminant at every shift. Generic radial positivity is
+therefore blocked as a proof route. This does not leave the Xi quadratic
+layer open: strict log concavity of `y -> Phi(sqrt(y))` plus Berwald--Borell
+already proves every shifted quadratic, and the reciprocal-defect heat theorem
+proves every shifted cubic throughout the target heat interval. The radial
+node by itself does not control the historical quartic outer threshold.
+
+The thirtieth gate closes that bounded Xi frontier by a different route. A
+192-bit directed near-minus-tail estimate proves a zero-free complex slab for
+the full interval `0<=t<=1/5`. De Bruijn strip contraction and Chasse's sector
+theorem then prove every shifted Xi Jensen polynomial through degree 71
+hyperbolic. This excludes the quartic/quintic survivor for Xi while preserving
+it as a generic finite signed-Hankel countermodel. Degree 72 and every
+unbounded or all-degree conclusion remain open. The certificate is
+
+```text
+outputs/jensen_window_pf_newman_zero_slab_degree71_sector_certificate.md
+python work/rh_compute/scripts/check_jensen_window_pf_newman_zero_slab_degree71_sector_certificate.py
+```
+
 The core runner is documented in:
 
 ```text
@@ -651,8 +740,11 @@ outputs/core_proof_programme_gates.md
 Current core runner status:
 
 ```text
-validated 193/193 core proof-programme gates in the integrated non-slow run.
-The current runner has 200 gates: 193 non-slow and 7 slow.
+latest completed non-slow umbrella: 421/421 gates passed.
+The current runner has 441 gates: 421 non-slow and 20 slow.
+Elapsed time for the latest complete non-slow replay: 1369.3 seconds.
+The subsequently strengthened degree-361 tail audit and affected global
+integration gates pass a differential final-state replay.
 ```
 
 Current manifest status:

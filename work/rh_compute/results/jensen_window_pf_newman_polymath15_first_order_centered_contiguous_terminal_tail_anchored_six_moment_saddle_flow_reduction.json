@@ -1,0 +1,271 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_saddle_flow_reduction",
+  "date": "2026-08-01",
+  "status": "exact endpoint-composed six-moment saddle-flow reduction and order-five Mangoldt handoff; signed flow estimate open; no Phi_B bound, Lambda<=0, or RH",
+  "proof_boundary": "This proves the exact endpoint-composed frequency-flow and transfer identities, preservation of Hermitian and transpose symmetry, the leading pair-flow formula, degree-five closure, and the order-five Mangoldt/balanced-hyperbola extension. It does not prove a signed flow estimate, saddle-proxy upper bound, Phi_B upper bound, contact exclusion, retained aggregate or Xi-level current theorem, Q209, Lambda<=0, PF-infinity, RH, or a prize-level result.",
+  "source_audit": {
+    "source_sha256": {
+      "quadratic_barrier": "86b4b87a626e5e9bc43e946b533709a68905a8cda23d53c1397e2ada7a91cf2d",
+      "two_carrier": "0d9af778f6dfd6453b59375e42f225aad382788f7660d7a5bbae2aa3bff5496f",
+      "mangoldt": "295c3a8ad23f98261e88e678b1e5ff6610c5dfe16fcd4f15724160d5fffaf57e"
+    },
+    "source_kinds": {
+      "quadratic_barrier": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_q1_saddle_phase_quadratic_transfer_barrier",
+      "two_carrier": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_two_carrier_kernel_reduction",
+      "mangoldt": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_current_mangoldt_normal_form_gate"
+    },
+    "imported_signed_flow_bounds": 0,
+    "imported_phi_b_bounds": 0
+  },
+  "full_current_flow_certificate": {
+    "auxiliary_carriers": "For T_0-epsilon<=xi<=T_0 put z_n(xi)=omega_a A_n exp(-i*xi*u_n). Then z_(n,xi)=-i*u_n*z_n and conj(z_n)_(xi)=i*u_n*conj(z_n).",
+    "current_family": "Define Psi(xi)=Re sum_(n<=B)L_nz_n(xi)+(1/2)Re sum_(n,m<=B)[H^+_(n,m)z_n(xi)conj(z_m(xi))+T^+_(n,m)z_n(xi)z_m(xi)]. At xi=Omega, Psi(Omega)=h^2*Phi_B exactly.",
+    "derivative": "Psi'(xi)=Re sum_n[-i*u_n*L_n]z_n+(1/2)Re sum_(n,m){[-i(u_n-u_m)H^+_(n,m)]z_nconj(z_m)+[-i(u_n+u_m)T^+_(n,m)]z_nz_m}.",
+    "transfer": "h^2*Phi_B-Psi(T_0)=-epsilon*integral_0^1 Psi'(T_0-theta*epsilon)dtheta.",
+    "symmetry": "If H^+_(m,n)=conj(H^+_(n,m)), then -i(u_n-u_m)H^+_(n,m) is Hermitian. If T^+_(m,n)=T^+_(n,m), then -i(u_n+u_m)T^+_(n,m) is transpose-symmetric.",
+    "interpretation": "The complete saddle transfer remains one endpoint-linear, one phase-difference, and one phase-sum family. No new correlation family or four-variable expansion is created.",
+    "symbolic_difference": "0",
+    "finite_carriers": 3
+  },
+  "leading_pair_flow_certificate": {
+    "coordinate_integrand": "For M_0=f+ig, M_1=p_1+iq_1, M_2=p_2+iq_2, and q_3=Im(M_3), put K=q_1p_2-fq_3+2u_x(q_1g-fp_1)=4P_bulk^(0)'(xi).",
+    "pair_identity": "With Delta_nm=u_n-u_m and Sigma_nm=u_n+u_m, K=-(1/4)sum_(n,m)[Delta_nm^2 Sigma_nm Im(z_nz_m)+Delta_nm Sigma_nm^2 Im(z_nconj(z_m))]-u_x sum_(n,m)Sigma_nm Re(z_nz_m).",
+    "diagonal": "The Hermitian and cubic transpose pieces vanish on n=m. The exact diagonal is K_diag=-2u_x sum_n u_n Re(z_n^2), which has no fixed sign.",
+    "kernel_origin": "This pair identity is exactly the xi derivative of the ideal kernels H_0^+=-Sigma_nm^2/8 and T_0^+=-Delta_nm^2/8-i*u_x/2.",
+    "scope": "The identity preserves both physical phase families. Its diagonal coefficient is small, but no diagonal or aggregate sign is inferred without the actual phases.",
+    "symbolic_difference": "0",
+    "finite_carriers": 3
+  },
+  "degree_certificate": {
+    "degree_statement": "In ell_n=log(n), C,D have degree at most 2, R,R_x degree at most 1, Q degree at most 3, N and L degree at most 4. Multiplication by u_n, u_n-u_m, or u_n+u_m raises each one-variable degree to at most 5.",
+    "six_moment_closure": "Therefore Psi'(xi) closes exactly on the six correction-free moments G_0(xi),...,G_5(xi), with no seventh moment and no new correction denominator.",
+    "degrees": {
+      "L_n": 4,
+      "u_n_L_n": 5,
+      "H_plus_ell_n": 4,
+      "H_plus_ell_m": 4,
+      "flow_H_ell_n": 5,
+      "flow_H_ell_m": 5,
+      "flow_T_ell_n": 5,
+      "flow_T_ell_m": 5
+    },
+    "max_degree": 5,
+    "moment_count": 6
+  },
+  "order_five_mangoldt_certificate": {
+    "phase_factor": "Put c_xi=exp[i(Omega-xi)log(a)], s_xi=sigma-i*xi, and q_n^(0)(xi)=exp[t log(n)^2/4-s_xi log(n)]. Then z_n(xi)=(eta/S_a)c_xi q_n^(0)(xi). The factor c_xi is common to every carrier and stays outside each divisor sum.",
+    "order_five": "G_5(xi)=(eta/S_a)c_xi sum_(dm<=B)Lambda(d)log(dm)^4q_(dm)^(0)(xi)=(eta*c_xi/(2S_a))sum_(dm<=B)[Lambda(d)+Lambda(m)]log(dm)^4q_(dm)^(0)(xi).",
+    "heat_factor": "The exact factor q_(dm)^(0)=q_d^(0)q_m^(0)exp[(t/2)log(d)log(m)] is unchanged; xi only changes the common logarithmic phase.",
+    "balanced_split": "For D=floor(sqrt(B)), the order-five sum has the same exact D-by-D square and two hyperbolic wings as orders one through four.",
+    "prime_edge_guard": "For every prime sqrt(B)<p<=B, the order-five symmetric {1,p} minor is [[0,log(p)^5/2],[log(p)^5/2,0]] and has determinant -log(p)^10/4<0.",
+    "audit": {
+      "cutoffs": [
+        17,
+        31,
+        64,
+        97
+      ],
+      "order_five_rows": 205,
+      "symmetric_order_five_rows": 205,
+      "balanced_hyperbola_rows": 4,
+      "max_moment_order": 5,
+      "heat_factor_exponent_difference": "0"
+    }
+  },
+  "exact": {
+    "composed_target": "Prove directly Psi(T_0)-epsilon integral_0^1Psi'(T_0-theta*epsilon)dtheta<=h^2/400, preferably h^2/800, for the actual endpoint and six-moment Xi vector.",
+    "analytic_handoff": "Apply a uniform signed Type-I/II, Vaughan, or reciprocal-Poisson estimate to the endpoint-linear, Hermitian flow, and transpose flow families together. The new arithmetic input is only the order-five logarithmic moment; no new correlation geometry is needed.",
+    "intermediate_boundary": "Only xi=Omega is the physical carrier state. Intermediate xi and xi=T_0 form an exact auxiliary homotopy and are not asserted to satisfy the terminal source recurrence separately.",
+    "proof_boundary": "This proves the exact endpoint-composed frequency-flow and transfer identities, preservation of Hermitian and transpose symmetry, the leading pair-flow formula, degree-five closure, and the order-five Mangoldt/balanced-hyperbola extension. It does not prove a signed flow estimate, saddle-proxy upper bound, Phi_B upper bound, contact exclusion, retained aggregate or Xi-level current theorem, Q209, Lambda<=0, PF-infinity, RH, or a prize-level result."
+  },
+  "counts": {
+    "rows": 15,
+    "full_current_flow_identities": 1,
+    "signed_transfer_integrals": 1,
+    "flow_kernel_symmetries": 2,
+    "leading_pair_flow_identities": 1,
+    "correction_free_moments": 6,
+    "max_moment_order": 5,
+    "new_mangoldt_orders": 1,
+    "order_five_prime_edge_guards": 1,
+    "signed_flow_bounds": 0,
+    "phi_b_bounds": 0,
+    "xi_level_current_theorems": 0
+  },
+  "rows": [
+    {
+      "id": "sfr_01_domain",
+      "role": "auxiliary saddle segment",
+      "readiness": "proved",
+      "claim": "The flow stays on the certified q=1 frequency segment.",
+      "formula": "For T_0-epsilon<=xi<=T_0 put z_n(xi)=omega_a A_n exp(-i*xi*u_n). Then z_(n,xi)=-i*u_n*z_n and conj(z_n)_(xi)=i*u_n*conj(z_n).",
+      "proof_boundary": "Only xi=Omega is the physical carrier state. Intermediate xi and xi=T_0 form an exact auxiliary homotopy and are not asserted to satisfy the terminal source recurrence separately.",
+      "diagnostics": null
+    },
+    {
+      "id": "sfr_02_family",
+      "role": "endpoint-composed current family",
+      "readiness": "proved",
+      "claim": "The full joined current extends to one exact auxiliary family.",
+      "formula": "Define Psi(xi)=Re sum_(n<=B)L_nz_n(xi)+(1/2)Re sum_(n,m<=B)[H^+_(n,m)z_n(xi)conj(z_m(xi))+T^+_(n,m)z_n(xi)z_m(xi)]. At xi=Omega, Psi(Omega)=h^2*Phi_B exactly.",
+      "proof_boundary": "All physical coefficients are held fixed along xi.",
+      "diagnostics": null
+    },
+    {
+      "id": "sfr_03_derivative",
+      "role": "full frequency derivative",
+      "readiness": "proved",
+      "claim": "Termwise differentiation preserves the three-family decomposition.",
+      "formula": "Psi'(xi)=Re sum_n[-i*u_n*L_n]z_n+(1/2)Re sum_(n,m){[-i(u_n-u_m)H^+_(n,m)]z_nconj(z_m)+[-i(u_n+u_m)T^+_(n,m)]z_nz_m}.",
+      "proof_boundary": "The complete saddle transfer remains one endpoint-linear, one phase-difference, and one phase-sum family. No new correlation family or four-variable expansion is created.",
+      "diagnostics": {
+        "difference": "0",
+        "finite_carriers": 3
+      }
+    },
+    {
+      "id": "sfr_04_symmetry",
+      "role": "flow-kernel symmetries",
+      "readiness": "proved",
+      "claim": "The differentiated pair kernels retain Hermitian and transpose symmetry.",
+      "formula": "If H^+_(m,n)=conj(H^+_(n,m)), then -i(u_n-u_m)H^+_(n,m) is Hermitian. If T^+_(m,n)=T^+_(n,m), then -i(u_n+u_m)T^+_(n,m) is transpose-symmetric.",
+      "proof_boundary": "Symmetry is an organization theorem, not a sign theorem.",
+      "diagnostics": null
+    },
+    {
+      "id": "sfr_05_transfer",
+      "role": "full signed saddle transfer",
+      "readiness": "proved",
+      "claim": "The actual Phi_B differs from its saddle proxy by one signed integral.",
+      "formula": "h^2*Phi_B-Psi(T_0)=-epsilon*integral_0^1 Psi'(T_0-theta*epsilon)dtheta.",
+      "proof_boundary": "No positive-mass transfer bound is applied.",
+      "diagnostics": null
+    },
+    {
+      "id": "sfr_06_leading",
+      "role": "leading coordinate flow",
+      "readiness": "proved",
+      "claim": "The Section 11.163 signed integrand is the derivative of the ideal bulk current.",
+      "formula": "For M_0=f+ig, M_1=p_1+iq_1, M_2=p_2+iq_2, and q_3=Im(M_3), put K=q_1p_2-fq_3+2u_x(q_1g-fp_1)=4P_bulk^(0)'(xi).",
+      "proof_boundary": "Moments through order three suffice only for the ideal part.",
+      "diagnostics": null
+    },
+    {
+      "id": "sfr_07_pair",
+      "role": "leading pair-flow identity",
+      "readiness": "proved",
+      "claim": "The leading signed integrand splits into the same two phase families.",
+      "formula": "With Delta_nm=u_n-u_m and Sigma_nm=u_n+u_m, K=-(1/4)sum_(n,m)[Delta_nm^2 Sigma_nm Im(z_nz_m)+Delta_nm Sigma_nm^2 Im(z_nconj(z_m))]-u_x sum_(n,m)Sigma_nm Re(z_nz_m). This pair identity is exactly the xi derivative of the ideal kernels H_0^+=-Sigma_nm^2/8 and T_0^+=-Delta_nm^2/8-i*u_x/2.",
+      "proof_boundary": "No four-variable sum is introduced.",
+      "diagnostics": {
+        "difference": "0",
+        "finite_carriers": 3
+      }
+    },
+    {
+      "id": "sfr_08_diagonal",
+      "role": "flow diagonal",
+      "readiness": "proved",
+      "claim": "Only the shear transpose term survives on the pair diagonal.",
+      "formula": "The Hermitian and cubic transpose pieces vanish on n=m. The exact diagonal is K_diag=-2u_x sum_n u_n Re(z_n^2), which has no fixed sign.",
+      "proof_boundary": "The identity preserves both physical phase families. Its diagonal coefficient is small, but no diagonal or aggregate sign is inferred without the actual phases.",
+      "diagnostics": null
+    },
+    {
+      "id": "sfr_09_degree",
+      "role": "degree-five coefficient audit",
+      "readiness": "proved",
+      "claim": "Frequency differentiation raises every one-variable logarithmic degree by at most one.",
+      "formula": "In ell_n=log(n), C,D have degree at most 2, R,R_x degree at most 1, Q degree at most 3, N and L degree at most 4. Multiplication by u_n, u_n-u_m, or u_n+u_m raises each one-variable degree to at most 5.",
+      "proof_boundary": "The audit uses the exact C,D,R,Q,R_x,N,L degree hierarchy.",
+      "diagnostics": {
+        "L_n": 4,
+        "u_n_L_n": 5,
+        "H_plus_ell_n": 4,
+        "H_plus_ell_m": 4,
+        "flow_H_ell_n": 5,
+        "flow_H_ell_m": 5,
+        "flow_T_ell_n": 5,
+        "flow_T_ell_m": 5
+      }
+    },
+    {
+      "id": "sfr_10_six",
+      "role": "six-moment closure",
+      "readiness": "proved",
+      "claim": "The full saddle-flow current closes on G_0 through G_5.",
+      "formula": "Therefore Psi'(xi) closes exactly on the six correction-free moments G_0(xi),...,G_5(xi), with no seventh moment and no new correction denominator.",
+      "proof_boundary": "Sufficiency is proved; no claim of irreducible minimality is made.",
+      "diagnostics": null
+    },
+    {
+      "id": "sfr_11_mangoldt",
+      "role": "order-five Mangoldt extension",
+      "readiness": "proved",
+      "claim": "The one new moment has the same exact symmetric divisor-pair form.",
+      "formula": "Put c_xi=exp[i(Omega-xi)log(a)], s_xi=sigma-i*xi, and q_n^(0)(xi)=exp[t log(n)^2/4-s_xi log(n)]. Then z_n(xi)=(eta/S_a)c_xi q_n^(0)(xi). The factor c_xi is common to every carrier and stays outside each divisor sum. G_5(xi)=(eta/S_a)c_xi sum_(dm<=B)Lambda(d)log(dm)^4q_(dm)^(0)(xi)=(eta*c_xi/(2S_a))sum_(dm<=B)[Lambda(d)+Lambda(m)]log(dm)^4q_(dm)^(0)(xi). The exact factor q_(dm)^(0)=q_d^(0)q_m^(0)exp[(t/2)log(d)log(m)] is unchanged; xi only changes the common logarithmic phase.",
+      "proof_boundary": "The common auxiliary phase stays outside the divisor sum; the form remains complex bilinear, not Hermitian.",
+      "diagnostics": {
+        "cutoffs": [
+          17,
+          31,
+          64,
+          97
+        ],
+        "order_five_rows": 205,
+        "symmetric_order_five_rows": 205,
+        "balanced_hyperbola_rows": 4,
+        "max_moment_order": 5,
+        "heat_factor_exponent_difference": "0"
+      }
+    },
+    {
+      "id": "sfr_12_hyperbola",
+      "role": "order-five balanced split",
+      "readiness": "proved",
+      "claim": "The new moment has the same square-and-wing Type-I/II organization.",
+      "formula": "For D=floor(sqrt(B)), the order-five sum has the same exact D-by-D square and two hyperbolic wings as orders one through four.",
+      "proof_boundary": "Organization alone supplies no cancellation.",
+      "diagnostics": {
+        "cutoffs": [
+          17,
+          31,
+          64,
+          97
+        ],
+        "order_five_rows": 205,
+        "symmetric_order_five_rows": 205,
+        "balanced_hyperbola_rows": 4,
+        "max_moment_order": 5,
+        "heat_factor_exponent_difference": "0"
+      }
+    },
+    {
+      "id": "sfr_13_guard",
+      "role": "order-five positivity guard",
+      "readiness": "guard_validated",
+      "claim": "The extended symmetric kernel is still indefinite on every prime edge.",
+      "formula": "For every prime sqrt(B)<p<=B, the order-five symmetric {1,p} minor is [[0,log(p)^5/2],[log(p)^5/2,0]] and has determinant -log(p)^10/4<0.",
+      "proof_boundary": "Transpose symmetry cannot be promoted to positivity.",
+      "diagnostics": null
+    },
+    {
+      "id": "sfr_14_target",
+      "role": "composed signed target",
+      "readiness": "open",
+      "claim": "The exact transfer and saddle proxy must now be estimated together.",
+      "formula": "Prove directly Psi(T_0)-epsilon integral_0^1Psi'(T_0-theta*epsilon)dtheta<=h^2/400, preferably h^2/800, for the actual endpoint and six-moment Xi vector. Apply a uniform signed Type-I/II, Vaughan, or reciprocal-Poisson estimate to the endpoint-linear, Hermitian flow, and transpose flow families together. The new arithmetic input is only the order-five logarithmic moment; no new correlation geometry is needed.",
+      "proof_boundary": "No signed constant is proved.",
+      "diagnostics": null
+    },
+    {
+      "id": "sfr_15_boundary",
+      "role": "proof boundary",
+      "readiness": "open",
+      "claim": "The six-moment handoff narrows but does not close the arithmetic theorem.",
+      "formula": "This proves the exact endpoint-composed frequency-flow and transfer identities, preservation of Hermitian and transpose symmetry, the leading pair-flow formula, degree-five closure, and the order-five Mangoldt/balanced-hyperbola extension. It does not prove a signed flow estimate, saddle-proxy upper bound, Phi_B upper bound, contact exclusion, retained aggregate or Xi-level current theorem, Q209, Lambda<=0, PF-infinity, RH, or a prize-level result.",
+      "proof_boundary": "RH remains open.",
+      "diagnostics": null
+    }
+  ]
+}

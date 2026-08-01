@@ -1,0 +1,470 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_recurrence_current_gate",
+  "date": "2026-07-31",
+  "status": "exact finite contiguous-tail recurrence and Arb-uniform fixed-M leading current theorem; no growing-tail finite-height estimate, aggregate cross-current bound, Abel gap, contact exclusion, Lambda<=0, or RH",
+  "proof_boundary": "This proves the exact real-trace recurrence collapse, its first two derivatives, and strict clockwise q=1 leading current for every fixed finite contiguous terminal prefix. It proves no estimate uniform when M grows with N, no finite-height grouped tail sign, complete Xi aggregate cross-current estimate, Abel gap, winding cap, contact exclusion, Q209, cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "source_audit": {
+    "source_sha256": {
+      "endpoint_normalization": "07f18c40511e9d9c95f8578e02fc39505ac59480682a50597dd9b79e6618fbf3",
+      "adjacent_recurrence": "3218716daac89ccbcf6ab6af938d4f146c15b561d906927ba21bccf7f04d2ce0",
+      "edge_current": "66a47359d8c9b457bcf98b43686b0bb3d1b51423d0de1f1222d21f5efa8d9e2b",
+      "pair_guard": "23552b5ecfc17097899a59906f64e21af188b1eadd66278c84bf5b5c70ea579a",
+      "cumulative_handoff": "6e4e9b178ddca73e3834b99fa9957b8ee15c8a8f92af4e6b9fbcbc078a0c49e6"
+    },
+    "published_source": {
+      "citation": "D.H.J. Polymath, Effective approximation of heat flow evolution of the Riemann xi function, and a new upper bound for the de Bruijn-Newman constant, arXiv:1904.12438",
+      "location": "equation (53), C_0, and the adjacent endpoint recurrence",
+      "url": "https://arxiv.org/abs/1904.12438"
+    }
+  },
+  "symbolic_certificate": {
+    "endpoint_recurrence": "C_0(p+2)+C_0(p)=R(p)",
+    "iterated_recurrence": "C_0(p)=sum_(m=0)^M(-1)^m R(p-2m-2)+(-1)^(M+1)C_0(p-2M-2)",
+    "phase_match": "Re[Q(p)r(p)^m]=(-1)^m Re[R(p-2m-2)], Q=exp[-pi*i*(p^2/2-p+3/8)], r=-exp(2*pi*i*p)",
+    "grouped_trace": "C_M(p)=Re[C_0(p)-Q*sum_(m=0)^M r^m]=(-1)^(M+1)Re C_0(p-2M-2)",
+    "grouped_jets": "D_M=-C_M'/(4*pi), N_M=C_M''/(16*pi^2)",
+    "grouped_current": "P_M=[C_M*C_M''-(C_M')^2]/(16*pi^2)"
+  },
+  "interval_certificate": {
+    "precision_bits": 192,
+    "domain": "0<=e<=2/5, -1/2<=z<=1/2",
+    "boxes": 1024,
+    "e_boxes": 16,
+    "z_boxes": 64,
+    "normalized_curvature": "q_z^2-q*q_zz",
+    "strict_margin": "q_z^2-q*q_zz>7/5",
+    "minimum_lower": "[1.423743769665932752336601416713784486545133562574235671638083294451386 +/- 2.00e-70]",
+    "minimum_box": "e=[3/8,2/5], z=[-1/2,-31/64]",
+    "sinc_tail": {
+      "argument_bound": "|pi*e*z|<=pi/5<2 and |pi*z*(1+e^2*z/2)|<=13*pi/25<2",
+      "terms": 30,
+      "ratio_bound": "successive absolute tail ratio <1/800",
+      "derivative_tail_bounds": {
+        "0": "512/225129132496117220353306960750130214817575701558816518008901611328125<1e-50",
+        "1": "1024/15008608833074481356887130716675347654505046770587767867260107421875<1e-50",
+        "2": "512/254383200560584429777747978248734706008560114755724879106103515625<1e-50"
+      }
+    },
+    "e_strip_minima": [
+      {
+        "e_interval": [
+          "0",
+          "1/40"
+        ],
+        "minimum_lower": "[2.243133441252490504604338391344989853736 +/- 2.65e-40]"
+      },
+      {
+        "e_interval": [
+          "1/40",
+          "1/20"
+        ],
+        "minimum_lower": "[2.227163499696589637889694774768022268835 +/- 1.90e-40]"
+      },
+      {
+        "e_interval": [
+          "1/20",
+          "3/40"
+        ],
+        "minimum_lower": "[2.206427792831039501977950722997373103710 +/- 3.70e-40]"
+      },
+      {
+        "e_interval": [
+          "3/40",
+          "1/10"
+        ],
+        "minimum_lower": "[2.180839004251209902042653024792825386633 +/- 2.33e-40]"
+      },
+      {
+        "e_interval": [
+          "1/10",
+          "1/8"
+        ],
+        "minimum_lower": "[2.150283416711506744921956237689820183609 +/- 2.69e-40]"
+      },
+      {
+        "e_interval": [
+          "1/8",
+          "3/20"
+        ],
+        "minimum_lower": "[2.114620637441753427626584982052883262094 +/- 3.13e-40]"
+      },
+      {
+        "e_interval": [
+          "3/20",
+          "7/40"
+        ],
+        "minimum_lower": "[2.073682315857137794956877579038566078295 +/- 1.99e-40]"
+      },
+      {
+        "e_interval": [
+          "7/40",
+          "1/5"
+        ],
+        "minimum_lower": "[2.027270706946821424763980411848185033535 +/- 2.14e-40]"
+      },
+      {
+        "e_interval": [
+          "1/5",
+          "9/40"
+        ],
+        "minimum_lower": "[1.975156865599157213860426228836600828828 +/- 2.15e-40]"
+      },
+      {
+        "e_interval": [
+          "9/40",
+          "1/4"
+        ],
+        "minimum_lower": "[1.917078483120519147513335815236291470905 +/- 3.96e-40]"
+      },
+      {
+        "e_interval": [
+          "1/4",
+          "11/40"
+        ],
+        "minimum_lower": "[1.852737438402639434588857280942573904683 +/- 3.53e-41]"
+      },
+      {
+        "e_interval": [
+          "11/40",
+          "3/10"
+        ],
+        "minimum_lower": "[1.781796927609808705482874228266268346401 +/- 2.27e-40]"
+      },
+      {
+        "e_interval": [
+          "3/10",
+          "13/40"
+        ],
+        "minimum_lower": "[1.703878024287268452126965448245173184825 +/- 2.69e-40]"
+      },
+      {
+        "e_interval": [
+          "13/40",
+          "7/20"
+        ],
+        "minimum_lower": "[1.618555792455524152270198047141727802511 +/- 3.87e-40]"
+      },
+      {
+        "e_interval": [
+          "7/20",
+          "3/8"
+        ],
+        "minimum_lower": "[1.525354779438697661372861777365730990436 +/- 2.60e-40]"
+      },
+      {
+        "e_interval": [
+          "3/8",
+          "2/5"
+        ],
+        "minimum_lower": "[1.423743769665932752336601416713784486545 +/- 1.34e-40]"
+      }
+    ]
+  },
+  "exact": {
+    "cofinal_path": "Fix p in [-1,1], theta=(1-p)/2, q=2tL^2=1, a=N+theta, and M>=0; take N->infinity with M fixed.",
+    "tail_definition": "Group the retained endpoint-terminal edge with the contiguous carriers n=N-1,...,N-M.",
+    "real_c0": "f(t)=Re C_0(t)=cos(pi*(t^2/2+3/8))/(2*cos(pi*t)), with analytic continuation at half-integers",
+    "trace_shift": "For K=M+1, C_M(p)=(-1)^K*f(p-2K); since f is even, its curvature is evaluated at t=2K-p>=1.",
+    "curvature": "D(t)=f'(t)^2-f(t)f''(t), P_M(p)=-D(2M+2-p)/(16*pi^2).",
+    "base_cell": "For M=0, t in [1,3], the imported 3072-box edge theorem gives D(t)>3/50.",
+    "away_bound": "For t>=3 and |cos(pi*t)|>6/(5t), direct phase minimization gives 4*cos(pi*t)^4*D >= pi^2*t^2*cos(pi*t)^2-pi^2/2-(pi/2)*sqrt(pi^2+cos(pi*t)^4). Using pi>3, pi<22/7, and t^2*cos(pi*t)^2>36/25 proves D>4/5.",
+    "near_reduction": "Otherwise choose the nearest alpha in Z+1/2, write y=t-alpha, e=1/alpha, z=alpha*y. Then 0<e<=2/5 and |z|<1/2. With q_e(z)=(1+e^2*z/2)*sinc(pi*z*(1+e^2*z/2))/sinc(pi*e*z), f(alpha+y)=+/-q_e(z)/(2e) and D=(q_z^2-q*q_zz)/(4e^4).",
+    "near_domain_bound": "arcsin(x)<=x/sqrt(1-x^2), pi>3, and t>=3 give |z|<=2/sqrt(21)+4/189<1/2.",
+    "theorem": "For every integer M>=0 and every p in [-1,1], D(2M+2-p)>3/50 and the fixed-M contiguous terminal-tail leading symbol satisfies P_M(p)<-3/8000.",
+    "endpoint_diagnostic": "P_M(1)=P_0(1)-M*(M+1)/16.",
+    "pi_provenance": "Every pi is inherited from the completed-zeta/Riemann-Siegel normalization and C_0 recurrence. No circle, polygon, fitted period, or plotted symmetry introduces a new constant.",
+    "surviving_target": "Prove a finite-height estimate uniform for a growing terminal prefix and join it to the nonterminal Abel/cross-current bulk, or prove the endpoint-complete division-free Abel gap directly."
+  },
+  "counts": {
+    "rows": 16,
+    "exact_endpoint_recurrences": 1,
+    "exact_tail_collapses": 1,
+    "grouped_jet_identities": 3,
+    "arb_compact_boxes": 1024,
+    "fixed_finite_tail_current_theorems": 1,
+    "growing_tail_estimates": 0,
+    "complete_aggregate_cross_current_bounds": 0,
+    "abel_gaps": 0,
+    "contact_exclusions": 0
+  },
+  "rows": [
+    {
+      "id": "cttr_01_path",
+      "role": "cofinal path",
+      "readiness": "proved",
+      "claim": "The tail limit stays on the physical q=1 boundary.",
+      "formula": "Fix p in [-1,1], theta=(1-p)/2, q=2tL^2=1, a=N+theta, and M>=0; take N->infinity with M fixed.",
+      "proof_boundary": "M is fixed before N tends to infinity.",
+      "diagnostics": null
+    },
+    {
+      "id": "cttr_02_tail",
+      "role": "canonical grouping",
+      "readiness": "proved",
+      "claim": "The tested block is a contiguous terminal prefix.",
+      "formula": "Group the retained endpoint-terminal edge with the contiguous carriers n=N-1,...,N-M.",
+      "proof_boundary": "Arbitrary sparse carrier subsets are not covered.",
+      "diagnostics": null
+    },
+    {
+      "id": "cttr_03_recurrence",
+      "role": "exact recurrence",
+      "readiness": "proved",
+      "claim": "The C_0 recurrence iterates without absolute values.",
+      "formula": "C_0(p)=sum_(m=0)^M(-1)^m R(p-2m-2)+(-1)^(M+1)C_0(p-2M-2)",
+      "proof_boundary": "This is an algebraic induction in M.",
+      "diagnostics": null
+    },
+    {
+      "id": "cttr_04_phase",
+      "role": "phase matching",
+      "readiness": "proved",
+      "claim": "Every limiting carrier phase matches one shifted recurrence term after real projection.",
+      "formula": "Re[Q(p)r(p)^m]=(-1)^m Re[R(p-2m-2)], Q=exp[-pi*i*(p^2/2-p+3/8)], r=-exp(2*pi*i*p)",
+      "proof_boundary": "The equality is for real traces; the complex terms are conjugate.",
+      "diagnostics": null
+    },
+    {
+      "id": "cttr_05_trace",
+      "role": "tail collapse",
+      "readiness": "proved",
+      "claim": "The complete finite terminal prefix collapses to one shifted C_0 trace.",
+      "formula": "C_M(p)=Re[C_0(p)-Q*sum_(m=0)^M r^m]=(-1)^(M+1)Re C_0(p-2M-2)",
+      "proof_boundary": "No termwise current sign is asserted.",
+      "diagnostics": null
+    },
+    {
+      "id": "cttr_06_jets",
+      "role": "differentiated identity",
+      "readiness": "proved",
+      "claim": "The grouped first and second jets are derivatives of the collapsed trace.",
+      "formula": "D_M=-C_M'/(4*pi), N_M=C_M''/(16*pi^2)",
+      "proof_boundary": "Analytic continuation covers removable half-integers.",
+      "diagnostics": null
+    },
+    {
+      "id": "cttr_07_current",
+      "role": "projective current",
+      "readiness": "proved",
+      "claim": "The grouped current is the negative Laguerre curvature of the real trace.",
+      "formula": "P_M=[C_M*C_M''-(C_M')^2]/(16*pi^2)",
+      "proof_boundary": "The division-free polynomial is primary at trace zeros.",
+      "diagnostics": null
+    },
+    {
+      "id": "cttr_08_base",
+      "role": "base cell",
+      "readiness": "interval proved",
+      "claim": "The existing edge theorem supplies the first shifted cell.",
+      "formula": "For M=0, t in [1,3], the imported 3072-box edge theorem gives D(t)>3/50.",
+      "proof_boundary": "This imports its 192-bit removable-chart certificate.",
+      "diagnostics": null
+    },
+    {
+      "id": "cttr_09_away",
+      "role": "analytic tail",
+      "readiness": "proved",
+      "claim": "Direct phase minimization gives a quantitative margin away from denominator removals.",
+      "formula": "For t>=3 and |cos(pi*t)|>6/(5t), direct phase minimization gives 4*cos(pi*t)^4*D >= pi^2*t^2*cos(pi*t)^2-pi^2/2-(pi/2)*sqrt(pi^2+cos(pi*t)^4). Using pi>3, pi<22/7, and t^2*cos(pi*t)^2>36/25 proves D>4/5.",
+      "proof_boundary": "The bound is division-free and includes trace zeros.",
+      "diagnostics": null
+    },
+    {
+      "id": "cttr_10_near",
+      "role": "compact reduction",
+      "readiness": "proved",
+      "claim": "All remaining half-integer neighborhoods reduce to one compact sinc family.",
+      "formula": "Otherwise choose the nearest alpha in Z+1/2, write y=t-alpha, e=1/alpha, z=alpha*y. Then 0<e<=2/5 and |z|<1/2. With q_e(z)=(1+e^2*z/2)*sinc(pi*z*(1+e^2*z/2))/sinc(pi*e*z), f(alpha+y)=+/-q_e(z)/(2e) and D=(q_z^2-q*q_zz)/(4e^4).",
+      "proof_boundary": "The sign +/- cancels from the quadratic curvature.",
+      "diagnostics": null
+    },
+    {
+      "id": "cttr_11_domain",
+      "role": "domain bound",
+      "readiness": "proved",
+      "claim": "The physical near-pole coordinates lie strictly inside the certified compact box.",
+      "formula": "arcsin(x)<=x/sqrt(1-x^2), pi>3, and t>=3 give |z|<=2/sqrt(21)+4/189<1/2.",
+      "proof_boundary": "The interval proof deliberately certifies a larger closed box.",
+      "diagnostics": null
+    },
+    {
+      "id": "cttr_12_compact",
+      "role": "Arb certificate",
+      "readiness": "interval proved",
+      "claim": "The normalized compact curvature has a strict rational margin.",
+      "formula": "q_z^2-q*q_zz>7/5",
+      "proof_boundary": "The sinc derivative tails are enclosed explicitly.",
+      "diagnostics": {
+        "precision_bits": 192,
+        "domain": "0<=e<=2/5, -1/2<=z<=1/2",
+        "boxes": 1024,
+        "e_boxes": 16,
+        "z_boxes": 64,
+        "normalized_curvature": "q_z^2-q*q_zz",
+        "strict_margin": "q_z^2-q*q_zz>7/5",
+        "minimum_lower": "[1.423743769665932752336601416713784486545133562574235671638083294451386 +/- 2.00e-70]",
+        "minimum_box": "e=[3/8,2/5], z=[-1/2,-31/64]",
+        "sinc_tail": {
+          "argument_bound": "|pi*e*z|<=pi/5<2 and |pi*z*(1+e^2*z/2)|<=13*pi/25<2",
+          "terms": 30,
+          "ratio_bound": "successive absolute tail ratio <1/800",
+          "derivative_tail_bounds": {
+            "0": "512/225129132496117220353306960750130214817575701558816518008901611328125<1e-50",
+            "1": "1024/15008608833074481356887130716675347654505046770587767867260107421875<1e-50",
+            "2": "512/254383200560584429777747978248734706008560114755724879106103515625<1e-50"
+          }
+        },
+        "e_strip_minima": [
+          {
+            "e_interval": [
+              "0",
+              "1/40"
+            ],
+            "minimum_lower": "[2.243133441252490504604338391344989853736 +/- 2.65e-40]"
+          },
+          {
+            "e_interval": [
+              "1/40",
+              "1/20"
+            ],
+            "minimum_lower": "[2.227163499696589637889694774768022268835 +/- 1.90e-40]"
+          },
+          {
+            "e_interval": [
+              "1/20",
+              "3/40"
+            ],
+            "minimum_lower": "[2.206427792831039501977950722997373103710 +/- 3.70e-40]"
+          },
+          {
+            "e_interval": [
+              "3/40",
+              "1/10"
+            ],
+            "minimum_lower": "[2.180839004251209902042653024792825386633 +/- 2.33e-40]"
+          },
+          {
+            "e_interval": [
+              "1/10",
+              "1/8"
+            ],
+            "minimum_lower": "[2.150283416711506744921956237689820183609 +/- 2.69e-40]"
+          },
+          {
+            "e_interval": [
+              "1/8",
+              "3/20"
+            ],
+            "minimum_lower": "[2.114620637441753427626584982052883262094 +/- 3.13e-40]"
+          },
+          {
+            "e_interval": [
+              "3/20",
+              "7/40"
+            ],
+            "minimum_lower": "[2.073682315857137794956877579038566078295 +/- 1.99e-40]"
+          },
+          {
+            "e_interval": [
+              "7/40",
+              "1/5"
+            ],
+            "minimum_lower": "[2.027270706946821424763980411848185033535 +/- 2.14e-40]"
+          },
+          {
+            "e_interval": [
+              "1/5",
+              "9/40"
+            ],
+            "minimum_lower": "[1.975156865599157213860426228836600828828 +/- 2.15e-40]"
+          },
+          {
+            "e_interval": [
+              "9/40",
+              "1/4"
+            ],
+            "minimum_lower": "[1.917078483120519147513335815236291470905 +/- 3.96e-40]"
+          },
+          {
+            "e_interval": [
+              "1/4",
+              "11/40"
+            ],
+            "minimum_lower": "[1.852737438402639434588857280942573904683 +/- 3.53e-41]"
+          },
+          {
+            "e_interval": [
+              "11/40",
+              "3/10"
+            ],
+            "minimum_lower": "[1.781796927609808705482874228266268346401 +/- 2.27e-40]"
+          },
+          {
+            "e_interval": [
+              "3/10",
+              "13/40"
+            ],
+            "minimum_lower": "[1.703878024287268452126965448245173184825 +/- 2.69e-40]"
+          },
+          {
+            "e_interval": [
+              "13/40",
+              "7/20"
+            ],
+            "minimum_lower": "[1.618555792455524152270198047141727802511 +/- 3.87e-40]"
+          },
+          {
+            "e_interval": [
+              "7/20",
+              "3/8"
+            ],
+            "minimum_lower": "[1.525354779438697661372861777365730990436 +/- 2.60e-40]"
+          },
+          {
+            "e_interval": [
+              "3/8",
+              "2/5"
+            ],
+            "minimum_lower": "[1.423743769665932752336601416713784486545 +/- 1.34e-40]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cttr_13_theorem",
+      "role": "asymptotic theorem",
+      "readiness": "proved",
+      "claim": "Every fixed finite contiguous terminal prefix preserves the original strict edge margin.",
+      "formula": "For every integer M>=0 and every p in [-1,1], D(2M+2-p)>3/50 and the fixed-M contiguous terminal-tail leading symbol satisfies P_M(p)<-3/8000.",
+      "proof_boundary": "This does not permit M to grow with N.",
+      "diagnostics": null
+    },
+    {
+      "id": "cttr_14_endpoint",
+      "role": "exact diagnostic",
+      "readiness": "proved",
+      "claim": "The endpoint pattern seen in the scout follows exactly.",
+      "formula": "P_M(1)=P_0(1)-M*(M+1)/16.",
+      "proof_boundary": "This diagnostic is not used as a substitute for the full-cell proof.",
+      "diagnostics": null
+    },
+    {
+      "id": "cttr_15_pi",
+      "role": "constant provenance",
+      "readiness": "proved",
+      "claim": "No unexplained pi is inserted.",
+      "formula": "Every pi is inherited from the completed-zeta/Riemann-Siegel normalization and C_0 recurrence. No circle, polygon, fitted period, or plotted symmetry introduces a new constant.",
+      "proof_boundary": "The normalization is source-derived.",
+      "diagnostics": null
+    },
+    {
+      "id": "cttr_16_handoff",
+      "role": "open handoff",
+      "readiness": "open",
+      "claim": "The result identifies the next aggregate interface rather than closing it.",
+      "formula": "Prove a finite-height estimate uniform for a growing terminal prefix and join it to the nonterminal Abel/cross-current bulk, or prove the endpoint-complete division-free Abel gap directly.",
+      "proof_boundary": "No growing-tail estimate or full Xi cross-current theorem is claimed.",
+      "diagnostics": null
+    }
+  ]
+}

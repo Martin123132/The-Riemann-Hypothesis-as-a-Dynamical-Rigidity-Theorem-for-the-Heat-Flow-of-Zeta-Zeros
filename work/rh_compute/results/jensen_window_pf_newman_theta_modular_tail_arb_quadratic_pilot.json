@@ -1,0 +1,119 @@
+{
+  "date": "2026-07-24",
+  "kind": "jensen_window_pf_newman_theta_modular_tail_arb_quadratic_pilot",
+  "pilot": {
+    "derivative_order": 9,
+    "imaginary_enclosure": "0",
+    "integrand_entire": true,
+    "integration_options": {
+      "deg_limit": 60,
+      "depth_limit": 25,
+      "eval_limit": 50000,
+      "use_heap": true
+    },
+    "n_start": 7,
+    "n_stop": 16,
+    "precision_bits": 96,
+    "quantity": "integral_0^(11/5) exp(u^2/5)*[D^9 sum_(n=7)^16 b_n(u)]^2 du",
+    "real_enclosure": "[1.4163309784009929435546867526867157e-20 +/- 3.65e-30]",
+    "real_lower": "[1.4163309780365239070829395050737364e-20 +/- 2.60e-56]",
+    "real_upper": "[1.4163309787654619800264340002996950e-20 +/- 1.23e-55]",
+    "relative_accuracy_bits": 31,
+    "t_cap_exact": "1/5",
+    "u_interval_exact": [
+      "0",
+      "11/5"
+    ]
+  },
+  "proof_boundary": "This artifact proves the weighted Cauchy-Schwarz reduction and certifies one explicitly stated finite compact integral. It does not cover the infinite arithmetic tail, the outer-u tail, the full derivative matrix, retained first-jet lower separation, Lambda<=0, RH, or a Clay-prize proof.",
+  "rows": [
+    {
+      "claim": "Every nonnegative weighted L1 tail term can be reduced exactly to a weight mass and an analytic quadratic integral.",
+      "diagnostics": null,
+      "formula": "int_I W|f| <= sqrt(int_I W)*sqrt(int_I W*f^2), W>=0",
+      "id": "ntmtaqp_01_weighted_cauchy_schwarz",
+      "proof_boundary": "This is Cauchy-Schwarz applied to sqrt(W) and sqrt(W)|f|; it does not estimate either factor.",
+      "readiness": "proved",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "The positive heat-polynomial weights in E_(N,k) admit the weighted quadratic reduction term by term.",
+      "diagnostics": null,
+      "formula": "W_b(u)=exp(Tu^2)binom(k,b)P_b(T,u)>=0 for u>=0",
+      "id": "ntmtaqp_02_heat_envelope_application",
+      "proof_boundary": "The reduction leaves certified bounds for each weight mass and exact infinite-tail quadratic integral to be supplied.",
+      "readiness": "proved",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "Arb certifies one order-9 finite-tail compact quadratic integral with a narrow positive enclosure.",
+      "diagnostics": {
+        "derivative_order": 9,
+        "imaginary_enclosure": "0",
+        "integrand_entire": true,
+        "integration_options": {
+          "deg_limit": 60,
+          "depth_limit": 25,
+          "eval_limit": 50000,
+          "use_heap": true
+        },
+        "n_start": 7,
+        "n_stop": 16,
+        "precision_bits": 96,
+        "quantity": "integral_0^(11/5) exp(u^2/5)*[D^9 sum_(n=7)^16 b_n(u)]^2 du",
+        "real_enclosure": "[1.4163309784009929435546867526867157e-20 +/- 3.65e-30]",
+        "real_lower": "[1.4163309780365239070829395050737364e-20 +/- 2.60e-56]",
+        "real_upper": "[1.4163309787654619800264340002996950e-20 +/- 1.23e-55]",
+        "relative_accuracy_bits": 31,
+        "t_cap_exact": "1/5",
+        "u_interval_exact": [
+          "0",
+          "11/5"
+        ]
+      },
+      "formula": "integral_0^(11/5) exp(u^2/5)*[D^9 sum_(n=7)^16 b_n(u)]^2 du",
+      "id": "ntmtaqp_03_arb_finite_compact_pilot",
+      "proof_boundary": "The enclosure covers only n=7..16 and u in [0,11/5].",
+      "readiness": "certified_for_stated_finite_integral",
+      "role": "rigorous_numerical_diagnostic"
+    },
+    {
+      "claim": "The pilot is not an enclosure for the exact r_6 tail because n>=17 and u>11/5 are not yet included.",
+      "diagnostics": null,
+      "formula": "r_6=sum_(n=7)^16 b_n + sum_(n>=17)b_n",
+      "id": "ntmtaqp_04_omitted_tail_guard",
+      "proof_boundary": "Both the arithmetic remainder and outer-u integral require independent analytic bounds before any C1 budget is certified.",
+      "readiness": "open",
+      "role": "non_promotion_guard"
+    },
+    {
+      "claim": "Complete the finite (b,k,N,t) quadratic matrix, append analytic n and u tails, and compare the resulting d0,d1 balls with retained J and J' lower balls.",
+      "diagnostics": null,
+      "formula": "certify d_(N,j,m)(T) < retained first-jet separation margin",
+      "id": "ntmtaqp_05_matrix_handoff",
+      "proof_boundary": "No retained lower separation, strict Laguerre conclusion, Lambda<=0, RH, or Clay-prize conclusion follows here.",
+      "readiness": "not_ready_to_apply",
+      "role": "proof_search_target"
+    }
+  ],
+  "source": {
+    "derivative_envelope": "work/rh_compute/results/jensen_window_pf_newman_theta_modular_tail_derivative_envelope_gate.json",
+    "derivative_envelope_rows": 9,
+    "derivative_envelope_sha256": "6de9bd8f410697502409d57cbdb67763f286e3bb1d3a90cb9e7d8886b3b88e1c"
+  },
+  "status": "rigorous_finite_compact_pilot_only",
+  "versions": {
+    "python_flint": "0.8.0",
+    "sympy": "1.14.0"
+  },
+  "weighted_reduction": {
+    "analytic_advantage": "W_b*f^2 is analytic for finite theta sums, avoiding nonanalytic absolute values inside Arb integration.",
+    "application": "W_b=exp(Tu^2)binom(k,b)P_b(T,u), f=r_N^(k-b)",
+    "hypotheses": [
+      "I measurable",
+      "W>=0",
+      "f real on I"
+    ],
+    "inequality": "int_I W|f| <= (int_I W)^(1/2)(int_I W*f^2)^(1/2)"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "builder_sha256": "3a2f45ef98fcbef4172ea2d1beb6991d47bb9b6dc3e32516059f9286babd60a8",
+  "date": "2026-07-25",
+  "exact_summary": {
+    "adaptive_condition_number": "C_m/(2t)",
+    "all_j_xi_theorem": false,
+    "cofinal_step_cost": "K_m*log(1+1/j)->0",
+    "exact_benchmark_reductions": 9,
+    "open_xi_targets": 1,
+    "requires_endpoint_simplicity": false,
+    "row_count": 10
+  },
+  "kind": "jensen_window_pf_newman_multiplicity_compatible_adaptive_jet_benchmark",
+  "next_exact_obligation": "Generalize the phase-cell successor lemma to a continuously time-dependent positive jet scaling, then prove an Xi-specific relative adaptive-jet estimate on descendant cells and a separate arithmetic half-plane or slope-gap theorem on newly entering right strips.",
+  "proof_boundary": "The monomial heat evolution, Hermite rescaling, adaptive jet and heat derivative, finite O(1/t) condition number for each fixed multiplicity, cofinal relative transport, and fixed-x uniform-floor implication are exact. No Xi adaptive relative estimate or entry-strip theorem is proved. This does not prove an all-j successor, Lambda<=0, RH, PF-infinity, or the Clay prize.",
+  "rows": [
+    {
+      "claim": "A positive first-jet floor uniform as t decreases to zero at fixed x persists at t=0 and therefore excludes a multiple endpoint zero.",
+      "formula": "If V(t,x)->V(0,x) and ||V(t,x)||>=b(x)>0 for every 0<t<=t_0, then ||V(0,x)||>=b(x)",
+      "id": "fixed_x_uniform_floor_guard",
+      "kind": "exact_implication"
+    },
+    {
+      "claim": "The backward-heat evolution of an m-fold local zero is a finite polynomial with an exact coefficient formula.",
+      "formula": "P_m(t,y)=exp(-t*D_y^2)y^m=m!*sum_(k=0)^floor(m/2)((-t)^k*y^(m-2k))/(k!*(m-2k)!)",
+      "id": "backward_heat_monomial",
+      "kind": "exact_identity"
+    },
+    {
+      "claim": "The local heat polynomial is exactly a probabilists' Hermite polynomial on the parabolic scale.",
+      "formula": "With s=sqrt(2t), z=y/s, P_m(t,y)=s^m*He_m(z)",
+      "id": "hermite_rescaling",
+      "kind": "exact_identity"
+    },
+    {
+      "claim": "For every t>0 the m-fold endpoint zero splits into m simple real zeros, and P_m and its first derivative have no common zero.",
+      "formula": "zeros(P_m(t,.))=sqrt(2t)*zeros(He_m); He_m'=m*He_(m-1)",
+      "id": "real_simple_splitting",
+      "kind": "exact_lemma"
+    },
+    {
+      "claim": "The time-dependent positive scaling balances both local jet components at the same parabolic order.",
+      "formula": "W_m=(P_m,s*partial_y P_m)=s^m*(He_m(z),m*He_(m-1)(z)); s=sqrt(2t)",
+      "id": "adaptive_first_jet",
+      "kind": "exact_identity"
+    },
+    {
+      "claim": "At fixed y, the adaptive jet derivative has an exact Hermite representation two parabolic orders lower.",
+      "formula": "partial_t W_m=s^(m-2)*(A_m(z),B_m(z)); A_m=-m*(m-1)*He_(m-2); B_m=m*He_(m-1)-m*(m-1)*(m-2)*He_(m-3)",
+      "id": "adaptive_heat_jet",
+      "kind": "exact_identity"
+    },
+    {
+      "claim": "For each fixed multiplicity, the adaptive heat-jet condition number is O(1/t), with a finite explicit one-variable Hermite supremum.",
+      "formula": "C_m=sup_(z in R) sqrt(A_m(z)^2+B_m(z)^2)/sqrt(He_m(z)^2+m^2*He_(m-1)(z)^2)<infinity; ||partial_t W_m||/||W_m||<=C_m/(2t)",
+      "id": "multiplicity_condition_number",
+      "kind": "exact_inequality"
+    },
+    {
+      "claim": "The multiplicity-compatible relative transport cost on one cofinal successor tends to zero and preserves every positive-time jet even if its endpoint clearance vanishes.",
+      "formula": "For K_m=C_m/2 and t_j=1/(5j), ||W_m(t_(j+1),y)||>=(j/(j+1))^K_m*||W_m(t_j,y)||; K_m*log(1+1/j)->0",
+      "id": "cofinal_relative_transport",
+      "kind": "exact_inequality"
+    },
+    {
+      "claim": "For any heat solution H_t=-H_xx, the adaptive jet has an exact transport derivative and is related to the ordinary first jet by an orientation-preserving map.",
+      "formula": "W=(H,sH_x), s=sqrt(2t); partial_t W=(-H_xx,H_x/s-s*H_xxx); diag(1,s) is in GL+(2,R) for t>0",
+      "id": "time_dependent_scaling_transfer",
+      "kind": "exact_identity"
+    },
+    {
+      "claim": "Replace the unnecessarily fixed-x-uniform small-ball shortcut by a two-regime successor theorem: arithmetic entry/cone control for new high-frequency strips and multiplicity-compatible relative transport for their older descendants.",
+      "formula": "entry strip: use a corrected Xi half-plane or slope-gap certificate; descendant collars: prove ||partial_t(H,sH_x)||<=(K/t)||(H,sH_x)|| with s=sqrt(2t), or a rigorously comparable local bound",
+      "id": "xi_domain_split_target",
+      "kind": "open_xi_target",
+      "status": "open and not proved"
+    }
+  ],
+  "source_sha256": {
+    "adiabatic_successor_lemma": "beedc9cf101ab6d1eb9c9778bd05c29b1a4a2895e9eec6425f05fbd45ad0bae6",
+    "crossing_slope_gap_reduction": "4a9975c1808a49d3a4c23288ae396fda52bd1a6ac55c1c4a40e29fb500b710d7",
+    "positive_boundary_attainment_lemma": "09062502a7000af8d232d57f437d11237e5cab376e08f118716862ca7d663f5d",
+    "positive_boundary_delta_localization_gate": "250f89dd215a212a70ffb9f3b1d67efbcfb4f5e799a5d26b62d3a5f3c2c03712",
+    "single_carrier_adiabatic_benchmark": "1818a0ea8364042934f6996454316035f5189ebc5b859a630450848a61b38ddd"
+  },
+  "status": "exact multiplicity-compatible adaptive-jet thought experiment and theorem-domain correction with one open two-regime Xi successor handoff"
+}

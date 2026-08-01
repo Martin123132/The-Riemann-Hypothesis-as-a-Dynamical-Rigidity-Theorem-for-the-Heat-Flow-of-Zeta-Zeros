@@ -1,0 +1,135 @@
+{
+  "date": "2026-07-23",
+  "exact": {
+    "backward_failure": "For -1/(3*beta)<lambda<0 every Delta_s(lambda)<0 and the quadratic zeros are nonreal; generic backward Stieltjes-cone invariance is false",
+    "generating_pde": "For A(t)=sum_(n>=0)a_n*t^n=R(-t): partial_lambda A=-4*t*A_tt+(8*t*A-6)*A_t+4*A^2",
+    "log_derivative_pde": "For R=partial_z log(F): partial_lambda R=4*z*R_zz+8*z*R*R_z+6*R_z+4*R^2",
+    "moment_ode": "For R(z)=sum_(n>=0)(-1)^n*a_n*z^n: a_n'= -2*(n+1)*(2*n+3)*a_(n+1)+4*(n+1)*sum_(k=0)^n a_k*a_(n-k)",
+    "open_handoff": "A backward argument from a de Bruijn real-zero time must use Xi/Phi-specific all-order rigidity or a uniform no-escape theorem, not generic invariance of the Stieltjes moment cone",
+    "quadratic_discriminant": "Disc_z=32*lambda*beta^3*(1+3*lambda*beta)",
+    "quadratic_heat": "exp(lambda*L)(1+beta*z)^2=beta^2*z^2+(2*beta+12*lambda*beta^2)*z+1+4*lambda*beta+12*lambda^2*beta^2",
+    "quadratic_shifted_minor": "Delta_s(lambda)=32*lambda*beta^(2*s+5)*(1+3*lambda*beta)/(1+4*lambda*beta+12*lambda^2*beta^2)^(s+3)",
+    "radial_heat": "partial_lambda F_lambda=(4*z*partial_z^2+2*partial_z)F_lambda",
+    "rank_one_boundary": "At H(z)=(1+beta*z)^m, a_n=m*beta^(n+1) and every shifted 2x2 Stieltjes minor Delta_s=a_s*a_(s+2)-a_(s+1)^2 vanishes",
+    "rank_one_orientation": "At that boundary, partial_lambda Delta_s=8*m^2*(m-1)*beta^(2*s+5)"
+  },
+  "kind": "jensen_window_pf_edrei_heat_flow_boundary_gate",
+  "proof_boundary": "This artifact proves the radial log-derivative and Edrei-moment heat hierarchies and gives an exact LP+ polynomial countermodel to generic backward Stieltjes-cone invariance. It does not prove an Xi/Phi-specific invariant, all-order Stieltjes positivity at lambda zero, PF-infinity, Jensen hyperbolicity for zeta, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The squared-variable Phi transform obeys the radial heat equation.",
+      "formula": "partial_lambda F_lambda=(4*z*partial_z^2+2*partial_z)F_lambda",
+      "id": "ehfb_01_radial_heat_operator",
+      "proof_boundary": "This is an evolution identity, not a zero-location statement.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Its logarithmic derivative obeys a closed radial Burgers equation.",
+      "formula": "For R=partial_z log(F): partial_lambda R=4*z*R_zz+8*z*R*R_z+6*R_z+4*R^2",
+      "id": "ehfb_02_log_derivative_pde",
+      "proof_boundary": "The nonlinear PDE does not preserve the desired cone backward by itself.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Coefficient extraction gives a closed hierarchy for the exact Edrei moments a_n=p_(n+1).",
+      "formula": "For R(z)=sum_(n>=0)(-1)^n*a_n*z^n: a_n'= -2*(n+1)*(2*n+3)*a_(n+1)+4*(n+1)*sum_(k=0)^n a_k*a_(n-k)",
+      "id": "ehfb_03_edrei_moment_ode",
+      "proof_boundary": "All shifts are coupled through a_(n+1) and the convolution term.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The ordinary moment generating series obeys an equivalent nonlinear PDE.",
+      "formula": "For A(t)=sum_(n>=0)a_n*t^n=R(-t): partial_lambda A=-4*t*A_tt+(8*t*A-6)*A_t+4*A^2",
+      "id": "ehfb_04_stieltjes_generating_pde",
+      "proof_boundary": "Formal equivalence only; it does not provide a positive representing measure.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "A repeated type-I factor is a rank-one Stieltjes boundary point at every shift.",
+      "formula": "At H(z)=(1+beta*z)^m, a_n=m*beta^(n+1) and every shifted 2x2 Stieltjes minor Delta_s=a_s*a_(s+2)-a_(s+1)^2 vanishes",
+      "id": "ehfb_05_rank_one_boundary",
+      "proof_boundary": "The multiplicity m is an integer for an entire LP+ factor.",
+      "readiness": "available_exact",
+      "role": "exact_boundary_model"
+    },
+    {
+      "claim": "Every shifted 2x2 Stieltjes wall points strictly into the cone under forward heat when m>=2.",
+      "formula": "At that boundary, partial_lambda Delta_s=8*m^2*(m-1)*beta^(2*s+5)",
+      "id": "ehfb_06_rank_one_orientation",
+      "proof_boundary": "The same sign means immediate exit under backward heat.",
+      "readiness": "available_exact",
+      "role": "exact_boundary_orientation"
+    },
+    {
+      "claim": "The radial heat orbit of a double negative zero is an explicit quadratic.",
+      "formula": "exp(lambda*L)(1+beta*z)^2=beta^2*z^2+(2*beta+12*lambda*beta^2)*z+1+4*lambda*beta+12*lambda^2*beta^2",
+      "id": "ehfb_07_double_zero_heat_polynomial",
+      "proof_boundary": "A finite LP+ model, not the Xi function.",
+      "readiness": "guard_validated",
+      "role": "exact_countermodel"
+    },
+    {
+      "claim": "The quadratic discriminant changes sign exactly at the repeated-zero boundary.",
+      "formula": "Disc_z=32*lambda*beta^3*(1+3*lambda*beta)",
+      "id": "ehfb_08_double_zero_discriminant",
+      "proof_boundary": "Shows the local Newman-type collision mechanism exactly.",
+      "readiness": "guard_validated",
+      "role": "exact_countermodel"
+    },
+    {
+      "claim": "Every shifted 2x2 Edrei/Stieltjes minor has the same crossing sign.",
+      "formula": "Delta_s(lambda)=32*lambda*beta^(2*s+5)*(1+3*lambda*beta)/(1+4*lambda*beta+12*lambda^2*beta^2)^(s+3)",
+      "id": "ehfb_09_all_shift_minor_crossing",
+      "proof_boundary": "Rejects rescue by moving to a different finite shift.",
+      "readiness": "guard_validated",
+      "role": "exact_countermodel"
+    },
+    {
+      "claim": "The Stieltjes moment cone is not generically invariant under backward radial heat.",
+      "formula": "For -1/(3*beta)<lambda<0 every Delta_s(lambda)<0 and the quadratic zeros are nonreal; generic backward Stieltjes-cone invariance is false",
+      "id": "ehfb_10_backward_invariance_guard",
+      "proof_boundary": "Does not exclude a stronger Xi/Phi-specific invariant.",
+      "readiness": "rejected_by_countermodel",
+      "role": "rejected_shortcut"
+    },
+    {
+      "claim": "The surviving dynamical route needs a uniform Xi/Phi rigidity mechanism preventing an all-order boundary escape.",
+      "formula": "A backward argument from a de Bruijn real-zero time must use Xi/Phi-specific all-order rigidity or a uniform no-escape theorem, not generic invariance of the Stieltjes moment cone",
+      "id": "ehfb_11_xi_specific_handoff",
+      "proof_boundary": "No such all-order Xi/Phi theorem is proved here.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    }
+  ],
+  "sources": [
+    "outputs/formal_core.md",
+    "outputs/jensen_window_pf_edrei_stieltjes_equivalence_gate.md",
+    "outputs/jensen_window_pf_heat_flow_jensen_hierarchy_lemma.md"
+  ],
+  "status": "exact heat-flow lemma, exact backward-invariance countermodel, and open Xi/Phi handoff",
+  "symbolic_audit": {
+    "exact_shifted_minor": "32*beta**(2*s + 5)*lambda*(3*beta*lambda + 1)*(12*beta**2*lambda**2 + 4*beta*lambda + 1)**(-s - 3)",
+    "quadratic_discriminant": "32*beta**3*lambda*(3*beta*lambda + 1)",
+    "quadratic_heat_polynomial": "12*beta**2*lambda**2 + 12*beta**2*lambda*z + beta**2*z**2 + 4*beta*lambda + 2*beta*z + 1",
+    "radial_heat_operator": "L=4*z*partial_z^2+2*partial_z",
+    "rank_one_minor_derivative": "8*beta**5*beta**(2*s)*m**2*(m - 1)",
+    "sample_witnesses": {
+      "backward_lambda_minus_1_over_10": {
+        "constant": "18/25",
+        "discriminant": "-56/25",
+        "lambda": "-1/10",
+        "shift0_minor": "-4375/729"
+      },
+      "forward_lambda_1_over_10": {
+        "constant": "38/25",
+        "discriminant": "104/25",
+        "lambda": "1/10",
+        "shift0_minor": "8125/6859"
+      }
+    }
+  }
+}

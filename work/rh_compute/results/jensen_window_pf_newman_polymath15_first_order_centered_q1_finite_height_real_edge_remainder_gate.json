@@ -1,0 +1,580 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_q1_finite_height_real_edge_remainder_gate",
+  "date": "2026-07-31",
+  "status": "effective finite-height negative q=1 real-edge current for the retained first-order model",
+  "source_audit": {
+    "source_sha256": {
+      "cofinal_real_edge": "66a47359d8c9b457bcf98b43686b0bb3d1b51423d0de1f1222d21f5efa8d9e2b",
+      "complex_endpoint_source": "07f18c40511e9d9c95f8578e02fc39505ac59480682a50597dd9b79e6618fbf3",
+      "critical_c1_source": "8913ef1c451e71b2df0c3fa6201dae0c8515399a3668ba35c8f255dfc36d9097",
+      "first_dirichlet_correction": "0d5038807a75ed4040aaa27baf25477987d45bd3d0fb61422117ed6c68b9a78b",
+      "adjacent_chart_stability": "dcee581f283d63141e29d1085ee463c2eabc714a6e6760b15f12262474f83a83"
+    },
+    "published_source": {
+      "citation": "D.H.J. Polymath, Effective approximation of heat flow evolution of the Riemann xi function, and a new upper bound for the de Bruijn-Newman constant, arXiv:1904.12438",
+      "location": "equation (53), C_0, first correction, and Proposition 6.2",
+      "url": "https://arxiv.org/abs/1904.12438"
+    }
+  },
+  "exact": {
+    "domain": {
+      "physical_family": "q=2tL^2=1, L>=50, theta=(1-p)/2 in [0,1], a=N+theta, h=1/a, T_0=2pi/h^2",
+      "saddle": "a^2=exp(L)+t/16, x=4pi*exp(L), rho=t*h^2/16, r=1-rho, y=1/x=h^2/(4pi*r)",
+      "effective_smallness": "t<=1/5000 and h<exp(-25)<1/72000000000"
+    },
+    "endpoint": {
+      "source": "F=C_0(p), C_1=F'''/(12pi^2), H=F+h*C_1",
+      "coordinate_jets": "p_x=-h/(4pi), h_x=-h^3/(8pi), p_xx=h^3/(32pi^2), h_xx=3h^5/(64pi^2)",
+      "H_jets": "H_x=p_x(F'+hC_1')+h_xC_1; H_xx=p_xx(F'+hC_1')+p_x^2(F''+hC_1'')+2p_xh_xC_1'+h_xxC_1"
+    },
+    "terminal": {
+      "source": "Z=z_N/S_a=(-1)^N M_t(s)exp[t log(N)^2/4-s_*log(N)](1+d)/(beta*T_0), S_a=kappa*T_0",
+      "alpha": "alpha=1/(2s)+1/(s-1)+Log(s/(2pi))/2, s_*=(s+t alpha/2), s_*'=-i/2-it alpha'/4, s_*''=-t alpha''/8",
+      "correction": "w=alpha-log(N), d=1/(6s)+alpha'[t/4+t^2w^2/8], d_x=(-i/2)[-1/(6s^2)+alpha''(t/4+t^2w^2/8)+(t^2/4)w(alpha')^2]",
+      "phase": "Q=exp[-pi*i*(p^2/2-p+3/8)], Z=-Q*exp(W), Q_x/Q=-i*h*theta/2"
+    },
+    "stable_log": {
+      "coordinates": "ell=log(1-h*theta), chi=alpha-log(a), chi_R=log(r)/2+log(1+y^2)/4-y^2/(1+y^2), chi_I=-pi/4+atan(y)/2+3y/(1+y^2), w=chi-ell",
+      "real_part": "Re W=-ell/2+(7/4)log(r)+(7/8)log(1+y^2)+atan(y)/(4y)-1/4+t*pi^2/64+(t/4)Re(w^2)+log|1+d|",
+      "imaginary_part": "Im W=T_0[ell+h*theta+h^2theta^2/2]-(pi*t/8)ell+(T_0/2)[r*(-log r)-rho]-log(1+y^2)/(8y)-atan(y)/4+(t/4)Im(w^2)+arg(1+d)",
+      "removable_rewrites": "T_0[ell+z+z^2/2]=-2pi*h*theta^3*sum_(m>=0)z^m/(m+3); (T_0/2)[r(-log r)-rho]=-pi*t^2*h^2*sum_(m>=0)rho^m/[(m+1)(m+2)]/256; pi^2/16+Re(w^2)=u_R^2+(pi/2)eta-eta^2",
+      "x_derivative": "W_x=eta/2-3/(4T_0)+i[ell+h*theta-chi_R]/2-i(t/4)alpha'w+d_x/(1+d), eta=atan(y)/2+3y/(1+y^2)",
+      "branch": "W is the continuous logarithm with W->0 as h->0; |d|<h^2/10 keeps 1+d in the principal near-one disk"
+    },
+    "endpoint_rate": {
+      "mu": "mu=K_rate+i*chi/2+i(t/4)alpha'chi, K_rate=-pi/8+1/(4T_0)+1/[2(T_0+i)]",
+      "mu_x": "mu_x=K_rate_x+i*chi_x/2+i(t/4)(alpha'_xchi+alpha'chi_x), K_rate_x=-1/(8T_0^2)-1/[4(T_0+i)^2], chi_x=-i alpha'/2-h^2/(8pi), alpha'_x=-i alpha''/2",
+      "endpoint_jet": "J=H_x+mu*H, J_x=H_xx+mu_xH+muH_x"
+    },
+    "normalized_edge": {
+      "definitions": "tau=1+i/T_0, u=log(a/N)=-ell, c=Re(tau H+Z), c_x=Re(tau_xH+tauH_x+Z_x), gbar=tauJ+s_*'uZ, d_edge=Re(gbar)-alpha_c c, alpha_c=Re(s_*')u",
+      "second_jet": "gbar_x=tau_xJ+tauJ_x+s_*''uZ+s_*'u_xZ+s_*'uZ_x; d_(edge,x)=Re(gbar_x)-alpha_(c,x)c-alpha_c c_x",
+      "current": "a^2 J_edge/S_a^2=h^-2[c*d_(edge,x)-d_edge*c_x]",
+      "leading_jets": "A=Re(F-Q), B=Re[-F'/(4pi)+i theta Q/2], M=Re[F''/(16pi^2)+Q{i/(16pi)+theta^2/4}]"
+    }
+  },
+  "derivative_certificate": {
+    "precision_bits": 192,
+    "direct_boxes": 4096,
+    "direct_regions": [
+      {
+        "interval": "[-1,-5/8]",
+        "boxes": 1024,
+        "maximum_derivative_upper_balls": [
+          "0.5002038874663412570953369140625000000000000000000000000000000000000000",
+          "0.6926544280722737312316894531250000000000000000000000000000000000000000",
+          "1.582116125151515007019042968750000000000000000000000000000000000000000",
+          "6.970899701118469238281250000000000000000000000000000000000000000000000",
+          "180.8105199337005615234375000000000000000000000000000000000000000000000",
+          "7393.586341857910156250000000000000000000000000000000000000000000000000"
+        ]
+      },
+      {
+        "interval": "[-3/8,3/8]",
+        "boxes": 2048,
+        "maximum_derivative_upper_balls": [
+          "0.3354119686409831047058105468750000000000000000000000000000000000000000",
+          "0.1844522759784013032913208007812500000000000000000000000000000000000000",
+          "0.6656702361069619655609130859375000000000000000000000000000000000000000",
+          "4.796135485172271728515625000000000000000000000000000000000000000000000",
+          "132.7393741607666015625000000000000000000000000000000000000000000000000",
+          "5434.301971435546875000000000000000000000000000000000000000000000000000"
+        ]
+      },
+      {
+        "interval": "[5/8,1]",
+        "boxes": 1024,
+        "maximum_derivative_upper_balls": [
+          "0.5002038874663412570953369140625000000000000000000000000000000000000000",
+          "0.6926544280722737312316894531250000000000000000000000000000000000000000",
+          "1.582116125151515007019042968750000000000000000000000000000000000000000",
+          "6.970899701118469238281250000000000000000000000000000000000000000000000",
+          "180.8105199337005615234375000000000000000000000000000000000000000000000",
+          "7393.586341857910156250000000000000000000000000000000000000000000000000"
+        ]
+      }
+    ],
+    "removable_centers": [
+      "-1/2",
+      "1/2"
+    ],
+    "local_disk_radius": "1/4",
+    "inner_cauchy_radius": "1/8",
+    "sinc_deviation_ball": "[0.106026219527102915512265224158690824848144944505944617724 +/- 8.82e-58]",
+    "sinc_deviation_lt": "1/5",
+    "factored_denominator_lower_ball": "[2.80850146123554803733759003745758816030427224523737071223 +/- 5.81e-57]",
+    "factored_numerator_upper_ball": "[5.99092299336329903583048563347753963707184844136065978161 +/- 6.46e-57]",
+    "C0_disk_upper_ball": "[1.06656932105132389235282563401131576761036690288863598515 +/- 6.23e-57]",
+    "C0_disk_upper_lt": "3",
+    "global_C0_derivative_bounds": [
+      3,
+      24,
+      384,
+      9216,
+      294912,
+      11796480
+    ],
+    "direct_maximum_upper_balls": [
+      "0.5002038874663412570953369140625000000000000000000000000000000000000000",
+      "0.6926544280722737312316894531250000000000000000000000000000000000000000",
+      "1.582116125151515007019042968750000000000000000000000000000000000000000",
+      "6.970899701118469238281250000000000000000000000000000000000000000000000",
+      "180.8105199337005615234375000000000000000000000000000000000000000000000",
+      "7393.586341857910156250000000000000000000000000000000000000000000000000"
+    ],
+    "direct_maximum_locations": [
+      "-1..-8189/8192",
+      "-1..-8189/8192",
+      "-1..-8189/8192",
+      "-5123/8192..-5/8",
+      "-5123/8192..-5/8",
+      "-5123/8192..-5/8"
+    ],
+    "C1_derivative_bounds": [
+      86,
+      2731,
+      109227
+    ],
+    "pi_square_lower": "pi^2>9"
+  },
+  "majorant_certificate": {
+    "precision_bits": 192,
+    "L_min": 50,
+    "t_max": "1/5000",
+    "exp_minus_25_ball": "[1.388794386496402059466176374608685691039976038020505558355e-11 +/- 6.31e-69]",
+    "h_upper": "1/72000000000",
+    "normalized_majorant_chain": {
+      "u_over_h": {
+        "upper": "72000000000/71999999999",
+        "cap": "2/1"
+      },
+      "u_minus_h_theta_over_h2": {
+        "upper": "36000000000/71999999999",
+        "cap": "1/1"
+      },
+      "log_r_over_h2": {
+        "upper": "5184000000000000000000/414719999999999999999999999",
+        "cap": "1/40000"
+      },
+      "y_over_h2": {
+        "upper": "34560000000000000000000000/414719999999999999999999999",
+        "cap": "1/6"
+      },
+      "eta_over_h2": {
+        "upper": "120960000000000000000000000/414719999999999999999999999",
+        "cap": "1/1"
+      },
+      "chi_R_over_h2": {
+        "upper": "1074954240000000000287999997408000000000000000000/171992678399999999999999999170560000000000000000000001",
+        "cap": "1/1"
+      },
+      "chi_absolute": {
+        "upper": "3095868211200000000000174171202560000000000000999580009/3095868211199999999999999985070080000000000000000000018",
+        "cap": "3/1"
+      },
+      "w_absolute": {
+        "upper": "222902511206400000000012540326584145813867520071969760647000420009/222902511203304131788799998925045760014929920000000001295999999982",
+        "cap": "3/1"
+      },
+      "alpha_prime_over_h2": {
+        "upper": "85996339200000000000001612592640000000000000000000000/171992678399999999999999999170560000000000000000000001",
+        "cap": "3/1"
+      },
+      "alpha_second_over_h4": {
+        "upper": "990677827584000000000191100587212800000000000000000000000000000000000000000000/71328803586047999999999999484021964800000000000000001244159999999999999999999999",
+        "cap": "1/1"
+      },
+      "correction_block": {
+        "upper": "10009/200000000",
+        "cap": "1/10000"
+      },
+      "d_over_h2": {
+        "upper": "4781878086795264000000000069182198668800000000000000/171992678399999999999999999170560000000000000000000001",
+        "cap": "1/10"
+      },
+      "d_x_over_h4": {
+        "upper": "68486042965090752685670401657023666167595663360000034623142095200256000000000000000000000000000000000000/29581481423205826559999999714684785655808000000000001031956070399999999999999998341120000000000000000000001",
+        "cap": "1/100"
+      },
+      "Re_W_over_h": {
+        "upper": "1780322353474926787934108248820745022237054818491915712573488191150601049064891145948535433899668215642500698489478219271893496259893901024126057407793262021419128591651644080287468300000/3560644706897640297518351323650076222722267365610857490029360826945697447886903476282028145702290720182530895308427637393988566426091709997752808594290274997645218219971413805006198515243",
+        "cap": "2/1"
+      },
+      "Im_W_over_h": {
+        "upper": "106003745955940732036745086115938759087281616982735098012174757725408245939340734142831248080985618982390298765847803400011482304733831688827396200000/39748423601143360627808117924659894007549190307588311262279175554216188380568066796374134373699777881651599314584093725075230720043235634167399505081",
+        "cap": "4/1"
+      },
+      "W_over_h": {
+        "upper": "11276087034278153091665812181377557518164186924054025378139280740261123186772402983961537535552479315654099209844058743722372916574938309169861289714709001142753930719135559946769656900000/3560644706897640297518351323650076222722267365610857490029360826945697447886903476282028145702290720182530895308427637393988566426091709997752808594290274997645218219971413805006198515243",
+        "cap": "6/1"
+      },
+      "W_x_over_h2": {
+        "upper": "133136633903425207980285081339637815789336817586192368467762728342360136182938280326080666538111466198356764365832200164973/255583999492948563707613927600976683496687896720315934366290071151454151560484453341904006272473538559884704975553601319784",
+        "cap": "2/1"
+      },
+      "mu_over_h2": {
+        "upper": "372758298624000000000001152621820800000000000000000001/1375941427199999999999999993364480000000000000000000008",
+        "cap": "1/1"
+      },
+      "mu_x_over_h4": {
+        "upper": "26582269451632806503802569128185375505019182252035063708177808403673907217828315126462050467840000000000002396128895999999999999999999/1177731069679864357532467185800888916861203251200000068475651442606079999999999834887028736000000000000000199065599999999999999999999904",
+        "cap": "1/1"
+      },
+      "s1_defect_over_h2": {
+        "upper": "4299816960000000000000080629632000000000000000000/171992678399999999999999999170560000000000000000000001",
+        "cap": "1/6000"
+      },
+      "real_s1_over_h2": {
+        "upper": "10368000000000000000000/414719999999999999999999999",
+        "cap": "1/20000"
+      },
+      "s2_over_h4": {
+        "upper": "24766945689600000000004777514680320000000000000000000000000000000000000000/71328803586047999999999999484021964800000000000000001244159999999999999999999999",
+        "cap": "1/40000"
+      },
+      "H_x_defect_over_h2": {
+        "upper": "196632000000043/864000000000",
+        "cap": "232/1"
+      },
+      "H_xx_defect_over_h3": {
+        "upper": "377529984000196632000000043/497664000000000000000000",
+        "cap": "800/1"
+      },
+      "J_defect_over_h2": {
+        "upper": "236/1",
+        "cap": "237/1"
+      },
+      "J_x_defect_over_h3": {
+        "upper": "14454000000001/18000000000",
+        "cap": "810/1"
+      },
+      "c_defect_over_h": {
+        "upper": "10584000000001/108000000000",
+        "cap": "100/1"
+      },
+      "c_x_defect_over_h2": {
+        "upper": "22581504000000648000000001/93312000000000000000000",
+        "cap": "250/1"
+      },
+      "d_edge_defect_over_h2": {
+        "upper": "104976000000003007/432000000000000",
+        "cap": "250/1"
+      },
+      "d_edge_x_defect_over_h3": {
+        "upper": "253730880000002883273000002521/311040000000000000000000000",
+        "cap": "900/1"
+      }
+    },
+    "source_block_majorants": {
+      "saddle": {
+        "u": "|u|<2h",
+        "u_minus_h_theta": "|u-h*theta|<h^2",
+        "rho": "rho<h^2/80000",
+        "log_r": "|log r|<h^2/40000",
+        "y": "0<=y<h^2/6",
+        "eta": "0<=eta<h^2",
+        "chi_R": "|chi_R|<h^2",
+        "chi": "|chi|<3",
+        "w": "|w|<3"
+      },
+      "alpha_and_correction": {
+        "alpha_prime": "|alpha'|<3h^2",
+        "alpha_second": "|alpha''|<h^4",
+        "d": "|d|<h^2/10",
+        "d_x": "|d_x|<h^4/100"
+      },
+      "stable_terminal": {
+        "W": "|W|<6h",
+        "W_x": "|W_x|<2h^2",
+        "exp_W": "|exp(W)|<2",
+        "exp_W_minus_one": "|exp(W)-1|<12h",
+        "terminal_value": "|Z+Q|<12h",
+        "terminal_first_jet": "|Z_x-i*h*theta*Q/2|<10h^2"
+      },
+      "endpoint_rate": {
+        "mu": "|mu|<h^2",
+        "mu_x": "|mu_x|<h^4",
+        "s_star_prime": "|s_*'+i/2|<h^2/6000",
+        "real_s_star_prime": "|Re(s_*')|<h^2/20000",
+        "s_star_second": "|s_*''|<h^4/40000"
+      }
+    },
+    "endpoint_majorants": {
+      "C0": [
+        3,
+        24,
+        384,
+        9216,
+        294912,
+        11796480
+      ],
+      "C1": [
+        86,
+        2731,
+        109227
+      ],
+      "H_minus_F": "|H-F|<86h",
+      "H_x_defect": "|H_x+hF'/(4pi)|<232h^2",
+      "H_xx_defect": "|H_xx-h^2F''/(16pi^2)|<800h^3",
+      "H": "|H|<4",
+      "H_x": "|H_x|<3h",
+      "H_xx": "|H_xx|<4h^2",
+      "J_defect": "|J+hF'/(4pi)|<236h^2",
+      "J_x_defect": "|J_x-h^2F''/(16pi^2)|<810h^3"
+    },
+    "leading_jet_bounds": {
+      "|A|": 4,
+      "|B|": 3,
+      "|M|": 3
+    },
+    "edge_jet_defects": {
+      "value": {
+        "formula": "c=A+h*e_0",
+        "bound": "|e_0|<100",
+        "constant": 100
+      },
+      "centered_slope": {
+        "formula": "d_edge=h*B+h^2*e_1",
+        "bound": "|e_1|<250",
+        "constant": 250
+      },
+      "radial_subtracted_value_jet": {
+        "formula": "c_x=h*B+h^2*e_2",
+        "bound": "|e_2|<250",
+        "constant": 250
+      },
+      "centered_second_jet": {
+        "formula": "d_(edge,x)=h^2*M+h^3*e_3",
+        "bound": "|e_3|<900",
+        "constant": 900
+      }
+    },
+    "perturbation_identity": "h^-2(c*d_x-d*c_x)-(A*M-B^2)=h[e_0M+A e_3-B(e_1+e_2)]+h^2[e_0e_3-e_1e_2]",
+    "linear_error_constant": 5400,
+    "quadratic_error_constant": 152500,
+    "combined_error_constant_lt": 5500,
+    "uniform_remainder": "|a^2 J_edge/S_a^2-K_edge(p)|<5500h<1/10000000",
+    "cofinal_symbol_margin": "K_edge(p)<-3/8000",
+    "finite_height_margin": "a^2 J_edge/S_a^2<-3749/10000000<0"
+  },
+  "rows": [
+    {
+      "id": "q1fher_01_domain",
+      "role": "effective_domain",
+      "readiness": "ready_to_apply",
+      "claim": "The physical q=1 saddle gives explicit small parameters at L>=50.",
+      "formula": "q=2tL^2=1, L>=50, theta=(1-p)/2 in [0,1], a=N+theta, h=1/a, T_0=2pi/h^2; t<=1/5000 and h<exp(-25)<1/72000000000",
+      "proof_boundary": "Only the retained first-order q=1 model is considered.",
+      "diagnostics": null
+    },
+    {
+      "id": "q1fher_02_endpoint_source",
+      "role": "exact_source_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The endpoint and both coordinate derivatives retain the complete C_1 correction.",
+      "formula": "F=C_0(p), C_1=F'''/(12pi^2), H=F+h*C_1; H_x=p_x(F'+hC_1')+h_xC_1; H_xx=p_xx(F'+hC_1')+p_x^2(F''+hC_1'')+2p_xh_xC_1'+h_xxC_1",
+      "proof_boundary": "No higher published endpoint correction is included.",
+      "diagnostics": null
+    },
+    {
+      "id": "q1fher_03_terminal_source",
+      "role": "exact_source_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The physical terminal carrier retains its first correction and derivative.",
+      "formula": "Z=z_N/S_a=(-1)^N M_t(s)exp[t log(N)^2/4-s_*log(N)](1+d)/(beta*T_0), S_a=kappa*T_0; w=alpha-log(N), d=1/(6s)+alpha'[t/4+t^2w^2/8], d_x=(-i/2)[-1/(6s^2)+alpha''(t/4+t^2w^2/8)+(t^2/4)w(alpha')^2]",
+      "proof_boundary": "The fixed-N derivative is taken before any asymptotic limit.",
+      "diagnostics": null
+    },
+    {
+      "id": "q1fher_04_stable_log",
+      "role": "exact_desingularization",
+      "readiness": "ready_to_apply",
+      "claim": "A continuous near-one logarithm removes every catastrophic terminal cancellation.",
+      "formula": "Re W=-ell/2+(7/4)log(r)+(7/8)log(1+y^2)+atan(y)/(4y)-1/4+t*pi^2/64+(t/4)Re(w^2)+log|1+d|; Im W=T_0[ell+h*theta+h^2theta^2/2]-(pi*t/8)ell+(T_0/2)[r*(-log r)-rho]-log(1+y^2)/(8y)-atan(y)/4+(t/4)Im(w^2)+arg(1+d)",
+      "proof_boundary": "W is the continuous logarithm with W->0 as h->0; |d|<h^2/10 keeps 1+d in the principal near-one disk",
+      "diagnostics": null
+    },
+    {
+      "id": "q1fher_05_removable_rewrites",
+      "role": "exact_desingularization",
+      "readiness": "ready_to_apply",
+      "claim": "The h=0 and y=0 quotients are replaced by convergent series before bounding.",
+      "formula": "T_0[ell+z+z^2/2]=-2pi*h*theta^3*sum_(m>=0)z^m/(m+3); (T_0/2)[r(-log r)-rho]=-pi*t^2*h^2*sum_(m>=0)rho^m/[(m+1)(m+2)]/256; pi^2/16+Re(w^2)=u_R^2+(pi/2)eta-eta^2",
+      "proof_boundary": "No interval division by h or y is used.",
+      "diagnostics": null
+    },
+    {
+      "id": "q1fher_06_terminal_bounds",
+      "role": "analytic_majorant",
+      "readiness": "certified",
+      "claim": "The terminal value and first jet have uniform one-order defects.",
+      "formula": "|W|<6h, |W_x|<2h^2, |Z+Q|<12h, |Z_x-i h theta Q/2|<10h^2",
+      "proof_boundary": "Uniform on the enlarged box 0<t<=1/5000, 0<h<1/72000000000, 0<=theta<=1.",
+      "diagnostics": {
+        "W": "|W|<6h",
+        "W_x": "|W_x|<2h^2",
+        "exp_W": "|exp(W)|<2",
+        "exp_W_minus_one": "|exp(W)-1|<12h",
+        "terminal_value": "|Z+Q|<12h",
+        "terminal_first_jet": "|Z_x-i*h*theta*Q/2|<10h^2"
+      }
+    },
+    {
+      "id": "q1fher_07_mu_bounds",
+      "role": "analytic_majorant",
+      "readiness": "certified",
+      "claim": "The endpoint frame rate and its derivative preserve two powers of h.",
+      "formula": "|mu|<h^2 and |mu_x|<h^4",
+      "proof_boundary": "The -pi/8 and +pi/8 terms are cancelled algebraically before taking absolute values.",
+      "diagnostics": {
+        "mu": "|mu|<h^2",
+        "mu_x": "|mu_x|<h^4",
+        "s_star_prime": "|s_*'+i/2|<h^2/6000",
+        "real_s_star_prime": "|Re(s_*')|<h^2/20000",
+        "s_star_second": "|s_*''|<h^4/40000"
+      }
+    },
+    {
+      "id": "q1fher_08_c0_cauchy",
+      "role": "analytic_desingularization",
+      "readiness": "certified",
+      "claim": "Two factored disks give Cauchy bounds through the fifth C_0 derivative.",
+      "formula": "|C_0^(k)|<3*k!*8^k for 0<=k<=5 near p=+-1/2",
+      "proof_boundary": "The common zero is factored before the disk lower bound is taken.",
+      "diagnostics": {
+        "disk_upper": "[1.06656932105132389235282563401131576761036690288863598515 +/- 6.23e-57]",
+        "bounds": [
+          3,
+          24,
+          384,
+          9216,
+          294912,
+          11796480
+        ]
+      }
+    },
+    {
+      "id": "q1fher_09_c0_direct_cover",
+      "role": "interval_certificate",
+      "readiness": "certified",
+      "claim": "A direct Arb cover verifies the same derivative bounds away from the removable disks.",
+      "formula": "4096 rational Arb boxes certify C_0 derivatives 0 through 5",
+      "proof_boundary": "This is a complete cover of the three complementary real intervals.",
+      "diagnostics": {
+        "boxes": 4096,
+        "maxima": [
+          "0.5002038874663412570953369140625000000000000000000000000000000000000000",
+          "0.6926544280722737312316894531250000000000000000000000000000000000000000",
+          "1.582116125151515007019042968750000000000000000000000000000000000000000",
+          "6.970899701118469238281250000000000000000000000000000000000000000000000",
+          "180.8105199337005615234375000000000000000000000000000000000000000000000",
+          "7393.586341857910156250000000000000000000000000000000000000000000000000"
+        ]
+      }
+    },
+    {
+      "id": "q1fher_10_endpoint_jets",
+      "role": "analytic_majorant",
+      "readiness": "certified",
+      "claim": "The corrected endpoint jets have explicit one-order error constants.",
+      "formula": "|H-F|<86h, |H_x+hF'/(4pi)|<232h^2, |H_xx-h^2F''/(16pi^2)|<800h^3",
+      "proof_boundary": "Uses pi^2>9 and the certified C_0 derivative bounds.",
+      "diagnostics": {
+        "C0": [
+          3,
+          24,
+          384,
+          9216,
+          294912,
+          11796480
+        ],
+        "C1": [
+          86,
+          2731,
+          109227
+        ],
+        "H_minus_F": "|H-F|<86h",
+        "H_x_defect": "|H_x+hF'/(4pi)|<232h^2",
+        "H_xx_defect": "|H_xx-h^2F''/(16pi^2)|<800h^3",
+        "H": "|H|<4",
+        "H_x": "|H_x|<3h",
+        "H_xx": "|H_xx|<4h^2",
+        "J_defect": "|J+hF'/(4pi)|<236h^2",
+        "J_x_defect": "|J_x-h^2F''/(16pi^2)|<810h^3"
+      }
+    },
+    {
+      "id": "q1fher_11_value_jet",
+      "role": "finite_height_jet",
+      "readiness": "certified",
+      "claim": "The normalized real edge value is uniformly close to A.",
+      "formula": "c=A+h*e_0, |e_0|<100",
+      "proof_boundary": "No division by A or c is used.",
+      "diagnostics": null
+    },
+    {
+      "id": "q1fher_12_first_jets",
+      "role": "finite_height_jet",
+      "readiness": "certified",
+      "claim": "The centered slope and radial-subtracted value jet share the leading B.",
+      "formula": "d_edge=hB+h^2e_1, c_x=hB+h^2e_2, |e_1|,|e_2|<250",
+      "proof_boundary": "The terminal centering alpha_c is retained exactly.",
+      "diagnostics": null
+    },
+    {
+      "id": "q1fher_13_second_jet",
+      "role": "finite_height_jet",
+      "readiness": "certified",
+      "claim": "The full centered second jet is uniformly close to M.",
+      "formula": "d_(edge,x)=h^2*M+h^3*e_3, |e_3|<900",
+      "proof_boundary": "H_xx, mu_x, s_*'', u_x, and Z_x are all retained.",
+      "diagnostics": null
+    },
+    {
+      "id": "q1fher_14_current_budget",
+      "role": "division_free_perturbation",
+      "readiness": "certified",
+      "claim": "The four jet defects give a uniform finite-height current remainder.",
+      "formula": "h^-2(c*d_x-d*c_x)-(A*M-B^2)=h[e_0M+A e_3-B(e_1+e_2)]+h^2[e_0e_3-e_1e_2]; |a^2 J_edge/S_a^2-K_edge(p)|<5500h<1/10000000",
+      "proof_boundary": "The estimate is polynomial at every A=0 and c=0 fibre.",
+      "diagnostics": {
+        "linear": 5400,
+        "quadratic": 152500
+      }
+    },
+    {
+      "id": "q1fher_15_finite_sign",
+      "role": "effective_interval_theorem",
+      "readiness": "certified",
+      "claim": "The retained first-order q=1 real-edge current is strictly clockwise for L>=50.",
+      "formula": "a^2 J_edge/S_a^2<-3749/10000000<0",
+      "proof_boundary": "This signs the retained first-order edge block, not the full Xi approximation error.",
+      "diagnostics": null
+    },
+    {
+      "id": "q1fher_16_handoff",
+      "role": "route_decision",
+      "readiness": "open_quantitative_handoff",
+      "claim": "The q=1 finite-height wall is closed inside the first-order model.",
+      "formula": "Next bound the omitted higher-order Xi/source remainder, extend q>=1, and splice adjacent cutoffs before using the edge block in the Abel scalar.",
+      "proof_boundary": "No q>1 theorem, Xi-level edge sign, Abel gap, winding cap, Lambda<=0, or RH conclusion follows yet.",
+      "diagnostics": null
+    }
+  ],
+  "counts": {
+    "rows": 16,
+    "direct_arb_boxes": 4096,
+    "removable_cauchy_charts": 2,
+    "source_derivative_bounds": 6,
+    "stable_terminal_log_identities": 1,
+    "terminal_value_derivative_bounds": 2,
+    "endpoint_mu_bounds": 2,
+    "finite_edge_jet_defects": 4,
+    "uniform_q1_finite_height_edge_signs": 1,
+    "uniform_q_gt_1_edge_signs": 0,
+    "xi_level_edge_signs": 0,
+    "abel_gaps": 0,
+    "winding_bounds": 0
+  },
+  "proof_boundary": "This artifact proves an effective finite-height negative real-edge current for the retained first-order q=1 endpoint/terminal model on L>=50 and -1<=p<=1. It does not bound the omitted higher-order Xi approximation error, prove a q>1 edge sign, splice adjacent cutoffs, prove a cumulative-minor estimate, Abel-scalar gap, successor winding cap, contact exclusion, Q209, the cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or a prize-level conclusion."
+}

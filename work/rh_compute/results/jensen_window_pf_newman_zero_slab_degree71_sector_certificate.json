@@ -1,0 +1,302 @@
+{
+  "date": "2026-07-25",
+  "exact": {
+    "constants": {
+      "absolute_tolerance": "1e-50",
+      "imaginary_radius": 1,
+      "integration_cutoff": 2,
+      "precision_bits": 192,
+      "real_radius": "84/5",
+      "slab": "|Re z|<=84/5, |Im z|<=1",
+      "split": "5*pi/168",
+      "split_ball": "[0.0934997813568390844780548625976042525058681368861638637195026779737105153091312376246875172 +/- 5.78e-59]",
+      "time_interval": "0<=t<=1/5"
+    },
+    "directed_integrals": {
+      "core": {
+        "ball": "[0.0250137178322222592781720466155290738354880163433099023243796069742164755707699343706888691 +/- 5.98e-55]",
+        "formula": "C_R=int_0^(5*pi/168) Phi_1(u)*cos((84/5)u)du",
+        "lower": "[0.0250137178322222592781720466155290738354880163433099017267112628639878481899225921431596888 +/- 2.30e-92]",
+        "strictly_positive": true,
+        "upper": "[0.0250137178322222592781720466155290738354880163433099029220479510844451029516172765982180494 +/- 4.70e-92]"
+      },
+      "first_tail": {
+        "ball": "[0.0250013637245988698624665825257790936376379193863078792549355807003372801796452099498413696 +/- 6.62e-58]",
+        "formula": "T_1=int_(5*pi/168)^2 exp(u^2/5)*Phi_1(u)*cosh(u)du",
+        "lower": "[0.0250013637245988698624665825257790936376379193863078792542734518747728547020050815345191644 +/- 1.88e-92]",
+        "strictly_positive": true,
+        "upper": "[0.0250013637245988698624665825257790936376379193863078792555977095259017056572853383651635749 +/- 4.29e-92]"
+      },
+      "higher_tail": {
+        "ball": "[1.26239731337832931418386021631717220860018844644733550153248964299810354830020759218822325e-7 +/- 4.24e-59]",
+        "formula": "T_ge2=int_(5*pi/168)^2 exp(u^2/5)*cosh(u)*E_ge2(u)du",
+        "lower": "[1.26239731337832931418386021631717220860018844644733507848253702951907622332322763144686581e-7 +/- 1.99e-97]",
+        "strictly_positive": true,
+        "upper": "[1.26239731337832931418386021631717220860018844644733592458244225647713087327718755292958069e-7 +/- 3.13e-97]"
+      },
+      "infinite_tail": {
+        "ball": "[2.81229244156541662833207459697003328528302017357678380448767119539977295514227473578212149e-2037 +/- 7.91e-2091]",
+        "formula": "T_inf<=2*pi^2/(1-16e^(-3pi))*exp(-(pi/2)e^8)/(2*pi*e^8)",
+        "lower": "[2.81229244156541662833207459697003328528302017357678379658218237012730129647203607750296955e-2037 +/- 1.56e-2127]",
+        "strictly_positive": true,
+        "upper": "[2.81229244156541662833207459697003328528302017357678381239316002067224461381251339406127342e-2037 +/- 4.50e-2127]"
+      },
+      "margin": {
+        "ball": "[1.22278678920515827740457037283484806292369381573783358938692646700682598895904006843418812e-5 +/- 5.99e-55]",
+        "formula": "C_16-T_1-T_ge2-T_inf",
+        "lower": "[1.22278678920515827740457037283484806292369381573777375220789106434975007785542669258857829e-5 +/- 4.48e-95]",
+        "strictly_positive": true,
+        "upper": "[1.22278678920515827740457037283484806292369381573789342656596186966390190006265344427979794e-5 +/- 7.99e-96]"
+      }
+    },
+    "kernel_bounds": {
+      "far_endpoint_gap": {
+        "ball": "[4661.67785637505580862762892364312943371454015764845152404824635229996045322316262515946329 +/- 4.12e-54]",
+        "lower": "[4661.67785637505580862762892364312943371454015764845152404302610872556163360179438987205805 +/- 8.03e-88]",
+        "strictly_positive": true,
+        "upper": "[4661.67785637505580862762892364312943371454015764845152405346659587435927284453086044686853 +/- 4.72e-87]"
+      },
+      "far_exponent_inequality": "u^2/5+10u<=(pi/2)*exp(4u), u>=2",
+      "full_envelope": "Phi(u)<=2*pi^2*exp(9u-pi*exp(4u))/(1-16*exp(-3*pi))",
+      "full_ratio": "16*exp(-3*pi)",
+      "full_ratio_ball": {
+        "ball": "[0.00129119228112487358782728054278954598324770431190593795310105515805961524523094532419583056 +/- 1.55e-60]",
+        "lower": "[0.00129119228112487358782728054278954598324770431190593795309949940424014995980415930818238553 +/- 1.35e-93]",
+        "strictly_positive": true,
+        "upper": "[0.00129119228112487358782728054278954598324770431190593795310261091187908053065773134020927559 +/- 3.47e-93]"
+      },
+      "higher_envelope": "sum_(n>=2) Phi_n(u)<=32*pi^2*exp(9u-4*pi*exp(4u))/(1-(3/2)^4*exp(-5*pi))",
+      "higher_ratio": "(3/2)^4*exp(-5*pi)",
+      "higher_ratio_ball": {
+        "ball": "[7.62927495666220209191234038610665753105398615766902331898609424493037130984295247601319651e-7 +/- 1.57e-63]",
+        "lower": "[7.62927495666220209191234038610665753105398615766902331896938204569783406404739956961876747e-7 +/- 5.04e-98]",
+        "strictly_positive": true,
+        "upper": "[7.62927495666220209191234038610665753105398615766902331900280644416290855563850538240762556e-7 +/- 1.33e-97]"
+      },
+      "summand_factorization": "Phi_n(u)=pi*n^2*exp(5u)*(2*pi*n^2*exp(4u)-3)*exp(-pi*n^2*exp(4u))>0"
+    },
+    "published_inputs": {
+      "chasse_sector": {
+        "accessible_source": "https://people.kth.se/~chasse/LaguerreSector.pdf",
+        "source": "https://doi.org/10.1080/17476933.2011.584250",
+        "statement": "An order-at-most-one real entire function with positive Taylor coefficients and zeros in S(pi,delta) has hyperbolic Jensen polynomials through degree floor(|sin(delta)|^-2); the sector class is closed under differentiation.",
+        "theorem": "Theorem 3.6 and derivative closure"
+      },
+      "debruijn_strip": {
+        "source": "https://arxiv.org/abs/1904.12438",
+        "statement": "Every zero z of H_t satisfies |Im z|<=sqrt(1-2t)<=1 for 0<=t<=1/5.",
+        "theorem": "Theorem 3.2"
+      },
+      "endpoint_comparison": {
+        "result": "Corollary 1.3",
+        "source": "https://arxiv.org/abs/1910.01227",
+        "statement": "At t=0, the published Xi theorem already gives all-shift hyperbolicity for d<=9.36*10^20."
+      }
+    },
+    "sector_transfer": {
+      "all_shifts": "F_t^(n)(s)=sum_(j>=0)A_(n+j)(t)s^j/j!",
+      "degree_cutoff": 71,
+      "generating_function": "F_t(s)=sum_(k>=0)A_k(t)s^k/k!=2*H_t(i*sqrt(s))",
+      "inverse_sine_square": "50140561/705600",
+      "order": "F_t has order 1/2; the double-exponential kernel gives log M_F(r)=O(sqrt(r)*log(2+r)).",
+      "positive_coefficients": true,
+      "sector_half_angle": "delta=2*atan(5/84)",
+      "sector_sine": "840/7081",
+      "theorem": "P_(d,n,t) is hyperbolic with real negative zeros for every 0<=d<=71, n>=0, and 0<=t<=1/5.",
+      "zero_map": "H_t(z)=0 => F_t(-z^2)=0"
+    },
+    "zero_slab": {
+      "far_inequality": "on u>=5*pi/168, 0<=t<=1/5 and |y|<=1: the real integrand is at least -exp(u^2/5)*Phi(u)*cosh(u)",
+      "near_inequality": "on 0<=u<=5*pi/168, |x|<=84/5: cos(xu)>=cos((84/5)u)>=0; exp(tu^2)>=1 and cosh(yu)>=1",
+      "real_part_identity": "Re H_t(x+iy)=int_0^infinity exp(tu^2)*Phi(u)*cos(xu)*cosh(yu)du",
+      "theorem": "Re H_t(x+iy)>0 for 0<=t<=1/5, |x|<=84/5, |y|<=1",
+      "zero_free": true
+    }
+  },
+  "kind": "jensen_window_pf_newman_zero_slab_degree71_sector_certificate",
+  "priority_lowered": true,
+  "proof_boundary": "This proves all-shift Jensen hyperbolicity only through degree 71 on 0<=t<=1/5. It is not an all-degree theorem and does not prove PF-infinity, Lambda<=0, RH, or a Clay-prize conclusion.",
+  "rows": [
+    {
+      "claim": "Every theta summand of the Newman kernel is positive on u>=0.",
+      "diagnostics": null,
+      "formula": "Phi_n(u)=pi*n^2*exp(5u)*(2*pi*n^2*exp(4u)-3)*exp(-pi*n^2*exp(4u))>0",
+      "id": "nzsd71_01_kernel_positivity",
+      "proof_boundary": "Elementary factorization using 2*pi-3>0.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "The first theta summand supplies a uniform positive near contribution.",
+      "diagnostics": null,
+      "formula": "on 0<=u<=5*pi/168, |x|<=84/5: cos(xu)>=cos((84/5)u)>=0; exp(tu^2)>=1 and cosh(yu)>=1",
+      "id": "nzsd71_02_near_lower_bound",
+      "proof_boundary": "Only the interval 0<=u<=5*pi/168 is used.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "A geometric majorant controls every theta summand n>=2.",
+      "diagnostics": null,
+      "formula": "sum_(n>=2) Phi_n(u)<=32*pi^2*exp(9u-4*pi*exp(4u))/(1-(3/2)^4*exp(-5*pi))",
+      "id": "nzsd71_03_theta_tail_envelope",
+      "proof_boundary": "Uniform for u>=0; no numerical theta truncation is assumed.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "The full kernel beyond u=2 has an explicit elementary integral bound.",
+      "diagnostics": null,
+      "formula": "Phi(u)<=2*pi^2*exp(9u-pi*exp(4u))/(1-16*exp(-3*pi)); u^2/5+10u<=(pi/2)*exp(4u), u>=2",
+      "id": "nzsd71_04_far_tail_envelope",
+      "proof_boundary": "Uses cosh(u)<=exp(u) and a monotone exponent gap.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "The directed near-minus-far margin is rigorously positive.",
+      "diagnostics": {
+        "core": {
+          "ball": "[0.0250137178322222592781720466155290738354880163433099023243796069742164755707699343706888691 +/- 5.98e-55]",
+          "formula": "C_R=int_0^(5*pi/168) Phi_1(u)*cos((84/5)u)du",
+          "lower": "[0.0250137178322222592781720466155290738354880163433099017267112628639878481899225921431596888 +/- 2.30e-92]",
+          "strictly_positive": true,
+          "upper": "[0.0250137178322222592781720466155290738354880163433099029220479510844451029516172765982180494 +/- 4.70e-92]"
+        },
+        "first_tail": {
+          "ball": "[0.0250013637245988698624665825257790936376379193863078792549355807003372801796452099498413696 +/- 6.62e-58]",
+          "formula": "T_1=int_(5*pi/168)^2 exp(u^2/5)*Phi_1(u)*cosh(u)du",
+          "lower": "[0.0250013637245988698624665825257790936376379193863078792542734518747728547020050815345191644 +/- 1.88e-92]",
+          "strictly_positive": true,
+          "upper": "[0.0250013637245988698624665825257790936376379193863078792555977095259017056572853383651635749 +/- 4.29e-92]"
+        },
+        "higher_tail": {
+          "ball": "[1.26239731337832931418386021631717220860018844644733550153248964299810354830020759218822325e-7 +/- 4.24e-59]",
+          "formula": "T_ge2=int_(5*pi/168)^2 exp(u^2/5)*cosh(u)*E_ge2(u)du",
+          "lower": "[1.26239731337832931418386021631717220860018844644733507848253702951907622332322763144686581e-7 +/- 1.99e-97]",
+          "strictly_positive": true,
+          "upper": "[1.26239731337832931418386021631717220860018844644733592458244225647713087327718755292958069e-7 +/- 3.13e-97]"
+        },
+        "infinite_tail": {
+          "ball": "[2.81229244156541662833207459697003328528302017357678380448767119539977295514227473578212149e-2037 +/- 7.91e-2091]",
+          "formula": "T_inf<=2*pi^2/(1-16e^(-3pi))*exp(-(pi/2)e^8)/(2*pi*e^8)",
+          "lower": "[2.81229244156541662833207459697003328528302017357678379658218237012730129647203607750296955e-2037 +/- 1.56e-2127]",
+          "strictly_positive": true,
+          "upper": "[2.81229244156541662833207459697003328528302017357678381239316002067224461381251339406127342e-2037 +/- 4.50e-2127]"
+        },
+        "margin": {
+          "ball": "[1.22278678920515827740457037283484806292369381573783358938692646700682598895904006843418812e-5 +/- 5.99e-55]",
+          "formula": "C_16-T_1-T_ge2-T_inf",
+          "lower": "[1.22278678920515827740457037283484806292369381573777375220789106434975007785542669258857829e-5 +/- 4.48e-95]",
+          "strictly_positive": true,
+          "upper": "[1.22278678920515827740457037283484806292369381573789342656596186966390190006265344427979794e-5 +/- 7.99e-96]"
+        }
+      },
+      "formula": "C_16-T_1-T_ge2-T_inf",
+      "id": "nzsd71_05_directed_integrals",
+      "proof_boundary": "One-dimensional 192-bit Arb integrals plus an analytic infinite tail.",
+      "readiness": "ready_to_apply",
+      "role": "interval_certificate"
+    },
+    {
+      "claim": "The full Newman transform has positive real part on the complete complex slab.",
+      "diagnostics": null,
+      "formula": "Re H_t(x+iy)>0 for 0<=t<=1/5, |x|<=84/5, |y|<=1",
+      "id": "nzsd71_06_zero_free_slab",
+      "proof_boundary": "Uniform only on the stated slab and heat interval.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "All positive-window Newman zeros lie in the horizontal strip used by the slab theorem.",
+      "diagnostics": {
+        "source": "https://arxiv.org/abs/1904.12438",
+        "statement": "Every zero z of H_t satisfies |Im z|<=sqrt(1-2t)<=1 for 0<=t<=1/5.",
+        "theorem": "Theorem 3.2"
+      },
+      "formula": "Every zero z of H_t satisfies |Im z|<=sqrt(1-2t)<=1 for 0<=t<=1/5.",
+      "id": "nzsd71_07_debruijn_strip",
+      "proof_boundary": "Imported Theorem 3.2 of the cited Polymath paper.",
+      "readiness": "available_published",
+      "role": "published_theorem"
+    },
+    {
+      "claim": "Every squared-variable zero lies in one explicit negative-axis sector.",
+      "diagnostics": null,
+      "formula": "|arg(-z^2)-pi|<=2*atan(5/84), sin(delta)=840/7081",
+      "id": "nzsd71_08_squared_zero_sector",
+      "proof_boundary": "Composition of the zero-free slab and de Bruijn strip only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "The sector theorem converts the squared-zero enclosure into Jensen hyperbolicity.",
+      "diagnostics": {
+        "accessible_source": "https://people.kth.se/~chasse/LaguerreSector.pdf",
+        "source": "https://doi.org/10.1080/17476933.2011.584250",
+        "statement": "An order-at-most-one real entire function with positive Taylor coefficients and zeros in S(pi,delta) has hyperbolic Jensen polynomials through degree floor(|sin(delta)|^-2); the sector class is closed under differentiation.",
+        "theorem": "Theorem 3.6 and derivative closure"
+      },
+      "formula": "An order-at-most-one real entire function with positive Taylor coefficients and zeros in S(pi,delta) has hyperbolic Jensen polynomials through degree floor(|sin(delta)|^-2); the sector class is closed under differentiation.",
+      "id": "nzsd71_09_chasse_transfer",
+      "proof_boundary": "Imported Chasse Theorem 3.6 and sector derivative closure.",
+      "readiness": "available_published",
+      "role": "published_theorem"
+    },
+    {
+      "claim": "All shifted Newman Jensen windows through degree 71 are hyperbolic throughout the target heat interval.",
+      "diagnostics": null,
+      "formula": "P_(d,n,t) is hyperbolic with real negative zeros for every 0<=d<=71, n>=0, and 0<=t<=1/5.",
+      "id": "nzsd71_10_degree71_theorem",
+      "proof_boundary": "Finite-degree theorem only; degrees 65 and above are not covered.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "Actual Xi degree-four and adjacent degree-five windows cannot realize the nonhyperbolic outer-contact survivor on this heat interval.",
+      "diagnostics": null,
+      "formula": "d=4,5<=71; hence P_(4,n,t) and P_(5,n,t) are hyperbolic for every n and 0<=t<=1/5",
+      "id": "nzsd71_11_quartic_consequence",
+      "proof_boundary": "Excludes the survivor for Xi; it does not invalidate the finite countermodel.",
+      "readiness": "ready_to_apply",
+      "role": "exact_consequence"
+    },
+    {
+      "claim": "The static endpoint already has a much larger published finite-degree theorem.",
+      "diagnostics": {
+        "result": "Corollary 1.3",
+        "source": "https://arxiv.org/abs/1910.01227",
+        "statement": "At t=0, the published Xi theorem already gives all-shift hyperbolicity for d<=9.36*10^20."
+      },
+      "formula": "At t=0, the published Xi theorem already gives all-shift hyperbolicity for d<=9.36*10^20.",
+      "id": "nzsd71_12_endpoint_scope",
+      "proof_boundary": "Endpoint t=0 only; it supplies no positive-time uniformity by itself.",
+      "readiness": "available_published",
+      "role": "literature_scope"
+    },
+    {
+      "claim": "A bounded degree cutoff cannot imply Laguerre-Polya membership or RH.",
+      "diagnostics": null,
+      "formula": "71<infinity",
+      "id": "nzsd71_13_nonpromotion",
+      "proof_boundary": "No degree-72 theorem, unbounded terminal sequence, PF-infinity, Lambda<=0, RH, or Clay-prize conclusion.",
+      "readiness": "blocked",
+      "role": "nonpromotion_guard"
+    }
+  ],
+  "status": "rigorous uniform zero-slab and published-sector composition theorem",
+  "summary": {
+    "all_degree_theorems": 0,
+    "all_shifts": true,
+    "directed_integrals": 4,
+    "maximum_proved_degree": 71,
+    "positive_margin": 1,
+    "precision_bits": 192,
+    "published_inputs": 3,
+    "quartic_layers_closed": 1,
+    "quintic_layers_closed": 1,
+    "rows": 13,
+    "uniform_heat_parameters": "continuum_0_to_1_over_5",
+    "zero_free_complex_slabs": 1
+  }
+}

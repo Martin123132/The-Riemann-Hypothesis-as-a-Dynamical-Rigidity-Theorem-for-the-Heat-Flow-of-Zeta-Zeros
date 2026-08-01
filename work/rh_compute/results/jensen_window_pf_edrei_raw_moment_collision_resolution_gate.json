@@ -1,0 +1,347 @@
+{
+  "collision_audit": {
+    "beta": "1",
+    "determinant_checks": 36,
+    "flux_checks": 75,
+    "q": "1/2",
+    "repeated_cases": [
+      [
+        "1",
+        "1/2"
+      ],
+      [
+        "3/2",
+        "1/2"
+      ],
+      [
+        "5/4",
+        "2/3"
+      ]
+    ],
+    "repeated_checks": 36,
+    "samples": [
+      {
+        "epsilon": "1/4",
+        "next_pair_product": "5/8",
+        "shift_12_logarithmic_flux": "585738913399767700/1968698333532879",
+        "top_pair_product": "15/16"
+      },
+      {
+        "epsilon": "1/8",
+        "next_pair_product": "9/16",
+        "shift_12_logarithmic_flux": "162573160018121410669671124/247359630245989140603711",
+        "top_pair_product": "63/64"
+      },
+      {
+        "epsilon": "1/32",
+        "next_pair_product": "33/64",
+        "shift_12_logarithmic_flux": "11221270460065578343438880876999589501677524/1368045336917027932610733805140222948351",
+        "top_pair_product": "1023/1024"
+      }
+    ],
+    "split_epsilons": [
+      "1/4",
+      "1/8",
+      "1/32"
+    ]
+  },
+  "conditioning_audit": {
+    "asymptotic": "kappa_s~[4*beta^2/(beta-q)^2]*(beta/q)^(s+1)",
+    "benchmark_limit": "kappa_s/2^s -> 32 for beta=1, q=1/2",
+    "definition": "kappa_s=(a_s*a_(s+2)+a_(s+1)^2)/D_(1,s)",
+    "rows": [
+      {
+        "condition_number": "16673/32",
+        "condition_over_2_to_s": 32.564453125,
+        "shift": 4
+      },
+      {
+        "condition_number": "4198913/512",
+        "condition_over_2_to_s": 32.03516387939453,
+        "shift": 8
+      },
+      {
+        "condition_number": "1073815553/8192",
+        "condition_over_2_to_s": 32.00219729542732,
+        "shift": 12
+      },
+      {
+        "condition_number": "70368763052033/2097152",
+        "condition_over_2_to_s": 32.0000085830693,
+        "shift": 20
+      },
+      {
+        "condition_number": "77371252455356058390495233/2199023255552",
+        "condition_over_2_to_s": 32.000000000008185,
+        "shift": 40
+      }
+    ]
+  },
+  "crossover_audit": {
+    "asymptotic_shift": "s_cross=2*log(beta/epsilon)/log(beta/q)+O(1)",
+    "ratio": "T_split/D_collision=[2*epsilon^2/(beta-q)^2]*[(beta^2-epsilon^2)/(beta*q)]^(s+1)",
+    "rows": [
+      {
+        "difference": -3.9716068606401187,
+        "epsilon": 0.0625,
+        "exact_benchmark_shift": 4.028393139359881,
+        "leading_asymptotic_shift": 8.0
+      },
+      {
+        "difference": -3.999713812385451,
+        "epsilon": 0.00390625,
+        "exact_benchmark_shift": 12.000286187614549,
+        "leading_asymptotic_shift": 16.0
+      },
+      {
+        "difference": -3.9999981941819556,
+        "epsilon": 0.000244140625,
+        "exact_benchmark_shift": 20.000001805818044,
+        "leading_asymptotic_shift": 24.0
+      },
+      {
+        "difference": -3.999999990258793,
+        "epsilon": 1.52587890625e-05,
+        "exact_benchmark_shift": 28.000000009741207,
+        "leading_asymptotic_shift": 32.0
+      }
+    ]
+  },
+  "date": "2026-07-24",
+  "exact": {
+    "coefficient_gap": "H_epsilon-H_0=-epsilon^2*z^2*(1+q*z)",
+    "collision_determinant": "D_(1,s)(0)=2*(beta*q)^(s+1)*(beta-q)^2",
+    "collision_family": "H_0(z)=(1+beta*z)^2(1+q*z), H_epsilon(z)=(1+(beta+epsilon)z)*(1+(beta-epsilon)z)*(1+q*z)",
+    "condition_number": "kappa_s=(a_s*a_(s+2)+a_(s+1)^2)/D_(1,s)~[4*beta^2/(beta-q)^2]*(beta/q)^(s+1)",
+    "crossover": "s_cross=2*log(beta/epsilon)/log(beta/q)+O(1)",
+    "general_rank_collision": "For B={b_1,...,b_(r-1)} above beta>q and P_B=product B: D_(r,s)(0)=2*(P_B*beta*q)^(s+1)*V(B,beta,q)^2",
+    "general_rank_top_split": "T_top(epsilon)=[P_B*(beta^2-epsilon^2)]^(s+1)*V(B,beta+epsilon,beta-epsilon)^2",
+    "noncommuting_limits": "I_r(H)=limsup_(s->infinity)max(1,partial_lambda log D_(r,s)(H))^(1/s); after any fixed larger simple prefix, I_r(H_epsilon)=1 for epsilon>0 and I_r(H_0)=beta/q>1",
+    "open_target": "Control the Xi/Phi determinant flux by a structural identity that preserves the rank-one cancellation, or obtain gap-adapted exponentially small remainders; fixed algebraic raw-moment asymptotics alone do not resolve the collision.",
+    "power_gap": "a_n(epsilon)-a_n(0)=(beta+epsilon)^(n+1)+(beta-epsilon)^(n+1)-2*beta^(n+1)",
+    "raw_moments": "M_n(lambda)=integral_R exp(lambda*u^2)*Phi(u)*u^(2n)du",
+    "repeated_flux": "With x=q/beta, partial_lambda log D_(1,s)(0)=beta*[16*x^(-s-1)-P_s(x)]/(1-x)^2, P_s(x)=2*x^3*s+6*x^3-4*x^2*s^2-18*x^2*s-50*x^2+8*x*s^2+38*x*s+18*x-4*s^2-22*s-30",
+    "split_determinant": "D_(1,s)(epsilon)=4*epsilon^2*(beta^2-epsilon^2)^(s+1)+[((beta+epsilon)*q)^(s+1)*(beta+epsilon-q)^2]+[((beta-epsilon)*q)^(s+1)*(beta-epsilon-q)^2]",
+    "taylor_map": "H_lambda(z)=sum_(n>=0)d_n z^n, d_n=M_n/((2n)!*M_0)",
+    "triangular_map": "(n+1)d_(n+1)=sum_(k=0)^n(-1)^k*a_k*d_(n-k); a_n=(-1)^n[(n+1)d_(n+1)-sum_(k=0)^(n-1)(-1)^k*a_k*d_(n-k)]"
+  },
+  "general_rank_audit": {
+    "cauchy_binet_checks": 24,
+    "determinant_checks": 24,
+    "general_crossover": "For any fixed larger simple prefix, s_cross=2*log(beta/epsilon)/log(beta/q)+O(1)",
+    "rank_cases": 3,
+    "ratio_checks": 24,
+    "samples": [
+      {
+        "beta": "1",
+        "epsilon": "1/8",
+        "prefix": [],
+        "q": "1/2",
+        "rank": 1,
+        "small_epsilon_ratio_prefactor": "1/8"
+      },
+      {
+        "beta": "1",
+        "epsilon": "1/8",
+        "prefix": [
+          "3/2"
+        ],
+        "q": "1/2",
+        "rank": 2,
+        "small_epsilon_ratio_prefactor": "1/32"
+      },
+      {
+        "beta": "1",
+        "epsilon": "1/10",
+        "prefix": [
+          "2",
+          "3/2"
+        ],
+        "q": "1/2",
+        "rank": 3,
+        "small_epsilon_ratio_prefactor": "2/225"
+      }
+    ]
+  },
+  "kind": "jensen_window_pf_edrei_raw_moment_collision_resolution_gate",
+  "proof_boundary": "This artifact proves the exact raw-Phi-moment to Taylor to logarithmic-moment transfer, the symmetric LP+ split identities, the exponential condition number of the high-shift determinant at a repeated leading atom, the same logarithmic crossover scale at every fixed collision rank, and the noncommuting collision limits. It does not prove a Xi/Phi-specific cancellation-preserving estimate, PF-infinity, Jensen hyperbolicity for zeta, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The Phi transform supplies normalized Taylor coefficients by exact even raw moments.",
+      "formula": "M_n(lambda)=integral_R exp(lambda*u^2)*Phi(u)*u^(2n)du; H_lambda(z)=sum_(n>=0)d_n z^n, d_n=M_n/((2n)!*M_0)",
+      "id": "ermc_01_phi_raw_moment_map",
+      "proof_boundary": "This is an identity, not an asymptotic estimate.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The Taylor coefficients determine every Edrei power moment through a triangular Newton recurrence.",
+      "formula": "(n+1)d_(n+1)=sum_(k=0)^n(-1)^k*a_k*d_(n-k); a_n=(-1)^n[(n+1)d_(n+1)-sum_(k=0)^(n-1)(-1)^k*a_k*d_(n-k)]",
+      "id": "ermc_02_triangular_log_map",
+      "proof_boundary": "Computing a high-shift determinant requires the recurrence through the same high order.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "A symmetric split gives an LP+ family converging to a repeated factor at any fixed support rank.",
+      "formula": "H_0(z)=(1+beta*z)^2(1+q*z), H_epsilon(z)=(1+(beta+epsilon)z)*(1+(beta-epsilon)z)*(1+q*z)",
+      "id": "ermc_03_collision_family",
+      "proof_boundary": "Any fixed string of larger simple factors can be adjoined; the family is a conditioning model, not the Xi function.",
+      "readiness": "available_exact",
+      "role": "exact_model"
+    },
+    {
+      "claim": "The split and collision are quadratically close in coefficient and compact-open topology.",
+      "formula": "H_epsilon-H_0=-epsilon^2*z^2*(1+q*z)",
+      "id": "ermc_04_quadratic_coefficient_gap",
+      "proof_boundary": "Multiplication by a common normalized LP+ tail preserves the O(epsilon^2) compact-open gap.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The logarithmic moments amplify the small symmetric split at high order.",
+      "formula": "a_n(epsilon)-a_n(0)=(beta+epsilon)^(n+1)+(beta-epsilon)^(n+1)-2*beta^(n+1)",
+      "id": "ermc_05_power_moment_gap",
+      "proof_boundary": "For fixed n the gap is O(epsilon^2), but the estimate is not uniform as n grows.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "At collision the leading rank-one terms cancel and expose the next atom.",
+      "formula": "D_(1,s)(0)=2*(beta*q)^(s+1)*(beta-q)^2",
+      "id": "ermc_06_collision_determinant",
+      "proof_boundary": "The formula is Cauchy-Binet for residues 2*beta and q.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Entrywise reconstruction of the collision determinant is exponentially ill-conditioned.",
+      "formula": "kappa_s=(a_s*a_(s+2)+a_(s+1)^2)/D_(1,s)~[4*beta^2/(beta-q)^2]*(beta/q)^(s+1)",
+      "id": "ermc_07_exponential_condition_number",
+      "proof_boundary": "Correlated structural formulas can evade this black-box condition number; independent algebraic remainders cannot.",
+      "readiness": "guard_validated",
+      "role": "exact_obstruction"
+    },
+    {
+      "claim": "At every fixed rank the split determinant contains a tiny top-subset term with a larger exponential base.",
+      "formula": "D_(1,s)(epsilon)=4*epsilon^2*(beta^2-epsilon^2)^(s+1)+[((beta+epsilon)*q)^(s+1)*(beta+epsilon-q)^2]+[((beta-epsilon)*q)^(s+1)*(beta-epsilon-q)^2]; T_top(epsilon)=[P_B*(beta^2-epsilon^2)]^(s+1)*V(B,beta+epsilon,beta-epsilon)^2",
+      "id": "ermc_08_split_cauchy_binet",
+      "proof_boundary": "Every Cauchy-Binet subset term is positive.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "At every fixed rank the high shift needed to resolve a gap diverges logarithmically as the gap closes.",
+      "formula": "s_cross=2*log(beta/epsilon)/log(beta/q)+O(1)",
+      "id": "ermc_09_crossover_scale",
+      "proof_boundary": "The larger simple prefix changes only the O(1) term, not the beta/q exponential base.",
+      "readiness": "available_exact",
+      "role": "exact_asymptotic"
+    },
+    {
+      "claim": "The repeated model has an explicit exponentially growing determinant logarithmic flux.",
+      "formula": "With x=q/beta, partial_lambda log D_(1,s)(0)=beta*[16*x^(-s-1)-P_s(x)]/(1-x)^2, P_s(x)=2*x^3*s+6*x^3-4*x^2*s^2-18*x^2*s-50*x^2+8*x*s^2+38*x*s+18*x-4*s^2-22*s-30",
+      "id": "ermc_10_repeated_flux",
+      "proof_boundary": "Its sth-root limit is beta/q.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "For each fixed nonzero split, the largest distinct pair dominates and the logarithmic flux is only affine in s up to exponentially small terms.",
+      "formula": "partial_lambda log D_(1,s)(epsilon)=A_epsilon*s+B_epsilon+o(1)",
+      "id": "ermc_11_simple_split_flux",
+      "proof_boundary": "The constants diverge as epsilon tends to zero, so this estimate is not uniform at collision.",
+      "readiness": "available_exact",
+      "role": "exact_asymptotic"
+    },
+    {
+      "claim": "Every fixed-rank all-shift collision indicator is discontinuous under compact-open LP+ convergence.",
+      "formula": "I_r(H)=limsup_(s->infinity)max(1,partial_lambda log D_(r,s)(H))^(1/s); after any fixed larger simple prefix, I_r(H_epsilon)=1 for epsilon>0 and I_r(H_0)=beta/q>1",
+      "id": "ermc_12_noncommuting_limits",
+      "proof_boundary": "This blocks promotion from any fixed collection of shifts or any nonuniform coefficient asymptotic.",
+      "readiness": "guard_validated",
+      "role": "exact_obstruction"
+    },
+    {
+      "claim": "A Phi-specific proof must preserve the determinant cancellation structurally or resolve it exponentially.",
+      "formula": "Control the Xi/Phi determinant flux by a structural identity that preserves the rank-one cancellation, or obtain gap-adapted exponentially small remainders; fixed algebraic raw-moment asymptotics alone do not resolve the collision.",
+      "id": "ermc_13_phi_precision_handoff",
+      "proof_boundary": "No such uniform Xi/Phi estimate is proved here.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    },
+    {
+      "claim": "The gate separates an exact conditioning obstruction from the still-open zeta estimate.",
+      "formula": "exact transfer and collision barrier proved; Xi/Phi determinant-flux bound open",
+      "id": "ermc_14_proof_boundary",
+      "proof_boundary": "Nothing here proves PF-infinity, Jensen hyperbolicity for zeta, RH, or Lambda<=0.",
+      "readiness": "guard_validated",
+      "role": "proof_boundary"
+    }
+  ],
+  "sources": [
+    {
+      "path": "outputs/jensen_window_pf_edrei_hankel_boundary_flux_gate.md",
+      "title": "Local Edrei Hankel boundary-flux gate"
+    },
+    {
+      "path": "outputs/formal_core.md",
+      "title": "Local formal core, Lemma 11.22C and Corollary 11.22C.1"
+    },
+    {
+      "path": "outputs/jensen_window_pf_newman_strict_laguerre_correlation_target.md",
+      "title": "Local cancellation-preserving strict-Laguerre correlation target"
+    }
+  ],
+  "status": "exact Phi-moment transfer and LP+ collision-resolution obstruction with one open Xi/Phi precision handoff",
+  "transfer_audit": {
+    "cases": 4,
+    "samples": [
+      {
+        "beta": "1",
+        "coefficient_difference": [
+          "0",
+          "0",
+          "-1/16",
+          "-1/32"
+        ],
+        "epsilon": "1/4",
+        "q": "1/2"
+      },
+      {
+        "beta": "5/4",
+        "coefficient_difference": [
+          "0",
+          "0",
+          "-1/64",
+          "-1/128"
+        ],
+        "epsilon": "1/8",
+        "q": "1/2"
+      },
+      {
+        "beta": "3/2",
+        "coefficient_difference": [
+          "0",
+          "0",
+          "-1/36",
+          "-1/54"
+        ],
+        "epsilon": "1/6",
+        "q": "2/3"
+      },
+      {
+        "beta": "7/5",
+        "coefficient_difference": [
+          "0",
+          "0",
+          "-1/100",
+          "-3/500"
+        ],
+        "epsilon": "1/10",
+        "q": "3/5"
+      }
+    ],
+    "triangular_checks": 104
+  }
+}

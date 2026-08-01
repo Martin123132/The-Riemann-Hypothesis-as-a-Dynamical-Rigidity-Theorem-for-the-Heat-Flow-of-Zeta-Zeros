@@ -1,0 +1,140 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_critical_RS_C1_endpoint_peeling_contract",
+  "date": "2026-07-26",
+  "status": "exact extraction of the first omitted Riemann-Siegel endpoint coefficient and its critical Gaussian cancellation; the uniform second-order heat remainder remains open",
+  "proof_boundary": "This artifact derives C_1 exactly from the published/implemented Riemann-Siegel coefficient recurrence, specializes it to the critical line, and identifies the signed remainder peel. It does not prove the required uniform second-order value/derivative bounds, the adjacent-cutoff splice, contact exclusion, Lambda<=0, or RH.",
+  "exact": {
+    "published_expansion": "R_0,N(s)=Dirichlet_N(s)+(-1)^(N-1)U*a^(-sigma)*(sum_(k=0)^K C_k(p,sigma)/a^k+RS_K(s))",
+    "coefficient_assembly": "C_k(p,sigma)=pi^(-2k)*sum_(j=0)^floor(3k/2)(pi/(2i))^j*d_j^(k)(sigma)*F^(3k-2j)(p)",
+    "first_recurrence": "d_0^(0)=1, d_1^(0)=0 => d_0^(1)=1/12, d_1^(1)=(1-2sigma)/2",
+    "first_coefficient": "C_1(p,sigma)=F'''(p)/(12*pi^2)+i*(2sigma-1)*F'(p)/(4*pi), with F=C_0",
+    "critical_specialization": "C_1(p,1/2)=F'''(p)/(12*pi^2)",
+    "heat_fluctuation": "C_1(p,1/2+sqrt(t)*v)=F'''(p)/(12*pi^2)+i*sqrt(t)*v*F'(p)/(2*pi)",
+    "centered_gaussian": "For dmu(v)=pi^(-1/2)exp(-v^2)dv, integral C_1(p,1/2+sqrt(t)*v)dmu(v)=F'''(p)/(12*pi^2)",
+    "scale_conversion": "a=sqrt(T_0/(2*pi)); a^(-1)=sqrt(2*pi/T_0), a^(-2)=2*pi/T_0",
+    "critical_endpoint_correction": "DeltaC_t(x)=2*(-1)^N*exp(t*pi^2/64)*Re(M_0(i*T_0)*U*exp(pi*i/8)*F'''(p)/(12*pi^2*a))",
+    "normalized_update": "DeltaQ=DeltaC_t/A_t; Q_[1]=Q_[0]+DeltaQ; J_[1]=P-Q_[1]=J_[0]-DeltaQ",
+    "remainder_peel": "Z=J_[0]+r_[0]=J_[1]+r_[1], hence r_[0]=-DeltaQ+r_[1] and r_[0],x=-DeltaQ_x+r_[1],x",
+    "critical_cutoff_parity": "F(-p)=F(p) => C_1(-p,1/2)=-C_1(p,1/2)",
+    "critical_cutoff_value_match": "At a=m, p_left=-1, p_right=1, and (-1)^(m-1)C_1(-1,1/2)=(-1)^m C_1(1,1/2)",
+    "critical_cutoff_derivative_jump": "For E_N(T)=(-1)^N*a^(-1)*C_1(p_N(T),1/2), p_N'(T)=-a/T and [E_N']_(right-left)=-(-1)^m*F''''(1)/(6*pi^2*T)",
+    "order_handoff": "After retaining C_1, the fixed-sigma Riemann-Siegel tail begins at a^(-2)=2*pi/T_0; the heat-integrated proof must also retain the O(T_0^-1) gamma/Stirling and log-M_0 Taylor terms",
+    "uniform_target": "Prove explicit value and x-derivative bounds for r_[1] on L>=50 and 0<t*L<=25, uniformly across fixed-N cells and adjacent-cutoff splices, then insert r_0=-DeltaQ into the signed contact-normal peeling inequality"
+  },
+  "rows": [
+    {
+      "id": "np15c1ep_01_published_expansion",
+      "role": "published_primary_input",
+      "readiness": "available_published",
+      "claim": "Polymath 15 records the Arias de Reyna endpoint expansion with coefficients C_k(p,sigma) and an explicit remainder.",
+      "formula": "R_0,N(s)=Dirichlet_N(s)+(-1)^(N-1)U*a^(-sigma)*(sum_(k=0)^K C_k(p,sigma)/a^k+RS_K(s))",
+      "proof_boundary": "Proposition 6.2; the paper uses only C_0 in its heat-flow endpoint approximation."
+    },
+    {
+      "id": "np15c1ep_02_flint_coefficient_assembly",
+      "role": "primary_source_extraction",
+      "readiness": "available_exact",
+      "claim": "FLINT's certified Riemann-Siegel implementation exposes the normalization relating d_j^(k), F derivatives, and C_k.",
+      "formula": "C_k(p,sigma)=pi^(-2k)*sum_(j=0)^floor(3k/2)(pi/(2i))^j*d_j^(k)(sigma)*F^(3k-2j)(p)",
+      "proof_boundary": "Read directly from zeta_rs_r.c together with the documented Riemann-Siegel normalization."
+    },
+    {
+      "id": "np15c1ep_03_first_recurrence",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The in-place d-coefficient recurrence gives the complete k=1 row.",
+      "formula": "d_0^(0)=1, d_1^(0)=0 => d_0^(1)=1/12, d_1^(1)=(1-2sigma)/2",
+      "proof_boundary": "Exact rational recurrence; no numerical inference."
+    },
+    {
+      "id": "np15c1ep_04_first_coefficient",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The first omitted endpoint coefficient has an explicit two-jet formula.",
+      "formula": "C_1(p,sigma)=F'''(p)/(12*pi^2)+i*(2sigma-1)*F'(p)/(4*pi), with F=C_0",
+      "proof_boundary": "The removable values of F=C_0 and its derivatives are understood by analytic continuation at p=+-1/2."
+    },
+    {
+      "id": "np15c1ep_05_critical_specialization",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "On the critical line the F' part of C_1 vanishes identically.",
+      "formula": "C_1(p,1/2)=F'''(p)/(12*pi^2)",
+      "proof_boundary": "Exact substitution sigma=1/2."
+    },
+    {
+      "id": "np15c1ep_06_centered_heat_cancellation",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The remaining sigma fluctuation in C_1 is odd and has zero centered Gaussian mean.",
+      "formula": "C_1(p,1/2+sqrt(t)*v)=F'''(p)/(12*pi^2)+i*sqrt(t)*v*F'(p)/(2*pi); For dmu(v)=pi^(-1/2)exp(-v^2)dv, integral C_1(p,1/2+sqrt(t)*v)dmu(v)=F'''(p)/(12*pi^2)",
+      "proof_boundary": "Exact for the frozen-prefactor coefficient layer. The full endpoint integrand has additional O(T_0^-1) factors."
+    },
+    {
+      "id": "np15c1ep_07_corrected_endpoint_definition",
+      "role": "exact_definition",
+      "readiness": "ready_to_apply",
+      "claim": "The critical corrected main can absorb the complete first Riemann-Siegel endpoint coefficient explicitly.",
+      "formula": "DeltaC_t(x)=2*(-1)^N*exp(t*pi^2/64)*Re(M_0(i*T_0)*U*exp(pi*i/8)*F'''(p)/(12*pi^2*a)); DeltaQ=DeltaC_t/A_t; Q_[1]=Q_[0]+DeltaQ; J_[1]=P-Q_[1]=J_[0]-DeltaQ; Z=J_[0]+r_[0]=J_[1]+r_[1], hence r_[0]=-DeltaQ+r_[1] and r_[0],x=-DeltaQ_x+r_[1],x",
+      "proof_boundary": "This is an exact repartition of the old remainder once DeltaC_t is defined; it does not yet bound the new remainder."
+    },
+    {
+      "id": "np15c1ep_08_second_order_handoff",
+      "role": "published_theorem_transfer",
+      "readiness": "conditional_ready",
+      "claim": "Extracting C_1 removes the a^-1 endpoint obstruction and moves every remaining formal endpoint contribution to order a^-2 or smaller.",
+      "formula": "a=sqrt(T_0/(2*pi)); a^(-1)=sqrt(2*pi/T_0), a^(-2)=2*pi/T_0; After retaining C_1, the fixed-sigma Riemann-Siegel tail begins at a^(-2)=2*pi/T_0; the heat-integrated proof must also retain the O(T_0^-1) gamma/Stirling and log-M_0 Taylor terms",
+      "proof_boundary": "The fixed-sigma order follows from the published expansion. Uniform heat integration, constants, and first derivatives still require a new proof."
+    },
+    {
+      "id": "np15c1ep_09_signed_contact_handoff",
+      "role": "analytic_handoff",
+      "readiness": "conditional_ready",
+      "claim": "The extracted endpoint block supplies the explicit signed remainder model required by the contact-normal equation.",
+      "formula": "Z=J_[0]+r_[0]=J_[1]+r_[1], hence r_[0]=-DeltaQ+r_[1] and r_[0],x=-DeltaQ_x+r_[1],x",
+      "proof_boundary": "Useful only after explicit C1 bounds for r_[1] and r_[1],x are proved."
+    },
+    {
+      "id": "np15c1ep_10_critical_cutoff_parity",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "Critical-line parity makes the added C_1 endpoint value continuous across every Riemann-Siegel cutoff.",
+      "formula": "F(-p)=F(p) => C_1(-p,1/2)=-C_1(p,1/2); At a=m, p_left=-1, p_right=1, and (-1)^(m-1)C_1(-1,1/2)=(-1)^m C_1(1,1/2); For E_N(T)=(-1)^N*a^(-1)*C_1(p_N(T),1/2), p_N'(T)=-a/T and [E_N']_(right-left)=-(-1)^m*F''''(1)/(6*pi^2*T)",
+      "proof_boundary": "The one-sided derivative mismatch is explicit and of order T^-1; a holomorphic collar splice must still absorb it."
+    },
+    {
+      "id": "np15c1ep_11_cutoff_guard",
+      "role": "route_guard",
+      "readiness": "guard_validated",
+      "claim": "Exact value matching does not by itself provide a global holomorphic C_1 collar.",
+      "formula": "critical value parity + fixed-N analyticity + adjacent-N derivative control are jointly required",
+      "proof_boundary": "The remaining mismatch is already at the desired T^-1 scale, but its explicit collar constant is not certified here."
+    },
+    {
+      "id": "np15c1ep_12_uniform_quantitative_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The next proof obligation is a uniform second-order endpoint value/first-jet theorem compatible with signed contact peeling.",
+      "formula": "Prove explicit value and x-derivative bounds for r_[1] on L>=50 and 0<t*L<=25, uniformly across fixed-N cells and adjacent-cutoff splices, then insert r_0=-DeltaQ into the signed contact-normal peeling inequality",
+      "proof_boundary": "Open. No global contact exclusion, Lambda<=0, or RH is asserted."
+    }
+  ],
+  "summary": {
+    "rows": 12,
+    "exact_coefficient_identities": 5,
+    "primary_source_inputs": 2,
+    "corrected_main_definitions": 1,
+    "conditional_transfers": 2,
+    "route_guards": 1,
+    "open_quantitative_targets": 1
+  },
+  "sources": [
+    "https://arxiv.org/abs/1904.12438",
+    "https://flintlib.org/doc/acb_dirichlet.html",
+    "https://github.com/flintlib/flint/blob/master/src/acb_dirichlet/zeta_rs_d_coeffs.c",
+    "https://github.com/flintlib/flint/blob/master/src/acb_dirichlet/zeta_rs_f_coeffs.c",
+    "https://github.com/flintlib/flint/blob/master/src/acb_dirichlet/zeta_rs_r.c",
+    "outputs/jensen_window_pf_newman_polymath15_endpoint_holomorphic_lift.md",
+    "outputs/jensen_window_pf_newman_parabolic_frequency_contact_normal_hierarchy_gate.md"
+  ]
+}

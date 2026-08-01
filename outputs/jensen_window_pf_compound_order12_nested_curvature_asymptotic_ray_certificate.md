@@ -1,0 +1,16 @@
+# Order-Twelve Nested Curvature Asymptotic-Ray Certificate
+
+Date: 2026-07-22
+
+Status: rigorous first-summand order-twelve theorem on `u>=20`.
+This is not a proof of order twelve, PF-infinity, RH, or `Lambda<=0`.
+
+```text
+t^2*v_1''(t)<8000 for every mode u>=20
+dimensionless D9 floor=3333333333333333333333333329333333333333333333333333333327330000000000000000000000000000000/666666666666666666666666666667666666666666666666666666666665999999999999999999999999999999
+scaled upper=4.57333386856472003273665904999254578775542492993255764609757E+3
+scaled margin=3.42666613143527996726334095000745421224457507006744235390243E+3
+```
+
+The finite ray `2001/1000<=u<=20` is certified separately. The lower
+and compact handoff remain open.

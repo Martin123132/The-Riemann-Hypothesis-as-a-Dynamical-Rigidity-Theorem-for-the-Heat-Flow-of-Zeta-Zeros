@@ -1,0 +1,318 @@
+{
+  "kind": "jensen_window_pf_mertens_centered_bridge_vaughan_handoff",
+  "date": "2026-07-23",
+  "status": "exact trace/off-diagonal and centered Brownian-bridge Vaughan reduction with one open two-component gate",
+  "parameters": {
+    "alpha_range": "0<alpha<1",
+    "dyadic_blocks": "K=2^j",
+    "low_mode_cutoff": "R_K=ceil(sqrt(K))",
+    "vaughan_cutoffs": "1<=U_K,V_K<=K"
+  },
+  "source_anchors": [
+    "https://doi.org/10.5802/aif.2401",
+    "https://arxiv.org/abs/1503.05121",
+    "https://doi.org/10.2140/ant.2015.9.2167"
+  ],
+  "rows": [
+    {
+      "id": "mcbvh_01_tail_setup",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "For 0<alpha<1 set q_n=mu(n)n^(-1-alpha), r_N=sum_(n>N)q_n, and R_alpha=sum_(N>=1)N^alpha|r_N|^2.",
+      "proof_boundary": "These are the checked reciprocal-Mobius tail coordinates."
+    },
+    {
+      "id": "mcbvh_02_dyadic_dct",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "For dyadic K let y_j=r_(K+j-1), c_(K,r)=<y,phi_r>, and E_alpha=sum_(K dyadic)K^alphasum_(0<=r<K)|c_(K,r)|^2.",
+      "proof_boundary": "The Neumann DCT basis is that of Lemma 11.22V."
+    },
+    {
+      "id": "mcbvh_03_common_kernels",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Define h_(K,0)(n)=K^(-1/2)min((n-K)_+,K), and for 1<=r<K define h_(K,r)(K+m)=sqrt(2/K)sin(pi*r*m/K)/[2sin(pi*r/(2K))] for 1<=m<K, with zero values elsewhere.",
+      "proof_boundary": "The mean kernel includes every future dyadic block; each nonconstant kernel is supported on (K,2K)."
+    },
+    {
+      "id": "mcbvh_04_kernel_identity",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For every 0<=r<K, c_(K,r)=sum_(n>=1)mu(n)n^(-1-alpha)h_(K,r)(n).",
+      "proof_boundary": "Count the number of tails containing q_n for r=0 and use the checked sine formula for r>0."
+    },
+    {
+      "id": "mcbvh_05_analysis_operator",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Let A_alpha x have coordinates K^(alpha/2)sum_n x_n n^(-1-alpha)h_(K,r)(n) over dyadic K and 0<=r<K.",
+      "proof_boundary": "For x_n=mu(n), ||A_alpha x||_2^2=E_alpha."
+    },
+    {
+      "id": "mcbvh_06_cosine_energy_equivalence",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "R_alpha<infinity iff E_alpha<infinity.",
+      "proof_boundary": "On K<=N<2K, the weights N^alpha and K^alpha differ by at most the fixed factor 2^alpha."
+    },
+    {
+      "id": "mcbvh_07_mean_row_bound",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "With F_(K,r)(n)=n^(-1-alpha)h_(K,r)(n), ||F_(K,0)||_2^2<=[1+2^(-1-2alpha)/(1+2alpha)]K^(-2alpha).",
+      "proof_boundary": "Split K<n<=2K from n>2K and compare the latter decreasing series with its integral."
+    },
+    {
+      "id": "mcbvh_08_nonconstant_row_bound",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "For 1<=r<K, ||F_(K,r)||_2^2<=K^(-2alpha)/(4r^2).",
+      "proof_boundary": "Use sum_(m=1)^(K-1)sin^2(pi*r*m/K)=K/2 and sin(pi*r/(2K))>=r/K."
+    },
+    {
+      "id": "mcbvh_09_finite_trace",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "sum_(K dyadic)K^alpha sum_(0<=r<K)||F_(K,r)||_2^2<infinity.",
+      "proof_boundary": "Rows 7-8 give at most [1+2^(-1-2alpha)/(1+2alpha)+pi^2/24]sum_K K^(-alpha)."
+    },
+    {
+      "id": "mcbvh_10_signed_gram_expansion",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For a finite dyadic cutoff J, E_alpha(J)=D_alpha(J)+2O_alpha(J), where D is the m=n part and O=sum_(m<n)mu(m)mu(n)G_(alpha,J)(m,n) for the Gram kernel G=sum_(K<=2^J,r)K^alpha F_(K,r)(m)F_(K,r)(n).",
+      "proof_boundary": "Each finite-J row is l1, so the displayed expansion is absolutely justified before taking J to infinity."
+    },
+    {
+      "id": "mcbvh_11_offdiagonal_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "E_alpha<infinity iff sup_J O_alpha(J)<infinity.",
+      "proof_boundary": "The diagonal D_alpha(J) converges by row 9 and E_alpha(J) is a monotone nonnegative partial energy."
+    },
+    {
+      "id": "mcbvh_12_trace_class_interpretation",
+      "role": "exact_consequence",
+      "status": "available_exact",
+      "statement": "A_alpha is Hilbert-Schmidt from l2(N) to the dyadic DCT coefficient space, while the RH input mu is not in l2.",
+      "proof_boundary": "The squared Hilbert-Schmidt norm is exactly the trace in row 9; this operator fact alone does not evaluate A_alpha mu."
+    },
+    {
+      "id": "mcbvh_13_linf_operator_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "A_alpha is not bounded from l_infinity to l2.",
+      "proof_boundary": "The zero-mean first-mode sequence of Lemma 11.22W gives |x_n|=|q*_n n^(1+alpha)|<=1 but divergent output energy. It is not the Mobius sequence."
+    },
+    {
+      "id": "mcbvh_14_local_mertens_path",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "For 0<=m<K define S_(K,m)=M(K+m)-M(K), T_(K,m)=sum_(ell=1)^m mu(K+ell)(K+ell)^(-1-alpha).",
+      "proof_boundary": "Both paths start at zero and T is the weighted path from Lemma 11.22W."
+    },
+    {
+      "id": "mcbvh_15_quotient_norm",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "On K-vectors define ||[x]||_K=min_a||x-a1||_2; equivalently ||[x]||_K^2=sum_m|x_m-K^(-1)sum_j x_j|^2.",
+      "proof_boundary": "This is the Euclidean quotient norm modulo constants."
+    },
+    {
+      "id": "mcbvh_16_extended_abel_operator",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "With a_m=(K+m)^(-1-alpha), define (A_Kx)_0=a_1x_0 and (A_Kx)_m=a_1x_0+sum_(j=1)^m a_j(x_j-x_(j-1)).",
+      "proof_boundary": "For S_(K,0)=0, A_K S_K=T_K exactly."
+    },
+    {
+      "id": "mcbvh_17_constant_preservation",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "A_K(c1)=a_1 c1, so A_K induces an invertible operator on the quotient by constants.",
+      "proof_boundary": "All a_m are nonzero; the increment relation Delta(A_Kx)_m=a_m Delta x_m gives invertibility."
+    },
+    {
+      "id": "mcbvh_18_abel_operator_upper",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "||A_Kx||_2<=(2+alpha)K^(-1-alpha)||x||_2.",
+      "proof_boundary": "Use the diagonal-plus-prefix Abel matrix, a_m<=K^(-1-alpha), a_m-a_(m+1)<=(1+alpha)K^(-2-alpha), and prefix norm <=K."
+    },
+    {
+      "id": "mcbvh_19_abel_inverse",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For b_m=1/a_m, (A_K^(-1)y)_0=b_1y_0 and (A_K^(-1)y)_m=b_m y_m+sum_(j=1)^(m-1)(b_j-b_(j+1))y_j.",
+      "proof_boundary": "This is finite summation of Delta x_m=b_m Delta y_m."
+    },
+    {
+      "id": "mcbvh_20_abel_inverse_upper",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "||A_K^(-1)y||_2<=2^alpha(3+alpha)K^(1+alpha)||y||_2.",
+      "proof_boundary": "Use b_m<=(2K)^(1+alpha), b_(m+1)-b_m<=(1+alpha)(2K)^alpha, and prefix norm <=K."
+    },
+    {
+      "id": "mcbvh_21_centered_abel_equivalence",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "[2^alpha(3+alpha)]^(-1)K^(-1-alpha)||[S_K]||_K<=||[T_K]||_K<=(2+alpha)K^(-1-alpha)||[S_K]||_K.",
+      "proof_boundary": "Rows 17-20 descend to quotient norms; no DCT-commutator estimate is needed."
+    },
+    {
+      "id": "mcbvh_22_centered_dct_identity",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "||[T_K]||_K^2=sum_(r=1)^(K-1)|tau_(K,r)|^2.",
+      "proof_boundary": "This is the centered-path Parseval identity from Lemma 11.22W."
+    },
+    {
+      "id": "mcbvh_23_high_modes_summable",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "For R_K=ceil(sqrt(K)), sum_K K^alpha sum_(r>=R_K)|tau_(K,r)|^2<infinity.",
+      "proof_boundary": "For r>0, tau=-c; apply the checked high-mode bound from Lemma 11.22V."
+    },
+    {
+      "id": "mcbvh_24_centered_bridge_equivalence",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "sum_K K^alpha sum_(1<=r<R_K)|tau_(K,r)|^2<infinity iff L_alpha:=sum_K K^(-2-alpha)||[S_K]||_K^2<infinity.",
+      "proof_boundary": "Add the summable high modes, then apply the two-sided quotient estimate in row 21."
+    },
+    {
+      "id": "mcbvh_25_two_component_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "R_alpha<infinity iff M_alpha+L_alpha<infinity, where M_alpha=sum_K K^alpha|sqrt(K)r_K-tau_(K,0)|^2.",
+      "proof_boundary": "Compose row 24 with the exact two-component criterion of Lemma 11.22W."
+    },
+    {
+      "id": "mcbvh_26_cofinal_rh_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "For any fixed cofinal alpha_j->0, RH iff M_(alpha_j)<infinity and L_(alpha_j)<infinity for every j.",
+      "proof_boundary": "This is a criterion only; neither component is estimated."
+    },
+    {
+      "id": "mcbvh_27_pairwise_variance",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "||[S_K]||_K^2=K^(-1)sum_(0<=i<j<K)|S_(K,j)-S_(K,i)|^2.",
+      "proof_boundary": "Use the standard finite variance/pairwise-distance identity."
+    },
+    {
+      "id": "mcbvh_28_brownian_bridge_kernel",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "Writing x_i=mu(K+i), 1<=i<K, ||[S_K]||_K^2=sum_(i,j)x_i x_j B_K(i,j), with B_K(i,j)=min(i,j)-ij/K=min(i,j)(K-max(i,j))/K.",
+      "proof_boundary": "The kernel is the discrete Brownian-bridge Green matrix L^*(I-K^(-1)11^T)L."
+    },
+    {
+      "id": "mcbvh_29_bridge_diagonal_offdiagonal",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "||[S_K]||_K^2=Delta_K+2C_K, where Delta_K=sum_(i=1)^(K-1)mu(K+i)^2 i(K-i)/K and C_K=sum_(h=1)^(K-2)sum_(i=1)^(K-1-h)mu(K+i)mu(K+i+h)i(K-i-h)/K.",
+      "proof_boundary": "Separate i=j and write j=i+h."
+    },
+    {
+      "id": "mcbvh_30_bridge_diagonal_bound",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "0<=Delta_K<=(K^2-1)/6 and sum_K K^(-2-alpha)Delta_K<infinity.",
+      "proof_boundary": "Use |mu|<=1 and sum_(i=1)^(K-1)i(K-i)/K=(K^2-1)/6."
+    },
+    {
+      "id": "mcbvh_31_bridge_offdiagonal_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "L_alpha<infinity iff sup_J sum_(K dyadic<=2^J)K^(-2-alpha)C_K<infinity.",
+      "proof_boundary": "The diagonal series converges by row 30 and the partial bridge energies are nonnegative and monotone."
+    },
+    {
+      "id": "mcbvh_32_vaughan_source",
+      "role": "literature_guard",
+      "status": "source_backed",
+      "statement": "Green and Tao, Lemma 4.1, give the finite Vaughan Type I/II identity for sum_(K<n<=2K)mu(n)f(n).",
+      "proof_boundary": "Only the exact divisor identity is imported; no bound for the present shifted-Mobius tests is attributed to the source."
+    },
+    {
+      "id": "mcbvh_33_shifted_bridge_test",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "For 1<=h<=K-2 and i=n-K define g_(K,h)(n)=mu(n+h)i(K-i-h)/K when 1<=i<=K-1-h, and zero otherwise; |g_(K,h)|<=K/4.",
+      "proof_boundary": "Then C_K=sum_h sum_(K<n<=2K)mu(n)g_(K,h)(n)."
+    },
+    {
+      "id": "mcbvh_34_vaughan_coefficients",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Choose 1<=U_K,V_K<=K and set a_(K,d)=sum_(bc=d,b<=U_K,c<=V_K)mu(b)mu(c), b_(K,d)=sum_(c|d,c>V_K)mu(c).",
+      "proof_boundary": "These are the coefficients in the finite Vaughan identity."
+    },
+    {
+      "id": "mcbvh_35_exact_vaughan_handoff",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "With TI_K=sum_h sum_(d<=U_KV_K)a_(K,d)sum_(K/d<w<=2K/d)g_(K,h)(dw), and the corresponding TII_K=sum_h sum_(V_K<d<=2K/U_K)b_(K,d)sum_(max(U_K,K/d)<w<=2K/d)mu(w)g_(K,h)(dw), one has C_K=-TI_K+TII_K.",
+      "proof_boundary": "Apply Vaughan termwise in h; invalid endpoint values vanish by the definition of g."
+    },
+    {
+      "id": "mcbvh_36_signed_type_i_ii_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "L_alpha<infinity iff sup_J sum_(K<=2^J)K^(-2-alpha)(-TI_K+TII_K)<infinity.",
+      "proof_boundary": "Substitute row 35 into the exact off-diagonal criterion."
+    },
+    {
+      "id": "mcbvh_37_separate_bound_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "The target in row 36 retains the signed Type I/II difference; replacing it by |TI_K|+|TII_K| is not an equivalent reduction.",
+      "proof_boundary": "The algebraic cancellation in Vaughan is part of the original Mobius sum and no absorbable separate bound is proved."
+    },
+    {
+      "id": "mcbvh_38_averaged_chowla_guard",
+      "role": "literature_guard",
+      "status": "source_backed",
+      "statement": "Averaged Chowla gives the natural unweighted average o(K^2) after collapsing the redundant shift average, but the Brownian-bridge weight is O(K), leaving o(K^3), one full power above the K^(2+epsilon) scale required here.",
+      "proof_boundary": "This is exponent bookkeeping for the published averaged theorem, not a lower bound on C_K or a novelty claim."
+    },
+    {
+      "id": "mcbvh_39_mean_and_scope_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "The centered bridge removes constants and therefore does not control M_alpha; both components in row 25 remain necessary. The reduction concerns R_alpha, not the full Burnol energy Q.",
+      "proof_boundary": "No centered-path estimate may be promoted to RH without the affine mean series or an independently sufficient full-Q theorem."
+    },
+    {
+      "id": "mcbvh_40_open_two_component_gate",
+      "role": "open_target",
+      "status": "open_target",
+      "statement": "For every alpha in one fixed cofinal sequence, prove both the affine mean summability M_alpha<infinity and the signed Brownian-bridge/Vaughan criterion in row 36.",
+      "proof_boundary": "No Type I/II power gain, mean estimate, full Burnol bound, RH, PF-infinity, or Lambda<=0 is proved."
+    }
+  ],
+  "audit": {
+    "row_count": 40,
+    "exact_reduction_count": 34,
+    "literature_guard_count": 2,
+    "proof_guard_count": 3,
+    "open_two_component_gate_count": 1,
+    "global_gram_diagonal_summable": true,
+    "analysis_operator_hilbert_schmidt_on_l2": true,
+    "analysis_operator_bounded_linf_to_l2": false,
+    "centered_abel_quotient_equivalence_proved": true,
+    "brownian_bridge_kernel_proved": true,
+    "bridge_vaughan_handoff_proved": true,
+    "averaged_chowla_closes_bridge": false,
+    "signed_type_i_ii_gain_proved": false,
+    "affine_mean_series_proved": false,
+    "full_burnol_bound_proved": false,
+    "rh_proved": false,
+    "pf_infinity_proved": false,
+    "lambda_le_zero_proved": false
+  }
+}

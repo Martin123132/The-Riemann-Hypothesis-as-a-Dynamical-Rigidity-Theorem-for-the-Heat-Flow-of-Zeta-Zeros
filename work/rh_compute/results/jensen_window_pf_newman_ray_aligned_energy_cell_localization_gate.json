@@ -1,0 +1,300 @@
+{
+  "kind": "jensen_window_pf_newman_ray_aligned_energy_cell_localization_gate",
+  "date": "2026-07-29",
+  "status": "exact cell-local energy criteria, flux telescoping, and current-time endpoint-ownership obstruction",
+  "proof_boundary": "This artifact proves the cell-local balance, local contact floors, one-sided threshold, exact internal-flux telescoping, global minimum-threshold criterion, vertex-cover ownership condition, and source ownership audit. It does not prove a cofinal interior anchor registry, any strict Xi local or global bulk upper budget, the corrected finite-main C1 lower bound, Q209, the cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or a Clay-prize conclusion.",
+  "source_audit": {
+    "source_sha256": {
+      "energy_current": "a52f81335963dd2bacbbe1c72aa75df573d678b1f4a7c7934b4fbcb8ce2969b3",
+      "endpoint_margin": "fa5ad158b3ccce77cf2018996ae90c89aaf10b46cb7c442c25c6e37f123b8f59",
+      "dominant_global": "9f5d8d208e84533241e7c4de69d7646e991b99406b56a687e2976741bd98bf3e",
+      "oscillatory_handoff": "65da15cd562e3b7ef9cc3e0fb448d1cc8c547c928e131a05e1e5ca06ebb148a5",
+      "critical_c1": "032831ee9e5b271ad102ff006705fb401cd2bf574e4c59e1011258e4c0e6c388",
+      "successor_lemma": "beedc9cf101ab6d1eb9c9778bd05c29b1a4a2895e9eec6425f05fbd45ad0bae6",
+      "finite_transport": "6291b7de03bdd496a862a9b5dde695bd52770c2b8297c9147def863118afbc4e",
+      "q208_bottom": "35524fb565fbc878b7ce90f12b3dad40babe96895c27c67a1af0082cbf2d77a8",
+      "q208_top": "c02d45aa4bc4c90991a262a8402d1c90c92b7939c93064799b5180b4dd4bd016"
+    },
+    "outer_stage_uniform_anchors": [
+      {
+        "node": "x_0=38",
+        "margin": "sqrt(E_pf(t,38))>=m_(L,j)>0",
+        "time_domain": "t_(j+1)<=t<=t_j, j>=25"
+      },
+      {
+        "node": "x_N=R_j",
+        "margin": "sqrt(E_pf(t,R_j))>(99/1000)A_t(R_j)>0",
+        "time_domain": "t_(j+1)<=t<=t_j, j>=25"
+      }
+    ],
+    "finite_phase_sources": {
+      "q208_bottom": {
+        "time": "1/1040",
+        "x_domain": [
+          "0",
+          "246"
+        ],
+        "cells": 492,
+        "unresolved_boxes": 0
+      },
+      "q208_top": {
+        "time": "1/5",
+        "x_domain": [
+          "0",
+          "246"
+        ],
+        "cells": 492,
+        "unresolved_boxes": 0
+      },
+      "q207_q208_transport": {
+        "instances": 1,
+        "panels": 525,
+        "x_cover": [
+          "38",
+          "245"
+        ]
+      }
+    },
+    "cofinal_internal_anchor_registry": false,
+    "inherited_boundary": "The sources own two cofinal outer endpoints and several finite fixed-time paths, but no stage-uniform current-time anchor set meeting every bounded interior cell."
+  },
+  "exact": {
+    "partition": {
+      "nodes": "38=x_0<x_1<...<x_N=R_j",
+      "cells": "I_k=[x_(k-1),x_k], 1<=k<=N",
+      "widths": "h_k=x_k-x_(k-1)>0",
+      "endpoint_norms": "e_i(t)=sqrt(E_pf(t,x_i))=||(H_t,s_pf H_(t,x))(x_i)||_2",
+      "certified_margins": "0<=m_i(t)<=e_i(t)"
+    },
+    "local_balance": {
+      "definition": "D_k(t)=d/dt integral_(x_(k-1))^(x_k) E_pf dx+2[J_pf(t,x_k)-J_pf(t,x_(k-1))]",
+      "identity": "D_k(t)=2 integral_(I_k) B_pf(t,x) dx>=0",
+      "reason": "B_pf>=|partial_x V_pf|^2>=0, V_pf=(H_t,s_pf H_(t,x))"
+    },
+    "cell_contact_floor": {
+      "exact": "V_pf(t,c)=0 in I_k => D_k(t)>=2[e_(k-1)(t)+e_k(t)]^2/h_k",
+      "certified": "V_pf(t,c)=0 in I_k => D_k(t)>=T_k(t), T_k=2[m_(k-1)(t)+m_k(t)]^2/h_k",
+      "one_sided": "m_(k-1)>0, m_k=0 => T_k=2m_(k-1)^2/h_k; the right-sided analogue is identical",
+      "minimizer": "min_(0<u<h) [e_L^2/u+e_R^2/(h-u)]=(e_L+e_R)^2/h"
+    },
+    "local_criterion": {
+      "statement": "If D_k(t)<T_k(t) for every k, then V_pf(t,x) has no zero on [38,R_j].",
+      "input": "Each local numerator needs either its two boundary fluxes and energy derivative, or a direct source upper bound for the local bulk."
+    },
+    "telescoping": {
+      "identity": "sum_(k=1)^N D_k(t)=d/dt integral_38^R_j E_pf dx+2[J_pf(t,R_j)-J_pf(t,38)]=2 integral_38^R_j B_pf dx=:D_total(t)",
+      "cancellation": "Every internal current J_pf(t,x_k), 1<=k<N, appears once with sign + and once with sign -.",
+      "nonnegative_cells": "D_k(t)>=0 for every k"
+    },
+    "global_minimum_criterion": {
+      "statement": "If T_k(t)>0 for every k and D_total(t)<min_(1<=k<=N) T_k(t), then V_pf(t,x) has no zero on [38,R_j].",
+      "proof": "A contact in I_r gives D_r>=T_r, while D_total=sum_k D_k>=D_r because every D_k>=0.",
+      "anchor_condition": "T_k>0 exactly when m_(k-1)+m_k>0; hence the certified node set must meet every partition edge."
+    },
+    "sum_threshold_guard": {
+      "false_shortcut": "D_total<sum_k T_k does not exclude a contact.",
+      "exact_budget_counterexample": "T_1=1, T_2=100, D_1=1, D_2=0 gives D_total=1<T_1+T_2=101 while D_1>=T_1.",
+      "boundary": "This is an exact implication counterexample for the budget logic, not a claimed realization by the Xi field."
+    },
+    "anchor_graph": {
+      "graph": "The partition is the path graph on nodes x_0,...,x_N; owned positive margins must form a vertex cover.",
+      "current_uniform_set": "{x_0=38,x_N=R_j}",
+      "consequence": "The two owned outer nodes cover both cells only when N<=2. For N>=3 at least one interior edge has neither endpoint owned; bounded-width localization therefore needs a cofinal interior anchor skeleton."
+    },
+    "flux_localization_tradeoff": {
+      "local_side": "Keeping the thresholds cellwise preserves their 1/h_k strength but also keeps the internal fluxes in D_k.",
+      "summed_side": "Summing cancels every internal flux but compresses all contact information to the weakest threshold min_k T_k.",
+      "conclusion": "Telescoping is exact bookkeeping, not a substitute for current-time interior endpoint ownership."
+    },
+    "ownership_audit": {
+      "compact": "At x=38 and 0<t<=1/5, the compact certificate gives |J_t'(38)|>20577/350 and the inherited margin sqrt(E_pf(t,38))>=m_(L,j)>0.",
+      "dominant": "The dominant theorem proves strict normalized Laguerre curvature on tL>=25. The endpoint gate exposes the quantitative margin at x=R_j. Uniformly over a descendant collar, the dominant region shrinks to x=R_j at the bottom time, so it does not populate a bounded-cell skeleton through the old interior.",
+      "oscillatory": "For each epsilon>0 the oscillatory theorem gives an existential L_epsilon above c_*+epsilon, c_*=4911678521/1933561194, but no practical L_epsilon or effective cofinal endpoint-margin registry.",
+      "critical_c1": "For L>=50 and 0<tL<25, the corrected global C1 remainder satisfies r^2+(r'/L)^2<32000000 exp(-3L/2), but the finite-main lower bound T_L[J]>32000000 exp(-3L/2) remains open.",
+      "finite_phase": "The Q208 top and bottom certificates own fixed paths t=1/5 and t=1/1040 on 0<=x<=246. The Q207-to-Q208 transport owns one finite successor on 38<=x<=245.",
+      "conditional_successor": "The all-stage phase-cell lemma would transfer margins if delta_j M_(j,k)<d_(j,k) on every cell, but that Xi antecedent is precisely open."
+    },
+    "nonpromotion": {
+      "snapshot": "A finite fixed-time phase chain cannot be reused as a current-time cofinal anchor registry.",
+      "positivity": "Qualitative strict positivity with an ineffective height does not provide the effective positive m_i needed by the minimum-threshold criterion.",
+      "partition": "Choosing more cells improves 1/h_k only after supplying more certified anchors; partition refinement alone proves nothing pointwise."
+    },
+    "route_decision": "Retain the local and globally telescoped criteria as exact conditional lemmas, but park the energy-localization route. The audited sources do not supply a cofinal current-time interior anchor vertex cover, and attempting to transport one reintroduces the open all-j phase-cell estimate. Return to the critical contact-normal C1 arithmetic target.",
+    "open_handoff": "Prove the corrected finite-main inequality T_L[J]>32000000 exp(-3L/2) for L>=50 and 0<tL<25, with cutoff transitions retained. First derive a cutoff-stable phase/amplitude decomposition of T_L[J] and identify the smallest signed cancellation statement that would force the lower bound; do not divide by the unknown first-jet norm."
+  },
+  "rows": [
+    {
+      "id": "raecl_01_partition",
+      "role": "exact_geometry",
+      "readiness": "proved_exact",
+      "claim": "Fix an arbitrary finite partition of the old descendant collar.",
+      "formula": "38=x_0<x_1<...<x_N=R_j; I_k=[x_(k-1),x_k], 1<=k<=N; h_k=x_k-x_(k-1)>0",
+      "proof_boundary": "No regular spacing or numerical mesh is assumed."
+    },
+    {
+      "id": "raecl_02_local_balance",
+      "role": "exact_identity",
+      "readiness": "proved_exact",
+      "claim": "The energy/current identity localizes exactly to every cell.",
+      "formula": "D_k(t)=d/dt integral_(x_(k-1))^(x_k) E_pf dx+2[J_pf(t,x_k)-J_pf(t,x_(k-1))]; D_k(t)=2 integral_(I_k) B_pf(t,x) dx>=0",
+      "proof_boundary": "B_pf>=|partial_x V_pf|^2>=0, V_pf=(H_t,s_pf H_(t,x))"
+    },
+    {
+      "id": "raecl_03_cell_nonnegativity",
+      "role": "exact_inequality",
+      "readiness": "proved_exact",
+      "claim": "Every local energy/current numerator is nonnegative.",
+      "formula": "D_k(t)=2 integral_(I_k) B_pf(t,x) dx>=0",
+      "proof_boundary": "This uses the proved outer-domain bulk coercivity."
+    },
+    {
+      "id": "raecl_04_two_sided_contact_floor",
+      "role": "exact_inequality",
+      "readiness": "proved_exact",
+      "claim": "A contact in one cell forces a two-sided local bulk floor.",
+      "formula": "V_pf(t,c)=0 in I_k => D_k(t)>=2[e_(k-1)(t)+e_k(t)]^2/h_k",
+      "proof_boundary": "min_(0<u<h) [e_L^2/u+e_R^2/(h-u)]=(e_L+e_R)^2/h"
+    },
+    {
+      "id": "raecl_05_certified_threshold",
+      "role": "exact_composition",
+      "readiness": "available_exact",
+      "claim": "Certified endpoint margins give a usable cell threshold.",
+      "formula": "V_pf(t,c)=0 in I_k => D_k(t)>=T_k(t), T_k=2[m_(k-1)(t)+m_k(t)]^2/h_k",
+      "proof_boundary": "The margins must be derived independently of contact exclusion."
+    },
+    {
+      "id": "raecl_06_one_sided_threshold",
+      "role": "exact_composition",
+      "readiness": "available_exact",
+      "claim": "One positive endpoint anchor is enough to make a cell threshold positive.",
+      "formula": "m_(k-1)>0, m_k=0 => T_k=2m_(k-1)^2/h_k; the right-sided analogue is identical",
+      "proof_boundary": "This is weaker than the two-sided floor but still exact."
+    },
+    {
+      "id": "raecl_07_local_no_contact",
+      "role": "conditional_criterion",
+      "readiness": "not_ready_to_apply",
+      "claim": "Strictly beating every local threshold excludes all contacts.",
+      "formula": "If D_k(t)<T_k(t) for every k, then V_pf(t,x) has no zero on [38,R_j].",
+      "proof_boundary": "Each local numerator needs either its two boundary fluxes and energy derivative, or a direct source upper bound for the local bulk."
+    },
+    {
+      "id": "raecl_08_flux_telescoping",
+      "role": "exact_identity",
+      "readiness": "proved_exact",
+      "claim": "All internal currents cancel when the cell balances are summed.",
+      "formula": "sum_(k=1)^N D_k(t)=d/dt integral_38^R_j E_pf dx+2[J_pf(t,R_j)-J_pf(t,38)]=2 integral_38^R_j B_pf dx=:D_total(t)",
+      "proof_boundary": "Every internal current J_pf(t,x_k), 1<=k<N, appears once with sign + and once with sign -."
+    },
+    {
+      "id": "raecl_09_global_minimum_criterion",
+      "role": "conditional_criterion",
+      "readiness": "not_ready_to_apply",
+      "claim": "The summed numerator can exclude contact only below the weakest cell threshold.",
+      "formula": "If T_k(t)>0 for every k and D_total(t)<min_(1<=k<=N) T_k(t), then V_pf(t,x) has no zero on [38,R_j].",
+      "proof_boundary": "A contact in I_r gives D_r>=T_r, while D_total=sum_k D_k>=D_r because every D_k>=0."
+    },
+    {
+      "id": "raecl_10_sum_threshold_guard",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "The sum of cell thresholds is not a valid global contact threshold.",
+      "formula": "T_1=1, T_2=100, D_1=1, D_2=0 gives D_total=1<T_1+T_2=101 while D_1>=T_1.",
+      "proof_boundary": "This is an exact implication counterexample for the budget logic, not a claimed realization by the Xi field."
+    },
+    {
+      "id": "raecl_11_anchor_vertex_cover",
+      "role": "exact_graph_reduction",
+      "readiness": "proved_exact",
+      "claim": "Positive owned endpoint margins must meet every partition cell.",
+      "formula": "T_k>0 exactly when m_(k-1)+m_k>0; hence the certified node set must meet every partition edge.",
+      "proof_boundary": "The partition is the path graph on nodes x_0,...,x_N; owned positive margins must form a vertex cover."
+    },
+    {
+      "id": "raecl_12_outer_anchor_obstruction",
+      "role": "source_audit",
+      "readiness": "not_ready_to_apply",
+      "claim": "The two cofinal outer anchors do not cover a bounded-width interior partition.",
+      "formula": "The two owned outer nodes cover both cells only when N<=2. For N>=3 at least one interior edge has neither endpoint owned; bounded-width localization therefore needs a cofinal interior anchor skeleton.",
+      "proof_boundary": "This concerns currently audited stage-uniform ownership only."
+    },
+    {
+      "id": "raecl_13_flux_localization_tradeoff",
+      "role": "exact_route_guard",
+      "readiness": "guard_validated",
+      "claim": "Flux cancellation and strong local thresholds cannot be obtained for free at the same time.",
+      "formula": "Telescoping is exact bookkeeping, not a substitute for current-time interior endpoint ownership.",
+      "proof_boundary": "Keeping the thresholds cellwise preserves their 1/h_k strength but also keeps the internal fluxes in D_k. Summing cancels every internal flux but compresses all contact information to the weakest threshold min_k T_k."
+    },
+    {
+      "id": "raecl_14_compact_ownership",
+      "role": "source_audit",
+      "readiness": "certified",
+      "claim": "The compact source owns the left outer node at every active time.",
+      "formula": "At x=38 and 0<t<=1/5, the compact certificate gives |J_t'(38)|>20577/350 and the inherited margin sqrt(E_pf(t,38))>=m_(L,j)>0.",
+      "proof_boundary": "Inherited from the checked endpoint-margin gate."
+    },
+    {
+      "id": "raecl_15_dominant_ownership",
+      "role": "source_audit",
+      "readiness": "certified_boundary_only",
+      "claim": "The dominant source owns the moving right end but not a uniform old-interior skeleton.",
+      "formula": "The dominant theorem proves strict normalized Laguerre curvature on tL>=25. The endpoint gate exposes the quantitative margin at x=R_j. Uniformly over a descendant collar, the dominant region shrinks to x=R_j at the bottom time, so it does not populate a bounded-cell skeleton through the old interior.",
+      "proof_boundary": "At the collar bottom the dominant tail begins at R_j."
+    },
+    {
+      "id": "raecl_16_oscillatory_effectivity",
+      "role": "source_audit",
+      "readiness": "not_effective_for_grid",
+      "claim": "The oscillatory theorem is asymptotic and does not expose effective cell anchors.",
+      "formula": "For each epsilon>0 the oscillatory theorem gives an existential L_epsilon above c_*+epsilon, c_*=4911678521/1933561194, but no practical L_epsilon or effective cofinal endpoint-margin registry.",
+      "proof_boundary": "No practical L_epsilon is present in the source theorem."
+    },
+    {
+      "id": "raecl_17_critical_c1_target",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "The critical remainder is controlled, but the corrected finite-main first-jet floor is open.",
+      "formula": "For L>=50 and 0<tL<25, the corrected global C1 remainder satisfies r^2+(r'/L)^2<32000000 exp(-3L/2), but the finite-main lower bound T_L[J]>32000000 exp(-3L/2) remains open.",
+      "proof_boundary": "This is the live arithmetic transversality obligation."
+    },
+    {
+      "id": "raecl_18_finite_phase_ownership",
+      "role": "source_audit",
+      "readiness": "finite_only",
+      "claim": "The rigorous phase-cell margins currently cover fixed finite paths and one successor.",
+      "formula": "The Q208 top and bottom certificates own fixed paths t=1/5 and t=1/1040 on 0<=x<=246. The Q207-to-Q208 transport owns one finite successor on 38<=x<=245.",
+      "proof_boundary": "They do not quantify every later descendant collar."
+    },
+    {
+      "id": "raecl_19_successor_and_snapshot_guard",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "Finite snapshots and a conditional successor lemma do not provide a cofinal anchor registry.",
+      "formula": "The all-stage phase-cell lemma would transfer margins if delta_j M_(j,k)<d_(j,k) on every cell, but that Xi antecedent is precisely open. A finite fixed-time phase chain cannot be reused as a current-time cofinal anchor registry.",
+      "proof_boundary": "Qualitative strict positivity with an ineffective height does not provide the effective positive m_i needed by the minimum-threshold criterion. Choosing more cells improves 1/h_k only after supplying more certified anchors; partition refinement alone proves nothing pointwise."
+    },
+    {
+      "id": "raecl_20_route_decision",
+      "role": "route_decision",
+      "readiness": "available_exact",
+      "claim": "Park localization and return to the corrected finite-main C1 target.",
+      "formula": "Prove the corrected finite-main inequality T_L[J]>32000000 exp(-3L/2) for L>=50 and 0<tL<25, with cutoff transitions retained. First derive a cutoff-stable phase/amplitude decomposition of T_L[J] and identify the smallest signed cancellation statement that would force the lower bound; do not divide by the unknown first-jet norm.",
+      "proof_boundary": "Retain the local and globally telescoped criteria as exact conditional lemmas, but park the energy-localization route. The audited sources do not supply a cofinal current-time interior anchor vertex cover, and attempting to transport one reintroduces the open all-j phase-cell estimate. Return to the critical contact-normal C1 arithmetic target."
+    }
+  ],
+  "summary": {
+    "rows": 20,
+    "exact_local_balances": 2,
+    "exact_contact_floors": 2,
+    "conditional_no_contact_criteria": 2,
+    "outer_stage_uniform_anchors": 2,
+    "cofinal_internal_anchor_registries": 0,
+    "finite_successor_instances": 1,
+    "nonpromotion_guards": 2,
+    "open_corrected_main_targets": 1,
+    "pointwise_contact_exclusions": 0,
+    "cofinal_descendant_theorem": false
+  }
+}

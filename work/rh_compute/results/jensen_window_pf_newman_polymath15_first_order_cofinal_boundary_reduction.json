@@ -1,0 +1,158 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_cofinal_boundary_reduction",
+  "date": "2026-07-26",
+  "status": "exact first-order cofinal boundary reduction with improved jet budget; not a boundary theorem, Lambda<=0, or RH",
+  "proof_boundary": "This artifact proves the first-order vector remainder budget, boundary-Rouche transfer condition, exponential improvement over the old budget, ray-schedule right-edge closure, and exact bottom q split. It also proves that the same boundary margin joins adjacent cutoff lifts by a nonvanishing overlap homotopy. It does not prove the q>=1 boundary margin, q<1 multiplicity-compatible margin, one-sided proxy phase bound, bounded-L shoulders, the all-stage cofinal boundary theorem, contact exclusion, Lambda<=0, RH, PF-infinity, or a Clay-prize result.",
+  "builder_sha256": "92fea56830cd57d675757a7f5594003950937a67c5b02536b5faafa4e8fb3aa8",
+  "source_sha256": {
+    "global_remainder": "ed3d6f75c59c14bd0d3c53bbbc946a1c6719facd899d6524c35c3edfa48ca577",
+    "signed_contact": "89d20ce680d02b11153ea73b92f16368e7b29783be82147a0f5385f840e275ef",
+    "boundary_degree": "a0ba27d354be3bb9e0f832b3c4cecc0c62b2ca871a6969a1a56818303f15fe66",
+    "ray_schedule": "ea478b0396559ceaa5c6fc6002bf9518704f8395bb430feae284ab1820d5d591"
+  },
+  "exact": {
+    "normalizer": "H=A_t*Z, A_t>0; every positive first-jet scale and the normalizer derivative shear preserve boundary winding and local contact index",
+    "vector_remainder": "V_r=(r_[1],r_[1],x/L), ||V_r||_2^2<50000000000*exp(-5L/2)",
+    "boundary_rouche": "If V_J=(J_[1],J_[1],x/L) satisfies J_[1]^2+(J_[1],x/L)^2>50000000000*exp(-5L/2) pointwise on a closed boundary, then V_J+s*V_r is nonzero there for 0<=s<=1 and wind(V_Z)=wind(V_J)",
+    "complex_half": "For J_[1]=2X_[1] and J_[1],x=2U_[1], it is enough that X_[1]^2+(U_[1]/L)^2>12500000000*exp(-5L/2)",
+    "old_new_ratio": "Relative to the old 32000000*exp(-3L/2) squared budget, the new/old ratio is (3125/2)*exp(-L), decreasing in L; at L>=50 it is <5*10^-19",
+    "ray_schedule": "t_j=25/(100+j), L_j=101+j, R_j=4*pi*exp(L_j), P_j=[t_j,1/2]x[0,R_j]",
+    "right_edge": "On x=R_j and t_j<=t<=1/2, tL_j>=25*(101+j)/(100+j)>25; the dominant-saddle theorem makes this boundary contact-free",
+    "new_strip": "For S_j=[t_(j+1),1/2]x[R_j,R_(j+1)], tL>=t_(j+1)L_j=25, so every new strip is already closed",
+    "bottom_split": "On the bottom t=t_j, q=2t_jL^2=50L^2/(100+j); q<1 iff L<sqrt((100+j)/50), and q>=1 beyond that point",
+    "outer_bottom": "On a fixed bottom, c=t_jL; every fixed c>4911678521/1933561194 is asymptotically closed after the oscillatory-zeta handoff, subject to its epsilon-dependent finite shoulder",
+    "adjacent_value": "On a doubled cutoff collar, the two adjacent first-order lifts satisfy |Delta J_[1]|<20000*exp(-5L/4)",
+    "adjacent_derivative": "Cauchy on radius 1/L and |partial_x log A_t|<L/2 give |partial_x Delta J_[1]|<30000*L*exp(-5L/4)",
+    "adjacent_vector": "||V_(J,N+1)-V_(J,N)||_2^2<1300000000*exp(-5L/2)=(13/500)*50000000000*exp(-5L/2)",
+    "continuity_homotopy": "If the standard boundary margin ||V_(J,N)||_2^2>50000000000*exp(-5L/2) holds, then V_(J,N)+s*(V_(J,N+1)-V_(J,N)) is nonzero for 0<=s<=1; the local cutoff lifts therefore join continuously without a separate arithmetic theorem",
+    "winding_obligation": "Boundary nonvanishing transfers winding but does not determine it; because the transferred contact degree is a nonnegative integer, it is enough to prove wind(V_J)<1 on every successor boundary",
+    "cofinal_handoff": "The ray-aligned P_0 has zero winding because t_0=1/4>1/5>=Lambda; Q208 remains a compact calibration. For every successor, prove the first-order boundary domination and continuous one-sided phase bound only on its boundary; the same-sign positive contact index in the standard (x,t) orientation then excludes all interior contacts",
+    "open_split": "The remaining proof work is one-dimensional but has three pieces: the q>=1 critical bottom arc, a multiplicity-compatible q<1 bottom arc, and finite bounded-L/epsilon shoulders, together with the winding computation"
+  },
+  "audit": {
+    "ratio_constant": "3125/2",
+    "rational_L50_upper": "156250000000000000000000000000000000000000000000000000/369988485035126972924700782451696644186473100389722973815184405301748249",
+    "decimal_L50_upper": "4.223104402429321692e-19"
+  },
+  "rows": [
+    {
+      "id": "np15f1cbr_01_orientation",
+      "role": "certified_input",
+      "readiness": "available_exact",
+      "claim": "Positive normalization preserves boundary degree.",
+      "formula": "H=A_t*Z, A_t>0; every positive first-jet scale and the normalizer derivative shear preserve boundary winding and local contact index",
+      "proof_boundary": "Imported from the checked cofinal degree gate."
+    },
+    {
+      "id": "np15f1cbr_02_vector_budget",
+      "role": "proved_composition",
+      "readiness": "available_asymptotic",
+      "claim": "The first-order C1 residual has a squared jet budget.",
+      "formula": "V_r=(r_[1],r_[1],x/L), ||V_r||_2^2<50000000000*exp(-5L/2)",
+      "proof_boundary": "Only on L>=50 and 0<tL<=25."
+    },
+    {
+      "id": "np15f1cbr_03_rouche",
+      "role": "proved_composition",
+      "readiness": "available_asymptotic",
+      "claim": "Strict first-order boundary domination transfers winding.",
+      "formula": "If V_J=(J_[1],J_[1],x/L) satisfies J_[1]^2+(J_[1],x/L)^2>50000000000*exp(-5L/2) pointwise on a closed boundary, then V_J+s*V_r is nonzero there for 0<=s<=1 and wind(V_Z)=wind(V_J)",
+      "proof_boundary": "Conditional on the displayed strict boundary margin."
+    },
+    {
+      "id": "np15f1cbr_04_complex_half",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The boundary target has an equivalent complex-half form.",
+      "formula": "For J_[1]=2X_[1] and J_[1],x=2U_[1], it is enough that X_[1]^2+(U_[1]/L)^2>12500000000*exp(-5L/2)",
+      "proof_boundary": "Exact factor-four conversion."
+    },
+    {
+      "id": "np15f1cbr_05_gain",
+      "role": "exact_bound",
+      "readiness": "available_exact",
+      "claim": "The first-order peel improves the old boundary budget exponentially.",
+      "formula": "Relative to the old 32000000*exp(-3L/2) squared budget, the new/old ratio is (3125/2)*exp(-L), decreasing in L; at L>=50 it is <5*10^-19",
+      "proof_boundary": "Exact rational comparison using e>27/10."
+    },
+    {
+      "id": "np15f1cbr_06_schedule",
+      "role": "exact_definition",
+      "readiness": "available_exact",
+      "claim": "The ray-aligned rectangles form a cofinal boundary family.",
+      "formula": "t_j=25/(100+j), L_j=101+j, R_j=4*pi*exp(L_j), P_j=[t_j,1/2]x[0,R_j]",
+      "proof_boundary": "Uses t_j tending to zero and R_j tending to infinity."
+    },
+    {
+      "id": "np15f1cbr_07_right_edge",
+      "role": "proved_composition",
+      "readiness": "available_asymptotic",
+      "claim": "Every right edge lies in the proved dominant-saddle region.",
+      "formula": "On x=R_j and t_j<=t<=1/2, tL_j>=25*(101+j)/(100+j)>25; the dominant-saddle theorem makes this boundary contact-free; For S_j=[t_(j+1),1/2]x[R_j,R_(j+1)], tL>=t_(j+1)L_j=25, so every new strip is already closed",
+      "proof_boundary": "L_j>=101 and the checked tL>=25 theorem."
+    },
+    {
+      "id": "np15f1cbr_08_bottom_split",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "Every bottom edge has an exact parabolic/frequency split.",
+      "formula": "On the bottom t=t_j, q=2t_jL^2=50L^2/(100+j); q<1 iff L<sqrt((100+j)/50), and q>=1 beyond that point",
+      "proof_boundary": "Pure schedule algebra."
+    },
+    {
+      "id": "np15f1cbr_09_outer_handoff",
+      "role": "proved_composition",
+      "readiness": "available_asymptotic",
+      "claim": "Fixed outer bottom rays are already closed asymptotically.",
+      "formula": "On a fixed bottom, c=t_jL; every fixed c>4911678521/1933561194 is asymptotically closed after the oscillatory-zeta handoff, subject to its epsilon-dependent finite shoulder",
+      "proof_boundary": "Does not close c=c_* or finite L_epsilon shoulders."
+    },
+    {
+      "id": "np15f1cbr_10_frequency_bottom",
+      "role": "open_theorem_target",
+      "readiness": "open",
+      "claim": "The corrected first-order proxy must dominate on the live q>=1 bottom arc.",
+      "formula": "For J_[1]=2X_[1] and J_[1],x=2U_[1], it is enough that X_[1]^2+(U_[1]/L)^2>12500000000*exp(-5L/2)",
+      "proof_boundary": "Open Xi-specific phase-critical-value theorem."
+    },
+    {
+      "id": "np15f1cbr_11_parabolic_bottom",
+      "role": "open_theorem_target",
+      "readiness": "open",
+      "claim": "The q<1 bottom arc needs multiplicity-compatible control.",
+      "formula": "On the bottom t=t_j, q=2t_jL^2=50L^2/(100+j); q<1 iff L<sqrt((100+j)/50), and q>=1 beyond that point; The remaining proof work is one-dimensional but has three pieces: the q>=1 critical bottom arc, a multiplicity-compatible q<1 bottom arc, and finite bounded-L/epsilon shoulders, together with the winding computation",
+      "proof_boundary": "Open; no endpoint-simplicity floor is imposed."
+    },
+    {
+      "id": "np15f1cbr_12_continuity",
+      "role": "proved_composition",
+      "readiness": "available_asymptotic",
+      "claim": "The standard boundary margin automatically joins adjacent cutoff lifts.",
+      "formula": "On a doubled cutoff collar, the two adjacent first-order lifts satisfy |Delta J_[1]|<20000*exp(-5L/4); Cauchy on radius 1/L and |partial_x log A_t|<L/2 give |partial_x Delta J_[1]|<30000*L*exp(-5L/4); ||V_(J,N+1)-V_(J,N)||_2^2<1300000000*exp(-5L/2)=(13/500)*50000000000*exp(-5L/2); If the standard boundary margin ||V_(J,N)||_2^2>50000000000*exp(-5L/2) holds, then V_(J,N)+s*(V_(J,N+1)-V_(J,N)) is nonzero for 0<=s<=1; the local cutoff lifts therefore join continuously without a separate arithmetic theorem",
+      "proof_boundary": "Conditional only on the same open boundary margin; no extra cutoff-separation theorem is needed."
+    },
+    {
+      "id": "np15f1cbr_13_winding",
+      "role": "open_theorem_target",
+      "readiness": "open",
+      "claim": "The continuous successor proxy needs only a winding upper bound strictly below one.",
+      "formula": "Boundary nonvanishing transfers winding but does not determine it; because the transferred contact degree is a nonnegative integer, it is enough to prove wind(V_J)<1 on every successor boundary; The ray-aligned P_0 has zero winding because t_0=1/4>1/5>=Lambda; Q208 remains a compact calibration. For every successor, prove the first-order boundary domination and continuous one-sided phase bound only on its boundary; the same-sign positive contact index in the standard (x,t) orientation then excludes all interior contacts",
+      "proof_boundary": "Open; nonvanishing alone does not determine winding."
+    }
+  ],
+  "summary": {
+    "rows": 13,
+    "certified_inputs_or_compositions": 6,
+    "exact_identities_or_bounds": 5,
+    "open_boundary_targets": 3,
+    "full_squared_budget": 50000000000,
+    "half_squared_budget": 12500000000,
+    "adjacent_squared_budget": 1300000000
+  },
+  "sources": [
+    "work/rh_compute/results/jensen_window_pf_newman_polymath15_critical_first_order_global_remainder_certificate.json",
+    "work/rh_compute/results/jensen_window_pf_newman_polymath15_critical_first_order_signed_contact_reduction.json",
+    "work/rh_compute/results/jensen_window_pf_newman_cofinal_boundary_degree_transfer_target.json",
+    "work/rh_compute/results/jensen_window_pf_newman_ray_aligned_parabolic_frequency_reduction.json"
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "audit": {
+    "exact_identity_or_bound_count": 10,
+    "lambda_le_zero_proved": false,
+    "norm_reduction_step_count": 4,
+    "open_short_interval_gate_count": 1,
+    "reciprocal_zeta_tail_obstruction_count": 1,
+    "rh_proved": false,
+    "row_count": 18,
+    "uniform_discrepancy_proved": false,
+    "zero_free_consequence_count": 1
+  },
+  "date": "2026-07-23",
+  "kind": "jensen_window_pf_burnol_cell_energy_tail_obstruction",
+  "refs": [
+    "outputs/jensen_window_pf_jordan_muntz_burnol_hardy_intertwiner.md",
+    "outputs/jensen_window_pf_jordan_muntz_causal_energy_bridge.md",
+    "https://arxiv.org/abs/math/0202166",
+    "https://arxiv.org/abs/math/0505453"
+  ],
+  "rows": [
+    {
+      "id": "bcet_01_partial_residue",
+      "proof_boundary": "Finite scalar definition.",
+      "role": "exact_definition",
+      "statement": "A_(omega,N)=sum_(d<=N)mu(d)d^(-(1+2omega)).",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_02_truncated_convolution",
+      "proof_boundary": "Finite divisor-sum definition.",
+      "role": "exact_definition",
+      "statement": "b_(omega,N)(n)=sum_(d|n,d<=N)mu(d)d^(-2omega).",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_03_summatory_floor_identity",
+      "proof_boundary": "Exact finite divisor reindexing.",
+      "role": "exact_identity",
+      "statement": "B_(omega,N)(k)=sum_(n<=k)b_(omega,N)(n)=sum_(d<=N)mu(d)d^(-2omega)floor(k/d).",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_04_reciprocal_fractional_part",
+      "proof_boundary": "Exact for noninteger x, with endpoint values irrelevant to L2.",
+      "role": "exact_identity",
+      "statement": "f_(2omega,N)(1/x)=A_(omega,N)x-B_(omega,N)(floor(x)).",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_05_weighted_burnol_norm",
+      "proof_boundary": "Exact reciprocal substitution.",
+      "role": "exact_identity",
+      "statement": "||t^(-omega)f_(2omega,N)||_2^2=integral_0^infinity x^(2omega-2)|A_(omega,N)x-B_(omega,N)(floor(x))|^2dx.",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_06_cell_decomposition",
+      "proof_boundary": "Nonnegative cell decomposition; Tonelli is immediate.",
+      "role": "exact_identity",
+      "statement": "The norm is the sum over k>=0 of integral_k^(k+1) x^(2omega-2)|A_N x-B_N(k)|^2dx.",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_07_zero_cell",
+      "proof_boundary": "Exact elementary integral.",
+      "role": "exact_identity",
+      "statement": "The k=0 cell equals A_N^2/(1+2omega).",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_08_closed_cell_formula",
+      "proof_boundary": "Here Delta_a=(k+1)^a-k^a; exact elementary integration.",
+      "role": "exact_identity",
+      "statement": "For k>=1 the cell is A_N^2 Delta_(1+2omega)/(1+2omega)-2A_NB_N(k)Delta_(2omega)/(2omega)+B_N(k)^2Delta_(2omega-1)/(2omega-1).",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_09_discrete_discrepancy",
+      "proof_boundary": "Exact finite fractional-part identity.",
+      "role": "exact_identity",
+      "statement": "S_(omega,N)(k)=A_(omega,N)k-B_(omega,N)(k)=sum_(d<=N)mu(d)d^(-2omega){k/d}.",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_10_uniform_residue_bound",
+      "proof_boundary": "Absolute convergence only; this is not the needed tail rate.",
+      "role": "exact_bound",
+      "statement": "sup_N|A_(omega,N)|<=zeta(1+2omega).",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_11_norm_implies_discrete_energy",
+      "proof_boundary": "Uses cell-weight comparability and the uniform A_N bound.",
+      "role": "exact_implication",
+      "statement": "Uniform Burnol L2 norm implies uniform Q_(omega,N)=sum_(k>=1)k^(2omega-2)S_(omega,N)(k)^2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_12_discrete_energy_implies_norm",
+      "proof_boundary": "Uses |S+A*y|^2<=2S^2+2A^2 and sum k^(2omega-2)<infinity.",
+      "role": "exact_implication",
+      "statement": "Uniform Q_(omega,N) implies the uniform Burnol L2 norm.",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_13_exact_discrete_criterion",
+      "proof_boundary": "Exact fixed-omega equivalence with explicit elementary constants.",
+      "role": "exact_corollary",
+      "statement": "sup_N||t^(-omega)f_(2omega,N)||_2<infinity iff sup_N Q_(omega,N)<infinity.",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_14_stable_prefix",
+      "proof_boundary": "All divisors of n<=k are already present.",
+      "role": "exact_identity",
+      "statement": "For k<=N, B_(omega,N)(k)=B_(omega,infinity)(k), while S_(omega,N)(k)-S_(omega,infinity)(k)=k(A_(omega,N)-A_(omega,infinity)).",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_15_limit_discrete_energy",
+      "proof_boundary": "One-way compactness statement only.",
+      "role": "exact_implication",
+      "statement": "Uniform Q_(omega,N) implies Q_(omega,infinity)<infinity by pointwise convergence and Fatou.",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_16_reciprocal_zeta_tail_rate",
+      "proof_boundary": "Weighted l2 triangle inequality on the stable prefix; constants can be enlarged when starting from the continuous norm.",
+      "role": "exact_implication",
+      "statement": "Uniform Q_(omega,N)<=C forces |A_(omega,N)-1/zeta(1+2omega)|<=2*sqrt(C*(1+2omega))*N^(-1/2-omega).",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_17_zero_free_consequence",
+      "proof_boundary": "Abel summation gives the continuation in the open half-plane; no boundary zero claim is made.",
+      "role": "exact_implication",
+      "statement": "The reciprocal-zeta tail rate analytically continues sum mu(n)n^(-s)=1/zeta(s) to Re(s)>1/2+omega, so that half-plane is zero-free.",
+      "status": "available_exact"
+    },
+    {
+      "id": "bcet_18_open_short_interval_gate",
+      "proof_boundary": "The reduction exposes an RH-strength necessary condition but does not prove it, RH, or Lambda <= 0.",
+      "role": "open_target",
+      "statement": "Prove the uniform weighted discrepancy energy Q_(omega,N) on one cofinal omega sequence; this requires both the scalar reciprocal-zeta tail rate and short-multiplicative-interval cancellation.",
+      "status": "open_target"
+    }
+  ],
+  "status": "exact cell-energy/discrete-discrepancy reduction with one reciprocal-zeta tail obstruction and one open short-interval gate"
+}

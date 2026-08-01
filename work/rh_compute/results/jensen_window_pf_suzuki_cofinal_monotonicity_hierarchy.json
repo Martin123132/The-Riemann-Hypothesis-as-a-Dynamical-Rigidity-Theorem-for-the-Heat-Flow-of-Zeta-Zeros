@@ -1,0 +1,187 @@
+{
+  "audit": {
+    "countermodel_gate_count": 3,
+    "eventual_sign_proved": false,
+    "lambda_le_zero_proved": false,
+    "open_arithmetic_gate_count": 1,
+    "published_or_exact_rows": 17,
+    "rh_proved": false,
+    "row_count": 21
+  },
+  "date": "2026-07-23",
+  "definitions": {
+    "Q_omega": "xi(s-omega)/xi(s+omega)",
+    "coefficient": "c_omega(n)=n^omega*product_(p|n)(1-p^(-2omega))",
+    "summatory_function": "H_(omega,k)(x)=x^(-1/2)sum_(n<=x)c_omega(n)g_(omega,k)(n/x)",
+    "weight_recursion": "g_(omega,k+1)(x)=integral_x^1 sqrt(y/x)g_(omega,k)(y)dy/y"
+  },
+  "kind": "jensen_window_pf_suzuki_cofinal_monotonicity_hierarchy",
+  "proof_boundary": "This hierarchy is not a proof of eventual sign, RH, or Lambda<=0. The cofinal equivalence composes published Suzuki results with the internally audited fixed-omega phase theorem and requires independent expert review.",
+  "rows": [
+    {
+      "id": "cmh_01_coefficient_identity",
+      "proof_boundary": "Exact arithmetic identity only.",
+      "role": "published_exact",
+      "statement": "c_omega(n)=n^omega*sum_(d|n)mu(d)d^(-2omega)=n^omega*product_(p|n)(1-p^(-2omega))>0.",
+      "status": "available_exact"
+    },
+    {
+      "id": "cmh_02_first_weight",
+      "proof_boundary": "Definition of the first smoothing weight only.",
+      "role": "published_exact",
+      "statement": "Suzuki's explicit beta-integral weight g_(omega,1) is supported on (0,1] for every 0<omega<1/2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "cmh_03_weight_recursion",
+      "proof_boundary": "Exact logarithmic smoothing recursion only.",
+      "role": "published_exact",
+      "statement": "g_(omega,k+1)(x)=integral_x^1 sqrt(y/x)*g_(omega,k)(y)dy/y.",
+      "status": "available_exact"
+    },
+    {
+      "id": "cmh_04_summatory_definition",
+      "proof_boundary": "Exact finite arithmetic sum only.",
+      "role": "published_exact",
+      "statement": "H_(omega,k)(x)=x^(-1/2)*sum_(n<=x)c_omega(n)*g_(omega,k)(n/x), with H=0 on 0<x<1.",
+      "status": "available_exact"
+    },
+    {
+      "id": "cmh_05_log_antiderivative",
+      "proof_boundary": "Exact smoothing identity; it supplies no eventual sign.",
+      "role": "published_exact",
+      "statement": "H_(omega,k+1)(x)=integral_1^x H_(omega,k)(y)dy/y.",
+      "status": "available_exact"
+    },
+    {
+      "id": "cmh_06_mellin_identity",
+      "proof_boundary": "Published Mellin identity only; contour continuation may not cross uncancelled denominator zeros.",
+      "role": "published_exact",
+      "statement": "integral_1^infinity H_(omega,k)(x)x^(1/2-s)dx/x=[xi(s-omega)/xi(s+omega)]/(s-1/2)^k, initially for Re(s)>1+omega.",
+      "status": "available_exact"
+    },
+    {
+      "id": "cmh_07_k1_normalization",
+      "proof_boundary": "Exact normalization bridge only.",
+      "role": "exact_identification",
+      "statement": "H_(omega,1)(x)=sqrt(x)*h_omega^<1>(x) in the canonical-system notation.",
+      "status": "available_exact"
+    },
+    {
+      "id": "cmh_08_eventual_sign_landau",
+      "proof_boundary": "The eventual-sign antecedent is not proved.",
+      "role": "published_implication",
+      "statement": "If H_(omega,k) has one sign for all sufficiently large x, Landau's theorem and the absence of real xi zeros remove every uncancelled pole of xi(s-omega)/xi(s+omega) in Re(s)>1/2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "cmh_09_pole_free_inner",
+      "proof_boundary": "The xi-specific growth input is essential.",
+      "role": "published_implication",
+      "statement": "For the xi quotient, pole-freeness in Re(s)>1/2 plus Suzuki's high-strip estimate and Phragmen-Lindelof gives reduced meromorphic innerness.",
+      "status": "available_exact"
+    },
+    {
+      "id": "cmh_10_fixed_shift_handoff",
+      "proof_boundary": "One fixed omega can still hide off-line zeros by exact horizontal cancellation.",
+      "role": "exact_handoff",
+      "statement": "Eventual one-sign behavior of one H_(omega,k) implies D(omega), the fixed-omega all-time determinant property.",
+      "status": "available_exact"
+    },
+    {
+      "id": "cmh_11_cofinal_handoff",
+      "proof_boundary": "Internally audited composition of published Landau machinery with the corpus fixed-omega phase theorem; external review is required.",
+      "role": "theorem_candidate",
+      "statement": "If omega_j decreases to zero and every H_(omega_j,k_j) is eventually one-signed for some integers k_j>=1, then RH.",
+      "status": "available_exact"
+    },
+    {
+      "id": "cmh_12_rh_k1_asymptotic",
+      "proof_boundary": "Conditional asymptotic; it cannot be used to prove its own antecedent.",
+      "role": "published_conditional",
+      "statement": "Under RH, H_(omega,1)(x)=1+O_omega(x^(-B_omega)) for some B_omega>0 and each fixed 0<omega<1/2.",
+      "status": "conditional_on_rh"
+    },
+    {
+      "id": "cmh_13_rh_higher_asymptotic",
+      "proof_boundary": "Conditional contour shift only.",
+      "role": "published_conditional",
+      "statement": "Under RH, H_(omega,k)(x) has positive leading term (log x)^(k-1)/(k-1)! for every fixed k>=2.",
+      "status": "conditional_on_rh"
+    },
+    {
+      "id": "cmh_14_cofinal_equivalence",
+      "proof_boundary": "The forward implication uses Suzuki's RH-conditional asymptotics; the reverse implication is a corpus sharpening requiring external review.",
+      "role": "theorem_candidate",
+      "statement": "RH is equivalent to the existence of omega_j decreasing to zero and integers k_j>=1 for which every H_(omega_j,k_j) has an eventual single sign.",
+      "status": "available_exact"
+    },
+    {
+      "id": "cmh_15_near_zero_first_weight",
+      "proof_boundary": "Exact endpoint sign, not a summatory sign.",
+      "role": "exact_asymptotic",
+      "statement": "g_(omega,1)(x)~-a_omega*x^(omega-1) as x->0+, where a_omega>0 for 0<omega<1/2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "cmh_16_near_zero_all_weights",
+      "proof_boundary": "Derived recursively; it proves every smoothing weight remains negative near zero.",
+      "role": "exact_asymptotic",
+      "statement": "g_(omega,k)(x)~-a_omega*(1/2-omega)^(-(k-1))*x^(omega-1) as x->0+.",
+      "status": "available_exact"
+    },
+    {
+      "id": "cmh_17_near_one_all_weights",
+      "proof_boundary": "Exact endpoint sign only.",
+      "role": "exact_asymptotic",
+      "statement": "For every k>=1, g_(omega,k)(x) is positive near x=1 and vanishes there like a positive constant times (1-x)^(omega+k-1).",
+      "status": "available_exact"
+    },
+    {
+      "id": "cmh_18_signed_weight_guard",
+      "proof_boundary": "Coefficient positivity cannot prove any smoothing level termwise.",
+      "role": "countermodel_gate",
+      "statement": "Every g_(omega,k) is signed: negative near zero and positive near one, despite c_omega(n)>0.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "cmh_19_finite_range_guard",
+      "proof_boundary": "No finite x grid closes the Landau antecedent.",
+      "role": "countermodel_gate",
+      "statement": "Finite positivity of H_(omega,k) cannot establish eventual sign on an unbounded half-line.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "cmh_20_fixed_shift_guard",
+      "proof_boundary": "Cofinality in omega is indispensable.",
+      "role": "countermodel_gate",
+      "statement": "Eventual sign at one fixed omega gives innerness only at that shift; exact horizontal zero cancellation prevents promotion to RH.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "cmh_21_open_smoothed_target",
+      "proof_boundary": "This is the surviving RH-strength arithmetic obligation.",
+      "role": "open_arithmetic_gate",
+      "statement": "Prove eventual one-sign behavior for H_(omega_j,k_j) along one explicit sequence omega_j->0, with any chosen k_j>=1, by direct arithmetic inequalities that do not assume a zero-free region.",
+      "status": "open_target"
+    }
+  ],
+  "sources": [
+    {
+      "title": "On monotonicity of certain weighted summatory functions associated with L-functions",
+      "url": "https://arxiv.org/abs/1204.1823",
+      "use": "weight hierarchy, Mellin identity, Landau implication, and RH-conditional eventual signs"
+    },
+    {
+      "title": "A canonical system of differential equations arising from the Riemann zeta-function",
+      "url": "https://arxiv.org/abs/1204.1827",
+      "use": "k=1 normalization, L2 criterion, and innerness"
+    },
+    {
+      "title": "Corpus fixed-omega phase diagram",
+      "url": "outputs/jensen_window_pf_suzuki_fixed_omega_phase_diagram.md",
+      "use": "cofinal innerness-to-RH sharpening"
+    }
+  ],
+  "status": "internally audited theorem-candidate reduction with one open arithmetic gate"
+}

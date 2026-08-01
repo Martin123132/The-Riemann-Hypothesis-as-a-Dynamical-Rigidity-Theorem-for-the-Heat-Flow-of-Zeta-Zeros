@@ -522,6 +522,511 @@ Toeplitz-total-positivity theorem, a positive determinant integral formula,
 or an explicit restricted Laguerre-Polya factorization.
 ```
 
+## Gate 7: Arithmetic-Hankel Shortcuts Do Not Close Suzuki's Criterion
+
+The exact Xi/Pick/Suzuki audit adds three independent proof-safety witnesses:
+
+```text
+F_*(z)=z^2+6z+25:
+  horizontal growth of M_*(w)=F_*(w^2) holds on Re(w)>1,
+  but the required hyperbolic Pick direction is negative at an exact point;
+
+K(x+y)=1 on L2(0,1):
+  the Hankel kernel is totally nonnegative and rank one,
+  but det(I-K)=0 because its nonzero eigenvalue is one;
+
+Theta_*(r)=(r+i)/(r-i):
+  |Theta_*(u)|=1 for every real u,
+  but the upper-half-plane pole contributes a residue under contour motion.
+```
+
+These block promotion from horizontal xi-modulus monotonicity, Hankel-kernel
+total nonnegativity, or real-boundary unimodularity into Suzuki's all-`t`
+Fredholm gate. The later determinant-only audit shows that the terminal
+premise is redundant for a cofinal all-time family, but these witnesses still
+leave that surviving spectral gate open. The executable exact audit is:
+
+```text
+outputs/jensen_window_pf_xi_pick_suzuki_hankel_bridge.md
+python work/rh_compute/scripts/check_jensen_window_pf_xi_pick_suzuki_hankel_bridge.py
+```
+
+## Gate 8: Suzuki Norm Certificates Must Respect Spectral Flow
+
+The exact truncation-path audit adds four route guards:
+
+```text
+isolated-time determinant guard:
+  A=2P has ||A||=2 while det(I-A)=-1 and det(I+A)=3;
+  determinant nonvanishing implies contraction only when the whole
+  continuous path from t=0 is included;
+
+Hilbert-Schmidt guard:
+  ||K[t]||_HS^2=integral_0^(2t)(2t-s)|K(s)|^2 ds,
+  which diverges for every nonzero supported continuous kernel;
+
+high-contour guard:
+  Suzuki's sufficient test M_v^2 exp(4vt)<1 has a finite t ceiling for
+  every fixed zeta pair (omega,nu), because M_v has polynomial scale;
+
+uniform-gap guard:
+  under the desired Hermite-Biehler hypothesis, ||K[t]||<1 for every
+  finite t but ||K[t]|| tends to one.
+```
+
+These reject an isolated determinant check, a global Hilbert-Schmidt
+estimate, indefinite repetition of the local sup-contour argument, and one
+epsilon-sized gap uniform in `t`. The surviving target is to prevent a
+finite first `+1` or `-1` crossing by a cancellation-sensitive signed
+quadratic form. The executable audit is:
+
+```text
+outputs/jensen_window_pf_suzuki_spectral_frontier.md
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_spectral_frontier.py
+```
+
+## Gate 9: One Fixed Suzuki Pair Cannot Replace Cofinality
+
+All-time determinant nonvanishing for one fixed `(omega,nu)` extends the
+supported kernel to a bounded causal multiplier and removes upper-half-plane
+poles of the xi quotient. At a denominator zero `rho`, however, this yields
+only the cancellation rule
+
+```text
+xi(rho-2*omega)=0.
+```
+
+One such shifted zero is not a contradiction. A strictly decreasing
+`omega_n->0` sequence is essential: it produces distinct zeros
+`rho-2*omega_n` accumulating at `rho`, which an entire nonzero xi function
+cannot have. Thus neither one fixed family nor a finite omega list may be
+promoted to the determinant-only RH equivalence. The exact reduction and
+guard are:
+
+```text
+outputs/jensen_window_pf_suzuki_determinant_only_reduction.md
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_determinant_only_reduction.py
+```
+
+## Gate 10: Fixed-Shift Cancellation And Finite Sign Do Not Prove RH
+
+The fixed-`omega` phase diagram has an exact cancellation witness:
+
+```text
+F(z)=(z^2+1)*(z^2+9),
+F(z-i)/F(z+i)=(z-4i)/(z+4i).
+```
+
+The quotient is inner in the upper half-plane even though `F` has nonreal
+zeros. A single good shift can therefore conceal off-axis zeros by exact
+equal-height horizontal cancellation. Multiplicity is essential:
+
+```text
+F_def(z)=(z^2+1)*(z^2+9)^2,
+F_def(z-i)/F_def(z+i)
+ =(z-4i)^2*(z+2i)/((z-2i)*(z+4i)^2),
+```
+
+which leaves an uncancelled pole at `z=2i`. Pole-freeness and boundary
+modulus are still insufficient without growth control: `exp(-i*z)` has
+modulus one on the real line and no poles, but is unbounded in the upper
+half-plane.
+
+Suzuki's scalar eventual-sign target has a separate finite-prefix guard.
+All 6000 sampled values of `sqrt(x)*h_omega^<1>(x)` are positive for five
+shifts down to `omega=1/32` and `x<=5000`, but the primitive weight itself is
+signed:
+
+```text
+g_(1/2)^<1>(exp(-4))=-39.803349588<0,
+g_(1/2)^<1>(1/2)=1.174060048>0.
+```
+
+Hence coefficient positivity is not a termwise proof, and no finite grid
+may be promoted to eventual sign or the required `L2` tail. The exact and
+finite audits are:
+
+```text
+outputs/jensen_window_pf_suzuki_fixed_omega_phase_diagram.md
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_fixed_omega_phase_diagram.py
+outputs/jensen_window_pf_suzuki_jordan_totient_sign_scout.md
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_jordan_totient_sign_scout.py
+outputs/jensen_window_pf_suzuki_cofinal_monotonicity_hierarchy.md
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_cofinal_monotonicity_hierarchy.py
+outputs/jensen_window_pf_suzuki_jordan_error_kernel_reduction.md
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_jordan_error_kernel_reduction.py
+```
+
+There is also an exact main-term guard. Abel summation shows that every
+Suzuki smoothing kernel annihilates the positive residue main term of the
+cumulative Jordan-totient mass. The remaining quantity is a signed
+Mobius-error convolution. Elementary absolute estimates give only
+`O(x^(1/2-omega)*(1+log x))`, with the same power at every finite smoothing
+order. A proof may therefore use neither positive main-term domination nor
+naive absolute values to establish eventual sign.
+
+## Gate 11: Boundary-Unimodular Energy Is Not Half-Plane Analyticity
+
+For `a>0`, consider the right-half-plane quotients
+
+```text
+Q_good(z)=(a-z)/(a+z),
+Q_bad(z)=(a+z)/(a-z).
+```
+
+Both have modulus one on the imaginary axis. The first is inner; the second
+has a pole at `z=a`. If `T_(k-1)` is the degree-`k-1` Taylor polynomial at
+zero, exact division gives
+
+```text
+[Q_good(z)-T_(k-1)(z)]/z^k
+ =2*(-1)^k/[a^(k-1)*(a+z)],
+
+[Q_bad(z)-T_(k-1)(z)]/z^k
+ =2/[a^(k-1)*(a-z)].
+```
+
+The first inverse Laplace transform decays like `exp(-a*t)` and is in
+`L2(0,infinity)`. The second actual positive-time inverse grows like
+`exp(a*t)` and is not. Yet the second quotient's regularized boundary trace
+still has finite `L2` norm: its inverse Fourier transform is the
+anti-causal function `2*a^(-(k-1))*exp(a*t)*1_(t<0)`. Thus the missing
+Hardy condition is causality, not a finite boundary Plancherel norm. An
+`L2` Suzuki residual detects right-half-plane pole-freeness; boundary
+modulus one by itself does not provide it. A finite residual-energy cutoff
+also cannot distinguish a long delayed tail from genuine integrability.
+
+The checker verifies the Taylor-remainder identities exactly through six
+smoothing orders, checks both boundary moduli, and integrates the decaying
+model energy:
+
+```text
+outputs/jensen_window_pf_suzuki_cofinal_l2_hierarchy.md
+work/rh_compute/results/jensen_window_pf_suzuki_cofinal_l2_hierarchy.json
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_cofinal_l2_hierarchy.py
+```
+
+The model is a proof-safety guard, not a surrogate for xi. It rejects
+trace-only and finite-energy promotions while leaving the cofinal
+Jordan-error `L2` estimate open.
+
+## Gate 12: Natural Mobius Form Does Not Supply Its Uniform Norm
+
+The generalized Muntz identity writes the unsmoothed Jordan error as
+
+```text
+E_omega(x)
+ =sum_(d>=1)mu(d)d^(-omega)R_omega(x/d).
+```
+
+This exact form has three distinct nonpromotion guards.
+
+First, the scalar coefficients of the unitary dilation expansion are in
+`l2`, but this alone gives no Bessel bound. The elementary Hilbert-space
+model `v_d=v` with coefficients `1/d` has unit vectors and square-summable
+coefficients while its partial sums diverge.
+
+Second, the finite energy kernel
+
+```text
+K_X(u,v)=1/max(1,u,v)-1/X
+```
+
+is positive semidefinite and its ordered finite matrices are totally
+nonnegative. That proves only `J_omega(X)>=0`, not a uniform upper bound.
+The discrete, cross, and continuum pieces each have the same potentially
+divergent scale, so their signed cancellation remains essential.
+
+Third, the boundary transforms `1/(a+z)` and `1/(a-z)` have the same squared
+boundary norm `1/(2a)`. The former is causal and decaying; the latter is
+anti-causal, while its positive-time inverse grows. Consequently, even the
+exact finite all-height Plancherel formula cannot be promoted to the Hardy
+estimate without causality.
+
+The exact Burnol-Hardy intertwiner adds a fourth guard. It gives
+
+```text
+(1-2omega)||t^(-omega)f_(2omega,N)||_2
+ <=||E_(omega,N)||_H
+ <=(1+2omega)||t^(-omega)f_(2omega,N)||_2,
+```
+
+so it transfers the norm problem into published Nyman coordinates but does
+not bound the arithmetic fractional-part sum. Bounded invertibility of the
+operator is not boundedness of its input family.
+
+The reciprocal-cell reduction adds a fifth guard. Uniform boundedness is
+equivalent to
+
+```text
+sup_N Q_(omega,N)<infinity,
+
+Q_(omega,N)
+ =sum_(k>=1)k^(2omega-2)
+  |sum_(d<=N)mu(d)d^(-2omega){k/d}|^2.
+```
+
+The stable divisor prefix then forces
+
+```text
+|sum_(d<=N)mu(d)d^(-(1+2omega))-1/zeta(1+2omega)|
+ =O(N^(-1/2-omega)).
+```
+
+Thus any proposed generic norm proof must also imply this explicit
+RH-strength reciprocal-zeta tail rate and the remaining weighted
+short-multiplicative-interval cancellation. An operator norm, positive
+kernel, or coefficient `l2` estimate that cannot recover this rate has not
+closed the arithmetic gate.
+
+The finite-tail split adds a sixth guard. It gives the exact criterion
+
+```text
+Q_(omega,infinity)<infinity,
+r_(omega,N)=O(N^(-1/2-omega)),
+sup_N sum_(j>=0)(2^j*N)^(2omega-2)
+ V_(omega,N)(2^j*N)<infinity.
+```
+
+The critical block estimate
+
+```text
+V_(omega,N)(K)=O(K^(2-2omega))
+```
+
+is not summable across dyadic `K=2^j*N` and therefore cannot be promoted
+to the needed post-prefix energy. A proof needs a summable gain or a
+different cancellation mechanism. Likewise, Báez-Duarte's unweighted
+natural-approximation lower bounds and the unweighted fractional-part
+autocorrelation kernel cannot be transferred by deleting the present
+weights.
+
+The stationary-Gram reduction adds a seventh guard. The weighted
+autocorrelation kernel is positive definite and has nonnegative spectral
+density, while
+
+```text
+Diag_(alpha,N)
+ <=C_alpha(0)zeta(1+alpha)
+```
+
+is uniformly bounded. Neither fact bounds the signed Mobius off-diagonal.
+Indeed, the pointwise positive-definite estimate
+`|C_alpha(u)|<=C_alpha(0)` gives only
+
+```text
+Gamma_(alpha,N)=O(N^(1-alpha)),
+```
+
+which diverges. Kernel positivity, spectral positivity, and a bounded
+diagonal therefore cannot be promoted to the uniform Burnol norm.
+
+The Ornstein-Uhlenbeck reduction adds an eighth guard. The leading kernel
+has the exact Gram identity
+
+```text
+G_(alpha,N)
+ =sum_(k=1)^N [k^(1-alpha)-(k-1)^(1-alpha)]
+  |sum_(d=k)^N mu(d)/d|^2.
+```
+
+Uniform boundedness of this energy for every member of one cofinal sequence
+`alpha_j->0` is equivalent to RH, but this does not compare it with the
+full Gram. The natural remainder density
+
+```text
+[|zeta((1-alpha)/2+it)|^2
+ -(1-alpha)L_alpha]
+/[((1-alpha)/2)^2+t^2]
+```
+
+is negative at `alpha=1/2`, `t=0`, so the remainder kernel is not positive
+semidefinite. A positivity argument cannot discard it or order the full
+Gram against the leading energy. Generic Montgomery-Vaughan spacing on
+`log n` costs order `N^(1-alpha)`, and the multiplicative Hilbert matrix has
+a product kernel rather than the required ratio kernel. A valid promotion
+therefore needs a direct Mobius-specific remainder estimate.
+
+The OU/Mertens reduction adds a ninth guard. If
+
+```text
+r_k=sum_(n>=k)mu(n)/n,
+B_alpha=sum_(k>=1)k^(-alpha)|r_k|^2,
+M_alpha=sum_(k>=1)M(k)^2/k^(2+alpha),
+```
+
+then explicit weighted Hardy and Copson bounds give
+
+```text
+B_alpha<infinity iff M_alpha<infinity.
+```
+
+The OU weights are comparable with `k^(-alpha)`, so this is not a new
+generic Hilbert-space shortcut: it is the classical weighted Mertens
+mean-square problem in exact coordinates. Equivalently,
+
+```text
+RH iff
+sum_(K<=k<2K) M(k)^2=O_epsilon(K^(2+epsilon))
+for every epsilon>0.
+```
+
+Moreover, with `C_h(Y)=sum_(m<=Y)mu(m)mu(m+h)`, exact pair reindexing
+writes the off-diagonal part of `sum_(k<=X)M(k)^2` as
+
+```text
+2 sum_(h<X) sum_(Y<=X-h) C_h(Y).
+```
+
+Thus the remaining correlation target is signed, origin-anchored, and
+cumulative in both the shift and terminal point. Generic Hardy applied
+directly to the Mobius prefix pays
+`sum mu(n)^2 n^(-alpha)`, which diverges. Averaged Chowla estimates average
+all shift tuples, while almost-all short-interval estimates may discard the
+exceptional interval anchored at the origin; neither theorem supplies this
+anchored cumulative estimate. Even a terminal absolute estimate
+`sum_h |C_h(Y)|=o(Y^2)` loses an extra factor when summed over `Y`. A valid
+argument must preserve signed cancellation across the joint `(h,Y)` region
+rather than take absolute values row by row.
+
+The weighted-prefix/affine-defect reduction adds a tenth guard. For
+
+```text
+A_alpha(k)=sum_(n<=k)mu(n)n^(-alpha),
+```
+
+the continuous energy
+
+```text
+integral_1^infinity A_alpha(x)^2*x^(alpha-2)dx
+```
+
+is an exact Volterra-Hardy coordinate for the weighted Mertens energy and
+has the same reciprocal-zeta boundary spectrum. Yet on the first
+post-prefix block the q-discrepancy sees only
+
+```text
+A_alpha(k)-A_alpha(N)-k*r_N.
+```
+
+A generic coefficient sequence with nonzero constant prefix from `N`
+onward has `r_N=0` and zero post-prefix discrepancy but positive absolute
+weighted-prefix energy. Thus the dyadic discrepancy and reciprocal-tail
+rate cannot be promoted at one cutoff to the Mertens energy.
+
+The all-cutoff tail reduction adds the sharper logarithmic guard. Compatible
+adjacent tails reconstruct the prefix exactly, and
+
+```text
+sum_N N^(alpha-2)|A_alpha(N)|^2<infinity
+ iff
+sum_N P_(alpha/2,N)/N<infinity.
+```
+
+The critical scalar sequence
+
+```text
+gamma=(1+alpha)/2,
+r_N=(N+1)^(-gamma),
+a_N=N[r_(N-1)-r_N]
+```
+
+satisfies `0<a_N<=gamma*N^(-alpha)` and has uniformly bounded stable-prefix
+energy `P_N`, but `sum_N P_N/N` diverges. Equivalently, its weighted-prefix
+energy has a positive harmonic asymptotic. Thus
+
+```text
+sup_N P_(omega,N)<infinity
+```
+
+cannot be promoted generically to the required all-cutoff anchor energy.
+This model is not Mobius; it leaves a Mobius-specific logarithmic
+mean-square gain open.
+
+The fixed-shift spectral route has a separate promotion trap. The real even
+quartic
+
+```text
+F(z)=((z-omega)^2+T^2)((z+omega)^2+T^2)
+```
+
+has a symmetric off-axis zero quartet, but
+
+```text
+Q(z)=F(z-omega)/F(z+omega)
+```
+
+cancels its boundary-zero factor and becomes rational inner in the right
+half-plane. In fact `||Q-1||_(H2)^2=8omega`. Nevertheless,
+
+```text
+integral_R dt/[(1+t^2)|F(omega+it)|^2]=infinity
+```
+
+because the shifted line still passes through the simple zeros. Thus
+finite limiting causal energy cannot be promoted generically to the
+reciprocal boundary energy required by the logarithmic stable-prefix
+criterion. The model blocks only this same-shift comparison; it does not
+block the cofinal full-Burnol implication.
+
+Vaughan decomposition has a second promotion trap. After collapsing the
+anchored correlation, its test is
+
+```text
+f_X(n)=(X-n+1)M(n-1),
+```
+
+and generic Cauchy-Schwarz feeds `sum M(k)^2` back into the estimate.
+Applying Vaughan before collapse avoids that circularity and gives the
+exact bounded-test aggregate
+
+```text
+B_1(X)-TI_X+TII_X.
+```
+
+The new theorem target is a signed `O_epsilon(X^(2+epsilon))` estimate for
+`-TI_X+TII_X`, with cancellation retained jointly over shift and terminal
+length. Rowwise absolute values are still forbidden.
+
+The executable audit is:
+
+```text
+outputs/jensen_window_pf_jordan_muntz_causal_energy_bridge.md
+work/rh_compute/results/jensen_window_pf_jordan_muntz_causal_energy_bridge.json
+python work/rh_compute/scripts/check_jensen_window_pf_jordan_muntz_causal_energy_bridge.py
+outputs/jensen_window_pf_jordan_muntz_burnol_hardy_intertwiner.md
+work/rh_compute/results/jensen_window_pf_jordan_muntz_burnol_hardy_intertwiner.json
+python work/rh_compute/scripts/check_jensen_window_pf_jordan_muntz_burnol_hardy_intertwiner.py
+outputs/jensen_window_pf_burnol_cell_energy_tail_obstruction.md
+work/rh_compute/results/jensen_window_pf_burnol_cell_energy_tail_obstruction.json
+python work/rh_compute/scripts/check_jensen_window_pf_burnol_cell_energy_tail_obstruction.py
+outputs/jensen_window_pf_burnol_tail_discrepancy_dyadic_reduction.md
+work/rh_compute/results/jensen_window_pf_burnol_tail_discrepancy_dyadic_reduction.json
+python work/rh_compute/scripts/check_jensen_window_pf_burnol_tail_discrepancy_dyadic_reduction.py
+outputs/jensen_window_pf_weighted_fractional_autocorrelation_gram_bridge.md
+work/rh_compute/results/jensen_window_pf_weighted_fractional_autocorrelation_gram_bridge.json
+python work/rh_compute/scripts/check_jensen_window_pf_weighted_fractional_autocorrelation_gram_bridge.py
+outputs/jensen_window_pf_weighted_autocorrelation_ou_tail_energy_reduction.md
+work/rh_compute/results/jensen_window_pf_weighted_autocorrelation_ou_tail_energy_reduction.json
+python work/rh_compute/scripts/check_jensen_window_pf_weighted_autocorrelation_ou_tail_energy_reduction.py
+outputs/jensen_window_pf_ou_mertens_mean_square_reduction.md
+work/rh_compute/results/jensen_window_pf_ou_mertens_mean_square_reduction.json
+python work/rh_compute/scripts/check_jensen_window_pf_ou_mertens_mean_square_reduction.py
+outputs/jensen_window_pf_mertens_weighted_prefix_affine_defect_reduction.md
+work/rh_compute/results/jensen_window_pf_mertens_weighted_prefix_affine_defect_reduction.json
+python work/rh_compute/scripts/check_jensen_window_pf_mertens_weighted_prefix_affine_defect_reduction.py
+outputs/jensen_window_pf_mertens_anchor_logarithmic_tail_energy_reduction.md
+work/rh_compute/results/jensen_window_pf_mertens_anchor_logarithmic_tail_energy_reduction.json
+python work/rh_compute/scripts/check_jensen_window_pf_mertens_anchor_logarithmic_tail_energy_reduction.py
+outputs/jensen_window_pf_fixed_shift_inner_reciprocal_boundary_separation_gate.md
+work/rh_compute/results/jensen_window_pf_fixed_shift_inner_reciprocal_boundary_separation_gate.json
+python work/rh_compute/scripts/check_jensen_window_pf_fixed_shift_inner_reciprocal_boundary_separation_gate.py
+```
+
+It leaves open the equivalent uniform bounds
+`sup_N ||E_(omega,N)||_H<infinity` and
+`sup_N Q_(omega,N)<infinity` on a cofinal shift sequence.
+
 ## Current Cache-Based Gate Run
 
 The executable gate reads:
@@ -749,12 +1254,32 @@ python work/rh_compute/scripts/check_result_language_boundaries.py
 Current result:
 
 ```text
-validated output references: scanned 191 markdown files, 2523 path references, 0 missing required paths, 3 planned missing deliverables
-validated output artifact statuses: scanned 191 markdown files, 0 status issues
-validated proof-claim ledger: 149 claims, 0 issues, 14 open theorem targets
+validated output references: scanned 425 markdown files, 4383 path references, 0 missing required paths, 3 planned missing deliverables
+validated output artifact statuses: scanned 425 markdown files, 0 status issues
+validated proof-claim ledger: 359 claims, 0 issues, 9 open theorem targets
 validated signed-Hankel/Jensen dependency graph with 0 issues
-validated Jensen-window PF bridge obligations: 11 obligations, 0 issues, 3 open obligations
-validated Jensen-window PF theorem machinery fit matrix: 7 rows, 0 issues, 0 ready-to-apply rows
+validated Jensen-window PF coefficient-PF equivalence gate: 13 rows, 0 issues, 3 exact coefficient identities, 4 classical/closure steps, 1 seven-way equivalence, 3 guards, 1 open structural handoff
+validated Jensen-window PF Edrei-Stieltjes equivalence gate: 14 rows, 0 issues, 12 exact indexing checks, 7 exact Hankel checks, 1 unified endpoint, 3 finite/nonpromotion guards, 1 open Xi/Phi handoff
+validated Jensen-window PF Edrei heat-flow boundary gate: 11 rows, 0 issues, 4 exact flow identities, 9 rank-one orientation checks, 2 exact heat witnesses, 1 rejected generic backward-invariance shortcut, 1 open Xi/Phi handoff
+validated Jensen-window PF Phi Pick-kernel target: 12 rows, 0 issues, 7 exact identities, 3 independent polarization checks, 1 exact mixture guard, 2 open structural routes
+validated Jensen-window PF Xi Pick/Suzuki Hankel bridge: 16 rows, 0 issues, 7 exact coordinate/guard identities, 4 published operator steps, 3 exact countermodels, 1 open global gate
+validated Jensen-window PF Suzuki spectral frontier: 16 rows, 0 issues, 10 exact path/reduction identities, 5 route guards, 1 open global obligation
+validated Suzuki determinant-only reduction: 16 rows, 0 issues, 12 exact bridge steps, 2 theorem/corollary candidates, 1 route guard, 1 open arithmetic gate
+validated Suzuki fixed-omega phase diagram: 21 rows, 0 issues, 3 exact countermodel guards, 2 published scalar targets, 1 open arithmetic gate
+validated Suzuki Jordan-totient sign scout: 6000 samples, 5 omega values, 0 negative rows, 0 issues
+validated Suzuki cofinal monotonicity hierarchy: 21 rows, 0 issues, 3 signed/nonpromotion guards, 1 cofinal equivalence candidate, 1 open arithmetic gate
+validated Suzuki Jordan-error kernel reduction: 16 rows, 0 issues, 8 exact identities/bounds, 2 route guards, 1 open cancellation gate
+validated Suzuki cofinal L2 hierarchy: 22 rows, 0 issues, 3 countermodel guards, 1 literature-fit guard, 1 cofinal equivalence candidate, 1 open arithmetic energy gate
+validated Jordan-Muntz causal-energy bridge: 32 rows, 0 issues, 5 theorem candidates, 5 proof guards, 1 open all-height mollifier gate
+validated Jordan-Muntz/Burnol Hardy intertwiner: 18 rows, 0 issues, 11 exact identities, 1 source-backed cofinal theorem candidate, 2 nonpromotion guards, 1 open natural-mollifier gate
+validated Burnol cell-energy/tail obstruction: 18 rows, 0 issues, 10 exact identities, 4 norm-reduction steps, 1 reciprocal-zeta tail obstruction, 1 open short-interval gate
+validated Burnol tail-discrepancy/dyadic reduction: 20 rows, 0 issues, 12 exact identities, 4 equivalence steps, 2 literature guards, 1 open dyadic square-function gate
+validated weighted fractional autocorrelation Gram bridge: 20 rows, 0 issues, 12 exact identities, 3 proof guards, 1 open signed off-diagonal gate
+validated weighted-autocorrelation OU tail-energy reduction: 22 rows, 0 issues, 13 exact identities, 4 proof guards, 1 open comparison gate
+validated OU/Mertens mean-square reduction: 25 rows, 0 issues, 16 exact reductions, 4 proof guards, 1 open anchored mean-square gate
+validated Mertens weighted-prefix/affine-defect reduction: 34 rows, 0 issues, 24 exact reductions, 4 proof guards, 2 open handoff gates
+validated Jensen-window PF bridge obligations: 16 obligations, 0 issues, 3 open obligations
+validated Jensen-window PF theorem machinery fit matrix: 11 rows, 0 issues, 0 ready-to-apply rows
 validated Jensen-window PF sign-regular transfer gap matrix: 9 transfer rows, 2 countermodel gates, 3 open requirements, 3 rejected shortcuts, 0 ready-to-apply rows, 0 issues
 validated Jensen-window PF factorial multiplier split audit: 5 exact rows, 315 raw degree-2 anti-hyperbolic rows, 315 normalized degree-2 positive rows, 0 ready-to-apply rows, 0 issues
 validated Jensen-window PF structural ansatz matrix: 6 ansatz rows, 0 issues, 0 ready-to-apply rows
@@ -880,5 +1405,5 @@ validated Jensen-window PF Cauchy-Binet low-degree scout: 15 formula rows, 0 iss
 validated Jensen-window PF log-concavity frontier scout: 14 contiguous rows, 0 issues
 validated Jensen-window PF ratio-condition scout: 7 candidate rows, 0 issues, 4 rejected by countermodel, 1 rejected by construction
 validated Jensen-window PF contraction-log-concavity scout: 1 rejected by construction, 0 issues, 2 negative frontier rows
-validated result-language boundaries: scanned 191 markdown files, 0 overclaims
+validated result-language boundaries: scanned 423 markdown files, 0 overclaims
 ```

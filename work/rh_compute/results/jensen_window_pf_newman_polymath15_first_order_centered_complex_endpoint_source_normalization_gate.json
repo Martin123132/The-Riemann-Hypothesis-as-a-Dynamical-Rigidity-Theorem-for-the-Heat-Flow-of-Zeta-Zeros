@@ -1,0 +1,229 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_complex_endpoint_source_normalization_gate",
+  "date": "2026-07-31",
+  "status": "exact complex recurrent-endpoint source-normalization corrigendum and rank nonpromotion gate",
+  "proof_boundary": "This artifact corrects the recurrent endpoint's Cartesian projections, Hermitian product, centered atom, exceptional fibre, odd-fibre rotation, and contact minors. It proves that the exact Vaughan split has no new rank capable of supplying the missing contact margin. It does not prove an Xi phase law, signed endpoint/carrier correlation estimate, Abel-scalar gap, successor winding cap, contact exclusion, Q209, the cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or a prize-level conclusion.",
+  "source_audit": {
+    "source_sha256": {
+      "c0_source_extraction": "9d9bdefe7918a18f82408952b2c6f6f8176568f9f6e24d0cd4c12b54d1736e0d",
+      "absolute_phase_anchor_historical": "7e5c8725b2d0913d2e5d1731b962a7cd79081b8e09e52c7992647e4dc631cbd2",
+      "direct_projection_historical": "8252a4d506a8132aeec65f5f1c9490430e39b776d76dfae92e27ce008c5e22a9",
+      "carrier_kernel_historical": "408b16b6719be7a55b5f260dcda8ebc9bfd012edd734e6fc4913f8cbb0e9abc3",
+      "first_pivot_historical": "b5200cf7a643cc646effe20fa3533321e5fa0ccb73214ba50db3642361307954",
+      "odd_fibre_historical": "df1222a7be2431b0ebb8df5e0a7125d9509e4f2b6bbbd6c939e65abbdbf3c34f",
+      "contact_transport_historical": "fdcef454128f5eacad5b059b6bd649de509dcdca329b2375fdcf260b2e7eb3e3",
+      "interior_current_historical": "c1282eac2b2d22c35055880f4eb2607b855446a3b678caf0c072ca983c660419"
+    },
+    "published_source": {
+      "citation": "D.H.J. Polymath, Effective approximation of heat flow evolution of the Riemann xi function, and a new upper bound for the de Bruijn-Newman constant, arXiv:1904.12438",
+      "location": "equation (53), C_0(p)",
+      "url": "https://arxiv.org/abs/1904.12438"
+    }
+  },
+  "exact": {
+    "source_normalization": {
+      "c0_formula": "C_0(p)={exp(pi*i*(p^2/2+3/8))-i*sqrt(2)*cos(pi*p/2)}/{2*cos(pi*p)}",
+      "critical_endpoint": "H_a(p)=C_0(p)+C_0'''(p)/(12*pi^2*a)",
+      "notation_guard": "The endpoint function C_0(p)=F(p) is not the Vaughan low coefficient C_0(n) from the preceding decomposition.",
+      "source_semantics": "C_0 and H_a are generally complex on the real p-axis; the source gives |C_0(p)|<=1/2, not C_0(p) in R.",
+      "pi_provenance": "Every pi in this correction is inherited from the published completed-zeta/Riemann-Siegel endpoint normalization. The Cartesian repair introduces no new pi."
+    },
+    "midpoint_witness": {
+      "parity": "C_0(-p)=C_0(p), hence C_0'''(0)=0",
+      "value": "C_0(0)=sqrt(2-sqrt(2))/4+i{sqrt(2+sqrt(2))/4-sqrt(2)/2}",
+      "strict_sign": "Im C_0(0)<0 because sqrt(2+sqrt(2))<2*sqrt(2)",
+      "endpoint_consequence": "For every a>0, H_a(0)=C_0(0) is nonreal.",
+      "physical_occurrence": "p=0 occurs at every half-integer saddle a=N+1/2, including arbitrarily large cutoffs."
+    },
+    "complex_endpoint": {
+      "coordinates": "kappa in R, H_a=H_R+iH_I, J_a=J_R+iJ_I, e=kappa(T_0+i)H_a, g=kappa(T_0+i)J_a",
+      "value_projection": "Re e=kappa(T_0H_R-H_I), Im e=kappa(T_0H_I+H_R)",
+      "jet_projection": "Re g=kappa(T_0J_R-J_I), Im g=kappa(T_0J_I+J_R)",
+      "hermitian_product": "g*conj(e)=kappa^2(T_0^2+1)J_a*conj(H_a)",
+      "factorization_survives": "E_N=kappa(T_0+i)[J_a-s_*'log(a)H_a]"
+    },
+    "centered_endpoint_atom": {
+      "definition": "alpha=c*u_N, c_0=Re e, d_0=Re g-alpha*Re e",
+      "value": "c_0=kappa(T_0H_R-H_I)",
+      "slope": "d_0=kappa{T_0J_R-J_I-c*u_N(T_0H_R-H_I)}",
+      "effective_slope": "h_0=(T_0J_R-J_I)/(T_0H_R-H_I)-c*u_N when T_0H_R-H_I!=0",
+      "exceptional_fibre": "The division-free endpoint fibre is T_0H_R-H_I=0; H_a=0 is only a subfibre."
+    },
+    "odd_fibre_repair": {
+      "coordinates": "For the physical endpoint g_0=A_N+iB_N and S_odd=X_odd+iY_odd, Re(S_odd*conj(g_0))=A_NX_odd+B_NY_odd.",
+      "cartesian": "|S_odd+g_0|^2=(X_odd+A_N)^2+(Y_odd+B_N)^2",
+      "rotation": "For D=sqrt(A_N^2+B_N^2)>0, P=(A_NX_odd+B_NY_odd)/D and Q=(-B_NX_odd+A_NY_odd)/D give |S_odd+g_0|^2=(P+D)^2+Q^2.",
+      "zero_endpoint": "For D=0 retain |S_odd|^2 without division."
+    },
+    "contact_minors": {
+      "carrier_atom": "For z_n=X_n+iY_n, d_n=c(u_n-u_N)X_n-b*u_nY_n.",
+      "endpoint_carrier": "K_(0n)=c_0d_n-d_0X_n=kappa{(T_0H_R-H_I)u_n(cX_n-bY_n)-(T_0J_R-J_I)X_n}.",
+      "carrier_carrier": "K_(nm)=X_nd_m-d_nX_m=c*log(n/m)X_nX_m-b{u_mX_nY_m-u_nY_nX_m}.",
+      "sign_boundary": "Neither determinant has a sign from the currently proved amplitude, distance, or source-normalization data."
+    },
+    "rank_guard": {
+      "vaughan_scalar": "For r=(R_0,R_I,R_II) and sigma=(1,-1,-1), Re mathfrak B_N=sigma*r.",
+      "vaughan_kernel": "sigma*sigma^T=[[1,-1,-1],[-1,1,1],[-1,1,1]] has rank 1 and eigenvalues 3,0,0.",
+      "pullback": "After pullback to the endpoint/carrier atoms the square is d*d^T, the original centered-slope rank-one kernel.",
+      "contact_join": "Adding the value row gives c*c^T+d*d^T of rank at most 2; on c*x=0 only the rank-at-most-one slope square remains.",
+      "consequence": "Exact Vaughan recombination changes coordinates but cannot create a contact margin. A new Xi restriction on the actual coefficient curve is still required."
+    },
+    "supersession": {
+      "scope": "Only endpoint rows that used H_a in R are superseded. The branch-free anchor, complex factorization, abstract component transport, Abel/Mangoldt identities, adjacent cutoff recurrence, and endpoint-composed Vaughan identity remain exact.",
+      "historical_artifacts": [
+        "absolute_phase_anchor_reduction: real-H declaration only",
+        "direct_projection_regime_reduction: endpoint projections",
+        "carrier_kernel_abel_prefix_reduction: endpoint Hermitian product",
+        "endpoint_first_pivot_odd_small_ball_guard: real-H sentence only",
+        "endpoint_odd_fibre_correlation_feasibility_guard: fixed endpoint direction",
+        "contact_signed_transport_reduction: endpoint atom and exceptional fibre",
+        "interior_projective_current_gate: endpoint effective-slope text"
+      ],
+      "route_decision": "Use the corrected Cartesian endpoint atom in every later contact or Type-I/II argument. Do not infer a fixed (T_0,1) endpoint direction, and do not divide merely under H_a!=0."
+    }
+  },
+  "rows": [
+    {
+      "id": "cesn_01_published_c0",
+      "role": "primary_source_correction",
+      "readiness": "available_published",
+      "claim": "The published C_0 endpoint coefficient is complex-valued.",
+      "formula": "C_0(p)={exp(pi*i*(p^2/2+3/8))-i*sqrt(2)*cos(pi*p/2)}/{2*cos(pi*p)}",
+      "proof_boundary": "This is source normalization, not a new estimate."
+    },
+    {
+      "id": "cesn_02_midpoint_parity",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "Evenness kills the third derivative at the midpoint.",
+      "formula": "C_0(-p)=C_0(p), hence C_0'''(0)=0",
+      "proof_boundary": "This statement is only at p=0."
+    },
+    {
+      "id": "cesn_03_midpoint_nonreal",
+      "role": "exact_counterexample",
+      "readiness": "available_exact",
+      "claim": "The actual endpoint source is nonreal at p=0.",
+      "formula": "C_0(0)=sqrt(2-sqrt(2))/4+i{sqrt(2+sqrt(2))/4-sqrt(2)/2}",
+      "proof_boundary": "This rejects H_a in R; it is not an RH counterexample."
+    },
+    {
+      "id": "cesn_04_endpoint_occurrence",
+      "role": "domain_audit",
+      "readiness": "available_exact",
+      "claim": "The nonreal midpoint recurs at unbounded physical cutoffs.",
+      "formula": "p=0 occurs at every half-integer saddle a=N+1/2, including arbitrarily large cutoffs.",
+      "proof_boundary": "No lower bound for the endpoint projection follows."
+    },
+    {
+      "id": "cesn_05_endpoint_factorization",
+      "role": "surviving_identity",
+      "readiness": "available_exact",
+      "claim": "The complex endpoint keeps the existing common factorization.",
+      "formula": "kappa in R, H_a=H_R+iH_I, J_a=J_R+iJ_I, e=kappa(T_0+i)H_a, g=kappa(T_0+i)J_a",
+      "proof_boundary": "Factorization alone gives no sign."
+    },
+    {
+      "id": "cesn_06_value_projection",
+      "role": "corrected_identity",
+      "readiness": "ready_to_apply",
+      "claim": "Both Cartesian value projections retain H_I.",
+      "formula": "Re e=kappa(T_0H_R-H_I), Im e=kappa(T_0H_I+H_R)",
+      "proof_boundary": "No projection nonvanishing is asserted."
+    },
+    {
+      "id": "cesn_07_jet_projection",
+      "role": "corrected_identity",
+      "readiness": "ready_to_apply",
+      "claim": "Both Cartesian jet projections retain J_I.",
+      "formula": "Re g=kappa(T_0J_R-J_I), Im g=kappa(T_0J_I+J_R)",
+      "proof_boundary": "No directional transversality is asserted."
+    },
+    {
+      "id": "cesn_08_hermitian_product",
+      "role": "corrected_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The endpoint Hermitian product uses conjugate(H_a).",
+      "formula": "g*conj(e)=kappa^2(T_0^2+1)J_a*conj(H_a)",
+      "proof_boundary": "Its real and imaginary parts remain unsigned."
+    },
+    {
+      "id": "cesn_09_centered_atom",
+      "role": "corrected_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The terminal-centered endpoint atom has the full complex projection.",
+      "formula": "c_0=kappa(T_0H_R-H_I); d_0=kappa{T_0J_R-J_I-c*u_N(T_0H_R-H_I)}",
+      "proof_boundary": "This is an exact atom, not a contact gap."
+    },
+    {
+      "id": "cesn_10_exceptional_fibre",
+      "role": "division_guard",
+      "readiness": "ready_to_apply",
+      "claim": "The projective exceptional set is the zero real projection.",
+      "formula": "The division-free endpoint fibre is T_0H_R-H_I=0; H_a=0 is only a subfibre.",
+      "proof_boundary": "H_a=0 is not the complete exceptional set."
+    },
+    {
+      "id": "cesn_11_odd_fibre_rotation",
+      "role": "corrected_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The odd-fibre rotation follows the actual complex endpoint vector.",
+      "formula": "For D=sqrt(A_N^2+B_N^2)>0, P=(A_NX_odd+B_NY_odd)/D and Q=(-B_NX_odd+A_NY_odd)/D give |S_odd+g_0|^2=(P+D)^2+Q^2.",
+      "proof_boundary": "This coordinate change gives no small-ball estimate."
+    },
+    {
+      "id": "cesn_12_endpoint_carrier_minor",
+      "role": "joint_source_kernel",
+      "readiness": "available_exact",
+      "claim": "The endpoint-carrier contact minor is explicit and unsigned.",
+      "formula": "K_(0n)=c_0d_n-d_0X_n=kappa{(T_0H_R-H_I)u_n(cX_n-bY_n)-(T_0J_R-J_I)X_n}.",
+      "proof_boundary": "No Xi phase law currently signs this minor."
+    },
+    {
+      "id": "cesn_13_carrier_carrier_minor",
+      "role": "joint_source_kernel",
+      "readiness": "available_exact",
+      "claim": "The carrier-carrier contact minor is explicit and unsigned.",
+      "formula": "K_(nm)=X_nd_m-d_nX_m=c*log(n/m)X_nX_m-b{u_mX_nY_m-u_nY_nX_m}.",
+      "proof_boundary": "No aggregate cumulative-mass estimate follows."
+    },
+    {
+      "id": "cesn_14_vaughan_rank",
+      "role": "nonpromotion_guard",
+      "readiness": "guard_validated",
+      "claim": "The exact three-block Vaughan square has rank one.",
+      "formula": "sigma*sigma^T=[[1,-1,-1],[-1,1,1],[-1,1,1]] has rank 1 and eigenvalues 3,0,0.",
+      "proof_boundary": "Separate block norms cannot create the missing sign."
+    },
+    {
+      "id": "cesn_15_contact_rank",
+      "role": "nonpromotion_guard",
+      "readiness": "guard_validated",
+      "claim": "The joined value/slope Gram has rank at most two.",
+      "formula": "Adding the value row gives c*c^T+d*d^T of rank at most 2; on c*x=0 only the rank-at-most-one slope square remains.",
+      "proof_boundary": "Positive semidefiniteness alone gives no contact margin."
+    },
+    {
+      "id": "cesn_16_supersession",
+      "role": "proof_corpus_corrigendum",
+      "readiness": "ready_to_apply",
+      "claim": "Only the real-H endpoint specializations are superseded.",
+      "formula": "Only endpoint rows that used H_a in R are superseded. The branch-free anchor, complex factorization, abstract component transport, Abel/Mangoldt identities, adjacent cutoff recurrence, and endpoint-composed Vaughan identity remain exact.",
+      "proof_boundary": "All surviving identities retain their existing proof boundaries."
+    }
+  ],
+  "summary": {
+    "rows": 16,
+    "source_nonreal_witnesses": 1,
+    "corrected_cartesian_projections": 4,
+    "corrected_hermitian_products": 1,
+    "corrected_centered_endpoint_atoms": 1,
+    "corrected_odd_fibre_rotations": 1,
+    "exact_contact_minors": 2,
+    "rank_guards": 2,
+    "historical_artifacts_quarantined": 7,
+    "signed_lower_bounds": 0,
+    "abel_gaps": 0,
+    "winding_bounds": 0
+  }
+}

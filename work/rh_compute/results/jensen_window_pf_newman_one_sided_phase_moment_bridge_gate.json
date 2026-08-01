@@ -1,0 +1,291 @@
+{
+  "kind": "jensen_window_pf_newman_one_sided_phase_moment_bridge_gate",
+  "date": "2026-07-25",
+  "status": "exact one-sided zero-free phase lift, score-probability and signed-Hankel/Abel moment bridge, with conditioning and shape guards plus full-scale common-interlacing and bare-Abel sign rejections; the Xi joint-avoidance theorem remains open",
+  "proof_boundary": "This artifact proves exact probability, complex-lift, phase, first-jet, coefficient, Abel-measure, flow, concentration-threshold, and asymptotic identities. It does not prove the Xi score-characteristic joint-avoidance target, corrected Riemann-Siegel transversality, PF-infinity, Lambda<=0, or RH.",
+  "exact": {
+    "imported_shape": "For 0<=t<=1/5, f_t(u)=exp(t*u^2)*Phi(u) is positive, even, C-infinity, strictly decreasing for u>0, and super-exponentially decaying; (log f_t)''<=-(kappa-2t), kappa=-Phi''(0)/Phi(0)>74.9076",
+    "score_probability": "dnu_t(u)=-f_t'(u)du/f_t(0), u>0, is a nondegenerate probability law with a continuous positive density",
+    "complex_lift": "F_t(x)=integral_0^infinity f_t(u)exp(i*x*u)du=H_t(x)+i*Y_t(x); chi_t(x)=integral_0^infinity exp(i*x*u)dnu_t(u); F_t(x)=i*f_t(0)*(1-chi_t(x))/x for x>0",
+    "cartesian_lift": "Writing chi_t=C_t+i*B_t gives H_t=f_t(0)*B_t/x and Y_t=f_t(0)*(1-C_t)/x>0 for x>0",
+    "phase_contact": "For Theta_t=arg(F_t) in (0,pi), at H_t(x)=0 one has Theta_t=pi/2, Theta_t'=-H_t'/Y_t=-B_t'/(1-C_t); B_t=E_nu[sin(xU)] and B_t'=E_nu[U*cos(xU)]; therefore H_t=H_t'=0 iff B_t=B_t'=0",
+    "scaled_first_jet": "T_L[H_t]=H_t^2+(H_t'/L)^2=f_t(0)^2/x^2*(B_t^2+(B_t'-B_t/x)^2/L^2)",
+    "coefficient_bridge": "If mu_(2k)(t)=integral_R u^(2k)f_t(u)du and c_k(t)=mu_(2k)(t)/(2k)!, then E_nu[U^(2k+1)]=(2k+1)*mu_(2k)/(2*f_t(0)), c_k=2*f_t(0)*E_nu[U^(2k+1)]/(2k+1)!, A_k=k!*c_k, and 2*H_t(sqrt(-z))=sum_(k>=0)c_k*z^k",
+    "shifted_laguerre_bridge": "For q=s*(1-s) and P_(D,n)(w)=sum_(k=0)^D binom(D,k)A_(n+k)w^k, P_(D,n)(w)=2*f_t(0)*D!/(D+n)!*integral_0^1 E_nu[U^(2n+1)*q^n*L_D^(n)(-q*U^2*w)]ds. For every U>0 and 0<s<1, the fixed kernel has D simple negative w-roots; the remaining issue is preservation under this specific positive score/Beta scale mixture",
+    "score_beta_abel_measure": "Let S be uniform on (0,1), independent of U~nu_t, Q=S*(1-S), and define the finite measure rho_t(E)=2*f_t(0)*E_nu[U*1_(Q*U^2 in E)]. Then rho_t has density r_t(v)=4*integral_(2*sqrt(v))^infinity (-f_t'(u))/sqrt(u^2-4*v)du, v>0, and M_k(t)=integral_0^infinity v^k*r_t(v)dv=k!*A_k(t)",
+    "abel_bessel_laguerre_bridge": "2*H_t(sqrt(-z))=integral_0^infinity I_0(2*sqrt(v*z))*r_t(v)dv and P_(D,n)(w)=D!/(D+n)!*integral_0^infinity v^n*L_D^(n)(-v*w)*r_t(v)dv",
+    "abel_flow_concentration_guard": "Writing R_t(v)=integral_v^infinity r_t(s)ds, partial_t r_t(v)=4*v*r_t(v)-2*R_t(v), equivalently M_k'=2*(2*k+1)*M_(k+1)/(k+1). Moreover disc P_(2,n)=4*(A_(n+1)^2-A_n*A_(n+2))>=0 iff M_(n+1)^2/(M_n*M_(n+2))>=(n+1)/(n+2); positivity of rho_t alone gives only the opposite-side Cauchy-Schwarz upper bound M_(n+1)^2/(M_n*M_(n+2))<=1",
+    "full_scale_interlacing_guard": "Because -f_t'(u)>0 for u>0, r_t(v)>0 for every v>0. If 0<ell_1<...<ell_D are the roots of L_D^(n), then the roots of L_D^(n)(-v*w) are -ell_D/v<...<-ell_1/v. For D>=2 the family {L_D^(n)(-v*w):v>0} has no common interlacer: as v tends to 0 every root tends to -infinity, while as v tends to infinity every root tends to 0 from below. Hence a direct global common-interlacing mixture theorem cannot close the Xi target; a weighted Xi-specific total-positive or variation-diminishing connection would still be sufficient",
+    "abel_kernel_sign_guard": "For K(x,y)=(y-x)_+^(-1/2), the 2x2 minor at x=(0,1), y=(2,3) is 1/2-1/sqrt(3)<0, whereas the minor at x=(0,2), y=(1,3) is 1>0. Thus the bare Abel kernel is neither TP_2 nor sign-regular of order 2; any variation-diminishing closure must use the Xi weight or a larger composed kernel",
+    "score_flow": "Writing m_t(u)=-f_t'(u)/f_t(0) and bar_nu_t(u)=integral_u^infinity m_t(v)dv=f_t(u)/f_t(0), partial_t m_t=u^2*m_t-2*u*bar_nu_t. Equivalently, partial_t chi_t=-chi_t''+2*chi_t'/x+2*(1-chi_t)/x^2 and partial_t B_t=-B_t''+2*B_t'/x-2*B_t/x^2",
+    "normalizer_transfer": "Let mathcal_A_t=|M_t((1-i*x)/2)|, Z_t=H_t/mathcal_A_t, g_t=x*mathcal_A_t/f_t(0), and a_t=(log mathcal_A_t)'. Then B_t=g_t*Z_t and B_t'-B_t/x=g_t*(Z_t'+a_t*Z_t). On L>=50, 0<tL<=25, |a_t|/L<1/2, so with m_-=(9-sqrt(17))/8 and m_+=(9+sqrt(17))/8, m_-*g_t^2*T_L[Z_t] <= B_t^2+(B_t'-B_t/x)^2/L^2 <= m_+*g_t^2*T_L[Z_t]. Equivalently, m_-*mathcal_A_t^2*T_L[Z_t] <= T_L[H_t] <= m_+*mathcal_A_t^2*T_L[Z_t]",
+    "phase_conditioning": "Uniformly for 0<=t<=1/5, Y_t(x)=f_t(0)/x-f_t''(0)/x^3+O(x^-5)=f_t(0)/x*(1+(kappa-2t)/x^2+O(x^-4)), while H_t and H_t' are rapidly decreasing; hence pi/2-Theta_t and Theta_t' are O_A(x^-A) for every A",
+    "conditioning_guard": "The exact one-sided phase is globally nonvanishing but asymptotically flat. No fixed polynomial absolute lower bound for |Theta_t'| can be transferred from the corrected Riemann-Siegel phase; quantitative margins must retain their own lift amplitude.",
+    "countermodel": "For f=K_(1,2)=(1-|.|)_+*exp(-(.^2)/8), f is positive, even, strictly decreasing and strongly log-concave, while Fourier[f](xi)=8*sqrt(2*pi)*exp(-2*xi^2)*sin(xi/2)^2/xi^2 has double zeros at xi=2*pi*n; its score probability therefore has B=B'=0 at those points",
+    "countermodel_quadratic_coefficient": "lim_(xi->2*pi) Fourier[f](xi)/(xi-2*pi)^2=sqrt(2*pi)*exp(-8*pi^2)/(2*pi^2)>0",
+    "live_target": "Prove for the Xi score laws nu_t that (B_t(x),B_t'(x))!=(0,0) for every x>38 and 0<t<=1/5, using theta arithmetic or an all-order PF/sign-regular theorem; probability, strong log-concavity, and the zero-free complex lift alone are insufficient"
+  },
+  "diagnostics": {
+    "role": "normalization_and_conditioning_diagnostics_only",
+    "proof_boundary": "The rows numerically cross-check exact identities and the first Xi crossing. They do not establish the cofinal no-contact target.",
+    "dps": 45,
+    "theta_terms": 8,
+    "rows": [
+      {
+        "label": "origin_scale",
+        "t": "0.0",
+        "x": "1.0000000000000000000000000000000000",
+        "F_real": "0.0617821234887595375475711022950",
+        "F_imag": "0.00536226124433314528087727480169",
+        "B": "0.138308825120909150722710536595",
+        "B_prime": "0.136710369608623504354686457479",
+        "phase_velocity": "0.0865011865313348111105123548922",
+        "complex_lift_abs_residual": "2.53164273339932772e-47",
+        "H_characteristic_abs_residual": "0.0",
+        "H_first_characteristic_abs_residual": "2.99349647530325912e-48",
+        "phase_formula_abs_residual": "4.16010481596430068e-46",
+        "exact_Xi_H": "0.0617821234887595375475711022950",
+        "Xi_integral_abs_residual": "0.0"
+      },
+      {
+        "label": "first_xi_crossing",
+        "t": "0.0",
+        "x": "28.269450283469387580914503967124941",
+        "F_real": "3.65266341309597454617387947171e-50",
+        "F_imag": "0.0181612061379581274434711380032",
+        "B": "-5.61758462520972539318165601487e-49",
+        "B_prime": "-0.00546913193651651910002987682407",
+        "phase_velocity": "0.00475849139201126423575890656899",
+        "complex_lift_abs_residual": "2.73728763897477282e-48",
+        "H_characteristic_abs_residual": "4.54032044746720995e-50",
+        "H_first_characteristic_abs_residual": "0.0",
+        "phase_formula_abs_residual": "0.0",
+        "exact_Xi_H": "1.34586884319363546361988654553e-50",
+        "Xi_integral_abs_residual": "2.30679456990233908e-50"
+      },
+      {
+        "label": "positive_time_edge",
+        "t": "0.20000000000000000000",
+        "x": "38.000000000000000000000000000000000",
+        "F_real": "-0.0000154478620675650912327473739218",
+        "F_imag": "0.0124455239128418939102969267037",
+        "B": "-0.00131413215080205734711010188599",
+        "B_prime": "0.000640372957365323859631934002192",
+        "phase_velocity": "-0.000600591980544819600376217770342",
+        "complex_lift_abs_residual": "1.37035698932008560e-48",
+        "H_characteristic_abs_residual": "7.21646471724892824e-50",
+        "H_first_characteristic_abs_residual": "1.47002059055070761e-50",
+        "phase_formula_abs_residual": "1.28292706084425391e-48"
+      }
+    ]
+  },
+  "convergence": {
+    "max_abs_selected_field_delta": "5.66729154114032898e-38"
+  },
+  "rows": [
+    {
+      "id": "nospmb_01_imported_shape",
+      "role": "imported_exact_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The positive-time Xi half-kernel has the shape needed for a score probability.",
+      "formula": "For 0<=t<=1/5, f_t(u)=exp(t*u^2)*Phi(u) is positive, even, C-infinity, strictly decreasing for u>0, and super-exponentially decaying; (log f_t)''<=-(kappa-2t), kappa=-Phi''(0)/Phi(0)>74.9076",
+      "proof_boundary": "Imports the already checked strong-log-concavity gate.",
+      "diagnostics": null
+    },
+    {
+      "id": "nospmb_02_score_probability",
+      "role": "exact_probability_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The negative logarithmic slope defines a probability law on the positive half-line.",
+      "formula": "dnu_t(u)=-f_t'(u)du/f_t(0), u>0, is a nondegenerate probability law with a continuous positive density",
+      "proof_boundary": "Uses strict decrease and the endpoint values of f_t.",
+      "diagnostics": null
+    },
+    {
+      "id": "nospmb_03_zero_free_lift",
+      "role": "exact_complex_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The one-sided Fourier lift is an exact characteristic-function defect and never vanishes on the positive real axis.",
+      "formula": "F_t(x)=integral_0^infinity f_t(u)exp(i*x*u)du=H_t(x)+i*Y_t(x); chi_t(x)=integral_0^infinity exp(i*x*u)dnu_t(u); F_t(x)=i*f_t(0)*(1-chi_t(x))/x for x>0; Writing chi_t=C_t+i*B_t gives H_t=f_t(0)*B_t/x and Y_t=f_t(0)*(1-C_t)/x>0 for x>0",
+      "proof_boundary": "Real x>0; strict positivity uses the continuous nondegenerate score law.",
+      "diagnostics": null
+    },
+    {
+      "id": "nospmb_04_phase_contact",
+      "role": "exact_contact_equivalence",
+      "readiness": "ready_to_apply",
+      "claim": "A Newman double contact is exactly a stationary pi/2 crossing of the globally defined one-sided phase.",
+      "formula": "For Theta_t=arg(F_t) in (0,pi), at H_t(x)=0 one has Theta_t=pi/2, Theta_t'=-H_t'/Y_t=-B_t'/(1-C_t); B_t=E_nu[sin(xU)] and B_t'=E_nu[U*cos(xU)]; therefore H_t=H_t'=0 iff B_t=B_t'=0",
+      "proof_boundary": "No exceptional F_t=0 case remains.",
+      "diagnostics": null
+    },
+    {
+      "id": "nospmb_05_scaled_first_jet",
+      "role": "exact_target_reduction",
+      "readiness": "conditional_ready",
+      "claim": "The full first-jet target is an exact two-observable small-ball problem for the score characteristic function.",
+      "formula": "T_L[H_t]=H_t^2+(H_t'/L)^2=f_t(0)^2/x^2*(B_t^2+(B_t'-B_t/x)^2/L^2)",
+      "proof_boundary": "The displayed identity is exact; positivity on the open outer region remains unproved.",
+      "diagnostics": null
+    },
+    {
+      "id": "nospmb_06_signed_hankel_bridge",
+      "role": "exact_coefficient_bridge",
+      "readiness": "ready_to_apply",
+      "claim": "The signed-Hankel coefficients and every shifted Jensen window are odd-moment/Laguerre mixtures of the same score probability.",
+      "formula": "If mu_(2k)(t)=integral_R u^(2k)f_t(u)du and c_k(t)=mu_(2k)(t)/(2k)!, then E_nu[U^(2k+1)]=(2k+1)*mu_(2k)/(2*f_t(0)), c_k=2*f_t(0)*E_nu[U^(2k+1)]/(2k+1)!, A_k=k!*c_k, and 2*H_t(sqrt(-z))=sum_(k>=0)c_k*z^k; For q=s*(1-s) and P_(D,n)(w)=sum_(k=0)^D binom(D,k)A_(n+k)w^k, P_(D,n)(w)=2*f_t(0)*D!/(D+n)!*integral_0^1 E_nu[U^(2n+1)*q^n*L_D^(n)(-q*U^2*w)]ds. For every U>0 and 0<s<1, the fixed kernel has D simple negative w-roots; the remaining issue is preservation under this specific positive score/Beta scale mixture",
+      "proof_boundary": "This identification does not prove mixture preservation, PF-infinity, or sign regularity.",
+      "diagnostics": null
+    },
+    {
+      "id": "nospmb_06a_score_beta_abel_measure",
+      "role": "exact_abel_measure_bridge",
+      "readiness": "ready_to_apply",
+      "claim": "The score/Beta mixture is a single positive Abel measure whose moments, Bessel transform, shifted Laguerre averages, and Newman-time flow are all exact.",
+      "formula": "Let S be uniform on (0,1), independent of U~nu_t, Q=S*(1-S), and define the finite measure rho_t(E)=2*f_t(0)*E_nu[U*1_(Q*U^2 in E)]. Then rho_t has density r_t(v)=4*integral_(2*sqrt(v))^infinity (-f_t'(u))/sqrt(u^2-4*v)du, v>0, and M_k(t)=integral_0^infinity v^k*r_t(v)dv=k!*A_k(t); 2*H_t(sqrt(-z))=integral_0^infinity I_0(2*sqrt(v*z))*r_t(v)dv and P_(D,n)(w)=D!/(D+n)!*integral_0^infinity v^n*L_D^(n)(-v*w)*r_t(v)dv; Writing R_t(v)=integral_v^infinity r_t(s)ds, partial_t r_t(v)=4*v*r_t(v)-2*R_t(v), equivalently M_k'=2*(2*k+1)*M_(k+1)/(k+1). Moreover disc P_(2,n)=4*(A_(n+1)^2-A_n*A_(n+2))>=0 iff M_(n+1)^2/(M_n*M_(n+2))>=(n+1)/(n+2); positivity of rho_t alone gives only the opposite-side Cauchy-Schwarz upper bound M_(n+1)^2/(M_n*M_(n+2))<=1",
+      "proof_boundary": "Measure positivity and the closed flow do not prove the degree-two concentration threshold at all times, the higher-degree Jensen inequalities, or PF-infinity.",
+      "diagnostics": null
+    },
+    {
+      "id": "nospmb_06b_full_scale_interlacing_guard",
+      "role": "exact_interlacing_countergate",
+      "readiness": "guard_validated",
+      "claim": "Full support of the Abel measure rules out a common interlacer for the entire fixed-scale Laguerre family in every degree at least two.",
+      "formula": "Because -f_t'(u)>0 for u>0, r_t(v)>0 for every v>0. If 0<ell_1<...<ell_D are the roots of L_D^(n), then the roots of L_D^(n)(-v*w) are -ell_D/v<...<-ell_1/v. For D>=2 the family {L_D^(n)(-v*w):v>0} has no common interlacer: as v tends to 0 every root tends to -infinity, while as v tends to infinity every root tends to 0 from below. Hence a direct global common-interlacing mixture theorem cannot close the Xi target; a weighted Xi-specific total-positive or variation-diminishing connection would still be sufficient",
+      "proof_boundary": "This rejects the direct global common-interlacing shortcut, not a weighted Xi-specific total-positive connection.",
+      "diagnostics": null
+    },
+    {
+      "id": "nospmb_06c_abel_kernel_sign_guard",
+      "role": "exact_abel_kernel_countergate",
+      "readiness": "guard_validated",
+      "claim": "The fractional Abel kernel underlying the score pushforward has both signs of two-by-two minors.",
+      "formula": "For K(x,y)=(y-x)_+^(-1/2), the 2x2 minor at x=(0,1), y=(2,3) is 1/2-1/sqrt(3)<0, whereas the minor at x=(0,2), y=(1,3) is 1>0. Thus the bare Abel kernel is neither TP_2 nor sign-regular of order 2; any variation-diminishing closure must use the Xi weight or a larger composed kernel",
+      "proof_boundary": "This rejects total positivity or sign regularity of the bare Abel operator, not a weighted Xi-specific composition.",
+      "diagnostics": null
+    },
+    {
+      "id": "nospmb_07_score_flow",
+      "role": "exact_dynamical_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The score probability and its sine characteristic obey a closed tail-source/radial backward-heat evolution.",
+      "formula": "Writing m_t(u)=-f_t'(u)/f_t(0) and bar_nu_t(u)=integral_u^infinity m_t(v)dv=f_t(u)/f_t(0), partial_t m_t=u^2*m_t-2*u*bar_nu_t. Equivalently, partial_t chi_t=-chi_t''+2*chi_t'/x+2*(1-chi_t)/x^2 and partial_t B_t=-B_t''+2*B_t'/x-2*B_t/x^2",
+      "proof_boundary": "The closed evolution preserves the exact coordinate but does not itself prevent a radial-heat collision.",
+      "diagnostics": null
+    },
+    {
+      "id": "nospmb_08_normalizer_transfer",
+      "role": "exact_quantitative_transfer",
+      "readiness": "ready_to_apply",
+      "claim": "After retaining the lift amplitude, the score first jet and the normalized Newman first jet are uniformly equivalent on the corrected overlap.",
+      "formula": "Let mathcal_A_t=|M_t((1-i*x)/2)|, Z_t=H_t/mathcal_A_t, g_t=x*mathcal_A_t/f_t(0), and a_t=(log mathcal_A_t)'. Then B_t=g_t*Z_t and B_t'-B_t/x=g_t*(Z_t'+a_t*Z_t). On L>=50, 0<tL<=25, |a_t|/L<1/2, so with m_-=(9-sqrt(17))/8 and m_+=(9+sqrt(17))/8, m_-*g_t^2*T_L[Z_t] <= B_t^2+(B_t'-B_t/x)^2/L^2 <= m_+*g_t^2*T_L[Z_t]. Equivalently, m_-*mathcal_A_t^2*T_L[Z_t] <= T_L[H_t] <= m_+*mathcal_A_t^2*T_L[Z_t]",
+      "proof_boundary": "Imports the proved normalizer derivative bound; it does not supply a lower bound for either first jet.",
+      "diagnostics": null
+    },
+    {
+      "id": "nospmb_09_phase_conditioning",
+      "role": "exact_asymptotic_guard",
+      "readiness": "guard_validated",
+      "claim": "The exact zero-free lift is asymptotically flat in phase and has a different quantitative conditioning from the corrected Riemann-Siegel lift.",
+      "formula": "Uniformly for 0<=t<=1/5, Y_t(x)=f_t(0)/x-f_t''(0)/x^3+O(x^-5)=f_t(0)/x*(1+(kappa-2t)/x^2+O(x^-4)), while H_t and H_t' are rapidly decreasing; hence pi/2-Theta_t and Theta_t' are O_A(x^-A) for every A; The exact one-sided phase is globally nonvanishing but asymptotically flat. No fixed polynomial absolute lower bound for |Theta_t'| can be transferred from the corrected Riemann-Siegel phase; quantitative margins must retain their own lift amplitude.",
+      "proof_boundary": "Uniform on the compact time interval; it rejects only lift-independent phase-speed floors.",
+      "diagnostics": null
+    },
+    {
+      "id": "nospmb_10_shape_countermodel",
+      "role": "exact_countermodel",
+      "readiness": "guard_validated",
+      "claim": "Probability, monotonicity, and strong log-concavity do not exclude a score-characteristic double zero.",
+      "formula": "For f=K_(1,2)=(1-|.|)_+*exp(-(.^2)/8), f is positive, even, strictly decreasing and strongly log-concave, while Fourier[f](xi)=8*sqrt(2*pi)*exp(-2*xi^2)*sin(xi/2)^2/xi^2 has double zeros at xi=2*pi*n; its score probability therefore has B=B'=0 at those points; lim_(xi->2*pi) Fourier[f](xi)/(xi-2*pi)^2=sqrt(2*pi)*exp(-8*pi^2)/(2*pi^2)>0",
+      "proof_boundary": "Generic shape countermodel, not the Xi kernel.",
+      "diagnostics": null
+    },
+    {
+      "id": "nospmb_11_xi_diagnostics",
+      "role": "finite_diagnostics",
+      "readiness": "diagnostic_only",
+      "claim": "Independent quadrature checks the lift, characteristic, first-jet, and phase formulas, including at the first Xi crossing.",
+      "formula": "F_t=i*f_t(0)*(1-chi_t)/x and Theta_t'=Im(-chi_t'/(1-chi_t))",
+      "proof_boundary": "Three finite rows and no cofinal conclusion.",
+      "diagnostics": {
+        "convergence": {
+          "max_abs_selected_field_delta": "5.66729154114032898e-38"
+        },
+        "rows": [
+          {
+            "label": "origin_scale",
+            "t": "0.0",
+            "x": "1.0000000000000000000000000000000000",
+            "F_real": "0.0617821234887595375475711022950",
+            "F_imag": "0.00536226124433314528087727480169",
+            "B": "0.138308825120909150722710536595",
+            "B_prime": "0.136710369608623504354686457479",
+            "phase_velocity": "0.0865011865313348111105123548922",
+            "complex_lift_abs_residual": "2.53164273339932772e-47",
+            "H_characteristic_abs_residual": "0.0",
+            "H_first_characteristic_abs_residual": "2.99349647530325912e-48",
+            "phase_formula_abs_residual": "4.16010481596430068e-46",
+            "exact_Xi_H": "0.0617821234887595375475711022950",
+            "Xi_integral_abs_residual": "0.0"
+          },
+          {
+            "label": "first_xi_crossing",
+            "t": "0.0",
+            "x": "28.269450283469387580914503967124941",
+            "F_real": "3.65266341309597454617387947171e-50",
+            "F_imag": "0.0181612061379581274434711380032",
+            "B": "-5.61758462520972539318165601487e-49",
+            "B_prime": "-0.00546913193651651910002987682407",
+            "phase_velocity": "0.00475849139201126423575890656899",
+            "complex_lift_abs_residual": "2.73728763897477282e-48",
+            "H_characteristic_abs_residual": "4.54032044746720995e-50",
+            "H_first_characteristic_abs_residual": "0.0",
+            "phase_formula_abs_residual": "0.0",
+            "exact_Xi_H": "1.34586884319363546361988654553e-50",
+            "Xi_integral_abs_residual": "2.30679456990233908e-50"
+          },
+          {
+            "label": "positive_time_edge",
+            "t": "0.20000000000000000000",
+            "x": "38.000000000000000000000000000000000",
+            "F_real": "-0.0000154478620675650912327473739218",
+            "F_imag": "0.0124455239128418939102969267037",
+            "B": "-0.00131413215080205734711010188599",
+            "B_prime": "0.000640372957365323859631934002192",
+            "phase_velocity": "-0.000600591980544819600376217770342",
+            "complex_lift_abs_residual": "1.37035698932008560e-48",
+            "H_characteristic_abs_residual": "7.21646471724892824e-50",
+            "H_first_characteristic_abs_residual": "1.47002059055070761e-50",
+            "phase_formula_abs_residual": "1.28292706084425391e-48"
+          }
+        ]
+      }
+    },
+    {
+      "id": "nospmb_12_live_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The remaining theorem is Xi-specific joint avoidance for the sine characteristic observable and its derivative.",
+      "formula": "Prove for the Xi score laws nu_t that (B_t(x),B_t'(x))!=(0,0) for every x>38 and 0<t<=1/5, using theta arithmetic or an all-order PF/sign-regular theorem; probability, strong log-concavity, and the zero-free complex lift alone are insufficient",
+      "proof_boundary": "This is still equivalent to the missing positive-time transversality endgame.",
+      "diagnostics": null
+    },
+    {
+      "id": "nospmb_13_nonpromotion",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "The one-sided phase bridge and its coefficient identification do not prove the required joint avoidance.",
+      "formula": "exact lift plus score probability plus finite diagnostics != Lambda<=0 or RH",
+      "proof_boundary": "No Clay-prize conclusion is asserted.",
+      "diagnostics": null
+    }
+  ],
+  "sources": [
+    "outputs/jensen_window_pf_newman_positive_time_strong_logconcavity_gate.md",
+    "outputs/jensen_window_pf_newman_strict_laguerre_correlation_target.md",
+    "outputs/jensen_window_pf_newman_polymath15_critical_wronskian_phase_reduction.md",
+    "outputs/jensen_window_pf_newman_theta_forward_sqrt_to_corrected_rs_C1_transfer_gate.md",
+    "outputs/signed_hankel_jensen_audit.md",
+    "outputs/jensen_window_pf_newman_theta_curvature_probability_operator_gate.md"
+  ]
+}

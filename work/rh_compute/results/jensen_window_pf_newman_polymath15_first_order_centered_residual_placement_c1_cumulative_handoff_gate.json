@@ -1,0 +1,191 @@
+{
+  "counts": {
+    "allocation_dependent_edge_current_guards": 1,
+    "allocation_gauge_parameters": 1,
+    "contact_exclusions": 0,
+    "exact_cumulative_polarizations": 1,
+    "global_remainder_coordinates": 2,
+    "open_cross_current_or_abel_targets": 1,
+    "required_c2_for_allocated_component_current": 1,
+    "required_c2_for_boundary_transfer": 0,
+    "retained_model_signed_edge_families": 1,
+    "retained_model_signed_interior_families": 1,
+    "rows": 16,
+    "whole_jet_c1_homotopies": 1,
+    "xi_level_edge_signs": 0
+  },
+  "date": "2026-07-31",
+  "exact": {
+    "allocation_gauge": "For any constant lambda, assign lambda V_r to the edge and (1-lambda)V_r to the complementary main. Their sum remains V_Z, while the individual edge current varies with lambda.",
+    "boundary_transfer": "M_L(V_J)>1 and M_L(V_r)<1 imply M_L(V_J+sV_r)>0 for 0<=s<=1; no derivative of V_r is used",
+    "c1_box": "|r_[1]|<B_0=100000exp(-5L/4), |partial_x r_[1]/L|<B_1=200000exp(-5L/4)",
+    "canonical_main_decomposition": "Inside V_J only, (mathsf X,mathcal C_N)=(C_edge,D_edge)+sum_(n=1)^(N-1)(c_n,d_n)",
+    "canonical_whole_jet": "V_Z=(Z,partial_x Z/L)=V_J+V_r with V_J=(J_[1],partial_x J_[1]/L) and V_r=(r_[1],partial_x r_[1]/L)",
+    "chart_covariance": "On an adjacent overlap, V_(J,N)+V_(r,N)=V_(J,N+1)+V_(r,N+1)=V_Z, hence Delta V_r=-Delta V_J",
+    "diagonal_reserve": "R_diag=-K(v_edge)-sum_(n=1)^(N-1)K(v_n)>0; K(V_J)=-R_diag+C_cross",
+    "domain": "L>=50, 0<tL<=25 on prescribed first-order charts",
+    "open_invariant_target": "Prove C_cross<R_diag in the required orientation, or prove the division-free Abel gap |mathsf_X|<=delta_L => |mathcal C_N|>A_L+epsilon_term. Then transfer the resulting whole-main boundary theorem to Xi with the C1 homotopy.",
+    "retained_edge": "The edge block is strictly clockwise in every prescribed cell and across every aligned cutoff for q>=1; it remains a component theorem for V_J",
+    "route_correction": "A C2 estimate would be needed only after choosing a noncanonical residual allocation and differentiating that allocated first-jet vector. It is not required by the invariant whole-jet boundary Rouche theorem."
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_residual_placement_c1_cumulative_handoff_gate",
+  "proof_boundary": "This gate proves that the global first-order remainder is canonically attached to the complete jet, that an Xi-level edge allocation and its C2 current are noninvariant, and that the certified C1 remainder is the correct whole-boundary transfer. It preserves the retained-model edge and cutoff signs and gives the exact cumulative polarization. It proves no cross-current bound, Abel gap, winding cap, contact exclusion, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "claim": "The complete normalized Xi first jet is main plus one global remainder jet.",
+      "formula": "V_Z=(Z,partial_x Z/L)=V_J+V_r with V_J=(J_[1],partial_x J_[1]/L) and V_r=(r_[1],partial_x r_[1]/L)",
+      "id": "rpc_01_whole_jet",
+      "proof_boundary": "This identity is made only after the retained components are summed.",
+      "readiness": "proved",
+      "role": "exact source identity"
+    },
+    {
+      "claim": "The global residual has two certified first-jet coordinates.",
+      "formula": "|r_[1]|<B_0=100000exp(-5L/4), |partial_x r_[1]/L|<B_1=200000exp(-5L/4)",
+      "id": "rpc_02_c1_box",
+      "proof_boundary": "No global second x derivative is asserted here.",
+      "readiness": "proved",
+      "role": "uniform analytic input"
+    },
+    {
+      "claim": "The endpoint-terminal edge is a component of the retained main.",
+      "formula": "Inside V_J only, (mathsf X,mathcal C_N)=(C_edge,D_edge)+sum_(n=1)^(N-1)(c_n,d_n)",
+      "id": "rpc_03_main_components",
+      "proof_boundary": "The global remainder is not one of these retained atoms.",
+      "readiness": "proved",
+      "role": "canonical decomposition"
+    },
+    {
+      "claim": "Allocating the global remainder to one component is nonunique.",
+      "formula": "For any constant lambda, assign lambda V_r to the edge and (1-lambda)V_r to the complementary main. Their sum remains V_Z, while the individual edge current varies with lambda.",
+      "id": "rpc_04_allocation_gauge",
+      "proof_boundary": "An allocated component current is not an invariant of Xi.",
+      "readiness": "proved",
+      "role": "nonpromotion guard"
+    },
+    {
+      "claim": "The former four-defect expression is the current change under one chosen allocation.",
+      "formula": "K(v+e)-K(v)=c*w_x+u*d_x+u*w_x-d*u_x-w*c_x-w*u_x",
+      "id": "rpc_05_four_defects",
+      "proof_boundary": "The identity is valid, but it does not canonically define a complete Xi edge.",
+      "readiness": "proved",
+      "role": "exact algebra"
+    },
+    {
+      "claim": "The allocated edge-current sign can change while the whole vector is held fixed by compensation.",
+      "formula": "v=(1,0), v_x=(0,-1), e=(0,1), e_x=(-2,0) gives K(v+lambda e)=-1+2lambda^2",
+      "id": "rpc_06_allocation_witness",
+      "proof_boundary": "The witness is algebraic and is not an asserted Xi state.",
+      "readiness": "proved",
+      "role": "sign guard"
+    },
+    {
+      "claim": "Differentiating an allocated first-jet residual introduces r_[1],xx.",
+      "formula": "partial_x[(partial_x r_[1])/L]=partial_x^2 r_[1]/L-partial_x r_[1]/(xL^2)",
+      "id": "rpc_07_derivative_order",
+      "proof_boundary": "This explains the apparent C2 demand without making it invariant.",
+      "readiness": "proved",
+      "role": "derivative audit"
+    },
+    {
+      "claim": "The whole-jet boundary homotopy uses C1 scalar control and no C2 residual estimate.",
+      "formula": "M_L(V_J)>1 and M_L(V_r)<1 imply M_L(V_J+sV_r)>0 for 0<=s<=1; no derivative of V_r is used",
+      "id": "rpc_08_c2_nonrequirement",
+      "proof_boundary": "This is a boundary-winding transfer, not pointwise interior exclusion.",
+      "readiness": "proved",
+      "role": "route correction"
+    },
+    {
+      "claim": "Matched adjacent remainders compensate the main-chart jump exactly.",
+      "formula": "On an adjacent overlap, V_(J,N)+V_(r,N)=V_(J,N+1)+V_(r,N+1)=V_Z, hence Delta V_r=-Delta V_J",
+      "id": "rpc_09_chart_covariance",
+      "proof_boundary": "Chart covariance does not assign the jump to the endpoint-terminal edge.",
+      "readiness": "proved",
+      "role": "cutoff identity"
+    },
+    {
+      "claim": "The signed projective edge splice and the C1 whole-jet chart transfer have different roles.",
+      "formula": "Delta_cut<-h/25<0 for the retained edge; M_L(Delta J)<1/5 for the whole main chart.",
+      "id": "rpc_10_cutoff_roles",
+      "proof_boundary": "Neither statement is promoted into an Xi-level edge current.",
+      "readiness": "proved",
+      "role": "join separation"
+    },
+    {
+      "claim": "The completed edge theorem remains valid input to the retained main.",
+      "formula": "The edge block is strictly clockwise in every prescribed cell and across every aligned cutoff for q>=1; it remains a component theorem for V_J",
+      "id": "rpc_11_retained_edge",
+      "proof_boundary": "The correction changes only the handoff, not the edge margins.",
+      "readiness": "proved",
+      "role": "component theorem"
+    },
+    {
+      "claim": "The projective current of the retained sum contains every pair cross current.",
+      "formula": "K(sum_a v_a)=sum_a K(v_a)+sum_(a<b)[det(v_a,partial_x v_b)+det(v_b,partial_x v_a)]",
+      "id": "rpc_12_polarization",
+      "proof_boundary": "No diagonal component theorem controls the cross aggregate by itself.",
+      "readiness": "proved",
+      "role": "exact cumulative identity"
+    },
+    {
+      "claim": "The signed edge and interior currents create a positive diagonal reserve.",
+      "formula": "R_diag=-K(v_edge)-sum_(n=1)^(N-1)K(v_n)>0; K(V_J)=-R_diag+C_cross",
+      "id": "rpc_13_diagonal_reserve",
+      "proof_boundary": "Strict cumulative clockwise current still requires C_cross<R_diag.",
+      "readiness": "conditional",
+      "role": "reduced target"
+    },
+    {
+      "claim": "Strictly clockwise component currents are not closed under addition.",
+      "formula": "v_1=(cos(theta),-sin(theta)), v_2=(cos(3theta),-sin(3theta)); K(v_1)=-1, K(v_2)=-3, but v_1+v_2=0 at theta=pi/2",
+      "id": "rpc_14_sum_guard",
+      "proof_boundary": "This is a route guard, not a counterexample to the Xi estimate.",
+      "readiness": "proved",
+      "role": "generic counterexample"
+    },
+    {
+      "claim": "The next admissible theorem is cumulative cross-current control or the endpoint-complete Abel gap.",
+      "formula": "Prove C_cross<R_diag in the required orientation, or prove the division-free Abel gap |mathsf_X|<=delta_L => |mathcal C_N|>A_L+epsilon_term. Then transfer the resulting whole-main boundary theorem to Xi with the C1 homotopy.",
+      "id": "rpc_15_invariant_handoff",
+      "proof_boundary": "Every endpoint, projection pole, exceptional fibre, and cutoff join remains included.",
+      "readiness": "open",
+      "role": "open theorem target"
+    },
+    {
+      "claim": "The noncanonical Xi-edge C2 obligation is retired without claiming contact exclusion.",
+      "formula": "A C2 estimate would be needed only after choosing a noncanonical residual allocation and differentiating that allocated first-jet vector. It is not required by the invariant whole-jet boundary Rouche theorem.",
+      "id": "rpc_16_boundary",
+      "proof_boundary": "No cumulative bound, Abel gap, winding cap, contact exclusion, Lambda<=0, PF-infinity, RH, or prize conclusion is proved.",
+      "readiness": "proved",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "source_kinds": {
+      "critical_ray_edge": "jensen_window_pf_newman_polymath15_first_order_centered_critical_ray_finite_height_real_edge_gate",
+      "cutoff_edge": "jensen_window_pf_newman_polymath15_first_order_centered_adjacent_cutoff_real_edge_projective_splice_gate",
+      "global_remainder": "jensen_window_pf_newman_polymath15_critical_first_order_global_remainder_certificate",
+      "interior_current": "jensen_window_pf_newman_polymath15_first_order_centered_interior_projective_current_gate",
+      "pairwise_occupation": "jensen_window_pf_newman_polymath15_first_order_centered_pairwise_projective_alignment_gate",
+      "rectangular_transfer": "jensen_window_pf_newman_polymath15_first_order_rectangular_boundary_degree_reduction"
+    },
+    "source_sha256": {
+      "critical_ray_edge": "3fd52e8a0927865e95daaea00507eca7e1fdda363f1dd55c84dca4165fdf13e8",
+      "cutoff_edge": "7f65cce881f99ceb7f128b109e90d71642cae91ead7973ead1016c65d0de6a2f",
+      "global_remainder": "ed3d6f75c59c14bd0d3c53bbbc946a1c6719facd899d6524c35c3edfa48ca577",
+      "interior_current": "c1282eac2b2d22c35055880f4eb2607b855446a3b678caf0c072ca983c660419",
+      "pairwise_occupation": "67296ef3368285d83f903a5798c866e05c366953adedaee7e496aceeda064ce8",
+      "rectangular_transfer": "ee07a33aa3407f760ca8efe1e7bed5babe1efc3d2c2380ae089e94d76fd7bd49"
+    }
+  },
+  "status": "exact residual-placement correction, C1 whole-jet boundary transfer, and cumulative-current handoff",
+  "symbolic_certificate": {
+    "allocation_current": "K(v+lambda e)-K(v)=lambda[c*w_x+u*d_x-d*u_x-w*c_x]+lambda^2[u*w_x-w*u_x]",
+    "allocation_sign_witness": "v=(1,0), v_x=(0,-1), e=(0,1), e_x=(-2,0) gives K(v+lambda e)=-1+2lambda^2",
+    "clockwise_sum_guard": "v_1=(cos(theta),-sin(theta)), v_2=(cos(3theta),-sin(3theta)); K(v_1)=-1, K(v_2)=-3, but v_1+v_2=0 at theta=pi/2",
+    "cumulative_polarization": "K(sum_a v_a)=sum_a K(v_a)+sum_(a<b)[det(v_a,partial_x v_b)+det(v_b,partial_x v_a)]",
+    "four_defect_specialization": "K(v+e)-K(v)=c*w_x+u*d_x+u*w_x-d*u_x-w*c_x-w*u_x",
+    "normalized_residual_derivative": "partial_x[(partial_x r_[1])/L]=partial_x^2 r_[1]/L-partial_x r_[1]/(xL^2)",
+    "normalized_second_derivative_expression": "r_xx/L - r_x/(L**2*x)"
+  }
+}

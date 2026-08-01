@@ -1,0 +1,220 @@
+{
+  "builder_sha256": "557f6aa526aebab6b67145b9cec162c421c17331cdb3ca0a78a515d31cbff0f1",
+  "constants": {
+    "base_time": "1/4",
+    "c_star": "4911678521/1933561194",
+    "explicit_ray": "25",
+    "minimum_log_radius": 101,
+    "schedule_offset": 100,
+    "top_time": "1/2"
+  },
+  "date": "2026-07-26",
+  "exact": {
+    "dimensionless_parameter": "q=2tL^2",
+    "equivalent_scale": "s_pf=sqrt(2t)/sqrt(1+2tL^2)",
+    "frequency_chart": "beta=L*s_pf=sqrt(q/(1+q))",
+    "frequency_derivative": "partial_t log(beta)=1/(2t(1+q))",
+    "parabolic_chart": "alpha=s_pf/sqrt(2t)=1/sqrt(1+q)",
+    "parabolic_derivative": "partial_t log(alpha)=-L^2/(1+q)",
+    "partition": "alpha^2+beta^2=1",
+    "scale": "s_pf(t,x)=(L(x)^2+(2t)^(-1))^(-1/2)",
+    "space_derivative": "partial_x log(s_pf)=-2tL/(x(1+2tL^2)), L=log(x/(4pi))",
+    "time_derivative": "partial_t log(s_pf)=1/(2t(1+q))"
+  },
+  "kind": "jensen_window_pf_newman_ray_aligned_parabolic_frequency_reduction",
+  "proof_boundary": "The artifact proves exact exhaustion, scale, chart, and conditional composition identities. It does not prove the Xi relative old-collar estimate, Lambda<=0, RH, PF-infinity, or the Clay prize.",
+  "rows": [
+    {
+      "claim": "An exponential-radius exhaustion keeps every newly entering strip on the already proved explicit tL=25 ray.",
+      "formula": "c=25, a=100, t_j=c/(a+j), L_j=log(R_j/(4pi))=a+j+1, R_j=4pi*exp(L_j)",
+      "id": "rapf_01_explicit_schedule",
+      "proof_boundary": "This changes the exhaustion geometry; it does not control the old descendant collars.",
+      "readiness": "proved_exact",
+      "role": "exact_exhaustion"
+    },
+    {
+      "claim": "The minimum scaled time on the new strip from R_j to R_(j+1) is exactly 25.",
+      "formula": "t_(j+1)*L(x)>=t_(j+1)*L_j=[25/(a+j+1)]*(a+j+1)=25",
+      "id": "rapf_02_new_strip_identity",
+      "proof_boundary": "Uses x>=R_j and monotonicity of L(x).",
+      "readiness": "proved_exact",
+      "role": "exact_exhaustion"
+    },
+    {
+      "claim": "The existing dominant-saddle theorem excludes every first-jet contact on every new strip of the explicit schedule.",
+      "formula": "L>=101>50 and tL>=25 imply H_x^2-H*H_xx>0",
+      "id": "rapf_03_outer_ray_composition",
+      "proof_boundary": "Imports the checked dominant-saddle global-ray theorem. No claim is made below tL=25.",
+      "readiness": "available_exact",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "The ray-aligned rectangles are cofinal in positive time and finite frequency.",
+      "formula": "t_j=25/(100+j)->0, R_j=4pi*exp(101+j)->infinity",
+      "id": "rapf_04_cofinal_geometry",
+      "proof_boundary": "Cofinality alone does not certify the rectangles.",
+      "readiness": "proved_exact",
+      "role": "exact_exhaustion"
+    },
+    {
+      "claim": "After the schedule change, the only all-stage successor antecedent is transport on the old collar.",
+      "formula": "C_j^out=[t_(j+1),t_j]x[38,R_j]; S_j=[t_(j+1),1/2]x[R_j,R_(j+1)] is already contact-free; x<=38 is independently closed",
+      "id": "rapf_05_descendant_localization",
+      "proof_boundary": "A relative old-collar estimate is still open and is the remaining infinite-dimensional Xi input.",
+      "readiness": "proved_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The reciprocal-square blend is a smooth positive scale joining the parabolic and frequency coordinates.",
+      "formula": "s_pf=(L^2+(2t)^(-1))^(-1/2)=sqrt(2t)/sqrt(1+2tL^2)",
+      "id": "rapf_06_blended_scale",
+      "proof_boundary": "Positive scaling preserves contacts and degree but does not itself prove a relative Xi estimate.",
+      "readiness": "proved_exact",
+      "role": "exact_scale"
+    },
+    {
+      "claim": "The two chart weights form an exact unit partition and the blended scale stays within sqrt(2) of the smaller natural scale.",
+      "formula": "alpha=s_pf/sqrt(2t), beta=L*s_pf, alpha^2+beta^2=1; min(sqrt(2t),1/L)/sqrt(2)<=s_pf<=min(sqrt(2t),1/L)",
+      "id": "rapf_07_chart_partition",
+      "proof_boundary": "The comparison is conditioning control, not a lower bound for the Xi first jet.",
+      "readiness": "proved_exact",
+      "role": "exact_scale"
+    },
+    {
+      "claim": "The scale-variation terms are explicit and locally integrable at every positive time.",
+      "formula": "partial_t log(s_pf)=1/[2t(1+2tL^2)]; partial_x log(s_pf)=-2tL/[x(1+2tL^2)]",
+      "id": "rapf_08_scale_derivatives",
+      "proof_boundary": "The time derivative is singular at t=0, as required by the arbitrary-multiplicity Hermite model.",
+      "readiness": "proved_exact",
+      "role": "exact_scale"
+    },
+    {
+      "claim": "A relative bound in either natural chart transfers to the blended chart with at most sqrt(2) conditioning loss in that chart's regime.",
+      "formula": "q<=1: kappa_pf<=sqrt(2)kappa_par+L^2/(1+q); q>=1: kappa_pf<=sqrt(2)kappa_freq+1/[2t(1+q)]",
+      "id": "rapf_09_two_chart_relative_transfer",
+      "proof_boundary": "The inequalities are conditional on Xi relative bounds kappa_par or kappa_freq; neither bound is asserted here.",
+      "readiness": "proved_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "Every new point enters deeply in the frequency chart, then moves continuously toward the parabolic chart as its fixed spatial coordinate descends toward t=0.",
+      "formula": "on entry q=2t_(j+1)L_j^2=50L_j>=5050; for fixed x, q=2tL(x)^2->0 as t->0",
+      "id": "rapf_10_entry_conditioning",
+      "proof_boundary": "Chart conditioning is exact; descendant noncontact still requires the relative Xi inequality.",
+      "readiness": "proved_exact",
+      "role": "exact_scale"
+    },
+    {
+      "claim": "The ray-aligned old-collar logarithmic time ratio tends to zero, so a K/t descendant estimate has vanishing one-step cost.",
+      "formula": "log(t_j/t_(j+1))=log((100+j+1)/(100+j))->0",
+      "id": "rapf_11_one_step_cost",
+      "proof_boundary": "An infinite product may tend to zero; the induction needs only a positive factor at each finite stage.",
+      "readiness": "proved_exact",
+      "role": "exact_asymptotic"
+    },
+    {
+      "claim": "The same schedule can be placed on any fixed c=c_*+epsilon ray above its existential threshold.",
+      "formula": "c_*=4911678521/1933561194; t_(j+1)L_j=c_*+epsilon",
+      "id": "rapf_12_asymptotic_ray_variant",
+      "proof_boundary": "The oscillatory-zeta theorem supplies an existential L_epsilon; the explicit c=25 schedule avoids hiding it.",
+      "readiness": "available_asymptotic",
+      "role": "theorem_composition"
+    },
+    {
+      "claim": "The published upper-time input, explicit new-strip ray, and relative blended-jet transport on every old collar would certify a cofinal family and imply Lambda<=0. Equivalently, one relative theorem on the inner wedge 0<t<=min(1/4,25/L(x)) is sufficient.",
+      "formula": "if ||partial_t(H,s_pf H_x)||<=kappa_j(t)||(H,s_pf H_x)|| on C_j^out with integral_(t_(j+1))^(t_j)kappa_j<infinity for every j, then every P_j is contact-free; equivalently tau(x)=min(1/4,25/L(x)) and an integrable relative bound on 0<t<=tau(x), x>=38, suffices",
+      "id": "rapf_13_conditional_rh_composition",
+      "proof_boundary": "The relative old-collar antecedent is unproved. Therefore this row is not RH or a Clay-prize proof.",
+      "readiness": "open_antecedent",
+      "role": "conditional_theorem"
+    },
+    {
+      "claim": "Construct an a priori two-chart relative majorant for the exact Xi heat flow on the ray-aligned descendant collars, with a finite bounded-L transition and without dividing by the unknown first-jet norm.",
+      "formula": "q<=1: establish kappa_par=O(1/t) in the Hermite chart; q>=1 below the entry ray: establish an integrable frequency-chart bound; kappa must not be defined as ||partial_t V_pf||/||V_pf||",
+      "id": "rapf_14_open_xi_descendant_theorem",
+      "proof_boundary": "On each compact positive-time interval, mere existence of an integrable relative bound is equivalent to nonvanishing: the reverse implication takes kappa=||partial_t V_pf||/||V_pf||. The required a priori majorant is the remaining RH-level analytic obligation.",
+      "readiness": "open",
+      "role": "theorem_target"
+    }
+  ],
+  "schedule_samples": [
+    {
+      "entry_beta_squared": "0.99980201940209856",
+      "entry_log_radius": "101",
+      "entry_q": "5050",
+      "new_strip_min_tL": "25",
+      "next_time": "25/101",
+      "stage": 0,
+      "time": "1/4",
+      "unit_K_log_cost": "0.009950330853168092"
+    },
+    {
+      "entry_beta_squared": "0.99980396000784155",
+      "entry_log_radius": "102",
+      "entry_q": "5100",
+      "new_strip_min_tL": "25",
+      "next_time": "25/102",
+      "stage": 1,
+      "time": "25/101",
+      "unit_K_log_cost": "0.0098522964430116395"
+    },
+    {
+      "entry_beta_squared": "0.99981985227886871",
+      "entry_log_radius": "111",
+      "entry_q": "5550",
+      "new_strip_min_tL": "25",
+      "next_time": "25/111",
+      "stage": 10,
+      "time": "5/22",
+      "unit_K_log_cost": "0.0090498355199178562"
+    },
+    {
+      "entry_beta_squared": "0.99990050741219783",
+      "entry_log_radius": "201",
+      "entry_q": "10050",
+      "new_strip_min_tL": "25",
+      "next_time": "25/201",
+      "stage": 100,
+      "time": "1/8",
+      "unit_K_log_cost": "0.0049875415110389679"
+    },
+    {
+      "entry_beta_squared": "0.99998183502570348",
+      "entry_log_radius": "1101",
+      "entry_q": "55050",
+      "new_strip_min_tL": "25",
+      "next_time": "25/1101",
+      "stage": 1000,
+      "time": "1/44",
+      "unit_K_log_cost": "0.00090867793621811225"
+    },
+    {
+      "entry_beta_squared": "0.99999802000194038",
+      "entry_log_radius": "10101",
+      "entry_q": "505050",
+      "new_strip_min_tL": "25",
+      "next_time": "25/10101",
+      "stage": 10000,
+      "time": "1/404",
+      "unit_K_log_cost": "9.900499983335809e-05"
+    }
+  ],
+  "source_sha256": {
+    "adaptive_jet": "cbce4d9484e7f001db0630af20eacd1a4e739f48094ebdd468caa5717a3380e2",
+    "compact_transversality": "e219c24e23f36544bede3cbcedef4477165a6a5482fcb08827413045f4d0854b",
+    "diagonal_exhaustion": "47f23141c580d5dbb13f971dcd1d01f4c7e39a7935f828c2950d67329e7158b9",
+    "dominant_saddle_global_ray": "9f5d8d208e84533241e7c4de69d7646e991b99406b56a687e2976741bd98bf3e",
+    "oscillatory_zeta_handoff": "65da15cd562e3b7ef9cc3e0fb448d1cc8c547c928e131a05e1e5ca06ebb148a5",
+    "positive_boundary_attainment": "09062502a7000af8d232d57f437d11237e5cab376e08f118716862ca7d663f5d",
+    "scaled_successor": "84c53a852a3bc6e217cc8ddce6a356f79d1e02aeeefb069a5b60692537a235d8"
+  },
+  "status": "exact ray-aligned exhaustion and parabolic-frequency scale reduction with one open Xi descendant antecedent",
+  "summary": {
+    "asymptotic_compositions": 1,
+    "exact_reductions": 11,
+    "new_strip_open_antecedents": 0,
+    "old_collar_open_antecedents": 1,
+    "open_antecedents": 2,
+    "rows": 14
+  }
+}

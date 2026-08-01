@@ -1,0 +1,279 @@
+{
+  "kind": "jensen_window_pf_mertens_planar_boundary_suffix_localization_gate",
+  "date": "2026-07-24",
+  "status": "exact bulk localization, terminal-collar recovery, cofinal RH-equivalence, and strict norm-separation guard",
+  "source": {
+    "formal_core": "outputs/formal_core.md",
+    "suffix_energy_handoff": "outputs/jensen_window_pf_mertens_planar_boundary_suffix_energy_handoff.md",
+    "affine_tent_handoff": "outputs/jensen_window_pf_mertens_affine_tent_bridge_handoff.md"
+  },
+  "rows": [
+    {
+      "id": "pbslg_01_inherited_energy",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Retain N=2K+1, R=ceil(K^(1-alpha/2)), Delta_i=w_i-w_(i-1), B_i=A_i+beta for i<K, B_K=beta, E_B=sum_(i=1)^K Delta_i B_i^2, and H_K=sum_(i=1)^K B_i^2.",
+      "proof_boundary": "Here 0<alpha<1, K is dyadic, and K>=4."
+    },
+    {
+      "id": "pbslg_02_odd_sine_partial_sum",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For q_r=2r-1, sum_(r=h)^ell sin(q_r u)=sin((ell-h+1)u)sin((h+ell-1)u)/sin(u).",
+      "proof_boundary": "The formula holds for 0<u<pi and finite 1<=h<=ell."
+    },
+    {
+      "id": "pbslg_03_square_wave_tail",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "For S_R(u)=sum_(r<=R)sin(q_r u)/q_r, |S_R(u)-pi/4|<=1/[(2R+1)sin(u)] on 0<u<pi.",
+      "proof_boundary": "This is Abel summation of the infinite odd-sine tail."
+    },
+    {
+      "id": "pbslg_04_interior_parameters",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Set eta_R=arcsin(8/[pi(2R+1)]), L=ceil(N eta_R/pi), and J=min(K,K+2-L).",
+      "proof_boundary": "The minimum at K is required when L is one or two."
+    },
+    {
+      "id": "pbslg_05_increment_slivers",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "Writing a=pi/N, Delta_i for i<K is 2/N times the S_R integrals over [(K-1-i)a,(K-i)a] and [(K-2+i)a,(K-1+i)a], while Delta_K=(2/N)integral_(a)^(3a)S_R(u)du.",
+      "proof_boundary": "The endpoint formula uses S_R(pi-u)=S_R(u)."
+    },
+    {
+      "id": "pbslg_06_interior_plateau",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "S_R(u)>=pi/8 throughout [eta_R,pi-eta_R].",
+      "proof_boundary": "No arithmetic coefficient enters this spectral bound."
+    },
+    {
+      "id": "pbslg_07_bulk_increment_lower_bound",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "Every 1<=i<=J has an interior sliver of length at least pi/N, hence Delta_i>=pi^2/(4N^2).",
+      "proof_boundary": "For L<=2 the endpoint sliver is included; otherwise J<K."
+    },
+    {
+      "id": "pbslg_08_localized_mass",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "Q_J:=sum_(i=1)^J B_i^2 satisfies Q_J<=4N^2 E_B/pi^2.",
+      "proof_boundary": "This uses only positivity and the bulk increment lower bound."
+    },
+    {
+      "id": "pbslg_09_suffix_lipschitz",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "Because B_i-B_(i+1)=u_i and |u_i|<=1, |B_(J+t)|<=|B_J|+t for 1<=t<=K-J.",
+      "proof_boundary": "The future anchor beta need not be bounded separately."
+    },
+    {
+      "id": "pbslg_10_exact_collar_recovery",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "For m=K-J, H_K<=(1+2m)Q_J+m(m+1)(2m+1)/3.",
+      "proof_boundary": "This is a deterministic bounded-increment inequality."
+    },
+    {
+      "id": "pbslg_11_coarse_collar_recovery",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "Since m<=L, H_K<=[4N^2(2L+1)/pi^2]E_B+2L^3.",
+      "proof_boundary": "The terminal collar is the only loss in the reverse comparison."
+    },
+    {
+      "id": "pbslg_12_collar_length",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "The elementary arcsine chord bound gives L<=1+4N/[pi(2R+1)]<=1+2N/(pi R).",
+      "proof_boundary": "For R=ceil(K^(1-alpha/2)), L=O(K^(alpha/2))."
+    },
+    {
+      "id": "pbslg_13_fixed_alpha_summability",
+      "role": "exact_reduction",
+      "status": "available_exact",
+      "statement": "If E_B=O_delta(K^delta) for every delta>0 at a fixed alpha, then sum_(K dyadic)K^(-2-alpha)H_K is finite.",
+      "proof_boundary": "Choose delta<alpha/2; both collar terms are dyadically summable."
+    },
+    {
+      "id": "pbslg_14_affine_tent_composition",
+      "role": "theorem_composition",
+      "status": "available_exact",
+      "statement": "By MATBH.39, fixed-alpha all-epsilon subpower control of E_B implies R_alpha<infinity.",
+      "proof_boundary": "One fixed alpha gives only its shifted reciprocal-tail criterion."
+    },
+    {
+      "id": "pbslg_15_cofinal_forward_implication",
+      "role": "theorem_composition",
+      "status": "available_exact",
+      "statement": "If the E_B subpower condition holds for every member of one fixed cofinal sequence alpha_j->0+, then RH follows.",
+      "proof_boundary": "No alpha=0 or uniform-in-alpha passage is used."
+    },
+    {
+      "id": "pbslg_16_rh_anchor_bound",
+      "role": "theorem_composition",
+      "status": "available_exact",
+      "statement": "Under RH, M(x)=O_delta(x^(1/2+delta)); partial summation gives beta_K=O_delta(K^(1/2+delta)) and B_i=O_delta(K^(1/2+delta)) uniformly in i.",
+      "proof_boundary": "The beta weight is monotone with uniformly bounded variation."
+    },
+    {
+      "id": "pbslg_17_rh_energy_bound",
+      "role": "theorem_composition",
+      "status": "available_exact",
+      "statement": "Under RH, H_K=O_delta(K^(2+delta)); PBSE.17 then gives E_B=O_delta(K^delta) for every delta>0.",
+      "proof_boundary": "The epsilon parameter is renamed after the square."
+    },
+    {
+      "id": "pbslg_18_cofinal_equivalence",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "Along any fixed cofinal positive-alpha sequence, the all-epsilon E_B subpower condition is equivalent to RH.",
+      "proof_boundary": "This is a composition of the collar theorem and prior RH criteria."
+    },
+    {
+      "id": "pbslg_19_synthetic_terminal_vector",
+      "role": "countermodel_definition",
+      "status": "available_exact",
+      "statement": "Set u_(K-1)=-1, all other current u_i=0, put one future coefficient v_(2K)=1, and set all other future coefficients to zero.",
+      "proof_boundary": "All synthetic coefficients have modulus at most one."
+    },
+    {
+      "id": "pbslg_20_synthetic_energies",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For the terminal vector beta=1, B_i=0 for i<K, H_K=1, and E_B=Delta_K=c-w_(K-1)>0.",
+      "proof_boundary": "The witness isolates the endpoint anchor direction."
+    },
+    {
+      "id": "pbslg_21_endpoint_increment_bound",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "Spectral differencing gives 0<Delta_K<=8pi^2 R/N^3.",
+      "proof_boundary": "The bound uses |sin(2theta)sin(theta)|<=2theta^2 modewise."
+    },
+    {
+      "id": "pbslg_22_no_uniform_lower_comparison",
+      "role": "countermodel_guard",
+      "status": "guard_active",
+      "statement": "For the terminal vector, K^2 E_B/H_K<=8pi^2 R K^2/N^3=O(R/K)->0.",
+      "proof_boundary": "Therefore no uniform E_B>=c K^(-2)H_K norm bound exists."
+    },
+    {
+      "id": "pbslg_23_finite_diagnostic",
+      "role": "finite_validation",
+      "status": "validated_finite",
+      "statement": "At alpha=1/2 and K=16,...,1024, every bulk increment exceeds the proved threshold and direct Mobius values give K^2 E_B/H_K near 2.35--2.47.",
+      "proof_boundary": "Finite values prove no asymptotic Mobius estimate."
+    },
+    {
+      "id": "pbslg_24_route_guard",
+      "role": "route_guard",
+      "status": "guard_active",
+      "statement": "E_B is strictly weaker as a finite-dimensional norm, but bounded coefficient increments recover its missing O(K^(alpha/2)) terminal collar at the cofinal theorem scale.",
+      "proof_boundary": "The boundary route is an RH-equivalent gate, not an easier shortcut."
+    },
+    {
+      "id": "pbslg_25_open_energy_gate",
+      "role": "theorem_target",
+      "status": "open",
+      "statement": "Prove E_B=O_delta(K^delta) for every delta>0 on every dyadic scale and every member of one fixed cofinal positive-alpha sequence, without assuming RH.",
+      "proof_boundary": "This target is now explicitly calibrated as RH-equivalent."
+    },
+    {
+      "id": "pbslg_26_proof_boundary",
+      "role": "proof_guard",
+      "status": "guard_active",
+      "statement": "The localization, collar recovery, cofinal composition, and synthetic norm-separation guard are exact.",
+      "proof_boundary": "No E_B estimate, Y projection estimate, RH, PF-infinity, Lambda<=0, or Clay-prize result is proved."
+    }
+  ],
+  "diagnostic": {
+    "alpha": 0.5,
+    "rigorous_bulk_threshold": 2.4674011002723395,
+    "rows": [
+      {
+        "K": 16,
+        "R": 8,
+        "L": 2,
+        "J": 16,
+        "min_bulk_N2_Delta": 6.96730549,
+        "terminal_K2_Delta": 2.551726426,
+        "mobius_K2_E_over_H": 2.35263005
+      },
+      {
+        "K": 32,
+        "R": 14,
+        "L": 2,
+        "J": 32,
+        "min_bulk_N2_Delta": 7.068824342,
+        "terminal_K2_Delta": 2.596386886,
+        "mobius_K2_E_over_H": 2.376051298
+      },
+      {
+        "K": 64,
+        "R": 23,
+        "L": 3,
+        "J": 63,
+        "min_bulk_N2_Delta": 7.247416957,
+        "terminal_K2_Delta": 2.497087829,
+        "mobius_K2_E_over_H": 2.427715794
+      },
+      {
+        "K": 128,
+        "R": 39,
+        "L": 3,
+        "J": 127,
+        "min_bulk_N2_Delta": 7.227781985,
+        "terminal_K2_Delta": 2.333757268,
+        "mobius_K2_E_over_H": 2.443250924
+      },
+      {
+        "K": 256,
+        "R": 64,
+        "L": 4,
+        "J": 254,
+        "min_bulk_N2_Delta": 9.125891467,
+        "terminal_K2_Delta": 2.078006159,
+        "mobius_K2_E_over_H": 2.452812821
+      },
+      {
+        "K": 512,
+        "R": 108,
+        "L": 4,
+        "J": 510,
+        "min_bulk_N2_Delta": 8.721113843,
+        "terminal_K2_Delta": 1.842244233,
+        "mobius_K2_E_over_H": 2.462827953
+      },
+      {
+        "K": 1024,
+        "R": 182,
+        "L": 5,
+        "J": 1021,
+        "min_bulk_N2_Delta": 9.26871261,
+        "terminal_K2_Delta": 1.608344198,
+        "mobius_K2_E_over_H": 2.462331675
+      }
+    ]
+  },
+  "summary": {
+    "row_count": 26,
+    "exact_result_count": 22,
+    "finite_validation_count": 1,
+    "guard_count": 3,
+    "open_energy_gate_count": 1,
+    "bulk_localization_proved": true,
+    "terminal_collar_recovery_proved": true,
+    "cofinal_rh_equivalence_proved": true,
+    "uniform_lower_norm_comparison_proved": false,
+    "anchored_mobius_energy_estimate_proved": false,
+    "interior_projection_estimate_proved": false,
+    "rh_proved": false,
+    "pf_infinity_proved": false,
+    "lambda_le_zero_proved": false
+  }
+}

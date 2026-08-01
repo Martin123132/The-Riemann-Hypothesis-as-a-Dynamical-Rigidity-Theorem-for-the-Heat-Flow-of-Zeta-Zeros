@@ -1,0 +1,85 @@
+{
+  "builder_sha256": "30cbca58b55653e1b97c6a8a1ccca65dd9b075c09f3e83fa1e5da44bd2f96d90",
+  "date": "2026-07-25",
+  "exact_summary": {
+    "all_j_xi_theorem": false,
+    "exact_reductions": 9,
+    "open_xi_targets": 1,
+    "relative_transport_available": true,
+    "requires_endpoint_simplicity": false,
+    "row_count": 10,
+    "time_dependent_positive_scaling": true
+  },
+  "kind": "jensen_window_pf_newman_time_dependent_scaled_successor_lemma",
+  "next_exact_obligation": "Choose an explicit positive entry/descendant scale profile and prove Xi-specific relative adaptive-jet bounds on old cells together with a corrected Riemann-Siegel half-plane or weighted slope-gap theorem on each new right strip.",
+  "proof_boundary": "Positive-scale contact/degree invariance, the full scaled heat derivative, additive and relative transport, Hermite specialization, cofinal factor, and scale-switch homotopy are exact. The Xi entry cone, relative descendant bound, interface estimates, and all-j composition are not proved. This does not prove Q209, Lambda<=0, RH, PF-infinity, or the Clay prize.",
+  "rows": [
+    {
+      "claim": "For any continuous positive scale s(t,x), the scaled first jet has exactly the same contact set as the ordinary first jet.",
+      "formula": "V_s=(H,s*H_x), s>0; V_s=0 iff (H,H_x)=0",
+      "id": "positive_scaled_jet",
+      "kind": "exact_definition"
+    },
+    {
+      "claim": "Positive scaling preserves boundary degree and local contact index through an explicit GL+(2,R) homotopy.",
+      "formula": "A_r=diag(1,(1-r)+r*s), 0<=r<=1; det(A_r)=(1-r)+r*s>0",
+      "id": "scaled_degree_homotopy",
+      "kind": "exact_lemma"
+    },
+    {
+      "claim": "The time derivative of a time-dependent scaled jet has one explicit scale-variation term.",
+      "formula": "If H_t=-H_xx, then partial_t V_s=(-H_xx,s_t*H_x-s*H_xxx)",
+      "id": "time_dependent_heat_jet",
+      "kind": "exact_identity"
+    },
+    {
+      "claim": "The original convex-cell additive transport theorem remains valid with the full time-dependent derivative.",
+      "formula": "If V_s(t_j,I) subset C, d=dist(0,C)>0, and M>=sup_collar||partial_t V_s||, then ||V_s(t,x)||>=d-|t-t_j|*M",
+      "id": "additive_scaled_transport",
+      "kind": "exact_inequality"
+    },
+    {
+      "claim": "An integrable relative heat-jet bound transports every nonzero old jet multiplicatively and cannot create a positive-time contact.",
+      "formula": "If ||partial_t V_s(t,x)||<=kappa(t)||V_s(t,x)||, then ||V_s(t,x)||>=exp(-integral_t^t_j kappa(r)dr)*||V_s(t_j,x)||",
+      "id": "relative_scaled_transport",
+      "kind": "exact_inequality"
+    },
+    {
+      "claim": "A whole old phase cell inherits a positive descendant clearance without requiring an additive ratio below one.",
+      "formula": "If dist(0,V_s(t_j,I))>=d_j>0, then dist(0,V_s(t,I))>=d_j*exp(-integral_t^t_j kappa)",
+      "id": "relative_cell_clearance",
+      "kind": "exact_inequality"
+    },
+    {
+      "claim": "The multiplicity-compatible scale s=sqrt(2t) inserts the exact Hermite condition number into the generalized successor.",
+      "formula": "s=sqrt(2t), s_t=1/s; kappa_m(t)=C_m/(2t)",
+      "id": "adaptive_hermite_specialization",
+      "kind": "exact_composition"
+    },
+    {
+      "claim": "On t_j=1/(5j), the relative descendant factor is positive at every stage and its one-step logarithmic cost tends to zero.",
+      "formula": "exp(-integral_(t_(j+1))^t_j C_m/(2t)dt)=(j/(j+1))^(C_m/2)>0; (C_m/2)*log(1+1/j)->0",
+      "id": "cofinal_multiplicative_factor",
+      "kind": "exact_composition"
+    },
+    {
+      "claim": "Any two positive jet scales can be blended without changing contacts or degree, allowing separate entry and descendant coordinates.",
+      "formula": "s_r=(1-r)*s_entry+r*s_descendant>0; diag(1,s_r) is in GL+(2,R)",
+      "id": "positive_scale_switch",
+      "kind": "exact_lemma"
+    },
+    {
+      "claim": "A finite base, a new-strip entry cone, and a relative scaled-jet bound on every descendant collar would give the cofinal successor without an endpoint-simplicity assumption.",
+      "formula": "entry strips: q_j.V_(s_entry)>=eta_j>0; descendant collars: ||partial_t V_(s_desc)||<=kappa_j(t)||V_(s_desc)|| with finite collar integrals; compose through a positive scale homotopy",
+      "id": "two_regime_successor_target",
+      "kind": "open_xi_target",
+      "status": "open and not proved"
+    }
+  ],
+  "source_sha256": {
+    "adaptive_jet_benchmark": "cbce4d9484e7f001db0630af20eacd1a4e739f48094ebdd468caa5717a3380e2",
+    "adiabatic_successor_lemma": "beedc9cf101ab6d1eb9c9778bd05c29b1a4a2895e9eec6425f05fbd45ad0bae6",
+    "crossing_slope_gap_reduction": "4a9975c1808a49d3a4c23288ae396fda52bd1a6ac55c1c4a40e29fb500b710d7"
+  },
+  "status": "exact time-dependent scaled-jet successor and relative transport lemma with one open two-regime Xi antecedent"
+}

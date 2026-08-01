@@ -1,0 +1,285 @@
+{
+  "date": "2026-07-28",
+  "exact": {
+    "carrier_jet": "For z_n=X_n+iY_n and z_(n,x)=(varrho_n+i*nu_n)z_n, X_(n,x)=varrho_nX_n-nu_nY_n and Y_(n,x)=nu_nX_n+varrho_nY_n.",
+    "components": "Put c_s=Re(s_*'), b=Im(s_*'), k_n=u_n-u_N=log(N/n), so k_(n,x)=0. Then c_n=X_n and d_n=c_s*k_n*X_n-b*u_n*Y_n.",
+    "cumulative_mass_boundary": "Strict clockwise flow of every interior atom does not sign the cumulative real masses P_k in the slope-ordered Abel identity, does not order different h_n, and does not bound their order changes. The remaining source theorem is still an Xi-specific one-sided cumulative-mass estimate, now with N-1 monotone interior projective atoms and one exact exceptional edge block.",
+    "diagnostics": {
+      "constant_audit": {
+        "curvature_integer_guard": "650<9*2^50",
+        "gershgorin_row_one": "-1/8+1/64+1/32=-5/64",
+        "gershgorin_row_two": "-1/8+1/32=-3/32",
+        "mixed_budget_using_pi_gt_3": "1/64+1/(8*pi)<1/64+1/24=11/192<1/16",
+        "phase_integer_guard": "67592<144*2^75"
+      },
+      "order_swap_guard": {
+        "boundary": "This hypothetical exact pair is not an Xi carrier pair. It proves only that individual monotonicity, as a theorem type, cannot by itself bound slope-order changes.",
+        "example": "h_1(x)=-x and h_2(x)=-x+sin(x)/2 both decrease strictly, because h_1'=-1 and -3/2<=h_2'<=-1/2.",
+        "swaps": "Nevertheless h_2-h_1=sin(x)/2 changes sign at every successive multiple of pi."
+      },
+      "terminal_sign_guard": "The choices b=-1/2,u_x=1,(X_N,Y_N)=(1,1) and (1,-1) give J_N=1/2 and -1/2. This is a local algebraic nonpromotion guard, not two asserted Xi cutoff states."
+    },
+    "division_free_current": "J_n:=c_n*d_(n,x)-d_n*c_(n,x)=c_(s,x)*k_n*X_n^2-(b_x*u_n+b*u_x)*X_n*Y_n-b*u_n*nu_n*(X_n^2+Y_n^2). The radial amplitude current varrho_n cancels identically from J_n.",
+    "domain": "Fix one N=floor(a) chart on L>=50, 0<tL<=25, q=2*t*L^2>=1. The interior theorem applies to 1<=n<=N-1; when N=1 it is vacuous. It includes q=1, where t=1/(2L^2) and 0<tL=1/(2L)<=1/100.",
+    "edge_block": "Define the exceptional edge block C_edge=c_0+c_N and D_edge=d_0+d_N. Then mathsf_X=C_edge+sum_(n=1)^(N-1)c_n and mathcal_C_N=D_edge+sum_(n=1)^(N-1)d_n exactly. If C_edge=0, retain D_edge division-free. This packages the only carrier not covered by the interior theorem with the recurrent endpoint instead of assigning either one an unsupported sign.",
+    "effective_slope": "When X_n!=0, h_n=d_n/c_n=c_s*log(N/n)-b*u_n*tan(theta_n), and h_(n,x)=c_(s,x)*log(N/n)-(b_x*u_n+b*u_x)*tan(theta_n)-b*u_n*nu_n*sec(theta_n)^2=J_n/X_n^2.",
+    "endpoint_recurrence": "Distinguish two source objects that were both denoted J_a. Inside one chart, J_a^(der)=H_(a,x)+mu_aH_a is generally complex, and h_0=Re(J_a^(der))/H_a-Im(J_a^(der))/(T_0H_a)-c_s*u_N only when H_a!=0. At an adjacent cutoff, J_a^(adj)=H_a(p+2)+H_a(p) and Q_N=f_(N+1)+kappa_NJ_a^(adj)=E_[1],N+1-E_[1],N. Recompute the terminal centering and transport the aggregate by mathcal_C_(N+1)-mathcal_C_N=Delta mathsf_A-alpha_(N+1)*Delta mathsf_X+(alpha_N-alpha_(N+1))*mathsf_X_N, with Delta A_a=Re[Q_(N,x)-lambda_aQ_N-e_(N+1)d_(N+1,x)]. Never identify J_a^(der) with J_a^(adj), and infer no separate endpoint or terminal projective sign.",
+    "interior_envelope": "For n<=N-1, u_n>=log(N/(N-1))>1/N>=1/a and 0<=k_n=log(N/n)<L. Since a^2<2*exp(L), u_n^2>exp(-L)/2. The monotone boundary checks 13L<pi^2*exp(L) and 33796a<x^2 follow for L>=50 from 650<9*2^50 and 67592<144*2^75. Therefore 8449/x^2<u_n/4, |c_(s,x)|k_n<u_n^2/64, |b_x|u_n<u_n^2/64, and u_x<u_n^2/(8*pi).",
+    "matrix_budget": "Put B_n=b_x*u_n+b*u_x and K_n=b*u_n*nu_n. Then nu_n<-u_n/4, K_n>=u_n^2/8, and |B_n|<u_n^2/16 because 1/64+1/(8*pi)<1/64+1/24=11/192<1/16. Moreover J_n=[X_n,Y_n]M_n[X_n,Y_n]^T with M_n=[[c_(s,x)k_n-K_n,-B_n/2],[-B_n/2,-K_n]].",
+    "negative_definite_theorem": "Gershgorin gives -1/8+1/64+1/32=-5/64 and -1/8+1/32=-3/32. Hence every eigenvalue of M_n is at most -5*u_n^2/64, and J_n<=-(5/64)*u_n^2*|z_n|^2<0 for 1<=n<=N-1.",
+    "order_swap_guard": "h_1(x)=-x and h_2(x)=-x+sin(x)/2 both decrease strictly, because h_1'=-1 and -3/2<=h_2'<=-1/2. Nevertheless h_2-h_1=sin(x)/2 changes sign at every successive multiple of pi. This hypothetical exact pair is not an Xi carrier pair. It proves only that individual monotonicity, as a theorem type, cannot by itself bound slope-order changes.",
+    "pi_provenance": "The pi in x=4*pi*exp(L), a^2=x/(4*pi)+t/16, and u_x=1/(8*pi*a^2) comes from the completed-zeta factor pi^(-s/2)*Gamma(s/2)*zeta(s) and the Riemann-Siegel saddle a^2=T_0/(2*pi). The use of pi>3 in one rational budget is an elementary bound on that same constant. No circle fitted to the carriers and no prefix polygon introduces pi.",
+    "projective_flow": "The interior vector v_n=(c_n,d_n) never vanishes: if X_n=0, then Y_n!=0 and d_n=-b*u_n*Y_n!=0. Its projective angle psi_n=arg(c_n+i*d_n) therefore satisfies psi_(n,x)=J_n/(c_n^2+d_n^2)<0. On X_n!=0, h_(n,x)=J_n/X_n^2<0.",
+    "proof_boundary": "This proves the exact division-free carrier current, radial-current cancellation, quantitative negative definiteness and strict projective orientation for every interior carrier on the stated q>=1 domain, including q=1. It also proves only an algebraic terminal sign obstruction, an exact edge-block decomposition, and a generic order-swap nonpromotion guard. It does not prove an Xi cumulative-mass estimate, an edge-block sign, the Abel-scalar gap, successor count, q<1 closure, finite-height effectivity, contact exclusion, Lambda<=0, PF-infinity, RH, or a Clay-prize conclusion.",
+    "q_lt_1": "The q<1 layer remains a separate multiplicity-compatible parabolic/Hermite or boundary-degree theorem. The interior current calculation is not promoted to t=0 endpoint simplicity.",
+    "route_decision": "Retain the negative-definite interior current as a new analytic lemma. In the next stage, formulate the aggregate transport on oriented projective cells for n<=N-1, but carry (C_edge,D_edge) by the exact endpoint recurrence. Seek summation-by-parts or oscillatory control of the actual Xi cumulative masses; do not infer it from monotonicity alone or split the terminal and endpoint signs.",
+    "source_bounds": "The source gives nu_n<=8449/x^2-u_n/2, -b>=1/2, |b|<1, and u_x=1/(8*pi*a^2). Also s_*''=-t*alpha''(s)/8. Since alpha''(s)=1/s^3+2/(s-1)^3-1/(2s^2), |s|=|s-1|=sqrt(1+x^2)/2, t<=1/2, and x>1, |alpha''|<=26/x^2 and hence |c_(s,x)|,|b_x|<=13/(8*x^2).",
+    "terminal_obstruction": "For n=N, k_N=0 and J_N=-(b_x*u_N+b*u_x)X_NY_N-b*u_N*nu_N*(X_N^2+Y_N^2). At the left cutoff u_N=0, J_N=-b*u_x*X_NY_N, which has either sign under the currently proved bounds. At u_N=0 and X_N=0, the isolated terminal component (c_N,d_N)=(X_N,0) is the zero vector, so it has no projective label. The choices b=-1/2,u_x=1,(X_N,Y_N)=(1,1) and (1,-1) give J_N=1/2 and -1/2. This is a local algebraic nonpromotion guard, not two asserted Xi cutoff states.",
+    "zero_projection_join": "At X_n=0 the ratio h_n is not used, but J_n=-K_n*Y_n^2<=-(1/8)*u_n^2*Y_n^2<0. Thus the division-free projective orientation crosses every interior real-projection zero with the same strict sign."
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_interior_projective_current_gate",
+  "proof_boundary": "This proves the exact division-free carrier current, radial-current cancellation, quantitative negative definiteness and strict projective orientation for every interior carrier on the stated q>=1 domain, including q=1. It also proves only an algebraic terminal sign obstruction, an exact edge-block decomposition, and a generic order-swap nonpromotion guard. It does not prove an Xi cumulative-mass estimate, an edge-block sign, the Abel-scalar gap, successor count, q<1 closure, finite-height effectivity, contact exclusion, Lambda<=0, PF-infinity, RH, or a Clay-prize conclusion.",
+  "rows": [
+    {
+      "claim": "Every occurrence of pi remains source-traced.",
+      "diagnostics": null,
+      "formula": "The pi in x=4*pi*exp(L), a^2=x/(4*pi)+t/16, and u_x=1/(8*pi*a^2) comes from the completed-zeta factor pi^(-s/2)*Gamma(s/2)*zeta(s) and the Riemann-Siegel saddle a^2=T_0/(2*pi). The use of pi>3 in one rational budget is an elementary bound on that same constant. No circle fitted to the carriers and no prefix polygon introduces pi.",
+      "id": "ipcg_00_pi_provenance",
+      "proof_boundary": "No visual or fitted geometry defines pi.",
+      "readiness": "certified",
+      "role": "definition_provenance"
+    },
+    {
+      "claim": "The theorem includes the q=1 boundary.",
+      "diagnostics": null,
+      "formula": "Fix one N=floor(a) chart on L>=50, 0<tL<=25, q=2*t*L^2>=1. The interior theorem applies to 1<=n<=N-1; when N=1 it is vacuous. It includes q=1, where t=1/(2L^2) and 0<tL=1/(2L)<=1/100.",
+      "id": "ipcg_01_domain",
+      "proof_boundary": "The q<1 layer remains separate.",
+      "readiness": "certified",
+      "role": "exact_domain"
+    },
+    {
+      "claim": "Each absolute carrier has explicit radial and angular currents.",
+      "diagnostics": null,
+      "formula": "For z_n=X_n+iY_n and z_(n,x)=(varrho_n+i*nu_n)z_n, X_(n,x)=varrho_nX_n-nu_nY_n and Y_(n,x)=nu_nX_n+varrho_nY_n.",
+      "id": "ipcg_02_carrier_jet",
+      "proof_boundary": "No bound on the radial current is assumed.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Terminal centering freezes k_n within one N chart.",
+      "diagnostics": null,
+      "formula": "Put c_s=Re(s_*'), b=Im(s_*'), k_n=u_n-u_N=log(N/n), so k_(n,x)=0. Then c_n=X_n and d_n=c_s*k_n*X_n-b*u_n*Y_n.",
+      "id": "ipcg_03_components",
+      "proof_boundary": "This row applies before any slope division.",
+      "readiness": "ready_to_apply",
+      "role": "exact_decomposition"
+    },
+    {
+      "claim": "The projective determinant cancels the radial current exactly.",
+      "diagnostics": null,
+      "formula": "J_n:=c_n*d_(n,x)-d_n*c_(n,x)=c_(s,x)*k_n*X_n^2-(b_x*u_n+b*u_x)*X_n*Y_n-b*u_n*nu_n*(X_n^2+Y_n^2). The radial amplitude current varrho_n cancels identically from J_n.",
+      "id": "ipcg_04_division_free_current",
+      "proof_boundary": "All d_n phase corrections remain inside nu_n.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The ratio derivative agrees with the determinant off its poles.",
+      "diagnostics": null,
+      "formula": "When X_n!=0, h_n=d_n/c_n=c_s*log(N/n)-b*u_n*tan(theta_n), and h_(n,x)=c_(s,x)*log(N/n)-(b_x*u_n+b*u_x)*tan(theta_n)-b*u_n*nu_n*sec(theta_n)^2=J_n/X_n^2.",
+      "id": "ipcg_05_effective_slope",
+      "proof_boundary": "The ratio is not used at X_n=0.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The first coefficient-current bounds control the moving frame.",
+      "diagnostics": null,
+      "formula": "The source gives nu_n<=8449/x^2-u_n/2, -b>=1/2, |b|<1, and u_x=1/(8*pi*a^2). Also s_*''=-t*alpha''(s)/8. Since alpha''(s)=1/s^3+2/(s-1)^3-1/(2s^2), |s|=|s-1|=sqrt(1+x^2)/2, t<=1/2, and x>1, |alpha''|<=26/x^2 and hence |c_(s,x)|,|b_x|<=13/(8*x^2).",
+      "id": "ipcg_06_source_bounds",
+      "proof_boundary": "Uses L>=50 and 0<tL<=25.",
+      "readiness": "certified",
+      "role": "analytic_bound"
+    },
+    {
+      "claim": "Every interior logarithmic distance dominates the frame errors.",
+      "diagnostics": null,
+      "formula": "For n<=N-1, u_n>=log(N/(N-1))>1/N>=1/a and 0<=k_n=log(N/n)<L. Since a^2<2*exp(L), u_n^2>exp(-L)/2. The monotone boundary checks 13L<pi^2*exp(L) and 33796a<x^2 follow for L>=50 from 650<9*2^50 and 67592<144*2^75. Therefore 8449/x^2<u_n/4, |c_(s,x)|k_n<u_n^2/64, |b_x|u_n<u_n^2/64, and u_x<u_n^2/(8*pi).",
+      "id": "ipcg_07_interior_envelope",
+      "proof_boundary": "The terminal distance is intentionally excluded.",
+      "readiness": "certified",
+      "role": "analytic_bound"
+    },
+    {
+      "claim": "The carrier determinant is a uniformly negative quadratic form.",
+      "diagnostics": null,
+      "formula": "Put B_n=b_x*u_n+b*u_x and K_n=b*u_n*nu_n. Then nu_n<-u_n/4, K_n>=u_n^2/8, and |B_n|<u_n^2/16 because 1/64+1/(8*pi)<1/64+1/24=11/192<1/16. Moreover J_n=[X_n,Y_n]M_n[X_n,Y_n]^T with M_n=[[c_(s,x)k_n-K_n,-B_n/2],[-B_n/2,-K_n]].",
+      "id": "ipcg_08_matrix_budget",
+      "proof_boundary": "The constants are deliberately nonoptimized.",
+      "readiness": "ready_to_apply",
+      "role": "analytic_reduction"
+    },
+    {
+      "claim": "Every interior projective current has one strict sign.",
+      "diagnostics": {
+        "constant_audit": {
+          "curvature_integer_guard": "650<9*2^50",
+          "gershgorin_row_one": "-1/8+1/64+1/32=-5/64",
+          "gershgorin_row_two": "-1/8+1/32=-3/32",
+          "mixed_budget_using_pi_gt_3": "1/64+1/(8*pi)<1/64+1/24=11/192<1/16",
+          "phase_integer_guard": "67592<144*2^75"
+        },
+        "order_swap_guard": {
+          "boundary": "This hypothetical exact pair is not an Xi carrier pair. It proves only that individual monotonicity, as a theorem type, cannot by itself bound slope-order changes.",
+          "example": "h_1(x)=-x and h_2(x)=-x+sin(x)/2 both decrease strictly, because h_1'=-1 and -3/2<=h_2'<=-1/2.",
+          "swaps": "Nevertheless h_2-h_1=sin(x)/2 changes sign at every successive multiple of pi."
+        },
+        "terminal_sign_guard": "The choices b=-1/2,u_x=1,(X_N,Y_N)=(1,1) and (1,-1) give J_N=1/2 and -1/2. This is a local algebraic nonpromotion guard, not two asserted Xi cutoff states."
+      },
+      "formula": "Gershgorin gives -1/8+1/64+1/32=-5/64 and -1/8+1/32=-3/32. Hence every eigenvalue of M_n is at most -5*u_n^2/64, and J_n<=-(5/64)*u_n^2*|z_n|^2<0 for 1<=n<=N-1.",
+      "id": "ipcg_09_negative_definite_theorem",
+      "proof_boundary": "Only 1<=n<=N-1 is covered.",
+      "readiness": "proved",
+      "role": "analytic_lemma"
+    },
+    {
+      "claim": "Every interior component moves strictly clockwise in RP1.",
+      "diagnostics": null,
+      "formula": "The interior vector v_n=(c_n,d_n) never vanishes: if X_n=0, then Y_n!=0 and d_n=-b*u_n*Y_n!=0. Its projective angle psi_n=arg(c_n+i*d_n) therefore satisfies psi_(n,x)=J_n/(c_n^2+d_n^2)<0. On X_n!=0, h_(n,x)=J_n/X_n^2<0.",
+      "id": "ipcg_10_projective_flow",
+      "proof_boundary": "This is an individual-atom theorem.",
+      "readiness": "proved",
+      "role": "analytic_corollary"
+    },
+    {
+      "claim": "Interior projection zeros have a fixed oriented join.",
+      "diagnostics": null,
+      "formula": "At X_n=0 the ratio h_n is not used, but J_n=-K_n*Y_n^2<=-(1/8)*u_n^2*Y_n^2<0. Thus the division-free projective orientation crosses every interior real-projection zero with the same strict sign.",
+      "id": "ipcg_11_zero_projection_join",
+      "proof_boundary": "No tangent ratio is evaluated at the zero.",
+      "readiness": "proved",
+      "role": "division_free_join"
+    },
+    {
+      "claim": "The isolated terminal current has no source-level uniform sign.",
+      "diagnostics": {
+        "constant_audit": {
+          "curvature_integer_guard": "650<9*2^50",
+          "gershgorin_row_one": "-1/8+1/64+1/32=-5/64",
+          "gershgorin_row_two": "-1/8+1/32=-3/32",
+          "mixed_budget_using_pi_gt_3": "1/64+1/(8*pi)<1/64+1/24=11/192<1/16",
+          "phase_integer_guard": "67592<144*2^75"
+        },
+        "order_swap_guard": {
+          "boundary": "This hypothetical exact pair is not an Xi carrier pair. It proves only that individual monotonicity, as a theorem type, cannot by itself bound slope-order changes.",
+          "example": "h_1(x)=-x and h_2(x)=-x+sin(x)/2 both decrease strictly, because h_1'=-1 and -3/2<=h_2'<=-1/2.",
+          "swaps": "Nevertheless h_2-h_1=sin(x)/2 changes sign at every successive multiple of pi."
+        },
+        "terminal_sign_guard": "The choices b=-1/2,u_x=1,(X_N,Y_N)=(1,1) and (1,-1) give J_N=1/2 and -1/2. This is a local algebraic nonpromotion guard, not two asserted Xi cutoff states."
+      },
+      "formula": "For n=N, k_N=0 and J_N=-(b_x*u_N+b*u_x)X_NY_N-b*u_N*nu_N*(X_N^2+Y_N^2). At the left cutoff u_N=0, J_N=-b*u_x*X_NY_N, which has either sign under the currently proved bounds. At u_N=0 and X_N=0, the isolated terminal component (c_N,d_N)=(X_N,0) is the zero vector, so it has no projective label. The choices b=-1/2,u_x=1,(X_N,Y_N)=(1,1) and (1,-1) give J_N=1/2 and -1/2. This is a local algebraic nonpromotion guard, not two asserted Xi cutoff states.",
+      "id": "ipcg_12_terminal_obstruction",
+      "proof_boundary": "The sign examples are not asserted Xi states.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion_guard"
+    },
+    {
+      "claim": "Terminal and endpoint contributions form one exact exceptional block.",
+      "diagnostics": null,
+      "formula": "Define the exceptional edge block C_edge=c_0+c_N and D_edge=d_0+d_N. Then mathsf_X=C_edge+sum_(n=1)^(N-1)c_n and mathcal_C_N=D_edge+sum_(n=1)^(N-1)d_n exactly. If C_edge=0, retain D_edge division-free. This packages the only carrier not covered by the interior theorem with the recurrent endpoint instead of assigning either one an unsupported sign.",
+      "id": "ipcg_13_edge_block",
+      "proof_boundary": "No sign or nonvanishing is asserted for the edge block.",
+      "readiness": "ready_to_apply",
+      "role": "exact_decomposition"
+    },
+    {
+      "claim": "The exceptional edge is transported only through the recurrent real jet.",
+      "diagnostics": null,
+      "formula": "Distinguish two source objects that were both denoted J_a. Inside one chart, J_a^(der)=H_(a,x)+mu_aH_a is generally complex, and h_0=Re(J_a^(der))/H_a-Im(J_a^(der))/(T_0H_a)-c_s*u_N only when H_a!=0. At an adjacent cutoff, J_a^(adj)=H_a(p+2)+H_a(p) and Q_N=f_(N+1)+kappa_NJ_a^(adj)=E_[1],N+1-E_[1],N. Recompute the terminal centering and transport the aggregate by mathcal_C_(N+1)-mathcal_C_N=Delta mathsf_A-alpha_(N+1)*Delta mathsf_X+(alpha_N-alpha_(N+1))*mathsf_X_N, with Delta A_a=Re[Q_(N,x)-lambda_aQ_N-e_(N+1)d_(N+1,x)]. Never identify J_a^(der) with J_a^(adj), and infer no separate endpoint or terminal projective sign.",
+      "id": "ipcg_14_endpoint_recurrence",
+      "proof_boundary": "J_a is generally complex.",
+      "readiness": "ready_to_apply",
+      "role": "exact_boundary_law"
+    },
+    {
+      "claim": "Individual monotonicity alone does not control order swaps.",
+      "diagnostics": {
+        "constant_audit": {
+          "curvature_integer_guard": "650<9*2^50",
+          "gershgorin_row_one": "-1/8+1/64+1/32=-5/64",
+          "gershgorin_row_two": "-1/8+1/32=-3/32",
+          "mixed_budget_using_pi_gt_3": "1/64+1/(8*pi)<1/64+1/24=11/192<1/16",
+          "phase_integer_guard": "67592<144*2^75"
+        },
+        "order_swap_guard": {
+          "boundary": "This hypothetical exact pair is not an Xi carrier pair. It proves only that individual monotonicity, as a theorem type, cannot by itself bound slope-order changes.",
+          "example": "h_1(x)=-x and h_2(x)=-x+sin(x)/2 both decrease strictly, because h_1'=-1 and -3/2<=h_2'<=-1/2.",
+          "swaps": "Nevertheless h_2-h_1=sin(x)/2 changes sign at every successive multiple of pi."
+        },
+        "terminal_sign_guard": "The choices b=-1/2,u_x=1,(X_N,Y_N)=(1,1) and (1,-1) give J_N=1/2 and -1/2. This is a local algebraic nonpromotion guard, not two asserted Xi cutoff states."
+      },
+      "formula": "h_1(x)=-x and h_2(x)=-x+sin(x)/2 both decrease strictly, because h_1'=-1 and -3/2<=h_2'<=-1/2. Nevertheless h_2-h_1=sin(x)/2 changes sign at every successive multiple of pi. This hypothetical exact pair is not an Xi carrier pair. It proves only that individual monotonicity, as a theorem type, cannot by itself bound slope-order changes.",
+      "id": "ipcg_15_order_swap_guard",
+      "proof_boundary": "The hypothetical functions are not Xi carriers.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion_guard"
+    },
+    {
+      "claim": "The remaining gap is still a signed Xi cumulative-mass estimate.",
+      "diagnostics": null,
+      "formula": "Strict clockwise flow of every interior atom does not sign the cumulative real masses P_k in the slope-ordered Abel identity, does not order different h_n, and does not bound their order changes. The remaining source theorem is still an Xi-specific one-sided cumulative-mass estimate, now with N-1 monotone interior projective atoms and one exact exceptional edge block.",
+      "id": "ipcg_16_cumulative_mass_boundary",
+      "proof_boundary": "The new lemma narrows but does not close that target.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    },
+    {
+      "claim": "Future work should use interior projective cells plus one recurrent edge block.",
+      "diagnostics": null,
+      "formula": "Retain the negative-definite interior current as a new analytic lemma. In the next stage, formulate the aggregate transport on oriented projective cells for n<=N-1, but carry (C_edge,D_edge) by the exact endpoint recurrence. Seek summation-by-parts or oscillatory control of the actual Xi cumulative masses; do not infer it from monotonicity alone or split the terminal and endpoint signs.",
+      "id": "ipcg_17_route_decision",
+      "proof_boundary": "Do not split unsupported terminal and endpoint signs.",
+      "readiness": "ready_to_apply",
+      "role": "route_decision"
+    },
+    {
+      "claim": "The multiplicity-compatible small-q theorem remains separate.",
+      "diagnostics": null,
+      "formula": "The q<1 layer remains a separate multiplicity-compatible parabolic/Hermite or boundary-degree theorem. The interior current calculation is not promoted to t=0 endpoint simplicity.",
+      "id": "ipcg_18_q_lt_1",
+      "proof_boundary": "No t=0 simplicity is assumed.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    },
+    {
+      "claim": "The interior theorem is not promoted to the aggregate Xi gap.",
+      "diagnostics": null,
+      "formula": "This proves the exact division-free carrier current, radial-current cancellation, quantitative negative definiteness and strict projective orientation for every interior carrier on the stated q>=1 domain, including q=1. It also proves only an algebraic terminal sign obstruction, an exact edge-block decomposition, and a generic order-swap nonpromotion guard. It does not prove an Xi cumulative-mass estimate, an edge-block sign, the Abel-scalar gap, successor count, q<1 closure, finite-height effectivity, contact exclusion, Lambda<=0, PF-infinity, RH, or a Clay-prize conclusion.",
+      "id": "ipcg_19_proof_boundary",
+      "proof_boundary": "RH and every prize-level conclusion remain open.",
+      "readiness": "guard_validated",
+      "role": "proof_guard"
+    }
+  ],
+  "source_audit": {
+    "absolute_phase": "jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_block_composition_guard",
+    "adjacent_recurrence": "jensen_window_pf_newman_polymath15_first_order_centered_adjacent_saddle_recurrence",
+    "contact_transport": "jensen_window_pf_newman_polymath15_first_order_centered_contact_signed_transport_reduction",
+    "real_residual": "jensen_window_pf_newman_polymath15_first_order_centered_real_residual_reduction"
+  },
+  "source_sha256": {
+    "absolute_phase": "1886a5476844ac89860436f1b0d82cbcee8f576dc5e46e9efcd29098edd4ee79",
+    "adjacent_recurrence": "ffab5ce74899f670a7e1e3cba0bcbd1734989134f2c0f0d972351f110af3d45f",
+    "contact_transport": "fdcef454128f5eacad5b059b6bd649de509dcdca329b2375fdcf260b2e7eb3e3",
+    "real_residual": "4e5390e921bb8a05cf804ba07b01121d4865b889cff2fa6209ec386afe7bbcff"
+  },
+  "sources": {
+    "absolute_phase": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_block_composition_guard.json",
+    "adjacent_recurrence": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_adjacent_saddle_recurrence.json",
+    "contact_transport": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_contact_signed_transport_reduction.json",
+    "real_residual": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_real_residual_reduction.json"
+  },
+  "status": "proved negative-definite projective current for every interior carrier; exact terminal-endpoint edge isolation; aggregate Xi cumulative-mass theorem remains open"
+}

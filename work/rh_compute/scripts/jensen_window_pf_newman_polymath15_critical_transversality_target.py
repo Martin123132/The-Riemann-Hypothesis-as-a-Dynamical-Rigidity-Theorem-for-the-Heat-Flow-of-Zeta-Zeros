@@ -96,12 +96,20 @@ def build_exact() -> dict:
             "A radius-1/L collar transfers the refined scalar remainder through "
             "one derivative with one factor L; no second-derivative remainder is needed"
         ),
+        "compact_certificate": (
+            "The exact moment bound and 160-bit Arb/Taylor certificate prove "
+            "(H_t(x),H_t'(x))!=(0,0) for 0<=t<=1/5 and |x|<=38"
+        ),
         "global_composition": (
-            "Combine the oscillatory-zeta theorem for every fixed "
-            "tL>=c_*+epsilon at sufficiently large L, the critical "
-            "transversality target on the residual high-frequency layer "
-            "0<tL<=c_*+o(1), and compact no-double-zero certificates for every "
-            "bounded-L remainder, where c_*=4911678521/1933561194"
+            "The compact no-double-zero certificates close |x|<=38. "
+            "For |x|>38 set "
+            "L=log(|x|/(4*pi)). The dominant-saddle theorem closes L>=50 and "
+            "tL>=25, while for every fixed epsilon>0 the oscillatory-zeta "
+            "theorem closes sufficiently large L with "
+            "tL>=c_*+epsilon. The remaining bounded-L remainder includes "
+            "38<|x|<4*pi*exp(50) and finite existential-threshold shoulders; "
+            "the remaining asymptotic layer is L>=50 and "
+            "0<tL<=c_*+o(1), where c_*=4911678521/1933561194"
         ),
         "conditional_endgame": (
             "If all three regions are closed, positive-boundary attainment gives "
@@ -174,10 +182,11 @@ def build_artifact() -> dict:
             role="proof_architecture",
             readiness="conditional_ready",
             claim="The no-collision endgame separates into the proved outer asymptotic region, residual critical high frequency, and bounded-L certificate regions.",
-            formula=exact["global_composition"],
+            formula=f"{exact['compact_certificate']}; {exact['global_composition']}",
             proof_boundary=(
-                "The residual critical and bounded-L regions remain open; the "
-                "outer theorem has an existential, not numerical, L_epsilon."
+                "Only |x|<=38 is compact-certified. The residual critical layer, "
+                "the bounded-L band above 38, and finite L_epsilon shoulders "
+                "remain open; the outer theorem has an existential threshold."
             ),
         ),
         GateRow(
@@ -220,6 +229,7 @@ def build_artifact() -> dict:
             "outputs/jensen_window_pf_newman_polymath15_critical_lehmer_margin_gate.md",
             "outputs/jensen_window_pf_newman_polymath15_oscillatory_zeta_handoff_theorem.md",
             "outputs/jensen_window_pf_newman_polymath15_cancellation_zero_free_wall_gate.md",
+            "outputs/jensen_window_pf_newman_theta_compact_transversality_interval_certificate.md",
         ],
     }
 
@@ -303,6 +313,7 @@ def render_note(artifact: dict) -> str:
             "## Global Composition",
             "",
             "```text",
+            exact["compact_certificate"],
             exact["global_composition"],
             exact["conditional_endgame"],
             "```",

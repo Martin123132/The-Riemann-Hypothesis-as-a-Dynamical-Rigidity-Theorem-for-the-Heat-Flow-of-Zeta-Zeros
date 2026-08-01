@@ -1,0 +1,262 @@
+{
+  "date": "2026-07-30",
+  "exact": {
+    "chain": {
+      "coefficient_current": "epsilon_n=d_(n,x)/(1+d_n); D_j A_k=x*(epsilon_(m*p^k)-k*h*s_*')*A_k",
+      "factorization": "Z_(m,p)=B_m*Q, Q=sum_k A_k, A_k=a_(m,k)*w_(m,p)^k",
+      "moments": "H=sum_k k*A_k; E=sum_k epsilon_(m*p^k)*A_k",
+      "sum_current": "D_j Q=x*E-x*h*s_*'*H"
+    },
+    "domain": "L>=50, 0<tL<=25, fixed t,N,p,m; p does not divide m; n_k=m*p^k, 0<=k<=M-1",
+    "dyadic_counterexample": {
+      "actual_perturbation": "|Theta_actual_flow(0)-Theta_heat(0)|<10^(-8)",
+      "cell_shape": "At the aligned point 0<=u<log(1+1/N)<1/N",
+      "chart": "t=1/4, p=2, m=562538277, N=128*m=72004899456, M=8",
+      "coarse_speeds": "Theta_geo(0)>14/5; Theta_heat(0)<11/5; Theta_geo(0)-Theta_heat(0)>3/5",
+      "ideal_coefficients": "c_k=exp[-k*log(2)/2+(k^2-14k)*log(2)^2/16], 0<=k<=7",
+      "left_boundary": "a=N, L=lambda_N=log(N^2-1/64)>50, tL<25",
+      "phase_sweep": "Delta theta>2*pi*log(2)*(2N+1)>2*pi; there is theta=0 mod 2*pi in the fixed-N cell",
+      "rejection": "|Theta_actual_flow'-Theta_geometric'|>1/2 but mu_8=22/15-sqrt(2)<1/15"
+    },
+    "heat_profile": {
+      "actual_correction": "C_k/C_0=(C_k^0/C_0^0)*(1+d_(m*p^k))/(1+d_m)",
+      "coefficient": "C_k^0/C_0^0=p^(-k/2)*q^[k*(2M-2-k+v)]",
+      "geometric_boundary": "t=0 => q=1 and C_k^0/C_0^0=p^(-k/2)",
+      "parameters": "q=exp(-t*h^2/4), v=2*(u-delta_a)/h, u=log(a/(m*p^(M-1))), delta_a=log(a)-Re(alpha)"
+    },
+    "numeric_audit": {
+      "L_left": "50.0000000032946126852386460561336836592922647389714028441091",
+      "aligned_speed_difference": "0.789930052015072714106847826002626156556008024641737852571706",
+      "arithmetic": "100-digit evaluation; the checker independently proves the displayed coarse inequalities with rational enclosures",
+      "block_length": 8,
+      "cutoff": 72004899456,
+      "difference_over_mu_8": "15.0597388401258544811200177324524084374267845177505482520554",
+      "geometric_aligned_speed": "2.88088022903976171546835539087636474523633854204361473984335",
+      "geometric_margin_mu_8": "0.0524531042935716178649779424569685880969947912897185934899869",
+      "heated_aligned_speed": "2.09095017702468900136150756487373858868033051740187688727164",
+      "heated_coefficients": [
+        "1.0",
+        "0.47857532374226880110545936616427503208722786208303",
+        "0.24321080499655730827378482605445723454448511567688",
+        "0.13124950984309091718541626591666391135097698218586",
+        "0.07521332301880895480415378570447549373148345801205",
+        "0.045769284678699237361016778665973633030105429340273",
+        "0.029575747833536712673906294004650393058738027297419",
+        "0.020294558418217641251683237823264518754994470479398"
+      ],
+      "prime": 2,
+      "prime_free_base": 562538277,
+      "t": "1/4",
+      "tL_left": "12.5000000008236531713096615140334209148230661847428507110273",
+      "u_cell_upper": "0.0000000000138879438419898851067291063305777219707718123637721303967001",
+      "x_left": "65152931413195804313343.1664280862718465099344472687708247536"
+    },
+    "phase_flow": {
+      "clock": "s_*'=c+i*b; tau=-x*h*b>0; rho=c/(-b)>=0",
+      "external_phase": "D_j arg(B_m)=x*(beta_t'-b*log(m)); D_j arg(Z_(m,p))/tau=(beta_t'-b*log(m))/(-h*b)+J_ray/|Q|^2-1",
+      "frozen_current": "J_ang=|Q|^2+Re(H*conj(Q)); partial_theta arg[z*Q_theta]=J_ang/|Q_theta|^2",
+      "ray_current": "J_ray=|Q|^2+Re(H*conj(Q))-rho*Im(H*conj(Q))+Im(E*conj(Q))/(h*(-b))",
+      "reduced_derivative": "D_j Q=tau*[(i-rho)*H+E/(h*(-b))]",
+      "shifted_speed": "D_j arg(wQ)/tau=J_ray/|Q|^2"
+    },
+    "replacement_target": {
+      "current": "J_heat=|Q_heat|^2+Re(H_heat*conj(Q_heat))>0 on |z|=1",
+      "families": "Begin with (p,M)=(2,8),(3,4),(5,2), then prove length propagation or an analytic tail theorem",
+      "payoff": "A quantitative normalized starlike-block theorem supplies both one-sided phase speed and a modulus budget for the d_n C1 perturbation",
+      "rejoin": "Insert any proved long-block estimate into the full p-free, short, singleton, recurrent-endpoint, cutoff, and ray-defect composition"
+    }
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_prime_power_logarithmic_phase_flow_gate",
+  "proof_boundary": "This artifact proves the exact fixed-ray logarithmic derivative of an actual heat-corrected prime-power chain, separates frozen angular, radial, correction, and external-phase currents, gives the exact dimensionless heat profile, and rigorously rejects the previous absolute geometric C1 perturbation target with a complete dyadic cutoff-cell witness. It replaces that failed route by a direct heat-block starlikeness target. It does not prove that target uniformly, a corrected all-family phase margin, a joined p-free or endpoint theorem, the Xi Abel gap, H_j<3*pi/2, contact exclusion, Lambda<=0, PF-infinity, RH, or a Clay-prize conclusion.",
+  "rows": [
+    {
+      "claim": "Fix one complete prime-power chain inside one cutoff chart.",
+      "formula": "D_j=x*partial_x at fixed t,N; p does not divide m; n_k=m*p^k, 0<=k<=M-1.",
+      "id": "pplpf_01_chart",
+      "proof_boundary": "Cutoff equality is owned by the canonical new-N chart.",
+      "readiness": "proved",
+      "role": "fixed-chart domain"
+    },
+    {
+      "claim": "The actual heat-corrected chain has one polynomial factorization.",
+      "formula": "Z_(m,p)=B_m*Q, Q=sum_k A_k, A_k=a_(m,k)*w_(m,p)^k.",
+      "id": "pplpf_02_factorization",
+      "proof_boundary": "The d_n factors remain inside A_k.",
+      "readiness": "proved",
+      "role": "exact chain algebra"
+    },
+    {
+      "claim": "Each internal coefficient has an exact fixed-ray current.",
+      "formula": "epsilon_n=d_(n,x)/(1+d_n); D_j A_k=x*(epsilon_(m*p^k)-k*h*s_*')*A_k.",
+      "id": "pplpf_03_currents",
+      "proof_boundary": "Here h=log(p) and t is fixed.",
+      "readiness": "proved",
+      "role": "exact logarithmic derivative"
+    },
+    {
+      "claim": "Two chain moments contain the full internal derivative.",
+      "formula": "H=sum_k k*A_k; E=sum_k epsilon_(m*p^k)*A_k; D_j Q=x*E-x*h*s_*'*H.",
+      "id": "pplpf_04_moments",
+      "proof_boundary": "No argument branch or division is used.",
+      "readiness": "proved",
+      "role": "exact definitions"
+    },
+    {
+      "claim": "The moving base phase supplies a positive angular clock.",
+      "formula": "s_*'=c+i*b; tau=-x*h*b>0; rho=c/(-b)>=0.",
+      "id": "pplpf_05_clock",
+      "proof_boundary": "The certified critical-frame formula has b<-1/2.",
+      "readiness": "proved",
+      "role": "exact phase clock"
+    },
+    {
+      "claim": "The chain derivative separates angular, radial, and correction currents.",
+      "formula": "D_j Q=tau*[(i-rho)*H+E/(h*(-b))].",
+      "id": "pplpf_06_reduced_derivative",
+      "proof_boundary": "The identity is exact on every fixed chart.",
+      "readiness": "proved",
+      "role": "exact logarithmic derivative"
+    },
+    {
+      "claim": "The shifted internal block P=wQ has an exact normalized ray speed.",
+      "formula": "D_j arg(P)/tau=J_ray/|Q|^2, where J_ray=|Q|^2+Re(H*conj(Q))-rho*Im(H*conj(Q))+Im(E*conj(Q))/(h*(-b)).",
+      "id": "pplpf_07_shifted_speed",
+      "proof_boundary": "The quotient statement is used only when Q is nonzero; J_ray itself is division-free.",
+      "readiness": "proved",
+      "role": "exact phase derivative"
+    },
+    {
+      "claim": "Freezing the coefficient shape removes precisely two ray terms.",
+      "formula": "J_ang=|Q|^2+Re(H*conj(Q)); partial_theta arg[z*Q_theta]=J_ang/|Q_theta|^2.",
+      "id": "pplpf_08_frozen_current",
+      "proof_boundary": "A frozen angular theorem and an L-flow theorem are not identical.",
+      "readiness": "proved",
+      "role": "exact phase derivative"
+    },
+    {
+      "claim": "The p-free external factor has its own moving phase.",
+      "formula": "D_j arg(B_m)=x*(beta_t'-b*log(m)); D_j arg(Z_(m,p))/tau=(beta_t'-b*log(m))/(-h*b)+J_ray/|Q|^2-1.",
+      "id": "pplpf_09_external_phase",
+      "proof_boundary": "An internal one-turn theorem is not a joined-chain theorem.",
+      "readiness": "proved",
+      "role": "exact phase bookkeeping"
+    },
+    {
+      "claim": "The correction-free heat block is a compact q-deformation of the geometric block.",
+      "formula": "q=exp(-t*h^2/4), v=2*(u-delta_a)/h; C_k^0/C_0^0=p^(-k/2)*q^[k*(2M-2-k+v)].",
+      "id": "pplpf_10_heat_profile",
+      "proof_boundary": "Here u=log(a/(m*p^(M-1))) and delta_a=log(a)-Re(alpha).",
+      "readiness": "proved",
+      "role": "exact dimensionless reduction"
+    },
+    {
+      "claim": "The previous geometric model is exactly the q=1 boundary.",
+      "formula": "t=0 => q=1 and C_k^0/C_0^0=p^(-k/2).",
+      "id": "pplpf_11_geometric_boundary",
+      "proof_boundary": "For q<1 the multiplier need not be uniformly close to one.",
+      "readiness": "proved",
+      "role": "boundary identification"
+    },
+    {
+      "claim": "A complete dyadic eight-level chain exists just above L=50.",
+      "formula": "t=1/4, p=2, m=562538277, N=128*m=72004899456; a=N at L=log(N^2-1/64)>50 and tL<25.",
+      "id": "pplpf_12_witness_chart",
+      "proof_boundary": "The base m is odd and the chain has exactly M=8 levels.",
+      "readiness": "proved",
+      "role": "complete chart witness"
+    },
+    {
+      "claim": "The base phase attains theta=0 modulo 2*pi inside the witness cell.",
+      "formula": "Delta theta>2*pi*log(2)*(2N+1)>2*pi on [lambda_N,lambda_(N+1)).",
+      "id": "pplpf_13_phase_sweep",
+      "proof_boundary": "At the attained point 0<=u<log(1+1/N)<1/N.",
+      "readiness": "proved",
+      "role": "exact phase-attainment theorem"
+    },
+    {
+      "claim": "At aligned phase the heat-only block is far from the geometric speed.",
+      "formula": "Theta_geo(0)>14/5; Theta_heat(0)<11/5; Theta_geo(0)-Theta_heat(0)>3/5.",
+      "id": "pplpf_14_heat_separation",
+      "proof_boundary": "The checker proves these inequalities with exact rational enclosures for log(2), sqrt(2), and exp.",
+      "readiness": "proved",
+      "role": "rigorous coarse enclosure"
+    },
+    {
+      "claim": "The actual d_n and radial-current terms cannot erase the witness separation.",
+      "formula": "|Theta_actual_flow(0)-Theta_heat(0)|<10^(-8).",
+      "id": "pplpf_15_actual_stability",
+      "proof_boundary": "This uses u<1/N, delta_a<1/(4x), |d_n|<2189/x, |epsilon_n|<8446/x^2, and x>12*(N^2-1).",
+      "readiness": "proved",
+      "role": "rigorous perturbation enclosure"
+    },
+    {
+      "claim": "The old absolute geometric C1 perturbation target is false.",
+      "formula": "|Theta_actual_flow'-Theta_geometric'|>1/2 while mu_8=22/15-sqrt(2)<1/15.",
+      "id": "pplpf_16_C1_rejection",
+      "proof_boundary": "The failure is caused by the retained heat profile, not by a numerical accident.",
+      "readiness": "proved",
+      "role": "counterexample gate"
+    },
+    {
+      "claim": "Replace absolute closeness by direct heat-block starlikeness.",
+      "formula": "J_heat=|Q_heat|^2+Re(H_heat*conj(Q_heat))>0 on |z|=1 for the admissible long families.",
+      "id": "pplpf_17_replacement",
+      "proof_boundary": "This is a one-sided inequality and may hold while the absolute difference from the geometric speed is order one.",
+      "readiness": "open",
+      "role": "new theorem target"
+    },
+    {
+      "claim": "A quantitative starlike margin supplies its own modulus budget.",
+      "formula": "Re[z*P_heat'/P_heat]>=kappa>0, P_heat'(0)=1 => a normalized starlike block; combine its distortion margin with the d_n C1 bounds.",
+      "id": "pplpf_18_modulus_payoff",
+      "proof_boundary": "A uniform kappa for all admissible p,M,q,v is not yet proved.",
+      "readiness": "open",
+      "role": "conditional theorem"
+    },
+    {
+      "claim": "Test the compact heat current at the three sharp geometric thresholds.",
+      "formula": "Start with (p,M)=(2,8),(3,4),(5,2), then prove length propagation or an analytic tail theorem.",
+      "id": "pplpf_19_family_split",
+      "proof_boundary": "Short p=2,3 chains and singleton chains remain explicit.",
+      "readiness": "open",
+      "role": "route decision"
+    },
+    {
+      "claim": "Even a proved internal heat-block theorem must be rejoined before counting.",
+      "formula": "Retain B_m, all p-free bases, short and singleton chains, the recurrent endpoint, q=1, cutoff homotopies, and mathsf_X*(L*D_j mathcal_C_N-mathcal_C_N).",
+      "id": "pplpf_20_rejoin",
+      "proof_boundary": "No joined Abel gap or successor winding bound is promoted.",
+      "readiness": "proved",
+      "role": "nonpromotion guard"
+    }
+  ],
+  "source_audit": {
+    "source_kinds": {
+      "complete_chain": "complete_prime_power_chain_occupation_gate",
+      "critical_frame": "jensen_window_pf_newman_polymath15_first_order_centered_real_residual_reduction",
+      "geometric_phase": "jensen_window_pf_newman_polymath15_first_order_centered_geometric_prime_power_phase_monotonicity_gate",
+      "normalized_prefix": "jensen_window_pf_newman_polymath15_first_order_centered_normalized_prefix_phase_flux_reduction",
+      "prime_power_heat": "jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_block_composition_guard",
+      "ray_flow": "jensen_window_pf_newman_polymath15_first_order_centered_ray_bottom_logarithmic_flow_reduction"
+    },
+    "source_sha256": {
+      "complete_chain": "1c16a5d39bd5fddfcc6f390779e1dbb771171c0daacdd0e569b853ea2a38781a",
+      "critical_frame": "4e5390e921bb8a05cf804ba07b01121d4865b889cff2fa6209ec386afe7bbcff",
+      "geometric_phase": "d8d1c0020748e3db13bbd08fff3bdf4e0a4983bef7751aaaf795bfc087e97653",
+      "normalized_prefix": "75982d22a245d4b9ab6dff57818a49e9936bd1afd1e58318216c41be49291706",
+      "prime_power_heat": "1886a5476844ac89860436f1b0d82cbcee8f576dc5e46e9efcd29098edd4ee79",
+      "ray_flow": "76020d21c97a454a0cb112cd37f8a912e5d7371254e8e942d96d54597137f021"
+    }
+  },
+  "status": "exact_prime_power_logarithmic_phase_flow_and_absolute_C1_perturbation_counterexample",
+  "summary": {
+    "complete_dyadic_counterexamples": 1,
+    "dimensionless_heat_profiles": 1,
+    "exact_logarithmic_phase_identities": 7,
+    "proved_joined_abel_gaps": 0,
+    "proved_successor_winding_bounds": 0,
+    "rejected_absolute_C1_targets": 1,
+    "replacement_starlikeness_targets": 1,
+    "rows": 20
+  }
+}

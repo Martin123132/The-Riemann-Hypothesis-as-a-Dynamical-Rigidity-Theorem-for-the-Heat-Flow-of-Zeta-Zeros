@@ -1,0 +1,65 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order11_sparse_h23_lower_bridge_certificate.py",
+  "date": "2026-07-18",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order11_sparse_h23_lower_bridge_certificate.py",
+  "kind": "jensen_window_pf_compound_order11_sparse_h23_lower_bridge_certificate",
+  "proof_boundary": "This artifact proves only the complete finite first-summand lower bridge. The finite saddle handoff, global composition, full-kernel transfer, PF-infinity, Lambda<=0, and RH are not proved here.",
+  "rows": [
+    {
+      "claim": "The complete segment cache is bound to the exact sparse source and Taylor-model implementation.",
+      "diagnostics": null,
+      "formula": "SHA256(cache)=7b1b5fc81dff51f01debc57e04fdf88e6e421ed7d107f49063f829172fd2792e",
+      "id": "co11sh23lbc_01_contract",
+      "proof_boundary": "Hash and deterministic live-source checks only.",
+      "readiness": "ready_to_apply",
+      "role": "immutable_source_contract"
+    },
+    {
+      "claim": "The canonical segments form a gap-free cover of the lower real-t interval.",
+      "diagnostics": {
+        "quarter_blocks": 17792,
+        "segments": 279
+      },
+      "formula": "[1252,5700]=union of 17792 certified quarter blocks",
+      "id": "co11sh23lbc_02_complete_cover",
+      "proof_boundary": "First Newman summand at lambda=-100 on the displayed finite interval.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "Every quarter block has positive margin below the order-eleven curvature cap.",
+      "diagnostics": {
+        "largest_scaled_curvature_upper": "41.4308043260243735131882308377712013897305561203006129174507",
+        "smallest_margin_lower": "5958.56919567397562648681176916222879861026944387969938708254"
+      },
+      "formula": "y_1''(t)<=6000/t^2 for every real 1252<=t<=5700",
+      "id": "co11sh23lbc_03_curvature",
+      "proof_boundary": "This does not cover t>5700 or promote the theorem to the full Newman kernel.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    }
+  ],
+  "source_contract": {
+    "run_contract": "work/rh_compute/results/jensen_window_pf_compound_order11_sparse_h23_lower_bridge_run_contract.json",
+    "run_contract_sha256": "b3e2f8fb4edea88815601e85b51ae6ed3c0cc95b7eb3336d9dfdcf6d38d729a4",
+    "segment_cache": "work/rh_compute/results/jensen_window_pf_compound_order11_sparse_h23_lower_bridge_segments.jsonl",
+    "segment_cache_sha256": "7b1b5fc81dff51f01debc57e04fdf88e6e421ed7d107f49063f829172fd2792e"
+  },
+  "status": "rigorous order-eleven first-summand curvature theorem on 1252<=t<=5700",
+  "summary": {
+    "covered_interval": [
+      "1252",
+      "5700"
+    ],
+    "global_first_summand_theorems": 0,
+    "largest_scaled_curvature_upper": "41.4308043260243735131882308377712013897305561203006129174507",
+    "lower_bridge_theorems": 1,
+    "quarter_blocks": 17792,
+    "required_quarter_blocks": 17792,
+    "required_segments": 279,
+    "rh_claims": 0,
+    "segments": 279,
+    "smallest_margin_lower": "5958.56919567397562648681176916222879861026944387969938708254"
+  },
+  "theorem": "y_1''(t)<=6000/t^2 for every real 1252<=t<=5700"
+}

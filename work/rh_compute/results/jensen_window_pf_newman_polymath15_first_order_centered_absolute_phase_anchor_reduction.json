@@ -1,0 +1,214 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_absolute_phase_anchor_reduction",
+  "date": "2026-07-26",
+  "status": "exact branch-free first-coefficient phase anchor and endpoint normalization; the aggregate determinant collapses to the Wronskian and does not remove the direct real-projection obligation",
+  "proof_boundary": "This artifact proves the nonvanishing first-coefficient anchor, explicit endpoint phase, relative aggregate shapes, contact split, determinant identity, Wronskian collapse, ordinary crossing sign, and real-projection chart covariance. It proves that the determinant route is not independent and does not classify E_[1]=0. It does not prove the q>=1 anchored projection lower bound or crossing count, the q<1 multiplicity-compatible theorem, finite phase cells, one-sided successor winding, contact exclusion, Lambda<=0, RH, PF-infinity, or a Clay-prize conclusion.",
+  "sources": {
+    "endpoint_phase": "work/rh_compute/results/jensen_window_pf_newman_polymath15_endpoint_holomorphic_lift.json",
+    "centered_reduction": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_real_residual_reduction.json",
+    "wronskian_reduction": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_wronskian_crossing_reduction.json",
+    "adjacent_stability": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_adjacent_chart_stability_certificate.json",
+    "bulk_pair_gate": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_bulk_pair_transfer_gate.json"
+  },
+  "source_sha256": {
+    "endpoint_phase": "1a884303ad2285410ad555431dca0207bbbfbc9160d349a21ff874493d3ddbbe",
+    "centered_reduction": "4e5390e921bb8a05cf804ba07b01121d4865b889cff2fa6209ec386afe7bbcff",
+    "wronskian_reduction": "1347942c7ab2a84227554db273bfccde506f9a51ab5b0d8da5e7851cc678b2cb",
+    "adjacent_stability": "dcee581f283d63141e29d1085ee463c2eabc714a6e6760b15f12262474f83a83",
+    "bulk_pair_gate": "933dae9cf78cdac6bc8371ee092a9b249a755e59d6b0aca29fb06220042f51a7"
+  },
+  "source_audit": {
+    "endpoint_phase": "jensen_window_pf_newman_polymath15_endpoint_holomorphic_lift",
+    "centered_reduction": "jensen_window_pf_newman_polymath15_first_order_centered_real_residual_reduction",
+    "wronskian_reduction": "jensen_window_pf_newman_polymath15_first_order_wronskian_crossing_reduction",
+    "adjacent_stability": "jensen_window_pf_newman_polymath15_first_order_centered_adjacent_chart_stability_certificate",
+    "bulk_pair_gate": "jensen_window_pf_newman_polymath15_first_order_centered_bulk_pair_transfer_gate"
+  },
+  "constants": {
+    "L_min": 50,
+    "d_absolute": 2189,
+    "value_chart": 1100,
+    "scalar_chart": 5000,
+    "normalized_value_chart": 2200,
+    "normalized_scalar_chart": 10000
+  },
+  "exact": {
+    "domain": "L=log(x/(4*pi))>=50, 0<=tL<=25, a^2=x/(4*pi)+t/16, N=floor(a)",
+    "first_coefficient": "f_1=phi*(1+d_1), |f_1|=|1+d_1|, |d_1|<2189/x<1/2",
+    "unit_anchor": "eta=f_1/|f_1|=phi*(1+d_1)/|1+d_1|",
+    "relative_coefficients": "q_n=f_n/f_1=exp[t*log(n)^2/4-s_*log(n)]*(1+d_n)/(1+d_1), q_1=1",
+    "endpoint_phase": "beta=(sqrt(pi)/8)*exp(t*pi^2/64-pi*T_0/4)*T_0^(1/2)>0; kappa_N=(-1)^(N+1)*beta*(T_0+i)/|M_t(s)|; g_0=(-1)^N*beta*(T_0+i)*H_a/|M_t(s)|; G_a=(-1)^N*beta*(T_0+i)*(H_(a,x)+mu_a*H_a)/|M_t(s)|",
+    "relative_endpoint": "r_0=g_0/f_1=(-1)^N*beta*(T_0+i)*H_a/[M_t(s)*(1+d_1)]; r_A=G_a/f_1=(-1)^N*beta*(T_0+i)*(H_(a,x)+mu_a*H_a)/[M_t(s)*(1+d_1)]",
+    "aggregate_shapes": "P_0=sum_(n=1)^N q_n, P_1=sum_(n=1)^N ell_n*q_n, ell_n=log(n/a); Z_0=P_0+r_0=E_[1]/f_1; Z_A=-s_*'*P_1+r_A=C_a/f_1, C_a=-s_*'*M_(1,a)+G_a, A_a=Re(C_a)",
+    "real_projection": "(X,A_a)^T=S(Z_0,Z_A)*(Re(f_1),Im(f_1))^T, S=[[Re(Z_0),-Im(Z_0)],[Re(Z_A),-Im(Z_A)]]; X/|f_1|=Re(eta*Z_0), A_a/|f_1|=Re(eta*Z_A)",
+    "contact_split": "If Z_0!=0, then X=A_a=0 iff Re(eta*Z_0)=0 and Im(conj(Z_0)*Z_A)=0. If Z_0=0, then X=A_a=0 iff Re(eta*Z_A)=0.",
+    "shape_determinant": "Delta_anchor=det(S)=-Im(conj(Z_0)*Z_A); |f_1|^2*Delta_anchor=-Im(C_a*conj(E_[1]))",
+    "singular_value_bound": "||(X,A_a)||_2>=|f_1|*|Delta_anchor|/sqrt(|Z_0|^2+|Z_A|^2) when |Z_0|^2+|Z_A|^2>0",
+    "wronskian_collapse": "E_[1],x=lambda_a*E_[1]+C_a+D_(1,x), lambda_a=u_a+i*v_a; hence |f_1|^2*Delta_anchor=v_a*|E_[1]|^2+Im(D_(1,x)*conj(E_[1]))-W_[1]",
+    "crossing_sign": "At X=0, |f_1|^2*Delta_anchor=A_a*Y. If E_[1]=iY!=0, then A_a>0 iff Delta_anchor*Y>0.",
+    "complex_zero_guard": "At E_[1]=0 one has Z_0=Delta_anchor=W_[1]=0, while A_a=|f_1|*Re(eta*Z_A) can be nonzero. The determinant cannot classify this crossing.",
+    "chart_covariance": "The anchor f_1 is independent of the prescribed cutoff. |Re(eta*Delta Z_0)|<2200*exp(-5L/4) and |Re(eta*Delta Z_A)|<10000*exp(-7L/4). The adjacent theorem controls these real projections, not the complex shape increments; Q_N can have a large imaginary part. Therefore Delta_anchor has no certified adjacent-chart absolute bound.",
+    "live_q_ge_1_target": "On q=2tL^2>=1 in the canonical N=floor(a) chart, prove |Re(eta*Z_0)|<=50000*exp(-5L/4)/|f_1| implies |Re(eta*Z_A)|>(100000L+1)*exp(-5L/4)/|f_1|, then bound N_(Re(eta*Z_0)=0,Re(eta*Z_A)>0) below one successor turn. This formulation retains Z_0=0.",
+    "ordinary_exceptional_split": "A possible proof split is: on |Z_0|>=tau use anchored phase-difference information together with the exact determinant collapse; on |Z_0|<tau prove the direct real projection Re(eta*Z_A) bound. The second branch is essential and cannot be inferred from Delta_anchor.",
+    "q_lt_1_target": "Construct the separate q=2tL^2<1 multiplicity-compatible local chart and finite phase-cell theorem; the present first-order anchor does not provide it.",
+    "numeric_audit": {
+      "x_min": "6.51529311985421213e+22",
+      "d_1_upper": "3.35978744122717451e-20",
+      "f_1_lower": "1.00000000000000000e+00",
+      "normalized_value_chart_constant_raw": "1.10000000000000000e+03",
+      "normalized_scalar_chart_constant_raw": "5.00000000000000000e+03"
+    }
+  },
+  "rows": [
+    {
+      "id": "nfocaapr_01_first_coefficient",
+      "role": "asymptotic_lemma",
+      "readiness": "certified",
+      "claim": "The first corrected Xi coefficient is uniformly nonzero.",
+      "formula": "f_1=phi*(1+d_1), |f_1|=|1+d_1|, |d_1|<2189/x<1/2",
+      "proof_boundary": "Valid on the displayed first-order L>=50 domain.",
+      "diagnostics": {
+        "x_min": "6.51529311985421213e+22",
+        "d_1_upper": "3.35978744122717451e-20",
+        "f_1_lower": "1.00000000000000000e+00",
+        "normalized_value_chart_constant_raw": "1.10000000000000000e+03",
+        "normalized_scalar_chart_constant_raw": "5.00000000000000000e+03"
+      }
+    },
+    {
+      "id": "nfocaapr_02_branch_free_anchor",
+      "role": "exact_definition",
+      "readiness": "ready_to_apply",
+      "claim": "The coefficient chain has a canonical unit phase without choosing an argument branch.",
+      "formula": "eta=f_1/|f_1|=phi*(1+d_1)/|1+d_1|; q_n=f_n/f_1=exp[t*log(n)^2/4-s_*log(n)]*(1+d_n)/(1+d_1), q_1=1",
+      "proof_boundary": "The anchor uses the fixed n=1 coefficient.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocaapr_03_endpoint_phase",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The endpoint normalizer phase reduces to the explicit algebraic direction T_0+i.",
+      "formula": "beta=(sqrt(pi)/8)*exp(t*pi^2/64-pi*T_0/4)*T_0^(1/2)>0; kappa_N=(-1)^(N+1)*beta*(T_0+i)/|M_t(s)|; g_0=(-1)^N*beta*(T_0+i)*H_a/|M_t(s)|; G_a=(-1)^N*beta*(T_0+i)*(H_(a,x)+mu_a*H_a)/|M_t(s)|",
+      "proof_boundary": "Positive T_0 and the established principal branches.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocaapr_04_relative_endpoint",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "Division by f_1 puts the finite chain and endpoint in one absolute phase frame.",
+      "formula": "r_0=g_0/f_1=(-1)^N*beta*(T_0+i)*H_a/[M_t(s)*(1+d_1)]; r_A=G_a/f_1=(-1)^N*beta*(T_0+i)*(H_(a,x)+mu_a*H_a)/[M_t(s)*(1+d_1)]",
+      "proof_boundary": "M_t(s) and 1+d_1 are nonzero on the working domain.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocaapr_05_aggregate_shapes",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "Two relative complex shapes encode the retained value and centered scalar.",
+      "formula": "P_0=sum_(n=1)^N q_n, P_1=sum_(n=1)^N ell_n*q_n, ell_n=log(n/a); Z_0=P_0+r_0=E_[1]/f_1; Z_A=-s_*'*P_1+r_A=C_a/f_1, C_a=-s_*'*M_(1,a)+G_a, A_a=Re(C_a)",
+      "proof_boundary": "No lower bound is asserted.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocaapr_06_real_projection",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The original real pair is exactly the anchored projection of the two shapes.",
+      "formula": "(X,A_a)^T=S(Z_0,Z_A)*(Re(f_1),Im(f_1))^T, S=[[Re(Z_0),-Im(Z_0)],[Re(Z_A),-Im(Z_A)]]; X/|f_1|=Re(eta*Z_0), A_a/|f_1|=Re(eta*Z_A)",
+      "proof_boundary": "This is branch-free but not phase-independent.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocaapr_07_contact_split",
+      "role": "exact_equivalence",
+      "readiness": "ready_to_apply",
+      "claim": "Ordinary contacts split into anchor orthogonality and shape collinearity, while complex-main zeros form a separate branch.",
+      "formula": "If Z_0!=0, then X=A_a=0 iff Re(eta*Z_0)=0 and Im(conj(Z_0)*Z_A)=0. If Z_0=0, then X=A_a=0 iff Re(eta*Z_A)=0.",
+      "proof_boundary": "The Z_0=0 clause must not be divided away.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocaapr_08_shape_determinant",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The aggregate shape determinant measures relative value/slope orientation.",
+      "formula": "Delta_anchor=det(S)=-Im(conj(Z_0)*Z_A); |f_1|^2*Delta_anchor=-Im(C_a*conj(E_[1]))",
+      "proof_boundary": "A nonzero determinant is only a sufficient contact exclusion.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocaapr_09_singular_value",
+      "role": "exact_inequality",
+      "readiness": "ready_to_apply",
+      "claim": "A determinant lower bound would imply quantitative first-jet separation away from the zero denominator case.",
+      "formula": "||(X,A_a)||_2>=|f_1|*|Delta_anchor|/sqrt(|Z_0|^2+|Z_A|^2) when |Z_0|^2+|Z_A|^2>0",
+      "proof_boundary": "This stronger sufficient route is not yet proved arithmetically.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocaapr_10_wronskian_collapse",
+      "role": "exact_obstruction",
+      "readiness": "guard_validated",
+      "claim": "The aggregate determinant is the centered Wronskian plus already isolated frame and derivative-correction terms.",
+      "formula": "E_[1],x=lambda_a*E_[1]+C_a+D_(1,x), lambda_a=u_a+i*v_a; hence |f_1|^2*Delta_anchor=v_a*|E_[1]|^2+Im(D_(1,x)*conj(E_[1]))-W_[1]",
+      "proof_boundary": "It is not an independent replacement for the direct scalar theorem.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocaapr_11_crossing_sign",
+      "role": "exact_equivalence",
+      "readiness": "ready_to_apply",
+      "claim": "On an ordinary real-part crossing the determinant carries the centered crossing sign.",
+      "formula": "At X=0, |f_1|^2*Delta_anchor=A_a*Y. If E_[1]=iY!=0, then A_a>0 iff Delta_anchor*Y>0.",
+      "proof_boundary": "Requires E_[1] nonzero for the sign equivalence.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocaapr_12_complex_zero_guard",
+      "role": "nondivision_guard",
+      "readiness": "guard_validated",
+      "claim": "The determinant and Wronskian both lose the complex-main-zero crossing class.",
+      "formula": "At E_[1]=0 one has Z_0=Delta_anchor=W_[1]=0, while A_a=|f_1|*Re(eta*Z_A) can be nonzero. The determinant cannot classify this crossing.",
+      "proof_boundary": "Direct control of Re(eta*Z_A) remains necessary.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocaapr_13_chart_guard",
+      "role": "covariance_guard",
+      "readiness": "guard_validated",
+      "claim": "Only the anchored real projections inherit the adjacent-chart certificate.",
+      "formula": "The anchor f_1 is independent of the prescribed cutoff. |Re(eta*Delta Z_0)|<2200*exp(-5L/4) and |Re(eta*Delta Z_A)|<10000*exp(-7L/4). The adjacent theorem controls these real projections, not the complex shape increments; Q_N can have a large imaginary part. Therefore Delta_anchor has no certified adjacent-chart absolute bound.",
+      "proof_boundary": "The complex determinant is a canonical-chart surrogate, not a certified chart-invariant scalar.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocaapr_14_q_ge_1_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The live q>=1 obligation is the direct anchored real-projection lower bound and its one-sided crossing count.",
+      "formula": "On q=2tL^2>=1 in the canonical N=floor(a) chart, prove |Re(eta*Z_0)|<=50000*exp(-5L/4)/|f_1| implies |Re(eta*Z_A)|>(100000L+1)*exp(-5L/4)/|f_1|, then bound N_(Re(eta*Z_0)=0,Re(eta*Z_A)>0) below one successor turn. This formulation retains Z_0=0. A possible proof split is: on |Z_0|>=tau use anchored phase-difference information together with the exact determinant collapse; on |Z_0|<tau prove the direct real projection Re(eta*Z_A) bound. The second branch is essential and cannot be inferred from Delta_anchor.",
+      "proof_boundary": "No such arithmetic lower bound or count is proved here.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocaapr_15_q_lt_1_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The q<1 multiplicity-compatible chart remains a separate obligation.",
+      "formula": "Construct the separate q=2tL^2<1 multiplicity-compatible local chart and finite phase-cell theorem; the present first-order anchor does not provide it.",
+      "proof_boundary": "It is not implied by the q>=1 first-order reduction.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocaapr_16_nonpromotion",
+      "role": "nonpromotion_guard",
+      "readiness": "guard_validated",
+      "claim": "The exact phase reduction is kept separate from the missing global arithmetic theorem and RH.",
+      "formula": "absolute phase anchor and determinant collapse != anchored projection lower bound",
+      "proof_boundary": "No q>=1 scalar theorem, q<1 theorem, finite phase closure, contact exclusion, Lambda<=0, PF-infinity, RH, or Clay-prize conclusion.",
+      "diagnostics": null
+    }
+  ]
+}

@@ -1,0 +1,284 @@
+{
+  "kind": "jensen_window_pf_mertens_mixed_boundary_sine_vaughan_handoff",
+  "date": "2026-07-23",
+  "status": "exact mixed-boundary sine and modewise Vaughan reduction with one open additive-twist gate",
+  "parameters": {
+    "alpha_range": "0<alpha<1",
+    "dyadic_blocks": "K=2^j",
+    "angles": "theta_(K,r)=(2r-1)pi/(2K+1)",
+    "boundary_conditions": "Dirichlet at 0, Neumann at K+1/2",
+    "mode_weight": "(2r-1)^(-2)"
+  },
+  "source_anchors": [
+    "outputs/jensen_window_pf_mertens_ordinary_vector_vaughan_handoff.md",
+    "https://doi.org/10.1093/qmath/os-8.1.313",
+    "https://doi.org/10.5802/aif.2401",
+    "https://doi.org/10.1017/fmp.2023.28"
+  ],
+  "rows": [
+    {
+      "id": "mbsv_01_vector_input",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "Lemma 11.22Z gives R_alpha<infinity iff E_alpha:=sum_(K dyadic)K^(-2-alpha)||B_K||_2^2<infinity.",
+      "proof_boundary": "The ordinary feature-vector handoff is independently validated and is the sole input here."
+    },
+    {
+      "id": "mbsv_02_collapsed_coefficient",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Set x_(K,i)=mu(K+i) for 1<=i<K and x_(K,K)=beta_K.",
+      "proof_boundary": "The future interval remains inside the exact boundary coefficient beta_K."
+    },
+    {
+      "id": "mbsv_03_suffix_map",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "B_(K,t)=sum_(i=t)^K x_(K,i), 1<=t<=K.",
+      "proof_boundary": "The terminal row is B_(K,K)=beta_K."
+    },
+    {
+      "id": "mbsv_04_brownian_gram",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "||B_K||_2^2=x_K^T C_K x_K with C_K(i,j)=min(i,j).",
+      "proof_boundary": "The suffix incidence matrix has Gram C_K."
+    },
+    {
+      "id": "mbsv_05_inverse_laplacian",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "C_K^(-1)=Q_K, where Q_K has off-diagonal -1, diagonal 2 for i<K, and final diagonal 1.",
+      "proof_boundary": "Direct multiplication gives the identity, including K=1."
+    },
+    {
+      "id": "mbsv_06_mixed_boundary",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "Q_K is the discrete Laplacian with v_0=0 and v_(K+1)=v_K.",
+      "proof_boundary": "These are Dirichlet and half-step Neumann boundary conditions."
+    },
+    {
+      "id": "mbsv_07_half_odd_angles",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "For 1<=r<=K put theta_(K,r)=(2r-1)pi/(2K+1).",
+      "proof_boundary": "The terminal boundary equation is cos((2K+1)theta/2)=0."
+    },
+    {
+      "id": "mbsv_08_sine_eigenvectors",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "phi_(K,r)(i)=2(2K+1)^(-1/2)sin(i*theta_(K,r)).",
+      "proof_boundary": "The normalization is chosen for an orthonormal basis of R^K."
+    },
+    {
+      "id": "mbsv_09_orthonormality",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "sum_(i=1)^K sin(i*theta_(K,r))sin(i*theta_(K,q))=(2K+1)delta_(r,q)/4.",
+      "proof_boundary": "This is the finite mixed-boundary sine orthogonality identity."
+    },
+    {
+      "id": "mbsv_10_eigenvalues",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "C_K phi_(K,r)=lambda_(K,r)phi_(K,r), where lambda_(K,r)=[4sin^2(theta_(K,r)/2)]^(-1).",
+      "proof_boundary": "Equivalently Q_K has eigenvalue 4sin^2(theta_(K,r)/2)."
+    },
+    {
+      "id": "mbsv_11_spectral_coefficient",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "X_(K,r):=<x_K,phi_(K,r)>.",
+      "proof_boundary": "These are normalized ordinary-Mobius half-odd sine modes."
+    },
+    {
+      "id": "mbsv_12_anchor_substitution",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "X_(K,r)=2(2K+1)^(-1/2)[sum_(i=1)^(K-1)mu(K+i)sin(i theta_(K,r))+beta_K sin(K theta_(K,r))].",
+      "proof_boundary": "The future anchor appears only in the mixed-Neumann boundary amplitude."
+    },
+    {
+      "id": "mbsv_13_spectral_feature",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Define g_(K,r)(K+i)=phi_(K,r)(i) and g_(K,r)(n)=b_K(n)phi_(K,r)(K) for 2K<=n<4K.",
+      "proof_boundary": "This unfolds beta_K back into ordinary Mobius values."
+    },
+    {
+      "id": "mbsv_14_spectral_mobius_sum",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "X_(K,r)=sum_(K<n<4K)mu(n)g_(K,r)(n).",
+      "proof_boundary": "Every spectral mode is one compact ordinary-Mobius test."
+    },
+    {
+      "id": "mbsv_15_feature_envelope",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "|g_(K,r)(n)|<=2/sqrt(2K+1) for all n,r.",
+      "proof_boundary": "The test coefficients are uniformly bounded and supported on K<n<4K."
+    },
+    {
+      "id": "mbsv_16_spectral_energy",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "||B_K||_2^2=sum_(r=1)^Klambda_(K,r)|X_(K,r)|^2.",
+      "proof_boundary": "This is the exact diagonalization of the min(i,j) Gram."
+    },
+    {
+      "id": "mbsv_17_eigenvalue_lower",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "K^(-2)lambda_(K,r)>=4/[pi^2(2r-1)^2].",
+      "proof_boundary": "Use sin(y)<=y and (2K+1)/K>=2."
+    },
+    {
+      "id": "mbsv_18_eigenvalue_upper",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "K^(-2)lambda_(K,r)<=9/[4(2r-1)^2].",
+      "proof_boundary": "Use sin(y)>=2y/pi on [0,pi/2] and (2K+1)/K<=3."
+    },
+    {
+      "id": "mbsv_19_odd_frequency_square",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "S_alpha:=sum_(K dyadic)K^(-alpha)sum_(r=1)^K|X_(K,r)|^2/(2r-1)^2.",
+      "proof_boundary": "This is the mixed-boundary additive-twist square function."
+    },
+    {
+      "id": "mbsv_20_spectral_equivalence",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "(4/pi^2)S_alpha<=E_alpha<=(9/4)S_alpha; hence R_alpha<infinity iff S_alpha<infinity.",
+      "proof_boundary": "The constants are uniform in K and alpha."
+    },
+    {
+      "id": "mbsv_21_absolute_barrier",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "The feature envelope gives |X_(K,r)|=O(sqrt(K)) and sum_r|X_(K,r)|^2/(2r-1)^2=O(K).",
+      "proof_boundary": "The normalized scale is O(K^(1-alpha)), one full power short."
+    },
+    {
+      "id": "mbsv_22_davenport_guard",
+      "role": "literature_guard",
+      "status": "source_backed",
+      "statement": "Davenport plus partial summation gives uniformly in r |X_(K,r)|<<_A sqrt(K)log^(-A)K.",
+      "proof_boundary": "The odd-frequency weight then gives only K^(1-alpha)log^(-2A)K, never a power saving."
+    },
+    {
+      "id": "mbsv_23_square_root_calibration",
+      "role": "conditional_calibration",
+      "status": "conditional",
+      "statement": "If the unnormalized bracket defining X_(K,r) is O_epsilon(K^(1/2+epsilon)) uniformly in r, then S_alpha<infinity whenever 2epsilon<alpha.",
+      "proof_boundary": "This sharp square-root-plus-epsilon estimate is not proved unconditionally."
+    },
+    {
+      "id": "mbsv_24_parseval_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "Orthogonality alone controls the unweighted mode square but does not provide Mobius cancellation in the odd-weighted square.",
+      "proof_boundary": "Generic Parseval or large-sieve bounds reproduce the one-power loss rather than close it."
+    },
+    {
+      "id": "mbsv_25_vaughan_split",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Split K<n<4K into X<n<=2X for X=K,2K and set U_X=V_X=floor(sqrt(X)).",
+      "proof_boundary": "The zero test value at n=4K makes the cover exact."
+    },
+    {
+      "id": "mbsv_26_type_i_coefficients",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "A_X(d)=sum_(bc=d,b<=U_X,c<=V_X)mu(b)mu(c).",
+      "proof_boundary": "These are Green-Tao's finite Type I coefficients."
+    },
+    {
+      "id": "mbsv_27_type_ii_coefficients",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "D_X(d)=sum_(c|d,c>V_X)mu(c).",
+      "proof_boundary": "These are the finite Type II divisor coefficients."
+    },
+    {
+      "id": "mbsv_28_type_i_mode",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "T_(I,K,r,X)=sum_(d<=U_XV_X)A_X(d)sum_(X/d<w<=2X/d)g_(K,r)(dw).",
+      "proof_boundary": "The inner test is deterministic and bounded."
+    },
+    {
+      "id": "mbsv_29_type_ii_mode",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "T_(II,K,r,X)=sum_(V_X<d<=2X/U_X)D_X(d)sum_(max(U_X,X/d)<w<=2X/d)mu(w)g_(K,r)(dw).",
+      "proof_boundary": "The bilinear Mobius factor remains inside the signed mode."
+    },
+    {
+      "id": "mbsv_30_modewise_vaughan",
+      "role": "source_backed_identity",
+      "status": "source_backed",
+      "statement": "With T_(q,K,r)=T_(q,K,r,K)+T_(q,K,r,2K), X_(K,r)=-T_(I,K,r)+T_(II,K,r).",
+      "proof_boundary": "Apply the finite Vaughan identity directly to each scalar spectral feature before squaring."
+    },
+    {
+      "id": "mbsv_31_modewise_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "R_alpha<infinity iff sum_K K^(-alpha)sum_r|-T_(I,K,r)+T_(II,K,r)|^2/(2r-1)^2<infinity.",
+      "proof_boundary": "This is the exact additive-twist Type I/II square-function target."
+    },
+    {
+      "id": "mbsv_32_separate_mode_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "Taking |T_I|+|T_II| mode by mode is not equivalent to the signed criterion.",
+      "proof_boundary": "A viable bilinear estimate must retain cancellation inside each half-odd mode and across the weighted mode family."
+    },
+    {
+      "id": "mbsv_33_all_interval_guard",
+      "role": "literature_guard",
+      "status": "source_backed",
+      "statement": "All-interval H*log^(-A)X cancellation remains scalar and gives the same K^(1-alpha)log^(-2A)K mode scale.",
+      "proof_boundary": "It supplies no square-root power or correlated spectral square estimate."
+    },
+    {
+      "id": "mbsv_34_finite_validation",
+      "role": "finite_reproduction",
+      "status": "finite_check_passed",
+      "statement": "Independent finite checks verify C_K^(-1), orthonormality, eigenpairs, spectral reconstruction, feature unfolding, and both interval Vaughan modes.",
+      "proof_boundary": "Finite checks validate algebra only and are not evidence for the open asymptotic estimate."
+    },
+    {
+      "id": "mbsv_35_open_spectral_gate",
+      "role": "open_theorem_target",
+      "status": "open",
+      "statement": "Prove the modewise criterion in row 31 for every member of one fixed cofinal sequence alpha_j->0 without assuming RH.",
+      "proof_boundary": "No square-root additive-twist bound, signed Type I/II power gain, full Burnol bound, RH, PF-infinity, or Lambda<=0 conclusion is supplied."
+    }
+  ],
+  "audit": {
+    "row_count": 35,
+    "exact_reduction_count": 27,
+    "literature_guard_count": 2,
+    "proof_guard_count": 3,
+    "conditional_calibration_count": 1,
+    "finite_validation_count": 1,
+    "open_signed_gate_count": 1,
+    "mixed_boundary_spectrum_proved": true,
+    "spectral_mobius_features_proved": true,
+    "odd_frequency_equivalence_proved": true,
+    "modewise_vaughan_proved": true,
+    "square_root_additive_twist_proved": false,
+    "signed_type_i_ii_gain_proved": false,
+    "full_burnol_bound_proved": false,
+    "rh_proved": false,
+    "pf_infinity_proved": false,
+    "lambda_le_zero_proved": false
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "kind": "jensen_window_pf_newman_theta_compact_transversality_scout",
+  "date": "2026-07-24",
+  "status": "exact uniform near-origin no-contact theorem plus a non-rigorous compact first-block scout and high-frequency proof-partition composition; not a proof of Lambda<=0 or RH",
+  "proof_boundary": "Only |x|<=1/4 is proved here. The 61951-point compact grid is numerical evidence, not an interval certificate. Existing Polymath-15 gates close specified high-frequency regions, while the corrected critical phase layer and the intervening bounded region remain open.",
+  "exact": {
+    "kernel": {
+      "definition": "phi_t(u)=exp(t*u^2)*Phi(u), H_t(x)=integral_0^infinity phi_t(u)*cos(xu)du",
+      "summands": "phi_n(u)=pi*n^2*exp(5u)*(2*pi*n^2*exp(4u)-3)*exp(-pi*n^2*exp(4u))",
+      "positivity": "phi_n(u)>0 for n>=1 and u>=0, hence phi_t(u)>0 for 0<=t<=1/5."
+    },
+    "zeroth_moment_floor": {
+      "interval": "0<=u<=1/100",
+      "rational_chain": "pi>3, exp(4u)<=exp(1/25)<25/24, pi*exp(4u)<10/3, exp(10/3)<29",
+      "first_summand_floor": "phi_1(u)>9/29",
+      "conclusion": "M_0(t)=integral phi_t(u)du>9/2900 for 0<=t<=1/5",
+      "value": "9/2900"
+    },
+    "second_moment_ceiling": {
+      "exponential_bound": "exp(4u)>=1+4u+8u^2 and t*u^2+9u-pi*n^2*exp(4u)<=-pi*n^2-3*n^2*u",
+      "integral_bound": "M_2(t)<=(4*pi^2/27)*sum_(n>=1)exp(-pi*n^2)/n^2",
+      "series_bound": "sum exp(-pi*n^2)/n^2<sum exp(-3n)=1/(exp(3)-1)<1/19",
+      "conclusion": "M_2(t)<40/513 for 0<=t<=1/5",
+      "value": "40/513"
+    },
+    "near_origin_theorem": {
+      "cosine_bound": "cos(y)>=1-y^2/2 for every real y",
+      "lower_bound": "H_t(x)>=M_0(t)-x^2*M_2(t)/2>9/2900-5/2052",
+      "interval": "0<=t<=1/5 and |x|<=1/4",
+      "margin": "248/371925",
+      "conclusion": "H_t(x)>0 on the stated rectangle, so H_t and H_t' cannot vanish together there."
+    },
+    "rational_audit": {
+      "exp_one_25_upper": "14350076907500385451/13787402343750000000",
+      "endpoint_exponent_upper": "275/84",
+      "exp_ten_thirds_upper": "13854522548056335366187505475792665888263455227857202460787248717953/494246145208720043936342207369613292173818981153707950259780760793",
+      "exp_three_lower": "39591971/1971200",
+      "origin_correction_upper": "5/2052"
+    }
+  },
+  "scout": {
+    "method": {
+      "description": "Gauss-Legendre quadrature of the n=1 Phi summand on [0,2], followed by the exact identities J_1=16*x^4*H_1 and J_1'=64*x^3*H_1+16*x^4*H_1'.",
+      "coarse_order": 600,
+      "fine_order": 900,
+      "cutoff": 2.0,
+      "status": "high-precision diagnostic only; no interval quadrature or between-grid derivative enclosure"
+    },
+    "compact_grid": {
+      "time_min": 0.0,
+      "time_max": 0.2,
+      "time_step": 0.005,
+      "time_rows": 41,
+      "x_min": 0.25,
+      "x_max": 38.0,
+      "x_step": 0.025,
+      "x_rows": 1511,
+      "total_points": 61951,
+      "fine_minimum": {
+        "ratio": 1.8494158798499079,
+        "t": 0.2,
+        "x": 38.0,
+        "value_ratio": 1.2838990186454429,
+        "derivative_ratio": 1.8494158798499079,
+        "J_1": -959.4339286373564,
+        "J_1_prime": 173.32124339996042,
+        "B_0": 747.2814564883707,
+        "B_1": 93.71674877909373
+      },
+      "coarse_minimum": {
+        "ratio": 1.8494158801880776,
+        "t": 0.2,
+        "x": 38.0,
+        "value_ratio": 1.283899018246208,
+        "derivative_ratio": 1.8494158801880776,
+        "J_1": -959.4339283390156,
+        "J_1_prime": 173.3212434316526,
+        "B_0": 747.2814564883707,
+        "B_1": 93.71674877909373
+      },
+      "fine_failures": 0,
+      "coarse_failures": 0,
+      "maximum_coarse_fine_ratio_difference": 4.129105946049094e-10,
+      "selected_time_minima": [
+        {
+          "t": 0.0,
+          "minimum_ratio": 1.8545081919853343,
+          "x": 38.0
+        },
+        {
+          "t": 0.05,
+          "minimum_ratio": 1.8534159114731381,
+          "x": 38.0
+        },
+        {
+          "t": 0.1,
+          "minimum_ratio": 1.852202975331964,
+          "x": 38.0
+        },
+        {
+          "t": 0.15,
+          "minimum_ratio": 1.8508695687642223,
+          "x": 38.0
+        },
+        {
+          "t": 0.2,
+          "minimum_ratio": 1.8494158798499079,
+          "x": 38.0
+        }
+      ]
+    },
+    "outer_scope_guard": {
+      "time_rows": 5,
+      "x_min": 38.0,
+      "x_max": 60.0,
+      "x_step": 0.05,
+      "total_points": 2205,
+      "failure_points": 2042,
+      "first_failures": [
+        {
+          "t": 0.0,
+          "first_x": 39.65,
+          "failure_count": 408
+        },
+        {
+          "t": 0.05,
+          "first_x": 39.65,
+          "failure_count": 408
+        },
+        {
+          "t": 0.1,
+          "first_x": 39.65,
+          "failure_count": 408
+        },
+        {
+          "t": 0.15,
+          "first_x": 39.6,
+          "failure_count": 409
+        },
+        {
+          "t": 0.2,
+          "first_x": 39.6,
+          "failure_count": 409
+        }
+      ],
+      "interpretation": "The raw first-block disjunction loses its margin near x=39.6 and cannot be promoted to an all-frequency theorem."
+    }
+  },
+  "rows": [
+    {
+      "id": "ntcts_01_positive_phi_kernel",
+      "role": "exact_inequality",
+      "readiness": "ready_to_apply",
+      "claim": "Every Xi kernel summand is positive on the half-line.",
+      "formula": "phi_n(u)>0 for n>=1 and u>=0, hence phi_t(u)>0 for 0<=t<=1/5.",
+      "proof_boundary": "Elementary from 2*pi*n^2*exp(4u)-3>0."
+    },
+    {
+      "id": "ntcts_02_zeroth_moment_floor",
+      "role": "exact_inequality",
+      "readiness": "ready_to_apply",
+      "claim": "The full deformed Xi kernel has a uniform positive mass floor.",
+      "formula": "M_0(t)=integral phi_t(u)du>9/2900 for 0<=t<=1/5",
+      "proof_boundary": "Uses only the n=1 summand on 0<=u<=1/100."
+    },
+    {
+      "id": "ntcts_03_second_moment_ceiling",
+      "role": "exact_inequality",
+      "readiness": "ready_to_apply",
+      "claim": "The full deformed Xi kernel has a uniform second-moment ceiling.",
+      "formula": "M_2(t)<40/513 for 0<=t<=1/5",
+      "proof_boundary": "Uses a rational exponential envelope summed over every n."
+    },
+    {
+      "id": "ntcts_04_near_origin_no_contact",
+      "role": "exact_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The Newman heat-flow transform is strictly positive near the origin.",
+      "formula": "H_t(x)>=M_0(t)-x^2*M_2(t)/2>9/2900-5/2052",
+      "proof_boundary": "0<=t<=1/5 and |x|<=1/4"
+    },
+    {
+      "id": "ntcts_05_component_contact_test",
+      "role": "exact_implication",
+      "readiness": "ready_to_apply",
+      "claim": "The first theta block supplies a rigorous pointwise contact exclusion.",
+      "formula": "|J_1|>B_0 or |J_1'|>B_1 implies (J,J')!=(0,0)",
+      "proof_boundary": "Imported from the independently checked 20-row theta/operator gate."
+    },
+    {
+      "id": "ntcts_06_compact_grid_scout",
+      "role": "numerical_evidence",
+      "readiness": "diagnostic_only",
+      "claim": "The pointwise disjunction has a robust sampled compact margin.",
+      "formula": "61951 points, minimum ratio=1.849415879849908, failures=0",
+      "proof_boundary": "Point quadrature and a finite grid are not an interval certificate."
+    },
+    {
+      "id": "ntcts_07_quadrature_crosscheck",
+      "role": "numerical_crosscheck",
+      "readiness": "diagnostic_only",
+      "claim": "Independent quadrature orders agree on the compact grid.",
+      "formula": "maximum coarse/fine normalized-ratio difference=4.129106e-10",
+      "proof_boundary": "Agreement does not enclose truncation or between-grid variation."
+    },
+    {
+      "id": "ntcts_08_outer_scope_guard",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "The raw first-block bars visibly lose their margin at larger frequency.",
+      "formula": "2042 failures on 2205 outer diagnostic points",
+      "proof_boundary": "The raw first-block disjunction loses its margin near x=39.6 and cannot be promoted to an all-frequency theorem."
+    },
+    {
+      "id": "ntcts_09_dominant_saddle_composition",
+      "role": "proved_external_composition",
+      "readiness": "ready_to_apply",
+      "claim": "The existing dominant-saddle certificate closes its complete ray.",
+      "formula": "L>=50 and t*L>=25 imply L_t(x)>0",
+      "proof_boundary": "Uses the published Polymath-15 effective approximation and the checked cutoff-transition repair."
+    },
+    {
+      "id": "ntcts_10_oscillatory_zeta_composition",
+      "role": "proved_asymptotic_composition",
+      "readiness": "ready_to_apply",
+      "claim": "The existing oscillatory-zeta theorem closes every fixed scaled ray above c_*.",
+      "formula": "For every epsilon>0, sufficiently large L and t*L>=c_*+epsilon imply L_t(x)>0, c_*=4911678521/1933561194.",
+      "proof_boundary": "The threshold depends on epsilon and is not a bounded-L certificate."
+    },
+    {
+      "id": "ntcts_11_critical_phase_target",
+      "role": "open_theorem_target",
+      "readiness": "open",
+      "claim": "The residual high-frequency layer requires corrected phase-critical-value avoidance.",
+      "formula": "L>=50, 0<t*L<=c_*+o(1): exclude theta=pi/2 mod pi together with theta'=0",
+      "proof_boundary": "This arithmetic transversality theorem remains RH-level and open."
+    },
+    {
+      "id": "ntcts_12_compact_interval_upgrade",
+      "role": "open_certification_target",
+      "readiness": "open",
+      "claim": "Upgrade the sampled first-block margin to a rigorous two-parameter interval cover.",
+      "formula": "Certify |J_1|>B_0 or |J_1'|>B_1 on 1/4<=x<=38, 0<=t<=1/5",
+      "proof_boundary": "Requires interval quadrature or a Taylor/Cauchy enclosure between every sampled point."
+    }
+  ]
+}

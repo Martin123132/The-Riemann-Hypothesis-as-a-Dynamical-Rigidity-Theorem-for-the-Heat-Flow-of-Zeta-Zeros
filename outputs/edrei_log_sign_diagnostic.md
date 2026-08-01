@@ -99,7 +99,7 @@ q_5 > 0:  3.1383438970865246250997232420260304e-15
 
 All signs above are interval-separated by Arb balls in the row logs.
 
-## Interpretation
+## Interpretation And Exact All-Order Target
 
 This removes one finite obstruction to the coefficient PF route:
 
@@ -107,7 +107,18 @@ This removes one finite obstruction to the coefficient PF route:
 c_k = A_k/k!
 ```
 
-It does not prove that all zeros of `H_lambda` are real and nonpositive, and it does not prove all Toeplitz minors are nonnegative. It is a necessary-condition check that sits between:
+It does not prove that all zeros of `H_lambda` are real and nonpositive, and it
+does not prove all Toeplitz minors are nonnegative. Log-sign alternation by
+itself is only necessary. But the shifted sequence
+
+```text
+a_r=p_(r+1)=(-1)^r [z^r] H_lambda'(z)/H_lambda(z)
+```
+
+has an exact all-order status: Sokal's Proposition 6 says that, because
+`H_lambda` is entire and `H_lambda(0)=1`, `a` is a Stieltjes moment sequence if
+and only if `H_lambda` is Laguerre-Polya type I. Thus the finite probes sit
+between:
 
 ```text
 finite Toeplitz/PF certificates
@@ -124,11 +135,23 @@ The next useful upgrade would be either:
 
 ```text
 1. extend the rigorous coefficient enclosures beyond k = 64 and rerun this log-sign probe;
-2. derive a representation proving (-1)^(n-1) q_n >= 0 for all n;
-3. show that the q_n are actual power sums of a positive zero-parameter measure.
+2. prove both Stieltjes Hankel columns s=1,2 at every order;
+3. derive a nonnegative Stieltjes continued fraction, prove the equivalent
+   global Phi Pick sign P_Phi(z)>0 in the upper half-plane, or construct a
+   Phi-derived positive self-adjoint resolvent for H_0'/H_0.
 ```
 
-## Power-Hankel Necessary Condition
+The Pick-kernel target and the exact rejection of generic backward
+Stieltjes-cone invariance are:
+
+```text
+outputs/jensen_window_pf_phi_pick_kernel_target.md
+python work/rh_compute/scripts/check_jensen_window_pf_phi_pick_kernel_target.py
+outputs/jensen_window_pf_edrei_heat_flow_boundary_gate.md
+python work/rh_compute/scripts/check_jensen_window_pf_edrei_heat_flow_boundary_gate.py
+```
+
+## Power-Hankel Finite Endpoint Diagnostic
 
 For a representation:
 
@@ -144,13 +167,14 @@ the signed logarithmic coefficients:
 p_n = (-1)^(n-1) q_n
 ```
 
-should behave like positive power sums. Therefore shifted Hankel determinants:
+give `a_r=p_(r+1)`. Therefore the shifted Hankel determinants
 
 ```text
 det(p_{i+j+s})_{i,j=0}^m
 ```
 
-with `s >= 1` provide another finite necessary-condition diagnostic.
+with `s=1,2` are the two leading Hankel columns in the exact Stieltjes moment
+criterion. The wider `s>=1` staircase supplies additional finite stress tests.
 
 Scripts:
 
@@ -277,4 +301,14 @@ orders 2..12: 55/55 Arb recurrence rows positive
 orders 2..20: frontier scout with 55 positive, 0 negative, 40 inconclusive rows
 ```
 
-This remains a finite diagnostic and does not prove the Edrei representation. The frontier beyond order 12 is inconclusive, not negative.
+This remains a finite diagnostic and does not prove the all-order Stieltjes
+property. At all orders that property would be sufficient, not merely
+necessary, by the entire-function logarithmic-derivative criterion. The
+frontier beyond order 12 is inconclusive, not negative.
+
+Exact theorem and indexing gate:
+
+```text
+outputs/jensen_window_pf_edrei_stieltjes_equivalence_gate.md
+python work/rh_compute/scripts/check_jensen_window_pf_edrei_stieltjes_equivalence_gate.py
+```

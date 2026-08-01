@@ -1,0 +1,352 @@
+{
+  "date": "2026-07-25",
+  "kind": "jensen_window_pf_newman_theta_forward_six_term_bridge_tail_gate",
+  "monotonicity": {
+    "derivative_x3_log_slope_at_x38": {
+      "enclosure": "[0.4716464501197767863867777913309904921035935433429408592008154424595297 +/- 1.77e-71]",
+      "log10_enclosure": "[-0.3263834299609617959083808904096671774283203376151246348 +/- 1.30e-56]",
+      "relative_accuracy_bits": 254,
+      "upper": "[0.4716464501197767863867777913309904921035935433429408592008154424595297 +/- 1.77e-71]"
+    },
+    "derivative_x4_log_slope_at_x38": {
+      "enclosure": "[0.4979622395934609969130935808046747026299093328166250697271312319332139 +/- 7.12e-72]",
+      "log10_enclosure": "[-0.3028035884811473060396116958269771016428450788933642404 +/- 3.05e-57]",
+      "relative_accuracy_bits": 254,
+      "upper": "[0.4979622395934609969130935808046747026299093328166250697271312319332139 +/- 7.12e-72]"
+    },
+    "monotonicity_formula": "d/dx log(exp(pi*x/8)*x^s)=pi/8+s/x>0, x>0, s in {3,4}",
+    "rho_K7": {
+      "enclosure": "[4.554480322505702777082047683314128599806051545572607618057386324050033e-21 +/- 2.15e-91]",
+      "log10_enclosure": "[-20.34156116994097683295786040463702081535351311134354769 +/- 3.91e-54]",
+      "relative_accuracy_bits": 248,
+      "upper": "[4.554480322505702777082047683314128599806051545572607618057386324050033e-21 +/- 2.15e-91]"
+    },
+    "spectral_rate_pi_over_8": {
+      "enclosure": "[0.3926990816987241548078304229099378605246461749218882276218680740384771 +/- 4.93e-71]",
+      "log10_enclosure": "[-0.4059401142978097312899483958825802066528913200058831778 +/- 2.78e-57]",
+      "relative_accuracy_bits": 255,
+      "upper": "[0.3926990816987241548078304229099378605246461749218882276218680740384771 +/- 4.93e-71]"
+    },
+    "theta_K7": {
+      "enclosure": "[0.9901746183091227879448801350162886541805257055435738620926184955963640 +/- 2.43e-71]",
+      "log10_enclosure": "[-0.004288210371298101547905878300385303080902440481310020126 +/- 3.48e-58]",
+      "relative_accuracy_bits": 254,
+      "upper": "[0.9901746183091227879448801350162886541805257055435738620926184955963640 +/- 2.43e-71]"
+    },
+    "value_x4_log_slope_at_x38": {
+      "enclosure": "[0.4979622395934609969130935808046747026299093328166250697271312319332139 +/- 7.12e-72]",
+      "log10_enclosure": "[-0.3028035884811473060396116958269771016428450788933642404 +/- 3.05e-57]",
+      "relative_accuracy_bits": 254,
+      "upper": "[0.4979622395934609969130935808046747026299093328166250697271312319332139 +/- 7.12e-72]"
+    }
+  },
+  "parameters": {
+    "first_omitted": 7,
+    "precision_bits": 256,
+    "ratio_target_exact": "1/100000000000",
+    "retained_terms": 6,
+    "t_cap_exact": "1/5",
+    "witness_first_omitted": [
+      6,
+      7,
+      8
+    ],
+    "x_interval": [
+      38,
+      245
+    ]
+  },
+  "proof_boundary": "This artifact proves only direct omitted-tail upper bounds for the six-term ordinary forward theta transform on 0<=t<=1/5 and 38<=x<=245. It does not certify retained first-jet separation on the finite bridge, prove the cofinal retained transition theorem, establish strict Laguerre positivity, prove Lambda<=0 or RH, or supply a Clay-prize proof.",
+  "rows": [
+    {
+      "claim": "On the positive half-line, the Xi theta kernel is the ordinary positive summand series.",
+      "diagnostics": null,
+      "formula": "Phi(u)=sum_(n>=1)phi_n(u), phi_n(u)>0 for u>=0",
+      "id": "ntfstbtg_01_forward_half_line_partition",
+      "proof_boundary": "This is the stored theta identity; individual ordinary summands are not even.",
+      "readiness": "proved",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The first six ordinary summands define a legitimate finite value and first-derivative transform.",
+      "diagnostics": null,
+      "formula": "S_(6,t)^F(x)=sum_(n=1)^6 integral_0^infinity exp(tu^2)phi_n(u)cos(xu)du",
+      "id": "ntfstbtg_02_six_term_transform",
+      "proof_boundary": "The residual is treated directly in L1; no evenness or integration-by-parts boundary cancellation is assumed.",
+      "readiness": "proved",
+      "role": "exact_definition"
+    },
+    {
+      "claim": "The omitted value and first-moment tails have explicit Gaussian arithmetic majorants uniform in 0<=t<=1/5.",
+      "diagnostics": null,
+      "formula": "E_p(K)<=5*p!*exp(1/80)*pi*K^2*exp(-pi*K^2)/[4*theta_K*(1-rho_K)]; theta_K=1-121/(80*pi*K^2), rho_K=exp(2/K-pi*(2K+1)), p in {0,1}",
+      "id": "ntfstbtg_03_raw_forward_tail_majorant",
+      "proof_boundary": "Uses P_0(X)=2X-3, coefficient norm five, u^p<=p!*exp(u), u^2<=exp(4u)/16, and a geometric sum from K onward.",
+      "readiness": "proved",
+      "role": "exact_inequality"
+    },
+    {
+      "claim": "Raw L1 and first-moment tails give direct J/J' errors without frequency integration by parts.",
+      "diagnostics": null,
+      "formula": "|J-J_6^F|<=16*x^4*E0(7); |J'-(J_6^F)'|<=64*x^3*E0(7)+16*x^4*E1(7)",
+      "id": "ntfstbtg_04_direct_c1_error",
+      "proof_boundary": "Triangle inequalities only; this is an omitted-tail upper bound, not retained first-jet separation.",
+      "readiness": "proved",
+      "role": "exact_composition"
+    },
+    {
+      "claim": "Both gamma-normalized direct error bounds increase with x on the finite bridge, so x=245 is the unique worst endpoint.",
+      "diagnostics": null,
+      "formula": "d/dx log(exp(pi*x/8)*x^s)=pi/8+s/x>0, x>0, s in {3,4}",
+      "id": "ntfstbtg_05_bridge_endpoint_monotonicity",
+      "proof_boundary": "Applies to the positive terms with powers x^3 and x^4.",
+      "readiness": "proved",
+      "role": "exact_inequality"
+    },
+    {
+      "claim": "Six ordinary forward terms leave less than 10^-11 of the natural gamma scale in both J and J' on 38<=x<=245.",
+      "diagnostics": {
+        "E0": {
+          "enclosure": "[2.751259270092159204869333934061053545014599795431688073435918276575254e-65 +/- 2.27e-136]",
+          "log10_enclosure": "[-64.56046848112443334727339054937489652388998883673504986 +/- 2.94e-55]",
+          "relative_accuracy_bits": 246,
+          "upper": "[2.751259270092159204869333934061053545014599795431688073435918276575254e-65 +/- 2.27e-136]"
+        },
+        "E1": {
+          "enclosure": "[2.751259270092159204869333934061053545014599795431688073435918276575254e-65 +/- 2.27e-136]",
+          "log10_enclosure": "[-64.56046848112443334727339054937489652388998883673504986 +/- 2.94e-55]",
+          "relative_accuracy_bits": 246,
+          "upper": "[2.751259270092159204869333934061053545014599795431688073435918276575254e-65 +/- 2.27e-136]"
+        },
+        "J_error": {
+          "enclosure": "[1.586046219148654947638994113240909553735370991530439083743145511671930e-54 +/- 7.04e-125]",
+          "log10_enclosure": "[-53.79968416101037870157566048063380697602140966614332661 +/- 2.33e-54]",
+          "relative_accuracy_bits": 247,
+          "upper": "[1.586046219148654947638994113240909553735370991530439083743145511671930e-54 +/- 7.05e-125]"
+        },
+        "J_error_over_gamma": {
+          "enclosure": "[9.645876016252800903561127821835024777240708998165622402398980787313357e-13 +/- 1.98e-83]",
+          "log10_enclosure": "[-12.01565832460398743482353695179853651333625547709811124 +/- 4.29e-54]",
+          "relative_accuracy_bits": 246,
+          "upper": "[9.645876016252800903561127821835024777240708998165622402398980787313357e-13 +/- 1.98e-83]"
+        },
+        "J_prime_error": {
+          "enclosure": "[1.611940851298020742702487894681577464816764803637058497355278499617594e-54 +/- 2.35e-124]",
+          "log10_enclosure": "[-53.79265089827917482665856584781220978001859805505782256 +/- 1.02e-54]",
+          "relative_accuracy_bits": 247,
+          "upper": "[1.611940851298020742702487894681577464816764803637058497355278499617594e-54 +/- 2.35e-124]"
+        },
+        "J_prime_error_over_gamma": {
+          "enclosure": "[9.803359706314071122394778888313963957277292002217306033458555983840922e-13 +/- 2.13e-83]",
+          "log10_enclosure": "[-12.00862506187278355990644231897693931733344386601260719 +/- 9.48e-55]",
+          "relative_accuracy_bits": 246,
+          "upper": "[9.803359706314071122394778888313963957277292002217306033458555983840922e-13 +/- 2.13e-83]"
+        },
+        "first_omitted": 7,
+        "gamma_scale": {
+          "enclosure": "[1.644273901588875196295731914281375605568650952629514376258029703004972e-42 +/- 2.78e-112]",
+          "log10_enclosure": "[-41.78402583640639126675212352883527046268515418904521537 +/- 1.97e-54]",
+          "relative_accuracy_bits": 248,
+          "upper": "[1.644273901588875196295731914281375605568650952629514376258029703004972e-42 +/- 2.78e-112]"
+        },
+        "retained_terms": 6,
+        "x_worst": 245
+      },
+      "formula": "|J-J_6^F|<10^-11*exp(-pi*x/8); |J'-(J_6^F)'|<10^-11*exp(-pi*x/8)",
+      "id": "ntfstbtg_06_six_term_gamma_scale_theorem",
+      "proof_boundary": "Uniform for 0<=t<=1/5; five retained terms explicitly fail this gamma-scale endpoint test.",
+      "readiness": "proved",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "A retained interval certificate for 38<=x<=245 needs only six ordinary oscillatory integrals plus the displayed direct tail bars.",
+      "diagnostics": null,
+      "formula": "max(|J_6^F|,|(J_6^F)'|)>10^-11*exp(-pi*x/8) is a sufficient pointwise target",
+      "id": "ntfstbtg_07_finite_bridge_reduction",
+      "proof_boundary": "This reduction does not assert that the retained disjunction holds.",
+      "readiness": "proved",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "Certify retained six-term first-jet separation on the remaining low-time and right-hand finite bridge rectangles.",
+      "diagnostics": null,
+      "formula": "[1/1035,1/155]x[38,69] union [1/1035,1/5]x[69,245]",
+      "id": "ntfstbtg_08_retained_bridge_handoff",
+      "proof_boundary": "No retained interval cover, cofinal retained theorem, strict Laguerre positivity, Lambda<=0, RH, or Clay-prize proof is supplied.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "source_audit": {
+    "base_builder_sha256": "9ea73fffc37bb9077f25d3965b173f6947abb9815971713e6eb9f8d046d32fd0",
+    "base_checker_sha256": "59c30d9f44055db8d5f9a1619583f786c8611edde978437c4ed64bf6085d86cd",
+    "base_result_sha256": "41585e8e17261eaed94e7a700a9a7f45746012a81508b431802b2fb44426c67c",
+    "contract_result_sha256": "8a476ffd0a6da75c28f7b9ac21d743a2dd57bfdac5b5bcc1f4dcd058c910fdb0",
+    "direct_c1_contract": {
+      "partial_derivative": "J_(N,t)'(x)=64*x^3*S_(N,t)(x)+16*x^4*S_(N,t)'(x)",
+      "partial_value": "J_(N,t)(x)=16*x^4*S_(N,t)(x)"
+    },
+    "modular_source_sha256": "a536f7995b9ef2651450aa5cb78936cb05c87265c8acaac42992ba4f6a1cf42d",
+    "positive_half_line": "phi_n(u)>0 for n>=1 and u>=0",
+    "theta_definition": "phi_n(u)=(2*pi^2*n^4*exp(9u)-3*pi*n^2*exp(5u))*exp(-pi*n^2*exp(4u))",
+    "theta_series": "Phi(u)=sum_(n>=1)phi_n(u)=Phi(-u)"
+  },
+  "status": "six-term ordinary-theta gamma-scale omitted-tail theorem on the finite Newman bridge",
+  "tail_majorant": {
+    "beta": "9/4",
+    "formula": "E_p(K)<=5*p!*exp(1/80)*pi*K^2*exp(-pi*K^2)/[4*theta_K*(1-rho_K)]; theta_K=1-121/(80*pi*K^2), rho_K=exp(2/K-pi*(2K+1)), p in {0,1}",
+    "kernel_coefficient_norm": 5,
+    "kernel_polynomial": "P_0(X)=2X-3",
+    "kernel_power": 2,
+    "uniformity": "0<=t<=1/5"
+  },
+  "theorem": {
+    "domain": "0<=t<=1/5, 38<=x<=245",
+    "first_derivative_error": "|J_t'-(J_(6,t)^F)'|<10^-11*exp(-pi*x/8)",
+    "retained_transform": "S_(6,t)^F=sum_(n=1)^6 integral_0^infinity exp(tu^2)phi_n(u)cos(xu)du",
+    "value_error": "|J_t-J_(6,t)^F|<10^-11*exp(-pi*x/8)"
+  },
+  "witnesses": [
+    {
+      "E0": {
+        "enclosure": "[1.106851925768652027936555395194194908809279369743594694518974244673057e-47 +/- 1.82e-117]",
+        "log10_enclosure": "[-46.95591047498661837615430010292032915314319417935895201 +/- 6.75e-55]",
+        "relative_accuracy_bits": 248,
+        "upper": "[1.106851925768652027936555395194194908809279369743594694518974244673057e-47 +/- 1.82e-117]"
+      },
+      "E1": {
+        "enclosure": "[1.106851925768652027936555395194194908809279369743594694518974244673057e-47 +/- 1.82e-117]",
+        "log10_enclosure": "[-46.95591047498661837615430010292032915314319417935895201 +/- 6.75e-55]",
+        "relative_accuracy_bits": 248,
+        "upper": "[1.106851925768652027936555395194194908809279369743594694518974244673057e-47 +/- 1.82e-117]"
+      },
+      "J_error": {
+        "enclosure": "[6.380781088523050979300682478770890004498642519977244438557677244665483e-37 +/- 3.81e-107]",
+        "log10_enclosure": "[-36.19512615487256373045657003417923960527461500876722876 +/- 2.71e-54]",
+        "relative_accuracy_bits": 247,
+        "upper": "[6.380781088523050979300682478770890004498642519977244438557677244665483e-37 +/- 3.81e-107]"
+      },
+      "J_error_over_gamma": {
+        "enclosure": "[388060.7167916033030525796948738226863094375369078980252670927776314124 +/- 3.85e-65]",
+        "log10_enclosure": "[5.588899681533827536295553494656030857410539180277986615 +/- 3.33e-55]",
+        "relative_accuracy_bits": 246,
+        "upper": "[388060.7167916033030525796948738226863094375369078980252670927776314124 +/- 3.85e-65]"
+      },
+      "J_prime_error": {
+        "enclosure": "[6.484957106294855893248448723322251473959844846834015776330047485394715e-37 +/- 1.15e-108]",
+        "log10_enclosure": "[-36.18809289214135985553947540135764240927180339768172471 +/- 6.34e-55]",
+        "relative_accuracy_bits": 247,
+        "upper": "[6.484957106294855893248448723322251473959844846834015776330047485394715e-37 +/- 1.14e-108]"
+      },
+      "J_prime_error_over_gamma": {
+        "enclosure": "[394396.4019637111120820095674431912199634691701635371767000249046131498 +/- 1.57e-65]",
+        "log10_enclosure": "[5.595932944265031411212648127477628053413350791363490661 +/- 3.30e-55]",
+        "relative_accuracy_bits": 246,
+        "upper": "[394396.4019637111120820095674431912199634691701635371767000249046131498 +/- 1.57e-65]"
+      },
+      "first_omitted": 6,
+      "gamma_scale": {
+        "enclosure": "[1.644273901588875196295731914281375605568650952629514376258029703004972e-42 +/- 2.78e-112]",
+        "log10_enclosure": "[-41.78402583640639126675212352883527046268515418904521537 +/- 1.97e-54]",
+        "relative_accuracy_bits": 248,
+        "upper": "[1.644273901588875196295731914281375605568650952629514376258029703004972e-42 +/- 2.78e-112]"
+      },
+      "retained_terms": 5,
+      "x_worst": 245
+    },
+    {
+      "E0": {
+        "enclosure": "[2.751259270092159204869333934061053545014599795431688073435918276575254e-65 +/- 2.27e-136]",
+        "log10_enclosure": "[-64.56046848112443334727339054937489652388998883673504986 +/- 2.94e-55]",
+        "relative_accuracy_bits": 246,
+        "upper": "[2.751259270092159204869333934061053545014599795431688073435918276575254e-65 +/- 2.27e-136]"
+      },
+      "E1": {
+        "enclosure": "[2.751259270092159204869333934061053545014599795431688073435918276575254e-65 +/- 2.27e-136]",
+        "log10_enclosure": "[-64.56046848112443334727339054937489652388998883673504986 +/- 2.94e-55]",
+        "relative_accuracy_bits": 246,
+        "upper": "[2.751259270092159204869333934061053545014599795431688073435918276575254e-65 +/- 2.27e-136]"
+      },
+      "J_error": {
+        "enclosure": "[1.586046219148654947638994113240909553735370991530439083743145511671930e-54 +/- 7.04e-125]",
+        "log10_enclosure": "[-53.79968416101037870157566048063380697602140966614332661 +/- 2.33e-54]",
+        "relative_accuracy_bits": 247,
+        "upper": "[1.586046219148654947638994113240909553735370991530439083743145511671930e-54 +/- 7.05e-125]"
+      },
+      "J_error_over_gamma": {
+        "enclosure": "[9.645876016252800903561127821835024777240708998165622402398980787313357e-13 +/- 1.98e-83]",
+        "log10_enclosure": "[-12.01565832460398743482353695179853651333625547709811124 +/- 4.29e-54]",
+        "relative_accuracy_bits": 246,
+        "upper": "[9.645876016252800903561127821835024777240708998165622402398980787313357e-13 +/- 1.98e-83]"
+      },
+      "J_prime_error": {
+        "enclosure": "[1.611940851298020742702487894681577464816764803637058497355278499617594e-54 +/- 2.35e-124]",
+        "log10_enclosure": "[-53.79265089827917482665856584781220978001859805505782256 +/- 1.02e-54]",
+        "relative_accuracy_bits": 247,
+        "upper": "[1.611940851298020742702487894681577464816764803637058497355278499617594e-54 +/- 2.35e-124]"
+      },
+      "J_prime_error_over_gamma": {
+        "enclosure": "[9.803359706314071122394778888313963957277292002217306033458555983840922e-13 +/- 2.13e-83]",
+        "log10_enclosure": "[-12.00862506187278355990644231897693931733344386601260719 +/- 9.48e-55]",
+        "relative_accuracy_bits": 246,
+        "upper": "[9.803359706314071122394778888313963957277292002217306033458555983840922e-13 +/- 2.13e-83]"
+      },
+      "first_omitted": 7,
+      "gamma_scale": {
+        "enclosure": "[1.644273901588875196295731914281375605568650952629514376258029703004972e-42 +/- 2.78e-112]",
+        "log10_enclosure": "[-41.78402583640639126675212352883527046268515418904521537 +/- 1.97e-54]",
+        "relative_accuracy_bits": 248,
+        "upper": "[1.644273901588875196295731914281375605568650952629514376258029703004972e-42 +/- 2.78e-112]"
+      },
+      "retained_terms": 6,
+      "x_worst": 245
+    },
+    {
+      "E0": {
+        "enclosure": "[1.227047147816612801480784393607309165711297476528433178444435381961244e-85 +/- 4.13e-155]",
+        "log10_enclosure": "[-84.91113874970722550633595835068365711671882097066090245 +/- 2.98e-54]",
+        "relative_accuracy_bits": 247,
+        "upper": "[1.227047147816612801480784393607309165711297476528433178444435381961244e-85 +/- 4.13e-155]"
+      },
+      "E1": {
+        "enclosure": "[1.227047147816612801480784393607309165711297476528433178444435381961244e-85 +/- 4.13e-155]",
+        "log10_enclosure": "[-84.91113874970722550633595835068365711671882097066090245 +/- 2.98e-54]",
+        "relative_accuracy_bits": 247,
+        "upper": "[1.227047147816612801480784393607309165711297476528433178444435381961244e-85 +/- 4.13e-155]"
+      },
+      "J_error": {
+        "enclosure": "[7.073682624780357294589227353051809485801653403988588115529659534365559e-75 +/- 3.08e-147]",
+        "log10_enclosure": "[-74.15035442959317086063822828194256756885024180006917920 +/- 9.47e-55]",
+        "relative_accuracy_bits": 248,
+        "upper": "[7.073682624780357294589227353051809485801653403988588115529659534365559e-75 +/- 3.07e-147]"
+      },
+      "J_error_over_gamma": {
+        "enclosure": "[4.302009913278438859342572536685387837218011277150707285729765403704792e-33 +/- 2.83e-103]",
+        "log10_enclosure": "[-32.36632859318677959388610475310729710616508761102396383 +/- 1.02e-54]",
+        "relative_accuracy_bits": 247,
+        "upper": "[4.302009913278438859342572536685387837218011277150707285729765403704792e-33 +/- 2.83e-103]"
+      },
+      "J_prime_error": {
+        "enclosure": "[7.189171320695138638174357595550614538631068153441463023538307036967446e-75 +/- 3.26e-145]",
+        "log10_enclosure": "[-74.14332116686196698572113364912097037284743018898367515 +/- 4.29e-54]",
+        "relative_accuracy_bits": 248,
+        "upper": "[7.189171320695138638174357595550614538631068153441463023538307036967446e-75 +/- 3.26e-145]"
+      },
+      "J_prime_error_over_gamma": {
+        "enclosure": "[4.372246809821760310107349231161883965172591053104188221006986063357115e-33 +/- 4.22e-103]",
+        "log10_enclosure": "[-32.35929533045557571896901012028569991016227599993845978 +/- 2.32e-54]",
+        "relative_accuracy_bits": 247,
+        "upper": "[4.372246809821760310107349231161883965172591053104188221006986063357115e-33 +/- 4.22e-103]"
+      },
+      "first_omitted": 8,
+      "gamma_scale": {
+        "enclosure": "[1.644273901588875196295731914281375605568650952629514376258029703004972e-42 +/- 2.78e-112]",
+        "log10_enclosure": "[-41.78402583640639126675212352883527046268515418904521537 +/- 1.97e-54]",
+        "relative_accuracy_bits": 248,
+        "upper": "[1.644273901588875196295731914281375605568650952629514376258029703004972e-42 +/- 2.78e-112]"
+      },
+      "retained_terms": 7,
+      "x_worst": 245
+    }
+  ]
+}

@@ -1,0 +1,307 @@
+{
+  "kind": "jensen_window_pf_newman_ray_aligned_energy_endpoint_margin_gate",
+  "date": "2026-07-28",
+  "status": "exact ray-aligned endpoint margins and whole-collar bulk-budget conditioning audit",
+  "proof_boundary": "This artifact proves the compact left derivative margin, its parabolic-frequency energy conversion, the dominant-ray normalizer-relative right energy margin, the instantiated two-endpoint contact floor, its cofinal conditioning, and the moving dominant-tail coverage geometry. It does not prove a full-collar Xi bulk upper bound, the strict no-contact budget, a localized telescoping theorem, Q209, the cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or a Clay-prize conclusion.",
+  "source_audit": {
+    "source_sha256": {
+      "energy_current": "a52f81335963dd2bacbbe1c72aa75df573d678b1f4a7c7934b4fbcb8ce2969b3",
+      "ray_schedule": "ea478b0396559ceaa5c6fc6002bf9518704f8395bb430feae284ab1820d5d591",
+      "compact": "e219c24e23f36544bede3cbcedef4477165a6a5482fcb08827413045f4d0854b",
+      "theta_operator": "84f0adfae26a39f23f785606822a7b799f6c8f3825fee737983ca07bb64cab62",
+      "dominant_global": "9f5d8d208e84533241e7c4de69d7646e991b99406b56a687e2976741bd98bf3e",
+      "dominant_cell": "5c090bb055068d72c4e02cfae9bbad5313d7225b52774a6ae9b57838bbd1e24d"
+    },
+    "compact_edge_records": 10,
+    "compact_edge_time_intervals": [
+      "[0,1/50]",
+      "[1/50,1/25]",
+      "[1/25,3/50]",
+      "[3/50,2/25]",
+      "[2/25,1/10]",
+      "[1/10,3/25]",
+      "[3/25,7/50]",
+      "[7/50,4/25]",
+      "[4/25,9/50]",
+      "[9/50,1/5]"
+    ],
+    "compact_edge_branches": [
+      "derivative"
+    ],
+    "compact_edge_ratio_lower_min": "[1.7521852560914668686294040482508965391487117311 +/- 2.31e-47]",
+    "inherited_boundary": "The endpoint sources are quantitative, but neither source supplies an upper bound for the energy bulk through the full old descendant collar."
+  },
+  "exact": {
+    "active_schedule": {
+      "range": "j>=25",
+      "reason": "t_j=25/(100+j)<=1/5 exactly when j>=25; earlier finite stages remain separate base/transition bookkeeping and are not used in this cofinal endpoint estimate",
+      "log_radius": "L_j=101+j>=126",
+      "times": "t_(j+1)=25/L_j and t_j=25/(L_j-1)",
+      "radius": "R_j=4*pi*exp(L_j)",
+      "width": "W_j=R_j-38=4*pi*exp(L_j)-38"
+    },
+    "left_source": {
+      "endpoint": "x=38, 0<t<=1/5",
+      "edge_records": 10,
+      "edge_cell": "757/20<=x<=38",
+      "branches": "all ten edge records use the derivative branch",
+      "ratio": "|J_(1,t)'|/B_1>7/4",
+      "tail": "|J_t'-J_(1,t)'|<B_1",
+      "b1_floor": "B_1(t,38)>=4*38^3/2800",
+      "full_margin": "|J_t'(38)|>3*38^3/2800=20577/350"
+    },
+    "left_energy_margin": {
+      "characteristic_derivative": "J_t'(x)=64x^3H_t(x)+16x^4H_t'(x)",
+      "cauchy": "|J_t'(38)|<=sqrt((64*38^3)^2+(16*38^4/s_pf(t,38))^2)*sqrt(E_pf(t,38))",
+      "pointwise": "E_pf(t,38)>M_38^2/[4096*38^6+256*38^8/s_pf(t,38)^2], M_38=20577/350",
+      "stage_uniform": "E_pf(t,38)>=M_38^2/[4096*38^6+256*38^8*(log(38/(4*pi))^2+L_j/50)]",
+      "notation": "call the square root of this lower bound m_(L,j)"
+    },
+    "right_source": {
+      "endpoint": "x=R_j, j>=25",
+      "ray": "tL_j>=25 and L_j>=126",
+      "curvature": "C=(H_x^2-H H_xx)/A_t^2>3L_j^2/40",
+      "normalization": "Z=H/A_t, g=H_x/A_t, h_2=H_xx/A_t, C=g^2-Zh_2",
+      "jet_caps": {
+        "|Z|": "18049/8000",
+        "|Z'|/L": "94407/160000",
+        "|Z''|/L^2": "123213/800000",
+        "|ell|/L": "27/100",
+        "|ell'|/L^2": "<=1/10^23",
+        "|h_2|/L^2": "<13/20",
+        "exact_h2_cap_before_rounding": "509689110000000000000018049/800000000000000000000000000"
+      }
+    },
+    "right_energy_margin": {
+      "scaled_norm": "y=sqrt(E_pf(t,R_j))/A_t(R_j)=sqrt(Z^2+s_pf^2 g^2)",
+      "beta_floor": "s_pf^2 L_j^2=q/(1+q)>=6300/6301, q>=6300",
+      "curvature_upper": "C/L_j^2<=y^2/(s_pf^2L_j^2)+(13/20)y",
+      "test": "at y=99/1000 the upper side is 51906789/700000000=3/40-593211/700000000",
+      "conclusion": "sqrt(E_pf(t,R_j))>(99/1000)A_t(R_j)"
+    },
+    "certified_contact_floor": {
+      "two_endpoint": "a contact in [38,R_j] implies integral_38^R_j B_pf dx>=[sqrt(E_pf(t,38))+sqrt(E_pf(t,R_j))]^2/W_j",
+      "source_lower": "integral_38^R_j B_pf dx>=[m_(L,j)+(99/1000)A_t(R_j)]^2/W_j",
+      "left_only": "integral_38^R_j B_pf dx>=m_(L,j)^2/W_j",
+      "strict_budget_target": "U_j(t)<2[m_(L,j)+(99/1000)A_t(R_j)]^2/W_j",
+      "upper_budget_requirement": "D_j(t)<=U_j(t), with U_j derived independently from Xi source bounds and D_j=d/dt integral E_pf+2[J_pf(R_j)-J_pf(38)]"
+    },
+    "conditioning": {
+      "left_floor_asymptotic": "m_(L,j)^2/W_j~[9/(231853260800*pi)]*exp(-L_j)/L_j",
+      "prefactor_without_pi": "9/231853260800",
+      "meaning": "The currently certified raw floor loses one exponential radius factor. This is a conditioning statement about the available sufficient bound, not a claim that the actual endpoint energy has this exact size."
+    },
+    "dominant_coverage": {
+      "threshold": "x_dom(t)=4*pi*exp(25/t)",
+      "bottom": "x_dom(t_(j+1))=R_j",
+      "top": "x_dom(t_j)=R_(j-1)",
+      "covered_tail": "[x_dom(t),R_j]",
+      "uncovered_for_bulk": "[38,x_dom(t))",
+      "consequence": "The dominant-ray C2 bounds control only the right tail; at the collar bottom they meet the interval only at R_j."
+    },
+    "numerator_gap": "The compact certificate stops at x=38 and the dominant-ray certificate starts at x_dom(t). Neither supplies a full-collar upper bound U_j for D_j. Pointwise noncontact in other bands does not itself bound the integrated H_x and H_xx bulk.",
+    "nonpromotion": {
+      "tautology": "Substituting D_j=2 integral B_pf is an identity, not the strict source-level upper estimate required by the test.",
+      "normalizer": "The right margin is relative to A_t(R_j); A_t cannot be dropped or replaced by one without a proved comparison.",
+      "finite_stage": "A finite evaluation of rho_j cannot prove the all-stage bulk budget.",
+      "conditioning": "Failure of the coarse certified floor to beat a candidate upper bound would reject that bound, not disprove the underlying contact-free theorem."
+    },
+    "route_decision": "Retain both endpoint margins, but do not launch a whole-collar bulk computation until a source-level interior majorant exists. The preferred refinement is a localized energy criterion on bounded logarithmic or phase cells with independently certified endpoint margins; otherwise return to the contact-normal C1 arithmetic target.",
+    "open_handoff": "Derive an exact localization of the energy/current identity on bounded cells and inventory which cell endpoints already have quantitative first-jet margins from compact, oscillatory-zeta, dominant-saddle, or phase-cell sources. Determine whether the cell boundary fluxes telescope without requiring the same open interior theorem."
+  },
+  "diagnostics": [
+    {
+      "stage": 25,
+      "L_j": 126,
+      "bottom_time": "0.1984126984126984",
+      "certified_left_energy_lower": "8.2688407852816759e-13",
+      "certified_left_norm_lower": "9.093316658558458e-07",
+      "left_only_floor_log10": "-67.902869954066773",
+      "status": "conditioning_diagnostic_not_proof_input"
+    },
+    {
+      "stage": 100,
+      "L_j": 201,
+      "bottom_time": "0.12437810945273632",
+      "certified_left_energy_lower": "5.9088140471450863e-13",
+      "certified_left_norm_lower": "7.6868810626580444e-07",
+      "left_only_floor_log10": "-100.62090040381037",
+      "status": "conditioning_diagnostic_not_proof_input"
+    },
+    {
+      "stage": 1000,
+      "L_j": 1101,
+      "bottom_time": "0.022706630336058128",
+      "certified_left_energy_lower": "1.3353419535134867e-13",
+      "certified_left_norm_lower": "3.6542330980843115e-07",
+      "left_only_floor_log10": "-492.13184194570636",
+      "status": "conditioning_diagnostic_not_proof_input"
+    },
+    {
+      "stage": 10000,
+      "L_j": 10101,
+      "bottom_time": "0.0024750024750024749",
+      "certified_left_energy_lower": "1.5278364068589664e-14",
+      "certified_left_norm_lower": "1.2360567975861653e-07",
+      "left_only_floor_log10": "-4401.7236947141373",
+      "status": "conditioning_diagnostic_not_proof_input"
+    }
+  ],
+  "rows": [
+    {
+      "id": "raem_01_active_schedule",
+      "role": "exact_geometry",
+      "readiness": "proved_exact",
+      "claim": "The compact quantitative endpoint source is available on every nontrivial ray-aligned stage j>=25.",
+      "formula": "j>=25; t_(j+1)=25/L_j and t_j=25/(L_j-1)",
+      "proof_boundary": "No new assertion is made about the finite initial-stage bookkeeping."
+    },
+    {
+      "id": "raem_02_compact_edge_inventory",
+      "role": "source_audit",
+      "readiness": "certified",
+      "claim": "The x=38 boundary is covered by ten contiguous derivative-branch interval boxes.",
+      "formula": "10 records; all ten edge records use the derivative branch",
+      "proof_boundary": "Uses only the stored rigorous compact certificate."
+    },
+    {
+      "id": "raem_03_compact_ratio",
+      "role": "exact_composition",
+      "readiness": "available_exact",
+      "claim": "Every compact edge box clears the derivative tail budget by a ratio greater than seven quarters.",
+      "formula": "|J_(1,t)'|/B_1>7/4; |J_t'-J_(1,t)'|<B_1",
+      "proof_boundary": "The ratio is an Arb lower enclosure, not a sampled midpoint."
+    },
+    {
+      "id": "raem_04_left_full_margin",
+      "role": "exact_inequality",
+      "readiness": "proved_exact",
+      "claim": "The full characteristic derivative has one explicit uniform raw margin at x=38.",
+      "formula": "|J_t'(38)|>3*38^3/2800=20577/350",
+      "proof_boundary": "Uses the positive cubic term in B_1 and delta_0=1/2800."
+    },
+    {
+      "id": "raem_05_left_energy_conversion",
+      "role": "exact_inequality",
+      "readiness": "proved_exact",
+      "claim": "Weighted Cauchy-Schwarz converts the characteristic derivative margin into an E_pf endpoint margin.",
+      "formula": "E_pf(t,38)>M_38^2/[4096*38^6+256*38^8/s_pf(t,38)^2], M_38=20577/350",
+      "proof_boundary": "Valid for t>0; no division by the unknown jet occurs."
+    },
+    {
+      "id": "raem_06_left_stage_margin",
+      "role": "exact_inequality",
+      "readiness": "proved_exact",
+      "claim": "The bottom time gives one explicit margin uniform over each descendant collar.",
+      "formula": "E_pf(t,38)>=M_38^2/[4096*38^6+256*38^8*(log(38/(4*pi))^2+L_j/50)]",
+      "proof_boundary": "Uses monotonicity of s_pf^2 in t."
+    },
+    {
+      "id": "raem_07_right_curvature",
+      "role": "source_audit",
+      "readiness": "certified",
+      "claim": "The exact dominant-ray theorem supplies a strict normalizer-relative curvature margin at R_j.",
+      "formula": "C=(H_x^2-H H_xx)/A_t^2>3L_j^2/40",
+      "proof_boundary": "Applies because tL_j>=25, including cutoff transitions."
+    },
+    {
+      "id": "raem_08_right_hxx_cap",
+      "role": "exact_composition",
+      "readiness": "proved_exact",
+      "claim": "The dominant main and remainder C2 caps give a uniform normalized second-jet upper bound.",
+      "formula": "|H_xx|/(A_t L_j^2)<13/20",
+      "proof_boundary": "Uses the certified normalizer log-derivative bounds."
+    },
+    {
+      "id": "raem_09_right_beta_floor",
+      "role": "exact_geometry",
+      "readiness": "proved_exact",
+      "claim": "The parabolic-frequency scale is uniformly frequency-conditioned at every active right endpoint.",
+      "formula": "s_pf^2 L_j^2=q/(1+q)>=6300/6301, q>=6300",
+      "proof_boundary": "Uses j>=25 and tL_j>=25."
+    },
+    {
+      "id": "raem_10_right_energy_margin",
+      "role": "exact_inequality",
+      "readiness": "proved_exact",
+      "claim": "Curvature positivity and the C2 cap force a quantitative normalized first-jet margin.",
+      "formula": "at y=99/1000 the upper side is 51906789/700000000=3/40-593211/700000000; sqrt(E_pf(t,R_j))>(99/1000)A_t(R_j)",
+      "proof_boundary": "The raw margin retains the explicit normalizer A_t(R_j)."
+    },
+    {
+      "id": "raem_11_two_endpoint_floor",
+      "role": "exact_composition",
+      "readiness": "available_exact",
+      "claim": "The two source margins instantiate the energy gate's exact contact floor.",
+      "formula": "integral_38^R_j B_pf dx>=[m_(L,j)+(99/1000)A_t(R_j)]^2/W_j",
+      "proof_boundary": "Conditional consequence if a contact exists; not a contact proof by itself."
+    },
+    {
+      "id": "raem_12_strict_budget_target",
+      "role": "conditional_criterion",
+      "readiness": "not_ready_to_apply",
+      "claim": "One independently derived full-collar bulk upper bound below the certified floor would exclude contact.",
+      "formula": "U_j(t)<2[m_(L,j)+(99/1000)A_t(R_j)]^2/W_j",
+      "proof_boundary": "D_j(t)<=U_j(t), with U_j derived independently from Xi source bounds and D_j=d/dt integral E_pf+2[J_pf(R_j)-J_pf(38)]"
+    },
+    {
+      "id": "raem_13_floor_conditioning",
+      "role": "exact_asymptotic",
+      "readiness": "proved_exact",
+      "claim": "The left-only certified whole-collar floor loses one exponential radius factor.",
+      "formula": "m_(L,j)^2/W_j~[9/(231853260800*pi)]*exp(-L_j)/L_j",
+      "proof_boundary": "The currently certified raw floor loses one exponential radius factor. This is a conditioning statement about the available sufficient bound, not a claim that the actual endpoint energy has this exact size."
+    },
+    {
+      "id": "raem_14_dominant_coverage",
+      "role": "exact_geometry",
+      "readiness": "proved_exact",
+      "claim": "The dominant-ray C2 theorem covers only a moving right tail of each old collar.",
+      "formula": "[x_dom(t),R_j]; [38,x_dom(t))",
+      "proof_boundary": "The dominant-ray C2 bounds control only the right tail; at the collar bottom they meet the interval only at R_j."
+    },
+    {
+      "id": "raem_15_interior_numerator_gap",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "The audited sources do not provide the full-collar numerator upper bound.",
+      "formula": "The compact certificate stops at x=38 and the dominant-ray certificate starts at x_dom(t). Neither supplies a full-collar upper bound U_j for D_j. Pointwise noncontact in other bands does not itself bound the integrated H_x and H_xx bulk.",
+      "proof_boundary": "This is the remaining Xi source obligation."
+    },
+    {
+      "id": "raem_16_tautology_guard",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "The exact energy identity cannot be recycled as its own strict upper estimate.",
+      "formula": "Substituting D_j=2 integral B_pf is an identity, not the strict source-level upper estimate required by the test.",
+      "proof_boundary": "Blocks a circular bulk-budget proof."
+    },
+    {
+      "id": "raem_17_normalizer_and_finite_guards",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "Neither the right normalizer nor all-stage quantification may be discarded.",
+      "formula": "The right margin is relative to A_t(R_j); A_t cannot be dropped or replaced by one without a proved comparison. A finite evaluation of rho_j cannot prove the all-stage bulk budget.",
+      "proof_boundary": "Failure of the coarse certified floor to beat a candidate upper bound would reject that bound, not disprove the underlying contact-free theorem."
+    },
+    {
+      "id": "raem_18_localization_handoff",
+      "role": "route_decision",
+      "readiness": "available_exact",
+      "claim": "The next energy test should be localized to bounded cells with quantitative endpoint ownership.",
+      "formula": "Derive an exact localization of the energy/current identity on bounded cells and inventory which cell endpoints already have quantitative first-jet margins from compact, oscillatory-zeta, dominant-saddle, or phase-cell sources. Determine whether the cell boundary fluxes telescope without requiring the same open interior theorem.",
+      "proof_boundary": "No localized telescoping or cellwise Xi bulk theorem is yet proved."
+    }
+  ],
+  "summary": {
+    "rows": 18,
+    "compact_edge_records": 10,
+    "left_raw_margins": 1,
+    "right_normalized_margins": 1,
+    "exact_contact_floors": 1,
+    "open_full_collar_bulk_budgets": 1,
+    "nonpromotion_guards": 2,
+    "pointwise_contact_exclusions": 0,
+    "cofinal_descendant_theorem": false
+  }
+}

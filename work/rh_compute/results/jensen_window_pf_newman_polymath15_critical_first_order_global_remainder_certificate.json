@@ -1,0 +1,269 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_critical_first_order_global_remainder_certificate",
+  "date": "2026-07-26",
+  "status": "global first-order critical remainder theorem on L>=50 and 0<tL<=25; not contact exclusion, Lambda<=0, or RH",
+  "proof_boundary": "This artifact proves the heat-integrated Riemann-Siegel endpoint a^-2 estimate, the variable-order negative-sigma tail, the first-order holomorphic lift, and one adjacent-cutoff signed comparison. Together with the existing finite Dirichlet theorem it proves eta_0=100000 and eta_1=200000 for r_[1]. It does not prove the strict Xi contact-normal inequality, the bounded-L shoulder, contact exclusion, Lambda<=0, RH, or a Clay-prize result.",
+  "builder_sha256": "4fafbfb677a582db51b12aa630ed4f7d3b75837998b566c2476cea16c84356db",
+  "source_sha256": {
+    "endpoint_C1": "8913ef1c451e71b2df0c3fa6201dae0c8515399a3668ba35c8f255dfc36d9097",
+    "dirichlet_second_order": "b19d92b1e027ea4323dadac183fa75edb13fe2246f130ca2d49d73c1b09c3831",
+    "old_global_C1": "032831ee9e5b271ad102ff006705fb401cd2bf574e4c59e1011258e4c0e6c388",
+    "C0_strip": "8c9a27ee454f08a4111d38e8d303040a1e73ff4d82c56023335c0f32201e1b15"
+  },
+  "exact": {
+    "region": "L=log(x/(4*pi))>=50, 0<t*L<=25, rho=1/L; all Cauchy disks are centered on the real critical ray",
+    "source_expansion": "For u=sigma+sqrt(t)v, Proposition 6.2 gives sum_(k=0)^K C_k(p,u)/a^k+RS_K; Proposition 6.3 gives the exact heat integral with a multiplicative P(u) satisfying |P(u)-1|<=exp((u^2+5/6)/(T-3))-1",
+    "C1_formula": "C_1(p,sigma)=F'''(p)/(12*pi^2)+i*(2*sigma-1)*F'(p)/(4*pi), F=C_0",
+    "off_axis_cancellation": "For sigma=(1-y)/2 and p'(T)=-1/(2*pi*a), (C_1(p,sigma)-C_1(p,1/2))/a=(i*y/2)*F'(p)*p'(T)=-i*y*F'(p)/(4*pi*a)",
+    "slow_factors": "K(T)=-(sqrt(pi)/8)*exp(-pi*T/4)*(T^(3/2)+i*T^(1/2)); (T^(3/2)+i*T^(1/2))/a=sqrt(2*pi)*(T+i)",
+    "analytic_lift": "E_[1],N(z)=(-1)^N exp(t*pi^2/64)*(G_[1],N(z)+G_[1],N^#(z)), where G_[1],N=K(T(z))*(F(p_N(T(z)))+F'''(p_N(T(z)))/(12*pi^2*a(T(z))))",
+    "lift_derivatives": "For A(T)=T^(3/2)+i*T^(1/2), |theta|<=1/L and T>=10^6: |A'|/|A(T)|<=2/T, |A''|/|A(T)|<=1/T^2, |p'|<=(2*pi*(T-|theta|))^-1/2, |p''|<=(2*sqrt(2*pi)*(T-|theta|)^(3/2))^-1; therefore T|S_0''|/|A(T)|<2100, T|S_1'|/|A(T)|<10133, and the two-component paper/lift mismatch is <1000/T",
+    "expanded_strip": "On |Re p|<=101/100, |Im p|<=1/100, Cauchy radius 1/10 stays in |Re p|<=111/100, |Im p|<=11/100; |F|<5 gives |F'|<50, |F''|<1000, |F'''|<30000, |F''''|<1200000",
+    "C0_prefactor": "|C_0|*integral|P-1|dmu<=2/T",
+    "C1_prefactor": "|C_1(p,u)|<=300+10|u| and a^-1*integral|P-1||C_1|dmu<=1000/T",
+    "positive_tail": "For u>=0 choose K=2; the C_2/a^2 and RS_2 terms contribute less than 9/T after Gaussian integration",
+    "negative_tail": "For u<0 choose K_u=max(floor(-u)+3,floor(T_0/pi)); the k>=2 low series is split into even/odd Gamma progressions, and the published extreme tail delta_3<=2*10^-30/a^14; the total negative contribution is less than 1/T",
+    "endpoint_pair": "The two heat endpoints, after the C_1 lift is retained, have bracket error <=4000/T on the doubled transition collar",
+    "endpoint_prefactor": "The published endpoint prefactor, the collar loss, and sup|B_t(z)|/A_t(x)<2 give |K(T)|/A_t(x)<2*exp(7/4)*exp(-L/4)<20*exp(-L/4); also T>pi*exp(L)",
+    "endpoint_normalized": "|R_endpoint|/A_t(x)<30000*exp(-5L/4)",
+    "finite_dirichlet": "|R_D|/A_t(x)<8000000*exp(-7L/4), |partial_x R_D|/A_t(x)<8000000*L*exp(-7L/4)",
+    "fixed_raw": "On a fixed-N disk, sup |R_[1]|/A_t(x)<40000*exp(-5L/4)",
+    "old_adjacent": "The inherited C_0/main-block adjacent mismatch is <1000*exp(-5L/4)",
+    "new_adjacent": "|d_(t,n)|<100/T for the entering Dirichlet term; critical C_1 parity gives exact endpoint value matching and its adjacent derivative difference is O(T^-1); together with the old mismatch, |Delta lift_[1]|/A_t(x)<20000*exp(-5L/4)",
+    "adjacent_components": "From |alpha'(s)|<=1/(T-3), t|alpha_n|<=27, d=1/(6s)+alpha'(s)(t/4+t^2*alpha_n^2/8) gives T|d|<100. The entering two-sharp block is <200*exp(-L/4), costing <7000*exp(-5L/4). C_1 parity makes the endpoint difference zero at a=m; the F'''' derivative bound costs <6000*exp(-5L/4) on the doubled collar",
+    "global_remainder": "For every critical disk, including cutoff crossings, |r_[1](x)|<100000*exp(-5L/4) and |partial_x r_[1](x)|<200000*L*exp(-5L/4)",
+    "cauchy_transfer": "A radius-1/L Cauchy estimate gives |R_[1]'|/A_t<100000*L*exp(-5L/4); with |partial_x log A_t|<L/2 this gives |partial_x r_[1]|<150000*L*exp(-5L/4)<200000*L*exp(-5L/4)",
+    "contact_handoff": "Insert eta_0=100000 and eta_1=200000 in the exact signed contact-normal inequality; the strict Xi arithmetic reversal is the next open theorem target"
+  },
+  "interval": {
+    "precision_bits": "256",
+    "L_min": "50",
+    "T_audit_min": "1000000",
+    "expanded_numerator_ball": "[2.902918572241135153718479990136224521200910762630440940977876674516813 +/- 1.57e-70]",
+    "expanded_vertical_denominator_ball": "[0.6387050795762012739638917965079090461591356694258520136447872975359859 +/- 3.46e-72]",
+    "expanded_horizontal_denominator_ball": "[1.035364652461827867361902752663783402289978716129831977013429513823473 +/- 2.17e-70]",
+    "expanded_C0_ball": "[4.545006240074531751161629560727004915340271656380749415359425070964983 +/- 4.82e-70]",
+    "derivative_bounds": {
+      "F": 5,
+      "F1": 50,
+      "F2": 1000,
+      "F3": 30000,
+      "F4": 1200000
+    },
+    "critical_T_lower_ball": "[32576465599271065176272.56089879303693393663297947214270800210949247375 +/- 1.06e-48]",
+    "p_displacement_ball": "[4.420669830983571318809063394042258698086734524135207993367751675303341e-14 +/- 2.77e-84]",
+    "endpoint_prefix_ball": "[11.50920535201146087373299940968538474184584461667305279961842629543484 +/- 1.22e-69]",
+    "C0_prefactor_scaled_ball": "[3.333364444716298570224192436663702224903351057681065122711056240564068 +/- 3.23e-71]",
+    "C1_cross_moment_ball": "[418.3887741438575101841332060857839436867705243105808336548409006595615 +/- 3.19e-68]",
+    "C1_prefactor_scaled_ball": "[418.3900293139454520204892675535866044465838640621730201739014223638286 +/- 2.34e-68]",
+    "mgf_9_ball": "[5.731822181280803339495553898216572845266094416944002220394492760688513 +/- 4.21e-70]",
+    "mgf_RS2_ball": "[1.965573190197460227733159854876456653845840554925041499326091886695195 +/- 3.18e-70]",
+    "positive_a2_constant_ball": "[0.6537465017405402999969178080450667596372026498570120002237305091122994 +/- 2.97e-71]",
+    "de_reyna_ratio_ball": "[0.4441328588822765519728934987039487548675259551447155371918081522966671 +/- 3.95e-71]",
+    "negative_low_series_ball": "[0.01226709802781813630862695378997646815059986111588753861772092344133046 +/- 3.75e-72]",
+    "mgf_negative_ball": "[1.061897858868952516170089002650538467051300847691324704010420053695092 +/- 4.72e-70]",
+    "negative_a2_constant_ball": "[0.01302640513027562905706069515542131158916217035130416358532481814033369 +/- 4.08e-72]",
+    "tail_scaled_constant_ball": "[4.189457731676133389787674308186841860067643027501996545237719259736133 +/- 4.89e-70]",
+    "C1_slow_derivative_scaled_ball": "[10132.77366615123582616596845025995941349153626694433876109083340487010 +/- 2.85e-66]",
+    "pair_lift_scaled_ball": "[406.5509466460494330466387380103983765396614506777735504436333361948041 +/- 1.39e-68]",
+    "endpoint_pair_bracket_ball": "[2430.550946646049433046638738010398376539661450677773550443633336194804 +/- 1.14e-67]",
+    "endpoint_normalized_ball": "[14653.97538265857024769466370864202946224496109484829902178563263977997 +/- 3.06e-66]",
+    "finite_effective_L50_ball": "[0.0001111035509197121647572941099686948552831980830416404446683823996870509 +/- 4.52e-74]",
+    "fixed_raw_ball": "[30000.00011110355091971216475729410996869485528319808304164044466838240 +/- 3.14e-67]",
+    "adjacent_dirichlet_ball": "[6366.197723675813430755350534900574481378385829618257949906693762355872 +/- 9.47e-68]",
+    "adjacent_endpoint_C1_ball": "[2969.708317236624794973274363349008368932438315052061908887205519524481 +/- 2.14e-67]",
+    "adjacent_total_ball": "[10335.90604091243822572862489824958285031082414467031985879389928188035 +/- 2.70e-66]",
+    "global_raw_ball": "60000.00000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "summary": {
+    "rows": 15,
+    "exact_or_published_inputs": 4,
+    "analytic_or_interval_bounds": 8,
+    "proved_compositions": 4,
+    "open_targets": 1,
+    "eta_0": 100000,
+    "eta_1": 200000
+  },
+  "rows": [
+    {
+      "id": "np15f1grc_01_scope",
+      "role": "exact_scope",
+      "readiness": "ready_to_apply",
+      "claim": "The first-order endpoint problem is posed on the full critical Cauchy collar.",
+      "formula": "L=log(x/(4*pi))>=50, 0<t*L<=25, rho=1/L; all Cauchy disks are centered on the real critical ray",
+      "proof_boundary": "Only L>=50 and 0<tL<=25; the bounded-L shoulder is not included.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15f1grc_02_source",
+      "role": "published_input",
+      "readiness": "ready_to_apply",
+      "claim": "The heat endpoint is controlled by the explicit Proposition 6.2 coefficient and remainder bounds.",
+      "formula": "For u=sigma+sqrt(t)v, Proposition 6.2 gives sum_(k=0)^K C_k(p,u)/a^k+RS_K; Proposition 6.3 gives the exact heat integral with a multiplicative P(u) satisfying |P(u)-1|<=exp((u^2+5/6)/(T-3))-1",
+      "proof_boundary": "Uses Polymath 15 and its cited Arias de Reyna estimates, not a new Riemann-Siegel theorem.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15f1grc_03_off_axis_cancellation",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The apparently dangerous off-axis C1 term is exactly the first complex displacement of the C0 lift.",
+      "formula": "C_1(p,sigma)=F'''(p)/(12*pi^2)+i*(2*sigma-1)*F'(p)/(4*pi), F=C_0; For sigma=(1-y)/2 and p'(T)=-1/(2*pi*a), (C_1(p,sigma)-C_1(p,1/2))/a=(i*y/2)*F'(p)*p'(T)=-i*y*F'(p)/(4*pi*a)",
+      "proof_boundary": "Exact first-order identity; all remaining Taylor terms are bounded separately.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15f1grc_04_strip",
+      "role": "interval_certificate",
+      "readiness": "certified",
+      "claim": "A wider removable-point strip gives four explicit C0 derivative bounds.",
+      "formula": "On |Re p|<=101/100, |Im p|<=1/100, Cauchy radius 1/10 stays in |Re p|<=111/100, |Im p|<=11/100; |F|<5 gives |F'|<50, |F''|<1000, |F'''|<30000, |F''''|<1200000",
+      "proof_boundary": "Finite complex rectangle only; the apparent poles at p=+-1/2 are removable.",
+      "diagnostics": {
+        "C0": "[4.545006240074531751161629560727004915340271656380749415359425070964983 +/- 4.82e-70]",
+        "derivatives": {
+          "F": 5,
+          "F1": 50,
+          "F2": 1000,
+          "F3": 30000,
+          "F4": 1200000
+        },
+        "p_displacement": "[4.420669830983571318809063394042258698086734524135207993367751675303341e-14 +/- 2.77e-84]"
+      }
+    },
+    {
+      "id": "np15f1grc_05_prefactor",
+      "role": "analytic_bound",
+      "readiness": "ready_to_apply",
+      "claim": "The C0 and retained C1 layers absorb the full gamma/Stirling and log-M0 prefactor defect at order T^-1.",
+      "formula": "|C_0|*integral|P-1|dmu<=2/T; |C_1(p,u)|<=300+10|u| and a^-1*integral|P-1||C_1|dmu<=1000/T",
+      "proof_boundary": "The C1 moment uses the exact affine sigma dependence and an explicit tilted Gaussian fourth moment.",
+      "diagnostics": {
+        "C0_scaled": "[3.333364444716298570224192436663702224903351057681065122711056240564068 +/- 3.23e-71]",
+        "C1_moment": "[418.3887741438575101841332060857839436867705243105808336548409006595615 +/- 3.19e-68]",
+        "C1_scaled": "[418.3900293139454520204892675535866044465838640621730201739014223638286 +/- 2.34e-68]"
+      }
+    },
+    {
+      "id": "np15f1grc_06_positive_tail",
+      "role": "analytic_bound",
+      "readiness": "ready_to_apply",
+      "claim": "K=2 suffices on the nonnegative shifted-sigma half-line.",
+      "formula": "For u>=0 choose K=2; the C_2/a^2 and RS_2 terms contribute less than 9/T after Gaussian integration",
+      "proof_boundary": "Bounds C2 and RS2 after Gaussian integration; it does not use a fixed K on the negative half-line.",
+      "diagnostics": {
+        "mgf_9": "[5.731822181280803339495553898216572845266094416944002220394492760688513 +/- 4.21e-70]",
+        "mgf_RS2": "[1.965573190197460227733159854876456653845840554925041499326091886695195 +/- 3.18e-70]",
+        "a2_constant": "[0.6537465017405402999969178080450667596372026498570120002237305091122994 +/- 2.97e-71]"
+      }
+    },
+    {
+      "id": "np15f1grc_07_negative_tail",
+      "role": "analytic_bound",
+      "readiness": "ready_to_apply",
+      "claim": "A variable expansion order closes the negative shifted-sigma Gaussian tail.",
+      "formula": "For u<0 choose K_u=max(floor(-u)+3,floor(T_0/pi)); the k>=2 low series is split into even/odd Gamma progressions, and the published extreme tail delta_3<=2*10^-30/a^14; the total negative contribution is less than 1/T",
+      "proof_boundary": "Uses K_u+u>=2 and retains the published extreme-tail estimate; fixed K=2 is explicitly forbidden here.",
+      "diagnostics": {
+        "ratio": "[0.4441328588822765519728934987039487548675259551447155371918081522966671 +/- 3.95e-71]",
+        "low_series": "[0.01226709802781813630862695378997646815059986111588753861772092344133046 +/- 3.75e-72]",
+        "Gaussian": "[1.061897858868952516170089002650538467051300847691324704010420053695092 +/- 4.72e-70]",
+        "scaled_total_tail": "[4.189457731676133389787674308186841860067643027501996545237719259736133 +/- 4.89e-70]"
+      }
+    },
+    {
+      "id": "np15f1grc_08_lift",
+      "role": "analytic_bound",
+      "readiness": "ready_to_apply",
+      "claim": "The first-order endpoint has a fixed-N holomorphic lift whose paper-extension defect is O(T^-1).",
+      "formula": "K(T)=-(sqrt(pi)/8)*exp(-pi*T/4)*(T^(3/2)+i*T^(1/2)); (T^(3/2)+i*T^(1/2))/a=sqrt(2*pi)*(T+i); E_[1],N(z)=(-1)^N exp(t*pi^2/64)*(G_[1],N(z)+G_[1],N^#(z)), where G_[1],N=K(T(z))*(F(p_N(T(z)))+F'''(p_N(T(z)))/(12*pi^2*a(T(z)))); For A(T)=T^(3/2)+i*T^(1/2), |theta|<=1/L and T>=10^6: |A'|/|A(T)|<=2/T, |A''|/|A(T)|<=1/T^2, |p'|<=(2*pi*(T-|theta|))^-1/2, |p''|<=(2*sqrt(2*pi)*(T-|theta|)^(3/2))^-1; therefore T|S_0''|/|A(T)|<2100, T|S_1'|/|A(T)|<10133, and the two-component paper/lift mismatch is <1000/T",
+      "proof_boundary": "Uses the exact C0/C1 displacement cancellation plus the explicit F through F'''' strip bounds.",
+      "diagnostics": {
+        "C1_derivative": "[10132.77366615123582616596845025995941349153626694433876109083340487010 +/- 2.85e-66]",
+        "pair_lift": "[406.5509466460494330466387380103983765396614506777735504436333361948041 +/- 1.39e-68]"
+      }
+    },
+    {
+      "id": "np15f1grc_09_endpoint",
+      "role": "proved_bound",
+      "readiness": "ready_to_apply",
+      "claim": "After C1 is retained, the complete heat endpoint starts at the a^-2 scale.",
+      "formula": "The two heat endpoints, after the C_1 lift is retained, have bracket error <=4000/T on the doubled transition collar; The published endpoint prefactor, the collar loss, and sup|B_t(z)|/A_t(x)<2 give |K(T)|/A_t(x)<2*exp(7/4)*exp(-L/4)<20*exp(-L/4); also T>pi*exp(L); |R_endpoint|/A_t(x)<30000*exp(-5L/4)",
+      "proof_boundary": "Uniform on fixed-N and doubled transition collars; this is an endpoint theorem only.",
+      "diagnostics": {
+        "bracket": "[2430.550946646049433046638738010398376539661450677773550443633336194804 +/- 1.14e-67]",
+        "normalized": "[14653.97538265857024769466370864202946224496109484829902178563263977997 +/- 3.06e-66]"
+      }
+    },
+    {
+      "id": "np15f1grc_10_fixed_composition",
+      "role": "proved_bound",
+      "readiness": "ready_to_apply",
+      "claim": "The endpoint theorem composes with the peeled finite Dirichlet residual on every fixed cutoff.",
+      "formula": "|R_D|/A_t(x)<8000000*exp(-7L/4), |partial_x R_D|/A_t(x)<8000000*L*exp(-7L/4); On a fixed-N disk, sup |R_[1]|/A_t(x)<40000*exp(-5L/4)",
+      "proof_boundary": "Fixed prescribed N; adjacent lifts are handled by the next rows.",
+      "diagnostics": {
+        "finite_L50": "[0.0001111035509197121647572941099686948552831980830416404446683823996870509 +/- 4.52e-74]",
+        "raw": "[30000.00011110355091971216475729410996869485528319808304164044466838240 +/- 3.14e-67]"
+      }
+    },
+    {
+      "id": "np15f1grc_11_adjacent_old",
+      "role": "imported_bound",
+      "readiness": "ready_to_apply",
+      "claim": "The already-certified C0/main-block cutoff mismatch is at the new target scale.",
+      "formula": "The inherited C_0/main-block adjacent mismatch is <1000*exp(-5L/4)",
+      "proof_boundary": "Imported without strengthening from the previous global C1 certificate.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15f1grc_12_adjacent_first_order",
+      "role": "proved_bound",
+      "readiness": "ready_to_apply",
+      "claim": "The entering Dirichlet correction and parity-matched endpoint C1 term preserve the target cutoff scale.",
+      "formula": "|d_(t,n)|<100/T for the entering Dirichlet term; critical C_1 parity gives exact endpoint value matching and its adjacent derivative difference is O(T^-1); together with the old mismatch, |Delta lift_[1]|/A_t(x)<20000*exp(-5L/4); From |alpha'(s)|<=1/(T-3), t|alpha_n|<=27, d=1/(6s)+alpha'(s)(t/4+t^2*alpha_n^2/8) gives T|d|<100. The entering two-sharp block is <200*exp(-L/4), costing <7000*exp(-5L/4). C_1 parity makes the endpoint difference zero at a=m; the F'''' derivative bound costs <6000*exp(-5L/4) on the doubled collar",
+      "proof_boundary": "One adjacent cutoff on a doubled collar; consecutive cutoffs cannot both occur there.",
+      "diagnostics": {
+        "Dirichlet": "[6366.197723675813430755350534900574481378385829618257949906693762355872 +/- 9.47e-68]",
+        "endpoint_C1": "[2969.708317236624794973274363349008368932438315052061908887205519524481 +/- 2.14e-67]",
+        "total": "[10335.90604091243822572862489824958285031082414467031985879389928188035 +/- 2.70e-66]"
+      }
+    },
+    {
+      "id": "np15f1grc_13_global",
+      "role": "asymptotic_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The first-order signed approximation now has explicit global value and first-derivative remainders.",
+      "formula": "For every critical disk, including cutoff crossings, |r_[1](x)|<100000*exp(-5L/4) and |partial_x r_[1](x)|<200000*L*exp(-5L/4); A radius-1/L Cauchy estimate gives |R_[1]'|/A_t<100000*L*exp(-5L/4); with |partial_x log A_t|<L/2 this gives |partial_x r_[1]|<150000*L*exp(-5L/4)<200000*L*exp(-5L/4)",
+      "proof_boundary": "L>=50 and 0<tL<=25 only; Cauchy gives the derivative after one fixed adjacent lift is selected.",
+      "diagnostics": {
+        "global_raw": "60000.00000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    {
+      "id": "np15f1grc_14_handoff",
+      "role": "open_handoff",
+      "readiness": "open",
+      "claim": "The approximation side is closed at first order, but the signed Xi contact contradiction remains open.",
+      "formula": "Insert eta_0=100000 and eta_1=200000 in the exact signed contact-normal inequality; the strict Xi arithmetic reversal is the next open theorem target",
+      "proof_boundary": "Not contact exclusion, not the bounded-L shoulder, not Lambda<=0, and not RH.",
+      "diagnostics": null
+    },
+    {
+      "id": "np15f1grc_15_nonpromotion",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "A global asymptotic remainder theorem cannot be promoted to a Clay-prize conclusion.",
+      "formula": "controlled r_[1] != strict signed contact-normal reversal",
+      "proof_boundary": "The arithmetic inequality is still an open theorem target.",
+      "diagnostics": null
+    }
+  ],
+  "sources": [
+    "https://arxiv.org/pdf/1904.12438",
+    "outputs/jensen_window_pf_newman_polymath15_critical_RS_C1_endpoint_peeling_contract.md",
+    "outputs/jensen_window_pf_newman_polymath15_critical_dirichlet_second_order_remainder_certificate.md",
+    "outputs/jensen_window_pf_newman_polymath15_critical_C1_global_remainder_certificate.md",
+    "outputs/jensen_window_pf_newman_polymath15_endpoint_C0_strip_certificate.md"
+  ]
+}

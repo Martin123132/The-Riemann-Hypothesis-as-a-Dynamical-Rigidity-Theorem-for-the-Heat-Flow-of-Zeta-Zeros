@@ -1,0 +1,232 @@
+{
+  "boundary_audit": {
+    "determinant_checks": 12,
+    "fractional_residue_flux": "-2",
+    "quadratic_form_checks": 16,
+    "samples": [
+      {
+        "betas": [
+          "3/2"
+        ],
+        "determinant_derivative": "0",
+        "multiplicities": [
+          1
+        ],
+        "shift": 1
+      },
+      {
+        "betas": [
+          "3/2"
+        ],
+        "determinant_derivative": "0",
+        "multiplicities": [
+          1
+        ],
+        "shift": 2
+      },
+      {
+        "betas": [
+          "3/2"
+        ],
+        "determinant_derivative": "0",
+        "multiplicities": [
+          1
+        ],
+        "shift": 3
+      }
+    ]
+  },
+  "date": "2026-07-24",
+  "exact": {
+    "canonical_escape": "If a continuous family exits LP+ through an infinite-support boundary, every outside sequence approaching the boundary requires canonical Stieltjes witness order d->infinity in one of the shifts s=0 or s=1",
+    "collision_sensor": "If beta_1>beta_2>... and r is the first index with m_r>=2, then lim_(s->infinity)(partial_lambda log D_(r,s))^(1/s)=beta_r/beta_(r+1)>1",
+    "determinant_flux": "For r positive atoms, monic P=product_j(t-beta_j), and D_(r,s)=det(a_(s+i+j))_(i,j=0)^r: D_(r,s)'=tau_(r,s)*Q_s'(P), tau_(r,s)=product_j(rho_j*beta_j^s)*product_(i<j)(beta_i-beta_j)^2",
+    "edrei_measure": "For F in LP+: dnu=gamma*delta_0+sum_j rho_j*delta_(beta_j), rho_j=m_j*beta_j, m_j positive integers",
+    "fractional_guard": "For nu=(1/2)delta_1, P(t)=t-1, and s=1, Q_s'(P)=-2: Stieltjes positivity without the integer Edrei residue condition does not orient the wall forward",
+    "infinite_support": "An LP+ Edrei measure with infinitely many distinct positive atoms makes every finite H_(d,s)=(a_(s+i+j)) positive definite for s=0 and s=1",
+    "integer_flux": "For Edrei residues rho_j=m_j*beta_j: Q_s'(P)=8 sum_j m_j*(m_j-1)*beta_j^(s+4)*P'(beta_j)^2>=0",
+    "moment_flow": "a_n'=-2(n+1)(2n+3)a_(n+1)+4(n+1)sum_(k=0)^n a_k*a_(n-k)",
+    "newman_consequence": "Lambda<=0 iff, for every fixed r and every lambda in (0,1/5] for which H_lambda has only real zeros, limsup_(s->infinity)max(1,partial_lambda log D_(r,s))^(1/s)<=1",
+    "null_flux": "If s>=1 and P(beta_j)=0 on every positive atom, then Q_s'(P)=8 sum_j rho_j*beta_j^(s+2)*(rho_j-beta_j)*P'(beta_j)^2",
+    "open_target": "Prove directly from the Phi transform that for every fixed r and every lambda in (0,1/5] for which H_lambda has only real zeros, limsup_(s->infinity)max(1,partial_lambda log D_(r,s))^(1/s)<=1",
+    "operator_identity": "Q_s'(P)=-2 integral x(E+1)(2E+3)[x^s P^2]dnu+4 double_integral [h_s(x)-h_s(y)]/(x-y)dnu(x)dnu(y), h_s(t)=t*d/dt[t^(s+1)P(t)^2]",
+    "orthogonal_convergence": "If P_r(t)=product_(j=1)^r(t-beta_j), then pi_(r,s)(beta_i)=O((beta_(r+1)/beta_i)^s) for i<=r and pi_(r,s)=P_r+O((beta_(r+1)/beta_r)^s) coefficientwise",
+    "orthogonal_quotient": "For the monic x^s*dnu-orthogonal polynomial pi_(r,s): h_(r,s)=Q_s(pi_(r,s))=D_(r,s)/D_(r-1,s) and partial_lambda log D_(r,s)=partial_lambda log D_(r-1,s)+Q_s'(pi_(r,s))/Q_s(pi_(r,s))",
+    "quadratic_form": "Q_s(P)=sum_(i,j)c_i*c_j*a_(s+i+j)=integral x^s*P(x)^2 dnu(x)"
+  },
+  "kind": "jensen_window_pf_edrei_hankel_boundary_flux_gate",
+  "proof_boundary": "This artifact proves the polynomial Hankel-flux identity, the finite-rank integer-residue orientation and determinant formula, strictness and canonical-order escape at an infinite-support LP+ boundary, and the high-shift determinant signature forced by a repeated atom. It does not prove the required Xi/Phi subexponential determinant-growth estimate, all-order Stieltjes positivity at lambda zero, PF-infinity, Jensen hyperbolicity for zeta, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The Edrei moments obey the radial heat hierarchy.",
+      "formula": "a_n'=-2(n+1)(2n+3)a_(n+1)+4(n+1)sum_(k=0)^n a_k*a_(n-k)",
+      "id": "ehbf_01_moment_flow",
+      "proof_boundary": "Inherited from Lemma 11.22C; no positivity follows yet.",
+      "readiness": "available_exact",
+      "role": "exact_input"
+    },
+    {
+      "claim": "Every shifted Hankel quadratic form is a polynomial square norm when an LP+ representing measure exists.",
+      "formula": "Q_s(P)=sum_(i,j)c_i*c_j*a_(s+i+j)=integral x^s*P(x)^2 dnu(x)",
+      "id": "ehbf_02_quadratic_form",
+      "proof_boundary": "The representation is available only on the LP+ side or boundary.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The nonlinear moment hierarchy has an exact polynomial divided-difference flux.",
+      "formula": "Q_s'(P)=-2 integral x(E+1)(2E+3)[x^s P^2]dnu+4 double_integral [h_s(x)-h_s(y)]/(x-y)dnu(x)dnu(y), h_s(t)=t*d/dt[t^(s+1)P(t)^2]",
+      "id": "ehbf_03_operator_flux",
+      "proof_boundary": "The divided difference is interpreted diagonally as h_s'(x).",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Entireness quantizes every positive pole residue of the Stieltjes logarithmic derivative.",
+      "formula": "For F in LP+: dnu=gamma*delta_0+sum_j rho_j*delta_(beta_j), rho_j=m_j*beta_j, m_j positive integers",
+      "id": "ehbf_04_integer_edrei_measure",
+      "proof_boundary": "This is the Sokal/Edrei LP+ representation, not a property of arbitrary Stieltjes measures.",
+      "readiness": "available_exact",
+      "role": "exact_structure"
+    },
+    {
+      "claim": "At finite support the null-form flux separates atom by atom.",
+      "formula": "If s>=1 and P(beta_j)=0 on every positive atom, then Q_s'(P)=8 sum_j rho_j*beta_j^(s+2)*(rho_j-beta_j)*P'(beta_j)^2",
+      "id": "ehbf_05_null_form_flux",
+      "proof_boundary": "The polynomial must vanish on the complete positive support.",
+      "readiness": "available_exact",
+      "role": "exact_boundary_identity"
+    },
+    {
+      "claim": "The finite-rank Edrei wall is nonnegative forward and is strict exactly at repeated factors.",
+      "formula": "For Edrei residues rho_j=m_j*beta_j: Q_s'(P)=8 sum_j m_j*(m_j-1)*beta_j^(s+4)*P'(beta_j)^2>=0",
+      "id": "ehbf_06_integer_residue_orientation",
+      "proof_boundary": "Simple factors are tangent at first order.",
+      "readiness": "available_exact",
+      "role": "exact_boundary_theorem"
+    },
+    {
+      "claim": "The first vanishing Hankel determinant has the same multiplicity flux times an explicit positive Vandermonde factor.",
+      "formula": "For r positive atoms, monic P=product_j(t-beta_j), and D_(r,s)=det(a_(s+i+j))_(i,j=0)^r: D_(r,s)'=tau_(r,s)*Q_s'(P), tau_(r,s)=product_j(rho_j*beta_j^s)*product_(i<j)(beta_i-beta_j)^2",
+      "id": "ehbf_07_vandermonde_determinant_flux",
+      "proof_boundary": "Stated for s>=1 so the optional exponential atom at zero is invisible.",
+      "readiness": "available_exact",
+      "role": "exact_boundary_theorem"
+    },
+    {
+      "claim": "The r=1 specialization recovers the previous repeated-zero 2x2 formula.",
+      "formula": "D_(1,s)'=8*m^2*(m-1)*beta^(2s+5)",
+      "id": "ehbf_08_rank_one_recovery",
+      "proof_boundary": "This is a consistency check, not a new closing estimate.",
+      "readiness": "available_exact",
+      "role": "exact_consistency_check"
+    },
+    {
+      "claim": "A positive Stieltjes atom with non-Edrei residue can point out of the cone even under forward heat.",
+      "formula": "For nu=(1/2)delta_1, P(t)=t-1, and s=1, Q_s'(P)=-2: Stieltjes positivity without the integer Edrei residue condition does not orient the wall forward",
+      "id": "ehbf_09_fractional_residue_guard",
+      "proof_boundary": "Its logarithmic primitive is not entire; the example isolates why residue quantization matters.",
+      "readiness": "guard_validated",
+      "role": "exact_countermodel"
+    },
+    {
+      "claim": "Infinite LP+ support makes every fixed finite shifted Hankel block strictly positive.",
+      "formula": "An LP+ Edrei measure with infinitely many distinct positive atoms makes every finite H_(d,s)=(a_(s+i+j)) positive definite for s=0 and s=1",
+      "id": "ehbf_10_infinite_support_strictness",
+      "proof_boundary": "Strict finite blocks do not supply a uniform all-order margin.",
+      "readiness": "available_exact",
+      "role": "exact_structure"
+    },
+    {
+      "claim": "Approach to an infinite-support Newman boundary cannot be detected at one fixed canonical Hankel order.",
+      "formula": "If a continuous family exits LP+ through an infinite-support boundary, every outside sequence approaching the boundary requires canonical Stieltjes witness order d->infinity in one of the shifts s=0 or s=1",
+      "id": "ehbf_11_canonical_order_escape",
+      "proof_boundary": "Finite order-eleven and finite-shift certificates remain bounded evidence.",
+      "readiness": "available_exact",
+      "role": "exact_nonpromotion_gate"
+    },
+    {
+      "claim": "For s>=1, Cauchy-Binet expands every shifted determinant as a positive sum of weighted squared Vandermondes.",
+      "formula": "For s>=1: D_(d,s)=sum_(|J|=d+1) product_(j in J)(rho_j*beta_j^s)*V(beta_J)^2",
+      "id": "ehbf_12_cauchy_binet_expansion",
+      "proof_boundary": "At s=0 the optional gamma*delta_0 atom adds nonnegative Cauchy-Binet terms; the displayed positive-atom sum still proves strictness.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The first repeated atom forces exponential growth of one fixed-size shifted determinant logarithmic derivative.",
+      "formula": "For the monic x^s*dnu-orthogonal polynomial pi_(r,s): h_(r,s)=Q_s(pi_(r,s))=D_(r,s)/D_(r-1,s) and partial_lambda log D_(r,s)=partial_lambda log D_(r-1,s)+Q_s'(pi_(r,s))/Q_s(pi_(r,s)); If beta_1>beta_2>... and r is the first index with m_r>=2, then lim_(s->infinity)(partial_lambda log D_(r,s))^(1/s)=beta_r/beta_(r+1)>1",
+      "id": "ehbf_13_high_shift_collision_sensor",
+      "proof_boundary": "The Schur quotient and orthogonality remove the coefficient-derivative term; the ratio beta_r/beta_(r+1) is greater than one because the distinct atoms are strictly ordered.",
+      "readiness": "available_exact",
+      "role": "exact_boundary_asymptotic"
+    },
+    {
+      "claim": "Two simple atoms have only polynomial shifted determinant logarithmic growth.",
+      "formula": "For nu=delta_1+q*delta_q: D_(1,s)'/D_(1,s)=-2(q+1)[q^2*s+3q^2-2q*s-14q+s+3]/(q-1)^2",
+      "id": "ehbf_14_simple_two_atom_guard",
+      "proof_boundary": "Shows that the exponential signature is multiplicity-sensitive.",
+      "readiness": "guard_validated",
+      "role": "exact_countermodel"
+    },
+    {
+      "claim": "A repeated leading atom gives the predicted exponential signature exactly.",
+      "formula": "For nu=2delta_1+(1/2)delta_(1/2): D_(1,s)'/D_(1,s)=128*2^s+4s^2+29s+131",
+      "id": "ehbf_15_repeated_two_atom_witness",
+      "proof_boundary": "A finite LP+ witness, not the Xi function.",
+      "readiness": "guard_validated",
+      "role": "exact_boundary_witness"
+    },
+    {
+      "claim": "The fixed-size subexponential high-shift determinant-flux criterion is exactly equivalent to Lambda<=0.",
+      "formula": "Lambda<=0 iff, for every fixed r and every lambda in (0,1/5] for which H_lambda has only real zeros, limsup_(s->infinity)max(1,partial_lambda log D_(r,s))^(1/s)<=1",
+      "id": "ehbf_16_positive_newman_consequence",
+      "proof_boundary": "The forward direction uses positive-time simplicity; the reverse direction uses positive-boundary attainment and the collision sensor.",
+      "readiness": "available_exact",
+      "role": "exact_equivalence"
+    },
+    {
+      "claim": "A subexponential fixed-size determinant-flux theorem would exclude every positive Newman collision.",
+      "formula": "Prove directly from the Phi transform that for every fixed r and every lambda in (0,1/5] for which H_lambda has only real zeros, limsup_(s->infinity)max(1,partial_lambda log D_(r,s))^(1/s)<=1",
+      "id": "ehbf_17_subexponential_phi_target",
+      "proof_boundary": "No such Xi/Phi-specific estimate is proved here.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    },
+    {
+      "claim": "The gate separates exact flux, exact asymptotics, countermodels, and the missing Phi estimate.",
+      "formula": "finite-rank flux and collision sensor proved; Xi/Phi subexponential bound open",
+      "id": "ehbf_18_proof_boundary",
+      "proof_boundary": "Nothing in this artifact proves PF-infinity, RH, or Lambda<=0.",
+      "readiness": "guard_validated",
+      "role": "proof_boundary"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Sokal, When does a hypergeometric function belong to LP+?, Proposition 6",
+      "url": "https://arxiv.org/abs/2204.01045"
+    },
+    {
+      "title": "D. H. J. Polymath, Effective approximation of heat flow evolution of the Riemann xi function",
+      "url": "https://arxiv.org/abs/1904.12438"
+    },
+    {
+      "path": "outputs/jensen_window_pf_edrei_heat_flow_boundary_gate.md",
+      "title": "Local Edrei heat-flow boundary gate"
+    },
+    {
+      "path": "outputs/formal_core.md",
+      "title": "Local positive Newman boundary and strict Laguerre correlation results"
+    }
+  ],
+  "status": "exact finite-rank Hankel boundary flux, infinite-support order escape, and high-shift collision sensor with one open Xi/Phi determinant-growth gate",
+  "two_atom_audit": {
+    "hankel_determinant": "m*n*q*q**s*(q - 1)**2",
+    "measure": "nu=m*delta_1+n*q*delta_q, 0<q<1",
+    "repeated_q_half_log_derivative": "128*2**s + 4*s**2 + 29*s + 131",
+    "repeated_root_limit": "2",
+    "simple_log_derivative": "-2*(q + 1)*(q**2*s + 3*q**2 - 2*q*s - 14*q + s + 3)/(q - 1)**2",
+    "simple_root_limit": "1"
+  }
+}

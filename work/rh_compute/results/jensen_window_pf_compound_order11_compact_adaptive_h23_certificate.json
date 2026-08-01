@@ -1,0 +1,116 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order11_compact_adaptive_h23_certificate.py",
+  "date": "2026-07-22",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order11_compact_adaptive_h23_certificate.py",
+  "kind": "jensen_window_pf_compound_order11_compact_adaptive_h23_certificate",
+  "proof_boundary": "This artifact proves the compact first-summand theorem at lambda=-100 only. It does not by itself prove the global first-summand theorem, full-kernel transfer, PF-infinity, Lambda<=0, or RH.",
+  "rows": [
+    {
+      "claim": "The complete segment cache is bound to the canonical adaptive-H23 run contract.",
+      "diagnostics": null,
+      "formula": "SHA256(cache)=70062a5bf5c906ef894a559db1cc8ebab3379d69ffcaf7f6f88561986b7ae9a2",
+      "id": "co11cah23c_01_contract",
+      "proof_boundary": "Hash binding and deterministic live-source validation only.",
+      "readiness": "ready_to_apply",
+      "role": "immutable_source_contract"
+    },
+    {
+      "claim": "The canonical quarter blocks form a gap-free partition of the compact real-t interval.",
+      "diagnostics": {
+        "quarter_blocks": 129280,
+        "quarter_width": "1/4",
+        "segments": 2020
+      },
+      "formula": "[5700,38020]=union of 129280 certified quarter blocks",
+      "id": "co11cah23c_02_partition",
+      "proof_boundary": "First Newman summand at lambda=-100 on the displayed interval.",
+      "readiness": "ready_to_apply",
+      "role": "interval_partition"
+    },
+    {
+      "claim": "Every compact quarter block has positive margin below the order-eleven curvature cap.",
+      "diagnostics": {
+        "largest_location": {
+          "anchor": "152079/4",
+          "block": 63,
+          "segment": 2019
+        },
+        "largest_scaled_curvature_upper": "2122.86516691011593226179209689464539687227984653146836129212",
+        "smallest_location": {
+          "anchor": "152079/4",
+          "block": 63,
+          "segment": 2019
+        },
+        "smallest_margin_lower": "3877.13483308988406773820790310535460312772015346853163870788",
+        "theorem_margin_lower": "3877.134833089884067738207903"
+      },
+      "formula": "y_1''(t)<=6000/t^2 for every real 5700<=t<=38020",
+      "id": "co11cah23c_03_curvature",
+      "proof_boundary": "Continuous compact first-summand theorem only.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "The compact endpoint lies strictly beyond the start of the complete monotone saddle ray.",
+      "diagnostics": {
+        "V_prime_2_001_upper": "3.80196621635193385678801171533426331770390296897595492274576E+4",
+        "monotonicity_formula": "V''>0 for u>=1/100; V'<0 for 0<u<=1/100"
+      },
+      "formula": "V'(2001/1000)<38020",
+      "id": "co11cah23c_04_saddle_overlap",
+      "proof_boundary": "Joins first-summand curvature ranges only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_overlap"
+    }
+  ],
+  "source_contract": {
+    "potential_source": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_negative_lambda_first_summand_leading_saddle_certificate.py",
+      "sha256": "c22b314e7ce07f46154796f63037c256401afa9a7c281d8bf73ceb48c4895279"
+    },
+    "run_contract": {
+      "path": "work/rh_compute/results/jensen_window_pf_compound_order11_compact_adaptive_h23_run_contract.json",
+      "sha256": "a93e25b7e11a83b9600f60c174ec5f054295d46a6ab9f0ff17049505f4b6d11c"
+    },
+    "saddle_monotonicity": {
+      "formula": "V''>0 for u>=1/100; V'<0 for 0<u<=1/100",
+      "kind": "jensen_window_pf_compound_order4_exact_cumulant_exact_tail_certificate",
+      "path": "work/rh_compute/results/jensen_window_pf_compound_order4_exact_cumulant_exact_tail_certificate.json",
+      "row": "co4ecetc_05_global_outward_monotonicity",
+      "sha256": "83ed8e202cc57df969d543284286ff6ef17c55458f7233afefd4699f48032e23"
+    },
+    "segment_cache": {
+      "bytes": 2361570130,
+      "path": "work/rh_compute/results/jensen_window_pf_compound_order11_compact_adaptive_h23_segments.jsonl",
+      "quarter_blocks": 129280,
+      "segments": 2020,
+      "sha256": "70062a5bf5c906ef894a559db1cc8ebab3379d69ffcaf7f6f88561986b7ae9a2"
+    }
+  },
+  "status": "rigorous order-eleven first-summand curvature theorem on 5700<=t<=38020",
+  "summary": {
+    "bytes": 2361570130,
+    "compact_first_summand_theorems": 1,
+    "full_kernel_theorems": 0,
+    "global_first_summand_theorems": 0,
+    "largest_location": {
+      "anchor": "152079/4",
+      "block": 63,
+      "segment": 2019
+    },
+    "largest_scaled_curvature_upper": "2122.86516691011593226179209689464539687227984653146836129212",
+    "quarter_blocks": 129280,
+    "rh_claims": 0,
+    "saddle_transition_upper": "3.80196621635193385678801171533426331770390296897595492274576E+4",
+    "segments": 2020,
+    "sha256": "70062a5bf5c906ef894a559db1cc8ebab3379d69ffcaf7f6f88561986b7ae9a2",
+    "smallest_location": {
+      "anchor": "152079/4",
+      "block": 63,
+      "segment": 2019
+    },
+    "smallest_margin_lower": "3877.13483308988406773820790310535460312772015346853163870788",
+    "theorem_margin_lower": "3877.134833089884067738207903"
+  },
+  "theorem": "y_1''(t)<=6000/t^2 for every real 5700<=t<=38020"
+}

@@ -1,0 +1,275 @@
+{
+  "kind": "jensen_window_pf_mertens_ordinary_vector_vaughan_handoff",
+  "date": "2026-07-23",
+  "status": "exact ordinary-Mobius feature Gram and pre-square vector Vaughan reduction with one open signed gate",
+  "parameters": {
+    "alpha_range": "0<alpha<1",
+    "dyadic_blocks": "K=2^j",
+    "feature_support": "K<n<4K",
+    "feature_dimension": "K",
+    "vaughan_intervals": "X=K and X=2K"
+  },
+  "source_anchors": [
+    "outputs/jensen_window_pf_mertens_affine_tent_bridge_handoff.md",
+    "https://doi.org/10.5802/aif.2401",
+    "https://doi.org/10.1017/fmp.2023.28"
+  ],
+  "rows": [
+    {
+      "id": "movh_01_prior_equivalence",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "For each fixed 0<alpha<1, Lemma 11.22Y gives R_alpha<infinity iff sum_(K dyadic)K^(-2-alpha)H_K<infinity.",
+      "proof_boundary": "This artifact begins from the independently checked ordinary-Mobius anchored criterion."
+    },
+    {
+      "id": "movh_02_future_anchor",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "With s=1+alpha, beta_K=mu(2K)+sum_(2K<n<4K)((2K)/n)^s(4K-n)/(2K)mu(n).",
+      "proof_boundary": "The future anchor is retained exactly rather than bounded or discarded."
+    },
+    {
+      "id": "movh_03_anchor_coefficients",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "Every coefficient b_K(n)=((2K)/n)^s(4K-n)/(2K) in beta_K lies in [0,1].",
+      "proof_boundary": "Bounded coefficients do not imply cancellation of beta_K."
+    },
+    {
+      "id": "movh_04_feature_support",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Let I_K={n:K<n<4K}; the feature vectors have K real coordinates indexed by 1<=t<=K.",
+      "proof_boundary": "All arithmetic coefficients now lie in one compact three-to-one interval."
+    },
+    {
+      "id": "movh_05_feature_vector",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Set a_(K,t)(K+i)=1_(t<=i) for 1<=i<K and a_(K,t)(n)=b_K(n) for 2K<=n<4K.",
+      "proof_boundary": "The current block is a nested suffix feature and the future anchor is the constant vector direction."
+    },
+    {
+      "id": "movh_06_suffix_vector",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "B_(K,t)=sum_(n in I_K)mu(n)a_(K,t)(n)=beta_K+sum_(i=t)^(K-1)mu(K+i).",
+      "proof_boundary": "The endpoint t=K contains beta_K and an empty current suffix."
+    },
+    {
+      "id": "movh_07_energy_norm",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "H_K=sum_(t=1)^K|B_(K,t)|^2=||B_K||_2^2.",
+      "proof_boundary": "The open scalar suffix family is one finite-dimensional Hilbert norm."
+    },
+    {
+      "id": "movh_08_vector_energy_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "R_alpha<infinity iff sum_(K dyadic)K^(-2-alpha)||B_K||_2^2<infinity.",
+      "proof_boundary": "This is an equivalent RH-strength criterion for every fixed positive alpha in a cofinal sequence."
+    },
+    {
+      "id": "movh_09_gram_kernel",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Define L_K(n,m)=sum_(t=1)^Ka_(K,t)(n)a_(K,t)(m).",
+      "proof_boundary": "The kernel is a Gram kernel and is therefore positive semidefinite."
+    },
+    {
+      "id": "movh_10_current_current_kernel",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For n=K+i and m=K+j with 1<=i,j<K, L_K(n,m)=min(i,j).",
+      "proof_boundary": "Count the coordinates t lying below both suffix endpoints."
+    },
+    {
+      "id": "movh_11_current_future_kernel",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For n=K+i and 2K<=m<4K, L_K(n,m)=i*b_K(m), symmetrically.",
+      "proof_boundary": "The future anchor occupies the constant vector direction."
+    },
+    {
+      "id": "movh_12_future_future_kernel",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For 2K<=n,m<4K, L_K(n,m)=K*b_K(n)b_K(m).",
+      "proof_boundary": "The future-future block has rank one."
+    },
+    {
+      "id": "movh_13_kernel_envelope",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "For all n,m in I_K, 0<=L_K(n,m)<=K.",
+      "proof_boundary": "After multiplying by K^(-2-alpha), every pair weight is at most K^(-1-alpha)."
+    },
+    {
+      "id": "movh_14_gram_expansion",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "H_K=sum_(n,m in I_K)mu(n)mu(m)L_K(n,m).",
+      "proof_boundary": "The positive norm still contains a genuinely signed off-diagonal Mobius form."
+    },
+    {
+      "id": "movh_15_diagonal",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "Delta_K=sum_(i=1)^(K-1)i*mu(K+i)^2+K*sum_(2K<=n<4K)b_K(n)^2mu(n)^2.",
+      "proof_boundary": "This is the complete Gram diagonal, including the future anchor."
+    },
+    {
+      "id": "movh_16_future_diagonal_envelope",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "Since b_K(n)<=(4K-n)/(2K), K*sum_(2K<=n<4K)b_K(n)^2<=(2K+1)(4K+1)/12.",
+      "proof_boundary": "The bound is an exact finite sum-of-squares envelope."
+    },
+    {
+      "id": "movh_17_diagonal_bound",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "0<=Delta_K<=(14K^2+1)/12<=(5/4)K^2.",
+      "proof_boundary": "The last inequality holds for every integer K>=1."
+    },
+    {
+      "id": "movh_18_diagonal_summability",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "sum_(K dyadic)K^(-2-alpha)Delta_K<=(5/4)sum_(K dyadic)K^(-alpha)<infinity.",
+      "proof_boundary": "The diagonal is closed for each fixed alpha>0, not at alpha=0."
+    },
+    {
+      "id": "movh_19_signed_offdiagonal",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Let C_(vec,K)=sum_(n<m; n,m in I_K)mu(n)mu(m)L_K(n,m); then H_K=Delta_K+2C_(vec,K).",
+      "proof_boundary": "No absolute values are introduced in the correlation sum."
+    },
+    {
+      "id": "movh_20_signed_gram_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "R_alpha<infinity iff sup_J sum_(K dyadic<=2^J)K^(-2-alpha)C_(vec,K)<infinity.",
+      "proof_boundary": "The summable diagonal and nonnegative partial energy make the upper boundedness criterion exact."
+    },
+    {
+      "id": "movh_21_absolute_barrier",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "The feature envelope gives ||sum_n mu(n)a_K(n)||_2=O(K^(3/2)) and H_K=O(K^3), hence weighted scale O(K^(1-alpha)).",
+      "proof_boundary": "Coefficientwise or rowwise absolute values lose one full power relative to the summable K^(-alpha) calibration."
+    },
+    {
+      "id": "movh_22_vaughan_interval_split",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Split I_K into X<n<=2X for X=K and X=2K; for each X set U_X=V_X=floor(sqrt(X)), with a zero feature at n=4K.",
+      "proof_boundary": "Both pieces now have the standard finite Vaughan interval shape."
+    },
+    {
+      "id": "movh_23_type_i_coefficients",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Define A_X(d)=sum_(bc=d,b<=U_X,c<=V_X)mu(b)mu(c).",
+      "proof_boundary": "These are the finite Type I coefficients in Green-Tao's Vaughan identity."
+    },
+    {
+      "id": "movh_24_type_ii_coefficients",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Define D_X(d)=sum_(c|d,c>V_X)mu(c).",
+      "proof_boundary": "These are the finite Type II divisor coefficients."
+    },
+    {
+      "id": "movh_25_type_i_vector",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "V_(I,K,X)=sum_(d<=U_X*V_X)A_X(d)sum_(X/d<w<=2X/d)a_K(dw).",
+      "proof_boundary": "The inner sum is a deterministic vector and contains no collapsed Mertens target."
+    },
+    {
+      "id": "movh_26_type_ii_vector",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "V_(II,K,X)=sum_(V_X<d<=2X/U_X)D_X(d)sum_(max(U_X,X/d)<w<=2X/d)mu(w)a_K(dw).",
+      "proof_boundary": "The bilinear Mobius factor is retained inside the vector sum."
+    },
+    {
+      "id": "movh_27_componentwise_vaughan",
+      "role": "source_backed_identity",
+      "status": "source_backed",
+      "statement": "Green-Tao's finite Vaughan identity applied componentwise gives sum_(X<n<=2X)mu(n)a_K(n)=-V_(I,K,X)+V_(II,K,X).",
+      "proof_boundary": "Finite-dimensional componentwise use requires no vector-valued extension theorem."
+    },
+    {
+      "id": "movh_28_full_vector_vaughan",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "With V_(r,K)=V_(r,K,K)+V_(r,K,2K), B_K=-V_(I,K)+V_(II,K).",
+      "proof_boundary": "The signed Type I/II cancellation is preserved before taking a norm."
+    },
+    {
+      "id": "movh_29_vector_vaughan_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "R_alpha<infinity iff sum_(K dyadic)K^(-2-alpha)||-V_(I,K)+V_(II,K)||_2^2<infinity.",
+      "proof_boundary": "This is a noncircular vector-valued arithmetic handoff with bounded deterministic features."
+    },
+    {
+      "id": "movh_30_separate_norm_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "Bounds for ||V_(I,K)||_2 and ||V_(II,K)||_2 separately are sufficient only if they retain the required power.",
+      "proof_boundary": "They are not equivalent to the signed-difference criterion and may erase its decisive cancellation."
+    },
+    {
+      "id": "movh_31_coordinatewise_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "Even a uniform coordinate estimate B_(K,t)=o(K) yields only H_K=o(K^3).",
+      "proof_boundary": "The target needs average-square cancellation at essentially K^2 scale, not merely sublinear cancellation per suffix."
+    },
+    {
+      "id": "movh_32_finite_validation",
+      "role": "finite_reproduction",
+      "status": "finite_check_passed",
+      "statement": "Mobius and arbitrary finite-vector checks reproduce the features, explicit Gram blocks, diagonal bound, signed expansion, and both interval Vaughan vectors.",
+      "proof_boundary": "Finite validation proves the identities only and supplies no asymptotic Mobius estimate."
+    },
+    {
+      "id": "movh_33_all_interval_log_guard",
+      "role": "literature_guard",
+      "status": "source_backed",
+      "statement": "Matomaki-Shao-Tao-Teravainen give H*log^(-A)X cancellation for Mobius in every interval when H>=X^(5/8+epsilon).",
+      "proof_boundary": "Squaring this scalar bound over O(K) long suffix endpoints still gives the K^3*log^(-2A) scale; the theorem does not state the required K^(2+epsilon) vector square estimate."
+    },
+    {
+      "id": "movh_34_open_vector_gate",
+      "role": "open_theorem_target",
+      "status": "open",
+      "statement": "Prove the vector Vaughan criterion in row 29 for every member of one fixed cofinal sequence alpha_j->0 without assuming RH.",
+      "proof_boundary": "No vector Type I/II power gain, full Burnol bound, RH, PF-infinity, or Lambda<=0 conclusion is supplied here."
+    }
+  ],
+  "audit": {
+    "row_count": 34,
+    "exact_reduction_count": 28,
+    "literature_guard_count": 2,
+    "proof_guard_count": 3,
+    "finite_validation_count": 1,
+    "open_signed_gate_count": 1,
+    "ordinary_feature_vector_proved": true,
+    "explicit_gram_kernel_proved": true,
+    "diagonal_summable": true,
+    "componentwise_vaughan_proved": true,
+    "pre_square_signed_difference_preserved": true,
+    "vector_type_i_ii_gain_proved": false,
+    "full_burnol_bound_proved": false,
+    "rh_proved": false,
+    "pf_infinity_proved": false,
+    "lambda_le_zero_proved": false
+  }
+}

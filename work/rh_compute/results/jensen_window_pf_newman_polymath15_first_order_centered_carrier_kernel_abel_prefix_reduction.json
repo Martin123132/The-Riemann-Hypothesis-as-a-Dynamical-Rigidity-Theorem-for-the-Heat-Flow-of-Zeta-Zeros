@@ -1,0 +1,299 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_carrier_kernel_abel_prefix_reduction",
+  "date": "2026-07-27",
+  "status": "exact endpoint-complete carrier kernels, Abel-prefix transversality scalar, and nonpromotion guards; the Xi-specific prefix lower bound and signed count remain open",
+  "proof_boundary": "This artifact proves the endpoint-complete pairwise radial and tangential kernels, their finite Abel-prefix forms, one continuous all-fiber crossing scalar, the negligible terminal contact-band correction, the exceptional derivative identity, and two exact generic nonpromotion countermodels. It does not prove the q>=1 Xi prefix lower bound or signed successor count, the q<1 multiplicity-compatible theorem, finite phase cells, one-sided successor winding, contact exclusion, Lambda<=0, RH, PF-infinity, or a Clay-prize conclusion.",
+  "sources": {
+    "direct_projection": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_direct_projection_regime_reduction.json",
+    "centered_reduction": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_real_residual_reduction.json",
+    "phase_anchor": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_absolute_phase_anchor_reduction.json",
+    "bulk_pair": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_bulk_pair_transfer_gate.json",
+    "wronskian_crossing": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_wronskian_crossing_reduction.json",
+    "component_wronskian": "work/rh_compute/results/jensen_window_pf_newman_polymath15_critical_component_wronskian_gate.json"
+  },
+  "source_sha256": {
+    "direct_projection": "8252a4d506a8132aeec65f5f1c9490430e39b776d76dfae92e27ce008c5e22a9",
+    "centered_reduction": "4e5390e921bb8a05cf804ba07b01121d4865b889cff2fa6209ec386afe7bbcff",
+    "phase_anchor": "7e5c8725b2d0913d2e5d1731b962a7cd79081b8e09e52c7992647e4dc631cbd2",
+    "bulk_pair": "933dae9cf78cdac6bc8371ee092a9b249a755e59d6b0aca29fb06220042f51a7",
+    "wronskian_crossing": "1347942c7ab2a84227554db273bfccde506f9a51ab5b0d8da5e7851cc678b2cb",
+    "component_wronskian": "8e39053762a7df120145b3b0921a8465947c674da968d28cfc1a11a2f7f731d2"
+  },
+  "source_audit": {
+    "direct_projection": "jensen_window_pf_newman_polymath15_first_order_centered_direct_projection_regime_reduction",
+    "centered_reduction": "jensen_window_pf_newman_polymath15_first_order_centered_real_residual_reduction",
+    "phase_anchor": "jensen_window_pf_newman_polymath15_first_order_centered_absolute_phase_anchor_reduction",
+    "bulk_pair": "jensen_window_pf_newman_polymath15_first_order_centered_bulk_pair_transfer_gate",
+    "wronskian_crossing": "jensen_window_pf_newman_polymath15_first_order_wronskian_crossing_reduction",
+    "component_wronskian": "jensen_window_pf_newman_polymath15_critical_component_wronskian_gate"
+  },
+  "constants": {
+    "L_min": 50,
+    "d_x": 4223,
+    "terminal_band_constant": 25000,
+    "terminal_relative_at_L_min": 2e-35
+  },
+  "exact": {
+    "domain": "L=log(x/(4*pi))>=50, 0<=tL<=25, a^2=x/(4*pi)+t/16, N=floor(a); the all-fiber q>=1 target additionally has q=2tL^2>=1",
+    "pi_provenance": "pi is the universal constant in the completed-zeta normalization xi(s)=s*(s-1)*pi^(-s/2)*Gamma(s/2)*zeta(s)/2. Equivalently, with theta(y)=sum_(m in Z)exp(-pi*m^2*y), pi^(-s/2)*Gamma(s/2)*zeta(s)=integral_0^infinity[(theta(y)-1)/2]*y^(s/2)*dy/y. For critical height T=x/2 and the heat-shifted height T_0=T+pi*t/8, the Riemann-Siegel saddle gives a^2=T_0/(2*pi)=x/(4*pi)+t/16. Hence at t=0, L=log(x/(4*pi))=log(a^2), and the fixed-t N-cell N<=a<N+1 has endpoints x_N=4*pi*(N^2-t/16), x_(N+1)=4*pi*((N+1)^2-t/16), so Delta x=4*pi*(2*N+1). The later 2*pi phase turn is the period exp(i*(theta+2*pi))=exp(i*theta). The prefix polygon is only the complex partial-sum path and defines none of these appearances of pi.",
+    "coordinates": "z_n=r_n*zeta_n, u_n=log(a/n)>=0, S=sum_(n=1)^N z_n, U=sum_(n=1)^N u_n*z_n, e=eta*r_0=(-1)^N*B_0*(T_0+i)*H_a, g=eta*r_A=(-1)^N*B_0*(T_0+i)*J_a, W_0=e+S, W_A=g+s_*'*U, s_*'=c+i*b",
+    "bulk_pairwise": "For theta_nm=arg(z_n)-arg(z_m), P_B=Re(s_*'*U*conj(S))=c*sum_n u_n*r_n^2+sum_(n<m)r_n*r_m*[c*(u_n+u_m)*cos(theta_nm)-b*(u_n-u_m)*sin(theta_nm)]; Q_B=Im(s_*'*U*conj(S))=b*sum_n u_n*r_n^2+sum_(n<m)r_n*r_m*[b*(u_n+u_m)*cos(theta_nm)+c*(u_n-u_m)*sin(theta_nm)]",
+    "endpoint_pairwise": "P=Re(W_A*conj(W_0))=Re(g*conj(e))+P_B+sum_n Re(g*conj(z_n)+s_*'*u_n*z_n*conj(e)); Q=Im(W_A*conj(W_0))=Im(g*conj(e))+Q_B+sum_n Im(g*conj(z_n)+s_*'*u_n*z_n*conj(e)); g*conj(e)=B_0^2*(T_0^2+1)*H_a*J_a",
+    "abel_prefix": "F_k=sum_(n=1)^k z_n, h_k=log((k+1)/k)>0, u_n=u_N+sum_(k=n)^(N-1)h_k; U=u_N*S+sum_(k=1)^(N-1)h_k*F_k",
+    "endpoint_complete_prefix": "V_N=g-s_*'*u_N*e; W_A=s_*'*u_N*W_0+V_N+s_*'*sum_(k=1)^(N-1)h_k*F_k",
+    "prefix_currents": "For R=|W_0|, P=c*u_N*R^2+Re(V_N*conj(W_0))+sum_k h_k*[c*Re(F_k*conj(W_0))-b*Im(F_k*conj(W_0))]; Q=b*u_N*R^2+Im(V_N*conj(W_0))+sum_k h_k*[b*Re(F_k*conj(W_0))+c*Im(F_k*conj(W_0))]",
+    "contact_scalar": "For W_0=mathsf_X+i*mathsf_Y define mathcal_C_N=Re(V_N)-b*u_N*mathsf_Y+sum_k h_k*[c*Re(F_k)-b*Im(F_k)]. Then mathsf_A=Re(W_A)=mathcal_C_N+c*u_N*mathsf_X. At mathsf_X=0, mathsf_A=mathcal_C_N and Q=-mathsf_Y*mathcal_C_N, including mathsf_Y=0.",
+    "terminal_band_bound": "On |mathsf_X|<=delta_L, 0<=c=t*D_x/4<exp(-L)/4 and 0<=u_N=log(a/N)<2*exp(-L/2), so |c*u_N*mathsf_X|<25000*exp(-11L/4)/|f_1|<exp(-3L/2)/(4L)*A_L<2e-35*A_L for L>=50.",
+    "all_fiber_sufficient": "Let epsilon_term=25000*exp(-11L/4)/|f_1|. On |mathsf_X|<=delta_L, |mathcal_C_N|>A_L+epsilon_term implies |mathsf_A|>A_L. At mathsf_X=0, sign(mathsf_A)=sign(mathcal_C_N) exactly, even when W_0=0.",
+    "ordinary_kernel_target": "For R=|W_0|>=tau_L>delta_L, P+i*Q=W_A*conj(W_0) and W_A/W_0=(P+i*Q)/R^2. The previous ordinary inequality is equivalent to |Q|*sqrt(R^2-delta_L^2)-|P|*delta_L>A_L*R^2. At a real crossing Q=-mathsf_Y*mathcal_C_N; the kernel loses the zero fiber only through multiplication by mathsf_Y.",
+    "exceptional_derivative": "With k_1=rho_1-u_a, partial_x mathsf_X=mathcal_C_N+(c*u_N-k_1)*mathsf_X-v_a*mathsf_Y+Re(D_(1,x))/|f_1|. At W_0=0, partial_x mathsf_X=mathcal_C_N+Re(D_(1,x))/|f_1|.",
+    "exceptional_error": "On |W_0|<tau_L, |partial_x mathsf_X-mathcal_C_N|<epsilon_term+2*exp(-L)*tau_L+2e-7*exp(-5L/4). At W_0=0 only the final D term remains.",
+    "ordinary_countermodel": {
+      "s_prime": "13/1056-i/2",
+      "amplitudes": "1,4/5,7/10",
+      "distances": "3,2,1",
+      "shared_lower_phase_cos": "-35/37",
+      "shared_lower_phase_sin": "-12/37",
+      "aligned_Q": "-53/8",
+      "opposed_Q": "7/40",
+      "kernel_zero": "0",
+      "radius_squared_at_zero": "61/148",
+      "interpretation": "Strictly decreasing positive amplitudes and distances allow Q<0, Q>0, and Q=0 with |W_0|^2=61/148>0, even for c>0 and b=-1/2."
+    },
+    "zero_fiber_countermodel": {
+      "s_prime": "1/16-i/2",
+      "global_unit_anchor": "(-8+i)/sqrt(65)",
+      "amplitudes": "1,3/5,2/5",
+      "distances": "3,2,1",
+      "W_0": "0",
+      "U": "7*sqrt(65)*(-8 + I)/325",
+      "W_A": "7*sqrt(65)*I/80",
+      "Re_W_A": "0",
+      "abs_W_A_squared": "637/1280",
+      "interpretation": "At an exact complex-main zero, strict positive amplitude and distance ordering permit a nonzero purely imaginary W_A and zero physical real-direction slope. The Xi anchor and endpoint must enter any successful lower bound."
+    },
+    "prefix_sector_guard": "The positive h_k make a weighted prefix-sector or aggregate oscillatory estimate a sufficient Xi input, but termwise sign is not inherited from r_(n+1)<r_n, u_(n+1)<u_n, or the common coefficient direction s_*'. The exact countermodels forbid such a generic promotion.",
+    "relative_carrier_rotation": "For chi_n=zeta_n*conj(zeta_1), |chi_n|=1, vartheta_(n,x)=Im(chi_(n,x)*conj(chi_n))=(-b)*log(n)+Im[d_(n,x)/(1+d_n)-d_(1,x)/(1+d_1)]. Since -b>=1/2, |d_n|<2189/x<1/2, and |d_(n,x)|<4223/x^2, vartheta_(n,x)>log(2)/2-16892/x^2>1/3 for n>=2. At fixed t a complete cutoff cell has Delta x=4*pi*(2N+1), so chi_2 advances by more than Delta x/3>2*pi and takes every unit-circle value.",
+    "sector_rotation_guard": "The actual Xi relative carriers are monotone rotating, not confined to one fixed sector on a cutoff cell. Therefore a termwise cosine/sine sign or fixed common half-plane cannot be the uniform proof. Relative rotation may instead be used inside an aggregate oscillatory estimate or an explicit phase-cell decomposition.",
+    "live_target": "With delta_L=50000*exp(-5L/4)/|f_1|, A_L=(100000L+1)*exp(-5L/4)/|f_1|, and epsilon_term=25000*exp(-11L/4)/|f_1|, prove on q>=1 that |mathsf_X|<=delta_L implies |mathcal_C_N|>A_L+epsilon_term, and prove that the number of crossings mathsf_X=0 with mathcal_C_N>0 is below one successor turn after the prescribed boundary composition. This single division-free prefix theorem includes W_0=0.",
+    "q_lt_1_target": "The q=2tL^2<1 boundary remains a separate multiplicity-compatible parabolic/Hermite theorem. The prefix identity remains exact there, but no uniform positive slope is imposed at t=0.",
+    "chart_scope": "The prefixes F_k and complex kernels are canonical-chart objects. Prove the prefix theorem in one prescribed chart and transfer only mathsf_X and mathsf_A through the certified adjacent real-projection bounds.",
+    "numeric_audit": {
+      "relative_carrier_rotation_lower": "3.46573590279972643e-01",
+      "terminal_relative_at_L50": "1.33931848090403900e-35",
+      "ordinary_radius_squared": "61/148",
+      "ordinary_aligned_Q": "-53/8",
+      "ordinary_opposed_Q": "7/40",
+      "zero_fiber_WA_squared": "637/1280"
+    }
+  },
+  "rows": [
+    {
+      "id": "nfockapr_00_pi_provenance",
+      "role": "definition_provenance",
+      "readiness": "certified",
+      "claim": "Every occurrence of pi in the saddle, cutoff cell, and phase turn is traced to a fixed analytic normalization.",
+      "formula": "pi is the universal constant in the completed-zeta normalization xi(s)=s*(s-1)*pi^(-s/2)*Gamma(s/2)*zeta(s)/2. Equivalently, with theta(y)=sum_(m in Z)exp(-pi*m^2*y), pi^(-s/2)*Gamma(s/2)*zeta(s)=integral_0^infinity[(theta(y)-1)/2]*y^(s/2)*dy/y. For critical height T=x/2 and the heat-shifted height T_0=T+pi*t/8, the Riemann-Siegel saddle gives a^2=T_0/(2*pi)=x/(4*pi)+t/16. Hence at t=0, L=log(x/(4*pi))=log(a^2), and the fixed-t N-cell N<=a<N+1 has endpoints x_N=4*pi*(N^2-t/16), x_(N+1)=4*pi*((N+1)^2-t/16), so Delta x=4*pi*(2*N+1). The later 2*pi phase turn is the period exp(i*(theta+2*pi))=exp(i*theta). The prefix polygon is only the complex partial-sum path and defines none of these appearances of pi.",
+      "proof_boundary": "No circle fitted to the prefix polygon and no polygonal approximation defines pi here.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfockapr_01_coordinates",
+      "role": "exact_normal_form",
+      "readiness": "ready_to_apply",
+      "claim": "The anchored value and slope are an endpoint plus a positive-amplitude unit-carrier sum and its logarithmic moment.",
+      "formula": "z_n=r_n*zeta_n, u_n=log(a/n)>=0, S=sum_(n=1)^N z_n, U=sum_(n=1)^N u_n*z_n, e=eta*r_0=(-1)^N*B_0*(T_0+i)*H_a, g=eta*r_A=(-1)^N*B_0*(T_0+i)*J_a, W_0=e+S, W_A=g+s_*'*U, s_*'=c+i*b",
+      "proof_boundary": "This introduces no phase branch or sign claim.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfockapr_02_bulk_pairwise",
+      "role": "exact_kernel",
+      "readiness": "ready_to_apply",
+      "claim": "The bulk radial and tangential currents have explicit diagonal and unordered-pair kernels.",
+      "formula": "For theta_nm=arg(z_n)-arg(z_m), P_B=Re(s_*'*U*conj(S))=c*sum_n u_n*r_n^2+sum_(n<m)r_n*r_m*[c*(u_n+u_m)*cos(theta_nm)-b*(u_n-u_m)*sin(theta_nm)]; Q_B=Im(s_*'*U*conj(S))=b*sum_n u_n*r_n^2+sum_(n<m)r_n*r_m*[b*(u_n+u_m)*cos(theta_nm)+c*(u_n-u_m)*sin(theta_nm)]",
+      "proof_boundary": "The cosine and sine kernels are indefinite.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfockapr_03_endpoint_pairwise",
+      "role": "exact_kernel",
+      "readiness": "ready_to_apply",
+      "claim": "The endpoint-complete current adds one endpoint diagonal and one cross term per carrier.",
+      "formula": "P=Re(W_A*conj(W_0))=Re(g*conj(e))+P_B+sum_n Re(g*conj(z_n)+s_*'*u_n*z_n*conj(e)); Q=Im(W_A*conj(W_0))=Im(g*conj(e))+Q_B+sum_n Im(g*conj(z_n)+s_*'*u_n*z_n*conj(e)); g*conj(e)=B_0^2*(T_0^2+1)*H_a*J_a",
+      "proof_boundary": "No endpoint interaction is discarded.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfockapr_04_abel_prefix",
+      "role": "exact_reindexing",
+      "readiness": "ready_to_apply",
+      "claim": "Finite Abel summation collapses the logarithmic moment to positive gap weights on prefixes.",
+      "formula": "F_k=sum_(n=1)^k z_n, h_k=log((k+1)/k)>0, u_n=u_N+sum_(k=n)^(N-1)h_k; U=u_N*S+sum_(k=1)^(N-1)h_k*F_k",
+      "proof_boundary": "The positive weights do not make the complex prefix projections one-signed.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfockapr_05_endpoint_complete_prefix",
+      "role": "exact_normal_form",
+      "readiness": "ready_to_apply",
+      "claim": "The complete centered slope has one terminal block and an O(N) Abel-prefix expansion.",
+      "formula": "V_N=g-s_*'*u_N*e; W_A=s_*'*u_N*W_0+V_N+s_*'*sum_(k=1)^(N-1)h_k*F_k",
+      "proof_boundary": "The terminal block retains the exact endpoint phase.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfockapr_06_prefix_currents",
+      "role": "exact_kernel",
+      "readiness": "ready_to_apply",
+      "claim": "Both ordinary Hermitian kernels have endpoint-complete O(N) prefix formulas.",
+      "formula": "For R=|W_0|, P=c*u_N*R^2+Re(V_N*conj(W_0))+sum_k h_k*[c*Re(F_k*conj(W_0))-b*Im(F_k*conj(W_0))]; Q=b*u_N*R^2+Im(V_N*conj(W_0))+sum_k h_k*[b*Re(F_k*conj(W_0))+c*Im(F_k*conj(W_0))]",
+      "proof_boundary": "These are the same radial and tangential ratio numerators, not a new positivity theorem.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfockapr_07_contact_scalar",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "One division-free prefix scalar equals the physical slope at every real crossing, including the zero fiber.",
+      "formula": "For W_0=mathsf_X+i*mathsf_Y define mathcal_C_N=Re(V_N)-b*u_N*mathsf_Y+sum_k h_k*[c*Re(F_k)-b*Im(F_k)]. Then mathsf_A=Re(W_A)=mathcal_C_N+c*u_N*mathsf_X. At mathsf_X=0, mathsf_A=mathcal_C_N and Q=-mathsf_Y*mathcal_C_N, including mathsf_Y=0.",
+      "proof_boundary": "Unlike the Wronskian, this scalar does not vanish merely because W_0=0.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfockapr_08_terminal_band",
+      "role": "asymptotic_certificate",
+      "readiness": "certified",
+      "claim": "The only contact-band difference between the prefix scalar and the physical slope is negligible.",
+      "formula": "On |mathsf_X|<=delta_L, 0<=c=t*D_x/4<exp(-L)/4 and 0<=u_N=log(a/N)<2*exp(-L/2), so |c*u_N*mathsf_X|<25000*exp(-11L/4)/|f_1|<exp(-3L/2)/(4L)*A_L<2e-35*A_L for L>=50.",
+      "proof_boundary": "Valid uniformly on L>=50 and 0<=tL<=25.",
+      "diagnostics": {
+        "relative_carrier_rotation_lower": "3.46573590279972643e-01",
+        "terminal_relative_at_L50": "1.33931848090403900e-35",
+        "ordinary_radius_squared": "61/148",
+        "ordinary_aligned_Q": "-53/8",
+        "ordinary_opposed_Q": "7/40",
+        "zero_fiber_WA_squared": "637/1280"
+      }
+    },
+    {
+      "id": "nfockapr_09_all_fiber_sufficient",
+      "role": "conditional_inequality",
+      "readiness": "ready_to_apply",
+      "claim": "A single prefix-scalar lower bound closes the direct projection theorem on every complex fiber.",
+      "formula": "Let epsilon_term=25000*exp(-11L/4)/|f_1|. On |mathsf_X|<=delta_L, |mathcal_C_N|>A_L+epsilon_term implies |mathsf_A|>A_L. At mathsf_X=0, sign(mathsf_A)=sign(mathcal_C_N) exactly, even when W_0=0.",
+      "proof_boundary": "The Xi-specific lower bound is not proved here.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfockapr_10_ordinary_connection",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "The previous ordinary ratio target is exactly the division-free Hermitian-kernel inequality.",
+      "formula": "For R=|W_0|>=tau_L>delta_L, P+i*Q=W_A*conj(W_0) and W_A/W_0=(P+i*Q)/R^2. The previous ordinary inequality is equivalent to |Q|*sqrt(R^2-delta_L^2)-|P|*delta_L>A_L*R^2. At a real crossing Q=-mathsf_Y*mathcal_C_N; the kernel loses the zero fiber only through multiplication by mathsf_Y.",
+      "proof_boundary": "The tangential kernel remains the centered Wronskian away from the zero fiber.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfockapr_11_exceptional_derivative",
+      "role": "exact_reduction",
+      "readiness": "certified",
+      "claim": "The same prefix scalar controls the exceptional real derivative with certified nuisance errors.",
+      "formula": "With k_1=rho_1-u_a, partial_x mathsf_X=mathcal_C_N+(c*u_N-k_1)*mathsf_X-v_a*mathsf_Y+Re(D_(1,x))/|f_1|. At W_0=0, partial_x mathsf_X=mathcal_C_N+Re(D_(1,x))/|f_1|. On |W_0|<tau_L, |partial_x mathsf_X-mathcal_C_N|<epsilon_term+2*exp(-L)*tau_L+2e-7*exp(-5L/4). At W_0=0 only the final D term remains.",
+      "proof_boundary": "This identity supplies no arithmetic lower bound.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfockapr_12_ordinary_countermodel",
+      "role": "countermodel",
+      "readiness": "guard_validated",
+      "claim": "Positive ordered amplitudes and distances do not give a phase-current sign or magnitude floor.",
+      "formula": "{\"aligned_Q\": \"-53/8\", \"amplitudes\": \"1,4/5,7/10\", \"distances\": \"3,2,1\", \"interpretation\": \"Strictly decreasing positive amplitudes and distances allow Q<0, Q>0, and Q=0 with |W_0|^2=61/148>0, even for c>0 and b=-1/2.\", \"kernel_zero\": \"0\", \"opposed_Q\": \"7/40\", \"radius_squared_at_zero\": \"61/148\", \"s_prime\": \"13/1056-i/2\", \"shared_lower_phase_cos\": \"-35/37\", \"shared_lower_phase_sin\": \"-12/37\"}",
+      "proof_boundary": "Exact generic carrier model, not an Xi counterexample.",
+      "diagnostics": {
+        "s_prime": "13/1056-i/2",
+        "amplitudes": "1,4/5,7/10",
+        "distances": "3,2,1",
+        "shared_lower_phase_cos": "-35/37",
+        "shared_lower_phase_sin": "-12/37",
+        "aligned_Q": "-53/8",
+        "opposed_Q": "7/40",
+        "kernel_zero": "0",
+        "radius_squared_at_zero": "61/148",
+        "interpretation": "Strictly decreasing positive amplitudes and distances allow Q<0, Q>0, and Q=0 with |W_0|^2=61/148>0, even for c>0 and b=-1/2."
+      }
+    },
+    {
+      "id": "nfockapr_13_zero_fiber_countermodel",
+      "role": "countermodel",
+      "readiness": "guard_validated",
+      "claim": "Positive ordered amplitudes and distances do not give directional real transversality on the zero fiber.",
+      "formula": "{\"Re_W_A\": \"0\", \"U\": \"7*sqrt(65)*(-8 + I)/325\", \"W_0\": \"0\", \"W_A\": \"7*sqrt(65)*I/80\", \"abs_W_A_squared\": \"637/1280\", \"amplitudes\": \"1,3/5,2/5\", \"distances\": \"3,2,1\", \"global_unit_anchor\": \"(-8+i)/sqrt(65)\", \"interpretation\": \"At an exact complex-main zero, strict positive amplitude and distance ordering permit a nonzero purely imaginary W_A and zero physical real-direction slope. The Xi anchor and endpoint must enter any successful lower bound.\", \"s_prime\": \"1/16-i/2\"}",
+      "proof_boundary": "The actual Xi absolute anchor and endpoint are absent and must be used by a successful theorem.",
+      "diagnostics": {
+        "s_prime": "1/16-i/2",
+        "global_unit_anchor": "(-8+i)/sqrt(65)",
+        "amplitudes": "1,3/5,2/5",
+        "distances": "3,2,1",
+        "W_0": "0",
+        "U": "7*sqrt(65)*(-8 + I)/325",
+        "W_A": "7*sqrt(65)*I/80",
+        "Re_W_A": "0",
+        "abs_W_A_squared": "637/1280",
+        "interpretation": "At an exact complex-main zero, strict positive amplitude and distance ordering permit a nonzero purely imaginary W_A and zero physical real-direction slope. The Xi anchor and endpoint must enter any successful lower bound."
+      }
+    },
+    {
+      "id": "nfockapr_14_prefix_sector_guard",
+      "role": "nonpromotion_guard",
+      "readiness": "guard_validated",
+      "claim": "Abel positivity localizes the arithmetic input but does not make prefix projections positive.",
+      "formula": "The positive h_k make a weighted prefix-sector or aggregate oscillatory estimate a sufficient Xi input, but termwise sign is not inherited from r_(n+1)<r_n, u_(n+1)<u_n, or the common coefficient direction s_*'. The exact countermodels forbid such a generic promotion.",
+      "proof_boundary": "No termwise cone or common-half-plane theorem is promoted.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfockapr_15_relative_carrier_rotation",
+      "role": "asymptotic_certificate",
+      "readiness": "certified",
+      "claim": "Every actual nonfirst Xi carrier makes a full monotone relative turn inside each complete cutoff cell.",
+      "formula": "For chi_n=zeta_n*conj(zeta_1), |chi_n|=1, vartheta_(n,x)=Im(chi_(n,x)*conj(chi_n))=(-b)*log(n)+Im[d_(n,x)/(1+d_n)-d_(1,x)/(1+d_1)]. Since -b>=1/2, |d_n|<2189/x<1/2, and |d_(n,x)|<4223/x^2, vartheta_(n,x)>log(2)/2-16892/x^2>1/3 for n>=2. At fixed t a complete cutoff cell has Delta x=4*pi*(2N+1), so chi_2 advances by more than Delta x/3>2*pi and takes every unit-circle value. The actual Xi relative carriers are monotone rotating, not confined to one fixed sector on a cutoff cell. Therefore a termwise cosine/sine sign or fixed common half-plane cannot be the uniform proof. Relative rotation may instead be used inside an aggregate oscillatory estimate or an explicit phase-cell decomposition.",
+      "proof_boundary": "This is phase structure, not aggregate transversality.",
+      "diagnostics": {
+        "relative_carrier_rotation_lower": "3.46573590279972643e-01",
+        "terminal_relative_at_L50": "1.33931848090403900e-35",
+        "ordinary_radius_squared": "61/148",
+        "ordinary_aligned_Q": "-53/8",
+        "ordinary_opposed_Q": "7/40",
+        "zero_fiber_WA_squared": "637/1280"
+      }
+    },
+    {
+      "id": "nfockapr_16_q_ge_1_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The q>=1 problem is one all-fiber anchored Abel-prefix lower bound plus its oriented crossing count.",
+      "formula": "With delta_L=50000*exp(-5L/4)/|f_1|, A_L=(100000L+1)*exp(-5L/4)/|f_1|, and epsilon_term=25000*exp(-11L/4)/|f_1|, prove on q>=1 that |mathsf_X|<=delta_L implies |mathcal_C_N|>A_L+epsilon_term, and prove that the number of crossings mathsf_X=0 with mathcal_C_N>0 is below one successor turn after the prescribed boundary composition. This single division-free prefix theorem includes W_0=0.",
+      "proof_boundary": "The Xi prefix theorem and signed count remain open.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfockapr_17_q_lt_1_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The q<1 multiplicity-compatible chart remains separate.",
+      "formula": "The q=2tL^2<1 boundary remains a separate multiplicity-compatible parabolic/Hermite theorem. The prefix identity remains exact there, but no uniform positive slope is imposed at t=0.",
+      "proof_boundary": "Endpoint simplicity is not assumed.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfockapr_18_nonpromotion",
+      "role": "nonpromotion_guard",
+      "readiness": "guard_validated",
+      "claim": "The exact kernel and prefix reductions are kept separate from the missing Xi theorem and RH.",
+      "formula": "The prefixes F_k and complex kernels are canonical-chart objects. Prove the prefix theorem in one prescribed chart and transfer only mathsf_X and mathsf_A through the certified adjacent real-projection bounds.",
+      "proof_boundary": "No prefix lower bound, signed successor count, q<1 theorem, finite phase closure, contact exclusion, Lambda<=0, PF-infinity, RH, or Clay-prize conclusion.",
+      "diagnostics": null
+    }
+  ]
+}

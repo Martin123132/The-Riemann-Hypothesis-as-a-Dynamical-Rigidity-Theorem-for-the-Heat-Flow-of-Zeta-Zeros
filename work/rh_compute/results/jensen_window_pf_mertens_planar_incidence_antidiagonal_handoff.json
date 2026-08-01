@@ -1,0 +1,344 @@
+{
+  "kind": "jensen_window_pf_mertens_planar_incidence_antidiagonal_handoff",
+  "date": "2026-07-24",
+  "status": "exact endpoint incidence, random-cut bilinear, and signed current-interior anti-diagonal reductions with one open projection gate",
+  "source": {
+    "parent": "outputs/jensen_window_pf_mertens_planar_edge_gram_vaughan_handoff.md",
+    "planar_parent": "outputs/jensen_window_pf_mertens_planar_abel_handoff.md",
+    "formal_core": "outputs/formal_core.md"
+  },
+  "literature": {
+    "menon_2026": "https://arxiv.org/abs/2607.15574"
+  },
+  "parameters": {
+    "vertex_interval": "K<n<4K",
+    "current_interior": "i>=1, H>=1, i+H<=K-2",
+    "antidiagonal": "s=2i+H",
+    "mode_cutoff": "R=ceil(K^(1-alpha/2))",
+    "normalization": "N=2K+1"
+  },
+  "rows": [
+    {
+      "id": "peia_01_parent_energy",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "Corollary 11.22Z.6 gives E=D+C on the edge lift, with D=O_epsilon(K^(1+epsilon)) and one open signed off-diagonal edge-pair form C.",
+      "proof_boundary": "This inherits, but does not prove, the edge-pair estimate."
+    },
+    {
+      "id": "peia_02_tail_kernel",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "T_K(X,G)=sum_(x>=X,H>=G)nu_(x,H), so G_K((p,q),(r,s))=T_K(max(p,r),max(q-p,s-r)).",
+      "proof_boundary": "The curvature measure is nu=|Delta Wtilde| only on the strong sufficient energy route."
+    },
+    {
+      "id": "peia_03_threshold_graph",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "The threshold graph Gamma_(x,H) has vertices K+1,...,4K-1 and edges p<q with p<=x and q-p<=H.",
+      "proof_boundary": "The orientation is retained only to encode base and shift."
+    },
+    {
+      "id": "peia_04_adjacency_quadratic",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "If A_t is the symmetric adjacency matrix of Gamma_t, then S_t=(1/2)<mu,A_t mu>.",
+      "proof_boundary": "A_t is indefinite and this identity supplies no sign bound."
+    },
+    {
+      "id": "peia_05_threshold_diagonal",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Q_t=sum_({u,v} in Gamma_t)mu(u)^2mu(v)^2; D=sum_t nu_t Q_t.",
+      "proof_boundary": "Q_t is the equal-edge contribution, not the full energy."
+    },
+    {
+      "id": "peia_06_neighbor_field",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "R_t(v)=sum_(u adjacent to v)mu(u) and Q_t(v)=sum_(u adjacent to v)mu(u)^2.",
+      "proof_boundary": "The neighbor intervals depend on both x and H."
+    },
+    {
+      "id": "peia_07_full_collision",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "The ordered one-vertex collision at threshold t is C_3(t)=sum_v mu(v)^2(R_t(v)^2-Q_t(v)).",
+      "proof_boundary": "This includes same-base, same-tip, and chain collisions."
+    },
+    {
+      "id": "peia_08_sorted_triple",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "After summing nu, C_3 is the explicit sorted-triple sum in (PEIA.4), with the three tail weights T(a,c-a), T(b,max(b-a,c-b)), and T(b,c-a).",
+      "proof_boundary": "The repeated endpoint introduces mu(v)^2; no Mobius cancellation is inferred."
+    },
+    {
+      "id": "peia_09_sorted_quadruple",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "The four-distinct-endpoint contribution C_4 is the sorted quadruple sum in (PEIA.5), one term for each perfect matching of a<b<c<d.",
+      "proof_boundary": "This is a weighted four-point Mobius form."
+    },
+    {
+      "id": "peia_10_endpoint_expansion",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "The complete signed edge off-diagonal is C=C_3+C_4.",
+      "proof_boundary": "Neither stratum is asserted to be small separately."
+    },
+    {
+      "id": "peia_11_cancellation_witness",
+      "role": "countermodel_gate",
+      "status": "guard_validated",
+      "statement": "For K=4, x=11, H=10, and signs +1 on 5..12 and -1 on 13..15, there are 49 edges, S=7, Q=49, C=0, C_3=210, and C_4=-210.",
+      "proof_boundary": "This bounded synthetic sequence proves exact cancellation between strata; it is not a statement about Mobius."
+    },
+    {
+      "id": "peia_12_stratum_separation_guard",
+      "role": "proof_guard",
+      "status": "guard_active",
+      "statement": "Separate bounds for C_3 and C_4 are sufficient but not equivalent to the signed C bound.",
+      "proof_boundary": "The cancellation witness forbids presenting separated stratum estimates as a lossless reformulation."
+    },
+    {
+      "id": "peia_13_random_cut",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "For independent fair vertex colors chi, J_t(chi) is the sum of c_e over threshold edges whose endpoints have different colors.",
+      "proof_boundary": "The coloring is auxiliary and does not change the Mobius labels."
+    },
+    {
+      "id": "peia_14_cut_probabilities",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "A fixed edge is cut with probability 1/2, while any two distinct edges are both cut with probability 1/4, whether they collide or are disjoint.",
+      "proof_boundary": "The second probability is the reason both signed strata remain joined."
+    },
+    {
+      "id": "peia_15_cut_second_moment",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "At every threshold, 4 E_chi[J_t(chi)^2]=S_t^2+Q_t.",
+      "proof_boundary": "This is an identity, not an upper bound for S_t."
+    },
+    {
+      "id": "peia_16_integrated_cut_identity",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For J_K(chi)=sum_t nu_t J_t(chi)^2, E=4 E_chi[J_K(chi)]-D.",
+      "proof_boundary": "The already-closed D is the only correction."
+    },
+    {
+      "id": "peia_17_cut_bilinear_form",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "With f_chi=mu 1_(chi=0) and g_chi=mu 1_(chi=1), J_t=B_t(f_chi,g_chi)+B_t(g_chi,f_chi)=2<f_chi,A_t g_chi>.",
+      "proof_boundary": "The random support masks destroy multiplicative structure unless a theorem explicitly tolerates them."
+    },
+    {
+      "id": "peia_18_cut_target_equivalence",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "The energy target is equivalent to an O_epsilon(K^(1+epsilon)) bound for the average cut bilinear energy.",
+      "proof_boundary": "The equivalence uses the closed diagonal and provides no automatic gain."
+    },
+    {
+      "id": "peia_19_uniform_coloring_guard",
+      "role": "proof_guard",
+      "status": "guard_active",
+      "statement": "A bound uniform over all colorings is sufficient but is strictly stronger than the required average.",
+      "proof_boundary": "Do not replace the exact average by a worst-case coloring without recording the loss."
+    },
+    {
+      "id": "peia_20_biased_sign_family",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Let eta_v be independent signs with E eta_v=m and put z=m^2; P_K(z) is the expected nu-weighted square after multiplying every edge by eta_u eta_v.",
+      "proof_boundary": "Only 0<=z<=1 has a direct biased-sign interpretation."
+    },
+    {
+      "id": "peia_21_chaos_polynomial",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "P_K(z)=D+z C_3+z^2 C_4.",
+      "proof_boundary": "The original energy is the boundary value P_K(1)."
+    },
+    {
+      "id": "peia_22_randomization_no_gain",
+      "role": "proof_guard",
+      "status": "guard_active",
+      "statement": "Mean-zero randomization gives P_K(0)=D, but no positivity principle controls P_K(1) from interior biased values.",
+      "proof_boundary": "Randomization isolates the chaos levels and does not prove the deterministic boundary estimate."
+    },
+    {
+      "id": "peia_23_partial_fourier_data",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "F_x(theta)=sum_(K<p<=x)mu(p)e(p theta), F_*(theta)=sum_(K<q<4K)mu(q)e(q theta), and K_H(theta)=sum_(h=1)^H e(h theta).",
+      "proof_boundary": "Here e(theta)=exp(2 pi i theta)."
+    },
+    {
+      "id": "peia_24_partial_prefix_fourier",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "S_K(x,H)=integral_0^1 F_x(theta) conj(F_*(theta)) K_H(theta)dtheta.",
+      "proof_boundary": "This keeps the varying base prefix and is bilinear rather than a full-prefix modulus square."
+    },
+    {
+      "id": "peia_25_full_prefix_specialization",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "At x=4K-2, the real form reduces to the inherited |F_K|^2 odd-correlation identity.",
+      "proof_boundary": "The varying-x problem is not removed by this specialization."
+    },
+    {
+      "id": "peia_26_current_interior_index",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "For the current-current interior, i>=1, H>=1, i+H<=K-2, and s=2i+H ranges from 3 to 2K-5.",
+      "proof_boundary": "Transition and future cells lie outside this index set."
+    },
+    {
+      "id": "peia_27_antidiagonal_curvature",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "Delta Wtilde_K(K+i,H)=kappa_(K,R)(2i+H), where kappa_s is the signed double integral of D_R in (PEIA.13).",
+      "proof_boundary": "The energy route replaces kappa_s by |kappa_s|; the direct route retains its sign."
+    },
+    {
+      "id": "peia_28_smoothed_odd_spectrum",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "kappa_s=(4 pi^2/N^3)sum_(r<=R)sigma_r cos(q_r(s+3/2)pi/N), with q_r=2r-1 and the two sinc factors sigma_r in (PEIA.14).",
+      "proof_boundary": "This is an exact finite odd-frequency expansion."
+    },
+    {
+      "id": "peia_29_curvature_parseval",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "sum_(s=0)^(2N-1)kappa_s^2=(16 pi^4/N^5)sum_(r<=R)sigma_r^2<=16 pi^4 R/N^5.",
+      "proof_boundary": "The identity is over a complete 2N-point period."
+    },
+    {
+      "id": "peia_30_line_aggregate",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "A_K(s)=sum_(2i+H=s,i+H<=K-2)S_K(K+i,H).",
+      "proof_boundary": "This sums prefixes along one current-interior anti-diagonal."
+    },
+    {
+      "id": "peia_31_edge_multiplicity",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "A_K(s)=sum_(a,g)mu(K+a)mu(K+a+g)N_s(a,g), with N_s(a,g)=[floor((s-g)/2)-max(a,s-K+2)+1]_+.",
+      "proof_boundary": "The edge range is a>=1, g>=1, a+g<=K-2."
+    },
+    {
+      "id": "peia_32_signed_interior_factorization",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "The direct current-current interior contribution is O_CC,int=sum_s kappa_s A_K(s).",
+      "proof_boundary": "This is one component of O_(alpha,K), not the complete transition/future decomposition."
+    },
+    {
+      "id": "peia_33_projection_coefficients",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Y_(K,r)=sum_(s=3)^(2K-5)A_K(s)cos(q_r(s+3/2)pi/N).",
+      "proof_boundary": "Only the first R odd frequencies enter the actual curvature."
+    },
+    {
+      "id": "peia_34_spectral_projection",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "O_CC,int=(4 pi^2/N^3)sum_(r<=R)sigma_r Y_(K,r).",
+      "proof_boundary": "No absolute value over r or s has been taken."
+    },
+    {
+      "id": "peia_35_projection_cauchy",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "|O_CC,int|^2<=(16 pi^4 R/N^6)sum_(r<=R)|Y_(K,r)|^2.",
+      "proof_boundary": "This Cauchy step is over the retained odd frequencies only."
+    },
+    {
+      "id": "peia_36_projection_sufficient_gate",
+      "role": "conditional_target",
+      "status": "open",
+      "statement": "For every epsilon>0, sum_(r<=R)|Y_(K,r)|^2=O_epsilon(N^6 R^(-1)K^epsilon) would make O_CC,int subpower on dyadic K.",
+      "proof_boundary": "This target covers only the signed current-current interior and is not proved."
+    },
+    {
+      "id": "peia_37_bessel_fallback",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "Odd-frequency Bessel gives sum_(r<=R)|Y_(K,r)|^2<=N sum_s|A_K(s)|^2.",
+      "proof_boundary": "A separate arithmetic line-energy estimate is still needed."
+    },
+    {
+      "id": "peia_38_bessel_power_guard",
+      "role": "proof_guard",
+      "status": "guard_active",
+      "statement": "Geometry-only bounds for A_K(s) do not reach the projection target; the all-one sequence retains polynomial excess.",
+      "proof_boundary": "Bessel orthogonality is an interface, not the missing Mobius cancellation."
+    },
+    {
+      "id": "peia_39_energy_vs_signed_route",
+      "role": "proof_guard",
+      "status": "guard_active",
+      "statement": "The cut bilinearization is exactly equivalent to the strong energy route, whereas the anti-diagonal projection acts before absolute mixed curvature and is genuinely weaker.",
+      "proof_boundary": "The two theorem targets must not be conflated."
+    },
+    {
+      "id": "peia_40_remaining_blocks",
+      "role": "proof_guard",
+      "status": "guard_active",
+      "statement": "The transition, current-future, and future-future cells from Corollary 11.22Z.5 remain separate open components on the direct signed route.",
+      "proof_boundary": "Controlling O_CC,int alone does not prove the complete off-diagonal criterion."
+    },
+    {
+      "id": "peia_40a_recent_short_interval_guard",
+      "role": "literature_guard",
+      "status": "guard_active",
+      "statement": "Menon's 2026 almost-all short-interval Fourier and averaged Chowla bounds give logarithmic-scale decay after averaging over base points or shifts.",
+      "proof_boundary": "They do not supply the anchored quadratic odd-frequency projection bound for Y_(K,r), nor the transition/future estimates required here."
+    },
+    {
+      "id": "peia_41_finite_validation",
+      "role": "finite_validation",
+      "status": "validated_finite",
+      "statement": "Independent finite checks reproduce the collision and matching formulas, exact cancellation witness, cut moments, biased chaos polynomial, partial Fourier identity, anti-diagonal multiplicities, spectrum, and Parseval law.",
+      "proof_boundary": "Finite identities do not prove either asymptotic target."
+    },
+    {
+      "id": "peia_42_proof_boundary",
+      "role": "proof_guard",
+      "status": "guard_active",
+      "statement": "The incidence expansion, random-cut equivalence, and signed current-interior anti-diagonal projection are exact.",
+      "proof_boundary": "No projection estimate, remaining-block estimate, full energy bound, RH, PF-infinity, Lambda<=0, or Clay-prize result is proved."
+    }
+  ],
+  "summary": {
+    "row_count": 43,
+    "exact_reduction_count": 32,
+    "proof_guard_count": 7,
+    "literature_guard_count": 1,
+    "countermodel_count": 1,
+    "finite_validation_count": 1,
+    "open_projection_gate_count": 1,
+    "endpoint_expansion_proved": true,
+    "perfect_stratum_cancellation_witness_proved": true,
+    "cut_bilinear_equivalence_proved": true,
+    "partial_prefix_fourier_identity_proved": true,
+    "antidiagonal_projection_proved": true,
+    "projection_estimate_proved": false,
+    "remaining_blocks_proved": false,
+    "curvature_energy_proved": false,
+    "rh_proved": false,
+    "pf_infinity_proved": false,
+    "lambda_le_zero_proved": false
+  },
+  "proof_boundary": "Exact incidence and current-interior reductions only. No missing arithmetic projection or boundary/future estimate is proved."
+}

@@ -1,0 +1,356 @@
+{
+  "kind": "jensen_window_pf_mertens_truncated_half_odd_kernel_handoff",
+  "date": "2026-07-24",
+  "status": "exact truncated half-odd kernel, uniformly summable diagonal, and signed off-diagonal/Vaughan reduction with one open arithmetic gate",
+  "parameters": {
+    "alpha_range": "0<alpha<1",
+    "dyadic_blocks": "K=2^j",
+    "cutoff": "R_(alpha,K)=ceil(K^(1-alpha/2))",
+    "ambient_size": "N=2K+1",
+    "mode_numbers": "q_r=2r-1",
+    "uniform_diagonal_bound": "7pi^2/24"
+  },
+  "source_anchors": [
+    "outputs/jensen_window_pf_mertens_spectral_anchor_high_mode_reduction.md",
+    "outputs/jensen_window_pf_mertens_mixed_boundary_sine_vaughan_handoff.md",
+    "https://doi.org/10.5802/aif.2401",
+    "https://doi.org/10.1093/qmath/os-8.1.313"
+  ],
+  "rows": [
+    {
+      "id": "thok_01_reduced_input",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "Corollary 11.22Z.2 reduces R_alpha<infinity to the low half-odd energy with R_(alpha,K)=ceil(K^(1-alpha/2)).",
+      "proof_boundary": "The complementary high modes are already summable and are not reopened."
+    },
+    {
+      "id": "thok_02_notation",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Put N=2K+1, q_r=2r-1, theta_r=q_r*pi/N, and phi_r(i)=2*N^(-1/2)sin(i*theta_r).",
+      "proof_boundary": "For 1<=r<=K these are the mixed-boundary orthonormal eigenvectors from Corollary 11.22Z.1."
+    },
+    {
+      "id": "thok_03_kernel",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "P_(K,R)(i,j):=sum_(r<=R)phi_r(i)phi_r(j)/q_r^2.",
+      "proof_boundary": "The cutoff satisfies 1<=R<=K."
+    },
+    {
+      "id": "thok_04_quadratic_identity",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "sum_(r<=R)|<x,phi_r>|^2/q_r^2=x^T P_(K,R)x.",
+      "proof_boundary": "No absolute value or Type I/II separation is introduced."
+    },
+    {
+      "id": "thok_05_cosine_sum",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "C_R(u):=sum_(r<=R)cos(q_r*u)/q_r^2.",
+      "proof_boundary": "This finite trigonometric polynomial is even."
+    },
+    {
+      "id": "thok_06_cosine_kernel",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "P_(K,R)(i,j)=2/N*[C_R((i-j)pi/N)-C_R((i+j)pi/N)].",
+      "proof_boundary": "This is product-to-sum applied before any estimate."
+    },
+    {
+      "id": "thok_07_sine_primitive",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "S_R(u):=sum_(r<=R)sin(q_r*u)/q_r=-C_R'(u).",
+      "proof_boundary": "The identity is termwise finite differentiation."
+    },
+    {
+      "id": "thok_08_odd_dirichlet",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "S_R'(u)=sum_(r<=R)cos(q_r*u)=sin(2Ru)/(2sin u), with continuous values at multiples of pi.",
+      "proof_boundary": "This is the finite odd Dirichlet identity."
+    },
+    {
+      "id": "thok_09_integral_kernel",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "P_(K,R)(i,j)=2/N*integral_(|i-j|pi/N)^((i+j)pi/N)S_R(u)du.",
+      "proof_boundary": "Both endpoints lie in [0,pi) for 1<=i,j<=K."
+    },
+    {
+      "id": "thok_10_sine_symmetry",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "S_R(pi-u)=S_R(u) for 0<=u<=pi.",
+      "proof_boundary": "Every q_r is odd."
+    },
+    {
+      "id": "thok_11_sine_positivity",
+      "role": "exact_positivity",
+      "status": "available_exact",
+      "statement": "S_R(u)>0 for 0<u<pi.",
+      "proof_boundary": "On (0,pi/2], pair successive half-waves in integral_0^u sin(2Rv)/(2sin v)dv using the decreasing weight 1/sin v; use symmetry on the other half."
+    },
+    {
+      "id": "thok_12_entrywise_positivity",
+      "role": "exact_positivity",
+      "status": "available_exact",
+      "statement": "P_(K,R)(i,j)>0 for all 1<=i,j<=K.",
+      "proof_boundary": "The integration interval in row 9 has positive length."
+    },
+    {
+      "id": "thok_13_psd",
+      "role": "exact_positivity",
+      "status": "available_exact",
+      "statement": "P_(K,R) is positive semidefinite.",
+      "proof_boundary": "It is a sum of positive rank-one matrices."
+    },
+    {
+      "id": "thok_14_rank",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "rank P_(K,R)=R.",
+      "proof_boundary": "The first R mixed-boundary eigenvectors are orthonormal."
+    },
+    {
+      "id": "thok_15_nesting",
+      "role": "exact_comparison",
+      "status": "available_exact",
+      "statement": "P_(K,R+1)-P_(K,R)=phi_(R+1)phi_(R+1)^T/q_(R+1)^2 is rank-one PSD.",
+      "proof_boundary": "Nesting is Loewner monotonicity, not necessarily entrywise monotonicity."
+    },
+    {
+      "id": "thok_16_infinite_odd_cosine",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "sum_(r>=1)cos((2r-1)u)/(2r-1)^2=pi^2/8-pi*u/4 for 0<=u<=pi.",
+      "proof_boundary": "Subtract the even modes from the standard absolutely convergent cosine series."
+    },
+    {
+      "id": "thok_17_min_kernel_completion",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "P_(K,infinity)(i,j)=pi^2*N^(-2)min(i,j).",
+      "proof_boundary": "Insert row 16 into the cosine-kernel formula."
+    },
+    {
+      "id": "thok_18_tail_psd",
+      "role": "exact_comparison",
+      "status": "available_exact",
+      "statement": "0<=P_(K,R)<=pi^2*N^(-2)C_K in Loewner order, where C_K(i,j)=min(i,j).",
+      "proof_boundary": "The omitted infinite tail is an absolutely convergent sum of rank-one PSD matrices."
+    },
+    {
+      "id": "thok_19_full_lower_comparison",
+      "role": "exact_comparison",
+      "status": "available_exact",
+      "statement": "4*N^(-2)C_K<=P_(K,K).",
+      "proof_boundary": "Compare the common eigenvalues using sin(theta/2)>=theta/pi."
+    },
+    {
+      "id": "thok_20_full_upper_comparison",
+      "role": "exact_comparison",
+      "status": "available_exact",
+      "statement": "P_(K,K)<=pi^2*N^(-2)C_K.",
+      "proof_boundary": "Compare the common eigenvalues using sin(theta/2)<=theta/2; this also follows from row 18."
+    },
+    {
+      "id": "thok_21_trace",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "tr P_(K,R)=sum_(r<=R)q_r^(-2)<pi^2/8.",
+      "proof_boundary": "The trace is uniformly bounded because the modes are orthonormal."
+    },
+    {
+      "id": "thok_22_diagonal_envelope",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "0<P_(K,R)(i,i)<=pi^2*i/N^2.",
+      "proof_boundary": "Take the ith diagonal entry in row 18."
+    },
+    {
+      "id": "thok_23_pullback_maps",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "For K<n<4K, set tau_K(n)=n-K and w_K(n)=1 on K<n<2K, while tau_K(n)=K and w_K(n)=b_K(n) on 2K<=n<4K.",
+      "proof_boundary": "The future affine interval is collapsed only to the already-defined terminal anchor."
+    },
+    {
+      "id": "thok_24_feature_pullback",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "g_(K,r)(n)=w_K(n)phi_r(tau_K(n)).",
+      "proof_boundary": "This reproduces both feature cases in Corollary 11.22Z.1."
+    },
+    {
+      "id": "thok_25_ordinary_kernel",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "G_(alpha,K,R)(n,m):=w_K(n)w_K(m)P_(K,R)(tau_K(n),tau_K(m)).",
+      "proof_boundary": "G is a positive semidefinite and entrywise positive ordinary-support kernel."
+    },
+    {
+      "id": "thok_26_ordinary_energy",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "L_(alpha,K):=sum_(r<=R)|X_(K,r)|^2/q_r^2=sum_(n,m)mu(n)mu(m)G_(alpha,K,R)(n,m).",
+      "proof_boundary": "The sums are finite on K<n,m<4K."
+    },
+    {
+      "id": "thok_27_diagonal_offdiagonal",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "L_(alpha,K)=D_(alpha,K)+2O_(alpha,K), with D=sum_n mu(n)^2G(n,n) and O=sum_(n<m)mu(n)mu(m)G(n,m).",
+      "proof_boundary": "All unresolved growth is isolated in the signed off-diagonal."
+    },
+    {
+      "id": "thok_28_current_diagonal",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "The current-support diagonal is less than pi^2/8.",
+      "proof_boundary": "Use mu^2<=1 and the trace bound."
+    },
+    {
+      "id": "thok_29_future_tent_square",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "sum_(2K<=n<4K)b_K(n)^2<=(2K+1)(4K+1)/(12K).",
+      "proof_boundary": "Drop the factor (2K/n)^(1+alpha)<=1 and sum the squared affine tent exactly."
+    },
+    {
+      "id": "thok_30_uniform_diagonal",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "0<=D_(alpha,K)<7pi^2/24 uniformly in alpha, K, and R.",
+      "proof_boundary": "The future diagonal is at most pi^2(4K+1)/[12(2K+1)]<pi^2/6."
+    },
+    {
+      "id": "thok_31_offdiagonal_equivalence",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "For fixed alpha, R_alpha<infinity iff sup_J sum_(K dyadic<=2^J)K^(-alpha)O_(alpha,K)<infinity.",
+      "proof_boundary": "The high modes and the uniformly bounded per-scale diagonal are both dyadically summable."
+    },
+    {
+      "id": "thok_32_endpoint_formula",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "p_i:=P_(K,R)(i,K)=4/N sum_(r<=R)(-1)^(r-1)sin(i*theta_r)cos(theta_r/2)/q_r^2.",
+      "proof_boundary": "This retains the exact endpoint phase."
+    },
+    {
+      "id": "thok_33_endpoint_integral",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "p_i=2/N integral_((K-i)pi/N)^((K+i)pi/N)S_R(u)du.",
+      "proof_boundary": "This is row 9 with j=K."
+    },
+    {
+      "id": "thok_34_endpoint_monotonicity",
+      "role": "exact_positivity",
+      "status": "available_exact",
+      "statement": "0=p_0<p_1<...<p_K.",
+      "proof_boundary": "Each successive endpoint interval strictly contains the previous one and S_R is positive."
+    },
+    {
+      "id": "thok_35_endpoint_abel",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "If A_t=sum_(i=t)^(K-1)mu(K+i), then sum_(i=1)^(K-1)mu(K+i)p_i=sum_(t=1)^(K-1)A_t(p_t-p_(t-1)).",
+      "proof_boundary": "This is exact finite suffix Abel summation."
+    },
+    {
+      "id": "thok_36_endpoint_abel_bound",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "The endpoint average has absolute value at most pi^2*K*N^(-2)max_t|A_t|.",
+      "proof_boundary": "The positive Abel increments total p_(K-1)<=p_K and row 22 bounds p_K."
+    },
+    {
+      "id": "thok_37_vaughan_coefficients",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Collect the two interval Vaughan sums as T_(q,K,r)=sum_n u_(q,K)(n)g_(K,r)(n), q in {I,II}.",
+      "proof_boundary": "The collected coefficients preserve every divisor and inner-variable incidence."
+    },
+    {
+      "id": "thok_38_vaughan_identity",
+      "role": "source_backed_identity",
+      "status": "available_exact",
+      "statement": "mu(n)=-u_(I,K)(n)+u_(II,K)(n) on the feature support.",
+      "proof_boundary": "This is Green-Tao's finite Vaughan identity on (K,2K] and (2K,4K], with the zero feature at 4K harmless."
+    },
+    {
+      "id": "thok_39_signed_gram_expansion",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "L=<u_I,G u_I>+<u_II,G u_II>-2<u_I,G u_II>.",
+      "proof_boundary": "The Type I/II cross term remains inside the exact positive-semidefinite kernel form."
+    },
+    {
+      "id": "thok_40_cross_term_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "Replacing row 39 by separate absolute Type I and Type II bounds is not an equivalent step.",
+      "proof_boundary": "The missing arithmetic cancellation may occur in the cross term."
+    },
+    {
+      "id": "thok_41_rank_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "For R<K, P_(K,R) has rank R and admits no positive Loewner lower bound by the full min kernel.",
+      "proof_boundary": "Kernel positivity, trace control, and generic large-sieve bounds do not supply Mobius cancellation."
+    },
+    {
+      "id": "thok_42_davenport_guard",
+      "role": "literature_guard",
+      "status": "source_backed",
+      "statement": "Davenport-scale arbitrary logarithmic cancellation in the endpoint anchor or local suffixes does not close the K^(1-alpha) power deficit.",
+      "proof_boundary": "The endpoint Abel identity changes the geometry, not the required power scale."
+    },
+    {
+      "id": "thok_43_conditional_endpoint",
+      "role": "conditional_calibration",
+      "status": "conditional",
+      "statement": "If both |beta_K| and max_t|A_t| are O_epsilon(K^(1/2+epsilon)), then the anchor-current cross term is O_epsilon(K^(2epsilon)).",
+      "proof_boundary": "Both square-root estimates are unproved, and the current-current and future-future off-diagonals remain."
+    },
+    {
+      "id": "thok_44_finite_reproduction",
+      "role": "finite_reproduction",
+      "status": "finite_check_passed",
+      "statement": "Finite arbitrary-vector and Mobius checks reproduce the trigonometric kernel, positivity, nesting, min-kernel comparison, diagonal bound, Abel identity, and signed Vaughan Gram expansion.",
+      "proof_boundary": "Finite checks validate identities only and supply no asymptotic Mobius estimate."
+    },
+    {
+      "id": "thok_45_open_gate",
+      "role": "open_theorem_target",
+      "status": "open",
+      "statement": "Prove the weighted low-kernel off-diagonal bound in row 31, equivalently the joint signed Vaughan Gram estimate in row 39, for one cofinal sequence alpha_j->0.",
+      "proof_boundary": "No such Mobius-specific bilinear estimate, full Burnol bound, RH, PF-infinity, or Lambda<=0 conclusion is supplied."
+    }
+  ],
+  "audit": {
+    "row_count": 45,
+    "exact_reduction_count": 39,
+    "literature_guard_count": 1,
+    "proof_guard_count": 2,
+    "conditional_calibration_count": 1,
+    "finite_validation_count": 1,
+    "open_signed_gate_count": 1,
+    "kernel_formula_proved": true,
+    "entrywise_positivity_proved": true,
+    "min_kernel_completion_proved": true,
+    "uniform_diagonal_bound_proved": true,
+    "endpoint_abel_identity_proved": true,
+    "signed_vaughan_gram_identity_proved": true,
+    "offdiagonal_mobius_gain_proved": false,
+    "full_burnol_bound_proved": false,
+    "rh_proved": false,
+    "pf_infinity_proved": false,
+    "lambda_le_zero_proved": false
+  }
+}

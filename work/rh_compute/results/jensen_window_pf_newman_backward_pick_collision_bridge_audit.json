@@ -1,0 +1,151 @@
+{
+  "kind": "jensen_window_pf_newman_backward_pick_collision_bridge_audit",
+  "date": "2026-07-24",
+  "status": "exact quadratic collision countermodel and literature audit with one open Xi-specific repair target",
+  "proof_boundary": "The artifact rejects generic backward Pick/collision bridging and pinpoints a separation/cutoff uniformity gap in one unreviewed preprint. It does not establish that every possible Xi-specific backward barrier fails, and it does not prove Lambda<=0 or RH.",
+  "exact": {
+    "quadratic_flow": {
+      "definition": "E_t(z)=z^2+a-2t, a>0",
+      "heat_equation": "partial_t E_t=-partial_z^2 E_t",
+      "collision_time": "t_*=a/2",
+      "zeros_above": "t>t_*: zeros are +/-sqrt(2t-a), both real",
+      "zeros_at": "t=t_*: z=0 is a double zero",
+      "zeros_below": "t<t_*: zeros are +/-i*sqrt(a-2t), so one lies in C+",
+      "class_scope": "E_t is an even real polynomial, hence an even real entire Cartwright-class backward-heat solution."
+    },
+    "pick_field": {
+      "definition": "g_t(z)=-E_t'(z)/E_t(z), h_t=Im(g_t)",
+      "burgers": "partial_t g=-partial_z^2 g+2g*partial_z g",
+      "formula": "h_t(x,y)=2y*(x^2+y^2-b)/((x^2-y^2+b)^2+4x^2y^2), b=a-2t",
+      "top_sign": "For t>t_* one has b<0, hence h_t(x,y)>0 for y>0.",
+      "negative_bubble": "For t<t_* one has h_t<0 on x^2+y^2<a-2t inside C+.",
+      "witness": "At x=0, y=sqrt(a-2t)/2, h_t=-4/(3*sqrt(a-2t))<0."
+    },
+    "collision_uniformity": {
+      "upper_zero": "rho_+(t)=i*sqrt(a-2t), t<t_*",
+      "speed": "|rho_+'(t)|=1/sqrt(a-2t), which tends to infinity as t increases to t_*.",
+      "closed_window_scope": "A finite zero-speed constant exists on each closed collision-free window, but not uniformly on an open window whose endpoint is t_*.",
+      "gronwall_guard": "A bound |E_rho'(t)|<=K*E_rho(t) with K depending on the zero-speed constant cannot be extended to t_* by asserting one finite K on (t_*-delta,t_*)."
+    },
+    "cutoff_obstruction": {
+      "negative_support": "supp(h_t^-)=C+ intersect {x^2+y^2<a-2t}",
+      "fixed_cutoff_hiding": "For a lower cutoff y>=rho, the weighted negative energy is exactly zero whenever 0<t_*-t<rho^2/2, although h_t^- is nonzero below y=rho.",
+      "hidden_width": "delta_rho=rho^2/2",
+      "noncommuting_limits": "The zero-energy bridge width tends to zero with rho. One cannot first prove a rho-dependent bridge and then send rho to zero while retaining a fixed backward time interval.",
+      "support_guard": "Vanishing of an energy whose weight is positive only on y>=rho proves h_t^-=0 only on that support, not on all C+."
+    },
+    "literature_audit": {
+      "source": "Kevin Schatz, Riemann Hypothesis: Backward Parabolic Positivity Barriers for the Xi Flow, preprint, 2025",
+      "doi": "https://doi.org/10.5281/zenodo.17636625",
+      "manuscript": "https://kschatz.github.io/rh-xi-backward-parabolic-barrier/schatz_riemann_hypothesis_backward_parabolic_positivity_barriers_xi_flow.pdf",
+      "pinpoint": "Lemma 4.7 assumes a closed collision-free window; Lemma 7.3 applies its speed-dependent energy bound on an open interval ending at a collision and concludes global upper-half-plane positivity from a cutoff-supported energy.",
+      "decision": "The quadratic flow satisfies the generic heat, Burgers, Cartwright, top-time Pick, and isolated-collision inputs but violates the claimed collision bridge. The cited preprint therefore does not presently supply an admissible proof of backward Pick positivity."
+    },
+    "open_repair": "A viable Xi-specific backward argument must add an estimate uniform in zero separation and lower cutoff through collisions, or an arithmetic invariant that excludes the collision before the cutoff limit. Closed-window speed bounds, weighted-energy continuity, and top-time Pick positivity are insufficient.",
+    "checks": {
+      "heat_residual": "0",
+      "burgers_residual": "0",
+      "pick_formula_residual": "0",
+      "negative_witness": "-4/(3*r)",
+      "hidden_width_residual": "0"
+    }
+  },
+  "rows": [
+    {
+      "id": "nbpca_01_quadratic_heat_flow",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "A quadratic family is an exact even backward-heat flow.",
+      "formula": "partial_t E_t=-partial_z^2 E_t",
+      "proof_boundary": "No Xi zero information is used."
+    },
+    {
+      "id": "nbpca_02_real_zero_top",
+      "role": "exact_example",
+      "readiness": "ready_to_apply",
+      "claim": "The flow has a real-zero time above one collision.",
+      "formula": "t>t_*: zeros are +/-sqrt(2t-a), both real",
+      "proof_boundary": "This is a finite Cartwright-class calibration model."
+    },
+    {
+      "id": "nbpca_03_pick_top",
+      "role": "exact_inequality",
+      "readiness": "ready_to_apply",
+      "claim": "The negative logarithmic derivative is Pick-positive above the collision.",
+      "formula": "For t>t_* one has b<0, hence h_t(x,y)>0 for y>0.",
+      "proof_boundary": "The sign follows directly from the displayed rational formula."
+    },
+    {
+      "id": "nbpca_04_double_collision",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The two real zeros collide at a finite time.",
+      "formula": "t=t_*: z=0 is a double zero",
+      "proof_boundary": "The collision is the standard square-root normal form."
+    },
+    {
+      "id": "nbpca_05_nonreal_birth",
+      "role": "exact_countermodel",
+      "readiness": "guard_validated",
+      "claim": "Backward continuation creates an upper-half-plane zero.",
+      "formula": "t<t_*: zeros are +/-i*sqrt(a-2t), so one lies in C+",
+      "proof_boundary": "This blocks generic backward preservation of real-rootedness."
+    },
+    {
+      "id": "nbpca_06_pick_bubble",
+      "role": "exact_countermodel",
+      "readiness": "guard_validated",
+      "claim": "A negative-Pick bubble is born below the upper zero.",
+      "formula": "For t<t_* one has h_t<0 on x^2+y^2<a-2t inside C+.",
+      "proof_boundary": "At x=0, y=sqrt(a-2t)/2, h_t=-4/(3*sqrt(a-2t))<0."
+    },
+    {
+      "id": "nbpca_07_speed_blowup",
+      "role": "uniformity_guard",
+      "readiness": "guard_validated",
+      "claim": "The zero-speed constant diverges at the collision.",
+      "formula": "|rho_+'(t)|=1/sqrt(a-2t), which tends to infinity as t increases to t_*.",
+      "proof_boundary": "A finite zero-speed constant exists on each closed collision-free window, but not uniformly on an open window whose endpoint is t_*."
+    },
+    {
+      "id": "nbpca_08_cutoff_hiding",
+      "role": "support_guard",
+      "readiness": "guard_validated",
+      "claim": "Every fixed lower cutoff hides the newborn negative bubble for a positive time.",
+      "formula": "For a lower cutoff y>=rho, the weighted negative energy is exactly zero whenever 0<t_*-t<rho^2/2, although h_t^- is nonzero below y=rho.",
+      "proof_boundary": "Vanishing of an energy whose weight is positive only on y>=rho proves h_t^-=0 only on that support, not on all C+."
+    },
+    {
+      "id": "nbpca_09_noncommuting_limits",
+      "role": "limit_order_obstruction",
+      "readiness": "guard_validated",
+      "claim": "The cutoff exhaustion and backward collision limit do not commute.",
+      "formula": "The zero-energy bridge width tends to zero with rho. One cannot first prove a rho-dependent bridge and then send rho to zero while retaining a fixed backward time interval.",
+      "proof_boundary": "The exact hidden interval has width rho^2/2."
+    },
+    {
+      "id": "nbpca_10_gronwall_boundary",
+      "role": "proof_boundary",
+      "readiness": "ready_to_apply",
+      "claim": "Closed-window energy control cannot be reused with one finite constant at the collision endpoint.",
+      "formula": "A bound |E_rho'(t)|<=K*E_rho(t) with K depending on the zero-speed constant cannot be extended to t_* by asserting one finite K on (t_*-delta,t_*).",
+      "proof_boundary": "A separation-uniform estimate would be a genuinely new input."
+    },
+    {
+      "id": "nbpca_11_preprint_audit",
+      "role": "literature_audit",
+      "readiness": "gap_identified",
+      "claim": "The preprint collision bridge crosses exactly the forbidden uniformity step.",
+      "formula": "Lemma 4.7 assumes a closed collision-free window; Lemma 7.3 applies its speed-dependent energy bound on an open interval ending at a collision and concludes global upper-half-plane positivity from a cutoff-supported energy.",
+      "proof_boundary": "The quadratic flow satisfies the generic heat, Burgers, Cartwright, top-time Pick, and isolated-collision inputs but violates the claimed collision bridge. The cited preprint therefore does not presently supply an admissible proof of backward Pick positivity."
+    },
+    {
+      "id": "nbpca_12_open_xi_repair",
+      "role": "open_theorem_target",
+      "readiness": "open",
+      "claim": "Only an Xi-specific separation-uniform collision estimate could repair this route.",
+      "formula": "A viable Xi-specific backward argument must add an estimate uniform in zero separation and lower cutoff through collisions, or an arithmetic invariant that excludes the collision before the cutoff limit. Closed-window speed bounds, weighted-energy continuity, and top-time Pick positivity are insufficient.",
+      "proof_boundary": "No backward Pick theorem, Lambda<=0, or RH claim is made."
+    }
+  ]
+}

@@ -207,9 +207,17 @@ def _next_signed_layer(
     return values, margins
 
 
-def stable_order11_prefix(values: dict[int, flint.arb]) -> dict:
+def stable_order11_prefix(
+    values: dict[int, flint.arb],
+    *,
+    maximum: int = MAX_COEFFICIENT_INDEX,
+    prefix_last_n: int = PREFIX_LAST_N,
+) -> dict:
     """Rebuild Q6 through Q11 without subtracting raw Hankel determinants."""
-    maximum = MAX_COEFFICIENT_INDEX
+    if prefix_last_n + 20 != maximum:
+        raise ValueError("order-eleven prefix requires maximum=prefix_last_n+20")
+    if set(values) != set(range(maximum + 1)):
+        raise ValueError("coefficient values do not exactly cover 0..maximum")
     contractions = {
         index: values[index - 1] * values[index + 1] / values[index] ** 2
         for index in range(1, maximum)
@@ -327,7 +335,7 @@ def stable_order11_prefix(values: dict[int, flint.arb]) -> dict:
     relative_q10 = {}
     rows = []
     minimum: tuple[flint.arb, int] | None = None
-    for index in range(PREFIX_LAST_N + 1):
+    for index in range(prefix_last_n + 1):
         numerator = q10[index + 1] ** 2 - q10[index] * q10[index + 2]
         if endpoint.sign_class(numerator) != "positive":
             raise RuntimeError(f"order-eleven numerator failed at n={index}")
@@ -368,8 +376,8 @@ def stable_order11_prefix(values: dict[int, flint.arb]) -> dict:
     assert minimum is not None
     return {
         "lambda": "-100",
-        "n_range": [0, PREFIX_LAST_N],
-        "coefficient_range": [0, MAX_COEFFICIENT_INDEX],
+        "n_range": [0, prefix_last_n],
+        "coefficient_range": [0, maximum],
         "precision_bits": PRECISION_BITS,
         "rows": rows,
         "positive_coordinate_counts": {
@@ -393,7 +401,7 @@ def stable_order11_prefix(values: dict[int, flint.arb]) -> dict:
             "inconclusive_indices": q10_classes["inconclusive"],
         },
         "exceptional_Q11_indices": [0, 1, 2, 3],
-        "positive_cone_Q11_range": [4, PREFIX_LAST_N],
+        "positive_cone_Q11_range": [4, prefix_last_n],
         "minimum_relative_n": minimum[1],
         "minimum_relative_ball": prefix.arb_text(minimum[0], 80),
         "minimum_relative_lower": prefix.arb_lower_text(minimum[0], 80),

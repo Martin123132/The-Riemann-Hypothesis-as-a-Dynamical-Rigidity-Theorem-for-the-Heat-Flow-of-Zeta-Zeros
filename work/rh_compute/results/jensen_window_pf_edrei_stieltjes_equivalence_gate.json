@@ -1,0 +1,220 @@
+{
+  "kind": "jensen_window_pf_edrei_stieltjes_equivalence_gate",
+  "date": "2026-07-23",
+  "status": "exact Edrei-log/Stieltjes/LP+/coefficient-PF/Jensen endpoint equivalence gate",
+  "proof_boundary": "This artifact proves an exact equivalence of all-order target formulations, identifies a strict two-column Hankel sufficient target, and records an exact Xi/Phi logarithmic-derivative handoff. It does not prove the all-order Stieltjes property, coefficient PF-infinity, Jensen hyperbolicity for zeta, RH, or Lambda <= 0.",
+  "primary_sources": [
+    "https://doi.org/10.1016/j.jmaa.2022.126432",
+    "https://discovery.ucl.ac.uk/10150527/1/Sokal_1-s2.0-S0022247X22004462-main.pdf",
+    "https://doi.org/10.1007/BF02786970",
+    "https://doi.org/10.1007/BF02786971"
+  ],
+  "corpus_sources": [
+    "outputs/jensen_window_pf_coefficient_pf_equivalence_gate.md",
+    "outputs/edrei_log_sign_diagnostic.md",
+    "outputs/edrei_moment_quadrature_scout.md",
+    "outputs/jensen_window_pf_laguerre_scale_mixture_gate.md",
+    "outputs/missing_coefficient_pf_theorem.md"
+  ],
+  "exact": {
+    "corpus_normalization": "H_lambda(z)=F_lambda(z)/F_lambda(0)=sum_(k>=0)d_k(lambda)z^k, H_lambda(0)=1, and H_lambda is entire",
+    "log_coordinates": "log H(z)=sum_(n>=1)ell_n*z^n, q_n=n*ell_n, p_n=(-1)^(n-1)*q_n",
+    "indexing_identity": "a_r:=(-1)^r*[z^r](H'(z)/H(z))=p_(r+1)",
+    "sokal_criterion": "For entire H with H(0)!=0: H in LP+ <=> (a_r)_(r>=0) is a Stieltjes moment sequence",
+    "unique_measure": "a_r=integral_[0,infinity)x^r*dnu(x), nu=gamma*delta_0+sum_j m_j*beta_j*delta_(beta_j), gamma>=0, beta_j>0, m_j in Z_(>=1), sum_j m_j*beta_j<infinity",
+    "stieltjes_transform": "H'(z)/H(z)=integral_[0,infinity)dnu(x)/(1+x*z)=gamma+sum_j m_j*beta_j/(1+beta_j*z)",
+    "hankel_psd": "a is Stieltjes <=> (a_(i+j))_(i,j>=0) and (a_(i+j+1))_(i,j>=0) are positive semidefinite on every finite block",
+    "strict_two_column_target": "D_(m,1)=det(p_(i+j+1))_(i,j=0)^m>0 and D_(m,2)=det(p_(i+j+2))_(i,j=0)^m>0 for every m>=0 => a is Stieltjes",
+    "s_fraction": "a is Stieltjes <=> sum_(r>=0)a_r*t^r has a formal Stieltjes continued fraction with nonnegative coefficients, including terminating cases",
+    "endpoint_equivalence": "c is PF-infinity <=> H is LP+ <=> a_r=p_(r+1) is Stieltjes <=> every shifted Jensen window is finite PF-infinity",
+    "phi_integral": "F_lambda(z)=integral_R exp(lambda*u^2)*Phi(u)*cosh(u*sqrt(z))*du",
+    "phi_log_derivative": "H_lambda'(z)/H_lambda(z)=[integral_R exp(lambda*u^2)*Phi(u)*u*sinh(u*sqrt(z))/(2*sqrt(z))*du]/[integral_R exp(lambda*u^2)*Phi(u)*cosh(u*sqrt(z))*du]",
+    "finite_guard": "finitely many positive D_(m,s), log signs, or recurrence coefficients do not imply the all-order Stieltjes moment property",
+    "object_separation": "Hankel matrices of a_r=p_(r+1) are nonlinear Edrei-log objects and are not the original signed-Hankel matrices of A_k",
+    "mixture_guard": "positivity of the Phi integral or fixed-scale LP+ kernels does not imply that their positive mixture has Stieltjes logarithmic derivative"
+  },
+  "sample_audit": {
+    "degree": 12,
+    "gamma": "2/5",
+    "atoms": [
+      {
+        "beta": "1/7",
+        "multiplicity": 2
+      },
+      {
+        "beta": "2/9",
+        "multiplicity": 1
+      }
+    ],
+    "h_coefficients": [
+      "1",
+      "286/315",
+      "1349/3675",
+      "704/7875",
+      "12412/826875",
+      "12988/6890625",
+      "19318/103359375",
+      "23584/1550390625",
+      "386/369140625",
+      "5612/90439453125",
+      "28202/8720947265625",
+      "167936/1119188232421875",
+      "9568/1526165771484375"
+    ],
+    "log_derivative_coefficients": [
+      "286/315",
+      "-358/3969",
+      "4202/250047",
+      "-51538/15752961",
+      "655922/992436543",
+      "-8592418/62523502209",
+      "114979442/3938980639167",
+      "-1561882498/248155780267521",
+      "21435887762/15633814156853823",
+      "-296228223778/984930291881790849",
+      "4112327288882/62050608388552823487",
+      "-57258771448258/3909188328478827879681"
+    ],
+    "shifted_log_moments": [
+      "286/315",
+      "358/3969",
+      "4202/250047",
+      "51538/15752961",
+      "655922/992436543",
+      "8592418/62523502209",
+      "114979442/3938980639167",
+      "1561882498/248155780267521",
+      "21435887762/15633814156853823",
+      "296228223778/984930291881790849",
+      "4112327288882/62050608388552823487",
+      "57258771448258/3909188328478827879681"
+    ],
+    "hankel_s1_determinants_sizes_1_to_4": [
+      "286/315",
+      "424/59535",
+      "160/992436543",
+      "0"
+    ],
+    "hankel_s2_determinants_sizes_1_to_3": [
+      "358/3969",
+      "200/15752961",
+      "0"
+    ],
+    "indexing_checks": 12,
+    "hankel_checks": 7
+  },
+  "rows": [
+    {
+      "id": "esee_01_corpus_normalization",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The normalized coefficient generating function is entire and has unit constant term.",
+      "formula": "H_lambda(z)=F_lambda(z)/F_lambda(0)=sum_(k>=0)d_k(lambda)z^k, H_lambda(0)=1, and H_lambda is entire",
+      "proof_boundary": "Known analytic normalization only; no zero-location conclusion."
+    },
+    {
+      "id": "esee_02_log_derivative_indexing",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The shifted signed Edrei-log powers are exactly the Taylor coefficients of the signed logarithmic derivative.",
+      "formula": "a_r:=(-1)^r*[z^r](H'(z)/H(z))=p_(r+1)",
+      "proof_boundary": "Formal identity near zero; audited independently at exact rational coefficients."
+    },
+    {
+      "id": "esee_03_sokal_log_derivative_criterion",
+      "role": "classical_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Sokal's logarithmic-derivative criterion makes the all-order shifted Stieltjes property equivalent to LP+ for an entire function.",
+      "formula": "For entire H with H(0)!=0: H in LP+ <=> (a_r)_(r>=0) is a Stieltjes moment sequence",
+      "proof_boundary": "The criterion identifies an endpoint-equivalent target; it does not prove the Stieltjes antecedent for zeta."
+    },
+    {
+      "id": "esee_04_unique_edrei_measure",
+      "role": "classical_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Entireness forces any Stieltjes representing measure for the logarithmic derivative into the discrete Edrei zero-measure form with integer residues.",
+      "formula": "a_r=integral_[0,infinity)x^r*dnu(x), nu=gamma*delta_0+sum_j m_j*beta_j*delta_(beta_j), gamma>=0, beta_j>0, m_j in Z_(>=1), sum_j m_j*beta_j<infinity",
+      "proof_boundary": "Conditional on the all-order Stieltjes property."
+    },
+    {
+      "id": "esee_05_stieltjes_transform_identity",
+      "role": "exact_equivalence",
+      "readiness": "ready_to_apply",
+      "claim": "The representing measure is equivalently a Stieltjes-transform representation of the logarithmic derivative.",
+      "formula": "H'(z)/H(z)=integral_[0,infinity)dnu(x)/(1+x*z)=gamma+sum_j m_j*beta_j/(1+beta_j*z)",
+      "proof_boundary": "An exact target representation, not an established representation for H_0."
+    },
+    {
+      "id": "esee_06_hankel_psd_criterion",
+      "role": "classical_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The Stieltjes moment property is equivalent to positivity of both unshifted and once-shifted Hankel quadratic forms at every finite size.",
+      "formula": "a is Stieltjes <=> (a_(i+j))_(i,j>=0) and (a_(i+j+1))_(i,j>=0) are positive semidefinite on every finite block",
+      "proof_boundary": "All sizes are required; finite blocks remain diagnostics."
+    },
+    {
+      "id": "esee_07_strict_two_column_target",
+      "role": "sufficient_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "Strict positivity of the two leading power-Hankel columns s=1 and s=2 at every order is a clean sufficient endpoint theorem.",
+      "formula": "D_(m,1)=det(p_(i+j+1))_(i,j=0)^m>0 and D_(m,2)=det(p_(i+j+2))_(i,j=0)^m>0 for every m>=0 => a is Stieltjes",
+      "proof_boundary": "Open for all m; currently checked only on a finite staircase."
+    },
+    {
+      "id": "esee_08_stieltjes_s_fraction",
+      "role": "classical_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "A nonnegative Stieltjes continued fraction is an exact alternative all-order certificate for the same shifted moment sequence.",
+      "formula": "a is Stieltjes <=> sum_(r>=0)a_r*t^r has a formal Stieltjes continued fraction with nonnegative coefficients, including terminating cases",
+      "proof_boundary": "Requires every continued-fraction coefficient or a valid terminating certificate."
+    },
+    {
+      "id": "esee_09_unified_endpoint",
+      "role": "exact_equivalence",
+      "readiness": "ready_to_apply",
+      "claim": "The Edrei-log Stieltjes target joins the already unified coefficient-PF and Jensen-window endpoint.",
+      "formula": "c is PF-infinity <=> H is LP+ <=> a_r=p_(r+1) is Stieltjes <=> every shifted Jensen window is finite PF-infinity",
+      "proof_boundary": "Equivalence of targets only; no endpoint statement is proved for zeta."
+    },
+    {
+      "id": "esee_10_finite_evidence_alignment",
+      "role": "finite_evidence_map",
+      "readiness": "diagnostic_validated",
+      "claim": "The existing log-sign, power-Hankel, and recurrence artifacts test finite pieces of this exact Stieltjes target.",
+      "formula": "320 log-sign rows; 4205 power-Hankel rows; 55 positive recurrence rows through order 12",
+      "proof_boundary": "Finite evidence only; higher recurrence orders are inconclusive and all-order positivity is open."
+    },
+    {
+      "id": "esee_11_original_hankel_separation",
+      "role": "object_separation_guard",
+      "readiness": "guard_validated",
+      "claim": "The viable Edrei-log Hankel target is not invalidated by the order-ten failure of the original A_k signed-Hankel antecedent.",
+      "formula": "Hankel matrices of a_r=p_(r+1) are nonlinear Edrei-log objects and are not the original signed-Hankel matrices of A_k",
+      "proof_boundary": "Prevents conflation of two different Hankel constructions."
+    },
+    {
+      "id": "esee_12_finite_prefix_guard",
+      "role": "forbidden_promotion",
+      "readiness": "guard_validated",
+      "claim": "No finite determinant or recurrence prefix enters the all-order equivalence.",
+      "formula": "finitely many positive D_(m,s), log signs, or recurrence coefficients do not imply the all-order Stieltjes moment property",
+      "proof_boundary": "Blocks finite-to-infinite extrapolation."
+    },
+    {
+      "id": "esee_13_phi_ratio_target",
+      "role": "xi_phi_exact_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "The Phi moment integral gives an exact ratio whose proof as a Stieltjes function would establish the endpoint noncircularly.",
+      "formula": "H_lambda'(z)/H_lambda(z)=[integral_R exp(lambda*u^2)*Phi(u)*u*sinh(u*sqrt(z))/(2*sqrt(z))*du]/[integral_R exp(lambda*u^2)*Phi(u)*cosh(u*sqrt(z))*du]",
+      "proof_boundary": "The ratio identity is exact; its Stieltjes property is open and does not follow from positivity of the integrands."
+    },
+    {
+      "id": "esee_14_positive_mixture_guard",
+      "role": "positive_mixture_guard",
+      "readiness": "guard_validated",
+      "claim": "Positive mixing of fixed-scale LP+ kernels is not a preservation theorem for the logarithmic-derivative Stieltjes class.",
+      "formula": "positivity of the Phi integral or fixed-scale LP+ kernels does not imply that their positive mixture has Stieltjes logarithmic derivative",
+      "proof_boundary": "The existing exact scale-mixture countermodel remains active."
+    }
+  ]
+}

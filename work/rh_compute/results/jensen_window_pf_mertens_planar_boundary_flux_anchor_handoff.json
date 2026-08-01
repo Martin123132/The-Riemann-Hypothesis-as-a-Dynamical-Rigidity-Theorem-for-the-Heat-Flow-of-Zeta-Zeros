@@ -1,0 +1,371 @@
+{
+  "kind": "jensen_window_pf_mertens_planar_boundary_flux_anchor_handoff",
+  "date": "2026-07-24",
+  "status": "exact joined boundary-flux and rank-one anchor reduction with one open Mobius energy gate",
+  "source": {
+    "planar_parent": "outputs/jensen_window_pf_mertens_planar_abel_handoff.md",
+    "antidiagonal_parent": "outputs/jensen_window_pf_mertens_planar_incidence_antidiagonal_handoff.md",
+    "kernel_parent": "outputs/jensen_window_pf_mertens_truncated_half_odd_kernel_handoff.md",
+    "formal_core": "outputs/formal_core.md"
+  },
+  "parameters": {
+    "normalization": "N=2K+1",
+    "mode_cutoff": "R=ceil(K^(1-alpha/2))",
+    "current_support": "K<n<2K",
+    "future_support": "2K<=n<4K",
+    "future_weight": "b_n=(2K)^alpha(4K-n)n^(-1-alpha)"
+  },
+  "rows": [
+    {
+      "id": "pbfah_01_parameters",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "N=2K+1, q_r=2r-1, theta_r=q_r*pi/N, and phi_r(i)=2*N^(-1/2)sin(i*theta_r).",
+      "proof_boundary": "The retained modes are 1<=r<=R; no asymptotic estimate is asserted."
+    },
+    {
+      "id": "pbfah_02_ordinary_feature",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "With e_r=phi_r(K), f_r(K+i)=phi_r(i) for 1<=i<K, f_r(n)=b_n e_r for 2K<=n<4K, and f_r=0 outside the support, G(n,m)=sum_r f_r(n)f_r(m)/q_r^2.",
+      "proof_boundary": "This is the truncated ordinary-Mobius pullback from the parent handoff."
+    },
+    {
+      "id": "pbfah_03_global_flux",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For m=n+h and delta f_r(t)=f_r(t)-f_r(t+1), Delta W(n,h)=sum_r[f_r(n)delta f_r(m)-f_r(n+1)delta f_r(m+1)]/q_r^2.",
+      "proof_boundary": "The identity is finite and modewise; it supplies no Mobius cancellation."
+    },
+    {
+      "id": "pbfah_04_current_interior",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For n=K+i and m=K+j<=2K-2, the global flux specializes to the signed current-current curvature used in Corollary 11.22Z.7.",
+      "proof_boundary": "This recovers the anti-diagonal component but does not separate it safely from its terminal boundary."
+    },
+    {
+      "id": "pbfah_05_second_transition",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "At m=2K-1 the mode numerator is phi_r(i)[phi_r(K-1)-e_r]-phi_r(i+1)e_r d_(2K).",
+      "proof_boundary": "Summing with q_r^(-2) reproduces P(i,K-1)-p_i-p_(i+1)d_(2K)."
+    },
+    {
+      "id": "pbfah_06_current_future",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For current n=K+i and future m, the mode numerator is e_r[(phi_r(i)-phi_r(i+1))d_m+phi_r(i+1)(d_m-d_(m+1))].",
+      "proof_boundary": "Both terms must remain signed before summing cells or modes."
+    },
+    {
+      "id": "pbfah_07_first_transition",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "At n=2K-1 and future m, the mode numerator is e_r[phi_r(K-1)-e_r]d_m+e_r^2(d_m-d_(m+1)).",
+      "proof_boundary": "Summing with q_r^(-2) reproduces p_(K-1)d_m-c d_(m+1)."
+    },
+    {
+      "id": "pbfah_08_future_future",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For 2K<=n<m, the mode numerator is e_r^2[b_n(d_m-d_(m+1))+d_n d_(m+1)].",
+      "proof_boundary": "Its geometric sign is nonnegative, but its Mobius prefix pairing is not thereby estimated."
+    },
+    {
+      "id": "pbfah_09_endpoint_symmetry",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For odd q_r, phi_r(K+1)=phi_r(K)=e_r.",
+      "proof_boundary": "This is a finite trigonometric endpoint identity."
+    },
+    {
+      "id": "pbfah_10_endpoint_recurrence",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "The sine recurrence gives phi_r(K-1)=(2cos(theta_r)-1)e_r.",
+      "proof_boundary": "No small-angle approximation is used."
+    },
+    {
+      "id": "pbfah_11_smoothed_endpoint_jump",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "phi_r(K-1)-e_r=-4sin^2(theta_r/2)e_r=-(pi^2 q_r^2/N^2)sinc^2(theta_r/2)e_r.",
+      "proof_boundary": "The q_r^2 factor cancels the kernel denominator only in this endpoint jump."
+    },
+    {
+      "id": "pbfah_12_second_transition_smoothing",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "The first part of the m=2K-1 transition equals -(pi^2/N^2)sum_r phi_r(i)e_r sinc^2(theta_r/2); the remaining term carries d_(2K).",
+      "proof_boundary": "This smoothing does not control the signed prefix paired with the complete transition."
+    },
+    {
+      "id": "pbfah_13_first_transition_smoothing",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "The first part of the n=2K-1 transition equals -(pi^2/N^2)sum_r e_r^2 d_m sinc^2(theta_r/2); the other part carries d_m-d_(m+1).",
+      "proof_boundary": "The formula is exact but is not an arithmetic estimate."
+    },
+    {
+      "id": "pbfah_14_lower_interface_join",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "At m=2K-1 the zero-extended CC boundary phi_r(i)phi_r(K-1) joins the CF boundary -phi_r(i)e_r-phi_r(i+1)e_r d_(2K) exactly.",
+      "proof_boundary": "Estimating the two artificial block boundaries separately can create a loss absent from the actual kernel."
+    },
+    {
+      "id": "pbfah_15_left_interface_join",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "At n=2K-1 the zero-extended CF boundary phi_r(K-1)e_r d_m joins the FF boundary -e_r^2 d_(m+1) exactly.",
+      "proof_boundary": "The join removes an artificial interface split, not the genuine current boundary contribution."
+    },
+    {
+      "id": "pbfah_16_block_split",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Write u_i=mu(K+i), v_m=mu(m), and split O into O_CC+O_CF+O_FF on the current and future supports.",
+      "proof_boundary": "The split is algebraic; estimates must retain any stated cross-block cancellation."
+    },
+    {
+      "id": "pbfah_17_current_mode_data",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Set x_r=sum_(i<K)u_i phi_r(i), D_(C,r)=sum_(i<K)u_i^2 phi_r(i)^2, gamma=sum_i u_i p_i, and c=sum_r e_r^2/q_r^2.",
+      "proof_boundary": "The scalar gamma is the weighted endpoint projection of the current mode vector."
+    },
+    {
+      "id": "pbfah_18_future_scalars",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Set beta=sum_(2K<=m<4K)v_m b_m and Q=sum_(2K<=m<4K)v_m^2 b_m^2.",
+      "proof_boundary": "Square-root cancellation for beta is not assumed."
+    },
+    {
+      "id": "pbfah_19_block_compression",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "O_CC=(1/2)sum_r(x_r^2-D_(C,r))/q_r^2, O_CF=beta*gamma, and O_FF=(c/2)(beta^2-Q).",
+      "proof_boundary": "The future interval is rank one only after its weighted Mobius sum beta is retained."
+    },
+    {
+      "id": "pbfah_20_boundary_prefix",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Put S_i^bd=S_K(K+i,K-1-i), S_i^sh=S_K(K+i,K-2-i), U_r=sum_i S_i^bd phi_r(i), and V_r=sum_i S_i^sh phi_r(i+1).",
+      "proof_boundary": "The shoulder is forced because the mixed stencil reaches m+2=2K on the top current-interior anti-diagonal."
+    },
+    {
+      "id": "pbfah_21_boundary_spectrum",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "B_CC=sum_i S_i^bd P(i,K-1)=sum_r phi_r(K-1)U_r/q_r^2, while the embedded CF shoulder A_CF=sum_i S_i^sh p_(i+1)=sum_r e_r V_r/q_r^2.",
+      "proof_boundary": "B_CC and A_CF must be joined before absolute values."
+    },
+    {
+      "id": "pbfah_22_current_reconstruction",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "O_CC=O_(CC,int)+B_CC-A_CF.",
+      "proof_boundary": "Omitting A_CF gives the zero-extended CC interior, not the actual joined curvature used in Corollary 11.22Z.7."
+    },
+    {
+      "id": "pbfah_23_joined_direct_decomposition",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "O=O_(CC,int)+B_CC-A_CF+beta*gamma+(c/2)(beta^2-Q).",
+      "proof_boundary": "This is the lossless signed join of every planar cell."
+    },
+    {
+      "id": "pbfah_24_remainder_modes",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Define Z_r=phi_r(K-1)U_r-e_r V_r+beta e_r x_r+(e_r^2/2)(beta^2-Q).",
+      "proof_boundary": "The shoulder, boundary, and anchor terms must be summed in Z_r before any modewise absolute value."
+    },
+    {
+      "id": "pbfah_25_remainder_projection",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "B_CC-A_CF+beta*gamma+(c/2)(beta^2-Q)=sum_r Z_r/q_r^2.",
+      "proof_boundary": "This closes the formerly unnamed transition/future remainder as an exact projection, not as an estimate."
+    },
+    {
+      "id": "pbfah_26_remainder_cauchy",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "|sum_r Z_r/q_r^2|^2<=(sum_r q_r^(-2))(sum_r |Z_r|^2/q_r^2)<(pi^2/8)sum_r |Z_r|^2/q_r^2.",
+      "proof_boundary": "The joined Z_r retains the cancellation between B_CC and the embedded shoulder A_CF."
+    },
+    {
+      "id": "pbfah_27_remainder_square_diagnostic",
+      "role": "conditional_calibration",
+      "status": "guard_active",
+      "statement": "sum_r|Z_r|^2/q_r^2=O_epsilon(K^epsilon) is sufficient for a subpower remainder.",
+      "proof_boundary": "It is a secondary sufficient target; the parent joined low-energy criterion remains the lossless theorem gate."
+    },
+    {
+      "id": "pbfah_28_current_energy",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Set E_C=sum_r x_r^2/q_r^2 and E_perp=E_C-gamma^2/c.",
+      "proof_boundary": "Here c>0; E_perp is the squared distance from the endpoint mode direction."
+    },
+    {
+      "id": "pbfah_29_orthogonal_anchor_completion",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "The complete low-mode energy is L=sum_r(x_r+beta e_r)^2/q_r^2=E_perp+c(beta+gamma/c)^2.",
+      "proof_boundary": "Both terms are nonnegative, so cancellation between them cannot prove the positive energy criterion."
+    },
+    {
+      "id": "pbfah_30_anchor_direction",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "The future rank-one anchor can shift only the endpoint direction gamma/c; it leaves E_perp unchanged.",
+      "proof_boundary": "It does not algebraically cancel the joined boundary flux B_CC-A_CF."
+    },
+    {
+      "id": "pbfah_31_joined_energy_gate",
+      "role": "theorem_target",
+      "status": "open",
+      "statement": "For every member of one fixed cofinal positive-alpha sequence, prove dyadic summability of K^(-alpha)[E_perp+c(beta+gamma/c)^2].",
+      "proof_boundary": "This is the earlier full low-mode energy gate in joined coordinates; no estimate is supplied here."
+    },
+    {
+      "id": "pbfah_32_boundary_cancellation_witness",
+      "role": "countermodel_gate",
+      "status": "guard_validated",
+      "statement": "For K=9, P_infinity(i,j)=pi^2 min(i,j)/19^2, and u=(-1,-1,-1,-1,-1,-1,1,1), one has O_CC=O_(CC,int)=0 and B_CC=A_CF=198pi^2/19^2.",
+      "proof_boundary": "This bounded synthetic sequence proves that omitting the shoulder manufactures a nonzero boundary remainder."
+    },
+    {
+      "id": "pbfah_33_shoulder_join_guard",
+      "role": "proof_guard",
+      "status": "guard_active",
+      "statement": "The Corollary 11.22Z.7 Y_(K,r) square-function remains a valid and potentially useful condition for the actual joined interior; the remaining theorem must use B_CC-A_CF.",
+      "proof_boundary": "No estimate may replace the shoulder by zero or bound B_CC and A_CF separately."
+    },
+    {
+      "id": "pbfah_34_mobius_finite_audit",
+      "role": "finite_validation",
+      "status": "validated_finite",
+      "statement": "For alpha=1/2 and K=16,...,1024, direct Mobius audits reproduce O_CC=O_(CC,int)+B_CC-A_CF and the full block compression; at K=1024 O_(CC,int)=2.086e-5 while B_CC=-184.3328081 and A_CF=-184.1213147.",
+      "proof_boundary": "The table is finite diagnostic evidence only and proves no asymptotic cancellation."
+    },
+    {
+      "id": "pbfah_35_proof_boundary",
+      "role": "proof_guard",
+      "status": "guard_active",
+      "statement": "The flux, joins, block compression, boundary spectrum, orthogonal completion, and countermodel are exact.",
+      "proof_boundary": "No Mobius energy estimate, reciprocal-tail theorem, RH, PF-infinity, Lambda<=0, or Clay-prize result is proved."
+    }
+  ],
+  "mobius_audit": {
+    "alpha": 0.5,
+    "rows": [
+      {
+        "K": 16,
+        "R": 8,
+        "O_CC": 0.0112021851505,
+        "B_CC": -1.64707693737,
+        "A_CF": -1.65999311032,
+        "joined_boundary": 0.0129161729502,
+        "O_CC_int": -0.00171398779971,
+        "anchor_correction": -0.606047689794,
+        "O_total": -0.594845504643
+      },
+      {
+        "K": 32,
+        "R": 14,
+        "O_CC": -0.258233497456,
+        "B_CC": -3.3956430504,
+        "A_CF": -3.13823518152,
+        "joined_boundary": -0.257407868874,
+        "O_CC_int": -0.00082562858183,
+        "anchor_correction": -0.338634157266,
+        "O_total": -0.596867654722
+      },
+      {
+        "K": 64,
+        "R": 23,
+        "O_CC": -0.285714586905,
+        "B_CC": -9.87073687071,
+        "A_CF": -9.5849702148,
+        "joined_boundary": -0.285766655914,
+        "O_CC_int": 5.20690090173e-05,
+        "anchor_correction": -0.289114323711,
+        "O_total": -0.574828910616
+      },
+      {
+        "K": 128,
+        "R": 39,
+        "O_CC": -0.308845847746,
+        "B_CC": -20.950184064,
+        "A_CF": -20.6412849618,
+        "joined_boundary": -0.30889910222,
+        "O_CC_int": 5.32544736735e-05,
+        "anchor_correction": -0.277062237592,
+        "O_total": -0.585908085338
+      },
+      {
+        "K": 256,
+        "R": 64,
+        "O_CC": -0.337635715345,
+        "B_CC": -47.8276172227,
+        "A_CF": -47.4901484097,
+        "joined_boundary": -0.337468812975,
+        "O_CC_int": -0.000166902369834,
+        "anchor_correction": -0.268082212656,
+        "O_total": -0.605717928
+      },
+      {
+        "K": 512,
+        "R": 108,
+        "O_CC": -0.311239977615,
+        "B_CC": -88.8508867578,
+        "A_CF": -88.5396892323,
+        "joined_boundary": -0.311197525512,
+        "O_CC_int": -4.24521027469e-05,
+        "anchor_correction": -0.295508209027,
+        "O_total": -0.606748186642
+      },
+      {
+        "K": 1024,
+        "R": 182,
+        "O_CC": -0.211472500994,
+        "B_CC": -184.332808071,
+        "A_CF": -184.12131471,
+        "joined_boundary": -0.21149336131,
+        "O_CC_int": 2.08603166243e-05,
+        "anchor_correction": -0.402560286509,
+        "O_total": -0.614032787502
+      }
+    ],
+    "status": "finite_diagnostic_only"
+  },
+  "summary": {
+    "row_count": 35,
+    "exact_reduction_count": 29,
+    "conditional_calibration_count": 1,
+    "proof_guard_count": 2,
+    "countermodel_count": 1,
+    "finite_validation_count": 1,
+    "open_joint_energy_gate_count": 1,
+    "global_flux_proved": true,
+    "all_remaining_cells_projected": true,
+    "interface_joins_proved": true,
+    "shoulder_join_proved": true,
+    "block_compression_proved": true,
+    "boundary_cancellation_witness_proved": true,
+    "orthogonal_anchor_completion_proved": true,
+    "interior_projection_estimate_proved": false,
+    "joint_mobius_energy_proved": false,
+    "full_reciprocal_tail_proved": false,
+    "rh_proved": false,
+    "pf_infinity_proved": false,
+    "lambda_le_zero_proved": false
+  },
+  "proof_boundary": "Exact joined algebra, one countermodel, and finite diagnostics only. The joint Mobius energy estimate remains open."
+}

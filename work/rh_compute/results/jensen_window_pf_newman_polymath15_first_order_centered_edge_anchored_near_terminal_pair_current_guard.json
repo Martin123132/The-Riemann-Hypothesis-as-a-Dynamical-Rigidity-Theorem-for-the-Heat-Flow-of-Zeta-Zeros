@@ -1,0 +1,209 @@
+{
+  "counts": {
+    "abel_gaps": 0,
+    "arb_point_witnesses": 2,
+    "carrier_jet_limits": 4,
+    "complete_aggregate_counterexamples": 0,
+    "contact_exclusions": 0,
+    "edge_jet_limits": 4,
+    "exact_pair_polarizations": 1,
+    "near_terminal_phase_limits": 1,
+    "negative_pair_symbols": 1,
+    "positive_pair_symbols": 1,
+    "rows": 12,
+    "uniform_termwise_edge_absorptions": 0
+  },
+  "date": "2026-07-31",
+  "exact": {
+    "path": "Fix p in [-1,1], theta=(1-p)/2, a=N+theta, q=2tL^2=1, and n=N-m with fixed integer m>=1; let N->infinity.",
+    "pi_provenance": "The pi in Q, the saddle phase, and the near-terminal ratio is inherited from the completed-zeta and Riemann-Siegel normalization. It is not fitted from a circle, polygon, or plot.",
+    "q": "Q(p)=exp[-pi*i(p^2/2-p+3/8)] and S_a=kappa_N*T_0",
+    "route_guard": "No proof may absorb the interior atoms into the signed edge one at a time by asserting K(v_edge+v_n)<0 or C_(e,n)<-K_edge-K_n uniformly.",
+    "sign_reversal": "For m=3, P_3(-5/8)>1/10 while P_3(0)<-2. By convergence, the retained edge plus the N-3 carrier has both projective-current orientations on sufficiently high physical q=1 cells.",
+    "surviving_target": "The complete Xi-specific signed cross aggregate C_cross<R_diag, or the endpoint-complete division-free Abel gap, remains open. Other carriers may provide essential cancellation."
+  },
+  "interval_certificate": {
+    "negative_margin": "P_3(0)<-2",
+    "negative_witness": {
+      "cross_current_ball": "[0.9918686782750220695180833578904217710702535089133473974158383706998938 +/- 3.57e-57]",
+      "edge_current_ball": "[-0.06197020203301425032648159499887917331992952714982249369512212021062424 +/- 1.29e-58]",
+      "interior_current_ball": "[-3.069533721219977391168399993679740160802066985546525161134100509673197 +/- 1.48e-56]",
+      "m": 3,
+      "p": "0/1",
+      "pair_current_ball": "[-2.139635244977969571976798230788197563051743003783000257413015856679478 +/- 1.33e-56]",
+      "pair_lower": "[-2.139635244977969571976798230788197563051743003783000257426397828732991 +/- 4.65e-71]",
+      "pair_upper": "[-2.139635244977969571976798230788197563051743003783000257399633884625966 +/- 2.45e-70]",
+      "theta": "1/2"
+    },
+    "positive_margin": "P_3(-5/8)>1/10",
+    "positive_witness": {
+      "cross_current_ball": "[3.953026170088723516633059715814807332365779340854756228282918345333038 +/- 6.10e-56]",
+      "edge_current_ball": "[-0.1998139332633360174687505374316345147845650239709598583676971899165802 +/- 4.69e-57]",
+      "interior_current_ball": "[-3.630437957159695265937155419247687625408016906580289266658673742648787 +/- 8.52e-56]",
+      "m": 3,
+      "p": "-5/8",
+      "pair_current_ball": "[0.1227742796656922332271537591354851921731974103035071032567067219587832 +/- 6.41e-56]",
+      "pair_lower": "[0.1227742796656922332271537591354851921731974103035071031926843407801478 +/- 1.54e-71]",
+      "pair_upper": "[0.1227742796656922332271537591354851921731974103035071033207291031374187 +/- 3.29e-71]",
+      "theta": "13/16"
+    },
+    "precision_bits": 192
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_edge_anchored_near_terminal_pair_current_guard",
+  "proof_boundary": "This gate proves the fixed-m q=1 carrier phase and four-jet limits, the exact edge-carrier polarization, and opposite signs for the edge plus N-3 leading pair. It rejects uniform termwise edge absorption only. It proves no complete Xi aggregate cross-current bound, Abel gap, winding cap, contact exclusion, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "claim": "The near-terminal test stays on the physical q=1 boundary.",
+      "diagnostics": null,
+      "formula": "Fix p in [-1,1], theta=(1-p)/2, a=N+theta, q=2tL^2=1, and n=N-m with fixed integer m>=1; let N->infinity.",
+      "id": "eant_01_path",
+      "proof_boundary": "The test concerns fixed m and fixed p as N tends to infinity.",
+      "readiness": "proved",
+      "role": "cofinal path"
+    },
+    {
+      "claim": "The N-m carrier has an explicit phase relative to the terminal carrier.",
+      "diagnostics": null,
+      "formula": "z_(N-m)/z_N -> R_m(theta)=(-1)^m*exp(-4*pi*i*m*theta)",
+      "id": "eant_02_phase_ratio",
+      "proof_boundary": "The integer phase exp(-2*pi*i*m*N) is exactly one.",
+      "readiness": "proved",
+      "role": "exact asymptotic"
+    },
+    {
+      "claim": "The phase ratio follows from the saddle logarithm before projection.",
+      "diagnostics": null,
+      "formula": "2*pi*h^-2[log(1-h(theta+m))-log(1-h theta)]+2*pi*m(h^-1-theta) -> -pi(4m theta+m^2)",
+      "id": "eant_03_phase_derivation",
+      "proof_boundary": "Heat and first-correction terms vanish at this leading scale.",
+      "readiness": "proved",
+      "role": "symbolic audit"
+    },
+    {
+      "claim": "The limiting carrier is a unit complex source with explicit real coordinates.",
+      "diagnostics": null,
+      "formula": "Z_m=-Q(p)R_m(theta)=X_m+iY_m, theta=(1-p)/2, k=m+theta",
+      "id": "eant_04_carrier_source",
+      "proof_boundary": "No argument branch is selected.",
+      "readiness": "proved",
+      "role": "leading source"
+    },
+    {
+      "claim": "All four radial-subtracted carrier jets have closed leading symbols.",
+      "diagnostics": null,
+      "formula": "c_m/S_a->X_m; a*d_m/S_a->D_m=kY_m/2; a(c_(m,x)-r_Sc_m)/S_a->D_m; a^2(d_(m,x)-r_Sd_m)/S_a->N_m=Y_m/(16*pi)-k^2X_m/4",
+      "id": "eant_05_carrier_jets",
+      "proof_boundary": "The Y/(16*pi) term from u_x is retained.",
+      "readiness": "proved",
+      "role": "four-jet asymptotic"
+    },
+    {
+      "claim": "The retained edge supplies its four already-certified leading jets.",
+      "diagnostics": null,
+      "formula": "c_e/S_a->A; a*d_e/S_a->B; a(c_(e,x)-r_Sc_e)/S_a->B; a^2(d_(e,x)-r_Sd_e)/S_a->M",
+      "id": "eant_06_edge_jets",
+      "proof_boundary": "This does not alter the finite-height edge sign theorem.",
+      "readiness": "proved",
+      "role": "inherited theorem"
+    },
+    {
+      "claim": "The edge-carrier cross and pair symbols retain every mixed term.",
+      "diagnostics": null,
+      "formula": "C_(e,m)=A*N_m+X_m*M-2*B*D_m; P_m(p)=(A+X_m)(M+N_m)-(B+D_m)^2=K_edge+K_m+C_(e,m)",
+      "id": "eant_07_polarization",
+      "proof_boundary": "No diagonal current is counted twice or discarded.",
+      "readiness": "proved",
+      "role": "exact algebra"
+    },
+    {
+      "claim": "The edge plus N-3 carrier is counterclockwise at p=-5/8 in the leading model.",
+      "diagnostics": {
+        "cross_current_ball": "[3.953026170088723516633059715814807332365779340854756228282918345333038 +/- 6.10e-56]",
+        "edge_current_ball": "[-0.1998139332633360174687505374316345147845650239709598583676971899165802 +/- 4.69e-57]",
+        "interior_current_ball": "[-3.630437957159695265937155419247687625408016906580289266658673742648787 +/- 8.52e-56]",
+        "m": 3,
+        "p": "-5/8",
+        "pair_current_ball": "[0.1227742796656922332271537591354851921731974103035071032567067219587832 +/- 6.41e-56]",
+        "pair_lower": "[0.1227742796656922332271537591354851921731974103035071031926843407801478 +/- 1.54e-71]",
+        "pair_upper": "[0.1227742796656922332271537591354851921731974103035071033207291031374187 +/- 3.29e-71]",
+        "theta": "13/16"
+      },
+      "formula": "P_3(-5/8)>1/10",
+      "id": "eant_08_positive",
+      "proof_boundary": "This is a 192-bit Arb point certificate.",
+      "readiness": "certified",
+      "role": "interval witness"
+    },
+    {
+      "claim": "The same pair is clockwise at p=0 in the leading model.",
+      "diagnostics": {
+        "cross_current_ball": "[0.9918686782750220695180833578904217710702535089133473974158383706998938 +/- 3.57e-57]",
+        "edge_current_ball": "[-0.06197020203301425032648159499887917331992952714982249369512212021062424 +/- 1.29e-58]",
+        "interior_current_ball": "[-3.069533721219977391168399993679740160802066985546525161134100509673197 +/- 1.48e-56]",
+        "m": 3,
+        "p": "0/1",
+        "pair_current_ball": "[-2.139635244977969571976798230788197563051743003783000257413015856679478 +/- 1.33e-56]",
+        "pair_lower": "[-2.139635244977969571976798230788197563051743003783000257426397828732991 +/- 4.65e-71]",
+        "pair_upper": "[-2.139635244977969571976798230788197563051743003783000257399633884625966 +/- 2.45e-70]",
+        "theta": "1/2"
+      },
+      "formula": "P_3(0)<-2",
+      "id": "eant_09_negative",
+      "proof_boundary": "This is a 192-bit Arb point certificate.",
+      "readiness": "certified",
+      "role": "interval witness"
+    },
+    {
+      "claim": "The physical near-terminal pair has both signs for sufficiently high q=1 cells.",
+      "diagnostics": null,
+      "formula": "For m=3, P_3(-5/8)>1/10 while P_3(0)<-2. By convergence, the retained edge plus the N-3 carrier has both projective-current orientations on sufficiently high physical q=1 cells.",
+      "id": "eant_10_reversal",
+      "proof_boundary": "No finite threshold is needed to reject a uniform theorem.",
+      "readiness": "proved",
+      "role": "asymptotic guard"
+    },
+    {
+      "claim": "Termwise edge absorption is rejected; complete aggregate cancellation remains viable.",
+      "diagnostics": null,
+      "formula": "No proof may absorb the interior atoms into the signed edge one at a time by asserting K(v_edge+v_n)<0 or C_(e,n)<-K_edge-K_n uniformly. The complete Xi-specific signed cross aggregate C_cross<R_diag, or the endpoint-complete division-free Abel gap, remains open. Other carriers may provide essential cancellation.",
+      "id": "eant_11_route",
+      "proof_boundary": "This does not falsify the complete Xi cross-current or Abel theorem.",
+      "readiness": "proved",
+      "role": "route decision"
+    },
+    {
+      "claim": "The guard narrows the route without claiming contact exclusion.",
+      "diagnostics": null,
+      "formula": "The pi in Q, the saddle phase, and the near-terminal ratio is inherited from the completed-zeta and Riemann-Siegel normalization. It is not fitted from a circle, polygon, or plot.",
+      "id": "eant_12_boundary",
+      "proof_boundary": "This artifact does not prove an aggregate cross bound, Abel gap, winding cap, contact exclusion, Lambda<=0, PF-infinity, RH, or a prize conclusion.",
+      "readiness": "proved",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "published_source": {
+      "citation": "D.H.J. Polymath, Effective approximation of heat flow evolution of the Riemann xi function, and a new upper bound for the de Bruijn-Newman constant, arXiv:1904.12438",
+      "location": "equation (53), the critical saddle, and the first correction",
+      "url": "https://arxiv.org/abs/1904.12438"
+    },
+    "source_sha256": {
+      "cumulative_handoff": "6e4e9b178ddca73e3834b99fa9957b8ee15c8a8f92af4e6b9fbcbc078a0c49e6",
+      "edge_builder": "ff4cc7d5983a7e3291cd7a020497d3c49ab9b87cbc2ee2eda9f791853cfee754",
+      "edge_symbol": "66a47359d8c9b457bcf98b43686b0bb3d1b51423d0de1f1222d21f5efa8d9e2b",
+      "finite_edge": "3fd52e8a0927865e95daaea00507eca7e1fdda363f1dd55c84dca4165fdf13e8",
+      "interior_current": "c1282eac2b2d22c35055880f4eb2607b855446a3b678caf0c072ca983c660419",
+      "near_terminal": "1bd3da9a730296f6ca95884874ca83ecbf38d8c113a8a4f0725addb08507da30"
+    }
+  },
+  "status": "asymptotic edge-anchored near-terminal pair-current sign-reversal guard with two Arb witnesses",
+  "symbolic_certificate": {
+    "carrier_jets": "c_m/S_a->X_m; a*d_m/S_a->D_m=kY_m/2; a(c_(m,x)-r_Sc_m)/S_a->D_m; a^2(d_(m,x)-r_Sd_m)/S_a->N_m=Y_m/(16*pi)-k^2X_m/4",
+    "carrier_source": "Z_m=-Q(p)R_m(theta)=X_m+iY_m, theta=(1-p)/2, k=m+theta",
+    "cross_symbol": "C_(e,m)=A*N_m+X_m*M-2*B*D_m",
+    "edge_jets": "c_e/S_a->A; a*d_e/S_a->B; a(c_(e,x)-r_Sc_e)/S_a->B; a^2(d_(e,x)-r_Sd_e)/S_a->M",
+    "pair_symbol": "P_m(p)=(A+X_m)(M+N_m)-(B+D_m)^2=K_edge+K_m+C_(e,m)",
+    "phase_limit": "z_(N-m)/z_N -> R_m(theta)=(-1)^m*exp(-4*pi*i*m*theta)",
+    "reduced_phase_limit": "2*pi*h^-2[log(1-h(theta+m))-log(1-h theta)]+2*pi*m(h^-1-theta) -> -pi(4m theta+m^2)"
+  }
+}

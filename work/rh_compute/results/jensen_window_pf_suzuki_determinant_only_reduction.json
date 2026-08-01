@@ -1,0 +1,185 @@
+{
+  "assumptions": [
+    "L is the Riemann zeta function and xi is its nonzero entire completion",
+    "omega>0, nu is a positive integer, and nu*omega>1",
+    "Suzuki's K_(omega,nu) is real, continuous, supported in [0,infinity), and has an absolutely convergent high-strip transform",
+    "both Fredholm determinants are nonzero for every finite truncation time"
+  ],
+  "coordinate_check": {
+    "denominator_argument": "3/4+7i",
+    "numerator_argument": "1/2+7i",
+    "omega": "1/8",
+    "rho": "3/4+7i",
+    "shift": "1/4",
+    "z": "-7+i/8"
+  },
+  "date": "2026-07-23",
+  "exact": {
+    "causal_multiplier": "There is M in H-infinity({Re(s)>0}) with ||M||_infinity=||G||<=1 and L(Gf)(s)=M(s)L(f)(s) for causal f",
+    "cofinal_accumulation": "If omega_n decreases strictly to 0, an off-line zero rho would force distinct zeros rho-2*omega_n -> rho for all large n, contradicting isolation of zeros of nonzero entire xi",
+    "dense_form": "D=L2_c(R)={compactly supported L2 functions}; B(f,g)=integral_R integral_R K(x+y)f(y)conj(g(x)) dy dx",
+    "determinant_only_equivalence": "RH iff there exist strictly decreasing omega_n->0 and positive integers nu_n with nu_n*omega_n>1 such that det(I+/-K_(omega_n,nu_n)[t])!=0 for every n and every t>=0",
+    "determinant_to_contraction": "det(I+/-K[t])!=0 for every t>=0 implies ||K[t]||<1 for every finite t",
+    "global_hankel_extension": "B extends uniquely to a bounded Hermitian form on L2(R), represented by a self-adjoint H with ||H||<=1",
+    "high_strip_identification": "For Re(s)>c: M(s)=integral_0^infinity K(x)e^(-s*x)dx=Theta_(omega,nu)(i*s)",
+    "open_arithmetic_gate": "The reduction does not establish the antecedent: one still must prove ||K_(omega_n,nu_n)[t]||<1 for every finite t on a cofinal omega_n sequence without assuming RH or HB",
+    "pole_removal": "The meromorphic identity theorem makes every apparent pole of the xi quotient in C+ removable",
+    "probe_nonvanishing": "For q=1_[0,1], L(q)(s)=(1-e^(-s))/s!=0 when Re(s)>0, so the high-strip multiplier identity can be divided by L(q)(s)",
+    "reflection_convolution": "Jf(x)=f(-x), G=H*J; for f in D, (Gf)(x)=integral_R K(x-y)f(y)dy=(K*f)(x)",
+    "shifted_zero": "If xi(rho)=0 and Re(rho)>1/2+omega, pole removal at z=-Im(rho)+i*(Re(rho)-1/2-omega) forces xi(rho-2*omega)=0",
+    "single_pair_guard": "For one fixed omega, holomorphic continuation permits a denominator zero to be canceled by a numerator zero at rho-2*omega; cofinal distinct shifts are essential",
+    "terminal_redundancy": "Within Suzuki's cofinal criterion, the terminal condition J_(omega_n,nu_n)(t;z,z)->0 follows after the determinant conditions imply RH; it is not an additional logical premise",
+    "theta_extension": "Theta_tilde(z)=M(-i*z) belongs to H-infinity(C+) with ||Theta_tilde||_infinity<=1 and agrees with [xi(1/2-omega-i*z)/xi(1/2+omega-i*z)]^nu on Im(z)>c",
+    "translation_causality": "G commutes with every translation and P_a G=P_a G P_a for P_a=1_(-infinity,a); thus G is bounded, translation-invariant, and causal",
+    "uniform_form_bound": "For f,g in D and t above both supports: B(f,g)=<K[t]f,g>, hence |B(f,g)|<=||f||_2||g||_2"
+  },
+  "kind": "jensen_window_pf_suzuki_determinant_only_reduction",
+  "proof_boundary": "This artifact proves, modulo the cited standard causal-multiplier theorem, that a cofinal sequence of Suzuki all-time determinant conditions implies RH and hence makes Suzuki's terminal J-limit premise redundant in that cofinal criterion. It does not prove that the determinant conditions hold for zeta, does not rule out common-zero cancellation for one fixed omega, and does not prove RH or Lambda<=0. The determinant-only equivalence is a new corpus theorem candidate and should receive independent expert review before being represented as a published result.",
+  "rows": [
+    {
+      "claim": "Suzuki's all-time determinant condition supplies a uniform norm-one bound on every compactly supported test pair.",
+      "formula": "det(I+/-K[t])!=0 for every t>=0 implies ||K[t]||<1 for every finite t",
+      "id": "sdr_01_all_history_contraction",
+      "proof_boundary": "This uses the continuous compact self-adjoint truncation path from K[0]=0.",
+      "readiness": "available_exact",
+      "role": "exact_input_reformulation"
+    },
+    {
+      "claim": "The local truncations define one compatible Hankel form on compactly supported functions.",
+      "formula": "D=L2_c(R)={compactly supported L2 functions}; B(f,g)=integral_R integral_R K(x+y)f(y)conj(g(x)) dy dx",
+      "id": "sdr_02_dense_hankel_form",
+      "proof_boundary": "For each test pair, any t above both supports gives the same value.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "All-time strict contractivity bounds the dense Hankel form by one independently of support size.",
+      "formula": "For f,g in D and t above both supports: B(f,g)=<K[t]f,g>, hence |B(f,g)|<=||f||_2||g||_2",
+      "id": "sdr_03_uniform_form_bound",
+      "proof_boundary": "Strict constants may approach one; only the uniform non-strict bound is used.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "The dense form has a unique bounded global Hankel-operator extension.",
+      "formula": "B extends uniquely to a bounded Hermitian form on L2(R), represented by a self-adjoint H with ||H||<=1",
+      "id": "sdr_04_global_hankel_extension",
+      "proof_boundary": "This is a Riesz-representation argument and does not assume HB or RH.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "Reflection turns the global Hankel extension into convolution by Suzuki's supported kernel.",
+      "formula": "Jf(x)=f(-x), G=H*J; for f in D, (Gf)(x)=integral_R K(x-y)f(y)dy=(K*f)(x)",
+      "id": "sdr_05_reflection_to_convolution",
+      "proof_boundary": "Equality is first distributional on compact tests and then holds in L2.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The reflected operator is a bounded causal translation-invariant L2 operator.",
+      "formula": "G commutes with every translation and P_a G=P_a G P_a for P_a=1_(-infinity,a); thus G is bounded, translation-invariant, and causal",
+      "id": "sdr_06_causal_translation_invariance",
+      "proof_boundary": "Causality uses only K(x)=0 for x<0.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "The causal L2 multiplier theorem gives a bounded holomorphic transfer function on the right half-plane.",
+      "formula": "There is M in H-infinity({Re(s)>0}) with ||M||_infinity=||G||<=1 and L(Gf)(s)=M(s)L(f)(s) for causal f",
+      "id": "sdr_07_hardy_multiplier",
+      "proof_boundary": "This is the standard Paley-Wiener multiplier theorem, not an arithmetic assumption.",
+      "readiness": "ready_to_apply",
+      "role": "published_functional_analysis"
+    },
+    {
+      "claim": "The transfer function is Suzuki's absolutely convergent high-strip Laplace transform.",
+      "formula": "For Re(s)>c: M(s)=integral_0^infinity K(x)e^(-s*x)dx=Theta_(omega,nu)(i*s)",
+      "id": "sdr_08_high_strip_identification",
+      "proof_boundary": "For q=1_[0,1], L(q)(s)=(1-e^(-s))/s!=0 when Re(s)>0, so the high-strip multiplier identity can be divided by L(q)(s)",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "All-time determinant nonvanishing forces the meromorphic xi quotient to have a contractive H-infinity extension to C+.",
+      "formula": "Theta_tilde(z)=M(-i*z) belongs to H-infinity(C+) with ||Theta_tilde||_infinity<=1 and agrees with [xi(1/2-omega-i*z)/xi(1/2+omega-i*z)]^nu on Im(z)>c",
+      "id": "sdr_09_theta_hardy_extension",
+      "proof_boundary": "The equality starts on Im(z)>c and extends meromorphically by identity.",
+      "readiness": "available_exact",
+      "role": "exact_consequence"
+    },
+    {
+      "claim": "Every upper-half-plane denominator zero is canceled by a numerator zero of at least the same multiplicity.",
+      "formula": "The meromorphic identity theorem makes every apparent pole of the xi quotient in C+ removable",
+      "id": "sdr_10_pole_removal",
+      "proof_boundary": "Cancellation need not make the underlying E function Hermite-Biehler for one fixed omega.",
+      "readiness": "available_exact",
+      "role": "exact_consequence"
+    },
+    {
+      "claim": "A zero to the right of the shifted critical line propagates left by exactly 2 omega.",
+      "formula": "If xi(rho)=0 and Re(rho)>1/2+omega, pole removal at z=-Im(rho)+i*(Re(rho)-1/2-omega) forces xi(rho-2*omega)=0",
+      "id": "sdr_11_shifted_zero_rule",
+      "proof_boundary": "Only existence, not multiplicity, is needed in the cofinal argument.",
+      "readiness": "available_exact",
+      "role": "exact_arithmetic_consequence"
+    },
+    {
+      "claim": "A cofinal sequence of distinct shifts rules out every zero to the right of the critical line.",
+      "formula": "If omega_n decreases strictly to 0, an off-line zero rho would force distinct zeros rho-2*omega_n -> rho for all large n, contradicting isolation of zeros of nonzero entire xi",
+      "id": "sdr_12_cofinal_accumulation",
+      "proof_boundary": "The functional equation then rules out zeros to the left.",
+      "readiness": "available_exact",
+      "role": "exact_arithmetic_consequence"
+    },
+    {
+      "claim": "Suzuki's cofinal RH criterion can be sharpened by deleting its terminal-kernel premise.",
+      "formula": "RH iff there exist strictly decreasing omega_n->0 and positive integers nu_n with nu_n*omega_n>1 such that det(I+/-K_(omega_n,nu_n)[t])!=0 for every n and every t>=0",
+      "id": "sdr_13_determinant_only_equivalence",
+      "proof_boundary": "The implication from RH is Suzuki's conditional all-time contraction theorem; the reverse implication is rows sdr_01 through sdr_12.",
+      "readiness": "internally_audited",
+      "role": "theorem_candidate"
+    },
+    {
+      "claim": "For a cofinal family satisfying the determinant premise, Suzuki's terminal limit follows after RH and is logically redundant.",
+      "formula": "Within Suzuki's cofinal criterion, the terminal condition J_(omega_n,nu_n)(t;z,z)->0 follows after the determinant conditions imply RH; it is not an additional logical premise",
+      "id": "sdr_14_terminal_redundancy",
+      "proof_boundary": "This does not derive the terminal limit directly from one fixed determinant family.",
+      "readiness": "internally_audited",
+      "role": "exact_corollary_candidate"
+    },
+    {
+      "claim": "A single omega is insufficient because common-zero cancellation can survive.",
+      "formula": "For one fixed omega, holomorphic continuation permits a denominator zero to be canceled by a numerator zero at rho-2*omega; cofinal distinct shifts are essential",
+      "id": "sdr_15_single_pair_cancellation_guard",
+      "proof_boundary": "Do not promote one fixed contractive family to a zero-free half-plane without an extra no-common-zero theorem.",
+      "readiness": "guard_validated",
+      "role": "exact_route_guard"
+    },
+    {
+      "claim": "The determinant-only equivalence isolates one remaining Suzuki-side arithmetic gate.",
+      "formula": "The reduction does not establish the antecedent: one still must prove ||K_(omega_n,nu_n)[t]||<1 for every finite t on a cofinal omega_n sequence without assuming RH or HB",
+      "id": "sdr_16_open_all_time_gate",
+      "proof_boundary": "No proof of this all-time signed contraction gate is presently in the corpus.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    }
+  ],
+  "sources": [
+    {
+      "relevant_results": "Theorems 2.3-2.4; Propositions 4.1-4.4 in arXiv v3",
+      "title": "Masatoshi Suzuki, Hamiltonians arising from L-functions in the Selberg class",
+      "url": "https://arxiv.org/abs/1606.05726"
+    },
+    {
+      "relevant_results": "classical L2 causal multiplier equivalence, equations (1.1) and (1.3)",
+      "title": "Guiver, Logemann, and Opmeer, Operator-valued multiplier theorems for causal translation-invariant operators",
+      "url": "https://link.springer.com/article/10.1007/s00498-024-00387-4"
+    },
+    {
+      "path": "outputs/jensen_window_pf_suzuki_spectral_frontier.md",
+      "title": "Suzuki spectral frontier"
+    }
+  ],
+  "status": "internally audited exact reduction and theorem candidate; external expert review still required before publication"
+}

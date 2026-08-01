@@ -1,0 +1,126 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_critical_dirichlet_first_correction_gate",
+  "date": "2026-07-26",
+  "status": "exact first signed correction for the critical Dirichlet blocks with a guarded second-order remainder programme",
+  "proof_boundary": "This artifact proves the shifted-ratio identity, Gaussian moment, first correction formula, and logarithmic remainder decomposition. It does not certify the uniform C_D/T^2 remainder, the resulting global exp(-5L/4) C^1 constants, the cutoff collar, the strict signed contact inequality, contact exclusion, Lambda<=0, or RH.",
+  "exact": {
+    "heat_shift": "r_(t,n)(s)=exp(-t*alpha_n^2/4)*integral exp(-sqrt(t)*v*alpha_n)r_(0,n)(s+w(v))dmu(v), w(v)=sqrt(t)*v+t*alpha_n/2",
+    "definitions": "alpha_n=alpha(s)-log(n), dmu(v)=pi^(-1/2)exp(-v^2)dv",
+    "scaled_gamma_factorization": "r_(0,n)(s)=M_0(s)*n^(-s)*GammaStar(s/2), GammaStar(z)=Gamma(z)/(exp(-z)z^z*sqrt(2*pi/z))",
+    "leading_main": "m_(t,n)(s)=M_0(s)*n^(-s)*exp(t*alpha_n^2/4)",
+    "exact_relative_ratio": "r_(t,n)(s)/m_(t,n)(s)=integral GammaStar((s+w)/2)*exp(log(M_0(s+w))-log(M_0(s))-alpha(s)w)dmu(v)",
+    "leading_cancellation": "-t*alpha_n^2/4-sqrt(t)*v*alpha_n+alpha_n*w=t*alpha_n^2/4",
+    "gaussian_moment": "integral w(v)^2 dmu(v)=t/2+t^2*alpha_n^2/4",
+    "first_correction": "d_(t,n)(s)=1/(6s)+alpha'(s)*(t/4+t^2*alpha_n^2/8)",
+    "refined_term": "m_[1](t,n;s)=m_(t,n)(s)*(1+d_(t,n)(s))",
+    "alpha_derivatives": "alpha'(s)=-1/(2s^2)-1/(s-1)^2+1/(2s); alpha''(s)=1/s^3+2/(s-1)^3-1/(2s^2)",
+    "log_gamma_remainder": "log GammaStar(z)=1/(12z)+R_G(z), |R_G(z)|<=sec(arg(z)/2)^4/(360*|z|^3)",
+    "upper_half_plane_gamma_bound": "For z=(s+w)/2 with Im(s+w)>0, |R_G(z)|<=16*|s+w|/(45*Im(s+w)^4)",
+    "m0_taylor_remainder": "R_M=log(M_0(s+w))-log(M_0(s))-alpha(s)w-alpha'(s)w^2/2, |R_M|<=|w|^3*sup_(0<=u<=1)|alpha''(s+u*w)|/6",
+    "log_residual": "rho(v)=R_M+R_G+1/(6(s+w))-1/(6s)",
+    "central_tail_split": "Split |v|<=V and |v|>V with V=T^(1/3), T=Im(s): use the second-order expansions on the central part and the published Proposition 6.1 quadratic Gaussian envelope on the tail",
+    "per_term_target": "|r_(t,n)/m_(t,n)-(1+d_(t,n))|<=C_D/T^2 uniformly for n<=N on the critical radius-1/L collar",
+    "finite_sum_scale": "sum of the two absolute finite-main coefficient masses <=50*exp(L/4), T>=2*pi*exp(L-1)",
+    "dirichlet_residual_scale": "C_D/T^2 times 50*exp(L/4)=O(C_D*exp(-7L/4))",
+    "combined_signed_update": "DeltaJ=(DeltaA+DeltaB-DeltaC)/A_t, J_[1]=J_[0]+DeltaJ, r_[0]=DeltaJ+r_[1]",
+    "global_scale_handoff": "The peeled Dirichlet residual is O(exp(-7L/4)); the RS-C_1 endpoint and cutoff residuals are O(exp(-5L/4)) and therefore set the next global C^1 scale",
+    "uniform_target": "Prove explicit constants eta_0,eta_1 with |r_[1]|<=eta_0*exp(-5L/4), |r_[1],x|<=eta_1*L*exp(-5L/4) on L>=50, 0<tL<=25, including adjacent cutoffs, then use r_0=DeltaJ in the signed contact-normal inequality"
+  },
+  "rows": [
+    {
+      "id": "np15cdfc_01_heat_shift",
+      "role": "published_primary_input",
+      "readiness": "available_published",
+      "claim": "Polymath 15 gives an exact contour-shifted Gaussian formula for every evolved Dirichlet block.",
+      "formula": "r_(t,n)(s)=exp(-t*alpha_n^2/4)*integral exp(-sqrt(t)*v*alpha_n)r_(0,n)(s+w(v))dmu(v), w(v)=sqrt(t)*v+t*alpha_n/2; alpha_n=alpha(s)-log(n), dmu(v)=pi^(-1/2)exp(-v^2)dv",
+      "proof_boundary": "Equation (40), with its stated contour condition."
+    },
+    {
+      "id": "np15cdfc_02_scaled_gamma",
+      "role": "published_primary_input",
+      "readiness": "available_published",
+      "claim": "The exact gamma prefactor is the Polymath normalizer times the standard scaled gamma function.",
+      "formula": "r_(0,n)(s)=M_0(s)*n^(-s)*GammaStar(s/2), GammaStar(z)=Gamma(z)/(exp(-z)z^z*sqrt(2*pi/z))",
+      "proof_boundary": "Algebraic comparison of the exact xi gamma factor with M_0; DLMF supplies the signed scaled-gamma expansion."
+    },
+    {
+      "id": "np15cdfc_03_exact_relative_ratio",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "After the saddle shift, every discarded finite-sum factor is contained in one exact centered Gaussian expectation.",
+      "formula": "m_(t,n)(s)=M_0(s)*n^(-s)*exp(t*alpha_n^2/4); r_(t,n)(s)/m_(t,n)(s)=integral GammaStar((s+w)/2)*exp(log(M_0(s+w))-log(M_0(s))-alpha(s)w)dmu(v); -t*alpha_n^2/4-sqrt(t)*v*alpha_n+alpha_n*w=t*alpha_n^2/4",
+      "proof_boundary": "No asymptotic truncation in the displayed ratio."
+    },
+    {
+      "id": "np15cdfc_04_gaussian_moment",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The shifted Gaussian second moment is explicit.",
+      "formula": "integral w(v)^2 dmu(v)=t/2+t^2*alpha_n^2/4",
+      "proof_boundary": "Uses integral v dmu=0 and integral v^2 dmu=1/2."
+    },
+    {
+      "id": "np15cdfc_05_first_correction",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The complete first signed relative correction combines the scaled-gamma term with the quadratic log-M_0 term.",
+      "formula": "d_(t,n)(s)=1/(6s)+alpha'(s)*(t/4+t^2*alpha_n^2/8); m_[1](t,n;s)=m_(t,n)(s)*(1+d_(t,n)(s)); alpha'(s)=-1/(2s^2)-1/(s-1)^2+1/(2s); alpha''(s)=1/s^3+2/(s-1)^3-1/(2s^2)",
+      "proof_boundary": "Exact coefficient extraction; the size of the remainder after truncation is a separate obligation."
+    },
+    {
+      "id": "np15cdfc_06_remainder_decomposition",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The unretained logarithmic error splits into an explicit M_0 Taylor remainder, scaled-gamma remainder, and rational shift difference.",
+      "formula": "R_M=log(M_0(s+w))-log(M_0(s))-alpha(s)w-alpha'(s)w^2/2, |R_M|<=|w|^3*sup_(0<=u<=1)|alpha''(s+u*w)|/6; rho(v)=R_M+R_G+1/(6(s+w))-1/(6s)",
+      "proof_boundary": "Exact Taylor remainder identity on the chosen branch."
+    },
+    {
+      "id": "np15cdfc_07_gamma_guard",
+      "role": "analytic_guard",
+      "readiness": "conditional_ready",
+      "claim": "A published complex-sector log-gamma remainder reduces to an integrable upper-half-plane bound.",
+      "formula": "log GammaStar(z)=1/(12z)+R_G(z), |R_G(z)|<=sec(arg(z)/2)^4/(360*|z|^3); For z=(s+w)/2 with Im(s+w)>0, |R_G(z)|<=16*|s+w|/(45*Im(s+w)^4)",
+      "proof_boundary": "The DLMF bound is published; its uniform insertion into the full heat collar still needs explicit branch and denominator bookkeeping."
+    },
+    {
+      "id": "np15cdfc_08_central_tail_guard",
+      "role": "analytic_guard",
+      "readiness": "conditional_ready",
+      "claim": "A central/tail split prevents the cubic Taylor remainder from being exponentiated on the entire Gaussian line.",
+      "formula": "Split |v|<=V and |v|>V with V=T^(1/3), T=Im(s): use the second-order expansions on the central part and the published Proposition 6.1 quadratic Gaussian envelope on the tail; |r_(t,n)/m_(t,n)-(1+d_(t,n))|<=C_D/T^2 uniformly for n<=N on the critical radius-1/L collar; sum of the two absolute finite-main coefficient masses <=50*exp(L/4), T>=2*pi*exp(L-1); C_D/T^2 times 50*exp(L/4)=O(C_D*exp(-7L/4))",
+      "proof_boundary": "Architecture only. The finite constant C_D and collar monotonicity inequalities are not certified here."
+    },
+    {
+      "id": "np15cdfc_09_signed_main_update",
+      "role": "exact_definition",
+      "readiness": "ready_to_apply",
+      "claim": "The two Dirichlet corrections and the endpoint correction combine into the signed remainder model required at contact.",
+      "formula": "DeltaJ=(DeltaA+DeltaB-DeltaC)/A_t, J_[1]=J_[0]+DeltaJ, r_[0]=DeltaJ+r_[1]; The peeled Dirichlet residual is O(exp(-7L/4)); the RS-C_1 endpoint and cutoff residuals are O(exp(-5L/4)) and therefore set the next global C^1 scale",
+      "proof_boundary": "Exact repartition once DeltaA, DeltaB, and DeltaC are defined; the claimed scale remains conditional on the open bounds."
+    },
+    {
+      "id": "np15cdfc_10_uniform_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The first-order asymptotic programme reduces to one explicit global second-order value/first-jet estimate.",
+      "formula": "Prove explicit constants eta_0,eta_1 with |r_[1]|<=eta_0*exp(-5L/4), |r_[1],x|<=eta_1*L*exp(-5L/4) on L>=50, 0<tL<=25, including adjacent cutoffs, then use r_0=DeltaJ in the signed contact-normal inequality",
+      "proof_boundary": "Open. No strict signed contact inequality, contact exclusion, Lambda<=0, or RH is asserted."
+    }
+  ],
+  "summary": {
+    "rows": 10,
+    "exact_identities": 4,
+    "primary_source_inputs": 2,
+    "analytic_guards": 2,
+    "signed_main_definitions": 1,
+    "open_uniform_targets": 1
+  },
+  "sources": [
+    "https://arxiv.org/abs/1904.12438",
+    "https://dlmf.nist.gov/5.11",
+    "outputs/jensen_window_pf_newman_polymath15_critical_RS_C1_endpoint_peeling_contract.md",
+    "outputs/jensen_window_pf_newman_parabolic_frequency_contact_normal_hierarchy_gate.md",
+    "outputs/jensen_window_pf_newman_polymath15_critical_C1_cell_remainder_certificate.md"
+  ]
+}

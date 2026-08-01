@@ -73,7 +73,8 @@ A radius-1/L collar transfers the refined scalar remainder through one derivativ
 ## Global Composition
 
 ```text
-Combine the oscillatory-zeta theorem for every fixed tL>=c_*+epsilon at sufficiently large L, the critical transversality target on the residual high-frequency layer 0<tL<=c_*+o(1), and compact no-double-zero certificates for every bounded-L remainder, where c_*=4911678521/1933561194
+The exact moment bound and 160-bit Arb/Taylor certificate prove (H_t(x),H_t'(x))!=(0,0) for 0<=t<=1/5 and |x|<=38
+The compact no-double-zero certificates close |x|<=38. For |x|>38 set L=log(|x|/(4*pi)). The dominant-saddle theorem closes L>=50 and tL>=25, while for every fixed epsilon>0 the oscillatory-zeta theorem closes sufficiently large L with tL>=c_*+epsilon. The remaining bounded-L remainder includes 38<|x|<4*pi*exp(50) and finite existential-threshold shoulders; the remaining asymptotic layer is L>=50 and 0<tL<=c_*+o(1), where c_*=4911678521/1933561194
 If all three regions are closed, positive-boundary attainment gives Lambda<=0, hence RH
 ```
 

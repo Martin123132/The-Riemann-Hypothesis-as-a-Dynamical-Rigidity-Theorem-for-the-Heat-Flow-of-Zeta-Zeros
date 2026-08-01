@@ -1,0 +1,275 @@
+{
+  "audit": {
+    "conditional_estimate_count": 1,
+    "finite_energy_formula_checked": true,
+    "guard_count": 5,
+    "lambda_le_zero_proved": false,
+    "max_kernel_tn_checked": true,
+    "muntz_identity_checked": true,
+    "open_arithmetic_gate_count": 1,
+    "rh_proved": false,
+    "row_count": 32,
+    "theorem_candidate_count": 5,
+    "uniform_mollifier_bound_proved": false
+  },
+  "date": "2026-07-23",
+  "exact": {
+    "finite_energy_kernel": "K_X(u,v)=1/max(1,u,v)-1/X",
+    "full_muntz": "E_omega=sum_(d>=1)mu(d)d^(-omega)R_omega(x/d)",
+    "hilbert_space": "H=L2((0,infinity),dx/x^2)",
+    "partial_mellin": "Mellin(E_(omega,N))(s)=zeta(s-omega)M_N(s+omega)/s",
+    "positive_transform": "G_omega(s)=zeta(s-omega)/(s*zeta(s+omega))-A_omega/(s-1-omega)",
+    "remainder": "R_omega(y)=sum_(m<=y)m^omega-y^(1+omega)/(1+omega)"
+  },
+  "kind": "jensen_window_pf_jordan_muntz_causal_energy_bridge",
+  "proof_boundary": "The exact identities expose a finite natural-mollifier norm and a totally nonnegative max-kernel discrepancy energy. They do not prove the required uniform bound, RH, or Lambda<=0. Fixed-shift and cofinal equivalences are internally audited theorem candidates requiring independent review.",
+  "rows": [
+    {
+      "id": "jmce_01_dirichlet_series",
+      "proof_boundary": "Absolute Dirichlet-series identity only.",
+      "role": "exact_identity",
+      "statement": "For c_omega(n)=sum_(dm=n)mu(d)d^(-omega)m^omega, sum c_omega(n)n^(-s)=zeta(s-omega)/zeta(s+omega) when Re(s)>1+omega.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_02_jordan_error",
+      "proof_boundary": "Definition and residue normalization only.",
+      "role": "definition",
+      "statement": "C_omega(x)=sum_(n<=x)c_omega(n), A_omega=1/((1+omega)zeta(1+2omega)), and E_omega(x)=C_omega(x)-A_omega*x^(1+omega).",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_03_power_remainder",
+      "proof_boundary": "Definition of the generalized fractional-part remainder.",
+      "role": "definition",
+      "statement": "R_omega(y)=sum_(m<=y)m^omega-y^(1+omega)/(1+omega), with R_omega(y)=-y^(1+omega)/(1+omega) for 0<y<1.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_04_full_muntz_identity",
+      "proof_boundary": "The d>x tail is part of the identity and must not be dropped.",
+      "role": "exact_identity",
+      "statement": "E_omega(x)=sum_(d>=1)mu(d)d^(-omega)R_omega(x/d).",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_05_tail_absolute",
+      "proof_boundary": "Pointwise absolute tail convergence is not Hilbert convergence.",
+      "role": "exact_convergence",
+      "statement": "For d>x the summand is -mu(d)x^(1+omega)/((1+omega)d^(1+2omega)); hence the tail is absolutely convergent for omega>0.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_06_remainder_hilbert_space",
+      "proof_boundary": "This concerns the base remainder, not the infinite Mobius sum.",
+      "role": "exact_bound",
+      "statement": "R_omega(y)=O_omega(y^omega) at infinity and is -y^(1+omega)/(1+omega) below one, so R_omega belongs to H=L2((0,infinity),dx/x^2) exactly in the needed range 0<omega<1/2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_07_remainder_mellin",
+      "proof_boundary": "Generalized Muntz transform in its honest convergence strip.",
+      "role": "exact_transform",
+      "statement": "Integral_0^infinity R_omega(x)x^(-s)dx/x =zeta(s-omega)/s for omega<Re(s)<1+omega.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_08_unitary_dilations",
+      "proof_boundary": "Unitary orbit identity only.",
+      "role": "exact_identity",
+      "statement": "U_d f(x)=sqrt(d)f(x/d) is unitary on H, and d^(-omega)R_omega(x/d)=d^(-omega-1/2)U_dR_omega(x).",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_09_partial_mobius_sum",
+      "proof_boundary": "Every E_(omega,N) is a finite H vector.",
+      "role": "definition",
+      "statement": "E_(omega,N)=sum_(d<=N)mu(d)d^(-omega)R_omega(x/d).",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_10_partial_mellin",
+      "proof_boundary": "Finite Dirichlet polynomial; no limiting interchange is used.",
+      "role": "exact_transform",
+      "statement": "On Re(s)=1/2, Mellin(E_(omega,N))(s)=zeta(s-omega)M_N(s+omega)/s, where M_N(u)=sum_(d<=N)mu(d)d^(-u).",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_11_partial_plancherel",
+      "proof_boundary": "Exact finite-N norm, not a bound uniform in N.",
+      "role": "exact_identity",
+      "statement": "||E_(omega,N)||_H^2=(1/(2pi))integral_R |zeta(1/2-omega+it)/(1/2+it)|^2|M_N(1/2+omega+it)|^2dt.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_12_mollified_right_line",
+      "proof_boundary": "An exact weighted natural-mollifier norm on a line right of one half.",
+      "role": "exact_identity",
+      "statement": "The functional equation rewrites the integrand as W_omega(t)|zeta(sigma+it)M_N(sigma+it)|^2, sigma=1/2+omega and W_omega(t)=|chi(1/2-omega+it)|^2/|1/2+it|^2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_13_pointwise_limit",
+      "proof_boundary": "Pointwise convergence does not imply H convergence.",
+      "role": "exact_convergence",
+      "statement": "E_(omega,N)(x) tends pointwise to E_omega(x) because the tail after d>x is absolutely convergent.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_14_fatou_handoff",
+      "proof_boundary": "One-way handoff; no Bessel property is assumed.",
+      "role": "exact_implication",
+      "statement": "sup_N ||E_(omega,N)||_H<infinity implies E_omega in H by Fatou and the pointwise limit.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_15_positive_time_energy",
+      "proof_boundary": "Exact removal of the harmless negative-log-time tail.",
+      "role": "exact_identity",
+      "statement": "E_omega in H iff J_omega=integral_1^infinity |E_omega(x)|^2dx/x^2<infinity, since the known x<1 contribution is A_omega^2/(1+2omega).",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_16_positive_laplace_transform",
+      "proof_boundary": "The second term removes the residue-main-term pole at s=1+omega.",
+      "role": "exact_transform",
+      "statement": "For s=z+1/2, the positive-time transform is G_omega(s)=zeta(s-omega)/(s*zeta(s+omega))-A_omega/(s-1-omega), initially for Re(s)>1-omega.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_17_boundary_energy_automatic",
+      "proof_boundary": "Finite boundary energy does not prove positive-time Hardy support.",
+      "role": "route_guard",
+      "statement": "G_omega(1/2+it) is in L2(dt) after removable boundary zeros: the zeta-ratio term is O(|t|^(omega-1)) and omega<1/2.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "jmce_18_l2_implies_fixed_shift",
+      "proof_boundary": "Paley-Wiener implication; independent expert review required.",
+      "role": "theorem_candidate",
+      "statement": "J_omega<infinity makes G_omega an H2 function in Re(s)>1/2; therefore every denominator zero in that half-plane is canceled and Suzuki's D(omega) holds.",
+      "status": "theorem_candidate"
+    },
+    {
+      "id": "jmce_19_fixed_shift_implies_l2",
+      "proof_boundary": "Uses the audited fixed-shift innerness theorem and the standard gamma-quotient Hardy estimate.",
+      "role": "theorem_candidate",
+      "statement": "If D(omega) holds, the completed quotient Q_omega is inner. The completed gamma quotient, its single removed pole, and the O(|t|^(omega-1)) boundary estimate put G_omega in H2, so transform uniqueness gives J_omega<infinity.",
+      "status": "theorem_candidate"
+    },
+    {
+      "id": "jmce_20_fixed_shift_equivalence",
+      "proof_boundary": "New corpus theorem candidate, not an unconditional J bound.",
+      "role": "theorem_candidate",
+      "statement": "For every fixed 0<omega<1/2, J_omega<infinity iff D(omega).",
+      "status": "theorem_candidate"
+    },
+    {
+      "id": "jmce_21_cofinal_error_criterion",
+      "proof_boundary": "Combines the fixed-shift candidate with the audited cofinal phase theorem.",
+      "role": "theorem_candidate",
+      "statement": "RH iff there is a sequence omega_j->0 with integral_1^infinity |E_(omega_j)(x)|^2dx/x^2 finite for every j.",
+      "status": "theorem_candidate"
+    },
+    {
+      "id": "jmce_22_rh_natural_convergence",
+      "proof_boundary": "Conditional theorem technology; it cannot supply the missing unconditional bound.",
+      "role": "conditional_estimate",
+      "statement": "Under RH, Balazard-Saias natural-Mobius approximation and Burnol's shifted-ratio estimate give E_(omega,N)->E_omega in H for every fixed 0<omega<1/2.",
+      "status": "conditional_on_rh"
+    },
+    {
+      "id": "jmce_23_cofinal_partial_norm",
+      "proof_boundary": "RH gives convergence; the reverse direction uses Fatou, the error-energy criterion, and cofinal accumulation.",
+      "role": "theorem_candidate",
+      "statement": "RH iff there exist omega_j->0 such that sup_N ||E_(omega_j,N)||_H<infinity for every j.",
+      "status": "theorem_candidate"
+    },
+    {
+      "id": "jmce_24_finite_energy_formula",
+      "proof_boundary": "All three terms must remain together.",
+      "role": "exact_identity",
+      "statement": "For X>=1, J_omega(X)=integral_1^X E_omega(x)^2dx/x^2 equals sum_(n,m<=X)c_n*c_m*(1/max(n,m)-1/X)-(2A_omega/omega)sum_(n<=X)c_n*(X^omega-n^omega)+A_omega^2*(X^(1+2omega)-1)/(1+2omega).",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_25_signed_measure_energy",
+      "proof_boundary": "Exact weighted H-minus-one discrepancy norm.",
+      "role": "exact_identity",
+      "statement": "With eta_(omega,X)=sum_(n<=X)c_n delta_n-A_omega(1+omega)u^omega 1_(0,X](u)du, J_omega(X)=double_integral K_X(u,v)deta(u)deta(v), where K_X=1/max(1,u,v)-1/X on [0,X]^2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_26_max_kernel_tn",
+      "proof_boundary": "Kernel total nonnegativity gives J>=0, not a uniform upper bound.",
+      "role": "exact_total_positivity",
+      "statement": "K_X(u,v)=integral_1^X 1_(u<=x)1_(v<=x)dx/x^2 is positive semidefinite; in reciprocal coordinates it is a Brownian min kernel and every ordered finite matrix is totally nonnegative by a cumulative-matrix factorization.",
+      "status": "available_exact"
+    },
+    {
+      "id": "jmce_27_tn_nonclosure_guard",
+      "proof_boundary": "A proof using positivity of the max kernel alone cannot close the criterion.",
+      "role": "route_guard",
+      "statement": "The positive-positive, cross, and continuum-continuum pieces of the finite formula each have X^(1+2omega)-scale; only their signed combination can stay bounded.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "jmce_28_causality_countermodel",
+      "proof_boundary": "Equal finite spectral energy does not distinguish the pole side; Hardy support does.",
+      "role": "countermodel_gate",
+      "statement": "1/(a+z) and 1/(a-z) have the same L2 boundary norm 1/(2a). The first is the transform of e^(-at)1_(t>0); the second has anti-causal boundary inverse e^(at)1_(t<0), while its actual positive-time Bromwich inverse is -e^(at).",
+      "status": "guard_validated"
+    },
+    {
+      "id": "jmce_29_l2_coefficients_guard",
+      "proof_boundary": "Generic model v_d=v and coefficients 1/d is l2 while its vector partial sums diverge.",
+      "role": "countermodel_gate",
+      "statement": "The coefficients d^(-omega-1/2) are square summable, but square-summable coefficients do not force convergence of a series of unit vectors without a Bessel bound.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "jmce_30_burnol_fit",
+      "proof_boundary": "Literature fit and proof template, not a transferred unconditional estimate.",
+      "role": "literature_fit",
+      "statement": "Burnol's f_epsilon theorem has the same shifted-zeta-ratio, square-integrability, and causality architecture. The present R_omega identity is its fractional-power Jordan analogue.",
+      "status": "source_fit"
+    },
+    {
+      "id": "jmce_31_nyman_nontransfer",
+      "proof_boundary": "The general closure theorem cannot be cited as the missing natural-mollifier bound.",
+      "role": "literature_guard",
+      "statement": "Baez-Duarte's general strong Nyman-Beurling sufficiency requires compact support in the audited theorem, while R_omega is not compactly supported; arbitrary closure also does not prove convergence of this fixed natural Mobius series.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "jmce_32_open_mollifier_gate",
+      "proof_boundary": "This all-height natural-mollifier estimate is not proved; finite t grids and finite X energies do not close it.",
+      "role": "open_arithmetic_gate",
+      "statement": "For one explicit omega_j->0, prove uniformly in N the exact finite inequality integral_R W_(omega_j)(t)|zeta(1/2+omega_j+it)M_N(1/2+omega_j+it)|^2dt<C_j.",
+      "status": "open_target"
+    }
+  ],
+  "sources": [
+    {
+      "title": "On monotonicity of certain weighted summatory functions associated with L-functions",
+      "url": "https://arxiv.org/abs/1204.1823",
+      "use": "Jordan coefficients and shifted quotient"
+    },
+    {
+      "title": "On an analytic estimate in the theory of the Riemann Zeta function and a Theorem of Baez-Duarte",
+      "url": "https://arxiv.org/abs/math/0202166",
+      "use": "shifted-ratio L2 theorem, natural Mobius approximation, and causality template"
+    },
+    {
+      "title": "A general strong Nyman-Beurling Criterion for the Riemann Hypothesis",
+      "url": "https://arxiv.org/abs/math/0505453",
+      "use": "Muntz dilation framework and compact-support guard"
+    },
+    {
+      "title": "Suzuki cofinal L2 hierarchy",
+      "url": "outputs/jensen_window_pf_suzuki_cofinal_l2_hierarchy.md",
+      "use": "fixed-shift and cofinal Hardy handoff"
+    }
+  ],
+  "status": "exact Jordan-Muntz and finite-energy reductions with two cofinal theorem candidates and one open mollifier gate"
+}

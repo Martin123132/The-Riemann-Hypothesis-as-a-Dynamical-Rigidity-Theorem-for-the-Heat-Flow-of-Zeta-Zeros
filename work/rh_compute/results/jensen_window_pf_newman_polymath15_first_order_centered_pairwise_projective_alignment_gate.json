@@ -1,0 +1,383 @@
+{
+  "date": "2026-07-28",
+  "exact": {
+    "aggregate_oriented_cell": "Let D_perp be the sum of d_i over interior atoms with c_i=0. With X_I=sum_(i in I)c_i, the endpoint-complete scalar is mathcal_C_N=D_edge+D_perp+A*X_I+integral_A^B P_x(s)ds, while mathsf_X=C_edge+X_I.",
+    "diagnostics": {
+      "alignment": {
+        "relative_identity": "For 1<=n<m<=N-1 put delta=u_n-u_m=k_n-k_m>0, S=u_n+u_m, and A_i=b^2*u_i^2+w_i^2. At h_n=h_m=H, D_nm(H):=h_(m,x)-h_(n,x) equals delta*[b^2*S+c_s*(c_s*(k_n+k_m)-2H)-c_(s,x)+c_s*b_x/b+u_x*(c_s*u_N+H)/(u_n*u_m)]+e_n*A_n/(b*u_n)-e_m*A_m/(b*u_m).",
+        "residual_definition": "Here e_i=v_a+Im[d_(i,x)/(1+d_i)], so nu_i=b*u_i+e_i and |e_i|<8449/x^2.",
+        "single_jet": "At h_i=H put w_i=c_s*k_i-H and e_i=nu_i-b*u_i. Then h_(i,x)=-b^2*u_i^2-w_i^2+c_(s,x)*k_i-(b_x/b+u_x/u_i)w_i-b*u_i*e_i-e_i*w_i^2/(b*u_i)."
+      },
+      "moving_scale": {
+        "critical_slope": "Put H_mov=-b^2*S*u_n*u_m/u_x<0. Then D_nm(0)=b^2*delta*S>0, D_nm(H_mov)=0, and D_nm(2H_mov)=-b^2*delta*S<0.",
+        "frozen_model": "If c_s=c_(s,x)=b_x=u_x=e_n=e_m=0, then D_nm=b^2*(u_n^2-u_m^2)=b^2*delta*S>0. This is the favorable frozen-scale correction-free Sturm orientation.",
+        "individual_flow_guard": "In that same reduced model h_(i,x)=-b^2*u_i^2-H^2+u_x*H/u_i. It is strictly negative at H=0 and at H=2H_mov<0 for both atoms. Thus strict individual clockwise motion and the actual logarithmic distance order do not fix pairwise crossing orientation once u_x is restored.",
+        "restored_scale": "Restoring only the exact moving scale u_x>0 gives D_nm=delta*[b^2*S+u_x*H/(u_n*u_m)]."
+      },
+      "occupation": {
+        "aggregate_decomposition": "Let D_perp be the sum of d_i over interior atoms with c_i=0. With X_I=sum_(i in I)c_i, the endpoint-complete scalar is mathcal_C_N=D_edge+D_perp+A*X_I+integral_A^B P_x(s)ds, while mathsf_X=C_edge+X_I.",
+        "occupation_identity": "On a pole-free local chart let I be the interior atoms with c_i!=0, choose A<min_(i in I)h_i and B>max_(i in I)h_i, and put P_x(s)=sum_(i in I)c_i*1_(A<s<h_i). Then exactly sum_(i in I)d_i=A*sum_(i in I)c_i+integral_A^B P_x(s)ds.",
+        "pole_chart_join": "When an atom reaches c_i=0 it is retained in D_perp division-free and the next local projective chart is chosen before continuing. The exact pole-rate formula, not a tangent quotient, is the chart join.",
+        "swap_join": "The threshold mass P_x(s) is permutation-free. At a pairwise alignment the two order-cell descriptions join without a singular term: h_2(c_1+c_2)-(h_2-h_1)c_1=h_1c_1+h_2c_2=h_1(c_1+c_2)-(h_1-h_2)c_2."
+      },
+      "pole": {
+        "exact_pole": "At a common projection pole X_n=X_m=0, division-free currents give psi_(i,x)=-nu_i/(b*u_i)=-1-e_i/(b*u_i), and hence psi_(m,x)-psi_(n,x)=e_n/(b*u_n)-e_m/(b*u_m).",
+        "finite_rate": "At a finite projective alignment, psi_(m,x)-psi_(n,x)=D_nm(H)/(1+H^2).",
+        "pole_limit": "The two finite-chart limits H->+infinity and H->-infinity of D_nm(H)/(1+H^2) both equal the exact pole value e_n/(b*u_n)-e_m/(b*u_m).",
+        "residual_order_guard": "Choose any 0<epsilon<min(8449/x^2,-b*delta,-b*u_m). The two hypothetical assignments (e_n,e_m)=(epsilon,0) and (0,epsilon) preserve nu_m-nu_n>0 and nu_n,nu_m<0. At the pole their relative rates are respectively epsilon/(b*u_n)<0 and -epsilon/(b*u_m)>0. Therefore the currently proved residual bounds and strict absolute angular-rate order do not determine the pole sign. These assignments are source-bound guards, not asserted Xi correction values."
+      }
+    },
+    "domain": "Fix one N=floor(a) chart on L>=50, 0<tL<=25, and q=2*t*L^2>=1. For 1<=n<m<=N-1, put u_i=log(a/i), k_i=u_i-u_N=log(N/i), c_s=Re(s_*'), b=Im(s_*')<0, and h_i=c_s*k_i-b*u_i*tan(theta_i) whenever X_i!=0.",
+    "exact_pole_rate": "At a common projection pole X_n=X_m=0, division-free currents give psi_(i,x)=-nu_i/(b*u_i)=-1-e_i/(b*u_i), and hence psi_(m,x)-psi_(n,x)=e_n/(b*u_n)-e_m/(b*u_m).",
+    "exceptional_edge": "The aggregate formula keeps (C_edge,D_edge)=(c_0+c_N,d_0+d_N) exact. At a cutoff, recompute terminal centering and transport this block through J_a^(adj); never replace the generally complex within-chart J_a^(der) by J_a^(adj), and never assign separate endpoint or terminal signs.",
+    "finite_projective_rate": "At a finite projective alignment, psi_(m,x)-psi_(n,x)=D_nm(H)/(1+H^2).",
+    "frozen_model_theorem": "If c_s=c_(s,x)=b_x=u_x=e_n=e_m=0, then D_nm=b^2*(u_n^2-u_m^2)=b^2*delta*S>0. This is the favorable frozen-scale correction-free Sturm orientation.",
+    "legacy_symmetry_boundary": "The reconstructed prime-curvature matrix is exactly radial and transpose-symmetric by construction, while every tested raw symmetric kernel is indefinite. That static p<->q symmetry supplies neither the moving-scale term u_x*H/(u_n*u_m) nor an ordering of e_i/u_i. The pictures remain a useful falsification laboratory, but they cannot repair either pairwise obstruction without an exact identity to the Xi contact scalar.",
+    "moving_scale_restoration": "Restoring only the exact moving scale u_x>0 gives D_nm=delta*[b^2*S+u_x*H/(u_n*u_m)].",
+    "moving_scale_sign_reversal": "Put H_mov=-b^2*S*u_n*u_m/u_x<0. Then D_nm(0)=b^2*delta*S>0, D_nm(H_mov)=0, and D_nm(2H_mov)=-b^2*delta*S<0. In that same reduced model h_(i,x)=-b^2*u_i^2-H^2+u_x*H/u_i. It is strictly negative at H=0 and at H=2H_mov<0 for both atoms. Thus strict individual clockwise motion and the actual logarithmic distance order do not fix pairwise crossing orientation once u_x is restored.",
+    "occupation_identity": "On a pole-free local chart let I be the interior atoms with c_i!=0, choose A<min_(i in I)h_i and B>max_(i in I)h_i, and put P_x(s)=sum_(i in I)c_i*1_(A<s<h_i). Then exactly sum_(i in I)d_i=A*sum_(i in I)c_i+integral_A^B P_x(s)ds.",
+    "pi_provenance": "The pi in a^2=x/(4*pi)+t/16 and u_x=1/(8*pi*a^2) is inherited from the completed-zeta factor pi^(-s/2)*Gamma(s/2)*zeta(s) and its Riemann-Siegel saddle. It is not fitted from a circle, prime-curvature arc, polygon, or plot.",
+    "pole_chart_join": "When an atom reaches c_i=0 it is retained in D_perp division-free and the next local projective chart is chosen before continuing. The exact pole-rate formula, not a tangent quotient, is the chart join.",
+    "pole_limit_join": "The two finite-chart limits H->+infinity and H->-infinity of D_nm(H)/(1+H^2) both equal the exact pole value e_n/(b*u_n)-e_m/(b*u_m).",
+    "proof_boundary": "This proves the exact finite-alignment relative-current identity, the favorable frozen-scale model, the exact moving-scale sign-reversal guard, the division-free pole rate and its two-sided chart limit, the residual-order insufficiency guard, and a permutation-free local occupation identity. The guards are not actual Xi counterexamples and do not rule out a stronger source-specific theorem. This does not prove a signed Xi occupation bound, an edge-block sign, the Abel-scalar gap, successor count, q<1 closure, finite-height effectivity, contact exclusion, Lambda<=0, PF-infinity, RH, or a Clay-prize conclusion.",
+    "q_lt_1": "The q<1 layer remains a separate multiplicity-compatible parabolic/Hermite or boundary-degree theorem. No pairwise or occupation identity here proves t=0 endpoint simplicity.",
+    "relative_alignment_identity": "For 1<=n<m<=N-1 put delta=u_n-u_m=k_n-k_m>0, S=u_n+u_m, and A_i=b^2*u_i^2+w_i^2. At h_n=h_m=H, D_nm(H):=h_(m,x)-h_(n,x) equals delta*[b^2*S+c_s*(c_s*(k_n+k_m)-2H)-c_(s,x)+c_s*b_x/b+u_x*(c_s*u_N+H)/(u_n*u_m)]+e_n*A_n/(b*u_n)-e_m*A_m/(b*u_m).",
+    "residual_definition": "Here e_i=v_a+Im[d_(i,x)/(1+d_i)], so nu_i=b*u_i+e_i and |e_i|<8449/x^2.",
+    "residual_order_guard": "Choose any 0<epsilon<min(8449/x^2,-b*delta,-b*u_m). The two hypothetical assignments (e_n,e_m)=(epsilon,0) and (0,epsilon) preserve nu_m-nu_n>0 and nu_n,nu_m<0. At the pole their relative rates are respectively epsilon/(b*u_n)<0 and -epsilon/(b*u_m)>0. Therefore the currently proved residual bounds and strict absolute angular-rate order do not determine the pole sign. These assignments are source-bound guards, not asserted Xi correction values.",
+    "route_decision": "Retire a uniform pairwise projective Sturm sign as a consequence of the currently proved current bounds. This does not prove that a stronger arithmetic Xi comparison is false. The next admissible target is a one-sided estimate for the signed occupation integral integral P_x(s)ds together with D_edge and D_perp, using actual Xi amplitudes and oscillation before absolute values. Pairwise alignments are harmless permutation joins; projection poles and cutoff edges remain exact separate joins.",
+    "single_aligned_jet": "At h_i=H put w_i=c_s*k_i-H and e_i=nu_i-b*u_i. Then h_(i,x)=-b^2*u_i^2-w_i^2+c_(s,x)*k_i-(b_x/b+u_x/u_i)w_i-b*u_i*e_i-e_i*w_i^2/(b*u_i).",
+    "swap_join": "The threshold mass P_x(s) is permutation-free. At a pairwise alignment the two order-cell descriptions join without a singular term: h_2(c_1+c_2)-(h_2-h_1)c_1=h_1c_1+h_2c_2=h_1(c_1+c_2)-(h_1-h_2)c_2."
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_pairwise_projective_alignment_gate",
+  "proof_boundary": "This proves the exact finite-alignment relative-current identity, the favorable frozen-scale model, the exact moving-scale sign-reversal guard, the division-free pole rate and its two-sided chart limit, the residual-order insufficiency guard, and a permutation-free local occupation identity. The guards are not actual Xi counterexamples and do not rule out a stronger source-specific theorem. This does not prove a signed Xi occupation bound, an edge-block sign, the Abel-scalar gap, successor count, q<1 closure, finite-height effectivity, contact exclusion, Lambda<=0, PF-infinity, RH, or a Clay-prize conclusion.",
+  "rows": [
+    {
+      "claim": "The moving-scale constant pi remains source-traced.",
+      "diagnostics": null,
+      "formula": "The pi in a^2=x/(4*pi)+t/16 and u_x=1/(8*pi*a^2) is inherited from the completed-zeta factor pi^(-s/2)*Gamma(s/2)*zeta(s) and its Riemann-Siegel saddle. It is not fitted from a circle, prime-curvature arc, polygon, or plot.",
+      "id": "ppag_00_pi_provenance",
+      "proof_boundary": "No plotted circle defines pi.",
+      "readiness": "certified",
+      "role": "definition_provenance"
+    },
+    {
+      "claim": "The pair calculation is fixed-chart and interior.",
+      "diagnostics": null,
+      "formula": "Fix one N=floor(a) chart on L>=50, 0<tL<=25, and q=2*t*L^2>=1. For 1<=n<m<=N-1, put u_i=log(a/i), k_i=u_i-u_N=log(N/i), c_s=Re(s_*'), b=Im(s_*')<0, and h_i=c_s*k_i-b*u_i*tan(theta_i) whenever X_i!=0.",
+      "id": "ppag_01_domain",
+      "proof_boundary": "The terminal carrier and q<1 layer are excluded.",
+      "readiness": "certified",
+      "role": "exact_domain"
+    },
+    {
+      "claim": "Every phase correction is retained in e_i.",
+      "diagnostics": null,
+      "formula": "Here e_i=v_a+Im[d_(i,x)/(1+d_i)], so nu_i=b*u_i+e_i and |e_i|<8449/x^2.",
+      "id": "ppag_02_residual_definition",
+      "proof_boundary": "No sign or ordering of e_i is assumed.",
+      "readiness": "ready_to_apply",
+      "role": "exact_decomposition"
+    },
+    {
+      "claim": "The single slope jet is exact at a finite alignment.",
+      "diagnostics": null,
+      "formula": "At h_i=H put w_i=c_s*k_i-H and e_i=nu_i-b*u_i. Then h_(i,x)=-b^2*u_i^2-w_i^2+c_(s,x)*k_i-(b_x/b+u_x/u_i)w_i-b*u_i*e_i-e_i*w_i^2/(b*u_i).",
+      "id": "ppag_03_single_aligned_jet",
+      "proof_boundary": "It is not evaluated at a projection pole.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The actual pairwise alignment current has an exact compact form.",
+      "diagnostics": {
+        "alignment": {
+          "relative_identity": "For 1<=n<m<=N-1 put delta=u_n-u_m=k_n-k_m>0, S=u_n+u_m, and A_i=b^2*u_i^2+w_i^2. At h_n=h_m=H, D_nm(H):=h_(m,x)-h_(n,x) equals delta*[b^2*S+c_s*(c_s*(k_n+k_m)-2H)-c_(s,x)+c_s*b_x/b+u_x*(c_s*u_N+H)/(u_n*u_m)]+e_n*A_n/(b*u_n)-e_m*A_m/(b*u_m).",
+          "residual_definition": "Here e_i=v_a+Im[d_(i,x)/(1+d_i)], so nu_i=b*u_i+e_i and |e_i|<8449/x^2.",
+          "single_jet": "At h_i=H put w_i=c_s*k_i-H and e_i=nu_i-b*u_i. Then h_(i,x)=-b^2*u_i^2-w_i^2+c_(s,x)*k_i-(b_x/b+u_x/u_i)w_i-b*u_i*e_i-e_i*w_i^2/(b*u_i)."
+        },
+        "moving_scale": {
+          "critical_slope": "Put H_mov=-b^2*S*u_n*u_m/u_x<0. Then D_nm(0)=b^2*delta*S>0, D_nm(H_mov)=0, and D_nm(2H_mov)=-b^2*delta*S<0.",
+          "frozen_model": "If c_s=c_(s,x)=b_x=u_x=e_n=e_m=0, then D_nm=b^2*(u_n^2-u_m^2)=b^2*delta*S>0. This is the favorable frozen-scale correction-free Sturm orientation.",
+          "individual_flow_guard": "In that same reduced model h_(i,x)=-b^2*u_i^2-H^2+u_x*H/u_i. It is strictly negative at H=0 and at H=2H_mov<0 for both atoms. Thus strict individual clockwise motion and the actual logarithmic distance order do not fix pairwise crossing orientation once u_x is restored.",
+          "restored_scale": "Restoring only the exact moving scale u_x>0 gives D_nm=delta*[b^2*S+u_x*H/(u_n*u_m)]."
+        },
+        "occupation": {
+          "aggregate_decomposition": "Let D_perp be the sum of d_i over interior atoms with c_i=0. With X_I=sum_(i in I)c_i, the endpoint-complete scalar is mathcal_C_N=D_edge+D_perp+A*X_I+integral_A^B P_x(s)ds, while mathsf_X=C_edge+X_I.",
+          "occupation_identity": "On a pole-free local chart let I be the interior atoms with c_i!=0, choose A<min_(i in I)h_i and B>max_(i in I)h_i, and put P_x(s)=sum_(i in I)c_i*1_(A<s<h_i). Then exactly sum_(i in I)d_i=A*sum_(i in I)c_i+integral_A^B P_x(s)ds.",
+          "pole_chart_join": "When an atom reaches c_i=0 it is retained in D_perp division-free and the next local projective chart is chosen before continuing. The exact pole-rate formula, not a tangent quotient, is the chart join.",
+          "swap_join": "The threshold mass P_x(s) is permutation-free. At a pairwise alignment the two order-cell descriptions join without a singular term: h_2(c_1+c_2)-(h_2-h_1)c_1=h_1c_1+h_2c_2=h_1(c_1+c_2)-(h_1-h_2)c_2."
+        },
+        "pole": {
+          "exact_pole": "At a common projection pole X_n=X_m=0, division-free currents give psi_(i,x)=-nu_i/(b*u_i)=-1-e_i/(b*u_i), and hence psi_(m,x)-psi_(n,x)=e_n/(b*u_n)-e_m/(b*u_m).",
+          "finite_rate": "At a finite projective alignment, psi_(m,x)-psi_(n,x)=D_nm(H)/(1+H^2).",
+          "pole_limit": "The two finite-chart limits H->+infinity and H->-infinity of D_nm(H)/(1+H^2) both equal the exact pole value e_n/(b*u_n)-e_m/(b*u_m).",
+          "residual_order_guard": "Choose any 0<epsilon<min(8449/x^2,-b*delta,-b*u_m). The two hypothetical assignments (e_n,e_m)=(epsilon,0) and (0,epsilon) preserve nu_m-nu_n>0 and nu_n,nu_m<0. At the pole their relative rates are respectively epsilon/(b*u_n)<0 and -epsilon/(b*u_m)>0. Therefore the currently proved residual bounds and strict absolute angular-rate order do not determine the pole sign. These assignments are source-bound guards, not asserted Xi correction values."
+        }
+      },
+      "formula": "For 1<=n<m<=N-1 put delta=u_n-u_m=k_n-k_m>0, S=u_n+u_m, and A_i=b^2*u_i^2+w_i^2. At h_n=h_m=H, D_nm(H):=h_(m,x)-h_(n,x) equals delta*[b^2*S+c_s*(c_s*(k_n+k_m)-2H)-c_(s,x)+c_s*b_x/b+u_x*(c_s*u_N+H)/(u_n*u_m)]+e_n*A_n/(b*u_n)-e_m*A_m/(b*u_m).",
+      "id": "ppag_04_relative_alignment_identity",
+      "proof_boundary": "All moving-frame and d_i corrections remain present.",
+      "readiness": "proved",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The frozen correction-free model has favorable Sturm orientation.",
+      "diagnostics": null,
+      "formula": "If c_s=c_(s,x)=b_x=u_x=e_n=e_m=0, then D_nm=b^2*(u_n^2-u_m^2)=b^2*delta*S>0. This is the favorable frozen-scale correction-free Sturm orientation.",
+      "id": "ppag_05_frozen_model_theorem",
+      "proof_boundary": "This is not the physical moving chart.",
+      "readiness": "proved",
+      "role": "model_lemma"
+    },
+    {
+      "claim": "Restoring u_x introduces a term linear in aligned slope.",
+      "diagnostics": null,
+      "formula": "Restoring only the exact moving scale u_x>0 gives D_nm=delta*[b^2*S+u_x*H/(u_n*u_m)].",
+      "id": "ppag_06_moving_scale_restoration",
+      "proof_boundary": "No correction term is hidden.",
+      "readiness": "ready_to_apply",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "Moving scale permits both pairwise crossing orientations.",
+      "diagnostics": {
+        "alignment": {
+          "relative_identity": "For 1<=n<m<=N-1 put delta=u_n-u_m=k_n-k_m>0, S=u_n+u_m, and A_i=b^2*u_i^2+w_i^2. At h_n=h_m=H, D_nm(H):=h_(m,x)-h_(n,x) equals delta*[b^2*S+c_s*(c_s*(k_n+k_m)-2H)-c_(s,x)+c_s*b_x/b+u_x*(c_s*u_N+H)/(u_n*u_m)]+e_n*A_n/(b*u_n)-e_m*A_m/(b*u_m).",
+          "residual_definition": "Here e_i=v_a+Im[d_(i,x)/(1+d_i)], so nu_i=b*u_i+e_i and |e_i|<8449/x^2.",
+          "single_jet": "At h_i=H put w_i=c_s*k_i-H and e_i=nu_i-b*u_i. Then h_(i,x)=-b^2*u_i^2-w_i^2+c_(s,x)*k_i-(b_x/b+u_x/u_i)w_i-b*u_i*e_i-e_i*w_i^2/(b*u_i)."
+        },
+        "moving_scale": {
+          "critical_slope": "Put H_mov=-b^2*S*u_n*u_m/u_x<0. Then D_nm(0)=b^2*delta*S>0, D_nm(H_mov)=0, and D_nm(2H_mov)=-b^2*delta*S<0.",
+          "frozen_model": "If c_s=c_(s,x)=b_x=u_x=e_n=e_m=0, then D_nm=b^2*(u_n^2-u_m^2)=b^2*delta*S>0. This is the favorable frozen-scale correction-free Sturm orientation.",
+          "individual_flow_guard": "In that same reduced model h_(i,x)=-b^2*u_i^2-H^2+u_x*H/u_i. It is strictly negative at H=0 and at H=2H_mov<0 for both atoms. Thus strict individual clockwise motion and the actual logarithmic distance order do not fix pairwise crossing orientation once u_x is restored.",
+          "restored_scale": "Restoring only the exact moving scale u_x>0 gives D_nm=delta*[b^2*S+u_x*H/(u_n*u_m)]."
+        },
+        "occupation": {
+          "aggregate_decomposition": "Let D_perp be the sum of d_i over interior atoms with c_i=0. With X_I=sum_(i in I)c_i, the endpoint-complete scalar is mathcal_C_N=D_edge+D_perp+A*X_I+integral_A^B P_x(s)ds, while mathsf_X=C_edge+X_I.",
+          "occupation_identity": "On a pole-free local chart let I be the interior atoms with c_i!=0, choose A<min_(i in I)h_i and B>max_(i in I)h_i, and put P_x(s)=sum_(i in I)c_i*1_(A<s<h_i). Then exactly sum_(i in I)d_i=A*sum_(i in I)c_i+integral_A^B P_x(s)ds.",
+          "pole_chart_join": "When an atom reaches c_i=0 it is retained in D_perp division-free and the next local projective chart is chosen before continuing. The exact pole-rate formula, not a tangent quotient, is the chart join.",
+          "swap_join": "The threshold mass P_x(s) is permutation-free. At a pairwise alignment the two order-cell descriptions join without a singular term: h_2(c_1+c_2)-(h_2-h_1)c_1=h_1c_1+h_2c_2=h_1(c_1+c_2)-(h_1-h_2)c_2."
+        },
+        "pole": {
+          "exact_pole": "At a common projection pole X_n=X_m=0, division-free currents give psi_(i,x)=-nu_i/(b*u_i)=-1-e_i/(b*u_i), and hence psi_(m,x)-psi_(n,x)=e_n/(b*u_n)-e_m/(b*u_m).",
+          "finite_rate": "At a finite projective alignment, psi_(m,x)-psi_(n,x)=D_nm(H)/(1+H^2).",
+          "pole_limit": "The two finite-chart limits H->+infinity and H->-infinity of D_nm(H)/(1+H^2) both equal the exact pole value e_n/(b*u_n)-e_m/(b*u_m).",
+          "residual_order_guard": "Choose any 0<epsilon<min(8449/x^2,-b*delta,-b*u_m). The two hypothetical assignments (e_n,e_m)=(epsilon,0) and (0,epsilon) preserve nu_m-nu_n>0 and nu_n,nu_m<0. At the pole their relative rates are respectively epsilon/(b*u_n)<0 and -epsilon/(b*u_m)>0. Therefore the currently proved residual bounds and strict absolute angular-rate order do not determine the pole sign. These assignments are source-bound guards, not asserted Xi correction values."
+        }
+      },
+      "formula": "Put H_mov=-b^2*S*u_n*u_m/u_x<0. Then D_nm(0)=b^2*delta*S>0, D_nm(H_mov)=0, and D_nm(2H_mov)=-b^2*delta*S<0. In that same reduced model h_(i,x)=-b^2*u_i^2-H^2+u_x*H/u_i. It is strictly negative at H=0 and at H=2H_mov<0 for both atoms. Thus strict individual clockwise motion and the actual logarithmic distance order do not fix pairwise crossing orientation once u_x is restored.",
+      "id": "ppag_07_moving_scale_sign_reversal",
+      "proof_boundary": "The reduced jets are not asserted Xi states.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion_guard"
+    },
+    {
+      "claim": "Finite-slope relative projective speed has positive normalization.",
+      "diagnostics": null,
+      "formula": "At a finite projective alignment, psi_(m,x)-psi_(n,x)=D_nm(H)/(1+H^2).",
+      "id": "ppag_08_finite_projective_rate",
+      "proof_boundary": "The formula remains chart-local.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "A common projection pole has an exact relative rate.",
+      "diagnostics": null,
+      "formula": "At a common projection pole X_n=X_m=0, division-free currents give psi_(i,x)=-nu_i/(b*u_i)=-1-e_i/(b*u_i), and hence psi_(m,x)-psi_(n,x)=e_n/(b*u_n)-e_m/(b*u_m).",
+      "id": "ppag_09_exact_pole_rate",
+      "proof_boundary": "No tangent ratio is used.",
+      "readiness": "proved",
+      "role": "division_free_join"
+    },
+    {
+      "claim": "Both affine ends join the same projective pole rate.",
+      "diagnostics": {
+        "alignment": {
+          "relative_identity": "For 1<=n<m<=N-1 put delta=u_n-u_m=k_n-k_m>0, S=u_n+u_m, and A_i=b^2*u_i^2+w_i^2. At h_n=h_m=H, D_nm(H):=h_(m,x)-h_(n,x) equals delta*[b^2*S+c_s*(c_s*(k_n+k_m)-2H)-c_(s,x)+c_s*b_x/b+u_x*(c_s*u_N+H)/(u_n*u_m)]+e_n*A_n/(b*u_n)-e_m*A_m/(b*u_m).",
+          "residual_definition": "Here e_i=v_a+Im[d_(i,x)/(1+d_i)], so nu_i=b*u_i+e_i and |e_i|<8449/x^2.",
+          "single_jet": "At h_i=H put w_i=c_s*k_i-H and e_i=nu_i-b*u_i. Then h_(i,x)=-b^2*u_i^2-w_i^2+c_(s,x)*k_i-(b_x/b+u_x/u_i)w_i-b*u_i*e_i-e_i*w_i^2/(b*u_i)."
+        },
+        "moving_scale": {
+          "critical_slope": "Put H_mov=-b^2*S*u_n*u_m/u_x<0. Then D_nm(0)=b^2*delta*S>0, D_nm(H_mov)=0, and D_nm(2H_mov)=-b^2*delta*S<0.",
+          "frozen_model": "If c_s=c_(s,x)=b_x=u_x=e_n=e_m=0, then D_nm=b^2*(u_n^2-u_m^2)=b^2*delta*S>0. This is the favorable frozen-scale correction-free Sturm orientation.",
+          "individual_flow_guard": "In that same reduced model h_(i,x)=-b^2*u_i^2-H^2+u_x*H/u_i. It is strictly negative at H=0 and at H=2H_mov<0 for both atoms. Thus strict individual clockwise motion and the actual logarithmic distance order do not fix pairwise crossing orientation once u_x is restored.",
+          "restored_scale": "Restoring only the exact moving scale u_x>0 gives D_nm=delta*[b^2*S+u_x*H/(u_n*u_m)]."
+        },
+        "occupation": {
+          "aggregate_decomposition": "Let D_perp be the sum of d_i over interior atoms with c_i=0. With X_I=sum_(i in I)c_i, the endpoint-complete scalar is mathcal_C_N=D_edge+D_perp+A*X_I+integral_A^B P_x(s)ds, while mathsf_X=C_edge+X_I.",
+          "occupation_identity": "On a pole-free local chart let I be the interior atoms with c_i!=0, choose A<min_(i in I)h_i and B>max_(i in I)h_i, and put P_x(s)=sum_(i in I)c_i*1_(A<s<h_i). Then exactly sum_(i in I)d_i=A*sum_(i in I)c_i+integral_A^B P_x(s)ds.",
+          "pole_chart_join": "When an atom reaches c_i=0 it is retained in D_perp division-free and the next local projective chart is chosen before continuing. The exact pole-rate formula, not a tangent quotient, is the chart join.",
+          "swap_join": "The threshold mass P_x(s) is permutation-free. At a pairwise alignment the two order-cell descriptions join without a singular term: h_2(c_1+c_2)-(h_2-h_1)c_1=h_1c_1+h_2c_2=h_1(c_1+c_2)-(h_1-h_2)c_2."
+        },
+        "pole": {
+          "exact_pole": "At a common projection pole X_n=X_m=0, division-free currents give psi_(i,x)=-nu_i/(b*u_i)=-1-e_i/(b*u_i), and hence psi_(m,x)-psi_(n,x)=e_n/(b*u_n)-e_m/(b*u_m).",
+          "finite_rate": "At a finite projective alignment, psi_(m,x)-psi_(n,x)=D_nm(H)/(1+H^2).",
+          "pole_limit": "The two finite-chart limits H->+infinity and H->-infinity of D_nm(H)/(1+H^2) both equal the exact pole value e_n/(b*u_n)-e_m/(b*u_m).",
+          "residual_order_guard": "Choose any 0<epsilon<min(8449/x^2,-b*delta,-b*u_m). The two hypothetical assignments (e_n,e_m)=(epsilon,0) and (0,epsilon) preserve nu_m-nu_n>0 and nu_n,nu_m<0. At the pole their relative rates are respectively epsilon/(b*u_n)<0 and -epsilon/(b*u_m)>0. Therefore the currently proved residual bounds and strict absolute angular-rate order do not determine the pole sign. These assignments are source-bound guards, not asserted Xi correction values."
+        }
+      },
+      "formula": "The two finite-chart limits H->+infinity and H->-infinity of D_nm(H)/(1+H^2) both equal the exact pole value e_n/(b*u_n)-e_m/(b*u_m).",
+      "id": "ppag_10_pole_limit_join",
+      "proof_boundary": "The limit does not supply a sign.",
+      "readiness": "proved",
+      "role": "division_free_join"
+    },
+    {
+      "claim": "Existing residual bounds and angular order allow either pole sign.",
+      "diagnostics": {
+        "alignment": {
+          "relative_identity": "For 1<=n<m<=N-1 put delta=u_n-u_m=k_n-k_m>0, S=u_n+u_m, and A_i=b^2*u_i^2+w_i^2. At h_n=h_m=H, D_nm(H):=h_(m,x)-h_(n,x) equals delta*[b^2*S+c_s*(c_s*(k_n+k_m)-2H)-c_(s,x)+c_s*b_x/b+u_x*(c_s*u_N+H)/(u_n*u_m)]+e_n*A_n/(b*u_n)-e_m*A_m/(b*u_m).",
+          "residual_definition": "Here e_i=v_a+Im[d_(i,x)/(1+d_i)], so nu_i=b*u_i+e_i and |e_i|<8449/x^2.",
+          "single_jet": "At h_i=H put w_i=c_s*k_i-H and e_i=nu_i-b*u_i. Then h_(i,x)=-b^2*u_i^2-w_i^2+c_(s,x)*k_i-(b_x/b+u_x/u_i)w_i-b*u_i*e_i-e_i*w_i^2/(b*u_i)."
+        },
+        "moving_scale": {
+          "critical_slope": "Put H_mov=-b^2*S*u_n*u_m/u_x<0. Then D_nm(0)=b^2*delta*S>0, D_nm(H_mov)=0, and D_nm(2H_mov)=-b^2*delta*S<0.",
+          "frozen_model": "If c_s=c_(s,x)=b_x=u_x=e_n=e_m=0, then D_nm=b^2*(u_n^2-u_m^2)=b^2*delta*S>0. This is the favorable frozen-scale correction-free Sturm orientation.",
+          "individual_flow_guard": "In that same reduced model h_(i,x)=-b^2*u_i^2-H^2+u_x*H/u_i. It is strictly negative at H=0 and at H=2H_mov<0 for both atoms. Thus strict individual clockwise motion and the actual logarithmic distance order do not fix pairwise crossing orientation once u_x is restored.",
+          "restored_scale": "Restoring only the exact moving scale u_x>0 gives D_nm=delta*[b^2*S+u_x*H/(u_n*u_m)]."
+        },
+        "occupation": {
+          "aggregate_decomposition": "Let D_perp be the sum of d_i over interior atoms with c_i=0. With X_I=sum_(i in I)c_i, the endpoint-complete scalar is mathcal_C_N=D_edge+D_perp+A*X_I+integral_A^B P_x(s)ds, while mathsf_X=C_edge+X_I.",
+          "occupation_identity": "On a pole-free local chart let I be the interior atoms with c_i!=0, choose A<min_(i in I)h_i and B>max_(i in I)h_i, and put P_x(s)=sum_(i in I)c_i*1_(A<s<h_i). Then exactly sum_(i in I)d_i=A*sum_(i in I)c_i+integral_A^B P_x(s)ds.",
+          "pole_chart_join": "When an atom reaches c_i=0 it is retained in D_perp division-free and the next local projective chart is chosen before continuing. The exact pole-rate formula, not a tangent quotient, is the chart join.",
+          "swap_join": "The threshold mass P_x(s) is permutation-free. At a pairwise alignment the two order-cell descriptions join without a singular term: h_2(c_1+c_2)-(h_2-h_1)c_1=h_1c_1+h_2c_2=h_1(c_1+c_2)-(h_1-h_2)c_2."
+        },
+        "pole": {
+          "exact_pole": "At a common projection pole X_n=X_m=0, division-free currents give psi_(i,x)=-nu_i/(b*u_i)=-1-e_i/(b*u_i), and hence psi_(m,x)-psi_(n,x)=e_n/(b*u_n)-e_m/(b*u_m).",
+          "finite_rate": "At a finite projective alignment, psi_(m,x)-psi_(n,x)=D_nm(H)/(1+H^2).",
+          "pole_limit": "The two finite-chart limits H->+infinity and H->-infinity of D_nm(H)/(1+H^2) both equal the exact pole value e_n/(b*u_n)-e_m/(b*u_m).",
+          "residual_order_guard": "Choose any 0<epsilon<min(8449/x^2,-b*delta,-b*u_m). The two hypothetical assignments (e_n,e_m)=(epsilon,0) and (0,epsilon) preserve nu_m-nu_n>0 and nu_n,nu_m<0. At the pole their relative rates are respectively epsilon/(b*u_n)<0 and -epsilon/(b*u_m)>0. Therefore the currently proved residual bounds and strict absolute angular-rate order do not determine the pole sign. These assignments are source-bound guards, not asserted Xi correction values."
+        }
+      },
+      "formula": "Choose any 0<epsilon<min(8449/x^2,-b*delta,-b*u_m). The two hypothetical assignments (e_n,e_m)=(epsilon,0) and (0,epsilon) preserve nu_m-nu_n>0 and nu_n,nu_m<0. At the pole their relative rates are respectively epsilon/(b*u_n)<0 and -epsilon/(b*u_m)>0. Therefore the currently proved residual bounds and strict absolute angular-rate order do not determine the pole sign. These assignments are source-bound guards, not asserted Xi correction values.",
+      "id": "ppag_11_residual_order_guard",
+      "proof_boundary": "The hypothetical corrections are not actual Xi values.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion_guard"
+    },
+    {
+      "claim": "Static prime-curvature symmetry does not sign dynamic pair currents.",
+      "diagnostics": null,
+      "formula": "The reconstructed prime-curvature matrix is exactly radial and transpose-symmetric by construction, while every tested raw symmetric kernel is indefinite. That static p<->q symmetry supplies neither the moving-scale term u_x*H/(u_n*u_m) nor an ordering of e_i/u_i. The pictures remain a useful falsification laboratory, but they cannot repair either pairwise obstruction without an exact identity to the Xi contact scalar.",
+      "id": "ppag_12_legacy_symmetry_boundary",
+      "proof_boundary": "No image-to-Xi identity is asserted.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion_guard"
+    },
+    {
+      "claim": "The interior first moment is a signed occupation integral.",
+      "diagnostics": {
+        "alignment": {
+          "relative_identity": "For 1<=n<m<=N-1 put delta=u_n-u_m=k_n-k_m>0, S=u_n+u_m, and A_i=b^2*u_i^2+w_i^2. At h_n=h_m=H, D_nm(H):=h_(m,x)-h_(n,x) equals delta*[b^2*S+c_s*(c_s*(k_n+k_m)-2H)-c_(s,x)+c_s*b_x/b+u_x*(c_s*u_N+H)/(u_n*u_m)]+e_n*A_n/(b*u_n)-e_m*A_m/(b*u_m).",
+          "residual_definition": "Here e_i=v_a+Im[d_(i,x)/(1+d_i)], so nu_i=b*u_i+e_i and |e_i|<8449/x^2.",
+          "single_jet": "At h_i=H put w_i=c_s*k_i-H and e_i=nu_i-b*u_i. Then h_(i,x)=-b^2*u_i^2-w_i^2+c_(s,x)*k_i-(b_x/b+u_x/u_i)w_i-b*u_i*e_i-e_i*w_i^2/(b*u_i)."
+        },
+        "moving_scale": {
+          "critical_slope": "Put H_mov=-b^2*S*u_n*u_m/u_x<0. Then D_nm(0)=b^2*delta*S>0, D_nm(H_mov)=0, and D_nm(2H_mov)=-b^2*delta*S<0.",
+          "frozen_model": "If c_s=c_(s,x)=b_x=u_x=e_n=e_m=0, then D_nm=b^2*(u_n^2-u_m^2)=b^2*delta*S>0. This is the favorable frozen-scale correction-free Sturm orientation.",
+          "individual_flow_guard": "In that same reduced model h_(i,x)=-b^2*u_i^2-H^2+u_x*H/u_i. It is strictly negative at H=0 and at H=2H_mov<0 for both atoms. Thus strict individual clockwise motion and the actual logarithmic distance order do not fix pairwise crossing orientation once u_x is restored.",
+          "restored_scale": "Restoring only the exact moving scale u_x>0 gives D_nm=delta*[b^2*S+u_x*H/(u_n*u_m)]."
+        },
+        "occupation": {
+          "aggregate_decomposition": "Let D_perp be the sum of d_i over interior atoms with c_i=0. With X_I=sum_(i in I)c_i, the endpoint-complete scalar is mathcal_C_N=D_edge+D_perp+A*X_I+integral_A^B P_x(s)ds, while mathsf_X=C_edge+X_I.",
+          "occupation_identity": "On a pole-free local chart let I be the interior atoms with c_i!=0, choose A<min_(i in I)h_i and B>max_(i in I)h_i, and put P_x(s)=sum_(i in I)c_i*1_(A<s<h_i). Then exactly sum_(i in I)d_i=A*sum_(i in I)c_i+integral_A^B P_x(s)ds.",
+          "pole_chart_join": "When an atom reaches c_i=0 it is retained in D_perp division-free and the next local projective chart is chosen before continuing. The exact pole-rate formula, not a tangent quotient, is the chart join.",
+          "swap_join": "The threshold mass P_x(s) is permutation-free. At a pairwise alignment the two order-cell descriptions join without a singular term: h_2(c_1+c_2)-(h_2-h_1)c_1=h_1c_1+h_2c_2=h_1(c_1+c_2)-(h_1-h_2)c_2."
+        },
+        "pole": {
+          "exact_pole": "At a common projection pole X_n=X_m=0, division-free currents give psi_(i,x)=-nu_i/(b*u_i)=-1-e_i/(b*u_i), and hence psi_(m,x)-psi_(n,x)=e_n/(b*u_n)-e_m/(b*u_m).",
+          "finite_rate": "At a finite projective alignment, psi_(m,x)-psi_(n,x)=D_nm(H)/(1+H^2).",
+          "pole_limit": "The two finite-chart limits H->+infinity and H->-infinity of D_nm(H)/(1+H^2) both equal the exact pole value e_n/(b*u_n)-e_m/(b*u_m).",
+          "residual_order_guard": "Choose any 0<epsilon<min(8449/x^2,-b*delta,-b*u_m). The two hypothetical assignments (e_n,e_m)=(epsilon,0) and (0,epsilon) preserve nu_m-nu_n>0 and nu_n,nu_m<0. At the pole their relative rates are respectively epsilon/(b*u_n)<0 and -epsilon/(b*u_m)>0. Therefore the currently proved residual bounds and strict absolute angular-rate order do not determine the pole sign. These assignments are source-bound guards, not asserted Xi correction values."
+        }
+      },
+      "formula": "On a pole-free local chart let I be the interior atoms with c_i!=0, choose A<min_(i in I)h_i and B>max_(i in I)h_i, and put P_x(s)=sum_(i in I)c_i*1_(A<s<h_i). Then exactly sum_(i in I)d_i=A*sum_(i in I)c_i+integral_A^B P_x(s)ds.",
+      "id": "ppag_13_occupation_identity",
+      "proof_boundary": "It is local to a pole-free chart.",
+      "readiness": "proved",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Pairwise order swaps are permutation-free joins.",
+      "diagnostics": null,
+      "formula": "The threshold mass P_x(s) is permutation-free. At a pairwise alignment the two order-cell descriptions join without a singular term: h_2(c_1+c_2)-(h_2-h_1)c_1=h_1c_1+h_2c_2=h_1(c_1+c_2)-(h_1-h_2)c_2.",
+      "id": "ppag_14_swap_join",
+      "proof_boundary": "This does not bound the signed occupation mass.",
+      "readiness": "proved",
+      "role": "exact_cell_join"
+    },
+    {
+      "claim": "The contact scalar splits into edge, pole, mass, and occupation terms.",
+      "diagnostics": null,
+      "formula": "Let D_perp be the sum of d_i over interior atoms with c_i=0. With X_I=sum_(i in I)c_i, the endpoint-complete scalar is mathcal_C_N=D_edge+D_perp+A*X_I+integral_A^B P_x(s)ds, while mathsf_X=C_edge+X_I.",
+      "id": "ppag_15_aggregate_oriented_cell",
+      "proof_boundary": "No term receives an unsupported sign.",
+      "readiness": "ready_to_apply",
+      "role": "exact_decomposition"
+    },
+    {
+      "claim": "Projection poles are handled by chart change and vector sums.",
+      "diagnostics": null,
+      "formula": "When an atom reaches c_i=0 it is retained in D_perp division-free and the next local projective chart is chosen before continuing. The exact pole-rate formula, not a tangent quotient, is the chart join.",
+      "id": "ppag_16_pole_chart_join",
+      "proof_boundary": "No global tangent ordering is asserted.",
+      "readiness": "ready_to_apply",
+      "role": "division_free_join"
+    },
+    {
+      "claim": "The terminal-endpoint block remains recurrent and exact.",
+      "diagnostics": null,
+      "formula": "The aggregate formula keeps (C_edge,D_edge)=(c_0+c_N,d_0+d_N) exact. At a cutoff, recompute terminal centering and transport this block through J_a^(adj); never replace the generally complex within-chart J_a^(der) by J_a^(adj), and never assign separate endpoint or terminal signs.",
+      "id": "ppag_17_exceptional_edge",
+      "proof_boundary": "The two historical J_a objects remain distinct.",
+      "readiness": "ready_to_apply",
+      "role": "exact_boundary_law"
+    },
+    {
+      "claim": "The surviving target is a signed Xi occupation estimate.",
+      "diagnostics": null,
+      "formula": "Retire a uniform pairwise projective Sturm sign as a consequence of the currently proved current bounds. This does not prove that a stronger arithmetic Xi comparison is false. The next admissible target is a one-sided estimate for the signed occupation integral integral P_x(s)ds together with D_edge and D_perp, using actual Xi amplitudes and oscillation before absolute values. Pairwise alignments are harmless permutation joins; projection poles and cutoff edges remain exact separate joins.",
+      "id": "ppag_18_route_decision",
+      "proof_boundary": "No aggregate gap has been proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    },
+    {
+      "claim": "The small-q multiplicity theorem remains separate.",
+      "diagnostics": null,
+      "formula": "The q<1 layer remains a separate multiplicity-compatible parabolic/Hermite or boundary-degree theorem. No pairwise or occupation identity here proves t=0 endpoint simplicity.",
+      "id": "ppag_19_q_lt_1",
+      "proof_boundary": "No t=0 simplicity is assumed.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    },
+    {
+      "claim": "The pairwise route gate is not promoted to contact exclusion.",
+      "diagnostics": null,
+      "formula": "This proves the exact finite-alignment relative-current identity, the favorable frozen-scale model, the exact moving-scale sign-reversal guard, the division-free pole rate and its two-sided chart limit, the residual-order insufficiency guard, and a permutation-free local occupation identity. The guards are not actual Xi counterexamples and do not rule out a stronger source-specific theorem. This does not prove a signed Xi occupation bound, an edge-block sign, the Abel-scalar gap, successor count, q<1 closure, finite-height effectivity, contact exclusion, Lambda<=0, PF-infinity, RH, or a Clay-prize conclusion.",
+      "id": "ppag_20_proof_boundary",
+      "proof_boundary": "RH and every prize-level conclusion remain open.",
+      "readiness": "guard_validated",
+      "role": "proof_guard"
+    }
+  ],
+  "source_audit": {
+    "absolute_phase": "jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_block_composition_guard",
+    "contact_transport": "jensen_window_pf_newman_polymath15_first_order_centered_contact_signed_transport_reduction",
+    "interior_current": "jensen_window_pf_newman_polymath15_first_order_centered_interior_projective_current_gate",
+    "legacy_symmetry": "legacy_prime_curvature_symmetry_audit"
+  },
+  "source_sha256": {
+    "absolute_phase": "1886a5476844ac89860436f1b0d82cbcee8f576dc5e46e9efcd29098edd4ee79",
+    "contact_transport": "fdcef454128f5eacad5b059b6bd649de509dcdca329b2375fdcf260b2e7eb3e3",
+    "interior_current": "c1282eac2b2d22c35055880f4eb2607b855446a3b678caf0c072ca983c660419",
+    "legacy_symmetry": "f9e6ca3a5b7b235f09312249029c961fc5555a073e3737c5df7f00db559a15bf"
+  },
+  "sources": {
+    "absolute_phase": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_block_composition_guard.json",
+    "contact_transport": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_contact_signed_transport_reduction.json",
+    "interior_current": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_interior_projective_current_gate.json",
+    "legacy_symmetry": "work\\rh_compute\\results\\legacy_prime_curvature_symmetry_audit.json"
+  },
+  "status": "exact pairwise projective-alignment identity proved; frozen model favorable; moving-scale and pole residual guards block promotion from current bounds; signed Xi occupation estimate remains open"
+}

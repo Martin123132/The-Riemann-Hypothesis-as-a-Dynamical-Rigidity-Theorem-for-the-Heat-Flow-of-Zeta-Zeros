@@ -1,0 +1,207 @@
+{
+  "date": "2026-07-24",
+  "exact": {
+    "adaptive_scale": {
+      "asymptotic": "n_*(a,t,x)=sqrt(x/(4pi))*(1+O(x^-1)) uniformly for bounded t",
+      "boundary": "The diagnostics suggest kappa=2, but no fixed-collar theorem is proved.",
+      "candidate": "N_kappa(x,t)=ceil(max(n_*(5,t,x),n_*(9,t,x)))+kappa",
+      "component_phase": "F_(a,n,t,x)(u)=tu^2+(a+ix)u-pi*n^2*exp(4u), a in {5,9}",
+      "crossing": "4y=atan((x+2ty)/a); n_*^2=sqrt(a^2+(x+2ty)^2)/(4pi)"
+    },
+    "direct_c1_contract": {
+      "conclusion": "The sufficient disjunction implies (H_t(x),H_t'(x))!=(0,0).",
+      "derivative_error": "|J_t'-J_(N,t)'|<=64*x^3*epsilon_(N,0,m)+16*x^4*epsilon_(N,1,m)",
+      "partial_derivative": "J_(N,t)'(x)=64*x^3*S_(N,t)(x)+16*x^4*S_(N,t)'(x)",
+      "partial_value": "J_(N,t)(x)=16*x^4*S_(N,t)(x)",
+      "sufficient_disjunction": "|J_(N,t)|>16*x^4*epsilon_(N,0,m) OR |J_(N,t)'|>64*x^3*epsilon_(N,0,m)+16*x^4*epsilon_(N,1,m)",
+      "value_error": "|J_t-J_(N,t)|<=16*x^4*epsilon_(N,0,m)"
+    },
+    "modular_partition": {
+      "block": "b_n(u)=omega(u)*phi_n(u)+(1-omega(u))*phi_n(-u)",
+      "newman_decay": "For every finite T, exp(tu^2)b_n(u) is Schwartz uniformly for 0<=t<=T",
+      "partition": "sum_(n>=1)b_n(u)=Phi(u)",
+      "properties": "b_n is even, entire, and strictly positive on R",
+      "switch": "omega(u)=(1+erf(3*sinh(4u)))/2"
+    },
+    "nonpromotion": {
+      "cancellation": "At x=200, the fixed three-block Laguerre diagnostic is cancelled by more than 20 decimal digits.",
+      "fixed_block": "Fixed N with static absolute bars is cofinally impossible.",
+      "monotonicity": "The stronger global sign -L_t'>0 is false at the Xi Lehmer stress point and is not part of this target.",
+      "scope": "Neither finite diagnostics nor the exact error contract prove the open adaptive separation inequality."
+    },
+    "normal_transform": {
+      "block_transform": "B_(n,t)(x)=integral_0^infinity exp(tu^2)b_n(u)cos(xu)du",
+      "partial": "S_(N,t)(x)=sum_(1<=n<=N)B_(n,t)(x)",
+      "remainder": "R_(N,t)(x)=H_t(x)-S_(N,t)(x)",
+      "series": "H_t^(j)(x)=sum_(n>=1)B_(n,t)^(j)(x), j=0,1,2,..., absolutely and uniformly on R_x times [0,T]"
+    },
+    "quantitative_target": {
+      "budget_scaling": "For m>=5, the explicit J error multipliers are x^(4-m)*d_(N,0,m) and 4*x^(3-m)*d_(N,0,m)+x^(4-m)*d_(N,1,m), up to the common factor 16.",
+      "composition": "Together with the certified |x|<=38 core and positive-boundary attainment, this target would close the remaining positive-time first-jet obstruction.",
+      "required_work": "Derive rigorous N-dependent derivative L1 budgets and a matching lower separation profile for the finite adaptive first jet; intervalize transition cells.",
+      "target": "Find explicit integers m>=5 and kappa>=0, or another controlled adaptive N(x,t), and rigorously prove the direct C1 sufficient disjunction for every 0<t<=1/5 and x>38."
+    },
+    "tail_budgets": {
+      "combined": "epsilon_(N,j,m)(x,T)=min(mu_(N,j)(T),d_(N,j,m)(T)/|x|^m)",
+      "derivative": "d_(N,j,m)(T)=(1/2)*sup_(0<=t<=T)||partial_u^m[(iu)^j*exp(tu^2)r_N(u)]||_1",
+      "finiteness": "Every d_(N,j,m)(T) is finite because the modular tail is uniformly Schwartz at bounded Newman time.",
+      "jet_bound": "|R_(N,t)^(j)(x)|<=epsilon_(N,j,m)(x,T), j=0,1,2",
+      "moment": "mu_(N,j)(T)=integral_0^infinity u^j*exp(Tu^2)*sum_(n>N)b_n(u)du"
+    }
+  },
+  "kind": "jensen_window_pf_newman_theta_adaptive_modular_c1_remainder_contract",
+  "proof_boundary": "This artifact composes an exact positive even modular theta partition, normal transform series, arbitrary-power Fourier tail budgets, direct J/J' error bars, and the exact adaptive saddle scale. It does not supply useful uniform derivative constants or the retained first-jet lower separation needed by the displayed disjunction. The finite cancellation and collar rows are diagnostic only. It proves no new Q_j, Lambda<=0, RH, or Clay-prize result.",
+  "rows": [
+    {
+      "claim": "The modular blend partitions Phi into positive even entire blocks.",
+      "diagnostics": null,
+      "formula": "b_n(u)=omega(u)*phi_n(u)+(1-omega(u))*phi_n(-u); sum_(n>=1)b_n(u)=Phi(u)",
+      "id": "ntamc1_01_positive_even_partition",
+      "proof_boundary": "Kernel decomposition only; no transform sign follows.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "Every frequency derivative has a normal arithmetic block series at bounded Newman time.",
+      "diagnostics": null,
+      "formula": "H_t^(j)(x)=sum_(n>=1)B_(n,t)^(j)(x), j=0,1,2,..., absolutely and uniformly on R_x times [0,T]",
+      "id": "ntamc1_02_normal_transform_series",
+      "proof_boundary": "Absolute convergence does not sign the coupled sum.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "Repeated Fourier integration by parts gives arbitrary-power modular-tail decay.",
+      "diagnostics": null,
+      "formula": "d_(N,j,m)(T)=(1/2)*sup_(0<=t<=T)||partial_u^m[(iu)^j*exp(tu^2)r_N(u)]||_1; |R_(N,t)^(j)(x)|<=epsilon_(N,j,m)(x,T), j=0,1,2",
+      "id": "ntamc1_03_decaying_tail_budget",
+      "proof_boundary": "The constants are finite but useful explicit bounds remain to be derived.",
+      "readiness": "ready_to_apply",
+      "role": "exact_inequality"
+    },
+    {
+      "claim": "The modular jet budgets give direct full-Xi error bars for J and J'.",
+      "diagnostics": null,
+      "formula": "|J_t-J_(N,t)|<=16*x^4*epsilon_(N,0,m); |J_t'-J_(N,t)'|<=64*x^3*epsilon_(N,0,m)+16*x^4*epsilon_(N,1,m)",
+      "id": "ntamc1_04_direct_first_jet_error",
+      "proof_boundary": "Exact finite-to-infinite C1 reduction.",
+      "readiness": "ready_to_apply",
+      "role": "exact_inequality"
+    },
+    {
+      "claim": "One strict retained value-or-derivative inequality excludes full-Xi contact.",
+      "diagnostics": null,
+      "formula": "|J_(N,t)|>16*x^4*epsilon_(N,0,m) OR |J_(N,t)'|>64*x^3*epsilon_(N,0,m)+16*x^4*epsilon_(N,1,m)",
+      "id": "ntamc1_05_contact_exclusion_disjunction",
+      "proof_boundary": "The sufficient disjunction implies (H_t(x),H_t'(x))!=(0,0).",
+      "readiness": "ready_to_apply",
+      "role": "exact_composition"
+    },
+    {
+      "claim": "The retained block count must grow or use an equivalent cancellation-preserving architecture.",
+      "diagnostics": null,
+      "formula": "Fixed N with static absolute bars is cofinally impossible.",
+      "id": "ntamc1_06_fixed_block_guard",
+      "proof_boundary": "Rejects static fixed-block bars, not Xi transversality.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion_gate"
+    },
+    {
+      "claim": "The modular transition fixes the Riemann-Siegel square-root block scale.",
+      "diagnostics": {
+        "diagnostic_collar_covers_all": true,
+        "diagnostic_first_counts": [
+          3,
+          4,
+          4,
+          5,
+          6,
+          3,
+          4,
+          4,
+          5,
+          6
+        ]
+      },
+      "formula": "4y=atan((x+2ty)/a); n_*^2=sqrt(a^2+(x+2ty)^2)/(4pi); n_*(a,t,x)=sqrt(x/(4pi))*(1+O(x^-1)) uniformly for bounded t",
+      "id": "ntamc1_07_adaptive_saddle_scale",
+      "proof_boundary": "The diagnostics suggest kappa=2, but no fixed-collar theorem is proved.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "A fixed three-block Laguerre expression loses more than twenty digits to the arithmetic tail at x=200.",
+      "diagnostics": {
+        "minimum_x200_cancellation_digits": "21.089970237240061894000000000000000000000000000000000000000000000000000000000000",
+        "rows": 10
+      },
+      "formula": "At x=200, the fixed three-block Laguerre diagnostic is cancelled by more than 20 decimal digits.",
+      "id": "ntamc1_08_cancellation_stress",
+      "proof_boundary": "Two-time point diagnostic only; no interval sign theorem.",
+      "readiness": "diagnostic_only",
+      "role": "finite_diagnostic"
+    },
+    {
+      "claim": "Find explicit integers m>=5 and kappa>=0, or another controlled adaptive N(x,t), and rigorously prove the direct C1 sufficient disjunction for every 0<t<=1/5 and x>38.",
+      "diagnostics": null,
+      "formula": "For m>=5, the explicit J error multipliers are x^(4-m)*d_(N,0,m) and 4*x^(3-m)*d_(N,0,m)+x^(4-m)*d_(N,1,m), up to the common factor 16.",
+      "id": "ntamc1_09_open_adaptive_c1_target",
+      "proof_boundary": "Derive rigorous N-dependent derivative L1 budgets and a matching lower separation profile for the finite adaptive first jet; intervalize transition cells. The stronger global sign -L_t'>0 is false at the Xi Lehmer stress point and is not part of this target.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    },
+    {
+      "claim": "The contract isolates one quantitative bridge and keeps every finite diagnostic subordinate to it.",
+      "diagnostics": null,
+      "formula": "Neither finite diagnostics nor the exact error contract prove the open adaptive separation inequality.",
+      "id": "ntamc1_10_proof_boundary",
+      "proof_boundary": "No new Q_j, Lambda<=0, RH, or Clay-prize result is proved.",
+      "readiness": "guard_active",
+      "role": "proof_guard"
+    }
+  ],
+  "source_audit": {
+    "adaptive_collar_covers_all": true,
+    "adaptive_first_counts": [
+      3,
+      4,
+      4,
+      5,
+      6,
+      3,
+      4,
+      4,
+      5,
+      6
+    ],
+    "adaptive_kind": "jensen_window_pf_newman_theta_modular_blend_adaptive_saddle_gate",
+    "adaptive_rows": 10,
+    "compact_kind": "jensen_window_pf_newman_theta_compact_transversality_interval_certificate",
+    "fixed_block_kind": "jensen_window_pf_newman_theta_fixed_block_cofinal_obstruction_gate",
+    "fixed_frontier_prefix": {
+      "certified_shell_rows": 26,
+      "end_j": 30,
+      "minimum_ratio_lower": "[1.3709314869015039163669568274457936340118136691538 +/- 2.92e-50]",
+      "minimum_ratio_shell": 23,
+      "proof_boundary": "Stored finite diagnostics only; no Q_j with j>=5 is promoted by this audit.",
+      "shell_rows": 26,
+      "start_j": 5,
+      "terminal_prefix_row_sha256": "a2e340abc6f317d0c8f6e794e3f9f4516e61db5e5ff23e159d82de080fde732d",
+      "total_evaluated_boxes": 20262,
+      "total_subdivisions": 1292
+    },
+    "high_frequency_kind": "jensen_window_pf_newman_theta_modular_blend_high_frequency_scout",
+    "high_frequency_rows": 10,
+    "minimum_x200_cancellation_digits": "21.089970237240061894000000000000000000000000000000000000000000000000000000000000",
+    "modular_kind": "jensen_window_pf_newman_theta_modular_blend_gate"
+  },
+  "sources": [
+    "work/rh_compute/results/jensen_window_pf_newman_theta_modular_blend_gate.json",
+    "work/rh_compute/results/jensen_window_pf_newman_theta_modular_blend_high_frequency_scout.json",
+    "work/rh_compute/results/jensen_window_pf_newman_theta_modular_blend_adaptive_saddle_gate.json",
+    "work/rh_compute/results/jensen_window_pf_newman_theta_fixed_block_cofinal_obstruction_gate.json",
+    "work/rh_compute/results/jensen_window_pf_newman_theta_compact_transversality_interval_certificate.json",
+    "outputs/formal_core.md"
+  ],
+  "status": "exact adaptive modular C1 remainder contract with one open quantitative separation target"
+}

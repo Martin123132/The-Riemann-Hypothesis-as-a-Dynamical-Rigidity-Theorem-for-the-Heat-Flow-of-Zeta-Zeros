@@ -1,0 +1,170 @@
+{
+  "audit": {
+    "exact_identity_count": 12,
+    "lambda_le_zero_proved": false,
+    "literature_guard_count": 1,
+    "normalization_crosscheck_count": 1,
+    "open_signed_off_diagonal_gate_count": 1,
+    "pf_infinity_proved": false,
+    "proof_guard_count": 3,
+    "rh_proved": false,
+    "row_count": 20,
+    "uniform_gram_bound_proved": false
+  },
+  "date": "2026-07-23",
+  "kind": "jensen_window_pf_weighted_fractional_autocorrelation_gram_bridge",
+  "parameters": {
+    "a": "(1-alpha)/2",
+    "alpha": "2omega",
+    "beta": "(1+alpha)/2",
+    "omega_range": "0<omega<1/2"
+  },
+  "rows": [
+    {
+      "id": "wfagb_01_parameters",
+      "proof_boundary": "Thus 0<alpha<1, 0<a<1/2, and 1/2<beta<1.",
+      "role": "exact_definition",
+      "statement": "alpha=2omega, a=(1-alpha)/2, and beta=(1+alpha)/2=1-a for 0<omega<1/2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_02_weighted_autocorrelation",
+      "proof_boundary": "Absolute convergence follows from O(x^alpha) at zero and O(x^(alpha-2)) at infinity.",
+      "role": "exact_definition",
+      "statement": "A_alpha(lambda)=integral_(0,infinity) {x}{lambda*x}x^(alpha-2)dx.",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_03_scaling_law",
+      "proof_boundary": "The substitution x=lambda*y in A_alpha(1/lambda).",
+      "role": "exact_identity",
+      "statement": "A_alpha(lambda)=lambda^(1-alpha)A_alpha(1/lambda).",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_04_log_stationary_kernel",
+      "proof_boundary": "Evenness is exactly the scaling law; pointwise positivity comes from the defining integral.",
+      "role": "exact_identity",
+      "statement": "C_alpha(u)=exp(-a*u)A_alpha(exp(u)) is real, positive, continuous, and even.",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_05_fractional_part_mellin",
+      "proof_boundary": "Classical Mellin identity, obtained by unit-interval decomposition and continuation inside the convergence strip.",
+      "role": "exact_identity",
+      "statement": "integral_(0,infinity){x}x^(s-1)dx=zeta(-s)/s for -1<Re(s)<0.",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_06_autocorrelation_mellin",
+      "proof_boundary": "Tonelli/Fubini is valid first on alpha-1<Re(s)<0; insert the fractional-part Mellin identity twice.",
+      "role": "exact_identity",
+      "statement": "integral_(0,infinity)A_alpha(lambda)lambda^(s-1)d(lambda)=-zeta(-s)zeta(1-alpha+s)/[s(s+1-alpha)].",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_07_fourier_density",
+      "proof_boundary": "Mellin-to-Fourier substitution lambda=exp(u); the standard convexity bound makes Phi_alpha integrable.",
+      "role": "exact_identity",
+      "statement": "At s=-a+it, Phi_alpha(t)=|zeta(a+it)|^2/(a^2+t^2) and C_alpha(u)=(1/(2*pi))integral_R Phi_alpha(t)exp(-itu)dt.",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_08_positive_definiteness",
+      "proof_boundary": "Bochner/Fourier inversion and the two-by-two principal minor.",
+      "role": "exact_implication",
+      "statement": "Phi_alpha(t)>=0 makes C_alpha positive definite and gives |C_alpha(u)|<=C_alpha(0).",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_09_burnol_reciprocal_norm",
+      "proof_boundary": "The reciprocal substitution x=1/t.",
+      "role": "exact_identity",
+      "statement": "For f_(alpha,N)(t)=sum_(d<=N)mu(d)d^(-alpha){1/(dt)}, integral t^(-alpha)|f_(alpha,N)(t)|^2dt equals integral x^(alpha-2)|sum_(d<=N)mu(d)d^(-alpha){x/d}|^2dx.",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_10_cross_kernel",
+      "proof_boundary": "Scale x=d*y and then apply the definition of C_alpha.",
+      "role": "exact_identity",
+      "statement": "I_alpha(d,e)=integral x^(alpha-2){x/d}{x/e}dx=d^(alpha-1)A_alpha(d/e)=(de)^((alpha-1)/2)C_alpha(log(d/e)).",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_11_stationary_gram_form",
+      "proof_boundary": "Finite expansion of the reciprocal norm and the cross-kernel identity.",
+      "role": "exact_identity",
+      "statement": "The Burnol norm is Gamma_(alpha,N)=sum_(d,e<=N)mu(d)mu(e)(de)^(-beta)C_alpha(log(d/e)).",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_12_spectral_gram_form",
+      "proof_boundary": "Insert the Fourier representation of C_alpha into the finite Gram sum.",
+      "role": "exact_identity",
+      "statement": "Gamma_(alpha,N)=(1/(2*pi))integral_R Phi_alpha(t)|sum_(d<=N)mu(d)d^(-beta-it)|^2dt.",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_13_mellin_plancherel_match",
+      "proof_boundary": "This is an exact normalization cross-check, not a new uniform estimate.",
+      "role": "exact_equivalence",
+      "statement": "The stationary Gram formula and the Burnol-Hardy Mellin-Plancherel formula are the same identity, with beta=1/2+omega and a=1/2-omega.",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_14_diagonal_split",
+      "proof_boundary": "Separate d=e from d!=e in the real symmetric Gram sum.",
+      "role": "exact_identity",
+      "statement": "Gamma_(alpha,N)=Diag_(alpha,N)+Off_(alpha,N), where Diag=C_alpha(0)sum_(d<=N)mu(d)^2d^(-(1+alpha)).",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_15_uniform_diagonal_bound",
+      "proof_boundary": "Use mu(d)^2<=1 and absolute convergence at 1+alpha>1.",
+      "role": "exact_inequality",
+      "statement": "0<=Diag_(alpha,N)<=C_alpha(0)zeta(1+alpha) uniformly in N.",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_16_signed_off_diagonal",
+      "proof_boundary": "All remaining difficulty is a signed multiplicative correlation, despite C_alpha being positive definite.",
+      "role": "exact_identity",
+      "statement": "Off_(alpha,N)=2sum_(d<e<=N)mu(d)mu(e)(de)^(-beta)C_alpha(log(d/e)).",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_17_absolute_value_barrier",
+      "proof_boundary": "Since sum_(d<=N)d^(-beta)=O(N^(1-beta)) and 2(1-beta)=1-alpha; this is not uniform.",
+      "role": "proof_guard",
+      "statement": "Positive definiteness only gives Gamma_(alpha,N)>=0; the bound |C_alpha(u)|<=C_alpha(0) gives merely Gamma_(alpha,N)=O(N^(1-alpha)).",
+      "status": "available_exact"
+    },
+    {
+      "id": "wfagb_18_source_scope",
+      "proof_boundary": "Do not attribute the weighted uniform bound to the unweighted source.",
+      "role": "literature_guard",
+      "statement": "The alpha=0 autocorrelation and Mellin formula are in B\u00e1ez-Duarte et al.; the 0<alpha<1 weighted extension and its finite Mobius Gram reduction are derived here.",
+      "status": "source_backed_guard"
+    },
+    {
+      "id": "wfagb_19_nonpromotion_guard",
+      "proof_boundary": "A uniform upper bound needs arithmetic cancellation, not only positive-definite kernel structure.",
+      "role": "proof_guard",
+      "statement": "Kernel positivity, pointwise positivity, bounded diagonal, or an unweighted autocorrelation theorem cannot by themselves bound the signed off-diagonal uniformly.",
+      "status": "guarded"
+    },
+    {
+      "id": "wfagb_20_open_off_diagonal_gate",
+      "proof_boundary": "This RH-strength off-diagonal gate remains open; no RH, PF-infinity, or Lambda<=0 conclusion is recorded.",
+      "role": "open_target",
+      "statement": "Prove sup_N Gamma_(alpha,N)<infinity along one explicit cofinal alpha sequence by a weighted multiplicative large-sieve, bilinear Mobius, or equivalent estimate.",
+      "status": "open_target"
+    }
+  ],
+  "source_anchors": [
+    "https://arxiv.org/abs/math/0306251",
+    "https://arxiv.org/abs/math/0202166",
+    "https://arxiv.org/abs/1305.4395"
+  ],
+  "status": "exact weighted autocorrelation Gram/spectral reduction with one open signed off-diagonal gate"
+}

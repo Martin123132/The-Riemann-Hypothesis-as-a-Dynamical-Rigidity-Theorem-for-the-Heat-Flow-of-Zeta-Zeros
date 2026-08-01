@@ -1,0 +1,141 @@
+{
+  "date": "2026-07-23",
+  "exact": {
+    "first_quadrant": "For z=w^2 and w=a+i*b with a,b>0: 2*|w|^2*P_Phi(w^2)=-Im(conj(w)*M'(w)*conj(M(w))), M(w)=integral Phi(u)cosh(u*w)du",
+    "first_wall": "At x=0: R'(0)=(E[y^2]-3*E[y]^2)/12, so the first real-axis Stieltjes wall is E[y^2]<=3*E[y]^2",
+    "kernel_atoms": "C_u(z)=cosh(u*sqrt(z)), D_u(z)=partial_z C_u(z)=u*sinh(u*sqrt(z))/(2*sqrt(z))",
+    "log_derivative": "R(z)=F'(z)/F(z)=integral Phi(u)D_u(z)du / integral Phi(u)C_u(z)du",
+    "open_target": "Prove P_Phi(z)>0 on the whole upper half-plane, or construct the positive resolvent representation, using verified Xi/Phi structure rather than zero reality",
+    "operator_route": "A direct identity R(z)=gamma+<v,(I+z*T)^(-1)v> with T positive self-adjoint would give the required Stieltjes representation by the spectral theorem",
+    "phi_transform": "F(z)=integral_R Phi(u)*cosh(u*sqrt(z))*du, F(x)>0 for x>=0",
+    "pick_equivalence": "For the nonexponential Phi transform: F in LP+ <=> P_Phi(z)>0 for every Im(z)>0",
+    "pick_numerator": "P_Phi(z):=-Im(F'(z)*conj(F(z)))=|F(z)|^2*(-Im R(z))",
+    "polarization": "P_Phi(z)=double_integral Phi(u)*Phi(v)*K_z(u,v)du dv",
+    "polarized_kernel": "K_z(u,v):=-(1/2)*Im(D_u(z)*conj(C_v(z))+D_v(z)*conj(C_u(z)))",
+    "stieltjes_characterization": "R is Stieltjes <=> R(x)>=0 for x>0, R is holomorphic on C\\(-infinity,0], and Im R(z)<=0 for Im(z)>0",
+    "tilted_identity": "For y=u^2, C_x(y)=cosh(sqrt(x*y)), r_x(y)=partial_x log C_x(y), and dPi_x=C_x*dmu/F(x): R'(x)=E_Pi[r_x']+Var_Pi(r_x)"
+  },
+  "kind": "jensen_window_pf_phi_pick_kernel_target",
+  "mixture_audit": {
+    "E_y": "19/40",
+    "E_y2": "109/160",
+    "E_y2_minus_3_E_y_squared": "7/1600",
+    "R_prime_0": "7/19200",
+    "conclusion": "R'(0)>0, so R is not Stieltjes and the Pick numerator is negative for z=i*epsilon with sufficiently small epsilon>0",
+    "measure": "(9/10)*delta_(1/4)+(1/10)*delta_(5/2) in y=u^2"
+  },
+  "proof_boundary": "This artifact proves an exact Pick-kernel reformulation of the common LP+/coefficient-PF/Jensen/Stieltjes endpoint, a tilted first-wall identity, and an exact positive-mixture countermodel. It does not prove the global Phi-kernel sign, construct a positive resolvent, prove PF-infinity, Jensen hyperbolicity for zeta, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "The squared-variable endpoint is a positive Phi mixture of fixed-scale cosh kernels.",
+      "formula": "F(z)=integral_R Phi(u)*cosh(u*sqrt(z))*du, F(x)>0 for x>=0",
+      "id": "ppkt_01_phi_transform",
+      "proof_boundary": "Positive mixing alone does not preserve LP+.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The transform and its derivative have explicit entire fixed-scale atoms.",
+      "formula": "C_u(z)=cosh(u*sqrt(z)), D_u(z)=partial_z C_u(z)=u*sinh(u*sqrt(z))/(2*sqrt(z))",
+      "id": "ppkt_02_kernel_atoms",
+      "proof_boundary": "The removable value at z=0 is understood by its power series.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The Edrei endpoint is the exact Phi logarithmic-derivative ratio.",
+      "formula": "R(z)=F'(z)/F(z)=integral Phi(u)D_u(z)du / integral Phi(u)C_u(z)du",
+      "id": "ppkt_03_log_derivative_ratio",
+      "proof_boundary": "A ratio of positive integrals on the positive axis is not yet a Stieltjes function.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The anti-Pick sign is equivalent to positivity of one real numerator.",
+      "formula": "P_Phi(z):=-Im(F'(z)*conj(F(z)))=|F(z)|^2*(-Im R(z))",
+      "id": "ppkt_04_pick_numerator",
+      "proof_boundary": "Strict positivity also excludes off-axis zeros of F.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Polarization writes the Pick numerator as a quadratic form in the known Phi density.",
+      "formula": "P_Phi(z)=double_integral Phi(u)*Phi(v)*K_z(u,v)du dv",
+      "id": "ppkt_05_polarized_double_kernel",
+      "proof_boundary": "The cross-scale kernel K_z(u,v) is not pointwise nonnegative in general.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Krein's Stieltjes/Pick characterization and Sokal's criterion make the global Phi-kernel sign endpoint-equivalent to LP+.",
+      "formula": "For the nonexponential Phi transform: F in LP+ <=> P_Phi(z)>0 for every Im(z)>0",
+      "id": "ppkt_06_pick_endpoint_equivalence",
+      "proof_boundary": "This identifies the exact target but proves none of its upper-half-plane signs.",
+      "readiness": "ready_to_apply",
+      "role": "exact_equivalence"
+    },
+    {
+      "claim": "The square-root map converts the target to a real two-parameter first-quadrant inequality.",
+      "formula": "For z=w^2 and w=a+i*b with a,b>0: 2*|w|^2*P_Phi(w^2)=-Im(conj(w)*M'(w)*conj(M(w))), M(w)=integral Phi(u)cosh(u*w)du",
+      "id": "ppkt_07_first_quadrant_form",
+      "proof_boundary": "All a,b>0 are required; finite grids are nonpromotable.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "On the positive boundary the first Pick wall is a tilted variance-versus-curvature inequality.",
+      "formula": "For y=u^2, C_x(y)=cosh(sqrt(x*y)), r_x(y)=partial_x log C_x(y), and dPi_x=C_x*dmu/F(x): R'(x)=E_Pi[r_x']+Var_Pi(r_x)",
+      "id": "ppkt_08_tilted_variance_wall",
+      "proof_boundary": "This is necessary but not sufficient for the global Pick condition.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "At the origin the first wall reduces to a sharp scale-kurtosis inequality.",
+      "formula": "At x=0: R'(0)=(E[y^2]-3*E[y]^2)/12, so the first real-axis Stieltjes wall is E[y^2]<=3*E[y]^2",
+      "id": "ppkt_09_origin_kurtosis_wall",
+      "proof_boundary": "Only the first real-axis wall, not an all-order theorem.",
+      "readiness": "available_exact",
+      "role": "exact_necessary_condition"
+    },
+    {
+      "claim": "A positive two-scale mixture violates the first Pick wall exactly.",
+      "formula": "For (9/10)delta_(1/4)+(1/10)delta_(5/2): R'(0)=7/19200>0",
+      "id": "ppkt_10_two_scale_pick_failure",
+      "proof_boundary": "Abstract positive scale measure, not the Xi/Phi density.",
+      "readiness": "guard_validated",
+      "role": "exact_countermodel"
+    },
+    {
+      "claim": "A Phi-derived positive self-adjoint resolvent realization would close the Stieltjes endpoint.",
+      "formula": "A direct identity R(z)=gamma+<v,(I+z*T)^(-1)v> with T positive self-adjoint would give the required Stieltjes representation by the spectral theorem",
+      "id": "ppkt_11_positive_resolvent_route",
+      "proof_boundary": "No noncircular operator T and cyclic vector v are constructed here.",
+      "readiness": "not_ready_to_apply",
+      "role": "sufficient_theorem_target"
+    },
+    {
+      "claim": "The surviving direct target is global positivity of the polarized Phi Pick kernel or an equivalent positive resolvent.",
+      "formula": "Prove P_Phi(z)>0 on the whole upper half-plane, or construct the positive resolvent representation, using verified Xi/Phi structure rather than zero reality",
+      "id": "ppkt_12_xi_phi_pick_handoff",
+      "proof_boundary": "The target must be proved without assuming real zeros, LP+, RH, or Lambda<=0.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Christian Berg, Stieltjes-Pick-Bernstein-Schoenberg and their connection to complete monotonicity, Theorem 3.2",
+      "url": "https://web.math.ku.dk/~berg/manus/castellon.pdf"
+    },
+    {
+      "title": "Kalmykov and Karp, When does a hypergeometric function belong to LP+, Proposition 6",
+      "url": "https://doi.org/10.1016/j.jmaa.2022.126432"
+    },
+    {
+      "path": "outputs/jensen_window_pf_edrei_stieltjes_equivalence_gate.md",
+      "title": "Local Edrei-Stieltjes endpoint equivalence gate"
+    }
+  ],
+  "status": "exact endpoint-equivalent Pick-kernel target, exact first-wall identity, and positive-mixture guard"
+}

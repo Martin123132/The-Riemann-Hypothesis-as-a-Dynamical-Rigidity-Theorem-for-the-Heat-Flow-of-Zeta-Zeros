@@ -1,0 +1,198 @@
+{
+  "builder_sha256": "31c8d14f688456a44c0b67831feefcb6d4741e59ae1a8efd40e0fdb2ade0da32",
+  "date": "2026-07-26",
+  "exact": {
+    "chart_weight": "beta=L*s_pf=sqrt(q/(1+q))",
+    "contact_remainder_transfer": "if Z=J+r=Z_x=J_x+r_x=0, |r|<=epsilon_0, |r_x|<=L*epsilon_1, then T_pf[J]<=epsilon_0^2+beta^2*epsilon_1^2",
+    "corrected_component_box": "for E_c with J=2Re(E_c), put X_c=Re(E_c), U_c=Re(E_c,x); a contact requires |X_c|<=epsilon_0/2 and |U_c|<=L*epsilon_1/2",
+    "corrected_main_jet": "J=2X-Q, J_x=2(U-BY)-Q_x, T_pf[J]=J^2+s_pf^2*J_x^2",
+    "correlation_normalization": "F_1(2x)=H_x^2-H H_xx; F_2(2x)=3H_xx^2/4-H_x H_xxx+H H_xxxx/4",
+    "critical_c1_budget": "for L>=50 and 0<tL<=25: epsilon_0=2500*exp(-3L/4), epsilon_1=5000*exp(-3L/4)",
+    "crossing_band_target": "on |2X-Q|<=epsilon_0 prove |2(U-BY)-Q_x|>L*epsilon_1",
+    "domain_split": "q<=1 iff t<=1/(2L^2) iff c=tL<=1/(2L); q>=1 is the frequency chart and contains every fixed 0<c<=c_*+epsilon as L->infinity",
+    "double_contact_signature": "H=H_x=0, H_xx!=0 implies F_1=F_1'=0, F_1''=H_xx^2/4, F_2=3H_xx^2/4, partial_t F_1=H_xx^2",
+    "explicit_robust_band_slope_target": "|M(h_+-h_-)+D_0|>625*exp(-3L/4)*(4L+|h_++h_-|)",
+    "explicit_sharp_contact_box": "a contact requires |J|<=2500*exp(-3L/4) and |J_x|<=5000*L*exp(-3L/4)",
+    "frequency_affine_reduction": "put A0=J^2-epsilon_0^2 and A1=(J_x/L)^2-epsilon_1^2; for q>=1, D_pf=A0+beta^2*A1>=min(A0+A1/2,A0+A1), so positivity of both endpoint deficits suffices",
+    "hierarchy_defect": "F_2-3*partial_xi^2 F_1=H H_xxxx-H_x H_xxx",
+    "near_crossing_slope_identity": "U_c=M(h_+-h_-)+(X_c/2)(h_++h_-)+D_0",
+    "normalizer_contact_jet": "for H=A Z and a=(log A)_x, at Z=Z_x=0: H_xx=A Z_xx, H_xxx=A(Z_xxx+3a Z_xx)",
+    "order_hankel_contact": "at a nondegenerate double contact, F_1*F_3-F_2^2=-9*H_xx^4/16<0",
+    "phase_matched_contact_equation": "at a contact, M(h_+-h_-)+D_0=-r_x/2+(r/4)(h_++h_-)",
+    "quadratic_countermodel": "H_tau(y)=y^2-2tau solves H_tau=-H_yy; F_1=2y^2+4tau, F_2=3, F_3=0, F_1F_3-F_2^2=-9, and at y=0 ||partial_tau(H,sH_y)||/||(H,sH_y)||=1/|tau|",
+    "robust_band_slope_target": "|M(h_+-h_-)+D_0|>L*epsilon_1/2+epsilon_0*|h_++h_-|/4",
+    "route_order_guard": "direct corrected-main exclusion uses a C1 remainder; relative heat-jet closure exposes Z_xx and Z_xxx and therefore needs C3 control or an independent closed factorization",
+    "scale": "s_pf=sqrt(2t)/sqrt(1+q), q=2tL^2",
+    "scale_derivative_guard": "the s_pf,t H_x term vanishes at H_x=0; the scale cannot regularize a genuine collision",
+    "scaled_heat_contact": "partial_t(H,s_pf H_x)=-A(Z_xx,s_pf*(Z_xxx+3a Z_xx)) at a contact",
+    "sharp_c1_target": "|2X-Q|>epsilon_0 or |2(U-BY)-Q_x|>L*epsilon_1",
+    "sharp_contact_box": "a contact requires |J|<=epsilon_0 and |J_x|<=L*epsilon_1",
+    "signed_remainder_peeling": "if r=r_0+delta_0, r_x=r_(0,x)+delta_1, |delta_0|<=eta_0, and |delta_1|<=L*eta_1, then contact requires |M(h_+-h_-)+D_0+r_(0,x)/2-(r_0/4)(h_++h_-)|<=L*eta_1/2+(eta_0/4)|h_++h_-|",
+    "signed_remainder_target": "|M(h_+-h_-)+D_0+r_(0,x)/2-(r_0/4)(h_++h_-)|>L*eta_1/2+(eta_0/4)|h_++h_-|",
+    "strict_c1_target": "(2X-Q)^2+s_pf^2*(2(U-BY)-Q_x)^2 >epsilon_0^2+beta^2*epsilon_1^2",
+    "uniform_wedge_multiplicity_guard": "if at t=0 a contact has |J(0)|<epsilon_0 and |J_x(0)|<L*epsilon_1, continuity keeps J,J_x inside the same open box for all sufficiently small t>0; therefore a full-wedge pointwise C1-box exclusion rules out endpoint multiplicity and is stronger than Lambda<=0 or RH",
+    "zero_mass_slope_convention": "set h_+=0 when M_+=0 and h_-=0 when M_-=0; the near-crossing identity then remains valid, including the all-zero-real-part case U_c=D_0"
+  },
+  "kind": "jensen_window_pf_newman_parabolic_frequency_contact_normal_hierarchy_gate",
+  "proof_boundary": "The artifact proves contact-normal, corrected-main, normalizer, heat-jet, and correlation identities. It rejects scale-only regularization and generic correlation-order log-convexity. It does not prove the Xi phase-matched contact contradiction, strict C1 small-ball theorem, contact exclusion in the wedge, Lambda<=0, RH, or the Clay prize.",
+  "rows": [
+    {
+      "claim": "A positive normalizer preserves first-jet contacts exactly.",
+      "formula": "H=A Z, A>0: H=H_x=0 iff Z=Z_x=0",
+      "id": "pfcn_01_positive_normalizer_contact_transfer",
+      "proof_boundary": "Algebraic equivalence only.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The corrected finite main has an exact parabolic-frequency first-jet norm.",
+      "formula": "J=2X-Q, J_x=2(U-BY)-Q_x, T_pf[J]=J^2+s_pf^2*J_x^2",
+      "id": "pfcn_02_corrected_main_scaled_jet",
+      "proof_boundary": "No lower bound for this norm is asserted.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "A refined C1 remainder puts every possible contact in one sharp coordinate box.",
+      "formula": "for L>=50 and 0<tL<=25: epsilon_0=2500*exp(-3L/4), epsilon_1=5000*exp(-3L/4); a contact requires |J|<=2500*exp(-3L/4) and |J_x|<=5000*L*exp(-3L/4); sufficient exclusion: |2X-Q|>epsilon_0 or |2(U-BY)-Q_x|>L*epsilon_1",
+      "id": "pfcn_03_c1_remainder_transfer",
+      "proof_boundary": "The joint Xi small-box exclusion remains open.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "The parabolic chart is ultra-small, while two endpoint inequalities control the fixed-c frequency layer.",
+      "formula": "q<=1 iff t<=1/(2L^2) iff c=tL<=1/(2L); q>=1 is the frequency chart and contains every fixed 0<c<=c_*+epsilon as L->infinity; put A0=J^2-epsilon_0^2 and A1=(J_x/L)^2-epsilon_1^2; for q>=1, D_pf=A0+beta^2*A1>=min(A0+A1/2,A0+A1), so positivity of both endpoint deficits suffices",
+      "id": "pfcn_04_two_chart_domain_split",
+      "proof_boundary": "A domain decomposition, not contact exclusion.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "At contact, the physical second and third jets have a simple normalized form.",
+      "formula": "for H=A Z and a=(log A)_x, at Z=Z_x=0: H_xx=A Z_xx, H_xxx=A(Z_xxx+3a Z_xx)",
+      "id": "pfcn_05_normalized_contact_higher_jet",
+      "proof_boundary": "Does not bound either higher jet.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The scaled heat derivative at contact exposes the normalized second and third jets.",
+      "formula": "partial_t(H,s_pf H_x)=-A(Z_xx,s_pf*(Z_xxx+3a Z_xx)) at a contact",
+      "id": "pfcn_06_scaled_heat_contact_vector",
+      "proof_boundary": "This is the numerator of a relative estimate, not a bound.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Time dependence of the positive scale cannot regularize a first-jet collision.",
+      "formula": "the s_pf,t H_x term vanishes at H_x=0; the scale cannot regularize a genuine collision",
+      "id": "pfcn_07_scale_derivative_nonregularization",
+      "proof_boundary": "Rejects a scale-only closure; Xi structure may still bound the higher jets.",
+      "readiness": "closed_route",
+      "role": "exact_route_guard"
+    },
+    {
+      "claim": "Direct corrected-main exclusion has a strictly lower remainder-derivative burden than bare relative transport.",
+      "formula": "direct corrected-main exclusion uses a C1 remainder; relative heat-jet closure exposes Z_xx and Z_xxx and therefore needs C3 control or an independent closed factorization",
+      "id": "pfcn_08_derivative_order_route_guard",
+      "proof_boundary": "A closed Xi factorization could still make the relative route competitive.",
+      "readiness": "closed_route",
+      "role": "exact_route_guard"
+    },
+    {
+      "claim": "The first two correlation transforms are explicit differential polynomials in H.",
+      "formula": "F_1(2x)=H_x^2-H H_xx; F_2(2x)=3H_xx^2/4-H_x H_xxx+H H_xxxx/4",
+      "id": "pfcn_09_correlation_first_two_layers",
+      "proof_boundary": "Correlation identities do not provide a favorable pointwise sign.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "A nondegenerate contact has a rigid quadratic-touch signature in the correlation hierarchy.",
+      "formula": "H=H_x=0, H_xx!=0 implies F_1=F_1'=0, F_1''=H_xx^2/4, F_2=3H_xx^2/4, partial_t F_1=H_xx^2",
+      "id": "pfcn_10_double_contact_hierarchy_signature",
+      "proof_boundary": "The hierarchy is compatible with this signature.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The proposed F2 versus F1 curvature comparison reduces to a fourth-order Wronskian defect.",
+      "formula": "F_2-3*partial_xi^2 F_1=H H_xxxx-H_x H_xxx",
+      "id": "pfcn_11_hierarchy_defect",
+      "proof_boundary": "No Xi sign for the defect is asserted.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Correlation-order log-convexity is not a generic or Laguerre-Polya closure.",
+      "formula": "H_tau(y)=y^2-2tau solves H_tau=-H_yy; F_1=2y^2+4tau, F_2=3, F_3=0, F_1F_3-F_2^2=-9, and at y=0 ||partial_tau(H,sH_y)||/||(H,sH_y)||=1/|tau|",
+      "id": "pfcn_12_order_hankel_countermodel",
+      "proof_boundary": "The quadratic flow is not Xi; it rejects only a generic promotion.",
+      "readiness": "closed_counterexample",
+      "role": "exact_countermodel"
+    },
+    {
+      "claim": "Positive definiteness of the first Wronskian is not pointwise strict positivity.",
+      "formula": "Dimitrov-Xu make F_1 positive definite because its inverse Fourier correlation is nonnegative; positive-definite functions may have real zeros, so this does not exclude contact",
+      "id": "pfcn_13_positive_definite_nonpromotion",
+      "proof_boundary": "The cited density criterion for Laguerre-Polya membership is itself RH-equivalent here.",
+      "readiness": "literature_nonpromotion",
+      "role": "literature_guard"
+    },
+    {
+      "claim": "At a hypothetical contact the signed remainder obeys an exact phase-matched slope equation.",
+      "formula": "set h_+=0 when M_+=0 and h_-=0 when M_-=0; the near-crossing identity then remains valid, including the all-zero-real-part case U_c=D_0; at a contact, M(h_+-h_-)+D_0=-r_x/2+(r/4)(h_++h_-)",
+      "id": "pfcn_14_phase_matched_remainder_equation",
+      "proof_boundary": "The equation retains remainder correlation but does not contradict it.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "A signed leading remainder can be moved to the signal side so only its smaller residual is paid as an absolute error.",
+      "formula": "if r=r_0+delta_0, r_x=r_(0,x)+delta_1, |delta_0|<=eta_0, and |delta_1|<=L*eta_1, then contact requires |M(h_+-h_-)+D_0+r_(0,x)/2-(r_0/4)(h_++h_-)|<=L*eta_1/2+(eta_0/4)|h_++h_-|",
+      "id": "pfcn_15_signed_remainder_peeling",
+      "proof_boundary": "No Xi signed leading remainder or residual improvement is supplied here.",
+      "readiness": "available_exact",
+      "role": "exact_reduction"
+    },
+    {
+      "claim": "A pointwise sharp-box theorem uniform down to t=0 is stronger than the multiplicity-compatible Newman conclusion.",
+      "formula": "if at t=0 a contact has |J(0)|<epsilon_0 and |J_x(0)|<L*epsilon_1, continuity keeps J,J_x inside the same open box for all sufficiently small t>0; therefore a full-wedge pointwise C1-box exclusion rules out endpoint multiplicity and is stronger than Lambda<=0 or RH",
+      "id": "pfcn_16_endpoint_multiplicity_quantifier_guard",
+      "proof_boundary": "The stronger theorem remains sufficient; it must not be presented as logically necessary.",
+      "readiness": "closed_route",
+      "role": "exact_route_guard"
+    },
+    {
+      "claim": "The direct frequency-layer route is a signed Riemann-Siegel remainder peeling theorem; the unpeeled magnitude gap on the corrected-component value band is a stronger fallback.",
+      "formula": "at a contact, M(h_+-h_-)+D_0=-r_x/2+(r/4)(h_++h_-); preferred signed refinement: |M(h_+-h_-)+D_0+r_(0,x)/2-(r_0/4)(h_++h_-)|>L*eta_1/2+(eta_0/4)|h_++h_-|; unpeeled sufficient magnitude relaxation: |M(h_+-h_-)+D_0|>L*epsilon_1/2+epsilon_0*|h_++h_-|/4; equivalently under the certified critical C1 budget: |M(h_+-h_-)+D_0|>625*exp(-3L/4)*(4L+|h_++h_-|)",
+      "id": "pfcn_17_live_xi_c1_target",
+      "proof_boundary": "The Xi phase-matched contradiction, stronger arithmetic gap, ultra-small theorem, and bounded-L shoulder are unproved.",
+      "readiness": "open",
+      "role": "theorem_target"
+    }
+  ],
+  "source_sha256": {
+    "correlation_hierarchy": "676b56d78ef545c27112a860ff67d637135b77918ece351f779d4468ee69931c",
+    "critical_c1_global_remainder": "032831ee9e5b271ad102ff006705fb401cd2bf574e4c59e1011258e4c0e6c388",
+    "critical_transversality": "6c8dbb3d071a9e8f23acf02ee3a895955e39f2d70943a30725d976777b3d387a",
+    "crossing_slope_gap": "4a9975c1808a49d3a4c23288ae396fda52bd1a6ac55c1c4a40e29fb500b710d7",
+    "lehmer_margin": "e4c95ae773add167e0d578311202e6f4672f309cbb0b3d0d39292802a28ad848",
+    "ray_aligned_reduction": "ea478b0396559ceaa5c6fc6002bf9518704f8395bb430feae284ab1820d5d591",
+    "scaled_successor": "84c53a852a3bc6e217cc8ddce6a356f79d1e02aeeefb069a5b60692537a235d8"
+  },
+  "sources": {
+    "Dimitrov_Xu": "https://arxiv.org/abs/1606.05011",
+    "Polymath15": "https://arxiv.org/abs/1904.12438",
+    "Rodgers_Tao": "https://arxiv.org/abs/1801.05914"
+  },
+  "status": "exact parabolic-frequency contact normal form, hierarchy route guards, and one open Xi C1 target",
+  "summary": {
+    "exact_identities": 12,
+    "exact_route_guards": 3,
+    "literature_guards": 1,
+    "open_xi_targets": 1,
+    "rows": 17
+  }
+}

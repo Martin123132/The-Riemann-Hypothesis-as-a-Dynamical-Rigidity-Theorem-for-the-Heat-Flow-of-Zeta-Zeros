@@ -1,0 +1,132 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order11_lambda0_completion_certificate.py",
+  "date": "2026-07-22",
+  "exact": {
+    "all_shift_order11_lambda0": "Q_(11,n)(0)>0 for every integer n>=0",
+    "arbitrary_columns_through_order11_lambda0": "epsilon_k*R_(k,n)(j_1,...,j_k)(0)>0 for 1<=k<=11, n>=0, and 0<=j_1<...<j_k",
+    "contiguous_through_order10_lambda0": "Q_(m,n)(0)>0 for every integer 1<=m<=10 and n>=0",
+    "contiguous_through_order11_lambda0": "Q_(m,n)(0)>0 for every integer 1<=m<=11 and n>=0",
+    "delayed_handoff": "[Q_(10,n)(lambda)>0 for every n>=4 and -100<=lambda<=0 and Q_(11,n)(-100)>0 for every n>=4] implies Q_(11,n)(lambda)>0 for every n>=4 and -100<=lambda<=0",
+    "delayed_order11_heat_ray": "Q_(11,n)(lambda)>0 for every n>=4 and -100<=lambda<=0",
+    "endpoint": "Q_(11,n)(-100)>0 for every integer n>=0",
+    "fixed_order_transfer": "[epsilon_k H_(k,s)>0 for 1<=k<=m, all s] => [epsilon_k R_(k,n)(j_1,...,j_k)>0 for 1<=k<=m]",
+    "lambda0_prefix": "Q_(11,n)(0)>0 for every integer 0<=n<=3",
+    "nonpromotion_guard": "contiguous order four alone does not imply arbitrary-column order four; the lower initial-minor signs are essential",
+    "order10_heat_base": "Q_(10,n)(lambda)>0 for every n>=4 and -100<=lambda<=0"
+  },
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order11_lambda0_completion_certificate.py",
+  "kind": "jensen_window_pf_compound_order11_lambda0_completion_certificate",
+  "proof_boundary": "This proves contiguous signed Hankel positivity at lambda zero through order eleven and the corresponding consecutive-row arbitrary-column signs through order eleven. It proves no order above eleven and is not PF-infinity, Lambda<=0, or RH.",
+  "rows": [
+    {
+      "claim": "The completed curvature bridge gives every order-eleven endpoint shift at lambda=-100.",
+      "formula": "Q_(11,n)(-100)>0 for every integer n>=0",
+      "id": "co11l0c_01_endpoint",
+      "proof_boundary": "Fixed order eleven and lambda=-100.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The completed order-ten layer supplies the positive coefficient in shifted cooperative descent.",
+      "formula": "Q_(10,n)(lambda)>0 for every n>=4 and -100<=lambda<=0",
+      "id": "co11l0c_02_order10_heat_base",
+      "proof_boundary": "Shifts n>=4 on the heat interval.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_input"
+    },
+    {
+      "claim": "The delayed cooperative lemma propagates the order-eleven endpoint ray through the heat interval.",
+      "formula": "Q_(11,n)(lambda)>0 for every n>=4 and -100<=lambda<=0",
+      "id": "co11l0c_03_delayed_heat",
+      "proof_boundary": "Uses no order-eleven shift below four.",
+      "readiness": "ready_to_apply",
+      "role": "theorem_application"
+    },
+    {
+      "claim": "Direct Arb determinants supply the four complementary lambda-zero shifts.",
+      "formula": "Q_(11,n)(0)>0 for every integer 0<=n<=3",
+      "id": "co11l0c_04_lambda0_prefix",
+      "proof_boundary": "Lambda zero and shifts zero through three only.",
+      "readiness": "ready_to_apply",
+      "role": "finite_theorem_input"
+    },
+    {
+      "claim": "The delayed heat ray and direct prefix partition every nonnegative shift at lambda zero.",
+      "formula": "Q_(11,n)(0)>0 for every integer n>=0",
+      "id": "co11l0c_05_all_shift_order11",
+      "proof_boundary": "Contiguous signed Hankel order eleven at lambda zero.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "The completed lower layers and order-eleven theorem give every contiguous layer through eleven.",
+      "formula": "Q_(m,n)(0)>0 for every integer 1<=m<=11 and n>=0",
+      "id": "co11l0c_06_contiguous_through11",
+      "proof_boundary": "Fixed lambda zero; no order above eleven is claimed.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    },
+    {
+      "claim": "An explicit countermodel forbids promotion from one contiguous layer without all lower initial-minor signs.",
+      "formula": "contiguous order four alone does not imply arbitrary-column order four; the lower initial-minor signs are essential",
+      "id": "co11l0c_07_nonpromotion_guard",
+      "proof_boundary": "This composition supplies layers one through eleven and makes no inference to order twelve.",
+      "readiness": "ready_to_apply",
+      "role": "countermodel_guard"
+    },
+    {
+      "claim": "The initial-minor transfer promotes the completed contiguous layers to arbitrary increasing columns.",
+      "formula": "epsilon_k*R_(k,n)(j_1,...,j_k)(0)>0 for 1<=k<=11, n>=0, and 0<=j_1<...<j_k",
+      "id": "co11l0c_08_fixed_order_transfer",
+      "proof_boundary": "Consecutive rows, arbitrary columns, and orders at most eleven.",
+      "readiness": "ready_to_apply",
+      "role": "published_theorem_application"
+    }
+  ],
+  "sources": [
+    {
+      "kind": "jensen_window_pf_compound_order11_m100_entry_certificate",
+      "path": "work/rh_compute/results/jensen_window_pf_compound_order11_m100_entry_certificate.json",
+      "sha256": "3d8b9843095ed12012f8c37a98479448732d4dea3fe5a1d4620f6da1394ff60d",
+      "status": "rigorous all-shift signed order-eleven entry at lambda=-100"
+    },
+    {
+      "kind": "jensen_window_pf_delayed_cooperative_heat_tail_lemma",
+      "path": "work/rh_compute/results/jensen_window_pf_delayed_cooperative_heat_tail_lemma.json",
+      "sha256": "19d93868828493fac7c3d4729fd49fe97875ad4300319c078c87af37a69504e8",
+      "status": "exact shifted cooperative heat-flow descent lemma"
+    },
+    {
+      "kind": "jensen_window_pf_compound_order10_lambda0_completion_certificate",
+      "path": "work/rh_compute/results/jensen_window_pf_compound_order10_lambda0_completion_certificate.json",
+      "sha256": "61448157e00a195bbc3104c6ac81309eec4ad49936373e0e69c63fed9f816a9e",
+      "status": "rigorous all-shift signed Hankel order ten and fixed-order arbitrary-column completion at lambda zero"
+    },
+    {
+      "kind": "jensen_window_pf_compound_order11_lambda0_prefix_certificate",
+      "path": "work/rh_compute/results/jensen_window_pf_compound_order11_lambda0_prefix_certificate.json",
+      "sha256": "0538d2427cdb59d058c071c86f08acfc1e3ab4df756bc5d1148526631987911a",
+      "status": "rigorous lambda-zero order-eleven prefix certificate for n=0,1,2,3"
+    },
+    {
+      "kind": "jensen_window_pf_order4_noncontiguous_total_positivity_transfer",
+      "path": "work/rh_compute/results/jensen_window_pf_order4_noncontiguous_total_positivity_transfer.json",
+      "sha256": "dba5df10b861a594e2e20690b5286a711d98ace5fdc343453f6cd8fdeca8d1e5",
+      "status": "exact arbitrary-column reshaped-Hankel order-four theorem at lambda zero"
+    }
+  ],
+  "status": "rigorous all-shift signed Hankel order eleven and fixed-order arbitrary-column completion at lambda zero",
+  "summary": {
+    "all_shift_order11_lambda0_theorems": 1,
+    "arbitrary_column_through_order11_lambda0_theorems": 1,
+    "contiguous_through_order11_lambda0_theorems": 1,
+    "countermodel_nonpromotion_guards": 1,
+    "delayed_order11_heat_theorems": 1,
+    "open_rows": 0,
+    "orders_above_11": 0,
+    "pf_infinity_theorems": 0,
+    "ready_rows": 8,
+    "rh_claims": 0,
+    "rows": 8
+  }
+}
