@@ -1,0 +1,190 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_abel_cross_current_reduction",
+  "date": "2026-07-31",
+  "status": "exact q=1 terminal-tail-anchored Abel cross-current reduction; signed Phi_B target open; no bulk closure, Xi-level current theorem, Lambda<=0, or RH",
+  "proof_boundary": "This is an exact cancellation-preserving reduction, not the required bound. It proves no bulk aggregate closure, complete retained current sign, Xi-level current theorem, Abel gap, winding cap, contact exclusion, Q209, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "source_audit": {
+    "source_sha256": {
+      "growing_tail": "6c94a1749bde59c8f62ea0b8ad08803c2150ec71abcd40d3f2dc983cf0b51611",
+      "abel_prefix": "408b16b6719be7a55b5f260dcda8ebc9bfd012edd734e6fc4913f8cbb0e9abc3",
+      "interior_current": "c1282eac2b2d22c35055880f4eb2607b855446a3b678caf0c072ca983c660419",
+      "residual_handoff": "6e4e9b178ddca73e3834b99fa9957b8ee15c8a8f92af4e6b9fbcbc078a0c49e6"
+    },
+    "source_kinds": {
+      "growing_tail": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_growing_prefix_finite_height_gate",
+      "abel_prefix": "jensen_window_pf_newman_polymath15_first_order_centered_carrier_kernel_abel_prefix_reduction",
+      "interior_current": "jensen_window_pf_newman_polymath15_first_order_centered_interior_projective_current_gate",
+      "residual_handoff": "jensen_window_pf_newman_polymath15_first_order_centered_residual_placement_c1_cumulative_handoff_gate"
+    },
+    "imported_terminal_reserve": "P_T=a^2*J_(tail,M)/S_a^2<-1/400",
+    "imported_bulk_closures": 0
+  },
+  "symbolic_certificate": {
+    "truncated_abel": "F_k=sum_(n=1)^k z_n, h_k=log((k+1)/k), kappa_B=u_B-u_N=log(N/B); R_B=sum_(n=1)^B(u_n-u_N)z_n=kappa_B*F_B+sum_(k=1)^(B-1)h_k*F_k",
+    "differentiated_abel": "Because N and B are fixed inside the chart, partial_x(u_n-u_N)=0; hence R_(B,x)=kappa_B*F_(B,x)+sum_(k=1)^(B-1)h_k*F_(k,x)",
+    "normalized_partition": "hat(T)=T/S_a, hat(F_k)=F_k/S_a, hat(R_B)=R_B/S_a; hat(W_0)=hat(T)+hat(F_B)",
+    "tail_centered_scalar": "A_T=Re(hat(G_T))-c*u_N*Re(hat(T))",
+    "bulk_centered_scalar": "A_B=Re(s_*'*hat(R_B))-b*u_N*Im(hat(F_B))=c*Re(hat(R_B))-b*Im(hat(R_B))-b*u_N*Im(hat(F_B))",
+    "reanchored_total_scalar": "A=A_T+A_B=Re(hat(G_T)-s_*'*u_N*hat(T))-b*u_N*Im(hat(W_0))+Re(s_*'*hat(R_B))",
+    "bulk_centered_derivative": "A_(B,x)=c_x*R_R+c*R_(R,x)-b_x*R_I-b*R_(I,x)-(b_x*u_N+b*u_(N,x))*F_I-b*u_N*F_(I,x), where F=hat(F_B), R=hat(R_B)",
+    "normalized_coordinate_map": "For a block with normalized real value X and normalized centered scalar A, (C,D,E,N)=(X,A/h,X_x/h,A_x/h^2) and P=CN-DE",
+    "normalizer_cancellation": "If X=C_0/S_a and A=A_0/S_a, then P=[C_0*A_(0,x)-A_0*C_(0,x)]/(h^2*S_a^2)=a^2*J/S_a^2; every S_(a,x) term cancels",
+    "four_coordinate_split": "P_ret=P_T+P_B+P_cross, P_B=C_B*N_B-D_B*E_B, P_cross=C_T*N_B+C_B*N_T-D_T*E_B-D_B*E_T",
+    "signed_bulk_remainder": "Phi_B=P_B+P_cross=h^-2*[(X_T+X_B)A_(B,x)+X_B*A_(T,x)-(A_T+A_B)X_(B,x)-A_B*X_(T,x)]",
+    "negative_components_guard": "At one point v_T=(1,0), v_(T,x)=(0,-1), v_B=(-1/2,0), v_(B,x)=(0,2): P_T=P_B=-1, P_cross=5/2, but P_ret=1/2"
+  },
+  "exact": {
+    "domain": "Fix a physical q=1, L>=50, fixed-N chart and an admissible M>=1 with h*(M+1)^18<=1. Put B=N-M-1>=1 and keep M,B fixed while differentiating inside the chart.",
+    "partition": "T=e+sum_(n=B+1)^N z_n, G_T=g+s_*'*sum_(n=B+1)^N u_n*z_n, F_B=sum_(n=1)^B z_n, U_B=sum_(n=1)^B u_n*z_n; W_0=T+F_B and W_A=G_T+s_*'*U_B.",
+    "bulk_moment": "U_B=u_N*F_B+R_B, with R_B=sum_(n=1)^B log(N/n)z_n.",
+    "tail_input": "The imported growing-prefix theorem supplies P_T=a^2*J_(tail,M)/S_a^2<-1/400.",
+    "sharp_join_target": "The signed inequality Phi_B<=1/400 implies P_ret<0. The stronger Phi_B<=1/800 preserves P_ret<-1/800.",
+    "streaming_reduction": "Compute hat(F_k) and hat(F_(k,x)) in index order, accumulate hat(R_B)=kappa_B*hat(F_B)+sum h_k*hat(F_k) and its derivative, then evaluate Phi_B in constant additional work. This is O(B) time and O(1) streaming state, rather than an O(B^2) pair expansion.",
+    "proof_gain": "The certified terminal block now replaces the isolated endpoint in the Abel identity without changing the u_N shear. All nonterminal uncertainty is concentrated in one signed cumulative correlation Phi_B.",
+    "centering_guard": "Do not recenter at u_B: u_N is the centering used by the certified current. An x-dependent change of shear contributes an extra shear-derivative current unless it is tracked.",
+    "pi_provenance": "The only pi occurs through the inherited completed-zeta/Riemann-Siegel normalization and h=1/a. The Abel weights are logarithmic arithmetic ratios and introduce no fitted geometry.",
+    "next_target": "Prove the Xi-specific signed upper bound Phi_B<=1/400, preferably Phi_B<=1/800, from the actual multiplicative carrier phases and cumulative prefixes before taking absolute values.",
+    "proof_boundary": "This is an exact cancellation-preserving reduction, not the required bound. It proves no bulk aggregate closure, complete retained current sign, Xi-level current theorem, Abel gap, winding cap, contact exclusion, Q209, Lambda<=0, PF-infinity, RH, or prize-level conclusion."
+  },
+  "counts": {
+    "rows": 14,
+    "exact_partitions": 1,
+    "exact_abel_identities": 2,
+    "normalized_coordinate_maps": 2,
+    "current_polarization_identities": 2,
+    "terminal_current_inputs": 1,
+    "signed_bulk_targets": 1,
+    "bulk_aggregate_closures": 0,
+    "xi_level_current_theorems": 0
+  },
+  "rows": [
+    {
+      "id": "ttac_01_domain",
+      "role": "chart domain",
+      "readiness": "proved",
+      "claim": "The terminal/bulk partition is fixed before x differentiation.",
+      "formula": "Fix a physical q=1, L>=50, fixed-N chart and an admissible M>=1 with h*(M+1)^18<=1. Put B=N-M-1>=1 and keep M,B fixed while differentiating inside the chart.",
+      "proof_boundary": "Adjacent cutoff transport remains separate.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttac_02_partition",
+      "role": "exact partition",
+      "readiness": "proved",
+      "claim": "The retained main splits into the certified terminal block and the nonterminal bulk.",
+      "formula": "T=e+sum_(n=B+1)^N z_n, G_T=g+s_*'*sum_(n=B+1)^N u_n*z_n, F_B=sum_(n=1)^B z_n, U_B=sum_(n=1)^B u_n*z_n; W_0=T+F_B and W_A=G_T+s_*'*U_B.",
+      "proof_boundary": "No carrier is omitted or counted twice.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttac_03_abel",
+      "role": "truncated Abel identity",
+      "readiness": "proved",
+      "claim": "The bulk centered moment is a positive-log weighted prefix sum.",
+      "formula": "F_k=sum_(n=1)^k z_n, h_k=log((k+1)/k), kappa_B=u_B-u_N=log(N/B); R_B=sum_(n=1)^B(u_n-u_N)z_n=kappa_B*F_B+sum_(k=1)^(B-1)h_k*F_k",
+      "proof_boundary": "This is finite algebra, not an estimate.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttac_04_abel_x",
+      "role": "differentiated Abel identity",
+      "readiness": "proved",
+      "claim": "The same prefix weights survive one x derivative.",
+      "formula": "Because N and B are fixed inside the chart, partial_x(u_n-u_N)=0; hence R_(B,x)=kappa_B*F_(B,x)+sum_(k=1)^(B-1)h_k*F_(k,x)",
+      "proof_boundary": "N and B must stay fixed inside the chart.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttac_05_normalizer",
+      "role": "normalization covariance",
+      "readiness": "proved",
+      "claim": "The common source normalizer cancels from projective current.",
+      "formula": "If X=C_0/S_a and A=A_0/S_a, then P=[C_0*A_(0,x)-A_0*C_(0,x)]/(h^2*S_a^2)=a^2*J/S_a^2; every S_(a,x) term cancels",
+      "proof_boundary": "The normalizer must be common to both blocks.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttac_06_tail",
+      "role": "certified terminal input",
+      "readiness": "proved",
+      "claim": "The growing terminal block supplies a strict finite-height reserve.",
+      "formula": "The imported growing-prefix theorem supplies P_T=a^2*J_(tail,M)/S_a^2<-1/400.",
+      "proof_boundary": "This imports the q=1 theorem only.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttac_07_bulk_scalar",
+      "role": "bulk Abel scalar",
+      "readiness": "proved",
+      "claim": "The bulk centered coordinate uses only F_B and R_B.",
+      "formula": "A_B=Re(s_*'*hat(R_B))-b*u_N*Im(hat(F_B))=c*Re(hat(R_B))-b*Im(hat(R_B))-b*u_N*Im(hat(F_B))",
+      "proof_boundary": "No division by a real projection is used.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttac_08_bulk_x",
+      "role": "bulk first jet",
+      "readiness": "proved",
+      "claim": "The bulk second projective coordinate uses only first prefix derivatives.",
+      "formula": "A_(B,x)=c_x*R_R+c*R_(R,x)-b_x*R_I-b*R_(I,x)-(b_x*u_N+b*u_(N,x))*F_I-b*u_N*F_(I,x), where F=hat(F_B), R=hat(R_B)",
+      "proof_boundary": "No second derivative of an individual carrier is introduced.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttac_09_coordinates",
+      "role": "four-coordinate map",
+      "readiness": "proved",
+      "claim": "Tail and bulk share one additive normalized coordinate map.",
+      "formula": "For a block with normalized real value X and normalized centered scalar A, (C,D,E,N)=(X,A/h,X_x/h,A_x/h^2) and P=CN-DE",
+      "proof_boundary": "The u_N centering is preserved.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttac_10_polarization",
+      "role": "current polarization",
+      "readiness": "proved",
+      "claim": "The retained current is tail plus bulk plus one exact cross term.",
+      "formula": "P_ret=P_T+P_B+P_cross, P_B=C_B*N_B-D_B*E_B, P_cross=C_T*N_B+C_B*N_T-D_T*E_B-D_B*E_T",
+      "proof_boundary": "The cross term is not assigned a sign.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttac_11_remainder",
+      "role": "signed cumulative remainder",
+      "readiness": "proved",
+      "claim": "Every nonterminal current contribution is one scalar Phi_B.",
+      "formula": "Phi_B=P_B+P_cross=h^-2*[(X_T+X_B)A_(B,x)+X_B*A_(T,x)-(A_T+A_B)X_(B,x)-A_B*X_(T,x)]",
+      "proof_boundary": "Its Xi-specific upper bound remains open.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttac_12_reserve",
+      "role": "sufficient inequality",
+      "readiness": "proved",
+      "claim": "The terminal margin turns one signed bulk estimate into a retained current theorem.",
+      "formula": "The signed inequality Phi_B<=1/400 implies P_ret<0. The stronger Phi_B<=1/800 preserves P_ret<-1/800.",
+      "proof_boundary": "No such bound is proved here.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttac_13_guard",
+      "role": "nonpromotion guard",
+      "readiness": "proved",
+      "claim": "Negative component currents do not sign their sum.",
+      "formula": "At one point v_T=(1,0), v_(T,x)=(0,-1), v_B=(-1/2,0), v_(B,x)=(0,2): P_T=P_B=-1, P_cross=5/2, but P_ret=1/2",
+      "proof_boundary": "This is generic algebra, not an Xi counterexample.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttac_14_handoff",
+      "role": "open handoff",
+      "readiness": "open",
+      "claim": "The next theorem is now a linear-time cumulative-correlation bound.",
+      "formula": "Prove the Xi-specific signed upper bound Phi_B<=1/400, preferably Phi_B<=1/800, from the actual multiplicative carrier phases and cumulative prefixes before taking absolute values.",
+      "proof_boundary": "This is an exact cancellation-preserving reduction, not the required bound. It proves no bulk aggregate closure, complete retained current sign, Xi-level current theorem, Abel gap, winding cap, contact exclusion, Q209, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+      "diagnostics": {
+        "streaming": "Compute hat(F_k) and hat(F_(k,x)) in index order, accumulate hat(R_B)=kappa_B*hat(F_B)+sum h_k*hat(F_k) and its derivative, then evaluate Phi_B in constant additional work. This is O(B) time and O(1) streaming state, rather than an O(B^2) pair expansion."
+      }
+    }
+  ]
+}

@@ -33,6 +33,98 @@ c_k(0) is PF-infinity
 
 This is the right normalization. It is also almost the whole problem.
 
+## Exact Relation To Jensen Windows
+
+The ordinary generating function of `c` is the exponential generating
+function of `A`:
+
+```text
+F(z)=sum_k c_k z^k=sum_k A_k z^k/k!.
+```
+
+For the diagonal tail operator `T_n[z^j]=A_(n+j)z^j`, one has
+
+```text
+T_n[(1+z)^d]
+ =sum_(j=0)^d binom(d,j)A_(n+j)z^j
+ =P_(d,n)(z).
+```
+
+Consequently ASW/Edrei, Polya-Schur, closure of type-I functions under
+differentiation, and finite ASW give the exact all-order equivalence
+
+```text
+c is PF-infinity
+  <=> F is Laguerre-Polya type I
+  <=> every shifted Jensen window is PF-infinity.
+```
+
+This does not make the route easier: proving all-order PF-infinity of `c` is
+already an endpoint theorem. It does correct the programme map. The
+coefficient-PF and Jensen-window routes are distinct finite diagnostics but
+not distinct all-order targets. The executable gate is
+`outputs/jensen_window_pf_coefficient_pf_equivalence_gate.md`.
+
+## Exact Relation To Edrei-Log Hankel Positivity
+
+Normalize `H(z)=F(z)/F(0)` and write
+
+```text
+log H(z)=sum_(n>=1)ell_n z^n,
+q_n=n ell_n,
+p_n=(-1)^(n-1)q_n,
+a_r=p_(r+1)=(-1)^r[z^r]H'(z)/H(z).
+```
+
+Sokal's logarithmic-derivative criterion gives, for this known entire `H`,
+
+```text
+H is Laguerre-Polya type I
+  <=> (a_r)_(r>=0) is a Stieltjes moment sequence.
+```
+
+Thus the nonlinear Edrei-log Hankel route is another exact language for the
+same endpoint. A strict sufficient target is positivity at every order of
+
+```text
+det(p_(i+j+1))_(i,j=0)^m,
+det(p_(i+j+2))_(i,j=0)^m.
+```
+
+This is not ordinary moment positivity of `mu_(2k)` and not the original
+signed-Hankel hierarchy of `A_k`. The existing finite Edrei-log determinants
+remain diagnostics only. The exact gate is
+`outputs/jensen_window_pf_edrei_stieltjes_equivalence_gate.md`.
+
+Krein's Stieltjes/Pick characterization further gives the exact Phi target
+
+```text
+P_Phi(z):=-Im(F_0'(z)conj(F_0(z)))>0
+for every Im(z)>0.
+```
+
+The polarized double-integral formula and positive-resolvent alternative are
+in `outputs/jensen_window_pf_phi_pick_kernel_target.md`. The exact radial heat
+hierarchy does not provide generic backward invariance; the repeated-zero
+countermodel is in
+`outputs/jensen_window_pf_edrei_heat_flow_boundary_gate.md`.
+
+The positive-resolvent handoff is no longer merely schematic. Suzuki's
+arithmetic-Hankel theorem gives an exact endpoint route through:
+
+```text
+det(I+/-K_(omega_n,nu_n)[t])!=0 for every finite t,
+J_(omega_n,nu_n)(t;r,r)->0 as t->infinity,
+```
+
+on a cofinal sequence `omega_n->0`, `nu_n*omega_n>1`. Its Fredholm series is
+an integral expansion in continuum Hankel determinants, so it is genuine
+contact with the signed-Hankel programme. It is not yet a bridge: a TN
+rank-one kernel can have `det(I-K)=0`, boundary unimodularity cannot justify
+crossing possible poles, and Suzuki's local interval does not imply either
+global gate. See
+`outputs/jensen_window_pf_xi_pick_suzuki_hankel_bridge.md`.
+
 ## Why The Finite Evidence Is Not A Bridge
 
 The current finite certificates prove many concrete Toeplitz minor inequalities for `c_k(lambda)`. They do not prove:
@@ -209,7 +301,9 @@ The coefficient PF route is alive but not yet a proof strategy. It becomes a pro
 1. an all-order determinant positivity identity;
 2. a known total-positivity theorem that applies to the heat-kernel coefficient specialization;
 3. a stable polynomial approximation with real negative zeros and coefficient convergence;
-4. a noncircular heat-flow preservation theorem for coefficient PF-infinity.
+4. a noncircular heat-flow preservation theorem for coefficient PF-infinity;
+5. Suzuki's cofinal all-t Fredholm spectral gate; the determinant-only
+   causal-multiplier reduction makes the published terminal premise redundant.
 ```
 
 Until then, finite Toeplitz/PF certificates are falsification pressure and route-selection evidence, not a bridge theorem.

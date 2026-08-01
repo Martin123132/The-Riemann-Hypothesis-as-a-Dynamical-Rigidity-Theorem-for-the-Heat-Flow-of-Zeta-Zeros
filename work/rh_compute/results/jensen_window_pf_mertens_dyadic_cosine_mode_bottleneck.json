@@ -1,0 +1,219 @@
+{
+  "kind": "jensen_window_pf_mertens_dyadic_cosine_mode_bottleneck",
+  "date": "2026-07-23",
+  "status": "exact dyadic cosine-mode reduction with automatically summable high modes and one open RH-equivalent low-mode gate",
+  "parameters": {
+    "alpha_range": "0<alpha<1",
+    "dyadic_blocks": "K=2^j",
+    "universal_low_mode_cutoff": "R_K=ceil(sqrt(K))",
+    "general_summable_cutoff": "R_K=ceil(K^beta), beta>(1-alpha)/2"
+  },
+  "source_anchors": [
+    "https://doi.org/10.1093/qmath/os-8.1.313",
+    "https://doi.org/10.5802/aif.2401",
+    "https://arxiv.org/abs/math/0202166"
+  ],
+  "rows": [
+    {
+      "id": "mdcos_01_tail_definitions",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "For 0<alpha<1 set q_n=mu(n)n^(-1-alpha), r_N=sum_(n>N)q_n, and R_alpha=sum_(N>=1)N^alpha|r_N|^2.",
+      "proof_boundary": "This is the reciprocal-Mobius tail coordinate from the checked anchor/logarithmic tail-energy reduction."
+    },
+    {
+      "id": "mdcos_02_dyadic_block",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "For dyadic K define y_m^(K)=r_(K+m-1), 1<=m<=K, and B_K=sum_(N=K)^(2K-1)N^alpha|r_N|^2.",
+      "proof_boundary": "The blocks [K,2K-1] partition the positive integers."
+    },
+    {
+      "id": "mdcos_03_weight_comparison",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "K^alpha||y^(K)||_2^2<=B_K<=2^alpha K^alpha||y^(K)||_2^2, and R_alpha=sum_(K dyadic)B_K.",
+      "proof_boundary": "Only the elementary comparison K<=N<2K is used."
+    },
+    {
+      "id": "mdcos_04_tail_difference",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For 1<=m<K, y_m^(K)-y_(m+1)^(K)=q_(K+m).",
+      "proof_boundary": "The endpoint tail and q_(2K) add a constant to the whole block and therefore disappear under the first difference."
+    },
+    {
+      "id": "mdcos_05_neumann_cosine_basis",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Let phi_0(m)=K^(-1/2) and, for 1<=r<K, phi_r(m)=sqrt(2/K)cos(pi*r*(m-1/2)/K). These diagonalize D_K^*D_K with nu_r=4sin^2(pi*r/(2K)).",
+      "proof_boundary": "D_K is the forward first-difference map on a K-vector. The basis and eigenvalues follow by direct trigonometric substitution, including both boundary rows."
+    },
+    {
+      "id": "mdcos_06_parseval",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "With c_(K,r)=<y^(K),phi_r>, ||y^(K)||_2^2=sum_(r=0)^(K-1)|c_(K,r)|^2.",
+      "proof_boundary": "The discrete cosine vectors in row 5 are an orthonormal basis."
+    },
+    {
+      "id": "mdcos_07_gradient_parseval",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "sum_(m=1)^(K-1)|q_(K+m)|^2=sum_(r=1)^(K-1)nu_r|c_(K,r)|^2.",
+      "proof_boundary": "Combine row 4 with ||D_K y||_2^2=<D_K^*D_K y,y> and row 5."
+    },
+    {
+      "id": "mdcos_08_constant_mode",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "c_(K,0)=K^(-1/2)sum_(m=1)^K r_(K+m-1)=sqrt(K)r_(2K)+K^(-1/2)sum_(ell=1)^K ell*q_(K+ell).",
+      "proof_boundary": "Every q_(K+ell) occurs in exactly ell tails in the block. This is the sole mode affected by adding an endpoint tail constant."
+    },
+    {
+      "id": "mdcos_09_nonconstant_modes",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For 1<=r<K, c_(K,r)=[sqrt(2/K)/(2sin(pi*r/(2K)))]sum_(m=1)^(K-1)q_(K+m)sin(pi*r*m/K).",
+      "proof_boundary": "Use c=nu_r^(-1)<D_K y,D_K phi_r> and the exact cosine difference. The endpoint tail and q_(2K) cancel."
+    },
+    {
+      "id": "mdcos_10_high_mode_bound",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "For 1<=R<K, K^alpha sum_(r=R)^(K-1)|c_(K,r)|^2<=K^(1-alpha)/(4R^2).",
+      "proof_boundary": "Since sin x>=2x/pi on [0,pi/2], nu_R>=4R^2/K^2. Then use row 7 and |q_n|<=K^(-1-alpha) on the block."
+    },
+    {
+      "id": "mdcos_11_summable_threshold",
+      "role": "exact_consequence",
+      "status": "available_exact",
+      "statement": "If R_K=ceil(K^beta) with beta>(1-alpha)/2, then the dyadic high-mode series is finite. The universal choice R_K=ceil(sqrt(K)) gives the block bound (1/4)K^(-alpha).",
+      "proof_boundary": "Insert R_K into row 10 and sum the resulting geometric series over dyadic K."
+    },
+    {
+      "id": "mdcos_12_low_mode_equivalence",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "For R_K=ceil(sqrt(K)), R_alpha<infinity iff sum_(K dyadic)K^alphasum_(0<=r<R_K)|c_(K,r)|^2<infinity.",
+      "proof_boundary": "Rows 3 and 6 compare R_alpha with the complete cosine energy, while row 11 proves the omitted high modes summable without any Mobius cancellation."
+    },
+    {
+      "id": "mdcos_13_cofinal_rh_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "For any fixed cofinal alpha_j->0 in (0,1), RH iff the low-mode series in row 12 is finite for every alpha_j.",
+      "proof_boundary": "Compose row 12 with the checked cofinal R_alpha criterion. This is an equivalent arithmetic target, not a convergence proof."
+    },
+    {
+      "id": "mdcos_14_dimension_reduction",
+      "role": "exact_consequence",
+      "status": "available_exact",
+      "statement": "At scale K the unresolved tail energy is confined to ceil(sqrt(K)) smooth cosine coordinates instead of all K cutoffs; every higher coordinate is automatically summable.",
+      "proof_boundary": "This is a deterministic spectral reduction. It does not estimate any of the surviving low coordinates."
+    },
+    {
+      "id": "mdcos_15_lowest_oscillatory_mode",
+      "role": "exact_consequence",
+      "status": "available_exact",
+      "statement": "The r=1 coordinate is a positive one-hump sine-weighted Mobius sum on (K,2K), amplified by a factor asymptotic to sqrt(2K)/pi.",
+      "proof_boundary": "Apply row 9 with r=1. This mode is a smooth anchored block average, not a high-frequency oscillation."
+    },
+    {
+      "id": "mdcos_16_davenport_linear_phase",
+      "role": "classical_theorem_step",
+      "status": "source_backed",
+      "statement": "For every A>0, Davenport's theorem gives uniformly in theta the estimate |sum_(n<=X)mu(n)e(n theta)|<<_A X(log X)^(-A).",
+      "proof_boundary": "Primary source: Davenport (1937). Green and Tao, Example 3 and Section 5, record the normalized uniform form and its ineffective constant."
+    },
+    {
+      "id": "mdcos_17_davenport_partial_summation",
+      "role": "classical_theorem_step",
+      "status": "source_backed",
+      "statement": "Partial summation gives |c_(K,0)|<<_(alpha,A)K^(1/2-alpha)(log K)^(-A) and, for 1<=r<K, |c_(K,r)|<<_(alpha,A)K^(1/2-alpha)/(r(log K)^A).",
+      "proof_boundary": "For r>0 absorb the sine into the two phases theta=+/-r/(2K) before summation by parts. For r=0 use theta=0 to bound the infinite reciprocal tail."
+    },
+    {
+      "id": "mdcos_18_davenport_power_deficit_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "Davenport's bounds yield at best a low-mode block majorant of order K^(1-alpha)(log K)^(-2A), which does not prove dyadic summability for any fixed 0<alpha<1.",
+      "proof_boundary": "Arbitrarily many logarithms cannot absorb the positive power K^(1-alpha). This is a proof-method insufficiency statement, not a lower bound on the actual Mobius modes."
+    },
+    {
+      "id": "mdcos_19_general_exponent_threshold",
+      "role": "conditional_consequence",
+      "status": "conditional_exact",
+      "statement": "A uniform additive-twist estimate with sigma<1+alpha, sum_(n<=X)mu(n)e(n theta)<<X^sigma would give low-mode block energy <<K^(2sigma-1-alpha), and closes the dyadic series when sigma<(1+alpha)/2.",
+      "proof_boundary": "This is the exact exponent bookkeeping obtained from rows 8-9 by partial summation. It assumes the displayed unproved power estimate."
+    },
+    {
+      "id": "mdcos_20_square_root_sufficient",
+      "role": "conditional_consequence",
+      "status": "conditional_exact",
+      "statement": "Uniform square-root-scale cancellation <<_epsilon X^(1/2+epsilon), with epsilon<alpha/2, makes the low-mode block energy O(K^(-alpha+2epsilon)) and hence proves R_alpha<infinity.",
+      "proof_boundary": "This is a sufficient conditional closure of row 12. No such uniform additive-twist theorem is proved here."
+    },
+    {
+      "id": "mdcos_21_square_root_scope_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "The square-root-scale hypothesis in row 20 contains the theta=0 Mertens bound and is not asserted to follow from RH alone; it is used only to calibrate the missing exponent.",
+      "proof_boundary": "A sufficient hypothesis must not be reported as an unconditional theorem or as an established equivalent form."
+    },
+    {
+      "id": "mdcos_22_translation_average_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "Translation-averaged Mobius cancellation and almost-all short-interval estimates do not automatically control the fixed dyadic mean and lowest one-hump modes.",
+      "proof_boundary": "The surviving coordinates are anchored at (K,2K), including the exceptional origin-linked tail mode; an averaging theorem needs an explicit de-averaging step."
+    },
+    {
+      "id": "mdcos_23_full_burnol_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "The cosine reduction concerns R_alpha and the logarithmic stable-prefix component P, not the full Burnol energy Q.",
+      "proof_boundary": "A cofinal full-Q theorem would still imply RH through the existing route; this reduction neither proves nor obstructs such a theorem."
+    },
+    {
+      "id": "mdcos_24_literature_context",
+      "role": "literature_guard",
+      "status": "source_backed",
+      "statement": "The source audit used Davenport's original uniform linear-phase estimate and Green-Tao's primary exposition, including their summation-by-parts and completion tools.",
+      "proof_boundary": "Those sources support the logarithmic linear-phase estimate, not the square-root hypothesis or the low-mode convergence."
+    },
+    {
+      "id": "mdcos_25_focused_source_search_guard",
+      "role": "literature_guard",
+      "status": "source_backed",
+      "statement": "A focused search found nearby exponential-sum refinements but no unconditional result removing the theta=0 power deficit required by row 19 on a cofinal alpha sequence.",
+      "proof_boundary": "This is a search report, not a novelty, priority, or exhaustiveness claim."
+    },
+    {
+      "id": "mdcos_26_open_low_mode_gate",
+      "role": "open_target",
+      "status": "open_target",
+      "statement": "Prove the low-mode series in row 12 for every member of one fixed cofinal alpha sequence, using Mobius-specific signed cancellation across the dyadic mean and smooth modes.",
+      "proof_boundary": "This target is RH-equivalent by row 13. No low-mode gain, uniform full-Burnol bound, RH, PF-infinity, or Lambda<=0 is proved."
+    }
+  ],
+  "audit": {
+    "row_count": 26,
+    "exact_reduction_count": 15,
+    "classical_theorem_step_count": 2,
+    "conditional_consequence_count": 2,
+    "literature_guard_count": 2,
+    "proof_guard_count": 4,
+    "open_low_mode_gate_count": 1,
+    "cosine_diagonalization_proved": true,
+    "high_modes_automatically_summable": true,
+    "low_mode_cofinal_rh_equivalence_proved": true,
+    "davenport_closes_low_modes": false,
+    "square_root_twist_bound_proved": false,
+    "low_mode_gain_proved": false,
+    "full_burnol_bound_proved": false,
+    "rh_proved": false,
+    "pf_infinity_proved": false,
+    "lambda_le_zero_proved": false
+  }
+}

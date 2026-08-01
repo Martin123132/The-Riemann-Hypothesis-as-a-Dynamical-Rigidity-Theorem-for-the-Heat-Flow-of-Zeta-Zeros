@@ -1,6 +1,6 @@
 # Jensen-Window PF Bridge Target
 
-Date: 2026-07-16
+Date: 2026-07-24
 
 Status: theorem target artifact. This is not a proof of PF-infinity,
 Laguerre-Polya membership, RH, or `Lambda <= 0`; it is the surviving direct
@@ -191,6 +191,52 @@ certifies `Q_(10,n)(-100)<0` for `n=0,1,2,3`, equivalently
 depend on the proposed all-shift signed-Hankel/deep-Schur cone. This rejects
 that antecedent, not Jensen hyperbolicity or RH.
 
+A complementary low-degree guard points in the other direction:
+
+```text
+outputs/jensen_window_pf_quartic_outer_contact_normal_form_gate.md
+outputs/jensen_window_pf_quartic_outer_contact_length14_survivor_gate.md
+outputs/jensen_window_pf_quartic_quintic_polar_contact_lemma.md
+```
+
+The normal form factors the adjacent-quintic discriminant and proves a
+negative-discriminant outward collar for `0<q<15/16`. The exact survivor lies
+inside it and has all `4,043` supported signed-Hankel minors of every possible
+order visible on `A_1,...,A_15` positive, but its normalized adjacent quintic
+has one nonreal conjugate pair. At a quartic double-root contact, the polar
+lemma shows that a hyperbolic adjacent quintic would force `x_5<=U`. The
+missing antecedent must therefore tolerate the actual sequence's order-ten
+failures while still enforcing this degree-coupled contact exclusion; no
+generic finite signed-Hankel promotion can do both.
+
+For the actual Xi heat flow, that low-degree exclusion is now available by a
+different route:
+
+```text
+outputs/jensen_window_pf_newman_zero_slab_degree71_sector_certificate.md
+work/rh_compute/results/jensen_window_pf_newman_zero_slab_degree71_sector_certificate.json
+python work/rh_compute/scripts/check_jensen_window_pf_newman_zero_slab_degree71_sector_certificate.py
+```
+
+A 192-bit directed near-minus-tail estimate proves
+
+```text
+Re H_t(x+iy)>0
+for 0<=t<=1/5, |x|<=84/5, |y|<=1.
+```
+
+Combining this slab with de Bruijn's zero strip puts every zero of
+`F_t(s)=2H_t(i*sqrt(s))` in the negative-axis sector with
+`sin(delta)=840/7081`. Chasse's sector theorem and derivative closure then
+prove every shifted Jensen polynomial through degree `71` hyperbolic,
+uniformly on `0<=t<=1/5`. This excludes the quartic/quintic survivor for Xi,
+while leaving it intact as a generic finite signed-Hankel countermodel.
+The cutoff is finite: degree `72`, any unbounded cofinal degree sequence,
+all-degree Jensen hyperbolicity, and PF-infinity remain unproved. At `t=0`,
+the effective Xi literature already gives the much larger finite cutoff
+`d<=9.36*10^20`; neither bounded result supplies the required all-degree
+endpoint theorem.
+
 ## Required Bridge Theorem
 
 The theorem needed now has the weaker form:
@@ -227,7 +273,7 @@ python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
 Current obligation split:
 
 ```text
-11 obligations
+16 obligations
 3 open obligations
 jwpf_06_sign_regular_to_jensen_pf_conversion is the central open bridge theorem
 jwpf_05_all_order_shifted_sign_consistency is rejected by counterexample
@@ -242,7 +288,7 @@ outputs/jensen_window_pf_theorem_machinery_fit_matrix.md
 python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
 ```
 
-It currently records `7` source-anchored theorem-family rows and `0`
+It currently records `11` source-anchored theorem-family rows and `0`
 ready-to-apply rows.
 
 The structural ansatz workbench for the same central row is:
@@ -291,12 +337,725 @@ coefficient sequence:
 c_k(lambda) = A_k(lambda)/k!
 ```
 
-That is a separate coefficient-PF route. It should not be confused with the
-binomially weighted Jensen windows:
+At the finite-evidence level this ledger must not be confused with the
+binomially weighted Jensen-window certificates:
 
 ```text
 B^{d,n,lambda}_j = binom(d,j) A_{n+j}(lambda).
 ```
+
+At the all-order theorem level, however, the two formulations are exactly
+equivalent. Since
+
+```text
+F(z)=sum_k c_k z^k=sum_k A_k z^k/k!,
+F^(n)(z)=sum_j A_(n+j) z^j/j!,
+```
+
+ASW/Edrei and Polya-Schur, followed by derivative closure and finite ASW, give
+
+```text
+c is PF-infinity <=> every B^{d,n}_j is finite PF-infinity for all d,n.
+```
+
+The executable theorem-equivalence gate is:
+
+```text
+outputs/jensen_window_pf_coefficient_pf_equivalence_gate.md
+work/rh_compute/results/jensen_window_pf_coefficient_pf_equivalence_gate.json
+python work/rh_compute/scripts/check_jensen_window_pf_coefficient_pf_equivalence_gate.py
+```
+
+There is also an exact nonlinear Hankel formulation. For normalized entire
+`H=F/F(0)`, define
+
+```text
+a_r=p_(r+1)=(-1)^r[z^r]H'(z)/H(z).
+```
+
+Sokal's logarithmic-derivative criterion and the preceding equivalence give
+
+```text
+a is a Stieltjes moment sequence
+  <=> H is Laguerre-Polya type I
+  <=> c is PF-infinity
+  <=> every B^{d,n} is finite PF-infinity for all d,n.
+```
+
+The executable gate is:
+
+```text
+outputs/jensen_window_pf_edrei_stieltjes_equivalence_gate.md
+work/rh_compute/results/jensen_window_pf_edrei_stieltjes_equivalence_gate.json
+python work/rh_compute/scripts/check_jensen_window_pf_edrei_stieltjes_equivalence_gate.py
+```
+
+This creates a precise alternative antecedent target: prove both Stieltjes
+Hankel columns `det(p_(i+j+1))` and `det(p_(i+j+2))` at every order, derive a
+nonnegative S-fraction, or prove directly that the exact Phi ratio `H_0'/H_0`
+is a Stieltjes function. Finite rows do not enter the equivalence.
+
+This removes a duplicated endpoint target. It does not supply the missing
+all-order theorem from signed-Hankel or Xi/Phi structure.
+
+The ratio target now has an exact upper-half-plane form. Define
+
+```text
+P_Phi(z)=-Im(F_0'(z)*conj(F_0(z))).
+```
+
+Krein's Stieltjes/Pick theorem and Sokal's criterion give
+
+```text
+F_0 in LP+ <=> P_Phi(z)>0 for every Im(z)>0.
+```
+
+Polarization writes `P_Phi` as an explicit double integral against
+`Phi(u)Phi(v)`. The full formula, first real-axis concentration wall, exact
+two-scale mixture guard, and positive-resolvent alternative are in:
+
+```text
+outputs/jensen_window_pf_phi_pick_kernel_target.md
+work/rh_compute/results/jensen_window_pf_phi_pick_kernel_target.json
+python work/rh_compute/scripts/check_jensen_window_pf_phi_pick_kernel_target.py
+```
+
+This is a sharper endpoint-equivalent target, not a proof of its sign.
+
+Under the exact normalization
+
+```text
+M(w)=xi((1+w)/2)/4,
+```
+
+the Pick numerator is the hyperbolic directional derivative
+
+```text
+2*|w|^2*P_Phi(w^2)/|M(w)|^2
+ =tau*Re(xi'/xi)-delta*Im(xi'/xi),
+```
+
+where `w=2*(delta+i*tau)`. It is not ordinary horizontal xi-modulus
+monotonicity. Suzuki's arithmetic-Hankel canonical-system theorem supplies a
+second exact form of the same endpoint. On a cofinal sequence
+`omega_n decreasing to 0`, with `nu_n*omega_n>1`, Suzuki's published
+criterion lists:
+
+```text
+det(I+/-K_(omega_n,nu_n)[t])!=0 for every finite t;
+J_(omega_n,nu_n)(t;r,r)->0 as t->infinity for every Im(r)>0.
+```
+
+The determinant-only causal-multiplier audit sharpens this: the first line
+already implies RH on a strictly decreasing cofinal sequence, because an
+off-line zero would force distinct shifted zeros accumulating at itself.
+Suzuki's terminal limit then follows after RH and is not a second cofinal
+premise. For one fixed pair, no direct terminal implication is asserted.
+
+The fixed-`omega` audit sharpens the first line further. If `D(omega)`
+denotes all-time determinant nonvanishing, then
+
+```text
+D(omega)
+iff the reduced quotient Theta_omega is meromorphic inner in C+
+iff m_xi(rho-2*omega)>=m_xi(rho)
+    for every xi-zero rho with Re(rho)>1/2+omega.
+```
+
+Thus a fixed shift can hide an off-line zero only through exact
+multiplicity-preserving cancellation by an equal-height horizontal zero
+pair. Outside the countable set of such displacements, `D(omega)` is exactly
+the shifted zero-free-half-plane condition. In particular,
+
+```text
+RH iff D(omega_n) holds for some sequence omega_n->0.
+```
+
+Suzuki's scalar criterion makes the noncircular arithmetic target explicit:
+prove, on such a sequence, that
+
+```text
+x^(-1/2)*1_(1,infinity)(x)-h_omega^<1>(x) belongs to L2(1,infinity),
+```
+
+or prove the stronger sufficient condition that `h_omega^<1>` has one
+eventual sign. A deterministic five-shift scout found all 6000 sampled
+normalized values positive through `x=5000`; this is finite reconnaissance
+only and gives no unbounded-tail or `omega->0` uniformity.
+
+The published scalar hierarchy broadens this target. Define
+`H_(omega,1)=sqrt(x)h_omega^<1>` and let each `H_(omega,k+1)` be the
+logarithmic antiderivative of `H_(omega,k)`. Suzuki's Mellin identity gives
+
+```text
+integral_1^infinity H_(omega,k)(x)x^(1/2-s)dx/x
+ =[xi(s-omega)/xi(s+omega)]/(s-1/2)^k.
+```
+
+Landau's theorem therefore makes eventual one-sign behavior at any
+`k>=1` sufficient for `D(omega)`. Combining this with the fixed-shift phase
+diagram yields the broader exact target
+
+```text
+RH iff some sequence omega_j->0 has eventually one-signed
+       H_(omega_j,k_j), for arbitrary selected integers k_j>=1.
+```
+
+Every higher smoothing weight remains negative near zero and positive near
+one, so coefficient positivity still cannot prove the sum termwise. The
+`k=2` logarithmic antiderivative is now the first smoother arithmetic route.
+
+An exact Abel reduction isolates what that route must control. Writing
+`C_omega(x)=sum_(n<=x)c_omega(n)` and subtracting its residue main term,
+every level satisfies
+
+```text
+H_(omega,k)(x)
+ =x^(-1/2)*integral_0^1
+  E_omega(x*u)W_(omega,k)(u)du/u,
+W_(omega,k)(u)=-u*g_(omega,k)'(u).
+```
+
+The positive Jordan-totient main term vanishes identically against the
+kernel. Elementary absolute estimates give only
+`O(x^(1/2-omega)*(1+log x))`, at every finite `k`. The live arithmetic
+problem is therefore a signed Mobius-error cancellation theorem, not
+main-term domination.
+
+The all-order Hardy-space sharpening supplies a parallel energy target.
+Let `P_(omega,k)` be the logarithmic polynomial determined by the first
+`k` central Taylor coefficients of the shifted xi quotient. Then
+
+```text
+H_(omega,k)(exp(t))-P_(omega,k)(t) in L2(0,infinity)
+iff D(omega).
+```
+
+Consequently,
+
+```text
+RH iff the residual is L2 along some omega_j->0
+       at arbitrary selected integers k_j>=1.
+```
+
+Via the Jordan-error identity, this asks for finite squared `dx/x` energy
+of an explicit signed Mobius-error convolution after central-polynomial
+subtraction. It is not supplied by boundary unimodularity, one fixed shift,
+or a finite numerical energy cutoff. The regularized boundary trace already
+has finite spectral energy without RH; the missing Hardy property is
+positive-time support, with quotient poles appearing as anti-causal
+components. Classical positive Riesz smoothing of
+the Euler-totient error has different kernels and uses RH plus extra
+zero-derivative hypotheses, so it does not close this target.
+
+The unsmoothed Jordan error makes the finite arithmetic obligation more
+explicit. Define the fractional power-sum remainder `R_omega` and its natural
+Mobius partial sums
+
+```text
+E_(omega,N)(x)
+ =sum_(d<=N)mu(d)d^(-omega)R_omega(x/d).
+```
+
+The full generalized Muntz identity gives `E_(omega,N)(x)->E_omega(x)`
+pointwise, while finite Mellin-Plancherel gives
+
+```text
+||E_(omega,N)||_H^2
+ =1/(2*pi) integral_R W_omega(t)
+  |zeta(1/2+omega+i*t)M_N(1/2+omega+i*t)|^2 dt.
+```
+
+Positive-time error energy is an internally audited criterion for
+`D(omega)`, and cofinal accumulation yields the theorem candidate
+
+```text
+RH iff some omega_j->0 satisfy
+       sup_N ||E_(omega_j,N)||_H < infinity.
+```
+
+Thus the sharp finite target is a uniform-in-`N`, all-height natural-mollifier
+bound. Total nonnegativity of the associated Brownian max kernel proves only
+nonnegativity of finite energy. Scalar `l2` coefficients do not make the
+dilation orbit Bessel, and equal causal/anti-causal boundary norms block
+promotion from Plancherel without positive-time Hardy support.
+
+There is an exact bridge to the published natural Nyman framework. If
+`f_(epsilon,N)` is Burnol's finite fractional-part approximant, then
+
+```text
+E_(omega,N)(1/t)
+ =-(I-omega*H_star)[t^(-omega)f_(2omega,N)(t)]
+```
+
+and the tail Hardy norm gives
+
+```text
+(1-2omega)||t^(-omega)f_(2omega,N)||_2
+ <=||E_(omega,N)||_H
+ <=(1+2omega)||t^(-omega)f_(2omega,N)||_2.
+```
+
+Thus the two uniform-norm targets are equivalent. Burnol's published
+sequence theorem and Balazard-Saias convergence source-back the cofinal
+composition, while leaving the unconditional natural-partial-sum bound
+open.
+
+The norm gate also has an exact discrete form. Put
+
+```text
+S_(omega,N)(k)
+ =sum_(d<=N)mu(d)d^(-2omega){k/d},
+
+Q_(omega,N)
+ =sum_(k>=1)k^(2omega-2)S_(omega,N)(k)^2.
+```
+
+Then
+
+```text
+sup_N ||t^(-omega)f_(2omega,N)||_2<infinity
+ iff
+sup_N Q_(omega,N)<infinity.
+```
+
+The stable prefix `k<=N` forces any such bound to contain
+
+```text
+|sum_(d<=N)mu(d)d^(-(1+2omega))-1/zeta(1+2omega)|
+ =O(N^(-1/2-omega)).
+```
+
+Abel summation makes `Re(s)>1/2+omega` zero-free. The reduction therefore
+isolates two genuinely arithmetic requirements: this reciprocal-zeta tail
+rate and weighted short-multiplicative-interval cancellation. Neither is
+established here.
+
+The finite-tail identity separates those requirements exactly. With
+
+```text
+r_(omega,N)=1/zeta(1+2omega)-A_(omega,N),
+
+H_(omega,N)(k)
+ =sum_(N<d<=k)mu(d)d^(-2omega)floor(k/d),
+```
+
+one has
+
+```text
+S_(omega,N)(k)-S_(omega,infinity)(k)
+ =H_(omega,N)(k)-k*r_(omega,N).
+```
+
+It follows that uniform `Q_(omega,N)` is equivalent to:
+
+```text
+Q_(omega,infinity)<infinity,
+r_(omega,N)=O(N^(-1/2-omega)),
+sup_N sum_(j>=0)(2^j*N)^(2omega-2)
+ V_(omega,N)(2^j*N)<infinity.
+```
+
+The dyadic term is a square function of weighted Mobius increments on
+`(k/(q+1),k/q]`. This is now the precise finite-tail cancellation gate; the
+reduction does not prove it.
+
+Equivalently, the weighted norm is an exact stationary Gram form on
+logarithmic divisors with spectral density
+`|zeta(1/2-omega+it)|^2/((1/2-omega)^2+t^2)`. Its diagonal is uniformly
+bounded, and every possible growth lies in a signed Mobius off-diagonal.
+Positive definiteness gives a lower bound, not the uniform upper bound
+needed here.
+
+The weighted autocorrelation has the explicit large-ratio split
+
+```text
+C_alpha(u)
+ =L_alpha exp(-(1-alpha)|u|/2)+R_alpha(u),
+
+|R_alpha(u)|
+ <=K_alpha exp(-(1+alpha)|u|/2).
+```
+
+The Ornstein-Uhlenbeck leading Gram is exactly the
+`reciprocal-Mobius tail energy`
+
+```text
+sum_(k=1)^N [k^(1-alpha)-(k-1)^(1-alpha)]
+ |sum_(d=k)^N mu(d)/d|^2.
+```
+
+Its uniform boundedness for every member of one cofinal sequence
+`alpha_j->0` is equivalent to RH. This identifies a sharp auxiliary
+criterion but does not prove its antecedent or the full norm: the remainder
+Fourier density is sign-indefinite, with a checked negative value at
+`alpha=1/2`, so no positivity comparison follows. The remaining target is
+a direct Mobius-specific remainder bound or a different comparison theorem.
+
+The OU leading energy is itself exactly a weighted Mertens mean-square
+barrier. The resulting dyadic Mertens mean square criterion is
+
+```text
+RH
+ iff
+for every epsilon>0,
+sum_(K<=k<2K)M(k)^2
+ =O_epsilon(K^(2+epsilon)).
+```
+
+Expanding the prefix squares makes this equivalent to one signed
+origin-anchored cumulative two-point Mobius-correlation estimate. This
+clarifies the arithmetic handoff but does not supply it. Generic Hardy
+costs `N^(1-alpha)`. Published averaged-Chowla results average every base
+shift, and almost-all short-interval results may discard the exceptional
+origin slice, so neither theorem closes the anchored cumulative target.
+
+The weighted-prefix/affine-defect reduction makes the next arithmetic
+handoff explicit:
+
+```text
+outputs/jensen_window_pf_mertens_weighted_prefix_affine_defect_reduction.md
+work/rh_compute/results/jensen_window_pf_mertens_weighted_prefix_affine_defect_reduction.json
+python work/rh_compute/scripts/check_jensen_window_pf_mertens_weighted_prefix_affine_defect_reduction.py
+```
+
+The first `q=floor(k/d)` block is exactly a detrended weighted-Mobius
+prefix. It misses one constant anchor mode even when the forced
+reciprocal-tail rate holds. Applying Vaughan after the correlation collapse
+is endogenous because its test contains `M(n-1)` and generic
+Cauchy-Schwarz recycles the target energy. Applying it before collapse with
+bounded shifted-Mobius tests instead gives the exact signed form
+
+```text
+B_1(X)-TI_X+TII_X.
+```
+
+Thus the noncircular alternatives are a summable theorem for the weighted
+prefix anchor or an `O_epsilon(X^(2+epsilon))` estimate for
+`-TI_X+TII_X`, with cancellation retained jointly across shift and terminal
+length.
+
+The all-cutoff anchor reduction makes the first alternative exact:
+
+```text
+outputs/jensen_window_pf_mertens_anchor_logarithmic_tail_energy_reduction.md
+work/rh_compute/results/jensen_window_pf_mertens_anchor_logarithmic_tail_energy_reduction.json
+python work/rh_compute/scripts/check_jensen_window_pf_mertens_anchor_logarithmic_tail_energy_reduction.py
+```
+
+Adjacent reciprocal tails reconstruct `A_alpha(N)` exactly, and weighted
+Hardy/Copson comparison gives
+
+```text
+sum_(N>=1)N^(alpha-2)|A_alpha(N)|^2<infinity
+ iff
+sum_(N>=1)P_(alpha/2,N)/N<infinity.
+```
+
+Thus the local constant anchor is globally encoded by logarithmic
+stable-prefix energy. The uniform consequence
+`sup_N P_(omega,N)<infinity` is one logarithm short: a critical scalar model
+has bounded `P_N` but divergent `sum_N P_N/N`. The remaining first
+alternative is now the concrete Mobius-specific logarithmic summability
+estimate, which is RH-equivalent along a cofinal alpha sequence and is not
+proved. This obstruction concerns `P` alone; a cofinal bound for the full
+Burnol energy `Q` would already close RH through the existing criterion.
+
+The dyadic cosine decomposition now isolates where that summability can
+fail:
+
+```text
+outputs/jensen_window_pf_mertens_dyadic_cosine_mode_bottleneck.md
+work/rh_compute/results/jensen_window_pf_mertens_dyadic_cosine_mode_bottleneck.json
+python work/rh_compute/scripts/check_jensen_window_pf_mertens_dyadic_cosine_mode_bottleneck.py
+```
+
+On each dyadic block, exact Neumann cosine Parseval proves all modes
+`r>=ceil(sqrt(K))` summable from `|mu(n)|<=1`. Thus the same cofinal
+RH-equivalent target is confined to the block mean and `O(sqrt(K))`
+smooth sine-weighted Mobius modes. The lowest nonconstant mode is a
+positive one-hump window, so high-frequency cancellation is irrelevant.
+Davenport's arbitrary-log uniform linear-phase theorem leaves the power
+`K^(1-alpha)` and cannot close the series. Uniform square-root
+additive-twist cancellation would suffice only conditionally; it is not
+proved or asserted to follow from RH alone.
+
+The exact local-path transform now identifies both surviving pieces:
+
+```text
+outputs/jensen_window_pf_mertens_local_path_cosine_transference.md
+work/rh_compute/results/jensen_window_pf_mertens_local_path_cosine_transference.json
+python work/rh_compute/scripts/check_jensen_window_pf_mertens_local_path_cosine_transference.py
+```
+
+The mean is `sqrt(K)r_K-tau_(K,0)`, while the nonconstant modes are the
+DCT of the anchored reciprocal-weighted local Mertens path. Exact Abel
+transforms compare the full path with ordinary local Mertens increments,
+but that comparison alone does not treat their low-mode projections. An absolutely summable non-Mobius
+model has zero dyadic endpoint tails and zero means yet a divergent first
+nonconstant mode. Consequently the first alternative cannot be closed
+from endpoint tails, coefficient size, or a generic large-sieve estimate;
+it needs new signed Mobius cancellation in both components.
+
+The correct quotient by constants removes the projection ambiguity:
+
+```text
+outputs/jensen_window_pf_mertens_centered_bridge_vaughan_handoff.md
+work/rh_compute/results/jensen_window_pf_mertens_centered_bridge_vaughan_handoff.json
+python work/rh_compute/scripts/check_jensen_window_pf_mertens_centered_bridge_vaughan_handoff.py
+```
+
+The Abel map is uniformly invertible on this quotient. The nonconstant
+series is therefore equivalent to a centered local Mertens energy whose
+Green kernel is `min(i,j)-ij/K`. Its diagonal is already summable; the
+open part is the signed Brownian-bridge correlation
+`C_K=-TI_K+TII_K`. This is a concrete pre-collapse Vaughan target, but
+separate absolute estimates and averaged Chowla retain one excess power.
+The affine mean series remains independently necessary.
+
+That affine series is now scale-localized and unified with the bridge:
+
+```text
+outputs/jensen_window_pf_mertens_affine_tent_bridge_handoff.md
+work/rh_compute/results/jensen_window_pf_mertens_affine_tent_bridge_handoff.json
+python work/rh_compute/scripts/check_jensen_window_pf_mertens_affine_tent_bridge_handoff.py
+```
+
+For `u_K=sqrt(K)c_(K,0)`, the invertible filter
+`u_K-(1/2)u_(2K)` cancels the infinite affine plateau and leaves a compact
+tent supported on `(K,4K)`. The tent square and normalized Brownian bridge
+then form one local signed kernel with a summable diagonal and exact
+two-interval identity `O_(loc,K)=-TI_(loc,K)+TII_(loc,K)`. This removes the
+separate nonlocal mean obligation. In the reciprocal-weighted coordinate,
+the affine rank-one term exactly fills the bridge's missing constant
+direction and yields an equivalent positive compact tail-lattice square.
+A uniformly invertible finite Abel map further turns this into an
+ordinary-Mobius suffix-square criterion with one explicit
+bounded-coefficient anchor `beta_K` on `[2K,4K)`. Its sufficient per-scale target
+is `H_K=O(K^(2+epsilon))` for `epsilon<alpha`, while the coefficientwise
+bound is only `O(K^3)`. None of these forms resolves the Mobius
+cancellation problem: separate Type I/II bounds and averaged Chowla are
+still one full power short.
+
+The same target now has an ordinary pre-square vector Vaughan form:
+
+```text
+outputs/jensen_window_pf_mertens_ordinary_vector_vaughan_handoff.md
+work/rh_compute/results/jensen_window_pf_mertens_ordinary_vector_vaughan_handoff.json
+python work/rh_compute/scripts/check_jensen_window_pf_mertens_ordinary_vector_vaughan_handoff.py
+```
+
+Here `H_K=||B_K||_2^2`, the bounded feature Gram has diagonal at most
+`(5/4)K^2`, and componentwise finite Vaughan gives the exact identity
+`B_K=-V_(I,K)+V_(II,K)` before taking the norm. Thus the arithmetic
+bridge can be sought as a vector square-function estimate that preserves
+the signed Type I/II difference across all suffix endpoints. No such
+power gain is presently proved.
+
+The vector square function also has an exact half-odd spectral form:
+
+```text
+outputs/jensen_window_pf_mertens_mixed_boundary_sine_vaughan_handoff.md
+work/rh_compute/results/jensen_window_pf_mertens_mixed_boundary_sine_vaughan_handoff.json
+python work/rh_compute/scripts/check_jensen_window_pf_mertens_mixed_boundary_sine_vaughan_handoff.py
+```
+
+The mixed Dirichlet-Neumann sine basis diagonalizes the min-kernel.
+After unfolding `beta_K`, every mode is a compact ordinary-Mobius test,
+and the target becomes
+`sum_K K^(-alpha)sum_r|X_(K,r)|^2/(2r-1)^2<infinity`.
+Modewise finite Vaughan preserves
+`X_(K,r)=-T_(I,K,r)+T_(II,K,r)` inside each square. This identifies a
+precise square-root additive-twist or joint bilinear Type I/II theorem
+that would advance the bridge; no such theorem is currently supplied.
+
+The spectral target has a further unconditional high-mode reduction:
+
+```text
+outputs/jensen_window_pf_mertens_spectral_anchor_high_mode_reduction.md
+work/rh_compute/results/jensen_window_pf_mertens_spectral_anchor_high_mode_reduction.json
+python work/rh_compute/scripts/check_jensen_window_pf_mertens_spectral_anchor_high_mode_reduction.py
+```
+
+The exact split `X_(K,r)=Y_(K,r)+beta_K h_(K,r)` and current-block
+Parseval show that the modes above
+`R_(alpha,K)=ceil(K^(1-alpha/2))` contribute a summable normalized tail
+bounded by `2K^(-1)+8K^(-alpha/2)`. Consequently, for each fixed
+positive `alpha`, the live arithmetic theorem concerns only the first
+`O(K^(1-alpha/2))` half-odd modes. The remaining low-mode square is
+still open, and the reduction gives no uniform passage to `alpha=0`.
+
+Those low modes now have an exact finite-kernel formulation:
+
+```text
+outputs/jensen_window_pf_mertens_truncated_half_odd_kernel_handoff.md
+work/rh_compute/results/jensen_window_pf_mertens_truncated_half_odd_kernel_handoff.json
+python work/rh_compute/scripts/check_jensen_window_pf_mertens_truncated_half_odd_kernel_handoff.py
+```
+
+The truncated kernel is entrywise positive and PSD, with completion
+`P_(K,infinity)(i,j)=pi^2(2K+1)^(-2)min(i,j)`. After pullback to
+ordinary Mobius coefficients its entire diagonal is uniformly below
+`7pi^2/24`, so the bridge target is exactly a weighted signed
+off-diagonal estimate. The terminal column is a monotone suffix-Abel
+weight, and the pre-square Vaughan identity retains the cross term
+`-2<u_I,G u_II>`. These are exact coordinates, not the missing
+arithmetic estimate.
+
+The signed off-diagonal has now been resolved into exact shift rows:
+
+```text
+outputs/jensen_window_pf_mertens_shift_kernel_variation_handoff.md
+work/rh_compute/results/jensen_window_pf_mertens_shift_kernel_variation_handoff.json
+python work/rh_compute/scripts/check_jensen_window_pf_mertens_shift_kernel_variation_handoff.py
+```
+
+Every row has height `O(1/K)` and satisfies
+`Var_(n in I_(K,h))W_(K,h)(n)<6rho_K`; the dual fixed-base variation
+is also `O(1/K)`. Exact Abel identities expose one maximal shifted
+correlation family and one local-Mertens family. Either family remains
+power-short when the other coordinate is summed absolutely, even
+under conditional square-root input. The target therefore needs
+joint cancellation across shifts, base points, Vaughan types, and
+possibly dyadic scales.
+
+The two axes can now be kept together:
+
+```text
+outputs/jensen_window_pf_mertens_planar_abel_handoff.md
+work/rh_compute/results/jensen_window_pf_mertens_planar_abel_handoff.json
+python work/rh_compute/scripts/check_jensen_window_pf_mertens_planar_abel_handoff.py
+```
+
+Zero extension followed by two-dimensional Abel summation gives an
+exact pairing between joint base/shift prefixes and mixed kernel
+curvature. The current interior is controlled by the finite odd
+Dirichlet-kernel `L1` norm, while the joined transition and future
+blocks telescope, yielding
+
+```text
+V_(alpha,K)<3*pi^2*(1+log(2R))/K.
+```
+
+Weighted Cauchy-Schwarz isolates the concrete sufficient target
+`E_(alpha,K)=O_epsilon(K^(1+epsilon))`. This curvature-energy estimate
+is open. Its stronger maximal-prefix version already contains
+RH-scale block-Mertens input, and an explicit block-diagonal
+countermodel prevents promotion from separate row/column square-root
+bounds.
+
+The finite diagnostic
+
+```text
+outputs/jensen_window_pf_mertens_planar_curvature_energy_scout.md
+work/rh_compute/results/jensen_window_pf_mertens_planar_curvature_energy_scout.json
+python work/rh_compute/scripts/check_jensen_window_pf_mertens_planar_curvature_energy_scout.py
+```
+
+checks 28 float64 rows through `K=1024`. On that grid, max `K*V_K` is
+below `6.571` and max `E_K/K` is below `0.831`. This is finite
+non-falsification only and supplies no all-scale estimate.
+
+The limiting fixed-shift route does not generically supply the missing
+logarithm:
+
+```text
+outputs/jensen_window_pf_fixed_shift_inner_reciprocal_boundary_separation_gate.md
+work/rh_compute/results/jensen_window_pf_fixed_shift_inner_reciprocal_boundary_separation_gate.json
+python work/rh_compute/scripts/check_jensen_window_pf_fixed_shift_inner_reciprocal_boundary_separation_gate.py
+```
+
+A symmetric four-zero model has a rational inner fixed-shift quotient with
+finite causal `H2` energy, but reciprocal square energy on the same shifted
+line diverges at the canceled boundary zeros. Therefore limiting
+Jordan/Burnol innerness cannot be promoted by a universal same-shift
+multiplier to `sum_N P_(alpha/2,N)/N<infinity`. This does not block the
+cofinal full-Burnol implication or a direct Mobius/Mertens estimate.
+
+The exact coordinate, published equivalence, continuum Fredholm/Hankel
+expansion, truncation-path reformulation, and countermodel guards are:
+
+```text
+outputs/jensen_window_pf_xi_pick_suzuki_hankel_bridge.md
+work/rh_compute/results/jensen_window_pf_xi_pick_suzuki_hankel_bridge.json
+python work/rh_compute/scripts/check_jensen_window_pf_xi_pick_suzuki_hankel_bridge.py
+outputs/jensen_window_pf_suzuki_spectral_frontier.md
+work/rh_compute/results/jensen_window_pf_suzuki_spectral_frontier.json
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_spectral_frontier.py
+outputs/jensen_window_pf_suzuki_determinant_only_reduction.md
+work/rh_compute/results/jensen_window_pf_suzuki_determinant_only_reduction.json
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_determinant_only_reduction.py
+outputs/jensen_window_pf_suzuki_fixed_omega_phase_diagram.md
+work/rh_compute/results/jensen_window_pf_suzuki_fixed_omega_phase_diagram.json
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_fixed_omega_phase_diagram.py
+outputs/jensen_window_pf_suzuki_jordan_totient_sign_scout.md
+work/rh_compute/results/jensen_window_pf_suzuki_jordan_totient_sign_scout.json
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_jordan_totient_sign_scout.py
+outputs/jensen_window_pf_suzuki_cofinal_monotonicity_hierarchy.md
+work/rh_compute/results/jensen_window_pf_suzuki_cofinal_monotonicity_hierarchy.json
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_cofinal_monotonicity_hierarchy.py
+outputs/jensen_window_pf_suzuki_jordan_error_kernel_reduction.md
+work/rh_compute/results/jensen_window_pf_suzuki_jordan_error_kernel_reduction.json
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_jordan_error_kernel_reduction.py
+outputs/jensen_window_pf_suzuki_cofinal_l2_hierarchy.md
+work/rh_compute/results/jensen_window_pf_suzuki_cofinal_l2_hierarchy.json
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_cofinal_l2_hierarchy.py
+outputs/jensen_window_pf_jordan_muntz_causal_energy_bridge.md
+work/rh_compute/results/jensen_window_pf_jordan_muntz_causal_energy_bridge.json
+python work/rh_compute/scripts/check_jensen_window_pf_jordan_muntz_causal_energy_bridge.py
+outputs/jensen_window_pf_jordan_muntz_burnol_hardy_intertwiner.md
+work/rh_compute/results/jensen_window_pf_jordan_muntz_burnol_hardy_intertwiner.json
+python work/rh_compute/scripts/check_jensen_window_pf_jordan_muntz_burnol_hardy_intertwiner.py
+outputs/jensen_window_pf_burnol_cell_energy_tail_obstruction.md
+work/rh_compute/results/jensen_window_pf_burnol_cell_energy_tail_obstruction.json
+python work/rh_compute/scripts/check_jensen_window_pf_burnol_cell_energy_tail_obstruction.py
+outputs/jensen_window_pf_burnol_tail_discrepancy_dyadic_reduction.md
+work/rh_compute/results/jensen_window_pf_burnol_tail_discrepancy_dyadic_reduction.json
+python work/rh_compute/scripts/check_jensen_window_pf_burnol_tail_discrepancy_dyadic_reduction.py
+outputs/jensen_window_pf_weighted_fractional_autocorrelation_gram_bridge.md
+work/rh_compute/results/jensen_window_pf_weighted_fractional_autocorrelation_gram_bridge.json
+python work/rh_compute/scripts/check_jensen_window_pf_weighted_fractional_autocorrelation_gram_bridge.py
+outputs/jensen_window_pf_weighted_autocorrelation_ou_tail_energy_reduction.md
+work/rh_compute/results/jensen_window_pf_weighted_autocorrelation_ou_tail_energy_reduction.json
+python work/rh_compute/scripts/check_jensen_window_pf_weighted_autocorrelation_ou_tail_energy_reduction.py
+outputs/jensen_window_pf_ou_mertens_mean_square_reduction.md
+work/rh_compute/results/jensen_window_pf_ou_mertens_mean_square_reduction.json
+python work/rh_compute/scripts/check_jensen_window_pf_ou_mertens_mean_square_reduction.py
+```
+
+Suzuki's local determinant interval is unconditional for `nu*omega>1`, but
+it is not the all-`t` theorem. The continuous self-adjoint truncation path
+starts at zero, so all-history determinant nonvanishing is equivalent to
+`||K[t]||<1` separately at every finite `t`. A positive gap uniform in `t`
+is not required and is impossible in the desired Hermite-Biehler case,
+where the norms tend to one. Hilbert-Schmidt domination diverges, and
+Suzuki's sup-contour certificate has a finite time ceiling for each fixed
+`(omega,nu)`. Total nonnegativity, boundary unimodularity without pole-free
+contour motion, and a finite `t` grid do not prove the Fredholm gate. Even
+though the cofinal determinant family makes the terminal premise redundant,
+the all-time determinant condition itself remains completely open.
+
+The corresponding Edrei moments obey an exact radial heat hierarchy, but
+generic backward Stieltjes-cone invariance is false. The repeated-zero model
+`(1+beta*z)^2` has
+
+```text
+Disc_z exp(lambda*(4z*partial_z^2+2partial_z))(1+beta*z)^2
+ =32*lambda*beta^3*(1+3*lambda*beta),
+```
+
+and every shifted `2x2` Stieltjes minor is negative for
+`-1/(3*beta)<lambda<0`. The exact gate is:
+
+```text
+outputs/jensen_window_pf_edrei_heat_flow_boundary_gate.md
+work/rh_compute/results/jensen_window_pf_edrei_heat_flow_boundary_gate.json
+python work/rh_compute/scripts/check_jensen_window_pf_edrei_heat_flow_boundary_gate.py
+```
+
+Thus a backward argument from a known positive de Bruijn time must prove an
+Xi/Phi-specific all-order rigidity or no-escape theorem; generic cone
+invariance cannot be used.
 
 ## Kill Gates
 
@@ -305,8 +1064,27 @@ Reject a proposed proof if it:
 ```text
 proves only the degree-2 signed-Hankel identity;
 checks only finitely many Jensen windows;
-checks only the ordinary coefficient sequence c_k;
+checks only finitely many minors of the ordinary coefficient sequence c_k;
+checks only finitely many Edrei-log Hankel determinants or recurrence coefficients;
 checks only shifted-principal Hankel determinants;
+uses positive mixing to assert the polarized Phi Pick kernel is nonnegative;
+promotes horizontal xi-modulus monotonicity to the hyperbolic Pick direction;
+promotes total nonnegativity of a Hankel kernel without ruling out a finite +/-1 crossing;
+uses |Theta|=1 on the real boundary to move a high contour across possible poles;
+uses Hilbert-Schmidt domination as an all-t contraction certificate;
+repeats Suzuki's M_v^2 exp(4vt)<1 estimate beyond its finite time ceiling;
+demands one positive contraction gap uniform in t;
+promotes Suzuki's local interval or a finite t grid to global Fredholm nonvanishing;
+claims one fixed determinant family directly proves its terminal limit;
+promotes finite positivity of Suzuki's summatory kernel to eventual sign or an L2 tail;
+promotes finite positivity of a logarithmic smoothing to eventual sign;
+promotes a finite Suzuki residual-energy cutoff to an L2 tail;
+promotes Brownian max-kernel total nonnegativity to a uniform energy upper bound;
+uses scalar l2 Mobius coefficients as if the dilation orbit were Bessel;
+uses a boundary Plancherel norm without proving positive-time causality;
+uses boundary modulus one without excluding right-half-plane quotient poles;
+uses the positive Jordan-totient residue main term as a dominant contribution after the Suzuki kernel annihilates it;
+uses generic backward invariance of the Stieltjes moment cone;
 uses all-order PF-infinity of B^{d,n,0} as an assumption;
 assumes Jensen hyperbolicity, Laguerre-Polya membership, RH, or Lambda <= 0;
 treats the shifted Arb staircase as an all-order theorem.
@@ -322,11 +1100,32 @@ outputs/signed_hankel_jensen_bridge_target.md
 outputs/jensen_window_pf_bridge_obligations.md
 outputs/jensen_window_pf_theorem_machinery_fit_matrix.md
 outputs/jensen_window_pf_structural_ansatz_matrix.md
+outputs/jensen_window_pf_coefficient_pf_equivalence_gate.md
+outputs/jensen_window_pf_edrei_heat_flow_boundary_gate.md
+outputs/jensen_window_pf_phi_pick_kernel_target.md
+outputs/jensen_window_pf_suzuki_determinant_only_reduction.md
+outputs/jensen_window_pf_suzuki_fixed_omega_phase_diagram.md
+outputs/jensen_window_pf_suzuki_jordan_totient_sign_scout.md
+outputs/jensen_window_pf_suzuki_cofinal_monotonicity_hierarchy.md
+outputs/jensen_window_pf_suzuki_jordan_error_kernel_reduction.md
+outputs/jensen_window_pf_suzuki_cofinal_l2_hierarchy.md
+outputs/jensen_window_pf_xi_pick_suzuki_hankel_bridge.md
+outputs/jensen_window_pf_suzuki_spectral_frontier.md
 outputs/sign_regularity_theorem_fit_matrix.md
 python work/rh_compute/scripts/check_signed_hankel_jensen_bridge_target.py
 python work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py
 python work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py
 python work/rh_compute/scripts/check_jensen_window_pf_structural_ansatz_matrix.py
+python work/rh_compute/scripts/check_jensen_window_pf_coefficient_pf_equivalence_gate.py
+python work/rh_compute/scripts/check_jensen_window_pf_edrei_heat_flow_boundary_gate.py
+python work/rh_compute/scripts/check_jensen_window_pf_phi_pick_kernel_target.py
+python work/rh_compute/scripts/check_jensen_window_pf_xi_pick_suzuki_hankel_bridge.py
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_spectral_frontier.py
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_fixed_omega_phase_diagram.py
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_jordan_totient_sign_scout.py
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_cofinal_monotonicity_hierarchy.py
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_jordan_error_kernel_reduction.py
+python work/rh_compute/scripts/check_jensen_window_pf_suzuki_cofinal_l2_hierarchy.py
 python work/rh_compute/scripts/check_sign_regularity_theorem_fit_matrix.py
 ```
 

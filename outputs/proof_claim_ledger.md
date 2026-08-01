@@ -1,6 +1,6 @@
 # Proof Claim Ledger
 
-Date: 2026-07-17
+Date: 2026-08-01
 
 Status: claim-classification ledger. This is not a proof of RH or `Lambda <= 0`; it records which claims are exact, finite, diagnostic, open, rejected, or hygiene gates.
 
@@ -25,8 +25,94 @@ python work/rh_compute/scripts/check_proof_claim_ledger.py
 Current result:
 
 ```text
-validated proof-claim ledger: 304 claims, 0 issues, 8 open theorem targets
+validated proof-claim ledger: 515 claims, 0 issues, 9 open theorem targets
 ```
+
+The source-normalization corrigendum remains the baseline: the Polymath-15
+coefficient `C_0(p)`, and therefore the retained endpoint `H_a`, is generally
+complex.  Formal Core Section 11.146 replaces the historical real-`H_a`
+endpoint rows.  Section 11.147 now derives the corrected division-free
+endpoint and endpoint-carrier phase currents.  Its exact `q=1` witnesses
+show that the terminal relative current is eventually negative at `p=0`
+and positive at cutoff equality `p=1`; a uniform terminal orientation is
+therefore false.  Section 11.148 composes that endpoint with the terminal
+carrier before real projection.  The resulting `q=1` cofinal leading symbol
+is `[A A''-(A')^2]/(16pi^2)`, and a 3072-box Arb cover proves it is below
+`-3/8000` on the full saddle cell.  Section 11.149 now proves the missing
+finite-height remainder inside the retained first-order `q=1` model:
+`|a^2J_edge/(kappa T_0)^2-K_edge|<1/10000000` for `L>=50`, hence the
+normalized model current is below `-3749/10000000`.  The omitted higher-order
+Xi approximation error remains open.  Section 11.150 redoes the heat
+majorants on the full box `0<tL<=25` and proves the same finite-height sign
+throughout the critical range, including every `q>=1` point.  The
+adjacent-cutoff projective splice is completed in Section 11.151.  Section
+11.152 keeps the global approximation residual on the whole first jet and
+shows that the boundary transfer requires only the established `C1`
+homotopy.  Section 11.153 proves that an edge plus one isolated near-terminal
+carrier can have either current sign, so termwise absorption is unavailable.
+Section 11.154 restores the canonical consecutive order: for each fixed
+finite `M`, the edge plus `N-1,...,N-M` collapses to one shifted real
+`C_0` trace and has leading current below `-3/8000`.  Section 11.155 makes
+this effective at finite height on `q=1`.  For
+`1<=M<=floor(a^(1/18))-1`, exact carrier-ratio and four-coordinate bounds
+give a current defect below `1/400`, hence the retained growing terminal
+block has normalized current below `-1/400`.  The remaining nonterminal bulk,
+its cross-current with this block, the omitted Xi remainder, and every RH-level
+conclusion remain open.  Section 11.156 now performs the exact join without
+expanding all carrier pairs.  Preserving the `u_N` shear, truncated Abel
+summation reduces the bulk and its first jet to `F_B,R_B` and their first
+derivatives, while four-coordinate polarization isolates one signed remainder
+`Phi_B`.  The sharp retained-model obligation is `Phi_B<=1/400`; this bound is
+not yet proved.  Section 11.157 closes the inputs to `Phi_B` on the five
+truncated complex currents `H_0,H_1,H_2,D_0,D_1` and the certified tail jets.
+The existing joined dyadic/odd-prefix formulas apply exactly at the bulk
+cutoff `B`, but no signed five-current inequality is yet available.  Section
+11.158 then removes the quadratic first Dirichlet correction exactly: the
+five corrected currents are a linear image of correction-free moments
+`G_0,...,G_4`.  Moments `G_1,...,G_4` have symmetric Mangoldt forms on the
+balanced hyperbola `dm<=B`.  Their prime-edge minors are negative through
+order four, so the live use of that symmetry is a signed endpoint-coupled
+Type-I/II estimate, not kernel positivity.
+Section 11.159 makes that target fully explicit.  The ten real components of
+`G_0,...,G_4` enter `Phi_B` through four real observations, and
+`h^2 Phi_B=g^T M g+ell_T^Tg` with `rank(M)<=4`.  A generic exact witness has
+inertia `(2,2,6)`, so no coefficient-blind semidefinite promotion is
+available.  On the simultaneous retained value/centered-scalar contact,
+`Phi_B=-P_T>1/400`; the open arithmetic theorem must therefore exclude that
+fibre source-specifically while proving the explicit rank-four inequality.
+Section 11.160 expands the rank-four form into its original endpoint-linear,
+Hermitian phase-difference, and transpose phase-sum carrier kernels.  The
+transpose kernel loses `chi_N` exactly and the Hermitian kernel loses its real
+part.  The physical terminal source further gives
+`|chi_N+i h theta/2|<3h^2`, with both the terminal and shared-anchor
+correction derivatives retained.  The ideal leading kernels are explicit,
+but a two-carrier opposite-phase guard reverses the isolated-carrier sign.
+The live theorem is therefore one joint endpoint-coupled Type-I/II or Vaughan
+bound on both kernel families; no such signed bound is yet proved.
+Section 11.161 identifies the exact source restriction behind those kernels.
+After polarizing the common factor, `G_0,...,G_4` are the order-four jet of
+one positive-amplitude Fourier polynomial on the frequencies `log n`.  Its
+phase-difference function is Bochner-positive, while its phase-sum family is
+not covered by that positivity.  The ideal bulk current reduces exactly to
+`[f f''-(f')^2]/4+[u_(N,x)/2]fg`; hence it is nonpositive on the physical
+zero fibre `f(0)=0`.  An exact positive-amplitude `n=1,2` half-turn guard has
+current `log(2)^2/8>0`, so the actual phase, amplitudes, endpoint, and
+correction remainder are indispensable.  The full signed bound remains open.
+Section 11.162 now restores the exact physical `q=1` laws.  It proves
+`Omega=-Im(s_*)=T_0-epsilon` with
+`3/(8L^2x)<epsilon<7/(8L^2x)`, the strictly ordered profile
+`A_n=A_a exp[B_a u_n+u_n^2/(8L^2)]` with `49/100<B_a<1/2`, and the
+parity-fixed common phase `omega_c=(-1)^N eta`.  The five unnormalized
+moments transfer from `Omega` to `T_0` with an explicit positive-mass error.
+Ordered amplitudes sign every two-carrier pure Turan numerator, so the old
+reverse-order witness is physically excluded.  On the ordinary fibre the
+leading current is equivalently the branch-free complex-variance
+discriminant `4P_bulk^(0)|M_0|^4=-D_hat`.  A robust three-carrier dyadic
+guard still gives positive current throughout the certified finite-`L`
+amplitude box when its phase is freed.  Thus the open theorem is now
+specifically an estimate using the actual `Omega`, common anchor, endpoint,
+and correction kernels; neither `D_hat>=0` nor the full signed bound is
+claimed.
 
 ## Categories
 
@@ -66,7 +152,9 @@ hygiene_gate:
 
 ```text
 target_direct_coefficient_pf:
-  prove all Toeplitz minors of c_k(0)=mu_{2k}(0)/(2k)! are nonnegative
+  prove all Toeplitz minors of c_k(0)=mu_{2k}(0)/(2k)! are nonnegative;
+  this is exactly equivalent to the all-degree/all-shift Jensen-window target
+  and to the Stieltjes moment property of a_r=p_(r+1)
 
 target_signed_hankel_jensen_bridge:
   the proposed all-order signed-Hankel/deep-rectangle antecedent is false at
@@ -75,10 +163,73 @@ target_signed_hankel_jensen_bridge:
   Laguerre-Polya membership, or exclusion of positive Newman birth
   specification: outputs/signed_hankel_jensen_bridge_target.md
 
+jensen_window_pf_compound_order11_compact_adaptive_h23_certificate:
+  interval theorem on all 129280 quarter blocks over 5700<=t<=38020;
+  largest scaled upper 2122.8651669101159 remains below the target 6000
+
+jensen_window_pf_compound_order11_first_summand_curvature_certificate:
+  exact four-range composition proving y_1''(t)<=6000/t^2 for every t>=1252;
+  zero full-kernel, heat-forward, or RH claims occur in this source theorem
+
+jensen_window_pf_compound_order11_m100_entry_certificate:
+  exact fixed-order endpoint composition proving Q_(11,n)(-100)>0 for every
+  integer n>=0
+
+jensen_window_pf_compound_order11_lambda0_completion_certificate:
+  exact lambda-zero completion proving contiguous and arbitrary-column signed
+  Hankel positivity through order eleven only; order twelve and PF-infinity
+  remain open
+
+jensen_window_pf_negative_lambda_first_summand_power14_rebalanced_dominance_extension:
+  asymptotic theorem proving the complete-to-first-summand defect is below
+  2/k^14 for every integer k>=380; not an order-twelve curvature theorem
+
+jensen_window_pf_compound_order12_m100_partial_prefix_certificate:
+  interval theorem proving four negative endpoint shifts followed by 1237
+  positive shifts through n=1240, with no inconclusive row
+
+jensen_window_pf_compound_order12_m100_endpoint_completion_certificate:
+  interval theorem extending coefficient coverage through A_1514, reproducing
+  all 1243 inherited Q11 balls by overlap, and proving the remaining 252
+  finite endpoint shifts positive through n=1492
+
+jensen_window_pf_compound_order12_lambda0_prefix_certificate:
+  interval theorem proving Q_(12,n)(0)>0 at n=0,1,2,3 from fresh 520-digit
+  12 by 12 determinant rebuilds
+
+jensen_window_pf_compound_order12_high_cumulant_coarse_corridor:
+  exact epsilon-ten vanishing and Cauchy residual bounds supplying normalized
+  cumulant orders 21 and 22 on the finite and asymptotic saddle rays
+
+jensen_window_pf_compound_order12_nested_curvature_finite_ray_certificate:
+  17,999-block interval theorem proving t^2*v_1''(t)<1109.799<8000 on
+  the complete finite saddle ray 2001/1000<=u<=20
+
+jensen_window_pf_compound_order12_nested_curvature_asymptotic_ray_certificate:
+  normalized asymptotic theorem proving t^2*v_1''(t)<4573.334<8000 for
+  every saddle mode u>=20
+
+jensen_window_pf_compound_order12_sparse_h23_two_unit_propagation:
+  exact normalized Taylor transport from H0-H23 anchors through H0-H16 at
+  distance at most two under a certified H24 wall; it certifies no source row
+
+jensen_window_pf_compound_order12_compact_refined_h0_h23_cache:
+  resumable window-16 H0-H23 compact source with 940/8085 exact rows through
+  t=9448, a matching live rebuild at row 939, and next target t=9452
+
+jensen_window_pf_compound_order12_sparse_h23_lower_bridge_prefix:
+  rigorous 125-segment, 8000-quarter-block prefix proving the scaled curvature
+  target on every real t in 1503..3503; segment 125 resumes at t=3503
+
+jensen_window_pf_compound_order12_curvature_bridge_target:
+  open fixed-order target with an exact transfer below 100/k^2 and proved
+  finite/asymptotic saddle rays; only the physical lower/compact cover remains
+
 target_jensen_window_pf_bridge:
   prove that every binomially weighted Jensen window
-  B^{d,n,0}_j=binom(d,j) A_{n+j}(0) is finite PF-infinity, or prove this
-  directly from a weaker Xi/Phi-specific structure that tolerates the
+  B^{d,n,0}_j=binom(d,j) A_{n+j}(0) is finite PF-infinity, equivalently prove
+  all-order PF-infinity of c_k=A_k/k! or the Stieltjes moment property of
+  a_r=p_(r+1), from a weaker Xi/Phi-specific structure that tolerates the
   certified negative order-ten endpoint minors
   specification: outputs/jensen_window_pf_bridge_target.md
 
@@ -91,7 +242,12 @@ target_positive_determinant_integral:
   nonzero Toeplitz minor
 
 target_edrei_log_power_representation:
-  prove an all-order positive Edrei log-power representation for H_0
+  prove that a_r=p_(r+1)=(-1)^r[z^r]H_0'/H_0 is a Stieltjes moment sequence,
+  equivalently prove both all-order Hankel columns, a nonnegative S-fraction,
+  the global upper-half-plane Phi Pick sign, Suzuki's cofinal all-t Fredholm
+  gate, or a Phi-derived positive self-adjoint resolvent
+  for the exact logarithmic-derivative ratio; generic backward
+  Stieltjes-cone invariance is rejected
 
 jensen_window_pf_newman_strict_laguerre_correlation_target:
   prove strict Fourier positivity, equivalently Wiener translate density,
@@ -1830,6 +1986,18 @@ jensen_window_pf_quartic_boundary_flow_obstruction:
   not by itself a quartic invariant; this does not show failure of the zeta
   trajectory and instead requires a new coupled degree-4 condition
 
+jensen_window_pf_strong_logconcave_local_quartic_countermodel:
+  exact moment-realized local countermodel; the
+  `1/5`-strongly log-concave squared-variable density
+  `exp(-3*y-y^2/10)1_[1/20,1](y)` has four Gamma-normalized Mellin
+  contractions satisfying every local lower/upper ratio wall,
+  `x_1<x_2<x_3<x_4`, and three consecutive strict cubic tests. Arb gives
+  `Q(x_1,x_2,x_3)<0`, so its shift-zero quartic discriminant is negative.
+  Full-support `1/5`-strongly log-concave approximants preserve these strict
+  finite signs by dominated convergence. This blocks only a local generic
+  promotion: it is not the Xi kernel or a Newman heat trajectory and does not
+  challenge the global Xi all-shift cubic theorem
+
 jensen_window_pf_quartic_double_root_threshold_lemma:
   exact local quartic boundary theorem; for
   P=(1+a*w)^2(1+b*w)(1+c*w), p=bc, the heat value at the double root has sign
@@ -1837,6 +2005,96 @@ jensen_window_pf_quartic_double_root_threshold_lemma:
   condition is (3*a^2-4*a+p)*(u-U)<=0. On the triple-root stratum first-order
   viability requires u=U and the first variation retains (1+a*w)^2. A closed
   contraction-coordinate quartic invariant and higher-time tangency remain open
+
+jensen_window_pf_quartic_signed_hankel_branch_exclusion_lemma:
+  exact Xi branch-selection theorem. At a normalized quartic double-root
+  boundary, the contiguous order-three Hankel determinant is a positive shift
+  factor times `-C^3/216`, where
+  `C=3*a^2-4*a+p=(a-b)*(a-c)`. The completed Xi compound-order-three theorem
+  gives `D_(3,n)<0`, hence `C>0`: the repeated root lies outside the two simple
+  roots, while the middle-root and triple-root strata are impossible. The
+  live inward condition therefore reduces from
+  `C*(u-U)<=0` to the single unproved outer threshold `u<=U(a,p)`
+
+jensen_window_pf_quartic_outer_threshold_order4_nonpromotion_gate:
+  exact finite local countergate. The rational segment `A_1,...,A_10` has an
+  outer-double-root shift-one quartic, eight strict pointwise ratio
+  coordinates, seven increasing scaled-defect steps, seven reciprocal-defect
+  increments below one, seven strict adjacent cubic frontiers, all `120`
+  supported order-two signs, all `126` supported arbitrary-column
+  order-three signs, and all `56` supported arbitrary-column order-four
+  signs across multiple forward shifts. Nevertheless `u-U(a,p)>0`, so its
+  quartic heat vector is outward; the adjacent quintic has negative
+  discriminant. This blocks finite promotion from the strengthened local
+  scalar and compound layers through order four. The segment is not Xi, an
+  infinite sign-regular sequence, or a Newman trajectory. The exact next
+  `x_10` continuation corridor has positive rational width, and one rational
+  interior point preserves the next order-three/order-four signs and scalar
+  corridor; the downstream length-13 obstruction proves that this fixed
+  prefix nevertheless has no all-length increasing continuation
+
+jensen_window_pf_quartic_outer_branch_length13_obstruction:
+  exact fixed-prefix obstruction. Every strict signed-Hankel continuation of
+  the outer-contact prefix through `x_12` is parameterized by
+  `G_(k-3)=y_k*C_k`, `0<y_k<1`. An increasing `x_13` with the next order-four
+  sign would require `Delta_13=C_13-M_13>0`. Exact Bernstein certificates for
+  1516 derivative coefficients prove `Delta_13` is coordinatewise
+  nondecreasing, but its closed-cube maximum is below
+  `-190137/125000000000`. Thus this prefix cannot be an infinite
+  countermodel. The alternate-tail gate below proves explicitly that this is
+  prefix-specific
+
+jensen_window_pf_quartic_outer_branch_alternate_length13_survivor_gate:
+  exact finite survivor and scope-repair gate. Keeping the same outer contact
+  only through `x_5`, eight rational corridor parameters construct a distinct
+  increasing tail through `x_13`. It clears every stated scalar gate, all ten
+  order-three gaps, all eight order-four cap margins, and all `364`, `715`,
+  and `792` supported arbitrary-column signed minors of orders two through
+  four on `A_1,...,A_14`. Here `Delta_13>0`, whereas this chosen tail has
+  `Delta_14<0`. Thus the earlier obstruction is not uniform, and the new
+  length-14 obstruction is fixed-tail only within this artifact. Its bounded
+  search remains numerical evidence; the separate interval certificate below
+  supplies the rigorous all-tail theorem for this one fixed contact
+
+jensen_window_pf_quartic_outer_branch_uniform_length14_interval_certificate:
+  rigorous one-contact interval theorem. The first scaled wall is exactly
+  `0<y_6<Y_6`, every later signed corridor has `0<y_k<1`, and cancellation-free
+  gap monomials place every admissible tail in `[0,Y_6]x[0,1]^7`. A 256-bit,
+  hash-chained Arb tree has `74,947` events, `37,473` splits, `37,474`
+  certified leaves, maximum depth `23`, and no uncovered box. Independent
+  replay proves every mean-value upper enclosure for `Delta_14` is strictly
+  negative. Thus every admissible tail from this contact dies at the
+  increasing-`x_14` order-four compatibility test. The complete outer-contact
+  family, the Xi threshold, PF-infinity, `Lambda<=0`, and RH remain open. The
+  contact-level survivor below proves that the one-contact restriction is
+  essential
+
+jensen_window_pf_quartic_outer_contact_normal_form_gate:
+  exact contact-level reduction. With `delta=1-a`,
+  `q=C/(4 delta^2)`, and `1-x_5=delta^2 s`, every contact defect has scale
+  `delta^2`; `G_1=delta^6 h_1`, `G_2=delta^4 h_2`, and
+  `Delta_14=delta^4 delta14_hat`. The opposite outer-root branch violates
+  `x_2<x_3`. The first extension has two exact regimes according as the
+  scaled wall or order-four cap is smaller. This normal form removes the
+  singular contact scale. It also factors the adjacent-quintic discriminant
+  as a positive prefactor times `epsilon^2 R(epsilon)`, with
+  `epsilon=T-s`; for `0<q<15/16`, one exact positive root `epsilon_+`
+  bounds a negative-discriminant outward collar. It does not decide the
+  complete tail-cell sign or establish that Xi enters this collar
+
+jensen_window_pf_quartic_outer_contact_length14_survivor_gate:
+  exact finite countermodel. The rational contact
+  `delta=13/200`, `q=1/2`, `s=T-1/100000` has `x_5-U>0`. Setting every
+  `y_6,...,y_14` to `99/100` constructs a strict tail through `x_14`.
+  All `4,043` supported arbitrary-column signed minors of every possible
+  order two through eight on `A_1,...,A_15` have positive 512-bit Arb lower
+  endpoints, while `Delta_14>0` and `Delta_15>0` exactly. This rejects
+  contact-uniform length-14 promotion from the finite recorded hypotheses.
+  Yet the adjacent quintic has `P_5(-1/a)<0` and negative exact
+  discriminant, hence three real roots and one nonreal conjugate pair. This
+  separates the finite signed-Hankel conditions from degree-five
+  hyperbolicity, but it is not Xi, an infinite sequence, or a Newman
+  trajectory
 
 jensen_window_pf_quartic_quintic_polar_contact_lemma:
   exact adjacent-degree theorem; normalized windows obey
@@ -1862,6 +2120,22 @@ jensen_window_pf_cofinal_scaling_limit_equivalence_gate:
   gives the converse. At shift zero the cofinal terminal theorem is already an
   endpoint-equivalent statement, while the bounded 1050-row Sturm ladder does
   not enter the limit
+
+jensen_window_pf_coefficient_pf_equivalence_gate:
+  exact route correction; c_k=A_k/k! has ordinary generating function equal
+  to the exponential generating function of A, and differentiation gives each
+  shifted tail. ASW/Edrei, Polya-Schur, derivative closure, and finite ASW make
+  all-order coefficient PF-infinity exactly equivalent to PF-infinity of every
+  shifted Jensen window. Finite evidence and signed-Hankel data still do not
+  prove the common endpoint theorem
+
+jensen_window_pf_edrei_stieltjes_equivalence_gate:
+  exact route correction; for the entire normalized H, the shifted signed
+  Edrei-log sequence a_r=p_(r+1) is exactly the signed Taylor sequence of
+  H'/H. Sokal's criterion identifies its all-order Stieltjes moment property
+  with H in LP+, hence with coefficient PF-infinity and every shifted Jensen
+  window. Strict positivity of the two Hankel columns s=1,2 at every order is
+  sufficient; the 4205 finite rows remain diagnostics only
 
 jensen_window_pf_polar_heat_collision_cascade_lemma:
   exact collision-cascade theorem; at a multiplicity-m root the adjacent
@@ -1926,6 +2200,250 @@ jensen_window_pf_newman_positive_boundary_attainment_lemma:
   m(m-1)/(8*(t-Lambda))+O((t-Lambda)^(-1/2)), so every multiplicity has a
   nonintegrable endpoint trace; Xi simplicity or endpoint control remains open
 
+jensen_window_pf_newman_positive_boundary_delta_localization_gate:
+  exact cofinal compact-strip reduction. For every fixed delta>0, the dominant
+  ray confines possible contacts with t>=delta to
+  |x|<4*pi*exp(25/delta); delta_j=1/(5j) gives a countable family equivalent
+  to Lambda<=0. The exact model G_t=x^2-2t has positive-time simplicity and a
+  double endpoint zero with vanishing first-jet margins. Thus a uniform floor
+  down to t=0 is a valid stronger route, not a logically necessary burden;
+  none of the Xi compact strips is certified here
+
+jensen_window_pf_newman_positive_boundary_diagonal_exhaustion_gate:
+  exact independent compact-exhaustion theorem. Because a positive boundary
+  supplies one fixed finite collision, any delta_j->0 and R_j->infinity
+  detect it eventually, with no required relation between their rates.
+  Composing with the certified |x|<=38 core gives the linear shell family
+  1/(5j)<=t<=1/5, 38<|x|<=38+j, exactly equivalent to Lambda<=0. An
+  arbitrary-height even polynomial heat flow realizes the classical field
+  -pi/8 and stiffness tending to pi^2/64 at any prescribed collision height
+  and shifted boundary time. Thus neither the exponential radius nor a local
+  field replacement is logically mandatory; the unbounded Xi shell family
+  remains open
+
+jensen_window_pf_newman_first_jet_winding_gate:
+  exact all-multiplicity contact-degree and boundary-flux reduction. The
+  universal Hermite heat polynomial shows that an m-fold real contact creates
+  floor(m/2) pairs and has local first-jet index +floor(m/2) in the standard
+  (x,t) orientation. Therefore all
+  interior contacts contribute with one sign and zero boundary winding is
+  equivalent to no contact. For Z=H+iH_x, its phase one-form is exactly
+  -(L/Q)dx+(L_x/Q)dt. On the half rectangles
+  [1/(5j),1/4]x[0,38+j], axis positivity and top-time simplicity close two
+  edges, reducing each 2D stage to bottom/right first-jet separation and one
+  integer phase-flux condition. Those unbounded Xi edge estimates remain open
+
+jensen_window_pf_newman_theta_first_diagonal_shell_interval_certificate:
+  rigorous first-stage interval theorem. Five 160-bit Arb/Taylor boxes with
+  analytic 10^-800 tails prove first-jet separation at t=1/5 on 38<=x<=39,
+  with no subdivision, no unresolved box, and normalized margin above 6/5.
+  Evenness, the certified |x|<=38 core, and simplicity for every t>1/5 close
+  Q_1=[1/5,1/4]x[0,39] and give zero first-jet winding on its boundary. This
+  certifies j=1 only; Q_2 and the cofinal family remain open
+
+jensen_window_pf_newman_theta_second_diagonal_shell_first_block_route_guard:
+  rigorous pointwise route guard for the second stage. At t=1/10, Arb upper
+  bounds prove that both first-block sufficient ratios are below one at
+  x=397/10,199/5,399/10,40; the largest failed upper ratio is below 24/25.
+  The neighboring x=198/5 still passes the derivative branch. Therefore
+  subdivision alone cannot promote the unchanged first-block bars across the
+  bottom edge of Q_2. This does not indicate a contact. At the guard stage
+  Q_2 required sharper tails, more theta blocks, or a different winding-edge
+  certificate; the succeeding two-block theorem supplies that repair
+
+jensen_window_pf_newman_theta_second_diagonal_shell_two_block_interval_certificate:
+  rigorous second-stage interval theorem. Retaining the actual n=1,2 theta
+  contributions gives the required cancellation, while an exact positive-tail
+  estimate proves M_0<10^-10 and M_1<10^-12 for n>=3. Twenty-five 160-bit
+  Arb/Taylor boxes, with no subdivision or unresolved box, prove H_t<0 on
+  [1/10,1/5]x[38,40]; the minimum normalized value-sign ratio is above 39000.
+  Composition with the |x|<=38 core and simplicity above 1/5 closes
+  Q_2=[1/10,1/4]x[0,40] and its winding. This certificate certifies j=2 only;
+  the separate successor below closes Q_3, while the cofinal family remains
+  open
+
+jensen_window_pf_newman_theta_third_diagonal_shell_two_block_interval_certificate:
+  rigorous third-stage interval theorem. The exact retained n=1,2 kernel and
+  analytic n>=3 tail theorem apply unchanged. Forty-eight 160-bit Arb/Taylor
+  boxes, with no subdivision or unresolved box, prove H_t<0 on
+  [1/15,1/5]x[38,41]; the minimum normalized value-sign ratio is above 12000.
+  Composition with the |x|<=38 core and simplicity above 1/5 closes
+  Q_3=[1/15,1/4]x[0,41] and its winding. This certificate certifies j=3 only;
+  the separate successor below closes Q_4, while the cofinal family remains
+  open
+
+jensen_window_pf_newman_theta_fourth_diagonal_shell_two_block_interval_certificate:
+  rigorous fourth-stage mixed-branch interval theorem. One hundred twenty
+  160-bit Arb/Taylor boxes, with no subdivision or unresolved box, prove full
+  first-jet separation on [1/20,1/5]x[38,42], with minimum normalized
+  disjunction ratio above 88000. Of these, 105 prove H_t<0; the remaining 15
+  cover [1/20,1/5]x[83/2,42] and require strict derivative separation.
+  Composition with the core and simplicity above 1/5 closes
+  Q_4=[1/20,1/4]x[0,42] and its winding. This certifies j=4 only; Q_5 and the
+  cofinal family remain open
+
+jensen_window_pf_newman_theta_fixed_block_cofinal_obstruction_gate:
+  exact route guard for fixed arithmetic truncations with static absolute-tail
+  bars. Uniform double-exponential decay and two integrations by parts give
+  retained bounds A_N/x^2 and B_N/x^2. Therefore the normalized value and
+  derivative margins against fixed positive moment bars both fall below one
+  beyond an explicit finite threshold, so no fixed N can certify every
+  diagonal shell. For N=2, the omitted n>=3 tail exactly cancels the positive
+  retained endpoint derivative a_2=8.2652795777...e-8; taking absolute moments
+  erases that cancellation. The hash-chained j=5..30 scout remains a finite
+  diagnostic and promotes no new Q_j. This rejects only the static-tail proof
+  mechanism, not Xi transversality; a growing-block or cancellation-aware
+  remainder theorem remains open
+
+jensen_window_pf_newman_theta_modular_blend_gate:
+  exact cancellation-preserving theta partition. The entire switch produces
+  positive even entire blocks summing ordinarily to Phi, and every bounded
+  positive Newman deformation remains uniformly Schwartz. Transform
+  derivatives and the coupled Laguerre matrix therefore converge normally,
+  while repeated Fourier integration by parts gives arbitrary-power tail
+  decay. Useful derivative constants and a retained lower profile remain
+  open. Negative block-transform and nonreal Jensen witnesses block termwise
+  spectral positivity and individual-block Laguerre-Polya promotion
+
+jensen_window_pf_newman_theta_modular_blend_high_frequency_scout:
+  ten high-precision point diagnostics for the first three blended blocks and
+  full theta Laguerre expression at two times and five frequencies. The
+  arithmetic tail cancels more than five digits at x=120, eleven at x=150,
+  and twenty at x=200. This blocks fixed three-block absolute-tail dominance
+  but proves no interval sign or adaptive remainder theorem
+
+jensen_window_pf_newman_theta_modular_blend_adaptive_saddle_gate:
+  exact modular-transition saddle geometry with finite adaptive diagnostics.
+  The a=5,9 component saddles cross the modular switch at
+  n_*(x,t)=sqrt(x/(4*pi))(1+O(x^-1)) for bounded positive Newman time,
+  identifying the Riemann-Siegel scale as the natural growing block count.
+  Ten high-precision rows track the first scale-level count from three to six
+  and fit a two-index empirical collar. The saddle law proves no contour
+  deformation or remainder sign, and the sampled global -L_t' branch is
+  rejected by the separate Xi Lehmer certificate. The live target is a
+  cancellation-aware direct first-jet remainder on the adaptive scale
+
+jensen_window_pf_newman_theta_adaptive_modular_c1_remainder_contract:
+  exact composition of the modular partition, arbitrary-power tail budgets,
+  direct J/J' error bars, and preliminary square-root saddle scale. Either one
+  of two explicit retained inequalities excludes full-Xi contact. The later
+  derivative-envelope theorem supplies the corrected absolute-tail scale, but
+  no retained first-jet lower profile or transition-cell theorem. The rejected
+  global -L_t' condition is not assumed
+
+jensen_window_pf_newman_theta_modular_tail_derivative_envelope_gate:
+  exact heat-factor polynomials and positive-half-line derivative envelopes
+  for d_(N,0,m),d_(N,1,m). Minimizing the reflected modular phase proves
+  effective C*N^A*exp(-c*N^(4/3)) bounds for every fixed weighted derivative
+  norm. Thus N_K(x)=ceil(K*(1+x)^(3/4)) yields exponential-in-x absolute tail
+  control, and the corrected count is max(N_sad,N_K). This is an asymptotic
+  tail theorem, not a retained first-jet separation theorem. Its formerly
+  effective constants are instantiated at T=1/5 by the later direct-tail
+  explicit-constant gate
+
+jensen_window_pf_newman_theta_modular_tail_derivative_budget_scout:
+  finite T=1/5 stress test of m=5..9 envelopes and 64 retained first jets.
+  The spectral ladder is stable to about 3.4e-31 relatively, while the
+  absolute-value quadrature has 1.93e-2 worst node drift and remains
+  diagnostic. At x=200 the kappa=2 rows first pass at m=9 and m=8. At x=300,
+  kappa=2,3,4 fail every sampled order and kappa=5 passes at both times. This
+  calibrates the growing-count route but proves no collar obstruction or
+  interval separation
+
+jensen_window_pf_newman_theta_modular_tail_arb_quadratic_pilot:
+  exact weighted Cauchy-Schwarz reduction of every positive heat-envelope
+  L1 term to a weight mass and an analytic quadratic integral. A 96-bit Arb
+  pilot rigorously encloses the order-nine n=7..16 block on u in [0,11/5].
+  It does not include n>=17, the outer-u tail, the remaining derivative
+  matrix, or retained first-jet lower balls, so it is not an exact r_6 bound
+
+jensen_window_pf_newman_theta_arbitrary_n_stable_remainder_gate:
+  exact all-N successor to the stable forward-remainder gate. For every
+  N>=1 and q<=9, the cap-free identity writes r_N^(q) as the finite
+  switch-defect derivative sum plus T_(N+1,q). Every K>=2 tail has a closed
+  coefficient-norm majorant, with uniform endpoint checks
+  16*pi-45>0 and 11-5*pi<-4. This removes the fixed forward-tail cap but
+  does not by itself bound the arbitrary-N switch defect, assemble full
+  d0/d1 budgets, or prove retained first-jet separation
+
+jensen_window_pf_newman_theta_switch_defect_explicit_constant_gate:
+  exact all-N direct-tail successor. Kernel polynomials and switch Laurent
+  recurrences through order nine reduce every derivative to forward,
+  compact-reflected, and large-reflected positive templates. The large
+  phase retains c_safe=3*3^(2/3)*pi^(2/3)/16, and directed upper incomplete
+  gamma integrals plus a unimodal sum lemma give explicit bounds for every
+  required I_(p,k). Exact Hermite composition yields cap-free m=9 d0/d1
+  upper budgets at T=1/5 for every N>=2. A 256-bit Arb compiler and an
+  independent implementation agree on eight witnesses. This closes the
+  omitted-tail upper-budget obligation, not the adaptive retained J_N/J_N'
+  lower margin or terminating transition cover
+
+jensen_window_pf_newman_theta_adaptive_gamma_scale_tail_gate:
+  exact cofinal successor for N(x)=ceil((1+x)^(3/4)). Gamma-normalized
+  errors increase inside each adaptive cell, while every forward,
+  compact-reflected, and large-reflected endpoint template decreases from
+  N=63 onward. Directed N=63 witnesses are below 0.214 and 0.217 of the
+  natural exp(-pi*x/8) scale. Therefore both omitted value and derivative
+  errors are below one quarter of that scale for every 0<=t<=1/5 and
+  x>=245. The retained quarter-gamma lower margin remains open
+
+jensen_window_pf_newman_theta_forward_six_term_bridge_tail_gate:
+  exact bounded-bridge direct-tail theorem. On u>=0 the ordinary theta
+  summands are positive, so retaining n=1,...,6 and bounding K>=7 gives
+  explicit E0/E1 Gaussian arithmetic tails without using the invalid
+  termwise-even integration-by-parts shortcut. At the worst endpoint x=245,
+  the directed J and J' errors are below 9.646e-13 and 9.804e-13 of
+  exp(-pi*x/8), hence below 10^-11 of that scale throughout
+  38<=x<=245. Five retained terms are an explicit failure guard. This is an
+  omitted-tail theorem only, not retained first-jet separation
+
+jensen_window_pf_newman_theta_forward_adaptive_sqrt_tail_gate:
+  exact tunable cofinal direct-tail theorem. For x>=245 and h>=0, retain
+  ordinary theta terms through
+  N_(F,h)=ceil(sqrt(x/8+2log(1+x)+h))-1. The Gaussian exponent, ceiling
+  geometry, and two decreasing directed envelopes prove both omitted
+  first-jet errors below exp(-3h-pi*x/8)/50. For fixed h the count is
+  asymptotic to sqrt(pi/2) times the Riemann-Siegel saddle count, replacing
+  the earlier x^(3/4) modular count on the preferred error side. Increasing
+  h follows any prescribed positive tolerance, so the approximation does
+  not impose a t-independent floor near t=0. Retained arithmetic
+  transversality remains open
+
+jensen_window_pf_newman_theta_forward_sqrt_to_corrected_rs_C1_transfer_gate:
+  exact critical-layer C1 transfer. The closed normalizer amplitude gives
+  A_t>=exp(-pi*x/8)x^(7/4)/32 and converts the adaptive ordinary tail into
+  normalized errors E_F0=exp(-3h)/(25x^(23/4)) and
+  E_F1<0.53E_F0. Thus
+  T_L[O_h]>2exp(-6h)/(625x^(23/2)) is a direct sufficient no-contact
+  target. The exact dual split with the corrected Riemann-Siegel main gives
+  scaled first-jet distance below 5600exp(-3L/4). This algebraic transfer
+  does not preserve the tiny ordinary threshold: the two currently proved
+  envelopes differ by a certified cost O(exp(5L+3h)). The bulk A+B
+  envelope itself is already only at the exp(-3L/4) scale, so higher
+  endpoint corrections alone cannot close the gap. Retained arithmetic
+  separation remains open on either quantitative route
+
+jensen_window_pf_newman_theta_forward_six_term_finite_bridge_interval_certificate:
+  rigorous 352-bit finite Q207 theorem. One shared order-(30,24) bivariate
+  Taylor model per half-unit x panel encloses the first six ordinary theta
+  terms; absolute moments through order 86 include an analytic u>11/5 tail.
+  The append-only hash chain certifies all 414 panels and all 7,102 leaves on
+  [1/1035,1/155]x[38,69] union [1/1035,1/5]x[69,245], with no subdivision or
+  unresolved leaf and minimum retained-to-tail ratio above 2.2234e25.
+  Composition with the compact and Q31 theorems proves no contact and zero
+  winding on Q_207=[1/1035,1/4]x[0,245], hence closes Q_1 through Q_207.
+  This finite theorem is not a fixed-count cofinal promotion
+
+jensen_window_pf_newman_theta_q31_margin_geometry_audit:
+  rigorous derived finite diagnostic from a fresh replay of all 1,240 Q31
+  cache rows and 1,566 terminal leaves. The weakest tail-relative ratio box
+  contains a retained zero and has strictly positive derivative, so the
+  1.45e20 ratio reflects the roughly 10^-23 tail bar rather than an intrinsic
+  cofinal margin. In s=sqrt(x/(4*pi)), partial_s=4sqrt(pi*x)partial_x, the
+  fixed Q31 cover has a positive finite saddle-jet floor. Q31 keeps N=7,
+  while even the kappa=1 x^(3/4) count runs from 16 to 25 there, so neither
+  the raw ratio nor the finite floor is extrapolated
+
 jensen_window_pf_newman_strict_laguerre_correlation_target:
   open RH-equivalent theorem target; the first Laguerre expression is exactly
   the Fourier transform of K_(1,t)(v)=integral phi_t(s+v)phi_t(s-v)s^2 ds.
@@ -1934,10 +2452,85 @@ jensen_window_pf_newman_strict_laguerre_correlation_target:
   0<t<=1/5. The kernels and every correlation are now proved uniformly
   strongly log-concave and admissible on that interval, but K_(0,0) gives an
   exact Xi-specific shape-and-tail counterexample with double Fourier zeros.
+  The theta-curvature reduction supplies exact component formulas and rational
+  B_0/B_1 pointwise contact bars through characteristic order three. A rational
+  origin estimate and 1,900-box Arb/Taylor certificate now promote those bars
+  to a uniform no-contact theorem for 0<=t<=1/5 and |x|<=38. Their polynomial
+  growth still blocks global promotion. The exact fixed-block obstruction now
+  proves that no static finite truncation can be cofinal. A positive even
+  modular partition supplies arbitrary-power Fourier tail budgets. The saddle
+  law fixes a sqrt(x) spectral transition, while the exact derivative-envelope
+  theorem proves the larger N=max(N_sad,ceil(K*(1+x)^(3/4))) absolute-tail
+  architecture. The direct-tail explicit-constant gate supplies referee-ready
+  arbitrary-N m=9 upper budgets, and its adaptive successor proves quarter-
+  gamma omitted-tail errors for all x>=245. A direct six-term theorem and
+  complete 414-panel, 7,102-leaf interval cover close the finite bridge and
+  Q_207. The ordinary tail now also has a tunable cofinal square-root
+  successor: its fixed-h count is only sqrt(pi/2) times the Riemann-Siegel
+  saddle count and both errors are below exp(-3h-pi*x/8)/50. Thus the
+  x^(3/4) count is no longer needed on the preferred error side. The
+  high-frequency route now lacks only retained arithmetic transversality.
+  On the critical overlap, exact normalizer conversion gives the direct
+  ordinary target T_L[O_h]>2exp(-6h)/(625x^(23/2)) and an algebraic
+  transfer to the corrected main. The current corrected remainder is
+  certified only at the much coarser exp(-3L/4) amplitude scale, so the
+  corrected joint small-ball or phase-critical-value theorem is an
+  alternative quantitative target, not a free inheritance of the smaller
+  ordinary threshold.
+  Weighted Cauchy-Schwarz and the finite compact Arb certificate separately
+  supply sharper finite-N budgets through Q31; only the retained cofinal
+  first-jet lower profile remains open on this branch.
   The stronger subroute -L_t'>0 is now rigorously rejected at the Lehmer
   stress point and, by continuity, at sufficiently small positive time. The
   target still needs direct s^2-weighted or hierarchy-coupled structure, or
   corrected C1 double-zero transversality
+
+jensen_window_pf_newman_theta_curvature_probability_operator_gate:
+  exact theta-primitive probability and operator theorem; every summand of
+  S_t(u)=exp(tu^2)R(u) is strictly decreasing and convex for
+  0<=t<=1/5. Thus dmu_t=2S_t''du is a probability and the primitive cosine
+  transform C_t=(1-A_t)/(2x^2) is strictly positive. Its theta weights are
+  independent of time, with w_1>2799/2800 and explicit uniform C0-C3 tail
+  budgets for all n>=2. Modular odd-jet identities nevertheless make that
+  tiny tail cancel a first-block fifth endpoint jet above 300, blocking global
+  promotion from mass dominance. The endpoint-subtracted operator factors as
+  D_t=-(2t*d_x-x)^2-1, and H_t becomes an explicit
+  second-order characteristic expression J_t/(16x^4). The ratio
+  G_t=8H_t/C_t obeys a weighted Doob diffusion with nonnegative instantaneous
+  Sturm-Liouville generator, but a quadratic guard shows that its reverse-time
+  heat semigroup can lose two nodes at a double contact. Modular endpoint
+  asymptotics make C_t eventually log-convex, blocking global
+  contracting-drift and positive-curvature shortcuts. The fixed theta split
+  gives exact formulas for J_(n,t), J_(n,t)' and rational B_0/B_1 bars, so
+  either strict first-block inequality excludes contact pointwise. Their raw
+  polynomial growth prevents global promotion. Boundary collision is exactly
+  J_t=J_t'=0; at t=0 this is tangential contact with the unit
+  exponential characteristic function. A smooth Neumann-lift model preserves
+  all generic normalizer properties while retaining a double Fourier zero, so
+  arithmetic C1 separation beyond the certified compact window remains open
+
+jensen_window_pf_newman_theta_compact_transversality_interval_certificate:
+  rigorous compact interval theorem. Positivity of the full Xi kernel and
+  exact rational moment bounds give H_t(x)>248/371925 for |x|<=1/4.
+  On 1/4<=x<=38, 160-bit Arb retained integrals, an analytic u>2 tail below
+  10^-800, and second-order-time/third-order-frequency Taylor enclosures
+  certify |J_1|>B_0 or |J_1'|>B_1 on 1,900 rational leaf boxes. Only ten
+  one-level subdivisions are required, no box is unresolved, and the weakest
+  rigorous normalized ratio exceeds 1.7521852560914668. Hence
+  (H_t,H_t')!=(0,0) for every 0<=t<=1/5 and |x|<=38. The bounded-L band
+  38<|x|<4*pi*exp(50), finite existential-threshold shoulders, and the
+  residual L>=50 corrected phase layer 0<tL<=c_*+o(1) remain open, as do
+  Lambda<=0 and RH
+
+jensen_window_pf_newman_backward_pick_collision_bridge_audit:
+  exact countermodel and literature gate. The even Cartwright heat flow
+  E_t(z)=z^2+a-2t has top-time real zeros and Pick-positive logarithmic
+  derivative, but a double collision births nonreal zeros and a negative-Pick
+  half-disc backward in time. The zero speed diverges at the collision, and a
+  fixed lower cutoff y>=rho hides the negative bubble for a time rho^2/2.
+  Thus cutoff exhaustion and collision bridging do not commute. This
+  identifies the missing separation/cutoff uniformity in the cited 2025
+  backward-Pick preprint without ruling out a genuinely Xi-specific repair
 
 jensen_window_pf_newman_correlation_hierarchy_gaussian_mixture_gate:
   exact hierarchy and route-elimination gate; all Xi correlations evolve by
@@ -2095,13 +2688,93 @@ jensen_window_pf_newman_polymath15_critical_scaled_coercivity_target:
   asymptotic strip 0<=tL<=c_*+o(1); the exact correction and C2 remainder
   transfer are available, but the required phase-sensitive sign is not
 
+jensen_window_pf_newman_polymath15_critical_component_wronskian_gate:
+  exact corrected-component Wronskian reduction. Its Hermitian rate matrix has
+  rank at most two and, for unequal component rates, inertia (1,1,m-2).
+  An exact ordered-negative-speed countermodel still has a nonzero double
+  real-part crossing, while four corrected t=0 diagnostics show both signs
+  and cancellation above 700. This blocks an unrestricted positive-
+  semidefinite rate-matrix proof but leaves the joint arithmetic small-ball
+  theorem open
+
+jensen_window_pf_newman_one_sided_phase_moment_bridge_gate:
+  exact zero-free one-sided lift and score-probability bridge. It turns double
+  contact into the joint equations E[sin(xU)]=E[U cos(xU)]=0 with no
+  exceptional complex-lift zero, identifies the signed-Hankel coefficients as
+  normalized odd score moments, and gives every shifted Jensen window as an
+  explicit positive generalized-Laguerre scale mixture. An independent
+  uniform/Beta pushforward turns that mixture into one positive Abel measure
+  with moments `M_k=k!A_k`, Bessel transform `2H_t(sqrt(-z))`, and closed
+  tail-source flow. Its quadratic Jensen condition is the sharp lower
+  concentration ratio `(n+1)/(n+2)`; measure positivity supplies only the
+  opposite-side Cauchy-Schwarz upper bound. Full support also rules out a
+  common interlacer for the complete fixed-scale Laguerre family in every
+  degree at least two, while leaving a weighted Xi-specific total-positive
+  connection open. Two exact minors of the fractional Abel kernel have
+  opposite signs, so the bare Abel operator is neither TP2 nor sign-regular
+  of order two; the Xi weight must participate in any surviving composition.
+  The sine observable obeys a closed radial backward-heat equation. Restoring
+  the exact lift amplitude makes its first jet uniformly equivalent to the
+  normalized Polymath first jet on the corrected overlap. The raw phase is
+  rapidly flat and an exact smoothed-triangle score countermodel has a double
+  characteristic zero, so the Xi-specific joint-avoidance theorem remains
+  open
+
+jensen_window_pf_newman_score_abel_radial_dimension_lift_gate:
+  exact all-shift radial geometry of the score/Beta Abel measure, with the
+  proved Xi bounded-degree layers reconciled explicitly. For each
+  shift `n`, the density
+  `r_t(|y|^2/4)/((4*pi)^(n+1)A_n)` has mass one on `R^(2n+2)` and Fourier
+  profile `mathcal F_t^(n)(-|xi|^2)/A_n`; at `n=0` its coordinate marginal
+  is the normalized Newman kernel. Successive profiles obey the classical
+  radial dimension walk, so every shifted Jensen window belongs to one
+  explicit dimension of the ladder. This does not satisfy Schoenberg's
+  fixed-profile all-dimensions premise. A two-Gaussian Newman flow has the
+  entire ladder and arbitrarily strong root-variable log-concavity, but its
+  generating function has an explicit nonreal zero lattice and every shifted
+  quadratic Jensen discriminant is negative; its squared-variable profile is
+  strictly log-convex. The Xi profile is different: strict log-concavity of
+  `Phi_t(sqrt(y))` plus Berwald-Borell closes every shifted quadratic, and the
+  reciprocal-defect heat theorem closes every shifted cubic throughout
+  `0<=t<=1/5`. The independent real-zero-band/sector theorem closes every
+  shifted Xi degree through 361 on that interval. Thus generic radial positivity
+  remains decisively insufficient, but the earlier quartic and quintic
+  frontier is no longer open for Xi. The strong-log-concave Mellin witness and
+  length-14 outer-contact survivor remain exact generic nonpromotion guards.
+  The first unproved direct degree is 362; the terminal need is an unbounded
+  cofinal degree sequence or an all-degree theorem.
+
+jensen_window_pf_newman_zero_slab_degree71_sector_certificate:
+  rigorous bounded-degree continuum theorem. A 192-bit directed
+  near-minus-tail estimate proves `Re H_t(x+iy)>0` for
+  `0<=t<=1/5`, `|x|<=84/5`, and `|y|<=1`. De Bruijn's strip theorem and the
+  map `F_t(s)=2H_t(i*sqrt(s))` put every zero of `F_t` in the negative-axis
+  sector with `sin(delta)=840/7081`. Chasse's sector theorem and derivative
+  closure then prove every shifted Xi Jensen polynomial through degree 71
+  hyperbolic throughout the target heat interval. This excludes the
+  quartic/quintic survivor for Xi but proves neither degree 72 nor any
+  unbounded/all-degree conclusion.
+
+jensen_window_pf_newman_real_zero_band_degree361_sector_certificate:
+  rigorous bounded-degree continuum theorem. A 192-bit Arb/Taylor enclosure
+  proves both vertical sides of `|Re z|<=38`, `|Im z|<=1` zero-free. The
+  de Bruijn strip, the classical endpoint horizontal boundary, published
+  `Lambda<=1/5` top-time reality, and the independent no-real-collision
+  certificate then prove by homotopy that every central-band zero is real.
+  The map `s=-z^2` gives `sin(delta)=76/1445`, and Chasse's sector theorem
+  proves every shifted Xi Jensen polynomial through degree 361 hyperbolic
+  on `0<=t<=1/5`. Degree 362 and every unbounded/all-degree conclusion
+  remain open.
+
 jensen_window_pf_laguerre_scale_mixture_gate:
   exact kernel theorem and preservation guard; each unshifted Jensen window is
   a positive scale integral of L_D^(-1/2), and each fixed scale is hyperbolic.
   Exact two-atom and exponential-density countermodels show that positive
   mixing and log-concavity do not preserve this property. Half-integer Gamma
   mixing is nevertheless hyperbolic in every degree by Euler-Jacobi
-  factorization, isolating a possible Xi-specific connection theorem
+  factorization. Full support makes global common interlacing of all fixed
+  scales impossible in degree at least two, isolating a weighted
+  Xi-specific total-positive connection as the surviving version
 
 jensen_window_pf_multiplier_counting_measure_target:
   rejected sufficient subclass; the order-6 moment magnitude forces every
@@ -2128,6 +2801,1124 @@ jensen_window_pf_monotone_contraction_stress:
   Arb-classified zeta-window rows across degrees d=3..12 and the k<=64 cache,
   all satisfying adjacent log-concavity and increasing ratio contractions
   with no zero-containing required positivity gaps
+
+jensen_window_pf_edrei_heat_flow_boundary_gate:
+  exact radial Burgers/Edrei-moment heat hierarchy and exact repeated-zero LP+
+  boundary model; every shifted rank-one 2x2 wall points inward under forward
+  heat, while the quadratic orbit has nonreal zeros and negative shifted
+  Stieltjes minors immediately under backward heat
+
+jensen_window_pf_edrei_hankel_boundary_flux_gate:
+  exact polynomial divided-difference flux for every shifted Edrei Hankel
+  form; integer residues make finite-rank walls forward-nonnegative and
+  repeated factors strict. Infinite support forces canonical boundary
+  witnesses to unbounded order. An exact orthogonal-polynomial Schur
+  quotient then proves that a repeated atom gives an exponential high-shift
+  determinant-flux signature. The required Phi-specific subexponential
+  bound remains open
+
+jensen_window_pf_edrei_raw_moment_collision_resolution_gate:
+  exact Phi raw-moment to Taylor to Edrei-moment transfer and exact symmetric
+  LP+ split model. At a repeated leading atom the shifted determinant has
+  condition number of order (beta/q)^s, while a gap epsilon is not resolved
+  until shifts of order 2*log(beta/epsilon)/log(beta/q). Any fixed string of
+  larger simple atoms preserves that scale at arbitrary determinant rank.
+  Every fixed-rank collision indicator has noncommuting split and high-shift
+  limits, so independent algebraic-accuracy raw-moment estimates cannot prove
+  the open Phi determinant-flux bound
+
+jensen_window_pf_phi_pick_kernel_target:
+  exact Krein/Sokal endpoint equivalence between LP+ and positivity of
+  P_Phi(z)=-Im(F_0'(z)conj(F_0(z))) throughout the upper half-plane;
+  polarization gives an explicit Phi double integral, while the first-wall
+  variance identity and R'(0)=7/19200 two-scale witness block positive-mixture
+  promotion
+
+jensen_window_pf_xi_pick_suzuki_hankel_bridge:
+  exact normalization M(w)=xi((1+w)/2)/4 and hyperbolic Pick direction;
+  Suzuki's published criterion replaces an unspecified positive resolvent by
+  explicit all-t Fredholm nonvanishing and a terminal canonical-kernel
+  condition. The determinant-only reduction makes the latter cofinal-sequence
+  redundant. The continuum Fredholm expansion gives signed-Hankel contact,
+  while exact horizontal-growth, rank-one TN, and contour-residue
+  countermodels block three tempting shortcuts
+
+jensen_window_pf_suzuki_spectral_frontier:
+  exact fixed-space truncation and Hilbert-Schmidt formula; continuity from
+  zero and norm monotonicity make all-history determinant nonvanishing
+  equivalent to pointwise strict contraction. Hilbert-Schmidt domination and
+  Suzuki's sup-contour certificate have finite reach, while the desired HB
+  case forces the finite-t norms to approach one
+
+jensen_window_pf_suzuki_determinant_only_reduction:
+  compatible all-time finite Hankel forms extend to a bounded causal
+  convolution multiplier. Its H-infinity continuation forces any off-line
+  zero to generate distinct shifted zeros accumulating at itself along a
+  cofinal omega sequence. Thus the determinant family alone is equivalent
+  to RH, but the all-time determinant premise remains open
+
+jensen_window_pf_suzuki_fixed_omega_phase_diagram:
+  exact fixed-shift equivalence between all-time determinant nonvanishing,
+  meromorphic innerness, and horizontal shifted-zero multiplicity
+  cancellation. Outside a countable exceptional set this is the zero-free
+  half-plane condition; failure of RH creates a whole small-omega failure
+  interval. Suzuki's Jordan-totient L2 residual and eventual-sign condition
+  give a scalar arithmetic form of the same open gate
+
+jensen_window_pf_suzuki_jordan_totient_sign_scout:
+  finite double-precision diagnostic with 6000 positive sampled values for
+  omega=1/2 through 1/32 and x through 5000, plus a signed-weight guard; no
+  eventual-sign, L2-tail, all-time determinant, RH, or Lambda<=0 promotion
+
+jensen_window_pf_suzuki_cofinal_monotonicity_hierarchy:
+  Suzuki's published logarithmic smoothing hierarchy and Landau implication,
+  composed with the fixed-omega phase theorem, reduce RH to eventual
+  one-sign behavior along any one sequence omega_j->0 at arbitrary selected
+  smoothing orders k_j>=1. Every smoothing weight remains signed, and the
+  cofinal equivalence is an internally audited theorem candidate rather than
+  a proof of its arithmetic antecedent
+
+jensen_window_pf_suzuki_jordan_error_kernel_reduction:
+  exact Abel-summation reduction showing that Suzuki's weight annihilates
+  the positive Jordan-totient residue main term and leaves only a signed
+  Mobius summatory-error convolution. Elementary absolute bounds reach only
+  O(x^(1/2-omega)log x), at every finite smoothing order, so the missing
+  step is a genuine cancellation or order theorem
+
+jensen_window_pf_suzuki_cofinal_l2_hierarchy:
+  central Taylor subtraction turns every Suzuki smoothing order into an
+  exact L2 residual criterion for fixed-shift innerness. Along any sequence
+  omega_j->0, finite residual energy at arbitrary selected orders k_j>=1 is
+  RH-equivalent. The corresponding Jordan-error energy estimate remains an
+  open arithmetic antecedent, not a proof
+
+jensen_window_pf_jordan_muntz_causal_energy_bridge:
+  exact generalized Muntz expansion and finite Mellin-Plancherel formula for
+  the unsmoothed Jordan-totient error. Its positive-time energy gives an
+  internally audited fixed-shift/cofinal criterion, while finite natural
+  Mobius partial sums expose the remaining all-height uniform mollifier
+  inequality. The inequality remains open and RH-strength
+
+jensen_window_pf_jordan_muntz_burnol_hardy_intertwiner:
+  exact finite Hardy-operator equivalence between the Jordan-Muntz partial
+  sums and Burnol's weighted natural fractional-part approximants at
+  epsilon=2omega. Explicit two-sided norm constants source-back the cofinal
+  criterion through Burnol and Balazard-Saias, while leaving the same
+  uniform natural-mollifier estimate open
+
+jensen_window_pf_burnol_cell_energy_tail_obstruction:
+  exact reciprocal-cell decomposition of the weighted Burnol norm. Uniform
+  boundedness is equivalent to a discrete discrepancy energy and forces the
+  reciprocal-zeta partial sums at 1+2omega to have the RH-strength rate
+  N^(-1/2-omega). The rate and the remaining short-interval cancellation
+  are necessary consequences of the still-open uniform energy target
+
+jensen_window_pf_burnol_tail_discrepancy_dyadic_reduction:
+  exact split of the finite discrepancy into its limiting error, stable
+  reciprocal-zeta tail, and post-prefix omitted-divisor fluctuation. The
+  latter is equivalently a summable dyadic square function of weighted
+  Mobius increments on (k/(q+1),k/q]. The square-function estimate remains
+  open and RH-strength
+
+jensen_window_pf_weighted_fractional_autocorrelation_gram_bridge:
+  exact stationary Gram and spectral representation of the same weighted
+  Burnol norm on the logarithmic divisor axis. Its diagonal is uniformly
+  bounded; every possible growth lies in a signed Mobius off-diagonal.
+  Positive definiteness supplies no uniform upper bound, so the weighted
+  off-diagonal cancellation estimate remains open and RH-strength
+
+jensen_window_pf_weighted_autocorrelation_ou_tail_energy_reduction:
+  explicit period averaging splits the stationary kernel into a leading
+  Ornstein-Uhlenbeck kernel plus an exponentially smaller pointwise
+  remainder. The leading Gram is exactly a weighted reciprocal-Mobius tail
+  energy, and boundedness along every member of one cofinal alpha sequence
+  is RH-equivalent. The remainder density changes sign, so this does not
+  compare the leading energy with the full Burnol norm or prove RH
+
+jensen_window_pf_ou_mertens_mean_square_reduction:
+  weighted Hardy/Copson identities identify the limiting OU tail energy
+  with a weighted Mertens mean square. Dyadic decomposition makes its
+  cofinal RH criterion equivalent to subpower normalized block energy and
+  to one signed origin-anchored integrated Mobius-correlation estimate.
+  Generic Hardy loses N^(1-alpha), while averaged-Chowla and almost-all
+  short-interval theorems do not control the anchored cumulative slice
+
+jensen_window_pf_mertens_weighted_prefix_affine_defect_reduction:
+  the weighted Mobius prefix is an exact Volterra-Hardy coordinate for the
+  same reciprocal-zeta energy. The first q=floor(k/d) block observes its
+  detrended increments but misses a constant anchor mode, as an exact
+  constant-tail countermodel proves. Applying Vaughan after correlation
+  collapse is endogenous and recycles the Mertens energy; applying it
+  before collapse gives the concrete signed handoff B_1(X)-TI_X+TII_X
+
+jensen_window_pf_mertens_anchor_logarithmic_tail_energy_reduction:
+  adjacent reciprocal tails reconstruct the weighted prefix exactly across
+  all cutoffs. Weighted Hardy/Copson bounds identify its energy with
+  sum_N N^alpha|r_N|^2 and hence with the logarithmic stable-prefix series
+  sum_N P_(alpha/2,N)/N. A critical scalar countermodel proves that
+  sup_N P_(omega,N)<infinity is one logarithm short; the Mobius-specific
+  logarithmic gain remains open and RH-equivalent on a cofinal sequence
+
+jensen_window_pf_mertens_dyadic_cosine_mode_bottleneck:
+  exact Neumann cosine diagonalization of each dyadic reciprocal-tail
+  block proves every mode above sqrt(K) summable from coefficient size
+  alone. The cofinal RH-equivalent target is reduced to the mean and
+  O(sqrt(K)) smooth modes. Davenport's arbitrary logarithmic savings lose
+  the power K^(1-alpha); square-root additive-twist cancellation is only
+  a sufficient conditional calibration and is not proved
+
+jensen_window_pf_mertens_local_path_cosine_transference:
+  the surviving modes are exactly the DCT of the anchored
+  reciprocal-weighted local Mertens path, with an affine incoming-tail
+  defect in the mean. Finite Abel transforms compare the full weighted
+  and ordinary local Mertens paths; that full-path comparison alone does
+  not control low projection. An exact non-Mobius scalar model has zero dyadic endpoint
+  tails and zero means but a divergent first nonconstant mode, ruling out
+  generic coefficient-size or large-sieve closure while leaving the
+  Mobius-specific two-component gate open
+
+jensen_window_pf_mertens_centered_bridge_vaughan_handoff:
+  the complete coefficient Gram has summable diagonal trace, leaving a
+  signed off-diagonal Mobius form. The Abel map preserves constants and
+  is uniformly invertible on the quotient by constants, so the
+  nonconstant low modes are equivalent to centered local Mertens energy
+  with Brownian-bridge kernel min(i,j)-ij/K. Its off-diagonal correlation
+  is exactly C_K=-TI_K+TII_K before rowwise absolute values. Averaged
+  Chowla and separate Type I/II bounds remain one power short. The affine
+  mean is not controlled here; the next exact lemma localizes and unifies
+  it without supplying the missing cancellation
+
+jensen_window_pf_mertens_affine_tent_bridge_handoff:
+  the scale filter u_K-(1/2)u_(2K) cancels the affine mean's infinite
+  plateau and is invertible after normalization. Its compact tent square
+  and the Brownian-bridge energy combine into one local nonnegative kernel
+  of size O(K^(-1-alpha)) on K<n<n+h<4K, with a summable diagonal and an
+  exact two-interval Vaughan identity. Before ordinary-Mertens transfer,
+  the affine rank-one term exactly fills the bridge's constant direction,
+  yielding an equivalent positive compact tail-lattice square. A second
+  finite Abel isomorphism removes the current-block power weights and
+  produces an equivalent ordinary-Mobius suffix-square criterion with one
+  explicit bounded-coefficient future anchor on [2K,4K). The resulting
+  signed, weighted-positive, and unweighted-anchored criteria are all
+  equivalent to the reciprocal-tail energy, but no arithmetic gain is
+  established. The sufficient scale target is H_K=O(K^(2+epsilon)) for
+  epsilon<alpha, whereas coefficientwise control gives only O(K^3).
+  All-interval results lack the needed power, almost-all results leave
+  the fixed dyadic bases exceptional, and no alpha=0 limit is permitted
+
+jensen_window_pf_mertens_ordinary_vector_vaughan_handoff:
+  the ordinary anchored suffix energy is exactly the squared norm of a
+  K-dimensional Mobius feature sum with deterministic coefficients in
+  [0,1]. Its explicit Gram kernel has current-current block min(i,j),
+  current-future block i*b_K(n), and rank-one future block
+  K*b_K(n)b_K(m). The complete diagonal is at most (5/4)K^2 and is
+  summable after normalization. Applying finite Vaughan componentwise on
+  the two standard intervals before squaring gives
+  B_K=-V_(I,K)+V_(II,K), making the live target the weighted square norm
+  of this signed vector difference. The identity is exact, but no
+  vector Type I/II power gain is proved; coefficientwise control remains
+  one full power short. Even the all-interval H*log^(-A)X theorem,
+  applied coordinatewise, remains at K^3*log^(-2A)K
+
+jensen_window_pf_mertens_mixed_boundary_sine_vaughan_handoff:
+  the min(i,j) suffix Gram has an exact mixed Dirichlet-Neumann sine
+  spectrum at theta_(K,r)=(2r-1)pi/(2K+1). Unfolding the future anchor
+  turns each mode into one compact ordinary-Mobius sine test with
+  O(K^(-1/2)) coefficients. The RH-equivalent energy is uniformly
+  comparable to the half-odd square function
+  sum_K K^(-alpha)sum_r |X_(K,r)|^2/(2r-1)^2, and finite Vaughan gives
+  X_(K,r)=-T_(I,K,r)+T_(II,K,r) before squaring. Davenport, Parseval,
+  and scalar all-interval logarithmic savings remain one power short;
+  square-root-plus-epsilon cancellation would suffice but is unproved
+
+jensen_window_pf_mertens_spectral_anchor_high_mode_reduction:
+  the half-odd coefficient splits exactly into a current Mobius mode and
+  one endpoint anchor. Parseval gives a K/R^2 current tail, while the
+  endpoint envelope gives a beta_K^2/(KR) anchor tail. With only the
+  trivial bound |beta_K|<=2K, the cutoff
+  R_(alpha,K)=ceil(K^(1-alpha/2)) makes every high-mode contribution
+  dyadically summable. The reciprocal-tail criterion is therefore
+  equivalent, for each fixed positive alpha, to the first
+  O(K^(1-alpha/2)) modes. This is not uniform at alpha=0, and the
+  reduced low-mode square remains open
+
+jensen_window_pf_mertens_truncated_half_odd_kernel_handoff:
+  the surviving low-mode square is exactly the quadratic form of a
+  truncated half-odd kernel. The kernel is entrywise positive and
+  positive semidefinite, nests by rank-one increments, and completes
+  at infinite odd rank to pi^2(2K+1)^(-2)min(i,j). Pullback to ordinary
+  Mobius support gives a uniformly bounded per-scale diagonal, so the
+  RH-equivalent reduced criterion is exactly a weighted signed
+  off-diagonal bound. Its endpoint column is strictly increasing and
+  gives an exact Abel average of local Mobius suffixes; finite Vaughan
+  decomposition preserves the joint signed Gram form. No required
+  weighted off-diagonal cancellation is proved
+
+jensen_window_pf_mertens_shift_kernel_variation_handoff:
+  the signed off-diagonal is exactly a sum over shifts with three
+  consecutive current/current, current/future, and future/future
+  blocks. Every kernel weight is O(1/K), and its discrete variation
+  is O(1/K) along either a fixed shift or a fixed base point. Exact
+  Abel formulas expose maximal two-point correlations and local
+  Mertens intervals, while total and per-shift kernel masses are
+  explicitly bounded. Absolute summation along either coordinate
+  remains power-short even under conditional square-root input, so
+  the live estimate must retain cancellation jointly across base
+  point, shift, Vaughan type, and possibly scale
+
+jensen_window_pf_mertens_planar_abel_handoff:
+  zero extension and two-dimensional Abel summation turn the signed
+  off-diagonal into a pairing of joint base/shift prefixes with mixed
+  kernel curvature. The total mixed variation is bounded by
+  3*pi^2*(1+log(2R))/K: the current interior costs the L1 norm of the
+  finite odd Dirichlet kernel, while all joins and future blocks
+  telescope through convex decrements. Weighted Cauchy-Schwarz isolates
+  a curvature-energy target of size K^(1+epsilon). That target remains
+  open; the stronger planar maximum condition already contains
+  RH-scale block-Mertens input, and separate axiswise square-root
+  prefixes do not imply it
+
+jensen_window_pf_mertens_planar_edge_gram_vaughan_handoff:
+  lifting each triangular-band pair to an edge indicator turns the
+  planar curvature energy into an exact Gram quadratic form. Its
+  diagonal is below (27/2)*pi^2*K*(1+log(2R)), so that entire part is
+  already at the required K^(1+epsilon) scale. The remaining energy
+  gate is therefore exactly the signed off-diagonal edge-pair bound,
+  containing both one-vertex collisions and four-distinct-endpoint
+  terms. Supported finite Vaughan decomposition and symmetrization
+  preserve their joint cancellation; the U=V=1 guard shows why the
+  four large directed pieces cannot be bounded separately. Existing
+  large-sieve, Gowers-uniformity, and averaged-Chowla theorems do not
+  supply this quadratic nested-edge estimate
+
+jensen_window_pf_mertens_planar_incidence_antidiagonal_handoff:
+  the complete signed edge-pair form has exact sorted-endpoint
+  incidence formulas C=C_3+C_4, while a bounded-sign witness has C=0
+  through perfect cancellation C_3=210 and C_4=-210. Random cuts give
+  an exact bilinear representation of the strong energy gate but no
+  gain. Before absolute mixed curvature, the current-current interior
+  collapses to a signed odd-frequency anti-diagonal projection with a
+  concrete square-function target for Y_(K,r). That target and the
+  transition/current-future/future-future cells remain open; recent
+  almost-all short-interval results are logarithmic and have the wrong
+  averaging quantifiers
+
+jensen_window_pf_mertens_planar_boundary_flux_anchor_handoff:
+  one exact modewise discrete-flux law covers every planar curvature cell.
+  The endpoint jump carries a q_r^2 smoothing factor, both artificial
+  interfaces join before absolute values, and the top current-interior
+  stencil contains a mandatory current-future shoulder A_CF. The complete
+  signed decomposition is
+  O=O_(CC,int)+B_CC-A_CF+beta*gamma+(c/2)(beta^2-Q), and its remaining
+  terms form one endpoint-spectral projection sum_r Z_(K,r)/q_r^2.
+  Orthogonal completion gives L=E_perp+c(beta+gamma/c)^2. These identities
+  are exact; the Y, joined-Z, and lossless low-mode Mobius estimates remain
+  open
+
+jensen_window_pf_mertens_planar_boundary_suffix_energy_handoff:
+  the complete joined boundary/future remainder is exactly
+  R_B=(E_B-D_B)/2+C_delta. Here E_B is a positive anchored suffix energy,
+  D_B is uniformly bounded, and the endpoint-smoothed defect is O(log R).
+  Thus subpower control of the formerly separate transition/future blocks is
+  equivalent to one explicit E_B weighted Mertens-energy estimate. Uniform
+  odd-sine control also gives E_B<=pi(1/2+2pi)K^(-2)H_K for the earlier
+  affine-tent anchored energy H_K. The reduction is exact, but the H_K/E_B
+  and inherited Y_(K,r) estimates remain open
+
+jensen_window_pf_mertens_planar_boundary_suffix_localization_gate:
+  the odd-sine square-wave tail gives a uniform lower bound for every
+  boundary increment outside an O(K^(alpha/2)) terminal collar. Bounded
+  adjacent Mobius increments recover that collar, proving that all-epsilon
+  subpower control of E_B along one fixed cofinal positive-alpha sequence is
+  RH-equivalent. A bounded terminal-anchor witness has K^2 E_B/H_K tending
+  to zero, so there is no uniform reverse norm comparison. The exact result
+  classifies this boundary gate as RH-strength but supplies no E_B or
+  inherited Y_(K,r) estimate
+
+jensen_window_pf_mertens_planar_joined_energy_equivalence_gate:
+  the candidate join J_B=O_(CC,int)+E_B/2 is exactly
+  L/2+(D_B-D_L)/2-C_delta, where L is the inherited lossless positive
+  low-mode energy, both diagonals are bounded, and C_delta=O(log R).
+  Therefore J_B, the full signed off-diagonal, and L have equivalent
+  all-epsilon and fixed-alpha weighted dyadic criteria. The joined route
+  returns the old lossless gate and supplies no L, E_B, or Y_(K,r) estimate
+
+jensen_window_pf_mertens_planar_curvature_energy_scout:
+  finite float64 diagnostic on 28 rows with dyadic K through 1024 and
+  alpha in {1/8,1/4,1/2,3/4}. Direct and double-Abel evaluations agree
+  within 6.7e-16; on this grid max K*V_K is below 6.571, max E_K/K is
+  below 0.831, and max M_K/K is below 2.096. This is a checked
+  falsification scout only and proves no uniform or asymptotic estimate
+
+jensen_window_pf_fixed_shift_inner_reciprocal_boundary_separation_gate:
+  a real even four-zero toy completed function has a rational-inner
+  fixed-shift quotient with finite exact causal H2 energy, while reciprocal
+  square energy on the same shifted line diverges at the canceled boundary
+  zeros. This blocks a generic same-shift promotion from limiting
+  Jordan/Burnol innerness to the logarithmic stable-prefix energy, without
+  blocking the cofinal full-Burnol implication
+
+jensen_window_pf_newman_convex_phase_cell_unwrapping_lemma:
+  a continuous closed first-jet path covered arcwise by cyclic convex
+  origin-free cells is homotopic to an exact rational intersection-witness
+  polygon. Its winding is the polygon's exact signed half-open ray-crossing
+  count, with no floating-point angle or branch-cut decision. The globally
+  regular proxy F=16(1+x^4)H is joined to the ordinary first jet by a
+  positive-determinant triangular homotopy. All 20 stored Q208 right-edge
+  cells transfer to F_t'(246)>0. The complete bottom/top cell chains,
+  cyclic Q208 winding, Q208, the cofinal family, Lambda<=0, and RH remain
+  open
+
+jensen_window_pf_newman_q208_bottom_phase_cell_certificate:
+  492 fixed-time cells rigorously cover t=1/1040 and 0<=x<=246 for
+  F=16(1+x^4)H. All cells exclude the origin without subdivision; 313 use
+  value separation and 179 derivative separation. Exact dyadic witnesses
+  give a 493-vertex open chain with signed crossing contribution -19
+
+jensen_window_pf_newman_q208_top_phase_cell_certificate:
+  492 fixed-time cells rigorously cover t=1/5 and 0<=x<=246 for the same
+  proxy. All cells exclude the origin without subdivision; 319 use value
+  separation and 173 derivative separation. Its forward open-chain crossing
+  contribution is also -19, and the Q208 boundary traverses it in reverse
+
+jensen_window_pf_newman_q208_closed_boundary_winding_certificate:
+  492 bottom, 20 transformed-right, 492 reversed-top, and one positive-axis
+  cell form a cyclic 1005-cell cover with 1005 exact dyadic witnesses. The
+  exact signed crossing count is zero. Sign-definite heat-contact index and
+  the independently proved Lambda<=1/5 bound therefore certify Q_208 and,
+  by containment, Q_1 through Q_208. No stage j>=209 or cofinal theorem is
+  proved
+
+jensen_window_pf_newman_cofinal_phase_cell_scaling_diagnostics:
+  exact shell identities place the cofinal bottom in the tL->0 layer, outside
+  the proved dominant-saddle ray. Finite source audits give 408/414 Q207/Q208
+  and 470/492 Q208 bottom/top branch agreements, no half-unit witness turn
+  reaching pi/2, and at least 5.85e24 tail domination. The scale comparisons
+  are diagnostics only and prove no all-j first-jet theorem
+
+jensen_window_pf_newman_adiabatic_phase_cell_successor_lemma:
+  P_(j+1) is exactly P_j plus a global bottom collar of time width
+  1/(5j(j+1)) and a one-unit right strip. If every bottom phase cell absorbs
+  its heat-jet displacement and the new strip lies in one strict first-jet
+  half-plane, contact-freeness and zero degree pass from P_j to P_(j+1).
+  The induction is exact and conditional; the Xi all-j antecedent is open
+
+jensen_window_pf_newman_q207_q208_adiabatic_bottom_collar_refined_tail_certificate:
+  379 half-unit prefix panels plus 222 order-six quarter-unit tail panels
+  rigorously certify [1/1040,1/1035]x[0,245] by heat-jet transport from the
+  new-edge Q208 bottom phase cells. The largest transport/cell-distance ratio is
+  0.7201430404231473655, and the largest refined-tail ratio is
+  6.9552399397749245e-5. This proves the collar but, by direction, is a
+  reverse-endpoint calibration rather than the old-edge induction hypothesis
+
+jensen_window_pf_newman_q207_q208_forward_adiabatic_successor_certificate:
+  all 414 stored Q207 old-bottom cells transform exactly to the regular proxy.
+  Their 303 half-unit and 222 quarter-unit transport panels all pass, with
+  maximum ratio 0.7630253717885428289. The compact core and derivative-positive
+  new right strip then realize one genuine forward Q207-to-Q208 successor.
+  No Q209 or all-j theorem is inferred
+
+jensen_window_pf_newman_single_carrier_adiabatic_benchmark:
+  an exact hypothetical carrier with a phase-speed floor and uniform
+  logarithmic jets has heat-transport condition number O(ell^2), while
+  delta_j*log((j+38)/(4pi))^2 tends to zero. A four-carrier exact double-zero
+  model proves that positive amplitudes and ordered component speeds do not
+  supply the required floor for a sum. The corrected Xi crossing small-ball
+  estimate remains open
+
+jensen_window_pf_newman_polymath15_crossing_slope_gap_reduction:
+  the scaled corrected-component first jet is a rank-at-most-two Gram form
+  that collapses to rank one on the crossing hyperplane. The exact crossing
+  observable is a positive/negative real-mass weighted slope gap plus the
+  zero-real-component term. A stronger four-carrier model, with no singular
+  component slopes, makes that gap vanish and forces the remaining theorem
+  to use the actual zeta phases, amplitudes, and endpoint relation
+
+jensen_window_pf_newman_multiplicity_compatible_adaptive_jet_benchmark:
+  the existing arbitrary-multiplicity Hermite split becomes quantitatively
+  adiabatic in the jet (H,sqrt(2t)H_x): each fixed multiplicity has relative
+  condition number C_m/(2t), and a cofinal successor costs only
+  (C_m/2)log(1+1/j). This permits endpoint clearance to vanish without a
+  positive-time contact. The Xi relative estimate and entry-strip theorem
+  remain open
+
+jensen_window_pf_newman_time_dependent_scaled_successor_lemma:
+  every continuous positive derivative scale preserves first-jet contacts
+  and degree. The full scaled heat derivative supports both the original
+  additive cell bound and a multiplicative relative transport theorem. The
+  latter carries inherited clearance through every positive collar without
+  an endpoint floor and permits a rigorous interface between separate
+  arithmetic-entry and multiplicity-descendant scales
+
+jensen_window_pf_newman_ray_aligned_parabolic_frequency_reduction:
+  the cofinal schedule t_j=25/(100+j) and
+  log(R_j/(4pi))=101+j puts every genuinely new strip exactly in the proved
+  tL>=25 dominant-saddle region. The smooth reciprocal-square scale enters
+  in the 1/L coordinate and tends to sqrt(2t) on fixed descendants, with an
+  exact alpha^2+beta^2=1 chart partition. Equivalently, the one remaining
+  target is a relative theorem below
+  tau(x)=min(1/4,25/log(x/(4pi))). The separate new-strip arithmetic
+  hypothesis is removed. Bare existence of the relative bound would be
+  equivalent to noncontact, so the open content is an a priori Xi majorant
+  that never divides by the unknown first-jet norm
+
+jensen_window_pf_newman_q207_q208_parabolic_frequency_relative_diagnostic:
+  all 525 stored first-successor panels give rigorous finite relative costs
+  in four coordinates. The blend agrees with the parabolic cost within a
+  factor 1.007053, but both are much worse than the existing unit coordinate
+  on this finite collar. The asymptotic blend is therefore not promoted
+  backward into the already certified finite transition
+
+jensen_window_pf_newman_parabolic_frequency_contact_normal_hierarchy_gate:
+  every contact lies in a sharp corrected-main C1 remainder box, so the live
+  target needs derivative separation only on its thin value band. A relative
+  heat-jet proof exposes normalized second and third jets and receives no help
+  from the scale-time term at collision. The exact chart split puts q<=1 only
+  in t<=1/(2L^2), and two endpoint deficits control the optional smooth q>=1
+  surrogate. The frequency-layer box reduces further to one robust weighted
+  slope gap on the corrected value band, without a strip-wide cone. A
+  universal correlation signature and quadratic Newman-flow countermodel
+  reject generic hierarchy log-convexity. The Xi crossing-band theorem and
+  its three domain pieces remain open
+
+jensen_window_pf_newman_polymath15_critical_RS_C1_endpoint_peeling_contract:
+  the first omitted Riemann-Siegel coefficient is
+  C_1(p,sigma)=F'''(p)/(12pi^2)+i(2sigma-1)F'(p)/(4pi). On the critical line
+  only the F''' term remains. Retaining it gives an explicit signed endpoint
+  peel, removes the a^-1 remainder, and exposes an a^-2 endpoint target.
+  Critical C_1 is odd, so its signed value matches at adjacent cutoffs; the
+  core derivative jump is already O(T^-1)
+
+jensen_window_pf_newman_polymath15_critical_dirichlet_first_correction_gate:
+  the exact shifted finite-block ratio is a centered scaled-gamma expectation.
+  Its first signed correction is
+  d_(t,n)=1/(6s)+alpha'(s)(t/4+t^2 alpha_n^2/8), and the remaining logarithmic
+  error splits exactly into M_0 Taylor, scaled-gamma, and rational-shift
+  remainders
+
+jensen_window_pf_newman_polymath15_critical_dirichlet_second_order_remainder_certificate:
+  t|alpha_n|<=27 on the critical collar. A T^(1/3) central/tail split gives the
+  explicit per-term bound 400000/T^2. Summation and Cauchy yield fixed-cell
+  finite-Dirichlet bounds 8000000exp(-7L/4) in value and
+  8000000Lexp(-7L/4) in the first derivative. The heat-integrated endpoint
+  a^-2 estimate and adjacent-cutoff signed lift remain open
+
+jensen_window_pf_newman_polymath15_critical_first_order_global_remainder_certificate:
+  the heat-integrated C_0+C_1/a endpoint, variable-order negative-sigma tail,
+  holomorphic lift, finite Dirichlet residual, and adjacent-cutoff comparison
+  give |r_[1]|<100000exp(-5L/4) and
+  |r_[1],x|<200000Lexp(-5L/4) on L>=50 and 0<tL<=25. The strict Xi
+  contact inequality remains open
+
+jensen_window_pf_newman_polymath15_critical_first_order_signed_contact_reduction:
+  the retained finite d_n and endpoint C_1/a terms form one complex main
+  E_[1]. A true contact lies in
+  |Re E_[1]|<50000exp(-5L/4),
+  |Re E_[1],x|<100000Lexp(-5L/4). The saddle-centered logarithmic moment
+  gives the exact frequency-layer observable. The q<1 layer remains a
+  separate multiplicity-compatible problem
+
+jensen_window_pf_newman_polymath15_first_order_cofinal_boundary_reduction:
+  the first-order squared boundary error is
+  50000000000exp(-5L/2), a factor (3125/2)exp(-L) relative to the old
+  budget. Ray-aligned right edges are already closed, bottom edges split
+  exactly at q=1, and the same margin automatically joins adjacent cutoff
+  lifts because their vector-square difference is only 13/500 of the budget.
+  The two bottom margins, finite shoulders, and one-sided proxy phase bound
+  remain open
+
+jensen_window_pf_newman_polymath15_first_order_oriented_successor_winding_reduction:
+  the standard (x,t) orientation gives positive contact degree. Exact
+  oriented-chain cancellation confines every successor increment to the
+  descendant slab, where it is a nonnegative integer. The scaled Pruefer form
+  and positive-imaginary-ray intersections give signed bottom and connector
+  crossing formulas. After first-order boundary transfer, any rigorous
+  winding upper bound below one forces the increment to vanish; exact zero
+  winding is stronger than necessary. The q>=1 and q<1 margins, finite phase
+  shoulders, and one-sided all-stage bound remain open
+
+jensen_window_pf_newman_polymath15_first_order_wronskian_crossing_reduction:
+  the improved first-order remainder converts a hypothetical contact into an
+  exp(-5L/4) Wronskian small-ball. At a nonzero complex-main crossing, the
+  vector margin is exactly a 50000sqrt(5) normalized Wronskian margin, and the
+  sign of W_[1]Im(E_[1]) identifies upward crossings. Zeros of E_[1] itself
+  form a second explicit crossing class and cannot be divided away. The
+  q>=1 signed Wronskian budget, q<1 chart, and finite phase cells remain open
+
+jensen_window_pf_newman_polymath15_first_order_centered_real_residual_reduction:
+  saddle centering gives S_a=Re(R_a)-v_a Im(E_[1])=U-u_a X, so S_a
+  classifies every horizontal crossing, including E_[1]=0. Exact
+  critical-line cancellation gives |u_a|<exp(-L), |v_a|<3/x^2, and the
+  existing mass and endpoint bounds reduce U on the contact band to an
+  explicit centered-moment-plus-endpoint scalar A_a with error below
+  10^-6 exp(-5L/4). The q>=1 lower bound and A_a-positive crossing budget
+  remain open; q<1 and finite phase cells remain separate
+
+jensen_window_pf_newman_polymath15_first_order_centered_complex_zero_scout:
+  a selected N=6 solve at L=3.7216 has |E_[1]| below 10^-80 while the
+  real crossing slope is 0.5561 and the two-variable complex-zero Jacobian
+  is 0.3954. The Wronskian vanishes, but S_a and A_a retain the simple
+  upward crossing. Seventy- and ninety-five-digit reruns agree beyond
+  fifty places. This is a moderate-height diagnostic, not an interval
+  certificate or evidence for the L>=50 scalar theorem
+
+jensen_window_pf_newman_polymath15_first_order_centered_adjacent_saddle_recurrence:
+  differentiating the exact C_0 recurrence through order four gives the
+  corrected adjacent endpoint and its x derivative. The adjacent A_a jump
+  is one exact entering-moment/endpoint expression. In the reflected sharp
+  ratio, the complete a^-1 coefficient vanishes before absolute values;
+  selected L>=50 rows show exp(-3L/4) pieces cancelling at the
+  exp(-7L/4) scalar scale
+
+jensen_window_pf_newman_polymath15_first_order_centered_adjacent_chart_stability_certificate:
+  on L>=50 and 0<=tL<=25 the corrected adjacent ratio satisfies
+  |rho-1|<11/a^2 and |rho_x|<3/a^3. The centered endpoint rate and imported
+  nuisance budgets then give
+  |A_(a,N+1)-A_(a,N)|<5000exp(-7L/4), below 10^-7 of the contact scale at
+  L=50. This closes adjacent endpoint bookkeeping, not the chart-invariant
+  bulk scalar lower bound or signed crossing theorem
+
+jensen_window_pf_newman_polymath15_first_order_centered_bulk_pair_transfer_gate:
+  the chart-invariant pair has exact reflected-sharp and finite-Abel bulk
+  coordinates. The full corrected ratio lock makes adjacent amplitudes
+  decrease as rho_n<exp(-2h_n/5), and every interior locked pair has
+  det(B_n)>=h_n^2/16 and a first-jet gap
+  h_n^2|f_n|/(48L). Exact component and isolated locked-pair countermodels
+  show why this local theorem does not control the aggregate, while an exact
+  common-phase turning guard rejects relative ratio phases alone. The next
+  input must use the ratios between successive pairs together with the
+  normalizer/endpoint phase anchor, or an equivalent anchored Xi-specific
+  signed turning/winding theorem
+
+jensen_window_pf_newman_polymath15_first_order_centered_absolute_phase_anchor_reduction:
+  the nonzero first coefficient gives a canonical branch-free phase anchor
+  and relative coefficient chain with q_1=1. Exact endpoint cancellation
+  reduces its direction to T_0+i and puts the finite sum and endpoint in two
+  relative shapes Z_0 and Z_A. Their real anchored projections are exactly
+  X and A_a. The natural aggregate determinant collapses to the centered
+  Wronskian plus the already isolated frame and d_(n,x) terms, loses the
+  E_[1]=0 branch, and has no certified complex adjacent-chart bound. The
+  live theorem is therefore still the direct anchored real-projection lower
+  bound and one-sided crossing count, with the complex-main-zero branch kept
+
+jensen_window_pf_newman_polymath15_first_order_centered_direct_projection_regime_reduction:
+  the anchored chain now has exact positive saddle amplitudes and unit
+  carriers, explicit endpoint projections, and a derivative identity whose
+  complete frame error is exponentially small. With tau_L=L exp(-L), the
+  q>=1 theorem splits into an ordinary logarithmic phase/radial-current
+  inequality on |Z_0|>=tau_L and directional real transversality on
+  |Z_0|<tau_L. At L=50 the target-to-tau ratio is below 0.746, so the
+  ordinary input is genuinely order one. An exact backward-heat solution
+  shows that simple complex zeros and a nonzero two-variable Jacobian do not
+  imply the exceptional real-direction slope. Both Xi-specific estimates
+  and their oriented crossing count remain open
+
+jensen_window_pf_newman_polymath15_first_order_centered_carrier_kernel_abel_prefix_reduction:
+  pi is traced from the completed-zeta gamma factor through the
+  Riemann-Siegel saddle, cutoff-cell width, and complex-exponential period;
+  the prefix polygon defines none of it. The endpoint-complete radial and
+  tangential currents now have exact
+  pairwise and O(N) finite-Abel prefix forms. One continuous scalar
+  mathcal_C_N equals the physical centered slope at every real crossing,
+  including W_0=0; the Wronskian loses that class only by multiplying it
+  by -Im(W_0). Across the L>=50 contact band, the remaining terminal real
+  correction is below 1.34e-35 of the target. Exact positive-c and
+  zero-fiber carrier models reject generic current and directional-slope
+  floors. The actual Xi relative carriers rotate at speed greater than
+  1/3 and complete a full relative turn in every cutoff cell, so the live
+  theorem is an aggregate anchored prefix lower bound and signed crossing
+  count, not a fixed termwise sector
+
+jensen_window_pf_newman_polymath15_first_order_centered_normalized_prefix_phase_flux_reduction:
+  removing the first-coefficient phase makes every prefix exactly
+  G_k=sum_(n<=k)q_n with G_1=1 while preserving the external projector and
+  endpoint. On q>=1 every nonfirst coefficient moves inward, all angular
+  currents are ordered, and every adjacent pair advances by more than 4pi
+  in a complete cutoff cell. An exact two-carrier model nevertheless has
+  six simple zeros, three upward crossings, zero net signed count, and
+  first-jet winding -3 in one phase cell. Restoring the required n=4
+  carrier produces a completed dyadic cubic of discriminant -1696 with
+  only one upward crossing. This revives complete multiplicative blocks as
+  a structured arithmetic route, but does not prove their cross-block or
+  endpoint composition. The viable integer target is
+  therefore the O(N) endpoint-complete first-jet argument flux after full
+  successor boundary composition, not an individual-carrier turn count
+
+jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_block_composition_guard:
+  the absolute carrier rate is
+  nu_n=v_a+b*u_n+Im(d_(n,x)/(1+d_n)). Every nonterminal n<=N-1 carrier
+  rotates strictly in the same direction; only n=N can be near stationary,
+  inside a fixed-t collar narrower than 50701/x. Complete p-power amplitudes
+  decrease with ratio below p^(-12/25). After the moving p-free external
+  phase is factored out, the correction-free normalized block is zero-free
+  in the unit disk, and its one-step shifted pure-power block has winding
+  one. The heat quadratic is an exact Gaussian mixture, but its terminal
+  tilted expanding-ratio sector is not uniformly negligible. Most
+  importantly, an exact length-three/length-two dyadic model has two
+  origin-free shifted blocks of winding one whose sum has winding three.
+  The live theorem must therefore keep the joined p-free prefixes, terminal
+  recurrence, endpoint, and first-jet flux together; no actual Xi
+  cross-block lower bound or successor theorem is claimed
+
+jensen_window_pf_newman_polymath15_first_order_centered_joined_dyadic_odd_prefix_first_jet_reduction:
+  unique dyadic valuation and an exact deterministic heat shift reorganize
+  the complete corrected prefix into nested odd-prefix layers. Its value and
+  first jet close on H_0,H_1,H_2,D_0,D_1 plus endpoint data, and one cutoff
+  change enters exactly one valuation layer together with the recurrent
+  endpoint. A polynomial-Mellin phase lift separates the dyadic and odd
+  phases. In the stipulated correction-free synchronized-phase hypothetical,
+  the joined z-polynomial has geometrically decreasing positive coefficients,
+  so Enestrom-Kakeya proves unit-disk zero-freeness and an explicit margin.
+  The physical odd-phase/correction transport, joined Xi lower bound, and
+  strict successor flux theorem remain open
+
+jensen_window_pf_newman_polymath15_first_order_centered_phase_cylinder_jacobian_transport_guard:
+  the joined phase lift has an exact oriented z/xi Jacobian with an explicit
+  unordered-pair kernel. Along the physical phase linkage its tangent is
+  iH_1, and the cylinder degree theorem transports unit-circle winding by
+  the signed Jacobian zeros. Odd-phase, d_n-correction, and endpoint-strength
+  restorations therefore form three exact transport cylinders. A genuine
+  n=2,3 kernel changes sign, a zero-free dyadic block can have nonmonotone
+  linked argument, and endpoint addition can create a boundary zero. The
+  Jacobian survives as a local degree current, while the Xi signed crossing
+  budget remains open
+
+jensen_window_pf_newman_polymath15_first_order_centered_endpoint_schur_cohn_first_jet_guard:
+  the endpoint-augmented joined polynomial has an exact outside-disk
+  Schur-Cohn recursion and inverse. Strict recursive reflection pivots are
+  equivalent to closed-unit-disk zero exclusion and give the conditional
+  boundary margin |b_0| product_d(1-|alpha_d|). Fixed-z x tangents, the
+  centered Z_A companion, and their mixed tangent propagate through the same
+  recursion while retaining H_2,D_0,D_1 and endpoint derivatives. The first
+  physical inequality is |r_0+B_(0,0)|>|B_(K,0)|. A strict first pivot,
+  decreasing coefficient moduli with free phases, and prefix zero-freeness
+  before endpoint addition are each insufficient; every actual Xi pivot
+  remains open
+
+jensen_window_pf_newman_polymath15_first_order_centered_endpoint_first_pivot_odd_small_ball_guard:
+  the terminal dyadic layer is the singleton m=1, and the shared
+  normalization denominator cancels exactly, while the m=1 correction
+  remains inside O_N. The first pivot is therefore the endpoint-shifted odd
+  small-ball condition
+  O_N notin Dbar(-R_N,rho_K), with one explicit endpoint correlation as the
+  missing term. In a correction-free N=5 model, Kronecker density and the
+  triangle formed by lengths 1, 1/sqrt(3), and 1/sqrt(5) prove that even the
+  genuinely linked logarithmic phases can make the pivot negative; a whole
+  neighborhood of small fixed endpoints has the same obstruction. This
+  rejects amplitude, linked-phase, and endpoint-smallness promotion, not an
+  actual Xi pivot. The live alternatives are an Xi-specific odd-disk
+  avoidance theorem or the weaker linked-point/signed-degree route
+
+jensen_window_pf_newman_polymath15_first_order_centered_endpoint_odd_fibre_correlation_feasibility_guard:
+  after restoring the physical unit phase, write the actual generally
+  complex endpoint as g_0=A_N+iB_N.  The missing first-pivot correlation is
+  A_NX_odd+B_NY_odd.  Rotating into that actual endpoint direction gives
+  |S_odd+g_0|^2=(P_odd+D_N)^2+Q_odd^2 for
+  D_N=sqrt(A_N^2+B_N^2)>0, with D_N=0 retained without division. A four-term dyadic
+  finite difference on q_3,q_6,q_12,q_24 fixes H_0,H_1,H_2,D_0,D_1, the
+  endpoint, and the terminal carrier in the unrestricted correction-free
+  joined class, while changing the odd fibre arbitrarily. Separately,
+  F_lambda(w)=1+lambda(w-1)^3 fixes its linked value and first two derivatives
+  but changes the first Schur-pivot sign. These are exact current-input
+  insufficiency guards, not Xi counterexamples. Full Schur disk stability is
+  retained as a falsification coordinate; the endpoint-complete signed
+  linked-point theorem is again the primary open route
+
+jensen_window_pf_newman_polymath15_first_order_centered_abel_scalar_shear_flux_reduction:
+  on each fixed-N q>=1 chart the physical slope is the real shear
+  mathsf_A=mathcal_C_N+c u_N mathsf_X. Conditional on the proposed
+  contact-band gap, a determinant-one homotopy removes that shear and every
+  positive jet scale, reducing the signed coordinate to the division-free
+  O(N) proxy Psi_ell=mathsf_X+i mathcal_C_N/ell. The established nuisance
+  budgets make the true horizontal derivative differ from mathcal_C_N by
+  less than 2.03e-14 A_L on the band, so the gap fixes crossing orientation
+  even at W_0=0. The exact backward-heat family
+  exp(m^2t)sin(mx+pi/4) nevertheless has an arbitrarily large local gap,
+  m upward crossings, and winding -m per period. Therefore the Xi
+  Abel-scalar gap and the completely composed one-turn phase budget are
+  independent open theorems; neither full Schur stability nor generic
+  transversality supplies the latter
+
+jensen_window_pf_newman_polymath15_first_order_centered_dominant_ray_connector_phase_cap:
+  on every ray-aligned successor connector, the exact normalized Xi first
+  jet remains within a uniform 5/9 relative cone around the one-saddle
+  ellipse. The exact heat-normalizer identity moves the saddle phase by less
+  than pi/64, and the certified ellipse eccentricity varies by at most 1/50.
+  Combining these bounds confines the complete connector to angular range
+  9719/6720<3/2<pi/2, uniformly through every cutoff transition. After the
+  two proxy-switch tracks are assigned once to the complementary path, the
+  one-turn theorem reduces from an unknown 2pi full-boundary budget to the
+  signed horizontal-composite target H_j<3pi/2. The pointwise Abel gap,
+  q<1 arcs, finite shoulders, endpoint tracks, and that horizontal
+  inequality remain open
+
+jensen_window_pf_newman_polymath15_first_order_centered_uniform_q_ge_1_degree_excision_reduction:
+  the moving interface L_*(t)=max(50,(2t)^(-1/2)) cuts each successor into
+  the exact q>=1, L>=50 outer collar and the q<1/bounded-L inner region.
+  The outer collar is covered by the open Abel regime tL<=25 and the already
+  proved dominant-saddle noncontact regime tL>=25. Conditional on proving
+  the Abel gap uniformly on the whole closed first regime, the exact outer
+  jet is nonzero and its degree vanishes, so the successor integer localizes
+  to the inner region. A paired many-turn guard validates horizontal
+  cancellation under uniform interior noncontact, while a quadratic heat
+  contact shows that boundary-only nonvanishing cannot justify excision.
+  The uniform Abel gap and localized inner successor theorem remain open
+
+jensen_window_pf_newman_polymath15_first_order_centered_oscillatory_spliced_outer_collar_reduction:
+  for every fixed positive epsilon below 25-c_*, raising the outer cutoff
+  to B_epsilon=max(50,L_epsilon) lets the proved oscillatory-zeta theorem
+  replace the open Abel obligation above c_*+epsilon.  Together with the
+  dominant theorem above 25, this gives a closed three-regime collar cover.
+  Conditional outer degree excision therefore needs the Abel gap only on
+  q>=1 and tL<=c_*+epsilon, while q<1 and the fixed bounded-L shoulder stay
+  in the inner theorem.  The current July-2026 ANTEDB frontier leaves
+  c_*=4911678521/1933561194 unchanged.  L_epsilon remains existential, so
+  no finite-height completion or RH conclusion is promoted
+
+jensen_window_pf_newman_polymath15_first_order_centered_reciprocal_saddle_self_duality_gate:
+  the Poisson saddle u_nu=a_omega^2/nu conjugates the logarithmic phase,
+  while the leading heat amplitude is exactly reciprocal-self-dual up to
+  the scalar defect Delta=2sigma-1-tlog(a_omega).  For the physical Xi
+  shift that defect is O(t/x), with a uniform exp(+-13/(2x)) modulus
+  enclosure.  The active pointwise block r_*=125662/155153 maps to the
+  outside-cutoff tail radius 184644/155153, exposing an endpoint-complete
+  primal/tail composition as a new cancellation target.  Equal reciprocal
+  moduli can reinforce as well as cancel, so the global Xi phase, corrected
+  endpoint, adjacent recurrence, and first derivative remain mandatory.
+  The discrete paired theorem and any improvement of c_* remain open
+
+jensen_window_pf_newman_polymath15_first_order_centered_reciprocal_normalizer_phase_reinforcement_guard:
+  the exact Polymath-15 normalizer locks the reciprocal stationary phase
+  to the conjugate physical carrier.  The heat-shifted angular error is
+  below 1/x, and the combined amplitude/phase partner differs from the
+  conjugate carrier by less than 8/x.  A real carrier is therefore
+  asymptotically doubled, while a small nearly imaginary projection is
+  only the original oscillation.  Raw reciprocal pairing cannot supply
+  the N^(-d_2-eta) gain needed at c=2.  The surviving reciprocal target
+  is the signed weighted-minus-unweighted tail symbol, with endpoint and
+  first derivative retained; no improved c_* or RH claim is promoted
+
+jensen_window_pf_newman_polymath15_first_order_centered_signed_handoff_reciprocal_symbol_guard:
+  the signed zeta-handoff difference has exact continuous reciprocal
+  symbol Sigma_N=1-exp(-t log(u_nu)^2/4) after division by the dominant
+  weighted saddle.  At the active radius r_*=125662/155153 this is
+  1-N^(-c r_*^2/8+o(1)), so it tends to one rather than zero.  At c=2
+  the exact weighted-minus-ordinary exponent gap is
+  r_*^2/4=3947734561/24072453409.  The fixed-chart first derivative of
+  the signed factor is power-small, the active dual block is separated
+  from the endpoint seam by N^(1-r_*), and the checked correction and
+  endpoint scales cannot reverse the leading symbol uniformly.  Signed
+  primal/tail pairwise cancellation is therefore retired.  A reciprocal
+  improvement would now require genuinely new arithmetic cancellation
+  inside the dual exponential sum; the direct Xi Abel-phase theorem
+  remains the primary route
+
+jensen_window_pf_newman_polymath15_first_order_centered_contact_signed_transport_reduction:
+  after terminal centering, the endpoint and every carrier contribute one
+  real value mass c_j and one real slope contribution d_j, with
+  sum c_j=mathsf_X and sum d_j=mathcal_C_N.  On the contact surface the
+  positive and negative real masses balance and the Abel scalar is exactly
+  M(h_+-h_-)+D_perp.  Ordering nonzero-real components by effective slope
+  gives a second exact form with nonnegative slope gaps multiplying signed
+  cumulative real masses.  This isolates a concrete Xi-specific transport
+  inequality.  For H_a=H_R+iH_I and J_a=J_R+iJ_I, the corrected endpoint
+  atom is c_0=kappa(T_0H_R-H_I) and
+  d_0=kappa[T_0J_R-J_I-c u_N(T_0H_R-H_I)].  Its effective slope is divided
+  only when T_0H_R-H_I!=0; the full zero-real-projection fibre is retained
+  without division.  The associated two-feature
+  Gram is PSD but drops to rank at
+  most one on contact, and an endpoint-shaped synthetic null model confirms
+  that symmetry, decreasing amplitudes, and ordered distances do not create
+  coercivity.  The complete H_2,D_0,D_1 first jet and adjacent cutoff law
+  remain attached.  No Xi cumulative-mass bound or Abel-scalar gap is proved
+
+jensen_window_pf_newman_polymath15_first_order_centered_interior_projective_current_gate:
+  for every interior carrier n<=N-1, the division-free current
+  J_n=c_n d_(n,x)-d_n c_(n,x) cancels the radial amplitude current and is
+  bounded above by -(5/64)u_n^2|z_n|^2.  Thus every interior projective
+  atom turns strictly clockwise, including through c_n=0 and at q=1.  The
+  terminal carrier is exceptional: at u_N=0 its current is
+  -b u_x X_NY_N and has no source-level fixed sign.  It is therefore
+  packaged with the complex recurrent endpoint into one exact edge block.
+  The within-chart J_a^(der) and adjacent-cutoff J_a^(adj) are explicitly
+  distinguished.  The Xi cumulative-mass estimate and edge sign remain open
+
+jensen_window_pf_newman_polymath15_first_order_target_reconciliation_gate:
+  the cutoff-uniform first-order main J_[1] and its exp(-5L/4) C1 remainder
+  supersede the historical zeroth-order exp(-3L/4) handoff.  A contact lies
+  in the exact rectangle |X|<50000exp(-5L/4),
+  |U|<100000Lexp(-5L/4).  The radial energy threshold
+  50000000000exp(-5L/2) excludes that rectangle but is strictly stronger
+  than the box-optimal signed band.  The endpoint-complete, division-free
+  Abel gap implies the box target through the certified terminal-shear and
+  real-residual bounds, including W_0=0.  The remaining outer arithmetic
+  obligation is restricted to one fixed-epsilon low-c, q>=1 wedge.  Exact
+  component cancellation forbids promotion from diagonal positivity, and
+  no Xi Abel gap or pointwise contact exclusion is claimed
+
+jensen_window_pf_newman_polymath15_first_order_rectangular_boundary_degree_reduction:
+  the matched first-order value and derivative errors define a rectangle,
+  so their weighted sup gauge gives a componentwise boundary-Rouche
+  homotopy strictly weaker than the Euclidean radial margin.  Positive
+  diagonal error whitening, the normalizer shear, and the adjacent-cutoff
+  sub-box all preserve winding.  Since every real heat contact has positive
+  local index, a transferred successor winding below one excludes contacts.
+  On bottom j the remaining fixed-epsilon low-c q>=1 Abel domain is the
+  explicit one-dimensional interval
+  max(B_epsilon,sqrt((100+j)/50))<=L
+  <=min(L_j,(c_*+epsilon)(100+j)/25).  One may prove the Abel gap uniformly
+  on the full outer wedge and excise it, or prove it only on the joined
+  boundary and separately establish H_j<3*pi/2.  Neither open inequality is
+  promoted
+
+jensen_window_pf_newman_polymath15_first_order_centered_ray_bottom_logarithmic_flow_reduction:
+  each nonempty hard ray is partitioned exactly into canonical fixed-cutoff
+  cells, with cutoff equality owned by the new chart.  On each cell
+  D_j=d/dL=x partial_x, so the normalized carriers, every prefix, the
+  recurrent endpoint, and the moving absolute projector have exact
+  endpoint-complete logarithmic derivatives.  For the Abel proxy
+  Psi=mathsf_X+i mathcal_C_N/L, its phase numerator is the negative square
+  -Lx mathcal_C_N^2 plus the endpoint-complete signed defect
+  mathsf_X(LD_jmathcal_C_N-mathcal_C_N) and the already tiny orientation
+  error.  The pointwise Abel gap would therefore preserve crossing
+  orientation in L, including W_0=0, but it does not bound recrossings.
+  Abel proxies join through the physical slope coordinate at cutoffs, and
+  opposite rays must be compared only inside the fully joined H_j ledger.
+  No Abel gap, aggregate defect sign, or horizontal phase bound is promoted
+
+jensen_window_pf_newman_polymath15_first_order_centered_geometric_prime_power_phase_monotonicity_gate:
+  a correction-free geometric prime-power block has an exact phase-speed
+  formula and the lower margin
+  mu_M(a)=1/(1+a)-Ma^M/(1-a^M).  This proves strict one-turn phase for
+  every block over p>=5, for ternary blocks of length at least four, and
+  for dyadic blocks of length at least eight.  Multiplicative completion is
+  not enough by itself: a complete two-level dyadic or ternary block at
+  external phase pi/2 has four simple real crossings, two upward crossings,
+  and first-jet winding -2 even though the complex block winds once.
+  Therefore short p=2,3 chains remain explicit and the positive long-block
+  margins become C1 perturbation budgets for the heat and coefficient
+  corrections.  P-free bases, singleton chains, cutoffs, and the recurrent
+  endpoint still have to be rejoined before estimating the signed ray defect
+
+jensen_window_pf_newman_polymath15_first_order_centered_prime_power_logarithmic_phase_flow_gate:
+  the actual fixed-ray chain derivative separates into an angular moment,
+  radial drift, and normalized coefficient-current term.  This gives one
+  exact division-free current for the shifted internal block and separately
+  exposes the moving p-free external phase.  The normalized heat exponent
+  can be order one across a long chain.  A complete actual dyadic M=8
+  cutoff-cell witness proves that the former absolute geometric-C1 target
+  fails by more than 1/2 even though its heated phase speed stays positive.
+  Direct one-sided heat-current positivity replaces that invalid norm.
+  No uniform long-chain, joined p-free, endpoint, Abel-gap, or successor
+  theorem is promoted
+
+jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_starlikeness_base_certificate:
+  exact tensor-Bernstein arithmetic proves correction-free current margins
+  above 1/300 for the dyadic M=8 base block and above 1/25 for the ternary
+  M=4 base block.  A direct two-level formula proves a margin above 1/20
+  for every p>=5, with an independent exact p=5 Bernstein cross-check.
+  Restoring the saddle offset, d_n coefficients, radial drift, and epsilon_n
+  current costs less than 1/1000.  The resulting actual fixed-ray margins
+  are 7/3000, 39/1000, and 49/1000.  Length propagation, short and singleton
+  chains, p-free external phases, the recurrent endpoint, and the joined
+  ray defect remain open
+
+jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_starlikeness_length_propagation_gate:
+  the exact append-one recurrence isolates the contracted old current and
+  the complete new cross current.  A 32-leaf exact tensor-Bernstein
+  certificate proves J_0>1/20 for the dyadic M=9 box.  For every p>=5,
+  the heat-coefficient ratios make the Fourier current sequence decreasing
+  and convex at every length.  Its exact Fejer-kernel decomposition gives
+  J_0>1/20, and length-uniform coefficient sums retain
+  J_ray>49/1000 after the actual saddle, d_n, radial, and epsilon_n terms.
+  The remaining complete-chain length families are p=2,M>=10 and
+  p=3,M>=5; short, singleton, p-free, endpoint, and joined ray obligations
+  remain open
+
+jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_starlikeness_ternary_length_gate:
+  for every complete ternary chain p=3,M>=5, exact Fourier grouping leaves
+  only one possibly negative second difference.  Five exact rational
+  small-d cluster certificates, a uniform positive D_0 reserve, twelve
+  exact finite defect-absorption certificates, and an analytic M>=17 tail
+  prove J_0>17/1000.  Length-uniform geometric coefficient sums retain
+  J_ray>2/125 after the actual saddle, d_n, radial, and epsilon_n terms.
+  The remaining all-length complete-chain family is p=2,M>=10; short,
+  singleton, p-free, endpoint, Abel-gap, and joined winding obligations
+  remain open
+
+jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_starlikeness_dyadic_length_gate:
+  for every complete dyadic chain p=2,M>=10, exact Fourier grouping
+  localizes possible defects to D_0 and D_(M-2).  A completed-square
+  terminal-pair identity, five finite seven-kernel certificates, one
+  length-free four-kernel certificate, exact finite terminal guards, and
+  an analytic decreasing terminal tail prove J_0>3/1000.  Length-uniform
+  geometric coefficient sums retain J_ray>1/500 after the actual saddle,
+  d_n, radial, and epsilon_n terms.  Together with the M=8 and M=9 gates,
+  complete dyadic chains are covered for M>=8.  Short, singleton, p-free,
+  endpoint, cutoff, adjacent-chart, Abel-gap, and joined winding obligations
+  remain open
+
+jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_starlikeness_short_family_counter_gate:
+  at the common linked interior point q=s=9999/10000, eight exact
+  Q(sqrt(p)) witnesses prove J_0<-1/100 for every short dyadic length
+  p=2,M=2..7 and both short ternary lengths p=3,M=2,3.  The witnesses
+  use simple rational angular coordinates, exact component or square-sign
+  guards, and no floating-point sign decision.  Thus M=8 and M=4 are
+  sharp thresholds for the present blockwise small-prime theorem.  The
+  desired universal short-block positivity statement is false; short
+  chains must be retained in the joined p-free, singleton, endpoint,
+  cutoff, Abel-gap, and winding problem
+
+jensen_window_pf_newman_polymath15_first_order_centered_joined_phase_current_polarization_gate:
+  the endpoint-complete phase current polarizes exactly into diagonal
+  component currents and all pair cross currents.  At a real-projection
+  contact it is -mathsf_Y(x mathcal_C_N+E_j), while each physical
+  prime-power theorem enters only through one explicit diagonal term.
+  The exact family exp(i theta)+a exp(3i theta) has positive self currents
+  but joined current (1-a)(1-3a) at theta=pi/2.  At a=1/3 its real
+  projection is (4/3)cos(theta)^3 and has a cubic contact; at a=1/2 the
+  joined current is -1/4.  Thus the long-chain theorems are valid diagonal
+  input, but an Xi-specific cross-current aggregate or the direct
+  division-free Abel gap remains necessary
+
+jensen_window_pf_newman_polymath15_first_order_centered_joined_pair_kernel_pfree_rejoin_gate:
+  every physical carrier pair has an exact division-free current kernel
+  whose ordered logarithmic rates multiply unrestricted complex
+  correlations.  Summing all diagonal and pair rows collapses exactly to
+  the H_0,H_1,D_0 moment current.  The heat-shifted p-free decomposition
+  telescopes linearly, but its quadratic phase current rejoins with every
+  cross term and reconstructs that original full-prefix moment.  An exact
+  two-layer jet has diagonal reserve 4/3, cross current -4/3, and joined
+  current zero.  Thus the prime symmetry remains a valid coordinate
+  organization, while an Xi-specific correlation estimate or the direct
+  endpoint-complete division-free Abel gap remains necessary
+
+jensen_window_pf_newman_polymath15_first_order_centered_mangoldt_abel_contact_gate:
+  the retained first Dirichlet correction is exactly quadratic in log(n),
+  so the endpoint-complete Abel bulk closes on four correction-free
+  logarithmic moments H_0 through H_3.  The three nonconstant moments are
+  exact transpose-symmetric von Mangoldt bilinear forms on dm<=N, with the
+  heat quadratic isolated as exp[(t/2)log(d)log(m)].  This gives a genuine
+  arithmetic symmetry and the exact contact coordinate
+  mathcal_C_N=Re[g+s_*'U]-c u_N mathsf_X, including W_0=0.  A prime edge
+  sqrt(N)<p<=N gives the strict principal-minor determinant
+  -log(p)^(2j)/4 for each j=1,2,3.  The symmetry is therefore useful for a
+  cancellation-preserving Type-I/II decomposition, but it is not a Gram
+  positivity proof and supplies no Abel gap by itself
+
+jensen_window_pf_newman_polymath15_first_order_centered_mangoldt_contact_centering_gate:
+  the corrected nonconstant moments combine exactly into the one physical
+  logarithmic derivative Z_Lambda=sum_(n<=N)log(n)z_n, which is also the
+  symmetric Mangoldt hyperbola sum.  Contact centering gives
+  mathfrak B_N=E_N-s_*'Z_Lambda+s_*'log(a)W_0=g+s_*'U and therefore
+  retains W_0=0 without division.  The identity
+  Z_Lambda=log(N)S-sum_k log((k+1)/k)F_k proves that the Mangoldt and Abel
+  prefix expressions are dual coordinates of the same jet, not
+  independent evidence.  A floor(sqrt(N)) split gives one complete square
+  and one exact hyperbolic wing.  The signed centered-jet estimate and Abel
+  gap remain open
+
+jensen_window_pf_newman_polymath15_first_order_centered_mangoldt_adjacent_cutoff_transport_gate:
+  at fixed (t,x), the anchored endpoint-value jump cancels exactly between
+  Delta E_N and log(a)Delta W_0.  The remaining centered jump is
+  Delta g+s_*'log(a/n)z_n, exactly the established physical adjacent jet,
+  so its certified real-projection bound transfers without a new complex
+  observable.  At nonsquare cutoffs only the hyperbolic wing changes.  At
+  n=r^2, the new complete-square row moves out of the old wing and cancels
+  internally; the diagonal plus new divisor boundary equals log(n)z_n.
+  An independent formal prime-log audit passes 79 consecutive transitions,
+  including all eight square transitions through n=81, with no residual
+  floor term.  The signed centered-jet estimate and Abel gap remain open
+
+jensen_window_pf_newman_polymath15_first_order_centered_mangoldt_endpoint_composed_vaughan_gate:
+  because the physical moment is sum log(n)z_n, the Vaughan decomposition
+  of Lambda retains its final convolution by 1.  The resulting exact
+  coefficient identity log=C_0+C_I+C_II composes with the recurrent
+  endpoint as
+  mathfrak B_N=R_(0;U,V)-s_*'Z_I-s_*'Z_II, without dividing on W_0=0 or
+  mathsf_X=0.  At the canonical cube-root cutoff, all historical
+  perfect-cube transfers cancel coefficientwise, including the square/cube
+  overlap at n=64.  Exact 1,5,25 and 1,11 route guards show that separate
+  Type-I/II absolute values and endpoint-free estimates can both erase the
+  required cancellation.  The missing input is an Xi-specific pointwise
+  signed endpoint/Type-I/Type-II correlation theorem; no such lower bound
+  or Abel gap is proved
+
+jensen_window_pf_newman_polymath15_first_order_centered_complex_endpoint_source_normalization_gate:
+  the published endpoint function C_0(p)=F(p), not the Vaughan coefficient
+  C_0(n), is generally complex.  Exact parity gives C_0'''(0)=0 while
+  Im C_0(0)<0, so H_a(0) is nonreal at every half-integer saddle.  The
+  corrected endpoint has Re e=kappa(T_0H_R-H_I),
+  Re g=kappa(T_0J_R-J_I), and
+  gconj(e)=kappa^2(T_0^2+1)J_aconj(H_a).  The projective exceptional fibre
+  is T_0H_R-H_I=0, the exact endpoint/carrier contact minors remain
+  unsigned, and the endpoint-composed Vaughan square has rank one.  Seven
+  historical real-H_a endpoint rows are quarantined; the unaffected
+  branch-free, Abel, Mangoldt, cutoff, and Vaughan identities remain exact.
+  No Xi phase law, Abel gap, winding cap, contact exclusion, or RH result is
+  proved
+
+jensen_window_pf_newman_polymath15_first_order_centered_endpoint_relative_phase_current_recurrence_gate:
+  the corrected endpoint self-current is
+  Im(e_xconj(e))=kappa^2[(T_0^2+1)Im(H_(a,x)conj(H_a))-|H_a|^2/2].
+  The common frame phase cancels from the division-free current against
+  each physical carrier.  On the physical q=1 cofinal family its terminal
+  scaled limit is -1/4 at p=0 but
+  [1-sqrt(4+2sqrt(2))/4]/4>0 at p=1, so no uniform terminal sign exists.
+  Terminal tails telescope before projection into an older endpoint plus
+  exact recurrence defects, while the phase current retains an uncontrolled
+  mixed defect.  At contact the exact cumulative identity
+  sum_n K_(0n)=c_0 mathcal C_N recovers the full scalar when c_0!=0 and
+  becomes blind when c_0=0.  The terminal-composed real-edge sign,
+  signed cumulative-minor estimate, Abel gap, winding cap, contact
+  exclusion, and RH result remain open
+
+jensen_window_pf_newman_polymath15_first_order_centered_real_edge_projective_current_gate:
+  composing the corrected endpoint and terminal carrier before real
+  projection gives the exact division-free current
+  J_edge=C_edge Re(G_x)-Re(G)C_(edge,x)-alpha_x C_edge^2.  On the physical
+  q=1 fixed-p cofinal family its second-jet symbol collapses to
+  K_edge=[A A''-(A')^2]/(16pi^2), with A=-Re C_0(p-2).  A 192-bit Arb cover
+  of 3072 rational intervals, using analytic sinc charts at both removable
+  points, proves (A')^2-AA''>3/50 and therefore K_edge<-3/8000 throughout
+  -1<=p<=1.  This is not yet a uniform finite-height sign; the explicit
+  remainder, q>1 extension, adjacent-cutoff splice, Abel gap, winding cap,
+  contact exclusion, and RH result remain open
+
+jensen_window_pf_newman_polymath15_first_order_centered_q1_finite_height_real_edge_remainder_gate:
+  on q=1 and L>=50, the terminal carrier has a cancellation-stable logarithm
+  Z=-Q exp(W) with |W|<6/a and |W_x|<2/a^2.  Two factored complex Cauchy
+  charts and a 4096-box Arb cover bound C_0 through order five.  The four
+  normalized real-edge jets have defects bounded by 100, 250, 250, and 900,
+  giving |a^2J_edge/(kappa T_0)^2-K_edge|<5500/a<1/10000000.  Combined with
+  the strict cofinal margin, the retained first-order model current is below
+  -3749/10000000 throughout -1<=p<=1.  This does not bound the omitted
+  higher-order Xi error, prove a q>1 or Xi-level edge sign, splice adjacent
+  cutoffs, or prove the Abel gap, winding cap, contact exclusion, or RH
+
+jensen_window_pf_newman_polymath15_first_order_centered_critical_ray_finite_height_real_edge_gate:
+  replacing t<=1/5000 by the complete critical bound t<=1/2 and recomputing
+  27 normalized rational majorants gives |W|<4/a, |W_x|<1/a^2,
+  |mu|<1/a^2, and |mu_x|<1/a^4.  The same four edge-jet defect constants
+  100, 250, 250, and 900 remain valid, so the retained first-order model
+  current stays below -3749/10000000 for L>=50, 0<tL<=25, and -1<=p<=1.
+  This contains every q>=1 critical point.  The adjacent-cutoff signed
+  splice, omitted Xi/source current remainder, cumulative Abel gap, winding
+  cap, contact exclusion, and RH remain open
+
+jensen_window_pf_newman_polymath15_first_order_centered_adjacent_cutoff_real_edge_projective_splice_gate:
+  at an integer cutoff, the aligned old p=-1 and new p=1 edge rows have
+  exact source values A_-=A_+=-sqrt(2+sqrt(2))/4,
+  B_-=-3sqrt(2-sqrt(2))/16, and B_+=-sqrt(2-sqrt(2))/16.  Their leading
+  oriented wedge is therefore -sqrt(2)/32.  The certified finite-height
+  value and slope defects give
+  Delta_cut=-sqrt(2)h/32+O(500h^2+50000h^3)<-h/25.  Both aligned real
+  values remain below -1/4, so the affine projective join never vanishes
+  and has strict clockwise current.  This closes every adjacent cutoff for
+  the retained first-order q>=1 critical-ray edge model without a second
+  adjacent x-jet.  The omitted Xi/source remainder, Xi-level edge sign,
+  cumulative-minor estimate, Abel gap, winding cap, contact exclusion, and
+  RH remain open
 
 signed_hankel_jensen_dependency_graph:
   dependency hygiene gate connecting finite evidence, countermodel gates, open

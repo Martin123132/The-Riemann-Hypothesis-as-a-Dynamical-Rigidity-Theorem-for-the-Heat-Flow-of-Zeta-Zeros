@@ -1,0 +1,211 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_wronskian_crossing_reduction",
+  "date": "2026-07-26",
+  "status": "exact first-order Wronskian, upward-crossing, and exceptional-zero reduction; three Xi crossing obligations remain open",
+  "proof_boundary": "This artifact proves the first-order contact Wronskian bound, crossing-margin equivalence, upward-sign identity, exceptional-zero split, and successor-count composition. It does not prove the q>=1 Wronskian theorem, q<1 multiplicity-compatible theorem, finite shoulders, one-sided successor winding, contact exclusion, Lambda<=0, RH, PF-infinity, or a Clay-prize conclusion.",
+  "constants": {
+    "eta_0": 100000,
+    "eta_1": 200000,
+    "half_squared_budget": 12500000000,
+    "crossing_threshold": "50000*sqrt(5)"
+  },
+  "sources": {
+    "global_remainder": "work/rh_compute/results/jensen_window_pf_newman_polymath15_critical_first_order_global_remainder_certificate.json",
+    "signed_contact": "work/rh_compute/results/jensen_window_pf_newman_polymath15_critical_first_order_signed_contact_reduction.json",
+    "oriented_successor": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_oriented_successor_winding_reduction.json",
+    "old_wronskian": "work/rh_compute/results/jensen_window_pf_newman_polymath15_critical_wronskian_phase_reduction.json",
+    "component_wronskian": "work/rh_compute/results/jensen_window_pf_newman_polymath15_critical_component_wronskian_gate.json",
+    "slope_gap": "work/rh_compute/results/jensen_window_pf_newman_polymath15_crossing_slope_gap_reduction.json"
+  },
+  "source_sha256": {
+    "global_remainder": "ed3d6f75c59c14bd0d3c53bbbc946a1c6719facd899d6524c35c3edfa48ca577",
+    "signed_contact": "89d20ce680d02b11153ea73b92f16368e7b29783be82147a0f5385f840e275ef",
+    "oriented_successor": "2b5a5d98d3d7fa2a3b65044bb0c94fe302f8db1e9855313d63569110d271f8c4",
+    "old_wronskian": "daca61faf3d2d90ad97b1d38ea1a1a332a499a974091122975e3b3ed08109dac",
+    "component_wronskian": "8e39053762a7df120145b3b0921a8465947c674da968d28cfc1a11a2f7f731d2",
+    "slope_gap": "4a9975c1808a49d3a4c23288ae396fda52bd1a6ac55c1c4a40e29fb500b710d7"
+  },
+  "source_audit": {
+    "global_remainder": "jensen_window_pf_newman_polymath15_critical_first_order_global_remainder_certificate",
+    "signed_contact": "jensen_window_pf_newman_polymath15_critical_first_order_signed_contact_reduction",
+    "oriented_successor": "jensen_window_pf_newman_polymath15_first_order_oriented_successor_winding_reduction",
+    "old_wronskian": "jensen_window_pf_newman_polymath15_critical_wronskian_phase_reduction",
+    "component_wronskian": "jensen_window_pf_newman_polymath15_critical_component_wronskian_gate",
+    "slope_gap": "jensen_window_pf_newman_polymath15_crossing_slope_gap_reduction"
+  },
+  "exact": {
+    "symbolic": {
+      "coordinates": "E_[1]=X+iY, E_[1],x=U+iV, W_[1]=Im(E_[1],x*conj(E_[1]))",
+      "wronskian": "W_[1]=V*X-U*Y",
+      "proxy": "J_[1]=2X, J_[1],x=2U",
+      "crossing": "At X=0, W_[1]=-U*Y.",
+      "proxy_crossing_norm": "At X=0, X^2+(U/L)^2=U^2/L^2.",
+      "threshold": "sqrt(12500000000)=50000*sqrt(5)",
+      "sympy_wronskian": "-U*Y + V*X",
+      "sympy_crossing": "-U*Y"
+    },
+    "contact": {
+      "equations": "At a full contact, X=-r_[1]/2 and U=-r_[1],x/2.",
+      "identity": "W_[1]=V*X-U*Y",
+      "bound": "2*|W_[1]|<exp(-5L/4)*(100000*|E_[1],x|+200000*L*|E_[1]|)",
+      "sufficient_disjunction": "For every point in the live layer, prove either |X|>50000*exp(-5L/4) or 2*|W_[1]|>exp(-5L/4)*(100000*|E_[1],x|+200000*L*|E_[1]|)."
+    },
+    "boundary_crossing": {
+      "margin_equivalence": "At X=0 and E_[1]!=0, X^2+(U/L)^2>12500000000*exp(-5L/2) iff |W_[1]|>50000*sqrt(5)*L*|E_[1]|*exp(-5L/4).",
+      "phase_speed": "Where E_[1]!=0, theta_[1],x=W_[1]/|E_[1]|^2.",
+      "upward_sign": "At X=0, E_[1]=iY!=0, an upward zero U>0 is equivalent to W_[1]*Y<0.",
+      "exceptional_zero": "If E_[1]=0 then X=Y=W_[1]=0; a proxy crossing with U>0 is not classified by W_[1]*Y and must be counted separately.",
+      "count_decomposition": "N_up=N_(X=0,E_[1]!=0,W_[1]*Y<0)+N_(E_[1]=0,U>0), with half-open endpoint conventions."
+    },
+    "successor_link": {
+      "crossing_formula": "Insert the decomposed N_up on both horizontal edges into kappa_j=N_up(t_j;R_j)-N_up(t_(j+1);R_j)+I_i(V_j), then add the finite shoulder/join intersection cells.",
+      "one_sided_target": "It is enough to prove the resulting oriented count is <1; positive contact degree then forces kappa_j=0.",
+      "distinction": "The absolute Wronskian margin proves boundary nonvanishing. The signed W_[1]*Y counts and exceptional complex-main zeros are additional data needed for the one-sided winding bound."
+    },
+    "route_guards": {
+      "phase_sign": "The aggregate phase derivative is not known to have one sign; stored corrected crossings exhibit both signs below the asymptotic L>=50 layer.",
+      "component_form": "The instantaneous component-rate Hermitian form has inertia (1,1,m-2) when rates differ, so it is not positive semidefinite.",
+      "ordered_speeds": "Positive amplitudes and ordered same-sign component speeds admit an exact double-crossing countermodel.",
+      "finite_diagnostics": "Finite sign diagnostics shape the route but neither prove nor disprove the L>=50 heat-coupled theorem."
+    },
+    "open_target": {
+      "frequency_layer": "On q=2tL^2>=1 in the live 0<tL<c_*+o(1) layer, prove the first-order Wronskian disjunction and a signed crossing/phase budget including E_[1]=0 exceptional crossings.",
+      "parabolic_layer": "Treat q<1 by a multiplicity-compatible Hermite or degree chart; do not demand a fixed phase-speed floor at t=0.",
+      "shoulders": "Close bounded L, L_epsilon, vertical connector, and chart-join phase cells separately."
+    },
+    "proof_handoff": "Use the Wronskian magnitude to certify first-jet separation at real-part crossings, and use the signs of W_[1]*Im(E_[1]) plus the explicit E_[1]=0 count to upper-bound the successor winding. Do not replace this signed arithmetic theorem by phase monotonicity or component-rate ordering."
+  },
+  "rows": [
+    {
+      "id": "nfowc_01_coordinates",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "The first-order complex main has an exact real-coordinate Wronskian.",
+      "formula": "E_[1]=X+iY, E_[1],x=U+iV, W_[1]=Im(E_[1],x*conj(E_[1])); W_[1]=V*X-U*Y",
+      "proof_boundary": "Algebraic identity only.",
+      "diagnostics": {
+        "coordinates": "E_[1]=X+iY, E_[1],x=U+iV, W_[1]=Im(E_[1],x*conj(E_[1]))",
+        "wronskian": "W_[1]=V*X-U*Y",
+        "proxy": "J_[1]=2X, J_[1],x=2U",
+        "crossing": "At X=0, W_[1]=-U*Y.",
+        "proxy_crossing_norm": "At X=0, X^2+(U/L)^2=U^2/L^2.",
+        "threshold": "sqrt(12500000000)=50000*sqrt(5)",
+        "sympy_wronskian": "-U*Y + V*X",
+        "sympy_crossing": "-U*Y"
+      }
+    },
+    {
+      "id": "nfowc_02_contact_wronskian",
+      "role": "exact_contact_reduction",
+      "readiness": "available_exact",
+      "claim": "A full contact forces an explicit exponentially small first-order Wronskian.",
+      "formula": "2*|W_[1]|<exp(-5L/4)*(100000*|E_[1],x|+200000*L*|E_[1]|)",
+      "proof_boundary": "Uses the certified eta_0 and eta_1 remainder bounds.",
+      "diagnostics": {
+        "equations": "At a full contact, X=-r_[1]/2 and U=-r_[1],x/2.",
+        "identity": "W_[1]=V*X-U*Y",
+        "bound": "2*|W_[1]|<exp(-5L/4)*(100000*|E_[1],x|+200000*L*|E_[1]|)",
+        "sufficient_disjunction": "For every point in the live layer, prove either |X|>50000*exp(-5L/4) or 2*|W_[1]|>exp(-5L/4)*(100000*|E_[1],x|+200000*L*|E_[1]|)."
+      }
+    },
+    {
+      "id": "nfowc_03_contact_disjunction",
+      "role": "exact_sufficient_target",
+      "readiness": "available_exact",
+      "claim": "A value-or-Wronskian disjunction excludes every full contact in the live frequency layer.",
+      "formula": "For every point in the live layer, prove either |X|>50000*exp(-5L/4) or 2*|W_[1]|>exp(-5L/4)*(100000*|E_[1],x|+200000*L*|E_[1]|).",
+      "proof_boundary": "The Xi-specific strict disjunction remains unproved.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfowc_04_crossing_margin",
+      "role": "exact_equivalence",
+      "readiness": "available_exact",
+      "claim": "At a nonzero complex-main crossing, the first-order vector margin is a normalized Wronskian margin.",
+      "formula": "At X=0 and E_[1]!=0, X^2+(U/L)^2>12500000000*exp(-5L/2) iff |W_[1]|>50000*sqrt(5)*L*|E_[1]|*exp(-5L/4).",
+      "proof_boundary": "The E_[1]=0 case is excluded by the strict Wronskian inequality.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfowc_05_upward_sign",
+      "role": "exact_crossing_reduction",
+      "readiness": "available_exact",
+      "claim": "The sign of W_[1]*Im(E_[1]) identifies upward real-part crossings when E_[1] is nonzero.",
+      "formula": "At X=0, E_[1]=iY!=0, an upward zero U>0 is equivalent to W_[1]*Y<0.",
+      "proof_boundary": "A signed count, not a global phase-monotonicity claim.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfowc_06_exceptional_zero",
+      "role": "nonpromotion_guard",
+      "readiness": "guard_validated",
+      "claim": "Zeros of the complete complex main form a separate crossing class.",
+      "formula": "If E_[1]=0 then X=Y=W_[1]=0; a proxy crossing with U>0 is not classified by W_[1]*Y and must be counted separately.",
+      "proof_boundary": "They cannot be divided out or hidden in the Wronskian sign.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfowc_07_count_decomposition",
+      "role": "exact_crossing_reduction",
+      "readiness": "available_exact",
+      "claim": "Every upward crossing splits into a Wronskian-sign crossing or an exceptional complex-main zero.",
+      "formula": "N_up=N_(X=0,E_[1]!=0,W_[1]*Y<0)+N_(E_[1]=0,U>0), with half-open endpoint conventions.",
+      "proof_boundary": "Assumes the standard half-open endpoint convention.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfowc_08_successor_link",
+      "role": "exact_composition",
+      "readiness": "available_exact",
+      "claim": "The decomposed crossing count plugs directly into the oriented successor recurrence.",
+      "formula": "Insert the decomposed N_up on both horizontal edges into kappa_j=N_up(t_j;R_j)-N_up(t_(j+1);R_j)+I_i(V_j), then add the finite shoulder/join intersection cells.",
+      "proof_boundary": "Finite connector and shoulder cells remain explicit.",
+      "diagnostics": {
+        "crossing_formula": "Insert the decomposed N_up on both horizontal edges into kappa_j=N_up(t_j;R_j)-N_up(t_(j+1);R_j)+I_i(V_j), then add the finite shoulder/join intersection cells.",
+        "one_sided_target": "It is enough to prove the resulting oriented count is <1; positive contact degree then forces kappa_j=0.",
+        "distinction": "The absolute Wronskian margin proves boundary nonvanishing. The signed W_[1]*Y counts and exceptional complex-main zeros are additional data needed for the one-sided winding bound."
+      }
+    },
+    {
+      "id": "nfowc_09_phase_sign_guard",
+      "role": "nonpromotion_guard",
+      "readiness": "guard_validated",
+      "claim": "A one-signed aggregate phase derivative is not an available shortcut.",
+      "formula": "The aggregate phase derivative is not known to have one sign; stored corrected crossings exhibit both signs below the asymptotic L>=50 layer.",
+      "proof_boundary": "The stored examples are below L=50 and are route guards only.",
+      "diagnostics": {
+        "phase_sign": "The aggregate phase derivative is not known to have one sign; stored corrected crossings exhibit both signs below the asymptotic L>=50 layer.",
+        "component_form": "The instantaneous component-rate Hermitian form has inertia (1,1,m-2) when rates differ, so it is not positive semidefinite.",
+        "ordered_speeds": "Positive amplitudes and ordered same-sign component speeds admit an exact double-crossing countermodel.",
+        "finite_diagnostics": "Finite sign diagnostics shape the route but neither prove nor disprove the L>=50 heat-coupled theorem."
+      }
+    },
+    {
+      "id": "nfowc_10_frequency_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "Prove the first-order Wronskian magnitude and signed crossing budget in the q>=1 layer.",
+      "formula": "On q=2tL^2>=1 in the live 0<tL<c_*+o(1) layer, prove the first-order Wronskian disjunction and a signed crossing/phase budget including E_[1]=0 exceptional crossings.",
+      "proof_boundary": "This is the live Xi-specific arithmetic target.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfowc_11_parabolic_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "Supply the multiplicity-compatible q<1 crossing theorem.",
+      "formula": "Treat q<1 by a multiplicity-compatible Hermite or degree chart; do not demand a fixed phase-speed floor at t=0.",
+      "proof_boundary": "No endpoint-simplicity floor is permitted.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfowc_12_shoulder_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "Terminate all finite phase shoulders and connector cells.",
+      "formula": "Close bounded L, L_epsilon, vertical connector, and chart-join phase cells separately.",
+      "proof_boundary": "Finite but not currently certified.",
+      "diagnostics": null
+    }
+  ]
+}

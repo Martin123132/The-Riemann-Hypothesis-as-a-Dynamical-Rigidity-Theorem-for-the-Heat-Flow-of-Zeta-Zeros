@@ -1,0 +1,280 @@
+{
+  "date": "2026-07-29",
+  "exact": {
+    "adjacent_chart": {
+      "derivative_ratio": "|partial_x Delta J_[1]/L|/B_1(L)<3/20",
+      "gauge": "M_L(Delta J)<1/5",
+      "homotopy": "M_L(J+s*Delta J)>1-s/5>=4/5",
+      "value_ratio": "|Delta J_[1]|/B_0(L)<1/5"
+    },
+    "boundary_abel": {
+      "conclusion": "The target implies M_L(J)>1 on the selected boundary, including W_0=0",
+      "prefix": "U=u_N*S+sum_(k=1)^(N-1)log((k+1)/k)*F_k",
+      "target": "|mathsf_X|<=delta_L => |mathcal_C_N|>A_L+epsilon_term"
+    },
+    "degree_transfer": {
+      "contact_index": "ind_(x,t)(H,H_x/L)=floor(m/2)>0",
+      "normalizer": "V_H=A_t*[[1,0],[partial_x log(A_t)/L,1]]*V_Z",
+      "successor_trap": "0<=kappa_j=wind(V_J)<1 => kappa_j=0",
+      "zero_degree": "wind(V_J)=0 implies no interior heat contact"
+    },
+    "domain": "L>=50, 0<tL<25 on prescribed first-order charts; the raised outer boundary also uses L>=B_epsilon",
+    "error_whitening": {
+      "determinant": "det(D_L)=1/(B_0(L)*B_1(L))>0",
+      "matrix": "D_L=diag(B_0(L)^(-1),B_1(L)^(-1))",
+      "square": "D_L maps the certified error box into (-1,1)^2",
+      "winding": "The positive diagonal homotopy from I to D_L preserves nonvanishing and winding"
+    },
+    "main_gauge": {
+      "boundary_target": "M_L(J)>1",
+      "complex_half": "M_L(J)=G_L(X,U)",
+      "definition": "M_L(J)=max(|J_[1]|/B_0(L),|partial_x J_[1]/L|/B_1(L))"
+    },
+    "nonpromotion": {
+      "boundary_only": "Boundary nonvanishing without a winding bound permits positive-index interior heat contacts",
+      "radial": "Box separation does not imply the stronger Euclidean radial threshold"
+    },
+    "open_handoff": "For every successor j and fixed epsilon, prove the normalized Abel gap on each nonempty hard bottom interval max(B_epsilon,sqrt((100+j)/50))<=L<=min(L_j,(c_*+epsilon)(100+j)/25), retaining W_0=0, the recurrent endpoint, q=1, equality boundaries, and adjacent-cutoff homotopies. Then prove the completely joined horizontal phase contribution H_j<3*pi/2. If the same Abel estimate extends to the full raised outer wedge, use the uniform-collar excision route instead.",
+    "radial_comparison": {
+      "constant": "100000^2+200000^2=50000000000",
+      "strictness": "The radial condition is strictly stronger than M_L(J)>1",
+      "sufficient": "J_[1]^2+(partial_x J_[1]/L)^2>50000000000*exp(-5L/2) => M_L(J)>1"
+    },
+    "ray_bottom": {
+      "c": "t_j*L=25*L/(100+j)",
+      "hard_interval": "max(B_epsilon,sqrt((100+j)/50))<=L<=min(L_j,(c_*+epsilon)*(100+j)/25)",
+      "q": "q=50*L^2/(100+j)",
+      "schedule": "t_j=25/(100+j), L_j=101+j, R_j=4*pi*exp(L_j)"
+    },
+    "rectangular_rouche": {
+      "conclusion": "V_J and V_Z are boundary-nonzero and have equal winding",
+      "homotopy": "V_s=V_J+s*V_r, M_L(V_s)>=M_L(V_J)-s*M_L(V_r)>0"
+    },
+    "remainder_box": {
+      "derivative": "B_1(L)=200000*exp(-5L/4)",
+      "error": "|r_[1]|<B_0(L), |partial_x r_[1]/L|<B_1(L)",
+      "value": "B_0(L)=100000*exp(-5L/4)"
+    },
+    "route_fork": {
+      "boundary": "Prove the Abel gap only on joined successor boundaries and H_j<3*pi/2; use C_j<pi/2 and the integer trap",
+      "recommended_next": "Attempt the one-dimensional hard-bottom Abel theorem first, preserving the full joined phase ledger",
+      "uniform": "Prove the Abel gap on the full two-dimensional raised outer wedge; excise it at zero degree"
+    }
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_rectangular_boundary_degree_reduction",
+  "proof_boundary": "This artifact proves the rectangular first-order boundary homotopy, error-whitening and winding invariance, adjacent-chart sub-box join, positive-index degree transfer, exact hard-bottom interval, and the two-route comparison. It does not prove the Xi Abel gap, horizontal phase bound, q<1 or bounded-L inner theorem, complete boundary nonvanishing, contact exclusion, Lambda<=0, PF-infinity, RH, or a Clay-prize conclusion.",
+  "rows": [
+    {
+      "claim": "Use the cutoff-local first-order main and its matched remainder.",
+      "formula": "Z=J_[1]+r_[1], J_[1]=2X, J_[1],x=2U.",
+      "id": "rbd_01_current_main",
+      "proof_boundary": "This is local to one prescribed cutoff chart.",
+      "readiness": "proved",
+      "role": "source contract"
+    },
+    {
+      "claim": "The C1 remainder gives a rectangular first-jet error set.",
+      "formula": "|r_[1]|<B_0=100000e^(-5L/4), |r_[1],x/L|<B_1=200000e^(-5L/4).",
+      "id": "rbd_02_error_rectangle",
+      "proof_boundary": "The two coordinates must not be merged before choosing a target.",
+      "readiness": "proved",
+      "role": "exact error geometry"
+    },
+    {
+      "claim": "The error-matched main gauge is the contact-box gauge.",
+      "formula": "M_L(J)=max(|J|/B_0,|J_x/L|/B_1)=G_L(X,U).",
+      "id": "rbd_03_box_gauge",
+      "proof_boundary": "Strict M_L>1 is required for a robust homotopy.",
+      "readiness": "proved",
+      "role": "exact target"
+    },
+    {
+      "claim": "M_L(J)>1 transfers boundary nonvanishing and winding to Z.",
+      "formula": "M_L(J+s*r)>=M_L(J)-s*M_L(r)>0 for 0<=s<=1.",
+      "id": "rbd_04_rectangular_rouche",
+      "proof_boundary": "This is a boundary theorem; it gives no interior noncontact.",
+      "readiness": "proved",
+      "role": "boundary homotopy"
+    },
+    {
+      "claim": "The Euclidean radial margin implies but is not equivalent to the box margin.",
+      "formula": "||V_J||_2^2>B_0^2+B_1^2=50000000000e^(-5L/2) => M_L(J)>1; the converse fails.",
+      "id": "rbd_05_radial_overstrength",
+      "proof_boundary": "Do not retain the stronger radial target by habit.",
+      "readiness": "proved",
+      "role": "nonpromotion guard"
+    },
+    {
+      "claim": "A positive diagonal map sends the error rectangle to the unit square.",
+      "formula": "D_L=diag(B_0^(-1),B_1^(-1)), det(D_L)>0, D_L V_J=(J/B_0,J_x/(L B_1)).",
+      "id": "rbd_06_error_whitening",
+      "proof_boundary": "The map changes phase parametrization but not degree.",
+      "readiness": "proved",
+      "role": "exact coordinate change"
+    },
+    {
+      "claim": "Continuous positive diagonal whitening preserves winding.",
+      "formula": "D_(L,s)=(1-s)I+sD_L is invertible with positive determinant.",
+      "id": "rbd_07_winding_invariance",
+      "proof_boundary": "No metric lower bound follows from orientation preservation alone.",
+      "readiness": "proved",
+      "role": "topological transfer"
+    },
+    {
+      "claim": "The normalized Abel gap implies M_L(J)>1 on any selected boundary arc.",
+      "formula": "|mathsf_X|<=delta_L => |mathcal_C_N|>A_L+epsilon_term.",
+      "id": "rbd_08_boundary_abel",
+      "proof_boundary": "The Xi-specific Abel inequality remains unproved.",
+      "readiness": "open",
+      "role": "arithmetic handoff"
+    },
+    {
+      "claim": "The boundary Abel target remains division-free at W_0=0.",
+      "formula": "mathsf_A=mathcal_C_N+c*u_N*mathsf_X.",
+      "id": "rbd_09_zero_fibre",
+      "proof_boundary": "No quotient by W_0 or the first-jet norm is permitted.",
+      "readiness": "retained",
+      "role": "exceptional fibre"
+    },
+    {
+      "claim": "The adjacent first-order chart jump occupies a strict sub-box.",
+      "formula": "|Delta J|/B_0<1/5, |Delta J_x/L|/B_1<3/20.",
+      "id": "rbd_10_adjacent_box",
+      "proof_boundary": "These are overlap bounds, not a global fixed-cutoff theorem.",
+      "readiness": "proved",
+      "role": "cutoff arithmetic"
+    },
+    {
+      "claim": "One box-separated chart joins its adjacent chart without zero.",
+      "formula": "M_L(J+s*Delta J)>=M_L(J)-s/5>4/5.",
+      "id": "rbd_11_adjacent_homotopy",
+      "proof_boundary": "Every prescribed equality boundary and overlap is still included.",
+      "readiness": "proved",
+      "role": "chart topology"
+    },
+    {
+      "claim": "The positive Xi normalizer and its derivative shear preserve degree.",
+      "formula": "V_H=A_t[[1,0],[a/L,1]]V_Z, det=A_t^2>0.",
+      "id": "rbd_12_normalizer",
+      "proof_boundary": "The normalizer is not discarded from quantitative estimates.",
+      "readiness": "proved",
+      "role": "exact topology"
+    },
+    {
+      "claim": "Every real heat contact has strictly positive local index in (x,t).",
+      "formula": "ind_(x,t)(H,H_x/L)=floor(m/2)>0 for multiplicity m>=2.",
+      "id": "rbd_13_contact_index",
+      "proof_boundary": "The orientation convention must remain counterclockwise in (x,t).",
+      "readiness": "proved",
+      "role": "exact heat theorem"
+    },
+    {
+      "claim": "Boundary transfer plus zero winding excludes all interior contacts.",
+      "formula": "wind(V_J)=wind(V_H)=sum_p floor(m_p/2); wind(V_J)=0 => no p.",
+      "id": "rbd_14_zero_degree",
+      "proof_boundary": "The proxy may have interior zeros; only its boundary winding is used.",
+      "readiness": "conditional",
+      "role": "global degree"
+    },
+    {
+      "claim": "A sub-one proxy winding is enough on each oriented successor.",
+      "formula": "0<=kappa_j=wind(V_J)<1 => kappa_j=0.",
+      "id": "rbd_15_integer_trap",
+      "proof_boundary": "Boundary nonvanishing alone does not prove kappa_j<1.",
+      "readiness": "conditional",
+      "role": "successor degree"
+    },
+    {
+      "claim": "Use the ray-aligned successor bottoms.",
+      "formula": "t_j=25/(100+j), L_j=101+j, R_j=4*pi*exp(L_j).",
+      "id": "rbd_16_ray_schedule",
+      "proof_boundary": "Finite base and shoulder ownership remain separate.",
+      "readiness": "proved",
+      "role": "cofinal geometry"
+    },
+    {
+      "claim": "The low-c q>=1 Abel obligation on bottom j is one explicit L interval.",
+      "formula": "max(B_epsilon,sqrt((100+j)/50))<=L<=min(L_j,(c_*+epsilon)(100+j)/25).",
+      "id": "rbd_17_hard_bottom_interval",
+      "proof_boundary": "An empty interval contributes no hard bottom arc.",
+      "readiness": "proved",
+      "role": "one-dimensional reduction"
+    },
+    {
+      "claim": "Oscillatory and dominant theorems close the rest of the raised outer bottom.",
+      "formula": "c_*+epsilon<t_jL<25 is oscillatory; t_jL>=25 is dominant.",
+      "id": "rbd_18_outer_closure",
+      "proof_boundary": "q<1 and L<B_epsilon remain inner or finite-shoulder obligations.",
+      "readiness": "proved",
+      "role": "source composition"
+    },
+    {
+      "claim": "A two-dimensional Abel gap gives complete outer-collar noncontact.",
+      "formula": "Uniform gap on A_(j,epsilon) => deg(Omega_j^out)=0.",
+      "id": "rbd_19_uniform_route",
+      "proof_boundary": "This stronger route removes the independent outer winding theorem.",
+      "readiness": "open",
+      "role": "route A"
+    },
+    {
+      "claim": "A one-dimensional boundary Abel gap can be paired with the horizontal phase cap.",
+      "formula": "M_L>1 on joined boundary and H_j<3*pi/2, C_j<pi/2 => kappa_j<1.",
+      "id": "rbd_20_boundary_route",
+      "proof_boundary": "This weaker-domain route retains an independent winding obligation.",
+      "readiness": "open",
+      "role": "route B"
+    },
+    {
+      "claim": "Boundary nonvanishing without a winding bound does not exclude contact.",
+      "formula": "F=x^2-2t has a boundary-nonzero rectangle with one index +1 contact.",
+      "id": "rbd_21_boundary_guard",
+      "proof_boundary": "This is a generic heat guard, not an Xi counterexample.",
+      "readiness": "proved",
+      "role": "nonpromotion guard"
+    },
+    {
+      "claim": "Attack the error-matched boundary Abel theorem before a two-dimensional upgrade.",
+      "formula": "Prove the Abel gap on every nonempty hard bottom interval, then compose the joined horizontal flux below 3*pi/2.",
+      "id": "rbd_22_handoff",
+      "proof_boundary": "No contact exclusion, Lambda<=0, PF-infinity, RH, or prize conclusion is proved.",
+      "readiness": "open",
+      "role": "route decision"
+    }
+  ],
+  "source_audit": {
+    "source_kinds": {
+      "abel_prefix": "jensen_window_pf_newman_polymath15_first_order_centered_carrier_kernel_abel_prefix_reduction",
+      "abel_shear": "jensen_window_pf_newman_polymath15_first_order_centered_abel_scalar_shear_flux_reduction",
+      "boundary_degree": "jensen_window_pf_newman_cofinal_boundary_degree_transfer_target",
+      "connector_cap": "jensen_window_pf_newman_polymath15_first_order_centered_dominant_ray_connector_phase_cap",
+      "contact_index": "jensen_window_pf_newman_first_jet_winding_gate",
+      "first_order_boundary": "jensen_window_pf_newman_polymath15_first_order_cofinal_boundary_reduction",
+      "oriented_successor": "jensen_window_pf_newman_polymath15_first_order_oriented_successor_winding_reduction",
+      "oscillatory_splice": "jensen_window_pf_newman_polymath15_first_order_centered_oscillatory_spliced_outer_collar_reduction",
+      "target_reconciliation": "jensen_window_pf_newman_polymath15_first_order_target_reconciliation_gate"
+    },
+    "source_sha256": {
+      "abel_prefix": "408b16b6719be7a55b5f260dcda8ebc9bfd012edd734e6fc4913f8cbb0e9abc3",
+      "abel_shear": "1a0b538a3340f2d69e2976ddb19f9b3c83c492ddf5715cfdcdb24ac3356536e5",
+      "boundary_degree": "a0ba27d354be3bb9e0f832b3c4cecc0c62b2ca871a6969a1a56818303f15fe66",
+      "connector_cap": "44870e026352077a526a6b7b30b4f1c198e3e25bd0f8221f8a95c6ce423a6c31",
+      "contact_index": "efc21d353b582f8a4759de89e1ba9e988c62b9b5540e6d7217b6249aff7d5a0b",
+      "first_order_boundary": "99a134bcd052687d56cc411e03134d25a82509e30e3700ae16d9cc478a7c559a",
+      "oriented_successor": "2b5a5d98d3d7fa2a3b65044bb0c94fe302f8db1e9855313d63569110d271f8c4",
+      "oscillatory_splice": "e5d353ed3fc613e0fef4adedbec61c24c359cea51ebfd608db209ec16ac9b042",
+      "target_reconciliation": "400680c7b11aa7051fc61c6774fa7ded3fb5685eb676c2e638423eae34392d09"
+    }
+  },
+  "status": "exact_rectangular_boundary_degree_reduction_with_open_abel_and_winding_targets",
+  "summary": {
+    "boundary_only_abel_targets": 1,
+    "cofinal_descendant_theorem": false,
+    "error_box_coordinates": 2,
+    "nonpromotion_guards": 2,
+    "pointwise_contact_exclusions": 0,
+    "positive_index_degree_transfers": 1,
+    "rectangular_homotopies": 2,
+    "route_branches": 2,
+    "rows": 22
+  }
+}

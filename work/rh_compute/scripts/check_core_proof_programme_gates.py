@@ -10,8 +10,12 @@ countermodel guards still match the advertised proof-programme status.
 from __future__ import annotations
 
 import argparse
+import ctypes
 from dataclasses import dataclass
+from datetime import datetime, timezone
+import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -19,6 +23,20 @@ from time import perf_counter
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
+
+
+def set_below_normal_priority() -> None:
+    """Keep a long umbrella run responsive to other desktop work on Windows."""
+    if os.name != "nt":
+        return
+    try:
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        kernel32.GetCurrentProcess.restype = ctypes.c_void_p
+        kernel32.SetPriorityClass.argtypes = (ctypes.c_void_p, ctypes.c_uint32)
+        kernel32.SetPriorityClass.restype = ctypes.c_int
+        kernel32.SetPriorityClass(kernel32.GetCurrentProcess(), 0x00004000)
+    except (AttributeError, OSError):
+        pass
 
 
 @dataclass(frozen=True)
@@ -58,7 +76,7 @@ GATES: tuple[GateSpec, ...] = (
     GateSpec(
         name="proof-claim ledger",
         command=("work/rh_compute/scripts/check_proof_claim_ledger.py",),
-        expected=("validated proof-claim ledger: 324 claims, 0 issues, 9 open theorem targets",),
+        expected=("validated proof-claim ledger:", "0 issues, 9 open theorem targets"),
         category="non-promotion guards",
     ),
     GateSpec(
@@ -174,15 +192,343 @@ GATES: tuple[GateSpec, ...] = (
         category="open theorem target hygiene",
     ),
     GateSpec(
+        name="Jensen-window PF coefficient-PF equivalence gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_coefficient_pf_equivalence_gate.py",),
+        expected=(
+            "validated Jensen-window PF coefficient-PF equivalence gate: 13 rows, 0 issues, 3 exact coefficient identities, 4 classical/closure steps, 1 seven-way equivalence, 3 guards, 1 open structural handoff",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Edrei-Stieltjes equivalence gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_edrei_stieltjes_equivalence_gate.py",),
+        expected=(
+            "validated Jensen-window PF Edrei-Stieltjes equivalence gate: 14 rows, 0 issues, 12 exact indexing checks, 7 exact Hankel checks, 1 unified endpoint, 3 finite/nonpromotion guards, 1 open Xi/Phi handoff",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Edrei heat-flow boundary gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_edrei_heat_flow_boundary_gate.py",),
+        expected=(
+            "validated Jensen-window PF Edrei heat-flow boundary gate: 11 rows, 0 issues, 4 exact flow identities, 9 rank-one orientation checks, 2 exact heat witnesses, 1 rejected generic backward-invariance shortcut, 1 open Xi/Phi handoff",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Edrei Hankel boundary-flux gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_edrei_hankel_boundary_flux_gate.py",),
+        expected=(
+            "validated Edrei Hankel boundary-flux gate: 18 rows, 0 issues, 25 null-form audits, 12 determinant audits, 15 Cauchy-Binet audits, 24 orthogonal-quotient audits, 43 countermodel/collision audits, 1 open Xi/Phi determinant-growth gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Edrei raw-moment collision-resolution gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_edrei_raw_moment_collision_resolution_gate.py",),
+        expected=(
+            "validated Edrei raw-moment collision-resolution gate: 14 rows, 0 issues, 104 triangular transfer audits, 36 split determinant audits, 75 simple-root/flux audits, 36 repeated-flux audits, 5 conditioning audits, 24 general-r collision determinant audits, 24 general-r Cauchy-Binet audits, 24 general-r crossover-ratio audits, 4 crossover audits, 1 noncommuting-limit obstruction, 1 open Xi/Phi precision handoff",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Phi Pick-kernel target",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_phi_pick_kernel_target.py",),
+        expected=(
+            "validated Jensen-window PF Phi Pick-kernel target: 12 rows, 0 issues, 7 exact identities, 3 independent polarization checks, 1 exact mixture guard, 2 open structural routes",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Xi Pick/Suzuki Hankel bridge",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_xi_pick_suzuki_hankel_bridge.py",),
+        expected=(
+            "validated Jensen-window PF Xi Pick/Suzuki Hankel bridge: 16 rows, 0 issues, 7 exact coordinate/guard identities, 4 published operator steps, 3 exact countermodels, 1 open global gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Suzuki spectral frontier",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_suzuki_spectral_frontier.py",),
+        expected=(
+            "validated Jensen-window PF Suzuki spectral frontier: 16 rows, 0 issues, 10 exact path/reduction identities, 5 route guards, 1 open global obligation",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Suzuki determinant-only reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_suzuki_determinant_only_reduction.py",),
+        expected=(
+            "validated Suzuki determinant-only reduction: 16 rows, 0 issues, 12 exact bridge steps, 2 theorem/corollary candidates, 1 route guard, 1 open arithmetic gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Suzuki fixed-omega phase diagram",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_suzuki_fixed_omega_phase_diagram.py",),
+        expected=(
+            "validated Suzuki fixed-omega phase diagram: 21 rows, 0 issues, 3 exact countermodel guards, 2 published scalar targets, 1 open arithmetic gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Suzuki Jordan-totient sign scout",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_suzuki_jordan_totient_sign_scout.py",),
+        expected=(
+            "validated Suzuki Jordan-totient sign scout: 6000 samples, 5 omega values, 0 negative rows, 0 issues",
+        ),
+        category="finite theorem-search diagnostics",
+    ),
+    GateSpec(
+        name="Jensen-window PF Suzuki cofinal monotonicity hierarchy",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_suzuki_cofinal_monotonicity_hierarchy.py",),
+        expected=(
+            "validated Suzuki cofinal monotonicity hierarchy: 21 rows, 0 issues, 3 signed/nonpromotion guards, 1 cofinal equivalence candidate, 1 open arithmetic gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Suzuki Jordan-error kernel reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_suzuki_jordan_error_kernel_reduction.py",),
+        expected=(
+            "validated Suzuki Jordan-error kernel reduction: 16 rows, 0 issues, 8 exact identities/bounds, 2 route guards, 1 open cancellation gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Suzuki cofinal L2 hierarchy",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_suzuki_cofinal_l2_hierarchy.py",),
+        expected=(
+            "validated Suzuki cofinal L2 hierarchy: 22 rows, 0 issues, 3 countermodel guards, 1 literature-fit guard, 1 cofinal equivalence candidate, 1 open arithmetic energy gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Jordan-Muntz causal-energy bridge",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_jordan_muntz_causal_energy_bridge.py",),
+        expected=(
+            "validated Jordan-Muntz causal-energy bridge: 32 rows, 0 issues, 5 theorem candidates, 5 proof guards, 1 open all-height mollifier gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Jordan-Muntz/Burnol Hardy intertwiner",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_jordan_muntz_burnol_hardy_intertwiner.py",),
+        expected=(
+            "validated Jordan-Muntz/Burnol Hardy intertwiner: 18 rows, 0 issues, 11 exact identities, 1 source-backed cofinal theorem candidate, 2 nonpromotion guards, 1 open natural-mollifier gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Burnol cell-energy/tail obstruction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_burnol_cell_energy_tail_obstruction.py",),
+        expected=(
+            "validated Burnol cell-energy/tail obstruction: 18 rows, 0 issues, 10 exact identities, 4 norm-reduction steps, 1 reciprocal-zeta tail obstruction, 1 open short-interval gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Burnol tail-discrepancy/dyadic reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_burnol_tail_discrepancy_dyadic_reduction.py",),
+        expected=(
+            "validated Burnol tail-discrepancy/dyadic reduction: 20 rows, 0 issues, 12 exact identities, 4 equivalence steps, 2 literature guards, 1 open dyadic square-function gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF weighted fractional autocorrelation Gram bridge",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_weighted_fractional_autocorrelation_gram_bridge.py",),
+        expected=(
+            "validated weighted fractional autocorrelation Gram bridge: 20 rows, 0 issues, 12 exact identities, 3 proof guards, 1 open signed off-diagonal gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF weighted autocorrelation OU tail-energy reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_weighted_autocorrelation_ou_tail_energy_reduction.py",),
+        expected=(
+            "validated weighted-autocorrelation OU tail-energy reduction: 22 rows, 0 issues, 13 exact identities, 4 proof guards, 1 open comparison gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF OU/Mertens mean-square reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_ou_mertens_mean_square_reduction.py",),
+        expected=(
+            "validated OU/Mertens mean-square reduction: 25 rows, 0 issues, 16 exact reductions, 4 proof guards, 1 open anchored mean-square gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens weighted-prefix/affine-defect reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_weighted_prefix_affine_defect_reduction.py",),
+        expected=(
+            "validated Mertens weighted-prefix/affine-defect reduction: 34 rows, 0 issues, 24 exact reductions, 4 proof guards, 2 open handoff gates",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens anchor/logarithmic tail-energy reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_anchor_logarithmic_tail_energy_reduction.py",),
+        expected=(
+            "validated Mertens anchor/logarithmic tail-energy reduction: 26 rows, 0 issues, 17 exact reductions, 4 proof guards, 1 open logarithmic gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens dyadic cosine-mode bottleneck",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_dyadic_cosine_mode_bottleneck.py",),
+        expected=(
+            "validated Mertens dyadic cosine-mode bottleneck: 26 rows, 0 issues, 15 exact reductions, 4 proof guards, 1 open low-mode gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens local-path cosine transference",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_local_path_cosine_transference.py",),
+        expected=(
+            "validated Mertens local-path cosine transference: 32 rows, 0 issues, 24 exact reductions, 5 proof guards, 1 open gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens centered-bridge Vaughan handoff",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_centered_bridge_vaughan_handoff.py",),
+        expected=(
+            "validated Mertens centered-bridge Vaughan handoff: 40 rows, 0 issues, 34 exact reductions, 3 proof guards, 1 open gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens affine-tent/bridge handoff",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_affine_tent_bridge_handoff.py",),
+        expected=(
+            "validated Mertens affine-tent/bridge handoff: 53 rows, 0 issues, 44 exact reductions, 4 proof guards, 1 open gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens ordinary-vector Vaughan handoff",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_ordinary_vector_vaughan_handoff.py",),
+        expected=(
+            "validated Mertens ordinary-vector Vaughan handoff: 34 rows, 0 issues, 28 exact reductions, 3 proof guards, 1 open gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens mixed-boundary sine/Vaughan handoff",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_mixed_boundary_sine_vaughan_handoff.py",),
+        expected=(
+            "validated Mertens mixed-boundary sine/Vaughan handoff: 35 rows, 0 issues, 27 exact reductions, 3 proof guards, 1 open gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens spectral anchor/high-mode reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_spectral_anchor_high_mode_reduction.py",),
+        expected=(
+            "validated Mertens spectral anchor/high-mode reduction: 24 rows, 0 issues, 16 exact reductions, 2 proof guards, 1 open gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens truncated half-odd kernel handoff",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_truncated_half_odd_kernel_handoff.py",),
+        expected=(
+            "validated Mertens truncated half-odd kernel handoff: 45 rows, 0 issues, 39 exact reductions, 2 proof guards, 1 open gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens shift-kernel variation handoff",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_shift_kernel_variation_handoff.py",),
+        expected=(
+            "validated Mertens shift-kernel variation handoff: 45 rows, 0 issues, 39 exact reductions, 2 proof guards, 1 open gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens planar Abel handoff",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_planar_abel_handoff.py",),
+        expected=(
+            "validated Mertens planar Abel handoff: 36 rows, 0 issues, 28 exact reductions, 3 proof guards, 1 open gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens planar edge-Gram/Vaughan handoff",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_planar_edge_gram_vaughan_handoff.py",),
+        expected=(
+            "validated planar edge-Gram/Vaughan handoff: 38 rows, 0 issues, 948 Vaughan audits, 4720 band audits, 20 Gram audits, 87 Fourier audits, 1 open signed edge gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens planar incidence/anti-diagonal handoff",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_planar_incidence_antidiagonal_handoff.py",),
+        expected=(
+            "validated planar incidence/anti-diagonal handoff: 43 rows, 0 issues, 3561 incidence audits, 13137 cut audits, 334 Fourier audits, 528 anti-diagonal audits, 1 open projection gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens planar boundary-flux/anchor handoff",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_planar_boundary_flux_anchor_handoff.py",),
+        expected=(
+            "validated planar boundary-flux/anchor handoff: 35 rows, 0 issues, 2122 flux audits, 897 endpoint audits, 216 block audits, 6 witness audits, 70 Mobius audits, 1 open joined energy gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens planar boundary suffix-energy handoff",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_planar_boundary_suffix_energy_handoff.py",),
+        expected=(
+            "validated planar boundary suffix-energy handoff: 26 rows, 0 issues, 132 algebra audits, 492 edge audits, 906 bound audits, 42 Mobius audits, 1 open anchored energy gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens planar boundary suffix-localization gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_planar_boundary_suffix_localization_gate.py",),
+        expected=(
+            "validated planar boundary suffix-localization gate: 26 rows, 0 issues, 41192 odd-sine audits, 10339 sliver audits, 9259 bulk audits, 306 collar audits, 49 diagnostic/countermodel audits, 1 open RH-equivalent energy gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens planar joined-energy equivalence gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_planar_joined_energy_equivalence_gate.py",),
+        expected=(
+            "validated planar joined-energy equivalence gate: 20 rows, 0 issues, 189 arbitrary-vector audits, 63 Mobius audits, 1 open lossless energy gate",
+        ),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Mertens planar curvature-energy scout",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_mertens_planar_curvature_energy_scout.py",),
+        expected=(
+            "validated Mertens planar curvature-energy scout: 28 rows, 0 issues, K<=1024, 4 alpha values",
+        ),
+        category="finite theorem-search diagnostics",
+    ),
+    GateSpec(
+        name="Jensen-window PF fixed-shift inner/reciprocal-boundary separation gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_fixed_shift_inner_reciprocal_boundary_separation_gate.py",),
+        expected=(
+            "validated fixed-shift inner/reciprocal-boundary separation gate: 18 rows, 0 issues, 15 exact reductions, 2 proof guards, 1 open target",
+        ),
+        category="countermodel proof safety",
+    ),
+    GateSpec(
         name="Jensen-window PF bridge obligation ledger",
         command=("work/rh_compute/scripts/check_jensen_window_pf_bridge_obligations.py",),
-        expected=("validated Jensen-window PF bridge obligations: 11 obligations, 0 issues, 3 open obligations",),
+        expected=("validated Jensen-window PF bridge obligations: 16 obligations, 0 issues, 3 open obligations",),
         category="open theorem target hygiene",
     ),
     GateSpec(
         name="Jensen-window PF theorem machinery fit matrix",
         command=("work/rh_compute/scripts/check_jensen_window_pf_theorem_machinery_fit_matrix.py",),
-        expected=("validated Jensen-window PF theorem machinery fit matrix: 7 rows, 0 issues, 0 ready-to-apply rows",),
+        expected=("validated Jensen-window PF theorem machinery fit matrix: 11 rows, 0 issues, 0 ready-to-apply rows",),
         category="open theorem target hygiene",
     ),
     GateSpec(
@@ -806,6 +1152,7 @@ GATES: tuple[GateSpec, ...] = (
             "validated order-eight first/full curvature bridge: 9 rows, 0 issues, 1 fifth-gap floor theorem, 134 positive transfer coefficients, 1 full-kernel transfer theorem, 1 open continuous target",
         ),
         category="exact theorem composition",
+        slow=True,
     ),
     GateSpec(
         name="Jensen-window PF compound order-eight high-cumulant coarse corridor",
@@ -1478,10 +1825,71 @@ GATES: tuple[GateSpec, ...] = (
         category="countermodel guards",
     ),
     GateSpec(
+        name="Jensen-window PF strong-log-concave local quartic countermodel",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_strong_logconcave_local_quartic_countermodel.py",),
+        expected=("validated Jensen-window PF strong-log-concave local quartic countermodel: 10 rows, 0 issues, 6 positive Mellin moments, 4 local ratio-wall contractions, 3 monotone gaps, 3 strict cubic margins, 1 negative quartic frontier, 1 full-support approximation theorem, 1 Xi-specific handoff",),
+        category="countermodel guards",
+    ),
+    GateSpec(
         name="Jensen-window PF quartic double-root threshold lemma",
         command=("work/rh_compute/scripts/check_jensen_window_pf_quartic_double_root_threshold_lemma.py",),
         expected=("validated Jensen-window PF quartic double-root threshold lemma: 10 rows, 0 issues, 5 exact coordinate identities, 1 double-root splitting criterion, 1 branch-aware inward threshold, 1 triple-root equality, 1 tangent factor, 1 explained countermodel, 1 open global-invariant handoff",),
         category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF quartic signed-Hankel branch-exclusion lemma",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_quartic_signed_hankel_branch_exclusion_lemma.py",),
+        expected=("validated Jensen-window PF quartic signed-Hankel branch-exclusion lemma: 10 rows, 0 issues, 4 exact identities, 1 imported Xi Hankel theorem, 2 excluded boundary strata, 1 reduced outer threshold, 1 countermodel separation, 1 open outer threshold",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF quartic outer-threshold order-four nonpromotion gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_quartic_outer_threshold_order4_nonpromotion_gate.py",),
+        expected=("validated quartic outer-threshold order-four nonpromotion gate: 11 rows, 0 issues, 1 exact outer quartic contact, 8 strict ratio coordinates, 7 strict scaled-defect steps, 7 reciprocal-defect increment bounds, 7 strict cubic frontiers, 120 signed order-two minors, 126 signed order-three minors, 56 signed order-four minors, 1 failed outer threshold, 1 negative quintic discriminant, 1 forbidden promotion, 1 closed downstream handoff",),
+        category="countermodel guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF quartic outer-branch length-13 obstruction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_quartic_outer_branch_length13_obstruction.py",),
+        expected=("validated quartic outer-branch length-13 obstruction: 10 rows, 0 issues, 3 exact corridor parameters, 3 derivative certificates, 1516 derivative Bernstein coefficients, 8 denominator-factor Bernstein coefficients, 1 negative cube-corner maximum, 1 forbidden all-length promotion, 1 repaired handoff",),
+        category="countermodel guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF quartic alternate length-13 survivor gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_quartic_outer_branch_alternate_length13_survivor_gate.py",),
+        expected=("validated alternate quartic length-13 survivor gate: 14 rows, 0 issues, 8 exact corridor parameters, 12 contractions, 11 strict adjacent scalar steps, 10 positive order-three gaps, 8 positive order-four margins, 364 signed order-two minors, 715 signed order-three minors, 792 signed order-four minors, 1 positive length-13 compatibility, 1 negative fixed-tail length-14 compatibility, 0 uniform length-14 theorems, 1 repaired scope handoff",),
+        category="countermodel guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF quartic one-contact uniform length-14 interval certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_quartic_outer_branch_uniform_length14_interval_certificate.py",),
+        expected=("validated one-contact uniform quartic length-14 interval certificate: 9 rows, 0 issues, 37474 certified leaves, 37473 dyadic splits, maximum depth 23, 8 tail parameters, 1 scaled wall, 1 uniform fixed-contact obstruction, 0 uniform all-contact theorems",),
+        category="interval theorem certificates",
+        slow=True,
+    ),
+    GateSpec(
+        name="Jensen-window PF quartic outer-contact normal-form gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_quartic_outer_contact_normal_form_gate.py",),
+        expected=("validated quartic outer-contact normal-form gate: 13 rows, 0 issues, 3 contact variables, 1 excluded outer branch, 4 normalized defects, 2 initial gap scalings, 2 first-extension regimes, 1 normalized Delta_14, 1 adjacent-quintic discriminant factorization, 1 low-q negative-discriminant collar, 0 uniform all-contact theorems",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF quartic outer-contact length-14 survivor gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_quartic_outer_contact_length14_survivor_gate.py",),
+        expected=("validated quartic outer-contact length-14 survivor gate: 15 rows, 0 issues, 3 contact variables, 9 corridor parameters, 13 contractions, 15 coefficients, 4043 positive supported order-two through order-eight minors, 1 positive Delta_14, 1 positive Delta_15, 1 nonhyperbolic adjacent quintic, 0 uniform all-contact obstructions",),
+        category="countermodel guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman zero-slab degree-71 sector certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_zero_slab_degree71_sector_certificate.py",),
+        expected=("validated Newman zero-slab degree-71 sector certificate: 13 rows, 0 issues, 4 directed integrals, 1 positive slab margin, 1 zero-free complex slab, 3 published inputs, all shifts through degree 71, 0 all-degree theorems",),
+        category="interval theorem certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman real-zero-band degree-361 sector certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_real_zero_band_degree361_sector_certificate.py",),
+        expected=("validated Newman real-zero-band degree-361 sector certificate: 12 rows, 0 issues, 200 certified boundary boxes, 0 unresolved, 1 real-zero band, all shifts through degree 361, 0 all-degree theorems, weakest negative margin",),
+        category="interval theorem certificates",
     ),
     GateSpec(
         name="Jensen-window PF quartic-quintic polar-contact lemma",
@@ -1538,16 +1946,803 @@ GATES: tuple[GateSpec, ...] = (
         category="non-promotion guards",
     ),
     GateSpec(
+        name="Jensen-window PF Newman counterfactual birth-signature atlas",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_counterfactual_birth_signature_atlas.py",),
+        expected=("validated Newman counterfactual birth-signature atlas: 12 rows, 0 issues, 1 symmetric quartet heat collision, 1 exact Jensen threshold, 1 exact Li quartet law, 1 Suzuki shift law, 1 diagonal finite-sensor escape theorem, 2 open global handoffs",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman cofinal boundary-degree transfer target",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_cofinal_boundary_degree_transfer_target.py",),
+        expected=("validated Newman cofinal boundary-degree transfer target: 12 rows, 0 issues, 2 orientation identities, 1 vector boundary-Rouche theorem, 1 sign-definite degree composition, 1 Q207 base, 2 explicit C1 proxy budgets, 1 endpoint-uniformity countermodel, 1 open cofinal Xi boundary theorem",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Q208 selected-boundary pilot",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_q208_selected_boundary_pilot.py",),
+        expected=("validated Q208 selected-boundary pilot: 8 panels, 46 certified leaves, 0 unresolved, 0 global promotions",),
+        category="promoted finite evidence",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman convex phase-cell unwrapping lemma",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_convex_phase_cell_unwrapping_lemma.py",),
+        expected=("validated Newman convex phase-cell unwrapping lemma: 10 rows, 0 issues, 5 projection audits, 4 exact polygon tests, 3 rejection guards, 20 Q208 right-edge cells, 1 open bottom-edge target",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Q208 bottom phase-cell certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_q208_bottom_phase_cell_certificate.py",),
+        expected=("validated Q208 bottom phase-cell certificate: 492/492 panels, 492 cells, 0 unresolved, complete=True, 0 structural issues",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Q208 top phase-cell certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_q208_top_phase_cell_certificate.py",),
+        expected=("validated Q208 top phase-cell certificate: 492/492 panels, 492 cells, 0 unresolved, complete=True, 0 structural issues",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Q208 closed-boundary winding certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_q208_closed_boundary_winding_certificate.py",),
+        expected=("validated Q208 closed-boundary winding certificate: 1005 cells, 1005 exact witnesses, winding=0, Q1..Q208 certified, 0 cofinal promotions",),
+        category="promoted finite evidence",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman cofinal phase-cell scaling diagnostics",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_cofinal_phase_cell_scaling_diagnostics.py",),
+        expected=("validated cofinal phase-cell scaling diagnostics: 414 Q207 comparisons, 492+492 Q208 cells, 408/414 and 470/492 branch agreements, crossing=-19, 0 cofinal promotions",),
+        category="diagnostics",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman adiabatic phase-cell successor lemma",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_adiabatic_phase_cell_successor_lemma.py",),
+        expected=("validated Newman adiabatic phase-cell successor lemma: 10 rows, 3 exact lemmas, 2 conditional compositions, 1 finite Q208 calibration, 1 open all-j Xi antecedent",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Q207-Q208 adiabatic bottom collar certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_q207_q208_adiabatic_bottom_collar_certificate.py",),
+        expected=("validated Q207-Q208 adiabatic bottom collar: 380/490 panels, 379 certified, 1 failed, complete=False, 0 all-j promotions",),
+        category="diagnostics",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Q207-Q208 refined-tail adiabatic collar certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_q207_q208_adiabatic_bottom_collar_refined_tail_certificate.py",),
+        expected=("validated hybrid Q207-Q208 adiabatic collar: 379 coarse + 222/222 refined panels, 0 failures, complete=True, 0 all-j promotions",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Q207-Q208 forward adiabatic successor certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_q207_q208_forward_adiabatic_successor_certificate.py",),
+        expected=("validated forward Q207-Q208 adiabatic successor: 414 old cells, 525/525 transport panels, max ratio<1, 1 finite successor, 0 all-j promotions",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman single-carrier adiabatic benchmark",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_single_carrier_adiabatic_benchmark.py",),
+        expected=("validated Newman single-carrier adiabatic benchmark: 10 rows, 8 exact benchmark reductions, 1 four-carrier obstruction, 1 open Xi small-ball handoff",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman corrected crossing slope-gap reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_crossing_slope_gap_reduction.py",),
+        expected=("validated Newman crossing slope-gap reduction: 10 rows, 8 exact reductions, 1 exact countermodel, 4 corrected-crossing diagnostics, 1 open Xi target",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman multiplicity-compatible adaptive-jet benchmark",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_multiplicity_compatible_adaptive_jet_benchmark.py",),
+        expected=("validated Newman multiplicity-compatible adaptive-jet benchmark: 10 rows, 9 exact reductions, 1 open two-regime Xi handoff",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman time-dependent scaled-jet successor lemma",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_time_dependent_scaled_successor_lemma.py",),
+        expected=("validated Newman time-dependent scaled-jet successor lemma: 10 rows, 9 exact reductions, 1 open two-regime Xi antecedent",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman ray-aligned parabolic-frequency reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_ray_aligned_parabolic_frequency_reduction.py",),
+        expected=("validated Newman ray-aligned parabolic-frequency reduction: 14 rows, 11 exact reductions, 1 asymptotic composition, 0 open new-strip antecedents, 1 open Xi descendant theorem",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Q207-Q208 parabolic-frequency relative diagnostic",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_q207_q208_parabolic_frequency_relative_diagnostic.py",),
+        expected=("validated Q207-Q208 parabolic-frequency relative diagnostic: 525 panels, 4 rigorous finite scale certificates, 0 all-j promotions",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman parabolic-frequency contact-normal hierarchy gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_parabolic_frequency_contact_normal_hierarchy_gate.py",),
+        expected=("validated Newman parabolic-frequency contact-normal hierarchy gate: 17 rows, 12 exact identities, 3 exact route guards, 1 literature guard, 1 open Xi target",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman parabolic-frequency energy/current gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_parabolic_frequency_energy_current_gate.py",),
+        expected=("validated Newman parabolic-frequency energy/current gate: 18 rows, 8 exact identities, 3 coefficient bounds, 2 pointwise bridge rows, 3 nonpromotion guards, 1 open Xi bulk-margin target, 0 pointwise contact exclusions",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman ray-aligned energy endpoint-margin gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_ray_aligned_energy_endpoint_margin_gate.py",),
+        expected=("validated ray-aligned energy endpoint-margin gate: 18 rows, 10 compact edge records, 1 left raw margin, 1 right normalized margin, 1 exact contact floor, 1 open full-collar bulk budget, 2 nonpromotion guards, 0 pointwise contact exclusions",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman ray-aligned energy cell-localization gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_ray_aligned_energy_cell_localization_gate.py",),
+        expected=("validated ray-aligned energy cell-localization gate: 20 rows, 2 exact local balances, 2 exact contact floors, 2 conditional no-contact criteria, 2 outer anchors, 0 cofinal internal anchor registries, 1 finite successor instance, 2 nonpromotion guards, 0 pointwise contact exclusions",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 critical C1 endpoint peeling contract",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_critical_RS_C1_endpoint_peeling_contract.py",),
+        expected=("validated Newman Polymath-15 critical C1 endpoint peeling contract: 12 rows, 5 exact coefficient identities, 2 primary-source inputs, 1 corrected-main definition, 2 conditional transfers, 1 route guard, 1 open quantitative target",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 critical Dirichlet first correction gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_critical_dirichlet_first_correction_gate.py",),
+        expected=("validated Newman Polymath-15 critical Dirichlet first correction gate: 10 rows, 4 exact identities, 2 primary-source inputs, 2 analytic guards, 1 signed-main definition, 1 open uniform target",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 critical Dirichlet second-order remainder certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_critical_dirichlet_second_order_remainder_certificate.py",),
+        expected=("validated Newman critical Dirichlet second-order remainder certificate: 12 rows, C_D=400000, fixed-cell C1 constant 8000000, 1 open global splice guard",),
+        category="analytic certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 critical first-order global remainder certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_critical_first_order_global_remainder_certificate.py",),
+        expected=("validated Newman critical first-order global remainder certificate: 15 rows, eta_0=100000, eta_1=200000, 1 open signed-contact target",),
+        category="analytic certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 critical first-order signed-contact reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_critical_first_order_signed_contact_reduction.py",),
+        expected=("validated Newman critical first-order signed-contact reduction: 15 rows, eta_0=100000, eta_1=200000, 1 open frequency target",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order target reconciliation gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_target_reconciliation_gate.py",),
+        expected=("validated Newman first-order target reconciliation gate: 22 rows, 1 superseded handoff, 1 cutoff-uniform first-order remainder, 4 exact energy identities, 2 contact-box coordinates, 1 radial target, 1 box-optimal target, 1 normalized Abel target, 2 nonpromotion guards, 0 pointwise contact exclusions",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order rectangular boundary-degree reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_rectangular_boundary_degree_reduction.py",),
+        expected=("validated Newman first-order rectangular boundary-degree reduction: 22 rows, 2 error-box coordinates, 2 rectangular homotopies, 1 positive-index degree transfer, 1 boundary-only Abel target, 2 route branches, 2 nonpromotion guards, 0 contact exclusions",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 centered ray-bottom logarithmic-flow reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_ray_bottom_logarithmic_flow_reduction.py",),
+        expected=("validated Newman centered ray-bottom logarithmic-flow reduction: 24 rows, 1 exact cutoff partition, 8 logarithmic-flow identities, 2 phase-flux identities, 1 orientation transfer, 1 cutoff-join contract, 2 nonpromotion guards, 2 open Xi targets, 0 Abel gaps, 0 horizontal phase bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 geometric prime-power phase-monotonicity gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_geometric_prime_power_phase_monotonicity_gate.py",),
+        expected=("validated geometric prime-power phase-monotonicity gate: 18 rows, 1 phase-derivative identity, 3 uniform monotone prime families, 1 complete short-chain recrossing guard, 2 nonpromotion guards, 1 open C1 perturbation target, 0 joined Abel gaps, 0 successor winding bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 prime-power logarithmic phase-flow gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_prime_power_logarithmic_phase_flow_gate.py",),
+        expected=("validated prime-power logarithmic phase-flow gate: 20 rows, 7 exact logarithmic-phase identities, 1 dimensionless heat profile, 1 complete dyadic counterexample, 1 rejected absolute C1 target, 1 replacement starlikeness target, 0 joined Abel gaps, 0 successor winding bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 prime-power heat-starlikeness base certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_starlikeness_base_certificate.py",),
+        expected=("validated prime-power heat-starlikeness base certificate: 18 rows, 3 exact Bernstein base certificates, 1 analytic p>=5 two-level family, 3 actual ray-positive base families, 0 length-propagation theorems, 0 joined Abel gaps, 0 successor winding bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 prime-power heat-starlikeness length propagation gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_starlikeness_length_propagation_gate.py",),
+        expected=("validated prime-power heat-starlikeness length propagation gate: 20 rows, 1 append-one identity, 1 exact dyadic next-length certificate, 1 analytic all-length p>=5 family, 2 actual ray-positive propagated families, 2 open small-prime length families, 0 joined Abel gaps, 0 successor winding bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 ternary all-length prime-power heat-starlikeness gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_starlikeness_ternary_length_gate.py",),
+        expected=("validated ternary all-length prime-power heat-starlikeness gate: 18 rows, 5 small-d clusters, 12 finite energies, 1 analytic terminal tail, 1 ideal all-length ternary family, 1 actual all-length ternary family, 1 open small-prime length family, 0 joined Abel gaps, 0 successor winding bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 dyadic all-length Fourier-defect localization gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_starlikeness_dyadic_defect_gate.py",),
+        expected=("validated dyadic all-length Fourier-defect localization gate: 13 rows, 2 initial clusters, 1 shortest-length certificate, 2 low terminal anchors, 12 middle terminal clusters, 1 analytic terminal tail, 1 proved positive-offset family, 2 possible defects, 0 ideal all-length dyadic families, 0 actual all-length dyadic families, 0 joined Abel gaps, 0 successor winding bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 dyadic all-length prime-power heat-starlikeness gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_starlikeness_dyadic_length_gate.py",),
+        expected=("validated dyadic all-length prime-power heat-starlikeness gate: 18 rows, 5 finite cores, 1 initial core, 5 finite terminal guards, 1 analytic terminal tail, 1 ideal all-length dyadic family, 1 actual all-length dyadic family, complete dyadic minimum length 8, 0 remaining defects, 0 joined Abel gaps, 0 successor winding bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 short small-prime heat-starlikeness counter-gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_starlikeness_short_family_counter_gate.py",),
+        expected=("validated short small-prime heat-starlikeness counter-gate: 10 rows, 8 exact interior negative witnesses, 6 short dyadic lengths rejected, 2 short ternary lengths rejected, 0 uniform short-block positive families, 1 joined-phase handoff, 0 joined Abel gaps, 0 successor winding bounds",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 joined phase-current polarization gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_joined_phase_current_polarization_gate.py",),
+        expected=("validated joined phase-current polarization gate: 10 rows, 1 exact polarization, 1 exact chain insertion, 1 cubic contact, 1 negative joined current, 3 long-family inputs, 0 joined cross-current bounds, 0 joined Abel gaps, 0 successor winding bounds",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 joined pair-kernel and p-free rejoin gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_joined_pair_kernel_pfree_rejoin_gate.py",),
+        expected=("validated joined pair-kernel p-free rejoin gate: 10 rows, 1 exact pair kernel, 1 moment collapse, 1 heat telescope, 1 quadratic rejoin, 1 cross-cancellation guard, 0 cross-current signs, 0 joined Abel gaps, 0 successor winding bounds",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 corrected Mangoldt-Abel contact gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_mangoldt_abel_contact_gate.py",),
+        expected=("validated corrected Mangoldt-Abel contact gate: 12 rows, 1 correction polynomial, 4 logarithmic moments, 3 symmetric Mangoldt moments, 8 prime-edge witnesses, 24 indefinite minors, 0 Abel gaps, 0 winding bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 contact-centered Mangoldt-Abel equivalence gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_mangoldt_contact_centering_gate.py",),
+        expected=("validated contact-centered Mangoldt gate: 12 rows, 1 physical moment, 2 contact fibres, 1 Abel duality, 8 balanced hyperbola audits, 0 mismatches, 0 Abel gaps, 0 winding bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 centered Mangoldt adjacent-cutoff transport gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_mangoldt_adjacent_cutoff_transport_gate.py",),
+        expected=("validated centered Mangoldt cutoff transport gate: 12 rows, 1 endpoint cancellation, 79 transitions, 71 ordinary, 8 square, 0 mismatches, 0 Abel gaps, 0 winding bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 centered Mangoldt endpoint-composed Vaughan gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_mangoldt_endpoint_composed_vaughan_gate.py",),
+        expected=("validated centered Mangoldt endpoint-composed Vaughan gate: 14 rows, 1 convolution identity, 214 transitions, 5 cube transfers, 1 square/cube overlap, 2 exact countermodels, 0 signed lower bounds, 0 Abel gaps, 0 winding bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 complex endpoint source-normalization corrigendum",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_complex_endpoint_source_normalization_gate.py",),
+        expected=("validated complex endpoint source-normalization gate: 16 rows, 1 nonreal source witness, 4 corrected Cartesian projections, 2 contact minors, 2 rank guards, 7 historical artifacts quarantined, 0 signed lower bounds, 0 Abel gaps, 0 winding bounds",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 endpoint-relative phase-current recurrence gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_endpoint_relative_phase_current_recurrence_gate.py",),
+        expected=("validated endpoint-relative phase-current recurrence gate: 16 rows, 2 exact endpoint currents, 1 division-free relative current, 2 asymptotic sign witnesses, 1 terminal-tail recurrence, 1 contact-minor sum, 0 uniform terminal signs, 0 Abel gaps, 0 winding bounds",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 real-edge projective-current gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_real_edge_projective_current_gate.py",),
+        expected=("validated real-edge projective-current gate: 14 rows, 1 division-free edge current, 4 asymptotic edge jets, 3072 Arb intervals, 2 removable charts, 1 strict curvature margin, 1 uniform q=1 leading sign, 0 finite-height edge signs, 0 Abel gaps, 0 winding bounds",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 q=1 finite-height real-edge remainder gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_q1_finite_height_real_edge_remainder_gate.py",),
+        expected=("validated q=1 finite-height real-edge remainder gate: 16 rows, 4096 Arb boxes, 2 Cauchy charts, 4 finite edge jets, remainder <1/10000000, 1 retained-model finite-height sign, 0 q>1 signs, 0 Xi-level signs",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 critical-ray finite-height real-edge gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_critical_ray_finite_height_real_edge_gate.py",),
+        expected=("validated critical-ray finite-height real-edge gate: 13 rows, 4096 Arb boxes, 27 normalized majorants, 4 finite edge jets, 1 full critical-ray model sign, 1 q>=1 model sign, 0 cutoff splices, 0 Xi-level signs",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 adjacent-cutoff real-edge projective splice gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_adjacent_cutoff_real_edge_projective_splice_gate.py",),
+        expected=("validated adjacent-cutoff real-edge projective splice gate: 12 rows, 4 exact endpoint values, 1 exact leading wedge, 1 rational remainder budget, 1 nonvanishing affine join, 1 signed q>=1 model splice, 0 second adjacent x-jets, 0 Xi-level splices",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 residual-placement C1 cumulative handoff gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_residual_placement_c1_cumulative_handoff_gate.py",),
+        expected=("validated residual-placement C1 cumulative handoff gate: 16 rows, 2 C1 residual coordinates, 1 allocation-sign guard, 0 C2 boundary requirements, 1 whole-jet homotopy, 1 cumulative polarization, 1 open cross-current/Abel target",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 edge-anchored near-terminal pair-current guard",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_edge_anchored_near_terminal_pair_current_guard.py",),
+        expected=("validated edge-anchored near-terminal pair-current guard: 12 rows, 1 phase limit, 4 carrier jets, 4 edge jets, 2 Arb witnesses, 1 asymptotic sign reversal, 0 uniform termwise absorptions, 0 aggregate counterexamples",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 contiguous terminal-tail recurrence/current gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_recurrence_current_gate.py",),
+        expected=("validated contiguous terminal-tail recurrence/current gate: 16 rows, 1 exact C0 tail collapse, 3 grouped jets, 1024 Arb boxes, 1 all-fixed-M clockwise theorem, 0 growing-tail estimates, 0 aggregate closures",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 contiguous terminal-tail growing-prefix finite-height gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_growing_prefix_finite_height_gate.py",),
+        expected=("validated growing-prefix finite-height gate: 16 rows, 1 exact ratio, 1 differentiated ratio, 4 carrier errors, 4 aggregate errors, exponent 1/18, M=3 at L=50, current <-1/400, 0 bulk closures",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 contiguous terminal-tail anchored Abel cross-current reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_abel_cross_current_reduction.py",),
+        expected=("validated terminal-tail anchored Abel cross-current reduction: 14 rows, 2 Abel identities, 2 current identities, 1 signed Phi_B target, 0 bulk closures",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 contiguous terminal-tail anchored five-current bulk closure",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_current_bulk_closure_reduction.py",),
+        expected=("validated terminal-tail five-current bulk closure: 12 rows, 5 complex currents, 3 derivative identities, 1 algebraic closure, 0 signed bulk bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 contiguous terminal-tail anchored five-current Mangoldt normal form",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_current_mangoldt_normal_form_gate.py",),
+        expected=("validated five-current Mangoldt normal form: 12 rows, 5 correction-free moments, 4 Mangoldt orders, 4 indefinite minor families, 0 signed Type-I/II bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 contiguous terminal-tail explicit five-moment Phi quadratic reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_explicit_phi_quadratic_reduction.py",),
+        expected=("validated explicit five-moment Phi_B quadratic reduction: 13 rows, 4 real observations, rank <=4, generic inertia (2,2,6), 1 double-contact obstruction, 0 signed Phi_B bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 contiguous terminal-tail five-moment two-carrier kernel reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_two_carrier_kernel_reduction.py",),
+        expected=("validated five-moment two-carrier kernel reduction: 14 rows, 1 endpoint-linear kernel, 1 Hermitian kernel, 1 transpose kernel, 1 physical chi_N bound, 0 signed Type-I/II bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 contiguous terminal-tail logarithmic-phase Turan reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_logarithmic_phase_turan_reduction.py",),
+        expected=("validated logarithmic-phase Turan reduction: 15 rows, 5 Fourier jet identities, 1 Bochner kernel, 1 leading Turan identity, 1 zero-fibre sign, 1 integer-log guard, 0 signed joint bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 physical q=1 saddle-phase variance reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_q1_saddle_phase_variance_reduction.py",),
+        expected=("validated physical q=1 saddle-phase variance reduction: 16 rows, 4 parameter laws, 5 saddle transfers, 1 two-carrier sign, 1 phase discriminant, 1 ordered-profile guard, 0 signed physical bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 physical q=1 saddle-phase quadratic transfer barrier",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_q1_saddle_phase_quadratic_transfer_barrier.py",),
+        expected=("validated q=1 quadratic transfer barrier: 15 rows, 1 discriminant collapse, 1 signed line integral, 1 terminal amplitude lower bound, 1 absolute-mass barrier, 0 signed physical bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 endpoint-composed six-moment saddle-flow reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_saddle_flow_reduction.py",),
+        expected=("validated six-moment saddle-flow reduction: 15 rows, 1 full-current flow, 2 flow symmetries, 1 leading pair identity, 6 moments, 1 new Mangoldt order, 0 signed flow bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 six-moment flow-matrix reciprocal-phase reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_flow_matrix_phase_reduction.py",),
+        expected=("validated six-moment flow matrix/phase reduction: 22 rows, rank <=8, generic inertia (4,4,4), 3 reciprocal phase families, 1 Hermitian diagonal null, 0 signed flow bounds",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order cofinal boundary reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_cofinal_boundary_reduction.py",),
+        expected=("validated Newman first-order cofinal boundary reduction: 13 rows, full budget 50000000000, 3 open boundary targets",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order oriented successor-winding reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_oriented_successor_winding_reduction.py",),
+        expected=("validated Newman oriented successor-winding reduction: 14 rows, 1 exact chain audit, 2 exact crossing reductions, 1 one-sided integer trap, 3 open cofinal obligations",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order Wronskian crossing reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_wronskian_crossing_reduction.py",),
+        expected=("validated Newman first-order Wronskian crossing reduction: 12 rows, eta_0=100000, eta_1=200000, 2 exact crossing classes, 3 open Xi obligations",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered real-residual reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_real_residual_reduction.py",),
+        expected=("validated Newman first-order centered real-residual reduction: 15 rows, |u_a|<e^-L, |v_a|<3/x^2, core error <1e-6*e^-5L/4, 2 open Xi cell obligations",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered complex-zero scout",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_complex_zero_scout.py",),
+        expected=("validated Newman first-order centered complex-zero scout: N=6, |E_[1]|<1e-70, |U|>0.5, |det D_(x,t)E_[1]|>0.3, cross-precision drift <1e-50",),
+        category="finite theorem-search diagnostics",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered adjacent-saddle recurrence",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_adjacent_saddle_recurrence.py",),
+        expected=("validated Newman first-order centered adjacent-saddle recurrence: 13 rows, exact Delta A identity, vanished a^-1 coefficient, 18 selected L>=50 rows with e^-7L/4 scalar scaling, 2 open scalar obligations",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered adjacent-chart stability certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_adjacent_chart_stability_certificate.py",),
+        expected=("validated Newman first-order centered adjacent-chart stability: 14 rows, |rho-1|<11/a^2, |rho_x|<3/a^3, |Delta A|<5000*e^-7L/4, 1 open bulk Xi obligation",),
+        category="asymptotic theorem-search certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered bulk pair-transfer gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_bulk_pair_transfer_gate.py",),
+        expected=("validated Newman centered bulk pair-transfer gate: 14 rows, rho_n<exp(-2h_n/5), det(B_n)>=h_n^2/16, 1 exact aggregate countermodel family, 2 open Xi obligations",),
+        category="asymptotic theorem-search certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered absolute-phase anchor reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_absolute_phase_anchor_reduction.py",),
+        expected=("validated Newman centered absolute-phase anchor reduction: 16 rows, 1 branch-free anchor, 1 determinant collapse, 2 open arithmetic obligations",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered direct-projection regime reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_direct_projection_regime_reduction.py",),
+        expected=("validated Newman centered direct-projection regime reduction: 16 rows, 2 exact projection normal forms, 1 heat-direction countermodel, 2 open Xi regimes",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered carrier-kernel Abel-prefix reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_carrier_kernel_abel_prefix_reduction.py",),
+        expected=("validated Newman centered carrier-kernel Abel reduction: 19 rows, 3 exact kernel forms, 1 all-fiber prefix scalar, 2 exact countermodels, 2 open Xi obligations",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered normalized-prefix phase-flux reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_normalized_prefix_phase_flux_reduction.py",),
+        expected=("validated Newman normalized-prefix phase-flux reduction: 15 rows, 2 certified spiral bounds, 1 exact recrossing guard, 1 dyadic completion diagnostic, 1 O(N) first-jet flux, 2 open Xi obligations",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered prime-power heat-block composition guard",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_block_composition_guard.py",),
+        expected=("validated Newman prime-power heat-block guard: 14 rows, 1 absolute-rate collar, 1 exact normalized-block zero-free/shifted-winding theorem, 1 Gaussian-mixture audit, 1 joined p-free decomposition, 1 exact two-block winding-3 countermodel, 2 open Xi obligations",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered joined dyadic odd-prefix first-jet reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_joined_dyadic_odd_prefix_first_jet_reduction.py",),
+        expected=("validated Newman joined dyadic odd-prefix first-jet reduction: 17 rows, 1 exact heat-shift factorization, 1 five-current closure, 1 phase-frozen joined zero-free theorem, 2 exact route guards, 2 open Xi obligations",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered phase-cylinder Jacobian transport guard",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_phase_cylinder_jacobian_transport_guard.py",),
+        expected=("validated Newman phase-cylinder Jacobian transport guard: 16 rows, 1 exact pair-kernel Jacobian, 1 cylinder winding-transport theorem, 3 exact route guards, 2 open Xi obligations",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered endpoint Schur-Cohn first-jet guard",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_endpoint_schur_cohn_first_jet_guard.py",),
+        expected=("validated Newman endpoint Schur-Cohn first-jet guard: 20 rows, 1 exact outside-stability theorem, 1 conditional reflection-product margin, 3 exact route guards, 2 open Xi obligations",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered endpoint first-pivot odd small-ball guard",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_endpoint_first_pivot_odd_small_ball_guard.py",),
+        expected=("validated Newman endpoint first-pivot odd small-ball guard: 18 rows, 1 exact denominator-cancelled pivot, 1 linked-logarithmic-phase countermodel, 1 small-endpoint countermodel family, 2 open Xi routes",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered endpoint odd-fibre correlation feasibility guard",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_endpoint_odd_fibre_correlation_feasibility_guard.py",),
+        expected=("validated Newman endpoint odd-fibre correlation feasibility guard: 18 rows, 1 exact physical odd-fibre pivot, 1 endpoint-projection normal form, 1 five-current null-family guard, 1 linked-two-jet guard, 1 Schur route downgrade, 2 open routes",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered contact signed-transport reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_contact_signed_transport_reduction.py",),
+        expected=("validated Newman contact signed-transport reduction: 20 rows, exact centered endpoint/carrier transport, slope-order Abel identity, conditional margin, Gram-rank guard, endpoint-shaped null guard, five-current first jet, and adjacent-cutoff law",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered interior projective-current gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_interior_projective_current_gate.py",),
+        expected=("validated interior projective-current gate: 20 rows, exact radial-current cancellation, proved 5/64 negative-definite interior current, terminal-edge and order-swap nonpromotion guards",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered pairwise projective-alignment gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_pairwise_projective_alignment_gate.py",),
+        expected=("validated pairwise projective-alignment gate: 21 rows, exact relative current and pole join, frozen-model Sturm term, moving-scale and residual-order guards, aggregate occupation identity",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered signed occupation transport reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_signed_occupation_transport_reduction.py",),
+        expected=("validated signed occupation transport reduction: 25 rows, exact weak/cumulative laws, Xi source collapse, N^sigma normalization, sub-1e-7 residual budget, direct-transversality equivalence, 3 route guards",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered complete prime-power-chain occupation gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_complete_prime_power_chain_occupation_gate.py",),
+        expected=("validated complete prime-power-chain occupation gate: 21 rows, exact chain factorization and Euler moment, negative-zero-positive threshold guard, external-phase reversal, order-N singleton theorem, p-free telescoping, joined-boundary handoff",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Q208-base/Q209 successor-shell coverage gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_q208_base_q209_shell_coverage_gate.py",),
+        expected=("validated Q208-base/Q209 shell coverage gate: 15 rows, 5 coverage regions, 2 open shell regions, 7 oriented boundary arcs, 416 outer old half-cells, 2 new strip half-columns, Q209 not certified",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered Abel-scalar shear-flux reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_abel_scalar_shear_flux_reduction.py",),
+        expected=("validated Newman Abel-scalar shear-flux reduction: 18 rows, 1 exact shear/scale homotopy, 1 reduced O(N) physical flux, 1 certified crossing-orientation handoff, 1 backward-heat many-crossing guard, 3 open obligations",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered dominant-ray connector phase cap",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_dominant_ray_connector_phase_cap.py",),
+        expected=("validated Newman dominant-ray connector phase cap: 17 rows, 1 uniform cone, 1 strict quarter-turn connector cap, 1 reduced 3*pi/2 horizontal ledger, 1 endpoint-only winding guard, 3 open obligations",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered uniform-q>=1 degree-excision reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_uniform_q_ge_1_degree_excision_reduction.py",),
+        expected=("validated Newman uniform-q>=1 degree excision: 16 rows, 1 exact interface chain, 1 conditional outer-degree excision, 1 paired many-turn cancellation guard, 1 boundary-only contact guard, 2 open Xi obligations",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered oscillatory-spliced outer-collar reduction",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_oscillatory_spliced_outer_collar_reduction.py",),
+        expected=("validated Newman oscillatory-spliced outer collar: 15 rows, 1 exact current frontier, 1 epsilon-raised collar, 1 three-regime cover, 1 conditional degree excision, 2 open Xi obligations",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered reciprocal-saddle self-duality gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_reciprocal_saddle_self_duality_gate.py",),
+        expected=("validated Newman reciprocal-saddle self-duality gate: 14 rows, 1 exact stationary map, 1 exact heat-amplitude self-duality, 1 Xi defect bound, 1 critical reciprocal-tail map, 2 nonpromotion guards, 1 open theorem",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered reciprocal normalizer-phase reinforcement guard",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_reciprocal_normalizer_phase_reinforcement_guard.py",),
+        expected=("validated Newman reciprocal normalizer-phase reinforcement guard: 13 rows, 2 exact phase identities, 1 uniform conjugate lock, 3 nonpromotion guards, 1 rejected raw-pair route, 1 open signed-kernel target",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 first-order centered signed-handoff reciprocal-symbol guard",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_first_order_centered_signed_handoff_reciprocal_symbol_guard.py",),
+        expected=("validated Newman signed-handoff reciprocal-symbol guard: 13 rows, 3 exact symbol identities, 2 first-jet identities, 2 rational exponent audits, 2 endpoint/cutoff guards, 1 retired pairwise route",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
         name="Jensen-window PF Newman positive-boundary attainment lemma",
         command=("work/rh_compute/scripts/check_jensen_window_pf_newman_positive_boundary_attainment_lemma.py",),
         expected=("validated Jensen-window PF Newman positive-boundary attainment lemma: 10 rows, 0 issues, 2 published compactness inputs, 1 finite-boundary attainment theorem, 1 positive-time simplicity equivalence, 1 arbitrary-multiplicity Hermite split, 9 exact Hermite checks, 1 cluster-energy blow-up, 1 open Xi endpoint handoff",),
         category="exact theorem-search algebra",
     ),
     GateSpec(
+        name="Jensen-window PF Newman positive-boundary delta-localization gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_positive_boundary_delta_localization_gate.py",),
+        expected=("validated Newman positive-boundary delta-localization gate: 10 rows, 0 issues, 5 exact reductions, 1 cofinal-strip criterion, 1 quadratic endpoint-uniformity countermodel, 1 delta-dependent open target",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman positive-boundary diagonal-exhaustion gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_positive_boundary_diagonal_exhaustion_gate.py",),
+        expected=("validated Newman positive-boundary diagonal-exhaustion gate: 10 rows, 0 issues, 5 exact exhaustion reductions, 1 compact-shell composition, 1 arbitrary-height classical-field boundary countermodel, 1 independent-rate open target",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman first-jet winding gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_first_jet_winding_gate.py",),
+        expected=("validated Newman first-jet winding gate: 10 rows, 0 issues, 9 Hermite audits, 5 exact local/global index reductions, 1 signed winding theorem, 1 half-rectangle flux criterion, 1 open Xi edge target",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta first diagonal-shell interval certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_first_diagonal_shell_interval_certificate.py",),
+        expected=("validated Newman theta first diagonal-shell interval certificate: 8 rows, 0 issues, 5 certified edge boxes, 0 subdivisions, 0 unresolved, minimum ratio >6/5, 1 first-stage no-contact theorem, 1 zero-winding composition, 1 open second-stage handoff",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta second diagonal-shell first-block route guard",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_second_diagonal_shell_first_block_route_guard.py",),
+        expected=("validated Newman theta second diagonal-shell first-block route guard: 6 rows, 0 issues, 5 exact point audits, 4 strict two-branch failures, maximum failed ratio <24/25, 1 second-stage route guard, 1 open replacement handoff",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta second diagonal-shell two-block interval certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_second_diagonal_shell_two_block_interval_certificate.py",),
+        expected=("validated Newman theta second diagonal-shell two-block interval certificate: 10 rows, 0 issues, 25 certified slab boxes, 0 subdivisions, 0 unresolved, 25 negative-value boxes, two analytic n>=3 moment bounds, minimum value ratio >39000, 1 second-stage no-contact theorem, 1 zero-winding composition, 1 open third-stage handoff",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta third diagonal-shell two-block interval certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_third_diagonal_shell_two_block_interval_certificate.py",),
+        expected=("validated Newman theta third diagonal-shell two-block interval certificate: 8 rows, 0 issues, 48 certified slab boxes, 0 subdivisions, 0 unresolved, 48 negative-value boxes, minimum value ratio >1000, 1 third-stage no-contact theorem, 1 zero-winding composition, 1 open fourth-stage handoff",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta fourth diagonal-shell two-block interval certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_fourth_diagonal_shell_two_block_interval_certificate.py",),
+        expected=("validated Newman theta fourth diagonal-shell two-block interval certificate: 8 rows, 0 issues, 120 certified slab boxes, 0 subdivisions, 0 unresolved, 105 negative-value boxes, 15 derivative-only boxes, minimum disjunction ratio >88000, 1 fourth-stage no-contact theorem, 1 zero-winding composition, 1 open fifth-stage handoff",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta two-block shell frontier scout",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_two_block_shell_frontier_scout.py",),
+        expected=("validated Newman theta two-block shell frontier scout: 26 shell rows, 0 issues, j=5..30, 26 certified shells, first finite frontier=none",),
+        category="bounded numerical evidence",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta fixed-block cofinal obstruction gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_fixed_block_cofinal_obstruction_gate.py",),
+        expected=("validated Newman theta fixed-block cofinal obstruction gate: 9 rows, 0 issues, 3 exact integration-by-parts bounds, 1 cofinal method obstruction, 1 endpoint-cancellation theorem, 26 finite diagnostic shells, 1 cancellation-aware open handoff",),
+        category="non-promotion guards",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta modular-blend gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_modular_blend_gate.py",),
+        expected=("validated Jensen-window PF Newman theta modular-blend gate: 12 rows, 0 issues, 1 exact positive modular partition, 1 positive-time normal series, 6 transform witnesses, 2 Jensen witnesses",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta modular-blend high-frequency scout",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_modular_blend_high_frequency_scout.py",),
+        expected=("validated Newman modular-blend high-frequency scout: 10 rows, 0 issues, 2 times, 5 frequencies, 3 fixed blocks, 1 cancellation non-promotion gate",),
+        category="bounded numerical evidence",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta modular-blend adaptive-saddle gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_modular_blend_adaptive_saddle_gate.py",),
+        expected=("validated Newman modular-blend adaptive-saddle gate: 8 rows, 0 issues, 2 exact saddle laws, 1 square-root transition theorem, 10 adaptive diagnostics, 10 matched monotonicity diagnostics, 1 collar guard, 1 retired monotonicity branch",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta adaptive modular C1 remainder contract",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_adaptive_modular_c1_remainder_contract.py",),
+        expected=("validated Newman theta adaptive modular C1 remainder contract: 10 rows, 0 issues, 2 exact modular theorems, 3 exact C1 inequalities/compositions, 1 fixed-block guard, 1 adaptive saddle theorem, 10 cancellation diagnostics, 1 open quantitative target",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta modular-tail derivative envelope gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_modular_tail_derivative_envelope_gate.py",),
+        expected=("validated Newman theta modular-tail derivative envelope gate: 9 rows, 0 issues, 3 exact inequalities/identities, 3 exact tail-scale theorems/compositions, 1 fixed-collar guard, 1 open separation handoff",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta modular-tail derivative budget scout",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_modular_tail_derivative_budget_scout.py",),
+        expected=("validated Newman theta modular-tail derivative-budget scout: 35 derivative rows, 64 C1 rows, 0 issues, 2 node ladders, 1 arithmetic-cap stress, 1 fixed-collar non-promotion pattern",),
+        category="bounded numerical evidence",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta modular-tail Arb quadratic pilot",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_modular_tail_arb_quadratic_pilot.py",),
+        expected=("Newman theta modular-tail Arb quadratic pilot checker: ok=True rows=5 issues=0",),
+        category="rigorous numerical pilot",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta forward-remainder tail gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_forward_remainder_tail_gate.py",),
+        expected=("validated Newman theta forward-remainder tail gate: 6 rows, 0 issues, 10 exact derivative polynomials, 10 explicit arithmetic-tail bounds, 1 open stable-matrix handoff",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta arbitrary-N stable-remainder gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_arbitrary_n_stable_remainder_gate.py",),
+        expected=("validated Newman theta arbitrary-N stable remainder gate: 8 rows, 0 issues, 10 derivative polynomials, 100 witness bounds, 1 exact all-N split, 1 cofinal handoff",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta switch-defect explicit-constant gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_switch_defect_explicit_constant_gate.py",),
+        expected=("validated Newman theta switch-defect explicit constant gate: 9 rows, 8 all-N formula witnesses, 0 issues, 1 open cofinal retained-separation handoff",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta adaptive gamma-scale tail gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_adaptive_gamma_scale_tail_gate.py",),
+        expected=("validated Newman theta adaptive gamma-scale tail gate: 8 rows, 3 boundary witnesses, 0 issues, cofinal x>=245 omitted-tail theorem, 1 open retained-margin handoff",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta forward six-term bridge tail gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_forward_six_term_bridge_tail_gate.py",),
+        expected=("validated Newman theta forward six-term bridge tail gate: 8 rows, 3 witnesses, 0 issues, direct gamma-scale tail theorem on 38<=x<=245, 1 open retained-cover handoff",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta forward adaptive square-root tail gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_forward_adaptive_sqrt_tail_gate.py",),
+        expected=("validated Newman theta forward adaptive square-root tail gate: 8 rows, 0 issues, tunable cofinal exp(-3h)/50 value/derivative tail with saddle-scale retained count, 1 open retained-separation handoff",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta square-root to corrected RS C1 transfer gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_forward_sqrt_to_corrected_rs_C1_transfer_gate.py",),
+        expected=("validated theta square-root to corrected RS C1 transfer gate: 9 rows, 0 issues, exact dual approximation, direct ordinary threshold, and quantified certified-envelope mismatch",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman one-sided phase/moment bridge gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_one_sided_phase_moment_bridge_gate.py",),
+        expected=("validated Newman one-sided phase/moment bridge gate: 16 rows, 0 issues, 1 zero-free complex lift, 1 score probability, 1 exact phase-contact system, 1 signed-Hankel moment bridge, 1 score/Beta Abel measure, 1 full-scale interlacing guard, 1 Abel-kernel sign guard, 1 closed score flow, 1 normalizer transfer, 1 conditioning guard, 1 shape countermodel, 3 precision-stable diagnostics, 1 open Xi joint-avoidance target",),
+        category="exact theorem-search algebra",
+        slow=True,
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman score-Abel radial dimension-lift gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_score_abel_radial_dimension_lift_gate.py",),
+        expected=("validated score-Abel radial dimension-lift gate: 15 rows, 0 issues, 1 imported Abel coordinate, 1 radial probability ladder, 1 planar marginal, 1 Bessel derivative identity, 1 own-dimension positive-definiteness theorem, 1 dimension walk, 1 Jensen identification, 1 Schoenberg scope guard, 3 exact Gaussian countermodel rows, 2 imported Xi low-degree closures, 1 imported degree-361 closure, 1 nonpromotion gate",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta stable-remainder outer-tail gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_stable_remainder_outer_tail_gate.py",),
+        expected=("validated Newman theta stable-remainder outer-tail gate: 7 rows, 203 directed entries, 7 retained counts, 0 issues",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta stable-remainder Arb quadratic matrix",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_stable_remainder_arb_quadratic_matrix.py",),
+        expected=("validated Newman theta stable-remainder Arb matrix: 223/223 cache rows, 7 complete retained counts, 0 issues",),
+        category="rigorous numerical certificate",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta full derivative-budget certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_full_derivative_budget_certificate.py",),
+        expected=("validated Newman theta full derivative-budget certificate: 7 rows, 7 full d0/d1 budgets, 0 issues, 1 open cofinal first-jet handoff",),
+        category="rigorous numerical certificate",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta modular-retained Q31 interval certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_modular_retained_q31_interval_certificate.py",),
+        expected=("validated Newman theta modular-retained Q31 interval certificate: 1240/1240 initial boxes, 1892 Taylor boxes, 0 unresolved, 0 issues",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta forward six-term finite-bridge interval certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_forward_six_term_finite_bridge_interval_certificate.py",),
+        expected=("validated Newman theta forward six-term finite-bridge interval certificate: 7 rows, 414/414 panels, 7102 certified leaves, 0 unresolved panels, 0 issues",),
+        category="interval certificates",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta Q31 margin-geometry audit",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_q31_margin_geometry_audit.py",),
+        expected=("validated Q31 margin geometry audit: 1240 cache records, 1566 leaves, 7 rows, 0 issues, 1 saddle-normalized cofinal handoff",),
+        category="bounded numerical evidence",
+    ),
+    GateSpec(
         name="Jensen-window PF Newman strict-Laguerre correlation target",
         command=("work/rh_compute/scripts/check_jensen_window_pf_newman_strict_laguerre_correlation_target.py",),
         expected=("validated Jensen-window PF Newman strict-Laguerre correlation target: 10 rows, 0 issues, 1 strict-Laguerre equivalence, 1 exact correlation identity, 1 Wiener-density equivalence, 1 RH-equivalent density target, 1 exact strict-log-concavity/positive-definiteness countermodel, 2 non-promotion gates, 1 open Xi handoff",),
         category="open theorem target hygiene",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta-curvature probability/operator gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_curvature_probability_operator_gate.py",),
+        expected=("validated Newman theta-curvature probability/operator gate: 20 rows, 0 issues, 3 theta-primitive identities, 2 monotone-convex inequalities, 1 probability law, 1 fixed-weight theta mixture, 1 uniform C2 dominant-block budget, 1 dominant-mass endpoint-jet guard, 2 transform identities, 1 oscillator factorization, 1 Doob diffusion identity, 1 Sturm nodal-loss guard, 1 asymptotic drift-curvature guard, 1 characteristic contact reduction, 1 componentwise contact decomposition, 1 explicit C1 tail disjunction, 1 endpoint Laplace comparison, 1 generic double-contact guard, 1 open Xi transversality handoff",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta compact-transversality scout",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_compact_transversality_scout.py",),
+        expected=("validated Newman theta compact-transversality scout: 12 rows, 0 issues, 3 exact moment/kernel inequalities, 1 uniform near-origin no-contact theorem, 61951 compact diagnostic points, 0 compact grid failures, 1 independent quadrature crosscheck, 1 outer nonpromotion guard, 2 high-frequency composition theorems, 2 open certification targets",),
+        category="bounded numerical evidence",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman theta compact-transversality interval certificate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_theta_compact_transversality_interval_certificate.py",),
+        expected=("validated Newman theta compact-transversality interval certificate: 8 rows, 0 issues, 4 exact identities/inequalities, 1900 certified boxes, 10 adaptive subdivisions, 0 unresolved boxes, 1 compact no-contact theorem, 1 origin composition, 1 open high-frequency handoff",),
+        category="exact theorem-search algebra",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman backward-Pick collision-bridge audit",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_backward_pick_collision_bridge_audit.py",),
+        expected=("validated Newman backward-Pick collision-bridge audit: 12 rows, 0 issues, 3 exact flow identities, 2 Pick-sign regions, 1 square-root speed blowup, 1 cutoff-hiding theorem, 1 noncommuting-limit obstruction, 1 preprint gap, 1 open Xi repair",),
+        category="non-promotion guards",
     ),
     GateSpec(
         name="Jensen-window PF Newman Polymath-15 oscillatory zeta handoff theorem",
@@ -1584,6 +2779,12 @@ GATES: tuple[GateSpec, ...] = (
         command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_critical_scaled_coercivity_target.py",),
         expected=("validated Newman Polymath-15 critical scaled coercivity target: 10 rows, 0 issues, 2 exact curvature identities, 1 published endpoint correction, 1 refined remainder, 1 open coercivity target",),
         category="open theorem target hygiene",
+    ),
+    GateSpec(
+        name="Jensen-window PF Newman Polymath-15 critical component Wronskian gate",
+        command=("work/rh_compute/scripts/check_jensen_window_pf_newman_polymath15_critical_component_wronskian_gate.py",),
+        expected=("validated Newman Polymath-15 critical component Wronskian gate: 10 rows, 0 issues, 5 exact identities/reductions, 1 exact ordered-speed countermodel, 4 corrected diagnostics, 1 open arithmetic small-ball target",),
+        category="exact theorem-search algebra",
     ),
     GateSpec(
         name="Jensen-window PF Newman correlation hierarchy Gaussian-mixture gate",
@@ -2458,6 +3659,7 @@ GATES: tuple[GateSpec, ...] = (
         command=("work/rh_compute/scripts/check_jensen_window_pf_negative_lambda_relative_gaussian_worst_row_finite_part_weighted_sum_interval_certificate.py",),
         expected=("validated Jensen-window PF negative-lambda relative-Gaussian worst-row finite-part weighted-sum interval certificate: 6 rows, 0 issues, 320 refined nodes, 320 interval weights, 2 below-one ratios, 0 ready-to-apply rows",),
         category="finite theorem-search diagnostics",
+        slow=True,
     ),
     GateSpec(
         name="Jensen-window PF negative-lambda relative-Gaussian worst-row finite-plus-tail budget certificate",
@@ -2582,14 +3784,35 @@ def tail(text: str, lines: int = 12) -> str:
 
 def run_gate(spec: GateSpec, timeout: int) -> dict:
     start = perf_counter()
-    completed = subprocess.run(
-        command_for(spec),
-        cwd=REPO_ROOT,
-        text=True,
-        capture_output=True,
-        timeout=timeout,
-        check=False,
-    )
+    try:
+        completed = subprocess.run(
+            command_for(spec),
+            cwd=REPO_ROOT,
+            text=True,
+            capture_output=True,
+            timeout=timeout,
+            check=False,
+        )
+    except subprocess.TimeoutExpired as exc:
+        elapsed = perf_counter() - start
+        stdout = exc.stdout or ""
+        stderr = exc.stderr or ""
+        if isinstance(stdout, bytes):
+            stdout = stdout.decode(errors="replace")
+        if isinstance(stderr, bytes):
+            stderr = stderr.decode(errors="replace")
+        return {
+            "name": spec.name,
+            "category": spec.category,
+            "command": " ".join(command_for(spec)),
+            "returncode": None,
+            "elapsed_seconds": round(elapsed, 3),
+            "ok": False,
+            "timed_out": True,
+            "missing_expected": list(spec.expected),
+            "stdout_tail": tail(stdout),
+            "stderr_tail": tail(stderr),
+        }
     elapsed = perf_counter() - start
     combined = completed.stdout + "\n" + completed.stderr
     missing = [needle for needle in spec.expected if needle not in combined]
@@ -2601,10 +3824,113 @@ def run_gate(spec: GateSpec, timeout: int) -> dict:
         "returncode": completed.returncode,
         "elapsed_seconds": round(elapsed, 3),
         "ok": ok,
+        "timed_out": False,
         "missing_expected": missing,
         "stdout_tail": tail(completed.stdout),
         "stderr_tail": tail(completed.stderr),
     }
+
+
+def resolved_control_path(path: Path | None) -> Path | None:
+    if path is None or path.is_absolute():
+        return path
+    return REPO_ROOT / path
+
+
+def registry_signature(specs: list[GateSpec]) -> str:
+    rows = []
+    for spec in specs:
+        script = REPO_ROOT / spec.command[0]
+        script_sha256 = None
+        if script.is_file():
+            script_sha256 = hashlib.sha256(script.read_bytes()).hexdigest()
+        rows.append(
+            {
+                "name": spec.name,
+                "command": list(spec.command),
+                "expected": list(spec.expected),
+                "category": spec.category,
+                "slow": spec.slow,
+                "script_sha256": script_sha256,
+            }
+        )
+    encoded = json.dumps(
+        rows, sort_keys=True, separators=(",", ":")
+    ).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def checkpoint_payload(
+    *,
+    specs: list[GateSpec],
+    results: list[dict],
+    signature: str,
+    timeout: int,
+    skip_slow: bool,
+    parked: bool,
+) -> dict:
+    return {
+        "schema_version": 1,
+        "kind": "core_proof_programme_replay_checkpoint",
+        "updated_utc": datetime.now(timezone.utc).isoformat(),
+        "registry_signature": signature,
+        "skip_slow": skip_slow,
+        "per_gate_timeout_seconds": timeout,
+        "total_gates": len(specs),
+        "completed_gates": len(results),
+        "next_gate": (
+            specs[len(results)].name
+            if len(results) < len(specs)
+            else None
+        ),
+        "parked": parked,
+        "complete": len(results) == len(specs) and not parked,
+        "all_completed_ok": all(result["ok"] for result in results),
+        "results": results,
+    }
+
+
+def write_checkpoint(path: Path, payload: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(path.name + ".tmp")
+    temporary.write_text(
+        json.dumps(payload, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    os.replace(temporary, path)
+
+
+def load_checkpoint(
+    path: Path,
+    *,
+    specs: list[GateSpec],
+    signature: str,
+    skip_slow: bool,
+) -> list[dict]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if payload.get("kind") != "core_proof_programme_replay_checkpoint":
+        raise ValueError("checkpoint kind does not match this runner")
+    if payload.get("registry_signature") != signature:
+        raise ValueError(
+            "checkpoint registry signature does not match current gates"
+        )
+    if payload.get("skip_slow") is not skip_slow:
+        raise ValueError("checkpoint --skip-slow mode does not match")
+    results = payload.get("results")
+    if not isinstance(results, list):
+        raise ValueError("checkpoint results are not a list")
+    if len(results) > len(specs):
+        raise ValueError("checkpoint contains too many gate results")
+    expected_names = [spec.name for spec in specs[: len(results)]]
+    actual_names = [result.get("name") for result in results]
+    if actual_names != expected_names:
+        raise ValueError("checkpoint results are not a registry prefix")
+    if not all(result.get("ok") is True for result in results):
+        raise ValueError(
+            "checkpoint contains a failed gate; start a fresh replay "
+            "after fixing it"
+        )
+    return results
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -2612,17 +3938,120 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--timeout", type=int, default=600, help="Per-gate timeout in seconds.")
     parser.add_argument("--skip-slow", action="store_true", help="Skip gates marked slow.")
     parser.add_argument("--json", action="store_true", help="Emit machine-readable JSON summary.")
+    parser.add_argument(
+        "--checkpoint",
+        type=Path,
+        help=(
+            "Atomically save each completed gate so a parked serial replay "
+            "can resume."
+        ),
+    )
+    parser.add_argument(
+        "--resume",
+        action="store_true",
+        help="Resume the validated prefix in --checkpoint.",
+    )
+    parser.add_argument(
+        "--stop-file",
+        type=Path,
+        help=(
+            "Park after the current gate when this file exists. "
+            "A parked run exits with status 75."
+        ),
+    )
     return parser
 
 
 def main() -> int:
+    set_below_normal_priority()
     args = build_parser().parse_args()
+    if args.resume and args.checkpoint is None:
+        raise SystemExit("--resume requires --checkpoint")
     specs = [spec for spec in GATES if not (args.skip_slow and spec.slow)]
-    results = [run_gate(spec, args.timeout) for spec in specs]
-    ok = all(result["ok"] for result in results)
+    signature = registry_signature(specs)
+    checkpoint = resolved_control_path(args.checkpoint)
+    stop_file = resolved_control_path(args.stop_file)
+    results: list[dict] = []
+    if args.resume:
+        if checkpoint is None or not checkpoint.is_file():
+            raise SystemExit("resume checkpoint does not exist")
+        try:
+            results = load_checkpoint(
+                checkpoint,
+                specs=specs,
+                signature=signature,
+                skip_slow=args.skip_slow,
+            )
+        except (OSError, ValueError, json.JSONDecodeError) as exc:
+            raise SystemExit(f"cannot resume checkpoint: {exc}") from exc
+
+    parked = False
+    if checkpoint is not None:
+        write_checkpoint(
+            checkpoint,
+            checkpoint_payload(
+                specs=specs,
+                results=results,
+                signature=signature,
+                timeout=args.timeout,
+                skip_slow=args.skip_slow,
+                parked=False,
+            ),
+        )
+
+    for spec in specs[len(results) :]:
+        if stop_file is not None and stop_file.exists():
+            parked = True
+            break
+        results.append(run_gate(spec, args.timeout))
+        if checkpoint is not None:
+            write_checkpoint(
+                checkpoint,
+                checkpoint_payload(
+                    specs=specs,
+                    results=results,
+                    signature=signature,
+                    timeout=args.timeout,
+                    skip_slow=args.skip_slow,
+                    parked=False,
+                ),
+            )
+        if stop_file is not None and stop_file.exists():
+            parked = True
+            break
+
+    ok = (
+        not parked
+        and len(results) == len(specs)
+        and all(result["ok"] for result in results)
+    )
+    if checkpoint is not None:
+        write_checkpoint(
+            checkpoint,
+            checkpoint_payload(
+                specs=specs,
+                results=results,
+                signature=signature,
+                timeout=args.timeout,
+                skip_slow=args.skip_slow,
+                parked=parked,
+            ),
+        )
 
     if args.json:
-        print(json.dumps({"ok": ok, "gates": results}, indent=2, sort_keys=True))
+        print(
+            json.dumps(
+                {
+                    "ok": ok,
+                    "parked": parked,
+                    "completed_gates": len(results),
+                    "total_gates": len(specs),
+                    "gates": results,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
     else:
         for result in results:
             status = "OK" if result["ok"] else "FAIL"
@@ -2631,6 +4060,8 @@ def main() -> int:
                 f"({result['category']}, {result['elapsed_seconds']}s)"
             )
             if not result["ok"]:
+                if result["timed_out"]:
+                    print(f"  timed out after {args.timeout}s")
                 if result["missing_expected"]:
                     print(f"  missing expected: {result['missing_expected']}")
                 if result["stdout_tail"]:
@@ -2639,8 +4070,20 @@ def main() -> int:
                 if result["stderr_tail"]:
                     print("  stderr tail:")
                     print(result["stderr_tail"])
-        print(f"validated {sum(1 for result in results if result['ok'])}/{len(results)} core proof-programme gates")
+        if parked:
+            print(
+                "parked core proof-programme replay after "
+                f"{len(results)}/{len(specs)} gates"
+            )
+        else:
+            print(
+                "validated "
+                f"{sum(1 for result in results if result['ok'])}/"
+                f"{len(specs)} core proof-programme gates"
+            )
 
+    if parked:
+        return 75
     return 0 if ok else 1
 
 

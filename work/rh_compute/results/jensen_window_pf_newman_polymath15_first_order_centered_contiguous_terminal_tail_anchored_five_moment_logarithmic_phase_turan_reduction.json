@@ -1,0 +1,241 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_logarithmic_phase_turan_reduction",
+  "date": "2026-08-01",
+  "status": "exact positive-amplitude logarithmic Fourier-jet, Bochner difference-kernel, leading Turan-current, zero-fibre sign, and correction decomposition; signed joint bound open; no Phi_B bound, Xi-level theorem, Lambda<=0, or RH",
+  "proof_boundary": "This proves the positive-amplitude logarithmic Fourier-jet representation, Bochner positivity of its difference kernel, the exact leading Turan-current identity, zero-fibre sign, an integer-log common-phase nonpromotion guard, and an exact correction decomposition. It proves no signed joint bound, upper bound on Phi_B, contact exclusion, retained aggregate sign, Xi residual transfer, Q209, cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "source_audit": {
+    "source_sha256": {
+      "phase_anchor": "7e5c8725b2d0913d2e5d1731b962a7cd79081b8e09e52c7992647e4dc631cbd2",
+      "mangoldt": "295c3a8ad23f98261e88e678b1e5ff6610c5dfe16fcd4f15724160d5fffaf57e",
+      "two_carrier": "0d9af778f6dfd6453b59375e42f225aad382788f7660d7a5bbae2aa3bff5496f",
+      "growing_tail": "6c94a1749bde59c8f62ea0b8ad08803c2150ec71abcd40d3f2dc983cf0b51611"
+    },
+    "source_kinds": {
+      "phase_anchor": "jensen_window_pf_newman_polymath15_first_order_centered_absolute_phase_anchor_reduction",
+      "mangoldt": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_current_mangoldt_normal_form_gate",
+      "two_carrier": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_two_carrier_kernel_reduction",
+      "growing_tail": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_growing_prefix_finite_height_gate"
+    },
+    "imported_signed_joint_bounds": 0,
+    "imported_phi_b_bounds": 0
+  },
+  "symbolic_certificate": {
+    "polar_carrier": "Write s_*=sigma+i*tau and polarize the nonzero common factor eta/S_a=omega*|eta/S_a|, |omega|=1. Then w_n=omega*A_n*exp(-i*tau*ell_n), where ell_n=log(n) and A_n=|eta/S_a|*exp[t*ell_n^2/4-sigma*ell_n]>0.",
+    "fourier_polynomial": "F(z)=sum_(n<=B)A_n*exp(-i*z*ell_n), Z(z)=omega*F(z), and G_r=i^r*Z^(r)(tau) for 0<=r<=4.",
+    "jet_differences": [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "polynomial_functional": "For every polynomial P of degree at most four, sum_(n<=B)P(ell_n)w_n=[P(i*partial_z)Z(z)]_(z=tau).",
+    "polynomial_difference": "0",
+    "pair_phases": "w_n*conj(w_m)=A_nA_m*exp[-i*tau*log(n/m)], while w_nw_m=omega^2*A_nA_m*exp[-i*tau*log(nm)].",
+    "bochner_factorization": "For real x_j and complex v_j, sum_(j,k)v_j*conj(v_k)F(x_j-x_k)=sum_(n<=B)A_n*|sum_j v_j*exp(-i*x_j*ell_n)|^2>=0.",
+    "bochner_difference": "0"
+  },
+  "leading_current_certificate": {
+    "shifted_trace": "Put u_n=log(a/n)=L_a-ell_n and f(y)=Re[e^(-i*y*L_a)Z(tau-y)]=Re sum_(n<=B)w_n*exp(-i*y*u_n); define g(y) as the imaginary part of the same sum.",
+    "trace_derivatives": "For S_r=sum_(n<=B)u_n^r*w_n, f(0)=Re(S_0), f'(0)=Im(S_1), f''(0)=-Re(S_2), and g(0)=Im(S_0).",
+    "leading_observations": "At C=1, D=0, s_*'=-i/2, s_*''=0, b=-1/2, b_x=0, and chi_N=-i*u_N/2, the real bulk observations are V=f, Q=A=f'/2, and N=f''/4+(u_x/2)g at y=0.",
+    "leading_turan": "P_bulk^(0)=V*N-A*Q=[f*f''-(f')^2]/4+(u_x/2)*f*g at y=0.",
+    "pair_kernel_difference": "0",
+    "logarithmic_identity": "On every interval where f is nonzero, f*f''-(f')^2=f^2*(log|f|)''. The division-free left side is the primary identity.",
+    "logarithmic_identity_difference": "0",
+    "zero_fibre": "If f(0)=0, then P_bulk^(0)=-(f'(0))^2/4<=0; the u_x*f*g term vanishes without division.",
+    "zero_fibre_expression": "-S1_I**2/4"
+  },
+  "finite_guard_certificate": {
+    "support": "n=1,2; a=4; ell_1=0, ell_2=log(2); u_1=2log(2), u_2=log(2)",
+    "phase_choice": "Take tau=pi/log(2), omega=-1, A_1=1/2, A_2=1. Then exp[-i*tau*log(2)]=exp(-i*pi)=-1, so w_1=-1/2 and w_2=1.",
+    "trace": "f(y)=cos(log(2)*y)-(1/2)cos(2log(2)*y)",
+    "jet": "f(0)=1/2, f'(0)=0, f''(0)=log(2)^2, g(0)=0",
+    "leading_current": "P_bulk^(0)=log(2)^2/8>0 for every real u_x",
+    "exact_current": "log(2)**2/8",
+    "pi_provenance": "The pi in this guard is chosen solely to make a half-turn on the log(2) frequency: tau*log(2)=pi and exp(-i*pi)=-1. It is not an inserted physical constant and it proves only a nonimplication. The separate physical u_x=h^2/(8*pi) is inherited from the certified growing-tail source.",
+    "scope": "This exact two-atom example has positive amplitudes, integer logarithmic support, and one common logarithmic phase, but it is not an attained large-q=1 Xi chart. It proves that those abstract properties and Bochner positivity alone cannot sign the leading bulk current."
+  },
+  "exact": {
+    "domain": "Use the fixed physical q=1, L>=50 terminal/bulk chart with B=N-M-1 and the correction-free carrier w_n=(eta/S_a)exp[t*log(n)^2/4-s_*log(n)]. The source gives eta/S_a nonzero; no assumption that S_a is positive or real is made.",
+    "bochner_boundary": "Bochner positivity controls the unweighted phase-difference matrix F(x_j-x_k). It does not control the phase-sum family w_nw_m, the polynomially weighted Hermitian kernel, the endpoint-linear sum, or their joint real projection.",
+    "exact_correction_decomposition": "Let E=Re sum_(n<=B)L_nw_n and let H_0^+,T_0^+ be the ideal kernels H_0^+(n,m)=-(u_n+u_m)^2/8 and T_0^+(n,m)=-(lambda_n-lambda_m)^2/8-i*u_x/2. Then exactly h^2*Phi_B=E+P_bulk^(0)+R_corr, where R_corr=(1/2)Re sum_(n,m<=B){[H^+-H_0^+]w_nconj(w_m)+[T^+-T_0^+]w_nw_m}.",
+    "correction_boundary": "Every kernel difference in R_corr vanishes at the ideal specialization, but no quantitative bound on E or R_corr is proved here. They may not be discarded or absorbed into an unnamed error.",
+    "sharp_target": "Use the actual physical tau, amplitudes A_n, terminal aggregate, and correction coefficients to prove E+P_bulk^(0)+R_corr<=h^2/400, preferably h^2/800. A viable argument must control the phase-sum family jointly with the weighted phase-difference family and endpoint.",
+    "proof_boundary": "This proves the positive-amplitude logarithmic Fourier-jet representation, Bochner positivity of its difference kernel, the exact leading Turan-current identity, zero-fibre sign, an integer-log common-phase nonpromotion guard, and an exact correction decomposition. It proves no signed joint bound, upper bound on Phi_B, contact exclusion, retained aggregate sign, Xi residual transfer, Q209, cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion."
+  },
+  "counts": {
+    "rows": 15,
+    "positive_amplitude_representations": 1,
+    "fourier_jet_identities": 5,
+    "differential_operator_identities": 1,
+    "phase_difference_families": 1,
+    "phase_sum_families": 1,
+    "bochner_psd_kernels": 1,
+    "leading_turan_identities": 1,
+    "leading_zero_fibre_signs": 1,
+    "integer_log_phase_guards": 1,
+    "exact_correction_decompositions": 1,
+    "signed_joint_targets": 1,
+    "signed_joint_bounds": 0,
+    "phi_b_bounds": 0,
+    "xi_level_current_theorems": 0
+  },
+  "rows": [
+    {
+      "id": "ltp_01_domain",
+      "role": "fixed-chart domain",
+      "readiness": "proved",
+      "claim": "The reduction uses the certified correction-free physical carrier.",
+      "formula": "Use the fixed physical q=1, L>=50 terminal/bulk chart with B=N-M-1 and the correction-free carrier w_n=(eta/S_a)exp[t*log(n)^2/4-s_*log(n)]. The source gives eta/S_a nonzero; no assumption that S_a is positive or real is made.",
+      "proof_boundary": "No sign is imported from the source.",
+      "diagnostics": null
+    },
+    {
+      "id": "ltp_02_polar",
+      "role": "positive-amplitude polarization",
+      "readiness": "proved",
+      "claim": "The common carrier factor can be polarized without assuming S_a is real.",
+      "formula": "Write s_*=sigma+i*tau and polarize the nonzero common factor eta/S_a=omega*|eta/S_a|, |omega|=1. Then w_n=omega*A_n*exp(-i*tau*ell_n), where ell_n=log(n) and A_n=|eta/S_a|*exp[t*ell_n^2/4-sigma*ell_n]>0.",
+      "proof_boundary": "Only nonvanishing of eta/S_a is used.",
+      "diagnostics": null
+    },
+    {
+      "id": "ltp_03_fourier",
+      "role": "logarithmic Fourier polynomial",
+      "readiness": "proved",
+      "claim": "All five moments belong to one logarithmic-frequency exponential polynomial.",
+      "formula": "F(z)=sum_(n<=B)A_n*exp(-i*z*ell_n), Z(z)=omega*F(z), and G_r=i^r*Z^(r)(tau) for 0<=r<=4.",
+      "proof_boundary": "The frequencies are the actual ell_n=log(n).",
+      "diagnostics": null
+    },
+    {
+      "id": "ltp_04_jets",
+      "role": "order-four jet",
+      "readiness": "proved",
+      "claim": "The five complex moments are exactly the first five tau jets.",
+      "formula": "G_r=i^r*Z^(r)(tau), 0<=r<=4",
+      "proof_boundary": "This is an identity, not a derivative estimate.",
+      "diagnostics": {
+        "differences": [
+          "0",
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      }
+    },
+    {
+      "id": "ltp_05_operator",
+      "role": "polynomial functional",
+      "readiness": "proved",
+      "claim": "Every degree-at-most-four carrier polynomial is a differential functional of Z.",
+      "formula": "For every polynomial P of degree at most four, sum_(n<=B)P(ell_n)w_n=[P(i*partial_z)Z(z)]_(z=tau).",
+      "proof_boundary": "No moment is treated as independent.",
+      "diagnostics": {
+        "difference": "0"
+      }
+    },
+    {
+      "id": "ltp_06_phases",
+      "role": "ratio/product phases",
+      "readiness": "proved",
+      "claim": "The two-carrier families have distinct logarithmic phase geometries.",
+      "formula": "w_n*conj(w_m)=A_nA_m*exp[-i*tau*log(n/m)], while w_nw_m=omega^2*A_nA_m*exp[-i*tau*log(nm)].",
+      "proof_boundary": "The global unit phase cancels only in the ratio family.",
+      "diagnostics": null
+    },
+    {
+      "id": "ltp_07_bochner",
+      "role": "Bochner kernel",
+      "readiness": "proved",
+      "claim": "The unweighted phase-difference kernel is positive semidefinite.",
+      "formula": "For real x_j and complex v_j, sum_(j,k)v_j*conj(v_k)F(x_j-x_k)=sum_(n<=B)A_n*|sum_j v_j*exp(-i*x_j*ell_n)|^2>=0.",
+      "proof_boundary": "Positivity follows from A_n>0.",
+      "diagnostics": {
+        "difference": "0"
+      }
+    },
+    {
+      "id": "ltp_08_boundary",
+      "role": "positivity boundary",
+      "readiness": "proved",
+      "claim": "Bochner positivity does not sign the complete current.",
+      "formula": "Bochner positivity controls the unweighted phase-difference matrix F(x_j-x_k). It does not control the phase-sum family w_nw_m, the polynomially weighted Hermitian kernel, the endpoint-linear sum, or their joint real projection.",
+      "proof_boundary": "No transpose or endpoint sign is inferred.",
+      "diagnostics": null
+    },
+    {
+      "id": "ltp_09_trace",
+      "role": "shifted real trace",
+      "readiness": "proved",
+      "claim": "The leading distance moments are derivatives of one real trace.",
+      "formula": "Put u_n=log(a/n)=L_a-ell_n and f(y)=Re[e^(-i*y*L_a)Z(tau-y)]=Re sum_(n<=B)w_n*exp(-i*y*u_n); define g(y) as the imaginary part of the same sum. For S_r=sum_(n<=B)u_n^r*w_n, f(0)=Re(S_0), f'(0)=Im(S_1), f''(0)=-Re(S_2), and g(0)=Im(S_0).",
+      "proof_boundary": "The imaginary quadrature g is retained.",
+      "diagnostics": null
+    },
+    {
+      "id": "ltp_10_observations",
+      "role": "leading observations",
+      "readiness": "proved",
+      "claim": "The four ideal observations reduce to f, f', f'', and g.",
+      "formula": "At C=1, D=0, s_*'=-i/2, s_*''=0, b=-1/2, b_x=0, and chi_N=-i*u_N/2, the real bulk observations are V=f, Q=A=f'/2, and N=f''/4+(u_x/2)g at y=0.",
+      "proof_boundary": "This is only the exact ideal specialization.",
+      "diagnostics": null
+    },
+    {
+      "id": "ltp_11_turan",
+      "role": "division-free Turan current",
+      "readiness": "proved",
+      "claim": "The ideal bulk current is a Turan numerator plus one quadrature term.",
+      "formula": "P_bulk^(0)=V*N-A*Q=[f*f''-(f')^2]/4+(u_x/2)*f*g at y=0. On every interval where f is nonzero, f*f''-(f')^2=f^2*(log|f|)''. The division-free left side is the primary identity.",
+      "proof_boundary": "The division-free form remains primary.",
+      "diagnostics": {
+        "pair_difference": "0",
+        "log_difference": "0"
+      }
+    },
+    {
+      "id": "ltp_12_zero",
+      "role": "zero-fibre sign",
+      "readiness": "proved",
+      "claim": "On the physical zero fibre f(0)=0, the leading bulk current is nonpositive.",
+      "formula": "If f(0)=0, then P_bulk^(0)=-(f'(0))^2/4<=0; the u_x*f*g term vanishes without division.",
+      "proof_boundary": "This does not control points where f is nonzero.",
+      "diagnostics": {
+        "expression": "-S1_I**2/4"
+      }
+    },
+    {
+      "id": "ltp_13_guard",
+      "role": "integer-log phase guard",
+      "readiness": "proved",
+      "claim": "Positive amplitudes and common logarithmic phase alone do not give a global sign.",
+      "formula": "n=1,2; a=4; ell_1=0, ell_2=log(2); u_1=2log(2), u_2=log(2); Take tau=pi/log(2), omega=-1, A_1=1/2, A_2=1. Then exp[-i*tau*log(2)]=exp(-i*pi)=-1, so w_1=-1/2 and w_2=1. P_bulk^(0)=log(2)^2/8>0 for every real u_x",
+      "proof_boundary": "This exact two-atom example has positive amplitudes, integer logarithmic support, and one common logarithmic phase, but it is not an attained large-q=1 Xi chart. It proves that those abstract properties and Bochner positivity alone cannot sign the leading bulk current.",
+      "diagnostics": {
+        "exact_current": "log(2)**2/8",
+        "pi_provenance": "The pi in this guard is chosen solely to make a half-turn on the log(2) frequency: tau*log(2)=pi and exp(-i*pi)=-1. It is not an inserted physical constant and it proves only a nonimplication. The separate physical u_x=h^2/(8*pi) is inherited from the certified growing-tail source."
+      }
+    },
+    {
+      "id": "ltp_14_correction",
+      "role": "exact correction decomposition",
+      "readiness": "proved",
+      "claim": "The full current is the leading Turan current plus explicit endpoint and kernel corrections.",
+      "formula": "Let E=Re sum_(n<=B)L_nw_n and let H_0^+,T_0^+ be the ideal kernels H_0^+(n,m)=-(u_n+u_m)^2/8 and T_0^+(n,m)=-(lambda_n-lambda_m)^2/8-i*u_x/2. Then exactly h^2*Phi_B=E+P_bulk^(0)+R_corr, where R_corr=(1/2)Re sum_(n,m<=B){[H^+-H_0^+]w_nconj(w_m)+[T^+-T_0^+]w_nw_m}.",
+      "proof_boundary": "Every kernel difference in R_corr vanishes at the ideal specialization, but no quantitative bound on E or R_corr is proved here. They may not be discarded or absorbed into an unnamed error.",
+      "diagnostics": null
+    },
+    {
+      "id": "ltp_15_target",
+      "role": "physical joint target",
+      "readiness": "open",
+      "claim": "Only the actual Xi phase-amplitude-endpoint coupling can now close this route.",
+      "formula": "Use the actual physical tau, amplitudes A_n, terminal aggregate, and correction coefficients to prove E+P_bulk^(0)+R_corr<=h^2/400, preferably h^2/800. A viable argument must control the phase-sum family jointly with the weighted phase-difference family and endpoint.",
+      "proof_boundary": "This proves the positive-amplitude logarithmic Fourier-jet representation, Bochner positivity of its difference kernel, the exact leading Turan-current identity, zero-fibre sign, an integer-log common-phase nonpromotion guard, and an exact correction decomposition. It proves no signed joint bound, upper bound on Phi_B, contact exclusion, retained aggregate sign, Xi residual transfer, Q209, cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+      "diagnostics": null
+    }
+  ]
+}

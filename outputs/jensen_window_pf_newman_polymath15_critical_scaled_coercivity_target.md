@@ -18,14 +18,16 @@ especially the A+B-C approximation in Corollary 6.4.
 ## Critical Region
 
 ```text
-L=log(x/(4*pi))->infinity, c=t*L in [0,c_*+o(1)], c_*=4911678521/1933561194=2.540223984760008..., N=floor(sqrt(x/(4*pi)+t/16))
+L=log(x/(4*pi))->infinity, c=t*L in (0,c_*+o(1)], c_*=4911678521/1933561194=2.540223984760008..., N=floor(sqrt(x/(4*pi)+t/16))
 ```
 
 The oscillatory zeta handoff closes every fixed `c > c_*`, where
 `c_* = 4911678521/1933561194 = 2.540223984760008...`. Thus only
-`0 <= c <= c_* + o(1)` remains asymptotically open. The earlier
+`0 < c <= c_* + o(1)` remains asymptotically open. The earlier
 absolute zeta-moment argument stops at `c=4`; published exponent-pair
 cancellation is what lowers the boundary from `4` to `c_*`.
+
+The Newman criterion requires t>0, so c=0 is not part of the target; however every positive sequence c(L)->0 remains in scope, and no lower cutoff c>=c_0 may be inserted.
 
 ## Finite Coercivity
 
@@ -86,7 +88,7 @@ remainder is then lower order even under crude absolute main-jet caps.
 The remaining theorem obligation is now concrete:
 
 ```text
-Prove C_t[J_(N,t)] greater than its explicit refined C2 remainder budget uniformly for 0<=t*L<=c_*+o(1)
+Prove C_t[J_(N,t)] greater than its explicit refined C2 remainder budget for every 0<t*L<=c_*+o(1), including positive sequences t*L->0
 ```
 
 This is an oscillatory arithmetic inequality for a finite sum of

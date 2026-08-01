@@ -1,0 +1,183 @@
+{
+  "assumptions": [
+    "K is real and continuous on R",
+    "K(s)=0 for s<0",
+    "K[t] is the compact self-adjoint Suzuki truncation"
+  ],
+  "date": "2026-07-23",
+  "exact": {
+    "conditional_inner_result": "If E_(omega,nu) belongs to HB, Suzuki Proposition 5.1 gives a full L2 isometry K, K[t]=P_t K P_t, and ||K[t]||<1 for every finite t",
+    "determinant_contractivity": "For every T>=0: det(I+/-K[t])!=0 for all 0<=t<=T iff ||K[T]||<1 iff ||K[t]||<1 for all 0<=t<=T",
+    "effective_interval": "K[t] vanishes on inputs supported in (-infinity,-t) and its output vanishes on (-infinity,-t); it is therefore represented by the continuous kernel K(x+y) on the finite square (-t,t)^2",
+    "first_crossing": "If T_*=inf{t>=0: ||K[t]||=1}<infinity, compact self-adjointness forces +1 or -1 to be an eigenvalue of K[T_*], so det(I-K[T_*])=0 or det(I+K[T_*])=0",
+    "fixed_space": "For (U_t f)(u)=f(t-u), u>0: A_t=U_t K[t] U_t^(-1), (A_t g)(u)=integral_0^infinity K(2t-u-v)g(v)dv",
+    "high_contour_ceiling": "T_HC(omega,nu)=sup_(v>1/2+omega) [log(1/M_v)]_+/(2v)<infinity; the certificate M_v^2*exp(4v*t)<1 cannot prove any t>T_HC",
+    "high_contour_certificate": "Suzuki's Proposition 4.2 eigenfunction contradiction is certified when M_v^2*exp(4v*t)<1 for some v>1/2+omega, where M_v=sup_(u in R)|Theta_(omega,nu)(u+i*v)|",
+    "hilbert_schmidt": "||K[t]||_HS^2=integral_0^(2t) (2t-s)*|K(s)|^2 ds",
+    "hilbert_schmidt_growth": "If c_R=integral_0^R |K(s)|^2 ds>0, then for t>R/2: ||K[t]||_HS^2 >= (2t-R)*c_R -> infinity",
+    "isolated_time_guard": "At one isolated time determinant nonvanishing is weaker: A=2P for a rank-one orthogonal projection has ||A||=2, det(I-A)=-1, and det(I+A)=3",
+    "no_uniform_gap": "Under the same HB hypothesis, P_t->I strongly and K is an isometry, so lim_(t->infinity)||K[t]||=1; no epsilon>0 can satisfy ||K[t]||<=1-epsilon for every t",
+    "norm_monotonicity": "For 0<=t_1<=t_2, ||K[t_1]||<=||K[t_2]||, because K[t_1] is the quadratic-form compression of the self-adjoint K[t_2]",
+    "operator": "(K[t]f)(x)=1_(x<t)*integral_(-infinity)^t K(x+y)f(y)dy, with K(s)=0 for s<0",
+    "path_continuity": "For continuous K with K(s)=0 on s<0, t -> A_t is continuous in Hilbert-Schmidt norm and A_0=0",
+    "quadratic_form_target": "The noncircular live target is, for every finite t and every nonzero f: |<K[t]f,f>|<||f||^2, equivalently I+K[t]>0 and I-K[t]>0",
+    "terminal_sequence_reduction": "For one fixed pair, pointwise-in-t strict contractivity does not directly prove J(t;z,z)->0. On a strictly decreasing cofinal omega_n->0 sequence, however, all-time contractivity gives a bounded causal multiplier, forces RH by shifted-zero accumulation, and then Suzuki's Theorem 2.3 supplies the terminal limit",
+    "zeta_vertical_asymptotic": "For zeta and a=nu*omega: Theta_(omega,nu)(i*v)=[xi(v+1/2-omega)/xi(v+1/2+omega)]^nu ~(2*pi/v)^a as v->infinity"
+  },
+  "kind": "jensen_window_pf_suzuki_spectral_frontier",
+  "proof_boundary": "This artifact proves the fixed-space translation, exact Hilbert-Schmidt identity, path continuity and monotonicity, the all-history determinant/contractivity equivalence, the first-crossing alternative, and finite-ceiling guards for Hilbert-Schmidt and Suzuki sup-contour certificates. It records Suzuki's conditional HB contraction theorem and proves that its norms tend to one. Together with the separately checked causal-multiplier reduction, it records that the terminal premise is redundant for a cofinal determinant family. It does not prove the signed quadratic-form target, global Fredholm nonvanishing for zeta without HB, the Phi Pick sign, PF-infinity, RH, or Lambda<=0.",
+  "rows": [
+    {
+      "claim": "Every Suzuki truncation is unitarily equivalent to a finite-triangle Hankel operator on one fixed half-line space.",
+      "formula": "For (U_t f)(u)=f(t-u), u>0: A_t=U_t K[t] U_t^(-1), (A_t g)(u)=integral_0^infinity K(2t-u-v)g(v)dv",
+      "id": "ssf_01_fixed_space_translation",
+      "proof_boundary": "This uses only the support K(s)=0 for s<0.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Although written on a half-line, the truncation acts only on a finite interval.",
+      "formula": "K[t] vanishes on inputs supported in (-infinity,-t) and its output vanishes on (-infinity,-t); it is therefore represented by the continuous kernel K(x+y) on the finite square (-t,t)^2",
+      "id": "ssf_02_effective_finite_interval",
+      "proof_boundary": "This does not bound its operator norm.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The Hilbert-Schmidt norm has a one-dimensional weighted-kernel formula.",
+      "formula": "||K[t]||_HS^2=integral_0^(2t) (2t-s)*|K(s)|^2 ds",
+      "id": "ssf_03_hilbert_schmidt_identity",
+      "proof_boundary": "The identity is valid for every locally square-integrable supported kernel.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "For every nonzero continuous supported kernel, the Hilbert-Schmidt norm of the truncations diverges.",
+      "formula": "If c_R=integral_0^R |K(s)|^2 ds>0, then for t>R/2: ||K[t]||_HS^2 >= (2t-R)*c_R -> infinity",
+      "id": "ssf_04_hilbert_schmidt_divergence",
+      "proof_boundary": "This does not imply that the operator norm exceeds one.",
+      "readiness": "guard_validated",
+      "role": "exact_route_guard"
+    },
+    {
+      "claim": "The sufficient estimate ||K[t]||<=||K[t]||_HS<1 can only certify a bounded initial t-range.",
+      "formula": "If c_R=integral_0^R |K(s)|^2 ds>0, then for t>R/2: ||K[t]||_HS^2 >= (2t-R)*c_R -> infinity",
+      "id": "ssf_05_hilbert_schmidt_certificate_no_go",
+      "proof_boundary": "Cancellation-sensitive operator estimates remain possible.",
+      "readiness": "guard_validated",
+      "role": "exact_route_guard"
+    },
+    {
+      "claim": "The translated compact operators form a Hilbert-Schmidt-continuous path starting at zero.",
+      "formula": "For continuous K with K(s)=0 on s<0, t -> A_t is continuous in Hilbert-Schmidt norm and A_0=0",
+      "id": "ssf_06_truncation_path_continuity",
+      "proof_boundary": "Suzuki Proposition 4.1 supplies continuity of the arithmetic kernel when nu*omega>1.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "The truncation operator norm is nondecreasing in t.",
+      "formula": "For 0<=t_1<=t_2, ||K[t_1]||<=||K[t_2]||, because K[t_1] is the quadratic-form compression of the self-adjoint K[t_2]",
+      "id": "ssf_07_operator_norm_monotonicity",
+      "proof_boundary": "Monotonicity alone does not keep the norm below one.",
+      "readiness": "available_exact",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "Along the whole connected truncation path, Suzuki's two determinant exclusions are exactly pointwise strict contractivity.",
+      "formula": "For every T>=0: det(I+/-K[t])!=0 for all 0<=t<=T iff ||K[T]||<1 iff ||K[t]||<1 for all 0<=t<=T",
+      "id": "ssf_08_global_determinant_contractivity_equivalence",
+      "proof_boundary": "The all-earlier-times quantifier is essential.",
+      "readiness": "ready_to_apply",
+      "role": "exact_equivalence"
+    },
+    {
+      "claim": "Any finite failure has a first spectral collision at +1 or -1.",
+      "formula": "If T_*=inf{t>=0: ||K[t]||=1}<infinity, compact self-adjointness forces +1 or -1 to be an eigenvalue of K[T_*], so det(I-K[T_*])=0 or det(I+K[T_*])=0",
+      "id": "ssf_09_first_crossing_alternative",
+      "proof_boundary": "The open task is to rule out this first collision for the arithmetic kernel.",
+      "readiness": "ready_to_apply",
+      "role": "exact_equivalence"
+    },
+    {
+      "claim": "At a single isolated t, nonzero determinants do not imply contraction.",
+      "formula": "At one isolated time determinant nonvanishing is weaker: A=2P for a rank-one orthogonal projection has ||A||=2, det(I-A)=-1, and det(I+A)=3",
+      "id": "ssf_10_isolated_time_guard",
+      "proof_boundary": "The example is a logical spectral guard, not a Suzuki truncation path.",
+      "readiness": "guard_validated",
+      "role": "exact_countermodel"
+    },
+    {
+      "claim": "Suzuki's unconditional local interval follows from a weighted high-contour eigenfunction contradiction.",
+      "formula": "Suzuki's Proposition 4.2 eigenfunction contradiction is certified when M_v^2*exp(4v*t)<1 for some v>1/2+omega, where M_v=sup_(u in R)|Theta_(omega,nu)(u+i*v)|",
+      "id": "ssf_11_suzuki_high_contour_certificate",
+      "proof_boundary": "The condition is sufficient and local, not necessary.",
+      "readiness": "available_exact",
+      "role": "published_exact_argument"
+    },
+    {
+      "claim": "For each fixed zeta pair (omega,nu), Suzuki's M_v certificate has a finite t ceiling.",
+      "formula": "T_HC(omega,nu)=sup_(v>1/2+omega) [log(1/M_v)]_+/(2v)<infinity; the certificate M_v^2*exp(4v*t)<1 cannot prove any t>T_HC",
+      "id": "ssf_12_high_contour_finite_ceiling",
+      "proof_boundary": "This rejects only this sup-norm contour certificate, not every possible contour argument.",
+      "readiness": "guard_validated",
+      "role": "exact_route_guard"
+    },
+    {
+      "claim": "Hermite-Biehler innerness supplies strict contraction at every finite t.",
+      "formula": "If E_(omega,nu) belongs to HB, Suzuki Proposition 5.1 gives a full L2 isometry K, K[t]=P_t K P_t, and ||K[t]||<1 for every finite t",
+      "id": "ssf_13_conditional_inner_contractivity",
+      "proof_boundary": "Using this implication to establish the same HB property would be circular.",
+      "readiness": "conditional_only",
+      "role": "published_conditional_theorem"
+    },
+    {
+      "claim": "In the desired HB case the finite-t norms approach one, so a t-uniform positive gap is impossible.",
+      "formula": "Under the same HB hypothesis, P_t->I strongly and K is an isometry, so lim_(t->infinity)||K[t]||=1; no epsilon>0 can satisfy ||K[t]||<=1-epsilon for every t",
+      "id": "ssf_14_no_uniform_t_gap",
+      "proof_boundary": "The target is strictness at each finite t, not one epsilon valid for all t.",
+      "readiness": "guard_validated",
+      "role": "exact_conditional_consequence"
+    },
+    {
+      "claim": "The surviving noncircular spectral task is a signed quadratic-form barrier against finite first crossing.",
+      "formula": "The noncircular live target is, for every finite t and every nonzero f: |<K[t]f,f>|<||f||^2, equivalently I+K[t]>0 and I-K[t]>0",
+      "id": "ssf_15_signed_quadratic_form_target",
+      "proof_boundary": "No arithmetic factorization or coercive identity proving this is currently known in the corpus.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    },
+    {
+      "claim": "The terminal premise is fixed-family independent but cofinal-sequence redundant.",
+      "formula": "For one fixed pair, pointwise-in-t strict contractivity does not directly prove J(t;z,z)->0. On a strictly decreasing cofinal omega_n->0 sequence, however, all-time contractivity gives a bounded causal multiplier, forces RH by shifted-zero accumulation, and then Suzuki's Theorem 2.3 supplies the terminal limit",
+      "id": "ssf_16_terminal_sequence_reduction",
+      "proof_boundary": "This uses the separately checked determinant-only causal-multiplier reduction and does not derive the terminal limit directly from one fixed family.",
+      "readiness": "internally_audited",
+      "role": "exact_cross_artifact_reduction"
+    }
+  ],
+  "sources": [
+    {
+      "relevant_results": "Propositions 4.1-4.3 and 5.1; Theorem 2.4",
+      "title": "Masatoshi Suzuki, Hamiltonians arising from L-functions in the Selberg class",
+      "url": "https://arxiv.org/abs/1606.05726"
+    },
+    {
+      "path": "outputs/jensen_window_pf_xi_pick_suzuki_hankel_bridge.md",
+      "title": "Xi Pick/Suzuki arithmetic-Hankel bridge"
+    },
+    {
+      "path": "outputs/jensen_window_pf_suzuki_determinant_only_reduction.md",
+      "title": "Suzuki determinant-only reduction"
+    }
+  ],
+  "status": "exact truncation-path spectral reformulation, finite-ceiling route guards, one open signed quadratic-form target, and an internally audited cofinal terminal reduction",
+  "toy_checks": {
+    "hs_kernel": "K(s)=s for s>=0",
+    "hs_squared": "4/3",
+    "hs_time": "1",
+    "rank_one_det_minus": "-1",
+    "rank_one_det_plus": "3",
+    "rank_one_eigenvalue": "2"
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_critical_dirichlet_second_order_remainder_certificate",
+  "date": "2026-07-26",
+  "status": "explicit second-order finite-Dirichlet remainder on fixed critical cutoff cells",
+  "proof_boundary": "This artifact proves the C_D/T^2 per-term estimate and its fixed-cell summed C1 transfer. It does not prove the heat-integrated Riemann-Siegel a^-2 endpoint remainder, the new adjacent-cutoff signed lift, a strict contact inequality, contact exclusion, Lambda<=0, or RH.",
+  "builder_sha256": "a25976617e9d28257d3e6423e3bf65a2e9447e4ddf9b5269391e670683fbfaf5",
+  "source_sha256": {
+    "first_correction": "0d5038807a75ed4040aaa27baf25477987d45bd3d0fb61422117ed6c68b9a78b",
+    "critical_collar": "2b960096b6b6baa633e88567b2bae212c94cb48347649f452aa8fef46403c517"
+  },
+  "exact": {
+    "region": "L>=50, 0<t<=1/2, tL<=25, T>=2*pi*exp(L-1), |sigma|<=1, n<=N, and the radius-1/L disk lies in one prescribed-N cell",
+    "coefficient_bound": "On the critical collar, |alpha(s)|<=L/2+(1+pi)/2+2/T and log(n)<=L/2+1; hence t|alpha_n|<=27",
+    "shift_bound": "w=sqrt(t)v+c, c=t*alpha_n/2, |c|<=27/2",
+    "split": "V=T^(1/3); central: |v|<=V; tail: |v|>V",
+    "central_geometry": "For T>=10^6, |v|<=V implies |w|<=V and Im(s+u*w)>=T/2 for 0<=u<=1",
+    "derivative_bounds": "|alpha'(s)|<=1/T and sup_(0<=u<=1)|alpha''(s+u*w)|<=3/T^2",
+    "central_logs": "g=1/(6s)+alpha'(s)w^2/2; rho=R_M+R_G+1/(6(s+w))-1/(6s); |rho|<=(|w|^3/2+|w|/3+12/T)/T^2",
+    "central_pointwise": "|g+rho|<0.006, |exp(g+rho)-1-g|<=|rho|+|g+rho|^2",
+    "central_moments": "E|w|^3<10980, E|w|<15, E|w|^4<307330; E|rho|<5496/T^2, E|g|^2<153666/T^2, E|rho|^2<T^-2",
+    "central_result": "integral_(|v|<=V)|exp(g+rho)-1-g|dmu <=312830/T^2",
+    "published_tail_envelope": "The pointwise envelope in the proof of Polymath Proposition 6.1 gives |I(v)|dmu<=pi^(-1/2)exp(92/T)*exp(-(1-0.26/T)v^2)dv",
+    "tail_results": "For T>=10^6: integral_tail |I|dmu<=T^-2, mu(tail)<=T^-3, E[v^2 1_tail]<=T^-1, and integral_tail |I-1-g|dmu<=2/T^2",
+    "scalar_guards": "At T=10^6, T^(1/3)=100 and T^(2/3)=10000. The exact rational bounds log(T)<14, log(2)<1, pi>157/50, and e<68/25 make all three tail logarithms negative, their derivative upper bounds negative, the central exponent <3/500, and the fixed-cell constant <8000000",
+    "per_term_certificate": "|r_(t,n)(s)/m_(t,n)(s)-(1+d_(t,n)(s))|<=400000/T^2",
+    "fixed_cell_sum": "Using the two-block coefficient mass <=50*exp(L/4), sup_collar |B_t|/A_t<2, and T>=2*pi*exp(L-1): |R_D|/A_t<8000000*exp(-7L/4)",
+    "fixed_cell_c1": "Cauchy on the radius-1/L disk gives |partial_x R_D|/A_t<8000000*L*exp(-7L/4)",
+    "scale_absorption": "8000000*exp(-7L/4)<0.000112*exp(-5L/4) for L>=50",
+    "remaining_splice": "The fixed-N Dirichlet residual is closed. A global corrected remainder still needs the heat-integrated endpoint a^-2 bound and one adjacent-cutoff comparison for the new signed lift.",
+    "shifted_second_moment": "For w=sqrt(t)v+c and dmu=pi^(-1/2)exp(-v^2)dv, E[w^2]=c^2+t/2",
+    "gaussian_moments": "E|v|=1/sqrt(pi), E|v|^3=1/sqrt(pi), E[v^4]=3/4"
+  },
+  "interval_audit": {
+    "role": "high_precision_margin_audit_after_exact_rational_guards",
+    "precision_digits": 80,
+    "T_audit_min": "1000000",
+    "actual_T_min_lower_bound": "11984211960000554356237.4704588507437795648004701854030141285",
+    "central_exponent_upper_at_T_audit_min": "0.00500116666666666666666666666666666666666666666666666666666667",
+    "exact_tail_log_margin_at_T_audit_min": "-9877.53637167713074180570825027127433957372711751249529615204",
+    "mass_tail_log_margin_at_T_audit_min": "-9963.73100345501996914278385040072670203420602358839728816922",
+    "second_tail_log_margin_at_T_audit_min": "-9980.88617207548768921843883624106690977111568795660956093761",
+    "exact_tail_log_derivative_at_T_audit_min": "-0.00659833342533333333333333333333333333333333333333333333333333",
+    "mass_tail_log_derivative_at_T_audit_min": "-0.006664",
+    "second_tail_log_derivative_at_T_audit_min": "-0.00666533333333333333333333333333333333333333333333333333333333",
+    "V_at_T_audit_min": "100.0",
+    "central_constant": "312830",
+    "tail_constant": "2",
+    "per_term_constant": "400000",
+    "fixed_cell_constant_ball": "7486679.09943288343643125329260883116733060898982563443002436",
+    "fixed_cell_constant_lt": "8000000",
+    "exact_rational_guards": {
+      "log_T_lt_14": "sum_(k=0)^40 14^k/k! > 10^6, hence log(10^6)<14",
+      "e_lt_2_72": "sum_(k=0)^9 1/k! + 11/(10*10!) < 68/25",
+      "pi_gt_3_14": "classical bound pi>157/50",
+      "exact_tail_log_upper": "-29627/3",
+      "mass_tail_log_upper": "-29888/3",
+      "second_tail_log_upper": "-29941/3",
+      "exact_tail_derivative_upper_after_multiplying_by_T": "-19795/3",
+      "mass_tail_derivative_upper_after_multiplying_by_T": "-6664",
+      "second_tail_derivative_upper_after_multiplying_by_T": "-19996/3",
+      "central_exponent_upper": "30007/6000000",
+      "fixed_cell_constant_upper": "184960000000/24649",
+      "critical_T_min_guard": "2*pi*e^49>6*2^49>10^6"
+    }
+  },
+  "rows": [
+    {
+      "id": "np15cd2rc_01_exact_ratio",
+      "role": "source_reduction",
+      "readiness": "available_published",
+      "claim": "The first-correction gate supplies the exact centered ratio and signed coefficient.",
+      "formula": "I(v)=GammaStar((s+w)/2)*exp(log M_0(s+w)-log M_0(s)-alpha(s)w); d=E[g]",
+      "proof_boundary": "Reuses the checked exact ratio; no estimate here."
+    },
+    {
+      "id": "np15cd2rc_02_collar_shift",
+      "role": "exact_bound",
+      "readiness": "available_exact",
+      "claim": "The complete saddle shift is uniformly bounded on the critical collar.",
+      "formula": "L>=50, 0<t<=1/2, tL<=25, T>=2*pi*exp(L-1), |sigma|<=1, n<=N, and the radius-1/L disk lies in one prescribed-N cell; On the critical collar, |alpha(s)|<=L/2+(1+pi)/2+2/T and log(n)<=L/2+1; hence t|alpha_n|<=27; w=sqrt(t)v+c, c=t*alpha_n/2, |c|<=27/2",
+      "proof_boundary": "Uses only the explicit alpha formula and cutoff geometry."
+    },
+    {
+      "id": "np15cd2rc_03_central_geometry",
+      "role": "exact_bound",
+      "readiness": "available_exact",
+      "claim": "The central segment stays uniformly in the upper half-plane.",
+      "formula": "V=T^(1/3); central: |v|<=V; tail: |v|>V; For T>=10^6, |v|<=V implies |w|<=V and Im(s+u*w)>=T/2 for 0<=u<=1",
+      "proof_boundary": "The actual critical T threshold is much larger than 10^6."
+    },
+    {
+      "id": "np15cd2rc_04_log_derivatives",
+      "role": "exact_bound",
+      "readiness": "available_exact",
+      "claim": "The explicit M_0 logarithmic derivatives have the required second-order decay.",
+      "formula": "|alpha'(s)|<=1/T and sup_(0<=u<=1)|alpha''(s+u*w)|<=3/T^2",
+      "proof_boundary": "Direct modulus bounds for alpha' and alpha''."
+    },
+    {
+      "id": "np15cd2rc_05_log_remainder",
+      "role": "exact_bound",
+      "readiness": "available_exact",
+      "claim": "The Taylor and scaled-gamma remainders give one integrable central majorant.",
+      "formula": "g=1/(6s)+alpha'(s)w^2/2; rho=R_M+R_G+1/(6(s+w))-1/(6s); |rho|<=(|w|^3/2+|w|/3+12/T)/T^2",
+      "proof_boundary": "Uses the DLMF complex log-gamma remainder."
+    },
+    {
+      "id": "np15cd2rc_06_gaussian_moments",
+      "role": "exact_identity",
+      "readiness": "available_exact",
+      "claim": "All shifted moments needed by the central estimate are explicit.",
+      "formula": "For w=sqrt(t)v+c and dmu=pi^(-1/2)exp(-v^2)dv, E[w^2]=c^2+t/2; E|v|=1/sqrt(pi), E|v|^3=1/sqrt(pi), E[v^4]=3/4; E|w|^3<10980, E|w|<15, E|w|^4<307330; E|rho|<5496/T^2, E|g|^2<153666/T^2, E|rho|^2<T^-2",
+      "proof_boundary": "The displayed inequalities deliberately round upward."
+    },
+    {
+      "id": "np15cd2rc_07_central_certificate",
+      "role": "exact_bound",
+      "readiness": "available_exact",
+      "claim": "The central exponential remainder is second order with an explicit constant.",
+      "formula": "|g+rho|<0.006, |exp(g+rho)-1-g|<=|rho|+|g+rho|^2; integral_(|v|<=V)|exp(g+rho)-1-g|dmu <=312830/T^2",
+      "proof_boundary": "Uniform in n and t under the collar hypotheses."
+    },
+    {
+      "id": "np15cd2rc_08_tail_envelope",
+      "role": "published_bound",
+      "readiness": "available_published",
+      "claim": "The published quadratic envelope controls the region where a cubic Taylor exponential would fail.",
+      "formula": "The pointwise envelope in the proof of Polymath Proposition 6.1 gives |I(v)|dmu<=pi^(-1/2)exp(92/T)*exp(-(1-0.26/T)v^2)dv",
+      "proof_boundary": "This is the pointwise estimate used inside the proof of Proposition 6.1."
+    },
+    {
+      "id": "np15cd2rc_09_tail_certificate",
+      "role": "exact_bound",
+      "readiness": "available_exact",
+      "claim": "The exact integrand and correction polynomial have a negligible Gaussian tail.",
+      "formula": "For T>=10^6: integral_tail |I|dmu<=T^-2, mu(tail)<=T^-3, E[v^2 1_tail]<=T^-1, and integral_tail |I-1-g|dmu<=2/T^2",
+      "proof_boundary": "At T=10^6, T^(1/3)=100 and T^(2/3)=10000. The exact rational bounds log(T)<14, log(2)<1, pi>157/50, and e<68/25 make all three tail logarithms negative, their derivative upper bounds negative, the central exponent <3/500, and the fixed-cell constant <8000000. The stored high-precision values are margin diagnostics only."
+    },
+    {
+      "id": "np15cd2rc_10_per_term_certificate",
+      "role": "proved_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Every critical Dirichlet component has an explicit uniform second-order relative remainder.",
+      "formula": "|r_(t,n)(s)/m_(t,n)(s)-(1+d_(t,n)(s))|<=400000/T^2",
+      "proof_boundary": "Fixed cutoff and its radius-1/L analytic collar."
+    },
+    {
+      "id": "np15cd2rc_11_fixed_cell_c1",
+      "role": "proved_transfer",
+      "readiness": "ready_to_apply",
+      "claim": "Summation and Cauchy close both finite Dirichlet blocks below the next global scale.",
+      "formula": "Using the two-block coefficient mass <=50*exp(L/4), sup_collar |B_t|/A_t<2, and T>=2*pi*exp(L-1): |R_D|/A_t<8000000*exp(-7L/4); Cauchy on the radius-1/L disk gives |partial_x R_D|/A_t<8000000*L*exp(-7L/4); 8000000*exp(-7L/4)<0.000112*exp(-5L/4) for L>=50",
+      "proof_boundary": "Does not include the Riemann-Siegel endpoint residual."
+    },
+    {
+      "id": "np15cd2rc_12_global_splice_guard",
+      "role": "route_guard",
+      "readiness": "open",
+      "claim": "The finite-sum theorem must not be promoted to a global corrected remainder.",
+      "formula": "The fixed-N Dirichlet residual is closed. A global corrected remainder still needs the heat-integrated endpoint a^-2 bound and one adjacent-cutoff comparison for the new signed lift.",
+      "proof_boundary": "Endpoint a^-2 control, the signed adjacent-cutoff lift, contact exclusion, Lambda<=0, and RH remain open."
+    }
+  ],
+  "summary": {
+    "rows": 12,
+    "exact_or_published_reductions": 9,
+    "proved_theorems": 2,
+    "open_route_guards": 1,
+    "per_term_constant": 400000,
+    "fixed_cell_constant": 8000000
+  },
+  "sources": [
+    "https://arxiv.org/abs/1904.12438",
+    "https://dlmf.nist.gov/5.11",
+    "outputs/jensen_window_pf_newman_polymath15_critical_dirichlet_first_correction_gate.md",
+    "outputs/jensen_window_pf_newman_polymath15_critical_C1_cell_remainder_certificate.md"
+  ]
+}

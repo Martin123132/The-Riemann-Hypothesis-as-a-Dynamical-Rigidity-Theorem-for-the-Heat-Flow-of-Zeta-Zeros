@@ -1,0 +1,263 @@
+{
+  "kind": "jensen_window_pf_newman_cofinal_boundary_degree_transfer_target",
+  "date": "2026-07-26",
+  "status": "exact cofinal boundary-degree transfer target and endpoint-uniformity guard",
+  "proof_boundary": "This artifact proves an exact vector first-jet boundary homotopy and composes it with the sign-definite heat-contact index and diagonal exhaustion. It reduces the missing global input to continuous arithmetic boundary proxies with strict C1 domination and zero winding. It does not construct that cofinal proxy family, prove retained first-jet separation, prove Lambda<=0, or prove RH.",
+  "sources": [
+    "outputs/jensen_window_pf_newman_first_jet_winding_gate.md",
+    "outputs/jensen_window_pf_newman_positive_boundary_diagonal_exhaustion_gate.md",
+    "outputs/jensen_window_pf_newman_theta_forward_adaptive_sqrt_tail_gate.md",
+    "outputs/jensen_window_pf_newman_theta_forward_sqrt_to_corrected_rs_C1_transfer_gate.md",
+    "outputs/jensen_window_pf_newman_polymath15_critical_C1_global_remainder_certificate.md",
+    "outputs/jensen_window_pf_newman_theta_forward_six_term_finite_bridge_interval_certificate.md",
+    "outputs/jensen_window_pf_newman_counterfactual_birth_signature_atlas.md"
+  ],
+  "exact": {
+    "normalizer_orientation": {
+      "normalization": "H=A*Z with A>0 and a=partial_x log(A)",
+      "scaled_jets": "V_H=(H,H_x/ell)=A*[[1,0],[a/ell,1]]*(Z,Z_x/ell)=A*S_a,ell*V_Z",
+      "matrix": "Matrix([[amplitude, 0], [amplitude*log_slope/scale, amplitude]])",
+      "determinant": "amplitude**2",
+      "conclusion": "The positive normalizer, derivative shear, and every positive jet scale preserve boundary nonvanishing, local degree, and winding."
+    },
+    "scaled_contact_index": {
+      "heat_equation": "partial_t F=-partial_x^2 F",
+      "scaled_map": "V_F=(F,F_x/ell), where ell(t,x)>0",
+      "orientation_convention": "Use the standard (x,t) orientation, matching the counterclockwise bottom-edge traversal x=0 to x=R.",
+      "double_contact_determinant_x_t": "f_xx**2/scale",
+      "double_contact_determinant_t_x": "-f_xx**2/scale",
+      "all_multiplicity_index": "At a spatial multiplicity-m contact, ind_(x,t)(V_F)=+floor(m/2)>0; reversing to (t,x) reverses both the index and boundary orientation.",
+      "global_degree": "deg(V_F,Omega,0)=wind((F+i*F_x/ell)(partial Omega),0)=+sum_p floor(m_p/2) in the standard (x,t) orientation."
+    },
+    "boundary_rouche": {
+      "split": "V_Z=V_P+V_R on partial Omega",
+      "proxy": "V_P=(P,P_x/ell)",
+      "error": "V_R=(Z-P,(Z_x-P_x)/ell)",
+      "strict_domination": "||V_R||_2<||V_P||_2 pointwise on partial Omega",
+      "homotopy": "V_s=V_P+s*V_R for 0<=s<=1",
+      "reverse_triangle": "||V_s||_2>=||V_P||_2-s*||V_R||_2>0",
+      "conclusion": "V_Z and V_P are boundary-nonzero and have the same winding."
+    },
+    "zero_degree_exclusion": {
+      "criterion": "If the boundary domination holds and wind(V_P)=0, then Omega contains no real multiple-zero contact of Z or H.",
+      "reason": "The transferred full winding is zero, while every possible interior contact has strictly positive local index in the standard (x,t) orientation.",
+      "scope": "The proxy may have interior zeros or mixed local indices; only its boundary winding enters the argument."
+    },
+    "cofinal_contract": {
+      "rectangles": "Q_j=[1/(5*j),1/4]x[0,38+j]",
+      "known_equivalence": "Lambda<=0 iff the full Xi first jet is boundary-nonzero with zero winding on every Q_j.",
+      "current_base": "Q_207=[1/1035,1/4]x[0,245] is already contact-free with zero first-jet winding.",
+      "open_boundary_theorem": "For every j>=208, construct a continuous boundary proxy P_j, a positive scale ell_j, and certified errors satisfying strict boundary domination and wind(V_(P_j))=0.",
+      "conditional_endgame": "The open boundary theorem for every j>=208, together with Q_207 and positive-boundary attainment, implies Lambda<=0 and RH."
+    },
+    "ordinary_proxy": {
+      "domain": "x>=245, 0<t<=1/5, L=log(x/(4*pi))",
+      "main": "O_(h,t)=J_(N_(F,h),t)^F/(16*x^4*A_t)",
+      "value_error": "E_F0=exp(-3h)/(25*x^(23/4))",
+      "derivative_error": "E_F1=E_F0*(1/2+(1+4/x)/L)",
+      "boundary_target": "O_h^2+(O_h'/L)^2>E_F0^2+E_F1^2 only on the selected high-frequency boundary arcs.",
+      "loose_sufficient_target": "O_h^2+(O_h'/L)^2>2*exp(-6h)/(625*x^(23/2))"
+    },
+    "corrected_proxy": {
+      "domain": "L>=50, 0<t<=1/5, t*L<=25",
+      "main": "J_hat_(N,t)",
+      "error_budget": "r_RS^2+(r_RS'/L)^2<32000000*exp(-3L/2)",
+      "boundary_target": "J_hat^2+(J_hat'/L)^2>32000000*exp(-3L/2) only on the selected boundary arcs.",
+      "guard": "The ordinary and corrected certified envelopes differ by five exponents; their quantitative targets must not be interchanged."
+    },
+    "continuity_contract": {
+      "requirement": "P_j must be continuous around the complete closed boundary.",
+      "fixed_cutoff_option": "Use a fixed retained cutoff on each finite boundary arc whenever the tail theorem remains valid after retaining extra terms.",
+      "chart_option": "Alternatively join adjacent cutoff charts through overlap homotopies that retain strict first-jet domination.",
+      "warning": "A pointwise family with unbridged cutoff jumps has no defined boundary winding and cannot discharge the theorem."
+    },
+    "endpoint_safe_model": {
+      "flow": "G_(epsilon,t)(x)=x^2+epsilon-2t",
+      "heat_equation": "partial_t G=-partial_x^2 G",
+      "collision_time": "t=epsilon/2",
+      "simple_region": "For t>epsilon/2 the zeros are +/-sqrt(2t-epsilon), real and simple.",
+      "lower_boundary": "t=epsilon/2+eta",
+      "jet_norm_at_center": "4*eta**2",
+      "limit": "4*eta^2 tends to zero as eta tends to zero",
+      "conclusion": "Contact-free rectangles need not have a time-independent interior first-jet floor; boundary margins may deteriorate with the rectangle."
+    },
+    "route_decision": {
+      "primary": "Use the cofinal boundary-degree contract as the minimal direct collision route. It keeps the sign-definite heat-contact charge and asks arithmetic separation only on one-dimensional edges.",
+      "secondary": "Retain the global corrected phase-critical small-ball theorem as a stronger alternative and the all-degree Jensen/PF route as an independent structural alternative.",
+      "next_bounded_input": "A permanent low-time compact base through x=245 and a continuous proxy/winding pilot for the first boundary beyond Q_207 would test the contract without pretending that one finite stage is global."
+    }
+  },
+  "rows": [
+    {
+      "id": "ncbdt_01_normalizer_orientation",
+      "role": "exact_lemma",
+      "readiness": "available_exact",
+      "claim": "Positive Xi normalization and positive derivative scaling preserve first-jet degree and winding.",
+      "formula": "V_H=(H,H_x/ell)=A*[[1,0],[a/ell,1]]*(Z,Z_x/ell)=A*S_a,ell*V_Z",
+      "proof_boundary": "Linear first-jet identity only; it proves no boundary margin.",
+      "diagnostics": {
+        "normalization": "H=A*Z with A>0 and a=partial_x log(A)",
+        "scaled_jets": "V_H=(H,H_x/ell)=A*[[1,0],[a/ell,1]]*(Z,Z_x/ell)=A*S_a,ell*V_Z",
+        "matrix": "Matrix([[amplitude, 0], [amplitude*log_slope/scale, amplitude]])",
+        "determinant": "amplitude**2",
+        "conclusion": "The positive normalizer, derivative shear, and every positive jet scale preserve boundary nonvanishing, local degree, and winding."
+      }
+    },
+    {
+      "id": "ncbdt_02_scaled_contact_charge",
+      "role": "exact_composition",
+      "readiness": "available_exact",
+      "claim": "Every multiple heat contact retains a strictly positive index in the standard (x,t) orientation under a positive scaled first jet.",
+      "formula": "deg(V_F,Omega,0)=wind((F+i*F_x/ell)(partial Omega),0)=+sum_p floor(m_p/2) in the standard (x,t) orientation.",
+      "proof_boundary": "Composes the independently checked all-multiplicity heat-contact theorem.",
+      "diagnostics": {
+        "heat_equation": "partial_t F=-partial_x^2 F",
+        "scaled_map": "V_F=(F,F_x/ell), where ell(t,x)>0",
+        "orientation_convention": "Use the standard (x,t) orientation, matching the counterclockwise bottom-edge traversal x=0 to x=R.",
+        "double_contact_determinant_x_t": "f_xx**2/scale",
+        "double_contact_determinant_t_x": "-f_xx**2/scale",
+        "all_multiplicity_index": "At a spatial multiplicity-m contact, ind_(x,t)(V_F)=+floor(m/2)>0; reversing to (t,x) reverses both the index and boundary orientation.",
+        "global_degree": "deg(V_F,Omega,0)=wind((F+i*F_x/ell)(partial Omega),0)=+sum_p floor(m_p/2) in the standard (x,t) orientation."
+      }
+    },
+    {
+      "id": "ncbdt_03_boundary_rouche",
+      "role": "exact_lemma",
+      "readiness": "available_exact",
+      "claim": "Strict first-jet error domination on the boundary transfers winding from a continuous proxy to the full function.",
+      "formula": "||V_s||_2>=||V_P||_2-s*||V_R||_2>0",
+      "proof_boundary": "Finite-dimensional boundary homotopy; strict domination must still be proved for Xi.",
+      "diagnostics": {
+        "split": "V_Z=V_P+V_R on partial Omega",
+        "proxy": "V_P=(P,P_x/ell)",
+        "error": "V_R=(Z-P,(Z_x-P_x)/ell)",
+        "strict_domination": "||V_R||_2<||V_P||_2 pointwise on partial Omega",
+        "homotopy": "V_s=V_P+s*V_R for 0<=s<=1",
+        "reverse_triangle": "||V_s||_2>=||V_P||_2-s*||V_R||_2>0",
+        "conclusion": "V_Z and V_P are boundary-nonzero and have the same winding."
+      }
+    },
+    {
+      "id": "ncbdt_04_zero_degree_exclusion",
+      "role": "exact_composition",
+      "readiness": "available_exact",
+      "claim": "Zero proxy winding plus boundary domination excludes every hidden full heat contact.",
+      "formula": "If the boundary domination holds and wind(V_P)=0, then Omega contains no real multiple-zero contact of Z or H.",
+      "proof_boundary": "The conclusion is conditional on both proxy obligations.",
+      "diagnostics": {
+        "criterion": "If the boundary domination holds and wind(V_P)=0, then Omega contains no real multiple-zero contact of Z or H.",
+        "reason": "The transferred full winding is zero, while every possible interior contact has strictly positive local index in the standard (x,t) orientation.",
+        "scope": "The proxy may have interior zeros or mixed local indices; only its boundary winding enters the argument."
+      }
+    },
+    {
+      "id": "ncbdt_05_cofinal_contract",
+      "role": "exact_reduction",
+      "readiness": "available_exact",
+      "claim": "A cofinal family of boundary proxy certificates would prove Lambda<=0 without an interior small-ball theorem.",
+      "formula": "For every j>=208, construct a continuous boundary proxy P_j, a positive scale ell_j, and certified errors satisfying strict boundary domination and wind(V_(P_j))=0.",
+      "proof_boundary": "The cofinal proxy family is open and is not constructed by this artifact.",
+      "diagnostics": {
+        "rectangles": "Q_j=[1/(5*j),1/4]x[0,38+j]",
+        "known_equivalence": "Lambda<=0 iff the full Xi first jet is boundary-nonzero with zero winding on every Q_j.",
+        "current_base": "Q_207=[1/1035,1/4]x[0,245] is already contact-free with zero first-jet winding.",
+        "open_boundary_theorem": "For every j>=208, construct a continuous boundary proxy P_j, a positive scale ell_j, and certified errors satisfying strict boundary domination and wind(V_(P_j))=0.",
+        "conditional_endgame": "The open boundary theorem for every j>=208, together with Q_207 and positive-boundary attainment, implies Lambda<=0 and RH."
+      }
+    },
+    {
+      "id": "ncbdt_06_q207_base",
+      "role": "exact_composition",
+      "readiness": "available_exact",
+      "claim": "The existing Q207 theorem supplies the current finite base of the cofinal contract.",
+      "formula": "Q_207=[1/1035,1/4]x[0,245] is already contact-free with zero first-jet winding.",
+      "proof_boundary": "Finite Q207 only; no stage j>=208 follows.",
+      "diagnostics": null
+    },
+    {
+      "id": "ncbdt_07_boundary_only_improvement",
+      "role": "route_decision",
+      "readiness": "available_exact",
+      "claim": "The proxy lower bound is required only on one-dimensional boundary arcs, not throughout each two-dimensional rectangle.",
+      "formula": "If the boundary domination holds and wind(V_P)=0, then Omega contains no real multiple-zero contact of Z or H.",
+      "proof_boundary": "A weaker sufficient architecture, not a completed Xi estimate.",
+      "diagnostics": null
+    },
+    {
+      "id": "ncbdt_08_ordinary_proxy_contract",
+      "role": "exact_composition",
+      "readiness": "available_exact",
+      "claim": "The adaptive ordinary-theta tail theorem supplies an explicit normalized boundary error budget.",
+      "formula": "O_h^2+(O_h'/L)^2>E_F0^2+E_F1^2 only on the selected high-frequency boundary arcs.",
+      "proof_boundary": "Retained ordinary first-jet separation and winding remain open.",
+      "diagnostics": {
+        "domain": "x>=245, 0<t<=1/5, L=log(x/(4*pi))",
+        "main": "O_(h,t)=J_(N_(F,h),t)^F/(16*x^4*A_t)",
+        "value_error": "E_F0=exp(-3h)/(25*x^(23/4))",
+        "derivative_error": "E_F1=E_F0*(1/2+(1+4/x)/L)",
+        "boundary_target": "O_h^2+(O_h'/L)^2>E_F0^2+E_F1^2 only on the selected high-frequency boundary arcs.",
+        "loose_sufficient_target": "O_h^2+(O_h'/L)^2>2*exp(-6h)/(625*x^(23/2))"
+      }
+    },
+    {
+      "id": "ncbdt_09_corrected_proxy_contract",
+      "role": "exact_composition",
+      "readiness": "available_exact",
+      "claim": "The corrected Riemann-Siegel C1 certificate supplies a second explicit boundary error budget.",
+      "formula": "J_hat^2+(J_hat'/L)^2>32000000*exp(-3L/2) only on the selected boundary arcs.",
+      "proof_boundary": "Corrected phase-critical boundary separation and winding remain open.",
+      "diagnostics": {
+        "domain": "L>=50, 0<t<=1/5, t*L<=25",
+        "main": "J_hat_(N,t)",
+        "error_budget": "r_RS^2+(r_RS'/L)^2<32000000*exp(-3L/2)",
+        "boundary_target": "J_hat^2+(J_hat'/L)^2>32000000*exp(-3L/2) only on the selected boundary arcs.",
+        "guard": "The ordinary and corrected certified envelopes differ by five exponents; their quantitative targets must not be interchanged."
+      }
+    },
+    {
+      "id": "ncbdt_10_proxy_continuity_guard",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "A cutoff-dependent arithmetic proxy must be joined continuously before its winding is meaningful.",
+      "formula": "P_j must be continuous around the complete closed boundary.",
+      "proof_boundary": "Architecture guard; it does not reject continuous fixed-cutoff or overlap-chart constructions.",
+      "diagnostics": {
+        "requirement": "P_j must be continuous around the complete closed boundary.",
+        "fixed_cutoff_option": "Use a fixed retained cutoff on each finite boundary arc whenever the tail theorem remains valid after retaining extra terms.",
+        "chart_option": "Alternatively join adjacent cutoff charts through overlap homotopies that retain strict first-jet domination.",
+        "warning": "A pointwise family with unbridged cutoff jumps has no defined boundary winding and cannot discharge the theorem."
+      }
+    },
+    {
+      "id": "ncbdt_11_endpoint_safe_model",
+      "role": "exact_countermodel",
+      "readiness": "guard_validated",
+      "claim": "Positive-time simplicity does not require a time-independent first-jet floor down to the zero-time endpoint.",
+      "formula": "G_(epsilon,t)(x)=x^2+epsilon-2t; jet norm=4*eta**2",
+      "proof_boundary": "Universal quadratic heat model, not the Xi heat flow.",
+      "diagnostics": {
+        "flow": "G_(epsilon,t)(x)=x^2+epsilon-2t",
+        "heat_equation": "partial_t G=-partial_x^2 G",
+        "collision_time": "t=epsilon/2",
+        "simple_region": "For t>epsilon/2 the zeros are +/-sqrt(2t-epsilon), real and simple.",
+        "lower_boundary": "t=epsilon/2+eta",
+        "jet_norm_at_center": "4*eta**2",
+        "limit": "4*eta^2 tends to zero as eta tends to zero",
+        "conclusion": "Contact-free rectangles need not have a time-independent interior first-jet floor; boundary margins may deteriorate with the rectangle."
+      }
+    },
+    {
+      "id": "ncbdt_12_open_xi_boundary_theorem",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "Construct the cofinal continuous Xi boundary proxies and prove their strict domination and zero winding.",
+      "formula": "For every j>=208, construct a continuous boundary proxy P_j, a positive scale ell_j, and certified errors satisfying strict boundary domination and wind(V_(P_j))=0.",
+      "proof_boundary": "Open RH-level arithmetic theorem; neither Lambda<=0 nor RH is proved here.",
+      "diagnostics": {
+        "primary": "Use the cofinal boundary-degree contract as the minimal direct collision route. It keeps the sign-definite heat-contact charge and asks arithmetic separation only on one-dimensional edges.",
+        "secondary": "Retain the global corrected phase-critical small-ball theorem as a stronger alternative and the all-degree Jensen/PF route as an independent structural alternative.",
+        "next_bounded_input": "A permanent low-time compact base through x=245 and a continuous proxy/winding pilot for the first boundary beyond Q_207 would test the contract without pretending that one finite stage is global."
+      }
+    }
+  ]
+}

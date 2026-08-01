@@ -1,0 +1,208 @@
+{
+  "counts": {
+    "abel_gaps": 0,
+    "asymptotic_sign_witnesses": 2,
+    "contact_minor_sums": 1,
+    "division_free_relative_currents": 1,
+    "exact_endpoint_currents": 2,
+    "rows": 16,
+    "terminal_tail_recurrences": 1,
+    "uniform_terminal_signs": 0,
+    "winding_bounds": 0
+  },
+  "date": "2026-07-31",
+  "exact": {
+    "contact_minor_sum": {
+      "contact": "On mathsf X=0, sum_(n=1)^N K_(0n)=c_0*mathcal C_N.",
+      "definition": "K_(0n)=c_0d_n-d_0c_n, mathsf X=sum_(j=0)^N c_j, mathcal C_N=sum_(j=0)^N d_j",
+      "exceptional_blind_spot": "When c_0=0=mathsf X, the minor sum is zero even if mathcal C_N!=0. The corrected zero-real-projection fibre therefore still needs a division-free direct theorem.",
+      "identity": "sum_(n=1)^N K_(0n)=c_0*mathcal C_N-d_0*mathsf X",
+      "ordinary_use": "When c_0!=0 on contact, mathcal C_N={sum_n K_(0n)}/c_0."
+    },
+    "endpoint_carrier_relative_current": {
+      "carrier_rate": "For z_n=r_n*zeta_n and delta_n=Im(d_(n,x)/(1+d_n)), Im(z_(n,x)*conj(z_n))=(v_a+b*u_n+delta_n)|z_n|^2",
+      "definition": "Omega_(0n):=|e|^2 Im(z_(n,x)*conj(z_n))-|z_n|^2 Im(e_x*conj(e))",
+      "division_free": "Omega_(0n)=kappa^2(T_0^2+1)|z_n|^2{|H_a|^2(b*u_n+delta_n)-Im(J_a^(der)*conj(H_a))}",
+      "ordinary_rate": "When e*z_n!=0, Omega_(0n)/(|e|^2|z_n|^2)=partial_x arg(z_n/e)",
+      "zero_fibre": "The polynomial current remains defined and equals zero when H_a=0 or z_n=0; no endpoint projection is divided."
+    },
+    "endpoint_self_current": {
+      "coordinates": "T_(0,x)=1/2, kappa in R, H_a in C, e=kappa(T_0+i)H_a",
+      "division_free": "I_e:=Im(e_x*conj(e))=kappa^2{(T_0^2+1)Im(H_(a,x)*conj(H_a))-|H_a|^2/2}",
+      "frame_form": "For e_x=g+(lambda_a-rho_1)e, lambda_a=u_a+i*v_a, g=kappa(T_0+i)J_a^(der), I_e=kappa^2(T_0^2+1){Im(J_a^(der)*conj(H_a))+v_a|H_a|^2}",
+      "mass": "|e|^2=kappa^2(T_0^2+1)|H_a|^2",
+      "ordinary_rate": "On H_a!=0, partial_x arg(e)=Im(H_(a,x)*conj(H_a))/|H_a|^2-1/{2(T_0^2+1)}",
+      "phase_cancellation": "Im(mu_a)+v_a=-1/{2(T_0^2+1)}; the radial normalizer cancels from I_e"
+    },
+    "near_terminal_asymptotic": {
+      "consequence": "Along the physical q=1 family the endpoint-terminal relative current has both signs for all sufficiently large cutoffs. A uniform one-sided terminal orientation is false.",
+      "cutoff_witness": "At p=1, Phi(1)/pi=1-sqrt(4+2sqrt(2))/4, so the m=0 limit is {1-sqrt(4+2sqrt(2))/4}/4>0.",
+      "midpoint_witness": "C_0'(0)=0, so the m=0 limit at p=0 is -1/4.",
+      "path": "Fix p in [-1,1], theta=(1-p)/2, a=N+theta, q=2tL^2=1, and n=N-m with fixed m>=0; let N->infinity.",
+      "phase_symbol": "Phi(p):=Im(C_0'(p)*conj(C_0(p)))/|C_0(p)|^2",
+      "scaled_limit": "a*Omega_(0,N-m)/(|e|^2|z_(N-m)|^2) -> Phi(p)/(4*pi)-m/2-(1-p)/4",
+      "source_limits": "H_a->C_0(p), a H_(a,x)->-C_0'(p)/(4*pi), a*mu_a->0, b->-1/2, a*u_(N-m)->m+theta, and a*delta_(N-m)->0."
+    },
+    "preprojection_tail_recurrence": {
+      "current_defect": "If H_+=J-H, then I(H_+)=I(J)+I(H)-Im(J_x*conj(H)+H_x*conj(J)); the mixed current does not telescope.",
+      "one_step_slope": "Delta W_(A,N-1):=s_*'u_N z_N+g_N-g_(N-1), hence g_N+s_*'u_Nz_N=g_(N-1)+Delta W_(A,N-1)",
+      "one_step_value": "Q_(N-1):=z_N+e_N-e_(N-1), hence e_N+z_N=e_(N-1)+Q_(N-1)",
+      "projection_boundary": "Existing adjacent-chart certificates control the needed real traces, not a complex norm/current of Q_k. Re Q=Re Q_x=0 alone permits either current sign: E=1, Q=i*y, Q_x=i*sigma gives I(E+Q)=sigma.",
+      "tail_slope": "g_N+s_*'sum_(j=0)^m u_(N-j)z_(N-j)=g_(N-m-1)+sum_(k=N-m-1)^(N-1)Delta W_(A,k)",
+      "tail_value": "e_N+sum_(j=0)^m z_(N-j)=e_(N-m-1)+sum_(k=N-m-1)^(N-1)Q_k"
+    },
+    "route_decision": {
+      "next_target": "Derive the division-free projective current of (C_edge,D_edge)=(c_0+c_N,d_0+d_N), retaining the second endpoint jet and d_(N,x). Test whether it is negative; otherwise return to the complete contact scalar and seek a signed cumulative-minor estimate with a separate zero-real-projection theorem.",
+      "retired": "Retire a uniform endpoint-terminal relative-current sign and any claim that the C_0 recurrence alone telescopes phase currents.",
+      "surviving_candidate": "The exact tail composition may still be useful if one proves a complex recurrence-defect current bound, or if the terminal-composed real edge block is treated directly."
+    }
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_endpoint_relative_phase_current_recurrence_gate",
+  "proof_boundary": "This artifact proves the endpoint self-current, the division-free endpoint-carrier relative current, the near-terminal q=1 scaled law, two opposite terminal sign witnesses, the preprojection tail recurrence, its mixed-current defect, and the cumulative contact-minor identity. It proves no terminal-composed real-edge sign, no signed cumulative-minor estimate, no Abel-scalar gap, no successor winding cap, no contact exclusion, no Lambda<=0 conclusion, no PF-infinity, no RH, and no prize-level result.",
+  "rows": [
+    {
+      "claim": "The physical endpoint keeps its full complex source factor.",
+      "formula": "T_(0,x)=1/2, kappa in R, H_a in C, e=kappa(T_0+i)H_a",
+      "id": "erpc_01_endpoint_coordinates",
+      "proof_boundary": "This is a coordinate identity, not a sign theorem.",
+      "readiness": "available_exact",
+      "role": "source_normal_form"
+    },
+    {
+      "claim": "The endpoint self-current is independent of radial normalization.",
+      "formula": "I_e:=Im(e_x*conj(e))=kappa^2{(T_0^2+1)Im(H_(a,x)*conj(H_a))-|H_a|^2/2}",
+      "id": "erpc_02_endpoint_current",
+      "proof_boundary": "The displayed bracket is not asserted to have one sign.",
+      "readiness": "ready_to_apply",
+      "role": "division_free_identity"
+    },
+    {
+      "claim": "The ordinary endpoint phase rate contains the moving T_0+i term.",
+      "formula": "On H_a!=0, partial_x arg(e)=Im(H_(a,x)*conj(H_a))/|H_a|^2-1/{2(T_0^2+1)}",
+      "id": "erpc_03_endpoint_phase_rate",
+      "proof_boundary": "Use only when H_a is nonzero.",
+      "readiness": "ready_with_division_guard",
+      "role": "ordinary_fibre_identity"
+    },
+    {
+      "claim": "The J_a^(der) frame gives the same endpoint current.",
+      "formula": "For e_x=g+(lambda_a-rho_1)e, lambda_a=u_a+i*v_a, g=kappa(T_0+i)J_a^(der), I_e=kappa^2(T_0^2+1){Im(J_a^(der)*conj(H_a))+v_a|H_a|^2}",
+      "id": "erpc_04_frame_current",
+      "proof_boundary": "J_a^(der) is not the adjacent recurrence block.",
+      "readiness": "ready_to_apply",
+      "role": "exact_frame_identity"
+    },
+    {
+      "claim": "The physical carrier angular rate retains its correction.",
+      "formula": "For z_n=r_n*zeta_n and delta_n=Im(d_(n,x)/(1+d_n)), Im(z_(n,x)*conj(z_n))=(v_a+b*u_n+delta_n)|z_n|^2",
+      "id": "erpc_05_carrier_rate",
+      "proof_boundary": "No correction term is dropped.",
+      "readiness": "ready_to_apply",
+      "role": "source_rate_identity"
+    },
+    {
+      "claim": "The endpoint-carrier relative current cancels the frame phase.",
+      "formula": "Omega_(0n)=kappa^2(T_0^2+1)|z_n|^2{|H_a|^2(b*u_n+delta_n)-Im(J_a^(der)*conj(H_a))}",
+      "id": "erpc_06_relative_current",
+      "proof_boundary": "Its source bracket remains unsigned.",
+      "readiness": "ready_to_apply",
+      "role": "division_free_identity"
+    },
+    {
+      "claim": "The polynomial current equals the relative phase rate off zero fibres.",
+      "formula": "When e*z_n!=0, Omega_(0n)/(|e|^2|z_n|^2)=partial_x arg(z_n/e)",
+      "id": "erpc_07_relative_rate",
+      "proof_boundary": "The polynomial formula, not the ratio, is primary.",
+      "readiness": "ready_with_division_guard",
+      "role": "ordinary_fibre_identity"
+    },
+    {
+      "claim": "Every fixed near-terminal offset has an explicit scaled limit.",
+      "formula": "a*Omega_(0,N-m)/(|e|^2|z_(N-m)|^2) -> Phi(p)/(4*pi)-m/2-(1-p)/4",
+      "id": "erpc_08_near_terminal_limit",
+      "proof_boundary": "This is along the stated q=1 cofinal family.",
+      "readiness": "available_exact",
+      "role": "asymptotic_source_identity"
+    },
+    {
+      "claim": "The terminal relative current is eventually negative at p=0.",
+      "formula": "C_0'(0)=0, so the m=0 limit at p=0 is -1/4.",
+      "id": "erpc_09_midpoint_sign",
+      "proof_boundary": "This is an endpoint-source sign witness, not a contact.",
+      "readiness": "available_exact",
+      "role": "exact_asymptotic_witness"
+    },
+    {
+      "claim": "The terminal relative current is eventually positive at cutoff equality.",
+      "formula": "At p=1, Phi(1)/pi=1-sqrt(4+2sqrt(2))/4, so the m=0 limit is {1-sqrt(4+2sqrt(2))/4}/4>0.",
+      "id": "erpc_10_cutoff_sign",
+      "proof_boundary": "This is an endpoint-source sign witness, not a contact.",
+      "readiness": "available_exact",
+      "role": "exact_asymptotic_witness"
+    },
+    {
+      "claim": "A uniform terminal relative-current sign is false.",
+      "formula": "Along the physical q=1 family the endpoint-terminal relative current has both signs for all sufficiently large cutoffs. A uniform one-sided terminal orientation is false.",
+      "id": "erpc_11_terminal_sign_guard",
+      "proof_boundary": "Contact conditioning could impose additional restrictions.",
+      "readiness": "obstruction_exact",
+      "role": "nonpromotion_guard"
+    },
+    {
+      "claim": "Terminal and near-terminal values telescope into recurrence defects.",
+      "formula": "e_N+sum_(j=0)^m z_(N-j)=e_(N-m-1)+sum_(k=N-m-1)^(N-1)Q_k",
+      "id": "erpc_12_tail_recurrence",
+      "proof_boundary": "The complex recurrence defects still require control.",
+      "readiness": "available_exact",
+      "role": "preprojection_composition"
+    },
+    {
+      "claim": "Endpoint phase currents acquire a mixed recurrence defect.",
+      "formula": "If H_+=J-H, then I(H_+)=I(J)+I(H)-Im(J_x*conj(H)+H_x*conj(J)); the mixed current does not telescope.",
+      "id": "erpc_13_current_defect",
+      "proof_boundary": "The C_0 value recurrence alone does not sign this term.",
+      "readiness": "obstruction_exact",
+      "role": "recurrence_nonpromotion_guard"
+    },
+    {
+      "claim": "Real-trace recurrence bounds cannot determine complex edge current.",
+      "formula": "Existing adjacent-chart certificates control the needed real traces, not a complex norm/current of Q_k. Re Q=Re Q_x=0 alone permits either current sign: E=1, Q=i*y, Q_x=i*sigma gives I(E+Q)=sigma.",
+      "id": "erpc_14_projection_guard",
+      "proof_boundary": "A complex-current bound or direct real-edge theorem is needed.",
+      "readiness": "obstruction_exact",
+      "role": "data_sufficiency_guard"
+    },
+    {
+      "claim": "All endpoint-carrier minors sum to the complete contact scalar.",
+      "formula": "sum_(n=1)^N K_(0n)=c_0*mathcal C_N-d_0*mathsf X",
+      "id": "erpc_15_contact_minor_sum",
+      "proof_boundary": "Division by c_0 is permitted only on its ordinary fibre.",
+      "readiness": "ready_to_apply",
+      "role": "contact_identity"
+    },
+    {
+      "claim": "The cumulative minor identity is blind on the corrected endpoint fibre.",
+      "formula": "When c_0=0=mathsf X, the minor sum is zero even if mathcal C_N!=0. The corrected zero-real-projection fibre therefore still needs a division-free direct theorem.",
+      "id": "erpc_16_exceptional_fibre",
+      "proof_boundary": "A separate division-free theorem remains mandatory.",
+      "readiness": "obstruction_exact",
+      "role": "division_guard"
+    }
+  ],
+  "source_audit": {
+    "published_source": {
+      "citation": "D.H.J. Polymath, Effective approximation of heat flow evolution of the Riemann xi function, and a new upper bound for the de Bruijn-Newman constant, arXiv:1904.12438",
+      "location": "equation (53), C_0(p), and its adjacent recurrence",
+      "url": "https://arxiv.org/abs/1904.12438"
+    },
+    "source_sha256": {
+      "adjacent_chart_stability": "dcee581f283d63141e29d1085ee463c2eabc714a6e6760b15f12262474f83a83",
+      "adjacent_saddle_recurrence": "ffab5ce74899f670a7e1e3cba0bcbd1734989134f2c0f0d972351f110af3d45f",
+      "c0_source_extraction": "9d9bdefe7918a18f82408952b2c6f6f8176568f9f6e24d0cd4c12b54d1736e0d",
+      "complex_endpoint_corrigendum": "07f18c40511e9d9c95f8578e02fc39505ac59480682a50597dd9b79e6618fbf3",
+      "contact_transport": "fdcef454128f5eacad5b059b6bd649de509dcdca329b2375fdcf260b2e7eb3e3",
+      "interior_projective_current": "c1282eac2b2d22c35055880f4eb2607b855446a3b678caf0c072ca983c660419"
+    }
+  },
+  "status": "exact endpoint-relative phase-current identities, q=1 terminal sign-reversal guard, and recurrence-defect gate"
+}

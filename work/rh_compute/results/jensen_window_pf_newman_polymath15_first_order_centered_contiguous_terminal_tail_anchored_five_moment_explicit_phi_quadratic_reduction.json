@@ -1,0 +1,189 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_explicit_phi_quadratic_reduction",
+  "date": "2026-07-31",
+  "status": "exact terminal-tail five-moment explicit rank-four Phi_B quadratic reduction; signed Phi_B bound open; no retained aggregate sign, Xi-level current theorem, Lambda<=0, or RH",
+  "proof_boundary": "This proves an exact explicit rank-four real quadratic normal form, fibre identities, and a generic indefiniteness guard. It proves no upper bound for Phi_B, endpoint-coupled Type-I/II or Vaughan estimate, contact exclusion, retained aggregate sign, Xi residual transfer, Q209, cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "source_audit": {
+    "source_sha256": {
+      "abel_join": "8a73552c92f0a1c2c3ca073c49e3140bd68043c7b4724e518d9ae02a747c881d",
+      "five_current": "64b2b78043ab4b2dbad53a0390f30817cf263067a345375dccbb793c382128ff",
+      "mangoldt_normal_form": "295c3a8ad23f98261e88e678b1e5ff6610c5dfe16fcd4f15724160d5fffaf57e"
+    },
+    "source_kinds": {
+      "abel_join": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_abel_cross_current_reduction",
+      "five_current": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_current_bulk_closure_reduction",
+      "mangoldt_normal_form": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_current_mangoldt_normal_form_gate"
+    },
+    "imported_terminal_reserve": "P_T<-1/400",
+    "imported_phi_bounds": 0
+  },
+  "symbolic_certificate": {
+    "base_coefficient_vectors": "Let L=log(N), G=(G_0,...,G_4)^T. Then v_0=(1,rho_1,rho_2,0,0), v_1=(L,Lrho_1-1,Lrho_2-rho_1,-rho_2,0), v_2=(L^2,L^2rho_1-2L,L^2rho_2-2Lrho_1+1,rho_1-2Lrho_2,rho_2), e_0=(0,rho_(1,x),rho_(2,x),0,0), and e_1=(0,Lrho_(1,x),Lrho_(2,x)-rho_(1,x),-rho_(2,x),0).",
+    "derivative_coefficient_vectors": "q_0=chi_N*v_0+s_*'*v_1+e_0; q_1=chi_N*v_1+s_*'*v_2+e_1; a_0=s_*'*v_1+i*b*u_N*v_0; n_0=s_*''*v_1+s_*'*q_1+i*(b_x*u_N+b*u_(N,x))*v_0+i*b*u_N*q_0.",
+    "four_real_observables": "V=Re(v_0 dot G)=X_B, Q=Re(q_0 dot G)=X_(B,x), A=Re(a_0 dot G)=A_B, and N=Re(n_0 dot G)=A_(B,x).",
+    "explicit_phi": "h^2*Phi_B=(X_T+V)N+V*A_(T,x)-(A_T+A)Q-A*X_(T,x).",
+    "real_quadratic_form": "For g=(Re G_0,...,Re G_4,Im G_0,...,Im G_4)^T and R(z)=(Re z_0,...,Re z_4,-Im z_0,...,-Im z_4)^T, put v=R(v_0), q=R(q_0), a=R(a_0), n=R(n_0). Then h^2*Phi_B=g^T M g+ell_T^T g, M=(v n^T+n v^T-a q^T-q a^T)/2 and ell_T=X_T n+A_(T,x)v-A_T q-X_(T,x)a.",
+    "rank_factorization": "M=[v n a q] J [v n a q]^T with J=(1/2)*diag_offdiag(+1,-1); hence rank(M)<=4. The observation map g->(V,Q,A,N) has a real kernel of dimension at least 6, and Phi_B vanishes on that kernel.",
+    "generic_inertia_guard": "An exact algebraic specialization L=2,rho_1=rho_2=rho_(1,x)=rho_(2,x)=0,s_*'=-i/2,s_*''=0,chi_N=1,u_N=u_(N,x)=1 has observation rank 4 and minor 5/16. By the displayed congruence its M has inertia (2,2,6). This is a generic nonpromotion guard, not a physical Xi state.",
+    "total_value_fibre": "On X_T+V=0, h^2*Phi_B=V*A_(T,x)-(A_T+A)Q-A*X_(T,x), with no division by the total value.",
+    "double_contact_obstruction": "If also A_T+A=0, then Phi_B=-P_T>1/400. Therefore the desired bound must source-specifically exclude a simultaneous retained value/centered-scalar contact; it cannot assume it away.",
+    "witness_minor": "5/16",
+    "generic_inertia": [
+      2,
+      2,
+      6
+    ]
+  },
+  "exact": {
+    "domain": "Fix the q=1, L>=50, fixed-N chart and admissible growing terminal block of the source reductions. Put B=N-M-1 and differentiate with N,M,B fixed. All G_r stop at B and use the same eta/S_a normalization as the tail.",
+    "coefficient_meaning": "The five base vectors convert the correction-free moments to K_0,K_1,K_2,E_0,E_1. The four derived vectors then give the bulk value, value derivative, centered scalar, and centered-scalar derivative without storing a prefix path.",
+    "dimension_reduction": "Although five complex moments have ten real components, Phi_B depends on them only through four real observations. The exact quadratic matrix has rank at most four and its tail-linear term lies in the same four-row span.",
+    "sharp_arithmetic_target": "For the actual Xi moment vector g_B and certified tail jets, prove g_B^T M g_B+ell_T^T g_B<=h^2/400, preferably <=h^2/800.",
+    "type_ii_handoff": "Insert the exact balanced Mangoldt or Vaughan decomposition into the four observations V,Q,A,N, or equivalently expand the rank-four form as its original two-carrier kernel. Keep the endpoint, complete square, both wings, and all transpose and Hermitian cross terms before taking absolute values.",
+    "falsification_program": "Any proposed signed criterion must survive X_T+V=0, W_0=0, zero observation rows, p=+-1, removable p=+-1/2, prime edges, square and cube transports, n=64, q=1, and adjacent cutoffs. The simultaneous value/scalar contact is an obstruction to be excluded by the theorem, not an admissible denominator.",
+    "proof_boundary": "This proves an exact explicit rank-four real quadratic normal form, fibre identities, and a generic indefiniteness guard. It proves no upper bound for Phi_B, endpoint-coupled Type-I/II or Vaughan estimate, contact exclusion, retained aggregate sign, Xi residual transfer, Q209, cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion."
+  },
+  "counts": {
+    "rows": 13,
+    "complex_correction_free_moments": 5,
+    "real_moment_coordinates": 10,
+    "complex_base_coefficient_vectors": 5,
+    "real_bulk_observations": 4,
+    "explicit_phi_quadratic_forms": 1,
+    "quadratic_rank_upper_bound": 4,
+    "generic_positive_directions": 2,
+    "generic_negative_directions": 2,
+    "generic_null_directions": 6,
+    "division_free_value_fibres": 1,
+    "double_contact_obstructions": 1,
+    "signed_phi_targets": 1,
+    "signed_phi_bounds": 0,
+    "xi_level_current_theorems": 0
+  },
+  "rows": [
+    {
+      "id": "ttqp_01_domain",
+      "role": "fixed-chart domain",
+      "readiness": "proved",
+      "claim": "The explicit form uses the certified terminal/bulk partition.",
+      "formula": "Fix the q=1, L>=50, fixed-N chart and admissible growing terminal block of the source reductions. Put B=N-M-1 and differentiate with N,M,B fixed. All G_r stop at B and use the same eta/S_a normalization as the tail.",
+      "proof_boundary": "No cutoff transport is folded into an x derivative.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttqp_02_base",
+      "role": "base coefficient vectors",
+      "readiness": "proved",
+      "claim": "Five explicit vectors map G_0 through G_4 to K_0,K_1,K_2,E_0,E_1.",
+      "formula": "Let L=log(N), G=(G_0,...,G_4)^T. Then v_0=(1,rho_1,rho_2,0,0), v_1=(L,Lrho_1-1,Lrho_2-rho_1,-rho_2,0), v_2=(L^2,L^2rho_1-2L,L^2rho_2-2Lrho_1+1,rho_1-2Lrho_2,rho_2), e_0=(0,rho_(1,x),rho_(2,x),0,0), and e_1=(0,Lrho_(1,x),Lrho_(2,x)-rho_(1,x),-rho_(2,x),0).",
+      "proof_boundary": "All correction coefficients and derivatives remain complex and exact.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttqp_03_derivatives",
+      "role": "derived coefficient vectors",
+      "readiness": "proved",
+      "claim": "Four derived vectors include every required first derivative.",
+      "formula": "q_0=chi_N*v_0+s_*'*v_1+e_0; q_1=chi_N*v_1+s_*'*v_2+e_1; a_0=s_*'*v_1+i*b*u_N*v_0; n_0=s_*''*v_1+s_*'*q_1+i*(b_x*u_N+b*u_(N,x))*v_0+i*b*u_N*q_0.",
+      "proof_boundary": "No second correction current is introduced.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttqp_04_observations",
+      "role": "four real observations",
+      "readiness": "proved",
+      "claim": "The ten real moment coordinates enter Phi_B through four real functionals.",
+      "formula": "V=Re(v_0 dot G)=X_B, Q=Re(q_0 dot G)=X_(B,x), A=Re(a_0 dot G)=A_B, and N=Re(n_0 dot G)=A_(B,x).",
+      "proof_boundary": "The five base vectors convert the correction-free moments to K_0,K_1,K_2,E_0,E_1. The four derived vectors then give the bulk value, value derivative, centered scalar, and centered-scalar derivative without storing a prefix path.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttqp_05_phi",
+      "role": "explicit Phi identity",
+      "readiness": "proved",
+      "claim": "The tail/bulk join is one displayed polynomial in the four observations.",
+      "formula": "h^2*Phi_B=(X_T+V)N+V*A_(T,x)-(A_T+A)Q-A*X_(T,x).",
+      "proof_boundary": "No value or scalar is divided out.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttqp_06_quadratic",
+      "role": "real quadratic form",
+      "readiness": "proved",
+      "claim": "Phi_B is one explicit symmetric quadratic form plus a tail-linear term.",
+      "formula": "For g=(Re G_0,...,Re G_4,Im G_0,...,Im G_4)^T and R(z)=(Re z_0,...,Re z_4,-Im z_0,...,-Im z_4)^T, put v=R(v_0), q=R(q_0), a=R(a_0), n=R(n_0). Then h^2*Phi_B=g^T M g+ell_T^T g, M=(v n^T+n v^T-a q^T-q a^T)/2 and ell_T=X_T n+A_(T,x)v-A_T q-X_(T,x)a.",
+      "proof_boundary": "This is an equality, not a sign estimate.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttqp_07_rank",
+      "role": "rank factorization",
+      "readiness": "proved",
+      "claim": "The moment quadratic has rank at most four.",
+      "formula": "M=[v n a q] J [v n a q]^T with J=(1/2)*diag_offdiag(+1,-1); hence rank(M)<=4. The observation map g->(V,Q,A,N) has a real kernel of dimension at least 6, and Phi_B vanishes on that kernel.",
+      "proof_boundary": "Although five complex moments have ten real components, Phi_B depends on them only through four real observations. The exact quadratic matrix has rank at most four and its tail-linear term lies in the same four-row span.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttqp_08_inertia",
+      "role": "generic inertia guard",
+      "readiness": "proved",
+      "claim": "A coefficient-blind semidefinite promotion is impossible.",
+      "formula": "An exact algebraic specialization L=2,rho_1=rho_2=rho_(1,x)=rho_(2,x)=0,s_*'=-i/2,s_*''=0,chi_N=1,u_N=u_(N,x)=1 has observation rank 4 and minor 5/16. By the displayed congruence its M has inertia (2,2,6). This is a generic nonpromotion guard, not a physical Xi state.",
+      "proof_boundary": "The witness is algebraic and is not asserted to be attained by Xi.",
+      "diagnostics": {
+        "minor": "5/16",
+        "inertia": [
+          2,
+          2,
+          6
+        ]
+      }
+    },
+    {
+      "id": "ttqp_09_kernel",
+      "role": "observation kernel",
+      "readiness": "proved",
+      "claim": "Every common null direction of the four observations is invisible to Phi_B.",
+      "formula": "M=[v n a q] J [v n a q]^T with J=(1/2)*diag_offdiag(+1,-1); hence rank(M)<=4. The observation map g->(V,Q,A,N) has a real kernel of dimension at least 6, and Phi_B vanishes on that kernel.",
+      "proof_boundary": "This does not bound the visible four-dimensional quotient.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttqp_10_value_fibre",
+      "role": "total real-value fibre",
+      "readiness": "proved",
+      "claim": "The formula remains division-free when the retained real value vanishes.",
+      "formula": "On X_T+V=0, h^2*Phi_B=V*A_(T,x)-(A_T+A)Q-A*X_(T,x), with no division by the total value.",
+      "proof_boundary": "The crossing orientation remains unsigned.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttqp_11_contact",
+      "role": "double-contact obstruction",
+      "readiness": "proved",
+      "claim": "A simultaneous retained value/scalar contact violates the desired Phi_B bound.",
+      "formula": "If also A_T+A=0, then Phi_B=-P_T>1/400. Therefore the desired bound must source-specifically exclude a simultaneous retained value/centered-scalar contact; it cannot assume it away.",
+      "proof_boundary": "The actual source must exclude this fibre.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttqp_12_target",
+      "role": "signed arithmetic target",
+      "readiness": "open",
+      "claim": "The remaining theorem is one explicit rank-four inequality.",
+      "formula": "For the actual Xi moment vector g_B and certified tail jets, prove g_B^T M g_B+ell_T^T g_B<=h^2/400, preferably <=h^2/800.",
+      "proof_boundary": "No Type-I/II constant is supplied.",
+      "diagnostics": null
+    },
+    {
+      "id": "ttqp_13_handoff",
+      "role": "Type-I/II handoff",
+      "readiness": "open",
+      "claim": "The four observations must be estimated jointly in their endpoint-composed form.",
+      "formula": "Insert the exact balanced Mangoldt or Vaughan decomposition into the four observations V,Q,A,N, or equivalently expand the rank-four form as its original two-carrier kernel. Keep the endpoint, complete square, both wings, and all transpose and Hermitian cross terms before taking absolute values.",
+      "proof_boundary": "This proves an exact explicit rank-four real quadratic normal form, fibre identities, and a generic indefiniteness guard. It proves no upper bound for Phi_B, endpoint-coupled Type-I/II or Vaughan estimate, contact exclusion, retained aggregate sign, Xi residual transfer, Q209, cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+      "diagnostics": null
+    }
+  ]
+}

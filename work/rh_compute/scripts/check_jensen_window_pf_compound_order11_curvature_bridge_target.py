@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the conditional order-eleven curvature bridge target."""
+"""Validate the conditional order-eleven bridge and its resolution note."""
 
 from __future__ import annotations
 
@@ -102,9 +102,9 @@ def validate(artifact_path: Path, note_path: Path) -> list[Finding]:
         "y_1''(t)<=6000/t^2",
         target.ORDER11_FINITE_PREFIX,
         target.ORDER11_DELAYED_HANDOFF,
-        "Only the continuum target",
-        "not all-shift order eleven",
-        "PF-infinity, RH, or `Lambda<=0`",
+        "four-range composition now proves",
+        "through order eleven",
+        "Order twelve, PF-infinity, RH, and `Lambda<=0` remain",
     ):
         if marker not in note:
             findings.append(finding("note", "missing-marker", marker))

@@ -1,0 +1,248 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_block_composition_guard",
+  "date": "2026-07-27",
+  "status": "exact absolute-rate, prime-power heat-block, Gaussian-mixture, and joined p-free reductions with an uncorrected normalized-block zero-free and shifted-winding theorem plus an exact two-block composition guard; the joined Xi successor theorem remains open",
+  "proof_boundary": "This artifact proves the absolute saddle-frame carrier rate, the nonterminal rotation and terminal-collar theorem, exact prime-power heat ratios, corrected amplitude contraction, the correction-free normalized-block zero-free and shifted-winding theorem, the Gaussian mixture and joined p-free identities, and an exact generic two-block winding-three countermodel. It does not prove a uniform corrected-block homotopy, the joined Xi prefix lower bound, the strict composed successor flux bound, the q<1 multiplicity-compatible theorem, finite shoulder closure, contact exclusion, Lambda<=0, PF-infinity, RH, or a Clay-prize conclusion.",
+  "sources": {
+    "normalized_prefix": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_normalized_prefix_phase_flux_reduction.json",
+    "direct_projection": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_direct_projection_regime_reduction.json",
+    "adjacent_chart": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_adjacent_chart_stability_certificate.json",
+    "phase_anchor": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_absolute_phase_anchor_reduction.json"
+  },
+  "source_sha256": {
+    "normalized_prefix": "75982d22a245d4b9ab6dff57818a49e9936bd1afd1e58318216c41be49291706",
+    "direct_projection": "8252a4d506a8132aeec65f5f1c9490430e39b776d76dfae92e27ce008c5e22a9",
+    "adjacent_chart": "dcee581f283d63141e29d1085ee463c2eabc714a6e6760b15f12262474f83a83",
+    "phase_anchor": "7e5c8725b2d0913d2e5d1731b962a7cd79081b8e09e52c7992647e4dc631cbd2"
+  },
+  "source_audit": {
+    "normalized_prefix": "jensen_window_pf_newman_polymath15_first_order_centered_normalized_prefix_phase_flux_reduction",
+    "direct_projection": "jensen_window_pf_newman_polymath15_first_order_centered_direct_projection_regime_reduction",
+    "adjacent_chart": "jensen_window_pf_newman_polymath15_first_order_centered_adjacent_chart_stability_certificate",
+    "phase_anchor": "jensen_window_pf_newman_polymath15_first_order_centered_absolute_phase_anchor_reduction"
+  },
+  "constants": {
+    "L_min": 50,
+    "d_absolute": 2189,
+    "d_x": 4223,
+    "terminal_rate": 16900,
+    "terminal_width": 50701
+  },
+  "exact": {
+    "domain": "L=log(x/(4*pi))>=50, 0<=tL<=25, a^2=x/(4*pi)+t/16, N=floor(a); q>=1 means q=2tL^2>=1",
+    "pi_provenance": "The pi in a^2=x/(4*pi)+t/16 comes from the completed zeta normalization xi(s)=s*(s-1)*pi^(-s/2)*Gamma(s/2)*zeta(s)/2 and its Riemann-Siegel saddle. The cutoff-cell difference is 4*pi*(2N+1). The 2*pi in a winding is the period of exp(i*theta). No circle, prime-power block, or prefix polygon defines or approximates pi.",
+    "absolute_rate": "For z_n=eta*q_n=r_n*zeta_n and zeta_n=phi*exp(i*omega_*log(n))*(1+d_n)/|1+d_n|, put omega_phi=Im(phi'/phi), b=Im(s_*'), u_n=log(a/n), and v_a=omega_phi-b*log(a). Since omega_*'=-b, nu_n=partial_x arg(z_n)=v_a+b*u_n+Im[d_(n,x)/(1+d_n)].",
+    "terminal_rate_collar": "The proved bounds |v_a|<3/x^2, |d_(n,x)|<4223/x^2, and |d_n|<2189/x<1/2 give nu_n<=8449/x^2-u_n/2. Therefore u_n>16900/x^2 implies nu_n<-1/x^2. For n<=N-1, u_n>=log(N/(N-1))>1/N>16900/x^2 on L>=50, so only the terminal n=N carrier can be near stationary. If u_N<=16900/x^2, then at fixed t its distance from the left cutoff boundary obeys 0<=x-x_N=4*pi*N^2*(exp(2u_N)-1)<50701/x.",
+    "prime_power_ratio": "For p prime, p does not divide m, n_k=m*p^k, h=log(p), and u_k=log(a/n_k), the correction-free absolute amplitudes satisfy log(a_(k+1)/a_k)=-B_a*h-(t/2)*u_k*h+(t/4)*h^2. If n_(k+1)<=N<=a, then u_k>=h.",
+    "prime_power_contraction": "Because B_a>49/100 and u_k>=h whenever the next p-power remains in the cutoff, the correction-free ratio is at most exp[-49h/100-th^2/4]<p^(-49/100). After |1+d_(k+1)|/|1+d_k| is restored, the ratio is still strictly below p^(-12/25) for L>=50. Thus every actual complete p-power block has strictly decreasing positive amplitudes.",
+    "correction_phase": "After the common absolute saddle phase and affine p-power phase are removed, |arg(1+d_(mp^k))-arg(1+d_m)|<8756/x. This is an exponentially small phase defect, but a uniform boundary-modulus margin is still required before it can be removed by homotopy.",
+    "uncorrected_block_winding": "Let Q_R(z)=sum_(k=0)^R a_k z^k with a_0>a_1>...>a_R>0. Enestrom-Kakeya puts every zero of Q_R outside |z|=1 because min_k a_k/a_(k+1)>1. Hence Q_R is nonzero on the unit circle and wind(Q_R,0)=0. The shifted pure-power block P_R(z)=z*Q_R(z) is also nonzero there and has wind(P_R,0)=1. For a general p-free base m, Q_R is the normalized internal block after its external m-phase is factored out; that external phase still moves with x and is not covered by the internal winding statement.",
+    "gaussian_heat": "For Z standard normal and sigma=sqrt(t/2), exp(t*log(n)^2/4)=E exp(sigma*Z*log(n)).",
+    "conditional_geometric_block": "With sigma=sqrt(t/2), the correction-free block is m^(-s_*) E[m^(sigma Z)*sum_(k=0)^R(p^(-s_*+sigma Z))^k]. The geometric quotient is interpreted by continuity as R+1 when its ratio is one.",
+    "tilted_expanding_mass": "Conditionally, |p^(-s_*+sigma Z)|>=1 exactly when Z>=Re(s_*)/sigma. After the factor m^(sigma Z) is included, exponential tilting makes the relative bad mass barPhi((1/2+(t/2)*(u_m-delta_a))/sigma), where delta_a=log(a)-Re(alpha). For a terminal block at t=1/2 this threshold approaches 1 and the mass approaches barPhi(1)=0.158655..., so conditional contraction cannot be asserted almost surely or discarded uniformly from the Gaussian identity alone.",
+    "joined_p_free": "With s_Z=s_*-sigma*Z and O_M^(p)(s_Z)=sum_(m<=M,p does not divide m)m^(-s_Z), sum_(n<=N)n^(-s_Z)=sum_(k=0)^floor(log_p N)p^(-k*s_Z)*O_floor(N/p^k)^(p)(s_Z).",
+    "two_block_countermodel": {
+      "dyadic_ratio": "r=2^(-1/2)",
+      "long_block": "A(z)=z*(1+r*z+r^2*z^2)",
+      "short_block": "B(z)=-(4/5)*z*(1+r*z)",
+      "individual_root_locations": "A/z has roots of modulus sqrt(2)>1; B/z has its root at -sqrt(2)",
+      "individual_windings": "wind(A)=wind(B)=1 on |z|=1",
+      "joined_factorization": "A+B=(z/5)*(1+r*z+5*r^2*z^2)",
+      "joined_quadratic_discriminant": "-19/2",
+      "joined_quadratic_root_product": "2/5",
+      "joined_quadratic_root_modulus": "sqrt(2/5)<1",
+      "joined_winding": 3,
+      "robust_scale_interval": "For A-c*z*(1+r*z), every 1/2<c<1 gives a conjugate root pair of modulus sqrt(2*(1-c))<1.",
+      "interpretation": "Two complete geometric dyadic blocks can each be origin-free with winding one while their sum has winding three. The opposite external block phase and scale are a generic composition guard, not asserted Xi data."
+    },
+    "composition_guard": "The one-block theorem is real, but winding is not additive under vector addition. The exact length-three/length-two dyadic model has two complete origin-free winding-one blocks and a winding-three sum. Therefore a successful Xi proof must retain the p-free outer prefixes, their relative phases and amplitudes, the terminal recurrence, and the endpoint inside one joined first-jet argument theorem.",
+    "live_q_ge_1_target": "Use the joined p-free decomposition, preferably first for p=2, to derive an endpoint-complete common argument-principle or Schur-Cohn/Rouche inequality for the full Xi prefix. It must prove both |mathsf_X|<=delta_L implies |mathcal_C_N|>A_L+epsilon_term and the composed successor bound 0<=kappa_j<1. The terminal u_N<=16900/x^2 collar must be paired with the adjacent endpoint recurrence. Independent block windings and the raw Gaussian mixture are insufficient.",
+    "q_lt_1_target": "The q=2tL^2<1 layer still requires its separate multiplicity-compatible parabolic/Hermite first-jet chart. No terminal simplicity or uniform positive endpoint slope is assumed.",
+    "numeric_audit": {
+      "x_min": "6.51529311985421213e+22",
+      "d_n_upper_at_L50": "3.35978744122717451e-20",
+      "d_log_derivative_upper_at_L50": "9.94839826419614111e-43",
+      "terminal_rate_threshold": "16900/x^2",
+      "terminal_negative_margin_scaled_by_x2": "4.22400000000000000e+03",
+      "terminal_x_collar_width": "<50701/x",
+      "worst_corrected_p_power_ratio": "7.12025097798535844e-01",
+      "certified_ratio_target": "7.16977624007913650e-01",
+      "relative_correction_phase_at_L50": "6.71957488245434901e-20",
+      "gaussian_tail_at_terminal_t_half": "1.58655253931457074e-01"
+    }
+  },
+  "rows": [
+    {
+      "id": "pphbcg_00_pi_provenance",
+      "role": "definition_provenance",
+      "readiness": "certified",
+      "claim": "Every appearance of pi in this block reduction has an explicit completed-zeta, saddle, or phase-period source.",
+      "formula": "The pi in a^2=x/(4*pi)+t/16 comes from the completed zeta normalization xi(s)=s*(s-1)*pi^(-s/2)*Gamma(s/2)*zeta(s)/2 and its Riemann-Siegel saddle. The cutoff-cell difference is 4*pi*(2N+1). The 2*pi in a winding is the period of exp(i*theta). No circle, prime-power block, or prefix polygon defines or approximates pi.",
+      "proof_boundary": "Neither a block nor a polygon supplies pi.",
+      "diagnostics": null
+    },
+    {
+      "id": "pphbcg_01_absolute_rate",
+      "role": "exact_differential_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The absolute carrier phase rate has an exact saddle-centered form.",
+      "formula": "For z_n=eta*q_n=r_n*zeta_n and zeta_n=phi*exp(i*omega_*log(n))*(1+d_n)/|1+d_n|, put omega_phi=Im(phi'/phi), b=Im(s_*'), u_n=log(a/n), and v_a=omega_phi-b*log(a). Since omega_*'=-b, nu_n=partial_x arg(z_n)=v_a+b*u_n+Im[d_(n,x)/(1+d_n)].",
+      "proof_boundary": "The d_n logarithmic derivative is retained.",
+      "diagnostics": null
+    },
+    {
+      "id": "pphbcg_02_terminal_collar",
+      "role": "asymptotic_certificate",
+      "readiness": "certified",
+      "claim": "Every nonterminal carrier rotates strictly in the same absolute direction; only one O(1/x) cutoff collar can be near stationary.",
+      "formula": "The proved bounds |v_a|<3/x^2, |d_(n,x)|<4223/x^2, and |d_n|<2189/x<1/2 give nu_n<=8449/x^2-u_n/2. Therefore u_n>16900/x^2 implies nu_n<-1/x^2. For n<=N-1, u_n>=log(N/(N-1))>1/N>16900/x^2 on L>=50, so only the terminal n=N carrier can be near stationary. If u_N<=16900/x^2, then at fixed t its distance from the left cutoff boundary obeys 0<=x-x_N=4*pi*N^2*(exp(2u_N)-1)<50701/x.",
+      "proof_boundary": "The terminal carrier still has to be paired with the endpoint recurrence.",
+      "diagnostics": {
+        "x_min": "6.51529311985421213e+22",
+        "d_n_upper_at_L50": "3.35978744122717451e-20",
+        "d_log_derivative_upper_at_L50": "9.94839826419614111e-43",
+        "terminal_rate_threshold": "16900/x^2",
+        "terminal_negative_margin_scaled_by_x2": "4.22400000000000000e+03",
+        "terminal_x_collar_width": "<50701/x",
+        "worst_corrected_p_power_ratio": "7.12025097798535844e-01",
+        "certified_ratio_target": "7.16977624007913650e-01",
+        "relative_correction_phase_at_L50": "6.71957488245434901e-20",
+        "gaussian_tail_at_terminal_t_half": "1.58655253931457074e-01"
+      }
+    },
+    {
+      "id": "pphbcg_03_prime_power_amplitude",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "Every complete p-power chain has an exact heat-quadratic ratio law.",
+      "formula": "For p prime, p does not divide m, n_k=m*p^k, h=log(p), and u_k=log(a/n_k), the correction-free absolute amplitudes satisfy log(a_(k+1)/a_k)=-B_a*h-(t/2)*u_k*h+(t/4)*h^2. If n_(k+1)<=N<=a, then u_k>=h.",
+      "proof_boundary": "The law is inside one prescribed cutoff chart.",
+      "diagnostics": null
+    },
+    {
+      "id": "pphbcg_04_corrected_contraction",
+      "role": "asymptotic_certificate",
+      "readiness": "certified",
+      "claim": "The actual corrected amplitudes in every complete p-power chain decrease geometrically.",
+      "formula": "Because B_a>49/100 and u_k>=h whenever the next p-power remains in the cutoff, the correction-free ratio is at most exp[-49h/100-th^2/4]<p^(-49/100). After |1+d_(k+1)|/|1+d_k| is restored, the ratio is still strictly below p^(-12/25) for L>=50. Thus every actual complete p-power block has strictly decreasing positive amplitudes.",
+      "proof_boundary": "After the common absolute saddle phase and affine p-power phase are removed, |arg(1+d_(mp^k))-arg(1+d_m)|<8756/x. This is an exponentially small phase defect, but a uniform boundary-modulus margin is still required before it can be removed by homotopy.",
+      "diagnostics": {
+        "x_min": "6.51529311985421213e+22",
+        "d_n_upper_at_L50": "3.35978744122717451e-20",
+        "d_log_derivative_upper_at_L50": "9.94839826419614111e-43",
+        "terminal_rate_threshold": "16900/x^2",
+        "terminal_negative_margin_scaled_by_x2": "4.22400000000000000e+03",
+        "terminal_x_collar_width": "<50701/x",
+        "worst_corrected_p_power_ratio": "7.12025097798535844e-01",
+        "certified_ratio_target": "7.16977624007913650e-01",
+        "relative_correction_phase_at_L50": "6.71957488245434901e-20",
+        "gaussian_tail_at_terminal_t_half": "1.58655253931457074e-01"
+      }
+    },
+    {
+      "id": "pphbcg_05_one_block_winding",
+      "role": "exact_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "A complete correction-free normalized prime-power block is zero-free in its internal phase, and its one-step shifted pure-power block has winding one.",
+      "formula": "Let Q_R(z)=sum_(k=0)^R a_k z^k with a_0>a_1>...>a_R>0. Enestrom-Kakeya puts every zero of Q_R outside |z|=1 because min_k a_k/a_(k+1)>1. Hence Q_R is nonzero on the unit circle and wind(Q_R,0)=0. The shifted pure-power block P_R(z)=z*Q_R(z) is also nonzero there and has wind(P_R,0)=1. For a general p-free base m, Q_R is the normalized internal block after its external m-phase is factored out; that external phase still moves with x and is not covered by the internal winding statement.",
+      "proof_boundary": "The moving p-free external phase and d_n phase defects remain outside this internal theorem.",
+      "diagnostics": null
+    },
+    {
+      "id": "pphbcg_06_gaussian_mixture",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The heat quadratic is an exact Gaussian mixture of geometric Dirichlet blocks.",
+      "formula": "For Z standard normal and sigma=sqrt(t/2), exp(t*log(n)^2/4)=E exp(sigma*Z*log(n)). With sigma=sqrt(t/2), the correction-free block is m^(-s_*) E[m^(sigma Z)*sum_(k=0)^R(p^(-s_*+sigma Z))^k]. The geometric quotient is interpreted by continuity as R+1 when its ratio is one.",
+      "proof_boundary": "Expectation does not preserve zero-free winding under addition.",
+      "diagnostics": null
+    },
+    {
+      "id": "pphbcg_07_tilted_mass_guard",
+      "role": "nonpromotion_guard",
+      "readiness": "guard_validated",
+      "claim": "The Gaussian representation has a non-negligible terminal conditional expanding-ratio sector.",
+      "formula": "Conditionally, |p^(-s_*+sigma Z)|>=1 exactly when Z>=Re(s_*)/sigma. After the factor m^(sigma Z) is included, exponential tilting makes the relative bad mass barPhi((1/2+(t/2)*(u_m-delta_a))/sigma), where delta_a=log(a)-Re(alpha). For a terminal block at t=1/2 this threshold approaches 1 and the mass approaches barPhi(1)=0.158655..., so conditional contraction cannot be asserted almost surely or discarded uniformly from the Gaussian identity alone.",
+      "proof_boundary": "The exact mixture identity alone is not a conditional multiplicativity theorem.",
+      "diagnostics": {
+        "x_min": "6.51529311985421213e+22",
+        "d_n_upper_at_L50": "3.35978744122717451e-20",
+        "d_log_derivative_upper_at_L50": "9.94839826419614111e-43",
+        "terminal_rate_threshold": "16900/x^2",
+        "terminal_negative_margin_scaled_by_x2": "4.22400000000000000e+03",
+        "terminal_x_collar_width": "<50701/x",
+        "worst_corrected_p_power_ratio": "7.12025097798535844e-01",
+        "certified_ratio_target": "7.16977624007913650e-01",
+        "relative_correction_phase_at_L50": "6.71957488245434901e-20",
+        "gaussian_tail_at_terminal_t_half": "1.58655253931457074e-01"
+      }
+    },
+    {
+      "id": "pphbcg_08_joined_p_free",
+      "role": "exact_reindexing",
+      "readiness": "ready_to_apply",
+      "claim": "All complete p-power blocks rejoin exactly through nested p-free outer prefixes.",
+      "formula": "With s_Z=s_*-sigma*Z and O_M^(p)(s_Z)=sum_(m<=M,p does not divide m)m^(-s_Z), sum_(n<=N)n^(-s_Z)=sum_(k=0)^floor(log_p N)p^(-k*s_Z)*O_floor(N/p^k)^(p)(s_Z).",
+      "proof_boundary": "The p-free prefixes remain complex and need an Xi-specific estimate.",
+      "diagnostics": null
+    },
+    {
+      "id": "pphbcg_09_two_block_countermodel",
+      "role": "countermodel",
+      "readiness": "guard_validated",
+      "claim": "Two complete winding-one dyadic blocks can have a winding-three sum.",
+      "formula": "{\"dyadic_ratio\": \"r=2^(-1/2)\", \"individual_root_locations\": \"A/z has roots of modulus sqrt(2)>1; B/z has its root at -sqrt(2)\", \"individual_windings\": \"wind(A)=wind(B)=1 on |z|=1\", \"interpretation\": \"Two complete geometric dyadic blocks can each be origin-free with winding one while their sum has winding three. The opposite external block phase and scale are a generic composition guard, not asserted Xi data.\", \"joined_factorization\": \"A+B=(z/5)*(1+r*z+5*r^2*z^2)\", \"joined_quadratic_discriminant\": \"-19/2\", \"joined_quadratic_root_modulus\": \"sqrt(2/5)<1\", \"joined_quadratic_root_product\": \"2/5\", \"joined_winding\": 3, \"long_block\": \"A(z)=z*(1+r*z+r^2*z^2)\", \"robust_scale_interval\": \"For A-c*z*(1+r*z), every 1/2<c<1 gives a conjugate root pair of modulus sqrt(2*(1-c))<1.\", \"short_block\": \"B(z)=-(4/5)*z*(1+r*z)\"}",
+      "proof_boundary": "This is an exact generic composition guard, not an Xi counterexample.",
+      "diagnostics": {
+        "dyadic_ratio": "r=2^(-1/2)",
+        "long_block": "A(z)=z*(1+r*z+r^2*z^2)",
+        "short_block": "B(z)=-(4/5)*z*(1+r*z)",
+        "individual_root_locations": "A/z has roots of modulus sqrt(2)>1; B/z has its root at -sqrt(2)",
+        "individual_windings": "wind(A)=wind(B)=1 on |z|=1",
+        "joined_factorization": "A+B=(z/5)*(1+r*z+5*r^2*z^2)",
+        "joined_quadratic_discriminant": "-19/2",
+        "joined_quadratic_root_product": "2/5",
+        "joined_quadratic_root_modulus": "sqrt(2/5)<1",
+        "joined_winding": 3,
+        "robust_scale_interval": "For A-c*z*(1+r*z), every 1/2<c<1 gives a conjugate root pair of modulus sqrt(2*(1-c))<1.",
+        "interpretation": "Two complete geometric dyadic blocks can each be origin-free with winding one while their sum has winding three. The opposite external block phase and scale are a generic composition guard, not asserted Xi data."
+      }
+    },
+    {
+      "id": "pphbcg_10_composition_guard",
+      "role": "route_decision",
+      "readiness": "guard_validated",
+      "claim": "Independent prime-power windings cannot be promoted to the full successor flux.",
+      "formula": "The one-block theorem is real, but winding is not additive under vector addition. The exact length-three/length-two dyadic model has two complete origin-free winding-one blocks and a winding-three sum. Therefore a successful Xi proof must retain the p-free outer prefixes, their relative phases and amplitudes, the terminal recurrence, and the endpoint inside one joined first-jet argument theorem.",
+      "proof_boundary": "Cross-block, terminal, endpoint, and connector terms must remain joined.",
+      "diagnostics": null
+    },
+    {
+      "id": "pphbcg_11_q_ge_1_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The q>=1 problem is now a joined p-free-prefix and endpoint first-jet theorem.",
+      "formula": "Use the joined p-free decomposition, preferably first for p=2, to derive an endpoint-complete common argument-principle or Schur-Cohn/Rouche inequality for the full Xi prefix. It must prove both |mathsf_X|<=delta_L implies |mathcal_C_N|>A_L+epsilon_term and the composed successor bound 0<=kappa_j<1. The terminal u_N<=16900/x^2 collar must be paired with the adjacent endpoint recurrence. Independent block windings and the raw Gaussian mixture are insufficient.",
+      "proof_boundary": "The Xi lower bound and strict successor flux upper bound remain open.",
+      "diagnostics": null
+    },
+    {
+      "id": "pphbcg_12_q_lt_1_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The q<1 multiplicity-compatible chart remains a separate theorem obligation.",
+      "formula": "The q=2tL^2<1 layer still requires its separate multiplicity-compatible parabolic/Hermite first-jet chart. No terminal simplicity or uniform positive endpoint slope is assumed.",
+      "proof_boundary": "No endpoint simplicity is promoted.",
+      "diagnostics": null
+    },
+    {
+      "id": "pphbcg_13_nonpromotion",
+      "role": "nonpromotion_guard",
+      "readiness": "guard_validated",
+      "claim": "The block identities and guards do not prove contact exclusion or RH.",
+      "formula": "The one-block theorem is real, but winding is not additive under vector addition. The exact length-three/length-two dyadic model has two complete origin-free winding-one blocks and a winding-three sum. Therefore a successful Xi proof must retain the p-free outer prefixes, their relative phases and amplitudes, the terminal recurrence, and the endpoint inside one joined first-jet argument theorem.",
+      "proof_boundary": "No full Xi prefix bound, successor theorem, Lambda<=0, PF-infinity, RH, or Clay-prize conclusion is asserted.",
+      "diagnostics": null
+    }
+  ]
+}

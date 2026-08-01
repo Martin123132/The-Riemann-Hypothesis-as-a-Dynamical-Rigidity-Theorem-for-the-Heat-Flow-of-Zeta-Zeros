@@ -1,0 +1,245 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_direct_projection_regime_reduction",
+  "date": "2026-07-27",
+  "status": "exact direct anchored-projection saddle normal form and ordinary/exceptional transversality reduction; both Xi-specific lower-bound branches remain open",
+  "proof_boundary": "This artifact proves the positive-amplitude/unit-carrier normal form, explicit endpoint projections, relative and anchored derivative identities, the small derivative-frame bound, the ordinary shape-ratio inequality, the exceptional directional reduction, and an exact backward-heat guard. It does not prove the q>=1 ratio or directional-transversality bounds, their signed crossing count, the q<1 multiplicity-compatible theorem, finite phase cells, one-sided successor winding, contact exclusion, Lambda<=0, RH, PF-infinity, or a Clay-prize conclusion.",
+  "sources": {
+    "phase_anchor": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_absolute_phase_anchor_reduction.json",
+    "centered_reduction": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_real_residual_reduction.json",
+    "adjacent_stability": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_adjacent_chart_stability_certificate.json",
+    "bulk_pair_gate": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_bulk_pair_transfer_gate.json",
+    "complex_zero_scout": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_complex_zero_scout.json"
+  },
+  "source_sha256": {
+    "phase_anchor": "7e5c8725b2d0913d2e5d1731b962a7cd79081b8e09e52c7992647e4dc631cbd2",
+    "centered_reduction": "4e5390e921bb8a05cf804ba07b01121d4865b889cff2fa6209ec386afe7bbcff",
+    "adjacent_stability": "dcee581f283d63141e29d1085ee463c2eabc714a6e6760b15f12262474f83a83",
+    "bulk_pair_gate": "933dae9cf78cdac6bc8371ee092a9b249a755e59d6b0aca29fb06220042f51a7",
+    "complex_zero_scout": "e7d384fead639732d8ce809a5c4e66a7c26863f6e279bb74021edcde0d09c647"
+  },
+  "source_audit": {
+    "phase_anchor": "jensen_window_pf_newman_polymath15_first_order_centered_absolute_phase_anchor_reduction",
+    "centered_reduction": "jensen_window_pf_newman_polymath15_first_order_centered_real_residual_reduction",
+    "adjacent_stability": "jensen_window_pf_newman_polymath15_first_order_centered_adjacent_chart_stability_certificate",
+    "bulk_pair_gate": "jensen_window_pf_newman_polymath15_first_order_centered_bulk_pair_transfer_gate",
+    "complex_zero_scout": "jensen_window_pf_newman_polymath15_first_order_centered_complex_zero_scout"
+  },
+  "constants": {
+    "L_min": 50,
+    "d_absolute": 2189,
+    "d_x": 4223,
+    "normalized_D": 2e-07,
+    "frame": 2,
+    "split_ratio_denominator": 100,
+    "split_sqrt": 0.9999
+  },
+  "exact": {
+    "domain": "L=log(x/(4*pi))>=50, 0<=tL<=25, a^2=x/(4*pi)+t/16, N=floor(a)",
+    "carrier_decomposition": "sigma_*=Re(s_*), omega_*=-Im(s_*); r_n=exp[t*log(n)^2/4-sigma_*log(n)]*|1+d_n|/|1+d_1|>0; zeta_n=phi*exp(i*omega_*log(n))*(1+d_n)/|1+d_n|, |zeta_n|=1; eta*q_n=r_n*zeta_n",
+    "saddle_amplitude": "u_n=log(a/n)=-ell_n, delta_a=log(a)-Re(alpha), B_a=1/2-t*delta_a/2, E_a=t*log(a)^2/4-Re(s_*)*log(a); r_n=exp[E_a+B_a*u_n+t*u_n^2/4]*|1+d_n|/|1+d_1|",
+    "saddle_bounds": "0<=delta_a<1/(4x), 0<=t<=1/2, hence B_a=1/2-t*delta_a/2>49/100. The amplitudes are explicit and positive; all unresolved oscillation is in the unit carriers zeta_n.",
+    "endpoint_projection": "B_0=beta/(|M_t(s)|*|f_1|)>0, J_a=H_(a,x)+mu_a*H_a; Re(eta*r_0)=(-1)^N*B_0*T_0*H_a; Re(eta*r_A)=(-1)^N*B_0*[T_0*Re(J_a)-Im(J_a)]",
+    "direct_projection": "C_n=Re(zeta_n), S_n=Im(zeta_n), s_*'=c+i*b; mathsf_X:=Re(eta*Z_0)=(-1)^N*B_0*T_0*H_a+sum_n r_n*C_n; mathsf_A:=Re(eta*Z_A)=(-1)^N*B_0*[T_0*Re(J_a)-Im(J_a)]+sum_n ell_n*r_n*(-c*C_n+b*S_n)",
+    "relative_derivative": "nu_1=f_(1,x)/f_1=phi'/phi+d_(1,x)/(1+d_1); Z_A=Z_(0,x)+(nu_1-lambda_a)*Z_0-D_(1,x)/f_1",
+    "anchored_derivative": "W_0=eta*Z_0=E_[1]/|f_1|, W_A=eta*Z_A=C_a/|f_1|, rho_1=partial_x log|f_1|=Re[d_(1,x)/(1+d_1)]; W_A=W_(0,x)+(rho_1-lambda_a)*W_0-D_(1,x)/|f_1|",
+    "real_derivative": "For W_0=mathsf_X+i*mathsf_Y and lambda_a=u_a+i*v_a, mathsf_A=partial_x mathsf_X+(rho_1-u_a)*mathsf_X+v_a*mathsf_Y-Re(D_(1,x))/|f_1|",
+    "derivative_frame_bound": "|rho_1|<8446/x^2, |u_a|<exp(-L), |v_a|<3/x^2, hence |rho_1-lambda_a|<2*exp(-L). Also |D_(1,x)|/|f_1|<2e-7*exp(-5L/4).",
+    "ordinary_identity": "If Z_0!=0, write h=Z_A/Z_0=p+i*q and R=|Z_0|. Then mathsf_A=p*mathsf_X-q*mathsf_Y, mathsf_X^2+mathsf_Y^2=R^2, and q=-Delta_anchor/R^2.",
+    "ordinary_log_current": "h=W_(0,x)/W_0+rho_1-lambda_a-D_(1,x)/E_[1]. With radial current r_x=partial_x log|W_0| and branch-free phase current theta_x=Im(W_(0,x)*conj(W_0))/|W_0|^2, p=r_x+rho_1-u_a-Re(D_(1,x)/E_[1]) and q=theta_x-v_a-Im(D_(1,x)/E_[1]).",
+    "ordinary_current_error": "On |Z_0|>=tau, |D_(1,x)/E_[1]|<2e-7*exp(-5L/4)/tau, while |rho_1-u_a|<2*exp(-L) and |v_a|<exp(-2L).",
+    "ordinary_sufficient": "If |mathsf_X|<=delta<tau<=R, |q|>=kappa, and |p|<=K, then |mathsf_A|>=kappa*sqrt(tau^2-delta^2)-K*delta.",
+    "explicit_split": "Choose tau_L=L*exp(-L). Since |f_1|>1/2, delta_L/tau_L<100000*exp(-L/4)/L<1/100 and sqrt(tau_L^2-delta_L^2)>0.9999*tau_L. Also A_L/tau_L<2*(100000L+1)*exp(-L/4)/L. Thus the ordinary branch closes if 0.9999*kappa_L-K_L*100000*exp(-L/4)/L>2*(100000L+1)*exp(-L/4)/L.",
+    "exceptional_sufficient": "If |Z_0|<tau, then |mathsf_A-partial_x mathsf_X|<2*exp(-L)*tau+2e-7*exp(-5L/4). Thus |partial_x mathsf_X| exceeding the target by this amount is sufficient.",
+    "zero_fiber": "At Z_0=0, mathsf_A=partial_x mathsf_X-Re(D_(1,x))/|f_1|.",
+    "heat_countermodel": "W_*(x,t)=t-x^2/2+i*x satisfies partial_t W_*=-partial_x^2 W_*. At (0,0), W_*=0, |W_*,x|=1, and det D_(x,t)(Re W_*,Im W_*)=-1, but partial_x Re W_*=0. Complex-zero simplicity and a nonzero two-variable Jacobian do not imply the required directional real-slope bound.",
+    "chart_scope": "mathsf_X and mathsf_A inherit the adjacent real-projection bounds, but h=Z_A/Z_0 and its real/imaginary parts do not have a certified complex adjacent-chart bound. Use h only inside one prescribed canonical chart and transfer the final real inequalities.",
+    "live_target": "With delta_L=50000*exp(-5L/4)/|f_1| and A_L=(100000L+1)*exp(-5L/4)/|f_1|, choose tau_L=L*exp(-L). On |Z_0|=R>=tau_L prove the direct Xi-specific inequality |Im(Z_A/Z_0)|*sqrt(R^2-delta_L^2)-|Re(Z_A/Z_0)|*delta_L>A_L. Uniform kappa_L,K_L bounds satisfying the displayed coarse condition are one stronger sufficient route, not a required formulation. On |Z_0|<tau_L prove the signed direct bound for partial_x mathsf_X, including the displayed frame and D corrections. Then count mathsf_A-positive crossings below one successor turn.",
+    "q_lt_1_target": "The q=2tL^2<1 boundary still requires a separate multiplicity-compatible parabolic/Hermite chart; neither ordinary ratio division nor a uniform zero-fiber slope may be imposed at t=0.",
+    "numeric_audit": {
+      "x_min": "6.51529311985421213e+22",
+      "d_1_upper": "3.35978744122717451e-20",
+      "f_1_lower": "1.00000000000000000e+00",
+      "rho_1_upper": "9.94839826419614111e-43",
+      "lambda_upper": "1.92874984796391782e-22",
+      "rho_minus_lambda_upper": "1.92874984796391782e-22",
+      "two_exp_minus_L": "3.85749969592783564e-22",
+      "saddle_B_lower": "5.00000000000000000e-01",
+      "normalized_D_constant_raw": "9.99999999999999955e-08",
+      "split_delta_over_tau_upper": "7.45330634415734220e-03",
+      "split_target_over_tau_upper": "7.45330783481861103e-01",
+      "split_sqrt_lower": "9.99972223726509402e-01"
+    }
+  },
+  "rows": [
+    {
+      "id": "nfocdprr_01_carriers",
+      "role": "exact_normal_form",
+      "readiness": "ready_to_apply",
+      "claim": "Every relative coefficient splits into a positive amplitude and a branch-free unit carrier.",
+      "formula": "sigma_*=Re(s_*), omega_*=-Im(s_*); r_n=exp[t*log(n)^2/4-sigma_*log(n)]*|1+d_n|/|1+d_1|>0; zeta_n=phi*exp(i*omega_*log(n))*(1+d_n)/|1+d_n|, |zeta_n|=1; eta*q_n=r_n*zeta_n",
+      "proof_boundary": "No argument branch or phase monotonicity is used.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocdprr_02_saddle_amplitude",
+      "role": "exact_normal_form",
+      "readiness": "ready_to_apply",
+      "claim": "The positive amplitudes have one exact saddle-distance form.",
+      "formula": "u_n=log(a/n)=-ell_n, delta_a=log(a)-Re(alpha), B_a=1/2-t*delta_a/2, E_a=t*log(a)^2/4-Re(s_*)*log(a); r_n=exp[E_a+B_a*u_n+t*u_n^2/4]*|1+d_n|/|1+d_1|; 0<=delta_a<1/(4x), 0<=t<=1/2, hence B_a=1/2-t*delta_a/2>49/100. The amplitudes are explicit and positive; all unresolved oscillation is in the unit carriers zeta_n.",
+      "proof_boundary": "This is an amplitude identity, not an oscillatory lower bound.",
+      "diagnostics": {
+        "x_min": "6.51529311985421213e+22",
+        "d_1_upper": "3.35978744122717451e-20",
+        "f_1_lower": "1.00000000000000000e+00",
+        "rho_1_upper": "9.94839826419614111e-43",
+        "lambda_upper": "1.92874984796391782e-22",
+        "rho_minus_lambda_upper": "1.92874984796391782e-22",
+        "two_exp_minus_L": "3.85749969592783564e-22",
+        "saddle_B_lower": "5.00000000000000000e-01",
+        "normalized_D_constant_raw": "9.99999999999999955e-08",
+        "split_delta_over_tau_upper": "7.45330634415734220e-03",
+        "split_target_over_tau_upper": "7.45330783481861103e-01",
+        "split_sqrt_lower": "9.99972223726509402e-01"
+      }
+    },
+    {
+      "id": "nfocdprr_03_endpoint_projection",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "Both endpoint real projections are explicit in the same branch-free frame.",
+      "formula": "B_0=beta/(|M_t(s)|*|f_1|)>0, J_a=H_(a,x)+mu_a*H_a; Re(eta*r_0)=(-1)^N*B_0*T_0*H_a; Re(eta*r_A)=(-1)^N*B_0*[T_0*Re(J_a)-Im(J_a)]",
+      "proof_boundary": "The endpoint scalar J_a remains complex through mu_a.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocdprr_04_direct_pair",
+      "role": "exact_normal_form",
+      "readiness": "ready_to_apply",
+      "claim": "The live value and centered-slope observables are direct cosine/sine carrier sums.",
+      "formula": "C_n=Re(zeta_n), S_n=Im(zeta_n), s_*'=c+i*b; mathsf_X:=Re(eta*Z_0)=(-1)^N*B_0*T_0*H_a+sum_n r_n*C_n; mathsf_A:=Re(eta*Z_A)=(-1)^N*B_0*[T_0*Re(J_a)-Im(J_a)]+sum_n ell_n*r_n*(-c*C_n+b*S_n)",
+      "proof_boundary": "The unit-carrier cancellation remains the arithmetic problem.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocdprr_05_relative_derivative",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The centered relative shape is the derivative of the value shape plus an explicit frame correction.",
+      "formula": "nu_1=f_(1,x)/f_1=phi'/phi+d_(1,x)/(1+d_1); Z_A=Z_(0,x)+(nu_1-lambda_a)*Z_0-D_(1,x)/f_1",
+      "proof_boundary": "Division by f_1 is safe; division by Z_0 is not used.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocdprr_06_anchored_derivative",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The anchored centered projection differs from the derivative of the anchored value by two certified nuisance terms.",
+      "formula": "W_0=eta*Z_0=E_[1]/|f_1|, W_A=eta*Z_A=C_a/|f_1|, rho_1=partial_x log|f_1|=Re[d_(1,x)/(1+d_1)]; W_A=W_(0,x)+(rho_1-lambda_a)*W_0-D_(1,x)/|f_1|; For W_0=mathsf_X+i*mathsf_Y and lambda_a=u_a+i*v_a, mathsf_A=partial_x mathsf_X+(rho_1-u_a)*mathsf_X+v_a*mathsf_Y-Re(D_(1,x))/|f_1|",
+      "proof_boundary": "Exact on one prescribed first-order chart.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocdprr_07_frame_bound",
+      "role": "asymptotic_certificate",
+      "readiness": "certified",
+      "claim": "The derivative-frame correction is exponentially smaller than unit scale.",
+      "formula": "|rho_1|<8446/x^2, |u_a|<exp(-L), |v_a|<3/x^2, hence |rho_1-lambda_a|<2*exp(-L). Also |D_(1,x)|/|f_1|<2e-7*exp(-5L/4).",
+      "proof_boundary": "Valid on L>=50 and 0<=tL<=25.",
+      "diagnostics": {
+        "x_min": "6.51529311985421213e+22",
+        "d_1_upper": "3.35978744122717451e-20",
+        "f_1_lower": "1.00000000000000000e+00",
+        "rho_1_upper": "9.94839826419614111e-43",
+        "lambda_upper": "1.92874984796391782e-22",
+        "rho_minus_lambda_upper": "1.92874984796391782e-22",
+        "two_exp_minus_L": "3.85749969592783564e-22",
+        "saddle_B_lower": "5.00000000000000000e-01",
+        "normalized_D_constant_raw": "9.99999999999999955e-08",
+        "split_delta_over_tau_upper": "7.45330634415734220e-03",
+        "split_target_over_tau_upper": "7.45330783481861103e-01",
+        "split_sqrt_lower": "9.99972223726509402e-01"
+      }
+    },
+    {
+      "id": "nfocdprr_08_ordinary_identity",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "Away from the complex-zero fiber the direct slope is controlled by the complex shape ratio.",
+      "formula": "If Z_0!=0, write h=Z_A/Z_0=p+i*q and R=|Z_0|. Then mathsf_A=p*mathsf_X-q*mathsf_Y, mathsf_X^2+mathsf_Y^2=R^2, and q=-Delta_anchor/R^2. h=W_(0,x)/W_0+rho_1-lambda_a-D_(1,x)/E_[1]. With radial current r_x=partial_x log|W_0| and branch-free phase current theta_x=Im(W_(0,x)*conj(W_0))/|W_0|^2, p=r_x+rho_1-u_a-Re(D_(1,x)/E_[1]) and q=theta_x-v_a-Im(D_(1,x)/E_[1]).",
+      "proof_boundary": "The ratio exists only when Z_0 is nonzero.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocdprr_09_ordinary_condition",
+      "role": "conditional_inequality",
+      "readiness": "ready_to_apply",
+      "claim": "Explicit real and imaginary ratio bounds would close the ordinary regime.",
+      "formula": "If |mathsf_X|<=delta<tau<=R, |q|>=kappa, and |p|<=K, then |mathsf_A|>=kappa*sqrt(tau^2-delta^2)-K*delta. On |Z_0|>=tau, |D_(1,x)/E_[1]|<2e-7*exp(-5L/4)/tau, while |rho_1-u_a|<2*exp(-L) and |v_a|<exp(-2L). Choose tau_L=L*exp(-L). Since |f_1|>1/2, delta_L/tau_L<100000*exp(-L/4)/L<1/100 and sqrt(tau_L^2-delta_L^2)>0.9999*tau_L. Also A_L/tau_L<2*(100000L+1)*exp(-L/4)/L. Thus the ordinary branch closes if 0.9999*kappa_L-K_L*100000*exp(-L/4)/L>2*(100000L+1)*exp(-L/4)/L.",
+      "proof_boundary": "The required Xi-specific ratio bounds are not proved here.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocdprr_10_exceptional_condition",
+      "role": "asymptotic_reduction",
+      "readiness": "certified",
+      "claim": "Near the complex-zero fiber the theorem reduces directly to directional real transversality.",
+      "formula": "If |Z_0|<tau, then |mathsf_A-partial_x mathsf_X|<2*exp(-L)*tau+2e-7*exp(-5L/4). Thus |partial_x mathsf_X| exceeding the target by this amount is sufficient.",
+      "proof_boundary": "This does not furnish the missing lower bound.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocdprr_11_zero_fiber",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "At a complex-main zero the centered scalar is the normalized real crossing derivative up to the tiny D correction.",
+      "formula": "At Z_0=0, mathsf_A=partial_x mathsf_X-Re(D_(1,x))/|f_1|.",
+      "proof_boundary": "No Wronskian, determinant, phase ratio, or division remains.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocdprr_12_heat_guard",
+      "role": "countermodel",
+      "readiness": "guard_validated",
+      "claim": "Complex-zero simplicity, derivative magnitude, and a nonzero two-variable Jacobian do not imply the required directional real slope.",
+      "formula": "W_*(x,t)=t-x^2/2+i*x satisfies partial_t W_*=-partial_x^2 W_*. At (0,0), W_*=0, |W_*,x|=1, and det D_(x,t)(Re W_*,Im W_*)=-1, but partial_x Re W_*=0. Complex-zero simplicity and a nonzero two-variable Jacobian do not imply the required directional real-slope bound.",
+      "proof_boundary": "Exact generic backward-heat model, not an Xi counterexample.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocdprr_13_chart_guard",
+      "role": "covariance_guard",
+      "readiness": "guard_validated",
+      "claim": "The ratio theorem must be proved canonically and transferred only through the real projections.",
+      "formula": "mathsf_X and mathsf_A inherit the adjacent real-projection bounds, but h=Z_A/Z_0 and its real/imaginary parts do not have a certified complex adjacent-chart bound. Use h only inside one prescribed canonical chart and transfer the final real inequalities.",
+      "proof_boundary": "No complex chart-stability statement is promoted.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocdprr_14_q_ge_1_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The q>=1 problem is now an explicit ordinary ratio theorem plus directional exceptional transversality.",
+      "formula": "With delta_L=50000*exp(-5L/4)/|f_1| and A_L=(100000L+1)*exp(-5L/4)/|f_1|, choose tau_L=L*exp(-L). On |Z_0|=R>=tau_L prove the direct Xi-specific inequality |Im(Z_A/Z_0)|*sqrt(R^2-delta_L^2)-|Re(Z_A/Z_0)|*delta_L>A_L. Uniform kappa_L,K_L bounds satisfying the displayed coarse condition are one stronger sufficient route, not a required formulation. On |Z_0|<tau_L prove the signed direct bound for partial_x mathsf_X, including the displayed frame and D corrections. Then count mathsf_A-positive crossings below one successor turn.",
+      "proof_boundary": "Neither branch is proved arithmetically.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocdprr_15_q_lt_1_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The q<1 multiplicity-compatible chart remains separate.",
+      "formula": "The q=2tL^2<1 boundary still requires a separate multiplicity-compatible parabolic/Hermite chart; neither ordinary ratio division nor a uniform zero-fiber slope may be imposed at t=0.",
+      "proof_boundary": "Endpoint simplicity is not assumed.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocdprr_16_nonpromotion",
+      "role": "nonpromotion_guard",
+      "readiness": "guard_validated",
+      "claim": "The exact regime split is kept separate from its missing Xi-specific inequalities and RH.",
+      "formula": "direct projection normal form and conditional split != anchored projection lower bound",
+      "proof_boundary": "No q>=1 ratio/transversality theorem, q<1 theorem, finite phase closure, contact exclusion, Lambda<=0, PF-infinity, RH, or Clay-prize conclusion.",
+      "diagnostics": null
+    }
+  ]
+}

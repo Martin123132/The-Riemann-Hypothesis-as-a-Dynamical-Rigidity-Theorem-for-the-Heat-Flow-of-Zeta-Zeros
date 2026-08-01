@@ -1,0 +1,303 @@
+{
+  "date": "2026-07-30",
+  "exact": {
+    "actual_transfer": {
+      "coefficient_error": "|R_k-1|<r_x=18000/x",
+      "frozen_current_error": "|J_ang-J_0|<576*r_x+288*r_x^2<900*r_x",
+      "margins": {
+        "dyadic": "J_ray>1/300-1/1000=7/3000",
+        "large_prime": "J_ray>1/20-1/1000=49/1000",
+        "ternary": "J_ray>1/25-1/1000=39/1000"
+      },
+      "normalized_factor": "R_k=exp[t*k*log(p)*delta_a/2]*(1+d_(m*p^k))/(1+d_m)",
+      "ray_error": "|J_ray-J_0|<16200448/x+6486528/x^2<1/1000",
+      "ray_terms": "J_ray=J_ang-rho*Im(H*conj(Q))+Im(E*conj(Q))/(log(p)*(-b))"
+    },
+    "bernstein_method": {
+      "arithmetic": "Exact Fraction affine transforms, exact Fraction power-to-Bernstein conversion, exact de Casteljau x-splits, and 90-digit outward rational sqrt bounds.",
+      "certificates": [
+        {
+          "bernstein_shape": [
+            99,
+            15,
+            8
+          ],
+          "block_length": 8,
+          "claimed_rational_lower": "1/300",
+          "global_minimum_lower": "3.899682592748647646504777592590999497967e-3",
+          "leaf_minimum_lowers": [
+            "1.581948618686023320113713421916457116787e-2",
+            "3.899682592748647646504777592590999497967e-3",
+            "6.628727486852878028346800733083400045840e-2",
+            "7.8125e-2",
+            "5.928265078834418285439714128835994766925e-1",
+            "1.249142811973160668888802078601622451776e+0"
+          ],
+          "positive": true,
+          "power_degrees": [
+            98,
+            14,
+            7
+          ],
+          "prime": 2,
+          "q_lower": "47/50",
+          "s_lower": "22/25",
+          "x_leaf_paths": [
+            "LLL",
+            "LLR",
+            "LR",
+            "RL",
+            "RRL",
+            "RRR"
+          ]
+        },
+        {
+          "bernstein_shape": [
+            19,
+            7,
+            4
+          ],
+          "block_length": 4,
+          "claimed_rational_lower": "1/25",
+          "global_minimum_lower": "4.254623391080937830531237568978401909853e-2",
+          "leaf_minimum_lowers": [
+            "4.254623391080937830531237568978401909853e-2",
+            "1.481481481481481481481481481481481481481e-1"
+          ],
+          "positive": true,
+          "power_degrees": [
+            18,
+            6,
+            3
+          ],
+          "prime": 3,
+          "q_lower": "17/20",
+          "s_lower": "73/100",
+          "x_leaf_paths": [
+            "L",
+            "R"
+          ]
+        },
+        {
+          "bernstein_shape": [
+            3,
+            3,
+            2
+          ],
+          "block_length": 2,
+          "claimed_rational_lower": "1/20",
+          "global_minimum_lower": "5.835921350012618215449579876123425873562e-2",
+          "leaf_minimum_lowers": [
+            "5.835921350012618215449579876123425873562e-2"
+          ],
+          "positive": true,
+          "power_degrees": [
+            2,
+            2,
+            1
+          ],
+          "prime": 5,
+          "q_lower": "18/25",
+          "s_lower": "13/25",
+          "x_leaf_paths": [
+            ""
+          ]
+        }
+      ],
+      "principle": "On [0,1]^d, every tensor Bernstein basis function is nonnegative and the basis sums to one; therefore P>=min_I b_I."
+    },
+    "ideal_family": {
+      "chebyshev_expansion": "J_0=sum_k(k+1)c_k^2+sum_(k<l)(k+l+2)c_k*c_l*T_(l-k)(x), x=cos(theta)",
+      "coefficients": "c_k=p^(-k/2)*q^[k*(2M-2-k)]*s^k",
+      "current": "J_0=|Q|^2+Re(H*conj(Q))",
+      "moment": "H(z)=sum_(k=0)^(M-1)k*c_k*z^k",
+      "parameters": "q=exp(-t*(log p)^2/4); s=exp(-t*(log p)*u/2); 0<=u<log(p)+1/N",
+      "polynomial": "Q(z)=sum_(k=0)^(M-1)c_k*z^k"
+    },
+    "large_prime_family": {
+      "current": "J_0=1+2r^2+3r*cos(theta)",
+      "minimum": "min_theta J_0=(1-r)(1-2r)>=7/5-3/sqrt(5)>1/20",
+      "reduction": "For M=2, Q=1+r*z with 0<=r=p^(-1/2)*q*s<=1/sqrt(5)"
+    },
+    "parameter_boxes": {
+      "cutoff": "a^2=exp(L)+t/16, N=floor(a), and L>=50 imply N>=2^25",
+      "dyadic": "log(2)<7/10; q>=exp[-(log 2)^2/8]>47/50; s>=exp[-log(2)(log(2)+1/N)/4]>22/25",
+      "quinary_audit": "log(5)<161/100; q>=exp[-(log 5)^2/8]>18/25; s>=exp[-log(5)(log(5)+1/N)/4]>13/25",
+      "ternary": "log(3)<11/10; q>=exp[-(log 3)^2/8]>17/20; s>=exp[-log(3)(log(3)+1/N)/4]>73/100"
+    }
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_starlikeness_base_certificate",
+  "proof_boundary": "This certificate proves strict actual fixed-ray phase-current positivity only for the threshold base families (p,M)=(2,8), (3,4), and p>=5 with M=2. It does not prove length propagation, short or singleton chain control, joined p-free base compatibility, recurrent-endpoint composition, a Xi Abel gap, a successor winding bound, or RH.",
+  "rows": [
+    {
+      "claim": "Work on one complete prime-power chain in the certified ray regime.",
+      "formula": "L>=50, 0<=t<=1/2, 0<=tL<=25; n_k=m*p^k, 0<=k<=M-1.",
+      "id": "pphsb_01_domain",
+      "proof_boundary": "The certificate concerns only complete long-block base lengths.",
+      "readiness": "proved",
+      "role": "fixed-chart domain"
+    },
+    {
+      "claim": "Removing delta_a and d_n leaves a three-variable positive coefficient family.",
+      "formula": "c_k=p^(-k/2)*q^[k(2M-2-k)]*s^k; q=exp(-t(log p)^2/4), s=exp(-t(log p)u/2).",
+      "id": "pphsb_02_ideal_coordinates",
+      "proof_boundary": "The omitted factors are restored quantitatively below.",
+      "readiness": "proved",
+      "role": "exact heat coordinates"
+    },
+    {
+      "claim": "The shifted phase is increasing exactly when its division-free current is positive.",
+      "formula": "Q=sum_k c_k z^k; H=sum_k k*c_k*z^k; J_0=|Q|^2+Re(H*conj(Q)).",
+      "id": "pphsb_03_current",
+      "proof_boundary": "No nonvanishing assumption is needed to state J_0>0.",
+      "readiness": "proved",
+      "role": "exact angular current"
+    },
+    {
+      "claim": "The circle current is a real polynomial in x=cos(theta).",
+      "formula": "J_0=sum_k (k+1)c_k^2+sum_(k<l)(k+l+2)c_k*c_l*T_(l-k)(x).",
+      "id": "pphsb_04_chebyshev",
+      "proof_boundary": "T_d is the Chebyshev polynomial defined by cos(d theta).",
+      "readiness": "proved",
+      "role": "exact polynomialization"
+    },
+    {
+      "claim": "A positive lower bound for every Bernstein coefficient on a box proves positivity throughout that box.",
+      "formula": "P=sum_I b_I prod_j B_(I_j,n_j)(y_j) and B_(i,n)>=0, sum_i B_(i,n)=1.",
+      "id": "pphsb_05_bernstein",
+      "proof_boundary": "All affine substitutions and de Casteljau splits use Fractions.",
+      "readiness": "proved",
+      "role": "exact positivity method"
+    },
+    {
+      "claim": "Every coefficient is enclosed as r+v*sqrt(p) with an outward rational square-root interval.",
+      "formula": "sqrt(p) in [floor(10^90 sqrt(p))/10^90, (floor(10^90 sqrt(p))+1)/10^90].",
+      "id": "pphsb_06_radicals",
+      "proof_boundary": "The sign of v selects the rigorous lower endpoint.",
+      "readiness": "proved",
+      "role": "exact algebraic enclosure"
+    },
+    {
+      "claim": "Every ideal dyadic base block lies in a rational certificate box.",
+      "formula": "(p,M)=(2,8): q in [47/50,1], s in [22/25,1], x in [-1,1].",
+      "id": "pphsb_07_dyadic_box",
+      "proof_boundary": "The bounds use log(2)<7/10 and N>=2^25.",
+      "readiness": "proved",
+      "role": "parameter containment"
+    },
+    {
+      "claim": "The ideal dyadic base current is uniformly positive.",
+      "formula": "J_0>1/300 for (p,M)=(2,8).",
+      "id": "pphsb_08_dyadic_margin",
+      "proof_boundary": "Six dyadic x-leaves cover [-1,1] exactly.",
+      "readiness": "proved",
+      "role": "exact Bernstein certificate"
+    },
+    {
+      "claim": "Every ideal ternary base block lies in a rational certificate box.",
+      "formula": "(p,M)=(3,4): q in [17/20,1], s in [73/100,1], x in [-1,1].",
+      "id": "pphsb_09_ternary_box",
+      "proof_boundary": "The bounds use log(3)<11/10 and N>=2^25.",
+      "readiness": "proved",
+      "role": "parameter containment"
+    },
+    {
+      "claim": "The ideal ternary base current is uniformly positive.",
+      "formula": "J_0>1/25 for (p,M)=(3,4).",
+      "id": "pphsb_10_ternary_margin",
+      "proof_boundary": "Two half-interval x-leaves cover [-1,1] exactly.",
+      "readiness": "proved",
+      "role": "exact Bernstein certificate"
+    },
+    {
+      "claim": "Every ideal two-level block with p>=5 has one uniform current margin.",
+      "formula": "Q=1+r*z, 0<=r<=1/sqrt(5); min_theta J_0=(1-r)(1-2r)>1/20.",
+      "id": "pphsb_11_large_prime",
+      "proof_boundary": "This is an analytic family theorem, not a p=5-only sample.",
+      "readiness": "proved",
+      "role": "analytic two-level family"
+    },
+    {
+      "claim": "The worst-prime p=5 two-level box independently reproduces the analytic margin.",
+      "formula": "(p,M)=(5,2): q in [18/25,1], s in [13/25,1], J_0>1/20.",
+      "id": "pphsb_12_quinary_audit",
+      "proof_boundary": "The analytic p>=5 argument is the promoted result.",
+      "readiness": "proved",
+      "role": "exact Bernstein cross-check"
+    },
+    {
+      "claim": "The positive saddle offset is isolated as a multiplicative perturbation.",
+      "formula": "exp[t*k*log(p)*delta_a/2], 0<=delta_a<1/(4x).",
+      "id": "pphsb_13_offset",
+      "proof_boundary": "It is not hidden inside the lower endpoint for s.",
+      "readiness": "proved",
+      "role": "saddle-offset transfer"
+    },
+    {
+      "claim": "Every normalized actual coefficient differs relatively from its ideal coefficient by less than r_x.",
+      "formula": "|R_k-1|<r_x=18000/x; R_k=exp[t*k*log(p)*delta_a/2]*(1+d_(m*p^k))/(1+d_m).",
+      "id": "pphsb_14_coefficient_error",
+      "proof_boundary": "The estimate covers M=8, M=4, and all p>=5 with M=2.",
+      "readiness": "proved",
+      "role": "actual coefficient transfer"
+    },
+    {
+      "claim": "The normalized frozen current changes by less than 900*r_x.",
+      "formula": "|J_ang-J_0|<576*r_x+288*r_x^2<900*r_x.",
+      "id": "pphsb_15_current_error",
+      "proof_boundary": "Only M<=8 and 0<c_k<=1 are used.",
+      "readiness": "proved",
+      "role": "current stability"
+    },
+    {
+      "claim": "Radial drift and correction current keep the total ray defect below one thousandth.",
+      "formula": "|J_ray-J_0|<16200448/x+6486528/x^2<1/1000.",
+      "id": "pphsb_16_ray_error",
+      "proof_boundary": "Here x>12*2^50, rho<1/(2x), and |epsilon_n|<8446/x^2.",
+      "readiness": "proved",
+      "role": "fixed-ray transfer"
+    },
+    {
+      "claim": "All three base families retain strict fixed-ray phase-current positivity.",
+      "formula": "p=2,M=8: J_ray>7/3000; p=3,M=4: J_ray>39/1000; p>=5,M=2: J_ray>49/1000.",
+      "id": "pphsb_17_actual_margins",
+      "proof_boundary": "The currents are normalized by the nonzero k=0 coefficient.",
+      "readiness": "proved",
+      "role": "actual ray positivity"
+    },
+    {
+      "claim": "Base-family positivity does not yet cover longer complete chains or joined p-free bases.",
+      "formula": "Open: (2,M>8), (3,M>4), (p>=5,M>2), short/singleton chains, endpoint joins, and the Xi Abel gap.",
+      "id": "pphsb_18_boundary",
+      "proof_boundary": "No RH conclusion or successor winding bound is claimed.",
+      "readiness": "open",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "source_kinds": {
+      "complete_chain": "complete_prime_power_chain_occupation_gate",
+      "direct_projection": "jensen_window_pf_newman_polymath15_first_order_centered_direct_projection_regime_reduction",
+      "geometric_phase": "jensen_window_pf_newman_polymath15_first_order_centered_geometric_prime_power_phase_monotonicity_gate",
+      "normalized_prefix": "jensen_window_pf_newman_polymath15_first_order_centered_normalized_prefix_phase_flux_reduction",
+      "phase_flow": "jensen_window_pf_newman_polymath15_first_order_centered_prime_power_logarithmic_phase_flow_gate"
+    },
+    "source_sha256": {
+      "complete_chain": "1c16a5d39bd5fddfcc6f390779e1dbb771171c0daacdd0e569b853ea2a38781a",
+      "direct_projection": "8252a4d506a8132aeec65f5f1c9490430e39b776d76dfae92e27ce008c5e22a9",
+      "geometric_phase": "d8d1c0020748e3db13bbd08fff3bdf4e0a4983bef7751aaaf795bfc087e97653",
+      "normalized_prefix": "75982d22a245d4b9ab6dff57818a49e9936bd1afd1e58318216c41be49291706",
+      "phase_flow": "6eb632898eec7084ee4a90c87666b5320a3d4070db6f6812874c809c59d264a6"
+    }
+  },
+  "status": "proved base-family correction-free Bernstein positivity and actual fixed-ray perturbation transfer",
+  "summary": {
+    "actual_ray_positive_base_families": 3,
+    "analytic_large_prime_base_families": 1,
+    "exact_bernstein_base_certificates": 3,
+    "length_propagation_theorems": 0,
+    "proved_joined_abel_gaps": 0,
+    "proved_successor_winding_bounds": 0,
+    "rows": 18
+  }
+}

@@ -1,0 +1,371 @@
+{
+  "kind": "jensen_window_pf_strong_logconcave_local_quartic_countermodel",
+  "date": "2026-07-25",
+  "status": "exact interval local quartic countermodel gate",
+  "proof_boundary": "This artifact gives a rigorous abstract Mellin countermodel to a local promotion from strong squared-variable log-concavity and the neighboring degree-two/degree-three data to degree four. It is not the Xi kernel or a Newman heat trajectory and does not disprove the global all-shift cubic theorem, degree-four hyperbolicity for Xi, PF-infinity, Lambda<=0, or RH.",
+  "sources": [
+    "outputs/jensen_window_pf_kernel_mellin_upper_wall_certificate.md",
+    "outputs/jensen_window_pf_cubic_forward_uniform_tail_certificate.md",
+    "outputs/jensen_window_pf_quartic_double_root_threshold_lemma.md",
+    "outputs/jensen_window_pf_quartic_boundary_flow_obstruction.md"
+  ],
+  "generator": "work/rh_compute/scripts/jensen_window_pf_strong_logconcave_local_quartic_countermodel.py",
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_strong_logconcave_local_quartic_countermodel.py",
+  "exact": {
+    "density": "f(y)=exp(-3*y-y^2/10)*1_[1/20,1](y)",
+    "strong_logconcavity_modulus": "1/5",
+    "normalized_moment": "A_k=integral_(1/20)^1 y^(k-1/2)*exp(-3*y-y^2/10)dy/Gamma(k+1/2)",
+    "contraction": "x_k=A_(k-1)*A_(k+1)/A_k^2",
+    "cubic_frontier": "F(s,t)=s^2*t^2-6*s*t+4*s+4*t-3",
+    "quartic": "J_4(w)=1+4*w+6*x_1*w^2+4*x_1^2*x_2*w^3+x_1^3*x_2^2*x_3*w^4",
+    "quartic_discriminant": "Disc(J_4)=256*x_1^6*x_2^2*Q(x_1,x_2,x_3)",
+    "full_support_approximation": "f_L(y)=exp(-3*y-y^2/10-L*((1/20-y)_+ +(y-1)_+)), y>=0, L<infinity"
+  },
+  "diagnostics": {
+    "precision_bits": 512,
+    "moments": [
+      {
+        "k": 0,
+        "ball": "[0.325578246240043023315194230870835283878944870516742123975010 +/- 4.05E-61]",
+        "lower": "3.25578246240043023315194230870835283878944870516742123975009E-1",
+        "upper": "3.25578246240043023315194230870835283878944870516742123975011E-1"
+      },
+      {
+        "k": 1,
+        "ball": "[0.159675339735646242420220248360194207414294215759454582873963 +/- 3.73E-62]",
+        "lower": "1.59675339735646242420220248360194207414294215759454582873962E-1",
+        "upper": "1.59675339735646242420220248360194207414294215759454582873964E-1"
+      },
+      {
+        "k": 2,
+        "ball": "[0.0427779635490679862778031200380200398009240915315171263615124 +/- 1.41E-62]",
+        "lower": "4.27779635490679862778031200380200398009240915315171263615123E-2",
+        "upper": "4.27779635490679862778031200380200398009240915315171263615125E-2"
+      },
+      {
+        "k": 3,
+        "ball": "[0.00938037244378959271688196330482779992271723241576957738579432 +/- 1.82E-63]",
+        "lower": "9.38037244378959271688196330482779992271723241576957738579431E-3",
+        "upper": "9.38037244378959271688196330482779992271723241576957738579433E-3"
+      },
+      {
+        "k": 4,
+        "ball": "[0.00175176236189677803076194075326881760946649060924224914639004 +/- 3.81E-63]",
+        "lower": "1.75176236189677803076194075326881760946649060924224914639003E-3",
+        "upper": "1.75176236189677803076194075326881760946649060924224914639005E-3"
+      },
+      {
+        "k": 5,
+        "ball": "[0.000282438354948671980145644133256153685990822126747093168613080 +/- 2.52E-64]",
+        "lower": "2.82438354948671980145644133256153685990822126747093168613079E-4",
+        "upper": "2.82438354948671980145644133256153685990822126747093168613081E-4"
+      }
+    ],
+    "contractions": [
+      {
+        "k": 1,
+        "ball": "[0.546260487327330744593299720444906878822025179257789770409088 +/- 4.00E-61]",
+        "lower": "5.46260487327330744593299720444906878822025179257789770409087E-1",
+        "upper": "5.46260487327330744593299720444906878822025179257789770409089E-1",
+        "lower_wall": "[0.333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333 +/- 3.46e-154]",
+        "lower_wall_margin": "[0.212927153993997411259966387111573545488691845924456437075755 +/- 6.65E-62]",
+        "upper_wall_margin": "[0.453739512672669255406700279555093121177974820742210229590912 +/- 4.00E-61]"
+      },
+      {
+        "k": 2,
+        "ball": "[0.818498181607290144339963533721499951426211436768873476867139 +/- 2.03E-61]",
+        "lower": "8.18498181607290144339963533721499951426211436768873476867138E-1",
+        "upper": "8.18498181607290144339963533721499951426211436768873476867140E-1",
+        "lower_wall": "[0.600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 +/- 1.20e-154]",
+        "lower_wall_margin": "[0.218498181607290144339963533721499951426211436768873476867139 +/- 2.03E-61]",
+        "upper_wall_margin": "[0.181501818392709855660036466278500048573788563231126523132861 +/- 2.03E-61]"
+      },
+      {
+        "k": 3,
+        "ball": "[0.851638198486083412271372927980468278727325989879406655860049 +/- 3.94E-61]",
+        "lower": "8.51638198486083412271372927980468278727325989879406655860048E-1",
+        "upper": "8.51638198486083412271372927980468278727325989879406655860050E-1",
+        "lower_wall": "[0.714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714 +/- 2.97e-154]",
+        "lower_wall_margin": "[0.137352484200369126557087213694753993013040275593692370145763 +/- 1.09E-61]",
+        "upper_wall_margin": "[0.148361801513916587728627072019531721272674010120593344139951 +/- 3.94E-61]"
+      },
+      {
+        "k": 4,
+        "ball": "[0.863362882556287015914332781935164391033742149130755272172689 +/- 4.36E-61]",
+        "lower": "8.63362882556287015914332781935164391033742149130755272172688E-1",
+        "upper": "8.63362882556287015914332781935164391033742149130755272172690E-1",
+        "lower_wall": "[0.777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777778 +/- 3.06e-154]",
+        "lower_wall_margin": "[0.0855851047785092381365550041573866132559643713529774943949108 +/- 1.29E-62]",
+        "upper_wall_margin": "[0.136637117443712984085667218064835608966257850869244727827311 +/- 4.36E-61]"
+      }
+    ],
+    "monotone_gaps": [
+      {
+        "from_k": 1,
+        "to_k": 2,
+        "ball": "[0.272237694279959399746663813276593072604186257511083706458051 +/- 1.98E-61]",
+        "lower": "2.72237694279959399746663813276593072604186257511083706458050E-1"
+      },
+      {
+        "from_k": 2,
+        "to_k": 3,
+        "ball": "[0.0331400168787932679314093942589683273011145531105331789929094 +/- 3.57E-63]",
+        "lower": "3.31400168787932679314093942589683273011145531105331789929093E-2"
+      },
+      {
+        "from_k": 3,
+        "to_k": 4,
+        "ball": "[0.0117246840702036036429598539546961123064161592513486163126400 +/- 4.13E-62]",
+        "lower": "1.17246840702036036429598539546961123064161592513486163126399E-2"
+      }
+    ],
+    "cubic_frontiers": [
+      {
+        "shift": 0,
+        "ball": "[-0.0237343900999162294985373243981561163330896523419611882190875 +/- 7.45E-63]",
+        "upper": "-2.37343900999162294985373243981561163330896523419611882190874E-2"
+      },
+      {
+        "shift": 1,
+        "ball": "[-0.0159417188925092933088746142017136146072988159580009747333247 +/- 3.58E-62]",
+        "upper": "-1.59417188925092933088746142017136146072988159580009747333246E-2"
+      },
+      {
+        "shift": 2,
+        "ball": "[-0.0110064304334018563944386285045908398412396185477237133973711 +/- 1.92E-62]",
+        "upper": "-1.10064304334018563944386285045908398412396185477237133973710E-2"
+      }
+    ],
+    "quartic_Q": {
+      "shift": 0,
+      "ball": "[-0.00587537323825915999878047191451202719150512396456697171798624 +/- 2.83E-63]",
+      "upper": "-5.87537323825915999878047191451202719150512396456697171798623E-3"
+    }
+  },
+  "summary": {
+    "rows": 10,
+    "positive_moments": 6,
+    "local_ratio_wall_contractions": 4,
+    "positive_monotone_gaps": 3,
+    "strict_cubic_margins": 3,
+    "negative_quartic_frontiers": 1,
+    "full_support_approximation_theorems": 1,
+    "open_xi_handoffs": 1,
+    "main_finding": "A 1/5-strongly log-concave Gamma-normalized Mellin density satisfies all local ratio walls and three consecutive strict cubic tests while its shift-zero quartic discriminant is negative. Full-support strongly log-concave approximants preserve the strict signs, so the quartic bridge needs genuinely global or Xi-specific structure beyond the reconciled low-degree facts."
+  },
+  "rows": [
+    {
+      "id": "slcq_01_strong_logconcavity",
+      "role": "exact_input",
+      "readiness": "ready_to_apply",
+      "claim": "The compact Mellin density is positive on a convex support and 1/5-strongly log-concave in the squared variable.",
+      "formula": "-d^2(log f)/dy^2=1/5 on (1/20,1)",
+      "proof_boundary": "Abstract Mellin density, not the Xi kernel.",
+      "diagnostics": null
+    },
+    {
+      "id": "slcq_02_normalized_mellin_coordinate",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "The coefficient normalization is exactly the Xi Berwald-Borell normalization.",
+      "formula": "A_k=integral_(1/20)^1 y^(k-1/2)*exp(-3*y-y^2/10)dy/Gamma(k+1/2)",
+      "proof_boundary": "Only the first six moments are used below.",
+      "diagnostics": null
+    },
+    {
+      "id": "slcq_03_positive_moments",
+      "role": "interval_certificate",
+      "readiness": "ready_to_apply",
+      "claim": "Arb encloses A_0 through A_5 strictly above zero.",
+      "formula": "A_k>0, 0<=k<=5",
+      "proof_boundary": "Six finite normalized Mellin moments.",
+      "diagnostics": {
+        "moments": [
+          {
+            "k": 0,
+            "ball": "[0.325578246240043023315194230870835283878944870516742123975010 +/- 4.05E-61]",
+            "lower": "3.25578246240043023315194230870835283878944870516742123975009E-1",
+            "upper": "3.25578246240043023315194230870835283878944870516742123975011E-1"
+          },
+          {
+            "k": 1,
+            "ball": "[0.159675339735646242420220248360194207414294215759454582873963 +/- 3.73E-62]",
+            "lower": "1.59675339735646242420220248360194207414294215759454582873962E-1",
+            "upper": "1.59675339735646242420220248360194207414294215759454582873964E-1"
+          },
+          {
+            "k": 2,
+            "ball": "[0.0427779635490679862778031200380200398009240915315171263615124 +/- 1.41E-62]",
+            "lower": "4.27779635490679862778031200380200398009240915315171263615123E-2",
+            "upper": "4.27779635490679862778031200380200398009240915315171263615125E-2"
+          },
+          {
+            "k": 3,
+            "ball": "[0.00938037244378959271688196330482779992271723241576957738579432 +/- 1.82E-63]",
+            "lower": "9.38037244378959271688196330482779992271723241576957738579431E-3",
+            "upper": "9.38037244378959271688196330482779992271723241576957738579433E-3"
+          },
+          {
+            "k": 4,
+            "ball": "[0.00175176236189677803076194075326881760946649060924224914639004 +/- 3.81E-63]",
+            "lower": "1.75176236189677803076194075326881760946649060924224914639003E-3",
+            "upper": "1.75176236189677803076194075326881760946649060924224914639005E-3"
+          },
+          {
+            "k": 5,
+            "ball": "[0.000282438354948671980145644133256153685990822126747093168613080 +/- 2.52E-64]",
+            "lower": "2.82438354948671980145644133256153685990822126747093168613079E-4",
+            "upper": "2.82438354948671980145644133256153685990822126747093168613081E-4"
+          }
+        ]
+      }
+    },
+    {
+      "id": "slcq_04_local_ratio_walls",
+      "role": "interval_certificate",
+      "readiness": "ready_to_apply",
+      "claim": "The first four contractions satisfy every local Stieltjes lower wall and Berwald-Borell upper wall strictly.",
+      "formula": "(2*k-1)/(2*k+1)<x_k<1, 1<=k<=4",
+      "proof_boundary": "Four local contractions, not an all-k cone theorem.",
+      "diagnostics": {
+        "contractions": [
+          {
+            "k": 1,
+            "ball": "[0.546260487327330744593299720444906878822025179257789770409088 +/- 4.00E-61]",
+            "lower": "5.46260487327330744593299720444906878822025179257789770409087E-1",
+            "upper": "5.46260487327330744593299720444906878822025179257789770409089E-1",
+            "lower_wall": "[0.333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333 +/- 3.46e-154]",
+            "lower_wall_margin": "[0.212927153993997411259966387111573545488691845924456437075755 +/- 6.65E-62]",
+            "upper_wall_margin": "[0.453739512672669255406700279555093121177974820742210229590912 +/- 4.00E-61]"
+          },
+          {
+            "k": 2,
+            "ball": "[0.818498181607290144339963533721499951426211436768873476867139 +/- 2.03E-61]",
+            "lower": "8.18498181607290144339963533721499951426211436768873476867138E-1",
+            "upper": "8.18498181607290144339963533721499951426211436768873476867140E-1",
+            "lower_wall": "[0.600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 +/- 1.20e-154]",
+            "lower_wall_margin": "[0.218498181607290144339963533721499951426211436768873476867139 +/- 2.03E-61]",
+            "upper_wall_margin": "[0.181501818392709855660036466278500048573788563231126523132861 +/- 2.03E-61]"
+          },
+          {
+            "k": 3,
+            "ball": "[0.851638198486083412271372927980468278727325989879406655860049 +/- 3.94E-61]",
+            "lower": "8.51638198486083412271372927980468278727325989879406655860048E-1",
+            "upper": "8.51638198486083412271372927980468278727325989879406655860050E-1",
+            "lower_wall": "[0.714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714285714 +/- 2.97e-154]",
+            "lower_wall_margin": "[0.137352484200369126557087213694753993013040275593692370145763 +/- 1.09E-61]",
+            "upper_wall_margin": "[0.148361801513916587728627072019531721272674010120593344139951 +/- 3.94E-61]"
+          },
+          {
+            "k": 4,
+            "ball": "[0.863362882556287015914332781935164391033742149130755272172689 +/- 4.36E-61]",
+            "lower": "8.63362882556287015914332781935164391033742149130755272172688E-1",
+            "upper": "8.63362882556287015914332781935164391033742149130755272172690E-1",
+            "lower_wall": "[0.777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777777778 +/- 3.06e-154]",
+            "lower_wall_margin": "[0.0855851047785092381365550041573866132559643713529774943949108 +/- 1.29E-62]",
+            "upper_wall_margin": "[0.136637117443712984085667218064835608966257850869244727827311 +/- 4.36E-61]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "slcq_05_local_monotonicity",
+      "role": "interval_certificate",
+      "readiness": "ready_to_apply",
+      "claim": "The four local contractions are strictly increasing.",
+      "formula": "x_1<x_2<x_3<x_4",
+      "proof_boundary": "Three local adjacent gaps.",
+      "diagnostics": {
+        "monotone_gaps": [
+          {
+            "from_k": 1,
+            "to_k": 2,
+            "ball": "[0.272237694279959399746663813276593072604186257511083706458051 +/- 1.98E-61]",
+            "lower": "2.72237694279959399746663813276593072604186257511083706458050E-1"
+          },
+          {
+            "from_k": 2,
+            "to_k": 3,
+            "ball": "[0.0331400168787932679314093942589683273011145531105331789929094 +/- 3.57E-63]",
+            "lower": "3.31400168787932679314093942589683273011145531105331789929093E-2"
+          },
+          {
+            "from_k": 3,
+            "to_k": 4,
+            "ball": "[0.0117246840702036036429598539546961123064161592513486163126400 +/- 4.13E-62]",
+            "lower": "1.17246840702036036429598539546961123064161592513486163126399E-2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "slcq_06_three_shifted_cubics",
+      "role": "interval_certificate",
+      "readiness": "ready_to_apply",
+      "claim": "Three consecutive shifted cubic Jensen windows are strictly hyperbolic.",
+      "formula": "F(x_1,x_2)<0, F(x_2,x_3)<0, F(x_3,x_4)<0",
+      "proof_boundary": "Shifts zero through two only; no all-shift cubic claim.",
+      "diagnostics": {
+        "cubic_frontiers": [
+          {
+            "shift": 0,
+            "ball": "[-0.0237343900999162294985373243981561163330896523419611882190875 +/- 7.45E-63]",
+            "upper": "-2.37343900999162294985373243981561163330896523419611882190874E-2"
+          },
+          {
+            "shift": 1,
+            "ball": "[-0.0159417188925092933088746142017136146072988159580009747333247 +/- 3.58E-62]",
+            "upper": "-1.59417188925092933088746142017136146072988159580009747333246E-2"
+          },
+          {
+            "shift": 2,
+            "ball": "[-0.0110064304334018563944386285045908398412396185477237133973711 +/- 1.92E-62]",
+            "upper": "-1.10064304334018563944386285045908398412396185477237133973710E-2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "slcq_07_negative_quartic_frontier",
+      "role": "countermodel_gate",
+      "readiness": "ready_to_apply",
+      "claim": "The shift-zero quartic has negative discriminant and is not hyperbolic.",
+      "formula": "Disc(J_4)=256*x_1^6*x_2^2*Q(x_1,x_2,x_3)<0",
+      "proof_boundary": "One local quartic nonhyperbolicity theorem.",
+      "diagnostics": {
+        "quartic_Q": {
+          "shift": 0,
+          "ball": "[-0.00587537323825915999878047191451202719150512396456697171798624 +/- 2.83E-63]",
+          "upper": "-5.87537323825915999878047191451202719150512396456697171798623E-3"
+        }
+      }
+    },
+    {
+      "id": "slcq_08_local_nonpromotion",
+      "role": "non_promotion_gate",
+      "readiness": "ready_to_apply",
+      "claim": "Strong squared-variable log-concavity plus the complete local quadratic, ratio, monotone, and cubic data do not force degree four.",
+      "formula": "local D2 + local ratio cone + local D3 != local D4",
+      "proof_boundary": "Blocks a local generic implication only; it does not reproduce the Xi heat trajectory or its global all-shift cubic theorem.",
+      "diagnostics": null
+    },
+    {
+      "id": "slcq_09_full_support_approximation",
+      "role": "exact_approximation_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Full-support 1/5-strongly log-concave densities retain all strict countermodel signs for sufficiently large finite L.",
+      "formula": "f_L(y)=exp(-3*y-y^2/10-L*((1/20-y)_+ +(y-1)_+)), y>=0, L<infinity",
+      "proof_boundary": "Existence by dominated convergence and openness of finitely many strict moment inequalities; no explicit least L is claimed.",
+      "diagnostics": null
+    },
+    {
+      "id": "slcq_10_xi_specific_handoff",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "A quartic proof must use a global heat-compatible or Xi-specific theta-arithmetic condition beyond the reconciled low-degree facts.",
+      "formula": "construct and propagate the branch-aware quartic threshold",
+      "proof_boundary": "Degree four for Xi, PF-infinity, Lambda<=0, and RH remain open.",
+      "diagnostics": null
+    }
+  ]
+}

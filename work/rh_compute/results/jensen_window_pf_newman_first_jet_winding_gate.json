@@ -1,0 +1,324 @@
+{
+  "kind": "jensen_window_pf_newman_first_jet_winding_gate",
+  "date": "2026-07-26",
+  "status": "exact all-multiplicity first-jet index, signed winding theorem, and diagonal boundary-flux reduction; the Xi edge separation and zero-winding family remain open and this is not a proof of Lambda<=0 or RH",
+  "proof_boundary": "The gate proves sign-definite local contact charge and an exact two-dimensional-to-boundary reduction. It does not prove the bottom/right Xi edge bounds, zero winding, positive-time simplicity, Lambda<=0, or RH.",
+  "sources": [
+    "work/rh_compute/results/jensen_window_pf_newman_positive_boundary_attainment_lemma.json",
+    "work/rh_compute/results/jensen_window_pf_newman_positive_boundary_diagonal_exhaustion_gate.json",
+    "work/rh_compute/results/jensen_window_pf_newman_theta_compact_transversality_interval_certificate.json"
+  ],
+  "source_audit": {
+    "boundary_kind": "jensen_window_pf_newman_positive_boundary_attainment_lemma",
+    "diagonal_kind": "jensen_window_pf_newman_positive_boundary_diagonal_exhaustion_gate",
+    "compact_kind": "jensen_window_pf_newman_theta_compact_transversality_interval_certificate"
+  },
+  "exact": {
+    "orientation_convention": "The domain has the standard (x,t) orientation: the positively oriented half-rectangle runs along its bottom edge from x=0 to x=R. Reversing the coordinate order to (t,x) reverses every local index and the boundary winding.",
+    "universal_heat_polynomial": "P_m(tau,u)=exp(-tau*D_u^2)u^m=(2tau)^(m/2)He_m(u/sqrt(2tau)) for tau>0",
+    "discriminant": "Disc_u P_m=(2tau)^(m(m-1)/2)*product_(k=1)^m k^k",
+    "root_count_jump": "For tau>0, P_m has m simple real Hermite roots. For tau<0, its coefficients have one sign in u^2, so it has zero real roots when m is even and only u=0 when m is odd. The contact therefore births floor(m/2) real pairs.",
+    "double_index": "At a nondegenerate common zero of (F,F_x), det D_(x,t)(F,F_x)=F_x*F_xt-F_t*F_xx=F_xx^2>0; in the reversed (t,x) coordinate order the determinant is -F_xx^2<0",
+    "multiplicity_index": "At a real zero of spatial multiplicity m>=2 in any nonzero real-analytic solution F_t=-F_xx, the common-zero point is isolated and its local Brouwer index in the standard (x,t) orientation is +floor(m/2)",
+    "global_winding": "If Omega is a compact planar domain whose boundary contains no common zero, wind((F+iF_x)(partial Omega),0)=+sum_(p in Omega) floor(m_p/2)>=0 in the standard (x,t) orientation",
+    "zero_winding_equivalence": "Under boundary nonvanishing, wind(F+iF_x)=0 iff Omega contains no real multiple-zero contact",
+    "orientation_audit": {
+      "domain_orientation": "(x,t)",
+      "positive_bottom_edge": "t=delta, x:0->R",
+      "determinant_x_t": "f_xx**2",
+      "determinant_t_x": "-f_xx**2",
+      "coordinate_reversal": "Changing (x,t) to (t,x) reverses both local degree and the positive boundary orientation."
+    },
+    "flux": {
+      "Q": "Q=H^2+H_x^2",
+      "L": "L=H_x^2-H*H_xx",
+      "horizontal": "partial_x arg(H+iH_x)=-L/Q",
+      "vertical": "partial_t arg(H+iH_x)=L_x/Q",
+      "one_form": "d arg(H+iH_x)=-(L/Q)dx+(L_x/Q)dt"
+    },
+    "xi_half_rectangles": "Let Q_j=[1/(5j),1/4]x[0,38+j]. Then Lambda<=0 iff, for every j, Z=H+iH_x is nonzero on partial Q_j and wind(Z(partial Q_j),0)=0",
+    "known_edges": "On x=0, H_t(0)>0. On t=1/4, all zeros are simple because 1/4>1/5>=Lambda. Thus only the bottom edge t=1/(5j), 0<=x<=38+j and the right edge x=38+j, 1/(5j)<=t<=1/4 need new boundary separation",
+    "half_rectangle_flux": "For Q=[delta,T]x[0,R], counterclockwise orientation gives 2pi*wind(Z)=-integral_0^R L_delta/Q_delta dx+integral_delta^T L_x(t,R)/Q(t,R)dt+integral_0^R L_T/Q_T dx",
+    "countermodel_guard": "The universal m=2 and m=4 heat contacts have winding +1 and +2 respectively in the standard (x,t) orientation. Top-edge simplicity, axis positivity, or forward real-rootedness alone does not force zero winding.",
+    "proof_handoff": "For every diagonal half-rectangle, prove first-jet separation on the bottom and right edges and prove that the displayed phase-flux integer is zero. This is a one-dimensional boundary theorem with sign-definite interior charges; it is not yet supplied by the compact certificate, the dominant ray, root-field balance, or generic heat-flow topology."
+  },
+  "hermite_audits": [
+    {
+      "multiplicity": 2,
+      "polynomial": "-2*tau + x**2",
+      "discriminant_tau_power": 1,
+      "discriminant_constant": "8",
+      "real_roots_tau_negative": 0,
+      "real_roots_tau_positive": 2,
+      "pair_births": 1,
+      "local_index": 1
+    },
+    {
+      "multiplicity": 3,
+      "polynomial": "-6*tau*x + x**3",
+      "discriminant_tau_power": 3,
+      "discriminant_constant": "864",
+      "real_roots_tau_negative": 1,
+      "real_roots_tau_positive": 3,
+      "pair_births": 1,
+      "local_index": 1
+    },
+    {
+      "multiplicity": 4,
+      "polynomial": "12*tau**2 - 12*tau*x**2 + x**4",
+      "discriminant_tau_power": 6,
+      "discriminant_constant": "1769472",
+      "real_roots_tau_negative": 0,
+      "real_roots_tau_positive": 4,
+      "pair_births": 2,
+      "local_index": 2
+    },
+    {
+      "multiplicity": 5,
+      "polynomial": "60*tau**2*x - 20*tau*x**3 + x**5",
+      "discriminant_tau_power": 10,
+      "discriminant_constant": "88473600000",
+      "real_roots_tau_negative": 1,
+      "real_roots_tau_positive": 5,
+      "pair_births": 2,
+      "local_index": 2
+    },
+    {
+      "multiplicity": 6,
+      "polynomial": "-120*tau**3 + 180*tau**2*x**2 - 30*tau*x**4 + x**6",
+      "discriminant_tau_power": 15,
+      "discriminant_constant": "132090377011200000",
+      "real_roots_tau_negative": 0,
+      "real_roots_tau_positive": 6,
+      "pair_births": 3,
+      "local_index": 3
+    },
+    {
+      "multiplicity": 7,
+      "polynomial": "-840*tau**3*x + 420*tau**2*x**3 - 42*tau*x**5 + x**7",
+      "discriminant_tau_power": 21,
+      "discriminant_constant": "6962054742715819622400000",
+      "real_roots_tau_negative": 1,
+      "real_roots_tau_positive": 7,
+      "pair_births": 3,
+      "local_index": 3
+    },
+    {
+      "multiplicity": 8,
+      "polynomial": "1680*tau**4 - 3360*tau**3*x**2 + 840*tau**2*x**4 - 56*tau*x**6 + x**8",
+      "discriminant_tau_power": 28,
+      "discriminant_constant": "14950898716463069750021534515200000",
+      "real_roots_tau_negative": 0,
+      "real_roots_tau_positive": 8,
+      "pair_births": 4,
+      "local_index": 4
+    },
+    {
+      "multiplicity": 9,
+      "polynomial": "15120*tau**4*x - 10080*tau**3*x**3 + 1512*tau**2*x**5 - 72*tau*x**7 + x**9",
+      "discriminant_tau_power": 36,
+      "discriminant_constant": "1482824829880728277246579369576745454796800000",
+      "real_roots_tau_negative": 1,
+      "real_roots_tau_positive": 9,
+      "pair_births": 4,
+      "local_index": 4
+    },
+    {
+      "multiplicity": 10,
+      "polynomial": "-30240*tau**5 + 75600*tau**4*x**2 - 25200*tau**3*x**4 + 2520*tau**2*x**6 - 90*tau*x**8 + x**10",
+      "discriminant_tau_power": 45,
+      "discriminant_constant": "7592063128989328779502486372232936728559616000000000000000",
+      "real_roots_tau_negative": 0,
+      "real_roots_tau_positive": 10,
+      "pair_births": 5,
+      "local_index": 5
+    }
+  ],
+  "rows": [
+    {
+      "id": "njwg_01_universal_heat_polynomial",
+      "role": "exact_local_model",
+      "readiness": "ready_to_apply",
+      "claim": "Every real multiple contact has a universal Hermite heat-polynomial tangent.",
+      "formula": "P_m(tau,u)=exp(-tau*D_u^2)u^m=(2tau)^(m/2)He_m(u/sqrt(2tau)) for tau>0",
+      "proof_boundary": "Parabolic leading-order model; higher terms do not change the local degree.",
+      "diagnostics": {
+        "boundary_kind": "jensen_window_pf_newman_positive_boundary_attainment_lemma",
+        "diagonal_kind": "jensen_window_pf_newman_positive_boundary_diagonal_exhaustion_gate",
+        "compact_kind": "jensen_window_pf_newman_theta_compact_transversality_interval_certificate"
+      }
+    },
+    {
+      "id": "njwg_02_discriminant",
+      "role": "exact_all_multiplicity_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The universal contact has no secondary multiple-zero time.",
+      "formula": "Disc_u P_m=(2tau)^(m(m-1)/2)*product_(k=1)^m k^k",
+      "proof_boundary": "Exact for every integer m>=2.",
+      "diagnostics": [
+        {
+          "multiplicity": 2,
+          "polynomial": "-2*tau + x**2",
+          "discriminant_tau_power": 1,
+          "discriminant_constant": "8",
+          "real_roots_tau_negative": 0,
+          "real_roots_tau_positive": 2,
+          "pair_births": 1,
+          "local_index": 1
+        },
+        {
+          "multiplicity": 3,
+          "polynomial": "-6*tau*x + x**3",
+          "discriminant_tau_power": 3,
+          "discriminant_constant": "864",
+          "real_roots_tau_negative": 1,
+          "real_roots_tau_positive": 3,
+          "pair_births": 1,
+          "local_index": 1
+        },
+        {
+          "multiplicity": 4,
+          "polynomial": "12*tau**2 - 12*tau*x**2 + x**4",
+          "discriminant_tau_power": 6,
+          "discriminant_constant": "1769472",
+          "real_roots_tau_negative": 0,
+          "real_roots_tau_positive": 4,
+          "pair_births": 2,
+          "local_index": 2
+        },
+        {
+          "multiplicity": 5,
+          "polynomial": "60*tau**2*x - 20*tau*x**3 + x**5",
+          "discriminant_tau_power": 10,
+          "discriminant_constant": "88473600000",
+          "real_roots_tau_negative": 1,
+          "real_roots_tau_positive": 5,
+          "pair_births": 2,
+          "local_index": 2
+        },
+        {
+          "multiplicity": 6,
+          "polynomial": "-120*tau**3 + 180*tau**2*x**2 - 30*tau*x**4 + x**6",
+          "discriminant_tau_power": 15,
+          "discriminant_constant": "132090377011200000",
+          "real_roots_tau_negative": 0,
+          "real_roots_tau_positive": 6,
+          "pair_births": 3,
+          "local_index": 3
+        },
+        {
+          "multiplicity": 7,
+          "polynomial": "-840*tau**3*x + 420*tau**2*x**3 - 42*tau*x**5 + x**7",
+          "discriminant_tau_power": 21,
+          "discriminant_constant": "6962054742715819622400000",
+          "real_roots_tau_negative": 1,
+          "real_roots_tau_positive": 7,
+          "pair_births": 3,
+          "local_index": 3
+        },
+        {
+          "multiplicity": 8,
+          "polynomial": "1680*tau**4 - 3360*tau**3*x**2 + 840*tau**2*x**4 - 56*tau*x**6 + x**8",
+          "discriminant_tau_power": 28,
+          "discriminant_constant": "14950898716463069750021534515200000",
+          "real_roots_tau_negative": 0,
+          "real_roots_tau_positive": 8,
+          "pair_births": 4,
+          "local_index": 4
+        },
+        {
+          "multiplicity": 9,
+          "polynomial": "15120*tau**4*x - 10080*tau**3*x**3 + 1512*tau**2*x**5 - 72*tau*x**7 + x**9",
+          "discriminant_tau_power": 36,
+          "discriminant_constant": "1482824829880728277246579369576745454796800000",
+          "real_roots_tau_negative": 1,
+          "real_roots_tau_positive": 9,
+          "pair_births": 4,
+          "local_index": 4
+        },
+        {
+          "multiplicity": 10,
+          "polynomial": "-30240*tau**5 + 75600*tau**4*x**2 - 25200*tau**3*x**4 + 2520*tau**2*x**6 - 90*tau*x**8 + x**10",
+          "discriminant_tau_power": 45,
+          "discriminant_constant": "7592063128989328779502486372232936728559616000000000000000",
+          "real_roots_tau_negative": 0,
+          "real_roots_tau_positive": 10,
+          "pair_births": 5,
+          "local_index": 5
+        }
+      ]
+    },
+    {
+      "id": "njwg_03_root_count_jump",
+      "role": "exact_all_multiplicity_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "An m-fold contact creates exactly floor(m/2) real pairs.",
+      "formula": "For tau>0, P_m has m simple real Hermite roots. For tau<0, its coefficients have one sign in u^2, so it has zero real roots when m is even and only u=0 when m is odd. The contact therefore births floor(m/2) real pairs.",
+      "proof_boundary": "Uses simplicity of Hermite roots and coefficient positivity for negative time.",
+      "diagnostics": null
+    },
+    {
+      "id": "njwg_04_local_index",
+      "role": "exact_topological_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "Every resolved pair birth has positive unit index in the standard (x,t) orientation, so an m-fold contact has index +floor(m/2).",
+      "formula": "At a nondegenerate common zero of (F,F_x), det D_(x,t)(F,F_x)=F_x*F_xt-F_t*F_xx=F_xx^2>0; in the reversed (t,x) coordinate order the determinant is -F_xx^2<0; At a real zero of spatial multiplicity m>=2 in any nonzero real-analytic solution F_t=-F_xx, the common-zero point is isolated and its local Brouwer index in the standard (x,t) orientation is +floor(m/2)",
+      "proof_boundary": "The index is local and independent of Xi arithmetic.",
+      "diagnostics": null
+    },
+    {
+      "id": "njwg_05_global_winding",
+      "role": "exact_topological_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "Interior contacts cannot cancel in first-jet winding.",
+      "formula": "If Omega is a compact planar domain whose boundary contains no common zero, wind((F+iF_x)(partial Omega),0)=+sum_(p in Omega) floor(m_p/2)>=0 in the standard (x,t) orientation; Under boundary nonvanishing, wind(F+iF_x)=0 iff Omega contains no real multiple-zero contact",
+      "proof_boundary": "Requires first-jet nonvanishing on the chosen boundary.",
+      "diagnostics": null
+    },
+    {
+      "id": "njwg_06_phase_flux",
+      "role": "exact_differential_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The first-jet winding is an explicit Laguerre phase flux.",
+      "formula": "Q=H^2+H_x^2; L=H_x^2-H*H_xx; partial_x arg(H+iH_x)=-L/Q; partial_t arg(H+iH_x)=L_x/Q; d arg(H+iH_x)=-(L/Q)dx+(L_x/Q)dt",
+      "proof_boundary": "Valid only away from common zeros, as required on the boundary.",
+      "diagnostics": null
+    },
+    {
+      "id": "njwg_07_xi_half_rectangles",
+      "role": "exact_equivalence",
+      "readiness": "ready_to_apply",
+      "claim": "The positive Newman direction is equivalent to zero winding on a linear half-rectangle exhaustion.",
+      "formula": "Let Q_j=[1/(5j),1/4]x[0,38+j]. Then Lambda<=0 iff, for every j, Z=H+iH_x is nonzero on partial Q_j and wind(Z(partial Q_j),0)=0",
+      "proof_boundary": "Uses positive-boundary attainment, evenness, and independent diagonal exhaustion.",
+      "diagnostics": null
+    },
+    {
+      "id": "njwg_08_known_edge_composition",
+      "role": "exact_composition",
+      "readiness": "ready_to_apply",
+      "claim": "The top and symmetry-axis edges are already contact-free.",
+      "formula": "On x=0, H_t(0)>0. On t=1/4, all zeros are simple because 1/4>1/5>=Lambda. Thus only the bottom edge t=1/(5j), 0<=x<=38+j and the right edge x=38+j, 1/(5j)<=t<=1/4 need new boundary separation; For Q=[delta,T]x[0,R], counterclockwise orientation gives 2pi*wind(Z)=-integral_0^R L_delta/Q_delta dx+integral_delta^T L_x(t,R)/Q(t,R)dt+integral_0^R L_T/Q_T dx",
+      "proof_boundary": "The bottom and right edge estimates remain open.",
+      "diagnostics": null
+    },
+    {
+      "id": "njwg_09_winding_guard",
+      "role": "nonpromotion_gate",
+      "readiness": "guard_validated",
+      "claim": "Generic heat-flow structure does not make the winding vanish.",
+      "formula": "The universal m=2 and m=4 heat contacts have winding +1 and +2 respectively in the standard (x,t) orientation. Top-edge simplicity, axis positivity, or forward real-rootedness alone does not force zero winding.",
+      "proof_boundary": "Blocks promotion from top-time real-rootedness or axis positivity.",
+      "diagnostics": null
+    },
+    {
+      "id": "njwg_10_proof_handoff",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "Close two one-dimensional first-jet edges and one integer phase-flux condition at every stage.",
+      "formula": "For every diagonal half-rectangle, prove first-jet separation on the bottom and right edges and prove that the displayed phase-flux integer is zero. This is a one-dimensional boundary theorem with sign-definite interior charges; it is not yet supplied by the compact certificate, the dominant ray, root-field balance, or generic heat-flow topology.",
+      "proof_boundary": "No unbounded Xi edge or winding value is certified here.",
+      "diagnostics": null
+    }
+  ]
+}

@@ -1,0 +1,277 @@
+{
+  "chain": {
+    "chain_moment": "Put kappa_0=log(N/m), u_0=log(a/m), C_(m,p)=Re Z_(m,p), and s_*'=c_s+i*b. Then D_(m,p)=Re[(c_s*kappa_0+i*b*u_0)Z_(m,p)-ell*s_*'*K_(m,p)].",
+    "chain_polynomial": "Q_(m,p)(w)=sum_(k=0)^R_m a_(m,k)w^k, Z_(m,p)=B_m*Q_(m,p)(w_(m,p)), and K_(m,p)=B_m*w_(m,p)*Q_(m,p)'(w_(m,p))=sum_k k*z_(m*p^k).",
+    "chain_transport": "On every fixed-N chart and fixed chain, D_(m,p)=partial_x C_(m,p)+c_s*log(N)*C_(m,p)-R_(m,p), where R_(m,p)=sum_k r_(m*p^k). Thus a chain contact still reduces to transversality, not positivity.",
+    "coefficient_family": "The active coefficients are q_n=exp[t*log(n)^2/4-s_*log(n)]*(1+d_n)/(1+d_1), q_1=1. They carry coefficient +1; there is no Mobius factor in this Xi prefix.",
+    "exact_factorization": "Fix p prime, p does not divide m, ell=log(p), n_k=m*p^k, and R_m=floor(log_p(N/m)). With B_m=phi*exp[t*log(m)^2/4-s_*log(m)]/|1+d_1|, w_(m,p)=exp[ell*(t*log(m)/2-s_*)], and a_(m,k)=exp[t*ell^2*k^2/4]*(1+d_(m*p^k)), one has z_(m*p^k)=eta*q_(m*p^k)=B_m*a_(m,k)*w_(m,p)^k exactly."
+  },
+  "date": "2026-07-28",
+  "kind": "complete_prime_power_chain_occupation_gate",
+  "outer_decomposition": {
+    "exact_partition": "For every fixed prime p, each 1<=n<=N has the unique form n=m*p^k with p not dividing m. Therefore mu=sum_(p not dividing m)mu_(m,p), P=sum_m P_(m,p), C_bulk=sum_m C_(m,p), and D_bulk=sum_m D_(m,p) exactly.",
+    "heat_rejoin": "The Gaussian identity writes the heat factor as an expectation of tilted Dirichlet prefixes. The p-free decomposition telescopes for every tilt before taking the expectation. This exactly reconstructs the original prefix; expectation cannot be passed through the phase-dependent indicators 1_(s<h_n).",
+    "no_mobius_reinterpretation": "The subtraction in O_M^(p)=S_M-p^(-s)S_floor(M/p) is a one-prime p-free inclusion identity. It does not turn the original carrier coefficients into Mobius coefficients and supplies no positivity.",
+    "p_free_prefix": "For the correction-free Dirichlet prefix S_M(s)=sum_(n<=M)n^(-s), O_M^(p)(s)=S_M(s)-p^(-s)S_floor(M/p)(s). If R=floor(log_p N), then sum_(k=0)^R p^(-ks)O_floor(N/p^k)^(p)(s)=S_N(s) by exact telescoping.",
+    "singleton_count": "Let M=floor(N/p). The number of p-free complete chains with R_m=0 is S_p(N)=N-2M+floor(M/p). For p=2, S_2(N)>=floor(N/4). Thus a fixed-prime chain split leaves order-N singleton chains with no internal completion at all.",
+    "singleton_diagnostics": {
+      "checked_N_range": "1<=N<=2048",
+      "checked_primes": [
+        2,
+        3,
+        5,
+        7
+      ],
+      "dyadic_lower_bound": "S_2(N)>=floor(N/4)"
+    }
+  },
+  "proof_boundary": "Proved: exact physical chain factorization, Euler moment, chain transport, three-level threshold guard, external-phase reversal, p-free partition, singleton count, and telescoping rejoin. Open: a joined Xi boundary margin, winding cap, q<1 chart, finite-height cofinal closure, contact exclusion, Lambda<=0, PF-infinity, RH, and any Clay-prize conclusion.",
+  "rows": [
+    {
+      "claim": "The active Xi prefix has coefficient +1 and no Mobius factor.",
+      "diagnostics": null,
+      "formula": "The active coefficients are q_n=exp[t*log(n)^2/4-s_*log(n)]*(1+d_n)/(1+d_1), q_1=1. They carry coefficient +1; there is no Mobius factor in this Xi prefix.",
+      "id": "cppco_01_coefficient_family",
+      "proof_boundary": "A p-free inclusion subtraction must not be relabelled as a Mobius coefficient.",
+      "readiness": "proved",
+      "role": "source contract"
+    },
+    {
+      "claim": "Every fixed prime-power chain has an exact heat-quadratic polynomial factorization.",
+      "diagnostics": null,
+      "formula": "Fix p prime, p does not divide m, ell=log(p), n_k=m*p^k, and R_m=floor(log_p(N/m)). With B_m=phi*exp[t*log(m)^2/4-s_*log(m)]/|1+d_1|, w_(m,p)=exp[ell*(t*log(m)/2-s_*)], and a_(m,k)=exp[t*ell^2*k^2/4]*(1+d_(m*p^k)), one has z_(m*p^k)=eta*q_(m*p^k)=B_m*a_(m,k)*w_(m,p)^k exactly.",
+      "id": "cppco_02_chain_factorization",
+      "proof_boundary": "The complex correction factors remain in a_(m,k).",
+      "readiness": "proved",
+      "role": "exact algebra"
+    },
+    {
+      "claim": "The chain sum and logarithmic index moment are Q and its Euler derivative.",
+      "diagnostics": null,
+      "formula": "Q_(m,p)(w)=sum_(k=0)^R_m a_(m,k)w^k, Z_(m,p)=B_m*Q_(m,p)(w_(m,p)), and K_(m,p)=B_m*w_(m,p)*Q_(m,p)'(w_(m,p))=sum_k k*z_(m*p^k).",
+      "id": "cppco_03_chain_polynomial",
+      "proof_boundary": "This is a fixed-x identity, not a zero-free theorem.",
+      "readiness": "proved",
+      "role": "exact algebra"
+    },
+    {
+      "claim": "The physical centered first moment has an exact chain-Euler representation.",
+      "diagnostics": null,
+      "formula": "Put kappa_0=log(N/m), u_0=log(a/m), C_(m,p)=Re Z_(m,p), and s_*'=c_s+i*b. Then D_(m,p)=Re[(c_s*kappa_0+i*b*u_0)Z_(m,p)-ell*s_*'*K_(m,p)].",
+      "id": "cppco_04_chain_moment",
+      "proof_boundary": "It is a real projection and has no automatic sign.",
+      "readiness": "proved",
+      "role": "exact algebra"
+    },
+    {
+      "claim": "Each fixed chain inherits the normalized occupation transversality identity.",
+      "diagnostics": null,
+      "formula": "On every fixed-N chart and fixed chain, D_(m,p)=partial_x C_(m,p)+c_s*log(N)*C_(m,p)-R_(m,p), where R_(m,p)=sum_k r_(m*p^k). Thus a chain contact still reduces to transversality, not positivity.",
+      "id": "cppco_05_chain_transport",
+      "proof_boundary": "At chain contact this remains a derivative statement.",
+      "readiness": "proved",
+      "role": "exact transport"
+    },
+    {
+      "claim": "Arbitrary contracted endpoint amplitudes admit a complete three-level affine-phase threshold guard.",
+      "diagnostics": null,
+      "formula": "Let A_0,A_1,A_2>0 with A_2<A_0, put theta_0=arccos(A_2/A_0), varphi=(pi-theta_0)/2, and theta_k=theta_0+k*varphi. Then theta_2=pi, c_0=A_2, c_2=-A_2, and c_1<0.",
+      "id": "cppco_06_general_guard",
+      "proof_boundary": "The phase parameters are not asserted to be attained by the Xi trajectory.",
+      "readiness": "proved",
+      "role": "nonpromotion guard"
+    },
+    {
+      "claim": "The three guard slopes are strictly ordered in the physical c_s,b range.",
+      "diagnostics": null,
+      "formula": "For u_0>2ell, u_k=u_0-k*ell, kappa_k=kappa_0-k*ell, beta=-b>=1/2, and 0<=c_s<1/4, h_k=c_s*kappa_k+beta*u_k*tan(theta_k) satisfies h_1<h_2<h_0. Indeed h_1-h_2<c_s*ell-beta*u_1<ell/4-ell/2<0, while h_0-h_2=2c_s*ell+beta*u_0*tan(theta_0)>0.",
+      "id": "cppco_07_slope_order",
+      "proof_boundary": "The guard is pole-free and uses u_0>2log(p).",
+      "readiness": "proved",
+      "role": "nonpromotion guard"
+    },
+    {
+      "claim": "A complete chain threshold profile can be negative, zero on an open interval, and positive.",
+      "diagnostics": {
+        "first_moment": "ell*(10sqrt(3)+3sqrt(6))/8>0",
+        "ordered_profile": "-sqrt(2)/4 below h_1; 0 on (h_1,h_2); 1/2 on (h_2,h_0)",
+        "parameters": "A=(1,2^(-1/2),1/2), theta=(pi/3,2pi/3,pi), u=(5ell/2,3ell/2,ell/2), c_s=0, b=-1",
+        "slope_order": "h_1=-3sqrt(3)ell/2<h_2=0<h_0=5sqrt(3)ell/2",
+        "status": "Exact correction-free complete three-level chain guard, not an actual Xi point."
+      },
+      "formula": "For P_(m,p)(s)=sum_(k=0)^2 c_k*1_(s<h_k), P=c_1<0 below h_1, P=c_0+c_2=0 on (h_1,h_2), and P=c_0=A_2>0 on (h_2,h_0). Thus neither a fixed sign nor a strict positive lower modulus follows from complete-chain amplitudes and affine phases.",
+      "id": "cppco_08_threshold_profile",
+      "proof_boundary": "This disproves chain-completion positivity, not an Xi-specific joined-prefix theorem.",
+      "readiness": "proved",
+      "role": "route obstruction"
+    },
+    {
+      "claim": "A common half-turn reverses every projected chain sign without changing its slopes.",
+      "diagnostics": null,
+      "formula": "Adding pi to every theta_k leaves every h_k unchanged but sends every c_k, P_(m,p), C_(m,p), and D_(m,p) to its negative. Any composable sign theorem must control the p-free external phase B_m; internal chain contraction cannot do so.",
+      "id": "cppco_09_external_phase",
+      "proof_boundary": "The p-free external phase must be controlled jointly.",
+      "readiness": "proved",
+      "role": "route obstruction"
+    },
+    {
+      "claim": "Fixed small coefficient phase corrections do not create coefficient-only threshold positivity.",
+      "diagnostics": null,
+      "formula": "For fixed correction phases delta_k, the two affine parameters alpha,varphi can still set alpha+delta_0=theta_0 and alpha+2varphi+delta_2=pi. The middle phase is (theta_0+pi)/2+delta_1-(delta_0+delta_2)/2. Small d_n corrections therefore do not create a coefficient-only sign; this does not assert that the actual Xi trajectory realizes the guard phases.",
+      "id": "cppco_10_correction_guard",
+      "proof_boundary": "No actual Xi phase-attainment statement is made.",
+      "readiness": "proved",
+      "role": "nonpromotion guard"
+    },
+    {
+      "claim": "Every occurrence of pi has an explicit source.",
+      "diagnostics": null,
+      "formula": "The pi in the Xi saddle and a^2=x/(4*pi)+t/16 comes from the completed-zeta Gamma normalization. The pi in theta_2=pi is separately the half-period of exp(i*theta); no polygon or prime chain defines pi.",
+      "id": "cppco_11_pi_provenance",
+      "proof_boundary": "The chain does not define or approximate pi.",
+      "readiness": "proved",
+      "role": "normalization provenance"
+    },
+    {
+      "claim": "The full occupation measure is the sum of its p-free prime-power chains.",
+      "diagnostics": null,
+      "formula": "For every fixed prime p, each 1<=n<=N has the unique form n=m*p^k with p not dividing m. Therefore mu=sum_(p not dividing m)mu_(m,p), P=sum_m P_(m,p), C_bulk=sum_m C_(m,p), and D_bulk=sum_m D_(m,p) exactly.",
+      "id": "cppco_12_exact_partition",
+      "proof_boundary": "Linearity of the measure does not imply positivity of its summands.",
+      "readiness": "proved",
+      "role": "exact arithmetic"
+    },
+    {
+      "claim": "Every fixed-prime split retains order-N complete singleton chains.",
+      "diagnostics": {
+        "checked_N_range": "1<=N<=2048",
+        "checked_primes": [
+          2,
+          3,
+          5,
+          7
+        ],
+        "dyadic_lower_bound": "S_2(N)>=floor(N/4)"
+      },
+      "formula": "Let M=floor(N/p). The number of p-free complete chains with R_m=0 is S_p(N)=N-2M+floor(M/p). For p=2, S_2(N)>=floor(N/4). Thus a fixed-prime chain split leaves order-N singleton chains with no internal completion at all.",
+      "id": "cppco_13_singletons",
+      "proof_boundary": "Internal prime-power rigidity has no content on these chains.",
+      "readiness": "proved",
+      "role": "route obstruction"
+    },
+    {
+      "claim": "The correction-free p-free rejoin telescopes to the original prefix.",
+      "diagnostics": null,
+      "formula": "For the correction-free Dirichlet prefix S_M(s)=sum_(n<=M)n^(-s), O_M^(p)(s)=S_M(s)-p^(-s)S_floor(M/p)(s). If R=floor(log_p N), then sum_(k=0)^R p^(-ks)O_floor(N/p^k)^(p)(s)=S_N(s) by exact telescoping.",
+      "id": "cppco_14_p_free_telescoping",
+      "proof_boundary": "The decomposition alone creates no new coercive quantity.",
+      "readiness": "proved",
+      "role": "exact arithmetic"
+    },
+    {
+      "claim": "The p-free subtraction is not a Mobius-weighted Xi expansion.",
+      "diagnostics": null,
+      "formula": "The subtraction in O_M^(p)=S_M-p^(-s)S_floor(M/p) is a one-prime p-free inclusion identity. It does not turn the original carrier coefficients into Mobius coefficients and supplies no positivity.",
+      "id": "cppco_15_no_mobius",
+      "proof_boundary": "No alternating-sign theorem may be imported from a different coefficient family.",
+      "readiness": "proved",
+      "role": "source contract"
+    },
+    {
+      "claim": "Gaussian heat mixing reconstructs the same joined prefix and does not linearize threshold indicators.",
+      "diagnostics": null,
+      "formula": "The Gaussian identity writes the heat factor as an expectation of tilted Dirichlet prefixes. The p-free decomposition telescopes for every tilt before taking the expectation. This exactly reconstructs the original prefix; expectation cannot be passed through the phase-dependent indicators 1_(s<h_n).",
+      "id": "cppco_16_heat_rejoin",
+      "proof_boundary": "Expectation preserves the sum identity, not zero-free winding or occupation sign.",
+      "readiness": "proved",
+      "role": "exact arithmetic"
+    },
+    {
+      "claim": "The contact condition is global rather than chainwise.",
+      "diagnostics": null,
+      "formula": "With the recurrent endpoint retained, mathsf_X=c_0+sum_m C_(m,p) and mathcal_C_N=d_0+sum_m D_(m,p). mathsf_X=0 does not imply C_(m,p)=0 for any m.",
+      "id": "cppco_17_global_contact",
+      "proof_boundary": "A chain-contact estimate cannot be summed under only the global contact equation.",
+      "readiness": "proved",
+      "role": "endpoint contract"
+    },
+    {
+      "claim": "Prime-power chains do not evolve independently across cutoff changes.",
+      "diagnostics": null,
+      "formula": "When N changes, chain lengths and every kappa_k=log(N/(m*p^k)) change. Recompute terminal centering and use the exact global adjacent laws F_(N+1)-F_N=j_0+u_nz^v and Q_N=f_(N+1)+kappa_N*J_a^(adj).",
+      "id": "cppco_18_cutoff_join",
+      "proof_boundary": "No blockwise cutoff homotopy replaces the recurrent endpoint join.",
+      "readiness": "proved",
+      "role": "chart contract"
+    },
+    {
+      "claim": "Retire complete-chain threshold positivity as a standalone route.",
+      "diagnostics": null,
+      "formula": "Complete chains remain an exact organization of the prefix, but their projected threshold masses have no chainwise sign and a fixed-p split leaves order-N singletons. Return to the endpoint-complete joined first-jet boundary flux, where p-free external phases and the recurrent endpoint are controlled together.",
+      "id": "cppco_19_route_decision",
+      "proof_boundary": "A stronger source-specific joined-prefix theorem remains logically possible.",
+      "readiness": "closed for chainwise positivity",
+      "role": "route decision"
+    },
+    {
+      "claim": "The next target is a whole-boundary joined-prefix first-jet estimate.",
+      "diagnostics": null,
+      "formula": "Insert the exact O(N) normalized first-jet flux into the cofinal boundary-degree contract. Seek strict boundary domination or a winding cap for the full joined prefix plus endpoint, beginning on the first unresolved compact boundary beyond Q_207.",
+      "id": "cppco_20_next_target",
+      "proof_boundary": "One finite pilot is diagnostic and cannot establish the cofinal theorem.",
+      "readiness": "open",
+      "role": "open theorem"
+    },
+    {
+      "claim": "The chain gate proves an exact obstruction, not RH.",
+      "diagnostics": null,
+      "formula": "Proved: exact physical chain factorization, Euler moment, chain transport, three-level threshold guard, external-phase reversal, p-free partition, singleton count, and telescoping rejoin. Open: a joined Xi boundary margin, winding cap, q<1 chart, finite-height cofinal closure, contact exclusion, Lambda<=0, PF-infinity, RH, and any Clay-prize conclusion.",
+      "id": "cppco_21_proof_boundary",
+      "proof_boundary": "No generic guard is labelled an actual Xi counterexample.",
+      "readiness": "audited",
+      "role": "proof boundary"
+    }
+  ],
+  "source_hashes": {
+    "adjacent_chart": "dcee581f283d63141e29d1085ee463c2eabc714a6e6760b15f12262474f83a83",
+    "contact_transport": "fdcef454128f5eacad5b059b6bd649de509dcdca329b2375fdcf260b2e7eb3e3",
+    "direct_projection": "8252a4d506a8132aeec65f5f1c9490430e39b776d76dfae92e27ce008c5e22a9",
+    "normalized_prefix": "75982d22a245d4b9ab6dff57818a49e9936bd1afd1e58318216c41be49291706",
+    "occupation": "769c3c8e5396f09e873ab7c83e3bbeecdc87fccc7c1c9edffd6880f9ca75db41",
+    "prime_power": "1886a5476844ac89860436f1b0d82cbcee8f576dc5e46e9efcd29098edd4ee79"
+  },
+  "source_kinds": {
+    "adjacent_chart": "jensen_window_pf_newman_polymath15_first_order_centered_adjacent_chart_stability_certificate",
+    "contact_transport": "jensen_window_pf_newman_polymath15_first_order_centered_contact_signed_transport_reduction",
+    "direct_projection": "jensen_window_pf_newman_polymath15_first_order_centered_direct_projection_regime_reduction",
+    "normalized_prefix": "jensen_window_pf_newman_polymath15_first_order_centered_normalized_prefix_phase_flux_reduction",
+    "occupation": "jensen_window_pf_newman_polymath15_first_order_centered_signed_occupation_transport_reduction",
+    "prime_power": "jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_block_composition_guard"
+  },
+  "status": "exact_reduction_and_route_obstruction_not_an_rh_proof",
+  "summary": {
+    "exact_chain_factorizations": 1,
+    "exact_euler_moments": 1,
+    "external_phase_guards": 1,
+    "open_joined_boundary_theorems": 1,
+    "p_free_telescoping_identities": 1,
+    "row_count": 21,
+    "singleton_count_theorems": 1,
+    "threshold_sign_obstructions": 1
+  },
+  "threshold_guard": {
+    "correction_guard": "For fixed correction phases delta_k, the two affine parameters alpha,varphi can still set alpha+delta_0=theta_0 and alpha+2varphi+delta_2=pi. The middle phase is (theta_0+pi)/2+delta_1-(delta_0+delta_2)/2. Small d_n corrections therefore do not create a coefficient-only sign; this does not assert that the actual Xi trajectory realizes the guard phases.",
+    "exact_dyadic_control": {
+      "first_moment": "ell*(10sqrt(3)+3sqrt(6))/8>0",
+      "ordered_profile": "-sqrt(2)/4 below h_1; 0 on (h_1,h_2); 1/2 on (h_2,h_0)",
+      "parameters": "A=(1,2^(-1/2),1/2), theta=(pi/3,2pi/3,pi), u=(5ell/2,3ell/2,ell/2), c_s=0, b=-1",
+      "slope_order": "h_1=-3sqrt(3)ell/2<h_2=0<h_0=5sqrt(3)ell/2",
+      "status": "Exact correction-free complete three-level chain guard, not an actual Xi point."
+    },
+    "external_phase_flip": "Adding pi to every theta_k leaves every h_k unchanged but sends every c_k, P_(m,p), C_(m,p), and D_(m,p) to its negative. Any composable sign theorem must control the p-free external phase B_m; internal chain contraction cannot do so.",
+    "general_construction": "Let A_0,A_1,A_2>0 with A_2<A_0, put theta_0=arccos(A_2/A_0), varphi=(pi-theta_0)/2, and theta_k=theta_0+k*varphi. Then theta_2=pi, c_0=A_2, c_2=-A_2, and c_1<0.",
+    "pi_provenance": "The pi in the Xi saddle and a^2=x/(4*pi)+t/16 comes from the completed-zeta Gamma normalization. The pi in theta_2=pi is separately the half-period of exp(i*theta); no polygon or prime chain defines pi.",
+    "slope_order": "For u_0>2ell, u_k=u_0-k*ell, kappa_k=kappa_0-k*ell, beta=-b>=1/2, and 0<=c_s<1/4, h_k=c_s*kappa_k+beta*u_k*tan(theta_k) satisfies h_1<h_2<h_0. Indeed h_1-h_2<c_s*ell-beta*u_1<ell/4-ell/2<0, while h_0-h_2=2c_s*ell+beta*u_0*tan(theta_0)>0.",
+    "threshold_profile": "For P_(m,p)(s)=sum_(k=0)^2 c_k*1_(s<h_k), P=c_1<0 below h_1, P=c_0+c_2=0 on (h_1,h_2), and P=c_0=A_2>0 on (h_2,h_0). Thus neither a fixed sign nor a strict positive lower modulus follows from complete-chain amplitudes and affine phases."
+  }
+}

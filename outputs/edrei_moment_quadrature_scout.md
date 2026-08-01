@@ -54,7 +54,10 @@ work/rh_compute/results/arb_edrei/log_sign/arb_edrei_log_sign_lam1em2_n1_n57_dps
 work/rh_compute/results/arb_edrei/log_sign/arb_edrei_log_sign_lam1em1_n1_n57_dps2400_boundary_tol1e-140.jsonl
 ```
 
-The scout is interval-based, but it remains a finite necessary-condition diagnostic. It is not promoted to a proof of the all-order Edrei representation.
+The scout is interval-based and remains finite. It tests a finite prefix of an
+exact all-order criterion: by Sokal's logarithmic-derivative theorem,
+`a_n=p_(n+1)` being a Stieltjes moment sequence at all orders is equivalent to
+`H` belonging to `LP+`. The scout is not promoted to that all-order statement.
 
 ## Positive Arb Recurrence Scout
 
@@ -147,7 +150,9 @@ power-Hankel determinant certificates: 4,205 promoted finite positives
 recurrence scout: 55 finite positive recurrence rows, then 40 inconclusive rows
 ```
 
-Neither gives the all-order Edrei representation. Both are finite diagnostics that sharpen the theorem target.
+Neither gives the all-order Stieltjes property. Both are finite diagnostics
+for an endpoint-equivalent theorem target. The exact theorem and indexing are
+recorded in `outputs/jensen_window_pf_edrei_stieltjes_equivalence_gate.md`.
 
 ## Countermodel Guard
 
@@ -210,6 +215,7 @@ The next theorem-search upgrade would be one of:
 ```text
 1. derive recurrence coefficients analytically from the zeta structure;
 2. tighten Edrei-log enclosures enough to push recurrence positivity beyond order 12;
-3. prove the all-n Edrei log-power representation directly;
+3. prove the all-n shifted Stieltjes moment property directly, equivalently
+   both required Hankel columns or a nonnegative Stieltjes continued fraction;
 4. identify a stable positive parameter reconstruction from the recurrence data.
 ```

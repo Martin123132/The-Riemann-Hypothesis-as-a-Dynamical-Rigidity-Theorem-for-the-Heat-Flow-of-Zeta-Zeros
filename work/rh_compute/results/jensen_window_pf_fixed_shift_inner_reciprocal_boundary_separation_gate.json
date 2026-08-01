@@ -1,0 +1,152 @@
+{
+  "audit": {
+    "causal_energy_finite": true,
+    "cofinal_full_burnol_implication_rejected": false,
+    "exact_reduction_count": 15,
+    "fixed_shift_promotion_valid": false,
+    "lambda_le_zero_proved": false,
+    "open_arithmetic_target_count": 1,
+    "pf_infinity_proved": false,
+    "proof_guard_count": 2,
+    "rational_inner_proved": true,
+    "reciprocal_boundary_energy_finite": false,
+    "rh_proved": false,
+    "row_count": 18
+  },
+  "date": "2026-07-23",
+  "kind": "jensen_window_pf_fixed_shift_inner_reciprocal_boundary_separation_gate",
+  "parameters": {
+    "half_plane": "Re(z)>0",
+    "height": "T>0",
+    "omega": "omega>0"
+  },
+  "rows": [
+    {
+      "id": "fsirbsg_01_parameters",
+      "proof_boundary": "The construction is finite-dimensional and makes no claim about zeros of the actual xi function.",
+      "role": "exact_definition",
+      "statement": "Fix omega>0 and T>0 in the centered variable z=s-1/2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "fsirbsg_02_toy_completed_function",
+      "proof_boundary": "A real even quartic with the functional-equation symmetries of one off-axis zero quartet.",
+      "role": "exact_definition",
+      "statement": "Define F(z)=((z-omega)^2+T^2)((z+omega)^2+T^2).",
+      "status": "available_exact"
+    },
+    {
+      "id": "fsirbsg_03_symmetry",
+      "proof_boundary": "Immediate from the two paired quadratic factors.",
+      "role": "exact_identity",
+      "statement": "F(-z)=F(z) and F(conj(z))=conj(F(z)).",
+      "status": "available_exact"
+    },
+    {
+      "id": "fsirbsg_04_zero_quartet",
+      "proof_boundary": "omega,T>0 keep the four roots distinct.",
+      "role": "exact_identity",
+      "statement": "The zeros of F are z=+/-omega+/-iT, all simple.",
+      "status": "available_exact"
+    },
+    {
+      "id": "fsirbsg_05_fixed_shift_quotient",
+      "proof_boundary": "This is the centered analogue of a completed fixed-shift quotient.",
+      "role": "exact_definition",
+      "statement": "Set Q(z)=F(z-omega)/F(z+omega).",
+      "status": "available_exact"
+    },
+    {
+      "id": "fsirbsg_06_boundary_zero_cancellation",
+      "proof_boundary": "The boundary zeros z=+/-iT cancel exactly in Q.",
+      "role": "exact_identity",
+      "statement": "Both numerator and denominator contain the factor z^2+T^2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "fsirbsg_07_quotient_simplification",
+      "proof_boundary": "Cancel the common boundary factor from row 6.",
+      "role": "exact_identity",
+      "statement": "Q(z)=(((z-2omega)^2+T^2)/((z+2omega)^2+T^2)).",
+      "status": "available_exact"
+    },
+    {
+      "id": "fsirbsg_08_pole_location",
+      "proof_boundary": "Hence Q is analytic on the open right half-plane.",
+      "role": "exact_identity",
+      "statement": "The poles of Q are -2omega+/-iT, strictly in Re(z)<0.",
+      "status": "available_exact"
+    },
+    {
+      "id": "fsirbsg_09_boundary_unimodularity",
+      "proof_boundary": "The numerator and denominator in row 7 are conjugates on the imaginary axis.",
+      "role": "exact_identity",
+      "statement": "|Q(it)|=1 for every real t.",
+      "status": "available_exact"
+    },
+    {
+      "id": "fsirbsg_10_rational_inner",
+      "proof_boundary": "It is the product of the two half-plane Blaschke factors (z-a)/(z+conj(a)) with a=2omega+/-iT.",
+      "role": "exact_consequence",
+      "statement": "Q is a rational inner function on Re(z)>0.",
+      "status": "available_exact"
+    },
+    {
+      "id": "fsirbsg_11_causal_difference",
+      "proof_boundary": "Direct subtraction in row 7.",
+      "role": "exact_identity",
+      "statement": "Q(z)-1=-8omega*z/((z+2omega)^2+T^2).",
+      "status": "available_exact"
+    },
+    {
+      "id": "fsirbsg_12_exact_hardy_energy",
+      "proof_boundary": "A two-Cauchy-kernel partial fraction evaluates the integral exactly; in particular the causal boundary energy is finite.",
+      "role": "exact_identity",
+      "statement": "The boundary integral int_R |Q(it)-1|^2 dt=16*pi*omega, so ||Q-1||_(H2)^2=8omega under the 1/(2pi) convention.",
+      "status": "available_exact"
+    },
+    {
+      "id": "fsirbsg_13_reciprocal_boundary_energy",
+      "proof_boundary": "Any positive smooth weight at t=+/-T gives the same divergence conclusion.",
+      "role": "exact_definition",
+      "statement": "Define I_(omega,T)=int_R dt/[(1+t^2)|F(omega+it)|^2].",
+      "status": "available_exact"
+    },
+    {
+      "id": "fsirbsg_14_shifted_line_zero",
+      "proof_boundary": "The first quadratic factor vanishes simply and the second is nonzero.",
+      "role": "exact_identity",
+      "statement": "F(omega+iT)=F(omega-iT)=0, and both zeros are simple along the shifted vertical line.",
+      "status": "available_exact"
+    },
+    {
+      "id": "fsirbsg_15_reciprocal_divergence",
+      "proof_boundary": "Near t=T the integrand is a positive constant times |t-T|^(-2).",
+      "role": "exact_consequence",
+      "statement": "I_(omega,T)=infinity.",
+      "status": "available_exact"
+    },
+    {
+      "id": "fsirbsg_16_fixed_shift_nonpromotion",
+      "proof_boundary": "The same symmetric boundary zero is canceled in Q but is a pole of 1/F(omega+it). No universal fixed-shift norm inequality can promote the former to the latter.",
+      "role": "proof_guard",
+      "statement": "Finite causal energy or fixed-shift innerness does not generically bound reciprocal square energy on the shifted line.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "fsirbsg_17_cofinal_distinction",
+      "proof_boundary": "One off-axis zero quartet can align with an exceptional cancellation shift, not with every member of a sequence omega_j->0.",
+      "role": "proof_guard",
+      "statement": "The countermodel blocks a same-shift promotion only; it does not block the audited cofinal implication from full determinant/Burnol control to RH.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "fsirbsg_18_open_arithmetic_target",
+      "proof_boundary": "The logarithmic tail-energy estimate, RH, PF-infinity, and Lambda<=0 all remain open.",
+      "role": "open_target",
+      "statement": "Obtain sum_N P_(alpha/2,N)/N<infinity from a direct Mobius/Mertens estimate, or prove a cofinal full-Burnol theorem; do not infer it from limiting fixed-shift innerness alone.",
+      "status": "open_target"
+    }
+  ],
+  "status": "exact rational-inner/reciprocal-boundary separation countermodel with one open arithmetic target"
+}

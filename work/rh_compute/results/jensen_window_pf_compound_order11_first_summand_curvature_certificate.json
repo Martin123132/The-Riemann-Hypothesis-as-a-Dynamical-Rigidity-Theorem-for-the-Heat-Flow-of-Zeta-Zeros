@@ -1,0 +1,125 @@
+{
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_compound_order11_first_summand_curvature_certificate.py",
+  "date": "2026-07-22",
+  "generator": "work/rh_compute/scripts/jensen_window_pf_compound_order11_first_summand_curvature_certificate.py",
+  "kind": "jensen_window_pf_compound_order11_first_summand_curvature_certificate",
+  "largest_scaled_curvature_upper": "2122.86516691011593226179209689464539687227984653146836129212",
+  "proof_boundary": "This artifact composes the continuous first-summand theorem at lambda=-100 only. It does not prove full-Newman-kernel entry, heat-forward invariance, all-shift order eleven, PF-infinity, Lambda<=0, or RH.",
+  "rows": [
+    {
+      "claim": "The sparse-H23 continuation proves the lower real-t interval.",
+      "diagnostics": null,
+      "formula": "y_1''(t)<=6000/t^2 for every real 1252<=t<=5700",
+      "id": "co11fscc_01_lower_bridge",
+      "proof_boundary": "First Newman summand on the finite lower interval.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "The adaptive-H23 compact certificate extends the real-t theorem beyond the u=2.001 handoff.",
+      "diagnostics": {
+        "V_prime_2_001_upper": "3.80196621635193385678801171533426331770390296897595492274576E+4"
+      },
+      "formula": "y_1''(t)<=6000/t^2 for every real 5700<=t<=38020",
+      "id": "co11fscc_02_compact_bridge",
+      "proof_boundary": "First Newman summand on the compact interval.",
+      "readiness": "ready_to_apply",
+      "role": "interval_theorem"
+    },
+    {
+      "claim": "Finite and asymptotic saddle certificates cover every mode u>=2.001.",
+      "diagnostics": null,
+      "formula": "[2001/1000<=u<=20] union [u>=20]",
+      "id": "co11fscc_03_saddle_rays",
+      "proof_boundary": "Uses the hash-bound strictly increasing saddle parametrization t=V'(u).",
+      "readiness": "ready_to_apply",
+      "role": "interval_analytic_theorem"
+    },
+    {
+      "claim": "The compact real-t interval overlaps the beginning of the complete saddle ray.",
+      "diagnostics": null,
+      "formula": "V'(2001/1000)<38020",
+      "id": "co11fscc_04_overlap",
+      "proof_boundary": "Joins first-summand curvature theorems only.",
+      "readiness": "ready_to_apply",
+      "role": "exact_overlap"
+    },
+    {
+      "claim": "The lower, compact, finite-ray, and asymptotic ranges cover the complete half-line.",
+      "diagnostics": {
+        "largest_scaled_curvature_upper": "2122.86516691011593226179209689464539687227984653146836129212",
+        "largest_source": "compact",
+        "scaled_uppers": {
+          "asymptotic_ray": "1.89624506010953554262717564901086051122142615632762193819294E+3",
+          "compact": "2122.86516691011593226179209689464539687227984653146836129212",
+          "finite_ray": "4.82778214518629812116688965439836787336070857370521810403170E+2",
+          "lower": "41.4308043260243735131882308377712013897305561203006129174507"
+        }
+      },
+      "formula": "y_1''(t)<=6000/t^2 for every real t>=1252",
+      "id": "co11fscc_05_global_composition",
+      "proof_boundary": "First Newman summand at lambda=-100 only; no full-kernel promotion.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem_composition"
+    }
+  ],
+  "source_contract": {
+    "compact_saddle_overlap": "V'(2001/1000)<=3.80196621635193385678801171533426331770390296897595492274576E+4<38020",
+    "finite_asymptotic_join": "u=20",
+    "lower_compact_join": "t=5700",
+    "saddle_monotonicity": {
+      "formula": "V''>0 for u>=1/100; V'<0 for 0<u<=1/100",
+      "kind": "jensen_window_pf_compound_order4_exact_cumulant_exact_tail_certificate",
+      "path": "work/rh_compute/results/jensen_window_pf_compound_order4_exact_cumulant_exact_tail_certificate.json",
+      "row": "co4ecetc_05_global_outward_monotonicity",
+      "sha256": "83ed8e202cc57df969d543284286ff6ef17c55458f7233afefd4699f48032e23"
+    },
+    "scaled_uppers": {
+      "asymptotic_ray": "1.89624506010953554262717564901086051122142615632762193819294E+3",
+      "compact": "2122.86516691011593226179209689464539687227984653146836129212",
+      "finite_ray": "4.82778214518629812116688965439836787336070857370521810403170E+2",
+      "lower": "41.4308043260243735131882308377712013897305561203006129174507"
+    },
+    "sources": [
+      {
+        "kind": "jensen_window_pf_compound_order11_sparse_h23_lower_bridge_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order11_sparse_h23_lower_bridge_certificate.json",
+        "sha256": "8104b1d2b375422762fde534a45fd90a8d40effa9bdd5a3c2dba216405f73caa",
+        "status": "rigorous order-eleven first-summand curvature theorem on 1252<=t<=5700",
+        "theorem": "y_1''(t)<=6000/t^2 for every real 1252<=t<=5700"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order11_compact_adaptive_h23_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order11_compact_adaptive_h23_certificate.json",
+        "sha256": "666121a10a4359db5ddd974429a08b7ea037e55085845937697e27f510d2c4cd",
+        "status": "rigorous order-eleven first-summand curvature theorem on 5700<=t<=38020",
+        "theorem": "y_1''(t)<=6000/t^2 for every real 5700<=t<=38020"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order11_nested_curvature_finite_ray_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order11_nested_curvature_finite_ray_certificate.json",
+        "sha256": "59bcd1b1465fcc833704a5f2b69f03f218baebdeafc472e116a459f666d18dd3",
+        "status": "rigorous order-eleven first-summand curvature theorem on 2001/1000<=u<=20",
+        "theorem": "y_1''(t)<=6000/t^2 for every saddle mode 2001/1000<=u<=20"
+      },
+      {
+        "kind": "jensen_window_pf_compound_order11_nested_curvature_asymptotic_ray_certificate",
+        "path": "work/rh_compute/results/jensen_window_pf_compound_order11_nested_curvature_asymptotic_ray_certificate.json",
+        "sha256": "b90bfca55c52c347e68608555b2b832f92ae68675bc2941cc6bf148fa3a6c63a",
+        "status": "rigorous order-eleven first-summand curvature theorem on u>=20",
+        "theorem": "t^2*y_1''(t)<2000 for every mode u>=20"
+      }
+    ]
+  },
+  "status": "rigorous global order-eleven first-summand curvature theorem on t>=1252",
+  "summary": {
+    "full_kernel_theorems": 0,
+    "global_first_summand_curvature_theorems": 1,
+    "heat_forward_theorems": 0,
+    "open_rows": 0,
+    "ready_rows": 5,
+    "rh_claims": 0,
+    "rows": 5
+  },
+  "theorem": "y_1''(t)<=6000/t^2 for every real t>=1252"
+}

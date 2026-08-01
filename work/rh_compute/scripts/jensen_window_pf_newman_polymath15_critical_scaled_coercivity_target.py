@@ -81,9 +81,14 @@ def build_exact() -> dict:
 
     return {
         "critical_region": (
-            f"L=log(x/(4*pi))->infinity, c=t*L in [0,c_*+o(1)], "
+            f"L=log(x/(4*pi))->infinity, c=t*L in (0,c_*+o(1)], "
             f"c_*={C_STAR_EXACT}={C_STAR_DECIMAL}..., "
             "N=floor(sqrt(x/(4*pi)+t/16))"
+        ),
+        "positive_time_scope": (
+            "The Newman criterion requires t>0, so c=0 is not part of the "
+            "target; however every positive sequence c(L)->0 remains in scope, "
+            "and no lower cutoff c>=c_0 may be inserted."
         ),
         "dirichlet_main": (
             "D_(N,t)(x)=sum_(n<=N)exp((t/4)log(n)^2)*n^(-s_*(x)), "
@@ -127,7 +132,8 @@ def build_exact() -> dict:
         ),
         "live_target": (
             "Prove C_t[J_(N,t)] greater than its explicit refined C2 remainder "
-            "budget uniformly for 0<=t*L<=c_*+o(1)"
+            "budget for every 0<t*L<=c_*+o(1), including positive sequences "
+            "t*L->0"
         ),
     }
 
@@ -143,7 +149,8 @@ def build_artifact() -> dict:
             formula=exact["critical_region"],
             proof_boundary=(
                 "The c>c_*+epsilon region is closed by the oscillatory zeta "
-                "handoff theorem."
+                "handoff theorem. The endpoint c=0 is not required, but no "
+                "positive lower cutoff is available."
             ),
         ),
         GateRow(
@@ -278,9 +285,11 @@ def render_note(artifact: dict) -> str:
             "",
             f"The oscillatory zeta handoff closes every fixed `c > c_*`, where",
             f"`c_* = {C_STAR_EXACT} = {C_STAR_DECIMAL}...`. Thus only",
-            "`0 <= c <= c_* + o(1)` remains asymptotically open. The earlier",
+            "`0 < c <= c_* + o(1)` remains asymptotically open. The earlier",
             "absolute zeta-moment argument stops at `c=4`; published exponent-pair",
             "cancellation is what lowers the boundary from `4` to `c_*`.",
+            "",
+            exact["positive_time_scope"],
             "",
             "## Finite Coercivity",
             "",

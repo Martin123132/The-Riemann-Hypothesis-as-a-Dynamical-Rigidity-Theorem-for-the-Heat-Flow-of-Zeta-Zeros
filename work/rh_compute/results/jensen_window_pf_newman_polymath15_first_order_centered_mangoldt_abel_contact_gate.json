@@ -1,0 +1,316 @@
+{
+  "date": "2026-07-30",
+  "exact": {
+    "contact_band_reduction": "On |mathsf_X|<=delta_L, the already certified terminal shear obeys |c u_N mathsf_X|<epsilon_term. Therefore a signed endpoint-plus-four-moment estimate |Re[g+s_*'U]|>A_L+2epsilon_term is sufficient for the existing Abel gap, but is not proved here.",
+    "contact_normal_form": "With e=eta r_0=g_0/|f_1|, g=eta r_A=G_a/|f_1|, W_0=e+S, mathsf_X=Re(W_0), s_*'=c+ib, and u_N=log(a/N), the exact endpoint-complete scalar is mathcal_C_N=Re[g+s_*'U]-c u_N mathsf_X, with S and U given by the four-moment formulas.",
+    "correction_polynomial": "Put B=alpha'(s)t^2/8, a_0=1+1/(6s)+alpha'(s)t/4+B alpha(s)^2, a_1=-2B alpha(s), and a_2=B. Then, exactly, 1+d_n=a_0+a_1 log(n)+a_2 log(n)^2.",
+    "four_moment_abel": "For H_j=sum_(n<=N)log(n)^j q_n^(0), j=0,1,2,3, S=eta[H_0+varrho_1 H_1+varrho_2 H_2] and U=eta[log(a)H_0+(varrho_1 log(a)-1)H_1+(varrho_2 log(a)-varrho_1)H_2-varrho_2 H_3].",
+    "heat_factorization": "For dm<=N, q_(dm)^(0)=q_d^(0)q_m^(0)exp[(t/2)log(d)log(m)].",
+    "heat_gram": "For t>=0 the untruncated heat coupling G_t(d,m)=exp[(t/2)log(d)log(m)] is positive semidefinite, because sum_(d,m)y_d y_m G_t(d,m)=sum_(r>=0)(t/2)^r/r! [sum_d y_d log(d)^r]^2.",
+    "legacy_distinction": "The exact first-jet symmetry is multiplicative and hyperbolically truncated: dm<=N with additive weight Lambda(d)+Lambda(m). The legacy radial square uses d^2+m^2 and product weight Lambda(d)Lambda(m). The latter is a different, second-order object and is not the Xi contact scalar.",
+    "mangoldt_moments": "For j=1,2,3, the finite moment is exactly H_j=sum_(dm<=N)Lambda(d)log(dm)^(j-1)q_(dm)^(0)=(1/2)sum_(dm<=N)[Lambda(d)+Lambda(m)]log(dm)^(j-1)q_(dm)^(0).",
+    "normalized_coefficients": "Since a_0=1+d_1 and |d_1|<1/2, put varrho_1=a_1/a_0 and varrho_2=a_2/a_0. With q_n^(0)=exp[t log(n)^2/4-s_*log(n)] and eta=f_1/|f_1|, the anchored carrier is z_n=eta q_n^(0)[1+varrho_1 log(n)+varrho_2 log(n)^2].",
+    "prime_edge_minor": "If sqrt(N)<p<=N is prime, then for every j=1,2,3 the {1,p} principal minor of K_(j,t,N) is [[0,log(p)^j/2],[log(p)^j/2,0]], with determinant -log(p)^(2j)/4<0. Bertrand's postulate supplies such a p for every N>=2, with N=2,3,4 checked directly.",
+    "route_decision": "Retain the symmetric Mangoldt form as a Type-I/II or bilinear cancellation coordinate. Do not promote transpose symmetry, entrywise positivity, or the untruncated heat Gram to a contact lower bound. A successful estimate must keep the complex phase, hyperbolic cutoff, recurrent endpoint, first-order coefficients, W_0=0, and adjacent charts joined.",
+    "symmetric_bilinear_kernel": "Combining the heat factorization with the preceding identity writes H_j=sum_(dm<=N)K_(j,t,N)(d,m)q_d^(0)q_m^(0), where K is real and transpose-symmetric. This is a complex bilinear form, not a Hermitian form."
+  },
+  "kind": "corrected_mangoldt_abel_contact_gate",
+  "proof_boundary": "This gate proves the exact quadratic correction polynomial, four-moment Abel collapse, symmetric Mangoldt divisor-pair identity, heat coupling, endpoint-complete contact normal form, and indefinite prime-edge guard. It proves no signed endpoint-plus-moment lower bound, Abel-scalar gap, horizontal successor winding cap, q<1 or bounded-L closure, contact exclusion, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "boundary": "This is the retained first-order coefficient only.",
+      "claim": "The retained first Dirichlet correction is exactly quadratic in log(n).",
+      "exact_statement": "Put B=alpha'(s)t^2/8, a_0=1+1/(6s)+alpha'(s)t/4+B alpha(s)^2, a_1=-2B alpha(s), and a_2=B. Then, exactly, 1+d_n=a_0+a_1 log(n)+a_2 log(n)^2.",
+      "id": "macg_01_correction",
+      "implication": "No remainder is introduced by the polynomial expansion.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "No sign or contact margin follows from normalization.",
+      "claim": "The branch-free normalized carrier has two exact logarithmic correction coefficients.",
+      "exact_statement": "Since a_0=1+d_1 and |d_1|<1/2, put varrho_1=a_1/a_0 and varrho_2=a_2/a_0. With q_n^(0)=exp[t log(n)^2/4-s_*log(n)] and eta=f_1/|f_1|, the anchored carrier is z_n=eta q_n^(0)[1+varrho_1 log(n)+varrho_2 log(n)^2].",
+      "id": "macg_02_anchor",
+      "implication": "The nonzero first carrier fixes the common absolute phase.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "The recurrent endpoint remains separate and explicit.",
+      "claim": "The full corrected Abel bulk closes exactly on H_0 through H_3.",
+      "exact_statement": "For H_j=sum_(n<=N)log(n)^j q_n^(0), j=0,1,2,3, S=eta[H_0+varrho_1 H_1+varrho_2 H_2] and U=eta[log(a)H_0+(varrho_1 log(a)-1)H_1+(varrho_2 log(a)-varrho_1)H_2-varrho_2 H_3].",
+      "id": "macg_03_four_moments",
+      "implication": "No higher logarithmic moment is needed at retained first order.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "It is a finite hyperbolic sum, not a radial prime-pair field.",
+      "claim": "Each nonconstant logarithmic moment has an exact symmetric Mangoldt divisor-pair representation.",
+      "exact_statement": "For j=1,2,3, the finite moment is exactly H_j=sum_(dm<=N)Lambda(d)log(dm)^(j-1)q_(dm)^(0)=(1/2)sum_(dm<=N)[Lambda(d)+Lambda(m)]log(dm)^(j-1)q_(dm)^(0).",
+      "id": "macg_04_mangoldt",
+      "implication": "The transpose symmetry is an exact arithmetic identity.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "The cutoff and Mangoldt weights are not removed.",
+      "claim": "The heat quadratic factors into two multiplicative carriers and one symmetric coupling.",
+      "exact_statement": "For dm<=N, q_(dm)^(0)=q_d^(0)q_m^(0)exp[(t/2)log(d)log(m)].",
+      "id": "macg_05_heat_factor",
+      "implication": "This exposes a natural bilinear exponential-sum coordinate.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "It is not the complete finite Mangoldt kernel.",
+      "claim": "The untruncated heat coupling alone is a positive Gram kernel.",
+      "exact_statement": "For t>=0 the untruncated heat coupling G_t(d,m)=exp[(t/2)log(d)log(m)] is positive semidefinite, because sum_(d,m)y_d y_m G_t(d,m)=sum_(r>=0)(t/2)^r/r! [sum_d y_d log(d)^r]^2.",
+      "id": "macg_06_heat_gram",
+      "implication": "This isolates the exact positive part of the old symmetry intuition.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "There is no conjugation and hence no automatic real positivity.",
+      "claim": "The corrected moments are transpose-symmetric complex bilinear forms.",
+      "exact_statement": "Combining the heat factorization with the preceding identity writes H_j=sum_(dm<=N)K_(j,t,N)(d,m)q_d^(0)q_m^(0), where K is real and transpose-symmetric. This is a complex bilinear form, not a Hermitian form.",
+      "id": "macg_07_bilinear",
+      "implication": "Type-I/II cancellation may be sought before absolute values.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "The Xi-specific lower bound remains open.",
+      "claim": "The endpoint-complete Abel scalar has an exact four-moment Mangoldt normal form.",
+      "exact_statement": "With e=eta r_0=g_0/|f_1|, g=eta r_A=G_a/|f_1|, W_0=e+S, mathsf_X=Re(W_0), s_*'=c+ib, and u_N=log(a/N), the exact endpoint-complete scalar is mathcal_C_N=Re[g+s_*'U]-c u_N mathsf_X, with S and U given by the four-moment formulas.",
+      "id": "macg_08_contact",
+      "implication": "The formula includes the exceptional W_0=0 fibre.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "The sufficient estimate is not established.",
+      "claim": "A signed endpoint-plus-four-moment estimate is sufficient for the existing Abel gap.",
+      "exact_statement": "On |mathsf_X|<=delta_L, the already certified terminal shear obeys |c u_N mathsf_X|<epsilon_term. Therefore a signed endpoint-plus-four-moment estimate |Re[g+s_*'U]|>A_L+2epsilon_term is sufficient for the existing Abel gap, but is not proved here.",
+      "id": "macg_09_band",
+      "implication": "This is the narrow theorem-search handoff.",
+      "readiness": "conditional"
+    },
+    {
+      "boundary": "This is a kernel guard, not an Xi contact counterexample.",
+      "claim": "The actual symmetric Mangoldt kernel has an exact negative prime-edge minor.",
+      "exact_statement": "If sqrt(N)<p<=N is prime, then for every j=1,2,3 the {1,p} principal minor of K_(j,t,N) is [[0,log(p)^j/2],[log(p)^j/2,0]], with determinant -log(p)^(2j)/4<0. Bertrand's postulate supplies such a p for every N>=2, with N=2,3,4 checked directly.",
+      "id": "macg_10_minor",
+      "implication": "Transpose symmetry and entrywise nonnegativity cannot prove the gap by Gram positivity.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "No zero-curvature correlation is promoted.",
+      "claim": "The old radial prime symmetry and the actual contact symmetry are mathematically distinct.",
+      "exact_statement": "The exact first-jet symmetry is multiplicative and hyperbolically truncated: dm<=N with additive weight Lambda(d)+Lambda(m). The legacy radial square uses d^2+m^2 and product weight Lambda(d)Lambda(m). The latter is a different, second-order object and is not the Xi contact scalar.",
+      "id": "macg_11_legacy",
+      "implication": "The useful clue is multiplicative divisor symmetry, not visual radial alignment.",
+      "readiness": "proved"
+    },
+    {
+      "boundary": "No Abel gap, horizontal winding cap, contact exclusion, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+      "claim": "The surviving use of the symmetry is bilinear cancellation with the endpoint retained.",
+      "exact_statement": "Retain the symmetric Mangoldt form as a Type-I/II or bilinear cancellation coordinate. Do not promote transpose symmetry, entrywise positivity, or the untruncated heat Gram to a contact lower bound. A successful estimate must keep the complex phase, hyperbolic cutoff, recurrent endpoint, first-order coefficients, W_0=0, and adjacent charts joined.",
+      "id": "macg_12_route",
+      "implication": "The next stage is an endpoint-complete signed Type-I/II estimate.",
+      "readiness": "open"
+    }
+  ],
+  "source_audit": {
+    "source_sha256": {
+      "abel_prefix": "408b16b6719be7a55b5f260dcda8ebc9bfd012edd734e6fc4913f8cbb0e9abc3",
+      "absolute_anchor": "7e5c8725b2d0913d2e5d1731b962a7cd79081b8e09e52c7992647e4dc631cbd2",
+      "first_order_contact": "89d20ce680d02b11153ea73b92f16368e7b29783be82147a0f5385f840e275ef",
+      "legacy_symmetry": "f9e6ca3a5b7b235f09312249029c961fc5555a073e3737c5df7f00db559a15bf"
+    }
+  },
+  "status": "exact four-moment and symmetric Mangoldt reduction; Abel gap remains open",
+  "summary": {
+    "exact_correction_polynomials": 1,
+    "indefinite_prime_edge_minors": 24,
+    "logarithmic_moments": 4,
+    "prime_edge_witnesses": 8,
+    "proved_abel_gaps": 0,
+    "proved_successor_winding_bounds": 0,
+    "rows": 12,
+    "symmetric_mangoldt_moments": 3
+  },
+  "witnesses": {
+    "mangoldt": {
+      "coefficient_audits": 128,
+      "limit": 128,
+      "mismatches": 0,
+      "moment_families": 3,
+      "prime_power_terms_seen": 315
+    },
+    "prime_edges": [
+      {
+        "N": 2,
+        "determinants": {
+          "1": "-log(2)^2/4",
+          "2": "-log(2)^4/4",
+          "3": "-log(2)^6/4"
+        },
+        "p": 2,
+        "p_squared": 4
+      },
+      {
+        "N": 3,
+        "determinants": {
+          "1": "-log(3)^2/4",
+          "2": "-log(3)^4/4",
+          "3": "-log(3)^6/4"
+        },
+        "p": 3,
+        "p_squared": 9
+      },
+      {
+        "N": 4,
+        "determinants": {
+          "1": "-log(3)^2/4",
+          "2": "-log(3)^4/4",
+          "3": "-log(3)^6/4"
+        },
+        "p": 3,
+        "p_squared": 9
+      },
+      {
+        "N": 5,
+        "determinants": {
+          "1": "-log(5)^2/4",
+          "2": "-log(5)^4/4",
+          "3": "-log(5)^6/4"
+        },
+        "p": 5,
+        "p_squared": 25
+      },
+      {
+        "N": 10,
+        "determinants": {
+          "1": "-log(7)^2/4",
+          "2": "-log(7)^4/4",
+          "3": "-log(7)^6/4"
+        },
+        "p": 7,
+        "p_squared": 49
+      },
+      {
+        "N": 25,
+        "determinants": {
+          "1": "-log(23)^2/4",
+          "2": "-log(23)^4/4",
+          "3": "-log(23)^6/4"
+        },
+        "p": 23,
+        "p_squared": 529
+      },
+      {
+        "N": 64,
+        "determinants": {
+          "1": "-log(61)^2/4",
+          "2": "-log(61)^4/4",
+          "3": "-log(61)^6/4"
+        },
+        "p": 61,
+        "p_squared": 3721
+      },
+      {
+        "N": 127,
+        "determinants": {
+          "1": "-log(127)^2/4",
+          "2": "-log(127)^4/4",
+          "3": "-log(127)^6/4"
+        },
+        "p": 127,
+        "p_squared": 16129
+      }
+    ],
+    "rational_moment": {
+      "base": [
+        {
+          "imag": "0/1",
+          "real": "1/1"
+        },
+        {
+          "imag": "1/5",
+          "real": "2/3"
+        },
+        {
+          "imag": "2/9",
+          "real": "-3/7"
+        },
+        {
+          "imag": "-1/6",
+          "real": "4/11"
+        }
+      ],
+      "collapsed_S": {
+        "imag": "12375475799/8605010700",
+        "real": "47717089751/60235074900"
+      },
+      "collapsed_U": {
+        "imag": "11235158791/8605010700",
+        "real": "1879299083/2618916300"
+      },
+      "direct_S": {
+        "imag": "12375475799/8605010700",
+        "real": "47717089751/60235074900"
+      },
+      "direct_U": {
+        "imag": "11235158791/8605010700",
+        "real": "1879299083/2618916300"
+      },
+      "endpoint": {
+        "imag": "1/8",
+        "real": "-2/7"
+      },
+      "endpoint_slope": {
+        "imag": "-3/10",
+        "real": "5/12"
+      },
+      "eta": {
+        "imag": "4/5",
+        "real": "3/5"
+      },
+      "interpretation": "Exact rational-complex algebra witness only; it is not an Xi state or a contact counterexample.",
+      "log_a": "7/6",
+      "logarithms": [
+        "0/1",
+        "1/2",
+        "2/3",
+        "1/1"
+      ],
+      "mathcal_C_N": "1892217056689/1706660455500",
+      "mathsf_X": "30507068351/60235074900",
+      "moments": [
+        {
+          "imag": "23/90",
+          "real": "370/231"
+        },
+        {
+          "imag": "11/135",
+          "real": "95/231"
+        },
+        {
+          "imag": "-29/1620",
+          "real": "157/462"
+        },
+        {
+          "imag": "-737/9720",
+          "real": "887/2772"
+        }
+      ],
+      "s_prime": {
+        "imag": "-1/2",
+        "real": "1/17"
+      },
+      "u_N": "1/10",
+      "varrho_1": {
+        "imag": "-2/17",
+        "real": "1/13"
+      },
+      "varrho_2": {
+        "imag": "1/23",
+        "real": "-1/19"
+      }
+    }
+  }
+}

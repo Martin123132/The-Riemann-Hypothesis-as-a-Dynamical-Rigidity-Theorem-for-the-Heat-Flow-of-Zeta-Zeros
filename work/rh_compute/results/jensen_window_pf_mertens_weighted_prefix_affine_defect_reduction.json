@@ -1,0 +1,272 @@
+{
+  "audit": {
+    "anchor_gate_proved": false,
+    "classical_theorem_step_count": 1,
+    "exact_reduction_count": 24,
+    "first_block_anchor_defect_proved": true,
+    "lambda_le_zero_proved": false,
+    "literature_guard_count": 1,
+    "open_handoff_gate_count": 2,
+    "pf_infinity_proved": false,
+    "proof_guard_count": 4,
+    "rh_proved": false,
+    "row_count": 34,
+    "signed_type_i_ii_gate_proved": false,
+    "vaughan_identity_closes_gate": false,
+    "weighted_prefix_rh_equivalence_proved": true
+  },
+  "date": "2026-07-23",
+  "kind": "jensen_window_pf_mertens_weighted_prefix_affine_defect_reduction",
+  "parameters": {
+    "alpha_range": "0<alpha<1",
+    "beta": "(1+alpha)/2",
+    "burnol_match": "alpha=2omega",
+    "lambda": "(1-alpha)/2"
+  },
+  "rows": [
+    {
+      "id": "mwpad_01_weighted_prefix_definitions",
+      "proof_boundary": "All integrals start at 1; beta=(1+alpha)/2 and lambda=(1-alpha)/2.",
+      "role": "exact_definition",
+      "statement": "For 0<alpha<1 define M(x)=sum_(n<=x)mu(n), A_alpha(x)=sum_(n<=x)mu(n)n^(-alpha), I_alpha=int M(x)^2*x^(-2-alpha)dx, and J_alpha=int A_alpha(x)^2*x^(alpha-2)dx.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_02_forward_abel",
+      "proof_boundary": "Stieltjes integration by parts; no zero-free region is used.",
+      "role": "exact_identity",
+      "statement": "A_alpha(x)=x^(-alpha)M(x)+alpha*int_1^x M(u)u^(-alpha-1)du.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_03_inverse_abel",
+      "proof_boundary": "The inverse Stieltjes identity for mu(n)=n^alpha [mu(n)n^(-alpha)].",
+      "role": "exact_identity",
+      "statement": "M(x)=x^alpha*A_alpha(x)-alpha*int_1^x A_alpha(u)u^(alpha-1)du.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_04_logarithmic_coordinates",
+      "proof_boundary": "A unitary logarithmic change of variables on t>=0.",
+      "role": "exact_definition",
+      "statement": "For x=e^t put m(t)=e^(-beta*t)M(e^t) and a(t)=e^(-lambda*t)A_alpha(e^t); then ||m||_2^2=I_alpha and ||a||_2^2=J_alpha.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_05_forward_volterra",
+      "proof_boundary": "Equation 2 in logarithmic coordinates.",
+      "role": "exact_identity",
+      "statement": "a=m+alpha*V_lambda*m, where V_c f(t)=int_0^t exp(-c(t-u))f(u)du.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_06_inverse_volterra",
+      "proof_boundary": "Equation 3 in logarithmic coordinates.",
+      "role": "exact_identity",
+      "statement": "m=a-alpha*V_beta*a.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_07_sharp_norm_sandwich",
+      "proof_boundary": "The forward Fourier multiplier is (beta+it)/(lambda+it), whose modulus lies in [1,beta/lambda].",
+      "role": "exact_inequality",
+      "statement": "I_alpha<=J_alpha<=((1+alpha)/(1-alpha))^2*I_alpha.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_08_weighted_prefix_mellin",
+      "proof_boundary": "Interchange the finite-prefix step function and the integral.",
+      "role": "exact_identity",
+      "statement": "int_1^infinity A_alpha(x)x^(-s-1)dx=1/[s*zeta(s+alpha)] initially for Re(s)>1-alpha.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_09_mellin_plancherel",
+      "proof_boundary": "Hardy-space continuation from the initial half-plane; finiteness excludes a reciprocal-zeta pole on the boundary.",
+      "role": "classical_theorem_step",
+      "statement": "If the energies are finite, Mellin-Plancherel writes J_alpha with denominator lambda^2+t^2 and I_alpha with denominator beta^2+t^2 against the same |zeta(beta+it)|^(-2).",
+      "status": "source_backed"
+    },
+    {
+      "id": "mwpad_10_shared_reciprocal_zeta_spectrum",
+      "proof_boundary": "The same reciprocal-zeta boundary data appear in both coordinates; only a scalar Hardy multiplier changes.",
+      "role": "exact_identity",
+      "statement": "J_alpha=(1/(2pi))*int_R dt/[(lambda^2+t^2)|zeta(beta+it)|^2], while I_alpha has beta^2+t^2 in the first factor.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_11_weighted_prefix_cell_identity",
+      "proof_boundary": "A_alpha(x)=A_alpha(k) on every half-open cell [k,k+1).",
+      "role": "exact_identity",
+      "statement": "J_alpha=(1/(1-alpha))*sum_(k>=1)A_alpha(k)^2*[k^(alpha-1)-(k+1)^(alpha-1)].",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_12_weighted_prefix_cell_comparison",
+      "proof_boundary": "Compare x^(alpha-2) on each unit cell.",
+      "role": "exact_inequality",
+      "statement": "For E_alpha=sum k^(alpha-2)A_alpha(k)^2, 2^(alpha-2)E_alpha<=J_alpha<=E_alpha.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_13_mertens_cell_comparison",
+      "proof_boundary": "The companion unit-cell comparison in the Mertens coordinate.",
+      "role": "exact_inequality",
+      "statement": "For M_alpha=sum M(k)^2/k^(2+alpha), 2^(-2-alpha)M_alpha<=I_alpha<=M_alpha.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_14_discrete_energy_equivalence",
+      "proof_boundary": "Rows 7, 12, and 13; the constants are explicit and nonsharp only because of unit-cell comparison.",
+      "role": "exact_equivalence",
+      "statement": "2^(-2-alpha)M_alpha<=E_alpha<=2^(2-alpha)*((1+alpha)/(1-alpha))^2*M_alpha.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_15_weighted_prefix_rh_criterion",
+      "proof_boundary": "Compose row 14 with the already checked cofinal OU/Mertens criterion; this is an equivalent target, not a proof.",
+      "role": "exact_equivalence",
+      "statement": "RH iff E_(alpha_j)<infinity for every member of any fixed cofinal sequence alpha_j->0 in (0,1).",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_16_burnol_coefficient_match",
+      "proof_boundary": "No normalization or deleted weight is hidden in the comparison.",
+      "role": "exact_identity",
+      "statement": "With alpha=2omega, A_alpha(k) is exactly the weighted Mobius prefix M_alpha(k) used in the Burnol tail-discrepancy reduction.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_17_first_block_floor_collapse",
+      "proof_boundary": "Every omitted divisor satisfies N<d<=k and hence floor(k/d)=1.",
+      "role": "exact_identity",
+      "statement": "For N<k<=2N, H_(omega,N)(k)=A_alpha(k)-A_alpha(N).",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_18_first_block_affine_defect",
+      "proof_boundary": "Insert row 17 into the exact finite-tail discrepancy.",
+      "role": "exact_identity",
+      "statement": "For N<k<=2N, D_(omega,N)(k)=A_alpha(k)-A_alpha(N)-k*r_(omega,N).",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_19_weighted_tail_abel",
+      "proof_boundary": "Discrete Abel summation; A_alpha(n)/n->0 follows unconditionally from alpha>0.",
+      "role": "exact_identity",
+      "statement": "r_(omega,N)=-A_alpha(N)/(N+1)+sum_(n>N)A_alpha(n)/(n(n+1)).",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_20_residual_weight_comparison",
+      "proof_boundary": "Dyadic comparison for the decreasing weight k^(alpha-2).",
+      "role": "exact_inequality",
+      "statement": "If V_N=sum_(N<k<=2N)|D_N(k)|^2 and E_D=sum k^(alpha-2)|D_N(k)|^2, then 2^(alpha-2)N^(alpha-2)V_N<=E_D<=N^(alpha-2)V_N.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_21_affine_gram",
+      "proof_boundary": "The Gram determinant W_0*W_2-W_1^2 is strictly positive.",
+      "role": "exact_identity",
+      "statement": "For W_q=sum_(N<k<=2N)k^(alpha-2+q), the weighted energy of A_alpha(N)+k*r_N is A_alpha(N)^2*W_0+2A_alpha(N)r_N*W_1+r_N^2*W_2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_22_three_term_block_bound",
+      "proof_boundary": "Weighted triangle inequality plus W_0<=N^(alpha-1) and W_2<=2^alpha*N^(1+alpha).",
+      "role": "exact_inequality",
+      "statement": "F_alpha(N)^(1/2)<=N^((alpha-2)/2)V_N^(1/2)+N^((alpha-1)/2)|A_alpha(N)|+2^(alpha/2)N^((1+alpha)/2)|r_N|.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_23_anchor_gauge_invariance",
+      "proof_boundary": "The first q-block is a high-pass observation with one unobserved constant anchor mode.",
+      "role": "exact_identity",
+      "statement": "Adding a constant C to A_alpha(N) and every A_alpha(k) on N<k<=2N leaves D_N(k) unchanged when r_N is fixed.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_24_constant_tail_countermodel",
+      "proof_boundary": "This is an operator countermodel, not a surrogate for mu; it proves that post-prefix residual and tail data alone cannot bound the absolute weighted-prefix block.",
+      "role": "proof_guard",
+      "statement": "For any finitely supported coefficient sequence whose prefix is the nonzero constant C after N, r_N=0 and D_N(k)=0 for all k>N, but F_alpha(N)=C^2*W_0>0.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "mwpad_25_tail_rate_does_not_fix_anchor",
+      "proof_boundary": "The constant-tail countermodel has r_N=0 and arbitrary anchor.",
+      "role": "proof_guard",
+      "statement": "Even the forced rate r_N=O(N^(-(1+alpha)/2)) does not control N^(alpha-1)A_alpha(N)^2 without an additional anchor theorem.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "mwpad_26_correlation_one_dimensional_collapse",
+      "proof_boundary": "Reorder the triangle by the larger index n=m+h.",
+      "role": "exact_identity",
+      "statement": "sum_(h<X)sum_(Y<=X-h)C_h(Y)=sum_(n=2)^X (X-n+1)mu(n)M(n-1).",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_27_discrete_energy_difference",
+      "proof_boundary": "The one-dimensional collapse is exact but still contains the unknown Mertens prefix endogenously.",
+      "role": "exact_identity",
+      "statement": "M(n)^2-M(n-1)^2=2mu(n)M(n-1)+mu(n)^2, and triangular summation of this identity recovers sum_(k<=X)M(k)^2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_28_vaughan_source",
+      "proof_boundary": "Only the published algebraic identity is imported; its bounded-test estimates are not promoted to the endogenous test.",
+      "role": "literature_guard",
+      "statement": "Green and Tao, Lemma 4.1, give Vaughan's exact Type I/II decomposition for sums of mu(n)f(n) on a dyadic interval.",
+      "status": "source_backed"
+    },
+    {
+      "id": "mwpad_29_vaughan_type_i_ii_identity",
+      "proof_boundary": "Finite divisor reindexing; independently checked for arbitrary finite test vectors.",
+      "role": "exact_identity",
+      "statement": "For 1<=U,V<=N, sum_(N<n<=2N)mu(n)f(n)=-TI(f)+TII(f), with a_d=sum_(bc=d,b<=U,c<=V)mu(b)mu(c) and b_d=sum_(c|d,c>V)mu(c).",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_30_endogenous_test_guard",
+      "proof_boundary": "The inverse theorem for a bounded external f cannot be quoted without retaining the Mertens dependence.",
+      "role": "proof_guard",
+      "statement": "After row 26 the Vaughan test is f_X(n)=(X-n+1)M(n-1), not an exogenous bounded function.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "mwpad_31_cauchy_schwarz_recycling_guard",
+      "proof_boundary": "No small absorbable coefficient is supplied by the identity alone; logarithmic Mobius orthogonality is one power short.",
+      "role": "proof_guard",
+      "statement": "sum_(n<=X)|f_X(n)|^2<=X^2*sum_(k<=X)M(k)^2, so generic Cauchy-Schwarz in the Type I/II forms recycles the target energy on the right-hand side.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "mwpad_32_precollapse_bounded_shift_route",
+      "proof_boundary": "The explicit aggregate avoids the endogenous-test defect, but no O_epsilon(X^(2+epsilon)) estimate for -TI_X+TII_X is asserted.",
+      "role": "exact_identity",
+      "statement": "Before collapsing h and Y, Vaughan applies with the bounded test f_(h,Y)(m)=mu(m+h)1_(m<=Y) on each dyadic m-block, giving T(X)=B_1(X)-TI_X+TII_X exactly.",
+      "status": "available_exact"
+    },
+    {
+      "id": "mwpad_33_open_anchor_gate",
+      "proof_boundary": "Post-prefix V_N and the reciprocal-tail rate do not supply it.",
+      "role": "open_target",
+      "statement": "Control the constant anchor mode N^((alpha-1)/2)A_alpha(N) in a summable dyadic theorem, using the limiting Burnol energy or another arithmetic input.",
+      "status": "open_target"
+    },
+    {
+      "id": "mwpad_34_open_type_i_ii_gate",
+      "proof_boundary": "This is the live noncircular bilinear handoff; no RH, PF-infinity, or Lambda<=0 conclusion is recorded.",
+      "role": "open_target",
+      "statement": "Prove an O_epsilon(X^(2+epsilon)) signed aggregate estimate for the pre-collapse Vaughan Type I/II forms over h and Y, without rowwise absolute values or RH.",
+      "status": "open_target"
+    }
+  ],
+  "source_anchors": [
+    "https://doi.org/10.5802/aif.2401",
+    "https://arxiv.org/abs/math/0202166",
+    "https://arxiv.org/abs/2508.00388"
+  ],
+  "status": "exact weighted-prefix, first-block affine-defect, and Vaughan handoff reduction with two open arithmetic gates"
+}

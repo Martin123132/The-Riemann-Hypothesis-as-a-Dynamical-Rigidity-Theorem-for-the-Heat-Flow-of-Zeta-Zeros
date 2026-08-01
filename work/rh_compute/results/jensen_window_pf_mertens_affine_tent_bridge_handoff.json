@@ -1,0 +1,414 @@
+{
+  "kind": "jensen_window_pf_mertens_affine_tent_bridge_handoff",
+  "date": "2026-07-23",
+  "status": "exact affine scale-localization and unified local Vaughan reduction with one open signed gate",
+  "parameters": {
+    "alpha_range": "0<alpha<1",
+    "dyadic_blocks": "K=2^j",
+    "scale_filter": "u_K-(1/2)u_(2K)",
+    "filter_contraction": "rho_alpha=2^(-(1+alpha)/2)",
+    "combined_support": "K<n<n+h<4K"
+  },
+  "source_anchors": [
+    "https://doi.org/10.5802/aif.2401",
+    "https://arxiv.org/abs/1503.05121",
+    "https://doi.org/10.2140/ant.2015.9.2167",
+    "https://arxiv.org/abs/1911.09076",
+    "https://arxiv.org/abs/1501.04585",
+    "https://doi.org/10.1007/s00222-026-01408-6"
+  ],
+  "rows": [
+    {
+      "id": "matbh_01_tail_setup",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "For 0<alpha<1 set q_n=mu(n)n^(-1-alpha), r_N=sum_(n>N)q_n, and R_alpha=sum_(N>=1)N^alpha|r_N|^2.",
+      "proof_boundary": "These are the reciprocal-Mobius tail coordinates from Lemmas 11.22T-X."
+    },
+    {
+      "id": "matbh_02_affine_block_sum",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For dyadic K, u_K:=sum_(N=K)^(2K-1)r_N=sqrt(K)c_(K,0).",
+      "proof_boundary": "The affine mean coefficient is exactly one dyadic block sum of the tail sequence."
+    },
+    {
+      "id": "matbh_03_infinite_mean_kernel",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "u_K=sum_n q_n w_K(n), where w_K(n)=min((n-K)_+,K).",
+      "proof_boundary": "Count the block tails containing q_n; w_K is constant for n>=2K."
+    },
+    {
+      "id": "matbh_04_mean_energy",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "M_alpha=sum_(K dyadic)K^(alpha-1)|u_K|^2.",
+      "proof_boundary": "This is Lemma 11.22X.15 after u_K=sqrt(K)c_(K,0)."
+    },
+    {
+      "id": "matbh_05_scale_filter",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Define v_K:=u_K-(1/2)u_(2K).",
+      "proof_boundary": "The coefficient 1/2 is forced by cancellation of the two constant kernel plateaux beyond 4K."
+    },
+    {
+      "id": "matbh_06_tent_kernel",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Define W_K(n)=n-K for K<n<=2K, W_K(n)=(4K-n)/2 for 2K<n<4K, and W_K(n)=0 otherwise.",
+      "proof_boundary": "W_K is a nonnegative compact tent with maximum K."
+    },
+    {
+      "id": "matbh_07_compact_localization",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "v_K=sum_(K<n<4K)mu(n)n^(-1-alpha)W_K(n).",
+      "proof_boundary": "This follows from W_K=w_K-(1/2)w_(2K); the infinite tail cancels exactly."
+    },
+    {
+      "id": "matbh_08_normalized_sequences",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Put p=(alpha-1)/2, d_K=K^p u_K, and e_K=K^p v_K.",
+      "proof_boundary": "Then M_alpha=sum_K|d_K|^2 and the filtered affine energy is E_aff=sum_K|e_K|^2."
+    },
+    {
+      "id": "matbh_09_filter_multiplier",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Let rho_alpha=2^(-(1+alpha)/2), so 0<rho_alpha<1.",
+      "proof_boundary": "The strict contraction is uniform over the dyadic scale index for fixed alpha."
+    },
+    {
+      "id": "matbh_10_normalized_filter_identity",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "e_K=d_K-rho_alpha*d_(2K).",
+      "proof_boundary": "Use rho_alpha*2^p=1/2."
+    },
+    {
+      "id": "matbh_11_boundary_decay",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "The coefficient envelope gives |d_K|=O_alpha(K^((1-alpha)/2)) and hence rho_alpha^m d_(2^m K)=O_alpha(2^(-alpha*m)).",
+      "proof_boundary": "This supplies the boundary condition needed to invert the forward scale filter without assuming the target energy."
+    },
+    {
+      "id": "matbh_12_filter_inverse",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "d_K=sum_(m>=0)rho_alpha^m e_(2^m K).",
+      "proof_boundary": "Iterate row 10 and use the boundary decay in row 11."
+    },
+    {
+      "id": "matbh_13_filter_norm_bounds",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "(1-rho_alpha)||d||_2<=||e||_2<=(1+rho_alpha)||d||_2.",
+      "proof_boundary": "The upper bound is the shift triangle inequality; the lower bound follows from the geometric-series inverse."
+    },
+    {
+      "id": "matbh_14_affine_energy_equivalence",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "M_alpha<infinity iff E_aff:=sum_(K dyadic)|e_K|^2<infinity.",
+      "proof_boundary": "The infinite affine mean kernel has therefore been replaced by compact tent tests without estimating it."
+    },
+    {
+      "id": "matbh_15_affine_signed_expansion",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "|e_K|^2=D_aff,K+2C_aff,K, where D_aff,K=K^(alpha-1)sum_n mu(n)^2 n^(-2-2alpha)W_K(n)^2 and C_aff,K is the corresponding sum over K<n<m<4K.",
+      "proof_boundary": "This is the diagonal/off-diagonal expansion of the compact tent square."
+    },
+    {
+      "id": "matbh_16_affine_diagonal_bound",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "0<=D_aff,K<=3K^(-alpha), so sum_(K dyadic)D_aff,K<infinity.",
+      "proof_boundary": "There are fewer than 3K terms, W_K<=K, and n>K."
+    },
+    {
+      "id": "matbh_17_affine_offdiagonal_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "M_alpha<infinity iff sup_J sum_(K<=2^J)C_aff,K<infinity.",
+      "proof_boundary": "Use rows 14-16 and monotonicity of the partial filtered affine energies."
+    },
+    {
+      "id": "matbh_18_bridge_energy_recall",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Let E_br,K=K^(-2-alpha)||[S_K]||_K^2, where S_(K,m)=M(K+m)-M(K) and [.] is the quotient modulo constants.",
+      "proof_boundary": "The sum of E_br,K is L_alpha from Lemma 11.22X."
+    },
+    {
+      "id": "matbh_19_bridge_signed_expansion",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "E_br,K=D_br,K+2C_br,K, with D_br,K=K^(-2-alpha)Delta_K and C_br,K=K^(-2-alpha)C_K.",
+      "proof_boundary": "Delta_K and C_K are the Brownian-bridge diagonal and off-diagonal terms from Lemma 11.22X."
+    },
+    {
+      "id": "matbh_20_bridge_diagonal_bound",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "0<=D_br,K<=K^(-alpha)/6.",
+      "proof_boundary": "Use Delta_K<=(K^2-1)/6."
+    },
+    {
+      "id": "matbh_21_unified_local_energy",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Define E_loc=sum_(K dyadic)(|e_K|^2+E_br,K).",
+      "proof_boundary": "Rows 14 and 18 give R_alpha<infinity iff E_loc<infinity."
+    },
+    {
+      "id": "matbh_22_combined_shift_kernel",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "For h>=1 define G_(K,h)(n) as K^(alpha-1)[n(n+h)]^(-1-alpha)W_K(n)W_K(n+h) on K<n<n+h<4K, plus K^(-3-alpha)(n-K)(2K-n-h) on K<n<n+h<2K.",
+      "proof_boundary": "The first summand is the affine tent kernel and the second is the normalized Brownian-bridge kernel."
+    },
+    {
+      "id": "matbh_23_combined_support",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "G_(K,h)(n)=0 unless K<n<n+h<4K.",
+      "proof_boundary": "Both formerly separate open components are now local on at most two adjacent dyadic annuli."
+    },
+    {
+      "id": "matbh_24_kernel_amplitude",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "0<=G_(K,h)(n)<=(5/4)K^(-1-alpha).",
+      "proof_boundary": "The tent product contributes at most K^(-1-alpha); the bridge product contributes at most K^(-1-alpha)/4."
+    },
+    {
+      "id": "matbh_25_unified_signed_expansion",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "E_loc(J)=D_loc(J)+2O_loc(J), where O_loc(J)=sum_(K<=2^J)sum_h sum_n mu(n)mu(n+h)G_(K,h)(n).",
+      "proof_boundary": "Combine rows 15 and 19 before taking a cutoff limit."
+    },
+    {
+      "id": "matbh_26_unified_diagonal_bound",
+      "role": "exact_inequality",
+      "status": "available_exact",
+      "statement": "The per-scale unified diagonal is at most (19/6)K^(-alpha), hence D_loc(infinity)<infinity.",
+      "proof_boundary": "Add the bounds 3K^(-alpha) and K^(-alpha)/6."
+    },
+    {
+      "id": "matbh_27_unified_signed_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "R_alpha<infinity iff sup_J O_loc(J)<infinity.",
+      "proof_boundary": "The partial local energies are nonnegative and monotone, and their diagonal converges."
+    },
+    {
+      "id": "matbh_28_two_interval_split",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "Split each n-sum in O_loc into K<n<=2K and 2K<n<4K.",
+      "proof_boundary": "This places every compact test into the standard (X,2X] form with X=K or X=2K."
+    },
+    {
+      "id": "matbh_29_vaughan_source",
+      "role": "literature_guard",
+      "status": "source_backed",
+      "statement": "Green and Tao, Lemma 4.1, supply the finite Vaughan Type I/II identity on each interval (X,2X].",
+      "proof_boundary": "Only the exact divisor identity is imported; no estimate for the endogenous shifted-Mobius tests is attributed to it."
+    },
+    {
+      "id": "matbh_30_vaughan_tests",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "For interval a in {0,1}, define g_(K,h,a)(n)=mu(n+h)G_(K,h)(n) restricted to (2^a K,2^(a+1)K].",
+      "proof_boundary": "Summing mu(n)g_(K,h,a)(n) over h and a recovers the unified off-diagonal O_loc scale by scale."
+    },
+    {
+      "id": "matbh_31_exact_vaughan_handoff",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "With the standard finite Vaughan coefficients on each interval, O_loc,K=-TI_loc,K+TII_loc,K.",
+      "proof_boundary": "Apply the identity termwise in h and in the two interval pieces, then retain the signed difference."
+    },
+    {
+      "id": "matbh_32_final_type_i_ii_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "R_alpha<infinity iff sup_J sum_(K<=2^J)(-TI_loc,K+TII_loc,K)<infinity.",
+      "proof_boundary": "This is one compact signed Type I/II target for both the affine mean and centered bridge."
+    },
+    {
+      "id": "matbh_33_absolute_value_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "Replacing -TI_loc,K+TII_loc,K by the sum of separate absolute values is not an equivalent reduction.",
+      "proof_boundary": "There are O(K^2) shift/base pairs of amplitude O(K^(-1-alpha)), giving the divergent scale K^(1-alpha)."
+    },
+    {
+      "id": "matbh_34_averaged_chowla_guard",
+      "role": "literature_guard",
+      "status": "source_backed",
+      "statement": "The natural averaged-Chowla o(K^2) pair scale becomes only o(K^(1-alpha)) after the normalized kernel, one full power above the diagonal K^(-alpha) calibration.",
+      "proof_boundary": "This is a power audit of the published averaged theorem, not a lower bound on the actual unified correlation."
+    },
+    {
+      "id": "matbh_35_localization_scope_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "The invertible scale filter localizes M_alpha but supplies no Mobius cancellation estimate.",
+      "proof_boundary": "Compact support must not be reported as a Type I/II gain, a full Burnol bound, or a proof of RH."
+    },
+    {
+      "id": "matbh_36_commutator_retirement_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "The Abel/low-DCT commutator is not a remaining obligation: the centered quotient handles nonconstant modes and the scale filter handles the affine mean.",
+      "proof_boundary": "Future work should attack the unified signed kernel rather than reintroduce the retired commutator."
+    },
+    {
+      "id": "matbh_37_finite_validation",
+      "role": "finite_reproduction",
+      "status": "finite_check_passed",
+      "statement": "Arbitrary finite coefficient tests verify the tail count, tent cancellation, normalized filter, inverse truncations, and norm bounds; Mobius tests verify both signed expansions and the two-interval Vaughan residual.",
+      "proof_boundary": "Finite validation checks the algebra only and is not asymptotic evidence for the open signed estimate."
+    },
+    {
+      "id": "matbh_38_weighted_bridge_coordinate",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Let T_(K,m)=sum_(i=1)^m q_(K+i), 0<=m<K, and retain the weighted centered energy K^alpha||[T_K]||_K^2.",
+      "proof_boundary": "Together with the affine mean this is the exact DCT decomposition before transfer to ordinary Mertens increments."
+    },
+    {
+      "id": "matbh_39_future_anchor",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Define Z_K=Kq_(2K)+sum_(2K<n<4K)(4K-n)q_n/2; then v_K=sum_(i=1)^(K-1)i*q_(K+i)+Z_K.",
+      "proof_boundary": "The q_(2K) endpoint belongs to the affine tent and not to the length-K centered path."
+    },
+    {
+      "id": "matbh_40_constant_direction_completion",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For 1<=i,j<K, K^(alpha-1)ij+K^alpha[min(i,j)-ij/K]=K^alpha min(i,j).",
+      "proof_boundary": "The affine rank-one square exactly restores the constant direction removed by the Brownian bridge."
+    },
+    {
+      "id": "matbh_41_tail_lattice_square",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "|e_K|^2+K^alpha||[T_K]||_K^2=K^alpha sum_(t=1)^K|Z_K/K+sum_(i=t)^(K-1)q_(K+i)|^2.",
+      "proof_boundary": "This is finite variance completion, including the terminal row t=K whose suffix sum is zero."
+    },
+    {
+      "id": "matbh_42_positive_compact_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "R_alpha<infinity iff sum_(K dyadic)K^alpha sum_(t=1)^K|Z_K/K+sum_(i=t)^(K-1)q_(K+i)|^2<infinity.",
+      "proof_boundary": "Use dyadic tail-energy comparison, DCT Parseval, and the invertible affine scale filter."
+    },
+    {
+      "id": "matbh_43_positive_square_scope",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "Every row in the positive criterion uses only q_n with K<n<4K.",
+      "proof_boundary": "The Cholesky form is compact and nonnegative but does not bound its own Mobius suffix sums."
+    },
+    {
+      "id": "matbh_44_ordinary_future_anchor",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Put s=1+alpha, z_K=Z_K/K, and beta_K=(2K)^s*z_K; then beta_K=mu(2K)+sum_(2K<n<4K)((2K)/n)^s(4K-n)/(2K)*mu(n).",
+      "proof_boundary": "This is one explicit compact future anchor, not an unproved short-interval cancellation estimate."
+    },
+    {
+      "id": "matbh_45_bounded_anchor_weights",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "Every coefficient of mu(n) in beta_K lies in [0,1] and the support is 2K<=n<4K.",
+      "proof_boundary": "Coefficient boundedness gives only the trivial |beta_K|=O(K); it does not itself close the criterion."
+    },
+    {
+      "id": "matbh_46_full_suffix_abel_pair",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "With a_i=(K+i)^(-s) for i<K, a_K=(2K)^(-s), A_(K,t)=sum_(i=t)^K a_i*x_i and B_(K,t)=sum_(i=t)^K x_i, where x_K=beta_K, finite Abel summation gives mutually inverse triangular maps.",
+      "proof_boundary": "The terminal choice a_K*beta_K=z_K is essential; omitting the future anchor would break the exact inverse."
+    },
+    {
+      "id": "matbh_47_full_suffix_norm_transfer",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "(4sqrt(2))^(-1)K^(-s)||B_K||_2<=||A_K||_2<=sqrt(6)K^(-s)||B_K||_2.",
+      "proof_boundary": "The constants follow from explicit row/column sums for the Abel matrix and its inverse and are uniform for 0<alpha<1."
+    },
+    {
+      "id": "matbh_48_ordinary_anchored_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "R_alpha<infinity iff sum_(K dyadic)K^(-2-alpha)sum_(t=1)^K|beta_K+sum_(i=t)^(K-1)mu(K+i)|^2<infinity.",
+      "proof_boundary": "This removes all power weights from the current-block suffixes while preserving one bounded-coefficient future anchor."
+    },
+    {
+      "id": "matbh_49_ordinary_calibration",
+      "role": "sufficient_condition",
+      "status": "available_exact",
+      "statement": "If H_K:=sum_(t=1)^K|beta_K+sum_(i=t)^(K-1)mu(K+i)|^2=O_epsilon(K^(2+epsilon)) for some epsilon<alpha, then the alpha criterion holds.",
+      "proof_boundary": "The coefficientwise estimate gives only H_K=O(K^3), which is one full power short of this calibration."
+    },
+    {
+      "id": "matbh_50_all_interval_guard",
+      "role": "literature_guard",
+      "status": "source_backed",
+      "statement": "Matomaki and Teravainen prove o(H) cancellation for every interval of length H=x^theta when theta>0.55.",
+      "proof_boundary": "An o(H) pointwise bound has no fixed square-root-scale power and does not make the K-term suffix-square family summable."
+    },
+    {
+      "id": "matbh_51_almost_all_guard",
+      "role": "literature_guard",
+      "status": "source_backed",
+      "statement": "Matomaki-Radziwill and the higher-uniformity short-interval theorems give strong cancellation outside small exceptional sets of base points.",
+      "proof_boundary": "The present endpoints are one fixed dyadic sequence; no source-backed de-averaging theorem excludes every one of those points from the exceptional sets."
+    },
+    {
+      "id": "matbh_52_positive_alpha_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "All criteria are imposed separately for fixed alpha>0; the diagonal majorant is sum_(K dyadic)K^(-alpha).",
+      "proof_boundary": "At alpha=0 this majorant is not summable. Cofinality alpha_j->0 does not permit setting alpha=0 or demanding a uniform limit in alpha."
+    },
+    {
+      "id": "matbh_53_open_signed_gate",
+      "role": "open_theorem_target",
+      "status": "open",
+      "statement": "Prove the unified signed criterion in row 32 for every member of one fixed cofinal sequence alpha_j->0 without assuming RH.",
+      "proof_boundary": "No signed Type I/II power gain, full Burnol bound, RH, PF-infinity, or Lambda<=0 conclusion is supplied here."
+    }
+  ],
+  "audit": {
+    "row_count": 53,
+    "exact_reduction_count": 44,
+    "literature_guard_count": 4,
+    "proof_guard_count": 4,
+    "open_signed_gate_count": 1,
+    "affine_infinite_tail_localized": true,
+    "scale_filter_invertible": true,
+    "affine_bridge_kernel_unified": true,
+    "combined_diagonal_summable": true,
+    "two_interval_vaughan_handoff_proved": true,
+    "positive_tail_lattice_square_proved": true,
+    "ordinary_mobius_anchored_criterion_proved": true,
+    "alpha_zero_passage_allowed": false,
+    "averaged_chowla_closes_gate": false,
+    "signed_type_i_ii_gain_proved": false,
+    "full_burnol_bound_proved": false,
+    "rh_proved": false,
+    "pf_infinity_proved": false,
+    "lambda_le_zero_proved": false
+  }
+}

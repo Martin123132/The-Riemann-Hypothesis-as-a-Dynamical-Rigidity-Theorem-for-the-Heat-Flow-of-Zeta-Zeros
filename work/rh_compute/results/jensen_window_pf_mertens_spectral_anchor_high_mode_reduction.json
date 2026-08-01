@@ -1,0 +1,204 @@
+{
+  "kind": "jensen_window_pf_mertens_spectral_anchor_high_mode_reduction",
+  "date": "2026-07-23",
+  "status": "exact spectral anchor separation and summable high-mode reduction with one open low-mode gate",
+  "parameters": {
+    "alpha_range": "0<alpha<1",
+    "dyadic_blocks": "K=2^j",
+    "unconditional_cutoff": "ceil(K^(1-alpha/2))",
+    "current_tail_decay": "R^(-2)",
+    "anchor_tail_decay": "R^(-1)"
+  },
+  "source_anchors": [
+    "outputs/jensen_window_pf_mertens_mixed_boundary_sine_vaughan_handoff.md",
+    "https://doi.org/10.1093/qmath/os-8.1.313"
+  ],
+  "rows": [
+    {
+      "id": "sahr_01_spectral_input",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "Corollary 11.22Z.1 gives R_alpha<infinity iff S_alpha:=sum_K K^(-alpha)sum_r|X_(K,r)|^2/(2r-1)^2<infinity.",
+      "proof_boundary": "The mixed-boundary spectral handoff is independently validated and is the sole input."
+    },
+    {
+      "id": "sahr_02_cutoff",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "For 1<=R<=K split the mode sum into r<=R and r>R.",
+      "proof_boundary": "The cutoff may depend on K and the fixed positive alpha."
+    },
+    {
+      "id": "sahr_03_current_anchor_split",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "X_(K,r)=Y_(K,r)+beta_K*h_(K,r), where Y_(K,r)=sum_(i=1)^(K-1)mu(K+i)phi_(K,r)(i) and h_(K,r)=phi_(K,r)(K).",
+      "proof_boundary": "The current block and future affine anchor are separated without estimating either one."
+    },
+    {
+      "id": "sahr_04_endpoint_phase",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "h_(K,r)=2(-1)^(r-1)(2K+1)^(-1/2)cos(theta_(K,r)/2).",
+      "proof_boundary": "Use K*theta=(2r-1)pi/2-theta/2."
+    },
+    {
+      "id": "sahr_05_endpoint_envelope",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "|h_(K,r)|^2<=4/(2K+1)<=2/K.",
+      "proof_boundary": "The future anchor is spread over all modes at boundary amplitude O(K^(-1/2))."
+    },
+    {
+      "id": "sahr_06_current_parseval",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "sum_(r=1)^K|Y_(K,r)|^2=sum_(i=1)^(K-1)mu(K+i)^2<=K.",
+      "proof_boundary": "This uses the exact sine orthonormality and no Mobius cancellation."
+    },
+    {
+      "id": "sahr_07_odd_tail",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "For R>=1, sum_(r>R)(2r-1)^(-2)<=1/(2R+1).",
+      "proof_boundary": "Compare the decreasing tail with its elementary integral."
+    },
+    {
+      "id": "sahr_08_current_high_modes",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "sum_(r>R)|Y_(K,r)|^2/(2r-1)^2<=K/(2R+1)^2.",
+      "proof_boundary": "Use Parseval and the smallest high-mode denominator."
+    },
+    {
+      "id": "sahr_09_anchor_high_modes",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "sum_(r>R)|beta_K*h_(K,r)|^2/(2r-1)^2<=2|beta_K|^2/[K(2R+1)].",
+      "proof_boundary": "The anchor loses one power of R rather than two because it occupies every boundary mode."
+    },
+    {
+      "id": "sahr_10_total_high_modes",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "sum_(r>R)|X_(K,r)|^2/(2r-1)^2<=2K/(2R+1)^2+4|beta_K|^2/[K(2R+1)].",
+      "proof_boundary": "Apply |a+b|^2<=2|a|^2+2|b|^2 after the exact split."
+    },
+    {
+      "id": "sahr_11_weighted_high_scale",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "The normalized high scale is at most 2K^(1-alpha)/(2R+1)^2+4K^(-1-alpha)|beta_K|^2/(2R+1).",
+      "proof_boundary": "This displays the distinct current and anchor thresholds."
+    },
+    {
+      "id": "sahr_12_trivial_anchor",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "|beta_K|<=2K.",
+      "proof_boundary": "There are 2K future coefficients and every weight lies in [0,1]."
+    },
+    {
+      "id": "sahr_13_unconditional_cutoff",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Set R_(alpha,K)=ceil(K^(1-alpha/2)).",
+      "proof_boundary": "For fixed alpha>0 this is sublinear and at most K."
+    },
+    {
+      "id": "sahr_14_unconditional_high_bound",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "At R=R_(alpha,K), the normalized high scale is at most 2K^(-1)+8K^(-alpha/2).",
+      "proof_boundary": "Insert the trivial anchor bound and R>=K^(1-alpha/2)."
+    },
+    {
+      "id": "sahr_15_high_summability",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "sum_(K dyadic)K^(-alpha)sum_(r>R_(alpha,K))|X_(K,r)|^2/(2r-1)^2<infinity.",
+      "proof_boundary": "Both K^(-1) and K^(-alpha/2) are dyadically summable."
+    },
+    {
+      "id": "sahr_16_low_mode_equivalence",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "R_alpha<infinity iff sum_(K dyadic)K^(-alpha)sum_(r<=R_(alpha,K))|X_(K,r)|^2/(2r-1)^2<infinity.",
+      "proof_boundary": "The removed high-mode series is unconditionally finite."
+    },
+    {
+      "id": "sahr_17_positive_alpha_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "The cutoff and high-tail summability are pointwise in each fixed alpha>0.",
+      "proof_boundary": "As alpha->0 the exponent approaches one; no alpha=0 or uniform-in-alpha reduction follows."
+    },
+    {
+      "id": "sahr_18_square_root_anchor",
+      "role": "conditional_calibration",
+      "status": "conditional",
+      "statement": "Assume |beta_K|=O_epsilon(K^(1/2+epsilon)) with 2epsilon<alpha.",
+      "proof_boundary": "This power-scale anchor cancellation is not known unconditionally."
+    },
+    {
+      "id": "sahr_19_conditional_cutoff",
+      "role": "conditional_calibration",
+      "status": "conditional",
+      "statement": "For any eta>0 with (1-alpha)/2+eta<1, set R=ceil(K^((1-alpha)/2+eta)).",
+      "proof_boundary": "The current high term is O(K^(-2eta)); the conditional anchor term is also dyadically summable."
+    },
+    {
+      "id": "sahr_20_conditional_low_modes",
+      "role": "conditional_calibration",
+      "status": "conditional",
+      "statement": "Under row 18, only O(K^((1-alpha)/2+eta)) low modes remain.",
+      "proof_boundary": "This stronger reduction depends on the unproved square-root anchor estimate."
+    },
+    {
+      "id": "sahr_21_davenport_anchor_guard",
+      "role": "literature_guard",
+      "status": "source_backed",
+      "statement": "Davenport and partial summation give beta_K<<_A K*log^(-A)K.",
+      "proof_boundary": "Arbitrary logarithmic savings do not change the power threshold R>K^(1-alpha)."
+    },
+    {
+      "id": "sahr_22_generic_anchor_guard",
+      "role": "proof_guard",
+      "status": "guard_validated",
+      "statement": "For a bounded synthetic sequence equal to one on [2K,3K], beta_K>=2K/9.",
+      "proof_boundary": "No coefficient-envelope or generic bounded-sequence argument can assume square-root anchor cancellation."
+    },
+    {
+      "id": "sahr_23_finite_validation",
+      "role": "finite_reproduction",
+      "status": "finite_check_passed",
+      "statement": "Arbitrary-vector and Mobius checks verify the endpoint phase, Parseval split, odd tail, current/anchor inequalities, and both cutoff calibrations.",
+      "proof_boundary": "Finite validation checks the inequalities only and supplies no asymptotic cancellation."
+    },
+    {
+      "id": "sahr_24_open_low_mode_gate",
+      "role": "open_theorem_target",
+      "status": "open",
+      "statement": "Prove the reduced low-mode criterion in row 16 for every member of one fixed cofinal sequence alpha_j->0 without assuming RH.",
+      "proof_boundary": "No low-mode square-root gain, anchor power cancellation, full Burnol bound, RH, PF-infinity, or Lambda<=0 conclusion is supplied."
+    }
+  ],
+  "audit": {
+    "row_count": 24,
+    "exact_reduction_count": 16,
+    "literature_guard_count": 1,
+    "proof_guard_count": 2,
+    "conditional_calibration_count": 3,
+    "finite_validation_count": 1,
+    "open_signed_gate_count": 1,
+    "current_anchor_split_proved": true,
+    "unconditional_high_modes_summable": true,
+    "unconditional_low_mode_equivalence_proved": true,
+    "square_root_anchor_proved": false,
+    "low_mode_gain_proved": false,
+    "full_burnol_bound_proved": false,
+    "rh_proved": false,
+    "pf_infinity_proved": false,
+    "lambda_le_zero_proved": false
+  }
+}

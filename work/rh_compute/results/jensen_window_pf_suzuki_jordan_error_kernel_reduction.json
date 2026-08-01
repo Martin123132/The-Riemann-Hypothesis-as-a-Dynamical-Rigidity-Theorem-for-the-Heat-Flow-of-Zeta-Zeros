@@ -1,0 +1,152 @@
+{
+  "audit": {
+    "eventual_sign_proved": false,
+    "exact_reduction_count": 11,
+    "lambda_le_zero_proved": false,
+    "main_term_survives": false,
+    "open_arithmetic_gate_count": 1,
+    "rh_proved": false,
+    "route_obstruction_count": 2,
+    "row_count": 16
+  },
+  "date": "2026-07-23",
+  "exact": {
+    "abel_formula": "H=x^(-1/2)integral_0^x C(t)W(t/x)dt/t",
+    "absolute_barrier": "H=O_(omega,k)(x^(1/2-omega)(1+log x))",
+    "coefficient_convolution": "c_omega(n)=sum_(dm=n)mu(d)d^(-omega)m^omega",
+    "elementary_error_bound": "E=O_omega(x^(1-omega))",
+    "error_kernel": "H=x^(-1/2)integral_0^1 E(xu)W(u)du/u",
+    "main_coefficient": "A_omega=1/((1+omega)zeta(1+2omega))",
+    "moment_zero": "integral_0^1 u^omega W(u)du=0",
+    "weight_derivative": "W_(omega,k)=-u*g_(omega,k)'"
+  },
+  "kind": "jensen_window_pf_suzuki_jordan_error_kernel_reduction",
+  "proof_boundary": "This artifact is not a proof of an eventual sign, RH, or Lambda<=0. It exactly removes the Jordan-totient residue main term and identifies the remaining signed Mobius-error convolution and its inadequate absolute bound.",
+  "rows": [
+    {
+      "formula": "c_omega=id^omega*(mu*id^(-omega)); c_omega(n)=sum_(dm=n)mu(d)d^(-omega)m^omega.",
+      "id": "jek_01_dirichlet_convolution",
+      "proof_boundary": "Exact coefficient identity only.",
+      "role": "exact_identity",
+      "status": "available_exact"
+    },
+    {
+      "formula": "C_omega(x)=sum_(n<=x)c_omega(n), with C_omega(x)=0 for x<1.",
+      "id": "jek_02_cumulative_mass",
+      "proof_boundary": "Definition only.",
+      "role": "definition",
+      "status": "available_exact"
+    },
+    {
+      "formula": "A_omega=1/((1+omega)zeta(1+2omega)); A_omega*x^(1+omega) is the residue main term of C_omega.",
+      "id": "jek_03_residue_main_term",
+      "proof_boundary": "A residue main term is not a pointwise approximation with a signed remainder.",
+      "role": "exact_identity",
+      "status": "available_exact"
+    },
+    {
+      "formula": "E_omega(x)=C_omega(x)-A_omega*x^(1+omega).",
+      "id": "jek_04_error_definition",
+      "proof_boundary": "Definition of the signed summatory discrepancy.",
+      "role": "definition",
+      "status": "available_exact"
+    },
+    {
+      "formula": "W_(omega,k)(u)=-u*g_(omega,k)'(u); for k>=1, W_(omega,k)=g_(omega,k-1)+(1/2)g_(omega,k).",
+      "id": "jek_05_weight_derivative",
+      "proof_boundary": "Uses Suzuki's weight recursion and the level-zero weight.",
+      "role": "exact_identity",
+      "status": "available_exact"
+    },
+    {
+      "formula": "H_(omega,k)(x)=x^(-1/2)*integral_0^x C_omega(t)W_(omega,k)(t/x)dt/t.",
+      "id": "jek_06_abel_formula",
+      "proof_boundary": "Stieltjes/Abel summation only; no sign follows because W is signed.",
+      "role": "exact_identity",
+      "status": "available_exact"
+    },
+    {
+      "formula": "integral_0^1 g_(omega,k)(u)u^omega du=0.",
+      "id": "jek_07_archimedean_zero",
+      "proof_boundary": "The zero is the factor s-omega-1 at s=1+omega in the archimedean Mellin transform.",
+      "role": "exact_identity",
+      "status": "available_exact"
+    },
+    {
+      "formula": "integral_0^1 W_(omega,k)(u)u^omega du=0.",
+      "id": "jek_08_derivative_moment_zero",
+      "proof_boundary": "Integration by parts is valid because the endpoint products vanish.",
+      "role": "exact_identity",
+      "status": "available_exact"
+    },
+    {
+      "formula": "integral_0^1 A_omega*(x*u)^(1+omega)*W_(omega,k)(u)du/u=0.",
+      "id": "jek_09_main_term_annihilation",
+      "proof_boundary": "The positive residue main term contributes exactly zero.",
+      "role": "exact_lemma",
+      "status": "available_exact"
+    },
+    {
+      "formula": "H_(omega,k)(x)=x^(-1/2)*integral_0^1 E_omega(x*u)W_(omega,k)(u)du/u.",
+      "id": "jek_10_error_kernel",
+      "proof_boundary": "Exact reduction to a signed error convolution; it proves no positivity.",
+      "role": "exact_lemma",
+      "status": "available_exact"
+    },
+    {
+      "formula": "E_omega(x)=sum_(d<=x)mu(d)d^(-omega)R_omega(x/d)-x^(1+omega)/(1+omega)*sum_(d>x)mu(d)d^(-(1+2omega)), where R_omega(y)=sum_(m<=y)m^omega-y^(1+omega)/(1+omega).",
+      "id": "jek_11_power_sum_decomposition",
+      "proof_boundary": "Both terms require Mobius cancellation and have no fixed sign.",
+      "role": "exact_identity",
+      "status": "available_exact"
+    },
+    {
+      "formula": "E_omega(x)=O_omega(x^(1-omega)) for 0<omega<1/2.",
+      "id": "jek_12_elementary_error_bound",
+      "proof_boundary": "Absolute-value estimate only; it discards all Mobius cancellation.",
+      "role": "exact_bound",
+      "status": "available_exact"
+    },
+    {
+      "formula": "The elementary E bound and endpoint size W_(omega,k)(u)=O_(omega,k)(u^(omega-1)) give H_(omega,k)(x)=O_(omega,k)(x^(1/2-omega)*(1+log x)).",
+      "id": "jek_13_absolute_kernel_bound",
+      "proof_boundary": "Far too large to establish eventual sign or the RH-conditional polylogarithmic scale.",
+      "role": "exact_bound",
+      "status": "available_exact"
+    },
+    {
+      "formula": "Every finite k has the same near-zero power u^(omega-1), so logarithmic smoothing alone does not improve the exponent in the absolute-value bound.",
+      "id": "jek_14_smoothing_barrier",
+      "proof_boundary": "Smoothing may improve cancellation, but not through a naive absolute estimate.",
+      "role": "route_obstruction",
+      "status": "guard_validated"
+    },
+    {
+      "formula": "The Jordan-totient residue main term cannot be used as a positive dominant term because the Suzuki kernel annihilates it exactly.",
+      "id": "jek_15_positive_main_term_rejected",
+      "proof_boundary": "Any proof claiming main-term domination fails this gate.",
+      "role": "route_obstruction",
+      "status": "guard_validated"
+    },
+    {
+      "formula": "For one explicit omega_j->0 and selected k_j, prove that the signed convolution of E_(omega_j) with W_(omega_j,k_j) has one eventual sign, gaining beyond the O(x^(1/2-omega_j)log x) absolute barrier.",
+      "id": "jek_16_open_cancellation_target",
+      "proof_boundary": "This cancellation estimate is not proved.",
+      "role": "open_arithmetic_gate",
+      "status": "open_target"
+    }
+  ],
+  "sources": [
+    {
+      "title": "On monotonicity of certain weighted summatory functions associated with L-functions",
+      "url": "https://arxiv.org/abs/1204.1823",
+      "use": "coefficients, weights, recursion, and Mellin transform"
+    },
+    {
+      "title": "Cofinal monotonicity hierarchy",
+      "url": "outputs/jensen_window_pf_suzuki_cofinal_monotonicity_hierarchy.md",
+      "use": "RH-strength eventual-sign handoff"
+    }
+  ],
+  "status": "exact arithmetic reduction with one open cancellation gate"
+}

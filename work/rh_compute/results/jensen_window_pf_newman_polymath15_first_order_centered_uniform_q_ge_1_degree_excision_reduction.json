@@ -1,0 +1,271 @@
+{
+  "date": "2026-07-28",
+  "exact": {
+    "boundary_only_guard": "F(t,x)=x^2-2t satisfies F_t=-F_xx. On [-1,1]x[-1/4,1/4], J_F=(F,F_x) is boundary-nonzero but has the interior zero (x,t)=(0,0), whose Jacobian determinant in (x,t) coordinates is +4. Hence its boundary winding is +1. Boundary nonvanishing alone cannot justify outer excision; nonvanishing on the whole closed collar is essential.",
+    "chart_guard": "mathcal_C_N is used only inside a canonical Abel chart to certify nonvanishing of the exact jet. It is not declared a global complex coordinate. Degree and interface cancellation are performed with the globally continuous exact Xi jet J_H; adjacent-cutoff and positive-normalizer homotopies retain their existing endpoint and overlap obligations.",
+    "conditional_exact_noncontact": "Assume the closed-domain Xi estimate |mathsf_X|<=delta_L implies |mathcal_C_N|>A_L+epsilon_term in every prescribed canonical chart throughout A_j, including q=1, tL=25, W_0=0, endpoints, and cutoff overlaps. The checked shear/scale and first-order remainder transfers then keep the exact jet J_H=(H_t,partial_x H_t) nonzero on A_j. The dominant theorem keeps J_H nonzero on G_j. Hence J_H is nonzero on all of Omega_j^out.",
+    "degree_excision": "If the conditional outer noncontact theorem holds and the remaining inner boundary contract makes all displayed windings defined, then deg(J_H,Omega_j^out,0)=wind(J_H(partial Omega_j^out),0)=0. Therefore kappa_j=wind(J_H(partial D_j),0)=wind(J_H(partial Omega_j^in),0). All q>=1 and dominant-ray horizontal turns cancel through the zero-degree outer collar; no separate signed outer phase bound is needed.",
+    "diagnostics": {
+      "chain": {
+        "full_segments": {
+          "axis": 1,
+          "bottom_inner": 1,
+          "bottom_outer": 1,
+          "right": 1,
+          "top_inner": 1,
+          "top_outer": 1
+        },
+        "identity": "partial D_j=partial Omega_j^in+partial Omega_j^out",
+        "inner_segments": {
+          "axis": 1,
+          "bottom_inner": 1,
+          "interface_outer": -1,
+          "top_inner": 1
+        },
+        "interface_cancels": true,
+        "outer_segments": {
+          "bottom_outer": 1,
+          "interface_outer": 1,
+          "right": 1,
+          "top_outer": 1
+        }
+      },
+      "geometry": {
+        "bottom_q_threshold": "(2*(25/L_j))^(-1/2)=sqrt(L_j/50)",
+        "interface_abel_side": "On L_*=50, tL_*=50t<=25/2<25. On L_*=(2t)^(-1/2), tL_*=sqrt(t/2)<1<25.",
+        "kink_time": "1/5000",
+        "threshold_inside_right_edge": "sqrt(L_j/50)<L_j and sqrt((L_j-1)/50)<L_j for L_j>=101",
+        "top_q_threshold": "(2*(25/(L_j-1)))^(-1/2)=sqrt((L_j-1)/50)"
+      }
+    },
+    "endpoint_thresholds": "At t_b and t_t the q=1 logarithmic thresholds are sqrt(L_j/50) and sqrt((L_j-1)/50), respectively. Both are strictly below L_j for L_j>=101, so the outer collar is nonempty on both horizontal edges.",
+    "inner_region": "Let Omega_j^in be the closure of D_j\\Omega_j^out. It contains the q<1 layer, every L<50 bounded/core shoulder, and their finite joins. The common interface is I_j={(X_*(t),t):t_b<=t<=t_t}.",
+    "interface_in_abel_domain": "The whole moving interface lies strictly on the tL<25 side: if L_*=50 then tL_*=50t<=25/2, while on q=1 one has tL_*=sqrt(t/2)<1. Thus no dominant/Abel seam is placed on the degree-excision interface.",
+    "interface_regularity": "The interface is continuous and piecewise analytic. Its only possible corner is where (2t)^(-1/2)=50, namely t=1/5000. Thus Omega_j^in and Omega_j^out are compact Lipschitz domains even when one successor slab contains that corner.",
+    "many_turn_guard": "For integer m>=1, X_m=exp(m^2t)sin(mx+pi/4) and C_m=partial_xX_m give a globally nonzero exact backward-heat jet. On [0,2*pi] each forward horizontal path winds -m, but the reversed upper path winds +m and the two vertical paths cancel. Thus the full zero-free strip has degree zero for every m. Arbitrarily many turns on one horizontal edge do not obstruct two-dimensional excision.",
+    "open_inner_target": "On Omega_j^in, construct one multiplicity-compatible exact or rigorously dominated proxy covering q<1, L<50, the core, finite shoulders, and all joins. Prove boundary nonvanishing and an oriented winding below one (or direct zero degree) for every j. Positive local contact degree then forces the localized successor integer to vanish.",
+    "open_outer_target": "Prove uniformly on the closed set L>=50, q=2tL^2>=1, 0<tL<=25 that |mathsf_X|<=delta_L implies |mathcal_C_N|>A_L+epsilon_term, with equality boundaries, W_0=0, the recurrent endpoint, and every cutoff overlap included. This is the only new outer arithmetic theorem.",
+    "oriented_chain": "Orient the outer boundary as bottom outer left-to-right, right edge bottom-to-top, top outer right-to-left, and I_j top-to-bottom. Orient the inner boundary as bottom inner left-to-right, I_j bottom-to-top, top inner right-to-left, and the symmetry axis top-to-bottom. The two copies of I_j cancel, so partial D_j=partial Omega_j^in+partial Omega_j^out as oriented one-chains.",
+    "outer_interface": "For L(x)=log(x/(4*pi)), define L_*(t)=max(50,(2t)^(-1/2)) and X_*(t)=4*pi*exp(L_*(t)). Then Omega_j^out={(x,t) in D_j:x>=X_*(t)} is exactly the closed part of D_j with L>=50 and q=2tL^2>=1.",
+    "pi_provenance": "The pi in L=log(x/(4*pi)) and X_*(t)=4*pi*exp(L_*(t)) is the same universal constant already fixed by the completed-zeta normalization and Riemann-Siegel saddle. The 2*pi in winding is the period of exp(i*theta). The excision introduces no circle, polygon, fitted pi, or new normalization.",
+    "preferred_route": "Promote the uniform-collar route as primary because the Abel target is already pointwise and its formulas are uniform in (x,t) on the source domain. Retain the connector quarter-turn theorem and H_j<3*pi/2 ledger as a valid fallback if the gap can be proved only on boundary arcs.",
+    "proof_boundary": "The successor geometry, moving q=1/L=50 interface, two-regime cover, oriented chain cancellation, conditional degree excision, paired many-turn cancellation guard, boundary-only contact guard, and route comparison are exact or inherited from checked sources. This does not prove the uniform Xi Abel-scalar gap, its exact-H noncontact consequence, the inner q<1/bounded-L successor theorem, complete boundary nonvanishing, contact exclusion, Lambda<=0, PF-infinity, RH, or a Clay-prize conclusion.",
+    "route_fork": "Boundary-only route: retain the proved connector cap |C_j|<pi/2 and prove the joined complementary inequality H_j<3*pi/2. Uniform-collar route: prove the Abel gap on all of A_j, combine it with dominant noncontact on G_j, excise Omega_j^out, and prove only the inner-region successor degree theorem. The second route asks for a stronger pointwise domain statement but removes the independent many-turn outer phase theorem.",
+    "successor_geometry": "For L_j=101+j put t_b=25/L_j, t_t=25/(L_j-1), R_j=4*pi*exp(L_j), and D_j={(x,t):0<=x<=R_j, t_b<=t<=t_t}, with the standard (x,t) orientation.",
+    "two_regime_cover": "Split Omega_j^out into A_j={tL<=25} and G_j={tL>=25}. On A_j the still-open uniform Abel-scalar gap lies in the certified L>=50, q>=1, 0<tL<=25 first-order remainder domain. On G_j the already proved dominant-saddle theorem gives L_t(x)>0 for the exact Xi flow. The two closed pieces meet at tL=25 and cover the entire outer collar."
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_uniform_q_ge_1_degree_excision_reduction",
+  "proof_boundary": "The successor geometry, moving q=1/L=50 interface, two-regime cover, oriented chain cancellation, conditional degree excision, paired many-turn cancellation guard, boundary-only contact guard, and route comparison are exact or inherited from checked sources. This does not prove the uniform Xi Abel-scalar gap, its exact-H noncontact consequence, the inner q<1/bounded-L successor theorem, complete boundary nonvanishing, contact exclusion, Lambda<=0, PF-infinity, RH, or a Clay-prize conclusion.",
+  "rows": [
+    {
+      "claim": "The outer interface introduces no unexplained pi.",
+      "diagnostics": null,
+      "formula": "The pi in L=log(x/(4*pi)) and X_*(t)=4*pi*exp(L_*(t)) is the same universal constant already fixed by the completed-zeta normalization and Riemann-Siegel saddle. The 2*pi in winding is the period of exp(i*theta). The excision introduces no circle, polygon, fitted pi, or new normalization.",
+      "id": "uqde_00_pi_provenance",
+      "proof_boundary": "Only the inherited Xi normalization and winding period occur.",
+      "readiness": "available_exact",
+      "role": "source_provenance"
+    },
+    {
+      "claim": "Every successor slab has one fixed standard orientation.",
+      "diagnostics": null,
+      "formula": "For L_j=101+j put t_b=25/L_j, t_t=25/(L_j-1), R_j=4*pi*exp(L_j), and D_j={(x,t):0<=x<=R_j, t_b<=t<=t_t}, with the standard (x,t) orientation.",
+      "id": "uqde_01_successor_geometry",
+      "proof_boundary": "Valid for every integer j>=0.",
+      "readiness": "available_exact",
+      "role": "exact_geometry"
+    },
+    {
+      "claim": "One moving interface cuts out exactly L>=50 and q>=1.",
+      "diagnostics": null,
+      "formula": "For L(x)=log(x/(4*pi)), define L_*(t)=max(50,(2t)^(-1/2)) and X_*(t)=4*pi*exp(L_*(t)). Then Omega_j^out={(x,t) in D_j:x>=X_*(t)} is exactly the closed part of D_j with L>=50 and q=2tL^2>=1.",
+      "id": "uqde_02_outer_interface",
+      "proof_boundary": "The logarithmic coordinate is used only for x>0.",
+      "readiness": "available_exact",
+      "role": "exact_geometry"
+    },
+    {
+      "claim": "The outer collar reaches both successor horizontal edges.",
+      "diagnostics": {
+        "bottom_q_threshold": "(2*(25/L_j))^(-1/2)=sqrt(L_j/50)",
+        "interface_abel_side": "On L_*=50, tL_*=50t<=25/2<25. On L_*=(2t)^(-1/2), tL_*=sqrt(t/2)<1<25.",
+        "kink_time": "1/5000",
+        "threshold_inside_right_edge": "sqrt(L_j/50)<L_j and sqrt((L_j-1)/50)<L_j for L_j>=101",
+        "top_q_threshold": "(2*(25/(L_j-1)))^(-1/2)=sqrt((L_j-1)/50)"
+      },
+      "formula": "At t_b and t_t the q=1 logarithmic thresholds are sqrt(L_j/50) and sqrt((L_j-1)/50), respectively. Both are strictly below L_j for L_j>=101, so the outer collar is nonempty on both horizontal edges.",
+      "id": "uqde_03_endpoint_thresholds",
+      "proof_boundary": "Strict for L_j>=101.",
+      "readiness": "available_exact",
+      "role": "exact_geometry"
+    },
+    {
+      "claim": "The moving interface is a valid Lipschitz degree boundary.",
+      "diagnostics": null,
+      "formula": "The interface is continuous and piecewise analytic. Its only possible corner is where (2t)^(-1/2)=50, namely t=1/5000. Thus Omega_j^in and Omega_j^out are compact Lipschitz domains even when one successor slab contains that corner.",
+      "id": "uqde_04_interface_regularity",
+      "proof_boundary": "The t=1/5000 corner needs no smoothing.",
+      "readiness": "available_exact",
+      "role": "exact_geometry"
+    },
+    {
+      "claim": "The Abel and dominant regimes cover the whole outer collar.",
+      "diagnostics": null,
+      "formula": "Split Omega_j^out into A_j={tL<=25} and G_j={tL>=25}. On A_j the still-open uniform Abel-scalar gap lies in the certified L>=50, q>=1, 0<tL<=25 first-order remainder domain. On G_j the already proved dominant-saddle theorem gives L_t(x)>0 for the exact Xi flow. The two closed pieces meet at tL=25 and cover the entire outer collar.",
+      "id": "uqde_05_two_regime_cover",
+      "proof_boundary": "The Abel estimate remains open; dominant noncontact is imported.",
+      "readiness": "available_exact",
+      "role": "exact_domain_reduction"
+    },
+    {
+      "claim": "The degree interface stays strictly inside the Abel regime.",
+      "diagnostics": {
+        "bottom_q_threshold": "(2*(25/L_j))^(-1/2)=sqrt(L_j/50)",
+        "interface_abel_side": "On L_*=50, tL_*=50t<=25/2<25. On L_*=(2t)^(-1/2), tL_*=sqrt(t/2)<1<25.",
+        "kink_time": "1/5000",
+        "threshold_inside_right_edge": "sqrt(L_j/50)<L_j and sqrt((L_j-1)/50)<L_j for L_j>=101",
+        "top_q_threshold": "(2*(25/(L_j-1)))^(-1/2)=sqrt((L_j-1)/50)"
+      },
+      "formula": "The whole moving interface lies strictly on the tL<25 side: if L_*=50 then tL_*=50t<=25/2, while on q=1 one has tL_*=sqrt(t/2)<1. Thus no dominant/Abel seam is placed on the degree-excision interface.",
+      "id": "uqde_06_interface_abel_side",
+      "proof_boundary": "No unproved dominant/Abel seam is hidden on I_j.",
+      "readiness": "available_exact",
+      "role": "exact_domain_reduction"
+    },
+    {
+      "claim": "The uniform Abel gap would make the exact outer jet nonzero.",
+      "diagnostics": null,
+      "formula": "Assume the closed-domain Xi estimate |mathsf_X|<=delta_L implies |mathcal_C_N|>A_L+epsilon_term in every prescribed canonical chart throughout A_j, including q=1, tL=25, W_0=0, endpoints, and cutoff overlaps. The checked shear/scale and first-order remainder transfers then keep the exact jet J_H=(H_t,partial_x H_t) nonzero on A_j. The dominant theorem keeps J_H nonzero on G_j. Hence J_H is nonzero on all of Omega_j^out.",
+      "id": "uqde_07_conditional_noncontact",
+      "proof_boundary": "Conditional on the explicitly open closed-domain Xi gap.",
+      "readiness": "available_exact",
+      "role": "conditional_exact_reduction"
+    },
+    {
+      "claim": "Degree is taken in the exact global jet, not an Abel chart.",
+      "diagnostics": null,
+      "formula": "mathcal_C_N is used only inside a canonical Abel chart to certify nonvanishing of the exact jet. It is not declared a global complex coordinate. Degree and interface cancellation are performed with the globally continuous exact Xi jet J_H; adjacent-cutoff and positive-normalizer homotopies retain their existing endpoint and overlap obligations.",
+      "id": "uqde_08_chart_guard",
+      "proof_boundary": "Cutoff overlaps and endpoint tracks may not be discarded.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion_guard"
+    },
+    {
+      "claim": "The inner and outer chains add to the successor boundary.",
+      "diagnostics": {
+        "full_segments": {
+          "axis": 1,
+          "bottom_inner": 1,
+          "bottom_outer": 1,
+          "right": 1,
+          "top_inner": 1,
+          "top_outer": 1
+        },
+        "identity": "partial D_j=partial Omega_j^in+partial Omega_j^out",
+        "inner_segments": {
+          "axis": 1,
+          "bottom_inner": 1,
+          "interface_outer": -1,
+          "top_inner": 1
+        },
+        "interface_cancels": true,
+        "outer_segments": {
+          "bottom_outer": 1,
+          "interface_outer": 1,
+          "right": 1,
+          "top_outer": 1
+        }
+      },
+      "formula": "Orient the outer boundary as bottom outer left-to-right, right edge bottom-to-top, top outer right-to-left, and I_j top-to-bottom. Orient the inner boundary as bottom inner left-to-right, I_j bottom-to-top, top inner right-to-left, and the symmetry axis top-to-bottom. The two copies of I_j cancel, so partial D_j=partial Omega_j^in+partial Omega_j^out as oriented one-chains.",
+      "id": "uqde_09_oriented_chain",
+      "proof_boundary": "The common interface occurs with opposite orientations.",
+      "readiness": "available_exact",
+      "role": "exact_topological_lemma"
+    },
+    {
+      "claim": "Uniform outer noncontact localizes the successor degree.",
+      "diagnostics": null,
+      "formula": "If the conditional outer noncontact theorem holds and the remaining inner boundary contract makes all displayed windings defined, then deg(J_H,Omega_j^out,0)=wind(J_H(partial Omega_j^out),0)=0. Therefore kappa_j=wind(J_H(partial D_j),0)=wind(J_H(partial Omega_j^in),0). All q>=1 and dominant-ray horizontal turns cancel through the zero-degree outer collar; no separate signed outer phase bound is needed.",
+      "id": "uqde_10_degree_excision",
+      "proof_boundary": "The inner boundary theorem remains open.",
+      "readiness": "available_exact",
+      "role": "conditional_topological_reduction"
+    },
+    {
+      "claim": "Paired horizontal turns cancel in a zero-free strip.",
+      "diagnostics": null,
+      "formula": "For integer m>=1, X_m=exp(m^2t)sin(mx+pi/4) and C_m=partial_xX_m give a globally nonzero exact backward-heat jet. On [0,2*pi] each forward horizontal path winds -m, but the reversed upper path winds +m and the two vertical paths cancel. Thus the full zero-free strip has degree zero for every m. Arbitrarily many turns on one horizontal edge do not obstruct two-dimensional excision.",
+      "id": "uqde_11_many_turn_guard",
+      "proof_boundary": "Generic heat-flow guard, not an Xi theorem.",
+      "readiness": "guard_validated",
+      "role": "countermodel"
+    },
+    {
+      "claim": "Boundary nonvanishing does not imply zero interior degree.",
+      "diagnostics": null,
+      "formula": "F(t,x)=x^2-2t satisfies F_t=-F_xx. On [-1,1]x[-1/4,1/4], J_F=(F,F_x) is boundary-nonzero but has the interior zero (x,t)=(0,0), whose Jacobian determinant in (x,t) coordinates is +4. Hence its boundary winding is +1. Boundary nonvanishing alone cannot justify outer excision; nonvanishing on the whole closed collar is essential.",
+      "id": "uqde_12_boundary_only_guard",
+      "proof_boundary": "Generic heat-flow guard, not an Xi counterexample.",
+      "readiness": "guard_validated",
+      "role": "countermodel"
+    },
+    {
+      "claim": "Boundary-only and uniform-collar routes have different obligations.",
+      "diagnostics": null,
+      "formula": "Boundary-only route: retain the proved connector cap |C_j|<pi/2 and prove the joined complementary inequality H_j<3*pi/2. Uniform-collar route: prove the Abel gap on all of A_j, combine it with dominant noncontact on G_j, excise Omega_j^out, and prove only the inner-region successor degree theorem. The second route asks for a stronger pointwise domain statement but removes the independent many-turn outer phase theorem.",
+      "id": "uqde_13_route_fork",
+      "proof_boundary": "Neither route is promoted to a completed Xi theorem.",
+      "readiness": "available_exact",
+      "role": "exact_route_comparison"
+    },
+    {
+      "claim": "The closed-domain Xi Abel-scalar gap remains open.",
+      "diagnostics": null,
+      "formula": "Prove uniformly on the closed set L>=50, q=2tL^2>=1, 0<tL<=25 that |mathsf_X|<=delta_L implies |mathcal_C_N|>A_L+epsilon_term, with equality boundaries, W_0=0, the recurrent endpoint, and every cutoff overlap included. This is the only new outer arithmetic theorem.",
+      "id": "uqde_14_outer_gap_target",
+      "proof_boundary": "This is an RH-level arithmetic estimate.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    },
+    {
+      "claim": "The localized inner successor theorem remains open.",
+      "diagnostics": null,
+      "formula": "On Omega_j^in, construct one multiplicity-compatible exact or rigorously dominated proxy covering q<1, L<50, the core, finite shoulders, and all joins. Prove boundary nonvanishing and an oriented winding below one (or direct zero degree) for every j. Positive local contact degree then forces the localized successor integer to vanish.",
+      "id": "uqde_15_inner_degree_target",
+      "proof_boundary": "It includes q<1, bounded L, core, shoulders, and joins.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    }
+  ],
+  "source_audit": {
+    "abel_shear": "jensen_window_pf_newman_polymath15_first_order_centered_abel_scalar_shear_flux_reduction",
+    "carrier_kernel": "jensen_window_pf_newman_polymath15_first_order_centered_carrier_kernel_abel_prefix_reduction",
+    "cofinal_boundary": "jensen_window_pf_newman_polymath15_first_order_cofinal_boundary_reduction",
+    "connector_cap": "jensen_window_pf_newman_polymath15_first_order_centered_dominant_ray_connector_phase_cap",
+    "degree_transfer": "jensen_window_pf_newman_cofinal_boundary_degree_transfer_target",
+    "dominant_global": "jensen_window_pf_newman_polymath15_dominant_saddle_global_ray_certificate",
+    "global_remainder": "jensen_window_pf_newman_polymath15_critical_first_order_global_remainder_certificate",
+    "oriented_successor": "jensen_window_pf_newman_polymath15_first_order_oriented_successor_winding_reduction"
+  },
+  "source_sha256": {
+    "abel_shear": "1a0b538a3340f2d69e2976ddb19f9b3c83c492ddf5715cfdcdb24ac3356536e5",
+    "carrier_kernel": "408b16b6719be7a55b5f260dcda8ebc9bfd012edd734e6fc4913f8cbb0e9abc3",
+    "cofinal_boundary": "99a134bcd052687d56cc411e03134d25a82509e30e3700ae16d9cc478a7c559a",
+    "connector_cap": "44870e026352077a526a6b7b30b4f1c198e3e25bd0f8221f8a95c6ce423a6c31",
+    "degree_transfer": "a0ba27d354be3bb9e0f832b3c4cecc0c62b2ca871a6969a1a56818303f15fe66",
+    "dominant_global": "9f5d8d208e84533241e7c4de69d7646e991b99406b56a687e2976741bd98bf3e",
+    "global_remainder": "ed3d6f75c59c14bd0d3c53bbbc946a1c6719facd899d6524c35c3edfa48ca577",
+    "oriented_successor": "2b5a5d98d3d7fa2a3b65044bb0c94fe302f8db1e9855313d63569110d271f8c4"
+  },
+  "sources": {
+    "abel_shear": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_abel_scalar_shear_flux_reduction.json",
+    "carrier_kernel": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_carrier_kernel_abel_prefix_reduction.json",
+    "cofinal_boundary": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_cofinal_boundary_reduction.json",
+    "connector_cap": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_dominant_ray_connector_phase_cap.json",
+    "degree_transfer": "work\\rh_compute\\results\\jensen_window_pf_newman_cofinal_boundary_degree_transfer_target.json",
+    "dominant_global": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_dominant_saddle_global_ray_certificate.json",
+    "global_remainder": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_critical_first_order_global_remainder_certificate.json",
+    "oriented_successor": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_oriented_successor_winding_reduction.json"
+  },
+  "status": "exact conditional uniform-q>=1 outer-collar degree-excision reduction; the uniform Xi Abel gap and inner successor degree theorem remain open"
+}

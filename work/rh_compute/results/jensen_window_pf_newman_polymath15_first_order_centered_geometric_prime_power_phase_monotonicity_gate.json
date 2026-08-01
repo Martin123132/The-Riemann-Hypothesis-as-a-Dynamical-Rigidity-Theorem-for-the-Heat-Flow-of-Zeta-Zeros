@@ -1,0 +1,214 @@
+{
+  "date": "2026-07-29",
+  "exact": {
+    "geometric_block": {
+      "definition": "a=p^(-1/2), P_M(z)=z*sum_(k=0)^(M-1)(a*z)^k",
+      "factorization": "P_M(z)=z*[1-(a*z)^M]/(1-a*z)",
+      "unit_circle": "P_M is nonzero on |z|=1 and has winding one"
+    },
+    "nonpromotion": {
+      "completion": "A complete contracted prime-power chain can have projected first-jet winding -2 although the complex coefficient block is zero-free with winding one",
+      "composition": "The sum of individually winding-one blocks can have winding three"
+    },
+    "phase_derivative": {
+      "consequence": "mu_M(a)>0 implies strict phase increase by 2*pi and exactly one upward crossing for every constant external phase",
+      "identity": "Theta_M'=1+K_M(a^M,theta)-K_1(a,theta)",
+      "kernel": "K_m(r,theta)=m*(r^2-r*cos(m*theta))/(1-2*r*cos(m*theta)+r^2)",
+      "kernel_bounds": "-m*r/(1-r)<=K_m(r,theta)<=m*r/(1+r)",
+      "margin": "Theta_M'>=mu_M(a):=1/(1+a)-M*a^M/(1-a^M)"
+    },
+    "route": {
+      "long_block_target": "|Theta_actual'-Theta_geometric'|<mu_M(p^(-1/2))",
+      "open_handoff": "Derive a C1 heat-and-correction perturbation bound for the positive-margin long families. Do not sum blockwise winding bounds: insert the long/short decomposition into mathsf_X*(L*D_j mathcal_C_N-mathcal_C_N), preserving external phases and the recurrent endpoint.",
+      "rejoin": "Rejoin all p-free bases, singleton chains, the recurrent endpoint, and cutoff homotopies before estimating the ray defect or successor winding",
+      "short_blocks": "Keep p=2 lengths 2..7 and p=3 lengths 2..3 inside an explicit finite block ledger; M=1 is exact"
+    },
+    "short_chain_guard": {
+      "block_winding": "wind(P_2)=1",
+      "counts": "two upward and two downward crossings on [0,2*pi)",
+      "derivatives": "X_a'(0)=-(1+2a)<0, X_a'(pi)=1-2a<0, X_a'(theta_a)=X_a'(2*pi-theta_a)=2a*sin(theta_a)^2>0",
+      "domain": "1/2<a<1, in particular p=2 or p=3",
+      "first_jet_winding": "wind(X_a+i*X_a')=-2",
+      "projection": "alpha=pi/2; X_a(theta)=-sin(theta)-a*sin(2theta)=-sin(theta)*(1+2a*cos(theta))",
+      "zeros": "0, pi, theta_a=arccos(-1/(2a)), 2*pi-theta_a"
+    },
+    "thresholds": {
+      "dyadic": "p=2, M>=8: mu_M>=22/15-sqrt(2)>0",
+      "large_primes": "p>=5: M=1 is exact and M>=2 has mu_M>=mu_2(5^(-1/2))=(3-sqrt(5))/4>0",
+      "tail": "g_M(a)=M*a^M/(1-a^M)",
+      "tail_monotonicity": "a<=M/(M+1) => g_(M+1)(a)<g_M(a)",
+      "ternary": "p=3, M>=4: mu_M>=(2-sqrt(3))/2>0"
+    }
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_geometric_prime_power_phase_monotonicity_gate",
+  "proof_boundary": "This artifact proves the correction-free geometric block phase formula, elementary monotonicity margin, uniform one-turn families p>=5, p=3 with M>=4, and p=2 with M>=8, and an exact complete two-level recrossing guard for p=2,3. It does not prove C1 stability under the heat quadratic or d_n corrections, a joined p-free or endpoint theorem, the Xi Abel gap, H_j<3*pi/2, contact exclusion, Lambda<=0, PF-infinity, RH, or a Clay-prize conclusion.",
+  "rows": [
+    {
+      "claim": "Isolate one complete geometric prime-power block.",
+      "formula": "a=p^(-1/2), P_M(z)=z*sum_(k=0)^(M-1)(a*z)^k.",
+      "id": "gppm_01_model",
+      "proof_boundary": "This is the t=0 correction-free internal chain model.",
+      "readiness": "proved",
+      "role": "correction-free chain"
+    },
+    {
+      "claim": "The finite block has one rational geometric representation.",
+      "formula": "P_M(z)=z*[1-(a*z)^M]/(1-a*z).",
+      "id": "gppm_02_factorization",
+      "proof_boundary": "Both denominator and numerator are nonzero on |z|=1.",
+      "readiness": "proved",
+      "role": "exact algebra"
+    },
+    {
+      "claim": "Every geometric block is unit-circle nonzero with winding one.",
+      "formula": "wind(P_M(e^(i*theta)),0)=1.",
+      "id": "gppm_03_block_winding",
+      "proof_boundary": "Winding one does not imply monotone phase or one upward crossing.",
+      "readiness": "proved",
+      "role": "topological baseline"
+    },
+    {
+      "claim": "Differentiate the two geometric factors without an argument branch.",
+      "formula": "K_m(r,theta)=m*(r^2-r*cos(m*theta))/(1-2*r*cos(m*theta)+r^2).",
+      "id": "gppm_04_kernel",
+      "proof_boundary": "K_m is the angular current of 1-r*exp(i*m*theta).",
+      "readiness": "proved",
+      "role": "exact phase derivative"
+    },
+    {
+      "claim": "The block phase speed is an explicit difference of two kernels.",
+      "formula": "Theta_M'=1+K_M(a^M,theta)-K_1(a,theta).",
+      "id": "gppm_05_phase_speed",
+      "proof_boundary": "The external constant phase does not change this derivative.",
+      "readiness": "proved",
+      "role": "exact phase derivative"
+    },
+    {
+      "claim": "Each geometric-factor current has sharp elementary bounds.",
+      "formula": "-m*r/(1-r)<=K_m(r,theta)<=m*r/(1+r).",
+      "id": "gppm_06_kernel_bounds",
+      "proof_boundary": "The endpoint values cos(m*theta)=1 and -1 attain the bounds.",
+      "readiness": "proved",
+      "role": "exact inequality"
+    },
+    {
+      "claim": "A positive scalar margin forces strict one-turn phase.",
+      "formula": "Theta_M'>=mu_M(a):=1/(1+a)-M*a^M/(1-a^M).",
+      "id": "gppm_07_monotone_margin",
+      "proof_boundary": "The bound is sufficient and may be negative for a monotone block.",
+      "readiness": "proved",
+      "role": "sufficient theorem"
+    },
+    {
+      "claim": "When mu_M(a)>0, every constant-phase real projection has one upcrossing.",
+      "formula": "For all alpha, Re(exp(i*alpha)P_M(e^(i*theta))) has two simple zeros and one upward zero on [0,2*pi).",
+      "id": "gppm_08_projection_consequence",
+      "proof_boundary": "This is internal to one geometric block.",
+      "readiness": "conditional",
+      "role": "one-block theorem"
+    },
+    {
+      "claim": "The tail penalty decreases once a is below M/(M+1).",
+      "formula": "g_M(a)=M*a^M/(1-a^M); a<=M/(M+1) => g_(M+1)(a)<g_M(a).",
+      "id": "gppm_09_length_monotonicity",
+      "proof_boundary": "This propagates one checked base margin to all longer blocks.",
+      "readiness": "proved",
+      "role": "threshold arithmetic"
+    },
+    {
+      "claim": "Every correction-free p>=5 block has strict phase monotonicity.",
+      "formula": "M=1 is exact; for M>=2, mu_M(p^(-1/2))>=mu_2(5^(-1/2))=(3-sqrt(5))/4>0.",
+      "id": "gppm_10_large_primes",
+      "proof_boundary": "Heat and d_n perturbations are not included.",
+      "readiness": "proved",
+      "role": "prime-family theorem"
+    },
+    {
+      "claim": "Every correction-free ternary block of length at least four is monotone.",
+      "formula": "mu_M(3^(-1/2))>=mu_4(3^(-1/2))=(2-sqrt(3))/2>0 for M>=4.",
+      "id": "gppm_11_ternary_threshold",
+      "proof_boundary": "Lengths two and three are outside this theorem.",
+      "readiness": "proved",
+      "role": "prime-family theorem"
+    },
+    {
+      "claim": "Every correction-free dyadic block of length at least eight is monotone.",
+      "formula": "mu_M(2^(-1/2))>=mu_8(2^(-1/2))=22/15-sqrt(2)>0 for M>=8.",
+      "id": "gppm_12_dyadic_threshold",
+      "proof_boundary": "Lengths two through seven are outside this theorem.",
+      "readiness": "proved",
+      "role": "prime-family theorem"
+    },
+    {
+      "claim": "A complete two-level chain can still have four simple crossings.",
+      "formula": "For a>1/2 and alpha=pi/2, X=-sin(theta)-a*sin(2theta)=-sin(theta)*(1+2a*cos(theta)).",
+      "id": "gppm_13_complete_short_guard",
+      "proof_boundary": "This applies to p=2 and p=3; it is not an Xi phase-attainment claim.",
+      "readiness": "proved",
+      "role": "exact recrossing guard"
+    },
+    {
+      "claim": "The complete short-chain guard has two upward crossings.",
+      "formula": "zeros: 0, pi, arccos(-1/(2a)), 2*pi-arccos(-1/(2a)); wind(X+i*X_theta)=-2.",
+      "id": "gppm_14_guard_count",
+      "proof_boundary": "The coefficient block itself remains nonzero and winds one.",
+      "readiness": "proved",
+      "role": "first-jet guard"
+    },
+    {
+      "claim": "Multiplicative completion alone does not imply first-jet one-turn behavior.",
+      "formula": "block winding=1 but projected first-jet winding=-2 in the guard.",
+      "id": "gppm_15_completion_verdict",
+      "proof_boundary": "External phase and phase speed must be controlled quantitatively.",
+      "readiness": "proved",
+      "role": "nonpromotion guard"
+    },
+    {
+      "claim": "Use the positive long-block margin as a C1 perturbation budget.",
+      "formula": "|Theta_actual'-Theta_geometric'|<mu_M(p^(-1/2)).",
+      "id": "gppm_16_perturbation_target",
+      "proof_boundary": "The heat quadratic, d_n phases, and moving base phase must be retained.",
+      "readiness": "open",
+      "role": "Xi extension"
+    },
+    {
+      "claim": "Even monotone one-turn blocks can produce a multi-turn sum.",
+      "formula": "The existing exact two-block model sums two winding-one blocks to winding three.",
+      "id": "gppm_17_rejoin_guard",
+      "proof_boundary": "P-free blocks and the recurrent endpoint must be rejoined first.",
+      "readiness": "proved",
+      "role": "nonpromotion guard"
+    },
+    {
+      "claim": "Split future chain analysis into robust long blocks and explicit short blocks.",
+      "formula": "Prove C1 stability on the monotone families; keep short p=2,3 blocks, singleton chains, p-free phases, cutoffs, and endpoint inside the joined ray defect.",
+      "id": "gppm_18_handoff",
+      "proof_boundary": "No joined Abel gap or successor winding bound is proved.",
+      "readiness": "open",
+      "role": "route decision"
+    }
+  ],
+  "source_audit": {
+    "source_kinds": {
+      "complete_chain": "complete_prime_power_chain_occupation_gate",
+      "prime_power_heat": "jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_block_composition_guard",
+      "ray_flow": "jensen_window_pf_newman_polymath15_first_order_centered_ray_bottom_logarithmic_flow_reduction"
+    },
+    "source_sha256": {
+      "complete_chain": "1c16a5d39bd5fddfcc6f390779e1dbb771171c0daacdd0e569b853ea2a38781a",
+      "prime_power_heat": "1886a5476844ac89860436f1b0d82cbcee8f576dc5e46e9efcd29098edd4ee79",
+      "ray_flow": "76020d21c97a454a0cb112cd37f8a912e5d7371254e8e942d96d54597137f021"
+    }
+  },
+  "status": "exact_geometric_phase_monotonicity_thresholds_and_complete_short_chain_recrossing_guard",
+  "summary": {
+    "complete_short_chain_recrossing_guards": 1,
+    "exact_phase_derivative_identities": 1,
+    "nonpromotion_guards": 2,
+    "open_C1_perturbation_targets": 1,
+    "proved_joined_abel_gaps": 0,
+    "proved_successor_winding_bounds": 0,
+    "rows": 18,
+    "uniform_monotone_prime_families": 3
+  }
+}

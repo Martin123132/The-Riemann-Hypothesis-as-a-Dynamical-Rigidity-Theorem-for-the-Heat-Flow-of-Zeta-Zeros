@@ -1,0 +1,267 @@
+{
+  "constants": {
+    "L_min": 50,
+    "corrected_dyadic_ratio": "2^(-12/25)",
+    "uncorrected_dyadic_ratio": "2^(-49/100)"
+  },
+  "date": "2026-07-27",
+  "exact": {
+    "adjacent_control": "The imported exact adjacent recurrence is therefore the cutoff boundary law of the joined representation, not a separate approximation. Its real projections retain |Delta X|<1100exp(-5L/4) and |Delta A_a|<5000exp(-7L/4); no complex jump bound is invented.",
+    "centered_endpoint_jet": "Let A=log(a), u_x=A_x=1/(8*pi*a^2), P_1=H_1-AH_0, Z_0=r_0+H_0, and Z_A=r_A-s_*'P_1. Then Z_(0,x)=r_(0,x)-s_*'H_1+D_0, P_(1,x)=-s_*'(H_2-AH_1)+D_1-AD_0-u_xH_0, and Z_(A,x)=r_(A,x)-s_*''P_1-s_*'P_(1,x). These formulas include the endpoint before any absolute value or winding estimate is taken.",
+    "coefficient_chain": "Put A_t(n;s)=exp[t*log(n)^2/4-s*log(n)], c_n=(1+d_n)/(1+d_1), epsilon_n=d_(n,x)/(1+d_n), delta_n=epsilon_n-epsilon_1, and q_n=A_t(n;s_*)c_n. Then q_(n,x)/q_n=-s_*'*log(n)+delta_n.",
+    "cutoff_jump": "At N->N+1 write n=N+1=2^v*m with m odd. Exactly one odd-prefix layer, v, gains one term, so Delta H_r=(log n)^r q_n and Delta D_r=(log n)^r delta_n q_n. With j_0=kappa_N*J_a/f_1 and j_A=kappa_N*(J_(a,x)+mu_a*J_a)/f_1, Delta Z_0=q_n+j_0=Q_N/f_1 and Delta Z_A=-s_*'*log(n/a)q_n+j_A. Differentiating gives Delta Z_(0,x)=gamma_nq_n+(j_0)_x and Delta Z_(A,x)=(j_A)_x-s_*''log(n/a)q_n-s_*'[-u_xq_n+log(n/a)gamma_nq_n].",
+    "diagnostics": {
+      "corrected_layer_ratio": "2^(-12/25)",
+      "phase_frozen_root_gap_lower": "4.04444875737997256e-01",
+      "phase_frozen_root_radius_lower": "1.40444487573799726e+00",
+      "uncorrected_layer_ratio": "2^(-49/100)",
+      "valuation": {
+        "layers": 7,
+        "n_max": 96,
+        "reconstructed_terms": 96
+      }
+    },
+    "domain": "L=log(x/(4*pi))>=50, 0<=tL<=25, a^2=x/(4*pi)+t/16, N=floor(a), and x differentiation is performed inside one fixed-N cutoff chart",
+    "five_current_ladder": "The fixed-chart logarithmic moments obey H_(r,x)=-s_*'*H_(r+1)+D_r. Hence the endpoint-complete first jet closes on H_0,H_1,H_2,D_0,D_1 together with r_0,r_A and their x derivatives; no individual carrier phase or Gaussian fibre has to be discarded.",
+    "heat_shift": "For A_t(n;s)=exp[t*log(n)^2/4-s*log(n)], h=log(2), A_t(2^k*m;s)=A_t(2^k;s)*A_t(m;s-t*k*h/2).",
+    "homotopy_target": "The exact deformation from the proved base to the actual finite prefix is (xi,mu):(0,0)->(omega_*,1) in P_N, with z=z_*. A viable new theorem must exclude P_N(z_*,xi,mu)=0 along a specified path or control every boundary crossing using the D_h first and second moments. The endpoint r_0 and centered jet r_A-s_*'P_1 must then be inserted before the successor argument is counted. Crude L1 phase perturbation is not assumed to be smaller than the phase-frozen margin.",
+    "joined_correction_current": "Define E_(k,j) by replacing c_(2^k*m) in O_(k,j) with delta_(2^k*m)c_(2^k*m), and put D_r=sum_k A_t(2^k;s_*)*sum_(j=0)^r binom(r,j)(k*h)^(r-j)E_(k,j). Then D_r=sum_(n<=N)(log n)^r delta_n q_n exactly.",
+    "joined_odd_prefix": "Let h=log(2), K=floor(log_2 N), M_k=floor(N/2^k), and for j>=0 define O_(k,j)=sum_(m<=M_k,m odd)(log m)^j*A_t(m;s_*-t*k*h/2)c_(2^k*m). Then, for H_r=sum_(n<=N)(log n)^r q_n, H_r=sum_(k=0)^K A_t(2^k;s_*)*sum_(j=0)^r binom(r,j)(k*h)^(r-j)O_(k,j). This is an exact deterministic heat-shifted odd-prefix identity, not a conditional or averaged approximation.",
+    "live_q_ge_1_target": "On q=2tL^2>=1, prove an Xi-specific transport theorem from the phase-frozen base to (z_*,omega_*,1), strong enough to yield |mathsf_X|<=delta_L => |mathcal_C_N|>A_L+epsilon_term and the complete composed successor bound 0<=kappa_j<1. Candidate mechanisms include a Hermite-Biehler/de Branges exponential-polynomial criterion, a signed two-parameter Jacobian, or a Rouche/argument-principle estimate that uses the linked dyadic and odd phases rather than independent block windings.",
+    "phase_frozen_hypothetical": "Set xi=0 and mu=0 while keeping z free. Then P_fr(z)=sum_(k=0)^K B_kz^k with B_k=sum_(m<=M_k,m odd)a_(k,m)>0. For every m retained in layer k+1, the certified correction-free dyadic ratio is below 2^(-49/100), and the odd index set shrinks. Thus 0<B_(k+1)<2^(-49/100)B_k. Enestrom-Kakeya puts every zero outside |z|=2^(49/100)>1. Therefore P_fr is unit-disk zero-free with winding zero, and zP_fr has winding one. This is a proved theorem for the stipulated phase-synchronized hypothetical, not for the actual Xi odd phases.",
+    "phase_frozen_margin": "If rho_1,...,rho_K are the roots of P_fr, then |rho_j|>R_0=2^(49/100). Hence on |z|=1, |P_fr(z)|=B_K*product_j|z-rho_j|>B_K*(R_0-1)^K. This explicit margin is positive but may be too small for the full odd-phase homotopy.",
+    "phase_lift": "Write sigma_*=Re(s_*), omega_*=-Im(s_*), a_(k,m)=exp[t*log(2^k*m)^2/4-sigma_*log(2^k*m)]>0, and define P_N(z,xi,mu)=sum_(k=0)^K z^k*sum_(m<=M_k,m odd)a_(k,m)exp(i*xi*log m)*(1+mu*d_(2^k*m))/(1+mu*d_1). For z_*=exp(i*omega_*h), P_N(z_*,omega_*,1)=H_0. With D_h=h*z*partial_z-i*partial_xi, D_h^r P_N(z_*,omega_*,1)=H_r.",
+    "phase_lift_derivatives": "For D_h=h*z*partial_z-i*partial_xi, D_h[z^k*exp(i*xi*log(m))]=log(2^k*m)*z^k*exp(i*xi*log(m)); D_h^r supplies the r-th total logarithmic moment. Also partial_mu P_N is obtained termwise from partial_mu[(1+mu*d_n)/(1+mu*d_1)]=(d_n-d_1)/(1+mu*d_1)^2. The physical fixed-chart derivative is H_(0,x)=-s_*'*D_h P_N+D_0 at the actual point.",
+    "pi_provenance": "The pi in a^2=x/(4*pi)+t/16 is inherited from xi(s)=s*(s-1)*pi^(-s/2)*Gamma(s/2)*zeta(s)/2 and the Riemann-Siegel saddle. The cutoff-cell difference is 4*pi*(2N+1), while 2*pi is the period of exp(i*theta). The dyadic base 2, odd prefixes, phase lift, and phase-synchronized hypothetical do not define pi.",
+    "projected_flux": "For eta_x=i*omega_eta*eta and Pi_eta(w)=Re(eta*w), mathsf_X=Pi_eta(Z_0), mathsf_A=Pi_eta(Z_A), mathsf_X_x=Pi_eta(Z_(0,x))-omega_eta*Im(eta*Z_0), and mathsf_A_x=Pi_eta(Z_(A,x))-omega_eta*Im(eta*Z_A). For ell>0, Gamma_ell=mathsf_X+i*mathsf_A/ell and partial_x arg Gamma_ell=[mathsf_X*partial_x(mathsf_A/ell)-(mathsf_A/ell)*mathsf_X_x]/[mathsf_X^2+(mathsf_A/ell)^2].",
+    "proof_boundary": "The heat-shift factorization, joined odd-prefix moments, five-current derivative closure, phase lift, cutoff jump, endpoint first jet, phase-frozen zero-free theorem and margin, and two generic route guards are exact or imported from certified prerequisites. The actual odd-phase/correction homotopy, joined Xi lower bound, strict successor flux upper bound, q<1 chart, finite shoulders and connectors, contact exclusion, Lambda<=0, PF-infinity, RH, and a Clay-prize conclusion remain open.",
+    "q_lt_1_target": "The q=2tL^2<1 layer remains a separate multiplicity-compatible parabolic/Hermite first-jet chart. The joined dyadic identities remain valid there, but no uniform endpoint simplicity or positive slope is inferred.",
+    "route_decision": "Retain the dyadic heat-shift, five-current closure, and phase-lift homotopy. Retire any route that proves winding one separately for Gaussian fibres and then averages, or that estimates the first-jet flux from H_0,H_1 while deleting H_2. The next arithmetic target is a linked-curve boundary-zero or signed-current theorem for P_N with the actual odd Mellin phases, followed by the exact endpoint augmentation and adjacent recurrence.",
+    "second_moment_guard": {
+      "interpretation": "For unrestricted joined coefficients, value and first logarithmic moment do not determine the second moment entering the first-jet derivative. Xi-specific structure must control H_2 rather than delete it.",
+      "moments": "H_0=0, H_1=0, H_2=2h^2",
+      "support": "logarithmic nodes 0,h,2h",
+      "weights": "1,-2,1"
+    },
+    "two_fibre_guard": {
+      "equal_weight_mean": "(A+B)/2",
+      "fibre_windings": "wind(A)=wind(B)=1 on |z|=1",
+      "first_fibre": "A(z)=z*(1+r*z+r^2*z^2)",
+      "interpretation": "Averaging boundary-nonzero winding-one fibres can produce winding three. A per-Gaussian-fibre theorem cannot be averaged without additional Gaussian/Xi structure.",
+      "mean_inner_discriminant": "-19/2",
+      "mean_inner_root_modulus": "sqrt(2/5)<1",
+      "mean_winding": 3,
+      "second_fibre": "B(z)=-(4/5)*z*(1+r*z)"
+    }
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_joined_dyadic_odd_prefix_first_jet_reduction",
+  "proof_boundary": "The heat-shift factorization, joined odd-prefix moments, five-current derivative closure, phase lift, cutoff jump, endpoint first jet, phase-frozen zero-free theorem and margin, and two generic route guards are exact or imported from certified prerequisites. The actual odd-phase/correction homotopy, joined Xi lower bound, strict successor flux upper bound, q<1 chart, finite shoulders and connectors, contact exclusion, Lambda<=0, PF-infinity, RH, and a Clay-prize conclusion remain open.",
+  "rows": [
+    {
+      "claim": "Every pi in the joined reduction has an explicit completed-zeta, saddle, or phase-period source.",
+      "diagnostics": null,
+      "formula": "The pi in a^2=x/(4*pi)+t/16 is inherited from xi(s)=s*(s-1)*pi^(-s/2)*Gamma(s/2)*zeta(s)/2 and the Riemann-Siegel saddle. The cutoff-cell difference is 4*pi*(2N+1), while 2*pi is the period of exp(i*theta). The dyadic base 2, odd prefixes, phase lift, and phase-synchronized hypothetical do not define pi.",
+      "id": "jdopfj_00_pi_provenance",
+      "proof_boundary": "The dyadic and odd-prefix constructions do not define pi.",
+      "readiness": "certified",
+      "role": "definition_provenance"
+    },
+    {
+      "claim": "The corrected normalized coefficient and its x-current are fixed before reindexing.",
+      "diagnostics": null,
+      "formula": "Put A_t(n;s)=exp[t*log(n)^2/4-s*log(n)], c_n=(1+d_n)/(1+d_1), epsilon_n=d_(n,x)/(1+d_n), delta_n=epsilon_n-epsilon_1, and q_n=A_t(n;s_*)c_n. Then q_(n,x)/q_n=-s_*'*log(n)+delta_n.",
+      "id": "jdopfj_01_coefficient_chain",
+      "proof_boundary": "No d_n correction is dropped.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "Each dyadic layer is a deterministic heat-shifted odd prefix.",
+      "diagnostics": null,
+      "formula": "For A_t(n;s)=exp[t*log(n)^2/4-s*log(n)], h=log(2), A_t(2^k*m;s)=A_t(2^k;s)*A_t(m;s-t*k*h/2).",
+      "id": "jdopfj_02_heat_shift",
+      "proof_boundary": "This is not a probabilistic approximation.",
+      "readiness": "ready_to_apply",
+      "role": "exact_factorization"
+    },
+    {
+      "claim": "All coefficient moments rejoin through nested odd-prefix layers.",
+      "diagnostics": {
+        "corrected_layer_ratio": "2^(-12/25)",
+        "phase_frozen_root_gap_lower": "4.04444875737997256e-01",
+        "phase_frozen_root_radius_lower": "1.40444487573799726e+00",
+        "uncorrected_layer_ratio": "2^(-49/100)",
+        "valuation": {
+          "layers": 7,
+          "n_max": 96,
+          "reconstructed_terms": 96
+        }
+      },
+      "formula": "Let h=log(2), K=floor(log_2 N), M_k=floor(N/2^k), and for j>=0 define O_(k,j)=sum_(m<=M_k,m odd)(log m)^j*A_t(m;s_*-t*k*h/2)c_(2^k*m). Then, for H_r=sum_(n<=N)(log n)^r q_n, H_r=sum_(k=0)^K A_t(2^k;s_*)*sum_(j=0)^r binom(r,j)(k*h)^(r-j)O_(k,j). This is an exact deterministic heat-shifted odd-prefix identity, not a conditional or averaged approximation.",
+      "id": "jdopfj_03_joined_odd_prefix",
+      "proof_boundary": "The odd prefixes remain complex at the physical phase.",
+      "readiness": "ready_to_apply",
+      "role": "exact_reindexing"
+    },
+    {
+      "claim": "The complete d_n logarithmic derivative has the same joined odd-prefix form.",
+      "diagnostics": null,
+      "formula": "Define E_(k,j) by replacing c_(2^k*m) in O_(k,j) with delta_(2^k*m)c_(2^k*m), and put D_r=sum_k A_t(2^k;s_*)*sum_(j=0)^r binom(r,j)(k*h)^(r-j)E_(k,j). Then D_r=sum_(n<=N)(log n)^r delta_n q_n exactly.",
+      "id": "jdopfj_04_correction_current",
+      "proof_boundary": "Correction currents are retained in D_0 and D_1.",
+      "readiness": "ready_to_apply",
+      "role": "exact_reindexing"
+    },
+    {
+      "claim": "The physical prefix is one linked point of a polynomial-Mellin phase lift.",
+      "diagnostics": null,
+      "formula": "Write sigma_*=Re(s_*), omega_*=-Im(s_*), a_(k,m)=exp[t*log(2^k*m)^2/4-sigma_*log(2^k*m)]>0, and define P_N(z,xi,mu)=sum_(k=0)^K z^k*sum_(m<=M_k,m odd)a_(k,m)exp(i*xi*log m)*(1+mu*d_(2^k*m))/(1+mu*d_1). For z_*=exp(i*omega_*h), P_N(z_*,omega_*,1)=H_0. With D_h=h*z*partial_z-i*partial_xi, D_h^r P_N(z_*,omega_*,1)=H_r. For D_h=h*z*partial_z-i*partial_xi, D_h[z^k*exp(i*xi*log(m))]=log(2^k*m)*z^k*exp(i*xi*log(m)); D_h^r supplies the r-th total logarithmic moment. Also partial_mu P_N is obtained termwise from partial_mu[(1+mu*d_n)/(1+mu*d_1)]=(d_n-d_1)/(1+mu*d_1)^2. The physical fixed-chart derivative is H_(0,x)=-s_*'*D_h P_N+D_0 at the actual point.",
+      "id": "jdopfj_05_phase_lift",
+      "proof_boundary": "The xi variable is a Mellin phase, not an independent Xi zero coordinate.",
+      "readiness": "ready_to_apply",
+      "role": "exact_phase_lift"
+    },
+    {
+      "claim": "The joined value and first jet close on five finite currents plus endpoint data.",
+      "diagnostics": null,
+      "formula": "The fixed-chart logarithmic moments obey H_(r,x)=-s_*'*H_(r+1)+D_r. Hence the endpoint-complete first jet closes on H_0,H_1,H_2,D_0,D_1 together with r_0,r_A and their x derivatives; no individual carrier phase or Gaussian fibre has to be discarded.",
+      "id": "jdopfj_06_five_current_closure",
+      "proof_boundary": "H_2, D_0, and D_1 may not be deleted.",
+      "readiness": "ready_to_apply",
+      "role": "exact_differential_reduction"
+    },
+    {
+      "claim": "The centered endpoint-complete first jet is explicit in the five currents.",
+      "diagnostics": null,
+      "formula": "Let A=log(a), u_x=A_x=1/(8*pi*a^2), P_1=H_1-AH_0, Z_0=r_0+H_0, and Z_A=r_A-s_*'P_1. Then Z_(0,x)=r_(0,x)-s_*'H_1+D_0, P_(1,x)=-s_*'(H_2-AH_1)+D_1-AD_0-u_xH_0, and Z_(A,x)=r_(A,x)-s_*''P_1-s_*'P_(1,x). These formulas include the endpoint before any absolute value or winding estimate is taken. For eta_x=i*omega_eta*eta and Pi_eta(w)=Re(eta*w), mathsf_X=Pi_eta(Z_0), mathsf_A=Pi_eta(Z_A), mathsf_X_x=Pi_eta(Z_(0,x))-omega_eta*Im(eta*Z_0), and mathsf_A_x=Pi_eta(Z_(A,x))-omega_eta*Im(eta*Z_A). For ell>0, Gamma_ell=mathsf_X+i*mathsf_A/ell and partial_x arg Gamma_ell=[mathsf_X*partial_x(mathsf_A/ell)-(mathsf_A/ell)*mathsf_X_x]/[mathsf_X^2+(mathsf_A/ell)^2].",
+      "id": "jdopfj_07_endpoint_jet",
+      "proof_boundary": "The formula is division-free on Z_0=0.",
+      "readiness": "ready_to_apply",
+      "role": "exact_endpoint_reduction"
+    },
+    {
+      "claim": "A cutoff change enters exactly one valuation layer and the recurrent endpoint simultaneously.",
+      "diagnostics": null,
+      "formula": "At N->N+1 write n=N+1=2^v*m with m odd. Exactly one odd-prefix layer, v, gains one term, so Delta H_r=(log n)^r q_n and Delta D_r=(log n)^r delta_n q_n. With j_0=kappa_N*J_a/f_1 and j_A=kappa_N*(J_(a,x)+mu_a*J_a)/f_1, Delta Z_0=q_n+j_0=Q_N/f_1 and Delta Z_A=-s_*'*log(n/a)q_n+j_A. Differentiating gives Delta Z_(0,x)=gamma_nq_n+(j_0)_x and Delta Z_(A,x)=(j_A)_x-s_*''log(n/a)q_n-s_*'[-u_xq_n+log(n/a)gamma_nq_n]. The imported exact adjacent recurrence is therefore the cutoff boundary law of the joined representation, not a separate approximation. Its real projections retain |Delta X|<1100exp(-5L/4) and |Delta A_a|<5000exp(-7L/4); no complex jump bound is invented.",
+      "id": "jdopfj_08_cutoff_jump",
+      "proof_boundary": "No complex adjacent-jump estimate is asserted.",
+      "readiness": "ready_to_apply",
+      "role": "exact_chart_transition"
+    },
+    {
+      "claim": "The stipulated phase-synchronized joined model is unit-disk zero-free.",
+      "diagnostics": null,
+      "formula": "Set xi=0 and mu=0 while keeping z free. Then P_fr(z)=sum_(k=0)^K B_kz^k with B_k=sum_(m<=M_k,m odd)a_(k,m)>0. For every m retained in layer k+1, the certified correction-free dyadic ratio is below 2^(-49/100), and the odd index set shrinks. Thus 0<B_(k+1)<2^(-49/100)B_k. Enestrom-Kakeya puts every zero outside |z|=2^(49/100)>1. Therefore P_fr is unit-disk zero-free with winding zero, and zP_fr has winding one. This is a proved theorem for the stipulated phase-synchronized hypothetical, not for the actual Xi odd phases.",
+      "id": "jdopfj_09_phase_frozen_theorem",
+      "proof_boundary": "This hypothetical is a homotopy base, not the physical odd-phase theorem.",
+      "readiness": "certified",
+      "role": "hypothetical_exact_theorem"
+    },
+    {
+      "claim": "The phase-frozen theorem has an explicit boundary-modulus margin.",
+      "diagnostics": {
+        "corrected_layer_ratio": "2^(-12/25)",
+        "phase_frozen_root_gap_lower": "4.04444875737997256e-01",
+        "phase_frozen_root_radius_lower": "1.40444487573799726e+00",
+        "uncorrected_layer_ratio": "2^(-49/100)",
+        "valuation": {
+          "layers": 7,
+          "n_max": 96,
+          "reconstructed_terms": 96
+        }
+      },
+      "formula": "If rho_1,...,rho_K are the roots of P_fr, then |rho_j|>R_0=2^(49/100). Hence on |z|=1, |P_fr(z)|=B_K*product_j|z-rho_j|>B_K*(R_0-1)^K. This explicit margin is positive but may be too small for the full odd-phase homotopy.",
+      "id": "jdopfj_10_phase_frozen_margin",
+      "proof_boundary": "No claim is made that crude odd-phase perturbation fits inside this margin.",
+      "readiness": "certified",
+      "role": "exact_quantitative_corollary"
+    },
+    {
+      "claim": "The physical arithmetic problem is a linked odd-phase and correction homotopy with endpoint augmentation.",
+      "diagnostics": null,
+      "formula": "The exact deformation from the proved base to the actual finite prefix is (xi,mu):(0,0)->(omega_*,1) in P_N, with z=z_*. A viable new theorem must exclude P_N(z_*,xi,mu)=0 along a specified path or control every boundary crossing using the D_h first and second moments. The endpoint r_0 and centered jet r_A-s_*'P_1 must then be inserted before the successor argument is counted. Crude L1 phase perturbation is not assumed to be smaller than the phase-frozen margin.",
+      "id": "jdopfj_11_homotopy_target",
+      "proof_boundary": "Boundary-zero exclusion along this homotopy is open.",
+      "readiness": "not_ready_to_apply",
+      "role": "new_theorem_target"
+    },
+    {
+      "claim": "Winding-one fibres cannot be averaged into a winding-one conclusion.",
+      "diagnostics": {
+        "equal_weight_mean": "(A+B)/2",
+        "fibre_windings": "wind(A)=wind(B)=1 on |z|=1",
+        "first_fibre": "A(z)=z*(1+r*z+r^2*z^2)",
+        "interpretation": "Averaging boundary-nonzero winding-one fibres can produce winding three. A per-Gaussian-fibre theorem cannot be averaged without additional Gaussian/Xi structure.",
+        "mean_inner_discriminant": "-19/2",
+        "mean_inner_root_modulus": "sqrt(2/5)<1",
+        "mean_winding": 3,
+        "second_fibre": "B(z)=-(4/5)*z*(1+r*z)"
+      },
+      "formula": "{\"equal_weight_mean\": \"(A+B)/2\", \"fibre_windings\": \"wind(A)=wind(B)=1 on |z|=1\", \"first_fibre\": \"A(z)=z*(1+r*z+r^2*z^2)\", \"interpretation\": \"Averaging boundary-nonzero winding-one fibres can produce winding three. A per-Gaussian-fibre theorem cannot be averaged without additional Gaussian/Xi structure.\", \"mean_inner_discriminant\": \"-19/2\", \"mean_inner_root_modulus\": \"sqrt(2/5)<1\", \"mean_winding\": 3, \"second_fibre\": \"B(z)=-(4/5)*z*(1+r*z)\"}",
+      "id": "jdopfj_12_averaging_guard",
+      "proof_boundary": "This is a generic exact guard, not Xi phase data.",
+      "readiness": "guard_validated",
+      "role": "countermodel"
+    },
+    {
+      "claim": "Value and first logarithmic moment do not determine the second moment.",
+      "diagnostics": {
+        "interpretation": "For unrestricted joined coefficients, value and first logarithmic moment do not determine the second moment entering the first-jet derivative. Xi-specific structure must control H_2 rather than delete it.",
+        "moments": "H_0=0, H_1=0, H_2=2h^2",
+        "support": "logarithmic nodes 0,h,2h",
+        "weights": "1,-2,1"
+      },
+      "formula": "{\"interpretation\": \"For unrestricted joined coefficients, value and first logarithmic moment do not determine the second moment entering the first-jet derivative. Xi-specific structure must control H_2 rather than delete it.\", \"moments\": \"H_0=0, H_1=0, H_2=2h^2\", \"support\": \"logarithmic nodes 0,h,2h\", \"weights\": \"1,-2,1\"}",
+      "id": "jdopfj_13_second_moment_guard",
+      "proof_boundary": "Xi-specific coefficient constraints may add information, but it must be proved.",
+      "readiness": "guard_validated",
+      "role": "countermodel"
+    },
+    {
+      "claim": "The next route is a linked phase-lift transport theorem, not independent block winding.",
+      "diagnostics": null,
+      "formula": "Retain the dyadic heat-shift, five-current closure, and phase-lift homotopy. Retire any route that proves winding one separately for Gaussian fibres and then averages, or that estimates the first-jet flux from H_0,H_1 while deleting H_2. The next arithmetic target is a linked-curve boundary-zero or signed-current theorem for P_N with the actual odd Mellin phases, followed by the exact endpoint augmentation and adjacent recurrence.",
+      "id": "jdopfj_14_route_decision",
+      "proof_boundary": "The endpoint and second moment remain joined.",
+      "readiness": "guard_validated",
+      "role": "route_decision"
+    },
+    {
+      "claim": "The q>=1 Xi obligation is now a precise phase-lift transport and endpoint flux theorem.",
+      "diagnostics": null,
+      "formula": "On q=2tL^2>=1, prove an Xi-specific transport theorem from the phase-frozen base to (z_*,omega_*,1), strong enough to yield |mathsf_X|<=delta_L => |mathcal_C_N|>A_L+epsilon_term and the complete composed successor bound 0<=kappa_j<1. Candidate mechanisms include a Hermite-Biehler/de Branges exponential-polynomial criterion, a signed two-parameter Jacobian, or a Rouche/argument-principle estimate that uses the linked dyadic and odd phases rather than independent block windings.",
+      "id": "jdopfj_15_q_ge_1_target",
+      "proof_boundary": "No Xi lower bound or strict successor upper bound is yet proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    },
+    {
+      "claim": "The q<1 multiplicity-compatible chart and every global proof stage remain open.",
+      "diagnostics": null,
+      "formula": "The q=2tL^2<1 layer remains a separate multiplicity-compatible parabolic/Hermite first-jet chart. The joined dyadic identities remain valid there, but no uniform endpoint simplicity or positive slope is inferred. The heat-shift factorization, joined odd-prefix moments, five-current derivative closure, phase lift, cutoff jump, endpoint first jet, phase-frozen zero-free theorem and margin, and two generic route guards are exact or imported from certified prerequisites. The actual odd-phase/correction homotopy, joined Xi lower bound, strict successor flux upper bound, q<1 chart, finite shoulders and connectors, contact exclusion, Lambda<=0, PF-infinity, RH, and a Clay-prize conclusion remain open.",
+      "id": "jdopfj_16_q_lt_1_nonpromotion",
+      "proof_boundary": "No Lambda<=0, PF-infinity, RH, or Clay-prize conclusion is asserted.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    }
+  ],
+  "source_audit": {
+    "adjacent_chart": "jensen_window_pf_newman_polymath15_first_order_centered_adjacent_chart_stability_certificate",
+    "adjacent_recurrence": "jensen_window_pf_newman_polymath15_first_order_centered_adjacent_saddle_recurrence",
+    "normalized_prefix": "jensen_window_pf_newman_polymath15_first_order_centered_normalized_prefix_phase_flux_reduction",
+    "prime_power_guard": "jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_block_composition_guard"
+  },
+  "source_sha256": {
+    "adjacent_chart": "dcee581f283d63141e29d1085ee463c2eabc714a6e6760b15f12262474f83a83",
+    "adjacent_recurrence": "ffab5ce74899f670a7e1e3cba0bcbd1734989134f2c0f0d972351f110af3d45f",
+    "normalized_prefix": "75982d22a245d4b9ab6dff57818a49e9936bd1afd1e58318216c41be49291706",
+    "prime_power_guard": "1886a5476844ac89860436f1b0d82cbcee8f576dc5e46e9efcd29098edd4ee79"
+  },
+  "sources": {
+    "adjacent_chart": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_adjacent_chart_stability_certificate.json",
+    "adjacent_recurrence": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_adjacent_saddle_recurrence.json",
+    "normalized_prefix": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_normalized_prefix_phase_flux_reduction.json",
+    "prime_power_guard": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_block_composition_guard.json"
+  },
+  "status": "exact joined dyadic odd-prefix heat-shift and five-current first-jet reduction with an endpoint-complete cutoff law, a proved phase-synchronized zero-free homotopy base, and two exact route guards; the physical Xi phase transport and successor theorem remain open"
+}

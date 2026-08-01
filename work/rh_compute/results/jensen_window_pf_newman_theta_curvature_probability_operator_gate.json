@@ -1,0 +1,343 @@
+{
+  "kind": "jensen_window_pf_newman_theta_curvature_probability_operator_gate",
+  "date": "2026-07-24",
+  "status": "exact theta-curvature probability/operator and dominant-component reduction with an explicit C1 tail-disjunction target and a generic double-contact guard and one open Xi transversality handoff",
+  "proof_boundary": "The artifact proves strict positivity of the theta-primitive transform C_t and an exact probability-characteristic reduction. It does not prove strict positivity of the first correlation transform, positive-time simplicity, Lambda<=0, or RH.",
+  "exact": {
+    "theta_primitive": {
+      "definition": "R(u)=sum_(n>=1) exp(u-pi*n^2*exp(4u)), u>=0",
+      "differential_identity": "R''(u)-R(u)=8*Phi(u)",
+      "modular_endpoint": "R'(0)=-1/2",
+      "newman_primitive": "S_t(u)=exp(t*u^2)*R(u), 0<=t<=1/5",
+      "summand": "s_(n,t)(u)=exp(t*u^2+u-pi*n^2*exp(4u))"
+    },
+    "monotone_convex_proof": {
+      "variables": "y=4*pi*n^2*exp(4u), y>=4*pi>12",
+      "log_derivative": "s_(n,t)'/s_(n,t)=1+2*t*u-y",
+      "second_derivative": "s_(n,t)''/s_(n,t)=(y-1-2*t*u)^2+2*t-4*y",
+      "elementary_bound": "1+2*t*u<=1+(2/5)u<=y/12, hence y-1-2*t*u>=11*y/12",
+      "strict_margin": "s_(n,t)''/s_(n,t)>=(121/144)*y^2-4*y=y*((121/144)*y-4)>0",
+      "conclusion": "Every s_(n,t), and therefore S_t, is positive, strictly decreasing, and strictly convex on u>=0."
+    },
+    "probability_law": {
+      "definition": "dmu_t(v)=2*S_t''(v)dv on [0,infinity)",
+      "mass": "mu_t([0,infinity))=2*(S_t'(infinity)-S_t'(0))=1",
+      "triangular_mixture": "S_t(u)=(1/2)*integral_[0,infinity)(v-u)_+ dmu_t(v)",
+      "density_at_endpoint": "S_t'(0)=R'(0)=-1/2 and S_t'(infinity)=0"
+    },
+    "fixed_theta_mixture": {
+      "component_measure": "dmu_(n,t)(v)=2*s_(n,t)''(v)dv",
+      "component_mass": "w_n=mu_(n,t)([0,infinity))=2*(4*pi*n^2-1)*exp(-pi*n^2)",
+      "time_independence": "The weights w_n are independent of t and sum_n w_n=1.",
+      "normalized_components": "dnu_(n,t)=dmu_(n,t)/w_n, A_t(x)=sum_(n>=1)w_n*a_(n,t)(x)",
+      "dominant_weight": "sum_(n>=2)w_n<1/2800, hence w_1>2799/2800",
+      "exact_first_weight": "w_1=2*(4*pi-1)*exp(-pi)=0.99965638867482904249949954238374",
+      "proof_certificate": "Using 333/106<pi<22/7, the 40-term exponential Taylor lower sum proves 32*pi*exp(-4*pi)<1/2801. For a_n=n^2*exp(-pi*n^2), a_(n+1)/a_n<10^-6 on n>=2; the resulting geometric sum is below 1/2800."
+    },
+    "dominant_component_c2_budget": {
+      "component_first_moment": "integral v*dmu_(n,t)=2*exp(-pi*n^2)",
+      "component_second_moment": "integral v^2*dmu_(n,t)=4*integral_0^infinity s_(n,t)(v)dv",
+      "component_third_moment": "integral v^3*dmu_(n,t)=12*integral_0^infinity v*s_(n,t)(v)dv",
+      "uniform_summand_bound": "s_(n,t)(v)<=exp(-pi*n^2)*exp(-(4*pi*n^2-1)*v)",
+      "tail_c0": "|A_t-w_1*a_(1,t)|<1/2800",
+      "tail_c1": "|A_t'-w_1*a_(1,t)'|<1/137200",
+      "tail_c2": "|A_t''-w_1*a_(1,t)''|<1/3361400",
+      "tail_c3": "|A_t'''-w_1*a_(1,t)'''|<1/54900000",
+      "modular_odd_jets": "R^((2k+1))(0)=R'(0)=-1/2 for every k>=0",
+      "first_component_fifth_jet": "s_(1,0)^(5)(0)=exp(-pi)*(-1024*pi^5+11520*pi^4-33920*pi^3+26400*pi^2-3124*pi+1)>300",
+      "tiny_mass_large_jet": "sum_(n>=2)s_(n,0)^(5)(0)=-1/2-s_(1,0)^(5)(0)<-601/2",
+      "scope": "The C0-C2 bounds form the dominant-block budget; the C3 bound supplies the derivative error below. Polynomial coefficients in J_t grow with x, and the tiny-mass tail cancels large first-block endpoint jets. A global proof therefore requires modularly coupled oscillatory decay rather than this compact-frequency budget alone."
+    },
+    "positive_transform": {
+      "definition": "C_t(x)=integral_0^infinity S_t(u)*cos(x*u)du",
+      "characteristic_function": "A_t(x)=integral_[0,infinity)cos(x*v)dmu_t(v)",
+      "triangular_transform": "C_t(x)=(1/(2*x^2))*integral(1-cos(x*v))dmu_t(v)=(1-A_t(x))/(2*x^2), x!=0",
+      "strict_positivity": "C_t(x)>0 for every real x; for x!=0, 0<x^2*C_t(x)<1",
+      "scope": "This is a strict Fourier-positivity theorem for the theta primitive S_t, not for the first correlation K_(1,t)."
+    },
+    "operator_factorization": {
+      "operator": "D_t=-4*t^2*d_x^2+4*t*x*d_x+(2*t-1-x^2)",
+      "first_order": "Q_t=2*t*d_x-x",
+      "factorization": "D_t=-(Q_t^2+1)",
+      "heat_transform": "H_t(x)=1/16+D_t[C_t](x)/8=(1-2*(Q_t^2+1)C_t(x))/16",
+      "positive_normalizer": "G_t(x)=8*H_t(x)/C_t(x) is globally real analytic because C_t(x)>0 on R."
+    },
+    "normalizer_evolution": {
+      "heat_equations": "partial_t H_t=-partial_x^2 H_t and partial_t C_t=-partial_x^2 C_t",
+      "ratio": "G_t=8*H_t/C_t",
+      "backward_pde": "partial_t G_t=-partial_x^2 G_t-2*(partial_x log C_t)*partial_x G_t=-C_t^(-2)*partial_x(C_t^2*partial_x G_t)",
+      "reverse_time": "For tau=T-t, partial_tau G=C^(-2)*partial_x(C^2*partial_x G).",
+      "instantaneous_operator": "A_t f=-C_t^(-2)*partial_x(C_t^2*partial_x f) is nonnegative in L2(C_t^2 dx): <f,A_t f>_(C_t^2)=integral C_t^2*(f')^2 dx.",
+      "nodal_interpretation": "A common zero G_t(c)=partial_x G_t(c)=0 is a multiple node at which the reverse-time Sturm zero number may drop."
+    },
+    "sturm_nodal_guard": {
+      "model": "C_t(x)=1, H_t(x)=(x^2+a-2t)/8, G_t(x)=x^2+a-2t",
+      "heat_identity": "partial_t H_t=-partial_x^2 H_t and partial_t G_t=-partial_x^2 G_t",
+      "nodal_transition": "At t_*=a/2, G has a double zero at 0; for t>t_* it has two simple real zeros, while for t<t_* it has none.",
+      "reverse_time_consequence": "Under tau=T-t, the positive heat semigroup loses two real nodes at the multiple zero. This is allowed by the Sturm zero-number theorem.",
+      "scope": "A positive denominator, divergence form, nonnegative instantaneous operator, and zero-number monotonicity do not exclude contact. A completion needs an Xi-specific conserved nodal count, boundary flux, or quantitative transversality."
+    },
+    "normalizer_weight_asymptotic": {
+      "endpoint_jets": "S_t'(0)=-1/2 and S_t'''(0)=R'''(0)+6*t*R'(0)=-1/2-3*t",
+      "cosine_expansion": "C_t(x)=1/(2*x^2)-(1/2+3*t)/x^4+O_t(x^-6)",
+      "uniformity": "The O(x^-6) remainder is uniform for 0<=t<=1/5 because the required S_t derivatives have uniform L1 tails.",
+      "log_curvature": "(log C_t)''=2/x^2-6*(1+6*t)/x^4+O(x^-6)>0 for all sufficiently large x, uniformly on 0<=t<=1/5.",
+      "doob_drift": "2*(log C_t)'=-4/x+4*(1+6*t)/x^3+O(x^-5)",
+      "scope": "The positive normalizer weight is eventually log-convex, not log-concave. Therefore a global contracting-drift, Bakry-Emery positive-curvature, or weight-log-concavity argument cannot close the contact problem."
+    },
+    "characteristic_transfer": {
+      "definition": "J_t(x)=16*x^4*H_t(x)",
+      "formula": "J_t=4*t^2*x^2*A_t''-4*t*x*(x^2+4*t)*A_t'+(x^4+(6*t+1)*x^2+24*t^2)*A_t-((6*t+1)*x^2+24*t^2)",
+      "expectation_form": "J_t=E_mu[((x^4+(6t+1)x^2+24t^2)-4t^2x^2V^2)*cos(xV)+4tx(x^2+4t)V*sin(xV)]-((6t+1)x^2+24t^2)",
+      "contact_reduction": "Because H_t(0)>0, a boundary multiple zero c is nonzero; H_t(c)=H_t'(c)=0 iff J_t(c)=J_t'(c)=0."
+    },
+    "componentwise_contact": {
+      "definitions": "A_(n,t)(x)=integral cos(xv)dmu_(n,t)(v), C_(n,t)=(w_n-A_(n,t))/(2*x^2), H_(n,t)=w_n/16+D_t[C_(n,t)]/8",
+      "additivity": "J_t=sum_(n>=1)J_(n,t), J_(n,t)=16*x^4*H_(n,t)",
+      "polynomials": "P_t=x^4+(6*t+1)*x^2+24*t^2, R_t=(6*t+1)*x^2+24*t^2",
+      "component_formula": "J_(n,t)=4*t^2*x^2*A_(n,t)''-4*t*x*(x^2+4*t)*A_(n,t)'+P_t*A_(n,t)-R_t*w_n",
+      "component_derivative": "J_(n,t)'=4*t^2*x^2*A_(n,t)'''-4*t*x*(x^2+2*t)*A_(n,t)''+(P_t-4*t*(3*x^2+4*t))*A_(n,t)'+(4*x^3+2*(6*t+1)*x)*A_(n,t)-2*(6*t+1)*x*w_n",
+      "endpoint_first_primitive": "C_(1,0)(x)=Re[(1/4)*pi^(-(1+i*x)/4)*Gamma((1+i*x)/4,pi)]"
+    },
+    "dominant_block_disjunction": {
+      "tail_constants": "delta_0=1/2800, delta_1=1/137200, delta_2=1/3361400, delta_3=1/54900000",
+      "tail_value_bound": "B_0(t,x)=4*t^2*x^2*delta_2+4*t*x*(x^2+4*t)*delta_1+(x^4+2*((6*t+1)*x^2+24*t^2))*delta_0",
+      "tail_derivative_bound": "B_1(t,x)=4*t^2*x^2*delta_3+4*t*x*(x^2+2*t)*delta_2+|P_t-4*t*(3*x^2+4*t)|*delta_1+(4*x^3+4*(6*t+1)*x)*delta_0",
+      "bounds": "|J_t-J_(1,t)|<B_0(t,x) and |J_t'-J_(1,t)'|<B_1(t,x), x>0",
+      "pointwise_exclusion": "At any 0<t<=1/5 and x>0, if |J_(1,t)(x)|>B_0(t,x) or |J_(1,t)'(x)|>B_1(t,x), then (J_t(x),J_t'(x))!=(0,0).",
+      "global_corollary": "If the pointwise disjunction holds for every 0<t<=1/5 and x>0, then the boundary-contact criterion gives Lambda<=0.",
+      "scope": "The displayed disjunction is a proved pointwise exclusion test, not an established global inequality. Since its raw moment bars contain delta_0*x^4 and 4*delta_0*x^3 terms, a completion needs a compact-frequency certificate plus a separate high-frequency estimate that retains modular endpoint cancellation."
+    },
+    "endpoint_laplace_comparison": {
+      "formula": "16*x^2*H_0(x)=(1+x^2)*A_0(x)-1",
+      "reference": "1/(1+x^2) is the cosine characteristic function of the unit exponential law on [0,infinity).",
+      "double_contact": "H_0(c)=H_0'(c)=0 iff A_0(c)=1/(1+c^2) and A_0'(c)=-2*c/(1+c^2)^2."
+    },
+    "laguerre_product": {
+      "normalization": "H_t=(C_t/8)*G_t",
+      "identity": "L[H_t]=(C_t^2/64)*L[G_t]+(G_t^2/64)*L[C_t]",
+      "zero_value": "At G_t(c)=0, L[H_t](c)=C_t(c)^2*G_t'(c)^2/64."
+    },
+    "generic_guard": {
+      "kernel": "f=(1-|.|)_+ * exp(-(.^2)/8), a smooth positive even Gaussian-tail kernel",
+      "fourier_transform": "8*sqrt(2)*sqrt(pi)*exp(-2*xi**2)*sin(xi/2)**2/xi**2",
+      "double_zero": "Fourier[f](2*pi)=Fourier[f]'(2*pi)=0",
+      "neumann_lift": "g(u)=-4*integral_0^infinity (exp(-|u-v|)+exp(-(u+v)))*f(v)dv",
+      "lift_identities": "g''-g=8*f, g'(0)=0, g<0",
+      "perturbation": "R_epsilon(u)=exp(-u)/2+epsilon*g(u). For sufficiently small epsilon>0, R_epsilon is positive and decreasing, R_epsilon''=R_epsilon+8*epsilon*f>0, and R_epsilon'(0)=-1/2.",
+      "consequence": "Its curvature law 2*R_epsilon''du is a probability and its primitive transform is strictly positive, while the associated H_epsilon=epsilon*integral_0^infinity f(u)cos(xu)du has a multiple real zero at 2*pi.",
+      "scope": "Theta-curvature probability, primitive Fourier positivity, and the positive normalizer do not alone exclude contact. The remaining estimate must use the arithmetic density mu_t or the full characteristic differential expression J_t."
+    },
+    "open_handoff": "Prove uniformly for 0<t<=1/5 that the Xi theta-curvature characteristic expression J_t has no common real zero with J_t'. Equivalently, use the explicit positive probability density dmu_t=2*d_u^2[exp(tu^2)R(u)]du to obtain a quantitative C1 separation for the displayed oscillatory expectation. The generic Neumann-lift guard forbids promotion from probability positivity, convexity, or C_t>0 alone. Any successful estimate must preserve the theta arithmetic and remain uniform as t tends to zero. The separate compact-transversality certificate now proves the displayed first-block disjunction on 1/4<=x<=38 and combines it with an exact origin collar. The live obligation is therefore x>38, where the raw B_0/B_1 bars must be abandoned in favor of the corrected Riemann-Siegel phase-aware partition.",
+    "checks": {
+      "oscillator_residual": "0",
+      "characteristic_transfer_residual": "0",
+      "component_transfer_residual": "0",
+      "component_derivative_residual": "0",
+      "ratio_pde_residual": "0",
+      "ratio_divergence_residual": "0",
+      "sturm_guard_heat_residual": "0",
+      "sturm_guard_ratio_residual": "0",
+      "primitive_third_modular": "-3*t - 1/2",
+      "log_curvature_asymptotic_coefficient": "-36*t - 6",
+      "third_moment_tail_check": "True",
+      "endpoint_transfer": "x**2*(x**2*A(x) + A(x) - 1)",
+      "product_laguerre_residual": "0",
+      "convex_floor_at_y12": "73",
+      "exp15_taylor_margin": "722901421450297680278228741/709859630199578034176",
+      "exp4pi_taylor_margin": "959900079963098456118373823646118336194465784008645403436743672126573747845647534639504909567159733/193711635527827834840910350430166445857993664344734906267340154458954933258669507324442416015625",
+      "geometric_tail_check": "True",
+      "fifth_jet_polynomial": "-1024*z**5 + 11520*z**4 - 33920*z**3 + 26400*z**2 - 3124*z + 1",
+      "fifth_jet_bernstein_min": "33728061396737/418195493",
+      "fifth_jet_polynomial_floor_at_pi_lo": "247791898331/418195493",
+      "exp_pi_upper_margin": "87950820110877767163841697/105961306991808459303464625",
+      "guard_zero": "0",
+      "guard_slope": "0",
+      "guard_curvature": "sqrt(2)*exp(-8*pi**2)/pi**(3/2)",
+      "green_endpoint_slope": "0",
+      "green_derivative_jump": "-2"
+    }
+  },
+  "rows": [
+    {
+      "id": "ntcpo_01_theta_primitive",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The positive theta primitive differentiates to the Xi kernel.",
+      "formula": "R''-R=8*Phi and R'(0)=-1/2",
+      "proof_boundary": "Exact theta-series differentiation and modular endpoint identity.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_02_summand_monotonicity",
+      "role": "exact_inequality",
+      "readiness": "ready_to_apply",
+      "claim": "Every Newman-weighted primitive summand decreases strictly.",
+      "formula": "s_(n,t)'/s_(n,t)=1+2tu-y<0",
+      "proof_boundary": "Uniform only on 0<=t<=1/5 and u>=0.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_03_summand_convexity",
+      "role": "exact_inequality",
+      "readiness": "ready_to_apply",
+      "claim": "Every Newman-weighted primitive summand is strictly convex.",
+      "formula": "s_(n,t)''/s_(n,t)>=(121/144)*y^2-4*y=y*((121/144)*y-4)>0",
+      "proof_boundary": "Uses y>=4*pi>12 and 1+2tu<=y/12.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_04_probability_law",
+      "role": "exact_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Theta curvature defines a probability measure.",
+      "formula": "dmu_t=2*S_t''du, integral dmu_t=1",
+      "proof_boundary": "Uses strict convexity and the exact endpoint slopes.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_04a_fixed_theta_weights",
+      "role": "exact_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "Theta curvature is a fixed-weight positive component mixture.",
+      "formula": "w_n=mu_(n,t)([0,infinity))=2*(4*pi*n^2-1)*exp(-pi*n^2)",
+      "proof_boundary": "The weights are exact and independent of Newman time.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_04b_dominant_component_budget",
+      "role": "exact_bound",
+      "readiness": "ready_to_apply",
+      "claim": "The first theta component has a uniform rational C2 tail budget.",
+      "formula": "|A_t-w_1*a_(1,t)|<1/2800, |A_t'-w_1*a_(1,t)'|<1/137200, |A_t''-w_1*a_(1,t)''|<1/3361400",
+      "proof_boundary": "Absolute bounds alone do not control the polynomially amplified global-frequency tail.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_05_triangular_mixture",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The primitive is a positive mixture of triangular kernels.",
+      "formula": "S_t(u)=(1/2)*integral_[0,infinity)(v-u)_+ dmu_t(v)",
+      "proof_boundary": "Tonelli applies because the curvature density is positive.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_06_primitive_fourier_positivity",
+      "role": "exact_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The primitive cosine transform is strictly positive.",
+      "formula": "C_t(x)=(1/(2*x^2))*integral(1-cos(x*v))dmu_t(v)=(1-A_t(x))/(2*x^2), x!=0",
+      "proof_boundary": "This does not assert Fourier positivity of K_(1,t).",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_07_oscillator_factorization",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The endpoint-subtracted transform operator factors exactly.",
+      "formula": "D_t=-(Q_t^2+1), Q_t=2t*d_x-x",
+      "proof_boundary": "Pure differential algebra.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_08_positive_normalizer",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "The strict-Laguerre target has a global positive normalizer.",
+      "formula": "G_t=8*H_t/C_t, C_t>0 on R",
+      "proof_boundary": "The normalized contact problem remains RH-strength.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_08a_doob_evolution",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The positive-normalizer ratio obeys a weighted Doob diffusion.",
+      "formula": "partial_t G_t=-partial_x^2 G_t-2*(partial_x log C_t)*partial_x G_t=-C_t^(-2)*partial_x(C_t^2*partial_x G_t)",
+      "proof_boundary": "The instantaneous reverse-time generator is nonnegative in L2(C_t^2 dx).",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_08b_sturm_nodal_guard",
+      "role": "countermodel_gate",
+      "readiness": "guard_validated",
+      "claim": "Positive operator evolution and Sturm zero-number monotonicity permit nodal loss at contact.",
+      "formula": "At t_*=a/2, G has a double zero at 0; for t>t_* it has two simple real zeros, while for t<t_* it has none.",
+      "proof_boundary": "A positive denominator, divergence form, nonnegative instantaneous operator, and zero-number monotonicity do not exclude contact. A completion needs an Xi-specific conserved nodal count, boundary flux, or quantitative transversality.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_08c_drift_curvature_guard",
+      "role": "asymptotic_guard",
+      "readiness": "guard_validated",
+      "claim": "The positive Doob weight is eventually log-convex.",
+      "formula": "(log C_t)''=2/x^2-6*(1+6*t)/x^4+O(x^-6)>0 for all sufficiently large x, uniformly on 0<=t<=1/5.",
+      "proof_boundary": "The positive normalizer weight is eventually log-convex, not log-concave. Therefore a global contracting-drift, Bakry-Emery positive-curvature, or weight-log-concavity argument cannot close the contact problem.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_09_characteristic_transfer",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "H_t is an explicit second-order expression in a probability characteristic function.",
+      "formula": "J_t=4*t^2*x^2*A_t''-4*t*x*(x^2+4*t)*A_t'+(x^4+(6*t+1)*x^2+24*t^2)*A_t-((6*t+1)*x^2+24*t^2)",
+      "proof_boundary": "The apparent singularity at x=0 is removable; contacts occur at c!=0.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_09a_componentwise_contact",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The contact functional splits exactly over the fixed theta components.",
+      "formula": "J_(n,t)=4*t^2*x^2*A_(n,t)''-4*t*x*(x^2+4*t)*A_(n,t)'+P_t*A_(n,t)-R_t*w_n",
+      "proof_boundary": "Both the value and derivative decompositions are audited symbolically.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_10_contact_reduction",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "A positive Newman boundary is a common zero of J_t and J_t'.",
+      "formula": "Because H_t(0)>0, a boundary multiple zero c is nonzero; H_t(c)=H_t'(c)=0 iff J_t(c)=J_t'(c)=0.",
+      "proof_boundary": "No zero simplicity or RH assumption enters.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_10a_dominant_block_disjunction",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "Explicit first-block C1 alternatives exclude contact pointwise.",
+      "formula": "At any 0<t<=1/5 and x>0, if |J_(1,t)(x)|>B_0(t,x) or |J_(1,t)'(x)|>B_1(t,x), then (J_t(x),J_t'(x))!=(0,0).",
+      "proof_boundary": "The raw moment bars are compact-frequency tools; no global inequality is claimed.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_11_endpoint_laplace_reference",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "At t=0, Xi is a transverse-crossing problem against the exponential characteristic function.",
+      "formula": "H_0(c)=H_0'(c)=0 iff A_0(c)=1/(1+c^2) and A_0'(c)=-2*c/(1+c^2)^2.",
+      "proof_boundary": "This is a reformulation, not a proof of transversality.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_12_generic_double_contact_guard",
+      "role": "countermodel_gate",
+      "readiness": "guard_validated",
+      "claim": "Positive curvature probability and primitive Fourier positivity do not exclude a multiple spectral zero.",
+      "formula": "Its curvature law 2*R_epsilon''du is a probability and its primitive transform is strictly positive, while the associated H_epsilon=epsilon*integral_0^infinity f(u)cos(xu)du has a multiple real zero at 2*pi.",
+      "proof_boundary": "The guard is generic and does not reproduce theta arithmetic.",
+      "diagnostics": null
+    },
+    {
+      "id": "ntcpo_13_open_xi_transversality",
+      "role": "open_theorem_target",
+      "readiness": "open",
+      "claim": "The remaining theorem is arithmetic C1 separation for J_t.",
+      "formula": "Prove uniformly for 0<t<=1/5 that the Xi theta-curvature characteristic expression J_t has no common real zero with J_t'. Equivalently, use the explicit positive probability density dmu_t=2*d_u^2[exp(tu^2)R(u)]du to obtain a quantitative C1 separation for the displayed oscillatory expectation. The generic Neumann-lift guard forbids promotion from probability positivity, convexity, or C_t>0 alone. Any successful estimate must preserve the theta arithmetic and remain uniform as t tends to zero. The separate compact-transversality certificate now proves the displayed first-block disjunction on 1/4<=x<=38 and combines it with an exact origin collar. The live obligation is therefore x>38, where the raw B_0/B_1 bars must be abandoned in favor of the corrected Riemann-Siegel phase-aware partition.",
+      "proof_boundary": "No strict-Laguerre, Lambda<=0, RH, or Clay-prize claim is made.",
+      "diagnostics": null
+    }
+  ]
+}

@@ -1,0 +1,435 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_critical_ray_finite_height_real_edge_gate",
+  "date": "2026-07-31",
+  "status": "effective finite-height negative critical-ray real-edge current for the retained first-order model",
+  "source_audit": {
+    "source_sha256": {
+      "q1_finite_height_gate": "391a9a371ff29c44f6201d280f07ddc6d93d901bc4a9afb494e562205e0a3bb6",
+      "cofinal_real_edge_gate": "66a47359d8c9b457bcf98b43686b0bb3d1b51423d0de1f1222d21f5efa8d9e2b",
+      "complex_endpoint_source": "07f18c40511e9d9c95f8578e02fc39505ac59480682a50597dd9b79e6618fbf3",
+      "critical_c1_source": "8913ef1c451e71b2df0c3fa6201dae0c8515399a3668ba35c8f255dfc36d9097",
+      "first_dirichlet_correction": "0d5038807a75ed4040aaa27baf25477987d45bd3d0fb61422117ed6c68b9a78b"
+    },
+    "published_source": {
+      "citation": "D.H.J. Polymath, Effective approximation of heat flow evolution of the Riemann xi function, and a new upper bound for the de Bruijn-Newman constant, arXiv:1904.12438",
+      "location": "equation (53), C_0, first correction, and Proposition 6.2",
+      "url": "https://arxiv.org/abs/1904.12438"
+    }
+  },
+  "exact": {
+    "domain": {
+      "critical_ray": "L>=50, 0<tL<=25, theta=(1-p)/2 in [0,1], a=N+theta, h=1/a, T_0=2pi/h^2",
+      "effective_box": "0<t<=1/2, 0<h<exp(-25)<1/72000000000, 0<=theta<=1",
+      "q_consequence": "q=2tL^2; therefore the theorem contains every q>=1 point in the critical range 0<tL<=25"
+    },
+    "endpoint": {
+      "source": "F=C_0(p), C_1=F'''/(12pi^2), H=F+h*C_1",
+      "coordinate_jets": "p_x=-h/(4pi), h_x=-h^3/(8pi), p_xx=h^3/(32pi^2), h_xx=3h^5/(64pi^2)",
+      "H_jets": "H_x=p_x(F'+hC_1')+h_xC_1; H_xx=p_xx(F'+hC_1')+p_x^2(F''+hC_1'')+2p_xh_xC_1'+h_xxC_1"
+    },
+    "terminal": {
+      "source": "Z=z_N/S_a=(-1)^N M_t(s)exp[t log(N)^2/4-s_*log(N)](1+d)/(beta*T_0), S_a=kappa*T_0",
+      "alpha": "alpha=1/(2s)+1/(s-1)+Log(s/(2pi))/2, s_*=(s+t alpha/2), s_*'=-i/2-it alpha'/4, s_*''=-t alpha''/8",
+      "correction": "w=alpha-log(N), d=1/(6s)+alpha'[t/4+t^2w^2/8], d_x=(-i/2)[-1/(6s^2)+alpha''(t/4+t^2w^2/8)+(t^2/4)w(alpha')^2]",
+      "phase": "Q=exp[-pi*i*(p^2/2-p+3/8)], Z=-Q*exp(W), Q_x/Q=-i*h*theta/2"
+    },
+    "stable_log": {
+      "coordinates": "ell=log(1-h*theta), chi=alpha-log(a), chi_R=log(r)/2+log(1+y^2)/4-y^2/(1+y^2), chi_I=-pi/4+atan(y)/2+3y/(1+y^2), w=chi-ell",
+      "real_part": "Re W=-ell/2+(7/4)log(r)+(7/8)log(1+y^2)+atan(y)/(4y)-1/4+t*pi^2/64+(t/4)Re(w^2)+log|1+d|",
+      "imaginary_part": "Im W=T_0[ell+h*theta+h^2theta^2/2]-(pi*t/8)ell+(T_0/2)[r*(-log r)-rho]-log(1+y^2)/(8y)-atan(y)/4+(t/4)Im(w^2)+arg(1+d)",
+      "removable_rewrites": "T_0[ell+z+z^2/2]=-2pi*h*theta^3*sum_(m>=0)z^m/(m+3); (T_0/2)[r(-log r)-rho]=-pi*t^2*h^2*sum_(m>=0)rho^m/[(m+1)(m+2)]/256; pi^2/16+Re(w^2)=u_R^2+(pi/2)eta-eta^2",
+      "x_derivative": "W_x=eta/2-3/(4T_0)+i[ell+h*theta-chi_R]/2-i(t/4)alpha'w+d_x/(1+d), eta=atan(y)/2+3y/(1+y^2)",
+      "branch": "W is the continuous logarithm with W->0 as h->0; |d|<h^2/10 keeps 1+d in the principal near-one disk"
+    },
+    "endpoint_rate": {
+      "mu": "mu=K_rate+i*chi/2+i(t/4)alpha'chi, K_rate=-pi/8+1/(4T_0)+1/[2(T_0+i)]",
+      "mu_x": "mu_x=K_rate_x+i*chi_x/2+i(t/4)(alpha'_xchi+alpha'chi_x), K_rate_x=-1/(8T_0^2)-1/[4(T_0+i)^2], chi_x=-i alpha'/2-h^2/(8pi), alpha'_x=-i alpha''/2",
+      "endpoint_jet": "J=H_x+mu*H, J_x=H_xx+mu_xH+muH_x"
+    },
+    "normalized_edge": {
+      "definitions": "tau=1+i/T_0, u=log(a/N)=-ell, c=Re(tau H+Z), c_x=Re(tau_xH+tauH_x+Z_x), gbar=tauJ+s_*'uZ, d_edge=Re(gbar)-alpha_c c, alpha_c=Re(s_*')u",
+      "second_jet": "gbar_x=tau_xJ+tauJ_x+s_*''uZ+s_*'u_xZ+s_*'uZ_x; d_(edge,x)=Re(gbar_x)-alpha_(c,x)c-alpha_c c_x",
+      "current": "a^2 J_edge/S_a^2=h^-2[c*d_(edge,x)-d_edge*c_x]",
+      "leading_jets": "A=Re(F-Q), B=Re[-F'/(4pi)+i theta Q/2], M=Re[F''/(16pi^2)+Q{i/(16pi)+theta^2/4}]"
+    },
+    "extension": {
+      "unchanged_identities": "The q=1 proof used no q identity after replacing t by its upper bound. Equations for H, d, W, W_x, mu, mu_x, and the four normalized edge jets are exact for every 0<tL<=25 point on a prescribed-N critical chart.",
+      "only_changed_caps": "rho/h^2: 1/80000 -> 1/32; t/4+t^2|w|^2/8: <1/10000 -> <1/2; the stable heat terms are then re-audited before exponentiation"
+    }
+  },
+  "derivative_certificate": {
+    "precision_bits": 192,
+    "direct_boxes": 4096,
+    "direct_regions": [
+      {
+        "interval": "[-1,-5/8]",
+        "boxes": 1024,
+        "maximum_derivative_upper_balls": [
+          "0.5002038874663412570953369140625000000000000000000000000000000000000000",
+          "0.6926544280722737312316894531250000000000000000000000000000000000000000",
+          "1.582116125151515007019042968750000000000000000000000000000000000000000",
+          "6.970899701118469238281250000000000000000000000000000000000000000000000",
+          "180.8105199337005615234375000000000000000000000000000000000000000000000",
+          "7393.586341857910156250000000000000000000000000000000000000000000000000"
+        ]
+      },
+      {
+        "interval": "[-3/8,3/8]",
+        "boxes": 2048,
+        "maximum_derivative_upper_balls": [
+          "0.3354119686409831047058105468750000000000000000000000000000000000000000",
+          "0.1844522759784013032913208007812500000000000000000000000000000000000000",
+          "0.6656702361069619655609130859375000000000000000000000000000000000000000",
+          "4.796135485172271728515625000000000000000000000000000000000000000000000",
+          "132.7393741607666015625000000000000000000000000000000000000000000000000",
+          "5434.301971435546875000000000000000000000000000000000000000000000000000"
+        ]
+      },
+      {
+        "interval": "[5/8,1]",
+        "boxes": 1024,
+        "maximum_derivative_upper_balls": [
+          "0.5002038874663412570953369140625000000000000000000000000000000000000000",
+          "0.6926544280722737312316894531250000000000000000000000000000000000000000",
+          "1.582116125151515007019042968750000000000000000000000000000000000000000",
+          "6.970899701118469238281250000000000000000000000000000000000000000000000",
+          "180.8105199337005615234375000000000000000000000000000000000000000000000",
+          "7393.586341857910156250000000000000000000000000000000000000000000000000"
+        ]
+      }
+    ],
+    "removable_centers": [
+      "-1/2",
+      "1/2"
+    ],
+    "local_disk_radius": "1/4",
+    "inner_cauchy_radius": "1/8",
+    "sinc_deviation_ball": "[0.106026219527102915512265224158690824848144944505944617724 +/- 8.82e-58]",
+    "sinc_deviation_lt": "1/5",
+    "factored_denominator_lower_ball": "[2.80850146123554803733759003745758816030427224523737071223 +/- 5.81e-57]",
+    "factored_numerator_upper_ball": "[5.99092299336329903583048563347753963707184844136065978161 +/- 6.46e-57]",
+    "C0_disk_upper_ball": "[1.06656932105132389235282563401131576761036690288863598515 +/- 6.23e-57]",
+    "C0_disk_upper_lt": "3",
+    "global_C0_derivative_bounds": [
+      3,
+      24,
+      384,
+      9216,
+      294912,
+      11796480
+    ],
+    "direct_maximum_upper_balls": [
+      "0.5002038874663412570953369140625000000000000000000000000000000000000000",
+      "0.6926544280722737312316894531250000000000000000000000000000000000000000",
+      "1.582116125151515007019042968750000000000000000000000000000000000000000",
+      "6.970899701118469238281250000000000000000000000000000000000000000000000",
+      "180.8105199337005615234375000000000000000000000000000000000000000000000",
+      "7393.586341857910156250000000000000000000000000000000000000000000000000"
+    ],
+    "direct_maximum_locations": [
+      "-1..-8189/8192",
+      "-1..-8189/8192",
+      "-1..-8189/8192",
+      "-5123/8192..-5/8",
+      "-5123/8192..-5/8",
+      "-5123/8192..-5/8"
+    ],
+    "C1_derivative_bounds": [
+      86,
+      2731,
+      109227
+    ],
+    "pi_square_lower": "pi^2>9"
+  },
+  "majorant_certificate": {
+    "L_min": 50,
+    "critical_range": "0<tL<=25",
+    "t_max": "1/2",
+    "h_upper": "1/72000000000",
+    "normalized_majorant_chain": {
+      "u_over_h": {
+        "upper": "72000000000/71999999999",
+        "cap": "2/1"
+      },
+      "u_minus_h_theta_over_h2": {
+        "upper": "36000000000/71999999999",
+        "cap": "1/1"
+      },
+      "rho_over_h2": {
+        "upper": "1/32",
+        "cap": "1/16"
+      },
+      "log_r_over_h2": {
+        "upper": "5184000000000000000000/165887999999999999999999",
+        "cap": "1/16"
+      },
+      "y_over_h2": {
+        "upper": "13824000000000000000000/165887999999999999999999",
+        "cap": "1/6"
+      },
+      "eta_over_h2": {
+        "upper": "48384000000000000000000/165887999999999999999999",
+        "cap": "1/1"
+      },
+      "chi_R_over_h2": {
+        "upper": "429981696000000000000043488000000000000000000/27518828543999999999999668224000000000000000001",
+        "cap": "1/16"
+      },
+      "chi_absolute": {
+        "upper": "495338913792000000000023390208000000000000000001/495338913791999999999994028032000000000000000018",
+        "cap": "2/1"
+      },
+      "w_absolute": {
+        "upper": "35664401793024000000001684094975970637824000000072000000017/35664401792528661086207570018304005971968000001295999999982",
+        "cap": "2/1"
+      },
+      "alpha_prime_over_h2": {
+        "upper": "13759414272000000000000175104000000000000000000/27518828543999999999999668224000000000000000001",
+        "cap": "1/1"
+      },
+      "alpha_second_over_h4": {
+        "upper": "63403380965376000000011848384512000000000000000000000000000000000000/4565043429507071999999917443514368000000000000497663999999999999999999",
+        "cap": "1/1"
+      },
+      "correction_block": {
+        "upper": "13/32",
+        "cap": "1/2"
+      },
+      "d_over_h2": {
+        "upper": "6354173952000000000000066528000000000000000000/27518828543999999999999668224000000000000000001",
+        "cap": "1/4"
+      },
+      "d_x_over_h4": {
+        "upper": "21638305855863521280000816978981814272000000000531505152000000000000000000000000000000000000/757285924434069159935981739826281971712000000165112971263999999999999336448000000000000000001",
+        "cap": "1/32"
+      },
+      "Re_W_over_h": {
+        "upper": "2916880143970235039439563825436628232994512731933857475542240037771492950245865132093775489204251879980210258784388605686980580022914064132727859999132274250000000/5833760287781093863453627335461277532766891485130503292131431811055797158008855757549884470556297720727465934215662221077381071053750272336591936000092015999999361",
+        "cap": "1/1"
+      },
+      "Im_W_over_h": {
+        "upper": "515563553063663461932974307693357051920890855164418127354138385508588364028331423393468538902698759167978331492000313731500000000/162809543070283205131490767178735118436329216495804393896140560918531764818544686014853545978386350080077967360000015335999999787",
+        "cap": "13/4"
+      },
+      "W_over_h": {
+        "upper": "21390454388888658563965221712791049062388879867793862053870437857460083884014454135262565307043123779558616001473391812363853712666716079999956332000073468750000000/5833760287781093863453627335461277532766891485130503292131431811055797158008855757549884470556297720727465934215662221077381071053750272336591936000092015999999361",
+        "cap": "4/1"
+      },
+      "W_x_over_h2": {
+        "upper": "1874282662957376898282290227456604180176543363994982675383454035607552838646784016774271999984664000000071/2617180154807793292365801000213689097203154797954916956493570153381896185577471886311423999959104000000568",
+        "cap": "1/1"
+      },
+      "mu_over_h2": {
+        "upper": "102622298112000000000000173952000000000000000001/220150628351999999999997345792000000000000000008",
+        "cap": "1/1"
+      },
+      "mu_x_over_h4": {
+        "upper": "311444438426453018991922701108141061828509696029693916752117759999999952351657984000000000000927359999999999999999999/12059966153521811021132100630756271646803230724382441692326789119999973581924597760000000000079626239999999999999999904",
+        "cap": "1/1"
+      },
+      "s1_defect_over_h2": {
+        "upper": "1719926784000000000000021888000000000000000000/27518828543999999999999668224000000000000000001",
+        "cap": "1/15"
+      },
+      "real_s1_over_h2": {
+        "upper": "10368000000000000000000/165887999999999999999999",
+        "cap": "1/15"
+      },
+      "s2_over_h4": {
+        "upper": "3962711310336000000000740524032000000000000000000000000000000000000/4565043429507071999999917443514368000000000000497663999999999999999999",
+        "cap": "1/1000"
+      },
+      "c_defect_over_h": {
+        "upper": "10152000000001/108000000000",
+        "cap": "100/1"
+      },
+      "c_x_defect_over_h2": {
+        "upper": "22208256000000648000000001/93312000000000000000000",
+        "cap": "250/1"
+      },
+      "d_edge_defect_over_h2": {
+        "upper": "520560000000043/2160000000000",
+        "cap": "250/1"
+      },
+      "d_edge_x_defect_over_h3": {
+        "upper": "12654144000000292200000000167/15552000000000000000000000",
+        "cap": "900/1"
+      }
+    },
+    "source_bounds": {
+      "rho": "rho<h^2/16",
+      "log_r": "|log r|<h^2/16",
+      "alpha_prime": "|alpha'|<h^2",
+      "alpha_second": "|alpha''|<h^4",
+      "correction": "|d|<h^2/4, |d_x|<h^4/32",
+      "stable_log": "|W|<4h, |W_x|<h^2",
+      "terminal": "|Z+Q|<8h, |Z_x-i*h*theta*Q/2|<6h^2",
+      "endpoint_rate": "|mu|<h^2, |mu_x|<h^4"
+    },
+    "edge_jet_defects": {
+      "c": "c=A+h*e_0, |e_0|<100",
+      "d": "d_edge=h*B+h^2*e_1, |e_1|<250",
+      "c_x": "c_x=h*B+h^2*e_2, |e_2|<250",
+      "d_x": "d_(edge,x)=h^2*M+h^3*e_3, |e_3|<900"
+    },
+    "linear_error_constant": 5400,
+    "quadratic_error_constant": 152500,
+    "uniform_remainder": "|a^2 J_edge/S_a^2-K_edge(p)|<5500h<1/10000000",
+    "finite_height_margin": "a^2 J_edge/S_a^2<-3749/10000000<0"
+  },
+  "rows": [
+    {
+      "id": "crfher_01_domain",
+      "role": "effective_domain",
+      "readiness": "ready_to_apply",
+      "claim": "The complete critical range lies in one explicit parameter box.",
+      "formula": "L>=50, 0<tL<=25, theta=(1-p)/2 in [0,1], a=N+theta, h=1/a, T_0=2pi/h^2; 0<t<=1/2, 0<h<exp(-25)<1/72000000000, 0<=theta<=1",
+      "proof_boundary": "A prescribed-N chart is used before adjacent-cutoff splicing.",
+      "diagnostics": null
+    },
+    {
+      "id": "crfher_02_exact_source",
+      "role": "source_inheritance",
+      "readiness": "ready_to_apply",
+      "claim": "The stable endpoint-terminal identities do not require q=1.",
+      "formula": "The q=1 proof used no q identity after replacing t by its upper bound. Equations for H, d, W, W_x, mu, mu_x, and the four normalized edge jets are exact for every 0<tL<=25 point on a prescribed-N critical chart.",
+      "proof_boundary": "Only the parameter majorants are enlarged.",
+      "diagnostics": null
+    },
+    {
+      "id": "crfher_03_changed_caps",
+      "role": "analytic_majorant",
+      "readiness": "certified",
+      "claim": "The two q=1-specific numerical caps are replaced before bounding.",
+      "formula": "rho/h^2: 1/80000 -> 1/32; t/4+t^2|w|^2/8: <1/10000 -> <1/2; the stable heat terms are then re-audited before exponentiation",
+      "proof_boundary": "No q=1 constant is reused without recomputation.",
+      "diagnostics": null
+    },
+    {
+      "id": "crfher_04_stable_heat",
+      "role": "exact_desingularization",
+      "readiness": "ready_to_apply",
+      "claim": "The terminal heat constants still cancel before absolute values.",
+      "formula": "T_0[ell+z+z^2/2]=-2pi*h*theta^3*sum_(m>=0)z^m/(m+3); (T_0/2)[r(-log r)-rho]=-pi*t^2*h^2*sum_(m>=0)rho^m/[(m+1)(m+2)]/256; pi^2/16+Re(w^2)=u_R^2+(pi/2)eta-eta^2",
+      "proof_boundary": "The continuous W->0 branch is retained on the enlarged box.",
+      "diagnostics": null
+    },
+    {
+      "id": "crfher_05_source_bounds",
+      "role": "analytic_majorant",
+      "readiness": "certified",
+      "claim": "The full critical range preserves the terminal and endpoint rates.",
+      "formula": "|W|<4h, |W_x|<h^2, |mu|<h^2, |mu_x|<h^4",
+      "proof_boundary": "All normalized rational caps are independently stored.",
+      "diagnostics": {
+        "rho": "rho<h^2/16",
+        "log_r": "|log r|<h^2/16",
+        "alpha_prime": "|alpha'|<h^2",
+        "alpha_second": "|alpha''|<h^4",
+        "correction": "|d|<h^2/4, |d_x|<h^4/32",
+        "stable_log": "|W|<4h, |W_x|<h^2",
+        "terminal": "|Z+Q|<8h, |Z_x-i*h*theta*Q/2|<6h^2",
+        "endpoint_rate": "|mu|<h^2, |mu_x|<h^4"
+      }
+    },
+    {
+      "id": "crfher_06_source_derivatives",
+      "role": "interval_inheritance",
+      "readiness": "certified",
+      "claim": "The C_0 derivative theorem is independent of t and transfers unchanged.",
+      "formula": "4096 direct Arb boxes plus two Cauchy charts bound C_0 through order five",
+      "proof_boundary": "The interval certificate is recomputed by this gate.",
+      "diagnostics": {
+        "boxes": 4096,
+        "bounds": [
+          3,
+          24,
+          384,
+          9216,
+          294912,
+          11796480
+        ]
+      }
+    },
+    {
+      "id": "crfher_07_terminal_jets",
+      "role": "finite_height_jet",
+      "readiness": "certified",
+      "claim": "The enlarged heat range retains one-order terminal defects.",
+      "formula": "|Z+Q|<8h and |Z_x-i*h*theta*Q/2|<6h^2",
+      "proof_boundary": "No phase interpolation is used.",
+      "diagnostics": null
+    },
+    {
+      "id": "crfher_08_four_jets",
+      "role": "finite_height_jet",
+      "readiness": "certified",
+      "claim": "The same four edge-jet caps hold on the complete critical range.",
+      "formula": "c=A+h*e_0, |e_0|<100; d_edge=h*B+h^2*e_1, |e_1|<250; c_x=h*B+h^2*e_2, |e_2|<250; d_(edge,x)=h^2*M+h^3*e_3, |e_3|<900",
+      "proof_boundary": "All H_xx, mu_x, s_*'', u_x, and Z_x terms are retained.",
+      "diagnostics": null
+    },
+    {
+      "id": "crfher_09_current_budget",
+      "role": "division_free_perturbation",
+      "readiness": "certified",
+      "claim": "The critical-ray finite-height remainder stays below the q=1 target.",
+      "formula": "|a^2 J_edge/S_a^2-K_edge(p)|<5500h<1/10000000",
+      "proof_boundary": "Polynomial at A=0 and at every zero real projection.",
+      "diagnostics": {
+        "linear": 5400,
+        "quadratic": 152500
+      }
+    },
+    {
+      "id": "crfher_10_uniform_sign",
+      "role": "effective_interval_theorem",
+      "readiness": "certified",
+      "claim": "The retained first-order real-edge current is clockwise throughout the critical range.",
+      "formula": "a^2 J_edge/S_a^2<-3749/10000000<0",
+      "proof_boundary": "This is a model-edge theorem on one prescribed-N chart.",
+      "diagnostics": null
+    },
+    {
+      "id": "crfher_11_q_ge_1",
+      "role": "domain_corollary",
+      "readiness": "ready_to_apply",
+      "claim": "Every q>=1 critical point is included.",
+      "formula": "q=2tL^2; therefore the theorem contains every q>=1 point in the critical range 0<tL<=25",
+      "proof_boundary": "No adjacent-cutoff signed splice follows from pointwise chart signs alone.",
+      "diagnostics": null
+    },
+    {
+      "id": "crfher_12_nonpromotion",
+      "role": "nonpromotion_guard",
+      "readiness": "guard_validated",
+      "claim": "The model sign is not silently promoted to the complete Xi edge.",
+      "formula": "The omitted higher-order Xi/source remainder and global contact insertion remain separate.",
+      "proof_boundary": "No Xi-level edge sign, Abel gap, winding cap, Lambda<=0, or RH theorem is claimed.",
+      "diagnostics": null
+    },
+    {
+      "id": "crfher_13_handoff",
+      "role": "route_decision",
+      "readiness": "open_quantitative_handoff",
+      "claim": "The pointwise q>=1 retained-model edge wall is closed.",
+      "formula": "Prove the signed adjacent-cutoff splice, then insert the edge block into the cumulative contact scalar with the existing global remainder budgets.",
+      "proof_boundary": "The splice and cumulative Abel-scalar gap remain open.",
+      "diagnostics": null
+    }
+  ],
+  "counts": {
+    "rows": 13,
+    "direct_arb_boxes": 4096,
+    "removable_cauchy_charts": 2,
+    "normalized_majorant_inequalities": 27,
+    "finite_edge_jet_defects": 4,
+    "uniform_critical_ray_model_signs": 1,
+    "uniform_q_ge_1_model_signs": 1,
+    "adjacent_cutoff_signed_splices": 0,
+    "xi_level_edge_signs": 0,
+    "abel_gaps": 0,
+    "winding_bounds": 0
+  },
+  "proof_boundary": "This artifact proves an effective negative real-edge current for the retained first-order model on L>=50, 0<tL<=25, and -1<=p<=1, including every q>=1 point in that critical range. It does not prove an adjacent-cutoff signed splice, bound the omitted higher-order Xi/source contribution to this current, prove an Xi-level edge sign, cumulative-minor estimate, Abel-scalar gap, successor winding cap, contact exclusion, Q209, the cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or a prize-level conclusion."
+}

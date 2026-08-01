@@ -1,0 +1,175 @@
+{
+  "date": "2026-07-24",
+  "exact": {
+    "cofinal_obstruction": {
+      "scope": "This is an obstruction to the fixed-N static absolute-tail proof method, not evidence of a common zero of the full Xi first jet.",
+      "shells": "S_j=[1/(5j),1/5]x[38,38+j]",
+      "theorem": "For every fixed N and every static positive absolute tail bar epsilon_0, the value-or-derivative direct-bar certificate fails at some point of every sufficiently large S_j."
+    },
+    "integration_by_parts": {
+      "constants": "A_N=sup_(0<=t<=1/5)(|f_(N,t)'(0)|+||f_(N,t)''||_1)<infinity; B_N=sup_(0<=t<=1/5)||(u*f_(N,t))''||_1<infinity",
+      "derivative_bound": "|partial_x H_(N,t)(x)|<=B_N/x^2",
+      "derivative_identity": "partial_x H_(N,t)(x)=x^(-2)*integral_0^infinity (u*f_(N,t)(u))''*sin(xu)du",
+      "value_bound": "|H_(N,t)(x)|<=A_N/x^2",
+      "value_identity": "H_(N,t)(x)=-f_(N,t)'(0)/x^2-x^(-2)*integral_0^infinity f_(N,t)''(u)*cos(xu)du"
+    },
+    "required_upgrade": {
+      "endpoint_jet_identity": "integral_0^infinity f(u)cos(xu)du=sum_(r=0)^(m-1)(-1)^(r+1)*f^(2r+1)(0)/x^(2r+2)+(-1)^m*x^(-2m)*integral_0^infinity f^(2m)(u)cos(xu)du",
+      "open_target": "Construct a uniform cancellation-aware first-jet remainder theorem strong enough to close every S_j without assuming zero simplicity or RH.",
+      "route": "A cofinal theta-shell proof must let N grow with x, replace static moment bars by oscillatory remainder bounds that retain endpoint-jet cancellation, or use a modular grouping that preserves the cancellation before transformation."
+    },
+    "retained_kernel": {
+      "finite_kernel": "f_(N,t)(u)=exp(tu^2)*sum_(1<=n<=N)phi_n(u)",
+      "regularity": "For fixed N, every u-derivative of f_(N,t) is uniformly integrable for 0<=t<=1/5, and every integration-by-parts boundary term at infinity vanishes.",
+      "theta_block": "phi_n(u)=(2*pi^2*n^4*exp(9u)-3*pi*n^2*exp(5u))*exp(-pi*n^2*exp(4u))",
+      "transform": "H_(N,t)(x)=integral_0^infinity f_(N,t)(u)*cos(xu)du"
+    },
+    "static_tail_certificate": {
+      "bars": "E_0(x)=16*x^4*epsilon_0; E_1(x)=64*x^3*epsilon_0+16*x^4*epsilon_1, where epsilon_0>0 and epsilon_1>=0 are fixed",
+      "derivative_ratio": "|J_(N,t)'(x)|/E_1(x)=|4H_(N,t)(x)+x*partial_x H_(N,t)(x)|/(4epsilon_0+xepsilon_1)<=(4A_N/x^2+B_N/x)/(4epsilon_0+xepsilon_1)",
+      "explicit_threshold": "X_N=max(1,sqrt(2A_N/epsilon_0),B_N/(2epsilon_0))",
+      "failure": "For every x>X_N and every 0<=t<=1/5, |J_(N,t)(x)|<E_0(x) and |J_(N,t)'(x)|<E_1(x)",
+      "value_ratio": "|J_(N,t)(x)|/E_0(x)=|H_(N,t)(x)|/epsilon_0<=A_N/(epsilon_0*x^2)"
+    },
+    "two_block_boundary_cancellation": {
+      "a_two": "a_2=f_(2,t)'(0)=sum_(n=1)^2 phi_n'(0)>0",
+      "a_two_decimal": "0.000000082652795777273394114371932109122889696862795688896760119283063044133246939086341",
+      "endpoint_derivative": "phi_n'(0)=pi*n^2*exp(-pi*n^2)*(-8*pi^2*n^4+30*pi*n^2-15)",
+      "full_cancellation": "Phi is even, so (exp(tu^2)Phi(u))'(0)=0 and sum_(n>=3)phi_n'(0)=-a_2<0",
+      "interpretation": "The omitted theta tail cancels the algebraic x^(-2) endpoint term of the retained two-block transform. Static absolute moments discard this cancellation.",
+      "sign_proof": "For n>=3, 4*pi*n^2-15>0, hence -8*pi^2*n^4+30*pi*n^2-15<0. The differentiated theta series converges locally uniformly. Since Phi is even, sum_(n>=1)phi_n'(0)=0, so a_2=-sum_(n>=3)phi_n'(0)>0."
+    }
+  },
+  "kind": "jensen_window_pf_newman_theta_fixed_block_cofinal_obstruction_gate",
+  "proof_boundary": "This artifact proves that a fixed finite theta truncation combined with fixed positive static absolute-moment tail bars cannot certify the cofinal diagonal shell family. It also identifies the exact endpoint cancellation discarded by the two-block bars. It does not prove a common zero, disprove the finite interval certificates, certify any new Q_j, prove Lambda<=0, prove RH, or win a Clay prize.",
+  "rows": [
+    {
+      "claim": "Every fixed finite theta truncation has enough uniform half-line decay for repeated integration by parts.",
+      "diagnostics": null,
+      "formula": "For fixed N, every u-derivative of f_(N,t) is uniformly integrable for 0<=t<=1/5, and every integration-by-parts boundary term at infinity vanishes.",
+      "id": "ntfbco_01_uniform_regular_decay",
+      "proof_boundary": "Fixed N and 0<=t<=1/5 only; no infinite theta sum is interchanged here.",
+      "readiness": "ready_to_apply",
+      "role": "exact_lemma"
+    },
+    {
+      "claim": "The retained cosine transform has a uniform O(x^-2) bound controlled by its endpoint derivative.",
+      "diagnostics": {
+        "bound": "|H_(N,t)(x)|<=A_N/x^2"
+      },
+      "formula": "H_(N,t)(x)=-f_(N,t)'(0)/x^2-x^(-2)*integral_0^infinity f_(N,t)''(u)*cos(xu)du",
+      "id": "ntfbco_02_value_ibp_bound",
+      "proof_boundary": "Exact integration by parts plus an L1 bound.",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The x derivative of the retained transform is also uniformly O(x^-2).",
+      "diagnostics": {
+        "bound": "|partial_x H_(N,t)(x)|<=B_N/x^2"
+      },
+      "formula": "partial_x H_(N,t)(x)=x^(-2)*integral_0^infinity (u*f_(N,t)(u))''*sin(xu)du",
+      "id": "ntfbco_03_derivative_ibp_bound",
+      "proof_boundary": "Exact integration by parts for u*f_(N,t).",
+      "readiness": "ready_to_apply",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "After the x^4 normalization, both direct-bar certificate ratios have explicit decaying upper bounds.",
+      "diagnostics": null,
+      "formula": "|J_(N,t)(x)|/E_0(x)=|H_(N,t)(x)|/epsilon_0<=A_N/(epsilon_0*x^2); |J_(N,t)'(x)|/E_1(x)=|4H_(N,t)(x)+x*partial_x H_(N,t)(x)|/(4epsilon_0+xepsilon_1)<=(4A_N/x^2+B_N/x)/(4epsilon_0+xepsilon_1)",
+      "id": "ntfbco_04_normalized_static_bars",
+      "proof_boundary": "Applies to fixed positive static absolute-tail bars.",
+      "readiness": "ready_to_apply",
+      "role": "exact_inequality"
+    },
+    {
+      "claim": "For every fixed N and every static positive absolute tail bar epsilon_0, the value-or-derivative direct-bar certificate fails at some point of every sufficiently large S_j.",
+      "diagnostics": null,
+      "formula": "X_N=max(1,sqrt(2A_N/epsilon_0),B_N/(2epsilon_0)); For every x>X_N and every 0<=t<=1/5, |J_(N,t)(x)|<E_0(x) and |J_(N,t)'(x)|<E_1(x)",
+      "id": "ntfbco_05_cofinal_obstruction",
+      "proof_boundary": "This is an obstruction to the fixed-N static absolute-tail proof method, not evidence of a common zero of the full Xi first jet.",
+      "readiness": "guard_validated",
+      "role": "route_guard"
+    },
+    {
+      "claim": "For N=2, the omitted arithmetic tail exactly cancels the nonzero retained endpoint derivative.",
+      "diagnostics": {
+        "a_two": "a_2=f_(2,t)'(0)=sum_(n=1)^2 phi_n'(0)>0",
+        "a_two_decimal": "0.000000082652795777273394114371932109122889696862795688896760119283063044133246939086341",
+        "endpoint_derivative": "phi_n'(0)=pi*n^2*exp(-pi*n^2)*(-8*pi^2*n^4+30*pi*n^2-15)",
+        "full_cancellation": "Phi is even, so (exp(tu^2)Phi(u))'(0)=0 and sum_(n>=3)phi_n'(0)=-a_2<0",
+        "interpretation": "The omitted theta tail cancels the algebraic x^(-2) endpoint term of the retained two-block transform. Static absolute moments discard this cancellation.",
+        "sign_proof": "For n>=3, 4*pi*n^2-15>0, hence -8*pi^2*n^4+30*pi*n^2-15<0. The differentiated theta series converges locally uniformly. Since Phi is even, sum_(n>=1)phi_n'(0)=0, so a_2=-sum_(n>=3)phi_n'(0)>0."
+      },
+      "formula": "Phi is even, so (exp(tu^2)Phi(u))'(0)=0 and sum_(n>=3)phi_n'(0)=-a_2<0",
+      "id": "ntfbco_06_two_block_endpoint_cancellation",
+      "proof_boundary": "Exact endpoint cancellation; it does not sign the full transform at positive frequency.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "The stored two-block scout remains certified through Q_30 at its finite rational-box resolution.",
+      "diagnostics": {
+        "certified_shell_rows": 26,
+        "end_j": 30,
+        "minimum_ratio_lower": "[1.3709314869015039163669568274457936340118136691538 +/- 2.92e-50]",
+        "minimum_ratio_shell": 23,
+        "proof_boundary": "Stored finite diagnostics only; no Q_j with j>=5 is promoted by this audit.",
+        "shell_rows": 26,
+        "start_j": 5,
+        "terminal_prefix_row_sha256": "a2e340abc6f317d0c8f6e794e3f9f4516e61db5e5ff23e159d82de080fde732d",
+        "total_evaluated_boxes": 20262,
+        "total_subdivisions": 1292
+      },
+      "formula": "stored prefix j=5..30; first finite frontier=none",
+      "id": "ntfbco_07_finite_frontier_diagnostic",
+      "proof_boundary": "No j>=5 stage or cofinal theorem is promoted.",
+      "readiness": "diagnostic_only",
+      "role": "finite_diagnostic"
+    },
+    {
+      "claim": "Construct a uniform cancellation-aware first-jet remainder theorem strong enough to close every S_j without assuming zero simplicity or RH.",
+      "diagnostics": {
+        "route": "A cofinal theta-shell proof must let N grow with x, replace static moment bars by oscillatory remainder bounds that retain endpoint-jet cancellation, or use a modular grouping that preserves the cancellation before transformation."
+      },
+      "formula": "integral_0^infinity f(u)cos(xu)du=sum_(r=0)^(m-1)(-1)^(r+1)*f^(2r+1)(0)/x^(2r+2)+(-1)^m*x^(-2m)*integral_0^infinity f^(2m)(u)cos(xu)du",
+      "id": "ntfbco_08_cancellation_aware_handoff",
+      "proof_boundary": "The identity identifies the repair; the required uniform first-jet estimate remains open.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    },
+    {
+      "claim": "Failure of this sufficient fixed-block certificate does not imply an Xi contact or failure of RH.",
+      "diagnostics": null,
+      "formula": "This is an obstruction to the fixed-N static absolute-tail proof method, not evidence of a common zero of the full Xi first jet.",
+      "id": "ntfbco_09_proof_boundary",
+      "proof_boundary": "No new Q_j, Lambda<=0, RH, or Clay-prize conclusion is proved.",
+      "readiness": "guard_active",
+      "role": "proof_guard"
+    }
+  ],
+  "source_audit": {
+    "evenness_kind": "jensen_window_pf_newman_theta_bessel_higher_shift_regularization_gate",
+    "frontier_prefix": {
+      "certified_shell_rows": 26,
+      "end_j": 30,
+      "minimum_ratio_lower": "[1.3709314869015039163669568274457936340118136691538 +/- 2.92e-50]",
+      "minimum_ratio_shell": 23,
+      "proof_boundary": "Stored finite diagnostics only; no Q_j with j>=5 is promoted by this audit.",
+      "shell_rows": 26,
+      "start_j": 5,
+      "terminal_prefix_row_sha256": "a2e340abc6f317d0c8f6e794e3f9f4516e61db5e5ff23e159d82de080fde732d",
+      "total_evaluated_boxes": 20262,
+      "total_subdivisions": 1292
+    },
+    "two_block_kind": "jensen_window_pf_newman_theta_second_diagonal_shell_two_block_interval_certificate"
+  },
+  "sources": [
+    "work/rh_compute/results/jensen_window_pf_newman_theta_second_diagonal_shell_two_block_interval_certificate.json",
+    "work/rh_compute/results/jensen_window_pf_newman_theta_bessel_higher_shift_regularization_gate.json",
+    "work/rh_compute/results/jensen_window_pf_newman_theta_two_block_shell_frontier_scout/frontier.jsonl",
+    "outputs/formal_core.md"
+  ],
+  "status": "exact fixed-block cofinal obstruction with cancellation-aware handoff"
+}

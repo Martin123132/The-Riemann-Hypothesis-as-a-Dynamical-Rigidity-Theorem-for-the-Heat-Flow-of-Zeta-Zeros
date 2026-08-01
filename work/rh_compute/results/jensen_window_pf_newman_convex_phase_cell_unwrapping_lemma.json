@@ -1,0 +1,499 @@
+{
+  "kind": "jensen_window_pf_newman_convex_phase_cell_unwrapping_lemma",
+  "date": "2026-07-25",
+  "status": "exact convex-cell phase-unwrapping and rational-polygon winding lemma with rigorous Q208 right-edge calibration; the complete Q208 bottom chain and closed winding remain open",
+  "proof_boundary": "This artifact proves a reusable topological and exact-arithmetic certificate and applies its half-plane branch to the stored Q208 right edge. It does not certify the complete bottom edge, the closed Q208 boundary winding, Q208, Lambda<=0, RH, or the Clay prize.",
+  "sources": [
+    "work/rh_compute/results/jensen_window_pf_newman_q208_selected_boundary_pilot.json",
+    "work/rh_compute/scripts/jensen_window_pf_newman_q208_selected_boundary_pilot.py"
+  ],
+  "source_sha256": {
+    "q208_result": "90ca1c6e1e3bfae3e1979b4a077f8ec428003e98b7bd7de8640c08c542c3e6b8",
+    "q208_builder": "a68731d871f538b05b8e304ade1a81964bc75d0596e21962bfb18664fcd0ff8a"
+  },
+  "exact": {
+    "projection_separation": "For a compact convex C with 0 not in C, let p be the closest point of C to 0. Then p dot v >= ||p||^2>0 for every v in C. Thus C lies in one open half-plane through 0 and admits a single argument branch of width strictly less than pi.",
+    "rectangle_projection": "For C=[a,b]x[c,d], p=(proj_[a,b](0),proj_[c,d](0)); C excludes 0 iff p!=0, and p dot v>=||p||^2 on all of C.",
+    "cell_to_chord_homotopy": "If gamma([s_k,s_(k+1)]) is contained in convex C_k and v_k=gamma(s_k), then (1-u)gamma(s)+u*((1-r)v_k+r*v_(k+1)) is a homotopy relative endpoints from gamma to its endpoint chord inside C_k, where r is the affine edge parameter.",
+    "cyclic_witness_polygon": "If q_k belongs to C_(k-1) intersect C_k cyclically, the exact endpoint polygon is homotopic to the rational witness polygon q_0...q_(n-1) edge by edge inside C_k. Therefore wind(gamma,0)=wind(q_0...q_(n-1),0).",
+    "exact_ray_crossing": "For each oriented edge p->q, add +1 when p_y<=0<q_y and det(p,q)>0; add -1 when q_y<=0<p_y and det(p,q)<0. The sum is the exact winding, provided no edge meets 0.",
+    "phase_unwrapping_equivalence": "The closest-point half-plane gives a local argument interval of width <pi on every C_k. A certified intersection witness selects the unique 2pi translate shared by adjacent branches. The resulting lifted phase has the same integer increment as the exact witness-polygon crossing count.",
+    "interval_certificate_contract": "Every cell must enclose the whole continuous path segment, not sampled points; every cell must exclude 0; each cyclic adjacent pair must have an exact rational intersection witness; and all ray-crossing determinants are evaluated exactly. Failure of any condition is unresolved, never an inferred phase.",
+    "axis_safe_proxy": "Set F_t(x)=16*(1+x^4)*H_t(x). Its first jet is T_x(H_t,H_t') with T_x=16[[1+x^4,0],[4x^3,1+x^4]]. The homotopy T_(x,s)=[[1-s+16s(1+x^4),0],[64s*x^3,1-s+16s(1+x^4)]] has positive determinant for 0<=s<=1. Hence F and H have the same contacts and the same closed-boundary winding, while F is regular at x=0 and its right-edge jet is rigorously transferred from J.",
+    "right_edge_calibration": {
+      "source_kind": "jensen_window_pf_newman_q208_selected_boundary_pilot",
+      "source_sha256": "90ca1c6e1e3bfae3e1979b4a077f8ec428003e98b7bd7de8640c08c542c3e6b8",
+      "right_strip_domain": "[1/1040,1/5]x[245,246]",
+      "right_strip_cells": 40,
+      "right_edge_domain": "x=246, 1/1040<=t<=1/5",
+      "right_edge_cells": 20,
+      "right_edge_time_cover_contiguous": true,
+      "right_edge_time_low": "1/1040",
+      "right_edge_time_high": "1/5",
+      "minimum_strip_full_derivative_lower": "[2.74842995422409717150882800350618905119382156826663560755859516271491876751094511518300491904084419573354e-29 +/- 4.09e-134]",
+      "minimum_edge_full_derivative_lower": "[2.74842995422409717150882800350618905119382156826663560755859516271491876751094511518300491904084419573354e-29 +/- 4.09e-134]",
+      "proxy": "F_t(x)=16*(1+x^4)*H_t(x)",
+      "right_edge_transfer": "F=(1+x^-4)*J and F'=(1+x^-4)*J'-4*x^-5*J at x=246",
+      "minimum_edge_proxy_derivative_lower": "[2.74842994114538475612679723538771225333469368077701874652160281001741346414414028782485097030428402853945e-29 +/- 1.85e-134]",
+      "phase_half_plane": "Im(F_t(246)+i*F_t'(246))>0",
+      "phase_conclusion": "The transformed axis-safe right-edge path has a single principal argument in (0,pi) and cannot contribute a complete turn by itself."
+    },
+    "q208_handoff": "Build a complete fixed-time first-jet cell chain on t=1/1040, 0<=x<=246, store cyclic endpoint witnesses with the axis, top, and right edges, and compute one exact closed witness-polygon winding. Until that chain exists, Q208, Lambda<=0, RH, and the Clay prize remain open."
+  },
+  "projection_audits": [
+    {
+      "rectangle": [
+        "2",
+        "5",
+        "-3",
+        "4"
+      ],
+      "projection": [
+        "2",
+        "0"
+      ],
+      "projection_norm_squared": "4",
+      "minimum_vertex_margin": "0"
+    },
+    {
+      "rectangle": [
+        "-5",
+        "-2",
+        "-4",
+        "6"
+      ],
+      "projection": [
+        "-2",
+        "0"
+      ],
+      "projection_norm_squared": "4",
+      "minimum_vertex_margin": "0"
+    },
+    {
+      "rectangle": [
+        "-3",
+        "7",
+        "2",
+        "5"
+      ],
+      "projection": [
+        "0",
+        "2"
+      ],
+      "projection_norm_squared": "4",
+      "minimum_vertex_margin": "0"
+    },
+    {
+      "rectangle": [
+        "-4",
+        "8",
+        "-6",
+        "-1"
+      ],
+      "projection": [
+        "0",
+        "-1"
+      ],
+      "projection_norm_squared": "1",
+      "minimum_vertex_margin": "0"
+    },
+    {
+      "rectangle": [
+        "2",
+        "5",
+        "3",
+        "7"
+      ],
+      "projection": [
+        "2",
+        "3"
+      ],
+      "projection_norm_squared": "13",
+      "minimum_vertex_margin": "0"
+    }
+  ],
+  "polygon_audits": [
+    {
+      "name": "counterclockwise_square",
+      "vertices": [
+        [
+          "1",
+          "-1"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "-1",
+          "1"
+        ],
+        [
+          "-1",
+          "-1"
+        ]
+      ],
+      "cell_count": 4,
+      "winding": 1
+    },
+    {
+      "name": "clockwise_square",
+      "vertices": [
+        [
+          "1",
+          "-1"
+        ],
+        [
+          "-1",
+          "-1"
+        ],
+        [
+          "-1",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ]
+      ],
+      "cell_count": 4,
+      "winding": -1
+    },
+    {
+      "name": "upper_half_plane_triangle",
+      "vertices": [
+        [
+          "2",
+          "1"
+        ],
+        [
+          "-2",
+          "1"
+        ],
+        [
+          "0",
+          "3"
+        ]
+      ],
+      "cell_count": 3,
+      "winding": 0
+    }
+  ],
+  "rows": [
+    {
+      "id": "npcu_01_projection_separation",
+      "role": "exact_convex_geometry_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "Every compact convex origin-free phase cell has a strict separating half-plane.",
+      "formula": "For a compact convex C with 0 not in C, let p be the closest point of C to 0. Then p dot v >= ||p||^2>0 for every v in C. Thus C lies in one open half-plane through 0 and admits a single argument branch of width strictly less than pi.",
+      "proof_boundary": "No smoothness or Xi input is used.",
+      "diagnostics": [
+        {
+          "rectangle": [
+            "2",
+            "5",
+            "-3",
+            "4"
+          ],
+          "projection": [
+            "2",
+            "0"
+          ],
+          "projection_norm_squared": "4",
+          "minimum_vertex_margin": "0"
+        },
+        {
+          "rectangle": [
+            "-5",
+            "-2",
+            "-4",
+            "6"
+          ],
+          "projection": [
+            "-2",
+            "0"
+          ],
+          "projection_norm_squared": "4",
+          "minimum_vertex_margin": "0"
+        },
+        {
+          "rectangle": [
+            "-3",
+            "7",
+            "2",
+            "5"
+          ],
+          "projection": [
+            "0",
+            "2"
+          ],
+          "projection_norm_squared": "4",
+          "minimum_vertex_margin": "0"
+        },
+        {
+          "rectangle": [
+            "-4",
+            "8",
+            "-6",
+            "-1"
+          ],
+          "projection": [
+            "0",
+            "-1"
+          ],
+          "projection_norm_squared": "1",
+          "minimum_vertex_margin": "0"
+        },
+        {
+          "rectangle": [
+            "2",
+            "5",
+            "3",
+            "7"
+          ],
+          "projection": [
+            "2",
+            "3"
+          ],
+          "projection_norm_squared": "13",
+          "minimum_vertex_margin": "0"
+        }
+      ]
+    },
+    {
+      "id": "npcu_02_rectangle_projection",
+      "role": "exact_interval_geometry",
+      "readiness": "ready_to_apply",
+      "claim": "Axis-aligned interval cells have an explicit exact separation witness.",
+      "formula": "For C=[a,b]x[c,d], p=(proj_[a,b](0),proj_[c,d](0)); C excludes 0 iff p!=0, and p dot v>=||p||^2 on all of C.",
+      "proof_boundary": "Endpoint bounds must be outward enclosures.",
+      "diagnostics": [
+        {
+          "rectangle": [
+            "2",
+            "5",
+            "-3",
+            "4"
+          ],
+          "projection": [
+            "2",
+            "0"
+          ],
+          "projection_norm_squared": "4",
+          "minimum_vertex_margin": "0"
+        },
+        {
+          "rectangle": [
+            "-5",
+            "-2",
+            "-4",
+            "6"
+          ],
+          "projection": [
+            "-2",
+            "0"
+          ],
+          "projection_norm_squared": "4",
+          "minimum_vertex_margin": "0"
+        },
+        {
+          "rectangle": [
+            "-3",
+            "7",
+            "2",
+            "5"
+          ],
+          "projection": [
+            "0",
+            "2"
+          ],
+          "projection_norm_squared": "4",
+          "minimum_vertex_margin": "0"
+        },
+        {
+          "rectangle": [
+            "-4",
+            "8",
+            "-6",
+            "-1"
+          ],
+          "projection": [
+            "0",
+            "-1"
+          ],
+          "projection_norm_squared": "1",
+          "minimum_vertex_margin": "0"
+        },
+        {
+          "rectangle": [
+            "2",
+            "5",
+            "3",
+            "7"
+          ],
+          "projection": [
+            "2",
+            "3"
+          ],
+          "projection_norm_squared": "13",
+          "minimum_vertex_margin": "0"
+        }
+      ]
+    },
+    {
+      "id": "npcu_03_cell_to_chord",
+      "role": "exact_homotopy_lemma",
+      "readiness": "ready_to_apply",
+      "claim": "A path segment inside one convex origin-free cell may be replaced by its endpoint chord.",
+      "formula": "If gamma([s_k,s_(k+1)]) is contained in convex C_k and v_k=gamma(s_k), then (1-u)gamma(s)+u*((1-r)v_k+r*v_(k+1)) is a homotopy relative endpoints from gamma to its endpoint chord inside C_k, where r is the affine edge parameter.",
+      "proof_boundary": "Convexity keeps the full homotopy inside the certified cell.",
+      "diagnostics": null
+    },
+    {
+      "id": "npcu_04_witness_polygon",
+      "role": "exact_homotopy_composition",
+      "readiness": "ready_to_apply",
+      "claim": "Cyclic cell intersections reduce continuous-path winding to a rational witness polygon.",
+      "formula": "If q_k belongs to C_(k-1) intersect C_k cyclically, the exact endpoint polygon is homotopic to the rational witness polygon q_0...q_(n-1) edge by edge inside C_k. Therefore wind(gamma,0)=wind(q_0...q_(n-1),0).",
+      "proof_boundary": "Each witness must lie in both adjacent certified cells.",
+      "diagnostics": null
+    },
+    {
+      "id": "npcu_05_exact_crossing_count",
+      "role": "exact_integer_algorithm",
+      "readiness": "ready_to_apply",
+      "claim": "The witness-polygon winding is computed without floating-point angles.",
+      "formula": "For each oriented edge p->q, add +1 when p_y<=0<q_y and det(p,q)>0; add -1 when q_y<=0<p_y and det(p,q)<0. The sum is the exact winding, provided no edge meets 0.",
+      "proof_boundary": "Edges meeting the origin are rejected.",
+      "diagnostics": [
+        {
+          "name": "counterclockwise_square",
+          "vertices": [
+            [
+              "1",
+              "-1"
+            ],
+            [
+              "1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "-1"
+            ]
+          ],
+          "cell_count": 4,
+          "winding": 1
+        },
+        {
+          "name": "clockwise_square",
+          "vertices": [
+            [
+              "1",
+              "-1"
+            ],
+            [
+              "-1",
+              "-1"
+            ],
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ]
+          ],
+          "cell_count": 4,
+          "winding": -1
+        },
+        {
+          "name": "upper_half_plane_triangle",
+          "vertices": [
+            [
+              "2",
+              "1"
+            ],
+            [
+              "-2",
+              "1"
+            ],
+            [
+              "0",
+              "3"
+            ]
+          ],
+          "cell_count": 3,
+          "winding": 0
+        }
+      ]
+    },
+    {
+      "id": "npcu_06_phase_unwrapping",
+      "role": "exact_phase_lift_equivalence",
+      "readiness": "ready_to_apply",
+      "claim": "Sequential local argument unwrapping and exact polygon winding are equivalent certificates.",
+      "formula": "The closest-point half-plane gives a local argument interval of width <pi on every C_k. A certified intersection witness selects the unique 2pi translate shared by adjacent branches. The resulting lifted phase has the same integer increment as the exact witness-polygon crossing count.",
+      "proof_boundary": "The polygon formulation avoids branch-cut and near-pi ambiguity.",
+      "diagnostics": null
+    },
+    {
+      "id": "npcu_07_interval_contract",
+      "role": "rigorous_numerical_contract",
+      "readiness": "ready_to_apply",
+      "claim": "The method promotes interval path covers only when all geometric gates are explicit.",
+      "formula": "Every cell must enclose the whole continuous path segment, not sampled points; every cell must exclude 0; each cyclic adjacent pair must have an exact rational intersection witness; and all ray-crossing determinants are evaluated exactly. Failure of any condition is unresolved, never an inferred phase.",
+      "proof_boundary": "Point sampling alone cannot satisfy this contract.",
+      "diagnostics": null
+    },
+    {
+      "id": "npcu_08_axis_safe_proxy",
+      "role": "exact_orientation_preserving_proxy",
+      "readiness": "ready_to_apply",
+      "claim": "One globally regular triangular proxy joins the axis to the high-frequency J cells.",
+      "formula": "Set F_t(x)=16*(1+x^4)*H_t(x). Its first jet is T_x(H_t,H_t') with T_x=16[[1+x^4,0],[4x^3,1+x^4]]. The homotopy T_(x,s)=[[1-s+16s(1+x^4),0],[64s*x^3,1-s+16s(1+x^4)]] has positive determinant for 0<=s<=1. Hence F and H have the same contacts and the same closed-boundary winding, while F is regular at x=0 and its right-edge jet is rigorously transferred from J.",
+      "proof_boundary": "The positive-determinant homotopy preserves every closed winding integer.",
+      "diagnostics": null
+    },
+    {
+      "id": "npcu_09_q208_right_edge",
+      "role": "rigorous_source_composition",
+      "readiness": "ready_to_apply",
+      "claim": "The complete transformed Q208 right edge lies in the open upper proxy half-plane.",
+      "formula": "The transformed axis-safe right-edge path has a single principal argument in (0,pi) and cannot contribute a complete turn by itself.",
+      "proof_boundary": "This fixes a phase branch on one open edge, not the closed-boundary winding.",
+      "diagnostics": {
+        "source_kind": "jensen_window_pf_newman_q208_selected_boundary_pilot",
+        "source_sha256": "90ca1c6e1e3bfae3e1979b4a077f8ec428003e98b7bd7de8640c08c542c3e6b8",
+        "right_strip_domain": "[1/1040,1/5]x[245,246]",
+        "right_strip_cells": 40,
+        "right_edge_domain": "x=246, 1/1040<=t<=1/5",
+        "right_edge_cells": 20,
+        "right_edge_time_cover_contiguous": true,
+        "right_edge_time_low": "1/1040",
+        "right_edge_time_high": "1/5",
+        "minimum_strip_full_derivative_lower": "[2.74842995422409717150882800350618905119382156826663560755859516271491876751094511518300491904084419573354e-29 +/- 4.09e-134]",
+        "minimum_edge_full_derivative_lower": "[2.74842995422409717150882800350618905119382156826663560755859516271491876751094511518300491904084419573354e-29 +/- 4.09e-134]",
+        "proxy": "F_t(x)=16*(1+x^4)*H_t(x)",
+        "right_edge_transfer": "F=(1+x^-4)*J and F'=(1+x^-4)*J'-4*x^-5*J at x=246",
+        "minimum_edge_proxy_derivative_lower": "[2.74842994114538475612679723538771225333469368077701874652160281001741346414414028782485097030428402853945e-29 +/- 1.85e-134]",
+        "phase_half_plane": "Im(F_t(246)+i*F_t'(246))>0",
+        "phase_conclusion": "The transformed axis-safe right-edge path has a single principal argument in (0,pi) and cannot contribute a complete turn by itself."
+      }
+    },
+    {
+      "id": "npcu_10_q208_handoff",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The complete Q208 bottom cell chain and closed winding remain to be certified.",
+      "formula": "Build a complete fixed-time first-jet cell chain on t=1/1040, 0<=x<=246, store cyclic endpoint witnesses with the axis, top, and right edges, and compute one exact closed witness-polygon winding. Until that chain exists, Q208, Lambda<=0, RH, and the Clay prize remain open.",
+      "proof_boundary": "No Q208, cofinal, Lambda<=0, RH, or prize conclusion is promoted.",
+      "diagnostics": null
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "date": "2026-07-24",
+  "exact": {
+    "derivative_tail_theorem": {
+      "budget_consequence": "For every fixed j,m,T, d_(N,j,m)(T)<=C_(j,m,T)*N^A*exp(-c_*N^(4/3)).",
+      "c_safe_decimal": "0.836595177919016838217115331627",
+      "c_safe_exact": "3*3**(2/3)*pi**(2/3)/16",
+      "proof": "Differentiate the two blended summands. Forward terms are polynomials times exp(-pi*n^2*exp(4u)). Reflected terms are polynomials times exp(-pi*n^2*exp(-4u)-9*sinh(4u)^2). The phase bound supplies exp(-c_0*n^(4/3)); two successive halvings absorb all fixed derivative, exp(Tu^2), integration, and arithmetic-summation factors.",
+      "safe_exponent": "c_*=c_0/4",
+      "statement": "For fixed T,p,k there are effective C_(T,p,k)>0 and A_(p,k)>=0 such that integral_R |u|^p*exp(Tu^2)*|r_N^(k)(u)|du<=C_(T,p,k)*N^A*exp(-c_*N^(4/3)) for N>=2."
+    },
+    "frequency_scales": {
+      "K_gamma_decimal": "0.567098366759640997160953095281",
+      "K_gamma_exact": "6**(3/4)*pi**(1/4)/9",
+      "combined_candidate": "N(x,t)=max(N_sad(x,t),ceil(K*(1+x)^(3/4)))",
+      "gamma_compatible_bound": "d_(N_K,j,m)(T)/x^m<=poly(x)*exp(-c_*K^(4/3)*x)",
+      "gamma_compatible_count": "N_K(x)=ceil(K*(1+x)^(3/4))",
+      "saddle_bound_scale": "The proved absolute derivative estimate at N_sad+O(1) is only polynomial(x)*exp(-c*x^(2/3)).",
+      "saddle_count": "N_sad(x,t)=ceil(max(n_*(5,t,x),n_*(9,t,x)))=Theta(sqrt(x))",
+      "safe_threshold": "K>K_gamma=(pi/(8*c_*))^(3/4)",
+      "warning": "This upper-bound scale does not prove failure of the exact Fourier remainder, but a fixed additive saddle collar is not by itself a gamma-scale absolute-error theorem."
+    },
+    "hermite_envelope": {
+      "definition": "P_b(T,v)=b!*sum_(ell=0)^floor(b/2) (2v)^(b-2ell)*T^(b-ell)/(ell!*(b-2ell)!)",
+      "derivative_identity": "partial_u^b exp(tu^2)=exp(tu^2)P_b(t,u)",
+      "uniform_bound": "|partial_u^b exp(tu^2)|<=exp(Tu^2)P_b(T,|u|), 0<=t<=T",
+      "verified_orders": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    },
+    "reflected_phase": {
+      "c0_decimal": "3.34638071167606735286846132651",
+      "c0_exact": "3*3**(2/3)*pi**(2/3)/4",
+      "global_n_bound": "pi*n^2/y+9*sinh(4u)^2>=c_0*n^(4/3), u>=0, n>=2",
+      "large_y": "9*sinh(4u)^2>=9y^2/16 for y>=sqrt(2)",
+      "minimizer": "y_*=(8q/9)^(1/3)",
+      "minimum": "(3/2)*(9/8)^(1/3)*q^(2/3)",
+      "phase": "q/y+9y^2/16",
+      "switch_bound": "1-omega(u)<=exp(-9*sinh(4u)^2)/2",
+      "variables": "y=exp(4u)>=1, q=pi*n^2"
+    },
+    "remaining_target": {
+      "not_supplied": "The derivative envelope does not give a lower separation bound for (S_(N,t),S_(N,t)') and does not intervalize the adaptive transition cells.",
+      "statement": "Instantiate effective constants for T=1/5 and m=5 or a higher optimized order, then prove the retained direct-C1 value-or-derivative separation on all transition cells."
+    },
+    "tail_envelopes": {
+      "E": "E_(N,k)(u;T)=exp(Tu^2)*sum_(b=0)^k binom(k,b)P_b(T,u)|r_N^(k-b)(u)|, u>=0",
+      "first_jet_budget": "d_(N,1,m)(T)<=integral_0^infinity [u*E_(N,m)(u;T)+m*E_(N,m-1)(u;T)]du",
+      "m5_first_jet_integrand": "u*E_(N,5)(u;T)+5*E_(N,4)(u;T)",
+      "m5_value_integrand": "exp(Tu^2)*sum_(b=0)^5 binom(5,b)P_b(T,u)|r_N^(5-b)(u)|",
+      "parity_reason": "r_N is even, so one half of the real-line L1 norm is the positive-half-line integral.",
+      "tail": "r_N(u)=sum_(n>N)b_n(u)",
+      "value_budget": "d_(N,0,m)(T)<=integral_0^infinity E_(N,m)(u;T)du"
+    }
+  },
+  "kind": "jensen_window_pf_newman_theta_modular_tail_derivative_envelope_gate",
+  "proof_boundary": "This artifact proves explicit integration-by-parts envelopes and an effective N^A*exp(-c*N^(4/3)) bound for every fixed modular-tail derivative norm. It derives an x^(3/4) sufficient scale for exponential absolute tail control and guards against promoting a fixed additive saddle collar. It does not instantiate referee-ready constants, prove retained first-jet separation, strict Laguerre positivity, Lambda<=0, RH, or a Clay-prize result.",
+  "rows": [
+    {
+      "claim": "All bounded-time heat-factor derivatives have an explicit positive polynomial envelope.",
+      "diagnostics": null,
+      "formula": "P_b(T,v)=b!*sum_(ell=0)^floor(b/2) (2v)^(b-2ell)*T^(b-ell)/(ell!*(b-2ell)!)",
+      "id": "ntmtdeg_01_heat_hermite_polynomials",
+      "proof_boundary": "Exact scalar calculus, verified through the orders used by the scout.",
+      "readiness": "available_exact",
+      "role": "exact_identity"
+    },
+    {
+      "claim": "The modular value remainder has an explicit positive-half-line derivative envelope.",
+      "diagnostics": null,
+      "formula": "d_(N,0,m)(T)<=integral_0^infinity E_(N,m)(u;T)du",
+      "id": "ntmtdeg_02_value_derivative_envelope",
+      "proof_boundary": "The displayed integral still requires numerical or analytic enclosure.",
+      "readiness": "ready_to_apply",
+      "role": "exact_inequality"
+    },
+    {
+      "claim": "The modular first-derivative remainder has an explicit companion envelope.",
+      "diagnostics": null,
+      "formula": "d_(N,1,m)(T)<=integral_0^infinity [u*E_(N,m)(u;T)+m*E_(N,m-1)(u;T)]du",
+      "id": "ntmtdeg_03_first_jet_derivative_envelope",
+      "proof_boundary": "Exact Leibniz reduction; no retained first-jet separation follows.",
+      "readiness": "ready_to_apply",
+      "role": "exact_inequality"
+    },
+    {
+      "claim": "The reflected modular blend has a uniform n^(4/3) decay phase.",
+      "diagnostics": {
+        "c0_decimal": "3.34638071167606735286846132651",
+        "c0_exact": "3*3**(2/3)*pi**(2/3)/4",
+        "global_n_bound": "pi*n^2/y+9*sinh(4u)^2>=c_0*n^(4/3), u>=0, n>=2",
+        "large_y": "9*sinh(4u)^2>=9y^2/16 for y>=sqrt(2)",
+        "minimizer": "y_*=(8q/9)^(1/3)",
+        "minimum": "(3/2)*(9/8)^(1/3)*q^(2/3)",
+        "phase": "q/y+9y^2/16",
+        "switch_bound": "1-omega(u)<=exp(-9*sinh(4u)^2)/2",
+        "variables": "y=exp(4u)>=1, q=pi*n^2"
+      },
+      "formula": "pi*n^2/y+9*sinh(4u)^2>=c_0*n^(4/3), u>=0, n>=2",
+      "id": "ntmtdeg_04_reflected_phase_minimum",
+      "proof_boundary": "Kernel-derivative decay only; not a Fourier sign theorem.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "Every fixed weighted derivative norm of the omitted modular tail has an effective stretched-exponential bound.",
+      "diagnostics": {
+        "budget_consequence": "For every fixed j,m,T, d_(N,j,m)(T)<=C_(j,m,T)*N^A*exp(-c_*N^(4/3)).",
+        "c_safe_decimal": "0.836595177919016838217115331627",
+        "c_safe_exact": "3*3**(2/3)*pi**(2/3)/16",
+        "proof": "Differentiate the two blended summands. Forward terms are polynomials times exp(-pi*n^2*exp(4u)). Reflected terms are polynomials times exp(-pi*n^2*exp(-4u)-9*sinh(4u)^2). The phase bound supplies exp(-c_0*n^(4/3)); two successive halvings absorb all fixed derivative, exp(Tu^2), integration, and arithmetic-summation factors.",
+        "safe_exponent": "c_*=c_0/4",
+        "statement": "For fixed T,p,k there are effective C_(T,p,k)>0 and A_(p,k)>=0 such that integral_R |u|^p*exp(Tu^2)*|r_N^(k)(u)|du<=C_(T,p,k)*N^A*exp(-c_*N^(4/3)) for N>=2."
+      },
+      "formula": "For fixed T,p,k there are effective C_(T,p,k)>0 and A_(p,k)>=0 such that integral_R |u|^p*exp(Tu^2)*|r_N^(k)(u)|du<=C_(T,p,k)*N^A*exp(-c_*N^(4/3)) for N>=2.",
+      "id": "ntmtdeg_05_stretched_exponential_tail",
+      "proof_boundary": "Constants are effective but not numerically instantiated here.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "A fixed additive saddle collar is not yet a gamma-scale absolute-error theorem.",
+      "diagnostics": null,
+      "formula": "The proved absolute derivative estimate at N_sad+O(1) is only polynomial(x)*exp(-c*x^(2/3)).",
+      "id": "ntmtdeg_06_fixed_collar_scale_guard",
+      "proof_boundary": "This upper-bound scale does not prove failure of the exact Fourier remainder, but a fixed additive saddle collar is not by itself a gamma-scale absolute-error theorem.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion_gate"
+    },
+    {
+      "claim": "An x^(3/4) block count converts the proved tail estimate to an exponential-in-x bound.",
+      "diagnostics": {
+        "K_gamma_decimal": "0.567098366759640997160953095281",
+        "K_gamma_exact": "6**(3/4)*pi**(1/4)/9",
+        "combined_candidate": "N(x,t)=max(N_sad(x,t),ceil(K*(1+x)^(3/4)))",
+        "gamma_compatible_bound": "d_(N_K,j,m)(T)/x^m<=poly(x)*exp(-c_*K^(4/3)*x)",
+        "gamma_compatible_count": "N_K(x)=ceil(K*(1+x)^(3/4))",
+        "saddle_bound_scale": "The proved absolute derivative estimate at N_sad+O(1) is only polynomial(x)*exp(-c*x^(2/3)).",
+        "saddle_count": "N_sad(x,t)=ceil(max(n_*(5,t,x),n_*(9,t,x)))=Theta(sqrt(x))",
+        "safe_threshold": "K>K_gamma=(pi/(8*c_*))^(3/4)",
+        "warning": "This upper-bound scale does not prove failure of the exact Fourier remainder, but a fixed additive saddle collar is not by itself a gamma-scale absolute-error theorem."
+      },
+      "formula": "d_(N_K,j,m)(T)/x^m<=poly(x)*exp(-c_*K^(4/3)*x)",
+      "id": "ntmtdeg_07_three_quarter_scale",
+      "proof_boundary": "Tail control only; it does not prove the direct-C1 disjunction.",
+      "readiness": "ready_to_apply",
+      "role": "exact_theorem"
+    },
+    {
+      "claim": "The absolute-error architecture must retain both the saddle transition and the larger derivative-tail scale.",
+      "diagnostics": null,
+      "formula": "N(x,t)=max(N_sad(x,t),ceil(K*(1+x)^(3/4)))",
+      "id": "ntmtdeg_08_revised_adaptive_candidate",
+      "proof_boundary": "A sufficient truncation architecture, not a proof that its retained jet stays separated.",
+      "readiness": "ready_to_apply",
+      "role": "exact_composition"
+    },
+    {
+      "claim": "Instantiate effective constants for T=1/5 and m=5 or a higher optimized order, then prove the retained direct-C1 value-or-derivative separation on all transition cells.",
+      "diagnostics": null,
+      "formula": "The derivative envelope does not give a lower separation bound for (S_(N,t),S_(N,t)') and does not intervalize the adaptive transition cells.",
+      "id": "ntmtdeg_09_open_separation_handoff",
+      "proof_boundary": "No new Q_j, Lambda<=0, RH, or Clay-prize result is proved.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_handoff"
+    }
+  ],
+  "source_audit": {
+    "c1_kind": "jensen_window_pf_newman_theta_adaptive_modular_c1_remainder_contract",
+    "c1_rows": 10,
+    "modular_kind": "jensen_window_pf_newman_theta_modular_blend_gate",
+    "modular_rows": 12
+  },
+  "sources": [
+    "outputs/jensen_window_pf_newman_theta_modular_blend_gate.md",
+    "outputs/jensen_window_pf_newman_theta_adaptive_modular_c1_remainder_contract.md",
+    "outputs/formal_core.md"
+  ],
+  "status": "exact modular-tail derivative envelope and effective three-quarter-scale absolute-error theorem"
+}

@@ -1,0 +1,186 @@
+{
+  "audit": {
+    "classical_theorem_step_count": 2,
+    "cofinal_ou_energy_rh_equivalence_proved": true,
+    "exact_identity_count": 13,
+    "full_burnol_bound_proved": false,
+    "full_gram_comparison_proved": false,
+    "lambda_le_zero_proved": false,
+    "literature_guard_count": 2,
+    "open_comparison_gate_count": 1,
+    "pf_infinity_proved": false,
+    "proof_guard_count": 4,
+    "rh_proved": false,
+    "row_count": 22
+  },
+  "date": "2026-07-23",
+  "kind": "jensen_window_pf_weighted_autocorrelation_ou_tail_energy_reduction",
+  "parameters": {
+    "a": "(1-alpha)/2",
+    "alpha": "2omega",
+    "beta": "(1+alpha)/2",
+    "omega_range": "0<omega<1/2"
+  },
+  "rows": [
+    {
+      "id": "waoter_01_parameters",
+      "proof_boundary": "Fixed 0<alpha<1.",
+      "role": "exact_definition",
+      "statement": "alpha=2omega, a=(1-alpha)/2, beta=(1+alpha)/2, so a+beta=1 and a+alpha=beta.",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_02_integrable_amplitude",
+      "proof_boundary": "It is x^(alpha-1) at zero and O(x^(alpha-2)) at infinity.",
+      "role": "exact_definition",
+      "statement": "f_alpha(x)={x}x^(alpha-2) belongs to L1(0,infinity).",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_03_period_mean",
+      "proof_boundary": "Insert s=alpha-1 in the fractional-part Mellin identity.",
+      "role": "exact_identity",
+      "statement": "L_alpha=(1/2)integral f_alpha=-zeta(1-alpha)/(2(1-alpha))>0.",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_04_bernoulli_primitive",
+      "proof_boundary": "Elementary periodic Bernoulli-polynomial identity.",
+      "role": "exact_identity",
+      "statement": "Psi(y)=B_2({y})/2 is continuous periodic, Psi'={y}-1/2 almost everywhere, and ||Psi||_infinity=1/12.",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_05_quantitative_period_averaging",
+      "proof_boundary": "Split at 1/lambda and integrate the centered sawtooth by parts against the bounded Bernoulli primitive.",
+      "role": "exact_inequality",
+      "statement": "|A_alpha(lambda)-L_alpha|<=K_alpha*lambda^(-alpha), lambda>=1, with K_alpha=1/(2alpha)+zeta(2-alpha)/6.",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_06_large_ratio_asymptotic",
+      "proof_boundary": "Immediate from the explicit averaging inequality; this is the weighted 0<alpha<1 statement, not the alpha=0 theorem.",
+      "role": "exact_asymptotic",
+      "statement": "A_alpha(lambda)=L_alpha+O_alpha(lambda^(-alpha)).",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_07_ou_kernel_split",
+      "proof_boundary": "Use evenness and a+alpha=beta.",
+      "role": "exact_identity",
+      "statement": "C_alpha(u)=L_alpha*exp(-a|u|)+R_alpha(u), with |R_alpha(u)|<=K_alpha*exp(-beta|u|).",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_08_fourier_density_split",
+      "proof_boundary": "Fourier transform of exp(-a|u|) and the previous full kernel density.",
+      "role": "exact_identity",
+      "statement": "The OU density is 2a/(a^2+t^2), while the remainder density is [|zeta(a+it)|^2-2aL_alpha]/(a^2+t^2).",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_09_remainder_sign_witness",
+      "proof_boundary": "The numerical value is about -0.06875549, so the natural remainder is not positive definite.",
+      "role": "countermodel_guard",
+      "statement": "At alpha=1/2 and t=0, |zeta(1/4)|^2-2*(1/4)*L_(1/2)<0.",
+      "status": "guard_validated"
+    },
+    {
+      "id": "waoter_10_main_gram",
+      "proof_boundary": "Finite real symmetric Gram form for the leading OU kernel.",
+      "role": "exact_definition",
+      "statement": "G_(alpha,N)=sum_(d,e<=N)c_d*c_e*exp(-a|log(d/e)|), c_d=mu(d)d^(-beta).",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_11_ou_factorization",
+      "proof_boundary": "Direct evaluation of the elementary exponential integral.",
+      "role": "exact_identity",
+      "statement": "exp(-a|u-v|)=2a*integral_(-infinity,min(u,v))exp(-a(u-x))exp(-a(v-x))dx.",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_12_continuous_tail_energy",
+      "proof_boundary": "Insert u=log(d), y=exp(x), and beta+a=1.",
+      "role": "exact_identity",
+      "statement": "G_(alpha,N)=(1-alpha)integral_0^N y^(-alpha)|sum_(y<=d<=N)mu(d)/d|^2dy.",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_13_discrete_tail_energy",
+      "proof_boundary": "The reciprocal-Mobius tail is constant on each interval (k-1,k).",
+      "role": "exact_identity",
+      "statement": "G_(alpha,N)=sum_(k=1)^N [k^(1-alpha)-(k-1)^(1-alpha)]|sum_(d=k)^N mu(d)/d|^2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_14_pnt_tail_limit",
+      "proof_boundary": "Classical PNT equivalence; not an RH assumption.",
+      "role": "classical_theorem_step",
+      "statement": "The prime number theorem gives sum_(d>=1)mu(d)/d=0 and sum_(d=k)^N mu(d)/d -> r_k=sum_(d=k)^infinity mu(d)/d.",
+      "status": "source_backed"
+    },
+    {
+      "id": "waoter_15_fatou_weighted_l2",
+      "proof_boundary": "Fatou plus k^(1-alpha)-(k-1)^(1-alpha)>=(1-alpha)k^(-alpha).",
+      "role": "exact_implication",
+      "statement": "sup_N G_(alpha,N)<infinity implies sum_(k>=1)k^(-alpha)|r_k|^2<infinity.",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_16_reciprocal_zeta_series",
+      "proof_boundary": "Cauchy-Schwarz with the weighted l2 tail and summation by parts in the absolutely convergent half-plane.",
+      "role": "exact_identity",
+      "statement": "F_alpha(s)=sum_(k>=2)r_k[k^(1-s)-(k-1)^(1-s)] converges locally uniformly for Re(s)>beta and equals 1/zeta(s) for Re(s)>1.",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_17_fixed_alpha_zero_free",
+      "proof_boundary": "The locally uniform series analytically continues 1/zeta to that half-plane.",
+      "role": "exact_implication",
+      "statement": "sup_N G_(alpha,N)<infinity implies zeta(s)!=0 for Re(s)>beta=(1+alpha)/2.",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_18_rh_implies_main_energy",
+      "proof_boundary": "RH gives M(x)=O_epsilon(x^(1/2+epsilon)); partial summation bounds every finite reciprocal-Mobius tail by O(k^(-1/2+epsilon)), with 2epsilon<alpha.",
+      "role": "classical_theorem_step",
+      "statement": "RH implies sup_N G_(alpha,N)<infinity for every fixed 0<alpha<1.",
+      "status": "source_backed"
+    },
+    {
+      "id": "waoter_19_cofinal_rh_equivalence",
+      "proof_boundary": "Rows 17 and 18 plus the functional-equation symmetry of nontrivial zeta zeros.",
+      "role": "exact_equivalence",
+      "statement": "RH iff sup_N G_(1/(j+1),N)<infinity for every integer j>=1.",
+      "status": "available_exact"
+    },
+    {
+      "id": "waoter_20_full_gram_noncomparison",
+      "proof_boundary": "The negative spectral witness forbids dropping or ordering the remainder.",
+      "role": "proof_guard",
+      "statement": "Gamma_(alpha,N)=L_alpha*G_(alpha,N)+E_(alpha,N), but the sign-indefinite remainder gives no inequality between Gamma and G.",
+      "status": "guarded"
+    },
+    {
+      "id": "waoter_21_hilbert_large_sieve_barrier",
+      "proof_boundary": "The generic theorem reaches only the same nonuniform critical scale; the multiplicative Hilbert matrix uses a product kernel and is also not directly applicable.",
+      "role": "literature_guard",
+      "statement": "Montgomery-Vaughan weighted Hilbert spacing with lambda_n=log n and c_n=mu(n)n^(-beta) costs sum n|c_n|^2 asymptotic to a constant times N^(1-alpha), and its skew kernel is not the present ratio kernel.",
+      "status": "source_backed_guard"
+    },
+    {
+      "id": "waoter_22_open_comparison_gate",
+      "proof_boundary": "This remains RH-strength; no full Burnol bound, RH, PF-infinity, or Lambda<=0 conclusion is recorded.",
+      "role": "open_target",
+      "statement": "Find a Mobius-specific comparison, cancellation, or bilinear estimate controlling the full remainder together with the RH-equivalent OU tail energy on a cofinal sequence.",
+      "status": "open_target"
+    }
+  ],
+  "source_anchors": [
+    "https://arxiv.org/abs/math/0306251",
+    "https://arxiv.org/abs/2203.14950",
+    "https://arxiv.org/abs/1411.7294"
+  ],
+  "status": "exact weighted far-ratio/OU reduction and cofinal RH-equivalent tail energy with one open comparison gate"
+}

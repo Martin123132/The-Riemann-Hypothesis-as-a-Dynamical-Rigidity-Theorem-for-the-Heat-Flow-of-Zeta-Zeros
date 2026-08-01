@@ -1,0 +1,242 @@
+{
+  "constants": {
+    "L_min": 50
+  },
+  "date": "2026-07-27",
+  "exact": {
+    "correction_cylinder": "P_mu=sum_(k,m) z^k a_(k,m)exp(i xi log m)*(d_(2^k m)-d_1)/(1+mu d_1)^2. Define J_(theta,mu)=Im(conj(P_theta)P_mu). If the boundary circles are nonzero and all interior zeros are regular, the same orientation gives wind_theta P(.,mu_1)-wind_theta P(.,mu_0)=-sum_(P=0)sign J_(theta,mu).",
+    "diagnostics": {
+      "linked_zero_free_ratio": "7.07106781186547573e-01",
+      "pair_kernel_terms": "one unordered term per distinct lifted pair",
+      "winding_transport_orientation": "wind(theta,xi_1)-wind(theta,xi_0)=-sum_(P=0) sign J_(theta,xi)",
+      "xi_support_pair": "n=2 and n=3"
+    },
+    "domain": "L=log(x/(4*pi))>=50, 0<=tL<=25, a^2=x/(4*pi)+t/16, N=floor(a), with the phase transport performed at fixed physical x,t,N before the physical x derivative is restored",
+    "endpoint_augmentation_guard": {
+      "augmented_zero": "P(1)+e=0",
+      "endpoint": "e=-5/3",
+      "interpretation": "Unit-disk zero-freeness of the finite prefix does not survive an arbitrary endpoint addition. The actual Riemann-Siegel endpoint needs its own transport current.",
+      "prefix": "P(z)=1+(2/3)z",
+      "prefix_zero": "z=-3/2, outside the closed unit disk"
+    },
+    "endpoint_cylinder": "At fixed physical x, after the finite prefix is restored, define F_N(z,tau)=P_N(z,omega_*,1)+tau*r_0 for 0<=tau<=1. Then F_theta=P_theta, F_tau=r_0, and J_(theta,tau)=Im(conj(P_theta)r_0). The same cylinder degree formula transports the finite-prefix winding to the endpoint-augmented value Z_0. This endpoint cylinder is indispensable.",
+    "endpoint_first_jet": "The final physical derivatives remain Z_(0,x)=r_(0,x)-s_*'H_1+D_0 and Z_(A,x)=r_(A,x)-s_*''P_1-s_*'P_(1,x), where P_(1,x)=-s_*'(H_2-log(a)H_1)+D_1-log(a)D_0-H_0/(8*pi*a^2). After eta projection, these enter Gamma_ell=mathsf_X+i mathsf_A/ell and its exact argument flux. The adjacent recurrence is retained at cutoff boundaries.",
+    "linked_argument_current": "Where H_0=P is nonzero, partial_xi arg P_link=Re(conj(H_0)H_1)/|H_0|^2.",
+    "linked_derivative": "On theta=h*xi, dP/dxi=h*P_theta+P_xi=i*mathcal D_hP=i*H_1.",
+    "linked_monotonicity_guard": {
+      "first_moment": "H_1=log(2)*r*exp(i*phi)",
+      "interpretation": "A zero-free complete dyadic block need not have monotone argument along the linked physical phase.",
+      "linked_argument_numerator": "Re(conj(P)*H_1)=log(2)*(r^2+r*cos(phi))",
+      "negative_value": "at phi=pi it equals log(2)*(1/2-1/sqrt(2))<0",
+      "nonvanishing": "|P(phi)|>=1-r>0",
+      "prefix": "P(phi)=1+r*exp(i*phi), r=2^(-1/2)"
+    },
+    "live_q_ge_1_target": "On q=2tL^2>=1, prove enough boundary nonvanishing and signed-degree control for the three cylinders to transport the synchronized base to the endpoint-augmented physical first jet. A sufficient result is zero interior degree together with nonvanishing final boundary; a more local result may control only the linked point and complete successor path. It must still imply |mathsf_X|<=delta_L => |mathcal C_N|>A_L+epsilon_term and 0<=kappa_j<1.",
+    "phase_jacobian": "J_(theta,xi)=Im(conj(P_theta)*P_xi). It is the oriented real Jacobian det partial_(theta,xi)(Re P_N,Im P_N).",
+    "phase_lift": "Retain P_N(z,xi,mu)=sum_(k=0)^K z^k*sum_(m<=M_k,m odd)a_(k,m)exp(i xi log m)*(1+mu d_(2^k m))/(1+mu d_1), with z=exp(i theta). The synchronized base is (xi,mu)=(0,0); the actual finite prefix is (theta,xi,mu)=(omega_*log 2,omega_*,1).",
+    "phase_pair_kernel": "sum_(alpha<beta) w_alpha*w_beta*(k_alpha*l_beta-k_beta*l_alpha)*sin(phi_beta-phi_alpha), with phi_alpha=k_alpha*theta+l_alpha*xi, l_alpha=log(m_alpha). For complex correction coefficients, replace w_alpha*w_beta*sin(phi_beta-phi_alpha) by Im(conj(c_alpha)c_beta exp(i(phi_beta-phi_alpha))).",
+    "phase_partials": "P_theta=i*sum_alpha k_alpha w_alpha exp(i phi_alpha), P_xi=i*sum_alpha l_alpha w_alpha exp(i phi_alpha)",
+    "physical_x_current": "At the actual point, H_(0,x)=-s_*'H_1+D_0. Thus the linked phase current iH_1 is only the phase component; the sigma_* amplitude drift and full d_n current D_0 must be restored before an x-transversality claim.",
+    "pi_provenance": "The pi in a^2=x/(4*pi)+t/16 comes from the completed zeta normalization and Riemann-Siegel saddle; 4*pi(2N+1) is the cutoff-cell difference and 2*pi is the period of exp(i theta). The phase cylinder and its Jacobians do not define pi.",
+    "proof_boundary": "The phase partials, pair-kernel Jacobian, linked derivative and argument current, cylinder winding-transport theorem, correction and endpoint cylinders, and three route guards are exact. No sign or nonzero lower bound for the full Xi Jacobian, no three-cylinder crossing budget, no joined Xi lower bound, no strict successor flux upper bound, no q<1 closure, no contact exclusion, no Lambda<=0 or PF-infinity theorem, no RH proof, and no Clay-prize conclusion is asserted.",
+    "q_lt_1_target": "The q=2tL^2<1 layer still needs the separate multiplicity-compatible parabolic/Hermite first-jet chart. The cylinder identities remain exact, but no endpoint simplicity or global Jacobian sign is imposed there.",
+    "route_decision": "Reject a global or termwise sign theorem for J_(theta,xi): its genuine n=2,3 pair kernel oscillates. Reject monotone linked argument: even the zero-free 1+2^(-1/2)exp(i phi) block has negative angular current on part of the phase cycle. Retain the Jacobians as local degree currents. The live theorem is a signed crossing budget, no-zero cylinder theorem, or Xi-specific cancellation theorem across the odd-phase, correction, and endpoint cylinders.",
+    "three_cylinder_programme": "A sufficient strong route starts from the proved P_N(z,0,0), transports odd phase xi:0->omega_*, then correction mu:0->1, then endpoint tau:0->1. Each stage has an exact local Jacobian and signed winding-change formula. The final physical theorem may use a weaker linked-point argument, but no stage may be skipped merely because the preceding circle was zero-free.",
+    "winding_transport": "Assume P_N is nonzero on the two boundary circles xi=xi_0,xi_1 and has only isolated regular zeros in S^1_theta times (xi_0,xi_1). With J_(theta,xi)=Im(conj(P_theta)P_xi), the degree theorem gives wind_theta P(.,xi_1)-wind_theta P(.,xi_0)=-sum_(P=0)sign J_(theta,xi). For P=exp(i theta)-r(xi) with r increasing through one, J>0 at the crossing while wind_theta drops from one to zero.",
+    "xi_support_sign_guard": {
+      "interpretation": "Even genuine dyadic/odd support with positive amplitudes has an oscillating pair current. The full Jacobian may still have structure, but no termwise-positive proof is available.",
+      "linked_kernel": "J_23=w_2*w_3*log(3)*sin(xi*log(3/2))",
+      "negative_point": "xi*log(3/2)=3*pi/2 modulo 2*pi",
+      "positive_amplitudes": "w_2>0, w_3>0",
+      "positive_point": "xi*log(3/2)=pi/2 modulo 2*pi",
+      "support": "n=2=(k,m)=(1,1), n=3=(k,m)=(0,3)"
+    }
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_phase_cylinder_jacobian_transport_guard",
+  "proof_boundary": "The phase partials, pair-kernel Jacobian, linked derivative and argument current, cylinder winding-transport theorem, correction and endpoint cylinders, and three route guards are exact. No sign or nonzero lower bound for the full Xi Jacobian, no three-cylinder crossing budget, no joined Xi lower bound, no strict successor flux upper bound, no q<1 closure, no contact exclusion, no Lambda<=0 or PF-infinity theorem, no RH proof, and no Clay-prize conclusion is asserted.",
+  "rows": [
+    {
+      "claim": "Every pi in the cylinder reduction has an explicit completed-zeta, saddle, or phase-period source.",
+      "diagnostics": null,
+      "formula": "The pi in a^2=x/(4*pi)+t/16 comes from the completed zeta normalization and Riemann-Siegel saddle; 4*pi(2N+1) is the cutoff-cell difference and 2*pi is the period of exp(i theta). The phase cylinder and its Jacobians do not define pi.",
+      "id": "pcjtg_00_pi_provenance",
+      "proof_boundary": "The phase cylinder does not define pi.",
+      "readiness": "certified",
+      "role": "definition_provenance"
+    },
+    {
+      "claim": "The joined finite prefix has a canonical dyadic/odd/correction phase lift.",
+      "diagnostics": null,
+      "formula": "Retain P_N(z,xi,mu)=sum_(k=0)^K z^k*sum_(m<=M_k,m odd)a_(k,m)exp(i xi log m)*(1+mu d_(2^k m))/(1+mu d_1), with z=exp(i theta). The synchronized base is (xi,mu)=(0,0); the actual finite prefix is (theta,xi,mu)=(omega_*log 2,omega_*,1).",
+      "id": "pcjtg_01_phase_lift",
+      "proof_boundary": "The endpoint is added in a separate exact cylinder.",
+      "readiness": "ready_to_apply",
+      "role": "exact_recall"
+    },
+    {
+      "claim": "Both phase-cylinder tangent vectors are explicit finite sums.",
+      "diagnostics": null,
+      "formula": "P_theta=i*sum_alpha k_alpha w_alpha exp(i phi_alpha), P_xi=i*sum_alpha l_alpha w_alpha exp(i phi_alpha)",
+      "id": "pcjtg_02_phase_partials",
+      "proof_boundary": "No sign is assigned termwise.",
+      "readiness": "ready_to_apply",
+      "role": "exact_differential_identity"
+    },
+    {
+      "claim": "The oriented phase-cylinder Jacobian has an exact unordered-pair kernel.",
+      "diagnostics": null,
+      "formula": "J_(theta,xi)=Im(conj(P_theta)*P_xi). It is the oriented real Jacobian det partial_(theta,xi)(Re P_N,Im P_N). sum_(alpha<beta) w_alpha*w_beta*(k_alpha*l_beta-k_beta*l_alpha)*sin(phi_beta-phi_alpha), with phi_alpha=k_alpha*theta+l_alpha*xi, l_alpha=log(m_alpha). For complex correction coefficients, replace w_alpha*w_beta*sin(phi_beta-phi_alpha) by Im(conj(c_alpha)c_beta exp(i(phi_beta-phi_alpha))).",
+      "id": "pcjtg_03_pair_jacobian",
+      "proof_boundary": "The sine kernel is retained.",
+      "readiness": "ready_to_apply",
+      "role": "exact_pair_kernel"
+    },
+    {
+      "claim": "The physical dyadic/odd phase linkage is exactly the total logarithmic moment direction.",
+      "diagnostics": null,
+      "formula": "On theta=h*xi, dP/dxi=h*P_theta+P_xi=i*mathcal D_hP=i*H_1. Where H_0=P is nonzero, partial_xi arg P_link=Re(conj(H_0)H_1)/|H_0|^2. At the actual point, H_(0,x)=-s_*'H_1+D_0. Thus the linked phase current iH_1 is only the phase component; the sigma_* amplitude drift and full d_n current D_0 must be restored before an x-transversality claim.",
+      "id": "pcjtg_04_linked_current",
+      "proof_boundary": "Amplitude and d_n currents must be restored for x motion.",
+      "readiness": "ready_to_apply",
+      "role": "exact_linked_direction"
+    },
+    {
+      "claim": "Regular cylinder zeros transport the unit-circle winding by their signed Jacobian degree.",
+      "diagnostics": null,
+      "formula": "Assume P_N is nonzero on the two boundary circles xi=xi_0,xi_1 and has only isolated regular zeros in S^1_theta times (xi_0,xi_1). With J_(theta,xi)=Im(conj(P_theta)P_xi), the degree theorem gives wind_theta P(.,xi_1)-wind_theta P(.,xi_0)=-sum_(P=0)sign J_(theta,xi). For P=exp(i theta)-r(xi) with r increasing through one, J>0 at the crossing while wind_theta drops from one to zero.",
+      "id": "pcjtg_05_winding_transport",
+      "proof_boundary": "Boundary nonvanishing and regularity are hypotheses, not conclusions.",
+      "readiness": "ready_to_apply",
+      "role": "exact_topological_theorem"
+    },
+    {
+      "claim": "A genuine dyadic/odd pair kernel changes sign on the linked phase.",
+      "diagnostics": {
+        "interpretation": "Even genuine dyadic/odd support with positive amplitudes has an oscillating pair current. The full Jacobian may still have structure, but no termwise-positive proof is available.",
+        "linked_kernel": "J_23=w_2*w_3*log(3)*sin(xi*log(3/2))",
+        "negative_point": "xi*log(3/2)=3*pi/2 modulo 2*pi",
+        "positive_amplitudes": "w_2>0, w_3>0",
+        "positive_point": "xi*log(3/2)=pi/2 modulo 2*pi",
+        "support": "n=2=(k,m)=(1,1), n=3=(k,m)=(0,3)"
+      },
+      "formula": "{\"interpretation\": \"Even genuine dyadic/odd support with positive amplitudes has an oscillating pair current. The full Jacobian may still have structure, but no termwise-positive proof is available.\", \"linked_kernel\": \"J_23=w_2*w_3*log(3)*sin(xi*log(3/2))\", \"negative_point\": \"xi*log(3/2)=3*pi/2 modulo 2*pi\", \"positive_amplitudes\": \"w_2>0, w_3>0\", \"positive_point\": \"xi*log(3/2)=pi/2 modulo 2*pi\", \"support\": \"n=2=(k,m)=(1,1), n=3=(k,m)=(0,3)\"}",
+      "id": "pcjtg_06_xi_pair_sign_guard",
+      "proof_boundary": "This rejects termwise positivity, not every possible full-sum identity.",
+      "readiness": "guard_validated",
+      "role": "countermodel"
+    },
+    {
+      "claim": "A zero-free complete dyadic block need not have monotone linked argument.",
+      "diagnostics": {
+        "first_moment": "H_1=log(2)*r*exp(i*phi)",
+        "interpretation": "A zero-free complete dyadic block need not have monotone argument along the linked physical phase.",
+        "linked_argument_numerator": "Re(conj(P)*H_1)=log(2)*(r^2+r*cos(phi))",
+        "negative_value": "at phi=pi it equals log(2)*(1/2-1/sqrt(2))<0",
+        "nonvanishing": "|P(phi)|>=1-r>0",
+        "prefix": "P(phi)=1+r*exp(i*phi), r=2^(-1/2)"
+      },
+      "formula": "{\"first_moment\": \"H_1=log(2)*r*exp(i*phi)\", \"interpretation\": \"A zero-free complete dyadic block need not have monotone argument along the linked physical phase.\", \"linked_argument_numerator\": \"Re(conj(P)*H_1)=log(2)*(r^2+r*cos(phi))\", \"negative_value\": \"at phi=pi it equals log(2)*(1/2-1/sqrt(2))<0\", \"nonvanishing\": \"|P(phi)|>=1-r>0\", \"prefix\": \"P(phi)=1+r*exp(i*phi), r=2^(-1/2)\"}",
+      "id": "pcjtg_07_linked_monotonicity_guard",
+      "proof_boundary": "Zero-freeness and angular-current sign are different statements.",
+      "readiness": "guard_validated",
+      "role": "countermodel"
+    },
+    {
+      "claim": "The d_n restoration has its own exact cylinder Jacobian and degree formula.",
+      "diagnostics": null,
+      "formula": "P_mu=sum_(k,m) z^k a_(k,m)exp(i xi log m)*(d_(2^k m)-d_1)/(1+mu d_1)^2. Define J_(theta,mu)=Im(conj(P_theta)P_mu). If the boundary circles are nonzero and all interior zeros are regular, the same orientation gives wind_theta P(.,mu_1)-wind_theta P(.,mu_0)=-sum_(P=0)sign J_(theta,mu).",
+      "id": "pcjtg_08_correction_cylinder",
+      "proof_boundary": "A quantitative correction margin remains open.",
+      "readiness": "ready_to_apply",
+      "role": "exact_transport_identity"
+    },
+    {
+      "claim": "Endpoint augmentation has an exact local degree current.",
+      "diagnostics": null,
+      "formula": "At fixed physical x, after the finite prefix is restored, define F_N(z,tau)=P_N(z,omega_*,1)+tau*r_0 for 0<=tau<=1. Then F_theta=P_theta, F_tau=r_0, and J_(theta,tau)=Im(conj(P_theta)r_0). The same cylinder degree formula transports the finite-prefix winding to the endpoint-augmented value Z_0. This endpoint cylinder is indispensable.",
+      "id": "pcjtg_09_endpoint_cylinder",
+      "proof_boundary": "The finite-prefix theorem cannot bypass this cylinder.",
+      "readiness": "ready_to_apply",
+      "role": "exact_transport_identity"
+    },
+    {
+      "claim": "Adding an endpoint can destroy unit-disk zero-freeness.",
+      "diagnostics": {
+        "augmented_zero": "P(1)+e=0",
+        "endpoint": "e=-5/3",
+        "interpretation": "Unit-disk zero-freeness of the finite prefix does not survive an arbitrary endpoint addition. The actual Riemann-Siegel endpoint needs its own transport current.",
+        "prefix": "P(z)=1+(2/3)z",
+        "prefix_zero": "z=-3/2, outside the closed unit disk"
+      },
+      "formula": "{\"augmented_zero\": \"P(1)+e=0\", \"endpoint\": \"e=-5/3\", \"interpretation\": \"Unit-disk zero-freeness of the finite prefix does not survive an arbitrary endpoint addition. The actual Riemann-Siegel endpoint needs its own transport current.\", \"prefix\": \"P(z)=1+(2/3)z\", \"prefix_zero\": \"z=-3/2, outside the closed unit disk\"}",
+      "id": "pcjtg_10_endpoint_guard",
+      "proof_boundary": "The countermodel endpoint is generic, not the Xi endpoint.",
+      "readiness": "guard_validated",
+      "role": "countermodel"
+    },
+    {
+      "claim": "Odd phase, correction, and endpoint restoration form three exact winding-transport stages.",
+      "diagnostics": null,
+      "formula": "A sufficient strong route starts from the proved P_N(z,0,0), transports odd phase xi:0->omega_*, then correction mu:0->1, then endpoint tau:0->1. Each stage has an exact local Jacobian and signed winding-change formula. The final physical theorem may use a weaker linked-point argument, but no stage may be skipped merely because the preceding circle was zero-free.",
+      "id": "pcjtg_11_three_cylinders",
+      "proof_boundary": "A full-circle theorem is sufficient and may be stronger than the linked-point target.",
+      "readiness": "ready_to_apply",
+      "role": "route_reduction"
+    },
+    {
+      "claim": "The transported value must feed the complete five-current endpoint first jet.",
+      "diagnostics": null,
+      "formula": "The final physical derivatives remain Z_(0,x)=r_(0,x)-s_*'H_1+D_0 and Z_(A,x)=r_(A,x)-s_*''P_1-s_*'P_(1,x), where P_(1,x)=-s_*'(H_2-log(a)H_1)+D_1-log(a)D_0-H_0/(8*pi*a^2). After eta projection, these enter Gamma_ell=mathsf_X+i mathsf_A/ell and its exact argument flux. The adjacent recurrence is retained at cutoff boundaries.",
+      "id": "pcjtg_12_endpoint_first_jet",
+      "proof_boundary": "H_2, D_0, D_1, and adjacent recurrence remain present.",
+      "readiness": "ready_to_apply",
+      "role": "exact_endpoint_handoff"
+    },
+    {
+      "claim": "The Jacobian survives as a degree current, not a globally signed density.",
+      "diagnostics": null,
+      "formula": "Reject a global or termwise sign theorem for J_(theta,xi): its genuine n=2,3 pair kernel oscillates. Reject monotone linked argument: even the zero-free 1+2^(-1/2)exp(i phi) block has negative angular current on part of the phase cycle. Retain the Jacobians as local degree currents. The live theorem is a signed crossing budget, no-zero cylinder theorem, or Xi-specific cancellation theorem across the odd-phase, correction, and endpoint cylinders.",
+      "id": "pcjtg_13_route_decision",
+      "proof_boundary": "No signed Xi crossing budget is yet proved.",
+      "readiness": "guard_validated",
+      "role": "route_decision"
+    },
+    {
+      "claim": "The q>=1 obligation is a three-cylinder signed-degree or no-zero theorem with endpoint first jet.",
+      "diagnostics": null,
+      "formula": "On q=2tL^2>=1, prove enough boundary nonvanishing and signed-degree control for the three cylinders to transport the synchronized base to the endpoint-augmented physical first jet. A sufficient result is zero interior degree together with nonvanishing final boundary; a more local result may control only the linked point and complete successor path. It must still imply |mathsf_X|<=delta_L => |mathcal C_N|>A_L+epsilon_term and 0<=kappa_j<1.",
+      "id": "pcjtg_14_q_ge_1_target",
+      "proof_boundary": "The Xi lower bound and strict successor bound remain open.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    },
+    {
+      "claim": "The small-q chart and every global conclusion remain open.",
+      "diagnostics": null,
+      "formula": "The q=2tL^2<1 layer still needs the separate multiplicity-compatible parabolic/Hermite first-jet chart. The cylinder identities remain exact, but no endpoint simplicity or global Jacobian sign is imposed there. The phase partials, pair-kernel Jacobian, linked derivative and argument current, cylinder winding-transport theorem, correction and endpoint cylinders, and three route guards are exact. No sign or nonzero lower bound for the full Xi Jacobian, no three-cylinder crossing budget, no joined Xi lower bound, no strict successor flux upper bound, no q<1 closure, no contact exclusion, no Lambda<=0 or PF-infinity theorem, no RH proof, and no Clay-prize conclusion is asserted.",
+      "id": "pcjtg_15_q_lt_1_nonpromotion",
+      "proof_boundary": "No Lambda<=0, PF-infinity, RH, or Clay-prize conclusion is asserted.",
+      "readiness": "not_ready_to_apply",
+      "role": "open_theorem_target"
+    }
+  ],
+  "source_audit": {
+    "adjacent_recurrence": "jensen_window_pf_newman_polymath15_first_order_centered_adjacent_saddle_recurrence",
+    "joined_odd_prefix": "jensen_window_pf_newman_polymath15_first_order_centered_joined_dyadic_odd_prefix_first_jet_reduction",
+    "normalized_prefix": "jensen_window_pf_newman_polymath15_first_order_centered_normalized_prefix_phase_flux_reduction",
+    "prime_power_guard": "jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_block_composition_guard"
+  },
+  "source_sha256": {
+    "adjacent_recurrence": "ffab5ce74899f670a7e1e3cba0bcbd1734989134f2c0f0d972351f110af3d45f",
+    "joined_odd_prefix": "61ae992c785567a79390d93f9b23984b6ed6ae8431aaea0ff897b2bd68682f67",
+    "normalized_prefix": "75982d22a245d4b9ab6dff57818a49e9936bd1afd1e58318216c41be49291706",
+    "prime_power_guard": "1886a5476844ac89860436f1b0d82cbcee8f576dc5e46e9efcd29098edd4ee79"
+  },
+  "sources": {
+    "adjacent_recurrence": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_adjacent_saddle_recurrence.json",
+    "joined_odd_prefix": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_joined_dyadic_odd_prefix_first_jet_reduction.json",
+    "normalized_prefix": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_normalized_prefix_phase_flux_reduction.json",
+    "prime_power_guard": "work\\rh_compute\\results\\jensen_window_pf_newman_polymath15_first_order_centered_prime_power_heat_block_composition_guard.json"
+  },
+  "status": "exact phase-cylinder pair Jacobian, linked-direction current, winding-transport theorem, correction and endpoint cylinders, and three route guards; the Xi signed-degree budget and successor theorem remain open"
+}

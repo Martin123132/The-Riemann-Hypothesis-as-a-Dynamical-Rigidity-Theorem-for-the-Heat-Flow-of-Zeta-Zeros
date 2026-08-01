@@ -1,0 +1,275 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_normalized_prefix_phase_flux_reduction",
+  "date": "2026-07-27",
+  "status": "exact normalized-prefix and first-jet flux reduction, certified Xi coefficient spiralling, and a recrossing nonpromotion guard, with an exact dyadic-completion diagnostic; the composed successor bound remains open",
+  "proof_boundary": "This artifact proves the normalized-prefix identities, exact coefficient and prefix currents, q>=1 inward coefficient motion, strict ordered relative rotation, the O(N) first-jet flux integrand, an exact recrossing countermodel, and the smallest exact dyadic-completion repair diagnostic. It does not prove the Xi prefix lower bound, the strict composed successor flux bound, the q<1 multiplicity-compatible theorem, finite shoulder closure, contact exclusion, Lambda<=0, PF-infinity, RH, or a Clay-prize conclusion.",
+  "sources": {
+    "carrier_prefix": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_carrier_kernel_abel_prefix_reduction.json",
+    "phase_anchor": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_absolute_phase_anchor_reduction.json",
+    "direct_projection": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_direct_projection_regime_reduction.json",
+    "wronskian_crossing": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_wronskian_crossing_reduction.json",
+    "oriented_successor": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_oriented_successor_winding_reduction.json"
+  },
+  "source_sha256": {
+    "carrier_prefix": "408b16b6719be7a55b5f260dcda8ebc9bfd012edd734e6fc4913f8cbb0e9abc3",
+    "phase_anchor": "7e5c8725b2d0913d2e5d1731b962a7cd79081b8e09e52c7992647e4dc631cbd2",
+    "direct_projection": "8252a4d506a8132aeec65f5f1c9490430e39b776d76dfae92e27ce008c5e22a9",
+    "wronskian_crossing": "1347942c7ab2a84227554db273bfccde506f9a51ab5b0d8da5e7851cc678b2cb",
+    "oriented_successor": "2b5a5d98d3d7fa2a3b65044bb0c94fe302f8db1e9855313d63569110d271f8c4"
+  },
+  "source_audit": {
+    "carrier_prefix": "jensen_window_pf_newman_polymath15_first_order_centered_carrier_kernel_abel_prefix_reduction",
+    "phase_anchor": "jensen_window_pf_newman_polymath15_first_order_centered_absolute_phase_anchor_reduction",
+    "direct_projection": "jensen_window_pf_newman_polymath15_first_order_centered_direct_projection_regime_reduction",
+    "wronskian_crossing": "jensen_window_pf_newman_polymath15_first_order_wronskian_crossing_reduction",
+    "oriented_successor": "jensen_window_pf_newman_polymath15_first_order_oriented_successor_winding_reduction"
+  },
+  "constants": {
+    "L_min": 50,
+    "d_x": 4223,
+    "d": 2189
+  },
+  "exact": {
+    "domain": "L=log(x/(4*pi))>=50, 0<=tL<=25, a^2=x/(4*pi)+t/16, N=floor(a); inward radial current uses q=2tL^2>=1 and all fixed-cell derivatives hold N constant",
+    "pi_provenance": "The pi in a^2=T_0/(2*pi)=x/(4*pi)+t/16 is inherited from xi(s)=s*(s-1)*pi^(-s/2)*Gamma(s/2)*zeta(s)/2 and the Riemann-Siegel saddle. The cutoff width 4*pi*(2N+1) is its algebraic cell difference. A phase cell uses the same constant because exp(i*(theta+2*pi))=exp(i*theta). No circle or prefix polygon is selected.",
+    "normalized_prefix": "Because z_n=eta*q_n, e=eta*r_0, and g=eta*r_A, G_k=conj(eta)*F_k=sum_(n=1)^k q_n with G_0=0 and G_1=1. Thus Z_0=r_0+G_N=conj(eta)*W_0. The prefix polygon is the piecewise-linear path through G_0,G_1,...,G_N; it has no role in defining pi.",
+    "normalized_slope": "Let V_tilde_N=r_A-s_*'*u_N*r_0 and B_N=V_tilde_N+s_*'*sum_(k=1)^(N-1)h_k*G_k. Then Z_A=s_*'*u_N*Z_0+B_N=conj(eta)*W_A. For Pi_eta(w)=Re(eta*w), mathsf_X=Pi_eta(Z_0), mathsf_A=Pi_eta(Z_A), and mathsf_A=Pi_eta(B_N)-b*u_N*Im(eta*Z_0)+c*u_N*mathsf_X. Hence at mathsf_X=0 the normalized formula is exactly mathcal_C_N=mathsf_A, including Z_0=0.",
+    "coefficient_current": "On a fixed-N cell put epsilon_n=d_(n,x)/(1+d_n). Then gamma_n=q_(n,x)/q_n=-s_*'*log(n)+epsilon_n-epsilon_1, gamma_1=0, rho_n=Re(gamma_n), vartheta_n=Im(gamma_n), and G_(k,x)=sum_(n=1)^k gamma_n*q_n.",
+    "q_ge_1_inward": "Since |epsilon_n|<8446/x^2, rho_n=-c*log(n)+Re(epsilon_n-epsilon_1). On q>=1, c=t*D_x/4>1/(8L^2*x). Therefore for n>=2, rho_n<-log(2)/(16L^2*x)<0; at L=50 the discarded coefficient-current error is less than 1.5e-14 of this certified inward floor.",
+    "ordered_rotation": "For 1<=n<m<=N, vartheta_m-vartheta_n=(-b)*log(m/n)+Im(epsilon_m-epsilon_n)>=log(m/n)/2-16892/x^2>0. In a complete fixed-t cutoff cell, h_n=log((n+1)/n)>1/N and Delta x=4*pi*(2N+1), so every adjacent relative phase advances by more than 4*pi. The worst L=50 integrated error is below 8.3e-20 of the surplus over 4*pi.",
+    "prefix_currents": "Writing q_n=R_n*exp(i*theta_n), delta_nm=theta_n-theta_m, gamma_n=rho_n+i*vartheta_n, Re(G_(k,x)*conj(G_k))=sum_n rho_n*R_n^2+sum_(n<m)R_n*R_m*[(rho_n+rho_m)*cos(delta_nm)-(vartheta_n-vartheta_m)*sin(delta_nm)]; Im(G_(k,x)*conj(G_k))=sum_n vartheta_n*R_n^2+sum_(n<m)R_n*R_m*[(rho_n-rho_m)*sin(delta_nm)+(vartheta_n+vartheta_m)*cos(delta_nm)].",
+    "current_sign_guard": "The diagonal angular terms are positive, but both pair kernels contain unrestricted sine and cosine factors. Strict inward motion and ordered angular currents therefore do not assign a sign to a prefix radial or angular current.",
+    "recrossing_countermodel": {
+      "coefficients": "q_2=exp(-epsilon*theta)*exp(i*theta), q_8=(1/2)*exp(-epsilon*theta)*exp(3*i*theta), epsilon>0",
+      "projection": "X_epsilon(theta)=exp(-epsilon*theta)*[cos(theta)+(1/2)cos(3theta)]",
+      "factorization": "cos(theta)+(1/2)cos(3theta)=cos(theta)*(2cos(theta)^2-1/2)",
+      "zeros": "pi/3,pi/2,2pi/3,4pi/3,3pi/2,5pi/3",
+      "upward_zeros": "pi/2,4pi/3,5pi/3",
+      "downward_zeros": "pi/3,2pi/3,3pi/2",
+      "zero_count": 6,
+      "upward_count": 3,
+      "downward_count": 3,
+      "signed_count": 0,
+      "first_jet_winding": -3,
+      "endpoint_relation": "Gamma_epsilon(2pi)=exp(-2pi*epsilon)*Gamma_epsilon(0) for Gamma_epsilon=X_epsilon+i*partial_theta X_epsilon",
+      "interpretation": "Both carriers move strictly inward, their angular currents are 1 and 3, the second amplitude is half the first, and the relative phase makes two turns. Nevertheless one phase cell has six simple crossings, three upward crossings, zero net signed crossing count, and first-jet winding -3. The simple zeros persist when the faster angular current is increased slightly, so a strict-more-than-two-turn version also exists."
+    },
+    "dyadic_completion_scout": {
+      "sparse_block": "cos(theta)+(1/2)cos(3theta), from the leading n=2 and n=8 coefficients after scaling by q_2",
+      "required_intermediate": "The actual t=0 dyadic chain also contains n=4 with q_4/q_2=2^(-1/2) and phase 2theta.",
+      "completed_block": "C_3(theta)=cos(theta)+2^(-1/2)cos(2theta)+(1/2)cos(3theta)",
+      "chebyshev_polynomial": "For c=cos(theta), 2sqrt(2)*C_3=4sqrt(2)c^3+4c^2-sqrt(2)c-2=:P(c).",
+      "discriminant": "-1696",
+      "endpoint_signs": "P(-1)=2-3sqrt(2)<0<P(1)=2+3sqrt(2)",
+      "real_root_count": 1,
+      "unit_interval_root_count": 1,
+      "completed_zero_count": 2,
+      "completed_upward_count": 1,
+      "interpretation": "Restoring the arithmetically required intermediate power removes the sparse model's extra two upward crossings. This does not prove the full Xi chain, but it shows that exact multiplicative completion can supply rigidity that generic amplitude and phase ordering miss.",
+      "next_hypothesis": "Test complete prime-power chains, then odd-part times dyadic chain decompositions, with the heat-quadratic and d_n perturbations retained. A theorem must also control sums of different chains and the endpoint; blockwise one-turn behavior alone is not promotable."
+    },
+    "signed_flux_identity": "For a regular real scalar X on [A,B], N_up-N_down=[sgn(X(B))-sgn(X(A))]/2. This endpoint flux controls only the net signed count. In the exact recrossing model it is zero while N_up=3.",
+    "first_jet_flux": "For ell>0 define Gamma_ell=mathsf_X+i*mathsf_A/ell. Where Gamma_ell!=0, partial_x arg(Gamma_ell)={mathsf_X*partial_x(mathsf_A/ell)-(mathsf_A/ell)*partial_x mathsf_X}/{mathsf_X^2+(mathsf_A/ell)^2}. At mathsf_X=0, mathsf_A>0, and partial_x mathsf_X>0, the positive-imaginary-ray intersection has sign -1. Thus the first-jet argument flux, with the prescribed connector and half-open conventions, is the correct object for the upward count.",
+    "normalized_flux_derivative": "Let eta_x=i*omega_eta*eta, Z_(0,x)=r_(0,x)+sum_n gamma_n*q_n, V_tilde_(N,x)=r_(A,x)-s_*''*u_N*r_0-s_*'*u_(N,x)*r_0-s_*'*u_N*r_(0,x), u_(N,x)=1/(8*pi*a^2)=1/(4*T_0), and B_(N,x)=V_tilde_(N,x)+s_*''*sum_k h_k*G_k+s_*'*sum_k h_k*sum_(n<=k)gamma_n*q_n. Then Z_(A,x)=(s_*''*u_N+s_*'*u_(N,x))*Z_0+s_*'*u_N*Z_(0,x)+B_(N,x), mathsf_X_x=Pi_eta(Z_(0,x))-omega_eta*Im(eta*Z_0), and mathsf_A_x=Pi_eta(Z_(A,x))-omega_eta*Im(eta*Z_A). This supplies an exact O(N) integrand for the first-jet phase flux.",
+    "live_q_ge_1_target": "Retain the pointwise all-fiber lower bound |mathcal_C_N|>A_L+epsilon_term on |mathsf_X|<=delta_L. For the integer, do not count turns of an individual carrier. Insert the normalized O(N) flux into the complete successor boundary composition and prove 0<=kappa_j=(2*pi)^(-1)*Delta_arg(Gamma_j)<1 after top, bottom, vertical, chart-join, and finite-shoulder terms are combined. The lower inequality is topological; the strict upper inequality is the open arithmetic theorem.",
+    "q_lt_1_target": "The q=2tL^2<1 layer still requires a separate multiplicity-compatible parabolic/Hermite first-jet flux chart. No uniform positive slope at t=0 is introduced.",
+    "numeric_audit": {
+      "x_min": "6.51529311985421213e+22",
+      "N_at_L50_tL25": 72004899337,
+      "cell_width_at_boundary": "1.80968050224930054e+12",
+      "q_ge_1_inward_floor": "2.65969300156159137e-28",
+      "coefficient_current_error": "3.97935930567845645e-42",
+      "radial_error_to_floor_ratio": "1.49617241664434464e-14",
+      "adjacent_rotation_lower": "1.25663706144464342e+01",
+      "adjacent_surplus_over_4pi": "8.72605248397444357e-11",
+      "adjacent_integrated_error": "7.20136894693061759e-30",
+      "adjacent_error_to_surplus_ratio": "8.25272247692305813e-20"
+    }
+  },
+  "rows": [
+    {
+      "id": "nfnpfr_00_pi_provenance",
+      "role": "definition_provenance",
+      "readiness": "certified",
+      "claim": "The saddle, cell-width, and phase-period appearances of pi have an explicit common provenance.",
+      "formula": "The pi in a^2=T_0/(2*pi)=x/(4*pi)+t/16 is inherited from xi(s)=s*(s-1)*pi^(-s/2)*Gamma(s/2)*zeta(s)/2 and the Riemann-Siegel saddle. The cutoff width 4*pi*(2N+1) is its algebraic cell difference. A phase cell uses the same constant because exp(i*(theta+2*pi))=exp(i*theta). No circle or prefix polygon is selected.",
+      "proof_boundary": "The prefix polygon neither defines nor approximates pi.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfnpfr_01_normalized_prefix",
+      "role": "exact_normal_form",
+      "readiness": "ready_to_apply",
+      "claim": "Removing the first coefficient phase turns every carrier prefix into a literal relative-coefficient partial sum.",
+      "formula": "Because z_n=eta*q_n, e=eta*r_0, and g=eta*r_A, G_k=conj(eta)*F_k=sum_(n=1)^k q_n with G_0=0 and G_1=1. Thus Z_0=r_0+G_N=conj(eta)*W_0. The prefix polygon is the piecewise-linear path through G_0,G_1,...,G_N; it has no role in defining pi.",
+      "proof_boundary": "The nonzero unit anchor is retained as the external real projector.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfnpfr_02_normalized_slope",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "The endpoint-complete Abel scalar has an exact normalized-prefix form and still includes the zero fiber.",
+      "formula": "Let V_tilde_N=r_A-s_*'*u_N*r_0 and B_N=V_tilde_N+s_*'*sum_(k=1)^(N-1)h_k*G_k. Then Z_A=s_*'*u_N*Z_0+B_N=conj(eta)*W_A. For Pi_eta(w)=Re(eta*w), mathsf_X=Pi_eta(Z_0), mathsf_A=Pi_eta(Z_A), and mathsf_A=Pi_eta(B_N)-b*u_N*Im(eta*Z_0)+c*u_N*mathsf_X. Hence at mathsf_X=0 the normalized formula is exactly mathcal_C_N=mathsf_A, including Z_0=0.",
+      "proof_boundary": "No argument division or slope sign is assumed.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfnpfr_03_coefficient_current",
+      "role": "exact_differential_identity",
+      "readiness": "ready_to_apply",
+      "claim": "Every normalized coefficient and every prefix derivative has an exact branch-free logarithmic current.",
+      "formula": "On a fixed-N cell put epsilon_n=d_(n,x)/(1+d_n). Then gamma_n=q_(n,x)/q_n=-s_*'*log(n)+epsilon_n-epsilon_1, gamma_1=0, rho_n=Re(gamma_n), vartheta_n=Im(gamma_n), and G_(k,x)=sum_(n=1)^k gamma_n*q_n.",
+      "proof_boundary": "All derivatives are inside one fixed cutoff chart.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfnpfr_04_inward_current",
+      "role": "asymptotic_certificate",
+      "readiness": "certified",
+      "claim": "On q>=1 every nonfirst normalized Xi coefficient moves strictly inward as x increases.",
+      "formula": "Since |epsilon_n|<8446/x^2, rho_n=-c*log(n)+Re(epsilon_n-epsilon_1). On q>=1, c=t*D_x/4>1/(8L^2*x). Therefore for n>=2, rho_n<-log(2)/(16L^2*x)<0; at L=50 the discarded coefficient-current error is less than 1.5e-14 of this certified inward floor.",
+      "proof_boundary": "This is a coefficientwise radial statement, not a prefix-current sign.",
+      "diagnostics": {
+        "x_min": "6.51529311985421213e+22",
+        "N_at_L50_tL25": 72004899337,
+        "cell_width_at_boundary": "1.80968050224930054e+12",
+        "q_ge_1_inward_floor": "2.65969300156159137e-28",
+        "coefficient_current_error": "3.97935930567845645e-42",
+        "radial_error_to_floor_ratio": "1.49617241664434464e-14",
+        "adjacent_rotation_lower": "1.25663706144464342e+01",
+        "adjacent_surplus_over_4pi": "8.72605248397444357e-11",
+        "adjacent_integrated_error": "7.20136894693061759e-30",
+        "adjacent_error_to_surplus_ratio": "8.25272247692305813e-20"
+      }
+    },
+    {
+      "id": "nfnpfr_05_ordered_rotation",
+      "role": "asymptotic_certificate",
+      "readiness": "certified",
+      "claim": "All normalized Xi angular currents are strictly ordered and every adjacent pair makes over two relative turns per complete cutoff cell.",
+      "formula": "For 1<=n<m<=N, vartheta_m-vartheta_n=(-b)*log(m/n)+Im(epsilon_m-epsilon_n)>=log(m/n)/2-16892/x^2>0. In a complete fixed-t cutoff cell, h_n=log((n+1)/n)>1/N and Delta x=4*pi*(2N+1), so every adjacent relative phase advances by more than 4*pi. The worst L=50 integrated error is below 8.3e-20 of the surplus over 4*pi.",
+      "proof_boundary": "A complete cell must lie inside the stated L>=50 domain.",
+      "diagnostics": {
+        "x_min": "6.51529311985421213e+22",
+        "N_at_L50_tL25": 72004899337,
+        "cell_width_at_boundary": "1.80968050224930054e+12",
+        "q_ge_1_inward_floor": "2.65969300156159137e-28",
+        "coefficient_current_error": "3.97935930567845645e-42",
+        "radial_error_to_floor_ratio": "1.49617241664434464e-14",
+        "adjacent_rotation_lower": "1.25663706144464342e+01",
+        "adjacent_surplus_over_4pi": "8.72605248397444357e-11",
+        "adjacent_integrated_error": "7.20136894693061759e-30",
+        "adjacent_error_to_surplus_ratio": "8.25272247692305813e-20"
+      }
+    },
+    {
+      "id": "nfnpfr_06_prefix_currents",
+      "role": "exact_kernel",
+      "readiness": "ready_to_apply",
+      "claim": "The normalized prefix radial and angular currents have explicit diagonal and pairwise kernels.",
+      "formula": "Writing q_n=R_n*exp(i*theta_n), delta_nm=theta_n-theta_m, gamma_n=rho_n+i*vartheta_n, Re(G_(k,x)*conj(G_k))=sum_n rho_n*R_n^2+sum_(n<m)R_n*R_m*[(rho_n+rho_m)*cos(delta_nm)-(vartheta_n-vartheta_m)*sin(delta_nm)]; Im(G_(k,x)*conj(G_k))=sum_n vartheta_n*R_n^2+sum_(n<m)R_n*R_m*[(rho_n-rho_m)*sin(delta_nm)+(vartheta_n+vartheta_m)*cos(delta_nm)].",
+      "proof_boundary": "The diagonal angular terms are positive, but both pair kernels contain unrestricted sine and cosine factors. Strict inward motion and ordered angular currents therefore do not assign a sign to a prefix radial or angular current.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfnpfr_07_recrossing_countermodel",
+      "role": "countermodel",
+      "readiness": "guard_validated",
+      "claim": "Inward ordered rotating carriers can produce three upward crossings and three first-jet turns in one phase cell.",
+      "formula": "{\"coefficients\": \"q_2=exp(-epsilon*theta)*exp(i*theta), q_8=(1/2)*exp(-epsilon*theta)*exp(3*i*theta), epsilon>0\", \"downward_count\": 3, \"downward_zeros\": \"pi/3,2pi/3,3pi/2\", \"endpoint_relation\": \"Gamma_epsilon(2pi)=exp(-2pi*epsilon)*Gamma_epsilon(0) for Gamma_epsilon=X_epsilon+i*partial_theta X_epsilon\", \"factorization\": \"cos(theta)+(1/2)cos(3theta)=cos(theta)*(2cos(theta)^2-1/2)\", \"first_jet_winding\": -3, \"interpretation\": \"Both carriers move strictly inward, their angular currents are 1 and 3, the second amplitude is half the first, and the relative phase makes two turns. Nevertheless one phase cell has six simple crossings, three upward crossings, zero net signed crossing count, and first-jet winding -3. The simple zeros persist when the faster angular current is increased slightly, so a strict-more-than-two-turn version also exists.\", \"projection\": \"X_epsilon(theta)=exp(-epsilon*theta)*[cos(theta)+(1/2)cos(3theta)]\", \"signed_count\": 0, \"upward_count\": 3, \"upward_zeros\": \"pi/2,4pi/3,5pi/3\", \"zero_count\": 6, \"zeros\": \"pi/3,pi/2,2pi/3,4pi/3,3pi/2,5pi/3\"}",
+      "proof_boundary": "This is an exact generic logarithmic-frequency route guard, not an Xi counterexample.",
+      "diagnostics": {
+        "coefficients": "q_2=exp(-epsilon*theta)*exp(i*theta), q_8=(1/2)*exp(-epsilon*theta)*exp(3*i*theta), epsilon>0",
+        "projection": "X_epsilon(theta)=exp(-epsilon*theta)*[cos(theta)+(1/2)cos(3theta)]",
+        "factorization": "cos(theta)+(1/2)cos(3theta)=cos(theta)*(2cos(theta)^2-1/2)",
+        "zeros": "pi/3,pi/2,2pi/3,4pi/3,3pi/2,5pi/3",
+        "upward_zeros": "pi/2,4pi/3,5pi/3",
+        "downward_zeros": "pi/3,2pi/3,3pi/2",
+        "zero_count": 6,
+        "upward_count": 3,
+        "downward_count": 3,
+        "signed_count": 0,
+        "first_jet_winding": -3,
+        "endpoint_relation": "Gamma_epsilon(2pi)=exp(-2pi*epsilon)*Gamma_epsilon(0) for Gamma_epsilon=X_epsilon+i*partial_theta X_epsilon",
+        "interpretation": "Both carriers move strictly inward, their angular currents are 1 and 3, the second amplitude is half the first, and the relative phase makes two turns. Nevertheless one phase cell has six simple crossings, three upward crossings, zero net signed crossing count, and first-jet winding -3. The simple zeros persist when the faster angular current is increased slightly, so a strict-more-than-two-turn version also exists."
+      }
+    },
+    {
+      "id": "nfnpfr_07a_dyadic_completion",
+      "role": "diagnostic",
+      "readiness": "diagnostic_validated",
+      "claim": "Restoring the missing leading dyadic carrier exactly repairs the smallest sparse recrossing obstruction.",
+      "formula": "{\"chebyshev_polynomial\": \"For c=cos(theta), 2sqrt(2)*C_3=4sqrt(2)c^3+4c^2-sqrt(2)c-2=:P(c).\", \"completed_block\": \"C_3(theta)=cos(theta)+2^(-1/2)cos(2theta)+(1/2)cos(3theta)\", \"completed_upward_count\": 1, \"completed_zero_count\": 2, \"discriminant\": \"-1696\", \"endpoint_signs\": \"P(-1)=2-3sqrt(2)<0<P(1)=2+3sqrt(2)\", \"interpretation\": \"Restoring the arithmetically required intermediate power removes the sparse model's extra two upward crossings. This does not prove the full Xi chain, but it shows that exact multiplicative completion can supply rigidity that generic amplitude and phase ordering miss.\", \"next_hypothesis\": \"Test complete prime-power chains, then odd-part times dyadic chain decompositions, with the heat-quadratic and d_n perturbations retained. A theorem must also control sums of different chains and the endpoint; blockwise one-turn behavior alone is not promotable.\", \"real_root_count\": 1, \"required_intermediate\": \"The actual t=0 dyadic chain also contains n=4 with q_4/q_2=2^(-1/2) and phase 2theta.\", \"sparse_block\": \"cos(theta)+(1/2)cos(3theta), from the leading n=2 and n=8 coefficients after scaling by q_2\", \"unit_interval_root_count\": 1}",
+      "proof_boundary": "This revives multiplicative block completion as a route; it does not control the sum of blocks or the Xi endpoint.",
+      "diagnostics": {
+        "sparse_block": "cos(theta)+(1/2)cos(3theta), from the leading n=2 and n=8 coefficients after scaling by q_2",
+        "required_intermediate": "The actual t=0 dyadic chain also contains n=4 with q_4/q_2=2^(-1/2) and phase 2theta.",
+        "completed_block": "C_3(theta)=cos(theta)+2^(-1/2)cos(2theta)+(1/2)cos(3theta)",
+        "chebyshev_polynomial": "For c=cos(theta), 2sqrt(2)*C_3=4sqrt(2)c^3+4c^2-sqrt(2)c-2=:P(c).",
+        "discriminant": "-1696",
+        "endpoint_signs": "P(-1)=2-3sqrt(2)<0<P(1)=2+3sqrt(2)",
+        "real_root_count": 1,
+        "unit_interval_root_count": 1,
+        "completed_zero_count": 2,
+        "completed_upward_count": 1,
+        "interpretation": "Restoring the arithmetically required intermediate power removes the sparse model's extra two upward crossings. This does not prove the full Xi chain, but it shows that exact multiplicative completion can supply rigidity that generic amplitude and phase ordering miss.",
+        "next_hypothesis": "Test complete prime-power chains, then odd-part times dyadic chain decompositions, with the heat-quadratic and d_n perturbations retained. A theorem must also control sums of different chains and the endpoint; blockwise one-turn behavior alone is not promotable."
+      }
+    },
+    {
+      "id": "nfnpfr_08_signed_flux_guard",
+      "role": "nonpromotion_guard",
+      "readiness": "guard_validated",
+      "claim": "Endpoint signed flux controls upward minus downward crossings, not the one-sided upward count.",
+      "formula": "For a regular real scalar X on [A,B], N_up-N_down=[sgn(X(B))-sgn(X(A))]/2. This endpoint flux controls only the net signed count. In the exact recrossing model it is zero while N_up=3.",
+      "proof_boundary": "A no-recrossing theorem or a first-jet argument bound is still required.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfnpfr_09_first_jet_flux",
+      "role": "exact_topological_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "The scaled first-jet argument, not an individual carrier phase, is the correct crossing flux.",
+      "formula": "For ell>0 define Gamma_ell=mathsf_X+i*mathsf_A/ell. Where Gamma_ell!=0, partial_x arg(Gamma_ell)={mathsf_X*partial_x(mathsf_A/ell)-(mathsf_A/ell)*partial_x mathsf_X}/{mathsf_X^2+(mathsf_A/ell)^2}. At mathsf_X=0, mathsf_A>0, and partial_x mathsf_X>0, the positive-imaginary-ray intersection has sign -1. Thus the first-jet argument flux, with the prescribed connector and half-open conventions, is the correct object for the upward count.",
+      "proof_boundary": "Endpoint, connector, and half-open conventions remain part of the count.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfnpfr_10_flux_integrand",
+      "role": "exact_differential_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The complete first-jet phase-flux density has an endpoint-complete O(N) normalized-prefix representation.",
+      "formula": "Let eta_x=i*omega_eta*eta, Z_(0,x)=r_(0,x)+sum_n gamma_n*q_n, V_tilde_(N,x)=r_(A,x)-s_*''*u_N*r_0-s_*'*u_(N,x)*r_0-s_*'*u_N*r_(0,x), u_(N,x)=1/(8*pi*a^2)=1/(4*T_0), and B_(N,x)=V_tilde_(N,x)+s_*''*sum_k h_k*G_k+s_*'*sum_k h_k*sum_(n<=k)gamma_n*q_n. Then Z_(A,x)=(s_*''*u_N+s_*'*u_(N,x))*Z_0+s_*'*u_N*Z_(0,x)+B_(N,x), mathsf_X_x=Pi_eta(Z_(0,x))-omega_eta*Im(eta*Z_0), and mathsf_A_x=Pi_eta(Z_(A,x))-omega_eta*Im(eta*Z_A). This supplies an exact O(N) integrand for the first-jet phase flux.",
+      "proof_boundary": "No sign or integral bound for this density is asserted.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfnpfr_11_q_ge_1_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The q>=1 integer problem is a composed successor first-jet flux bound, not a carrier-cell crossing bound.",
+      "formula": "Retain the pointwise all-fiber lower bound |mathcal_C_N|>A_L+epsilon_term on |mathsf_X|<=delta_L. For the integer, do not count turns of an individual carrier. Insert the normalized O(N) flux into the complete successor boundary composition and prove 0<=kappa_j=(2*pi)^(-1)*Delta_arg(Gamma_j)<1 after top, bottom, vertical, chart-join, and finite-shoulder terms are combined. The lower inequality is topological; the strict upper inequality is the open arithmetic theorem.",
+      "proof_boundary": "The strict upper flux bound and pointwise Xi prefix lower bound remain open.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfnpfr_12_q_lt_1_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The q<1 multiplicity-compatible first-jet flux chart remains separate.",
+      "formula": "The q=2tL^2<1 layer still requires a separate multiplicity-compatible parabolic/Hermite first-jet flux chart. No uniform positive slope at t=0 is introduced.",
+      "proof_boundary": "No simplicity assumption is promoted to t=0.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfnpfr_13_nonpromotion",
+      "role": "nonpromotion_guard",
+      "readiness": "guard_validated",
+      "claim": "Normalized spiralling and exact phase flux are kept separate from the missing Xi inequalities and RH.",
+      "formula": "The diagonal angular terms are positive, but both pair kernels contain unrestricted sine and cosine factors. Strict inward motion and ordered angular currents therefore do not assign a sign to a prefix radial or angular current.",
+      "proof_boundary": "No prefix lower bound, successor flux upper bound, q<1 theorem, finite shoulder closure, contact exclusion, Lambda<=0, PF-infinity, RH, or Clay-prize conclusion.",
+      "diagnostics": null
+    }
+  ]
+}

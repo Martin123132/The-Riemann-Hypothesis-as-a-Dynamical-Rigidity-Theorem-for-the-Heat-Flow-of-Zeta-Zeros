@@ -1,0 +1,168 @@
+{
+  "kind": "jensen_window_pf_burnol_tail_discrepancy_dyadic_reduction",
+  "date": "2026-07-23",
+  "status": "exact finite-tail and dyadic square-function reduction with one open arithmetic gate",
+  "parameters": {
+    "omega_range": "0<omega<1/2",
+    "alpha": "2omega",
+    "weight": "k^(alpha-2)"
+  },
+  "source_anchors": [
+    "https://arxiv.org/abs/math/0202166",
+    "https://arxiv.org/abs/math/0011254",
+    "https://arxiv.org/abs/math/0306251"
+  ],
+  "rows": [
+    {
+      "id": "btdr_01_weighted_mobius_data",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "alpha=2omega, a_omega(d)=mu(d)d^(-alpha), A_(omega,N)=sum_(d<=N)a_omega(d)/d.",
+      "proof_boundary": "Definitions for one fixed 0<omega<1/2."
+    },
+    {
+      "id": "btdr_02_limiting_residue",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "A_(omega,infinity)=1/zeta(1+alpha) and r_(omega,N)=A_(omega,infinity)-A_(omega,N).",
+      "proof_boundary": "Absolute convergence at 1+alpha>1."
+    },
+    {
+      "id": "btdr_03_finite_and_limiting_discrepancies",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "S_(omega,N)(k)=A_(omega,N)k-B_(omega,N)(k), with the analogous limiting S_(omega,infinity).",
+      "proof_boundary": "Finite divisor sums; B_infinity(k) is finite for each k."
+    },
+    {
+      "id": "btdr_04_tail_divisor_sum",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "H_(omega,N)(k)=B_(omega,infinity)(k)-B_(omega,N)(k)=sum_(N<d<=k)a_omega(d)floor(k/d).",
+      "proof_boundary": "Exact finite omitted-divisor sum."
+    },
+    {
+      "id": "btdr_05_discrepancy_difference",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "D_(omega,N)(k)=S_(omega,N)(k)-S_(omega,infinity)(k)=H_(omega,N)(k)-k*r_(omega,N).",
+      "proof_boundary": "Exact subtraction of finite and limiting discrepancies."
+    },
+    {
+      "id": "btdr_06_omitted_fractional_tail",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "T_(omega,N)(k)=sum_(d>N)a_omega(d){k/d}=k*r_(omega,N)-H_(omega,N)(k)=-D_(omega,N)(k).",
+      "proof_boundary": "The infinite tail is absolute after d>k and finite before it."
+    },
+    {
+      "id": "btdr_07_abel_tail_operator",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "With g_k(d)=d{k/d}, T_N(k)=r_N*g_k(N+1)+sum_(d=N+1)^k r_d*(g_k(d+1)-g_k(d)).",
+      "proof_boundary": "Finite summation by parts; g_k is constant for d>k."
+    },
+    {
+      "id": "btdr_08_energy_definitions",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Q_N=sum_(k>=1)k^(alpha-2)S_N(k)^2, Q_infinity analogously, and R_N=sum_(k>=1)k^(alpha-2)D_N(k)^2.",
+      "proof_boundary": "Nonnegative extended-real weighted energies."
+    },
+    {
+      "id": "btdr_09_hilbert_tail_split",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "sup_N Q_N<infinity iff Q_infinity<infinity and sup_N R_N<infinity.",
+      "proof_boundary": "Pointwise convergence plus Fatou in one direction and the Hilbert triangle inequality in both directions."
+    },
+    {
+      "id": "btdr_10_stable_prefix_energy",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "For k<=N, H_N(k)=0 and D_N(k)=-k*r_N, so P_N=sum_(k<=N)k^(alpha-2)D_N(k)^2=r_N^2 sum_(k<=N)k^alpha.",
+      "proof_boundary": "Exact stable-divisor prefix."
+    },
+    {
+      "id": "btdr_11_scalar_tail_equivalence",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "sup_N P_N<infinity iff r_N=O(N^(-(1+alpha)/2))=O(N^(-1/2-omega)).",
+      "proof_boundary": "Uses elementary two-sided power-sum bounds."
+    },
+    {
+      "id": "btdr_12_post_prefix_energy",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "U_N=sum_(k>N)k^(alpha-2)|H_N(k)-k*r_N|^2 and R_N=P_N+U_N.",
+      "proof_boundary": "Exact disjoint split at k=N."
+    },
+    {
+      "id": "btdr_13_three_gate_criterion",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "sup_N Q_N<infinity iff Q_infinity<infinity, r_N=O(N^(-1/2-omega)), and sup_N U_N<infinity.",
+      "proof_boundary": "Composition of the Hilbert split, stable-prefix identity, and nonnegativity."
+    },
+    {
+      "id": "btdr_14_quotient_reindexing",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "H_N(k)=sum_(m<=floor(k/(N+1)))[M_alpha(floor(k/m))-M_alpha(N)].",
+      "proof_boundary": "Swap floor(k/d) with its count of multiples."
+    },
+    {
+      "id": "btdr_15_short_interval_reindexing",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "H_N(k)=sum_(q<=floor(k/(N+1)))q*[M_alpha(floor(k/q))-M_alpha(max(N,floor(k/(q+1))))].",
+      "proof_boundary": "Partition d by q=floor(k/d); the intervals have ratio (q+1)/q."
+    },
+    {
+      "id": "btdr_16_dyadic_block_energy",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "V_N(K)=sum_(K<k<=2K)|H_N(k)-k*r_N|^2, K_j=2^j N.",
+      "proof_boundary": "Dyadic post-prefix block definition."
+    },
+    {
+      "id": "btdr_17_dyadic_equivalence",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "2^(alpha-2)sum_j K_j^(alpha-2)V_N(K_j)<=U_N<=sum_j K_j^(alpha-2)V_N(K_j).",
+      "proof_boundary": "The power weight is monotone on each dyadic block."
+    },
+    {
+      "id": "btdr_18_summable_envelope",
+      "role": "exact_implication",
+      "status": "available_exact",
+      "statement": "If V_N(2^jN)<=C*(2^jN)^(2-alpha)*2^(-eta*j) uniformly for some eta>0, then sup_N U_N<infinity.",
+      "proof_boundary": "A sufficient geometric envelope, not a proved estimate."
+    },
+    {
+      "id": "btdr_19_literature_nonpromotion_guards",
+      "role": "literature_guard",
+      "status": "source_backed_guard",
+      "statement": "Baez-Duarte's unweighted natural-approximation lower bounds and the fractional-part autocorrelation formula motivate but do not prove the weighted uniform dyadic estimate.",
+      "proof_boundary": "Source comparison only; the weights and finite-tail operator are different."
+    },
+    {
+      "id": "btdr_20_open_dyadic_square_function",
+      "role": "open_target",
+      "status": "open_target",
+      "statement": "Prove Q_infinity<infinity, the reciprocal-zeta tail rate, and a uniform summable dyadic bound for V_N along one explicit cofinal omega sequence.",
+      "proof_boundary": "This is RH-strength and remains open; no RH, PF-infinity, or Lambda<=0 conclusion is recorded."
+    }
+  ],
+  "audit": {
+    "row_count": 20,
+    "exact_identity_count": 12,
+    "equivalence_step_count": 4,
+    "literature_guard_count": 2,
+    "open_dyadic_square_function_gate_count": 1,
+    "uniform_dyadic_bound_proved": false,
+    "rh_proved": false,
+    "pf_infinity_proved": false,
+    "lambda_le_zero_proved": false
+  }
+}

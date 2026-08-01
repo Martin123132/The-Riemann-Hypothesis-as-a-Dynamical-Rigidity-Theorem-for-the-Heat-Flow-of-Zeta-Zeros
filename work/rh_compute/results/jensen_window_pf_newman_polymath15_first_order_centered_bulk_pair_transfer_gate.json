@@ -1,0 +1,196 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_bulk_pair_transfer_gate",
+  "date": "2026-07-26",
+  "status": "exact reflected bulk basis and uniform adjacent locked-pair transfer theorem on L>=50, 0<=tL<=25; aggregate Xi cancellation remains open",
+  "proof_boundary": "This artifact proves the reflected and Abel coordinate identities, the corrected consecutive ratio law, strict amplitude decrease, the exact locked-pair determinant, and det(B_n)>=h_n^2/16 with a two-term separation bound. It also gives exact countermodels showing that component or isolated-pair invertibility does not prove aggregate nonvanishing. It does not prove the q>=1 bulk scalar lower bound or signed crossing count, the q<1 multiplicity-compatible theorem, finite phase cells, one-sided successor winding, contact exclusion, Lambda<=0, RH, PF-infinity, or a Clay-prize conclusion.",
+  "sources": {
+    "first_correction": "work/rh_compute/results/jensen_window_pf_newman_polymath15_critical_dirichlet_first_correction_gate.json",
+    "centered_reduction": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_real_residual_reduction.json",
+    "adjacent_stability": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_adjacent_chart_stability_certificate.json"
+  },
+  "source_sha256": {
+    "first_correction": "0d5038807a75ed4040aaa27baf25477987d45bd3d0fb61422117ed6c68b9a78b",
+    "centered_reduction": "4e5390e921bb8a05cf804ba07b01121d4865b889cff2fa6209ec386afe7bbcff",
+    "adjacent_stability": "dcee581f283d63141e29d1085ee463c2eabc714a6e6760b15f12262474f83a83"
+  },
+  "source_audit": {
+    "first_correction": "jensen_window_pf_newman_polymath15_critical_dirichlet_first_correction_gate",
+    "centered_reduction": "jensen_window_pf_newman_polymath15_first_order_centered_real_residual_reduction",
+    "adjacent_stability": "jensen_window_pf_newman_polymath15_first_order_centered_adjacent_chart_stability_certificate"
+  },
+  "constants": {
+    "L_min": 50,
+    "tL_max": 25,
+    "d_absolute": 2189,
+    "d_difference": 44,
+    "amplitude_decay": "2/5",
+    "pair_determinant_denominator": 16,
+    "pair_separation_denominator": 48
+  },
+  "exact": {
+    "domain": "L=log(x/(4*pi))>=50, 0<=tL<=25, a^2=x/(4*pi)+t/16, N=floor(a), 1<=n<=N-1",
+    "reflected_sharp_basis": "2*(X,A_a)^T=(g_0,G_a)^T+(conj(g_0),conj(G_a))^T+sum_n{(1,-s_*'*ell_n)^T*f_n+(1,-conj(s_*')*ell_n)^T*conj(f_n)}, ell_n=log(n/a)",
+    "real_component_transfer": "For s_*'=c+i*b and f_n=x_n+i*y_n, V_n=(X_n,A_n)^T=T_(ell_n)(x_n,y_n)^T, T_ell=[[1,0],[-c*ell,b*ell]], det(T_ell)=b*ell",
+    "abel_chart_basis": "F_k=sum_(n<=k)f_n, h_k=log((k+1)/k): M_(1,a)=ell_N*F_N-sum_(k=1)^(N-1)h_k*F_k; A_a=Re(G_a-s_*'*ell_N*F_N+s_*'*sum_(k=1)^(N-1)h_k*F_k)",
+    "ratio_lock": "R_n=f_(n+1)/f_n=rho_n*exp(i*delta_n)=exp[-s_*h_n+(t/4)*(2log(n)h_n+h_n^2)]*(1+d_(n+1))/(1+d_n)",
+    "correction_difference": "d_(n+1)-d_n=alpha'*t^2*(h_n^2-2*h_n*alpha_n)/8, alpha_n=alpha-log(n)",
+    "amplitude_monotonicity": "|d_n|<2189/x<1/2, |d_(n+1)-d_n|<44*h_n/x, log(rho_n)<-(2/5)h_n, hence 0<rho_n<=exp(-2h_n/5)<1 and 1-rho_n>h_n/4",
+    "pair_matrix": "V_n+V_(n+1)=B_n*(Re f_n,Im f_n)^T, B_n=T_(ell_n)+rho_n*T_(ell_(n+1))*R(delta_n)",
+    "pair_determinant": "det(B_n)=b*(ell_n+rho_n^2*ell_(n+1))+rho_n*[b*(ell_n+ell_(n+1))*cos(delta_n)+c*(ell_(n+1)-ell_n)*sin(delta_n)]",
+    "positive_coordinates": "With b=-B, ell_n=-L_0, ell_(n+1)=-M_0, h_n=L_0-M_0>0: det(B_n)=B*(L_0+rho_n^2*M_0)+rho_n*[B*(L_0+M_0)*cos(delta_n)+c*h_n*sin(delta_n)]",
+    "determinant_bound": "C_x>0, D_x>0, B=1/2+t*C_x/4>=1/2, c=t*D_x/4<=1/(4x)<=h_n/16. Therefore det(B_n)>=h_n*[B*(1-rho_n)-c*rho_n]>=h_n^2/16.",
+    "two_term_separation": "||B_n||_F<3L, so ||(X_n+X_(n+1),A_n+A_(n+1))||_2>h_n^2*|f_n|/(48L).",
+    "chart_edge": "The disjoint adjacent blocks stop before the unpaired edge. The certified recurrence |A_(a,N+1)-A_(a,N)|<5000exp(-7L/4) must be retained for that last-saddle/endpoint block.",
+    "three_component_countermodel": "For arbitrary c, b!=0, and ell_j!=0, any target w_j=(P_j,Q_j) is realized by f_j=P_j+i*(Q_j/ell_j+c*P_j)/b. The nonzero targets (1,0),(0,1),(-1,-1) sum to zero.",
+    "locked_block_countermodel": "For any three invertible locked-pair matrices B_1,B_2,B_3, set u_j=B_j^(-1)w_j for w_1=(1,0), w_2=(0,1), w_3=(-1,-1). Every pair obeys its internal ratio lock and is nonzero, yet sum_j B_j u_j=0. Cross-block Xi ratios are essential.",
+    "turning_form": "For W_k=B_(2k-1)u_k and u_(k+1)=rho_(2k-1)rho_(2k)*R(delta_(2k-1)+delta_(2k))*u_k, det(W_k,W_(k+1)) is the quadratic form rho_(2k-1)rho_(2k)*u_k^T*B_(2k-1)^T*J*B_(2k+1)*R(delta_(2k-1)+delta_(2k))*u_k",
+    "turning_countermodel": "If the frame drift and all three ratio phases are zero, positive pair matrices may be diag(p_1,q_1),diag(p_2,q_2). Then det(W_1,W_2)=(p_1*q_2-q_1*p_2)*x*y, which takes both signs under the common phase whenever p_1*q_2!=q_1*p_2.",
+    "surviving_xi_target": "Use the full consecutive ratio chain together with the exact normalizer/endpoint phase anchor, not isolated pair invertibility or relative phases alone, to prove a quantitative half-plane, signed-area, or one-sided winding bound for the paired block polygon plus the recurrent edge block on the contact value band.",
+    "numeric_audit": {
+      "x_min": "6.51529311985421213e+22",
+      "d_absolute_upper": "3.35978744122717451e-20",
+      "d_log_ratio_per_h_upper": "1.35066831808127638e-21",
+      "uncorrected_log_ratio_per_h_upper": "-4.12499999999999978e-01",
+      "corrected_log_ratio_per_h_upper": "-4.12499999999999978e-01",
+      "one_minus_ratio_over_h_lower": "3.49336653940064357e-01",
+      "saddle_over_x_quarter": "4.42066983098357159e-12"
+    },
+    "factorization": "(L_0+rho^2*M_0)^2-rho^2*(L_0+M_0)^2=(1-rho^2)*(L_0-rho*M_0)*(L_0+rho*M_0)"
+  },
+  "rows": [
+    {
+      "id": "nfocbptg_01_reflected_basis",
+      "role": "exact_reduction",
+      "readiness": "available_exact",
+      "claim": "The centered pair has one division-free reflected sharp basis.",
+      "formula": "2*(X,A_a)^T=(g_0,G_a)^T+(conj(g_0),conj(G_a))^T+sum_n{(1,-s_*'*ell_n)^T*f_n+(1,-conj(s_*')*ell_n)^T*conj(f_n)}, ell_n=log(n/a)",
+      "proof_boundary": "This is a real projection identity, not a lower bound.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocbptg_02_abel_basis",
+      "role": "exact_reduction",
+      "readiness": "available_exact",
+      "claim": "Finite Abel summation isolates chart-independent positive logarithmic increments.",
+      "formula": "F_k=sum_(n<=k)f_n, h_k=log((k+1)/k): M_(1,a)=ell_N*F_N-sum_(k=1)^(N-1)h_k*F_k; A_a=Re(G_a-s_*'*ell_N*F_N+s_*'*sum_(k=1)^(N-1)h_k*F_k)",
+      "proof_boundary": "No sign is asserted for the complex partial sums.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocbptg_03_component_transfer",
+      "role": "exact_lemma",
+      "readiness": "available_exact",
+      "claim": "Each interior complex coefficient maps locally and orientation-preservingly to value/slope coordinates.",
+      "formula": "For s_*'=c+i*b and f_n=x_n+i*y_n, V_n=(X_n,A_n)^T=T_(ell_n)(x_n,y_n)^T, T_ell=[[1,0],[-c*ell,b*ell]], det(T_ell)=b*ell",
+      "proof_boundary": "The determinant degenerates at ell=0 and says nothing about sums of components.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocbptg_04_ratio_lock",
+      "role": "exact_lemma",
+      "readiness": "available_exact",
+      "claim": "Consecutive corrected Xi coefficients obey an exact phase-amplitude ratio law.",
+      "formula": "R_n=f_(n+1)/f_n=rho_n*exp(i*delta_n)=exp[-s_*h_n+(t/4)*(2log(n)h_n+h_n^2)]*(1+d_(n+1))/(1+d_n)",
+      "proof_boundary": "The law is local; its global oscillatory consequences remain to be proved.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocbptg_05_amplitude_decay",
+      "role": "asymptotic_theorem",
+      "readiness": "certified",
+      "claim": "Corrected coefficient amplitudes strictly decrease across every interior adjacent pair.",
+      "formula": "|d_n|<2189/x<1/2, |d_(n+1)-d_n|<44*h_n/x, log(rho_n)<-(2/5)h_n, hence 0<rho_n<=exp(-2h_n/5)<1 and 1-rho_n>h_n/4",
+      "proof_boundary": "Valid only on the displayed L>=50 first-order domain.",
+      "diagnostics": {
+        "x_min": "6.51529311985421213e+22",
+        "d_absolute_upper": "3.35978744122717451e-20",
+        "d_log_ratio_per_h_upper": "1.35066831808127638e-21",
+        "uncorrected_log_ratio_per_h_upper": "-4.12499999999999978e-01",
+        "corrected_log_ratio_per_h_upper": "-4.12499999999999978e-01",
+        "one_minus_ratio_over_h_lower": "3.49336653940064357e-01",
+        "saddle_over_x_quarter": "4.42066983098357159e-12"
+      }
+    },
+    {
+      "id": "nfocbptg_06_pair_determinant",
+      "role": "exact_lemma",
+      "readiness": "available_exact",
+      "claim": "The locked two-frequency pair has a common-phase-independent transfer determinant.",
+      "formula": "det(B_n)=b*(ell_n+rho_n^2*ell_(n+1))+rho_n*[b*(ell_n+ell_(n+1))*cos(delta_n)+c*(ell_(n+1)-ell_n)*sin(delta_n)]",
+      "proof_boundary": "Nonzero pair determinant is a local two-term statement.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocbptg_07_positive_pair",
+      "role": "asymptotic_theorem",
+      "readiness": "certified",
+      "claim": "Every interior locked adjacent pair has a uniformly positive transfer determinant.",
+      "formula": "C_x>0, D_x>0, B=1/2+t*C_x/4>=1/2, c=t*D_x/4<=1/(4x)<=h_n/16. Therefore det(B_n)>=h_n*[B*(1-rho_n)-c*rho_n]>=h_n^2/16.",
+      "proof_boundary": "This does not imply that different pair outputs have a common direction.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocbptg_08_pair_separation",
+      "role": "asymptotic_theorem",
+      "readiness": "certified",
+      "claim": "Each locked adjacent two-term block has an explicit first-jet lower separation.",
+      "formula": "||B_n||_F<3L, so ||(X_n+X_(n+1),A_n+A_(n+1))||_2>h_n^2*|f_n|/(48L).",
+      "proof_boundary": "The bound is before summing other blocks and the endpoint.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocbptg_09_edge_composition",
+      "role": "composition_rule",
+      "readiness": "available_exact",
+      "claim": "The unpaired last saddle is composed through the certified adjacent recurrence.",
+      "formula": "The disjoint adjacent blocks stop before the unpaired edge. The certified recurrence |A_(a,N+1)-A_(a,N)|<5000exp(-7L/4) must be retained for that last-saddle/endpoint block.",
+      "proof_boundary": "It must not be bounded as an independent exp(-3L/4) component.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocbptg_10_component_countermodel",
+      "role": "countermodel",
+      "readiness": "guard_validated",
+      "claim": "Orientation-preserving component transfers alone do not prevent exact aggregate cancellation.",
+      "formula": "For arbitrary c, b!=0, and ell_j!=0, any target w_j=(P_j,Q_j) is realized by f_j=P_j+i*(Q_j/ell_j+c*P_j)/b. The nonzero targets (1,0),(0,1),(-1,-1) sum to zero.",
+      "proof_boundary": "The coefficients are generic, not the Xi coefficient chain.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocbptg_11_pair_countermodel",
+      "role": "countermodel",
+      "readiness": "guard_validated",
+      "claim": "Positive locked-pair invertibility and relative ratio phases do not give aggregate nonvanishing or a fixed turning sign.",
+      "formula": "For any three invertible locked-pair matrices B_1,B_2,B_3, set u_j=B_j^(-1)w_j for w_1=(1,0), w_2=(0,1), w_3=(-1,-1). Every pair obeys its internal ratio lock and is nonzero, yet sum_j B_j u_j=0. Cross-block Xi ratios are essential. If the frame drift and all three ratio phases are zero, positive pair matrices may be diag(p_1,q_1),diag(p_2,q_2). Then det(W_1,W_2)=(p_1*q_2-q_1*p_2)*x*y, which takes both signs under the common phase whenever p_1*q_2!=q_1*p_2.",
+      "proof_boundary": "The surviving theorem must use cross-block compatibility and the absolute Xi phase anchor.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocbptg_12_xi_handoff",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The next arithmetic input must use the full phase-locked Xi chain to control cancellation between blocks.",
+      "formula": "Use the full consecutive ratio chain together with the exact normalizer/endpoint phase anchor, not isolated pair invertibility or relative phases alone, to prove a quantitative half-plane, signed-area, or one-sided winding bound for the paired block polygon plus the recurrent edge block on the contact value band.",
+      "proof_boundary": "No anchored half-plane, signed-area, crossing-count, or winding theorem is proved here.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocbptg_13_scalar_target",
+      "role": "open_theorem_target",
+      "readiness": "not_ready_to_apply",
+      "claim": "The q>=1 contact-band scalar lower bound and one-sided successor count remain open.",
+      "formula": "|X|<=50000exp(-5L/4) => |A_a|>(100000L+1)exp(-5L/4), followed by an A_a-positive successor count below one turn",
+      "proof_boundary": "The local pair theorem is not this global implication.",
+      "diagnostics": null
+    },
+    {
+      "id": "nfocbptg_14_nonpromotion",
+      "role": "nonpromotion_guard",
+      "readiness": "guard_validated",
+      "claim": "The local determinant theorem is kept separate from contact exclusion and RH.",
+      "formula": "adjacent locked-pair separation != aggregate Xi separation",
+      "proof_boundary": "No q<1 theorem, finite phase closure, contact exclusion, Lambda<=0, PF-infinity, RH, or Clay-prize conclusion.",
+      "diagnostics": null
+    }
+  ]
+}

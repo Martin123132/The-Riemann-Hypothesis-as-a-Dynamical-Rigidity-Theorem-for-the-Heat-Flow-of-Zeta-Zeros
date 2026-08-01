@@ -1,0 +1,251 @@
+{
+  "kind": "jensen_window_pf_mertens_planar_joined_energy_equivalence_gate",
+  "date": "2026-07-24",
+  "status": "exact joined current-interior/boundary equivalence to the lossless low-mode energy",
+  "source": {
+    "formal_core": "outputs/formal_core.md",
+    "boundary_flux": "outputs/jensen_window_pf_mertens_planar_boundary_flux_anchor_handoff.md",
+    "suffix_energy": "outputs/jensen_window_pf_mertens_planar_boundary_suffix_energy_handoff.md",
+    "suffix_localization": "outputs/jensen_window_pf_mertens_planar_boundary_suffix_localization_gate.md"
+  },
+  "rows": [
+    {
+      "id": "pjeg_01_inherited_data",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Retain O_(CC,int), E_B, D_B, C_delta, x_r, e_r, beta, Q, c, and D_(C,r) from Corollaries 11.22Z.8-Z.10.",
+      "proof_boundary": "No arithmetic estimate is assumed."
+    },
+    {
+      "id": "pjeg_02_lossless_energy",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Set L=sum_(r<=R)(x_r+beta e_r)^2/q_r^2=E_perp+c(beta+gamma/c)^2.",
+      "proof_boundary": "L is nonnegative and is the inherited low-mode energy."
+    },
+    {
+      "id": "pjeg_03_lossless_diagonal",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "Set D_L=sum_(r<=R)D_(C,r)/q_r^2+cQ.",
+      "proof_boundary": "D_L is the current/future diagonal in the same mode coordinates."
+    },
+    {
+      "id": "pjeg_04_block_compression",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "O_(alpha,K)=(L-D_L)/2.",
+      "proof_boundary": "This is the exact three-block compression, not an estimate."
+    },
+    {
+      "id": "pjeg_05_lossless_diagonal_bound",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "0<=D_L<7pi^2/24.",
+      "proof_boundary": "The bound is uniform in alpha, K, and R."
+    },
+    {
+      "id": "pjeg_06_offdiagonal_lossless_comparison",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "|O_(alpha,K)-L/2|=D_L/2<7pi^2/48.",
+      "proof_boundary": "The full signed off-diagonal and positive energy differ boundedly."
+    },
+    {
+      "id": "pjeg_07_suffix_remainder",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "R_B=(E_B-D_B)/2+C_delta and O_(alpha,K)=O_(CC,int)+R_B.",
+      "proof_boundary": "The boundary shoulder remains included in R_B."
+    },
+    {
+      "id": "pjeg_08_defect_bound",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "|C_delta|<=pi H_R^odd+pi^2/2.",
+      "proof_boundary": "The two terms are the shoulder and anchor endpoint corrections."
+    },
+    {
+      "id": "pjeg_09_joined_candidate",
+      "role": "exact_definition",
+      "status": "available_exact",
+      "statement": "J_B:=O_(CC,int)+E_B/2.",
+      "proof_boundary": "This is the proposed signed current-interior/boundary join."
+    },
+    {
+      "id": "pjeg_10_joined_identity",
+      "role": "exact_identity",
+      "status": "available_exact",
+      "statement": "J_B=L/2+(D_B-D_L)/2-C_delta.",
+      "proof_boundary": "No Cauchy-Schwarz or absolute cell split is used."
+    },
+    {
+      "id": "pjeg_11_joined_error_bound",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "|J_B-L/2|<=pi H_R^odd+41pi^2/48.",
+      "proof_boundary": "Use D_B<5pi^2/12 and D_L<7pi^2/24."
+    },
+    {
+      "id": "pjeg_12_joined_offdiagonal_bound",
+      "role": "exact_bound",
+      "status": "available_exact",
+      "statement": "|J_B-O_(alpha,K)|<=pi H_R^odd+17pi^2/24.",
+      "proof_boundary": "This is the same summable coordinate defect as in PBSE.15."
+    },
+    {
+      "id": "pjeg_13_pointwise_subpower_equivalence",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "For polynomially bounded R, J_B, O_(alpha,K), and L are all-epsilon subpower simultaneously.",
+      "proof_boundary": "The logarithmic defects are absorbed for every positive epsilon."
+    },
+    {
+      "id": "pjeg_14_weighted_dyadic_equivalence",
+      "role": "exact_equivalence",
+      "status": "available_exact",
+      "statement": "For every fixed alpha>0, sum K^(-alpha)L is finite iff sum K^(-alpha)|J_B| is finite, iff sum K^(-alpha)|O_(alpha,K)| is finite.",
+      "proof_boundary": "The K^(-alpha) logarithmic and bounded defects are summable."
+    },
+    {
+      "id": "pjeg_15_cofinal_composition",
+      "role": "theorem_composition",
+      "status": "available_exact",
+      "statement": "On one fixed cofinal positive-alpha sequence, the joined J_B criterion is the prior lossless RH criterion.",
+      "proof_boundary": "This is a route identification, not a proof of its antecedent."
+    },
+    {
+      "id": "pjeg_16_route_collapse",
+      "role": "route_guard",
+      "status": "guard_active",
+      "statement": "Retaining O_(CC,int) with E_B/2 does not create a new weaker theorem interface; it returns L/2 up to a summable coordinate defect.",
+      "proof_boundary": "Separate current-interior/E_B work may not be advertised as easier."
+    },
+    {
+      "id": "pjeg_17_finite_mobius_audit",
+      "role": "finite_validation",
+      "status": "validated_finite",
+      "statement": "At alpha=1/2 and K=16,...,1024, direct Mobius recomputation verifies the joined identity to float64 roundoff.",
+      "proof_boundary": "Finite values prove no asymptotic estimate."
+    },
+    {
+      "id": "pjeg_18_open_lossless_gate",
+      "role": "theorem_target",
+      "status": "open",
+      "statement": "Prove dyadic summability of K^(-alpha)L for every member of one fixed cofinal positive-alpha sequence.",
+      "proof_boundary": "This remains the RH-equivalent low-mode arithmetic obligation."
+    },
+    {
+      "id": "pjeg_19_next_route",
+      "role": "route_guard",
+      "status": "guard_active",
+      "statement": "Future work must attack L, E_B, or the strong signed edge form honestly at RH strength, or find structure outside this algebraically equivalent join.",
+      "proof_boundary": "Positivity and coordinate changes alone cannot supply cancellation."
+    },
+    {
+      "id": "pjeg_20_proof_boundary",
+      "role": "proof_guard",
+      "status": "guard_active",
+      "statement": "The joined identity, diagonal bounds, subpower equivalence, and route collapse are exact.",
+      "proof_boundary": "No L, E_B, or Y estimate, RH, PF-infinity, Lambda<=0, or Clay-prize result is proved."
+    }
+  ],
+  "diagnostic": {
+    "alpha": 0.5,
+    "rows": [
+      {
+        "K": 16,
+        "R": 8,
+        "L": 0.086714164,
+        "D_L": 1.276405173,
+        "O": -0.594845505,
+        "E_B": 0.110319464,
+        "O_CC_int": -0.001713988,
+        "J_B": 0.053445744,
+        "J_minus_L_over_2": 0.010088662
+      },
+      {
+        "K": 32,
+        "R": 14,
+        "L": 0.074555912,
+        "D_L": 1.268291221,
+        "O": -0.596867655,
+        "E_B": 0.083247421,
+        "O_CC_int": -0.000825629,
+        "J_B": 0.040798082,
+        "J_minus_L_over_2": 0.003520126
+      },
+      {
+        "K": 64,
+        "R": 23,
+        "L": 0.129088701,
+        "D_L": 1.278746522,
+        "O": -0.574828911,
+        "E_B": 0.13532393,
+        "O_CC_int": 5.2069e-05,
+        "J_B": 0.067714034,
+        "J_minus_L_over_2": 0.003169684
+      },
+      {
+        "K": 128,
+        "R": 39,
+        "L": 0.143665376,
+        "D_L": 1.315481547,
+        "O": -0.585908085,
+        "E_B": 0.147238007,
+        "O_CC_int": 5.3254e-05,
+        "J_B": 0.073672258,
+        "J_minus_L_over_2": 0.00183957
+      },
+      {
+        "K": 256,
+        "R": 64,
+        "L": 0.112963133,
+        "D_L": 1.324398989,
+        "O": -0.605717928,
+        "E_B": 0.115185299,
+        "O_CC_int": -0.000166902,
+        "J_B": 0.057425747,
+        "J_minus_L_over_2": 0.000944181
+      },
+      {
+        "K": 512,
+        "R": 108,
+        "L": 0.109596358,
+        "D_L": 1.323092731,
+        "O": -0.606748187,
+        "E_B": 0.111068291,
+        "O_CC_int": -4.2452e-05,
+        "J_B": 0.055491694,
+        "J_minus_L_over_2": 0.000693515
+      },
+      {
+        "K": 1024,
+        "R": 182,
+        "L": 0.096999647,
+        "D_L": 1.325065222,
+        "O": -0.614032788,
+        "E_B": 0.097890613,
+        "O_CC_int": 2.086e-05,
+        "J_B": 0.048966167,
+        "J_minus_L_over_2": 0.000466344
+      }
+    ]
+  },
+  "summary": {
+    "row_count": 20,
+    "exact_result_count": 16,
+    "finite_validation_count": 1,
+    "guard_count": 3,
+    "open_energy_gate_count": 1,
+    "joined_identity_proved": true,
+    "weighted_dyadic_equivalence_proved": true,
+    "joined_route_distinct": false,
+    "lossless_energy_estimate_proved": false,
+    "boundary_energy_estimate_proved": false,
+    "interior_projection_estimate_proved": false,
+    "rh_proved": false,
+    "pf_infinity_proved": false,
+    "lambda_le_zero_proved": false
+  }
+}

@@ -233,7 +233,7 @@ lambda grid, N = 24, orders <= 5
 
 The remaining gap is all-order theory, not these selected finite coefficient enclosures.
 
-### Edrei Log-Sign Necessary Condition
+### Edrei Log-Derivative Stieltjes Criterion
 
 For the normalized ordinary generating function:
 
@@ -242,15 +242,23 @@ H_lambda(z) = sum d_k(lambda) z^k
 d_k = c_k / c_0
 ```
 
-an entire restricted Laguerre-Polya target with only nonpositive real zeros would have alternating logarithmic coefficients:
+define the signed logarithmic powers and their shifted sequence by
 
 ```text
 log H_lambda(z) = sum ell_n z^n
 q_n = n ell_n
-(-1)^(n-1) q_n >= 0.
+p_n = (-1)^(n-1) q_n
+a_r = p_(r+1) = (-1)^r [z^r] H_lambda'(z)/H_lambda(z).
 ```
 
-Using rigorous `c_ball` enclosure rows through `k = 64`, Arb validates this finite necessary condition for:
+Sokal's Proposition 6 gives the exact all-order equivalence
+
+```text
+H_lambda in LP+ <=> (a_r)_(r>=0) is a Stieltjes moment sequence.
+```
+
+Using rigorous `c_ball` enclosure rows through `k = 64`, Arb validates the
+finite log-sign part of this target for:
 
 ```text
 lambda in {0, 1e-6, 1e-4, 1e-2, 1e-1}
@@ -319,8 +327,43 @@ Edrei-log reruns for all five lambdas. The boundary checker
 validates both the retired blockers and the repaired positive rows.
 
 This is not a substitute for PF-infinity. It says finite Edrei/log and
-power-Hankel obstructions have not appeared and sharpens the missing theorem
-target.
+power-Hankel obstructions have not appeared. At all orders, positivity of the
+two Stieltjes Hankel columns `s=1,2` would be sufficient for `LP+`; the current
+finite staircase does not prove that statement. See
+`outputs/jensen_window_pf_edrei_stieltjes_equivalence_gate.md`.
+
+The same endpoint is exactly equivalent to the upper-half-plane sign
+
+```text
+P_Phi(z)=-Im(F_0'(z)conj(F_0(z)))>0,
+```
+
+whose polarization is an explicit Phi double integral. A Phi-derived positive
+resolvent is an equivalent structural construction target. Positive mixing
+does not force the sign, and generic backward Stieltjes-cone invariance is
+false at a repeated-zero LP+ boundary. These two gates are
+`outputs/jensen_window_pf_phi_pick_kernel_target.md` and
+`outputs/jensen_window_pf_edrei_heat_flow_boundary_gate.md`.
+
+Suzuki's arithmetic-Hankel theorem gives the strongest current operator
+translation. The Pick endpoint becomes hyperbolic directional xi growth, and
+Suzuki's published global criterion states all-`t` Fredholm nonvanishing on a
+cofinal `omega` sequence plus terminal canonical-kernel collapse. The
+internally audited causal-multiplier reduction proves that the first condition
+already implies RH on a strictly decreasing cofinal sequence, so the terminal
+premise is redundant there. The surviving operator obligation is all-`t`
+Fredholm nonvanishing itself. The
+Fredholm expansion exposes continuum Hankel determinants, but total
+nonnegativity does not by itself prevent a finite `+1` crossing. Along the
+continuous self-adjoint truncation path, all-history determinant
+nonvanishing is exactly pointwise `||K[t]||<1`; one gap uniform in `t` is
+neither required nor possible in the desired HB case. Boundary unimodularity
+also cannot move Suzuki's high contour across possible poles. The
+source-anchored route and exact guards are in
+`outputs/jensen_window_pf_xi_pick_suzuki_hankel_bridge.md` and
+`outputs/jensen_window_pf_suzuki_spectral_frontier.md`. The determinant-only
+cofinal proof and fixed-pair cancellation guard are in
+`outputs/jensen_window_pf_suzuki_determinant_only_reduction.md`.
 
 ### Verdict
 
@@ -560,6 +603,8 @@ At present, we have evidence and a route, not that theorem.
   https://www.numdam.org/articles/10.5802/mrr.12/
 - Michalowski, "On the Polya Frequency Order of the de Bruijn-Newman Kernel":
   https://arxiv.org/abs/2602.20313
+- Suzuki, "Hamiltonians arising from L-functions in the Selberg class":
+  https://doi.org/10.1016/j.jfa.2021.109116
 - Grussler-Damm, "Efficient k-Sign Consistency Verification of Hankel Matrices via Schur Polynomials":
   https://arxiv.org/abs/2602.08122
 - Bakan-Berg, "Solvability of the Hankel determinant problem for real sequences":

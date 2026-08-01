@@ -1,0 +1,325 @@
+{
+  "common_phase_certificate": {
+    "family_separation": "The endpoint family carries c_xi, the Hermitian family carries c_xi*conj(c_xi)=1, and the transpose family carries c_xi^2. Hence log(a) cancels exactly from the Hermitian flow and remains only through c_xi' and (c_xi^2)' in the endpoint and transpose families. No common phase enters a divisor sum.",
+    "flow_multipliers": "In logarithmic coordinates ell_n=log(n), the three exact multipliers are i(ell_n-log(a)), i(ell_n-ell_m), and i(ell_n+ell_m-2log(a)) for endpoint, Hermitian, and transpose respectively.",
+    "matrix_projection": "For J_5=[[0,-I],[I,0]], decompose a real symmetric current matrix M as M_H=(M-J_5MJ_5)/2 and M_T=(M+J_5MJ_5)/2. Then M_HJ_5=J_5M_H, M_TJ_5=-J_5M_T, and the common-rotation quadratic flow is log(a)(J_5M-MJ_5)=-2log(a)M_TJ_5. The Hermitian part contributes zero.",
+    "normalized_moments": "Write G_j(xi)=c_xi*Ghat_j(xi), where c_xi=exp[i(Omega-xi)log(a)] and Ghat_j contains the full Mangoldt or balanced divisor sum but no c_xi. Then Ghat_j'(xi)=iGhat_(j+1)(xi), while c_xi'=-i log(a)c_xi.",
+    "symbolic_differences": {
+      "common_flow": "zero_4_matrix",
+      "external_phase": "0",
+      "hermitian_commutator": "zero_4_matrix",
+      "transpose_anticommutator": "zero_4_matrix"
+    }
+  },
+  "counts": {
+    "correction_free_moments": 6,
+    "flow_rank_upper_bound": 8,
+    "generic_flow_rank": 8,
+    "generic_negative_inertia": 4,
+    "generic_positive_inertia": 4,
+    "generic_zero_inertia": 4,
+    "hermitian_reciprocal_diagonal_nulls": 1,
+    "phi_b_bounds": 0,
+    "real_flow_observations": 8,
+    "real_moment_coordinates": 12,
+    "reciprocal_phase_families": 3,
+    "rows": 22,
+    "signed_flow_bounds": 0,
+    "stationary_phase_remainder_bounds": 0
+  },
+  "date": "2026-08-01",
+  "exact": {
+    "arithmetic_handoff": "Insert the balanced Mangoldt square-and-wing formula for each Ghat_0,...,Ghat_5 into the eight observations (V,N,A,Q,V_xi,N_xi,A_xi,Q_xi). Keep c_xi outside the sums. Apply one- and two-variable Poisson/B-process transforms before taking absolute values, preserving endpoint, Hermitian, and transpose terms in one signed expression.",
+    "domain": "Use the q=1, L>=50, fixed-N chart, B=N-M-1, and the exact auxiliary frequency segment T_0-epsilon<=xi<=T_0 from Section 11.164. All physical tail jets and coefficient rows are held fixed along xi.",
+    "exact_target": "Prove Psi(T_0)-epsilon*integral_0^1 Psi'(T_0-theta*epsilon)dtheta<=h^2/400, preferably h^2/800, by an endpoint-complete signed reciprocal-Poisson estimate for the eight-observation normal form.",
+    "falsification_program": "Any candidate estimate must retain the hard-cutoff boundary, adjacent saddle recurrence, c_xi, correction derivative D, M_0=0, X_T+V=0, double contact, W_0=0, p=+-1, removable p=+-1/2, prime edges, square/cube transports, n=64, and q=1.",
+    "new_cancellation_clue": "The canonical zero phase-difference channel is the Hermitian reciprocal diagonal, and the differentiated kernel kills it exactly. The next estimate should exploit the resulting log(r/k) factor by dual antisymmetry or summation by parts. The endpoint and transpose saddles remain and must be composed with the certified terminal recurrence rather than bounded separately.",
+    "proof_boundary": "This proves an exact six-moment/12-real flow matrix, rank at most eight, generic inertia (4,4,4), common-phase separation, three reciprocal stationary-phase skeletons, and the Hermitian reciprocal-diagonal null. It proves no Poisson summation remainder bound, hard-cutoff boundary estimate, near-diagonal bilinear gain, signed flow estimate, saddle-proxy or Phi_B upper bound, contact exclusion, retained aggregate or Xi theorem, Q209, cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion."
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_flow_matrix_phase_reduction",
+  "moment_shift_certificate": {
+    "coefficient_lift": "For r=(r_0,...,r_4), pad(r)=(r_0,...,r_4,0), S(r)=(0,r_0,...,r_4), and delta_a(r)=i[S(r)-log(a)pad(r)]. Then d_xi Re(r dot G_[0:4])=Re(delta_a(r) dot G_[0:5]).",
+    "input_complex_moments": 6,
+    "input_real_coordinates": 12,
+    "moment_flow": "For 0<=j<=4, G_j'(xi)=-i*log(a)G_j(xi)+iG_(j+1)(xi). Thus the derivative of a degree-four observation uses exactly G_0,...,G_5 and no G_6.",
+    "real_shift": "For y=(Re G_0,...,Re G_5,Im G_0,...,Im G_5)^T, let E select G_0,...,G_4, P select G_1,...,G_5, and J_5=[[0,-I_5],[I_5,0]]. Then x=Ey and x'=D_ay with D_a=J_5(P-log(a)E).",
+    "symbolic_differences": {
+      "complex_lift": "0",
+      "real_row_lift": "zero_12_vector",
+      "real_shift": "zero_10_vector"
+    }
+  },
+  "observation_flow_certificate": {
+    "double_contact_fibre": "On X_T+V=A_T+A=0, Psi'=V_xi[N+A_(T,x)]-A_xi[Q+X_(T,x)]. This is division-free but has no algebraic sign.",
+    "eight_observation_factor": "With W=[U_0,U_1] and K=[[0,J],[J,0]], M_xi=WKW^T. Hence rank(M_xi)<=8, ell_xi lies in range(U_1), and Psi' depends on at most eight real observations.",
+    "explicit_flow": "Psi'=V_xi*N+V*N_xi-A_xi*Q-A*Q_xi+X_T*N_xi+A_(T,x)*V_xi-A_T*Q_xi-X_(T,x)*A_xi. Equivalently, Psi'=V_xi[N+A_(T,x)]+[X_T+V]N_xi-A_xi[Q+X_(T,x)]-[A_T+A]Q_xi.",
+    "kernel": "Every y satisfying U_0^Ty=U_1^Ty=0 has Psi'(xi)=0. The common flow-invisible kernel has dimension at least four.",
+    "observation_rows": "Retain the Section 11.159 complex coefficient rows v_0,n_0,a_0,q_0 and put dot(r)=delta_a(r). For y in R^12, V=tilde(v)^Ty, N=tilde(n)^Ty, A=tilde(a)^Ty, Q=tilde(q)^Ty and V_xi=dot(v)^Ty, N_xi=dot(n)^Ty, A_xi=dot(a)^Ty, Q_xi=dot(q)^Ty.",
+    "real_quadratic": "Let U_0=[tilde(v),tilde(n),tilde(a),tilde(q)], U_1=[dot(v),dot(n),dot(a),dot(q)], J=(1/2)diag_offdiag(+1,-1), and t_T=(A_(T,x),X_T,-X_(T,x),-A_T)^T. Then Psi'=y^T M_xi y+ell_xi^T y, where M_xi=U_0JU_1^T+U_1JU_0^T and ell_xi=U_1t_T.",
+    "symbolic_difference": "0"
+  },
+  "proof_boundary": "This proves an exact six-moment/12-real flow matrix, rank at most eight, generic inertia (4,4,4), common-phase separation, three reciprocal stationary-phase skeletons, and the Hermitian reciprocal-diagonal null. It proves no Poisson summation remainder bound, hard-cutoff boundary estimate, near-diagonal bilinear gain, signed flow estimate, saddle-proxy or Phi_B upper bound, contact exclusion, retained aggregate or Xi theorem, Q209, cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rank_certificate": {
+    "factor_rank": 8,
+    "flow_inertia": [
+      4,
+      4,
+      4
+    ],
+    "flow_rank": 8,
+    "generic_inertia_guard": "Since K=[[0,J],[J,0]] has inertia (4,4), the witness flow matrix has inertia (4,4,4). Therefore the rank-eight bound is generically sharp and the flow is not coefficient-blind semidefinite. The witness is algebraic, not a physical Xi state.",
+    "generic_rank_guard": "An exact algebraic specialization log(N)=2, log(a)=3, rho_1=1+i, rho_2=2-i, rho_(1,x)=1-2i, rho_(2,x)=-1+i, s_*'=1-i/2, s_*''=2+i, chi_N=1+i, b=-1/2, b_x=1, and u_N=u_(N,x)=1 has rank(W)=8 and leading 8-by-8 minor 51095/16.",
+    "witness_minor": "51095/16"
+  },
+  "reciprocal_phase_certificate": {
+    "active_mode_window": "For each primal variable in [1,B], the only continuous stationary modes satisfy a^2/B<=mode<=a^2. Modes outside this window are nonstationary, but a discrete Poisson formula, hard-cutoff boundary terms, and uniform integration-by-parts constants remain to be proved.",
+    "endpoint_saddle": "The endpoint mode has n_*=a^2/k, phase a^2[log(a^2/k)-1], curvature -k^2/a^2, and flow multiplier log(a/k). Its retained-support window 1<=n_*<=B is exactly a^2/B<=k<=a^2.",
+    "external_phases": "Since Omega=T_0-epsilon, c_(T_0)=exp[-i epsilon log(a)]. The endpoint Poisson family retains this unit phase, the Hermitian family has none, and the transpose family retains exp[-2i epsilon log(a)].",
+    "hermitian_diagonal_null": "On the reciprocal diagonal k=r, both the Hermitian stationary phase and its differentiated-flow multiplier vanish exactly. The zero-phase reciprocal diagonal channel is therefore absent from Psi'_H, although near-diagonal modes still require an estimate.",
+    "hermitian_saddle": "The Hermitian mode has (n_*,m_*)=(a^2/k,a^2/r), stationary phase a^2log(r/k), Hessian diag(-k^2/a^2,+r^2/a^2), and flow multiplier log(r/k). Thus the multiplier is exactly the stationary phase divided by a^2.",
+    "pi_provenance": "Use e(t)=exp(2*pi*i*t). The T_0=2*pi*a^2 factor is inherited from the completed-zeta/Riemann-Siegel saddle. Dividing its radian phase by the standard Poisson 2*pi gives a^2. These are the two appearances of the same normalization; no circle or fitted pi is introduced.",
+    "poisson_convention": "At xi=T_0 and with Poisson character e(-kn), discard only n-independent unit phases when locating saddles. The endpoint cycle phase is a^2log(n)-kn. For a two-variable mode, use a^2log(n)-a^2log(m)-kn+rm in the Hermitian family and a^2log(n)+a^2log(m)-kn-rm in the transpose family, with k,r>0.",
+    "support_signs": "Because B<a, every interior retained saddle has k,r>a. Hence the endpoint multiplier log(a/k) and transpose multiplier log(a^2/(kr)) are negative there. They multiply complex coefficients and unit phases, so this is not a current-sign theorem. The Hermitian multiplier is antisymmetric under k<->r.",
+    "symbolic": {
+      "endpoint_curvature": "-k**2/a**2",
+      "hermitian_hessian": "Matrix([[-k**2/a**2, 0], [0, r**2/a**2]])",
+      "hermitian_stationary_multiplier": "-log(k) + log(r)",
+      "hermitian_stationary_phase": "a**2*(2*log(a) - log(k)) - a**2*(2*log(a) - log(r))",
+      "transpose_hessian": "Matrix([[-k**2/a**2, 0], [0, -r**2/a**2]])"
+    },
+    "transpose_saddle": "The transpose mode has (n_*,m_*)=(a^2/k,a^2/r), phase a^2[log(a^4/(kr))-2], Hessian diag(-k^2/a^2,-r^2/a^2), and flow multiplier log(a^2/(kr))."
+  },
+  "rows": [
+    {
+      "claim": "The flow normal form uses the certified auxiliary segment.",
+      "diagnostics": null,
+      "formula": "Use the q=1, L>=50, fixed-N chart, B=N-M-1, and the exact auxiliary frequency segment T_0-epsilon<=xi<=T_0 from Section 11.164. All physical tail jets and coefficient rows are held fixed along xi.",
+      "id": "fmpr_01_domain",
+      "proof_boundary": "Intermediate xi is auxiliary, not a new physical source state.",
+      "readiness": "proved",
+      "role": "fixed-chart domain"
+    },
+    {
+      "claim": "Frequency differentiation is one exact shifted moment operator.",
+      "diagnostics": null,
+      "formula": "For 0<=j<=4, G_j'(xi)=-i*log(a)G_j(xi)+iG_(j+1)(xi). Thus the derivative of a degree-four observation uses exactly G_0,...,G_5 and no G_6.",
+      "id": "fmpr_02_shift",
+      "proof_boundary": "Only derivatives of G_0 through G_4 are used.",
+      "readiness": "proved",
+      "role": "six-moment shift"
+    },
+    {
+      "claim": "Every degree-four complex observation has one explicit degree-five derivative row.",
+      "diagnostics": {
+        "complex_lift": "0",
+        "real_row_lift": "zero_12_vector",
+        "real_shift": "zero_10_vector"
+      },
+      "formula": "For r=(r_0,...,r_4), pad(r)=(r_0,...,r_4,0), S(r)=(0,r_0,...,r_4), and delta_a(r)=i[S(r)-log(a)pad(r)]. Then d_xi Re(r dot G_[0:4])=Re(delta_a(r) dot G_[0:5]).",
+      "id": "fmpr_03_lift",
+      "proof_boundary": "For y=(Re G_0,...,Re G_5,Im G_0,...,Im G_5)^T, let E select G_0,...,G_4, P select G_1,...,G_5, and J_5=[[0,-I_5],[I_5,0]]. Then x=Ey and x'=D_ay with D_a=J_5(P-log(a)E).",
+      "readiness": "proved",
+      "role": "coefficient lift"
+    },
+    {
+      "claim": "The full flow uses four values and their four frequency derivatives.",
+      "diagnostics": null,
+      "formula": "Retain the Section 11.159 complex coefficient rows v_0,n_0,a_0,q_0 and put dot(r)=delta_a(r). For y in R^12, V=tilde(v)^Ty, N=tilde(n)^Ty, A=tilde(a)^Ty, Q=tilde(q)^Ty and V_xi=dot(v)^Ty, N_xi=dot(n)^Ty, A_xi=dot(a)^Ty, Q_xi=dot(q)^Ty.",
+      "id": "fmpr_04_observations",
+      "proof_boundary": "No denominator or relative moment is introduced.",
+      "readiness": "proved",
+      "role": "eight observations"
+    },
+    {
+      "claim": "Psi' is one displayed division-free polynomial in eight observations.",
+      "diagnostics": null,
+      "formula": "Psi'=V_xi*N+V*N_xi-A_xi*Q-A*Q_xi+X_T*N_xi+A_(T,x)*V_xi-A_T*Q_xi-X_(T,x)*A_xi. Equivalently, Psi'=V_xi[N+A_(T,x)]+[X_T+V]N_xi-A_xi[Q+X_(T,x)]-[A_T+A]Q_xi.",
+      "id": "fmpr_05_flow",
+      "proof_boundary": "The endpoint, Hermitian, and transpose terms have not been separately bounded.",
+      "readiness": "proved",
+      "role": "explicit flow polynomial"
+    },
+    {
+      "claim": "The six complex moments give one symmetric real quadratic plus a linear term.",
+      "diagnostics": null,
+      "formula": "Let U_0=[tilde(v),tilde(n),tilde(a),tilde(q)], U_1=[dot(v),dot(n),dot(a),dot(q)], J=(1/2)diag_offdiag(+1,-1), and t_T=(A_(T,x),X_T,-X_(T,x),-A_T)^T. Then Psi'=y^T M_xi y+ell_xi^T y, where M_xi=U_0JU_1^T+U_1JU_0^T and ell_xi=U_1t_T.",
+      "id": "fmpr_06_matrix",
+      "proof_boundary": "This is an identity, not a sign estimate.",
+      "readiness": "proved",
+      "role": "12-real flow matrix"
+    },
+    {
+      "claim": "The flow matrix factors through eight real observations.",
+      "diagnostics": null,
+      "formula": "With W=[U_0,U_1] and K=[[0,J],[J,0]], M_xi=WKW^T. Hence rank(M_xi)<=8, ell_xi lies in range(U_1), and Psi' depends on at most eight real observations.",
+      "id": "fmpr_07_factor",
+      "proof_boundary": "Every y satisfying U_0^Ty=U_1^Ty=0 has Psi'(xi)=0. The common flow-invisible kernel has dimension at least four.",
+      "readiness": "proved",
+      "role": "rank-eight factorization"
+    },
+    {
+      "claim": "The rank-eight upper bound is algebraically sharp.",
+      "diagnostics": {
+        "minor": "51095/16",
+        "rank": 8
+      },
+      "formula": "An exact algebraic specialization log(N)=2, log(a)=3, rho_1=1+i, rho_2=2-i, rho_(1,x)=1-2i, rho_(2,x)=-1+i, s_*'=1-i/2, s_*''=2+i, chi_N=1+i, b=-1/2, b_x=1, and u_N=u_(N,x)=1 has rank(W)=8 and leading 8-by-8 minor 51095/16.",
+      "id": "fmpr_08_rank",
+      "proof_boundary": "The witness is not claimed to occur on the Xi source.",
+      "readiness": "proved",
+      "role": "generic rank witness"
+    },
+    {
+      "claim": "Coefficient-blind semidefiniteness is impossible.",
+      "diagnostics": {
+        "inertia": [
+          4,
+          4,
+          4
+        ]
+      },
+      "formula": "Since K=[[0,J],[J,0]] has inertia (4,4), the witness flow matrix has inertia (4,4,4). Therefore the rank-eight bound is generically sharp and the flow is not coefficient-blind semidefinite. The witness is algebraic, not a physical Xi state.",
+      "id": "fmpr_09_inertia",
+      "proof_boundary": "Physical phase cancellation remains possible.",
+      "readiness": "proved",
+      "role": "generic inertia guard"
+    },
+    {
+      "claim": "The matrix form remains valid on the contact and zero-moment fibres.",
+      "diagnostics": null,
+      "formula": "On X_T+V=A_T+A=0, Psi'=V_xi[N+A_(T,x)]-A_xi[Q+X_(T,x)]. This is division-free but has no algebraic sign.",
+      "id": "fmpr_10_fibre",
+      "proof_boundary": "No contact exclusion or flow sign is inferred.",
+      "readiness": "proved",
+      "role": "exceptional fibres"
+    },
+    {
+      "claim": "The common phase can be removed from every arithmetic divisor sum.",
+      "diagnostics": null,
+      "formula": "Write G_j(xi)=c_xi*Ghat_j(xi), where c_xi=exp[i(Omega-xi)log(a)] and Ghat_j contains the full Mangoldt or balanced divisor sum but no c_xi. Then Ghat_j'(xi)=iGhat_(j+1)(xi), while c_xi'=-i log(a)c_xi.",
+      "id": "fmpr_11_normalize",
+      "proof_boundary": "The phase remains in the endpoint and transpose prefactors.",
+      "readiness": "proved",
+      "role": "external common phase"
+    },
+    {
+      "claim": "The log(a) rotation cancels exactly from the Hermitian flow.",
+      "diagnostics": {
+        "common_flow": "zero_4_matrix",
+        "external_phase": "0",
+        "hermitian_commutator": "zero_4_matrix",
+        "transpose_anticommutator": "zero_4_matrix"
+      },
+      "formula": "The endpoint family carries c_xi, the Hermitian family carries c_xi*conj(c_xi)=1, and the transpose family carries c_xi^2. Hence log(a) cancels exactly from the Hermitian flow and remains only through c_xi' and (c_xi^2)' in the endpoint and transpose families. No common phase enters a divisor sum. For J_5=[[0,-I],[I,0]], decompose a real symmetric current matrix M as M_H=(M-J_5MJ_5)/2 and M_T=(M+J_5MJ_5)/2. Then M_HJ_5=J_5M_H, M_TJ_5=-J_5M_T, and the common-rotation quadratic flow is log(a)(J_5M-MJ_5)=-2log(a)M_TJ_5. The Hermitian part contributes zero.",
+      "id": "fmpr_12_rotation",
+      "proof_boundary": "In logarithmic coordinates ell_n=log(n), the three exact multipliers are i(ell_n-log(a)), i(ell_n-ell_m), and i(ell_n+ell_m-2log(a)) for endpoint, Hermitian, and transpose respectively.",
+      "readiness": "proved",
+      "role": "common-rotation cancellation"
+    },
+    {
+      "claim": "The reciprocal scale introduces no unexplained pi.",
+      "diagnostics": null,
+      "formula": "Use e(t)=exp(2*pi*i*t). The T_0=2*pi*a^2 factor is inherited from the completed-zeta/Riemann-Siegel saddle. Dividing its radian phase by the standard Poisson 2*pi gives a^2. These are the two appearances of the same normalization; no circle or fitted pi is introduced.",
+      "id": "fmpr_13_pi",
+      "proof_boundary": "The standard Poisson character fixes the normalization.",
+      "readiness": "proved",
+      "role": "pi provenance"
+    },
+    {
+      "claim": "All three flow families have explicit cycle phases at T_0.",
+      "diagnostics": null,
+      "formula": "At xi=T_0 and with Poisson character e(-kn), discard only n-independent unit phases when locating saddles. The endpoint cycle phase is a^2log(n)-kn. For a two-variable mode, use a^2log(n)-a^2log(m)-kn+rm in the Hermitian family and a^2log(n)+a^2log(m)-kn-rm in the transpose family, with k,r>0.",
+      "id": "fmpr_14_poisson",
+      "proof_boundary": "This locates continuous saddles only.",
+      "readiness": "proved",
+      "role": "Poisson phase convention"
+    },
+    {
+      "claim": "Every active endpoint mode has one reciprocal saddle.",
+      "diagnostics": null,
+      "formula": "The endpoint mode has n_*=a^2/k, phase a^2[log(a^2/k)-1], curvature -k^2/a^2, and flow multiplier log(a/k). Its retained-support window 1<=n_*<=B is exactly a^2/B<=k<=a^2.",
+      "id": "fmpr_15_endpoint",
+      "proof_boundary": "Since Omega=T_0-epsilon, c_(T_0)=exp[-i epsilon log(a)]. The endpoint Poisson family retains this unit phase, the Hermitian family has none, and the transpose family retains exp[-2i epsilon log(a)].",
+      "readiness": "proved",
+      "role": "endpoint saddle"
+    },
+    {
+      "claim": "The phase-difference family has an indefinite reciprocal saddle.",
+      "diagnostics": null,
+      "formula": "The Hermitian mode has (n_*,m_*)=(a^2/k,a^2/r), stationary phase a^2log(r/k), Hessian diag(-k^2/a^2,+r^2/a^2), and flow multiplier log(r/k). Thus the multiplier is exactly the stationary phase divided by a^2.",
+      "id": "fmpr_16_hermitian",
+      "proof_boundary": "No two-variable stationary-phase remainder is supplied.",
+      "readiness": "proved",
+      "role": "Hermitian saddle"
+    },
+    {
+      "claim": "The zero-phase reciprocal diagonal is killed by the flow multiplier.",
+      "diagnostics": null,
+      "formula": "On the reciprocal diagonal k=r, both the Hermitian stationary phase and its differentiated-flow multiplier vanish exactly. The zero-phase reciprocal diagonal channel is therefore absent from Psi'_H, although near-diagonal modes still require an estimate.",
+      "id": "fmpr_17_null",
+      "proof_boundary": "Near-diagonal modes remain an open bilinear problem.",
+      "readiness": "proved",
+      "role": "Hermitian diagonal null"
+    },
+    {
+      "claim": "The phase-sum family has a negative-definite reciprocal saddle.",
+      "diagnostics": null,
+      "formula": "The transpose mode has (n_*,m_*)=(a^2/k,a^2/r), phase a^2[log(a^4/(kr))-2], Hessian diag(-k^2/a^2,-r^2/a^2), and flow multiplier log(a^2/(kr)).",
+      "id": "fmpr_18_transpose",
+      "proof_boundary": "Because B<a, every interior retained saddle has k,r>a. Hence the endpoint multiplier log(a/k) and transpose multiplier log(a^2/(kr)) are negative there. They multiply complex coefficients and unit phases, so this is not a current-sign theorem. The Hermitian multiplier is antisymmetric under k<->r.",
+      "readiness": "proved",
+      "role": "transpose saddle"
+    },
+    {
+      "claim": "The exact retained saddle window is a^2/B<=mode<=a^2.",
+      "diagnostics": null,
+      "formula": "For each primal variable in [1,B], the only continuous stationary modes satisfy a^2/B<=mode<=a^2. Modes outside this window are nonstationary, but a discrete Poisson formula, hard-cutoff boundary terms, and uniform integration-by-parts constants remain to be proved.",
+      "id": "fmpr_19_window",
+      "proof_boundary": "Boundary and nonstationary constants remain open.",
+      "readiness": "proved",
+      "role": "active dual window"
+    },
+    {
+      "claim": "The eight-observation form must be estimated after reciprocal composition.",
+      "diagnostics": null,
+      "formula": "Insert the balanced Mangoldt square-and-wing formula for each Ghat_0,...,Ghat_5 into the eight observations (V,N,A,Q,V_xi,N_xi,A_xi,Q_xi). Keep c_xi outside the sums. Apply one- and two-variable Poisson/B-process transforms before taking absolute values, preserving endpoint, Hermitian, and transpose terms in one signed expression. The canonical zero phase-difference channel is the Hermitian reciprocal diagonal, and the differentiated kernel kills it exactly. The next estimate should exploit the resulting log(r/k) factor by dual antisymmetry or summation by parts. The endpoint and transpose saddles remain and must be composed with the certified terminal recurrence rather than bounded separately.",
+      "id": "fmpr_20_handoff",
+      "proof_boundary": "Prove Psi(T_0)-epsilon*integral_0^1 Psi'(T_0-theta*epsilon)dtheta<=h^2/400, preferably h^2/800, by an endpoint-complete signed reciprocal-Poisson estimate for the eight-observation normal form.",
+      "readiness": "open",
+      "role": "signed arithmetic handoff"
+    },
+    {
+      "claim": "Every proposed cancellation estimate must survive the existing exceptional cases.",
+      "diagnostics": null,
+      "formula": "Any candidate estimate must retain the hard-cutoff boundary, adjacent saddle recurrence, c_xi, correction derivative D, M_0=0, X_T+V=0, double contact, W_0=0, p=+-1, removable p=+-1/2, prime edges, square/cube transports, n=64, and q=1.",
+      "id": "fmpr_21_guard",
+      "proof_boundary": "No guard may be removed by genericity.",
+      "readiness": "open",
+      "role": "falsification guard"
+    },
+    {
+      "claim": "The exact algebra is separated from the missing analytic estimate.",
+      "diagnostics": null,
+      "formula": "This proves an exact six-moment/12-real flow matrix, rank at most eight, generic inertia (4,4,4), common-phase separation, three reciprocal stationary-phase skeletons, and the Hermitian reciprocal-diagonal null. It proves no Poisson summation remainder bound, hard-cutoff boundary estimate, near-diagonal bilinear gain, signed flow estimate, saddle-proxy or Phi_B upper bound, contact exclusion, retained aggregate or Xi theorem, Q209, cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+      "id": "fmpr_22_boundary",
+      "proof_boundary": "This is not a proof of RH.",
+      "readiness": "proved",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "imported_signed_flow_bounds": 0,
+    "imported_stationary_phase_bounds": 0,
+    "source_kinds": {
+      "five_moment_quadratic": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_explicit_phi_quadratic_reduction",
+      "reciprocal_saddle": "jensen_window_pf_newman_polymath15_first_order_centered_reciprocal_saddle_self_duality_gate",
+      "six_moment_flow": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_saddle_flow_reduction"
+    },
+    "source_sha256": {
+      "five_moment_quadratic": "3fb9330a67ca91eb3541f7b5a6f73afc1c57d50647f5c0802c1eaa8f9c5b4e2c",
+      "reciprocal_saddle": "959d37f1c6910d272c545e1df22def7b656790711062835b0c9a0d13a7929d14",
+      "six_moment_flow": "e3682e9c84bb5c72621cc6e6d5e1baccdb873f98c2bcfdda3e6a84efaff41be1"
+    }
+  },
+  "status": "exact six-moment flow matrix, common-phase separation, and reciprocal-phase skeleton complete; signed analytic estimate open"
+}

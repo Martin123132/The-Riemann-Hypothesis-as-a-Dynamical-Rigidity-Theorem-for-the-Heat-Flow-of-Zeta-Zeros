@@ -1,0 +1,185 @@
+{
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_adjacent_cutoff_real_edge_projective_splice_gate",
+  "date": "2026-07-31",
+  "status": "effective finite-height signed adjacent-cutoff projective splice for the retained first-order real-edge model",
+  "proof_boundary": "This proves the adjacent-cutoff signed splice only for the retained first-order real-edge model. It does not bound the higher-order Xi/source contribution, prove an Xi-level edge sign, cumulative-minor estimate, Abel-scalar gap, successor winding cap, contact exclusion, Lambda<=0, PF-infinity, RH, or a prize-level conclusion.",
+  "source_audit": {
+    "source_sha256": {
+      "critical_ray_edge": "3fd52e8a0927865e95daaea00507eca7e1fdda363f1dd55c84dca4165fdf13e8",
+      "adjacent_recurrence": "30c8dbd34afb8c9c52b9abcc87c0fe69e01288e17fd0fa556799f9adc26a0b9a",
+      "real_edge_source": "66a47359d8c9b457bcf98b43686b0bb3d1b51423d0de1f1222d21f5efa8d9e2b"
+    },
+    "published_source": {
+      "citation": "D.H.J. Polymath, Effective approximation of heat flow evolution of the Riemann xi function, and a new upper bound for the de Bruijn-Newman constant, arXiv:1904.12438",
+      "location": "equation (53), C_0, first correction, and Proposition 6.2",
+      "url": "https://arxiv.org/abs/1904.12438"
+    }
+  },
+  "exact": {
+    "domain": "L>=50, 0<tL<=25, h=1/a<1/72000000000; at an integer cutoff a=m compare p_minus=-1 in the N=m-1 chart with p_plus=1 in the N=m chart",
+    "physical_alignment": "S_minus=kappa_(m-1)T_0, S_plus=kappa_mT_0=-S_minus; v_minus=(C_minus/S_minus,D_minus/S_minus), v_plus=(C_plus/S_plus,D_plus/S_plus). Real nonzero rescaling does not change the projective points, and c_minus,c_plus<0 select their common short lift.",
+    "finite_jets": "c_sigma=A_sigma+h e0_sigma, |e0_sigma|<100; d_sigma=h B_sigma+h^2 e1_sigma, |e1_sigma|<250, sigma in {minus,plus}",
+    "orientation": "For v_s=(c_s,d_s), partial_s arg(c_s+i d_s)=Delta_cut/(c_s^2+d_s^2)<0",
+    "pi_provenance": "The endpoint A and B formulas inherit pi from the completed-zeta and Riemann-Siegel C_0 normalization. Evaluation at p=+-1 reduces that source phase to square radicals; no geometric circle, polygon, or fitted constant is introduced."
+  },
+  "symbolic_certificate": {
+    "endpoint_values": {
+      "A_minus": "-sqrt(2+sqrt(2))/4",
+      "A_plus": "-sqrt(2+sqrt(2))/4",
+      "B_minus": "-3sqrt(2-sqrt(2))/16",
+      "B_plus": "-sqrt(2-sqrt(2))/16"
+    },
+    "leading_wedge": "A_minus*B_plus-B_minus*A_plus=-sqrt(2)/32",
+    "finite_wedge": "Delta_cut=c_minus*d_plus-d_minus*c_plus=-sqrt(2)h/32+h^2[A(e1_plus-e1_minus)+e0_minus B_plus-B_minus e0_plus]+h^3[e0_minus e1_plus-e1_minus e0_plus]",
+    "affine_join": "v_s=(1-s)v_minus+s v_plus; c_s*d_(s)-d_s*c_(s)=Delta_cut"
+  },
+  "arithmetic_certificate": {
+    "h_upper": "1/72000000000",
+    "endpoint_bounds": "A<-1/3, |A|<1/2, |B_minus|<1, |B_plus|<1",
+    "defect_bounds": "|e0_minus|,|e0_plus|<100; |e1_minus|,|e1_plus|<250",
+    "second_order_coefficient": 500,
+    "third_order_coefficient": 50000,
+    "error_at_h_upper": "720000001/103680000000000000",
+    "error_cap": "1/600",
+    "radical_margin": "sqrt(2)/32>1/24",
+    "normalized_wedge": "Delta_cut/h<-1/25",
+    "signed_wedge": "Delta_cut<-h/25<0",
+    "nonvanishing": "c_minus<-1/4, c_plus<-1/4, c_s<-1/4"
+  },
+  "rows": [
+    {
+      "id": "acres_01_domain",
+      "role": "effective_domain",
+      "readiness": "ready_to_apply",
+      "claim": "Each canonical adjacent cutoff lies in one common high-height box.",
+      "formula": "L>=50, 0<tL<=25, h=1/a<1/72000000000; at an integer cutoff a=m compare p_minus=-1 in the N=m-1 chart with p_plus=1 in the N=m chart",
+      "proof_boundary": "The statement concerns the retained first-order edge model.",
+      "diagnostics": null
+    },
+    {
+      "id": "acres_02_alignment",
+      "role": "projective_normalization",
+      "readiness": "ready_to_apply",
+      "claim": "The alternating endpoint normalizer is harmless in real projective space.",
+      "formula": "S_minus=kappa_(m-1)T_0, S_plus=kappa_mT_0=-S_minus; v_minus=(C_minus/S_minus,D_minus/S_minus), v_plus=(C_plus/S_plus,D_plus/S_plus). Real nonzero rescaling does not change the projective points, and c_minus,c_plus<0 select their common short lift.",
+      "proof_boundary": "The aligned normalized rows, not the antipodal physical representatives, define the short join.",
+      "diagnostics": null
+    },
+    {
+      "id": "acres_03_endpoint_values",
+      "role": "exact_source_identity",
+      "readiness": "certified",
+      "claim": "The two cutoff endpoint values agree and their first slopes have an exact gap.",
+      "formula": "A_minus=-sqrt(2+sqrt(2))/4; A_plus=-sqrt(2+sqrt(2))/4; B_minus=-3sqrt(2-sqrt(2))/16; B_plus=-sqrt(2-sqrt(2))/16",
+      "proof_boundary": "These are exact evaluations of the published C_0 source formulas.",
+      "diagnostics": null
+    },
+    {
+      "id": "acres_04_leading_wedge",
+      "role": "exact_orientation",
+      "readiness": "certified",
+      "claim": "The limiting cutoff connector is strictly clockwise.",
+      "formula": "A_minus*B_plus-B_minus*A_plus=-sqrt(2)/32",
+      "proof_boundary": "No numerical sign fitting is used.",
+      "diagnostics": null
+    },
+    {
+      "id": "acres_05_finite_jets",
+      "role": "finite_height_transfer",
+      "readiness": "certified",
+      "claim": "Only the value and centered-slope edge jets are needed at a cutoff connector.",
+      "formula": "c_sigma=A_sigma+h e0_sigma, |e0_sigma|<100; d_sigma=h B_sigma+h^2 e1_sigma, |e1_sigma|<250, sigma in {minus,plus}",
+      "proof_boundary": "The x-second jet is needed for within-cell current, not for the join-parameter current.",
+      "diagnostics": null
+    },
+    {
+      "id": "acres_06_wedge_expansion",
+      "role": "division_free_perturbation",
+      "readiness": "certified",
+      "claim": "The finite connector determinant has an exact polynomial remainder.",
+      "formula": "Delta_cut=c_minus*d_plus-d_minus*c_plus=-sqrt(2)h/32+h^2[A(e1_plus-e1_minus)+e0_minus B_plus-B_minus e0_plus]+h^3[e0_minus e1_plus-e1_minus e0_plus]",
+      "proof_boundary": "No division by either endpoint row occurs.",
+      "diagnostics": null
+    },
+    {
+      "id": "acres_07_error_budget",
+      "role": "rational_majorant",
+      "readiness": "certified",
+      "claim": "The O(h^2) connector error cannot consume the radical margin.",
+      "formula": "500h+50000h^2<1/600 and sqrt(2)/32>1/24",
+      "proof_boundary": "All finite-height constants are inherited from the critical-ray gate.",
+      "diagnostics": {
+        "h_upper": "1/72000000000",
+        "endpoint_bounds": "A<-1/3, |A|<1/2, |B_minus|<1, |B_plus|<1",
+        "defect_bounds": "|e0_minus|,|e0_plus|<100; |e1_minus|,|e1_plus|<250",
+        "second_order_coefficient": 500,
+        "third_order_coefficient": 50000,
+        "error_at_h_upper": "720000001/103680000000000000",
+        "error_cap": "1/600",
+        "radical_margin": "sqrt(2)/32>1/24",
+        "normalized_wedge": "Delta_cut/h<-1/25",
+        "signed_wedge": "Delta_cut<-h/25<0",
+        "nonvanishing": "c_minus<-1/4, c_plus<-1/4, c_s<-1/4"
+      }
+    },
+    {
+      "id": "acres_08_signed_wedge",
+      "role": "effective_sign_theorem",
+      "readiness": "certified",
+      "claim": "Every retained-model adjacent edge connector has strict negative projective current.",
+      "formula": "Delta_cut<-h/25<0",
+      "proof_boundary": "This signs the connector, not the omitted Xi/source remainder.",
+      "diagnostics": null
+    },
+    {
+      "id": "acres_09_nonvanishing",
+      "role": "zero_fibre_guard",
+      "readiness": "certified",
+      "claim": "The affine connector remains in one nonzero projective chart.",
+      "formula": "c_minus<-1/4, c_plus<-1/4, c_s<-1/4",
+      "proof_boundary": "The join cannot pass through the origin.",
+      "diagnostics": null
+    },
+    {
+      "id": "acres_10_affine_current",
+      "role": "exact_homotopy",
+      "readiness": "certified",
+      "claim": "The affine join has constant signed projective current.",
+      "formula": "v_s=(1-s)v_minus+s v_plus; c_s*d_(s)-d_s*c_(s)=Delta_cut; For v_s=(c_s,d_s), partial_s arg(c_s+i d_s)=Delta_cut/(c_s^2+d_s^2)<0",
+      "proof_boundary": "The join parameter s is distinct from the physical x derivative.",
+      "diagnostics": null
+    },
+    {
+      "id": "acres_11_q_ge_1",
+      "role": "domain_corollary",
+      "readiness": "ready_to_apply",
+      "claim": "The result closes every q>=1 cutoff splice in the retained critical-ray model.",
+      "formula": "q=2tL^2>=1 is a subset of L>=50, 0<tL<=25",
+      "proof_boundary": "Insertion into the cumulative contact scalar remains separate.",
+      "diagnostics": null
+    },
+    {
+      "id": "acres_12_boundary",
+      "role": "nonpromotion_guard",
+      "readiness": "guard_validated",
+      "claim": "The model splice is not an Xi-level or global contact theorem.",
+      "formula": "Higher-order Xi/source error and the cumulative signed-minor estimate remain open.",
+      "proof_boundary": "No Xi-level edge sign, Abel gap, winding cap, contact exclusion, Lambda<=0, or RH is claimed.",
+      "diagnostics": null
+    }
+  ],
+  "counts": {
+    "rows": 12,
+    "exact_cutoff_endpoint_values": 4,
+    "exact_leading_wedges": 1,
+    "finite_connector_jet_families": 2,
+    "rational_remainder_budgets": 1,
+    "nonvanishing_affine_joins": 1,
+    "signed_affine_splices": 1,
+    "uniform_q_ge_1_model_splices": 1,
+    "required_second_adjacent_x_jets": 0,
+    "xi_level_edge_splices": 0,
+    "abel_gaps": 0,
+    "winding_bounds": 0
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "kind": "jensen_window_pf_quartic_signed_hankel_branch_exclusion_lemma",
+  "date": "2026-07-25",
+  "status": "exact Xi quartic branch-exclusion lemma",
+  "proof_boundary": "This artifact combines an exact quartic boundary factorization with the already proved strict Xi contiguous order-three signed-Hankel theorem. It excludes the middle-double-root and triple-root boundary strata and reduces the live quartic inward condition to u<=U on the outer branch. It does not prove that remaining inequality, degree-four Xi hyperbolicity, PF-infinity, Lambda<=0, or RH.",
+  "sources": [
+    "outputs/jensen_window_pf_reciprocal_defect_compound_order3_gate.md",
+    "outputs/jensen_window_pf_compound_order3_forward_invariance_certificate.md",
+    "outputs/jensen_window_pf_quartic_double_root_threshold_lemma.md",
+    "outputs/jensen_window_pf_strong_logconcave_local_quartic_countermodel.md"
+  ],
+  "generator": "work/rh_compute/scripts/jensen_window_pf_quartic_signed_hankel_branch_exclusion_lemma.py",
+  "checker": "work/rh_compute/scripts/check_jensen_window_pf_quartic_signed_hankel_branch_exclusion_lemma.py",
+  "exact": {
+    "normalized_coefficients": [
+      "1",
+      "1",
+      "x",
+      "x^2*y",
+      "x^3*y^2*z"
+    ],
+    "shift_scaling": "A_(n+j)=A_n*r_n^j*B_j, r_n=A_(n+1)/A_n; D_(3,n)=A_n^3*r_n^6*det[B_(i+j)]",
+    "normalized_hankel": "x**3*(x*y**2*z - x*y**2 - y**2*z + 2*y - 1)",
+    "boundary_coordinates": {
+      "x": "-a**2/2 + 4*a/3 + p/6",
+      "y": "18*a*(-a**2 + 2*a + p)/(-3*a**2 + 8*a + p)**2",
+      "z": "2*p*(-3*a**2 + 8*a + p)/(3*(-a**2 + 2*a + p)**2)"
+    },
+    "curvature": "C=3*a^2-4*a+p=(a-b)*(a-c)",
+    "boundary_hankel": "det[B_(i+j)]=-C^3/216",
+    "strict_xi_sign": "D_(3,n)(lambda)<0 for every n>=0 and finite lambda>=-100",
+    "branch_conclusion": "C>0: the double-root slope a lies outside the interval with endpoints b,c",
+    "excluded_strata": [
+      "C<0 middle-root branch",
+      "C=0 triple-root stratum"
+    ],
+    "threshold": "(-a**2 + 2*a + p)*(3*a**2 - 5*a + 5*p)/(6*p**2)",
+    "reduced_inward_condition": "u<=U(a,p)"
+  },
+  "summary": {
+    "rows": 10,
+    "exact_identities": 4,
+    "imported_hankel_theorems": 1,
+    "excluded_boundary_strata": 2,
+    "reduced_outer_thresholds": 1,
+    "countermodel_separations": 1,
+    "open_outer_thresholds": 1,
+    "main_finding": "At a quartic double-root boundary, the normalized contiguous order-three Hankel determinant is -((a-b)(a-c))^3/216. The strict Xi sign therefore excludes the middle-root and triple-root strata throughout the target heat interval, leaving only the outer branch and the single unproved threshold u<=U(a,p)."
+  },
+  "rows": [
+    {
+      "id": "qshb_01_shift_normalization",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "Every shifted quartic can be normalized to B_0=B_1=1 with positive Hankel scaling.",
+      "formula": "A_(n+j)=A_n*r_n^j*B_j, r_n=A_(n+1)/A_n; D_(3,n)=A_n^3*r_n^6*det[B_(i+j)]",
+      "proof_boundary": "Positive normalization only.",
+      "diagnostics": null
+    },
+    {
+      "id": "qshb_02_order_three_coordinate",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "The normalized contiguous order-three Hankel determinant is explicit in the quartic contractions.",
+      "formula": "det[B_(i+j)]=x**3*(x*y**2*z - x*y**2 - y**2*z + 2*y - 1)",
+      "proof_boundary": "One contiguous 3 by 3 minor.",
+      "diagnostics": null
+    },
+    {
+      "id": "qshb_03_double_root_coordinates",
+      "role": "exact_identity",
+      "readiness": "ready_to_apply",
+      "claim": "Substitute the complete nondegenerate positive-root quartic boundary coordinates.",
+      "formula": "P=(1+a*w)^2*(1+b*w)*(1+c*w), 2*a+b+c=4, p=b*c",
+      "proof_boundary": "Nondegenerate quartic boundary stratum.",
+      "diagnostics": {
+        "x": "-a**2/2 + 4*a/3 + p/6",
+        "y": "18*a*(-a**2 + 2*a + p)/(-3*a**2 + 8*a + p)**2",
+        "z": "2*p*(-3*a**2 + 8*a + p)/(3*(-a**2 + 2*a + p)**2)"
+      }
+    },
+    {
+      "id": "qshb_04_boundary_factorization",
+      "role": "exact_factorization",
+      "readiness": "ready_to_apply",
+      "claim": "On the quartic boundary, the order-three Hankel sign is the negative cube of the root-order curvature.",
+      "formula": "det[B_(i+j)]=-C^3/216, C=3*a^2-4*a+p=(a-b)*(a-c)",
+      "proof_boundary": "Exact boundary identity before importing the Xi sign theorem.",
+      "diagnostics": null
+    },
+    {
+      "id": "qshb_05_imported_xi_hankel_sign",
+      "role": "imported_theorem",
+      "readiness": "ready_to_apply",
+      "claim": "The completed Xi compound-order-three flow gives the strict negative contiguous Hankel sign throughout the target interval.",
+      "formula": "D_(3,n)(lambda)<0 for every n>=0 and finite lambda>=-100",
+      "proof_boundary": "Imports the validated order-three entry and forward-invariance certificates.",
+      "diagnostics": null
+    },
+    {
+      "id": "qshb_06_outer_branch_only",
+      "role": "theorem_conclusion",
+      "readiness": "ready_to_apply",
+      "claim": "Every hypothetical Xi quartic double-root boundary point lies on an outer-root branch.",
+      "formula": "D_(3,n)<0 => C>0 => (a-b)*(a-c)>0",
+      "proof_boundary": "Branch selection only; it does not prove inward motion.",
+      "diagnostics": null
+    },
+    {
+      "id": "qshb_07_middle_and_triple_exclusion",
+      "role": "theorem_conclusion",
+      "readiness": "ready_to_apply",
+      "claim": "The middle-root branch and tangent triple-root stratum are incompatible with the strict Xi order-three Hankel theorem.",
+      "formula": "C<0 and C=0 are excluded",
+      "proof_boundary": "Excludes boundary strata, not all quartic double roots.",
+      "diagnostics": null
+    },
+    {
+      "id": "qshb_08_reduced_inward_threshold",
+      "role": "exact_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "The branch-aware quartic inward condition reduces on Xi to one upper threshold.",
+      "formula": "C*(u-U)<=0 and C>0 => u<=U(a,p)",
+      "proof_boundary": "The inequality u<=U remains unproved.",
+      "diagnostics": {
+        "U": "(-a**2 + 2*a + p)*(3*a**2 - 5*a + 5*p)/(6*p**2)"
+      }
+    },
+    {
+      "id": "qshb_09_countermodel_separation",
+      "role": "countermodel_diagnostic",
+      "readiness": "ready_to_apply",
+      "claim": "The strong-log-concave local quartic countermodel is excluded by the already proved Xi order-three Hankel sign.",
+      "formula": "D_3(countermodel)=[9.515769718203299328698745521778012352202713614459947107E-7 +/- 1.86E-62]>0",
+      "proof_boundary": "Explains the scope difference; it is not an Xi computation.",
+      "diagnostics": {
+        "countermodel_hankel_ball": "[9.515769718203299328698745521778012352202713614459947107E-7 +/- 1.86E-62]"
+      }
+    },
+    {
+      "id": "qshb_10_live_outer_threshold",
+      "role": "open_handoff",
+      "readiness": "not_ready_to_apply",
+      "claim": "Prove u<=U at every remaining outer-branch Xi quartic contact using a global heat-compatible or theta-specific condition.",
+      "formula": "outer quartic contact => u<=U(a,p)",
+      "proof_boundary": "Degree-four Xi hyperbolicity, PF-infinity, Lambda<=0, and RH remain open.",
+      "diagnostics": null
+    }
+  ]
+}

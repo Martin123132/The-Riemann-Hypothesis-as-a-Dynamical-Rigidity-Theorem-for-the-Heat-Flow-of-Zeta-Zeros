@@ -76,12 +76,20 @@ pushforward `y=u^2`, but positive mixing of these blocks is not enough.
 
 ## Live Handoff
 
-Exploit the actual pushforward density W_lambda(sqrt(y))/(2*sqrt(y)) through a half-integer Gamma/Laguerre expansion with a proved common-interlacing, total-positive connection, or direct variation-diminishing rule; positivity of the expansion coefficients alone is insufficient.
+Exploit the actual pushforward density W_lambda(sqrt(y))/(2*sqrt(y)) through a half-integer Gamma/Laguerre expansion with a weighted total-positive connection or direct variation-diminishing rule. Because the density has full support y>0 and every component root scales as 1/y, the complete fixed-scale family has no common interlacer in degree D>=2; positivity of the expansion coefficients alone is also insufficient. The fractional Abel kernel has both signs of 2x2 minors, so any variation-diminishing argument must use a weighted Xi-specific composition. The Abel measure now also gives every shift n an exact radial probability in dimension 2n+2 and a classical dimension walk. A two-Gaussian Newman flow has that entire radial ladder and arbitrarily strong log-concavity while every shifted quadratic Jensen discriminant is negative. The model is log-convex in the squared variable and therefore lies outside the Xi root-variable log-concavity theorem. That Xi theorem already closes every shifted quadratic, and the reciprocal-defect heat theorem closes every shifted cubic on the target interval. Hence radial positive definiteness cannot replace the missing Xi-specific degree-four or all-degree connection.
 
 The useful question is now whether the actual Phi pushforward carries
-a common-interlacing or total-positive Gamma/Laguerre connection that
-the two countermodels cannot possess. That is an Xi-specific theorem
-target, not a generic measure argument.
+a weighted total-positive Gamma/Laguerre connection that the two
+countermodels cannot possess. Global common interlacing of all scales
+is impossible by full support. The remaining Xi-specific theorem
+target is not a generic measure argument, and it cannot come from
+total positivity of the bare Abel kernel.
+
+The exact full-support guard and score/Beta Abel coordinate are in
+`outputs/jensen_window_pf_newman_one_sided_phase_moment_bridge_gate.md`.
+Their all-shift radial dimension ladder and exact two-Gaussian
+nonpromotion theorem are in
+`outputs/jensen_window_pf_newman_score_abel_radial_dimension_lift_gate.md`.
 
 References: https://dlmf.nist.gov/13.6, https://dlmf.nist.gov/15.8,
 and https://dlmf.nist.gov/18.16.
