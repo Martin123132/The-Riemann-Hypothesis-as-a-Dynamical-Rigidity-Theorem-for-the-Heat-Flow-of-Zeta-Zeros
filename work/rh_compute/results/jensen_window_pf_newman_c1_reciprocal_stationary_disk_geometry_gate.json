@@ -1,0 +1,213 @@
+{
+  "kind": "jensen_window_pf_newman_c1_reciprocal_stationary_disk_geometry_gate",
+  "schema_version": 1,
+  "date": "2026-08-04",
+  "status": "exact anchored reciprocal decomposition and tangent-disk geometry proved; separated termwise absolute budgets fail; signed complete-join estimate open",
+  "source_sha256": {
+    "anchor": "2064f5bbf9e74fc100d40dd3f7d596f79eb463f4803aa1426d724466487f2219",
+    "finite_band": "f97ce0e29e2b374a1154cbb982eb522077ea59bfc471e9e121bfe37b96ab39af",
+    "ridge": "81ab2ccbd2d5429e2044280db44a09f7f9befc7099b397d90c1017b79ab5d68f"
+  },
+  "source_audit": {
+    "anchor": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_carrier_near_odd_harmonic_anchor_gate.json",
+      "sha256": "2064f5bbf9e74fc100d40dd3f7d596f79eb463f4803aa1426d724466487f2219"
+    },
+    "finite_band": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_finite_band_dirichlet_cell_reduction_gate.json",
+      "sha256": "f97ce0e29e2b374a1154cbb982eb522077ea59bfc471e9e121bfe37b96ab39af"
+    },
+    "ridge": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_ideal_cubic_double_morse_ridge_carrier_inversion_gate.json",
+      "sha256": "81ab2ccbd2d5429e2044280db44a09f7f9befc7099b397d90c1017b79ab5d68f"
+    }
+  },
+  "exact": {
+    "algebra": {
+      "hermitian_join": "mathcal J_H^0=-A_H+R_H, hence W_H:=R_H=A_H+mathcal J_H^0.",
+      "transpose_join": "mathcal J_T^0=-A_T+R_T+Q_T, hence W_T:=R_T+Q_T=A_T+mathcal J_T^0.",
+      "transpose_improvement": "The exact sufficient condition |R_T+Q_T|<=A_T-delta is weaker than the previous separated condition |R_T|+|Q_T|<=A_T-delta and still implies |mathcal J_T^0|>=delta.",
+      "cell_join": "For S_q=tau_q+M_q-E_q^(ext)+Lambda_q^(alias), one has 2M_q-S_q=M_q-tau_q+E_q^(ext)-Lambda_q^(alias).",
+      "global_join": "Summing cells gives mathcal J_H^0=mathscr M_N[P_H^0]-tau_band[P_H^0]+E_band[P_H^0], while mathcal J_T^0 has the same expression for P_T^0 plus the exact transpose terminal survivor.",
+      "anchored_stationary": "Therefore W_H and W_T are A_H and A_T plus the complete tie-invariant reciprocal joins. Internal aliases, exterior pieces, and tie halves must recompose before a modulus is taken.",
+      "disk_identity": "For A>0 and J=x+iy, |A+J|^2-A^2=|J|^2+2A Re(J).",
+      "contracted_disk": "For 0<delta<=A, |A+J|<=A-delta iff |J|^2+2A Re(J)<=-2A delta+delta^2; the reverse triangle inequality then gives |J|>=delta.",
+      "signed_necessity": "Any nonzero J in the closed tangent disk |A+J|<=A satisfies Re(J)<=-|J|^2/(2A)<0. A magnitude-only estimate for J cannot establish this directional condition.",
+      "combined_residuals": 2,
+      "optimal_disk_identities": 2
+    }
+  },
+  "analytic_proof": {
+    "absolute_budget_guard": {
+      "test_block": "Let I_N={q in Z:ceil(N/64)<=q<=floor(N/32)}. On L>=50, N>4160 and #I_N>=N/65; every such q is an interior carrier with full starred weight.",
+      "amplitude_floor": "Since sigma<1/2+1/(8L), log(a)<(L+1)/2, and (L+1)/(16L)<=51/800<log(10/9), exp(S(log q))>9/(10 sqrt(q))>9/(2 sqrt(N)) on I_N.",
+      "polynomial_floor": "For q in I_N, u_q-u_N=log(N/q)>=log 32>3 and u_q+u_N>=u_q-u_N. Thus |P_H^0(log q)|>27/4. The imaginary cubic part of P_T^0 has the same floor and is orthogonal to its real affine part, so |P_T^0(log q)|>27/4.",
+      "carrier_budget": "For C=H,T define B_C=2 sum_(q=1)^N omega_N(q)|f_(P_C^0)(q)|. The preceding block gives B_C>(243/260)sqrt(N)>(243/520)exp(L/4).",
+      "anchor_upper": "The floor definitions give D_N<1+log(2N+1)<(L+7)/2, while b<(L+1)/2 and d<(L+3)/2. Since pi>3, both A_H and A_T are below U(L)=(L+7)(L+1)(L+3)^2/192.",
+      "uniform_comparison": "At L=50 the 41-term positive Taylor lower sum for exp(25/2) gives (243/520)exp(25/2)>125396 while U(50)<42531. The logarithmic derivative of U is below 4/(L+1)<=4/51<1/4, so the strict budget gap increases for all L>=50.",
+      "route_guard": "Therefore B_H>A_H and B_T>A_T throughout the q=1 chart. A proof that first applies the triangle inequality separately to carrier atoms, and then adds any nonnegative variation budget, cannot close either anchor disk. This does not lower-bound |mathscr M_N| or disprove signed cancellation.",
+      "carrier_coefficient": "243/260",
+      "exp_taylor_terms": 41,
+      "budget_lower_50": 125396.07810554927,
+      "anchor_upper_50": 42530.015625,
+      "budget_to_anchor_ratio_50": 2.9484136382926445,
+      "absolute_budget_obstructions": 2
+    }
+  },
+  "rows": [
+    {
+      "id": "rsd_01_hermitian",
+      "role": "combined residual",
+      "readiness": "proved",
+      "claim": "The Hermitian disk residual is A_H plus the complete ideal join.",
+      "certificate": "mathcal J_H^0=-A_H+R_H, hence W_H:=R_H=A_H+mathcal J_H^0.",
+      "proof_boundary": "This is an identity, not a disk estimate."
+    },
+    {
+      "id": "rsd_02_transpose",
+      "role": "combined residual",
+      "readiness": "proved",
+      "claim": "The transpose correction belongs inside one combined residual.",
+      "certificate": "mathcal J_T^0=-A_T+R_T+Q_T, hence W_T:=R_T+Q_T=A_T+mathcal J_T^0.",
+      "proof_boundary": "R_T and Q_T are not estimated separately."
+    },
+    {
+      "id": "rsd_03_improvement",
+      "role": "optimal handoff",
+      "readiness": "proved",
+      "claim": "The combined transpose disk strictly improves the separated triangle handoff.",
+      "certificate": "The exact sufficient condition |R_T+Q_T|<=A_T-delta is weaker than the previous separated condition |R_T|+|Q_T|<=A_T-delta and still implies |mathcal J_T^0|>=delta.",
+      "proof_boundary": "No combined disk bound is claimed."
+    },
+    {
+      "id": "rsd_04_cell",
+      "role": "reciprocal cell",
+      "readiness": "proved",
+      "claim": "Each finite reciprocal cell has an exact one-carrier join.",
+      "certificate": "For S_q=tau_q+M_q-E_q^(ext)+Lambda_q^(alias), one has 2M_q-S_q=M_q-tau_q+E_q^(ext)-Lambda_q^(alias).",
+      "proof_boundary": "Aliases retain symmetric ordering."
+    },
+    {
+      "id": "rsd_05_global",
+      "role": "global recomposition",
+      "readiness": "proved",
+      "claim": "Internal ties and aliases recompose into one global exterior.",
+      "certificate": "Summing cells gives mathcal J_H^0=mathscr M_N[P_H^0]-tau_band[P_H^0]+E_band[P_H^0], while mathcal J_T^0 has the same expression for P_T^0 plus the exact transpose terminal survivor.",
+      "proof_boundary": "The global exterior is not bounded here."
+    },
+    {
+      "id": "rsd_06_anchor_stationary",
+      "role": "anchored decomposition",
+      "readiness": "proved",
+      "claim": "Both disk residuals have a complete tie-invariant reciprocal decomposition.",
+      "certificate": "Therefore W_H and W_T are A_H and A_T plus the complete tie-invariant reciprocal joins. Internal aliases, exterior pieces, and tie halves must recompose before a modulus is taken.",
+      "proof_boundary": "No proper fixed-width collar is frozen."
+    },
+    {
+      "id": "rsd_07_disk",
+      "role": "disk geometry",
+      "readiness": "proved",
+      "claim": "The tangent anchor disk has an exact signed quadratic equation.",
+      "certificate": "For A>0 and J=x+iy, |A+J|^2-A^2=|J|^2+2A Re(J).",
+      "proof_boundary": "The disk is tangent to zero."
+    },
+    {
+      "id": "rsd_08_delta",
+      "role": "quantitative disk",
+      "readiness": "proved",
+      "claim": "The contracted disk gives the exact delta margin.",
+      "certificate": "For 0<delta<=A, |A+J|<=A-delta iff |J|^2+2A Re(J)<=-2A delta+delta^2; the reverse triangle inequality then gives |J|>=delta.",
+      "proof_boundary": "This is sufficient, not necessary, for nonvanishing."
+    },
+    {
+      "id": "rsd_09_sign",
+      "role": "sign necessity",
+      "readiness": "proved",
+      "claim": "Every nonzero point in the anchor disk has negative raw real part.",
+      "certificate": "Any nonzero J in the closed tangent disk |A+J|<=A satisfies Re(J)<=-|J|^2/(2A)<0. A magnitude-only estimate for J cannot establish this directional condition.",
+      "proof_boundary": "Raw sign is not yet the physical-current sign."
+    },
+    {
+      "id": "rsd_10_block",
+      "role": "carrier block",
+      "readiness": "proved",
+      "claim": "A macroscopic interior carrier block has a rational counting floor.",
+      "certificate": "Let I_N={q in Z:ceil(N/64)<=q<=floor(N/32)}. On L>=50, N>4160 and #I_N>=N/65; every such q is an interior carrier with full starred weight.",
+      "proof_boundary": "The block is used only for an absolute-budget guard."
+    },
+    {
+      "id": "rsd_11_amplitude",
+      "role": "amplitude floor",
+      "readiness": "proved",
+      "claim": "The physical q=1 weight has an explicit lower floor on that block.",
+      "certificate": "Since sigma<1/2+1/(8L), log(a)<(L+1)/2, and (L+1)/(16L)<=51/800<log(10/9), exp(S(log q))>9/(10 sqrt(q))>9/(2 sqrt(N)) on I_N.",
+      "proof_boundary": "No phase is removed from the true sum."
+    },
+    {
+      "id": "rsd_12_hermitian_poly",
+      "role": "Hermitian floor",
+      "readiness": "proved",
+      "claim": "The Hermitian ideal cubic is uniformly nonzero on the test block.",
+      "certificate": "For q in I_N, u_q-u_N=log(N/q)>=log 32>3 and u_q+u_N>=u_q-u_N. Thus |P_H^0(log q)|>27/4. The imaginary cubic part of P_T^0 has the same floor and is orthogonal to its real affine part, so |P_T^0(log q)|>27/4.",
+      "proof_boundary": "This is a modulus statement for a route guard."
+    },
+    {
+      "id": "rsd_13_transpose_poly",
+      "role": "transpose floor",
+      "readiness": "proved",
+      "claim": "The transpose ideal cubic has the same modulus floor.",
+      "certificate": "For q in I_N, u_q-u_N=log(N/q)>=log 32>3 and u_q+u_N>=u_q-u_N. Thus |P_H^0(log q)|>27/4. The imaginary cubic part of P_T^0 has the same floor and is orthogonal to its real affine part, so |P_T^0(log q)|>27/4.",
+      "proof_boundary": "Its real affine part cannot cancel its imaginary cubic part in modulus."
+    },
+    {
+      "id": "rsd_14_budget",
+      "role": "absolute carrier budget",
+      "readiness": "proved",
+      "claim": "Both fully termwise carrier budgets grow at least like exp(L/4).",
+      "certificate": "For C=H,T define B_C=2 sum_(q=1)^N omega_N(q)|f_(P_C^0)(q)|. The preceding block gives B_C>(243/260)sqrt(N)>(243/520)exp(L/4).",
+      "proof_boundary": "This does not lower-bound the signed carrier sum."
+    },
+    {
+      "id": "rsd_15_anchor_upper",
+      "role": "anchor upper bound",
+      "readiness": "proved",
+      "claim": "Both anchors have a polynomial q=1 upper envelope.",
+      "certificate": "The floor definitions give D_N<1+log(2N+1)<(L+7)/2, while b<(L+1)/2 and d<(L+3)/2. Since pi>3, both A_H and A_T are below U(L)=(L+7)(L+1)(L+3)^2/192.",
+      "proof_boundary": "The sharper lower anchors remain valid."
+    },
+    {
+      "id": "rsd_16_comparison",
+      "role": "uniform mismatch",
+      "readiness": "proved",
+      "claim": "The termwise budgets already exceed the anchors for every L>=50.",
+      "certificate": "At L=50 the 41-term positive Taylor lower sum for exp(25/2) gives (243/520)exp(25/2)>125396 while U(50)<42531. The logarithmic derivative of U is below 4/(L+1)<=4/51<1/4, so the strict budget gap increases for all L>=50.",
+      "proof_boundary": "The comparison is a route obstruction only."
+    },
+    {
+      "id": "rsd_17_guard",
+      "role": "nonpromotion guard",
+      "readiness": "proved",
+      "claim": "Separated termwise absolute estimates cannot prove either disk inclusion.",
+      "certificate": "Therefore B_H>A_H and B_T>A_T throughout the q=1 chart. A proof that first applies the triangle inequality separately to carrier atoms, and then adds any nonnegative variation budget, cannot close either anchor disk. This does not lower-bound |mathscr M_N| or disprove signed cancellation.",
+      "proof_boundary": "Signed reciprocal cancellation may still close the theorem."
+    },
+    {
+      "id": "rsd_18_target",
+      "role": "signed stationary target",
+      "readiness": "open",
+      "claim": "The live target is a signed complete-join estimate in the tangent half-plane, preferably after physical phase composition.",
+      "certificate": "Bound the tie-invariant M-tau+E package before moduli, or prove a phase-weighted Hermitian/transpose alternative that bypasses the raw anchor disk.",
+      "proof_boundary": "No stationary sign, physical-current sign, contact exclusion, Lambda<=0, or RH conclusion is claimed."
+    }
+  ],
+  "summary": {
+    "rows": 18,
+    "combined_residuals": 2,
+    "optimal_disk_identities": 2,
+    "absolute_budget_obstructions": 2,
+    "live_signed_stationary_targets": 1
+  },
+  "next_action": "Use the exact global M-tau+E decomposition to seek a signed estimate for the complete Hermitian or transpose join, with aliases, exterior, tie halves, and terminal phase composed before moduli. The raw disk route requires a negative-real tangent-half-plane estimate; alternatively derive a phase-weighted two-channel inequality that proves the physical current directly. Do not return to separated carrier/variation triangle budgets.",
+  "proof_boundary": "This gate proves exact combined anchor residuals, an improved transpose handoff, tangent-disk geometry, and a q=1 source-specific obstruction to separated termwise absolute budgets. It proves no signed reciprocal join, disk inclusion, physical-current sign, all-q transport, contact-box exclusion, Q209 shell, cofinal successor, Lambda<=0, RH, or prize-level conclusion.",
+  "success": "built Newman C1 reciprocal-stationary disk geometry gate: 18 rows, 0 issues, 2 combined residuals, 2 optimal disk identities, 2 absolute-budget obstructions, 1 live signed stationary target"
+}

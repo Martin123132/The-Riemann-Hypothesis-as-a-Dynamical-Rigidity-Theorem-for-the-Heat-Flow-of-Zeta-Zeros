@@ -1,0 +1,83 @@
+{
+  "date": "2026-08-13",
+  "decision": {
+    "complete_T_upper_proved": false,
+    "completed_endpoint_cancellation_proved": false,
+    "detuning_ODE_exactly_conjugated_to_Airy_equation": true,
+    "grouped_398_mode_splice_proved": false,
+    "grouped_Green_operator_bound_proved": false,
+    "remaining_event_pairs_form_exact_symmetric_Airy_lattice": true,
+    "rh_implication": false,
+    "uniform_pointwise_Green_kernel_bound_below_4_67e_minus_4": true,
+    "variation_of_constants_kernel_explicit": true
+  },
+  "dependencies": {
+    "branch_envelope": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_scaled_airy_branch_amplitude_envelope_gate.json",
+      "sha256": "2fe162a6568a701e3749a5337748345e1428bf331ea0466cbfca51af98302e8b"
+    },
+    "detuning_ode": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_selected_beta4_endpoint_coherent_detuning_ode_gate.json",
+      "sha256": "551807a08ac7acf176feef55c3991be678baf7806962365dad67eea369b1cfa8"
+    }
+  },
+  "external_theorem": {
+    "source": "NIST Digital Library of Mathematical Functions, Section 9.8",
+    "url": "https://dlmf.nist.gov/9.8",
+    "used_statements": [
+      "Airy modulus definition 9.8.3",
+      "Airy modulus expansion 9.8.20",
+      "signed first-neglected-term remainder statement following 9.8.23"
+    ]
+  },
+  "interval_certificate": {
+    "event_zero_r_interval": [
+      "[4641534.06654237528322626414420534715079119576996547827909025160980093483219891382143074683 +/- 4.09e-83]",
+      "[4641534.06663351263341091695235630294831589596115137004613097052137221567055971635229842640 +/- 4.28e-83]"
+    ],
+    "exact_lattice_step_ball": "[232.694798886661458660881172825585318541936808144908828028964517489628567492347238423600029 +/- 2.12e-87]",
+    "green_kernel_absolute_envelope_ball": "[0.000466482634806340821896175549566115059023874252868881411276861381617387754052114340490062689 +/- 2.61e-93]",
+    "height_interval": "t*-pi/16<=t<=t*",
+    "kernel_bound_derivation": "|K(r,s)|<=pi M(-r)M(-s)<=(rs)^(-1/4)<=r_min^(-1/2)",
+    "lambda_interval": "0<=lambda<=pi/(16beta)",
+    "mode_roster": [
+      39696,
+      40094
+    ],
+    "modulus_inequality": "M(-r)^2<=1/(pi sqrt(r)) for r>0 from DLMF 9.8.20 with n=0 and its signed first-neglected-term remainder",
+    "r_max_ball": "[4688073.02641084492514309318692142001202428332278035181173676342487014138405818579998314640 +/- 4.73e-83]",
+    "r_min_ball": "[4595460.49636281631441140967198588125771989228195278633114051663533798837583542906822287403 +/- 4.49e-83]",
+    "removed_event_zero_mode": 39894
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_selected_beta4_detuning_airy_green_kernel_gate",
+  "next_action": "Insert the exact endpoint-source aggregates and grouped forcing from the detuning-ODE gate into (GK6). Derive finite Abel differences of the Airy Green phase on the symmetric r lattice, while composing the endpoint terms with g4_lambda(0), the half-current, and the Poisson complement before taking norms.",
+  "passed": true,
+  "proof_boundary": "Exact Airy gauge conjugation, Green kernel, symmetric event-pair lattice, and pointwise kernel envelope only. No grouped Green-operator estimate, completed endpoint cancellation, finite-integral splice, complete Q_K-T or T_upper, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "runtime": {
+    "elapsed_seconds": 0.415,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_selected_beta4_detuning_airy_green_kernel_gate.py",
+      "sha256": "db0572b9b852e9ed90dcac0118af324171887791f3a5c621c2d8dcce1597374d"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_selected_beta4_detuning_airy_green_kernel_gate.py",
+      "sha256": "5b3fff50d208d1f44bb5a8434c51c02b936fbfeb31de692ae6d47cc4c500e4b7"
+    }
+  },
+  "status": "selected_detuning_equation_conjugated_to_exact_Airy_Green_lattice",
+  "symbolic_certificate": {
+    "airy_coordinate": "r=beta^2+lambda+2beta d",
+    "conjugated_equation": "H_rr+rH=exp[i(2beta^2 d+beta d^2)]S(d)",
+    "event_pair_symmetry": "r_(q+j)=r_q+j Delta_r; r_(q-j)=r_q-j Delta_r",
+    "gauge": "G(d)=exp[-i(2beta^2 d+beta d^2)] H(r)",
+    "green_kernel": "K(r,s)=pi[Ai(-r)Bi(-s)-Bi(-r)Ai(-s)]",
+    "kernel_initial_data": "K(s,s)=0; partial_r K(s,s)=1",
+    "lattice_step": "8*beta**2/159577",
+    "mode_coordinate": "8*beta**2*m/159577 - beta**2 + lambda",
+    "variation_of_constants": "H(r)=-partial_s K(r,r0)H(r0)+K(r,r0)H_r(r0)+Integral_(r0)^r K(r,s)exp(i chi(d(s)))S(d(s))ds"
+  }
+}

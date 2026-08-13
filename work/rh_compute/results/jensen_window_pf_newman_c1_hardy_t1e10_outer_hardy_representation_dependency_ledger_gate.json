@@ -1,0 +1,800 @@
+{
+  "aggregate": {
+    "dependency_count": 18,
+    "dependency_kinds": [
+      "conjugation",
+      "normalization",
+      "omitted_block",
+      "source_arithmetic",
+      "truncation"
+    ],
+    "dependency_state_counts": {
+      "enclosed": 1,
+      "exact": 4,
+      "open": 13
+    },
+    "open_dependency_count": 13,
+    "outputs_hardy_z_certified": 0,
+    "outputs_with_explicit_open_dependencies": 15,
+    "outputs_xi_certified": 0
+  },
+  "critical_findings": {
+    "current_internal_bound_is_complete_hardy_error": false,
+    "current_internal_bound_upper": "1.18534368330532563659717863467183140923914676684614E-3",
+    "paper_big_o_terms_have_imported_usable_constants": false,
+    "paper_representation_exact": false,
+    "source_parameter_et": "5.0000000000000000000000000000000000902780E-0003",
+    "source_parameter_et_is_proved_hardy_error_bound": false,
+    "source_shifted_a_exactly_recomputed": false,
+    "source_shifted_theta_exactly_recomputed": false,
+    "source_visibly_retains_only_leading_rs_endpoint_correction": true
+  },
+  "dependencies": {
+    "accepted_source": {
+      "path": "work/rh_compute/external/hardy_fastcode/resumable/zeta14cubicmult_resumable.f90",
+      "sha256": "0fb64f090c21b185f27edc1c9194254cf471e74bfd6af3b88cb7f0cb40ec0c3d"
+    },
+    "crossblock_atlas": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_crossblock_structural_atlas_gate.json",
+      "sha256": "d92327e1d11405e93359b8491215e0e6902b902274f988406c1475712c2d8616"
+    },
+    "final_checkpoint": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/accumulation_weights/t1e10_crossblock/run/checkpoint.jsonl",
+      "sha256": "aedd9b6b334a0ffe7d7441dc619b44ba60e50f9d43014a8f58ed3d720f73ca74"
+    },
+    "fixture_inputs": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/accumulation_weights/t1e10_crossblock/run/inputs3.nml",
+      "sha256": "272562a9cc10b938edde6f366291de13c6e4116430462b4432aacbe57c0be61b"
+    },
+    "fixture_output": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/accumulation_weights/t1e10_crossblock/run/run.output.txt",
+      "sha256": "52214a68de33716fc41bc74c8d6c9d9f0313a9ae5fca3955e665f86881a8f6f6"
+    },
+    "internal_bound": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_rigorous_arb_source_q_dependency_cut_gate.json",
+      "sha256": "196550fe1fa57c8bc26f089541eaa4bc3113b309b3603149a350279b3e882527"
+    },
+    "observer_fixture": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/accumulation_weights/t1e10_crossblock/fixture_result.json",
+      "sha256": "abed60faaa1f078d7bd613acb125640d020bac88ca8be3752fd96d1ccb4ac68e"
+    },
+    "paper": {
+      "path": "work/rh_compute/external/hardy_fastcode/Lewis_Brereton_2607.15310.pdf",
+      "sha256": "fbc95e5e9bbde078160c7b1a3ac3abcbb3fc3ec522d1324b14d6024bf71e537a"
+    }
+  },
+  "dependency_ledger": [
+    {
+      "id": "hardy_z_definition",
+      "kind": "normalization",
+      "scope": "Exact mathematical target definition for real t.",
+      "state": "exact",
+      "statement": "Z(t)=exp(i*theta(t))*zeta(1/2+i*t), with theta(t)=Im(log Gamma(1/4+i*t/2))-t*log(pi)/2."
+    },
+    {
+      "id": "xi_hardy_normalization",
+      "kind": "normalization",
+      "scope": "Exact xi-to-Hardy normalization under the stated xi convention.",
+      "state": "exact",
+      "statement": "Xi(t)=-((t^2+1/4)/2)*abs(pi^(-s/2)*Gamma(s/2))*Z(t), s=1/2+i*t."
+    },
+    {
+      "id": "critical_line_conjugation_and_reality",
+      "kind": "conjugation",
+      "scope": "Exact target identity; it does not identify the source estimator with that target.",
+      "state": "exact",
+      "statement": "The functional equation and conjugation symmetry make the exact Hardy target real for real t."
+    },
+    {
+      "id": "source_observer_equivalence",
+      "kind": "source_arithmetic",
+      "scope": "Exact source reproduction only, not mathematical accuracy of those values.",
+      "state": "exact",
+      "statement": "The blocks-20--35 observer preserves the saved checkpoint state and all fifteen displayed source values exactly."
+    },
+    {
+      "id": "central_phase_scale_rounding",
+      "kind": "source_arithmetic",
+      "required_upgrade": "Enclose central PARI-to-binary128 conversion and every downstream phase/amplitude operation, or bypass the source values.",
+      "state": "open",
+      "statement": "PARI evaluates central theta and a before conversion to binary128, but no end-to-end interval encloses their conversion and downstream use."
+    },
+    {
+      "id": "shifted_theta_and_a_linearization",
+      "kind": "truncation",
+      "required_upgrade": "Bound the Taylor remainders uniformly on |delta|<=0.07 or recompute exact interval phases and scales at every target.",
+      "state": "open",
+      "statement": "The fourteen noncentral outputs use first-order updates for rsphase and a rather than independent exact evaluations."
+    },
+    {
+      "id": "hybrid_equations_126_127",
+      "kind": "normalization",
+      "required_upgrade": "Derive a constant-bearing equality plus remainder from an exact Hardy or Riemann-Siegel identity.",
+      "state": "open",
+      "statement": "The paper explicitly classifies the hybrid representation as non-exact and leaves relative O(epsilon_t) and comparable Gaussian-sum errors without a usable constant here."
+    },
+    {
+      "id": "omitted_H_t_normalizer",
+      "kind": "normalization",
+      "required_upgrade": "Prove and interval-evaluate the normalization factor and its interaction with every retained term.",
+      "state": "open",
+      "statement": "Equation (127) carries H(t), while the source accumulation does not expose a certified H(t) correction column."
+    },
+    {
+      "id": "lower_alpha_euler_maclaurin_and_exponential_tail",
+      "kind": "truncation",
+      "required_upgrade": "State and prove explicit remainder bounds in the actual source parameter domain.",
+      "state": "open",
+      "statement": "The exact integral representation's Euler-Maclaurin and lower-alpha truncation remainders have no imported enclosure in the saved certificate."
+    },
+    {
+      "id": "block_zero_transition_quadrature",
+      "kind": "omitted_block",
+      "required_upgrade": "Enclose the transition integral, contour truncation, and 64-point quadrature error.",
+      "state": "open",
+      "statement": "Block zero uses a fixed 64-point Gauss-Legendre transition quadrature with no certified quadrature and contour remainder in the current ledger."
+    },
+    {
+      "id": "block_zero_direct_terms",
+      "kind": "omitted_block",
+      "required_upgrade": "Interval-evaluate the complete block-zero roster and source rounding at all fifteen targets.",
+      "state": "open",
+      "statement": "The block-zero direct ter calls and their scaling are outside the blocks-20--35 weight fixture and corrected-model bound."
+    },
+    {
+      "id": "blocks_1_19",
+      "kind": "omitted_block",
+      "required_upgrade": "Extend the exact observer, corrected formula, local enclosures, and transport through blocks 1--19.",
+      "state": "open",
+      "statement": "Cubic blocks 1--19 are absent from the current cross-block fixture and internal error ledger."
+    },
+    {
+      "id": "blocks_20_35_corrected_internal_model",
+      "kind": "source_arithmetic",
+      "scope": "Finite saved-height internal corrected-model discrepancy only; it is not an outer Hardy error.",
+      "state": "enclosed",
+      "statement": "The corrected internal blocks-20--35 cell-plus-tail column is bounded by 1.18534368330532563659717863467183140923914676684614E-3 across the saved outputs."
+    },
+    {
+      "id": "upper_alpha_portcullis_cutoff",
+      "kind": "truncation",
+      "required_upgrade": "Prove exact partition coverage and bound all cutoff, floor, and discarded-tail terms.",
+      "state": "open",
+      "statement": "The high-alpha cutoff and its matching to the lower Riemann-Siegel cutoff have no complete constant-bearing remainder enclosure."
+    },
+    {
+      "id": "lower_rs_finite_sum_arithmetic",
+      "kind": "source_arithmetic",
+      "required_upgrade": "Re-evaluate the finite lower sum with rigorous phases and outward-rounded arithmetic.",
+      "state": "open",
+      "statement": "The n<=621 Riemann-Siegel sum is source-reproduced but not interval-enclosed through phase conversion, rtodbl, binary128 accumulation, and output addition."
+    },
+    {
+      "id": "omitted_rs_corrections_and_remainder",
+      "kind": "omitted_block",
+      "required_upgrade": "Choose an explicit correction order and prove a numerical remainder bound valid at every target height.",
+      "state": "open",
+      "statement": "The source visibly adds the leading endpoint correction only; higher correction terms and the final classical Riemann-Siegel remainder are not enclosed."
+    },
+    {
+      "id": "final_source_accumulation_rounding",
+      "kind": "source_arithmetic",
+      "required_upgrade": "Provide a complete operation-level interval ledger or bypass the legacy accumulation with rigorous evaluation.",
+      "state": "open",
+      "statement": "Roundoff for block zero, blocks 1--19, the lower RS sum, and the final zsum+rszsum addition is outside the selected internal columns."
+    },
+    {
+      "id": "assembled_outer_hardy_remainder",
+      "kind": "truncation",
+      "required_upgrade": "Sum nonoverlapping explicit columns into a complete outer Hardy remainder and verify it at all fifteen outputs.",
+      "state": "open",
+      "statement": "No theorem currently assembles every normalization, truncation, omitted-block, and arithmetic column into |Z_source-Z_exact|."
+    }
+  ],
+  "first_gate": {
+    "hardy_certification_claim_permitted": false,
+    "name": "complete_outer_hardy_remainder_present",
+    "reason": "At least one open outer column remains, including the assembled Hardy remainder.",
+    "satisfied": false
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_outer_hardy_representation_dependency_ledger_gate",
+  "next_obligation": "Independently enclose the exact Hardy Z targets at the fifteen saved heights, then derive a complete constant-bearing outer representation remainder from an exact identity.",
+  "next_route": {
+    "finite_falsification": "Independently enclose Hardy Z at all fifteen saved heights with Arb and compare against the source estimator. This calibrates the finite run only and is not evidence for RH by height exhaustion.",
+    "priority": "Run the independent fifteen-point Arb calibration first; then choose the exact classical representation and build its explicit outer remainder ledger.",
+    "proof_route": "Start from an exact classical Riemann-Siegel or exact Hardy identity, make the lower/upper partition exact, and prove constant-bearing remainders for every hybrid transformation before importing the corrected cubic machinery."
+  },
+  "output_rows": [
+    {
+      "current_internal_corrected_model_upper": "1.18534368330519512245965159430703043451643480177213E-3",
+      "exact_hardy_target": "Z(t_j)=exp(i*theta(t_j))*zeta(1/2+i*t_j)",
+      "exact_xi_target": "Xi(t_j)=-((t_j^2+1/4)/2)*abs(pi^(-s_j/2)*Gamma(s_j/2))*Z(t_j)",
+      "hardy_z_certified": false,
+      "open_dependency_ids": [
+        "central_phase_scale_rounding",
+        "shifted_theta_and_a_linearization",
+        "hybrid_equations_126_127",
+        "omitted_H_t_normalizer",
+        "lower_alpha_euler_maclaurin_and_exponential_tail",
+        "block_zero_transition_quadrature",
+        "block_zero_direct_terms",
+        "blocks_1_19",
+        "upper_alpha_portcullis_cutoff",
+        "lower_rs_finite_sum_arithmetic",
+        "omitted_rs_corrections_and_remainder",
+        "final_source_accumulation_rounding",
+        "assembled_outer_hardy_remainder"
+      ],
+      "output_index": 1,
+      "output_label": "t-0.07",
+      "requested_tolerance_certified": false,
+      "source_estimator_value": "4.4908882869435657827884036713313374295159E-0001",
+      "target_t": "9999999999.930000000000000000",
+      "xi_certified": false
+    },
+    {
+      "current_internal_corrected_model_upper": "1.18534368330520444489953472633068049975329714392513E-3",
+      "exact_hardy_target": "Z(t_j)=exp(i*theta(t_j))*zeta(1/2+i*t_j)",
+      "exact_xi_target": "Xi(t_j)=-((t_j^2+1/4)/2)*abs(pi^(-s_j/2)*Gamma(s_j/2))*Z(t_j)",
+      "hardy_z_certified": false,
+      "open_dependency_ids": [
+        "central_phase_scale_rounding",
+        "shifted_theta_and_a_linearization",
+        "hybrid_equations_126_127",
+        "omitted_H_t_normalizer",
+        "lower_alpha_euler_maclaurin_and_exponential_tail",
+        "block_zero_transition_quadrature",
+        "block_zero_direct_terms",
+        "blocks_1_19",
+        "upper_alpha_portcullis_cutoff",
+        "lower_rs_finite_sum_arithmetic",
+        "omitted_rs_corrections_and_remainder",
+        "final_source_accumulation_rounding",
+        "assembled_outer_hardy_remainder"
+      ],
+      "output_index": 2,
+      "output_label": "t-0.06",
+      "requested_tolerance_certified": false,
+      "source_estimator_value": "4.8839505246898460279913784227759487471102E-0001",
+      "target_t": "9999999999.940000000000000000",
+      "xi_certified": false
+    },
+    {
+      "current_internal_corrected_model_upper": "1.18534368330521376733941786347005732213871590810584E-3",
+      "exact_hardy_target": "Z(t_j)=exp(i*theta(t_j))*zeta(1/2+i*t_j)",
+      "exact_xi_target": "Xi(t_j)=-((t_j^2+1/4)/2)*abs(pi^(-s_j/2)*Gamma(s_j/2))*Z(t_j)",
+      "hardy_z_certified": false,
+      "open_dependency_ids": [
+        "central_phase_scale_rounding",
+        "shifted_theta_and_a_linearization",
+        "hybrid_equations_126_127",
+        "omitted_H_t_normalizer",
+        "lower_alpha_euler_maclaurin_and_exponential_tail",
+        "block_zero_transition_quadrature",
+        "block_zero_direct_terms",
+        "blocks_1_19",
+        "upper_alpha_portcullis_cutoff",
+        "lower_rs_finite_sum_arithmetic",
+        "omitted_rs_corrections_and_remainder",
+        "final_source_accumulation_rounding",
+        "assembled_outer_hardy_remainder"
+      ],
+      "output_index": 3,
+      "output_label": "t-0.05",
+      "requested_tolerance_certified": false,
+      "source_estimator_value": "5.1498591834310773611909619221329777459893E-0001",
+      "target_t": "9999999999.950000000000000000",
+      "xi_certified": false
+    },
+    {
+      "current_internal_corrected_model_upper": "1.18534368330522308977582812680894274064335067128373E-3",
+      "exact_hardy_target": "Z(t_j)=exp(i*theta(t_j))*zeta(1/2+i*t_j)",
+      "exact_xi_target": "Xi(t_j)=-((t_j^2+1/4)/2)*abs(pi^(-s_j/2)*Gamma(s_j/2))*Z(t_j)",
+      "hardy_z_certified": false,
+      "open_dependency_ids": [
+        "central_phase_scale_rounding",
+        "shifted_theta_and_a_linearization",
+        "hybrid_equations_126_127",
+        "omitted_H_t_normalizer",
+        "lower_alpha_euler_maclaurin_and_exponential_tail",
+        "block_zero_transition_quadrature",
+        "block_zero_direct_terms",
+        "blocks_1_19",
+        "upper_alpha_portcullis_cutoff",
+        "lower_rs_finite_sum_arithmetic",
+        "omitted_rs_corrections_and_remainder",
+        "final_source_accumulation_rounding",
+        "assembled_outer_hardy_remainder"
+      ],
+      "output_index": 4,
+      "output_label": "t-0.04",
+      "requested_tolerance_certified": false,
+      "source_estimator_value": "5.2847889871581641923042949562085405924694E-0001",
+      "target_t": "9999999999.960000000000000000",
+      "xi_certified": false
+    },
+    {
+      "current_internal_corrected_model_upper": "1.18534368330523241221397483472166114109907716627778E-3",
+      "exact_hardy_target": "Z(t_j)=exp(i*theta(t_j))*zeta(1/2+i*t_j)",
+      "exact_xi_target": "Xi(t_j)=-((t_j^2+1/4)/2)*abs(pi^(-s_j/2)*Gamma(s_j/2))*Z(t_j)",
+      "hardy_z_certified": false,
+      "open_dependency_ids": [
+        "central_phase_scale_rounding",
+        "shifted_theta_and_a_linearization",
+        "hybrid_equations_126_127",
+        "omitted_H_t_normalizer",
+        "lower_alpha_euler_maclaurin_and_exponential_tail",
+        "block_zero_transition_quadrature",
+        "block_zero_direct_terms",
+        "blocks_1_19",
+        "upper_alpha_portcullis_cutoff",
+        "lower_rs_finite_sum_arithmetic",
+        "omitted_rs_corrections_and_remainder",
+        "final_source_accumulation_rounding",
+        "assembled_outer_hardy_remainder"
+      ],
+      "output_index": 5,
+      "output_label": "t-0.03",
+      "requested_tolerance_certified": false,
+      "source_estimator_value": "5.2868221454591277947161167303494569636123E-0001",
+      "target_t": "9999999999.970000000000000000",
+      "xi_certified": false
+    },
+    {
+      "current_internal_corrected_model_upper": "1.18534368330524173465212154775010438241910001357523E-3",
+      "exact_hardy_target": "Z(t_j)=exp(i*theta(t_j))*zeta(1/2+i*t_j)",
+      "exact_xi_target": "Xi(t_j)=-((t_j^2+1/4)/2)*abs(pi^(-s_j/2)*Gamma(s_j/2))*Z(t_j)",
+      "hardy_z_certified": false,
+      "open_dependency_ids": [
+        "central_phase_scale_rounding",
+        "shifted_theta_and_a_linearization",
+        "hybrid_equations_126_127",
+        "omitted_H_t_normalizer",
+        "lower_alpha_euler_maclaurin_and_exponential_tail",
+        "block_zero_transition_quadrature",
+        "block_zero_direct_terms",
+        "blocks_1_19",
+        "upper_alpha_portcullis_cutoff",
+        "lower_rs_finite_sum_arithmetic",
+        "omitted_rs_corrections_and_remainder",
+        "final_source_accumulation_rounding",
+        "assembled_outer_hardy_remainder"
+      ],
+      "output_index": 6,
+      "output_label": "t-0.02",
+      "requested_tolerance_certified": false,
+      "source_estimator_value": "5.1560102032340240395808367288467950835081E-0001",
+      "target_t": "9999999999.980000000000000000",
+      "xi_certified": false
+    },
+    {
+      "current_internal_corrected_model_upper": "1.18534368330525105709026826589427248438013895427708E-3",
+      "exact_hardy_target": "Z(t_j)=exp(i*theta(t_j))*zeta(1/2+i*t_j)",
+      "exact_xi_target": "Xi(t_j)=-((t_j^2+1/4)/2)*abs(pi^(-s_j/2)*Gamma(s_j/2))*Z(t_j)",
+      "hardy_z_certified": false,
+      "open_dependency_ids": [
+        "central_phase_scale_rounding",
+        "shifted_theta_and_a_linearization",
+        "hybrid_equations_126_127",
+        "omitted_H_t_normalizer",
+        "lower_alpha_euler_maclaurin_and_exponential_tail",
+        "block_zero_transition_quadrature",
+        "block_zero_direct_terms",
+        "blocks_1_19",
+        "upper_alpha_portcullis_cutoff",
+        "lower_rs_finite_sum_arithmetic",
+        "omitted_rs_corrections_and_remainder",
+        "final_source_accumulation_rounding",
+        "assembled_outer_hardy_remainder"
+      ],
+      "output_index": 7,
+      "output_label": "t-0.01",
+      "requested_tolerance_certified": false,
+      "source_estimator_value": "4.8944120093327848313686182684985449458343E-0001",
+      "target_t": "9999999999.990000000000000000",
+      "xi_certified": false
+    },
+    {
+      "current_internal_corrected_model_upper": "1.18534368330526037952841498915416542883628495823403E-3",
+      "exact_hardy_target": "Z(t_j)=exp(i*theta(t_j))*zeta(1/2+i*t_j)",
+      "exact_xi_target": "Xi(t_j)=-((t_j^2+1/4)/2)*abs(pi^(-s_j/2)*Gamma(s_j/2))*Z(t_j)",
+      "hardy_z_certified": false,
+      "open_dependency_ids": [
+        "central_phase_scale_rounding",
+        "shifted_theta_and_a_linearization",
+        "hybrid_equations_126_127",
+        "omitted_H_t_normalizer",
+        "lower_alpha_euler_maclaurin_and_exponential_tail",
+        "block_zero_transition_quadrature",
+        "block_zero_direct_terms",
+        "blocks_1_19",
+        "upper_alpha_portcullis_cutoff",
+        "lower_rs_finite_sum_arithmetic",
+        "omitted_rs_corrections_and_remainder",
+        "final_source_accumulation_rounding",
+        "assembled_outer_hardy_remainder"
+      ],
+      "output_index": 8,
+      "output_label": "t+0.00",
+      "requested_tolerance_certified": false,
+      "source_estimator_value": "4.5061069643860312199353168473749404328841E-0001",
+      "target_t": "10000000000.00000000000000000",
+      "xi_certified": false
+    },
+    {
+      "current_internal_corrected_model_upper": "1.18534368330526970196656171752978322142968476061579E-3",
+      "exact_hardy_target": "Z(t_j)=exp(i*theta(t_j))*zeta(1/2+i*t_j)",
+      "exact_xi_target": "Xi(t_j)=-((t_j^2+1/4)/2)*abs(pi^(-s_j/2)*Gamma(s_j/2))*Z(t_j)",
+      "hardy_z_certified": false,
+      "open_dependency_ids": [
+        "central_phase_scale_rounding",
+        "shifted_theta_and_a_linearization",
+        "hybrid_equations_126_127",
+        "omitted_H_t_normalizer",
+        "lower_alpha_euler_maclaurin_and_exponential_tail",
+        "block_zero_transition_quadrature",
+        "block_zero_direct_terms",
+        "blocks_1_19",
+        "upper_alpha_portcullis_cutoff",
+        "lower_rs_finite_sum_arithmetic",
+        "omitted_rs_corrections_and_remainder",
+        "final_source_accumulation_rounding",
+        "assembled_outer_hardy_remainder"
+      ],
+      "output_index": 9,
+      "output_label": "t+0.01",
+      "requested_tolerance_certified": false,
+      "source_estimator_value": "3.9971829915918164788121397482370701819139E-0001",
+      "target_t": "10000000000.01000000000000000",
+      "xi_certified": false
+    },
+    {
+      "current_internal_corrected_model_upper": "1.18534368330527902440470845102112586563172385740663E-3",
+      "exact_hardy_target": "Z(t_j)=exp(i*theta(t_j))*zeta(1/2+i*t_j)",
+      "exact_xi_target": "Xi(t_j)=-((t_j^2+1/4)/2)*abs(pi^(-s_j/2)*Gamma(s_j/2))*Z(t_j)",
+      "hardy_z_certified": false,
+      "open_dependency_ids": [
+        "central_phase_scale_rounding",
+        "shifted_theta_and_a_linearization",
+        "hybrid_equations_126_127",
+        "omitted_H_t_normalizer",
+        "lower_alpha_euler_maclaurin_and_exponential_tail",
+        "block_zero_transition_quadrature",
+        "block_zero_direct_terms",
+        "blocks_1_19",
+        "upper_alpha_portcullis_cutoff",
+        "lower_rs_finite_sum_arithmetic",
+        "omitted_rs_corrections_and_remainder",
+        "final_source_accumulation_rounding",
+        "assembled_outer_hardy_remainder"
+      ],
+      "output_index": 10,
+      "output_label": "t+0.02",
+      "requested_tolerance_certified": false,
+      "source_estimator_value": "3.3756989676757134475603385430542727770526E-0001",
+      "target_t": "10000000000.02000000000000000",
+      "xi_certified": false
+    },
+    {
+      "current_internal_corrected_model_upper": "1.18534368330528834684285518962819336183868394166246E-3",
+      "exact_hardy_target": "Z(t_j)=exp(i*theta(t_j))*zeta(1/2+i*t_j)",
+      "exact_xi_target": "Xi(t_j)=-((t_j^2+1/4)/2)*abs(pi^(-s_j/2)*Gamma(s_j/2))*Z(t_j)",
+      "hardy_z_certified": false,
+      "open_dependency_ids": [
+        "central_phase_scale_rounding",
+        "shifted_theta_and_a_linearization",
+        "hybrid_equations_126_127",
+        "omitted_H_t_normalizer",
+        "lower_alpha_euler_maclaurin_and_exponential_tail",
+        "block_zero_transition_quadrature",
+        "block_zero_direct_terms",
+        "blocks_1_19",
+        "upper_alpha_portcullis_cutoff",
+        "lower_rs_finite_sum_arithmetic",
+        "omitted_rs_corrections_and_remainder",
+        "final_source_accumulation_rounding",
+        "assembled_outer_hardy_remainder"
+      ],
+      "output_index": 11,
+      "output_label": "t+0.03",
+      "requested_tolerance_certified": false,
+      "source_estimator_value": "2.6516216516199722945717385667777618931562E-0001",
+      "target_t": "10000000000.03000000000000000",
+      "xi_certified": false
+    },
+    {
+      "current_internal_corrected_model_upper": "1.18534368330529766928100193335098570778547646509516E-3",
+      "exact_hardy_target": "Z(t_j)=exp(i*theta(t_j))*zeta(1/2+i*t_j)",
+      "exact_xi_target": "Xi(t_j)=-((t_j^2+1/4)/2)*abs(pi^(-s_j/2)*Gamma(s_j/2))*Z(t_j)",
+      "hardy_z_certified": false,
+      "open_dependency_ids": [
+        "central_phase_scale_rounding",
+        "shifted_theta_and_a_linearization",
+        "hybrid_equations_126_127",
+        "omitted_H_t_normalizer",
+        "lower_alpha_euler_maclaurin_and_exponential_tail",
+        "block_zero_transition_quadrature",
+        "block_zero_direct_terms",
+        "blocks_1_19",
+        "upper_alpha_portcullis_cutoff",
+        "lower_rs_finite_sum_arithmetic",
+        "omitted_rs_corrections_and_remainder",
+        "final_source_accumulation_rounding",
+        "assembled_outer_hardy_remainder"
+      ],
+      "output_index": 12,
+      "output_label": "t+0.04",
+      "requested_tolerance_certified": false,
+      "source_estimator_value": "1.8367374525920091871464426724634547083454E-0001",
+      "target_t": "10000000000.04000000000000000",
+      "xi_certified": false
+    },
+    {
+      "current_internal_corrected_model_upper": "1.18534368330530699171741224273138524391659659804931E-3",
+      "exact_hardy_target": "Z(t_j)=exp(i*theta(t_j))*zeta(1/2+i*t_j)",
+      "exact_xi_target": "Xi(t_j)=-((t_j^2+1/4)/2)*abs(pi^(-s_j/2)*Gamma(s_j/2))*Z(t_j)",
+      "hardy_z_certified": false,
+      "open_dependency_ids": [
+        "central_phase_scale_rounding",
+        "shifted_theta_and_a_linearization",
+        "hybrid_equations_126_127",
+        "omitted_H_t_normalizer",
+        "lower_alpha_euler_maclaurin_and_exponential_tail",
+        "block_zero_transition_quadrature",
+        "block_zero_direct_terms",
+        "blocks_1_19",
+        "upper_alpha_portcullis_cutoff",
+        "lower_rs_finite_sum_arithmetic",
+        "omitted_rs_corrections_and_remainder",
+        "final_source_accumulation_rounding",
+        "assembled_outer_hardy_remainder"
+      ],
+      "output_index": 13,
+      "output_label": "t+0.05",
+      "requested_tolerance_certified": false,
+      "source_estimator_value": "9.4453968230640867229373894538133605704714E-0002",
+      "target_t": "10000000000.05000000000000000",
+      "xi_certified": false
+    },
+    {
+      "current_internal_corrected_model_upper": "1.18534368330531631415729543614374495306687673939786E-3",
+      "exact_hardy_target": "Z(t_j)=exp(i*theta(t_j))*zeta(1/2+i*t_j)",
+      "exact_xi_target": "Xi(t_j)=-((t_j^2+1/4)/2)*abs(pi^(-s_j/2)*Gamma(s_j/2))*Z(t_j)",
+      "hardy_z_certified": false,
+      "open_dependency_ids": [
+        "central_phase_scale_rounding",
+        "shifted_theta_and_a_linearization",
+        "hybrid_equations_126_127",
+        "omitted_H_t_normalizer",
+        "lower_alpha_euler_maclaurin_and_exponential_tail",
+        "block_zero_transition_quadrature",
+        "block_zero_direct_terms",
+        "blocks_1_19",
+        "upper_alpha_portcullis_cutoff",
+        "lower_rs_finite_sum_arithmetic",
+        "omitted_rs_corrections_and_remainder",
+        "final_source_accumulation_rounding",
+        "assembled_outer_hardy_remainder"
+      ],
+      "output_index": 14,
+      "output_label": "t+0.06",
+      "requested_tolerance_certified": false,
+      "source_estimator_value": "-9.9077626321085485457889895003293750235122E-0004",
+      "target_t": "10000000000.06000000000000000",
+      "xi_certified": false
+    },
+    {
+      "current_internal_corrected_model_upper": "1.18534368330532563659717863467183140923914676684614E-3",
+      "exact_hardy_target": "Z(t_j)=exp(i*theta(t_j))*zeta(1/2+i*t_j)",
+      "exact_xi_target": "Xi(t_j)=-((t_j^2+1/4)/2)*abs(pi^(-s_j/2)*Gamma(s_j/2))*Z(t_j)",
+      "hardy_z_certified": false,
+      "open_dependency_ids": [
+        "central_phase_scale_rounding",
+        "shifted_theta_and_a_linearization",
+        "hybrid_equations_126_127",
+        "omitted_H_t_normalizer",
+        "lower_alpha_euler_maclaurin_and_exponential_tail",
+        "block_zero_transition_quadrature",
+        "block_zero_direct_terms",
+        "blocks_1_19",
+        "upper_alpha_portcullis_cutoff",
+        "lower_rs_finite_sum_arithmetic",
+        "omitted_rs_corrections_and_remainder",
+        "final_source_accumulation_rounding",
+        "assembled_outer_hardy_remainder"
+      ],
+      "output_index": 15,
+      "output_label": "t+0.07",
+      "requested_tolerance_certified": false,
+      "source_estimator_value": "-1.0101290498264119414684776809414205222220E-0001",
+      "target_t": "10000000000.07000000000000000",
+      "xi_certified": false
+    }
+  ],
+  "paper_audit": {
+    "equations": [
+      126,
+      127
+    ],
+    "missing_token_count": 0,
+    "page_text_sha256": "8387001afc096f23447372090b5be922cc034fbab40b11cbfea99a21b6677de4",
+    "paper_declares_hybrid_not_exact": true,
+    "paper_supplies_explicit_uniform_constant_for_all_big_o_terms_here": false,
+    "pdf_pages": [
+      44,
+      45
+    ],
+    "required_tokens": [
+      "(126)",
+      "(127)",
+      "hybrid representation (126-127)",
+      "is not exact",
+      "relative error",
+      "further errors of a similar size"
+    ]
+  },
+  "passed": true,
+  "proof_boundary": "Dependency classification and fail-closed diagnostic only. It proves no complete source-to-Hardy error, no height-uniform theorem, no Lambda<=0 statement, no PF-infinity statement, no RH, and no prize-level conclusion.",
+  "runtime": {
+    "elapsed_seconds": 0.364,
+    "workers": 1
+  },
+  "scope": {
+    "height_center": "1e10",
+    "offset_max": "+0.07",
+    "offset_min": "-0.07",
+    "outer_weight_rows": 50880,
+    "output_count": 15,
+    "source_blocks_in_internal_fixture": [
+      20,
+      35
+    ],
+    "source_calls_in_internal_fixture": 6784
+  },
+  "source_audit": [
+    {
+      "excerpt_sha256": "256bd195ace8189a5c5d7f25a57fc7f75f4bb7ce34bf07de5c49675c1ffba3f5",
+      "id": "source_pi_and_phase_constants",
+      "line_end": 335,
+      "line_start": 323,
+      "missing_token_count": 0,
+      "required_tokens": [
+        "p=4*ATAN(C)",
+        "tpp=2*p",
+        "tpm=-tpp"
+      ]
+    },
+    {
+      "excerpt_sha256": "ea0e4114964e3bb40be66bb824b533c3dede95baa9d0d4b746a504de75c2e4a6",
+      "id": "fifteen_point_grid_and_shifted_parameters",
+      "line_end": 602,
+      "line_start": 489,
+      "missing_token_count": 0,
+      "required_tokens": [
+        "nchalf=2*numbercalc-1",
+        "tar(i)=t+(i-numbercalc)*0.01",
+        "rsphasear(i)=rsphase+(i-numbercalc)*(log(0.25*a)-1/(48*t*t))*0.01",
+        "aar(i)=a+4*(i-numbercalc)*0.01/(p*a)"
+      ]
+    },
+    {
+      "excerpt_sha256": "35474051b1675e46435889f3250585833c0ddf856ee5c28a6b410115ca4ea2ce",
+      "id": "source_hybrid_split",
+      "line_end": 662,
+      "line_start": 649,
+      "missing_token_count": 0,
+      "required_tokens": [
+        "ZP(t)+RSremainder(t).",
+        "zsum",
+        "rszsum"
+      ]
+    },
+    {
+      "excerpt_sha256": "3184dc234260d448008f770a9d8605fdaee53d822037f0de3b541f5016c365c4",
+      "id": "block_zero_transition_and_direct_terms",
+      "line_end": 695,
+      "line_start": 668,
+      "missing_token_count": 0,
+      "required_tokens": [
+        "call start(a,t6,yphase,transit,M2)",
+        "call ter(ial,1/aar(i),yphasear(i),tar(i),term)",
+        "zsum(i)=zsum(i)*sqrt(8/aar(i))"
+      ]
+    },
+    {
+      "excerpt_sha256": "71e1e30e4a40918afcb4123147048bd0efa66076b2dbf6ee715493d1d14ba956",
+      "id": "cubic_blocks_one_through_totblock",
+      "line_end": 840,
+      "line_start": 775,
+      "missing_token_count": 0,
+      "required_tokens": [
+        "do iblock=rh_block_start,totblock",
+        "call alphasum(MTM,rae,pcsum)",
+        "zsum=zsum+zsum2"
+      ]
+    },
+    {
+      "excerpt_sha256": "d077c160cb1d9242e8df869b231e99a80ea7fed56601cb1c68765bacfacd432e",
+      "id": "lower_rs_sum_and_leading_endpoint_correction",
+      "line_end": 1025,
+      "line_start": 911,
+      "missing_token_count": 0,
+      "required_tokens": [
+        "NC=aint(CE,dp1)",
+        "CALL pari_calc",
+        "rszsum(i)=2*rszsum(i)+((-1)**(RSN-1))*CE*C"
+      ]
+    },
+    {
+      "excerpt_sha256": "65dafdbeba7441ce51211daca1aaf0bc6bfba4af17359032fe0690b3c8dca1aa",
+      "id": "final_source_addition",
+      "line_end": 1058,
+      "line_start": 1035,
+      "missing_token_count": 0,
+      "required_tokens": [
+        "zsum(i)=zsum(i)+rszsum(i)",
+        "rh_stage_complete"
+      ]
+    },
+    {
+      "excerpt_sha256": "edf36e770af5e2f6663555b2e87575f21fd0c6229b3e18c038290207f3b32d3d",
+      "id": "fixed_64_point_transition_quadrature",
+      "line_end": 1432,
+      "line_start": 1345,
+      "missing_token_count": 0,
+      "required_tokens": [
+        "real(dp)      :: abb(64),wee(64),ri",
+        "call gauleg(bot,top,abb,wee)",
+        "do i=1,64"
+      ]
+    },
+    {
+      "excerpt_sha256": "1632010e7cf60999065402f5ef35481de997efe5d433c7f2e518170cf4a89dcb",
+      "id": "direct_or_recursive_cubic_sums",
+      "line_end": 1542,
+      "line_start": 1437,
+      "missing_token_count": 0,
+      "required_tokens": [
+        "if (MTM.lt.K) then",
+        "call computarrs",
+        "call mgausssum",
+        "pcsum(i)=amp(i)*(real(c1*pcgsum(1)+c2*pcgsum(2)))"
+      ]
+    },
+    {
+      "excerpt_sha256": "ca7bb424d33f960e9b42c8baf930ba9361692fef78993c3eb571aa8b97738b12",
+      "id": "pari_lower_rs_arithmetic",
+      "line_end": 2667,
+      "line_start": 2564,
+      "missing_token_count": 0,
+      "required_tokens": [
+        "u =  gmul(t, glog",
+        "u =  gcos",
+        "rzsum(j) = rzsum(j) + rtodbl(w)"
+      ]
+    },
+    {
+      "excerpt_sha256": "0a5e80ef332a252d08f3f2930f5a594480ec8fa47303d5ba34f22856d508f1b8",
+      "id": "central_exact_formula_phases_before_rounding",
+      "line_end": 3035,
+      "line_start": 2970,
+      "missing_token_count": 0,
+      "required_tokens": [
+        "glngamma(u,prec)",
+        "rsphase_pari = gmod(theta_pari, v)",
+        "a_pari      = gsqrt(v ,prec)"
+      ]
+    }
+  ],
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_outer_hardy_representation_dependency_ledger_gate.py",
+      "sha256": "6dfe03281ab09d0503ce01ac51918da4866a10c65b1f5174b7f8320feab5b612"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_outer_hardy_representation_dependency_ledger_gate.py",
+      "sha256": "e17caf5136aa8c3c505167400c87d777566fc8cd3629e82bf94e422c555e7683"
+    }
+  },
+  "status": "outer_hardy_dependency_audit_validated_with_explicit_open_remainder_columns"
+}

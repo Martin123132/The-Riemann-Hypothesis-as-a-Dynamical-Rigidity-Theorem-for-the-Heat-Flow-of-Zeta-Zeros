@@ -1,0 +1,306 @@
+{
+  "counts": {
+    "bare_logarithmic_moments": 6,
+    "evaluated_physical_remainder_constants": 0,
+    "exact_morse_phase_identities": 1,
+    "exact_transition_integrals": 6,
+    "explicit_tail_integral_majorants": 6,
+    "explicit_transition_residual_majorants": 6,
+    "fixed_transition_rosters": 1,
+    "hidden_big_o_terms_in_derived_decomposition": 0,
+    "incomplete_fresnel_main_families": 6,
+    "phi_b_bounds": 0,
+    "rows": 27,
+    "sharp_cutoff_jump_laws_required": 0,
+    "signed_flow_bounds": 0,
+    "stable_endpoint_sum_families": 3,
+    "twofold_nonstationary_ibp_identities": 6
+  },
+  "date": "2026-08-01",
+  "exact": {
+    "domain": "Use the physical q=1, L>=50, fixed-N chart, B=N-M-1, alpha=xi/(2*pi), and alpha_-<=alpha<=alpha_+ corresponding to T_0-epsilon<=xi<=T_0. The six amplitudes are A_j(u)=(log u)^j exp[t(log u)^2/4-sigma log u], 0<=j<=5.",
+    "exact_target": "Prove Psi(T_0)-epsilon*integral_0^1 Psi'(T_0-theta*epsilon)dtheta<=h^2/400, preferably h^2/800.",
+    "fixed_roster": "Set m=max(1,floor(alpha_-/(2B))), n=ceil(2alpha_+), and T={m,...,n}. This roster is fixed on the whole auxiliary segment. It contains every mode whose saddle can enter [1,B], as well as both endpoint-transition collars.",
+    "next_target": "Build interval majorants for the six transition quantities |c(y_1)|+|c(y_B)|+integral|c'|, sum them over the fixed roster without splitting the Hermitian pairs, and evaluate the explicit Hurwitz-zeta tail envelope. Then compose both physical endpoint functionals with the terminal recurrence and insert the six value transforms into the eight observation rows.",
+    "proof_boundary": "This proves an exact fixed-roster Morse-Fresnel representation for every transition mode, an exact twice-integrated reassembly of the infinite nonstationary tail, stable digamma/Hurwitz-zeta endpoint sums, and explicit constant-one residual majorants. It does not evaluate the summed transition variation norms on the physical chart, bound the imaginary Hermitian coefficient, prove a signed offset-sum or signed flow estimate, upper-bound Phi_B, exclude contact, prove a retained aggregate or Xi theorem, Q209, a cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or a prize-level conclusion.",
+    "source_scope": "Vandehey Section 11 motivates an incomplete-Fresnel endpoint chart and explicitly notes that it is computer-evaluable near transition, but its displayed remainder and Corollary 1.4 retain implicit constants. The formulas below are instead exact direct specializations to the logarithmic phase; no sourced big-O term is promoted into a numerical bound."
+  },
+  "external_source": {
+    "author": "Joseph Vandehey",
+    "title": "Error term improvements for van der Corput transforms",
+    "url": "https://arxiv.org/abs/1205.0090",
+    "usage": "comparison and Fresnel-endpoint motivation only"
+  },
+  "handoff_certificate": {
+    "pi_provenance": "The factor 2*pi comes from e(x)=exp(2*pi*i*x); the Fresnel limit e(-1/8)=exp(-i*pi/4) is the negative-curvature signature. The cotangent identity is the symmetric partial-fraction expansion of pi*cot(pi*x). No geometric circle or fitted pi is introduced.",
+    "remaining_scalar_work": "The new quantitative objects are explicit: six transition variation sums and six Hurwitz-zeta tail integrals. Their physical interval evaluation, Hermitian pairing, and endpoint-terminal composition remain open.",
+    "route_decision": "Use the fixed-roster Morse-Fresnel plus twice-integrated tail decomposition as the primary endpoint route. Do not use the inexplicit Vandehey remainder as a numerical certificate, and do not introduce a hard dyadic partition unless a later explicit comparison proves it smaller after all boundary terms are rejoined.",
+    "six_values": "Apply the exact representation independently to j=0,...,5. Section 11.167 already proves that the eight physical flow observations are fixed rows of these six values, so no derivative of the incomplete-Fresnel main is needed and no seventh moment is introduced."
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_endpoint_reduction",
+  "morse_certificate": {
+    "coordinate": "Define z(v)=sgn(v-1)sqrt(2h(v)), z(1)=0. Since h>=0, h'= (v-1)/v, z'=(v-1)/(vz)>0, and z tends to -infinity and +infinity at the two ends, z is a smooth increasing bijection (0,infinity)->R.",
+    "endpoint_coordinates": "The transformed endpoints are y_1=sqrt(alpha)z(r/alpha) and y_B=sqrt(alpha)z(Br/alpha). The lower saddle crossing r=alpha has y_1=0; the upper crossing r=alpha/B has y_B=0.",
+    "jacobian": "With J(v)=dv/dz=vz/(v-1) and J(1)=1, put y=sqrt(alpha)z. Then du/dy=[sqrt(alpha)/r]J(v) and phi_r(u)=phi_r(u_0)-y^2/2 exactly.",
+    "phase": "For r>0 put u_0=alpha/r, v=u/u_0, h(v)=v-1-log v, and phi_r(u)=alpha log u-ru. Then phi_r(u)=phi_r(u_0)-alpha h(v), where phi_r(u_0)=alpha[log(alpha/r)-1].",
+    "series": "For delta=v-1, z=delta-delta^2/3+7delta^3/36+O(delta^4) and J=1+2delta/3-5delta^2/36+O(delta^3). These expansions supply the removable values at v=1; they are not asymptotic approximations in the exact transformed integral."
+  },
+  "proof_boundary": "This proves an exact fixed-roster Morse-Fresnel representation for every transition mode, an exact twice-integrated reassembly of the infinite nonstationary tail, stable digamma/Hurwitz-zeta endpoint sums, and explicit constant-one residual majorants. It does not evaluate the summed transition variation norms on the physical chart, bound the imaginary Hermitian coefficient, prove a signed offset-sum or signed flow estimate, upper-bound Phi_B, exclude contact, prove a retained aggregate or Xi theorem, Q209, a cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or a prize-level conclusion.",
+  "rows": [
+    {
+      "claim": "The auxiliary chart and six amplitudes are fixed.",
+      "formula": "Use the physical q=1, L>=50, fixed-N chart, B=N-M-1, alpha=xi/(2*pi), and alpha_-<=alpha<=alpha_+ corresponding to T_0-epsilon<=xi<=T_0. The six amplitudes are A_j(u)=(log u)^j exp[t(log u)^2/4-sigma log u], 0<=j<=5.",
+      "id": "mfer_01_domain",
+      "proof_boundary": "No remainder bound is inferred from the domain.",
+      "readiness": "proved",
+      "role": "physical domain"
+    },
+    {
+      "claim": "The sourced motivation is separated from the exact specialization.",
+      "formula": "Vandehey Section 11 motivates an incomplete-Fresnel endpoint chart and explicitly notes that it is computer-evaluable near transition, but its displayed remainder and Corollary 1.4 retain implicit constants. The formulas below are instead exact direct specializations to the logarithmic phase; no sourced big-O term is promoted into a numerical bound.",
+      "id": "mfer_02_source",
+      "proof_boundary": "No implicit source constant is promoted.",
+      "readiness": "proved",
+      "role": "source boundary"
+    },
+    {
+      "claim": "The logarithmic phase has an exact universal defect.",
+      "formula": "For r>0 put u_0=alpha/r, v=u/u_0, h(v)=v-1-log v, and phi_r(u)=alpha log u-ru. Then phi_r(u)=phi_r(u_0)-alpha h(v), where phi_r(u_0)=alpha[log(alpha/r)-1].",
+      "id": "mfer_03_phase",
+      "proof_boundary": "Per-mode identity.",
+      "readiness": "proved",
+      "role": "Morse phase"
+    },
+    {
+      "claim": "The signed coordinate is a global smooth bijection.",
+      "formula": "Define z(v)=sgn(v-1)sqrt(2h(v)), z(1)=0. Since h>=0, h'= (v-1)/v, z'=(v-1)/(vz)>0, and z tends to -infinity and +infinity at the two ends, z is a smooth increasing bijection (0,infinity)->R.",
+      "id": "mfer_04_coordinate",
+      "proof_boundary": "No numerical asymptotic is used.",
+      "readiness": "proved",
+      "role": "global coordinate"
+    },
+    {
+      "claim": "The phase is exactly quadratic in y.",
+      "formula": "With J(v)=dv/dz=vz/(v-1) and J(1)=1, put y=sqrt(alpha)z. Then du/dy=[sqrt(alpha)/r]J(v) and phi_r(u)=phi_r(u_0)-y^2/2 exactly.",
+      "id": "mfer_05_jacobian",
+      "proof_boundary": "Exact for every positive mode.",
+      "readiness": "proved",
+      "role": "Jacobian"
+    },
+    {
+      "claim": "The saddle values are removable.",
+      "formula": "For delta=v-1, z=delta-delta^2/3+7delta^3/36+O(delta^4) and J=1+2delta/3-5delta^2/36+O(delta^3). These expansions supply the removable values at v=1; they are not asymptotic approximations in the exact transformed integral.",
+      "id": "mfer_06_series",
+      "proof_boundary": "Series records local values only.",
+      "readiness": "proved",
+      "role": "removable chart"
+    },
+    {
+      "claim": "Both dual crossings are zeros of transformed endpoints.",
+      "formula": "The transformed endpoints are y_1=sqrt(alpha)z(r/alpha) and y_B=sqrt(alpha)z(Br/alpha). The lower saddle crossing r=alpha has y_1=0; the upper crossing r=alpha/B has y_B=0.",
+      "id": "mfer_07_endpoints",
+      "proof_boundary": "No crossing is assumed absent.",
+      "readiness": "proved",
+      "role": "endpoint coordinates"
+    },
+    {
+      "claim": "One finite roster covers the full auxiliary segment.",
+      "formula": "Set m=max(1,floor(alpha_-/(2B))), n=ceil(2alpha_+), and T={m,...,n}. This roster is fixed on the whole auxiliary segment. It contains every mode whose saddle can enter [1,B], as well as both endpoint-transition collars.",
+      "id": "mfer_08_roster",
+      "proof_boundary": "The roster is not yet optimized.",
+      "readiness": "proved",
+      "role": "fixed roster"
+    },
+    {
+      "claim": "The saddle coefficient is explicit.",
+      "formula": "Let v(y) be the inverse Morse coordinate and define b_(j,r)(y)=[sqrt(alpha)/r]A_j(u_0v(y))J(v(y)). Then b_(j,r)(0)=[sqrt(alpha)/r]A_j(u_0).",
+      "id": "mfer_09_amplitude",
+      "proof_boundary": "Value transform only.",
+      "readiness": "proved",
+      "role": "transformed amplitude"
+    },
+    {
+      "claim": "Every roster mode has an exact Fresnel chart.",
+      "formula": "For every r in the fixed roster, I_(j,r)=e(phi_r(u_0))*integral_(y_1)^(y_B) b_(j,r)(y)e(-y^2/2)dy. This identity remains valid when u_0 is just outside [1,B].",
+      "id": "mfer_10_integral",
+      "proof_boundary": "No stationary approximation is claimed.",
+      "readiness": "proved",
+      "role": "exact transition integral"
+    },
+    {
+      "claim": "The transition main and residual are exact.",
+      "formula": "Define F(y_1,y_B)=integral_(y_1)^(y_B)e(-y^2/2)dy and U_(j,r)=b_(j,r)(0)e(phi_r(u_0))F(y_1,y_B). Then I_(j,r)=U_(j,r)+Q_(j,r), where Q is the same integral with b(y)-b(0).",
+      "id": "mfer_11_main",
+      "proof_boundary": "Residual still requires evaluation.",
+      "readiness": "proved",
+      "role": "uniform main"
+    },
+    {
+      "claim": "Full and half stationary mains are one continuous family.",
+      "formula": "F(-infinity,infinity)=e(-1/8)=exp(-i*pi/4), while each half-line integral ending at zero is e(-1/8)/2. Thus the usual full stationary main and both starred half-mains are limits of one continuous function, not separate cutoff rules.",
+      "id": "mfer_12_limits",
+      "proof_boundary": "Standard Fresnel normalization.",
+      "readiness": "proved",
+      "role": "Fresnel limits"
+    },
+    {
+      "claim": "The residual has an explicit constant-one variation bound.",
+      "formula": "Put c(y)=[b(y)-b(0)]/y for y!=0 and c(0)=b'(0). Exact integration by parts gives |Q_(j,r)|<={|c(y_1)|+|c(y_B)|+integral_(y_1)^(y_B)|c'(y)|dy}/(2*pi). The constant is exactly 1/(2*pi), with no hidden big-O constant.",
+      "id": "mfer_13_residual",
+      "proof_boundary": "The variation norm is not yet bounded physically.",
+      "readiness": "proved",
+      "role": "transition residual bound"
+    },
+    {
+      "claim": "The variation integrand is regular at the saddle.",
+      "formula": "The identities c(y)=integral_0^1 b'(sy)ds and c'(y)=integral_0^1 s b''(sy)ds make the residual bound regular at y=0. Moreover c_(j,r)(0)=r^(-1){jA_(j-1)(u_0)+[2/3-sigma+(t/2)log u_0]A_j(u_0)}.",
+      "id": "mfer_14_removable_c",
+      "proof_boundary": "No interval enclosure is claimed.",
+      "readiness": "proved",
+      "role": "residual chart"
+    },
+    {
+      "claim": "The exact fixed-roster representation has no sharp cutoff jump.",
+      "formula": "Because the roster is fixed and z, J, F, and c use removable charts, U+Q is smooth through y_1=0 and y_B=0. The two sharp jump laws of Section 11.167 are replaced by one exact incomplete-Fresnel transition; no cutoff absence is assumed.",
+      "id": "mfer_15_smooth",
+      "proof_boundary": "Global signed estimates remain open.",
+      "readiness": "proved",
+      "role": "cutoff smoothness"
+    },
+    {
+      "claim": "Every outside-roster mode is uniformly nonstationary.",
+      "formula": "For r outside T, q_r(u)=alpha/u-r has no zero on [1,B]. The low tail lies below alpha_-/(2B), and the high tail lies above 2alpha_+, so both are uniformly separated from every stationary point on the full xi segment.",
+      "id": "mfer_16_gap",
+      "proof_boundary": "Uses the deliberately enlarged roster.",
+      "readiness": "proved",
+      "role": "nonstationary gap"
+    },
+    {
+      "claim": "The nonstationary tail has an exact second-order identity.",
+      "formula": "Let kappa=1/(2*pi*i), D_rA=(A/q_r)', and C_rA=((D_rA)/q_r)'. Then exactly I_r=kappa[e(phi_r)A/q_r]_1^B-kappa^2[e(phi_r)(D_rA)/q_r]_1^B+kappa^2 integral_1^B e(phi_r)C_rA du.",
+      "id": "mfer_17_ibp",
+      "proof_boundary": "Endpoint terms must be summed before absolute values.",
+      "readiness": "proved",
+      "role": "twofold integration by parts"
+    },
+    {
+      "claim": "The remaining integrand has denominator powers at least two.",
+      "formula": "Writing q'= -alpha/u^2 and q''=2alpha/u^3, C_rA=A''/q^2-3A'q'/q^3-Aq''/q^3+3A(q')^2/q^4.",
+      "id": "mfer_18_operator",
+      "proof_boundary": "Exact differential identity.",
+      "readiness": "proved",
+      "role": "tail operator"
+    },
+    {
+      "claim": "The conditional endpoint series has a stable closed form.",
+      "formula": "For x in (m-1,n+1), a_x=x-m+1 and b_x=n+1-x, the symmetric outside-roster sums are S_1(x)=psi(b_x)-psi(a_x), S_2(x)=zeta(2,a_x)+zeta(2,b_x), and S_3(x)=zeta(3,a_x)-zeta(3,b_x). Equivalently S_1=pi*cot(pi*x)-sum_(r=m)^n 1/(x-r), with removable values at every integer in T.",
+      "id": "mfer_19_sums",
+      "proof_boundary": "Symmetric Poisson convention retained.",
+      "readiness": "proved",
+      "role": "stable endpoint sums"
+    },
+    {
+      "claim": "All outside-roster first and second endpoint terms are reassembled.",
+      "formula": "At an integer endpoint mu in {1,B}, x=alpha/mu and e(-rmu)=1. The complete outside-roster endpoint functional is B_j(mu)=e(alpha log mu){kappa A_j(mu)S_1(x)-kappa^2[A_j'(mu)S_2(x)+(alpha/mu^2)A_j(mu)S_3(x)]}. The summed tail equals B_j(B)-B_j(1)+kappa^2 sum_(r outside T)integral e C_rA_j.",
+      "id": "mfer_20_boundary",
+      "proof_boundary": "Must still compose with the physical terminal recurrence.",
+      "readiness": "proved",
+      "role": "endpoint functional"
+    },
+    {
+      "claim": "The post-boundary tail has an explicit convergent majorant.",
+      "formula": "For k>=2 put Z_k(x)=zeta(k,a_x)+zeta(k,b_x). The remaining tail has the explicit bound 1/(4*pi^2) integral_1^B {|A_j''|Z_2+[3|A_j'||q'|+|A_j||q''|]Z_3+3|A_j||q'|^2Z_4}du, where x=alpha/u.",
+      "id": "mfer_21_envelope",
+      "proof_boundary": "No numerical physical value is claimed.",
+      "readiness": "proved",
+      "role": "absolute tail envelope"
+    },
+    {
+      "claim": "No logarithmic truncation loss remains after reassembly.",
+      "formula": "The only conditional tail term is S_1, which is evaluated in the same symmetric sense as full Poisson summation. After that endpoint term is reassembled, S_2, S_3, and the integral remainder are absolutely convergent. No logarithmic truncation loss or artificial dyadic endpoint remains.",
+      "id": "mfer_22_convergence",
+      "proof_boundary": "The finite transition sum can still be large.",
+      "readiness": "proved",
+      "role": "convergence audit"
+    },
+    {
+      "claim": "Six value transforms still suffice for eight observations.",
+      "formula": "Apply the exact representation independently to j=0,...,5. Section 11.167 already proves that the eight physical flow observations are fixed rows of these six values, so no derivative of the incomplete-Fresnel main is needed and no seventh moment is introduced.",
+      "id": "mfer_23_values",
+      "proof_boundary": "No signed flow estimate follows.",
+      "readiness": "proved",
+      "role": "six-value handoff"
+    },
+    {
+      "claim": "The constant-bearing endpoint route is selected.",
+      "formula": "Use the fixed-roster Morse-Fresnel plus twice-integrated tail decomposition as the primary endpoint route. Do not use the inexplicit Vandehey remainder as a numerical certificate, and do not introduce a hard dyadic partition unless a later explicit comparison proves it smaller after all boundary terms are rejoined.",
+      "id": "mfer_24_route",
+      "proof_boundary": "Selection is architectural, not the final bound.",
+      "readiness": "proved",
+      "role": "route selection"
+    },
+    {
+      "claim": "The remaining scalar quantities are explicit.",
+      "formula": "The new quantitative objects are explicit: six transition variation sums and six Hurwitz-zeta tail integrals. Their physical interval evaluation, Hermitian pairing, and endpoint-terminal composition remain open.",
+      "id": "mfer_25_handoff",
+      "proof_boundary": "Build interval majorants for the six transition quantities |c(y_1)|+|c(y_B)|+integral|c'|, sum them over the fixed roster without splitting the Hermitian pairs, and evaluate the explicit Hurwitz-zeta tail envelope. Then compose both physical endpoint functionals with the terminal recurrence and insert the six value transforms into the eight observation rows.",
+      "readiness": "open",
+      "role": "quantitative handoff"
+    },
+    {
+      "claim": "Every pi has analytic provenance.",
+      "formula": "The factor 2*pi comes from e(x)=exp(2*pi*i*x); the Fresnel limit e(-1/8)=exp(-i*pi/4) is the negative-curvature signature. The cotangent identity is the symmetric partial-fraction expansion of pi*cot(pi*x). No geometric circle or fitted pi is introduced.",
+      "id": "mfer_26_pi",
+      "proof_boundary": "No fitted constant.",
+      "readiness": "proved",
+      "role": "pi provenance"
+    },
+    {
+      "claim": "Exact reduction is separated from the missing physical estimates.",
+      "formula": "This proves an exact fixed-roster Morse-Fresnel representation for every transition mode, an exact twice-integrated reassembly of the infinite nonstationary tail, stable digamma/Hurwitz-zeta endpoint sums, and explicit constant-one residual majorants. It does not evaluate the summed transition variation norms on the physical chart, bound the imaginary Hermitian coefficient, prove a signed offset-sum or signed flow estimate, upper-bound Phi_B, exclude contact, prove a retained aggregate or Xi theorem, Q209, a cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or a prize-level conclusion.",
+      "id": "mfer_27_boundary",
+      "proof_boundary": "This is not a proof of RH.",
+      "readiness": "proved",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "finite_poisson_transport": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_finite_poisson_transport_reduction.json",
+      "sha256": "6e55e1627f16ebf0080277397b96c097b2d124a6a26ce2e1671977a019697339"
+    },
+    "flow_matrix_phase": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_flow_matrix_phase_reduction.json",
+      "sha256": "cc528b890aa3ace1b364f4f6b75aea1ae06461c29ac6d2896d666ca19d440675"
+    }
+  },
+  "status": "exact fixed-roster logarithmic Morse-Fresnel transition and twice-integrated nonstationary-tail reduction complete; physical variation sums and signed flow estimate open",
+  "symbolic_certificate": {
+    "h_prime": "1 - 1/v",
+    "jacobian_series_right": "-5*delta**2/36 + 2*delta/3 + 1",
+    "phase_difference": "0",
+    "q_prime": "-alpha/u**2",
+    "q_second": "2*alpha/u**3",
+    "tail_operator": "3*alpha**2*A(u)/(u**4*(alpha/u - r)**4) + 3*alpha*Derivative(A(u), u)/(u**2*(alpha/u - r)**3) - 2*alpha*A(u)/(u**3*(alpha/u - r)**3) + Derivative(A(u), (u, 2))/(alpha/u - r)**2",
+    "tail_operator_difference": "0",
+    "z_series_right": "7*delta**3/36 - delta**2/3 + delta"
+  },
+  "tail_certificate": {
+    "absolute_envelope": "For k>=2 put Z_k(x)=zeta(k,a_x)+zeta(k,b_x). The remaining tail has the explicit bound 1/(4*pi^2) integral_1^B {|A_j''|Z_2+[3|A_j'||q'|+|A_j||q''|]Z_3+3|A_j||q'|^2Z_4}du, where x=alpha/u.",
+    "boundary_functional": "At an integer endpoint mu in {1,B}, x=alpha/mu and e(-rmu)=1. The complete outside-roster endpoint functional is B_j(mu)=e(alpha log mu){kappa A_j(mu)S_1(x)-kappa^2[A_j'(mu)S_2(x)+(alpha/mu^2)A_j(mu)S_3(x)]}. The summed tail equals B_j(B)-B_j(1)+kappa^2 sum_(r outside T)integral e C_rA_j.",
+    "convergence": "The only conditional tail term is S_1, which is evaluated in the same symmetric sense as full Poisson summation. After that endpoint term is reassembled, S_2, S_3, and the integral remainder are absolutely convergent. No logarithmic truncation loss or artificial dyadic endpoint remains.",
+    "gap": "For r outside T, q_r(u)=alpha/u-r has no zero on [1,B]. The low tail lies below alpha_-/(2B), and the high tail lies above 2alpha_+, so both are uniformly separated from every stationary point on the full xi segment.",
+    "operator": "Writing q'= -alpha/u^2 and q''=2alpha/u^3, C_rA=A''/q^2-3A'q'/q^3-Aq''/q^3+3A(q')^2/q^4.",
+    "stable_sums": "For x in (m-1,n+1), a_x=x-m+1 and b_x=n+1-x, the symmetric outside-roster sums are S_1(x)=psi(b_x)-psi(a_x), S_2(x)=zeta(2,a_x)+zeta(2,b_x), and S_3(x)=zeta(3,a_x)-zeta(3,b_x). Equivalently S_1=pi*cot(pi*x)-sum_(r=m)^n 1/(x-r), with removable values at every integer in T.",
+    "two_ibp": "Let kappa=1/(2*pi*i), D_rA=(A/q_r)', and C_rA=((D_rA)/q_r)'. Then exactly I_r=kappa[e(phi_r)A/q_r]_1^B-kappa^2[e(phi_r)(D_rA)/q_r]_1^B+kappa^2 integral_1^B e(phi_r)C_rA du."
+  },
+  "transition_certificate": {
+    "amplitude": "Let v(y) be the inverse Morse coordinate and define b_(j,r)(y)=[sqrt(alpha)/r]A_j(u_0v(y))J(v(y)). Then b_(j,r)(0)=[sqrt(alpha)/r]A_j(u_0).",
+    "exact_integral": "For every r in the fixed roster, I_(j,r)=e(phi_r(u_0))*integral_(y_1)^(y_B) b_(j,r)(y)e(-y^2/2)dy. This identity remains valid when u_0 is just outside [1,B].",
+    "fresnel_limits": "F(-infinity,infinity)=e(-1/8)=exp(-i*pi/4), while each half-line integral ending at zero is e(-1/8)/2. Thus the usual full stationary main and both starred half-mains are limits of one continuous function, not separate cutoff rules.",
+    "removable_c": "The identities c(y)=integral_0^1 b'(sy)ds and c'(y)=integral_0^1 s b''(sy)ds make the residual bound regular at y=0. Moreover c_(j,r)(0)=r^(-1){jA_(j-1)(u_0)+[2/3-sigma+(t/2)log u_0]A_j(u_0)}.",
+    "residual_bound": "Put c(y)=[b(y)-b(0)]/y for y!=0 and c(0)=b'(0). Exact integration by parts gives |Q_(j,r)|<={|c(y_1)|+|c(y_B)|+integral_(y_1)^(y_B)|c'(y)|dy}/(2*pi). The constant is exactly 1/(2*pi), with no hidden big-O constant.",
+    "smoothness": "Because the roster is fixed and z, J, F, and c use removable charts, U+Q is smooth through y_1=0 and y_B=0. The two sharp jump laws of Section 11.167 are replaced by one exact incomplete-Fresnel transition; no cutoff absence is assumed.",
+    "uniform_main": "Define F(y_1,y_B)=integral_(y_1)^(y_B)e(-y^2/2)dy and U_(j,r)=b_(j,r)(0)e(phi_r(u_0))F(y_1,y_B). Then I_(j,r)=U_(j,r)+Q_(j,r), where Q is the same integral with b(y)-b(0)."
+  }
+}

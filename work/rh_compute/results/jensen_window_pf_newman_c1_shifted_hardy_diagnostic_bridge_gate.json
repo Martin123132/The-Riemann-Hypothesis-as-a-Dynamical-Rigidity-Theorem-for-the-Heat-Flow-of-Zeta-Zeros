@@ -1,0 +1,1323 @@
+{
+  "calibration": {
+    "single_t1e10": {
+      "absolute_error": 0.0018623960398040638,
+      "fast_value": 0.4557313171,
+      "mpmath_value": "0.45759371313980404115999353175150276518748244437736124127403125666102148704185684",
+      "relative_error": 0.004069977332129702
+    },
+    "t1e10_et005": {
+      "errors": [
+        -0.006636315494858103,
+        -0.006689857906859165,
+        -0.00674219760000927,
+        -0.00679325286111887,
+        -0.006842942791653206,
+        -0.006891186759608647,
+        -0.0069379049349049815,
+        -0.006983018047073186,
+        -0.007026447537322178,
+        -0.007068115927281515,
+        -0.007107946364008688,
+        -0.0071458630841897686,
+        -0.0071817914215696055,
+        -0.007215657608051252,
+        -0.007247389238608376
+      ],
+      "maximum_absolute": 0.007247389238608376,
+      "mean": -0.006967325838474454,
+      "standard_deviation": 0.0001899691066628025
+    },
+    "t1e10_et05": {
+      "errors": [
+        -0.003297448094858102,
+        -0.003550558906859125,
+        -0.0038019389000092385,
+        -0.00405141646111884,
+        -0.004298823791653139,
+        -0.004543996759608593,
+        -0.0047867755349049745,
+        -0.0050270041470731885,
+        -0.00526453113732217,
+        -0.005499209327281485,
+        -0.0057308958640087115,
+        -0.005959452684189764,
+        -0.0061847461215696065,
+        -0.006406647208051252,
+        -0.006625031838608381
+      ],
+      "maximum_absolute": 0.006625031838608381,
+      "mean": -0.005001898451807772,
+      "standard_deviation": 0.0010288311677525061
+    },
+    "t1e10_h002": {
+      "errors": [
+        0.8774376499701201,
+        0.6295729880969817,
+        0.41202783298934803,
+        0.23197477811285333,
+        0.09568161219314081,
+        0.008243928238881204,
+        -0.026660356359608617,
+        -0.006983018047073186,
+        0.0675269550727185,
+        0.19521033401581023,
+        0.37244753739194875,
+        0.5936778242641328,
+        0.8514917294395166,
+        1.1367978997076873,
+        1.4390624948869064
+      ],
+      "maximum_absolute": 1.4390624948869064,
+      "mean": 0.45850067933155764,
+      "standard_deviation": 0.43730718200775265
+    },
+    "t1e10_h004": {
+      "errors": [
+        4.0876351952002405,
+        3.492919114167819,
+        2.709736005939356,
+        1.8483449454770384,
+        1.0351307367969818,
+        0.3939205167128534,
+        0.026153931538881126,
+        -0.006983018047073186,
+        0.30263209631581023,
+        0.9048551537641328,
+        1.6952053015076873,
+        2.528075048097277,
+        3.237839265251046,
+        3.6650494918847274,
+        3.6838161520585455
+      ],
+      "maximum_absolute": 4.0876351952002405,
+      "mean": 1.9736219957776882,
+      "standard_deviation": 1.4172711945965055
+    },
+    "t1e12_et005": {
+      "errors": [
+        -0.0028899097675232355,
+        -0.0027242732730559105,
+        -0.002559968682221303,
+        -0.0023971433779852447,
+        -0.0022359424861466692,
+        -0.002076508183732173,
+        -0.0019189800436034687,
+        -0.0017634950479274991,
+        -0.0016101870298763643,
+        -0.0014591871011386814,
+        -0.0013106234575550602,
+        -0.001164621077515804,
+        -0.001021302013250569,
+        -0.0008807850577379206,
+        -0.0007431857741146963
+      ],
+      "maximum_absolute": 0.0028899097675232355,
+      "mean": -0.0017837408248923066,
+      "standard_deviation": 0.0006642240695126114
+    }
+  },
+  "date": "2026-08-05",
+  "exact": {
+    "accepted_grid": "For the upstream shift_step=0.01 grid, the maximum direct-main errors are 0.00724738923861 at T=10^10 and 0.00288990976752 at T=10^12.",
+    "conditioning": "The largest physical coefficient l1 norm is 2311004.4995. A worst-case independent sample-error estimate is therefore amplified by that factor; only empirical low-height correlation currently reduces it.",
+    "kernel_identity": "If K_j(lambda)=2 exp[-i theta_RS(T+delta_j)]exp(i delta_j lambda) and g(lambda) is fitted as sum_j c_jK_j(lambda) with real c_j, then sum_j c_j H_main(T+delta_j)=Re sum_(n<=N)n^(-1/2+iT)g(log n). The half-endpoint carrier convention is restored by explicit endpoint subtraction.",
+    "next_action": "Add append-only block checkpoints and deterministic resume to the accepted shift_step=0.01 multi evaluator, preserve each of the 15 partial sums and the RS-tail state, and validate stop/resume equivalence at T=10^10 and T=10^12. Then formulate a joint correlated-error diagnostic; do not launch the physical job or call it proof evidence before both gates close.",
+    "phase_lock": "At the first physical root omega_c/exp(-i theta_RS(T_0))=-1-4.83903158037279e-17i, so the retained perpendicular endpoint fraction is 4.83903158037e-17.",
+    "physical_kernel": "Three roots times eight base/tangent rows give 24 fitted kernels. The maximum held-out relative bulk error is 3.80043545001e-11.",
+    "proof_boundary": "The external algorithm documents only an asymptotic relative-error order, with no validated constant or interval enclosure here. Kernel interpolation, raw ten-decimal outputs, and correlated low-height errors prove no physical observation, determinant sign, flow inequality, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+    "rejected_002": "At T=10^10, shift_step=0.02 has maximum direct-main error 1.43906249489 and is rejected.",
+    "rejected_004": "At T=10^10, shift_step=0.04 has maximum direct-main error 4.0876351952 and is rejected.",
+    "runtime_guard": "The upstream multi evaluator has no restart facility. Measured one-rank runtime rises from about 9 seconds at T=10^10 to 153 seconds at T=10^12, so an uncheckpointed physical T about 3.26e22 run cannot be assumed to finish inside one four-hour cycle even with four night workers.",
+    "scaling": "The accepted-grid mean error magnitude decreases from 0.00696732583847 to 0.00178374082489. This is compatible with, but does not prove, the documented O(T^(-1/4)) floor.",
+    "single_fixture": "At T=10^10 the patched single code gives 0.4557313171, while mpmath gives 0.457593713139804041159993531752; absolute error 0.0018623960398.",
+    "structural_obstruction": "The exact ridge identity 2 M_N-F_N=M_N-tau_band+E_band leaves one raw carrier. The diagonal-plus-adjacent collar is locally exact but does not by itself give an O(polylog N) physical evaluator.",
+    "terminal_peel": "At the actual frequency T_0=Omega, the parity-adjusted source phase agrees with the stationary Hardy endpoint direction to the recorded precision. No terminal band is peeled: the fit includes lambda=log N, while the starred carrier's half-weights at n=1 and n=N are restored by explicit subtraction."
+  },
+  "kind": "jensen_window_pf_newman_c1_shifted_hardy_diagnostic_bridge_gate",
+  "low_height_reconstruction": {
+    "t1e10_et005": {
+      "N": 39894,
+      "T": "10000000000.0",
+      "maximum_exact_main_relative_error": 0.0002639890362155506,
+      "maximum_fast_main_relative_error": 0.02417192754266978,
+      "maximum_grid_relative_error": 0.0008254663878961895,
+      "rows": [
+        {
+          "coefficient_l1": 4119718829.1836596,
+          "degree": 0,
+          "direct_half_endpoint_observation": 0.1589171671483181,
+          "exact_main_relative_error": 0.0002639890362155506,
+          "fast_main_relative_error": 0.02417192754266978,
+          "fast_minus_exact_reconstruction": -0.02390793850645423,
+          "grid_relative_error": 0.0008254663878961895
+        },
+        {
+          "coefficient_l1": 193038294.41201118,
+          "degree": 1,
+          "direct_half_endpoint_observation": 5.584098456924274,
+          "exact_main_relative_error": 0.00011395372592297208,
+          "fast_main_relative_error": 0.0006626582785803982,
+          "fast_minus_exact_reconstruction": 0.0030640202458016574,
+          "grid_relative_error": 6.801552530835784e-05
+        },
+        {
+          "coefficient_l1": 28142814088.497948,
+          "degree": 2,
+          "direct_half_endpoint_observation": 17.044740426031822,
+          "exact_main_relative_error": 9.486109756964255e-06,
+          "fast_main_relative_error": 0.011453909332743675,
+          "fast_minus_exact_reconstruction": -0.19506722316145897,
+          "grid_relative_error": 1.4057923935392191e-05
+        },
+        {
+          "coefficient_l1": 3677220913.1351223,
+          "degree": 3,
+          "direct_half_endpoint_observation": -724.8702982531304,
+          "exact_main_relative_error": 1.4797632473863265e-05,
+          "fast_main_relative_error": 1.5145741093670994e-05,
+          "fast_minus_exact_reconstruction": -0.02170506212860346,
+          "grid_relative_error": 8.036526357098243e-06
+        },
+        {
+          "coefficient_l1": 781835353605.0583,
+          "degree": 4,
+          "direct_half_endpoint_observation": -4987.42612611517,
+          "exact_main_relative_error": 1.0505704531448244e-06,
+          "fast_main_relative_error": 0.0010317504511759303,
+          "fast_minus_exact_reconstruction": -5.151018798351288,
+          "grid_relative_error": 2.4934119446469166e-06
+        },
+        {
+          "coefficient_l1": 204303065299.03204,
+          "degree": 5,
+          "direct_half_endpoint_observation": 66743.28145694983,
+          "exact_main_relative_error": 6.500703420156005e-06,
+          "fast_main_relative_error": 2.6092450439167228e-05,
+          "fast_minus_exact_reconstruction": 1.3076174855232239,
+          "grid_relative_error": 2.9799134881829166e-06
+        }
+      ],
+      "shift_step": 0.01
+    },
+    "t1e10_et05": {
+      "N": 39894,
+      "T": "10000000000.0",
+      "maximum_exact_main_relative_error": 0.0002639890362155506,
+      "maximum_fast_main_relative_error": 0.026066830911917693,
+      "maximum_grid_relative_error": 0.0008254663878961895,
+      "rows": [
+        {
+          "coefficient_l1": 4119718829.1836596,
+          "degree": 0,
+          "direct_half_endpoint_observation": 0.1589171671483181,
+          "exact_main_relative_error": 0.0002639890362155506,
+          "fast_main_relative_error": 0.026066830911917693,
+          "fast_minus_exact_reconstruction": -0.025802841875702143,
+          "grid_relative_error": 0.0008254663878961895
+        },
+        {
+          "coefficient_l1": 193038294.41201118,
+          "degree": 1,
+          "direct_half_endpoint_observation": 5.584098456924274,
+          "exact_main_relative_error": 0.00011395372592297208,
+          "fast_main_relative_error": 0.002096615283904006,
+          "fast_minus_exact_reconstruction": 0.011071377346524969,
+          "grid_relative_error": 6.801552530835784e-05
+        },
+        {
+          "coefficient_l1": 28142814088.497948,
+          "degree": 2,
+          "direct_half_endpoint_observation": 17.044740426031822,
+          "exact_main_relative_error": 9.486109756964255e-06,
+          "fast_main_relative_error": 0.012121393387442525,
+          "fast_minus_exact_reconstruction": -0.20644431561231613,
+          "grid_relative_error": 1.4057923935392191e-05
+        },
+        {
+          "coefficient_l1": 3677220913.1351223,
+          "degree": 3,
+          "direct_half_endpoint_observation": -724.8702982531304,
+          "exact_main_relative_error": 1.4797632473863265e-05,
+          "fast_main_relative_error": 0.0001042712705043558,
+          "fast_minus_exact_reconstruction": -0.0863095112144947,
+          "grid_relative_error": 8.036526357098243e-06
+        },
+        {
+          "coefficient_l1": 781835353605.0583,
+          "degree": 4,
+          "direct_half_endpoint_observation": -4987.42612611517,
+          "exact_main_relative_error": 1.0505704531448244e-06,
+          "fast_main_relative_error": 0.0010314762119693587,
+          "fast_minus_exact_reconstruction": -5.149651050567627,
+          "grid_relative_error": 2.4934119446469166e-06
+        },
+        {
+          "coefficient_l1": 204303065299.03204,
+          "degree": 5,
+          "direct_half_endpoint_observation": 66743.28145694983,
+          "exact_main_relative_error": 6.500703420156005e-06,
+          "fast_main_relative_error": 1.9817209108797948e-06,
+          "fast_minus_exact_reconstruction": -0.3016117215156555,
+          "grid_relative_error": 2.9799134881829166e-06
+        }
+      ],
+      "shift_step": 0.01
+    },
+    "t1e12_et005": {
+      "N": 398942,
+      "T": "1000000000000.0",
+      "maximum_exact_main_relative_error": 0.00023340425217380917,
+      "maximum_fast_main_relative_error": 0.002197673098483474,
+      "maximum_grid_relative_error": 0.0008407010829380285,
+      "rows": [
+        {
+          "coefficient_l1": 586383918.085106,
+          "degree": 0,
+          "direct_half_endpoint_observation": -1.7989963321119766,
+          "exact_main_relative_error": 9.044308114986776e-05,
+          "fast_main_relative_error": 0.0013310635024804433,
+          "fast_minus_exact_reconstruction": -0.0025572851300239563,
+          "grid_relative_error": 0.0008407010829380285
+        },
+        {
+          "coefficient_l1": 40591975.5319564,
+          "degree": 1,
+          "direct_half_endpoint_observation": -3.800611425039764,
+          "exact_main_relative_error": 0.00023340425217380917,
+          "fast_main_relative_error": 0.002197673098483474,
+          "fast_minus_exact_reconstruction": -0.007465422619134188,
+          "grid_relative_error": 6.924840254019496e-05
+        },
+        {
+          "coefficient_l1": 5921614374.447838,
+          "degree": 2,
+          "direct_half_endpoint_observation": 120.50081894238654,
+          "exact_main_relative_error": 2.252222573887943e-06,
+          "fast_main_relative_error": 0.00019976855421187264,
+          "fast_minus_exact_reconstruction": -0.02380087971687317,
+          "grid_relative_error": 1.4323991675263677e-05
+        },
+        {
+          "coefficient_l1": 1142316252.1907616,
+          "degree": 3,
+          "direct_half_endpoint_observation": 379.7458774944059,
+          "exact_main_relative_error": 4.807922695251037e-05,
+          "fast_main_relative_error": 0.0001305481600783558,
+          "fast_minus_exact_reconstruction": 0.06783301383256912,
+          "grid_relative_error": 8.151616104970498e-06
+        },
+        {
+          "coefficient_l1": 242998842832.85132,
+          "degree": 4,
+          "direct_half_endpoint_observation": -15652.42070452087,
+          "exact_main_relative_error": 1.0392109413416509e-06,
+          "fast_main_relative_error": 0.00010053275907296718,
+          "fast_minus_exact_reconstruction": -1.5573148727416992,
+          "grid_relative_error": 2.5355578486436204e-06
+        },
+        {
+          "coefficient_l1": 69614821512.00226,
+          "degree": 5,
+          "direct_half_endpoint_observation": -34211.09234302676,
+          "exact_main_relative_error": 3.267558872714402e-05,
+          "fast_main_relative_error": 3.6203067489363706e-05,
+          "fast_minus_exact_reconstruction": -0.12067890167236328,
+          "grid_relative_error": 3.0135839024769936e-06
+        }
+      ],
+      "shift_step": 0.01
+    }
+  },
+  "next_action": "Add append-only block checkpoints and deterministic resume to the accepted shift_step=0.01 multi evaluator, preserve each of the 15 partial sums and the RS-tail state, and validate stop/resume equivalence at T=10^10 and T=10^12. Then formulate a joint correlated-error diagnostic; do not launch the physical job or call it proof evidence before both gates close.",
+  "physical_kernel_summary": {
+    "maximum_coefficient_l1": 2311004.499499379,
+    "maximum_design_condition_number": 2.5335071062200616e+16,
+    "maximum_held_out_relative_error": 3.8004354500110824e-11,
+    "maximum_unpeeled_endpoint_obstruction": 4.8390315803727896e-17,
+    "physical_rows": 24,
+    "roots": 3,
+    "terminal_peel": 0
+  },
+  "physical_kernels": [
+    {
+      "N": 72004899338,
+      "T_0": "32576465600642364416126.938598757358687497106700043541714542934243805272497464961",
+      "bulk_log_upper": 25.00000000000853,
+      "endpoint_phase_ratio": {
+        "im": -4.8390315803727896e-17,
+        "re": -1.0
+      },
+      "root_index": 0,
+      "rows": [
+        {
+          "coefficient_l1": 178.26282984123577,
+          "coefficient_l2": 67.90679954144568,
+          "design_condition_number": 2.504518170337771e+16,
+          "family": "base_rows",
+          "held_out_relative_error": 6.181262789793202e-13,
+          "name": "P_A",
+          "polynomial_degree": 4,
+          "real_hardy_coefficients": [
+            -0.14147916830318802,
+            1.5541807114249024,
+            -7.388134636176714,
+            18.934816682068274,
+            -24.233008228310144,
+            0.795845163477238,
+            36.090172735407506,
+            -0.00206095439443027,
+            -36.08853414369721,
+            -0.792981500600231,
+            24.22824630938083,
+            -18.931364009121502,
+            7.386707072650082,
+            -1.5538522800144685,
+            0.1414462462090499
+          ],
+          "target_scale": 12.500000000010523
+        },
+        {
+          "coefficient_l1": 27861.104789598092,
+          "coefficient_l2": 9730.857071791897,
+          "design_condition_number": 2.504518170337771e+16,
+          "family": "base_rows",
+          "held_out_relative_error": 3.7532549946490694e-13,
+          "name": "P_N",
+          "polynomial_degree": 4,
+          "real_hardy_coefficients": [
+            7.617206387247202,
+            -98.44916160512084,
+            571.5805376346674,
+            -1916.2237982827285,
+            3845.451244380096,
+            -3776.3319590374213,
+            -1174.2925849455175,
+            5081.331193596989,
+            -1174.3975669575182,
+            -3776.206875008112,
+            3845.3762484887807,
+            -1916.2004175517006,
+            571.5785598783732,
+            -98.45003141092711,
+            7.617404432891333
+          ],
+          "target_scale": 156.2500000002631
+        },
+        {
+          "coefficient_l1": 178.26282984123577,
+          "coefficient_l2": 67.90679954144568,
+          "design_condition_number": 2.504518170337771e+16,
+          "family": "base_rows",
+          "held_out_relative_error": 6.181262789793202e-13,
+          "name": "P_Q",
+          "polynomial_degree": 4,
+          "real_hardy_coefficients": [
+            -0.14147916830318802,
+            1.5541807114249024,
+            -7.388134636176714,
+            18.934816682068274,
+            -24.233008228310144,
+            0.795845163477238,
+            36.090172735407506,
+            -0.00206095439443027,
+            -36.08853414369721,
+            -0.792981500600231,
+            24.22824630938083,
+            -18.931364009121502,
+            7.386707072650082,
+            -1.5538522800144685,
+            0.1414462462090499
+          ],
+          "target_scale": 12.500000000010523
+        },
+        {
+          "coefficient_l1": 3.2812014301923957,
+          "coefficient_l2": 1.325090138773123,
+          "design_condition_number": 2.504518170337771e+16,
+          "family": "base_rows",
+          "held_out_relative_error": 4.990140660236864e-15,
+          "name": "P_V",
+          "polynomial_degree": 4,
+          "real_hardy_coefficients": [
+            -0.0006631008777468507,
+            0.008760100566848894,
+            -0.052575940459695415,
+            0.18597896901772246,
+            -0.4109686000618395,
+            0.5044165699644466,
+            -0.020775980062417432,
+            -0.9129644383884574,
+            -0.0207640831761196,
+            0.5044017032232297,
+            -0.41095870838298626,
+            0.18597504128446726,
+            -0.05257506953537597,
+            0.008760022420396602,
+            -0.0006631027706446892
+          ],
+          "target_scale": 1.0
+        },
+        {
+          "coefficient_l1": 55722.209579196184,
+          "coefficient_l2": 19461.714143583795,
+          "design_condition_number": 2.504518170337771e+16,
+          "family": "tangent_rows",
+          "held_out_relative_error": 3.7532549946490694e-13,
+          "name": "P_A",
+          "polynomial_degree": 5,
+          "real_hardy_coefficients": [
+            15.234412774494404,
+            -196.89832321024167,
+            1143.1610752693348,
+            -3832.447596565457,
+            7690.902488760192,
+            -7552.6639180748425,
+            -2348.585169891035,
+            10162.662387193977,
+            -2348.7951339150363,
+            -7552.413750016224,
+            7690.752496977561,
+            -3832.4008351034013,
+            1143.1571197567464,
+            -196.90006282185422,
+            15.234808865782666
+          ],
+          "target_scale": 312.5000000005262
+        },
+        {
+          "coefficient_l1": 2311004.499499379,
+          "coefficient_l2": 798767.7014048168,
+          "design_condition_number": 2.504518170337771e+16,
+          "family": "tangent_rows",
+          "held_out_relative_error": 3.770248583215245e-11,
+          "name": "P_N",
+          "polynomial_degree": 5,
+          "real_hardy_coefficients": [
+            2439.2523610043345,
+            -25977.97996574913,
+            117695.46530388613,
+            -277862.57386520953,
+            297557.8551334931,
+            67696.09790175465,
+            -366307.2963101011,
+            21.028102998762733,
+            366290.57638502587,
+            -67725.31349199013,
+            -297509.27055927756,
+            277827.345904561,
+            -117680.89915120976,
+            25974.62865696579,
+            -2438.9164061523165
+          ],
+          "target_scale": 3906.2500000098657
+        },
+        {
+          "coefficient_l1": 55722.209579196184,
+          "coefficient_l2": 19461.714143583795,
+          "design_condition_number": 2.504518170337771e+16,
+          "family": "tangent_rows",
+          "held_out_relative_error": 3.7532549946490694e-13,
+          "name": "P_Q",
+          "polynomial_degree": 5,
+          "real_hardy_coefficients": [
+            15.234412774494404,
+            -196.89832321024167,
+            1143.1610752693348,
+            -3832.447596565457,
+            7690.902488760192,
+            -7552.6639180748425,
+            -2348.585169891035,
+            10162.662387193977,
+            -2348.7951339150363,
+            -7552.413750016224,
+            7690.752496977561,
+            -3832.4008351034013,
+            1143.1571197567464,
+            -196.90006282185422,
+            15.234808865782666
+          ],
+          "target_scale": 312.5000000005262
+        },
+        {
+          "coefficient_l1": 356.52565968247154,
+          "coefficient_l2": 135.81359908289136,
+          "design_condition_number": 2.504518170337771e+16,
+          "family": "tangent_rows",
+          "held_out_relative_error": 6.181262789793202e-13,
+          "name": "P_V",
+          "polynomial_degree": 5,
+          "real_hardy_coefficients": [
+            -0.28295833660637604,
+            3.108361422849805,
+            -14.776269272353428,
+            37.86963336413655,
+            -48.46601645662029,
+            1.591690326954476,
+            72.18034547081501,
+            -0.00412190878886054,
+            -72.17706828739442,
+            -1.585963001200462,
+            48.45649261876166,
+            -37.862728018243004,
+            14.773414145300164,
+            -3.107704560028937,
+            0.2828924924180998
+          ],
+          "target_scale": 25.000000000021046
+        }
+      ],
+      "shift_step": 0.01,
+      "shifts": [
+        -0.07,
+        -0.06,
+        -0.05,
+        -0.04,
+        -0.03,
+        -0.02,
+        -0.01,
+        0.0,
+        0.01,
+        0.02,
+        0.03,
+        0.04,
+        0.05,
+        0.06,
+        0.07
+      ],
+      "terminal_peel": 0,
+      "unpeeled_endpoint_quadrature_obstruction": 4.8390315803727896e-17
+    },
+    {
+      "N": 72004899339,
+      "T_0": "32576465601237413764456.765272912092831856149787384522961919487129370004222745467",
+      "bulk_log_upper": 25.000000000022418,
+      "endpoint_phase_ratio": {
+        "im": -0.0,
+        "re": 1.0
+      },
+      "root_index": 1,
+      "rows": [
+        {
+          "coefficient_l1": 178.26024552527088,
+          "coefficient_l2": 67.90653952475914,
+          "design_condition_number": 9294205425567670.0,
+          "family": "base_rows",
+          "held_out_relative_error": 6.234135339296322e-13,
+          "name": "P_A",
+          "polynomial_degree": 4,
+          "real_hardy_coefficients": [
+            0.14145542833990804,
+            -1.5539478505313964,
+            7.387139707200921,
+            -18.932451944010296,
+            24.229803774645543,
+            -0.7939509175344803,
+            -36.08911479350598,
+            -0.0005548056978064708,
+            36.08954786966287,
+            0.7947428927065252,
+            -24.23110876061774,
+            18.93339573717595,
+            -7.387529304096863,
+            1.5540373529037146,
+            -0.14146438664089422
+          ],
+          "target_scale": 12.50000000001509
+        },
+        {
+          "coefficient_l1": 27863.757937110906,
+          "coefficient_l2": 9731.661188334678,
+          "design_condition_number": 9294205425567670.0,
+          "family": "base_rows",
+          "held_out_relative_error": 1.5307725292116773e-13,
+          "name": "P_N",
+          "polynomial_degree": 4,
+          "real_hardy_coefficients": [
+            -7.619317927130591,
+            98.46837562750832,
+            -571.6529700396877,
+            1916.3572870767837,
+            -3845.523310658726,
+            3776.134509846458,
+            1174.7533376783763,
+            -5081.670413839518,
+            1174.2160893770133,
+            3776.850010287103,
+            -3846.0588635874587,
+            1916.6161858915204,
+            -571.7335499602018,
+            98.48317277068752,
+            -7.620542542728366
+          ],
+          "target_scale": 156.25000000037727
+        },
+        {
+          "coefficient_l1": 178.26024552527088,
+          "coefficient_l2": 67.90653952475914,
+          "design_condition_number": 9294205425567670.0,
+          "family": "base_rows",
+          "held_out_relative_error": 6.234135339296322e-13,
+          "name": "P_Q",
+          "polynomial_degree": 4,
+          "real_hardy_coefficients": [
+            0.14145542833990804,
+            -1.5539478505313964,
+            7.387139707200921,
+            -18.932451944010296,
+            24.229803774645543,
+            -0.7939509175344803,
+            -36.08911479350598,
+            -0.0005548056978064708,
+            36.08954786966287,
+            0.7947428927065252,
+            -24.23110876061774,
+            18.93339573717595,
+            -7.387529304096863,
+            1.5540373529037146,
+            -0.14146438664089422
+          ],
+          "target_scale": 12.50000000001509
+        },
+        {
+          "coefficient_l1": 3.2813864337338656,
+          "coefficient_l2": 1.3251539789005908,
+          "design_condition_number": 9294205425567670.0,
+          "family": "base_rows",
+          "held_out_relative_error": 3.0104245458587028e-15,
+          "name": "P_V",
+          "polynomial_degree": 4,
+          "real_hardy_coefficients": [
+            0.0006632497724070594,
+            -0.008761394814173054,
+            0.0525803741700011,
+            -0.18598503464973704,
+            0.4109640269635664,
+            -0.5043853013468509,
+            0.02072507554754118,
+            0.912994860095585,
+            0.02078961630889175,
+            -0.5044720974188236,
+            0.41103005873609233,
+            -0.18601769230329876,
+            0.05259084195134062,
+            -0.008763387714963388,
+            0.0006634219405939508
+          ],
+          "target_scale": 1.0
+        },
+        {
+          "coefficient_l1": 55727.51587422181,
+          "coefficient_l2": 19463.322376669355,
+          "design_condition_number": 9294205425567670.0,
+          "family": "tangent_rows",
+          "held_out_relative_error": 1.5307725292116773e-13,
+          "name": "P_A",
+          "polynomial_degree": 5,
+          "real_hardy_coefficients": [
+            -15.238635854261181,
+            196.93675125501665,
+            -1143.3059400793754,
+            3832.7145741535674,
+            -7691.046621317452,
+            7552.269019692916,
+            2349.5066753567526,
+            -10163.340827679036,
+            2348.4321787540266,
+            7553.700020574206,
+            -7692.1177271749175,
+            3833.232371783041,
+            -1143.4670999204036,
+            196.96634554137503,
+            -15.241085085456731
+          ],
+          "target_scale": 312.50000000075454
+        },
+        {
+          "coefficient_l1": 2310978.366651373,
+          "coefficient_l2": 798765.4745684413,
+          "design_condition_number": 9294205425567670.0,
+          "family": "tangent_rows",
+          "held_out_relative_error": 3.774005678927106e-11,
+          "name": "P_N",
+          "polynomial_degree": 5,
+          "real_hardy_coefficients": [
+            -2439.053537604726,
+            25976.026256113386,
+            -117687.0987558976,
+            277842.62319197354,
+            -297530.6610349809,
+            -67712.48659239747,
+            366298.8494233183,
+            0.8700744756206404,
+            -366299.44140410377,
+            67711.01465284624,
+            297532.96132007457,
+            -277844.262769204,
+            117687.76967394377,
+            -25976.179231497845,
+            2439.068732941151
+          ],
+          "target_scale": 3906.2500000141467
+        },
+        {
+          "coefficient_l1": 55727.51587422181,
+          "coefficient_l2": 19463.322376669355,
+          "design_condition_number": 9294205425567670.0,
+          "family": "tangent_rows",
+          "held_out_relative_error": 1.5307725292116773e-13,
+          "name": "P_Q",
+          "polynomial_degree": 5,
+          "real_hardy_coefficients": [
+            -15.238635854261181,
+            196.93675125501665,
+            -1143.3059400793754,
+            3832.7145741535674,
+            -7691.046621317452,
+            7552.269019692916,
+            2349.5066753567526,
+            -10163.340827679036,
+            2348.4321787540266,
+            7553.700020574206,
+            -7692.1177271749175,
+            3833.232371783041,
+            -1143.4670999204036,
+            196.96634554137503,
+            -15.241085085456731
+          ],
+          "target_scale": 312.50000000075454
+        },
+        {
+          "coefficient_l1": 356.52049105054175,
+          "coefficient_l2": 135.81307904951828,
+          "design_condition_number": 9294205425567670.0,
+          "family": "tangent_rows",
+          "held_out_relative_error": 6.234135339296322e-13,
+          "name": "P_V",
+          "polynomial_degree": 5,
+          "real_hardy_coefficients": [
+            0.2829108566798161,
+            -3.107895701062793,
+            14.774279414401843,
+            -37.86490388802059,
+            48.459607549291086,
+            -1.5879018350689607,
+            -72.17822958701196,
+            -0.0011096113956129416,
+            72.17909573932575,
+            1.5894857854130504,
+            -48.46221752123548,
+            37.8667914743519,
+            -14.775058608193726,
+            3.108074705807429,
+            -0.28292877328178845
+          ],
+          "target_scale": 25.00000000003018
+        }
+      ],
+      "shift_step": 0.01,
+      "shifts": [
+        -0.07,
+        -0.06,
+        -0.05,
+        -0.04,
+        -0.03,
+        -0.02,
+        -0.01,
+        0.0,
+        0.01,
+        0.02,
+        0.03,
+        0.04,
+        0.05,
+        0.06,
+        0.07
+      ],
+      "terminal_peel": 0,
+      "unpeeled_endpoint_quadrature_obstruction": 0.0
+    },
+    {
+      "N": 72004899340,
+      "T_0": "32576465602452044918436.542141254288398453042631465970711877671109453226162393168",
+      "bulk_log_upper": 25.000000000036305,
+      "endpoint_phase_ratio": {
+        "im": -4.8390315803727896e-17,
+        "re": -1.0
+      },
+      "root_index": 2,
+      "rows": [
+        {
+          "coefficient_l1": 178.26120107345938,
+          "coefficient_l2": 67.90660928613511,
+          "design_condition_number": 2.5335071062200616e+16,
+          "family": "base_rows",
+          "held_out_relative_error": 6.258910257522089e-13,
+          "name": "P_A",
+          "polynomial_degree": 4,
+          "real_hardy_coefficients": [
+            -0.14145690403578431,
+            1.553962359982089,
+            -7.387203530761548,
+            18.932616545605484,
+            -24.23007645260798,
+            0.7942449686478774,
+            36.08892997057332,
+            0.0005649611161109847,
+            -36.08942150926418,
+            -0.7949168260958728,
+            24.231254169608793,
+            -18.933480170113437,
+            7.387562341872149,
+            -1.554045143850895,
+            0.14146521932386774
+          ],
+          "target_scale": 12.500000000024412
+        },
+        {
+          "coefficient_l1": 27865.563240126412,
+          "coefficient_l2": 9732.242700126895,
+          "design_condition_number": 2.5335071062200616e+16,
+          "family": "base_rows",
+          "held_out_relative_error": 2.314403124627406e-13,
+          "name": "P_N",
+          "polynomial_degree": 4,
+          "real_hardy_coefficients": [
+            7.623050933869235,
+            -98.50835053660045,
+            571.845141061329,
+            -1916.8989116242371,
+            3846.496137234501,
+            -3777.2419111786694,
+            -1174.0829014232152,
+            5081.75612329282,
+            -1174.8088942657769,
+            -3776.251918248557,
+            3845.72586018977,
+            -1916.5062981332574,
+            571.7146003811755,
+            -98.48243465289146,
+            7.620706969744122
+          ],
+          "target_scale": 156.2500000006103
+        },
+        {
+          "coefficient_l1": 178.26120107345938,
+          "coefficient_l2": 67.90660928613511,
+          "design_condition_number": 2.5335071062200616e+16,
+          "family": "base_rows",
+          "held_out_relative_error": 6.258910257522089e-13,
+          "name": "P_Q",
+          "polynomial_degree": 4,
+          "real_hardy_coefficients": [
+            -0.14145690403578431,
+            1.553962359982089,
+            -7.387203530761548,
+            18.932616545605484,
+            -24.23007645260798,
+            0.7942449686478774,
+            36.08892997057332,
+            0.0005649611161109847,
+            -36.08942150926418,
+            -0.7949168260958728,
+            24.231254169608793,
+            -18.933480170113437,
+            7.387562341872149,
+            -1.554045143850895,
+            0.14146521932386774
+          ],
+          "target_scale": 12.500000000024412
+        },
+        {
+          "coefficient_l1": 3.281627214126006,
+          "coefficient_l2": 1.325218054611636,
+          "design_condition_number": 2.5335071062200616e+16,
+          "family": "base_rows",
+          "held_out_relative_error": 5.24896022202741e-15,
+          "name": "P_V",
+          "polynomial_degree": 4,
+          "real_hardy_coefficients": [
+            -0.000663719288650016,
+            0.008766392846463592,
+            -0.05260425340530285,
+            0.1860519106975262,
+            -0.41108336571181125,
+            0.5045202375962298,
+            -0.020806111239082777,
+            -0.9130056181314707,
+            -0.020717805677417152,
+            0.5043996724241665,
+            -0.4109893754925225,
+            0.18600388202621332,
+            -0.05258823693624038,
+            0.008763202853317597,
+            -0.0006634297995914981
+          ],
+          "target_scale": 1.0
+        },
+        {
+          "coefficient_l1": 55731.126480252824,
+          "coefficient_l2": 19464.48540025379,
+          "design_condition_number": 2.5335071062200616e+16,
+          "family": "tangent_rows",
+          "held_out_relative_error": 2.314403124627406e-13,
+          "name": "P_A",
+          "polynomial_degree": 5,
+          "real_hardy_coefficients": [
+            15.24610186773847,
+            -197.0167010732009,
+            1143.690282122658,
+            -3833.7978232484743,
+            7692.992274469002,
+            -7554.483822357339,
+            -2348.1658028464303,
+            10163.51224658564,
+            -2349.6177885315537,
+            -7552.503836497114,
+            7691.45172037954,
+            -3833.0125962665147,
+            1143.429200762351,
+            -196.9648693057829,
+            15.241413939488243
+          ],
+          "target_scale": 312.5000000012206
+        },
+        {
+          "coefficient_l1": 2310980.890375904,
+          "coefficient_l2": 798766.0625852171,
+          "design_condition_number": 2.5335071062200616e+16,
+          "family": "tangent_rows",
+          "held_out_relative_error": 3.8004354500110824e-11,
+          "name": "P_N",
+          "polynomial_degree": 5,
+          "real_hardy_coefficients": [
+            2439.0412341066753,
+            -25975.90640523997,
+            117686.61261368344,
+            -277841.642962592,
+            297529.99596744764,
+            67711.1178962381,
+            -366295.0016179834,
+            -4.460654398889346,
+            366299.0842946751,
+            -67706.35198816934,
+            -297538.6870540107,
+            277848.0675892864,
+            -117689.29098583768,
+            25976.52559251497,
+            -2439.103519720212
+          ],
+          "target_scale": 3906.250000022886
+        },
+        {
+          "coefficient_l1": 55731.126480252824,
+          "coefficient_l2": 19464.48540025379,
+          "design_condition_number": 2.5335071062200616e+16,
+          "family": "tangent_rows",
+          "held_out_relative_error": 2.314403124627406e-13,
+          "name": "P_Q",
+          "polynomial_degree": 5,
+          "real_hardy_coefficients": [
+            15.24610186773847,
+            -197.0167010732009,
+            1143.690282122658,
+            -3833.7978232484743,
+            7692.992274469002,
+            -7554.483822357339,
+            -2348.1658028464303,
+            10163.51224658564,
+            -2349.6177885315537,
+            -7552.503836497114,
+            7691.45172037954,
+            -3833.0125962665147,
+            1143.429200762351,
+            -196.9648693057829,
+            15.241413939488243
+          ],
+          "target_scale": 312.5000000012206
+        },
+        {
+          "coefficient_l1": 356.52240214691875,
+          "coefficient_l2": 135.81321857227022,
+          "design_condition_number": 2.5335071062200616e+16,
+          "family": "tangent_rows",
+          "held_out_relative_error": 6.258910257522089e-13,
+          "name": "P_V",
+          "polynomial_degree": 5,
+          "real_hardy_coefficients": [
+            -0.28291380807156863,
+            3.107924719964178,
+            -14.774407061523096,
+            37.86523309121097,
+            -48.46015290521596,
+            1.5884899372957548,
+            72.17785994114664,
+            0.0011299222322219693,
+            -72.17884301852835,
+            -1.5898336521917455,
+            48.462508339217585,
+            -37.866960340226875,
+            14.775124683744298,
+            -3.10809028770179,
+            0.2829304386477355
+          ],
+          "target_scale": 25.000000000048825
+        }
+      ],
+      "shift_step": 0.01,
+      "shifts": [
+        -0.07,
+        -0.06,
+        -0.05,
+        -0.04,
+        -0.03,
+        -0.02,
+        -0.01,
+        0.0,
+        0.01,
+        0.02,
+        0.03,
+        0.04,
+        0.05,
+        0.06,
+        0.07
+      ],
+      "terminal_peel": 0,
+      "unpeeled_endpoint_quadrature_obstruction": 4.8390315803727896e-17
+    }
+  ],
+  "pi_provenance": "Every pi in the bridge comes from T_0=2pi a^2, the Riemann-Siegel theta normalization, or the Fourier character exp(i delta log n). No circle or polygon is inserted into the arithmetic.",
+  "proof_boundary": "The external algorithm documents only an asymptotic relative-error order, with no validated constant or interval enclosure here. Kernel interpolation, raw ten-decimal outputs, and correlated low-height errors prove no physical observation, determinant sign, flow inequality, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "certificate": "https://github.com/dml2391/Hardy-function-fastcodes at 2e16dac3206b707052c3ac4cacdf3d1a2325e636; GPL-3.0.",
+      "claim": "The external Hardy implementation is pinned by repository, commit, and license.",
+      "id": "shd_01_pin",
+      "proof_boundary": "The third-party source is not copied into this corpus.",
+      "readiness": "guard_validated",
+      "role": "upstream pin"
+    },
+    {
+      "certificate": "MPI_SUM initialization, reachable MPI_Finalize calls, removal of one dead undefined callback, and default-integer reduction counts.",
+      "claim": "Four minimal patches make the single and multi programs compile and exit cleanly under OpenMPI.",
+      "id": "shd_02_port",
+      "proof_boundary": "These patches certify interoperability, not numerical correctness.",
+      "readiness": "diagnostic_validated",
+      "role": "portability"
+    },
+    {
+      "certificate": "At T=10^10 the patched single code gives 0.4557313171, while mpmath gives 0.457593713139804041159993531752; absolute error 0.0018623960398.",
+      "claim": "The patched single evaluator is independently checked at T=10^10.",
+      "id": "shd_03_single",
+      "proof_boundary": "The observed error is not an interval bound.",
+      "readiness": "diagnostic_validated",
+      "role": "single fixture"
+    },
+    {
+      "certificate": "For the upstream shift_step=0.01 grid, the maximum direct-main errors are 0.00724738923861 at T=10^10 and 0.00288990976752 at T=10^12.",
+      "claim": "The upstream 0.01 multi grid is checked against direct Riemann-Siegel main sums.",
+      "id": "shd_04_multi",
+      "proof_boundary": "Only the tested low heights are covered.",
+      "readiness": "diagnostic_validated",
+      "role": "multi fixture"
+    },
+    {
+      "certificate": "The accepted-grid mean error magnitude decreases from 0.00696732583847 to 0.00178374082489. This is compatible with, but does not prove, the documented O(T^(-1/4)) floor.",
+      "claim": "The error decreases between T=10^10 and T=10^12 in the direction predicted by the documented asymptotic floor.",
+      "id": "shd_05_scale",
+      "proof_boundary": "Two heights do not establish an error theorem or its constant.",
+      "readiness": "diagnostic_validated",
+      "role": "height scaling"
+    },
+    {
+      "certificate": "At the first physical root omega_c/exp(-i theta_RS(T_0))=-1-4.83903158037279e-17i, so the retained perpendicular endpoint fraction is 4.83903158037e-17.",
+      "claim": "The physical normalizer nearly aligns with the stationary Hardy endpoint direction.",
+      "id": "shd_06_phase",
+      "proof_boundary": "The residual endpoint quadrature is retained, not rounded to zero.",
+      "readiness": "diagnostic_validated",
+      "role": "phase lock"
+    },
+    {
+      "certificate": "If K_j(lambda)=2 exp[-i theta_RS(T+delta_j)]exp(i delta_j lambda) and g(lambda) is fitted as sum_j c_jK_j(lambda) with real c_j, then sum_j c_j H_main(T+delta_j)=Re sum_(n<=N)n^(-1/2+iT)g(log n). The half-endpoint carrier convention is restored by explicit endpoint subtraction.",
+      "claim": "A real combination of corrected Hardy main sums implements the fitted complex carrier kernel.",
+      "id": "shd_07_kernel",
+      "proof_boundary": "The identity is conditional on the supplied main-sum values.",
+      "readiness": "proved",
+      "role": "kernel identity"
+    },
+    {
+      "certificate": "At the actual frequency T_0=Omega, the parity-adjusted source phase agrees with the stationary Hardy endpoint direction to the recorded precision. No terminal band is peeled: the fit includes lambda=log N, while the starred carrier's half-weights at n=1 and n=N are restored by explicit subtraction.",
+      "claim": "The physical phase lock removes the stationary endpoint quadrature obstruction.",
+      "id": "shd_08_endpoint",
+      "proof_boundary": "The two starred endpoint half-weights are still adjusted explicitly.",
+      "readiness": "diagnostic_validated",
+      "role": "endpoint ownership"
+    },
+    {
+      "certificate": "Three roots times eight base/tangent rows give 24 fitted kernels. The maximum held-out relative bulk error is 3.80043545001e-11.",
+      "claim": "All 24 physical base and tangent kernels pass independent held-out bulk grids.",
+      "id": "shd_09_physical",
+      "proof_boundary": "This checks interpolation only, not Hardy-sample accuracy.",
+      "readiness": "diagnostic_validated",
+      "role": "physical kernel"
+    },
+    {
+      "certificate": "The largest physical coefficient l1 norm is 2311004.4995. A worst-case independent sample-error estimate is therefore amplified by that factor; only empirical low-height correlation currently reduces it.",
+      "claim": "The coefficient norms make independent per-sample error bounds unusable at proof scale.",
+      "id": "shd_10_condition",
+      "proof_boundary": "Empirical correlated cancellation cannot replace a certified joint error bound.",
+      "readiness": "guard_validated",
+      "role": "conditioning"
+    },
+    {
+      "certificate": "At T=10^10, shift_step=0.02 has maximum direct-main error 1.43906249489 and is rejected.",
+      "claim": "The 0.02 spacing shortcut is rejected.",
+      "id": "shd_11_h002",
+      "proof_boundary": "It must not be used for a physical run.",
+      "readiness": "falsified",
+      "role": "spacing control"
+    },
+    {
+      "certificate": "At T=10^10, shift_step=0.04 has maximum direct-main error 4.0876351952 and is rejected.",
+      "claim": "The 0.04 spacing shortcut is rejected.",
+      "id": "shd_12_h004",
+      "proof_boundary": "It must not be used for a physical run.",
+      "readiness": "falsified",
+      "role": "spacing control"
+    },
+    {
+      "certificate": "The upstream multi evaluator has no restart facility. Measured one-rank runtime rises from about 9 seconds at T=10^10 to 153 seconds at T=10^12, so an uncheckpointed physical T about 3.26e22 run cannot be assumed to finish inside one four-hour cycle even with four night workers.",
+      "claim": "The physical multi-value job is not launched until it is resumable within the session contract.",
+      "id": "shd_13_runtime",
+      "proof_boundary": "A non-resumable run may not be allowed to cross the four-hour turn ceiling.",
+      "readiness": "guard_validated",
+      "role": "runtime guard"
+    },
+    {
+      "certificate": "The external algorithm documents only an asymptotic relative-error order, with no validated constant or interval enclosure here. Kernel interpolation, raw ten-decimal outputs, and correlated low-height errors prove no physical observation, determinant sign, flow inequality, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+      "claim": "This bridge is a numerical diagnostic and not proof evidence for the determinant sign or RH.",
+      "id": "shd_14_boundary",
+      "proof_boundary": "No interval enclosure or asymptotic error constant is supplied.",
+      "readiness": "guard_validated",
+      "role": "proof boundary"
+    },
+    {
+      "certificate": "Add append-only block checkpoints and deterministic resume to the accepted shift_step=0.01 multi evaluator, preserve each of the 15 partial sums and the RS-tail state, and validate stop/resume equivalence at T=10^10 and T=10^12. Then formulate a joint correlated-error diagnostic; do not launch the physical job or call it proof evidence before both gates close.",
+      "claim": "The next gate is a resumable 0.01 multi evaluator with an explicit joint-error ledger.",
+      "id": "shd_15_handoff",
+      "proof_boundary": "No physical value is claimed before that gate closes.",
+      "readiness": "open",
+      "role": "next implementation"
+    }
+  ],
+  "schema_version": 1,
+  "source_audit": {
+    "fixture:multi_t1e10_et005": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/t1e10/zeta14cubicmult_et005_output.txt",
+      "sha256": "ab6187529845f263073b00e7a58de1410e1eade4865f42e201ac4c2a1b95c5fe"
+    },
+    "fixture:multi_t1e10_et005_h002": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/t1e10/zeta14cubicmult_et005_h002_output.txt",
+      "sha256": "6f18b0db1f965ea86d5fa262434feb79f59ea3ab7a0f0b3d769c41a93935b274"
+    },
+    "fixture:multi_t1e10_et005_h004": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/t1e10/zeta14cubicmult_et005_h004_output.txt",
+      "sha256": "d8f75794f9ffeab06cb1ff12c8827c9a781b9f84e53feb88a505dab339d1b121"
+    },
+    "fixture:multi_t1e10_et05": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/t1e10/zeta14cubicmult_et05_output.txt",
+      "sha256": "ba1a1287c73974f92a178ec5a722a9552c01db5f81ab1805f8224422dcbd9e19"
+    },
+    "fixture:multi_t1e12_et005": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/t1e12/zeta14cubicmult_et005_output.txt",
+      "sha256": "63de78256786bb9bb0b6b81d6bfdc469412cfb40e81216a1d8b3425eefe46907"
+    },
+    "fixture:single_t1e10_et05": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/t1e10/zeta14cubic_single_et05_output.txt",
+      "sha256": "256cbc5c130ec834517c37b0ad9631ace64e4c5faa8648dc0c4f050b68343b54"
+    },
+    "patch:multi_finalize": {
+      "path": "work/rh_compute/external/hardy_fastcode/patches/0003-finalize-multi-mpi-before-stop.patch",
+      "sha256": "2840aebf1c76c298a6e1aa40716c96458c9138b09c672a98d3f6ea3210e739e8"
+    },
+    "patch:multi_openmpi": {
+      "path": "work/rh_compute/external/hardy_fastcode/patches/0004-fix-multi-openmpi-interface.patch",
+      "sha256": "3eebf8a35bbdd0631c7f65b8a2e83ad98358d90014e4f15288ec36eea0abcce7"
+    },
+    "patch:single_finalize": {
+      "path": "work/rh_compute/external/hardy_fastcode/patches/0002-finalize-mpi-before-stop.patch",
+      "sha256": "b4af3812b8ca0ef315f0e8c6d9efbef8688f1a873d98c377e51737a89643a12b"
+    },
+    "patch:single_mpi_sum": {
+      "path": "work/rh_compute/external/hardy_fastcode/patches/0001-initialize-mpi-sum.patch",
+      "sha256": "a42062eff4ae9645077b8508f1f8368704f9dbe8077fe22a7c6b20ae0fb7dba5"
+    },
+    "patch:spacing_002": {
+      "path": "work/rh_compute/external/hardy_fastcode/patches/0006-multi-shift-step-002.patch",
+      "sha256": "c8847b83dfe8c77f3264e74129bc1b34dc6f6067c9228e65cd335aa20f1b8180"
+    },
+    "patch:spacing_004": {
+      "path": "work/rh_compute/external/hardy_fastcode/patches/0005-multi-shift-step-004.patch",
+      "sha256": "5dd971d91063e8c8d1d991af659e21269227bbd9d5eba8dade65d09f86ef37ca"
+    },
+    "source:calibrated_roots": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_calibrated_roster_interior_phase_root_scout.json",
+      "sha256": "a3f0247bab7790265522936bed07525dc27b0b8dea034f6aafefcffc2ca0b694"
+    },
+    "source:low_n_oracle": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_fixed_cell_low_n_determinant_evaluator_gate.json",
+      "sha256": "c658d15590a75da5bb2c4bcf91cbab94afea80607f524ba502aaebdb1f846a07"
+    },
+    "source:physical_adapter": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_physical_scalar_edge_adapter_gate.json",
+      "sha256": "e0be065ad520917a98372df3bf3903a9789a34e1971d312a4c6ee015de86f192"
+    },
+    "source:ridge_inversion": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_ideal_cubic_double_morse_ridge_carrier_inversion_gate.json",
+      "sha256": "81ab2ccbd2d5429e2044280db44a09f7f9befc7099b397d90c1017b79ab5d68f"
+    }
+  },
+  "source_sha256": {
+    "fixture:multi_t1e10_et005": "ab6187529845f263073b00e7a58de1410e1eade4865f42e201ac4c2a1b95c5fe",
+    "fixture:multi_t1e10_et005_h002": "6f18b0db1f965ea86d5fa262434feb79f59ea3ab7a0f0b3d769c41a93935b274",
+    "fixture:multi_t1e10_et005_h004": "d8f75794f9ffeab06cb1ff12c8827c9a781b9f84e53feb88a505dab339d1b121",
+    "fixture:multi_t1e10_et05": "ba1a1287c73974f92a178ec5a722a9552c01db5f81ab1805f8224422dcbd9e19",
+    "fixture:multi_t1e12_et005": "63de78256786bb9bb0b6b81d6bfdc469412cfb40e81216a1d8b3425eefe46907",
+    "fixture:single_t1e10_et05": "256cbc5c130ec834517c37b0ad9631ace64e4c5faa8648dc0c4f050b68343b54",
+    "patch:multi_finalize": "2840aebf1c76c298a6e1aa40716c96458c9138b09c672a98d3f6ea3210e739e8",
+    "patch:multi_openmpi": "3eebf8a35bbdd0631c7f65b8a2e83ad98358d90014e4f15288ec36eea0abcce7",
+    "patch:single_finalize": "b4af3812b8ca0ef315f0e8c6d9efbef8688f1a873d98c377e51737a89643a12b",
+    "patch:single_mpi_sum": "a42062eff4ae9645077b8508f1f8368704f9dbe8077fe22a7c6b20ae0fb7dba5",
+    "patch:spacing_002": "c8847b83dfe8c77f3264e74129bc1b34dc6f6067c9228e65cd335aa20f1b8180",
+    "patch:spacing_004": "5dd971d91063e8c8d1d991af659e21269227bbd9d5eba8dade65d09f86ef37ca",
+    "source:calibrated_roots": "a3f0247bab7790265522936bed07525dc27b0b8dea034f6aafefcffc2ca0b694",
+    "source:low_n_oracle": "c658d15590a75da5bb2c4bcf91cbab94afea80607f524ba502aaebdb1f846a07",
+    "source:physical_adapter": "e0be065ad520917a98372df3bf3903a9789a34e1971d312a4c6ee015de86f192",
+    "source:ridge_inversion": "81ab2ccbd2d5429e2044280db44a09f7f9befc7099b397d90c1017b79ab5d68f"
+  },
+  "status": "shifted-Hardy diagnostic bridge calibrated; physical kernel fits retained; wider grids rejected; resumable physical evaluator and proof error bound open",
+  "success": "built Newman C1 shifted-Hardy diagnostic bridge gate: 15 rows, 0 issues, 4 portability patches, 6 raw fixtures, 5 direct-main calibrations, 3 low-height reconstructions, 24 physical kernel fits, shift_step 0.01 retained, 0.02 and 0.04 rejected, 0 physical values and 1 open resumable-evaluator row",
+  "summary": {
+    "accepted_shift_steps": [
+      0.01
+    ],
+    "interval_enclosures": 0,
+    "low_height_main_calibrations": 5,
+    "low_height_reconstructions": 3,
+    "open_rows": 1,
+    "physical_kernel_rows": 24,
+    "physical_roots": 3,
+    "physical_values_evaluated": 0,
+    "rejected_shift_steps": [
+      0.02,
+      0.04
+    ],
+    "rows": 15,
+    "source_artifacts": 16,
+    "terminal_peel": 0
+  },
+  "upstream": {
+    "commit": "2e16dac3206b707052c3ac4cacdf3d1a2325e636",
+    "license": "GPL-3.0",
+    "repository": "https://github.com/dml2391/Hardy-function-fastcodes"
+  }
+}

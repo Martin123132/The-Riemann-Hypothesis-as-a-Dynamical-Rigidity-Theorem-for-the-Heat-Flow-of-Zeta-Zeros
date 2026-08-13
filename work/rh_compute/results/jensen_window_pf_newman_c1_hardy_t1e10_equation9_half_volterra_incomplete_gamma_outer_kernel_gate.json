@@ -1,0 +1,65 @@
+{
+  "decision": {
+    "Volterra_kernel_reduced_exactly_to_incomplete_Gamma_path": true,
+    "complete_T_upper_proved": false,
+    "endpoint_driver_may_be_bounded_by_raw_absolute_value": false,
+    "outer_kernel_family_l1_bound_proved": true,
+    "outer_kernel_l1_bound_below_1p03e_minus_4": true,
+    "outer_kernel_single_mode_nonstationary_bound_proved": true,
+    "outer_pair_residual_quantitatively_closed": false,
+    "rh_implication": false
+  },
+  "dependencies": {
+    "Volterra_transport": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_endpoint_transport_volterra_gate.json",
+      "sha256": "4c0f45f6147a29c0e30b451c4996a8f20b97967db17e9fd523a56abc9d3792f4"
+    },
+    "pair_Morse": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_signed_pair_logistic_morse_transform_gate.json",
+      "sha256": "01cce93e156d87bc9c2b8374059d84a2ba937bc3921caf88feabef149d6dec66"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_volterra_incomplete_gamma_outer_kernel_gate",
+  "next_obligation": "Exploit the endpoint-driver phases inside the Volterra convolution. Derive a two-phase nonalignment denominator away from z_D=2m/D=x_m, use it for the outer block and ordinary corridors, and reserve local charts for the B and A characteristic alignments.",
+  "passed": true,
+  "proof_boundary": "Exact incomplete-Gamma kernel and rigorous outer-kernel l1 bound only. No endpoint-driver convolution bound, complete outer-pair residual, B crossing, A-fold splice, complete T_upper, height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "rigorous_outer_bound": {
+    "certified_upper_threshold": "0.000103",
+    "first_kernel_sup_bound_ball": "[1.033572969268750064895190650356156205407155144244537162722061543848830995157131499163462569357709154e-5 +/- 4.50e-102]",
+    "first_spectral_gap_ball": "[193503.5125207458075972594709574470075130898380465352053980618812507859210095476705901020984629221914 +/- 8.42e-92]",
+    "height": 10000000000,
+    "integral_tail_bound_ball": "[9.212348423239020181115770970949769196372930942178186478519404760052496614391773573109843828940777729e-5 +/- 7.78e-102]",
+    "nu_ball": "[39894.22804014326779399460599343818684758586311649346576659258296706579258993018385012523339073069364 +/- 3.33e-96]",
+    "outer_kernel_l1_bound_ball": "[0.0001024592139250777024601096162130592540178008608642272364124146630390132760954890507227330639829848688 +/- 1.23e-101]",
+    "outer_start": 39895,
+    "outer_start_minus_nu_ball": "[0.7719598567322060053940065618131524141368835065342334074170329342074100698161498747666092693063574271 +/- 7.52e-97]"
+  },
+  "runtime": {
+    "elapsed_seconds": 0.248,
+    "flint_threads": 1,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_volterra_incomplete_gamma_outer_kernel_gate.py",
+      "sha256": "6715cec27e5c32f4da142028bec641a4e83b953967d6de01cd261424d1c26d35"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_volterra_incomplete_gamma_outer_kernel_gate.py",
+      "sha256": "645d22358ba8ae417d2106cce105685226d355c749250298226b1269111b84bb"
+    }
+  },
+  "status": "exact_incomplete_Gamma_Volterra_kernel_and_outer_l1_bound_proved_driver_coupling_open",
+  "symbolic_certificate": {
+    "incomplete_Gamma": "With a=3/4+i*t/2 and lambda=i*pi*m^2, G_m=(-1)^m lambda^(-a)[gamma_path(a,lambda W_z)-gamma_path(a,lambda)].",
+    "kernel_definition": "G_m(z)=integral_z^(1/2)W_t(x)x^(-3/2)exp(-i*pi*m^2/x)dx",
+    "logistic_substitution": "w=(1-x)/x, W_z=(1-z)/z",
+    "outer_l1_integral_bound": "sum_(m=M)^infinity sup_z|G_m(z)| <= 2/[pi(M^2-nu^2)]+log[(M+nu)/(M-nu)]/(pi*nu), nu=sqrt(t/(2*pi)).",
+    "outer_monotonicity": "For m>=39895 and w>=1, lambda_m(w)>0 increases, while w^(-1/4)/lambda_m(w) decreases.",
+    "outer_phase_derivative": "phi_m'(w)=t/(2w)-pi*m^2=-lambda_m(w)",
+    "path_guard": "gamma_path is the lower incomplete-Gamma integral continued along the straight positive-imaginary ray from lambda to lambda W_z; this fixes the branch unambiguously.",
+    "reduced_kernel": "G_m(z)=(-1)^m integral_1^(W_z) w^(-1/4+i*t/2)exp(-i*pi*m^2*w)dw",
+    "single_kernel_bound": "sup_(0<z<=1/2)|G_m(z)|<=2/[pi*m^2-t/2]"
+  }
+}

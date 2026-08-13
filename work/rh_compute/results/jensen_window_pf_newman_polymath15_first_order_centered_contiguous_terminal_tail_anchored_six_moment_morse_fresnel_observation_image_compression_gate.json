@@ -1,0 +1,277 @@
+{
+  "counts": {
+    "coefficient_aware_interior_bounds": 0,
+    "enumerated_physical_modes": 0,
+    "evaluated_physical_linear_polynomials": 0,
+    "linear_residual_functionals": 1,
+    "maximum_polynomial_degree": 5,
+    "phi_b_bounds": 0,
+    "quadratic_observation_pairings": 4,
+    "quadratic_remainder_bounds": 0,
+    "rows": 25,
+    "signed_flow_bounds": 0,
+    "tail_projection_templates": 1,
+    "universal_endpoint_zeros": 0,
+    "visible_residual_observations": 8
+  },
+  "date": "2026-08-02",
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_observation_image_compression_gate",
+  "matrix_certificate": {
+    "gradient_factorization": "For a=U_0^Tp and b=U_1^Tp, g_p=2M_xi p+ell_xi=U_0(2Jb)+U_1(2Ja+t_T).",
+    "residual_factorization": "For x=U_0^Tr and z=U_1^Tr, g_p^Tr+r^TM_xi r=2a^TJz+2b^TJx+t_T^Tz+2x^TJz.",
+    "symbolic_difference": "0",
+    "visible_image": "The remainder affects the flow through x and z only: four real observation errors and their four frequency derivatives. Any remainder in ker(U_0^T) intersect ker(U_1^T) is exactly invisible."
+  },
+  "observation_certificate": {
+    "expanded_error": "The exact flow error is (N_p+A_(T,x))z_V+(X_T+V_p)z_N-(Q_p+X_(T,x))z_A-(A_T+A_p)z_Q+N_(p,xi)x_V+V_(p,xi)x_N-Q_(p,xi)x_A-A_(p,xi)x_Q+x_Vz_N+x_Nz_V-x_Az_Q-x_Qz_A.",
+    "flow_invisible_guard": "Large componentwise moment errors can be harmless if all eight visible projections vanish. Conversely, smallness of only the six raw moments is not the theorem dictated by the flow.",
+    "linear_collapse": "The entire linear remainder interaction is exactly g_p^Tr=Re E[P_lin], where deg(P_lin)<=5.",
+    "linear_polynomial": "P_lin=N_(p,xi)P_V+V_(p,xi)P_N-Q_(p,xi)P_A-A_(p,xi)P_Q+i(lambda-log a){(N_p+A_(T,x))P_V+(X_T+V_p)P_N-(Q_p+X_(T,x))P_A-(A_T+A_p)P_Q}.",
+    "normalization": "Let E[P]=nu c_xi R[P], with the fixed source normalizer and common phase. For X in {V,N,A,Q}, set x_X=Re E[P_X] and z_X=Re E[i(lambda-log a)P_X].",
+    "quadratic_pairing": "The quadratic remainder is exactly r^TM_xi r=x_Vz_N+x_Nz_V-x_Az_Q-x_Qz_A. It contains four signed base/derivative pairings and no hidden moment directions."
+  },
+  "polynomial_certificate": {
+    "amplitude_linearity": "For P(lambda)=sum_(j=0)^5 p_jlambda^j, set A_P(u)=P(log u)exp(t(log u)^2/4-sigma log u). The Morse maps A to b, c, c', and the outside C_rA operator linearly.",
+    "base_polynomials": "The four base observation polynomials are P_V=C, P_N=N, P_A=RC, and P_Q=Q, with degrees at most 2,4,3,3.",
+    "degree_ceiling": "The base and lifted observation amplitudes have degrees at most 2,4,3,3 and 3,5,4,4. No degree above five is introduced.",
+    "derivative_lift": "The frequency-derivative row of P is dot(P)(lambda)=i(lambda-log a)P(lambda), exactly matching delta_a(r).",
+    "nonpromotion_witness": "An exact algebraic specialization has P_lin of degree five with leading coefficient 6i and P_lin(log a)=-21. Thus the compression does not force a universal factor lambda-log a or any automatic endpoint zero. This witness is not asserted to be a physical Xi state.",
+    "residual_functional": "Define R[P]=kappa sum_T e(phi_r(alpha/r)) integral c'_(P,r)e(-y^2/2)+kappa^2 sum_(r notin T) integral e(phi_r)C_rA_P. Then R[P]=sum_j p_j rho_j^(osc).",
+    "witness_polynomial": "6*I*lambda**5 + 2*lambda**4 - 27*I*lambda**4 - 7*lambda**3 + 35*I*lambda**3 + lambda**2 - 10*I*lambda**2 + 3*I*lambda - 1 - 6*I"
+  },
+  "proof_boundary": "This proves exact observation-image compression, polynomial-amplitude closure through degree five, collapse of the full linear remainder to one complex Morse functional, four exact quadratic pairings, and one coefficient-dependent outside-tail template. It does not evaluate P_lin on the physical chart, bound its c-prime interior, control the four quadratic pairings, prove an h^2 flow error, evaluate the retained carrier, prove a signed flow or Phi_B bound, exclude contact, establish a retained aggregate or Xi theorem, prove Q209, Lambda<=0, PF-infinity, RH, or a prize-level conclusion.",
+  "route_certificate": {
+    "next_target": "Expand the physical coefficients of P_lin from C,N,RC,Q and the retained carrier observations. Derive the exact c'_(P_lin,r) Morse amplitude, audit its discrete mode variation and saddle zeros, and prove or falsify a grouped bound after the common phase, reciprocal pairing, endpoints, and terminal row are retained.",
+    "proof_boundary": "This proves exact observation-image compression, polynomial-amplitude closure through degree five, collapse of the full linear remainder to one complex Morse functional, four exact quadratic pairings, and one coefficient-dependent outside-tail template. It does not evaluate P_lin on the physical chart, bound its c-prime interior, control the four quadratic pairings, prove an h^2 flow error, evaluate the retained carrier, prove a signed flow or Phi_B bound, exclude contact, establish a retained aggregate or Xi theorem, prove Q209, Lambda<=0, PF-infinity, RH, or a prize-level conclusion.",
+    "route_decision": "Estimate the single grouped interior functional associated with P_lin before taking absolute values. Treat the four quadratic observation pairings at their normalized scale. Do not allocate independent budgets to rho_0,...,rho_5."
+  },
+  "rows": [
+    {
+      "certificate": "Sections 11.165 and 11.171.",
+      "claim": "The reduction starts from the exact endpoint carrier and rank-eight flow.",
+      "id": "mfic_01_source",
+      "proof_boundary": "No estimate follows.",
+      "readiness": "proved",
+      "role": "source chain"
+    },
+    {
+      "certificate": "For a=U_0^Tp and b=U_1^Tp, g_p=2M_xi p+ell_xi=U_0(2Jb)+U_1(2Ja+t_T).",
+      "claim": "The carrier gradient factors through U_0 and U_1.",
+      "id": "mfic_02_gradient",
+      "proof_boundary": "Exact linear algebra.",
+      "readiness": "proved",
+      "role": "flow gradient"
+    },
+    {
+      "certificate": "For x=U_0^Tr and z=U_1^Tr, g_p^Tr+r^TM_xi r=2a^TJz+2b^TJx+t_T^Tz+2x^TJz.",
+      "claim": "The full flow error uses only the observation image.",
+      "id": "mfic_03_residual",
+      "proof_boundary": "No norm is applied.",
+      "readiness": "proved",
+      "role": "residual factor"
+    },
+    {
+      "certificate": "The remainder affects the flow through x and z only: four real observation errors and their four frequency derivatives. Any remainder in ker(U_0^T) intersect ker(U_1^T) is exactly invisible.",
+      "claim": "Only eight real remainder observations affect the flow.",
+      "id": "mfic_04_visible",
+      "proof_boundary": "At most eight; physical rank can fall.",
+      "readiness": "proved",
+      "role": "visible image"
+    },
+    {
+      "certificate": "Let E[P]=nu c_xi R[P], with the fixed source normalizer and common phase. For X in {V,N,A,Q}, set x_X=Re E[P_X] and z_X=Re E[i(lambda-log a)P_X].",
+      "claim": "Fixed normalization and common phase pass through every residual projection.",
+      "id": "mfic_05_normalize",
+      "proof_boundary": "Common phase is not discarded.",
+      "readiness": "proved",
+      "role": "normalization"
+    },
+    {
+      "certificate": "For P(lambda)=sum_(j=0)^5 p_jlambda^j, set A_P(u)=P(log u)exp(t(log u)^2/4-sigma log u). The Morse maps A to b, c, c', and the outside C_rA operator linearly.",
+      "claim": "Polynomial amplitudes are closed under the exact Morse construction.",
+      "id": "mfic_06_linearity",
+      "proof_boundary": "Degree at most five.",
+      "readiness": "proved",
+      "role": "Morse linearity"
+    },
+    {
+      "certificate": "Define R[P]=kappa sum_T e(phi_r(alpha/r)) integral c'_(P,r)e(-y^2/2)+kappa^2 sum_(r notin T) integral e(phi_r)C_rA_P. Then R[P]=sum_j p_j rho_j^(osc).",
+      "claim": "Every row projection is one polynomial-amplitude residual.",
+      "id": "mfic_07_functional",
+      "proof_boundary": "Includes interior and outside tail.",
+      "readiness": "proved",
+      "role": "residual functional"
+    },
+    {
+      "certificate": "The four base observation polynomials are P_V=C, P_N=N, P_A=RC, and P_Q=Q, with degrees at most 2,4,3,3.",
+      "claim": "The four observations use C,N,RC,Q.",
+      "id": "mfic_08_base",
+      "proof_boundary": "Physical coefficients retained.",
+      "readiness": "proved",
+      "role": "base polynomials"
+    },
+    {
+      "certificate": "The frequency-derivative row of P is dot(P)(lambda)=i(lambda-log a)P(lambda), exactly matching delta_a(r).",
+      "claim": "Frequency differentiation multiplies by i(lambda-log a).",
+      "id": "mfic_09_lift",
+      "proof_boundary": "No seventh moment.",
+      "readiness": "proved",
+      "role": "derivative lift"
+    },
+    {
+      "certificate": "The base and lifted observation amplitudes have degrees at most 2,4,3,3 and 3,5,4,4. No degree above five is introduced.",
+      "claim": "All eight observation amplitudes remain degree at most five.",
+      "id": "mfic_10_degree",
+      "proof_boundary": "Sufficiency, not minimality.",
+      "readiness": "proved",
+      "role": "degree closure"
+    },
+    {
+      "certificate": "The exact flow error is (N_p+A_(T,x))z_V+(X_T+V_p)z_N-(Q_p+X_(T,x))z_A-(A_T+A_p)z_Q+N_(p,xi)x_V+V_(p,xi)x_N-Q_(p,xi)x_A-A_(p,xi)x_Q+x_Vz_N+x_Nz_V-x_Az_Q-x_Qz_A.",
+      "claim": "The carrier/remainder interaction has an exact observation formula.",
+      "id": "mfic_11_expanded",
+      "proof_boundary": "Signed formula.",
+      "readiness": "proved",
+      "role": "expanded error"
+    },
+    {
+      "certificate": "P_lin=N_(p,xi)P_V+V_(p,xi)P_N-Q_(p,xi)P_A-A_(p,xi)P_Q+i(lambda-log a){(N_p+A_(T,x))P_V+(X_T+V_p)P_N-(Q_p+X_(T,x))P_A-(A_T+A_p)P_Q}.",
+      "claim": "All physical linear error coefficients form one polynomial.",
+      "id": "mfic_12_plin",
+      "proof_boundary": "Carrier observations remain exact.",
+      "readiness": "proved",
+      "role": "linear polynomial"
+    },
+    {
+      "certificate": "The entire linear remainder interaction is exactly g_p^Tr=Re E[P_lin], where deg(P_lin)<=5.",
+      "claim": "The full linear remainder is one complex Morse functional.",
+      "id": "mfic_13_collapse",
+      "proof_boundary": "No bound is claimed.",
+      "readiness": "proved",
+      "role": "linear collapse"
+    },
+    {
+      "certificate": "The quadratic remainder is exactly r^TM_xi r=x_Vz_N+x_Nz_V-x_Az_Q-x_Qz_A. It contains four signed base/derivative pairings and no hidden moment directions.",
+      "claim": "The nonlinear error is four signed observation pairings.",
+      "id": "mfic_14_quadratic",
+      "proof_boundary": "No sign follows.",
+      "readiness": "proved",
+      "role": "quadratic error"
+    },
+    {
+      "certificate": "Large componentwise moment errors can be harmless if all eight visible projections vanish. Conversely, smallness of only the six raw moments is not the theorem dictated by the flow.",
+      "claim": "Moment directions outside the observation image do not affect the flow.",
+      "id": "mfic_15_kernel",
+      "proof_boundary": "Does not prove actual errors lie there.",
+      "readiness": "proved",
+      "role": "invisible kernel"
+    },
+    {
+      "certificate": "If P(lambda)=sum_(j=0)^5p_jlambda^j, the known outside-tail bounds imply |T[P]|<2h^2 sum_(j=0)^5 K_j|p_j|, with K=(6,14,55,336,2738,27936).",
+      "claim": "Known component tails propagate after polynomial composition.",
+      "id": "mfic_16_tail",
+      "proof_boundary": "This is a coefficient-dependent propagation template. The physical coefficients of P_lin and the eight base/lifted rows are not yet bounded here, and the c' interior is untouched.",
+      "readiness": "proved",
+      "role": "tail projection"
+    },
+    {
+      "certificate": "An exact algebraic specialization has P_lin of degree five with leading coefficient 6i and P_lin(log a)=-21. Thus the compression does not force a universal factor lambda-log a or any automatic endpoint zero. This witness is not asserted to be a physical Xi state.",
+      "claim": "Compression creates no universal endpoint zero.",
+      "id": "mfic_17_witness",
+      "proof_boundary": "Algebraic witness, not a physical Xi state.",
+      "readiness": "proved",
+      "role": "root nonpromotion"
+    },
+    {
+      "certificate": "Estimate the single grouped interior functional associated with P_lin before taking absolute values. Treat the four quadratic observation pairings at their normalized scale. Do not allocate independent budgets to rho_0,...,rho_5.",
+      "claim": "The proof target is coefficient-composed, not componentwise.",
+      "id": "mfic_18_route",
+      "proof_boundary": "The grouped estimate remains open.",
+      "readiness": "proved",
+      "role": "route decision"
+    },
+    {
+      "certificate": "Expand the physical coefficients of P_lin from C,N,RC,Q and the retained carrier observations. Derive the exact c'_(P_lin,r) Morse amplitude, audit its discrete mode variation and saddle zeros, and prove or falsify a grouped bound after the common phase, reciprocal pairing, endpoints, and terminal row are retained.",
+      "claim": "The physical P_lin c-prime sum is the next analytic theorem.",
+      "id": "mfic_19_target",
+      "proof_boundary": "No h^2 bound is claimed.",
+      "readiness": "open",
+      "role": "interior target"
+    },
+    {
+      "certificate": "No endpoint package is moved back into the error.",
+      "claim": "Retained hard endpoints stay inside p while their residual sensitivity enters P_lin.",
+      "id": "mfic_20_endpoint",
+      "proof_boundary": "Cross-term cancellation remains to be proved.",
+      "readiness": "proved",
+      "role": "endpoint retention"
+    },
+    {
+      "certificate": "The coefficients N_p+A_(T,x), X_T+V_p, Q_p+X_(T,x), and A_T+A_p remain joined.",
+      "claim": "The terminal vector contributes through t_T in P_lin.",
+      "id": "mfic_21_terminal",
+      "proof_boundary": "No terminal sign is assumed.",
+      "readiness": "proved",
+      "role": "terminal retention"
+    },
+    {
+      "certificate": "Polynomial composition occurs after the physical coefficient rows are formed.",
+      "claim": "The V,N,A,Q rows retain the Hermitian and transpose source structure.",
+      "id": "mfic_22_hermitian",
+      "proof_boundary": "No swap-symmetry sign is inferred.",
+      "readiness": "proved",
+      "role": "symmetry retention"
+    },
+    {
+      "certificate": "This is a coefficient-dependent propagation template. The physical coefficients of P_lin and the eight base/lifted rows are not yet bounded here, and the c' interior is untouched.",
+      "claim": "A degree-five closure is not an h^2 estimate.",
+      "id": "mfic_23_scale",
+      "proof_boundary": "Coefficient norms and c-prime cancellation remain open.",
+      "readiness": "proved",
+      "role": "scale boundary"
+    },
+    {
+      "certificate": "All pi factors remain those in kappa and the inherited Fourier character.",
+      "claim": "No new pi is introduced by observation compression.",
+      "id": "mfic_24_pi",
+      "proof_boundary": "No fitted geometry.",
+      "readiness": "proved",
+      "role": "pi provenance"
+    },
+    {
+      "certificate": "This proves exact observation-image compression, polynomial-amplitude closure through degree five, collapse of the full linear remainder to one complex Morse functional, four exact quadratic pairings, and one coefficient-dependent outside-tail template. It does not evaluate P_lin on the physical chart, bound its c-prime interior, control the four quadratic pairings, prove an h^2 flow error, evaluate the retained carrier, prove a signed flow or Phi_B bound, exclude contact, establish a retained aggregate or Xi theorem, prove Q209, Lambda<=0, PF-infinity, RH, or a prize-level conclusion.",
+      "claim": "The gate is an exact reduction, not the missing signed estimate.",
+      "id": "mfic_25_boundary",
+      "proof_boundary": "This is not a proof of RH.",
+      "readiness": "proved",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "endpoint_composition": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_endpoint_composition_retention_gate.json",
+      "sha256": "378be6b1649a5a8ace90cb8b71baad383ba0f77fffdba84c3cc99fd2314f3cfc"
+    },
+    "flow_matrix": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_flow_matrix_phase_reduction.json",
+      "sha256": "cc528b890aa3ace1b364f4f6b75aea1ae06461c29ac6d2896d666ca19d440675"
+    },
+    "morse_fresnel_endpoint": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_endpoint_reduction.json",
+      "sha256": "a0a2a9d98db6648a6c4fe720062c05e3cfdd28084730ee06791074a5902f3764"
+    }
+  },
+  "status": "eight-observation and degree-five linear-functional compression proved; coefficient-aware interior and signed flow remain open",
+  "tail_certificate": {
+    "boundary": "This is a coefficient-dependent propagation template. The physical coefficients of P_lin and the eight base/lifted rows are not yet bounded here, and the c' interior is untouched.",
+    "constants": [
+      6,
+      14,
+      55,
+      336,
+      2738,
+      27936
+    ],
+    "projection_template": "If P(lambda)=sum_(j=0)^5p_jlambda^j, the known outside-tail bounds imply |T[P]|<2h^2 sum_(j=0)^5 K_j|p_j|, with K=(6,14,55,336,2738,27936)."
+  }
+}

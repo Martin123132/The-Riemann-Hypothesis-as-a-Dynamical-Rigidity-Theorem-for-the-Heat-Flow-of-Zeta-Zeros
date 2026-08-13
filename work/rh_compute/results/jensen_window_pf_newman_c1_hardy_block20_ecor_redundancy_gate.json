@@ -1,0 +1,84 @@
+{
+  "kind": "jensen_window_pf_newman_c1_hardy_block20_ecor_redundancy_gate",
+  "status": "exact_displayed_ecor_coefficient_already_present_in_source_gc_phase",
+  "scope": {
+    "phase_degree": 3,
+    "source_hierarchy_level": 1,
+    "physical_block": 20,
+    "identity_type": "exact_symbolic_rational_function"
+  },
+  "identity": {
+    "source_saddle_location": "-3*a**2*b/x**3 + a/x",
+    "source_gc_expansion": "27*a**6*b**4/x**9 - 27*a**5*b**3/x**7 + 9*a**4*b**2/(2*x**5) - a**3*b/x**3 + a**2/(2*x)",
+    "phase_quartic_coefficient": "9*pi/(32*phi2**5)",
+    "commented_ecor_coefficient": "9*pi/(32*phi2**5)",
+    "coefficient_after_hypothetical_extra_ecor": "9*pi/(16*phi2**5)",
+    "quartic_match_identity": "0"
+  },
+  "source_audit": {
+    "executable_ecor_occurrences": [
+      {
+        "line": 2268,
+        "code": "real(dp)      :: xbeta,c1,ecor,gc,sav1,sav2,tol"
+      },
+      {
+        "line": 2466,
+        "code": "ecor=0.0"
+      }
+    ],
+    "executable_ecor_occurrence_count": 2,
+    "ecor_used_in_phase_expression": false,
+    "classification": "stale_comment_or_prior_formula; enabling it in the current full-gc path would double-count the leading b^2*a^4 phase term"
+  },
+  "source": {
+    "path": "work/rh_compute/external/hardy_fastcode/resumable/zeta14cubicmult_resumable.f90",
+    "sha256": "0fb64f090c21b185f27edc1c9194254cf471e74bfd6af3b88cb7f0cb40ec0c3d",
+    "locations": {
+      "cubic_saddle_displacements": [
+        2427,
+        2470
+      ],
+      "saddle_locations": [
+        2435,
+        2478
+      ],
+      "phase_seeds": [
+        2441,
+        2486
+      ],
+      "full_phase_polynomials": [
+        2443,
+        2488
+      ],
+      "phase_exponentials": [
+        2446,
+        2491
+      ],
+      "commented_ecor_formula": 2465,
+      "zero_ecor_assignment": 2466,
+      "ecor_comment": 2505
+    }
+  },
+  "paper": {
+    "url": "https://arxiv.org/abs/2607.15310",
+    "exact_through": "equation (69)",
+    "saddle_approximation_begins": "equation (72)",
+    "endpoint_component": "W1, equation (81)"
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_block20_ecor_redundancy_gate.py",
+      "sha256": "47c397de998a99814195c20aa54951c2c62f0b1a1a42babfe4efec15564a3e60"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_block20_ecor_redundancy_gate.py",
+      "sha256": "ae48f0e1016fb8613d9eaa6cb6fd22e35c730a84bf67edcc7bb23e4004e8d655"
+    },
+    "sympy_version": "1.14.0"
+  },
+  "next_handoff": {
+    "remove_candidate": "Do not add the commented ecor coefficient to the current cr1=exp(i*tpp*gc) path.",
+    "live_target": "Evaluate the actually omitted finite-ip endpoint terms and then bound the difference between the displayed W1 approximation and the exact contour integrals."
+  },
+  "proof_boundary": "Exact algebra for the displayed cubic source phase only. It neither proves the saddle or contour approximation nor reconstructs the unavailable Maple code, controls finite-ip tails, supplies a uniform recurrence bound, or establishes Lambda <= 0, PF-infinity, RH, or a prize-level theorem."
+}

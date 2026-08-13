@@ -1,0 +1,93 @@
+{
+  "certificate": {
+    "canonical_profile_scale_interval": [
+      "18.5172637372933172944160169256230672422138481023579575878863075576719273979422983547666152",
+      "18.5172637372933172944160169256230672422138481023579575878863075576719422107495312266193501"
+    ],
+    "completed_canonical_profile_value_upper_bound": "1.75842251125259831742031899764141519403286918141964047104483729464309891537402844719769180E-10",
+    "detuning_spacing_h_ball": "[0.05400365918999276349713021611659637923100296108992399103476616517645497 +/- 2.16e-71]",
+    "hY_minus_2pi_ball": "[-1.44890865261227397880145908654e-70 +/- 4.18e-69]",
+    "normal_width_Y_ball": "[116.3473994433307293304405864127926592709684040724544140144822587448143 +/- 4.28e-68]",
+    "weighted_kernel_L1_bound_ball": "[3.8402825923711157469357553976338890036124815208824976467044011286419031499973287e-5 +/- 4.70e-85]",
+    "weighted_kernel_L1_upper_bound": "0.000038402825923711157469357553976338890036124815208824976467044011286419031499973287470"
+  },
+  "date": "2026-08-13",
+  "decision": {
+    "coefficientwise_mode_bounds_used": false,
+    "complete_T_upper_proved": false,
+    "complete_physical_source_initial_data_splice_proved": false,
+    "exact_transformed_strip_common_profile_identity_proved": true,
+    "rh_implication": false,
+    "uniform_exact_minus_beta4_profile_bound_proved": false,
+    "weighted_exact_minus_beta4_coefficient_operator_proved": true,
+    "weighted_exact_minus_beta4_numerical_bound_proved": false
+  },
+  "dependencies": {
+    "beta4_reduction": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_canonical_airy_derivative_reduction_gate.json",
+      "sha256": "41210634f1489fa13edd0b72438187f61ff9b16af0b09ff0afb91844e8b7c82f"
+    },
+    "completed_projection": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_fixed_B_selector_boundary_beta4_completed_branch_projection_gate.json",
+      "sha256": "a295c3083220027a0fa44a670d47bf39f200bcf4da36ff525354719984edb437"
+    },
+    "exact_normal_form": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_grouped_characteristic_airy_boundary_normal_form_gate.json",
+      "sha256": "7b0cf517df4089022c855fb5dfde5da61f68488a633eed46bc516099f7763164"
+    },
+    "fourier_completion": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_fixed_B_selector_boundary_399_mode_fourier_completion_gate.json",
+      "sha256": "021324502636d0c2de16690eb418231f1d63ec4714af9a84130e1812ebb0d1ff"
+    },
+    "profile_obligation": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_exact_completed_point_weighted_profile_obligation_gate.json",
+      "sha256": "a214fe57cb1780da4ab941a5ade0beabd210feda247a2c715b20b8a01117cd13"
+    },
+    "weighted_kernel": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_weighted_opposite_branch_dirichlet_gate.json",
+      "sha256": "681f2ac9990f1d245ac6a661598724596f35bbbda604d921276206c65f37f314"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_exact_finite_t_common_profile_operator_gate",
+  "next_action": "Certify sup|J_ex(lambda,s)-J_4(lambda,s)| on the ordinary top corridor and 0<=s<=1 using one common contour and a resumable two-parameter atlas or an analytic derivative/endpoint envelope. Transfer the result through the whole weighted kernel; do not estimate the 398 coefficients separately.",
+  "operator_identity": {
+    "beta4_profile": "g_4(s)=Y/(2pi) exp(-3pi i s/2) J_4(lambda,s)",
+    "exact_profile": "g_ex(s)=Y/(2pi) exp(-3pi i s/2) J_ex(lambda,s)",
+    "mode_coefficients": "G_(39895+n)=int_0^1 g(s) exp(-2pi i n s) ds",
+    "profile_difference": "delta g=g_ex-g_4",
+    "uniform_transfer": "|Delta W|<=||delta g||_infinity ||P_w||_1",
+    "weighted_kernel": "P_w(s)=sum_(n=-199)^199 w_(39895+n) exp(-2pi i n s), w_39894=0",
+    "weighted_pairing": "Delta W=int_0^1 delta g(s) P_w(s) ds"
+  },
+  "passed": true,
+  "proof_boundary": "Exact transformed-strip common-profile and weighted Fourier operator identities only. No uniform exact-minus-beta^-4 profile bound, weighted numerical remainder, complete physical source/initial-data splice, complete Q_K-T or T_upper, all-corridor or height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.273,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_exact_finite_t_common_profile_operator_gate.py",
+      "sha256": "be94228a4b42d8cd5b48cfb3ad42177e1b8d3f1b04eb4daf67980bc93cc8178b"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_exact_finite_t_common_profile_operator_gate.py",
+      "sha256": "2ee8e2b59630330417e798c73f13c649ceca6944f6c2a6fd973b5f5ac6722bf6"
+    }
+  },
+  "status": "exact_finite_t_common_profile_fourier_operator_certified",
+  "symbolic_certificate": {
+    "exact_amplitude": "cosh(z/beta)^(-3/2)(1+sigma*y/C)",
+    "exact_height_phase": "beta^3[z/beta-tanh(z/beta)]-lambda*z",
+    "exact_logit": "x(z)=[1-tanh(z/beta)]/2",
+    "exact_profile_phase": "beta^3[z/beta-tanh(z/beta)]-lambda*z-beta*y*tanh(z/beta)+x(z)y^2/(2beta)",
+    "fixed_lower_endpoint": "159577",
+    "height_parameterization": "t=t*-beta*lambda, t*=beta^3=pi*C^2/8",
+    "mode_detuning": "d_(39895+n)=h(n+3/4)",
+    "mode_factor": "exp(-i*d_m*Y*s)=exp(-2pi*i*n*s)exp(-3pi*i*s/2)",
+    "one_period": "hY=2pi",
+    "profile_scale": "Y/(2pi)=1/h",
+    "selector_center": "39895"
+  }
+}

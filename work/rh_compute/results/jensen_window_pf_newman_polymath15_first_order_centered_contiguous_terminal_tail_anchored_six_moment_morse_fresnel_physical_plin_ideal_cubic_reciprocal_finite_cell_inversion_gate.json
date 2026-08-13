@@ -1,0 +1,270 @@
+{
+  "boundary_certificate": {
+    "achievement": "The full-line sequential transform is exact Fourier inversion, so it returns the starred physical carrier with no full-line remainder. The first-correction cancellation in Section 11.179 is its first local coefficient. Finite reciprocal cells differ only through explicit tie, alias, and exterior-tail terms.",
+    "handoff": "Recompose the global lower and upper reciprocal-frequency exterior with the nonphysical roster fringes, mathcal T, the hard endpoint halves, mathcal L+e_Bmathcal U, and the terminal recurrence. Then derive a signed bound for that two-sided package, using the alias derivative gap only after internal cell cancellation.",
+    "off_lattice_guard": "The real-r extension must use e(-r) and e(alpha_Plog B-rB) at the Morse endpoints. Replacing them off lattice by their integer values 1 and e_B changes the second Poisson transform.",
+    "remaining_bound": "No uniform estimate is supplied for the noncentral aliases or the global reciprocal-band exterior. Endpoint jumps make the exterior Fourier inversion principal-value at q=1,B, so its two sides must not be bounded independently before endpoint composition."
+  },
+  "counts": {
+    "alias_bounds": 0,
+    "alias_gap_identities": 1,
+    "carrier_inversion_identities": 3,
+    "complete_mode_recompositions": 2,
+    "endpoint_composed_h2_bounds": 0,
+    "exterior_tail_bounds": 0,
+    "finite_cell_poisson_identities": 3,
+    "finite_cell_remainder_bounds": 0,
+    "fourier_kernel_identities": 2,
+    "global_recompositions": 3,
+    "internal_tie_cancellations": 1,
+    "off_lattice_endpoint_phase_identities": 2,
+    "phi_b_bounds": 0,
+    "quadratic_remainder_bounds": 0,
+    "reciprocal_cell_identities": 4,
+    "rows": 23,
+    "signed_flow_bounds": 0
+  },
+  "date": "2026-08-02",
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_ideal_cubic_reciprocal_finite_cell_inversion_gate",
+  "proof_boundary": "This gate proves the exact off-lattice endpoint phases, integer endpoint reassembly, reciprocal half-cell Poisson formula and tie correction, finite Fourier kernel, central carrier inversion, alias derivative gap, physical-band tiling, internal tie cancellation, and reduction of all cellwise defects to one global reciprocal-frequency exterior package. It proves no bound for that exterior, nonphysical roster fringes, endpoint-complete h2 remainder, q-family signed aggregate, quadratic residual, signed flow, Phi_B, contact exclusion, retained aggregate or Xi theorem, Q209, cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "certificate": "F_A(u)=1_[1,B](u)A(u)e(alpha_Plog u), and I_A(r)=integral_1^B A(u)e(alpha_Plog u-ru)du=Fhat_A(r).",
+      "claim": "The complete real-r mode is the Fourier transform of the compact physical amplitude.",
+      "id": "rfi_01_fourier_mode",
+      "proof_boundary": "The zero extension has jumps at the two physical endpoints.",
+      "readiness": "certified",
+      "role": "complete_mode"
+    },
+    {
+      "certificate": "For real r>0, I_A(r)=U_A(r)+kappa e(-r)c_A(y_1(r))-kappa e(alpha_Plog B-rB)c_A(y_B(r))+J_A(r).",
+      "claim": "Morse integration by parts has exact off-lattice endpoint phases.",
+      "id": "rfi_02_off_lattice",
+      "proof_boundary": "The real-r extension must use e(-r) and e(alpha_Plog B-rB) at the Morse endpoints. Replacing them off lattice by their integer values 1 and e_B changes the second Poisson transform.",
+      "readiness": "certified",
+      "role": "endpoint_recomposition"
+    },
+    {
+      "certificate": "For integer r and integer B, the endpoint phases reduce to 1 and e_B, so I_A(r)=U_A(r)+kappa c_A(y_1)-kappa e_Bc_A(y_B)+J_A(r).",
+      "claim": "At integer modes the off-lattice package becomes the endpoint-composed roster summand.",
+      "id": "rfi_03_integer_rejoin",
+      "proof_boundary": "The simplification is valid only on the integer lattice.",
+      "readiness": "certified",
+      "role": "endpoint_recomposition"
+    },
+    {
+      "certificate": "a_q=alpha_P/(q+1/2), b_q=alpha_P/(q-1/2), and C_q(alpha_P)={r in Z_(>0):a_q<r<=b_q}.",
+      "claim": "Derivative half-cells have exact continuous endpoints.",
+      "id": "rfi_04_cells",
+      "proof_boundary": "Only positive reciprocal cells are defined.",
+      "readiness": "certified",
+      "role": "reciprocal_cells"
+    },
+    {
+      "certificate": "C_q(alpha_P)={floor(a_q)+1,...,floor(b_q)}.",
+      "claim": "The half-open cell has an exact floor representation.",
+      "id": "rfi_05_bounds",
+      "proof_boundary": "Empty cells are permitted.",
+      "readiness": "certified",
+      "role": "reciprocal_cells"
+    },
+    {
+      "certificate": "b_(q+1)=a_q; the shared integer, when present, belongs to C_(q+1).",
+      "claim": "Adjacent continuous cells share one endpoint with deterministic lattice ownership.",
+      "id": "rfi_06_adjacency",
+      "proof_boundary": "This is a bookkeeping identity, not a remainder bound.",
+      "readiness": "certified",
+      "role": "reciprocal_cells"
+    },
+    {
+      "certificate": "S_q[A]:=sum_(r in C_q)I_A(r)=tau_q[A]+lim_(R->infinity)sum_(s=-R)^R B_(q,s)[A]. B_(q,s)[A]=integral_(a_q)^(b_q)I_A(r)e(sr)dr.",
+      "claim": "Finite Poisson summation applies exactly to one half-open reciprocal cell.",
+      "id": "rfi_07_poisson",
+      "proof_boundary": "The dual sum is a symmetric limit.",
+      "readiness": "certified",
+      "role": "finite_cell_poisson"
+    },
+    {
+      "certificate": "tau_q[A]=(1/2)1_(b_q in Z)I_A(b_q)-(1/2)1_(a_q in Z)I_A(a_q).",
+      "claim": "The half-open convention produces one explicit two-ended tie correction.",
+      "id": "rfi_08_tie",
+      "proof_boundary": "The indicators cannot be discarded at exact crossings.",
+      "readiness": "certified",
+      "role": "finite_cell_poisson"
+    },
+    {
+      "certificate": "b_(q+1)=a_q; the shared integer, when present, belongs to C_(q+1). tau_q[A]=(1/2)1_(b_q in Z)I_A(b_q)-(1/2)1_(a_q in Z)I_A(a_q).",
+      "claim": "A shared integer transfers as one complete mode package between adjacent cells.",
+      "id": "rfi_09_transfer",
+      "proof_boundary": "Individual cell formulas jump while their union does not.",
+      "readiness": "certified",
+      "role": "tie_transfer"
+    },
+    {
+      "certificate": "B_(q,s)[A]=integral_1^B F_A(u)K_q(u-s)du, where K_q(x)=kappa[e(-a_qx)-e(-b_qx)]/x and K_q(0)=b_q-a_q.",
+      "claim": "Ordinary Fubini gives an exact finite reciprocal-band kernel.",
+      "id": "rfi_10_kernel",
+      "proof_boundary": "No localization estimate is used.",
+      "readiness": "certified",
+      "role": "finite_fourier_kernel"
+    },
+    {
+      "certificate": "The s=q phase has r saddle alpha_P/q, value alpha_Plog q, and curvature q^2/alpha_P.",
+      "claim": "The diagonal dual mode has exactly the reciprocal Morse saddle.",
+      "id": "rfi_11_phase",
+      "proof_boundary": "This identifies only the diagonal continuous mode.",
+      "readiness": "certified",
+      "role": "central_dual_mode"
+    },
+    {
+      "certificate": "On [a_q,b_q], alpha_P/r lies in [q-1/2,q+1/2]; hence |s-alpha_P/r|>=1/2 for every integer s!=q.",
+      "claim": "Every noncentral dual mode is uniformly nonstationary in the reciprocal cell.",
+      "id": "rfi_12_alias_gap",
+      "proof_boundary": "No summed alias bound follows yet.",
+      "readiness": "certified",
+      "role": "noncentral_aliases"
+    },
+    {
+      "certificate": "PV integral_R I_A(r)e(sr)dr=omega_B(s)A(s)e(alpha_Plog s).",
+      "claim": "Full-line Fourier inversion returns the compact physical amplitude.",
+      "id": "rfi_13_inversion",
+      "proof_boundary": "Endpoint values carry Dirichlet half weights.",
+      "readiness": "certified",
+      "role": "carrier_inversion"
+    },
+    {
+      "certificate": "omega_B(s)=1 for 1<s<B, 1/2 for s=1 or B, and 0 outside [1,B].",
+      "claim": "The returned carrier weights match the starred primal Poisson convention.",
+      "id": "rfi_14_weights",
+      "proof_boundary": "The hard endpoint halves remain outside the starred carrier.",
+      "readiness": "certified",
+      "role": "carrier_inversion"
+    },
+    {
+      "certificate": "E_q^ext[A]=PV integral_(R setminus [a_q,b_q])I_A(r)e(qr)dr, so B_(q,q)=omega_B(q)A(q)e(alpha_Plog q)-E_q^ext[A].",
+      "claim": "Truncating the diagonal inverse transform creates exactly one two-sided exterior tail.",
+      "id": "rfi_15_exterior",
+      "proof_boundary": "At q=1,B the exterior is principal-value and cannot be split absolutely.",
+      "readiness": "certified",
+      "role": "finite_cell_defect"
+    },
+    {
+      "certificate": "S_q[A]-omega_B(q)A(q)e(alpha_Plog q)=tau_q[A]+sum_(s!=q)B_(q,s)[A]-E_q^ext[A], with symmetric dual limits.",
+      "claim": "The complete finite-cell defect has exactly tie, alias, and exterior components.",
+      "id": "rfi_16_cell_defect",
+      "proof_boundary": "No component is bounded here.",
+      "readiness": "certified",
+      "role": "finite_cell_defect"
+    },
+    {
+      "certificate": "The cells 1<=q<=B tile the continuous reciprocal band (alpha_P/(B+1/2),2alpha_P] and its integer modes. For alpha_-<=alpha_P<=alpha_+, every such mode lies in the fixed roster T={m,...,n}, m=max(1,floor(alpha_-/(2B))) and n=ceil(2alpha_+).",
+      "claim": "Physical reciprocal cells tile one continuous outer-frequency band.",
+      "id": "rfi_17_tile",
+      "proof_boundary": "Nonphysical roster fringes remain outside this band.",
+      "readiness": "certified",
+      "role": "physical_band"
+    },
+    {
+      "certificate": "Internal tie terms cancel because a_q=b_(q+1); only the two outer reciprocal-band half terms remain.",
+      "claim": "All internal half-integer tie corrections cancel in the physical q family.",
+      "id": "rfi_18_telescope",
+      "proof_boundary": "The two outer band corrections remain.",
+      "readiness": "certified",
+      "role": "physical_band"
+    },
+    {
+      "certificate": "sum_(q=1)^B S_q[A]=tau_band[A]+sum_(s=1)^B omega_B(s)A(s)e(alpha_Plog s)-sum_(s in Z)^sym E_s^band[A], where E_s^band is the Fourier-inversion exterior of [alpha_P/(B+1/2),2alpha_P]. All internal cell aliases and cellwise exterior tails recompose exactly; the only reciprocal-frequency boundary is the two-sided exterior of the complete physical band.",
+      "claim": "Cell aliases and cellwise exterior tails recompose to one global two-sided exterior package.",
+      "id": "rfi_19_global",
+      "proof_boundary": "The global exterior package has not been estimated.",
+      "readiness": "certified",
+      "role": "global_recomposition"
+    },
+    {
+      "certificate": "If M_A=sum_(r in Z)^sym I_A(r) is the complete mode sum and C_band[A]=M_A-sum_(q=1)^B S_q[A], then sum_(s in Z)^sym E_s^band[A]=tau_band[A]+C_band[A].",
+      "claim": "The global exterior is exactly the complementary integer-mode package plus the two band ties.",
+      "id": "rfi_20_involution",
+      "proof_boundary": "A second scalar Poisson transform alone supplies no smallness.",
+      "readiness": "certified",
+      "role": "global_recomposition"
+    },
+    {
+      "certificate": "The full-line sequential transform is exact Fourier inversion, so it returns the starred physical carrier with no full-line remainder. The first-correction cancellation in Section 11.179 is its first local coefficient. Finite reciprocal cells differ only through explicit tie, alias, and exterior-tail terms.",
+      "claim": "There is no complete-line sequential stationary remainder.",
+      "id": "rfi_21_achievement",
+      "proof_boundary": "This does not make the finite reciprocal band exact by itself.",
+      "readiness": "certified",
+      "role": "reciprocal_handoff"
+    },
+    {
+      "certificate": "No uniform estimate is supplied for the noncentral aliases or the global reciprocal-band exterior. Endpoint jumps make the exterior Fourier inversion principal-value at q=1,B, so its two sides must not be bounded independently before endpoint composition. Recompose the global lower and upper reciprocal-frequency exterior with the nonphysical roster fringes, mathcal T, the hard endpoint halves, mathcal L+e_Bmathcal U, and the terminal recurrence. Then derive a signed bound for that two-sided package, using the alias derivative gap only after internal cell cancellation.",
+      "claim": "The signed global exterior/complement package must be composed and bounded.",
+      "id": "rfi_22_handoff",
+      "proof_boundary": "No alias, exterior-tail, endpoint-complete h2, or signed-flow bound is claimed.",
+      "readiness": "open",
+      "role": "open_bound"
+    },
+    {
+      "certificate": "Finite reciprocal-frequency exterior, nonphysical fringes, endpoint and terminal composition, quadratic residuals, and signed flow remain open.",
+      "claim": "The exact inversion is not promoted to the RH bridge.",
+      "id": "rfi_23_boundary",
+      "proof_boundary": "No h2, Xi, Lambda<=0, PF-infinity, RH, or prize theorem is claimed.",
+      "readiness": "guard_validated",
+      "role": "proof_boundary"
+    }
+  ],
+  "source_audit": {
+    "endpoint_composition": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_endpoint_composition_retention_gate.json",
+      "sha256": "378be6b1649a5a8ace90cb8b71baad383ba0f77fffdba84c3cc99fd2314f3cfc"
+    },
+    "finite_poisson": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_finite_poisson_transport_reduction.json",
+      "sha256": "6e55e1627f16ebf0080277397b96c097b2d124a6a26ce2e1671977a019697339"
+    },
+    "first_correction": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_ideal_cubic_reciprocal_first_correction_gate.json",
+      "sha256": "087876f56f7a7e212575a56711885835e2cfacca06a210ebc2b876495f52a8c5"
+    }
+  },
+  "status": "exact complete real-mode endpoint reassembly, half-open reciprocal-cell finite Poisson identity, carrier Fourier inversion, and global internal tie/alias recomposition complete; exterior-tail and signed-flow bounds open; no endpoint-complete h2, Xi, or RH theorem",
+  "symbolic_certificate": {
+    "audit": {
+      "exact_ties": 15,
+      "physical_tilings": 20,
+      "rational_cell_cases": 70,
+      "roster_containments": 20
+    },
+    "carrier_inversion": {
+      "cell_defect": "S_q[A]-omega_B(q)A(q)e(alpha_Plog q)=tau_q[A]+sum_(s!=q)B_(q,s)[A]-E_q^ext[A], with symmetric dual limits.",
+      "exterior_tail": "E_q^ext[A]=PV integral_(R setminus [a_q,b_q])I_A(r)e(qr)dr, so B_(q,q)=omega_B(q)A(q)e(alpha_Plog q)-E_q^ext[A].",
+      "full_inversion": "PV integral_R I_A(r)e(sr)dr=omega_B(s)A(s)e(alpha_Plog s).",
+      "weight": "omega_B(s)=1 for 1<s<B, 1/2 for s=1 or B, and 0 outside [1,B]."
+    },
+    "complete_mode": {
+      "fourier_transform": "F_A(u)=1_[1,B](u)A(u)e(alpha_Plog u), and I_A(r)=integral_1^B A(u)e(alpha_Plog u-ru)du=Fhat_A(r).",
+      "integer_recomposition": "For integer r and integer B, the endpoint phases reduce to 1 and e_B, so I_A(r)=U_A(r)+kappa c_A(y_1)-kappa e_Bc_A(y_B)+J_A(r).",
+      "off_lattice_recomposition": "For real r>0, I_A(r)=U_A(r)+kappa e(-r)c_A(y_1(r))-kappa e(alpha_Plog B-rB)c_A(y_B(r))+J_A(r)."
+    },
+    "finite_cell_poisson": {
+      "alias_gap": "On [a_q,b_q], alpha_P/r lies in [q-1/2,q+1/2]; hence |s-alpha_P/r|>=1/2 for every integer s!=q.",
+      "central_phase": "The s=q phase has r saddle alpha_P/q, value alpha_Plog q, and curvature q^2/alpha_P.",
+      "dual_integral": "B_(q,s)[A]=integral_(a_q)^(b_q)I_A(r)e(sr)dr.",
+      "identity": "S_q[A]:=sum_(r in C_q)I_A(r)=tau_q[A]+lim_(R->infinity)sum_(s=-R)^R B_(q,s)[A].",
+      "kernel": "B_(q,s)[A]=integral_1^B F_A(u)K_q(u-s)du, where K_q(x)=kappa[e(-a_qx)-e(-b_qx)]/x and K_q(0)=b_q-a_q.",
+      "tie_term": "tau_q[A]=(1/2)1_(b_q in Z)I_A(b_q)-(1/2)1_(a_q in Z)I_A(a_q)."
+    },
+    "global_recomposition": {
+      "band_identity": "sum_(q=1)^B S_q[A]=tau_band[A]+sum_(s=1)^B omega_B(s)A(s)e(alpha_Plog s)-sum_(s in Z)^sym E_s^band[A], where E_s^band is the Fourier-inversion exterior of [alpha_P/(B+1/2),2alpha_P].",
+      "complement_identity": "If M_A=sum_(r in Z)^sym I_A(r) is the complete mode sum and C_band[A]=M_A-sum_(q=1)^B S_q[A], then sum_(s in Z)^sym E_s^band[A]=tau_band[A]+C_band[A].",
+      "interpretation": "All internal cell aliases and cellwise exterior tails recompose exactly; the only reciprocal-frequency boundary is the two-sided exterior of the complete physical band.",
+      "tie_telescope": "Internal tie terms cancel because a_q=b_(q+1); only the two outer reciprocal-band half terms remain."
+    },
+    "reciprocal_cells": {
+      "adjacency": "b_(q+1)=a_q; the shared integer, when present, belongs to C_(q+1).",
+      "continuous_endpoints": "a_q=alpha_P/(q+1/2), b_q=alpha_P/(q-1/2), and C_q(alpha_P)={r in Z_(>0):a_q<r<=b_q}.",
+      "integer_bounds": "C_q(alpha_P)={floor(a_q)+1,...,floor(b_q)}.",
+      "physical_tiling": "The cells 1<=q<=B tile the continuous reciprocal band (alpha_P/(B+1/2),2alpha_P] and its integer modes. For alpha_-<=alpha_P<=alpha_+, every such mode lies in the fixed roster T={m,...,n}, m=max(1,floor(alpha_-/(2B))) and n=ceil(2alpha_+)."
+    }
+  }
+}

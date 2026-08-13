@@ -1,0 +1,342 @@
+{
+  "counts": {
+    "bare_logarithmic_moments": 6,
+    "bounded_endpoint_functionals": 0,
+    "certified_transition_collars": 1,
+    "enumerated_transition_modes": 0,
+    "evaluated_full_physical_remainders": 0,
+    "explicit_outside_roster_tail_bounds": 6,
+    "explicit_tail_h2_scaling_bounds": 6,
+    "grouped_roster_bounds": 0,
+    "majorant_h2_separation_factors": 1,
+    "phi_b_bounds": 0,
+    "rows": 24,
+    "signed_flow_bounds": 0,
+    "termwise_absolute_transition_majorant_floors": 1
+  },
+  "date": "2026-08-02",
+  "exact": {
+    "domain": "Use q=1, L>=50, t=1/(2L^2), a^2=exp(L)+1/(32L^2), a=N+theta with 0<=theta<=1, B=N-M-1<a, h=1/a, and alpha=xi/(2pi) on T_0-epsilon<=xi<=T_0. Then alpha>a^2/2>22.",
+    "next_target": "Construct one grouped roster theorem that keeps the incomplete-Fresnel transition exact while summing its residuals with phase cancellation. Compose calB_j(B)-calB_j(1), the physical endpoint E_j, c_xi, transpose terms, and the terminal recurrence before inserting the six values into the eight observations.",
+    "proof_boundary": "This proves a fixed positive floor for the sum of one particular termwise absolute j=0 transition majorant, and explicit O(h^2) bounds for the six outside-roster integral tails. It does not lower-bound the true signed transition residual, bound either endpoint functional, include the physical observation/current coefficients, prove a grouped roster estimate, signed flow bound, Phi_B bound, contact exclusion, retained aggregate or Xi theorem, Q209, Lambda<=0, PF-infinity, RH, or a prize-level conclusion.",
+    "route_decision": "Keep the exact Morse-Fresnel chart, but retire summing its per-mode transition majorants by absolute values as a bare h^2-scale theorem. Group roster modes through Hermitian pairing, Poisson/Abel summation, or a smooth aggregate transform before absolute values. The outside-roster integral tail may be bounded absolutely because its six explicit bounds have h^2 scaling."
+  },
+  "geometry_certificate": {
+    "P": "2*((s - 1)*exp(s) + 1)/(1 - exp(s))**2",
+    "P_upper_identity": "2*(-s + sinh(s))*exp(s)",
+    "Q": "-(-2*((s - 1)*exp(s) + 1)*(exp(s) - 1)**2*exp(s) + (exp(s) - 1)**4)/(exp(s) - 1)**5",
+    "Q_floor": "16/25",
+    "Q_floor_numerator": "50*s*exp(2*s) - 16*exp(3*s) - 27*exp(2*s) + 52*exp(s) - 9",
+    "Q_floor_reserve": "8364091/29232000",
+    "Q_floor_tail_bound": "2187/81200000",
+    "coefficient_defect": "D_n=16*3^n-2^(n-1)(50n-54)-52 for n>=4; D_4=76 and D_(n+1)-2D_n=16*3^n-50*2^n+52>0",
+    "coordinate_parameter": "s=-log(v) on 0<v<=1"
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_aggregate_scaling_gate",
+  "proof_boundary": "This proves a fixed positive floor for the sum of one particular termwise absolute j=0 transition majorant, and explicit O(h^2) bounds for the six outside-roster integral tails. It does not lower-bound the true signed transition residual, bound either endpoint functional, include the physical observation/current coefficients, prove a grouped roster estimate, signed flow bound, Phi_B bound, contact exclusion, retained aggregate or Xi theorem, Q209, Lambda<=0, PF-infinity, RH, or a prize-level conclusion.",
+  "rows": [
+    {
+      "certificate": "Use q=1, L>=50, t=1/(2L^2), a^2=exp(L)+1/(32L^2), a=N+theta with 0<=theta<=1, B=N-M-1<a, h=1/a, and alpha=xi/(2pi) on T_0-epsilon<=xi<=T_0. Then alpha>a^2/2>22.",
+      "claim": "The scaling chart is the certified q=1 terminal-tail chart.",
+      "id": "mfas_01_domain",
+      "proof_boundary": "No aggregate sign follows.",
+      "readiness": "proved",
+      "role": "physical domain"
+    },
+    {
+      "certificate": "a=N+theta and B=N-M-1 with M>=1.",
+      "claim": "The bulk cutoff obeys B<a.",
+      "id": "mfas_02_cutoff",
+      "proof_boundary": "Only the inequality B<a is used.",
+      "readiness": "proved",
+      "role": "cutoff scale"
+    },
+    {
+      "certificate": "alpha=a^2-epsilon/(2pi)>a^2/2, so 1/alpha<2h^2. Also pi>3, hence 1/(4pi^2)<1/36.",
+      "claim": "The auxiliary alpha remains larger than a^2/2.",
+      "id": "mfas_03_alpha",
+      "proof_boundary": "No replacement alpha=a^2 is made.",
+      "readiness": "proved",
+      "role": "frequency scale"
+    },
+    {
+      "certificate": "P=2*((s - 1)*exp(s) + 1)/(1 - exp(s))**2; Q=-(-2*((s - 1)*exp(s) + 1)*(exp(s) - 1)**2*exp(s) + (exp(s) - 1)**4)/(exp(s) - 1)**5",
+      "claim": "The derivative geometry closes on P and Q.",
+      "id": "mfas_04_geometry",
+      "proof_boundary": "Lower endpoint collar only.",
+      "readiness": "proved",
+      "role": "Morse geometry"
+    },
+    {
+      "certificate": "2*(-s + sinh(s))*exp(s)",
+      "claim": "P is at most one on the lower collar.",
+      "id": "mfas_05_p_upper",
+      "proof_boundary": "Uses sinh(s)>=s.",
+      "readiness": "proved",
+      "role": "Jacobian upper"
+    },
+    {
+      "certificate": "-(-2*((s - 1)*exp(s) + 1)*(exp(s) - 1)**2*exp(s) + (exp(s) - 1)**4)/(exp(s) - 1)**5",
+      "claim": "Q=(P-P')/2 exactly.",
+      "id": "mfas_06_q_formula",
+      "proof_boundary": "Removable at s=0.",
+      "readiness": "proved",
+      "role": "Jacobian slope"
+    },
+    {
+      "certificate": "reserve=8364091/29232000; tail=2187/81200000",
+      "claim": "Q>=16/25 on 0<=s<=1/10.",
+      "id": "mfas_07_q_floor",
+      "proof_boundary": "Exact Taylor-tail certificate.",
+      "readiness": "proved",
+      "role": "rational geometry floor"
+    },
+    {
+      "certificate": "R_alpha={r integer: ceil(alpha*exp(-1/10))<=r<=floor(alpha)}; then u_0=alpha/r and 0<=log(u_0)<=1/10",
+      "claim": "A macroscopic lower-endpoint saddle collar lies in the fixed roster.",
+      "id": "mfas_08_collar",
+      "proof_boundary": "No modes are enumerated.",
+      "readiness": "proved",
+      "role": "transition collar"
+    },
+    {
+      "certificate": "P<=1, Q>=16/25, sigma<=201/400, and A_0(u)>=1-sigma log(u)>=3799/4000 on the collar",
+      "claim": "A_0 is uniformly positive on the collar.",
+      "id": "mfas_09_amplitude",
+      "proof_boundary": "Order zero only.",
+      "readiness": "proved",
+      "role": "amplitude floor"
+    },
+    {
+      "certificate": "partial_y b_(0,r)=(A_0(u)/r){Q(v)+P(v)[t log(u)/2-sigma]}, P=J^2/v, Q=J partial_v J",
+      "claim": "The transformed derivative has an explicit 1/r factor.",
+      "id": "mfas_10_b_derivative",
+      "proof_boundary": "Exact chain rule.",
+      "readiness": "proved",
+      "role": "transition derivative"
+    },
+    {
+      "certificate": "c_(0,r)(y_1)>=13/(100r), because c(y_1) is the average of partial_y b on [y_1,0]",
+      "claim": "Each collar mode contributes a positive c(y_1) floor.",
+      "id": "mfas_11_c_endpoint",
+      "proof_boundary": "Floor concerns the majorant, not Q itself.",
+      "readiness": "proved",
+      "role": "residual endpoint"
+    },
+    {
+      "certificate": "exp(-1/10)<10/11 and alpha>=22 imply #R_alpha>=alpha/22, hence sum_(r in R_alpha)1/r>=1/22",
+      "claim": "The collar harmonic mass is at least 1/22.",
+      "id": "mfas_12_mode_count",
+      "proof_boundary": "Floor/ceiling loss included.",
+      "readiness": "proved",
+      "role": "analytic mode count"
+    },
+    {
+      "certificate": ">91/96800",
+      "claim": "The summed j=0 termwise majorant has a fixed positive floor.",
+      "id": "mfas_13_majorant_floor",
+      "proof_boundary": "Not a true-residual lower bound.",
+      "readiness": "proved",
+      "role": "absolute aggregation guard"
+    },
+    {
+      "certificate": "At L>=50, a^2>2^50, so the sum of the j=0 termwise absolute transition majorants exceeds 10^12*h^2. This lower-bounds the chosen majorant, not the true signed residual.",
+      "claim": "That chosen majorant exceeds 10^12 h^2 at L>=50.",
+      "id": "mfas_14_h2_guard",
+      "proof_boundary": "Bare value-transform comparison only.",
+      "readiness": "proved",
+      "role": "scale separation"
+    },
+    {
+      "certificate": "For x=alpha/u, a_x=x-m+1>=alpha/(2u) and b_x=n+1-x>=alpha_+>=alpha.",
+      "claim": "Outside-roster distances grow with alpha/u.",
+      "id": "mfas_15_tail_coordinates",
+      "proof_boundary": "Uses the enlarged fixed roster.",
+      "readiness": "proved",
+      "role": "tail distances"
+    },
+    {
+      "certificate": "For k>=2 and q>=1, zeta(k,q)<=q^(-k)+q^(1-k)/(k-1)<=2q^(1-k).",
+      "claim": "All k>=2 outside sums have an elementary integral envelope.",
+      "id": "mfas_16_hurwitz",
+      "proof_boundary": "S_1 remains in the exact endpoint functional.",
+      "readiness": "proved",
+      "role": "Hurwitz compression"
+    },
+    {
+      "certificate": "Z_2<=6u/alpha, Z_3<=10u^2/alpha^2, Z_4<=18u^3/alpha^3.",
+      "claim": "Z_2,Z_3,Z_4 have explicit alpha powers.",
+      "id": "mfas_17_zeta",
+      "proof_boundary": "Uniform in u.",
+      "readiness": "proved",
+      "role": "zeta envelopes"
+    },
+    {
+      "certificate": "The outside-roster integral remainder is at most [4pi^2 alpha]^(-1) integral_0^(log B){6|(D^2-D)A_j|+30|DA_j|+74|A_j|}d lambda.",
+      "claim": "The integral tail reduces to three logarithmic amplitude norms.",
+      "id": "mfas_18_tail_reduction",
+      "proof_boundary": "Endpoint functional excluded.",
+      "readiness": "proved",
+      "role": "tail normal form"
+    },
+    {
+      "certificate": "On q=1, L>=50 and 0<=lambda<=log B<log a<L, g'=t lambda/2-sigma<=-49/100, so |A_j|<=lambda^j exp(-49lambda/100).",
+      "claim": "Every amplitude has a fixed exponential logarithmic envelope.",
+      "id": "mfas_19_decay",
+      "proof_boundary": "Physical q=1 chart.",
+      "readiness": "proved",
+      "role": "amplitude decay"
+    },
+    {
+      "certificate": "With |g'|<=51/100 and g''=t/2<=1/10000, |DA_j|<=[j lambda^(j-1)+(51/100)lambda^j]e^(-49lambda/100) and |(D^2-D)A_j|<=[j(j-1)lambda^(j-2)+(101j/50)lambda^(j-1)+(3851/5000)lambda^j]e^(-49lambda/100).",
+      "claim": "The two needed logarithmic derivatives have polynomial envelopes.",
+      "id": "mfas_20_derivatives",
+      "proof_boundary": "Constants are deliberately coarse.",
+      "readiness": "proved",
+      "role": "amplitude derivatives"
+    },
+    {
+      "certificate": "K_j=[6, 14, 55, 336, 2738, 27936]",
+      "claim": "All six outside-roster integral tails scale as h^2.",
+      "id": "mfas_21_constants",
+      "proof_boundary": "These bounds cover only the absolutely convergent integral remainder after calB_j(B)-calB_j(1) is extracted. The two endpoint functionals remain exact and unbounded here.",
+      "readiness": "proved",
+      "role": "six tail constants"
+    },
+    {
+      "certificate": "Keep the exact Morse-Fresnel chart, but retire summing its per-mode transition majorants by absolute values as a bare h^2-scale theorem. Group roster modes through Hermitian pairing, Poisson/Abel summation, or a smooth aggregate transform before absolute values. The outside-roster integral tail may be bounded absolutely because its six explicit bounds have h^2 scaling.",
+      "claim": "Absolute tail, grouped transition is the surviving architecture.",
+      "id": "mfas_22_route",
+      "proof_boundary": "Architectural theorem, not signed closure.",
+      "readiness": "proved",
+      "role": "route decision"
+    },
+    {
+      "certificate": "Construct one grouped roster theorem that keeps the incomplete-Fresnel transition exact while summing its residuals with phase cancellation. Compose calB_j(B)-calB_j(1), the physical endpoint E_j, c_xi, transpose terms, and the terminal recurrence before inserting the six values into the eight observations.",
+      "claim": "A grouped roster estimate is now the live scalar theorem.",
+      "id": "mfas_23_handoff",
+      "proof_boundary": "Endpoint and current coefficients remain.",
+      "readiness": "open",
+      "role": "next analytic target"
+    },
+    {
+      "certificate": "This proves a fixed positive floor for the sum of one particular termwise absolute j=0 transition majorant, and explicit O(h^2) bounds for the six outside-roster integral tails. It does not lower-bound the true signed transition residual, bound either endpoint functional, include the physical observation/current coefficients, prove a grouped roster estimate, signed flow bound, Phi_B bound, contact exclusion, retained aggregate or Xi theorem, Q209, Lambda<=0, PF-infinity, RH, or a prize-level conclusion.",
+      "claim": "The scaling gate is not a signed-flow theorem.",
+      "id": "mfas_24_boundary",
+      "proof_boundary": "This is not a proof of RH.",
+      "readiness": "proved",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "growing_terminal_prefix": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_growing_prefix_finite_height_gate.json",
+      "sha256": "6c94a1749bde59c8f62ea0b8ad08803c2150ec71abcd40d3f2dc983cf0b51611"
+    },
+    "morse_fresnel_endpoint": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_endpoint_reduction.json",
+      "sha256": "a0a2a9d98db6648a6c4fe720062c05e3cfdd28084730ee06791074a5902f3764"
+    },
+    "physical_q1": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_q1_saddle_phase_variance_reduction.json",
+      "sha256": "2eebbbac71106d6248ac9261316ea5ed2466e78e2b93565044a4d8d80e9a331e"
+    }
+  },
+  "status": "termwise absolute transition aggregation retired at bare h^2 scale; six outside-roster integral tails proved O(h^2); grouped roster theorem open",
+  "tail_certificate": {
+    "K_j": [
+      6,
+      14,
+      55,
+      336,
+      2738,
+      27936
+    ],
+    "alpha_to_h2": "alpha=a^2-epsilon/(2pi)>a^2/2, so 1/alpha<2h^2. Also pi>3, hence 1/(4pi^2)<1/36.",
+    "amplitude_decay": "On q=1, L>=50 and 0<=lambda<=log B<log a<L, g'=t lambda/2-sigma<=-49/100, so |A_j|<=lambda^j exp(-49lambda/100).",
+    "constants": [
+      {
+        "C_j": "234803/1225",
+        "C_j_decimal": "191.675918367347",
+        "D2_minus_D_integral_bound": "3851/2450",
+        "D_integral_bound": "51/49",
+        "K_j_ceiling": 6,
+        "j": 0,
+        "outside_roster_integral_tail_bound": "<6/alpha<=12*h^2",
+        "value_integral_bound": "100/49"
+      },
+      {
+        "C_j": "1145600/2401",
+        "C_j_decimal": "477.134527280300",
+        "D2_minus_D_integral_bound": "17600/2401",
+        "D_integral_bound": "10000/2401",
+        "K_j_ceiling": 14,
+        "j": 1,
+        "outside_roster_integral_tail_bound": "<14/alpha<=28*h^2",
+        "value_integral_bound": "10000/2401"
+      },
+      {
+        "C_j": "232001200/117649",
+        "C_j_decimal": "1971.977662368571",
+        "D2_minus_D_integral_bound": "4000200/117649",
+        "D_integral_bound": "2000000/117649",
+        "K_j_ceiling": 55,
+        "j": 2,
+        "outside_roster_integral_tail_bound": "<55/alpha<=110*h^2",
+        "value_integral_bound": "2000000/117649"
+      },
+      {
+        "C_j": "69600360000/5764801",
+        "C_j_decimal": "12073.332626746353",
+        "D2_minus_D_integral_bound": "1200060000/5764801",
+        "D_integral_bound": "600000000/5764801",
+        "K_j_ceiling": 336,
+        "j": 3,
+        "outside_roster_integral_tail_bound": "<336/alpha<=672*h^2",
+        "value_integral_bound": "600000000/5764801"
+      },
+      {
+        "C_j": "27840144000000/282475249",
+        "C_j_decimal": "98557.817361194713",
+        "D2_minus_D_integral_bound": "480024000000/282475249",
+        "D_integral_bound": "240000000000/282475249",
+        "K_j_ceiling": 2738,
+        "j": 4,
+        "outside_roster_integral_tail_bound": "<2738/alpha<=5476*h^2",
+        "value_integral_bound": "240000000000/282475249"
+      },
+      {
+        "C_j": "13920072000000000/13841287201",
+        "C_j_decimal": "1005692.013889741967",
+        "D2_minus_D_integral_bound": "240012000000000/13841287201",
+        "D_integral_bound": "120000000000000/13841287201",
+        "K_j_ceiling": 27936,
+        "j": 5,
+        "outside_roster_integral_tail_bound": "<27936/alpha<=55872*h^2",
+        "value_integral_bound": "120000000000000/13841287201"
+      }
+    ],
+    "derivative_bounds": "With |g'|<=51/100 and g''=t/2<=1/10000, |DA_j|<=[j lambda^(j-1)+(51/100)lambda^j]e^(-49lambda/100) and |(D^2-D)A_j|<=[j(j-1)lambda^(j-2)+(101j/50)lambda^(j-1)+(3851/5000)lambda^j]e^(-49lambda/100).",
+    "endpoint_boundary": "These bounds cover only the absolutely convergent integral remainder after calB_j(B)-calB_j(1) is extracted. The two endpoint functionals remain exact and unbounded here.",
+    "hurwitz_lemma": "For k>=2 and q>=1, zeta(k,q)<=q^(-k)+q^(1-k)/(k-1)<=2q^(1-k).",
+    "moment_integral": "integral_0^infinity lambda^k exp(-49lambda/100)d lambda=k!(100/49)^(k+1).",
+    "roster_distances": "For x=alpha/u, a_x=x-m+1>=alpha/(2u) and b_x=n+1-x>=alpha_+>=alpha.",
+    "tail_reduction": "The outside-roster integral remainder is at most [4pi^2 alpha]^(-1) integral_0^(log B){6|(D^2-D)A_j|+30|DA_j|+74|A_j|}d lambda.",
+    "zeta_envelopes": "Z_2<=6u/alpha, Z_3<=10u^2/alpha^2, Z_4<=18u^3/alpha^3."
+  },
+  "transition_certificate": {
+    "amplitude_floor": "3799/4000",
+    "b_derivative": "partial_y b_(0,r)=(A_0(u)/r){Q(v)+P(v)[t log(u)/2-sigma]}, P=J^2/v, Q=J partial_v J",
+    "bracket_floor": "11/80",
+    "collar": "R_alpha={r integer: ceil(alpha*exp(-1/10))<=r<=floor(alpha)}; then u_0=alpha/r and 0<=log(u_0)<=1/10",
+    "derivative_floor": "13/100",
+    "derivative_floor_exact": "41789/320000",
+    "endpoint_c_floor": "c_(0,r)(y_1)>=13/(100r), because c(y_1) is the average of partial_y b on [y_1,0]",
+    "h2_ratio_floor": "3201777860083712/3025",
+    "h2_ratio_statement": "At L>=50, a^2>2^50, so the sum of the j=0 termwise absolute transition majorants exceeds 10^12*h^2. This lower-bounds the chosen majorant, not the true signed residual.",
+    "harmonic_floor": "1/22",
+    "mode_count": "exp(-1/10)<10/11 and alpha>=22 imply #R_alpha>=alpha/22, hence sum_(r in R_alpha)1/r>=1/22",
+    "physical_bounds": "P<=1, Q>=16/25, sigma<=201/400, and A_0(u)>=1-sigma log(u)>=3799/4000 on the collar",
+    "termwise_majorant_floor": "91/96800"
+  }
+}

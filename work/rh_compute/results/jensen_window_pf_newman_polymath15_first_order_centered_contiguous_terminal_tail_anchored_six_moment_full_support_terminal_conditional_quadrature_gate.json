@@ -1,0 +1,314 @@
+{
+  "counts": {
+    "bulk_terminal_kernel_decompositions": 1,
+    "complete_outer_complement_bounds": 0,
+    "complex_recurrence_relations": 1,
+    "endpoint_carrier_half_audits": 1,
+    "endpoint_carrier_halves": 2,
+    "local_terminal_derivative_bounds": 2,
+    "phi_b_bounds": 0,
+    "physical_carrier_source_expansions": 1,
+    "physical_terminal_quadrature_sign_witnesses": 2,
+    "quadratic_remainder_bounds": 0,
+    "quadrature_recurrence_defects": 1,
+    "row_relative_terminal_bounds": 2,
+    "rows": 28,
+    "signed_bulk_terminal_bounds": 0,
+    "signed_full_current_bounds": 0,
+    "terminal_quadrature_identities": 1,
+    "terminal_s1_geometry_bounds": 4,
+    "terminal_s1_integral_sandwiches": 1,
+    "terminal_s1_sample_checks": 456
+  },
+  "date": "2026-08-02",
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_terminal_conditional_quadrature_gate",
+  "proof_boundary": "This proves the exact all-carrier expansion of mathcal N_(p,xi), the two q=N derivative halves and their h-cubed scale, positivity and logarithmic growth of the terminal S_1 kernel, the conditional quadrature projection, a row-relative bulk-terminal reduction, and the complex terminal recurrence defect. It proves no signed bulk-terminal estimate, complete outer-complement or quadratic residual bound, signed full-current or Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Q209, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "certificate": "For u_q=log(a/q), R_q=s_*'u_q-cu_N and R_(q,x)=s_*''u_q-c_xu_N+ib u_(N,x). Then Q_q=(R_q+delta)C_q+D_q and mathcal N_q=R_qQ_q+R_(q,x)C_q.",
+      "claim": "The retained mathcal N carrier has an exact terminal-centered source row.",
+      "id": "tcq_01_rates",
+      "proof_boundary": "No row norm follows.",
+      "readiness": "proved",
+      "role": "source row"
+    },
+    {
+      "certificate": "With w_q=nu c_xi exp(S(log q))e(alpha_Plog q), mathcal N_(p,xi)=sum_(q=1)^N Re{-iu_q mathcal N_qw_q} after endpoint composition.",
+      "claim": "The complete retained frequency derivative is one full carrier sum.",
+      "id": "tcq_02_lift",
+      "proof_boundary": "The sum is not signed.",
+      "readiness": "proved",
+      "role": "frequency lift"
+    },
+    {
+      "certificate": "Before endpoint composition the reciprocal return and hard endpoint each contribute one half of Re{-iu_Nmathcal N_Nw_N}; together they give the full q=N atom exactly once.",
+      "claim": "The returned and hard q=N halves reassemble one atom.",
+      "id": "tcq_03_halves",
+      "proof_boundary": "No endpoint is counted twice.",
+      "readiness": "proved",
+      "role": "endpoint accounting"
+    },
+    {
+      "certificate": "The full q=N lifted mathcal N atom is smaller than (17/5)h^3|w_N|; each reciprocal/hard half is smaller than (17/10)h^3|w_N|.",
+      "claim": "The full local q=N lifted mathcal N atom is h-cubed scale relative to its source amplitude.",
+      "id": "tcq_04_local_bound",
+      "proof_boundary": "This does not bound the bulk row.",
+      "readiness": "proved",
+      "role": "terminal atom"
+    },
+    {
+      "certificate": "The full q=N lifted mathcal N atom is smaller than (17/5)h^3|w_N|; each reciprocal/hard half is smaller than (17/10)h^3|w_N|.",
+      "claim": "Each q=N half has half the local h-cubed envelope.",
+      "id": "tcq_05_half_bound",
+      "proof_boundary": "The two halves must remain joined.",
+      "readiness": "proved",
+      "role": "terminal halves"
+    },
+    {
+      "certificate": "For x_N=alpha_P/N, a_*=x_N-floor(alpha_P/(N+1/2)) and b_*=floor(2alpha_P)+1-x_N satisfy 1/4<a_*<2 and b_*>alpha_P(2-1/N)>a_*.",
+      "claim": "The terminal Hurwitz arguments are ordered and pole-free.",
+      "id": "tcq_06_geometry",
+      "proof_boundary": "This is not a signed source estimate.",
+      "readiness": "proved",
+      "role": "kernel geometry"
+    },
+    {
+      "certificate": "log(b_*/a_*)<S_(1,N)<log(b_*/a_*)+a_*^(-1)-b_*^(-1).",
+      "claim": "The terminal conditional kernel has a sharp elementary integral sandwich.",
+      "id": "tcq_07_integral",
+      "proof_boundary": "No physical coefficient is bounded.",
+      "readiness": "proved",
+      "role": "digamma sandwich"
+    },
+    {
+      "certificate": "log(((N^2-1)(2-1/N))/2)<S_(1,N)<log(8(N+1)^2+4)+4.",
+      "claim": "The terminal conditional kernel grows logarithmically.",
+      "id": "tcq_08_growth",
+      "proof_boundary": "It must not be treated as O(1).",
+      "readiness": "proved",
+      "role": "kernel scale"
+    },
+    {
+      "certificate": "The terminal S_1 kernel is positive and logarithmic in N; it is not an O(1) or O(h) factor.",
+      "claim": "Endpoint centering does not suppress S_(1,N).",
+      "id": "tcq_09_meaning",
+      "proof_boundary": "Only its row coefficient was reduced in Section 11.183.",
+      "readiness": "guard_validated",
+      "role": "scale guard"
+    },
+    {
+      "certificate": "If S_(1,N)=S_1^[N](alpha_P/N), the terminal conditional linear trace is L_(N,1)=[S_(1,N)/(2pi)]Im{w_NP_lin^[N](log N)}.",
+      "claim": "The exact terminal S_1 trace is a quadrature projection.",
+      "id": "tcq_10_exact_trace",
+      "proof_boundary": "The factor 1/(2pi) is Fourier normalization.",
+      "readiness": "proved",
+      "role": "conditional trace"
+    },
+    {
+      "certificate": "L_(N,1)=[S_(1,N)/(2pi)]mathcal N_(p,xi)Im(w_N)+E_row.",
+      "claim": "The unique order-one row produces one real rank-one boundary correlation.",
+      "id": "tcq_11_leading",
+      "proof_boundary": "Its sign is open.",
+      "readiness": "proved",
+      "role": "rank-one kernel"
+    },
+    {
+      "certificate": "|E_row|<[S_(1,N)/(2pi)]h|w_N|{(8/5)R_alpha+(16/5)R_beta}.",
+      "claim": "Every nonleading terminal row is explicitly h-suppressed relative to the two retained row norms.",
+      "id": "tcq_12_row_error",
+      "proof_boundary": "Neither row norm is assigned a numerical size.",
+      "readiness": "proved",
+      "role": "row remainder"
+    },
+    {
+      "certificate": "With R_beta the l1 norm of beta_N, |P_lin^[N](log N)-mathcal N_(p,xi)|<(8/5)hR_alpha+(16/5)hR_beta.",
+      "claim": "The complete beta row remains in the terminal remainder.",
+      "id": "tcq_13_beta",
+      "proof_boundary": "The genuine edge is not deleted.",
+      "readiness": "proved",
+      "role": "beta row"
+    },
+    {
+      "certificate": "Writing mathcal N_(<N,xi)=sum_(q<N)Re{-iu_qmathcal N_qw_q}, L_(N,1)=[S_(1,N)/(2pi)]Im(w_N)mathcal N_(<N,xi)+E_term.",
+      "claim": "The local terminal derivative atom separates from the q<N source.",
+      "id": "tcq_14_bulk_split",
+      "proof_boundary": "The q<N sum remains global.",
+      "readiness": "proved",
+      "role": "source decomposition"
+    },
+    {
+      "certificate": "|E_term|<[S_(1,N)/(2pi)]{h|w_N|[(8/5)R_alpha+(16/5)R_beta]+(17/5)h^3|w_N|^2}.",
+      "claim": "The local atom and row-collapse errors have one explicit joined envelope.",
+      "id": "tcq_15_bulk_error",
+      "proof_boundary": "This is row-relative, not an h-squared theorem.",
+      "readiness": "proved",
+      "role": "joined remainder"
+    },
+    {
+      "certificate": "For Q_RS(p), r(p), and R(p) of Section 11.154, Q_RS(p)r(p)^m=(-1)^m conjugate(R(p-2m-2)).",
+      "claim": "The terminal carrier phase is the conjugate recurrence phase.",
+      "id": "tcq_16_complex_relation",
+      "proof_boundary": "Equality of real traces is not complex equality.",
+      "readiness": "proved",
+      "role": "terminal phase"
+    },
+    {
+      "certificate": "C_0(p)-Q_RS(p)sum_(m=0)^M r(p)^m=(-1)^(M+1)C_0(p-2M-2)+2i sum_(m=0)^M(-1)^m Im R(p-2m-2).",
+      "claim": "Complex recurrence composition leaves an explicit imaginary defect.",
+      "id": "tcq_17_recurrence_defect",
+      "proof_boundary": "The defect is not bounded here.",
+      "readiness": "proved",
+      "role": "quadrature recurrence"
+    },
+    {
+      "certificate": "At p=0 and M=0 the explicit quadrature-defect summand is 2i sin(3pi/8), so it is nonzero.",
+      "claim": "The recurrence quadrature defect is not identically zero.",
+      "id": "tcq_18_midpoint",
+      "proof_boundary": "This is not an Xi counterexample.",
+      "readiness": "proved",
+      "role": "nonzero witness"
+    },
+    {
+      "certificate": "The known recurrence telescopes the real terminal trace, whereas the conditional S_1 boundary kernel sees the imaginary quadrature because kappa=-i/(2pi).",
+      "claim": "The established real recurrence cannot cancel the conditional quadrature by itself.",
+      "id": "tcq_19_consequence",
+      "proof_boundary": "A new quadrature estimate is required.",
+      "readiness": "guard_validated",
+      "role": "recurrence guard"
+    },
+    {
+      "certificate": "At the physical anchor, C_Nw_N=-Q_RS(p)exp(W_theta) and |exp(W_theta)/C_N-1|<9h.",
+      "claim": "The corrected physical terminal source remains close to its exact Riemann--Siegel phase.",
+      "id": "tcq_20_source",
+      "proof_boundary": "This controls only the terminal factor.",
+      "readiness": "proved",
+      "role": "terminal anchor"
+    },
+    {
+      "certificate": "The terminal quadrature obeys Im w_N(p=0)>5/8 and Im w_N(p=1)<-1/4.",
+      "claim": "The physical terminal quadrature has both signs across the endpoint chart.",
+      "id": "tcq_21_signs",
+      "proof_boundary": "No sign of the full product follows.",
+      "readiness": "proved",
+      "role": "terminal sign guard"
+    },
+    {
+      "certificate": "The first unsuppressed boundary object is [S_(1,N)/(2pi)]Im(w_N)mathcal N_(<N,xi), not a local q=N cancellation.",
+      "claim": "The local-cancellation route reduces to a global bulk-terminal correlation.",
+      "id": "tcq_22_live",
+      "proof_boundary": "No signed bound is proved.",
+      "readiness": "proved",
+      "role": "live kernel"
+    },
+    {
+      "certificate": "Estimate this one-versus-many bulk-terminal correlation jointly with the remaining S_2/S_3 and interior outer terms, H_out, T_out, correction perturbation, and moved-tail defect.",
+      "claim": "Prove or falsify the joined source-specific bulk-terminal estimate.",
+      "id": "tcq_23_route",
+      "proof_boundary": "No componentwise budget is licensed.",
+      "readiness": "open",
+      "role": "route decision"
+    },
+    {
+      "certificate": "Transfer the complete mode and both endpoint halves before differentiating.",
+      "claim": "The q=N half audit retains the half-open reciprocal convention.",
+      "id": "tcq_24_ties",
+      "proof_boundary": "No complement-only derivative is used.",
+      "readiness": "guard_validated",
+      "role": "tie guard"
+    },
+    {
+      "certificate": "The rotation is forced by kappa=1/(2pi i).",
+      "claim": "The leading boundary kernel is an imaginary, not real, terminal projection.",
+      "id": "tcq_25_phase",
+      "proof_boundary": "Do not substitute the real recurrence trace.",
+      "readiness": "guard_validated",
+      "role": "phase guard"
+    },
+    {
+      "certificate": "Retain both phase families and their mixed S_2/S_3/interior pieces.",
+      "claim": "H_out and T_out remain outside this linear rank-one reduction.",
+      "id": "tcq_26_quadratic",
+      "proof_boundary": "No quadratic remainder is bounded.",
+      "readiness": "guard_validated",
+      "role": "quadratic guard"
+    },
+    {
+      "certificate": "The factor 1/(2pi) comes from the Fourier character, while Q_RS and R use the completed-zeta/Riemann--Siegel phase.",
+      "claim": "Every pi in the gate is inherited.",
+      "id": "tcq_27_pi",
+      "proof_boundary": "No geometric fitting is introduced.",
+      "readiness": "proved",
+      "role": "pi provenance"
+    },
+    {
+      "certificate": "No signed bulk-terminal estimate, complete outer bound, quadratic residual bound, retained-current theorem, Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is claimed.",
+      "claim": "This is a source and recurrence reduction, not a proof of RH.",
+      "id": "tcq_28_boundary",
+      "proof_boundary": "This is not a proof of RH.",
+      "readiness": "guard_validated",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "full_support": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_ideal_cubic_reciprocal_terminal_full_support_homotopy_gate.json",
+      "sha256": "24a7caf7787b5b0764a4a60591dbf615957fc3799dc7f39e2c8d57331621e1d5"
+    },
+    "outer_endpoint": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_outer_endpoint_kernel_gate.json",
+      "sha256": "4cf510dcf472241ba45a5602a231c4cbe713af6c62924f9ff4e4108454f86df8"
+    },
+    "terminal_obstruction": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_terminal_endpoint_obstruction_gate.json",
+      "sha256": "3d2cab56be3454327b740aab4bf5bfa0fc2f0a5c371bff134036687e4ffefcf0"
+    },
+    "terminal_recurrence": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_recurrence_current_gate.json",
+      "sha256": "19408f15e7b3d1e2ed6bea7c35741a5031985446734efc4bd7e74fd1fe30c463"
+    },
+    "two_carrier": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_two_carrier_kernel_reduction.json",
+      "sha256": "0d9af778f6dfd6453b59375e42f225aad382788f7660d7a5bbae2aa3bff5496f"
+    }
+  },
+  "status": "terminal conditional quadrature and recurrence defect proved; signed bulk-terminal estimate open",
+  "symbolic_certificate": {
+    "audit": {
+      "terminal_s1_cases": 456
+    },
+    "bounds": {
+      "row_remainder": "With R_beta the l1 norm of beta_N, |P_lin^[N](log N)-mathcal N_(p,xi)|<(8/5)hR_alpha+(16/5)hR_beta.",
+      "terminal_atom": "The full q=N lifted mathcal N atom is smaller than (17/5)h^3|w_N|; each reciprocal/hard half is smaller than (17/10)h^3|w_N|.",
+      "terminal_signs": "The terminal quadrature obeys Im w_N(p=0)>5/8 and Im w_N(p=1)<-1/4.",
+      "terminal_source": "At the physical anchor, C_Nw_N=-Q_RS(p)exp(W_theta) and |exp(W_theta)/C_N-1|<9h."
+    },
+    "conditional_boundary": {
+      "bulk_error": "|E_term|<[S_(1,N)/(2pi)]{h|w_N|[(8/5)R_alpha+(16/5)R_beta]+(17/5)h^3|w_N|^2}.",
+      "bulk_split": "Writing mathcal N_(<N,xi)=sum_(q<N)Re{-iu_qmathcal N_qw_q}, L_(N,1)=[S_(1,N)/(2pi)]Im(w_N)mathcal N_(<N,xi)+E_term.",
+      "exact": "If S_(1,N)=S_1^[N](alpha_P/N), the terminal conditional linear trace is L_(N,1)=[S_(1,N)/(2pi)]Im{w_NP_lin^[N](log N)}.",
+      "leading": "L_(N,1)=[S_(1,N)/(2pi)]mathcal N_(p,xi)Im(w_N)+E_row.",
+      "row_error": "|E_row|<[S_(1,N)/(2pi)]h|w_N|{(8/5)R_alpha+(16/5)R_beta}."
+    },
+    "handoff": {
+      "live_kernel": "The first unsuppressed boundary object is [S_(1,N)/(2pi)]Im(w_N)mathcal N_(<N,xi), not a local q=N cancellation.",
+      "route": "Estimate this one-versus-many bulk-terminal correlation jointly with the remaining S_2/S_3 and interior outer terms, H_out, T_out, correction perturbation, and moved-tail defect."
+    },
+    "physical_carrier_row": {
+      "halves": "Before endpoint composition the reciprocal return and hard endpoint each contribute one half of Re{-iu_Nmathcal N_Nw_N}; together they give the full q=N atom exactly once.",
+      "lift": "With w_q=nu c_xi exp(S(log q))e(alpha_Plog q), mathcal N_(p,xi)=sum_(q=1)^N Re{-iu_q mathcal N_qw_q} after endpoint composition.",
+      "rates": "For u_q=log(a/q), R_q=s_*'u_q-cu_N and R_(q,x)=s_*''u_q-c_xu_N+ib u_(N,x). Then Q_q=(R_q+delta)C_q+D_q and mathcal N_q=R_qQ_q+R_(q,x)C_q."
+    },
+    "terminal_kernel": {
+      "geometry": "For x_N=alpha_P/N, a_*=x_N-floor(alpha_P/(N+1/2)) and b_*=floor(2alpha_P)+1-x_N satisfy 1/4<a_*<2 and b_*>alpha_P(2-1/N)>a_*.",
+      "growth": "log(((N^2-1)(2-1/N))/2)<S_(1,N)<log(8(N+1)^2+4)+4.",
+      "integral": "log(b_*/a_*)<S_(1,N)<log(b_*/a_*)+a_*^(-1)-b_*^(-1).",
+      "meaning": "The terminal S_1 kernel is positive and logarithmic in N; it is not an O(1) or O(h) factor."
+    },
+    "terminal_recurrence": {
+      "complex_relation": "For Q_RS(p), r(p), and R(p) of Section 11.154, Q_RS(p)r(p)^m=(-1)^m conjugate(R(p-2m-2)).",
+      "consequence": "The known recurrence telescopes the real terminal trace, whereas the conditional S_1 boundary kernel sees the imaginary quadrature because kappa=-i/(2pi).",
+      "defect": "C_0(p)-Q_RS(p)sum_(m=0)^M r(p)^m=(-1)^(M+1)C_0(p-2M-2)+2i sum_(m=0)^M(-1)^m Im R(p-2m-2).",
+      "midpoint": "At p=0 and M=0 the explicit quadrature-defect summand is 2i sin(3pi/8), so it is nonzero."
+    }
+  }
+}

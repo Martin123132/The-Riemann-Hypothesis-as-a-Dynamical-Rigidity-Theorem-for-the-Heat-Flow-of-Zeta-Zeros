@@ -1,0 +1,502 @@
+{
+  "kind": "jensen_window_pf_newman_c1_hardy_local_defect_obligation_ledger_gate",
+  "status": "exact_defect_reduction_with_componentwise_open_bounds",
+  "paper_audit": {
+    "arxiv_id": "2607.15310v1",
+    "abstract_url": "https://arxiv.org/abs/2607.15310",
+    "pdf_url": "https://arxiv.org/pdf/2607.15310",
+    "audited_locations": [
+      {
+        "pages": "22-23",
+        "equations": [
+          "64",
+          "67a",
+          "69"
+        ],
+        "finding": "The Euler-Maclaurin/Fourier reduction is exact through equation (69); the paper explicitly says estimation starts with its constituent integrals."
+      },
+      {
+        "pages": "23-25",
+        "equations": [
+          "71",
+          "72",
+          "74",
+          "75",
+          "76",
+          "77",
+          "78"
+        ],
+        "finding": "The saddle contour is replaced by a quadratic phase, the two vertical endpoint phases discard order-three-and-higher terms, and their quadratic exponentials are truncated after first order."
+      },
+      {
+        "pages": "25-26",
+        "equations": [
+          "79",
+          "80",
+          "81"
+        ],
+        "finding": "W1 combines exact digamma sums with endpoint/saddle corrections. Equation (81) is formally summed over all relevant n, while the paper uses the empirical cutoff P=3 in practice."
+      },
+      {
+        "pages": "28-30",
+        "equations": [
+          "89",
+          "93",
+          "94",
+          "96",
+          "97"
+        ],
+        "finding": "W2, W3 or W4, W5, and the endpoint half-sum complete the local reciprocity approximation."
+      },
+      {
+        "pages": "37-38",
+        "equations": [
+          "MGS step h",
+          "MGS step i"
+        ],
+        "finding": "The kernel is evaluated directly and the recurrence is iterated back to the progenitor."
+      },
+      {
+        "pages": "40-42",
+        "equations": [
+          "120",
+          "121",
+          "122",
+          "123"
+        ],
+        "finding": "Equation (120) defines each local defect as an exact finite-sum difference; equations (121)-(123) propagate those defects, but the paper leaves their higher-order maximum unbounded."
+      }
+    ],
+    "source_conclusion": "The missing theorem is not a single floating-point tolerance. It is a uniform bound for the exact local defect after analytic truncation, endpoint cutoff, hierarchy modelling, and numerical evaluation are all accounted for."
+  },
+  "source_audit": {
+    "repository": "https://github.com/dml2391/Hardy-function-fastcodes",
+    "upstream_commit": "2e16dac3206b707052c3ac4cacdf3d1a2325e636",
+    "path": "work/rh_compute/external/hardy_fastcode/resumable/zeta14cubicmult_resumable.f90",
+    "sha256": "0fb64f090c21b185f27edc1c9194254cf471e74bfd6af3b88cb7f0cb40ec0c3d",
+    "marker_lines": {
+      "ip=3": [
+        570
+      ],
+      "I have found ip~20 to be adequate.": [
+        2294
+      ],
+      "ignore psi(2,z) correction here, which is included in MAPLE version": [
+        2335
+      ],
+      "call erf(z,6,cr1)": [
+        2347,
+        2365
+      ],
+      "tol=1e-7": [
+        2314
+      ],
+      "do i=jbot,ip1": [
+        2407
+      ],
+      "do i=L(nit),L(nit)-ip1+1,-1": [
+        2468
+      ],
+      "ecor=0.0": [
+        2466
+      ],
+      "t5=t5+(SUM0+SUM1)": [
+        2499
+      ],
+      "qq=conjg(t1+t2+t4)+t3+t5": [
+        2508
+      ],
+      "call q(m,k,ip,qq)": [
+        2046
+      ],
+      "csum=c1*csum+qq": [
+        2047
+      ],
+      "if (abs(smalle).gt.0.001)": [
+        2202
+      ],
+      "csum=csum+exp(fn)/(denn+i*(rminorcor-i*rminorcor2))": [
+        2025
+      ]
+    },
+    "paper_to_fortran_map": [
+      {
+        "paper_component": "W1",
+        "paper_equation": "81",
+        "fortran_component": "t5",
+        "source_lines": [
+          2407,
+          2468,
+          2499
+        ],
+        "finding": "The two ip-truncated endpoint loops and digamma base are paper W1."
+      },
+      {
+        "paper_component": "W2",
+        "paper_equation": "89",
+        "fortran_component": "t2",
+        "source_lines": [
+          2347
+        ],
+        "finding": "The first six-term complex-erf correction is paper W2."
+      },
+      {
+        "paper_component": "W3_or_W4",
+        "paper_equation": "93_or_94",
+        "fortran_component": "t4",
+        "source_lines": [
+          2365
+        ],
+        "finding": "The sign-selected second complex-erf correction is paper W3 or W4."
+      },
+      {
+        "paper_component": "W5",
+        "paper_equation": "97",
+        "fortran_component": "t1",
+        "source_lines": [
+          2335
+        ],
+        "finding": "The non-saddle digamma difference is paper W5."
+      },
+      {
+        "paper_component": "endpoint_half_sum",
+        "paper_equation": "96",
+        "fortran_component": "t3",
+        "source_lines": [
+          2508
+        ],
+        "finding": "t3 is the exact half-sum before floating-point evaluation error."
+      },
+      {
+        "paper_component": "CW_assembly_and_recurrence",
+        "paper_equation": "120",
+        "fortran_component": "qq_and_csum",
+        "source_lines": [
+          2046,
+          2047,
+          2508
+        ],
+        "finding": "q assembles CW plus the endpoint term and mgausssum applies it once per level."
+      }
+    ],
+    "critical_findings": [
+      "The executable sets ip=3 while the q-routine comment says ip about 20 was found adequate.",
+      "The source explicitly omits a psi(2,z) correction present in a Maple version.",
+      "The source sets ecor=0 although the surrounding comment says the correction may be significant.",
+      "Complex erf is evaluated with six retained terms and saddle Newton iteration uses tol=1e-7."
+    ]
+  },
+  "error_components": [
+    {
+      "id": "eld_w1_saddle_phase",
+      "scope": "local_MGS",
+      "origin": "equations_72_to_74",
+      "remainder": "order-three-and-higher phase on the diagonal saddle contour",
+      "readiness": "open_analytic_bound",
+      "certificate": "A contour-domain majorant retaining every Phi_q term."
+    },
+    {
+      "id": "eld_w1_vertical_phase",
+      "scope": "local_MGS",
+      "origin": "equations_75_to_78",
+      "remainder": "discarded higher phase plus exponential Taylor remainder on both vertical legs",
+      "readiness": "open_analytic_bound",
+      "certificate": "Two explicit integral remainders with endpoint-uniform constants."
+    },
+    {
+      "id": "eld_w1_index_tail",
+      "scope": "local_MGS",
+      "origin": "equation_81_and_ip_3",
+      "remainder": "all lower and upper endpoint correction indices omitted beyond ip",
+      "readiness": "open_tail_bound",
+      "certificate": "A summable majorant uniform in Phi, L, and every admissible branch."
+    },
+    {
+      "id": "eld_w1_saddle_location",
+      "scope": "local_MGS",
+      "origin": "series_saddle_or_Newton_tol_1e_minus_7",
+      "remainder": "phase error induced by approximate saddle locations",
+      "readiness": "open_root_enclosure",
+      "certificate": "Interval root isolation and a residual-to-location theorem, including multiplicity separation."
+    },
+    {
+      "id": "eld_digamma_evaluation",
+      "scope": "local_MGS_numeric",
+      "origin": "PSI_truncated_series_and_asymptotic",
+      "remainder": "finite psi series, asymptotic tail, decimal constants, and pole distance",
+      "readiness": "open_special_function_enclosure",
+      "certificate": "Directed-rounding digamma balls on every source argument domain."
+    },
+    {
+      "id": "eld_complex_erf_evaluation",
+      "scope": "local_MGS_numeric",
+      "origin": "ERF_with_N_6",
+      "remainder": "piecewise six-term power, Taylor, or asymptotic approximation",
+      "readiness": "open_special_function_enclosure",
+      "certificate": "Region-by-region analytic remainder bounds and selector margins."
+    },
+    {
+      "id": "eld_other_W_analytic",
+      "scope": "local_MGS",
+      "origin": "W2_W3_W4_endpoint_approximations",
+      "remainder": "non-W1 endpoint contour linearization and sign-selected special case",
+      "readiness": "open_analytic_bound",
+      "certificate": "Explicit bounds for equations (84)-(94), not only W1."
+    },
+    {
+      "id": "eld_hierarchy_scheme",
+      "scope": "local_MGS_model",
+      "origin": "scheme_phifactors_and_smalle_0_001",
+      "remainder": "truncated transformed coefficients and order-raising decision",
+      "readiness": "open_model_remainder",
+      "certificate": "An exact transformed-level specification plus a tail bound beyond m1."
+    },
+    {
+      "id": "eld_kernel_model",
+      "scope": "local_MGS_model",
+      "origin": "finite_kernel_with_amplitude_denominator",
+      "remainder": "difference between the finite source kernel model and the exact transformed child quantity",
+      "readiness": "open_model_identity",
+      "certificate": "A formal level adapter proving what finite quantity the denominator-weighted kernel represents."
+    },
+    {
+      "id": "eld_roundoff_accumulation",
+      "scope": "local_MGS_numeric",
+      "origin": "quad_precision_straight_line_recurrence",
+      "remainder": "elementary, phase, summation, and recurrence roundoff",
+      "readiness": "feasible_interval_enclosure",
+      "certificate": "Directed-rounding complex balls with a recorded operation graph."
+    },
+    {
+      "id": "eld_hardy_representation",
+      "scope": "whole_Hardy_evaluator",
+      "origin": "hybrid_formula_truncation_EM_and_transition",
+      "remainder": "representation error outside the MGS local defect",
+      "readiness": "open_separate_bound",
+      "certificate": "Explicit Euler-Maclaurin, lower-cutoff, transition, and Riemann-Siegel-tail bounds."
+    },
+    {
+      "id": "eld_shared_multi_shift",
+      "scope": "whole_shifted_batch",
+      "origin": "central_hierarchy_reused_on_0_01_grid",
+      "remainder": "shift dependence suppressed by the shared hierarchy parameterization",
+      "readiness": "open_C6_or_piecewise_bound",
+      "certificate": "Differentiate a fixed branch through order six or enclose its analytic surrogate on a disk."
+    },
+    {
+      "id": "eld_transition_set",
+      "scope": "whole_shifted_batch",
+      "origin": "floor_round_sign_and_piecewise_special_function_selectors",
+      "remainder": "branch jumps or selector changes across the physical interval/disk",
+      "readiness": "mandatory_exclusion_or_partition",
+      "certificate": "Strict interval margins or an explicit partition with jump-mode vectors."
+    }
+  ],
+  "exact_defect_routes": {
+    "paper_level_defect": "epsilon_l=S_l-[a_l S_(l+1)+q_l], exactly as equation (120); both S terms are finite sums once a transformed-level adapter is fixed.",
+    "direct_defect_certificate": "Enclose the two finite level sums and the source recurrence term directly. This captures W1, W2-W5, coefficient-transform, and numerical defects without requiring their cancellations to be bounded separately.",
+    "exact_shell_bypass": "Directly evaluate one or more levels above the kernel and begin recurrence there. The skipped local defects vanish from the exact accumulation identity.",
+    "cost_guard": "No complexity claim is made until the physical chain roster records the direct-shell lengths. A shell is admissible only if its measured finite cost fits the bounded evaluator budget.",
+    "adapter_obligation": "The source's denominator-weighted kernel and raised-order coefficients must first be identified with a precise finite target; otherwise a direct defect could compare the wrong two quantities.",
+    "accumulation_fixture": {
+      "multipliers": [
+        {
+          "real": "2/3",
+          "imag": "1/3"
+        },
+        {
+          "real": "-1/5",
+          "imag": "2/5"
+        },
+        {
+          "real": "3/7",
+          "imag": "-1/7"
+        }
+      ],
+      "defects": [
+        {
+          "real": "1/11",
+          "imag": "-2/11"
+        },
+        {
+          "real": "3/13",
+          "imag": "1/13"
+        },
+        {
+          "real": "-1/17",
+          "imag": "4/17"
+        },
+        {
+          "real": "2/19",
+          "imag": "-3/19"
+        }
+      ],
+      "expanded_terms": [
+        {
+          "real": "1/11",
+          "imag": "-2/11"
+        },
+        {
+          "real": "5/39",
+          "imag": "5/39"
+        },
+        {
+          "real": "-8/255",
+          "imag": "-19/255"
+        },
+        {
+          "real": "1/95",
+          "imag": "53/1995"
+        }
+      ],
+      "recursive_root_error": {
+        "real": "45789/230945",
+        "imag": "-492533/4849845"
+      },
+      "expanded_root_error": {
+        "real": "45789/230945",
+        "imag": "-492533/4849845"
+      },
+      "direct_shell_level": 2,
+      "direct_shell_root_error": {
+        "real": "94/429",
+        "imag": "-23/429"
+      },
+      "identity": "e_k=epsilon_k+a_k*e_(k+1)",
+      "expanded_identity": "e_0=sum_(k=0)^r (prod_(j=0)^(k-1) a_j) epsilon_k",
+      "shell_identity": "If level m is evaluated directly, epsilon_m through epsilon_r are absent and e_0=sum_(k=0)^(m-1)(prod_(j=0)^(k-1)a_j)epsilon_k."
+    }
+  },
+  "derivative_handoff": {
+    "source_path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_modewise_derivative_handoff_gate.json",
+    "source_sha256": "82c5ac9f685d8a4bcf4405dd46421d95c31f836d33517330eae5c1fe6e593819",
+    "required_output": "A branch-stable bound for D_0,...,D_6 on [T-0.07,T+0.07], one holomorphic disk bound with radius greater than 0.07, or a transition-aware piecewise replacement."
+  },
+  "rows": [
+    {
+      "id": "held_01_source_pin",
+      "role": "source_audit",
+      "readiness": "source_pinned",
+      "claim": "The paper version, upstream commit, and local derivative hash are fixed.",
+      "proof_boundary": "Provenance only."
+    },
+    {
+      "id": "held_02_exact_until_69",
+      "role": "exact_reduction",
+      "readiness": "available_exact",
+      "claim": "The paper states that its reduction is exact through equation (69).",
+      "proof_boundary": "No later contour approximation is promoted."
+    },
+    {
+      "id": "held_03_w1_anatomy",
+      "role": "source_audit",
+      "readiness": "component_mapped",
+      "claim": "Equation (81) is split into saddle, vertical-leg, endpoint-index, root, and digamma obligations.",
+      "proof_boundary": "The component bounds remain open."
+    },
+    {
+      "id": "held_04_fortran_mapping",
+      "role": "source_audit",
+      "readiness": "component_mapped",
+      "claim": "Fortran t5,t2,t4,t1,t3 map to W1,W2,W3/4,W5, and the endpoint half-sum.",
+      "proof_boundary": "Variable-name mapping only."
+    },
+    {
+      "id": "held_05_cutoff_conflict",
+      "role": "nonpromotion_guard",
+      "readiness": "open_tail_bound",
+      "claim": "The executable fixes ip=3 although its q routine comments say ip about 20 was found adequate.",
+      "proof_boundary": "Neither empirical choice is a theorem."
+    },
+    {
+      "id": "held_06_special_functions",
+      "role": "nonpromotion_guard",
+      "readiness": "open_enclosures",
+      "claim": "Six-term complex-erf and truncated digamma routines require explicit remainder and selector margins.",
+      "proof_boundary": "Quad precision does not imply rigorous special-function accuracy."
+    },
+    {
+      "id": "held_07_scheme_kernel",
+      "role": "nonpromotion_guard",
+      "readiness": "open_adapter",
+      "claim": "Hierarchy truncation and the denominator-weighted kernel need a precise transformed-level target.",
+      "proof_boundary": "Direct summation is exact only after that target is fixed."
+    },
+    {
+      "id": "held_08_exact_defect",
+      "role": "exact_lemma",
+      "readiness": "available_exact",
+      "claim": "Equation (120) permits direct finite certification of each local recurrence defect.",
+      "proof_boundary": "No physical defect enclosure has yet been computed."
+    },
+    {
+      "id": "held_09_accumulation",
+      "role": "exact_lemma",
+      "readiness": "available_exact",
+      "claim": "Local defects propagate by an exact affine recurrence and weighted finite sum.",
+      "proof_boundary": "Useful only with certified local inputs."
+    },
+    {
+      "id": "held_10_exact_shell",
+      "role": "algorithmic_bypass",
+      "readiness": "available_conditional",
+      "claim": "Direct evaluation of a level above the kernel removes every skipped descendant defect from the accumulation.",
+      "proof_boundary": "Physical shell lengths and cost remain unmeasured."
+    },
+    {
+      "id": "held_11_termwise_route",
+      "role": "theorem_route",
+      "readiness": "open",
+      "claim": "One route bounds each W1 contour and index-tail remainder with explicit constants.",
+      "proof_boundary": "No such constants are supplied here."
+    },
+    {
+      "id": "held_12_real_C6_route",
+      "role": "theorem_route",
+      "readiness": "open",
+      "claim": "A fixed real branch can be differentiated and enclosed through order six.",
+      "proof_boundary": "All branch and selector margins must be strict."
+    },
+    {
+      "id": "held_13_disk_route",
+      "role": "theorem_route",
+      "readiness": "open",
+      "claim": "A holomorphic mathematical surrogate can be enclosed on a complex disk and transferred by Cauchy.",
+      "proof_boundary": "The raw source ABS/floor selectors are not themselves a holomorphic program."
+    },
+    {
+      "id": "held_14_representation_split",
+      "role": "scope_guard",
+      "readiness": "mandatory",
+      "claim": "MGS local defects and the outer Hardy representation remainder are separate budgets.",
+      "proof_boundary": "Closing one does not close the other."
+    },
+    {
+      "id": "held_15_next_experiment",
+      "role": "handoff",
+      "readiness": "ready_to_implement",
+      "claim": "Instrument one accepted low-height chain, record every level, and compare termwise W1 versus direct-defect versus exact-shell routes.",
+      "proof_boundary": "A low-height scout remains diagnostic until converted to uniform intervals."
+    },
+    {
+      "id": "held_16_physical_block",
+      "role": "nonpromotion_guard",
+      "readiness": "not_ready_to_apply",
+      "claim": "Physical kernel contraction remains blocked pending the external C6/disk or piecewise error theorem.",
+      "proof_boundary": "No physical carrier value, sign theorem, Lambda<=0, or RH conclusion follows."
+    }
+  ],
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_local_defect_obligation_ledger_gate.py",
+      "sha256": "3f214f51a6065f0e9b41049b1d5670f1204bb3cebf23414bd6e9534619ab3574"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_local_defect_obligation_ledger_gate.py",
+      "sha256": "ba964e11c2192371349a04a20fb893b29f64fa567fcccdc317e270850ad95e53"
+    }
+  },
+  "next_executable_target": "Add read-only chain telemetry to one accepted low-height fixture. For every level record L, m1, Phi, x, fracL, ip, q components, direct finite level values, and the exact local defect at increasing precision. Then test direct evaluation of the first parent shell. Do not alter the accepted evaluator output path during this scout.",
+  "proof_boundary": "This gate proves the paper-to-source component map, the exact affine defect accumulation identity, and the exact-shell bypass implication. It does not prove any W1 tail or contour bound, special-function enclosure, transformed-level adapter, evaluator C6 or disk theorem, transition exclusion, outer Hardy representation bound, physical carrier value, interval kernel approximation, determinant sign or bound, complete-current inequality, all-q transport, contact exclusion, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "success": "built Newman C1 Hardy local-defect obligation ledger gate: 16 rows, 6 paper-to-source mappings, 13 error components, 2 exact defect identities, 1 exact-shell bypass, 2 conditional derivative routes and 0 external error bounds"
+}

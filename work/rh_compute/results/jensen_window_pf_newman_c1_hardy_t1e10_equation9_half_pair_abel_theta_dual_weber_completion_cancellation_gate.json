@@ -1,0 +1,68 @@
+{
+  "decision": {
+    "Abel_completed_Weber_kernel_evaluated_exactly": true,
+    "common_Gaussian_tail_sum_bounded": false,
+    "complete_T_upper_proved": false,
+    "complete_modular_continuation_bounded": false,
+    "completed_B_minus_A_kernel_cancels_for_each_fixed_k_at_least_1": true,
+    "every_finite_matched_prefix_reduced_to_common_Gaussian_tails": true,
+    "exceptional_k_0_face_fold_term_cancelled": false,
+    "infinite_continuation_Abel_reindexing_justified": false,
+    "matched_endpoint_dual_domains_share_exact_Gaussian_interval": true,
+    "matched_endpoint_dual_phases_share_exact_Gaussian_coordinate": true,
+    "rh_implication": false,
+    "same_cutoff_reindexing_has_L_term_A_shift_defect": true,
+    "shift_defect_vanishing_proved": false,
+    "stationary_expansion_remainder_needed_for_completed_bulk": false
+  },
+  "dependencies": {
+    "continuation_partition": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_continuation_stationary_cancellation_gate.json",
+      "sha256": "d8b10606ff307730d24886345104c19a36246e3fb0b1cd0ad31dd1b12a1b69bb"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_weber_completion_cancellation_gate",
+  "next_obligation": "First prove that the L-term high-index A shift defect in WC9 vanishes in the original dual cutoff or Abel prescription, with a bound uniform enough to pass through the x,z integral. Only then form the all-k common Gaussian tail series, retain the x=0 endpoint grouping, and splice k=0 to the face/fold atlas.",
+  "passed": true,
+  "proof_boundary": "Exact Abel-Weber completion for each fixed matched k and exact finite-cutoff bookkeeping only. Infinite reindexing, shift-defect vanishing, the summed common-tail bound, k=0 fold splice, complete source-minus-target estimate, T_upper, Lambda<=0, PF-infinity, RH, and any prize-level conclusion remain open.",
+  "runtime": {
+    "elapsed_seconds": 0.39,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "B_roster_offset": 2481422,
+    "fixed_matched_continuation_labels": "every integer k>=1",
+    "height": 10000000000,
+    "lower_endpoint": 159577,
+    "matched_positive_continuation_pairs": 79788,
+    "upper_endpoint": 5122421
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_weber_completion_cancellation_gate.py",
+      "sha256": "105d0f4fe73fb9fb958ca5ffe7ce497d91c2bd975a60b32a9d392871f4592ad0"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_weber_completion_cancellation_gate.py",
+      "sha256": "a7916c783a0f49196f723595bb6f293c0150778d8e4ddb2b5008e633f3722a19"
+    }
+  },
+  "status": "each_fixed_matched_dual_continuation_Weber_bulk_cancels_exactly_finite_cutoff_shift_defect_open",
+  "symbolic_certificate": {
+    "Gaussian_amplitude": "J_D=4sqrt(x)p_D(u)^2[2+i*pi*D^2(x-p_D(u)^2)]/[D*p_D(u)^2+2nx]",
+    "Jacobian": "du_D/dp=D/2+nx/p^2>0",
+    "Weber_formula": "I0(a,b)=int_0^infinity exp(-a p^2-b/p^2)dp=sqrt(pi)exp(-2sqrt(ab))/(2sqrt(a))",
+    "Weber_second_moment": "I2=-partial_a I0=I0[1/(2a)+sqrt(b/a)]",
+    "common_tail_endpoint": "u_D(sqrt(x))=alpha*sqrt(x)/2",
+    "completed_kernel": "K_D^[0,infinity]=2*i*pi*alpha*x^(3/2)*exp(i*pi*alpha^2*x/4)",
+    "completed_pair_cancellation": "K_B^[0,infinity]-K_A^[0,infinity]=0 exactly at fixed alpha",
+    "exact_Gaussian_coordinate": "u_D=Dp/2-nx/p",
+    "exact_phase": "D^2*x/4+n^2*x-D^2*p^2/4-n^2*x^2/p^2=alpha^2*x/4-u_D^2",
+    "face_square_root": "p=sqrt(x-z), so z=x-p^2 and 0<p<sqrt(x)",
+    "finite_cutoff_identity": "sum_(n=0)^N(B_n-A_n)=sum_(n=0)^L B_n-A_0+sum_(k=1)^(N-L)(B_(L+k)-A_k)-sum_(k=N-L+1)^N A_k for N>L",
+    "matched_labels": "alpha=A-2k with n_B=L+k and n_A=k for every integer k>=1",
+    "shift_defect": "the final A block has exactly L terms and must be shown to vanish in the original cutoff/Abel prescription before N->infinity",
+    "truncated_pair_tail": "K_B^[0,sqrt(x)]-K_A^[0,sqrt(x)]=-e^(i*pi/4+i*pi*alpha^2*x/4)int_(alpha*sqrt(x)/2)^infinity (J_B-J_A)e^(-i*pi*u^2)du"
+  }
+}

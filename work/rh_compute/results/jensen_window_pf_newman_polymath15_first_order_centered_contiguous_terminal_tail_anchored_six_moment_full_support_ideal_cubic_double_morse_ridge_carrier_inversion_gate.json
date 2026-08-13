@@ -1,0 +1,304 @@
+{
+  "counts": {
+    "endpoint_weight_checks": 5,
+    "fiber_identities": 3,
+    "internal_tie_cancellations": 1,
+    "inversion_identities": 5,
+    "nonzero_exterior_witnesses": 1,
+    "phi_b_bounds": 0,
+    "ridge_decomposition_identities": 2,
+    "rows": 28,
+    "signed_ridge_completed_bounds": 0,
+    "witness_exact_checks": 5,
+    "witness_numerical_checks": 8
+  },
+  "date": "2026-08-03",
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_ideal_cubic_double_morse_ridge_carrier_inversion_gate",
+  "proof_boundary": "This proves the exact per-cell and global carrier coefficient, starred endpoint weights, hyperbolic ridge/residual/wings decomposition, and a nonzero-exterior witness. It proves no signed ridge-completed ideal join, exterior/complement bound, completed current, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "certificate": "Source hashes and parent counts are recorded.",
+      "claim": "The three parent gates are current.",
+      "id": "rci_01_sources",
+      "proof_boundary": "No parent bound is strengthened.",
+      "readiness": "proved",
+      "role": "source chain"
+    },
+    {
+      "certificate": "With Lambda_q^alias=sum_(s!=q)^sym B_(q,s), finite Poisson inversion gives S_q=tau_q+B_(q,q)+Lambda_q^alias and B_(q,q)=M_q-E_q^ext. Hence 2M_q-S_q=M_q-tau_q+E_q^ext-Lambda_q^alias.",
+      "claim": "Each finite cell is tie plus diagonal plus aliases.",
+      "id": "rci_02_cell_poisson",
+      "proof_boundary": "No alias bound is claimed.",
+      "readiness": "proved",
+      "role": "cell decomposition"
+    },
+    {
+      "certificate": "With Lambda_q^alias=sum_(s!=q)^sym B_(q,s), finite Poisson inversion gives S_q=tau_q+B_(q,q)+Lambda_q^alias and B_(q,q)=M_q-E_q^ext. Hence 2M_q-S_q=M_q-tau_q+E_q^ext-Lambda_q^alias.",
+      "claim": "The finite diagonal is carrier minus exterior.",
+      "id": "rci_03_diagonal",
+      "proof_boundary": "The exterior is retained.",
+      "readiness": "proved",
+      "role": "diagonal inversion"
+    },
+    {
+      "certificate": "With Lambda_q^alias=sum_(s!=q)^sym B_(q,s), finite Poisson inversion gives S_q=tau_q+B_(q,q)+Lambda_q^alias and B_(q,q)=M_q-E_q^ext. Hence 2M_q-S_q=M_q-tau_q+E_q^ext-Lambda_q^alias.",
+      "claim": "One carrier survives the local 2M-S join.",
+      "id": "rci_04_cell_join",
+      "proof_boundary": "Cellwise aliases remain conditionally ordered.",
+      "readiness": "proved",
+      "role": "per-cell join"
+    },
+    {
+      "certificate": "For the complete physical band, mathscr F_N=tau_band+mathscr M_N-E_band. Therefore 2mathscr M_N-mathscr F_N=mathscr M_N-tau_band+E_band: exactly one starred carrier remains.",
+      "claim": "Internal cells recompose before estimation.",
+      "id": "rci_05_band",
+      "proof_boundary": "No exterior smallness is inferred.",
+      "readiness": "proved",
+      "role": "global band"
+    },
+    {
+      "certificate": "Since mathscr D_N=mathscr F_N-mathscr M_N=tau_band-E_band, the same join is mathscr M_N-mathscr D_N. This is an identity, not an exterior-smallness estimate.",
+      "claim": "The global join is M-D.",
+      "id": "rci_06_defect",
+      "proof_boundary": "This is an involutive identity.",
+      "readiness": "proved",
+      "role": "defect coordinate"
+    },
+    {
+      "certificate": "For the complete physical band, mathscr F_N=tau_band+mathscr M_N-E_band. Therefore 2mathscr M_N-mathscr F_N=mathscr M_N-tau_band+E_band: exactly one starred carrier remains.",
+      "claim": "Exactly one starred carrier remains.",
+      "id": "rci_07_one_carrier",
+      "proof_boundary": "It is not two independent positive copies.",
+      "readiness": "proved",
+      "role": "carrier coefficient"
+    },
+    {
+      "certificate": "For every starred atom, 2omega_N(q)-omega_N(q)=omega_N(q). Thus the surviving carrier has the original endpoint half-weights, not a new unstarred normalization.",
+      "claim": "The surviving endpoint carriers retain half-weight.",
+      "id": "rci_08_star_weights",
+      "proof_boundary": "Hard endpoint halves remain separate.",
+      "readiness": "proved",
+      "role": "endpoint weights"
+    },
+    {
+      "certificate": "The internal lower/upper tie pair is -1/2+1/2=0. The global formula retains only tau_band at the two outer reciprocal boundaries.",
+      "claim": "Internal tie halves cancel globally.",
+      "id": "rci_09_ties",
+      "proof_boundary": "Outer tau_band remains.",
+      "readiness": "proved",
+      "role": "tie cancellation"
+    },
+    {
+      "certificate": "The ideal joins are J_H^0=mathscr M_N[P_H^0]-tau_band[P_H^0]+E_band[P_H^0] and J_T^0=mathscr M_N[P_T^0]-tau_band[P_T^0]+E_band[P_T^0]+2iu_N mathcal T_N^[N][B_(T,N)^0]. The transpose terminal block remains explicit.",
+      "claim": "The terminal survivor is not absorbed into inversion.",
+      "id": "rci_10_terminal",
+      "proof_boundary": "No terminal sign is claimed.",
+      "readiness": "proved",
+      "role": "transpose terminal"
+    },
+    {
+      "certificate": "The full diagonal rectangle a_q<=r<=b_q, 1<=u<=N maps to a curvilinear domain Omega_q in (s,d). Because eta+y_U(eta) is strictly increasing, every fixed-s fiber is an interval.",
+      "claim": "Fixed-s fibers are intervals.",
+      "id": "rci_11_domain",
+      "proof_boundary": "Curvilinear limits are preserved.",
+      "readiness": "proved",
+      "role": "hyperbolic domain"
+    },
+    {
+      "certificate": "The fibers meeting d=0 are indexed by S_q^Delta=[sqrt(2)eta_-,sqrt(2)eta_+]. On this interval their actual limits satisfy d_-(s)<=0<=d_+(s), including one-sided endpoint cases q=1,N.",
+      "claim": "The d=0 carrier line has an exact finite s-range.",
+      "id": "rci_12_diagonal_chart",
+      "proof_boundary": "Outer s-wings remain.",
+      "readiness": "proved",
+      "role": "diagonal subchart"
+    },
+    {
+      "certificate": "K_q(s)=integral_(d_-(s))^(d_+(s))e(sd)dd=kappa{e(sd_+)-e(sd_-)}/s for s!=0, with K_q(0)=d_+(0)-d_-(0).",
+      "claim": "The finite ridge coefficient is K_q(s), not one.",
+      "id": "rci_13_kernel",
+      "proof_boundary": "The s=0 chart uses its removable value.",
+      "readiness": "proved",
+      "role": "transverse kernel"
+    },
+    {
+      "certificate": "On S_q^Delta write G_q(s,d)=G_q(s,0)+dH_q(s,d). Define Z_q=e(alpha_Plog q)integral G_q(s,0)K_q(s)ds and V_q=e(alpha_Plog q)integral integral dH_q(s,d)e(sd)dd ds.",
+      "claim": "The trace is lifted across actual transverse fibers.",
+      "id": "rci_14_ridge_lift",
+      "proof_boundary": "A measure-zero line is not itself a two-dimensional summand.",
+      "readiness": "proved",
+      "role": "ridge lift"
+    },
+    {
+      "certificate": "On S_q^Delta write G_q(s,d)=G_q(s,0)+dH_q(s,d). Define Z_q=e(alpha_Plog q)integral G_q(s,0)K_q(s)ds and V_q=e(alpha_Plog q)integral integral dH_q(s,d)e(sd)dd ds.",
+      "claim": "The dH residual remains exact.",
+      "id": "rci_15_transverse",
+      "proof_boundary": "No residual bound is claimed.",
+      "readiness": "proved",
+      "role": "transverse residual"
+    },
+    {
+      "certificate": "Let W_q be the contribution of the remaining s-wings. Then B_(q,q)=Z_q+V_q+W_q and M_q=Z_q+V_q+W_q+E_q^ext.",
+      "claim": "The non-diagonal s-wings are retained.",
+      "id": "rci_16_wings",
+      "proof_boundary": "No wing bound is claimed.",
+      "readiness": "proved",
+      "role": "outer wings"
+    },
+    {
+      "certificate": "Let W_q be the contribution of the remaining s-wings. Then B_(q,q)=Z_q+V_q+W_q and M_q=Z_q+V_q+W_q+E_q^ext.",
+      "claim": "Ridge, transverse, and wings reconstruct B_(q,q).",
+      "id": "rci_17_ridge_sum",
+      "proof_boundary": "The exterior is not part of B_(q,q).",
+      "readiness": "proved",
+      "role": "finite diagonal split"
+    },
+    {
+      "certificate": "A direct identification Z_q=M_q is equivalent to the additional identity V_q+W_q+E_q^ext=0. Neither the hyperbolic chart nor finite Fourier inversion supplies that identity.",
+      "claim": "The carrier requires ridge, residual, wings, and exterior.",
+      "id": "rci_18_carrier_relation",
+      "proof_boundary": "No direct ridge equality is promoted.",
+      "readiness": "proved",
+      "role": "ridge/carrier relation"
+    },
+    {
+      "certificate": "Take alpha_P=2, q=2, B>=3, and the piecewise-BV test source F_A(u)=A(u)e(alpha_Plog u)=1_[3/2,5/2](u). Full inversion at the interior point u=2 returns M_2=1.",
+      "claim": "A compact piecewise-BV source tests the coefficient.",
+      "id": "rci_19_witness_source",
+      "proof_boundary": "The witness is nonphysical and rejects a coefficient-blind finite-diagonal-equals-carrier identity. It also shows that any ridge-equals-carrier claim needs a separate residual-plus-wings-plus-exterior cancellation; it does not disprove such a special physical cancellation or RH.",
+      "readiness": "guard_validated",
+      "role": "test source"
+    },
+    {
+      "certificate": "For this source I_A(r)e(2r)=integral_(-1/2)^(1/2)e(-rt)dt=sin(pi r)/(pi r).",
+      "claim": "The witness transform is normalized sinc.",
+      "id": "rci_20_witness_transform",
+      "proof_boundary": "The witness is nonphysical and rejects a coefficient-blind finite-diagonal-equals-carrier identity. It also shows that any ridge-equals-carrier claim needs a separate residual-plus-wings-plus-exterior cancellation; it does not disprove such a special physical cancellation or RH.",
+      "readiness": "proved",
+      "role": "exact transform"
+    },
+    {
+      "certificate": "The reciprocal cell is [a_2,b_2]=[4/5,4/3], of exact width 8/15, so B_(2,2)=integral_(4/5)^(4/3)sin(pi r)/(pi r)dr={Si(4pi/3)-Si(4pi/5)}/pi.",
+      "claim": "The witness cell has width 8/15.",
+      "id": "rci_21_witness_cell",
+      "proof_boundary": "The witness is nonphysical and rejects a coefficient-blind finite-diagonal-equals-carrier identity. It also shows that any ridge-equals-carrier claim needs a separate residual-plus-wings-plus-exterior cancellation; it does not disprove such a special physical cancellation or RH.",
+      "readiness": "proved",
+      "role": "finite cell"
+    },
+    {
+      "certificate": "Since |sin(pi r)/(pi r)|<=1, |B_(2,2)|<=8/15<1=M_2. Therefore |E_2^ext|=|M_2-B_(2,2)|>=7/15.",
+      "claim": "The finite diagonal cannot equal the carrier.",
+      "id": "rci_22_witness_bound",
+      "proof_boundary": "The witness is nonphysical and rejects a coefficient-blind finite-diagonal-equals-carrier identity. It also shows that any ridge-equals-carrier claim needs a separate residual-plus-wings-plus-exterior cancellation; it does not disprove such a special physical cancellation or RH.",
+      "readiness": "guard_validated",
+      "role": "finite-diagonal guard"
+    },
+    {
+      "certificate": "Since |sin(pi r)/(pi r)|<=1, |B_(2,2)|<=8/15<1=M_2. Therefore |E_2^ext|=|M_2-B_(2,2)|>=7/15.",
+      "claim": "The witness exterior has modulus at least 7/15.",
+      "id": "rci_23_exterior",
+      "proof_boundary": "The witness is nonphysical and rejects a coefficient-blind finite-diagonal-equals-carrier identity. It also shows that any ridge-equals-carrier claim needs a separate residual-plus-wings-plus-exterior cancellation; it does not disprove such a special physical cancellation or RH.",
+      "readiness": "guard_validated",
+      "role": "exterior necessity"
+    },
+    {
+      "certificate": "A direct identification Z_q=M_q is equivalent to the additional identity V_q+W_q+E_q^ext=0. Neither the hyperbolic chart nor finite Fourier inversion supplies that identity.",
+      "claim": "Local ridge matching is retired.",
+      "id": "rci_24_local_guard",
+      "proof_boundary": "Special physical cancellation is not ruled out.",
+      "readiness": "guard_validated",
+      "role": "route guard"
+    },
+    {
+      "certificate": "Before applying a 1/s modulus, pull E_band through the certified full-support exterior/complement identity and join its negative-, low-positive-, and high-positive-frequency pieces to the roster fringes, endpoint halves, and terminal recurrence. A useful estimate must act on that complete non-tautological package.",
+      "claim": "The global exterior is composed before a transverse modulus.",
+      "id": "rci_25_global_route",
+      "proof_boundary": "No signed ridge-completed ideal bound, exterior/complement bound, completed-current theorem, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+      "readiness": "guard_validated",
+      "role": "route decision"
+    },
+    {
+      "certificate": "Prove or rigorously obstruct a signed bound for the complete ideal Hermitian and transpose joins after this exterior composition. Only then return to the central and outer hyperbolic residuals and attach Delta_H, Delta_T.",
+      "claim": "Control the complete exterior/carrier package.",
+      "id": "rci_26_exterior_open",
+      "proof_boundary": "No signed ridge-completed ideal bound, exterior/complement bound, completed-current theorem, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+      "readiness": "open",
+      "role": "exterior composition"
+    },
+    {
+      "certificate": "Prove or rigorously obstruct a signed bound for the complete ideal Hermitian and transpose joins after this exterior composition. Only then return to the central and outer hyperbolic residuals and attach Delta_H, Delta_T.",
+      "claim": "Prove or obstruct the complete ideal sign.",
+      "id": "rci_27_signed_open",
+      "proof_boundary": "No signed ridge-completed ideal bound, exterior/complement bound, completed-current theorem, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+      "readiness": "open",
+      "role": "signed ideal join"
+    },
+    {
+      "certificate": "No signed ridge-completed ideal bound, exterior/complement bound, completed-current theorem, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+      "claim": "This gate is not a proof of RH.",
+      "id": "rci_28_boundary",
+      "proof_boundary": "No prize-level conclusion is claimed.",
+      "readiness": "guard_validated",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "finite_cell_inversion": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_ideal_cubic_reciprocal_finite_cell_inversion_gate.json",
+      "sha256": "52856581875a22fd16216f3282475bf2716fe8757d147dfb604ddac8ec14f5fd"
+    },
+    "hyperbolic_transport": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_ideal_cubic_double_morse_hyperbolic_transport_gate.json",
+      "sha256": "6ed47dd4091188f704ec0b7a9e9ea8e8d9dd1deaff035e4b3ed5b7e98a696eb3"
+    },
+    "joined_recombination": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_joined_lower_interior_abel_recombination_gate.json",
+      "sha256": "685078175aee3d9d32ffefb49cb596d8380bf31f2cb7d60a2739e4c1e38ff31b"
+    }
+  },
+  "status": "one-starred-carrier coefficient and finite-diagonal obstruction proved; complete signed ideal join open",
+  "symbolic_certificate": {
+    "endpoint": {
+      "endpoint_weight_checks": 5,
+      "internal_tie_cancellations": 1,
+      "ties": "The internal lower/upper tie pair is -1/2+1/2=0. The global formula retains only tau_band at the two outer reciprocal boundaries.",
+      "weights": "For every starred atom, 2omega_N(q)-omega_N(q)=omega_N(q). Thus the surviving carrier has the original endpoint half-weights, not a new unstarred normalization."
+    },
+    "fiber": {
+      "diagonal_chart": "The fibers meeting d=0 are indexed by S_q^Delta=[sqrt(2)eta_-,sqrt(2)eta_+]. On this interval their actual limits satisfy d_-(s)<=0<=d_+(s), including one-sided endpoint cases q=1,N.",
+      "domain": "The full diagonal rectangle a_q<=r<=b_q, 1<=u<=N maps to a curvilinear domain Omega_q in (s,d). Because eta+y_U(eta) is strictly increasing, every fixed-s fiber is an interval.",
+      "fiber_identities": 3,
+      "guard": "A direct identification Z_q=M_q is equivalent to the additional identity V_q+W_q+E_q^ext=0. Neither the hyperbolic chart nor finite Fourier inversion supplies that identity.",
+      "kernel": "K_q(s)=integral_(d_-(s))^(d_+(s))e(sd)dd=kappa{e(sd_+)-e(sd_-)}/s for s!=0, with K_q(0)=d_+(0)-d_-(0).",
+      "ridge_decomposition_identities": 2,
+      "ridge_lift": "On S_q^Delta write G_q(s,d)=G_q(s,0)+dH_q(s,d). Define Z_q=e(alpha_Plog q)integral G_q(s,0)K_q(s)ds and V_q=e(alpha_Plog q)integral integral dH_q(s,d)e(sd)dd ds.",
+      "wings": "Let W_q be the contribution of the remaining s-wings. Then B_(q,q)=Z_q+V_q+W_q and M_q=Z_q+V_q+W_q+E_q^ext."
+    },
+    "handoff": {
+      "decision": "Retire direct finite-ridge-to-carrier matching. The exact target is the one-carrier global package mathscr M_N-tau_band+E_band, with the transpose terminal survivor in its own channel.",
+      "obligation": "Prove or rigorously obstruct a signed bound for the complete ideal Hermitian and transpose joins after this exterior composition. Only then return to the central and outer hyperbolic residuals and attach Delta_H, Delta_T.",
+      "reserve": "No signed ridge-completed ideal bound, exterior/complement bound, completed-current theorem, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+      "route": "Before applying a 1/s modulus, pull E_band through the certified full-support exterior/complement identity and join its negative-, low-positive-, and high-positive-frequency pieces to the roster fringes, endpoint halves, and terminal recurrence. A useful estimate must act on that complete non-tautological package."
+    },
+    "inversion": {
+      "band": "For the complete physical band, mathscr F_N=tau_band+mathscr M_N-E_band. Therefore 2mathscr M_N-mathscr F_N=mathscr M_N-tau_band+E_band: exactly one starred carrier remains.",
+      "cell": "With Lambda_q^alias=sum_(s!=q)^sym B_(q,s), finite Poisson inversion gives S_q=tau_q+B_(q,q)+Lambda_q^alias and B_(q,q)=M_q-E_q^ext. Hence 2M_q-S_q=M_q-tau_q+E_q^ext-Lambda_q^alias.",
+      "defect": "Since mathscr D_N=mathscr F_N-mathscr M_N=tau_band-E_band, the same join is mathscr M_N-mathscr D_N. This is an identity, not an exterior-smallness estimate.",
+      "inversion_identities": 5,
+      "terminal": "The ideal joins are J_H^0=mathscr M_N[P_H^0]-tau_band[P_H^0]+E_band[P_H^0] and J_T^0=mathscr M_N[P_T^0]-tau_band[P_T^0]+E_band[P_T^0]+2iu_N mathcal T_N^[N][B_(T,N)^0]. The transpose terminal block remains explicit.",
+      "ties": "At an internal reciprocal boundary, the -I/2 lower correction of one cell and +I/2 upper correction of its neighbor cancel. Only the two outer band corrections remain in tau_band.",
+      "weights": "The surviving mathscr M_N keeps omega_N(1)=omega_N(N)=1/2 and omega_N(q)=1 internally. The endpoint halves are not promoted to full atoms."
+    },
+    "witness": {
+      "bound": "Since |sin(pi r)/(pi r)|<=1, |B_(2,2)|<=8/15<1=M_2. Therefore |E_2^ext|=|M_2-B_(2,2)|>=7/15.",
+      "cell": "The reciprocal cell is [a_2,b_2]=[4/5,4/3], of exact width 8/15, so B_(2,2)=integral_(4/5)^(4/3)sin(pi r)/(pi r)dr={Si(4pi/3)-Si(4pi/5)}/pi.",
+      "diagonal_value": "-0.019407578480917249745586237162",
+      "exterior_value": "1.01940757848091724974558623716",
+      "nonzero_exterior_witnesses": 1,
+      "scope": "The witness is nonphysical and rejects a coefficient-blind finite-diagonal-equals-carrier identity. It also shows that any ridge-equals-carrier claim needs a separate residual-plus-wings-plus-exterior cancellation; it does not disprove such a special physical cancellation or RH.",
+      "source": "Take alpha_P=2, q=2, B>=3, and the piecewise-BV test source F_A(u)=A(u)e(alpha_Plog u)=1_[3/2,5/2](u). Full inversion at the interior point u=2 returns M_2=1.",
+      "transform": "For this source I_A(r)e(2r)=integral_(-1/2)^(1/2)e(-rt)dt=sin(pi r)/(pi r).",
+      "witness_exact_checks": 5,
+      "witness_numerical_checks": 8
+    }
+  }
+}

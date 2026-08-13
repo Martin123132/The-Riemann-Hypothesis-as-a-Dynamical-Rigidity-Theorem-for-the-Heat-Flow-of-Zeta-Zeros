@@ -1,0 +1,95 @@
+{
+  "decision": {
+    "Volterra_operator_quantitatively_bounded": false,
+    "bare_endpoint_exponentials_separated": false,
+    "canonical_roster_transport_PDE_proved": true,
+    "complete_T_upper_proved": false,
+    "endpoint_driven_Volterra_solution_proved": true,
+    "half_pair_triangular_Volterra_representation_proved": true,
+    "midpoint_parity_used_as_boundary_data_only": true,
+    "rh_implication": false,
+    "symmetric_pair_first_order_x_ODE_proved": true,
+    "zero_initial_pair_at_x0_proved": true
+  },
+  "dependencies": {
+    "midpoint_guard": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_boundary_linear_roster_pair_anchor_gate.json",
+      "sha256": "7e89d8be65098d451c133c5d4f0e35399355c1c8be97578082a4b20f48214360"
+    },
+    "pair_Morse": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_signed_pair_logistic_morse_transform_gate.json",
+      "sha256": "01cce93e156d87bc9c2b8374059d84a2ba937bc3921caf88feabef149d6dec66"
+    },
+    "paired_residual": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_paired_target_residual_normal_form_gate.json",
+      "sha256": "86c4a9245c0afa36fb0aa6fbfb919ea040bfc7dcb01709190757e97d2428dfc4"
+    },
+    "symmetric_poisson": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_symmetric_poisson_interchange_gate.json",
+      "sha256": "4a1898bcda7105107fcaf303a20a87237e75c09f0052db7710bff5f6765a88b0"
+    }
+  },
+  "finite_height_geometry": {
+    "A_characteristic_roots": [
+      "39852.3913862312389618431367868261478442698900177001428220670814997234",
+      "39936.1086137687610381568632131738521557301099822998571779329185002766"
+    ],
+    "A_half_boundary_mode_A_over_4": "39894.25",
+    "A_half_phase_derivative_detuning": "22018.08517666499993302147812178580354357235668887033521357223156775436",
+    "A_minus_half_stationary_alpha": "0.08783942692882402157602624725260965654753402613693362966813173682964028",
+    "B_characteristic_roots": [
+      "621.5560036102371463889412039565834444235567629462757775115581974443559",
+      "2560588.943996389762853611058796043416555576443237053724222488441802556"
+    ],
+    "half_stationary_alpha_sqrt_8t_over_pi": "159576.9121605730711759784239737527473903434524659738630663703318682632",
+    "height": 10000000000,
+    "interpretation": "The same endpoint driver produces the B crossing, both A characteristic roots, and the A/x=1/2 corner. The midpoint arithmetic identity supplies boundary data but does not linearize the propagator.",
+    "source_endpoints": [
+      159577,
+      5122421
+    ]
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_endpoint_transport_volterra_gate",
+  "next_obligation": "Construct a quantitative oscillatory bound for the Volterra kernel G_m and the endpoint-driver integral in the nonaligned regions. Isolate only neighborhoods of the B lower root and the A/half-fold alignments, then compare their grouped signed contribution with the target budget.",
+  "passed": true,
+  "proof_boundary": "Exact roster PDE, pair transport ODE, endpoint-driven Volterra representation, and characteristic geometry only. No quantitative Volterra operator bound, nonlinear B crossing, A-fold splice, complete T_upper, height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.476,
+    "process_priority": "below_normal",
+    "sympy_threads": 1,
+    "workers": 1
+  },
+  "scope": {
+    "height": 10000000000,
+    "mode_condition": "integer m>0",
+    "roster_coordinate_length": 2481422,
+    "source_odd_roster": [
+      159577,
+      5122421
+    ]
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_endpoint_transport_volterra_gate.py",
+      "sha256": "996c30d23ac0faaf8a9d0061ccf1037393d6802b9433efb1542e92c171bbe486"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_endpoint_transport_volterra_gate.py",
+      "sha256": "ac8e95440e2694bf4b6216b3d4aea864a70879c7b0532850ef5e3557a36f5c7e"
+    }
+  },
+  "status": "exact_endpoint_driven_pair_transport_and_half_volterra_representation_proved_operator_bound_open",
+  "symbolic_certificate": {
+    "Volterra_kernel": "G_m(z)=integral_z^(1/2) W_t(x)x^(-3/2)exp(-i*pi*m^2/x)dx",
+    "Volterra_solution": "P_m(x)=x^(-3/2)exp(-i*pi*m^2/x)/(2 i*pi) integral_0^x z^(-1/2)exp(i*pi*m^2/z)Delta f_z' dz",
+    "cancellation_interpretation": "The Fresnel tails and endpoint currents are not separated; their cancellation is encoded in the endpoint-driven Volterra propagator.",
+    "characteristic_alignment": "The endpoint-driver saddle z_D=2m/D meets x_m exactly when D=2m+t/(pi*m).",
+    "endpoint_driver": "Delta f_x'=exp(i*pi*x*B^2/4)(2+i*pi*x*B^2)-exp(i*pi*x*A^2/4)(2+i*pi*x*A^2)",
+    "half_pair_integral": "K_m+K_(-m)=1/(2 i*pi) integral_0^(1/2) z^(-1/2)exp(i*pi*m^2/z)Delta f_z' G_m(z)dz",
+    "integrating_factor": "mu_m(x)=x^(3/2)exp(i*pi*m^2/x)",
+    "pair_coefficient": "P_m(x)=I_m(x)+I_(-m)(x)=2 integral_0^L f_x(u)cos(2*pi*m*u)du",
+    "pair_initial_value": "P_m(0)=0 for every nonzero integer m because L is an integer and f_0(u)=A+2u",
+    "pair_transport_ODE": "4 i*pi*x^2 P_m'+(4*pi^2*m^2+6 i*pi*x)P_m=2 Delta f_x'",
+    "roster_PDE": "partial_u^2 f_x=6 i*pi*x f_x+4 i*pi*x^2 partial_x f_x"
+  }
+}

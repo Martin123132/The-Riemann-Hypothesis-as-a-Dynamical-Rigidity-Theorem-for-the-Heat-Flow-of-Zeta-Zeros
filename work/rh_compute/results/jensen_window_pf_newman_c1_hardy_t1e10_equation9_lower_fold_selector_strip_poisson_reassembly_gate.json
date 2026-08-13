@@ -1,0 +1,79 @@
+{
+  "certified_selector_reassembly": {
+    "complete_symmetric_mode_sum_required": true,
+    "endpoint_half_current_required": true,
+    "fixed_B_selector_reassembly_exact": true,
+    "fixed_upper_endpoint_B": 5122421,
+    "new_odd_roster_length_L": 2481421,
+    "new_odd_roster_term_count": 2481422,
+    "new_selector_C": 159579,
+    "new_selector_turning_mode_count": 399,
+    "new_selector_turning_roster_at_lower_edge": [
+      39696,
+      40094
+    ],
+    "old_odd_roster_length_L": 2481422,
+    "old_odd_roster_term_count": 2481423,
+    "old_selector_C": 159577,
+    "positive_399_mode_roster_sufficient_for_selector_reassembly": false,
+    "removed_source_lattice_point": 159577,
+    "removed_source_lattice_point_count": 1,
+    "shared_selector_boundary_ball": "[10000011009.0425883324999665107390608929017717861783444351676067861157838771817261874891645 +/- 3.27e-80]",
+    "upper_endpoint_simultaneous_change_covered": false,
+    "zero_and_negative_modes_may_be_discarded": false
+  },
+  "decision": {
+    "complete_source_selector_splice_proved": false,
+    "complete_symmetric_poisson_strip_reassembles_removed_term": true,
+    "endpoint_half_current_retained": true,
+    "one_source_lattice_term_removed": true,
+    "positive_399_mode_roster_alone_sufficient": false,
+    "rh_implication": false
+  },
+  "dependencies": {
+    "symmetric_poisson_gate": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_symmetric_poisson_interchange_gate.json",
+      "sha256": "4a1898bcda7105107fcaf303a20a87237e75c09f0052db7710bff5f6765a88b0"
+    },
+    "theta_current_gate": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation10_global_theta_current_reduction_gate.json",
+      "sha256": "9e1de029f8cdb4eb9c11b3221fe16a651b86aaadd58320ca00af5345dfc9bf29"
+    },
+    "turning_event_gate": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_turning_event_atlas_handoff_gate.json",
+      "sha256": "c0200bbbb2fa3d4e569f5c137db037ac6320283cf1973b86c93d1beebba5fc7a"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_selector_strip_poisson_reassembly_gate",
+  "next_obligation": "Insert a 399-mode exact or uniformly bounded endpoint chart into the complete symmetric strip identity, bound its zero/negative and positive outer complements jointly, and audit whether B changes at the same source selector boundary.",
+  "passed": true,
+  "proof_boundary": "Exact fixed-B selector-strip finite-Poisson reassembly only. No 399-mode quantitative bound, simultaneous upper endpoint transition, T_upper theorem, Lambda<=0, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.444,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_selector_strip_poisson_reassembly_gate.py",
+      "sha256": "6c995c791807d522a9ec87f8a157e48e47ab3b6fe740f018e5c66a146e0e9730"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_selector_strip_poisson_reassembly_gate.py",
+      "sha256": "deeca1b0083e57cd93e3447b5720ea0612d3cd3731d6eaa2e2a45b7e2fd94f60"
+    }
+  },
+  "status": "exact_fixed_B_odd_selector_strip_poisson_reassembly_complete",
+  "symbolic_reassembly": {
+    "endpoint_half_difference": "H_C(x)=[f_C(0)-f_C(1)]/2",
+    "exact_removed_term": "H_C+lim_sym sum_m S_m=f_C(0)=C exp(i*pi*x*C^2/4)",
+    "integer_character_shift": "exp[-2pi*i*m*(u-1)]=exp(-2pi*i*m*u) for integer m",
+    "integrated_selector_identity": "K_C(t;B)-K_(C+2)(t;B)=integral_0^1 W_t(x) C exp(i*pi*x*C^2/4)dx for fixed B",
+    "mode_strip": "S_m(x)=integral_0^1 f_C(u)exp(-2pi*i*m*u)du=(-1)^m/2 integral_C^(C+2) alpha exp(i*pi[x*alpha^2/4-m*alpha])dalpha",
+    "new_coordinate": "alpha=C+2+2v, 0<=v<=L-1",
+    "old_coordinate": "alpha=C+2u, 0<=u<=L",
+    "one_cell_poisson": "lim_(M->infinity) sum_(m=-M)^M S_m(x)=[f_C(0)+f_C(1)]/2",
+    "parity_guard": "Because C and C+2 are odd, (-1)^m exp(-i*pi*m*C)=(-1)^m exp(-i*pi*m*(C+2))=1; endpoint currents cannot be separated from the symmetric strip sum.",
+    "roster_shift": "f_(C+2)(v)=f_C(v+1)"
+  }
+}

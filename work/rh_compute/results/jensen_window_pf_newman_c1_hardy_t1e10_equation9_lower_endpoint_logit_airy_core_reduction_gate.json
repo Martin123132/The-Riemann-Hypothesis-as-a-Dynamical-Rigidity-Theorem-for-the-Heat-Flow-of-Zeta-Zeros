@@ -1,0 +1,90 @@
+{
+  "certified_core": {
+    "Airy_core_u_radius_ball": "[0.0037132697042392459654042408468635088499648642302803953126851729374878701752630350880798367196444757413066000883 +/- 1.58e-112]",
+    "Airy_core_z_radius": 4,
+    "Airy_lambda_ball": "[5.1099430394918356283059191674846647509663170203654407926790704695202619930481405568500939226158509559393019513 +/- 1.69e-104]",
+    "Airy_scale_ball": "[0.00092831742605981149135106021171587721249121605757009882817129323437196754381575877201995917991111893532665002206 +/- 3.00e-113]",
+    "conservative_phase_remainder_bound_ball": "[0.00094128618812900810795259480279158435017965493452879447449818214531710186157684518019028494708880597560803135400 +/- 5.59e-113]",
+    "decision": "The exact lower-boundary phase is a two-saddle fold with Airy parameter about 5.11. On |z|<=4 its noncubic phase is rigorously below 0.001 under a conservative derivative bound. The remaining work is grouped amplitude control and contour/tail completion, not discovery of the canonical fold phase.",
+    "eta_ball": "[1.0000011009042588332499966510739060892901771786178344435167606786115783877181726187489164531305393951710723053 +/- 4.73e-110]",
+    "height": 10000000000,
+    "lower_continuous_mode_ball": "[39852.391386231238961843136786826147844269890017700142822067081499723395630016783577515625960639418285931660383 +/- 1.35e-103]",
+    "lower_endpoint": 159577,
+    "lower_stationary_x_ball": "[0.49947538036472974127653905997513611415517135950293767675876951565355152221205792285248658591951745284009174735 +/- 1.69e-108]",
+    "mu_ball": "[1.1009042588332499966510739060892901771786178344435167606786115783877181726187489164531305393951710723053436773e-6 +/- 3.63e-111]",
+    "positive_stationary_u_ball": "[0.0020984793111553500981026270719767794587790728878360139157185498558128247638349764941421054750462154234924968581 +/- 6.73e-108]",
+    "precision_decimal_digits": 110,
+    "upper_continuous_mode_ball": "[39936.108613768761038156863213173852155730109982299857177932918500276604369983216422484374039360581714068339617 +/- 1.35e-103]",
+    "upper_stationary_x_ball": "[0.50052461963527025872346094002486388584482864049706232324123048434644847778794207714751341408048254715990825265 +/- 1.69e-108]"
+  },
+  "decision": {
+    "Airy_core_phase_remainder_below_0_001": true,
+    "canonical_Airy_scaling_proved": true,
+    "exact_logit_fold_phase_proved": true,
+    "grouped_amplitude_remainder_proved": false,
+    "portcullis_roots_recovered": true,
+    "rh_implication": false,
+    "separated_endpoint_mode_series_summable": false
+  },
+  "dependencies": {
+    "fresnel_gate": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_fresnel_endpoint_normal_form_gate.json",
+      "sha256": "0122270e518a11763f0d086af05e72ec148e74798eec8dc304663a1f68f33b4e"
+    },
+    "morse_fold_gate": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_universal_logistic_morse_characteristic_fold_reduction_gate.json",
+      "sha256": "7fe2f844f4822ec1c3650562635159b2a7d21efeaffd2f727fdd8ef498f26fb2"
+    },
+    "paper": {
+      "path": "work/rh_compute/external/hardy_fastcode/Lewis_Brereton_2607.15310.pdf",
+      "sha256": "fbc95e5e9bbde078160c7b1a3ac3abcbb3fc3ec522d1324b14d6024bf71e537a"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_endpoint_logit_airy_core_reduction_gate",
+  "next_obligation": "Transport the exact grouped boundary/Fresnel amplitude through the |z|<=4 Airy core, derive explicit variation and contour-tail constants uniformly in the fold parameter, and join it to ordinary interior and nonstationary mode estimates.",
+  "passed": true,
+  "proof_boundary": "Exact lower-boundary fold algebra and finite Airy phase-core bound at t=10^10 only. No grouped fold-uniform remainder, complete T_upper assembly, source-aligned height-uniform error, Lambda<=0, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.922,
+    "flint_threads": 1,
+    "process_priority": "below_normal",
+    "sympy_threads": 1,
+    "workers": 1
+  },
+  "scope": {
+    "Airy_core": "|z|<=4",
+    "diagnostic_midpoint_used": false,
+    "height_center": "1e10",
+    "lower_endpoint": 159577
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_endpoint_logit_airy_core_reduction_gate.py",
+      "sha256": "03e840d372ae0cf984d0f262bbd2d0ac4b5bb1fa218dbfdc81669f6dc6e52365"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_endpoint_logit_airy_core_reduction_gate.py",
+      "sha256": "6e6ddf870fa487f44ba7a25152761570dc90bfabb23c8500fc16ffc10d401d41"
+    }
+  },
+  "status": "exact_lower_endpoint_logit_fold_and_certified_Airy_phase_core_complete",
+  "symbolic_reduction": {
+    "Airy_parameter": "lambda=mu*t^(2/3)*eta^(-1/3)",
+    "Airy_scale": "u=2z/(t*eta)^(1/3)",
+    "Kummer_measure": "[x(1-x)]^(-1/4)|dx|=2^(-3/2)cosh(u/2)^(-3/2)du",
+    "Taylor_guard": "Using |tanh^(5)(y)|<=512 for real y, |tanh(u/2)-u/2+u^3/24|<=(2/15)|u|^5.",
+    "canonical_cubic": "t[-mu*u/2+eta*u^3/24]=z^3/3-lambda*z",
+    "control_parameter": "mu=eta-1",
+    "exact_fold_phase": "Phi_C-constant=t[u/2-eta*tanh(u/2)], eta=pi*C^2/(8t)",
+    "fold_value": "eta=1 gives t[u/2-tanh(u/2)]=t[u^3/24-u^5/240+... ]",
+    "integer_parity_guard": "For integer m and odd integer C, (-1)^m exp(-i*pi*m*C)=1.",
+    "logit_coordinate": "u=log((1-x)/x), x=1/(1+exp(u))",
+    "lower_boundary_phase": "Phi_C(u;m,t)=pi*C^2/[4(1+e^u)]-pi*m*C+(t/2)u",
+    "lower_endpoint_mode_factor": "exp(I*pi*m)*exp(-I*pi*C*m)",
+    "phase_constant": "pi*C^2/8-pi*m*C",
+    "scaled_phase_remainder": "|R_phase(z)|<=(64/15)t^(-2/3)eta^(-2/3)|z|^5",
+    "series_grouping_guard": "The separated lower-boundary current is mode-independent after parity and is not summable over modes; the Airy phase must be used only inside the exact grouped boundary/Fresnel current.",
+    "stationary_equation": "sech^2(u/2)=1/eta",
+    "stationary_points": "u_+-=+/-2 acosh(sqrt(eta)) for eta>=1"
+  }
+}

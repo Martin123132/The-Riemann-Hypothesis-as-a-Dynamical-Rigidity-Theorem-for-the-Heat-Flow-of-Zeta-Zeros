@@ -1,0 +1,377 @@
+{
+  "counts": {
+    "character_split_checks": 7,
+    "conjugation_checks": 4,
+    "finite_roster_checks": 88,
+    "fourier_mode_checks": 14,
+    "fourier_mode_witnesses": 2,
+    "ideal_endpoint_identities": 6,
+    "near_kernel_mean_checks": 8,
+    "one_sided_divergence_witnesses": 1,
+    "phi_b_bounds": 0,
+    "recombination_identities": 5,
+    "reflection_identities": 2,
+    "remote_pair_formula_checks": 5,
+    "remote_tail_bound_checks": 10,
+    "rows": 34,
+    "signed_complete_ideal_bounds": 0
+  },
+  "date": "2026-08-03",
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_ideal_cubic_symmetric_outer_pairing_gate",
+  "proof_boundary": "This proves the exact exterior pullback, canonical common-cutoff decomposition, mean-one finite near kernel, absolute convergence of remote pairs, the physical ideal-Hermitian endpoint obstruction to separate one-sided sums, and reflection/conjugation guards. It proves no signed complete ideal join, physical derivative-size bound, completed current, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "certificate": "Source hashes and parent counts are recorded.",
+      "claim": "All four parent gates replay and are hash-pinned.",
+      "id": "sop_01_sources",
+      "proof_boundary": "No parent estimate is strengthened.",
+      "readiness": "proved",
+      "role": "source chain"
+    },
+    {
+      "certificate": "Full-support Poisson summation gives mathscr F_N[P]+mathscr O_N[P]=mathscr M_N[P], where mathscr O_N is the common symmetric sum over all integer modes outside mathcal R_N.",
+      "claim": "The exterior is the missing Poisson complement.",
+      "id": "sop_02_poisson",
+      "proof_boundary": "These are recombinations of the same Fourier involution. They do not imply that either complete join is small or has a sign.",
+      "readiness": "proved",
+      "role": "full-support identity"
+    },
+    {
+      "certificate": "Because mathscr F_N=tau_band+mathscr M_N-E_band, one has mathscr O_N=E_band-tau_band=-mathscr D_N exactly.",
+      "claim": "E_band-tau_band equals the symmetric outer sum.",
+      "id": "sop_03_exterior",
+      "proof_boundary": "These are recombinations of the same Fourier involution. They do not imply that either complete join is small or has a sign.",
+      "readiness": "proved",
+      "role": "exterior pullback"
+    },
+    {
+      "certificate": "The ideal Hermitian join is mathcal J_H^0=mathscr M_N[P_H^0]+mathscr O_N[P_H^0].",
+      "claim": "The Hermitian join is carrier plus outer complement.",
+      "id": "sop_04_hermitian_join",
+      "proof_boundary": "These are recombinations of the same Fourier involution. They do not imply that either complete join is small or has a sign.",
+      "readiness": "proved",
+      "role": "ideal Hermitian join"
+    },
+    {
+      "certificate": "The ideal transpose join is mathcal J_T^0=mathscr M_N[P_T^0]+mathscr O_N[P_T^0]+2iu_N mathcal T_N^[N][B_(T,N)^0].",
+      "claim": "The transpose terminal survivor remains separate.",
+      "id": "sop_05_transpose_join",
+      "proof_boundary": "These are recombinations of the same Fourier involution. They do not imply that either complete join is small or has a sign.",
+      "readiness": "proved",
+      "role": "ideal transpose join"
+    },
+    {
+      "certificate": "Put m_N=floor(alpha_P/(N+1/2))+1 and n_N=floor(2alpha_P), with mathcal R_N={m_N,...,n_N}. For every R>=n_N, the finite symmetric outer sum has one canonical disjoint split.",
+      "claim": "The complement uses the certified half-open positive band.",
+      "id": "sop_06_roster",
+      "proof_boundary": "Assume the nonempty physical roster m_N<=n_N.",
+      "readiness": "proved",
+      "role": "reciprocal roster"
+    },
+    {
+      "certificate": "sum_(-R<=r<=R,r notin mathcal R_N)I_P(r)=sum_(r=1)^(m_N-1)I_P(r)+I_P(0)+sum_(k=1)^n_N I_P(-k)+sum_(k=n_N+1)^R{I_P(-k)+I_P(k)}.",
+      "claim": "Every finite symmetric cutoff splits without rearrangement.",
+      "id": "sop_07_finite_split",
+      "proof_boundary": "The common cutoff is part of the theorem.",
+      "readiness": "proved",
+      "role": "symmetric cutoff"
+    },
+    {
+      "certificate": "Define mathscr N_N[P]=sum_(r=1)^(m_N-1)I_P(r)+I_P(0)+sum_(k=1)^n_N I_P(-k). It is finite and equals integral_1^N f_P(u)K_near,N(u)du.",
+      "claim": "All unpaired modes form one finite object.",
+      "id": "sop_08_near",
+      "proof_boundary": "No sign is assigned to this finite sum.",
+      "readiness": "proved",
+      "role": "finite near modes"
+    },
+    {
+      "certificate": "The remaining remote object is the paired series mathscr C_N[P]=sum_(k=n_N+1)^infinity{I_P(-k)+I_P(k)}. The common symmetric cutoff, not a rearrangement of two one-sided series, defines the passage to this limit.",
+      "claim": "Only the remote opposite modes are paired.",
+      "id": "sop_09_remote",
+      "proof_boundary": "The two one-sided infinities are not defined separately.",
+      "readiness": "proved",
+      "role": "remote pairs"
+    },
+    {
+      "certificate": "K_near,N(u)=sum_(j=-(m_N-1))^n_N e(ju). Its mean on every integer unit cell is exactly 1 because its only zero Fourier mode has coefficient 1.",
+      "claim": "The near object has a contiguous Dirichlet kernel.",
+      "id": "sop_10_near_kernel",
+      "proof_boundary": "The kernel is generally complex and nonsymmetric.",
+      "readiness": "proved",
+      "role": "finite kernel"
+    },
+    {
+      "certificate": "K_near,N(u)=sum_(j=-(m_N-1))^n_N e(ju). Its mean on every integer unit cell is exactly 1 because its only zero Fourier mode has coefficient 1.",
+      "claim": "The near kernel has unit cell mean one.",
+      "id": "sop_11_kernel_mean",
+      "proof_boundary": "Mean one is not positivity or pointwise control.",
+      "readiness": "proved",
+      "role": "kernel mean"
+    },
+    {
+      "certificate": "For every positive integer k, I_P(-k)+I_P(k)=2integral_1^N f_P(u)cos(2pi ku)du.",
+      "claim": "Each remote pair is a cosine integral.",
+      "id": "sop_12_pair_cosine",
+      "proof_boundary": "No physical derivative bound follows yet.",
+      "readiness": "proved",
+      "role": "paired phase"
+    },
+    {
+      "certificate": "If f_P is C^2 on [1,N], integer endpoints make both sine boundary values zero, and I_P(-k)+I_P(k)={2/(2pi k)^2}{f_P'(N)-f_P'(1)-integral_1^N f_P''(u)cos(2pi ku)du}.",
+      "claim": "Two integrations expose k^(-2) decay.",
+      "id": "sop_13_pair_ibp",
+      "proof_boundary": "This proves absolute convergence of the paired remote tail. It is not an h^2 estimate: alpha_P occurs in f_P' and f_P'', so the displayed derivative numerator must still be analyzed in the physical scaling.",
+      "readiness": "proved",
+      "role": "paired integration"
+    },
+    {
+      "certificate": "Hence |mathscr C_N[P]|<={|f_P'(N)-f_P'(1)|+||f_P''||_1}/{2pi^2} sum_(k>n_N)k^(-2)<={|f_P'(N)-f_P'(1)|+||f_P''||_1}/{2pi^2 n_N}.",
+      "claim": "The paired remote series converges absolutely.",
+      "id": "sop_14_pair_bound",
+      "proof_boundary": "This proves absolute convergence of the paired remote tail. It is not an h^2 estimate: alpha_P occurs in f_P' and f_P'', so the displayed derivative numerator must still be analyzed in the physical scaling.",
+      "readiness": "proved",
+      "role": "absolute paired tail"
+    },
+    {
+      "certificate": "This proves absolute convergence of the paired remote tail. It is not an h^2 estimate: alpha_P occurs in f_P' and f_P'', so the displayed derivative numerator must still be analyzed in the physical scaling.",
+      "claim": "The C^2 numerator remains a physical obligation.",
+      "id": "sop_15_scaling_guard",
+      "proof_boundary": "No h^2 reserve is claimed.",
+      "readiness": "guard_validated",
+      "role": "physical scaling"
+    },
+    {
+      "certificate": "For Delta_P=f_P(N)-f_P(1), one integration by parts at integer endpoints gives I_P(k)=-kappa Delta_P/k+O(k^(-2)) and I_P(-k)=kappa Delta_P/k+O(k^(-2)), with kappa=1/(2pi i).",
+      "claim": "Endpoint mismatch creates opposite harmonic terms.",
+      "id": "sop_16_endpoint_ibp",
+      "proof_boundary": "If Delta_P is nonzero, the positive and negative one-sided tails have opposite nonzero harmonic leading terms. Neither tail converges by itself; only their common symmetric pairing cancels the 1/k term.",
+      "readiness": "proved",
+      "role": "one-sided asymptotic"
+    },
+    {
+      "certificate": "If Delta_P is nonzero, the positive and negative one-sided tails have opposite nonzero harmonic leading terms. Neither tail converges by itself; only their common symmetric pairing cancels the 1/k term.",
+      "claim": "The separate outer infinities need not converge.",
+      "id": "sop_17_split_guard",
+      "proof_boundary": "They must not receive independent error budgets.",
+      "readiness": "guard_validated",
+      "role": "summation guard"
+    },
+    {
+      "certificate": "For x=log(u/a), u_N=log(a/N), S(0)=0, and P_H^0=-i(x+u_N)(x-u_N)^2/4, one has P_H^0(log N)=0 and P_H^0(0)=i log N{log(a^2/N)}^2/4.",
+      "claim": "The upper ideal Hermitian value vanishes.",
+      "id": "sop_18_h_terminal",
+      "proof_boundary": "This does not remove the lower endpoint.",
+      "readiness": "proved",
+      "role": "Hermitian endpoint"
+    },
+    {
+      "certificate": "For x=log(u/a), u_N=log(a/N), S(0)=0, and P_H^0=-i(x+u_N)(x-u_N)^2/4, one has P_H^0(log N)=0 and P_H^0(0)=i log N{log(a^2/N)}^2/4.",
+      "claim": "The lower ideal Hermitian value is nonzero physically.",
+      "id": "sop_19_h_lower",
+      "proof_boundary": "Thus Delta_H=-i c_H, where c_H=log N{log(a^2/N)}^2/4>0 in the physical regime a>=N>=2.",
+      "readiness": "proved",
+      "role": "Hermitian lower endpoint"
+    },
+    {
+      "certificate": "Thus Delta_H=-i c_H, where c_H=log N{log(a^2/N)}^2/4>0 in the physical regime a>=N>=2.",
+      "claim": "The physical endpoint jump is explicit and nonzero.",
+      "id": "sop_20_h_delta",
+      "proof_boundary": "Smooth interior changes do not alter the leading endpoint term.",
+      "readiness": "proved",
+      "role": "Hermitian jump"
+    },
+    {
+      "certificate": "Consequently I_H(k)=c_H/(2pi k)+O(k^(-2)) and I_H(-k)=-c_H/(2pi k)+O(k^(-2)). The two separate outer infinities diverge with opposite real signs even though their paired sum is O(k^(-2)).",
+      "claim": "The positive Hermitian coefficients have a positive harmonic lead.",
+      "id": "sop_21_h_positive",
+      "proof_boundary": "The one-sided series diverges.",
+      "readiness": "proved",
+      "role": "positive tail"
+    },
+    {
+      "certificate": "Consequently I_H(k)=c_H/(2pi k)+O(k^(-2)) and I_H(-k)=-c_H/(2pi k)+O(k^(-2)). The two separate outer infinities diverge with opposite real signs even though their paired sum is O(k^(-2)).",
+      "claim": "The negative Hermitian coefficients have the opposite harmonic lead.",
+      "id": "sop_22_h_negative",
+      "proof_boundary": "The one-sided series diverges.",
+      "readiness": "proved",
+      "role": "negative tail"
+    },
+    {
+      "certificate": "Consequently I_H(k)=c_H/(2pi k)+O(k^(-2)) and I_H(-k)=-c_H/(2pi k)+O(k^(-2)). The two separate outer infinities diverge with opposite real signs even though their paired sum is O(k^(-2)).",
+      "claim": "The leading endpoint terms cancel only pairwise.",
+      "id": "sop_23_h_pair",
+      "proof_boundary": "No sign follows for the O(k^(-2)) pair.",
+      "readiness": "proved",
+      "role": "harmonic cancellation"
+    },
+    {
+      "certificate": "The exact nonphysical source f(u)=u on integer [1,N] gives I_f(k)=-kappa(N-1)/k and I_f(-k)=kappa(N-1)/k for every k>=1. This is an exact one-sided-divergence witness, not merely an asymptotic example.",
+      "claim": "A linear source realizes the harmonic obstruction exactly.",
+      "id": "sop_24_linear_witness",
+      "proof_boundary": "The witness is nonphysical and only guards the summation method.",
+      "readiness": "guard_validated",
+      "role": "exact divergence witness"
+    },
+    {
+      "certificate": "The algebraic identity P_T^0(x)=-P_H^0(-x)+u_(N,x)(x-u_N) is exact, but it is only a polynomial identity.",
+      "claim": "The ideal cubics obey an algebraic reflection identity.",
+      "id": "sop_25_cubic_reflection",
+      "proof_boundary": "Polynomial symmetry alone is not operator symmetry.",
+      "readiness": "proved",
+      "role": "polynomial symmetry"
+    },
+    {
+      "certificate": "The reflection x->-x sends u to a^2/u because x=log(u/a). It sends [1,N] to [a^2/N,a^2], which is not [1,N]; for a>=N>=2 the image lies at or above N.",
+      "claim": "The reflection moves the physical interval.",
+      "id": "sop_26_coordinate_reflection",
+      "proof_boundary": "The transformed domain is not the original domain.",
+      "readiness": "guard_validated",
+      "role": "coordinate map"
+    },
+    {
+      "certificate": "Under u=a^2/v, alpha_Plog u-ru becomes 2alpha_Plog a-alpha_Plog v-r a^2/v. Its v-derivative cannot equal alpha_P/v-s for a constant Fourier mode s on an interval when alpha_P>0.",
+      "claim": "The reflection does not preserve a Fourier mode.",
+      "id": "sop_27_phase_reflection",
+      "proof_boundary": "No Hermitian/transpose outer cancellation follows.",
+      "readiness": "guard_validated",
+      "role": "phase map"
+    },
+    {
+      "certificate": "For real S, conjugate(I_P^(alpha_P)(r))=I_(conjugate P)^(-alpha_P)(-r). Conjugation reverses alpha_P as well as r, so it does not pair two modes inside the fixed physical alpha_P family.",
+      "claim": "Conjugation reverses both frequency parameters.",
+      "id": "sop_28_conjugation",
+      "proof_boundary": "The fixed-alpha physical family is not closed under this map.",
+      "readiness": "proved",
+      "role": "conjugation map"
+    },
+    {
+      "certificate": "The Hermitian terminal Abel coefficient still vanishes at q=N, but that finite identity neither changes Delta_H nor regularizes either one-sided outer series.",
+      "claim": "The terminal Hermitian Abel null remains finite only.",
+      "id": "sop_29_abel",
+      "proof_boundary": "It does not regularize the outer half-series.",
+      "readiness": "guard_validated",
+      "role": "finite Abel guard"
+    },
+    {
+      "certificate": "If K lies in mathcal R_N, then mathscr O_N=0 and M+mathscr O_N=N-1.",
+      "claim": "A pure inside-band mode gives a nonzero ideal package.",
+      "id": "sop_30_fourier_inside",
+      "proof_boundary": "Therefore the outer pullback, finite Abel identity, and Fourier algebra alone provide neither universal cancellation nor a sign. Any useful result must exploit the physical ideal-cubic coefficient and its joined terminal structure.",
+      "readiness": "guard_validated",
+      "role": "inside-band witness"
+    },
+    {
+      "certificate": "If K lies outside mathcal R_N, then mathscr O_N=N-1 and M+mathscr O_N=2(N-1). Negating f_K reverses both values.",
+      "claim": "A pure outside-band mode changes the package coefficient.",
+      "id": "sop_31_fourier_outside",
+      "proof_boundary": "Therefore the outer pullback, finite Abel identity, and Fourier algebra alone provide neither universal cancellation nor a sign. Any useful result must exploit the physical ideal-cubic coefficient and its joined terminal structure.",
+      "readiness": "guard_validated",
+      "role": "outside-band witness"
+    },
+    {
+      "certificate": "Prove or rigorously obstruct a source-specific signed estimate for the carrier-plus-near package, including endpoint half-weights. Do not assign budgets to the divergent one-sided outer tails.",
+      "claim": "Control the carrier plus mean-one near kernel without blockwise moduli.",
+      "id": "sop_32_near_open",
+      "proof_boundary": "No signed complete ideal join, physical derivative-size bound, completed-current theorem, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+      "readiness": "open",
+      "role": "near-package estimate"
+    },
+    {
+      "certificate": "Keep K_near,N intact and test a cellwise Euler/Abel composition of the starred carrier with its mean-one finite kernel. The remote paired tail may be attached afterward through its absolute C^2 bound; the transpose terminal survivor remains explicit.",
+      "claim": "Join the transpose endpoint atom and terminal conditional block.",
+      "id": "sop_33_terminal_open",
+      "proof_boundary": "No signed complete ideal join, physical derivative-size bound, completed-current theorem, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+      "readiness": "open",
+      "role": "transpose completion"
+    },
+    {
+      "certificate": "No signed complete ideal join, physical derivative-size bound, completed-current theorem, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+      "claim": "This gate is not a proof of RH.",
+      "id": "sop_34_boundary",
+      "proof_boundary": "No prize-level conclusion is claimed.",
+      "readiness": "guard_validated",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "finite_cell_inversion": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_ideal_cubic_reciprocal_finite_cell_inversion_gate.json",
+      "sha256": "52856581875a22fd16216f3282475bf2716fe8757d147dfb604ddac8ec14f5fd"
+    },
+    "joined_recombination": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_joined_lower_interior_abel_recombination_gate.json",
+      "sha256": "685078175aee3d9d32ffefb49cb596d8380bf31f2cb7d60a2739e4c1e38ff31b"
+    },
+    "outer_endpoint_kernel": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_outer_endpoint_kernel_gate.json",
+      "sha256": "4cf510dcf472241ba45a5602a231c4cbe713af6c62924f9ff4e4108454f86df8"
+    },
+    "ridge_carrier": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_ideal_cubic_double_morse_ridge_carrier_inversion_gate.json",
+      "sha256": "81ab2ccbd2d5429e2044280db44a09f7f9befc7099b397d90c1017b79ab5d68f"
+    }
+  },
+  "status": "symmetric outer decomposition and Hermitian one-sided-divergence obstruction proved; signed carrier-plus-near estimate open",
+  "symbolic_certificate": {
+    "cutoff": {
+      "character_checks": 7,
+      "exact_roster_checks": 88,
+      "finite_split": "sum_(-R<=r<=R,r notin mathcal R_N)I_P(r)=sum_(r=1)^(m_N-1)I_P(r)+I_P(0)+sum_(k=1)^n_N I_P(-k)+sum_(k=n_N+1)^R{I_P(-k)+I_P(k)}.",
+      "indices": "Put m_N=floor(alpha_P/(N+1/2))+1 and n_N=floor(2alpha_P), with mathcal R_N={m_N,...,n_N}. For every R>=n_N, the finite symmetric outer sum has one canonical disjoint split.",
+      "kernel": "K_near,N(u)=sum_(j=-(m_N-1))^n_N e(ju). Its mean on every integer unit cell is exactly 1 because its only zero Fourier mode has coefficient 1.",
+      "mean_checks": 8,
+      "near": "Define mathscr N_N[P]=sum_(r=1)^(m_N-1)I_P(r)+I_P(0)+sum_(k=1)^n_N I_P(-k). It is finite and equals integral_1^N f_P(u)K_near,N(u)du.",
+      "remote": "The remaining remote object is the paired series mathscr C_N[P]=sum_(k=n_N+1)^infinity{I_P(-k)+I_P(k)}. The common symmetric cutoff, not a rearrangement of two one-sided series, defines the passage to this limit."
+    },
+    "endpoint": {
+      "asymptotic": "Consequently I_H(k)=c_H/(2pi k)+O(k^(-2)) and I_H(-k)=-c_H/(2pi k)+O(k^(-2)). The two separate outer infinities diverge with opposite real signs even though their paired sum is O(k^(-2)).",
+      "criterion": "If Delta_P is nonzero, the positive and negative one-sided tails have opposite nonzero harmonic leading terms. Neither tail converges by itself; only their common symmetric pairing cancels the 1/k term.",
+      "delta": "Thus Delta_H=-i c_H, where c_H=log N{log(a^2/N)}^2/4>0 in the physical regime a>=N>=2.",
+      "hermitian": "For x=log(u/a), u_N=log(a/N), S(0)=0, and P_H^0=-i(x+u_N)(x-u_N)^2/4, one has P_H^0(log N)=0 and P_H^0(0)=i log N{log(a^2/N)}^2/4.",
+      "ibp": "For Delta_P=f_P(N)-f_P(1), one integration by parts at integer endpoints gives I_P(k)=-kappa Delta_P/k+O(k^(-2)) and I_P(-k)=kappa Delta_P/k+O(k^(-2)), with kappa=1/(2pi i).",
+      "identity_checks": 6,
+      "linear_witness": "The exact nonphysical source f(u)=u on integer [1,N] gives I_f(k)=-kappa(N-1)/k and I_f(-k)=kappa(N-1)/k for every k>=1. This is an exact one-sided-divergence witness, not merely an asymptotic example.",
+      "one_sided_divergence_witnesses": 1
+    },
+    "fourier_guard": {
+      "inside": "If K lies in mathcal R_N, then mathscr O_N=0 and M+mathscr O_N=N-1.",
+      "mode_checks": 14,
+      "outside": "If K lies outside mathcal R_N, then mathscr O_N=N-1 and M+mathscr O_N=2(N-1). Negating f_K reverses both values.",
+      "scope": "Therefore the outer pullback, finite Abel identity, and Fourier algebra alone provide neither universal cancellation nor a sign. Any useful result must exploit the physical ideal-cubic coefficient and its joined terminal structure.",
+      "source": "For the nonphysical Fourier source f_K(u)=e(Ku) on integer [1,N], I_K(r)=N-1 when r=K and is zero for every other integer r; the starred carrier is also M=N-1.",
+      "witnesses": 2
+    },
+    "handoff": {
+      "decision": "Retire the requested three-way split into independent negative, low-positive, and high-positive infinite tails. Keep the finite low modes and the absolutely convergent remote pairs as the canonical decomposition of the symmetric outer sum.",
+      "exact_target": "The complete ideal targets are mathcal J_H^0=mathscr M_N[P_H^0]+mathscr N_N[P_H^0]+mathscr C_N[P_H^0] and mathcal J_T^0=mathscr M_N[P_T^0]+mathscr N_N[P_T^0]+mathscr C_N[P_T^0]+2iu_Nmathcal T_N^[N][B_(T,N)^0].",
+      "next": "Keep K_near,N intact and test a cellwise Euler/Abel composition of the starred carrier with its mean-one finite kernel. The remote paired tail may be attached afterward through its absolute C^2 bound; the transpose terminal survivor remains explicit.",
+      "obligation": "Prove or rigorously obstruct a source-specific signed estimate for the carrier-plus-near package, including endpoint half-weights. Do not assign budgets to the divergent one-sided outer tails.",
+      "reserve": "No signed complete ideal join, physical derivative-size bound, completed-current theorem, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved."
+    },
+    "paired_tail": {
+      "bound": "Hence |mathscr C_N[P]|<={|f_P'(N)-f_P'(1)|+||f_P''||_1}/{2pi^2} sum_(k>n_N)k^(-2)<={|f_P'(N)-f_P'(1)|+||f_P''||_1}/{2pi^2 n_N}.",
+      "pair": "For every positive integer k, I_P(-k)+I_P(k)=2integral_1^N f_P(u)cos(2pi ku)du.",
+      "pair_formula_checks": 5,
+      "scope": "This proves absolute convergence of the paired remote tail. It is not an h^2 estimate: alpha_P occurs in f_P' and f_P'', so the displayed derivative numerator must still be analyzed in the physical scaling.",
+      "tail_bound_checks": 10,
+      "twice_ibp": "If f_P is C^2 on [1,N], integer endpoints make both sine boundary values zero, and I_P(-k)+I_P(k)={2/(2pi k)^2}{f_P'(N)-f_P'(1)-integral_1^N f_P''(u)cos(2pi ku)du}."
+    },
+    "recombination": {
+      "exterior": "Because mathscr F_N=tau_band+mathscr M_N-E_band, one has mathscr O_N=E_band-tau_band=-mathscr D_N exactly.",
+      "guard": "These are recombinations of the same Fourier involution. They do not imply that either complete join is small or has a sign.",
+      "hermitian": "The ideal Hermitian join is mathcal J_H^0=mathscr M_N[P_H^0]+mathscr O_N[P_H^0].",
+      "identities": 5,
+      "poisson": "Full-support Poisson summation gives mathscr F_N[P]+mathscr O_N[P]=mathscr M_N[P], where mathscr O_N is the common symmetric sum over all integer modes outside mathcal R_N.",
+      "transpose": "The ideal transpose join is mathcal J_T^0=mathscr M_N[P_T^0]+mathscr O_N[P_T^0]+2iu_N mathcal T_N^[N][B_(T,N)^0]."
+    },
+    "symmetry": {
+      "abel": "The Hermitian terminal Abel coefficient still vanishes at q=N, but that finite identity neither changes Delta_H nor regularizes either one-sided outer series.",
+      "conjugation": "For real S, conjugate(I_P^(alpha_P)(r))=I_(conjugate P)^(-alpha_P)(-r). Conjugation reverses alpha_P as well as r, so it does not pair two modes inside the fixed physical alpha_P family.",
+      "conjugation_checks": 4,
+      "coordinate": "The reflection x->-x sends u to a^2/u because x=log(u/a). It sends [1,N] to [a^2/N,a^2], which is not [1,N]; for a>=N>=2 the image lies at or above N.",
+      "cubic": "The algebraic identity P_T^0(x)=-P_H^0(-x)+u_(N,x)(x-u_N) is exact, but it is only a polynomial identity.",
+      "phase": "Under u=a^2/v, alpha_Plog u-ru becomes 2alpha_Plog a-alpha_Plog v-r a^2/v. Its v-derivative cannot equal alpha_P/v-s for a constant Fourier mode s on an interval when alpha_P>0.",
+      "reflection_identities": 2
+    }
+  }
+}

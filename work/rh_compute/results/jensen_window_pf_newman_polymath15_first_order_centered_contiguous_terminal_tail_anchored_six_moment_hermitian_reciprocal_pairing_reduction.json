@@ -1,0 +1,254 @@
+{
+  "counts": {
+    "exact_full_diagonal_nulls": 1,
+    "hard_cutoff_boundary_bounds": 0,
+    "hermitian_swap_pair_identities": 1,
+    "imaginary_correction_bounds": 0,
+    "imaginary_resonance_guards": 1,
+    "leading_real_sine_channels": 1,
+    "phi_b_bounds": 0,
+    "poisson_remainder_bounds": 0,
+    "reciprocal_lattice_defect_bounds": 1,
+    "rows": 17,
+    "sign_guards": 2,
+    "signed_flow_bounds": 0,
+    "signed_offset_sum_bounds": 0,
+    "unpaired_interior_dual_main_modes": 0
+  },
+  "cutoff_certificate": {
+    "boundary_guard": "There is no unpaired mode in the square interior stationary main. This combinatorial fact does not pair the one-variable endpoint family, hard-cutoff half-weights, nonstationary modes, Poisson remainders, or the adjacent terminal recurrence.",
+    "dual_square": "Let K={ceil(a^2/B),...,floor(a^2)}. The interior two-variable stationary main is indexed by KxK, which is invariant under (k,l)<->(l,k). Its |K| diagonal modes vanish and its |K|(|K|-1) off-diagonal modes form exactly |K|(|K|-1)/2 unordered swap pairs.",
+    "symbolic_pairing_residual": "0"
+  },
+  "date": "2026-08-01",
+  "exact": {
+    "domain": "Use the physical q=1, L>=50, fixed-N terminal/bulk chart and the auxiliary segment from Sections 11.164-11.165. The present reduction concerns only the interior Hermitian reciprocal stationary main at xi=T_0; all endpoint and remainder terms remain explicit obligations.",
+    "exact_target": "Prove Psi(T_0)-epsilon*integral_0^1 Psi'(T_0-theta*epsilon)dtheta<=h^2/400, preferably h^2/800.",
+    "next_target": "Derive the endpoint-complete discrete Poisson/B-process formula with uniform value and first-x derivative remainders. In its Hermitian main, bound the real leading offset sums using the reciprocal-lattice split, prove a source-specific bound for the imaginary coefficient I, and retain the endpoint, transpose, hard-cutoff, and adjacent-recurrence terms before taking absolute values.",
+    "pi_provenance": "The sine is sin(2*pi*a^2*mu) because Poisson summation uses e(t)=exp(2*pi*i*t) and T_0=2*pi*a^2. The flow multiplier is i*mu because partial_xi e[xi*mu/(2*pi)]=i*mu e[xi*mu/(2*pi)]. Thus the factor 1/(2*pi) in the alpha-derivative identity is forced by the same two inherited normalizations; no new pi is inserted.",
+    "proof_boundary": "This proves the exact Hermitian reciprocal swap pairing, its outer-half sine/cosine formula, the real-leading reciprocal coordinates and stationary factor, the offset phase derivatives, the logarithmic and reciprocal-lattice defect bounds, complete pairing of the square interior dual main, and three algebraic nonpromotion guards. It proves no discrete Poisson or B-process formula, stationary-phase remainder, hard-cutoff boundary estimate, imaginary-correction bound, signed offset-sum gain, signed flow estimate, Phi_B bound, contact exclusion, retained aggregate or Xi theorem, Q209, cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion."
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_hermitian_reciprocal_pairing_reduction",
+  "offset_and_defect_certificate": {
+    "full_mixed_bound": "For a full stationary coefficient R+iI, the exact swap formula gives |P_H(k,k+d)| <= 2*pi*|R|*(d/k)*[d*rho_k+alpha*d^2/(2k^2)]+|I|*d/k. The first term exposes reciprocal-lattice suppression; the second is the correction obligation that cannot be discarded.",
+    "lattice_defect": "Let rho_k=dist(alpha/k,Z). Choosing an integer q with |alpha/k-q|=rho_k gives dist(alpha*log(1+d/k),Z) <= d*rho_k+alpha*d^2/(2k^2).",
+    "log_bounds": "For x=d/k>=0, x-log(1+x)=integral_0^x t/(1+t)dt. Hence 0<=x-log(1+x)<=x^2/2 and 0<=mu<=d/k.",
+    "offset_coordinates": "For k<l write l=k+d with integer d>=1. Then mu_(k,d)=log(1+d/k), F_k(d)=alpha*mu_(k,d), F_k'(d)=alpha/(k+d), and F_k''(d)=-alpha/(k+d)^2. The two-dimensional ordered main is therefore reduced to one triangular family of one-dimensional logarithmic phases.",
+    "proof_of_lattice_defect": "The integer dq may be subtracted from the phase. The triangle inequality leaves d|alpha/k-q| plus alpha[d/k-log(1+d/k)], and the displayed logarithmic defect bounds the latter term.",
+    "resonant_nonresonant_handoff": "A proof may split by rho_k. Small rho_k is controlled by the displayed sine defect if R and I are bounded sharply. On the complement, the monotone derivative alpha/(k+d) identifies the remaining one-dimensional exponential-sum problem. This is a route decomposition, not a completed estimate.",
+    "sine_bound": "Because |sin(2*pi*y)|<=2*pi*dist(y,Z), the real leading channel satisfies |P_H^0(k,k+d)| <= 2*pi*C_(k,k+d)*(d/k)*[d*rho_k+alpha*d^2/(2k^2)].",
+    "symbolic": {
+      "mu": "log(d/k + 1)",
+      "phase_cycles": "alpha*log(d/k + 1)",
+      "phase_first_derivative": "alpha/(k*(d/k + 1))",
+      "phase_second_derivative": "-alpha/(k**2*(d/k + 1)**2)",
+      "taylor_defect_integral_difference": "0"
+    }
+  },
+  "proof_boundary": "This proves the exact Hermitian reciprocal swap pairing, its outer-half sine/cosine formula, the real-leading reciprocal coordinates and stationary factor, the offset phase derivatives, the logarithmic and reciprocal-lattice defect bounds, complete pairing of the square interior dual main, and three algebraic nonpromotion guards. It proves no discrete Poisson or B-process formula, stationary-phase remainder, hard-cutoff boundary estimate, imaginary-correction bound, signed offset-sum gain, signed flow estimate, Phi_B bound, contact exclusion, retained aggregate or Xi theorem, Q209, cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "reciprocal_leading_certificate": {
+    "leading_coefficient": "For the ideal q=1 kernel H_0^+=-tau^2/8 and positive real normalized saddle amplitudes W_k,W_l, the interior stationary coefficient is A^0_(k,l)=-C_(k,l), where C_(k,l)=a^2*tau^2*W_kW_l/(8kl)>=0.",
+    "leading_unordered_pair": "The corresponding outer-half unordered Hermitian flow main is P_H^0(k,l)=C_(k,l)*mu*sin(2*pi*a^2*mu). It has the exact diagonal zero and a second zero whenever a^2*mu is integral, but it has no fixed sign between those phases.",
+    "reciprocal_coordinates": "At n_*=a^2/k and m_*=a^2/l, put mu=log(l/k) and tau=log(kl/a^2). Then u_n-u_m=-mu and u_n+u_m=tau.",
+    "stationary_factor": "The Hermitian Hessian is diag(-k^2/a^2,+l^2/a^2), has signature zero, and contributes the positive leading factor a^2/(kl); no Maslov phase is introduced by this mixed signature.",
+    "symbolic": {
+      "hessian": "Matrix([[-k**2/a**2, 0], [0, l**2/a**2]])",
+      "inverse_sqrt_abs_det": "a**2/(k*l)",
+      "leading_stationary_coefficient": "-W_k*W_l*a**2*log(k*l/a**2)**2/(8*k*l)",
+      "leading_unordered_pair": "log((k/l)**(W_k*W_l*a**2*log(k*l/a**2)**2*sin(log((k/l)**(2*pi*a**2)))/(8*k*l)))",
+      "u_difference": "log(k/l)",
+      "u_sum": "log(k*l/a**2)"
+    }
+  },
+  "rows": [
+    {
+      "claim": "The reduction is restricted to the interior Hermitian stationary main.",
+      "diagnostics": null,
+      "formula": "Use the physical q=1, L>=50, fixed-N terminal/bulk chart and the auxiliary segment from Sections 11.164-11.165. The present reduction concerns only the interior Hermitian reciprocal stationary main at xi=T_0; all endpoint and remainder terms remain explicit obligations.",
+      "id": "hrpr_01_domain",
+      "proof_boundary": "Endpoint and remainder families are not absorbed.",
+      "readiness": "proved",
+      "role": "fixed-chart domain"
+    },
+    {
+      "claim": "Hermitian dual coefficients and phases are conjugate under mode swap.",
+      "diagnostics": null,
+      "formula": "Let Z_(k,l)=A_(k,l)e(alpha*mu_(k,l)), where e(t)=exp(2*pi*i*t), mu_(k,l)=log(l/k), and the interior Hermitian stationary coefficients obey A_(l,k)=conj(A_(k,l)). Then Z_(l,k)=conj(Z_(k,l)) and mu_(l,k)=-mu_(k,l).",
+      "id": "hrpr_02_covariance",
+      "proof_boundary": "This assumes the interior stationary coefficient inherited from the Hermitian kernel.",
+      "readiness": "proved",
+      "role": "swap covariance"
+    },
+    {
+      "claim": "Two ordered dual modes collapse to one real sine/cosine expression.",
+      "diagnostics": null,
+      "formula": "Writing A_(k,l)=R_(k,l)+iI_(k,l), the two ordered flow terms satisfy i*mu*Z_(k,l)-i*mu*conj(Z_(k,l))=-2mu{R sin(2*pi*alpha*mu)+I cos(2*pi*alpha*mu)}. After the existing outer factor 1/2, one unordered pair k<l contributes P_H(k,l)=-mu{R sin(2*pi*alpha*mu)+I cos(2*pi*alpha*mu)}.",
+      "id": "hrpr_03_pair",
+      "proof_boundary": "No absolute value has been taken.",
+      "readiness": "proved",
+      "role": "unordered pair formula"
+    },
+    {
+      "claim": "The paired flow is the exact frequency derivative of the paired stationary phase.",
+      "diagnostics": null,
+      "formula": "The ordered flow pair is exactly (1/(2*pi))*partial_alpha [Z_(k,l)+conj(Z_(k,l))] when the stationary coefficient is held fixed. Equivalently, since xi=2*pi*alpha, it is the xi phase derivative.",
+      "id": "hrpr_04_derivative",
+      "proof_boundary": "The sine is sin(2*pi*a^2*mu) because Poisson summation uses e(t)=exp(2*pi*i*t) and T_0=2*pi*a^2. The flow multiplier is i*mu because partial_xi e[xi*mu/(2*pi)]=i*mu e[xi*mu/(2*pi)]. Thus the factor 1/(2*pi) in the alpha-derivative identity is forced by the same two inherited normalizations; no new pi is inserted.",
+      "readiness": "proved",
+      "role": "phase derivative"
+    },
+    {
+      "claim": "The entire complex Hermitian reciprocal diagonal vanishes.",
+      "diagnostics": null,
+      "formula": "At k=l one has mu=0, so the full Hermitian differentiated stationary pair vanishes, including every complex correction.",
+      "id": "hrpr_05_diagonal",
+      "proof_boundary": "This says nothing by itself about adjacent modes.",
+      "readiness": "proved",
+      "role": "diagonal null"
+    },
+    {
+      "claim": "The leading real and corrective imaginary channels have different phase zeros.",
+      "diagnostics": null,
+      "formula": "The real channel is -mu*R*sin(2*pi*alpha*mu), while the imaginary correction is -mu*I*cos(2*pi*alpha*mu). Thus the real leading kernel gains a sine zero at integral phase, but an imaginary correction generally gains only the single mu factor.",
+      "id": "hrpr_06_split",
+      "proof_boundary": "The imaginary correction must be bounded independently.",
+      "readiness": "proved",
+      "role": "real/imaginary split"
+    },
+    {
+      "claim": "The saddle difference and sum coordinates are mu and tau.",
+      "diagnostics": null,
+      "formula": "At n_*=a^2/k and m_*=a^2/l, put mu=log(l/k) and tau=log(kl/a^2). Then u_n-u_m=-mu and u_n+u_m=tau.",
+      "id": "hrpr_07_coordinates",
+      "proof_boundary": "Continuous saddle algebra only.",
+      "readiness": "proved",
+      "role": "reciprocal coordinates"
+    },
+    {
+      "claim": "The Hermitian stationary factor is positive and carries no Maslov phase.",
+      "diagnostics": null,
+      "formula": "The Hermitian Hessian is diag(-k^2/a^2,+l^2/a^2), has signature zero, and contributes the positive leading factor a^2/(kl); no Maslov phase is introduced by this mixed signature.",
+      "id": "hrpr_08_stationary",
+      "proof_boundary": "No uniform stationary-phase remainder is supplied.",
+      "readiness": "proved",
+      "role": "mixed-signature factor"
+    },
+    {
+      "claim": "The ideal q=1 Hermitian main is one explicit unsigned sine channel.",
+      "diagnostics": null,
+      "formula": "For the ideal q=1 kernel H_0^+=-tau^2/8 and positive real normalized saddle amplitudes W_k,W_l, the interior stationary coefficient is A^0_(k,l)=-C_(k,l), where C_(k,l)=a^2*tau^2*W_kW_l/(8kl)>=0. The corresponding outer-half unordered Hermitian flow main is P_H^0(k,l)=C_(k,l)*mu*sin(2*pi*a^2*mu). It has the exact diagonal zero and a second zero whenever a^2*mu is integral, but it has no fixed sign between those phases.",
+      "id": "hrpr_09_leading",
+      "proof_boundary": "The sine oscillation has no pointwise sign.",
+      "readiness": "proved",
+      "role": "leading sine channel"
+    },
+    {
+      "claim": "Swap pairing rewrites the off-diagonal square as triangular logarithmic offset sums.",
+      "diagnostics": null,
+      "formula": "For k<l write l=k+d with integer d>=1. Then mu_(k,d)=log(1+d/k), F_k(d)=alpha*mu_(k,d), F_k'(d)=alpha/(k+d), and F_k''(d)=-alpha/(k+d)^2. The two-dimensional ordered main is therefore reduced to one triangular family of one-dimensional logarithmic phases.",
+      "id": "hrpr_10_offset",
+      "proof_boundary": "This is an exact phase organization, not a sum estimate.",
+      "readiness": "proved",
+      "role": "offset reduction"
+    },
+    {
+      "claim": "The nonlinear log phase has a uniform quadratic Taylor defect.",
+      "diagnostics": null,
+      "formula": "For x=d/k>=0, x-log(1+x)=integral_0^x t/(1+t)dt. Hence 0<=x-log(1+x)<=x^2/2 and 0<=mu<=d/k.",
+      "id": "hrpr_11_log",
+      "proof_boundary": "The integer dq may be subtracted from the phase. The triangle inequality leaves d|alpha/k-q| plus alpha[d/k-log(1+d/k)], and the displayed logarithmic defect bounds the latter term.",
+      "readiness": "proved",
+      "role": "logarithmic defect"
+    },
+    {
+      "claim": "Near an integral reciprocal saddle, the leading sine gains an explicit second defect factor.",
+      "diagnostics": null,
+      "formula": "Let rho_k=dist(alpha/k,Z). Choosing an integer q with |alpha/k-q|=rho_k gives dist(alpha*log(1+d/k),Z) <= d*rho_k+alpha*d^2/(2k^2). Because |sin(2*pi*y)|<=2*pi*dist(y,Z), the real leading channel satisfies |P_H^0(k,k+d)| <= 2*pi*C_(k,k+d)*(d/k)*[d*rho_k+alpha*d^2/(2k^2)].",
+      "id": "hrpr_12_lattice",
+      "proof_boundary": "This bound can be weak when rho_k is not small.",
+      "readiness": "proved",
+      "role": "reciprocal-lattice defect"
+    },
+    {
+      "claim": "The exact bound isolates the surviving imaginary-correction obligation.",
+      "diagnostics": null,
+      "formula": "For a full stationary coefficient R+iI, the exact swap formula gives |P_H(k,k+d)| <= 2*pi*|R|*(d/k)*[d*rho_k+alpha*d^2/(2k^2)]+|I|*d/k. The first term exposes reciprocal-lattice suppression; the second is the correction obligation that cannot be discarded.",
+      "id": "hrpr_13_mixed",
+      "proof_boundary": "No source-specific bound for I is proved here.",
+      "readiness": "proved",
+      "role": "full mixed bound"
+    },
+    {
+      "claim": "Every off-diagonal interior main mode has exactly one swap partner.",
+      "diagnostics": null,
+      "formula": "Let K={ceil(a^2/B),...,floor(a^2)}. The interior two-variable stationary main is indexed by KxK, which is invariant under (k,l)<->(l,k). Its |K| diagonal modes vanish and its |K|(|K|-1) off-diagonal modes form exactly |K|(|K|-1)/2 unordered swap pairs.",
+      "id": "hrpr_14_cutoff",
+      "proof_boundary": "There is no unpaired mode in the square interior stationary main. This combinatorial fact does not pair the one-variable endpoint family, hard-cutoff half-weights, nonstationary modes, Poisson remainders, or the adjacent terminal recurrence.",
+      "readiness": "proved",
+      "role": "dual-square pairing"
+    },
+    {
+      "claim": "Swap symmetry and integral phase cannot be promoted to a sign theorem.",
+      "diagnostics": null,
+      "formula": "For R=1,I=0,mu=1/4 the outer-half pair is -1/4 at alpha=1 and +1/4 at alpha=3, so swap symmetry has no sign. For R=0,I=1,mu=1/2,alpha=2 the phase is integral but the pair is -1/2, so phase resonance does not kill the imaginary defect.",
+      "id": "hrpr_15_guards",
+      "proof_boundary": "The witnesses are algebraic, not asserted Xi configurations.",
+      "readiness": "proved",
+      "role": "sign and resonance guards"
+    },
+    {
+      "claim": "The paired main is ready for a resonant/nonresonant estimate inside the endpoint-complete formula.",
+      "diagnostics": null,
+      "formula": "A proof may split by rho_k. Small rho_k is controlled by the displayed sine defect if R and I are bounded sharply. On the complement, the monotone derivative alpha/(k+d) identifies the remaining one-dimensional exponential-sum problem. This is a route decomposition, not a completed estimate. Derive the endpoint-complete discrete Poisson/B-process formula with uniform value and first-x derivative remainders. In its Hermitian main, bound the real leading offset sums using the reciprocal-lattice split, prove a source-specific bound for the imaginary coefficient I, and retain the endpoint, transpose, hard-cutoff, and adjacent-recurrence terms before taking absolute values.",
+      "id": "hrpr_16_handoff",
+      "proof_boundary": "Prove Psi(T_0)-epsilon*integral_0^1 Psi'(T_0-theta*epsilon)dtheta<=h^2/400, preferably h^2/800.",
+      "readiness": "open",
+      "role": "analytic handoff"
+    },
+    {
+      "claim": "The exact reduction is separated from the missing analytic theorem.",
+      "diagnostics": null,
+      "formula": "This proves the exact Hermitian reciprocal swap pairing, its outer-half sine/cosine formula, the real-leading reciprocal coordinates and stationary factor, the offset phase derivatives, the logarithmic and reciprocal-lattice defect bounds, complete pairing of the square interior dual main, and three algebraic nonpromotion guards. It proves no discrete Poisson or B-process formula, stationary-phase remainder, hard-cutoff boundary estimate, imaginary-correction bound, signed offset-sum gain, signed flow estimate, Phi_B bound, contact exclusion, retained aggregate or Xi theorem, Q209, cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+      "id": "hrpr_17_boundary",
+      "proof_boundary": "This is not a proof of RH.",
+      "readiness": "proved",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "imported_poisson_remainder_bounds": 0,
+    "imported_signed_flow_bounds": 0,
+    "source_kinds": {
+      "flow_matrix_phase": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_flow_matrix_phase_reduction",
+      "reciprocal_saddle": "jensen_window_pf_newman_polymath15_first_order_centered_reciprocal_saddle_self_duality_gate",
+      "saddle_flow": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_saddle_flow_reduction",
+      "two_carrier": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_two_carrier_kernel_reduction"
+    },
+    "source_sha256": {
+      "flow_matrix_phase": "cc528b890aa3ace1b364f4f6b75aea1ae06461c29ac6d2896d666ca19d440675",
+      "reciprocal_saddle": "959d37f1c6910d272c545e1df22def7b656790711062835b0c9a0d13a7929d14",
+      "saddle_flow": "e3682e9c84bb5c72621cc6e6d5e1baccdb873f98c2bcfdda3e6a84efaff41be1",
+      "two_carrier": "0d9af778f6dfd6453b59375e42f225aad382788f7660d7a5bbae2aa3bff5496f"
+    }
+  },
+  "status": "exact Hermitian reciprocal swap, offset, and lattice-defect reduction complete; endpoint-complete signed estimate open",
+  "swap_pair_certificate": {
+    "diagonal_null": "At k=l one has mu=0, so the full Hermitian differentiated stationary pair vanishes, including every complex correction.",
+    "ordered_pair": "Writing A_(k,l)=R_(k,l)+iI_(k,l), the two ordered flow terms satisfy i*mu*Z_(k,l)-i*mu*conj(Z_(k,l))=-2mu{R sin(2*pi*alpha*mu)+I cos(2*pi*alpha*mu)}.",
+    "outer_half_pair": "After the existing outer factor 1/2, one unordered pair k<l contributes P_H(k,l)=-mu{R sin(2*pi*alpha*mu)+I cos(2*pi*alpha*mu)}.",
+    "phase_derivative": "The ordered flow pair is exactly (1/(2*pi))*partial_alpha [Z_(k,l)+conj(Z_(k,l))] when the stationary coefficient is held fixed. Equivalently, since xi=2*pi*alpha, it is the xi phase derivative.",
+    "real_defect_split": "The real channel is -mu*R*sin(2*pi*alpha*mu), while the imaginary correction is -mu*I*cos(2*pi*alpha*mu). Thus the real leading kernel gains a sine zero at integral phase, but an imaginary correction generally gains only the single mu factor.",
+    "sign_and_resonance_guards": "For R=1,I=0,mu=1/4 the outer-half pair is -1/4 at alpha=1 and +1/4 at alpha=3, so swap symmetry has no sign. For R=0,I=1,mu=1/2,alpha=2 the phase is integral but the pair is -1/2, so phase resonance does not kill the imaginary defect.",
+    "swap_covariance": "Let Z_(k,l)=A_(k,l)e(alpha*mu_(k,l)), where e(t)=exp(2*pi*i*t), mu_(k,l)=log(l/k), and the interior Hermitian stationary coefficients obey A_(l,k)=conj(A_(k,l)). Then Z_(l,k)=conj(Z_(k,l)) and mu_(l,k)=-mu_(k,l).",
+    "symbolic": {
+      "imaginary_channel": "-I*mu*cos(2*pi*alpha*mu)",
+      "imaginary_resonance_witness": "-1/2",
+      "negative_real_witness": "-1/4",
+      "outer_half_pair": "-mu*(I*cos(2*pi*alpha*mu) + R*sin(2*pi*alpha*mu))",
+      "paired_ordered_flow": "-2*mu*(I*cos(2*pi*alpha*mu) + R*sin(2*pi*alpha*mu))",
+      "phase_derivative_difference": "0",
+      "positive_real_witness": "1/4",
+      "real_channel": "-R*mu*sin(2*pi*alpha*mu)"
+    }
+  }
+}

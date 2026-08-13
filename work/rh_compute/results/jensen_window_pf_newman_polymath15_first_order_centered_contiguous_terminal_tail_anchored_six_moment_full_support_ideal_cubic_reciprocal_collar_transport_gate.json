@@ -1,0 +1,352 @@
+{
+  "counts": {
+    "collar_decompositions": 107,
+    "corner_orientation_checks": 752,
+    "far_aggregate_bounds": 0,
+    "far_ibp_identities": 1,
+    "far_interval_compressions": 1475,
+    "finite_correction_bounds": 0,
+    "finite_moment_identities": 2,
+    "fixed_cell_transports": 2,
+    "full_line_cancellations": 1,
+    "ideal_cubic_identities": 5,
+    "internal_tie_checks": 2150,
+    "joined_recombinations": 2,
+    "noninvariance_witnesses": 1400,
+    "phase_identities": 3,
+    "phi_b_bounds": 0,
+    "radius_one_tie_checks": 432,
+    "rows": 31,
+    "signed_collar_bounds": 0
+  },
+  "date": "2026-08-02",
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_ideal_cubic_reciprocal_collar_transport_gate",
+  "proof_boundary": "This proves the exact finite collar/far split, internal and outer rail transport, local diagonal and adjacent-corner phases, rail-compressed integration by parts, finite Gaussian moment boundary identities, and ideal-cubic source identities. It proves no signed tie-complete collar, far aggregate, finite first-correction remainder, completed current, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "certificate": "For r in C_p define I_(q,r)[P]=integral_(J_q)f_P(u)e(-ru)du and mathcal B_(q,p)[P]=sum_(r in C_p)I_(q,r)[P].",
+      "claim": "Every reciprocal block is a finite sum of physical-cell mode atoms.",
+      "id": "rct_01_atom",
+      "proof_boundary": "No atom is estimated separately.",
+      "readiness": "proved",
+      "role": "block atom"
+    },
+    {
+      "certificate": "For 0<=L<=N-1 define mathcal C_(N,L)[P]=sum_(|p-q|<=L)mathcal B_(q,p)[P] and mathcal E_(N,L)[P]=sum_(|p-q|>=L+1)mathcal B_(q,p)[P]. Then mathscr F_N[P]=mathcal C_(N,L)[P]+mathcal E_(N,L)[P].",
+      "claim": "Every finite radius gives an exact near/far partition.",
+      "id": "rct_02_collar",
+      "proof_boundary": "The partition is algebraic.",
+      "readiness": "proved",
+      "role": "collar definition"
+    },
+    {
+      "certificate": "The bookmarked diagonal-plus-adjacent object is mathcal C_(N,1)=sum_q mathcal B_(q,q)+sum_(q<N)mathcal B_(q,q+1)+sum_(q>1)mathcal B_(q,q-1).",
+      "claim": "The diagonal-plus-adjacent object is exactly the radius-one collar.",
+      "id": "rct_03_radius_one",
+      "proof_boundary": "It is not yet tie completed.",
+      "readiness": "proved",
+      "role": "bookmarked collar"
+    },
+    {
+      "certificate": "For fixed p, the far physical cells are two contiguous rails: [1,p-L-1/2] when p>=L+2 and [p+L+1/2,N] when p<=N-L-1. Hence mathcal E_(N,L) is a sum of at most two oriented integrals per frequency cell, not a collection of independently bounded unit cells.",
+      "claim": "All far physical cells compress to two oriented intervals per frequency cell.",
+      "id": "rct_04_far_compression",
+      "proof_boundary": "No modulus is taken.",
+      "readiness": "proved",
+      "role": "far rail compression"
+    },
+    {
+      "certificate": "When alpha_P/r crosses p+1/2 upward, the mode r moves from C_p to C_(p+1). Its collar jump is 1_(p+L+1<=N)I_(p+L+1,r)-1_(p-L>=1)I_(p-L,r).",
+      "claim": "A reciprocal reassignment moves two collar rails.",
+      "id": "rct_05_internal_tie",
+      "proof_boundary": "The source is evaluated at the crossing.",
+      "readiness": "proved",
+      "role": "internal tie law"
+    },
+    {
+      "certificate": "For L=1 the exact jump is 1_(p+2<=N)I_(p+2,r)-1_(p-1>=1)I_(p-1,r). The diagonal and two adjacent blocks therefore do not form an internal-tie-invariant object.",
+      "claim": "The diagonal-plus-adjacent collar has an explicit two-rail jump.",
+      "id": "rct_06_radius_one_tie",
+      "proof_boundary": "It is not globally invariant alone.",
+      "readiness": "proved",
+      "role": "three-strip jump"
+    },
+    {
+      "certificate": "The far complement has the opposite rail jump, so mathcal C_(N,L)+mathcal E_(N,L)=mathscr F_N remains invariant under every internal reassignment.",
+      "claim": "The far complement cancels the collar rail jump exactly.",
+      "id": "rct_07_far_tie",
+      "proof_boundary": "The full band sum remains invariant.",
+      "readiness": "proved",
+      "role": "far compensation"
+    },
+    {
+      "certificate": "For the exact test source f(u)=u e(ru), every full-cell atom I_(q,r) equals q. At an interior tie the collar jump is 2L+1, proving that no proper fixed-width collar is coefficientwise tie invariant.",
+      "claim": "No proper fixed-width collar is coefficientwise tie invariant.",
+      "id": "rct_08_witness",
+      "proof_boundary": "The witness is nonphysical and proves only structural nonclosure.",
+      "readiness": "guard_validated",
+      "role": "nonclosure witness"
+    },
+    {
+      "certificate": "At the two outer reciprocal-band crossings the complete mode, not only its near collar, is transferred to or from the outer remainder. The collar and both far rails must travel together.",
+      "claim": "Outer roster crossings transfer a complete mode.",
+      "id": "rct_09_outer_tie",
+      "proof_boundary": "Near and far pieces cannot be transferred separately.",
+      "readiness": "guard_validated",
+      "role": "outer transfer"
+    },
+    {
+      "certificate": "On a fixed roster-and-cell chart, mathcal C_(N,L)[i(lambda-c)P]=(partial_xi-ic)mathcal C_(N,L)[P] and likewise for mathcal E_(N,L). At a tie the two rail atoms and their relative lifts are transferred explicitly.",
+      "claim": "Fixed-cell relative lifting preserves the collar and far split.",
+      "id": "rct_10_fixed_cell",
+      "proof_boundary": "Rail lifts are explicit at ties.",
+      "readiness": "proved",
+      "role": "relative lift"
+    },
+    {
+      "certificate": "For r in C_q put v=alpha_P/r and u=v(1+y). Then phi_r(u)=alpha_P(log v-1)+alpha_P{log(1+y)-y}. This is the exact negative Morse chart; no quadratic truncation is made.",
+      "claim": "The diagonal has an exact negative Morse chart.",
+      "id": "rct_11_diagonal",
+      "proof_boundary": "No full-line replacement is made.",
+      "readiness": "proved",
+      "role": "diagonal phase"
+    },
+    {
+      "certificate": "For p=q+1 let c=q+1/2, u=c-a, v=c+b, and d=(a+b)/(c+b). Then phi_r(u)=alpha_P(log v-1)+alpha_P{log(1-d)+d}, with phi_r'(u)>=0 and equality only at the shared corner a=b=0.",
+      "claim": "The right adjacent block is an oriented stationary boundary corner.",
+      "id": "rct_12_right_corner",
+      "proof_boundary": "Its endpoint is retained.",
+      "readiness": "proved",
+      "role": "right adjacent corner"
+    },
+    {
+      "certificate": "For p=q-1 let c=q-1/2, u=c+a, v=c-b, and d=(a+b)/(c-b). Then phi_r(u)=alpha_P(log v-1)+alpha_P{log(1+d)-d}, with phi_r'(u)<=0 and equality only at the shared corner.",
+      "claim": "The left adjacent block has the opposite orientation.",
+      "id": "rct_13_left_corner",
+      "proof_boundary": "Its endpoint is retained.",
+      "readiness": "proved",
+      "role": "left adjacent corner"
+    },
+    {
+      "certificate": "Both corner corrections are strictly negative away from the shared boundary: d/d d[log(1-d)+d]=-d/(1-d) and d/d d[log(1+d)-d]=-d/(1+d). Their cubic terms have opposite orientations and cannot be replaced by one unsigned half-Gaussian.",
+      "claim": "Both exact corner phase corrections are negative away from contact.",
+      "id": "rct_14_corner_sign",
+      "proof_boundary": "This does not sign the complex amplitude integral.",
+      "readiness": "proved",
+      "role": "corner geometry"
+    },
+    {
+      "certificate": "On either far rail, v=alpha_P/r lies in the p-cell and the physical variable lies outside [p-L-1/2,p+L+1/2]. Hence |v-u|>=L and q_r(u)=alpha_P/u-r has no zero for every L>=1.",
+      "claim": "The compressed far rails have no stationary point.",
+      "id": "rct_15_far_gap",
+      "proof_boundary": "The bound is not yet aggregated.",
+      "readiness": "proved",
+      "role": "far nonstationarity"
+    },
+    {
+      "certificate": "For q_r=alpha_P/u-r, integral_a^b A e(phi_r)du=kappa[Ae(phi_r)/q_r]_a^b-kappa integral_a^b e(phi_r){A'/q_r-Aq_r'/q_r^2}du on each oriented far interval.",
+      "claim": "One exact integration by parts applies to each far rail.",
+      "id": "rct_16_ibp",
+      "proof_boundary": "Endpoint orientation is preserved.",
+      "readiness": "proved",
+      "role": "oriented far identity"
+    },
+    {
+      "certificate": "The unit-cell boundary terms telescope before estimation because each far side is one contiguous interval. Only u=1, u=N, and the two collar rails p-L-1/2 and p+L+1/2 remain for each frequency cell.",
+      "claim": "Unit-cell integration-by-parts boundaries cancel before estimation.",
+      "id": "rct_17_telescope",
+      "proof_boundary": "Only physical and collar rails remain.",
+      "readiness": "proved",
+      "role": "boundary telescope"
+    },
+    {
+      "certificate": "The rail-compressed identity prevents an artificial O(N^2) boundary budget, but no signed or absolute aggregate bound for the remaining p,r sum is proved here.",
+      "claim": "Control the p,r aggregate after rail compression.",
+      "id": "rct_18_far_bound",
+      "proof_boundary": "No far aggregate bound is claimed.",
+      "readiness": "open",
+      "role": "far aggregate"
+    },
+    {
+      "certificate": "The inherited full-line sequential coefficient remains -kappa mathcal D_qA/(2alpha_P)+kappa mathcal D_qA/(2alpha_P)=0 for arbitrary twice-differentiable A.",
+      "claim": "The inherited first sequential coefficient still cancels on the full line.",
+      "id": "rct_19_full_line",
+      "proof_boundary": "This is not a finite-cell theorem.",
+      "readiness": "proved",
+      "role": "full-line correction"
+    },
+    {
+      "certificate": "On a finite negative chart, integral_a^b y^2e(-y^2/2)dy=kappa integral_a^b e(-y^2/2)dy-kappa[y e(-y^2/2)]_a^b.",
+      "claim": "Finite negative-chart second moments have an explicit boundary defect.",
+      "id": "rct_20_negative_moment",
+      "proof_boundary": "The endpoints are not discarded.",
+      "readiness": "proved",
+      "role": "negative finite moment"
+    },
+    {
+      "certificate": "On a finite positive chart, integral_c^d eta^2e(+eta^2/2)deta=-kappa integral_c^d e(+eta^2/2)deta+kappa[eta e(+eta^2/2)]_c^d.",
+      "claim": "Finite positive-chart second moments have the opposite boundary formula.",
+      "id": "rct_21_positive_moment",
+      "proof_boundary": "The endpoints are not discarded.",
+      "readiness": "proved",
+      "role": "positive finite moment"
+    },
+    {
+      "certificate": "The full-line cancellation uses vanishing regularized boundary terms. Finite diagonal and corner charts retain the four displayed endpoint terms; they may cancel only after the oriented collar rails, outer endpoints, and terminal recurrence are composed.",
+      "claim": "Full-line cancellation cannot be copied into a finite collar without boundary composition.",
+      "id": "rct_22_boundary_guard",
+      "proof_boundary": "A complete endpoint cancellation remains open.",
+      "readiness": "guard_validated",
+      "role": "finite-correction guard"
+    },
+    {
+      "certificate": "The full-line cancellation uses vanishing regularized boundary terms. Finite diagonal and corner charts retain the four displayed endpoint terms; they may cancel only after the oriented collar rails, outer endpoints, and terminal recurrence are composed.",
+      "claim": "Compose and bound the finite moment boundary terms.",
+      "id": "rct_23_finite_correction",
+      "proof_boundary": "No finite correction remainder is proved.",
+      "readiness": "open",
+      "role": "finite first correction"
+    },
+    {
+      "certificate": "Retain P_H^0=-i(x+u_N)(x-u_N)^2/4 and P_T^0=-i(x-u_N)(x+u_N)^2/4+u_(N,x)(x-u_N) inside every block before a modulus is taken.",
+      "claim": "The two ideal cubics remain exact block amplitudes.",
+      "id": "rct_24_cubics",
+      "proof_boundary": "Corrections remain detached.",
+      "readiness": "proved",
+      "role": "ideal sources"
+    },
+    {
+      "certificate": "At x=-u_q, P_H^0=i(u_q-u_N)(u_q+u_N)^2/4 and P_T^0=i(u_q+u_N)(u_q-u_N)^2/4-u_(N,x)(u_q+u_N).",
+      "claim": "The physical ideal atom values retain their phase-difference and phase-sum factors.",
+      "id": "rct_25_atoms",
+      "proof_boundary": "No atomwise sign is inferred.",
+      "readiness": "proved",
+      "role": "ideal atom values"
+    },
+    {
+      "certificate": "The exact polynomial relation is P_T^0(x)=-P_H^0(-x)+u_(N,x)(x-u_N). The physical interval is not reflection-symmetric, so this identity alone gives no cancellation or sign.",
+      "claim": "The Hermitian/transpose reflection has an explicit shear defect.",
+      "id": "rct_26_reflection",
+      "proof_boundary": "The physical domain is not reflection symmetric.",
+      "readiness": "guard_validated",
+      "role": "ideal reflection"
+    },
+    {
+      "certificate": "At q=N, P_H^0(log N)=0 and P_T^0(log N)=-2u_Nu_(N,x). The transpose endpoint must remain joined to +2iu_N mathcal T_N[B_(T,N)^0] and the complex terminal recurrence.",
+      "claim": "The Hermitian endpoint vanishes and the transpose endpoint survives at shear scale.",
+      "id": "rct_27_terminal",
+      "proof_boundary": "The complex terminal quadrature remains compulsory.",
+      "readiness": "proved",
+      "role": "terminal ideal values"
+    },
+    {
+      "certificate": "Since mathscr F_N=mathcal C_(N,1)+mathcal E_(N,1), the ideal carrier-only joins are mathcal J_H^0=2mathscr M_N[P_H^0]-mathcal C_(N,1)[P_H^0]-mathcal E_(N,1)[P_H^0] and mathcal J_T^0=2mathscr M_N[P_T^0]-mathcal C_(N,1)[P_T^0]-mathcal E_(N,1)[P_T^0]+2iu_Nmathcal T_N[B_(T,N)^0]. The collar rail jump cancels only against the far rail jump inside these complete joins.",
+      "claim": "The live Hermitian and transpose joins contain both the collar and far rails.",
+      "id": "rct_28_joined",
+      "proof_boundary": "No component is signed separately.",
+      "readiness": "proved",
+      "role": "physical ideal joins"
+    },
+    {
+      "certificate": "The diagonal-plus-adjacent collar is useful only on a fixed cell chart; it is not a globally closed observation. Preserve its two rail transfers and compose the rail-compressed far functional before seeking a uniform sign.",
+      "claim": "Replace the isolated three-strip target by a tie-complete collar-plus-far composition.",
+      "id": "rct_29_decision",
+      "proof_boundary": "No valid cancellation route is discarded beyond the isolated collar.",
+      "readiness": "guard_validated",
+      "role": "route decision"
+    },
+    {
+      "certificate": "Insert P_H^0 and P_T^0 into the exact diagonal and corner charts, carry the four finite-moment boundary terms into the two rail interfaces, join 2mathscr M_N and the transpose terminal survivor, and then prove or falsify a signed aggregate for the resulting tie-complete collar-plus-far functional.",
+      "claim": "Derive the signed tie-complete ideal composition.",
+      "id": "rct_30_obligation",
+      "proof_boundary": "No signed ideal-cubic collar, far aggregate, finite first-correction remainder, h^2 reserve, completed current, or RH-level theorem is proved.",
+      "readiness": "open",
+      "role": "next obligation"
+    },
+    {
+      "certificate": "No signed ideal-cubic collar, far aggregate, finite first-correction remainder, h^2 reserve, completed current, or RH-level theorem is proved.",
+      "claim": "This gate is not a proof of RH.",
+      "id": "rct_31_boundary",
+      "proof_boundary": "No prize-level conclusion is claimed.",
+      "readiness": "guard_validated",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "finite_band": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_finite_band_dirichlet_cell_reduction_gate.json",
+      "sha256": "f97ce0e29e2b374a1154cbb982eb522077ea59bfc471e9e121bfe37b96ab39af"
+    },
+    "first_correction": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_ideal_cubic_reciprocal_first_correction_gate.json",
+      "sha256": "087876f56f7a7e212575a56711885835e2cfacca06a210ebc2b876495f52a8c5"
+    },
+    "terminal_quadrature": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_terminal_conditional_quadrature_gate.json",
+      "sha256": "27033bf847ba614cdd73dbd8c0924c488a2c8610ca80c737e63030c042553790"
+    }
+  },
+  "status": "reciprocal collar and rail transport proved; signed tie-complete ideal estimate open",
+  "symbolic_certificate": {
+    "collar": {
+      "atom": "For r in C_p define I_(q,r)[P]=integral_(J_q)f_P(u)e(-ru)du and mathcal B_(q,p)[P]=sum_(r in C_p)I_(q,r)[P].",
+      "collar": "For 0<=L<=N-1 define mathcal C_(N,L)[P]=sum_(|p-q|<=L)mathcal B_(q,p)[P] and mathcal E_(N,L)[P]=sum_(|p-q|>=L+1)mathcal B_(q,p)[P]. Then mathscr F_N[P]=mathcal C_(N,L)[P]+mathcal E_(N,L)[P].",
+      "decompositions": 107,
+      "far_compression": "For fixed p, the far physical cells are two contiguous rails: [1,p-L-1/2] when p>=L+2 and [p+L+1/2,N] when p<=N-L-1. Hence mathcal E_(N,L) is a sum of at most two oriented integrals per frequency cell, not a collection of independently bounded unit cells.",
+      "far_compressions": 1475,
+      "radius_one": "The bookmarked diagonal-plus-adjacent object is mathcal C_(N,1)=sum_q mathcal B_(q,q)+sum_(q<N)mathcal B_(q,q+1)+sum_(q>1)mathcal B_(q,q-1)."
+    },
+    "far": {
+      "aggregate_open": "The rail-compressed identity prevents an artificial O(N^2) boundary budget, but no signed or absolute aggregate bound for the remaining p,r sum is proved here.",
+      "far_aggregate_bounds": 0,
+      "gap": "On either far rail, v=alpha_P/r lies in the p-cell and the physical variable lies outside [p-L-1/2,p+L+1/2]. Hence |v-u|>=L and q_r(u)=alpha_P/u-r has no zero for every L>=1.",
+      "ibp": "For q_r=alpha_P/u-r, integral_a^b A e(phi_r)du=kappa[Ae(phi_r)/q_r]_a^b-kappa integral_a^b e(phi_r){A'/q_r-Aq_r'/q_r^2}du on each oriented far interval.",
+      "ibp_identities": 1,
+      "telescoping": "The unit-cell boundary terms telescope before estimation because each far side is one contiguous interval. Only u=1, u=N, and the two collar rails p-L-1/2 and p+L+1/2 remain for each frequency cell."
+    },
+    "handoff": {
+      "decision": "The diagonal-plus-adjacent collar is useful only on a fixed cell chart; it is not a globally closed observation. Preserve its two rail transfers and compose the rail-compressed far functional before seeking a uniform sign.",
+      "obligation": "Insert P_H^0 and P_T^0 into the exact diagonal and corner charts, carry the four finite-moment boundary terms into the two rail interfaces, join 2mathscr M_N and the transpose terminal survivor, and then prove or falsify a signed aggregate for the resulting tie-complete collar-plus-far functional.",
+      "reserve": "No signed ideal-cubic collar, far aggregate, finite first-correction remainder, h^2 reserve, completed current, or RH-level theorem is proved."
+    },
+    "ideal": {
+      "atoms": "At x=-u_q, P_H^0=i(u_q-u_N)(u_q+u_N)^2/4 and P_T^0=i(u_q+u_N)(u_q-u_N)^2/4-u_(N,x)(u_q+u_N).",
+      "cubics": "Retain P_H^0=-i(x+u_N)(x-u_N)^2/4 and P_T^0=-i(x-u_N)(x+u_N)^2/4+u_(N,x)(x-u_N) inside every block before a modulus is taken.",
+      "ideal_identities": 5,
+      "joined": "Since mathscr F_N=mathcal C_(N,1)+mathcal E_(N,1), the ideal carrier-only joins are mathcal J_H^0=2mathscr M_N[P_H^0]-mathcal C_(N,1)[P_H^0]-mathcal E_(N,1)[P_H^0] and mathcal J_T^0=2mathscr M_N[P_T^0]-mathcal C_(N,1)[P_T^0]-mathcal E_(N,1)[P_T^0]+2iu_Nmathcal T_N[B_(T,N)^0]. The collar rail jump cancels only against the far rail jump inside these complete joins.",
+      "joined_recombinations": 2,
+      "reflection": "The exact polynomial relation is P_T^0(x)=-P_H^0(-x)+u_(N,x)(x-u_N). The physical interval is not reflection-symmetric, so this identity alone gives no cancellation or sign.",
+      "signed_collar_bounds": 0,
+      "terminal": "At q=N, P_H^0(log N)=0 and P_T^0(log N)=-2u_Nu_(N,x). The transpose endpoint must remain joined to +2iu_N mathcal T_N[B_(T,N)^0] and the complex terminal recurrence."
+    },
+    "moments": {
+      "boundary_guard": "The full-line cancellation uses vanishing regularized boundary terms. Finite diagonal and corner charts retain the four displayed endpoint terms; they may cancel only after the oriented collar rails, outer endpoints, and terminal recurrence are composed.",
+      "finite_correction_bounds": 0,
+      "full_line": "The inherited full-line sequential coefficient remains -kappa mathcal D_qA/(2alpha_P)+kappa mathcal D_qA/(2alpha_P)=0 for arbitrary twice-differentiable A.",
+      "full_line_cancellations": 1,
+      "moment_identities": 2,
+      "negative_moment": "On a finite negative chart, integral_a^b y^2e(-y^2/2)dy=kappa integral_a^b e(-y^2/2)dy-kappa[y e(-y^2/2)]_a^b.",
+      "positive_moment": "On a finite positive chart, integral_c^d eta^2e(+eta^2/2)deta=-kappa integral_c^d e(+eta^2/2)deta+kappa[eta e(+eta^2/2)]_c^d."
+    },
+    "phases": {
+      "corner_orientation_checks": 752,
+      "diagonal": "For r in C_q put v=alpha_P/r and u=v(1+y). Then phi_r(u)=alpha_P(log v-1)+alpha_P{log(1+y)-y}. This is the exact negative Morse chart; no quadratic truncation is made.",
+      "left_corner": "For p=q-1 let c=q-1/2, u=c+a, v=c-b, and d=(a+b)/(c-b). Then phi_r(u)=alpha_P(log v-1)+alpha_P{log(1+d)-d}, with phi_r'(u)<=0 and equality only at the shared corner.",
+      "orientation": "Both corner corrections are strictly negative away from the shared boundary: d/d d[log(1-d)+d]=-d/(1-d) and d/d d[log(1+d)-d]=-d/(1+d). Their cubic terms have opposite orientations and cannot be replaced by one unsigned half-Gaussian.",
+      "phase_identities": 3,
+      "right_corner": "For p=q+1 let c=q+1/2, u=c-a, v=c+b, and d=(a+b)/(c+b). Then phi_r(u)=alpha_P(log v-1)+alpha_P{log(1-d)+d}, with phi_r'(u)>=0 and equality only at the shared corner a=b=0."
+    },
+    "ties": {
+      "far_tie": "The far complement has the opposite rail jump, so mathcal C_(N,L)+mathcal E_(N,L)=mathscr F_N remains invariant under every internal reassignment.",
+      "fixed_cell": "On a fixed roster-and-cell chart, mathcal C_(N,L)[i(lambda-c)P]=(partial_xi-ic)mathcal C_(N,L)[P] and likewise for mathcal E_(N,L). At a tie the two rail atoms and their relative lifts are transferred explicitly.",
+      "fixed_cell_transports": 2,
+      "internal_tie": "When alpha_P/r crosses p+1/2 upward, the mode r moves from C_p to C_(p+1). Its collar jump is 1_(p+L+1<=N)I_(p+L+1,r)-1_(p-L>=1)I_(p-L,r).",
+      "noninvariance_witnesses": 1400,
+      "outer_tie": "At the two outer reciprocal-band crossings the complete mode, not only its near collar, is transferred to or from the outer remainder. The collar and both far rails must travel together.",
+      "radius_one_checks": 432,
+      "radius_one_tie": "For L=1 the exact jump is 1_(p+2<=N)I_(p+2,r)-1_(p-1>=1)I_(p-1,r). The diagonal and two adjacent blocks therefore do not form an internal-tie-invariant object.",
+      "tie_checks": 2150,
+      "witness": "For the exact test source f(u)=u e(ru), every full-cell atom I_(q,r) equals q. At an interior tie the collar jump is 2L+1, proving that no proper fixed-width collar is coefficientwise tie invariant."
+    }
+  }
+}

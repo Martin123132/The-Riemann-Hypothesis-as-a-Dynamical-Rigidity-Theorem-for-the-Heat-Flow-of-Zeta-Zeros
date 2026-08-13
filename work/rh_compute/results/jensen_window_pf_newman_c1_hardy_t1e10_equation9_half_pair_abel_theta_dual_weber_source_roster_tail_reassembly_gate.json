@@ -1,0 +1,71 @@
+{
+  "decision": {
+    "all_remaining_positive_dual_tails_reassembled_at_same_index": true,
+    "complete_T_upper_proved": false,
+    "completed_B_block_recovers_labels_B_minus_2_through_A": true,
+    "completed_finite_B_block_has_exact_equation9_source_normalization": true,
+    "positive_dual_sector_reindexed_with_cutoff_guard": true,
+    "rh_implication": false,
+    "summed_tail_driver_vanishes_at_s_equal_1": true,
+    "summed_tail_retains_endpoint_difference_before_absolute_values": true,
+    "summed_theta_tail_quantitatively_bounded": false,
+    "upper_source_label_B_recovered_by_this_gate": false,
+    "zero_mode_direct_exceptional_sector_closed": false
+  },
+  "dependencies": {
+    "Abel_theta_roster": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_modular_dual_roster_gate.json",
+      "sha256": "b5295bd15ac42385f1cee282e66d9dc05f65c54746d02b265ee4f7341ee5cae5"
+    },
+    "Weber_completion": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_weber_completion_cancellation_gate.json",
+      "sha256": "65e44261a22dd976b18c092fb09ea9b30204df3af43ae6986cbad2ab1af9359f"
+    },
+    "shift_defect": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_cutoff_shift_defect_vanishing_gate.json",
+      "sha256": "53c8904f5da227a2a1493a9b6dadc75517a0917f1d0e659f2b60eb8591946c9d"
+    },
+    "symmetric_Poisson": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_symmetric_poisson_interchange_gate.json",
+      "sha256": "4a1898bcda7105107fcaf303a20a87237e75c09f0052db7710bff5f6765a88b0"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_weber_source_roster_tail_reassembly_gate",
+  "next_obligation": "Analyze WR7 as one endpoint-grouped theta tail. Use the linear s=1 zero before majorization, seek a second modular or contour representation for s>1, and isolate the x=0/s=1 corner. In parallel, combine the dual n=0 and direct -1 terms without separating endpoints and test whether they supply the missing upper source label B plus the certified face/fold currents.",
+  "passed": true,
+  "proof_boundary": "Exact fixed-height source-roster recovery except B and same-index theta-tail reassembly only. No tail bound, exceptional-sector closure, complete source-minus-target estimate, T_upper, height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.289,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "height": 10000000000,
+    "lower_endpoint": 159577,
+    "recovered_completed_labels": 2481422,
+    "roster_length": 2481422,
+    "upper_endpoint": 5122421
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_weber_source_roster_tail_reassembly_gate.py",
+      "sha256": "427af280617b6cdaf8095b84e7a9e1c99bdcb2190793f20f61277f13a85a408d"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_weber_source_roster_tail_reassembly_gate.py",
+      "sha256": "fb71a25aec684afe89760b83869690c465d831d0c745c2cbd1291176dedea1fd"
+    }
+  },
+  "status": "completed_B_block_recovers_source_roster_except_B_remaining_positive_dual_sector_is_one_grouped_theta_tail",
+  "symbolic_certificate": {
+    "completed_finite_B_block": "2/(4i*pi) times K_B^[0,infinity](alpha) times a_t(x)=alpha[x(1-x)]^(-1/4)e^(i*pi*alpha^2*x/4)",
+    "exceptional_sector": "dual n=0 endpoint difference and the direct -1 in Theta(tau)-1 stay grouped with the missing upper source label B",
+    "positive_dual_identity": "sum_(n>=1)(B_n-A_n)=sum_(n=1)^L B_n+sum_(k>=1)(B_(L+k)-A_k)",
+    "recovered_source_labels": "alpha=B-2,B-4,...,A (L labels); the upper label B remains in the zero/direct exceptional sector",
+    "same_index_tail_identity": "sum_(n>=1)(B_n-A_n)=sum_(n=1)^L Full_B,n+sum_(n>=1)(Tail_A,n-Tail_B,n)",
+    "summed_tail": "2sum_(n>=1)(Tail_A,n-Tail_B,n)=e^(i*pi/4)x int_1^infinity s^(-1/2)[g_A-g_B][Theta(tau_x(s))-1]ds",
+    "tail_coordinate": "s=p^2/x>=1, tau_x(s)=x(1-1/s)",
+    "tail_driver": "g_D(x,s)=exp[i*pi*D^2*x(1-s)/4]{2+i*pi*D^2*x(1-s)}",
+    "tail_face_cancellation": "g_A(x,1)-g_B(x,1)=0 and partial_s(g_A-g_B)(x,1)=(3i*pi/2)(B^2-A^2)x"
+  }
+}

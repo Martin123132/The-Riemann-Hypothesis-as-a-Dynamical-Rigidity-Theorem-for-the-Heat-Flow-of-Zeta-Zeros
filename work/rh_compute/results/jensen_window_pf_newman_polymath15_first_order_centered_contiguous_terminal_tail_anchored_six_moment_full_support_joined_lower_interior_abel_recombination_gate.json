@@ -1,0 +1,308 @@
+{
+  "counts": {
+    "abel_checks": 50,
+    "global_recombinations": 4,
+    "ideal_kernel_identities": 6,
+    "lower_endpoint_identities": 2,
+    "modewise_recombinations": 1,
+    "phi_b_bounds": 0,
+    "physical_kernel_factorizations": 2,
+    "relative_recombinations": 4,
+    "rows": 28,
+    "signed_completed_current_bounds": 0,
+    "signed_finite_cell_defect_bounds": 0,
+    "tie_invariants": 2
+  },
+  "date": "2026-08-02",
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_joined_lower_interior_abel_recombination_gate",
+  "proof_boundary": "This proves exact physical kernel factorizations, ideal cubic lifts, lower/interior reverse recombination, finite-band/carrier/defect identities, relative-channel joins, and Abel formulas. It proves no signed finite-cell-defect or completed-current bound, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "certificate": "B_(H,N)=(R-conjugate(R_N)){conjugate(C_N)Q-conjugate(Q_N)C}+(R_x+conjugate(R_(N,x)))conjugate(C_N)C.",
+      "claim": "The complete Hermitian terminal coefficient has an exact rate/determinant factorization.",
+      "id": "jli_01_hfull",
+      "proof_boundary": "Terminal conjugation is retained.",
+      "readiness": "proved",
+      "role": "physical Hermitian kernel"
+    },
+    {
+      "certificate": "After Q=(R+delta)C+D, B_(H,N)=conjugate(C_N)C{(R-conjugate(R_N))^2+(R-conjugate(R_N))(delta-conjugate(delta))+R_x+conjugate(R_(N,x))}+(R-conjugate(R_N)){conjugate(C_N)D-conjugate(D_N)C}.",
+      "claim": "Substitution of Q exposes every physical correction channel.",
+      "id": "jli_02_hphysical",
+      "proof_boundary": "No correction is bounded separately.",
+      "readiness": "proved",
+      "role": "Hermitian correction chart"
+    },
+    {
+      "certificate": "B_(T,N)=(R-R_N){C_NQ-Q_NC}+(R_x+R_(N,x))C_NC.",
+      "claim": "The complete transpose terminal coefficient has the matching factorization.",
+      "id": "jli_03_tfull",
+      "proof_boundary": "No sign is inferred.",
+      "readiness": "proved",
+      "role": "physical transpose kernel"
+    },
+    {
+      "certificate": "After Q=(R+delta)C+D, B_(T,N)=C_NC{(R-R_N)^2+R_x+R_(N,x)}+(R-R_N){C_ND-D_NC}.",
+      "claim": "Substitution of Q exposes the transpose correction channels.",
+      "id": "jli_04_tphysical",
+      "proof_boundary": "No determinant factor is discarded.",
+      "readiness": "proved",
+      "role": "transpose correction chart"
+    },
+    {
+      "certificate": "For C=1, D=delta=0, R=ix/2, R_N=-iu_N/2, and R_x=R_(N,x)=-iu_(N,x)/2, B_(H,N)^0=-(x-u_N)^2/4 and B_(T,N)^0=-(x+u_N)^2/4-iu_(N,x).",
+      "claim": "The correction-free kernels are explicit quadratics.",
+      "id": "jli_05_ideal",
+      "proof_boundary": "This specialization is not the full physical state.",
+      "readiness": "proved",
+      "role": "ideal kernels"
+    },
+    {
+      "certificate": "P_H^0=-i(x+u_N)(x-u_N)^2/4 and P_T^0=-i(x-u_N)(x+u_N)^2/4+u_(N,x)(x-u_N). Both ideal lifts are cubic; the physical correction can restore degrees four and five.",
+      "claim": "Both correction-free joined kernels are cubic.",
+      "id": "jli_06_ideal_lifts",
+      "proof_boundary": "Degree reduction is not a size bound.",
+      "readiness": "proved",
+      "role": "ideal relative lifts"
+    },
+    {
+      "certificate": "At x=-u_q, P_H^0=i(u_q-u_N)(u_q+u_N)^2/4 and P_T^0=i(u_q+u_N)(u_q-u_N)^2/4-u_(N,x)(u_q+u_N).",
+      "claim": "The ideal q-atoms display the phase-difference and phase-sum factors.",
+      "id": "jli_07_atoms",
+      "proof_boundary": "Neither atom family has a fixed real sign.",
+      "readiness": "proved",
+      "role": "ideal carrier atoms"
+    },
+    {
+      "certificate": "Define Delta_H=P_H-P_H^0 and Delta_T=P_T-P_T^0 only after the full terminal conjugations above. Every term in either Delta vanishes under the simultaneous ideal specialization; no modulus or coefficient budget is taken here.",
+      "claim": "Physical corrections are defined after full terminal conjugation.",
+      "id": "jli_08_corrections",
+      "proof_boundary": "No componentwise correction budget is introduced.",
+      "readiness": "proved",
+      "role": "correction split"
+    },
+    {
+      "certificate": "For P_L=i(lambda-L)P, the exact lower block is -T_1[P_L]-U_1[P_L]=i kappa L P(0)S_1+i kappa^2{[P(0)-L(P'(0)+g_0P(0))]S_2-alpha_P L P(0)S_3}.",
+      "claim": "Both lifted lower endpoint orders form one exact formula.",
+      "id": "jli_09_lower",
+      "proof_boundary": "The S_1/S_2/S_3 pieces remain joined.",
+      "readiness": "proved",
+      "role": "lower endpoint"
+    },
+    {
+      "certificate": "Use L=log N in the Hermitian channel and L=log a+u_N in the transpose channel. The logarithms are retained until reverse recombination.",
+      "claim": "The two genuine lower logarithms are identified.",
+      "id": "jli_10_lengths",
+      "proof_boundary": "They are not hidden in O(h).",
+      "readiness": "proved",
+      "role": "relative lengths"
+    },
+    {
+      "certificate": "For every outer mode r, -T_(1,r)[P]-U_(1,r)[P]+I_(int,r)[P]=I_P(r)-T_(N,r)[P]-U_(N,r)[P]. Thus the lower S_1/S_2/S_3 traces and the absolute interior reverse exactly to the original mode integral minus its upper boundary.",
+      "claim": "Two integrations by parts reverse exactly mode by mode.",
+      "id": "jli_11_mode",
+      "proof_boundary": "The lower block does not vanish by itself.",
+      "readiness": "proved",
+      "role": "modewise reversal"
+    },
+    {
+      "certificate": "After symmetric summation, L_N[P]:=-T_1[P]-U_1[P]+I_N[P]=O_N[P]-T_N[P]-U_N[P], and R_N[P]=O_N[P]-T_N[P]. The lower logarithms are representation coordinates, not a separately small error and not a zero.",
+      "claim": "The complete lower/interior package is the outer mode sum minus its upper boundary.",
+      "id": "jli_12_outer",
+      "proof_boundary": "Conditional summation remains symmetric.",
+      "readiness": "proved",
+      "role": "outer reversal"
+    },
+    {
+      "certificate": "Let F_N[P]=sum_(r in mathcal R_N)I_P(r), let M_N[P] be the starred physical carrier from full finite Poisson inversion on [1,N], and define D_N[P]=F_N[P]-M_N[P]. Since F_N+O_N=M_N, one has R_N[P]=-D_N[P]-T_N[P] and F_N[P]+R_N[P]=M_N[P]-T_N[P].",
+      "claim": "Band modes, returned carriers, and their defect are distinguished exactly.",
+      "id": "jli_13_objects",
+      "proof_boundary": "F_N and M_N must not be identified.",
+      "readiness": "proved",
+      "role": "three-object split"
+    },
+    {
+      "certificate": "The tiled finite-cell formula F_N=tau_band+M_N-E_band gives D_N=tau_band-E_band and R_N=E_band-tau_band-T_N. The finite-cell defect is the global two-sided exterior/tie package, not a new local endpoint estimate.",
+      "claim": "The finite-cell defect is the global exterior/tie package.",
+      "id": "jli_14_exterior",
+      "proof_boundary": "No cellwise absolute budget is allowed.",
+      "readiness": "proved",
+      "role": "finite-cell exterior"
+    },
+    {
+      "certificate": "At a half-open roster tie, F_N gains one complete mode and O_N loses the same mode. F_N+O_N and F_N+R_N are invariant; D_N and R_N change oppositely.",
+      "claim": "The complete mode join is invariant at reciprocal ties.",
+      "id": "jli_15_tie",
+      "proof_boundary": "D_N and R_N move oppositely.",
+      "readiness": "proved",
+      "role": "half-open transfer"
+    },
+    {
+      "certificate": "For P_H=i(lambda-log N)B_(H,N), T_N[P_H]=0. Hence R_N[P_H]=-D_N[P_H] and F_N[P_H]+R_N[P_H]=M_N[P_H] exactly.",
+      "claim": "The Hermitian upper conditional value vanishes after relative lifting.",
+      "id": "jli_16_hrelative",
+      "proof_boundary": "This is a mode-plus-remainder identity.",
+      "readiness": "proved",
+      "role": "Hermitian recombination"
+    },
+    {
+      "certificate": "For P_T=i(lambda-log a-u_N)B_(T,N), T_N[P_T]=-2iu_NT_N[B_(T,N)]. Hence R_N[P_T]=-D_N[P_T]+2iu_NT_N[B_(T,N)] and F_N[P_T]+R_N[P_T]=M_N[P_T]+2iu_NT_N[B_(T,N)].",
+      "claim": "The transpose join leaves one explicit terminal conditional term.",
+      "id": "jli_17_trelative",
+      "proof_boundary": "The terminal term is not dropped.",
+      "readiness": "proved",
+      "role": "transpose recombination"
+    },
+    {
+      "certificate": "If the joined finite object is the returned carrier M_N rather than the band-mode sum F_N, then M_N[P_H]+R_N[P_H]=M_N[P_H]-D_N[P_H], while the transpose channel also has +2iu_NT_N[B_(T,N)]. Dropping D_N would apply Fourier inversion twice.",
+      "claim": "A returned carrier cannot replace the reciprocal-band mode sum for free.",
+      "id": "jli_18_carrier_guard",
+      "proof_boundary": "Dropping D_N double-applies inversion.",
+      "readiness": "guard_validated",
+      "role": "carrier-only guard"
+    },
+    {
+      "certificate": "M_N[P_H] is the starred q<N sum with multiplier -i(u_q-u_N)B_(H,N)(log q); its q=N atom vanishes. M_N[P_T] is the starred q<=N sum with multiplier -i(u_q+u_N)B_(T,N)(log q).",
+      "claim": "The exact returned sums have the parent relative multipliers.",
+      "id": "jli_19_atoms",
+      "proof_boundary": "Endpoint half weights remain.",
+      "readiness": "proved",
+      "role": "starred carrier form"
+    },
+    {
+      "certificate": "For a_q and k_q with A_j=sum_(q<=j)a_q, sum_(q=1)^N a_qk_q=A_Nk_N+sum_(q=1)^(N-1)A_q(k_q-k_(q+1)).",
+      "claim": "The discrete joined carrier admits exact summation by parts.",
+      "id": "jli_20_abel",
+      "proof_boundary": "No partial-sum estimate is supplied.",
+      "readiness": "proved",
+      "role": "Abel identity"
+    },
+    {
+      "certificate": "Because the Hermitian relative kernel has k_N=0, its exact Abel form has no terminal boundary: sum_(q=1)^N a_qk_q=sum_(q=1)^(N-1)A_q(k_q-k_(q+1)). This is where phase-difference cancellation can be sought without detaching the finite-cell defect.",
+      "claim": "The Hermitian terminal Abel boundary vanishes exactly.",
+      "id": "jli_21_habel",
+      "proof_boundary": "The finite-cell defect remains joined.",
+      "readiness": "proved",
+      "role": "Hermitian Abel boundary"
+    },
+    {
+      "certificate": "The transpose relative kernel generally has k_N=-2iu_NB_(T,N)(log N), so its Abel terminal boundary survives and must be combined with +2iu_NT_N[B_(T,N)] and the pure terminal transpose block.",
+      "claim": "The transpose Abel boundary survives in an explicit terminal package.",
+      "id": "jli_22_tabel",
+      "proof_boundary": "It must meet the pure terminal block.",
+      "readiness": "proved",
+      "role": "transpose Abel boundary"
+    },
+    {
+      "certificate": "Abel summation may now be applied to M_N-D_N (and the explicit transpose terminal term), not to M_N alone while silently deleting D_N. No partial-sum estimate or sign is asserted by this gate.",
+      "claim": "Abel must act on the carrier-defect join.",
+      "id": "jli_23_abel_guard",
+      "proof_boundary": "No sign is inferred.",
+      "readiness": "guard_validated",
+      "role": "Abel route guard"
+    },
+    {
+      "certificate": "The lower logarithmic traces are no longer an independent target. After exact reverse integration by parts, the live obstruction is the source-specific returned carrier minus the finite-cell defect, plus one explicit transpose terminal term.",
+      "claim": "The raw lower logarithms are retired as the primary obstruction.",
+      "id": "jli_24_decision",
+      "proof_boundary": "This is a structural reduction only.",
+      "readiness": "proved",
+      "role": "route decision"
+    },
+    {
+      "certificate": "Derive a source-specific formula and signed estimate for D_N[P_H] and D_N[P_T] from the global exterior/tie kernel, then Abel-sum M_N-D_N with the ideal cubic kept intact and Delta_H,Delta_T attached only afterward.",
+      "claim": "Prove or falsify a signed source-specific finite-cell-defect estimate.",
+      "id": "jli_25_route",
+      "proof_boundary": "No signed defect bound is proved.",
+      "readiness": "open",
+      "role": "next theorem"
+    },
+    {
+      "certificate": "No h^2/800 reserve is claimed. The next bound must include both phase families, the correction perturbations, fixed affine row, pure terminal transpose block, and moved-tail defect before the whole-jet C1 transfer.",
+      "claim": "Recover the h^2/800 reserve only after all live channels are reattached.",
+      "id": "jli_26_reserve",
+      "proof_boundary": "No h^2 reserve is claimed.",
+      "readiness": "open",
+      "role": "aggregate reserve"
+    },
+    {
+      "certificate": "kappa=1/(2pi i), alpha_P=xi/(2pi), and e(x)=exp(2pi i x); no new geometric constant is inserted.",
+      "claim": "Every pi remains inherited from the fixed Fourier normalization.",
+      "id": "jli_27_pi",
+      "proof_boundary": "No fitted constant is used.",
+      "readiness": "proved",
+      "role": "pi provenance"
+    },
+    {
+      "certificate": "No signed finite-cell defect, completed mixed-current, Phi_B, contact-exclusion, Xi, Lambda<=0, PF-infinity, RH, or prize-level theorem is claimed.",
+      "claim": "This gate is not a proof of RH.",
+      "id": "jli_28_boundary",
+      "proof_boundary": "The theorem-search boundary remains explicit.",
+      "readiness": "guard_validated",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "finite_cell": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_ideal_cubic_reciprocal_finite_cell_inversion_gate.json",
+      "sha256": "52856581875a22fd16216f3282475bf2716fe8757d147dfb604ddac8ec14f5fd"
+    },
+    "outer_endpoint": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_outer_endpoint_kernel_gate.json",
+      "sha256": "4cf510dcf472241ba45a5602a231c4cbe713af6c62924f9ff4e4108454f86df8"
+    },
+    "relative_lift": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_terminal_nonterminal_relative_lift_gate.json",
+      "sha256": "7b0f9df6bcc1d50becb3fcf28f62fff7545c63451229418cd3b3a954ca81425c"
+    }
+  },
+  "status": "joined lower/interior and finite-cell recombination proved; signed finite-cell-defect estimate open",
+  "symbolic_certificate": {
+    "abel": {
+      "abel_checks": 50,
+      "generic": "For a_q and k_q with A_j=sum_(q<=j)a_q, sum_(q=1)^N a_qk_q=A_Nk_N+sum_(q=1)^(N-1)A_q(k_q-k_(q+1)).",
+      "guard": "Abel summation may now be applied to M_N-D_N (and the explicit transpose terminal term), not to M_N alone while silently deleting D_N. No partial-sum estimate or sign is asserted by this gate.",
+      "hermitian": "Because the Hermitian relative kernel has k_N=0, its exact Abel form has no terminal boundary: sum_(q=1)^N a_qk_q=sum_(q=1)^(N-1)A_q(k_q-k_(q+1)). This is where phase-difference cancellation can be sought without detaching the finite-cell defect.",
+      "transpose": "The transpose relative kernel generally has k_N=-2iu_NB_(T,N)(log N), so its Abel terminal boundary survives and must be combined with +2iu_NT_N[B_(T,N)] and the pure terminal transpose block."
+    },
+    "handoff": {
+      "decision": "The lower logarithmic traces are no longer an independent target. After exact reverse integration by parts, the live obstruction is the source-specific returned carrier minus the finite-cell defect, plus one explicit transpose terminal term.",
+      "reserve": "No h^2/800 reserve is claimed. The next bound must include both phase families, the correction perturbations, fixed affine row, pure terminal transpose block, and moved-tail defect before the whole-jet C1 transfer.",
+      "route": "Derive a source-specific formula and signed estimate for D_N[P_H] and D_N[P_T] from the global exterior/tie kernel, then Abel-sum M_N-D_N with the ideal cubic kept intact and Delta_H,Delta_T attached only afterward."
+    },
+    "lower_endpoint": {
+      "generic": "For P_L=i(lambda-L)P, the exact lower block is -T_1[P_L]-U_1[P_L]=i kappa L P(0)S_1+i kappa^2{[P(0)-L(P'(0)+g_0P(0))]S_2-alpha_P L P(0)S_3}.",
+      "lengths": "Use L=log N in the Hermitian channel and L=log a+u_N in the transpose channel. The logarithms are retained until reverse recombination.",
+      "lower_endpoint_identities": 2
+    },
+    "physical_kernels": {
+      "correction_split": "Define Delta_H=P_H-P_H^0 and Delta_T=P_T-P_T^0 only after the full terminal conjugations above. Every term in either Delta vanishes under the simultaneous ideal specialization; no modulus or coefficient budget is taken here.",
+      "factorizations": 2,
+      "hermitian_full": "B_(H,N)=(R-conjugate(R_N)){conjugate(C_N)Q-conjugate(Q_N)C}+(R_x+conjugate(R_(N,x)))conjugate(C_N)C.",
+      "hermitian_physical": "After Q=(R+delta)C+D, B_(H,N)=conjugate(C_N)C{(R-conjugate(R_N))^2+(R-conjugate(R_N))(delta-conjugate(delta))+R_x+conjugate(R_(N,x))}+(R-conjugate(R_N)){conjugate(C_N)D-conjugate(D_N)C}.",
+      "ideal": "For C=1, D=delta=0, R=ix/2, R_N=-iu_N/2, and R_x=R_(N,x)=-iu_(N,x)/2, B_(H,N)^0=-(x-u_N)^2/4 and B_(T,N)^0=-(x+u_N)^2/4-iu_(N,x).",
+      "ideal_atoms": "At x=-u_q, P_H^0=i(u_q-u_N)(u_q+u_N)^2/4 and P_T^0=i(u_q+u_N)(u_q-u_N)^2/4-u_(N,x)(u_q+u_N).",
+      "ideal_kernel_identities": 6,
+      "ideal_lifts": "P_H^0=-i(x+u_N)(x-u_N)^2/4 and P_T^0=-i(x-u_N)(x+u_N)^2/4+u_(N,x)(x-u_N). Both ideal lifts are cubic; the physical correction can restore degrees four and five.",
+      "transpose_full": "B_(T,N)=(R-R_N){C_NQ-Q_NC}+(R_x+R_(N,x))C_NC.",
+      "transpose_physical": "After Q=(R+delta)C+D, B_(T,N)=C_NC{(R-R_N)^2+R_x+R_(N,x)}+(R-R_N){C_ND-D_NC}."
+    },
+    "relative_channels": {
+      "carrier_only": "If the joined finite object is the returned carrier M_N rather than the band-mode sum F_N, then M_N[P_H]+R_N[P_H]=M_N[P_H]-D_N[P_H], while the transpose channel also has +2iu_NT_N[B_(T,N)]. Dropping D_N would apply Fourier inversion twice.",
+      "hermitian": "For P_H=i(lambda-log N)B_(H,N), T_N[P_H]=0. Hence R_N[P_H]=-D_N[P_H] and F_N[P_H]+R_N[P_H]=M_N[P_H] exactly.",
+      "relative_recombinations": 4,
+      "starred_atoms": "M_N[P_H] is the starred q<N sum with multiplier -i(u_q-u_N)B_(H,N)(log q); its q=N atom vanishes. M_N[P_T] is the starred q<=N sum with multiplier -i(u_q+u_N)B_(T,N)(log q).",
+      "transpose": "For P_T=i(lambda-log a-u_N)B_(T,N), T_N[P_T]=-2iu_NT_N[B_(T,N)]. Hence R_N[P_T]=-D_N[P_T]+2iu_NT_N[B_(T,N)] and F_N[P_T]+R_N[P_T]=M_N[P_T]+2iu_NT_N[B_(T,N)]."
+    },
+    "reverse_recombination": {
+      "exterior": "The tiled finite-cell formula F_N=tau_band+M_N-E_band gives D_N=tau_band-E_band and R_N=E_band-tau_band-T_N. The finite-cell defect is the global two-sided exterior/tie package, not a new local endpoint estimate.",
+      "global_recombinations": 4,
+      "modewise": "For every outer mode r, -T_(1,r)[P]-U_(1,r)[P]+I_(int,r)[P]=I_P(r)-T_(N,r)[P]-U_(N,r)[P]. Thus the lower S_1/S_2/S_3 traces and the absolute interior reverse exactly to the original mode integral minus its upper boundary.",
+      "modewise_recombinations": 1,
+      "objects": "Let F_N[P]=sum_(r in mathcal R_N)I_P(r), let M_N[P] be the starred physical carrier from full finite Poisson inversion on [1,N], and define D_N[P]=F_N[P]-M_N[P]. Since F_N+O_N=M_N, one has R_N[P]=-D_N[P]-T_N[P] and F_N[P]+R_N[P]=M_N[P]-T_N[P].",
+      "outer": "After symmetric summation, L_N[P]:=-T_1[P]-U_1[P]+I_N[P]=O_N[P]-T_N[P]-U_N[P], and R_N[P]=O_N[P]-T_N[P]. The lower logarithms are representation coordinates, not a separately small error and not a zero.",
+      "tie": "At a half-open roster tie, F_N gains one complete mode and O_N loses the same mode. F_N+O_N and F_N+R_N are invariant; D_N and R_N change oppositely.",
+      "tie_invariants": 2
+    }
+  }
+}

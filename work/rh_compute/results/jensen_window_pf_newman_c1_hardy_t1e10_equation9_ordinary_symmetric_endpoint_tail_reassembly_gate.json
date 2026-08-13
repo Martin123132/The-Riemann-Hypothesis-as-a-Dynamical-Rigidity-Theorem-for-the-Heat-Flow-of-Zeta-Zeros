@@ -1,0 +1,137 @@
+{
+  "decision": {
+    "bare_completed_square_endpoint_exponentials_may_be_summed_separately": false,
+    "bulk_extracted_joint_residual_identity_proved": true,
+    "complete_T_upper_proved": false,
+    "finite_symmetric_dirichlet_reassembly_proved": true,
+    "half_current_is_endpoint_current_canceller": false,
+    "joint_residual_quantitatively_bounded": false,
+    "portcullis_mode_equals_odd_roster_fourier_coefficient": true,
+    "rh_implication": false,
+    "symmetric_residual_limit_proved": true,
+    "target_negative_partners_retained_in_complement": true,
+    "target_positive_endpoint_currents_cancel_internally": false,
+    "zero_mode_is_endpoint_current_canceller": false
+  },
+  "dependencies": {
+    "Gamma_bulk": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_ordinary_global_morse_gamma_bulk_gate.json",
+      "sha256": "3160a0cb4b386f551f2162bb25c7cc8c156eeb49b5308e34c970459ed4b1fe39"
+    },
+    "coverage_ledger": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_ordinary_mode_coverage_ledger_gate.json",
+      "sha256": "a38b1cfefd29d4bd0170f0930911bbba7656b074463f8dd3c10cc523f9c37b27"
+    },
+    "endpoint_decomposition": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_ordinary_finite_endpoint_tail_decomposition_gate.json",
+      "sha256": "3c06598ec8870d105f5bdad7bd68125ad4c826c1882c6c1e68f45940dc512a17"
+    },
+    "portcullis": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_finite_poisson_portcullis_saddle_reduction_gate.json",
+      "sha256": "e347789fc095c77e08cf74a6ab5cbc37a6131e533e049b3e32e5112406515087"
+    },
+    "symmetric_poisson": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_symmetric_poisson_interchange_gate.json",
+      "sha256": "4a1898bcda7105107fcaf303a20a87237e75c09f0052db7710bff5f6765a88b0"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_ordinary_symmetric_endpoint_tail_reassembly_gate",
+  "mode_partition": {
+    "cancellation_ledger": {
+      "grouping_guard": "Bare completed-square endpoint exponentials do not cancel pairwise. Their cancellation occurs only after each is recombined with its Fresnel tail into J_m and the complete symmetric roster is paired.",
+      "half_current_role": "The endpoint half-current is the finite-roster midpoint correction; it is not the canceller of the one-over-m pair current.",
+      "low_partner": "negative modes -621..-1 pair with positive modes 1..621",
+      "outer_partner": "negative modes -M..-39895 pair with positive modes 39895..M",
+      "target_partner": "negative modes -39894..-622 cancel the one-over-m currents of target modes 622..39894",
+      "zero_mode_role": "The zero coefficient is an explicit reconstruction term and has no one-over-m endpoint current."
+    },
+    "count_identity": "M+1+621+39273+(M-39894)=2M+1",
+    "cutoff_condition": "integer M>=39894",
+    "low_positive_completion": {
+      "count": 621,
+      "range": [
+        1,
+        621
+      ]
+    },
+    "negative_completion": {
+      "count": "M",
+      "range": [
+        "-M",
+        -1
+      ]
+    },
+    "outer_positive_completion": {
+      "count": "M-39894",
+      "empty_at_minimal_cutoff": true,
+      "range": [
+        39895,
+        "M"
+      ]
+    },
+    "target_positive_block": {
+      "count": 39273,
+      "range": [
+        622,
+        39894
+      ]
+    },
+    "zero_mode": {
+      "count": 1,
+      "range": [
+        0,
+        0
+      ]
+    }
+  },
+  "next_obligation": "Bound the single cancellation-preserving residual H+integral(f C_M)+sum_target(P_A+P_B), beginning with a grouped nonstationary B-endpoint enclosure and then matching the A characteristic part to the certified fold atlas on the same exact current.",
+  "passed": true,
+  "proof_boundary": "Exact finite symmetric reassembly, target/complement partition, symmetric residual limit, and one-over-m pair cancellation only. No quantitative joint residual bound, complete endpoint-tail theorem, ordinary/fold splice, complete T_upper, height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.289,
+    "process_priority": "below_normal",
+    "sympy_threads": 1,
+    "workers": 1
+  },
+  "scope": {
+    "finite_cutoff": "M>=39894",
+    "height": 10000000000,
+    "roster_coordinate_length": 2481422,
+    "source_odd_roster": [
+      159577,
+      5122421
+    ],
+    "target_mode_count": 39273,
+    "target_positive_modes": [
+      622,
+      39894
+    ]
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_ordinary_symmetric_endpoint_tail_reassembly_gate.py",
+      "sha256": "4136e5e3e7104458cd6fe8a6dd2d94140a138639cc2082c15eb3e757d51740fd"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_ordinary_symmetric_endpoint_tail_reassembly_gate.py",
+      "sha256": "ee03453a240916f22e912f18639d3f8b28334813c3b4eb85069a7d32d86ee6ac"
+    }
+  },
+  "status": "exact_symmetric_bulk_extracted_endpoint_residual_and_limit_proved_quantitative_bound_open",
+  "symbolic_certificate": {
+    "bulk_extracted_residual": "S_M-B_T=H_x+integral_0^L f_x(u)C_M(u)du+sum_(m=622)^39894[J_m-B_m]",
+    "complement_kernel": "C_M(u)=D_M(u)-G_T(u)",
+    "endpoint_values": "D_M(k)=2M+1, G_T(k)=39273, C_M(k)=2M+1-39273 for every integer k, by removable limits",
+    "finite_reconstruction": "S_M(x)=H_x+integral_0^L f_x(u)D_M(u)du",
+    "finite_symmetric_kernel": "D_M(u)=sum_(m=-M)^M exp(-2*pi*i*m*u)=sin((2M+1)*pi*u)/sin(pi*u)",
+    "fourier_coefficient": "I_m(x)=integral_0^L f_x(u)exp(-2*pi*i*m*u)du",
+    "half_current": "H_x=[f_x(0)+f_x(L)]/2",
+    "odd_roster_change": "alpha=A+2u, d alpha=2du, 0<=u<=L",
+    "one_over_m_cancellation": "The Delta f_x/(2*pi*i*m) current cancels exactly in every finite +/-m pair.",
+    "paired_ibp_identity": "I_m+I_(-m)=[-2*Delta f_x'+R_m+R_(-m)]/(2*pi*i*m)^2",
+    "portcullis_to_fourier": "J_m=(-1)^m integral_0^L f_x(u)exp[-i*pi*m(A+2u)]du=I_m because A is odd",
+    "symmetric_limit": "The proved symmetric-Poisson limit for D_M implies the C_M residual limit because G_T is a fixed finite trigonometric polynomial.",
+    "target_finite_block": "J_T(x)=integral_0^L f_x(u)G_T(u)du=sum_(m=622)^39894 J_m(x)",
+    "target_kernel": "G_T(u)=sum_(m=622)^39894 exp(-2*pi*i*m*u)=exp(-40516*pi*i*u)sin(39273*pi*u)/sin(pi*u)"
+  }
+}

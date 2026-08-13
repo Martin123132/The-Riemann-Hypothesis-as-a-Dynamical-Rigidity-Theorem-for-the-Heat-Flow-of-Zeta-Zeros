@@ -1,0 +1,88 @@
+{
+  "coefficient_certificate": {
+    "endpoint_augmented_total_variation_ball": "3.093179181527883275722471886903797155810025287792086601257324218750000000000000000000000000000000000e-5",
+    "extended_weight_definition": "w_m=a_m for m!=q and w_q=0",
+    "fixed_event_zero_countermodel_modes": [
+      40093,
+      40094
+    ],
+    "internal_total_variation_ball": "1.547051080601302902524677926332508093310025287792086601257324218750000000000000000000000000000000000e-5",
+    "last_two_weight_difference_absolute_ball": "[1.917549273811047783055983018130064010620117187500000000000000000000000000000000000000000000000000000e-7 +/- 4.06e-11]",
+    "left_endpoint_absolute_ball": "7.700657747022887633647769689559936523437500000000000000000000000000000000000000000000000000000000000e-6",
+    "mode_count": 399,
+    "mode_interval": [
+      39696,
+      40094
+    ],
+    "removed_event_mode": 39894,
+    "right_endpoint_absolute_ball": "7.760623262242916098330169916152954101562500000000000000000000000000000000000000000000000000000000000e-6"
+  },
+  "countermodel": {
+    "completed_total_change": "0",
+    "event_zero_held_fixed": true,
+    "perturbation": "G4_40093 -> G4_40093+z; G4_40094 -> G4_40094-z",
+    "scope": "Shows non-identifiability from the global completed identity alone; does not vary the actual Fourier model.",
+    "weighted_sum_change": "(w_40093-w_40094)z"
+  },
+  "date": "2026-08-13",
+  "decision": {
+    "complete_T_upper_proved": false,
+    "completed_initial_data_cancellation_proved": false,
+    "completed_partial_sum_family_exactly_reduces_weighted_roster": true,
+    "event_zero_term_needed_for_countermodel": false,
+    "global_unweighted_completion_alone_identifies_weighted_roster": false,
+    "grouped_398_mode_splice_proved": false,
+    "rh_implication": false,
+    "selected_branch_weighted_roster_bound_proved": false,
+    "uniform_completed_partial_remainder_bound_proved": false,
+    "weighted_opposite_branch_bound_proved": false
+  },
+  "dependencies": {
+    "completed_projection": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_fixed_B_selector_boundary_beta4_completed_branch_projection_gate.json",
+      "sha256": "a295c3083220027a0fa44a670d47bf39f200bcf4da36ff525354719984edb437"
+    },
+    "event_pairing": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_selector_event_ordered_398_pairing_multiplier_gate.json",
+      "sha256": "3481f3920b23e5e4e84de5dfec84abd07b0b0654f0cac298a77244bfd23e5742"
+    },
+    "variation_reassembly": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_weighted_variation_of_constants_roster_reassembly_gate.json",
+      "sha256": "1477826accd60e308eddd6293d6fa4d9987c096f4ad35e626ba4b54947dd507f"
+    },
+    "weighted_packets": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_leading_defect_weighted_airy_green_packet_gate.json",
+      "sha256": "fef3ccc2176937cbb53f233308cbadd72329ffe8dc0a2fb47afd897419fb8ab1"
+    }
+  },
+  "exact_algebra": {
+    "Abel_identity": "W=w_U S_U+sum_(k=L)^(U-1)(w_k-w_(k+1))S_k",
+    "completed_Abel_identity": "W=w_L g4_lambda(0)-w_U R_U-sum_(k=L)^(U-1)(w_k-w_(k+1))R_k",
+    "completed_partial_remainder": "R_k=H4+C4+sum_(m=k+1)^U G4_m",
+    "completion_relation": "S_k=g4_lambda(0)-R_k",
+    "prefix": "S_k=sum_(m=L)^k G4_m",
+    "selected_full_opposite_decomposition": "W_sel=W_full-W_opp, where W_opp=sum w_m G_opp,m",
+    "uniform_bound": "If max(|g4_lambda(0)|,max_k|R_k|)<=B_comp, then |W|<=B_comp(|w_L|+sum|Delta w|+|w_U|)",
+    "weighted_full_sum": "W_full=sum_(m=L)^U w_m G4_m with w_q=0"
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_weighted_completion_partial_sum_obligation_gate",
+  "next_action": "Construct cancellation-preserving bounds for the completed family R_k=H4+C4+sum_(m=k+1)^U G4_m and for W_opp=sum w_m G_opp,m. Only then infer W_sel=W_full-W_opp; do not split H4 or C4.",
+  "passed": true,
+  "proof_boundary": "Exact auxiliary full-roster weighted-completion Abel reduction, certified coefficient variation, and a fixed-event-zero non-identifiability countermodel for the global identity alone. No uniform completed partial-remainder or weighted opposite-branch bound, selected-branch initial-data/source cancellation, exact finite-integral amplitude remainder, grouped 398-mode splice, complete Q_K-T or T_upper, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "runtime": {
+    "elapsed_seconds": 0.364,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_weighted_completion_partial_sum_obligation_gate.py",
+      "sha256": "6f18bc17a0841298b980f5bc28b15b39ee44638cbe6a982caa4455820eaf4149"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_weighted_completion_partial_sum_obligation_gate.py",
+      "sha256": "e3e78e271d73ad2f7ac8758dedb83b6b507bd4478208a35e638db9f80a5f6fd4"
+    }
+  },
+  "status": "weighted_completion_reduced_to_completed_partial_sum_family"
+}

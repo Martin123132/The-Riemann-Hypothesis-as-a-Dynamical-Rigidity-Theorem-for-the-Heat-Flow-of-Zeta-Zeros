@@ -1,0 +1,69 @@
+{
+  "certified_bound": {
+    "beta_ball": "[2154.435480640368805145387124309525102136439880461700179338720085090788886098776301259204877059165806 +/- 8.15e-97]",
+    "grouped_B_endpoint_integral_bound_ball": "[7.408579191603318432795220588787340757158421645674988845899048798314769461562822867182347566354574626e-12 +/- 7.47e-111]",
+    "grouped_amplitude_derivative_max_ball": "[8.197773804310145597463345719806872448546045194434013316143969755202047799076806568830313660286802509e-6 +/- 7.89e-105]",
+    "grouped_amplitude_max_ball": "[0.01762476186986768588593001596347203645035806409020455791291511863741364838917188709219369492669539223 +/- 1.43e-101]",
+    "height": 10000000000,
+    "minimum_x_ball": "[0.4979112979412672374511058300727637929146698634275200139886503054264966240327502094928230665496464530 +/- 3.28e-101]",
+    "mode_count": 84,
+    "phase_derivative_absolute_min_ball": "[4778016703.758423817360821504318873171196462743725757458275781878497479479133281849495703972286212076 +/- 1.96e-90]",
+    "phase_second_derivative_max_ball": "[18546.94337920088468768644533441165323046577833535521531957989298510597243445417057717649293584471981 +/- 1.63e-95]",
+    "sech2_R_over_beta_ball": "[0.9999825492948393820773906476093779926689770433160044081665717586597958125497746724283531107173229227 +/- 6.00e-101]",
+    "sigma_ball": "[0.01718989861027481767762198114529487486060548349235169630321461626471715893915346793966962062853893942 +/- 6.91e-102]",
+    "source_endpoints": [
+      159577,
+      5122421
+    ],
+    "tanh_R_over_beta_ball": "[0.004177404117465525097788339854472414170660273144959972022699389147006751934499581014353866900707094054 +/- 1.30e-102]",
+    "z_range": [
+      -9,
+      9
+    ]
+  },
+  "decision": {
+    "B_endpoint_nonstationary_on_R9_proved": true,
+    "exact_transformed_to_source_B_phase_reduction_proved": true,
+    "grouped_B_endpoint_below_7_5e_minus_12": true,
+    "lower_characteristic_fold_proved": false,
+    "rh_implication": false
+  },
+  "dependencies": {
+    "normal_form_gate": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_grouped_characteristic_airy_boundary_normal_form_gate.json",
+      "sha256": "7b0cf517df4089022c855fb5dfde5da61f68488a633eed46bc516099f7763164"
+    },
+    "reassembly_gate": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_y64_endpoint_roster_reassembly_gate.json",
+      "sha256": "2daa10b70c1af97a5571d76cbea5324c7423d2fdb76d8b28897024a7e27e47f2"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_yB_upper_endpoint_nonstationary_gate",
+  "next_obligation": "Apply a characteristic-fold-uniform estimate to the lower C endpoint/Fresnel current, then join its ordinary Morse side to modes 622..39852 and compare the combined carrier with T_upper.",
+  "passed": true,
+  "proof_boundary": "Saved-height grouped B-endpoint nonstationary enclosure only. No lower fold bound, lower-interior join, complete T_upper theorem, Lambda<=0, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.095,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_yB_upper_endpoint_nonstationary_gate.py",
+      "sha256": "f3a310d45b1553a34c7c52bc2dea96218d4f888168d0b021bf42654ac1744faa"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_yB_upper_endpoint_nonstationary_gate.py",
+      "sha256": "9c221b4e03d370ac7e8d26d30cdfad085b731bc62c855dbe48cad301570ffc5c"
+    }
+  },
+  "status": "grouped_yB_upper_endpoint_R9_nonstationary_bound_complete",
+  "symbolic": {
+    "grouped_amplitude": "A_B(z)=(sqrt(2)/pi)*84*(sigma/C)*(beta/x(z))*cosh(z/beta)^(-3/2)",
+    "integration_by_parts": "|int A_B exp(iP_B)|<=2Amax/mu+2R[A1max/mu+Amax*P2max/mu^2]",
+    "phase_derivative": "P_B'(z)=[t-(pi*B^2/8)sech(z/beta)^2]/beta",
+    "phase_second_derivative": "P_B''(z)=(pi*B^2/(4beta^2))sech(z/beta)^2*tanh(z/beta)",
+    "source_phase_reduction": "P_B(z)=t*z/beta+pi*B^2*x(z)/4 plus a z-independent constant",
+    "transformed_common_phase": "t*z/beta-t*eta*tanh(z/beta)-beta*y_B*tanh(z/beta)+x(z)*y_B^2/(2beta)"
+  }
+}

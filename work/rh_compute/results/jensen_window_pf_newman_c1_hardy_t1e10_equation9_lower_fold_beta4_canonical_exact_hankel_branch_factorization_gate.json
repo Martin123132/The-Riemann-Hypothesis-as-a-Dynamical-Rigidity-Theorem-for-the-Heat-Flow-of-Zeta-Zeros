@@ -1,0 +1,100 @@
+{
+  "connection_coefficients": {
+    "J_-1/3_plus_J_1/3_H1": "3/4 + sqrt(3)*I/4",
+    "J_-1/3_plus_J_1/3_H2": "3/4 - sqrt(3)*I/4",
+    "J_-2/3_minus_J_2/3_H1": "-3/4 + sqrt(3)*I/4",
+    "J_-2/3_minus_J_2/3_H2": "-3/4 - sqrt(3)*I/4"
+  },
+  "date": "2026-08-13",
+  "decision": {
+    "Airy_or_explicit_limit_required_at_X_zero": true,
+    "branch_basis_nonsingular_for_positive_X": true,
+    "complete_Q_K_minus_T_bound_proved": false,
+    "complete_T_upper_proved": false,
+    "corridor_remainder_bound_proved": false,
+    "exact_Hankel_branch_factorization_proved": true,
+    "ordinary_logistic_branch_identification_proved": false,
+    "prefactored_branches_have_finite_positive_limits": true,
+    "raw_Hankel_functions_singular_at_X_zero": true,
+    "rh_implication": false
+  },
+  "dependencies": {
+    "beta4_Airy_reduction": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_canonical_airy_derivative_reduction_gate.json",
+      "sha256": "41210634f1489fa13edd0b72438187f61ff9b16af0b09ff0afb91844e8b7c82f"
+    },
+    "ordinary_fold_ownership": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_ordinary_mode_coverage_ledger_gate.json",
+      "sha256": "a38b1cfefd29d4bd0170f0930911bbba7656b074463f8dd3c10cc523f9c37b27"
+    }
+  },
+  "exact_identities": {
+    "A": "sqrt(X)/(2*sqrt(3))*(exp(i*pi/6)*H1_(1/3)(xi)+exp(-i*pi/6)*H2_(1/3)(xi))",
+    "A_X": "-X/(2*sqrt(3))*(exp(-i*pi/6)*H1_(2/3)(xi)+exp(i*pi/6)*H2_(2/3)(xi))",
+    "Hankel_Wronskian": "W(H1_nu,H2_nu)=-4*i/(pi*xi)",
+    "branch_sum": "U*A+V*A_X=C1+C2",
+    "real_conjugation": "C2=conjugate(C1) for real X,U,V",
+    "xi": "2*X^(3/2)/3"
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_canonical_exact_hankel_branch_factorization_gate",
+  "leading_phase_contract": {
+    "C1": "(U*X^(-1/4)+i*V*X^(1/4))/(2*sqrt(pi))*exp(i*(xi-pi/4))",
+    "C2": "(U*X^(-1/4)-i*V*X^(1/4))/(2*sqrt(pi))*exp(-i*(xi-pi/4))",
+    "normal_phase_derivatives": [
+      "y/(2*beta)-d+sqrt(lambda+y)",
+      "y/(2*beta)-d-sqrt(lambda+y)"
+    ],
+    "quantitative_remainder_proved": false
+  },
+  "next_action": "Choose a rigorous Airy collar and compare the exact outgoing Hankel branch with the endpoint-retaining logistic/Gamma carrier on each owned ordinary corridor, including overlap remainders.",
+  "numerical_replay": {
+    "digits": 90,
+    "maximum_absolute_error": "1.782422803122748762149422e-90",
+    "rows": [
+      {
+        "X": "0.0003",
+        "max_absolute_error": "1.227273366324431638273943e-91"
+      },
+      {
+        "X": "0.17",
+        "max_absolute_error": "6.136366831622158191369715e-92"
+      },
+      {
+        "X": "2.75",
+        "max_absolute_error": "2.454546732648863276547886e-91"
+      },
+      {
+        "X": "37.0",
+        "max_absolute_error": "1.782422803122748762149422e-90"
+      }
+    ]
+  },
+  "passed": true,
+  "proof_boundary": "Exact positive-X branch factorization and leading phase contract only. No quantitative Hankel asymptotic remainder, ordinary-carrier identification, corridor splice, Q_K-T bound, complete T_upper, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "resource_policy": {
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "runtime": {
+    "elapsed_seconds": 0.243
+  },
+  "scope": {
+    "U_V": "real corrected Airy weights",
+    "X": "positive real"
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_canonical_exact_hankel_branch_factorization_gate.py",
+      "sha256": "9c9c69e0ee1b7fe78c3cf6d6807b113239e3030267c26e9885edd52b4baa4e17"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_canonical_exact_hankel_branch_factorization_gate.py",
+      "sha256": "68c5147ffe8ef758fc9bb33577a473b0f568006195b776b7849c70b438b8bf01"
+    },
+    "note": {
+      "path": "outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_canonical_exact_hankel_branch_factorization_gate.md",
+      "sha256": "c0e6313e6e1b50276318d8549c7ae661e97c4cc4a37ef6fd5f9fdce75b2c972b"
+    }
+  },
+  "status": "exact_beta_minus_4_Airy_carrier_Hankel_branch_factorization_proved"
+}
