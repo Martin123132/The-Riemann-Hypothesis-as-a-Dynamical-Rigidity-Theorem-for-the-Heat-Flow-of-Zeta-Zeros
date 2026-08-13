@@ -1,0 +1,315 @@
+{
+  "counts": {
+    "boundary_flux_identities": 2,
+    "endpoint_derivative_checks": 232,
+    "ideal_cubic_identities": 5,
+    "ideal_rail_checks": 128,
+    "integer_tie_gauge_checks": 60,
+    "internal_interface_cancellations": 78,
+    "jacobian_identities": 2,
+    "moving_endpoint_identities": 2,
+    "numerical_curved_flux_checks": 3,
+    "phase_identities": 2,
+    "phi_b_bounds": 0,
+    "reciprocal_endpoint_checks": 78,
+    "rows": 28,
+    "signed_flux_bounds": 0,
+    "signed_ideal_flux_bounds": 0
+  },
+  "date": "2026-08-03",
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_ideal_cubic_double_morse_rail_flux_gate",
+  "proof_boundary": "This proves the exact double-Morse map, phase and Jacobian, curvilinear collar endpoints, moving-endpoint shear, finite correction boundary flux, weighted interior transport, adjacent-interface cancellation, integer tie gauge, ideal-cubic rail values, and terminal values. It proves no signed weighted flux, complete ideal join, far aggregate, completed current, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "certificate": "Put rho=pr/alpha_P and v=ur/alpha_P. With eta=sqrt(alpha_P)z(rho) and y=sqrt(alpha_P)z(v), the inverse map is r=alpha_Prho/p and u=pv/rho.",
+      "claim": "The sequential saddle admits one exact two-variable coordinate map.",
+      "id": "dmf_01_variables",
+      "proof_boundary": "All variables remain positive.",
+      "readiness": "proved",
+      "role": "double-Morse variables"
+    },
+    {
+      "certificate": "For Psi_p(r,u)=alpha_Plog u-r(u-p), the exact identity is Psi_p=alpha_Plog p+(eta^2-y^2)/2. The sequential positive and negative Morse phases are therefore one two-dimensional saddle chart.",
+      "claim": "The two sequential phases separate exactly.",
+      "id": "dmf_02_phase",
+      "proof_boundary": "No quadratic truncation is used.",
+      "readiness": "proved",
+      "role": "separated phase"
+    },
+    {
+      "certificate": "The exact Jacobian is dr du={J(rho)J(v)/rho}deta dy. Hence the transformed amplitude is G_P(eta,y)=exp(S(log(pv/rho)))P(log(pv/rho))J(rho)J(v)/rho.",
+      "claim": "The double-Morse Jacobian is exact.",
+      "id": "dmf_03_jacobian",
+      "proof_boundary": "The amplitude remains coupled.",
+      "readiness": "proved",
+      "role": "coordinate Jacobian"
+    },
+    {
+      "certificate": "The physical line u=p is exactly v=rho, hence y=eta and Psi_p=alpha_Plog p. It is the returned-carrier ridge, not an oscillatory error rail.",
+      "claim": "The returned carrier is the constant-phase line y=eta.",
+      "id": "dmf_04_carrier",
+      "proof_boundary": "It is not an error rail.",
+      "readiness": "proved",
+      "role": "carrier ridge"
+    },
+    {
+      "certificate": "The reciprocal cell endpoints rho_-=p/(p+1/2) and rho_+=p/(p-1/2) map to fixed eta endpoints. Their inner saddles are u_0=p+1/2 and u_0=p-1/2 respectively.",
+      "claim": "Reciprocal cell ends map to fixed eta sides and half-integer inner saddles.",
+      "id": "dmf_05_cell_endpoints",
+      "proof_boundary": "Endpoint half-weights remain explicit.",
+      "readiness": "proved",
+      "role": "reciprocal sides"
+    },
+    {
+      "certificate": "For an internal radius-L collar, U_-=p-L-1/2 and U_+=p+L+1/2. Its Morse image is eta_-<=eta<=eta_+ and y_-(eta)<=y<=y_+(eta), where y_U(eta)=sqrt(alpha_P)z(Urho(eta)/p). This is curvilinear, not Cartesian.",
+      "claim": "A physical collar maps to moving y limits.",
+      "id": "dmf_06_collar_domain",
+      "proof_boundary": "The domain is not a Morse rectangle.",
+      "readiness": "proved",
+      "role": "curvilinear collar"
+    },
+    {
+      "certificate": "Along a physical rail u=U, y_U'(eta)=(U/p)J(rho)/J(Urho/p)=vJ(rho)/{rho J(v)}>0. The endpoint velocity vanishes nowhere; only its product with eta vanishes at the reciprocal saddle.",
+      "claim": "Every physical rail has an explicit positive Morse velocity.",
+      "id": "dmf_07_velocity",
+      "proof_boundary": "Its shear contribution is retained.",
+      "readiness": "proved",
+      "role": "endpoint velocity"
+    },
+    {
+      "certificate": "For L=1, the cells J_(p-1), J_p, and J_(p+1) tile [p-3/2,p+3/2]. Their two internal Morse interfaces cancel with opposite orientations, leaving only the two outer collar rails.",
+      "claim": "The diagonal and adjacent cells cancel their internal physical interfaces.",
+      "id": "dmf_08_adjacent_union",
+      "proof_boundary": "Only outer collar rails survive.",
+      "readiness": "proved",
+      "role": "adjacent composition"
+    },
+    {
+      "certificate": "For E(eta,y)=e((eta^2-y^2)/2), div(kappa eta E,-kappa y E)=(eta^2+y^2)E. The full-line first-correction cancellation is the zero-boundary limit of this exact divergence law.",
+      "claim": "The paired second moments are an exact divergence.",
+      "id": "dmf_09_divergence",
+      "proof_boundary": "Full-line cancellation is its zero-boundary limit.",
+      "readiness": "proved",
+      "role": "finite correction flux"
+    },
+    {
+      "certificate": "On the true collar image, the paired finite second moments equal kappa times the four-side flux integral int_(boundary Omega)E{eta dy+y deta}. The reciprocal sides contribute kappa eta E dy; a physical rail contributes kappa E{y_U+eta y_U'}deta with its boundary orientation.",
+      "claim": "The finite paired correction is the flux across the true curvilinear boundary.",
+      "id": "dmf_10_curved_flux",
+      "proof_boundary": "All side orientations are retained.",
+      "readiness": "proved",
+      "role": "four-side flux"
+    },
+    {
+      "certificate": "The term kappa eta y_U'E is the moving-endpoint shear. It is absent only in an artificial Cartesian Morse rectangle. Thus the four fixed-limit terms in the two one-dimensional moment formulas do not by themselves equal the physical collar rails.",
+      "claim": "Physical rail flux contains an additional endpoint-velocity term.",
+      "id": "dmf_11_shear",
+      "proof_boundary": "Dropping it changes the finite correction.",
+      "readiness": "proved",
+      "role": "moving endpoint shear"
+    },
+    {
+      "certificate": "If F(eta)=integral_(y_-(eta))^(y_+(eta))e(-y^2/2)dy, positive-moment integration by parts differentiates F and creates y_+'e(-y_+^2/2)-y_-'e(-y_-^2/2). These are exactly the two shear terms required by the boundary flux.",
+      "claim": "Differentiating the incomplete negative Fresnel factor reproduces the shear.",
+      "id": "dmf_12_slice",
+      "proof_boundary": "Moving limits are not frozen.",
+      "readiness": "proved",
+      "role": "slice derivative"
+    },
+    {
+      "certificate": "For a nonconstant coefficient D, div(Dkappa eta E,-Dkappa y E)=D(eta^2+y^2)E+kappa E(eta D_eta-y D_y). The physical ideal-cubic amplitude therefore leaves an interior transport term as well as boundary flux; constant-symbol cancellation cannot be promoted coefficientwise.",
+      "claim": "A nonconstant physical amplitude leaves an interior transport term.",
+      "id": "dmf_13_weighted",
+      "proof_boundary": "Constant-symbol cancellation is insufficient.",
+      "readiness": "proved",
+      "role": "weighted flux"
+    },
+    {
+      "certificate": "The term kappa eta y_U'E is the moving-endpoint shear. It is absent only in an artificial Cartesian Morse rectangle. Thus the four fixed-limit terms in the two one-dimensional moment formulas do not by themselves equal the physical collar rails.",
+      "claim": "The four fixed-limit moment terms are incomplete on the physical chart.",
+      "id": "dmf_14_rectangular_guard",
+      "proof_boundary": "This is a route obstruction, not a sign theorem.",
+      "readiness": "guard_validated",
+      "role": "Cartesian guard"
+    },
+    {
+      "certificate": "At the shared reciprocal boundary, Psi_(p+1)-Psi_p=r. When the boundary is an actual integer tie, e(r)=1, so overlapping complete-mode traces use the same Fourier phase.",
+      "claim": "Neighboring reciprocal gauges agree at an integer tie.",
+      "id": "dmf_15_tie_gauge",
+      "proof_boundary": "Continuous noninteger sides still retain finite-Poisson traces.",
+      "readiness": "proved",
+      "role": "integer tie phase"
+    },
+    {
+      "certificate": "The radius-one collar changes from [p-3/2,p+3/2] to [p-1/2,p+5/2]. After common-interface cancellation, the only transferred physical strips are the leaving J_(p-1) and entering J_(p+2), exactly as Section 11.189 requires.",
+      "claim": "The diagonal-adjacent union transfers exactly two physical strips.",
+      "id": "dmf_16_tie_transport",
+      "proof_boundary": "The strips remain complete.",
+      "readiness": "proved",
+      "role": "collar shift"
+    },
+    {
+      "certificate": "The collar-side flux is therefore tie invariant only after the corresponding far-side flux is included. The moving-endpoint shear travels with the same complete physical strips and cannot be assigned to the collar alone.",
+      "claim": "The shear and ordinary rail traces move with the complete mode.",
+      "id": "dmf_17_tie_completion",
+      "proof_boundary": "Collar-only invariance remains false.",
+      "readiness": "guard_validated",
+      "role": "far completion"
+    },
+    {
+      "certificate": "For any positive physical rail U, put u_U=log(a/U). Then P_H^0(log U)=i(u_U-u_N)(u_U+u_N)^2/4 and P_T^0(log U)=i(u_U+u_N)(u_U-u_N)^2/4-u_(N,x)(u_U+u_N). These apply at half-integer collar rails as well as integer atoms.",
+      "claim": "Both ideal cubics have exact values on every physical rail.",
+      "id": "dmf_18_ideal_rails",
+      "proof_boundary": "No railwise sign is inferred.",
+      "readiness": "proved",
+      "role": "ideal rail values"
+    },
+    {
+      "certificate": "The reciprocal side saddles occur at U=p+1/2 and U=p-1/2, whereas the radius-one physical rails are U=p+3/2 and U=p-3/2. Adjacent-corner transport bridges a full cell; the positive endpoint trace cannot be identified pointwise with the outer collar rail.",
+      "claim": "Reciprocal side saddles and outer collar rails are separated by one adjacent cell.",
+      "id": "dmf_19_side_mismatch",
+      "proof_boundary": "Pointwise endpoint identification is invalid.",
+      "readiness": "proved",
+      "role": "endpoint location"
+    },
+    {
+      "certificate": "At U=N, P_H^0(log N)=0 but P_T^0(log N)=-2u_Nu_(N,x). The exact Hermitian physical endpoint value vanishes; the transpose endpoint remains joined to the conditional terminal quadrature and full complex recurrence.",
+      "claim": "The Hermitian terminal value vanishes and the transpose value survives.",
+      "id": "dmf_20_terminal",
+      "proof_boundary": "The full complex recurrence remains compulsory.",
+      "readiness": "proved",
+      "role": "terminal endpoint"
+    },
+    {
+      "certificate": "The identity P_T^0(x)=-P_H^0(-x)+u_(N,x)(x-u_N) does not reverse the curvilinear collar: S(log u), the interval [1,N], reciprocal side traces, and endpoint velocities are not reflection symmetric.",
+      "claim": "Polynomial reflection does not reflect the physical flux domain.",
+      "id": "dmf_21_reflection",
+      "proof_boundary": "No H/T cancellation is inferred.",
+      "readiness": "guard_validated",
+      "role": "reflection guard"
+    },
+    {
+      "certificate": "For a nonconstant coefficient D, div(Dkappa eta E,-Dkappa y E)=D(eta^2+y^2)E+kappa E(eta D_eta-y D_y). The physical ideal-cubic amplitude therefore leaves an interior transport term as well as boundary flux; constant-symbol cancellation cannot be promoted coefficientwise.",
+      "claim": "Control the weighted physical boundary and interior transport.",
+      "id": "dmf_22_weighted_open",
+      "proof_boundary": "No signed weighted flux bound is proved.",
+      "readiness": "open",
+      "role": "weighted ideal flux"
+    },
+    {
+      "certificate": "Insert the complete transformed ideal amplitudes G_H^0 and G_T^0 into the weighted flux identity, combine the two physical rail traces with the rail-compressed far integration-by-parts functional, and compose both reciprocal side traces with finite-cell tie corrections and the q=N transpose terminal quadrature. Then estimate or obstruct the remaining interior transport eta G_eta-y G_y without blockwise moduli.",
+      "claim": "Compose the physical flux rails with the exact far functional.",
+      "id": "dmf_23_far_open",
+      "proof_boundary": "No far aggregate is bounded.",
+      "readiness": "open",
+      "role": "far rail composition"
+    },
+    {
+      "certificate": "Insert the complete transformed ideal amplitudes G_H^0 and G_T^0 into the weighted flux identity, combine the two physical rail traces with the rail-compressed far integration-by-parts functional, and compose both reciprocal side traces with finite-cell tie corrections and the q=N transpose terminal quadrature. Then estimate or obstruct the remaining interior transport eta G_eta-y G_y without blockwise moduli.",
+      "claim": "Compose the reciprocal sides with tie halves and the transpose terminal quadrature.",
+      "id": "dmf_24_terminal_open",
+      "proof_boundary": "No terminal sign is claimed.",
+      "readiness": "open",
+      "role": "terminal composition"
+    },
+    {
+      "certificate": "Replace the proposed four fixed-endpoint match by the exact curvilinear boundary flux. Keep reciprocal side integrals, physical outer-rail integrals, and moving-endpoint shear together; internal diagonal/adjacent interfaces cancel only after their oriented union.",
+      "claim": "Use the curvilinear weighted flux as the next exact object.",
+      "id": "dmf_25_decision",
+      "proof_boundary": "The rectangular shortcut is retired.",
+      "readiness": "guard_validated",
+      "role": "route decision"
+    },
+    {
+      "certificate": "Insert the complete transformed ideal amplitudes G_H^0 and G_T^0 into the weighted flux identity, combine the two physical rail traces with the rail-compressed far integration-by-parts functional, and compose both reciprocal side traces with finite-cell tie corrections and the q=N transpose terminal quadrature. Then estimate or obstruct the remaining interior transport eta G_eta-y G_y without blockwise moduli.",
+      "claim": "Derive the complete weighted ideal composition.",
+      "id": "dmf_26_obligation",
+      "proof_boundary": "No signed complete ideal join, weighted rail flux, interior transport, far aggregate, h^2 reserve, completed current, or RH-level theorem is proved.",
+      "readiness": "open",
+      "role": "next obligation"
+    },
+    {
+      "certificate": "Insert the complete transformed ideal amplitudes G_H^0 and G_T^0 into the weighted flux identity, combine the two physical rail traces with the rail-compressed far integration-by-parts functional, and compose both reciprocal side traces with finite-cell tie corrections and the q=N transpose terminal quadrature. Then estimate or obstruct the remaining interior transport eta G_eta-y G_y without blockwise moduli.",
+      "claim": "Prove or obstruct a signed complete ideal join only after exact composition.",
+      "id": "dmf_27_signed_bound",
+      "proof_boundary": "No signed complete ideal join, weighted rail flux, interior transport, far aggregate, h^2 reserve, completed current, or RH-level theorem is proved.",
+      "readiness": "open",
+      "role": "signed join"
+    },
+    {
+      "certificate": "No signed complete ideal join, weighted rail flux, interior transport, far aggregate, h^2 reserve, completed current, or RH-level theorem is proved.",
+      "claim": "This gate is not a proof of RH.",
+      "id": "dmf_28_boundary",
+      "proof_boundary": "No prize-level conclusion is claimed.",
+      "readiness": "guard_validated",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "collar_transport": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_ideal_cubic_reciprocal_collar_transport_gate.json",
+      "sha256": "00c6fe93d51b96cb687f40039ae1f47d48946292756e6b1618d9f20bbbdff6e4"
+    },
+    "finite_cell_inversion": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_ideal_cubic_reciprocal_finite_cell_inversion_gate.json",
+      "sha256": "52856581875a22fd16216f3282475bf2716fe8757d147dfb604ddac8ec14f5fd"
+    },
+    "first_correction": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_ideal_cubic_reciprocal_first_correction_gate.json",
+      "sha256": "087876f56f7a7e212575a56711885835e2cfacca06a210ebc2b876495f52a8c5"
+    },
+    "terminal_quadrature": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_terminal_conditional_quadrature_gate.json",
+      "sha256": "27033bf847ba614cdd73dbd8c0924c488a2c8610ca80c737e63030c042553790"
+    }
+  },
+  "status": "double-Morse rail flux and moving-endpoint shear proved; signed complete ideal estimate open",
+  "symbolic_certificate": {
+    "flux": {
+      "boundary_flux_identities": 2,
+      "curved_flux": "On the true collar image, the paired finite second moments equal kappa times the four-side flux integral int_(boundary Omega)E{eta dy+y deta}. The reciprocal sides contribute kappa eta E dy; a physical rail contributes kappa E{y_U+eta y_U'}deta with its boundary orientation.",
+      "divergence": "For E(eta,y)=e((eta^2-y^2)/2), div(kappa eta E,-kappa y E)=(eta^2+y^2)E. The full-line first-correction cancellation is the zero-boundary limit of this exact divergence law.",
+      "moving_endpoint_identities": 2,
+      "numerical_curved_flux_checks": 3,
+      "shear": "The term kappa eta y_U'E is the moving-endpoint shear. It is absent only in an artificial Cartesian Morse rectangle. Thus the four fixed-limit terms in the two one-dimensional moment formulas do not by themselves equal the physical collar rails.",
+      "signed_flux_bounds": 0,
+      "slice_formula": "If F(eta)=integral_(y_-(eta))^(y_+(eta))e(-y^2/2)dy, positive-moment integration by parts differentiates F and creates y_+'e(-y_+^2/2)-y_-'e(-y_-^2/2). These are exactly the two shear terms required by the boundary flux.",
+      "weighted_flux": "For a nonconstant coefficient D, div(Dkappa eta E,-Dkappa y E)=D(eta^2+y^2)E+kappa E(eta D_eta-y D_y). The physical ideal-cubic amplitude therefore leaves an interior transport term as well as boundary flux; constant-symbol cancellation cannot be promoted coefficientwise."
+    },
+    "geometry": {
+      "adjacent_union": "For L=1, the cells J_(p-1), J_p, and J_(p+1) tile [p-3/2,p+3/2]. Their two internal Morse interfaces cancel with opposite orientations, leaving only the two outer collar rails.",
+      "carrier_line": "The physical line u=p is exactly v=rho, hence y=eta and Psi_p=alpha_Plog p. It is the returned-carrier ridge, not an oscillatory error rail.",
+      "cell_endpoints": "The reciprocal cell endpoints rho_-=p/(p+1/2) and rho_+=p/(p-1/2) map to fixed eta endpoints. Their inner saddles are u_0=p+1/2 and u_0=p-1/2 respectively.",
+      "collar_domain": "For an internal radius-L collar, U_-=p-L-1/2 and U_+=p+L+1/2. Its Morse image is eta_-<=eta<=eta_+ and y_-(eta)<=y<=y_+(eta), where y_U(eta)=sqrt(alpha_P)z(Urho(eta)/p). This is curvilinear, not Cartesian.",
+      "endpoint_checks": 78,
+      "endpoint_derivative_checks": 232,
+      "endpoint_velocity": "Along a physical rail u=U, y_U'(eta)=(U/p)J(rho)/J(Urho/p)=vJ(rho)/{rho J(v)}>0. The endpoint velocity vanishes nowhere; only its product with eta vanishes at the reciprocal saddle.",
+      "internal_interface_cancellations": 78,
+      "jacobian": "The exact Jacobian is dr du={J(rho)J(v)/rho}deta dy. Hence the transformed amplitude is G_P(eta,y)=exp(S(log(pv/rho)))P(log(pv/rho))J(rho)J(v)/rho.",
+      "jacobian_identities": 2,
+      "phase": "For Psi_p(r,u)=alpha_Plog u-r(u-p), the exact identity is Psi_p=alpha_Plog p+(eta^2-y^2)/2. The sequential positive and negative Morse phases are therefore one two-dimensional saddle chart.",
+      "phase_identities": 2,
+      "variables": "Put rho=pr/alpha_P and v=ur/alpha_P. With eta=sqrt(alpha_P)z(rho) and y=sqrt(alpha_P)z(v), the inverse map is r=alpha_Prho/p and u=pv/rho."
+    },
+    "handoff": {
+      "decision": "Replace the proposed four fixed-endpoint match by the exact curvilinear boundary flux. Keep reciprocal side integrals, physical outer-rail integrals, and moving-endpoint shear together; internal diagonal/adjacent interfaces cancel only after their oriented union.",
+      "obligation": "Insert the complete transformed ideal amplitudes G_H^0 and G_T^0 into the weighted flux identity, combine the two physical rail traces with the rail-compressed far integration-by-parts functional, and compose both reciprocal side traces with finite-cell tie corrections and the q=N transpose terminal quadrature. Then estimate or obstruct the remaining interior transport eta G_eta-y G_y without blockwise moduli.",
+      "reserve": "No signed complete ideal join, weighted rail flux, interior transport, far aggregate, h^2 reserve, completed current, or RH-level theorem is proved."
+    },
+    "ideal": {
+      "ideal_cubic_identities": 5,
+      "ideal_rail_checks": 128,
+      "internal_values": "The reciprocal side saddles occur at U=p+1/2 and U=p-1/2, whereas the radius-one physical rails are U=p+3/2 and U=p-3/2. Adjacent-corner transport bridges a full cell; the positive endpoint trace cannot be identified pointwise with the outer collar rail.",
+      "rail_values": "For any positive physical rail U, put u_U=log(a/U). Then P_H^0(log U)=i(u_U-u_N)(u_U+u_N)^2/4 and P_T^0(log U)=i(u_U+u_N)(u_U-u_N)^2/4-u_(N,x)(u_U+u_N). These apply at half-integer collar rails as well as integer atoms.",
+      "reflection_guard": "The identity P_T^0(x)=-P_H^0(-x)+u_(N,x)(x-u_N) does not reverse the curvilinear collar: S(log u), the interval [1,N], reciprocal side traces, and endpoint velocities are not reflection symmetric.",
+      "signed_ideal_flux_bounds": 0,
+      "terminal": "At U=N, P_H^0(log N)=0 but P_T^0(log N)=-2u_Nu_(N,x). The exact Hermitian physical endpoint value vanishes; the transpose endpoint remains joined to the conditional terminal quadrature and full complex recurrence."
+    },
+    "ties": {
+      "completion": "The collar-side flux is therefore tie invariant only after the corresponding far-side flux is included. The moving-endpoint shear travels with the same complete physical strips and cannot be assigned to the collar alone.",
+      "gauge": "At the shared reciprocal boundary, Psi_(p+1)-Psi_p=r. When the boundary is an actual integer tie, e(r)=1, so overlapping complete-mode traces use the same Fourier phase.",
+      "integer_gauge_checks": 60,
+      "transport": "The radius-one collar changes from [p-3/2,p+3/2] to [p-1/2,p+5/2]. After common-interface cancellation, the only transferred physical strips are the leaving J_(p-1) and entering J_(p+2), exactly as Section 11.189 requires."
+    }
+  }
+}

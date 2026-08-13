@@ -1,0 +1,282 @@
+{
+  "counts": {
+    "hyperbolic_identities": 3,
+    "ideal_transport_identities": 5,
+    "numerical_transport_checks": 6,
+    "phi_b_bounds": 0,
+    "profile_identities": 4,
+    "profile_sign_checks": 16,
+    "rows": 26,
+    "signed_ideal_transport_bounds": 0,
+    "signed_transport_bounds": 0,
+    "transport_identities": 4,
+    "transverse_kernel_checks": 8
+  },
+  "date": "2026-08-03",
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_ideal_cubic_double_morse_hyperbolic_transport_gate",
+  "proof_boundary": "This proves the exact transport profiles, closed rho-v operator, saddle zero, carrier-ridge trace, hyperbolic phase and boost, finite transverse kernel, and ideal derivative and terminal identities. It proves no signed ridge-completed ideal join, transverse residual bound, far aggregate, completed current, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "certificate": "Define h(w)=w-1-log w, mathfrak R(w)=2h(w)/(w-1), and mathfrak B(w)=2h(w)/(w-1)^2, with removable values mathfrak R(1)=0 and mathfrak B(1)=1. Also z(w)J(w)=w mathfrak R(w).",
+      "claim": "Two removable scalar profiles control the transport.",
+      "id": "dht_01_profiles",
+      "proof_boundary": "Their limits are exact.",
+      "readiness": "proved",
+      "role": "Morse profiles"
+    },
+    {
+      "certificate": "The exact logarithmic Jacobian identity is zJ partial_w log J=1-mathfrak B(w). It converts the weighted flux transport into two elementary profile functions.",
+      "claim": "The Morse Jacobian derivative reduces to mathfrak B.",
+      "id": "dht_02_jacobian",
+      "proof_boundary": "No numerical fit is used.",
+      "readiness": "proved",
+      "role": "Jacobian derivative"
+    },
+    {
+      "certificate": "At w=1+d, mathfrak R=d-2d^2/3+d^3/2-2d^4/5+..., while mathfrak B=1-2d/3+d^2/2-2d^3/5+d^4/3+.... Thus the transport has a removable first-order zero at the double saddle.",
+      "claim": "The transport profiles have explicit removable saddle series.",
+      "id": "dht_03_series",
+      "proof_boundary": "The gain is first order.",
+      "readiness": "proved",
+      "role": "saddle jet"
+    },
+    {
+      "certificate": "mathfrak B(w)>0 for w>0, while mathfrak R(w) has the sign of w-1. A coefficient-blind ridge transport therefore changes orientation across the reciprocal saddle.",
+      "claim": "The ridge profile reverses sign across the saddle.",
+      "id": "dht_04_profile_sign",
+      "proof_boundary": "This is not a physical current sign.",
+      "readiness": "proved",
+      "role": "profile orientation"
+    },
+    {
+      "certificate": "The boundary-flux transport vector is mathcal L=eta partial_eta-y partial_y=z(rho)J(rho)partial_rho-z(v)J(v)partial_v.",
+      "claim": "The weighted flux interior has an exact rho-v vector field.",
+      "id": "dht_05_operator",
+      "proof_boundary": "The amplitude remains coupled.",
+      "readiness": "proved",
+      "role": "transport vector"
+    },
+    {
+      "certificate": "For G_P=exp(S(x))P(x)J(rho)J(v)/rho, x=log(pv/rho), the exact identity is mathcal L G_P=exp(S)J(rho)J(v)/rho times {[mathfrak B(v)-mathfrak B(rho)-mathfrak R(rho)]P-[mathfrak R(rho)+mathfrak R(v)](P'+gP)}.",
+      "claim": "The complete transport reduces to P and P'+gP with explicit profiles.",
+      "id": "dht_06_closed_form",
+      "proof_boundary": "No division by P occurs.",
+      "readiness": "proved",
+      "role": "transport formula"
+    },
+    {
+      "certificate": "At rho=v=1 both coefficients vanish. To first order they are -(delta_rho+2delta_v)/3 and -(delta_rho+delta_v), so the interior transport gains one local displacement but not two.",
+      "claim": "Both transport coefficients vanish at the double saddle.",
+      "id": "dht_07_saddle_zero",
+      "proof_boundary": "Only one displacement is gained.",
+      "readiness": "proved",
+      "role": "local gain"
+    },
+    {
+      "certificate": "On the carrier ridge v=rho, mathcal L G_P=-exp(S(log p))J(rho)^2 mathfrak R(rho){P+2(P'+gP)}(log p)/rho. The phase is constant there, so this trace must be recombined with the returned carrier rather than bounded as an oscillatory cell error.",
+      "claim": "The exact ridge transport has constant phase and a live coefficient.",
+      "id": "dht_08_ridge",
+      "proof_boundary": "It must remain joined to returned carriers.",
+      "readiness": "proved",
+      "role": "carrier ridge"
+    },
+    {
+      "certificate": "Put s=(eta+y)/sqrt(2) and d=(eta-y)/sqrt(2). Then (eta^2-y^2)/2=sd and deta dy has unit absolute Jacobian.",
+      "claim": "An orthogonal change gives phase sd.",
+      "id": "dht_09_hyperbolic",
+      "proof_boundary": "The domain remains finite and curved.",
+      "readiness": "proved",
+      "role": "hyperbolic phase"
+    },
+    {
+      "certificate": "The transport becomes mathcal L=d partial_s+s partial_d. It differentiates transversely on the carrier ridge d=0, where the phase e(sd) is constant.",
+      "claim": "The transport is the hyperbolic boost d partial_s+s partial_d.",
+      "id": "dht_10_boost",
+      "proof_boundary": "It is transverse on d=0.",
+      "readiness": "proved",
+      "role": "hyperbolic transport"
+    },
+    {
+      "certificate": "For fixed s!=0 and finite transverse limits d_-<d_+, integral_(d_-)^(d_+)e(sd)dd=kappa{e(sd_+)-e(sd_-)}/s, with removable value d_+-d_- at s=0. This is the exact finite transverse Fourier kernel.",
+      "claim": "The finite d integral has an exact removable 1/s kernel.",
+      "id": "dht_11_kernel",
+      "proof_boundary": "The central s chart remains explicit.",
+      "readiness": "proved",
+      "role": "transverse kernel"
+    },
+    {
+      "certificate": "Subtract the ridge amplitude before estimating the transverse residual. For |s| away from zero, integrate the residual in d with the exact 1/s kernel; keep a central s-neighborhood and reciprocal side traces joined to the returned carrier. A two-dimensional modulus would erase this structure.",
+      "claim": "Ridge subtraction precedes transverse estimation.",
+      "id": "dht_12_route",
+      "proof_boundary": "No two-dimensional modulus is admissible.",
+      "readiness": "guard_validated",
+      "role": "transverse route"
+    },
+    {
+      "certificate": "The exact ideal derivatives are (P_H^0)'=-i(x-u_N)(3x+u_N)/4 and (P_T^0)'=-i(x+u_N)(3x-u_N)/4+u_(N,x). They enter the transport only through P'+gP.",
+      "claim": "Both cubic derivative rows are explicit.",
+      "id": "dht_13_ideal_derivatives",
+      "proof_boundary": "Corrections remain detached.",
+      "readiness": "proved",
+      "role": "ideal derivatives"
+    },
+    {
+      "certificate": "At x=-u_N, P_H^0=0 but (P_H^0)'=-iu_N^2. Also P_T^0=-2u_Nu_(N,x) and (P_T^0)'+g_NP_T^0=u_(N,x)(1-2g_Nu_N). Thus the Hermitian value null does not delete the terminal-neighborhood interior transport.",
+      "claim": "The Hermitian value null leaves derivative transport.",
+      "id": "dht_14_terminal",
+      "proof_boundary": "The transpose terminal quadrature remains joined.",
+      "readiness": "proved",
+      "role": "terminal derivative"
+    },
+    {
+      "certificate": "Neither P_H^0+2{(P_H^0)'+gP_H^0} nor its transpose analogue vanishes identically. The nonoscillatory ridge transport is therefore a live joined-carrier term, not a polynomial null.",
+      "claim": "Neither ideal ridge coefficient vanishes identically.",
+      "id": "dht_15_ridge_guard",
+      "proof_boundary": "No sign follows.",
+      "readiness": "guard_validated",
+      "role": "polynomial nonnull"
+    },
+    {
+      "certificate": "mathfrak B(w)>0 for w>0, while mathfrak R(w) has the sign of w-1. A coefficient-blind ridge transport therefore changes orientation across the reciprocal saddle.",
+      "claim": "The constant source ridge transport changes sign with rho-1.",
+      "id": "dht_16_constant_witness",
+      "proof_boundary": "The witness is nonphysical.",
+      "readiness": "guard_validated",
+      "role": "coefficient-blind sign guard"
+    },
+    {
+      "certificate": "Write the complete ideal Hermitian and transpose joins in (s,d) coordinates, isolate the ridge amplitude G_P(s,0), and prove the exact cancellation or retained coefficient supplied by both returned carriers and the transpose terminal block. Then split the residual into a central |s| chart and an outer transverse 1/s kernel, keeping physical rails, reciprocal sides, and far compression joined.",
+      "claim": "Compose the exact ridge with both returned carriers.",
+      "id": "dht_17_ridge_open",
+      "proof_boundary": "No ridge cancellation is claimed.",
+      "readiness": "open",
+      "role": "ridge recombination"
+    },
+    {
+      "certificate": "Write the complete ideal Hermitian and transpose joins in (s,d) coordinates, isolate the ridge amplitude G_P(s,0), and prove the exact cancellation or retained coefficient supplied by both returned carriers and the transpose terminal block. Then split the residual into a central |s| chart and an outer transverse 1/s kernel, keeping physical rails, reciprocal sides, and far compression joined.",
+      "claim": "Control the removable s=0 transverse chart.",
+      "id": "dht_18_central_open",
+      "proof_boundary": "No central bound is claimed.",
+      "readiness": "open",
+      "role": "central chart"
+    },
+    {
+      "certificate": "Write the complete ideal Hermitian and transpose joins in (s,d) coordinates, isolate the ridge amplitude G_P(s,0), and prove the exact cancellation or retained coefficient supplied by both returned carriers and the transpose terminal block. Then split the residual into a central |s| chart and an outer transverse 1/s kernel, keeping physical rails, reciprocal sides, and far compression joined.",
+      "claim": "Exploit the finite 1/s kernel without blockwise moduli.",
+      "id": "dht_19_outer_open",
+      "proof_boundary": "No transverse bound is claimed.",
+      "readiness": "open",
+      "role": "outer transverse chart"
+    },
+    {
+      "certificate": "Write the complete ideal Hermitian and transpose joins in (s,d) coordinates, isolate the ridge amplitude G_P(s,0), and prove the exact cancellation or retained coefficient supplied by both returned carriers and the transpose terminal block. Then split the residual into a central |s| chart and an outer transverse 1/s kernel, keeping physical rails, reciprocal sides, and far compression joined.",
+      "claim": "Keep physical and reciprocal sides joined to the far functional.",
+      "id": "dht_20_rails_open",
+      "proof_boundary": "No far aggregate is claimed.",
+      "readiness": "open",
+      "role": "rail completion"
+    },
+    {
+      "certificate": "Use the exact hyperbolic transverse kernel after subtracting and recombining the carrier ridge. Do not estimate eta G_eta-y G_y as a two-dimensional absolute remainder and do not infer that the Hermitian terminal value null removes its derivative transport.",
+      "claim": "Use ridge-completed hyperbolic transport.",
+      "id": "dht_21_decision",
+      "proof_boundary": "The absolute two-dimensional route is retired.",
+      "readiness": "guard_validated",
+      "role": "route decision"
+    },
+    {
+      "certificate": "Write the complete ideal Hermitian and transpose joins in (s,d) coordinates, isolate the ridge amplitude G_P(s,0), and prove the exact cancellation or retained coefficient supplied by both returned carriers and the transpose terminal block. Then split the residual into a central |s| chart and an outer transverse 1/s kernel, keeping physical rails, reciprocal sides, and far compression joined.",
+      "claim": "Derive the complete ridge coefficient and transverse residual.",
+      "id": "dht_22_obligation",
+      "proof_boundary": "No signed ridge-completed ideal join, transverse residual bound, far aggregate, h^2 reserve, completed current, or RH-level theorem is proved.",
+      "readiness": "open",
+      "role": "next obligation"
+    },
+    {
+      "certificate": "Write the complete ideal Hermitian and transpose joins in (s,d) coordinates, isolate the ridge amplitude G_P(s,0), and prove the exact cancellation or retained coefficient supplied by both returned carriers and the transpose terminal block. Then split the residual into a central |s| chart and an outer transverse 1/s kernel, keeping physical rails, reciprocal sides, and far compression joined.",
+      "claim": "Prove or obstruct the signed ridge-completed join.",
+      "id": "dht_23_signed_join",
+      "proof_boundary": "No signed ridge-completed ideal join, transverse residual bound, far aggregate, h^2 reserve, completed current, or RH-level theorem is proved.",
+      "readiness": "open",
+      "role": "signed ideal join"
+    },
+    {
+      "certificate": "Write the complete ideal Hermitian and transpose joins in (s,d) coordinates, isolate the ridge amplitude G_P(s,0), and prove the exact cancellation or retained coefficient supplied by both returned carriers and the transpose terminal block. Then split the residual into a central |s| chart and an outer transverse 1/s kernel, keeping physical rails, reciprocal sides, and far compression joined.",
+      "claim": "Attach Delta_H and Delta_T only after the ideal join closes.",
+      "id": "dht_24_corrections",
+      "proof_boundary": "No correction budget is spent.",
+      "readiness": "open",
+      "role": "physical corrections"
+    },
+    {
+      "certificate": "Write the complete ideal Hermitian and transpose joins in (s,d) coordinates, isolate the ridge amplitude G_P(s,0), and prove the exact cancellation or retained coefficient supplied by both returned carriers and the transpose terminal block. Then split the residual into a central |s| chart and an outer transverse 1/s kernel, keeping physical rails, reciprocal sides, and far compression joined.",
+      "claim": "Apply the global residual only after a retained aggregate theorem.",
+      "id": "dht_25_residual",
+      "proof_boundary": "No componentwise allocation is made.",
+      "readiness": "open",
+      "role": "whole-jet residual"
+    },
+    {
+      "certificate": "No signed ridge-completed ideal join, transverse residual bound, far aggregate, h^2 reserve, completed current, or RH-level theorem is proved.",
+      "claim": "This gate is not a proof of RH.",
+      "id": "dht_26_boundary",
+      "proof_boundary": "No prize-level conclusion is claimed.",
+      "readiness": "guard_validated",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "collar_transport": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_ideal_cubic_reciprocal_collar_transport_gate.json",
+      "sha256": "00c6fe93d51b96cb687f40039ae1f47d48946292756e6b1618d9f20bbbdff6e4"
+    },
+    "first_correction": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_ideal_cubic_reciprocal_first_correction_gate.json",
+      "sha256": "087876f56f7a7e212575a56711885835e2cfacca06a210ebc2b876495f52a8c5"
+    },
+    "rail_flux": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_ideal_cubic_double_morse_rail_flux_gate.json",
+      "sha256": "efdbb84736ba63a01e0acfc45005786ad07c859b4ffce4ad6894efc249628f88"
+    }
+  },
+  "status": "double-Morse hyperbolic transport and carrier-ridge reduction proved; signed ridge-completed ideal estimate open",
+  "symbolic_certificate": {
+    "handoff": {
+      "decision": "Use the exact hyperbolic transverse kernel after subtracting and recombining the carrier ridge. Do not estimate eta G_eta-y G_y as a two-dimensional absolute remainder and do not infer that the Hermitian terminal value null removes its derivative transport.",
+      "obligation": "Write the complete ideal Hermitian and transpose joins in (s,d) coordinates, isolate the ridge amplitude G_P(s,0), and prove the exact cancellation or retained coefficient supplied by both returned carriers and the transpose terminal block. Then split the residual into a central |s| chart and an outer transverse 1/s kernel, keeping physical rails, reciprocal sides, and far compression joined.",
+      "reserve": "No signed ridge-completed ideal join, transverse residual bound, far aggregate, h^2 reserve, completed current, or RH-level theorem is proved."
+    },
+    "hyperbolic": {
+      "coordinates": "Put s=(eta+y)/sqrt(2) and d=(eta-y)/sqrt(2). Then (eta^2-y^2)/2=sd and deta dy has unit absolute Jacobian.",
+      "hyperbolic_identities": 3,
+      "kernel": "For fixed s!=0 and finite transverse limits d_-<d_+, integral_(d_-)^(d_+)e(sd)dd=kappa{e(sd_+)-e(sd_-)}/s, with removable value d_+-d_- at s=0. This is the exact finite transverse Fourier kernel.",
+      "operator": "The transport becomes mathcal L=d partial_s+s partial_d. It differentiates transversely on the carrier ridge d=0, where the phase e(sd) is constant.",
+      "route": "Subtract the ridge amplitude before estimating the transverse residual. For |s| away from zero, integrate the residual in d with the exact 1/s kernel; keep a central s-neighborhood and reciprocal side traces joined to the returned carrier. A two-dimensional modulus would erase this structure.",
+      "transverse_kernel_checks": 8
+    },
+    "ideal": {
+      "derivatives": "The exact ideal derivatives are (P_H^0)'=-i(x-u_N)(3x+u_N)/4 and (P_T^0)'=-i(x+u_N)(3x-u_N)/4+u_(N,x). They enter the transport only through P'+gP.",
+      "ideal_transport_identities": 5,
+      "ridge_guard": "Neither P_H^0+2{(P_H^0)'+gP_H^0} nor its transpose analogue vanishes identically. The nonoscillatory ridge transport is therefore a live joined-carrier term, not a polynomial null.",
+      "signed_ideal_transport_bounds": 0,
+      "terminal": "At x=-u_N, P_H^0=0 but (P_H^0)'=-iu_N^2. Also P_T^0=-2u_Nu_(N,x) and (P_T^0)'+g_NP_T^0=u_(N,x)(1-2g_Nu_N). Thus the Hermitian value null does not delete the terminal-neighborhood interior transport."
+    },
+    "profiles": {
+      "jacobian_derivative": "The exact logarithmic Jacobian identity is zJ partial_w log J=1-mathfrak B(w). It converts the weighted flux transport into two elementary profile functions.",
+      "profile_identities": 4,
+      "profile_sign_checks": 16,
+      "profiles": "Define h(w)=w-1-log w, mathfrak R(w)=2h(w)/(w-1), and mathfrak B(w)=2h(w)/(w-1)^2, with removable values mathfrak R(1)=0 and mathfrak B(1)=1. Also z(w)J(w)=w mathfrak R(w).",
+      "series": "At w=1+d, mathfrak R=d-2d^2/3+d^3/2-2d^4/5+..., while mathfrak B=1-2d/3+d^2/2-2d^3/5+d^4/3+.... Thus the transport has a removable first-order zero at the double saddle.",
+      "sign": "mathfrak B(w)>0 for w>0, while mathfrak R(w) has the sign of w-1. A coefficient-blind ridge transport therefore changes orientation across the reciprocal saddle."
+    },
+    "transport": {
+      "closed_form": "For G_P=exp(S(x))P(x)J(rho)J(v)/rho, x=log(pv/rho), the exact identity is mathcal L G_P=exp(S)J(rho)J(v)/rho times {[mathfrak B(v)-mathfrak B(rho)-mathfrak R(rho)]P-[mathfrak R(rho)+mathfrak R(v)](P'+gP)}.",
+      "numerical_transport_checks": 6,
+      "operator": "The boundary-flux transport vector is mathcal L=eta partial_eta-y partial_y=z(rho)J(rho)partial_rho-z(v)J(v)partial_v.",
+      "ridge": "On the carrier ridge v=rho, mathcal L G_P=-exp(S(log p))J(rho)^2 mathfrak R(rho){P+2(P'+gP)}(log p)/rho. The phase is constant there, so this trace must be recombined with the returned carrier rather than bounded as an oscillatory cell error.",
+      "saddle_zero": "At rho=v=1 both coefficients vanish. To first order they are -(delta_rho+2delta_v)/3 and -(delta_rho+delta_v), so the interior transport gains one local displacement but not two.",
+      "signed_transport_bounds": 0,
+      "transport_identities": 4
+    }
+  }
+}

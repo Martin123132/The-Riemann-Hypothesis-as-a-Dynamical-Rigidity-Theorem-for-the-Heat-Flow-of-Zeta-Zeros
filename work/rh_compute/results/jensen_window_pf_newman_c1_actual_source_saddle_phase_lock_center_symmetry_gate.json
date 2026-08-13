@@ -1,0 +1,246 @@
+{
+  "kind": "jensen_window_pf_newman_c1_actual_source_saddle_phase_lock_center_symmetry_gate",
+  "schema_version": 1,
+  "date": "2026-08-04",
+  "status": "actual-source normalization, reverse complete-cell turn, and exact bare-centre symmetry proved; joined current sign open",
+  "source_sha256": {
+    "normalizer_lock": "889036f64ee82ef41142680db9a1a14d5178f2d983325944e7bfca1d9b76bf21",
+    "absolute_anchor": "7e5c8725b2d0913d2e5d1731b962a7cd79081b8e09e52c7992647e4dc631cbd2",
+    "q1_phase": "2eebbbac71106d6248ac9261316ea5ed2466e78e2b93565044a4d8d80e9a331e",
+    "raw_anchors": "2064f5bbf9e74fc100d40dd3f7d596f79eb463f4803aa1426d724466487f2219",
+    "relative_lift": "7b0f9df6bcc1d50becb3fcf28f62fff7545c63451229418cd3b3a954ca81425c",
+    "terminal_covariance": "b95960dfe81719e13cb6296090521bb004ae01d80571470c42858032f536647d"
+  },
+  "source_audit": {
+    "normalizer_lock": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_reciprocal_normalizer_phase_reinforcement_guard.json",
+      "sha256": "889036f64ee82ef41142680db9a1a14d5178f2d983325944e7bfca1d9b76bf21"
+    },
+    "absolute_anchor": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_absolute_phase_anchor_reduction.json",
+      "sha256": "7e5c8725b2d0913d2e5d1731b962a7cd79081b8e09e52c7992647e4dc631cbd2"
+    },
+    "q1_phase": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_q1_saddle_phase_variance_reduction.json",
+      "sha256": "2eebbbac71106d6248ac9261316ea5ed2466e78e2b93565044a4d8d80e9a331e"
+    },
+    "raw_anchors": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_carrier_near_odd_harmonic_anchor_gate.json",
+      "sha256": "2064f5bbf9e74fc100d40dd3f7d596f79eb463f4803aa1426d724466487f2219"
+    },
+    "relative_lift": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_terminal_nonterminal_relative_lift_gate.json",
+      "sha256": "7b0f9df6bcc1d50becb3fcf28f62fff7545c63451229418cd3b3a954ca81425c"
+    },
+    "terminal_covariance": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_terminal_phase_winding_covariant_two_channel_gate.json",
+      "sha256": "b95960dfe81719e13cb6296090521bb004ae01d80571470c42858032f536647d"
+    }
+  },
+  "exact": {
+    "source_phase": {
+      "normalizer": "The common source normalizer is nu=eta/S_a=omega_c/(B_0T_0), where omega_c=(-1)^N eta and eta=phi(1+d_1)/|1+d_1|. At xi=Omega one has c_xi=1, |nu|=(B_0T_0)^(-1), and exp(2i gamma_phys)=eta^2; cutoff parity cancels from the transpose phase.",
+      "continuous_phase": "Because M_t(s) is nonzero and |d_1|<1/2, choose continuous unwrapped beta_t=arg M_t(s), delta_1=arg(1+d_1), theta_eta=beta_t+delta_1, and chi_N=phi_N+theta_eta on each complete fixed-N q=1 cell.",
+      "stationary_lock": "For Q(v)=exp(i[v log(v/(2pi))-v-pi/4]) and gamma_t=conjugate(M_t)/M_t=exp(-2i beta_t), Section 11.119 supplies the continuous psi=arg(Q(Omega)/gamma_t), with |psi|<1/x. Hence arg Q(Omega)+2beta_t=psi exactly on the chosen lift.",
+      "source_normalizer_identifications": 1,
+      "continuous_phase_lifts": 1
+    },
+    "reverse_turn": {
+      "lock_identity": "Let K_N=2pi N^2 and F_N(v)=v[1+log(K_N/v)]. The stationary lock gives the exact unwrapped identity 2chi_N=F_N(Omega)+pi/4+psi+2delta_1.",
+      "endpoint_identity": "At the ideal cutoff endpoints Omega=2pi N^2 and 2pi(N+1)^2, the increment of 2chi_N is 2pi G_N, where G_N=(N+1)^2[1-2log(1+1/N)]-N^2.",
+      "ideal_decrement": "Put u=1/N. The alternating lower bound log(1+u)>=u-u^2/2+u^3/3-u^4/4 yields G_N<=-2-(7/16)u. Thus the ideal increment obeys Delta(2chi_N)<=-4pi-7pi/(8N).",
+      "endpoint_scale": "At an endpoint with a=m>=2, x=4pi[m^2-1/(32L^2)]>9m^2, using pi>3. Also N>=ceil(a(50))>2^25 because e>2.",
+      "physical_error": "Replacing the ideal endpoint frequencies by Omega=2pi a^2-epsilon contributes less than 1/N^2 to Delta F_N. The lock phases contribute |Delta psi|<2/(9N^2). Since |arg(1+d_1)|<2|d_1|<4378/x, the term 2Delta delta_1 contributes less than 17512/(9N^2). The total perturbation of Delta(2chi_N) is therefore less than 1947/N^2.",
+      "reverse_turn": "Since 1947/N^2<7pi/(8N) for N>2^25, every complete physical q=1 cell satisfies Delta chi_N<-2pi. Moreover Delta chi_N tends to -2pi as N tends to infinity.",
+      "absolute_circle": "The continuous absolute terminal carrier eta exp(i phi_N)=exp(i chi_N) covers the full unit circle on every complete cell, now in the reverse direction. This is source-inclusive and is distinct from the much faster positive winding of exp(i phi_N).",
+      "phase_inventory": "The previous Delta phi_N>2pi and the new Delta chi_N<-2pi imply Delta theta_eta=Delta chi_N-Delta phi_N<-4pi. The transpose phase phi_N+2theta_eta=2chi_N-phi_N has increment below -6pi. Thus the terminal, source, absolute-terminal, and transpose phases all cover the circle; their correlations, not a fixed sector, are the remaining content.",
+      "reverse_full_turn_theorems": 1,
+      "source_inclusive_circle_theorems": 1,
+      "phase_inventory_corollaries": 2,
+      "physical_error_coefficient": 1947
+    },
+    "centre_symmetry": {
+      "anchor_ratio": "For b=log N, d=log(a^2/N)=b+2u_N, the raw anchors satisfy A_H/A_T=d/b=1+2u_N/b and A_H-A_T=D_N b d u_N/(2pi)>=0.",
+      "actual_current": "At xi=Omega, write tau_0=rho exp(i[phi_N-pi/2]), rho>0. The actual-source raw-centre current is R_center=-(rho|nu|^2/2)[A_H sin(phi_N)+A_T sin(phi_N+2theta_eta)].",
+      "symmetry_factorization": "The two-channel centre has the exact saddle symmetry R_center=-rho|nu|^2 A_T[cos(theta_eta)sin(phi_N+theta_eta)+(u_N/b)sin(phi_N)]. The first term couples the source phase to the source-inclusive absolute terminal phase chi_N; the second is the exact Hermitian/transpose anchor mismatch.",
+      "branch_free": "Equivalently, R_center=-rho|nu|^2 A_T[Re(eta)Im(eta exp(i phi_N))+(u_N/b)Im(exp(i phi_N))]. Choosing omega_c=(-1)^Neta instead gives the same product, so this form is parity invariant and branch free.",
+      "mismatch_bound": "Across a complete cell, 0<=u_N<=log(1+1/N)<1/N and b=log N>1/2, hence 0<=u_N/b<2/N. The raw centres are therefore an extremely close equal-anchor pair, but this small coefficient does not control the current near zeros of Re(eta) or Im(eta exp(i phi_N)).",
+      "tie_guard": "D_N changes at internal odd-roster ties. The ratio and factorization hold on both adjacent raw-centre charts, but the centre is not itself a tie-invariant physical observable. Any sign theorem must restore the reciprocal residual, terminal survivor, correction rows, affine row, and moved-tail defect before crossing a tie.",
+      "open_correlation": "The next falsifiable centre-level question is whether the Xi-specific joint path (Re eta, Im[eta exp(i phi_N)]) has a signed product budget strong enough to dominate the O(u_N/log N) mismatch on roster interiors. Circle coverage of either factor separately cannot answer it.",
+      "exact_center_factorizations": 2,
+      "anchor_mismatch_bounds": 1,
+      "live_joint_phase_targets": 1
+    }
+  },
+  "rows": [
+    {
+      "id": "asl_01_normalizer",
+      "role": "source normalizer",
+      "readiness": "proved",
+      "claim": "The physical source phase and modulus are fixed exactly.",
+      "certificate": "The common source normalizer is nu=eta/S_a=omega_c/(B_0T_0), where omega_c=(-1)^N eta and eta=phi(1+d_1)/|1+d_1|. At xi=Omega one has c_xi=1, |nu|=(B_0T_0)^(-1), and exp(2i gamma_phys)=eta^2; cutoff parity cancels from the transpose phase.",
+      "proof_boundary": "This is the q=1 source normalization."
+    },
+    {
+      "id": "asl_02_lift",
+      "role": "phase lift",
+      "readiness": "proved",
+      "claim": "The source and terminal phases admit continuous unwrapped lifts.",
+      "certificate": "Because M_t(s) is nonzero and |d_1|<1/2, choose continuous unwrapped beta_t=arg M_t(s), delta_1=arg(1+d_1), theta_eta=beta_t+delta_1, and chi_N=phi_N+theta_eta on each complete fixed-N q=1 cell.",
+      "proof_boundary": "Only complete fixed-N cells are used."
+    },
+    {
+      "id": "asl_03_lock",
+      "role": "stationary lock",
+      "readiness": "proved",
+      "claim": "The reciprocal stationary phase is conjugate-locked to the normalizer.",
+      "certificate": "For Q(v)=exp(i[v log(v/(2pi))-v-pi/4]) and gamma_t=conjugate(M_t)/M_t=exp(-2i beta_t), Section 11.119 supplies the continuous psi=arg(Q(Omega)/gamma_t), with |psi|<1/x. Hence arg Q(Omega)+2beta_t=psi exactly on the chosen lift.",
+      "proof_boundary": "The lock is imported with its O(1/x) error."
+    },
+    {
+      "id": "asl_04_identity",
+      "role": "absolute phase identity",
+      "readiness": "proved",
+      "claim": "The source-inclusive terminal phase has an exact scalar normal form.",
+      "certificate": "Let K_N=2pi N^2 and F_N(v)=v[1+log(K_N/v)]. The stationary lock gives the exact unwrapped identity 2chi_N=F_N(Omega)+pi/4+psi+2delta_1.",
+      "proof_boundary": "No phase sampling is used."
+    },
+    {
+      "id": "asl_05_endpoint",
+      "role": "ideal endpoint",
+      "readiness": "proved",
+      "claim": "The ideal complete-cell increment is one elementary logarithmic expression.",
+      "certificate": "At the ideal cutoff endpoints Omega=2pi N^2 and 2pi(N+1)^2, the increment of 2chi_N is 2pi G_N, where G_N=(N+1)^2[1-2log(1+1/N)]-N^2.",
+      "proof_boundary": "Physical epsilon corrections are added later."
+    },
+    {
+      "id": "asl_06_decrement",
+      "role": "ideal decrement",
+      "readiness": "proved",
+      "claim": "The ideal absolute phase decreases by more than one full turn.",
+      "certificate": "Put u=1/N. The alternating lower bound log(1+u)>=u-u^2/2+u^3/3-u^4/4 yields G_N<=-2-(7/16)u. Thus the ideal increment obeys Delta(2chi_N)<=-4pi-7pi/(8N).",
+      "proof_boundary": "The alternating logarithm bound is uniform for N>=2."
+    },
+    {
+      "id": "asl_07_scale",
+      "role": "physical scale",
+      "readiness": "proved",
+      "claim": "The actual q=1 cells make every endpoint correction tiny relative to the turn margin.",
+      "certificate": "At an endpoint with a=m>=2, x=4pi[m^2-1/(32L^2)]>9m^2, using pi>3. Also N>=ceil(a(50))>2^25 because e>2.",
+      "proof_boundary": "The coarse N>2^25 floor is sufficient."
+    },
+    {
+      "id": "asl_08_error",
+      "role": "physical perturbation",
+      "readiness": "proved",
+      "claim": "All physical phase-lock and first-anchor corrections fit one O(N^-2) budget.",
+      "certificate": "Replacing the ideal endpoint frequencies by Omega=2pi a^2-epsilon contributes less than 1/N^2 to Delta F_N. The lock phases contribute |Delta psi|<2/(9N^2). Since |arg(1+d_1)|<2|d_1|<4378/x, the term 2Delta delta_1 contributes less than 17512/(9N^2). The total perturbation of Delta(2chi_N) is therefore less than 1947/N^2.",
+      "proof_boundary": "The budget is intentionally coarse."
+    },
+    {
+      "id": "asl_09_reverse",
+      "role": "reverse full turn",
+      "readiness": "proved",
+      "claim": "The actual source-inclusive terminal phase loses more than 2pi per complete cell.",
+      "certificate": "Since 1947/N^2<7pi/(8N) for N>2^25, every complete physical q=1 cell satisfies Delta chi_N<-2pi. Moreover Delta chi_N tends to -2pi as N tends to infinity.",
+      "proof_boundary": "This is a phase theorem, not a current sign."
+    },
+    {
+      "id": "asl_10_circle",
+      "role": "absolute circle",
+      "readiness": "proved",
+      "claim": "The actual absolute terminal carrier covers every unit direction.",
+      "certificate": "The continuous absolute terminal carrier eta exp(i phi_N)=exp(i chi_N) covers the full unit circle on every complete cell, now in the reverse direction. This is source-inclusive and is distinct from the much faster positive winding of exp(i phi_N).",
+      "proof_boundary": "Coverage follows from continuity and endpoint decrement."
+    },
+    {
+      "id": "asl_11_inventory",
+      "role": "phase inventory",
+      "readiness": "proved",
+      "claim": "The source and transpose phases also make complete turns.",
+      "certificate": "The previous Delta phi_N>2pi and the new Delta chi_N<-2pi imply Delta theta_eta=Delta chi_N-Delta phi_N<-4pi. The transpose phase phi_N+2theta_eta=2chi_N-phi_N has increment below -6pi. Thus the terminal, source, absolute-terminal, and transpose phases all cover the circle; their correlations, not a fixed sector, are the remaining content.",
+      "proof_boundary": "Separate winding does not determine their joint product."
+    },
+    {
+      "id": "asl_12_ratio",
+      "role": "anchor ratio",
+      "readiness": "proved",
+      "claim": "The Hermitian and transpose raw anchors differ by exactly 2u_N/log N.",
+      "certificate": "For b=log N, d=log(a^2/N)=b+2u_N, the raw anchors satisfy A_H/A_T=d/b=1+2u_N/b and A_H-A_T=D_N b d u_N/(2pi)>=0.",
+      "proof_boundary": "D_N remains roster dependent."
+    },
+    {
+      "id": "asl_13_current",
+      "role": "actual centre",
+      "readiness": "proved",
+      "claim": "The physical source can be inserted into the bare two-channel centre exactly.",
+      "certificate": "At xi=Omega, write tau_0=rho exp(i[phi_N-pi/2]), rho>0. The actual-source raw-centre current is R_center=-(rho|nu|^2/2)[A_H sin(phi_N)+A_T sin(phi_N+2theta_eta)].",
+      "proof_boundary": "Residual and correction rows are excluded here."
+    },
+    {
+      "id": "asl_14_symmetry",
+      "role": "centre symmetry",
+      "readiness": "proved",
+      "claim": "The bare centre factors into the source and absolute-terminal phases plus one mismatch.",
+      "certificate": "The two-channel centre has the exact saddle symmetry R_center=-rho|nu|^2 A_T[cos(theta_eta)sin(phi_N+theta_eta)+(u_N/b)sin(phi_N)]. The first term couples the source phase to the source-inclusive absolute terminal phase chi_N; the second is the exact Hermitian/transpose anchor mismatch.",
+      "proof_boundary": "No sign of the phase product is asserted."
+    },
+    {
+      "id": "asl_15_branch",
+      "role": "branch-free form",
+      "readiness": "proved",
+      "claim": "The symmetry has a parity-invariant branch-free expression.",
+      "certificate": "Equivalently, R_center=-rho|nu|^2 A_T[Re(eta)Im(eta exp(i phi_N))+(u_N/b)Im(exp(i phi_N))]. Choosing omega_c=(-1)^Neta instead gives the same product, so this form is parity invariant and branch free.",
+      "proof_boundary": "A continuous lift is used only for winding counts."
+    },
+    {
+      "id": "asl_16_mismatch",
+      "role": "mismatch bound",
+      "readiness": "proved",
+      "claim": "The unequal-anchor term is below 2/N relative to A_T.",
+      "certificate": "Across a complete cell, 0<=u_N<=log(1+1/N)<1/N and b=log N>1/2, hence 0<=u_N/b<2/N. The raw centres are therefore an extremely close equal-anchor pair, but this small coefficient does not control the current near zeros of Re(eta) or Im(eta exp(i phi_N)).",
+      "proof_boundary": "Smallness alone fails at phase-product zeros."
+    },
+    {
+      "id": "asl_17_ties",
+      "role": "roster guard",
+      "readiness": "proved",
+      "claim": "The raw-centre factorization cannot be promoted through ties by itself.",
+      "certificate": "D_N changes at internal odd-roster ties. The ratio and factorization hold on both adjacent raw-centre charts, but the centre is not itself a tie-invariant physical observable. Any sign theorem must restore the reciprocal residual, terminal survivor, correction rows, affine row, and moved-tail defect before crossing a tie.",
+      "proof_boundary": "The complete joined current is the invariant object."
+    },
+    {
+      "id": "asl_18_joint",
+      "role": "joint phase target",
+      "readiness": "open",
+      "claim": "A signed Xi-specific joint-phase product estimate remains open.",
+      "certificate": "The next falsifiable centre-level question is whether the Xi-specific joint path (Re eta, Im[eta exp(i phi_N)]) has a signed product budget strong enough to dominate the O(u_N/log N) mismatch on roster interiors. Circle coverage of either factor separately cannot answer it.",
+      "proof_boundary": "Marginal circle coverage is insufficient."
+    },
+    {
+      "id": "asl_19_complete",
+      "role": "complete current",
+      "readiness": "open",
+      "claim": "The joint phase theorem must be recomposed with every retained residual and correction row.",
+      "certificate": "Prove the actual-phase inequality for the complete tie-invariant pair (h,t), using the new locked phase coordinate before any absolute values.",
+      "proof_boundary": "No contact-box, all-q, Lambda<=0, or RH theorem is claimed."
+    }
+  ],
+  "summary": {
+    "rows": 19,
+    "source_normalizer_identifications": 1,
+    "continuous_phase_lifts": 1,
+    "reverse_full_turn_theorems": 1,
+    "source_inclusive_circle_theorems": 1,
+    "phase_inventory_corollaries": 2,
+    "physical_error_coefficient": 1947,
+    "exact_center_factorizations": 2,
+    "anchor_mismatch_bounds": 1,
+    "live_joint_phase_targets": 1,
+    "open_rows": 2
+  },
+  "next_action": "Derive a local scale-separation theorem for the joint path Re(eta)*Im(eta exp(i phi_N)) on roster interiors. Use the exact reverse-turn coordinate chi_N and the much faster terminal phase phi_N to determine whether the dominant product must take both signs, while retaining the O(u_N/log N) mismatch. If that centre-level sign oscillates, promote it as a route obstruction and move directly to the complete reciprocal residual; if a one-sided Xi correlation survives, insert it into the tie-invariant complete (h,t) current before estimating corrections.",
+  "pi_provenance": "The pi in Q(v)=exp(i[v log(v/(2pi))-v-pi/4]) is the completed-zeta reciprocal stationary phase, with pi/4 its negative-curvature signature. The factor 2pi in K_N=2pi N^2 and T_0=2pi a^2 is the same completed-zeta/Fourier normalization. The threshold 2pi is one period of exp(i chi_N). Only elementary pi>3 is used in the coarse endpoint-error audit.",
+  "proof_boundary": "This gate proves the exact physical source normalizer, a source-inclusive reverse full turn on every complete q=1 cutoff cell, the induced source and transpose winding inventory, and the exact parity-invariant bare-centre symmetry with its O(u_N/log N) anchor mismatch. It proves no sign for the joint phase product, raw-centre sign theorem, signed reciprocal residual estimate, complete actual-source current inequality, correction-row bound, tie-spliced current theorem, all-q transport, contact-box exclusion, Q209 shell, cofinal successor, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "success": "built Newman C1 actual-source saddle-phase lock/centre-symmetry gate: 19 rows, 0 issues, 1 reverse full-turn theorem, 1 source-inclusive circle theorem, 2 exact centre factorizations, 1 live joint-phase target"
+}

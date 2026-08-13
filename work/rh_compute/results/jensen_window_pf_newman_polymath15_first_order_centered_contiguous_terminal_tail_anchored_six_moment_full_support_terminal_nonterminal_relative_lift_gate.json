@@ -1,0 +1,353 @@
+{
+  "counts": {
+    "complete_outer_complement_bounds": 0,
+    "geometry_checks": 440,
+    "lower_conditional_relative_traces": 2,
+    "maximum_mixed_polynomial_degree": 5,
+    "mixed_current_compressions": 2,
+    "mixed_polynomial_functionals": 2,
+    "outer_remainder_components": 4,
+    "outer_remainder_decompositions": 1,
+    "phi_b_bounds": 0,
+    "quadratic_remainder_bounds": 0,
+    "real_remainder_observation_rows": 8,
+    "relative_lift_families": 2,
+    "rows": 30,
+    "signed_full_current_bounds": 0,
+    "signed_lower_interior_bounds": 0,
+    "terminal_hermitian_diagonal_nulls": 1,
+    "terminal_higher_endpoint_reductions": 2,
+    "tie_transfer_invariants": 4,
+    "transpose_carrier_bilinear_factorizations": 1
+  },
+  "date": "2026-08-02",
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_terminal_nonterminal_relative_lift_gate",
+  "proof_boundary": "This proves the exact outer-remainder split, completed relative lifts and tie invariance, Hermitian/transpose mixed-current compression into two degree-five functionals, terminal endpoint reductions, lower conditional traces, and a carrier-bilinear factorization. It proves no signed lower/interior estimate, complete outer-complement or quadratic residual bound, signed full-current or Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Q209, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "certificate": "Write T_mu[P]=e(alpha_Plog mu)kappa A_P(mu)S_1^[N](alpha_P/mu) and U_mu[P]=-e(alpha_Plog mu)kappa^2{A_P'(mu)S_2^[N](alpha_P/mu)+(alpha_P/mu^2)A_P(mu)S_3^[N](alpha_P/mu)}.",
+      "claim": "The S_1 and S_2/S_3 endpoint rows are separated by exact linear operators.",
+      "id": "tnr_01_endpoint",
+      "proof_boundary": "No endpoint is bounded componentwise.",
+      "readiness": "proved",
+      "role": "endpoint operators"
+    },
+    {
+      "certificate": "Write I_N[P]=kappa^2 sum_(r notin mathcal R_N)^sym integral_1^N e(phi_r)C_rA_Pdu; this series is absolute only after the joined twofold integration by parts.",
+      "claim": "The joined twofold interior is one exact operator.",
+      "id": "tnr_02_interior",
+      "proof_boundary": "Absolute convergence begins only after reassembly.",
+      "readiness": "proved",
+      "role": "absolute interior"
+    },
+    {
+      "certificate": "The exact outer functional is mathscr O_N[P]=T_N[P]+mathscr R_N[P], where mathscr R_N[P]=U_N[P]-T_1[P]-U_1[P]+I_N[P].",
+      "claim": "The terminal conditional block has an exact four-component complement.",
+      "id": "tnr_03_split",
+      "proof_boundary": "The four pieces remain joined.",
+      "readiness": "proved",
+      "role": "outer decomposition"
+    },
+    {
+      "certificate": "mathscr R_N=U_N-T_1-U_1+I_N.",
+      "claim": "The nonterminal outer remainder consists of terminal higher, lower conditional, lower higher, and interior pieces.",
+      "id": "tnr_04_components",
+      "proof_boundary": "Signs are retained exactly.",
+      "readiness": "proved",
+      "role": "remainder roster"
+    },
+    {
+      "certificate": "For X in {V,mathcal N,A,Q}, rho_X=Re{nu c_xi mathscr R_N[P_X]} and dot rho_X=Re{nu c_xi mathscr R_N[i(lambda-log a)P_X]} on a fixed roster cell.",
+      "claim": "The real rho rows are source projections of one complex remainder operator.",
+      "id": "tnr_05_observations",
+      "proof_boundary": "No eight-row norm is introduced.",
+      "readiness": "proved",
+      "role": "real observations"
+    },
+    {
+      "certificate": "The complete linear outer functional splits without componentwise budgets as mathscr O_N[P_lin]=T_N[P_lin]+mathscr R_N[P_lin].",
+      "claim": "The linear outer correction remains one P_lin functional after the split.",
+      "id": "tnr_06_linear",
+      "proof_boundary": "The terminal and remainder pieces are not estimated separately here.",
+      "readiness": "proved",
+      "role": "linear compression"
+    },
+    {
+      "certificate": "T_N[i(lambda-log a)P]=-iu_NT_N[P].",
+      "claim": "The terminal conditional block has the common -iu_N lift.",
+      "id": "tnr_07_terminal_lift",
+      "proof_boundary": "This is a fixed-roster identity.",
+      "readiness": "proved",
+      "role": "terminal lift"
+    },
+    {
+      "certificate": "D_Hmathscr R_N[P]:=mathscr R_N[i(lambda-log a)P]+iu_Nmathscr R_N[P]=mathscr R_N[i(lambda-log N)P].",
+      "claim": "The Hermitian cross is measured relative to log N.",
+      "id": "tnr_08_hlift",
+      "proof_boundary": "The complement alone is not differentiated at ties.",
+      "readiness": "proved",
+      "role": "Hermitian relative lift"
+    },
+    {
+      "certificate": "D_Tmathscr R_N[P]:=mathscr R_N[i(lambda-log a)P]-iu_Nmathscr R_N[P]=mathscr R_N[i(lambda-log a-u_N)P].",
+      "claim": "The transpose cross uses the phase-sum relative lift.",
+      "id": "tnr_09_tlift",
+      "proof_boundary": "No phase family is discarded.",
+      "readiness": "proved",
+      "role": "transpose relative lift"
+    },
+    {
+      "certificate": "On a retained carrier atom with lift -iu_q, D_H=-i(u_q-u_N) and D_T=-i(u_q+u_N); the q=N Hermitian relative lift vanishes exactly.",
+      "claim": "Relative lifts reproduce the exact phase difference and phase sum on every carrier atom.",
+      "id": "tnr_10_atoms",
+      "proof_boundary": "This does not sign either sum.",
+      "readiness": "proved",
+      "role": "carrier phases"
+    },
+    {
+      "certificate": "At a reciprocal tie, transfer the complete mode I_P and its lift from mathscr R_N to the retained carrier. Their sum Y and both dot Y+iu_NY and dot Y-iu_NY are invariant; the complement is never differentiated alone.",
+      "claim": "The completed relative lifts are invariant under a half-open mode transfer.",
+      "id": "tnr_11_ties",
+      "proof_boundary": "Only the joined carrier plus remainder is differentiated.",
+      "readiness": "proved",
+      "role": "tie transfer"
+    },
+    {
+      "certificate": "Let Y_X be the retained carrier observation plus mathscr R_N[P_X], and let A_X=tau_0P_X(log N), tau_0=kappa e(alpha_Plog N)exp(S(log N))S_(1,N). Then the complete terminal/nonterminal current uses D_HY_X=dot Y_X+iu_NY_X and D_TY_X=dot Y_X-iu_NY_X.",
+      "claim": "The terminal cross uses one complete nonterminal observation vector.",
+      "id": "tnr_12_complete",
+      "proof_boundary": "The fixed endpoint edge remains external.",
+      "readiness": "proved",
+      "role": "complete observation"
+    },
+    {
+      "certificate": "Re H_(a*)=Re{A_Vconjugate(D_HY_N)+A_Nconjugate(D_HY_V)-A_Aconjugate(D_HY_Q)-A_Qconjugate(D_HY_A)}.",
+      "claim": "All mixed Hermitian pairings compress through D_H.",
+      "id": "tnr_13_hermitian",
+      "proof_boundary": "Only its real projection enters.",
+      "readiness": "proved",
+      "role": "mixed Hermitian current"
+    },
+    {
+      "certificate": "T_(a*)=A_VD_TY_N+A_ND_TY_V-A_AD_TY_Q-A_QD_TY_A.",
+      "claim": "All mixed transpose pairings compress through D_T.",
+      "id": "tnr_14_transpose",
+      "proof_boundary": "Its complex phase remains.",
+      "readiness": "proved",
+      "role": "mixed transpose current"
+    },
+    {
+      "certificate": "The actual mixed real current is (1/2)Re{|nu|^2H_(a*)+nu^2c_xi^2T_(a*)}; the fixed affine row and moved-tail defect remain separate.",
+      "claim": "The source factors match the established H_out/T_out polarization.",
+      "id": "tnr_15_projection",
+      "proof_boundary": "The affine and moved-tail rows are not absorbed.",
+      "readiness": "proved",
+      "role": "source projection"
+    },
+    {
+      "certificate": "B_(H,N)(lambda)=conjugate(C_N)mathcal N(lambda)+conjugate(mathcal N_N)C(lambda)-conjugate(A_N)Q(lambda)-conjugate(Q_N)A(lambda).",
+      "claim": "The outer Hermitian cross has one terminal-coefficient polynomial.",
+      "id": "tnr_16_hpoly",
+      "proof_boundary": "Its coefficients are complex.",
+      "readiness": "proved",
+      "role": "Hermitian polynomial"
+    },
+    {
+      "certificate": "B_(T,N)(lambda)=C_Nmathcal N(lambda)+mathcal N_NC(lambda)-A_NQ(lambda)-Q_NA(lambda).",
+      "claim": "The outer transpose cross has one terminal-coefficient polynomial.",
+      "id": "tnr_17_tpoly",
+      "proof_boundary": "It is not signed.",
+      "readiness": "proved",
+      "role": "transpose polynomial"
+    },
+    {
+      "certificate": "The outer-remainder cross satisfies Re H_(a rho)=Re{conjugate(tau_0)mathscr R_N[i(lambda-log N)B_(H,N)(lambda)]}.",
+      "claim": "Eight Hermitian cross terms reduce to one degree-five remainder functional after real projection.",
+      "id": "tnr_18_hfunctional",
+      "proof_boundary": "No modulus is taken.",
+      "readiness": "proved",
+      "role": "Hermitian functional"
+    },
+    {
+      "certificate": "The outer-remainder cross satisfies T_(a rho)=tau_0mathscr R_N[i(lambda-log a-u_N)B_(T,N)(lambda)].",
+      "claim": "Eight transpose cross terms reduce to one degree-five remainder functional.",
+      "id": "tnr_19_tfunctional",
+      "proof_boundary": "No modulus is taken.",
+      "readiness": "proved",
+      "role": "transpose functional"
+    },
+    {
+      "certificate": "Both B_(H,N) and B_(T,N) have degree at most four; each relative lift has degree at most five, so the source-complete mixed cross remains inside the certified six-moment closure.",
+      "claim": "The completed mixed channel requires no seventh moment.",
+      "id": "tnr_20_degree",
+      "proof_boundary": "Degree closure is not a size bound.",
+      "readiness": "proved",
+      "role": "six-moment closure"
+    },
+    {
+      "certificate": "For P_H=i(lambda-log N)P, U_N[P_H]=-i kappa^2 e(alpha_Plog N)exp(S(log N))N^(-1)P(log N)S_2^[N](alpha_P/N); its terminal S_1 and S_3 values vanish.",
+      "claim": "The relative Hermitian terminal higher endpoint leaves only an S_2 term.",
+      "id": "tnr_21_terminal_h",
+      "proof_boundary": "Its coefficient still depends on the physical row.",
+      "readiness": "proved",
+      "role": "terminal Hermitian endpoint"
+    },
+    {
+      "certificate": "For P_T=i(lambda-log a-u_N)P, U_N[P_T]=-i kappa^2 e(alpha_Plog N)exp(S(log N)){N^(-1)[P-2u_N(P'+gP)]S_2-2alpha_Pu_NN^(-2)P S_3} at lambda=log N.",
+      "claim": "The relative transpose terminal higher endpoint retains explicit N^(-1) or u_N factors.",
+      "id": "tnr_22_terminal_t",
+      "proof_boundary": "No signed cancellation is inferred.",
+      "readiness": "proved",
+      "role": "terminal transpose endpoint"
+    },
+    {
+      "certificate": "The lower conditional piece is -T_1[P_H]=i kappa(log N)P(0)S_1^[N](alpha_P).",
+      "claim": "The lower conditional Hermitian trace carries log N times the small lower kernel.",
+      "id": "tnr_23_lower_h",
+      "proof_boundary": "It must remain joined with the interior.",
+      "readiness": "proved",
+      "role": "lower Hermitian endpoint"
+    },
+    {
+      "certificate": "The lower conditional piece is -T_1[P_T]=i kappa(log a+u_N)P(0)S_1^[N](alpha_P).",
+      "claim": "The lower conditional transpose trace carries log a+u_N times the small lower kernel.",
+      "id": "tnr_24_lower_t",
+      "proof_boundary": "It must remain joined with the interior.",
+      "readiness": "proved",
+      "role": "lower transpose endpoint"
+    },
+    {
+      "certificate": "B_(T,N)(lambda)=[R(lambda)-R_N]{C_NQ(lambda)-Q_NC(lambda)}+[R_x(lambda)+R_(N,x)]C_NC(lambda).",
+      "claim": "The transpose coefficient has an exact rate/determinant factorization.",
+      "id": "tnr_25_factor",
+      "proof_boundary": "The factorization is not sign-definite.",
+      "readiness": "proved",
+      "role": "carrier bilinear"
+    },
+    {
+      "certificate": "At lambda=log N, B_(T,N)=2R_(N,x)C_N^2, while the Hermitian relative factor lambda-log N is zero.",
+      "claim": "The q=N Hermitian cross vanishes and the transpose row collapses to R_(N,x).",
+      "id": "tnr_26_diagonal",
+      "proof_boundary": "This controls only the local diagonal.",
+      "readiness": "proved",
+      "role": "terminal diagonal"
+    },
+    {
+      "certificate": "At mu=N, every relative-lift S_2/S_3 coefficient contains N^(-1), u_N, or alpha_Pu_N/N^2; the established boxes give N^(-1)<=(3/2)h and alpha_Pu_N/N^2<(9/2)h. At mu=1, 0<S_1^[N](alpha_P)<5/N<=(15/2)h, but the relative lifts also contain log N or log a+u_N. The lower endpoint must remain grouped with the interior.",
+      "claim": "Terminal-side higher pieces preserve h mechanisms, while lower logarithms remain visible.",
+      "id": "tnr_27_scale",
+      "proof_boundary": "No complete h^2 estimate follows.",
+      "readiness": "guard_validated",
+      "role": "endpoint scale guard"
+    },
+    {
+      "certificate": "Expand the two degree-five mathscr R_N functionals into their lower U_1 and absolute-interior pieces, combine them with the finite q<N carrier sums and correction perturbation, and prove or falsify a joined Abel/Mangoldt/Vaughan or reciprocal-pair estimate before taking moduli.",
+      "claim": "Prove or falsify the joined lower-endpoint/interior relative-lift estimate.",
+      "id": "tnr_28_route",
+      "proof_boundary": "No signed completed bound is proved.",
+      "readiness": "open",
+      "role": "route decision"
+    },
+    {
+      "certificate": "kappa=1/(2pi i) and alpha_P=xi/(2pi) are inherited; the relative lifts introduce no new pi.",
+      "claim": "All pi factors remain Fourier-normalization factors.",
+      "id": "tnr_29_pi",
+      "proof_boundary": "No geometric fitting is used.",
+      "readiness": "proved",
+      "role": "pi provenance"
+    },
+    {
+      "certificate": "No signed lower/interior estimate, complete outer bound, quadratic residual bound, full-current theorem, contact exclusion, Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is claimed.",
+      "claim": "This is an exact endpoint and phase compression, not a proof of RH.",
+      "id": "tnr_30_boundary",
+      "proof_boundary": "This is not a proof of RH.",
+      "readiness": "guard_validated",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "full_support": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_ideal_cubic_reciprocal_terminal_full_support_homotopy_gate.json",
+      "sha256": "24a7caf7787b5b0764a4a60591dbf615957fc3799dc7f39e2c8d57331621e1d5"
+    },
+    "observation_image": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_observation_image_compression_gate.json",
+      "sha256": "8155e7e923285fdab23d6d9988287d136b70b2b405fe89afcfb9ee0004991317"
+    },
+    "outer_endpoint": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_outer_endpoint_kernel_gate.json",
+      "sha256": "4cf510dcf472241ba45a5602a231c4cbe713af6c62924f9ff4e4108454f86df8"
+    },
+    "physical_plin": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_amplitude_gate.json",
+      "sha256": "f9eda5af34ce5c54693265f99be2afaf294ef3395aadeea78cda2547346d02a6"
+    },
+    "terminal_bulk_phase": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_terminal_bulk_phase_completion_gate.json",
+      "sha256": "db055ba59bee55084fe5682b063fe6a75625463daebe8ac989903c52d3c208fb"
+    },
+    "terminal_conditional": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_terminal_conditional_quadrature_gate.json",
+      "sha256": "27033bf847ba614cdd73dbd8c0924c488a2c8610ca80c737e63030c042553790"
+    },
+    "terminal_obstruction": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_terminal_endpoint_obstruction_gate.json",
+      "sha256": "3d2cab56be3454327b740aab4bf5bfa0fc2f0a5c371bff134036687e4ffefcf0"
+    }
+  },
+  "status": "endpoint-resolved terminal/nonterminal relative lifts proved; signed lower/interior estimate open",
+  "symbolic_certificate": {
+    "audit": {
+      "geometry_cases": 440,
+      "mixed_polynomial_functionals": 2,
+      "outer_remainder_components": 4,
+      "relative_lift_families": 2
+    },
+    "bounds": {
+      "lower_conditional": "At mu=1, 0<S_1^[N](alpha_P)<5/N<=(15/2)h, but the relative lifts also contain log N or log a+u_N. The lower endpoint must remain grouped with the interior.",
+      "terminal_higher": "At mu=N, every relative-lift S_2/S_3 coefficient contains N^(-1), u_N, or alpha_Pu_N/N^2; the established boxes give N^(-1)<=(3/2)h and alpha_Pu_N/N^2<(9/2)h."
+    },
+    "carrier_bilinear": {
+      "diagonal": "At lambda=log N, B_(T,N)=2R_(N,x)C_N^2, while the Hermitian relative factor lambda-log N is zero.",
+      "factorization": "B_(T,N)(lambda)=[R(lambda)-R_N]{C_NQ(lambda)-Q_NC(lambda)}+[R_x(lambda)+R_(N,x)]C_NC(lambda).",
+      "meaning": "The retained q=N cross is therefore Hermitian-null and transpose-suppressed; it does not cancel the lower endpoint or interior algebraically."
+    },
+    "endpoint_audit": {
+      "lower_hermitian": "The lower conditional piece is -T_1[P_H]=i kappa(log N)P(0)S_1^[N](alpha_P).",
+      "lower_transpose": "The lower conditional piece is -T_1[P_T]=i kappa(log a+u_N)P(0)S_1^[N](alpha_P).",
+      "terminal_hermitian": "For P_H=i(lambda-log N)P, U_N[P_H]=-i kappa^2 e(alpha_Plog N)exp(S(log N))N^(-1)P(log N)S_2^[N](alpha_P/N); its terminal S_1 and S_3 values vanish.",
+      "terminal_transpose": "For P_T=i(lambda-log a-u_N)P, U_N[P_T]=-i kappa^2 e(alpha_Plog N)exp(S(log N)){N^(-1)[P-2u_N(P'+gP)]S_2-2alpha_Pu_NN^(-2)P S_3} at lambda=log N."
+    },
+    "handoff": {
+      "decision": "Terminal higher-endpoint and retained q=N cross terms keep explicit h mechanisms. The unresolved completed channel is the lower endpoint plus absolute interior, with both relative phase families still joined.",
+      "route": "Expand the two degree-five mathscr R_N functionals into their lower U_1 and absolute-interior pieces, combine them with the finite q<N carrier sums and correction perturbation, and prove or falsify a joined Abel/Mangoldt/Vaughan or reciprocal-pair estimate before taking moduli."
+    },
+    "mixed_current": {
+      "complete": "Let Y_X be the retained carrier observation plus mathscr R_N[P_X], and let A_X=tau_0P_X(log N), tau_0=kappa e(alpha_Plog N)exp(S(log N))S_(1,N). Then the complete terminal/nonterminal current uses D_HY_X=dot Y_X+iu_NY_X and D_TY_X=dot Y_X-iu_NY_X.",
+      "hermitian": "Re H_(a*)=Re{A_Vconjugate(D_HY_N)+A_Nconjugate(D_HY_V)-A_Aconjugate(D_HY_Q)-A_Qconjugate(D_HY_A)}.",
+      "projection": "The actual mixed real current is (1/2)Re{|nu|^2H_(a*)+nu^2c_xi^2T_(a*)}; the fixed affine row and moved-tail defect remain separate.",
+      "transpose": "T_(a*)=A_VD_TY_N+A_ND_TY_V-A_AD_TY_Q-A_QD_TY_A."
+    },
+    "outer_remainder": {
+      "endpoint_operators": "Write T_mu[P]=e(alpha_Plog mu)kappa A_P(mu)S_1^[N](alpha_P/mu) and U_mu[P]=-e(alpha_Plog mu)kappa^2{A_P'(mu)S_2^[N](alpha_P/mu)+(alpha_P/mu^2)A_P(mu)S_3^[N](alpha_P/mu)}.",
+      "interior": "Write I_N[P]=kappa^2 sum_(r notin mathcal R_N)^sym integral_1^N e(phi_r)C_rA_Pdu; this series is absolute only after the joined twofold integration by parts.",
+      "linear": "The complete linear outer functional splits without componentwise budgets as mathscr O_N[P_lin]=T_N[P_lin]+mathscr R_N[P_lin].",
+      "observations": "For X in {V,mathcal N,A,Q}, rho_X=Re{nu c_xi mathscr R_N[P_X]} and dot rho_X=Re{nu c_xi mathscr R_N[i(lambda-log a)P_X]} on a fixed roster cell.",
+      "split": "The exact outer functional is mathscr O_N[P]=T_N[P]+mathscr R_N[P], where mathscr R_N[P]=U_N[P]-T_1[P]-U_1[P]+I_N[P]."
+    },
+    "polynomial_compression": {
+      "degree": "Both B_(H,N) and B_(T,N) have degree at most four; each relative lift has degree at most five, so the source-complete mixed cross remains inside the certified six-moment closure.",
+      "hermitian_functional": "The outer-remainder cross satisfies Re H_(a rho)=Re{conjugate(tau_0)mathscr R_N[i(lambda-log N)B_(H,N)(lambda)]}.",
+      "hermitian_polynomial": "B_(H,N)(lambda)=conjugate(C_N)mathcal N(lambda)+conjugate(mathcal N_N)C(lambda)-conjugate(A_N)Q(lambda)-conjugate(Q_N)A(lambda).",
+      "transpose_functional": "The outer-remainder cross satisfies T_(a rho)=tau_0mathscr R_N[i(lambda-log a-u_N)B_(T,N)(lambda)].",
+      "transpose_polynomial": "B_(T,N)(lambda)=C_Nmathcal N(lambda)+mathcal N_NC(lambda)-A_NQ(lambda)-Q_NA(lambda)."
+    },
+    "relative_lifts": {
+      "atoms": "On a retained carrier atom with lift -iu_q, D_H=-i(u_q-u_N) and D_T=-i(u_q+u_N); the q=N Hermitian relative lift vanishes exactly.",
+      "hermitian": "D_Hmathscr R_N[P]:=mathscr R_N[i(lambda-log a)P]+iu_Nmathscr R_N[P]=mathscr R_N[i(lambda-log N)P].",
+      "terminal": "T_N[i(lambda-log a)P]=-iu_NT_N[P].",
+      "ties": "At a reciprocal tie, transfer the complete mode I_P and its lift from mathscr R_N to the retained carrier. Their sum Y and both dot Y+iu_NY and dot Y-iu_NY are invariant; the complement is never differentiated alone.",
+      "transpose": "D_Tmathscr R_N[P]:=mathscr R_N[i(lambda-log a)P]-iu_Nmathscr R_N[P]=mathscr R_N[i(lambda-log a-u_N)P]."
+    }
+  }
+}

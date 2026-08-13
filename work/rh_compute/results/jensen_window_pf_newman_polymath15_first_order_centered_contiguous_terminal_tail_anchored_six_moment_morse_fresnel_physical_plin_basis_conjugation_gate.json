@@ -1,0 +1,266 @@
+{
+  "bound_certificate": {
+    "coarse_joined_bounds": {
+      "ideal": "|bar(gamma)_j|<=R and |bar(eta)_j|<=R; the Section 11.175 errors give Gamma_j<2R and H_j<2R.",
+      "p_0": "|p_0-bar(gamma)_0|<8764h^2R",
+      "p_1": "|p_1-bar(gamma)_1|<8765h^2R",
+      "p_2": "|p_2-bar(gamma)_2|<8762h^2R",
+      "p_3": "|p_3-bar(gamma)_3|<8760h^2R",
+      "p_4": "|p_4|<(2/3)h^2R",
+      "p_5": "|p_5|<h^2R/63"
+    },
+    "domain": "On the physical q=1 chart, L>=50, a^2=exp(L)+1/(32L^2), ell=log(a), h=1/a, and h<exp(-25)<1/72000000000. Hence 0<ell<L and h^2<exp(-L).",
+    "interpretation": "All correction-induced coefficient departures, including the degree-four and degree-five channels, are negligible in the raw outside tail relative to the retained row scale. The unsuppressed ideal cubic is the remaining coefficient-aware tail theorem.",
+    "monotone_weight_bound": "For every positive-coefficient polynomial W of degree at most five, L W'(L)<=5W(L), so exp(-L)W(L) decreases for L>=50. Therefore h^2 Khat_k(ell)<Khat_k(50)/(72000000000)^2.",
+    "perturbation_polynomial_at_50": "70021821752/9",
+    "perturbation_ratio": "8752727719/2916000000000000000000",
+    "row_scale": "R=||alpha||_1+||beta||_1, with alpha and beta the actual joined retained-observation rows. No numerical bound on R is assumed.",
+    "tail_separation": "Let Pbar=sum_(j=0)^3bar(gamma)_j(lambda-ell)^j. Then |T[P_lin-Pbar]|<h^2 R/300000000000, while |T[Pbar]|<2h^2 sum_(j=0)^3 Khat_j(ell)|bar(gamma)_j|.",
+    "weights_at_50": {
+      "Khat_0": 6,
+      "Khat_1": 314,
+      "Khat_2": 16455,
+      "Khat_3": 863586,
+      "Khat_4": 45394938,
+      "Khat_5": 2390362436
+    }
+  },
+  "counts": {
+    "basis_coefficients": 6,
+    "exact_morse_conjugations": 3,
+    "grouped_ideal_cubic_bounds": 0,
+    "inverse_basis_coefficients": 6,
+    "joined_operator_identities": 3,
+    "numerical_observation_row_bounds": 0,
+    "phi_b_bounds": 0,
+    "quadratic_remainder_bounds": 0,
+    "rows": 18,
+    "signed_flow_bounds": 0,
+    "tail_perturbation_bounds": 1,
+    "translated_tail_weights": 6
+  },
+  "date": "2026-08-02",
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_basis_conjugation_gate",
+  "proof_boundary": "This gate proves exact basis and Morse-operator identities and a row-relative outside-tail perturbation bound. It proves no numerical retained-observation bound, grouped ideal-cubic c-prime sum, quadratic residual bound, signed flow estimate, Phi_B upper bound, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "certificate": "On the physical q=1 chart, L>=50, a^2=exp(L)+1/(32L^2), ell=log(a), h=1/a, and h<exp(-25)<1/72000000000. Hence 0<ell<L and h^2<exp(-L).",
+      "claim": "The basis and conjugation gate stays on the complete q=1 chart.",
+      "id": "pbc_01_domain",
+      "proof_boundary": "No extension outside the source chart is asserted.",
+      "readiness": "ready_to_apply",
+      "role": "physical_domain"
+    },
+    {
+      "certificate": "q_j=sum_(k=j)^5 binom(k,j)(-ell)^(k-j)p_k, where ell=log(a).",
+      "claim": "The centered coefficients have one exact lambda-basis image.",
+      "id": "pbc_02_forward",
+      "proof_boundary": "The signs and binomial factors are retained exactly.",
+      "readiness": "certified",
+      "role": "exact_basis_map"
+    },
+    {
+      "certificate": "p_j=sum_(k=j)^5 binom(k,j)ell^(k-j)q_k.",
+      "claim": "The basis map is exactly invertible.",
+      "id": "pbc_03_inverse",
+      "proof_boundary": "No coefficient information is discarded by centering.",
+      "readiness": "certified",
+      "role": "exact_basis_map"
+    },
+    {
+      "certificate": "q_j=P^(j)(0)/j! and p_j=P^(j)(ell)/j! for P(lambda)=sum p_k(lambda-ell)^k.",
+      "claim": "Both coefficient vectors are Taylor jets of one polynomial.",
+      "id": "pbc_04_jet",
+      "proof_boundary": "Large translated coefficients can be coordinate effects.",
+      "readiness": "certified",
+      "role": "jet_interpretation"
+    },
+    {
+      "certificate": "Khat_k(ell)=sum_(j=0)^k binom(k,j)K_j ell^(k-j), K=(6,14,55,336,2738,27936). Khat_0(ell)=6; Khat_1(ell)=6*ell + 14; Khat_2(ell)=6*ell**2 + 28*ell + 55; Khat_3(ell)=6*ell**3 + 42*ell**2 + 165*ell + 336; Khat_4(ell)=6*ell**4 + 56*ell**3 + 330*ell**2 + 1344*ell + 2738; Khat_5(ell)=6*ell**5 + 70*ell**4 + 550*ell**3 + 3360*ell**2 + 13690*ell + 27936",
+      "claim": "The old tail template induces six explicit centered weights.",
+      "id": "pbc_05_tail_weights",
+      "proof_boundary": "This is still a coefficientwise absolute majorant.",
+      "readiness": "certified",
+      "role": "translated_majorant"
+    },
+    {
+      "certificate": "For a centered monomial P=p_k(lambda-ell)^k, the old coefficientwise majorant is exactly 2h^2 Khat_k(ell)|p_k|. Thus no smaller universal coefficientwise weight follows from that template.",
+      "claim": "The powers of log(a) cannot be removed inside the old six-term majorant.",
+      "id": "pbc_06_sharpness",
+      "proof_boundary": "Grouped cross-coefficient cancellation may still improve the true tail.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion_guard"
+    },
+    {
+      "certificate": "B_a=sigma-(t/2)ell=1/2-(t/2)delta_a, ell=log(a), delta_a=ell-Re(alpha).",
+      "claim": "The physical amplitude rate absorbs the coordinate origin.",
+      "id": "pbc_07_parameter",
+      "proof_boundary": "This uses the q=1 source identity, not a fitted parameter.",
+      "readiness": "certified",
+      "role": "physical_parameter_identity"
+    },
+    {
+      "certificate": "S(ell+x)=S(ell)+S_tilde(x), S_tilde(x)=t*x^2/4-B_a*x. g(ell+x)=t*x/2-B_a=:g_tilde(x).",
+      "claim": "The Morse exponent has an exact centered form.",
+      "id": "pbc_08_exponent",
+      "proof_boundary": "The sampled coordinate x can still range over a long interval.",
+      "readiness": "certified",
+      "role": "exact_conjugation"
+    },
+    {
+      "certificate": "P'(lambda)+g(lambda)P(lambda)=Ptilde'(x)+g_tilde(x)Ptilde(x).",
+      "claim": "The first-order Morse amplitude has no explicit log(a) coefficient.",
+      "id": "pbc_09_first_order",
+      "proof_boundary": "This is an identity, not a mode-sum estimate.",
+      "readiness": "certified",
+      "role": "exact_conjugation"
+    },
+    {
+      "certificate": "L_B[P]=P''+(2g_tilde+1)P'+(g_tilde^2+g_tilde+t/2+1/6)P. L_B[P]=exp(-S_tilde)*(D_x^2+D_x+1/6)[exp(S_tilde)P].",
+      "claim": "The removable saddle operator is a fixed conjugated differential operator.",
+      "id": "pbc_10_saddle",
+      "proof_boundary": "No sign follows from this factorization alone.",
+      "readiness": "certified",
+      "role": "exact_conjugation"
+    },
+    {
+      "certificate": "x_0=lambda_0-ell=log(alpha_P/(a*r)); log(a) enters the sampled interval through x_0, but not as an extra coefficient in L_B.",
+      "claim": "Explicit log(a) coefficients cancel without erasing the physical mode range.",
+      "id": "pbc_11_mode",
+      "proof_boundary": "The distinction prevents both fake losses and fake uniformity.",
+      "readiness": "guard_validated",
+      "role": "coordinate_guard"
+    },
+    {
+      "certificate": "F=(C,mathcal N,A,Q), F_f=f dot F, and P_lin=alpha dot F+i*x*beta dot F. (D_x+g_tilde)P_lin=alpha dot[(D_x+g_tilde)F]+i beta dot{x(D_x+g_tilde)F+F}.",
+      "claim": "The first-order amplitude remains two joined row contractions.",
+      "id": "pbc_12_first_joined",
+      "proof_boundary": "No alpha or beta component is bounded separately.",
+      "readiness": "certified",
+      "role": "joined_row_identity"
+    },
+    {
+      "certificate": "L_B[P_lin]=alpha dot L_B[F]+i beta dot{x L_B[F]+2F'+(2g_tilde+1)F}.",
+      "claim": "The saddle operator preserves the joined alpha/beta structure.",
+      "id": "pbc_13_saddle_joined",
+      "proof_boundary": "This identifies the exact vector kernels still requiring cancellation.",
+      "readiness": "certified",
+      "role": "joined_row_identity"
+    },
+    {
+      "certificate": "With A_z=zJ^2/v, B_z=zJJ'-J, E_x=exp(S_tilde(x)), and E_0=exp(S_tilde(x_0)), factor exp(S(ell)) from the c-prime numerator. The remaining centered bracket is alpha dot K_alpha+i beta dot K_beta, where K_alpha=E_x[A_z(D+g_tilde)F+B_zF]+E_0F(x_0) and K_beta=E_x[A_z{x(D+g_tilde)F+F}+B_zxF]+E_0x_0F(x_0). Thus c-prime equals exp(S(ell)) times this bracket divided by r*sqrt(alpha_P)*z^2.",
+      "claim": "The complete off-saddle c-prime numerator, after its common physical factor, has only two joined contractions.",
+      "id": "pbc_14_off_saddle_joined",
+      "proof_boundary": "The roster sum and its phases remain unevaluated.",
+      "readiness": "certified",
+      "role": "joined_row_identity"
+    },
+    {
+      "certificate": "R=||alpha||_1+||beta||_1, with alpha and beta the actual joined retained-observation rows. No numerical bound on R is assumed. |bar(gamma)_j|<=R and |bar(eta)_j|<=R; the Section 11.175 errors give Gamma_j<2R and H_j<2R. |p_0-bar(gamma)_0|<8764h^2R |p_1-bar(gamma)_1|<8765h^2R |p_2-bar(gamma)_2|<8762h^2R |p_3-bar(gamma)_3|<8760h^2R |p_4|<(2/3)h^2R |p_5|<h^2R/63",
+      "claim": "The Section 11.175 envelopes admit one coarse joined row scale.",
+      "id": "pbc_15_row_scale",
+      "proof_boundary": "R is a bookkeeping scale, not a proved numerical observation bound.",
+      "readiness": "certified",
+      "role": "relative_envelope"
+    },
+    {
+      "certificate": "Let Pbar=sum_(j=0)^3bar(gamma)_j(lambda-ell)^j. Then |T[P_lin-Pbar]|<h^2 R/300000000000, while |T[Pbar]|<2h^2 sum_(j=0)^3 Khat_j(ell)|bar(gamma)_j|. For every positive-coefficient polynomial W of degree at most five, L W'(L)<=5W(L), so exp(-L)W(L) decreases for L>=50. Therefore h^2 Khat_k(ell)<Khat_k(50)/(72000000000)^2.",
+      "claim": "Every departure from the ideal cubic has a uniformly tiny raw outside-tail contribution.",
+      "id": "pbc_16_tail_perturbation",
+      "proof_boundary": "The fixed source normalizer and real projection are not absorbed here.",
+      "readiness": "certified",
+      "role": "quantitative_tail_separation"
+    },
+    {
+      "certificate": "All correction-induced coefficient departures, including the degree-four and degree-five channels, are negligible in the raw outside tail relative to the retained row scale. The unsuppressed ideal cubic is the remaining coefficient-aware tail theorem.",
+      "claim": "The remaining linear theorem is the ideal cubic inside the grouped physical functional.",
+      "id": "pbc_17_handoff",
+      "proof_boundary": "It still requires retained-row or direct phase-correlation control.",
+      "readiness": "open",
+      "role": "open_quantitative_handoff"
+    },
+    {
+      "certificate": "There are zero numerical row bounds, grouped roster bounds, quadratic-pairing bounds, Phi_B bounds, or Xi signs here.",
+      "claim": "Basis cancellation is not promoted to a signed flow theorem.",
+      "id": "pbc_18_boundary",
+      "proof_boundary": "No contact exclusion, Lambda<=0, PF-infinity, RH, or prize theorem is claimed.",
+      "readiness": "guard_validated",
+      "role": "proof_boundary"
+    }
+  ],
+  "source_audit": {
+    "critical_ray": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_critical_ray_finite_height_real_edge_gate.json",
+      "sha256": "3fd52e8a0927865e95daaea00507eca7e1fdda363f1dd55c84dca4165fdf13e8"
+    },
+    "joined_envelope": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_joined_coefficient_envelope_gate.json",
+      "sha256": "5c5b8403727fca8bd5ec830ccc75ea67a9734a90c62b0686f99c9cd18e24cd6c"
+    },
+    "observation_image": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_observation_image_compression_gate.json",
+      "sha256": "8155e7e923285fdab23d6d9988287d136b70b2b405fe89afcfb9ee0004991317"
+    },
+    "physical_plin": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_amplitude_gate.json",
+      "sha256": "f9eda5af34ce5c54693265f99be2afaf294ef3395aadeea78cda2547346d02a6"
+    },
+    "q1_saddle": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_q1_saddle_phase_variance_reduction.json",
+      "sha256": "2eebbbac71106d6248ac9261316ea5ed2466e78e2b93565044a4d8d80e9a331e"
+    }
+  },
+  "status": "exact centered-to-lambda basis map, physical Morse conjugation, joined alpha/beta c-prime identities, and raw outside-tail perturbation separation complete; grouped ideal-cubic estimate open; no signed flow, Phi_B bound, Xi theorem, or RH",
+  "symbolic_certificate": {
+    "basis_translation": {
+      "forward": "q_j=sum_(k=j)^5 binom(k,j)(-ell)^(k-j)p_k, where ell=log(a).",
+      "forward_rows": [
+        "q_0=-ell**5*p_5 + ell**4*p_4 - ell**3*p_3 + ell**2*p_2 - ell*p_1 + p_0",
+        "q_1=5*ell**4*p_5 - 4*ell**3*p_4 + 3*ell**2*p_3 - 2*ell*p_2 + p_1",
+        "q_2=-10*ell**3*p_5 + 6*ell**2*p_4 - 3*ell*p_3 + p_2",
+        "q_3=10*ell**2*p_5 - 4*ell*p_4 + p_3",
+        "q_4=-5*ell*p_5 + p_4",
+        "q_5=p_5"
+      ],
+      "inverse": "p_j=sum_(k=j)^5 binom(k,j)ell^(k-j)q_k.",
+      "inverse_rows": [
+        "p_0=ell**5*q_5 + ell**4*q_4 + ell**3*q_3 + ell**2*q_2 + ell*q_1 + q_0",
+        "p_1=5*ell**4*q_5 + 4*ell**3*q_4 + 3*ell**2*q_3 + 2*ell*q_2 + q_1",
+        "p_2=10*ell**3*q_5 + 6*ell**2*q_4 + 3*ell*q_3 + q_2",
+        "p_3=10*ell**2*q_5 + 4*ell*q_4 + q_3",
+        "p_4=5*ell*q_5 + q_4",
+        "p_5=q_5"
+      ],
+      "jet_interpretation": "q_j=P^(j)(0)/j! and p_j=P^(j)(ell)/j! for P(lambda)=sum p_k(lambda-ell)^k.",
+      "symbolic_zero_checks": 13
+    },
+    "joined_operator": {
+      "field_vector": "F=(C,mathcal N,A,Q), F_f=f dot F, and P_lin=alpha dot F+i*x*beta dot F.",
+      "first_order": "(D_x+g_tilde)P_lin=alpha dot[(D_x+g_tilde)F]+i beta dot{x(D_x+g_tilde)F+F}.",
+      "off_saddle": "With A_z=zJ^2/v, B_z=zJJ'-J, E_x=exp(S_tilde(x)), and E_0=exp(S_tilde(x_0)), factor exp(S(ell)) from the c-prime numerator. The remaining centered bracket is alpha dot K_alpha+i beta dot K_beta, where K_alpha=E_x[A_z(D+g_tilde)F+B_zF]+E_0F(x_0) and K_beta=E_x[A_z{x(D+g_tilde)F+F}+B_zxF]+E_0x_0F(x_0). Thus c-prime equals exp(S(ell)) times this bracket divided by r*sqrt(alpha_P)*z^2.",
+      "saddle": "L_B[P_lin]=alpha dot L_B[F]+i beta dot{x L_B[F]+2F'+(2g_tilde+1)F}.",
+      "symbolic_zero_checks": 3
+    },
+    "physical_conjugation": {
+      "conjugate_form": "L_B[P]=exp(-S_tilde)*(D_x^2+D_x+1/6)[exp(S_tilde)P].",
+      "exponent": "S(ell+x)=S(ell)+S_tilde(x), S_tilde(x)=t*x^2/4-B_a*x.",
+      "first_order": "P'(lambda)+g(lambda)P(lambda)=Ptilde'(x)+g_tilde(x)Ptilde(x).",
+      "log_derivative": "g(ell+x)=t*x/2-B_a=:g_tilde(x).",
+      "mode_coordinate": "x_0=lambda_0-ell=log(alpha_P/(a*r)); log(a) enters the sampled interval through x_0, but not as an extra coefficient in L_B.",
+      "parameter": "B_a=sigma-(t/2)ell=1/2-(t/2)delta_a, ell=log(a), delta_a=ell-Re(alpha).",
+      "saddle_operator": "L_B[P]=P''+(2g_tilde+1)P'+(g_tilde^2+g_tilde+t/2+1/6)P."
+    },
+    "translated_tail_weights": {
+      "definition": "Khat_k(ell)=sum_(j=0)^k binom(k,j)K_j ell^(k-j), K=(6,14,55,336,2738,27936).",
+      "rows": [
+        "Khat_0(ell)=6",
+        "Khat_1(ell)=6*ell + 14",
+        "Khat_2(ell)=6*ell**2 + 28*ell + 55",
+        "Khat_3(ell)=6*ell**3 + 42*ell**2 + 165*ell + 336",
+        "Khat_4(ell)=6*ell**4 + 56*ell**3 + 330*ell**2 + 1344*ell + 2738",
+        "Khat_5(ell)=6*ell**5 + 70*ell**4 + 550*ell**3 + 3360*ell**2 + 13690*ell + 27936"
+      ],
+      "sharpness": "For a centered monomial P=p_k(lambda-ell)^k, the old coefficientwise majorant is exactly 2h^2 Khat_k(ell)|p_k|. Thus no smaller universal coefficientwise weight follows from that template."
+    }
+  }
+}

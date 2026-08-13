@@ -1,0 +1,72 @@
+{
+  "decision": {
+    "Airy_to_logistic_remainder_proved": false,
+    "division_by_characteristic_defect_used": false,
+    "endpoint_current_and_Fresnel_term_remain_paired": true,
+    "global_logistic_Morse_phase_is_exact": true,
+    "propagation_across_399_events_proved": false,
+    "rh_implication": false,
+    "transform_is_regular_at_turning_event": true
+  },
+  "dependencies": {
+    "Fresnel_normal_form_gate": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_fresnel_endpoint_normal_form_gate.json",
+      "sha256": "0122270e518a11763f0d086af05e72ec148e74798eec8dc304663a1f68f33b4e"
+    },
+    "Fresnel_retention_gate": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_turning_event_fresnel_retention_gate.json",
+      "sha256": "4824944a2d2edbab7e9047a1420f1c50eb743a743c9c931579a558b5e3112449"
+    },
+    "logistic_Morse_gate": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_universal_logistic_morse_characteristic_fold_reduction_gate.json",
+      "sha256": "7fe2f844f4822ec1c3650562635159b2a7d21efeaffd2f727fdd8ef498f26fb2"
+    },
+    "portcullis_gate": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_finite_poisson_portcullis_saddle_reduction_gate.json",
+      "sha256": "e347789fc095c77e08cf74a6ab5cbc37a6131e533e049b3e32e5112406515087"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_fresnel_retaining_logistic_transform_gate",
+  "next_obligation": "Derive a cancellation-preserving comparison between the grouped Airy-Fresnel transform and the exact Fresnel-retaining logistic amplitude A_m(s), beginning with mode 39894 at the two pi/16 faces. Bound amplitude/phase transport without freezing F(q_B)-F(q_C).",
+  "passed": true,
+  "proof_boundary": "Exact algebraic transform and event regularity only. No amplitude-variation estimate, Airy-to-logistic remainder, 399-event propagation, complete T_upper, Lambda<=0, RH, or prize-level conclusion is proved.",
+  "prototype_certificate": {
+    "division_by_characteristic_defect": false,
+    "event_height_ball": "[10000011008.64988925080124235593123046999183392565369826024571855849391580314324913670338840647688960 +/- 1.88e-90]",
+    "finite_Jacobian_weight_ball": "[0.7071112123256777031645955082146022816916880477231222365949880387944855147256459786707552174331662772 +/- 1.51e-100]",
+    "logistic_characteristic_ball": "[-6.266567237133170820356317013103392092845460185365058874399192866139857247598338106368712283098438782e-6 +/- 2.06e-101]",
+    "logistic_r_ball": "[1.000012533213014488394244748583746929362811450343410036596982002306111194665864541033739409435002757 +/- 3.50e-100]",
+    "lower_endpoint_Fresnel_coordinate_ball": "[9.363323371298775135582115452008733351814599525865910576241412384112335337790759144117852033355661050e-97 +/- 3.72e-96]",
+    "lower_endpoint_Fresnel_primitive_at_event": "F(q_C)=F(0)=0",
+    "lower_endpoint_current_at_event": "exp(i*pi*q_C^2/2)=1",
+    "mode": 39894,
+    "saddle_x_ball": "[0.4999968667163814334145898218414934483039535772699073174705628004035669300713762008309468156438584508 +/- 3.56e-101]",
+    "upper_endpoint_Fresnel_coordinate_ball": "[2481415.224985782684224518129617620840289245227135651492989529376158664479066332836005433747371783561 +/- 2.39e-94]"
+  },
+  "runtime": {
+    "elapsed_seconds": 0.25,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_fresnel_retaining_logistic_transform_gate.py",
+      "sha256": "62063c17a24a355379d192062d55e87436034b0da03530fb0cebd8168c0d2a0f"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_fresnel_retaining_logistic_transform_gate.py",
+      "sha256": "72f990a2199c14da0f491c52d7b3e94af196b6ac705d5751e87ab99d747d1918"
+    }
+  },
+  "status": "exact_Fresnel_retaining_logistic_Morse_transform_certified",
+  "symbolic_certificate": {
+    "Jacobian": "-dx/ds=r*x^2*dv/ds, dv/ds=v*s/(v-1), (dv/ds)(0)=1",
+    "Morse_coordinate": "s=sgn(v-1)*sqrt(2*(v-1-log(v)))",
+    "Poisson_mode": "J_m=(-1)^m*exp(-i*pi*m^2/x)*P_m/x",
+    "event_regularization": "at t=tau_m, x_m=2m/C and q_C(m,x_m)=0",
+    "exact_phase": "psi_m(x)-psi_m(x_m)=-t*s^2/4",
+    "logistic_coordinate": "r=t/(2*pi*m^2), v=(1-x)/(r*x), x=1/(1+r*v)",
+    "paired_current": "P_m=[exp(i*pi*q_B^2/2)-exp(i*pi*q_C^2/2)]/(i*pi)+m*sqrt(2/x)[F(q_B)-F(q_C)]",
+    "quadratic_completion": "E_m(D)=exp(-i*pi*m^2/x)*exp(i*pi*q_D^2/2)"
+  }
+}

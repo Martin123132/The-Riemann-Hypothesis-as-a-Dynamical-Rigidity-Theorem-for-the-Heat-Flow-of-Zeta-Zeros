@@ -1,0 +1,1140 @@
+{
+  "date": "2026-08-05",
+  "exact": {
+    "centered": "Translation ell=log_a+x exactly reproduces R=-s_prime*x-c*u_N, R_x=-s_second*x-c_x*u_N+i*b*u_N_x, Q=(R+delta)C+D, and mathcal N=RQ+R_xC with delta=chi_rate-i*b*u_N.",
+    "compiler": "The compiler maps the twelve explicit scalar inputs into ascending coefficient arrays for P_V=C, P_N=mathcal N, P_A=RC, and P_Q=Q. It derives u_N=log_a-L_N internally, preventing an inconsistent duplicate input.",
+    "dual_derivation": "Each base row is constructed both from the five moment vectors v_0,v_1,v_2,e_0,e_1 of Section 11.159 and from the carrier laws C,D,R,R_x,Q,mathcal N of Section 11.160. All twenty symbolic coefficient differences vanish.",
+    "lift": "The tangent compiler applies dot(P)(ell)=i(ell-log_a)P(ell), giving the exact ascending recurrence dot(p)_j=i[p_(j-1)-log_a*p_j].",
+    "low_n": "The exact fixture is recompiled at each validated low-N chart using that chart's L_N=log N and log_a=log a. Base, tangent, and joined P_lin arrays project through the stored degree-six carrier, finite-band, near, and paired-remote basis with the recorded machine-roundoff identities.",
+    "missing_inputs": "A physical numerical row now requires explicit certified values of chi_rate, rho_1,rho_2 and their x-derivatives, c,b,c_x,b_x,u_(N,x), plus the genuine endpoint edge observations and retained carrier observations used in alpha and beta. The compiler deliberately does not invent them.",
+    "ownership": "For alpha=(N_(p,xi),V_(p,xi),-Q_(p,xi),-A_(p,xi)), beta_p=(N_p,V_p,-Q_p,-A_p), and beta_E=(N_E,V_E,-Q_E,-A_E), P_lin=F_alpha+i(ell-log_a)F_(beta_p+beta_E) splits exactly into one bulk term plus the single edge lift. The edge is not inserted into alpha or counted twice.",
+    "pi_provenance": "No new pi is introduced by the coefficient algebra. Any pi inside u_(N,x), calibrated rates, or the low-N Fourier basis is inherited from the completed-zeta/Fourier normalizations already audited by the source gates.",
+    "proof_boundary": "This gate proves exact symbolic compatibility, coefficient ownership, degree ceilings, and a low-N software interface. Its low-N rates are synthetic regression data. It does not evaluate the physical chi_rate or endpoint jets, enumerate the physical carrier, prove interval enclosures, a determinant sign, a flow inequality, Lambda<=0, RH, or a prize-level conclusion."
+  },
+  "exact_fixture": {
+    "P_lin_coefficients": [
+      "69174038572816993/4292124686503500 - 2463174549014984536723*I/392632133661947947950",
+      "-175641829139744041306645901/12848886574087246596663750 + 10045795595598068295369041*I/4650073236336336863554500",
+      "2909978274554836403200509961/2493601772985360643081100625 + 12469366354951571027654264*I/5347584221786787393087675",
+      "1785405979590128054994159869/712457649424388755166028750 - 48279743443266741126475607*I/16264541872715574559621500",
+      "-106859028235481399/125952050087506500 + 167444204903518451*I/131677143273302250",
+      "120512/1884025 - 29792*I/171275"
+    ],
+    "P_lin_degree": 5,
+    "alpha": [
+      "2/3",
+      "-3/5",
+      "-5/7",
+      "7/11"
+    ],
+    "beta_E": [
+      "23/29",
+      "-29/31",
+      "-31/37",
+      "37/41"
+    ],
+    "beta_p": [
+      "11/13",
+      "-13/17",
+      "-17/19",
+      "19/23"
+    ],
+    "centered_rows": {
+      "P_A": [
+        "5088/18865 + 1292*I/4459",
+        "56157/35035 + 102281*I/1051050",
+        "7849/15015 + 86249*I/150150",
+        "67/1430 + 94*I/715",
+        "0"
+      ],
+      "P_N": [
+        "296727850489766/5172590264086245 + 1187636754476*I/58128000332675",
+        "8913289369550024/19376446562507125 - 127884780526569674969*I/451943990202541186350",
+        "6503112550988382152/6456342717179159805 - 94937149029414796399*I/129126854343583196100",
+        "90720153126037/144656803755750 + 3837475371403*I/81007810103220",
+        "133/1300 + 269*I/7150"
+      ],
+      "P_Q": [
+        "100828920646/169055471585 + 978520737*I/62693205575",
+        "38564090259/24150781655 + 11583266561*I/40840145346",
+        "291921088/608843235 + 53971193*I/84359550",
+        "67/1430 + 94*I/715",
+        "0"
+      ],
+      "P_V": [
+        "3816/2695 + 969*I/637",
+        "-36/385 + 89*I/91",
+        "-1/11 + 2*I/13",
+        "0",
+        "0"
+      ]
+    },
+    "rows": {
+      "P_A": [
+        "-7/6 + 57*I/35",
+        "-293/1470 - 121*I/1050",
+        "4241/30030 - 74491*I/150150",
+        "67/1430 + 94*I/715",
+        "0"
+      ],
+      "P_N": [
+        "-261146287/344313900 - 2274910723*I/643829970",
+        "119308118022593/178131656949750 + 472722419052997*I/270760118563620",
+        "68267006534917010813/161408567929478995125 + 3499970480652368731*I/6456342717179159805",
+        "-69960173507273/144656803755750 - 146259543197953*I/405039050516100",
+        "133/1300 + 269*I/7150"
+      ],
+      "P_Q": [
+        "-281/246 + 286*I/215",
+        "185839/6293910 - 9978989*I/35171850",
+        "9174791/93668190 - 300615947*I/697883550",
+        "67/1430 + 94*I/715",
+        "0"
+      ],
+      "P_V": [
+        "1",
+        "2/5 + I/7",
+        "-1/11 + 2*I/13",
+        "0",
+        "0"
+      ]
+    },
+    "substitution": {
+      "A_E": "-37/41",
+      "A_p": "-19/23",
+      "A_p_xi": "-7/11",
+      "L_N": "7/3",
+      "N_E": "23/29",
+      "N_p": "11/13",
+      "N_p_xi": "2/3",
+      "Q_E": "31/37",
+      "Q_p": "17/19",
+      "Q_p_xi": "5/7",
+      "V_E": "-29/31",
+      "V_p": "-13/17",
+      "V_p_xi": "-3/5",
+      "b": "3/5",
+      "b_x": "-2/37",
+      "c": "-1/2",
+      "c_x": "1/31",
+      "chi_rate": "1/41 - 3*I/43",
+      "log_a": "19/7",
+      "rho_1": "2/5 + I/7",
+      "rho_1_x": "3/17 - I/19",
+      "rho_2": "-1/11 + 2*I/13",
+      "rho_2_x": "-2/23 + I/29",
+      "u_N_x": "2/47"
+    },
+    "tangent_rows": {
+      "P_A": [
+        "1083/245 + 19*I/6",
+        "-14269/7350 - 1073*I/1715",
+        "-647104/525525 - 20413*I/35035",
+        "128071/150150 + 211*I/15015",
+        "-94/715 + 67*I/1430",
+        "0"
+      ],
+      "P_N": [
+        "-43223303737/4506809790 + 4961779453*I/2410197300",
+        "825192536653171/99753727891860 - 2141724689030293*I/831281065765500",
+        "-49623402832277324443/180777596081016474540 - 3791727988936228073*I/7928841933377915550",
+        "-4011434260295315729/2635241925379248900 + 1390317879110135671*I/801035076573096750",
+        "37524254642339/81007810103220 - 220260510331201*I/289313607511500",
+        "-269/7150 + 133*I/1300"
+      ],
+      "P_Q": [
+        "5434/1505 + 5339*I/1722",
+        "-27216209/12958050 - 8976106*I/7342895",
+        "-41093902448/46409256075 - 439056104*I/1857752435",
+        "6046160077/7676719050 - 17792174*I/608843235",
+        "-94/715 + 67*I/1430",
+        "0"
+      ],
+      "P_V": [
+        "-19*I/7",
+        "19/49 - 3*I/35",
+        "25/91 + 249*I/385",
+        "-2/13 - I/11",
+        "0",
+        "0"
+      ]
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_physical_observation_polynomial_compiler_gate",
+  "laws": {
+    "centered_chart": {
+      "C": "log_a**2*rho_2 + log_a*rho_1 + 2*log_a*rho_2*x + rho_1*x + rho_2*x**2 + 1",
+      "D": "log_a**2*rho_2_x + log_a*rho_1_x + 2*log_a*rho_2_x*x + rho_1_x*x + rho_2_x*x**2",
+      "R": "L_N*c - I*b*x - c*log_a - c*x",
+      "R_x": "L_N*c_x + I*b*u_N_x - I*b_x*x - c_x*log_a - c_x*x",
+      "delta": "I*L_N*b - I*b*log_a + chi_rate"
+    },
+    "ell_chart": {
+      "C": "ell**2*rho_2 + ell*rho_1 + 1",
+      "D": "ell**2*rho_2_x + ell*rho_1_x",
+      "R": "L_N*c - I*b*ell + I*b*log_a - c*ell",
+      "R_x": "L_N*c_x + I*b*u_N_x - I*b_x*ell + I*b_x*log_a - c_x*ell",
+      "delta": "I*L_N*b - I*b*log_a + chi_rate"
+    }
+  },
+  "low_n_interface": {
+    "coefficient_fixture": "synthetic exact rates with each low-N fixture's own L_N=log N and log_a=log a",
+    "fixtures": [
+      {
+        "id": "n4",
+        "maximum_P_lin_combination_error": 5.551115123125783e-16,
+        "maximum_lift_projection_error": 3.775166431889533e-16,
+        "parameters": {
+          "L_N": "1.38629436111989057e+00",
+          "N": 4,
+          "a": 4.25,
+          "log_a": "1.44691898293632537e+00",
+          "u_N": "6.06246218164347983e-02"
+        },
+        "projections": {
+          "band_blocks": {
+            "P_lin": {
+              "im": "-6.52196830222811080e-02",
+              "re": "1.43496772915877635e+00"
+            },
+            "base": {
+              "P_A": {
+                "im": "-7.74838634056671111e-02",
+                "re": "-2.25922580138051887e-01"
+              },
+              "P_N": {
+                "im": "-4.40360369945654473e-01",
+                "re": "6.69573129383852494e-02"
+              },
+              "P_Q": {
+                "im": "-2.69825722806255747e-02",
+                "re": "-3.14379205995216515e-01"
+              },
+              "P_V": {
+                "im": "-1.98213431042640276e-01",
+                "re": "-3.40750814922020917e-01"
+              }
+            },
+            "lifted": {
+              "P_A": {
+                "im": "4.72221825787106253e-01",
+                "re": "2.72704454398670304e-01"
+              },
+              "P_N": {
+                "im": "3.28033359405898173e-02",
+                "re": "-7.31810484796772465e-01"
+              },
+              "P_Q": {
+                "im": "4.70285124247048270e-01",
+                "re": "3.04074998937196084e-01"
+              },
+              "P_V": {
+                "im": "-1.06412268839873231e-01",
+                "re": "2.70645835123284106e-01"
+              }
+            }
+          },
+          "carrier": {
+            "P_lin": {
+              "im": "1.52115813105445752e-01",
+              "re": "1.28032503480329773e+00"
+            },
+            "base": {
+              "P_A": {
+                "im": "-1.14869556227939595e-01",
+                "re": "-2.60809033189915052e-01"
+              },
+              "P_N": {
+                "im": "-4.61029497905547814e-01",
+                "re": "1.02943360451455954e-01"
+              },
+              "P_Q": {
+                "im": "-1.08945767683502059e-02",
+                "re": "-3.69063204441044013e-01"
+              },
+              "P_V": {
+                "im": "-1.25229393775684011e-01",
+                "re": "-7.25883167424131837e-01"
+              }
+            },
+            "lifted": {
+              "P_A": {
+                "im": "5.19483117073233025e-01",
+                "re": "2.43848605892583364e-01"
+              },
+              "P_N": {
+                "im": "-2.19583298266981253e-02",
+                "re": "-7.52374249160978725e-01"
+              },
+              "P_Q": {
+                "im": "5.13938827263058728e-01",
+                "re": "2.79773162975884615e-01"
+              },
+              "P_V": {
+                "im": "-8.64898034796367510e-02",
+                "re": "3.25934891993491238e-01"
+              }
+            }
+          },
+          "near": {
+            "P_lin": {
+              "im": "8.29087123276939897e-01",
+              "re": "2.05865822582836422e-01"
+            },
+            "base": {
+              "P_A": {
+                "im": "-1.62019912352823620e-01",
+                "re": "-1.85750663308993536e-01"
+              },
+              "P_N": {
+                "im": "-4.36442738695535168e-02",
+                "re": "2.40307410479465244e-01"
+              },
+              "P_Q": {
+                "im": "-1.00383687460634391e-01",
+                "re": "-1.88224027388843945e-01"
+              },
+              "P_V": {
+                "im": "2.52045372910944587e-01",
+                "re": "-4.14439549993047662e-01"
+              }
+            },
+            "lifted": {
+              "P_A": {
+                "im": "2.64257771512304618e-01",
+                "re": "-2.09547587640337180e-01"
+              },
+              "P_N": {
+                "im": "-3.50893623462979809e-01",
+                "re": "-5.06145078160495920e-02"
+              },
+              "P_Q": {
+                "im": "2.33395706563226335e-01",
+                "re": "-1.98364296119338285e-01"
+              },
+              "P_V": {
+                "im": "2.49212666019924811e-02",
+                "re": "3.09414460196564711e-01"
+              }
+            }
+          },
+          "remote": {
+            "P_lin": {
+              "im": "-6.11751627149285993e-01",
+              "re": "-3.60508516938208290e-01"
+            },
+            "base": {
+              "P_A": {
+                "im": "1.24634219530578877e-01",
+                "re": "1.50864210257108444e-01"
+              },
+              "P_N": {
+                "im": "2.29751459096192191e-02",
+                "re": "-2.04321362966400966e-01"
+              },
+              "P_Q": {
+                "im": "1.16471682972936169e-01",
+                "re": "1.33540028942993078e-01"
+              },
+              "P_V": {
+                "im": "-1.79061335643994152e-01",
+                "re": "2.93071974909506240e-02"
+              }
+            },
+            "lifted": {
+              "P_A": {
+                "im": "-2.16996480226144456e-01",
+                "re": "1.80691739134294427e-01"
+              },
+              "P_N": {
+                "im": "2.96131957695700498e-01",
+                "re": "3.00507434517827236e-02"
+              },
+              "P_Q": {
+                "im": "-1.89742003547183125e-01",
+                "re": "1.74062460158066368e-01"
+              },
+              "P_V": {
+                "im": "-4.99880124180174419e-03",
+                "re": "-2.54125403326358523e-01"
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "n5",
+        "maximum_P_lin_combination_error": 3.233018248352212e-15,
+        "maximum_lift_projection_error": 7.216449660063518e-16,
+        "parameters": {
+          "L_N": "1.60943791243410028e+00",
+          "N": 5,
+          "a": 5.4,
+          "log_a": "1.68639895357022884e+00",
+          "u_N": "7.69610411361285607e-02"
+        },
+        "projections": {
+          "band_blocks": {
+            "P_lin": {
+              "im": "-3.75633223033127717e+00",
+              "re": "3.81964409125689919e+00"
+            },
+            "base": {
+              "P_A": {
+                "im": "1.19169116425651112e+00",
+                "re": "-8.17090106259399152e-01"
+              },
+              "P_N": {
+                "im": "-1.19040245099073383e+00",
+                "re": "-1.64137996585735080e-01"
+              },
+              "P_Q": {
+                "im": "8.77526450634037336e-01",
+                "re": "-7.62588779790871696e-01"
+              },
+              "P_V": {
+                "im": "-6.20233780215260877e-01",
+                "re": "2.03299925005005333e+00"
+              }
+            },
+            "lifted": {
+              "P_A": {
+                "im": "1.08182112659530461e+00",
+                "re": "1.41419790281113511e+00"
+              },
+              "P_N": {
+                "im": "2.52883061341905468e-01",
+                "re": "-1.71014069330597063e+00"
+              },
+              "P_Q": {
+                "im": "9.85192293814425413e-01",
+                "re": "1.15694165807155236e+00"
+              },
+              "P_V": {
+                "im": "-1.92950055353075411e+00",
+                "re": "-1.15715501749279637e-01"
+              }
+            }
+          },
+          "carrier": {
+            "P_lin": {
+              "im": "-3.23662137459965615e+00",
+              "re": "3.84485634949503874e+00"
+            },
+            "base": {
+              "P_A": {
+                "im": "1.15465027999344172e+00",
+                "re": "-8.75995728789223493e-01"
+              },
+              "P_N": {
+                "im": "-1.20693998655538559e+00",
+                "re": "-1.26520737039718167e-01"
+              },
+              "P_Q": {
+                "im": "9.04414763907036123e-01",
+                "re": "-7.76952276507758111e-01"
+              },
+              "P_V": {
+                "im": "-1.41386667984774284e-01",
+                "re": "1.75368325814965531e+00"
+              }
+            },
+            "lifted": {
+              "P_A": {
+                "im": "1.14144654715299287e+00",
+                "re": "1.37466330971900663e+00"
+              },
+              "P_N": {
+                "im": "1.70916229557348892e-01",
+                "re": "-1.73288965829674035e+00"
+              },
+              "P_Q": {
+                "im": "1.03506553889168162e+00",
+                "re": "1.12321763979716516e+00"
+              },
+              "P_V": {
+                "im": "-1.91441595784342367e+00",
+                "re": "-2.28826757456510183e-02"
+              }
+            }
+          },
+          "near": {
+            "P_lin": {
+              "im": "1.42840903030287936e+00",
+              "re": "4.84239717709527229e-01"
+            },
+            "base": {
+              "P_A": {
+                "im": "-1.80539726384326416e-01",
+                "re": "-2.36883419152644409e-01"
+              },
+              "P_N": {
+                "im": "-5.32134985470471000e-02",
+                "re": "3.15054723754173427e-01"
+              },
+              "P_Q": {
+                "im": "-1.09761862653007705e-01",
+                "re": "-1.69875077147059711e-01"
+              },
+              "P_V": {
+                "im": "6.74418267108753078e-01",
+                "re": "-2.90519159079459632e-01"
+              }
+            },
+            "lifted": {
+              "P_A": {
+                "im": "3.57502251917007463e-01",
+                "re": "-2.81871229077584107e-01"
+              },
+              "P_N": {
+                "im": "-5.50909710840182809e-01",
+                "re": "-8.24428520761606443e-02"
+              },
+              "P_Q": {
+                "im": "3.12886657624442788e-01",
+                "re": "-2.68468386057121200e-01"
+              },
+              "P_V": {
+                "im": "1.81032296587452235e-02",
+                "re": "3.91259509176072107e-01"
+              }
+            }
+          },
+          "remote": {
+            "P_lin": {
+              "im": "-9.08698174571322959e-01",
+              "re": "-4.59027459471109900e-01"
+            },
+            "base": {
+              "P_A": {
+                "im": "1.43498842121303150e-01",
+                "re": "1.77977796622769274e-01"
+              },
+              "P_N": {
+                "im": "3.66759629822923719e-02",
+                "re": "-2.77437464208163509e-01"
+              },
+              "P_Q": {
+                "im": "1.36650175926061906e-01",
+                "re": "1.55511580430121144e-01"
+              },
+              "P_V": {
+                "im": "-1.95571154878228709e-01",
+                "re": "1.12031671790162324e-02"
+              }
+            },
+            "lifted": {
+              "P_A": {
+                "im": "-2.97876831359225380e-01",
+                "re": "2.42336635985553467e-01"
+              },
+              "P_N": {
+                "im": "4.68942879055633699e-01",
+                "re": "5.96938870852156828e-02"
+              },
+              "P_Q": {
+                "im": "-2.63013412547094094e-01",
+                "re": "2.34744367782823038e-01"
+              },
+              "P_V": {
+                "im": "-3.01863397149853413e-03",
+                "re": "-2.98426683172431595e-01"
+              }
+            }
+          }
+        }
+      },
+      {
+        "id": "n7",
+        "maximum_P_lin_combination_error": 3.552713678800501e-15,
+        "maximum_lift_projection_error": 3.3399081181809284e-15,
+        "parameters": {
+          "L_N": "1.94591014905531323e+00",
+          "N": 7,
+          "a": 7.35,
+          "log_a": "1.99470031322474517e+00",
+          "u_N": "4.87901641694319377e-02"
+        },
+        "projections": {
+          "band_blocks": {
+            "P_lin": {
+              "im": "-6.79005088412566682e-01",
+              "re": "7.65282757944121172e+00"
+            },
+            "base": {
+              "P_A": {
+                "im": "4.70927422081401592e-01",
+                "re": "-1.66389195525604894e+00"
+              },
+              "P_N": {
+                "im": "-1.76794817428290663e+00",
+                "re": "3.60660663167165940e-01"
+              },
+              "P_Q": {
+                "im": "5.06245513468483121e-01",
+                "re": "-1.40537324715004508e+00"
+              },
+              "P_V": {
+                "im": "1.75055036803958863e+00",
+                "re": "6.99576606266042456e-01"
+              }
+            },
+            "lifted": {
+              "P_A": {
+                "im": "2.22159413291622831e+00",
+                "re": "1.21772631491507077e+00"
+              },
+              "P_N": {
+                "im": "-2.96712963660018536e-01",
+                "re": "-3.02846845723111580e+00"
+              },
+              "P_Q": {
+                "im": "1.96763433840945234e+00",
+                "re": "1.11918296947063034e+00"
+              },
+              "P_V": {
+                "im": "-1.79903713654264896e+00",
+                "re": "1.30239935953188679e+00"
+              }
+            }
+          },
+          "carrier": {
+            "P_lin": {
+              "im": "-2.21251749556884869e-01",
+              "re": "8.05370723290522861e+00"
+            },
+            "base": {
+              "P_A": {
+                "im": "4.61450259369445726e-01",
+                "re": "-1.70922560033465354e+00"
+              },
+              "P_N": {
+                "im": "-1.76970653293744418e+00",
+                "re": "4.06423852454431467e-01"
+              },
+              "P_Q": {
+                "im": "4.84552988953627473e-01",
+                "re": "-1.39302579598015086e+00"
+              },
+              "P_V": {
+                "im": "2.23820470636984048e+00",
+                "re": "1.04832204062142598e+00"
+              }
+            },
+            "lifted": {
+              "P_A": {
+                "im": "2.28331764747276678e+00",
+                "re": "1.17316418764923247e+00"
+              },
+              "P_N": {
+                "im": "-4.08118993304620203e-01",
+                "re": "-3.05187381426964066e+00"
+              },
+              "P_Q": {
+                "im": "2.02203983006251242e+00",
+                "re": "1.07467666319768229e+00"
+              },
+              "P_V": {
+                "im": "-1.82214622030247342e+00",
+                "re": "1.37287732069265589e+00"
+              }
+            }
+          },
+          "near": {
+            "P_lin": {
+              "im": "1.92199661013468370e+00",
+              "re": "9.67019736126862206e-01"
+            },
+            "base": {
+              "P_A": {
+                "im": "-1.79568734392284379e-01",
+                "re": "-2.53729662436020464e-01"
+              },
+              "P_N": {
+                "im": "-5.64486215266208347e-02",
+                "re": "4.44257348299767429e-01"
+              },
+              "P_Q": {
+                "im": "-1.87930940541479408e-01",
+                "re": "-1.77317841959923950e-01"
+              },
+              "P_V": {
+                "im": "6.72989897238717161e-01",
+                "re": "3.57927608240594219e-01"
+              }
+            },
+            "lifted": {
+              "P_A": {
+                "im": "4.76171004211384363e-01",
+                "re": "-3.85066058763644969e-01"
+              },
+              "P_N": {
+                "im": "-9.06963511876210271e-01",
+                "re": "-1.31545073815213742e-01"
+              },
+              "P_Q": {
+                "im": "4.34150286516181927e-01",
+                "re": "-3.76491130806341445e-01"
+              },
+              "P_V": {
+                "im": "-2.23587557428746031e-02",
+                "re": "4.18803263246664226e-01"
+              }
+            }
+          },
+          "remote": {
+            "P_lin": {
+              "im": "-1.46424327127929454e+00",
+              "re": "-5.66140082661810262e-01"
+            },
+            "base": {
+              "P_A": {
+                "im": "1.70091571680473452e-01",
+                "re": "2.08396017357331848e-01"
+              },
+              "P_N": {
+                "im": "5.46902628717736636e-02",
+                "re": "-3.98494159012560412e-01"
+              },
+              "P_Q": {
+                "im": "1.66238416026771668e-01",
+                "re": "1.89665293129725188e-01"
+              },
+              "P_V": {
+                "im": "-1.85335558908443693e-01",
+                "re": "-9.18217388524127445e-03"
+              }
+            },
+            "lifted": {
+              "P_A": {
+                "im": "-4.14447489654604762e-01",
+                "re": "3.40503931498134349e-01"
+              },
+              "P_N": {
+                "im": "7.95557482231694313e-01",
+                "re": "1.08139716776030986e-01"
+              },
+              "P_Q": {
+                "im": "-3.79744794862875046e-01",
+                "re": "3.31984824533698819e-01"
+              },
+              "P_V": {
+                "im": "-7.50328017160264288e-04",
+                "re": "-3.48325302085930932e-01"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "functional_order": [
+      "carrier",
+      "band_blocks",
+      "near",
+      "remote"
+    ],
+    "maximum_P_lin_combination_error": 3.552713678800501e-15,
+    "maximum_lift_projection_error": 3.3399081181809284e-15
+  },
+  "proof_boundary": "This gate proves exact symbolic compatibility, coefficient ownership, degree ceilings, and a low-N software interface. Its low-N rates are synthetic regression data. It does not evaluate the physical chi_rate or endpoint jets, enumerate the physical carrier, prove interval enclosures, a determinant sign, a flow inequality, Lambda<=0, RH, or a prize-level conclusion.",
+  "rows": [
+    {
+      "certificate": "The compiler maps the twelve explicit scalar inputs into ascending coefficient arrays for P_V=C, P_N=mathcal N, P_A=RC, and P_Q=Q. It derives u_N=log_a-L_N internally, preventing an inconsistent duplicate input.",
+      "claim": "The physical observation compiler has an explicit variable, order, and input contract.",
+      "id": "poc_01_schema",
+      "proof_boundary": "Complex rates remain explicit inputs.",
+      "readiness": "validated",
+      "role": "compiler schema"
+    },
+    {
+      "certificate": "chi_rate is the complex rate chi_N of Sections 11.157-11.173, not the later phase angle also denoted chi_N",
+      "claim": "The complex chi rate is not confused with the later phase angle.",
+      "id": "poc_02_symbol",
+      "proof_boundary": "Notation is disambiguated in code and output.",
+      "readiness": "guard_validated",
+      "role": "symbol collision guard"
+    },
+    {
+      "certificate": "Rows (v_0,n_0,a_0,q_0) are serialized in ascending ell degree.",
+      "claim": "The Section 11.159 vectors compile all four observation rows.",
+      "id": "poc_03_moment",
+      "proof_boundary": "No real-part projection is applied at coefficient level.",
+      "readiness": "validated",
+      "role": "moment-vector derivation"
+    },
+    {
+      "certificate": "Each base row is constructed both from the five moment vectors v_0,v_1,v_2,e_0,e_1 of Section 11.159 and from the carrier laws C,D,R,R_x,Q,mathcal N of Section 11.160. All twenty symbolic coefficient differences vanish.",
+      "claim": "The Section 11.160 carrier laws independently compile the same rows.",
+      "id": "poc_04_carrier",
+      "proof_boundary": "The equality is coefficient-by-coefficient.",
+      "readiness": "validated",
+      "role": "carrier-law derivation"
+    },
+    {
+      "certificate": "P_V coefficients agree in both derivations.",
+      "claim": "P_V=C has degree at most two.",
+      "id": "poc_05_value",
+      "proof_boundary": "No numerical correction bound is inferred.",
+      "readiness": "validated",
+      "role": "value row"
+    },
+    {
+      "certificate": "P_A coefficients agree in both derivations.",
+      "claim": "P_A=RC has degree at most three.",
+      "id": "poc_06_scalar",
+      "proof_boundary": "This is the bulk scalar, not the total endpoint scalar.",
+      "readiness": "validated",
+      "role": "centered-scalar row"
+    },
+    {
+      "certificate": "P_Q coefficients agree in both derivations.",
+      "claim": "P_Q=Q has degree at most three.",
+      "id": "poc_07_value_rate",
+      "proof_boundary": "chi_rate remains unspecialized.",
+      "readiness": "validated",
+      "role": "value-rate row"
+    },
+    {
+      "certificate": "P_N coefficients agree in both derivations.",
+      "claim": "P_N=RQ+R_xC has degree at most four.",
+      "id": "poc_08_scalar_rate",
+      "proof_boundary": "No sign follows from degree four.",
+      "readiness": "validated",
+      "role": "scalar-rate row"
+    },
+    {
+      "certificate": "Translation ell=log_a+x exactly reproduces R=-s_prime*x-c*u_N, R_x=-s_second*x-c_x*u_N+i*b*u_N_x, Q=(R+delta)C+D, and mathcal N=RQ+R_xC with delta=chi_rate-i*b*u_N.",
+      "claim": "Large log N and log a terms cancel before norms are taken.",
+      "id": "poc_09_centered",
+      "proof_boundary": "The identity uses u_N=log_a-L_N exactly.",
+      "readiness": "validated",
+      "role": "centered chart"
+    },
+    {
+      "certificate": "The expanded symbolic difference is zero.",
+      "claim": "P_A-P_Q=(i*b*u_N-chi_rate)C-D.",
+      "id": "poc_10_defect",
+      "proof_boundary": "This cancellation is algebraic, not a bound on delta.",
+      "readiness": "validated",
+      "role": "rate cancellation"
+    },
+    {
+      "certificate": "The tangent compiler applies dot(P)(ell)=i(ell-log_a)P(ell), giving the exact ascending recurrence dot(p)_j=i[p_(j-1)-log_a*p_j].",
+      "claim": "All four auxiliary frequency derivatives use one exact coefficient lift.",
+      "id": "poc_11_lift",
+      "proof_boundary": "The source polynomial is held fixed on the auxiliary chart.",
+      "readiness": "validated",
+      "role": "tangent lift"
+    },
+    {
+      "certificate": "No moment above ell^5 enters P_lin; the evaluator retains degree six as margin.",
+      "claim": "Base degrees (2,4,3,3) lift to (3,5,4,4).",
+      "id": "poc_12_degree",
+      "proof_boundary": "Degree control alone gives no amplitude bound.",
+      "readiness": "validated",
+      "role": "degree ceiling"
+    },
+    {
+      "certificate": "alpha=(N_(p,xi),V_(p,xi),-Q_(p,xi),-A_(p,xi)).",
+      "claim": "The non-lifted physical channel compiles as F_alpha.",
+      "id": "poc_13_alpha",
+      "proof_boundary": "The observations still require physical evaluation.",
+      "readiness": "validated",
+      "role": "alpha channel"
+    },
+    {
+      "certificate": "beta=beta_p+beta_E is assembled before projection.",
+      "claim": "The lifted physical channel compiles as i(ell-log_a)F_beta.",
+      "id": "poc_14_beta",
+      "proof_boundary": "Componentwise absolute values are not introduced.",
+      "readiness": "validated",
+      "role": "beta channel"
+    },
+    {
+      "certificate": "For alpha=(N_(p,xi),V_(p,xi),-Q_(p,xi),-A_(p,xi)), beta_p=(N_p,V_p,-Q_p,-A_p), and beta_E=(N_E,V_E,-Q_E,-A_E), P_lin=F_alpha+i(ell-log_a)F_(beta_p+beta_E) splits exactly into one bulk term plus the single edge lift. The edge is not inserted into alpha or counted twice.",
+      "claim": "The genuine endpoint edge appears exactly once in beta_E.",
+      "id": "poc_15_edge",
+      "proof_boundary": "No edge value is inserted into alpha.",
+      "readiness": "validated",
+      "role": "edge ownership"
+    },
+    {
+      "certificate": "P_lin(log a)=F_alpha(log a) exactly.",
+      "claim": "At ell=log a the entire beta lift vanishes.",
+      "id": "poc_16_endpoint",
+      "proof_boundary": "The full polynomial need not contain a universal ell-log a factor.",
+      "readiness": "validated",
+      "role": "lift-zero endpoint"
+    },
+    {
+      "certificate": "All base, centered, tangent, and joined coefficients are serialized exactly.",
+      "claim": "A rational-complex fixture exercises every input and reaches degree five.",
+      "id": "poc_17_fixture",
+      "proof_boundary": "The fixture is not asserted to be Xi data.",
+      "readiness": "validated",
+      "role": "exact fixture"
+    },
+    {
+      "certificate": "3 fixtures; max lift error=3.340e-15; max joined error=3.553e-15.",
+      "claim": "The compiler output passes through the existing degree-six functional API.",
+      "id": "poc_18_low_n",
+      "proof_boundary": "The basis values are floating-point regression data.",
+      "readiness": "validated",
+      "role": "low-N interface"
+    },
+    {
+      "certificate": "A physical numerical row now requires explicit certified values of chi_rate, rho_1,rho_2 and their x-derivatives, c,b,c_x,b_x,u_(N,x), plus the genuine endpoint edge observations and retained carrier observations used in alpha and beta. The compiler deliberately does not invent them.",
+      "claim": "Supply certified calibrated-root values for every compiler input.",
+      "id": "poc_19_inputs",
+      "proof_boundary": "No missing rate is fitted or guessed.",
+      "readiness": "open",
+      "role": "physical scalar adapter"
+    },
+    {
+      "certificate": "This gate proves exact symbolic compatibility, coefficient ownership, degree ceilings, and a low-N software interface. Its low-N rates are synthetic regression data. It does not evaluate the physical chi_rate or endpoint jets, enumerate the physical carrier, prove interval enclosures, a determinant sign, a flow inequality, Lambda<=0, RH, or a prize-level conclusion.",
+      "claim": "The compiler is infrastructure, not a signed theorem.",
+      "id": "poc_20_boundary",
+      "proof_boundary": "All prize-level implications remain open.",
+      "readiness": "guard_validated",
+      "role": "proof boundary"
+    }
+  ],
+  "schema": {
+    "base_degree_ceilings": {
+      "P_A": 3,
+      "P_N": 4,
+      "P_Q": 3,
+      "P_V": 2
+    },
+    "centered_variable": "x=ell-log a",
+    "coefficient_order": "ascending powers",
+    "derived": [
+      "u_N=log_a-L_N",
+      "s_prime=c+i*b",
+      "s_second=c_x+i*b_x",
+      "delta=chi_rate-i*b*u_N"
+    ],
+    "inputs": [
+      "L_N",
+      "log_a",
+      "rho_1",
+      "rho_2",
+      "rho_1_x",
+      "rho_2_x",
+      "c",
+      "b",
+      "c_x",
+      "b_x",
+      "chi_rate",
+      "u_N_x"
+    ],
+    "lifted_degree_ceilings": {
+      "P_A": 4,
+      "P_N": 5,
+      "P_Q": 4,
+      "P_V": 3
+    },
+    "observation_order": [
+      "V",
+      "mathcal N",
+      "A",
+      "Q"
+    ],
+    "polynomial_variable": "ell=log n",
+    "row_order": [
+      "P_V",
+      "P_N",
+      "P_A",
+      "P_Q"
+    ],
+    "symbol_guard": "chi_rate is the complex rate chi_N of Sections 11.157-11.173, not the later phase angle also denoted chi_N"
+  },
+  "source_audit": {
+    "centered_amplitude": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_amplitude_gate.json",
+      "sha256": "f9eda5af34ce5c54693265f99be2afaf294ef3395aadeea78cda2547346d02a6"
+    },
+    "edge_ownership": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_actual_source_edge_affine_ownership_gate.json",
+      "sha256": "e9d0f077642a2854114f87043274b69ef77f178239cb6ef2914a8369c70b4bd4"
+    },
+    "low_n_basis": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_fixed_cell_low_n_determinant_evaluator_gate.json",
+      "sha256": "c658d15590a75da5bb2c4bcf91cbab94afea80607f524ba502aaebdb1f846a07"
+    },
+    "moment_rows": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_explicit_phi_quadratic_reduction.json",
+      "sha256": "3fb9330a67ca91eb3541f7b5a6f73afc1c57d50647f5c0802c1eaa8f9c5b4e2c"
+    },
+    "observation_image": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_observation_image_compression_gate.json",
+      "sha256": "8155e7e923285fdab23d6d9988287d136b70b2b405fe89afcfb9ee0004991317"
+    }
+  },
+  "status": "c1_physical_observation_polynomial_compiler_validated",
+  "success": "built C1 physical-observation polynomial compiler gate: 4 base rows from 2 exact derivations, 4 centered translations, 4 tangent lifts, single edge ownership, 3 low-N interface fixtures, 0 physical numerical rows and 0 signed bounds",
+  "summary": {
+    "base_polynomials": 4,
+    "centered_identities": 4,
+    "edge_ownership_identities": 1,
+    "exact_fixture_P_lin_degree": 5,
+    "low_n_fixtures": 3,
+    "low_n_functionals_per_fixture": 4,
+    "maximum_low_n_joined_error": 3.552713678800501e-15,
+    "maximum_low_n_lift_error": 3.3399081181809284e-15,
+    "physical_numeric_rows": 0,
+    "physical_signed_bounds": 0,
+    "rows": 20,
+    "symbolic_row_identities": 4,
+    "tangent_identities": 4
+  },
+  "symbolic": {
+    "centered_rows": {
+      "P_A": [
+        "L_N*c*log_a**2*rho_2 + L_N*c*log_a*rho_1 + L_N*c - c*log_a**3*rho_2 - c*log_a**2*rho_1 - c*log_a",
+        "2*L_N*c*log_a*rho_2 + L_N*c*rho_1 - I*b*log_a**2*rho_2 - I*b*log_a*rho_1 - I*b - 3*c*log_a**2*rho_2 - 2*c*log_a*rho_1 - c",
+        "L_N*c*rho_2 - 2*I*b*log_a*rho_2 - I*b*rho_1 - 3*c*log_a*rho_2 - c*rho_1",
+        "-I*b*rho_2 - c*rho_2",
+        "0"
+      ],
+      "P_N": [
+        "I*L_N**2*b*c*log_a**2*rho_2 + I*L_N**2*b*c*log_a*rho_1 + I*L_N**2*b*c + L_N**2*c**2*log_a**2*rho_2 + L_N**2*c**2*log_a*rho_1 + L_N**2*c**2 - 2*I*L_N*b*c*log_a**3*rho_2 - 2*I*L_N*b*c*log_a**2*rho_1 - 2*I*L_N*b*c*log_a - 2*L_N*c**2*log_a**3*rho_2 - 2*L_N*c**2*log_a**2*rho_1 - 2*L_N*c**2*log_a + L_N*c*chi_rate*log_a**2*rho_2 + L_N*c*chi_rate*log_a*rho_1 + L_N*c*chi_rate + L_N*c*log_a**2*rho_2_x + L_N*c*log_a*rho_1_x + L_N*c_x*log_a**2*rho_2 + L_N*c_x*log_a*rho_1 + L_N*c_x + I*b*c*log_a**4*rho_2 + I*b*c*log_a**3*rho_1 + I*b*c*log_a**2 + I*b*log_a**2*rho_2*u_N_x + I*b*log_a*rho_1*u_N_x + I*b*u_N_x + c**2*log_a**4*rho_2 + c**2*log_a**3*rho_1 + c**2*log_a**2 - c*chi_rate*log_a**3*rho_2 - c*chi_rate*log_a**2*rho_1 - c*chi_rate*log_a - c*log_a**3*rho_2_x - c*log_a**2*rho_1_x - c_x*log_a**3*rho_2 - c_x*log_a**2*rho_1 - c_x*log_a",
+        "2*I*L_N**2*b*c*log_a*rho_2 + I*L_N**2*b*c*rho_1 + 2*L_N**2*c**2*log_a*rho_2 + L_N**2*c**2*rho_1 + L_N*b**2*log_a**2*rho_2 + L_N*b**2*log_a*rho_1 + L_N*b**2 - 7*I*L_N*b*c*log_a**2*rho_2 - 5*I*L_N*b*c*log_a*rho_1 - 3*I*L_N*b*c - 6*L_N*c**2*log_a**2*rho_2 - 4*L_N*c**2*log_a*rho_1 - 2*L_N*c**2 + 2*L_N*c*chi_rate*log_a*rho_2 + L_N*c*chi_rate*rho_1 + 2*L_N*c*log_a*rho_2_x + L_N*c*rho_1_x + 2*L_N*c_x*log_a*rho_2 + L_N*c_x*rho_1 - b**2*log_a**3*rho_2 - b**2*log_a**2*rho_1 - b**2*log_a + 5*I*b*c*log_a**3*rho_2 + 4*I*b*c*log_a**2*rho_1 + 3*I*b*c*log_a - I*b*chi_rate*log_a**2*rho_2 - I*b*chi_rate*log_a*rho_1 - I*b*chi_rate - I*b*log_a**2*rho_2_x - I*b*log_a*rho_1_x + 2*I*b*log_a*rho_2*u_N_x + I*b*rho_1*u_N_x - I*b_x*log_a**2*rho_2 - I*b_x*log_a*rho_1 - I*b_x + 4*c**2*log_a**3*rho_2 + 3*c**2*log_a**2*rho_1 + 2*c**2*log_a - 3*c*chi_rate*log_a**2*rho_2 - 2*c*chi_rate*log_a*rho_1 - c*chi_rate - 3*c*log_a**2*rho_2_x - 2*c*log_a*rho_1_x - 3*c_x*log_a**2*rho_2 - 2*c_x*log_a*rho_1 - c_x",
+        "I*L_N**2*b*c*rho_2 + L_N**2*c**2*rho_2 + 2*L_N*b**2*log_a*rho_2 + L_N*b**2*rho_1 - 8*I*L_N*b*c*log_a*rho_2 - 3*I*L_N*b*c*rho_1 - 6*L_N*c**2*log_a*rho_2 - 2*L_N*c**2*rho_1 + L_N*c*chi_rate*rho_2 + L_N*c*rho_2_x + L_N*c_x*rho_2 - 3*b**2*log_a**2*rho_2 - 2*b**2*log_a*rho_1 - b**2 + 9*I*b*c*log_a**2*rho_2 + 5*I*b*c*log_a*rho_1 + 2*I*b*c - 2*I*b*chi_rate*log_a*rho_2 - I*b*chi_rate*rho_1 - 2*I*b*log_a*rho_2_x - I*b*rho_1_x + I*b*rho_2*u_N_x - 2*I*b_x*log_a*rho_2 - I*b_x*rho_1 + 6*c**2*log_a**2*rho_2 + 3*c**2*log_a*rho_1 + c**2 - 3*c*chi_rate*log_a*rho_2 - c*chi_rate*rho_1 - 3*c*log_a*rho_2_x - c*rho_1_x - 3*c_x*log_a*rho_2 - c_x*rho_1",
+        "L_N*b**2*rho_2 - 3*I*L_N*b*c*rho_2 - 2*L_N*c**2*rho_2 - 3*b**2*log_a*rho_2 - b**2*rho_1 + 7*I*b*c*log_a*rho_2 + 2*I*b*c*rho_1 - I*b*chi_rate*rho_2 - I*b*rho_2_x - I*b_x*rho_2 + 4*c**2*log_a*rho_2 + c**2*rho_1 - c*chi_rate*rho_2 - c*rho_2_x - c_x*rho_2",
+        "-b**2*rho_2 + 2*I*b*c*rho_2 + c**2*rho_2"
+      ],
+      "P_Q": [
+        "I*L_N*b*log_a**2*rho_2 + I*L_N*b*log_a*rho_1 + I*L_N*b + L_N*c*log_a**2*rho_2 + L_N*c*log_a*rho_1 + L_N*c - I*b*log_a**3*rho_2 - I*b*log_a**2*rho_1 - I*b*log_a - c*log_a**3*rho_2 - c*log_a**2*rho_1 - c*log_a + chi_rate*log_a**2*rho_2 + chi_rate*log_a*rho_1 + chi_rate + log_a**2*rho_2_x + log_a*rho_1_x",
+        "2*I*L_N*b*log_a*rho_2 + I*L_N*b*rho_1 + 2*L_N*c*log_a*rho_2 + L_N*c*rho_1 - 3*I*b*log_a**2*rho_2 - 2*I*b*log_a*rho_1 - I*b - 3*c*log_a**2*rho_2 - 2*c*log_a*rho_1 - c + 2*chi_rate*log_a*rho_2 + chi_rate*rho_1 + 2*log_a*rho_2_x + rho_1_x",
+        "I*L_N*b*rho_2 + L_N*c*rho_2 - 3*I*b*log_a*rho_2 - I*b*rho_1 - 3*c*log_a*rho_2 - c*rho_1 + chi_rate*rho_2 + rho_2_x",
+        "-I*b*rho_2 - c*rho_2",
+        "0"
+      ],
+      "P_V": [
+        "log_a**2*rho_2 + log_a*rho_1 + 1",
+        "2*log_a*rho_2 + rho_1",
+        "rho_2",
+        "0",
+        "0"
+      ]
+    },
+    "identities": {
+      "centered_translation": {
+        "P_A": "0",
+        "P_N": "0",
+        "P_Q": "0",
+        "P_V": "0"
+      },
+      "edge_additive_ownership": "0",
+      "lift_zero_endpoint": "0",
+      "moment_vector_vs_polynomial_law": {
+        "P_A": "0",
+        "P_N": "0",
+        "P_Q": "0",
+        "P_V": "0"
+      },
+      "rate_cancellation": "0",
+      "tangent_lift": {
+        "P_A": "0",
+        "P_N": "0",
+        "P_Q": "0",
+        "P_V": "0"
+      }
+    },
+    "moment_vector_rows": {
+      "P_A": [
+        "L_N*c + I*b*log_a",
+        "L_N*c*rho_1 + I*b*log_a*rho_1 - I*b - c",
+        "L_N*c*rho_2 + I*b*log_a*rho_2 - I*b*rho_1 - c*rho_1",
+        "-I*b*rho_2 - c*rho_2",
+        "0"
+      ],
+      "P_N": [
+        "I*L_N**2*b*c + L_N**2*c**2 - L_N*b**2*log_a + I*L_N*b*c*log_a + L_N*c*chi_rate + L_N*c_x + I*b*chi_rate*log_a + I*b*u_N_x + I*b_x*log_a",
+        "I*L_N**2*b*c*rho_1 + L_N**2*c**2*rho_1 - L_N*b**2*log_a*rho_1 + L_N*b**2 + I*L_N*b*c*log_a*rho_1 - 3*I*L_N*b*c - 2*L_N*c**2 + L_N*c*chi_rate*rho_1 + L_N*c*rho_1_x + L_N*c_x*rho_1 + b**2*log_a - I*b*c*log_a + I*b*chi_rate*log_a*rho_1 - I*b*chi_rate + I*b*log_a*rho_1_x + I*b*rho_1*u_N_x + I*b_x*log_a*rho_1 - I*b_x - c*chi_rate - c_x",
+        "I*L_N**2*b*c*rho_2 + L_N**2*c**2*rho_2 - L_N*b**2*log_a*rho_2 + L_N*b**2*rho_1 + I*L_N*b*c*log_a*rho_2 - 3*I*L_N*b*c*rho_1 - 2*L_N*c**2*rho_1 + L_N*c*chi_rate*rho_2 + L_N*c*rho_2_x + L_N*c_x*rho_2 + b**2*log_a*rho_1 - b**2 - I*b*c*log_a*rho_1 + 2*I*b*c + I*b*chi_rate*log_a*rho_2 - I*b*chi_rate*rho_1 + I*b*log_a*rho_2_x - I*b*rho_1_x + I*b*rho_2*u_N_x + I*b_x*log_a*rho_2 - I*b_x*rho_1 + c**2 - c*chi_rate*rho_1 - c*rho_1_x - c_x*rho_1",
+        "L_N*b**2*rho_2 - 3*I*L_N*b*c*rho_2 - 2*L_N*c**2*rho_2 + b**2*log_a*rho_2 - b**2*rho_1 - I*b*c*log_a*rho_2 + 2*I*b*c*rho_1 - I*b*chi_rate*rho_2 - I*b*rho_2_x - I*b_x*rho_2 + c**2*rho_1 - c*chi_rate*rho_2 - c*rho_2_x - c_x*rho_2",
+        "-b**2*rho_2 + 2*I*b*c*rho_2 + c**2*rho_2"
+      ],
+      "P_Q": [
+        "I*L_N*b + L_N*c + chi_rate",
+        "I*L_N*b*rho_1 + L_N*c*rho_1 - I*b - c + chi_rate*rho_1 + rho_1_x",
+        "I*L_N*b*rho_2 + L_N*c*rho_2 - I*b*rho_1 - c*rho_1 + chi_rate*rho_2 + rho_2_x",
+        "-I*b*rho_2 - c*rho_2",
+        "0"
+      ],
+      "P_V": [
+        "1",
+        "rho_1",
+        "rho_2",
+        "0",
+        "0"
+      ]
+    },
+    "polynomial_law_rows": {
+      "P_A": [
+        "L_N*c + I*b*log_a",
+        "L_N*c*rho_1 + I*b*log_a*rho_1 - I*b - c",
+        "L_N*c*rho_2 + I*b*log_a*rho_2 - I*b*rho_1 - c*rho_1",
+        "-I*b*rho_2 - c*rho_2",
+        "0"
+      ],
+      "P_N": [
+        "I*L_N**2*b*c + L_N**2*c**2 - L_N*b**2*log_a + I*L_N*b*c*log_a + L_N*c*chi_rate + L_N*c_x + I*b*chi_rate*log_a + I*b*u_N_x + I*b_x*log_a",
+        "I*L_N**2*b*c*rho_1 + L_N**2*c**2*rho_1 - L_N*b**2*log_a*rho_1 + L_N*b**2 + I*L_N*b*c*log_a*rho_1 - 3*I*L_N*b*c - 2*L_N*c**2 + L_N*c*chi_rate*rho_1 + L_N*c*rho_1_x + L_N*c_x*rho_1 + b**2*log_a - I*b*c*log_a + I*b*chi_rate*log_a*rho_1 - I*b*chi_rate + I*b*log_a*rho_1_x + I*b*rho_1*u_N_x + I*b_x*log_a*rho_1 - I*b_x - c*chi_rate - c_x",
+        "I*L_N**2*b*c*rho_2 + L_N**2*c**2*rho_2 - L_N*b**2*log_a*rho_2 + L_N*b**2*rho_1 + I*L_N*b*c*log_a*rho_2 - 3*I*L_N*b*c*rho_1 - 2*L_N*c**2*rho_1 + L_N*c*chi_rate*rho_2 + L_N*c*rho_2_x + L_N*c_x*rho_2 + b**2*log_a*rho_1 - b**2 - I*b*c*log_a*rho_1 + 2*I*b*c + I*b*chi_rate*log_a*rho_2 - I*b*chi_rate*rho_1 + I*b*log_a*rho_2_x - I*b*rho_1_x + I*b*rho_2*u_N_x + I*b_x*log_a*rho_2 - I*b_x*rho_1 + c**2 - c*chi_rate*rho_1 - c*rho_1_x - c_x*rho_1",
+        "L_N*b**2*rho_2 - 3*I*L_N*b*c*rho_2 - 2*L_N*c**2*rho_2 + b**2*log_a*rho_2 - b**2*rho_1 - I*b*c*log_a*rho_2 + 2*I*b*c*rho_1 - I*b*chi_rate*rho_2 - I*b*rho_2_x - I*b_x*rho_2 + c**2*rho_1 - c*chi_rate*rho_2 - c*rho_2_x - c_x*rho_2",
+        "-b**2*rho_2 + 2*I*b*c*rho_2 + c**2*rho_2"
+      ],
+      "P_Q": [
+        "I*L_N*b + L_N*c + chi_rate",
+        "I*L_N*b*rho_1 + L_N*c*rho_1 - I*b - c + chi_rate*rho_1 + rho_1_x",
+        "I*L_N*b*rho_2 + L_N*c*rho_2 - I*b*rho_1 - c*rho_1 + chi_rate*rho_2 + rho_2_x",
+        "-I*b*rho_2 - c*rho_2",
+        "0"
+      ],
+      "P_V": [
+        "1",
+        "rho_1",
+        "rho_2",
+        "0",
+        "0"
+      ]
+    },
+    "tangent_rows": {
+      "P_A": [
+        "-I*L_N*c*log_a + b*log_a**2",
+        "-I*L_N*c*log_a*rho_1 + I*L_N*c + b*log_a**2*rho_1 - 2*b*log_a + I*c*log_a",
+        "-I*L_N*c*log_a*rho_2 + I*L_N*c*rho_1 + b*log_a**2*rho_2 - 2*b*log_a*rho_1 + b + I*c*log_a*rho_1 - I*c",
+        "I*L_N*c*rho_2 - 2*b*log_a*rho_2 + b*rho_1 + I*c*log_a*rho_2 - I*c*rho_1",
+        "b*rho_2 - I*c*rho_2",
+        "0"
+      ],
+      "P_N": [
+        "L_N**2*b*c*log_a - I*L_N**2*c**2*log_a + I*L_N*b**2*log_a**2 + L_N*b*c*log_a**2 - I*L_N*c*chi_rate*log_a - I*L_N*c_x*log_a + b*chi_rate*log_a**2 + b*log_a*u_N_x + b_x*log_a**2",
+        "L_N**2*b*c*log_a*rho_1 - L_N**2*b*c - I*L_N**2*c**2*log_a*rho_1 + I*L_N**2*c**2 + I*L_N*b**2*log_a**2*rho_1 - 2*I*L_N*b**2*log_a + L_N*b*c*log_a**2*rho_1 - 4*L_N*b*c*log_a + 2*I*L_N*c**2*log_a - I*L_N*c*chi_rate*log_a*rho_1 + I*L_N*c*chi_rate - I*L_N*c*log_a*rho_1_x - I*L_N*c_x*log_a*rho_1 + I*L_N*c_x - I*b**2*log_a**2 - b*c*log_a**2 + b*chi_rate*log_a**2*rho_1 - 2*b*chi_rate*log_a + b*log_a**2*rho_1_x + b*log_a*rho_1*u_N_x - b*u_N_x + b_x*log_a**2*rho_1 - 2*b_x*log_a + I*c*chi_rate*log_a + I*c_x*log_a",
+        "L_N**2*b*c*log_a*rho_2 - L_N**2*b*c*rho_1 - I*L_N**2*c**2*log_a*rho_2 + I*L_N**2*c**2*rho_1 + I*L_N*b**2*log_a**2*rho_2 - 2*I*L_N*b**2*log_a*rho_1 + I*L_N*b**2 + L_N*b*c*log_a**2*rho_2 - 4*L_N*b*c*log_a*rho_1 + 3*L_N*b*c + 2*I*L_N*c**2*log_a*rho_1 - 2*I*L_N*c**2 - I*L_N*c*chi_rate*log_a*rho_2 + I*L_N*c*chi_rate*rho_1 - I*L_N*c*log_a*rho_2_x + I*L_N*c*rho_1_x - I*L_N*c_x*log_a*rho_2 + I*L_N*c_x*rho_1 - I*b**2*log_a**2*rho_1 + 2*I*b**2*log_a - b*c*log_a**2*rho_1 + 3*b*c*log_a + b*chi_rate*log_a**2*rho_2 - 2*b*chi_rate*log_a*rho_1 + b*chi_rate + b*log_a**2*rho_2_x - 2*b*log_a*rho_1_x + b*log_a*rho_2*u_N_x - b*rho_1*u_N_x + b_x*log_a**2*rho_2 - 2*b_x*log_a*rho_1 + b_x - I*c**2*log_a + I*c*chi_rate*log_a*rho_1 - I*c*chi_rate + I*c*log_a*rho_1_x + I*c_x*log_a*rho_1 - I*c_x",
+        "-L_N**2*b*c*rho_2 + I*L_N**2*c**2*rho_2 - 2*I*L_N*b**2*log_a*rho_2 + I*L_N*b**2*rho_1 - 4*L_N*b*c*log_a*rho_2 + 3*L_N*b*c*rho_1 + 2*I*L_N*c**2*log_a*rho_2 - 2*I*L_N*c**2*rho_1 + I*L_N*c*chi_rate*rho_2 + I*L_N*c*rho_2_x + I*L_N*c_x*rho_2 - I*b**2*log_a**2*rho_2 + 2*I*b**2*log_a*rho_1 - I*b**2 - b*c*log_a**2*rho_2 + 3*b*c*log_a*rho_1 - 2*b*c - 2*b*chi_rate*log_a*rho_2 + b*chi_rate*rho_1 - 2*b*log_a*rho_2_x + b*rho_1_x - b*rho_2*u_N_x - 2*b_x*log_a*rho_2 + b_x*rho_1 - I*c**2*log_a*rho_1 + I*c**2 + I*c*chi_rate*log_a*rho_2 - I*c*chi_rate*rho_1 + I*c*log_a*rho_2_x - I*c*rho_1_x + I*c_x*log_a*rho_2 - I*c_x*rho_1",
+        "I*L_N*b**2*rho_2 + 3*L_N*b*c*rho_2 - 2*I*L_N*c**2*rho_2 + 2*I*b**2*log_a*rho_2 - I*b**2*rho_1 + 3*b*c*log_a*rho_2 - 2*b*c*rho_1 + b*chi_rate*rho_2 + b*rho_2_x + b_x*rho_2 - I*c**2*log_a*rho_2 + I*c**2*rho_1 - I*c*chi_rate*rho_2 - I*c*rho_2_x - I*c_x*rho_2",
+        "-I*b**2*rho_2 - 2*b*c*rho_2 + I*c**2*rho_2"
+      ],
+      "P_Q": [
+        "L_N*b*log_a - I*L_N*c*log_a - I*chi_rate*log_a",
+        "L_N*b*log_a*rho_1 - L_N*b - I*L_N*c*log_a*rho_1 + I*L_N*c - b*log_a + I*c*log_a - I*chi_rate*log_a*rho_1 + I*chi_rate - I*log_a*rho_1_x",
+        "L_N*b*log_a*rho_2 - L_N*b*rho_1 - I*L_N*c*log_a*rho_2 + I*L_N*c*rho_1 - b*log_a*rho_1 + b + I*c*log_a*rho_1 - I*c - I*chi_rate*log_a*rho_2 + I*chi_rate*rho_1 - I*log_a*rho_2_x + I*rho_1_x",
+        "-L_N*b*rho_2 + I*L_N*c*rho_2 - b*log_a*rho_2 + b*rho_1 + I*c*log_a*rho_2 - I*c*rho_1 + I*chi_rate*rho_2 + I*rho_2_x",
+        "b*rho_2 - I*c*rho_2",
+        "0"
+      ],
+      "P_V": [
+        "-I*log_a",
+        "-I*log_a*rho_1 + I",
+        "-I*log_a*rho_2 + I*rho_1",
+        "I*rho_2",
+        "0",
+        "0"
+      ]
+    }
+  }
+}

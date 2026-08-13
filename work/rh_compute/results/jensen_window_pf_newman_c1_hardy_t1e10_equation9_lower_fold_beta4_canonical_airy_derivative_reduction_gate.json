@@ -1,0 +1,141 @@
+{
+  "Airy_ODE": "A(X)=Ai(-X); A''(X)=-X*A(X)",
+  "date": "2026-08-13",
+  "decision": {
+    "all_derivatives_reduced_to_Ai_and_first_derivative": true,
+    "beta_minus_4_two_dimensional_model_reduced_exactly": true,
+    "complete_Q_K_minus_T_bound_proved": false,
+    "complete_T_upper_proved": false,
+    "highest_required_Airy_derivative": 10,
+    "leading_Section_11_315_formula_recovered_at_epsilon_zero": true,
+    "ordinary_carrier_branch_match_proved": false,
+    "rh_implication": false
+  },
+  "dependencies": {
+    "all_event_cells": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_event_parameter_second_order_all_event_continuous_height_gate.json",
+      "sha256": "72c3e83b41a72d14fd15117eb5ad1d4aa46ebad635b475951d46a9ce805e17e3"
+    },
+    "beta4_normal_form": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_event_parameter_extreme_second_order_normal_form_gate.json",
+      "sha256": "91882be6978da9b89eef71fd40f213217eee4d25e5473dfe5fa68a0452b7160a"
+    },
+    "leading_Airy_reduction": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_characteristic_canonical_core_quadrature_gate.json",
+      "sha256": "a2c10d683d5753968091a4d41c4e8df9520e112bc0b6a8d6fe4fcd20e1a93870"
+    }
+  },
+  "derivative_recurrence": [
+    {
+      "P_k": "1",
+      "Q_k": "0",
+      "k": 0
+    },
+    {
+      "P_k": "0",
+      "Q_k": "1",
+      "k": 1
+    },
+    {
+      "P_k": "-X",
+      "Q_k": "0",
+      "k": 2
+    },
+    {
+      "P_k": "-1",
+      "Q_k": "-X",
+      "k": 3
+    },
+    {
+      "P_k": "X**2",
+      "Q_k": "-2",
+      "k": 4
+    },
+    {
+      "P_k": "4*X",
+      "Q_k": "X**2",
+      "k": 5
+    },
+    {
+      "P_k": "4 - X**3",
+      "Q_k": "6*X",
+      "k": 6
+    },
+    {
+      "P_k": "-9*X**2",
+      "Q_k": "10 - X**3",
+      "k": 7
+    },
+    {
+      "P_k": "X**4 - 28*X",
+      "Q_k": "-12*X**2",
+      "k": 8
+    },
+    {
+      "P_k": "16*X**3 - 28",
+      "Q_k": "X**4 - 52*X",
+      "k": 9
+    },
+    {
+      "P_k": "-X**5 + 100*X**2",
+      "Q_k": "20*X**3 - 80",
+      "k": 10
+    }
+  ],
+  "exact_reduction": "2*pi*Integral_0^Y exp(i*y^2/(4*beta))*D_M(y)*(U*Ai(-lambda-y)+V*d_X Ai(-X)|_(X=lambda+y))dy",
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_canonical_airy_derivative_reduction_gate",
+  "moment_identity": "Integral_Abel z^k exp(i*(z^3/3-X*z)) dz = 2*pi*i^k*d_X^k Ai(-X), 0<=k<=10",
+  "next_action": "Prove a remainder-controlled Ai(-X), d_X Ai(-X) branch expansion on each ordinary corridor and identify it with the classical/Gamma carrier, while retaining the exact Airy form at fold overlap.",
+  "normal_form": {
+    "C1": "-I*y**2*z/4 + I*y*z**3/3 + y/2 - 2*I*z**5/15 - 3*z**2/4",
+    "C2": "-y**4*z**2/32 + y**3*z**4/12 - I*y**3*z/8 - 4*y**2*z**6/45 + 7*I*y**2*z**3/16 + 2*y*z**8/45 - 9*I*y*z**5/20 - 3*y*z**2/8 - 2*z**10/225 + 97*I*z**7/630 + 13*z**4/32",
+    "a1": "y/2 - 3*z**2/4",
+    "a2": "-3*y*z**2/8 + 13*z**4/32",
+    "r1": "-y**2*z/4 + y*z**3/3 - 2*z**5/15",
+    "r2": "y**2*z**3/12 - 2*y*z**5/15 + 17*z**7/315"
+  },
+  "passed": true,
+  "pi_provenance": "Ai(-X)=(2*pi)^(-1) Integral_Abel exp(i*(z^3/3-X*z))dz",
+  "proof_boundary": "Exact corrected canonical-model reduction only. No Airy-to-ordinary carrier remainder theorem, corridor splice, Q_K-T bound, complete T_upper, height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "reduced_weights_X_y": {
+    "U1": "-13*X/60 + y/6",
+    "U2": "-2*X**5/225 + 2*X**4*y/45 - 4*X**3*y**2/45 + X**2*y**3/12 - 913*X**2/10080 - X*y**4/32 + 13*X*y/72 - 59*y**2/720",
+    "V1": "2*X**2/15 - X*y/3 + y**2/4",
+    "V2": "X**3/42 - X**2*y/12 + 23*X*y**2/240 - y**3/24 + 9/560"
+  },
+  "reduced_weights_lambda_y": {
+    "U1": "-(13*lambda + 3*y)/60",
+    "U2": "-(448*lambda**5 + 280*lambda**2*y**3 + 4565*lambda**2 - 105*lambda*y**4 + 30*lambda*y + 63*y**5 - 405*y**2)/50400",
+    "V1": "(8*lambda**2 - 4*lambda*y + 3*y**2)/60",
+    "V2": "-(-40*lambda**3 + 20*lambda**2*y - lambda*y**2 + 9*y**3 - 27)/1680"
+  },
+  "resource_policy": {
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "runtime": {
+    "elapsed_seconds": 0.185
+  },
+  "scope": {
+    "Y": "finite nonnegative",
+    "beta": "positive real",
+    "lambda": "real",
+    "mode_roster": "arbitrary finite real detuning roster",
+    "z_integral": "symmetric Abel oscillatory limit on the real line"
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_canonical_airy_derivative_reduction_gate.py",
+      "sha256": "f9d9004dfb0328430f746c69c11c177188a9cdccb10f2848f2bff57e9e629566"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_canonical_airy_derivative_reduction_gate.py",
+      "sha256": "ba1dd62a18f171b71645cc116d6ee75ba2075114b53b4d7b9d0378811d33f28f"
+    },
+    "note": {
+      "path": "outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_canonical_airy_derivative_reduction_gate.md",
+      "sha256": "ae92cd776f2e2f86287e2d104c64deb5abcd1a3ae7d3b80b7d123ecd4a1763ae"
+    }
+  },
+  "status": "exact_beta_minus_4_fold_canonical_Airy_derivative_reduction_proved"
+}

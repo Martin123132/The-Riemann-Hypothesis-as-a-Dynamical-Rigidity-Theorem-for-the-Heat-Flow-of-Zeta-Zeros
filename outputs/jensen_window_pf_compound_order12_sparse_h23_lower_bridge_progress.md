@@ -99,14 +99,6 @@ python work/rh_compute/scripts/check_jensen_window_pf_compound_order12_sparse_h2
   --require-complete
 ```
 
-The repository publishes the validated prefix as a lossless gzip archive. Its
-archive wrapper restores a temporary JSONL stream and runs the same independent
-segment checker:
-
-```powershell
-python work/rh_compute/scripts/check_jensen_window_pf_compound_order12_sparse_h23_lower_bridge_archive.py
-```
-
 Only after the complete checker passes may the promotion generator and its
 checker be run.
 

@@ -1,6 +1,6 @@
 # Core Proof-Programme Gate Runner
 
-Date: 2026-07-31
+Date: 2026-08-09
 
 Status: reproducibility ledger. This is not a proof of PF-infinity,
 Laguerre-Polya membership, RH, or `Lambda <= 0`.
@@ -27,7 +27,20 @@ python work/rh_compute/scripts/check_core_proof_programme_gates.py --skip-slow
 
 Current result:
 
-The runner has `522` gates: `502` non-slow and `20` slow.  On 2026-07-30
+As of 2026-08-09 the runner has `665` registered gates: `634` non-slow and
+`31` explicitly slow.  A fresh single-process, below-normal-priority replay
+passes all `634/634` non-slow gates, including the four new block-21--28
+signed-bridge gates.  Its resumable checkpoint is
+
+```text
+work/rh_compute/results/core_proof_programme_gates_20260809_block21_28_checkpoint.json
+```
+
+The 31 slow gates were not rerun in this daytime cycle and retain their prior
+separate validation status.  The proof-claim ledger now validates 646 claims
+with zero issues and nine open theorem targets.
+
+Historical context: on 2026-07-30
 the immediately preceding single-process non-slow registry passed `489/489` at
 below-normal Windows priority.  The sum of measured child-gate runtimes was
 `2362.353` seconds.  The replay used one active checker at a time, was
@@ -45,9 +58,9 @@ adjacent-cutoff transport gate, endpoint-composed Vaughan gate, complex
 endpoint source-normalization corrigendum, endpoint-relative phase-current
 recurrence gate, real-edge projective-current gate, and q=1 finite-height
 real-edge remainder gate, the full critical-ray real-edge gate, and the
-adjacent-cutoff real-edge projective splice gate, together with the current
-`504`-claim ledger, pass focused replay.  A complete
-`502/502` replay is
+adjacent-cutoff real-edge projective splice gate, together with the
+then-current `504`-claim ledger, passed focused replay.  A complete
+then-current `502/502` replay was
 pending.  The
 durable preceding-state
 checkpoint is
@@ -58,7 +71,7 @@ SHA-256 44d1d2f9b2d0250258503e07140f6d4447871239c52f6c8097ff08e9616032db
 registry signature b2edddefed099ecc2f50f91cbbaec433c169d1b7493e6229ab46234cabf3c631
 ```
 
-The current 502-gate registry has a separate validated 0/502 parked
+That 502-gate registry has a separate validated 0/502 parked
 checkpoint:
 
 ```text
@@ -466,7 +479,7 @@ output reference integrity:
   files; current run has 0 missing required paths and 3 planned deliverables
 
 proof-claim ledger:
-  validates 504 classified claims, including 9 open theorem targets that remain
+  validates 527 classified claims, including 9 open theorem targets that remain
   explicitly unproved
 
 signed-Hankel/Jensen dependency graph:
@@ -2533,7 +2546,7 @@ Current quick result:
 
 ```text
 latest completed non-slow umbrella: 489/489 core proof-programme gates
-the current runner has 522 gates: 502 non-slow and 20 slow
+the current runner has 545 gates: 525 non-slow and 20 slow
 aggregate child-gate time: 2362.353 seconds
 new coverage includes the counterfactual birth-signature atlas,
 the cofinal boundary-degree transfer, the Q208 right-strip theorem,
@@ -2543,7 +2556,7 @@ and complete refined-tail collar gates,
 the focused forward Q207-to-Q208 successor gate,
 the focused single-carrier adiabatic benchmark,
 the degree-361 Newman real-zero-band/sector theorem,
-the reconciled radial and strict-Laguerre gates, the 504-claim ledger,
+the reconciled radial and strict-Laguerre gates, the 527-claim ledger,
 dependency graph, bridge obligations, result-language boundaries,
 output status manifest, output reference integrity,
 the complete dyadic all-length heat-starlikeness theorem,
@@ -2558,10 +2571,14 @@ the complex endpoint source-normalization corrigendum,
 the endpoint-relative phase-current recurrence gate,
 the real-edge projective-current gate,
 the q=1 and full critical-ray finite-height real-edge gates,
-and the adjacent-cutoff real-edge projective splice gate
+the adjacent-cutoff real-edge projective splice gate,
+the six-moment Morse-Fresnel endpoint-composition retention gate,
+the six-moment Morse-Fresnel observation-image compression gate,
+the physical P_lin Morse-amplitude gate,
+and the physical P_lin correction-coefficient envelope gate
 ```
 
-The current 504-claim ledger and the post-2026-07-25
+The current 527-claim ledger and the post-2026-07-25
 forward-successor, single-carrier, crossing-slope-gap, adaptive-jet, scaled-successor,
 ray-aligned exhaustion, first-successor relative-scale, and contact-normal
 hierarchy gates, together with the first endpoint-coefficient peeling
@@ -2878,12 +2895,119 @@ The final
 suffix-energy, suffix-localization, joined-energy equivalence, claim-ledger,
 dependency-graph, bridge-obligation,
 theorem-machinery, language-boundary, status, and reference-integrity gates
-passed on that umbrella state; the thirteen subsequently registered gates
-and current 504-claim ledger pass focused checks on the current source
-state.  A complete current `502/502` replay remains pending.  The 20 explicitly slow
-gates remain outside this quick pass and retain their separately validated
-status. Earlier reduction and finite-prefix artifacts retain their local proof
-boundaries.
+pass on the current umbrella state.  Earlier reduction and finite-prefix
+artifacts retain their local proof boundaries.
+
+The current registry contains 676 unique gates: 645 non-slow and 31 explicitly
+slow.  The forty-eight gates added with Formal Core Sections 11.255--11.299
+pass focused checks, and the proof-claim ledger validates 657 claims with zero
+issues and nine open theorem targets.  A complete `641/641` non-slow umbrella
+replay passes through Section 11.295; the new exact-Hardy calibration and
+lower-RS/hybrid-upper split and classical upper-main remainder-split gates
+and the equation-(124) classical block-partition atlas pass focused
+70/110/130-digit checks separately.  The 31 slow gates were not rerun in that
+daytime cycle.  These gates
+localize the block-20 discrepancy while ruling out native recurrence
+inversion ambiguity, separate use of the commented ecor quartic term,
+displayed W1 finite-index clipping, the default-real sqrt(2.0) literal, and
+the complete finite equation-(69) saddle family as sole explanations.  They
+also isolate an exact source-only `-1/(L+1)` term absent from published W2
+equation (89); removing it improves all 374 calls.  The exact W2--W5
+orientation and special-function evaluation leaves every smaller residual
+nonzero, and the cubic far-field audit shows that one of the two printed
+infinite vertical nonsaddle contours fails for every saved call.  The
+sign-aware `5*pi/6`, `pi/2`, and `pi/6` sector contract now repairs exact
+contour existence, connector decay, quadratic-ray rotation, and termwise
+summability on all 374 calls.  Summing `1/n` first then reduces the exact
+nonsaddle target to four logarithmic endpoint-ray integrals and one optional
+zero mode.  Singularity-subtracted Arb quadrature now encloses that finite
+representation and its difference from W2--W4 on all 374 calls, proving that
+the surviving finite residual is exactly the full-cubic nonsaddle correction.
+The paper's approximation is now decomposed exactly into a generic endpoint-
+linear baseline, whose digamma sum is W5, and exceptional W2--W4 quadratic or
+zero-mode replacements.  A raw componentwise triangle bound loses a factor up
+to about 138940; pairing each exceptional term with its exact remainder lowers
+this to about 210 but still exposes cancellation between the two endpoint
+families.  Exact mode recombination removes the apparent `1/delta` and
+`1/eta` poles before estimation.  A shared-contour homotopy now gives symbolic
+gap-uniform Gaussian majorants for every W2 mode and every W3 mode, with all
+374 and 165 finite applications respectively certified by Arb.  A Cauchy
+deformation then identifies W4 as the corresponding exact-minus-model n=0
+endpoint difference, and explicit Hurwitz moments sum every generic
+exact-minus-linear tail.  This yields a selector-gap-uniform local endpoint
+majorant on all 374 calls.  Exact binary128 observation then inventories all
+3180 outer weight rows and proves that the first absolute transport is about
+0.00858014, above the nominal 0.005 scale.  Retaining the common-ray homotopy
+decay sharpens the transported endpoint-model budget below 0.002189215 on all
+fifteen outputs without using signed cancellation.  Transport over all 374
+occupied coefficient boxes raises this only to 0.002196524 and still closes
+all fifteen outputs.  The exact cubic stationary radical now closes the
+complete saved-point Legendre phase-and-amplitude tail on all 753 child
+indices; its transported contribution is below 0.000150954, and endpoint plus
+tail remains below 0.002347477 on all fifteen outputs.  Factoring the exact
+phase remainder by `z^2` and removing the common unit-modulus child phase then
+extends the complete tail to every occupied coefficient cell.  The transported
+cell-tail column is below 0.000169449, and endpoint plus cell tail stays below
+0.002365972 on all fifteen outputs.  The correlated definition
+`W69(M,C)=I69-M*C` then shows that the broad child, multiplier, parent, and
+equation-(69) variations are not independent error columns: they cancel
+exactly, leaving only the endpoint discrepancy, below 0.002196524 on all
+fifteen outputs.  A signed finite bridge now composes the source's exact-W1,
+source-only t2, special-function, and binary-normalization corrections on all
+374 calls.  Every handoff overlaps the independent endpoint decomposition;
+after the PSI/ERF replacement the remaining nonsaddle normalization is below
+1.582e-9.  A full t=10^10 observer atlas now records 6784 calls over blocks
+20--35, with 1414 recursive and 5370 direct calls; recursion ends in block 28,
+and exact binary margins preserve the recursive theorem's structural domain.
+The retained endpoint theorem then covers all 1414 recursive calls.  Its
+global maximum remains the admitted block-20 value below 0.004879658, while
+every later block maximum is smaller.  A source-equivalent observer now
+captures all 50880 exact binary128 outer-weight rows for blocks 20--35 without
+changing evaluator state or displayed values.  Absolute transport of the 1414
+recursive endpoint majorants then gives a complete recursive output column
+below 0.005805801, only 1.161161 times the nominal 0.005 scale but not yet
+closed.  All 5370 direct kernels are now independently enclosed at two Arb
+precisions and transported through the same exact weights; their entire output
+column is below 3.851e-29.  The complete 6784-call exact-point maximum is
+therefore still 0.005805801 under the all-retained triangle bound.  Replacing
+only block 20 by its already certified dyadic full-contour correction intervals
+then closes the corrected-model endpoint/direct column below 0.003807296 on
+all fifteen outputs, without signed cross-call cancellation.  The next targets
+were full-contour extension beyond block 20, later source arithmetic, and the
+outer Hardy representation.  The length-generic signed bridge now closes all
+307 block-21 calls and all 733 calls in blocks 22--28 at 70 and 110 decimal
+digits.  Together with block 20 this gives exact contour corrections for all
+1414 recursive exact-point calls.  Absolute-magnitude outer transport, plus
+the 5370 direct calls, bounds every complete saved output below
+0.000443988875, leaving more than 0.004556 below the nominal 0.005 scale and
+using no cross-call cancellation.  The signed analytic corrected-model
+correction is now transported over nonzero-radius selector-stable coefficient
+cells for all 1040 recursive calls in blocks 21--28.  Every 70/110-digit cell
+enclosure overlaps its saved point correction and remains inside its retained
+majorant; exact outer transport keeps all fifteen complete outputs below
+0.000448798734 without cross-call cancellation.  The pinned source environment
+now verifies radix-2, 113-bit, round-to-nearest binary128.  Exact preimage
+cells, complete factored cubic Legendre tails, and source complex multiply-add
+rounding envelopes close on all 1040 later calls.  Their exact outer transport
+keeps all fifteen partial complete outputs below 0.001185344 and leaves more
+than 0.00381465 below 0.005.  A source-q dependency cut proves that emitted q
+and saved special-function payloads are not antecedents of that corrected-
+model certificate.  The outer-Hardy ledger then finds four exact identities,
+one enclosed internal column, and thirteen open columns.  In particular the
+paper explicitly calls equations (126)--(127) non-exact, the source input
+`et=0.005` is not itself a proved Hardy-error bound, and all fifteen saved
+outputs remain uncertified as Hardy-Z or Xi values.  The active frontier is an
+independent finite Arb Hardy calibration followed by a constant-bearing outer
+remainder derived from an exact Riemann--Siegel or Hardy identity.  That Arb
+calibration now rigorously shows that all fifteen saved source outputs miss the
+exact Hardy targets by more than 0.005; even the most favorable perturbation
+bounded by the completed internal column leaves a residual above 0.00545097.
+This rejects the saved run's accuracy target but has no RH implication.  An
+exact component split then localizes the discrepancy: lower n<=621 arithmetic
+is below 4.862e-9, final addition below 7.001e-41, while the hybrid-upper ZP
+error is 0.0066363--0.0072474, dominates all fifteen rows by more than six
+orders of magnitude, and alone rejects 0.005.  The finite saved-height work
+proves none of the remaining global obligations.
 
 For machine-readable output:
 

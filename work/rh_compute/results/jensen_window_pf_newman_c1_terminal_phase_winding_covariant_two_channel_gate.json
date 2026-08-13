@@ -1,0 +1,204 @@
+{
+  "kind": "jensen_window_pf_newman_c1_terminal_phase_winding_covariant_two_channel_gate",
+  "schema_version": 1,
+  "date": "2026-08-04",
+  "status": "complete fixed-N terminal-phase winding and exact covariant two-channel matrix proved; joined physical-current inequality open",
+  "source_sha256": {
+    "q1_phase": "2eebbbac71106d6248ac9261316ea5ed2466e78e2b93565044a4d8d80e9a331e",
+    "relative_lift": "7b0f9df6bcc1d50becb3fcf28f62fff7545c63451229418cd3b3a954ca81425c",
+    "anchor": "2064f5bbf9e74fc100d40dd3f7d596f79eb463f4803aa1426d724466487f2219",
+    "disk": "e8d63820b85e451422306acf0e526c68cb8a42d2ab1960d5b033ee3fb296af48"
+  },
+  "source_audit": {
+    "q1_phase": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_q1_saddle_phase_variance_reduction.json",
+      "sha256": "2eebbbac71106d6248ac9261316ea5ed2466e78e2b93565044a4d8d80e9a331e"
+    },
+    "relative_lift": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_terminal_nonterminal_relative_lift_gate.json",
+      "sha256": "7b0f9df6bcc1d50becb3fcf28f62fff7545c63451229418cd3b3a954ca81425c"
+    },
+    "anchor": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_carrier_near_odd_harmonic_anchor_gate.json",
+      "sha256": "2064f5bbf9e74fc100d40dd3f7d596f79eb463f4803aa1426d724466487f2219"
+    },
+    "disk": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_reciprocal_stationary_disk_geometry_gate.json",
+      "sha256": "e8d63820b85e451422306acf0e526c68cb8a42d2ab1960d5b033ee3fb296af48"
+    }
+  },
+  "exact": {
+    "phase_cell": {
+      "cutoff_law": "On q=1, a(L)^2=exp(L)+1/(32L^2), T_0=2pi a(L)^2, Omega=T_0-epsilon, and 0<epsilon<7/(8L^2x), with x=4pi exp(L).",
+      "cutoff_monotonicity": "The derivative of a(L)^2 is exp(L)-1/(16L^3)>0 for L>=50. Thus a is continuous, strictly increasing, and unbounded.",
+      "complete_cells": "For every integer N>=ceil(a(50)), there are unique L_N and L_(N+1) with a(L_N)=N and a(L_(N+1))=N+1. This is a complete fixed-N cutoff cell.",
+      "terminal_phase": "At the physical frequency xi=Omega, E_N=|E_N|exp(i phi_N) with phi_N(L)=Omega(L)log N.",
+      "endpoint_identity": "Across a complete fixed-N cell, Delta phi_N=[2pi(2N+1)+epsilon(L_N)-epsilon(L_(N+1))]log N.",
+      "epsilon_guard": "For L>=50, x>1 makes 0<epsilon<7/(8L^2x)<1. Hence Delta phi_N>[2pi(2N+1)-1]log N>4pi N log N.",
+      "full_turn": "Since N>=2 and log N>=log 2>1/2, Delta phi_N>4pi N log N>2pi. The last comparison can be checked using pi>3 and pi<22/7; the actual physical N is vastly larger.",
+      "circle_coverage": "A continuous real phase whose endpoint increment exceeds 2pi assumes a representative of every residue class modulo 2pi in the cell interior: choose k=floor((phi_left-theta)/(2pi))+1, so phi_left<theta+2pi k<=phi_left+2pi<phi_right. Therefore exp(i phi_N) covers the whole unit circle independently of the half-open endpoint convention.",
+      "sector_guard": "No fixed proper phase sector contains the terminal phase on a complete fixed-N cell. In particular sin(phi_N) takes both signs and vanishes, so the raw negative anchors in Section 11.213 cannot have a cell-uniform physical projection by a fixed terminal sector.",
+      "complete_cell_winding_theorems": 1,
+      "circle_surjectivity_theorems": 1,
+      "fixed_sector_obstructions": 1
+    },
+    "covariant_current": {
+      "mixed_current": "Let h=Re(conjugate(tau_0)mathcal J_H^0), t=tau_0 mathcal J_T^0, and z=nu c_xi. The ideal joined mixed current is R_id(z)=(1/2){|z|^2 h+Re(z^2 t)}.",
+      "matrix_form": "Writing z=x+iy and t=u+iv gives R_id=[x y]Q(h,t)[x y]^T with Q(h,t)=(1/2)[[h+u,-v],[-v,h-u]].",
+      "spectral_form": "The trace and determinant are h and (h^2-|t|^2)/4, so the eigenvalues are (h-|t|)/2 and (h+|t|)/2.",
+      "actual_phase_criterion": "For z=r exp(i gamma), R_id=(r^2/2){h+Re(exp(2i gamma)t)}. Negativity for the actual source phase is exactly h+Re(exp(2i gamma)t)<0.",
+      "uniform_phase_criterion": "Negativity for every nonzero source phase is equivalent to negative definiteness of Q, hence to the single phase-invariant inequality h+|t|<0. Nonpositivity is equivalent to h+|t|<=0.",
+      "anchor_pair": "For tau_0=rho exp(i(phi_N-pi/2)) and the raw centres mathcal J_H^0=-A_H, mathcal J_T^0=-A_T, one has h_0=-rho A_H sin(phi_N) and |t_0|=rho A_T.",
+      "center_obstruction": "Because every complete cell contains phi_N=3pi/2 modulo 2pi, the centre-only phase-uniform margin h_0+|t_0| equals rho(A_H+A_T)>0 there. Static negative centres cannot prove a source-phase-uniform current theorem on a complete cell.",
+      "surviving_target": "Estimate the complete tie-invariant Hermitian/transpose pair before projection. Either prove the actual-phase inequality h+Re(exp(2i gamma_phys)t) plus all correction rows is below the required negative reserve, or prove the stronger invariant inequality h+|t| plus those rows is below it. Residual phase correlation, not two independent anchor disks, is now the live arithmetic content.",
+      "proof_guard": "The phase-uniform criterion is stronger than the theorem at one known physical source phase. Its failure for the bare centres does not disprove the complete current: the signed reciprocal residuals, physical corrections, fixed affine row, and moved-tail defect have not been estimated.",
+      "covariant_matrix_identities": 1,
+      "source_phase_uniform_criteria": 1,
+      "center_only_obstructions": 1
+    }
+  },
+  "rows": [
+    {
+      "id": "tpw_01_q1_law",
+      "role": "physical phase law",
+      "readiness": "proved",
+      "claim": "The q=1 cutoff and physical frequency have an exact one-sided epsilon law.",
+      "certificate": "On q=1, a(L)^2=exp(L)+1/(32L^2), T_0=2pi a(L)^2, Omega=T_0-epsilon, and 0<epsilon<7/(8L^2x), with x=4pi exp(L).",
+      "proof_boundary": "Only the fixed physical q=1 chart is used."
+    },
+    {
+      "id": "tpw_02_monotone",
+      "role": "cutoff monotonicity",
+      "readiness": "proved",
+      "claim": "The saddle cutoff is strictly increasing for L>=50.",
+      "certificate": "The derivative of a(L)^2 is exp(L)-1/(16L^3)>0 for L>=50. Thus a is continuous, strictly increasing, and unbounded.",
+      "proof_boundary": "No integer roster is frozen across a crossing."
+    },
+    {
+      "id": "tpw_03_cells",
+      "role": "complete cells",
+      "readiness": "proved",
+      "claim": "Every sufficiently large integer cutoff has a unique complete L-cell.",
+      "certificate": "For every integer N>=ceil(a(50)), there are unique L_N and L_(N+1) with a(L_N)=N and a(L_(N+1))=N+1. This is a complete fixed-N cutoff cell.",
+      "proof_boundary": "The first partial cell at L=50 is excluded."
+    },
+    {
+      "id": "tpw_04_phase",
+      "role": "terminal phase",
+      "readiness": "proved",
+      "claim": "The physical terminal phase is Omega log N on a fixed-N cell.",
+      "certificate": "At the physical frequency xi=Omega, E_N=|E_N|exp(i phi_N) with phi_N(L)=Omega(L)log N.",
+      "proof_boundary": "This is the phase of E_N before source projection."
+    },
+    {
+      "id": "tpw_05_endpoint",
+      "role": "endpoint identity",
+      "readiness": "proved",
+      "claim": "The exact cell endpoint phase increment is explicit.",
+      "certificate": "Across a complete fixed-N cell, Delta phi_N=[2pi(2N+1)+epsilon(L_N)-epsilon(L_(N+1))]log N.",
+      "proof_boundary": "No phase samples or fitted unwrapping are used."
+    },
+    {
+      "id": "tpw_06_epsilon",
+      "role": "epsilon guard",
+      "readiness": "proved",
+      "claim": "The one-sided physical correction cannot remove the macroscopic phase increment.",
+      "certificate": "For L>=50, x>1 makes 0<epsilon<7/(8L^2x)<1. Hence Delta phi_N>[2pi(2N+1)-1]log N>4pi N log N.",
+      "proof_boundary": "The bound is deliberately coarse but uniform."
+    },
+    {
+      "id": "tpw_07_turn",
+      "role": "full-turn theorem",
+      "readiness": "proved",
+      "claim": "Every complete fixed-N cell gains more than one full terminal turn.",
+      "certificate": "Since N>=2 and log N>=log 2>1/2, Delta phi_N>4pi N log N>2pi. The last comparison can be checked using pi>3 and pi<22/7; the actual physical N is vastly larger.",
+      "proof_boundary": "This is a terminal-phase theorem, not a current sign."
+    },
+    {
+      "id": "tpw_08_circle",
+      "role": "circle coverage",
+      "readiness": "proved",
+      "claim": "The terminal phase covers every direction on every complete cell.",
+      "certificate": "A continuous real phase whose endpoint increment exceeds 2pi assumes a representative of every residue class modulo 2pi in the cell interior: choose k=floor((phi_left-theta)/(2pi))+1, so phi_left<theta+2pi k<=phi_left+2pi<phi_right. Therefore exp(i phi_N) covers the whole unit circle independently of the half-open endpoint convention.",
+      "proof_boundary": "Coverage follows from continuity and endpoint variation."
+    },
+    {
+      "id": "tpw_09_sector",
+      "role": "sector obstruction",
+      "readiness": "proved",
+      "claim": "A fixed proper terminal phase sector cannot be uniform on a complete cell.",
+      "certificate": "No fixed proper phase sector contains the terminal phase on a complete fixed-N cell. In particular sin(phi_N) takes both signs and vanishes, so the raw negative anchors in Section 11.213 cannot have a cell-uniform physical projection by a fixed terminal sector.",
+      "proof_boundary": "Adaptive phase localization is not ruled out."
+    },
+    {
+      "id": "tpw_10_current",
+      "role": "two-channel current",
+      "readiness": "proved",
+      "claim": "The ideal joined current has one Hermitian scalar and one transpose spin-two scalar.",
+      "certificate": "Let h=Re(conjugate(tau_0)mathcal J_H^0), t=tau_0 mathcal J_T^0, and z=nu c_xi. The ideal joined mixed current is R_id(z)=(1/2){|z|^2 h+Re(z^2 t)}.",
+      "proof_boundary": "Correction and affine rows remain outside this ideal block."
+    },
+    {
+      "id": "tpw_11_matrix",
+      "role": "covariant matrix",
+      "readiness": "proved",
+      "claim": "The source phase is represented by an exact real symmetric 2x2 quadratic form.",
+      "certificate": "Writing z=x+iy and t=u+iv gives R_id=[x y]Q(h,t)[x y]^T with Q(h,t)=(1/2)[[h+u,-v],[-v,h-u]].",
+      "proof_boundary": "No positivity of that matrix is asserted."
+    },
+    {
+      "id": "tpw_12_spectrum",
+      "role": "matrix spectrum",
+      "readiness": "proved",
+      "claim": "The two invariant eigenvalues are determined by h and |t|.",
+      "certificate": "The trace and determinant are h and (h^2-|t|^2)/4, so the eigenvalues are (h-|t|)/2 and (h+|t|)/2.",
+      "proof_boundary": "This is algebraic compression only."
+    },
+    {
+      "id": "tpw_13_actual",
+      "role": "actual-phase criterion",
+      "readiness": "proved",
+      "claim": "The physical source phase has an exact scalar sign criterion.",
+      "certificate": "For z=r exp(i gamma), R_id=(r^2/2){h+Re(exp(2i gamma)t)}. Negativity for the actual source phase is exactly h+Re(exp(2i gamma)t)<0.",
+      "proof_boundary": "The inequality itself remains unproved."
+    },
+    {
+      "id": "tpw_14_uniform",
+      "role": "phase-uniform criterion",
+      "readiness": "proved",
+      "claim": "A source-phase-uniform theorem is equivalent to h+|t|<0.",
+      "certificate": "Negativity for every nonzero source phase is equivalent to negative definiteness of Q, hence to the single phase-invariant inequality h+|t|<0. Nonpositivity is equivalent to h+|t|<=0.",
+      "proof_boundary": "This criterion is stronger than one fixed physical phase."
+    },
+    {
+      "id": "tpw_15_centres",
+      "role": "centre-only obstruction",
+      "readiness": "proved",
+      "claim": "The raw anchor centres cannot make the covariant matrix negative on a complete cell.",
+      "certificate": "Because every complete cell contains phi_N=3pi/2 modulo 2pi, the centre-only phase-uniform margin h_0+|t_0| equals rho(A_H+A_T)>0 there. Static negative centres cannot prove a source-phase-uniform current theorem on a complete cell.",
+      "proof_boundary": "This does not obstruct signed residual rotation."
+    },
+    {
+      "id": "tpw_16_target",
+      "role": "covariant current target",
+      "readiness": "open",
+      "claim": "The live target is a joined phase-correlated Hermitian/transpose current estimate.",
+      "certificate": "Estimate the complete tie-invariant Hermitian/transpose pair before projection. Either prove the actual-phase inequality h+Re(exp(2i gamma_phys)t) plus all correction rows is below the required negative reserve, or prove the stronger invariant inequality h+|t| plus those rows is below it. Residual phase correlation, not two independent anchor disks, is now the live arithmetic content.",
+      "proof_boundary": "No signed current, contact exclusion, Lambda<=0, or RH conclusion is claimed."
+    }
+  ],
+  "summary": {
+    "rows": 16,
+    "complete_cell_winding_theorems": 1,
+    "circle_surjectivity_theorems": 1,
+    "fixed_sector_obstructions": 1,
+    "covariant_matrix_identities": 1,
+    "source_phase_uniform_criteria": 1,
+    "center_only_obstructions": 1,
+    "live_covariant_current_targets": 1
+  },
+  "next_action": "Work with the complete physical pair h=Re(conjugate(tau_0)mathcal J_H) and t=tau_0 mathcal J_T, including the correction polynomials, fixed affine row, and moved-tail defect before projection. First derive the exact actual-source-phase scalar h+Re(exp(2i gamma_phys)t) in the contact-box normalization. Then test whether reciprocal stationary recomposition can prove its signed reserve. Use h+|t| only if a genuinely source-phase-uniform theorem is sought; do not estimate the two channels or their anchor disks independently.",
+  "pi_provenance": "The factor 2pi in T_0=2pi a^2 and alpha_P=xi/(2pi) comes from the completed-zeta saddle and the Fourier character e(y)=exp(2pi i y). The threshold 2pi is one period of exp(i phi_N). The rational bounds pi>3 and pi<22/7 only certify a deliberately coarse full-turn inequality. No circle, polygon, or fitted plotting constant is inserted into the model.",
+  "proof_boundary": "This gate proves complete-cell winding of the physical q=1 terminal phase, failure of any fixed proper terminal phase sector on such a cell, the exact Hermitian/transpose source-phase quadratic matrix, its invariant eigenvalues, and a centre-only obstruction to source-phase-uniform negativity. It proves no signed reciprocal residual estimate, actual-source-phase current inequality, correction-row bound, all-q transport, contact-box exclusion, Q209 shell, cofinal successor, Lambda<=0, RH, or prize-level conclusion.",
+  "success": "built Newman C1 terminal-phase winding/covariant two-channel gate: 16 rows, 0 issues, 1 full-cell winding theorem, 1 circle-surjectivity theorem, 1 phase-uniform criterion, 1 centre-only obstruction, 1 live covariant current target"
+}

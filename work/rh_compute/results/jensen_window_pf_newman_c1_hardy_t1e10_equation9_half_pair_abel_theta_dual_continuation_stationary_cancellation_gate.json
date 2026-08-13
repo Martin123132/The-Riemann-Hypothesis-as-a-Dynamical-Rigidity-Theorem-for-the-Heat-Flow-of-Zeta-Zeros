@@ -1,0 +1,73 @@
+{
+  "decision": {
+    "all_k_at_least_K_plus_1_are_z_nonstationary": true,
+    "all_matched_positive_continuation_reduced_phases_are_x_nonstationary": true,
+    "complete_T_upper_proved": false,
+    "complete_modular_continuation_bounded": false,
+    "dual_continuation_saddle_roster_partition_complete": true,
+    "exceptional_k_0_face_fold_term_cancelled": false,
+    "leading_universal_z_stationary_channel_cancels_for_k_1_through_K": true,
+    "matched_positive_continuation_pairs": 79788,
+    "rh_implication": false,
+    "scalar_endpoint_channel_survives": true,
+    "uniform_z_stationary_expansion_remainder_bounded": false
+  },
+  "dependencies": {
+    "Abel_theta_roster": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_modular_dual_roster_gate.json",
+      "sha256": "b5295bd15ac42385f1cee282e66d9dc05f65c54746d02b265ee4f7341ee5cae5"
+    }
+  },
+  "interval_certificate": {
+    "A_minus_threshold_ball": "[0.08783942692882402157602624725260965654753402613693362966813173682964027926459949906643707722542970855 +/- 3.01e-96]",
+    "B_roster_offset": 2481422,
+    "continuation_partition": {
+      "k_0": "B has the alpha=A interior z saddle while A has its n=0 face term; no cancellation is asserted",
+      "k_1_through_K": "79788 matched positive-alpha interior-z saddle pairs; all are x-nonstationary",
+      "k_at_least_K_plus_1": "k>=79789 gives alpha<=-1, so the formal z saddle lies outside 0<z<x"
+    },
+    "height": 10000000000,
+    "lower_endpoint": 159577,
+    "paired_scalar_coefficient_ball": "[-2.428538818921985054081296773582498652697662687871837964467097719657559868827644325303470803504936578e-5 +/- 3.46e-105]",
+    "paired_scalar_coefficient_exact": "4*(159577-5122421)/(159577*5122421)",
+    "positive_continuation_pairs": 79788,
+    "threshold_minus_A_minus_2_ball": "[1.912160573071175978423973752747390343452465973863066370331868263170359720735400500933562922774570291 +/- 3.01e-96]",
+    "threshold_sqrt_8t_over_pi_ball": "[159576.9121605730711759784239737527473903434524659738630663703318682631703597207354005009335629227746 +/- 3.28e-95]",
+    "uniform_x_derivative_magnitude_lower_ball": "[479304.7041125798458878933024084241487050751473858115512743255266943577473971531088360046745008905107 +/- 3.37e-91]",
+    "upper_endpoint": 5122421
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_continuation_stationary_cancellation_gate",
+  "next_obligation": "Derive a uniform paired z-stationary expansion for k=1..K with the B-minus-A driver grouped, bound its remainder before summing, integrate the surviving scalar channel in x using the certified derivative gap, treat k=0 in the existing face/fold chart, and bound k>=K+1 by z-nonstationary integration.",
+  "passed": true,
+  "proof_boundary": "Leading z-stationary cancellation and exact continuation saddle classification only. No uniform stationary remainder, summed continuation bound, k=0 fold splice, complete source-minus-target estimate, T_upper, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.439,
+    "flint_threads": 1,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_continuation_stationary_cancellation_gate.py",
+      "sha256": "10c8bc1cf65cdeb0e8b777fbcd0b656a77612305fe656be84acca30274c3f171"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_continuation_stationary_cancellation_gate.py",
+      "sha256": "da138a709d3759583a7f1f42778d306c7a669265e5097d5fb4d09373d6c71be1"
+    }
+  },
+  "status": "leading_dual_continuation_stationary_channel_cancels_and_remaining_positive_labels_are_x_nonstationary",
+  "symbolic_certificate": {
+    "cancelled_channel": "the universal 2*i*pi*alpha*x^(3/2) channel cancels exactly",
+    "continuation_label": "alpha=A-2k=alpha_(B,L+k)=alpha_(A,k)",
+    "dual_z_saddle": "z_*(D,alpha)=x*alpha/D for 0<alpha<D",
+    "endpoint_driver": "h_D(z)=z^(-1/2)(2+i*pi*D^2*z)",
+    "leading_stationary_multiplier": "M_D(alpha,x)=4*sqrt(x)/D+2*i*pi*alpha*x^(3/2)",
+    "modular_coordinate": "r_*=(D-alpha)/(x*alpha)",
+    "outer_amplitude_residual": "a_t(x)(M_B-M_A)=4(1/B-1/A)x^(-5/4)(1-x)^(-1/4)",
+    "paired_difference": "M_B-M_A=4*sqrt(x)(1/B-1/A)",
+    "reduced_phase": "psi_alpha(x)=pi*alpha^2*x/4+(t/2)log((1-x)/x)",
+    "x_phase_derivative": "psi_alpha'(x)=pi*alpha^2/4-t/[2x(1-x)]",
+    "z_Hessian": "Psi_zz(z_*)=-pi*D^3/[2(D-alpha)x]"
+  }
+}

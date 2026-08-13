@@ -1,0 +1,311 @@
+{
+  "counts": {
+    "absolute_kernel_bounds": 3,
+    "complete_outer_complement_bounds": 0,
+    "edge_endpoint_factorizations": 1,
+    "edge_terminal_suppression_templates": 1,
+    "full_support_linear_functionals": 1,
+    "hermitian_transpose_decompositions": 1,
+    "integer_removable_formulas": 1,
+    "moving_tail_placements": 1,
+    "outer_band_rosters": 1,
+    "phi_b_bounds": 0,
+    "pole_free_kernel_families": 3,
+    "quadratic_remainder_bounds": 0,
+    "rows": 27,
+    "signed_full_current_bounds": 0,
+    "stable_endpoint_functionals": 2,
+    "terminal_plin_evaluations": 1,
+    "twofold_outer_recompositions": 1
+  },
+  "date": "2026-08-02",
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_outer_endpoint_kernel_gate",
+  "proof_boundary": "This proves a stable joined representation of the full-support outer modes, exact endpoint reassembly, physical P_lin pullthrough, h-scale terminal centering of the genuine-edge endpoint trace, and Hermitian/transpose decomposition of the four quadratic outer pairings. It proves no complete outer-complement bound, quadratic residual estimate, signed full-current or Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Q209, cofinal descendant theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "certificate": "m_N=floor(alpha_P/(N+1/2))+1, n_N=floor(2alpha_P), and R_N={m_N,...,n_N}.",
+      "claim": "The reciprocal physical band is one finite integer roster.",
+      "id": "oek_01_band",
+      "proof_boundary": "The outer modes remain infinite.",
+      "readiness": "proved",
+      "role": "full-support band"
+    },
+    {
+      "certificate": "For x(u)=alpha_P/u, a_x=x-m_N+1>1/4 and b_x=n_N+1-x>alpha_P on 1<=u<=N.",
+      "claim": "Every possible stationary integer lies inside the band.",
+      "id": "oek_02_distance",
+      "proof_boundary": "This is not an outer-sum bound.",
+      "readiness": "proved",
+      "role": "pole separation"
+    },
+    {
+      "certificate": "The complement uses the same half-open reciprocal band as the finite-cell theorem; at a moving integer tie its transfer must be joined to the band before differentiation.",
+      "claim": "Band/complement transfer uses the exact half-open convention.",
+      "id": "oek_03_tie",
+      "proof_boundary": "The complement must not be differentiated alone at a tie.",
+      "readiness": "guard_validated",
+      "role": "tie guard"
+    },
+    {
+      "certificate": "S_1^[N](x)=psi(b_x)-psi(a_x)=PV sum_(r notin R_N)1/(x-r).",
+      "claim": "Both outer tails have one stable joined first-order kernel.",
+      "id": "oek_04_s1",
+      "proof_boundary": "It may grow logarithmically.",
+      "readiness": "proved",
+      "role": "conditional kernel"
+    },
+    {
+      "certificate": "S_2^[N](x)=zeta(2,a_x)+zeta(2,b_x)=sum_(r notin R_N)1/(x-r)^2.",
+      "claim": "The second-order outer kernel is an absolute Hurwitz sum.",
+      "id": "oek_05_s2",
+      "proof_boundary": "This does not bound physical coefficients.",
+      "readiness": "proved",
+      "role": "absolute kernel"
+    },
+    {
+      "certificate": "S_3^[N](x)=zeta(3,a_x)-zeta(3,b_x)=sum_(r notin R_N)1/(x-r)^3.",
+      "claim": "The third-order outer kernel retains the tail orientation.",
+      "id": "oek_06_s3",
+      "proof_boundary": "Its sign alone does not sign the flow.",
+      "readiness": "proved",
+      "role": "signed absolute kernel"
+    },
+    {
+      "certificate": "At integer x in R_N, S_1^[N](x)=H_(n_N-x)-H_(x-m_N); no cotangent pole is separated.",
+      "claim": "Integral stationary crossings have a finite harmonic value.",
+      "id": "oek_07_integer",
+      "proof_boundary": "Separating cotangent poles is forbidden.",
+      "readiness": "proved",
+      "role": "removable value"
+    },
+    {
+      "certificate": "On the physical segment S_2^[N]<21, |S_3^[N]|<73, and Z_4^[N]<278. These bound kernels, not the complete outer functional.",
+      "claim": "All absolute denominator kernels needed after two integrations are uniformly bounded.",
+      "id": "oek_08_kernel_bounds",
+      "proof_boundary": "No complete outer-complement estimate follows.",
+      "readiness": "proved",
+      "role": "kernel envelope"
+    },
+    {
+      "certificate": "I_P(r)=kappa[e(phi_r)A_P/q_r]_1^N-kappa^2[e(phi_r)(D_rA_P)/q_r]_1^N+kappa^2 integral_1^N e(phi_r)C_rA_P du.",
+      "claim": "Every outer Fourier mode has an exact twofold nonstationary representation.",
+      "id": "oek_09_mode_ibp",
+      "proof_boundary": "Endpoint terms remain main terms.",
+      "readiness": "proved",
+      "role": "mode identity"
+    },
+    {
+      "certificate": "C_rA=A''/q_r^2-3A'q_r'/q_r^3-Aq_r''/q_r^3+3A(q_r')^2/q_r^4.",
+      "claim": "The twice-integrated interior operator is explicit.",
+      "id": "oek_10_operator",
+      "proof_boundary": "Its physical aggregate is not evaluated.",
+      "readiness": "proved",
+      "role": "interior operator"
+    },
+    {
+      "certificate": "B_mu^[N][P]=e(alpha_Plog mu){kappa A_P(mu)S_1^[N](alpha_P/mu)-kappa^2[A_P'(mu)S_2^[N](alpha_P/mu)+(alpha_P/mu^2)A_P(mu)S_3^[N](alpha_P/mu)]}.",
+      "claim": "Each physical endpoint is represented by one joined three-kernel functional.",
+      "id": "oek_11_endpoint",
+      "proof_boundary": "The N endpoint must remain joined to the edge row.",
+      "readiness": "proved",
+      "role": "endpoint package"
+    },
+    {
+      "certificate": "O_N[P]=B_N^[N][P]-B_1^[N][P]+kappa^2 sum_(r notin R_N)^sym integral_1^N e(phi_r)C_rA_P du.",
+      "claim": "The complete lower and upper complements reassemble before absolute values.",
+      "id": "oek_12_outer_sum",
+      "proof_boundary": "No scalar smallness is asserted.",
+      "readiness": "proved",
+      "role": "outer recomposition"
+    },
+    {
+      "certificate": "Only S_1 is principal-value conditional; the S_2, S_3, and interior C_r terms are absolutely summable after the joined twofold integration by parts.",
+      "claim": "Only the first endpoint kernel is conditionally convergent.",
+      "id": "oek_13_convergence",
+      "proof_boundary": "Its symmetric convention is structural.",
+      "readiness": "proved",
+      "role": "convergence"
+    },
+    {
+      "certificate": "The complete outer linear correction is Re[nu c_xi O_N[P_lin^[N]]], with no six-moment componentwise split.",
+      "claim": "The full outer linear correction remains one physical polynomial functional.",
+      "id": "oek_14_linear",
+      "proof_boundary": "The functional is not yet bounded.",
+      "readiness": "proved",
+      "role": "P_lin pullthrough"
+    },
+    {
+      "certificate": "P_lin^[N](log N)=F_(alpha_N)(log N)-i u_N F_(beta_N)(log N).",
+      "claim": "The terminal P_lin value separates its frequency and base rows exactly.",
+      "id": "oek_15_terminal_eval",
+      "proof_boundary": "The alpha row need not vanish.",
+      "readiness": "proved",
+      "role": "terminal evaluation"
+    },
+    {
+      "certificate": "For beta_E=(mathcal N_E,V_E,-Q_E,-A_E), P_E(lambda)=i(lambda-log a)F_(beta_E)(lambda).",
+      "claim": "The genuine endpoint enters only through the lifted beta row.",
+      "id": "oek_16_edge_split",
+      "proof_boundary": "The edge is not assigned to a scalar cell.",
+      "readiness": "proved",
+      "role": "edge row"
+    },
+    {
+      "certificate": "B_N^[N][P_E] has exact factor i exp(S(log N)) times {-kappa u_NF S_1-kappa^2 N^(-1)[F-u_N(F'+gF)]S_2+kappa^2 alpha_Pu_NN^(-2)F S_3}.",
+      "claim": "The N-endpoint edge trace is one pole-free exact expression.",
+      "id": "oek_17_edge_endpoint",
+      "proof_boundary": "No coefficient norm is inserted.",
+      "readiness": "proved",
+      "role": "edge composition"
+    },
+    {
+      "certificate": "The conditional S_1 edge coefficient has the exact factor u_N<2h; the remaining edge coefficients contain either N^(-1)<=(3/2)h or alpha_Pu_N/N^2<9h/2.",
+      "claim": "Every edge-only terminal multiplier carries h-scale suppression.",
+      "id": "oek_18_suppression",
+      "proof_boundary": "The surviving physical rows may still be large.",
+      "readiness": "proved",
+      "role": "terminal centering"
+    },
+    {
+      "certificate": "The F_(alpha_N)(log N) coefficient survives without u_N. Thus terminal centering suppresses the edge-only trace but does not algebraically cancel the complete lower-boundary package.",
+      "claim": "The terminal strip does not generically annihilate the complete lower-boundary trace.",
+      "id": "oek_19_noncancel",
+      "proof_boundary": "A source-specific signed estimate is still required.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion guard"
+    },
+    {
+      "certificate": "R_out=(1/2)Re[|nu|^2 H_out+nu^2 c_xi^2 T_out], where H_out uses O_X conjugate(O_dotY) and T_out uses O_X O_dotY with signs +,+,-,-.",
+      "claim": "The four outer observation pairings split exactly into Hermitian and transpose channels.",
+      "id": "oek_20_quadratic",
+      "proof_boundary": "Neither channel is signed here.",
+      "readiness": "proved",
+      "role": "quadratic image"
+    },
+    {
+      "certificate": "The common phase cancels exactly from H_out and appears squared in T_out.",
+      "claim": "The common auxiliary phase behaves correctly in both quadratic channels.",
+      "id": "oek_21_phase",
+      "proof_boundary": "Imaginary coefficients remain.",
+      "readiness": "proved",
+      "role": "phase audit"
+    },
+    {
+      "certificate": "The retained moving-tail defect remains 2Delta(omega_C)^TJdot(omega_B)+2(omega_E+omega_B+omega_C)^TJdot(omega_C); it is not an outer-mode remainder and is added exactly once.",
+      "claim": "The moved terminal block remains a retained observation package.",
+      "id": "oek_22_move",
+      "proof_boundary": "It must not be counted as an outer residual.",
+      "readiness": "proved",
+      "role": "moving tail"
+    },
+    {
+      "certificate": "Estimate it jointly with the reciprocal-band carrier, Hermitian, transpose, correction, and moved-tail kernels before any modulus.",
+      "claim": "The only unsuppressed conditional boundary coefficient is the complete physical alpha-row trace.",
+      "id": "oek_23_route",
+      "proof_boundary": "The edge recurrence alone cannot close the sign.",
+      "readiness": "proved",
+      "role": "route decision"
+    },
+    {
+      "certificate": "Insert O_N[P_lin^[N]], H_out, T_out, and the moved-tail defect into tilde(Psi)' and establish the direct negative retained-current target.",
+      "claim": "Prove or falsify the joined full-support kernel at the h^2 flow scale.",
+      "id": "oek_24_handoff",
+      "proof_boundary": "No such estimate is proved here.",
+      "readiness": "open",
+      "role": "signed theorem"
+    },
+    {
+      "certificate": "e(x)=exp(2pi i x), kappa=1/(2pi i), and the cotangent audit is the symmetric integer partial fraction; no plotted geometry is used.",
+      "claim": "All pi factors come from the fixed Fourier and completed-zeta conventions.",
+      "id": "oek_25_pi",
+      "proof_boundary": "No geometric inference is made.",
+      "readiness": "proved",
+      "role": "pi provenance"
+    },
+    {
+      "certificate": "The S2, S3, and Z4 bounds control denominators only; physical coefficient and signed correlation bounds remain open.",
+      "claim": "Kernel bounds are not promoted to a signed current theorem.",
+      "id": "oek_26_scope",
+      "proof_boundary": "No Phi_B or retained-current sign follows.",
+      "readiness": "guard_validated",
+      "role": "scope guard"
+    },
+    {
+      "certificate": "No complete outer bound, quadratic residual bound, signed flow, contact exclusion, Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is claimed.",
+      "claim": "This gate is an exact endpoint-kernel reduction, not a proof of RH.",
+      "id": "oek_27_boundary",
+      "proof_boundary": "This is not a proof of RH.",
+      "readiness": "guard_validated",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "endpoint_composition": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_endpoint_composition_retention_gate.json",
+      "sha256": "378be6b1649a5a8ace90cb8b71baad383ba0f77fffdba84c3cc99fd2314f3cfc"
+    },
+    "finite_cell": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_ideal_cubic_reciprocal_finite_cell_inversion_gate.json",
+      "sha256": "52856581875a22fd16216f3282475bf2716fe8757d147dfb604ddac8ec14f5fd"
+    },
+    "full_support": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_ideal_cubic_reciprocal_terminal_full_support_homotopy_gate.json",
+      "sha256": "24a7caf7787b5b0764a4a60591dbf615957fc3799dc7f39e2c8d57331621e1d5"
+    },
+    "morse_endpoint": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_endpoint_reduction.json",
+      "sha256": "a0a2a9d98db6648a6c4fe720062c05e3cfdd28084730ee06791074a5902f3764"
+    },
+    "observation_image": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_observation_image_compression_gate.json",
+      "sha256": "8155e7e923285fdab23d6d9988287d136b70b2b405fe89afcfb9ee0004991317"
+    },
+    "physical_plin": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_amplitude_gate.json",
+      "sha256": "f9eda5af34ce5c54693265f99be2afaf294ef3395aadeea78cda2547346d02a6"
+    }
+  },
+  "status": "pole-free full-support outer endpoint kernel proved; complete signed estimate open",
+  "symbolic_certificate": {
+    "audit": {
+      "absolute_kernel_checks": 783,
+      "band_cases": 36,
+      "kernel_points": 261,
+      "noninteger_kernel_checks": 780,
+      "rational_symmetric_checks": 294,
+      "removable_integer_checks": 294
+    },
+    "outer_band": {
+      "pole_distance": "For x(u)=alpha_P/u, a_x=x-m_N+1>1/4 and b_x=n_N+1-x>alpha_P on 1<=u<=N.",
+      "roster": "m_N=floor(alpha_P/(N+1/2))+1, n_N=floor(2alpha_P), and R_N={m_N,...,n_N}.",
+      "tie_rule": "The complement uses the same half-open reciprocal band as the finite-cell theorem; at a moving integer tie its transfer must be joined to the band before differentiation."
+    },
+    "outer_identity": {
+      "convergence": "Only S_1 is principal-value conditional; the S_2, S_3, and interior C_r terms are absolutely summable after the joined twofold integration by parts.",
+      "endpoint": "B_mu^[N][P]=e(alpha_Plog mu){kappa A_P(mu)S_1^[N](alpha_P/mu)-kappa^2[A_P'(mu)S_2^[N](alpha_P/mu)+(alpha_P/mu^2)A_P(mu)S_3^[N](alpha_P/mu)]}.",
+      "mode": "I_P(r)=kappa[e(phi_r)A_P/q_r]_1^N-kappa^2[e(phi_r)(D_rA_P)/q_r]_1^N+kappa^2 integral_1^N e(phi_r)C_rA_P du.",
+      "operator": "C_rA=A''/q_r^2-3A'q_r'/q_r^3-Aq_r''/q_r^3+3A(q_r')^2/q_r^4.",
+      "sum": "O_N[P]=B_N^[N][P]-B_1^[N][P]+kappa^2 sum_(r notin R_N)^sym integral_1^N e(phi_r)C_rA_P du."
+    },
+    "physical_pullthrough": {
+      "edge_endpoint": "B_N^[N][P_E] has exact factor i exp(S(log N)) times {-kappa u_NF S_1-kappa^2 N^(-1)[F-u_N(F'+gF)]S_2+kappa^2 alpha_Pu_NN^(-2)F S_3}.",
+      "edge_split": "For beta_E=(mathcal N_E,V_E,-Q_E,-A_E), P_E(lambda)=i(lambda-log a)F_(beta_E)(lambda).",
+      "linear": "The complete outer linear correction is Re[nu c_xi O_N[P_lin^[N]]], with no six-moment componentwise split.",
+      "noncancellation": "The F_(alpha_N)(log N) coefficient survives without u_N. Thus terminal centering suppresses the edge-only trace but does not algebraically cancel the complete lower-boundary package.",
+      "suppression": "The conditional S_1 edge coefficient has the exact factor u_N<2h; the remaining edge coefficients contain either N^(-1)<=(3/2)h or alpha_Pu_N/N^2<9h/2.",
+      "terminal_value": "P_lin^[N](log N)=F_(alpha_N)(log N)-i u_N F_(beta_N)(log N)."
+    },
+    "quadratic_channels": {
+      "moved_tail": "The retained moving-tail defect remains 2Delta(omega_C)^TJdot(omega_B)+2(omega_E+omega_B+omega_C)^TJdot(omega_C); it is not an outer-mode remainder and is added exactly once.",
+      "phase": "The common phase cancels exactly from H_out and appears squared in T_out.",
+      "split": "R_out=(1/2)Re[|nu|^2 H_out+nu^2 c_xi^2 T_out], where H_out uses O_X conjugate(O_dotY) and T_out uses O_X O_dotY with signs +,+,-,-."
+    },
+    "stable_kernels": {
+      "S1": "S_1^[N](x)=psi(b_x)-psi(a_x)=PV sum_(r notin R_N)1/(x-r).",
+      "S2": "S_2^[N](x)=zeta(2,a_x)+zeta(2,b_x)=sum_(r notin R_N)1/(x-r)^2.",
+      "S3": "S_3^[N](x)=zeta(3,a_x)-zeta(3,b_x)=sum_(r notin R_N)1/(x-r)^3.",
+      "bounds": "On the physical segment S_2^[N]<21, |S_3^[N]|<73, and Z_4^[N]<278. These bound kernels, not the complete outer functional.",
+      "integer": "At integer x in R_N, S_1^[N](x)=H_(n_N-x)-H_(x-m_N); no cotangent pole is separated."
+    }
+  }
+}

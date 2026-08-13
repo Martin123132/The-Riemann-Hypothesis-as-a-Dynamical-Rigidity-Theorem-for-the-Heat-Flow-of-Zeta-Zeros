@@ -1,0 +1,61 @@
+{
+  "decision": {
+    "complete_B_face_estimate_proved": false,
+    "direct_Fresnel_and_boundary_current_truncations_identical": false,
+    "exact_rational_dictionary_correction_derived": true,
+    "nonlocal_dictionary_correction_absolutely_summed": true,
+    "physical_dictionary_correction_below_2p1e_minus_20": true,
+    "rh_implication": false
+  },
+  "dependencies": {
+    "B_window": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_B_face_gaussian_window_fresnel_remainder_gate.json",
+      "sha256": "ce9d2bc94cd669d07e25ac80df0172bd5de26b1da1b2b53afabad2cea6c585a5"
+    },
+    "higher_currents": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_B_face_higher_boundary_current_absolute_window_gate.json",
+      "sha256": "a1a9b5008a5f5c0ef20eb7a4577b595675d1a3637ee8185dbb59e2e0f307bdaf"
+    }
+  },
+  "interval_certificate": {
+    "analytic_tail_ball": "[4.687887249880842385334462367955122073908968816233092243839649931838627398404285312455472179848884670e-35 +/- 2.13e-132]",
+    "endpoint": 5122421,
+    "height": 10000000000,
+    "physical_dictionary_correction_ball": "[2.008623530541314263038626341400090849584077132853930785636956278176743558106204164082269591186308018e-20 +/- 2.06e-114]",
+    "physical_dictionary_correction_upper_bound": "2.1e-20",
+    "sum_cutoff": 100000,
+    "uniform_nonlocal_dictionary_correction_ball": "[1.473382220896900982381436728578127689315566567946299748218399913058673969628811570087359703502695308e-12 +/- 1.18e-106]",
+    "window_xi": [
+      -70,
+      70
+    ]
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_B_face_fresnel_boundary_truncation_dictionary_gate",
+  "next_obligation": "Insert this correction into the B-window partial budget, then use the direct Fresnel truncation on normal-safe local arcs and the exact continuous step-tail replacement on complementary outer-safe arcs.",
+  "passed": true,
+  "proof_boundary": "Only the exact three-term truncation dictionary and its nonlocal saved-height |xi|<=70 correction. No local replacement, outside-window tail, complete B estimate, A-fold splice, complete T_upper, height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level theorem is proved.",
+  "runtime": {
+    "elapsed_seconds": 1.073,
+    "flint_threads": 1,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_B_face_fresnel_boundary_truncation_dictionary_gate.py",
+      "sha256": "3966107ec08e0ac1b6ce3382e3b47aa8dc115ac65941b838af5872514fa40bd6"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_B_face_fresnel_boundary_truncation_dictionary_gate.py",
+      "sha256": "5e4e7583fbf82f3734517531bf3243fef1c5e48a5583fe995c42680e2022ab0e"
+    }
+  },
+  "status": "exact_Fresnel_boundary_truncation_dictionary_with_physical_correction_below_2p1e_minus_20",
+  "symbolic_certificate": {
+    "boundary_currents": "C_3,m=C_0,m+C_1,m+C_2,m",
+    "correction": "D_m=48*x^2*(B^4*x^4+40*B^2*m^2*x^2+80*m^4)/(pi^4*(B*x-2m)^5*(B*x+2m)^5)",
+    "dictionary": "C_3,m=F_3,m+D_m",
+    "direct_Fresnel_terms": "F_3,m=P_0,+ + P_1,+ + P_2,+ + P_0,- + P_1,- + P_2,-",
+    "remainder_transfer": "exact-C_3=(exact-F_3)-D_m, hence |exact-C_3|<=|R_F,m|+|D_m|"
+  }
+}

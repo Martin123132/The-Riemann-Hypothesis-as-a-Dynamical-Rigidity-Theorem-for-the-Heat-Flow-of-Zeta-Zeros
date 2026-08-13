@@ -1,0 +1,440 @@
+{
+  "contact_correction": {
+    "m3_heat_expansion": "lambda_D=lambda_*+rho/(8D)-rho*2^(-13/3)D^(-4/3)+rho*2^(-11/3)D^(-5/3)+o(D^(-5/3))",
+    "m3_parameter": "r_3=2^(-5/3)",
+    "m3_root": "s_3=(1-2n)/4",
+    "m3_root_expansion": "w_D=rho/D+rho*2^(-2/3)D^(-5/3)+rho*(1-2n)D^(-2)/4+o(D^(-2))",
+    "newman_shift_zero": "For rho=-c^2 and n=0: t_D=Lambda-c^2/(8D)+c^2*2^(-13/3)D^(-4/3)-c^2*2^(-11/3)D^(-5/3)+o(D^(-5/3)).",
+    "nondegenerate_contact_rule": "If P=P_y=0 and P_yy!=0 at (y_m,q_m), then the epsilon^2 value equation gives r_m=y_m/2 and the derivative equation gives s_m=(1-2n)/4."
+  },
+  "counts": {
+    "appell_identities": 28,
+    "degree_uniform_bounds": 0,
+    "exact_finite_models": 12,
+    "exact_m3_contact_corrections": 2,
+    "multiplicities": 14,
+    "open_handoffs": 2,
+    "operator_checks": 14,
+    "rh_conclusions": 0,
+    "rows": 15,
+    "shift_values": 2,
+    "sources": 3,
+    "unit_isolation_checks": 12
+  },
+  "date": "2026-08-03",
+  "exact_finite_model_audit": [
+    {
+      "epsilon_one_zero": true,
+      "epsilon_three_zero": true,
+      "first_local_unit_coefficient": "12*q**2*rho + 12*q*rho*y**2 + rho*y**4 + 2*rho*y",
+      "first_local_unit_target": "rho*(12*q**2 + 12*q*y**2 + y**4 + 2*y)",
+      "matched": true,
+      "multiplicity": 3,
+      "secondary_limit": "6*q*y + y**3 + 1/2",
+      "shift": 0,
+      "tertiary_correction": "3*q/2 + 6*r*y - 9*y**2/4"
+    },
+    {
+      "epsilon_one_zero": true,
+      "epsilon_three_zero": true,
+      "first_local_unit_coefficient": "60*q**2*rho*y + 20*q*rho*y**3 + 10*q*rho + rho*y**5 + 5*rho*y**2",
+      "first_local_unit_target": "rho*(60*q**2*y + 20*q*y**3 + 10*q + y**5 + 5*y**2)",
+      "matched": true,
+      "multiplicity": 4,
+      "secondary_limit": "12*q**2 + 12*q*y**2 + y**4 + 2*y",
+      "shift": 0,
+      "tertiary_correction": "24*q*r - 6*q*y + 12*r*y**2 - 5*y**3 + 1/2"
+    },
+    {
+      "epsilon_one_zero": true,
+      "epsilon_three_zero": true,
+      "first_local_unit_coefficient": "120*q**3*rho + 180*q**2*rho*y**2 + 30*q*rho*y**4 + 60*q*rho*y + rho*y**6 + 10*rho*y**3 + 5*rho/2",
+      "first_local_unit_target": "rho*(120*q**3 + 180*q**2*y**2 + 30*q*y**4 + 60*q*y + y**6 + 10*y**3 + 5/2)",
+      "matched": true,
+      "multiplicity": 5,
+      "secondary_limit": "60*q**2*y + 20*q*y**3 + 10*q + y**5 + 5*y**2",
+      "shift": 0,
+      "tertiary_correction": "15*q**2 + 120*q*r*y - 45*q*y**2 + 20*r*y**3 + 10*r - 35*y**4/4 - 5*y/2"
+    },
+    {
+      "epsilon_one_zero": true,
+      "epsilon_three_zero": true,
+      "first_local_unit_coefficient": "840*q**3*rho*y + 420*q**2*rho*y**3 + 210*q**2*rho + 42*q*rho*y**5 + 210*q*rho*y**2 + rho*y**7 + 35*rho*y**4/2 + 35*rho*y/2",
+      "first_local_unit_target": "rho*(840*q**3*y + 420*q**2*y**3 + 210*q**2 + 42*q*y**5 + 210*q*y**2 + y**7 + 35*y**4/2 + 35*y/2)",
+      "matched": true,
+      "multiplicity": 6,
+      "secondary_limit": "120*q**3 + 180*q**2*y**2 + 30*q*y**4 + 60*q*y + y**6 + 10*y**3 + 5/2",
+      "shift": 0,
+      "tertiary_correction": "360*q**2*r - 90*q**2*y + 360*q*r*y**2 - 150*q*y**3 + 15*q + 30*r*y**4 + 60*r*y - 27*y**5/2 - 45*y**2/2"
+    },
+    {
+      "epsilon_one_zero": true,
+      "epsilon_three_zero": true,
+      "first_local_unit_coefficient": "1680*q**4*rho + 3360*q**3*rho*y**2 + 840*q**2*rho*y**4 + 1680*q**2*rho*y + 56*q*rho*y**6 + 560*q*rho*y**3 + 140*q*rho + rho*y**8 + 28*rho*y**5 + 70*rho*y**2",
+      "first_local_unit_target": "rho*(1680*q**4 + 3360*q**3*y**2 + 840*q**2*y**4 + 1680*q**2*y + 56*q*y**6 + 560*q*y**3 + 140*q + y**8 + 28*y**5 + 70*y**2)",
+      "matched": true,
+      "multiplicity": 7,
+      "secondary_limit": "840*q**3*y + 420*q**2*y**3 + 210*q**2 + 42*q*y**5 + 210*q*y**2 + y**7 + 35*y**4/2 + 35*y/2",
+      "shift": 0,
+      "tertiary_correction": "210*q**3 + 2520*q**2*r*y - 945*q**2*y**2 + 840*q*r*y**3 + 420*q*r - 735*q*y**4/2 - 105*q*y + 42*r*y**5 + 210*r*y**2 - 77*y**6/4 - 175*y**3/2 + 35/8"
+    },
+    {
+      "epsilon_one_zero": true,
+      "epsilon_three_zero": true,
+      "first_local_unit_coefficient": "15120*q**4*rho*y + 10080*q**3*rho*y**3 + 5040*q**3*rho + 1512*q**2*rho*y**5 + 7560*q**2*rho*y**2 + 72*q*rho*y**7 + 1260*q*rho*y**4 + 1260*q*rho*y + rho*y**9 + 42*rho*y**6 + 210*rho*y**3 + 35*rho",
+      "first_local_unit_target": "rho*(15120*q**4*y + 10080*q**3*y**3 + 5040*q**3 + 1512*q**2*y**5 + 7560*q**2*y**2 + 72*q*y**7 + 1260*q*y**4 + 1260*q*y + y**9 + 42*y**6 + 210*y**3 + 35)",
+      "matched": true,
+      "multiplicity": 8,
+      "secondary_limit": "1680*q**4 + 3360*q**3*y**2 + 840*q**2*y**4 + 1680*q**2*y + 56*q*y**6 + 560*q*y**3 + 140*q + y**8 + 28*y**5 + 70*y**2",
+      "shift": 0,
+      "tertiary_correction": "6720*q**3*r - 1680*q**3*y + 10080*q**2*r*y**2 - 4200*q**2*y**3 + 420*q**2 + 1680*q*r*y**4 + 3360*q*r*y - 756*q*y**5 - 1260*q*y**2 + 56*r*y**6 + 560*r*y**3 + 140*r - 26*y**7 - 245*y**4 - 35*y"
+    },
+    {
+      "epsilon_one_zero": true,
+      "epsilon_three_zero": true,
+      "first_local_unit_coefficient": "12*q**2*rho + 12*q*rho*y**2 + rho*y**4 + 2*rho*y",
+      "first_local_unit_target": "rho*(12*q**2 + 12*q*y**2 + y**4 + 2*y)",
+      "matched": true,
+      "multiplicity": 3,
+      "secondary_limit": "6*q*y + y**3 + 1/2",
+      "shift": 3,
+      "tertiary_correction": "21*q/2 + 6*r*y + 9*y**2/4"
+    },
+    {
+      "epsilon_one_zero": true,
+      "epsilon_three_zero": true,
+      "first_local_unit_coefficient": "60*q**2*rho*y + 20*q*rho*y**3 + 10*q*rho + rho*y**5 + 5*rho*y**2",
+      "first_local_unit_target": "rho*(60*q**2*y + 20*q*y**3 + 10*q + y**5 + 5*y**2)",
+      "matched": true,
+      "multiplicity": 4,
+      "secondary_limit": "12*q**2 + 12*q*y**2 + y**4 + 2*y",
+      "shift": 3,
+      "tertiary_correction": "24*q*r + 30*q*y + 12*r*y**2 + y**3 + 7/2"
+    },
+    {
+      "epsilon_one_zero": true,
+      "epsilon_three_zero": true,
+      "first_local_unit_coefficient": "120*q**3*rho + 180*q**2*rho*y**2 + 30*q*rho*y**4 + 60*q*rho*y + rho*y**6 + 10*rho*y**3 + 5*rho/2",
+      "first_local_unit_target": "rho*(120*q**3 + 180*q**2*y**2 + 30*q*y**4 + 60*q*y + y**6 + 10*y**3 + 5/2)",
+      "matched": true,
+      "multiplicity": 5,
+      "secondary_limit": "60*q**2*y + 20*q*y**3 + 10*q + y**5 + 5*y**2",
+      "shift": 3,
+      "tertiary_correction": "105*q**2 + 120*q*r*y + 45*q*y**2 + 20*r*y**3 + 10*r - 5*y**4/4 + 25*y/2"
+    },
+    {
+      "epsilon_one_zero": true,
+      "epsilon_three_zero": true,
+      "first_local_unit_coefficient": "840*q**3*rho*y + 420*q**2*rho*y**3 + 210*q**2*rho + 42*q*rho*y**5 + 210*q*rho*y**2 + rho*y**7 + 35*rho*y**4/2 + 35*rho*y/2",
+      "first_local_unit_target": "rho*(840*q**3*y + 420*q**2*y**3 + 210*q**2 + 42*q*y**5 + 210*q*y**2 + y**7 + 35*y**4/2 + 35*y/2)",
+      "matched": true,
+      "multiplicity": 6,
+      "secondary_limit": "120*q**3 + 180*q**2*y**2 + 30*q*y**4 + 60*q*y + y**6 + 10*y**3 + 5/2",
+      "shift": 3,
+      "tertiary_correction": "360*q**2*r + 450*q**2*y + 360*q*r*y**2 + 30*q*y**3 + 105*q + 30*r*y**4 + 60*r*y - 9*y**5/2 + 45*y**2/2"
+    },
+    {
+      "epsilon_one_zero": true,
+      "epsilon_three_zero": true,
+      "first_local_unit_coefficient": "1680*q**4*rho + 3360*q**3*rho*y**2 + 840*q**2*rho*y**4 + 1680*q**2*rho*y + 56*q*rho*y**6 + 560*q*rho*y**3 + 140*q*rho + rho*y**8 + 28*rho*y**5 + 70*rho*y**2",
+      "first_local_unit_target": "rho*(1680*q**4 + 3360*q**3*y**2 + 840*q**2*y**4 + 1680*q**2*y + 56*q*y**6 + 560*q*y**3 + 140*q + y**8 + 28*y**5 + 70*y**2)",
+      "matched": true,
+      "multiplicity": 7,
+      "secondary_limit": "840*q**3*y + 420*q**2*y**3 + 210*q**2 + 42*q*y**5 + 210*q*y**2 + y**7 + 35*y**4/2 + 35*y/2",
+      "shift": 3,
+      "tertiary_correction": "1470*q**3 + 2520*q**2*r*y + 945*q**2*y**2 + 840*q*r*y**3 + 420*q*r - 105*q*y**4/2 + 525*q*y + 42*r*y**5 + 210*r*y**2 - 35*y**6/4 + 35*y**3/2 + 245/8"
+    },
+    {
+      "epsilon_one_zero": true,
+      "epsilon_three_zero": true,
+      "first_local_unit_coefficient": "15120*q**4*rho*y + 10080*q**3*rho*y**3 + 5040*q**3*rho + 1512*q**2*rho*y**5 + 7560*q**2*rho*y**2 + 72*q*rho*y**7 + 1260*q*rho*y**4 + 1260*q*rho*y + rho*y**9 + 42*rho*y**6 + 210*rho*y**3 + 35*rho",
+      "first_local_unit_target": "rho*(15120*q**4*y + 10080*q**3*y**3 + 5040*q**3 + 1512*q**2*y**5 + 7560*q**2*y**2 + 72*q*y**7 + 1260*q*y**4 + 1260*q*y + y**9 + 42*y**6 + 210*y**3 + 35)",
+      "matched": true,
+      "multiplicity": 8,
+      "secondary_limit": "1680*q**4 + 3360*q**3*y**2 + 840*q**2*y**4 + 1680*q**2*y + 56*q*y**6 + 560*q*y**3 + 140*q + y**8 + 28*y**5 + 70*y**2",
+      "shift": 3,
+      "tertiary_correction": "6720*q**3*r + 8400*q**3*y + 10080*q**2*r*y**2 + 840*q**2*y**3 + 2940*q**2 + 1680*q*r*y**4 + 3360*q*r*y - 252*q*y**5 + 1260*q*y**2 + 56*r*y**6 + 560*r*y**3 + 140*r - 14*y**7 - 35*y**4 + 175*y"
+    }
+  ],
+  "kind": "jensen_window_pf_newman_arbitrary_multiplicity_tertiary_universal_layer_gate",
+  "operator_audit": [
+    {
+      "appell_identity": "partial_y P_(m+1)=(m+1)P_m",
+      "heat_identity": "partial_q P_m=partial_y^2 P_m",
+      "multiplicity": 3,
+      "secondary_polynomial": "6*q*y + y**3 + 1/2",
+      "shift_difference": "Q_(m,3)-Q_(m,0)=(3/2)partial_y P_m",
+      "tertiary_shift_three": "21*q/2 + 6*r*y + 9*y**2/4",
+      "tertiary_shift_zero": "3*q/2 + 6*r*y - 9*y**2/4"
+    },
+    {
+      "appell_identity": "partial_y P_(m+1)=(m+1)P_m",
+      "heat_identity": "partial_q P_m=partial_y^2 P_m",
+      "multiplicity": 4,
+      "secondary_polynomial": "12*q**2 + 12*q*y**2 + y**4 + 2*y",
+      "shift_difference": "Q_(m,3)-Q_(m,0)=(3/2)partial_y P_m",
+      "tertiary_shift_three": "24*q*r + 30*q*y + 12*r*y**2 + y**3 + 7/2",
+      "tertiary_shift_zero": "24*q*r - 6*q*y + 12*r*y**2 - 5*y**3 + 1/2"
+    },
+    {
+      "appell_identity": "partial_y P_(m+1)=(m+1)P_m",
+      "heat_identity": "partial_q P_m=partial_y^2 P_m",
+      "multiplicity": 5,
+      "secondary_polynomial": "60*q**2*y + 20*q*y**3 + 10*q + y**5 + 5*y**2",
+      "shift_difference": "Q_(m,3)-Q_(m,0)=(3/2)partial_y P_m",
+      "tertiary_shift_three": "105*q**2 + 120*q*r*y + 45*q*y**2 + 20*r*y**3 + 10*r - 5*y**4/4 + 25*y/2",
+      "tertiary_shift_zero": "15*q**2 + 120*q*r*y - 45*q*y**2 + 20*r*y**3 + 10*r - 35*y**4/4 - 5*y/2"
+    },
+    {
+      "appell_identity": "partial_y P_(m+1)=(m+1)P_m",
+      "heat_identity": "partial_q P_m=partial_y^2 P_m",
+      "multiplicity": 6,
+      "secondary_polynomial": "120*q**3 + 180*q**2*y**2 + 30*q*y**4 + 60*q*y + y**6 + 10*y**3 + 5/2",
+      "shift_difference": "Q_(m,3)-Q_(m,0)=(3/2)partial_y P_m",
+      "tertiary_shift_three": "360*q**2*r + 450*q**2*y + 360*q*r*y**2 + 30*q*y**3 + 105*q + 30*r*y**4 + 60*r*y - 9*y**5/2 + 45*y**2/2",
+      "tertiary_shift_zero": "360*q**2*r - 90*q**2*y + 360*q*r*y**2 - 150*q*y**3 + 15*q + 30*r*y**4 + 60*r*y - 27*y**5/2 - 45*y**2/2"
+    },
+    {
+      "appell_identity": "partial_y P_(m+1)=(m+1)P_m",
+      "heat_identity": "partial_q P_m=partial_y^2 P_m",
+      "multiplicity": 7,
+      "secondary_polynomial": "840*q**3*y + 420*q**2*y**3 + 210*q**2 + 42*q*y**5 + 210*q*y**2 + y**7 + 35*y**4/2 + 35*y/2",
+      "shift_difference": "Q_(m,3)-Q_(m,0)=(3/2)partial_y P_m",
+      "tertiary_shift_three": "1470*q**3 + 2520*q**2*r*y + 945*q**2*y**2 + 840*q*r*y**3 + 420*q*r - 105*q*y**4/2 + 525*q*y + 42*r*y**5 + 210*r*y**2 - 35*y**6/4 + 35*y**3/2 + 245/8",
+      "tertiary_shift_zero": "210*q**3 + 2520*q**2*r*y - 945*q**2*y**2 + 840*q*r*y**3 + 420*q*r - 735*q*y**4/2 - 105*q*y + 42*r*y**5 + 210*r*y**2 - 77*y**6/4 - 175*y**3/2 + 35/8"
+    },
+    {
+      "appell_identity": "partial_y P_(m+1)=(m+1)P_m",
+      "heat_identity": "partial_q P_m=partial_y^2 P_m",
+      "multiplicity": 8,
+      "secondary_polynomial": "1680*q**4 + 3360*q**3*y**2 + 840*q**2*y**4 + 1680*q**2*y + 56*q*y**6 + 560*q*y**3 + 140*q + y**8 + 28*y**5 + 70*y**2",
+      "shift_difference": "Q_(m,3)-Q_(m,0)=(3/2)partial_y P_m",
+      "tertiary_shift_three": "6720*q**3*r + 8400*q**3*y + 10080*q**2*r*y**2 + 840*q**2*y**3 + 2940*q**2 + 1680*q*r*y**4 + 3360*q*r*y - 252*q*y**5 + 1260*q*y**2 + 56*r*y**6 + 560*r*y**3 + 140*r - 14*y**7 - 35*y**4 + 175*y",
+      "tertiary_shift_zero": "6720*q**3*r - 1680*q**3*y + 10080*q**2*r*y**2 - 4200*q**2*y**3 + 420*q**2 + 1680*q*r*y**4 + 3360*q*r*y - 756*q*y**5 - 1260*q*y**2 + 56*r*y**6 + 560*r*y**3 + 140*r - 26*y**7 - 245*y**4 - 35*y"
+    },
+    {
+      "appell_identity": "partial_y P_(m+1)=(m+1)P_m",
+      "heat_identity": "partial_q P_m=partial_y^2 P_m",
+      "multiplicity": 9,
+      "secondary_polynomial": "15120*q**4*y + 10080*q**3*y**3 + 5040*q**3 + 1512*q**2*y**5 + 7560*q**2*y**2 + 72*q*y**7 + 1260*q*y**4 + 1260*q*y + y**9 + 42*y**6 + 210*y**3 + 35",
+      "shift_difference": "Q_(m,3)-Q_(m,0)=(3/2)partial_y P_m",
+      "tertiary_shift_three": "26460*q**4 + 60480*q**3*r*y + 22680*q**3*y**2 + 30240*q**2*r*y**3 + 15120*q**2*r - 1890*q**2*y**4 + 18900*q**2*y + 3024*q*r*y**5 + 15120*q*r*y**2 - 630*q*y**6 + 1260*q*y**3 + 2205*q + 72*r*y**7 + 1260*r*y**4 + 1260*r*y - 81*y**8/4 - 189*y**5 + 945*y**2/2",
+      "tertiary_shift_zero": "3780*q**4 + 60480*q**3*r*y - 22680*q**3*y**2 + 30240*q**2*r*y**3 + 15120*q**2*r - 13230*q**2*y**4 - 3780*q**2*y + 3024*q*r*y**5 + 15120*q*r*y**2 - 1386*q*y**6 - 6300*q*y**3 + 315*q + 72*r*y**7 + 1260*r*y**4 + 1260*r*y - 135*y**8/4 - 567*y**5 - 945*y**2/2"
+    },
+    {
+      "appell_identity": "partial_y P_(m+1)=(m+1)P_m",
+      "heat_identity": "partial_q P_m=partial_y^2 P_m",
+      "multiplicity": 10,
+      "secondary_polynomial": "30240*q**5 + 75600*q**4*y**2 + 25200*q**3*y**4 + 50400*q**3*y + 2520*q**2*y**6 + 25200*q**2*y**3 + 6300*q**2 + 90*q*y**8 + 2520*q*y**5 + 6300*q*y**2 + y**10 + 60*y**7 + 525*y**4 + 350*y",
+      "shift_difference": "Q_(m,3)-Q_(m,0)=(3/2)partial_y P_m",
+      "tertiary_shift_three": "151200*q**4*r + 189000*q**4*y + 302400*q**3*r*y**2 + 25200*q**3*y**3 + 88200*q**3 + 75600*q**2*r*y**4 + 151200*q**2*r*y - 11340*q**2*y**5 + 56700*q**2*y**2 + 5040*q*r*y**6 + 50400*q*r*y**3 + 12600*q*r - 1260*q*y**7 - 3150*q*y**4 + 15750*q*y + 90*r*y**8 + 2520*r*y**5 + 6300*r*y**2 - 55*y**9/2 - 525*y**6 + 525*y**3 + 1225/2",
+      "tertiary_shift_zero": "151200*q**4*r - 37800*q**4*y + 302400*q**3*r*y**2 - 126000*q**3*y**3 + 12600*q**3 + 75600*q**2*r*y**4 + 151200*q**2*r*y - 34020*q**2*y**5 - 56700*q**2*y**2 + 5040*q*r*y**6 + 50400*q*r*y**3 + 12600*q*r - 2340*q*y**7 - 22050*q*y**4 - 3150*q*y + 90*r*y**8 + 2520*r*y**5 + 6300*r*y**2 - 85*y**9/2 - 1155*y**6 - 2625*y**3 + 175/2"
+    },
+    {
+      "appell_identity": "partial_y P_(m+1)=(m+1)P_m",
+      "heat_identity": "partial_q P_m=partial_y^2 P_m",
+      "multiplicity": 11,
+      "secondary_polynomial": "332640*q**5*y + 277200*q**4*y**3 + 138600*q**4 + 55440*q**3*y**5 + 277200*q**3*y**2 + 3960*q**2*y**7 + 69300*q**2*y**4 + 69300*q**2*y + 110*q*y**9 + 4620*q*y**6 + 23100*q*y**3 + 3850*q + y**11 + 165*y**8/2 + 1155*y**5 + 1925*y**2",
+      "shift_difference": "Q_(m,3)-Q_(m,0)=(3/2)partial_y P_m",
+      "tertiary_shift_three": "582120*q**5 + 1663200*q**4*r*y + 623700*q**4*y**2 + 1108800*q**3*r*y**3 + 554400*q**3*r - 69300*q**3*y**4 + 693000*q**3*y + 166320*q**2*r*y**5 + 831600*q**2*r*y**2 - 34650*q**2*y**6 + 69300*q**2*y**3 + 121275*q**2 + 7920*q*r*y**7 + 138600*q*r*y**4 + 138600*q*r*y - 4455*q*y**8/2 - 20790*q*y**5 + 51975*q*y**2 + 110*r*y**9 + 4620*r*y**6 + 23100*r*y**3 + 3850*r - 143*y**10/4 - 1155*y**7 - 5775*y**4/4 + 9625*y/2",
+      "tertiary_shift_zero": "83160*q**5 + 1663200*q**4*r*y - 623700*q**4*y**2 + 1108800*q**3*r*y**3 + 554400*q**3*r - 485100*q**3*y**4 - 138600*q**3*y + 166320*q**2*r*y**5 + 831600*q**2*r*y**2 - 76230*q**2*y**6 - 346500*q**2*y**3 + 17325*q**2 + 7920*q*r*y**7 + 138600*q*r*y**4 + 138600*q*r*y - 7425*q*y**8/2 - 62370*q*y**5 - 51975*q*y**2 + 110*r*y**9 + 4620*r*y**6 + 23100*r*y**3 + 3850*r - 209*y**10/4 - 2145*y**7 - 40425*y**4/4 - 1925*y/2"
+    },
+    {
+      "appell_identity": "partial_y P_(m+1)=(m+1)P_m",
+      "heat_identity": "partial_q P_m=partial_y^2 P_m",
+      "multiplicity": 12,
+      "secondary_polynomial": "665280*q**6 + 1995840*q**5*y**2 + 831600*q**4*y**4 + 1663200*q**4*y + 110880*q**3*y**6 + 1108800*q**3*y**3 + 277200*q**3 + 5940*q**2*y**8 + 166320*q**2*y**5 + 415800*q**2*y**2 + 132*q*y**10 + 7920*q*y**7 + 69300*q*y**4 + 46200*q*y + y**12 + 110*y**9 + 2310*y**6 + 7700*y**3 + 1925/2",
+      "shift_difference": "Q_(m,3)-Q_(m,0)=(3/2)partial_y P_m",
+      "tertiary_shift_three": "3991680*q**5*r + 4989600*q**5*y + 9979200*q**4*r*y**2 + 831600*q**4*y**3 + 2910600*q**4 + 3326400*q**3*r*y**4 + 6652800*q**3*r*y - 498960*q**3*y**5 + 2494800*q**3*y**2 + 332640*q**2*r*y**6 + 3326400*q**2*r*y**3 + 831600*q**2*r - 83160*q**2*y**7 - 207900*q**2*y**4 + 1039500*q**2*y + 11880*q*r*y**8 + 332640*q*r*y**5 + 831600*q*r*y**2 - 3630*q*y**9 - 69300*q*y**6 + 69300*q*y**3 + 80850*q + 132*r*y**10 + 7920*r*y**7 + 69300*r*y**4 + 46200*r*y - 45*y**11 - 4455*y**8/2 - 10395*y**5 + 17325*y**2",
+      "tertiary_shift_zero": "3991680*q**5*r - 997920*q**5*y + 9979200*q**4*r*y**2 - 4158000*q**4*y**3 + 415800*q**4 + 3326400*q**3*r*y**4 + 6652800*q**3*r*y - 1496880*q**3*y**5 - 2494800*q**3*y**2 + 332640*q**2*r*y**6 + 3326400*q**2*r*y**3 + 831600*q**2*r - 154440*q**2*y**7 - 1455300*q**2*y**4 - 207900*q**2*y + 11880*q*r*y**8 + 332640*q*r*y**5 + 831600*q*r*y**2 - 5610*q*y**9 - 152460*q*y**6 - 346500*q*y**3 + 11550*q + 132*r*y**10 + 7920*r*y**7 + 69300*r*y**4 + 46200*r*y - 63*y**11 - 7425*y**8/2 - 31185*y**5 - 17325*y**2"
+    },
+    {
+      "appell_identity": "partial_y P_(m+1)=(m+1)P_m",
+      "heat_identity": "partial_q P_m=partial_y^2 P_m",
+      "multiplicity": 13,
+      "secondary_polynomial": "8648640*q**6*y + 8648640*q**5*y**3 + 4324320*q**5 + 2162160*q**4*y**5 + 10810800*q**4*y**2 + 205920*q**3*y**7 + 3603600*q**3*y**4 + 3603600*q**3*y + 8580*q**2*y**9 + 360360*q**2*y**6 + 1801800*q**2*y**3 + 300300*q**2 + 156*q*y**11 + 12870*q*y**8 + 180180*q*y**5 + 300300*q*y**2 + y**13 + 143*y**10 + 4290*y**7 + 25025*y**4 + 25025*y/2",
+      "shift_difference": "Q_(m,3)-Q_(m,0)=(3/2)partial_y P_m",
+      "tertiary_shift_three": "15135120*q**6 + 51891840*q**5*r*y + 19459440*q**5*y**2 + 43243200*q**4*r*y**3 + 21621600*q**4*r - 2702700*q**4*y**4 + 27027000*q**4*y + 8648640*q**3*r*y**5 + 43243200*q**3*r*y**2 - 1801800*q**3*y**6 + 3603600*q**3*y**3 + 6306300*q**3 + 617760*q**2*r*y**7 + 10810800*q**2*r*y**4 + 10810800*q**2*r*y - 173745*q**2*y**8 - 1621620*q**2*y**5 + 4054050*q**2*y**2 + 17160*q*r*y**9 + 720720*q*r*y**6 + 3603600*q*r*y**3 + 600600*q*r - 5577*q*y**10 - 180180*q*y**7 - 225225*q*y**4 + 750750*q*y + 156*r*y**11 + 12870*r*y**8 + 180180*r*y**5 + 300300*r*y**2 - 221*y**12/4 - 7865*y**9/2 - 75075*y**6/2 + 25025*y**3 + 175175/8",
+      "tertiary_shift_zero": "2162160*q**6 + 51891840*q**5*r*y - 19459440*q**5*y**2 + 43243200*q**4*r*y**3 + 21621600*q**4*r - 18918900*q**4*y**4 - 5405400*q**4*y + 8648640*q**3*r*y**5 + 43243200*q**3*r*y**2 - 3963960*q**3*y**6 - 18018000*q**3*y**3 + 900900*q**3 + 617760*q**2*r*y**7 + 10810800*q**2*r*y**4 + 10810800*q**2*r*y - 289575*q**2*y**8 - 4864860*q**2*y**5 - 4054050*q**2*y**2 + 17160*q*r*y**9 + 720720*q*r*y**6 + 3603600*q*r*y**3 + 600600*q*r - 8151*q*y**10 - 334620*q*y**7 - 1576575*q*y**4 - 150150*q*y + 156*r*y**11 + 12870*r*y**8 + 180180*r*y**5 + 300300*r*y**2 - 299*y**12/4 - 12155*y**9/2 - 165165*y**6/2 - 125125*y**3 + 25025/8"
+    },
+    {
+      "appell_identity": "partial_y P_(m+1)=(m+1)P_m",
+      "heat_identity": "partial_q P_m=partial_y^2 P_m",
+      "multiplicity": 14,
+      "secondary_polynomial": "17297280*q**7 + 60540480*q**6*y**2 + 30270240*q**5*y**4 + 60540480*q**5*y + 5045040*q**4*y**6 + 50450400*q**4*y**3 + 12612600*q**4 + 360360*q**3*y**8 + 10090080*q**3*y**5 + 25225200*q**3*y**2 + 12012*q**2*y**10 + 720720*q**2*y**7 + 6306300*q**2*y**4 + 4204200*q**2*y + 182*q*y**12 + 20020*q*y**9 + 420420*q*y**6 + 1401400*q*y**3 + 175175*q + y**14 + 182*y**11 + 15015*y**8/2 + 70070*y**5 + 175175*y**2/2",
+      "shift_difference": "Q_(m,3)-Q_(m,0)=(3/2)partial_y P_m",
+      "tertiary_shift_three": "121080960*q**6*r + 151351200*q**6*y + 363242880*q**5*r*y**2 + 30270240*q**5*y**3 + 105945840*q**5 + 151351200*q**4*r*y**4 + 302702400*q**4*r*y - 22702680*q**4*y**5 + 113513400*q**4*y**2 + 20180160*q**3*r*y**6 + 201801600*q**3*r*y**3 + 50450400*q**3*r - 5045040*q**3*y**7 - 12612600*q**3*y**4 + 63063000*q**3*y + 1081080*q**2*r*y**8 + 30270240*q**2*r*y**5 + 75675600*q**2*r*y**2 - 330330*q**2*y**9 - 6306300*q**2*y**6 + 6306300*q**2*y**3 + 7357350*q**2 + 24024*q*r*y**10 + 1441440*q*r*y**7 + 12612600*q*r*y**4 + 8408400*q*r*y - 8190*q*y**11 - 405405*q*y**8 - 1891890*q*y**5 + 3153150*q*y**2 + 182*r*y**12 + 20020*r*y**9 + 420420*r*y**6 + 1401400*r*y**3 + 175175*r - 133*y**13/2 - 13013*y**10/2 - 105105*y**7 - 175175*y**4/2 + 875875*y/4",
+      "tertiary_shift_zero": "121080960*q**6*r - 30270240*q**6*y + 363242880*q**5*r*y**2 - 151351200*q**5*y**3 + 15135120*q**5 + 151351200*q**4*r*y**4 + 302702400*q**4*r*y - 68108040*q**4*y**5 - 113513400*q**4*y**2 + 20180160*q**3*r*y**6 + 201801600*q**3*r*y**3 + 50450400*q**3*r - 9369360*q**3*y**7 - 88288200*q**3*y**4 - 12612600*q**3*y + 1081080*q**2*r*y**8 + 30270240*q**2*r*y**5 + 75675600*q**2*r*y**2 - 510510*q**2*y**9 - 13873860*q**2*y**6 - 31531500*q**2*y**3 + 1051050*q**2 + 24024*q*r*y**10 + 1441440*q*r*y**7 + 12612600*q*r*y**4 + 8408400*q*r*y - 11466*q*y**11 - 675675*q*y**8 - 5675670*q*y**5 - 3153150*q*y**2 + 182*r*y**12 + 20020*r*y**9 + 420420*r*y**6 + 1401400*r*y**3 + 175175*r - 175*y**13/2 - 19019*y**10/2 - 195195*y**7 - 1226225*y**4/2 - 175175*y/4"
+    },
+    {
+      "appell_identity": "partial_y P_(m+1)=(m+1)P_m",
+      "heat_identity": "partial_q P_m=partial_y^2 P_m",
+      "multiplicity": 15,
+      "secondary_polynomial": "259459200*q**7*y + 302702400*q**6*y**3 + 151351200*q**6 + 90810720*q**5*y**5 + 454053600*q**5*y**2 + 10810800*q**4*y**7 + 189189000*q**4*y**4 + 189189000*q**4*y + 600600*q**3*y**9 + 25225200*q**3*y**6 + 126126000*q**3*y**3 + 21021000*q**3 + 16380*q**2*y**11 + 1351350*q**2*y**8 + 18918900*q**2*y**5 + 31531500*q**2*y**2 + 210*q*y**13 + 30030*q*y**10 + 900900*q*y**7 + 5255250*q*y**4 + 2627625*q*y + y**15 + 455*y**12/2 + 25025*y**9/2 + 175175*y**6 + 875875*y**3/2 + 175175/4",
+      "shift_difference": "Q_(m,3)-Q_(m,0)=(3/2)partial_y P_m",
+      "tertiary_shift_three": "454053600*q**7 + 1816214400*q**6*r*y + 681080400*q**6*y**2 + 1816214400*q**5*r*y**3 + 908107200*q**5*r - 113513400*q**5*y**4 + 1135134000*q**5*y + 454053600*q**4*r*y**5 + 2270268000*q**4*r*y**2 - 94594500*q**4*y**6 + 189189000*q**4*y**3 + 331080750*q**4 + 43243200*q**3*r*y**7 + 756756000*q**3*r*y**4 + 756756000*q**3*r*y - 12162150*q**3*y**8 - 113513400*q**3*y**5 + 283783500*q**3*y**2 + 1801800*q**2*r*y**9 + 75675600*q**2*r*y**6 + 378378000*q**2*r*y**3 + 63063000*q**2*r - 585585*q**2*y**10 - 18918900*q**2*y**7 - 23648625*q**2*y**4 + 78828750*q**2*y + 32760*q*r*y**11 + 2702700*q*r*y**8 + 37837800*q*r*y**5 + 63063000*q*r*y**2 - 23205*q*y**12/2 - 825825*q*y**9 - 7882875*q*y**6 + 5255250*q*y**3 + 18393375*q/4 + 210*r*y**13 + 30030*r*y**10 + 900900*r*y**7 + 5255250*r*y**4 + 2627625*r*y - 315*y**14/4 - 20475*y**11/2 - 2027025*y**8/8 - 1576575*y**5/2 + 7882875*y**2/8",
+      "tertiary_shift_zero": "64864800*q**7 + 1816214400*q**6*r*y - 681080400*q**6*y**2 + 1816214400*q**5*r*y**3 + 908107200*q**5*r - 794593800*q**5*y**4 - 227026800*q**5*y + 454053600*q**4*r*y**5 + 2270268000*q**4*r*y**2 - 208107900*q**4*y**6 - 945945000*q**4*y**3 + 47297250*q**4 + 43243200*q**3*r*y**7 + 756756000*q**3*r*y**4 + 756756000*q**3*r*y - 20270250*q**3*y**8 - 340540200*q**3*y**5 - 283783500*q**3*y**2 + 1801800*q**2*r*y**9 + 75675600*q**2*r*y**6 + 378378000*q**2*r*y**3 + 63063000*q**2*r - 855855*q**2*y**10 - 35135100*q**2*y**7 - 165540375*q**2*y**4 - 15765750*q**2*y + 32760*q*r*y**11 + 2702700*q*r*y**8 + 37837800*q*r*y**5 + 63063000*q*r*y**2 - 31395*q*y**12/2 - 1276275*q*y**9 - 17342325*q*y**6 - 26276250*q*y**3 + 2627625*q/4 + 210*r*y**13 + 30030*r*y**10 + 900900*r*y**7 + 5255250*r*y**4 + 2627625*r*y - 405*y**14/4 - 28665*y**11/2 - 3378375*y**8/8 - 4729725*y**5/2 - 7882875*y**2/8"
+    },
+    {
+      "appell_identity": "partial_y P_(m+1)=(m+1)P_m",
+      "heat_identity": "partial_q P_m=partial_y^2 P_m",
+      "multiplicity": 16,
+      "secondary_polynomial": "518918400*q**8 + 2075673600*q**7*y**2 + 1210809600*q**6*y**4 + 2421619200*q**6*y + 242161920*q**5*y**6 + 2421619200*q**5*y**3 + 605404800*q**5 + 21621600*q**4*y**8 + 605404800*q**4*y**5 + 1513512000*q**4*y**2 + 960960*q**3*y**10 + 57657600*q**3*y**7 + 504504000*q**3*y**4 + 336336000*q**3*y + 21840*q**2*y**12 + 2402400*q**2*y**9 + 50450400*q**2*y**6 + 168168000*q**2*y**3 + 21021000*q**2 + 240*q*y**14 + 43680*q*y**11 + 1801800*q*y**8 + 16816800*q*y**5 + 21021000*q*y**2 + y**16 + 280*y**13 + 20020*y**10 + 400400*y**7 + 1751750*y**4 + 700700*y",
+      "shift_difference": "Q_(m,3)-Q_(m,0)=(3/2)partial_y P_m",
+      "tertiary_shift_three": "4151347200*q**7*r + 5189184000*q**7*y + 14529715200*q**6*r*y**2 + 1210809600*q**6*y**3 + 4237833600*q**6 + 7264857600*q**5*r*y**4 + 14529715200*q**5*r*y - 1089728640*q**5*y**5 + 5448643200*q**5*y**2 + 1210809600*q**4*r*y**6 + 12108096000*q**4*r*y**3 + 3027024000*q**4*r - 302702400*q**4*y**7 - 756756000*q**4*y**4 + 3783780000*q**4*y + 86486400*q**3*r*y**8 + 2421619200*q**3*r*y**5 + 6054048000*q**3*r*y**2 - 26426400*q**3*y**9 - 504504000*q**3*y**6 + 504504000*q**3*y**3 + 588588000*q**3 + 2882880*q**2*r*y**10 + 172972800*q**2*r*y**7 + 1513512000*q**2*r*y**4 + 1009008000*q**2*r*y - 982800*q**2*y**11 - 48648600*q**2*y**8 - 227026800*q**2*y**5 + 378378000*q**2*y**2 + 43680*q*r*y**12 + 4804800*q*r*y**9 + 100900800*q*r*y**6 + 336336000*q*r*y**3 + 42042000*q*r - 15960*q*y**13 - 1561560*q*y**10 - 25225200*q*y**7 - 21021000*q*y**4 + 52552500*q*y + 240*r*y**14 + 43680*r*y**11 + 1801800*r*y**8 + 16816800*r*y**5 + 21021000*r*y**2 - 92*y**15 - 15470*y**12 - 550550*y**9 - 3503500*y**6 + 1751750*y**3 + 1226225",
+      "tertiary_shift_zero": "4151347200*q**7*r - 1037836800*q**7*y + 14529715200*q**6*r*y**2 - 6054048000*q**6*y**3 + 605404800*q**6 + 7264857600*q**5*r*y**4 + 14529715200*q**5*r*y - 3269185920*q**5*y**5 - 5448643200*q**5*y**2 + 1210809600*q**4*r*y**6 + 12108096000*q**4*r*y**3 + 3027024000*q**4*r - 562161600*q**4*y**7 - 5297292000*q**4*y**4 - 756756000*q**4*y + 86486400*q**3*r*y**8 + 2421619200*q**3*r*y**5 + 6054048000*q**3*r*y**2 - 40840800*q**3*y**9 - 1109908800*q**3*y**6 - 2522520000*q**3*y**3 + 84084000*q**3 + 2882880*q**2*r*y**10 + 172972800*q**2*r*y**7 + 1513512000*q**2*r*y**4 + 1009008000*q**2*r*y - 1375920*q**2*y**11 - 81081000*q**2*y**8 - 681080400*q**2*y**5 - 378378000*q**2*y**2 + 43680*q*r*y**12 + 4804800*q*r*y**9 + 100900800*q*r*y**6 + 336336000*q*r*y**3 + 42042000*q*r - 21000*q*y**13 - 2282280*q*y**10 - 46846800*q*y**7 - 147147000*q*y**4 - 10510500*q*y + 240*r*y**14 + 43680*r*y**11 + 1801800*r*y**8 + 16816800*r*y**5 + 21021000*r*y**2 - 116*y**15 - 20930*y**12 - 850850*y**9 - 7707700*y**6 - 8758750*y**3 + 175175"
+    }
+  ],
+  "proof_boundary": "No Xi-specific exclusion, degree-uniform theorem, PF-infinity, Lambda<=0, RH, or prize-level conclusion is proved.",
+  "rows": [
+    {
+      "certificate": "The secondary cubic, primary boundary, and double-zero gates are audited.",
+      "claim": "Three parent contracts are current and hash-pinned.",
+      "id": "tul_01_sources",
+      "proof_boundary": "No parent theorem is strengthened.",
+      "readiness": "proved",
+      "role": "source chain"
+    },
+    {
+      "certificate": "Set epsilon=D^(-1/6), lambda=lambda_*+rho*epsilon^6/8+(rho*q/4)*epsilon^8+(rho*r/4)*epsilon^10, and evaluate at (rho+rho*y*epsilon^4)/D.",
+      "claim": "The next heat parameter enters at D^(-5/3).",
+      "id": "tul_02_scaling",
+      "proof_boundary": "This is a local selected-sequence expansion.",
+      "readiness": "proved",
+      "role": "tertiary scaling"
+    },
+    {
+      "certificate": "After normalization by rho^m U(rho) epsilon^(4m), the finite Jensen cluster is P_m(y,q)+epsilon^2 Q_(m,n)(y,q,r)+O(epsilon^4) locally, where P_m=exp(q*partial_y^2+partial_y^3/12)y^m.",
+      "claim": "The normalized cluster has a complete epsilon^2 correction.",
+      "id": "tul_03_expansion",
+      "proof_boundary": "An explicit local-uniform remainder is retained.",
+      "readiness": "proved",
+      "role": "tertiary limit"
+    },
+    {
+      "certificate": "Q_(m,n)=((r-y/2)*partial_y^2+(2n+1)*partial_y/4)P_m.",
+      "claim": "The epsilon^2 correction is a first-order transport of P_m and its second derivative.",
+      "id": "tul_04_operator",
+      "proof_boundary": "No Xi-specific coefficient occurs.",
+      "readiness": "proved",
+      "role": "universal operator"
+    },
+    {
+      "certificate": "All apparent fourth-order finite-Jensen and second heat-commutator terms cancel or recombine into the displayed first-order transport of P_m; no independent partial_y^4 term survives at epsilon^2.",
+      "claim": "No independent fourth derivative survives at this order.",
+      "id": "tul_05_cancellation",
+      "proof_boundary": "The cancellation is checked against exact finite models.",
+      "readiness": "proved",
+      "role": "operator cancellation"
+    },
+    {
+      "certificate": "The fixed Jensen shift first enters at epsilon^2 through (2n+1)partial_y P_m/4.",
+      "claim": "The fixed shift first appears at epsilon^2.",
+      "id": "tul_06_shift",
+      "proof_boundary": "The Newman consequence still uses n=0.",
+      "readiness": "proved",
+      "role": "shift entry"
+    },
+    {
+      "certificate": "The universal family obeys partial_q P_m=partial_y^2 P_m and partial_y P_(m+1)=(m+1)P_m.",
+      "claim": "Parameter and degree derivatives close inside the universal family.",
+      "id": "tul_07_appell",
+      "proof_boundary": "These identities do not imply hyperbolicity beyond q_m.",
+      "readiness": "proved",
+      "role": "Appell identities"
+    },
+    {
+      "certificate": "The local unit is absent from Q_(m,n). Its first linear contribution occurs at epsilon^4 and equals rho*[U'(rho)/U(rho)]*P_(m+1)(y,q).",
+      "claim": "The first local-unit contribution is delayed to epsilon^4.",
+      "id": "tul_08_unit",
+      "proof_boundary": "The rest of the epsilon^4 term is not yet computed.",
+      "readiness": "proved",
+      "role": "Xi-unit isolation"
+    },
+    {
+      "certificate": "At any nondegenerate threshold double root P_m=P_m'=0, P_m''!=0, the next parameter and root coefficients are r_m=y_m/2 and s_m=(1-2n)/4.",
+      "claim": "A simple threshold double root has universal next corrections.",
+      "id": "tul_09_contact",
+      "proof_boundary": "The rule requires P_m''!=0 at the selected threshold root.",
+      "readiness": "conditional_exact",
+      "role": "nondegenerate contact"
+    },
+    {
+      "certificate": "For q_3=-2^(-7/3), y_3=2^(-2/3): r_3=2^(-5/3) and s_3=(1-2n)/4.",
+      "claim": "The exact cubic contact supplies explicit tertiary coefficients.",
+      "id": "tul_10_m3",
+      "proof_boundary": "This is unconditional for m=3.",
+      "readiness": "proved",
+      "role": "multiplicity three"
+    },
+    {
+      "certificate": "For rho=-c^2 and n=0: t_D=Lambda-c^2/(8D)+c^2*2^(-13/3)D^(-4/3)-c^2*2^(-11/3)D^(-5/3)+o(D^(-5/3)).",
+      "claim": "The conditional m=3 unshifted collision expansion is explicit through D^(-5/3).",
+      "id": "tul_11_newman",
+      "proof_boundary": "This refines rather than excludes the collision.",
+      "readiness": "proved",
+      "role": "Newman refinement"
+    },
+    {
+      "certificate": "The root-center coefficient rho*(1-2n)/4 agrees exactly with the existing double-zero finite-Jensen center correction, although the preceding multiplicity-three scales are different.",
+      "claim": "The D^(-2) root-center coefficient matches the double-zero calculation.",
+      "id": "tul_12_double",
+      "proof_boundary": "The parameter scales before that coefficient differ by multiplicity.",
+      "readiness": "guard_validated",
+      "role": "cross-check"
+    },
+    {
+      "certificate": "At epsilon^4 the Xi local unit appears together with a still-uncomputed universal background and the next heat/root parameters. Its isolated coefficient alone has no sign implication.",
+      "claim": "The full epsilon^4 correction must combine the Xi unit with the universal background.",
+      "id": "tul_13_xi",
+      "proof_boundary": "The isolated U'/U term cannot be assigned a decisive sign.",
+      "readiness": "open",
+      "role": "first Xi jet"
+    },
+    {
+      "certificate": "The local expansion remains noncontradictory and requires a degree-uniform analytic remainder before any collision exclusion can be claimed.",
+      "claim": "A degree-uniform remainder is still required.",
+      "id": "tul_14_uniform",
+      "proof_boundary": "Formal local asymptotics are not collision exclusion.",
+      "readiness": "open",
+      "role": "uniform handoff"
+    },
+    {
+      "certificate": "It proves the universal tertiary operator, exact m=3 corrections, and the first local-unit coefficient.",
+      "claim": "This gate is not a proof of RH.",
+      "id": "tul_15_boundary",
+      "proof_boundary": "No Xi-specific exclusion, degree-uniform theorem, PF-infinity, Lambda<=0, RH, or prize-level conclusion is proved.",
+      "readiness": "guard_validated",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "double_layer": {
+      "path": "work/rh_compute/results/jensen_window_pf_scaled_double_zero_boundary_layer_lemma.json",
+      "sha256": "8ce9a47724e97d4e9374b576825181416013415d53a435e9c78c8e9510cc0c71"
+    },
+    "primary_layer": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_arbitrary_multiplicity_jensen_boundary_layer_gate.json",
+      "sha256": "f4bee2ee50f5daed0c7aa117128b679527053f4426adb2cf3f49fa340ca59e73"
+    },
+    "secondary_layer": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_arbitrary_multiplicity_secondary_cubic_layer_gate.json",
+      "sha256": "2f4564edbec5e8ff9323e774db65a09668bd14169647f52b746e7593426e290a"
+    }
+  },
+  "status": "exact universal tertiary Jensen correction; full first Xi-jet order open",
+  "symbolic_certificate": {
+    "appell": "The universal family obeys partial_q P_m=partial_y^2 P_m and partial_y P_(m+1)=(m+1)P_m.",
+    "cancellation": "All apparent fourth-order finite-Jensen and second heat-commutator terms cancel or recombine into the displayed first-order transport of P_m; no independent partial_y^4 term survives at epsilon^2.",
+    "contact_rule": "At any nondegenerate threshold double root P_m=P_m'=0, P_m''!=0, the next parameter and root coefficients are r_m=y_m/2 and s_m=(1-2n)/4.",
+    "double_match": "The root-center coefficient rho*(1-2n)/4 agrees exactly with the existing double-zero finite-Jensen center correction, although the preceding multiplicity-three scales are different.",
+    "extended_scaling": "Set epsilon=D^(-1/6), lambda=lambda_*+rho*epsilon^6/8+(rho*q/4)*epsilon^8+(rho*r/4)*epsilon^10, and evaluate at (rho+rho*y*epsilon^4)/D.",
+    "m3": "For q_3=-2^(-7/3), y_3=2^(-2/3): r_3=2^(-5/3) and s_3=(1-2n)/4.",
+    "shift_entry": "The fixed Jensen shift first enters at epsilon^2 through (2n+1)partial_y P_m/4.",
+    "tertiary_expansion": "After normalization by rho^m U(rho) epsilon^(4m), the finite Jensen cluster is P_m(y,q)+epsilon^2 Q_(m,n)(y,q,r)+O(epsilon^4) locally, where P_m=exp(q*partial_y^2+partial_y^3/12)y^m.",
+    "tertiary_operator": "Q_(m,n)=((r-y/2)*partial_y^2+(2n+1)*partial_y/4)P_m.",
+    "uniform_guard": "The local expansion remains noncontradictory and requires a degree-uniform analytic remainder before any collision exclusion can be claimed.",
+    "unit_delay": "The local unit is absent from Q_(m,n). Its first linear contribution occurs at epsilon^4 and equals rho*[U'(rho)/U(rho)]*P_(m+1)(y,q).",
+    "xi_handoff": "At epsilon^4 the Xi local unit appears together with a still-uncomputed universal background and the next heat/root parameters. Its isolated coefficient alone has no sign implication."
+  }
+}

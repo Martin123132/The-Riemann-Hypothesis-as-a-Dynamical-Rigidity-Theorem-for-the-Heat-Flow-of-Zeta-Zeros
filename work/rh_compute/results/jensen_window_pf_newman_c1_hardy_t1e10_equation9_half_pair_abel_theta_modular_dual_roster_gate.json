@@ -1,0 +1,73 @@
+{
+  "decision": {
+    "Abel_limit_justified_by_paired_one_over_m_squared_bound": true,
+    "B_dual_indices_recover_complete_odd_source_roster": true,
+    "Jacobi_modular_dual_phase_identified": true,
+    "complete_T_upper_proved": false,
+    "continuation_endpoints_cancel_termwise": false,
+    "endpoint_difference_retained_before_majorization": true,
+    "grouped_x0_corner_has_integrable_majorant": true,
+    "modular_transform_alone_proves_quantitative_gain": false,
+    "nonzero_pairs_reassembled_as_one_Abel_theta_triangle": true,
+    "rh_implication": false
+  },
+  "dependencies": {
+    "pair_triangle": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_separable_triangle_geometry_gate.json",
+      "sha256": "5d36c6ee9d45bc786711a1418cbc677deeebf6ce2949c5215a830c211020d7cc"
+    },
+    "symmetric_poisson": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_symmetric_poisson_interchange_gate.json",
+      "sha256": "4a1898bcda7105107fcaf303a20a87237e75c09f0052db7710bff5f6765a88b0"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_modular_dual_roster_gate",
+  "modular_witness": {
+    "absolute_difference": "0.0",
+    "cutoff_each_side": 40,
+    "tau_imag": "0.237",
+    "tau_real": "0.371"
+  },
+  "next_obligation": "Use the modular kernel near r=0 to derive a uniform face parametrix with the B and A endpoint drivers still grouped. Isolate the finite B-dual roster n=0..L, identify its ordinary and A-fold saddle terms with the normalized target carriers, and bound the matched continuation n>L jointly rather than termwise.",
+  "passed": true,
+  "proof_boundary": "Exact Abel-theta and modular dual-roster reduction only. No quantitative modular remainder, source-minus-target estimate, complete T_upper, height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.646,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "height": 10000000000,
+    "lower_endpoint": 159577,
+    "roster_steps": 2481422,
+    "roster_terms": 2481423,
+    "upper_endpoint": 5122421
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_modular_dual_roster_gate.py",
+      "sha256": "2c8d6fee1ca21838391b5208ba7a470527e3a248d93eeee7128f9009d937bc8b"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_modular_dual_roster_gate.py",
+      "sha256": "957d390b035e0958f9d67227699567277919ebe078ad5eda09b2f1cf785f4d23"
+    }
+  },
+  "status": "exact_Abel_theta_pair_triangle_and_modular_dual_source_roster_proved_quantitative_gain_open",
+  "symbolic_certificate": {
+    "Abel_parameter": "tau_epsilon=r+i*epsilon, epsilon>0",
+    "B_roster": "n=0..2481422 gives alpha=B,B-2,...,A (2481423 odd values)",
+    "continuation_match": "alpha_(B,L+k)=A-2k=alpha_(A,k); this labels the two endpoint continuations but does not prove termwise cancellation",
+    "corner_majorant": "|Delta_g(z)|<=(3*pi/2)(B^2+A^2)z^(1/2), so the grouped x=0 majorant is proportional to x^(-1/4)",
+    "dual_label": "alpha_(D,n)=D-2n",
+    "dual_phase": "Psi_(D,n)=pi*D^2*z/4+(t/2)log((1-x)/x)-pi*n^2*x*z/(x-z)",
+    "dual_x_saddle": "x(1-x)=2t/[pi(D-2n)^2]",
+    "dual_z_saddle": "z=x(D-2n)/D",
+    "endpoint_driver": "Delta_g=z^(-1/2){exp(i*pi*B^2*z/4)(2+i*pi*B^2*z)-exp(i*pi*A^2*z/4)(2+i*pi*A^2*z)}",
+    "face_coordinate": "r(z,x)=1/z-1/x=(x-z)/(x*z)>0 on 0<z<x<1/2",
+    "grouped_triangle": "S_epsilon=(1/(4*i*pi))*integral_T Delta_g(z)*a_t(x)*(Theta(tau_epsilon)-1) dx dz",
+    "modular_identity": "Theta(tau)=(-i*tau)^(-1/2)Theta(-1/tau), Im(tau)>0, principal square root",
+    "positive_pair_sum": "sum_(m>=1)exp(i*pi*tau*m^2)=(Theta(tau)-1)/2",
+    "theta_kernel": "Theta(tau)=sum_(m in Z) exp(i*pi*tau*m^2)"
+  }
+}

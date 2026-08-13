@@ -1,0 +1,94 @@
+{
+  "boundary_homotopy": "For F_s=sum_(n=1)^5 H_n+s*sum_(n>=6)H_n, 0<=s<=1, each selected boundary component retains at least the five-term certified margin minus the complete-tail bound. This is strictly positive.",
+  "component_ratio_audit": {
+    "conclusion": "For every u>=0, sum_(n>=6) phi_n(u) < 10^-9*phi_5(u).",
+    "geometric_tail": "For n>=6, b_(n+1)/b_n <= (7/6)^4*exp(-3*(2n+1)) <2*2^-39=2^-38, using e>2. Also b_6<5*2^-33. Hence sum_(n>=6)b_n < (5*2^-33)/(1-2^-38) < 6*2^-33 < 10^-9.",
+    "pointwise_reduction": "For z_n=pi*n^2*exp(4u), phi_n=exp(u)*z_n*(2z_n-3)*exp(-z_n). Since z_5>25*3>3, 2z_5-3>=z_5 and 2z_n-3<=2z_n. Thus for n>=6, phi_n/phi_5 <= 2*(n/5)^4*exp(-pi*(n^2-25)*exp(4u)).",
+    "tail_ratio_upper": "1e-9",
+    "theta_pi_provenance": "The pi is the canonical Jacobi-theta normalization in phi_n, inherited from sum_n exp(-pi*n^2*y); no arbitrary circle constant is inserted.",
+    "uniform_exponential_reduction": "Using pi>3 and exp(4u)>=1 on u>=0 gives phi_n/phi_5 < b_n=2*(n/5)^4*exp(-3*(n^2-25))."
+  },
+  "date": "2026-08-04",
+  "degree_composition": "The five-term endpoint has boundary winding zero. The complete-tail homotopy preserves it. Every multiplicity-m contact has local index -floor(m/2) in (t,x), so total degree zero excludes every contact.",
+  "finite_margin_lower": "[1.946581008278572725404437041561276623575684854292304814661743878009124e-21 +/- 4.28e-91]",
+  "kind": "jensen_window_pf_newman_theta_complete_tail_positive_time_degree_certificate",
+  "maximum_tail_derivative_bound": "[6.085496135366523828070687011210104660166492461570447146370589647700371e-42 +/- 1.54e-112]",
+  "n5_positive_moment_tail_audit": {
+    "combined_family": "For 0<=mu<=1, the first-four-plus-mu*fifth tail is below 5*10^-1800, hence below the attached 10^-1500 radius.",
+    "moment_transfer": "Multiplication by u^m*exp(t*u^2) is nonnegative for real t and u>=2; therefore every absolute n=5 tail moment through m=60 is bounded by the already certified n=4 tail moment.",
+    "n5_dominance": "Write z=pi*n^2*exp(4u). Then phi_n(u)=exp(u)*z*(2z-3)*exp(-z). For z>3, the z derivative has sign -2z^2+7z-3=-(2z-1)(z-3)<0. On u>=2 and n>=4, z>3*16*2000>3, so 0<phi_5(u)<phi_4(u).",
+    "parent_n_le_4_audit": {
+      "component_bound": "integral tail < 10^-1800",
+      "derivation": "u^m<=m!e^u, u^2<=e^(4u)/(4e^2), e^2>7, 3<pi<22/7, 2000<e^8<3^8=6561, and y=e^(4u)",
+      "radius_used_per_transform": "1e-1500",
+      "range": "u>=2, t<=1/2, 0<=moment<=60, 1<=n<=4",
+      "weighted_family_note": "The n=1,2,3 plus lambda_c*n=4 sum has total tail below 4*10^-1800, hence below the attached 10^-1500 radius."
+    }
+  },
+  "parents": {
+    "all_multiplicity_index": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_first_jet_winding_gate.json",
+      "sha256": "efc21d353b582f8a4759de89e1ba9e988c62b9b5540e6d7217b6249aff7d5a0b"
+    },
+    "fifth_summand_degree": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_theta_fifth_summand_positive_time_degree_certificate.json",
+      "sha256": "8afb6784ebd1076f6e128af0075c7ea9c3ef61dc49d9b88b0cc5241fb6471191"
+    }
+  },
+  "positive_moment_budget": {
+    "absolute_integration_tolerance": "1e-44",
+    "derivative_orders": [
+      0,
+      1
+    ],
+    "moment_uppers": [
+      "[6.085496135366523828070687011210104660166492461570447146370589647700371e-33 +/- 1.54e-103]",
+      "[1.943293575091157177778034132028974988444390734788681032358061813035406e-35 +/- 2.91e-105]"
+    ],
+    "precision_bits": 288,
+    "raw_moment_uppers": [
+      "[3.042748067683261914035343505605052330083246230785223573185294823850186e-33 +/- 4.24e-103]",
+      "[9.716467875455785888890170660144874942221953673943405161790309065177031e-36 +/- 4.52e-106]"
+    ],
+    "reference_component": "phi_5",
+    "safety_factor": "2",
+    "tail_derivative_bounds": [
+      "[6.085496135366523828070687011210104660166492461570447146370589647700371e-42 +/- 1.54e-112]",
+      "[1.943293575091157177778034132028974988444390734788681032358061813035406e-44 +/- 2.91e-114]"
+    ],
+    "time_upper": "0.45",
+    "uniformity": "For 0<=t<=0.45 and every real x, |partial_x^j H_n(t,x)| is bounded by the positive j-th moment at t=0.45."
+  },
+  "proof_boundary": "This is a rigorous complete-theta contact exclusion only in the declared local positive-time rectangle. It does not control other frequency rectangles, negative heat time, all real x, the global de Bruijn-Newman constant, a degree-uniform Jensen remainder, Lambda<=0, RH, or a prize-level conclusion.",
+  "rectangle": {
+    "coordinate_orientation": "(t,x)",
+    "time": [
+      "0",
+      "0.45"
+    ],
+    "x": [
+      "135.5",
+      "136"
+    ]
+  },
+  "resource_policy": {
+    "active_compute_workers": 1,
+    "baseline_cpu_percent": [
+      29.2,
+      18.7,
+      32.4,
+      48.4,
+      90.0
+    ],
+    "baseline_mean_percent": 43.739999999999995,
+    "below_normal_priority_applied": true,
+    "elapsed_seconds": 0.017518000007839873,
+    "mode": "daytime",
+    "thread_caps": 1
+  },
+  "schema_version": 1,
+  "source_sha256": "a4d54384d67b06b7f73023815d15d0dd6d749f7e434ace33bdb720a884eb6b56",
+  "status": "rigorous complete-theta local positive-time exclusion complete",
+  "tail_to_margin_ratio_upper": "[3.126248591497424204626508401912865241041842156376065885300607362926303e-21 +/- 3.87e-91]",
+  "theorem": "The complete theta-kernel heat transform and its first x derivative have no common zero in [0,0.45]x[135.5,136]."
+}

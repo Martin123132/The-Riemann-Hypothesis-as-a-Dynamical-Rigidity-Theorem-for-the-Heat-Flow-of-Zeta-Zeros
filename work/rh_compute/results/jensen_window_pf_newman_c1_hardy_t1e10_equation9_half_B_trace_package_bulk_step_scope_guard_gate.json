@@ -1,0 +1,107 @@
+{
+  "decision": {
+    "complete_T_upper_proved": false,
+    "complete_endpoint_B_window_bound_proved": false,
+    "finite_mode_trace_grouped_identity_proved": true,
+    "independent_nonlocal_bulk_step_bound_proved": false,
+    "local_621_622_crossing_steps_owned_by_trace_package": true,
+    "negative_trace_package_bound_preserved": true,
+    "nonlocal_bulk_steps_owned_by_grouped_remainder": true,
+    "rh_implication": false,
+    "window_nonlocal_sigma_ranges_proved": true
+  },
+  "dependencies": {
+    "global_extraction": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_B_window_extraction_target_gate.json",
+      "sha256": "d695ce7333a276514eb2cedf0508e05a069ccdec42620c615d16a4ac74081863"
+    },
+    "step_tail": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_positive_B_crossing_step_tail_normal_form_gate.json",
+      "sha256": "fe7cff25286e2fa810d311594041ae8e1419a549cd47fb70c5aa46f9e0e044f0"
+    },
+    "trace_window": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_B_face_complete_gaussian_window_signed_gate.json",
+      "sha256": "43c5656c9212456f5ae69a42a693905911f54caddd0369e5a3fdecad4c5ccda5"
+    },
+    "window_geometry": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_B_face_gaussian_window_fresnel_remainder_gate.json",
+      "sha256": "ce9d2bc94cd669d07e25ac80df0172bd5de26b1da1b2b53afabad2cea6c585a5"
+    }
+  },
+  "interval_certificate": {
+    "c_window_high_ball": "[622.17131267942091816677759475066933602707465432095742996304611742329732171103145 +/- 2.92e-78]",
+    "c_window_low_ball": "[620.94069454105337461110481316249755282003887157159412506007027746541440167484559 +/- 6.05e-78]",
+    "certified_local_crossing_modes": "621,622",
+    "certified_nonlocal_negative_q_range": "m>=623",
+    "certified_nonlocal_positive_q_range": "m<=620"
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_B_trace_package_bulk_step_scope_guard_gate",
+  "next_obligation": "Bound the common-regulator joined remainder while retaining sum_(m=1)^620 P_bulk,m-sum_(m=623)^39894 P_bulk,m inside it. Do not promote the negative B trace package to the complete endpoint B sector without an exact estimate of that completion.",
+  "passed": true,
+  "proof_boundary": "Exact B trace-package ownership and non-promotion guard only. No independent omitted-step or grouped-remainder bound, complete endpoint B sector, complete Q_K-T or T_upper, height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.114,
+    "flint_threads": 1,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_B_trace_package_bulk_step_scope_guard_gate.py",
+      "sha256": "395e9cae68cdc4a8896bb35755f7006d9be917756ee694da26b338fb8bc10484"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_B_trace_package_bulk_step_scope_guard_gate.py",
+      "sha256": "838e3f47169999079162fbdf35b7baa98e7179fe6c08c11c4cff3952e72f719c"
+    }
+  },
+  "status": "B_trace_package_scope_guard_with_nonlocal_bulk_steps_retained_globally",
+  "symbolic_certificate": {
+    "nonlocal_window_step_block": "sum_(m=1)^620 P_bulk,m-sum_(m=623)^39894 P_bulk,m",
+    "pair_identity": "I_m+I_-m-tau_m P_bulk=[U_B,m+P_B,-m+ell_m sigma_m P_bulk]+[P_A,m+I_-m-P_B,-m+(1-ell_m)sigma_m P_bulk]",
+    "step_coefficient": "sigma_m=(1-tau_m)-1_(q_B,m<0), tau_m=1_(622<=m<=39894), ell_m=1_(m in {621,622})",
+    "trace_package": "Btr_M=sum_[U_B,m+P_B,-m+ell_m sigma_m P_bulk,m]",
+    "window_case_table": [
+      {
+        "ell": 0,
+        "mode_range": "1..620",
+        "owner": "grouped_remainder",
+        "q_negative": 0,
+        "sigma": 1,
+        "tau": 0
+      },
+      {
+        "ell": 1,
+        "mode_range": "621 at left/right window sides",
+        "owner": "local_trace_package",
+        "q_negative": "1/0",
+        "sigma": "0/1",
+        "tau": 0
+      },
+      {
+        "ell": 1,
+        "mode_range": "622 at left/right window sides",
+        "owner": "local_trace_package",
+        "q_negative": "1/0",
+        "sigma": "-1/0",
+        "tau": 1
+      },
+      {
+        "ell": 0,
+        "mode_range": "623..39894",
+        "owner": "grouped_remainder",
+        "q_negative": 1,
+        "sigma": -1,
+        "tau": 1
+      },
+      {
+        "ell": 0,
+        "mode_range": "39895 and above",
+        "owner": "zero",
+        "q_negative": 1,
+        "sigma": 0,
+        "tau": 0
+      }
+    ]
+  }
+}

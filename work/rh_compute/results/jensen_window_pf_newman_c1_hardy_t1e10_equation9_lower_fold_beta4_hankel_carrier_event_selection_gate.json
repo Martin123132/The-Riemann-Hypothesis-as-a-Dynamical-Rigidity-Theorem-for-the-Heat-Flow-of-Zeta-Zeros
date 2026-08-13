@@ -1,0 +1,77 @@
+{
+  "date": "2026-08-13",
+  "decision": {
+    "all_399_event_cells_strictly_positive_X": true,
+    "complete_Q_K_minus_T_bound_proved": false,
+    "complete_T_upper_proved": false,
+    "corridor_remainder_bound_proved": false,
+    "exact_scaled_Hankel_amplitude_derivative_bound_proved": false,
+    "opposite_extracted_carrier_nonstationary_on_fold_strip": true,
+    "ordinary_logistic_Gamma_carrier_identification_proved": false,
+    "rh_implication": false,
+    "selected_extracted_carrier_crosses_at_event_center": true,
+    "selected_extracted_carrier_has_at_most_one_fold_strip_saddle": true
+  },
+  "dependencies": {
+    "all_event_height_cells": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_event_parameter_second_order_all_event_continuous_height_gate.json",
+      "sha256": "72c3e83b41a72d14fd15117eb5ad1d4aa46ebad635b475951d46a9ce805e17e3"
+    },
+    "exact_Hankel_split": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_canonical_exact_hankel_branch_factorization_gate.json",
+      "sha256": "4af5c5e42ec6e622deabe3ad862fee2130aee45efff70e24d076a5d28dd14bcc"
+    },
+    "turning_event_geometry": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_turning_event_fresnel_retention_gate.json",
+      "sha256": "4824944a2d2edbab7e9047a1420f1c50eb743a743c9c931579a558b5e3112449"
+    }
+  },
+  "interval_certificate": {
+    "beta_ball": "[2154.435480640368805145387124309525102136439880461700179338720085090788886098776301259204877059165806 +/- 8.15e-97]",
+    "beta_squared_ball": "[4641592.240242096948590929364498553547120831254167514506297258850930307239340786908240352749649517292 +/- 2.61e-93]",
+    "d_max_ball": "[10.76022909360605812680319556123182856177733999716735521367715841140865376727676740447298976053037184 +/- 5.85e-99]",
+    "d_min_ball": "[0.01350091479749819087428255402914909480775074027248099775869154129411374374815152748365494323780473255 +/- 4.32e-102]",
+    "event_abs_odd_label_range": "1..797",
+    "event_count": "399",
+    "fold_strip_X_max_ball": "[179.7826212842364358783291133355320921861894327921030789194750313894923904623866089297296628709318970 +/- 8.67e-98]",
+    "lambda_min_ball": "[9.113735018465280815095579752470019118589176704071891157128083836080253086767956786676652574538943211e-5 +/- 1.18e-103]",
+    "lambda_min_exact_formula": "pi/(16*beta)",
+    "opposite_branch_endpoint_gap_lower_ball": "[0.02304750320303096570934008097507117659999729076109874125176871511415862386522358812650639225263348796 +/- 1.10e-101]",
+    "selected_branch_face_slope_upper_ball": "[0.003954326391965416039225027083227013015504189783863254265614367474068863631079466840803494222975977140 +/- 3.07e-102]"
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_hankel_carrier_event_selection_gate",
+  "next_action": "Bound the exact scaled Hankel amplitude and its first derivatives on the positive-X cell range, then compare the selected branch with the endpoint-retaining logistic/Gamma carrier and integrate the opposite branch nonstationarily.",
+  "passed": true,
+  "proof_boundary": "Exact extracted-carrier selection and positive-X event-cell geometry only. No scaled-Hankel amplitude derivative bound, quantitative ordinary-carrier identification, corridor splice, Q_K-T bound, complete T_upper, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "resource_policy": {
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "runtime": {
+    "elapsed_seconds": 0.232
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_hankel_carrier_event_selection_gate.py",
+      "sha256": "af0c7637834aaa56f16e2ed054e7880f7342b7cdcacd0baf0e08aca18b987a02"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_hankel_carrier_event_selection_gate.py",
+      "sha256": "73b637f18fab0f49d3446aaaeac4fea0e3aaba05c9c6625b307c8c2534879cdf"
+    },
+    "note": {
+      "path": "outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_beta4_hankel_carrier_event_selection_gate.md",
+      "sha256": "7433e369c72f435690ad0fe10bb4a7356f883e0754656a1cbface49162f4c040"
+    }
+  },
+  "status": "exact_Hankel_carrier_selection_and_all_event_positive_X_floor_proved",
+  "symbolic_certificate": {
+    "branch_label": "sigma=sign(d_m); C_sigma is H^(1) for sigma=+1 and H^(2) for sigma=-1",
+    "carrier_derivatives": "F_+ = y/(2beta)-d_m+sqrt(lambda+y); F_- = y/(2beta)-d_m-sqrt(lambda+y)",
+    "event_height": "t=tau_m+delta; lambda=d_m^2-delta/beta",
+    "exact_branch_form": "C_+=exp(i*(xi-pi/4))/(2sqrt(pi))*[U*X^(-1/4)R_(1/3)^+ + i*V*X^(1/4)R_(2/3)^+]; C_-=conjugate(C_+)",
+    "extracted_Hankel_amplitude": "R_nu^+(xi)=sqrt(pi*xi/2)*exp(-i*(xi-pi*nu/2-pi/4))*H_nu^(1)(xi); R_nu^-=conjugate(R_nu^+)",
+    "opposite_endpoint_slope": "F_-sigma(0)=-sigma*(abs(d_m)+sqrt(lambda))",
+    "selected_endpoint_slope": "F_sigma(0)=-d_m+sigma*sqrt(lambda)=-sigma*delta/[beta*(sqrt(lambda)+abs(d_m))]"
+  }
+}

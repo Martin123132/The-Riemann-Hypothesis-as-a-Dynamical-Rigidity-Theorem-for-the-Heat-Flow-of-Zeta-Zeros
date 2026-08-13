@@ -38,9 +38,8 @@ def load_json(path: Path) -> dict:
 
 def validate_spec(results_dir: Path, spec: LogSignSpec) -> None:
     stem = f"arb_edrei_log_sign_lam{spec.safe_lam}_n1_n{spec.max_n}_dps340"
-    log_sign_dir = results_dir / "arb_edrei" / "log_sign"
-    summary_path = log_sign_dir / f"{stem}_summary.json"
-    rows_path = log_sign_dir / f"{stem}.jsonl"
+    summary_path = results_dir / f"{stem}_summary.json"
+    rows_path = results_dir / f"{stem}.jsonl"
     summary = load_json(summary_path)
 
     checks = {

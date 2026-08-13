@@ -47,11 +47,11 @@ work/rh_compute/scripts/check_edrei_quadrature_scout_manifest.py
 Default promoted input rows:
 
 ```text
-work/rh_compute/results/arb_edrei/log_sign/arb_edrei_log_sign_lam0_n1_n57_dps2400_boundary_tol1e-140.jsonl
-work/rh_compute/results/arb_edrei/log_sign/arb_edrei_log_sign_lam1em6_n1_n57_dps2400_boundary_tol1e-140.jsonl
-work/rh_compute/results/arb_edrei/log_sign/arb_edrei_log_sign_lam1em4_n1_n57_dps2400_boundary_tol1e-140.jsonl
-work/rh_compute/results/arb_edrei/log_sign/arb_edrei_log_sign_lam1em2_n1_n57_dps2400_boundary_tol1e-140.jsonl
-work/rh_compute/results/arb_edrei/log_sign/arb_edrei_log_sign_lam1em1_n1_n57_dps2400_boundary_tol1e-140.jsonl
+work/rh_compute/results/arb_edrei_log_sign_lam0_n1_n57_dps2400_boundary_tol1e-140.jsonl
+work/rh_compute/results/arb_edrei_log_sign_lam1em6_n1_n57_dps2400_boundary_tol1e-140.jsonl
+work/rh_compute/results/arb_edrei_log_sign_lam1em4_n1_n57_dps2400_boundary_tol1e-140.jsonl
+work/rh_compute/results/arb_edrei_log_sign_lam1em2_n1_n57_dps2400_boundary_tol1e-140.jsonl
+work/rh_compute/results/arb_edrei_log_sign_lam1em1_n1_n57_dps2400_boundary_tol1e-140.jsonl
 ```
 
 The scout is interval-based and remains finite. It tests a finite prefix of an

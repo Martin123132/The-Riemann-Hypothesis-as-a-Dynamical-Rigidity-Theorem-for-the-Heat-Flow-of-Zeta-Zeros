@@ -1,0 +1,66 @@
+{
+  "decision": {
+    "common_Gaussian_tail_series_bounded": false,
+    "complete_T_upper_proved": false,
+    "exceptional_k_0_face_fold_term_cancelled": false,
+    "explicit_q_integration_by_parts_bound_proved": true,
+    "fixed_height_symmetric_dual_cutoff_reindexing_justified": true,
+    "fixed_width_L_term_A_shift_defect_vanishes": true,
+    "height_uniform_shift_defect_theorem_proved": false,
+    "high_index_q_phase_is_uniformly_nonstationary_for_n_at_least_A": true,
+    "rh_implication": false,
+    "scaled_A_dual_kernel_retains_x_factor": true,
+    "weighted_mode_norm_decays_as_O_n_minus_one_half": true
+  },
+  "dependencies": {
+    "Abel_theta_roster": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_modular_dual_roster_gate.json",
+      "sha256": "b5295bd15ac42385f1cee282e66d9dc05f65c54746d02b265ee4f7341ee5cae5"
+    },
+    "Weber_completion": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_weber_completion_cancellation_gate.json",
+      "sha256": "65e44261a22dd976b18c092fb09ea9b30204df3af43ae6986cbad2ab1af9359f"
+    }
+  },
+  "interval_witness": {
+    "A": 159577,
+    "B": 5122421,
+    "C0_ball": "[1.8593339383434121766015626959074693723390841153170785123537010353547308422030275 +/- 4.86e-80]",
+    "C1_ball": "[2.1206349206349206349206349206349206349206349206349206349206349206349206349206349 +/- 2.08e-80]",
+    "C_half_ball": "[21.975491371568892328131411901384911237176208934419417604341223702055270048795308 +/- 2.95e-79]",
+    "first_cutoff_where_certificate_applies": 2640998,
+    "height": 10000000000,
+    "shift_block_width_L": 2481422
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_cutoff_shift_defect_vanishing_gate",
+  "next_obligation": "Use the now-licensed all-k common Gaussian-tail representation. Preserve the sum over k at the x=0 corner, derive a uniform summation formula or summation-by-parts bound for J_B-J_A, and separately splice k=0 to the certified A/B face-fold charts.",
+  "passed": true,
+  "proof_boundary": "Fixed-height weighted-L1 vanishing of the dual-cutoff shift defect only. No height-uniform reindexing, common-tail-series bound, k=0 splice, complete source-minus-target estimate, T_upper, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.327,
+    "flint_threads": 1,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_cutoff_shift_defect_vanishing_gate.py",
+      "sha256": "3b80237a25cbe778ead2b50b287a70c7fe6d5cdaa78f72a857d690b395ced81d"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_cutoff_shift_defect_vanishing_gate.py",
+      "sha256": "ea1bd8bb6d98d4763165d2e5f8d41d2ca7dee04104cdf804fd0f53c47ac7242e"
+    }
+  },
+  "status": "fixed_height_dual_cutoff_A_shift_defect_vanishes_in_weighted_L1_infinite_common_tail_bound_open",
+  "symbolic_certificate": {
+    "IBP_bound_for_n_at_least_A": "|K_(A,n)(x)|<=[368/(63*pi)+(668/315)A^2*x]/n^2",
+    "phase_derivative": "phi_q=pi*x[A^2/4-n^2/(1-q)^2]",
+    "scaled_kernel": "K_(A,n)(x)=e^(i*pi/4)x int_0^1 (1-q)^(-1/2)[2+i*pi*A^2*x*q]e^(i*phi) dq",
+    "scaled_phase": "phi=pi*x[A^2*q/4-n^2*q/(1-q)]",
+    "shift_block_bound": "sum_(n=N-L+1)^N M_n<=L times the displayed decreasing bound at n=N-L+1 ->0 for fixed A,L",
+    "split": "x_0=n^(-2)",
+    "trivial_bound": "|K_(A,n)(x)|<=4x+2*pi*A^2*x^2",
+    "weighted_mode_bound": "M_n<=C_half*n^(-1/2)+4*(668/315)A^2*n^(-2)+2^(1/4)*(8*pi*A^2/5)n^(-5/2), C_half=2**(1/4)*(1472/(189*pi) + 16)"
+  }
+}

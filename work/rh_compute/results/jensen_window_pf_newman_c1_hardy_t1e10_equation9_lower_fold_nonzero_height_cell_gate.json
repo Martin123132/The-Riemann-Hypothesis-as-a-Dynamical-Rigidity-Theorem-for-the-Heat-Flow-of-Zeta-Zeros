@@ -1,0 +1,86 @@
+{
+  "certified_height_cell": {
+    "airy_envelope": {
+      "all_panels_strictly_below_envelope": true,
+      "argument_left_ball": "[-69.10994768107896592736337592278572333035237947644572864317321132594660 +/- 1.84e-64]",
+      "argument_right_ball": "[-5.109938397904705329248462412183606171580254564285152942184929613014258 +/- 1.84e-64]",
+      "envelope_constant": "[0.5400000000000000000000000000000000000000000000000000000000000000000000 +/- 1.31e-71]",
+      "largest_observed_interval_upper": "[0.3722920898536456909221329783916907594873566198478217783669244878124989 +/- 3.74e-71]",
+      "largest_observed_panel": 2014,
+      "panels": 2048
+    },
+    "derived_taylor_remainder_bound_ball": "[7.291657302104532106335820529681058770500825215883746048694589094795463e-6 +/- 3.60e-71]",
+    "derived_total_variation_bound_ball": "[0.001312427708723700739560577186610768477591410939177878783087636176205980 +/- 5.24e-73]",
+    "derived_uniform_second_derivative_bound_ball": "[0.1458331460420906421267164105936211754100165043176749209738917818959093 +/- 7.20e-67]",
+    "fixed_odd_selector_C": 159577,
+    "grouped_center_first_height_derivative": {
+      "imag_ball": "[-0.0001213396458241485134591364143593757347215943672136758824701598851589646 +/- 1.33e-25]",
+      "real_ball": "[0.1305127144667297220085814791523352302470003090059549893087442709631377 +/- 1.33e-25]"
+    },
+    "grouped_center_second_height_derivative": {
+      "imag_ball": "[-2.396049252308244255126821105787969397862433313757582419538937634004558e-6 +/- 4.17e-28]",
+      "real_ball": "[7.124339989088178937685650837430203489865279142326362495015407503670092e-5 +/- 4.17e-28]"
+    },
+    "grouped_center_value": {
+      "imag_ball": "[1.428190029203347133044642455140469773370106139214021263248523619533087 +/- 2.27e-22]",
+      "real_ball": "[-43.33293318556235591049231631821292024307103273683162131356787883669535 +/- 2.27e-22]"
+    },
+    "height_center": 10000000000,
+    "height_lower_ball": "[9999999999.990000000000000000000000000000000000000000000000000000000000 +/- 3.06e-61]",
+    "height_radius": "0.01",
+    "height_upper_ball": "[10000000000.01000000000000000000000000000000000000000000000000000000000 +/- 1.62e-61]",
+    "lambda_center_ball": "[5.109943039491835628305919167484664750966317020365440792679070469480430 +/- 1.84e-64]",
+    "lambda_max_ball": "[5.109947681078965927363375922785723330352379476445728643173211325946602 +/- 1.84e-64]",
+    "lambda_min_ball": "[5.109938397904705329248462412183606171580254564285152942184929613014258 +/- 1.84e-64]",
+    "linear_excursion_bound_ball": "[0.001305127708723700739560577186610768477591410939177878783087636176205980 +/- 5.24e-73]",
+    "selector_cell_lower_ball": "[9999760347.647943710077056053348795787925647462426307094224362837236653 +/- 4.21e-61]",
+    "selector_cell_upper_ball": "[10000011009.04258833249996651073906089290177178617834443516760678611578 +/- 4.07e-60]",
+    "stated_taylor_remainder_bound": "0.0000073",
+    "stated_total_variation_bound": "0.001313",
+    "stated_uniform_second_derivative_bound": "0.146",
+    "uniform_cell_theorem": "For every real t with |t-10^10|<=0.01 and fixed selector C=159577, |S(t)-S(t0)-(t-t0)S'(t0)|<0.0000073 and |S(t)-S(t0)|<0.001313."
+  },
+  "decision": {
+    "airy_envelope_interval_certified": true,
+    "nonzero_radius_height_cell_proved": true,
+    "rh_implication": false,
+    "selector_fixed_throughout_cell": true,
+    "selector_transition_join_proved": false,
+    "source_height_interval_proved": false,
+    "uniform_second_height_derivative_bound_proved": true
+  },
+  "dependencies": {
+    "height_transport_cache": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_height_transport_identity_cache.jsonl",
+      "sha256": "7ad250e848e50acb7e6c06b3d4e1b834f2d0d7351d9481c91001b8e7b2ee496f"
+    },
+    "height_transport_gate": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_height_transport_identity_gate.json",
+      "sha256": "d1827413e60850795ff2a3abf5a0a8b1d4fc6e214c8b8554f245976534b5b669"
+    }
+  },
+  "exact_identity": {
+    "derivation": "Because d lambda/dt=-1/beta is constant and partial_lambda^2 Ai(-lambda-y)=(-lambda-y)Ai(-lambda-y).",
+    "second_height_derivative": "G_tt=(-lambda*G-i*G')/beta^2"
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_nonzero_height_cell_gate",
+  "next_obligation": "Replace the deliberately local radius by a resumable selector-cell subdivision, then prove adjacent-roster endpoint reassembly at every crossed odd selector fold.",
+  "passed": true,
+  "proof_boundary": "A first nonzero fixed-selector height cell only. No selector transition join, source-height theorem, T_upper theorem, Lambda<=0, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.096,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_nonzero_height_cell_gate.py",
+      "sha256": "38923d78d3a0166cdf23595417cf0b74df2b4418c211428774634eba29a3de75"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_nonzero_height_cell_gate.py",
+      "sha256": "3616108d7ea7d2644ee330baee1006cacbe84b813dc34d5e7c6677da77dc2fdf"
+    }
+  },
+  "status": "first_nonzero_fixed_selector_lower_fold_height_cell_complete"
+}

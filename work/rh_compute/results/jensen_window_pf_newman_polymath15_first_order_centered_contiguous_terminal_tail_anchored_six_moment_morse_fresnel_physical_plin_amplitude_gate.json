@@ -1,0 +1,281 @@
+{
+  "centered_carrier_certificate": {
+    "center": "Put x=lambda-log(a) and u_N=log(a/N), so log(N)=log(a)-u_N. Writing s_*'=c+ib and s_*''=c_x+ib_x gives the exact identities R=-s_*'x-c*u_N and R_x=-s_*''x-c_x*u_N+i*b*u_(N,x).",
+    "correction_rows": "In the centered variable, C=c_0+c_1*x+c_2*x^2 and D=d_0+d_1*x+d_2*x^2, where c_0=1+rho_1*log(a)+rho_2*log(a)^2, c_1=rho_1+2rho_2*log(a), c_2=rho_2, d_0=rho_(1,x)*log(a)+rho_(2,x)*log(a)^2, d_1=rho_(1,x)+2rho_(2,x)*log(a), and d_2=rho_(2,x).",
+    "rate_defect": "Put delta=chi_N-i*b*u_N. Then Q=(R+delta)C+D and N=R*Q+R_x*C. The existing physical estimate is |delta|<4h^2, but no estimate is used in this algebraic gate.",
+    "symbolic_differences": {
+      "R": "0",
+      "R_x": "0"
+    }
+  },
+  "coefficient_certificate": {
+    "channel_coefficients": "Let gamma=(u_(alpha,0),u_(alpha,1)+i*u_(beta,0),u_(alpha,2)+i*u_(beta,1),i*u_(beta,2)) and eta=(v_(alpha,0),v_(alpha,1)+i*v_(beta,0),i*v_(beta,1)). Then P_lin=C*sum_(j=0)^3gamma_j*x^j+D*sum_(j=0)^2eta_j*x^j.",
+    "leading_coefficient": "The top coefficient is exactly p_5=i*rho_2*(X_T+V_p)*(s_*')^2. Hence the degree-five channel vanishes on the total-value fibre X_T+V_p=0; this is a degree reduction, not a remainder bound.",
+    "observation_rows": "For any real f=(f_V,f_N,f_A,f_Q), let F_f=f_V*C+f_N*N+f_A*A+f_Q*Q. Use alpha=(N_(p,xi),V_(p,xi),-Q_(p,xi),-A_(p,xi)) and beta=(N_p+A_(T,x),X_T+V_p,-Q_p-X_(T,x),-A_T-A_p). Then P_lin=F_alpha+i*x*F_beta.",
+    "six_coefficients": [
+      "p_0=c_0*gamma_0+d_0*eta_0",
+      "p_1=c_0*gamma_1+c_1*gamma_0+d_0*eta_1+d_1*eta_0",
+      "p_2=c_0*gamma_2+c_1*gamma_1+c_2*gamma_0+d_0*eta_2+d_1*eta_1+d_2*eta_0",
+      "p_3=c_0*gamma_3+c_1*gamma_2+c_2*gamma_1+d_1*eta_2+d_2*eta_1",
+      "p_4=c_1*gamma_3+c_2*gamma_2+d_2*eta_2",
+      "p_5=c_2*gamma_3"
+    ],
+    "symbolic_differences": {
+      "p_5": "0",
+      "six_coefficients": "0",
+      "two_channel": "0"
+    },
+    "two_channel_factorization": "For R=r_0+r_1*x and R_x=t_0+t_1*x, every F_f factors exactly as F_f=C*U_f+D*V_f. Here V_f=f_N*R+f_Q and U_f=f_N*[R(R+delta)+R_x]+f_Q(R+delta)+f_A*R+f_V. Thus four physical carrier polynomials reduce to the two correction channels C and D.",
+    "uv_recurrence": "Writing U_f=u_0+u_1*x+u_2*x^2 and V_f=v_0+v_1*x, put g_0=r_0(r_0+delta)+t_0, g_1=r_1(2r_0+delta)+t_1, g_2=r_1^2. Then u_0=f_Ng_0+f_Q(r_0+delta)+f_Ar_0+f_V, u_1=f_Ng_1+(f_Q+f_A)r_1, u_2=f_Ng_2, v_0=f_Nr_0+f_Q, and v_1=f_Nr_1."
+  },
+  "counts": {
+    "coefficient_norm_bounds": 0,
+    "correction_free_contact_maximum_degree": 2,
+    "correction_free_maximum_degree": 3,
+    "degree_five_total_value_factors": 1,
+    "enumerated_physical_modes": 0,
+    "exact_centered_complex_coefficients": 6,
+    "exact_morse_cprime_formulas": 2,
+    "grouped_interior_bounds": 0,
+    "maximum_polynomial_degree": 5,
+    "phi_b_bounds": 0,
+    "physical_base_polynomials": 4,
+    "physical_correction_channels": 2,
+    "quadratic_remainder_bounds": 0,
+    "rows": 24,
+    "signed_flow_bounds": 0
+  },
+  "date": "2026-08-02",
+  "ideal_certificate": {
+    "boundary": "The actual correction channels can restore degrees four and five. The ideal reduction is a scale guide, not an exact deletion of C-1 or D.",
+    "contact_polynomial": "On X_T+V_p=0 and A_T+A_p=0, the correction-free leading polynomial is quadratic: P_lin=N_(p,xi)-i*A_p*u_(N,x)+i[N_p+A_(T,x)-Q_(p,xi)]x+X_(T,x)x^2/2.",
+    "contact_polynomial_expanded": "I*A_T*u_x + I*A_T_x*x + I*N_p*x + N_p_xi - I*Q_p_xi*x + X_T_x*x**2/2",
+    "ideal_polynomial": "P_lin=N_(p,xi)-i*A_p*u_(N,x)+{i[N_p+A_(T,x)-Q_(p,xi)]+(X_T+V_p)u_(N,x)/2}x+[A_p+A_T+X_(T,x)]x^2/2-i(X_T+V_p)x^3/4.",
+    "ideal_polynomial_expanded": "A_T*x**2/2 + I*A_T_x*x - I*A_p*u_x + A_p*x**2/2 + I*N_p*x + N_p_xi - I*Q_p_xi*x + V_p*u_x*x/2 - I*V_p*x**3/4 + X_T*u_x*x/2 - I*X_T*x**3/4 + X_T_x*x**2/2",
+    "specialization": "At C=1, D=0, s_*'=-i/2, s_*''=0, delta=0, and b=-1/2, one has R=Q=i*x/2 and N=-x^2/4-i*u_(N,x)/2. The induced observation identities are A_p=Q_p, A_(p,xi)=Q_(p,xi), and V_(p,xi)=2A_p."
+  },
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_amplitude_gate",
+  "morse_amplitude_certificate": {
+    "c_formula": "For z!=0, c_(P,r)(y)=[W_P(v)-W_P(1)]/(r*z).",
+    "cprime_formula": "For z!=0, c'_(P,r)(y)={z*J*W_P'(v)-W_P(v)+W_P(1)}/[r*sqrt(alpha)*z^2]. With g=t*lambda/2-sigma, this equals {exp(S)[zJ^2(P'+gP)/v+(zJJ'-J)P]+exp(S(lambda_0))P(lambda_0)}/[r*sqrt(alpha)*z^2], where lambda_0=log(alpha/r).",
+    "definitions": "For u_0=alpha/r, lambda=log(u_0v), S(lambda)=t*lambda^2/4-sigma*lambda, z=sgn(v-1)sqrt(2[v-1-log v]), and J=dv/dz, put W_P(v)=exp(S(lambda))*P(lambda)*J(v). Then b_(P,r)(y)=sqrt(alpha)W_P(v)/r and y=sqrt(alpha)z.",
+    "mode_dependence": "At fixed xi the same physical P_lin is used for every Poisson mode. Mode dependence enters only through lambda_0=log(alpha/r), the Morse endpoints, and the common phase. Thus the saddle audit is one second-order differential operator sampled on the logarithmic mode lattice, not six unrelated moment amplitudes.",
+    "saddle_formula": "The removable saddle value is c'_(P,r)(0)=exp(S(lambda_0))/[2r*sqrt(alpha)] times {P''+(2g_0+1)P'+[g_0^2+g_0+t/2+1/6]P}(lambda_0), with g_0=t*lambda_0/2-sigma.",
+    "zero_boundary": "Neither P_lin(lambda_0)=0 nor the displayed saddle operator vanishes identically. Any zero or discrete-difference gain must be proved from the physical coefficients and mode coupling."
+  },
+  "proof_boundary": "This proves the exact physical terminal-centered carrier laws, the C/D two-channel factorization, all six centered P_lin coefficients, the total-value factor in the degree-five coefficient, the correction-free cubic and contact-quadratic reductions, and exact off-saddle and saddle Morse c-prime formulas. It proves no coefficient norm on the physical chart, grouped c-prime sum, discrete cancellation theorem, quadratic residual bound, h^2 flow error, Phi_B upper bound, contact exclusion, retained aggregate or Xi theorem, Q209, Lambda<=0, PF-infinity, RH, or a prize-level conclusion.",
+  "route_certificate": {
+    "next_target": "Insert the certified formulas for rho_1,rho_2 and their x derivatives, bound the six centered coefficients on the full physical chart, and apply the saddle differential operator to P_lin. Then test Abel or reciprocal pairing on that one mode sequence before taking absolute values; keep the four quadratic observation pairings separate.",
+    "proof_boundary": "This proves the exact physical terminal-centered carrier laws, the C/D two-channel factorization, all six centered P_lin coefficients, the total-value factor in the degree-five coefficient, the correction-free cubic and contact-quadratic reductions, and exact off-saddle and saddle Morse c-prime formulas. It proves no coefficient norm on the physical chart, grouped c-prime sum, discrete cancellation theorem, quadratic residual bound, h^2 flow error, Phi_B upper bound, contact exclusion, retained aggregate or Xi theorem, Q209, Lambda<=0, PF-infinity, RH, or a prize-level conclusion.",
+    "route_decision": "Use x=lambda-log(a) and the C/D factorization as the proof-facing coefficient chart. Do not expand powers of log(N) and log(a) separately, and do not return to six componentwise Morse estimates."
+  },
+  "rows": [
+    {
+      "certificate": "Sections 11.160, 11.168, and 11.172.",
+      "claim": "The exact carrier, observation image, and Morse chart are imported.",
+      "id": "plma_01_source",
+      "proof_boundary": "No estimate follows.",
+      "readiness": "proved",
+      "role": "source chain"
+    },
+    {
+      "certificate": "Put x=lambda-log(a) and u_N=log(a/N), so log(N)=log(a)-u_N. Writing s_*'=c+ib and s_*''=c_x+ib_x gives the exact identities R=-s_*'x-c*u_N and R_x=-s_*''x-c_x*u_N+i*b*u_(N,x).",
+      "claim": "The terminal logarithm cancels from R and R_x.",
+      "id": "plma_02_center",
+      "proof_boundary": "Uses log(N)+u_N=log(a) exactly.",
+      "readiness": "proved",
+      "role": "physical centering"
+    },
+    {
+      "certificate": "Put delta=chi_N-i*b*u_N. Then Q=(R+delta)C+D and N=R*Q+R_x*C. The existing physical estimate is |delta|<4h^2, but no estimate is used in this algebraic gate.",
+      "claim": "Q differs from RC through one rate defect and D.",
+      "id": "plma_03_defect",
+      "proof_boundary": "The small bound is not used here.",
+      "readiness": "proved",
+      "role": "rate defect"
+    },
+    {
+      "certificate": "In the centered variable, C=c_0+c_1*x+c_2*x^2 and D=d_0+d_1*x+d_2*x^2, where c_0=1+rho_1*log(a)+rho_2*log(a)^2, c_1=rho_1+2rho_2*log(a), c_2=rho_2, d_0=rho_(1,x)*log(a)+rho_(2,x)*log(a)^2, d_1=rho_(1,x)+2rho_(2,x)*log(a), and d_2=rho_(2,x).",
+      "claim": "C and D have exact centered quadratic rows.",
+      "id": "plma_04_correction",
+      "proof_boundary": "No coefficient norm is asserted.",
+      "readiness": "proved",
+      "role": "correction chart"
+    },
+    {
+      "certificate": "For any real f=(f_V,f_N,f_A,f_Q), let F_f=f_V*C+f_N*N+f_A*A+f_Q*Q. Use alpha=(N_(p,xi),V_(p,xi),-Q_(p,xi),-A_(p,xi)) and beta=(N_p+A_(T,x),X_T+V_p,-Q_p-X_(T,x),-A_T-A_p). Then P_lin=F_alpha+i*x*F_beta.",
+      "claim": "P_lin is F_alpha+i*x*F_beta.",
+      "id": "plma_05_rows",
+      "proof_boundary": "All carrier and terminal observations remain joined.",
+      "readiness": "proved",
+      "role": "observation rows"
+    },
+    {
+      "certificate": "For R=r_0+r_1*x and R_x=t_0+t_1*x, every F_f factors exactly as F_f=C*U_f+D*V_f. Here V_f=f_N*R+f_Q and U_f=f_N*[R(R+delta)+R_x]+f_Q(R+delta)+f_A*R+f_V. Thus four physical carrier polynomials reduce to the two correction channels C and D.",
+      "claim": "Every four-polynomial combination factors through C and D.",
+      "id": "plma_06_channels",
+      "proof_boundary": "No positivity follows.",
+      "readiness": "proved",
+      "role": "two-channel factor"
+    },
+    {
+      "certificate": "Writing U_f=u_0+u_1*x+u_2*x^2 and V_f=v_0+v_1*x, put g_0=r_0(r_0+delta)+t_0, g_1=r_1(2r_0+delta)+t_1, g_2=r_1^2. Then u_0=f_Ng_0+f_Q(r_0+delta)+f_Ar_0+f_V, u_1=f_Ng_1+(f_Q+f_A)r_1, u_2=f_Ng_2, v_0=f_Nr_0+f_Q, and v_1=f_Nr_1.",
+      "claim": "The channel coefficients have degree at most two and one.",
+      "id": "plma_07_uv",
+      "proof_boundary": "Exact polynomial algebra.",
+      "readiness": "proved",
+      "role": "coefficient recurrence"
+    },
+    {
+      "certificate": "Let gamma=(u_(alpha,0),u_(alpha,1)+i*u_(beta,0),u_(alpha,2)+i*u_(beta,1),i*u_(beta,2)) and eta=(v_(alpha,0),v_(alpha,1)+i*v_(beta,0),i*v_(beta,1)). Then P_lin=C*sum_(j=0)^3gamma_j*x^j+D*sum_(j=0)^2eta_j*x^j.",
+      "claim": "The derivative lift is absorbed into gamma and eta.",
+      "id": "plma_08_gamma",
+      "proof_boundary": "No seventh moment.",
+      "readiness": "proved",
+      "role": "lifted channels"
+    },
+    {
+      "certificate": "p_0=c_0*gamma_0+d_0*eta_0; p_1=c_0*gamma_1+c_1*gamma_0+d_0*eta_1+d_1*eta_0; p_2=c_0*gamma_2+c_1*gamma_1+c_2*gamma_0+d_0*eta_2+d_1*eta_1+d_2*eta_0; p_3=c_0*gamma_3+c_1*gamma_2+c_2*gamma_1+d_1*eta_2+d_2*eta_1; p_4=c_1*gamma_3+c_2*gamma_2+d_2*eta_2; p_5=c_2*gamma_3",
+      "claim": "All six centered complex coefficients are explicit.",
+      "id": "plma_09_coefficients",
+      "proof_boundary": "Recurrence form avoids artificial large-log expansion.",
+      "readiness": "proved",
+      "role": "six coefficients"
+    },
+    {
+      "certificate": "The top coefficient is exactly p_5=i*rho_2*(X_T+V_p)*(s_*')^2. Hence the degree-five channel vanishes on the total-value fibre X_T+V_p=0; this is a degree reduction, not a remainder bound.",
+      "claim": "The top coefficient contains the total-value fibre.",
+      "id": "plma_10_leading",
+      "proof_boundary": "A vanishing top coefficient is not an error bound.",
+      "readiness": "proved",
+      "role": "degree-five factor"
+    },
+    {
+      "certificate": "At C=1, D=0, s_*'=-i/2, s_*''=0, delta=0, and b=-1/2, one has R=Q=i*x/2 and N=-x^2/4-i*u_(N,x)/2. The induced observation identities are A_p=Q_p, A_(p,xi)=Q_(p,xi), and V_(p,xi)=2A_p.",
+      "claim": "The correction-free carrier rows reduce to one cubic.",
+      "id": "plma_11_ideal",
+      "proof_boundary": "Actual corrections remain present.",
+      "readiness": "proved",
+      "role": "ideal specialization"
+    },
+    {
+      "certificate": "P_lin=N_(p,xi)-i*A_p*u_(N,x)+{i[N_p+A_(T,x)-Q_(p,xi)]+(X_T+V_p)u_(N,x)/2}x+[A_p+A_T+X_(T,x)]x^2/2-i(X_T+V_p)x^3/4.",
+      "claim": "The complete correction-free P_lin is explicit.",
+      "id": "plma_12_cubic",
+      "proof_boundary": "The actual correction channels can restore degrees four and five. The ideal reduction is a scale guide, not an exact deletion of C-1 or D.",
+      "readiness": "proved",
+      "role": "ideal cubic"
+    },
+    {
+      "certificate": "On X_T+V_p=0 and A_T+A_p=0, the correction-free leading polynomial is quadratic: P_lin=N_(p,xi)-i*A_p*u_(N,x)+i[N_p+A_(T,x)-Q_(p,xi)]x+X_(T,x)x^2/2.",
+      "claim": "The correction-free simultaneous-contact polynomial is quadratic.",
+      "id": "plma_13_contact",
+      "proof_boundary": "The actual correction channels can restore degrees four and five. The ideal reduction is a scale guide, not an exact deletion of C-1 or D.",
+      "readiness": "proved",
+      "role": "contact reduction"
+    },
+    {
+      "certificate": "For u_0=alpha/r, lambda=log(u_0v), S(lambda)=t*lambda^2/4-sigma*lambda, z=sgn(v-1)sqrt(2[v-1-log v]), and J=dv/dz, put W_P(v)=exp(S(lambda))*P(lambda)*J(v). Then b_(P,r)(y)=sqrt(alpha)W_P(v)/r and y=sqrt(alpha)z.",
+      "claim": "One W_P amplitude represents every mode.",
+      "id": "plma_14_morse",
+      "proof_boundary": "Exact change of variables.",
+      "readiness": "proved",
+      "role": "Morse amplitude"
+    },
+    {
+      "certificate": "For z!=0, c_(P,r)(y)=[W_P(v)-W_P(1)]/(r*z).",
+      "claim": "The c chart has a centered divided-difference form.",
+      "id": "plma_15_c",
+      "proof_boundary": "Removable at the saddle.",
+      "readiness": "proved",
+      "role": "residual quotient"
+    },
+    {
+      "certificate": "For z!=0, c'_(P,r)(y)={z*J*W_P'(v)-W_P(v)+W_P(1)}/[r*sqrt(alpha)*z^2]. With g=t*lambda/2-sigma, this equals {exp(S)[zJ^2(P'+gP)/v+(zJJ'-J)P]+exp(S(lambda_0))P(lambda_0)}/[r*sqrt(alpha)*z^2], where lambda_0=log(alpha/r).",
+      "claim": "The off-saddle c-prime amplitude is explicit.",
+      "id": "plma_16_cprime",
+      "proof_boundary": "No absolute variation is taken.",
+      "readiness": "proved",
+      "role": "interior amplitude"
+    },
+    {
+      "certificate": "The removable saddle value is c'_(P,r)(0)=exp(S(lambda_0))/[2r*sqrt(alpha)] times {P''+(2g_0+1)P'+[g_0^2+g_0+t/2+1/6]P}(lambda_0), with g_0=t*lambda_0/2-sigma.",
+      "claim": "The removable saddle value is a second-order polynomial operator.",
+      "id": "plma_17_saddle",
+      "proof_boundary": "Modewise identity.",
+      "readiness": "proved",
+      "role": "saddle operator"
+    },
+    {
+      "certificate": "At fixed xi the same physical P_lin is used for every Poisson mode. Mode dependence enters only through lambda_0=log(alpha/r), the Morse endpoints, and the common phase. Thus the saddle audit is one second-order differential operator sampled on the logarithmic mode lattice, not six unrelated moment amplitudes.",
+      "claim": "All modes sample one physical polynomial.",
+      "id": "plma_18_modes",
+      "proof_boundary": "No mode sum is bounded.",
+      "readiness": "proved",
+      "role": "mode compression"
+    },
+    {
+      "certificate": "Neither P_lin(lambda_0)=0 nor the displayed saddle operator vanishes identically. Any zero or discrete-difference gain must be proved from the physical coefficients and mode coupling.",
+      "claim": "No universal saddle zero is created.",
+      "id": "plma_19_zero",
+      "proof_boundary": "Physical cancellation remains open.",
+      "readiness": "proved",
+      "role": "zero boundary"
+    },
+    {
+      "certificate": "Use x=lambda-log(a) and the C/D factorization as the proof-facing coefficient chart. Do not expand powers of log(N) and log(a) separately, and do not return to six componentwise Morse estimates.",
+      "claim": "The centered C/D chart is selected.",
+      "id": "plma_20_route",
+      "proof_boundary": "Selection is not the final theorem.",
+      "readiness": "proved",
+      "role": "route decision"
+    },
+    {
+      "certificate": "Insert the certified formulas for rho_1,rho_2 and their x derivatives, bound the six centered coefficients on the full physical chart, and apply the saddle differential operator to P_lin. Then test Abel or reciprocal pairing on that one mode sequence before taking absolute values; keep the four quadratic observation pairings separate.",
+      "claim": "The one-sequence grouped estimate is now explicit.",
+      "id": "plma_21_target",
+      "proof_boundary": "No h^2 estimate is claimed.",
+      "readiness": "open",
+      "role": "next theorem"
+    },
+    {
+      "certificate": "No quadratic term was absorbed into P_lin.",
+      "claim": "The four quadratic observation pairings remain separate.",
+      "id": "plma_22_quadratic",
+      "proof_boundary": "Their scale remains open.",
+      "readiness": "proved",
+      "role": "quadratic boundary"
+    },
+    {
+      "certificate": "The only sqrt(alpha) and Fourier constants are inherited from the existing Morse and Poisson charts.",
+      "claim": "No new pi is introduced.",
+      "id": "plma_23_pi",
+      "proof_boundary": "No fitted geometry.",
+      "readiness": "proved",
+      "role": "pi provenance"
+    },
+    {
+      "certificate": "This proves the exact physical terminal-centered carrier laws, the C/D two-channel factorization, all six centered P_lin coefficients, the total-value factor in the degree-five coefficient, the correction-free cubic and contact-quadratic reductions, and exact off-saddle and saddle Morse c-prime formulas. It proves no coefficient norm on the physical chart, grouped c-prime sum, discrete cancellation theorem, quadratic residual bound, h^2 flow error, Phi_B upper bound, contact exclusion, retained aggregate or Xi theorem, Q209, Lambda<=0, PF-infinity, RH, or a prize-level conclusion.",
+      "claim": "The gate is an exact coefficient reduction.",
+      "id": "plma_24_boundary",
+      "proof_boundary": "This is not a proof of RH.",
+      "readiness": "proved",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "morse_fresnel_endpoint": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_endpoint_reduction.json",
+      "sha256": "a0a2a9d98db6648a6c4fe720062c05e3cfdd28084730ee06791074a5902f3764"
+    },
+    "observation_image": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_observation_image_compression_gate.json",
+      "sha256": "8155e7e923285fdab23d6d9988287d136b70b2b405fe89afcfb9ee0004991317"
+    },
+    "two_carrier_kernel": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_five_moment_two_carrier_kernel_reduction.json",
+      "sha256": "0d9af778f6dfd6453b59375e42f225aad382788f7660d7a5bbae2aa3bff5496f"
+    }
+  },
+  "status": "exact terminal-centered physical P_lin coefficient factorization and Morse c-prime amplitude complete; grouped interior and signed flow estimates open"
+}

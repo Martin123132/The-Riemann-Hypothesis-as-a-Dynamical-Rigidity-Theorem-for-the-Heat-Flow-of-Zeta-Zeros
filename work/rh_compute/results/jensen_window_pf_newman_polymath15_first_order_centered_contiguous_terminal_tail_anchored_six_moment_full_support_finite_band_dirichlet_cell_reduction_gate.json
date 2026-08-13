@@ -1,0 +1,362 @@
+{
+  "counts": {
+    "adjacent_block_classes": 2,
+    "cell_recombinations": 3,
+    "far_gap_checks": 20300,
+    "fixed_cell_transports": 1,
+    "fourier_witness_checks": 1680,
+    "odd_harmonic_checks": 204,
+    "parity_decompositions": 1,
+    "periodic_checks": 1020,
+    "phi_b_bounds": 0,
+    "reciprocal_block_decompositions": 1,
+    "relative_cell_reductions": 2,
+    "rows": 33,
+    "signed_physical_bounds": 0,
+    "tie_jumps": 2,
+    "zero_mean_checks": 204
+  },
+  "date": "2026-08-02",
+  "kind": "jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_finite_band_dirichlet_cell_reduction_gate",
+  "proof_boundary": "This proves the finite band kernel, cell-variation and parity formulas, relative Hermitian/transpose reductions, tie jumps, fixed-cell transport, and exact source-placement guards. It proves no signed physical variation, finite-cell defect or completed-current bound, Phi_B theorem, contact exclusion, retained aggregate or Xi theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "rows": [
+    {
+      "certificate": "Put m_N=floor(alpha_P/(N+1/2))+1 and n_N=floor(2alpha_P). The reciprocal band is the finite integer interval {m_N,...,n_N}, with m_N>=1 on the physical chart.",
+      "claim": "The full-support reciprocal band is one finite positive integer interval.",
+      "id": "fbd_01_roster",
+      "proof_boundary": "The floor functions retain their half-open convention.",
+      "readiness": "proved",
+      "role": "band roster"
+    },
+    {
+      "certificate": "Define K_N(u)=sum_(r=m_N)^n_N e(-ru). Then mathscr F_N[P]=integral_1^N f_P(u)K_N(u)du, where f_P(u)=e(alpha_Plog u)exp(S(log u))P(log u).",
+      "claim": "The band-mode sum is one finite source integral.",
+      "id": "fbd_02_kernel",
+      "proof_boundary": "No exterior symmetric limit remains.",
+      "readiness": "proved",
+      "role": "finite kernel"
+    },
+    {
+      "certificate": "For u notin Z, K_N(u)=e(-(m_N+n_N)u/2)sin(pi(n_N-m_N+1)u)/sin(pi u); at u in Z its removable value is n_N-m_N+1.",
+      "claim": "The finite kernel has an exact sine-quotient form and removable integer values.",
+      "id": "fbd_03_closed",
+      "proof_boundary": "The quotient is not split at integers.",
+      "readiness": "proved",
+      "role": "kernel closed form"
+    },
+    {
+      "certificate": "Because all frequencies are integral, K_N is 1-periodic, K_N(-v)=conjugate(K_N(v)), and integral_(-1/2)^(1/2)K_N(v)dv=0 since m_N>=1.",
+      "claim": "Periodicity, conjugation, and zero cell mean are exact.",
+      "id": "fbd_04_symmetry",
+      "proof_boundary": "Zero mean uses m_N>=1.",
+      "readiness": "proved",
+      "role": "kernel symmetry"
+    },
+    {
+      "certificate": "H_N:=integral_0^(1/2)K_N(v)dv=2kappa sum_(m_N<=r<=n_N, r odd)1/r is purely imaginary, and integral_(-1/2)^0K_N(v)dv=-H_N.",
+      "claim": "The two half-cell means are opposite odd harmonic sums.",
+      "id": "fbd_05_half",
+      "proof_boundary": "The coefficient is generally nonzero.",
+      "readiness": "proved",
+      "role": "endpoint harmonic"
+    },
+    {
+      "certificate": "Partition [1,N] into [1,3/2], the centered cells [q-1/2,q+1/2] for 2<=q<=N-1, and [N-1/2,N]. Periodicity lets every cell use the same K_N(v).",
+      "claim": "The physical interval has an exact two-half plus centered-cell partition.",
+      "id": "fbd_06_partition",
+      "proof_boundary": "No endpoint half is duplicated.",
+      "readiness": "proved",
+      "role": "cell partition"
+    },
+    {
+      "certificate": "Define V_N[P] as the lower half-cell integral of [f_P(1+v)-f_P(1)]K_N(v), the sum of centered integrals of [f_P(q+v)-f_P(q)]K_N(v), and the upper half-cell integral of [f_P(N+v)-f_P(N)]K_N(v).",
+      "claim": "All nonconstant source content is collected in one finite variation functional.",
+      "id": "fbd_07_variation",
+      "proof_boundary": "It is not an absolute error budget.",
+      "readiness": "proved",
+      "role": "cell variation"
+    },
+    {
+      "certificate": "The zero cell mean and half-kernel identity give mathscr F_N[P]=H_N{f_P(1)-f_P(N)}+V_N[P].",
+      "claim": "The band sum is endpoint harmonic plus cell variation.",
+      "id": "fbd_08_band",
+      "proof_boundary": "The carrier has not yet been subtracted.",
+      "readiness": "proved",
+      "role": "band recombination"
+    },
+    {
+      "certificate": "Therefore mathscr D_N[P]=-mathscr M_N[P]+H_N{f_P(1)-f_P(N)}+V_N[P]. This finite formula is exactly tau_band-E_band with no conditional exterior sum left.",
+      "claim": "The finite-cell defect has a stable finite source formula.",
+      "id": "fbd_09_defect",
+      "proof_boundary": "It need not be small.",
+      "readiness": "proved",
+      "role": "defect recombination"
+    },
+    {
+      "certificate": "The returned-carrier join is mathscr M_N[P]-mathscr D_N[P]=2mathscr M_N[P]-H_N{f_P(1)-f_P(N)}-V_N[P].",
+      "claim": "The carrier-only join contains two carrier copies minus the finite kernel pieces.",
+      "id": "fbd_10_joined",
+      "proof_boundary": "This is not a sign theorem.",
+      "readiness": "proved",
+      "role": "carrier-defect join"
+    },
+    {
+      "certificate": "On an interior cell, V_(N,q)[P]=integral_0^(1/2){Re(K_N)Delta_even f_P+i Im(K_N)Delta_odd f_P}dv, where Delta_even=f(q+v)+f(q-v)-2f(q) and Delta_odd=f(q+v)-f(q-v).",
+      "claim": "Interior cells split into an even second difference and odd first difference.",
+      "id": "fbd_11_parity",
+      "proof_boundary": "Both complex channels remain.",
+      "readiness": "proved",
+      "role": "cell parity"
+    },
+    {
+      "certificate": "For P_H=i(lambda-log N)B_(H,N), f_(P_H)(N)=0 and mathcal T_N[P_H]=0. Hence mathscr R_N[P_H]=mathscr M_N[P_H]-H_Nf_(P_H)(1)-V_N[P_H], and the carrier-only join is 2mathscr M_N[P_H]-H_Nf_(P_H)(1)-V_N[P_H].",
+      "claim": "The Hermitian terminal value removes only the upper endpoint harmonic.",
+      "id": "fbd_12_hermitian",
+      "proof_boundary": "The lower endpoint and V_N remain.",
+      "readiness": "proved",
+      "role": "Hermitian channel"
+    },
+    {
+      "certificate": "For P_T=i(lambda-log a-u_N)B_(T,N), mathscr R_N[P_T]=mathscr M_N[P_T]-H_N{f_(P_T)(1)-f_(P_T)(N)}-V_N[P_T]+2iu_Nmathcal T_N[B_(T,N)]. The carrier-only join adds a second mathscr M_N[P_T].",
+      "claim": "The transpose channel retains both endpoint and conditional terminal pieces.",
+      "id": "fbd_13_transpose",
+      "proof_boundary": "No terminal term is merged twice.",
+      "readiness": "proved",
+      "role": "transpose channel"
+    },
+    {
+      "certificate": "The transpose endpoint satisfies f_(P_T)(N)=-2iu_N f_(B_(T,N))(N). It must remain with the H_N endpoint coefficient, the conditional terminal term, and the pure terminal transpose block.",
+      "claim": "The terminal transpose value is explicit.",
+      "id": "fbd_14_terminal",
+      "proof_boundary": "It must remain complex.",
+      "readiness": "proved",
+      "role": "transpose terminal"
+    },
+    {
+      "certificate": "Insert the intact ideal cubics P_H^0=-i(x+u_N)(x-u_N)^2/4 and P_T^0=-i(x-u_N)(x+u_N)^2/4+u_(N,x)(x-u_N) into mathscr M_N,H_Nf(1),V_N before attaching Delta_H,Delta_T.",
+      "claim": "The ideal cubic is inserted before physical corrections.",
+      "id": "fbd_15_ideal",
+      "proof_boundary": "No correction norm is spent here.",
+      "readiness": "proved",
+      "role": "ideal cubic placement"
+    },
+    {
+      "certificate": "When 2alpha_P crosses an integer r_*, n_N gains r_* and mathscr F_N,mathscr D_N jump by +I_P(r_*); the outer remainder jumps by -I_P(r_*).",
+      "claim": "The upper half-open crossing transfers one complete mode.",
+      "id": "fbd_16_upper_tie",
+      "proof_boundary": "The joined total is invariant.",
+      "readiness": "proved",
+      "role": "upper band tie"
+    },
+    {
+      "certificate": "When alpha_P/(N+1/2) crosses an integer r_*, m_N changes from r_* to r_*+1 and mathscr F_N,mathscr D_N jump by -I_P(r_*); the outer remainder jumps by +I_P(r_*).",
+      "claim": "The lower half-open crossing transfers one complete mode with opposite sign.",
+      "id": "fbd_17_lower_tie",
+      "proof_boundary": "The joined total is invariant.",
+      "readiness": "proved",
+      "role": "lower band tie"
+    },
+    {
+      "certificate": "On a fixed roster cell, if P and S are held fixed under the auxiliary frequency, f_(i(lambda-c)P)=(partial_xi-ic)f_P and mathscr D_N[i(lambda-c)P]=(partial_xi-ic)mathscr D_N[P]. At a tie the complete transferred mode and lift must be included.",
+      "claim": "Relative frequency lifting commutes with the finite defect on fixed cells.",
+      "id": "fbd_18_transport",
+      "proof_boundary": "At ties the moved mode and lift are included.",
+      "readiness": "proved",
+      "role": "fixed-cell lift"
+    },
+    {
+      "certificate": "Differentiating the sine-quotient formula while allowing m_N or n_N to move creates boundary distributions. The half-open jump laws above, not an ordinary derivative of floor functions, are the exact global rule.",
+      "claim": "Floor jumps are not ordinary derivatives.",
+      "id": "fbd_19_floor_guard",
+      "proof_boundary": "No delta term is silently lost.",
+      "readiness": "guard_validated",
+      "role": "moving-boundary guard"
+    },
+    {
+      "certificate": "Let J_q be the nearest-integer physical u-cell, truncated to [1,N], and let C_p={r in Z_(>0):p-1/2<=alpha_P/r<p+1/2}. Then mathcal R_N is the disjoint union of C_p for 1<=p<=N.",
+      "claim": "The frequency band is tiled by the same nearest-integer labels as the physical cells.",
+      "id": "fbd_20_cells",
+      "proof_boundary": "Endpoint cells remain truncated.",
+      "readiness": "proved",
+      "role": "reciprocal cells"
+    },
+    {
+      "certificate": "Define B_(q,p)[P]=sum_(r in C_p)integral_(J_q)f_P(u)e(-ru)du. The finite band sum is exactly mathscr F_N[P]=sum_(q=1)^N sum_(p=1)^N B_(q,p)[P].",
+      "claim": "The band integral is one exact finite q-by-p block sum.",
+      "id": "fbd_21_blocks",
+      "proof_boundary": "No block is estimated separately here.",
+      "readiness": "proved",
+      "role": "finite block matrix"
+    },
+    {
+      "certificate": "Writing v=alpha_P/r in the p-cell, the phase gradient on J_q is alpha_P/u-r=alpha_P(v-u)/(uv). The diagonal p=q contains the reciprocal stationary point u=v; p=1,N are the two incomplete endpoint diagonals.",
+      "claim": "The block phase gradient has an exact reciprocal-distance form.",
+      "id": "fbd_22_gradient",
+      "proof_boundary": "Boundary diagonals are incomplete.",
+      "readiness": "proved",
+      "role": "block phase"
+    },
+    {
+      "certificate": "For |p-q|>=2, |alpha_P/u-r|>=alpha_P(|p-q|-1)/{(p+1/2)(q+1/2)} throughout the block. These separated blocks are uniformly nonstationary before any modulus is taken.",
+      "claim": "All blocks beyond nearest neighbors have an explicit gradient gap.",
+      "id": "fbd_23_far",
+      "proof_boundary": "The gap is not yet converted to an aggregate bound.",
+      "readiness": "proved",
+      "role": "separated blocks"
+    },
+    {
+      "certificate": "The p=q+1 and p=q-1 blocks meet the diagonal cells at a shared half-integer boundary and have no positive uniform gradient gap. They must be composed in opposite orientations with the half-open tie transfer and, at the terminal edge, the complex adjacent recurrence.",
+      "claim": "Nearest-neighbor blocks have no uniform gap and retain oriented boundary transport.",
+      "id": "fbd_24_adjacent",
+      "proof_boundary": "They cannot be included in the far-block modulus.",
+      "readiness": "guard_validated",
+      "role": "adjacent blocks"
+    },
+    {
+      "certificate": "For u=q+w, phi_r(q+w)-phi_r(q)=(alpha_P/q-r)w+alpha_P{log(1+w/q)-w/q}. This exact form keeps the linear reciprocal offset and negative logarithmic curvature together.",
+      "claim": "The exact local phase separates reciprocal offset from logarithmic curvature.",
+      "id": "fbd_25_local_phase",
+      "proof_boundary": "No quadratic truncation is made.",
+      "readiness": "proved",
+      "role": "local reciprocal phase"
+    },
+    {
+      "certificate": "For the exact test source f(u)=e(ku) with integer k in [m_N,n_N], orthogonality gives mathscr F_N=N-1=mathscr M_N and mathscr D_N=0.",
+      "claim": "An exact in-band Fourier source has zero defect.",
+      "id": "fbd_26_inband",
+      "proof_boundary": "This witness is not the physical logarithmic source.",
+      "readiness": "proved",
+      "role": "in-band witness"
+    },
+    {
+      "certificate": "For f(u)=e(ku) with integer k outside [m_N,n_N], including k=0, mathscr F_N=0 while mathscr M_N=N-1, so mathscr D_N=-(N-1) and mathscr M_N-mathscr D_N=2(N-1).",
+      "claim": "An exact exterior Fourier source has maximal carrier-sized defect.",
+      "id": "fbd_27_outband",
+      "proof_boundary": "This witness is not a physical counterexample.",
+      "readiness": "proved",
+      "role": "out-of-band witness"
+    },
+    {
+      "certificate": "The finite-cell defect has no coefficient-blind smallness or sign theorem. Its behavior is controlled by where the source frequency lies relative to the reciprocal band; the logarithmic physical phase must be retained.",
+      "claim": "No coefficient-blind defect theorem is possible.",
+      "id": "fbd_28_nouniversal",
+      "proof_boundary": "Source phase placement is essential.",
+      "readiness": "guard_validated",
+      "role": "nonpromotion guard"
+    },
+    {
+      "certificate": "For f_P=e(alpha_Plog u)exp(S(log u))P(log u), f_P'(u)=u^(-1)e(alpha_Plog u)exp(S){P'+[g+2pi i alpha_P]P}. The alpha_P term is large, so V_N cannot be bounded as a slowly varying cell error before reciprocal stationary cancellation.",
+      "claim": "The physical logarithmic source is not slowly varying on unit cells.",
+      "id": "fbd_29_derivative",
+      "proof_boundary": "A derivative majorant discards the needed oscillation.",
+      "readiness": "proved",
+      "role": "physical cell scale"
+    },
+    {
+      "certificate": "Return to the reciprocal r-cells inside the finite V_N formula: isolate the stationary r near alpha_P/q, pair the nonstationary modes globally, and estimate the ideal cubic carrier and variation together. Do not take an L1 norm of K_N or a cellwise derivative majorant.",
+      "claim": "Prove or falsify a reciprocal-stationary bound for the joined ideal variation.",
+      "id": "fbd_30_route",
+      "proof_boundary": "No signed physical bound is proved.",
+      "readiness": "open",
+      "role": "stationary route"
+    },
+    {
+      "certificate": "Replace the conditional global exterior by the finite Dirichlet-cell functional. The live Hermitian and transpose joins are now two starred carriers minus one endpoint harmonic and one source-coupled cell variation, plus the explicit transpose terminal term.",
+      "claim": "The conditional exterior is replaced by a finite source functional.",
+      "id": "fbd_31_decision",
+      "proof_boundary": "This is an exact reduction.",
+      "readiness": "proved",
+      "role": "route decision"
+    },
+    {
+      "certificate": "Derive a reciprocal-stationary decomposition of V_N[P_H^0] and V_N[P_T^0] that preserves cancellation with 2mathscr M_N. Bound or sign that ideal pair before attaching Delta_H,Delta_T and the remaining current packages.",
+      "claim": "Control the ideal carrier and variation jointly before corrections.",
+      "id": "fbd_32_obligation",
+      "proof_boundary": "No h^2 reserve is claimed.",
+      "readiness": "open",
+      "role": "next obligation"
+    },
+    {
+      "certificate": "No signed physical defect, h^2/800 reserve, completed current, or RH-level conclusion is proved. The sine quotient is only the finite geometric sum for e(x)=exp(2pi i x); kappa=1/(2pi i). No geometric input is added.",
+      "claim": "This gate is not a proof of RH.",
+      "id": "fbd_33_boundary",
+      "proof_boundary": "No prize-level conclusion is claimed.",
+      "readiness": "guard_validated",
+      "role": "proof boundary"
+    }
+  ],
+  "source_audit": {
+    "finite_cell": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_morse_fresnel_physical_plin_ideal_cubic_reciprocal_finite_cell_inversion_gate.json",
+      "sha256": "52856581875a22fd16216f3282475bf2716fe8757d147dfb604ddac8ec14f5fd"
+    },
+    "joined_recombination": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_polymath15_first_order_centered_contiguous_terminal_tail_anchored_six_moment_full_support_joined_lower_interior_abel_recombination_gate.json",
+      "sha256": "685078175aee3d9d32ffefb49cb596d8380bf31f2cb7d60a2739e4c1e38ff31b"
+    }
+  },
+  "status": "finite-band Dirichlet-cell and relative-channel reduction proved; signed physical variation estimate open",
+  "symbolic_certificate": {
+    "band_kernel": {
+      "closed_form": "For u notin Z, K_N(u)=e(-(m_N+n_N)u/2)sin(pi(n_N-m_N+1)u)/sin(pi u); at u in Z its removable value is n_N-m_N+1.",
+      "half_kernel": "H_N:=integral_0^(1/2)K_N(v)dv=2kappa sum_(m_N<=r<=n_N, r odd)1/r is purely imaginary, and integral_(-1/2)^0K_N(v)dv=-H_N.",
+      "kernel": "Define K_N(u)=sum_(r=m_N)^n_N e(-ru). Then mathscr F_N[P]=integral_1^N f_P(u)K_N(u)du, where f_P(u)=e(alpha_Plog u)exp(S(log u))P(log u).",
+      "odd_harmonic_checks": 204,
+      "periodic_checks": 1020,
+      "pi_provenance": "The sine quotient is only the finite geometric sum for e(x)=exp(2pi i x); kappa=1/(2pi i). No geometric input is added.",
+      "roster": "Put m_N=floor(alpha_P/(N+1/2))+1 and n_N=floor(2alpha_P). The reciprocal band is the finite integer interval {m_N,...,n_N}, with m_N>=1 on the physical chart.",
+      "symmetry": "Because all frequencies are integral, K_N is 1-periodic, K_N(-v)=conjugate(K_N(v)), and integral_(-1/2)^(1/2)K_N(v)dv=0 since m_N>=1.",
+      "zero_mean_checks": 204
+    },
+    "cell_reduction": {
+      "band": "The zero cell mean and half-kernel identity give mathscr F_N[P]=H_N{f_P(1)-f_P(N)}+V_N[P].",
+      "cell_recombinations": 3,
+      "defect": "Therefore mathscr D_N[P]=-mathscr M_N[P]+H_N{f_P(1)-f_P(N)}+V_N[P]. This finite formula is exactly tau_band-E_band with no conditional exterior sum left.",
+      "joined": "The returned-carrier join is mathscr M_N[P]-mathscr D_N[P]=2mathscr M_N[P]-H_N{f_P(1)-f_P(N)}-V_N[P].",
+      "parity": "On an interior cell, V_(N,q)[P]=integral_0^(1/2){Re(K_N)Delta_even f_P+i Im(K_N)Delta_odd f_P}dv, where Delta_even=f(q+v)+f(q-v)-2f(q) and Delta_odd=f(q+v)-f(q-v).",
+      "parity_decompositions": 1,
+      "partition": "Partition [1,N] into [1,3/2], the centered cells [q-1/2,q+1/2] for 2<=q<=N-1, and [N-1/2,N]. Periodicity lets every cell use the same K_N(v).",
+      "variation": "Define V_N[P] as the lower half-cell integral of [f_P(1+v)-f_P(1)]K_N(v), the sum of centered integrals of [f_P(q+v)-f_P(q)]K_N(v), and the upper half-cell integral of [f_P(N+v)-f_P(N)]K_N(v)."
+    },
+    "handoff": {
+      "decision": "Replace the conditional global exterior by the finite Dirichlet-cell functional. The live Hermitian and transpose joins are now two starred carriers minus one endpoint harmonic and one source-coupled cell variation, plus the explicit transpose terminal term.",
+      "obligation": "Derive a reciprocal-stationary decomposition of V_N[P_H^0] and V_N[P_T^0] that preserves cancellation with 2mathscr M_N. Bound or sign that ideal pair before attaching Delta_H,Delta_T and the remaining current packages.",
+      "reserve": "No signed physical defect, h^2/800 reserve, completed current, or RH-level conclusion is proved."
+    },
+    "reciprocal_blocks": {
+      "adjacent": "The p=q+1 and p=q-1 blocks meet the diagonal cells at a shared half-integer boundary and have no positive uniform gradient gap. They must be composed in opposite orientations with the half-open tie transfer and, at the terminal edge, the complex adjacent recurrence.",
+      "adjacent_block_classes": 2,
+      "block_decompositions": 1,
+      "blocks": "Define B_(q,p)[P]=sum_(r in C_p)integral_(J_q)f_P(u)e(-ru)du. The finite band sum is exactly mathscr F_N[P]=sum_(q=1)^N sum_(p=1)^N B_(q,p)[P].",
+      "cells": "Let J_q be the nearest-integer physical u-cell, truncated to [1,N], and let C_p={r in Z_(>0):p-1/2<=alpha_P/r<p+1/2}. Then mathcal R_N is the disjoint union of C_p for 1<=p<=N.",
+      "far_gap": "For |p-q|>=2, |alpha_P/u-r|>=alpha_P(|p-q|-1)/{(p+1/2)(q+1/2)} throughout the block. These separated blocks are uniformly nonstationary before any modulus is taken.",
+      "far_gap_checks": 20300,
+      "gradient": "Writing v=alpha_P/r in the p-cell, the phase gradient on J_q is alpha_P/u-r=alpha_P(v-u)/(uv). The diagonal p=q contains the reciprocal stationary point u=v; p=1,N are the two incomplete endpoint diagonals.",
+      "local_phase": "For u=q+w, phi_r(q+w)-phi_r(q)=(alpha_P/q-r)w+alpha_P{log(1+w/q)-w/q}. This exact form keeps the linear reciprocal offset and negative logarithmic curvature together."
+    },
+    "relative_channels": {
+      "hermitian": "For P_H=i(lambda-log N)B_(H,N), f_(P_H)(N)=0 and mathcal T_N[P_H]=0. Hence mathscr R_N[P_H]=mathscr M_N[P_H]-H_Nf_(P_H)(1)-V_N[P_H], and the carrier-only join is 2mathscr M_N[P_H]-H_Nf_(P_H)(1)-V_N[P_H].",
+      "ideal": "Insert the intact ideal cubics P_H^0=-i(x+u_N)(x-u_N)^2/4 and P_T^0=-i(x-u_N)(x+u_N)^2/4+u_(N,x)(x-u_N) into mathscr M_N,H_Nf(1),V_N before attaching Delta_H,Delta_T.",
+      "relative_cell_reductions": 2,
+      "terminal": "The transpose endpoint satisfies f_(P_T)(N)=-2iu_N f_(B_(T,N))(N). It must remain with the H_N endpoint coefficient, the conditional terminal term, and the pure terminal transpose block.",
+      "transpose": "For P_T=i(lambda-log a-u_N)B_(T,N), mathscr R_N[P_T]=mathscr M_N[P_T]-H_N{f_(P_T)(1)-f_(P_T)(N)}-V_N[P_T]+2iu_Nmathcal T_N[B_(T,N)]. The carrier-only join adds a second mathscr M_N[P_T]."
+    },
+    "route_guards": {
+      "fourier_witness_checks": 1680,
+      "in_band": "For the exact test source f(u)=e(ku) with integer k in [m_N,n_N], orthogonality gives mathscr F_N=N-1=mathscr M_N and mathscr D_N=0.",
+      "meaning": "The finite-cell defect has no coefficient-blind smallness or sign theorem. Its behavior is controlled by where the source frequency lies relative to the reciprocal band; the logarithmic physical phase must be retained.",
+      "next_route": "Return to the reciprocal r-cells inside the finite V_N formula: isolate the stationary r near alpha_P/q, pair the nonstationary modes globally, and estimate the ideal cubic carrier and variation together. Do not take an L1 norm of K_N or a cellwise derivative majorant.",
+      "outside_band": "For f(u)=e(ku) with integer k outside [m_N,n_N], including k=0, mathscr F_N=0 while mathscr M_N=N-1, so mathscr D_N=-(N-1) and mathscr M_N-mathscr D_N=2(N-1).",
+      "signed_physical_bounds": 0,
+      "source_derivative": "For f_P=e(alpha_Plog u)exp(S(log u))P(log u), f_P'(u)=u^(-1)e(alpha_Plog u)exp(S){P'+[g+2pi i alpha_P]P}. The alpha_P term is large, so V_N cannot be bounded as a slowly varying cell error before reciprocal stationary cancellation."
+    },
+    "tie_transport": {
+      "fixed_cell": "On a fixed roster cell, if P and S are held fixed under the auxiliary frequency, f_(i(lambda-c)P)=(partial_xi-ic)f_P and mathscr D_N[i(lambda-c)P]=(partial_xi-ic)mathscr D_N[P]. At a tie the complete transferred mode and lift must be included.",
+      "fixed_cell_transports": 1,
+      "lower_tie": "When alpha_P/(N+1/2) crosses an integer r_*, m_N changes from r_* to r_*+1 and mathscr F_N,mathscr D_N jump by -I_P(r_*); the outer remainder jumps by +I_P(r_*).",
+      "moving_boundary_guard": "Differentiating the sine-quotient formula while allowing m_N or n_N to move creates boundary distributions. The half-open jump laws above, not an ordinary derivative of floor functions, are the exact global rule.",
+      "tie_jumps": 2,
+      "upper_tie": "When 2alpha_P crosses an integer r_*, n_N gains r_* and mathscr F_N,mathscr D_N jump by +I_P(r_*); the outer remainder jumps by -I_P(r_*)."
+    }
+  }
+}

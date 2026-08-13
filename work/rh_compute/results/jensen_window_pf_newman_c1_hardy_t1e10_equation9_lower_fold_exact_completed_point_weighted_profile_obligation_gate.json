@@ -1,0 +1,96 @@
+{
+  "certificate": {
+    "canonical_profile_scale_identity": "Y/(2pi)=1/h",
+    "canonical_profile_scale_interval": [
+      "18.5172637372933172944160169256230672422138481023579575878863075576719273979422983547666152",
+      "18.5172637372933172944160169256230672422138481023579575878863075576719422107495312266193501"
+    ],
+    "counterprofile_frequencies": [
+      198,
+      199
+    ],
+    "counterprofile_modes": [
+      40093,
+      40094
+    ],
+    "detuning_spacing_h_ball": "[0.05400365918999276349713021611659637923100296108992399103476616517645497 +/- 2.16e-71]",
+    "last_two_weight_difference_absolute_ball": "[1.917549273811047783055983018130064010620117187500000000000000000000000000000000000000000000000000000e-7 +/- 4.06e-11]",
+    "last_two_weight_difference_lower_bound": "1.91714327381104778305598301813006401062011718750000000000000000000000000000000000000000000E-7",
+    "raw_fold_profile_transfer_coefficient_upper_bound": "0.000711115255886724357667503555655620273299661419993347461371735065747527115808614214504886573",
+    "two_piece_weighted_kernel_L1_bound_ball": "[3.8402825923711157469357553976338890036124815208824976467044011286419031499973287e-5 +/- 4.70e-85]",
+    "two_piece_weighted_kernel_L1_upper_bound": "0.000038402825923711157469357553976338890036124815208824976467044011286419031499973287470",
+    "uniform_completed_canonical_profile_value_upper_bound": "1.75842251125259831742031899764141519403286918141964047104483729464309891537402844719769180E-10",
+    "uniform_completed_scalar_reduced_error_ball": "[9.49612500096965344123853751189785591899931291950937710064324691677659606545530133694636546e-12 +/- 2.94e-29]",
+    "uniform_completed_scalar_reduced_error_upper_bound": "9.49612500096965347063853751189785591899931291950937710064324691677659606545530133694636546E-12"
+  },
+  "countermodel_scope": "Logical non-identifiability from completed endpoint data alone; it does not assert that the physical exact profile admits arbitrary perturbations.",
+  "date": "2026-08-13",
+  "decision": {
+    "complete_T_upper_proved": false,
+    "completed_scalar_value_controls_weighted_profile_correction": false,
+    "conditional_whole_kernel_transfer_exact": true,
+    "endpoint_half_current_and_midpoint_preserved_by_counterprofile": true,
+    "event_zero_preserved_by_counterprofile": true,
+    "physical_exact_common_profile_operator_identity_proved": false,
+    "rh_implication": false,
+    "uniform_exact_minus_beta4_profile_bound_proved": false,
+    "weighted_exact_finite_integral_remainder_proved": false
+  },
+  "dependencies": {
+    "beta4_completed_projection": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_fixed_B_selector_boundary_beta4_completed_branch_projection_gate.json",
+      "sha256": "a295c3083220027a0fa44a670d47bf39f200bcf4da36ff525354719984edb437"
+    },
+    "completed_height_cell": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_fixed_B_selector_boundary_nonzero_height_completed_strip_cell_gate.json",
+      "sha256": "47e464d25cee5eebe41ffaa4ce1302dbf592686f534291f6c2af112ac576bf8f"
+    },
+    "fourier_completion": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_fixed_B_selector_boundary_399_mode_fourier_completion_gate.json",
+      "sha256": "021324502636d0c2de16690eb418231f1d63ec4714af9a84130e1812ebb0d1ff"
+    },
+    "grouped_selected": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_weighted_selected_branch_grouped_integral_gate.json",
+      "sha256": "edfff42f793829acb2c759397e56f5fea0b0a32de28da32290c272d9e31e1083"
+    },
+    "weighted_completion": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_weighted_completion_partial_sum_obligation_gate.json",
+      "sha256": "3c8840b5b8b5225387824da4cc81b19912eef431636b0af0ca16e2014e2dd6cb"
+    },
+    "weighted_kernel": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_weighted_opposite_branch_dirichlet_gate.json",
+      "sha256": "681f2ac9990f1d245ac6a661598724596f35bbbda604d921276206c65f37f314"
+    }
+  },
+  "exact_algebra": {
+    "candidate_common_profile": "Delta G_(39895+n)=int_0^1 delta g(s) exp(-2pi i n s) ds",
+    "completed_value": "The all-mode midpoint plus endpoint half-current evaluates delta J(0), hence delta g(0)=delta J(0)/h",
+    "conditional_transfer": "If ||delta g||_infinity<=epsilon_profile, then |sum w_m Delta G_m|<=epsilon_profile ||P_w||_1",
+    "counterprofile": "phi_z(s)=z(exp(2pi i 198s)-exp(2pi i 199s))",
+    "counterprofile_coefficients": "Delta G_40093=z, Delta G_40094=-z",
+    "counterprofile_endpoints": "phi_z(0)=phi_z(1)=0",
+    "counterprofile_weighted_shift": "z(w_40093-w_40094)",
+    "profile_normalization": "delta g(s)=Y delta J(s)/(2pi)=delta J(s)/h because hY=2pi",
+    "selector_center": 39895
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_exact_completed_point_weighted_profile_obligation_gate",
+  "next_action": "Derive the exact finite-t common profile before all-mode evaluation at s=0 and prove that the missing weighted amplitude/Fresnel correction is its Fourier pairing with P_w. Then certify a uniform profile or completed-cutoff bound and apply the whole-kernel L1 constant; do not estimate 398 modes separately.",
+  "passed": true,
+  "proof_boundary": "Exact completed-point insufficiency counterprofile and a conditional cancellation-preserving whole-kernel transfer only. No physical exact common-profile identity, uniform exact-minus-beta^-4 profile estimate, weighted finite-integral amplitude/Fresnel remainder, completed source/initial-data splice, complete Q_K-T or T_upper, all-corridor or height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.041,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_exact_completed_point_weighted_profile_obligation_gate.py",
+      "sha256": "0439f08b47f5a2a8d1e4e065fd0878359c0d785ced44085181fec1fa0c064f64"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_exact_completed_point_weighted_profile_obligation_gate.py",
+      "sha256": "f9486092e54e9bfb06f58439453450a037ce0e1ec7f2533479f0fb6f624842cf"
+    }
+  },
+  "status": "completed_point_insufficient_weighted_profile_transfer_obligation_certified"
+}

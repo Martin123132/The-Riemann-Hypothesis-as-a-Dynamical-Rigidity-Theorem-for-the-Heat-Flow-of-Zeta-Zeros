@@ -1,0 +1,176 @@
+{
+  "kind": "jensen_window_pf_newman_c1_actual_source_raw_center_sign_obstruction_gate",
+  "schema_version": 1,
+  "date": "2026-08-04",
+  "status": "actual physical source phase forces both raw-centre signs on every complete q=1 cell; complete residual current open",
+  "source_sha256": {
+    "phase_lock": "497befa6177e5cc352e2ee8daeebb18d1a4ed11e279ca43da1a1d682071f712b",
+    "covariant_current": "b95960dfe81719e13cb6296090521bb004ae01d80571470c42858032f536647d",
+    "raw_anchors": "2064f5bbf9e74fc100d40dd3f7d596f79eb463f4803aa1426d724466487f2219"
+  },
+  "source_audit": {
+    "phase_lock": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_actual_source_saddle_phase_lock_center_symmetry_gate.json",
+      "sha256": "497befa6177e5cc352e2ee8daeebb18d1a4ed11e279ca43da1a1d682071f712b"
+    },
+    "covariant_current": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_terminal_phase_winding_covariant_two_channel_gate.json",
+      "sha256": "b95960dfe81719e13cb6296090521bb004ae01d80571470c42858032f536647d"
+    },
+    "raw_anchors": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_carrier_near_odd_harmonic_anchor_gate.json",
+      "sha256": "2064f5bbf9e74fc100d40dd3f7d596f79eb463f4803aa1426d724466487f2219"
+    }
+  },
+  "exact": {
+    "phase_scale": {
+      "main_phase": "Write chi_N=chi_0+r with chi_0=(1/2)F_N(Omega)+pi/8, F_N(v)=v[1+log(2pi N^2/v)], and r=psi/2+arg(1+d_1).",
+      "frequency_monotonicity": "On q=1, T_0=2pi a^2 is strictly increasing while both positive terms of epsilon=atan(1/x)/(8L^2)+3x/[4L^2(1+x^2)] are strictly decreasing for x>1. Hence Omega=T_0-epsilon is strictly increasing across the cell.",
+      "main_reverse_turn": "The cell crosses K_N=2pi N^2 once. From that crossing to the right endpoint, F_N(Omega) decreases by more than 4pi, so chi_0 decreases by more than 2pi.",
+      "safe_arc": "In any real interval of phase length greater than 2pi, the periodic set sin(theta)>=1/2 has a connected component of intersection of width at least pi/3. Choose a subinterval J on which chi_0 decreases by pi/3 and sin(chi_0)>=1/2.",
+      "relative_speed": "With phi_N=Omega log N and Omega>=K_N on J, |d chi_0/d phi_N|=log(Omega/K_N)/(2log N)<log(1+1/N)/log N<2/N.",
+      "source_sweep": "The pi/3 change of chi_0 therefore requires Delta phi_N>pi N/6. Thus theta_0=chi_0-phi_N decreases by more than pi N/6+pi/3>2pi on J, and assumes representatives with cos(theta_0)=+1 and cos(theta_0)=-1.",
+      "safe_phase_arcs": 1,
+      "scale_separation_theorems": 1,
+      "source_half_turn_pairs": 1
+    },
+    "sign_obstruction": {
+      "uniform_remainder": "The phase-lock errors give |r|<1/(2x)+4378/x<487/N^2<1/1000 throughout the cell. The exact anchor mismatch e_N=u_N/log N obeys 0<=e_N<2/N<1/1000.",
+      "positive_point": "At a point of J with theta_0=0 modulo 2pi, theta_eta=theta_0+r and chi_N=chi_0+r. Hence cos(theta_eta)>999/1000 and sin(chi_N)>499/1000. The normalized bracket B=cos(theta_eta)sin(chi_N)+e_N sin(phi_N) is greater than 497501/10^6>49/100.",
+      "negative_point": "At a point of J with theta_0=pi modulo 2pi, cos(theta_eta)<-999/1000 while sin(chi_N)>499/1000. The same normalized bracket satisfies B<-497501/10^6<-49/100.",
+      "raw_center_obstruction": "Since R_center=-rho|nu|^2A_T B with rho|nu|^2A_T>0, every complete physical q=1 cell contains raw-centre points with R_center<-(49/100)rho|nu|^2A_T and R_center>(49/100)rho|nu|^2A_T. The actual physical source phase therefore does not rescue a cell-uniform raw-centre sign.",
+      "tie_guard": "The selected points may be perturbed off the finite roster-tie set without losing the strict 49/100 reserve. The raw-centre sign obstruction is valid on roster interiors, but only the complete residual-composed current is tie invariant.",
+      "residual_scalar": "With W_H=R_H and W_T=R_T+Q_T, the complete ideal actual-source scalar is Sigma_id=-2rho A_TB+E_W, where E_W=Re(conjugate(tau_0)W_H)+Re(eta^2tau_0W_T), and R_id=(|nu|^2/2)Sigma_id.",
+      "macroscopic_compensation": "At the witness B<-49/100, negativity of the complete ideal current requires E_W<-(98/100)rho A_T. Since |E_W|<=rho(|W_H|+|W_T|), a necessary condition is |W_H|+|W_T|>(98/100)A_T. The residual must therefore be macroscopic and correctly signed on the adverse arc; this may be a uniform negative bias or a phase-correlated response.",
+      "complete_target": "A successful physical-current theorem must use signed reciprocal-stationary residuals and the correction/affine/moved-tail rows to overturn or absorb this O(A_T) alternating centre. It must prove either a sufficiently strong uniform negative bias or the required phase-correlated inequality. Any proof based on a uniformly favourable centre phase, even the actual source phase, is now retired.",
+      "strict_positive_witnesses": 1,
+      "strict_negative_witnesses": 1,
+      "actual_source_center_sign_obstructions": 1,
+      "macroscopic_compensation_conditions": 1,
+      "normalized_reserve_numerator": 49,
+      "normalized_reserve_denominator": 100
+    }
+  },
+  "rows": [
+    {
+      "id": "rco_01_main",
+      "role": "locked main phase",
+      "readiness": "proved",
+      "claim": "The actual absolute phase splits into an explicit main and a uniformly tiny remainder.",
+      "certificate": "Write chi_N=chi_0+r with chi_0=(1/2)F_N(Omega)+pi/8, F_N(v)=v[1+log(2pi N^2/v)], and r=psi/2+arg(1+d_1).",
+      "proof_boundary": "This is the fixed physical q=1 chart."
+    },
+    {
+      "id": "rco_02_monotone",
+      "role": "frequency monotonicity",
+      "readiness": "proved",
+      "claim": "The physical frequency is strictly increasing across each complete cell.",
+      "certificate": "On q=1, T_0=2pi a^2 is strictly increasing while both positive terms of epsilon=atan(1/x)/(8L^2)+3x/[4L^2(1+x^2)] are strictly decreasing for x>1. Hence Omega=T_0-epsilon is strictly increasing across the cell.",
+      "proof_boundary": "No sampled monotonicity is used."
+    },
+    {
+      "id": "rco_03_turn",
+      "role": "main reverse turn",
+      "readiness": "proved",
+      "claim": "The explicit locked main makes more than one reverse turn after the saddle crossing.",
+      "certificate": "The cell crosses K_N=2pi N^2 once. From that crossing to the right endpoint, F_N(Omega) decreases by more than 4pi, so chi_0 decreases by more than 2pi.",
+      "proof_boundary": "This concerns chi_0, before the tiny phase remainder."
+    },
+    {
+      "id": "rco_04_arc",
+      "role": "safe sine arc",
+      "readiness": "proved",
+      "claim": "One connected locked-phase arc has sine at least one half and width pi/3.",
+      "certificate": "In any real interval of phase length greater than 2pi, the periodic set sin(theta)>=1/2 has a connected component of intersection of width at least pi/3. Choose a subinterval J on which chi_0 decreases by pi/3 and sin(chi_0)>=1/2.",
+      "proof_boundary": "This is an elementary periodic-arc pigeonhole."
+    },
+    {
+      "id": "rco_05_speed",
+      "role": "scale separation",
+      "readiness": "proved",
+      "claim": "The locked phase moves at less than 2/N of the terminal phase speed.",
+      "certificate": "With phi_N=Omega log N and Omega>=K_N on J, |d chi_0/d phi_N|=log(Omega/K_N)/(2log N)<log(1+1/N)/log N<2/N.",
+      "proof_boundary": "The bound is used only after Omega reaches K_N."
+    },
+    {
+      "id": "rco_06_sweep",
+      "role": "source half-turn pair",
+      "readiness": "proved",
+      "claim": "The source phase makes more than a full turn inside the safe locked-phase arc.",
+      "certificate": "The pi/3 change of chi_0 therefore requires Delta phi_N>pi N/6. Thus theta_0=chi_0-phi_N decreases by more than pi N/6+pi/3>2pi on J, and assumes representatives with cos(theta_0)=+1 and cos(theta_0)=-1.",
+      "proof_boundary": "Only continuity and strict phase ranges are required."
+    },
+    {
+      "id": "rco_07_remainder",
+      "role": "physical remainder",
+      "readiness": "proved",
+      "claim": "The actual phase and unequal-anchor errors are each below 1/1000.",
+      "certificate": "The phase-lock errors give |r|<1/(2x)+4378/x<487/N^2<1/1000 throughout the cell. The exact anchor mismatch e_N=u_N/log N obeys 0<=e_N<2/N<1/1000.",
+      "proof_boundary": "The physical N floor is used explicitly."
+    },
+    {
+      "id": "rco_08_positive",
+      "role": "positive bracket witness",
+      "readiness": "proved",
+      "claim": "One roster-interior point has normalized centre bracket above 49/100.",
+      "certificate": "At a point of J with theta_0=0 modulo 2pi, theta_eta=theta_0+r and chi_N=chi_0+r. Hence cos(theta_eta)>999/1000 and sin(chi_N)>499/1000. The normalized bracket B=cos(theta_eta)sin(chi_N)+e_N sin(phi_N) is greater than 497501/10^6>49/100.",
+      "proof_boundary": "The current itself has the opposite sign."
+    },
+    {
+      "id": "rco_09_negative",
+      "role": "negative bracket witness",
+      "readiness": "proved",
+      "claim": "A second roster-interior point has normalized centre bracket below -49/100.",
+      "certificate": "At a point of J with theta_0=pi modulo 2pi, cos(theta_eta)<-999/1000 while sin(chi_N)>499/1000. The same normalized bracket satisfies B<-497501/10^6<-49/100.",
+      "proof_boundary": "The current itself has the opposite sign."
+    },
+    {
+      "id": "rco_10_obstruction",
+      "role": "actual-source centre obstruction",
+      "readiness": "proved",
+      "claim": "The raw-centre current takes both signs at the actual physical source phase.",
+      "certificate": "Since R_center=-rho|nu|^2A_T B with rho|nu|^2A_T>0, every complete physical q=1 cell contains raw-centre points with R_center<-(49/100)rho|nu|^2A_T and R_center>(49/100)rho|nu|^2A_T. The actual physical source phase therefore does not rescue a cell-uniform raw-centre sign.",
+      "proof_boundary": "This is not the complete current."
+    },
+    {
+      "id": "rco_11_ties",
+      "role": "tie guard",
+      "readiness": "proved",
+      "claim": "The strict witnesses can be chosen away from every roster tie.",
+      "certificate": "The selected points may be perturbed off the finite roster-tie set without losing the strict 49/100 reserve. The raw-centre sign obstruction is valid on roster interiors, but only the complete residual-composed current is tie invariant.",
+      "proof_boundary": "Residual recomposition remains compulsory."
+    },
+    {
+      "id": "rco_12_compensation",
+      "role": "residual compensation",
+      "readiness": "proved",
+      "claim": "Any negative complete ideal current needs a macroscopic correctly signed residual on the positive-centre arc.",
+      "certificate": "At the witness B<-49/100, negativity of the complete ideal current requires E_W<-(98/100)rho A_T. Since |E_W|<=rho(|W_H|+|W_T|), a necessary condition is |W_H|+|W_T|>(98/100)A_T. The residual must therefore be macroscopic and correctly signed on the adverse arc; this may be a uniform negative bias or a phase-correlated response.",
+      "proof_boundary": "This is a necessary condition, not a residual estimate; uniform bias is not excluded."
+    },
+    {
+      "id": "rco_13_target",
+      "role": "complete current target",
+      "readiness": "open",
+      "claim": "Only a signed complete residual current can now restore a one-sided theorem.",
+      "certificate": "A successful physical-current theorem must use signed reciprocal-stationary residuals and the correction/affine/moved-tail rows to overturn or absorb this O(A_T) alternating centre. It must prove either a sufficiently strong uniform negative bias or the required phase-correlated inequality. Any proof based on a uniformly favourable centre phase, even the actual source phase, is now retired.",
+      "proof_boundary": "No residual estimate or RH conclusion is supplied."
+    }
+  ],
+  "summary": {
+    "rows": 13,
+    "safe_phase_arcs": 1,
+    "scale_separation_theorems": 1,
+    "source_half_turn_pairs": 1,
+    "strict_positive_witnesses": 1,
+    "strict_negative_witnesses": 1,
+    "actual_source_center_sign_obstructions": 1,
+    "macroscopic_compensation_conditions": 1,
+    "normalized_reserve": "49/100",
+    "live_complete_current_targets": 1
+  },
+  "next_action": "Stop trying to obtain the physical sign from either raw anchor centre. Compose the full tie-invariant actual-source scalar h+Re(eta^2 t) using R_H, R_T+Q_T, the physical correction polynomials, fixed affine row, and moved-tail defect. Determine whether it has a cell-uniform negative bias or a phase-correlated O(A_T) response on the strict adverse arcs. A lower bound at one adverse witness, or a common-unit residual bound below the sharp 98/100 threshold, would instead prove that the complete ideal block changes sign and retire this entire sign route.",
+  "pi_provenance": "The only pi-dependent phase is inherited from the completed-zeta saddle lock in the source artifact. The pi/3 safe arc and 2pi turn are fixed fractions of the period of exp(i theta); they introduce no geometric model constant. The 49/100 reserve is a rational consequence of the physical N floor and the exact phase/mismatch error bounds.",
+  "proof_boundary": "This gate proves a two-scale phase theorem and two strict opposite-sign witnesses for the bare Hermitian/transpose centre at the actual physical source phase on every complete q=1 cell. It retires a cell-uniform raw-centre sign, not the complete current. It proves no signed reciprocal residual estimate, correction/affine/moved-tail compensation, tie-spliced complete current sign, all-q transport, contact-box exclusion, Q209 shell, cofinal successor, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "success": "built Newman C1 actual-source raw-centre sign-obstruction gate: 13 rows, 0 issues, 1 safe phase arc, 1 scale-separation theorem, 2 strict sign witnesses, 1 actual-source centre obstruction, 1 macroscopic compensation condition, 1 live complete-current target"
+}

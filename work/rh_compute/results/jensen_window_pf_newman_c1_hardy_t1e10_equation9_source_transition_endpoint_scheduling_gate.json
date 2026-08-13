@@ -1,0 +1,118 @@
+{
+  "certificate": {
+    "added_upper_alpha": 5122423,
+    "added_upper_direct_term_ball": "[0.00074659059801428060968843821285634332 +/- 1.06e-24]",
+    "fixed_chart_endpoint": 5122423,
+    "fixed_chart_roster_count": 2481424,
+    "fixed_chart_start": 159577,
+    "lower_direct_term_ball": "[-0.033148860502163392226338212689733540 +/- 2.50e-22]",
+    "post_effective_start": 159579,
+    "post_endpoint": 5122423,
+    "post_roster_count": 2481423,
+    "pre_effective_start": 159577,
+    "pre_endpoint": 5122421,
+    "pre_roster_count": 2481423,
+    "removed_lower_alpha": 159577,
+    "rs_cutoff_post": 621,
+    "rs_cutoff_pre": 621,
+    "rs_lower_root_post_ball": "[621.55590806021966312398073510640727 +/- 6.48e-32]",
+    "rs_lower_root_pre_ball": "[621.55615085858927834075625234156252 +/- 6.28e-32]",
+    "threshold_contact_ball": "[4.71975501248323497396297e-37 +/- 3.71e-28]",
+    "transition_entry_height_ball": "[10000002368.452855115796615822593132249655275276958737919804918428369710000000000000000000000000000000000000000 +/- 1.01e-24]",
+    "transition_residual_left_ball": "[3.703451242219726567870988045e-28 +/- 2.35e-56]",
+    "transition_residual_right_ball": "[-3.703451242219726567870988045e-28 +/- 2.35e-56]"
+  },
+  "decision": {
+    "complete_source_error_bounded": false,
+    "earlier_coupled_source_event_decomposed": true,
+    "fixed_analytic_endpoint_for_next_chart": 5122423,
+    "moving_source_endpoint_admissible_as_theorem_selector": false,
+    "rh_implication": false,
+    "rs_cutoff_changes_at_event": false,
+    "transition_is_exact_handoff_identity": false
+  },
+  "dependencies": {
+    "paper_2015": {
+      "path": "work/rh_compute/external/hardy_fastcode/Lewis_2015_1502.06903.pdf",
+      "sha256": "171a7f3ccc3dfd89671aa1ba08168c0a1effaf4b6d69b4236dd3da2f076cf3c1"
+    },
+    "paper_2026": {
+      "path": "work/rh_compute/external/hardy_fastcode/Lewis_Brereton_2607.15310.pdf",
+      "sha256": "fbc95e5e9bbde078160c7b1a3ac3abcbb3fc3ec522d1324b14d6024bf71e537a"
+    },
+    "pinned_source": {
+      "path": "work/rh_compute/external/hardy_fastcode/resumable/zeta14cubicmult_resumable.f90",
+      "sha256": "0fb64f090c21b185f27edc1c9194254cf471e74bfd6af3b88cb7f0cb40ec0c3d"
+    },
+    "selector_strip_gate": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_selector_strip_poisson_reassembly_gate.json",
+      "sha256": "55e89746067266d278be822fcd2a751989e8a0b977a74b9151aeaf38e7eb7729"
+    },
+    "upper_endpoint_gate": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_upper_endpoint_selector_boundary_stability_gate.json",
+      "sha256": "a2a38ffd6f7a9e6cc0e94c158972650a97a2609a1a73c7aa0b46c8c9fb38a35d"
+    }
+  },
+  "exact_identities": {
+    "fixed_chart_post": "source_post=fixed_chart+(T_C-F_t(C))",
+    "fixed_chart_pre": "source_pre=fixed_chart-F_t(B_plus)",
+    "ideal_roster_change": "sum(R_plus)-sum(R_minus)=F_t(B_plus)-F_t(C)",
+    "source_scheduling_change": "Delta_source=(T_C-F_t(C))+F_t(B_plus)"
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_source_transition_endpoint_scheduling_gate",
+  "next_obligation": "Instantiate the quantitative 399-mode selector chart at fixed B=5122423, keeping the exact symmetric one-cell Poisson splice separate from the source approximation-error ledger.",
+  "numerical_diagnostic": {
+    "classification": "high_precision_point_diagnostic_not_interval_proof",
+    "coupled_source_change": "0.0336430684033743862769475047553975189140556722512270724",
+    "direct_added_B_plus": "0.0007465905980142806096884382130377093742147968970444658956",
+    "direct_lower_C": "-0.0331488605021633922263382127558995188665993092092979214",
+    "transition_64": "-0.0002523826968032865590791462135397093267584338551153148935",
+    "transition_96": "-0.0002523826968032865590791462135397093267584338387415239068",
+    "transition_defect_T_minus_F_C": "0.03289647780536010566725906654235980953984087535418260651"
+  },
+  "paper_audit": {
+    "lewis_2015": {
+      "finding": "hybrid and transition formulae are approximations; part of the transition zone is assigned to direct numerical integration; some observed transition correlations are not proved",
+      "pages": [
+        4,
+        5,
+        17,
+        23,
+        49,
+        50,
+        51
+      ]
+    },
+    "lewis_brereton_2026": {
+      "finding": "the proposed Gaussian-sum hybrid is explicitly not exact and part of the transition term is assigned to numerical integration",
+      "pages": [
+        45,
+        46
+      ]
+    }
+  },
+  "passed": true,
+  "proof_boundary": "Exact finite-roster scheduling algebra, transition-root interval, and unchanged RS floor only. The 64-node transition value is diagnostic. No complete source-error bound, quantitative 399-mode theorem, T_upper, Lambda<=0, RH, or prize-level conclusion.",
+  "runtime": {
+    "elapsed_seconds": 2.065,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "source_contract": {
+    "all_required_snippets_present": true,
+    "required_snippet_count": 10,
+    "source_default_real_3_2": "3.20000004768372",
+    "source_default_real_3_2_hex": "0x1.99999a0000000p+1"
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_source_transition_endpoint_scheduling_gate.py",
+      "sha256": "77c503e16649a70c48a28264f6c4e74da510f0d9578138a2c1a842cc62d5d51c"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_source_transition_endpoint_scheduling_gate.py",
+      "sha256": "f4de640434e509032faf4f3bde692b0cac731e1a3671877b99db515cd78fc4a9"
+    }
+  },
+  "status": "exact_coupled_roster_decomposition_and_source_approximation_boundary_certified"
+}

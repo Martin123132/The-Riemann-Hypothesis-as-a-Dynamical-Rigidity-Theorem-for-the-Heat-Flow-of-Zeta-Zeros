@@ -1,0 +1,122 @@
+{
+  "kind": "jensen_window_pf_newman_outer_frequency_frontier_consolidation_gate",
+  "schema_version": 1,
+  "date": "2026-08-04",
+  "status": "exact compact-base and outer-frequency frontier consolidation; the outer Xi joint-avoidance theorem remains open",
+  "source_sha256": "0e020655c97e53ba5d02a23bb46330cddebded2c6557cdd7ea8768fb87c761ed",
+  "source_audit": {
+    "compact_transversality": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_theta_compact_transversality_interval_certificate.json",
+      "sha256": "e219c24e23f36544bede3cbcedef4477165a6a5482fcb08827413045f4d0854b",
+      "kind": "jensen_window_pf_newman_theta_compact_transversality_interval_certificate",
+      "status": "rigorous Arb/Taylor contact exclusion for |x|<=38 and 0<=t<=1/5; the high-frequency transversality target, Lambda<=0, and RH remain open"
+    },
+    "q208_closed_boundary": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_q208_closed_boundary_winding_certificate.json",
+      "sha256": "35182a50d6a3b5aeef2c0abd107762d106838b3c68c03df9b5d79116797803a0",
+      "kind": "jensen_window_pf_newman_q208_closed_boundary_winding_certificate",
+      "status": "rigorous finite Q208 closed-boundary zero-winding and no-contact certificate"
+    },
+    "q209_shell_coverage": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_q208_base_q209_shell_coverage_gate.json",
+      "sha256": "693607c58d82f4ce53148045a0473a67de1d3a839bd6a389637df41f2ca4dfdb",
+      "kind": "jensen_window_pf_newman_q208_base_q209_shell_coverage_gate",
+      "status": "exact Q208-base/Q209 successor-shell coverage gate with two explicit open regions"
+    },
+    "one_sided_phase_bridge": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_one_sided_phase_moment_bridge_gate.json",
+      "sha256": "528bb0c7791bf782479865fb66c4ffbb4610bac0cd5728fd936c97cd8ab2a217",
+      "kind": "jensen_window_pf_newman_one_sided_phase_moment_bridge_gate",
+      "status": "exact one-sided zero-free phase lift, score-probability and signed-Hankel/Abel moment bridge, with conditioning and shape guards plus full-scale common-interlacing and bare-Abel sign rejections; the Xi joint-avoidance theorem remains open"
+    },
+    "complete_theta_spatial_band": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_theta_complete_spatial_tile_degree_certificate.json",
+      "sha256": "14a71dbe28a892f63cdeacdd19abd9f8cef759c20d8aee6937366ed40c46edbd",
+      "kind": "jensen_window_pf_newman_theta_complete_spatial_tile_degree_certificate",
+      "status": "rigorous complete-theta spatial tile exclusion certificate complete"
+    }
+  },
+  "exact": {
+    "compact_core": {
+      "domain": "0<=t<=1/5 and |x|<=38",
+      "certified_boxes": 1900,
+      "unresolved_boxes": 0,
+      "contact_free": true,
+      "new_boundary_scout_required": false
+    },
+    "finite_cofinal_base": {
+      "proved_through": 208,
+      "first_unresolved_linear_stage": 209,
+      "q208": "[1/1040,1/4]x[0,246]",
+      "q209": "[1/1045,1/4]x[0,247]",
+      "q209_open_shell_regions": 2
+    },
+    "local_band": {
+      "domain": "0<=t<=0.45 and 135<=x<=136.5",
+      "critical_time_window_contained": true,
+      "strictly_outside_compact_core": true,
+      "global_outer_theorem": false
+    },
+    "direct_remaining_domain": "0<t<=1/5 and x>38",
+    "direct_phase_target": "Prove for the Xi score laws nu_t that (B_t(x),B_t'(x))!=(0,0) for every x>38 and 0<t<=1/5, using theta arithmetic or an all-order PF/sign-regular theorem; probability, strong log-concavity, and the zero-free complex lift alone are insufficient",
+    "route_split": {
+      "minimal_topological_route": "prove a source-level relative first-jet transport theorem on every ray-aligned outer descendant collar",
+      "stronger_direct_route": "prove Xi-specific phase-critical joint avoidance for B_t and B_t' on the complete outer domain",
+      "retired_next_step": "rescouting the already certified compact rectangle or continuing an indefinite fixed-width tile ladder"
+    }
+  },
+  "rows": [
+    {
+      "id": "ofc_01_compact_core_closed",
+      "readiness": "ready_to_apply",
+      "claim": "The complete Newman theta first jet has no common zero on 0<=t<=1/5 and |x|<=38. The origin collar is exact and the remaining compact rectangle has 1900 certified Arb/Taylor boxes."
+    },
+    {
+      "id": "ofc_02_q208_finite_base",
+      "readiness": "ready_to_apply",
+      "claim": "Q208=[1/1040,1/4]x[0,246] is contact-free and has zero first-jet winding; Q1 through Q208 follow by containment."
+    },
+    {
+      "id": "ofc_03_q209_exact_frontier",
+      "readiness": "ready_to_apply",
+      "claim": "Q209 is the first unresolved linear stage. Its low shell has exactly two open regions: the outer old collar and the new right strip."
+    },
+    {
+      "id": "ofc_04_direct_outer_reduction",
+      "readiness": "ready_to_apply",
+      "claim": "Prove for the Xi score laws nu_t that (B_t(x),B_t'(x))!=(0,0) for every x>38 and 0<t<=1/5, using theta arithmetic or an all-order PF/sign-regular theorem; probability, strong log-concavity, and the zero-free complex lift alone are insufficient"
+    },
+    {
+      "id": "ofc_05_local_band_placement",
+      "readiness": "ready_to_apply",
+      "claim": "The complete-theta theorem on 0<=t<=0.45 and 135<=x<=136.5 lies inside the direct outer-frequency target during 0<=t<=1/5, but it covers only one finite spatial band."
+    },
+    {
+      "id": "ofc_06_compact_rescout_redundant",
+      "readiness": "ready_to_apply",
+      "claim": "A new boundary scout for [0,1/5]x[0,38] is logically subsumed by the existing full interior transversality theorem."
+    },
+    {
+      "id": "ofc_07_cofinal_successor_target",
+      "readiness": "open",
+      "claim": "Construct an a priori source-level kappa_j(t) such that ||partial_t(H,s_pf H_x)||<=kappa_j(t)||(H,s_pf H_x)|| on every outer descendant collar, with finite one-step integral. Defining kappa as the quotient of these two unknown norms is forbidden because it assumes nonvanishing."
+    },
+    {
+      "id": "ofc_08_global_outer_target",
+      "readiness": "open",
+      "claim": "Prove complete first-jet nonvanishing for every x>38 and 0<t<=1/5, either by the cofinal boundary-successor theorem or by the Xi-specific phase-critical small-ball theorem."
+    }
+  ],
+  "summary": {
+    "rows": 8,
+    "compact_certified_boxes": 1900,
+    "compact_rescout_required": false,
+    "proved_cofinal_base": 208,
+    "first_unresolved_linear_stage": 209,
+    "q209_open_shell_regions": 2,
+    "ready_rows": 6,
+    "open_rows": 2
+  },
+  "next_action": "Do not build the proposed [0,1/5]x[0,38] boundary scout. Use the replayed compact theorem as a closed parent. Before another large expansion, derive or falsify an a priori source-level relative first-jet transport inequality on the ray-aligned outer collar; keep the direct phase-critical-value theorem as the independent alternative.",
+  "proof_boundary": "This gate consolidates already proved domains and identifies the exact remaining outer-frequency obligations. It proves no new outer contact exclusion, no Q209 shell antecedent, no cofinal successor theorem, no phase-critical small-ball inequality, Lambda<=0, RH, or prize-level result."
+}

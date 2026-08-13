@@ -1,0 +1,89 @@
+{
+  "date": "2026-08-13",
+  "decision": {
+    "complete_T_upper_proved": false,
+    "completed_initial_data_cancellation_proved": false,
+    "completed_source_cancellation_proved": false,
+    "finite_integral_amplitude_remainder_proved": false,
+    "grouped_398_mode_splice_proved": false,
+    "inverse_gauge_common": true,
+    "leading_defect_weighted_packet_coefficients_inserted": true,
+    "negative_prefix_Fubini_reassembly_exact": true,
+    "positive_suffix_Fubini_reassembly_exact": true,
+    "rh_implication": false
+  },
+  "dependencies": {
+    "completed_projection": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_fixed_B_selector_boundary_beta4_completed_branch_projection_gate.json",
+      "sha256": "a295c3083220027a0fa44a670d47bf39f200bcf4da36ff525354719984edb437"
+    },
+    "detuning_ode": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_selected_beta4_endpoint_coherent_detuning_ode_gate.json",
+      "sha256": "551807a08ac7acf176feef55c3991be678baf7806962365dad67eea369b1cfa8"
+    },
+    "green_kernel": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_selected_beta4_detuning_airy_green_kernel_gate.json",
+      "sha256": "e44ddf4366f1f69cb8efa06ac1321c80274d7d3ba443d795683809d0354e7fc5"
+    },
+    "grouped_packets": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_detuning_airy_lattice_grouped_green_packet_gate.json",
+      "sha256": "007b3810b233d1db4f9bff9dfc802b566da00183daf0bdc86be91d733d963791"
+    },
+    "weighted_packets": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_leading_defect_weighted_airy_green_packet_gate.json",
+      "sha256": "fef3ccc2176937cbb53f233308cbadd72329ffe8dc0a2fb47afd897419fb8ab1"
+    }
+  },
+  "exact_algebra": {
+    "event_lattice": "r_j=r_0+j*Delta_r",
+    "gauge_lock": "chi(d_m)=2pi*m^2-beta^3; exp(-i chi(d_m))=exp(i beta^3)",
+    "initial_packets": "D_sigma=sum a_j partial_s K(r_j,r_0); A_sigma=sum a_j K(r_j,r_0)",
+    "negative_active_blocks": "prefixes -198..-k with counts 198,197,...,1",
+    "negative_offsets": [
+      -198,
+      -1
+    ],
+    "negative_reassembly": "sum_(j=-198)^-1 a_j H_-(r_j)=-D_- H_-(r_0)+A_- H_-,r(r_0)-Integral_(r_-198)^(r_0)[sum_(j: r_j<=s) a_j K(r_j,s)]F_-(s)ds",
+    "negative_source_cell_incidences": 19701,
+    "one_mode_variation_formula": "H_sigma(r_j)=-partial_s K(r_j,r_0)H_sigma(r_0)+K(r_j,r_0)H_sigma,r(r_0)+Integral_(r_0)^(r_j)K(r_j,s)F_sigma(s)ds",
+    "original_transform_reassembly": "sum a_j G_sigma(d_j)=exp(i beta^3) sum a_j H_sigma(r_j), separately on each selected branch",
+    "positive_active_blocks": "suffixes k..200 with counts 200,199,...,1",
+    "positive_offsets": [
+      1,
+      200
+    ],
+    "positive_reassembly": "sum_(j=1)^200 a_j H_+(r_j)=-D_+ H_+(r_0)+A_+ H_+,r(r_0)+Integral_(r_0)^(r_200)[sum_(j: r_j>=s) a_j K(r_j,s)]F_+(s)ds",
+    "positive_source_cell_incidences": 20100,
+    "reference_coordinate": "r_0=r_q",
+    "reference_mode": 39894,
+    "transformed_source": "F_sigma(s)=exp(i chi(d(s)))[R_0,sigma(d(s))+R_Y,sigma(d(s))+Q_sigma(d(s))]"
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_weighted_variation_of_constants_roster_reassembly_gate",
+  "next_action": "Express the beta^-4 completed projection and event-zero correction in the same H_sigma(r0), H_sigma,r(r0), and F_sigma coordinates. Test whether the derivative initial-data packet cancels algebraically; if it does not, derive a certified residual bound before addressing the finite-integral amplitude remainder.",
+  "operator_certificate": {
+    "conditional_norm_bound": "|weighted roster| <= D_-|H_-(r0)|+D_+|H_+(r0)|+A_-|H_-,r(r0)|+A_+|H_+,r(r0)|+A_- Integral_(r_-198)^r0 |F_-(s)|ds+A_+ Integral_r0^(r_200)|F_+(s)|ds",
+    "minus_branch_weighted_K_coefficient_ball": "[3.773903448169599551191850315432134375919658704338404930639827597634795645143518324339296821328192359e-7 +/- 1.40e-107]",
+    "minus_branch_weighted_partial_s_K_coefficient_ball": "[0.0008130582038663737342069787758298923635702310623270155310617545506295678791616509437420557386391222821 +/- 4.34e-104]",
+    "norm_guard": "This fallback inequality may be used only after the initial-data and source channels have been composed with the event-zero and completed Poisson terms in the same normalization.",
+    "plus_branch_weighted_K_coefficient_ball": "[3.803311209208802542424917587689813444070251655385279973081910541362153303059285741228013472911439103e-7 +/- 3.15e-107]",
+    "plus_branch_weighted_partial_s_K_coefficient_ball": "[0.0008193938777114114838080827418321118813518608278440911741065844719169044886212161734318185531535825621 +/- 3.74e-104]"
+  },
+  "passed": true,
+  "proof_boundary": "Exact leading-defect weighted variation-of-constants roster reassembly and conditional packet coefficients only. No completed initial-data/source cancellation, finite-integral amplitude remainder, grouped 398-mode splice, complete Q_K-T or T_upper, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "runtime": {
+    "elapsed_seconds": 0.066,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_weighted_variation_of_constants_roster_reassembly_gate.py",
+      "sha256": "5ec5d17538ce762c78dcbc4fdefb240a704dcfe10b82cdd9bab12a9634e7e429"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_weighted_variation_of_constants_roster_reassembly_gate.py",
+      "sha256": "42e6595dbcd744778c7566c1670fdd003ae77abf2b59ffb3de24cc4b0fad965f"
+    }
+  },
+  "status": "weighted_branchwise_variation_of_constants_roster_exactly_reassembled"
+}

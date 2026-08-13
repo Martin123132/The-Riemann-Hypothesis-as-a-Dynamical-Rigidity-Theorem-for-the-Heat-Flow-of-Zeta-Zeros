@@ -1,0 +1,116 @@
+{
+  "decision": {
+    "B_endpoint_crossing_bounded": false,
+    "complete_T_upper_proved": false,
+    "full_source_main_equals_twice_real_half_integral": true,
+    "half_domain_has_one_positive_stationary_branch": true,
+    "half_domain_nonstationary_completion_bounded": false,
+    "odd_alpha_half_kummer_reflection_proved": true,
+    "reflected_upper_branch_requires_separate_stationary_estimate": false,
+    "rh_implication": false,
+    "rounded_reciprocal_integer_pairing_used": false,
+    "symmetric_poisson_may_be_restricted_to_half_domain": true
+  },
+  "dependencies": {
+    "coverage_ledger": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_ordinary_mode_coverage_ledger_gate.json",
+      "sha256": "a38b1cfefd29d4bd0170f0930911bbba7656b074463f8dd3c10cc523f9c37b27"
+    },
+    "portcullis": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_finite_poisson_portcullis_saddle_reduction_gate.json",
+      "sha256": "e347789fc095c77e08cf74a6ab5cbc37a6131e533e049b3e32e5112406515087"
+    },
+    "symmetric_endpoint_residual": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_ordinary_symmetric_endpoint_tail_reassembly_gate.json",
+      "sha256": "84038e740eb2577fbc0b8cd6c9fb121805dea53fa7fbaeecb7f35a68672dcbb7"
+    },
+    "symmetric_poisson": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_symmetric_poisson_interchange_gate.json",
+      "sha256": "4a1898bcda7105107fcaf303a20a87237e75c09f0052db7710bff5f6765a88b0"
+    }
+  },
+  "finite_height_ledger": {
+    "N_t": "39894.228040143267793994605993438186847585863116493465766592582967065792589930184",
+    "N_t_interval": [
+      39894,
+      39895
+    ],
+    "half_domain_stationary_partition": {
+      "half_boundary_and_outer_positive_completion": "m>=39895 has no interior x saddle on 0<x<=1/2",
+      "low_B_endpoint_side": [
+        1,
+        621
+      ],
+      "lower_A_endpoint_side": [
+        39853,
+        39894
+      ],
+      "lower_interior": [
+        622,
+        39852
+      ],
+      "nonpositive_modes": "no alpha stationary point"
+    },
+    "height": 10000000000,
+    "remaining_half_domain_transitions": [
+      "B endpoint crossing 621|622",
+      "A endpoint/half-boundary crossing 39894|39895"
+    ],
+    "removed_full_domain_stationary_ranges": {
+      "interpretation": "These are stationary only in x>1/2 and are represented exactly by conjugation of the half integral.",
+      "reflected_A_transition": [
+        39895,
+        39936
+      ],
+      "upper_interior": [
+        39937,
+        2560588
+      ]
+    },
+    "source_endpoints": [
+      159577,
+      5122421
+    ],
+    "source_target": [
+      622,
+      39894
+    ],
+    "source_target_count": 39273,
+    "x_39894": "0.49999714193247716694413417419586567084413176044897809781887003218609231986815676",
+    "x_39895": "0.50000967498841161316591397860423041961203135212436835404219252695951074077899497"
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_kummer_reflection_branch_reduction_gate",
+  "next_obligation": "Derive the noncharacteristic B bulk-plus-Fresnel crossing at 621|622 on the half-domain, then bound the nonpositive and m>=39895 completion jointly while retaining the A/half-boundary fold atlas.",
+  "passed": true,
+  "proof_boundary": "Exact odd-alpha half-Kummer reflection, half-domain Poisson representation, and one-branch stationary classification only. No quantitative half-domain complement, B crossing theorem, A splice, complete T_upper, height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.28,
+    "process_priority": "below_normal",
+    "sympy_threads": 1,
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_kummer_reflection_branch_reduction_gate.py",
+      "sha256": "1b1bf45cb826db1dfe3c08cb7f7bfb2578741b13d710b3052d25774350baebd5"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_kummer_reflection_branch_reduction_gate.py",
+      "sha256": "d6ac2082a4238c0c5554880853a2e61757661c8756fdb3e20b748b16eaf35086"
+    }
+  },
+  "status": "exact_half_kummer_reflection_and_single_stationary_branch_reduction_proved",
+  "symbolic_certificate": {
+    "branch_consequence": "The m>sqrt(t/(2*pi)) stationary branch lies in the reflected x>1/2 half and is already supplied by exact conjugation; it is not a second stationary family to estimate in Q_half.",
+    "continuous_reflection": "m*=t/(2*pi*m) gives alpha_(m*)=alpha_m and x_(m*)=1-x_m",
+    "finite_roster_identity": "The same identity holds after the finite odd-alpha sum, including its two endpoint half-weights.",
+    "half_domain_threshold": "x_m<1/2 iff 0<m<sqrt(t/(2*pi)); x_m=1/2 at m=sqrt(t/(2*pi))",
+    "half_integral_identity": "exp(-i*pi/8) integral_0^1 K dx=2 Re[exp(-i*pi/8) integral_0^(1/2) K dx]",
+    "half_poisson_formula": "Q_half=integral_0^(1/2) W_t(x){H_x+lim_(M->infinity)sum_(m=-M)^M I_m(x)}dx",
+    "joint_saddle": "x_m=2*pi*m^2/(t+2*pi*m^2), alpha_m=2m+t/(pi*m)",
+    "nonpositive_guard": "For m<=0 and alpha>0, x>0, partial_alpha Phi=pi(alpha*x/2-m)>0, so no joint saddle exists.",
+    "odd_reflection": "K_(alpha,t;1-x)=exp(i*pi/4) conjugate(K_(alpha,t;x)) for every odd integer alpha",
+    "pi_provenance": "pi comes from the equation-(9) Kummer phase, odd-square character, and Fourier-Poisson mode phase.",
+    "source_integrand": "K_(alpha,t;x)=alpha exp(i*pi*alpha^2*x/4) exp(i*t*log((1-x)/x)/2)/[x(1-x)]^(1/4)"
+  }
+}

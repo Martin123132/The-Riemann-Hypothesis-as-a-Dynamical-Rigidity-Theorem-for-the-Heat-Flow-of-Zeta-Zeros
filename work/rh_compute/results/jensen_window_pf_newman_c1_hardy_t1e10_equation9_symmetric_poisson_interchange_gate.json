@@ -1,0 +1,79 @@
+{
+  "certified_constants": {
+    "A": 159577,
+    "B": 5122421,
+    "L": 2481422,
+    "alpha_count": 2481423,
+    "beta_3_4_3_4_ball": "[1.6944261695879581732129982469643832729628918206538843701211587453194680096682695194464005879892224598842445712 +/- 5.51e-110]",
+    "integrated_C_AB_ball": "[503733833073196278190667429.28383089612220237732825663893249881263299218681763813190547292262879551692566495085 +/- 8.45e-84]",
+    "precision_decimal_digits": 110,
+    "raw_cutoff_required_for_bound_below_0_005_ball": "[5103890820766804023459560409.8204729799083640288826056215041043517193398454957522818820835726694136018367853405 +/- 1.07e-82]",
+    "scale_decision": "The C2 interchange proof is rigorous and height-uniform, but its absolute tail coefficient is too large for a quantitative source-error bound. The stationary/nonstationary phase structure must be used before absolute values.",
+    "tail_coefficient_C_AB_over_2pi2_ball": "[25519454103834020117297802.049102364899541820144413028107520521758596699227478761409410417863347068009183926703 +/- 8.72e-85]"
+  },
+  "decision": {
+    "auxiliary_endpoint_regulator_required": false,
+    "paired_one_over_m_endpoint_current_cancels": true,
+    "raw_c2_tail_bound_quantitatively_viable": false,
+    "rh_implication": false,
+    "stationary_phase_remainder_proved": false,
+    "symmetric_poisson_interchange_proved": true,
+    "tail_bound_uniform_in_height": true
+  },
+  "dependencies": {
+    "finite_poisson_saddle_gate": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_finite_poisson_portcullis_saddle_reduction_gate.json",
+      "sha256": "e347789fc095c77e08cf74a6ab5cbc37a6131e533e049b3e32e5112406515087"
+    },
+    "paper": {
+      "path": "work/rh_compute/external/hardy_fastcode/Lewis_Brereton_2607.15310.pdf",
+      "sha256": "fbc95e5e9bbde078160c7b1a3ac3abcbb3fc3ec522d1324b14d6024bf71e537a"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_symmetric_poisson_interchange_gate",
+  "next_obligation": "Derive phase-adapted bounds for the joint Kummer/Poisson integral: interior saddles, all 84 lower-alpha turning modes, and symmetric nonstationary tails, while retaining each mode's grouped boundary/Fresnel current.",
+  "passed": true,
+  "proof_boundary": "Exact symmetric finite-Poisson reconstruction and height-uniform interchange for a fixed finite odd-alpha roster. No quantitatively useful stationary-phase remainder, source-aligned hybrid bound, Lambda<=0, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.645,
+    "flint_threads": 1,
+    "process_priority": "below_normal",
+    "sympy_threads": 1,
+    "workers": 1
+  },
+  "scope": {
+    "diagnostic_midpoint_used": false,
+    "height": "every real t for a fixed finite odd-alpha roster",
+    "source_roster": "159577..5122421 odd"
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_symmetric_poisson_interchange_gate.py",
+      "sha256": "3941ffac374a133bced1674ee04831d8219c3fad1328419b26924fb2f175f1b0"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_symmetric_poisson_interchange_gate.py",
+      "sha256": "2243d88f01fb0d1c2689bda15b991679427b777dadec6c465691947a6598a1b3"
+    }
+  },
+  "status": "exact_height_uniform_symmetric_poisson_interchange_complete_phase_adapted_remainder_open",
+  "symbolic_reduction": {
+    "alpha_roster_integrand": "f_x(u)=(A+2u) exp(i*pi*x*(A+2u)^2/4)",
+    "beta_recurrences": "B(7/4,3/4)=B(3/4,3/4)/2 and B(11/4,3/4)=7*B(3/4,3/4)/20",
+    "first_derivative": "f_x'(u)=exp(i*pi*x*alpha^2/4)[2+i*pi*x*alpha^2]",
+    "first_derivative_residual": "0",
+    "integrated_constant": "C_AB=B(3/4,3/4)[4+pi*(5*B^2-A^2)/4+7*pi^2*(B^4-A^4)/160]",
+    "interchange_reason": "The Kummer endpoint weight is absolutely integrable and the paired Fourier tail has an integrable O(M^-1) majorant independent of t.",
+    "kummer_weight_absolute_value": "|W_t(x)|=[x(1-x)]^(-1/4)",
+    "mode_integral": "I_m(x)=int_0^L f_x(u) exp(-2*pi*i*m*u)du",
+    "odd_roster_coordinate": "alpha=A+2u, 0<=u<=L=(B-A)/2",
+    "pair_bound": "|I_m+I_(-m)|<=(|Delta f_x'|+int_0^L|f_x''(u)|du)/(2*pi^2*m^2)",
+    "paired_endpoint_cancellation": "The Delta f_x/(2*pi*i*m) terms cancel exactly before absolute values.",
+    "paired_ibp_identity": "I_m+I_(-m)=[-2*Delta f_x'+R_m+R_(-m)]/(2*pi*i*m)^2",
+    "pointwise_derivative_majorant": "C_AB(x)=4+pi*x*(5*B^2-A^2)/2+pi^2*x^2*(B^4-A^4)/8",
+    "second_derivative": "f_x''(u)=exp(i*pi*x*alpha^2/4)[6*i*pi*x*alpha-pi^2*x^2*alpha^3]",
+    "second_derivative_residual": "0",
+    "symmetric_partial_sum": "K_(t,M)=int_0^1 W_t(x){[f_x(0)+f_x(L)]/2+sum_(m=-M)^M I_m(x)}dx",
+    "uniform_tail_bound": "|K_t-K_(t,M)|<=C_AB/(2*pi^2*M), uniformly for every real t and M>=1"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "decision": {
+    "B_trace_window_extracted_at_every_finite_symmetric_cutoff": true,
+    "B_trace_window_extraction_survives_symmetric_Abel_limit": true,
+    "complete_QK_minus_T_bound_proved": false,
+    "complete_T_upper_proved": false,
+    "complete_endpoint_B_window_extracted": false,
+    "grouped_remainder_below_1p4058e_minus_4_proved": false,
+    "isolated_left_B_tail_triangle_budget_admissible": false,
+    "nonlocal_constant_bulk_steps_retained_in_grouped_remainder": true,
+    "remaining_object_is_one_grouped_global_remainder": true,
+    "rh_implication": false
+  },
+  "dependencies": {
+    "Abel_theta": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_modular_dual_roster_gate.json",
+      "sha256": "b5295bd15ac42385f1cee282e66d9dc05f65c54746d02b265ee4f7341ee5cae5"
+    },
+    "complete_B_window": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_B_face_complete_gaussian_window_signed_gate.json",
+      "sha256": "43c5656c9212456f5ae69a42a693905911f54caddd0369e5a3fdecad4c5ccda5"
+    },
+    "global_residual": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_ordinary_symmetric_endpoint_tail_reassembly_gate.json",
+      "sha256": "84038e740eb2577fbc0b8cd6c9fb121805dea53fa7fbaeecb7f35a68672dcbb7"
+    },
+    "step_tail": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_positive_B_crossing_step_tail_normal_form_gate.json",
+      "sha256": "fe7cff25286e2fa810d311594041ae8e1419a549cd47fb70c5aa46f9e0e044f0"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_B_window_extraction_target_gate",
+  "next_obligation": "Construct a quantitative representation of R_group that keeps every nonlocal sigma_m P_bulk,m step, Delta_g=g_B-g_A, the symmetric completion, and the endpoint half-current joined. Extract only an endpoint-safe part of the exterior B trace package; then treat its complement in the Abel-theta/double-Weber representation. A joined bound below 1.4058e-4 closes the saved-height 8.6e-6 target.",
+  "passed": true,
+  "proof_boundary": "Exact global fixed-state B trace-window extraction and sufficient grouped-remainder targets only. The complete endpoint B sector is not extracted. No grouped-remainder estimate, complete Q_K-T or T_upper, height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level theorem is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.093,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_B_window_extraction_target_gate.py",
+      "sha256": "a3652b66850c70fbcf66ec6c3721d5c23e9ceb85f8be10745a3f1bd271c01b2f"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_B_window_extraction_target_gate.py",
+      "sha256": "bd591e33716c2e308bdb2c8f9b5e3601c9558f9414a3d49597ba45b21c3bca41"
+    }
+  },
+  "status": "exact_global_fixed_state_B_trace_window_extraction_with_grouped_remainder_target_1p4058e_minus_4",
+  "symbolic_certificate": {
+    "B_trace_package": "Btr_M=sum_(m=1)^M[U_B,m+P_B,-m+ell_m sigma_m P_bulk,m]",
+    "closing_target": "E_Btr,win<-1.3198e-4 and R_group<1.4058e-4 imply R_end<8.6e-6",
+    "extraction": "G_M=chi_W Btr_M+[G_M-chi_W Btr_M] at every finite symmetric cutoff M",
+    "finite_cutoff_integrand": "G_M=H_x+integral_0^L f_x(u)C_M(u)du+sum_(m=622)^39894(P_A,m+P_B,m)",
+    "finite_mode_allocation": "I_m+I_-m-tau_m P_bulk=[U_B,m+P_B,-m+ell_m sigma_m P_bulk]+[P_A,m+I_-m-P_B,-m+(1-ell_m)sigma_m P_bulk]",
+    "grouping_guard": "R_group is one global remainder; it includes all nonlocal sigma_m P_bulk,m steps, B-left, A, zero, negative, outer-positive, and endpoint-half sectors",
+    "limit": "R_end=E_Btr,win+R_group after the already-proved symmetric Abel limit",
+    "negative_target": "R_group<1.3198e-4 would imply R_end<0",
+    "omitted_step_completion": "Every nonlocal (1-ell_m)sigma_m P_bulk,m remains in the grouped global complement",
+    "step_coefficient": "sigma_m(x)=(1-tau_m)-1_(q_B,m(x)<0), tau_m=1_(622<=m<=39894), ell_m=1_(m in {621,622})",
+    "window": "chi_W=1_[x_low,x_high], with xi=sqrt(H_B)(x-x_B) and |xi|<=70"
+  },
+  "target_certificate": {
+    "complete_B_trace_window_upper_bound": "-1.3198e-4",
+    "exact_decimal_arithmetic": "1.4058e-4-1.3198e-4=8.6e-6",
+    "sufficient_grouped_remainder_target_for_negative_residual": "1.3198e-4",
+    "sufficient_grouped_remainder_upper_target": "1.4058e-4",
+    "working_global_residual_upper_target": "8.6e-6"
+  }
+}
