@@ -1,0 +1,103 @@
+{
+  "actual_height_scale_audit": {
+    "bound_rows": [
+      {
+        "absolute_bound_log10": "6821881760.30315098651784673299241393111616378",
+        "order": 1
+      },
+      {
+        "absolute_bound_log10": "6821881729.54066707544738577709423959754143114",
+        "order": 4
+      },
+      {
+        "absolute_bound_log10": "6821881690.95572042265386752478157135755362926",
+        "order": 8
+      },
+      {
+        "absolute_bound_log10": "6821881616.65869545405746653473249836125266287",
+        "order": 16
+      },
+      {
+        "absolute_bound_log10": "6821881473.33889809165411473900425984485383268",
+        "order": 32
+      }
+    ],
+    "consequence": "this absolute Taylor majorant is strictly decreasing through more than twenty billion orders, so minimizing it is not a scalable evaluator",
+    "first_order_where_that_upper_bound_exceeds_one": 20000022019,
+    "last_order_with_certified_ratio_upper_bound_below_one": 20000022018,
+    "pi_interval_digits": 99,
+    "ratio_upper_bound": "[K+3/(16(K+1))]/(pi*q_minus^2)",
+    "successive_bound_ratio": "B_(K+1)/B_K=[(2K+1/2)(2K+3/2)/(4*pi*(K+1))]*Delta_zeta(2K+5/2)/Delta_zeta(2K+1/2)"
+  },
+  "decision": {
+    "D_K_enclosed": false,
+    "J_Z_enclosed": false,
+    "absolute_taylor_remainder_route_rejected": true,
+    "gamma_balanced_mellin_coordinate_selected": true,
+    "joined_packet_enclosed": false,
+    "next_action": "retain the oscillatory Mellin remainder and derive a saddle-aligned contour or endpoint-complete Mordell representation; do not norm its Taylor remainder on the positive axis",
+    "rh_implication": false
+  },
+  "dependencies": {
+    "entire_kernel": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_riemann_auxiliary_entire_kernel_finite_difference_gate.json",
+      "sha256": "89e22e2fc8ffa669e0eefb340bc8958bf52ae652cf9afcf8f870de0453ff9f4c"
+    },
+    "geometric_half_line": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_QK_geometric_half_line_and_saddle_route_gate.json",
+      "sha256": "238e252db66493fa56b4a381c13b8d0687d0503e4d8e62ca734d9d93b4ede241"
+    }
+  },
+  "finite_mellin_hurwitz_expansion": {
+    "absolute_bound": "|E_s*R_K|<=|E_s|*Gamma(2K+1/2)*Delta_zeta(2K+1/2)/((4*pi)^K*K!)",
+    "altered_expansion_discrepancy_absolute": "8.842537256868159182548076424479686652446e-67",
+    "altered_explicit_bound": "0.004704998273958122050033002628296950364535",
+    "altered_order": 3,
+    "altered_scaled_remainder_absolute": "0.002139276585464790920620933925338650410198",
+    "main": "sum_(k=0)^(K-1) (i/(4*pi))^k/k!*Gamma(1-s+2k)*Delta_zeta(1-s+2k)",
+    "remainder": "integral u^(-s)*Delta_q(u)*(exp(i*x)-sum_(k<K)(i*x)^k/k!)du, x=u^2/(4*pi)"
+  },
+  "gamma_balance": {
+    "anchor_discrepancy_absolute": "1.623376684820359874012028835111915400443e-71",
+    "balance_discrepancy_absolute": "8.590913564271021467917600921225982375207e-91",
+    "prefactor_identity": "|exp(pi*t/2+i*pi/4)*(2*pi)^(s-1)*Gamma(1-s)|^2=1/(1+exp(-2*pi*t))",
+    "zero_gaussian_anchor": "integral u^(-s)*Delta_q(u)du=Gamma(1-s)*(zeta(1-s,q_minus)-zeta(1-s,q_plus))"
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_gamma_balanced_mellin_hurwitz_finite_difference_gate",
+  "passed": true,
+  "proof_boundary": "Exact gamma-balanced Mellin-Hurwitz finite-difference coordinate, finite expansion with explicit remainder, and a rigorous non-scalability result for its positive-axis absolute Taylor majorant only. No saddle-aligned remainder bound, quantitative joined-packet, J_Z, or D_K enclosure, and no non-A, all-height, Lambda<=0, PF-infinity, RH, or prize-level conclusion.",
+  "runtime": {
+    "active_compute_workers": 1,
+    "priority": "below_normal_one_cpu",
+    "seconds": 119.55383000000438,
+    "thread_caps": 1
+  },
+  "scaled_mellin_coordinate": {
+    "altered_validation": {
+      "direct_source": "(-0.3925273616324996975713894252332133251126 - 1.052470663543708785123596243740121120001j)",
+      "discrepancy_absolute": "2.563198922405038732438228525802537308225e-70",
+      "first_label": 5,
+      "label_count": 5,
+      "mellin_source": "(-0.3925273616324996975713894252332133251126 - 1.052470663543708785123596243740121120001j)",
+      "t": "3.25"
+    },
+    "contour_sector_has_gaussian_nongrowth": true,
+    "finite_difference": "Delta_q(u)=(exp(-q_minus*u)-exp(-q_plus*u))/(1-exp(-u))",
+    "integral": "M_s=integral_0^infinity u^(-s)*exp(i*u^2/(4*pi))*Delta_q(u)du",
+    "removable_value": "Delta_q(0)=2481423",
+    "source_identity": "S_W=exp(pi*t/2+i*pi/4)*(2*pi)^(s-1)*M_s",
+    "substitution": "u=2*pi*exp(i*pi/4)*x, followed within 0<=arg(u)<=pi/4 to the positive real axis"
+  },
+  "scope": {
+    "height": 10000000000,
+    "label_count": 2481423,
+    "q_minus": "159577/2",
+    "q_plus": "5122423/2",
+    "s": "1/2+i*t"
+  },
+  "source_hashes": {
+    "builder": "0d17957c88c105b22291f793a50ccf47fa32b662d6fdc999b80404f2f2905b40",
+    "checker": "8d71265dfbb337a35658de3d51a96ae8b07e50855ae3aa3c253e2c8202274be4"
+  },
+  "status": "gamma_balanced_mellin_hurwitz_finite_difference_and_absolute_taylor_barrier_certified"
+}

@@ -1,0 +1,89 @@
+{
+  "decision": {
+    "QK_minus_T_bound_proved": false,
+    "R_Dir_bound_proved": false,
+    "R_after_A_bound_proved": false,
+    "continuous_edge_A_tail_defined_by_exact_finite_endpoint_current": true,
+    "first_two_normal_currents_derived_exactly": true,
+    "half_integer_phase_equals_minus_i": true,
+    "leading_current_small_enough_for_separate_norm": false,
+    "rh_implication": false,
+    "signed_edge_42_mode_cancellation_bound_proved": false,
+    "tangential_Morse_integral_bounded": false,
+    "translated_edge_adjacent_to_exact_42_mode_block": true,
+    "two_current_pointwise_remainder_below_4e_minus_6": true,
+    "uniform_abs_q_at_least_84_point_5_certified": true
+  },
+  "dependencies": {
+    "A_projector_assembly": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_complete_endpoint_projector_assembly_gate.json",
+      "sha256": "1d434f4da71842247d8b09ee57b371e1d5148fc57e25d1b4a70b171609511923"
+    },
+    "finite_endpoint_tail": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_ordinary_finite_endpoint_tail_decomposition_gate.json",
+      "sha256": "3c06598ec8870d105f5bdad7bd68125ad4c826c1882c6c1e68f45940dc512a17"
+    },
+    "normal_tangential_split": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_tangential_split_gate.json",
+      "sha256": "bd41b7daa5f1c23a12abbb518953904c889f8e7ab20e1be5dcf9a1b61a620b43"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_two_current_expansion_gate",
+  "next_obligation": "Write the fixed-regulator signed reassembly of c_0+c_1+R_2 with the exact outside-target A modes 39895..39936. Use the common -i exp(i Phi_A) phase to cancel the leading current before any modulus. Then map the residual amplitude to the existing exact A-face Morse coordinate and bound or scout only the resulting signed one-dimensional object.",
+  "numerical_certificate": {
+    "adjacency": "The translated edge begins exactly one q-unit beyond the last exact outside-target A mode.",
+    "corner_delta_ball": "42.250000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "first_omitted_third_current_modulus_ball": "[1.7938581107505157062616988631161487551592995478825911452760622769261004067574454e-6 +/- 4.00e-87]",
+    "last_exact_block_mode_corner_q": "q_A(39936,1/2)=-167/2=-83.5",
+    "maximum_first_current_modulus_ball": "[300.56175566598085202356407464728667870263866140029371268410073092173460681747891 +/- 1.25e-78]",
+    "maximum_second_current_modulus_ball": "[0.013413129711267953330719296106310526399048064109263654055414797153951257968760117 +/- 8.76e-83]",
+    "minimum_abs_q_ball": "84.500000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "monotonicity": "|c_0|, |c_1|, and the stated |R_2| majorant increase on 0<x<=1/2, so their maxima occur at x=1/2.",
+    "translated_edge_corner_q": "q_A(39936.5,1/2)=-169/2=-84.5",
+    "uniform_two_current_remainder_ball": "[3.5877162215010314125233977262322975103185990957651822905521245538522008135148908e-6 +/- 8.00e-87]"
+  },
+  "passed": true,
+  "proof_boundary": "Exact continuous-edge Fresnel expansion, first two normal currents, uniform pointwise remainder, common A-face phase, and roster adjacency only. No signed edge/42-mode cancellation bound, tangential Morse integral, quantitative R_after_A, R_Dir, or Q_K-T estimate, all-height theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "arb_threads": 1,
+    "elapsed_seconds": 0.419,
+    "precision_decimal_digits": 100,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "A": 159577,
+    "half_domain": "0<x<=1/2",
+    "height": 10000000000,
+    "last_exact_outside_target_A_mode": 39936,
+    "translated_upper_edge": "79873/2"
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_two_current_expansion_gate.py",
+      "sha256": "9b4e842edbd6a93d71476ebbdce5a99e43bc74bc12d366b580004c16c8da9799"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_two_current_expansion_gate.py",
+      "sha256": "fd352e878232a159febb0f3eadfa0db01ba15e384f4edf51f71e00fd4c62e965"
+    }
+  },
+  "status": "exact_translated_A_face_two_normal_currents_and_uniform_Fresnel_tail_remainder_certified_signed_assembly_open",
+  "symbolic_certificate": {
+    "Fresnel_recurrence": "I_p(q)=exp(i*pi*q^2/2)/(i*pi*q^(p+1))+(p+1)I_(p+2)(q)/(i*pi)",
+    "Fresnel_tail": "J_-(q)=F(q)+(1+i)/2=integral_(-infinity)^q exp(i*pi*v^2/2)dv, q<0",
+    "continuous_A_tail_current": "L_A(d,x)=-E(q)/(i*pi)-d*sqrt(2/x)*J_-(q)",
+    "current_remainder": "L_A(d_A,x)=E(q_A)[c_0(x)+c_1(x)]+R_2(x), |R_2(x)|<=3*d_A*x^2/[2*pi^3*delta_A(x)^5]",
+    "first_current": "c_0(x)=A*x/[2*i*pi*delta_A(x)]",
+    "half_integer_phase": "exp(-i*pi*d_A*A)=-i",
+    "normal_coordinate": "q_A(d_A,x)=-delta_A(x)*sqrt(2/x)",
+    "normal_gap": "delta_A(x)=d_A-A*x/2",
+    "q_squared_derivative": "(159577*x - 79873)*(159577*x + 79873)/(2*x**2)",
+    "quadratic_completion": "exp(-i*pi*d_A^2/x)E(q_A)=exp(i*pi*A^2*x/4-i*pi*d_A*A)",
+    "second_current": "c_1(x)=-d_A*x/[2*pi^2*delta_A(x)^3]",
+    "tail_remainder": "|r_2(q)|<=6/(pi^3*|q|^5)",
+    "translated_edge": "d_A=79873/2=39936.5",
+    "two_term_tail": "J_-(q)=E(q)[1/(i*pi*q)+1/(i*pi)^2*q^3]+r_2(q)",
+    "uniform_coordinate_bound": "q_A(d_A,x)<=-169/2 for 0<x<=1/2"
+  }
+}

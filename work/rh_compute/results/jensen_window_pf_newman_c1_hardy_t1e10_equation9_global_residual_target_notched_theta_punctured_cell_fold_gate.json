@@ -1,0 +1,130 @@
+{
+  "decision": {
+    "Kummer_x_integration_completed": false,
+    "R_after_A_bound_proved": false,
+    "R_after_A_evaluated": false,
+    "apparent_integer_lattice_poles_removed_exactly": true,
+    "finite_Gauss_current_error_theorem_proved": false,
+    "floating_pilot_used_as_proof": false,
+    "folded_source_is_exact_finite_quadratic_theta_current": true,
+    "k0_residual_recombined_before_evaluation": true,
+    "long_u_integral_folded_exactly_to_one_periodic_cell": true,
+    "rh_implication": false,
+    "single_dual_formula_continuous_on_closed_centred_cell": true,
+    "uniform_cubic_tail_on_closed_centred_cell_certified": true
+  },
+  "dependencies": {
+    "R_after_A_equivalence": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_finite_regulator_equivalence_gate.json",
+      "sha256": "e4f5c904204da05cff08ad0da01739b8aa78b7f72957dca3f54864c2b1c55f27"
+    },
+    "global_theta_current": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation10_global_theta_current_reduction_gate.json",
+      "sha256": "9e1de029f8cdb4eb9c11b3221fe16a651b86aaadd58320ca00af5345dfc9bf29"
+    },
+    "two_edge_modular": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_two_edge_modular_gate.json",
+      "sha256": "aea135f785fe297174fed4b0722f67fa938cb9b323d3ebf7098ce00ff7dd07c7"
+    }
+  },
+  "exploratory_context": {
+    "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_punctured_cell_pilot.json",
+    "sha256": "cc748d2d6a60b40cf4eeebd1cd8c6564017497f9e994bde7efcaf57ac9cfb859",
+    "used_as_proof": false
+  },
+  "fold_certificate": {
+    "centred_evaluation_map": "Use r=s for 0<=s<=1/2 and r=s-1 for 1/2<s<=1; C_epsilon(s)=C_epsilon(r).",
+    "change_of_variables": "integral_n^(n+1)f_x(u)C_epsilon(u)du=integral_0^1 f_x(n+s)C_epsilon(s)ds",
+    "endpoint_shift_survivor": "upper B label minus lower A label",
+    "one_cell_fold": "integral_0^L f_x(u)C_epsilon(u)du=integral_0^1 F_x(s)C_epsilon(s)ds",
+    "partition": "[0,L]=union_(n=0)^(L-1)[n,n+1] up to shared endpoints",
+    "periodicity": "C_epsilon(u+j)=C_epsilon(u) for every integer j",
+    "roster_length": 2481422,
+    "shifted_fold_roster_at_s_1": [
+      159579,
+      5122421
+    ],
+    "unshifted_fold_roster": [
+      159577,
+      5122419
+    ],
+    "zero_x_guard": "The derivative formula is used for x>0; F_x(s) itself has the direct continuous x=0 definition."
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_punctured_cell_fold_gate",
+  "next_obligation": "Construct a deterministic evaluator for the folded quadratic-Gauss current F_x(s) on one cell with explicit error and derivative controls, then compose it with the pole-free C_epsilon(s) formula. Start with floating cross-checks against direct finite sums on a sparse (x,s,epsilon) lattice; promote only after a recursive Gauss-sum or interval chirp evaluator closes. Keep the endpoint half-current, A notch, B window, and B outer subtraction in the same physical projection.",
+  "passed": true,
+  "proof_boundary": "Exact fixed-regulator punctured-cell cancellation, one-cell fold, finite theta-current identity, and uniform cubic dual tails only. No finite-Gauss-current error theorem, Kummer x integration, A/B extraction evaluation, quantitative R_after_A or R_Dir bound, complete Q_K-T, all-height theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "punctured_transform_certificate": {
+    "K3": "K3=|q_epsilon''(c)|+|q_epsilon''(d)|+20pi*epsilon",
+    "integer_value": "C_epsilon(0)=hat h_epsilon(0)+E_1(0)/24+sum_(k!=0)rho_2(k)",
+    "reason": "The k=0 identity rho_2(s)=hat h(s)-b_0(s)-b_1(s) cancels the apparent poles in the closed boundary sums before evaluation.",
+    "stable_cell_formula": "C_epsilon(s)=hat h_epsilon(s)+E_0(s)g_0(s)+E_1(s)g_1(s)+sum_(k in Z, k!=0)rho_2(k+s), |s|<=1/2",
+    "uniform_tail": "sum_(|k|>K)|rho_2(k+s)|<=K3/[(2pi)^3(K-1/2)^2] for |s|<=1/2"
+  },
+  "runtime": {
+    "arb_threads": 1,
+    "elapsed_seconds": 0.61,
+    "precision_decimal_digits": 100,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "centred_cell": "|s|<=1/2",
+    "dual_cutoff_certificate": 64,
+    "height": 10000000000,
+    "roster_coordinate_length": 2481422,
+    "source_odd_roster": [
+      159577,
+      5122421
+    ]
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_punctured_cell_fold_gate.py",
+      "sha256": "925b41e9896d0ed75ae3d389128bfa912906d58cd083c70ac96e45bfe28131f9"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_punctured_cell_fold_gate.py",
+      "sha256": "bec0416fae12f060517754a6932491d72597f7bbaeded6a1f8a9831fe292232c"
+    }
+  },
+  "status": "exact_pole_free_target_notch_cell_recombination_one_cell_source_fold_and_uniform_cubic_tail_certified_quadrature_open",
+  "symbolic_certificate": {
+    "cell_coefficients": {
+      "four_g1_series": "1/6 + 7*z**2/120 + 31*z**4/3024 + 127*z**6/86400 + O(z**8)",
+      "g0": "g_0(s)=[csc(pi*s)-1/(pi*s)]/(2i)",
+      "g0_series": "z/6 + 7*z**3/360 + 31*z**5/15120 + 127*z**7/604800 + O(z**8)",
+      "g1": "g_1(s)={1/(pi*s)^2-cos(pi*s)/sin(pi*s)^2}/4",
+      "limits": "g_0(0)=0, g_1(0)=1/24"
+    },
+    "folded_theta_current": "F_x(s)=sum_(n=0)^(L-1)(A+2n+2s)e^(i*pi*x*(A+2n+2s)^2/4)=(i*pi*x)^(-1)partial_s Theta_L(x,s)",
+    "punctured_identity": "B_0+B_1+rho_2(s)=hat h(s)+[B_0-b_0(s)]+[B_1-b_1(s)]",
+    "theta_definition": "Theta_L(x,s)=sum_(n=0)^(L-1)e^(i*pi*x*(A+2n+2s)^2/4)",
+    "theta_shift": "Theta_L(x,1)-Theta_L(x,0)=e^(i*pi*x*B^2/4)-e^(i*pi*x*A^2/4)"
+  },
+  "tail_certificate": {
+    "rows": [
+      {
+        "K3_ball": "[6.549615699196855455722121629501800919902227783159496965469923089617561e-5 +/- 6.51e-76]",
+        "centred_cell": "|s|<=1/2",
+        "dual_cutoff": 64,
+        "epsilon": "1e-6",
+        "uniform_punctured_tail_ball": "[6.548302940258891799542952621948798162414800652753522509695882672469211e-11 +/- 4.54e-81]"
+      },
+      {
+        "K3_ball": "[6.888860304059993892346228921304296230150397164428307630218707663518607e-7 +/- 4.08e-77]",
+        "centred_cell": "|s|<=1/2",
+        "dual_cutoff": 64,
+        "epsilon": "1e-8",
+        "uniform_punctured_tail_ball": "[6.887479549317750506554295966713475103808344402866605972845544097886508e-13 +/- 4.19e-83]"
+      },
+      {
+        "K3_ball": "[6.911280321531870520904031493128722808572397817028624480435390415885090e-9 +/- 4.52e-79]",
+        "centred_cell": "|s|<=1/2",
+        "dual_cutoff": 64,
+        "epsilon": "1e-10",
+        "uniform_punctured_tail_ball": "[6.909895073078900089481325342875753204122569115857216372961103461136594e-15 +/- 3.74e-85]"
+      }
+    ]
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "decision": {
+    "A_B_extraction_cancellation_completed": false,
+    "differentiated_leakage_absolutely_convergent": true,
+    "finite_regulator_and_limit_order_preserved": true,
+    "floating_data_used_as_proof": false,
+    "quantitative_R_after_A_bound_proved": false,
+    "rh_implication": false,
+    "target_asymmetry_reduced_to_closed_harmonic_current": true,
+    "theta_first_derivative_jump_extracted_exactly": true,
+    "theta_value_jump_extracted_exactly": true,
+    "two_jet_remainder_periodic_C1": true,
+    "zero_x_extension_regular_and_residual_vanishes": true
+  },
+  "dependencies": {
+    "R_after_A_equivalence": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_finite_regulator_equivalence_gate.json",
+      "sha256": "e4f5c904204da05cff08ad0da01739b8aa78b7f72957dca3f54864c2b1c55f27"
+    },
+    "punctured_cell_fold": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_punctured_cell_fold_gate.json",
+      "sha256": "c1546126d5aa1124d7429e33fc218e078be4d325e6d95f6dd93b98dbe30b0fee"
+    },
+    "symmetric_poisson_interchange": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_symmetric_poisson_interchange_gate.json",
+      "sha256": "4a1898bcda7105107fcaf303a20a87237e75c09f0052db7710bff5f6765a88b0"
+    }
+  },
+  "fourier_tail_certificate": {
+    "coefficient_definition": "hat Phi_x(m)=integral_0^1 Phi_x(s)e^(-2*pi*i*m*s)ds",
+    "consequence": "The differentiated leakage series is absolutely convergent after the two endpoint jets are extracted.",
+    "differentiated_term_bound": "2*pi*|m|*|hat Phi_x(m)|<=K_Phi(x)/(2*pi*|m|)^2",
+    "quantitative_warning": "The displayed derivative majorant proves convergence but is not asserted to meet the R_after_A target.",
+    "symmetric_tail_bound": "sum_(|m|>K)2*pi*|m|*|hat Phi_x(m)|<=K_Phi(x)/(2*pi^2*K)",
+    "three_IBP_bound": "|hat Phi_x(m)|<=(|Delta Phi_x''|+integral_0^1|Phi_x'''(s)|ds)/(2*pi*|m|)^3"
+  },
+  "harmonic_certificate": {
+    "definition": "H_T(epsilon)=sum_(m=622)^39894 exp(-pi*epsilon*m^2)/m",
+    "independent_of_M_once": "M>=39894",
+    "polynomial_current": "integral_0^1 (s^2-s) C_(M,epsilon)'(s) ds=i*H_T(epsilon)/pi",
+    "rows": [
+      {
+        "H_T_ball": "[4.16185772996900304025207600348705642984596876815154322119292404133349293634 +/- 7.20e-76]",
+        "H_T_over_pi_ball": "[1.32476046033956276831194354001237996844173426659028391392901539427103246713 +/- 4.26e-75]",
+        "epsilon": "0"
+      },
+      {
+        "H_T_ball": "[0.0775332647434742627012306722750592309097418589031230632375662464893550834332 +/- 2.57e-77]",
+        "H_T_over_pi_ball": "[0.0246796046759530025980814369862326104195850907346629491544306270072636225737 +/- 9.63e-78]",
+        "epsilon": "1e-6"
+      },
+      {
+        "H_T_ball": "[1.92328061262064477280306930337827240762772218771555446877668110335478851308 +/- 3.98e-75]",
+        "H_T_over_pi_ball": "[0.612199232902768634226558119940223779918708105393901885464872766627894152506 +/- 3.46e-76]",
+        "epsilon": "1e-8"
+      },
+      {
+        "H_T_ball": "[3.93999468019999251076355435862015671431973946139778406209141362529523816755 +/- 3.08e-75]",
+        "H_T_over_pi_ball": "[1.25413925821920034143118899315511394611259919746056536893015795286988216120 +/- 5.32e-76]",
+        "epsilon": "1e-10"
+      }
+    ]
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_extraction_gate",
+  "next_obligation": "Insert the extracted E_x and K_x*H_T endpoint currents into the exact R_after_A ownership ledger and prove their coefficientwise cancellation or retention against the A notch, B trace window, B outer block, H_x, and explicit A_m/B_m atoms. Only after that ownership gate should the periodic C1 leakage be evaluated or bounded.",
+  "passed": true,
+  "periodized_identity_certificate": {
+    "endpoint_current": "K_x=B*e_B(x)-A*e_A(x), K_0=B-A=2L",
+    "endpoint_divided_difference": "E_x=[e_B(x)-e_A(x)]/(i*pi*x), E_0=(B^2-A^2)/4",
+    "finite_cutoff_scope": "M>=B=5122421 in R_after_A; identity itself needs M>=39894",
+    "limit_order_preserved": "finite M and epsilon identity first; then M to infinity at fixed epsilon; then epsilon down to zero",
+    "source_identity": "integral_0^1 F_x(s)C_(M,epsilon)(s)ds=E_x-i*K_x*H_T(epsilon)/(2*pi)-integral_0^1 Phi_x(s)C_(M,epsilon)'(s)ds",
+    "stable_endpoint_form": "E_x=((B^2-A^2)/4)e^(i*pi*x*(A^2+B^2)/8)sinc(pi*x*(B^2-A^2)/8)",
+    "zero_x_identity": "integral_0^1 F_0(s)C_(M,epsilon)(s)ds=(B^2-A^2)/4-i*(B-A)*H_T(epsilon)/(2*pi)"
+  },
+  "proof_boundary": "Exact finite-regulator two-jet periodization, closed target harmonic current, and absolute convergence of the differentiated leakage only. No quantitative finite-current evaluator, cancellation with separately owned A/B extraction terms, Kummer x bound, R_after_A or R_Dir bound, complete Q_K-T, all-height theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "arb_threads": 1,
+    "elapsed_seconds": 0.653,
+    "precision_decimal_digits": 110,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "common_cutoff": "M>=B=5122421",
+    "height": 10000000000,
+    "regulator": "epsilon>=0 after the finite-regulator identity is established",
+    "roster_coordinate_length": 2481422,
+    "source_odd_roster": [
+      159577,
+      5122421
+    ],
+    "target_positive_modes": [
+      622,
+      39894
+    ]
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_extraction_gate.py",
+      "sha256": "88f0c9d23fdcd365e3884f6af42a3108aaf7c3208308b219a41f6985ecbd4d3f"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_extraction_gate.py",
+      "sha256": "ba9cd74cf31809fa533a2a5a16a66d9be4006c44406035df7fe8cbbad75379c9"
+    }
+  },
+  "status": "exact_periodic_two_jet_endpoint_current_extraction_and_absolute_leakage_convergence_certified_quantitative_bound_open",
+  "symbolic_certificate": {
+    "current_endpoint_jump": "F_x(1)-F_x(0)=B*e_B(x)-A*e_A(x)=K_x",
+    "folded_current_derivative": "partial_s Theta_L(x,s)=i*pi*x*F_x(s)",
+    "folded_current_derivative_residual": "0",
+    "periodic_jet_conditions": "Phi_x(0)=Phi_x(1)=0 and partial_s Phi_x(0)=partial_s Phi_x(1)",
+    "scaled_value_periodization": "Psi_x(s)=[Theta_L(x,s)-Theta_L(x,0)-s*D_x]/(i*pi*x)",
+    "theta_endpoint_jump": "D_x=Theta_L(x,1)-Theta_L(x,0)=e_B(x)-e_A(x)",
+    "two_jet_periodization": "Phi_x(s)=Psi_x(s)-(K_x/2)*(s^2-s)",
+    "zero_x_extension": "Psi_0(s)=2481422*(s^2-s)",
+    "zero_x_residual": "0"
+  }
+}

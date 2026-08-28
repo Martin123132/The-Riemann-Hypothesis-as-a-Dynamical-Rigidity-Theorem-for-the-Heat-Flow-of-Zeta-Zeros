@@ -1,0 +1,154 @@
+{
+  "decision": {
+    "D_K_enclosed": false,
+    "actual_height_joined_remainder_enclosed": false,
+    "actual_mode_roster_recovered_from_saddle_map": true,
+    "branch_Stokes_connection_complete": true,
+    "common_integral_G_plus_A_transition_subtraction_complete": false,
+    "finite_branch_sum_Fresnel_Dirichlet_representation_exact": true,
+    "non_A_bound_proved": false,
+    "rh_implication": false,
+    "uncertified_third_quadrant_rotation_required": false
+  },
+  "dependencies": {
+    "branch_alignment": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_label_branch_correction_QK_alignment_gate.json",
+      "sha256": "f7aa4a7f80241c2ae24a9dc4602a9db6d09a38f17daff49133ef9b4a382b4a9d"
+    },
+    "geometric_half_line": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_QK_geometric_half_line_and_saddle_route_gate.json",
+      "sha256": "238e252db66493fa56b4a381c13b8d0687d0503e4d8e62ca734d9d93b4ede241"
+    },
+    "physical_ownership": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_physical_transform_ownership_ledger_gate.json",
+      "sha256": "15595ec04fd6f48c33b6182593a395dc62587a388ee3b3e9a18cc178b1b1af00"
+    }
+  },
+  "finite_Fresnel_branch_sum": {
+    "Dirichlet_factor": "D_W(y)=sum_(j=0)^(M-1)exp(i*pi*(A+2*j)*y)=exp(i*pi*(A+M-1)*y)*sin(pi*M*y)/sin(pi*y)",
+    "finite_sum": "B_W=Fresnel integral_0^infinity y^(-s)exp(-i*pi*y^2)D_W(y)dy",
+    "infinite_A21_interchange_used": false,
+    "integer_singularities_removable_by_finite_sum": true,
+    "one_label": "d*I_plus=Fresnel integral_0^infinity y^(-s)exp(i*pi*(alpha*y-y^2))dy",
+    "rotation": "x=exp(i*pi/4)*y approached through arg(x)<pi/4",
+    "tail_convergence": "one integration by parts after the last stationary point; phase derivative is asymptotic to -2*pi*y"
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_branch_Fresnel_Dirichlet_connection_and_mode_roster_gate",
+  "next_obligation": "Put the exact target P/Gamma modes 622..39894, extra Gamma modes 39895..39936, and paired A modes 39853..39936 onto the common Fresnel/Dirichlet representation of B_W. Subtract G+A_transition before norms, retain P_W and the parabolic-cylinder Stokes complement with exact H(t), and derive one signed interval for the joined J_Z or D_K remainder.",
+  "parabolic_cylinder_connection": {
+    "DLMF_references": [
+      "https://dlmf.nist.gov/12.5.E1",
+      "https://dlmf.nist.gov/12.2.E19"
+    ],
+    "I_minus": "integral_0^infinity x^(-s)exp(-pi*x^2-c_alpha*x)dx",
+    "I_plus": "integral_0^infinity x^(-s)exp(-pi*x^2+c_alpha*x)dx",
+    "J": "integral_0^infinity x^(-conj(s))exp(-pi*x^2+i*c_alpha*x)dx",
+    "identity": "I_minus=-i*exp(-pi*t)*I_plus+kappa(t)*J",
+    "kappa": "i*sqrt(2*pi)*(2*pi)^(i*t)*exp(-pi*t/2)/Gamma(1/2+i*t)",
+    "kappa_modulus": "sqrt(1+exp(-2*pi*t))",
+    "source_split": "S_alpha=d*I_plus+K_0*kappa*J=(S_alpha-T_alpha)+T_alpha",
+    "surrogate_rows": [
+      {
+        "DLMF_connection_discrepancy_absolute": "1.34893020881602553e-36",
+        "alpha": 1,
+        "branch_prefactor_discrepancy_absolute": "4.19648771515188272e-67",
+        "kappa_absolute": "1.0000017436696579125597834360036404",
+        "sqrt_1_plus_exp_minus_2pi_t": "1.0000017436696579125597834360036404",
+        "t": "2.0"
+      },
+      {
+        "DLMF_connection_discrepancy_absolute": "4.55332400467797668e-37",
+        "alpha": 3,
+        "branch_prefactor_discrepancy_absolute": "1.42589912456982364e-65",
+        "kappa_absolute": "1.0000000001407134228643775023674543",
+        "sqrt_1_plus_exp_minus_2pi_t": "1.0000000001407134228643775023674543",
+        "t": "3.5"
+      },
+      {
+        "DLMF_connection_discrepancy_absolute": "4.65684953475422553e-37",
+        "alpha": 5,
+        "branch_prefactor_discrepancy_absolute": "2.2598777957208204e-66",
+        "kappa_absolute": "1.0000000000000113555053416204047196",
+        "sqrt_1_plus_exp_minus_2pi_t": "1.0000000000000113555053416204047196",
+        "t": "5.0"
+      }
+    ]
+  },
+  "passed": true,
+  "physical_ownership_match": {
+    "carrier_amplitude_subtraction_on_common_Fresnel_integral_complete": false,
+    "extended_P_modes": [
+      622,
+      39936
+    ],
+    "extra_Gamma_modes": [
+      39895,
+      39936
+    ],
+    "independent_saddle_roster_matches_existing_indices": true,
+    "paired_A_modes": [
+      39853,
+      39936
+    ],
+    "target_P_modes": [
+      622,
+      39894
+    ]
+  },
+  "proof_boundary": "Exact parabolic-cylinder connection, branch/Stokes ownership, finite Fresnel/Dirichlet representation, and actual saddle-mode roster only. No common-integral carrier subtraction, joined amplitude bound, actual-height B_W, Q_K, D_K, Delta_KU, J_Z, non-A, all-height, Lambda<=0, PF-infinity, RH, or prize-level enclosure is proved.",
+  "runtime": {
+    "elapsed_seconds": 4.345,
+    "numerical_threads": 1,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "saddle_mode_roster": {
+    "A_lower_saddle_ball": "[39852.39138623123896184313678682614784426989001770014282206708149972340 +/- 4.38e-66]",
+    "A_upper_saddle_ball": "[39936.10861376876103815686321317385215573010998229985717793291850027660 +/- 4.38e-66]",
+    "B_lower_saddle_ball": "[621.5560036102371463889412039565834444235567629462757775115581974443559 +/- 3.84e-68]",
+    "B_upper_saddle_ball": "[2560588.943996389762853611058796043416555576443237053724222488441802556 +/- 3.56e-64]",
+    "alpha_A": 159577,
+    "alpha_B": 5122421,
+    "classical_center_sqrt_t_over_2pi_ball": "[39894.22804014326779399460599343818684758586311649346576659258296706579 +/- 2.60e-66]",
+    "ordinary_integer_count": 39231,
+    "ordinary_integer_roster": [
+      622,
+      39852
+    ],
+    "transition_alpha_ball": "[159576.9121605730711759784239737527473903434524659738630663703318682632 +/- 2.97e-65]",
+    "transition_half_counts": [
+      42,
+      42
+    ],
+    "transition_integer_count": 84,
+    "transition_integer_roster": [
+      39853,
+      39936
+    ],
+    "transition_lower_half": [
+      39853,
+      39894
+    ],
+    "transition_upper_half": [
+      39895,
+      39936
+    ]
+  },
+  "scope": {
+    "alpha_max": 5122421,
+    "alpha_min": 159577,
+    "height": 10000000000,
+    "window_label_count": 2481423
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_branch_Fresnel_Dirichlet_connection_and_mode_roster_gate.py",
+      "sha256": "3eaa50a0c6f43fc889529cee79a8b884dceff4a539390eeb98324cbdf82dfdd1"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_branch_Fresnel_Dirichlet_connection_and_mode_roster_gate.py",
+      "sha256": "2cd608cfb7ed285b8447456021affe641f2f4ed05f35902be2cd18dfe672d48e"
+    }
+  },
+  "status": "exact_parabolic_cylinder_branch_connection_Fresnel_Dirichlet_sum_and_mode_roster_certified"
+}

@@ -1,6 +1,6 @@
 # Proof Claim Ledger
 
-Date: 2026-08-13
+Date: 2026-08-28
 
 Status: claim-classification ledger. This is not a proof of RH or `Lambda <= 0`; it records which claims are exact, finite, diagnostic, open, rejected, or hygiene gates.
 
@@ -25,7 +25,7 @@ python work/rh_compute/scripts/check_proof_claim_ledger.py
 Current result:
 
 ```text
-validated proof-claim ledger: 776 claims, 0 issues, 10 open theorem targets
+validated proof-claim ledger: 866 claims, 0 issues, 11 open theorem targets
 ```
 
 The source-normalization corrigendum remains the baseline: the Polymath-15
@@ -5584,6 +5584,784 @@ jensen_window_pf_newman_c1_hardy_half_B_face_higher_boundary_current_absolute_wi
   through R_5.  Finite interval sums and analytic tails bound their physical
   absolute window contribution by 1.491e-6.  The post-third remainder, local
   replacements, and outside-window tails remain open
+
+jensen_window_pf_newman_c1_hardy_global_residual_endpoint_safe_completed_B_extraction_gate:
+  the exterior trace package alone jumps by -P_bulk,m at every nonlocal B
+  crossing, so classical derivative bounds on the full released support are
+  unavailable.  Adjoining the exactly matching nonlocal step block gives the
+  smooth completed current Ctr=Btr+N mode by mode.  The rational corner cutoff
+  transfers this completion only away from the Abel corner and leaves the
+  certified negative B window unchanged.  Uniform derivative and joined
+  remainder bounds remain open
+
+jensen_window_pf_newman_c1_hardy_global_residual_completed_B_derivative_transport_gate:
+  after factoring the common B phase, each completed mode obeys a closed exact
+  first-order transport whose bulk completion is a homogeneous solution.
+  Differentiating that system gives explicit second derivatives for every
+  finite regulated pair and the Kummer weight without numerical Fresnel
+  differentiation or crossing distributions.  Uniform summed derivative
+  bounds and the joined remainder estimate remain open
+
+jensen_window_pf_newman_c1_hardy_global_residual_completed_B_outer_three_current_derivative_tail_gate:
+  for m>=B and delta<=x<=1/2, c/m<=1/4 gives the uniform denominator
+  margin |c^2-m^2|>=15m^2/16.  Monomial differentiation before norms and
+  analytic zeta-tail comparison bound the first three paired rational
+  currents through two normalized derivatives, uniformly in cutoff and
+  Abel weight.  This is a derivative tail, not by itself an integral bound
+
+jensen_window_pf_newman_c1_hardy_global_residual_completed_B_outer_fresnel_remainder_derivative_tail_gate:
+  the phase-stripped exact Fresnel remainder satisfies closed first and
+  second differential equations.  Combining them with the certified q^-7
+  contour remainder bounds both outer signs through two derivatives.  The
+  direct-Fresnel/boundary-current dictionary remains a separate mandatory
+  term at this stage
+
+jensen_window_pf_newman_c1_hardy_global_residual_completed_B_outer_dictionary_derivative_tail_gate:
+  the exact truncation dictionary reduces to three rational monomials and
+  has an analytically summable m>=B tail through two derivatives.  Together
+  with the rational-current and exact-remainder gates, this completes the
+  analytic outer derivative block without treating either truncation as exact
+
+jensen_window_pf_newman_c1_hardy_global_residual_completed_B_outer_phase_coupled_tangential_gate:
+  a 45-slab Arb partition couples the complete outer derivative majorants to
+  the local B phase in two tangential integrations by parts.  Every x_low,
+  x_high, and half-endpoint term is retained, proving the physical m>=B
+  contribution below 8e-10; a bisected independent partition gives
+  6.56393e-10.  The finite completed block is not bounded here
+
+jensen_window_pf_newman_c1_hardy_global_residual_completed_B_finite_block_dirichlet_rejoin_gate:
+  the remaining 5122420 positive completed modes are rejoined with the common
+  remainder before norms.  Exact finite-cutoff algebra replaces 1280347
+  crossing charts by the established weighted Abel/Dirichlet kernel and the
+  fixed 39273 target tails.  The revised sufficient compressed-residual
+  targets are 1.405792e-4 for R_end<8.6e-6 and 1.319792e-4 for negativity;
+  neither bound is claimed proved
+
+jensen_window_pf_newman_c1_hardy_global_residual_uniform_gamma_target_insertion_gate:
+  all 39273 target modes share one exact Abel-regularized full-line Gamma
+  carrier; ordinary/fold ownership begins only in the finite endpoint defect.
+  An independent Arb replay bounds the physical Gamma-to-classical correction
+  below 5e-20 and gives the exact safe R_Dir targets.  No R_Dir bound is proved
+
+jensen_window_pf_newman_c1_hardy_global_residual_phase_space_projector_defect_gate:
+  the complete Gamma-normalized residual is exactly one endpoint-completed
+  oriented phase-space projector defect.  Stationary occupancy changes at
+  621|622, 39852|39853, and 39894|39895; 39694|39695 is only a proof-ownership
+  boundary.  The inherited raw C2 majorant cannot reach the working target,
+  but this is not a lower bound for the actual signed defect
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_flat_face_projector_kernel_gate:
+  the Abel-regularized hyperbolic flat-face profile is an exact complex
+  Fresnel smoothing with unit jump and sharp null limit.  Its B scaling is
+  exactly the certified scalar U0 profile, while U1 remains mandatory.  A
+  joint fold requires face incidence and null slope simultaneously; the
+  remote B near-degeneracy is not a fold, while the A/half corner nearly is.
+  Curved-face and amplitude remainders remain open
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_wedge_corner_kernel_gate:
+  adding the half-domain gives one coupled hyperbolic Fresnel wedge whose
+  a-, h-, and mixed-boundary derivatives are exact.  The B half boundary is
+  over 270598 standardized units away, while the A half event is only
+  0.02196 mode below its null face and crosses the canonical scale at
+  39894|39895.  Curved-face and transformed-amplitude remainders remain open
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_wedge_affine_remainder_identity_gate:
+  the exact bi-Morse Jacobians factor the transformed amplitude into endpoint
+  and outer-logistic terms.  Keeping its full affine tangent reduces the
+  canonical moment to C and its two boundary derivatives.  Exact-minus-
+  tangent is one amplitude-difference integral plus one oriented curved-face
+  strip, with no phase remainder.  The two global bounds remain open
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_wedge_null_coordinate_unfolding_gate:
+  R=P+S reduces the nearly null A wedge to one-dimensional Abel/PV integrals
+  on both sides of delta=1+rho=0, with the half-jump explicit.  The exact
+  unfolding eta_A lies in (0.07784,0.07785), and the continuous null face
+  generates the Airy cubic coefficient 1/(3A sqrt(pi)).  No wedge value or
+  global remainder is bounded here
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_wedge_null_coordinate_affine_corner_evaluation_gate:
+  completed quadratics plus rigorously tailed steepest rays certify the scalar
+  and affine tangent wedges at modes 39894 and 39895.  A longer-ray replay
+  agrees independently.  The affine correction at 39894 has real part above
+  6e-4, so the scalar corner alone is not admissible at target precision
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_wedge_affine_corner_projector_orientation_gate:
+  odd-endpoint parity restores one common classical carrier and fixes the A
+  endpoint sign as epsilon_A=-1.  The paired endpoint coefficient remains +1
+  across 39894|39895; only the positive full-line bulk coefficient jumps.  The
+  two-mode physical affine correction is -6.30999e-6, but is not a global sum
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_wedge_affine_A_transition_roster_gate:
+  lower-indented null-coordinate steepest rays certify all 84 tangent modes
+  39853..39936 without a duplicated positive-delta half-jump.  Common-carrier
+  summation gives affine total -0.115708566730828 and affine-minus-scalar
+  +1.06868e-5, reversing the two-mode sign.  Exact remainders remain open
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_wedge_affine_A_local_curved_face_strip_gate:
+  a tail-bounded analytic logistic series and exact Fresnel primitives certify
+  the oriented exact-face/tangent strip on y_half<=y<=0.0037 for all 84 modes.
+  Its signed physical total is -0.0102179932316142 +/- 4.21e-13, so it must be
+  retained in the A Airy carrier.  The exterior face and amplitude are open
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_wedge_affine_A_localized_exact_domain_regrouping_gate:
+  exact indicator algebra removes the unintended full tangent exterior before
+  estimation.  The artificial tangent saddle occurs exactly for modes
+  39884..39894, while the genuine exact-face exterior saddle occurs exactly
+  for modes 39927..39936.  This is a localization guard, not an exterior value
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_wedge_affine_A_local_exact_domain_gate:
+  exact lower Fresnel primitives certify the complete finite-box affine A
+  carrier for all 84 modes without retaining the tangent exterior.  Its signed
+  physical sum is -0.126865295975502 +/- 2.66e-12; the exact exterior and
+  compact exact-minus-affine transformed amplitude remain open
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_wedge_A_exterior_asymptotic_cancellation_guard_gate:
+  the affine and exact-minus-affine exterior pieces diverge oppositely and do
+  not possess separate x=0 limits, even after all-mode common-phase summation.
+  The recombined exact endpoint current is O(x^-1/4) and integrable.  Only the
+  common-cutoff object or full exact endpoint factor is admissible
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_wedge_A_exact_exterior_common_phase_reduction_gate:
+  an exact inverse-Gaussian erfc primitive and phase-stripped transport reduce
+  the full exact exterior to one common-phase integral.  The signed cutoff
+  Morse roster is -10.55089..1.09534 and is positive exactly for modes
+  39927..39936.  The displayed -0.00240153 scale remains diagnostic only
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_wedge_A_exact_exterior_endpoint_tail_remainder_gate:
+  four exact endpoint integrations by parts and an x^(7/2)-preserving Arb
+  partition bound the 84-mode rational replacement error.  The complete
+  physical error is at most 2.28235255004382e-15, with a tighter independent
+  replay.  The resulting rational common-phase integral is not evaluated here
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_wedge_A_exact_exterior_rational_common_phase_contour_gate:
+  a cutoff-split logistic contour, certified Taylor panels, and an analytic
+  horizontal-ray majorant evaluate the rational common-phase integral.  After
+  adding the endpoint-replacement error, the full exact 84-mode A exterior is
+  -0.00240153401848142 +/- 3.40e-13.  The compact interior nonlinear amplitude
+  and complete A endpoint block remain open
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_wedge_A_local_exact_nonlinear_amplitude_gate:
+  the exact endpoint-current normalization and stable ODE disk enclosures
+  reduce and certify the compact exact-minus-affine amplitude on all 84 A
+  modes.  Its complete physical value is +1.10622962615099e-8 +/- 2.19e-14,
+  and a fresh 70-digit tighter replay overlaps every row and aggregate
+
+jensen_window_pf_newman_c1_hardy_global_residual_hyperbolic_wedge_A_complete_endpoint_projector_assembly_gate:
+  the local affine, compact nonlinear, and exact exterior values assemble to
+  the complete A endpoint -0.129266818931687 +/- 3.03e-12.  Adding the exact
+  42-mode positive Gamma projector jump gives the admissible A transition
+  -0.0366741247977736 +/- 3.03e-12.  The remaining R_Dir currents are open
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_Dir_projector_ownership_ledger_gate:
+  the zero mode and five positive-label classes partition the common-cutoff
+  projector defect exactly.  The A extraction removes only its 84 endpoint
+  pairs and 42 outside-target positive bulk atoms, with no negative-bulk or
+  B-endpoint overlap.  Thus R_Dir=A_transition+R_after_A, reducing the working
+  one-sided target to R_after_A<0.0368147039947.  The joined bound is open
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_finite_regulator_equivalence_gate:
+  at every common M>=5122421 and epsilon>0, the Dirichlet/Abel kernel with the
+  B window, analytic B exterior, and certified A notch removed is exactly the
+  zero sector plus five recorded positive-label coefficient classes.  The
+  independent checker reconstructs every interface vector and the inherited
+  M-then-epsilon physical limit.  No bound for R_after_A is asserted
+
+jensen_window_pf_newman_c1_hardy_global_residual_target_notched_theta_two_edge_modular_gate:
+  the regulated complement of target modes 622..39894 is exactly the Poisson
+  dual of a Gaussian cut at half-integers 621.5 and 39894.5.  Two explicit
+  Mittag-Leffler boundary currents leave an absolutely convergent dual series
+  with a certified cubic tail.  This transforms only the common kernel; its
+  Kummer integration and the joined R_after_A bound remain open
+
+jensen_window_pf_newman_c1_hardy_global_residual_target_notched_theta_punctured_cell_fold_gate:
+  recombining the k=0 dual residual with both closed edge currents removes the
+  apparent integer-lattice poles exactly and gives one formula continuous on
+  the closed centred cell, with a uniform certified cubic tail.  Periodicity
+  then folds the 2481422-cell Kummer source roster to one cell weighted by an
+  exact finite quadratic-theta current.  Its certified evaluator, Kummer
+  integration, and the joined R_after_A bound remain open
+
+jensen_window_pf_newman_c1_hardy_global_residual_target_notched_theta_periodic_two_jet_extraction_gate:
+  subtracting the exact value and first-derivative endpoint jumps from the
+  folded finite-theta potential gives a periodic C1 remainder that vanishes
+  identically at x=0.  The notch asymmetry reduces to one closed target
+  harmonic current, while the differentiated remainder has an absolutely
+  convergent m^-2 leakage tail.  The resulting crude derivative majorant is
+  a convergence theorem, not a quantitative R_after_A bound
+
+jensen_window_pf_newman_c1_hardy_global_residual_target_notched_theta_periodic_two_jet_common_kernel_reassembly_gate:
+  the target harmonic current cancels coefficientwise against the matching
+  first-jet term in the exact target endpoint atoms.  The complete common
+  kernel is therefore H_x+E_x plus an absolutely and uniformly convergent
+  symmetric Phi pair series minus the finite target Gamma bulk.  The harmonic
+  current is not an additional error budget, and the phase-adapted physical
+  estimate remains open
+
+jensen_window_pf_newman_c1_hardy_global_residual_all_order_endpoint_jet_route_gate:
+  repeated integration by parts gives an exact all-order signed-pair expansion
+  in which only odd endpoint jumps survive.  The endpoint derivative
+  recurrence has highest-monomial ratio [xD/(2m)]^2; exact saved-height
+  arithmetic places the B crossing and A half-boundary at ratio one and shows
+  the raw hierarchy is not uniformly descending across the target geometry.
+  This rejects only a global absolute higher-jet majorant; the joined
+  phase-adapted R_after_A estimate remains open
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_extended_notch_normal_form_gate:
+  subtracting the certified A transition compresses the positive Gamma-bulk
+  mask exactly to the contiguous notch 622..39936 and reduces the surviving
+  endpoint roster to two rows.  The one-cell and two-edge modular formulas
+  inherit with upper edge 39936.5, which is 42.25 modes beyond the A
+  half-boundary and has q_A=-84.5 instead of -0.5.  B and negative-bulk
+  ownership is unchanged; the joined quantitative bound remains open
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_extended_notch_pole_free_kernel_gate:
+  the post-A complement with edges 621.5 and 39936.5 has an exact
+  fixed-regulator Poisson transform and a pole-free dual formula on the
+  closed centred cell.  At dual cutoff 64 its cubic Arb tail is below
+  6.911e-15 for epsilon=1e-10.  The common A phase nevertheless retains its
+  interior stationary point x_*=0.4994753803..., so the edge displacement
+  does not license blanket nonstationary integration by parts; the joined
+  Morse/Fresnel estimate remains open
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_extended_notch_normal_tangential_split_gate:
+  translating the upper edge by 42 modes is exactly the negative finite
+  block 39895..39936 at every positive regulator.  On the A face the new
+  edge improves the uniform normal derivative gap from pi/4 to 169*pi/4,
+  but the tangential Morse saddle persists.  This licenses a signed normal
+  endpoint reduction followed by tangential Morse/Fresnel analysis, not
+  blanket integration by parts; the quantitative assembly remains open
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_extended_notch_A_face_two_current_expansion_gate:
+  the translated upper A edge has an exact two-current Fresnel expansion.
+  Its remainder is uniformly below 3.588e-6 and all terms retain the common
+  -i exp(i Phi_A) phase, but the leading current reaches 300.562 and cannot
+  be normed separately from the adjacent 42-mode block
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_extended_notch_A_face_midpoint_Peano_partition_gate:
+  the signed 42-mode/translated-strip A-face difference is exactly a positive
+  midpoint Peano kernel applied to the second normal derivative, with cell
+  mass 1/24 and total mass 7/4.  The Morse saddle lies in the uniform
+  |q_A|>=16 region, while the endpoint transition layer is shorter than
+  9.713e-5 and has Phi_A'>21000.  The derivative and integrated bounds remain
+  open
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_extended_notch_A_face_six_current_midpoint_defect_reduction_gate:
+  on the full pre-endpoint region the exact A-face midpoint defect is a finite
+  six-current rational-log function with a uniform remainder below
+  1.025e-8.  Its Kummer-divided amplitude is regular at x=0; the weighted
+  Morse integral and the separate endpoint-layer remainder remain open
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_extended_notch_A_face_endpoint_eight_cell_transition_localization_gate:
+  the endpoint strip splits exactly into an eight-cell Fresnel transition and
+  a 34-cell six-current rational-log tail.  The tail has |q_A|>=16.5, its
+  defect replacement error is below 5.56e-9, and its physical replacement
+  cost is below 6e-15.  The tail value itself is retained, not discarded
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_extended_notch_A_face_endpoint_eight_cell_peano_interval_gate:
+  positive Peano kernels, exact real-q erfc centres, ODE variation balls, and
+  the retained 34-cell rational-log value prove that the complete translated
+  A-face endpoint layer is below 0.0037 at t=10^10.  A different 120-digit
+  partition independently gives a bound below 0.0030.  The pre-endpoint
+  Morse integral and the joined R_after_A estimate remain open
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_extended_notch_A_face_six_current_core_absolute_peano_interval_gate:
+  factoring G_(6,yy)=x M_6, applying the positive midpoint Peano kernel, and
+  changing to the logistic coordinate prove the complete pre-endpoint A-face
+  core is below 1.2e-5 at t=10^10.  The proof uses no Morse cancellation and
+  includes the rigorously integrated six-current replacement remainder
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_extended_notch_A_face_complete_absolute_assembly_gate:
+  the independently checked core and endpoint certificates meet at the same
+  x_16 handoff and use the same physical normalization.  Their interval sum
+  proves the complete translated 42-mode A-face channel is below 0.00364,
+  leaving more than 0.03317 of the R_after_A allowance.  All other post-A
+  channels remain outside this assembly and unbounded here
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_extended_notch_A_face_fixed_regulator_embedding_gate:
+  the negative 42-mode block and negative translated strip form one exact
+  fixed-regulator channel inside R_after_A.  Their oriented difference is
+  charged once without altering the six-class coefficient mask.  Uniform
+  Abel convergence on the finite strip and the certified O(x) lower-endpoint
+  amplitude give the physical split R_after_A=I_(A,42)+R_nonA.  The A-face
+  bound reduces the sufficient non-A target to 0.0331747039947, but no bound
+  for that complement is proved
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_non_A_common_kernel_theta_current_gate:
+  the non-A complement has exact coefficient-mask, extended-notch, two-jet,
+  and one-cell evaluators on the same regulator.  Its folded source current
+  is one length-2481422 incomplete quadratic Gauss sum S_0 plus its first
+  moment S_1.  Exact phase factorization gives a two-ratio recurrence and a
+  removable x=0 value, furnishing the reference oracle for the next fast
+  evaluator.  No evaluator error theorem, physical quadrature, or non-A
+  bound is claimed
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_non_A_quadratic_theta_reference_evaluator_gate:
+  exact rational-period congruences compress S_0, S_1, and the weighted
+  current to one residue cycle.  The one-worker O(L) recurrence agrees with
+  direct high-precision short rosters and seven independent full-roster
+  periodic oracles, with worst discrepancy below 3.897e-13 relative to
+  absolute term mass.  This is diagnostic implementation validation, not a
+  uniform floating-error theorem or a physical non-A bound
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_non_A_quadratic_theta_poisson_current_self_duality_gate:
+  the folded source is exactly a j=0,1 truncated-theta current whose
+  normalized Poisson index contracts by one half.  At every completed saddle,
+  the derivative amplitude becomes 2v/x and the large base phase cancels, so
+  the image is a pure absolute-dual first moment.  The reindexed zeroth and
+  first moments, and the endpoint remainders cR_0+2KR_1, must remain tied.
+  Saddle-only remainder samples are diagnostic and explicitly non-negligible
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_characteristic_euler_maclaurin_remainder_gate:
+  the exact right and left small-t child phases lie in one characteristic
+  quadratic family whose phase derivative stays below 0.7 in absolute value
+  and has one stationary crossing.  A closed Hermite derivative envelope and
+  periodic-Bernoulli Fourier bound prove uniform order-48 Euler--Maclaurin
+  remainders below 0.000301312 and 0.000003276.  Exact Fresnel plus endpoint
+  partial sums overlap ten direct full-current evaluations.  Finite t- and
+  s-cell transport and the endpoint-complete source cover remain open
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_characteristic_euler_maclaurin_parameter_derivative_gate:
+  exact t- and s-derivative identities reduce to degree-three weighted
+  characteristic currents.  Exact Fresnel moments and all corrections through
+  B_160 give uniform order-80 remainder bounds, and a 512-bit altered-order
+  checker overlaps ten direct 496284-term weighted sums.  Sampled derivative
+  magnitudes force diagnostic pointwise half-widths down to 4.42343e-24 in t
+  and 7.66918e-19 in s.  Those widths are a route guard, not certified cells;
+  complete-source transport and source-kernel quadrature remain open
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_non_A_quadratic_theta_folded_source_kernel_abel_cubic_symmetry_gate:
+  the complete-cell Abel limit is one retained endpoint half-sum minus 39315
+  finite source Fourier coefficients, each with an exact Fresnel handoff.  The
+  notch is 3*13105 terms long, forcing an exact interior kernel zero at s=1/3
+  and slope 13105*pi*(-sqrt(3)+3i).  Rigorous complete-source wall derivatives
+  overlap the prior grouped boxes under a 416-bit reverse-block replay.  The
+  product t derivative vanishes on the symmetry line, but its s slope still
+  forces diagnostic widths below 2.7e-18, selecting signed oscillatory x
+  quadrature rather than near-constant product boxes
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_non_A_folded_abel_source_roster_reassembly_gate:
+  the symmetric-Poisson half-current and Abel endpoint boundary layer combine
+  exactly into the complete 2481423-label odd source roster, with regular
+  x=0 value 6553435661577.  The two post-A endpoint rows then cancel all
+  39315 owned finite coefficients to the contiguous P block and 84 paired A
+  atoms.  The complete half-interval finite-phase schedule has 78588 distinct
+  rational events and minimum spacing 882/817420575917.  This redirects the
+  primary numerical route to one signed source-minus-owned-carriers assembly;
+  no physical quadrature or non-A bound is claimed
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_non_A_source_owned_carrier_sparse_pilot_gate:
+  the endpoint-complete source and joined P/A carrier evaluator passes 18
+  rational rows.  Eight full 39315-mode altered Fresnel replays agree below
+  5.753e-79 relative discrepancy, nine periodic source rows agree below
+  1.354e-12 of source mass, and a direct-Fresnel checker independently replays
+  four carrier rows below 1e-38 relative discrepancy.  Sampled normalized
+  physical density reaches 1.693e11, selecting a physical-transform ownership
+  ledger before naive value-space panels; no interval quadrature is claimed
+
+jensen_window_pf_newman_c1_hardy_global_residual_R_after_A_non_A_physical_transform_ownership_ledger_gate:
+  the complete source transforms exactly to Q_K, while the owned P and paired
+  A blocks reassemble as G+A_transition.  This isolates
+  J_Z=Q_K-G-A_transition and proves
+  R_nonA=J_Z-E_Btr,win-E_outer-I_(A,42).  Reassembling existing B certificates
+  gives -0.000134948<E_Btr,win<-0.00013198, and |J_Z|<0.02939975 is sufficient
+  for the inherited absolute non-A target.  No J_Z enclosure is claimed
+
+jensen_window_pf_newman_c1_hardy_equation9_half_domain_Kummer_normalization_repair_gate:
+  odd-label reflection converts the full Kummer integral to twice the real
+  projected half-domain integral.  The full Kummer label therefore carries
+  c_t rather than 2c_t; the literal Section 11.478 formula doubled it.  All
+  executable carrier certificates already used the half interval, so their
+  values and the joined target arithmetic are unchanged
+
+jensen_window_pf_newman_c1_hardy_equation9_QK_exact_hardy_truncation_bridge_target_gate:
+  with U=Z-L and Delta_KU=Q_K-U, the exact bridge identities transport the
+  saved-height stronger-route target to
+  -0.0663407986927308950<Delta_KU<-0.0072743686927308951.  This demands a
+  definite negative continuation bias; neither source-hybrid telemetry nor
+  unusable direct fixed-precision 1F1 balls enclose it
+
+jensen_window_pf_newman_c1_hardy_equation9_exact_H_continuation_defect_target_gate:
+  the stated Kummer prefactor has two exactly equivalent Gamma forms and
+  H-1=3.12500000000000000002001953125e-22 at t=10^10.  Defining
+  D_K=U-HQ_K transports the target to
+  0.0072743687<D_K<0.0663407986.  This algebraic H identity does not certify
+  the infinite Kummer construction as an exact formula for Z
+
+jensen_window_pf_newman_c1_hardy_equation4_A21_exactness_provenance_and_contour_jump_target_gate:
+  A13 and A18 are exact geometric secant expansions on opposite open halves
+  of the Riemann-Siegel contour and fail the term test on the wrong halves.
+  Their crossing convergence is nonuniform: at q=-u/N the omitted-factor
+  magnitude is exp(-sqrt(2)pi u), equal to 0.011761980531389... for u=1.
+  The cited source calls A21 heuristic and leaves its convergence unresolved,
+  so equation-(4) exactness is not imported
+
+jensen_window_pf_newman_c1_hardy_equation4_finite_geometric_contour_residual_and_pole_release_gate:
+  the exact N-term geometric identity splits RSI into a finite odd-label
+  prefix and one residual contour before any infinite interchange.  Integer
+  translation of that residual releases exactly sum_(n=1)^N n^(-s).  For
+  the actual roster this gives the exact prefix identity
+  P_W=-sum_(n=79789)^2561211 n^(-s)+C_79788-C_2561211.  The uncorrected
+  finite prefix is not identified with H Q_K
+
+jensen_window_pf_newman_c1_hardy_equation4_finite_label_branch_correction_QK_alignment_gate:
+  each exact finite RSI label T_alpha differs from the explicit A33 Kummer
+  label S_alpha by d I_alpha(c_alpha), a half-line Log(v^2) branch term.
+  Their Hardy projections use Phi1 and Phi2 respectively, with
+  Hardy_t[S_alpha]=H(t)K_t(alpha).  Arb proves the correction is nonzero near
+  -1.0548850993 at t=5, alpha=3.  Retaining its finite sum B_W yields the
+  exact augmented physical identity
+  H(t)Q_K=Hardy_t[-Dirichlet_block+C_79788-C_2561211+B_W] without A21
+
+jensen_window_pf_newman_c1_hardy_equation4_finite_QK_geometric_half_line_and_saddle_route_gate:
+  the complete physical Kummer roster compresses exactly to one half-line
+  integral with a finite geometric source quotient and removable endpoint.
+  Its saddle discriminant gives alpha_0=sqrt(8t/pi), and Arb proves 159577 is
+  the first odd label above the transition at t=10^10.  The third-quadrant
+  saddle-ray substitution cancels the huge normalization pointwise, but its
+  Stokes and branch contour connection remains explicitly open
+
+jensen_window_pf_newman_c1_hardy_equation4_finite_branch_Fresnel_Dirichlet_connection_and_mode_roster_gate:
+  the exact parabolic-cylinder connection owns both the branch correction and
+  Stokes complement.  The decaying branch rotates legally to a finite
+  Fresnel/Dirichlet integral for B_W.  Its actual-height saddle map independently
+  recovers modes 622..39852 and the 39853..39936 transition block, split 42+42
+  at the classical centre.  This is an index match, not an amplitude bound
+
+jensen_window_pf_newman_c1_hardy_equation4_finite_Fresnel_cell_common_carrier_subtraction_reduction_gate:
+  exact integer-cell covariance partitions B_W into m^(-s)beta_m coefficients.
+  The full extended Gamma roster is then subtracted before norms through one
+  exact common coefficient C_G, leaving m^(-s)(beta_m-C_G) on ordinary owned
+  cells.  A canonical Hardy lift inserts the 84 paired A modes and gives an
+  exact joined H J_Z identity.  The natural A cell lift, Mordell join, and all
+  coefficient bounds remain open
+
+jensen_window_pf_newman_c1_hardy_equation4_finite_Fresnel_cell_natural_A_carrier_lift_gate:
+  the original convergent endpoint-wedge integral gives each paired A mode a
+  natural complex preprojection.  Odd-endpoint parity factors it on the same
+  m^(-s) carrier as the Fresnel and Gamma cells, reducing every transition
+  packet exactly to m^(-s)(beta_m-C_G-C_A,m).  Full complex enclosures for all
+  84 endpoint coefficients and the joined bounds remain open
+
+jensen_window_pf_newman_c1_hardy_equation4_finite_Fresnel_transition_grouped_complex_A_endpoint_lift_gate:
+  joining the cached complex local pieces with the grouped certified exterior
+  gives the complete natural A endpoint lift before physical projection.  Its
+  nonzero imaginary component is retained, and the transition estimate reduces
+  to one grouped Fresnel/Gamma sum minus this complex ball.  Separate complex
+  exterior integration for 84 modes is unnecessary
+
+jensen_window_pf_newman_c1_hardy_equation4_finite_Fresnel_transition_alternating_boundary_jet_packet_gate:
+  half-integer endpoint parity collapses all 2481422 nonzero transition-source
+  labels to twelve endpoint jets and finite alternating harmonic sums.  The
+  rigorous remainder is below 6.45e-17; subtracting the exact Gamma and grouped
+  natural A lifts before projection certifies the complete transition packet.
+  Higher-order replay and an altered direct nine-label roster check the identity
+
+jensen_window_pf_newman_c1_hardy_equation4_finite_PW_unowned_cell_pole_safe_two_boundary_contour_join_gate:
+  P_W and both unowned Fresnel tails join exactly as one finite-interior
+  complement.  A common G_0 subtraction removes the shared integer poles and
+  zero singularity from each finite-prefix csc packet, proving the legal
+  regularized difference mathcal J_79788-mathcal J_2561211.  Exact Euler
+  endpoint jets and altered-height contour replays pass.  Quantitative
+  actual-height enclosure of the joined packet remains open
+
+jensen_window_pf_newman_c1_hardy_equation4_joined_packet_unequal_truncation_saddle_map_gate:
+  every real label saddle maps exactly to alpha*beta=t/(2*pi) and
+  ell=2(alpha+beta).  At t=10^10, the completed generalized Riemann-Siegel
+  remainder scale first contracts from the half-cell boundary 860.5, splitting
+  the owned roster into a 239-cell endpoint block and the 39076-cell core.
+  O'Sullivan's intermediate Mordell formula is only a transform donor here;
+  no identity with J_Z or explicit remainder constant has been proved
+
+jensen_window_pf_newman_c1_hardy_equation4_joined_packet_riemann_auxiliary_entire_kernel_finite_difference_gate:
+  the entire Riemann auxiliary kernel has removable values kappa(k)=k-1/2,
+  and its integer finite difference is exactly the regularized finite-prefix
+  packet.  The actual 2481423-label source is therefore one pole-free common
+  functional of kappa(z-79788)-kappa(z-2561211), with Gamma and A subtraction
+  retained.  No quantitative deformation, Mellin remainder, J_Z, or D_K
+  enclosure has yet been proved
+
+jensen_window_pf_newman_c1_hardy_equation4_joined_packet_gamma_balanced_mellin_hurwitz_finite_difference_gate:
+  scaling the entire finite difference gives one exact Mellin-Hurwitz packet.
+  Its exponential prefactor cancels exactly against Gamma(1-s).  A finite
+  expansion has an explicit positive-axis Taylor majorant, but that majorant
+  is certified decreasing through order 20000022018 at t=10^10.  The scaled
+  coordinate is retained; the absolute Taylor evaluator is rejected.  A
+  saddle-aligned quantitative remainder remains open
+
+jensen_window_pf_newman_c1_hardy_equation4_joined_packet_quarter_disk_vertical_arc_tail_gate:
+  the gamma-balanced packet deforms exactly through a finite fourth-quadrant
+  quarter disk.  Its vertical radius recovers the complete Fresnel current
+  pointwise with no exponential normalization, reducing the unowned join to
+  one lower finite cell, one compact upper arc, and a negligible positive-real
+  tail.  Arb retains the complete 2481423-label finite difference and encloses
+  the signed upper arc with modulus below 0.057665.  The lower-cell/Gamma/A
+  assembly and D_K remain open
+
+jensen_window_pf_newman_c1_hardy_equation4_joined_packet_lower_cell_reversed_roster_endpoint_gate:
+  reversing the complete 2481423-label roster makes every lower-cell phase
+  nonstationary and reduces all endpoint sums exactly to shifted alternating
+  Hurwitz functions.  Arb encloses the retained complex lower cell as
+  [3.7858004113710693e-6 +/- 2.30e-16]
+  +i[1.3336666061723478e-5 +/- 2.30e-16].  An independent changed-order,
+  changed-split, changed-slab replay and altered three-label witness pass
+
+jensen_window_pf_newman_c1_hardy_equation4_joined_packet_ordinary_complementary_half_lattice_gate:
+  exact Abel/Poisson completion turns the finite ordinary roster into its two
+  complementary half-lattice tails plus an explicit negligible Gamma defect.
+  The lower complement is nonstationary; the upper complement has exactly 230
+  stationary labels, all rooted in the first ordinary cell.  Thus the old
+  39231-cell wall is one endpoint-saddle packet plus two summable tail targets
+
+jensen_window_pf_newman_c1_hardy_equation4_joined_packet_upper_complement_endpoint_saddle_core_gate:
+  all 230 stationary roots lie in [621.5,621.5625], and their even consecutive
+  roster vanishes exactly at the half-integer endpoint.  One grouped Arb
+  integral encloses the stationary core as
+  0.0003561096102039883+0.0002536459380703996i with component radii 1.03e-56.
+  A sine-kernel replay and altered grouped/direct four-label witness pass
+
+jensen_window_pf_newman_c1_hardy_equation4_joined_packet_upper_complement_rational_240_label_collar_gate:
+  at B=L+1/16 the Fourier step has order 16, so 240 is the least closed collar
+  containing all 230 saddles.  Its grouped amplitude vanishes exactly at both
+  endpoints, and Arb encloses it as
+  0.0003078279649411258+0.0002801606958430010i.  The two remaining upper sums
+  are nonstationary with launch gaps above 27.7560 and 10.3203
+
+jensen_window_pf_newman_c1_hardy_equation4_joined_packet_nonstationary_complement_root_unity_hurwitz_endpoint_gate:
+  residue-class Hurwitz/digamma formulas rigorously evaluate every
+  phase-weighted endpoint denominator sum through power 16 for R_B, R_L, and
+  the reversed lower complementary tail.  The k=1 poles cancel exactly; all
+  finite rows overlap direct 240-term sums, all infinite rows satisfy the
+  shifted alternating recurrence, and altered order-five and direct
+  alternating witnesses pass.  The integrated h_8 remainders remain open
+
+jensen_window_pf_newman_c1_hardy_equation4_joined_packet_nonstationary_complement_eight_round_remainder_gate:
+  the exact h_n recurrence and endpoint algebra give rigorous eight-round
+  balls, but their component radii are about 30.69, 5.0174e7, and 25.62.
+  Normalized upper endpoint detunings 0.4325 and 0.1608 identify exterior
+  endpoint-saddle transition layers.  A changed ninth-order replay and
+  altered positive-D/negative-D quadratures pass, certifying rejection of the
+  unsplit absolute integration-by-parts route rather than a sign failure
+
+jensen_window_pf_newman_c1_hardy_equation4_joined_packet_upper_complement_closed_752_label_exterior_transition_layer_gate:
+  the exact regrouping T_upper=G_752+F_C+I_L uses C=L+3/16 and
+  752=47*16.  Its grouped amplitude vanishes exactly at both rational
+  endpoints, captures all 230 stationary labels, and is rigorously enclosed
+  as 0.0001853273986930984+0.0002793610483135411i.  The two retained upper
+  pieces launch at normalized detunings 8.4546 and 8.1381; exact comparison
+  with the preceding grid point and multiple of 16 certifies the selected
+  layer as minimal for that eight-width rule.  The far pieces remain open
+
+jensen_window_pf_newman_c1_hardy_equation4_joined_packet_upper_complement_closed_752_far_remainder_eight_round_gate:
+  the new order-16 and alternating endpoint tables, followed by eight exact
+  integration-by-parts rounds, bound the F_C and I_L component remainders by
+  1.741e-17 and 2.974e-17.  Joining their retained complex balls to G_752
+  certifies the complete upper complement as
+  0.0001875912328902530+0.0002720743734463255i with component uncertainty
+  below 4.74e-17.  A direct-endpoint order-nine replay and altered direct
+  quadrature pass.  The lower complementary tail remains open
+
+jensen_window_pf_newman_c1_hardy_equation4_joined_packet_lower_complement_signed_coefficient_interval_gate:
+  interval-evaluating each collected signed recurrence coefficient before its
+  slabwise absolute value preserves rigorous internal algebraic cancellation.
+  A certified order-2-to-9 sweep selects order three and reduces the lower-tail
+  component radius from 25.62 to 3.44e-7.  Joining that retained complex ball
+  to the complete upper complement and negligible Gamma defect certifies the
+  complete ordinary packet as
+  0.0001856808270683950+0.0001356133041738801i with component radius 3.44e-7.
+  An independent order-four replay and altered negative-D quadrature pass
+
+jensen_window_pf_newman_c1_hardy_equation4_joined_packet_complete_signed_JZ_DK_ownership_gate:
+  the exact ownership identity places V_L, C_U, the negligible positive-real
+  tail, O_join, and T_A^join in five top-level slots, with the grouped natural
+  A lift subtracted exactly once inside T_A^join.  Independent subcomponent
+  reconstructions, theta calibration, and sign-flip guards pass.  At t=1e10,
+  J_Z=0.0334441839950...+/-9.68e-7 and
+  D_K=0.00322993949549...+/-9.68e-7.  The stronger sufficient J_Z, R_KGamma,
+  and D_K corridors are missed by about 0.00404346, more than four thousand
+  enclosure radii.  A 512-bit checker recomputes theta and both D_K formulas
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_R_after_A_one_sided_closure_gate:
+  collecting the two exact signed residual identities before norms cancels
+  I_(A,42) and gives R_after_A=J_Z-E_Btr,win-E_outer.  An independent
+  R_KGamma reassembly cancels A_transition and gives the same formula.  The
+  raw signed B reconstruction then certifies
+  R_after_A=0.03357764840149...+/-2.46e-6 and
+  R_Dir=-0.00309647639628...+/-2.46e-6.  Thus Q_K-T is rigorously negative at
+  t=1e10, including under a dependency-lost rejoin.  A changed-order 512-bit
+  checker passes.  No all-height or RH implication is claimed
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_R_after_A_local_height_event_atlas_gate:
+  the exact fixed-A event law tau_m=pi*m*(A-2m) gives the maximal same-roster
+  cell around t=1e10 as
+  t0-206.8358840647606...<t<t0+57.0578988367820....  On its closure, 384-bit
+  interval arithmetic keeps the ordinary roster 622..39852, the 84-mode A
+  roster and 42+42 classical split, both B saddle floors, the 230-label upper
+  complement census, and the selected 240/752 root-of-unity closures fixed.
+  Both eight-width 752 launch margins remain positive while their immediate
+  tested predecessors remain negative.  A 512-bit checker reconstructs the
+  two walls from the independent Q(a),Q(U) contact equations.  No packet ball
+  or saved-height sign is transported off t=1e10
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_QK_minus_T_joined_height_derivative_identity_gate:
+  the exact finite-source and classical-target projections collapse to the
+  A-free identity Q_K-T=Hardy_t[S_W-H D_T]/H for the fixed target roster
+  622..39894.  Differentiation before norms gives one joined kernel K_T; the
+  H'D_T terms and all A-endpoint ownership cancel exactly.  Two Gamma
+  coordinates agree for H'/H, two source-integral coordinates agree on
+  altered fixtures, and reverse 512-bit target summation certifies
+  T'(1e10)=1.264313017356....  An A-free packet assembly remains negative
+  and overlaps the saved Q_K-T closure.  No nonzero-radius K_T bound or
+  off-height sign is claimed
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_QK_minus_T_joined_first_nonzero_height_subcell_gate:
+  the exact A-free packet is evaluated directly before projection on the
+  fixed-roster box |t-1e10|<=1e-4.  Exact logarithmic transport stabilizes H,
+  and dA_max/dt=delta_*(t) stabilizes the unique upper-arc action maximum.
+  The conservative production ball has upper endpoint below -4.0053e-5.  A
+  448-bit checker covers the interval by two altered half-boxes, changes the
+  arc, transition, recurrence, and slab configurations, and obtains upper
+  bounds below -0.00224148 and -0.00214155.  No sign beyond this first
+  subcell, event-wall handoff, all-height theorem, or RH implication is claimed
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_QK_minus_T_joined_transition_K_first_subcell_gate:
+  the complete Hardy transport operator is inserted into the finite transition
+  source before its alternating boundary-jet collapse and into the matching
+  42-mode Gamma sum per mode.  On |t-1e10|<=1e-4 the direct K_tr component has
+  radii below 3.4e-7 and gives Hardy_t[K_tr]/H=
+  [7.5645370998245e-5 +/- 1.06e-6]>0.  A 448-bit checker changes jet order,
+  slabs, panels, and logarithm-series order and repeats an altered five-label
+  direct-source fixture.  No complete K_T or wider sign interval is claimed
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_QK_minus_T_joined_transition_upper_arc_K_pair_first_subcell_gate:
+  the compact upper arc is differentiated inside its rotated integral with
+  weight delta+i(theta'-log Y)-H'/H, and the final projection transports the
+  combined endpoint/Hardy phase.  Its contribution
+  [-7.545256446744565e-5 +/- 1.87e-11] nearly cancels the transition component;
+  the joined pair has absolute upper below 1.3e-6.  A changed-degree,
+  changed-cutoff, changed-panel 448-bit checker passes.  The lower cell,
+  ordinary complement, positive tail, and tiny target correction remain open
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_QK_minus_T_joined_lower_finite_cell_K_first_subcell_gate:
+  the complete Hardy operator is inserted into the lower finite-cell
+  integrand before the reversed 2481423-label collapse.  One exact
+  logarithmic recurrence channel and explicit zero-endpoint log moments give
+  K_L with component radii below 3.7e-8 and
+  Hardy_t[K_L]/H=[-6.682826256110275e-5 +/- 1.82e-7]<0.  A 448-bit checker
+  changes order 18 to 20, split 300 to 280, and slabs 4096 to 6144 and
+  tightens the discarded integral below 1.35e-16.  The complete-half-lattice
+  endpoint join with both ordinary complements remains open
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_QK_minus_T_joined_lower_ordinary_K_first_subcell_gate:
+  the lower finite cell and complete ordinary complement are differentiated
+  in one cancellation-preserving coordinate.  Their endpoint partials are
+  joined before recurrence remainders, and the Hardy weight remains inside
+  the grouped 752-label collar.  On |t-1e10|<=1e-4 this gives
+  Hardy_t[K_(L+O)]/H=[0.0007211635411294992 +/- 6.22e-5]>0.  A changed
+  448-bit replay and direct four-label fixtures for both denominator signs
+  pass.  The positive-real tail, tiny target correction, and complete K_T
+  assembly remain open
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_QK_minus_T_positive_real_tail_K_first_subcell_gate:
+  the Hardy operator enters the absolutely convergent positive-real tail with
+  its exact pi/2-H'/H+i(theta'-log(u/(2*pi))) weight.  A closed exponential-
+  moment estimate gives log10 |Hardy_t[K_tail]/H| below
+  -1873216239.0508875.  Changed-half-box and altered direct-derivative checks
+  pass independently.  This is one component, not complete K_T
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_QK_minus_T_tiny_target_correction_K_first_subcell_gate:
+  the exact correction P_corr=(C_G-H)D_T is differentiated before widening.
+  Its two apparent H'D_T terms cancel, leaving one modewise weighted sum over
+  39,273 modes and Hardy_t[K_corr]/H=[-3.950973934851032e-22 +/- 6.20e-21].
+  Reversed-order, three-form, and altered direct-derivative checks pass.  This
+  is one component, not complete K_T
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_QK_minus_T_complete_K_T_first_subcell_gate:
+  all four ownership packets are assembled as
+  K_T=K_(L+O)+(K_tr+K_U)+K_tail+K_corr.  The complete complex ball has real
+  center 0.0010758327238847598 and imaginary center -0.0007637304928410180,
+  with component radii below 2.14e-5.  Exact projected linearity gives
+  (Q_K-T)'=[0.0007213563476602988 +/- 6.32e-5], whose lower endpoint exceeds
+  0.000658186347.  A changed-order checker and a coarser 1.3e-6 pair-envelope
+  guard remain positive.  This covers only |t-1e10|<=1e-4
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_QK_minus_T_upper_event_cell_offset20_local_box_gate:
+  the complete joined packet is recentered on
+  |t-(1e10+20)|<=0.00012, strictly inside the same fixed-roster event cell.
+  Production and changed-panel/slab/order/jet configurations overlap and give
+  respective upper endpoints -2.7254958695e-5 and -2.5479566830e-5.  The donor
+  action is retained inside every error estimate and all substantive contour
+  guards pass.  Radius 0.00013 instead produces a zero-straddling enclosure
+  while those guards still pass, identifying dependency width rather than a
+  pointwise sign failure.  The approximately 19.99978-unit gap back to the
+  first subcell is not covered
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_QK_minus_T_upper_event_cell_offset20_complete_K_T_monotonicity_gate:
+  all five complete K_T ownership components are recentered together on
+  |t-(1e10+20)|<=0.006.  Production direct and component-sum projections have
+  lower endpoints 4.7862005886e-5 and 5.2380888519e-5.  An independent
+  reversed-order and changed-duplication/transition/endpoint/arc configuration
+  has lower endpoints 4.0199993236e-5 and 4.5986627811e-5; corresponding
+  projections and complete complex K_T boxes overlap.  Thus (Q_K-T)'>0 on the
+  whole box.  Anchoring at the certified negative value at
+  1e10+20+0.00012 and integrating left proves Q_K-T<0 on
+  [10000000019.994,10000000020.00012].  This reduces, but does not close, the
+  gap to the first subcell; the exact remaining distance is 19.9939.  A
+  radius-0.01 zero-straddling derivative enclosure is a width diagnostic only
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_QK_minus_T_upper_event_cell_offset20_grouped_752_phase_transport_monotonicity_gate:
+  the width-dominant grouped 752-label collar is transported from its center
+  by factoring one common exp(-ihs_0) phase.  On each panel the exact finite
+  geometric bound gives B_j=752*Delta y/sqrt(y_left), with base and log-weighted
+  replacement errors |h|epsilon_j B_j and log(C)|h|epsilon_j B_j.  The common
+  Hardy phase is enclosed as theta(t_c)+h(theta'(D)-s_0), retaining the shared
+  height increment.  A 192-panel 384-bit production run and a reverse-order
+  256-panel 448-bit independent run give complete derivative lower endpoints
+  2.6138765202e-4 and 2.5756190257e-4 on |t-(1e10+20)|<=0.07; their derivative,
+  lower-ordinary, and complete K_T boxes overlap.  Integrating left from the
+  negative anchor proves Q_K-T<0 on
+  [10000000019.93,10000000020.00012], leaving an exact 19.9299-unit gap.  A
+  radius-0.1 zero-straddling enclosure is a width diagnostic only
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_QK_minus_T_upper_event_cell_phase_landscape_scout:
+  cache-backed route diagnostic: complete derivative boxes have sign sequence
+  positive, negative, negative, positive at offsets 5, 10, 15, and 20, so one
+  globally positive derivative chain cannot bridge the gap.  Twenty integer,
+  thirteen candidate-trough, and thirteen candidate-peak value boxes are all
+  strictly negative; the closest sampled candidate-peak upper is
+  -0.0019815741798... at offset 12.75.  The observed approximately 1.5-unit
+  spacing is not a proved period, the samples are not certified extrema, and
+  no interval-sign theorem is promoted
+
+jensen_window_pf_newman_c1_hardy_equation9_signed_QK_minus_T_upper_event_cell_phase_cell_12p5_13_lipschitz_gate:
+  rigorous two-configuration continuous phase-cell certificate: one grouped
+  752-label panel atlas at offset 12.75 is transported by the exact identity
+  F_t(y)=F_a(y)exp(-i(t-a)log y), with panel errors
+  |t-a|epsilon_j B_j and log(C)|t-a|epsilon_j B_j retained.  Production uses
+  192 forward 384-bit panels and the independent route uses 256 reverse
+  448-bit panels.  On the closed halves [12.5,12.75] and [12.75,13], the
+  production complete derivative moduli are below 0.005257619 and 0.005314598;
+  the independent moduli are below 0.005249440 and 0.005307682.  Combining
+  these with independently negative offset-12.75 anchors and |t-a|<=0.25
+  gives worst upper endpoints -0.0006529248... and -0.0006543894....  Hence
+  Q_K-T<0 throughout [10^10+12.5,10^10+13].  No stationary-point uniqueness
+  is assumed.  This one closed half-unit cell neither fills the remaining
+  event-cell gap nor crosses an event wall
+
+target_jensen_window_pf_newman_c1_hardy_equation4_exact_split_contour_continuation_defect:
+  open theorem target: complete K_T and a positive Q_K-T derivative are
+  certified on the first subcell and on a radius-0.07 offset-20 box.  The
+  common-phase grouped-collar transport enlarges the negative island leftward
+  and leaves an exact 19.9299-unit gap.  The complete derivative changes sign
+  inside that gap, rejecting one monotonicity chain; cached local values select
+  an approximately 1.5-unit phase-cell scale.  The first continuous cell
+  [10^10+12.5,10^10+13] is now certified negative by a reusable anchored
+  derivative-norm argument without stationary-point uniqueness.  Reuse that
+  common-phase atlas method on an adaptive finite cover of the remaining
+  candidate cells, bridge the disconnected sign islands, enlarge the connected
+  sign cover across the maximal
+  local event cell, prove exact handoffs at both walls, and scale across all
+  required height corridors while preserving changing cutoffs, saddle rosters,
+  and endpoint coefficients and avoiding the quarantined A21 infinite interchange
 
 jensen_window_pf_newman_c1_hardy_equation9_endpoint_residual_source_hybrid_nonidentification_guard_gate:
   the exact endpoint object Q_K, the published hybrid Q_P, and implemented

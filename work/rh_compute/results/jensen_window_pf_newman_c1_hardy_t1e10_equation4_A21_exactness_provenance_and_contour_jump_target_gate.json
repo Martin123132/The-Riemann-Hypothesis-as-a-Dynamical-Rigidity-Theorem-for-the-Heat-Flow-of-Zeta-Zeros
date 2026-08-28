@@ -1,0 +1,244 @@
+{
+  "contour_defect_target": {
+    "C_K_definition": "C_K=Z-H*Q_K",
+    "D_K_definition": "D_K=C_K-L=U-H*Q_K",
+    "D_K_safe_lower_ball": "[0.007274368692730895024919615437400126429337092159374815670147581678231483575706953231660068274895441282 +/- 2.22e-103]",
+    "D_K_safe_upper_ball": "[0.06634079869273089502493807369677512642933721040759893676389758406032032772243546895737349520857692536 +/- 3.68e-102]",
+    "boundary_layer_alone_asserted_to_equal_D_K": false,
+    "displayed_D_K_sufficient_corridor": "0.0072743687<D_K<0.0663407986"
+  },
+  "decision": {
+    "A21_permitted_as_exact_whole_contour_interchange": false,
+    "A33_permitted_as_unconditional_identity": false,
+    "C_K_enclosed": false,
+    "D_K_enclosed": false,
+    "equation4_exactness_imported_from_2015": false,
+    "exact_split_contour_route_selected": true,
+    "finite_QK_definition_exact": true,
+    "finite_source_to_QK_transform_identity_retained": true,
+    "later_asymptotic_or_numerical_agreement_closes_A21": false,
+    "non_A_bound_proved": false,
+    "q_zero_boundary_layer_requires_analysis": true,
+    "rh_implication": false
+  },
+  "dependencies": {
+    "exact_H_defect_target": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_exact_H_continuation_defect_target_gate.json",
+      "sha256": "4f4b3db88cc2e87fb2c68da7558beccda519de16d9fb23506c9b00363a40a030"
+    },
+    "normalization_repair": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_domain_Kummer_normalization_repair_gate.json",
+      "sha256": "6eb53ba43bfd2148cfbad05c5ddbd8a360e529f0fe3603efda16ba1e69496175"
+    }
+  },
+  "exact_contour_obligation": {
+    "step_1": "Start from the exact Riemann-Siegel contour and fix all logarithm and power branches.",
+    "step_2": "Split q<0 and q>0 before expanding the secant denominator; use A13 and A18 only in their valid domains.",
+    "step_3": "Introduce finite contour, series, and puncture cutoffs; justify every interchange away from q=0 by the exact finite residuals.",
+    "step_4": "Rescale q=u/N at the crossing and derive the surviving boundary-layer or jump functional without assuming it vanishes.",
+    "step_5": "Track the Re(z)=0 chart point q=-1/sqrt(2) and retain the chosen branch through every contour deformation.",
+    "step_6": "Match the corrected finite Kummer roster H*Q_K and derive the complete complement C_K=Z-H*Q_K.",
+    "step_7": "Prove the inherited saved-height D_K corridor before any RH-level promotion."
+  },
+  "half_contour_identities": {
+    "A13_finite_residual": "sec(w)*[-exp(2*i*w)]^N",
+    "A13_valid_q_negative": "2*sum_(k>=0)(-1)^k*exp(i*(2k+1)*w)",
+    "A18_finite_residual": "sec(w)*[-exp(-2*i*w)]^N",
+    "A18_valid_q_positive": "2*sum_(k>=0)(-1)^k*exp(-i*(2k+1)*w)",
+    "contour": "z=1/2+q*exp(-i*pi/4)",
+    "denominator": "1/sin(pi*z)=1/cos(w)",
+    "high_precision_rows": [
+      {
+        "closed_residual_imag_ball": "[4.560504256833617596850529587848673842214737329622735870941604244378928e-95 +/- 1.79e-165]",
+        "closed_residual_real_ball": "[-3.391927311275763613359177311402998907691746474545523672601539586571722e-95 +/- 4.54e-165]",
+        "q": "-2",
+        "ratio_absolute_ball": "[0.0001383441860207767254249721833108819717089177742470660621475443795545982 +/- 4.55e-75]",
+        "residual_imag_ball": "[4.560504256833617596850529587848673842624284518943586452412188431205569e-95 +/- 2.47e-131]",
+        "residual_real_ball": "[-3.391927311275763613359177311402998907789928669815469048736995907554355e-95 +/- 1.72e-131]",
+        "secant_imag_ball": "[0.02267705314717178795010511601921787142286834367990880580343037661941475 +/- 2.51e-72]",
+        "secant_real_ball": "[-0.006265734532810606473832276268727710180711330082287596380750435246039540 +/- 3.39e-73]",
+        "terms": 24,
+        "valid_expansion": "A13"
+      },
+      {
+        "closed_residual_imag_ball": "[3.933626418116912523347041923631119200653067304495209732619058495955748e-24 +/- 2.60e-94]",
+        "closed_residual_real_ball": "[-2.957327017867297197387098723571440099145710169845935580390695322518810e-24 +/- 3.58e-94]",
+        "q": "-0.5",
+        "ratio_absolute_ball": "[0.1084526649344732408597381809821718287635348301253106404343525130273138 +/- 3.71e-72]",
+        "residual_imag_ball": "[3.933626418116912523347041923631119200653067304495209732619058495955748e-24 +/- 2.60e-94]",
+        "residual_real_ball": "[-2.957327017867297197387098723571440099145710169845935580390695322518810e-24 +/- 3.58e-94]",
+        "secant_imag_ball": "[-0.5976409215441880439462050871848503988299471975484597198913060628227970 +/- 3.77e-71]",
+        "secant_real_ball": "[0.3682089566202330209397575085942347481094662103974013765624957230371329 +/- 1.36e-71]",
+        "terms": 24,
+        "valid_expansion": "A13"
+      },
+      {
+        "closed_residual_imag_ball": "[-1.208534549467761212387538566809609583243343196959650907193973686807099e-6 +/- 8.37e-77]",
+        "closed_residual_real_ball": "[1.084792829125513996304950886359232008516011600041620245756545344510778e-6 +/- 3.82e-76]",
+        "q": "-0.125",
+        "ratio_absolute_ball": "[0.5738654216143493429400280565875435115615727461131887581334882524628127 +/- 1.51e-71]",
+        "residual_imag_ball": "[-1.208534549467761212387538566809609583243343196959650907193973686807099e-6 +/- 8.37e-77]",
+        "residual_real_ball": "[1.084792829125513996304950886359232008516011600041620245756545344510778e-6 +/- 3.82e-76]",
+        "secant_imag_ball": "[-0.07679678289057455837744158776139027363130253869980711542530570813259636 +/- 4.18e-72]",
+        "secant_real_ball": "[0.9950648689442589242400664828748227413318843742566318145459863818453807 +/- 1.24e-71]",
+        "terms": 24,
+        "valid_expansion": "A13"
+      },
+      {
+        "closed_residual_imag_ball": "[-1.208534549467761212387538566809609583243343196959650907193973686807099e-6 +/- 8.37e-77]",
+        "closed_residual_real_ball": "[1.084792829125513996304950886359232008516011600041620245756545344510778e-6 +/- 3.82e-76]",
+        "q": "0.125",
+        "ratio_absolute_ball": "[0.5738654216143493429400280565875435115615727461131887581334882524628127 +/- 1.51e-71]",
+        "residual_imag_ball": "[-1.208534549467761212387538566809609583243343196959650907193973686807099e-6 +/- 8.37e-77]",
+        "residual_real_ball": "[1.084792829125513996304950886359232008516011600041620245756545344510778e-6 +/- 3.82e-76]",
+        "secant_imag_ball": "[-0.07679678289057455837744158776139027363130253869980711542530570813259636 +/- 4.18e-72]",
+        "secant_real_ball": "[0.9950648689442589242400664828748227413318843742566318145459863818453807 +/- 1.24e-71]",
+        "terms": 24,
+        "valid_expansion": "A18"
+      },
+      {
+        "closed_residual_imag_ball": "[3.933626418116912523347041923631119200653067304495209732619058495955748e-24 +/- 2.60e-94]",
+        "closed_residual_real_ball": "[-2.957327017867297197387098723571440099145710169845935580390695322518810e-24 +/- 3.58e-94]",
+        "q": "0.5",
+        "ratio_absolute_ball": "[0.1084526649344732408597381809821718287635348301253106404343525130273138 +/- 3.71e-72]",
+        "residual_imag_ball": "[3.933626418116912523347041923631119200653067304495209732619058495955748e-24 +/- 2.60e-94]",
+        "residual_real_ball": "[-2.957327017867297197387098723571440099145710169845935580390695322518810e-24 +/- 3.58e-94]",
+        "secant_imag_ball": "[-0.5976409215441880439462050871848503988299471975484597198913060628227970 +/- 3.77e-71]",
+        "secant_real_ball": "[0.3682089566202330209397575085942347481094662103974013765624957230371329 +/- 1.36e-71]",
+        "terms": 24,
+        "valid_expansion": "A18"
+      },
+      {
+        "closed_residual_imag_ball": "[4.560504256833617596850529587848673842214737329622735870941604244378928e-95 +/- 1.79e-165]",
+        "closed_residual_real_ball": "[-3.391927311275763613359177311402998907691746474545523672601539586571722e-95 +/- 4.54e-165]",
+        "q": "2",
+        "ratio_absolute_ball": "[0.0001383441860207767254249721833108819717089177742470660621475443795545982 +/- 4.55e-75]",
+        "residual_imag_ball": "[4.560504256833617596850529587848673842624284518943586452412188431205569e-95 +/- 2.47e-131]",
+        "residual_real_ball": "[-3.391927311275763613359177311402998907798733924387179383305743361971104e-95 +/- 1.72e-131]",
+        "secant_imag_ball": "[0.02267705314717178795010511601921787142286834367990880580343037661941475 +/- 2.51e-72]",
+        "secant_real_ball": "[-0.006265734532810606473832276268727710180711330082287596380750435246039540 +/- 3.39e-73]",
+        "terms": 24,
+        "valid_expansion": "A18"
+      }
+    ],
+    "precision_ladder_overlap": true,
+    "q_zero_ordinary_series_convergent": false,
+    "w": "w=pi*q*exp(-i*pi/4)"
+  },
+  "invalid_side_guard": {
+    "A13_at_q_positive_ratio_absolute_ball": "[3.0365461496367097866858723876118940866843565020881274312256914040621032208727690 +/- 1.56e-80]",
+    "A18_at_q_negative_ratio_absolute_ball": "[3.0365461496367097866858723876118940866843565020881274312256914040621032208727690 +/- 1.56e-80]",
+    "q_zero_term_absolute_value": "2",
+    "term_test_fails_on_each_invalid_half_contour": true
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation4_A21_exactness_provenance_and_contour_jump_target_gate",
+  "next_obligation": "Derive the exact split-contour finite-N identity with puncture and contour cutoffs, rescale the q=O(1/N) crossing layer, and prove whether the complete boundary/branch contribution yields C_K=Z-HQ_K with 0.0072743687<D_K<0.0663407986.",
+  "nonuniform_boundary_layer_certificate": {
+    "exact_factor": "|ratio|^N=exp(-sqrt(2)*pi*u)",
+    "expected_boundary_factor_ball": "[0.01176198053138912168914475002296359047769707872905960066692824630593644201133705395720180104299821895 +/- 3.55e-102]",
+    "rows": [
+      {
+        "omitted_geometric_factor_absolute_ball": "[0.011761980531389121689144750022963590477697078729059600666928246305936442011337054 +/- 4.29e-83]",
+        "q": "-0.12500000000000000000000000000000000000000000000000",
+        "terms": 8
+      },
+      {
+        "omitted_geometric_factor_absolute_ball": "[0.011761980531389121689144750022963590477697078729059600666928246305936442011337054 +/- 4.29e-83]",
+        "q": "-0.062500000000000000000000000000000000000000000000000",
+        "terms": 16
+      },
+      {
+        "omitted_geometric_factor_absolute_ball": "[0.011761980531389121689144750022963590477697078729059600666928246305936442011337054 +/- 4.29e-83]",
+        "q": "-0.031250000000000000000000000000000000000000000000000",
+        "terms": 32
+      },
+      {
+        "omitted_geometric_factor_absolute_ball": "[0.011761980531389121689144750022963590477697078729059600666928246305936442011337054 +/- 4.29e-83]",
+        "q": "-0.015625000000000000000000000000000000000000000000000",
+        "terms": 64
+      }
+    ],
+    "scaling": "q=-u/N on A13 (and q=+u/N on A18)",
+    "u": 1,
+    "uniform_convergence_through_q_zero": false
+  },
+  "passed": true,
+  "proof_boundary": "Exact half-contour secant identities, finite residual formulas, a nonuniform q=O(1/N) crossing certificate, source-provenance nonpromotion, and the inherited saved-height D_K target only. No derivation or enclosure of the contour defect, C_K, D_K, Delta_KU, Q_K, J_Z, non-A bound, all-height theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "references": {
+    "Lewis_2015": {
+      "path": "work/rh_compute/external/hardy_fastcode/Lewis_2015_1502.06903.pdf",
+      "relevant_equations": [
+        "A1",
+        "A12",
+        "A13",
+        "A17",
+        "A18",
+        "A20",
+        "A21",
+        "A33",
+        "A40",
+        "A64",
+        "A73"
+      ],
+      "sha256": "171a7f3ccc3dfd89671aa1ba08168c0a1effaf4b6d69b4236dd3da2f076cf3c1"
+    },
+    "Lewis_Brereton_2026": {
+      "path": "work/rh_compute/external/hardy_fastcode/Lewis_Brereton_2607.15310.pdf",
+      "relevant_equations": [
+        4,
+        7,
+        8,
+        9
+      ],
+      "sha256": "fbc95e5e9bbde078160c7b1a3ac3abcbb3fc3ec522d1324b14d6024bf71e537a"
+    }
+  },
+  "runtime": {
+    "arb_threads": 1,
+    "elapsed_seconds": 0.056,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "height": 10000000000,
+    "partial_terms": 24,
+    "precisions_decimal_digits": [
+      90,
+      130
+    ],
+    "sample_q": [
+      "-2",
+      "-0.5",
+      "-0.125",
+      "0.125",
+      "0.5",
+      "2"
+    ]
+  },
+  "source_provenance_audit": {
+    "Lewis_2015_pdf_pages_1_based": {
+      "37": "A13 is stated to converge only on q<0; A18 replaces it on q>0; direct matching of the termwise asymptotic constructions fails.",
+      "38": "A21 extends the A13 term integrals across the whole q range heuristically; correctness and convergence are explicitly set aside.",
+      "41": "A33 is asserted only provided suitable convergence criteria hold.",
+      "42": "A33 is described as proposed and supported by later asymptotic/numerical analysis.",
+      "52": "The later Euler-Maclaurin discussion retains an unproved all-orders cancellation assertion.",
+      "85": "The appendix describes its numerical agreement as indicative rather than a formal proof."
+    },
+    "Lewis_Brereton_2026_pdf_pages_1_based": {
+      "3": "Equation (4) is presented and its derivation is delegated to the 2015 source.",
+      "5": "Equation (4) is called an exact formulation before equation (7) is obtained through Euler's integral."
+    },
+    "logical_conclusion": "The 2026 exactness label does not replace the unresolved A21 whole-contour continuation/interchange proof in its cited derivation."
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_A21_exactness_provenance_and_contour_jump_target_gate.py",
+      "sha256": "b80f4e7681caaae7db999d38fc2e99c599eb1dd2eac78995a1b62839a3925242"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_A21_exactness_provenance_and_contour_jump_target_gate.py",
+      "sha256": "c42115afca76ce9527a092f1cc2739821db4b88b061e77c8db93f076872d0ae5"
+    }
+  },
+  "status": "A21_heuristic_continuation_quarantined_exact_split_contour_boundary_layer_and_DK_target_certified"
+}

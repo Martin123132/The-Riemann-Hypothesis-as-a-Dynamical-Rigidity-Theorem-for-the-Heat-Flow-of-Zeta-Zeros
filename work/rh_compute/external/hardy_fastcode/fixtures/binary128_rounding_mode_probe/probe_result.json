@@ -1,0 +1,63 @@
+{
+  "artifacts": {
+    "accepted_source": {
+      "path": "work/rh_compute/external/hardy_fastcode/resumable/zeta14cubicmult_resumable.f90",
+      "sha256": "0fb64f090c21b185f27edc1c9194254cf471e74bfd6af3b88cb7f0cb40ec0c3d"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_hardy_binary128_rounding_mode_probe.py",
+      "sha256": "0850ac12ed6d13a78546ff6678dab6aaa564ce8d2f9b2599e940db14348a5826"
+    },
+    "probe_source": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/binary128_rounding_mode_probe/probe.f90",
+      "sha256": "76f39cf606eb09705a7ca7a96d4c28dda35e656c67db275aff10022520c5c9fd"
+    },
+    "runner": {
+      "path": "work/rh_compute/scripts/run_hardy_binary128_rounding_mode_probe.py",
+      "sha256": "ed0b4a9fa05c5a2e26bf5c3ff70457f283be5d5e63e5bd512fc9a197f09b087e"
+    },
+    "stderr": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/binary128_rounding_mode_probe/probe.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/binary128_rounding_mode_probe/probe.stdout.txt",
+      "sha256": "0cd43b124a6d8d1b8a9035bffecb5e606be81a2337bd60f2d430f52e66f8c96e"
+    }
+  },
+  "build": {
+    "compiler": "GNU Fortran (Debian 12.2.0-14+deb12u1) 12.2.0",
+    "compiler_flags": [
+      "-O3",
+      "-ffree-line-length-none"
+    ],
+    "container_nice": 10,
+    "controller_priority": "below_normal",
+    "cpu_cap": 1,
+    "elapsed_seconds": 1.3929234000388533,
+    "image": "rh-hardy-fastcode:bookworm",
+    "image_id": "sha256:b4325533de8d0f76eae21f27ab1b96490f5da131c2c96ca289f6b28716d562e9",
+    "memory_cap": "512m"
+  },
+  "kind": "hardy_binary128_rounding_mode_probe",
+  "passed": true,
+  "probe_values": {
+    "digits": "113",
+    "epsilon_hex": "3F8F0000000000000000000000000000",
+    "ieee_datatype": "T",
+    "ieee_nearest_supported": "T",
+    "max_exponent": "16384",
+    "min_exponent": "-16381",
+    "one_hex": "3FFF0000000000000000000000000000",
+    "radix": "2",
+    "rounding_mode": "nearest",
+    "selected_real_kind": "16",
+    "tiny_hex": "00010000000000000000000000000000"
+  },
+  "proof_boundary": "Pins the process-start rounding mode and binary format in the accepted Docker/compiler environment. It does not by itself certify every source operation, intrinsic special-function error, other build environment, or RH.",
+  "source_rounding_mode_mutator_counts": {
+    "fesetround": 0,
+    "ieee_set_rounding_mode": 0
+  },
+  "status": "pinned_source_environment_starts_binary128_in_round_to_nearest_mode"
+}

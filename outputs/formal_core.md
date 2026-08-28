@@ -66190,7 +66190,10333 @@ It does not bound the omitted bulk-step block or `R_group`, complete
 `Q_K-T` or `T_upper`, establish a height-uniform theorem, `Lambda<=0`,
 PF-infinity, RH, or a prize-level result.
 
-Sections 11.351--11.416 prove exact cancellation-preserving reductions, one
+## 11.417 Endpoint-safe crossing completion of the exterior B current
+
+The derivative programme stated after (11.415.8) requires one further exact
+recombination.  At a common finite cutoff and Abel regulator, put
+
+```text
+N_(M,epsilon)
+ =sum_(m=1)^M w_(m,epsilon)(1-ell_m)sigma_m P_bulk,m,
+Ctr_(M,epsilon)=Btr_(M,epsilon)+N_(M,epsilon).          (11.417.1)
+```
+
+Here `tau_m`, `ell_m`, and `sigma_m` are those of (11.414.1)--(11.414.2).
+At every nonlocal crossing `q_B,m=0`, `U_B,m` jumps by `-P_bulk,m`, while
+the corresponding summand of `N_(M,epsilon)` jumps by `+P_bulk,m` (with the
+same Abel weight).  Thus `Btr_(M,epsilon)` alone is not classically
+differentiable across the released exterior.  In particular, modes 620 and
+623 lie in the fully-on left and right exterior supports, respectively; the
+obstruction is present already at finite cutoff.
+
+The jump cancellation is algebraically complete.  Since
+
+```text
+P_B,m=U_B,m-1_(q_B,m<0)P_bulk,m,
+```
+
+one has mode by mode
+
+```text
+U_B,m+P_B,-m+sigma_m P_bulk,m
+ =P_B,m+P_B,-m+(1-tau_m)P_bulk,m.                      (11.417.2)
+```
+
+The right side is smooth for `x>0`.  Hence every finite
+`Ctr_(M,epsilon)` is smooth through all B crossings.  With the cutoff from
+Section 11.415 define
+
+```text
+R_B,comp(M,epsilon)=eta_delta E_W Ctr_(M,epsilon),
+R_join,comp(M,epsilon)
+ =G_(M,epsilon)-chi_W Btr_(M,epsilon)-R_B,comp(M,epsilon).
+                                                               (11.417.3)
+```
+
+Then exactly
+
+```text
+G_(M,epsilon)=chi_W Btr_(M,epsilon)
+               +R_B,comp(M,epsilon)+R_join,comp(M,epsilon),
+
+R_join,comp=R_join-eta_delta E_W N_(M,epsilon).         (11.417.4)
+```
+
+Because `eta_delta=0` for `x<=delta`, this transfer changes nothing at the
+Abel corner.  The `Delta_g` endpoint cancellation, zero and negative modes,
+outer completion, and endpoint half-current remain under the inherited common
+prescription.  Because `E_W=0` on the certified window, the bound
+`E_Btr,win<-1.3198e-4` is also unchanged.  The released current is now
+crossing-complete before any derivative or absolute value is taken.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_endpoint_safe_completed_B_extraction_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_endpoint_safe_completed_B_extraction_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_endpoint_safe_completed_B_extraction_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_endpoint_safe_completed_B_extraction_gate.py
+```
+
+Section 11.417 proves the exact endpoint-safe crossing completion and rejects
+classical derivative bounds for the uncompleted exterior trace only.  It does
+not prove first or second derivative bounds for `Ctr`, bound the completed
+exterior current or `R_join,comp`, complete `Q_K-T` or `T_upper`, establish a
+height-uniform theorem, `Lambda<=0`, PF-infinity, RH, or a prize-level result.
+
+## 11.418 Exact derivative transport for the completed B current
+
+The crossing-completed coefficient admits a closed derivative system.  After
+odd-endpoint parity and extraction of the common B phase, put, for
+`s in {+1,-1}`,
+
+```text
+a=m sqrt(2/x),                    b=B sqrt(x/2),
+a_s=s a,                          q_s=b-s a,
+rho=1/(i*pi),
+
+Y_+^tau=e^(-i*pi*q_+^2/2)[P_B,++(1-tau_m)P_bulk,+],
+Y_-    =e^(-i*pi*q_-^2/2)P_B,-.                         (11.418.1)
+```
+
+Let
+
+```text
+K_s=1/(2x)+i*pi*q_s q_s'.                               (11.418.2)
+```
+
+The Fresnel identity `F'(q)=exp(i*pi*q^2/2)` gives exactly
+
+```text
+Y_s'=a_s q_s'+(rho-Y_s)K_s,                             (11.418.3)
+
+q_s' =(b+s a)/(2x),
+q_s''=(-b-3s a)/(4x^2),
+K_s' =-1/(2x^2)+i*pi[(q_s')^2+q_s q_s''].               (11.418.4)
+```
+
+The added non-target completion is the homogeneous solution
+
+```text
+V_+=(1-tau_m)a(1+i)e^(-i*pi*q_+^2/2),
+V_+'=-K_+V_+.                                           (11.418.5)
+```
+
+It therefore changes the value of `Y_+` but not the form of (11.418.3).
+Differentiating once more gives
+
+```text
+Y_s''=a_s(q_s''-q_s'/(2x))-Y_s'K_s+(rho-Y_s)K_s'.       (11.418.6)
+```
+
+For the complete phase-stripped pair
+
+```text
+C_m=(Y_+^tau+Y_-)/x,
+
+C_m'=(Y_+'+Y_-')/x-(Y_++Y_-)/x^2,
+
+C_m''=(Y_+''+Y_-'')/x-2(Y_+'+Y_-')/x^2
+       +2(Y_++Y_-)/x^3.                                 (11.418.7)
+```
+
+The remaining Kummer amplitude `w=[x(1-x)]^(-1/4)` satisfies
+
+```text
+w'/w =(2x-1)/[4x(1-x)],
+w''/w=(12x^2-12x+5)/[16x^2(1-x)^2].                    (11.418.8)
+```
+
+Equations (11.418.3)--(11.418.8) give exact first and second derivatives of
+the finite common-regulator sum before norms.  In the normalized coordinate,
+`partial_xi=H_B^(-1/2)partial_x` and
+`partial_xixi=H_B^(-1)partial_xx`.  No numerical differentiation of a
+Fresnel difference and no distributional crossing term is needed.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_derivative_transport_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_derivative_transport_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_derivative_transport_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_derivative_transport_gate.py
+```
+
+Section 11.418 proves the exact completed-mode derivative transport and
+finite-sum calculus only.  It does not provide bounds uniform in cutoff and
+regulator, bound the completed exterior current or `R_join,comp`, complete
+`Q_K-T` or `T_upper`, establish a height-uniform theorem, `Lambda<=0`,
+PF-infinity, RH, or a prize-level result.
+
+## 11.419 Analytic outer tail for the first three completed B currents
+
+Put `c=Bx/2`, `D=c^2-m^2`, and retain the paired rational currents
+`C_0,C_1,C_2` of Sections 11.375 and 11.411.  Every summand is a monomial
+
+```text
+alpha B^q c^p D^(-k).                                  (11.419.1)
+```
+
+For the outer block `m>=B` and the entire released range
+`delta<=x<=1/2`,
+
+```text
+c/m<=1/4,             |D|>=15m^2/16.                  (11.419.2)
+```
+
+Differentiate (11.419.1) before taking absolute values.  The exact rules
+
+```text
+d_c[c^pD^-k]
+ =p c^(p-1)D^-k-2k c^(p+1)D^(-k-1),
+
+d_c^2[c^pD^-k]
+ =p(p-1)c^(p-2)D^-k-2k(2p+1)c^pD^(-k-1)
+  +4k(k+1)c^(p+2)D^(-k-2)                            (11.419.3)
+```
+
+together with `d_x=(B/2)d_c` and decreasing-series comparison give uniform
+finite-cutoff and Abel-weight bounds through two derivatives.  After the
+Kummer weight and normalized coordinate, the three bounds are
+
+```text
+|wS|          <4.348156e6,
+|d_xi(wS)|    <37.335,
+|d_xixi(wS)|  <0.001601.                              (11.419.4)
+```
+
+The large zeroth-order global supremum in (11.419.4) is not used as an
+exterior integral bound; it occurs near `x=1/2`, where the tangential phase
+derivative is also enormous.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_three_current_derivative_tail_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_three_current_derivative_tail_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_three_current_derivative_tail_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_three_current_derivative_tail_gate.py
+```
+
+Section 11.419 proves only the rational `m>=B` derivative tail.  The exact
+Fresnel remainder and truncation dictionary are supplied next.
+
+## 11.420 Differentiated exact Fresnel remainder on the outer block
+
+For the phase-stripped Fresnel tail write
+
+```text
+z(q)=exp(-i*pi*q^2/2)T(q),
+P_3(q)=i/(pi q)+1/(pi^2q^3)-3i/(pi^3q^5),
+r(q)=z(q)-P_3(q).                                     (11.420.1)
+```
+
+The exact tail equation and the certified contour remainder imply
+
+```text
+r' =-i*pi*q*r-15i/(pi^3q^6),
+r''=-(i*pi+pi^2q^2)r-15/(pi^2q^5)+90i/(pi^3q^7),
+
+|r|  <=30/(pi^4|q|^7),
+|r'| <=45/(pi^3|q|^6),
+|r''|<=45/(pi^2|q|^5)+120/(pi^3|q|^7).               (11.420.2)
+```
+
+For both signs `R_s=m sqrt(2)x^(-3/2)r(q_s)`.  On `m>=B`, the uniform
+geometry
+
+```text
+|q_s|>=(3/4)sqrt(2/x)m,
+|q_s'|<=(5/4)sqrt(2/x)m/(2x),
+|q_s''|<=(13/4)sqrt(2/x)m/(4x^2)                     (11.420.3)
+```
+
+makes the product/chain-rule tails summable through order two.  Their
+Kummer-weighted normalized bounds are respectively below
+`8.18e-35`, `2.17e-28`, and `1.73e-14`.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_fresnel_remainder_derivative_tail_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_fresnel_remainder_derivative_tail_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_fresnel_remainder_derivative_tail_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_fresnel_remainder_derivative_tail_gate.py
+```
+
+Section 11.420 controls the exact remainder rather than treating the
+three-term asymptotic expansion as an equality.
+
+## 11.421 Outer derivative tail for the truncation dictionary
+
+The exact dictionary term of Section 11.411 reduces under `c=Bx/2` to
+
+```text
+D_m=3c^2(c^4+10m^2c^2+5m^4)
+    /[pi^4B^2(c^2-m^2)^5].                            (11.421.1)
+```
+
+Applying (11.419.2)--(11.419.3) to its three monomials proves uniform
+outer-tail bounds through two derivatives.  After the Kummer weight and
+normalized coordinate they are below
+
+```text
+8.22e-36,             7.07e-41,             3.03e-45. (11.421.2)
+```
+
+Thus Sections 11.419--11.421 contain all three parts of the exact outer
+completed current: the rational currents, exact Fresnel remainder, and the
+mandatory direct-Fresnel/boundary-current dictionary.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_dictionary_derivative_tail_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_dictionary_derivative_tail_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_dictionary_derivative_tail_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_dictionary_derivative_tail_gate.py
+```
+
+## 11.422 Phase-coupled tangential bound for `m>=B`
+
+Let `A=eta_delta w S_outer` and
+
+```text
+h=Phi_B'=pi B^2/4-t/[2x(1-x)].                       (11.422.1)
+```
+
+Two tangential integrations by parts bound the three true exterior
+boundaries by
+
+```text
+|A/h|,
+|A'|/|h|^2+|A||h'|/|h|^3,                            (11.422.2)
+```
+
+and the remaining integral by
+
+```text
+integral { |A''|/|h|^2+3|A'||h'|/|h|^3
+          +|A||h''|/|h|^3+3|A||h'|^2/|h|^4 }dx.      (11.422.3)
+```
+
+The cutoff makes `A(delta)=A'(delta)=0`; the boundaries at `x_low`,
+`x_high`, and `1/2` are all retained.  A deterministic 45-slab Arb
+partition, dyadic in normalized distance from the B saddle outside the
+cutoff transition, keeps amplitude growth coupled to phase growth.  It
+gives
+
+```text
+sum first boundary  <1.8531320e-7,
+sum second boundary <3.176299e-11,
+integral remainder  <1.093393e-10.                    (11.422.4)
+```
+
+After the exact half-domain projection,
+
+```text
+|E_outer,m>=B|<6.566e-10<8e-10.                      (11.422.5)
+```
+
+A nonmatching checker bisects every slab and obtains `6.56393e-10`.
+The summable derivative majorants also justify a separate dominated Abel
+limit for this outer block.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_phase_coupled_tangential_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_phase_coupled_tangential_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_phase_coupled_tangential_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_phase_coupled_tangential_gate.py
+```
+
+Section 11.422 proves the complete analytic `m>=B` exterior contribution at
+the saved height only.  It does not bound the finite completed block or the
+joined remainder.
+
+## 11.423 Dirichlet rejoin of the finite completed B block
+
+For `M>=B` split `Ctr=Ctr_<B+Ctr_>=B` and put
+
+```text
+O_(M,epsilon)=eta_delta E_W Ctr_>=B,M,epsilon,
+J_(M,epsilon)=eta_delta E_W Ctr_<B,epsilon
+              +R_join,comp(M,epsilon).                (11.423.1)
+```
+
+The finite common-regulator allocation is exactly
+
+```text
+G_(M,epsilon)=chi_W Btr_(M,epsilon)+O_(M,epsilon)
+               +J_(M,epsilon).                        (11.423.2)
+```
+
+Consequently the `B-1=5122420` finite positive modes need not be normed or
+covered by `1280347` crossing charts.  They rejoin the global residual,
+whose weighted kernel is
+
+```text
+D_(M,epsilon)=sum_(m=-M)^M e^(-pi epsilon m^2)e^(-2pi i m u),
+G_(T,epsilon)=sum_(m=622)^39894 e^(-pi epsilon m^2)e^(-2pi i m u),
+C_(M,epsilon)=D_(M,epsilon)-G_(T,epsilon).             (11.423.3)
+```
+
+Thus
+
+```text
+G_(M,epsilon)(x)
+ =H_x+integral_0^L f_x(u)C_(M,epsilon)(u)du
+  +sum_(m=622)^39894 e^(-pi epsilon m^2)(P_A,m+P_B,m). (11.423.4)
+```
+
+At zero regulator the two finite sums in (11.423.3) are the removable
+Dirichlet quotients from Section 11.351.  Passing to the certified window,
+outer, and common residual limits gives
+
+```text
+R_KGamma=Q_K-G=E_Btr,win+E_outer+R_Dir.                (11.423.5)
+```
+
+Using only `E_Btr,win<-1.3198e-4` and (11.422.5),
+
+```text
+R_Dir<1.405792e-4  ==> R_KGamma<8.6e-6,
+R_Dir<1.319792e-4  ==> R_KGamma<0.                     (11.423.6)
+```
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_finite_block_dirichlet_rejoin_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_finite_block_dirichlet_rejoin_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_finite_block_dirichlet_rejoin_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_finite_block_dirichlet_rejoin_gate.py
+```
+
+Section 11.423 is an exact compression and Gamma-target reduction, not a
+bound for `R_Dir`.  The exact classical correction and the structure of the
+remaining endpoint defect are treated next.
+
+## 11.424 Uniform Gamma carrier and exact classical correction
+
+For every target mode, without an ordinary/fold exception, write
+
+```text
+I_m=P_bulk,m+Q_m,             Q_m=P_A,m+P_B,m.         (11.424.1)
+```
+
+Substitution before taking norms gives the finite identity
+
+```text
+H+integral f(D_(M,epsilon)-G_(T,epsilon))
+  +sum_(m=622)^39894 w_m Q_m
+ =S_(M,epsilon)-sum_(m=622)^39894 w_m P_bulk,m.        (11.424.2)
+```
+
+Thus all `39273` target modes carry the same exact Abel-regularized full-line
+Gamma bulk.  The split `622..39694` and `39695..39894` is proof ownership of
+the finite endpoint terms only; the exceptional A face remains in `Q_m` and
+does not create a second bulk carrier.
+
+If `G` is the physical projection of the Gamma bulk and `T` is the exact
+classical upper main, then
+
+```text
+R_KGamma=Q_K-G=E_Btr,win+E_outer+R_Dir,
+Q_K-T=R_KGamma+(G-T).                                  (11.424.3)
+```
+
+The common-factor Arb certificate over the full target roster proves
+
+```text
+|G-T|_physical<5e-20.                                  (11.424.4)
+```
+
+Consequently the exact sufficient targets are
+
+```text
+R_Dir<0.00014057919999999995  ==> Q_K-T<8.6e-6,
+R_Dir<0.00013197919999999995  ==> Q_K-T<0.             (11.424.5)
+```
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_uniform_gamma_target_insertion_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_uniform_gamma_target_insertion_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_uniform_gamma_target_insertion_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_uniform_gamma_target_insertion_gate.py
+```
+
+Section 11.424 proves the common-carrier identity and the saved-height
+Gamma-to-classical correction only.  It does not bound `R_Dir`.
+
+## 11.425 Endpoint-completed phase-space projector defect
+
+Put `U=[0,L]`, `T={622,...,39894}`, and
+
+```text
+K_x(u,m)=f_x(u)e^(-2pi i m u),
+I_m=integral_U K_x(u,m)du,
+P_m=Abel-integral_R K_x(u,m)du.                       (11.425.1)
+```
+
+For `M>=39894`, the complete Gamma-normalized integrand is
+
+```text
+Delta_(M,epsilon)
+ =H_x+sum_(m=-M)^M w_m I_m-sum_(m in T)w_m P_m.       (11.425.2)
+```
+
+Splitting the first sum by the target projector yields
+
+```text
+Delta_(M,epsilon)
+ =H_x+sum_(m in [-M,621] union [39895,M])w_m I_m
+     -sum_(m in T)w_m(P_m-I_m).                       (11.425.3)
+```
+
+Equation (11.425.3) is one endpoint-completed oriented rectangle: source
+interval over frequencies outside `T`, minus the full-line spatial tails
+over frequencies inside `T`, with the Poisson half-current and one common
+Abel prescription retained.  Its physical common limit is `R_KGamma`; only
+after subtracting the certified B window and outer block does one obtain
+`R_Dir`.
+
+The saved-height stationary occupancy changes at exactly
+
+```text
+B face:                621|622,
+A face:                39852|39853,
+half-boundary corner:  39894|39895.                   (11.425.4)
+```
+
+The proof-ownership split `39694|39695` changes neither the A-face sign nor
+the half-boundary sign and is not a valid norm boundary.  Separately, the
+inherited height-uniform `C^2` majorant has coefficient above `2.5519e25`;
+at `M=5122421` its right side still exceeds `4.9e18`, and it would require a
+cutoff above `1e29` to reach (11.424.5).  This rejects that majorant, not the
+possibility that the actual signed defect is small.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_phase_space_projector_defect_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_phase_space_projector_defect_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_phase_space_projector_defect_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_phase_space_projector_defect_gate.py
+```
+
+Section 11.425 proves exact projector algebra, mode counts, and stationary
+occupancy only.  It does not prove a phase-adapted bound.
+
+## 11.426 Hyperbolic flat-face projector kernel
+
+In the exact bi-Morse coordinates, replace the curved face temporarily by
+
+```text
+Phi(P,S)=(P^2-S^2)/2,       P<a+rho S,
+c=rho^2-1.                                             (11.426.1)
+```
+
+For `c!=0`, positive Gaussian damping followed by its Abel boundary value
+gives the normalized profile
+
+```text
+F_c'(a)=exp(i sgn(c)pi/4)exp[-i a^2/(2c)]
+        /sqrt(2pi|c|),
+F_c(a)=1/2+integral_0^a F_c'(r)dr.                    (11.426.2)
+```
+
+The full-plane Gaussian fixes `F_c(-infinity)=0` and
+`F_c(+infinity)=1`.  As `c` tends to zero, (11.426.2) tends
+distributionally to the sharp projector step.  Thus a noncharacteristic
+straight face is exactly a Fresnel smoothing; at a null face, curvature is
+the next nonvanishing datum.
+
+The earlier B tangent profile is the same kernel under
+
+```text
+P=sqrt(pi)q,       S=sqrt(2)y,
+a=sqrt(pi)q_B*,    rho=kappa_B sqrt(pi/2),
+c=-Delta_B.                                            (11.426.3)
+```
+
+Its complementary scalar profile is exactly the certified `U_0`; the
+affine `q`-density current `U_1` is a separate mandatory amplitude term.  A
+near-zero B slope at mode `257` is not a fold: its face lies more than
+`1.8e6` canonical widths from the saddle.  A joint fold requires both
+
+```text
+a=0 and c=0
+ iff alpha_m=D and m=D/4
+ iff t=pi D^2/8.                                       (11.426.4)
+```
+
+At the A occupancy edge, the scaled detunings for modes `39852` and `39853`
+have absolute value below `0.08`; at `39894|39895`, `c` changes sign.  Hence
+the A face and half-boundary corner realize the near codimension-two geometry
+that must retain curved-face terms and match the fold atlas.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_flat_face_projector_kernel_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_flat_face_projector_kernel_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_flat_face_projector_kernel_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_flat_face_projector_kernel_gate.py
+```
+
+Section 11.426 proves the exact flat-face kernel, its B dictionary, and the
+joint-fold criterion only.  The transformed-amplitude and curved-face
+remainders remain open.
+
+## 11.427 Hyperbolic wedge and half-boundary corner kernel
+
+The half-domain is not represented by the flat-face profile alone.  It adds
+the coupled boundary `S>h`, giving the canonical Abel wedge
+
+```text
+C_rho(a,h)=(2pi)^(-1) Abel-integral_(S>h) exp(-iS^2/2)
+             integral_(P<a+rho S)exp(iP^2/2)dP dS,
+c=rho^2-1.                                             (11.427.1)
+```
+
+For `c!=0`, square completion and differentiation under the regularized
+integral give
+
+```text
+partial_a C_rho(a,h)
+ =exp[-ia^2/(2c)]/[2sqrt(pi|c|)]
+  T_sgn(c)(sqrt(|c|/pi)[h+a rho/c]),                  (11.427.2)
+
+T_eps(u)=integral_u^infinity exp(i eps pi v^2/2)dv,
+
+partial_h C_rho(a,h)
+ =-exp(-ih^2/2)/(2pi)
+   integral_(-infinity)^(a+rho h)exp(iP^2/2)dP,
+
+partial_a partial_h C_rho
+ =-exp(i[(a+rho h)^2-h^2]/2)/(2pi).                  (11.427.3)
+```
+
+The limiting identities
+
+```text
+lim_(h to -infinity) C_rho(a,h)=F_(rho^2-1)(a),
+lim_(h to +infinity) C_rho(a,h)=0                   (11.427.4)
+```
+
+show that Section 11.426 is the remote-half-boundary limit of this same
+kernel.  In the exact logistic Morse coordinate,
+
+```text
+h=sqrt(t/2)s(v_H),       v_H=2pi m^2/t,
+s(v)=sgn(v-1)sqrt(2[v-1-log v]).                     (11.427.5)
+```
+
+At `m=621,622`, interval arithmetic gives `|h|>270598`, so the B edge may
+use (11.427.4) plus a remote-tail correction.  At the A face-entry modes
+`39852,39853`, `h<-146`.  At `39894,39895`, however,
+
+```text
+h_39894 in (-0.81,-0.80),       h_39895 in (2.73,2.74).
+                                                               (11.427.6)
+```
+
+The exact half-boundary event is
+`m=sqrt(t/(2pi))=39894.2280401432...`, while the A null-face mode is
+`A/4=39894.25`; their separation is `0.0219598567...`.  Therefore the A
+face, near-null slope, and `x=1/2` cutoff must be retained in one corner
+chart.  Here `pi` comes from the equation-(9) Fourier/Kummer phase and exact
+Gaussian standardization; it is not a fitted geometric constant.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_corner_kernel_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_corner_kernel_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_corner_kernel_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_corner_kernel_gate.py
+```
+
+Section 11.427 proves the canonical wedge boundary calculus and saved-height
+corner localization only.  It does not bound the exact curved-face or
+transformed-amplitude remainder.
+
+## 11.428 Exact affine-wedge remainder identity
+
+Including both bi-Morse Jacobians, the endpoint-`D` triangle has the exact
+form
+
+```text
+eps_D exp(i Phi_D,m) W0_D,m (2pi)^(-1)
+ int_(S>h) int_(P<P_D(S)) A_D,m(P,S)
+ exp(i(P^2-S^2)/2)dP dS,                              (11.428.1)
+
+W0_D,m=4(pi Dm-i)r^(3/4)/(D sqrt(pi t)),
+r=t/(2pi m^2).                                        (11.428.2)
+```
+
+The normalized transformed amplitude separates globally:
+
+```text
+A_D,m(P,S)=E_D,m(u(P))O(v(S)),
+E_D,m(u)=2u(pi Dm u-i)/[(u+1)(pi Dm-i)],
+O(v)=v^(3/4)s/(v-1).                                  (11.428.3)
+```
+
+Both factors equal one at the joint saddle.  Retain the complete affine
+tangent
+
+```text
+A_aff(P,S)=1+lambda_P P+mu_S S,
+lambda_P=(3pi Dm-i)/[2(pi Dm-i)sqrt(pi mD)],
+mu_S=(5/12)sqrt(2/t).                                 (11.428.4)
+```
+
+This keeps both the mandatory endpoint-density current and the first outer
+logistic correction.  Its canonical wedge moment is still exact:
+
+```text
+C_aff=C+i mu_S partial_h C
+        -i(lambda_P+mu_S rho)partial_a C.             (11.428.5)
+```
+
+With `P_lin(S)=a+rho S`, the exact defect splits before norms as
+
+```text
+R_exact-aff=R_amp+R_face,                              (11.428.6)
+
+R_amp=(2pi)^(-1) int_(S>h) int_(P<P_D(S))
+      [A_D,m(P,S)-A_aff(P,S)]exp(i(P^2-S^2)/2)dP dS,
+
+R_face=(2pi)^(-1) int_(S>h) int_(P_lin(S))^(P_D(S))
+       A_aff(P,S)exp(i(P^2-S^2)/2)dP dS.              (11.428.7)
+```
+
+The inner face integral is oriented, so crossing of the curved face and its
+tangent introduces no sign ambiguity.  The phase remainder is identically
+zero.  At the six saved-height transition modes, interval arithmetic gives
+
+```text
+|P_D''(0)|<7e-6,       Re(lambda_P)<2e-5,
+|Im(lambda_P)|<1e-14,  mu_S<6e-6.                    (11.428.8)
+```
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_remainder_identity_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_remainder_identity_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_remainder_identity_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_remainder_identity_gate.py
+```
+
+Section 11.428 proves the exact transformed-amplitude factorization, affine
+wedge moments, and signed remainder identity only.  The local coefficient
+audit in (11.428.8) is not a global bound for either remainder integral.
+
+## 11.429 Null-coordinate unfolding of the A wedge
+
+The parameter `c=rho^2-1` is a poor coordinate at the A null face.  Put
+
+```text
+R=P+S,       delta=1+rho.                              (11.429.1)
+```
+
+Then
+
+```text
+(P^2-S^2)/2=R^2/2-RS,
+P<a+rho S  iff  R<a+delta S,
+r0=a+delta h.                                         (11.429.2)
+```
+
+Swapping the half-plane integrations and evaluating the `S` integral gives,
+for `delta<0`,
+
+```text
+C=(2pi i)^(-1) int_(-infinity)^r0 exp(iR^2/2)
+ [exp(-iRh)-exp(-iR(R-a)/delta)]dR/R.                 (11.429.3)
+```
+
+The numerator is removable at `R=0`.  For `delta>0`, the common Abel value is
+
+```text
+C=1/2+(2pi i)^(-1)PV{
+ int_(-infinity)^r0 exp(iR^2/2-iRh)dR/R
+ +int_r0^infinity exp(iR^2/2-iR(R-a)/delta)dR/R}.     (11.429.4)
+```
+
+At `delta=0`, this becomes
+
+```text
+C=H(a)/2+(2pi i)^(-1)PV
+ int_(-infinity)^a exp(iR^2/2-iRh)dR/R.               (11.429.5)
+```
+
+Thus the half-jump remains explicit and no factor `1/sqrt(|c|)` is used.
+The continuous half-boundary mode and dynamic null endpoint are
+
+```text
+nu=sqrt(t/(2pi)),       D_t=4nu=sqrt(8t/pi).           (11.429.6)
+```
+
+The exact codimension-two unfolding for endpoint `D` is
+
+```text
+eta_D=sqrt(pi)(D-D_t)/2
+     =4(pi D^2/8-t)/[sqrt(pi)(D+D_t)].                 (11.429.7)
+```
+
+For the saved `A`, `eta_A` lies in `(0.07784,0.07785)`.  Modes `39894` and
+`39895` straddle `delta=0`, but their tangent `r0` values differ from this
+same `eta_A` by less than `1e-10` and `1e-9`, respectively.  At the continuous
+null point, `rho=-1`, `P_A''(0)=-2/(3sqrt(pi)A)`, and the face phase has
+cubic coefficient `1/(3A sqrt(pi))`.  The Airy cubic is therefore forced by
+the exact paired-triangle geometry.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_null_coordinate_unfolding_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_null_coordinate_unfolding_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_null_coordinate_unfolding_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_null_coordinate_unfolding_gate.py
+```
+
+Section 11.429 proves the characteristic-coordinate reduction and unfolding
+only.  It does not evaluate the wedge or transfer an older fold bound into
+the paired global projector.
+
+## 11.430 Certified affine A-corner wedge values
+
+For a quadratic `A_R R^2+B_R R`, complete the phase before contour
+deformation.  The lower-indented full-line integral is
+
+```text
+L_full(A_R,B_R)
+ =i pi[1+erf(e^(i sgn(A_R)pi/4)B_R/(2sqrt(|A_R|)))].  (11.430.1)
+```
+
+Subtract the right ray
+`R=r0+e^(i sgn(A_R)pi/4)y`.  Its modulus is exactly
+`exp(-|A_R|y^2+Ly)`, giving an explicit monotone Gaussian tail.  Combining
+these rays according to (11.429.3)--(11.429.4) yields the rigorous scalar
+enclosures
+
+```text
+C_39894 in (0.55049140553459,0.55049140553461)
+          +i(0.51629103497221,0.51629103497223),
+
+C_39895 in (0.22614941108099,0.22614941108101)
+          +i(0.15430715853067,0.15430715853069).       (11.430.2)
+```
+
+Applying the exact affine moment (11.428.5) gives
+
+```text
+C_aff,39894 in (0.55115455318144,0.55115455318146)
+              +i(0.51595349243525,0.51595349243528),
+
+C_aff,39895 in (0.22614030418560,0.22614030418562)
+              +i(0.15430902651539,0.15430902651541).  (11.430.3)
+```
+
+At mode `39894`, the real affine correction exceeds `6e-4`.  A scalar-only
+corner carrier is therefore quantitatively inadmissible at the target scale.
+An independent replay uses a longer steepest ray and overlaps every saved
+complex ball.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_null_coordinate_affine_corner_evaluation_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_null_coordinate_affine_corner_evaluation_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_null_coordinate_affine_corner_evaluation_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_null_coordinate_affine_corner_evaluation_gate.py
+```
+
+Section 11.430 certifies canonical tangent-wedge values at two modes only.
+It does not restore the paired phase carrier, bound either exact remainder,
+or sum the A transition roster.
+
+## 11.431 Exact A carrier and paired-projector orientation
+
+The stationary phase of the endpoint-`D` triangle is
+
+```text
+Phi_D,m=pi*m*D-pi*m^2-t/2+(t/2)log[t/(2pi*m^2)].     (11.431.1)
+```
+
+For an odd endpoint `D=2d+1`, the integer
+`m(D-m)=2md+m(1-m)` is even.  Hence both odd endpoints reduce to the same
+classical carrier,
+
+```text
+exp(i Phi_D,m)
+ =exp(i{t[log(t/(2pi))-1]/2-t log m}),
+
+exp(-i*pi/8)exp(i Phi_D,m)
+ =exp(i[theta_0-t log m]),
+theta_0=t[log(t/(2pi))-1]/2-pi/8.                    (11.431.2)
+```
+
+The affine A endpoint and its equation-(9) projection are therefore
+
+```text
+K_A,m^aff=-exp(i Phi_A,m)W0_A,m C_aff,A,m,
+q_A,m^aff=2(pi/(32t))^(1/4)
+ Re[exp(-i*pi/8)K_A,m^aff].                          (11.431.3)
+```
+
+The sign in (11.431.3) is the geometric endpoint orientation
+`epsilon_A=-1`.  It is not created by the target projector.  Indeed,
+
+```text
+I_m+I_-m-chi_T(m)P_m
+ =(1-chi_T(m))P_m+P_-m+Q_m+Q_-m.                    (11.431.4)
+```
+
+Thus the paired endpoint coefficient remains `+1` across `39894|39895`;
+only the positive full-line bulk coefficient changes from zero to one.
+Restoring the common carrier gives
+
+```text
+q_A,39894^aff=-0.0058473814010481522425...,
+q_A,39895^aff=-0.0018925895733072011429...,
+
+sum q_A,m^aff=-0.0077399709743553533855...,
+sum(q_A,m^aff-q_A,m^scalar)=-6.3099857276746194e-6. (11.431.5)
+```
+
+The two tangent corners reinforce, but their sum is a carrier component,
+not an error estimate.  It must remain grouped with the rest of the A
+roster, the full-line projector jump, and both exact remainders.
+
+Pi provenance: every `pi` in (11.431.1)--(11.431.5) is inherited from the
+equation-(9) endpoint phase, Fourier parity, odd-square reflection,
+Gaussian rotation, and the paper normalization; none is fitted.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_corner_projector_orientation_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_corner_projector_orientation_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_corner_projector_orientation_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_corner_projector_orientation_gate.py
+```
+
+Section 11.431 proves the exact carrier/orientation dictionary and the
+normalized affine tangent values at two modes only.  It does not prove the
+complete A block or a bound for `R_Dir`.
+
+## 11.432 Complete affine A-transition tangent roster
+
+The deterministic A roster consists of 42 target-side modes `39853..39894`
+and 42 outer-side modes `39895..39936`.  For `delta=1+rho<0`, the
+null-coordinate formula is evaluated as two lower-indented full lines minus
+right steepest rays.  For `delta>0`, use the direct lower-indented left ray
+and the right ray,
+
+```text
+C={L_left^-(A1,B1;r0)+L_right(A2,B2;r0)}/(2pi i).    (11.432.1)
+```
+
+The direct left path already includes the Abel half-jump; inserting another
+`1/2` would double count it.  Every ray points away from its quadratic
+saddle, and the largest cutoff-20 tail is below `1.215e-95`.  Across the
+roster,
+
+```text
+0.0778000616850... < r0 < 0.0778929333821....         (11.432.2)
+```
+
+Summing with the common phase and endpoint orientation before norms gives
+
+```text
+target-side affine sum=-0.1026099618028655673575...,
+outer-side affine sum =-0.01309860492796261323757...,
+complete scalar sum   =-0.1157192535765010789802...,
+complete affine sum   =-0.1157085667308281805951...,
+affine-minus-scalar   =+1.0686845672898385e-5.        (11.432.3)
+
+sum_m |q_A,m^aff|=0.2851658668225129758442...,
+|sum_m q_A,m^aff|/sum_m |q_A,m^aff|
+ =0.4057588238737040249258....                        (11.432.4)
+```
+
+In particular, the full roster reverses the sign suggested by the two-mode
+affine correction in (11.431.5).  Local sign extrapolation is therefore not
+admissible.  Equations (11.432.3)--(11.432.4) describe only the affine
+tangent carrier; they are not an exact A-block or `R_Dir` estimate.
+
+Pi provenance: the `pi` in (11.432.1)--(11.432.4) comes only from equation
+(9), the exact bi-Morse/null-coordinate maps, odd-endpoint parity, Gaussian
+contour rotation, and the paper normalization.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_transition_roster_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_transition_roster_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_transition_roster_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_transition_roster_gate.py
+```
+
+Section 11.432 certifies the complete 84-mode affine tangent roster only.
+The exact curved-face and transformed-amplitude terms remain mandatory.
+
+## 11.433 Exact local curved-face strip on the A Airy box
+
+Put `y=v-1`.  The logistic Morse coordinate has the regular expansion
+
+```text
+sigma=y sqrt(q(y)),
+q(y)=2[y-log(1+y)]/y^2
+    =2 sum_(k>=0)(-1)^k y^k/(k+2),
+S=sqrt(t/2)sigma.                                     (11.433.1)
+```
+
+For a truncation after `N` terms and `|y|<=r<1`,
+
+```text
+|q-q_N| <=2r^N/[(N+2)(1-r)],
+|q'-q_N'|<=2r^(N-1)/(1-r).                            (11.433.2)
+```
+
+At `r=0.0037`, the 24-term production bounds are below `3.35e-60` and
+`2.36e-56`.  This removes the apparent null-point `0/0` without a floating
+branch choice.  The exact A face is
+
+```text
+P_A(y)=sqrt(pi/2){A/[1+r_m(1+y)]^(1/2)
+                  -2m[1+r_m(1+y)]^(1/2)}.            (11.433.3)
+```
+
+For `P_lin=a+rho S`, the affine strip between the exact and tangent faces is
+reduced to the analytic Fresnel primitives
+
+```text
+J_0(P)=integral_0^P exp(iu^2/2)du,
+J_1(P)=-i exp(iP^2/2),
+
+R_face,loc=(2pi)^(-1) integral e^(-iS^2/2)
+ {(1+mu S)[J_0(P_A)-J_0(P_lin)]
+   +lambda[J_1(P_A)-J_1(P_lin)]}dS.                  (11.433.4)
+```
+
+All 84 half-boundaries lie in `y_half<=y<=0.0037`.  A resumable Arb run,
+followed by a 70-digit, 28-term replay, gives
+
+```text
+target-side local strip=+0.00387733798228573928672...,
+outer-side local strip =-0.01409533121389991087781...,
+complete signed strip  =-0.01021799323161417159109...
+                         +/- 4.21e-13,
+sum of modewise moduli = 0.03768074261647970988896...,
+signed/modulus ratio   = 0.2711728199100121288064.... (11.433.5)
+```
+
+The local exact-face correction is therefore not an error at the
+`1.405792e-4` working scale.  It must be promoted into the signed A Airy
+carrier.  Equation (11.433.5) excludes `y>0.0037`, the exact-minus-affine
+transformed amplitude, and all global projector companions, so it is not an
+estimate for the complete A block or `R_Dir`.
+
+Pi provenance: every `pi` in (11.433.1)--(11.433.5) is inherited from
+equation (9), the exact bi-Morse map, Fresnel primitives, odd-endpoint phase,
+and the paper normalization; no geometric or fitted `pi` is inserted.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_local_curved_face_strip_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_local_curved_face_strip_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_local_curved_face_strip_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_local_curved_face_strip_gate.py
+```
+
+Section 11.433 certifies only the finite-box affine curved-face strip.  The
+exterior face strip and exact-minus-affine transformed-amplitude integral
+remain open.
+
+## 11.434 Localized exact-domain regrouping and exterior saddle guard
+
+Let `chi_E` and `chi_T` be the exact and tangent A-domain indicators, and
+split the `S>h` half-domain at the common local cutoff `S_0` as
+`chi_L+chi_X=1`.  Before any norm is taken,
+
+```text
+chi_T+(chi_E-chi_T)=chi_E=chi_L chi_E+chi_X chi_E.    (11.434.1)
+```
+
+Keeping only the local part of the face correction instead gives
+
+```text
+chi_T+chi_L(chi_E-chi_T)=chi_L chi_E+chi_X chi_T.     (11.434.2)
+```
+
+Thus the tangent roster of Section 11.432 plus the local strip of Section
+11.433 is not yet the localized exact carrier: it retains the complete
+tangent exterior.  The cancellation-safe affine decomposition is instead
+
+```text
+C_A^aff,exact=C_A,loc^aff,exact+C_A,ext^aff,exact.    (11.434.3)
+```
+
+This algebraic removal is essential.  The tangent boundary phase
+
+```text
+F_T(S)=((a+rho S)^2-S^2)/2,
+F_T'(S)=rho a+(rho^2-1)S.                            (11.434.4)
+```
+
+has an exterior stationary point above
+`S_0=261.307527301262830...` for exactly the 11 modes `39884..39894`.
+The adjacent guards put the mode-39883 root at
+`S_T*=256.184693262201399...<S_0`, the mode-39884 root at
+`S_T*=284.890053534132029...>S_0`, and certify that `rho^2-1` changes sign
+between modes 39894 and 39895.  These 11 roots are artifacts of extending
+the linearized face outside the exact triangle and must be removed by
+(11.434.3), not estimated as physical saddles.
+
+After restoring the common carrier, restriction to the exact face `z=x`
+gives the mode-independent phase
+
+```text
+Phi_A,face(x)=pi A^2 x/4+(t/2)log((1-x)/x).           (11.434.5)
+```
+
+Its unique half-domain stationary point is
+
+```text
+kappa=sqrt(1-8t/(pi A^2))=0.00104923927054051745...,
+x_*=(1-kappa)/2=0.49947538036472974128....            (11.434.6)
+```
+
+At `y_0=0.0037`, this genuine exact-face saddle lies in the exterior for
+exactly the 10 modes `39927..39936`; the adjacent values are
+`y_*(39926)=0.003697474099410908...<y_0` and
+`y_*(39927)=0.003747752616846732...>y_0`.  Every exact inner endpoint at
+the cutoff also satisfies
+
+```text
+P_A(y_0)<-261.2.                                      (11.434.7)
+```
+
+Consequently the exterior Fresnel tail admits an inverse-`P` expansion,
+but its leading boundary currents must be combined in the common phase
+(11.434.5), with an incomplete stationary transition for the ten-mode
+roster.  A blanket exterior integration-by-parts estimate is invalid.
+
+Pi provenance: every `pi` in (11.434.4)--(11.434.7) is inherited from the
+exact equation-(9) bi-Morse phase, the triangle face `z=x`, and the saved
+odd-endpoint normalization; no fitted constant is inserted.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_localized_exact_domain_regrouping_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_localized_exact_domain_regrouping_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_localized_exact_domain_regrouping_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_localized_exact_domain_regrouping_gate.py
+```
+
+Section 11.434 proves the exact localization algebra and the tangent and
+exact exterior stationary rosters only.  It does not bound either the local
+or exterior exact-domain affine integral, the exact-minus-affine amplitude,
+the complete A block, or `R_Dir`.
+
+## 11.435 Finite-box exact-domain affine A carrier
+
+For the exact boundary `P_A(S)`, define the lower Fresnel tail
+
+```text
+T_-(P)=integral_(-infinity)^P exp(iu^2/2)du
+ =sqrt(pi/2)exp(i pi/4)
+  [1+erf(exp(-i pi/4)P/sqrt(2))].                    (11.435.1)
+```
+
+The complete affine amplitude `1+lambda_P P+mu_S S` can therefore be
+integrated exactly in `P` over the localized exact domain.  On
+`y_half<=y<=y_0`, with `y_0=0.0037`, the canonical contribution is
+
+```text
+C_A,loc^aff,exact=(2pi)^(-1) integral exp(-iS^2/2)
+ {(1+mu_S S)T_-(P_A(S))
+   -i lambda_P exp(iP_A(S)^2/2)}dS.                 (11.435.2)
+```
+
+Equation (11.435.2) is algebraically equal to local tangent plus local
+curved-face strip, but it contains neither the tangent exterior nor any of
+its artificial stationary points.  The regular logistic series and explicit
+tails from Section 11.433 control the `y=0` coordinate, and each completed
+mode is written to an fsynced cache before the next begins.
+
+Restoring `epsilon_A=-1`, the common odd-endpoint carrier, the paper
+rotation, and the equation-(9) normalization, deterministic summation before
+norms gives
+
+```text
+target-side local exact affine=-0.09904763219017836424030...
+                               +/- 1.34e-12,
+outer-side local exact affine =-0.02781766378532328032213...
+                               +/- 1.32e-12,
+complete local exact affine   =-0.12686529597550164456243...
+                               +/- 2.66e-12,
+sum of modewise moduli        = 0.28276880019685993831313...
+                               +/- 2.66e-12,
+signed/modulus ratio          = 0.44865379733259003714...
+                               +/- 1.36e-11.         (11.435.3)
+```
+
+An independent replay at 70 decimal digits, with 28 rather than 24
+logistic-series terms and tolerance `3e-14` rather than `1e-13`, overlaps
+the physical and canonical complex balls for every mode `39853..39936` and
+all five aggregates in (11.435.3).
+
+Pi provenance: every `pi` in (11.435.1)--(11.435.3) comes from the exact
+Fresnel primitive, equation-(9) bi-Morse phase, odd-endpoint carrier, and
+paper normalization.  No fitted constant is introduced.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_local_exact_domain_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_local_exact_domain_gate.json
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_local_exact_domain_gate_rows.jsonl
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_local_exact_domain_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_affine_A_local_exact_domain_gate.py
+```
+
+Section 11.435 certifies only the affine-amplitude integral over the finite
+exact A domain.  It excludes the exact exterior `y>0.0037`, the
+exact-minus-affine transformed amplitude even inside the box, the positive
+full-line projector jump, and every other global sector.  It is not a
+complete A endpoint or `R_Dir` estimate.
+
+## 11.436 Exterior affine/amplitude nonseparability at x=0
+
+The affine/exact-minus-affine identity of Section 11.428 is exact at every
+common finite exterior cutoff.  Its two terms do not possess separate
+improper limits at `x=0`.
+
+Let `H_aff(P_A,S)` be the inner `P` integral of
+`1+lambda_P P+mu_S S`.  The lower Fresnel expansion and exact face limits
+give
+
+```text
+exp(-iP_A^2/2)H_aff(P_A,S) -> i(mu_S-lambda_P),       (11.436.1)
+sqrt(x)P_A -> -m sqrt(2pi),
+sqrt(x)S   ->  m sqrt(2pi),
+x^(3/2)S_x-> -m sqrt(pi/2).                           (11.436.2)
+```
+
+For all modes `39853..39936`, interval arithmetic proves
+
+```text
+4.7084937318005548e-6
+ < Re(lambda_P-mu_S)
+ <4.7195271486251214e-6,
+|Im(lambda_P)|<3.6e-16.                               (11.436.3)
+```
+
+Consequently each affine exterior current has the common-phase asymptotic
+
+```text
+J_A,m^aff(x)=L_m x^(-3/2)exp(i Phi_A,face(x))+O(x^-1),
+Phi_A,face(x)=pi A^2 x/4+(t/2)log((1-x)/x).           (11.436.4)
+```
+
+Required all-mode grouping does not cancel the leading coefficient:
+
+```text
+Re sum_m L_m=+2.22817223099254296e-10,
+Im sum_m L_m=-8.91263383468451327182...,
+|sum_m L_m| = 8.91263383468451327183....              (11.436.5)
+```
+
+Since `exp(i Phi_A,face(x))=x^(-it/2)(1+O(x))`, the cutoff
+primitive has a nonzero `epsilon^(-1/2-it/2)` leading term.  The standalone
+affine exterior therefore has no improper limit.  The exterior
+exact-minus-affine amplitude has the opposite leading term and likewise has
+no standalone limit.
+
+The full endpoint factor restores convergence.  With `K=pi A m`,
+
+```text
+E(P)=-2iK/(K-i)P^(-2)+O(P^-4),
+exp(-iP^2/2) integral_(-infinity)^P E(q)exp(iq^2/2)dq
+ =-2K/(K-i)P^(-3)+O(P^-5).                           (11.436.6)
+```
+
+Together with
+`x^(1/4)O(v(x))->sqrt(2)r^(-1/4)`, this makes the full exact current
+`O(x^-1/4)`, hence absolutely integrable at zero.  The admissible exterior
+object is therefore
+
+```text
+C_A,ext^exact=lim_(epsilon->0)
+ [C_A,ext^aff(epsilon)+R_A,ext^amp(epsilon)],         (11.436.7)
+```
+
+with one common cutoff, or equivalently the full exact endpoint factor
+integrated directly.  The affine/amplitude split remains valid on the
+compact local box used in Section 11.435.
+
+Pi provenance: every `pi` in (11.436.1)--(11.436.7) comes from the exact
+equation-(9) bi-Morse map, the original triangle face, and the endpoint
+normalization.  No fitted constant is introduced.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exterior_asymptotic_cancellation_guard_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exterior_asymptotic_cancellation_guard_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exterior_asymptotic_cancellation_guard_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exterior_asymptotic_cancellation_guard_gate.py
+```
+
+Section 11.436 proves only the endpoint asymptotic orders, the all-mode
+noncancellation, and the common-cutoff guard.  It does not evaluate the full
+exact exterior current, the compact nonlinear-amplitude remainder, the
+complete A block, or `R_Dir`.
+
+## 11.437 Full exact A-exterior common-phase reduction
+
+Return to the original exact triangle before splitting its endpoint
+amplitude.  Put
+
+```text
+F_m(z)=pi m^2/z+pi A^2 z/4,
+h_A(z)=z^(-1/2)(2+i pi A^2 z),
+H_m(x)=integral_0^x h_A(z)exp(iF_m(z))dz.             (11.437.1)
+```
+
+For
+
+```text
+alpha=exp(-i pi/4)sqrt(pi)A/2,
+beta =exp(-i pi/4)sqrt(pi)m,
+X=sqrt(x),   w_+/-=beta/X +/- alpha X,               (11.437.2)
+```
+
+differentiating the exact inverse-Gaussian erfc primitive gives
+
+```text
+H_m(x)=4sqrt(x)exp(iF_m(x))
+ -2sqrt(pi)beta(-1)^(mA)[erfc(w_-)+erfc(w_+)].        (11.437.3)
+```
+
+The phase-stripped tail `B_m=exp(-iF_m)H_m` satisfies the exact ODE
+
+```text
+B_m'+iF_m'B_m=h_A.                                   (11.437.4)
+```
+
+No exterior cutoff reaches the endpoint saddle.  Therefore
+
+```text
+b_0=h_A/(iF_m'),
+b_(j+1)=-b_j'/(iF_m')                                (11.437.5)
+```
+
+is an exact finite integration-by-parts hierarchy with one explicit
+oscillatory remainder.  At all 84 cutoff points the maximum successive term
+moduli are
+
+```text
+764.229430511361...,
+0.0112281897550515...,
+4.93533309645e-7,
+3.61552323726e-11.                                   (11.437.6)
+```
+
+The endpoint phase cancels the mode-dependent outer phase exactly.  Thus the
+full convergent exterior is reduced to
+
+```text
+C_A,ext^exact=-1/(2pi i) sum_(m=39853)^39936
+ integral_0^(x0_m) x^(-7/4)(1-x)^(-1/4)B_m(x)
+ exp(i Phi_A(x))dx,                                  (11.437.7)
+
+Phi_A(x)=pi A^2 x/4+(t/2)log((1-x)/x),
+x0_m={1+[t/(2pi m^2)](1+0.0037)}^(-1).               (11.437.8)
+```
+
+The unique stationary point remains
+`x_*=0.4994753803647297412765...`.  In the exact signed Morse coordinate
+
+```text
+w0_m=sgn(x0_m-x_*)
+ sqrt(2[Phi_A(x0_m)-Phi_A(x_*)]),                    (11.437.9)
+```
+
+the endpoint roster runs from `-10.5508889686027...` to
+`1.09533403228579...`; `w0_m>0` exactly for modes `39927..39936`.
+
+A nonrigorous 180-node-per-mode pilot, using three endpoint terms and five
+grouped far-boundary terms, gives the physical partial sequence
+
+```text
+-0.00238815975766248,
+-0.00240161895424093,
+-0.00240156220182666,
+-0.00240153356655061,
+-0.00240153381358943.                                (11.437.10)
+```
+
+Equation (11.437.10) is route-selection telemetry only.  It is not an
+interval enclosure and is not used in any theorem.  It indicates that the
+exact exterior is likely another signed A-carrier component, not a small
+error.  Promotion requires interval control of the endpoint-hierarchy
+remainder, stationary-region quadrature, and final grouped outer remainder.
+
+Pi provenance: every `pi` in (11.437.1)--(11.437.10) comes from the original
+equation-(9) triangle, exact endpoint/outer phases, and paper normalization;
+no fitted constant is introduced.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exact_exterior_common_phase_reduction_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exact_exterior_common_phase_reduction_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exact_exterior_common_phase_reduction_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exact_exterior_common_phase_reduction_gate.py
+```
+
+Section 11.437 proves the exact erfc primitive, phase-stripped ODE,
+one-dimensional common-phase reduction, and cutoff/Morse roster only.  It
+does not certify the diagnostic exterior value, a uniform remainder, the
+compact nonlinear-amplitude term, the complete A block, or `R_Dir`.
+
+## 11.438 Uniform four-term endpoint-tail replacement
+
+For the exact phase-stripped endpoint tail in (11.437.4), retain four terms
+of the rational hierarchy (11.437.5):
+
+```text
+B_m=b_0+b_1+b_2+b_3+R_4,
+|R_4(x)|<=integral_0^x |b_3'(u)|du.                  (11.438.1)
+```
+
+Direct symbolic differentiation gives
+
+```text
+b_3'(x)=240 i x^(7/2) P_9(x,m)
+ /[pi^4(Ax-2m)^8(Ax+2m)^8],                         (11.438.2)
+
+P_9= pi A^10 x^9+14i A^8 x^8-176pi A^8m^2x^7
+    +2016i A^6m^2x^6-9504pi A^6m^4x^5
+    +28224i A^4m^4x^4-59136pi A^4m^6x^3
+    +75264i A^2m^6x^2-59136pi A^2m^8x
+    +32256i m^8.                                     (11.438.3)
+```
+
+Every exterior cutoff remains strictly below the pole `Ax=2m`.  On
+`[0,10^-12]`, the interval calculation retains the exact `x^(7/2)` factor in
+(11.438.2); on the remainder of each mode interval it uses 4096 deterministic
+real slabs.  The resulting cumulative bound is then integrated against the
+complete exterior weight `x^(-7/4)(1-x)^(-1/4)` before summing modes.  Thus no
+nonintegrable pointwise majorant is introduced at `x=0`.
+
+For all modes `39853..39936`, Arb interval arithmetic proves
+
+```text
+max_m sup_(0<=x<=x0_m)|R_4,m(x)|
+ <=5.58799161437242737138e-11,
+
+1/(2pi) sum_m integral_0^(x0_m)
+ x^(-7/4)(1-x)^(-1/4)|R_4,m(x)|dx
+ <=6.44692711737752556018e-13,
+
+complete physical replacement error
+ <=2.28235255004381957070e-15.                      (11.438.4)
+```
+
+An independent 70-digit replay doubles the partition to 8192 slabs per mode,
+recomputes every interval from source, and obtains strictly tighter upper
+bounds, including a physical error below `10^-14`.  A separate symbolic replay
+of (11.437.5) reproduces all ten coefficients in (11.438.3).
+
+Consequently the full exact exterior in (11.437.7) may be replaced, with the
+error in (11.438.4), by the rational four-term common-phase integral.  This is
+a replacement theorem, not an evaluation of that rational integral.
+
+Pi provenance: every `pi` in (11.438.1)--(11.438.4) comes from the exact
+endpoint phase, the endpoint driver, the common outer phase, and the original
+equation-(9) normalization.  No fitted constant is introduced.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exact_exterior_endpoint_tail_remainder_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exact_exterior_endpoint_tail_remainder_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exact_exterior_endpoint_tail_remainder_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exact_exterior_endpoint_tail_remainder_gate.py
+```
+
+Section 11.438 proves only the uniform four-term endpoint-tail replacement
+error on the full exact A exterior.  It does not evaluate the rational
+common-phase integral, certify its stationary or nonstationary outer pieces,
+bound the compact nonlinear-amplitude term, prove the complete A block or
+`R_Dir`, or imply RH.
+
+## 11.439 Rational common-phase contour value
+
+Use the logistic coordinate
+
+```text
+q=log((1-x)/x),   x=(1+exp(q))^(-1).                 (11.439.1)
+```
+
+After the four-term replacement of Section 11.438, (11.437.7) becomes
+
+```text
+I_4=sum_m integral_(q0_m)^infinity
+ G_m(q)exp(i[Phi(q)-Phi_*])dq,
+
+G_m(q)=-exp(3q/4)(b_0+b_1+b_2+b_3)/(2pi i).         (11.439.2)
+```
+
+The factor `exp(3q/4)` is exactly the transformed Jacobian-weight product,
+because
+`x^(-7/4)(1-x)^(-1/4)x(1-x)=exp(3q/4)`.  In particular, the
+leading rational endpoint term makes `G_m(q)=O(exp(-3q/4))`.
+
+Take the exact rational splice and contour height
+
+```text
+q_L=0.0083,   eta=0.001.                             (11.439.3)
+```
+
+The largest mode cutoff is below `q_L`.  Every endpoint pole
+
+```text
+q_p,m=log((A-2m)/(2m))
+```
+
+lies at least `0.003692070973...` to the left of its cutoff, and the first
+logistic singularity has imaginary part `pi`.  Hence the rectangle
+`Re q>=q_L`, `0<=Im q<=eta` is analytic for all 84 modes.
+
+The compact part is split at every exact cutoff, so the active roster is
+constant on each band and is summed before integration.  On a panel of half
+width `h`, an order-`N` Arb Taylor polynomial is integrated exactly.  If `M`
+bounds the integrand on the complex disk of radius `R=2h`, Cauchy's estimate
+gives the omitted-panel error
+
+```text
+E_panel<=2Mh (h/R)^N/[(N+1)(1-h/R)].                 (11.439.4)
+```
+
+The implementation fails closed unless the python-flint series cap equals
+the advertised order.  With 376 order-36 compact panels and 100 vertical
+panels, the total compact Cauchy allowance is
+`5.301902692153e-11` in the relative canonical coordinate.
+
+For the far interval, contour closure gives
+
+```text
+integral_(q_L)^infinity f(q)dq
+ =i integral_0^eta f(q_L+iy)dy
+  +integral_(q_L)^infinity f(s+i eta)ds.             (11.439.5)
+```
+
+Writing `R=exp(s)`, monotonicity of
+`R/(1+2R cos(eta)+R^2)` proves on the horizontal ray
+
+```text
+Im(Phi(s+i eta)-Phi_*)>=80.1904463374521...,
+integral_(q_L)^infinity |f(s+i eta)|ds
+ <=1.370521721782e-31.                               (11.439.6)
+```
+
+The rational amplitude majorant in (11.439.6) retains all powers from
+`b_0,...,b_3` and all 84 endpoint denominators.  It uses no sampled decay.
+
+Restoring the common carrier, paper rotation, and equation-(9) normalization
+then yields
+
+```text
+four-term rational A exterior
+ =-0.0024015340184814209578429561 +/- 3.38e-13,
+
+full exact A exterior
+ =-0.0024015340184814209578429561 +/- 3.40e-13.       (11.439.7)
+```
+
+The second enclosure adds the `2.283e-15` endpoint-replacement error from
+Section 11.438.  An independent replay uses 70 digits, 42 actual Taylor
+coefficients, 502 compact panels, and 134 vertical panels.  It overlaps every
+saved aggregate with strictly smaller radii.
+
+Pi provenance: every `pi` in (11.439.1)--(11.439.7) comes from the exact
+endpoint hierarchy, common phase, contour geometry, paper rotation, and
+equation-(9) normalization.  No fitted constant is introduced.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exact_exterior_rational_common_phase_contour_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exact_exterior_rational_common_phase_contour_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exact_exterior_rational_common_phase_contour_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exact_exterior_rational_common_phase_contour_gate.py
+```
+
+Section 11.439 certifies only the full exact exterior for the finite A roster
+`39853..39936` at `t=10^10`.  It does not bound the compact exact-minus-affine
+transformed amplitude, prove the complete A endpoint block or `R_Dir`, or
+imply RH.
+
+## 11.440 Compact exact-minus-affine A amplitude
+
+On the compact exact A domain, the transformed amplitude still factors as
+
+```text
+A_exact(P,S)=E(P)O(S),
+E=2u(pi A m u-i)/[(u+1)(pi A m-i)],
+O=v^(3/4)sigma/(v-1).                                (11.440.1)
+```
+
+For `x=1/[1+r_m(1+y)]` and the exact face `P_A(y)`, put
+
+```text
+C_E=2sqrt(2)i(pi A m-i)/(sqrt(pi)A).
+```
+
+The exact identities
+
+```text
+C_E E(P_A)dP_A/dx=x^(-1/2)(2+i pi A^2x),
+P_A^2/2=pi m^2/x+pi A^2x/4-pi A m                 (11.440.2)
+```
+
+and oddness of `A=159577` turn the inverse-Gaussian primitive of Section
+11.437 into the exact lower endpoint current
+
+```text
+I_E(P_A)=integral_(-infinity)^P_A E(P)exp(iP^2/2)dP
+        =(-1)^m H_m(x)/C_E.                           (11.440.3)
+```
+
+Hence the two-dimensional nonlinear defect reduces without approximation to
+
+```text
+R_A,m^amp=(2pi)^(-1) integral_(y_half)^0.0037
+ exp(-iS(y)^2/2)[O(S(y))I_E(P_A(y))
+                 -I_aff(P_A(y),S(y))]S'(y)dy.         (11.440.4)
+```
+
+Direct interval evaluation of the raw `erfc` formula on complex disks is
+poorly conditioned near its Stokes cancellation.  The rigorous callback
+therefore evaluates each current at the disk centre and encloses its
+variation by the disk radius times the supremum of its exact elementary ODE
+derivative.  This changes only the enclosure, not the analytic function.
+
+Restoring the endpoint orientation, common carrier, paper rotation, and
+equation-(9) normalization, deterministic summation gives
+
+```text
+target-side compact nonlinear=+2.5696412105123670e-9
+                               +/- 1.16e-14,
+outer-side compact nonlinear =+8.492655050997492e-9
+                               +/- 1.03e-14,
+complete compact nonlinear   =+1.1062296261509859e-8
+                               +/- 2.19e-14,
+sum of modewise moduli       = 1.1426783870400915e-8
+                               +/- 2.19e-14.          (11.440.5)
+```
+
+The production run uses a modewise fsynced cache.  A fresh 70-digit replay
+with 28 rather than 24 logistic terms and tolerance `3e-16` rather than
+`1e-15` overlaps the physical, canonical, and carrier-restored complex balls
+for every mode `39853..39936` and all aggregates.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_local_exact_nonlinear_amplitude_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_local_exact_nonlinear_amplitude_gate.json
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_local_exact_nonlinear_amplitude_gate_rows.jsonl
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_local_exact_nonlinear_amplitude_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_local_exact_nonlinear_amplitude_gate.py
+```
+
+Section 11.440 certifies only the compact exact-minus-affine transformed
+amplitude for the finite A roster at `t=10^10`.  It does not by itself prove
+the complete A endpoint, `R_Dir`, or RH.
+
+## 11.441 Complete exact A endpoint and projector transition
+
+The endpoint coefficient is continuous across the target edge, while the
+positive full-line coefficient jumps.  Exactly,
+
+```text
+I_m+I_-m-chi_T(m)P_m
+ =(1-chi_T(m))P_m+P_-m+Q_m+Q_-m.                    (11.441.1)
+```
+
+Thus `Q_m+Q_-m` has coefficient `+1` on all 84 A modes, whereas the
+positive full-line Gamma bulk has coefficient zero through mode `39894` and
+one on modes `39895..39936`.  Combining Sections 11.435, 11.439, and 11.440
+before norms gives
+
+```text
+local exact affine       =-0.12686529597550164456 +/- 2.67e-12,
+local exact-minus-affine =+0.0000000110622962615099 +/- 2.20e-14,
+full exact exterior      =-0.002401534018481420958 +/- 3.41e-13,
+complete exact A endpoint=-0.12926681893168680401 +/- 3.03e-12.
+                                                               (11.441.2)
+```
+
+Let `B(t)` be the exact global-Morse Gamma factor from Section 11.349 and
+`theta_0=t[log(t/(2pi))-1]/2-pi/8`.  The adjacent projector jump is
+
+```text
+G_m=2 Re[B(t)exp(i(theta_0-t log m))]/sqrt(m),
+sum_(m=39895)^39936 G_m
+ =+0.09259269413391315729245...,
+Gamma-minus-classical sum
+ =-2.8935216916847862e-23.                            (11.441.3)
+```
+
+The complete saved-height A transition is consequently
+
+```text
+A_transition
+ =A_endpoint+sum_(m=39895)^39936 G_m
+ =-0.03667412479777364671797 +/- 3.03e-12.           (11.441.4)
+```
+
+The endpoint and bulk values remain separately recorded because their
+projector ownership differs.  An independent 110-digit reconstruction
+checks all 42 Gamma rows, every aggregate, and all source hashes.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_complete_endpoint_projector_assembly_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_complete_endpoint_projector_assembly_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_complete_endpoint_projector_assembly_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_complete_endpoint_projector_assembly_gate.py
+```
+
+Section 11.441 certifies the exact A endpoint and adjacent positive full-line
+projector transition at `t=10^10`.  It does not include the B endpoint, zero
+mode, negative or remote-positive currents, prove complete `R_Dir` or
+`Q_K-T`, establish an all-height theorem, or imply RH.
+
+## 11.442 Global `R_Dir` ownership after the A extraction
+
+Write `Q_m=A_m+B_m` for the two endpoint atoms and retain `P_m` for the
+full-line bulk atom.  At every common finite cutoff `M>=39936`, the exact
+positive/negative pair identity is
+
+```text
+I_m+I_-m-chi_T(m)P_m
+ =(1-chi_T(m))P_m+P_-m+A_m+A_-m+B_m+B_-m.          (11.442.1)
+```
+
+The positive labels partition without overlap into
+
+```text
+1..621, 622..39852, 39853..39894,
+39895..39936, 39937..M,
+
+621+39231+42+42+(M-39936)=M.                       (11.442.2)
+```
+
+The certified A object removes `A_m+A_-m` on all 84 modes
+`39853..39936` and removes the positive full-line atom only when
+`m=39895..39936`.  In particular, it removes no `P_-m` and no B endpoint
+atom.  At finite regulator its coefficient transfer is therefore
+
+```text
+A_(M,epsilon)
+ =sum_(m=39853)^39936 w_m
+   [A_m+A_-m+(1-chi_T(m))P_m].                     (11.442.3)
+```
+
+The B trace window is already extracted from `R_Dir`; its only local bulk
+steps occur at modes 621 and 622.  The analytic completed-B outer block
+starts at mode 5122421.  Hence neither overlaps (11.442.3).  The finite
+completed-B block is a representation of the common Dirichlet/Abel
+residual, not a third numerical contribution; (11.442.3) reassigns its
+positive bulk atoms `39895..39936` exactly.  Consequently
+
+```text
+R_KGamma=E_Btr,win+E_outer+A_transition+R_after_A,
+R_Dir=A_transition+R_after_A,                       (11.442.4)
+
+A_transition=-0.03667412479777365 +/- 3.04e-12.
+```
+
+Outward-rounded arithmetic converts the former targets into
+
+```text
+R_after_A<0.0368147039947
+  ==> R_Dir<0.00014057919999999995,
+
+R_after_A<0.0368061039947
+  ==> R_Dir<0.00013197919999999995.                 (11.442.5)
+```
+
+The first scalar threshold is about 261.8787 times the former `R_Dir`
+working scale.  This is target arithmetic, not a bound for `R_after_A`.
+The half-current, zero mode, negative full-line atoms, remaining endpoint
+atoms, and remote-positive pairs still form one joined object.  The exact
+double-Weber reconstruction and symmetric pair identity forbid assigning
+them independent norms.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_Dir_projector_ownership_ledger_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_Dir_projector_ownership_ledger_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_Dir_projector_ownership_ledger_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_Dir_projector_ownership_ledger_gate.py
+```
+
+Pi provenance: every `pi` in (11.442.1)--(11.442.5) is inherited from the
+equation-(9) Fourier kernel, Gaussian Abel regulator, and the certified
+Gamma/A identities.  No geometric or fitted occurrence is introduced.
+
+Section 11.442 certifies exact saved-height component ownership and the
+post-A sufficient targets only.  It does not bound `R_after_A`, prove
+complete `R_Dir` or `Q_K-T`, establish an all-height theorem, or imply RH.
+
+## 11.443 Finite-regulator equivalence for `R_after_A`
+
+Let `T={622,...,39894}`, `w_m=exp(-pi epsilon m^2)`, and use one common
+finite regulator with
+
+```text
+M>=B=5122421,       epsilon>0.                         (11.443.1)
+```
+
+The stronger cutoff is required because the A deletion alone is present for
+`M>=39936`, whereas the separately extracted analytic B exterior
+`O_(M,epsilon)=eta_delta E_W Ctr_>=B,M,epsilon` is defined in the same finite
+identity only for `M>=B`.  The common projector kernel is
+
+```text
+Delta_(M,epsilon)(x)
+ =H_x+integral_0^L f_x(u)[D_(M,epsilon)-G_(T,epsilon)]du
+   +sum_(m in T)w_m(A_m+B_m).                         (11.443.2)
+```
+
+Delete the certified A transition algebraically before any norm:
+
+```text
+mathcal A_(M,epsilon)
+ =sum_(m=39853)^39936 w_m
+   [A_m+A_-m+(1-chi_T(m))P_m],                       (11.443.3)
+
+mathfrak R_A,(M,epsilon)
+ =Delta_(M,epsilon)-chi_W Btr_(M,epsilon)
+   -O_(M,epsilon)-mathcal A_(M,epsilon).              (11.443.4)
+```
+
+Expanding the Fourier kernel, using `I_m=P_m+A_m+B_m`, pairing `+m` and
+`-m` with the even Abel weight, and then subtracting (11.443.3) gives the
+equivalent mask
+
+```text
+mode range       post-A joined summand
+1..621           P_m+P_-m+A_m+A_-m+B_m+B_-m
+622..39852       P_-m+A_m+A_-m+B_m+B_-m
+39853..39894     P_-m+B_m+B_-m
+39895..39936     P_-m+B_m+B_-m
+39937..M         P_m+P_-m+A_m+A_-m+B_m+B_-m.         (11.443.5)
+```
+
+Together with `H_x+I_0`, `-chi_W Btr`, and `-O`, (11.443.5) is exactly
+(11.443.4).  The two A-window rows have the same surviving vector for
+different reasons: the target projector had already removed `P_m` below the
+target edge, while (11.443.3) removes it above that edge.  No `P_-m` or B
+endpoint atom is deleted.
+
+For the inherited physical functional
+
+```text
+mathcal P_t[F]=2(pi/(32t))^(1/4)
+ Re[e^(-i*pi/8) integral_0^1 W_t(x)F(x)dx],           (11.443.6)
+```
+
+the remaining object is precisely
+
+```text
+R_after_A
+ =lim_(epsilon down 0) lim_(M to infinity)
+   mathcal P_t[mathfrak R_A,(M,epsilon)],             (11.443.7)
+
+R_KGamma=E_Btr,win+E_outer+A_transition+R_after_A.    (11.443.8)
+```
+
+The symmetric cutoff limit is taken first at fixed positive `epsilon`; the
+common Abel regulator tends to zero second.  The endpoint half-current, zero
+mode, negative bulk, remaining endpoint atoms, and remote-positive pairs
+therefore stay inside one evaluator.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_finite_regulator_equivalence_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_finite_regulator_equivalence_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_finite_regulator_equivalence_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_finite_regulator_equivalence_gate.py
+```
+
+Pi provenance: every `pi` in (11.443.1)--(11.443.8) is inherited from the
+Kummer quadratic phase, integer Fourier character, Gaussian Abel regulator,
+and equation-(9) physical normalization.  No fitted or geometric occurrence
+is introduced.
+
+Section 11.443 proves exact finite-regulator representation, coefficient-mask
+equivalence, cutoff compatibility, and common limit order at `t=10^10` only.
+It does not bound `R_after_A`, prove complete `R_Dir` or `Q_K-T`, establish an
+all-height theorem, or imply RH.
+
+## 11.444 Two-edge modular transform of the target notch
+
+After the `M->infinity` passage at fixed `epsilon>0` licensed by Section
+11.443, put
+
+```text
+T={622,...,39894},       c=621.5,       d=39894.5,
+q_epsilon(y)=exp(-pi epsilon y^2),
+h_epsilon(y)=q_epsilon(y)[1_(y<c)+1_(y>d)].           (11.444.1)
+```
+
+The half-integer edges make the integer samples of `h_epsilon` exactly the
+target complement.  Poisson summation for this integrable bounded-variation
+function gives, in the inherited symmetric prescription,
+
+```text
+C_epsilon(u)
+ =sum_(m in Z)[1-chi_T(m)]q_epsilon(m)e^(-2pi i m u)
+ =sum_(k in Z)hat h_epsilon(k+u),                     (11.444.2)
+
+hat h_epsilon(xi)
+ =e^(-pi xi^2/epsilon)/(2sqrt(epsilon))
+  {erfc[-sqrt(pi epsilon)c-i sqrt(pi/epsilon)xi]
+   +erfc[ sqrt(pi epsilon)d+i sqrt(pi/epsilon)xi]}.   (11.444.3)
+```
+
+For `j=0,1`, define
+
+```text
+b_j(xi)
+ =[q_epsilon^(j)(d)e^(-2pi i xi d)
+   -q_epsilon^(j)(c)e^(-2pi i xi c)]
+   /(2pi i xi)^(j+1),                                (11.444.4)
+
+E_j(u)=q_epsilon^(j)(d)e^(-2pi i u d)
+       -q_epsilon^(j)(c)e^(-2pi i u c).
+```
+
+Because both edge phases at integer `k` equal `(-1)^k`, the standard
+Mittag-Leffler sums yield
+
+```text
+sum_k b_0(k+u)= E_0(u)/(2i sin(pi u)),
+sum_k b_1(k+u)=-E_1(u)cos(pi u)/(4sin(pi u)^2).       (11.444.5)
+```
+
+Three integrations by parts on the two exterior intervals, before taking an
+absolute value, give for `rho_2=hat h-b_0-b_1`
+
+```text
+|rho_2(xi)|
+ <=[|q_epsilon''(c)|+|q_epsilon''(d)|+20pi epsilon]
+    /(2pi|xi|)^3,                                    (11.444.6)
+
+integral_R |q_epsilon'''(y)|dy<=20pi epsilon.         (11.444.7)
+```
+
+Thus, away from integer `u`,
+
+```text
+C_epsilon(u)
+ =E_0(u)/(2i sin(pi u))
+  -E_1(u)cos(pi u)/(4sin(pi u)^2)
+  +sum_(k in Z)rho_2(k+u),                           (11.444.8)
+```
+
+with continuous extension of the complete expression at the integer lattice.
+The closed pieces are not separately stable there, so the licensed evaluator
+uses the direct Gaussian sum near integers and (11.444.8) away from them.
+For `|k|<=64`, `0.1<=u<=0.9`, and `epsilon=10^-10`, the certified omitted
+dual tail is below `7e-15`.  A separate floating pilot checks nine direct/dual
+rows down to that regulator: the largest direct cutoff is `328014`, the dual
+cutoff remains `64`, and the largest discrepancy is below `4.19e-11`.  Those
+samples select the route and are not used to prove (11.444.1)--(11.444.8).
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_two_edge_modular_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_two_edge_modular_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_two_edge_modular_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_two_edge_modular_gate.py
+```
+
+Pi provenance: every `pi` in (11.444.1)--(11.444.8) is inherited from the
+Gaussian Abel weight, integer Fourier convention, and Jacobi/Poisson
+normalization.  No fitted or geometric occurrence is introduced.
+
+Section 11.444 proves the exact fixed-regulator target-complement transform,
+closed boundary currents, and a cubic dual-tail bound only.  It does not
+perform the Kummer-source integration, evaluate the A or B extractions, bound
+`R_after_A`, prove complete `R_Dir` or `Q_K-T`, or imply RH.
+
+## 11.445 Pole-free centred-cell recombination and one-cell fold
+
+Retain `hat h_epsilon`, `E_0`, `E_1`, and `rho_2` from Section 11.444.  For
+`|s|<=1/2`, define initially at `s!=0`
+
+```text
+g_0(s)=[csc(pi s)-1/(pi s)]/(2i),
+g_1(s)={1/(pi s)^2-cos(pi s)/sin(pi s)^2}/4.          (11.445.1)
+```
+
+Both apparent singularities are removable.  With `z=pi s`,
+
+```text
+g_0(s)=(1/(2i))[z/6+7z^3/360+31z^5/15120+...],
+g_1(s)=1/24+7z^2/480+31z^4/12096+...,
+g_0(0)=0,                 g_1(0)=1/24.                (11.445.2)
+```
+
+The `k=0` identity
+
+```text
+rho_2(s)=hat h_epsilon(s)-b_0(s)-b_1(s)
+```
+
+must be recombined with the two closed boundary currents before evaluation.
+It gives the single pole-free formula
+
+```text
+C_epsilon(s)
+ =hat h_epsilon(s)+E_0(s)g_0(s)+E_1(s)g_1(s)
+  +sum_(k in Z, k!=0)rho_2(k+s),       |s|<=1/2,      (11.445.3)
+
+C_epsilon(0)
+ =hat h_epsilon(0)+E_1(0)/24+sum_(k!=0)rho_2(k).      (11.445.4)
+```
+
+Thus no direct high-cutoff switch is required at the integer lattice.  If
+
+```text
+K3=|q_epsilon''(c)|+|q_epsilon''(d)|+20pi epsilon,
+```
+
+then the cubic estimate in Section 11.444 and `|k+s|>=|k|-1/2` imply,
+uniformly on the closed centred cell,
+
+```text
+sum_(|k|>K)|rho_2(k+s)|
+ <=K3/[(2pi)^3(K-1/2)^2].                            (11.445.5)
+```
+
+For `K=64`, the certified right sides are below `6.549e-11`, `6.888e-13`,
+and `6.910e-15` at `epsilon=10^-6`, `10^-8`, and `10^-10`, respectively.
+
+Now let
+
+```text
+A=159577,       B=5122421,       L=(B-A)/2=2481422,
+
+Theta_L(x,s)
+ =sum_(n=0)^(L-1)e^[i*pi*x*(A+2n+2s)^2/4],
+
+F_x(s)
+ =sum_(n=0)^(L-1)(A+2n+2s)e^[i*pi*x*(A+2n+2s)^2/4]
+ =(i*pi*x)^(-1)partial_s Theta_L(x,s),       x>0.     (11.445.6)
+```
+
+The direct finite sum defines `F_x` continuously at `x=0`.  Since
+`C_epsilon` is one-periodic, partitioning `[0,L]` into its `L` unit cells and
+putting `u=n+s` gives the exact fold
+
+```text
+integral_0^L f_x(u)C_epsilon(u)du
+ =integral_0^1 F_x(s)C_epsilon(s)ds.                  (11.445.7)
+```
+
+For evaluation on the right side, use the centred representative `r=s` for
+`0<=s<=1/2` and `r=s-1` for `1/2<s<=1`.  The finite roster shifts from
+`A,...,B-2` at `s=0` to `A+2,...,B` at `s=1`; consequently
+
+```text
+Theta_L(x,1)-Theta_L(x,0)
+ =e^(i*pi*x*B^2/4)-e^(i*pi*x*A^2/4).                 (11.445.8)
+```
+
+A separate floating pilot checks 21 direct/dual rows at and near the integer
+lattice, down to `epsilon=10^-10`, with worst relative discrepancy below
+`3.91e-11`.  It selects the stable representation and is not used to prove
+(11.445.1)--(11.445.8).
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_punctured_cell_fold_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_punctured_cell_fold_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_punctured_cell_fold_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_punctured_cell_fold_gate.py
+```
+
+Pi provenance: every `pi` in (11.445.1)--(11.445.8) is inherited from the
+Gaussian Abel/Fourier kernel and the original Kummer quadratic phase.  No
+fitted or geometric occurrence is introduced.
+
+Section 11.445 proves exact fixed-regulator pole cancellation, the one-cell
+fold, the finite theta-current identity, and uniform cubic dual tails only.
+It does not prove a finite-Gauss-current error theorem, perform the Kummer
+`x` integration, evaluate the A or B extractions, bound `R_after_A`, prove
+complete `R_Dir` or `Q_K-T`, establish an all-height theorem, or imply RH.
+
+## 11.446 Periodic two-jet extraction of the folded current
+
+Write `e_D(x)=exp(i*pi*x*D^2/4)` for `D` in `{A,B}` and put
+
+```text
+D_x=e_B(x)-e_A(x),
+E_x=D_x/(i*pi*x),               E_0=(B^2-A^2)/4,
+K_x=B e_B(x)-A e_A(x),         K_0=B-A=2L.             (11.446.1)
+```
+
+The endpoint quotient is entire at zero and has the stable form
+
+```text
+E_x=((B^2-A^2)/4)e^[i*pi*x*(A^2+B^2)/8]
+    sinc[pi*x*(B^2-A^2)/8],                            (11.446.2)
+```
+
+where `sinc(z)=sin(z)/z`.  For `x>0`, define
+
+```text
+Psi_x(s)
+ =[Theta_L(x,s)-Theta_L(x,0)-s D_x]/(i*pi*x),
+
+Phi_x(s)=Psi_x(s)-(K_x/2)(s^2-s).                     (11.446.3)
+```
+
+The exact finite-roster sums give the extensions
+
+```text
+Psi_0(s)=L(s^2-s),                Phi_0(s)=0.           (11.446.4)
+```
+
+The value and first-derivative jumps have both been removed:
+
+```text
+Phi_x(0)=Phi_x(1)=0,
+partial_s Phi_x(0)=partial_s Phi_x(1).                 (11.446.5)
+```
+
+For `T={622,...,39894}`, let
+
+```text
+H_T(epsilon)=sum_(m in T)e^(-pi*epsilon*m^2)/m.
+```
+
+At every finite cutoff `M>=39894`, the symmetric Fourier pairs cancel and
+the positive target notch is the only survivor in the quadratic bridge:
+
+```text
+integral_0^1 (s^2-s)C_(M,epsilon)'(s)ds
+ =i H_T(epsilon)/pi.                                   (11.446.6)
+```
+
+Since `integral_0^1 C_(M,epsilon)=1`, integration by parts using
+(11.446.5) gives the exact joined identity
+
+```text
+integral_0^1 F_x(s)C_(M,epsilon)(s)ds
+ =E_x-i K_x H_T(epsilon)/(2pi)
+  -integral_0^1 Phi_x(s)C_(M,epsilon)'(s)ds.           (11.446.7)
+```
+
+Certified summation gives
+
+```text
+H_T(0)=4.16185772996900304025207600348705...,
+H_T(0)/pi=1.32476046033956276831194354001237....       (11.446.8)
+```
+
+For `hat Phi_x(m)=integral_0^1 Phi_x(s)e^(-2*pi*i*m*s)ds`, three
+integrations by parts yield
+
+```text
+|hat Phi_x(m)|<=K_Phi(x)/(2*pi*|m|)^3,
+K_Phi(x)=|Delta Phi_x''|+integral_0^1|Phi_x'''(s)|ds,
+
+sum_(|m|>K)2*pi*|m|*|hat Phi_x(m)|
+ <=K_Phi(x)/(2*pi^2*K).                                (11.446.9)
+```
+
+Thus the differentiated leakage is absolutely convergent after the two
+endpoint jets are removed, including at zero Abel regulator.  The raw
+derivative majorant proves convergence only and is not asserted to meet the
+`R_after_A` target.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_extraction_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_extraction_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_extraction_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_extraction_gate.py
+```
+
+Pi provenance: every `pi` in (11.446.1)--(11.446.9) is inherited from the
+Kummer quadratic phase, integer Fourier character, and Gaussian Abel
+regulator.  No fitted or geometric occurrence is introduced.
+
+Section 11.446 proves exact finite-regulator two-jet periodization, a closed
+target harmonic current, and absolute convergence of the differentiated
+leakage only.  It does not prove a quantitative current evaluator, its
+cancellation with separately owned A/B terms, a Kummer `x` bound,
+`R_after_A`, `R_Dir`, `Q_K-T`, an all-height theorem, or RH.
+
+## 11.447 Two-jet reassembly of the common projector kernel
+
+For every nonzero integer `m`, (11.446.3)--(11.446.5) give
+
+```text
+I_m=2*pi*i*m*hat Phi_x(m)+i K_x/(2*pi*m),
+I_0=E_x.                                                (11.447.1)
+```
+
+The second term in (11.447.1) contributes
+`-i K_x H_T(epsilon)/(2pi)` to the notched source.  On each positive target
+mode, however, the exact endpoint atoms obey
+
+```text
+A_m+B_m=I_m-P_m,                                       (11.447.2)
+```
+
+where `P_m` is the full-line Gamma bulk.  Their first-jet contribution is
+`+i K_x H_T(epsilon)/(2pi)`.  The two harmonic currents therefore cancel
+coefficientwise before any norm, while the target Fourier coefficients of
+`Phi_x` are restored.
+
+Consequently, for `w_m=exp(-pi*epsilon*m^2)` and every common `M>=B`, the
+complete Gamma-normalized kernel is exactly
+
+```text
+Delta_(M,epsilon)(x)
+ =H_x+E_x
+  +2*pi*i*sum_(m=1)^M m*w_m
+      [hat Phi_x(m)-hat Phi_x(-m)]
+  -sum_(m=622)^39894 w_m P_m(x).                       (11.447.3)
+```
+
+The harmonic current from Section 11.446 is therefore not an independent
+error term and must not be counted after (11.447.3).  Equation (11.446.9)
+makes the symmetric series in (11.447.3) absolutely convergent.  Since the
+source roster is finite, `K_Phi(x)` is continuous on `0<=x<=1`; its maximum
+is finite, so the convergence is uniform on the Kummer interval.  This
+licenses the zero-regulator pair representation structurally, although the
+resulting raw constant is not quantitatively useful.
+
+The post-A object remains, with no ownership change,
+
+```text
+mathfrak R_A=Delta-chi_W Btr-O-mathcal A.               (11.447.4)
+```
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_common_kernel_reassembly_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_common_kernel_reassembly_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_common_kernel_reassembly_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_common_kernel_reassembly_gate.py
+```
+
+Section 11.447 proves finite-regulator coefficient reassembly, exact
+cancellation of the target harmonic jet, and absolute/uniform convergence of
+the periodic two-jet pair series only.  It does not supply a useful numerical
+tail constant, perform the physical Kummer quadrature, bound the A/B-subtracted
+`R_after_A` or `R_Dir`, prove `Q_K-T`, establish an all-height theorem, or
+imply RH.
+
+## 11.448 All-order signed-pair endpoint jets and turning-ratio guard
+
+For `D_m=2*pi*i*m`, repeated integration by parts at any even order `2r`
+and pairing before taking absolute values gives
+
+```text
+I_m+I_-m
+ =-2 sum_(k=0)^(r-1) Delta f_x^(2k+1)/D_m^(2k+2)
+  +[R_(m,2r)+R_(-m,2r)]/D_m^(2r),                    (11.448.1)
+
+R_(+/-m,2r)
+ =integral_0^L f_x^(2r)(u)e^(-/+2*pi*i*m*u)du.       (11.448.2)
+```
+
+Thus all even endpoint derivatives cancel from the signed pair.  The
+elementary remainder estimate is
+
+```text
+|remainder|<=2 integral_0^L |f_x^(2r)(u)|du
+                    /(2*pi*m)^(2r).                  (11.448.3)
+```
+
+With `y=A+2u` and `q=i*pi*x`, the exact derivative polynomials obey
+
+```text
+p_0(y)=y,
+p_(n+1)(y)=2p_n'(y)+q*y*p_n(y),
+f_x^(n)(u)=p_n(y)e^(q*y^2/4),
+p_n(y)=q^n y^(n+1)+lower powers.                     (11.448.4)
+```
+
+Consequently the ratio between successive highest odd-jet monomials from
+endpoint `D` is exactly
+
+```text
+rho_D(x,m)^2=[x*D/(2m)]^2.                           (11.448.5)
+```
+
+This is the normal turning coordinate.  It equals one at `x=2m/D`, so the
+raw endpoint hierarchy cannot be uniformly descending through an endpoint
+crossing.  The saved integers make both relevant obstructions exact:
+
+```text
+B/(4*39894)=5122421/159576>32,
+A/(4*39894)=159577/159576>1,
+A/(4*39895)=159577/159580<1,
+x_(B,622)=1244/5122421,       rho_B(x_(B,622),622)=1. (11.448.6)
+```
+
+Hence every target mode is on the non-descending side of both raw endpoint
+top-monomial hierarchies at `x=1/2`, while the A half-boundary lies between
+modes 39894 and 39895.  An 80-digit order-seven scout reproduces the predicted
+unit B ratio at its crossing, the unit A ratio at its half-boundary, and the
+large unremoved B growth; those rows are route-selection telemetry only.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_all_order_endpoint_jet_route_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_all_order_endpoint_jet_route_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_all_order_endpoint_jet_route_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_all_order_endpoint_jet_route_gate.py
+```
+
+Pi provenance: every `pi` in (11.448.1)--(11.448.6) is inherited from the
+Kummer quadratic phase and integer Fourier character.  No fitted or geometric
+occurrence is introduced.
+
+Section 11.448 proves the all-order paired integration-by-parts identity,
+derivative recurrence, highest-monomial ratio, and rational turning geometry
+only.  It rejects a globally descending raw endpoint-jet majorant, not a
+cancellation-aware resummation.  It does not bound `R_after_A` or `R_Dir`,
+prove `Q_K-T`, establish an all-height theorem, or imply RH.
+
+## 11.449 Post-A extended-notch normal form
+
+Let
+
+```text
+T={622,...,39894},
+W_A={39853,...,39936},
+U={622,...,39936}=T union W_A.                       (11.449.1)
+```
+
+The 84-mode A window has 42 modes inside `T` and 42 outside.  Consequently
+
+```text
+chi_T+chi_A(1-chi_T)=chi_U.                          (11.449.2)
+```
+
+At every inherited common cutoff and positive regulator, subtracting the
+certified A transition before any norm therefore gives
+
+```text
+Delta_(M,epsilon)-mathcal A_(M,epsilon)
+ =H_x+sum_(m=-M)^M w_m I_m
+  -sum_(m=622)^39936 w_m P_m
+  -sum_(m=39853)^39936 w_m(A_m+A_-m).                (11.449.3)
+```
+
+The former six-row positive-bulk mask is one contiguous extended notch.
+Equivalently, with `G_U` its positive Fourier projector,
+
+```text
+Delta-mathcal A
+ =H_x+integral_0^L f_x(u)[D_(M,epsilon)-G_(U,epsilon)]du
+  +sum_(m in U)w_m(A_m+B_m)
+  -sum_(m in W_A)w_m(A_m+A_-m).                      (11.449.4)
+```
+
+The endpoint roster reduces to two rows:
+
+```text
+622..39852:    A_m+B_m,
+39853..39936:  B_m-A_-m.                             (11.449.5)
+```
+
+The one-cell fold and two-jet reassembly give the equivalent form
+
+```text
+H_x+E_x
+ +2*pi*i sum_(m=1)^M m*w_m[hat Phi_x(m)-hat Phi_x(-m)]
+ -sum_(m=622)^39936 w_m P_m
+ -sum_(m=39853)^39936 w_m(A_m+A_-m).                 (11.449.6)
+```
+
+The B extractions retain their ownership:
+
+```text
+mathfrak R_A=(Delta-mathcal A)-chi_W Btr-O.           (11.449.7)
+```
+
+For the extended notch, the two half-integer edges are `621.5` and
+`39936.5`.  The two-edge modular and pole-free centred-cell formulas from
+Sections 11.444--11.445 therefore apply with the upper edge replaced by
+`d_A=39936.5`; both edge phases remain `(-1)^k` on integer dual cells.
+
+This translation moves the upper edge out of the A half-boundary collar.
+Since `A/4=39894.25` and `q_A(m,1/2)=(A-4m)/2`, exactly
+
+```text
+old upper-edge gap=39894.5-A/4=0.25,
+new upper-edge gap=39936.5-A/4=42.25,
+q_A(39936.5,1/2)=-84.5.                              (11.449.8)
+```
+
+The deleted integer window spans `q_A=82.5` through `-83.5`; its nearest
+surviving neighbours have `q_A=84.5` and `-85.5`.  Thus the A transition
+changes the post-A spectral geometry, not merely its final scalar value.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_form_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_form_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_form_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_form_gate.py
+```
+
+Pi provenance: every `pi` in (11.449.1)--(11.449.8) is inherited from the
+Gaussian Abel regulator, integer Fourier character, and Kummer phase.  No
+fitted or geometric occurrence is introduced.
+
+Section 11.449 proves finite-regulator post-A coefficient compression,
+extended-notch fold/modular inheritance, and rational upper-edge geometry
+only.  It does not bound the remaining joined kernel, `R_after_A`, `R_Dir`,
+or `Q_K-T`, establish an all-height theorem, or imply RH.
+
+## 11.450 Post-A extended-notch pole-free kernel
+
+Retain the exact post-A notch
+
+```text
+U={622,...,39936},       c=621.5,       d_A=39936.5,
+q_epsilon(y)=exp(-pi*epsilon*y^2),
+h_A,epsilon(y)=q_epsilon(y)[1_(y<c)+1_(y>d_A)].      (11.450.1)
+```
+
+The identity `d_A-c=39315=|U|` and the odd edge numerators `1243` and
+`79873` give, for integer `k`,
+
+```text
+exp(-2*pi*i*k*c)=exp(-2*pi*i*k*d_A)=(-1)^k.          (11.450.2)
+```
+
+Consequently the fixed-regulator complement has the exact Poisson form
+
+```text
+C_A,epsilon(s)
+ =sum_(m in Z)[1-chi_U(m)]q_epsilon(m)e^(-2*pi*i*m*s)
+ =sum_(k in Z)hat h_A,epsilon(k+s),                  (11.450.3)
+
+hat h_A,epsilon(xi)
+ =e^(-pi*xi^2/epsilon)/(2sqrt(epsilon))
+  {erfc[-sqrt(pi*epsilon)c-i sqrt(pi/epsilon)xi]
+   +erfc[ sqrt(pi*epsilon)d_A+i sqrt(pi/epsilon)xi]}. (11.450.4)
+```
+
+For `j=0,1`, set
+
+```text
+b_A,j(xi)
+ =[q_epsilon^(j)(d_A)e^(-2*pi*i*xi*d_A)
+   -q_epsilon^(j)(c)e^(-2*pi*i*xi*c)]
+   /(2*pi*i*xi)^(j+1),
+
+E_A,j(s)=q_epsilon^(j)(d_A)e^(-2*pi*i*s*d_A)
+         -q_epsilon^(j)(c)e^(-2*pi*i*s*c).           (11.450.5)
+```
+
+Writing `rho_A,2=hat h_A,epsilon-b_A,0-b_A,1`, the `k=0` term cancels the
+apparent boundary-current poles before evaluation.  On the whole centred
+cell,
+
+```text
+C_A,epsilon(s)
+ =hat h_A,epsilon(s)+E_A,0(s)g_0(s)+E_A,1(s)g_1(s)
+  +sum_(k in Z,k!=0)rho_A,2(k+s),       |s|<=1/2,
+
+g_0(s)=[csc(pi*s)-1/(pi*s)]/(2i),
+g_1(s)={1/(pi*s)^2-cos(pi*s)/sin(pi*s)^2}/4,
+g_0(0)=0,       g_1(0)=1/24.                        (11.450.6)
+```
+
+Three integrations by parts on the two exterior intervals give
+
+```text
+|rho_A,2(xi)|<=K3_A/(2*pi*|xi|)^3,
+K3_A=|q_epsilon''(c)|+|q_epsilon''(d_A)|+20*pi*epsilon,
+
+sum_(|k|>K)|rho_A,2(k+s)|
+ <=K3_A/[(2*pi)^3(K-1/2)^2],       |s|<=1/2.        (11.450.7)
+```
+
+At `K=64`, fresh 100-decimal-digit Arb evaluation gives
+
+```text
+epsilon=1e-6:  [6.5483029402588917995429526219487982e-11 +/- 4.54e-81]
+epsilon=1e-8:  [6.8874795493177505065531204955901150e-13 +/- 1.58e-83]
+epsilon=1e-10: [6.9106969042126825332216169657647402e-15 +/- 2.09e-85].
+                                                               (11.450.8)
+```
+
+The upper-edge displacement is not a nonstationarity theorem.  The surviving
+exact A common phase remains
+
+```text
+Phi_A(x)=pi*A^2*x/4+(t/2)log((1-x)/x),
+x_*=[1-sqrt(1-8t/(pi*A^2))]/2
+   =[0.4994753803647297412765390599751361 +/- 1.00e-34],
+Phi_A''(x_*)=[83939326.46126016487345505280688484 +/- 2.27e-27].
+                                                               (11.450.9)
+```
+
+Neither `Phi_A` nor `x_*` depends on `d_A`.  Hence the certified A subtraction
+moves the projector edge out of the half-boundary collar but does not remove
+the interior stationary point of the surviving common current.  That current
+and the A-window deletion must remain in one signed Morse/Fresnel assembly;
+blanket nonstationary integration by parts is invalid.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_pole_free_kernel_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_pole_free_kernel_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_pole_free_kernel_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_pole_free_kernel_gate.py
+```
+
+Pi provenance: every `pi` in (11.450.1)--(11.450.9) is inherited from the
+Gaussian Abel/Fourier kernel and the exact Kummer common phase.  No fitted or
+geometric occurrence is introduced.
+
+Section 11.450 proves the exact fixed-regulator extended-notch transform,
+pole-free cell recombination, cubic dual tails, and common-phase stationary
+guard only.  It does not evaluate the Kummer-weighted cell integral, prove a
+joined phase-adapted estimate, bound `R_after_A`, `R_Dir`, or `Q_K-T`,
+establish an all-height theorem, or imply RH.
+
+## 11.451 Normal/tangential split after the A-edge translation
+
+Let `T={622,...,39894}` and `U={622,...,39936}`.  At every positive
+regulator, the two complement kernels differ by the exact finite block
+
+```text
+C_U,epsilon(s)-C_T,epsilon(s)
+ =-sum_(m=39895)^39936
+    exp(-pi*epsilon*m^2)exp(-2*pi*i*m*s).             (11.451.1)
+```
+
+Equivalently, their continuous interpolants satisfy
+
+```text
+h_U,epsilon(y)-h_T,epsilon(y)
+ =-q_epsilon(y)1_(39894.5<y<39936.5),                (11.451.2)
+```
+
+up to measure-zero endpoint conventions.  Applying the already licensed
+Poisson transform to (11.451.2) gives
+
+```text
+sum_(k in Z)[hat h_U,epsilon(k+s)-hat h_T,epsilon(k+s)]
+ =-sum_(m=39895)^39936 w_m exp(-2*pi*i*m*s).          (11.451.3)
+```
+
+At zero regulator this is the finite trigonometric polynomial
+
+```text
+-exp(-pi*i*79831*s)sin(42*pi*s)/sin(pi*s),            (11.451.4)
+```
+
+with continuous value `-42` at integer `s`.  Thus the improved upper-edge
+geometry is exactly balanced by the explicit 42-mode outside-target half of
+the A window; it is not a separate small remainder.
+
+For the exact joint phase
+
+```text
+Phi(alpha,x;m)
+ =pi*alpha^2*x/4-pi*m*alpha+(t/2)log((1-x)/x),
+
+partial_alpha Phi(A,x;m)=pi(A*x/2-m),
+partial_x Phi(A,x;m)=pi*A^2/4-t/[2*x(1-x)].           (11.451.5)
+```
+
+Since `0<=x<=1/2`, the old and new upper edges obey the exact uniform bounds
+
+```text
+|partial_alpha Phi(A,x;39894.5)| >= pi/4,
+|partial_alpha Phi(A,x;39936.5)| >= 169*pi/4.         (11.451.6)
+```
+
+The translation therefore improves the worst-case A-face normal denominator
+by the exact factor `169`.  At the tangential Morse point from Section
+11.450, the corresponding mode-unit gaps are
+
+```text
+old: [42.10861376876103815686321317385216 +/- 1e-34],
+new: [84.10861376876103815686321317385216 +/- 1e-34]. (11.451.7)
+```
+
+Nevertheless `partial_x Phi(A,x_*;m)=0` for every `m`, with the positive
+curvature already certified in (11.450.9).  The new upper edge is uniformly
+nonstationary in the A-face normal direction, not in the tangential
+direction.  The licensed order is therefore a signed normal endpoint
+reduction followed by a tangential Morse/Fresnel estimate.  Integration by
+parts through `x_*` is invalid.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_tangential_split_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_tangential_split_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_tangential_split_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_tangential_split_gate.py
+```
+
+Pi provenance: every `pi` in (11.451.1)--(11.451.7) is inherited from the
+Gaussian Abel/Fourier kernel and the exact Kummer phase.  No fitted or
+geometric occurrence is introduced.
+
+Section 11.451 proves the exact fixed-regulator edge translation,
+finite-block ownership, uniform normal gap, and tangential Morse
+classification only.  It does not prove an endpoint-expansion remainder,
+the signed 42-mode cancellation bound, `R_after_A`, `R_Dir`, or `Q_K-T`, an
+all-height theorem, or RH.
+
+## 11.452 Translated A-face two-current expansion
+
+Put
+
+```text
+d_A=39936.5,
+delta_A(x)=d_A-A*x/2,
+q_A(x)=-delta_A(x)sqrt(2/x),          0<x<=1/2.       (11.452.1)
+```
+
+Since `d_A-A/4=169/4`, one has the uniform normal-tail bound
+
+```text
+q_A(x)<=-169/2=-84.5.                                 (11.452.2)
+```
+
+For `q<0`, retain the exact lower Fresnel tail
+
+```text
+J_-(q)=integral_(-infinity)^q exp(i*pi*v^2/2)dv.
+```
+
+Two integrations by parts, followed by one exposed boundary term in the
+remainder, give the genuine finite identity and bound
+
+```text
+J_-(q)
+ =exp(i*pi*q^2/2)
+   [1/(i*pi*q)+1/((i*pi)^2*q^3)]+r_2(q),
+
+|r_2(q)|<=6/(pi^3|q|^5).                              (11.452.3)
+```
+
+For the exact continuous lower-endpoint current
+
+```text
+L_A(d,x)=-exp(i*pi*q_A^2/2)/(i*pi)
+         -d sqrt(2/x)J_-(q_A),                        (11.452.4)
+```
+
+the bare endpoint term and first Fresnel-tail term cancel algebraically.
+Writing `E_A=exp(i*pi*q_A^2/2)` gives
+
+```text
+L_A(d_A,x)=E_A[c_0(x)+c_1(x)]+R_2(x),
+
+c_0(x)=A*x/[2*i*pi*delta_A(x)],
+c_1(x)=-d_A*x/[2*pi^2*delta_A(x)^3],
+
+|R_2(x)|<=3*d_A*x^2/[2*pi^3*delta_A(x)^5].           (11.452.5)
+```
+
+All three displayed moduli increase on the half-domain.  Their certified
+endpoint maxima are
+
+```text
+|c_0| <= [300.56175566598085202356407464728668 +/- 1.25e-38],
+|c_1| <= [0.013413129711267953330719296106310527 +/- 8.76e-39],
+|R_2| <= [3.587716221501031412523397726232298e-6 +/- 8.00e-43].
+                                                               (11.452.6)
+```
+
+Quadratic completion preserves the common A-face phase:
+
+```text
+exp(-i*pi*d_A^2/x)E_A
+ =exp(i*pi*A^2*x/4-i*pi*d_A*A).
+```
+
+Both `A` and the numerator `79873` are `1 mod 4`, so
+
+```text
+exp(-i*pi*d_A*A)=-i.                                  (11.452.7)
+```
+
+Finally,
+
+```text
+q_A(39936,1/2)=-83.5,
+q_A(39936.5,1/2)=-84.5.                              (11.452.8)
+```
+
+The translated tail therefore begins exactly one normal-coordinate unit
+beyond the final mode of the finite block.  The remainder in (11.452.6) is
+small, but the leading current is not: it must remain signed with modes
+`39895..39936` before any norm.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_two_current_expansion_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_two_current_expansion_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_two_current_expansion_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_two_current_expansion_gate.py
+```
+
+Pi provenance: every `pi` in (11.452.1)--(11.452.8) is inherited from the
+exact Kummer/Fourier phase and canonical Fresnel primitive.  No fitted or
+geometric occurrence is introduced.
+
+Section 11.452 proves the exact continuous-edge Fresnel expansion, first two
+normal currents, uniform pointwise remainder, common A-face phase, and roster
+adjacency only.  It does not prove the signed edge/block bound, tangential
+Morse integral, `R_after_A`, `R_Dir`, or `Q_K-T`, an all-height theorem, or
+RH.
+
+## 11.453 Midpoint-Peano reduction and tail/endpoint partition
+
+For real `y`, define
+
+```text
+c(x)=sqrt(2/x),
+q_A(y,x)=-(y-A*x/2)c(x),
+H(q)=exp(-i*pi*q^2/2)J_-(q),
+G_A(y,x)=-1/(i*pi)-y*c(x)H(q_A(y,x)).                (11.453.1)
+```
+
+At positive Abel regulator put
+
+```text
+f_(epsilon,x)(y)=exp(-pi*epsilon*y^2)G_A(y,x).       (11.453.2)
+```
+
+The integers `39895,...,39936` are exactly the midpoints of the 42 unit
+cells partitioning `[39894.5,39936.5]`.  Compact-strip Fubini fixes the
+oriented primal-block/minus-translated-strip A-face channel as
+
+```text
+E_(42,epsilon)(x)
+ =[-sum_(m=39895)^39936 f_(epsilon,x)(m)]
+  -[-integral_(39894.5)^39936.5 f_(epsilon,x)(y)dy]. (11.453.3)
+```
+
+For `|y-m|<=1/2`, set
+
+```text
+K_m(y)=(1/2)(1/2-|y-m|)^2.
+```
+
+The exact midpoint Peano formula is
+
+```text
+E_(42,epsilon)(x)
+ =sum_(m=39895)^39936
+   integral_(m-1/2)^(m+1/2)
+   K_m(y)partial_y^2 f_(epsilon,x)(y)dy,             (11.453.4)
+
+integral_cell K_m(y)dy=1/24,
+sum_(42 cells)integral_cell K_m(y)dy=7/4.            (11.453.5)
+```
+
+The strip is finite and `G_A` is smooth there, so the zero-regulator limit
+passes inside (11.453.4):
+
+```text
+E_42(x)=sum_m integral_cell K_m(y)G_(A,yy)(y,x)dy,
+|E_42(x)|<=(1/24)sum_m sup_cell |G_(A,yy)(.,x)|.     (11.453.6)
+```
+
+Thus the correct cancellation object is a weighted second normal derivative,
+not either large summand in (11.453.3).  Its exact differential interface is
+
+```text
+H_q=1-i*pi*qH,
+H_qq=-i*pi*q-(i*pi+pi^2*q^2)H,
+
+G_(A,y)=-cH+y*c^2H_q,
+G_(A,yy)=2*c^2H_q-y*c^3H_qq.                         (11.453.7)
+```
+
+At positive regulator,
+
+```text
+partial_y^2 f_(epsilon,x)
+ =exp(-pi*epsilon*y^2)
+  [G_yy-4*pi*epsilon*y*G_y
+   +(4*pi^2*epsilon^2*y^2-2*pi*epsilon)G].           (11.453.8)
+```
+
+The phase removal is exact for continuous `y`:
+
+```text
+exp(i*pi*A*y)exp(-i*pi*y^2/x)exp(i*pi*q_A^2/2)
+ =exp(i*pi*A^2*x/4).                                 (11.453.9)
+```
+
+To separate the endpoint transition from the Morse region, fix the explicit
+rational normal threshold `16` and let
+
+```text
+x_16=[(sqrt(2*16^2+8*A*39894.5)-16sqrt(2))/(2A)]^2
+ =[0.4999028779462474474223253711284800 +/- 4.2e-35].
+                                                               (11.453.10)
+```
+
+Monotonicity of `(y-A*x/2)sqrt(2/x)` gives
+
+```text
+0<x<=x_16, 39894.5<=y<=39936.5
+       ==> -q_A(y,x)>=16.                            (11.453.11)
+```
+
+The unique half-domain saddle satisfies
+
+```text
+x_*=[0.4994753803647297412765390599751361 +/- 2.3e-35]<x_16.
+```
+
+On the remaining layer, of width less than `9.713e-5`, the tangential phase
+is uniformly nonstationary:
+
+```text
+Phi_A'(x)>=Phi_A'(x_16)
+ =[21263.46968218367680295689986469 +/- 2.7e-26]>21000.
+                                                               (11.453.12)
+```
+
+Therefore the rigorous continuation has two parts.  On `0<x<=x_16`, the
+normal tail is uniformly safe for a differentiated Fresnel hierarchy while
+the tangential Morse saddle is retained.  On `x_16<=x<=1/2`, the exact Peano
+amplitude must be retained while tangential integration by parts is licensed
+by (11.453.12).  A floating route scout found defect moduli about `0.22335` at
+the saddle and `2413.08` at the endpoint; those values only reject a uniform
+smallness argument and are not used in (11.453.1)--(11.453.12).
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_midpoint_Peano_partition_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_midpoint_Peano_partition_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_midpoint_Peano_partition_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_midpoint_Peano_partition_gate.py
+```
+
+Pi provenance: every `pi` in (11.453.1)--(11.453.12) is inherited from the
+Gaussian Abel regulator, Fourier character, canonical Fresnel primitive, and
+exact Kummer phase.  The threshold `16` is an explicit rational partition,
+not a fitted occurrence of `pi`.
+
+Section 11.453 proves the exact fixed-regulator A-face block/strip
+orientation, midpoint-Peano identity, compact-strip Abel-zero passage, normal
+derivative ODE, continuous phase cancellation, and tail/endpoint partition
+only.  It does not prove a quantitative `G_yy` envelope, endpoint-layer
+remainder, tangential Morse integral, `R_after_A`, `R_Dir`, or `Q_K-T`, an
+all-height theorem, or RH.
+
+## 11.454 Six-current elementary midpoint defect
+
+For `q<0`, six retained lower-Fresnel currents give
+
+```text
+H(q)=exp(-i*pi*q^2/2)J_-(q)
+ =sum_(n=0)^5 (2n-1)!!/[(i*pi)^(n+1)q^(2n+1)]
+  +R_(H,6)(q),
+
+|R_(H,6)(q)|<=2*11!!/[pi^7|q|^13].                 (11.454.1)
+```
+
+The bound follows by exposing the next boundary current and bounding the
+remaining `v^-14` integral absolutely.  With
+`delta(y,x)=y-A*x/2`, substitution in the phase-stripped A current gives
+
+```text
+G_6(y,x)=A*x/[2*i*pi*delta]
+ +sum_(n=1)^5
+  y(2n-1)!!(x/2)^n/[(i*pi)^(n+1)delta^(2n+1)].       (11.454.2)
+```
+
+On `0<x<=x_16` and `39894.5<=y<=39936.5`,
+
+```text
+|G_A-G_6|
+ <=2*11!!*y*(x/2)^6/[pi^7 delta^13].                (11.454.3)
+```
+
+The majorant increases with `x` and decreases with `y`.  Its maximum is
+therefore at `(x_16,39894.5)`, where Arb certifies
+
+```text
+sup |G_A-G_6|
+ <=[1.2196376196424647064542115065855114e-10 +/- 1.1e-50].
+                                                               (11.454.4)
+```
+
+Define
+
+```text
+D_6(x)=sum_(m=39895)^39936 G_6(m,x)
+       -integral_(39894.5)^39936.5 G_6(y,x)dy.       (11.454.5)
+```
+
+This is elementary.  If `a=A*x/2`,
+`delta_l=39894.5-a`, `delta_r=39936.5-a`, and
+`b_n=(2n-1)!!(x/2)^n/(i*pi)^(n+1)`, then
+
+```text
+I_0=A*x*log(delta_r/delta_l)/(2*i*pi),
+
+I_n=b_n
+ [delta^(1-2n)/(1-2n)-a*delta^(-2n)/(2n)]
+       |_(delta_l)^(delta_r),       1<=n<=5,         (11.454.6)
+
+D_6=sum_m G_6(m,x)-sum_(n=0)^5 I_n.
+```
+
+The oriented channel in Section 11.453 is `E_42=-D_42`.  The 42 point
+masses and strip length 42 therefore give, without sampled cancellation,
+
+```text
+E_42(x)=-D_6(x)+R_(D,6)(x),
+
+|R_(D,6)(x)|
+ <=[1.0244956004996703534215376655318296e-8 +/- 4.4e-48].
+                                                               (11.454.7)
+```
+
+Direct Arb evaluation of the rational-log formula gives
+
+```text
+|D_6(x_*)|
+ =[0.2233493823502305582072009851555260 +/- 3.3e-35],
+
+|D_6(x_16)|
+ =[8.033251410960617873932030439429257 +/- 2.9e-33]. (11.454.8)
+```
+
+The inherited mode response contains `1/x`, but the lower endpoint is
+regular.  Exactly,
+
+```text
+lim_(x down 0)D_6(x)/x
+ =A[sum_m 1/m-log(r/l)]/(2*i*pi)
+  +[sum_m 1/m^2-(1/l-1/r)]/[2(i*pi)^2],             (11.454.9)
+```
+
+whose certified modulus is
+
+```text
+[1.397764451342624895817671079151884e-9 +/- 9.2e-44].
+```
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_six_current_midpoint_defect_reduction_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_six_current_midpoint_defect_reduction_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_six_current_midpoint_defect_reduction_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_six_current_midpoint_defect_reduction_gate.py
+```
+
+Pi provenance: every `pi` in (11.454.1)--(11.454.9) is inherited from the
+canonical Fresnel primitive and exact Kummer/Fourier phase.  No fitted
+occurrence is introduced.
+
+Section 11.454 proves the exact six-current expansion, elementary
+rational-log defect, uniform tail error below `1.025e-8`, and regular lower
+endpoint on `0<x<=x_16` only.  It does not prove the Morse-core integral,
+endpoint-layer remainder, full signed A-face bound, `R_after_A`, `R_Dir`, or
+`Q_K-T`, an all-height theorem, or RH.
+
+## 11.455 Exact eight-cell localization of the endpoint transition
+
+The endpoint strip has the exact decomposition
+
+```text
+[39894.5,39936.5]
+ =[39894.5,39902.5] union [39902.5,39936.5],
+
+D_42(x)=D_(tr,8)(x)+D_(tail,34)(x).                 (11.455.1)
+```
+
+The first interval contains exactly the midpoint modes `39895,...,39902`;
+the second contains exactly `39903,...,39936`.  On the full endpoint layer
+`x_16<=x<=1/2`, the minimum normal size in the 34-cell tail is attained at
+its lower strip edge and at `x=1/2`:
+
+```text
+min_tail |q_A|
+ =2*(39902.5-A/4)=33/2=16.5.                       (11.455.2)
+```
+
+Consequently the six-current theorem applies uniformly to that entire tail.
+Its monotone remainder majorant gives
+
+```text
+sup_tail |G_A-G_6|<8.177e-11,
+
+|D_(tail,34)-D_(tail,34),6|<5.56e-9.               (11.455.3)
+```
+
+The second factor uses `68=34+34`, accounting for both the 34 midpoint atoms
+and strip length 34.  Under the inherited equation-(9) normalization, the
+cost of replacing the tail by its exact rational-log six-current form is
+
+```text
+epsilon_(tail,6)<6e-15.                             (11.455.4)
+```
+
+The value of `D_(tail,34),6` itself is retained.  Equations (11.455.1)--
+(11.455.4) remove special functions only from those 34 cells; they do not
+declare their rational-log contribution small.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_endpoint_eight_cell_transition_localization_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_endpoint_eight_cell_transition_localization_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_endpoint_eight_cell_transition_localization_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_endpoint_eight_cell_transition_localization_gate.py
+```
+
+Pi provenance: every `pi` in (11.455.1)--(11.455.4) is inherited from the
+canonical Fresnel current and equation-(9) normalization.  The eight/34 split
+is forced by the half-integer edge for which the endpoint normal coordinate
+exceeds 16; it is not fitted to floating telemetry.
+
+Section 11.455 proves only the exact endpoint localization and tail
+replacement theorem.  It does not yet bound either the eight-cell value or
+the retained 34-cell rational-log value.
+
+## 11.456 Complete absolute bound for the A-face endpoint layer
+
+For the eight transition cells, the positive midpoint Peano representation is
+
+```text
+|D_(tr,8)(x)|
+ <=sum_(m=39895)^39902 integral_(m-1/2)^(m+1/2)
+       K_m(y)|G_(A,yy)(y,x)|dy.                    (11.456.1)
+```
+
+For a real normal centre `q_0<0`, define
+
+```text
+w_0=(-q_0)sqrt(pi)(1-i)/2,
+H(q_0)=(1+i)exp(w_0^2)erfc(w_0)/2.                 (11.456.2)
+```
+
+If `|q-q_0|<=r`, the integrating-factor identity for
+`H_q=1-i*pi*qH`, together with `|exp(i theta)-1|<=|theta|`, gives the rigorous
+centre-variation ball
+
+```text
+|H(q)-H(q_0)|
+ <=r[1+pi|H(q_0)|(|q_0|+r/2)].                    (11.456.3)
+```
+
+Equations (11.456.2)--(11.456.3) avoid evaluating complex `erfc` on a wide
+rectangle.  The exact ODE then encloses `G_(A,yy)`.  Boxes with certified
+`|q|>=2` instead use the six-current expansion, the remainder (11.454.1),
+and the exact terminal-current correction.  Any indeterminate alternating
+interval falls back to (11.456.2)--(11.456.3).
+
+Let `B_8(x)` denote the resulting Peano majorant.  Retaining the full
+rational-log tail value from Section 11.455 gives
+
+```text
+B_end
+ <=2(pi/(32T))^(1/4) integral_(x_16)^(1/2)
+      x^(-5/4)(1-x)^(-1/4)
+      [B_8(x)+|D_(tail,34),6(x)|]dx
+    +epsilon_(tail,6).                              (11.456.4)
+```
+
+A 100-decimal Arb cover uses 256 `x` slabs and 16 subdivisions of every
+half-cell.  Its decimal lower edge `0.4999028779462474` lies strictly below
+the exact `x_16`, so the cover is an outward enlargement.  It certifies
+
+```text
+eight-cell physical contribution       <0.003584,
+34-cell six-current physical tail      <0.000037,
+tail replacement error                 <6e-15,
+
+B_end                                  <0.0037.      (11.456.5)
+```
+
+An independent 120-decimal checker uses 320 `x` slabs, 20 subdivisions per
+half-cell, endpoint kernel maxima instead of kernel interval evaluation, and
+the terminal-current recurrence rather than the builder's factored
+correction.  It independently obtains `B_end<0.0030`.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_endpoint_eight_cell_peano_interval_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_endpoint_eight_cell_peano_interval_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_endpoint_eight_cell_peano_interval_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_endpoint_eight_cell_peano_interval_gate.py
+```
+
+Pi provenance: every `pi` in (11.456.1)--(11.456.5) comes from the canonical
+Fresnel primitive, its exact ODE, or the inherited equation-(9)
+normalization.  No geometric or fitted occurrence is inserted.
+
+Section 11.456 proves the complete translated A-face endpoint-layer absolute
+bound on `x_16<=x<=1/2` at `t=10^10` only.  It does not prove the separate
+pre-endpoint Morse integral, the full signed A-face channel, the joined
+`R_after_A`, `R_Dir`, or `Q_K-T` estimate, an all-height theorem, or RH.
+
+## 11.457 Nonoscillatory absolute bound for the pre-endpoint core
+
+On `0<x<=x_16`, apply the positive midpoint Peano kernel to the exact
+six-current rational amplitude itself:
+
+```text
+|D_6(x)|
+ <=sum_(m=39895)^39936 integral_cell
+       K_m(y)|G_(6,yy)(y,x)|dy.                    (11.457.1)
+```
+
+Termwise differentiation of (11.454.2) factors an exact power of `x`:
+
+```text
+G_(6,yy)(y,x)=x M_6(y,x),                           (11.457.2)
+```
+
+where
+
+```text
+M_6=A/(i*pi*delta^3)
+ +sum_(n=1)^5 (2n-1)!! x^(n-1)/[2^n(i*pi)^(n+1)]
+   *(2n+1)[(2n+2)y/delta^(2n+3)-2/delta^(2n+2)].   (11.457.3)
+```
+
+This avoids subtracting the large midpoint sum and strip integral.  With the
+logistic coordinate `q=log((1-x)/x)` and `|dx|=x(1-x)dq`, the apparent lower
+endpoint singularity disappears:
+
+```text
+integral_0^x16 |D_6|x^(-5/4)(1-x)^(-1/4)dx
+ <=integral_q16^infinity
+      B_6(x(q))[x(q)(1-x(q))]^(3/4)dq,              (11.457.4)
+
+B_6(x)=sum_cells integral_cell K_m(y)|M_6(y,x)|dy.
+```
+
+The exact six-current replacement remainder has the faster logistic weight
+`x^(23/4)(1-x)^(3/4)`.  A 100-decimal Arb cover uses 768 finite `q` panels,
+four subdivisions per half-cell, and an analytic tail from `q=40` based on
+`x(q)<=exp(-q)` and total Peano mass `7/4`.  It certifies
+
+```text
+six-current core contribution <1.1e-5,
+replacement contribution      <2e-15,
+
+complete pre-endpoint core     <1.2e-5.             (11.457.5)
+```
+
+The independent checker uses 120 decimal digits, 1152 finite `q` panels,
+three subdivisions per half-cell, and exact endpoint kernel maxima.  Its
+independent total is also below `1.2e-5`.  No Morse-phase cancellation is
+used in either calculation.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_six_current_core_absolute_peano_interval_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_six_current_core_absolute_peano_interval_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_six_current_core_absolute_peano_interval_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_six_current_core_absolute_peano_interval_gate.py
+```
+
+Pi provenance: every `pi` in (11.457.1)--(11.457.5) is inherited from the
+canonical Fresnel hierarchy or equation-(9) normalization.  The logistic
+coordinate introduces no new occurrence.
+
+Section 11.457 proves only the complete translated A-face pre-endpoint core
+at the saved height.  It does not by itself include the endpoint layer or
+prove any joined post-A estimate.
+
+## 11.458 Complete translated 42-mode A-face assembly
+
+The common certified handoff gives the exact partition
+
+```text
+I_(A,42)=I_(A,42)^core+I_(A,42)^end,
+
+core: 0<x<=x_16,       endpoint: x_16<=x<=1/2.      (11.458.1)
+```
+
+Sections 11.456 and 11.457 use the same equation-(9) normalization and their
+Arb `x_16` balls overlap.  Therefore the triangle inequality gives
+
+```text
+|I_(A,42)|
+ <=|I_(A,42)^core|+|I_(A,42)^end|
+ <0.00364.                                             (11.458.2)
+```
+
+The direct interval sum is
+`[0.0036117723406584 +/- 1.80e-5]`, whose upper edge is below the displayed
+threshold.  Relative to the inherited working target
+`R_after_A<0.0368147039947`, this leaves a certified allowance exceeding
+`0.03317` for every other post-A channel.  This is only budget bookkeeping;
+it does not bound those channels.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_complete_absolute_assembly_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_complete_absolute_assembly_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_complete_absolute_assembly_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_complete_absolute_assembly_gate.py
+```
+
+Pi provenance: Section 11.458 introduces no new `pi`; both summands inherit
+the canonical Fresnel and equation-(9) normalization recorded in their
+dependency gates.
+
+Section 11.458 proves only the complete translated 42-mode A-face channel at
+`t=10^10`.  The zero sector, lower edge, B-owned terms, negative bulk, and
+all other post-A remainders remain outside this assembly.  It does not prove
+`R_after_A`, `R_Dir`, `Q_K-T`, an all-height theorem, or RH.
+
+## 11.459 Exact embedding of the translated A-face channel
+
+Retain the common regulator and cutoff of Section 11.443.  With
+
+```text
+T={622,...,39894},       U={622,...,39936},
+Q=U minus T={39895,...,39936},                     (11.459.1)
+```
+
+the exact edge-translation identities of Section 11.451 are
+
+```text
+C_U,epsilon-C_T,epsilon
+ =-sum_(m in Q) exp(-pi epsilon m^2)exp(-2pi i m s),
+
+h_U,epsilon-h_T,epsilon
+ =-q_epsilon(y)1_(39894.5<y<39936.5).              (11.459.2)
+```
+
+After the exact A-face lift and common-phase removal, their paired channel is
+
+```text
+E_(42,epsilon)(x)
+ =[-sum_(m=39895)^39936 f_(epsilon,x)(m)]
+   -[-integral_(39894.5)^39936.5
+        f_(epsilon,x)(y)dy].                       (11.459.3)
+```
+
+Thus the finite block has coefficient `-1` and the translated strip has
+coefficient `+1`.  They are the two pieces of one analytic channel.  For
+every `M>=B=5122421`, denote its exact lift by
+`mathfrak E_(A,42),epsilon` and define
+
+```text
+mathfrak R_nonA,(M,epsilon)
+ :=mathfrak R_A,(M,epsilon)-mathfrak E_(A,42),epsilon.
+
+mathfrak R_A,(M,epsilon)
+ =mathfrak E_(A,42),epsilon
+  +mathfrak R_nonA,(M,epsilon).                    (11.459.4)
+```
+
+The lifted channel is independent of `M` once `M>=B`: its finite support
+ends at `39936` and its continuous strip is compact.  This is a decomposition
+of the existing common-regulator remainder, not another coefficient
+deletion.  The six-class mask is unchanged, and modes `39895..39936` retain
+
+```text
+P_-m+B_m+B_-m.                                     (11.459.5)
+```
+
+No positive full-line or A-endpoint atom is reintroduced.
+
+It remains to justify the physical Abel passage in (11.459.4).  The Gaussian
+regulator tends uniformly to one on the finite strip.  On
+`0<x<=x_16`, Section 11.454 writes the exact amplitude as a six-current sum
+whose retained terms are `O(x)` and whose remainder is `O(x^6)`, uniformly
+on that strip.  Hence the physical density has the integrable lower-endpoint
+majorant
+
+```text
+x^(-5/4)(1-x)^(-1/4)O(x)=O(x^(-1/4)).              (11.459.6)
+```
+
+The interval `x_16<=x<=1/2` is compact.  Dominated convergence and the
+inherited order `M to infinity` followed by `epsilon down to zero` therefore
+give
+
+```text
+R_after_A=I_(A,42)+R_nonA.                         (11.459.7)
+```
+
+Here the non-A limit exists as the difference of the already defined
+`R_after_A` limit and the dominated A-face limit.  Section 11.458 now yields
+the rigorous sufficient condition
+
+```text
+|R_nonA|<0.0368147039947-0.00364
+        =0.0331747039947                            (11.459.8)
+```
+
+for the inherited upper target on `R_after_A`.  Equation (11.459.8) is a
+target, not a proved estimate.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_fixed_regulator_embedding_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_fixed_regulator_embedding_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_fixed_regulator_embedding_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_A_face_fixed_regulator_embedding_gate.py
+```
+
+Pi provenance: Section 11.459 introduces no new occurrence of `pi`.
+Equations (11.459.2)--(11.459.3) inherit the Gaussian Abel/Fourier and
+canonical Fresnel/Kummer normalizations from their exact dependency gates.
+
+Section 11.459 proves the fixed-regulator A-face embedding, unchanged
+coefficient ownership, physical Abel-zero split, and sufficient non-A target
+at `t=10^10` only.  It does not bound the non-A complement, prove joined
+`R_after_A`, `R_Dir`, or `Q_K-T`, establish an all-height theorem, or imply RH.
+
+## 11.460 Non-A common kernel and finite quadratic-theta current
+
+For one common `M>=B=5122421` and `epsilon>0`, write the finite non-A kernel
+from Section 11.459 as
+
+```text
+mathfrak K_nonA,(M,epsilon)
+ =mathfrak R_A,(M,epsilon)-mathfrak E_(A,42),epsilon. (11.460.1)
+```
+
+Its coefficient-mask evaluator is
+
+```text
+H_x+I_0
+ +sum_(m=1)^621       w_m(P_m+P_-m+A_m+A_-m+B_m+B_-m)
+ +sum_(m=622)^39852   w_m(P_-m+A_m+A_-m+B_m+B_-m)
+ +sum_(m=39853)^39936 w_m(P_-m+B_m+B_-m)
+ +sum_(m=39937)^M     w_m(P_m+P_-m+A_m+A_-m+B_m+B_-m)
+ -chi_W Btr_(M,epsilon)-O_(M,epsilon)
+ -mathfrak E_(A,42),epsilon.                        (11.460.2)
+```
+
+The two 42-mode A-window rows combine in (11.460.2) because their surviving
+coefficient vectors are identical.  This is a display compression, not a
+new ownership change.
+
+With `U={622,...,39936}`, the exactly equivalent extended-notch evaluator is
+
+```text
+H_x+integral_0^L f_x(u)[D_(M,epsilon)-G_(U,epsilon)]du
+ +sum_(m=622)^39852 w_m(A_m+B_m)
+ +sum_(m=39853)^39936 w_m(B_m-A_-m)
+ -chi_W Btr_(M,epsilon)-O_(M,epsilon)
+ -mathfrak E_(A,42),epsilon.                        (11.460.3)
+```
+
+The two-jet form is likewise
+
+```text
+H_x+E_x+2pi i sum_(m=1)^M m w_m
+       [hat Phi_x(m)-hat Phi_x(-m)]
+ -sum_(m=622)^39936 w_m P_m
+ -sum_(m=39853)^39936 w_m(A_m+A_-m)
+ -chi_W Btr_(M,epsilon)-O_(M,epsilon)
+ -mathfrak E_(A,42),epsilon.                        (11.460.4)
+```
+
+The pair series in (11.460.4) is absolutely and uniformly convergent after
+the two endpoint jets are removed.  The inherited raw derivative majorant
+does not meet the numerical target, so (11.460.4) is retained as an exact
+cross-check rather than used for a termwise norm.
+
+The source term in (11.460.3) folds to one periodic cell:
+
+```text
+integral_0^L f_x(u)C_(U,M,epsilon)(u)du
+ =integral_0^1 F_x(s)C_(U,M,epsilon)(s)ds,           (11.460.5)
+
+F_x(s)=sum_(n=0)^(L-1)(A+2n+2s)
+       exp[i pi x(A+2n+2s)^2/4],
+L=2481422.                                           (11.460.6)
+```
+
+At fixed positive regulator, the `M` limit of `C_U` has the pole-free
+centred-cell representation and certified cubic dual tail of Section 11.450.
+The remaining long source current is an incomplete quadratic Gauss sum and
+its first moment.  Define
+
+```text
+S_0=sum_(n=0)^(L-1) exp[i pi x{n^2+n(A+2s)}],
+S_1=sum_(n=0)^(L-1) n exp[i pi x{n^2+n(A+2s)}].      (11.460.7)
+```
+
+The exact identity
+
+```text
+(A+2n+2s)^2/4
+ =(A+2s)^2/4+n^2+n(A+2s)                            (11.460.8)
+```
+
+gives
+
+```text
+F_x(s)=exp[i pi x(A+2s)^2/4]
+       [(A+2s)S_0+2S_1].                            (11.460.9)
+```
+
+For a direct recurrence oracle, if `z_n` is the summand of `S_0`, then
+
+```text
+z_(n+1)/z_n=exp[i pi x(A+2n+2s+1)],
+
+(z_(n+2)/z_(n+1))/(z_(n+1)/z_n)=exp(2pi i x).       (11.460.10)
+```
+
+Only the initial value and the first two ratios require transcendental
+evaluation.  Both `S_0` and `S_1` then follow by multiplication and
+accumulation.  The removable zero-`x` value is
+
+```text
+F_0(s)=L(A+2s+L-1).                                  (11.460.11)
+```
+
+Equations (11.460.7)--(11.460.11) supply a deterministic reference oracle
+for a fast incomplete quadratic-Gauss recursion.  Such a fast evaluator,
+its error theorem, and the physical `x,s` quadrature are not yet supplied.
+The target remains
+
+```text
+|R_nonA|<0.0331747039947.                            (11.460.12)
+```
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_common_kernel_theta_current_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_common_kernel_theta_current_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_common_kernel_theta_current_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_common_kernel_theta_current_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.460 is inherited from the original
+Kummer quadratic phase, Fourier character, Gaussian Abel regulator, and
+Poisson normalization.  The phase factorization adds no fitted occurrence.
+
+Section 11.460 proves exact saved-height coefficient-mask, extended-notch,
+two-jet, one-cell, and quadratic-theta-current forms only.  It does not prove
+a fast-evaluator error theorem, physical quadrature, the non-A bound, joined
+`R_after_A`, `R_Dir`, or `Q_K-T`, an all-height theorem, or RH.
+
+## 11.461 Validated reference evaluator and exact rational-phase compression
+
+The O(`L`) reference evaluator for (11.460.7)--(11.460.10) retains the two
+multiplicative recurrences
+
+```text
+z_(n+1)=z_n r_n,
+r_(n+1)=r_n exp(2pi i x).                           (11.461.1)
+```
+
+For deterministic rational inputs `x,s`, the implementation reduces every
+initial phase modulo two and reseeds `z_n,r_n` from their exact rational
+phases at the start of each 256-term block.  It then uses separate blockwise
+faithful sums for the real and imaginary parts of `S_0,S_1`.  Thus no
+large unreduced phase is passed to a platform trigonometric function.
+
+There is an independent full-roster oracle at rational phases.  Direct
+subtraction of the quadratic exponents gives
+
+```text
+z_(n+P)/z_n
+ =exp(i pi[2xPn+xP(P+A+2s)]).                      (11.461.2)
+```
+
+Consequently
+
+```text
+xP in Z,
+xP(P+A+2s) in 2Z                                  (11.461.3)
+```
+
+are sufficient for `P` to be a period.  If `L=kP+R`, define one-cycle and
+partial-cycle moments
+
+```text
+Z_0=sum_(j=0)^(P-1) z_j,
+Z_1=sum_(j=0)^(P-1) j z_j,
+Z_(0,R)=sum_(j=0)^(R-1) z_j,
+Z_(1,R)=sum_(j=0)^(R-1) j z_j.                    (11.461.4)
+```
+
+Then exact arithmetic progression summation gives
+
+```text
+S_0=kZ_0+Z_(0,R),
+
+S_1=P k(k-1)Z_0/2+kZ_1+kP Z_(0,R)+Z_(1,R).        (11.461.5)
+```
+
+The original weighted current has the same period in its phase and an
+affine weight in the cycle number, so the analogous formula applies directly
+to `F_x(s)`.  This checks the factorized current independently of the
+two-ratio loop and compresses a full `L=2481422` roster to one short residue
+cycle.
+
+Four nonperiodic rosters of lengths through 4096 were compared with direct
+90-digit phase evaluation.  Seven full rosters were compared with the
+100-digit periodic oracle at exact rational test pairs.  Their minimal
+periods range from 1 to 4096.  All eleven rows pass a declared forward-error
+allowance of `2e-10` relative to the corresponding absolute term mass; the
+largest observed normalized discrepancies are
+
+```text
+S_0: 2.5759437323653976e-13,
+S_1: 3.8961094360530305e-13,
+F:   2.5775566733259217e-13.                       (11.461.6)
+```
+
+The denominator in (11.461.6) is an absolute term mass, not the possibly
+small signed sum.  Hence these comparisons validate this implementation as
+an audit oracle and detect long-run phase drift; they are not a uniform
+floating-error theorem on the physical square.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_reference_evaluator_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_reference_evaluator_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_reference_evaluator_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_reference_evaluator_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.461 is the Kummer/Fourier phase
+already present in Section 11.460.  Equations (11.461.2)--(11.461.5) use only
+its ordinary period and introduce no fitted or geometric constant.
+
+Section 11.461 proves the exact rational-period and cycle identities and
+validates one floating O(`L`) implementation on eleven deterministic rows.
+It does not prove a uniform floating-error theorem, an interval theta
+evaluator, a sublinear incomplete-Gauss algorithm, physical quadrature, the
+non-A bound, joined `R_after_A`, `R_Dir`, or `Q_K-T`, an all-height theorem,
+or RH.
+
+## 11.462 Poisson self-duality of the folded source current
+
+Set `K=L-1=2481421`, `c=A+2s`, and
+
+```text
+a=xc/2,                    b=x/2,
+
+F(K,j;a,b)
+ =K^(-j) sum_(n=0)^K n^j exp(2pi i[an+bn^2]).       (11.462.1)
+```
+
+Then the two sums in Section 11.460 are exactly
+
+```text
+S_0=F(K,0;a,b),              S_1=K F(K,1;a,b).      (11.462.2)
+```
+
+Thus only the moments `j=0,1` of the truncated-theta algorithm of
+[Hiary](https://arxiv.org/abs/0711.5002v4) are required.  On the physical
+range `0<x<=1/2`, one has `0<b<=1/4` before any transformation.  The exact
+integer/half-integer phase periodicities normalize each later pair to
+`0<=a<1`, `0<=b<=1/4`.  Consequently
+
+```text
+q=floor(a+2bK)<=(K+1)/2.                            (11.462.3)
+```
+
+Every main transform therefore contracts the index length.  Eight exact
+rational traces terminate at a direct short sum or the small-`b`
+Euler--Maclaurin/linear branch in at most three main transforms.  This
+certifies the parameter map and contraction only; the endpoint-complete
+remainder algorithm has not yet been imported or rederived.
+
+The folded source current has an additional exact cancellation.  Insert a
+Poisson frequency `v` directly in the full phase and write
+
+```text
+phi(n;v)=x(c+2n)^2/4-2vn.                           (11.462.4)
+```
+
+Its stationary point, current amplitude, and stationary value are
+
+```text
+n_v=v/x-c/2,
+c+2n_v=2v/x,
+phi(n_v;v)=cv-v^2/x.                               (11.462.5)
+```
+
+The large constant phase therefore cancels exactly.  Completing each
+stationary Gaussian gives the pure absolute-dual first moment
+
+```text
+F_saddle(x,s)
+ =2 exp(i*pi/4)x^(-3/2)
+   sum_(ceil(xc/2)<=v<=floor(xc/2+xK))
+     v exp(i*pi[cv-v^2/x]).                         (11.462.6)
+```
+
+There is no independent zeroth-order dual current in (11.462.6).  After
+reindexing `v=p+r`, its two ordinary theta moments occur only through the
+tied combination `pF_0+NF_1`, where `N=q-p`.  They must not be estimated
+separately.
+
+The same cancellation in normalized coordinates reads
+
+```text
+F(K,0)=C_0 F(q,0;a*,b*)+R_0,
+
+F(K,1)
+ =C_0[qF(q,1;a*,b*)-aF(q,0;a*,b*)]/(2bK)+R_1,
+
+cS_0+2S_1
+ =C_0[(c-a/b)F(q,0)+(q/b)F(q,1)]
+  +cR_0+2KR_1.                                     (11.462.7)
+```
+
+Here `R_0,R_1` denote the endpoint and nonstationary terms of one complete
+Poisson step.  Equation (11.462.7) identifies their required joined
+ownership as `cR_0+2KR_1`.
+
+A floating route scout compared the completed saddle sum alone with the
+validated O(`L`) reference evaluator at six rational phase pairs.  The dual
+roster ranged from 2 to 1,240,710 terms.  The omitted endpoint-plus-
+nonstationary channel had size between
+
+```text
+4.4706067228776397e-7 and 8.189979484494224e-7       (11.462.8)
+```
+
+relative to absolute source term mass.  At `x=1/2,s=0`, it overwhelms the
+small signed reference current.  These are diagnostic values, not error
+bounds.  They reject a saddle-only implementation and make the next
+obligation precise: specialize and validate the complete tied remainder in
+(11.462.7), including the small-`b` Euler--Maclaurin branch.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_poisson_current_self_duality_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_poisson_current_self_duality_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_poisson_current_self_duality_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_poisson_current_self_duality_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.462 comes from the Kummer quadratic
+phase and the inherited integer Fourier character.  No fitted or geometric
+occurrence is introduced.
+
+Section 11.462 proves the exact theta-moment mapping, phase normalization,
+index contraction, and completed stationary-current self-duality.  It does
+not supply `R_0,R_1`, a complete fast theta evaluator, a uniform or interval
+error theorem, physical quadrature, the non-A bound, joined `R_after_A`,
+`R_Dir`, or `Q_K-T`, an all-height theorem, or RH.
+
+## 11.463 Endpoint-complete Mordell one-step current
+
+For `tau=x/2>0`, put `a=tau c`, where `c=A+2s`, and write
+
+```text
+F_n(a,tau)=sum_(k=0)^n exp(2pi i[ak+tau k^2]),
+
+J_n=exp(i pi a^2/(2tau))
+    [a F_n/tau+(pi i)^(-1)partial_a F_n].           (11.463.1)
+```
+
+Choose the unique integer `r` and reduced phase `z` such that
+
+```text
+a=z+r,                    -1/2<=z<1/2,
+m=floor(2n tau),          w=z/(2tau),
+sigma=-1/(4tau),
+C=exp(i pi/4-i pi z^2/(2tau))/sqrt(2tau).           (11.463.2)
+```
+
+Kuznetsov's Theorem 1 gives exactly
+
+```text
+F_n(a,tau)=F_n(z,tau)=C F_m(w,sigma)+R_(m,n)(z,tau), (11.463.3)
+```
+
+where `R_(m,n)` is a sum of two explicit Mordell integrals.  Differentiate
+(11.463.3) before estimating either theta moment.  The derivative of the
+Gaussian prefactor cancels the reduced `z/tau` part of the source amplitude:
+
+```text
+[a/tau+(pi i)^(-1)partial_z][C F_m(w,sigma)]
+ =C/tau [r F_m(w,sigma)+(2pi i)^(-1)partial_w F_m(w,sigma)]
+ =C/tau sum_(k=0)^m
+       (r+k)exp(2pi i[wk+sigma k^2]).               (11.463.4)
+```
+
+Thus the normalized zeroth and first moments are one absolute-frequency
+first moment.  Indeed, with `v=r+k`,
+
+```text
+(a^2-z^2)/(2tau)+zk/tau-k^2/(2tau)
+ =(a/tau)v-v^2/(2tau),                              (11.463.5)
+```
+
+so (11.463.4), after multiplying by the outer phase in (11.463.1), is the
+pure dual current of (11.462.6).
+
+For the endpoint term define
+
+```text
+u_-=z-tau+1/2,
+u_+=z+(2n+1)tau-m-1/2,
+E_-=exp[-pi i(z-tau/2)],
+E_+=exp[2pi i(n+1/2){z+tau(n+1/2)}].                (11.463.6)
+```
+
+Direct differentiation of Kuznetsov's stated remainder yields the joined
+identity
+
+```text
+J_endpoint=exp(i pi a^2/(2tau))(-i/2){
+ E_-[(a/tau-1)h(u_-,-2tau)+h_z(u_-,-2tau)/(pi i)]
+ +(-1)^m E_+[(a/tau+2n+1)h(u_+,-2tau)
+              +h_z(u_+,-2tau)/(pi i)]}.            (11.463.7)
+```
+
+Equations (11.463.4) and (11.463.7) are an endpoint-complete exact modular
+step for the physical current.  In particular, the old `cR_0+2KR_1`
+ownership is now represented by one pair of joined `h,h_z` expressions and
+is never split into separately bounded moments.
+
+Two 90-digit short rows check (11.463.4)+(11.463.7) against direct sums; the
+largest absolute discrepancy is
+
+```text
+3.79161294924389047227623641004e-88.                (11.463.8)
+```
+
+At the full `L=2481422` roster, the `x=1/2,s=0` and `x=2/5,s=1/3` rows agree
+with the validated O(`L`) source oracle to at worst
+
+```text
+1.0258208639662034e-16                              (11.463.9)
+```
+
+relative to absolute source term mass.  The transformed weighted sums also
+agree with independent exact rational-period compression (periods `2` and
+`6`) to at worst `6.121841430281607e-17` of transformed absolute weight.
+The Mordell values and derivatives are stable between 60- and 90-digit
+rotated-integral evaluations to `3.512225147644066e-61` in this roster.
+These are diagnostic comparisons, not interval enclosures.  The
+`x=1/2,s=0` row has main-plus-endpoint condition ratio
+`3.734730529550561e6`, so future error propagation must retain their joined
+cancellation.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_endpoint_complete_current_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_endpoint_complete_current_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_endpoint_complete_current_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_endpoint_complete_current_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.463 is inherited from the quadratic
+Fourier phase or from Kuznetsov's exact Mordell identity.  No fitted or
+geometric constant is inserted.
+
+Section 11.463 proves the endpoint-complete one-step current identity and
+the rational transformed-period formulas.  It does not prove a certified
+Mordell `h,h_z` evaluator, the small-`tau` Euler--Maclaurin branch, recursive
+interval control, physical quadrature, the non-A bound, joined `R_after_A`,
+`R_Dir`, or `Q_K-T`, an all-height theorem, or RH.
+
+## 11.464 Certified central Mordell tails and full one-step interval rows
+
+Put `theta=exp(i*pi/4)`.  Kuznetsov's rotated Mordell representation is
+
+```text
+h(z,tau)=2 theta integral_0^infinity exp(-pi tau y^2)
+          cosh(2pi z theta y)/cosh(pi theta y) dy.   (11.464.1)
+```
+
+For real `|z|<=1/2`, set `u=pi y/sqrt(2)`.  The exact identities
+
+```text
+|cosh(a+ib)|^2=sinh(a)^2+cos(b)^2,
+|sinh(a+ib)|^2=sinh(a)^2+sin(b)^2                  (11.464.2)
+```
+
+imply
+
+```text
+|cosh(2pi z theta y)/cosh(pi theta y)|<=coth(u),
+|sinh(2pi z theta y)/cosh(pi theta y)|<=coth(u).   (11.464.3)
+```
+
+Because `coth` decreases on the positive real axis, the tails after a cutoff
+`Y>0` in (11.464.1) and its `z` derivative obey the uniform bounds
+
+```text
+T_h(Y,tau)
+ <=coth(pi Y/sqrt(2))*erfc(sqrt(pi tau)Y)/sqrt(tau),
+
+T_hz(Y,tau)
+ <=2*coth(pi Y/sqrt(2))*exp(-pi tau Y^2)/tau.       (11.464.4)
+```
+
+There is no asymptotic or fitted constant in (11.464.4).  Arb/ACB encloses
+the finite segments on `[0,Y]`; each tail disk is enlarged to a containing
+real-imaginary rectangle.  Exact Mordell unit recurrences transport arguments
+outside `|z|<=1/2`, and conjugation transports negative `tau`.
+
+At `L=2481422`, production balls use 320 bits, `Y=10`, and absolute integral
+tolerance `1e-55`.  For both `x=1/2,s=0` and `x=2/5,s=1/3`, the complete
+one-step current from (11.463.4)+(11.463.7) overlaps an independently enclosed
+exact rational-period source current, and the corresponding difference ball
+contains zero.  The transformed periods are `2,6`; the source periods are
+`4,15`.  The largest certified quantities are
+
+```text
+complete-current radius / source absolute mass
+ <=2.77496430578298726880530328172e-60,
+
+Mordell h tail
+ <=2.1087487593897386755726628813e-56,
+
+Mordell h_z tail
+ <=1.33019665275897183720721926882e-54.            (11.464.5)
+```
+
+The worst main-plus-endpoint condition ratio is
+`3734933.28525266563519835472107`.  This large ratio remains a compulsory
+cancellation guard: neither current may be bounded separately in later
+parameter-box work.
+
+The independent checker repeats the complete construction at 384 bits,
+`Y=11`, and tolerance `1e-65`, and independently checks the Gaussian tail
+antiderivatives.  Both production rows overlap their stricter replays and
+retain the source/current zero-containing difference test.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_interval_one_step_current_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_interval_one_step_current_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_interval_one_step_current_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_interval_one_step_current_gate.py
+```
+
+Primary-source boundary: (11.464.1) and the exact unit recurrence come from
+Alexey Kuznetsov, *Computing the truncated theta function via Mordell
+integral*, arXiv:1306.4081v2.  Equations (11.464.2)--(11.464.4) are derived
+here.  The paper's practical Gauss--Laguerre rule is not used.
+
+Pi provenance: every `pi` in Section 11.464 comes from the inherited
+quadratic Fourier phase or the exact rotated Mordell representation.  No
+circle or polygon constant is inserted independently.
+
+Section 11.464 proves the uniform central-strip tails (11.464.4) and certifies
+two full-roster pointwise interval rows.  It does not prove a uniform
+parameter-box evaluator, the small-`tau` branch, recursive interval control,
+physical quadrature, the non-A bound, joined `R_after_A`, `R_Dir`, `Q_K-T`,
+an all-height theorem, `Lambda<=0`, PF-infinity, RH, or a prize-level
+conclusion.
+
+## 11.465 Mordell parameter boxes and the direct phase-scale barrier
+
+Let `Z=[z_-,z_+]` be a real interval contained in `[-1/2,1/2]`, and let
+`T=[tau_-,tau_+]` with `tau_->0`.  Substitution of the Arb balls `Z,T` in
+the rotated integral (11.464.1) encloses the complete finite segments for
+`h(Z,T)` and `h_z(Z,T)`.  Since both analytic tails decrease with `tau`, the
+uniform remainder is obtained by evaluating (11.464.4) at `tau_-`:
+
+```text
+T_h(Z,T;Y)
+ <=coth(pi Y/sqrt(2))*erfc(sqrt(pi tau_-)Y)/sqrt(tau_-),
+
+T_hz(Z,T;Y)
+ <=2*coth(pi Y/sqrt(2))*exp(-pi tau_- Y^2)/tau_-.   (11.465.1)
+```
+
+If a target interval crosses a half integer, partition it at every such
+wall.  A single exact unit recurrence is then valid on each closed piece;
+the resulting complex balls are joined by interval hull.  The shared wall
+is admitted by both exact representations, so this is a cover rather than a
+one-sided sampling convention.                                  (11.465.2)
+
+At 320 bits, `Y=10`, and absolute integration tolerance `1e-55`, three
+target boxes of width `0.002` are certified, including one crossing `z=1/2`.
+All 27 rigorous corner/midpoint point balls are contained in their parent
+boxes.  The largest complex radii are
+
+```text
+rad h   <=0.01045107631944119930267333984375,
+rad h_z <=0.0419043576694093644618988037109375.     (11.465.3)
+```
+
+The physical map is boxed only while the discrete quantities
+
+```text
+r=nearest(x(A+2s)/2),        m=floor(Kx)             (11.465.4)
+```
+
+remain fixed with positive exact rational margins.  This certifies two
+joined endpoint-current boxes.  The corner box crosses the Mordell wall in
+both endpoint arguments, and the partition (11.465.2) supplies two branches
+for each without changing `r` or `m`.
+
+To test a complete current while retaining centre cancellation, write
+
+```text
+T(w,sigma)=sum_(k=0)^m (r+k)exp(2pi i[wk+sigma k^2]),
+
+w=(A+2s)/2-r/x,       sigma=-1/(2x),
+q=2/x^(3/2),          phi=1/4+r(A+2s)-r^2/x.        (11.465.5)
+```
+
+At an exact rational centre, `T_0` is enclosed by exact period compression.
+For a branch-stable box, the chord inequality gives the rigorous variation
+
+```text
+|T-T_0|<=2pi(delta_w S_1+delta_sigma S_2),
+
+S_1=sum_(k=0)^m(r+k)k,
+S_2=sum_(k=0)^m(r+k)k^2.                            (11.465.6)
+```
+
+The prefactor `q exp(i pi phi)` is propagated as one ball, and (11.465.6) is
+added to the exact centre before joining the interval endpoint currents.
+Thus the large main and endpoint centre values cancel before the variation
+radius is charged.  At half-width `10^-28`, the `x=1/2,s=0` and
+`x=2/5,s=1/3` full-roster complete-current boxes both contain their
+independently enclosed exact centre source currents.  Their largest absolute
+radius is
+
+```text
+0.0067461658982210792601108551025390625.            (11.465.7)
+```
+
+The same proved variation formula was evaluated at half-widths
+`10^-12,10^-16,10^-20,10^-24,10^-28`.  At width `10^-24`, its smaller main
+variation bound is already
+
+```text
+42.66662147212760913816964603029191493988.          (11.465.8)
+```
+
+At width `10^-28`, the two bounds are approximately `0.00427` and `0.00477`.
+Consequently, direct source-length first-difference boxes are rejected as a
+physical tiling strategy.  This is a barrier for (11.465.6), not an
+impossibility theorem for all interval methods.  A scalable evaluator must
+first use the exact Mordell transform to contract the active theta length,
+then propagate parameter boxes through the shorter transformed current and
+the joined endpoints.
+
+The independent checker repeats every parameter box at 384 bits, `Y=11`,
+and tolerance `1e-65`; replays four subdivisions of each target box; verifies
+the polynomial moment identities in (11.465.6); and reproduces the strict
+five-width scale ordering.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_parameter_box_phase_scale_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_parameter_box_phase_scale_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_parameter_box_phase_scale_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_parameter_box_phase_scale_gate.py
+```
+
+Primary-source boundary: the rotated Mordell representation and exact unit
+recurrence are from Alexey Kuznetsov, *Computing the truncated theta function
+via Mordell integral*, arXiv:1306.4081v2.  The interval substitution, wall
+partition, physical branch guards, and phase-scale audit are derived here.
+The practical Gauss--Laguerre route is not used.
+
+Pi provenance: every `pi` in Section 11.465 comes from the inherited
+quadratic Fourier phase or the rotated Mordell representation.  No fitted
+circle or polygon constant is introduced.
+
+Section 11.465 proves the three Mordell target boxes, exact recurrence-wall
+partition, two physical joined endpoint boxes, and two width-`10^-28`
+complete-current boxes.  It rejects only the recorded direct source-length
+first-difference tiling strategy.  It does not prove scalable current boxes,
+the small-`tau` branch, recursive interval control, physical quadrature, the
+non-A bound, joined `R_after_A`, `R_Dir`, `Q_K-T`, an all-height theorem,
+`Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+## 11.466 Affine-weighted Mordell recursion and full second steps
+
+For real `p,a,tau`, define the affine-weighted truncated theta current
+
+```text
+W_n(p;a,tau)
+ =sum_(k=0)^n (p+k)exp(2pi i[ak+tau k^2]).          (11.466.1)
+```
+
+Let `tau>0`, choose `a=z+r` with `-1/2<=z<1/2`, and put
+
+```text
+m=floor(2n tau),        w=z/(2tau),
+sigma=-1/(4tau),
+C=exp(i*pi/4-i*pi*z^2/(2tau))/sqrt(2tau).           (11.466.2)
+```
+
+Write `D_a=(2pi i)^(-1)partial_a`.  Since
+
+```text
+D_a[C F_m(w,sigma)]
+ =C[-z F_m/(2tau)+D_w F_m/(2tau)],                 (11.466.3)
+```
+
+differentiating Kuznetsov's exact identity before estimating gives
+
+```text
+W_n(p;a,tau)
+ =C/(2tau)W_m(2tau p-z;w,sigma)+E_n(p;a,tau).       (11.466.4)
+```
+
+Thus the affine family is closed by the Mordell step and the child weight is
+
+```text
+p'=2tau p-z.                                        (11.466.5)
+```
+
+With `u_-,u_+,E_-,E_+` as in (11.463.6), direct differentiation of both
+endpoint terms gives the complete companion
+
+```text
+E_n(p;a,tau)=-i/4{
+ E_-[(2p-1)h(u_-,-2tau)+h_z(u_-,-2tau)/(pi i)]
+ +(-1)^m E_+[(2p+2n+1)h(u_+,-2tau)
+                    +h_z(u_+,-2tau)/(pi i)]}.       (11.466.6)
+```
+
+The physical first step in Section 11.463 is recovered by taking
+`p=a/(2tau)`, because then (11.466.5) equals the nearest-integer shift `r`.
+
+Before every later step, the following exact symmetries normalize the phase:
+
+```text
+W_n(p;a+j,tau+l)=W_n(p;a,tau),             j,l integers,
+
+W_n(p;a+1/2,tau-1/2)=W_n(p;a,tau),
+
+W_n(p;a,-tau)=conjugate(W_n(p;-a,tau)).             (11.466.7)
+```
+
+The half-shift identity follows because `(k-k^2)/2` is integral.  Equations
+(11.466.7) give `-1/2<=a<1/2` and `0<=tau<=1/4` without changing `p`.
+
+Four short rational rows certify (11.466.4)--(11.466.6) against independent
+exact-period currents.  On the full `x=2/5,s=1/3` row, the first transformed
+current normalizes as
+
+```text
+W_992568(31916;-7/6,-5/4)
+ =conjugate(W_992568(31916;1/6,1/4)).                (11.466.8)
+```
+
+The second Mordell step then has
+
+```text
+m'=496284,        p'=95747/6,
+w'=1/3,           sigma'=-1.                        (11.466.9)
+```
+
+It strictly halves the active index, and its child has exact period three.
+After conjugation, restoration of the first multiplier, and addition of the
+first joined endpoint current, the resulting complete-current ball overlaps
+the independent source-current ball and their difference contains zero.
+
+At `x=1/2,s=0`, exact normalization instead gives
+
+```text
+W_1240710(39894;1/2,-1)
+ =W_1240710(39894;-1/2,0).                          (11.466.10)
+```
+
+This is an alternating affine sum of period two.  The centre therefore
+terminates exactly and no formula divides by `tau=0`.  Any nonzero
+neighbourhood includes very small positive normalized `tau`, so this exact
+terminal point does not replace the still-open small-`tau` box branch.
+
+At 320 bits, `Y=10`, and tolerance `1e-55`, both full two-level source
+differences contain zero.  The larger difference-ball radius is
+
+```text
+5.792175785049672968251976117642415829888e-47.       (11.466.11)
+```
+
+The independent checker replays all short and full rows at 384 bits, `Y=11`,
+and tolerance `1e-65`; verifies the parity normalization independently; and
+reproduces the interior contraction, child weight, period-three leaf, and
+period-two terminal branch.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_affine_weighted_second_step_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_affine_weighted_second_step_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_affine_weighted_second_step_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_affine_weighted_second_step_gate.py
+```
+
+Primary-source boundary: Kuznetsov's exact theta/Mordell identity supplies the
+unweighted transform and endpoint functions.  Equations
+(11.466.3)--(11.466.7), the affine endpoint coefficients, and their recursion
+are derived here.  Practical Gauss--Laguerre quadrature is not used.
+
+Pi provenance: every `pi` in Section 11.466 comes from the inherited
+quadratic Fourier phase, the differential normalization `D_a`, or the exact
+Mordell representation.  No fitted circle or polygon constant is introduced.
+
+Section 11.466 proves the affine-weighted exact recurrence, four short
+interval rows, one contracting full pointwise second step, and one exact
+`tau=0` terminal full row.  It does not prove recursive parameter boxes, a
+small-`tau` neighbourhood branch, physical quadrature, the non-A bound,
+joined `R_after_A`, `R_Dir`, `Q_K-T`, an all-height theorem, `Lambda<=0`,
+PF-infinity, RH, or a prize-level conclusion.
+
+## 11.467 A one-sided small-tau alternating Taylor box
+
+Retain the affine current (11.466.1), and consider the one-sided physical
+corner
+
+```text
+x in [1/2-epsilon,1/2],       s in [0,epsilon].       (11.467.1)
+```
+
+On this box the first transformed index and affine weight are fixed:
+
+```text
+n=1240710,                    p=r=39894.              (11.467.2)
+```
+
+If `w,sigma` are the first transformed phase parameters, conjugation followed
+by the integer curvature shift gives the exact continuous normalization
+
+```text
+W_n(p;w,sigma)=conjugate(W_n(p;a,t)),
+a=-w=p/x-(A+2s)/2,
+t=-sigma-1=1/(2x)-1.                                  (11.467.3)
+```
+
+Thus `(a,t)=(-1/2,0)` at the corner and `t>=0` throughout (11.467.1).  The
+raw `a` coordinate is not reduced modulo one, avoiding an artificial branch
+jump at `a=-1/2`.
+
+Put `alpha=a+1/2`.  Since
+
+```text
+exp(2pi i[-k/2])=(-1)^k,
+M_j=sum_(k=0)^n (-1)^k(p+k)k^j,                       (11.467.4)
+```
+
+Taylor expansion at the exact alternating terminal gives
+
+```text
+W_n(p;a,t)
+ =M_0+2pi i(alpha M_1+t M_2)+R_2.                     (11.467.5)
+```
+
+For real `d`, Taylor's integral remainder is
+
+```text
+exp(id)-1-id=-d^2 integral_0^1 (1-u)exp(iud)du,
+```
+
+so `|exp(id)-1-id|<=d^2/2`.  With
+
+```text
+delta_a=max |alpha|,       t_max=max t,
+S_j=sum_(k=0)^n (p+k)k^j,
+```
+
+termwise application only to this quadratic remainder yields
+
+```text
+|R_2| <= 2pi^2[delta_a^2 S_2
+                +2 delta_a t_max S_3+t_max^2 S_4].    (11.467.6)
+```
+
+The signed constant and linear terms in (11.467.5) are therefore never
+replaced by source-length absolute masses.  Splitting `k` into its even and
+odd residue classes and using exact integer power sums gives
+
+```text
+M_0=660249,
+M_1=794429714775,
+M_2=985657301007258645,                               (11.467.7)
+
+S_2=617807154810712593325515,
+S_3=611640287488092310728887713993,
+S_4=631413024933345447184904722907810667.             (11.467.8)
+```
+
+For `epsilon=10^-22`, the exact parameter extrema are
+
+```text
+delta_a=79788/4999999999999999999999,
+t_max  =1/4999999999999999999999.                     (11.467.9)
+```
+
+At 320 bits, (11.467.5)--(11.467.6) give
+
+```text
+linear-radius bound       < 0.001318266638421672,
+quadratic remainder bound < 0.000000578713470681.      (11.467.10)
+```
+
+The original transformed current is the conjugate in (11.467.3).  Restoring
+the first exact multiplier and the joined endpoint current gives
+
+```text
+P_1=2x^(-3/2)
+    exp(pi i[1/4+r(A+2s)-r^2/x]),
+
+SourceBox=P_1 conjugate(TaylorBox)+EndpointBox.         (11.467.11)
+```
+
+The propagated child-variation bound is below
+`0.007460515933275522`.  Direct interval reassembly with the inherited
+Mordell endpoint boxes gives a complete source-current radius below
+
+```text
+0.010180147306527945,                                  (11.467.12)
+```
+
+and this complete box contains the independent exact period-two source
+current at `(x,s)=(1/2,0)`.  The certified physical half-width is one million
+times the `10^-28` direct first-difference half-width in Section 11.465.
+
+The independent checker verifies every power-sum formula against direct
+finite witnesses, verifies (11.467.7) exactly, audits the Taylor coefficient
+symbolically, and replays the joined endpoint and complete source box at 384
+bits, `Y=11`, and tolerance `1e-65`.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_alternating_taylor_box_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_alternating_taylor_box_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_alternating_taylor_box_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_alternating_taylor_box_gate.py
+```
+
+Primary-source boundary: Kuznetsov's exact theta/Mordell identity supplies the
+inherited first transform and endpoint functions.  Equations
+(11.467.3)--(11.467.11), the alternating Taylor enclosure, and the physical
+corner assembly are derived here.
+
+Pi provenance: `2pi` in (11.467.4)--(11.467.6) comes directly from the phase
+convention `e(u)=exp(2pi i u)` in (11.466.1); the remaining `pi` in
+(11.467.11) is inherited from the exact first Mordell multiplier.  No fitted
+circle or polygon constant is introduced.
+
+Section 11.467 proves one one-sided width-`10^-22` small-`tau` affine-current
+box, its continuous exact period-two terminal join, and one complete
+source-current box at the physical corner.  It does not prove a uniform
+small-`tau` branch away from that corner, recursive interior parameter boxes,
+physical quadrature, the non-A bound, joined `R_after_A`, `R_Dir`, `Q_K-T`, an
+all-height theorem, `Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+## 11.468 The right side of the affine Mordell normalization wall
+
+Consider the one-sided physical box
+
+```text
+x in [2/5,2/5+epsilon],
+s in [1/3-epsilon,1/3+epsilon].                       (11.468.1)
+```
+
+The first nearest-integer shift and transformed index remain
+
+```text
+p=r=31916,                   n=992568.                (11.468.2)
+```
+
+After conjugating the negative first curvature and removing integer periods,
+the right branch has the exact normalization
+
+```text
+a=31916/x-(A+2s)/2-1,
+tau=1/(2x)-1,
+
+W_n(31916;w,sigma)=conjugate(W_n(31916;a,tau)).       (11.468.3)
+```
+
+At `x=2/5`, `(a,tau)=(1/6,1/4)` when `s=1/3` and
+
+```text
+floor(2n tau)=496284.                                 (11.468.4)
+```
+
+For every `x>2/5` in a sufficiently small right box, `tau<1/4` and
+
+```text
+floor(2n tau)=496283.                                 (11.468.5)
+```
+
+Thus no closed right neighbourhood has one constant second child index.  It
+must be split into the wall line `x=2/5` and the open-right branch.  The latter
+is bounded on its closed analytic parameter hull, but its identity is asserted
+only for the open physical side; the wall line supplies the excluded endpoint.
+
+On either branch the affine Mordell child parameters are
+
+```text
+p_2=2tau p-a,       a_2=a/(2tau),
+tau_2=-1/(4tau),                                    (11.468.6)
+```
+
+and approach the exact period-three point
+
+```text
+(p_0,a_0,tau_0)=(95747/6,1/3,-1).                   (11.468.7)
+```
+
+Put `omega=exp(2pi i/3)`.  Since
+`exp(2pi i[k/3-k^2])=omega^k`, define the exact residue-class moments
+
+```text
+F_j=sum_(k=0)^m k^j omega^k,
+M_j=sum_(k=0)^m (p_0+k)k^j omega^k.                 (11.468.8)
+```
+
+Every one is represented exactly as `u+v omega`.  For example, on the open
+branch `m=496283`,
+
+```text
+F_0=0,
+F_1=-330856-165428 omega,
+M_0=-330856-165428 omega,
+M_1=-508433859460/3-(254217426014/3)omega,
+M_2=-252327327370706984/3-42054680350313136 omega.
+                                                               (11.468.9)
+```
+
+Writing `rho=p_2-p_0`, `alpha=a_2-a_0`, and
+`beta=tau_2-tau_0`, retain the affine weight exactly through first phase order:
+
+```text
+B_j(rho)=M_j+rho F_j,
+
+W_m(p_2;a_2,tau_2)
+ =B_0(rho)+2pi i[alpha B_1(rho)+beta B_2(rho)]+R_2.  (11.468.10)
+```
+
+If `delta_a=max|alpha|` and `delta_tau=max|beta|`, Taylor's integral
+remainder gives
+
+```text
+|R_2|<=2pi^2[delta_a^2 S_2
+              +2 delta_a delta_tau S_3
+              +delta_tau^2 S_4],                    (11.468.11)
+```
+
+where `S_j=sum_(k=0)^m(p_max+k)k^j`.  Only this quadratic remainder is
+placed under a source-mass absolute value.
+
+For `epsilon=10^-23`, the open-right period-three child deviation in
+(11.468.10)--(11.468.11) is below
+
+```text
+0.000060888942603543.                                (11.468.12)
+```
+
+After both exact Mordell multipliers, its child-variation contribution is
+below
+
+```text
+0.001361518147396044.                                (11.468.13)
+```
+
+The `m=496283` and `m=496284` branches are each assembled with their own
+upper parity, main coefficient, and both joined affine `h,h_z` endpoint
+currents from (11.466.6).  Only the two completed normalized-parent balls are
+then hulled:
+
+```text
+T_right=hull(T_496283,T_496284),
+
+SourceBox=P_1 conjugate(T_right)+Endpoint_1.          (11.468.14)
+```
+
+The two completed branch balls overlap.  At 320 bits, `Y=10`, and tolerance
+`1e-55`, the final physical source-current radius is below
+
+```text
+0.003664947384095286,                                (11.468.15)
+```
+
+and the box contains the independent exact source current at
+`(x,s)=(2/5,1/3)`.
+
+The independent checker verifies all residue power sums against direct finite
+witnesses, derives (11.468.4)--(11.468.5) independently, checks the exact
+period-three base currents on both child lengths, and replays both
+endpoint-complete branches and the final source assembly at 384 bits, `Y=11`,
+and tolerance `1e-65`.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_right_wall_period_three_recursive_box_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_right_wall_period_three_recursive_box_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_right_wall_period_three_recursive_box_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_right_wall_period_three_recursive_box_gate.py
+```
+
+Primary-source boundary: Kuznetsov's exact theta/Mordell identity supplies the
+parent transform and endpoint functions.  The exact floor partition,
+period-three affine Taylor enclosure, branchwise endpoint assembly, and
+right-side physical hull are derived here.
+
+Pi provenance: every `2pi` in (11.468.8)--(11.468.11) comes from the inherited
+phase convention `e(u)=exp(2pi i u)`.  The other `pi` factors occur in the
+exact Mordell multipliers and endpoints.  No fitted circle or polygon constant
+is introduced.
+
+Section 11.468 proves one right-sided width-`10^-23` physical box at the
+`x=2/5` normalization wall, the exact `496283|496284` child-floor split, two
+endpoint-complete affine Mordell branch boxes, and their complete source hull.
+It does not prove the left-side branch, a full two-sided interior
+neighbourhood, recursive tiling, physical quadrature, the non-A bound, joined
+`R_after_A`, `R_Dir`, `Q_K-T`, an all-height theorem, `Lambda<=0`, PF-infinity,
+RH, or a prize-level conclusion.
+
+## 11.469 The two-sided affine Mordell wall box
+
+On the left of `x=2/5`, the right-normalized coordinate (11.468.3) has
+`tau_R>1/4`.  Apply the exact half-shift in (11.466.7) and conjugate the
+resulting negative curvature.  After the final integer `a` period, this gives
+
+```text
+a_L=1/2-a_R=3/2+A/2+s-31916/x,
+tau_L=1/2-tau_R=3/2-1/(2x).                          (11.469.1)
+```
+
+The original transformed current obeys
+
+```text
+W_original=conjugate(W(a_R,tau_R)),
+W(a_R,tau_R)=conjugate(W(a_L,tau_L)),
+
+W_original=W(a_L,tau_L).                             (11.469.2)
+```
+
+Thus the parity half-shift introduces a second conjugation which cancels the
+first.  The left normalized parent is already in the original-current
+orientation.  At the wall its parameters are `(a_L,tau_L)=(1/3,1/4)`.
+
+For every `x<2/5` in the local box,
+
+```text
+floor(2*992568*tau_L)=496283,                         (11.469.3)
+```
+
+while the wall line again has index `496284`.  The left child parameters tend
+to
+
+```text
+(p_0,a_0,tau_0)=(47873/3,2/3,-1).                    (11.469.4)
+```
+
+This is the conjugate period-three phase.  With
+`omega=exp(2pi i/3)`, the base root is `omega^(2k)`.  Conjugating an exact
+pair `u+v omega` gives
+
+```text
+conjugate(u+v omega)=(u-v)-v omega.                   (11.469.5)
+```
+
+The left residue-class moments are therefore exact pairs as well.  On the
+open branch `m=496283`, for example,
+
+```text
+F_0=0,
+F_1=-165428+165428 omega,
+M_0=-165428+165428 omega,
+M_1=-254216350732/3+(254217343300/3)omega,
+M_2=-126163245270298228/3+42054666667101544 omega.
+                                                               (11.469.6)
+```
+
+For `rho=p-p_0`, `alpha=a-a_0`, and `beta=tau-tau_0`, the same
+cancellation-preserving expansion applies:
+
+```text
+B_j(rho)=M_j+rho F_j,
+
+W_m=B_0(rho)+2pi i[alpha B_1(rho)+beta B_2(rho)]+R_2,
+
+|R_2|<=2pi^2[delta_a^2 S_2
+              +2 delta_a delta_tau S_3
+              +delta_tau^2 S_4].                    (11.469.7)
+```
+
+At physical half-width `epsilon=10^-23`, the open-left child deviation is
+below
+
+```text
+0.000060888922792201,                                 (11.469.8)
+```
+
+and its contribution after both Mordell multipliers is below
+
+```text
+0.001361517704400958.                                 (11.469.9)
+```
+
+The open-left `496283` branch and a separate left-wall `496284` branch are
+each completed with their own affine main and joined endpoint currents.  The
+left-wall complete parent overlaps the conjugate of the independently
+certified right-wall complete parent.  Consequently all four original-current
+branches can be hulled only after completion:
+
+```text
+T_two=hull(T_left,open,T_left,wall,
+           conjugate(T_right,wall),
+           conjugate(T_right,open)).                 (11.469.10)
+```
+
+The physical source box is then
+
+```text
+SourceBox=P_1 T_two+Endpoint_1                        (11.469.11)
+```
+
+on the full rectangle
+
+```text
+x in [2/5-10^-23,2/5+10^-23],
+s in [1/3-10^-23,1/3+10^-23].                        (11.469.12)
+```
+
+At 320 bits, `Y=10`, and tolerance `1e-55`, the transformed-current hull has
+radius below `0.000461921`, and the complete physical source-current radius is
+below
+
+```text
+0.005268418157356792.                                 (11.469.13)
+```
+
+The complete box contains the exact source current at `(2/5,1/3)`.
+
+The independent checker derives (11.469.1)--(11.469.3), verifies the
+`omega^2` residue pairs against direct finite witnesses, checks the exact
+left/right wall identity, and replays all four completed parent branches and
+the final source assembly at 384 bits, `Y=11`, and tolerance `1e-65`.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_two_sided_wall_period_three_recursive_box_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_two_sided_wall_period_three_recursive_box_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_two_sided_wall_period_three_recursive_box_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_two_sided_wall_period_three_recursive_box_gate.py
+```
+
+Primary-source boundary: Kuznetsov's exact theta/Mordell identity supplies the
+branchwise transforms and endpoints.  The left parity/double-conjugation map,
+conjugate period-three Taylor enclosure, orientation witness, and four-branch
+physical hull are derived here.
+
+Pi provenance: every `2pi` in (11.469.5)--(11.469.7) comes from the phase
+convention `e(u)=exp(2pi i u)`.  Remaining `pi` factors are inherited from the
+exact Mordell multipliers and endpoint currents.  No fitted circle or polygon
+constant is introduced.
+
+Section 11.469 proves one two-sided width-`10^-23` physical source box across
+the `x=2/5` normalization wall, including both open child branches, both wall
+orientation representations, and all joined endpoint currents.  It does not
+prove recursive tiling beyond this local box, physical quadrature, the non-A
+bound, joined `R_after_A`, `R_Dir`, `Q_K-T`, an all-height theorem,
+`Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+## 11.470 A rational-phase terminal and the first adjacent tile
+
+The period-two terminal in Section 11.467 and the two period-three terminals
+in Sections 11.468--11.469 are instances of one rational-phase statement.  If
+
+```text
+q_0(k)=a_0 k+tau_0 k^2,
+```
+
+then `e(q_0(k))`, with `e(u)=exp(2pi i u)`, has period `P` exactly when
+
+```text
+2 tau_0 P is an integer,
+a_0 P+tau_0 P^2 is an integer.                    (11.470.1)
+```
+
+Indeed, the phase increment at `k` is
+`2 tau_0 P k+a_0 P+tau_0 P^2`.  For rational `(a_0,tau_0)`, condition
+(11.470.1) therefore gives an exact finite residue decomposition.  Define
+
+```text
+F_j=sum_(k=0)^n k^j e(q_0(k)),
+M_j=p_0 F_j+F_(j+1).                               (11.470.2)
+```
+
+Grouping `k` modulo the minimal `P` evaluates every coefficient in
+(11.470.2) as an exact integer or rational multiplying a stored root of
+unity.  This avoids choosing a special parity or `1,omega` basis.
+
+For a parameter box, put `rho=p-p_0`, `alpha=a-a_0`, and
+`beta=tau-tau_0`, and set `B_j=M_j+rho F_j`.  Taylor's formula gives the
+common enclosure
+
+```text
+W_n=B_0+2pi i(alpha B_1+beta B_2)+R_2,             (11.470.3)
+
+|R_2|<=2pi^2[delta_a^2 S_2
+              +2 delta_a delta_tau S_3
+              +delta_tau^2 S_4],                  (11.470.4)
+```
+
+where `S_j=sum_(k=0)^n (p_hi+k)k^j`.  The exact residue implementation
+reproduces the alternating period-two terminal and both conjugate
+period-three terminals.  A separate checker recomputes the residue sums by
+direct classwise loops.
+
+There is a second cancellation before interval evaluation.  On the open
+right and left parents respectively, the affine child weights simplify to
+
+```text
+p_(2,R)=A/2+s+1-2*31916,
+p_(2,L)=3*31916-3/2-A/2-s.                         (11.470.5)
+```
+
+Thus both are independent of `x`.  On the adjacent right tile below, using
+(11.470.5) instead of separately interval-evaluating `2 tau p-a` shrinks the
+child-weight radius by a factor greater than `199475.999999`.
+
+After shifting the child curvature by one integer and conjugating, the two
+open period-three children have positive small-curvature coordinates
+
+```text
+t_R=(5x-2)/(2(1-2x)),
+t_L=(2-5x)/(2(3x-1)).                              (11.470.6)
+```
+
+For the common open child length `n=496283`, the floor walls
+`2n t=q` are therefore
+
+```text
+x_R(q)=(2n+q)/(5n+2q),
+x_L(q)=(2n+q)/(5n+3q).                             (11.470.7)
+```
+
+The first positive walls lie at distances
+
+```text
+x_R(1)-2/5=1/12407085,
+2/5-x_L(1)=1/12407090.                             (11.470.8)
+```
+
+In particular, the adjacent right tile
+
+```text
+x in [2/5+10^-23,2/5+2*10^-23],
+s in [1/3-10^-23,1/3+10^-23]                      (11.470.9)
+```
+
+lies strictly inside the next `m_3=0` branch.  Its normalized small-`t`
+child is enclosed by (11.470.3)--(11.470.4) around
+`(p_0,a_0,tau_0)=(95747/6,-1/3,0)`.  In right-branch orientation the complete
+assembly is
+
+```text
+T_2=C_2 conjugate(T_3)+E_2,
+SourceBox=P_1 conjugate(T_2)+E_1,                  (11.470.10)
+```
+
+where both lower and upper joined Mordell currents are retained in each
+endpoint term.  At 320 bits, `Y=10`, and tolerance `1e-55`, the terminal
+deviation and complete source radius are respectively below
+
+```text
+0.000121779641783427,
+0.003665095791802742.                              (11.470.11)
+```
+
+The source box overlaps the Section 11.469 wall box at their shared boundary.
+The 384-bit, `Y=11`, tolerance-`1e-65` replay independently reconstructs the
+periods, exact residue coefficients, child boxes, two wall formulas, and full
+endpoint assembly.
+
+There is also a negative algorithmic result.  Formally recursing once more
+gives child index zero, but the isolated small-`t` main coefficient has only
+the bound
+
+```text
+|C_3|<3.190621591522e32.                            (11.470.12)
+```
+
+Its cancellation with the small-`t` endpoints must not be destroyed by
+separate absolute estimates.  Direct rational-phase termination preserves
+that cancellation.  Moreover, the first positive floor wall is about
+`8.06e-8` away, over `8.05e15` current tile widths.  Uniform fixed-width
+enumeration is therefore not a viable route to a finite cover; symbolic
+dependency cancellation and adaptive analytic widening are required.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_rational_phase_third_level_adjacent_tile_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_rational_phase_third_level_adjacent_tile_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_rational_phase_third_level_adjacent_tile_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_rational_phase_third_level_adjacent_tile_gate.py
+```
+
+Primary-source boundary: Kuznetsov's exact theta/Mordell identity supplies the
+two endpoint-complete parent transforms.  The generic rational-phase residue
+terminal, exact child-weight cancellation, recursive wall inventory, and
+adjacent source box are derived here.
+
+Pi provenance: every `2pi` in (11.470.1)--(11.470.4) comes from the declared
+phase convention `e(u)=exp(2pi i u)` and Taylor's theorem for that exponential.
+The remaining `pi` factors are inherited from the exact Mordell transform.
+No circle or polygon constant is fitted or inserted.
+
+Section 11.470 proves one generic rational-phase terminal theorem, exact local
+next-wall formulas, and one endpoint-complete adjacent right source tile.  It
+does not prove a finite recursive cover, a useful separately bounded third
+Mordell step, physical quadrature, the non-A bound, joined `R_after_A`,
+`R_Dir`, `Q_K-T`, an all-height theorem, `Lambda<=0`, PF-infinity, RH, or a
+prize-level conclusion.
+
+## 11.471 The mirrored local width crossover
+
+The left open branch admits the same symbolic cancellation as the right.  Its
+second affine weight and normalized small-curvature child are
+
+```text
+p_(2,L)=3*31916-3/2-A/2-s,
+
+a_(3,L)=1-[(3/2+A/2+s)x-31916]/(3x-1),
+t_(3,L)=x/[2(3x-1)]-1.                              (11.471.1)
+```
+
+The raw child is the conjugate of the current at `(a_(3,L),t_(3,L))`.
+Substitution into the affine Mordell identity retains the second main and
+both joined endpoint currents.  The resulting parent is already in the
+original transformed-current orientation by (11.469.2).  Restoring the first
+main and physical endpoint therefore gives an endpoint-complete left source
+box without an orientation hull.
+
+At `(x,s)=(2/5,1/3)`, the cancellation-preserving child Jacobians are
+
+```text
+right: d_x p_2=0, d_s p_2=1,
+       d_x a_3=2393675/6, d_s a_3=2, d_x t_3=25/2,
+
+left:  d_x p_2=0, d_s p_2=-1,
+       d_x a_3=-1196825/3, d_s a_3=-2, d_x t_3=-25/2.
+                                                               (11.471.2)
+```
+
+Thus the remaining local stiffness belongs to the phase coordinates, not to
+the affine weight.
+
+To measure that stiffness with complete currents, fix the `s` half-width and
+the width lattice unit at
+
+```text
+epsilon=10^-23.                                      (11.471.3)
+```
+
+For an integer `M>=2`, define the cumulative right and left tiles
+
+```text
+I_R(M)=[2/5+epsilon,2/5+M epsilon],
+I_L(M)=[2/5-M epsilon,2/5-epsilon].                  (11.471.4)
+```
+
+Every tile uses the rational-phase terminal of Section 11.470 and retains all
+four joined endpoint contributions through the physical source.  With the
+declared diagnostic target `rad(SourceBox)<0.01`, the certified radii are
+
+```text
+right M=2: 0.003665095791802742,
+      M=3: 0.007330240558076184,
+      M=4: 0.010986090419464747,
+
+left  M=2: 0.002987630454299506,
+      M=3: 0.005975298023258802,
+      M=4: 0.008955457247793675,
+      M=5: 0.011950860658544116.                    (11.471.5)
+```
+
+Consequently `M=3` is the largest passing right candidate and `M=4` the
+largest passing left candidate among consecutive integer multiples of
+`epsilon` under this enclosure.  The immediate `M=4` and `M=5` candidates
+are valid source boxes but do not certify the diagnostic radius target.  This
+is discrete lattice maximality for the present method, not a continuous or
+method-independent maximal-width theorem.
+
+The first positive third-floor wall gives a second exact crossover.  With
+`n=496283`, both normalized curvatures there equal
+
+```text
+t_*=1/(2n)=1/992566.                                 (11.471.6)
+```
+
+At `s=1/3`, the two normalized linear phases and their minimal phase periods
+are
+
+```text
+right: a_*=-896819/2977698, P_*=1488849=3n,
+left:  a_*= 544156/1488849, P_*=2977698=6n.         (11.471.7)
+```
+
+The period statement is exact: condition (11.470.1) first holds at those
+multiples of `n`.  Both periods exceed the current length `n`, so there is no
+complete root-of-unity cycle to compress before that wall.  In contrast, the
+next Mordell floor is exactly one.  Hence the two available local methods
+have a genuine gap:
+
+```text
+wall-anchored Taylor certification saturates after O(epsilon),
+rational-period compression has no full cycle at the first wall,
+the third Mordell transform contracts n to 1 but requires grouped
+small-t endpoint cancellation.                              (11.471.8)
+```
+
+The 384-bit, `Y=11`, tolerance-`1e-65` checker rederives (11.471.1)--
+(11.471.2), proves the two minimal periods in (11.471.7), and replays the
+passing/failing boundary tiles on both sides.  The production search uses
+320 bits, `Y=10`, and tolerance `1e-55`.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_adaptive_width_mirrored_tile_crossover_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_adaptive_width_mirrored_tile_crossover_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_adaptive_width_mirrored_tile_crossover_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_adaptive_width_mirrored_tile_crossover_gate.py
+```
+
+Primary-source boundary: Kuznetsov's exact theta/Mordell identity supplies the
+endpoint-complete transforms.  The mirrored symbolic maps, exact Jacobians,
+width-lattice crossover, and first-wall period analysis are derived here.
+
+Pi provenance: Section 11.471 introduces no new numerical `pi`.  Its phase
+moments retain the convention `e(u)=exp(2pi i u)`, and all other `pi` factors
+remain those in the inherited exact Mordell identity.
+
+Section 11.471 proves exact mirrored local maps, exact first-wall phase
+periods, and discrete passing/failing source tiles for one diagnostic radius
+target.  It does not prove a continuous maximal width, a finite cover, the
+grouped small-`t` endpoint bridge, physical quadrature, the non-A bound,
+joined `R_after_A`, `R_Dir`, `Q_K-T`, an all-height theorem, `Lambda<=0`,
+PF-infinity, RH, or a prize-level conclusion.
+
+## 11.472 The grouped first positive floor-wall bridge
+
+The obstruction in (11.471.8) is removable when the third main and its upper
+Mordell endpoint are treated as one current.  Write the affine Mordell
+identity (11.466.2)--(11.466.3) with an explicit floor label as
+
+```text
+G_m=C/(2t) W_m(p';w,sigma)+E_-(p,a,t)+E_(+,m)(p,a,t),
+
+p'=2tp-z,  w=z/(2t),  sigma=-1/(4t),
+m=floor(2nt).                                      (11.472.1)
+```
+
+At the first positive wall, `2nt=1`.  The upper arguments on the two floor
+representations are
+
+```text
+u_+(0)=z+(2n+1)t-1/2,
+u_+(1)=z+(2n+1)t-3/2,
+
+u_+(0)=u_+(1)+1.                                  (11.472.2)
+```
+
+For signed Mordell parameter `-2t`, the exact unit recurrence and its
+derivative give
+
+```text
+h(u+1,-2t)+h(u,-2t)=g_-(u,t),
+h_z(u+1,-2t)+h_z(u,-2t)=g_(-,z)(u,t),
+
+g_-(u,t)=2 exp[-i*pi(1/4+(u+1/2)^2/(2t))]/sqrt(2t),
+g_(-,z)/(pi i)=-(u+1/2)g_-/t.                    (11.472.3)
+```
+
+Put `u=u_+(1)`.  Since `u+1/2=z+t` and `2n=1/t`, the affine coefficient in
+the endpoint jump simplifies before any norm:
+
+```text
+(2p+2n+1)g_-+g_(-,z)/(pi i)
+  =[(2p+2n+1)-(z+t)/t]g_-
+  =(p'+1)g_-/t.                                   (11.472.4)
+```
+
+The remaining phases are exact.  The phase of the endpoint jump and the
+phase of the negative new child term differ by
+
+```text
+2n=992566,                                         (11.472.5)
+```
+
+an even integer in the `exp(i*pi*phase)` convention.  Therefore
+
+```text
+Delta E_+=-C/(2t)(p'+1)e(w+sigma)=-Delta Main,
+
+G_0=G_1 at 2nt=1.                                 (11.472.6)
+```
+
+This is the required grouped cancellation.  It is invalid to assign
+separate absolute budgets to the two terms in (11.472.6).  At the physical
+right and left anchors respectively,
+
+```text
+p'=1/3,  p'=-1/3.                                  (11.472.7)
+```
+
+For a quantitative two-sided wall box, use the common analytic finite
+current rather than either separated Mordell representation:
+
+```text
+W_n(p;a,t)=sum_(k=0)^n (p+k)e(ak+tk^2),
+e(v)=exp(2pi i v).                                 (11.472.8)
+```
+
+At each exact wall anchor compute the four rigorous moments
+`F_j=sum k^j e(a_0k+t_0k^2)`, `0<=j<=3`, by resetting the exact quadratic
+phase every 16 terms.  For `rho=p-p_0`, `alpha=a-a_0`, and `beta=t-t_0`, set
+`M_j=p_0F_j+F_(j+1)` and `B_j=M_j+rho F_j`.  The common floor-crossing
+enclosure is
+
+```text
+W_n=B_0+2pi i(alpha B_1+beta B_2)+R_2,
+
+|R_2|<=2pi^2(delta_a^2 S_2
+              +2 delta_a delta_t S_3
+              +delta_t^2 S_4).                   (11.472.9)
+```
+
+Equation (11.472.9) encloses the complete finite current on both sides of
+the `m=0|1` wall; it does not evaluate the small-`t` Mordell main or endpoint
+separately.  Restore the second main and both second joined endpoints, then
+the first main and both physical endpoints, exactly as in (11.470.10).
+
+With x half-width `10^-24` and s half-width `10^-24` about the exact wall
+anchors
+
+```text
+x_R=992567/2481417,
+x_L=992567/2481418,
+t_*=1/992566,                                      (11.472.10)
+```
+
+the child deviations from their wall anchors are below
+
+```text
+right: 0.000250215070594279,
+left:  0.002002960256450680.                       (11.472.11)
+```
+
+The complete physical source-current radii are below
+
+```text
+right: 0.010659942519851029,
+left:  0.057766934100072838,                       (11.472.12)
+```
+
+so both certify the declared local target `0.06`.  The quadratic remainders
+in (11.472.9) are below `9.260e-12` on both sides.
+
+The independent checker uses 384 bits, `Y=11`, tolerance `1e-65`, phase
+reset length 13, and reverse block summation.  It rederives
+(11.472.2)--(11.472.7), recomputes all eight base moment balls with different
+block boundaries, and replays both complete source boxes.  Every altered
+moment and source ball overlaps its production counterpart.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_grouped_first_wall_bridge_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_grouped_first_wall_bridge_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_grouped_first_wall_bridge_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_grouped_first_wall_bridge_gate.py
+```
+
+Primary-source boundary: Kuznetsov's exact theta/Mordell identity and unit
+recurrence supply (11.472.1)--(11.472.3).  The affine coefficient reduction,
+exact phase cancellation, common finite-current wall enclosure, and two
+physical source boxes are derived here.
+
+Pi provenance: every `pi` in Section 11.472 comes from the inherited Mordell
+identity or the declared Fourier convention `e(v)=exp(2pi i v)`.  No fitted
+circle, polygon, or empirical constant is introduced.
+
+Section 11.472 proves the exact grouped `m_3=0|1` main/upper-endpoint jump
+cancellation and one endpoint-complete width-`2*10^-24` physical source box
+around each first positive third-floor wall.  It does not prove a cover of
+the interval between the normalization wall and these boxes, a subsequent
+floor-wall bridge, physical quadrature, the non-A bound, joined `R_after_A`,
+`R_Dir`, `Q_K-T`, an all-height theorem, `Lambda<=0`, PF-infinity, RH, or a
+prize-level conclusion.
+
+## 11.473 A characteristic Euler--Maclaurin bridge across the open small-t interval
+
+The wall identity (11.472.6) removes the floor discontinuity, but it does not
+control the long finite current between `t=0` and the first wall.  The exact
+physical maps provide a useful extra relation.  On the right and left,
+respectively,
+
+```text
+t_R=(5x-2)/(2(1-2x)),       x=2(1+t_R)/(5+4t_R),
+t_L=(2-5x)/(2(3x-1)),       x=2(1+t_L)/(5+6t_L).       (11.473.1)
+```
+
+The affine child weights simplify before interval evaluation:
+
+```text
+p_R=A/2+s+1-2(31916),
+p_L=3(31916)-3/2-A/2-s.                              (11.473.2)
+```
+
+Substitution of (11.473.1)--(11.473.2) into the normalized child phases gives
+
+```text
+a_R=2s-1+2p_R t,
+a_L=-2s+2p_L t              (mod 1).                 (11.473.3)
+```
+
+Thus, at `s=1/3`, both open child currents are members of the single
+characteristic family
+
+```text
+W(p,b,t)=sum_(k=0)^n (p+k)e(q(k)),
+q(k)=t k^2+(b+2pt)k
+    =t((p+k)^2-p^2)+bk,
+e(v)=exp(2pi i v),
+0<=t<=T=1/(2n),  n=496283,                           (11.473.4)
+```
+
+with
+
+```text
+(p_R,b_R)=(95747/6,-1/3),
+(p_L,b_L)=(47873/3,-2/3).                            (11.473.5)
+```
+
+The harmless integer removed in the left identity does not change `e(q)`.
+The continuous phase derivative is
+
+```text
+q'(x)=b+2t(p+x).                                    (11.473.6)
+```
+
+Over the full rectangle `0<=x<=n`, `0<=t<=T`, its exact ranges are
+
+```text
+right: [-1/3, 2080879/2977698],
+left:  [-2/3, 544156/1488849].                      (11.473.7)
+```
+
+Both ranges lie strictly inside `(-0.7,0.7)` and cross zero once.  The
+stationary point first enters at `t=1/3073445` on the right and
+`t=1/1536722` on the left.  At the first wall its positions are
+`896819/6` and `944693/3`, both strictly inside `[0,n]`.  Hence the whole
+open interval contains one migrating ordinary quadratic stationary point,
+not a sequence of unresolved frequency walls.
+
+For the Euler--Maclaurin remainder, write
+
+```text
+d^r e(q(x))/dx^r=e(q(x))E_r(q'(x),t),
+
+E_r=r! sum_(j=0)^(floor(r/2))
+    (2pi i q')^(r-2j)(2pi i t)^j/(j!(r-2j)!).       (11.473.8)
+```
+
+If `|q'|<=D` and `0<=t<=T`, define the positive envelope
+
+```text
+H_r(D,T)=r! sum_(j=0)^(floor(r/2))
+    (2pi D)^(r-2j)(2pi T)^j/(j!(r-2j)!).            (11.473.9)
+```
+
+Leibniz' rule for the affine weight then gives the explicit integral bound
+
+```text
+integral_0^n |d^m[(p+x)e(q(x))]/dx^m| dx
+ <=(pn+n^2/2)H_m(D,T)+mn H_(m-1)(D,T).             (11.473.10)
+```
+
+Euler--Maclaurin through the `B_(2M)` endpoint correction has remainder
+
+```text
+|R_M| <= 2 zeta(2M)/(2pi)^(2M)
+         integral_0^n |f^(2M)(x)| dx.              (11.473.11)
+```
+
+Taking `M=48`, using `D_R=2080879/2977698` and `D_L=2/3`, and evaluating
+(11.473.9)--(11.473.11) with Arb gives the uniform whole-interval radii
+
+```text
+right: |R_48| < 0.000301311815099290,
+left:  |R_48| < 0.000003275156896856.               (11.473.12)
+```
+
+This is a pointwise formula valid at every `t` in the complete interval,
+including the stationary migration.  The integral term is evaluated by the
+exact Fresnel primitive after completing the square; at `t=0` its elementary
+exponential limit is used.  The production run evaluates all corrections
+through `B_96` and overlaps the resulting remainder ball with a direct
+496284-term phase-reset sum at
+
+```text
+t/T in {0,1/16,1/4,1/2,1}                           (11.473.13)
+```
+
+on each side.  A 448-bit checker reverses the Hermite and Bernoulli summation
+orders, uses phase-reset blocks of length 13 instead of 16, and independently
+repeats all ten overlaps.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_characteristic_euler_maclaurin_remainder_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_characteristic_euler_maclaurin_remainder_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_characteristic_euler_maclaurin_remainder_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_characteristic_euler_maclaurin_remainder_gate.py
+```
+
+Primary-source boundary: Kuznetsov's truncated-theta algorithm identifies
+Euler--Maclaurin summation as the small-parameter branch when
+`|tau|<1/n`.  Here `0<=t<=1/(2n)<1/n`.  This supplies the algorithmic regime
+cue only.  Equations (11.473.1)--(11.473.12), all constants, and all interval
+checks are derived in this corpus.
+
+Pi provenance: the factors `2pi` in (11.473.4), (11.473.8), and the Fresnel
+primitive come from the declared character `e(v)=exp(2pi i v)`.  The
+denominator `(2pi)^(2M)` in (11.473.11) comes from the Fourier series of the
+periodic Bernoulli polynomial.  No geometric circle or polygon constant is
+inserted into the theta-current model.
+
+Section 11.473 proves the exact characteristic reduction and a uniform
+order-48 Euler--Maclaurin remainder below `0.001` for each child current over
+the whole first small-`t` interval.  It does not prove finite transport of the
+Fresnel/endpoint partial sum in `t` or `s`, an endpoint-complete physical
+source cover, physical quadrature, the non-A bound, joined `R_after_A`,
+`R_Dir`, `Q_K-T`, an all-height theorem, `Lambda<=0`, PF-infinity, RH, or a
+prize-level conclusion.
+
+## 11.474 Uniform characteristic parameter derivatives and a value-box route guard
+
+The pointwise formula in Section 11.473 is useful for quadrature only if its
+parameter derivatives can be evaluated with a certified error.  Retain
+
+```text
+W(p,b,t)=sum_(k=0)^n (p+k)e(q(k)),
+q(k)=t k^2+(b+2pt)k,
+y=p+k.                                               (11.474.1)
+```
+
+At fixed `s`, direct differentiation gives
+
+```text
+partial_t W
+ =2pi i sum_(k=0)^n (p+k)(k^2+2pk)e(q(k))
+ =2pi i sum_(k=0)^n (y^3-p^2y)e(q(k)).              (11.474.2)
+```
+
+For the physical `s` derivative, put `epsilon=1` on the right and
+`epsilon=-1` on the left.  Equations (11.473.2)--(11.473.3) give
+`p_s=epsilon` and `b_s=2epsilon`, hence
+
+```text
+partial_s W
+ =epsilon[sum_(k=0)^n e(q(k))
+   +4pi i(1+t)sum_(k=0)^n (y^2-py)e(q(k))].          (11.474.3)
+```
+
+The first term in (11.474.3) is the amplitude derivative.  It cannot be
+dropped or estimated as part of the phase derivative.
+
+For any polynomial `P`, Leibniz' rule and (11.473.8) give
+
+```text
+d^m[P(y)e(q(x))]/dx^m
+ =e(q(x)) sum_(r=0)^(min(m,deg P))
+   binom(m,r)P^(r)(y)E_(m-r)(q'(x),t).               (11.474.4)
+```
+
+Consequently, with the same `H_j(D,T)` as (11.473.9),
+
+```text
+integral_0^n |d^m[P(y)e(q(x))]/dx^m|dx
+ <=sum_r binom(m,r)H_(m-r)(D,T)
+         integral_p^(p+n)|P^(r)(y)|dy.              (11.474.5)
+```
+
+For the three weights required by (11.474.2)--(11.474.3),
+
+```text
+P_0(y)=1,
+P_2(y)=y^2-py,
+P_3(y)=y^3-p^2y.                                    (11.474.6)
+```
+
+Every derivative of `P_2` and `P_3` occurring in (11.474.5) is nonnegative
+on `p<=y<=p+n`, so each integral in (11.474.5) is an exact endpoint
+difference rather than a coefficientwise absolute majorant.
+
+Applying the periodic-Bernoulli remainder coefficient in (11.473.11) at
+`M=80` proves the uniform whole-interval derivative-error radii
+
+```text
+right:
+ |R_(partial_t W)| < 0.027323904889626897,
+ |R_(partial_s W)| < 1.358547012876938e-7,
+
+left:
+ |R_(partial_t W)| < 0.000014578623887425,
+ |R_(partial_s W)| < 7.248486856671694e-11.          (11.474.7)
+```
+
+The integral terms are exact Fresnel moments through degree three, obtained
+from the degree-zero Fresnel primitive and its endpoint recurrence.  The
+Euler--Maclaurin partial sums retain every endpoint correction through
+`B_160`.  At
+
+```text
+t/T in {0,1/16,1/4,1/2,1},                          (11.474.8)
+```
+
+both derivative enclosures overlap direct 496284-term weighted phase-reset
+sums on both sides.  A 512-bit checker reverses the Hermite, Bernoulli, and
+block orders and changes the phase-reset length from 16 to 13.
+
+The direct balls in (11.474.8) are much tighter than their displayed
+magnitudes.  For example, on the right at `t/T=1/2`,
+
+```text
+|partial_t W| = 2.2606891711781044... * 10^20,
+|partial_s W| = 1.3039203113052487... * 10^15,       (11.474.9)
+```
+
+while their ball radii are below `7e-109` and `2e-114`.  Across the ten
+sampled points, dividing a diagnostic current-variation allowance `0.001`
+by the pointwise derivative upper bounds gives
+
+```text
+4.42343e-24 <= diagnostic delta_t <= 2.27355e-21,
+7.66918e-19 <= diagnostic delta_s <= 6.00443e-16.    (11.474.10)
+```
+
+Equation (11.474.10) is not a certified cell-width theorem: it contains no
+second-derivative transport and supplies no lower bound on every possible
+enclosure.  It is a route guard.  Uniform accuracy of the characteristic
+evaluator does not by itself make near-constant child-current boxes
+macroscopic.  The next audit must retain the complete folded source and its
+pole-free kernel through integration if the grouped source transport scale
+remains microscopic.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_characteristic_euler_maclaurin_parameter_derivative_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_characteristic_euler_maclaurin_parameter_derivative_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_characteristic_euler_maclaurin_parameter_derivative_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_characteristic_euler_maclaurin_parameter_derivative_gate.py
+```
+
+Pi provenance: every `pi` in (11.474.2)--(11.474.7) comes either from
+differentiating the declared character `e(v)=exp(2pi i v)` or from the
+Fourier series of the periodic Bernoulli polynomial.  No geometric or fitted
+occurrence is introduced.
+
+Section 11.474 proves exact `t` and `s` derivative identities and uniform
+order-80 Euler--Maclaurin remainder certificates for the two characteristic
+currents at `s=1/3`.  It does not prove a complete-source derivative bound,
+a finite parameter cover, a source-kernel quadrature estimate, the non-A
+bound, joined `R_after_A`, `R_Dir`, `Q_K-T`, an all-height theorem,
+`Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+## 11.475 Folded source-kernel Abel limit and cubic symmetry
+
+The isolated-current route guard in Section 11.474 must be tested on the
+complete folded source and on the kernel multiplication that actually occurs
+in (11.460.5).  Retain
+
+```text
+C_(U,epsilon)(s)
+ =sum_(m in Z)[1-chi_U(m)]exp(-pi epsilon m^2)
+                    exp(-2pi i m s),
+U={622,...,39936}.                                   (11.475.1)
+```
+
+Writing the full theta part in Poisson form gives
+
+```text
+Theta_epsilon(s)
+ =epsilon^(-1/2)sum_(k in Z)exp[-pi(k+s)^2/epsilon]. (11.475.2)
+```
+
+On every closed subinterval away from the integer lattice, (11.475.2)
+converges uniformly to zero.  On the complete cell `[0,1]`, however, its two
+boundary half-spikes have total mass one.  Therefore every continuously
+extended folded source satisfies the exact Abel limit
+
+```text
+lim_(epsilon downarrow 0) integral_0^1
+ F_x(s)C_(U,epsilon)(s)ds
+ =[F_x(0)+F_x(1)]/2
+  -sum_(m=622)^39936 hat F_x(m),                     (11.475.3)
+
+hat F_x(m)=integral_0^1F_x(s)exp(-2pi i m s)ds
+           =integral_0^L f_x(u)exp(-2pi i m u)du.    (11.475.4)
+```
+
+The second equality in (11.475.4) follows by putting `u=n+s` in each of the
+`L` cells; integer `m` removes the factor `exp(2pi i m n)`.  The endpoint
+half-sum in (11.475.3) is mandatory.  Replacing the kernel by its pointwise
+interior limit and then integrating through `s=0` would discard the theta
+boundary layer.
+
+For `x>0`, put
+
+```text
+phi_m(y)=x y^2/4-m y,       J_m(x)=integral_A^B exp(i pi phi_m(y))dy.
+```
+
+Since `A` is odd, `B-A=2L`, and
+`y=2[phi_m'(y)+m]/x`, (11.475.4) becomes
+
+```text
+hat F_x(m)=(-1)^m{
+ [exp(i pi phi_m(B))-exp(i pi phi_m(A))]/(i pi x)
+ +(m/x)J_m(x)}.                                    (11.475.5)
+```
+
+At `x=0`, the two pieces in (11.475.5) must not be bounded separately; the
+continuous direct-integral limit from Section 11.445 is used.  Equations
+(11.475.3)--(11.475.5) remove the need for an `s`-cell enumeration at the
+Abel-limit stage, but the endpoint term and all 39,315 modes must remain in
+one signed assembly before norms.
+
+There is also an exact interior symmetry.  Write
+
+```text
+Q=39936-622+1=39315=3*13105,
+omega=exp(-2pi i/3).
+```
+
+For `s` away from the integer lattice,
+`C_(U,0)(s)=-sum_(m in U)exp(-2pi i m s)`.  Hence
+
+```text
+C_(U,0)(1/3+u)
+ =-omega exp(-2pi i 622u)
+   [1-exp(-2pi i 39315u)]/[1-omega exp(-2pi i u)],  (11.475.6)
+
+C_(U,0)(1/3)=0,
+C_(U,0)'(1/3)=13105 pi[-sqrt(3)+3i],
+|C_(U,0)'(1/3)|=2pi*13105*sqrt(3).                  (11.475.7)
+```
+
+Indeed, the notch is the disjoint union of 13,105 triples
+`{3q+1,3q+2,3q+3}`.  Their unweighted root sums vanish, while each weighted
+sum equals `1-omega`.
+
+For `alpha_n=A+2n+2s`, direct differentiation of the complete source gives
+
+```text
+F_x(s)=sum alpha_n exp(i pi x alpha_n^2/4),
+partial_x F_x=(i pi/4)sum alpha_n^3 exp(i pi x alpha_n^2/4),
+partial_s F_x=2sum exp(i pi x alpha_n^2/4)
+              +i pi x sum alpha_n^2 exp(i pi x alpha_n^2/4).    (11.475.8)
+```
+
+Exact-rational phase resets at the two first walls produce the rigorous lower
+bounds
+
+```text
+right, x=992567/2481417:
+ |F|>2.6058819751008667e9,
+ |partial_t F|>4.4810302321130419e20,
+ |partial_s F|>5.4172954877671129e15,
+
+left, x=992567/2481418:
+ |F|>5.2173012565671774e9,
+ |partial_t F|>3.5936380703523508e21,
+ |partial_s F|>2.1704071911337656e16.               (11.475.9)
+```
+
+Both direct 2,481,422-term source balls overlap the independently certified
+grouped wall-source boxes.  If
+`P(t,s)=F_(x(t))(s)C_(U,0)(s)`, then (11.475.7) proves on the symmetry line
+
+```text
+P(t,1/3)=0,              partial_t P(t,1/3)=0,
+partial_s P(t,1/3)=F_(x(t))(1/3)C_(U,0)'(1/3).       (11.475.10)
+```
+
+At the two walls the last magnitude is respectively greater than
+`3.7164839609108972e14` and `7.4408651752240808e14`.  A diagnostic variation
+allowance `0.001` therefore gives `s` half-widths only
+`2.69072e-18` and `1.34393e-18`.  These are not certified cells or lower
+bounds for every method.  They show that the cubic zero removes pointwise
+`t` stiffness on one line but does not make two-dimensional near-constant
+product boxes viable.  The natural next coordinate is the oscillatory factor
+in (11.475.6), joined to the endpoint half-sum in (11.475.3).
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_folded_source_kernel_abel_cubic_symmetry_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_folded_source_kernel_abel_cubic_symmetry_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_folded_source_kernel_abel_cubic_symmetry_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_folded_source_kernel_abel_cubic_symmetry_gate.py
+```
+
+Pi provenance: every `pi` in (11.475.1)--(11.475.10) comes from the declared
+Gaussian Abel/Fourier kernel or the original quadratic Kummer character.  The
+cubic root is selected by the exact integer identity `39315=3*13105`; no
+geometric or fitted occurrence is introduced.
+
+Section 11.475 proves the exact folded-source Abel-limit identity, its finite
+Fresnel-mode handoff, the interior cubic-root kernel factorization, and two
+complete-source wall derivative rows.  It does not prove a uniform source
+derivative theorem, a boundary-layer numerical estimate, a signed bound for
+the 39,315-mode assembly, physical `x` quadrature, the non-A bound, joined
+`R_after_A`, `R_Dir`, `Q_K-T`, an all-height theorem, `Lambda<=0`,
+PF-infinity, RH, or a prize-level conclusion.
+
+## 11.476 Abel-zero source-roster reassembly and transition schedule
+
+The endpoint half-sum in (11.475.3) is mandatory, but it is not an
+independent new source term.  Put
+
+```text
+f_x(n)=(A+2n)exp[i*pi*x*(A+2n)^2/4],       0<=n<=L,
+A=159577,       B=5122421,       L=2481422.          (11.476.1)
+```
+
+The inherited symmetric-Poisson half-current and the two folded endpoint
+values are
+
+```text
+H_x=[f_x(0)+f_x(L)]/2,
+F_x(0)=sum_(n=0)^(L-1)f_x(n),
+F_x(1)=sum_(n=1)^L f_x(n).                           (11.476.2)
+```
+
+Consequently their coefficients reassemble exactly as
+
+```text
+H_x+[F_x(0)+F_x(1)]/2=sum_(n=0)^L f_x(n).           (11.476.3)
+```
+
+The right side is the complete `2,481,423`-label odd source roster
+`A,A+2,...,B`.  In particular, its removable endpoint value is the exact
+integer
+
+```text
+sum_(n=0)^L(A+2n)=(L+1)(A+B)/2=6553435661577.       (11.476.4)
+```
+
+Now combine (11.475.3) with the two endpoint rows in (11.460.3).  On
+`622<=m<=39852`,
+
+```text
+A_m+B_m=I_m-P_m,                                    (11.476.5)
+```
+
+whereas on `39853<=m<=39936`,
+
+```text
+B_m-A_-m=I_m-P_m-A_m-A_-m.                          (11.476.6)
+```
+
+The Abel source supplies `-I_m` on every mode in the extended notch.  Thus,
+before any norm, all 39,315 finite coefficients cancel to the exact
+source/ownership identity
+
+```text
+H_x+AbelSource+EndpointRows
+ =sum_(n=0)^L f_x(n)
+  -sum_(m=622)^39936 P_m(x)
+  -sum_(m=39853)^39936[A_m(x)+A_-m(x)].              (11.476.7)
+```
+
+Inside the ordered physical limit defining the non-A complement, the
+`Btr`, `O`, and translated `mathfrak E_(A,42)` subtractions remain unchanged.
+Equation (11.476.7) is a change of evaluator, not another deletion and not
+permission to norm its three displayed rows separately.  The endpoint-plus-
+39,315-Fresnel formula remains an exact altered-representation check, but a
+production quadrature of those raw coefficients would repeat cancellation
+already completed in (11.476.5)--(11.476.7).
+
+The finite-phase transition schedule is also exact.  For
+
+```text
+phi_m(y)=x y^2/4-m y,       y_*(m,x)=2m/x,            (11.476.8)
+```
+
+the stationary point lies in `[A,B]` precisely when
+
+```text
+x_B(m)=2m/B <= x <= x_A(m)=2m/A.                    (11.476.9)
+```
+
+On `0<=x<=1/2`, the 39,315 B-entry events and 39,273 A-exit events are all
+distinct.  Their closest pair is
+
+```text
+x_A(630)<x_B(20223),
+x_B(20223)-x_A(630)=882/817420575917
+                         =1.0790039130230523e-9....  (11.476.10)
+```
+
+Modes `39895..39936` have `x_A(m)>1/2`, so their finite-`y` stationary
+points persist through the midpoint.  After quadratic completion, the common
+physical phase has
+
+```text
+Psi_m(x)=-pi*m^2/x+(t/2)log((1-x)/x),
+x_m=2*pi*m^2/(t+2*pi*m^2),
+alpha_m=2m+t/(pi*m),                                 (11.476.11)
+```
+
+and `x_B<=x_m<=x_A` if and only if `A<=alpha_m<=B`.  The saved-height
+classification is therefore
+
+```text
+622..39852:    39,231 interior joint saddles,
+39853..39894:      42 lower A-transition modes,
+39895..39936:      42 reflected A-transition modes.  (11.476.12)
+```
+
+The last physical saddles lie in `x>1/2`; exact Kummer reflection supplies
+the full source without creating a second stationary family on the half
+domain.  Combining (11.476.12) with the existing ordinary/fold ownership
+gives the next evaluator partition
+
+```text
+622..39694:    39,073 ordinary-core modes,
+39695..39852:      158 remaining fold-owned interior modes,
+39853..39936:       84 extracted A-transition modes.  (11.476.13)
+```
+
+This partition preserves the signed assembly.  The selected next test is a
+bounded complete-source-minus-owned-carriers pilot, split at the exact
+rational events and cross-checked sparsely against (11.475.3)--(11.475.5).
+Only after that altered representation agrees should an interval physical
+`x` quadrature be attempted.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_folded_abel_source_roster_reassembly_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_folded_abel_source_roster_reassembly_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_folded_abel_source_roster_reassembly_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_folded_abel_source_roster_reassembly_gate.py
+```
+
+Pi provenance: every `pi` in (11.476.1)--(11.476.13) is inherited from the
+Gaussian Abel/Fourier kernel, the original quadratic Kummer phase, or the
+physical Kummer weight.  The rational transition locations themselves contain
+no `pi`; the `pi` in (11.476.11) is forced by differentiating the declared
+phase.
+
+Section 11.476 proves the exact Abel-zero source/ownership reassembly, the
+regular `x=0` source value, and the complete rational finite-phase transition
+schedule on the half interval only.  It does not evaluate the signed
+source-minus-carriers assembly, prove a fast-evaluator error theorem or
+physical `x` quadrature, bound the non-A complement, prove joined `R_after_A`,
+`R_Dir`, `Q_K-T`, an all-height theorem, `Lambda<=0`, PF-infinity, RH, or a
+prize-level conclusion.
+
+## 11.477 Sparse joined source-carrier pilot and physical-level route guard
+
+The first evaluator test after (11.476.7) must keep every object at one
+mathematical level.  Define the pointwise block
+
+```text
+Z(x)=sum_(n=0)^L f_x(n)
+     -sum_(m=622)^39936 P_m(x)
+     -sum_(m=39853)^39936[A_m(x)+A_-m(x)].             (11.477.1)
+```
+
+The saved `Btr`, completed-B outer, and translated A-face artifacts are
+physical integrals or bounds, not pointwise functions of `x`.  They are
+therefore not inserted as constants into (11.477.1); their ownership and
+physical normalization remain unchanged.
+
+There is a stable joined formula for the 84 A-window modes.  For `x>0`, put
+
+```text
+z_m=(-1)^m exp(-i*pi*m^2/x),       h_x=sqrt(2/x),
+e_D=exp(i*pi*x*D^2/4),             F_infinity=(1+i)/2,
+
+L(q)=F(q)+F_infinity,              U(q)=F_infinity-F(q),
+q_D^-=sqrt(x/2)(D-2m/x),           q_D^+=sqrt(x/2)(D+2m/x).
+                                                               (11.477.2)
+```
+
+Here `L` and `U` are the lower and upper Abel Fresnel tails.  Direct completion
+of the square gives
+
+```text
+P_m=z_m*m*h_x*(1+i)/x,
+
+A_m+A_-m
+ =-2e_A/(i*pi*x)
+   +(z_m*m*h_x/x)[L(q_A^+)-L(q_A^-)],                 (11.477.3)
+
+-P_m-A_m-A_-m
+ =2e_A/(i*pi*x)
+   -(z_m*m*h_x/x)[U(q_A^-)+L(q_A^+)].                 (11.477.4)
+```
+
+Thus (11.477.4), rather than three independently accumulated norms, is the
+primary A-window current.  The ordinary modes contribute the single joined
+row `-P_m`.
+
+An altered representation evaluates the original finite coefficient and
+endpoint rows instead.  With `q_B^-=sqrt(x/2)(B-2m/x)`,
+
+```text
+I_m=(e_B-e_A)/(i*pi*x)
+     +(z_m*m*h_x/x)[L(q_B^-)-L(q_A^-)],
+
+A_m+B_m=(e_B-e_A)/(i*pi*x)
+     -(z_m*m*h_x/x)[L(q_A^-)+U(q_B^-)],
+
+B_m-A_-m=(e_B+e_A)/(i*pi*x)
+     -(z_m*m*h_x/x)[U(q_B^-)+L(q_A^+)].               (11.477.5)
+```
+
+Consequently `-I_m+(A_m+B_m)=-P_m` on `622..39852`, while
+`-I_m+(B_m-A_-m)` equals (11.477.4) on `39853..39936`.  Equations
+(11.477.3)--(11.477.5) also provide a numerical check which does not use the
+primary blockwise phase recurrence.
+
+The deterministic pilot uses 18 rational coordinates, including the first
+and last B-entry events, the first A exit, both sides of the closest event
+pair, the first A-window exit, the last lower A exit, and several periodic
+dyadic and small-denominator points.  The complete source is evaluated on the
+endpoint-complete `L+1` roster by exact-rational phase reseeding.  Eight rows
+replay all 39,315 modes through (11.477.5), and nine periodic rows use the
+independent full-roster cycle oracle.  The results are
+
+```text
+maximum altered-representation relative discrepancy
+  <5.753e-79,
+
+maximum source-mass-normalized periodic-oracle discrepancy
+  <1.354e-12,
+
+0.0431721078725745 < sampled cancellation ratio
+                  < 0.999998161218293,
+
+maximum sampled normalized physical-density magnitude
+  >1.69212509674387e11.                                (11.477.6)
+```
+
+The independent checker changes the source block length from `256` to `193`,
+sums modes in descending order, and evaluates the A tails with direct
+high-precision Fresnel functions at the first B entry, the close-pair B event,
+`x=1/4`, and `x=1/2`.  All four joined carriers agree with the primary values
+to relative error below `1e-38`.  The closest event pair, whose separation is
+only `882/817420575917`, passes on both sides.
+
+Equation (11.477.6) certifies no integral.  The first two rows validate the
+altered evaluator only at the sampled coordinates; the recurrence still lacks
+a uniform floating-error theorem, and the asymptotic Fresnel stopping rule is
+not an interval remainder bound.  The large physical-density scale rejects a
+naive value-space panel launch as the selected next route, but it is not a
+lower bound on the cost of every oscillatory quadrature.
+
+The next gate is an exact physical-transform ownership ledger for the complete
+source, finite `P` block, paired A block, B trace, completed B outer channel,
+and translated A-face channel.  Existing certified physical values and bounds
+must be reused in their native normalization.  Event-aware `x` panels remain
+a fallback only for a genuinely unevaluated transformed term, with one joined
+cumulative interval budget below the non-A allowance.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_source_owned_carrier_sparse_pilot_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_source_owned_carrier_sparse_pilot_gate.json
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_source_owned_carrier_sparse_pilot_gate_rows.jsonl
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_source_owned_carrier_sparse_pilot_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_source_owned_carrier_sparse_pilot_gate.py
+```
+
+Pi provenance: every `pi` in (11.477.1)--(11.477.6) is inherited from the
+quadratic Kummer character, its integer Fourier transform, the canonical
+Fresnel primitive, or the equation-(9) physical normalization.  No geometric
+or fitted occurrence is introduced.
+
+Section 11.477 proves only a deterministic sparse numerical agreement between
+the joined source/owned-carrier evaluator and its altered finite-Fresnel form,
+plus selected periodic and altered-implementation checks.  It does not prove
+a uniform source error theorem, a Fresnel-tail interval remainder, physical
+`x` quadrature, the non-A bound, joined `R_after_A`, `R_Dir`, `Q_K-T`, an
+all-height theorem, `Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+## 11.478 Physical-transform ownership and the single joined Kummer residual
+
+The route guard in Section 11.477 does not require six new physical
+quadratures.  Use the inherited physical functional
+
+```text
+P_t[F]=2(pi/(32t))^(1/4)
+ Re[e^(-i*pi/8) integral_0^1 W_t(x)F(x)dx].          (11.478.1)
+```
+
+For
+
+```text
+a=3/4-it/2,     b=3/4+it/2,     a+b=3/2,
+```
+
+Euler's Kummer integral gives, label by label,
+
+```text
+K_t(alpha)=2(pi/(32t))^(1/4)
+ Re[e^(-i*pi/8) alpha B(a,b)
+                    1F1(a;3/2;i*pi*alpha^2/4)],
+
+Q_K=sum_(alpha=A,A+2,...,B) K_t(alpha)
+   =P_t[sum_(n=0)^L f_x(n)].                         (11.478.2)
+```
+
+Thus the complete endpoint source transforms exactly to the finite
+equation-(9) Kummer roster `Q_K`.  This is an identity, not a numerical
+enclosure of `Q_K`; in particular the published or implemented source-hybrid
+telemetry remains inadmissible as a replacement.
+
+The finite carriers now close without overlap.  The target `P` block
+`622..39894` transforms to `G`, the extra `P` block `39895..39936` transforms
+to `G_extra`, and the paired `A` block `39853..39936` transforms to
+`A_endpoint`.  The certified identity
+`A_transition=A_endpoint+G_extra` therefore gives
+
+```text
+J_Z=P_t[Z]
+   =Q_K-G-A_transition
+   =R_KGamma-A_transition.                           (11.478.3)
+```
+
+The remaining native physical subtractions retain the signs inherited from
+the common-regulator kernel:
+
+```text
+R_nonA=J_Z-E_Btr,win-E_outer-I_(A,42).                (11.478.4)
+```
+
+There is also more signed information in the already certified B channels
+than the earlier one-sided gate used.  Reassemble the signed local principal
+and signed nonlocal first current, then place every remaining certified local
+normal remainder, partner remainder, higher current, post-third current, and
+Fresnel/boundary dictionary term in one absolute allowance.  Outward-rounded
+Arb arithmetic gives
+
+```text
+E_Btr,win
+ =[-0.0001334644064788904440605731217335137745361 +/- 1.49e-6],
+
+-0.000134948<E_Btr,win<-0.00013198.                  (11.478.5)
+```
+
+Together with `|E_outer|<8e-10`, `|I_(A,42)|<0.00364`, and the inherited
+absolute non-A target `0.0331747039947`, exact interval arithmetic yields the
+sufficient transformed corridor
+
+```text
+-0.02966668<J_Z<0.02939975,
+
+or, more simply,
+
+|J_Z|<0.02939975.                                    (11.478.6)
+```
+
+Either condition implies `|R_nonA|<0.0331747039947`.  Equivalently, the
+stronger absolute route is closed by
+
+```text
+-0.0663408<R_KGamma<-0.00727437.                     (11.478.7)
+```
+
+The sub-`5e-20` Gamma-to-classical correction leaves the same displayed
+rounded sufficient corridor for `Q_K-T`.  These corridors are sufficient for
+the stronger absolute non-A route; they are not necessary conditions for the
+original one-sided `Q_K-T` theorem.
+
+The selected next object is therefore the single joined transform `J_Z`, not
+six separately normed integrals and not source-hybrid telemetry.  An
+admissible next method must preserve the `Q_K-G-A_transition` cancellation,
+preferably through an exact Kummer recurrence or common-contour transform.
+Event-aware `x` panels remain a fallback only if that transformed route leaves
+a genuinely unevaluated term.
+
+The machine-readable certificate and independent checker are
+
+```text
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_physical_transform_ownership_ledger_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_physical_transform_ownership_ledger_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_physical_transform_ownership_ledger_gate.py
+```
+
+The checker reconstructs the interval arithmetic independently with decimal
+endpoints, verifies every dependency and source hash, and checks the
+Euler--Kummer transform on an altered direct-quadrature surrogate to relative
+discrepancy below `8.513e-65`.
+
+Pi provenance: every `pi` in (11.478.1)--(11.478.7) is inherited from the
+equation-(9) physical normalization, the Kummer quadratic phase, the Gaussian
+Abel regulator, or already certified Gamma/A/B identities.  No geometric or
+fitted occurrence is introduced.
+
+Section 11.478 proves exact saved-height physical-transform ownership, a
+conservative two-sided B-trace interval, and sufficient scalar target
+arithmetic only.  It does not enclose `J_Z` numerically and does not prove the
+non-A bound, joined `R_after_A`, `R_Dir`, `Q_K-T`, an all-height theorem,
+`Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+## 11.479 Half-domain normalization repair
+
+Read literally, (11.478.1)--(11.478.2) combine the half-domain factor `2 Re`
+with a full-domain integral.  That doubles every full Kummer label.  The
+executable A, B, Gamma, and source-carrier gates already use the intended
+half interval, so this is a formula-level domain/factor defect rather than a
+rescaling of their certified values.
+
+For an odd label `alpha`, odd-square parity gives
+
+```text
+K_alpha(1-x)=exp(i*pi/4) conjugate(K_alpha(x)),
+
+exp(-i*pi/8) integral_0^1 K_alpha(x) dx
+ =2 Re[exp(-i*pi/8) integral_0^(1/2) K_alpha(x) dx]. (11.479.1)
+```
+
+Put `c_t=(pi/(32t))^(1/4)`.  The corrected formulas, which supersede the
+literal domain and factor in (11.478.1)--(11.478.2), are
+
+```text
+P_t[F]=2c_t Re[exp(-i*pi/8)
+                 integral_0^(1/2) W_t(x)F(x) dx],
+
+K_t(alpha)=c_t Re[exp(-i*pi/8) alpha B(a,b)
+                   1F1(a;3/2;i*pi*alpha^2/4)].       (11.479.2)
+```
+
+Thus the full-Kummer label carries `c_t`, not `2c_t`.  An altered-height
+surrogate independently checks Euler's integral, the odd-label reflection,
+and the projection, with discrepancies below `2.406e-75`, `3.677e-75`, and
+`2.001e-75`, respectively.  Because every executable carrier scope was
+already half-domain, the identities
+
+```text
+J_Z=Q_K-G-A_transition,
+R_nonA=J_Z-E_Btr,win-E_outer-I_(A,42)                (11.479.3)
+```
+
+and the Section 11.478 scalar corridors remain unchanged.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_domain_Kummer_normalization_repair_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_domain_Kummer_normalization_repair_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_domain_Kummer_normalization_repair_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_domain_Kummer_normalization_repair_gate.py
+```
+
+Pi provenance: `pi` in (11.479.1)--(11.479.2) is inherited from the Kummer
+quadratic character, odd-square reflection, and the stated physical
+normalization.  No geometric or fitted occurrence is inserted.
+
+Section 11.479 proves the exact domain/factor repair and altered-height
+surrogate identities only.  It does not enclose `Q_K`, `J_Z`, `Q_K-T`, or the
+non-A residual and does not prove an all-height theorem, `Lambda<=0`,
+PF-infinity, RH, or a prize-level conclusion.
+
+## 11.480 Exact Kummer-to-Hardy truncation target
+
+Let the independently enclosed complementary Hardy component and classical
+upper main be
+
+```text
+U=Z-L,       rho_RS=U-T,
+```
+
+and define the corrected finite-roster defect
+
+```text
+Delta_KU=Q_K-U.                                      (11.480.1)
+```
+
+These definitions give the exact identities
+
+```text
+Q_K-T=Delta_KU+rho_RS,
+R_KGamma=Delta_KU+rho_RS-(G-T),
+J_Z=Delta_KU+rho_RS-(G-T)-A_transition.              (11.480.2)
+```
+
+At `t=10^10`, Arb gives
+
+```text
+rho_RS=
+[-1.307269104974427175188859152630866028707428608596035684317385e-9
+ +/- 2.41e-97].                                      (11.480.3)
+```
+
+Transport of the already certified stronger-route corridor through
+(11.480.2) yields the inward-rounded sufficient target
+
+```text
+-0.0663407986927308950 < Delta_KU
+                       < -0.0072743686927308951.      (11.480.4)
+```
+
+In particular `Delta_KU=0` misses the upper wall by more than
+`0.00727436869273`.  The desired theorem therefore requires a definite
+negative finite-roster/continuation bias, not near-equality of `Q_K` and `U`.
+The saved source-hybrid discrepancy is not substituted for `Delta_KU`; as a
+diagnostic it lies above the required upper wall by at least
+`0.000291351991530054468`.
+
+Naive fixed-precision direct `1F1` evaluation is also rejected as the
+production route.  Three corrected-label scouts contain zero with enormous
+balls, already reaching radius `6.02e+6821866891` at the lower endpoint.
+This diagnoses an unusable representation, not impossibility of a scaled
+Kummer, steepest-descent, or common-contour theorem.  The identity
+
+```text
+z_(alpha+2)-z_alpha=i*pi(alpha+1),
+z_alpha=i*pi*alpha^2/4                               (11.480.5)
+```
+
+makes the exponential phase periodic on the odd lattice, but `1F1(a;b;z)`
+itself is not periodic in `z`; standard parameter-contiguous relations do
+not close this fixed-parameter argument roster.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_QK_exact_hardy_truncation_bridge_target_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_QK_exact_hardy_truncation_bridge_target_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_QK_exact_hardy_truncation_bridge_target_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_QK_exact_hardy_truncation_bridge_target_gate.py
+```
+
+Section 11.480 proves the exact saved-height identities and sufficient target
+arithmetic, plus conditioning diagnostics only.  It does not enclose
+`Delta_KU`, `Q_K`, or `J_Z` and does not prove the non-A bound, an all-height
+theorem, `Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+## 11.481 Algebraic H prefactor and lower-adjusted continuation defect
+
+The Kummer prefactor stated in equation (4), after the corrected Euler
+integral normalization, simplifies algebraically to
+
+```text
+H(t)=2^(5/4)t^(1/4)pi^(3/2)exp(-3pi*t/4)
+ /[(1+exp(-2pi*t))|Gamma(1/4+it/2)|
+   |Gamma(3/4+it/2)|^2].                             (11.481.1)
+```
+
+The Gamma duplication formula independently gives
+
+```text
+H(t)=2^(3/4)t^(1/4)sqrt(pi)exp(-3pi*t/4)sqrt(cosh(pi*t))
+ /[(1+exp(-2pi*t))|Gamma(3/4+it/2)|].                (11.481.2)
+```
+
+The exactness of (11.481.1)--(11.481.2) is algebraic exactness of this
+special-function prefactor.  It is not a proof that the proposed infinite
+Kummer series equals Hardy's `Z(t)`.
+
+At `t=10^10`, the two formulas and two precision levels overlap, with
+
+```text
+log H=3.1250000000000000000195312500000000000003971e-22
+       +/- 1.98e-130,
+
+H-1  =3.1250000000000000000200195312500000000004033e-22
+       +/- 1.98e-130.                                (11.481.3)
+```
+
+The resulting correction to `U` has magnitude below `6.56e-22`, about
+nineteen orders smaller than the required bridge.  Define, without assuming
+the missing equation-(4) theorem,
+
+```text
+C_K=Z-H Q_K,
+D_K=C_K-L=U-H Q_K.                                   (11.481.4)
+```
+
+Since `Q_K=U+Delta_KU`, these definitions imply
+
+```text
+D_K=(1-H)U-H Delta_KU,
+Delta_KU=((1-H)U-D_K)/H.                             (11.481.5)
+```
+
+The target (11.480.4) therefore becomes the conservative positive corridor
+
+```text
+0.0072743687 < D_K < 0.0663407986.                   (11.481.6)
+```
+
+Appendix-A equations A64, A65, A71, A73, and A74 remain asymptotic or
+leading-order statements with unquantified `O` terms at the relevant bridge.
+They cannot supply the exact constant-bearing enclosure (11.481.6).
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_exact_H_continuation_defect_target_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_exact_H_continuation_defect_target_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_exact_H_continuation_defect_target_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_exact_H_continuation_defect_target_gate.py
+```
+
+Section 11.481 proves the algebraic prefactor identities, exact defect
+definitions, and saved-height sufficient target only.  It does not certify
+equation (4) as an identity for `Z`, enclose `C_K`, `D_K`, `Delta_KU`, `Q_K`,
+or `J_Z`, or prove the non-A bound, an all-height theorem, `Lambda<=0`,
+PF-infinity, RH, or a prize-level conclusion.
+
+## 11.482 A21 nonpromotion and the exact split-contour wall
+
+The 2026 paper calls equation (4) exact and delegates its derivation to the
+2015 Appendix A.  That source starts from the Riemann-Siegel contour
+
+```text
+z=1/2+q exp(-i*pi/4),       -infinity<q<infinity.     (11.482.1)
+```
+
+Put `w=pi q exp(-i*pi/4)`.  Since `sin(pi z)=cos(w)`, the denominator has the
+two exact geometric expansions
+
+```text
+q<0: sec(w)=2 sum_(k>=0)(-1)^k exp(i(2k+1)w),
+q>0: sec(w)=2 sum_(k>=0)(-1)^k exp(-i(2k+1)w).       (11.482.2)
+```
+
+These are A13 and A18, respectively.  Each diverges by the term test on the
+other open half-contour, and neither ordinary series converges at `q=0`.
+For `N` terms their exact residuals are
+
+```text
+q<0: R_N^-(q)=sec(w)[-exp(2iw)]^N,
+q>0: R_N^+(q)=sec(w)[-exp(-2iw)]^N.                  (11.482.3)
+```
+
+Arb verifies (11.482.3) directly at six points and two precisions.  The
+crossing convergence is not uniform: on `q=-u/N`,
+
+```text
+|[-exp(2iw)]^N|=exp(-sqrt(2)*pi*u).                  (11.482.4)
+```
+
+At `u=1` this is
+
+```text
+0.011761980531389121689144750022963590477697078729...
+```
+
+for `N=8,16,32,64` and, exactly, for every positive `N`.  Thus pointwise
+decay away from `q=0` does not license a whole-contour interchange of limit,
+sum, and integral.
+
+The source itself records the logical gap.  It states that A13 converges only
+for `q<0`, replaces it by A18 for `q>0`, reports failure of the attempted
+termwise asymptotic matching, and then constructs A21 by extending the A13
+term integrals across the entire `q` range.  It describes that continuation
+as heuristic, sets its convergence question aside, and later states A33 only
+subject to suitable convergence criteria.  Subsequent asymptotic and
+numerical agreement is evidence, not the missing interchange theorem.
+Consequently equation-(4) exactness is not imported into this programme.
+
+The selected replacement is an exact finite-cutoff theorem:
+
+1. fix every power and logarithm branch in (11.482.1);
+2. split at `q=0` before expanding, using A13 and A18 only on their valid
+   half-contours;
+3. introduce finite contour, series, and puncture cutoffs and use
+   (11.482.3) before taking limits;
+4. rescale the `q=O(1/N)` crossing layer and derive its signed projected
+   boundary functional rather than assuming it vanishes;
+5. track the chart change at `q=-1/sqrt(2)`, where `Re(z)=0`;
+6. identify the corrected finite roster `H Q_K` and the complete complement
+   `C_K=Z-HQ_K`; and
+7. prove (11.481.6).
+
+The value in (11.482.4) lies inside the scale of (11.481.6), making this a
+quantitatively credible mechanism.  It is not yet proved to have the required
+projection sign, nor is the crossing layer asserted to be the whole defect.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_A21_exactness_provenance_and_contour_jump_target_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_A21_exactness_provenance_and_contour_jump_target_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_A21_exactness_provenance_and_contour_jump_target_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_A21_exactness_provenance_and_contour_jump_target_gate.py
+```
+
+Pi provenance: every `pi` in (11.482.1)--(11.482.4) comes from the
+Riemann-Siegel denominator `sin(pi z)` and the fixed contour rotation
+`exp(-i*pi/4)`, not from an inserted circle or fitted constant.
+
+Section 11.482 proves the two valid half-contour identities, their finite
+residuals, the nonuniform crossing layer, and the provenance nonpromotion.
+It does not derive or enclose the contour defect, prove that the crossing
+layer is its only contribution, or enclose `C_K`, `D_K`, `Delta_KU`, `Q_K`,
+or `J_Z`.  It does not prove the non-A bound, an all-height theorem,
+`Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+## 11.483 Finite RSI residual and exact pole release
+
+The nonuniformity in Section 11.482 does not prevent an exact finite
+geometric identity.  For every integer `N>=0` and non-pole `z`,
+
+```text
+csc(pi z)
+ =-2i sum_(k=0)^(N-1) exp(i*pi*(2k+1)z)
+  +exp(2*pi*i*N*z)csc(pi z).                         (11.483.1)
+```
+
+Insert (11.483.1) into the exact RSI contour before taking any infinite
+limit.  If `P_N` is the finite odd-exponential prefix and
+
+```text
+E_N=1/(2i) integral_C
+    exp(-i*pi*z^2+2*pi*i*N*z)z^(-s)csc(pi z)dz,      (11.483.2)
+```
+
+then `RSI=P_N+E_N` exactly.  Translation by `u=z-N` gives
+
+```text
+E_N=1/(2i) integral_(C-N)
+    exp(-i*pi*u^2)(u+N)^(-s)csc(pi u)du.             (11.483.3)
+```
+
+The factors `exp(i*pi*N^2)` and `sin(pi(u+N))` contribute the same
+`(-1)^N` and cancel.  Moving `C-N` back to `C` crosses exactly the poles
+`m=1-N,...,0`, each with integrand residue `(m+N)^(-s)/pi`.  The branch point
+`u=-N` remains outside the deformation strip.  Consequently
+
+```text
+E_N=sum_(n=1)^N n^(-s)+C_N,
+C_N=1/(2i) integral_C
+    exp(-i*pi*u^2)(u+N)^(-s)csc(pi u)du.             (11.483.4)
+```
+
+An altered-height direct contour calculation independently verifies the
+orientation and residue sign for `N=1,2,3,5` to more than 48 decimal places.
+
+For the actual odd-label window,
+
+```text
+n_-=(159577-1)/2=79788,
+n_+=(5122421+1)/2=2561211.                           (11.483.5)
+```
+
+It contains `2481423` labels, and subtraction of two finite prefixes gives
+
+```text
+P_W=P_(n_+)-P_(n_-)
+   =-sum_(n=79789)^2561211 n^(-s)
+    +C_79788-C_2561211.                              (11.483.6)
+```
+
+Thus the finite RSI prefix has an exact common-contour representation and an
+explicit released Dirichlet block, with no A21 infinite interchange.  It is
+not yet the physical Kummer roster: Section 11.484 identifies the compulsory
+finite-label branch correction.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_geometric_contour_residual_and_pole_release_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_geometric_contour_residual_and_pole_release_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_geometric_contour_residual_and_pole_release_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_geometric_contour_residual_and_pole_release_gate.py
+```
+
+Pi provenance: every `pi` in (11.483.1)--(11.483.4) comes from the original
+RSI sine denominator, Gaussian, and integer contour translation.  No fitted
+or unexplained geometric constant is inserted.
+
+Section 11.483 proves the finite kernel identity, prefix/residual split,
+integer contour translation, released pole roster, and actual-window index
+arithmetic.  It does not identify the uncorrected prefix with `H Q_K`, enclose
+any residual contour, or prove a `D_K`, non-A, all-height, `Lambda<=0`,
+PF-infinity, RH, or prize-level conclusion.
+
+## 11.484 Log-square branch correction and augmented Q_K identity
+
+Let `s=1/2+it`, let `alpha` be positive and odd, and define
+
+```text
+c_alpha=pi*alpha*(1+i)/sqrt(2),
+d=exp(-pi*t/4-i*pi/8),
+a=1/4-it/2, b=3/4-it/2, xi=i*pi*alpha^2/4.           (11.484.1)
+```
+
+The exact finite-prefix label is
+
+```text
+T_alpha=-integral_C exp(-i*pi*z^2+i*pi*alpha*z)z^(-s)dz.
+                                                                    (11.484.2)
+```
+
+With `v=exp(i*pi/4)z`, move the horizontal contour to the upper boundary of
+the real axis and put
+
+```text
+I_alpha(gamma)=integral_0^infinity
+               x^(-s)exp(-pi*x^2+gamma*x)dx,
+A_alpha=Gamma(a)pi^(-a)1F1(a;1/2;xi)/2,
+B_alpha=c_alpha Gamma(b)pi^(-b)1F1(b;3/2;xi)/2.     (11.484.3)
+```
+
+Then `I_alpha(c_alpha)=A_alpha+B_alpha` and
+`I_alpha(-c_alpha)=A_alpha-B_alpha`.  Since the negative-axis upper boundary
+contributes `exp(-i*pi*s)=-i exp(pi*t)`,
+
+```text
+T_alpha=-d[(A_alpha+B_alpha)
+            -i exp(pi*t)(A_alpha-B_alpha)].          (11.484.4)
+```
+
+After the odd-label phase and gamma reflection are simplified, the explicit
+A33 Kummer label is
+
+```text
+S_alpha=i exp(pi*t)d(A_alpha-B_alpha).               (11.484.5)
+```
+
+Equations (11.484.4)--(11.484.5) give the exact branch-jump identity
+
+```text
+T_alpha=S_alpha-d I_alpha(c_alpha),
+S_alpha-T_alpha=d I_alpha(c_alpha).                  (11.484.6)
+```
+
+This is the resolution of the apparent sign conflict.  The full endpoint in
+the auxiliary `Log(v^2)` integral crosses its logarithmic cut; the integration
+constant derived on the left cannot be transported through that crossing
+without (11.484.6).
+
+Write `Hardy_t[X]=2 Re[exp(i*theta(t))X]`.  Odd-label Kummer reflection makes
+both rotated hypergeometric values below real, and exact phase algebra gives
+
+```text
+Hardy_t[T_alpha]
+ =-exp(-pi*t/4)|Gamma(1/4+it/2)|pi^(-1/4)
+   Re[exp(-i*pi/8)1F1(a;1/2;xi)],                   (11.484.7)
+
+Hardy_t[S_alpha]
+ =2pi^(5/4)alpha exp(-3pi*t/4)
+   Re[exp(-i*pi/8)1F1(b;3/2;xi)]
+  /[(1+exp(-2pi*t))|Gamma(1/4+it/2)|]
+ =H(t)K_t(alpha).                                   (11.484.8)
+```
+
+Thus the exact finite RSI label projects through the first Kummer channel,
+whereas the physical equation-(4) label projects through the thermal second
+channel.  Arb proves that the correction is genuinely nonzero.  At
+`t=5, alpha=3`,
+
+```text
+Hardy_t[T_alpha] =  0.5274428505789424128457877681...,
+Hardy_t[S_alpha] = -0.5274422487464643653286627282...,
+Hardy_t[S_alpha-T_alpha]
+                  = -1.0548850993254067781744504963....             (11.484.9)
+```
+
+All three values are rigorous balls, and the last excludes zero by more than
+one.  An independent checker repeats the contour quadrature at altered
+heights and labels.
+
+For the actual window define
+
+```text
+B_W=sum_(alpha=159577,159579,...,5122421)d I_alpha(c_alpha),
+S_W=sum S_alpha.                                      (11.484.10)
+```
+
+Summing (11.484.6), using (11.483.6), and applying (11.484.8) gives the exact
+augmented physical identity
+
+```text
+H(t)Q_K=Hardy_t[S_W]
+ =Hardy_t[-sum_(n=79789)^2561211 n^(-s)
+           +C_79788-C_2561211+B_W].                 (11.484.11)
+```
+
+No infinite A21 interchange appears in (11.484.11).  The price is explicit:
+the finite branch sum `B_W` is mandatory and currently unenclosed.  The next
+stage is to insert (11.484.11) into `D_K=U-HQ_K`, combine the released
+Dirichlet block with the exact classical upper decomposition before norms,
+and reduce `B_W+C_79788-C_2561211` to a signed common-contour object.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_label_branch_correction_QK_alignment_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_label_branch_correction_QK_alignment_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_label_branch_correction_QK_alignment_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_label_branch_correction_QK_alignment_gate.py
+```
+
+Pi provenance: all instances in (11.484.1)--(11.484.11) descend from the RSI
+sine/Gaussian kernel, the fixed quarter-turn, the Riemann-Siegel phase, or
+standard gamma/Kummer normalization.  No fitted circle constant is used.
+
+Section 11.484 proves the finite-label branch correction, rejects the
+uncorrected prefix-to-`Q_K` identification, restores exact physical alignment
+with the correction included, and produces (11.484.11).  It does not enclose
+`B_W`, `Q_K`, `D_K`, `Delta_KU`, or `J_Z`, join the released pole block to the
+classical upper component, or prove a non-A, all-height, `Lambda<=0`,
+PF-infinity, RH, or prize-level conclusion.
+
+## 11.485 One-integral Q_K compression and saddle geometry
+
+The explicit source labels in Section 11.484 admit a second finite
+compression.  Put
+
+```text
+lambda=pi(1+i)/sqrt(2),
+K_0=exp(3pi*t/4+i3pi/8),
+M=2481423.                                           (11.485.1)
+```
+
+Then
+
+```text
+S_alpha=K_0 integral_0^infinity
+        x^(-s)exp(-pi*x^2-lambda*alpha*x)dx.         (11.485.2)
+```
+
+The actual roster is finite, so summation and integration commute without a
+limit theorem.  Its source factor is the exact geometric quotient
+
+```text
+G_W(x)=sum_(j=0)^(M-1)exp[-lambda(159577+2j)x]
+      =exp(-159577lambda*x)
+       (1-exp(-2lambda*M*x))/(1-exp(-2lambda*x)),    (11.485.3)
+
+G_W(0)=M.                                           (11.485.4)
+```
+
+For real `x>0`, the ratio in the denominator of (11.485.3) has modulus below
+one, and its endpoint singularity is removable.  Therefore
+
+```text
+S_W=K_0 integral_0^infinity x^(-s)exp(-pi*x^2)G_W(x)dx,
+H(t)Q_K=Hardy_t[S_W].                               (11.485.5)
+```
+
+This replaces 2,481,423 directly ill-conditioned Kummer evaluations by one
+exact scalar integral.  At `t=5` on the altered roster `1,3,5,7`, direct
+label summation and quadrature of (11.485.5) differ by less than `4.18e-31`;
+the checker repeats the test at a different height and roster.
+
+For one label the logarithmic exponent is
+
+```text
+F_alpha(x)=-pi*x^2-lambda*alpha*x-s Log(x).          (11.485.6)
+```
+
+Its saddle equation and discriminant are
+
+```text
+2pi*x^2+lambda*alpha*x+s=0,
+D_alpha=-4pi+i*pi*(pi*alpha^2-8t).                  (11.485.7)
+```
+
+Thus the transition occurs at
+
+```text
+alpha_0=sqrt(8t/pi).                                (11.485.8)
+```
+
+At `t=10^10`, Arb proves
+
+```text
+alpha_0=159576.91216057307117597842397375274739034345...,
+159577-alpha_0=0.08783942692882402157602624725260965655.... (11.485.9)
+```
+
+Hence the actual lower endpoint is the first odd label above the saddle
+transition.  Both roots of (11.485.7) lie in the open third quadrant at the
+previous odd label, the first two roster labels, and the upper endpoint.
+
+The algebra also identifies the correct candidate steepest ray.  With
+`x=exp(-3i*pi/4)y` and `Log(x)=log(y)-3i*pi/4`,
+
+```text
+K_0 x^(-s)exp(-pi*x^2-lambda*alpha*x)dx
+ =y^(-s)exp[i*pi*(alpha*y-y^2)]dy.                  (11.485.10)
+```
+
+The exponentially large prefactor cancels pointwise, and the stationary
+equation on the right is
+
+```text
+2pi*y^2-pi*alpha*y+t=0,                             (11.485.11)
+```
+
+with the same threshold (11.485.8).  Equation (11.485.10) is an exact
+integrand identity, not yet an integral deformation: the Gaussian grows in
+intervening Stokes sectors and the zero branch needs its connection
+multiplier.  The next proof obligation is an exact finite steepest-descent or
+parabolic-cylinder connection formula that owns those contributions
+uniformly across the finite roster.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_QK_geometric_half_line_and_saddle_route_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_QK_geometric_half_line_and_saddle_route_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_QK_geometric_half_line_and_saddle_route_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_QK_geometric_half_line_and_saddle_route_gate.py
+```
+
+Pi provenance: (11.485.1)--(11.485.11) use only the RSI Gaussian/sine
+normalization, fixed quarter-turn, and standard gamma/Kummer factors.  The
+transition is derived from the discriminant and is not fitted.
+
+Section 11.485 proves the finite geometric compression, removable endpoint,
+exact saddle polynomial, actual transition arithmetic, and candidate-ray
+integrand identity.  It does not prove the candidate contour deformation or
+Stokes multiplier, enclose the actual-height integral, or prove a `Q_K`,
+`D_K`, non-A, all-height, `Lambda<=0`, PF-infinity, RH, or prize-level result.
+
+## 11.486 Exact branch/Stokes connection and Fresnel mode roster
+
+The missing connection in Section 11.485 can be supplied without rotating
+`I_-` through a growing Stokes sector.  For a positive odd label `alpha`, put
+
+```text
+I_-(alpha)=integral_0^infinity
+           x^(-s)exp(-pi*x^2-c_alpha*x)dx,
+I_+(alpha)=integral_0^infinity
+           x^(-s)exp(-pi*x^2+c_alpha*x)dx,
+J_alpha=integral_0^infinity
+        x^(-conj(s))exp(-pi*x^2+i*c_alpha*x)dx.       (11.486.1)
+```
+
+Scaling the standard parabolic-cylinder integral representation and applying
+its exact minus-sign connection formula gives
+
+```text
+I_-(alpha)=-i exp(-pi*t)I_+(alpha)+kappa(t)J_alpha,  (11.486.2)
+
+kappa(t)=i sqrt(2pi)(2pi)^(it)exp(-pi*t/2)
+         /Gamma(1/2+it),                             (11.486.3)
+
+|kappa(t)|=sqrt(1+exp(-2pi*t)).                      (11.486.4)
+```
+
+Here the odd-label phase `exp(i*pi*alpha^2/4)=exp(i*pi/4)` removes all label
+dependence from `kappa`.  Since
+
+```text
+K_0[-i exp(-pi*t)]=d,                                (11.486.5)
+```
+
+equation (11.486.2) is exactly the finite-label decomposition already found
+by the independent branch audit:
+
+```text
+S_alpha=K_0 I_-(alpha)
+       =d I_+(alpha)+K_0 kappa(t)J_alpha,
+
+d I_+(alpha)=S_alpha-T_alpha,
+K_0 kappa(t)J_alpha=T_alpha.                         (11.486.6)
+```
+
+Thus the parabolic-cylinder connection owns both pieces that the attempted
+third-quadrant deformation omitted: the zero-branch term and its Stokes
+complement.  Three altered `(t,alpha)` rows verify (11.486.2)--(11.486.5)
+numerically, and a separate checker repeats the calculation at different
+heights and labels.
+
+The `I_+` contour, unlike the `I_-` contour, may be rotated within
+`0<=arg(x)<pi/4`, where the Gaussian has quadratic decay.  Taking the boundary
+as a Fresnel/Abel limit yields the exact oscillatory representation
+
+```text
+d I_+(alpha)=integral_0^infinity[Fresnel]
+             y^(-s)exp[i*pi*(alpha*y-y^2)]dy.        (11.486.7)
+```
+
+The amplitude is locally `y^(-1/2)` at zero and the phase derivative is
+eventually `-2pi*y`; integration by parts therefore defines the improper
+tail.  The roster is finite, so summing (11.486.7) requires no infinite
+interchange:
+
+```text
+B_W=integral_0^infinity[Fresnel]
+    y^(-s)exp(-i*pi*y^2)D_W(y)dy,                    (11.486.8)
+
+D_W(y)=sum_(j=0)^(M-1)exp[i*pi*(159577+2j)y]
+      =exp[i*pi*(159577+M-1)y]
+       sin(pi*M*y)/sin(pi*y).                        (11.486.9)
+```
+
+The apparent singularities in (11.486.9) at integer `y` are removable; the
+finite sum is the defining value there.
+
+The real oscillatory phase in (11.486.7) has stationary equation
+
+```text
+2pi*y^2-pi*alpha*y+t=0,
+y_+/-=(alpha+/-sqrt(alpha^2-8t/pi))/4.               (11.486.10)
+```
+
+At `t=10^10`, Arb proves
+
+```text
+y_-(5122421)=621.5560036102371463889412039565...,
+y_-(159577) =39852.3913862312389618431367868261...,
+y_+(159577) =39936.1086137687610381568632131739...,
+sqrt(t/(2pi))=39894.2280401432677939946059934382.... (11.486.11)
+```
+
+Consequently the induced integer roster is
+
+```text
+ordinary lower branch: 622..39852, 39231 modes,
+transition block:       39853..39936, 84 modes,
+transition lower half:  39853..39894, 42 modes,
+transition upper half:  39895..39936, 42 modes.      (11.486.12)
+```
+
+This independently recovers the physical ownership ledger: the extended
+`P/Gamma` roster is `622..39936`, the paired `A` roster is `39853..39936`,
+the classical target ends at `39894`, and the extra Gamma block is
+`39895..39936`.  The agreement certifies the route geometry and index
+ownership.  It is not an amplitude estimate.  The next obligation is to put
+the already-owned `G+A_transition` carriers on (11.486.8), subtract them
+before norms, and enclose only the joined remainder.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_branch_Fresnel_Dirichlet_connection_and_mode_roster_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_branch_Fresnel_Dirichlet_connection_and_mode_roster_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_branch_Fresnel_Dirichlet_connection_and_mode_roster_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_branch_Fresnel_Dirichlet_connection_and_mode_roster_gate.py
+```
+
+Pi provenance: the standard parabolic-cylinder normalization contributes its
+usual `pi`; all project-specific occurrences descend from the RSI Gaussian,
+quarter-turn, and Riemann-Siegel phase.  No fitted constant or circle
+construction is inserted.
+
+Section 11.486 proves the exact branch/Stokes connection, legal Fresnel/Abel
+representation, finite Dirichlet source, and actual saddle-mode roster.  It
+does not perform the common-integral carrier subtraction, enclose `B_W`,
+`Q_K`, `D_K`, `Delta_KU`, or `J_Z`, or prove a non-A, all-height,
+`Lambda<=0`, PF-infinity, RH, or prize-level result.
+
+## 11.487 Fresnel-cell common-carrier subtraction
+
+The finite Dirichlet source in (11.486.9) has an exact integer-cell
+covariance.  For every integer `m` and `-1/2<=u<=1/2`, oddness of the lower
+label gives
+
+```text
+D_W(m+u)=(-1)^m D_W(u),
+
+exp[-i*pi*(m+u)^2]D_W(m+u)
+ =exp(-i*pi*u^2-2*pi*i*m*u)D_W(u).                  (11.487.1)
+```
+
+Define
+
+```text
+B_0=integral_0^(1/2)y^(-s)exp(-i*pi*y^2)D_W(y)dy,
+
+beta_m(t)=integral_(-1/2)^(1/2)
+ (1+u/m)^(-s)exp(-i*pi*u^2-2*pi*i*m*u)D_W(u)du.
+                                                               (11.487.2)
+```
+
+Every positive cell therefore factors exactly as
+
+```text
+B_m=m^(-s)beta_m(t).                                  (11.487.3)
+```
+
+Partitioning each finite truncation into contiguous cells and only then
+taking the original Fresnel limit proves
+
+```text
+B_W=B_0+sum_(m=1)^infinity[Fresnel]m^(-s)beta_m(t).   (11.487.4)
+```
+
+This is not an exchange of an infinite cell sum with the integral.  Altered
+finite-roster quadratures verify (11.487.1)--(11.487.3), and the independent
+checker changes the height, roster, cells, and working precision.
+
+The exact global-Morse carrier from Section 11.349 has
+
+```text
+G_m=2 Re[B(t)exp(i*theta_0)m^(-s)],
+B(t)=I_bulk(t)/I_G(t).                                (11.487.5)
+```
+
+Put
+
+```text
+C_G(t)=H(t)exp[-i*theta(t)]B(t)exp(i*theta_0).         (11.487.6)
+```
+
+Then the Hardy lift is exact mode by mode:
+
+```text
+Hardy_t[C_G(t)m^(-s)]=H(t)G_m.                        (11.487.7)
+```
+
+Consequently every ordinary owned cell is now the single coefficient defect
+
+```text
+m^(-s)[beta_m(t)-C_G(t)],       622<=m<=39852.        (11.487.8)
+```
+
+This is the required Gamma subtraction before norms.  It does not assert
+that the difference in (11.487.8) is small.
+
+For `39853<=m<=39936`, let `a_m` be the real physical projection of the
+already-defined paired endpoint mode `A_m+A_-m`.  Its canonical Hardy lift is
+
+```text
+mathcal A_m=(H(t)/2)exp[-i*theta(t)]a_m,
+Hardy_t[mathcal A_m]=H(t)a_m.                         (11.487.9)
+```
+
+Since `A_transition=A_endpoint+G_extra`, the target and extra Gamma rosters
+combine into the extended range `622..39936`.  Equations
+(11.484.11), (11.487.4), and (11.487.7)--(11.487.9) give the exact joined
+identity
+
+```text
+H(t)J_Z=Hardy_t{
+ P_W+B_0
+ +sum_(m=1)^621 m^(-s)beta_m
+ +sum_(m=622)^39852 m^(-s)[beta_m-C_G]
+ +sum_(m=39853)^39936
+       [m^(-s)(beta_m-C_G)-mathcal A_m]
+ +sum_(m=39937)^infinity[Fresnel]m^(-s)beta_m},
+
+P_W=-sum_(n=79789)^2561211 n^(-s)
+    +C_79788-C_2561211.                              (11.487.10)
+```
+
+Thus the exact mode partition is
+
+```text
+1..621:          unowned lower cells,
+622..39852:      39231 Gamma-subtracted ordinary cells,
+39853..39936:    84 Gamma-plus-A-subtracted cells, split 42+42,
+39937..infinity: unowned upper cells.
+```
+
+The common Gamma coefficient is now explicit.  The two remaining structural
+steps are equally explicit: derive the natural same-cell integral lift of
+`mathcal A_m`, and join `P_W` to the lower and upper unowned-cell packages by
+an exact contour or Mordell transformation.  Only the resulting joined
+packets may then be bounded.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_cell_common_carrier_subtraction_reduction_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_cell_common_carrier_subtraction_reduction_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_cell_common_carrier_subtraction_reduction_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_cell_common_carrier_subtraction_reduction_gate.py
+```
+
+Pi provenance: every `pi` in (11.487.1)--(11.487.10) descends from the finite
+RSI Gaussian, odd Fourier roster, Riemann-Siegel phase, or exact global-Morse
+Gamma normalization.  No fitted constant is introduced.
+
+Section 11.487 proves the exact finite-source cell covariance, contiguous
+Fresnel partition, common Gamma coefficient, canonical A lift, and joined
+`H J_Z` reduction.  It does not bound a coefficient defect, derive the
+natural A cell lift or Mordell join, enclose `J_Z` or `D_K`, or prove a non-A,
+all-height, `Lambda<=0`, PF-infinity, RH, or prize-level result.
+
+## 11.488 Natural A endpoint-integral cell lift
+
+The canonical real lift in (11.487.9) proves the physical identity but
+discards the pre-projection imaginary component.  The exact endpoint theorem
+already supplies a natural complex object.  For `39853<=m<=39936`, let
+
+```text
+mathfrak C_A,m^exact=(2pi)^(-1)
+ integral_(S>h_m) integral_(P<P_A,m(S))
+ A_A,m(P,S)exp(i(P^2-S^2)/2)dP dS.                 (11.488.1)
+```
+
+This is the convergent full exact endpoint-wedge integral of (11.428.1), with
+the compact and exterior pieces joined before the improper limit.  Put
+
+```text
+c_t=(pi/(32t))^(1/4),       epsilon_A=-1,
+
+X_A,m=c_t exp(-i*pi/8)epsilon_A exp(i Phi_A,m)
+      W0_A,m mathfrak C_A,m^exact,
+a_m=2 Re X_A,m=P_t[A_m+A_-m].                       (11.488.2)
+```
+
+Because `A=159577` is odd, `m(A-m)` is even.  The endpoint phase therefore
+obeys the exact parity reduction
+
+```text
+exp(-i*pi/8)exp(i Phi_A,m)
+ =exp(i theta_0)m^(-it),
+theta_0=t[log(t/(2pi))-1]/2-pi/8.                   (11.488.3)
+```
+
+With `s=1/2+it`, define the endpoint integral amplitude
+
+```text
+eta_A,m=epsilon_A c_t sqrt(m)exp(i theta_0)
+        W0_A,m mathfrak C_A,m^exact.                 (11.488.4)
+```
+
+Equations (11.488.2)--(11.488.4) give the exact common-cell carrier
+factorization
+
+```text
+X_A,m=m^(-s)eta_A,m.                                (11.488.5)
+```
+
+The natural Hardy coefficient and lift are consequently
+
+```text
+C_A,m=H(t)exp[-i theta(t)]eta_A,m,
+
+mathcal A_A,m^nat=H(t)exp[-i theta(t)]X_A,m
+                 =m^(-s)C_A,m,
+
+Hardy_t[mathcal A_A,m^nat]=H(t)a_m.                 (11.488.6)
+```
+
+The difference from the real canonical lift is exactly Hardy-null:
+
+```text
+Hardy_t[mathcal A_A,m^nat
+        -(H(t)/2)exp(-i theta(t))a_m]=0.             (11.488.7)
+```
+
+It is generally nonzero before projection, so retaining it is necessary for
+cancellation.  Replacing (11.487.9) by (11.488.6) changes no physical value
+and turns every transition cell into the single joined coefficient
+
+```text
+m^(-s)[beta_m(t)-C_G(t)-C_A,m],
+                         39853<=m<=39936.            (11.488.8)
+```
+
+Thus the exact `H J_Z` argument in (11.487.10) now has ordinary packets
+`m^(-s)(beta_m-C_G)` and transition packets
+`m^(-s)(beta_m-C_G-C_A,m)`, with no arbitrary lift.  Production witnesses
+reconstruct saved complex endpoint-integral rows at modes `39853`, `39894`,
+and `39936`; an independent checker changes the height, odd endpoint, modes,
+integration box, and precision.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_cell_natural_A_carrier_lift_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_cell_natural_A_carrier_lift_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_cell_natural_A_carrier_lift_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_cell_natural_A_carrier_lift_gate.py
+```
+
+Pi provenance: every `pi` in (11.488.1)--(11.488.8) descends from the exact
+equation-(9) endpoint phase, odd-endpoint Fourier parity, the bi-Morse
+normalization, paper rotation, or Riemann-Siegel phase.  No fitted constant is
+introduced.
+
+Section 11.488 proves the exact natural endpoint-integral Hardy lift, its
+common `m^(-s)` carrier, and the joined transition coefficient reduction.  It
+does not certify 84 modewise full-endpoint complex enclosures, bound a joined
+coefficient, prove the Mordell join of `P_W` to unowned cells, enclose `J_Z` or
+`D_K`, or prove a non-A, all-height, `Lambda<=0`, PF-infinity, RH, or
+prize-level result.
+
+## 11.489 Grouped complex A endpoint lift
+
+The transition theorem requires the sum of the 84 natural endpoint lifts, not
+84 separately normed exterior values.  The existing certified pieces retain
+exactly the complex information needed for that grouped object.  Let
+
+```text
+R_A^raw=R_A,loc^aff+R_A,loc^nonlinear+R_A,ext^exact,  (11.489.1)
+```
+
+where the first two terms are the deterministic sums of the 84 cached raw
+complex rows.  The exterior theorem supplies the grouped rational contour
+value `R_A,ext^(4)`, while (11.438.4) gives the complex modulus allowance
+
+```text
+|R_A,ext^exact-R_A,ext^(4)|
+ <=6.44692711737752556018e-13.                       (11.489.2)
+```
+
+All three terms in (11.489.1) are before the paper rotation and physical real
+projection.  Interval summation gives
+
+```text
+R_A^raw
+ =-31.93967938340305868087...
+  -18.30596358717747117406... i,
+
+X_A,endpoint=c_t exp(-i*pi/8)R_A^raw
+ =-0.06463340946584340200521...
+  -0.00830131301357600374062... i.                  (11.489.3)
+```
+
+The radii of the two components of `X_A,endpoint` are below `1.52e-12`.
+Direct physical reconstruction overlaps the independent Section 11.441
+assembly:
+
+```text
+2 Re X_A,endpoint
+ =-0.12926681893168680401041... +/- 3.02e-12.
+                                                               (11.489.4)
+```
+
+Using the exact `H(t)` and exact Riemann-Siegel phase correction from the
+global-Morse theorem, define
+
+```text
+mathcal A_A^nat
+ =H(t)exp[-i theta(t)]X_A,endpoint
+ =sum_(m=39853)^39936 m^(-s)C_A,m.                  (11.489.5)
+```
+
+Its certified ball is centred at
+
+```text
+-0.04519913646310109060063...
+-0.04694068043732117894394... i,                    (11.489.6)
+```
+
+with component radii below `2.13e-12`, and
+
+```text
+Hardy_t[mathcal A_A^nat]=H(t)A_endpoint.             (11.489.7)
+```
+
+The grouped natural lift differs from the real canonical lift by modulus
+`0.008301313013576...`, although their Hardy projections agree.  Thus the
+imaginary component cannot be discarded before joining carriers.
+
+By linearity, the complete transition block is now the single exact packet
+
+```text
+T_A^join
+ =sum_(m=39853)^39936 m^(-s)[beta_m(t)-C_G(t)]
+  -mathcal A_A^nat
+
+ =sum_(m=39853)^39936
+    m^(-s)[beta_m(t)-C_G(t)-C_A,m].                 (11.489.8)
+```
+
+Equation (11.489.8) proves that separate full complex exterior integration
+for all 84 modes is not logically required for a grouped transition bound.
+The next calculation must evaluate the Fresnel/Gamma sum and subtract the
+certified complex ball (11.489.6) before applying a norm.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_transition_grouped_complex_A_endpoint_lift_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_transition_grouped_complex_A_endpoint_lift_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_transition_grouped_complex_A_endpoint_lift_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_transition_grouped_complex_A_endpoint_lift_gate.py
+```
+
+Pi provenance: every `pi` in (11.489.1)--(11.489.8) comes from the exact
+endpoint phase, bi-Morse normalization, paper rotation, or Riemann-Siegel
+phase.  No fitted constant is introduced.
+
+Section 11.489 certifies the complete grouped complex A endpoint
+preprojection and natural Hardy lift at `t=10^10`.  It does not evaluate or
+bound `T_A^join`, prove the Mordell join of `P_W` to unowned cells, enclose
+`J_Z` or `D_K`, or prove a non-A, all-height, `Lambda<=0`, PF-infinity, RH,
+or prize-level result.
+
+## 11.490 Alternating boundary-jet transition packet
+
+The complete transition source can be evaluated without traversing its
+`2481423` Fourier labels.  Put
+
+```text
+a=39852.5,  b=39936.5,  M=2481423,
+F(y)=y^(-s)exp[i*pi*(159577*y-y^2)].                 (11.490.1)
+```
+
+On this contiguous 84-cell interval its exact finite source contribution is
+
+```text
+I_tr=sum_(j=0)^(M-1) integral_a^b
+       F(y)exp(2*pi*i*j*y)dy.                        (11.490.2)
+```
+
+Both endpoints are half integers and `b-a=84`, so
+`exp(2*pi*i*j*a)=exp(2*pi*i*j*b)=(-1)^j`.  Repeated integration by parts,
+performed only for `j>=1`, therefore gives the exact finite identity
+
+```text
+I_tr=I_0
+ +sum_(r=0)^(R-1) (-1)^r [F^(r)(b)-F^(r)(a)]
+    A_(r+1)(M-1)/(2*pi*i)^(r+1)
+ +R_R,                                               (11.490.3)
+
+A_p(N)=sum_(j=1)^N (-1)^j/j^p.                      (11.490.4)
+```
+
+No asymptotic replacement has occurred in (11.490.3).  The finite alternating
+sums in (11.490.4) are evaluated by digamma for `p=1` and by finite harmonic
+sums/Hurwitz zeta for `p>1`.  The retained remainder obeys
+
+```text
+|R_R| <= zeta(R)/(2*pi)^R integral_a^b |F^(R)(y)|dy. (11.490.5)
+```
+
+At `R=12`, with 128 rigorous derivative slabs, Arb certifies
+
+```text
+|R_12| <= 6.44904766789228995535e-17.                (11.490.6)
+```
+
+The `j=0` logarithmic phase is integrated directly with a convergent centred
+series carrying its geometric tail.  Combining it with the twelve endpoint
+jets gives
+
+```text
+I_tr=
+ 0.07154278585722209135245427134057774180...
++0.06062036407180469713273252142459330656... i,
+                                                               (11.490.7)
+```
+
+with component radii below `6.45e-17`.  Subtracting the exact common Gamma
+lift and the grouped natural A lift from Section 11.489 before projection
+then yields
+
+```text
+T_A^join=
+ 0.04434802829267891969187949473383939830...
++0.04625765106805546494431672804809789346... i,       (11.490.8)
+
+Hardy_t[T_A^join]
+ =0.12708423867872593858362106486326453306...
+   +/- 5.97e-12.                                     (11.490.9)
+```
+
+The component radii in (11.490.8) are below `2.13e-12`.  An independent
+replay raises the endpoint-jet order from 12 to 14, doubles the derivative
+slabs, and tightens the integration panels.  It overlaps (11.490.7)--
+(11.490.9) and gives a smaller remainder.  A separate nine-label fixture at
+an altered height directly integrates every Fourier label and overlaps the
+collapsed boundary-jet formula, checking the endpoint parity and repeated-
+integration signs.
+
+Machine-audited companion:
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_transition_alternating_boundary_jet_packet_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_transition_alternating_boundary_jet_packet_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_transition_alternating_boundary_jet_packet_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_Fresnel_transition_alternating_boundary_jet_packet_gate.py
+```
+
+Pi provenance: every `pi` in (11.490.1)--(11.490.9) comes from the exact
+finite Fresnel phase, the integer Fourier spacing, the Gamma normalization,
+or the Riemann-Siegel phase.  No fitted constant is introduced.
+
+Section 11.490 certifies the grouped Fresnel/Gamma/A transition packet at the
+single saved height `t=10^10`.  It does not join `P_W` to cells `1..621` and
+`39937..infinity`, bound the ordinary owned packet, enclose complete `J_Z` or
+`D_K`, or prove a non-A, all-height, `Lambda<=0`, PF-infinity, RH, or
+prize-level result.
+
+## 11.491 Pole-safe two-boundary join of P_W to the unowned cells
+
+Keep the principal logarithm and the contour orientation fixed in Sections
+11.483--11.486.  Put
+
+```text
+s=1/2+it,
+A=159577,  B=5122421,  M=2481423,
+n_-=(A-1)/2=79788,  n_+=(B+1)/2=2561211,
+
+D_W(z)=sum_(j=0)^(M-1) exp[i*pi*(A+2j)z],
+g_W(z)=z^(-s)exp(-i*pi*z^2)D_W(z).                 (11.491.1)
+```
+
+The finite RSI prefix, the complete Fresnel branch correction, and their
+physical sum are
+
+```text
+P_W=-integral_C g_W(z)dz,
+B_W=integral_0^infinity[Fresnel] g_W(y)dy,
+S_W=P_W+B_W.                                       (11.491.2)
+```
+
+For the two cell boundaries
+
+```text
+L=621.5,  U=39936.5,
+```
+
+the finite prefix must be joined to both unowned tails before any norm.  The
+exact joined object is
+
+```text
+U_unowned
+ =P_W+integral_0^L g_W+integral_U^infinity[Fresnel]g_W
+ =S_W-integral_L^U g_W.                            (11.491.3)
+```
+
+Deforming the finite-source contour to the upper side of the real axis is
+legal.  Its zero indentation vanishes because `Re(s)=1/2`, and therefore
+
+```text
+U_unowned
+ =-integral_(-infinity)^0[upper]g_W(z)dz
+  -integral_L^U g_W(y)dy.                          (11.491.4)
+```
+
+Writing `z=-y+i0` and then rotating `y=exp(-i*pi/4)x` through the decaying
+quadrant gives
+
+```text
+-integral_(-infinity)^0[upper]g_W(z)dz
+ =K_0 integral_0^infinity x^(-s)exp(-pi*x^2)G_W(x)dx
+ =S_W,
+
+K_0=exp(3*pi*t/4+3*pi*i/8),
+G_W(x)=sum_(j=0)^(M-1)
+ exp[-pi(1+i)(A+2j)x/sqrt(2)].                     (11.491.5)
+```
+
+The finite source also has the exact paired form
+
+```text
+D_W(z)=(i/2)[exp(2*pi*i*n_-*z)-exp(2*pi*i*n_+*z)]
+        csc(pi*z).                                 (11.491.6)
+```
+
+Define the two formal csc packets by
+
+```text
+G_N(z)=(1/(2i))z^(-s)exp(-i*pi*z^2+2*pi*i*N*z)csc(pi*z).
+```
+
+Then `g_W=G_(n_+)-G_(n_-)`.  At every nonzero integer `k`, both `G_N`
+terms have the same residue `k^(-s)/(2*pi*i)`.  At zero each separate term
+behaves as `z^(-s-1)/(2*pi*i)`, whereas their production difference behaves
+as `M z^(-s)`.  Thus the paired source is locally integrable, but separate
+unregularized `G_N` real-tail integrals are illegal.
+
+The canonical common subtraction repairs this without changing the pair:
+
+```text
+R_N(z)=G_N(z)-G_0(z)
+      =z^(-s)exp(-i*pi*z^2)
+       sum_(r=0)^(N-1)exp[i*pi*(2r+1)z].            (11.491.7)
+```
+
+Every integer pole of `R_N` is removable and `R_N(z)` behaves as `N z^(-s)`
+at zero.  Consequently each finite-prefix object
+
+```text
+mathcal J_N(L,U)
+ =integral_C R_N(z)dz
+  -integral_0^L R_N(y)dy
+  -integral_U^infinity[Fresnel]R_N(y)dy
+```
+
+is legitimate, and the common subtraction cancels exactly in
+
+```text
+U_unowned
+ =mathcal J_(n_-)(L,U)-mathcal J_(n_+)(L,U).        (11.491.8)
+```
+
+If `S_N` denotes the finite physical Kummer prefix and `B_N[L,U]` its finite
+interior Fresnel integral, the same definitions give
+
+```text
+mathcal J_N(L,U)=B_N[L,U]-S_N.                     (11.491.9)
+```
+
+This is a pole-safe finite/infinite contour normalization, not yet a
+quantitative Mordell compression or an actual-height enclosure.
+
+The production endpoints also have constant-work jets.  Since `A=1 mod 4`,
+`M` is odd, and `h=k+1/2`,
+
+```text
+D_W(h)=i(-1)^k,
+
+D_W^(r)(h)
+ =i(-1)^k(i*pi)^r 2^(r-1)
+  [E_r(A/2)+E_r(A/2+M)].                           (11.491.10)
+```
+
+Here `E_r` is the Euler polynomial.  For
+`f(z)=z^(-s)exp(-i*pi*z^2)`, every full endpoint jet follows from
+
+```text
+g_W^(r)(h)=sum_(q=0)^r binom(r,q)f^(r-q)(h)D_W^(q)(h),
+
+(log f)'=-s/z-2i*pi*z,
+(log f)''=s/z^2-2i*pi,
+(log f)^(q)=(-1)^q s(q-1)!/z^q,  q>=3.             (11.491.11)
+```
+
+No traversal of the `2481423` production labels is needed to form these
+jets.  An altered five-label replay at `t=3.25` independently compares the
+closed hypergeometric source, direct RSI contour, rotated negative boundary,
+branch correction, finite interior integral, and regularized `mathcal J_2-
+mathcal J_7` difference.  The source discrepancy is below `2.07e-72`, the
+branch and joined-packet discrepancies are below `7.18e-58`, and the
+regularized-difference discrepancy is below `2.22e-75`.  A convergent lower-
+endpoint Taylor integral is stable from 36 to 44 terms at the saved precision;
+the omitted Gaussian upper tail is bounded by `4.96e-109`.  The independent
+checker changes the height, logarithmic cut points, Taylor depths, contour
+partition, and finite integration mesh and passes.
+
+The exact cancellation needed later is already visible.  With `a=39852.5`,
+write
+
+```text
+O_join=integral_L^a g_W
+       -C_G sum_(m=622)^39852 m^(-s),
+
+T_join=integral_a^U g_W
+       -C_G sum_(m=39853)^39936 m^(-s)-mathcal A_A^nat.
+```
+
+Then (11.491.3) gives, before projection,
+
+```text
+U_unowned+O_join+T_join
+ =S_W-C_G sum_(m=622)^39936 m^(-s)-mathcal A_A^nat. (11.491.12)
+```
+
+The two positive Fresnel subintervals cancel `-integral_L^U g_W` exactly.
+The three packets must therefore be assembled before a final norm.
+
+The certificate and independent replay are
+
+```text
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_PW_unowned_cell_pole_safe_two_boundary_contour_join_gate.json
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_finite_PW_unowned_cell_pole_safe_two_boundary_contour_join_gate.py
+```
+
+Pi provenance: every `pi` in (11.491.1)--(11.491.12) descends from the exact
+RSI Gaussian/sine kernel, odd Fourier roster, fixed quarter-turn, or
+Riemann-Siegel branch phase.  No fitted circle constant is inserted.
+
+Section 11.491 certifies the exact pole-safe `P_W`/unowned-cell contour join,
+the common-`G_0` finite-prefix regularization, all-order half-integer endpoint
+jets, and cancellation-preserving packet reassembly.  It does not compress or
+bound the joined packet at `t=10^10`, bound the ordinary owned packet, enclose
+complete `J_Z` or `D_K`, or prove a non-A, all-height, `Lambda<=0`,
+PF-infinity, RH, or prize-level result.
+
+## 11.492 Unequal-truncation saddle map and endpoint/core route split
+
+The exact Fresnel phase in Section 11.486 supplies a direct map to the
+unequal-truncation geometry of the generalized Riemann--Siegel formula.  Put
+
+```text
+p=t/(2pi),
+phi_ell(y)=pi(ell y-y^2)-t log y.                    (11.492.1)
+```
+
+Its real stationary equation is
+
+```text
+phi_ell'(y)=0
+iff ell=2y+t/(pi y)=2(y+p/y).                        (11.492.2)
+```
+
+For any positive stationary coordinate define
+
+```text
+alpha=max(y,p/y),       beta=min(y,p/y),
+lambda=sqrt(alpha/beta).                              (11.492.3)
+```
+
+Then, exactly,
+
+```text
+t=2pi alpha beta,       ell=2(alpha+beta),
+y_+/-=(ell+/-sqrt(ell^2-8t/pi))/4.                  (11.492.4)
+```
+
+Thus each source label records the sum of an unequal pair on the fixed-product
+hyperbola; it is not itself one of the two truncation lengths.  At `t=10^10`,
+the endpoint labels give
+
+```text
+ell=159577:
+ y_-=39852.3913862312389618431367868261...,
+ y_+=39936.1086137687610381568632131739...,
+ lambda=1.00104979030007426716012246076...,
+
+ell=5122421:
+ y_-=621.5560036102371463889412039566...,
+ y_+=2560588.943996389762853611058796...,
+ lambda=64.1844464672888604363499222111....          (11.492.5)
+```
+
+O'Sullivan's Theorem 1.5 concerns the classical symmetric zeta remainder
+`R(s;alpha,beta)`.  At `sigma=1/2`, its displayed remainder scale, with the
+implicit constant deliberately omitted, is
+
+```text
+E_N^shape=(lambda+lambda^(-1))^(3N+1/2)
+          /t^(N/2+1/4),
+
+E_(N+1)^shape/E_N^shape
+ =(lambda+lambda^(-1))^3/sqrt(t).                    (11.492.6)
+```
+
+The exact crossover of the displayed ratio is
+
+```text
+c=t^(1/6),
+lambda_*=(c+sqrt(c^2-4))/2,
+y_*=sqrt(t/(2pi))/lambda_*.
+```
+
+At the production height,
+
+```text
+lambda_*=46.39433397993349...,
+y_*=859.8944012731885200216922270542....             (11.492.7)
+```
+
+The first half-integer boundary not below `y_*` is `860.5`; at `859.5` the
+ratio in (11.492.6) is still above one.  Hence any implementation of the
+completed expansion has the exact route split
+
+```text
+endpoint block:  622..860,       239 cells,
+contracting core: 861..39936,  39076 cells.           (11.492.8)
+```
+
+This is a scale audit, not an enclosure.  In particular, the paper explicitly
+does not supply numerical constants for its error terms.  Its intermediate
+Theorem 2.1 is the more promising donor: before completed symmetric
+re-expansion, the displayed `sigma=1/2` error scale is
+
+```text
+lambda^(1/2)t^(-1/4-N/6),                            (11.492.9)
+```
+
+and the stated implied constant is independent of `lambda` for `lambda>=1`.
+That still does not identify the classical remainder with the heat-flow
+quantity
+
+```text
+S_W-C_G sum_(m=622)^39936 m^(-s)-mathcal A_A^nat.   (11.492.10)
+```
+
+The next obligation is therefore an exact common-contour derivation from
+(11.492.10) to a finite Mordell main plus an explicit remainder.  The Gamma
+and A terms must remain inside that derivation; applying (11.492.6) to
+separate packets would discard the cancellation proved in Section 11.491.
+
+The machine-audited certificate and independent replay are
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_unequal_truncation_saddle_map_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_unequal_truncation_saddle_map_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_unequal_truncation_saddle_map_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_unequal_truncation_saddle_map_gate.py
+```
+
+Primary source: https://arxiv.org/abs/1811.01130.
+
+Pi provenance: every `pi` in Section 11.492 descends from the fixed
+Riemann--Siegel/Fresnel quadratic phase and the standard product relation
+`t=2pi alpha beta`.  No fitted or geometric constant is inserted.
+
+Section 11.492 proves the exact saddle/unequal-truncation parameter map and
+the actual-height displayed-scale route split only.  It does not prove an
+identity between O'Sullivan's classical zeta remainder and `J_Z`, make the
+paper's implicit constants explicit, enclose the joined packet, `J_Z`, or
+`D_K`, or prove a non-A, all-height, `Lambda<=0`, PF-infinity, RH, or
+prize-level result.
+
+## 11.493 Entire auxiliary-kernel finite difference
+
+The common-`G_0` subtraction in Section 11.491 has a pole-free global form.
+Define
+
+```text
+kappa(z)=[exp(-i*pi*z)-exp(-i*pi*z^2)]/[2i sin(pi*z)]
+        =exp[-i*pi(z^2+z)/2]
+          sin[pi(z^2-z)/2]/sin(pi*z).                (11.493.1)
+```
+
+The numerator vanishes at every integer.  L'Hopital's rule gives the exact
+removable values
+
+```text
+kappa(k)=k-1/2,                 k in Z.              (11.493.2)
+```
+
+For an integer `N>=0`, parity leaves the linear quotient in (11.493.1)
+unchanged under `z -> z-N`, while
+
+```text
+ exp[-i*pi(z-N)^2]/[2i sin(pi(z-N))]
+ =exp(-i*pi*z^2+2pi*i*N*z)/[2i sin(pi*z)].           (11.493.3)
+```
+
+Subtracting the translated kernel therefore proves the global entire
+identity
+
+```text
+kappa(z)-kappa(z-N)
+ =exp(-i*pi*z^2)sum_(r=0)^(N-1)exp[i*pi(2r+1)z],
+
+R_N(z)=z^(-s)[kappa(z)-kappa(z-N)].                  (11.493.4)
+```
+
+This is exactly the regularized finite-prefix packet of (11.491.7), now with
+no displayed csc pole.  Subtracting the two production prefixes gives
+
+```text
+H_W(z)=kappa(z-n_-)-kappa(z-n_+),
+g_W(z)=z^(-s)H_W(z),
+
+n_-=79788,       n_+=2561211.                       (11.493.5)
+```
+
+At every integer, including zero,
+
+```text
+H_W(k)=(k-n_--1/2)-(k-n_+-1/2)
+      =n_+-n_-=2481423.                              (11.493.6)
+```
+
+Thus all integer singularities are absent before integration, and the only
+local zero behavior is the already legal `2481423 z^(-s)`.
+
+Let the common contour functional be
+
+```text
+L_s[h]
+ =integral_0^infinity[Fresnel] z^(-s)h(z)dz
+  -integral_C z^(-s)h(z)dz.                         (11.493.7)
+```
+
+By the definitions of the finite RSI prefix and branch correction,
+
+```text
+S_N=L_s[kappa(z)-kappa(z-N)],
+
+S_W=L_s[kappa(z-n_-)-kappa(z-n_+)].                 (11.493.8)
+```
+
+Consequently the complete preprojection target of (11.491.12) is the single
+pole-free object
+
+```text
+L_s[H_W]
+ -C_G sum_(m=622)^39936 m^(-s)
+ -mathcal A_A^nat.                                  (11.493.9)
+```
+
+The unshifted `kappa` is the trigonometric kernel in Proposition 9 of Arias de
+Reyna's integral representation of Riemann's auxiliary function.  Only that
+kernel identity is used here.  No auxiliary-function value, asymptotic, or
+bound is transferred to (11.493.9).
+
+Four altered complex points, four finite-prefix lengths, a separate finite
+window, and six removable integer values verify (11.493.1)--(11.493.6) to
+high precision.  The independent checker changes all points, prefix lengths,
+integer probes, and the removable-limit extrapolation.
+
+The certificate and checker are
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_riemann_auxiliary_entire_kernel_finite_difference_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_riemann_auxiliary_entire_kernel_finite_difference_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_riemann_auxiliary_entire_kernel_finite_difference_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_riemann_auxiliary_entire_kernel_finite_difference_gate.py
+```
+
+Primary source for the unshifted kernel:
+https://arxiv.org/abs/2407.02016.
+
+Pi provenance: every `pi` in Section 11.493 is inherited from the exact
+Riemann--Siegel Gaussian/sine kernel.  The finite-difference identity uses
+only integer translation parity.
+
+Section 11.493 proves the entire-kernel identity, integer removable values,
+finite-prefix/window finite differences, and common-functional reassembly
+only.  It does not prove a quantitative contour deformation, Mellin
+remainder bound, joined-packet, `J_Z`, or `D_K` enclosure, or a non-A,
+all-height, `Lambda<=0`, PF-infinity, RH, or prize-level result.
+
+## 11.494 Gamma-balanced Mellin-Hurwitz coordinate and Taylor barrier
+
+The entire finite difference in Section 11.493 has a scaled Mellin coordinate
+in which its exponential normalization cancels exactly.  Put
+
+```text
+omega=exp(i*pi/4),
+q_-=n_-+1/2=79788+1/2,
+q_+=n_++1/2=2561211+1/2,
+
+Delta_q(u)=[exp(-q_-u)-exp(-q_+u)]/[1-exp(-u)].       (11.494.1)
+```
+
+The quotient is the finite sum
+
+```text
+Delta_q(u)=sum_(j=n_-)^(n_+-1)exp[-(j+1/2)u],
+Delta_q(0)=n_+-n_-=2481423.                          (11.494.2)
+```
+
+In the decaying half-line source (11.485.5), use
+
+```text
+u=2*pi*omega*x.
+```
+
+Then `exp(-pi*x^2)=exp(i*u^2/(4*pi))`.  The image ray has
+`arg(u)=pi/4`.  In the closed sector `0<=arg(u)<=pi/4`,
+
+```text
+|exp(i*u^2/(4*pi))|
+ =exp[-|u|^2 sin(2 arg(u))/(4*pi)]<=1.               (11.494.3)
+```
+
+There is no denominator zero in the sector except the removable point at
+zero, and the positive real part supplies exponential decay at infinity.
+Cauchy's theorem therefore rotates the ray to the positive real axis without
+a residue.  With `s=1/2+it`, define
+
+```text
+M_s(q_-,q_+)
+ =integral_0^infinity u^(-s)exp(i*u^2/(4*pi))
+   Delta_q(u)du,
+
+E_s=exp(pi*t/2+i*pi/4)(2*pi)^(s-1).                 (11.494.4)
+```
+
+The exact source identity is
+
+```text
+S_W=E_s M_s(q_-,q_+).                               (11.494.5)
+```
+
+Deleting only the Gaussian chirp gives a finite Hurwitz-Mellin anchor.  Since
+`Re(1-s)=1/2>0`, termwise integration of the finite sum (11.494.2) is legal:
+
+```text
+integral_0^infinity u^(-s)Delta_q(u)du
+ =Gamma(1-s)Delta_zeta(1-s),
+
+Delta_zeta(w)=zeta(w,q_-)-zeta(w,q_+).              (11.494.6)
+```
+
+The standard critical-line gamma identity now proves
+
+```text
+|E_s Gamma(1-s)|^2
+ =exp(pi*t)/(2pi) * pi/cosh(pi*t)
+ =1/[1+exp(-2pi*t)].                                 (11.494.7)
+```
+
+Thus the `exp(pi*t/2)` in `E_s` is not an intrinsic large factor; it is
+exactly balanced by the Mellin gamma factor.
+
+For every integer `K>=1`, finite Taylor expansion gives the exact identity
+
+```text
+M_s=sum_(k=0)^(K-1) (i/(4*pi))^k/k!
+      Gamma(1-s+2k)Delta_zeta(1-s+2k)+R_K,           (11.494.8)
+
+R_K=integral_0^infinity u^(-s)Delta_q(u)
+    [exp(iX)-sum_(k=0)^(K-1)(iX)^k/k!]du,
+
+X=u^2/(4*pi).                                        (11.494.9)
+```
+
+The integral form of Taylor's remainder gives `|remainder|<=X^K/K!` on the
+positive real axis.  Positivity of (11.494.2) therefore yields the explicit
+majorant
+
+```text
+|E_s R_K|
+ <=|E_s| Gamma(2K+1/2)Delta_zeta(2K+1/2)
+    /[(4*pi)^K K!]
+ =:B_K.                                              (11.494.10)
+```
+
+This bound is rigorous but does not scale.  The finite positive Hurwitz sum
+implies
+
+```text
+Delta_zeta(w+2)/Delta_zeta(w)<=q_-^(-2),
+
+B_(K+1)/B_K
+ <=[K+3/(16(K+1))]/(pi*q_-^2).                      (11.494.11)
+```
+
+The numerator coordinate in (11.494.11) is strictly increasing.  Exact
+rational comparisons against a 99-decimal enclosing interval for `pi` prove
+that its right side is below one through
+
+```text
+K=20000022018,                                       (11.494.12)
+```
+
+and exceeds one at `K=20000022019`.  Hence the absolute Taylor majorant is
+strictly decreasing for more than twenty billion orders before it can even
+reach a turning point.  The positive-axis norm in (11.494.10) is therefore
+rejected as an evaluator; the oscillatory remainder (11.494.9) must instead
+be moved onto a saddle-aligned contour or an endpoint-complete Mordell form.
+
+At `t=3.25` on an altered five-label roster, the original decaying half-line
+and (11.494.5) differ by less than `2.57e-70`; the Hurwitz anchor differs by
+less than `1.63e-71`, and the order-three finite expansion closes to less than
+`8.85e-67`.  The independent checker changes the height, roster, order,
+quadrature partition, and precision.
+
+The certificate and checker are
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_gamma_balanced_mellin_hurwitz_finite_difference_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_gamma_balanced_mellin_hurwitz_finite_difference_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_gamma_balanced_mellin_hurwitz_finite_difference_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_gamma_balanced_mellin_hurwitz_finite_difference_gate.py
+```
+
+Primary-source boundary: Arias de Reyna supplies the entire auxiliary-kernel
+no-residue mechanism, and O'Sullivan supplies the unequal-truncation/Mordell
+route context.  No auxiliary-function value, zeta remainder identity, or
+implicit asymptotic constant is transferred to the heat-flow packet.
+
+Pi provenance: every `pi` in Section 11.494 comes from the inherited
+Riemann--Siegel Gaussian, the fixed quarter-turn, the Mellin scaling, or the
+standard gamma identity.  The threshold uses a certified rational enclosure
+of that same constant.
+
+Section 11.494 proves the exact gamma-balanced Mellin-Hurwitz coordinate, its
+finite expansion with explicit remainder, and the non-scalability of the
+positive-axis absolute Taylor majorant only.  It does not prove a
+saddle-aligned remainder bound, quantitative joined-packet, `J_Z`, or `D_K`
+enclosure, or a non-A, all-height, `Lambda<=0`, PF-infinity, RH, or prize-level
+result.
+
+## 11.495 Quarter-disk vertical current and rigorous upper-arc enclosure
+
+The oscillatory Mellin packet in Section 11.494 admits a finite deformation
+that keeps the complete `q_-` to `q_+` difference intact.  Write
+
+```text
+F_s(u)=u^(-s)exp(i*u^2/(4*pi))Delta_q(u),
+M_s=integral_0^infinity F_s(u)du,
+R=2*pi*Y.                                           (11.495.1)
+```
+
+Use the principal logarithm in the fourth-quadrant quarter disk.  The small
+circle about zero contributes `O(epsilon^(1/2))`, because the finite
+difference is regular at zero and `Re(1-s)=1/2`.  If `A_Y^cw` denotes the
+clockwise arc from `R` to `-iR` and
+
+```text
+T_Y=integral_R^infinity F_s(u)du,
+```
+
+then contour orientation gives the exact finite identity
+
+```text
+M_s=integral_[0 to -iR]F_s(u)du-A_Y^cw+T_Y.         (11.495.2)
+```
+
+On the vertical radius put `u=-2*pi*i*y`.  Since
+
+```text
+u^(-s)=(2*pi*y)^(-s)exp(i*pi*s/2),
+du=-2*pi*i*dy,
+```
+
+the complete normalization cancels pointwise:
+
+```text
+E_s u^(-s)du=y^(-s)dy,
+exp(i*u^2/(4*pi))=exp(-i*pi*y^2),
+Delta_q(-2*pi*i*y)=D_W(y).                          (11.495.3)
+```
+
+Consequently, with
+
+```text
+V_Y=integral_0^Y y^(-s)exp(-i*pi*y^2)D_W(y)dy,
+C_Y=-E_s A_Y^cw,
+```
+
+one has
+
+```text
+S_W=V_Y+C_Y+E_s T_Y.                               (11.495.4)
+```
+
+Combining (11.495.4) at `Y=U=39936.5` with the exact two-boundary join
+(11.491.3) cancels the entire interior Fresnel current before any norm:
+
+```text
+U_unowned=integral_0^L g_W(y)dy+C_U+E_s T_U,
+L=621.5.                                             (11.495.5)
+```
+
+This is a strict reduction from one infinite contour plus two real tails to
+one finite lower cell, one compact upper arc, and an exponentially negligible
+positive-real tail.
+
+The upper arc has a cancellation-stable endpoint coordinate.  Put
+
+```text
+u=-iR exp(i*delta),       0<=delta<=pi/2,
+N=q_+-q_-=2481423,
+w(delta)=exp(i*R*expm1(i*delta)).                   (11.495.6)
+```
+
+Because `U` and `q_-` are half integers and `N` is odd,
+
+```text
+C_U=exp(i*[pi-t*log(U)-pi*U^2]) C_U^rot,
+
+C_U^rot=sqrt(U) integral_0^(pi/2)
+ exp(X(delta)) [1+w(delta)^N]/[1+w(delta)] ddelta,   (11.495.7)
+
+X(delta)=(t+2*pi*U^2-q_-R+i/2)delta
+ -i*pi*U^2[expm1(2i*delta)-2i*delta]
+ +i*q_-R[expm1(i*delta)-i*delta].                   (11.495.8)
+```
+
+Formula (11.495.8) exposes the small endpoint slope
+
+```text
+t+2*pi*U^2-q_-R
+ =206.8358840647606189557056478378....              (11.495.9)
+```
+
+It avoids subtracting three unresolved `10^10`-scale interval expressions.
+The real action is
+
+```text
+A(delta)=t*delta+pi*U^2 sin(2*delta)-q_-R sin(delta).
+```
+
+Writing `c=cos(delta)` gives
+
+```text
+A'(delta)=4*pi*U^2 c^2-q_-R c+t-2*pi*U^2.           (11.495.10)
+```
+
+Thus its stationary points are roots of one explicit quadratic.  Arb proves
+that the lower root is negative, the upper root gives the unique maximum,
+and
+
+```text
+delta_*=0.00014358973891853018144981371308229259...
+A(delta_*)=0.019799673680311219306517189044370065...
+A(0.003)=-89.6654529490488933964690964754....       (11.495.11)
+```
+
+On `0<=delta<=0.003`, the geometric denominator stays in the positive-real
+sector after the half-integer phase is removed.  The initial interval
+`0<=delta<=10^-10` retains `(1+w^N)/(1+w)` exactly.  On the remaining compact
+interval Arb integrates `1/(1+w)` and adds the explicit omitted-numerator
+bound.  Degree-24 endpoint series give
+
+```text
+exponent truncation <9.24e-72,
+w truncation        <1.38e-83,
+omitted numerator   <5.56e-28,
+compact arc tail    <3.59e-37.                     (11.495.12)
+```
+
+Including all four errors gives the rigorous signed enclosure
+
+```text
+C_U^rot
+ =0.0413826555194463161241427...
+  +0.0401581142560263590705370... i,
+
+|C_U|=|C_U^rot|
+ =0.05766453258668822459759736... <0.057665.        (11.495.13)
+```
+
+Restoring the exact endpoint carrier gives
+
+```text
+C_U
+ =-0.0158306196895407819134282...
+  -0.0554489837480034602710652... i.               (11.495.14)
+```
+
+The separate positive-real tail obeys
+
+```text
+log10 |E_s T_U|<-1873216239.5483983.                (11.495.15)
+```
+
+An altered `t=3.25` five-label contour replay checks (11.495.2)--(11.495.4)
+to less than `5.54e-68`, with its omitted positive tail below `5.33e-98`.
+The independent checker changes the height, roster, endpoint, precision,
+Taylor degree, initial split, and Arb panels; its altered discrepancies are
+below `3.18e-78` and its 336-bit arc ball overlaps (11.495.13).
+
+The certificate and checker are
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_quarter_disk_vertical_arc_tail_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_quarter_disk_vertical_arc_tail_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_quarter_disk_vertical_arc_tail_gate.py
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_quarter_disk_vertical_arc_tail_arb.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_quarter_disk_vertical_arc_tail_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.495 descends from the inherited
+Riemann--Siegel Gaussian, the Mellin scaling `R=2*pi*Y`, the principal
+quarter-turn branch, or the odd Fourier roster.  No fitted circle constant is
+inserted.
+
+Section 11.495 proves the exact quarter-disk orientation, pointwise vertical
+normalization, cancellation-preserving unowned-cell reduction, and rigorous
+production upper-arc/tail enclosure only.  The numerical arc lies on the
+scale of the stored `D_K` corridor, but it is not `D_K`.  No lower-cell or
+ordinary Gamma-subtracted enclosure, complete joined packet, `J_Z`, `D_K`,
+non-A, all-height, `Lambda<=0`, PF-infinity, RH, or prize-level result is
+proved.
+
+## 11.496 Reversed-roster endpoint certificate for the lower finite cell
+
+Write `s=1/2+it`, `p=t/(2*pi)`, `L=621.5`, and reverse the finite odd roster:
+
+```text
+D_W(y)=sum_(r=1)^M exp[2*pi*i(q_+-r)y],
+q_+=2561211.5,       M=2481423.                    (11.496.1)
+```
+
+After absorbing `y^(-it)` into the phase of the `r`th label,
+
+```text
+phi_r'(y)=-2*pi*d_r(y),
+d_r(y)=p/y+y-q_++r.                                (11.496.2)
+```
+
+On `0<y<=L`, the closest label satisfies
+
+```text
+d_1(L)=230.679676513849861363851528791...,
+|phi_1'(L)|=1449.403154136761381328726020417... .  (11.496.3)
+```
+
+Hence every lower-cell label is nonstationary.  Since `L` is a half integer,
+
+```text
+exp[2*pi*i(q_+-r)L]=exp(2*pi*i*q_+L)(-1)^r.        (11.496.4)
+```
+
+Set `h_0(y)=y^(-1/2)` and
+
+```text
+h_(n+1,r)=d/dy[h_(n,r)/d_r].                       (11.496.5)
+```
+
+Repeated integration by parts leaves only the `L` endpoint.  Every roster sum
+there reduces, without iterating 2481423 labels, to shifted alternating
+Hurwitz sums
+
+```text
+sum_(r=1)^M (-1)^r/(r+a)^k
+ =-eta_k(a+1)-eta_k(a+1+M),                        (11.496.6)
+
+a=p/L+L-q_+=229.679676513849861363851528791...,
+eta_k(z)=2^(-k)[zeta(k,z/2)-zeta(k,(z+1)/2)]
+```
+
+with the equivalent digamma formula at `k=1`.  At order 18, splitting the
+discarded integral at `y=300` and using 4096 monotone slabs above the split
+gives
+
+```text
+|R_18| < 2.29999008166399045788463226336e-16.      (11.496.7)
+```
+
+Arb therefore encloses the complete lower finite cell as
+
+```text
+V_L = [3.78580041137106931470874825626e-6 +/- 2.30e-16]
+    + i[1.33366660617234778724669681064e-5 +/- 2.30e-16].
+                                                               (11.496.8)
+```
+
+The independent checker changes the expansion order to 20, the split to 280,
+the slab count to 8192, and also verifies an altered three-label direct
+quadrature witness.  It tightens its independently reconstructed remainder to
+less than `2.436e-17`.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_lower_cell_reversed_roster_endpoint_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_lower_cell_reversed_roster_endpoint_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_lower_cell_reversed_roster_endpoint_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_lower_cell_reversed_roster_endpoint_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.496 comes from the inherited
+Riemann--Siegel/Fresnel quadratic phase, exact Fourier spacing, or
+`p=t/(2*pi)`.  No geometric fit is introduced.
+
+Section 11.496 proves the exact reversed-roster reduction, lower-cell
+nonstationarity, finite alternating-Hurwitz endpoint expansion, and rigorous
+production complex enclosure only.  The complex ball is retained before the
+join; no norm is substituted.  No ordinary packet, complete joined packet,
+`J_Z`, `D_K`, non-A, all-height, `Lambda<=0`, PF-infinity, RH, or prize-level
+conclusion is proved.
+
+## 11.497 Complementary half-lattice reduction of the ordinary packet
+
+For `622<=m<=39852`, put
+
+```text
+w_m(u)=(1+u/m)^(-s)exp(-i*pi*u^2),
+beta_m=integral_(-1/2)^(1/2) w_m(u)
+       sum_(q=q_-)^(q_+-1) exp[2*pi*i(q-m)u]du.     (11.497.1)
+```
+
+The Abel/Poisson identity for the complete half-integer lattice is
+
+```text
+sum_(q in Z+1/2) exp[2*pi*i(q-m)u]
+ =sum_(k in Z)(-1)^k delta(u-k).                   (11.497.2)
+```
+
+Only `k=0` lies in the cell and `w_m(0)=1`.  Thus the complete lattice
+contributes exactly one, and the finite-roster defect is exactly the negative
+of its two missing tails.  Reassembling cells before taking the Abel limit
+gives
+
+```text
+O_join=-T_lower-T_upper
+       +(1-C_G)sum_(m=622)^39852 m^(-s),            (11.497.3)
+
+T_lower=sum_(q in Z+1/2, q<=79787.5)
+        integral_L^a y^(-s)e^(-i*pi*y^2+2*pi*i*q*y)dy,
+
+T_upper=sum_(q in Z+1/2, q>=2561211.5)
+        integral_L^a y^(-s)e^(-i*pi*y^2+2*pi*i*q*y)dy,
+
+L=621.5,       a=39852.5.                          (11.497.4)
+```
+
+The common Gamma coefficient also reduces exactly:
+
+```text
+C_G(t)=(1+exp(-2*pi*t))^(-1/2),
+0<1-C_G<exp(-2*pi*t)/2.                            (11.497.5)
+```
+
+At `t=10^10`, the logarithm base ten of the complete Gamma-defect packet is
+below `-27287527074.5945`; it is retained explicitly rather than set to zero.
+For a complementary label, stationarity is governed by
+
+```text
+q=y+p/y.                                           (11.497.6)
+```
+
+This function decreases on `[L,a]`.  The lower complement is nonstationary,
+with nearest gap greater than `0.9997721335`.  The upper complement contains
+exactly 230 stationary labels
+
+```text
+q=2561211.5, 2561212.5, ..., 2561440.5,            (11.497.7)
+```
+
+and every lower saddle root lies in the first ordinary cell:
+
+```text
+621.5001649946745... <= y_q <= 621.5557608119251... .
+                                                               (11.497.8)
+```
+
+The next upper label is nonstationary with endpoint gap greater than
+`0.3203234861`.  Consequently the former 39231-cell ordinary wall is exactly
+reduced to one 230-label endpoint-saddle packet, two nonstationary
+complementary tails, and the explicit Gamma defect.  An independent
+altered-parameter Poisson reconstruction returns absolute error
+`6.3622326e-5`, below its `0.01` witness threshold.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_ordinary_complementary_half_lattice_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_ordinary_complementary_half_lattice_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_ordinary_complementary_half_lattice_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_ordinary_complementary_half_lattice_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.497 comes from the inherited Fresnel
+phase, exact half-integer Fourier spacing, or `p=t/(2*pi)`.  No fitted circle
+constant is introduced.
+
+Section 11.497 proves the exact Abel/Poisson completion, complementary-tail
+identity, Gamma coefficient reduction and production stationary-label census
+only.  It does not enclose the 230-label packet or either complementary tail,
+the complete ordinary or joined packet, `J_Z`, `D_K`, non-A, all-height,
+`Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+## 11.498 Grouped upper-complement endpoint-saddle core
+
+The stationary part of the upper complement consists of the consecutive
+half-integer labels
+
+```text
+q=q_+,q_++1,...,q_++229,       q_+=2561211.5.      (11.498.1)
+```
+
+Choose the rational split
+
+```text
+L=621.5,       B=621.5625=L+1/16.                  (11.498.2)
+```
+
+The extreme lower saddle roots are rigorously enclosed by
+
+```text
+621.5001649946745846412553230822...
+ <= y_q <=
+621.5557608119250787013127828834... .              (11.498.3)
+```
+
+Thus `B` lies beyond every one of the 230 saddles.  The first-label root is
+below `B` by more than `0.0067391880`, and at `B` its phase gap is already
+greater than `27.75603159`.
+
+The even roster and half-integer endpoint give the exact cancellation
+
+```text
+sum_(j=0)^229 exp(2*pi*i*j*L)
+ =sum_(j=0)^229 (-1)^j=0.                          (11.498.4)
+```
+
+Consequently the complete stationary core should be evaluated as one grouped
+object, not as 230 separately normed integrals.  With `x=y-L`, its exact
+Dirichlet amplitude is
+
+```text
+(1-exp(2*pi*i*230*x))/(1+exp(2*pi*i*x)).            (11.498.5)
+```
+
+Thirty-two Arb panels at 384 bits, using the endpoint-centered logarithmic
+phase, rigorously give
+
+```text
+P_core = [0.0003561096102039882921994687132362 +/- 1.03e-56]
+       + i[0.0002536459380703995777941146551348 +/- 1.03e-56],
+
+|P_core| = [0.0004372074065923969000011121647091 +/- 1.43e-56].
+                                                               (11.498.6)
+```
+
+The independent checker changes to the sine-kernel formula, uses 48 panels at
+448 bits, and overlaps (11.498.6).  At changed height and roster it also
+compares the grouped four-label integral with four separately integrated
+labels; the discrepancy contains zero with radius about `6.85e-55`.
+
+This proves the exact decomposition
+
+```text
+T_upper=P_core+R_upper,                             (11.498.7)
+```
+
+where every phase retained in `R_upper` is nonstationary on its own interval:
+the 230 labels continue from `B`, while labels `q>=q_++230` start at `L`.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_endpoint_saddle_core_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_endpoint_saddle_core_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_endpoint_saddle_core_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_endpoint_saddle_core_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.498 comes from the inherited Fresnel
+phase, exact half-integer Fourier spacing, or `p=t/(2*pi)`.  The split is the
+exact rational number `L+1/16`; no fitted geometric constant is introduced.
+
+Section 11.498 proves exact endpoint cancellation and a rigorous complex
+enclosure of the grouped finite stationary core only.  It does not enclose
+`R_upper`, the lower complementary tail, the complete ordinary or joined
+packet, `J_Z`, `D_K`, non-A, all-height, `Lambda<=0`, PF-infinity, RH, or a
+prize-level conclusion.
+
+## 11.499 Rationally closed 240-label upper collar
+
+At `L=621.5`, every even consecutive half-integer roster has zero grouped
+amplitude.  At the rational split `B=L+1/16`, the Fourier step has exact order
+16.  The least multiple of 16 containing all 230 stationary labels is
+
+```text
+240=15*16.                                         (11.499.1)
+```
+
+Extending the collar by ten nonstationary labels therefore gives exact zeros
+at both endpoints:
+
+```text
+sum_(j=0)^239 (-1)^j=0,
+sum_(j=0)^239 exp(2*pi*i*j*621.5625)=0.            (11.499.2)
+```
+
+Define the closed collar
+
+```text
+P_240=sum_(q=q_+)^(q_++239)
+      integral_L^B y^(-s)e^(-i*pi*y^2+2*pi*i*q*y)dy.            (11.499.3)
+```
+
+Thirty-two Arb panels at 384 bits rigorously give
+
+```text
+P_240 = [0.0003078279649411258387103804363291 +/- 9.76e-57]
+      + i[0.0002801606958430009538604208529588 +/- 9.76e-57],
+
+|P_240| = [0.0004162307911424015377691083930585 +/- 1.38e-56].
+                                                               (11.499.4)
+```
+
+The exact upper-tail split is now
+
+```text
+T_upper=P_240+R_B+R_L,                             (11.499.5)
+
+R_B=sum_(q=q_+)^(q_++239) integral_B^a (...),
+R_L=sum_(q>=q_++240) integral_L^a (...).
+```
+
+Every phase in both remainders is nonstationary.  Their minimum launch gaps
+are rigorously
+
+```text
+gap(R_B)>27.7560315984190,
+gap(R_L)>10.3203234861501.                         (11.499.6)
+```
+
+Thus the rational closure removes the former `0.320323...` endpoint wall
+without approximation.  The independent checker changes to the sine-kernel
+formula at 448 bits and, at altered height, compares an eight-label
+dual-endpoint-zero packet with eight separate rigorous integrals.  Its
+discrepancy contains zero with radius about `4.84e-55`.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_rational_240_label_collar_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_rational_240_label_collar_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_rational_240_label_collar_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_rational_240_label_collar_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.499 comes from the inherited Fresnel
+phase, exact half-integer Fourier spacing, or `p=t/(2*pi)`.  The numbers
+`1/16`, `16`, and `240` follow exactly from the rational endpoint and its
+root-of-unity order; no fitted geometric constant is introduced.
+
+Section 11.499 proves exact dual-endpoint cancellation and a rigorous complex
+enclosure of the grouped 240-label collar only.  It does not enclose `R_B`,
+`R_L`, the lower complementary tail, the complete ordinary or joined packet,
+`J_Z`, `D_K`, non-A, all-height, `Lambda<=0`, PF-infinity, RH, or a prize-level
+conclusion.
+
+## 11.500 Root-of-unity Hurwitz endpoint algebra for the complements
+
+Put
+
+```text
+p=t/(2*pi),       Q(y)=y+p/y,       D_q(y)=q-Q(y).
+```
+
+For a nontrivial root of unity `omega^h=1`, `M=hC`, and `delta>0`, residue
+class grouping gives, for `k>1`,
+
+```text
+sum_(n=0)^(M-1) omega^n/(n+delta)^k
+ =h^(-k)sum_(r=0)^(h-1) omega^r
+  [zeta(k,(delta+r)/h)-zeta(k,(delta+r)/h+C)].     (11.500.1)
+```
+
+For `k=1`, the bracket is instead
+`psi((delta+r)/h+C)-psi((delta+r)/h)`.  The corresponding infinite sum is
+
+```text
+F_k(delta,omega)
+ =h^(-k)sum_(r=0)^(h-1)omega^r zeta(k,(delta+r)/h),  k>1,
+
+F_1(delta,omega)
+ =-h^(-1)sum_(r=0)^(h-1)omega^r psi((delta+r)/h). (11.500.2)
+```
+
+The apparent Hurwitz poles in the second line cancel exactly because
+
+```text
+sum_(r=0)^15 exp(2*pi*i*9r/16)=0,
+1+exp(pi*i)=0.                                    (11.500.3)
+```
+
+Apply (11.500.1) with `(h,C)=(16,15)` at `B=621+9/16` and `(h,C)=(2,120)`
+at `a`.  This evaluates every endpoint denominator sum for the finite
+240-label remainder `R_B`.  Apply (11.500.2) with `h=2` at `L` and `a` to
+the infinite upper remainder `R_L`.  Reversing the lower complementary tail
+uses the same alternating formula and the exact orientation factor `(-1)^k`.
+The six production shifts are positive; the three limiting ones are
+
+```text
+delta_RB(B)    > 27.7560315984190,
+delta_RL(L)    > 10.3203234861501,
+delta_lower(a) > 0.999772133576505.                (11.500.4)
+```
+
+At the alternating endpoints, direct index shifting gives the exact
+functional equation
+
+```text
+F_k(delta,-1)+F_k(delta+1,-1)=delta^(-k).          (11.500.5)
+```
+
+Arb at 384 bits certifies every phase-weighted production endpoint sum for
+`1<=k<=16`.  All 32 finite `R_B` rows overlap direct 240-term summation, and
+all 64 infinite rows satisfy (11.500.5) and overlap the independent
+eta/digamma form.  The 448-bit checker reverses residue order, raises the
+altered test to power 18, uses an order-five 25-term root-of-unity roster,
+and encloses the infinite formula by an 8192-term alternating sum with its
+Leibniz remainder.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_nonstationary_complement_root_unity_hurwitz_endpoint_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_nonstationary_complement_root_unity_hurwitz_endpoint_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_nonstationary_complement_root_unity_hurwitz_endpoint_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_nonstationary_complement_root_unity_hurwitz_endpoint_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.500 comes from the inherited
+Fresnel/Fourier phase or `p=t/(2*pi)`.  The order 16 is forced by the exact
+fractional endpoint `9/16`; no fitted circle constant is introduced.
+
+With `h_0=y^(-1/2)` and `h_(n+1)=d(h_n/D)/dy`, the table supplies the endpoint
+denominator sums needed by an eight-round integration-by-parts recurrence.
+Section 11.500 does not bound the integrated `h_8` remainder and therefore
+does not enclose `R_B`, `R_L`, the lower complementary tail, the complete
+ordinary or joined packet, `J_Z`, `D_K`, non-A, all-height, `Lambda<=0`,
+PF-infinity, RH, or a prize-level conclusion.
+
+## 11.501 Eight-round absolute-tail obstruction
+
+For each label define
+
+```text
+h_0=y^(-1/2),             h_(n+1)=d(h_n/D_q)/dy.   (11.501.1)
+```
+
+Exact differentiation writes `h_n` as a finite rational monomial table in
+`p`, half-integer powers of `y`, and powers of `D_q^(-1)`.  In particular,
+`h_8` has 45 exact monomials over denominator powers 8 through 16.  Therefore
+the root-of-unity endpoint algebra from Section 11.500 gives the exact
+eight-round expansion
+
+```text
+I_q=sum_(n=0)^7 (-1)^n(i2*pi)^(-n-1)
+    [exp(i*phi_q)h_n/D_q]_left^right
+    +(i2*pi)^(-8) integral exp(i*phi_q)h_8.        (11.501.2)
+```
+
+At finite label cutoff (11.501.2) is ordinary integration by parts.  Its Abel
+limit is legal: the `k=1` endpoint current uses the certified root-of-unity
+limit, while every label sum in the integrated `h_8` remainder is absolutely
+dominated by a power `k>=8`.
+
+On 8192 fourth-power endpoint-clustered rational slabs, monotonicity and
+
+```text
+sum_(m>=0)(delta+m)^(-k)
+ <=delta^(-k)+delta^(1-k)/(k-1)                   (11.501.3)
+```
+
+give rigorous componentwise remainder radii
+
+```text
+R_B:     30.6901190340874,
+R_L:     50174039.9270251,
+R_lower: 25.6198115131044.                         (11.501.4)
+```
+
+The corresponding endpoint partials are approximately
+
+```text
+R_B:     -4.1166062345 - 4.9247150189i,
+R_L:      21793298.1712 - 5616365.1717i,
+R_lower: -0.0003732721 - 0.0004076877i.             (11.501.5)
+```
+
+Thus (11.501.4) gives valid but `D_K`-scale-useless complex balls.  The
+failure is structural.  With the quadratic-width coordinate
+
+```text
+chi(y)=delta(y)/sqrt(abs(Q'(y))),
+```
+
+the three limiting endpoints satisfy
+
+```text
+chi_RB(B)    =0.432498723422339...,
+chi_RL(L)    =0.160796682591001...,
+chi_lower(a) =21.8416864195496....                  (11.501.6)
+```
+
+Consequently `R_B` and especially `R_L` start inside an exterior
+endpoint-saddle transition layer even though `D_q` has constant sign.  Pure
+integration by parts is asymptotic there.  A 448-bit checker changes to nine
+rounds and 10000 fifth-power-clustered slabs; its production balls overlap the
+saved balls.  Separate altered four-label quadratures with `D>0` and `D<0`
+both overlap their fifth-order expansions, ruling out a recurrence or
+orientation-sign explanation for the bad scale.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_nonstationary_complement_eight_round_remainder_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_nonstationary_complement_eight_round_remainder_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_nonstationary_complement_eight_round_remainder_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_nonstationary_complement_eight_round_remainder_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.501 comes from the inherited
+Fresnel/Fourier phase, `phi'=2*pi*D`, or `p=t/(2*pi)`.  No fitted circle
+constant is used.
+
+Section 11.501 certifies rejection of the unsplit eight-round absolute route.
+The next upper-tail construction must extract a grouped uniform Fresnel/erfc
+exterior-saddle layer before integration by parts; the lower tail should be
+sharpened separately.  No useful complete complementary-tail enclosure,
+ordinary or joined packet, `J_Z`, `D_K`, non-A, all-height, `Lambda<=0`,
+PF-infinity, RH, or prize-level conclusion is proved.
+
+## 11.502 Closed 752-label exterior transition layer
+
+The obstruction in Section 11.501 can be removed from the upper complement by
+changing the exact packet coordinates.  Put
+
+```text
+C=L+3/16=621.6875=621+11/16,       N=752=47*16.     (11.502.1)
+```
+
+At `L=621.5` the label step is `-1`.  At `C` it is the primitive order-16
+root `exp(2*pi*i*11/16)`, because `gcd(11,16)=1`.  Hence the same consecutive
+roster has exact zero amplitude at both endpoints:
+
+```text
+sum_(j=0)^751 (-1)^j=0,
+sum_(j=0)^751 exp(2*pi*i*j*C)=0.                   (11.502.2)
+```
+
+Partitioning labels and then the first finite label block gives the exact
+identity
+
+```text
+T_upper=G_752+F_C+I_L,                            (11.502.3)
+
+G_752=sum_(q=q_+)^(q_++751) integral_L^C (...),
+F_C   =sum_(q=q_+)^(q_++751) integral_C^a (...),
+I_L   =sum_(q>=q_++752)       integral_L^a (...).
+```
+
+All 230 stationary labels lie in `[L,C]`.  One grouped geometric-amplitude
+integral, evaluated on 192 Arb panels at 384 bits, gives
+
+```text
+G_752 = [0.0001853273986930983605816975075785724 +/- 1.14e-55]
+       +i[0.0002793610483135410831008643242168326 +/- 1.14e-55],
+
+|G_752|=[0.0003352444481586403112261164508986548 +/- 1.58e-55].
+                                                               (11.502.4)
+```
+
+For `Q(y)=y+p/y`, `p=t/(2*pi)`, define
+
+```text
+chi=delta/sqrt(abs(Q'(y))),       delta=q-Q(y).
+```
+
+The comparison `chi>8` is certified without fitting decimals by proving
+`delta^2-64*abs(Q'(y))>0`.  At the finite continuation launch `C`,
+`chi=8.45458385104859...` and the squared margin is
+`30794.3676075710...`.  At the remote launch `(q_++752,L)`,
+`chi=8.13805646491044...` and the margin is `9177.83891187864...`.
+The immediately preceding candidates fail:
+
+```text
+margin at C_prev=L+2/16 = -182229.840458838...,
+margin for N_prev=736    =   -7280.41143967817.... (11.502.5)
+```
+
+The complete physical interval satisfies `a^2<p`; consequently `Q'<0`
+throughout it.  The positive finite detuning increases while `abs(Q')`
+decreases with `y`, and the remote detuning increases with roster length.
+Thus `C` is the first point of the stated `1/16` grid and 752 is the least
+positive-detuning multiple of 16 that meet the eight-width criterion.  Both
+`F_C` and `I_L` are now genuinely far nonstationary, but neither is bounded by
+this section.
+
+A 448-bit checker uses the independent sine-quotient form on 256 panels and
+overlaps (11.502.4).  Its changed eight-label dual-endpoint-closed witness is
+also integrated label by label; the grouped/direct discrepancy contains zero
+with radius `7.25e-55`.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_closed_752_label_exterior_transition_layer_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_closed_752_label_exterior_transition_layer_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_closed_752_label_exterior_transition_layer_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_closed_752_label_exterior_transition_layer_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.502 comes from the inherited
+Fresnel/Fourier phase, exact Fourier characters, or `p=t/(2*pi)`.  The split
+`3/16` and roster 752 are selected by exact root order and the displayed
+squared-detuning inequalities.  No circle, polygon, fitted constant, or
+visual pattern supplies `pi`.
+
+Section 11.502 certifies the exact regrouping, dual-endpoint cancellation,
+`G_752` complex ball, and two far-launch inequalities only.  It does not
+enclose `F_C`, `I_L`, the lower complementary tail, the complete ordinary or
+joined packet, `J_Z`, `D_K`, non-A, all-height, `Lambda<=0`, PF-infinity, RH,
+or a prize-level conclusion.
+
+## 11.503 Eight-round closure of the far upper remainders
+
+The exact recurrence of Section 11.501 becomes quantitatively effective after
+the Section 11.502 transition extraction.  At `C=621+11/16`, the finite
+752-label endpoint has primitive root numerator 11 and 47 complete order-16
+cycles.  At `a=39852.5` it has 376 alternating cycles.  The infinite remote
+tail beginning at `q_++752` is alternating at both `L` and `a`.  Therefore the
+root-of-unity Hurwitz/digamma formulas through denominator power 16 apply to
+all four endpoints, with the `k=1` poles canceled before evaluation.
+
+Using
+
+```text
+h_0=y^(-1/2),             h_(n+1)=d(h_n/D_q)/dy,    (11.503.1)
+```
+
+eight exact integrations by parts and 8192 fourth-power endpoint-clustered
+slabs give
+
+```text
+F_C partial =
+  3.87555794344493853928813960640579e-6
+ -1.38592282533207387796164545570980e-6 i,
+
+rad(F_C) <= 1.74059857308995518791986489757469e-17, (11.503.2)
+
+I_L partial =
+ -1.61172374629028454582842978335088e-6
+ -5.90075204188353427680533261072082e-6 i,
+
+rad(I_L) <= 2.97311462255729774535247807324866e-17. (11.503.3)
+```
+
+Here each displayed radius is added componentwise.  The endpoint-table balls
+are much narrower.  Joining these retained complex balls to (11.502.4) before
+taking a norm proves
+
+```text
+T_upper=
+ [0.0001875912328902530145751572174016273 +/- 4.74e-17]
+ +i[0.0002720743734463254749460973461504020 +/- 4.74e-17],
+
+|T_upper|=
+ [0.0003304768302672605232441649583669105 +/- 6.58e-17].
+                                                               (11.503.4)
+```
+
+The infinite-tail Abel limit is legitimate: the `k=1` endpoint currents use
+the certified alternating Lerch convention, while each summed integrated
+order-eight remainder is absolutely dominated by denominator powers at least
+eight.  The complete physical interval lies below `sqrt(p)`, so no phase
+derivative changes sign.
+
+A 448-bit checker changes to nine recurrence rounds and 10000 fifth-power
+clustered slabs.  It replaces every finite Hurwitz endpoint value by a direct
+752-term sum and every infinite value by explicit alternating eta, then
+rejoins the changed balls to the independently certified `G_752`.  Both
+families and the complete upper ball overlap (11.503.2)--(11.503.4).  A
+separate altered-height positive-denominator quadrature also overlaps its
+fifth-order recurrence enclosure.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_closed_752_far_remainder_eight_round_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_closed_752_far_remainder_eight_round_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_closed_752_far_remainder_eight_round_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_upper_complement_closed_752_far_remainder_eight_round_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.503 comes from the inherited
+Fresnel/Fourier phase, `phi'=2*pi*D`, exact root-of-unity characters, or
+`p=t/(2*pi)`.  The endpoint `C` and count 752 are inherited from the exact
+order-16/eight-width gate.  No circle, polygon, fitted constant, or visual
+pattern supplies `pi`.
+
+Section 11.503 certifies endpoint tables through power 16, rigorous complex
+balls for `F_C` and `I_L`, and the complete production-height upper
+complement only.  It does not enclose the lower complementary tail, the
+complete ordinary or joined packet, `J_Z`, `D_K`, non-A, all-height,
+`Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+## 11.504 Signed-coefficient closure of the lower complement
+
+The order-eight lower-tail failure in Section 11.501 is not caused by the
+phase geometry.  It occurs because the old majorant takes absolute values of
+every monomial before collecting the exact coefficient of each denominator
+power.  At `y=a`, the resulting inflation reaches
+`6.9508845e23` in denominator power 16.
+
+Write the exact collected order-`N` recurrence as
+
+```text
+h_N(y,q)=sum_k c_(N,k)(y)D_q(y)^(-k).
+```
+
+On each rigorous slab `Y_j`, retain the signed coefficient and use
+
+```text
+sup_(y in Y_j)|c_(N,k)(y)|
+ <= abs(c_(N,k)(Y_j)).upper,                       (11.504.1)
+```
+
+before multiplying by the positive denominator-series bound.  This preserves
+only algebraic cancellation internal to an already-collected exact
+coefficient.  It assumes no cancellation between labels, powers, or slabs.
+
+With 16384 fourth-power right-endpoint-clustered slabs, a rigorous order sweep
+gives
+
+```text
+N=2: 2.6277780274234404e-6,
+N=3: 3.4314494847207362e-7,
+N=4: 6.0246299409804409e-7,
+N=5: 1.4913268061252540e-6,
+N=6: 4.6831087360282702e-6,
+N=7: 1.7763210153945877e-5,
+N=8: 7.8857711099521087e-5,
+N=9: 4.00749710136320e-4.                              (11.504.2)
+```
+
+Order one is inadmissible for this absolute Abel remainder because it retains
+a denominator-power-one infinite label sum.  Thus order three is the
+certified minimum over the audited admissible orders 2 through 9.
+
+The alternating endpoint terms through order three give the retained ball
+
+```text
+T_lower=
+ [-0.0003732720599586480301084584933693615 +/- 3.44e-7]
+ +i[-0.0004076876776202056223715388491975691 +/- 3.44e-7].
+                                                               (11.504.3)
+```
+
+The exact complementary-lattice identity is
+
+```text
+O_join=-T_lower-T_upper
+       +(1-C_G)sum_(m=622)^39852 m^(-s).            (11.504.4)
+```
+
+The last packet has `log10` absolute upper bound below
+`-27287527074.5945`.  Joining it as a complex error to (11.504.3) and the
+complete upper ball (11.503.4), before taking any norm, proves
+
+```text
+O_join=
+ [0.0001856808270683950155333012759677341 +/- 3.44e-7]
+ +i[0.0001356133041738801474254415030471670 +/- 3.44e-7],
+
+|O_join|=
+ [0.0002299306576105664134956896305084229 +/- 4.81e-7].
+                                                               (11.504.5)
+```
+
+This improves the old lower-tail component radius `25.6198115...` by a
+certified factor above `7.466e7`.  A 448-bit checker changes to order four,
+20000 fifth-power-clustered slabs, and explicit alternating eta endpoints.
+Its lower-tail and ordinary-packet balls overlap (11.504.3) and (11.504.5).
+An altered negative-denominator direct quadrature independently overlaps its
+fifth-order recurrence enclosure.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_lower_complement_signed_coefficient_interval_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_lower_complement_signed_coefficient_interval_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_lower_complement_signed_coefficient_interval_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_lower_complement_signed_coefficient_interval_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.504 comes from the inherited
+Fresnel/Fourier phase, `phi'=2*pi*D`, alternating Fourier characters, or
+`p=t/(2*pi)`.  The signed coefficient collection follows exact
+differentiation.  No circle, polygon, fitted constant, or visual pattern
+supplies `pi`.
+
+Section 11.504 certifies the signed-coefficient lower-tail ball and resulting
+complete production-height ordinary-packet ball only.  It does not certify
+the later full joined packet, `J_Z`, `D_K`, non-A, all-height, `Lambda<=0`,
+PF-infinity, RH, or a prize-level conclusion.
+
+## 11.505 Complete signed production-height J_Z and D_K ownership
+
+The exact cell partition, pole-safe contour join, and quarter-disk reduction
+now leave five top-level complex ownership slots.  Before projection,
+
+```text
+H(t)J_Z=Hardy_t[V_L+C_U+E_s T_U+O_join+T_A^join],
+Hardy_t[X]=2 Re[exp(i theta(t))X].                   (11.505.1)
+```
+
+The phase is evaluated rigorously as
+
+```text
+theta(t)=Im log Gamma(1/4+it/2)-t log(pi)/2.         (11.505.2)
+```
+
+The 384-bit Arb ball from (11.505.2) overlaps the independently saved
+110-decimal-digit Hardy calibration.  Projecting the transition packet also
+overlaps its independent saved physical projection, which checks the phase
+and sign convention.
+
+The grouped natural A lift is not a sixth top-level term.  It occurs exactly
+once, with negative sign, inside
+
+```text
+T_A^join=I_transition-C_G sum_(m=39853)^39936 m^(-s)
+         -mathcal A_A^nat.                          (11.505.3)
+```
+
+The gate reconstructs (11.505.3) from its three certified complex balls.  It
+also independently reconstructs
+`O_join=-T_lower-T_upper+Gamma_defect`.  Both reconstructions overlap their
+saved complete packets.  Adding `mathcal A_A^nat` again, subtracting it
+twice, or flipping any non-negligible top-level packet sign produces a
+`J_Z` ball disjoint from the certified result.
+
+At `t=10^10`, the five Hardy projections are
+
+```text
+V_L:       [ 0.0000226043634183139661 +/- 6.47e-16],
+C_U:       [-0.0941220401927439895121 +/- 7.24e-26],
+E_s T_U:   [+/- 7.96e-1873216240],
+O_join:    [ 0.0004593811663337592015 +/- 9.68e-7],
+T_A^join:  [ 0.1270842386787259385836 +/- 5.99e-12]. (11.505.4)
+```
+
+The signed complex argument and its projection are
+
+```text
+J_arg=
+ [0.02870687523061790386329930475806339 +/- 3.45e-7]
+ +i[-0.00904238270971239170145056348074849 +/- 3.45e-7],
+
+H J_Z=
+ [0.03344418401573402223903256645729202 +/- 9.68e-7].
+                                                               (11.505.5)
+```
+
+Using the exact positive prefactor (11.481.1)--(11.481.3) gives the complete
+saved-height enclosure
+
+```text
+J_Z=[0.033444183995015919208526611328125 +/- 9.68e-7].
+                                                               (11.505.6)
+```
+
+The independently certified physical `A_transition`, the rigorous
+Gamma-to-classical correction, and `rho_RS=U-T` then give
+
+```text
+R_KGamma=J_Z+A_transition
+ =[-0.003229940802757727509439479770795512 +/- 9.68e-7],
+
+Q_K-T
+ =[-0.003229940802757727509439479770795512 +/- 9.68e-7],
+
+Delta_KU
+ =[-0.003229939495488622535012304581936359 +/- 9.68e-7],
+
+D_K
+ =[0.003229939495488622534357831324071500 +/- 9.68e-7].
+                                                               (11.505.7)
+```
+
+The two exact evaluations
+`D_K=(1-H)U-H Delta_KU` and `D_K=U-H[T+(Q_K-T)]` overlap.  The stronger
+sufficient corridor is nevertheless rigorously missed:
+
+```text
+J_Z-0.02939975 > 0.0040434665836915373,
+R_KGamma-(-0.00727437) > 0.0040434617828874258,
+0.0072743687-D_K > 0.0040434617901369909.            (11.505.8)
+```
+
+The ordinary packet supplies the dominant interval radius, but (11.505.8)
+separates the central value from the wall by more than four thousand such
+radii.  Sharpening these same enclosures cannot close the displayed
+sufficient route.  This does not reject the original signed one-sided
+residual theorem: its B trace, outer term, and `I_(A,42)` must be retained
+with their signs rather than replaced by the stronger absolute allowance.
+
+The production certificate and changed-precision checker are
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_complete_signed_JZ_DK_ownership_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_complete_signed_JZ_DK_ownership_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_complete_signed_JZ_DK_ownership_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation4_joined_packet_complete_signed_JZ_DK_ownership_gate.py
+```
+
+The checker uses 512-bit arithmetic, changes the packet addition order,
+reconstructs both nested packets from their subcomponents, recomputes
+`theta`, evaluates `D_K` by both exact formulas, and replays every ownership
+guard.
+
+Pi provenance: every `pi` in Section 11.505 comes from the inherited
+Fresnel/Fourier phase, the standard Riemann--Siegel theta normalization, the
+Mellin quarter turn, or `p=t/(2*pi)`.  No circle, polygon, fitted constant,
+or visual pattern supplies `pi`.
+
+Section 11.505 certifies the complete signed packet and scalar enclosures at
+the single saved height `t=10^10`, and rigorously rejects only the displayed
+stronger sufficient corridor.  It does not disprove the original one-sided
+route, prove the non-A bound, certify equation (4) as a global infinite-series
+identity, give an all-height theorem, prove `Lambda<=0`, PF-infinity, RH, or a
+prize-level conclusion.
+
+## 11.506 Signed saved-height one-sided residual closure
+
+Retain the common-regulator identities proved independently in Sections
+11.459 and 11.478:
+
+```text
+R_after_A=I_(A,42)+R_nonA,
+R_nonA=J_Z-E_Btr,win-E_outer-I_(A,42).              (11.506.1)
+```
+
+Collecting coefficients before taking an interval norm cancels the translated
+A-face exactly and gives
+
+```text
+R_after_A=J_Z-E_Btr,win-E_outer.                    (11.506.2)
+```
+
+This is also forced by the independent pair
+
+```text
+R_KGamma=J_Z+A_transition,
+R_KGamma=E_Btr,win+E_outer+A_transition+R_after_A.  (11.506.3)
+```
+
+Thus both `I_(A,42)` and `A_transition` have coefficient zero in the final
+formula (11.506.2).  No sign or new quadrature estimate for `I_(A,42)` is
+needed for this saved-height closure.
+
+Reconstruct the B trace directly from its signed local principal and signed
+nonlocal first current, placing every remaining certified B term in one
+outward absolute allowance.  At 384-bit production precision this gives
+
+```text
+E_Btr,win
+ =[-0.000133464406478890444060573121733514 +/- 1.49e-6],
+
+-0.000134948<E_Btr,win<-0.00013198.                 (11.506.4)
+```
+
+Combining (11.506.2), the Section 11.505 `J_Z` enclosure, and the independent
+outer bound `|E_outer|<6.566e-10` yields
+
+```text
+R_after_A
+ =[0.03357764840149480965258718444985851 +/- 2.46e-6].
+                                                               (11.506.5)
+```
+
+Its upper endpoint lies below both inherited one-sided targets:
+
+```text
+R_after_A<0.0368147039947,
+R_after_A<0.0368061039947,                           (11.506.6)
+```
+
+with rigorous margins greater than `0.00323460` and `0.00322600`.
+Restoring the projector-completed A transition gives
+
+```text
+R_Dir
+ =[-0.0030964763962788370653789066490620 +/- 2.46e-6]<0.
+                                                               (11.506.7)
+```
+
+The alternate evaluation `R_KGamma-E_Btr,win-E_outer` overlaps (11.506.7).
+It follows in particular that both Section 11.424 `R_Dir` sufficient targets
+hold.  Finally, the sub-`5e-20` Gamma-to-classical correction gives
+
+```text
+Q_K-T
+ =[-0.0032299408027577275094394797707955 +/- 9.69e-7]<0.
+                                                               (11.506.8)
+```
+
+Even rejoining the B trace, outer term, `R_Dir`, and Gamma correction after
+discarding their shared interval dependence leaves a negative upper endpoint,
+with margin greater than `0.00322600`.  Hence the original one-sided
+`Q_K-T<8.6e-6` condition and the stronger saved-height negativity condition
+are both certified.
+
+The production certificate and independent changed-order checker are
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_R_after_A_one_sided_closure_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_R_after_A_one_sided_closure_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_R_after_A_one_sided_closure_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_R_after_A_one_sided_closure_gate.py
+```
+
+The checker uses 512-bit arithmetic, rebuilds the B trace from its raw pieces
+in a different order, evaluates both exact `R_Dir` routes, and verifies direct
+and dependency-lost rejoined `Q_K-T` negativity.
+
+Pi provenance: Section 11.506 introduces no new `pi`.  Every inherited
+occurrence belongs to an already certified Fresnel, Fourier, Kummer, Gamma,
+or Riemann--Siegel normalization.
+
+Section 11.506 proves the original signed one-sided residual and `Q_K-T<0`
+only at the single saved height `t=10^10`.  It does not prove the stronger
+absolute non-A bound, an all-height finite split-contour transport theorem,
+equation (4) as a global infinite-series identity, `Lambda<=0`, PF-infinity,
+RH, or a prize-level conclusion.
+
+## 11.507 Maximal local height event cell for the signed closure
+
+Keep the exact odd window fixed at
+
+```text
+A=159577,       B=5122421,       M=2481423.          (11.507.1)
+```
+
+For a fixed odd label `alpha`, either saddle reaches the integer mode `m`
+at the exact height
+
+```text
+tau_m(alpha)=pi*m*(alpha-2m).                        (11.507.2)
+```
+
+The two nearest active ownership events around `t0=10^10` are
+
+```text
+t_-=tau_39852(A)
+   =9999999793.16411593523938104429435...,
+
+t_+=tau_39936(A)
+   =10000000057.0578988367820130751564....           (11.507.3)
+```
+
+Consequently
+
+```text
+t_-<t<t_+                                               (11.507.4)
+```
+
+is the maximal open interval containing `t0` on which the same fixed-`A`
+ordinary/transition ownership is valid.  Its exact saved-height margins are
+
+```text
+t0-t_-=206.835884064760618955705647837...,
+t_+-t0= 57.057898836782013075156396358....           (11.507.5)
+```
+
+The two walls have simultaneous complementary-root descriptions:
+
+```text
+t=t_-: y_-(A)=39852,     y_+(A)=39936.5=U,
+t=t_+: y_-(A)=39852.5=a, y_+(A)=39936.               (11.507.6)
+```
+
+Thus neither wall is a decimal or sampling choice.  Inside (11.507.4), Arb
+interval arithmetic and exact monotonicity prove the fixed census
+
+```text
+ordinary roster:       622..39852,       39231 modes,
+transition roster:     39853..39936,         84 modes,
+classical split:       39853..39894 | 39895..39936,
+B saddle floors:       621 and 2560588,
+upper complement:      230 stationary half-labels,
+                       2561211.5..2561440.5.          (11.507.7)
+```
+
+The smallest closed-cell margins against losing the 230th upper label,
+gaining the 231st, admitting the lower complementary label, and letting the
+first upper saddle escape the rational core are respectively greater than
+
+```text
+0.62670,       0.30571,       0.99894,       27.7414. (11.507.8)
+```
+
+The half-integer and rational endpoints are fixed proof coordinates, not
+height events:
+
+```text
+L=621.5,
+B_core=621+9/16=621.5625,
+C_far =621+11/16=621.6875.                           (11.507.9)
+```
+
+The distinction in (11.507.9) is compulsory.  Since
+`gcd(9,16)=gcd(11,16)=1`, both rational points have primitive Fourier order
+16, while `L` has alternating order two.  Therefore
+
+```text
+240=15*16,       752=47*16                            (11.507.10)
+```
+
+continues to give exact dual-endpoint cancellation independently of height.
+On the entire closed event cell, direct interval evaluation gives
+
+```text
+finite 752-launch margin:       [30778.4,30851.9] >0,
+remote 752-launch margin:       [9162.4,9233.3]   >0,
+previous 1/16-grid margin:      [-182238.3,-182199.6] <0,
+previous multiple-16 margin:    [-7295.3,-7226.7]    <0. (11.507.11)
+```
+
+Hence the selected two far launches remain admissible and both immediate
+predecessors remain inadmissible throughout (11.507.4).  The diagnostic
+unequal-truncation crossover also remains strictly between `859.5` and
+`860.5`, so its dormant split stays `622..860 | 861..39936`.
+
+With `A` and `B` fixed, the finite RSI prefix, logarithmic branch correction,
+finite Dirichlet source, cell covariance, pole-safe contour join, entire-
+kernel finite difference, and complementary half-lattice identities are
+exact throughout (11.507.4).  This statement concerns their algebra and
+their index sets.  The saved complex enclosures for `V_L`, `C_U`, `T_upper`,
+`T_lower`, `O_join`, `T_A^join`, `J_Z`, the signed B trace, and `E_outer`
+have not been promoted to interval-valued functions of `t`.  In particular,
+the negativity in (11.506.8) has not yet been transported off `t0`.
+
+The production certificate and independent 512-bit replay are
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_R_after_A_local_height_event_atlas_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_R_after_A_local_height_event_atlas_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_R_after_A_local_height_event_atlas_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_R_after_A_local_height_event_atlas_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.507 comes from the inherited
+Fresnel/Riemann--Siegel saddle equations or the exact event law (11.507.2).
+The rational endpoint fractions and roster multiples are exact Fourier
+orders; no circle, polygon, fitted constant, or visual pattern supplies
+`pi`.
+
+Section 11.507 proves the maximal same-roster local event cell and all active
+discrete guards only.  It does not prove a uniform packet enclosure, retain
+the one-sided sign on a nonzero-radius interval, cross either event wall,
+prove an all-height theorem, `Lambda<=0`, PF-infinity, RH, or a prize-level
+conclusion.
+
+## 11.508 Direct A-free joined height derivative of Q_K-T
+
+The finite Kummer source and the classical target use the same Hardy
+projection.  On the Section 11.507 cell put
+
+```text
+D_T(t)=sum_(m=622)^39894 m^(-s),       s=1/2+it,
+Hardy_t[X]=2 Re[exp(i theta(t))X].                    (11.508.1)
+```
+
+The exact finite-source transform and the definition of the classical upper
+main give
+
+```text
+Q_K=Hardy_t[S_W]/H,          T=Hardy_t[D_T].          (11.508.2)
+```
+
+Consequently the target residual is the single joined object
+
+```text
+Q_K-T=Hardy_t[S_W-H D_T]/H.                          (11.508.3)
+```
+
+No equation-(4) infinite-series identity is used in (11.508.2).  The source
+`S_W` is the already certified finite odd-window transform.  The same
+collapse follows independently from
+
+```text
+J_Z=Q_K-G-A_transition,
+A_transition=A_endpoint+G_extra,
+Q_K-T=J_Z+A_transition+(G-T).                        (11.508.4)
+```
+
+Thus `A_endpoint` has coefficient zero.  The 42 extra Gamma modes restore the
+target roster, and the Gamma-to-classical correction converts its coefficient
+exactly from `C_G` to `H`.  The signed B trace and outer term remain valid in
+the alternate residual decomposition, but they are not inputs to (11.508.3).
+
+Write
+
+```text
+h(t)=H'(t)/H(t),       Y_T=S_W-H D_T.
+```
+
+Differentiating the joined equality before splitting its packets gives
+
+```text
+(Q_K-T)'=Hardy_t[K_T]/H,                             (11.508.5)
+
+K_T=S_W'+(i theta'-h)S_W
+    -H(D_T'+i theta'D_T),                            (11.508.6)
+
+D_T'=-i sum_(m=622)^39894 log(m)m^(-s).              (11.508.7)
+```
+
+The `H'D_T` terms cancel exactly in (11.508.6).  At the saved height, two
+independent Gamma coordinates give the overlapping balls
+
+```text
+theta'(10^10)
+ =10.59398693176555567830941920368287006481077627...,
+
+H'(10^10)/H(10^10)
+ =-6.2500000000000000000781250000000000000023828...e-32.
+                                                               (11.508.8)
+```
+
+The second number is produced once from the direct two-Gamma formula and once
+from the duplication formula; it is not a cancellation of machine-precision
+floating-point values.
+
+The source derivative has two exact coordinates.  Differentiating the
+decaying half-line gives
+
+```text
+S_W'=K_0 integral_0^infinity (3pi/4-i log x)
+             x^(-s)exp(-pi x^2)G_W(x)dx.             (11.508.9)
+```
+
+In the gamma-balanced Mellin coordinate it is
+
+```text
+S_W'=E_s integral_0^infinity [pi/2-i log(u/(2pi))]
+             u^(-s)exp(iu^2/(4pi))Delta_q(u)du.      (11.508.10)
+```
+
+Near zero both derivatives are dominated by a constant times
+`u^(-1/2)(1+|log u|)`.  At infinity the finite difference has exponential
+decay, while the half-line coordinate has Gaussian decay.  These majorants
+are uniform on compact subcells of (11.507.4), so differentiation under the
+integral is legal.  On `u=2pi exp(i*pi/4)x`, the weight in (11.508.10) becomes
+exactly `3pi/4-i log x`.  An altered five-label fixture evaluates both
+coordinates independently with discrepancy below `7.19e-70`; the checker
+changes the height, roster, cuts, and precision.
+
+Direct 384-bit finite summation gives
+
+```text
+T(10^10)
+ =2.09754436597030700733662243406735756894752882...,
+
+T'(10^10)
+ =1.26431301735607962973890281046974533593549334.... (11.508.11)
+```
+
+The target value overlaps the independent Hardy bridge.  The derivative
+scale in (11.508.11) also shows why separate absolute bounds for `Q_K'` and
+`T'` would be wasteful.
+
+There is an A-free saved-height packet assembly of (11.508.3):
+
+```text
+Y_T=U_unowned+O_join+I_transition
+    -C_G D_(39853..39894)+(C_G-H)D_T
+    =S_W-H D_T.                                      (11.508.12)
+```
+
+It gives
+
+```text
+Q_K-T=[-0.003229940777600859291851520538330078125
+       +/- 9.68e-7] < 0,                             (11.508.13)
+```
+
+overlapping the Section 11.506 enclosure.  A second assembly starts from
+`J_arg`, adds the natural A lift back, restores the 42 extra Gamma modes, and
+reaches an overlapping ball.  This checks the endpoint and roster signs in
+(11.508.4) without using the B trace or outer allowance.
+
+Reserve one half of the rigorous saved upper-endpoint negativity margin for
+transport.  The resulting derivative budgets are
+
+```text
+radius 0.01:    sup |(Q_K-T)'| <   0.1614486401...,
+radius 0.001:   sup |(Q_K-T)'| <   1.6144864013...,
+radius 0.0001:  sup |(Q_K-T)'| <  16.1448640137...,
+radius 0.00001: sup |(Q_K-T)'| < 161.4486401376....   (11.508.14)
+```
+
+No row of (11.508.14) is selected here.  Selection requires an interval
+bound for the single kernel `K_T`; the five joined packets must not be
+separately normed before their derivative cancellation is collected.
+
+The production certificate and independent 512-bit replay are
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_height_derivative_identity_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_height_derivative_identity_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_height_derivative_identity_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_height_derivative_identity_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.508 comes from the inherited
+Riemann--Siegel phase, exact finite Fourier/Gaussian source, Mellin quarter
+turn, or Gamma normalization.  No circle, polygon, fitted constant, or
+visual pattern supplies `pi`.
+
+Section 11.508 proves the exact A-free target identity, exact joined first
+height derivative, rigorous classical-target value and point derivative, and
+an A-free saved-height negative reassembly only.  It does not bound `K_T` on
+a nonzero-radius interval, prove an off-height sign or event-wall handoff, or
+prove an all-height theorem, equation-(4) global infinite-series identity,
+`Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+## 11.509 First nonzero joined Q_K-T height subcell
+
+The derivative route in Section 11.508 is not the only rigorous way to spend
+the saved-height margin.  On a compact fixed-roster box, Arb can evaluate the
+same A-free joined packet directly.  Put
+
+```text
+t_0=10^10,             r=10^(-4),
+I_1=[t_0-r,t_0+r].                                   (11.509.1)
+```
+
+Section 11.507 proves that `I_1` lies strictly inside the maximal event cell.
+Consequently every finite roster, half-integer endpoint, complementary-tail
+orientation, root-of-unity closure, and nonstationary launch used below is
+unchanged throughout `I_1`.
+
+Retain the Section 11.508 identity in the form
+
+```text
+Q_K(t)-T(t)=Hardy_t[Y_T(t)]/H(t),
+
+Y_T=U_unowned+O_join+I_transition
+    -C_G D_(39853..39894)
+    +(C_G-H)D_(622..39894).                          (11.509.2)
+```
+
+Equation (11.509.2) is evaluated as one complex packet before the final Hardy
+projection.  The lower finite cell uses its order-18 reversed-roster endpoint
+expansion, the ordinary packet uses the signed order-three complementary-tail
+recurrence, the transition source uses twelve endpoint jets, and the upper
+quarter arc retains all polynomial, geometric-numerator, compact-tail, and
+positive-real-tail errors.  All occurrences of `t` in those formulas are Arb
+balls covering `I_1`.
+
+Two direct interval substitutions would create false dependency losses.  The
+first is the Gamma prefactor.  Use the exact transport
+
+```text
+log H(t)-log H(t_0)
+ =integral_(t_0)^t H'(u)/H(u)du.                    (11.509.3)
+```
+
+The direct and duplication formulas for `H'/H` overlap on `I_1`.  Transporting
+the point ball by their smaller common absolute bound gives
+
+```text
+H(I_1)
+ =[1.000000000000000000000312499999999999841801075230765990
+   +/- 3.51e-28].                                   (11.509.4)
+```
+
+The second dependency loss occurs in the upper-arc maximum
+
+```text
+A(t,delta)=t delta+pi U^2 sin(2delta)-q_-R sin(delta).
+```
+
+The Section 11.495 quadratic proves that its maximizer `delta_*(t)` is unique
+throughout `I_1`.  Hence the envelope theorem gives the exact identity
+
+```text
+d A_max(t)/dt=delta_*(t).                            (11.509.5)
+```
+
+Transporting the point maximum with the interval enclosure of `delta_*`
+avoids reevaluating three large cancelling terms with a shared interval and
+gives
+
+```text
+A_max(I_1)
+ =[0.01979967368031121930651718904437006522489619007936360954
+   +/- 1.44e-8] < 0.01981.                          (11.509.6)
+```
+
+The resulting complete preprojection box is
+
+```text
+Y_T(I_1)
+ =[-0.01238924095603966903423889986536336603727507015377952453
+    +/- 6.98e-4]
+ +i[0.01333663388133707678528102421808135380720287510145394467
+    +/- 1.15e-3].                                   (11.509.7)
+```
+
+Only after (11.509.7) is assembled is the interval phase applied and the
+positive box (11.509.4) divided out.  The production certificate gives the
+round-trip-stable enclosure
+
+```text
+Q_K(t)-T(t)
+ =[-0.00262005319018498994410037994384765625
+   +/- 2.58e-3] < 0              for every t in I_1. (11.509.8)
+```
+
+Parsing the saved decimal ball still leaves a strict upper margin above
+`4.0053e-5`; the unrounded in-memory endpoint is below `-4.8043e-5`.
+
+The independent checker does not merely replay the same box.  At 448 bits it
+covers `I_1` by the two adjacent radius-`5e-5` boxes centred at
+`t_0-5e-5` and `t_0+5e-5`.  It changes the upper-arc Taylor and panel
+configuration, uses 256 grouped transition panels, raises the transition jet
+order from 12 to 14, changes the ordinary recurrence from order three to four,
+and uses 20000 fifth-power-clustered ordinary slabs.  Its two rigorous upper
+endpoints are
+
+```text
+left half:  Q_K-T < -0.002241489546577213...,
+right half: Q_K-T < -0.002141551462045754....        (11.509.9)
+```
+
+Thus the large radius in the one-box production enclosure is interval
+dependency, not evidence that the function approaches zero inside `I_1`.
+
+The production certificate and independent checker are
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_first_nonzero_height_subcell_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_first_nonzero_height_subcell_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_first_nonzero_height_subcell_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_first_nonzero_height_subcell_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.509 comes from the inherited
+Riemann--Siegel phase, Gaussian/Fresnel kernel, finite Fourier characters,
+Gamma normalization, or the exact Section 11.507 event equations.  No circle,
+polygon, fitted constant, or visual pattern supplies `pi`.
+
+Section 11.509 proves `Q_K(t)-T(t)<0` uniformly on the first nonzero-radius
+fixed-roster interval (11.509.1).  It does not prove the sign on the rest of
+the maximal event cell, cross either event wall, establish an all-height
+theorem, prove the equation-(4) global infinite-series identity,
+`Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+## 11.510 Joined transition K on the first height subcell
+
+The direct box in Section 11.509 is sufficient for the first sign interval,
+but its width cannot scale to the complete event cell.  The dominant false
+width comes from differentiating the transition source, its 42-mode Gamma
+block, and the Hardy phase separately.  Let
+
+```text
+L_t=d/dt+i theta'(t)-H'(t)/H(t),
+
+J_tr=I_tr-C_G D_(39853..39894),
+K_tr=L_t J_tr.                                      (11.510.1)
+```
+
+For the finite Fresnel source integrand
+
+```text
+F(y,t)=y^(-1/2) exp(i[pi q y-pi y^2-t log y]),
+```
+
+one has exactly
+
+```text
+L_t F=[i(theta'-log y)-H'/H]F.                      (11.510.2)
+```
+
+Equation (11.510.2) is inserted before the alternating boundary-jet collapse.
+All endpoint jets are differentiated by the Leibniz rule, and the discarded
+finite-source remainder is bounded by applying the same weight to the
+order-14 normalized endpoint jet.  An altered five-label fixture evaluates
+the differentiated finite source directly and through this collapse; the two
+Arb balls overlap.
+
+The Gamma operator is also joined before interval widening.  Rather than form
+`D'` and `i theta'D` separately, each mode is summed with the exact weight
+
+```text
+C_G [i(theta'-log m)+C_G'/C_G-H'/H]m^(-1/2-it).
+                                                               (11.510.3)
+```
+
+On `I_1`, the two direct operator packets are
+
+```text
+source K:
+  [5.705656817908623508368822281209214431728540332200977863e-5
+   +/- 2.48e-7]
+ +i[4.529518035964684206652038761786063134682230400186764772e-5
+    +/- 2.55e-7],
+
+Gamma K:
+  [3.536019129435206792641993278849844502350919726150049031e-6
+   +/- 8.69e-8]
+ +i[5.153874803093435437454248389480590774084511477870679484e-5
+    +/- 6.33e-8].                                  (11.510.4)
+```
+
+Thus
+
+```text
+K_tr=
+ [5.352054904965102829104622953324229981493448359585972960e-5
+  +/- 3.34e-7]
++i[-6.243567671287512308022096276945276394022810776839147118e-6
+   +/- 3.18e-7].                                   (11.510.5)
+```
+
+This narrow enclosure overlaps the deliberately dependency-heavy assembly
+`J_tr'+(i theta'-H'/H)J_tr`.  Its physical contribution is
+
+```text
+Hardy_t[K_tr]/H
+ =[7.56453709982451982796192169189453125e-5
+   +/- 1.06e-6] > 0.                               (11.510.6)
+```
+
+At 448 bits the independent checker changes the source jet order from 14 to
+16, derivative slabs from 256 to 384, integral panels from 48 to 64, and the
+logarithm-series order from 34 to 40.  It repeats the altered finite-source
+fixture and recovers (11.510.5)--(11.510.6).
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_transition_K_first_subcell_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_transition_K_first_subcell_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_transition_K_first_subcell_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_transition_K_first_subcell_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.510 comes from the inherited Fresnel
+phase, exact integer Fourier spacing, Gamma normalization, Riemann--Siegel
+phase, or `p=t/(2*pi)`.  No circle, polygon, fitted constant, or visual
+pattern supplies `pi`.
+
+Section 11.510 certifies only the transition contribution to `K_T` on `I_1`.
+It does not enclose the lower-cell, upper-arc, ordinary-packet, positive-tail,
+or tiny target-correction contributions and therefore proves no complete
+`K_T` bound or wider sign interval.
+
+## 11.511 Transition--upper-arc K ownership pair
+
+The compact upper arc has the cancellation-stable endpoint coordinate
+
+```text
+C_U(t)=exp(i phi_U(t)) R_U(t),
+phi_U(t)=pi-t log Y-pi Y^2.
+```
+
+In the rotated coordinate, only the linear exponent coefficient depends on
+height, so
+
+```text
+d R_U/dt=integral delta I_U(delta,t)d delta,
+
+L_t C_U=exp(i phi_U)
+ integral [delta+i(theta'-log Y)-H'/H]I_U(delta,t)d delta.
+                                                               (11.511.1)
+```
+
+The operator is applied inside both the full-numerator endpoint panels and
+the reduced main panels.  The polynomial and omitted-numerator errors are
+multiplied by the supremum of the operator weight on `0<=delta<=delta_cut`;
+the compact-tail error uses the corresponding supremum through `pi/2`.
+The direct result overlaps the wider assembly obtained from `C_U'` and
+`(i theta'-H'/H)C_U`.
+
+For the final physical projection, `theta` and `phi_U` are not enclosed
+separately.  Their exact combined derivative is
+
+```text
+(theta+phi_U)'=theta'-log Y,                        (11.511.2)
+```
+
+which transports the common phase across `I_1`.  The resulting upper-arc
+contribution is
+
+```text
+Hardy_t[K_U]/H
+ =[-7.545256446744565354337042073495922522852197289466857910e-5
+   +/- 1.87e-11] < 0.                               (11.511.3)
+```
+
+The transition and upper arc therefore have opposite signs and nearly equal
+centres.  Joining them before taking an absolute value gives
+
+```text
+Hardy_t[K_tr+K_U]/H
+ =[1.928065307995447362487961839860872714780271053314209e-7
+   +/- 1.07e-6],                                    (11.511.4)
+
+sup_(t in I_1)|Hardy_t[K_tr+K_U]/H|
+ <1.252826e-6 <1.3e-6.                              (11.511.5)
+```
+
+The 448-bit checker changes the arc Taylor degree from 24 to 26, moves the
+cutoff from `0.003` to `0.0032`, changes the initial panel count from 128 to
+192, and uses a distinct main-panel partition.  It simultaneously replays
+the altered transition configuration from Section 11.510 and recovers
+(11.511.3)--(11.511.5).
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_transition_upper_arc_K_pair_first_subcell_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_transition_upper_arc_K_pair_first_subcell_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_transition_upper_arc_K_pair_first_subcell_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_transition_upper_arc_K_pair_first_subcell_gate.py
+```
+
+Pi provenance is inherited exactly from Sections 11.495, 11.509, and 11.510;
+no fitted or visual source of `pi` is introduced.
+
+Section 11.511 certifies only the transition--compact-upper-arc ownership
+pair.  The positive-real tail derivative, lower finite cell, ordinary
+complement, and tiny target correction remain open.  Consequently it does
+not prove the complete `K_T` interval, enlarge the sign theorem beyond
+`I_1`, cross an event wall, establish an all-height theorem, prove
+`Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+## 11.512 Joined lower finite-cell K on the first height subcell
+
+For the lower finite cell from Section 11.496, put
+
+```text
+V_L(t)=integral_0^L F(y,t)dy,       L=621.5,
+K_L=(d_t+i theta'-H'/H)V_L.                         (11.512.1)
+```
+
+The time derivative is inserted before the reversed 2481423-label collapse:
+
+```text
+K_L=integral_0^L [i(theta'-log y)-H'/H]F(y,t)dy.    (11.512.2)
+```
+
+For `d_r=p/y+y-q_++r`, `T(f)=(f/d_r)'`, and
+`C=i theta'-H'/H`, exact linearity gives
+
+```text
+T^n[(C-i log y)y^(-1/2)]
+ =C T^n[y^(-1/2)]-i T^n[(log y)y^(-1/2)].          (11.512.3)
+```
+
+The logarithmic recurrence contains only terms
+`p^j y^(e/2)(log y)^ell d_r^(-k)` with `ell=0,1`.  Its zero-endpoint
+remainder is explicit because, for `b>0`,
+
+```text
+integral_0^S y^(b-1)|log y|dy
+ =S^b[-log(S)/b+1/b^2],              0<S<=1,
+ =S^b[ log(S)/b-1/b^2]+2/b^2,        S>=1.          (11.512.4)
+```
+
+On upper slabs the complete signed complex coefficient of each denominator
+power is interval-evaluated before its modulus is taken.  With order 18,
+split `300`, and 4096 slabs, the direct discarded integral is below
+`9.558e-16`.  Arb gives
+
+```text
+K_L=
+ [-5.550521035144591024700789451841786798604412850259680048077e-5
+  +/- 1.03e-8]
++i[1.575591933754295400329504103333343296818185409077174744126e-5
+   +/- 3.61e-8].                                   (11.512.5)
+```
+
+This overlaps the deliberately wider assembly
+`V_L'+(i theta'-H'/H)V_L`.  After the common Hardy projection and stable
+positive `H` transport,
+
+```text
+Hardy_t[K_L]/H
+ =[-6.6828262561102746985852718353271484375e-5
+   +/- 1.82e-7] < 0.                               (11.512.6)
+```
+
+The 448-bit checker changes the endpoint order from 18 to 20, the split from
+300 to 280, and the slab count from 4096 to 6144.  Its discarded integral is
+below `1.348e-16`, its direct and assembled operator balls overlap, and it
+recovers (11.512.5)--(11.512.6).  A changed three-label logarithmic-chart
+quadrature agrees with the recurrence midpoint to `3.36e-11`.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_lower_finite_cell_K_first_subcell_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_lower_finite_cell_K_first_subcell_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_lower_finite_cell_K_first_subcell_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_lower_finite_cell_K_first_subcell_gate.py
+```
+
+The next cancellation-preserving coordinate is
+
+```text
+K_(L+O)=(d_t+i theta'-H'/H)
+        [V_L-T_lower-T_upper+Gamma_defect].         (11.512.7)
+```
+
+At `L`, the lower complement, finite source roster, and upper complement
+partition the complete half-integer lattice.  Their endpoint currents must be
+joined before a final norm, so (11.512.6) is not substituted for the future
+joined calculation.
+
+Pi provenance: every `pi` comes from the inherited Fresnel phase, exact
+half-integer Fourier spacing, Riemann--Siegel phase, Gamma normalization, or
+`p=t/(2*pi)`.  No fitted geometric constant supplies `pi`.
+
+Section 11.512 certifies only the lower finite-cell contribution to `K_T` on
+`I_1`.  It does not enclose either ordinary complementary tail, the complete
+lower-plus-ordinary join (11.512.7), the positive-real tail derivative, tiny
+target correction, complete `K_T`, a wider sign interval, the full event
+cell, wall handoffs, an all-height theorem, `Lambda<=0`, PF-infinity, RH, or
+a prize-level conclusion.
+
+## 11.513 Joined lower-plus-ordinary K on the first height subcell
+
+Retain the ordinary packet in the exact split-contour coordinate
+
+```text
+O_join=-T_lower-T_upper+Gamma_defect,
+T_upper=G_752+F_C+I_L.                              (11.513.1)
+```
+
+For `L_t=d_t+i theta'-H'/H`, the cancellation-preserving derivative target
+is therefore
+
+```text
+K_(L+O)=L_t[V_L-T_lower-G_752-F_C-I_L+Gamma_defect].
+                                                        (11.513.2)
+```
+
+The finite source, lower complement, finite upper tail, and remote upper
+tail all use the exact logarithmic recurrence
+
+```text
+T^n[(C-i log y)y^(-1/2)]
+ =C T^n[y^(-1/2)]-i T^n[(log y)y^(-1/2)],
+C=i theta'-H'/H,       T(f)=(f/(q-y-p/y))'.        (11.513.3)
+```
+
+For every denominator power, the complete signed complex coefficient is
+interval-evaluated on each slab before taking a modulus.  More importantly,
+the endpoint partials from `V_L`, `T_lower`, `F_C`, and `I_L` are joined as
+complex balls before any recurrence remainder is added.  The 752-label
+endpoint-saddle collar is handled differently: the weight
+`i(theta'-log y)-H'/H` is inserted inside its single grouped integral, so its
+exact zeros at `L` and `C` survive.  The Gamma defect is retained through the
+exact rationalized expression for `1-C_G`, not replaced by zero.
+
+At 384 bits, lower-cell order 18, lower-complement order 3, upper-tail order
+8, and the independently certified endpoint algebra through power 16, Arb
+gives
+
+```text
+K_O=
+ [0.001131885762403202693009739095911082263411659597604196008272
+  +/- 2.09e-5]
++i[-0.0007803223146070577146973592340954016853164112284845942144995
+   +/- 2.10e-5],
+
+K_(L+O)=
+ [0.001076380552051756782762731201392664395425615469101599207791
+  +/- 2.09e-5]
++i[-0.0007645663952695147606940641930620682523482293743938224670582
+   +/- 2.10e-5].                                   (11.513.4)
+```
+
+The explicit joined recurrence-error sum is below `7.243e-6`.  After the
+common Hardy projection and stable positive `H` transport,
+
+```text
+Hardy_t[K_O]/H
+ =[0.000787991803008480928838253021240234375
+   +/- 6.22e-5],
+
+Hardy_t[K_(L+O)]/H
+ =[0.0007211635411294992081820964813232421875
+   +/- 6.21e-5] > 0.                               (11.513.5)
+```
+
+The 448-bit checker changes the lower-cell order, split, and slab count;
+changes the lower-complement order from 3 to 4; changes the upper-tail order
+from 8 to 9; changes every clustered slab scheme; raises the endpoint power
+from 16 to 20; and changes the grouped collar from 192 to 256 panels.  It
+recovers (11.513.4)--(11.513.5), with projected radius `6.82e-5`.  Separate
+four-label direct quadratures on the two signs of `q-y-p/y` agree with the
+order-seven weighted recurrence midpoints to `3.84e-9` and `3.34e-14` and
+lie inside their Arb remainder balls.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_lower_ordinary_K_first_subcell_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_lower_ordinary_K_first_subcell_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_lower_ordinary_K_first_subcell_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_joined_lower_ordinary_K_first_subcell_gate.py
+```
+
+Pi provenance: every `pi` comes from the inherited Fresnel phase, exact
+half-integer Fourier spacing, root-of-unity endpoint algebra,
+Riemann--Siegel phase, Gamma normalization, or `p=t/(2*pi)`.  No fitted
+geometric constant supplies `pi`.
+
+Section 11.513 certifies only `K_(L+O)` on `I_1`.  The positive-real tail
+derivative and exact tiny target correction remain to be enclosed and joined
+with (11.513.5) and the transition--upper-arc pair.  Thus it proves no
+complete `K_T` bound, wider sign interval, full event-cell theorem, wall
+handoff, all-height theorem, `Lambda<=0`, PF-infinity, RH, or prize-level
+conclusion.
+
+## 11.514 Positive-real-tail K on the first height subcell
+
+For `s=1/2+it`, `R=2*pi*U`, and
+
+```text
+F_s(u,t)=u^(-s) exp(i u^2/(4*pi)) Delta_q(u),
+P_tail(t)=E_s(t) integral_R^infinity F_s(u,t)du,
+E_s=exp(pi*t/2+i*pi/4)(2*pi)^(s-1),                 (11.514.1)
+```
+
+the fixed-roster atlas keeps `R`, `q_-`, and the finite label count constant
+on `I_1`.  With `L_t=d_t+i theta'-H'/H`, absolute convergence permits the
+operator to enter the tail integral:
+
+```text
+L_t[P_tail]
+ =E_s integral_R^infinity
+  [pi/2-H'/H+i(theta'-log(u/(2*pi)))]F_s(u,t)du.    (11.514.2)
+```
+
+For `u>=R`, the finite geometric difference and logarithmic weight obey
+
+```text
+0<Delta_q(u)<=exp(-q_-u)/(1-exp(-R)),
+|theta'-log(u/(2*pi))|
+ <=|theta'-log U|+log(u/R),
+log(u/R)<=(u-R)/R,       u^(-1/2)<=R^(-1/2).       (11.514.3)
+```
+
+Consequently, for
+`A=|pi/2-H'/H|+|theta'-log U|`, the closed elementary bound is
+
+```text
+|L_t[P_tail]|
+ <=|E_s| R^(-1/2) exp(-q_-R)/(1-exp(-R))
+   [A/q_-+1/(R q_-^2)].                            (11.514.4)
+```
+
+At `U=39936.5`, `q_-=79788.5`, and 384 bits, Arb gives
+
+```text
+log10 |Hardy_t[L_t[P_tail]]/H|
+ <=-1873216239.050887564273651795... .              (11.514.5)
+```
+
+The 512-bit checker splits `I_1` into two changed half-boxes, switches from
+the direct to the Gamma-duplication formula for `H'/H`, and reconstructs
+(11.514.4).  An altered five-label packet directly differentiates `E_s T_R`
+and agrees with (11.514.2) to `2.76e-134`, with precision drift below
+`3.27e-102`.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_positive_real_tail_K_first_subcell_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_positive_real_tail_K_first_subcell_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_positive_real_tail_K_first_subcell_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_positive_real_tail_K_first_subcell_gate.py
+```
+
+Pi provenance: every `pi` in (11.514.1)--(11.514.5) comes from the inherited
+Mellin--Fresnel kernel, exact quarter-disk scale, Gamma normalization, or
+Riemann--Siegel phase.  No fitted geometric constant supplies `pi`.
+
+Section 11.514 certifies only the positive-real-tail Hardy operator on `I_1`.
+It does not by itself certify the exact target correction, complete `K_T`, a
+wider sign interval, the full event cell, wall handoffs, an all-height theorem,
+`Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+## 11.515 Tiny target-correction K on the first height subcell
+
+The A-free packet contains the exact finite correction
+
+```text
+P_corr=(C_G-H)D_T,
+D_T=sum_(m=622)^39894 m^(-1/2-it),
+C_G=(1+exp(-2*pi*t))^(-1/2).                       (11.515.1)
+```
+
+Writing `h=H'/H`, the raw product rule is
+
+```text
+L_t[P_corr]=(C_G'-H')D_T+(C_G-H)D_T'
+             +(i theta'-h)(C_G-H)D_T.              (11.515.2)
+```
+
+The two apparent `H'D_T` terms cancel exactly.  Hence
+
+```text
+L_t[P_corr]
+ =(C_G-H)(D_T'+i theta'D_T)+(C_G'-h C_G)D_T
+
+ =sum_(m=622)^39894
+  [C_G'-h C_G+i(C_G-H)(theta'-log m)]
+   m^(-1/2-it).                                    (11.515.3)
+```
+
+The production evaluator sums the final line mode by mode, avoiding separate
+wide balls for `D_T'` and `i theta'D_T`.  At 384 bits it obtains
+
+```text
+Hardy_t[K_corr]/H
+ =[-3.9509739348510319669472601773e-22 +/- 6.20e-21].
+                                                        (11.515.4)
+```
+
+This compact weighted sum overlaps both the simplified two-term form and the
+raw three-term form.  The 448-bit checker reverses all 39,273 modes, switches
+to the duplication formula for `H'/H`, and repeats all three expressions.  A
+changed six-mode model directly differentiates `(C-H)D`; the discrepancy is
+`1.42e-116`, with precision drift below `3.18e-87`.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_tiny_target_correction_K_first_subcell_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_tiny_target_correction_K_first_subcell_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_tiny_target_correction_K_first_subcell_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_tiny_target_correction_K_first_subcell_gate.py
+```
+
+Pi provenance: `pi` in Section 11.515 comes only from the exact thermal Gamma
+coefficient, Riemann--Siegel phase, and inherited Fourier/Gamma normalization.
+No fitted geometric constant supplies `pi`.
+
+Section 11.515 certifies only the exact target-correction operator on `I_1`.
+It does not by itself certify complete `K_T`, a wider sign interval, the full
+event cell, wall handoffs, an all-height theorem, `Lambda<=0`, PF-infinity,
+RH, or a prize-level conclusion.
+
+## 11.516 Complete K_T and positive joined derivative on the first subcell
+
+The exact ownership established above now closes as
+
+```text
+K_T=K_(L+O)+(K_tr+K_U)+K_tail+K_corr.               (11.516.1)
+```
+
+The first two parentheses are assembled before taking a norm.  The positive
+tail modulus from Section 11.514 supplies a centered rectangle for its real
+and imaginary parts, and the exact correction from Section 11.515 retains its
+phase.  Arb obtains the complete complex enclosure
+
+```text
+K_T=
+ [0.001075832723884759782215980917140674724944806468367439016635
+  +/- 2.13e-5]
++i[-0.000763730492841017986250157395811724900917821154519328349289
+   +/- 2.14e-5].                                   (11.516.2)
+```
+
+Direct use of the common phase and positive `H` transport gives
+
+```text
+Hardy_t[K_T]/H
+ =[0.0007213559574665850959718227386474609375
+   +/- 6.33e-5] > 0.                               (11.516.3)
+```
+
+There is a tighter cancellation-preserving route.  Exact linearity of the
+same Hardy projection permits the four already stabilized projected packets
+to be added directly:
+
+```text
+Hardy_t[K_(L+O)]/H
+ =[0.0007211635411294992081820964813232421875 +/- 6.22e-5],
+
+Hardy_t[K_tr+K_U]/H
+ =[1.9280653079954473624879618398608727e-7 +/- 1.08e-6],
+
+|Hardy_t[K_tail]/H|<10^(-1873216239),
+
+Hardy_t[K_corr]/H
+ =[-3.9509739348510319669472601773e-22 +/- 6.21e-21].
+                                                        (11.516.4)
+```
+
+Their sum is
+
+```text
+(Q_K-T)'=Hardy_t[K_T]/H
+ =[0.0007213563476602987525232478840221250781
+   +/- 6.32e-5]
+ >=0.0006581863470023793074481531841625059374>0.
+                                                        (11.516.5)
+```
+
+As a deliberately coarser guard, discarding the transition--arc midpoint and
+using only its certified absolute envelope `1.3e-6` still gives
+
+```text
+(Q_K-T)'
+ in[0.0007211635411294992077869990878381389908 +/- 6.35e-5]
+ >=0.0006577635407438719990437546782769817642>0.
+                                                        (11.516.6)
+```
+
+The 512-bit checker changes summation order, independently rebuilds `theta`
+and the positive `H` transport, overlaps the complete complex and projected
+production balls, repeats (11.516.6), and checks projection linearity on an
+altered four-packet fixture.  Combining (11.516.5) with Section 11.509 proves
+that `Q_K-T` is strictly negative and strictly increasing throughout `I_1`.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_complete_K_T_first_subcell_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_complete_K_T_first_subcell_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_complete_K_T_first_subcell_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_complete_K_T_first_subcell_gate.py
+```
+
+Pi provenance: every `pi` in Section 11.516 is inherited through the four
+exact packets from the Mellin--Fresnel kernel, half-integer Fourier spacing,
+Gamma normalization, Riemann--Siegel phase, or `p=t/(2*pi)`.  No circle,
+polygon, visual symmetry, or fitted constant supplies `pi`.
+
+Section 11.516 proves complete `K_T` and `(Q_K-T)'>0` only on `I_1`.  It does
+not enlarge the already-certified sign interval without a new adaptive cover.
+It proves no full event-cell theorem, event-wall handoff, all-height theorem,
+equation-(4) global infinite-series identity, `Lambda<=0`, PF-infinity, RH,
+or prize-level conclusion.
+
+## 11.517 A second certified local sign island at offset 20
+
+Put
+
+```text
+I_20=[10^10+20-0.00012,10^10+20+0.00012].          (11.517.1)
+```
+
+The event atlas of Section 11.508 has open walls
+
+```text
+9999999793.164115935239381...<t
+                              <10000000057.057898836782013... .
+                                                               (11.517.2)
+```
+
+Thus the whole closed box `I_20` lies strictly inside the same fixed-roster
+cell as `t=10^10`.  Recenter the complete joined packet at `10^10+20`, retain
+the exact event roster, and evaluate every lower-cell, transition, ordinary,
+upper-arc, tail, phase, and prefactor dependency on the new Arb box.  The
+production configuration gives
+
+```text
+Q_K-T
+ in[-0.00260618280663038603961467742919921875 +/- 2.58e-3],
+ upper endpoint
+ <=-0.0000272549586952663958072662353515625<0.      (11.517.3)
+```
+
+An independent configuration changes the transition panels, endpoint-
+remainder slabs, ordinary expansion order, and transition-jet order.  It gives
+
+```text
+Q_K-T
+ in[-0.00260618278480251319706439971923828125 +/- 2.59e-3],
+ upper endpoint
+ <=-0.0000254795668297447264194488525390625<0.      (11.517.4)
+```
+
+The two `Q_K-T` boxes overlap, as do their complete complex packets and joined
+transition packets.  Consequently
+
+```text
+Q_K(t)-T(t)<0 for every t in I_20.                  (11.517.5)
+```
+
+Two old upper-arc scalar checks require care away from the saved point.  The
+constants `0.01981` and `0.057665` each occur once in the donor source and are
+regression-scale assertions.  The actual interval-valued action, rather than
+`0.01981`, is used in both Taylor-error terms; the guard
+`total_added_error<1e-20` remains active.  The `0.057665` assertion occurs only
+after the arc has been enclosed and is not substituted into the returned arc.
+All stationary-root, nonstationary-gap, phase-sector, compact-tail, positive-
+tail, finite-jet, endpoint, and integration-by-parts guards remain active.
+
+The same direct representation reveals its present scaling limit.  Radius
+`0.00012` is the largest tested passing radius, while radius `0.00013` gives
+
+```text
+Q_K-T
+ in[-0.00260620637345709837973117828369140625 +/- 2.78e-3],
+ with upper endpoint 0.000171707364643225446343421936...>0.
+                                                               (11.517.6)
+```
+
+Every analytic guard still passes in (11.517.6), and the box straddles zero.
+This is an interval-dependency obstruction, not evidence for a pointwise sign
+change.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_offset20_local_box_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_offset20_local_box_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_offset20_local_box_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_offset20_local_box_gate.py
+```
+
+Pi provenance: `pi` here is the ordinary circumference-to-diameter constant.
+It enters through the exact kernels `exp(2*pi*i*q*y)` and
+`exp(-i*pi*y^2)`; differentiating their phases produces `p=t/(2*pi)`.  No
+circle plot, polygon, visual symmetry, or fitted parameter supplies `pi`.
+
+Section 11.517 proves only the disconnected box (11.517.1).  The gap from the
+upper end of `I_1` to the lower end of `I_20` is about `19.99978`; no sign or
+derivative theorem covers it.  There is still no connected adaptive cover,
+maximal-event-cell theorem, event-wall handoff, all-height theorem,
+equation-(4) global infinite-series identity, `Lambda<=0`, PF-infinity, RH,
+or prize-level conclusion.
+
+## 11.518 Complete K_T monotonicity and a leftward offset-20 sign extension
+
+Keep the exact fixed roster of Section 11.517 and put
+
+```text
+D_20=[10^10+20-0.006,10^10+20+0.006].              (11.518.1)
+```
+
+The directed Arb height ball used by the calculation is outwardly wider than
+(11.518.1), with endpoints
+
+```text
+10000000019.9939999999915016815...,
+10000000020.0060000000084983185... .                (11.518.2)
+```
+
+Thus the exact decimal interval (11.518.1) is contained in the evaluated box,
+which itself lies strictly inside the event walls (11.517.2).  Recenter all
+five ownership components together and retain the exact identity
+
+```text
+K_T=K_(L+O)+(K_tr+K_U)+K_tail+K_corr,
+(Q_K-T)'=Hardy_t[K_T]/H.                            (11.518.3)
+```
+
+The production direct projection is
+
+```text
+(Q_K-T)'
+ in[0.00254375767326564528048038482666015625
+    +/- 0.00249589566737995482981204986572265625],
+ lower endpoint
+ >=0.0000478620058856904506683349609375>0.           (11.518.4)
+```
+
+Adding the stabilized component projections before any final norm gives
+
+```text
+(Q_K-T)'
+ in[0.0025452732406847644600527931089609242
+    +/- 0.00249289235216565430164337158203125],
+ lower endpoint
+ >=0.0000523808885191101584094215269296742>0.        (11.518.5)
+```
+
+An independent configuration reverses the ordinary expansion path and
+changes the duplication, transition, endpoint, and upper-arc settings.  Its
+direct and component-sum lower endpoints are respectively
+
+```text
+0.0000401999932364560663700103759765625,
+0.0000459866278106346729653528201866597.             (11.518.6)
+```
+
+Within each configuration the direct and component-sum projections overlap.
+The production and independent direct projections, component projections,
+and complete complex `K_T` enclosures also overlap.  Consequently
+
+```text
+(Q_K-T)'(t)>0 for every t in D_20.                   (11.518.7)
+```
+
+This derivative theorem converts the local value island into a one-sided
+extension.  Let
+
+```text
+a=10^10+20+0.00012.                                 (11.518.8)
+```
+
+Section 11.517 gives `Q_K(a)-T(a)<0`.  For every
+`t in[10^10+19.994,a]`, the whole integration segment lies in `D_20`, so the
+fundamental theorem of calculus and (11.518.7) give
+
+```text
+Q_K(t)-T(t)
+ =Q_K(a)-T(a)-integral_t^a (Q_K-T)'(u)du
+ <=Q_K(a)-T(a)<0.                                   (11.518.9)
+```
+
+Therefore the second sign island is rigorously enlarged to
+
+```text
+Q_K(t)-T(t)<0
+for every t in[10000000019.994,10000000020.00012].  (11.518.10)
+```
+
+The right endpoint of the first certified subcell is
+`10000000000.0001`; hence the still-uncovered distance to (11.518.10) is
+exactly
+
+```text
+10000000019.994-10000000000.0001=19.9939.           (11.518.11)
+```
+
+The stabilized action envelope removes the old radius-`0.005` upper-arc
+failure.  Production remains positive at radius `0.0061`, with component-sum
+lower endpoint `8.4055338902544e-6`.  At radius `0.01`, all retained analytic
+and overlap guards still pass, but both the direct and component-sum
+enclosures straddle zero; the latter is
+
+```text
+[-0.0017717255269644738288,0.0068306899755725680737].
+                                                               (11.518.12)
+```
+
+Equation (11.518.12) diagnoses interval width only and proves no pointwise
+derivative zero or sign change.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_offset20_complete_K_T_monotonicity_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_offset20_complete_K_T_monotonicity_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_offset20_complete_K_T_monotonicity_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_offset20_complete_K_T_monotonicity_gate.py
+```
+
+Pi provenance: `pi` is the ordinary circumference-to-diameter constant.  It
+enters through the exact Fourier kernel `exp(2*pi*i*q*y)`, quadratic kernel
+`exp(-i*pi*y^2)`, Gamma normalization, and `p=t/(2*pi)`.  It is not fitted
+from a plot, polygon, visual symmetry, or numerical pattern.
+
+Section 11.518 proves only the local derivative theorem (11.518.7) and the
+left-anchored sign extension (11.518.10).  It does not bridge (11.518.11),
+cover the maximal event cell, cross an event wall, prove an all-height
+theorem, equation-(4) global infinite-series identity, `Lambda<=0`,
+PF-infinity, RH, or a prize-level conclusion.
+
+## 11.519 Common-phase transport of the grouped 752-label collar
+
+The radius loss in Section 11.518 is not caused by the upper arc or by a large
+recurrence remainder.  At radius `0.006`, the grouped 752-label collar carries
+about `97.3%` of the complete derivative radius.  Its direct 192-panel
+evaluation treats a common height rotation independently on every panel and
+therefore discards cancellation between the panel phases.
+
+Let `t_c=10^10+20`, `h=t-t_c`, and let `[L,C]=[621.5,621.6875]` be the grouped
+collar.  On panel `j`, put
+
+```text
+s_j=(log y_(j,L)+log y_(j,R))/2,
+epsilon_j=(log y_(j,R)-log y_(j,L))/2,
+s_0=(log L+log C)/2.                                (11.519.1)
+```
+
+The exact center-height integrand satisfies
+
+```text
+F_t(y)=F_(t_c)(y)exp(-ih log y).                    (11.519.2)
+```
+
+Write the 752-term geometric amplitude in its finite-sum form.  On panel `j`,
+
+```text
+integral |F_(t_c)(y)|dy
+ <=B_j:=752*(y_(j,R)-y_(j,L))/sqrt(y_(j,L)).        (11.519.3)
+```
+
+Since `x,y` are real and
+`|exp(-ix)-exp(-iy)|<=|x-y|`, factoring the common phase in (11.519.2) gives
+
+```text
+F_t(y)=exp(-ihs_0)exp(-ih(s_j-s_0))F_(t_c)(y)+E_j(y),
+integral |E_j(y)|dy<=|h|epsilon_j B_j.              (11.519.4)
+```
+
+For the companion log-weighted integral the same argument gives
+
+```text
+integral |log(y)E_j(y)|dy
+ <=log(C)|h|epsilon_j B_j.                          (11.519.5)
+```
+
+Thus each panel needs only two rigorous center-height integrals,
+`integral F_(t_c)` and `integral log(y)F_(t_c)`.  The full grouped Hardy packet
+is reconstructed after summation.  Its common final phase is not evaluated as
+the dependent subtraction `theta(t)-hs_0`.  Instead the real mean-value
+theorem gives the narrower rigorous enclosure
+
+```text
+theta(t_c)+h(theta'(D)-s_0).                        (11.519.6)
+```
+
+Equations (11.519.2)--(11.519.6) are exact identities plus explicit
+majorants; no interpolation or sampled sign assumption is used.
+
+Now put
+
+```text
+D_20^phase=[10^10+20-0.07,10^10+20+0.07].          (11.519.7)
+```
+
+All original finite-cell, complementary-tail, transition, upper-arc,
+positive-tail, correction, event-roster, and overlap guards remain active.
+The 192-panel, 384-bit production transport has grouped-packet added error
+below `5.295e-6` and gives
+
+```text
+(Q_K-T)'
+ in[0.0024371086026349075838370597936626446
+    +/- 0.00217572095061768777668476104736328125],
+ lower endpoint
+ >=0.0002613876520172198071522987462993634>0.       (11.519.8)
+```
+
+An independent configuration uses 256 panels at 448 bits, integrates them in
+reverse order, and changes the lower-ordinary, transition, endpoint, and arc
+settings.  Its grouped-packet added error is below `3.972e-6`, and
+
+```text
+(Q_K-T)'
+ in[0.0024371086026349075838370597936626446
+    +/- 0.00217954670006292872130870819091796875],
+ lower endpoint
+ >=0.0002575619025719788625283516027446759>0.       (11.519.9)
+```
+
+The derivative, lower-ordinary, and complete complex `K_T` enclosures overlap
+between configurations.  Each sharpened projection also overlaps its broader
+direct interval evaluation.  Hence
+
+```text
+(Q_K-T)'(t)>0 for every t in D_20^phase.             (11.519.10)
+```
+
+Use the same negative anchor `a` from (11.518.8).  Integrating (11.519.10) to
+the left proves
+
+```text
+Q_K(t)-T(t)<0
+for every t in[10000000019.93,10000000020.00012].   (11.519.11)
+```
+
+The exact remaining gap to the right endpoint of the first subcell is now
+
+```text
+10000000019.93-10000000000.0001=19.9299.            (11.519.12)
+```
+
+At radius `0.1`, all retained source guards and the phase-transport formulas
+still pass, but the production derivative enclosure becomes
+
+```text
+[-0.0008569125000121857737939459553,
+  0.0055012350551351119065840142497].               (11.519.13)
+```
+
+This is a representation-width diagnostic only and proves no pointwise
+derivative zero or sign change.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_offset20_grouped_752_phase_transport_monotonicity_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_offset20_grouped_752_phase_transport_monotonicity_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_grouped_752_panel_phase_transport_scout.py
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_offset20_grouped_752_phase_transport_monotonicity_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_offset20_grouped_752_phase_transport_monotonicity_gate.py
+```
+
+Pi provenance: `pi` is the ordinary circumference-to-diameter constant.  It
+enters through the exact Fourier kernel `exp(2*pi*i*q*y)`, quadratic kernel
+`exp(-i*pi*y^2)`, Gamma normalization, and `p=t/(2*pi)`.  It is not fitted
+from a plot, polygon, visual symmetry, or numerical pattern.
+
+Section 11.519 proves only the common-phase collar transport,
+(11.519.10), and the left-anchored sign extension (11.519.11).  It does not
+bridge (11.519.12), cover the maximal event cell, cross an event wall, prove
+an all-height theorem, equation-(4) global infinite-series identity,
+`Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+## 11.520 The upper-cell derivative obstruction and phase landscape
+
+The proposed center-to-center monotonicity chain must first survive the
+complete derivative, not merely the width of one representation.  Complete
+radius-`10^-7` boxes at offsets `5`, `10`, and `15`, together with the
+radius-`0.005` offset-`20` box, give the sign sequence
+
+```text
+offset 5:  (Q_K-T)'>0,
+offset 10: (Q_K-T)'<0,
+offset 15: (Q_K-T)'<0,
+offset 20: (Q_K-T)'>0.                              (11.520.1)
+```
+
+For example, the complete component sums at offsets `5`, `10`, and `15` are
+
+```text
+offset 5:  [ 0.0020593544255...,  0.0020982201638...],
+offset 10: [-0.0023108356794..., -0.0022812419637...],
+offset 15: [-0.0003586256034..., -0.0003203218536...]. (11.520.2)
+```
+
+The fixed-roster expression is analytic inside the event cell.  Hence
+(11.520.1) forces at least one stationary point between offsets `5` and `10`
+and at least one between `15` and `20`; uniqueness is not asserted.  In
+particular, no chain whose premise is `(Q_K-T)'>0` throughout the remaining
+gap can be correct.
+
+The append-only value cache was then completed on three complementary grids:
+all twenty integer offsets `1,...,20`, the thirteen candidate trough offsets
+`1.5,3,...,19.5`, and the thirteen phase-predicted candidate peak offsets
+
+```text
+0.75,2.25,3.75,...,18.75.                            (11.520.3)
+```
+
+Every radius-`10^-7` Arb box on these grids is strictly negative.  On the
+candidate-peak grid the closest sampled upper endpoint to zero is
+
+```text
+Q_K(10^10+12.75)-T(10^10+12.75)
+ <=-0.00198157417980837635695934295654296875<0.       (11.520.4)
+```
+
+The approximately `1.5`-unit spacing in (11.520.3) is an observed route scale,
+not a proved period.  Nor are the sampled candidate peaks certified extrema.
+Thus (11.520.4) does not fill any interval.  It does, however, reject the
+monotonicity-chain route and selects a finite phase-cell problem: construct a
+phase-normalized interval Taylor/Chebyshev envelope or isolate every zero of
+`(Q_K-T)'` on the thirteen cells covering offsets `[0,19.5]`, then close the
+remaining `[19.5,19.93]` tail into the sign island of Section 11.519.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_phase_landscape_scout.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_phase_landscape_scout.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_phase_landscape_scout.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_phase_landscape_scout.py
+```
+
+Pi provenance: `pi` is the ordinary circumference-to-diameter constant and
+enters through the exact Fourier, quadratic, Gamma, and `p=t/(2*pi)`
+normalizations.  No period or peak location in this section is fitted into a
+proof from a plot.
+
+Section 11.520 proves the derivative sign obstruction in (11.520.1) and
+records rigorous local value boxes.  It does not prove that (11.520.3) lists
+all extrema, certify negativity between samples, close the `19.9299`-unit
+gap, cross an event wall, prove an all-height theorem, `Lambda<=0`,
+PF-infinity, RH, or a prize-level conclusion.
+
+## 11.521 A first continuous phase-cell sign certificate
+
+The worst sampled candidate peak from Section 11.520 can be promoted without
+proving that it is an extremum.  Put
+
+```text
+a=10^10+12.75,
+I_L=[10^10+12.5,10^10+12.75],
+I_R=[10^10+12.75,10^10+13].                       (11.521.1)
+```
+
+Both closed halves lie strictly inside one fixed-roster event cell.  For the
+width-dominant grouped 752-label collar, evaluate one panel atlas at `a`.  If
+`h=t-a`, the exact height identity is
+
+```text
+F_t(y)=F_a(y) exp(-i h log y).                    (11.521.2)
+```
+
+After extracting the common rotation at the global log center `s_0` and the
+local rotation at panel log center `s_j`, the two retained panel errors are
+
+```text
+|E_j|     <= |h| epsilon_j B_j,
+|E_j^log| <= log(C)|h| epsilon_j B_j,
+B_j=752(y_right-y_left)/sqrt(y_left).             (11.521.3)
+```
+
+Thus the same center atlas transports rigorously to both half boxes while the
+non-grouped packets are enclosed directly there.  The production route uses
+192 forward panels at 384 bits.  The independent route uses 256 reverse
+panels at 448 bits and altered component configurations.  Corresponding
+anchor values, lower-ordinary projections, complete complex `K_T` boxes, and
+full derivative boxes overlap.
+
+The two anchor enclosures have upper endpoints
+
+```text
+production:  Q_K(a)-T(a)<=-0.0019815741798083763569593429565...,
+independent: Q_K(a)-T(a)<=-0.0019813099024759139865636825561.... (11.521.4)
+```
+
+The complete transported derivative norms are
+
+```text
+                I_L                         I_R
+production   <=0.0052576184726831...     <=0.0053145972681250...,
+independent  <=0.0052494395324629...     <=0.0053076818869613.... (11.521.5)
+```
+
+For every `t` in either half, `|t-a|<=0.25`.  Therefore the real mean-value
+identity gives
+
+```text
+Q(t)=Q(a)+integral_a^t Q'(u)du
+    <=Q(a)+0.25 sup_I |Q'|.                       (11.521.6)
+```
+
+The resulting production upper endpoints on `I_L,I_R` are respectively
+
+```text
+-0.0006671695616340400...,
+-0.0006529248627735740...,                         (11.521.7)
+```
+
+and the independent upper endpoints are
+
+```text
+-0.0006689500193530762...,
+-0.0006543894307284859....                         (11.521.8)
+```
+
+All four are strictly negative.  Since the two halves meet at `a`,
+
+```text
+Q_K(t)-T(t)<0
+for every t in [10^10+12.5,10^10+13].             (11.521.9)
+```
+
+The derivative point diagnostics additionally bracket at least one positive-
+to-negative crossing in `(10^10+12.75,10^10+12.77)`, but neither uniqueness
+nor even use of that crossing is required by (11.521.9).  Any additional
+hidden stationary points are absorbed by the complete derivative norms in
+(11.521.5).  This is the reusable lesson: a negative phase anchor plus a
+common-phase derivative norm can certify a cell whose derivative changes
+sign internally.
+
+```text
+outputs/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_phase_cell_12p5_13_lipschitz_gate.md
+work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_phase_cell_12p5_13_lipschitz_gate.json
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_anchored_grouped_752_phase_transport_scout.py
+work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_phase_cell_12p5_13_lipschitz_gate.py
+work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_signed_QK_minus_T_upper_event_cell_phase_cell_12p5_13_lipschitz_gate.py
+```
+
+Pi provenance: no new occurrence of `pi` is introduced by the phase-cell
+transport or mean-value step.  The inherited `pi` is the ordinary
+circumference-to-diameter constant already fixed by the exact Fourier,
+quadratic, Gamma, and `p=t/(2*pi)` normalizations.
+
+Section 11.521 proves only the closed local sign theorem (11.521.9).  It does
+not cover the other phase cells, connect this island to the offset-20 island,
+close the remaining event-cell gap, cross an event wall, prove an all-height
+theorem, `Lambda<=0`, PF-infinity, RH, or a prize-level conclusion.
+
+Sections 11.351--11.521 prove exact cancellation-preserving reductions, one
 outer-kernel bound, several certified local B channels, exact local
 nonstationarity, the complete modular involution back to the exact Kummer
 roster, a fail-closed separation from the published and implemented hybrids,
@@ -66258,9 +76584,293 @@ the Abel endpoint grouping, and releases the exterior B trace package into
 a uniformly tangentially nonstationary sector with `|G_B|>69.92`.  Section
 11.416 independently replays the mode ownership and prevents the negative
 trace-package certificate from being promoted to the complete endpoint B
-sector while its nonlocal bulk-step block remains unbounded.
-They do not
-yet bound that grouped remainder, its cancellation-preserving
-finite-integral A-fold and outside-window components, all 400 height corridors, the complete
-`Q_K-T` residual or `T_upper`, a height-uniform theorem, `Lambda<=0`,
-PF-infinity, RH, or a prize-level conclusion.
+sector while its nonlocal bulk-step block remains unbounded.  Section 11.417
+then transfers that block into the released current and proves exact smooth
+crossing completion.  Section 11.418 supplies the exact first and second
+derivative transport.  Sections 11.419--11.421 analytically sum the rational,
+exact-remainder, and dictionary pieces of the complete `m>=B` derivative
+tail.  Section 11.422 couples those bounds to the local B phase and proves
+the entire analytic outer contribution is below `8e-10`.  Finally, Section
+11.423 rejoins the remaining finite completed block before norms, replacing
+more than five million mode terms and 1.28 million crossing charts by one
+common Abel/Dirichlet residual.  Section 11.424 identifies its target as one
+uniform Gamma carrier, restores the sub-`5e-20` classical correction, and
+sets the exact sufficient target `0.00014057919999999995`.  Section 11.425
+rewrites the whole Gamma residual as one endpoint-completed oriented
+phase-space projector defect and distinguishes its three stationary
+occupancy interfaces from the ordinary/fold bookkeeping boundary.  Section
+11.426 evaluates the canonical flat-face projector exactly, proves its
+identity with the B tangent profile, and isolates the A/half corner as a
+near codimension-two null face.  Section 11.427 restores the half-domain as
+one coupled Fresnel wedge, proves its exact boundary calculus, and locates the
+saved-height A corner within `0.022` mode of simultaneous half-boundary and
+null-face incidence.  Section 11.428 transports the full pair-triangle
+amplitude into that wedge, retains both affine currents, and splits the exact
+nonlinear defect into one second-order amplitude integral and one oriented
+curved-face strip without a phase remainder.  Section 11.429 replaces the
+singular characteristic-defect scaling by a one-dimensional null-coordinate
+Abel formula and identifies the exact saved-height unfolding `eta_A`.
+Section 11.430 evaluates that scalar and affine canonical corner rigorously
+at `39894|39895`, including the non-negligible affine current.
+Section 11.431 restores the exact common odd-endpoint carrier, A orientation,
+and paired-projector coefficient across that edge.  Section 11.432 certifies
+the complete 84-mode affine tangent roster and shows why a two-mode sign
+cannot be extrapolated.  Section 11.433 evaluates the exact finite-box
+curved-face strip and proves that it belongs in the signed A Airy carrier,
+not in a small-error budget.  Section 11.434 then corrects the required
+regrouping, removes the tangent exterior algebraically, and certifies both
+the artificial tangent-saddle and genuine exact-face exterior rosters.
+Section 11.435 evaluates the finite-box exact-domain affine carrier directly
+and certifies its full 84-mode signed sum.  Section 11.436 proves that its
+affine/nonlinear split cannot be continued termwise to `x=0`: the two
+exterior pieces diverge oppositely and must be recombined into the integrable
+full exact endpoint current before the limit.  Section 11.437 then gives an
+exact erfc primitive and reduces that full exterior to one common-phase
+integral with a ten-mode incomplete stationary roster; its displayed scale
+remains diagnostic.  Section 11.438 replaces the exact endpoint tail by four
+explicit rational hierarchy terms with complete physical error below
+`2.283e-15`.  Section 11.439 evaluates the resulting rational common-phase
+integral by a finite logistic contour and certifies the full exact A exterior
+as `-0.00240153401848142 +/- 3.40e-13`.  Section 11.440 then certifies the
+compact exact-minus-affine amplitude on all 84 modes.  Section 11.441 combines
+it with the localized affine carrier and exact exterior, then restores the
+42-mode positive full-line Gamma jump to certify the projector-completed A
+transition as `-0.03667412479777365 +/- 3.03e-12`.  Section 11.442 then
+partitions every remaining finite-cutoff mode and component, proves that the
+A extraction overlaps neither certified B extraction, and converts the
+working theorem into the single joined target
+`R_after_A<0.0368147039947`.  Sections
+11.443--11.447 place that object in one common finite-regulator kernel, derive
+the two-edge modular form, remove its apparent cell poles, fold the source to
+one periodic cell, and cancel the extracted target harmonic current inside an
+absolutely convergent symmetric two-jet series.  Section 11.448 proves that
+raising the raw endpoint-jet order cannot be a uniform replacement for the
+phase-adapted A/B transition charts.  Section 11.449 compresses the post-A
+positive projector to `622..39936` and moves its upper half-integer edge from
+`0.25` to `42.25` modes beyond the A half-boundary.  Section 11.450
+instantiates the resulting pole-free kernel and proves that its common A
+saddle survives the edge move.  Section 11.451 identifies the exact
+42-mode edge-translation block and the licensed normal-then-Morse analysis,
+with a factor-169 normal gap improvement.  Sections 11.452--11.454 derive the
+translated-edge currents, midpoint-Peano representation, and six-current
+rational-log pre-endpoint reduction.  Section 11.455 confines endpoint
+special functions to eight cells while retaining the 34-cell tail value, and
+Section 11.456 certifies the complete local endpoint layer below `0.0037`.
+Section 11.457 then bounds the complete pre-endpoint core without Morse
+cancellation, Section 11.458 assembles the translated 42-mode A-face channel
+below `0.00364`, and Section 11.459 embeds that channel exactly in the common
+post-A remainder while deriving the non-A sufficient target
+`0.0331747039947`.  Section 11.460 then gives the non-A kernel in four exact
+coordinates and reduces its folded 2,481,422-cell source current to one
+incomplete quadratic Gauss sum and its first moment, with an exact reference
+recurrence.  Section 11.461 derives exact rational-phase cycle compression
+and validates the O(`L`) recurrence against direct high-precision and
+full-roster periodic oracles, while deliberately withholding a uniform
+floating-error claim.  Section 11.462 then maps the folded source exactly to
+the first two truncated-theta moments, proves contraction of the normalized
+Poisson recursion, and exposes a pure dual-first-moment saddle transform in
+which the huge base phase and independent zeroth current cancel.  Its
+saddle-only scout also shows that the tied endpoint/nonstationary remainder
+cannot be dropped.  Section 11.463 differentiates the exact Mordell transform
+before estimation and joins the main and two endpoint currents without
+splitting the dangerous cancellation.  Section 11.464 supplies explicit
+uniform central-strip `h,h_z` tails and end-to-end interval certificates for
+two full-roster rows, including a stricter altered-precision replay.  Section
+11.465 promotes the Mordell integrals to genuine parameter boxes, covers the
+half-integer recurrence wall, and proves two complete-current microboxes.  Its
+scale audit rejects direct source-length first-difference tiling and forces the
+next implementation toward interval Mordell recursion.  Section 11.466 closes
+the affine-weighted current under that exact recursion, certifies a full
+interior contraction from `992568` to `496284`, and identifies the exact
+period-two `tau=0` terminal at the corner.  Section 11.467 then extends that
+terminal to a one-sided width-`10^-22` small-`tau` Taylor box while preserving
+the signed alternating moments and certifies the complete corner source box.
+Section 11.468 separately splits the right side of the interior normalization
+wall into its `496283` open branch and `496284` wall line, preserves the exact
+period-three child moments, and certifies their endpoint-complete source hull
+at width `10^-23`.  Section 11.469 derives the left parity and
+double-conjugation map, certifies its conjugate period-three branches, proves
+the two wall orientations agree, and closes the full two-sided width-`10^-23`
+source box.  Section 11.470 unifies the period-two and period-three terminals
+as one exact rational-phase residue evaluator, removes artificial `x`
+dependence from the child weight, derives the next left/right floor walls, and
+certifies the first adjacent endpoint-complete tile.  It also proves that a
+separately bounded third Mordell main inflates like `t^(-3/2)`, so its endpoint
+cancellation must be retained.  Section 11.471 mirrors the exact child and
+endpoint maps, certifies the right and left width-lattice crossovers, and
+shows that the first positive-wall root periods exceed the current length
+while the next Mordell index is one.  Section 11.472 then proves that the
+new child main and shifted upper endpoint cancel exactly across that first
+floor wall and certifies a complete local source box on each side.  Section
+11.473 removes the artificial independent phase parameters, places both open
+child currents in one exact characteristic family, and proves a uniform
+order-48 Euler--Maclaurin remainder below `0.001` across the entire first
+small-`t` interval.  Section 11.474 differentiates that characteristic family
+exactly in `t` and `s`, carries both derivatives through an order-80
+Euler--Maclaurin formula with uniform remainder bounds, and validates ten
+altered-order direct weighted-current overlaps.  Its magnitude audit shows
+that pointwise value-box transport of the isolated child current would require
+diagnostic half-widths as small as `4.42e-24` in `t` and `7.67e-19` in `s`;
+these are route diagnostics, not certified cells.  Section 11.475 then removes
+the Abel regulator from the complete folded-source integral as one endpoint
+half-sum plus 39,315 finite Fresnel modes, isolates the mandatory theta
+boundary layer, and proves an exact cubic-root kernel zero at `s=1/3`.
+Rigorous full-roster derivatives at both first walls show that the zero removes
+the product's pointwise `t` stiffness on that line but leaves microscopic
+`s`-transport scale.  Section 11.476 then restores the inherited half-current,
+proves that the Abel boundary layer is exactly the missing half of the complete
+2,481,423-label source roster, and cancels every owned finite coefficient to
+the contiguous full-line block and 84 paired A atoms.  It also certifies all
+78,588 rational finite-phase transitions and redirects the primary evaluator
+to the signed source-minus-owned-carriers assembly, retaining the raw 39,315-
+mode form only as a cross-check.  Section 11.477 implements that joined
+pointwise evaluator on 18 rational coordinates, checks eight complete altered
+39,315-mode rows and nine periodic source rows, and independently replays four
+carrier rows.  The altered forms agree, but sampled normalized physical
+densities reach `1.69e11`; the next selected step is therefore a native
+physical-transform ownership ledger rather than naive value-space panels.
+Section 11.478 completes that ledger: the complete source transforms exactly
+to `Q_K`, the owned `P` and paired `A` blocks reassemble as
+`G+A_transition`, and the whole signed physical assembly reduces to
+`J_Z=Q_K-G-A_transition`.  It also proves
+`R_nonA=J_Z-E_Btr,win-E_outer-I_(A,42)`, derives
+`-0.000134948<E_Btr,win<-0.00013198`, and identifies
+`|J_Z|<0.02939975` as a sufficient stronger-route target.  Section 11.479
+repairs the half-domain/full-Kummer factor without changing any executable
+carrier certificate.  Sections 11.480--11.481 reduce the remaining bridge to
+the exact finite-roster defect `Delta_KU` and then to the positive
+continuation target `0.0072743687<D_K<0.0663407986`; they also prove the
+algebraic `H-1` correction is only `3.126e-22`.  Section 11.482 audits the
+cited derivation of equation (4), quarantines the heuristic A21 continuation,
+and proves the opposite-half geometric expansions have a nonuniform
+`q=O(1/N)` crossing layer of scale `exp(-sqrt(2)pi)=0.01176198...`.
+Section 11.483 replaces that failed infinite interchange by an exact finite
+prefix/residual identity, translates its residual by an integer, and releases
+the actual Dirichlet block `79789..2561211`.  Section 11.484 then proves that
+the prefix is not the physical Kummer roster: the two differ by an explicit,
+nonzero `Log(v^2)` branch term.  Retaining its finite sum `B_W` yields the
+exact augmented identity (11.484.11) without A21.
+Section 11.485 then compresses its complete physical Kummer roster to one
+geometric half-line integral, derives the exact transition
+`alpha_0=sqrt(8t/pi)`, and identifies the normalization-free third-quadrant
+saddle ray while explicitly withholding the unproved Stokes deformation.
+Section 11.486 supplies the exact parabolic-cylinder connection that owns the
+zero-branch and Stokes terms, legally rotates only the decaying `I_+` branch
+to a finite Fresnel/Dirichlet integral, and independently recovers the
+`622..39852` ordinary roster and symmetric `42+42` transition split.  The
+common-integral carrier amplitudes have not yet been subtracted.  Section
+11.487 partitions that Fresnel integral into exact integer cells and subtracts
+the full extended Gamma carrier as the common coefficient `C_G`, reducing the
+ordinary owned cells to `m^(-s)(beta_m-C_G)`.  It also inserts an exact
+canonical lift of the 84 paired A modes.  Section 11.488 replaces that
+real-only lift by the original convergent endpoint-wedge integral, factors it
+on the same `m^(-s)` carrier, and reduces every transition mode to
+`m^(-s)(beta_m-C_G-C_A,m)`.  Section 11.489 then joins all three certified A
+pieces before physical projection and rigorously encloses their complete
+complex natural lift, showing that separate full-complex exterior rows are
+unnecessary.  Section 11.490 collapses all later transition-source labels to
+twelve endpoint jets with a rigorous `6.45e-17` remainder and certifies the
+complete grouped Fresnel/Gamma/A transition packet.  Section 11.491 joins
+`P_W` exactly to both unowned Fresnel tails through a common-`G_0` pole-safe
+finite-prefix normalization and preserves the complete three-packet
+cancellation before norms.  Section 11.492 maps every real label saddle
+exactly to an unequal-truncation pair on `t=2pi alpha beta`, audits both forms
+of O'Sullivan's generalized Riemann--Siegel expansion, and isolates the
+completed-series endpoint block `622..860` from the contracting core
+`861..39936`.  It also records why the intermediate Mordell formula is the
+preferred donor and why neither displayed asymptotic scale is yet a certified
+bound for `J_Z`.  Section 11.493 then identifies the common-`G_0`
+regularization as an integer finite difference of the entire Riemann auxiliary
+kernel, proves `kappa(k)=k-1/2`, and rewrites `S_W` as one pole-free common
+functional.  Section 11.494 then puts that functional in an exact
+gamma-balanced Mellin-Hurwitz coordinate and proves that the naive
+positive-axis Taylor majorant cannot scale: it remains decreasing beyond
+twenty billion orders.  Section 11.495 deforms that coordinate through a
+finite fourth-quadrant quarter disk, proves the vertical current recovers the
+complete Fresnel packet with no exponential normalization, cancels the
+interior unowned cells exactly, and rigorously encloses the signed production
+upper arc with modulus below `0.057665`; its separate positive-real tail is
+smaller than `10^-1873216239`.  Section 11.496 rigorously encloses the complete
+lower finite cell as a complex ball with radius `2.30e-16` per component.
+Section 11.497 then replaces the 39231-cell ordinary packet exactly by one
+230-label endpoint-saddle packet, two nonstationary complementary tails, and
+an explicit Gamma defect below `10^-27287527074`.  Section 11.498 exploits the
+even-roster endpoint zero, captures every one of those 230 saddles in the
+rational interval `[621.5,621.5625]`, and rigorously encloses their grouped
+core as `0.0003561096102...+0.0002536459381...i`.  Section 11.499 extends that
+core to the least root-of-unity-closed 240-label collar, makes both rational
+endpoints vanish exactly, encloses the collar as
+`0.0003078279649...+0.0002801606958...i`, and leaves two upper remainders with
+minimum gaps above `27.7560` and `10.3203`.  Section 11.500 then evaluates
+every root-of-unity Hurwitz/digamma endpoint sum through denominator power 16
+for those two upper remainders and the lower complementary tail, with the
+`k=1` poles canceled exactly and independent altered-roster checks.  The
+unsplit eight-round absolute test of Section 11.501 then gives rigorous but
+useless radii `30.69`, `5.02e7`, and `25.62`, and identifies the two upper
+launches as exterior endpoint-saddle transitions only `0.43` and `0.16`
+quadratic widths from their saddles.  Section 11.502 replaces those two upper
+pieces exactly by a dual-endpoint-closed 752-label transition packet and two
+far nonstationary remainders.  It encloses the grouped packet as
+`0.0001853273987...+0.0002793610483...i` and certifies both new launches above
+eight quadratic widths.  Section 11.503 then bounds both far remainders below
+`3e-17` componentwise and certifies the complete upper complement as
+`0.0001875912329...+0.0002720743734...i`.  Section 11.504 preserves each
+signed recurrence coefficient before taking its slab supremum, reduces the
+lower-tail radius to `3.44e-7`, and certifies the complete ordinary packet as
+`0.0001856808271...+0.0001356133042...i`.  Both complementary tails are now
+closed at the production height.  Section 11.505 then places the lower cell,
+upper arc, negligible positive-real tail, ordinary packet, and transition
+packet in their exact ownership slots, with the natural A lift subtracted
+inside the transition exactly once.  It certifies
+`J_Z=0.0334441840...+/-9.68e-7` and
+`D_K=0.0032299395...+/-9.68e-7`.  These balls rigorously miss the selected
+stronger sufficient corridor by about `0.00404346`; the miss is not caused by
+enclosure width.  Section 11.506 then returns to the original signed
+one-sided residual, cancels the translated A-face and A transition at the
+coefficient level, and certifies `R_after_A<0.0368061039947`, `R_Dir<0`, and
+`Q_K-T<0` at `t=10^10`.  Section 11.507 then derives the two exact nearest
+height events, proves the maximal same-roster cell
+`t0-206.835884...<t<t0+57.057899...`, and certifies that every active
+classical, saddle, complement, rational-closure, and far-launch discrete
+guard remains fixed there.  Section 11.508 then collapses the direct target to
+the A-free identity `Q_K-T=Hardy_t[S_W-H D_T]/H`, proves its exact joined
+height derivative, and certifies `T'(10^10)=1.2643130173...`.  An A-free
+saved-height packet reassembly remains negative and overlaps Section 11.506.
+Section 11.509 then evaluates that A-free packet directly on
+`|t-10^10|<=10^-4`, stabilizes the Gamma prefactor and upper-arc action by
+exact transport identities, and proves `Q_K-T<0` throughout the first
+nonzero-radius height subcell.  A 448-bit checker covers the same interval by
+two altered half-boxes whose upper bounds remain below `-0.00214`.  Section
+11.510 then pushes the complete Hardy transport operator through the
+transition source boundary jets and the 42-mode Gamma sum before interval
+widening, reducing the transition derivative component to a radius near
+`1.06e-6`.  Section 11.511 applies the same operator inside the compact upper
+arc, transports the combined endpoint/Hardy phase, and proves that the
+transition--arc derivative pair has absolute upper below `1.3e-6` on the
+first subcell.  Section 11.512 then inserts the Hardy operator into the lower
+finite-cell reversed-roster recurrence, proves its contribution strictly
+negative with radius `1.82e-7`, and records the complete-half-lattice endpoint
+join that must be retained with the ordinary complements.  Section 11.513
+performs that join before recurrence errors are added and certifies
+`Hardy_t[K_(L+O)]/H=[0.0007211635411294992 +/- 6.22e-5]>0`, with a changed
+448-bit replay and two direct orientation fixtures.  Section 11.514 then
+pushes the Hardy operator through the positive-real tail and bounds its
+projected contribution below `10^-1873216239`.  Section 11.515 performs the
+exact target-correction product rule, cancels the two apparent `H'D_T` terms,
+and encloses its projected contribution at the `10^-21` scale.  Section
+11.516 finally assembles every `K_T` ownership component and proves
+`(Q_K-T)'>0.00065818` throughout the first subcell, with a changed-order
+512-bit checker and an envelope-only guard.  The next obligation is to use
+this complete derivative certificate to enlarge the joined sign box through
+the maximal event cell.  The exact one-mode handoffs at both walls must then
+be proved without importing the heuristic A21 continuation.
+These sections now certify the saved-height `J_Z`, `D_K`, and original
+one-sided residual closure, a nonzero-width event atlas, an exact A-free
+derivative target, the first off-height `Q_K-T<0` interval, a rigorous
+transition derivative packet, and its cancellation-safe compact-arc pair.
+They also certify the positive-real tail, exact tiny target correction,
+complete complex `K_T`, and a strictly positive joined derivative on the
+first subcell.  They do not certify the rest of the event cell, either wall
+handoff, the stronger absolute non-A bound, all 400 height corridors, a
+height-uniform theorem, `Lambda<=0`, PF-infinity, RH, or a prize-level
+conclusion.

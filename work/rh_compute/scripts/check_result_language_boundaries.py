@@ -128,25 +128,35 @@ def scan_file(path: Path, root: Path) -> list[Finding]:
     findings: list[Finding] = []
     in_fence = False
     previous_heading = ""
+    open_sentence = ""
     with path.open("r", encoding="utf-8") as handle:
         for lineno, raw_line in enumerate(handle, start=1):
             line = raw_line.rstrip("\n")
             stripped = line.strip()
             if stripped.startswith("```"):
                 in_fence = not in_fence
+                open_sentence = ""
                 continue
             if in_fence:
                 continue
             if stripped.startswith("#") or stripped.endswith(":"):
                 previous_heading = stripped
+                open_sentence = ""
             if stripped.startswith(">"):
+                open_sentence = ""
                 continue
             if not stripped:
+                open_sentence = ""
                 continue
+            context = f"{open_sentence} {stripped}".strip()
             for rule in RULES:
                 if not rule.pattern.search(line):
                     continue
-                if is_allowed_context(line, previous_heading):
+                # Markdown wraps prose independently of sentence boundaries.
+                # Carry only the unfinished sentence so a leading "No" or
+                # "does not" is not lost, but never inherit an allowance from
+                # an earlier completed sentence in the same paragraph.
+                if is_allowed_context(context, previous_heading):
                     continue
                 findings.append(
                     Finding(
@@ -156,6 +166,11 @@ def scan_file(path: Path, root: Path) -> list[Finding]:
                         text=stripped,
                     )
                 )
+            sentence_ends = list(re.finditer(r"[.!?](?:\s|$)", context))
+            if sentence_ends:
+                open_sentence = context[sentence_ends[-1].end() :].strip()
+            else:
+                open_sentence = context
     return findings
 
 

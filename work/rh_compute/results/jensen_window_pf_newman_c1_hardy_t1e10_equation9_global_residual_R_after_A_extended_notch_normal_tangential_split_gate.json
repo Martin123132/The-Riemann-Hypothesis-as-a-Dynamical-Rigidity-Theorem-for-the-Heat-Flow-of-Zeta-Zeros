@@ -1,0 +1,104 @@
+{
+  "decision": {
+    "QK_minus_T_bound_proved": false,
+    "R_Dir_bound_proved": false,
+    "R_after_A_bound_proved": false,
+    "blanket_x_integration_by_parts_licensed": false,
+    "edge_translation_equals_explicit_42_mode_block": true,
+    "new_upper_edge_uniformly_nonstationary_in_A_face_normal_direction": true,
+    "normal_denominator_gain_factor_169_certified": true,
+    "normal_then_tangential_analysis_licensed": true,
+    "rh_implication": false,
+    "signed_42_mode_cancellation_bound_proved": false,
+    "tangential_A_Morse_stationary_point_persists": true,
+    "zero_regulator_translation_is_finite_trigonometric_polynomial": true
+  },
+  "dependencies": {
+    "extended_notch": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_form_gate.json",
+      "sha256": "90a61cf74c000b51f7b9d298bef1682973828cf7c312c37ef13bc32b09d63840"
+    },
+    "extended_pole_free": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_pole_free_kernel_gate.json",
+      "sha256": "a1006e0c934ba7d6bf6883346f6f0f33bc382cfa7e914b9e6ffff77076096629"
+    },
+    "stationary_geometry": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_separable_triangle_geometry_gate.json",
+      "sha256": "5d36c6ee9d45bc786711a1418cbc677deeebf6ce2949c5215a830c211020d7cc"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_tangential_split_gate",
+  "next_obligation": "Derive the first two signed A-face normal endpoint currents for the translated upper edge and combine them algebraically with the explicit 42-mode block before taking norms. Put the resulting one-dimensional amplitude into the existing exact A-face Morse coordinate and run a bounded floating scout to choose the certified core/tail partition.",
+  "passed": true,
+  "phase_geometry_certificate": {
+    "A_face_normal_derivative": "partial_alpha Phi(A,x;m)=pi*(A*x/2-m)",
+    "A_face_tangential_derivative": "partial_x Phi(A,x;m)=pi*A^2/4-t/[2*x*(1-x)]",
+    "classification": "The new upper edge is uniformly nonstationary in the A-face normal direction but retains a nondegenerate tangential Morse stationary point.",
+    "corner_normal_coordinates": {
+      "new_q_A": "-169/2",
+      "old_q_A": "-1/2"
+    },
+    "joint_phase": "Phi(alpha,x;m)=pi*alpha^2*x/4-pi*m*alpha+(t/2)log((1-x)/x)",
+    "licensed_order": "Perform the signed normal endpoint reduction first, then a tangential Morse/Fresnel estimate; do not integrate by parts through x_*.",
+    "new_edge_gap_at_x_star_ball": "[84.108613768761038156863213173852155730109982299857177932918500276604369983216422 +/- 4.85e-79]",
+    "old_edge_gap_at_x_star_ball": "[42.108613768761038156863213173852155730109982299857177932918500276604369983216422 +/- 4.85e-79]",
+    "tangential_curvature_ball": "[83939326.461260164873455052806884843660556268898598797452281582630954798389243676 +/- 2.27e-73]",
+    "tangential_stationary_point": "x_*=[1-sqrt(1-8*t/(pi*A^2))]/2",
+    "uniform_half_domain_normal_gaps": {
+      "exact_gain_factor": 169,
+      "new_edge": "|partial_alpha Phi(A,x;39936.5)|>=169*pi/4 for 0<=x<=1/2",
+      "old_edge": "|partial_alpha Phi(A,x;39894.5)|>=pi/4 for 0<=x<=1/2"
+    },
+    "x_star_ball": "[0.49947538036472974127653905997513611415517135950293767675876951565355152221205792 +/- 2.86e-81]"
+  },
+  "proof_boundary": "Exact fixed-regulator edge translation, finite-block ownership, uniform normal gap, and tangential Morse classification only. No endpoint-expansion remainder, signed 42-mode cancellation bound, quantitative R_after_A, R_Dir, or Q_K-T estimate, all-height theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "arb_threads": 1,
+    "elapsed_seconds": 0.292,
+    "precision_decimal_digits": 100,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "A": 159577,
+    "height": 10000000000,
+    "new_upper_edge": "79873/2",
+    "old_upper_edge": "79789/2",
+    "shifted_modes": [
+      39895,
+      39936
+    ]
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_tangential_split_gate.py",
+      "sha256": "3ee4570f90ff2639988533b477f5226a4067e743f6460364991263cfa0698f8e"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_tangential_split_gate.py",
+      "sha256": "2d075e81e05083c2e06d07bb9b4645ef39099cd0507bd47a631761320e339108"
+    }
+  },
+  "status": "exact_post_A_edge_translation_and_A_face_normal_tangential_geometry_certified_signed_estimate_open",
+  "translation_certificate": {
+    "dual_identity": "sum_(k in Z)[hat h_U,epsilon(k+s)-hat h_T,epsilon(k+s)]=-sum_(m=39895)^39936 w_m exp(-2*pi*i*m*s)",
+    "edge_shift": "42",
+    "fixed_regulator_identity": "C_U,epsilon(s)-C_T,epsilon(s)=-sum_(m=39895)^39936 exp(-pi*epsilon*m^2)exp(-2*pi*i*m*s)",
+    "interpolant_identity": "h_U,epsilon(y)-h_T,epsilon(y)=-q_epsilon(y)1_(39894.5<y<39936.5), up to endpoint conventions of measure zero",
+    "new_target": [
+      622,
+      39936
+    ],
+    "old_target": [
+      622,
+      39894
+    ],
+    "ownership_guard": "The improved upper-edge geometry is exactly balanced by the explicit 42-mode block 39895..39936; it is not an independent small remainder.",
+    "shifted_block": [
+      39895,
+      39936
+    ],
+    "shifted_mode_count": 42,
+    "zero_regulator_polynomial": "C_U,0(s)-C_T,0(s)=-exp(-pi*i*79831*s)sin(42*pi*s)/sin(pi*s), with continuous value -42 at s in Z"
+  }
+}

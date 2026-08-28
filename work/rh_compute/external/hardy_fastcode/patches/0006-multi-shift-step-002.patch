@@ -1,0 +1,45 @@
+diff --git a/src/zeta14cubicmult.f90 b/src/zeta14cubicmult.f90
+index f2ddb0c..9254c66 100644
+--- a/src/zeta14cubicmult.f90
++++ b/src/zeta14cubicmult.f90
+@@ -263,6 +263,7 @@ program compute_hardy_fast
+ 
+   integer, parameter :: dp = selected_real_kind(33)
+   integer, parameter :: dp1 = selected_int_kind(16)
++  real(dp), parameter :: shift_step = 0.02
+ 
+   integer       :: ip,K,icj(0:50),MIT,totblock,irsp(7,2),i,mc,m1(50),pblocks,mmax
+   integer(dp1)  :: NC,jsum,RSN,L(0:50),KSET,numbercalc,nchalf
+@@ -557,16 +558,16 @@ program compute_hardy_fast
+ 
+   
+   do i=1,nchalf
+-     tar(i)=t+(i-numbercalc)*0.01
+-     yphasear(i)=yphase+(i-numbercalc)*0.01
++     tar(i)=t+(i-numbercalc)*shift_step
++     yphasear(i)=yphase+(i-numbercalc)*shift_step
+      if (yphasear(i).lt.0.0) then
+         yphasear(i)=yphasear(i)+tpp
+      endif
+-     rsphasear(i)=rsphase+(i-numbercalc)*(log(0.25*a)-1/(48*t*t))*0.01
++     rsphasear(i)=rsphase+(i-numbercalc)*(log(0.25*a)-1/(48*t*t))*shift_step
+      if (rsphasear(i).lt.0.0) then
+         rsphasear(i)=rsphasear(i)+tpp
+      endif   
+-     aar(i)=a+4*(i-numbercalc)*0.01/(p*a)
++     aar(i)=a+4*(i-numbercalc)*shift_step/(p*a)
+   enddo
+ 
+   ain=1/a
+@@ -856,9 +857,9 @@ program compute_hardy_fast
+    !     Estimate for Z(t)=ZP(t)+RSremainder(t) for all nchalf t values
+    
+    if (i.ge.numbercalc) then
+-    write(2,3008) 'Grand total of Hardy function Z(t+',(i-numbercalc)*0.01,')= ',zsum(i)
++    write(2,3008) 'Grand total of Hardy function Z(t+',(i-numbercalc)*shift_step,')= ',zsum(i)
+    else
+-    write(2,3008) 'Grand total of Hardy function Z(t-',(numbercalc-i)*0.01,')= ',zsum(i)
++    write(2,3008) 'Grand total of Hardy function Z(t-',(numbercalc-i)*shift_step,')= ',zsum(i)
+    endif   
+   enddo 
+   write(2,3005) 'Total cpu time needed for this calculation= ',tsum

@@ -1,0 +1,13 @@
+! input parameters:
+! scaling 15-value interoperability fixture
+! the upstream parser skips exactly nine lines
+! before reading et and the 45-character T string
+! this fixture tests the documented T^(-1/4) error trend
+! it is diagnostic only and independently checked
+! no physical RH row is inferred
+! retain the upstream fixed-width input format
+&inputs
+et=0.00500
+YT = '1.0000000000000000000000000000000000000000e12'
+! retain this skipped line before numbercalc
+numbercalc = 8

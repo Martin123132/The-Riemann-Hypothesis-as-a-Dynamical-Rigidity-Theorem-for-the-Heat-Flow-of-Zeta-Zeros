@@ -52,6 +52,18 @@ BOUNDARY_MARKERS: tuple[str, ...] = (
     "not an all-order",
     "not a rigorous",
     "not a clay-ready",
+    "not a complete",
+    "not a bound",
+    "not a ",
+    "not an ",
+    "not bounded",
+    "nonrigorous",
+    "no ",
+    "remain open",
+    "remains open",
+    " open",
+    "conditional",
+    "too coarse",
 )
 
 

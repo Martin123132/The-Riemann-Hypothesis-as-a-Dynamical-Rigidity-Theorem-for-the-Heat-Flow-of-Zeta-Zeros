@@ -1,0 +1,141 @@
+{
+  "decision": {
+    "A_half_boundary_projector_collar_removed": true,
+    "Kummer_weighted_cell_integral_evaluated": false,
+    "QK_minus_T_bound_proved": false,
+    "R_Dir_bound_proved": false,
+    "R_after_A_bound_proved": false,
+    "blanket_nonstationary_IBP_allowed": false,
+    "extended_upper_edge_instantiated_exactly": true,
+    "pole_free_closed_centred_cell_formula_certified": true,
+    "rh_implication": false,
+    "shared_half_integer_dual_phase_certified": true,
+    "surviving_common_A_phase_has_interior_stationary_point": true,
+    "uniform_cubic_dual_tail_certified": true
+  },
+  "dependencies": {
+    "A_common_phase": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_exact_exterior_common_phase_reduction_gate.json",
+      "sha256": "e47180ccf063006f36ed15ecd33adb2337cc2114042636c4d3ab5389ec0e37ce"
+    },
+    "extended_notch": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_form_gate.json",
+      "sha256": "90a61cf74c000b51f7b9d298bef1682973828cf7c312c37ef13bc32b09d63840"
+    },
+    "pole_free_cell": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_punctured_cell_fold_gate.json",
+      "sha256": "c1546126d5aa1124d7429e33fc218e078be4d325e6d95f6dd93b98dbe30b0fee"
+    },
+    "two_edge_modular": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_two_edge_modular_gate.json",
+      "sha256": "aea135f785fe297174fed4b0722f67fa938cb9b323d3ebf7098ce00ff7dd07c7"
+    }
+  },
+  "exact_kernel_certificate": {
+    "Fourier_transform": "hat h_A,epsilon(xi)=e^(-pi*xi^2/epsilon)/(2sqrt(epsilon)){erfc[-sqrt(pi*epsilon)c-i sqrt(pi/epsilon)xi]+erfc[sqrt(pi*epsilon)d_A+i sqrt(pi/epsilon)xi]}",
+    "Gaussian": "q_epsilon(y)=exp(-pi*epsilon*y^2)",
+    "Poisson_identity": "C_A,epsilon(s)=sum_(m in Z)[1-chi_U(m)]q_epsilon(m)e^(-2*pi*i*m*s)=sum_(k in Z)hat h_A,epsilon(k+s)",
+    "boundary_currents": "b_A,j(xi)=[q_epsilon^(j)(d_A)e^(-2*pi*i*xi*d_A)-q_epsilon^(j)(c)e^(-2*pi*i*xi*c)]/(2*pi*i*xi)^(j+1), j=0,1",
+    "closed_currents": [
+      "sum_k b_A,0(k+s)=E_A,0(s)/(2*i*sin(pi*s))",
+      "sum_k b_A,1(k+s)=-E_A,1(s)cos(pi*s)/(4*sin(pi*s)^2)"
+    ],
+    "edge_numerator": "E_A,j(s)=q_epsilon^(j)(d_A)e^(-2*pi*i*s*d_A)-q_epsilon^(j)(c)e^(-2*pi*i*s*c)",
+    "edge_width": "39315",
+    "extended_target": [
+      622,
+      39936
+    ],
+    "half_integer_edges": [
+      "1243/2",
+      "79873/2"
+    ],
+    "integer_samples": "h_A,epsilon(m)=q_epsilon(m)[1-chi_U(m)], U={622,...,39936}",
+    "integer_value": "C_A,epsilon(0)=hat h_A,epsilon(0)+E_A,1(0)/24+sum_(k!=0)rho_A,2(k)",
+    "interpolant": "h_A,epsilon(y)=q_epsilon(y)[1_(y<c)+1_(y>d_A)]",
+    "pole_free_cell": "C_A,epsilon(s)=hat h_A,epsilon(s)+E_A,0(s)g_0(s)+E_A,1(s)g_1(s)+sum_(k in Z,k!=0)rho_A,2(k+s), |s|<=1/2",
+    "pole_free_coefficients": {
+      "g0": "g_0(s)=[csc(pi*s)-1/(pi*s)]/(2*i)",
+      "g1": "g_1(s)={1/(pi*s)^2-cos(pi*s)/sin(pi*s)^2}/4",
+      "limits": "g_0(0)=0, g_1(0)=1/24"
+    },
+    "remainder": "rho_A,2=hat h_A,epsilon-b_A,0-b_A,1",
+    "shared_integer_dual_phase": "exp(-2*pi*i*k*c)=exp(-2*pi*i*k*d_A)=(-1)^k",
+    "target_count": 39315
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_pole_free_kernel_gate",
+  "next_obligation": "Build a bounded floating pilot for the Kummer-weighted post-A upper-edge current using the exact common A phase and its Morse coordinate, retaining the A-window deletion and B-window ownership in the same signed assembly. Use it only to choose the rigorous interval decomposition; then certify the compact stationary core and exterior tails separately.",
+  "passed": true,
+  "proof_boundary": "Exact fixed-regulator extended-notch transform, pole-free cell recombination, cubic dual tails, and common-phase stationary guard only. No Kummer-weighted cell integral, joined phase-adapted remainder estimate, quantitative R_after_A, R_Dir, or Q_K-T bound, all-height theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "arb_threads": 1,
+    "elapsed_seconds": 0.705,
+    "precision_decimal_digits": 100,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "A": 159577,
+    "centred_cell": "|s|<=1/2",
+    "dual_cutoff": 64,
+    "extended_target": [
+      622,
+      39936
+    ],
+    "height": 10000000000
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_pole_free_kernel_gate.py",
+      "sha256": "86668d182d32528ac57cf9847665b56e82bc5239179dc63e997701e0e5b01dc9"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_pole_free_kernel_gate.py",
+      "sha256": "856605226cb5916c01861d910b0b1cfc00fd7a3229082d76a9f3120aa647e858"
+    }
+  },
+  "stationary_guard_certificate": {
+    "common_phase": "Phi_A(x)=pi*A^2*x/4+(t/2)log((1-x)/x)",
+    "curvature_ball": "[83939326.461260164873455052806884843660556268898598797452281582630954798389243676 +/- 2.27e-73]",
+    "edge_independence": "Phi_A and x_* depend on A and t, not on the notch edge d_A.",
+    "lower_half_stationary_point": "x_*=[1-sqrt(1-8*t/(pi*A^2))]/2",
+    "phase_derivative": "25464818929*pi/4 - 5000000000/(x*(1 - x))",
+    "route_guard": "Moving d to d_A removes the A half-boundary collar from the projector edge, but it does not remove the interior stationary point of the surviving common A phase.",
+    "stationary_equation": "x*(1-x)=2*t/(pi*A^2)",
+    "x_star_ball": "[0.49947538036472974127653905997513611415517135950293767675876951565355152221205792 +/- 2.86e-81]"
+  },
+  "status": "exact_post_A_extended_notch_pole_free_kernel_and_cubic_tail_certified_common_phase_stationary_guard_active",
+  "tail_certificate": {
+    "pointwise_bound": "|rho_A,2(xi)|<=[|q_epsilon''(c)|+|q_epsilon''(d_A)|+20*pi*epsilon]/(2*pi*|xi|)^3",
+    "rows": [
+      {
+        "K3_ball": "[6.549615699196855455722121629501800919902227783159496965469923089617561e-5 +/- 6.51e-76]",
+        "centred_cell": "|s|<=1/2",
+        "dual_cutoff": 64,
+        "epsilon": "1e-6",
+        "q2_lower_edge_ball": "[2.664303920172689787968348629427951515078889844092853235200339050019283e-6 +/- 4.77e-76]",
+        "q2_upper_edge_ball": "[5.277407416262843985124938882306080816609870282159064412300676253539532e-2178 +/- 1.80e-2248]",
+        "uniform_punctured_tail_ball": "[6.548302940258891799542952621948798162414800652753522509695882672469211e-11 +/- 4.54e-81]"
+      },
+      {
+        "K3_ball": "[6.888860304059993892345053214530533666935556132029442765513965024720368e-7 +/- 2.59e-77]",
+        "centred_cell": "|s|<=1/2",
+        "dual_cutoff": 64,
+        "epsilon": "1e-8",
+        "q2_lower_edge_ball": "[-6.056749968804074154089526598192717746216772368898074609680656862479277e-8 +/- 1.62e-78]",
+        "q2_upper_edge_ball": "[1.081378815225612391954009638942366259601015385680776237411235328544838e-27 +/- 3.89e-97]",
+        "uniform_punctured_tail_ball": "[6.887479549317750506553120495590115032220669962120633970286253021548241e-13 +/- 1.58e-83]"
+      },
+      {
+        "K3_ball": "[6.912082313411268617059365292148990171027355402179751013260179314668920e-9 +/- 3.69e-79]",
+        "centred_cell": "|s|<=1/2",
+        "dual_cutoff": 64,
+        "epsilon": "1e-10",
+        "q2_lower_edge_ball": "[-6.280898185109482159142138121415628631747598375401628380057463351535432e-10 +/- 4.99e-80]",
+        "q2_upper_edge_ball": "[8.071877207339242198647134484215394582567658893765333045437948997444059e-13 +/- 2.27e-83]",
+        "uniform_punctured_tail_ball": "[6.910696904212682533221616965764740177706638690339591064842848614155363e-15 +/- 2.09e-85]"
+      }
+    ],
+    "uniform_tail": "sum_(|k|>K)|rho_A,2(k+s)|<=K3_A/[(2*pi)^3(K-1/2)^2], |s|<=1/2"
+  }
+}

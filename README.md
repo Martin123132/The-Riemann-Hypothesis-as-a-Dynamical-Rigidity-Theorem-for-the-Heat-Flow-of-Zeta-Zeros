@@ -1,178 +1,112 @@
- Riemann Zeta Zero Dynamics under Heat Flow  
- A Dynamical Rigidity Perspective on the Riemann Hypothesis
- 
-<img width="1491" height="1055" alt="b99bfc3a-d49b-4bfe-9f4f-8510e70b0e9f" src="https://github.com/user-attachments/assets/655f1bd0-4f8e-4fee-a5a4-4b4b38ad6ebb" />
+# Riemann Zeta Zero Dynamics Under Heat Flow
 
-This repository contains research notes, draft manuscripts, and a large
-collection of standalone Python experiments investigating the dynamics of
-Riemann zeta zeros under Gaussian heat-flow smoothing.
+This repository is a research corpus on the Riemann Hypothesis, the
+de Bruijn-Newman heat flow, Jensen-window and determinant methods, and a
+current Xi-specific Hardy endpoint programme.
 
-The central theme is the emergence of a **low-dimensional, rigid
-renormalisation-group (RG) structure** governing zero motion under *forward*
-heat flow, and the implications of this structure for the Riemann Hypothesis.
+> **Status:** this repository does not contain a proof of the Riemann
+> Hypothesis or a proof that `Lambda <= 0`. It contains exact reductions,
+> rigorous finite and interval certificates, countermodel gates, computational
+> evidence, and explicitly labelled open theorem targets.
 
-> **Scope note**  
-> This repository does **not** claim a proof of the Riemann Hypothesis.
-> It presents exact analytic identities together with extensive
-> high-precision numerical evidence for a *dynamical rigidity mechanism*
-> that appears to obstruct complex zero formation under forward heat flow.
+The corpus preserves the original manuscripts and numerical experiments, but
+the current audited programme is documented in `outputs/` and
+`work/rh_compute/`.
 
----
-<img width="1491" height="1055" alt="3c249e74-34f9-4b4a-8543-860bf3646736" src="https://github.com/user-attachments/assets/4c4e1fa5-559b-4fab-834d-56418e1ab275" />
+## Start Here
 
-## 1. Core Idea 
+- [`outputs/Clay_Prize_Readiness_Audit.md`](outputs/Clay_Prize_Readiness_Audit.md)
+  gives the honest prize-readiness verdict and the missing theorem chain.
+- [`outputs/formal_core.md`](outputs/formal_core.md) is the cumulative formal
+  mathematical core.
+- [`outputs/proof_claim_ledger.md`](outputs/proof_claim_ledger.md) classifies
+  proved statements, finite certificates, diagnostics, countermodels, and open
+  targets.
+- [`outputs/core_proof_programme_gates.md`](outputs/core_proof_programme_gates.md)
+  explains the executable proof-safety gate registry.
+- [`outputs/RH_Proof_Programme_Roadmap.md`](outputs/RH_Proof_Programme_Roadmap.md)
+  records the broader programme and route history.
 
-- Apply **Gaussian smoothing (heat flow)** to the Riemann–Siegel Z-function.
-- Track the induced motion of its real zeros as a function of the heat
-  parameter σ.
-- Observe that zero motion:
-  - is **exactly σ-additive**,
-  - admits a well-defined generator `dt/dσ`,
-  - is governed (numerically) by a **rank-2 invariant manifold**.
-- This manifold is spanned by:
-  1. an antisymmetric **Hadamard-type repulsive interaction**, and
-  2. a smooth **density-balancing mode**.
-- Perturbations transverse to this manifold produce **dramatic RG breakdown**
-  and exhibit a **non-analytic cusp** in the associated energy.
-- Creation of complex zeros would require a **rank increase** in the
-  generator, which is empirically obstructed under forward heat flow.
+## Current Audited Checkpoint
 
-This reframes the Riemann Hypothesis as a statement of **dynamical rigidity
-and stability**, rather than a static property of zero locations.
+The formal core currently runs through Section 11.521. Its newest continuous
+certificate proves, for the exact Hardy/Newman endpoint object used there,
 
----
-<img width="1491" height="1055" alt="0eb6d3b4-d912-4b5f-9546-65b16113c6ac" src="https://github.com/user-attachments/assets/51b492c3-166d-491e-801e-14cd2025894b" />
+```text
+Q_K(t) - T(t) < 0
+for every t in [10^10 + 12.5, 10^10 + 13].
+```
 
-## 2. Manuscripts / Formal Write-Ups
+The proof uses an anchored grouped 752-label phase transport with retained
+panel and derivative errors. Independent production and reverse-order routes
+give strictly negative upper margins. No stationary-point uniqueness is
+assumed.
 
-### Primary manuscript
-- **`The Riemann Hypothesis as a Dynamical Rigidity Theorem for the Heat Flow of Zeta Zeros`**
-  - Full formal exposition.
-  - Exact zero-tracking lemmas.
-  - Hadamard log-derivative structure.
-  - Rank-2 RG closure.
-  - Transverse instability and cusp behaviour.
-  - Relation to the de Bruijn–Newman constant.
+This is one certified phase cell, not the global Newman theorem. The next
+local target is the adjacent cell `[10^10+13, 10^10+13.5]`. The programme must
+still connect the remaining event-cell cover, prove both wall handoffs, obtain
+uniform control across all required heights and changing rosters, and deduce
+that no positive Newman boundary can occur.
 
-### Consolidated empirical summary
-- **`part 1`**
-  - Narrative summary of all numerical findings.
-  - Operator dependence, σ-additivity, kernel dominance, and open questions.
+## Repository Map
 
----
-<img width="1491" height="1055" alt="83fed14b-2cd7-4e1d-957b-d7766d423e67" src="https://github.com/user-attachments/assets/baef2773-a219-4006-94f1-7b749cf39ae3" />
+```text
+outputs/
+  Formal notes, theorem gates, route audits, countermodels, and claim ledgers.
 
-## 3. Formal Analytic Backbone (What Is Exact)
+work/rh_compute/scripts/
+  Generators, rigorous checkers, independent replays, and bounded runners.
 
-The following components are *analytic* and exact:
+work/rh_compute/results/
+  Machine-readable certificates, interval outputs, ledgers, and caches.
 
-- Zero tracking via the implicit function theorem.
-- Exact generator formula under heat flow:
-  
+work/rh_compute/external/
+  Pinned external-source metadata, GPL-3.0 Hardy adapters, and exact fixtures
+  used by the reproducibility gates.
+```
 
-dt_i/dσ = −c · (F_tt / F_t)(t_i)
+Large certificate ledgers are stored with Git LFS. Virtual environments,
+runtime policy, PID files, session bookmarks, scratch files, transient logs,
+and two multi-gigabyte resumable ledgers are intentionally not published.
 
-- Hadamard log-derivative expansion yielding a nonlocal repulsive interaction:
+## Core Integrity Checks
 
-(F_tt / F_t)(t_i) = 2 Σ_{j≠i} 1/(t_i − t_j) + A(σ)
+From the repository root, the main lightweight checks are:
 
-- Repulsive barrier preventing finite-time zero collisions.
-- Collision necessity for complex zero creation.
-- Square-root bifurcation at the de Bruijn–Newman boundary (Weierstrass normal form).
+```powershell
+python work/rh_compute/scripts/check_proof_claim_ledger.py
+python work/rh_compute/scripts/check_result_language_boundaries.py
+python work/rh_compute/scripts/check_output_status_manifest.py
+python work/rh_compute/scripts/check_output_reference_integrity.py
+python work/rh_compute/scripts/check_signed_hankel_jensen_dependency_graph.py
+```
 
-These results are summarised and unified in the **Formal Core** section of the
-main manuscript.
+The serial core replay is intentionally resource bounded:
 
----
+```powershell
+python work/rh_compute/scripts/run_core_gates_resource_bounded.py --mode day
+```
 
-## 4. Numerical Discoveries (What Is Empirical)
+Passing finite, static, or computational gates does not promote an open target
+to a theorem. The proof-claim ledger and dependency graph enforce that
+boundary.
 
-All RG structure claims are supported by extensive numerical experiments:
+## Route History
 
-- Exact σ-additivity of zero displacements.
-- Dominance of a **two-dimensional velocity subspace**.
-- Rank-2 RG equation:
+The original zero-motion, rank-reduction, and finite-flow experiments remain
+part of the historical corpus. Later work established that local repulsion by
+itself cannot exclude a positive square-root birth at a Newman boundary. An
+all-shift signed-Hankel endpoint route was also rejected by rigorous order-ten
+counterexamples. Those failures are retained because they prevent circular or
+overstrong arguments from re-entering the programme.
 
-d a / d log T = B a
+The live route is the Xi-specific Hardy/Newman endpoint comparison developed
+in the later formal core. Its status should be read from the readiness audit,
+not inferred from the size of the computational corpus.
 
-with numerical rank ≈ 2 and relative closure error ~10⁻¹⁴.
-- Violent amplification of RG error (>10¹²) under transverse perturbations.
-- A non-analytic cusp in transverse “energy”:
+## Licensing
 
-E(δ) ~ |δ|^α,   α ≈ 0.6
-
-These findings are **numerical evidence**, not proofs, and are presented as
-such.
-
----
-
-## 5. Code Structure and Experimental Map
-
-Each `part N` file is a **self-contained Python experiment** with inline
-commentary and, in many cases, embedded sample output.
-
-### Orientation guide
-
-| File | Purpose |
-|----|----|
-| `part 1` | Consolidated narrative of all experimental findings |
-| `part 2` | Operator tests, convolution drift, scaling laws |
-| `part 3` | Global balance tests, phase-only Fourier masks |
-| `part 5` | Continuous σ-flow tracking and instantaneous velocity |
-| `part 6` | Generator extraction and odd-kernel correlation |
-| `part 7` | Multi-σ renormalisation (solve for α) |
-| `part 8` | Operator closure failure & cross-σ SVD |
-| `part 9` | Flow extrapolation tests |
-| `part 10` | Acceleration vs dv/dσ, β-function RG |
-| `part 11` | High-T RG stress tests |
-| `part 12` | Controlled trajectory corruption (“t-kink”) |
-| `part 13` | Dense near-zero cusp and curvature tests |
-| `Part 14` | Energy curve collapse across windows |
-| `Part 15` | Bracketed splitting rate near double root |
-| `Part 16` | Winding number diagnostics under σ-flow |
-| `Part 17` | σ-flow universality checks |
-| `Part 18` | Local no-escape certification & Hadamard alignment |
-| `Part 19` | RG flow of coefficients across height |
-
-> There is no build system; scripts are intended to be read, modified,
-> and run individually.
-
----
-
-## 6. Relation to the de Bruijn–Newman Constant
-
-- The classical Newman deformation corresponds to **backward heat flow**.
-- Backward flow can destabilise the real-zero manifold if Λ > 0.
-- This work focuses on **forward heat flow**, where:
-- zero ordering is preserved,
-- collisions are obstructed,
-- the generator is empirically confined to a rigid rank-2 manifold.
-- From this perspective, the conjectural bound Λ ≤ 0 may be interpreted as
-a **dynamical stability condition**.
-
----
-
-## 7. Limitations and Status
-
-- The RG manifold and transverse instability are established **numerically**.
-- A fully rigorous proof would require:
-- excluding all finite-σ escape scenarios analytically,
-- proving global attraction to the RG manifold.
-- The present results should be read as **strong structural evidence**,
-not a completed proof.
-
----
-
-## 8. Intended Audience
-
-This repository is aimed at readers with background in:
-
-- analytic number theory,
-- spectral theory,
-- dynamical systems,
-- or numerical experimentation with special functions.
-
-Sceptical reading is encouraged.
-
----
-
+See [`LICENSE.md`](LICENSE.md),
+[`COMMERCIAL-LICENSE.md`](COMMERCIAL-LICENSE.md), and [`NOTICE.md`](NOTICE.md)
+for the repository terms. Third-party material under
+`work/rh_compute/external/` retains its stated provenance and license.
