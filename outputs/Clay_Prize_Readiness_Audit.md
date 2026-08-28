@@ -2,6 +2,8 @@
 
 Date: 2026-07-16
 
+Last audited: 2026-08-28
+
 Status: readiness audit. This is not a proof of RH or `Lambda <= 0`; it separates the current programme from a Clay-ready argument.
 
 Source bundle reviewed:
@@ -374,3 +376,89 @@ whose hypotheses are weaker than the rejected all-shift signed-Hankel cone.
 ```
 
 That version would be honest, technically sharper, and far more useful to a serious reader.
+
+## 2026-08-28 Readiness Update
+
+The Clay-readiness verdict remains negative, but the live Newman/Hardy route
+has advanced materially beyond the 2026-07-16 checkpoint. The formal core now
+runs through Section 11.521. The proof-claim ledger contains 870 claims with no
+structural issues and 11 theorem targets still explicitly open. The core gate
+registry contains 859 named gates with no duplicate names or commands, no
+missing checker scripts, and no empty expected-output contracts.
+
+### New Continuous Certificate
+
+For the current exact Hardy/Newman endpoint reduction at production height,
+the programme now proves
+
+```text
+Q_K(t) - T(t) < 0
+for every t in [10^10 + 12.5, 10^10 + 13].
+```
+
+The proof anchors a grouped 752-label collar at offset `12.75`, transports it
+by the exact common-phase identity, and retains the panel and derivative error
+budgets on each closed half-cell. The production route gives worst upper bound
+
+```text
+-0.000652924862773574...
+```
+
+and an independently ordered, higher-precision route gives
+
+```text
+-0.000654389430728486....
+```
+
+No stationary-point uniqueness assumption is used. This is the first reusable
+continuous phase-cell certificate in the current event-cell programme. It is
+strictly stronger than a point sample or grid observation.
+
+It is not a proof of RH. One certified half-unit cell does not yet exclude all
+candidate first events, cross either event wall, or prove `Lambda <= 0`.
+
+### Remaining Prize-Critical Chain
+
+A successful completion through this route still has to prove all of the
+following without an RH assumption:
+
+1. Extend the anchored phase-cell certificate across the adjacent cells,
+   beginning with `[10^10+13, 10^10+13.5]`, and connect it to the separate
+   certified sign island near offset `20`.
+2. Complete a connected finite cover of the maximal local event cell and prove
+   exact handoffs at both event walls while respecting cutoff and roster
+   changes.
+3. Promote the production-height argument uniformly across every required
+   height corridor, with explicit control of changing saddle rosters, endpoint
+   coefficients, and nonlocal remainders.
+4. Deduce from that uniform theorem that no positive de Bruijn-Newman boundary
+   can occur, hence `Lambda <= 0`.
+5. Present the resulting implication as a conventional proof with every
+   imported analytic theorem, constant, limiting operation, and numerical
+   certificate independently reviewable.
+
+The first item is now a concrete local continuation problem. Items two through
+five remain global theorem obligations. The rejected all-shift signed-Hankel
+route is not being silently reused; the live route is the Xi-specific
+Hardy/Newman endpoint comparison described in the later formal core.
+
+### Audit Gates
+
+The 2026-08-28 repository audit reports:
+
+```text
+Python scripts syntax-compile: pass
+proof claims: 870, structural issues: 0, open theorem targets: 11
+Markdown artifacts: 950, result-language overclaims: 0
+Markdown artifact status issues: 0
+required path references missing: 0
+planned future deliverables missing: 3
+JSON files parsed: 2,518, invalid: 0
+static core registry: 859 gates, registry issues: 0
+```
+
+A fresh resource-bounded serial replay passed its first 104 gates with no
+failures and then parked after the machine crossed the sustained daytime CPU
+threshold. Thus repository structure and the newly added local certificate are
+validated, but a fresh end-to-end `859/859` dynamic replay is still a release
+audit obligation rather than a completed fact.

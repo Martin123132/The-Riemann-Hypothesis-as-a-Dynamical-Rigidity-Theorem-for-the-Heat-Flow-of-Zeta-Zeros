@@ -1,0 +1,78 @@
+{
+  "decision": {
+    "complete_T_upper_proved": false,
+    "complete_outer_mode_derivative_block_bounded": true,
+    "completed_exterior_current_bound_proved": false,
+    "dictionary_outer_tail_analytically_summed_through_two_derivatives": true,
+    "exact_dictionary_reduced_to_outer_rational_monomials": true,
+    "finite_mode_block_below_outer_start_bounded": false,
+    "joined_remainder_below_1p4058e_minus_4_proved": false,
+    "rh_implication": false
+  },
+  "dependencies": {
+    "dictionary": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_B_face_fresnel_boundary_truncation_dictionary_gate.json",
+      "sha256": "4fc3c627b47f06bd6e70f7a650c15b760c2f33b76f739d13ff2377f807f9c04d"
+    },
+    "outer_remainder": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_fresnel_remainder_derivative_tail_gate.json",
+      "sha256": "760ed9d5b2fd77247fc2df7b7bf36998935f459eadffd54637381e49b47b1539"
+    }
+  },
+  "interval_certificate": {
+    "derivative_order_legend": {
+      "0": "dictionary amplitude",
+      "1": "first derivative",
+      "2": "second derivative"
+    },
+    "dictionary_x_derivative_tail_balls": {
+      "0": "[8.212668816256876343321415225064040839372463202464211845474144413857878704801571380062727194834765362e-37 +/- 1.55e-136]",
+      "1": "[4.344746124475119055731245787343104307014946408689169601032794340390783788984966551696968044838424102e-36 +/- 9.59e-136]",
+      "2": "[1.872640700409613832150147173220218014036334238381288114730541910518965433562763374461301616193769872e-35 +/- 6.57e-135]"
+    },
+    "endpoint": 5122421,
+    "height": 10000000000,
+    "outer_mode_start": 5122421,
+    "weighted_normalized_derivative_tail_balls": {
+      "0": "[8.212874145810540290961717770075010149662286405265759720632984780337009229980907371424348520381427542e-36 +/- 1.94e-135]",
+      "1": "[7.060897103113070555046108462679378766895409654069237947906255327381557265653729162398176587882636891e-41 +/- 1.59e-138]",
+      "2": "[3.025488955577184909564061672028677733752852432772210044117984410559645610031339725052634619810541195e-45 +/- 1.36e-142]"
+    },
+    "weighted_x_derivative_tail_balls": {
+      "0": "[8.212874145810540290961717770075010149662286405265759720632984780337009229980907371424348520381427542e-36 +/- 1.94e-135]",
+      "1": "[2.057358048814668426772472576528621075755582275136309153220604669071138809121969050738496014439667619e-32 +/- 9.87e-132]",
+      "2": "[2.568594607840231451080364419905041385604752637218150828541434349844023093879536821218386610910271792e-28 +/- 1.08e-127]"
+    },
+    "x_domain": [
+      "1e-4",
+      "1/2"
+    ]
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_dictionary_derivative_tail_gate",
+  "next_obligation": "Use x-dependent outer majorants together with the exact tangential phase G_B, rather than a global amplitude supremum, to bound the complete analytic m>=B exterior contribution including x_low, x_high, and x=1/2 boundary terms. Separately compress the finite m<B block before norms.",
+  "passed": true,
+  "proof_boundary": "Uniform analytic outer dictionary-tail bounds through two derivatives, completing the rational plus remainder plus dictionary outer derivative block on m>=B and delta<=x<=1/2. No finite m<B block, phase-coupled exterior integral, complete exterior-B or joined-remainder bound, complete T_upper, height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.31,
+    "flint_threads": 1,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_dictionary_derivative_tail_gate.py",
+      "sha256": "f7f129824769a590cbbecb9c5b8bc27955f9f3ceaa894bd97d126748a377f2f4"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_dictionary_derivative_tail_gate.py",
+      "sha256": "e006c3bc504e07443b884682ad831ffbdbe468ee539fbb1e21d200e227885c6e"
+    }
+  },
+  "status": "uniform_completed_B_outer_dictionary_tail_bounded_through_two_normalized_derivatives",
+  "symbolic_certificate": {
+    "derivative_rule": "Differentiate each c^p(c^2-m^2)^(-k) monomial before absolute values; d/dx=(B/2)d/dc",
+    "original": "D_m=48x^2(B^4x^4+40B^2m^2x^2+80m^4)/[pi^4(Bx-2m)^5(Bx+2m)^5]",
+    "outer_margin": "m>=B and c<=B/4 imply |c^2-m^2|>=(15/16)m^2",
+    "reduced": "D_m=3c^2(c^4+10m^2c^2+5m^4)/[pi^4 B^2(c^2-m^2)^5], c=Bx/2"
+  }
+}

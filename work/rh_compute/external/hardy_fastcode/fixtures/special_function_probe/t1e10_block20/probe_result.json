@@ -1,0 +1,79 @@
+{
+  "kind": "hardy_block20_special_function_probe",
+  "status": "source_derived_374_call_probe_with_exact_t1_t2_t4_replay",
+  "block": 20,
+  "recursive_chain_count": 374,
+  "validation": {
+    "row_count": 374,
+    "psi_call_count": 2244,
+    "erf_call_count": 748,
+    "saved_component_bit_match_count": 1122,
+    "constants_hex": {
+      "pi": "4000921FB54442D18469898CC51701B8",
+      "sqrt_pi": "3FFFC5BF891B4EF6AA79C3B0520D5DB9",
+      "two_pi": "4001921FB54442D18469898CC51701B8",
+      "minus_two_pi": "C001921FB54442D18469898CC51701B8",
+      "epi4_real": "3FFE6A09E667F3BCC908B2FB1366EA95",
+      "epi4_imag": "3FFE6A09E667F3BCC908B2FB1366EA95"
+    }
+  },
+  "build": {
+    "image": "rh-hardy-fastcode:bookworm",
+    "image_id": "sha256:b4325533de8d0f76eae21f27ab1b96490f5da131c2c96ca289f6b28716d562e9",
+    "cpu_cap": 1,
+    "nice": 10,
+    "compiler_flags": [
+      "-O3",
+      "-ffree-line-length-none"
+    ],
+    "elapsed_seconds": 1.7680161999887787,
+    "binary_sha256": "a890a90288cd924b1b95973c6dca9fa5118fafe8a437c8f600d6ab09b5adb437"
+  },
+  "run": {
+    "cpu_cap": 1,
+    "nice": 10,
+    "elapsed_seconds": 0.8901478999760002
+  },
+  "source_extraction": {
+    "initialization_sha256": "b1a1e2134ce943ced7f070a6768d50f5053873261b1b3133de2ddbeaa878ed65",
+    "erf_routine_sha256": "8e9f2fa7c9f5474bdf3e135667d3ffb7016a44887c2730cd5d8345bd282377a4",
+    "psi_routine_sha256": "8415be96eb2a7feb30d6d0a4396703b7aded9342bb46d59f7b676775436f4f3f"
+  },
+  "artifacts": {
+    "generated_probe": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/special_function_probe/t1e10_block20/probe_generated.f90",
+      "sha256": "62d3e1af06ce60ad7477899cfc5f471238fa6f5f35ea8ed5b20567c9156ddd57"
+    },
+    "input": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/special_function_probe/t1e10_block20/probe_input.txt",
+      "sha256": "d7f0b8cdb46c92fd252b9dd0ca22e6df01564cec4f7b3fb7ff3ec695ae43025e"
+    },
+    "output": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/special_function_probe/t1e10_block20/probe_output.txt",
+      "sha256": "dc8427e27dcc51b13d47587cef5ded07c28d47a2f227b3ca83185c43c40ceca0"
+    },
+    "stderr": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/special_function_probe/t1e10_block20/probe.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "sources": {
+    "accepted_source": {
+      "path": "work/rh_compute/external/hardy_fastcode/resumable/zeta14cubicmult_resumable.f90",
+      "sha256": "0fb64f090c21b185f27edc1c9194254cf471e74bfd6af3b88cb7f0cb40ec0c3d"
+    },
+    "telemetry": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/chain_telemetry/t1e10_block20_full/enabled/chain_telemetry.jsonl",
+      "sha256": "60b36563cc164d1e73c444f8596fa3239a7ce30330a189bcc96e807f0b89d69f"
+    },
+    "runner": {
+      "path": "work/rh_compute/scripts/run_hardy_block20_special_function_probe.py",
+      "sha256": "c5c5e0db52edb4deb17862455f11bd92306475de43f21b562fabbe4054d252bc"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_hardy_block20_special_function_probe.py",
+      "sha256": "fe61db571791e9f5a842c07c8b0e6e099101356f71214c19874b4b5576e439e7"
+    }
+  },
+  "proof_boundary": "The standalone one-CPU probe copies the accepted initialization and PSI/ERF routines and replays saved t1, t2, and t4 bits at 374 finite recursive calls. It does not itself prove special-function accuracy, uniform cell bounds, recurrence accuracy, RH, or a prize-level theorem."
+}

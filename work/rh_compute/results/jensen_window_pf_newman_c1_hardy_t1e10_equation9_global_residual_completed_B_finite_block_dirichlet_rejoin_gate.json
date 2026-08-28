@@ -1,0 +1,88 @@
+{
+  "decision": {
+    "common_endpoint_half_A_negative_and_nonlocal_grouping_preserved": true,
+    "complete_T_upper_proved": false,
+    "compressed_residual_below_1p319792e_minus_4_proved": false,
+    "compressed_residual_below_1p405792e_minus_4_proved": false,
+    "finite_completed_B_block_rejoined_before_norms": true,
+    "finite_crossing_roster_replaced_by_common_Dirichlet_Abel_kernel": true,
+    "outer_limit_separated_only_after_absolute_summable_certificate": true,
+    "rh_implication": false,
+    "window_negative_certificate_preserved": true
+  },
+  "dependencies": {
+    "completed_extraction": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_endpoint_safe_completed_B_extraction_gate.json",
+      "sha256": "547488711b572ad3d596c5c69b145f752b44ce1515a81d01385740823e11d218"
+    },
+    "global_extraction": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_B_window_extraction_target_gate.json",
+      "sha256": "d695ce7333a276514eb2cedf0508e05a069ccdec42620c615d16a4ac74081863"
+    },
+    "outer_phase": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_phase_coupled_tangential_gate.json",
+      "sha256": "19ed2625327bf4e50581c2d6a94f0e195854f3c284f0440c0705731216feb72d"
+    },
+    "symmetric_reassembly": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_ordinary_symmetric_endpoint_tail_reassembly_gate.json",
+      "sha256": "84038e740eb2577fbc0b8cd6c9fb121805dea53fa7fbaeecb7f35a68672dcbb7"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_finite_block_dirichlet_rejoin_gate",
+  "next_obligation": "Bound the single compressed residual R_Dir below 1.405792e-4 (or 1.319792e-4 for negativity). Start from the modular form of D_(M,epsilon), subtract the fixed target kernel before norms, identify the ordinary and A-fold target carriers in the same representation, and bound only their joint defect; do not reopen per-crossing completed-B charts.",
+  "passed": true,
+  "proof_boundary": "Exact common-regulator rejoin and Dirichlet/Abel compression of the finite completed-B block, plus sufficient target arithmetic only. No quantitative compressed residual, complete T_upper, height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.081,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "avoided_crossing_chart_count": 1280347,
+    "finite_completed_positive_mode_count": 5122420,
+    "height": 10000000000,
+    "outer_threshold": 5122421,
+    "roster_coordinate_length": 2481422,
+    "source_odd_roster": [
+      159577,
+      5122421
+    ],
+    "target_mode_count": 39273,
+    "target_positive_modes": [
+      622,
+      39894
+    ]
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_finite_block_dirichlet_rejoin_gate.py",
+      "sha256": "0a13b8109ce7f9313b1bd1c8ebf53b97df89a0f036001f2d0e9bc049a39e6cbf"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_finite_block_dirichlet_rejoin_gate.py",
+      "sha256": "58daf43f2d2f11a3116614c13929011f7d49cfd8c2217f56ba880d242c9c180b"
+    }
+  },
+  "status": "finite_completed_B_block_rejoined_exactly_to_one_common_regulator_Dirichlet_residual",
+  "symbolic_certificate": {
+    "completed_split": "Ctr_(M,epsilon)=Ctr_<B,epsilon+Ctr_>=B,M,epsilon for M>=B",
+    "finite_join": "J_(M,epsilon)=eta_delta E_W Ctr_<B,epsilon+R_join,comp(M,epsilon)",
+    "global_kernel_integrand": "G_(M,epsilon)(x)=H_x+integral_0^L f_x(u)C_(M,epsilon)(u)du+sum_(m=622)^39894 exp(-pi*epsilon*m^2)(P_A,m+P_B,m)",
+    "handoff": "J_(M,epsilon)=G_(M,epsilon)-chi_W Btr_(M,epsilon)-O_(M,epsilon)",
+    "outer_block": "O_(M,epsilon)=eta_delta E_W Ctr_>=B,M,epsilon",
+    "three_part_identity": "G_(M,epsilon)=chi_W Btr_(M,epsilon)+O_(M,epsilon)+J_(M,epsilon)",
+    "weighted_complement": "C_(M,epsilon)=D_(M,epsilon)-G_(T,epsilon)",
+    "weighted_kernel": "D_(M,epsilon)(u)=sum_(m=-M)^M exp(-pi*epsilon*m^2)exp(-2pi*i*m*u)",
+    "weighted_target_kernel": "G_(T,epsilon)(u)=sum_(m=622)^39894 exp(-pi*epsilon*m^2)exp(-2pi*i*m*u)",
+    "zero_regulator_Dirichlet": "D_M(u)=sin((2M+1)pi*u)/sin(pi*u)",
+    "zero_regulator_target": "G_T(u)=exp(-40516pi*i*u)sin(39273pi*u)/sin(pi*u)"
+  },
+  "target_arithmetic": {
+    "finite_join_sufficient_for_negative_R_end": "1.319792e-4",
+    "finite_join_sufficient_for_working_target": "1.405792e-4",
+    "identity": "R_end=E_Btr,win+E_outer+R_Dir",
+    "outer_absolute_upper": "8e-10",
+    "window_upper": "-1.3198e-4",
+    "working_R_end_upper": "8.6e-6"
+  }
+}

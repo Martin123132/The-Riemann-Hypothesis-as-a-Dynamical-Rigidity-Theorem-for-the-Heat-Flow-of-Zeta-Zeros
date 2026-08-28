@@ -1,0 +1,271 @@
+{
+  "decision": {
+    "complete_cell_Abel_limit_reduced_to_endpoint_half_sum_and_finite_modes": true,
+    "complete_source_direct_sums_overlap_both_grouped_wall_boxes": true,
+    "complete_source_wall_derivatives_interval_certified": true,
+    "interior_kernel_has_exact_cubic_zero_at_s_one_third": true,
+    "interior_product_s_derivative_remains_microscopic_for_value_boxing": true,
+    "interior_product_t_derivative_vanishes_on_symmetry_line": true,
+    "near_constant_source_product_cover_selected": false,
+    "physical_quadrature_completed": false,
+    "pointwise_interior_limit_interchange_across_integer_boundary_forbidden": true,
+    "rh_implication": false,
+    "signed_boundary_layer_plus_finite_mode_x_quadrature_selected": true
+  },
+  "dependencies": {
+    "characteristic_derivatives": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_characteristic_euler_maclaurin_parameter_derivative_gate.json",
+      "sha256": "dceb1a5961120c0d381d452cf14b5d55f6f8e0928343741e7c750ab81ade44ca"
+    },
+    "common_kernel": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_common_kernel_theta_current_gate.json",
+      "sha256": "f624799d0ebae88f47a314876564a54bd611566e9777640b9f1dc1dadbbdfd85"
+    },
+    "grouped_first_wall": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_mordell_small_tau_grouped_first_wall_bridge_gate.json",
+      "sha256": "5ba929805667e67f84e5672cd57c3fe3939c74ad93c593e4b2c41c0a58fa061c"
+    },
+    "pole_free_kernel": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_pole_free_kernel_gate.json",
+      "sha256": "a1006e0c934ba7d6bf6883346f6f0f33bc382cfa7e914b9e6ffff77076096629"
+    }
+  },
+  "exact_source_derivatives": {
+    "F": "sum alpha_n*exp(i*pi*x*alpha_n^2/4)",
+    "alpha_n": "A+2*n+2*s",
+    "partial_s_F": "2*sum exp(i*pi*x*alpha_n^2/4)+i*pi*x*sum alpha_n^2*exp(i*pi*x*alpha_n^2/4)",
+    "partial_x_F": "(i*pi/4)*sum alpha_n^3*exp(i*pi*x*alpha_n^2/4)"
+  },
+  "kernel_symmetry_certificate": {
+    "boundary_layer_guard": "The full theta term is a periodic approximate identity and contributes [F(0)+F(1)]/2. The pointwise interior limit -D_U cannot be integrated through the integer boundary by itself.",
+    "cubic_block_count_r": 13105,
+    "cubic_zero": "C_U,0(1/3)=0",
+    "exact_factorization": "C_U,0(1/3+u)=-omega*exp(-2*pi*i*622*u)*(1-exp(-2*pi*i*39315*u))/(1-omega*exp(-2*pi*i*u))",
+    "finite_Fresnel_handoff": "hat_F_x(m)=(-1)^m*{[exp(i*pi*phi_m(B))-exp(i*pi*phi_m(A))]/(i*pi*x)+(m/x)J_m(x)}, phi_m(y)=x*y^2/4-m*y, x>0; x=0 uses the continuous direct-integral limit",
+    "first_derivative": "C_U,0'(1/3)=13105*pi*(-sqrt(3)+3*i)",
+    "first_derivative_absolute_ball": {
+      "lower": "1.42619044009736549592212373398402705229496129e5",
+      "upper": "1.42619044009736549592212373398402705229496130e5"
+    },
+    "first_derivative_absolute_exact": "2*pi*13105*sqrt(3)",
+    "first_derivative_ball": {
+      "absolute_lower": "1.42619044009736549592212373398402705229496129e5",
+      "absolute_upper": "1.42619044009736549592212373398402705229496130e5",
+      "imag_ball": "[123511.715175882721170158824613633655892211714936432285351629946646581802013142306781061189158325332527718 +/- 1.91e-100]",
+      "radius_upper": "6.00719973249836916962656230438966413824549173e-101",
+      "real_ball": "[-71309.5220048682747961061866992013526147480645437660957285300262347840628659826029370413739115571455385824 +/- 5.84e-101]"
+    },
+    "full_cell_Abel_limit": "lim_(epsilon->0+) integral_0^1 F(s)C_U,epsilon(s)ds=[F(0)+F(1)]/2-sum_(m=622)^39936 hat_F(m)",
+    "integer_Fourier_unfolding": "hat_F_x(m)=integral_0^L f_x(u)*exp(-2*pi*i*m*u)du",
+    "interior_Abel_limit": "C_U,0(s)=-sum_(m=622)^39936 exp(-2*pi*i*m*s), s not in Z",
+    "notch": [
+      622,
+      39936
+    ],
+    "notch_length_Q": 39315,
+    "root": "omega=exp(-2*pi*i/3), 1+omega+omega^2=0",
+    "weighted_root_sum": "sum_(m=622)^39936 m*omega^m=13105*(1-omega)"
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_folded_source_kernel_abel_cubic_symmetry_gate",
+  "next_obligation": "Instantiate the endpoint half-sum and all 39315 finite Fresnel coefficients in the exact non-A ownership assembly. Preserve their signed sum before norms, derive a stable common x-phase representation, and build a bounded pilot followed by an interval altered-partition x quadrature.",
+  "passed": true,
+  "primary_source": null,
+  "proof_boundary": "The exact complete-cell Abel-limit identity for the folded source factor, its finite Fresnel-mode handoff, the interior cubic-root factorization at s=1/3, and rigorous complete-source value and first-derivative balls at the two first walls only. The reported variation widths are diagnostics, not certified cells. No uniform complete-source derivative theorem, boundary-layer numerical estimate, finite 39315-mode signed bound, physical x quadrature, non-A bound, joined R_after_A, R_Dir, Q_K-T, all-height theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "blas_threads": 1,
+    "elapsed_seconds": 32.131,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "daytime_cpu_baseline_average_percent": 20.18,
+    "daytime_cpu_baseline_samples_percent": [
+      24.85,
+      18.43,
+      20.13,
+      26.99,
+      21.5,
+      9.16
+    ],
+    "first_wall_t": "1/992566",
+    "height": 10000000000,
+    "notch": [
+      622,
+      39936
+    ],
+    "phase_reset_block_size": 16,
+    "precision_bits": 352,
+    "s": "1/3",
+    "source_cell_count": 2481422,
+    "source_odd_roster": [
+      159577,
+      5122421
+    ],
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_folded_source_kernel_abel_cubic_symmetry_gate.py",
+      "sha256": "04cc59fb75b885bc5fa18a84d31d628a6f8b1f97c0b6f9890a5bdf16b79a1c48"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_non_A_quadratic_theta_folded_source_kernel_abel_cubic_symmetry_gate.py",
+      "sha256": "cc1d006f02f89bdab736e444621310005a7b257dad5aa730889578beb509e525"
+    }
+  },
+  "status": "folded_source_Abel_limit_cubic_kernel_zero_and_two_wall_derivative_rows_certified_signed_x_quadrature_open",
+  "wall_source_derivative_rows": [
+    {
+      "diagnostic_half_width_for_variation_0_001": {
+        "certified_transport_width": false,
+        "product_s": "2.69071523116409066758880619695133350168029342e-18",
+        "source_s": "1.84593955094034842693642032741542295925235605e-19",
+        "source_t": "2.23162966594949148582587043703116816190339932e-24"
+      },
+      "direct_F_overlaps_grouped_complete_source_box": true,
+      "direct_partial_s_F": {
+        "absolute_lower": "5.41729548776711291439378709941051862418475131e15",
+        "absolute_upper": "5.41729548776711291439378709941051862418475132e15",
+        "imag_ball": "[2297796130467831.7821183288647920468500964895869436039941850580705880540040995187183942769840670333 +/- 5.52e-83]",
+        "radius_upper": "2.77685212888512166329212348180049715825090310e-83",
+        "real_ball": "[4905835641823824.9832079596465520941004361000944335215249020349860819397761958773527371018613613969 +/- 6.23e-83]"
+      },
+      "direct_partial_t_F": {
+        "absolute_lower": "4.48103023211304199751582640749685852977845508e20",
+        "absolute_upper": "4.48103023211304199751582640749685852977845509e20",
+        "imag_ball": "[191511409501270682304.88524574346600490077124163252643095366258604785149449886592012472961381235669 +/- 7.68e-78]",
+        "radius_upper": "5.34773490014162473625868388668491288062453873e-78",
+        "real_ball": "[405116896021317827038.10370928327637228585609610416905825130069687721939770653394659753218077220725 +/- 7.12e-78]"
+      },
+      "direct_partial_x_F": {
+        "absolute_lower": "5.60129681932835494423781562792043457172682768e21",
+        "absolute_upper": "5.60129681932835494423781562792043457172682769e21",
+        "imag_ball": "[2393896477682805518442.3758987651007923612232287932847955883945380750672729743463019490026781490455 +/- 7.95e-77]",
+        "radius_upper": "6.68467920059280672038245331929561811523417400e-77",
+        "real_ball": "[5063969363291587173029.4909609177858294866050087775951766379774261715816345270839442153625926291040 +/- 9.14e-77]"
+      },
+      "direct_source_F": {
+        "absolute_lower": "2.60588197510086679777881211452933315603886538e9",
+        "absolute_upper": "2.60588197510086679777881211452933315603886539e9",
+        "imag_ball": "[-2361114597.86421494483662190272148261985755857147257501118510167937260415075098490028241759997227349 +/- 8.34e-90]",
+        "radius_upper": "6.48077864663012133055758819411899236908973456e-90",
+        "real_ball": "[1102614494.69345409711228845780500125944120002893670109868434670441822772653628930494628591754767358 +/- 9.19e-90]"
+      },
+      "grouped_complete_source_box": {
+        "absolute_lower": "2.60588197509081908073553833456432508281605723e9",
+        "absolute_upper": "2.60588197518130160404010939655985502033582928e9",
+        "imag_ball": "[-2361114597.9 +/- 0.0434]",
+        "radius_upper": "4.55689589725807309150695800781250000000000000e-2",
+        "real_ball": "[1102614494.7 +/- 0.0143]"
+      },
+      "interior_limit_mixed_partial_t_partial_s_product_at_s0": {
+        "absolute_lower": "6.39080247882689922696729093084687090898836478e25",
+        "absolute_upper": "6.39080247882689922696729093084687090898836479e25",
+        "imag_ball": "[36380095604308502525970195.66892698902188011369360927139070298932420672819414248356832969317905030 +/- 3.18e-72]",
+        "radius_upper": "1.04185235923406325637238104905421898037136161e-72",
+        "real_ball": "[-52542594874628880919455830.059589886728731064160208923219721377215687085378988414673219957888692481 +/- 8.85e-73]"
+      },
+      "interior_limit_partial_s_product_at_s0": {
+        "absolute_lower": "3.71648396091089725352577426019440169045143529e14",
+        "absolute_upper": "3.71648396091089725352577426019440169045143530e14",
+        "imag_ball": "[304555760789791.695845516276895559542240845797539301660006220300834456825321283298961895676363901770 +/- 9.64e-85]",
+        "radius_upper": "1.26258954195818354341471762603968561087350927e-84",
+        "real_ball": "[212998401136794.20688398859221606099126445397258992570059900169570137806963570659530493874336220842 +/- 4.40e-84]"
+      },
+      "interior_limit_partial_t_product_at_s0": {
+        "absolute_lower": "0",
+        "absolute_upper": "0",
+        "imag_ball": "0",
+        "radius_upper": "0",
+        "real_ball": "0"
+      },
+      "interior_limit_product_F_times_C_at_s0": {
+        "absolute_lower": "0",
+        "absolute_upper": "0",
+        "imag_ball": "0",
+        "radius_upper": "0",
+        "real_ball": "0"
+      },
+      "s": "1/3",
+      "side": "right",
+      "t": "1/992566",
+      "x": "992567/2481417"
+    },
+    {
+      "diagnostic_half_width_for_variation_0_001": {
+        "certified_transport_width": false,
+        "product_s": "1.34392973995780689013292614939131460805635000e-18",
+        "source_s": "4.60743036645407258195569012005261376335202506e-20",
+        "source_t": "2.78269536448324497904547607045490963718724622e-25"
+      },
+      "direct_F_overlaps_grouped_complete_source_box": true,
+      "direct_partial_s_F": {
+        "absolute_lower": "2.17040719113376564723398780249809864091414253e16",
+        "absolute_upper": "2.17040719113376564723398780249809864091414254e16",
+        "imag_ball": "[-12456219848701731.0462720804390490916774977867021334185417684523786525931273239051388582529692651645 +/- 4.80e-83]",
+        "radius_upper": "2.80009261803209703303015108388634947854445163e-83",
+        "real_ball": "[-17773838207132562.3158435902964014573126690876931099600604372690333166947874312600753401570742028104 +/- 3.17e-83]"
+      },
+      "direct_partial_t_F": {
+        "absolute_lower": "3.59363807035235088498978900192681874835506292e21",
+        "absolute_upper": "3.59363807035235088498978900192681874835506293e21",
+        "imag_ball": "[2063087188996783367561.46269205201313005258377604624480979132721399961757203075741699428086657670936 +/- 5.79e-78]",
+        "radius_upper": "5.39148191698536025973478921644215383439412588e-78",
+        "real_ball": "[2942431958649701499341.91948071154382532413959212176108532257148954450959502076329761791236143041574 +/- 7.88e-78]"
+      },
+      "direct_partial_x_F": {
+        "absolute_lower": "4.49205844960679434774623034344511968531046655e22",
+        "absolute_upper": "4.49205844960679434774623034344511968531046656e22",
+        "imag_ball": "[-25788652218668934465272.5686217467178643995962672200094175817020902495248160203792275748940323831469 +/- 8.80e-77]",
+        "radius_upper": "6.73936723205568728287589425993430413237373086e-77",
+        "real_ball": "[-36780488417269849237113.5595764036802649283039367309089527002979110012492739582528495207386900599516 +/- 7.17e-77]"
+      },
+      "direct_source_F": {
+        "absolute_lower": "5.21730125656717748664863016528256567589944535e9",
+        "absolute_upper": "5.21730125656717748664863016528256567589944536e9",
+        "imag_ball": "[4272981632.73502882298771520047253856087387602600490068197848229896056402030388590331019024491488793 +/- 8.71e-90]",
+        "radius_upper": "6.48202667913461201173976953703852116410472393e-90",
+        "real_ball": "[-2993636645.96866805850156458795300548880860041830403046958942946196703502928359423635314104235256964 +/- 5.05e-90]"
+      },
+      "grouped_complete_source_box": {
+        "absolute_lower": "5.21730125645413623986939333433015867983791724e9",
+        "absolute_upper": "5.21730125665879728726845191319110387496809469e9",
+        "imag_ball": "[4272981632.7 +/- 0.0718]",
+        "radius_upper": "1.04483922710642218589782714843750000000000000e-1",
+        "real_ball": "[-2993636646.0 +/- 0.0761]"
+      },
+      "interior_limit_mixed_partial_t_partial_s_product_at_s0": {
+        "absolute_lower": "5.12521226110646661658245699651635285541133160e26",
+        "absolute_upper": "5.12521226110646661658245699651635285541133161e26",
+        "imag_ball": "[216307056699428699324420783.982855927079491607257236022143739501838571678877362722891488482002180008 +/- 8.29e-73]",
+        "radius_upper": "1.05037445382787338647511369230178280244780088e-72",
+        "real_ball": "[-464638853773541778727346930.964764005657174726396075413702292405652615482755834230960497074441982858 +/- 8.33e-73]"
+      },
+      "interior_limit_partial_s_product_at_s0": {
+        "absolute_lower": "7.44086517522408087346228653358729687845118590e14",
+        "absolute_upper": "7.44086517522408087346228653358729687845118591e14",
+        "imag_ball": "[-674453474522883.49446927047031315918428069900571737778940975224148546660182158855485281333548669383 +/- 1.18e-84]",
+        "radius_upper": "1.26283801112165446412758392500990103341554505e-84",
+        "real_ball": "[-314288492093864.395516505468836283674705250508597946299461156299785326150640607893844914023970961613 +/- 9.38e-85]"
+      },
+      "interior_limit_partial_t_product_at_s0": {
+        "absolute_lower": "0",
+        "absolute_upper": "0",
+        "imag_ball": "0",
+        "radius_upper": "0",
+        "real_ball": "0"
+      },
+      "interior_limit_product_F_times_C_at_s0": {
+        "absolute_lower": "0",
+        "absolute_upper": "0",
+        "imag_ball": "0",
+        "radius_upper": "0",
+        "real_ball": "0"
+      },
+      "s": "1/3",
+      "side": "left",
+      "t": "1/992566",
+      "x": "992567/2481418"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+diff --git a/src/zeta14cubic.f90 b/src/zeta14cubic.f90
+index 8ccbca4..e2c7c71 100644
+--- a/src/zeta14cubic.f90
++++ b/src/zeta14cubic.f90
+@@ -802,6 +802,7 @@ program compute_hardy_fast
+ 
+   !     All Done
+ 
++  call MPI_Finalize(IERR)
+   STOP
+ 
+ 2002 FORMAT(A14,1X,I4,A18,1X,I14,1X,A17,1X,I14)
+@@ -831,8 +832,6 @@ program compute_hardy_fast
+ 4005 FORMAT(A3,A45)
+ 4008 FORMAT(A12,E47.40)
+  
+-  call MPI_Finalize(IERR)
+-
+ 
+ end program compute_hardy_fast
+ 

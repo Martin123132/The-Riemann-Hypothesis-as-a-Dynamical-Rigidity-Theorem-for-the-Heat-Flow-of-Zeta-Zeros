@@ -1,0 +1,82 @@
+{
+  "kind": "hardy_block20_t5_component_probe",
+  "status": "source_derived_374_call_probe_with_exact_t5_replay",
+  "block": 20,
+  "recursive_chain_count": 374,
+  "validation": {
+    "row_count": 374,
+    "saved_t5_bit_match_count": 374,
+    "intrinsic_erfc_call_count": 913,
+    "lower_erfc_call_count": 539,
+    "upper_erfc_call_count": 374,
+    "two_call_row_count": 209,
+    "three_call_row_count": 165,
+    "constants_hex": {
+      "pi": "4000921FB54442D18469898CC51701B8",
+      "sqrt_pi": "3FFFC5BF891B4EF6AA79C3B0520D5DB9",
+      "two_pi": "4001921FB54442D18469898CC51701B8",
+      "minus_two_pi": "C001921FB54442D18469898CC51701B8",
+      "epi4_real": "3FFE6A09E667F3BCC908B2FB1366EA95",
+      "epi4_imag": "3FFE6A09E667F3BCC908B2FB1366EA95"
+    }
+  },
+  "build": {
+    "image": "rh-hardy-fastcode:bookworm",
+    "image_id": "sha256:b4325533de8d0f76eae21f27ab1b96490f5da131c2c96ca289f6b28716d562e9",
+    "cpu_cap": 1,
+    "nice": 10,
+    "compiler_flags": [
+      "-O3",
+      "-ffree-line-length-none"
+    ],
+    "elapsed_seconds": 2.011205399991013,
+    "binary_sha256": "0ec38d65d75b84dc40a5dbed30e51a6931b7c0d57f990d46b16f01a9df3f20c5"
+  },
+  "run": {
+    "cpu_cap": 1,
+    "nice": 10,
+    "elapsed_seconds": 0.9888547000009567
+  },
+  "source_extraction": {
+    "initialization_sha256": "b1a1e2134ce943ced7f070a6768d50f5053873261b1b3133de2ddbeaa878ed65",
+    "psi_routine_sha256": "8415be96eb2a7feb30d6d0a4396703b7aded9342bb46d59f7b676775436f4f3f",
+    "t5_source_block_sha256": "6148330b7a6bd275a4351cfcca0c75771fdffe9703c1a162c4a097591c329b7d"
+  },
+  "artifacts": {
+    "generated_probe": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/t5_component_probe/t1e10_block20/probe_generated.f90",
+      "sha256": "5192c3da8541a058ba0f1a6fccd616b48c5c16646e3230b34126b054e6433a71"
+    },
+    "input": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/t5_component_probe/t1e10_block20/probe_input.txt",
+      "sha256": "2497bfbefaa18332ad38525bd4b1fd0aafcfdb0e95a6945f2bca3ed30e7d23bd"
+    },
+    "output": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/t5_component_probe/t1e10_block20/probe_output.txt",
+      "sha256": "9954421d1a6de0d9bb13b19fcc92d442a2e50afbd0265518c16eb3853f3d6329"
+    },
+    "stderr": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/t5_component_probe/t1e10_block20/probe.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "sources": {
+    "accepted_source": {
+      "path": "work/rh_compute/external/hardy_fastcode/resumable/zeta14cubicmult_resumable.f90",
+      "sha256": "0fb64f090c21b185f27edc1c9194254cf471e74bfd6af3b88cb7f0cb40ec0c3d"
+    },
+    "telemetry": {
+      "path": "work/rh_compute/external/hardy_fastcode/fixtures/chain_telemetry/t1e10_block20_full/enabled/chain_telemetry.jsonl",
+      "sha256": "60b36563cc164d1e73c444f8596fa3239a7ce30330a189bcc96e807f0b89d69f"
+    },
+    "runner": {
+      "path": "work/rh_compute/scripts/run_hardy_block20_t5_component_probe.py",
+      "sha256": "fef21913cde8c3389cd869ba4ebea265a9584e9c30710239286c22e048d1f023"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_hardy_block20_t5_component_probe.py",
+      "sha256": "086dc1a424b257be1ad712d07b4007512b949d83cb0c64b9474b3b815022cc36"
+    }
+  },
+  "proof_boundary": "The standalone one-CPU probe copies accepted initialization and PSI code, reproduces the source t5 statement order, and requires exact saved t5 replay at all 374 finite recursive calls. It exposes finite component values and intrinsic real-erfc arguments, outputs, and weights; it does not itself prove erfc accuracy, endpoint-saddle accuracy, recurrence accuracy, RH, or a prize-level theorem."
+}

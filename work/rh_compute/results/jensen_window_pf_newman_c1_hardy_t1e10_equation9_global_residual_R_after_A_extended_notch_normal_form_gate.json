@@ -1,0 +1,133 @@
+{
+  "decision": {
+    "A_upper_projector_edge_moved_out_of_half_boundary_collar": true,
+    "B_subtractions_and_negative_bulk_ownership_preserved": true,
+    "extended_notch_alone_proves_joined_bound": false,
+    "extended_notch_one_cell_fold_and_modular_transform_inherited": true,
+    "post_A_endpoint_roster_reduced_to_two_rows": true,
+    "post_A_positive_bulk_mask_is_one_contiguous_extended_notch": true,
+    "quantitative_R_after_A_bound_proved": false,
+    "rh_implication": false,
+    "six_row_mask_compressed_coefficientwise": true
+  },
+  "dependencies": {
+    "R_Dir_ownership": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_Dir_projector_ownership_ledger_gate.json",
+      "sha256": "d3c67b7d2f35b6e7c0876e75962ada23fe0c77280f62b91d13501d93c522f684"
+    },
+    "R_after_A_equivalence": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_finite_regulator_equivalence_gate.json",
+      "sha256": "e4f5c904204da05cff08ad0da01739b8aa78b7f72957dca3f54864c2b1c55f27"
+    },
+    "all_order_route_guard": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_all_order_endpoint_jet_route_gate.json",
+      "sha256": "421e01f0c6739c38f91229e800e2314e48f216094f47efde80ba198e9356c34f"
+    },
+    "two_jet_reassembly": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_common_kernel_reassembly_gate.json",
+      "sha256": "3dfb0940f1a94195a6b5855b1ac7c91196d0aa58d55ef39b5fe98b2d51e110ca"
+    }
+  },
+  "edge_geometry": {
+    "A_half_boundary": "159577/4",
+    "edge_shift_modes": "42",
+    "new_edge_gap_modes": "169/4",
+    "new_upper_half_integer_edge": "79873/2",
+    "normal_gap_consequence": "At x=1/2 the extended upper projector edge has q_A=-84.5 instead of -0.5, and the nearest surviving A endpoint integers have |q_A|>=84.5.",
+    "old_edge_gap_modes": "1/4",
+    "old_upper_half_integer_edge": "79789/2",
+    "q_A_at_x_half": {
+      "deleted_first_integer": "165/2",
+      "deleted_last_integer": "-167/2",
+      "lower_surviving_integer": "169/2",
+      "new_projector_edge": "-169/2",
+      "old_projector_edge": "-1/2",
+      "upper_surviving_integer": "-171/2"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_form_gate",
+  "modular_certificate": {
+    "edge_phase_guard": "Both c and d_A are half-integers, so exp(-2*pi*i*k*c)=exp(-2*pi*i*k*d_A)=(-1)^k for integer k.",
+    "edges": {
+      "lower": "c=621.5=1243/2",
+      "upper": "d_A=39936.5=79873/2"
+    },
+    "integer_samples": "h_A,epsilon(m)=w_m[1-1_(622<=m<=39936)]",
+    "interpolant": "h_A,epsilon(y)=exp(-pi*epsilon*y^2)[1_(y<c)+1_(y>d_A)]",
+    "limit_order": "M tends to infinity first at fixed epsilon>0; epsilon tends down to zero second, exactly as in the inherited R_after_A definition.",
+    "poisson_identity": "C_A,epsilon(u)=sum_(m in Z)[1-1_U(m)]w_m exp(-2*pi*i*m*u)=sum_(k in Z)hat h_A,epsilon(k+u)",
+    "pole_free_inheritance": "The two-edge Mittag-Leffler closure and centred-cell k=0 recombination apply with d replaced by d_A; the proof uses only Gaussian differentiation and the shared half-integer phase."
+  },
+  "next_obligation": "Instantiate the pole-free two-edge kernel with d_A=39936.5 and combine its upper-edge current with the already-deleted A window before norms. Derive a joint-gradient or contour estimate on the surviving post-A kernel, using the exact |q_A|>=84.5 half-boundary separation and the existing B-window subtraction.",
+  "passed": true,
+  "proof_boundary": "Exact finite-regulator post-A coefficient compression, extended-notch fold/modular inheritance, and rational upper-edge geometry only. No quantitative bound for the remaining joined kernel, complete R_after_A, R_Dir, or Q_K-T estimate, all-height theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.101,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "A_transition_window": [
+      39853,
+      39936
+    ],
+    "common_cutoff": "M>=B=5122421",
+    "extended_target": [
+      622,
+      39936
+    ],
+    "height": 10000000000,
+    "original_target": [
+      622,
+      39894
+    ],
+    "source_odd_roster": [
+      159577,
+      5122421
+    ]
+  },
+  "set_certificate": {
+    "A_window": [
+      39853,
+      39936
+    ],
+    "counts": {
+      "A_window": 84,
+      "A_window_inside_original_target": 42,
+      "A_window_outside_original_target": 42,
+      "extended_target": 39315,
+      "original_target": 39273
+    },
+    "extended_target": [
+      622,
+      39936
+    ],
+    "finite_projector_identity": "Delta-mathcal_A=H+sum_(m=-M)^M w_m I_m-sum_(m=622)^39936 w_m P_m-sum_(m=39853)^39936 w_m(A_m+A_-m)",
+    "indicator_identity": "chi_T+chi_A*(1-chi_T)=chi_U, U=T union A_window={622,...,39936}",
+    "original_target": [
+      622,
+      39894
+    ]
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_form_gate.py",
+      "sha256": "620b4f1c5f68513ddf3300b66deebbecee7437e91d32f0401b14254771e08b4a"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_extended_notch_normal_form_gate.py",
+      "sha256": "06c4ed32e474dc8eee186575e31fad49b58b6fb589b99eb79335d29d50be3fd6"
+    }
+  },
+  "status": "exact_post_A_extended_positive_projector_notch_and_transition_free_upper_edge_certified_joined_bound_open",
+  "symbolic_certificate": {
+    "endpoint_roster": {
+      "39853_to_39936": "B_m-A_-m",
+      "622_to_39852": "A_m+B_m"
+    },
+    "folded_source_form": "H_x+integral_0^L f_x(u)[D_(M,epsilon)(u)-G_(U,epsilon)(u)]du+sum_(m in U)w_m(A_m+B_m)-sum_(m in W_A)w_m(A_m+A_-m)",
+    "one_cell_form": "Replace the source integral by integral_0^1 F_x(s)C_(U,M,epsilon)(s)ds using the certified periodic fold.",
+    "post_A_residual": "mathfrak R_A=(Delta-mathcal_A)-chi_W*Btr-O",
+    "two_jet_common_kernel_form": "H_x+E_x+2*pi*i*sum_(m=1)^M m*w_m[hat Phi_x(m)-hat Phi_x(-m)]-sum_(m=622)^39936 w_m P_m-sum_(m=39853)^39936 w_m(A_m+A_-m)"
+  }
+}

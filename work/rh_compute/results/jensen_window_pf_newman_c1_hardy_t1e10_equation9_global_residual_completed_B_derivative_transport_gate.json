@@ -1,0 +1,93 @@
+{
+  "decision": {
+    "bulk_completion_is_homogeneous_transport_solution": true,
+    "complete_T_upper_proved": false,
+    "completed_exterior_current_bound_proved": false,
+    "exact_Kummer_weight_derivatives_proved": true,
+    "exact_first_second_pair_derivatives_proved": true,
+    "finite_cutoff_sum_may_be_differentiated_without_crossing_distributions": true,
+    "joined_remainder_below_1p4058e_minus_4_proved": false,
+    "phase_stripped_completed_mode_transport_proved": true,
+    "rh_implication": false,
+    "uniform_M_epsilon_derivative_bounds_proved": false
+  },
+  "dependencies": {
+    "crossing_completion": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_endpoint_safe_completed_B_extraction_gate.json",
+      "sha256": "547488711b572ad3d596c5c69b145f752b44ce1515a81d01385740823e11d218"
+    },
+    "endpoint_decomposition": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_ordinary_finite_endpoint_tail_decomposition_gate.json",
+      "sha256": "3c06598ec8870d105f5bdad7bd68125ad4c826c1882c6c1e68f45940dc512a17"
+    },
+    "tangential_cutoff": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_tangential_exterior_cutoff_gate.json",
+      "sha256": "bf17bcb09f838851540d83bdfbef33fcd7eee9fb3056baf42e249ffc21d0714c"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_derivative_transport_gate",
+  "next_obligation": "Use the exact Y_s transport to derive sum-first enclosures for A, A_xi, and A_xixi on the two completed B exterior intervals, uniform in the finite cutoff and Abel regulator. Split the proof into the finite crossing roster and an analytic outer-mode tail, retain both B-window edge terms, and combine with R_join,comp under one common prescription. The joined target remains below 1.4058e-4.",
+  "passed": true,
+  "proof_boundary": "Exact completed-mode derivative transport and finite-sum calculus only. No uniform derivative norm, completed exterior-current or joined-remainder bound, complete Q_K-T or T_upper, height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 3.876,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_derivative_transport_gate.py",
+      "sha256": "57ebcced32bae0a358aed161e692bdda23d9baa32c3742c3e167188c982d6ee7"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_derivative_transport_gate.py",
+      "sha256": "3f6854b0699337f3636735cc09524957fabe7a96792c55c5916d044d7ed81552"
+    }
+  },
+  "status": "exact_crossing_completed_B_first_second_derivative_transport_reduced",
+  "symbolic_certificate": {
+    "Kummer_weight": "w=[x(1-x)]^(-1/4), w'/w=(2x-1)/[4x(1-x)], w''/w=(12x^2-12x+5)/[16x^2(1-x)^2]",
+    "bulk_completion_homogeneous_equation": "V_+'=-K_+ V_+, V_+=(1-tau_m)a(1+i)exp(-i*pi*q_+^2/2)",
+    "finite_sum_amplitude": "A_(M,epsilon)=w sum_(m=1)^M w_(m,epsilon) C_m; differentiate the finite sum using the displayed transports before taking norms",
+    "geometry_derivatives": "q_s'=(b+s a)/(2x), q_s''=(-b-3s a)/(4x^2), K_s'=-1/(2x^2)+i*pi[(q_s')^2+q_s q_s'']",
+    "normalized_coordinate": "partial_xi=H_B^(-1/2)partial_x and partial_xixi=H_B^(-1)partial_xx",
+    "pair_coefficient": "C_m=(Y_plus_tau+Y_minus)/x",
+    "pair_derivatives": {
+      "first": "C_m'=(Y_+'+Y_-')/x-(Y_++Y_-)/x^2",
+      "second": "C_m''=(Y_+''+Y_-'')/x-2(Y_+'+Y_-')/x^2+2(Y_++Y_-)/x^3"
+    },
+    "phase_stripped_modes": {
+      "Y_minus": "exp(-i*pi*q_-^2/2)P_B,-",
+      "Y_plus_tau": "exp(-i*pi*q_+^2/2)[P_B,+ +(1-tau_m)P_bulk,+]",
+      "a_sign": "a_s=s m sqrt(2/x)",
+      "q_sign": "q_s=B sqrt(x/2)-s m sqrt(2/x), s in {+1,-1}",
+      "rho": "1/(i*pi)"
+    },
+    "second_transport": "Y_s''=a_s(q_s''-q_s'/(2x))-Y_s'K_s+(rho-Y_s)K_s'",
+    "sign_rows": [
+      {
+        "K": "I*pi*B**2/4 - I*pi*m**2/x**2 + 1/(2*x)",
+        "K_first": "(4*I*pi*m**2 - x)/(2*x**3)",
+        "Y_first": "m*(B*x + 2*m)/(2*x**2) + (-Y_plus - I/pi)*(I*pi*B**2/4 - I*pi*m**2/x**2 + 1/(2*x))",
+        "Y_second": "(-8*pi*m*x*(B*x + 4*m) - 8*x*(pi*Y_plus + I)*(4*I*pi*m**2 - x) - (2*pi*m*(B*x + 2*m) - (pi*Y_plus + I)*(I*pi*B**2*x**2 - 4*I*pi*m**2 + 2*x))*(I*pi*B**2*x**2 - 4*I*pi*m**2 + 2*x))/(16*pi*x**4)",
+        "a_sign": "sqrt(2)*m/sqrt(x)",
+        "q": "sqrt(2)*B*sqrt(x)/2 - sqrt(2)*m/sqrt(x)",
+        "q_first": "(sqrt(2)*B*sqrt(x)/2 + sqrt(2)*m/sqrt(x))/(2*x)",
+        "q_second": "(-sqrt(2)*B*sqrt(x)/2 - 3*sqrt(2)*m/sqrt(x))/(4*x**2)",
+        "sign": "+"
+      },
+      {
+        "K": "I*pi*B**2/4 - I*pi*m**2/x**2 + 1/(2*x)",
+        "K_first": "(4*I*pi*m**2 - x)/(2*x**3)",
+        "Y_first": "-m*(B*x - 2*m)/(2*x**2) + (-Y_minus - I/pi)*(I*pi*B**2/4 - I*pi*m**2/x**2 + 1/(2*x))",
+        "Y_second": "(8*pi*m*x*(B*x - 4*m) - 8*x*(pi*Y_minus + I)*(4*I*pi*m**2 - x) + (2*pi*m*(B*x - 2*m) + (pi*Y_minus + I)*(I*pi*B**2*x**2 - 4*I*pi*m**2 + 2*x))*(I*pi*B**2*x**2 - 4*I*pi*m**2 + 2*x))/(16*pi*x**4)",
+        "a_sign": "-sqrt(2)*m/sqrt(x)",
+        "q": "sqrt(2)*B*sqrt(x)/2 + sqrt(2)*m/sqrt(x)",
+        "q_first": "(sqrt(2)*B*sqrt(x)/2 - sqrt(2)*m/sqrt(x))/(2*x)",
+        "q_second": "(-sqrt(2)*B*sqrt(x)/2 + 3*sqrt(2)*m/sqrt(x))/(4*x**2)",
+        "sign": "-"
+      }
+    ],
+    "transport": "Y_s'=a_s q_s'+(rho-Y_s)K_s, K_s=1/(2x)+i*pi*q_s*q_s'"
+  }
+}

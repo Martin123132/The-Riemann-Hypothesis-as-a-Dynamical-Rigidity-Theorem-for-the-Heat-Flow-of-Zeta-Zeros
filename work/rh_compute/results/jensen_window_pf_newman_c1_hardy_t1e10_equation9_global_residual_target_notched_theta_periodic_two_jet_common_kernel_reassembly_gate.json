@@ -1,0 +1,82 @@
+{
+  "common_kernel_certificate": {
+    "R_after_A_insertion": "Subtract chi_W*Btr, O, and the certified A notch from this same Delta before the physical projection, exactly as in the R_after_A equivalence gate.",
+    "absolute_limit": "The symmetric Phi series is absolutely and uniformly convergent on x in [0,1] after the two endpoint jets are extracted.",
+    "cutoff": "M>=B=5122421",
+    "finite_identity": "Delta_(M,epsilon)(x)=H_x+E_x+2*pi*i*sum_(m=1)^M m*w_m[hat Phi_x(m)-hat Phi_x(-m)]-sum_(m=622)^39894 w_m*P_m(x)",
+    "target_endpoint_relation": "A_m+B_m=I_m-P_m for every positive target mode",
+    "weight": "w_m=exp(-pi*epsilon*m^2)",
+    "zero_regulator_form": "Set w_m=1 after taking the certified symmetric limit; no one-sided endpoint-current series remains."
+  },
+  "decision": {
+    "R_after_A_ownership_and_limit_order_preserved": true,
+    "common_kernel_reassembled_as_symmetric_pair_series": true,
+    "harmonic_current_is_independent_error_term": false,
+    "per_mode_two_jet_identity_proved": true,
+    "quantitative_R_after_A_bound_proved": false,
+    "raw_derivative_majorant_closes_target": false,
+    "rh_implication": false,
+    "target_Phi_coefficients_restored_exactly": true,
+    "target_harmonic_current_cancels_coefficientwise": true,
+    "zero_regulator_pair_series_absolute_and_uniform": true
+  },
+  "dependencies": {
+    "R_after_A_equivalence": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_finite_regulator_equivalence_gate.json",
+      "sha256": "e4f5c904204da05cff08ad0da01739b8aa78b7f72957dca3f54864c2b1c55f27"
+    },
+    "finite_endpoint_decomposition": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_ordinary_finite_endpoint_tail_decomposition_gate.json",
+      "sha256": "3c06598ec8870d105f5bdad7bd68125ad4c826c1882c6c1e68f45940dc512a17"
+    },
+    "projector_defect": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_phase_space_projector_defect_gate.json",
+      "sha256": "fde7f08d99c004267c5173f5db8931b9fc8d8c59c9b1f55ddd2fd3e3308f5f3d"
+    },
+    "two_jet_extraction": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_extraction_gate.json",
+      "sha256": "ce3c44b632486c9d84ce34b1a18a59d2cebcd3fad7413945743e8850899e3736"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_common_kernel_reassembly_gate",
+  "next_obligation": "Develop a phase-adapted evaluator for the symmetric pair coefficient m[hat Phi_x(m)-hat Phi_x(-m)] and compose it with H_x+E_x and the finite target Gamma bulk before subtracting the already-certified B window, B outer block, and A transition. Use the periodic C1 cancellation, not the enormous raw K_Phi derivative majorant.",
+  "passed": true,
+  "proof_boundary": "Exact finite-regulator coefficient reassembly, cancellation of the target harmonic endpoint jet, and absolute/uniform convergence of the periodic two-jet pair series only. No useful numerical tail constant, physical Kummer quadrature, A/B-subtracted R_after_A or R_Dir bound, complete Q_K-T, all-height theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.209,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "common_cutoff": "M>=B=5122421",
+    "height": 10000000000,
+    "roster_coordinate_length": 2481422,
+    "source_odd_roster": [
+      159577,
+      5122421
+    ],
+    "target_positive_modes": [
+      622,
+      39894
+    ]
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_common_kernel_reassembly_gate.py",
+      "sha256": "a0517da28fce7728525468656ac419d72c3f2b156321d88a2c13fce3771ea11a"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_periodic_two_jet_common_kernel_reassembly_gate.py",
+      "sha256": "1097b461731d09e2c4732cb2cfd59adfa0d72561d209cba17ba1e2bdda4d05bc"
+    }
+  },
+  "status": "exact_two_jet_common_kernel_reassembly_harmonic_current_cancelled_symmetric_pair_series_absolute_quantitative_bound_open",
+  "symbolic_certificate": {
+    "harmonic_cancellation_residual": "0",
+    "per_mode_identity": "I_m=2*pi*i*m*hat Phi_x(m)+i*K_x/(2*pi*m), m!=0",
+    "source_complement": "sum_(m notin T)w_m I_m=E_x-i*K_x*H_T/(2*pi)+R_all-R_T",
+    "symmetric_pair": "m*w_m[hat Phi_x(m)-hat Phi_x(-m)]",
+    "target_endpoint_atoms": "sum_(m in T)w_m(A_m+B_m)=R_T+i*K_x*H_T/(2*pi)-sum_(m in T)w_m P_m",
+    "zero_mode_identity": "I_0=E_x"
+  }
+}

@@ -1,0 +1,31 @@
+diff --git a/src/zeta14cubicmult.f90 b/src/zeta14cubicmult.f90
+index 655cd1e..f2ddb0c 100644
+--- a/src/zeta14cubicmult.f90
++++ b/src/zeta14cubicmult.f90
+@@ -307,8 +307,6 @@ program compute_hardy_fast
+   CALL  MPI_COMM_RANK(COMM, RANK, IERR)
+   CALL  MPI_COMM_SIZE(COMM, COMM_SIZE, IERR)
+ 
+-  call MPI_Op_create(qsum,.true.,mysum,IERR)
+-
+ ! Set p=pi, tpp=2*pi and tpm=-2*pi  
+ 
+   C=1.0
+@@ -746,7 +744,7 @@ program compute_hardy_fast
+      RN1=RN1startofblock + (2*(real(MT,dp)+1.0)*real(aenums,dp))
+ 
+ 
+-      CALL MPI_ALLREDUCE(zsum1,zsum2,nchalf,MPI_REAL16,MPI_SUM,COMM,IERR)
++      CALL MPI_ALLREDUCE(zsum1,zsum2,int(nchalf),MPI_REAL16,MPI_SUM,COMM,IERR)
+       zsum=zsum+zsum2
+       
+ 
+@@ -812,7 +810,7 @@ program compute_hardy_fast
+      enddo
+ 
+ 
+-      CALL MPI_ALLREDUCE(RSZSUM,RSZSUM1,nchalf,MPI_REAL16,MPI_SUM,COMM,IERR)
++      CALL MPI_ALLREDUCE(RSZSUM,RSZSUM1,int(nchalf),MPI_REAL16,MPI_SUM,COMM,IERR)
+       rszsumtot=rszsumtot+rszsum1
+ 
+ !  Additional bit of code to do the final bit of calculation N_MAX*N_INTERNAL+1 to NC.

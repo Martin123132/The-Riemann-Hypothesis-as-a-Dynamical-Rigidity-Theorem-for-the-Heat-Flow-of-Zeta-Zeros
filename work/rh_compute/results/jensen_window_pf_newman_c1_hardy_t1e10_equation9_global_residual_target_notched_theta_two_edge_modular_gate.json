@@ -1,0 +1,136 @@
+{
+  "decision": {
+    "Kummer_source_integration_completed": false,
+    "Poisson_dual_two_edge_transform_exact_at_fixed_positive_epsilon": true,
+    "R_after_A_bound_proved": false,
+    "R_after_A_evaluated": false,
+    "first_two_boundary_currents_summed_in_closed_form": true,
+    "floating_pilot_used_as_proof": false,
+    "hybrid_direct_near_integer_and_dual_away_evaluator_licensed": true,
+    "remaining_dual_series_absolutely_convergent_with_cubic_tail": true,
+    "rh_implication": false,
+    "target_complement_realized_as_half_integer_continuous_notch": true
+  },
+  "dependencies": {
+    "R_after_A_equivalence": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_after_A_finite_regulator_equivalence_gate.json",
+      "sha256": "e4f5c904204da05cff08ad0da01739b8aa78b7f72957dca3f54864c2b1c55f27"
+    },
+    "symmetric_poisson": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_symmetric_poisson_interchange_gate.json",
+      "sha256": "4a1898bcda7105107fcaf303a20a87237e75c09f0052db7710bff5f6765a88b0"
+    },
+    "theta_modular": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_modular_dual_roster_gate.json",
+      "sha256": "b5295bd15ac42385f1cee282e66d9dc05f65c54746d02b265ee4f7341ee5cae5"
+    }
+  },
+  "exact_transform_certificate": {
+    "Fourier_transform": "hat h_epsilon(xi)=exp(-pi*xi^2/epsilon)/(2sqrt(epsilon)){erfc[-sqrt(pi*epsilon)c-i*sqrt(pi/epsilon)xi]+erfc[sqrt(pi*epsilon)d+i*sqrt(pi/epsilon)xi]}",
+    "Gaussian": "q_epsilon(y)=exp(-pi*epsilon*y^2)",
+    "Poisson_identity": "C_epsilon(u)=sum_(k in Z) hat h_epsilon(k+u), in the inherited symmetric prescription",
+    "absolute_remainder": "rho_2(xi)=hat h_epsilon(xi)-b_0(xi)-b_1(xi)",
+    "boundary_currents": "b_j(xi)=[q_epsilon^(j)(d)exp(-2pi*i*xi*d)-q_epsilon^(j)(c)exp(-2pi*i*xi*c)]/(2pi*i*xi)^(j+1), j=0,1",
+    "boundary_sum_0": "B_0(u)=E_0(u)/(2i*sin(pi*u))",
+    "boundary_sum_1": "B_1(u)=-E_1(u)cos(pi*u)/(4sin(pi*u)^2)",
+    "continuous_notch_complement": "h_epsilon(y)=q_epsilon(y)[1_(y<c)+1_(y>d)], c=621.5, d=39894.5",
+    "edge_numerator": "E_j(u)=q_epsilon^(j)(d)exp(-2pi*i*u*d)-q_epsilon^(j)(c)exp(-2pi*i*u*c)",
+    "hybrid_evaluator": "Use the direct Gaussian Fourier sum near integer u and the boundary-subtracted dual sum away from integers; both evaluate the same C_epsilon.",
+    "integer_samples": "h_epsilon(m)=q_epsilon(m)[1-chi_T(m)] for every integer m",
+    "pointwise_remainder_bound": "|rho_2(xi)|<=[|q''(c)|+|q''(d)|+20pi*epsilon]/(2pi|xi|)^3",
+    "regulated_infinite_complement": "C_epsilon(u)=sum_(m in Z)[1-chi_T(m)]q_epsilon(m)exp(-2pi*i*m*u)",
+    "three_IBP_identity": "rho_2(xi)={[q''(d)e^(-2pi*i*xi*d)-q''(c)e^(-2pi*i*xi*c)]+integral_(-infinity,c union d,infinity)q'''(y)e^(-2pi*i*xi*y)dy}/(2pi*i*xi)^3",
+    "two_edge_modular_form": "C_epsilon(u)=B_0(u)+B_1(u)+sum_(k in Z)rho_2(k+u), u not in Z, with continuous extension at integers"
+  },
+  "exploratory_context": {
+    "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_dual_pilot.json",
+    "sha256": "b0bf00a603f7a6e3e224d124433cabcfc9f2bbcd3f081c544b54027408a5f024",
+    "used_as_proof": false
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_two_edge_modular_gate",
+  "next_obligation": "Insert the two-edge formula into the u-integral of mathfrak R_A. Prove a stable cellwise recombination at integer u so the apparent sin(pi*u) poles cancel before quadrature, then integrate the closed boundary currents jointly with the target endpoint atoms and estimate the absolutely convergent rho_2 series. Keep the A notch and both B subtractions outside this kernel substitution but inside the same physical projection.",
+  "passed": true,
+  "proof_boundary": "Exact fixed-epsilon target-complement transform, boundary-current closure, and cubic dual-tail certificate only. No Kummer-source integration, A/B extraction evaluation, quantitative R_after_A or R_Dir bound, complete Q_K-T, all-height theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "arb_threads": 1,
+    "elapsed_seconds": 0.608,
+    "precision_decimal_digits": 100,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "half_integer_edges": [
+      621.5,
+      39894.5
+    ],
+    "height": 10000000000,
+    "regulator": "epsilon>0 after the inherited M-to-infinity passage",
+    "target_count": 39273,
+    "target_positive_modes": [
+      622,
+      39894
+    ]
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_two_edge_modular_gate.py",
+      "sha256": "ff0a37c7883b8a936ab5e249f4fe52b5e1df45ece2815718dde36fb6e4eea1b7"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_target_notched_theta_two_edge_modular_gate.py",
+      "sha256": "ce03f84e11198bebacd3b7991c1b2d66864f77b0eb5f367990e7e1aef924c88b"
+    }
+  },
+  "status": "exact_target_notched_Abel_kernel_two_edge_modular_transform_and_cubic_dual_tail_certified_R_after_A_integration_open",
+  "symbolic_certificate": {
+    "Mittag_Leffler_sums": [
+      "sum_(k in Z)(-1)^k/(k+u)=pi/sin(pi*u)",
+      "sum_(k in Z)(-1)^k/(k+u)^2=pi^2*cos(pi*u)/sin(pi*u)^2"
+    ],
+    "edge_width": "39273",
+    "half_integer_edges": [
+      "1243/2",
+      "79789/2"
+    ],
+    "half_integer_phase": "exp(-2*pi*i*k*c)=exp(-2*pi*i*k*d)=(-1)^k for integer k",
+    "q_derivatives": [
+      "1",
+      "-2*pi*epsilon*y",
+      "4*pi**2*epsilon**2*y**2 - 2*pi*epsilon",
+      "-8*pi**3*epsilon**3*y**3 + 12*pi**2*epsilon**2*y"
+    ],
+    "target_band": [
+      622,
+      39894
+    ],
+    "target_count": 39273,
+    "third_derivative_L1_majorant": "integral_R |q_epsilon'''(y)|dy<=20*pi*epsilon"
+  },
+  "tail_certificate": {
+    "rows": [
+      {
+        "K3_ball": "[6.549615699196855455722121629501800919902227783159496965469923089617561e-5 +/- 6.51e-76]",
+        "dual_cutoff": 64,
+        "epsilon": "1e-6",
+        "fractional_strip": "0.1<=u<=0.9",
+        "uniform_dual_tail_ball": "[6.528937450666721695060600177892742540446103991715442238236289336715962e-11 +/- 1.75e-81]"
+      },
+      {
+        "K3_ball": "[6.888860304059993892346228921304296230150397164428307630218707663518607e-7 +/- 4.08e-77]",
+        "dual_cutoff": 64,
+        "epsilon": "1e-8",
+        "fractional_strip": "0.1<=u<=0.9",
+        "uniform_dual_tail_ball": "[6.867111002727063288042984668013149188701141530822527977244566166608852e-13 +/- 1.42e-83]"
+      },
+      {
+        "K3_ball": "[6.911280321531870520904031493128722808572397817028624480435390415885090e-9 +/- 4.52e-79]",
+        "dual_cutoff": 64,
+        "epsilon": "1e-10",
+        "fractional_strip": "0.1<=u<=0.9",
+        "uniform_dual_tail_ball": "[6.889460236398084202921179195653848520652434069487249017629400230613491e-15 +/- 1.88e-85]"
+      }
+    ],
+    "tail_formula": "sum_(|k|>K)|rho_2(k+u)|<=K3/(2pi)^3{1/[2(K+u)^2]+1/[2(K-u)^2]}",
+    "uniformization": "For 0.1<=u<=0.9, bound the two denominators separately by K+0.1 and K-0.9."
+  }
+}

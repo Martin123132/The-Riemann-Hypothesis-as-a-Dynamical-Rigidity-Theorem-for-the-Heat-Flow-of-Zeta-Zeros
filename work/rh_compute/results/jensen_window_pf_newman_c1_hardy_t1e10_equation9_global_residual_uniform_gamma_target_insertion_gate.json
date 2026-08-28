@@ -1,0 +1,88 @@
+{
+  "correction_certificate": {
+    "Gamma_to_classical_physical_absolute_bound_ball": "[4.918151566720828980806353638226121738513797734778668279706287331790919038545165004173875668351233940e-20 +/- 3.54e-89]",
+    "negative_R_Dir_sufficient_target": "0.00013197919999999995",
+    "safe_Gamma_correction_budget": "5E-20",
+    "target_identity": "Q_K-T=E_Btr,win+E_outer+R_Dir+E_Gamma, |E_Gamma|<5e-20",
+    "working_R_Dir_sufficient_target": "0.00014057919999999995"
+  },
+  "decision": {
+    "A_face_exception_remains_in_endpoint_defect_not_bulk_carrier": true,
+    "Dirichlet_target_kernel_is_exact_Gamma_bulk_insertion": true,
+    "Gamma_residual_identified_as_QK_minus_G": true,
+    "Gamma_to_classical_physical_correction_below_5e_minus_20": true,
+    "complete_T_upper_proved": false,
+    "compressed_R_Dir_target_proved": false,
+    "exact_classical_residual_requires_Gamma_correction": true,
+    "ordinary_and_fold_bulk_carriers_are_one_common_object": true,
+    "rh_implication": false
+  },
+  "dependencies": {
+    "Gamma_bulk": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_ordinary_global_morse_gamma_bulk_gate.json",
+      "sha256": "3160a0cb4b386f551f2162bb25c7cc8c156eeb49b5308e34c970459ed4b1fe39"
+    },
+    "coverage": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_lower_fold_ordinary_mode_coverage_ledger_gate.json",
+      "sha256": "a38b1cfefd29d4bd0170f0930911bbba7656b074463f8dd3c10cc523f9c37b27"
+    },
+    "double_Weber": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_double_weber_exact_source_reconstruction_gate.json",
+      "sha256": "22f9d704da985e7a9f7d02376903451e0c858e6c196d1082a8a850605d311767"
+    },
+    "finite_rejoin": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_finite_block_dirichlet_rejoin_gate.json",
+      "sha256": "6bfacb882d51a585e30af60d669c9d3052cb7f738d778df986b7d7841a95c121"
+    },
+    "paired_target": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_paired_target_residual_normal_form_gate.json",
+      "sha256": "86c4a9245c0afa36fb0aa6fbfb919ea040bfc7dcb01709190757e97d2428dfc4"
+    }
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_uniform_gamma_target_insertion_gate",
+  "next_obligation": "Bound the single endpoint defect R_Dir in (GI3) below 0.00014057919999999995, preserving the A face, B complement, zero, negative, finite outer, endpoint-half, and common Abel sectors. Use the double-Weber representation only after the uniform Gamma carrier has been removed; do not create separate ordinary and fold bulk budgets.",
+  "passed": true,
+  "proof_boundary": "Exact uniform Gamma-carrier insertion, Q_K-G versus Q_K-T object separation, and saved-height Gamma-to-classical correction below 5e-20 only. No quantitative R_Dir bound, complete endpoint residual theorem, height-uniform theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "elapsed_seconds": 0.132,
+    "flint_threads": 1,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "fold_target_count": 200,
+    "fold_target_modes": [
+      39695,
+      39894
+    ],
+    "height": 10000000000,
+    "ordinary_target_count": 39073,
+    "ordinary_target_modes": [
+      622,
+      39694
+    ],
+    "total_target_count": 39273
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_uniform_gamma_target_insertion_gate.py",
+      "sha256": "9f5ff2ee1382d39919dedfcea3c5de36acad802a94e111699839fd52121c6a82"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_uniform_gamma_target_insertion_gate.py",
+      "sha256": "b10dc6b4ddc2aeeee41b405b5eb277992ca7fb8ba1eebaa40d3bf61c6c51864d"
+    }
+  },
+  "status": "uniform_Gamma_bulk_target_inserted_across_ordinary_and_fold_rosters_exact_classical_correction_below_5e_minus_20",
+  "symbolic_certificate": {
+    "Gamma_mode": "g_m=B(t)exp(i(theta_0-t log m))/sqrt(m)",
+    "Gamma_residual": "R_KGamma=Q_K-G=E_Btr,win+E_outer+R_Dir",
+    "classical_mode": "tau_m=exp(i(theta-t log m))/sqrt(m)",
+    "exact_target_residual": "Q_K-T=R_KGamma+(G-T)",
+    "mode_decomposition": "I_m=P_bulk,m+Q_m, Q_m=P_A,m+P_B,m",
+    "mode_defect": "g_m-tau_m=[B(t)-exp(i(theta-theta_0))]exp(i(theta_0-t log m))/sqrt(m)",
+    "uniform_insertion": "H+integral f(D-G_T)+sum_T w_m Q_m=S_(M,epsilon)-sum_T w_m P_bulk,m",
+    "weighted_source": "S_(M,epsilon)=H_x+integral_0^L f_x(u)D_(M,epsilon)(u)du",
+    "weighted_target_fourier": "I_(T,epsilon)=integral_0^L f_x(u)G_(T,epsilon)(u)du=sum_(m=622)^39894 w_m I_m"
+  }
+}

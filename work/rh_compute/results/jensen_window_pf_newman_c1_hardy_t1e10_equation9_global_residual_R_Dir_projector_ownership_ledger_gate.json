@@ -1,0 +1,385 @@
+{
+  "decision": {
+    "A_endpoint_and_positive_bulk_coefficients_transferred_exactly": true,
+    "B_window_A_transition_and_analytic_B_outer_no_overlap_guards_certified": true,
+    "all_finite_mode_classes_partitioned_without_gap_or_overlap": true,
+    "complete_Q_K_minus_T_proved": false,
+    "complete_R_Dir_proved": false,
+    "joined_R_after_A_bound_proved": false,
+    "post_A_one_sided_targets_derived": true,
+    "rh_implication": false,
+    "zero_half_negative_and_remote_positive_sectors_remain_joined": true
+  },
+  "dependencies": {
+    "A_transition": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_hyperbolic_wedge_A_complete_endpoint_projector_assembly_gate.json",
+      "sha256": "1d434f4da71842247d8b09ee57b371e1d5148fc57e25d1b4a70b171609511923"
+    },
+    "B_outer_bound": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_outer_phase_coupled_tangential_gate.json",
+      "sha256": "19ed2625327bf4e50581c2d6a94f0e195854f3c284f0440c0705731216feb72d"
+    },
+    "B_window_bound": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_B_face_complete_gaussian_window_signed_gate.json",
+      "sha256": "43c5656c9212456f5ae69a42a693905911f54caddd0369e5a3fdecad4c5ccda5"
+    },
+    "B_window_extraction": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_B_window_extraction_target_gate.json",
+      "sha256": "d695ce7333a276514eb2cedf0508e05a069ccdec42620c615d16a4ac74081863"
+    },
+    "Gamma_insertion": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_uniform_gamma_target_insertion_gate.json",
+      "sha256": "0b8a27f744387e706c3c9e1471b838b4d32f85425e1e9a1d6b48dc12fe9b9ca6"
+    },
+    "double_weber_reconstruction": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_half_pair_abel_theta_dual_double_weber_exact_source_reconstruction_gate.json",
+      "sha256": "22f9d704da985e7a9f7d02376903451e0c858e6c196d1082a8a850605d311767"
+    },
+    "finite_dirichlet_rejoin": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_completed_B_finite_block_dirichlet_rejoin_gate.json",
+      "sha256": "6bfacb882d51a585e30af60d669c9d3052cb7f738d778df986b7d7841a95c121"
+    },
+    "projector_defect": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_phase_space_projector_defect_gate.json",
+      "sha256": "fde7f08d99c004267c5173f5db8931b9fc8d8c59c9b1f55ddd2fd3e3308f5f3d"
+    },
+    "symmetric_reassembly": {
+      "path": "work/rh_compute/results/jensen_window_pf_newman_c1_hardy_t1e10_equation9_ordinary_symmetric_endpoint_tail_reassembly_gate.json",
+      "sha256": "84038e740eb2577fbc0b8cd6c9fb121805dea53fa7fbaeecb7f35a68672dcbb7"
+    }
+  },
+  "extraction_certificate": {
+    "A_transition_ball": "[-0.036674124797773646717966091098920512012405425979411807743120038220889293386300000 +/- 3.04e-12]",
+    "Gamma_to_classical_absolute_bound_ball": "[4.918151566720828980806353638226121738513797734778668279706287331790919038545165004173875668351233940e-20 +/- 3.54e-89]",
+    "extractions": [
+      {
+        "bound_type": "signed_upper",
+        "certified_value_or_bound": "[-0.000131980880480359397499389294254019796601012398470818913951995361310102457746940187192698511 +/- 2.15e-15]",
+        "overlap_guard": "A extraction uses A endpoint atoms and positive bulk only; Btr uses B trace atoms and local bulk only at modes 621 and 622",
+        "owner": "outside_R_Dir",
+        "sector_id": "B_trace_window",
+        "support_or_grouping": "chi_W Btr; all nonlocal trace currents plus exact local modes 621 and 622"
+      },
+      {
+        "bound_type": "absolute_upper",
+        "certified_value_or_bound": "[6.565486022379221416510266647544862923073521082626919637883972959976130875503541450674936869045802908e-10 +/- 1.25e-104]",
+        "overlap_guard": "mode range starts above every A-transition mode",
+        "owner": "outside_R_Dir",
+        "sector_id": "analytic_B_outer",
+        "support_or_grouping": "completed B current on the released exterior for modes m>=5122421"
+      },
+      {
+        "bound_type": "signed_interval",
+        "certified_value_or_bound": "[-0.036674124797773646717966091098920512012405425979411807743120038220889293386300000 +/- 3.04e-12]",
+        "overlap_guard": "target Gamma modes 622..39894 remain subtracted; only the outside-target positive bulk coefficient is restored",
+        "owner": "inside_R_Dir_extracted_signed",
+        "sector_id": "projector_completed_A_transition",
+        "support_or_grouping": "A endpoint atoms on 39853..39936 plus positive Gamma bulk on 39895..39936"
+      },
+      {
+        "bound_type": "open_one_sided_join",
+        "certified_value_or_bound": null,
+        "overlap_guard": "no independent norm is permitted on zero, half-current, negative, or remote-positive subsectors",
+        "owner": "inside_R_Dir_open",
+        "sector_id": "joined_R_after_A",
+        "support_or_grouping": "half-current, zero mode, all unextracted negative/endpoint/remote-positive atoms, and the finite Dirichlet/Abel completion after B extractions"
+      }
+    ],
+    "negative_R_Dir_target": "0.00013197919999999995",
+    "negative_R_after_A_safe_upper": "0.0368061039947",
+    "negative_R_after_A_threshold_ball": "[0.036806103997773646667966091098920512012405425979411807743120038220889293386300000 +/- 3.04e-12]",
+    "target_implications": [
+      "R_after_A < inf(working_target-A_transition) implies R_Dir < 0.00014057919999999995",
+      "R_after_A < inf(negative_target-A_transition) implies R_Dir < 0.00013197919999999995"
+    ],
+    "working_R_Dir_target": "0.00014057919999999995",
+    "working_R_after_A_safe_upper": "0.0368147039947",
+    "working_R_after_A_threshold_ball": "[0.036814703997773646667966091098920512012405425979411807743120038220889293386300000 +/- 3.04e-12]",
+    "working_threshold_expansion_factor_ball": "[261.87874162536145527885406424330743056371932807536 +/- 8.57e-49]"
+  },
+  "kind": "jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_Dir_projector_ownership_ledger_gate",
+  "mode_ownership_rows": [
+    {
+      "A_transition_coefficients": {
+        "I_zero": 0
+      },
+      "count": "1",
+      "mode_range": [
+        0,
+        0
+      ],
+      "post_A_coefficients": {
+        "I_zero": 1
+      },
+      "post_A_owner": "joined_R_after_A",
+      "pre_A_coefficients": {
+        "I_zero": 1
+      },
+      "sector_id": "zero_mode",
+      "separate_norm_admissible": false,
+      "target_indicator": 0
+    },
+    {
+      "A_transition_coefficients": {
+        "A_minus": 0,
+        "A_plus": 0,
+        "B_minus": 0,
+        "B_plus": 0,
+        "P_minus": 0,
+        "P_plus": 0
+      },
+      "count": "621",
+      "mode_range": [
+        1,
+        621
+      ],
+      "post_A_coefficients": {
+        "A_minus": 1,
+        "A_plus": 1,
+        "B_minus": 1,
+        "B_plus": 1,
+        "P_minus": 1,
+        "P_plus": 1
+      },
+      "post_A_owner": "joined_R_after_A",
+      "pre_A_coefficients": {
+        "A_minus": 1,
+        "A_plus": 1,
+        "B_minus": 1,
+        "B_plus": 1,
+        "P_minus": 1,
+        "P_plus": 1
+      },
+      "sector_id": "low_positive_pairs",
+      "separate_norm_admissible": false,
+      "target_indicator": 0
+    },
+    {
+      "A_transition_coefficients": {
+        "A_minus": 0,
+        "A_plus": 0,
+        "B_minus": 0,
+        "B_plus": 0,
+        "P_minus": 0,
+        "P_plus": 0
+      },
+      "count": "39231",
+      "mode_range": [
+        622,
+        39852
+      ],
+      "post_A_coefficients": {
+        "A_minus": 1,
+        "A_plus": 1,
+        "B_minus": 1,
+        "B_plus": 1,
+        "P_minus": 1,
+        "P_plus": 0
+      },
+      "post_A_owner": "joined_R_after_A",
+      "pre_A_coefficients": {
+        "A_minus": 1,
+        "A_plus": 1,
+        "B_minus": 1,
+        "B_plus": 1,
+        "P_minus": 1,
+        "P_plus": 0
+      },
+      "sector_id": "ordinary_target_pairs_before_A_window",
+      "separate_norm_admissible": false,
+      "target_indicator": 1
+    },
+    {
+      "A_transition_coefficients": {
+        "A_minus": 1,
+        "A_plus": 1,
+        "B_minus": 0,
+        "B_plus": 0,
+        "P_minus": 0,
+        "P_plus": 0
+      },
+      "count": "42",
+      "mode_range": [
+        39853,
+        39894
+      ],
+      "post_A_coefficients": {
+        "A_minus": 0,
+        "A_plus": 0,
+        "B_minus": 1,
+        "B_plus": 1,
+        "P_minus": 1,
+        "P_plus": 0
+      },
+      "post_A_owner": "joined_R_after_A_except_extracted_A_endpoint",
+      "pre_A_coefficients": {
+        "A_minus": 1,
+        "A_plus": 1,
+        "B_minus": 1,
+        "B_plus": 1,
+        "P_minus": 1,
+        "P_plus": 0
+      },
+      "sector_id": "A_window_target_pairs",
+      "separate_norm_admissible": false,
+      "target_indicator": 1
+    },
+    {
+      "A_transition_coefficients": {
+        "A_minus": 1,
+        "A_plus": 1,
+        "B_minus": 0,
+        "B_plus": 0,
+        "P_minus": 0,
+        "P_plus": 1
+      },
+      "count": "42",
+      "mode_range": [
+        39895,
+        39936
+      ],
+      "post_A_coefficients": {
+        "A_minus": 0,
+        "A_plus": 0,
+        "B_minus": 1,
+        "B_plus": 1,
+        "P_minus": 1,
+        "P_plus": 0
+      },
+      "post_A_owner": "joined_R_after_A_except_extracted_A_endpoint_and_positive_bulk",
+      "pre_A_coefficients": {
+        "A_minus": 1,
+        "A_plus": 1,
+        "B_minus": 1,
+        "B_plus": 1,
+        "P_minus": 1,
+        "P_plus": 1
+      },
+      "sector_id": "A_window_outer_pairs",
+      "separate_norm_admissible": false,
+      "target_indicator": 0
+    },
+    {
+      "A_transition_coefficients": {
+        "A_minus": 0,
+        "A_plus": 0,
+        "B_minus": 0,
+        "B_plus": 0,
+        "P_minus": 0,
+        "P_plus": 0
+      },
+      "count": "M-39936",
+      "mode_range": [
+        39937,
+        "M"
+      ],
+      "post_A_coefficients": {
+        "A_minus": 1,
+        "A_plus": 1,
+        "B_minus": 1,
+        "B_plus": 1,
+        "P_minus": 1,
+        "P_plus": 1
+      },
+      "post_A_owner": "joined_R_after_A",
+      "pre_A_coefficients": {
+        "A_minus": 1,
+        "A_plus": 1,
+        "B_minus": 1,
+        "B_plus": 1,
+        "P_minus": 1,
+        "P_plus": 1
+      },
+      "sector_id": "remote_positive_pairs",
+      "separate_norm_admissible": false,
+      "target_indicator": 0
+    }
+  ],
+  "next_obligation": "Construct a cancellation-preserving evaluator or analytic enclosure for R_after_A directly from the common Dirichlet/Abel representation with the 84 A endpoint atoms and 42 outside-target positive bulk atoms deleted algebraically. Keep the half-current, zero, negative, and remote-positive sectors joined. Target the certified one-sided upper bound recorded here before attempting any all-height promotion.",
+  "partition_certificate": {
+    "cutoff_condition": "integer M>=39936",
+    "full_symmetric_count_identity": "1+2M=2M+1",
+    "positive_count_identity": "621+39231+42+42+(M-39936)=M",
+    "samples": [
+      {
+        "class_counts": [
+          621,
+          39231,
+          42,
+          42,
+          0
+        ],
+        "cutoff": 39936,
+        "full_symmetric_total": 79873,
+        "positive_total": 39936
+      },
+      {
+        "class_counts": [
+          621,
+          39231,
+          42,
+          42,
+          5082485
+        ],
+        "cutoff": 5122421,
+        "full_symmetric_total": 10244843,
+        "positive_total": 5122421
+      },
+      {
+        "class_counts": [
+          621,
+          39231,
+          42,
+          42,
+          5082502
+        ],
+        "cutoff": 5122438,
+        "full_symmetric_total": 10244877,
+        "positive_total": 5122438
+      }
+    ]
+  },
+  "passed": true,
+  "proof_boundary": "Exact saved-height mode/component ownership, no-overlap guards, and post-A sufficient target arithmetic only. No quantitative R_after_A or R_Dir bound, complete Q_K-T, all-height theorem, Lambda<=0, PF-infinity, RH, or prize-level conclusion is proved.",
+  "runtime": {
+    "arb_threads": 1,
+    "elapsed_seconds": 0.062,
+    "precision_decimal_digits": 100,
+    "process_priority": "below_normal",
+    "workers": 1
+  },
+  "scope": {
+    "A_transition_modes": [
+      39853,
+      39936
+    ],
+    "analytic_B_outer_start": 5122421,
+    "common_regulator": "w_m=exp(-pi*epsilon*m^2), symmetric M limit before epsilon down to zero",
+    "finite_cutoff": "M>=39936",
+    "height": 10000000000,
+    "target_positive_modes": [
+      622,
+      39894
+    ]
+  },
+  "sources": {
+    "builder": {
+      "path": "work/rh_compute/scripts/jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_Dir_projector_ownership_ledger_gate.py",
+      "sha256": "b76500b7033e509e65974da628cbde655f7b947bf9e124bf204533ba5df6c4f9"
+    },
+    "checker": {
+      "path": "work/rh_compute/scripts/check_jensen_window_pf_newman_c1_hardy_t1e10_equation9_global_residual_R_Dir_projector_ownership_ledger_gate.py",
+      "sha256": "640739061bbc74a610003d6c54979393ea13e3903495858eb872206c66d680b6"
+    }
+  },
+  "status": "exact_global_R_Dir_projector_ownership_and_post_A_join_target_certified_quantitative_join_open",
+  "symbolic_certificate": {
+    "A_extraction": "A_(M,epsilon)=sum_(m=39853)^39936 w_m[A_m+A_-m+(1-chi_T(m))P_m]",
+    "R_Dir_split": "R_Dir=A_transition+R_after_A",
+    "atom_dictionary": "P_+ and P_- are full-line bulk atoms; A_+/- and B_+/- are the two endpoint atoms in Q_+/-",
+    "finite_defect": "Delta_(M,epsilon)=H_x+I_0+sum_(m=1)^M w_m[I_m+I_-m-chi_T(m)P_m]",
+    "paired_projector": "I_m+I_-m-chi_T(m)P_m=(1-chi_T(m))P_m+P_-m+A_m+A_-m+B_m+B_-m",
+    "physical_join": "R_KGamma=E_Btr,win+E_outer+A_transition+R_after_A",
+    "post_A_finite_join": "J_A,(M,epsilon)=Delta_(M,epsilon)-A_(M,epsilon)-Btr_win,(M,epsilon)-B_outer,(M,epsilon)"
+  }
+}
