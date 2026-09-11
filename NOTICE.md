@@ -1,20 +1,32 @@
-# The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros Notice
+# Company Ownership and Permission Notice
 
-The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros is source-available software, not open-source software.
+Copyright (c) 2026 TWO HANDS NETWORK LTD. All rights reserved.
 
-Required Notice: Copyright (c) 2026 TWO HANDS NETWORK LTD.
+Project creator: Martin Ollett.
 
-The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros is licensed under the PolyForm Noncommercial License 1.0.0. Personal, hobby, research, educational, public-interest, and other non-commercial uses are permitted under that license.
+**Company-owned protected material is proprietary, not open source.
+Prior written permission is required for licensed reuse, including
+non-commercial and academic reuse. Credit or attribution alone does not
+grant permission.**
 
-Commercial use requires a separate written license from the licensor. Commercial use includes, without limitation:
+The controlling policy is [LICENSE.md](LICENSE.md),
+THN-RH-PERMISSION-ONLY-1.0, adopted 11 September 2026. It offers no general
+permission for copying, adaptation, redistribution, product integration, or
+AI training, fine-tuning, distillation, retrieval, or evaluation involving
+protected material. The Company reserves its available legal remedies for
+infringement or breach of an applicable agreement.
 
-- bundling The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros or derived code into a paid product;
-- offering The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros functionality through a hosted, managed, SaaS, cloud, API, or agent service;
-- using The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros in an enterprise product or commercial developer tool;
-- using The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros or derived code as part of a commercial AI coding, agent, memory, context, retrieval, or repository-analysis product;
-- training, fine-tuning, distilling, evaluating, or improving a commercial AI model or commercial AI system using The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros source code, documentation, tests, data formats, or derived materials;
-- removing or obscuring copyright, license, attribution, or required notices.
+The policy preserves existing valid licences, third-party rights, statutory
+exceptions and rights under applicable hosting agreements. It does not claim
+ownership of mathematical facts, ideas or methods. Public access does not
+make this a confidential repository or cancel GitHub platform rights.
 
-The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros was created by Martin Ollett and is owned/licensed by TWO HANDS NETWORK LTD.
+Authorised reuse must follow its written permission, including the agreed
+Company and author attribution and retention of applicable notices.
+Permission requests for any purpose are described in
+[COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md).
 
-This notice does not limit rights you may have under fair use, fair dealing, or other applicable law. It is intended to make the licensor's permission boundaries clear before the repository is made public.
+Historical licences and sealed evidence remain unchanged. See
+[LICENSING-HISTORY.md](LICENSING-HISTORY.md). This notice is not a claim of
+ownership over separately licensed third-party material or an assertion of
+infringement by any identified person or organisation.

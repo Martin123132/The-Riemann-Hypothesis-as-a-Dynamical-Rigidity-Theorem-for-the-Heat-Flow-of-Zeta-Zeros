@@ -1,86 +1,101 @@
-Required Notice: Copyright (c) 2026 TWO HANDS NETWORK LTD.
-Required Notice: The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros is source-available for personal and non-commercial use. Commercial use, including incorporation into paid products, hosted services, managed services, enterprise products, or commercial AI coding/agent products, requires a separate written license from the licensor.
+# Proprietary Rights Notice - Written Permission Required
 
-# PolyForm Noncommercial License 1.0.0
+Copyright (c) 2026 TWO HANDS NETWORK LTD. All rights reserved.
 
-https://polyformproject.org/licenses/noncommercial/1.0.0
+Policy: THN-RH-PERMISSION-ONLY-1.0, adopted 11 September 2026.
 
-## Acceptance
+**Company-owned material is proprietary. It is not offered under an
+open-source licence or a general non-commercial-use licence. Prior written
+permission is required. Attribution alone is not permission.**
 
-In order to get any license under these terms, you must agree to them as both strict obligations and conditions to all your licenses.
+## 1. Scope and ownership
 
-## Copyright License
+This notice applies only to protected material in this repository for which
+TWO HANDS NETWORK LTD (the Company) owns or is authorised to license the
+relevant rights. This includes eligible source code, research manuscripts,
+documentation, diagrams, tests, certificates, and protected compilations or
+database material. Martin Ollett is the credited project creator.
 
-The licensor grants you a copyright license for the software to do everything you might do with the software that would otherwise infringe the licensor's copyright in it for any permitted purpose.
+This notice does not transfer ownership, claim third-party rights, or assert
+exclusive rights in mathematical facts, ideas, methods, discoveries, or
+independently developed work. The exclusions in section 5 control throughout.
 
-However, you may only distribute the software according to [Distribution License](#distribution-license) and make changes or new works based on the software according to [Changes and New Works License](#changes-and-new-works-license).
+## 2. No general licence grant
 
-## Distribution License
+This notice grants no copyright, patent, database, trademark, or other
+intellectual-property licence. Merely making material accessible does not
+constitute an additional licence from the Company.
 
-The licensor grants you an additional copyright license to distribute copies of the software.
+Except as provided in section 5, prior written permission from an authorised
+representative of the Company is required before exercising its exclusive
+rights, including reproducing, adapting, distributing, publishing, or
+otherwise exploiting protected material. No general permission is offered
+for personal, academic, educational, public-interest, non-commercial, or
+commercial purposes.
 
-Your license to distribute covers distributing the software with changes and new works permitted by [Changes and New Works License](#changes-and-new-works-license).
+In particular, no permission is granted for copying or adapting protected
+material into software, products, services, research publications, datasets,
+or AI systems. No permission is granted for AI or machine-learning training,
+fine-tuning, distillation, evaluation, benchmarking, retrieval indexing,
+embedding, or automated extraction to the extent these activities require
+the Company's permission under applicable law. All such rights are reserved.
 
-## Notices
+## 3. Written permission and attribution
 
-You must ensure that anyone who gets a copy of any part of the software from you also gets a copy of these terms or the URL for them above, as well as copies of any plain-text lines beginning with Required Notice: that the licensor provided with the software.
+Permission must expressly identify the material and permitted use and be
+issued by an authorised Company representative. Permission for one purpose
+does not authorise another. Silence, public availability, a citation, a
+repository star, or a pending request is not permission.
 
-For example:
+The Company's policy is to require authorised copies and publications using
+licensed material to retain applicable copyright, licence, provenance and
+third-party notices and credit TWO HANDS NETWORK LTD and Martin Ollett,
+together with the source version or commit. Any different attribution terms
+must be expressly agreed in writing. These requirements do not themselves
+grant a licence or enlarge restrictions on uses permitted by section 5.
 
-> Required Notice: Copyright Yoyodyne, Inc. (http://example.com)
+See [permission requests](COMMERCIAL-LICENSE.md). Despite its historical
+filename, that document covers requests for both non-commercial and
+commercial uses.
 
-## Changes and New Works License
+## 4. Reservation and enforcement
 
-The licensor grants you an additional copyright license to make changes and new works based on the software for any permitted purpose.
+The Company reserves all rights and all remedies available under applicable
+law for infringement and breach of an applicable agreement. This notice does
+not declare every use unlawful, impose automatic damages, or make mere
+viewing acceptance of a separate contract.
 
-## Patent License
+No endorsement or permission to use Company or contributor names, logos, or
+trademarks is granted by this notice.
 
-The licensor grants you a patent license for the software that covers patent claims the licensor can license, or becomes able to license, that you would infringe by using the software.
+## 5. Existing rights and exclusions
 
-## Noncommercial Purposes
+- **Earlier licences and agreements:** valid permissions already granted
+  remain governed by their own terms. This change does not retroactively
+  revoke earlier grants, including applicable rights to use, modify or
+  redistribute earlier versions under PolyForm Noncommercial 1.0.0. Earlier
+  grants do not automatically license later new protected material. See
+  [licensing history](LICENSING-HISTORY.md).
+- **Third-party material:** separately licensed material, dependencies,
+  upstream adaptations and contributions remain governed by their applicable
+  licences and provenance notices, including material under
+  `work/rh_compute/external/`. This policy does not restrict rights those
+  licences require or grant. Location alone does not determine ownership.
+- **Applicable law:** nothing here limits fair use, fair dealing, lawful
+  quotation, statutory text-and-data-mining exceptions, public-domain use,
+  or any other right that cannot lawfully be restricted. No exclusive right
+  in mathematical ideas, facts or methods is asserted.
+- **Hosting agreements:** rights already granted under applicable hosting
+  agreements, including GitHub's platform terms, are not cancelled by this
+  notice. A public repository is not an access-control or confidentiality
+  mechanism.
+- **Historical evidence:** sealed research and benchmark packages and earlier
+  commits retain their bytes and original notices. This policy does not
+  rewrite their evidence or licensing history.
 
-Any noncommercial purpose is a permitted purpose.
+## 6. Disclaimer
 
-## Personal Uses
-
-Personal use for research, experiment, and testing for the benefit of public knowledge, personal study, private entertainment, hobby projects, amateur pursuits, or religious observance, without any anticipated commercial application, is use for a permitted purpose.
-
-## Noncommercial Organizations
-
-Use by any charitable organization, educational institution, public research organization, public safety or health organization, environmental protection organization, or government institution is use for a permitted purpose regardless of the source of funding or obligations resulting from the funding.
-
-## Fair Use
-
-You may have "fair use" rights for the software under the law. These terms do not limit them.
-
-## No Other Rights
-
-These terms do not allow you to sublicense or transfer any of your licenses to anyone else, or prevent the licensor from granting licenses to anyone else. These terms do not imply any other licenses.
-
-## Patent Defense
-
-If you make any written claim that the software infringes or contributes to infringement of any patent, your patent license for the software granted under these terms ends immediately.
-
-If your company makes such a claim, your patent license ends immediately for work on behalf of your company.
-
-## Violations
-
-The first time you are notified in writing that you have violated any of these terms, or done anything with the software not covered by your licenses, your licenses can nonetheless continue if you come into full compliance with these terms, and take practical steps to correct past violations, within 32 days of receiving notice. Otherwise, all your licenses end immediately.
-
-## No Liability
-
-As far as the law allows, the software comes as is, without any warranty or condition, and the licensor will not be liable to you for any damages arising out of these terms or the use or nature of the software, under any kind of legal claim.
-
-## Definitions
-
-The licensor is the individual or entity offering these terms, and the software is the software the licensor makes available under these terms.
-
-You refers to the individual or entity agreeing to these terms.
-
-Your company is any legal entity, sole proprietorship, or other kind of organization that you work for, plus all organizations that have control over, are under the control of, or are under common control with that organization.
-
-Control means ownership of substantially all the assets of an entity, or the power to direct its management and policies by vote, contract, or otherwise. Control can be direct or indirect.
-
-Your licenses are all the licenses granted to you for the software under these terms.
-
-Use means anything you do with the software requiring one of your licenses.
+To the extent permitted by law, material is provided as is, without warranty
+of accuracy, fitness for purpose, or non-infringement. Nothing in this notice
+asserts that the Riemann Hypothesis has been proved. An express written
+agreement may supply different terms.

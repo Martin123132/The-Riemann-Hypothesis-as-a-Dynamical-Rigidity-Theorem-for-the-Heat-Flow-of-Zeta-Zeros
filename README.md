@@ -1,5 +1,14 @@
 # Riemann Zeta Zero Dynamics Under Heat Flow
 
+> **PROPRIETARY - WRITTEN PERMISSION REQUIRED**
+> Copyright (c) 2026 TWO HANDS NETWORK LTD. All rights reserved.
+> Project creator: Martin Ollett. Company-owned protected material is not
+> open source and has no general non-commercial-use permission. Prior written
+> Company permission is required for licensed reuse; attribution alone is not
+> permission. Existing valid licences, third-party rights, statutory exceptions
+> and hosting-platform rights remain unaffected. See [LICENSE.md](LICENSE.md),
+> [NOTICE.md](NOTICE.md), and [permission requests](COMMERCIAL-LICENSE.md).
+
 This repository is a research corpus on the Riemann Hypothesis, the
 de Bruijn-Newman heat flow, Jensen-window and determinant methods, and a
 current Xi-specific Hardy endpoint programme.
@@ -106,7 +115,14 @@ not inferred from the size of the computational corpus.
 
 ## Licensing
 
-See [`LICENSE.md`](LICENSE.md),
-[`COMMERCIAL-LICENSE.md`](COMMERCIAL-LICENSE.md), and [`NOTICE.md`](NOTICE.md)
-for the repository terms. Third-party material under
-`work/rh_compute/external/` retains its stated provenance and license.
+Company-owned protected material is proprietary under
+[LICENSE.md](LICENSE.md); no general commercial or non-commercial licence
+is offered. Prior written Company permission is required where a licence is
+needed. Attribution alone is not permission. See [NOTICE.md](NOTICE.md) and
+[written permission requests](COMMERCIAL-LICENSE.md).
+
+[LICENSING-HISTORY.md](LICENSING-HISTORY.md) preserves the earlier licensing
+record. Existing valid grants, legal exceptions, hosting-platform rights,
+and third-party licences remain unaffected. Separately licensed material,
+including `work/rh_compute/external/`, retains its provenance and licence.
+This policy does not claim exclusive rights in mathematical ideas or facts.

@@ -1,23 +1,48 @@
-# Commercial Licensing
+# Written Permission Requests - All Purposes
 
-The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros is available for personal and non-commercial use under the PolyForm Noncommercial License 1.0.0.
+Copyright (c) 2026 TWO HANDS NETWORK LTD. All rights reserved.
 
-Commercial use is not included in the public license. A separate written commercial license from TWO HANDS NETWORK LTD is required before using The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros in a paid product, hosted service, managed service, enterprise product, commercial developer tool, commercial AI system, or commercial AI training/evaluation pipeline.
+This file retains its historical name to keep existing links working. It
+now covers **both non-commercial and commercial permission requests**.
+There is no general research, educational, personal, or non-commercial grant
+under the current [proprietary policy](LICENSE.md).
 
-Examples that require a commercial license:
+Except where applicable law, an existing valid licence, a third-party licence
+or a hosting agreement already permits the use, obtain prior written
+permission from an authorised representative of TWO HANDS NETWORK LTD.
+Attribution or payment alone does not create permission.
 
-- adding The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros features to a paid coding assistant or AI agent product;
-- running The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros as part of a SaaS, API, hosted MCP server, or managed repository-analysis service;
-- embedding The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros code, schemas, tests, formats, or derived implementation details into a commercial tool;
-- using The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros materials to train, fine-tune, distill, evaluate, benchmark, or improve a commercial AI model or commercial AI system;
-- distributing a modified commercial version of The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros.
+## Request information
 
-Commercial license requests should include:
+Ask the [repository owner](https://github.com/Martin123132) for the Company's
+authorised licensing contact. Do not post confidential proposed uses or
+unpublished research in public issues. A public request for contact details
+is not a licence application approval.
 
-- who will use The-Riemann-Hypothesis-as-a-Dynamical-Rigidity-Theorem-for-the-Heat-Flow-of-Zeta-Zeros;
-- whether the use is internal, distributed, hosted, or embedded;
-- whether AI model training, evaluation, or product integration is involved;
-- expected number of users or customers;
-- any requested changes to attribution, warranty, support, or redistribution terms.
+Provide the Company with:
 
-No commercial license is granted unless agreed in writing by TWO HANDS NETWORK LTD.
+- Your legal name, organisation, and contact details.
+- The exact files, material, version, or commit requested.
+- The purpose, duration, territory, users, and intended recipients.
+- Any proposed copying, modification, publication, redistribution, hosting,
+  or product integration.
+- Any AI training, fine-tuning, distillation, evaluation, retrieval indexing,
+  embedding, or automated extraction.
+- Proposed attribution, provenance retention, and confidentiality arrangements.
+
+Permission is granted only by an express written authorisation issued by an
+authorised Company representative and only within its stated scope. No reply,
+informal discussion, citation, or pending request creates a licence.
+
+The Company's default requirement for authorised reuse is credit to
+TWO HANDS NETWORK LTD and Martin Ollett, identification of the source version,
+and retention of applicable copyright, licence and third-party notices.
+Any different terms must be expressly agreed in writing.
+
+## Existing and independent rights
+
+Nothing here cancels earlier valid permissions or restricts rights under
+applicable law, hosting agreements, or third-party licences. Historical
+PolyForm grants remain subject to their own terms. This policy does not
+claim exclusive rights in mathematical ideas, facts or methods. See
+[LICENSE.md](LICENSE.md) and [LICENSING-HISTORY.md](LICENSING-HISTORY.md).
