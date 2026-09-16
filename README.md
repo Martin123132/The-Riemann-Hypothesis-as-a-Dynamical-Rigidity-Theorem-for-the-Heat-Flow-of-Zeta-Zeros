@@ -36,7 +36,11 @@ the current audited programme is documented in `outputs/` and
 - [`outputs/RH_Proof_Programme_Roadmap.md`](outputs/RH_Proof_Programme_Roadmap.md)
   records the broader programme and route history.
 
-## Current Audited Checkpoint
+## Research Update: 16 September 2026
+
+The current selection-stage audit and immutable evidence are in [research/2026-09-16-selection/AUDIT.md](research/2026-09-16-selection/AUDIT.md). The four packages pass 142 tests and 17 byte-identical result rebuilds. They establish finite checks and scoped asymptotic deductions, not RH. The unbounded gated coefficient-minimum inequality remains open. The earlier checkpoint below is retained as historical context.
+
+## Archived Checkpoint
 
 The formal core currently runs through Section 11.521. Its newest continuous
 certificate proves, for the exact Hardy/Newman endpoint object used there,
