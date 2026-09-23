@@ -24,6 +24,10 @@ the current audited programme is documented in `outputs/` and
 
 ## Start Here
 
+- [Current completed research, 24 September 2026](research/2026-09-24-current/README.md)
+  contains the full latest derivation and audit, an index of 90 recorded stages,
+  and lossless hash-verified evidence through Uniform Filtered First Moment.
+  The favourable signed-current bound remains open; this is not a proof of RH.
 - [`outputs/Clay_Prize_Readiness_Audit.md`](outputs/Clay_Prize_Readiness_Audit.md)
   gives the honest prize-readiness verdict and the missing theorem chain.
 - [`outputs/formal_core.md`](outputs/formal_core.md) is the cumulative formal
@@ -35,6 +39,22 @@ the current audited programme is documented in `outputs/` and
   explains the executable proof-safety gate registry.
 - [`outputs/RH_Proof_Programme_Roadmap.md`](outputs/RH_Proof_Programme_Roadmap.md)
   records the broader programme and route history.
+
+## Research Update: 24 September 2026
+
+The [new snapshot](research/2026-09-24-current/README.md) brings the completed
+16-23 September research into the repository without changing previous sealed
+evidence. It includes complete mathematical files, code and saved verification,
+with full-byte hash checks and explicit administrative exclusions. Original
+archives are inventoried and their included members are losslessly repackaged;
+the original local ZIP containers and seals are unchanged.
+
+The latest result supplies uniform filtered first-moment decay for the literal
+rough source under the retained reciprocal-phase estimate, and a squared
+vanishing nonlinear-overlap allowance. The remaining signed alignment is not
+proved. The separate next-stage GPT work is unfinished and is not included.
+See the [current audit](research/2026-09-24-current/latest/AUDIT.md) for precise
+dependencies and verification limits. Earlier checkpoints below are historical.
 
 ## Research Update: 16 September 2026
 
